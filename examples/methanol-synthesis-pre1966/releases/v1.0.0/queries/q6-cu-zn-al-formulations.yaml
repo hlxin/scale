@@ -1,0 +1,41 @@
+question: Which formulations containing copper, zinc and aluminium were reported for methanol synthesis
+  before 1966?
+manuscript: 'design programme: Al-containing Cu-Zn formulations'
+match:
+  label: Catalyst
+  as: catalyst
+steps:
+- from: catalyst
+  edge: HAS_COMPONENT
+  to: ChemicalSpecies
+  as: cu
+  where:
+  - prop: name
+    op: matches
+    value: (?i)^(cu|cuo|cu2o)$|copper|cupric|cuprous
+- from: catalyst
+  edge: HAS_COMPONENT
+  to: ChemicalSpecies
+  as: zn
+  where:
+  - prop: name
+    op: matches
+    value: (?i)^(zn|zno)$|zinc
+- from: catalyst
+  edge: HAS_COMPONENT
+  to: ChemicalSpecies
+  as: al
+  where:
+  - prop: name
+    op: matches
+    value: (?i)^(al|al2o3)$|alumin
+published_before: '1966-01-01'
+return:
+- catalyst.name
+- catalyst.nominal_formula
+evidence: true
+evidence_vars:
+- catalyst
+limit: 40
+note: 'Components are matched by name as well as formula: a source-specific species such as ''copper oxide''
+  (CuO or Cu2O not stated) has no formula.'
