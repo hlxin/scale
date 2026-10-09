@@ -8,6 +8,19 @@
   identity (the Claude GitHub App in the scale-agent workflow, or a bot account), never a person's, since GitHub does
   not let an author approve their own pull request (governance/repository-settings.md, "The agent"). The scale-agent
   workflow may run `gh pr create` without `--draft`.
+- **The methanol-synthesis example is public** (`examples/methanol-synthesis-pre1966/`), a small benchmark for the
+  repository. The ARPA-E CATALYST partners cleared the curated graph of the historical methanol-synthesis literature
+  published before 1966 for publication; the example keeps its CO and CO2 hydrogenation scope (105 sources, 4,868
+  records, 16,586 links, 684 catalytic tests). It was moved from the consortium schema repository's 0.1.0 to its 0.5.0
+  with that repository's tools and re-pinned to 0.1.0 (valid, 0 errors), and its quoted text was capped (`scale
+  evidence cap`; 6,920 of 25,230 evidence items carry a withheld quote). With it: the corpus (`corpus/sources.json`:
+  the 105 sources and each PDF's sha256; the PDFs are local), the rights file, the frozen corpus manifest, the curation
+  guide and assembly report, the manuscript's seven query plans and the curation tools. Its first release,
+  `releases/v1.0.0/` (2026-10-09), is an immutable snapshot: the graph (sha256 `0dfc8c1c…ed13f`), the corpus list,
+  the rights file and the plans, with `RELEASE.yaml` (schema 0.1.0 and its spec digest, counts, each plan's answer)
+  and `SHA256SUMS`, built and verified by `tools/release_graph.py`. The fragments, page
+  texts, OCR and GALAXY bundles stay in the restricted copy; the evidence index is built locally. New tests,
+  `tools/tests/test_example_methanol.py`, run on the public files.
 - **One approval for every change (review policy version 2).** A pull request to `main` now merges with one approving
   review from any reviewer other than its author, instead of two; a reviewer who disagrees with a merged change
   corrects it with a pull request of their own. `governance/review-policy.yaml` sets `approvals.required: 1`, and the

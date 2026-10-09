@@ -1,0 +1,43 @@
+question: Was CO2 known before 1966 to yield methanol, over which catalysts and at what conditions?
+manuscript: third query (Kume, Abe and Tanioka 1959 is held out by the cutoff)
+match:
+  label: CatalyticTest
+  as: test
+steps:
+- from: test
+  edge: FED_WITH
+  to: Feed
+  as: feed
+- from: feed
+  edge: HAS_COMPONENT
+  to: ChemicalSpecies
+  as: co2
+  where:
+  - prop: formula
+    op: eq
+    value: CO2
+  edge_where:
+  - prop: role
+    op: eq
+    value: reactant
+- from: test
+  edge: USES_CATALYST
+  to: CatalystSample
+  as: sample
+  optional: true
+- from: sample
+  edge: HAS_FORMULATION
+  to: Catalyst
+  as: catalyst
+  optional: true
+published_before: '1966-01-01'
+return:
+- test.name
+- catalyst.name
+- feed.name
+- test.temperature
+- test.pressure
+- test.yield
+- test.conversion
+evidence: true
+limit: 60

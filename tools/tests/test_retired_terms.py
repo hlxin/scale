@@ -23,14 +23,15 @@ _CAT = "Cataly" + "sis"
 OLD_PACKAGE = "scale" + "-science"                     # the first distribution name
 ORG = "scale" + "-consortium"                          # the organization the work was started in
 DATA_REPO = "catalysis" + "-kg"                        # its private data repository
-OLD_EXAMPLES = ("methanol" + "-synthesis", "p" + "2h")  # the restricted examples' folders under domain/examples/
+OLD_EXAMPLES = ("methanol" + "-synthesis", "p" + "2h")  # the restricted examples' former folders under domain/examples/
+#                                                         (the methanol example is public now, under examples/ at the root)
 EARLIER_PACKAGE = "scale-" + "catalysis"               # the package of the earlier contents of github.com/hlxin/scale
 
 R1 = re.compile(rf"Shared\s+{_CAT}\s+(?:Atlas|Attributes)|SCALE\s+Science(?!\s+kernel)|SCALE-{_CAT}", re.I)
 R2 = re.compile(r"scale[-_]science|\b(?:pip3? install|uv pip install|uv tool install|uv add|uvx)(?:\s+--?[\w=.-]+)*\s+schema(?![\w-])",
                 re.I)
 R3 = re.compile("|".join([re.escape(ORG), re.escape(DATA_REPO), "kg" + "-tiers", "cath" + "anor",
-                          r"examples/(?:" + "|".join(OLD_EXAMPLES) + r")\b"]), re.I)
+                          r"domain/examples/(?:" + "|".join(OLD_EXAMPLES) + r")\b"]), re.I)
 R4 = re.compile(r"SCALE_RESTRICTED_DATA")
 
 TEXT = (".py", ".md", ".yaml", ".yml", ".toml", ".in", ".cfg", ".cff", ".json", ".txt", ".sh")
@@ -112,7 +113,8 @@ def test_the_names_and_the_rules():
     for fine in ("Shared Concepts, Attributes, and Links with Evidence", "uvx scale-schema call status",
                  "pip install scale-schema", "the catalysis domain", "a methanol-synthesis reaction (synthetic)",
                  "access consortium", "the SCALE science kernel", "follows_domains", "--domain catalysis", "https://github.com/hlxin/scale",
-                 "scale:project/p2h", "the consortium schema repository (up to 79b4fe4)"):
+                 "scale:project/p2h", "the consortium schema repository (up to 79b4fe4)",
+                 "examples/methanol-synthesis-pre1966/README.md"):
         assert not any(rx.search(fine) for rx in (R1, R2, R3, R4)), fine
     assert R1.search(f"the {EARLIER_PACKAGE} schema") and not _hits("README.md", f"numbering 0.1.0-0.8.0, package {EARLIER_PACKAGE});")
     assert _hits("CHANGELOG.md", f"package {EARLIER_PACKAGE});")          # allowed only where ALLOWED says
