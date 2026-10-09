@@ -10,7 +10,7 @@ require, so the bundle is smaller than the graph it comes from:
 
 | what SCALE keeps | what the bundle loses today | change |
 |---|---|---|
-| evidence whose quote is withheld under the copyright cap (source, locator, passage, sha256 and length of the quote) | **3,277 links**, all from in-copyright sources: 14,107 edges instead of 17,563 (8,477 substantive instead of 11,751, 28 % fewer) | 1 (required) |
+| evidence whose quote is withheld under the copyright cap, which applies to in-copyright sources only (source, locator, passage, sha256 and length of the quote) | **3,277 links**, all from in-copyright sources: 14,107 edges instead of 17,563 (8,477 substantive instead of 11,751, 28 % fewer) | 1 (required) |
 | the schema a graph follows, named by version **and** spec digest | nothing is lost, but GALAXY cannot tell that two bundles share a schema | 2 |
 | typed absences: a value the source does not report, did not measure, or gives below a detection limit | 229 absences | 3 |
 

@@ -18,13 +18,14 @@ The project partners cleared the curated data for publication. This folder holds
   `manifest.json`, the frozen corpus; `curation/GUIDE.md` and `curation/assembly-report.json`;
 - `queries/scale-graph/*.yaml`, the manuscript's questions as query plans, and `tools/`.
 
-**Quoted text is capped.** Most sources are in copyright, so the graph keeps the quoted text of each
-source within the repository's cap (`scale evidence cap`: 300 characters a quote; 4,000 distinct
-characters and 10 % of the text a source; `rights.yaml` gives each source's class). The rest is withheld
-as `sha256` and length in the evidence `note`: 6,920 of the 25,230 evidence items carry a withheld quote.
-Every withheld quote keeps its source, locator and passage, and anyone holding the source texts restores
-it with `scale evidence rehydrate`. US patents and works published before 1931 are public domain (in the
-US) and are not capped.
+**Quoted text of in-copyright sources is capped; nothing else is.** `rights.yaml` gives each source's class.
+The 55 public-domain sources (the 38 US patents and the works first published before 1931, public domain in the
+US) keep every quote in full. Only the 50 in-copyright sources are held to the repository's cap (`scale evidence
+cap`: 300 characters a quote; 4,000 distinct characters and 10 % of the text a source), and 12 of them fit within
+it. The rest of their quoted text is withheld as `sha256` and length in the evidence `note`: 6,920 of the 25,230
+evidence items, all from in-copyright sources, carry withheld text (6,410 quotes and 510 page-image
+transcriptions). Every withheld quote keeps its source, locator and passage, and anyone holding the source texts
+restores it with `scale evidence rehydrate`. (`withheld_quotes` in a release's `RELEASE.yaml` counts these items.)
 
 **Not here** (they reproduce source text beyond the cap, or are rebuilt locally): the curation fragments
 and second readings, the page texts and OCR (`work/`, `curation/ocr/`), the earlier private GALAXY bundles and the full graph

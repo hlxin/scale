@@ -13,7 +13,9 @@
   published before 1966 for publication; the example keeps its CO and CO2 hydrogenation scope (105 sources, 4,868
   records, 16,586 links, 684 catalytic tests). It was moved from the consortium schema repository's 0.1.0 to its 0.5.0
   with that repository's tools and re-pinned to 0.1.0 (valid, 0 errors), and its quoted text was capped (`scale
-  evidence cap`; 6,920 of 25,230 evidence items carry a withheld quote). With it: the corpus (`corpus/sources.json`:
+  evidence cap`, which applies to the 50 in-copyright sources only; the 55 public-domain sources, the US patents
+  and works published before 1931, keep every quote: 6,920 of 25,230 evidence items, all from in-copyright sources,
+  carry withheld text). With it: the corpus (`corpus/sources.json`:
   the 105 sources and each PDF's sha256; the PDFs are local), the rights file, the frozen corpus manifest, the curation
   guide and assembly report, the manuscript's seven query plans and the curation tools. Its first release,
   `releases/v1.0.0/` (2026-10-09), is an immutable snapshot: the graph (sha256 `0dfc8c1c…ed13f`), the corpus list,
