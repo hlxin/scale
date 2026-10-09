@@ -14,7 +14,7 @@ POLICY = load_policy(REPO)
 def test_every_tier_needs_the_same_one_approval():
     """Tiers are information in the reports; there is no approval class per tier, no comment period and no
     development stage."""
-    assert POLICY["policy_version"] == 2
+    assert POLICY["policy_version"] == 3
     assert not {"committee", "provisional_approvers", "stage", "stages", "area_review", "objections"} & set(POLICY)
     assert all(set(t) <= {"name", "examples", "needs"} for t in POLICY["tiers"].values())
     assert POLICY["new_concepts_maturity"] == "provisional"

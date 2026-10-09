@@ -3,10 +3,13 @@
 # person starts it for a merged proposal and its pull request (it needs the repository secret APPLY_TOKEN).
 # GitHub pull-request reviews are the approvals. Changing this file is a governance change: it needs the
 # same approvals as every other pull request.
-policy_version: 2
+policy_version: 3
 
 principles:
-  - Only people approve, by reviewing the pull request on GitHub. Agents never approve, merge or apply.
+  - A person or an agent may open a pull request. One person other than its author approves it, by reviewing it on
+    GitHub, and merges it. Agents never approve, merge or apply.
+  - An agent opens a pull request under its own GitHub identity (the Claude GitHub App in the scale-agent workflow,
+    or a bot account), never under a person's account, so that the person can approve it.
   - Every pull request to main needs one approving review from a reviewer other than its author, any reviewer
     listed below, not a particular one; the owner is one of them. GitHub does not let an author approve their own
     pull request, so until a second reviewer joins, the owner merges their own under the bootstrap rule

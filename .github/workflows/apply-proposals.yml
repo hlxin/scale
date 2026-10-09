@@ -3,8 +3,8 @@ name: apply-proposals
 # Applies a merged schema proposal on main: the version bump. MANUAL: a person starts it after the pull
 # request that carries the proposal has merged (Actions > apply-proposals > Run workflow, or
 #   gh workflow run apply-proposals.yml --repo hlxin/scale -f proposal=000001 -f pr=12
-# ). It reads the merged pull request's reviews, checks them against governance/review-policy.yaml (two
-# approving reviewers other than the author; placeholders never count), records them in the proposal's
+# ). It reads the merged pull request's reviews, checks them against governance/review-policy.yaml (one
+# approving reviewer other than the author; placeholders never count), records them in the proposal's
 # approvals/, writes the decision record with the pull-request link, applies the proposal (freeze the base
 # version, install the new one, raise the schema's one version in every file that states it, update the gap
 # register, set `status: applied`), runs the full `scale check` (unit tests included), and commits

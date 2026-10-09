@@ -435,7 +435,7 @@ def render_digest(queue: dict, proposals: list[dict], repo: str, since: str | No
          f"Feedback since `{since or 'the beginning'}`: **{len(queue['items'])}** items in **{len(queue['clusters'])}** topics; "
          f"**{len(need)}** may need a change.", "",
          "**How to act on a topic:** open a pull request that takes one of its options (or, with write access, start "
-         "the scale-agent workflow by hand with the topic and the option, and it opens a draft pull request). Every "
+         "the scale-agent workflow by hand with the topic and the option, and it opens a pull request). Every "
          "change is decided by an approving review of its pull request (governance/review-policy.yaml). Agents "
          "prepared these options; they do not decide.", ""]
     for p in need + info:
