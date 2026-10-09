@@ -172,7 +172,7 @@ capabilities:
   where: tools/scale/kg.py, scale kg update
   tests: [test_kg_update_dry_run_writes_nothing, test_kg_update_migrates_validates_and_reindexes, test_kg_update_refuses_a_document_pinning_a_version_not_held]
   notes: Tested on a synthetic data folder against a schema with a frozen earlier version and a registered step.
-- name: An agent on GitHub (@scale-agent; anthropics/claude-code-action), off by default and started by hand with a prompt, that drafts changes and proposals as draft pull requests; gap reports checked before they leave a data repository
+- name: An agent on GitHub (@scale-agent; anthropics/claude-code-action), off by default and started by hand with a prompt, that opens pull requests with changes and proposals under the Claude GitHub App's identity (a person approves and merges them); gap reports checked before they leave a data repository
   status: mocked
   where: .github/workflows/scale-agent.yml, .github/agent/instructions.md, scale evidence gap-report (tools/scale/rights.py gap_report)
   tests: [test_a_gap_report_leaves_the_data_repository_only_within_the_cap]

@@ -80,8 +80,8 @@ for schema extension; extraction errors and absent source information do not.
 5. **Run `scale proposal check <id>`** until `ok`: every gap assigned to one
    theme, every addressed theme resolved by an operation, fixtures behaving, documents still
    valid, competency answers unchanged or declared, no blocking critic objection.
-6. **Hand over for review.** Set `status: proposed` and open a pull request (a DRAFT when an agent
-   opens it) whose body is `PR_BODY.md`; it carries the proposal and its reports, never edits to the
+6. **Hand over for review.** Set `status: proposed` and open a pull request (an agent opens it under its
+   own GitHub identity, never a person's) whose body is `PR_BODY.md`; it carries the proposal and its reports, never edits to the
    schema files. `review_checklist.md` is for the reviewers. Only people approve, by reviewing the pull
    request; one reviewer other than its author must approve (the owner is a reviewer; the owner's own
    pull requests are merged under the bootstrap rule until a second reviewer joins). After the merge, the proposal is applied (`scale proposal

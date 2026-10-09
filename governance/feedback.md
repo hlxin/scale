@@ -13,7 +13,7 @@ drafted, and how changes are decided: by an approving review of a pull request.
 | ask what the graph should answer | **[A question the graph should answer](https://github.com/hlxin/scale/issues/new?template=competency-question.yml)** |
 | discuss an idea | **[Discussions](https://github.com/hlxin/scale/discussions)**, once they are on, or a comment issue |
 | comment on a proposed change | comment on the pull request, or on any line of it |
-| have a change drafted | ask a collaborator, or (people with write access) start the scale-agent workflow by hand with what you want; the agent opens a draft pull request |
+| have a change drafted | ask a collaborator, or (people with write access) start the scale-agent workflow by hand with what you want; the agent opens a pull request, which a person approves and merges |
 | find schema gaps in open-access sources | open a `gap-report` issue with a sample curated against the schema (the curate-source skill; short capped quotes only) |
 | report a wrong value, a missing concept or a source problem | the specific issue forms (optional; the general form works too) |
 
@@ -22,8 +22,8 @@ From the command line, `scale suggest --record <id> --text "…"` prints the sam
 ## What happens next
 
 ```
-an issue or a request ──► a pull request (a collaborator, or a draft ──► one approving review ──► merge
-                          by the agent when a person starts it)          (a schema proposal is then applied
+an issue or a request ──► a pull request (a person, or an agent ──► one approving review ──► merge
+                          under its own GitHub identity)        (by the person who approved)          (a schema proposal is then applied
                                                                           and the version moves on)
 comments, issues, review comments, discussions
         │  weekly (and on demand): scale triage ingest

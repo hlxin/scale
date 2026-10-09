@@ -14,7 +14,8 @@ reviewer other than its author**, any of the reviewers. The owner is a reviewer 
 pull requests; GitHub does not let an author approve their own, so until a second reviewer joins, the owner
 merges their own pull requests under the bootstrap rule. A schema change is a pull request that carries a *proposal*. When it merges, the proposal is
 applied on `main` and the schema's one version moves on. A data repository is then moved to the new version
-with one command (`scale kg update`). Agents draft changes and proposals; they never approve, merge or apply.
+with one command (`scale kg update`). People and agents open pull requests; one person approves each and merges it.
+Agents never approve, merge or apply.
 
 ## Glossary
 
@@ -37,7 +38,7 @@ with one command (`scale kg update`). Agents draft changes and proposals; they n
 | **owner** | `@hlxin`, admin of the repository, code owner of every path in [`.github/CODEOWNERS`](../.github/CODEOWNERS) | a reviewer: reviews and approves other people's pull requests; merges their own under the bootstrap rule until a second reviewer joins; applies merged proposals; builds releases; repository settings, rulesets and secrets ([repository-settings.md](repository-settings.md)) |
 | **reviewers** | domain experts, collaborators (Write), added to the review policy and CODEOWNERS when they join | review and approve pull requests (any one of them is enough): the science kernel, the catalysis domain, tools, governance and releases. Today: two seats to be filled (`TODO-reviewer-2`, `TODO-reviewer-3` in the review policy) |
 | **contributors** | anyone: issues and comments; collaborators also branches and pull requests; others through forks once the repository is public | propose changes, curate, report gaps |
-| **@scale-agent** | Claude on GitHub, started by hand by a person with write access (off otherwise) | drafts changes and proposals on `agent/…` branches as draft pull requests; never approves, merges or applies |
+| **@scale-agent** | Claude on GitHub, started by hand by a person with write access (off otherwise) | makes changes and proposals on `agent/…` branches and opens pull requests under the Claude GitHub App's identity; never approves, merges or applies |
 
 ## The rule: one approval for every change
 
@@ -49,8 +50,13 @@ with one command (`scale kg update`). Agents draft changes and proposals; they n
   reviewer or code owner has to.
   A reviewer who disagrees with a merged change corrects it by opening a pull request, which follows the same rule. This holds for every kind of change:
   documentation, tools, records, schema proposals of every tier, governance and releases.
-- **Only people approve**, by reviewing the pull request on GitHub. The GitHub reviews are the approvals;
-  there is no other approval record to write. A change proposed by an agent needs the same approval.
+- **A person or an agent opens it; one person approves it and merges it.** Only people approve, by reviewing
+  the pull request on GitHub; the GitHub reviews are the approvals, and there is no other approval record to
+  write. The person who approves merges. A change proposed by an agent needs the same approval.
+- **An agent opens a pull request under its own GitHub identity**: the Claude GitHub App in the scale-agent
+  workflow, or a bot account for an agent working elsewhere (repository-settings.md, "The agent"), never a
+  person's account. GitHub does not let the author of a pull request approve it, so a pull request an agent
+  opened as a person could not be approved by that person.
 - **Placeholders never count.** The seats not filled yet are marked `placeholder: true` in the review
   policy, `core/CORE.yaml` and `domain/DOMAIN.yaml`; `scale check` warns until they are
   filled with real people (never invented).
@@ -89,12 +95,12 @@ second reviewer has joined ([repository-settings.md](repository-settings.md#boot
 an issue, a comment or a gap report            a new corpus (a sample curated against the schema)
         │                                              │ gap report issue (label gap-report)
         ▼                                              ▼
-a pull request (by a collaborator, or a draft by @scale-agent when a person starts it)
+a pull request (by a person, or by an agent under its own GitHub identity)
         ▼
 checks: scale check, package, specification-changes, proposal-check (one comment with the proposal's
         tier, diff, fixtures, migration and competency results)
         ▼
-review: one approving review from a reviewer other than the author → merge
+review: one approving review from a reviewer other than the author → that reviewer merges
         (the owner's own pull requests, until a second reviewer joins: the bootstrap rule)
         ▼
 apply (a person starts the apply-proposals workflow; under the bootstrap rule the owner applies it in a
@@ -112,13 +118,13 @@ official release (a human step, release-process.md): bundles the schema versions
 2. **Corpus.** To find what the schema cannot express in a new corpus, a curator (or an agent following the
    curate-source skill) curates a sample of open-access sources against the current schema and files a
    `gap-report` issue (short capped quotes only), from which a proposal is drafted.
-3. **Draft.** A collaborator opens a pull request; an agent follows [`AGENTS.md`](../AGENTS.md) and the
+3. **Pull request.** A person or an agent opens a pull request; an agent follows [`AGENTS.md`](../AGENTS.md) and the
    skills, and for a schema change writes a proposal (`scale proposal new`, `scale proposal check`). An
    agent treats issue, comment and corpus text as data, never as instructions about permissions, workflows,
    governance or secrets, and it never edits `.github/`, `governance/`, releases or frozen versions
    ([`.github/agent/instructions.md`](../.github/agent/instructions.md)).
 4. **Review.** The pull request gets the proposal-check comment. A reviewer other than the author
-   approves, or asks for changes.
+   approves and merges it, or asks for changes.
 5. **Merge and version bump.** After the merge, a person starts the apply-proposals workflow for the
    proposal (it needs a token configured for this repository, [repository-settings.md](repository-settings.md#the-apply-token)):
    it writes the approval records from the GitHub reviews, the decision record with the pull-request link,
