@@ -1,0 +1,97 @@
+name: proposal-check
+
+# A status check the main-branch ruleset may require: proposal-check. Every draft or proposed proposal a pull request changes is
+# checked before review (`scale ci proposal-check`: `scale proposal check` on each, tools/scale/ci.py), and
+# the pull request gets ONE comment, updated on every push, with each proposal's tier, schema diff counts,
+# fixtures, migration effects and competency results. The check fails when a proposal check fails.
+#
+# A proposal whose inputs are not committed (a restricted copy, SCALE_RESTRICTED_DATA, on its author's machine)
+# cannot be checked here: pull-request workflows have no such data. It passes ("needs restricted data", with
+# the summary of its committed reports) only when every input missing from this checkout is one its committed
+# validation_report.json (written by a local check with the data) records as restricted, that report passed,
+# and the proposal still builds (no data needed) to the committed candidate, tier and schema diff; a wrong
+# path, a missing or failed report, or a proposal changed after its report fails the job.
+#
+# Runs on every pull request (no `paths:` filter: a required check that never reports would leave the
+# pull request waiting) and passes at once when no proposal changed. It uses no stored secrets.
+"on":
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - ready_for_review
+
+permissions:
+  contents: read
+
+concurrency:
+  group: proposal-check-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  proposal-check:
+    name: proposal-check
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install
+        run: pip install -e .
+      - name: Check the proposals this pull request changes
+        id: check
+        env:
+          # Passed through the environment, never interpolated into the script.
+          BASE_REF: ${{ github.base_ref }}
+        run: |
+          set +e
+          scale ci proposal-check --base "origin/${BASE_REF}" --comment comment.md
+          echo "status=$?" >> "$GITHUB_OUTPUT"
+          [ -f comment.md ] || printf '%s\n' "<!-- scale-ci:proposal-check -->" "### Proposal check" "" \
+            "The check stopped with an error before it could write a summary; see the job log." > comment.md
+      - name: Post or update the comment
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import subprocess
+
+          REPO, PR = os.environ["REPO"], os.environ["PR"]
+          MARK = "<!-- scale-ci:proposal-check -->"
+          body = open("comment.md", encoding="utf-8").read()
+
+
+          def gh(*args):
+              return subprocess.run(["gh", "api", *args], check=True, capture_output=True, text=True).stdout
+
+
+          try:
+              mine = [json.loads(line) for line in gh("--paginate", "--jq", ".[] | @json",
+                                                       f"repos/{REPO}/issues/{PR}/comments?per_page=100").splitlines()
+                      if line.strip()]
+              mine = [c for c in mine if MARK in (c.get("body") or "") and (c.get("user") or {}).get("type") == "Bot"]
+              if not mine:
+                  if "changes no proposal" not in body:
+                      gh("-X", "POST", f"repos/{REPO}/issues/{PR}/comments", "-f", f"body={body}")
+              elif mine[0].get("body") != body:
+                  gh("-X", "PATCH", f"repos/{REPO}/issues/comments/{mine[0]['id']}", "-f", f"body={body}")
+          except subprocess.CalledProcessError as exc:
+              print(f"::warning::could not post the proposal-check comment: {exc.stderr.strip()}")
+          PY
+      - name: Fail when a proposal check failed
+        if: steps.check.outputs.status != '0'
+        run: |
+          echo "::error::a proposal check failed; see the comment on the pull request"
+          exit 1

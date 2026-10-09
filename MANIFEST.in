@@ -1,0 +1,16 @@
+# Data bundled into the wheel by setup.py (scale/_data); the source archive must carry it too.
+# Every root in scale.layout.BUNDLE is grafted here (tools/tests checks it); setup.py drops proposal
+# working files and test modules when it copies them into the wheel.
+include scale-release.yaml AGENTS.md README.md LICENSE NOTICE REUSE.toml CHANGELOG.md CITATION.cff
+include LICENSES/*.txt
+include docs/implementation-status.yaml governance/review-policy.yaml
+graft releases
+graft core
+graft domain
+graft tools/skills
+graft governance/registry
+# local, git-ignored material: source texts, caches, OCR output
+prune domain/examples/*/work
+prune domain/examples/*/scratchpad
+prune domain/examples/*/curation/ocr
+global-exclude __pycache__ *.pyc .DS_Store

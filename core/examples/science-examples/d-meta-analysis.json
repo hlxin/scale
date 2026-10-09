@@ -1,0 +1,372 @@
+{
+  "nodes": [
+    {
+      "id": "ex:sk-d/question/tof",
+      "label": "Question",
+      "props": {
+        "name": "Reported TOF",
+        "origin": "synthetic",
+        "statement": "What turnover frequency is reported for Cu/ZnO at 523 K?"
+      }
+    },
+    {
+      "id": "ex:sk-d/object/cu-zno",
+      "label": "ObjectOfStudy",
+      "props": {
+        "name": "Cu/ZnO catalysts reported at 523 K",
+        "generality": "kind",
+        "object_kind": "population",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:sk-d/variable/tof",
+      "label": "Variable",
+      "props": {
+        "name": "Turnover frequency",
+        "of": "ex:sk-d/object/cu-zno",
+        "origin": "synthetic",
+        "quantity_kind": "turnover_frequency",
+        "scale": "quantitative",
+        "unit": "1/s"
+      }
+    },
+    {
+      "id": "ex:sk-d/design/meta",
+      "label": "Design",
+      "props": {
+        "name": "Meta-analysis",
+        "design_kind": "meta_analysis",
+        "exclusion_criteria": "conversion above 10 %",
+        "inclusion_criteria": "Cu/ZnO catalysts; 523 K; site count by N2O titration",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:sk-d/experiment/meta-analysis",
+      "label": "Experiment",
+      "props": {
+        "name": "Random-effects pooling",
+        "approach": "exploratory",
+        "experiment_kind": "computational",
+        "experiment_status": "completed",
+        "goal": "benchmark",
+        "manipulation": "observational",
+        "method_id": "STATO:0000429",
+        "origin": "synthetic",
+        "results": {
+          "heterogeneity_i2": {
+            "status": "present",
+            "unit": "%",
+            "value": 41
+          },
+          "pooled_tof": {
+            "status": "present",
+            "confidence_level": 0.95,
+            "interval_lower": 0.009,
+            "interval_upper": 0.016,
+            "uncertainty_kind": "confidence_interval",
+            "unit": "1/s",
+            "value": 0.012,
+            "variable": "ex:sk-d/variable/tof"
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:sk-d/source/s1",
+      "label": "Source",
+      "props": {
+        "name": "Study 1 (invented)",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "Study 1 (invented)",
+        "year": 2011
+      }
+    },
+    {
+      "id": "ex:sk-d/experiment/s1",
+      "label": "Experiment",
+      "props": {
+        "name": "Reported test, study 1",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:sk-d/source/s1"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "origin": "synthetic",
+        "record_version": 1,
+        "results": {
+          "tof": {
+            "status": "present",
+            "unit": "1/s",
+            "value": 0.01,
+            "variable": "ex:sk-d/variable/tof"
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:sk-d/source/s2",
+      "label": "Source",
+      "props": {
+        "name": "Study 2 (invented)",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "Study 2 (invented)",
+        "year": 2012
+      }
+    },
+    {
+      "id": "ex:sk-d/experiment/s2",
+      "label": "Experiment",
+      "props": {
+        "name": "Reported test, study 2",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:sk-d/source/s2"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "origin": "synthetic",
+        "record_version": 1,
+        "results": {
+          "tof": {
+            "status": "present",
+            "unit": "1/s",
+            "value": 0.015,
+            "variable": "ex:sk-d/variable/tof"
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:sk-d/source/s3",
+      "label": "Source",
+      "props": {
+        "name": "Study 3 (invented)",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "Study 3 (invented)",
+        "year": 2013
+      }
+    },
+    {
+      "id": "ex:sk-d/experiment/s3",
+      "label": "Experiment",
+      "props": {
+        "name": "Reported test, study 3",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:sk-d/source/s3"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "origin": "synthetic",
+        "record_version": 1,
+        "results": {
+          "tof": {
+            "status": "present",
+            "unit": "1/s",
+            "value": 0.011,
+            "variable": "ex:sk-d/variable/tof"
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:sk-d/claim/pooled",
+      "label": "Claim",
+      "props": {
+        "name": "Pooled TOF",
+        "claim_kind": "generalization",
+        "claim_status": "supported",
+        "inference_type": "meta_analysis",
+        "origin": "synthetic",
+        "scope": "Cu/ZnO at 523 K, N2O site counting",
+        "statement": "Across three studies the pooled TOF is 0.012 s⁻¹ (95 % CI 0.009–0.016)."
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:sk-d/link/1",
+      "type": "ABOUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-d/question/tof",
+      "target": "ex:sk-d/object/cu-zno"
+    },
+    {
+      "id": "ex:sk-d/link/2",
+      "type": "ADDRESSES",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-d/design/meta",
+      "target": "ex:sk-d/question/tof"
+    },
+    {
+      "id": "ex:sk-d/link/3",
+      "type": "PART_OF_DESIGN",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-d/experiment/meta-analysis",
+      "target": "ex:sk-d/design/meta"
+    },
+    {
+      "id": "ex:sk-d/link/4",
+      "type": "HAS_INPUT",
+      "props": {
+        "input_version": 1,
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:sk-d/experiment/meta-analysis",
+      "target": "ex:sk-d/experiment/s1"
+    },
+    {
+      "id": "ex:sk-d/link/5",
+      "type": "INCLUDES",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-d/design/meta",
+      "target": "ex:sk-d/experiment/s1"
+    },
+    {
+      "id": "ex:sk-d/link/6",
+      "type": "HAS_INPUT",
+      "props": {
+        "input_version": 1,
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:sk-d/experiment/meta-analysis",
+      "target": "ex:sk-d/experiment/s2"
+    },
+    {
+      "id": "ex:sk-d/link/7",
+      "type": "INCLUDES",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-d/design/meta",
+      "target": "ex:sk-d/experiment/s2"
+    },
+    {
+      "id": "ex:sk-d/link/8",
+      "type": "HAS_INPUT",
+      "props": {
+        "input_version": 1,
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:sk-d/experiment/meta-analysis",
+      "target": "ex:sk-d/experiment/s3"
+    },
+    {
+      "id": "ex:sk-d/link/9",
+      "type": "INCLUDES",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-d/design/meta",
+      "target": "ex:sk-d/experiment/s3"
+    },
+    {
+      "id": "ex:sk-d/link/10",
+      "type": "CONCLUDES",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-d/experiment/meta-analysis",
+      "target": "ex:sk-d/claim/pooled"
+    },
+    {
+      "id": "ex:sk-d/link/11",
+      "type": "ABOUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-d/claim/pooled",
+      "target": "ex:sk-d/object/cu-zno"
+    },
+    {
+      "id": "ex:sk-d/link/12",
+      "type": "SUPPORTS",
+      "props": {
+        "origin": "synthetic",
+        "premise_refs": [
+          {
+            "path": "/results/pooled_tof",
+            "record": "ex:sk-d/experiment/meta-analysis"
+          }
+        ],
+        "warrant": "Pooled estimate with its interval."
+      },
+      "source": "ex:sk-d/experiment/meta-analysis",
+      "target": "ex:sk-d/claim/pooled"
+    },
+    {
+      "id": "ex:sk-d/experiment/s1/reported-in/s1",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-d/experiment/s1",
+      "target": "ex:sk-d/source/s1"
+    },
+    {
+      "id": "ex:sk-d/experiment/s2/reported-in/s2",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-d/experiment/s2",
+      "target": "ex:sk-d/source/s2"
+    },
+    {
+      "id": "ex:sk-d/experiment/s3/reported-in/s3",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-d/experiment/s3",
+      "target": "ex:sk-d/source/s3"
+    }
+  ],
+  "directed": true,
+  "graph": {
+    "data_status": "synthetic_example",
+    "graph_id": "ex:sk-d/graph",
+    "schema": "scale-graph",
+    "schema_version": "0.1.0",
+    "stewardship": {
+      "access": "public"
+    },
+    "title": "Synthetic case (d): a meta-analysis of reported turnover frequencies"
+  },
+  "multigraph": true
+}

@@ -1,0 +1,60 @@
+# The science kernel's declaration, checked by `scale domains check` and copied into every release.
+# Paths are relative to core/. `version` states the schema's one version (kernel and catalysis together), the
+# catalysis manifest's (domain/graph/scale-graph.yaml); the kernel file carries none of its own.
+core: scale-core
+title: SCALE science kernel
+summary: 'The science kernel: the general base layer that every domain builds on (catalysis, for now).'
+version: 0.1.0
+kernel: graph/kernel.yaml
+scope: |
+  In scope: the science kernel (scale-graph-kernel): the method of science (Question, Hypothesis,
+  Prediction, Experiment, Procedure, Protocol, Operation, Design, Variable, Claim), what is studied
+  (ObjectOfStudy), what science is done with (Instrument, Model, Dataset, Source) and who does it
+  (Person, Institution, Project, Software), with the value object, evidence items, record
+  references, stewardship, common properties, extension keys and the links between them.
+  Concepts belong here when they are general scientific distinctions that are not specific to one
+  field. Out of scope: anything specific to catalysis (its entities, checklist, examples and competency
+  questions), which belongs in the catalysis domain, domain/.
+compatibility: |
+  The schema has one version for the kernel and the catalysis domain together: the catalysis
+  manifest's `version` (domain/graph/scale-graph.yaml), numbered from 0.1.0. Every applied proposal
+  raises it, whether it changes the kernel, the catalysis file or both: additive changes raise the
+  minor version; breaking changes (removals, narrowed ranges, newly required properties, changed
+  meaning) raise the major version, follow tier 3 of the review policy and need a migration and a
+  decision record. Prefer deprecation to removal. The kernel of each earlier version is frozen in
+  graph/frozen/kernel-<version>.yaml when a proposal moves the schema on.
+# One reviewer group for the kernel and the catalysis domain for now (governance/review-policy.yaml). The two
+# placeholder seats are filled when the reviewers join (never invent them).
+maintainers:
+  team: '@hlxin'
+  people:
+    - name: Hongliang Xin
+      github: hlxin
+      since: '2026-09-26'
+      roles:
+        - steward
+    - name: TODO-reviewer-2
+      github: TODO-reviewer-2
+      placeholder: true
+      roles:
+        - maintainer
+    - name: TODO-reviewer-3
+      github: TODO-reviewer-3
+      placeholder: true
+      roles:
+        - maintainer
+review_areas:
+  - kernel
+examples:
+  - examples
+example_documents:
+  graph:
+    - examples/science-examples/*.json
+tests: tests
+proposals: proposals
+docs: graph/README.md
+contributors:
+  - name: Hongliang Xin
+    github: hlxin
+    roles:
+      - steward

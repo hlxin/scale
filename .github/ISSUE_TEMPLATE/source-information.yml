@@ -1,0 +1,30 @@
+name: Source information absent or ambiguous
+description: The source does not report, or reports inconsistently, information needed for a record or calculation (routes to source review; no schema change).
+labels: ["gap:absent-source-information", "curation"]
+body:
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Kind
+      options:
+        - absent in the examined source
+        - ambiguous or inconsistent in the source
+        - present in SI or source data but not yet curated
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Details and locators
+    validations:
+      required: true
+  - type: input
+    id: record
+    attributes:
+      label: Affected record id(s)
+  - type: input
+    id: domain
+    attributes:
+      label: Part (optional)
+      description: The part this concerns, the catalysis domain (domain/) or the science kernel (core/). Leave empty if unsure.
+      placeholder: catalysis

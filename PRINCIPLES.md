@@ -1,0 +1,11 @@
+A scientific schema should enable scientists and agents to interpret, compare, and challenge records without relying on unstated assumptions. For **SCALE** (Shared Concepts, Attributes, and Links with Evidence), the goal is to preserve scientific meaning and evidence while supporting reuse across studies, methods and scientific domains (catalysis first), and controlled evolution as knowledge changes.
+
+- **Design around scientific questions.** Begin with the questions and workflows the schema must support, rather than an exhaustive list of fields. Test the design against representative examples, including incomplete and conflicting records, to identify which concepts and relationships are necessary.
+
+- **Preserve scientific meaning through explicit definitions and context.** Clearly distinguish materials, samples, experiments, observations, and interpretations, with explicit rules for identity and relationships. Define quantities together with their units, normalization bases, methods, and relevant conditions so that superficially similar records are not mistaken for scientifically comparable ones.
+
+- **Make evidence and the limits of knowledge explicit.** Connect assertions to their sources, derivations, and responsible contributors, distinguishing reported results from interpretations and agent-generated inferences. Represent measurement uncertainty, extraction reliability, and interpretive support separately, while preserving missing information and competing claims.
+
+- **Build a small shared core with interoperable extensions.** Standardize recurring scientific concepts in the science kernel and add specialized detail through clearly defined domains (catalysis is the first), reusing established vocabularies where their meanings fit. Keep scientific meaning independent of storage format, and document mappings and any information lost during conversion.
+
+- **Evolve through testing, versioning, and accountable review.** Validate records and test whether the schema continues to answer its intended scientific questions, without confusing structural validity with scientific credibility. Preserve stable meanings and identifiers, give the whole schema one version number that every change raises, document changes and migrations, and ensure that revisions do not silently reinterpret existing records.

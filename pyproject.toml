@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=77"]        # PEP 639: an SPDX licence expression and license-files
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "scale-schema"
+version = "0.1.0"
+description = "SCALE — Shared Concepts, Attributes, and Links with Evidence: one shared framework for evidence-backed scientific knowledge graphs across domains (science kernel; catalysis first)."
+readme = "README.md"
+requires-python = ">=3.10"
+# code MIT; vocabulary, curated records and documentation CC-BY-4.0 (REUSE.toml gives each file's licence;
+# third-party material: NOTICE). The wheel holds both kinds.
+license = "MIT AND CC-BY-4.0"
+license-files = ["LICENSE", "LICENSES/MIT.txt", "LICENSES/CC-BY-4.0.txt", "NOTICE"]
+authors = [{ name = "SCALE contributors" }]
+dependencies = ["PyYAML>=6.0", "jsonschema>=4.18,<5"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Topic :: Scientific/Engineering",
+  "Topic :: Scientific/Engineering :: Chemistry",
+]
+
+[project.urls]
+Repository = "https://github.com/hlxin/scale"
+
+[project.optional-dependencies]
+dev = ["pytest>=7", "numpy>=1.24", "reuse[charset-normalizer]>=5"]   # reuse: the licence check of scale check
+search = ["numpy>=1.24"]            # scale graph index | search
+pdf = ["pymupdf>=1.23"]              # page texts of PDF sources (OCR also needs the tesseract command)
+
+[project.scripts]
+scale = "scale.cli:main"
+scale-schema = "scale.cli:main"      # so that `uvx scale-schema …` works without --from
+
+[tool.setuptools.packages.find]
+where = ["tools"]
+include = ["scale", "scale.*"]
+
+[tool.pytest.ini_options]
+# the same list as scale.layout.TEST_DIRS; the domain template test fixture is not collected (conftest.py
+# collect_ignore_glob)
+testpaths = ["tools/tests", "core/tests", "domain/tests"]

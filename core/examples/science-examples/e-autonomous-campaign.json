@@ -1,0 +1,376 @@
+{
+  "nodes": [
+    {
+      "id": "ex:sk-e/question/optimum",
+      "label": "Question",
+      "props": {
+        "name": "Best loading",
+        "origin": "synthetic",
+        "statement": "Which Zn loading maximizes the space-time yield at 523 K?"
+      }
+    },
+    {
+      "id": "ex:sk-e/object/cu-zn-family",
+      "label": "ObjectOfStudy",
+      "props": {
+        "name": "Cu–Zn catalysts of varying Zn loading",
+        "generality": "kind",
+        "object_kind": "population",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:sk-e/variable/zn",
+      "label": "Variable",
+      "props": {
+        "name": "Zn fraction",
+        "of": "ex:sk-e/object/cu-zn-family",
+        "origin": "synthetic",
+        "quantity_kind": "mole_fraction",
+        "scale": "quantitative",
+        "unit": "mol%"
+      }
+    },
+    {
+      "id": "ex:sk-e/variable/sty",
+      "label": "Variable",
+      "props": {
+        "name": "Space-time yield",
+        "of": "ex:sk-e/object/cu-zn-family",
+        "origin": "synthetic",
+        "quantity_kind": "space_time_yield",
+        "scale": "quantitative",
+        "unit": "g/(kg*h)"
+      }
+    },
+    {
+      "id": "ex:sk-e/design/campaign",
+      "label": "Design",
+      "props": {
+        "name": "Adaptive campaign",
+        "assignment_method": "adaptive",
+        "design_kind": "adaptive",
+        "origin": "synthetic",
+        "stopping_criterion": "STY above 1.5 g/(kg*h), or 20 iterations"
+      }
+    },
+    {
+      "id": "ex:sk-e/software/planner",
+      "label": "Software",
+      "props": {
+        "name": "Campaign planner",
+        "origin": "synthetic",
+        "software_kind": "agent",
+        "version": "0.3"
+      }
+    },
+    {
+      "id": "ex:sk-e/instrument/robot",
+      "label": "Instrument",
+      "props": {
+        "name": "Synthesis and test robot",
+        "instrument_kind": "robotic platform",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:sk-e/model/surrogate-v1",
+      "label": "Model",
+      "props": {
+        "name": "Surrogate (v1)",
+        "model_kind": "gaussian_process",
+        "origin": "synthetic",
+        "record_version": 1
+      }
+    },
+    {
+      "id": "ex:sk-e/experiment/iter1",
+      "label": "Experiment",
+      "props": {
+        "name": "Iteration 1",
+        "approach": "exploratory",
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "finished_at": "2026-05-01T12:00:00Z",
+        "goal": "investigate",
+        "manipulation": "interventional",
+        "origin": "synthetic",
+        "results": {
+          "space_time_yield": {
+            "status": "present",
+            "unit": "g/(kg*h)",
+            "value": 0.9,
+            "variable": "ex:sk-e/variable/sty"
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:sk-e/dataset/iter1",
+      "label": "Dataset",
+      "props": {
+        "name": "Iteration 1 data",
+        "availability": "available",
+        "data_kind": "processed",
+        "origin": "synthetic",
+        "record_version": 1
+      }
+    },
+    {
+      "id": "ex:sk-e/experiment/refit",
+      "label": "Experiment",
+      "props": {
+        "name": "Re-fit surrogate",
+        "experiment_kind": "computational",
+        "experiment_status": "completed",
+        "finished_at": "2026-05-01T12:05:00Z",
+        "goal": "compute",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:sk-e/model/surrogate-v2",
+      "label": "Model",
+      "props": {
+        "name": "Surrogate (v2)",
+        "model_kind": "gaussian_process",
+        "origin": "synthetic",
+        "record_version": 2
+      }
+    },
+    {
+      "id": "ex:sk-e/prediction/iter2",
+      "label": "Prediction",
+      "props": {
+        "name": "Expected yield at 22 mol%",
+        "direction": "value",
+        "expected": {
+          "status": "present",
+          "confidence_level": 0.9,
+          "interval_lower": 1.1,
+          "interval_upper": 1.5,
+          "uncertainty_kind": "confidence_interval",
+          "unit": "g/(kg*h)",
+          "value": 1.3,
+          "variable": "ex:sk-e/variable/sty"
+        },
+        "origin": "synthetic",
+        "proposed_at": "2026-05-01",
+        "variable": "ex:sk-e/variable/sty"
+      }
+    },
+    {
+      "id": "ex:sk-e/experiment/iter2",
+      "label": "Experiment",
+      "props": {
+        "name": "Iteration 2 (planned)",
+        "approach": "hypothesis_driven",
+        "experiment_kind": "physical",
+        "experiment_status": "planned",
+        "goal": "investigate",
+        "manipulation": "interventional",
+        "origin": "synthetic"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:sk-e/link/1",
+      "type": "ADDRESSES",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-e/design/campaign",
+      "target": "ex:sk-e/question/optimum"
+    },
+    {
+      "id": "ex:sk-e/link/2",
+      "type": "HAS_VARIABLE",
+      "props": {
+        "origin": "synthetic",
+        "role": "factor"
+      },
+      "source": "ex:sk-e/design/campaign",
+      "target": "ex:sk-e/variable/zn"
+    },
+    {
+      "id": "ex:sk-e/link/3",
+      "type": "HAS_VARIABLE",
+      "props": {
+        "origin": "synthetic",
+        "role": "target"
+      },
+      "source": "ex:sk-e/design/campaign",
+      "target": "ex:sk-e/variable/sty"
+    },
+    {
+      "id": "ex:sk-e/link/4",
+      "type": "PART_OF_DESIGN",
+      "props": {
+        "iteration": 1,
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-e/experiment/iter1",
+      "target": "ex:sk-e/design/campaign"
+    },
+    {
+      "id": "ex:sk-e/link/5",
+      "type": "HAS_VARIABLE",
+      "props": {
+        "level": {
+          "status": "present",
+          "unit": "mol%",
+          "value": 15
+        },
+        "origin": "synthetic",
+        "role": "factor"
+      },
+      "source": "ex:sk-e/experiment/iter1",
+      "target": "ex:sk-e/variable/zn"
+    },
+    {
+      "id": "ex:sk-e/link/6",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "actuator"
+      },
+      "source": "ex:sk-e/experiment/iter1",
+      "target": "ex:sk-e/instrument/robot"
+    },
+    {
+      "id": "ex:sk-e/link/7",
+      "type": "EXAMINES",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-e/experiment/iter1",
+      "target": "ex:sk-e/object/cu-zn-family"
+    },
+    {
+      "id": "ex:sk-e/link/8",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-e/experiment/iter1",
+      "target": "ex:sk-e/dataset/iter1"
+    },
+    {
+      "id": "ex:sk-e/link/9",
+      "type": "HAS_INPUT",
+      "props": {
+        "input_version": 1,
+        "origin": "synthetic",
+        "role": "training_data"
+      },
+      "source": "ex:sk-e/experiment/refit",
+      "target": "ex:sk-e/dataset/iter1"
+    },
+    {
+      "id": "ex:sk-e/link/10",
+      "type": "HAS_INPUT",
+      "props": {
+        "input_version": 1,
+        "origin": "synthetic",
+        "role": "parameter"
+      },
+      "source": "ex:sk-e/experiment/refit",
+      "target": "ex:sk-e/model/surrogate-v1"
+    },
+    {
+      "id": "ex:sk-e/link/11",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-e/experiment/refit",
+      "target": "ex:sk-e/model/surrogate-v2"
+    },
+    {
+      "id": "ex:sk-e/link/12",
+      "type": "REVISES",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-e/model/surrogate-v2",
+      "target": "ex:sk-e/model/surrogate-v1"
+    },
+    {
+      "id": "ex:sk-e/link/13",
+      "type": "PERFORMED_BY",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-e/experiment/refit",
+      "target": "ex:sk-e/software/planner"
+    },
+    {
+      "id": "ex:sk-e/link/14",
+      "type": "DERIVES",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-e/model/surrogate-v2",
+      "target": "ex:sk-e/prediction/iter2"
+    },
+    {
+      "id": "ex:sk-e/link/15",
+      "type": "PART_OF_DESIGN",
+      "props": {
+        "iteration": 2,
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-e/experiment/iter2",
+      "target": "ex:sk-e/design/campaign"
+    },
+    {
+      "id": "ex:sk-e/link/16",
+      "type": "HAS_VARIABLE",
+      "props": {
+        "level": {
+          "status": "present",
+          "unit": "mol%",
+          "value": 22
+        },
+        "origin": "synthetic",
+        "role": "factor"
+      },
+      "source": "ex:sk-e/experiment/iter2",
+      "target": "ex:sk-e/variable/zn"
+    },
+    {
+      "id": "ex:sk-e/link/17",
+      "type": "PROPOSED_BY",
+      "props": {
+        "acquisition_value": 0.8,
+        "origin": "synthetic",
+        "proposed_at": "2026-05-01T12:06:00Z",
+        "rationale": "Highest expected improvement under the v2 surrogate."
+      },
+      "source": "ex:sk-e/experiment/iter2",
+      "target": "ex:sk-e/software/planner"
+    },
+    {
+      "id": "ex:sk-e/link/18",
+      "type": "AIMS_TO_TEST",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-e/experiment/iter2",
+      "target": "ex:sk-e/prediction/iter2"
+    }
+  ],
+  "directed": true,
+  "graph": {
+    "data_status": "synthetic_example",
+    "graph_id": "ex:sk-e/graph",
+    "schema": "scale-graph",
+    "schema_version": "0.1.0",
+    "stewardship": {
+      "access": "public"
+    },
+    "title": "Synthetic case (e): an autonomous campaign proposing its next experiment"
+  },
+  "multigraph": true
+}

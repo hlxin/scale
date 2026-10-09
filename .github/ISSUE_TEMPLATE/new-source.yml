@@ -1,0 +1,25 @@
+name: Suggest a source to curate
+description: A paper, dataset or notebook that should be represented in SCALE.
+labels: ["new-source"]
+body:
+  - type: input
+    id: identifier
+    attributes:
+      label: "DOI or link"
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: "What does it add?"
+      description: "e.g. a new operating mode, conflicting results, a reaction not yet covered."
+  - type: input
+    id: domain
+    attributes:
+      label: Part (optional)
+      description: The part this concerns, the catalysis domain (domain/) or the science kernel (core/). Leave empty if unsure.
+      placeholder: catalysis
+  - type: input
+    id: licence
+    attributes:
+      label: "Licence (if known)"

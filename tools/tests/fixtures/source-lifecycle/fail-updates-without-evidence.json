@@ -1,0 +1,51 @@
+{
+  "nodes": [
+    {
+      "id": "ex:exmpl/lifecycle/source/paper-a",
+      "label": "Source",
+      "props": {
+        "name": "Methanol over an invented oxide (invented)",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "Methanol over an invented oxide (invented)",
+        "year": 2019
+      }
+    },
+    {
+      "id": "ex:exmpl/lifecycle/source/correction",
+      "label": "Source",
+      "props": {
+        "name": "Correction (invented)",
+        "kind": "correction",
+        "origin": "synthetic",
+        "title": "Correction (invented)",
+        "year": 2019
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:exmpl/lifecycle/link/bad",
+      "type": "UPDATES",
+      "props": {
+        "origin": "synthetic",
+        "update_type": "correction",
+        "updated_on": "2019-09"
+      },
+      "source": "ex:exmpl/lifecycle/source/correction",
+      "target": "ex:exmpl/lifecycle/source/paper-a"
+    }
+  ],
+  "directed": true,
+  "graph": {
+    "data_status": "synthetic_example",
+    "graph_id": "ex:exmpl/lifecycle/fixture/updates-without-evidence",
+    "schema": "scale-graph",
+    "schema_version": "0.1.0",
+    "stewardship": {
+      "access": "public"
+    },
+    "title": "A correction link that cites no notice (synthetic; must fail)"
+  },
+  "multigraph": true
+}

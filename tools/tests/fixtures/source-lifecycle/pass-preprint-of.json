@@ -1,0 +1,84 @@
+{
+  "nodes": [
+    {
+      "id": "ex:exmpl/lifecycle/source/preprint",
+      "label": "Source",
+      "props": {
+        "name": "Methanol over an invented oxide, preprint (invented)",
+        "kind": "preprint",
+        "date_basis": "available",
+        "origin": "synthetic",
+        "published_on": "2018-11-20",
+        "retrieved_from": "an invented preprint server",
+        "retrieved_on": "2026-10-06",
+        "text_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "text_version": "submitted_manuscript",
+        "title": "Methanol over an invented oxide, preprint (invented)",
+        "year": 2018
+      }
+    },
+    {
+      "id": "ex:exmpl/lifecycle/source/version-of-record",
+      "label": "Source",
+      "props": {
+        "name": "Methanol over an invented oxide (invented)",
+        "kind": "article",
+        "date_basis": "published",
+        "origin": "synthetic",
+        "published_on": "2019-03-04",
+        "text_version": "version_of_record",
+        "title": "Methanol over an invented oxide (invented)",
+        "year": 2019
+      }
+    },
+    {
+      "id": "ex:exmpl/lifecycle/source/patent",
+      "label": "Source",
+      "props": {
+        "name": "Process for an invented catalyst (invented)",
+        "kind": "patent",
+        "date_basis": "granted",
+        "origin": "synthetic",
+        "priority_date": "1957-02-11",
+        "published_on": "1960-06-07",
+        "title": "Process for an invented catalyst (invented)",
+        "year": 1960
+      }
+    },
+    {
+      "id": "ex:exmpl/lifecycle/dataset/rates",
+      "label": "Dataset",
+      "props": {
+        "name": "Rates of the invented oxide",
+        "availability": "available",
+        "data_kind": "table",
+        "issued": "2019-03",
+        "origin": "synthetic"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:exmpl/lifecycle/link/preprint-of",
+      "type": "SAME_WORK_AS",
+      "props": {
+        "origin": "synthetic",
+        "relation": "preprint_of"
+      },
+      "source": "ex:exmpl/lifecycle/source/preprint",
+      "target": "ex:exmpl/lifecycle/source/version-of-record"
+    }
+  ],
+  "directed": true,
+  "graph": {
+    "data_status": "synthetic_example",
+    "graph_id": "ex:exmpl/lifecycle/fixture/preprint-of",
+    "schema": "scale-graph",
+    "schema_version": "0.1.0",
+    "stewardship": {
+      "access": "public"
+    },
+    "title": "A preprint of an article, the text actually read, the dates of a patent and of a dataset (synthetic)"
+  },
+  "multigraph": true
+}

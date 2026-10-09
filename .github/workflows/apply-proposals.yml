@@ -1,0 +1,94 @@
+name: apply-proposals
+
+# Applies a merged schema proposal on main: the version bump. MANUAL: a person starts it after the pull
+# request that carries the proposal has merged (Actions > apply-proposals > Run workflow, or
+#   gh workflow run apply-proposals.yml --repo hlxin/scale -f proposal=000001 -f pr=12
+# ). It reads the merged pull request's reviews, checks them against governance/review-policy.yaml (two
+# approving reviewers other than the author; placeholders never count), records them in the proposal's
+# approvals/, writes the decision record with the pull-request link, applies the proposal (freeze the base
+# version, install the new one, raise the schema's one version in every file that states it, update the gap
+# register, set `status: applied`), runs the full `scale check` (unit tests included), and commits
+#   "Apply proposal 0000NN (<core|catalysis>): schema X → Y (PR #N)"
+# to main. All of it is `scale proposal apply-merged` (tools/scale/apply_merged.py, tested offline with
+# recorded reviews); this file only fetches the reviews and pushes. If anything fails, nothing is pushed.
+#
+# IT NEEDS A TOKEN CONFIGURED FOR THIS REPOSITORY: the repository secret APPLY_TOKEN, a fine-grained personal
+# access token (or a GitHub App token) with "Contents: read and write" on hlxin/scale only, from an account
+# the main-branch ruleset lets push (governance/repository-settings.md, "The apply token"). Without it the
+# job stops at its first step and says so. The workflow token (GITHUB_TOKEN) stays read-only: a workflow a
+# writer changes on a branch runs with that branch's copy, so it is never given write access here. The job
+# runs only from main.
+#
+# While the reviewer seats are placeholders, two approvals are impossible: the owner records a decision under
+# the bootstrap rule instead (`scale proposal decide --bootstrap-bypass`, governance/GOVERNANCE.md) and applies
+# the proposal locally with `scale proposal apply --confirm` in a pull request.
+"on":
+  workflow_dispatch:
+    inputs:
+      proposal:
+        description: "Proposal id to apply (e.g. 000001)"
+        required: true
+      pr:
+        description: "Number of its merged pull request"
+        required: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: apply-proposals
+  cancel-in-progress: false
+
+jobs:
+  apply:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read             # the push uses APPLY_TOKEN (below), never this token
+      pull-requests: read
+    env:
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+      INPUT_PROPOSAL: ${{ inputs.proposal }}
+      INPUT_PR: ${{ inputs.pr }}
+      HAS_APPLY_TOKEN: ${{ secrets.APPLY_TOKEN != '' }}
+    steps:
+      - name: Stop when no apply token is configured
+        if: env.HAS_APPLY_TOKEN != 'true'
+        run: |
+          echo "::error::the repository secret APPLY_TOKEN is not set: configure a token with write access to this repository (governance/repository-settings.md, 'The apply token'), or apply the proposal locally (scale proposal apply --confirm) in a pull request"
+          exit 1
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          token: ${{ secrets.APPLY_TOKEN }}   # git push below uses it
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install
+        run: pip install -e ".[dev]"
+      - name: Apply the merged proposal
+        run: |
+          set -euo pipefail
+          gh api "repos/${REPO}/pulls/${INPUT_PR}" > ../pr.json
+          gh api --paginate "repos/${REPO}/pulls/${INPUT_PR}/reviews?per_page=100" --jq '.[]' \
+            | python -c "import json,sys;print(json.dumps([json.loads(l) for l in sys.stdin if l.strip()]))" > ../reviews.json
+          author=$(python -c "import json;print(json.load(open('../pr.json'))['user']['login'])")
+          head_sha=$(python -c "import json;print(json.load(open('../pr.json'))['head']['sha'])")
+          url=$(python -c "import json;print(json.load(open('../pr.json'))['html_url'])")
+          merged=$(python -c "import json;print(bool(json.load(open('../pr.json')).get('merged_at')))")
+          [ "${merged}" = "True" ] || { echo "::error::pull request #${INPUT_PR} is not merged"; exit 1; }
+          scale proposal apply-merged "${INPUT_PROPOSAL}" --pr "${INPUT_PR}" --author "${author}" --head-sha "${head_sha}" \
+            --pr-url "${url}" --reviews ../reviews.json --format json > ../result.json
+          cat ../result.json
+          if [ "$(python -c "import json;print(json.load(open('../result.json'))['changed'])")" = "True" ]; then
+            python -c "import json;print(json.load(open('../result.json'))['commit_message'])" > ../message.txt
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add -A
+            git commit -q -F ../message.txt
+            git push origin HEAD:main
+          else
+            echo "nothing to apply (already applied)"
+          fi

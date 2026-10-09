@@ -1,0 +1,33 @@
+name: Comment or suggestion
+description: Anything you noticed or would like to see — no knowledge of the schema needed.
+labels: ["suggestion"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you! Write in your own words. Every comment is read; the weekly triage groups comments into
+        topics with options for the reviewers, and you will get a link to the feedback digest. A collaborator
+        drafts the change as a pull request, which is reviewed like every change.
+  - type: input
+    id: record
+    attributes:
+      label: What is it about? (optional)
+      description: A record id (e.g. ex:df-electro/test/m03), a paper DOI, a file, or leave empty.
+  - type: input
+    id: domain
+    attributes:
+      label: Part (optional)
+      description: The part this concerns, the catalysis domain (domain/) or the science kernel (core/). Leave empty if unsure.
+      placeholder: catalysis
+  - type: textarea
+    id: comment
+    attributes:
+      label: Your comment
+      description: What did you notice, what is missing, or what would you change? Quotes and page/figure numbers help.
+    validations:
+      required: true
+  - type: dropdown
+    id: role
+    attributes:
+      label: You are (optional)
+      options: [researcher / catalysis expert, data or ontology specialist, software developer, student, other]

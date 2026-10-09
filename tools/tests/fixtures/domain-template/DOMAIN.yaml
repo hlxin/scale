@@ -1,0 +1,39 @@
+# The __TITLE__ domain's declaration (domain/DOMAIN.yaml of a test repository), scaffolded by the tests'
+# new_domain() and checked by `scale domains check`. Paths are relative to this directory, except
+# decision_record (repository-relative). `version` states the schema's one version (the manifest's).
+# Field reference: domain/README.md.
+domain: '__DOMAIN__'
+title: '__TITLE__'
+status: experimental
+version: '__VERSION__'
+depends_on: []
+summary: 'TODO: one line on what the __TITLE__ domain covers.'
+scope: |
+  TODO: in scope (the phenomena, systems and measurements the domain describes) and out of scope
+  (what belongs to the core or to another domain).
+maintainers:
+  team: '__TEAM__'
+  people:
+    - name: '__STEWARD_NAME__'
+      github: '__STEWARD_GITHUB__'
+      since: '__SINCE__'
+      roles:
+        - steward
+review_areas:
+  - '__DOMAIN__'
+graph:
+  manifest: 'graph/scale-graph.yaml'
+examples:
+  - examples
+example_documents:
+  graph:
+    - 'examples/__DOMAIN__.example.graph.json'
+competency: competency
+tests: tests
+proposals: proposals
+roadmap: ROADMAP.md
+contributors:
+  - name: '__STEWARD_NAME__'
+    github: '__STEWARD_GITHUB__'
+    roles:
+      - steward

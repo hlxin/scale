@@ -1,0 +1,59 @@
+name: Science-kernel change
+description: Propose a change to the science kernel, the general base layer every domain builds on (core/).
+title: "Kernel: "
+labels: ["core", "schema-evolution"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The science kernel holds the general scientific distinctions (questions, experiments, claims,
+        sources, people) that every domain, catalysis first, builds on. A change here reaches every domain, so
+        it is reviewed with that in mind:
+        - a proposal in `core/proposals/<NNNNNN>/` (a six-digit number, global) and a decision record in `docs/decisions/`;
+        - two approving reviews from reviewers other than the author, as every change; say how the
+          catalysis domain is affected;
+        - new concepts enter as `maturity: provisional`;
+        - after the merge, the proposal is applied and the schema's one version (kernel and catalysis
+          together) moves on.
+
+        A concept about catalysis belongs in the catalysis domain. Use "Missing concept" for that.
+  - type: textarea
+    id: change
+    attributes:
+      label: What should change in the science kernel?
+      description: In ordinary language. Name existing kernel concepts if you know them.
+    validations:
+      required: true
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Why it belongs in the science kernel
+      description: Why the catalysis domain needs it, and why it is a general scientific distinction rather than one about catalysis.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Examples and evidence
+      description: Records, sources (DOI with locators and short quotes) or competency questions that need the change.
+  - type: dropdown
+    id: compatibility
+    attributes:
+      label: Compatibility
+      options:
+        - additive (new concepts or properties)
+        - deprecation (an existing name gets superseded_by)
+        - breaking (existing documents would change meaning or stop validating)
+        - not sure
+    validations:
+      required: true
+  - type: textarea
+    id: domains
+    attributes:
+      label: Effect on the catalysis domain
+      description: Which catalysis files, examples or competency questions would have to adapt, and how.
+  - type: input
+    id: release
+    attributes:
+      label: SCALE release in use
+      placeholder: v0.1.0

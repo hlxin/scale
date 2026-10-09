@@ -1,0 +1,28 @@
+# Invalid scale-graph documents, one defect each (built by build_fixtures.py from a valid public example).
+# `scale check` and test_invalid_fixtures.py validate each one and require that it is rejected (exit 1)
+# with an error message containing `error`; `reason` says why the schema must reject it.
+fixtures:
+  - file: dangling-link.json
+    error: does not resolve
+    reason: A link must join two records of the document; a target that is no record is a broken graph.
+  - file: unknown-property.json
+    error: is not declared for this type
+    reason: Curators never invent attributes; what the schema cannot express goes in the record's unmodeled list.
+  - file: value-without-status.json
+    error: a value needs a status
+    reason: A value says whether it is present or why it is missing; a bare number hides missingness.
+  - file: enum-value-not-allowed.json
+    error: is not one of
+    reason: An enumerated property takes one of its listed values, so that queries can rely on them.
+  - file: edge-endpoint-not-allowed.json
+    error: USES_CATALYST source must be
+    reason: An edge type joins only the labels it declares; a source document does not use a catalyst.
+  - file: evidence-without-locator.json
+    error: evidence needs locator
+    reason: Evidence says where in the source a statement is (section, table, figure), so that a reader can check it.
+  - file: reported-in-without-evidence.json
+    error: is not backed by its evidence
+    reason: REPORTED_IN is derived from a record's evidence; a link that no evidence backs asserts a source without proof.
+  - file: research-data-without-stewardship.json
+    error: a research_data graph declares stewardship
+    reason: Research data says who contributed it, which project it belongs to and who may see it.

@@ -1,0 +1,19 @@
+labels: ["idea"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Ideas are included in the weekly triage (governance/feedback.md). To send content without Git, use the
+        issue form "Submit a contribution".
+  - type: textarea
+    id: idea
+    attributes:
+      label: "Idea"
+      description: "What would make SCALE more useful to you?"
+    validations:
+      required: true
+  - type: input
+    id: domain
+    attributes:
+      label: "Part (optional)"
+      description: "The part this concerns: the catalysis domain (domain/) or the science kernel (core/). Leave empty if unsure."

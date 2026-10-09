@@ -1,0 +1,60 @@
+{
+  "nodes": [
+    {
+      "id": "ex:exmpl/lifecycle/source/paper-b",
+      "label": "Source",
+      "props": {
+        "name": "Kinetics over an invented alloy (invented)",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "Kinetics over an invented alloy (invented)",
+        "year": 2020
+      }
+    },
+    {
+      "id": "ex:exmpl/lifecycle/source/expression-of-concern",
+      "label": "Source",
+      "props": {
+        "name": "Expression of concern about the invented alloy paper (invented)",
+        "kind": "expression_of_concern",
+        "origin": "synthetic",
+        "title": "Expression of concern about the invented alloy paper (invented)",
+        "year": 2021
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:exmpl/lifecycle/link/concern",
+      "type": "UPDATES",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "notice",
+            "note": "the editors have been alerted to concerns about Figure 2 (invented)",
+            "source": "ex:exmpl/lifecycle/source/expression-of-concern"
+          }
+        ],
+        "origin": "synthetic",
+        "reason": "questions about the reproducibility of Figure 2, under investigation (invented)",
+        "update_type": "expression_of_concern",
+        "updated_on": "2021-06-15"
+      },
+      "source": "ex:exmpl/lifecycle/source/expression-of-concern",
+      "target": "ex:exmpl/lifecycle/source/paper-b"
+    }
+  ],
+  "directed": true,
+  "graph": {
+    "data_status": "synthetic_example",
+    "graph_id": "ex:exmpl/lifecycle/fixture/expression-of-concern",
+    "schema": "scale-graph",
+    "schema_version": "0.1.0",
+    "stewardship": {
+      "access": "public"
+    },
+    "title": "An expression of concern about an article (synthetic)"
+  },
+  "multigraph": true
+}

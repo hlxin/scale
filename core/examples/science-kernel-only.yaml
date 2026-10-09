@@ -1,0 +1,12 @@
+# The science kernel on its own, without any domain: documents that use only kernel labels
+# and edges (the worked cases in science-examples/) validate against it. Its version is the schema's
+# one version (domain/graph/scale-graph.yaml's); `scale proposal apply` raises it with the manifest.
+schema: scale-graph
+version: 0.1.0
+status: candidate
+maturity: provisional
+description: |
+  The science kernel without any domain. Documents that use only kernel labels and edges
+  validate against it; domain detail goes in conditions and results maps or in extension keys.
+kernel: ../graph/kernel.yaml
+domains: []

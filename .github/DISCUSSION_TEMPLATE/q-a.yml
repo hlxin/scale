@@ -1,0 +1,18 @@
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: "Question"
+    validations:
+      required: true
+  - type: input
+    id: domain
+    attributes:
+      label: "Part (optional)"
+      description: "The part this concerns: the catalysis domain (domain/) or the science kernel (core/). Leave empty if unsure."
+  - type: input
+    id: release
+    attributes:
+      label: "SCALE release in use (optional)"
+      description: "Shown by `uvx scale-schema call status`."
+      placeholder: "v0.1.0"

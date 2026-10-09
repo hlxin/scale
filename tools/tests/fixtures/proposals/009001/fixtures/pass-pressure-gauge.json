@@ -1,0 +1,470 @@
+{
+  "nodes": [
+    {
+      "id": "ex:exmpl/thermo/source/invented-paper",
+      "label": "Source",
+      "props": {
+        "name": "Invented paper",
+        "kind": "article",
+        "origin": "synthetic",
+        "stewardship": {
+          "access": "public"
+        },
+        "title": "Methanol over zinc oxide at high pressure (invented)",
+        "year": 2026
+      }
+    },
+    {
+      "id": "ex:exmpl/thermo/catalyst/zno",
+      "label": "Catalyst",
+      "props": {
+        "name": "ZnO",
+        "catalyst_family": "oxide",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:exmpl/thermo/source/invented-paper"
+          }
+        ],
+        "nominal_formula": "ZnO",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:exmpl/thermo/catalyst-sample/zno-40cc",
+      "label": "CatalystSample",
+      "props": {
+        "name": "ZnO charge, 40 cc",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:exmpl/thermo/source/invented-paper"
+          }
+        ],
+        "origin": "synthetic",
+        "sample_kind": "reactor_charge"
+      }
+    },
+    {
+      "id": "ex:exmpl/thermo/species/co",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "carbon monoxide",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 1,
+          "O": 1
+        },
+        "formula": "CO",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:exmpl/thermo/species/h2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "hydrogen",
+        "charge": 0,
+        "elemental_composition": {
+          "H": 2
+        },
+        "formula": "H2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:exmpl/thermo/species/meoh",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "methanol",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 1,
+          "H": 4,
+          "O": 1
+        },
+        "formula": "CH3OH",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:exmpl/thermo/reaction/meoh",
+      "label": "Reaction",
+      "props": {
+        "name": "CO + 2 H2 -> CH3OH",
+        "balance_status": "balanced",
+        "direction": "forward",
+        "equation": "CO + 2 H2 -> CH3OH",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:exmpl/thermo/feed/co-3h2",
+      "label": "Feed",
+      "props": {
+        "name": "CO : H2 = 1 : 3",
+        "evidence": [
+          {
+            "kind": "curation_note",
+            "locator": "Experimental section",
+            "note": "feed of 1 part CO to 3 parts H2 (invented)",
+            "source": "ex:exmpl/thermo/source/invented-paper"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:exmpl/thermo/test/zno-run-1",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "ZnO, run 1",
+        "conversion": {
+          "status": "present",
+          "basis": "CO converted to methanol per pass",
+          "target": "ex:exmpl/thermo/species/co",
+          "unit": "%",
+          "value": 6.2
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 1, run 1",
+            "note": "run 1: 6.2 % of the CO converted to methanol per pass; 52 g/h of methanol (invented)",
+            "source": "ex:exmpl/thermo/source/invented-paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "note": "absolute",
+          "unit": "atm",
+          "value": 150
+        },
+        "results": {
+          "methanol_production": {
+            "status": "present",
+            "unit": "g/h",
+            "value": 52
+          }
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "GHSV 12,000 h-1",
+          "unit": "h-1",
+          "value": 12000
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 380
+        },
+        "test_kind": "activity"
+      }
+    },
+    {
+      "id": "ex:exmpl/org/example-lab",
+      "label": "Institution",
+      "props": {
+        "name": "Example laboratory (invented)",
+        "country": "US",
+        "institution_kind": "university",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:exmpl/project/examples",
+      "label": "Project",
+      "props": {
+        "name": "SCALE examples (invented)",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:exmpl/thermo/species/zno",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "zinc oxide",
+        "charge": 0,
+        "elemental_composition": {
+          "O": 1,
+          "Zn": 1
+        },
+        "formula": "ZnO",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:exmpl/thermo/instrument/gauge",
+      "label": "PressureGauge",
+      "props": {
+        "name": "pressure gauge",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental section",
+            "source": "ex:exmpl/thermo/source/invented-paper"
+          }
+        ],
+        "gauge_kind": "bourdon",
+        "origin": "synthetic"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:exmpl/thermo/link/1",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/thermo/catalyst-sample/zno-40cc",
+      "target": "ex:exmpl/thermo/catalyst/zno"
+    },
+    {
+      "id": "ex:exmpl/thermo/link/2",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "unit": "cc",
+          "value": 40
+        },
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:exmpl/thermo/source/invented-paper"
+          }
+        ],
+        "origin": "synthetic",
+        "state": "fresh"
+      },
+      "source": "ex:exmpl/thermo/test/zno-run-1",
+      "target": "ex:exmpl/thermo/catalyst-sample/zno-40cc"
+    },
+    {
+      "id": "ex:exmpl/thermo/link/3",
+      "type": "FED_WITH",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/thermo/test/zno-run-1",
+      "target": "ex:exmpl/thermo/feed/co-3h2"
+    },
+    {
+      "id": "ex:exmpl/thermo/link/4",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "fraction": {
+          "status": "present",
+          "note": "relative molar parts",
+          "unit": "1",
+          "value": 1
+        },
+        "fraction_basis": "mole",
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:exmpl/thermo/feed/co-3h2",
+      "target": "ex:exmpl/thermo/species/co"
+    },
+    {
+      "id": "ex:exmpl/thermo/link/5",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "fraction": {
+          "status": "present",
+          "note": "relative molar parts",
+          "unit": "1",
+          "value": 3
+        },
+        "fraction_basis": "mole",
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:exmpl/thermo/feed/co-3h2",
+      "target": "ex:exmpl/thermo/species/h2"
+    },
+    {
+      "id": "ex:exmpl/thermo/link/6",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/thermo/test/zno-run-1",
+      "target": "ex:exmpl/thermo/reaction/meoh"
+    },
+    {
+      "id": "ex:exmpl/thermo/link/7",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:exmpl/thermo/reaction/meoh",
+      "target": "ex:exmpl/thermo/species/co"
+    },
+    {
+      "id": "ex:exmpl/thermo/link/8",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 2,
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:exmpl/thermo/reaction/meoh",
+      "target": "ex:exmpl/thermo/species/h2"
+    },
+    {
+      "id": "ex:exmpl/thermo/link/9",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "role": "product"
+      },
+      "source": "ex:exmpl/thermo/reaction/meoh",
+      "target": "ex:exmpl/thermo/species/meoh"
+    },
+    {
+      "id": "ex:exmpl/thermo/link/10",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "context": [
+          "ex:exmpl/thermo/test/zno-run-1"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:exmpl/thermo/source/invented-paper"
+          }
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/thermo/catalyst/zno",
+      "target": "ex:exmpl/thermo/reaction/meoh"
+    },
+    {
+      "id": "ex:exmpl/thermo/link/11",
+      "type": "PARTICIPATES_IN",
+      "props": {
+        "origin": "synthetic",
+        "role": "data_provider"
+      },
+      "source": "ex:exmpl/org/example-lab",
+      "target": "ex:exmpl/project/examples"
+    },
+    {
+      "id": "ex:exmpl/thermo/link/12",
+      "type": "IDENTIFIED_AS",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/thermo/catalyst/zno",
+      "target": "ex:exmpl/thermo/species/zno"
+    },
+    {
+      "id": "ex:exmpl/thermo/catalyst-sample/zno-40cc/reported-in/invented-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/thermo/catalyst-sample/zno-40cc",
+      "target": "ex:exmpl/thermo/source/invented-paper"
+    },
+    {
+      "id": "ex:exmpl/thermo/catalyst/zno/reported-in/invented-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/thermo/catalyst/zno",
+      "target": "ex:exmpl/thermo/source/invented-paper"
+    },
+    {
+      "id": "ex:exmpl/thermo/feed/co-3h2/reported-in/invented-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental section"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/thermo/feed/co-3h2",
+      "target": "ex:exmpl/thermo/source/invented-paper"
+    },
+    {
+      "id": "ex:exmpl/thermo/test/zno-run-1/reported-in/invented-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1, run 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/thermo/test/zno-run-1",
+      "target": "ex:exmpl/thermo/source/invented-paper"
+    },
+    {
+      "id": "ex:exmpl/thermo/link/gauge",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental section",
+            "source": "ex:exmpl/thermo/source/invented-paper"
+          }
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/thermo/test/zno-run-1",
+      "target": "ex:exmpl/thermo/instrument/gauge"
+    },
+    {
+      "id": "ex:exmpl/thermo/link/gauge-reported",
+      "type": "REPORTED_IN",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/thermo/instrument/gauge",
+      "target": "ex:exmpl/thermo/source/invented-paper"
+    }
+  ],
+  "directed": true,
+  "graph": {
+    "data_status": "synthetic_example",
+    "follows_domains": [
+      "catalysis"
+    ],
+    "graph_id": "ex:exmpl/thermo/example",
+    "schema": "scale-graph",
+    "schema_version": "0.2.0",
+    "stewardship": {
+      "access": "public",
+      "contributed_by": [
+        "ex:exmpl/org/example-lab"
+      ],
+      "project": "ex:exmpl/project/examples"
+    },
+    "title": "Worked example of the scale-graph format: one thermocatalytic zinc oxide run (synthetic: the source and every value are invented)"
+  },
+  "multigraph": true
+}

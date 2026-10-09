@@ -1,0 +1,533 @@
+{
+  "nodes": [
+    {
+      "id": "ex:df-electrophoto/source/paper",
+      "label": "Source",
+      "props": {
+        "name": "Invented paper",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "C-H amination with an electrochemically turned-over molecular photocatalyst (invented)",
+        "year": 2026
+      }
+    },
+    {
+      "id": "ex:df-electrophoto/species/benzene",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "C6H6",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 6,
+          "H": 6
+        },
+        "formula": "C6H6",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:df-electrophoto/species/phenyltriazole",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "C8H7N3",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 8,
+          "H": 7,
+          "N": 3
+        },
+        "formula": "C8H7N3",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:df-electrophoto/species/triazole",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "C2H3N3",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 2,
+          "H": 3,
+          "N": 3
+        },
+        "formula": "C2H3N3",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:df-electrophoto/species/h2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "H2",
+        "charge": 0,
+        "elemental_composition": {
+          "H": 2
+        },
+        "formula": "H2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:df-electrophoto/reaction/amination",
+      "label": "Reaction",
+      "props": {
+        "name": "C6H6 + C2H3N3 -> C8H7N3 + H2",
+        "balance_status": "balanced",
+        "direction": "forward",
+        "equation": "C6H6 + C2H3N3 -> C8H7N3 + H2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:df-electrophoto/catalyst/tac",
+      "label": "Catalyst",
+      "props": {
+        "name": "Trisaminocyclopropenium photocatalyst",
+        "catalyst_family": "oxide",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:df-electrophoto/source/paper"
+          }
+        ],
+        "nominal_formula": "C21H36N3+",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:df-electrophoto/sample/tac",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Trisaminocyclopropenium photocatalyst, batch 1",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:df-electrophoto/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "sample_kind": "powder"
+      }
+    },
+    {
+      "id": "ex:df-electrophoto/electrode/rvc",
+      "label": "Electrode",
+      "props": {
+        "name": "Reticulated vitreous carbon anode",
+        "origin": "synthetic",
+        "substrate": "RVC"
+      }
+    },
+    {
+      "id": "ex:df-electrophoto/instrument/ref",
+      "label": "ReferenceElectrode",
+      "props": {
+        "name": "Ag/AgNO3 reference",
+        "origin": "synthetic",
+        "reference_type": "pseudo_reference"
+      }
+    },
+    {
+      "id": "ex:df-electrophoto/electrolyte/mecn",
+      "label": "Electrolyte",
+      "props": {
+        "name": "0.1 M Et4NBF4 in MeCN",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:df-electrophoto/species/et4nbf4",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "C8H20NBF4",
+        "charge": 0,
+        "elemental_composition": {
+          "B": 1,
+          "C": 8,
+          "F": 4,
+          "H": 20,
+          "N": 1
+        },
+        "formula": "C8H20NBF4",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:df-electrophoto/instrument/cfl",
+      "label": "LightSource",
+      "props": {
+        "name": "Compact fluorescent lamp",
+        "origin": "synthetic",
+        "source_kind": "other",
+        "spectrum": "white light"
+      }
+    },
+    {
+      "id": "ex:df-electrophoto/variable/illumination",
+      "label": "Variable",
+      "props": {
+        "name": "Illumination",
+        "categories": [
+          "light",
+          "dark"
+        ],
+        "origin": "synthetic",
+        "scale": "nominal"
+      }
+    },
+    {
+      "id": "ex:df-electrophoto/test/light",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Light + 1.5 mA",
+        "control_mode": "galvanostatic",
+        "current": {
+          "status": "present",
+          "unit": "mA",
+          "value": 1.5
+        },
+        "driving_forces": [
+          "electro",
+          "photo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:df-electrophoto/source/paper"
+          }
+        ],
+        "excited_species": "electrogenerated radical dication of the photocatalyst",
+        "experiment_kind": "physical",
+        "illumination": "light",
+        "light_absorber": "molecular_photocatalyst",
+        "origin": "synthetic",
+        "reference_scale": "other",
+        "results": {
+          "yield": {
+            "status": "present",
+            "target": "ex:df-electrophoto/species/phenyltriazole",
+            "unit": "%",
+            "value": 72
+          }
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 298
+        },
+        "test_kind": "activity"
+      }
+    },
+    {
+      "id": "ex:df-electrophoto/test/dark",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Dark + 1.5 mA",
+        "control_mode": "galvanostatic",
+        "current": {
+          "status": "present",
+          "unit": "mA",
+          "value": 1.5
+        },
+        "driving_forces": [
+          "electro",
+          "photo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:df-electrophoto/source/paper"
+          }
+        ],
+        "excited_species": "electrogenerated radical dication of the photocatalyst",
+        "experiment_kind": "physical",
+        "illumination": "dark",
+        "light_absorber": "molecular_photocatalyst",
+        "origin": "synthetic",
+        "reference_scale": "other",
+        "results": {
+          "yield": {
+            "status": "present",
+            "target": "ex:df-electrophoto/species/phenyltriazole",
+            "unit": "%",
+            "value": 3
+          }
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 298
+        },
+        "test_kind": "control"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:df-electrophoto/link/1",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:df-electrophoto/reaction/amination",
+      "target": "ex:df-electrophoto/species/benzene"
+    },
+    {
+      "id": "ex:df-electrophoto/link/2",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:df-electrophoto/reaction/amination",
+      "target": "ex:df-electrophoto/species/triazole"
+    },
+    {
+      "id": "ex:df-electrophoto/link/3",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "role": "product"
+      },
+      "source": "ex:df-electrophoto/reaction/amination",
+      "target": "ex:df-electrophoto/species/phenyltriazole"
+    },
+    {
+      "id": "ex:df-electrophoto/link/4",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "role": "product"
+      },
+      "source": "ex:df-electrophoto/reaction/amination",
+      "target": "ex:df-electrophoto/species/h2"
+    },
+    {
+      "id": "ex:df-electrophoto/link/5",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:df-electrophoto/sample/tac",
+      "target": "ex:df-electrophoto/catalyst/tac"
+    },
+    {
+      "id": "ex:df-electrophoto/link/6",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "fraction": {
+          "status": "present",
+          "unit": "mol/L",
+          "value": 0.1
+        },
+        "fraction_basis": "not_reported",
+        "origin": "synthetic",
+        "role": "inert"
+      },
+      "source": "ex:df-electrophoto/electrolyte/mecn",
+      "target": "ex:df-electrophoto/species/et4nbf4"
+    },
+    {
+      "id": "ex:df-electrophoto/link/7",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "as_prepared"
+      },
+      "source": "ex:df-electrophoto/test/light",
+      "target": "ex:df-electrophoto/sample/tac"
+    },
+    {
+      "id": "ex:df-electrophoto/link/8",
+      "type": "USES_ELECTRODE",
+      "props": {
+        "origin": "synthetic",
+        "role": "working"
+      },
+      "source": "ex:df-electrophoto/test/light",
+      "target": "ex:df-electrophoto/electrode/rvc"
+    },
+    {
+      "id": "ex:df-electrophoto/link/9",
+      "type": "USES_ELECTRODE",
+      "props": {
+        "origin": "synthetic",
+        "role": "reference"
+      },
+      "source": "ex:df-electrophoto/test/light",
+      "target": "ex:df-electrophoto/instrument/ref"
+    },
+    {
+      "id": "ex:df-electrophoto/link/10",
+      "type": "IN_ELECTROLYTE",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:df-electrophoto/test/light",
+      "target": "ex:df-electrophoto/electrolyte/mecn"
+    },
+    {
+      "id": "ex:df-electrophoto/link/11",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:df-electrophoto/test/light",
+      "target": "ex:df-electrophoto/reaction/amination"
+    },
+    {
+      "id": "ex:df-electrophoto/link/12",
+      "type": "ILLUMINATED_BY",
+      "props": {
+        "geometry": "side",
+        "origin": "synthetic"
+      },
+      "source": "ex:df-electrophoto/test/light",
+      "target": "ex:df-electrophoto/instrument/cfl"
+    },
+    {
+      "id": "ex:df-electrophoto/link/13",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "as_prepared"
+      },
+      "source": "ex:df-electrophoto/test/dark",
+      "target": "ex:df-electrophoto/sample/tac"
+    },
+    {
+      "id": "ex:df-electrophoto/link/14",
+      "type": "USES_ELECTRODE",
+      "props": {
+        "origin": "synthetic",
+        "role": "working"
+      },
+      "source": "ex:df-electrophoto/test/dark",
+      "target": "ex:df-electrophoto/electrode/rvc"
+    },
+    {
+      "id": "ex:df-electrophoto/link/15",
+      "type": "USES_ELECTRODE",
+      "props": {
+        "origin": "synthetic",
+        "role": "reference"
+      },
+      "source": "ex:df-electrophoto/test/dark",
+      "target": "ex:df-electrophoto/instrument/ref"
+    },
+    {
+      "id": "ex:df-electrophoto/link/16",
+      "type": "IN_ELECTROLYTE",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:df-electrophoto/test/dark",
+      "target": "ex:df-electrophoto/electrolyte/mecn"
+    },
+    {
+      "id": "ex:df-electrophoto/link/17",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:df-electrophoto/test/dark",
+      "target": "ex:df-electrophoto/reaction/amination"
+    },
+    {
+      "id": "ex:df-electrophoto/link/18",
+      "type": "ILLUMINATED_BY",
+      "props": {
+        "geometry": "side",
+        "origin": "synthetic"
+      },
+      "source": "ex:df-electrophoto/test/dark",
+      "target": "ex:df-electrophoto/instrument/cfl"
+    },
+    {
+      "id": "ex:df-electrophoto/link/19",
+      "type": "CONTROL_FOR",
+      "props": {
+        "control_kind": "negative",
+        "differs_in": [
+          "ex:df-electrophoto/variable/illumination"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:df-electrophoto/test/dark",
+      "target": "ex:df-electrophoto/test/light"
+    },
+    {
+      "id": "ex:df-electrophoto/catalyst/tac/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:df-electrophoto/catalyst/tac",
+      "target": "ex:df-electrophoto/source/paper"
+    },
+    {
+      "id": "ex:df-electrophoto/sample/tac/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:df-electrophoto/sample/tac",
+      "target": "ex:df-electrophoto/source/paper"
+    },
+    {
+      "id": "ex:df-electrophoto/test/dark/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:df-electrophoto/test/dark",
+      "target": "ex:df-electrophoto/source/paper"
+    },
+    {
+      "id": "ex:df-electrophoto/test/light/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:df-electrophoto/test/light",
+      "target": "ex:df-electrophoto/source/paper"
+    }
+  ],
+  "directed": true,
+  "graph": {
+    "data_status": "synthetic_example",
+    "follows_domains": [
+      "catalysis"
+    ],
+    "graph_id": "ex:df-electrophoto/graph",
+    "schema": "scale-graph",
+    "schema_version": "0.1.0",
+    "stewardship": {
+      "access": "public"
+    },
+    "title": "C-H amination with an electrochemically turned-over molecular photocatalyst"
+  },
+  "multigraph": true
+}

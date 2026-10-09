@@ -1,0 +1,17 @@
+__pycache__/
+*.egg-info/
+.pytest_cache/
+build/
+dist/
+.venv/
+/venv/
+/env/
+uv.lock
+demo-output/
+*.pyc
+.DS_Store
+
+# local material of an example or corpus (source texts, OCR, scratch): never committed (layout.LOCAL_DIRS)
+/domain/examples/**/work/
+/domain/examples/**/scratchpad/
+/domain/examples/*/curation/ocr/

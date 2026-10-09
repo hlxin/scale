@@ -1,0 +1,298 @@
+"""Science checks of the scale-graph science kernel.
+
+Rules about the method of science that a type check cannot express: tests that assert an outcome
+cite what it rests on; predictions made after the result are flagged; a fit does not confirm its
+own data; a hypothesis's status agrees with the evidence recorded for it; references and evidence
+ids resolve; plans and orderings are acyclic; inputs used at an old version are flagged; records that rest on retracted sources are flagged (source lifecycle, ``lifecycle``).
+
+The checks report; they never grade science. Severity, independence and confounding are recorded
+as the source or an assessor states them and are not computed.
+"""
+
+from __future__ import annotations
+
+from collections import defaultdict
+from typing import Any, Iterator
+
+VALUE_STATUS = {"present", "not_reported", "not_measured", "not_applicable", "below_detection_limit",
+                "below_quantification_limit"}
+POLAR = {"supports", "disputes", "refutes"}
+
+
+def _values(obj: Any, path: str = "") -> Iterator[tuple[str, dict]]:
+    """Every value object inside a props tree, with its JSON pointer."""
+    if isinstance(obj, dict):
+        if obj.get("status") in VALUE_STATUS and path:
+            yield path, obj
+        for k, v in obj.items():
+            if k != "evidence":
+                yield from _values(v, f"{path}/{k}")
+    elif isinstance(obj, list):
+        for i, v in enumerate(obj):
+            yield from _values(v, f"{path}/{i}")
+
+
+def _pointer(props: dict, path: str) -> tuple[bool, Any]:
+    cur: Any = props
+    for part in [p.replace("~1", "/").replace("~0", "~") for p in path.split("/")[1:]]:
+        if isinstance(cur, dict) and part in cur:
+            cur = cur[part]
+        elif isinstance(cur, list) and part.isdigit() and int(part) < len(cur):
+            cur = cur[int(part)]
+        else:
+            return False, None
+    return True, cur
+
+
+def _when(p: dict) -> str | None:
+    """A comparable ISO string for when something happened (datetime or date at any precision)."""
+    for k in ("started_at", "performed_on", "finished_at"):
+        if isinstance(p.get(k), str):
+            return p[k]
+    return None
+
+
+def _before(a: str, b: str) -> bool | None:
+    """a strictly before b, compared at their common precision; None when undecidable."""
+    n = min(len(a), len(b), 10)
+    if a[:n] == b[:n]:
+        return None
+    return a[:n] < b[:n]
+
+
+def _cyclic(edges: list[tuple[str, str]]) -> list[str]:
+    graph = defaultdict(list)
+    for a, b in edges:
+        graph[a].append(b)
+    state: dict[str, int] = {}
+    found: list[str] = []
+
+    def visit(n: str, stack: list[str]) -> None:
+        state[n] = 1
+        for m in graph[n]:
+            if state.get(m) == 1:
+                found.append(" -> ".join(stack[stack.index(m):] + [m]) if m in stack else m)
+            elif not state.get(m):
+                visit(m, stack + [m])
+        state[n] = 2
+    for n in list(graph):
+        if not state.get(n):
+            visit(n, [n])
+    return found
+
+
+def science_checks(doc: dict, spec: dict, rep) -> None:
+    nodes = {n["id"]: n for n in doc.get("nodes") or [] if isinstance(n.get("id"), str)}
+    links = [e for e in doc.get("links") or [] if isinstance(e, dict)]
+    records = {**nodes, **{e["id"]: e for e in links if isinstance(e.get("id"), str)}}
+    props = {rid: (r.get("props") or {}) for rid, r in records.items()}
+    label = {nid: n.get("label") for nid, n in nodes.items()}
+    edges_def = spec["edges"]
+    out = defaultdict(list)
+    inc = defaultdict(list)
+    for e in links:
+        out[e.get("source")].append(e)
+        inc[e.get("target")].append(e)
+    warn = lambda rid, msg: rep.add("warning", rid, msg)  # noqa: E731
+    err = lambda rid, msg: rep.add("error", rid, msg)  # noqa: E731
+
+    # ---- record references (paths) and evidence ids
+    def refs_of(e: dict) -> Iterator[tuple[str, dict]]:
+        for k, d in (edges_def.get(e.get("type"), {}).get("properties") or {}).items():
+            v = (e.get("props") or {}).get(k)
+            if d.get("type") == "record_ref" and isinstance(v, dict):
+                yield k, v
+            elif d.get("type") == "list" and d.get("items", {}).get("type") == "record_ref" and isinstance(v, list):
+                for x in v:
+                    if isinstance(x, dict):
+                        yield k, x
+
+    resolved_refs: dict[str, list[Any]] = defaultdict(list)
+    for e in links:
+        for k, r in refs_of(e):
+            target = r.get("record")
+            if target not in records:
+                continue                      # unresolved ids are reported by the type check
+            if "path" in r:
+                ok, val = _pointer(props[target], r["path"])
+                if not ok:
+                    err(e["id"], f"{k}: {target}{r['path']} does not resolve to a property")
+                    continue
+                resolved_refs[e["id"]].append(val)
+            want = r.get("record_version")
+            have = props[target].get("record_version")
+            if want is not None and have is not None and want != have:
+                warn(e["id"], f"{k}: refers to {target} version {want}; the graph holds version {have}")
+    for rid, p in props.items():
+        ev_ids = [ev.get("id") for ev in p.get("evidence") or [] if isinstance(ev, dict) and ev.get("id")]
+        if len(ev_ids) != len(set(ev_ids)):
+            err(rid, "evidence ids repeat within the record")
+        for path, v in _values(p):
+            for x in v.get("evidence_ids") or []:
+                if x not in ev_ids:
+                    err(rid, f"{path}: evidence_ids names {x!r}, which is not an evidence item of this record")
+
+    # ---- tests of hypotheses and predictions
+    for e in links:
+        if e.get("type") != "TESTS":
+            continue
+        p = e.get("props") or {}
+        exp, tgt = props.get(e.get("source"), {}), props.get(e.get("target"), {})
+        if p.get("outcome") in POLAR and not (p.get("evidence") or p.get("result_refs")):
+            err(e["id"], f"a TESTS outcome '{p['outcome']}' cites evidence or result_refs")
+        if label.get(e.get("target")) == "Prediction" or "Prediction" in _ancestors(spec, label.get(e.get("target"))):
+            made, ran = tgt.get("proposed_at"), _when(exp)
+            if isinstance(made, str) and ran and _before(ran, made):
+                warn(e["id"], f"post hoc: prediction {e['target']} was proposed ({made}) after the test started ({ran})")
+        if p.get("outcome") == "supports":
+            fitted = [v for v in resolved_refs.get(e["id"], []) if isinstance(v, dict) and v.get("origin") == "fitted"]
+            if fitted:
+                warn(e["id"], "a supports outcome rests on a fitted value; a fit does not confirm its own data")
+
+    # ---- hypothesis status agrees with the recorded evidence
+    for nid, n in nodes.items():
+        if n.get("label") != "Hypothesis":
+            continue
+        st = props[nid].get("hypothesis_status")
+        ins = inc.get(nid, [])
+        outcomes = {(e.get("props") or {}).get("outcome") for e in ins if e.get("type") == "TESTS"}
+        types = {e.get("type") for e in ins}
+        need = {"supported": ("supports" in outcomes or "SUPPORTS" in types),
+                "refuted": ("refutes" in outcomes or "CONTRADICTS" in types),
+                "disputed": (bool(outcomes & {"disputes", "refutes"}) or "CONTRADICTS" in types)}
+        if st in need and not need[st]:
+            err(nid, f"hypothesis_status {st} has no test outcome or argument link that says so")
+
+    # ---- experiments, predictions, variables
+    for nid, n in nodes.items():
+        p, lab = props[nid], n.get("label")
+        anc = [lab] + _ancestors(spec, lab)
+        if "Experiment" in anc and p.get("approach") == "hypothesis_driven":
+            if not any(e.get("type") in ("TESTS", "AIMS_TO_TEST") for e in out.get(nid, [])):
+                warn(nid, "a hypothesis-driven experiment names no hypothesis or prediction it tests (TESTS or AIMS_TO_TEST)")
+        if lab == "Prediction":
+            if not (p.get("statement") or p.get("expected")):
+                err(nid, "a prediction states its expectation (statement or expected)")
+            ev = (p.get("expected") or {}).get("variable")
+            if ev and p.get("variable") and ev != p["variable"]:
+                err(nid, "the prediction's variable and expected.variable disagree")
+        if lab == "Variable":
+            if p.get("scale") == "quantitative" and not p.get("quantity_kind"):
+                err(nid, "a quantitative variable names its quantity_kind")
+    scale = {nid: props[nid].get("scale") for nid, n in nodes.items() if n.get("label") == "Variable"}
+    cats = {nid: props[nid].get("categories") for nid in scale}
+    for rid, p in props.items():
+        for path, v in _values(p):
+            var = v.get("variable")
+            if var in scale and scale[var] in ("nominal", "ordinal") and v.get("status") == "present":
+                if "text_value" not in v:
+                    err(rid, f"{path}: a value of {scale[var]} variable {var} is a text_value")
+                elif cats.get(var) and v["text_value"] not in cats[var]:
+                    warn(rid, f"{path}: {v['text_value']!r} is not one of the categories of {var}")
+
+    # ---- operations: static or dynamic
+    for nid, n in nodes.items():
+        if n.get("label") != "Operation":
+            continue
+        p = props[nid]
+        if p.get("operation_mode") == "dynamic":
+            if not p.get("varied_quantities"):
+                err(nid, "a dynamic operation names its varied_quantities")
+            if not (p.get("segments") or p.get("period") or p.get("frequency") or p.get("description")):
+                warn(nid, "a dynamic operation says how it varies (segments, period, frequency or description)")
+        elif p.get("operation_mode") == "static" and p.get("time_pattern") not in (None, "constant", "not_reported"):
+            err(nid, f"a static operation has time_pattern constant, not {p['time_pattern']}")
+
+    # ---- controls and replication (recorded, not judged)
+    for e in links:
+        p = e.get("props") or {}
+        if e.get("type") == "CONTROL_FOR" and not p.get("differs_in"):
+            warn(e["id"], "a control names the variables in which it differs (differs_in)")
+        if e.get("type") == "REPLICATES" and p.get("level") == "reproduce" and not p.get("changed"):
+            warn(e["id"], "a reproduction lists what changed (data, sample, method, team, site, …)")
+
+    # ---- structure: self-links, acyclic orderings, revisions
+    kernel_edges = {t for t, d in edges_def.items() if d.get("module") == "kernel"}
+    for e in links:
+        if e.get("type") in kernel_edges and e.get("source") == e.get("target"):
+            err(e["id"], f"a {e['type']} link joins a record to itself")
+        if e.get("type") == "REVISES" and label.get(e.get("source")) != label.get(e.get("target")):
+            err(e["id"], "REVISES joins two versions of a record of the same label")
+    for t in ("PART_OF", "PRECEDES", "HAS_PART", "REVISES"):
+        for cyc in _cyclic([(e["source"], e["target"]) for e in links if e.get("type") == t]):
+            err("<graph>", f"{t} forms a cycle: {cyc}")
+
+    # ---- inputs used at an older version
+    for e in links:
+        if e.get("type") != "HAS_INPUT":
+            continue
+        used = (e.get("props") or {}).get("input_version")
+        now = props.get(e.get("target"), {}).get("record_version")
+        if isinstance(used, int) and isinstance(now, int) and used < now \
+                and props.get(e.get("source"), {}).get("freshness_status") != "inputs_revised":
+            warn(e.get("source"), f"inputs revised: {e['target']} was used at version {used}; version {now} is current")
+
+    lifecycle_checks(doc, spec, rep, nodes, links, props, inc)
+
+
+def lifecycle_checks(doc: dict, spec: dict, rep, nodes: dict, links: list[dict], props: dict, inc) -> None:
+    """Source lifecycle: a notice is authoritative and a source's status is derived from the
+    notices that reach it (``lifecycle``). What rests on retracted sources is flagged, never rewritten; the counts
+    go to ``rep.lifecycle`` for the summaries. Nothing fires on a document that records no notice."""
+    from .lifecycle import RETRACTED, resting, statuses, summary
+    warn = lambda rid, msg: rep.add("warning", rid, msg)  # noqa: E731
+    for e in links:
+        if e.get("type") != "RETRACTS":
+            continue
+        p = e.get("props") or {}
+        if not p.get("retracted_on"):
+            warn(e.get("id"), "retraction_undated: a RETRACTS link states when the retraction was made (retracted_on)")
+        if p.get("scope_locators") and p.get("scope") != "partial":
+            rep.add("error", e.get("id"), "scope_locators go only with a partial retraction (scope partial); "
+                                          "a full retraction covers the whole source")
+    st = statuses(doc, spec)
+    rest = resting(doc, spec, st)
+    for rid in sorted(rest, key=str):
+        r = rest[rid]
+        if r["rests"] == "all":
+            warn(rid, f"rests_on_retracted_source: all the evidence it rests on is retracted ({_retracted_support(rid, r)}); "
+                      "flagged, not rewritten")
+        else:
+            warn(rid, f"partially_rests_on_retracted_source: some of the evidence it rests on is retracted "
+                      f"({_retracted_support(rid, r)})")
+    for nid, n in nodes.items():
+        key = {"Claim": "claim_status", "Hypothesis": "hypothesis_status"}.get(n.get("label"))
+        if not key:
+            continue
+        status = props[nid].get(key)
+        if status == "supported" and (rest.get(nid) or {}).get("rests") == "all":
+            warn(nid, f"supported_on_retracted_sources: {key} supported rests only on retracted evidence "
+                      f"({_retracted_support(nid, rest[nid])})")
+        if status == "retracted":
+            noticed = any(e.get("type") == "RETRACTS" for e in inc.get(nid, [])) or any(
+                (st.get(ev.get("source")) or {}).get("status") in RETRACTED | {"partially_retracted"}
+                for ev in props[nid].get("evidence") or [] if isinstance(ev, dict))
+            if not noticed:
+                warn(nid, f"retracted_without_notice: {key} retracted, but no RETRACTS link reaches it and none of the "
+                          "sources its evidence cites is retracted; record the notice (a Source that RETRACTS)")
+    rep.lifecycle = summary(st, rest)
+
+
+def _retracted_support(rid: str, r: dict) -> str:
+    """What a record's retracted support is, naming only the sources that are themselves retracted (or withdrawn)
+    and, apart, the retracted datasets with the sources their retraction covers: a dataset that includes the
+    record itself, or one that includes an input or experiment the record uses (which is said so)."""
+    parts = [f"retracted sources: {', '.join(r['sources'])}"] if r["sources"] else []
+    for d in r["datasets"]:                       # each dataset with the sources whose evidence it retracts
+        srcs = r["dataset_sources"].get(d) or []
+        used = [x for x in r["dataset_records"].get(d) or [] if x != rid]
+        if rid in (r["dataset_records"].get(d) or []):
+            head = f"included in the retracted dataset {d}" + (f" (as is {', '.join(used)}, which it uses)" if used else "")
+        else:
+            head = f"uses {', '.join(used)}, included in the retracted dataset {d}"
+        parts.append(head + (f", which retracts its evidence from {', '.join(srcs)}" if srcs else ""))
+    return "; ".join(parts)
+
+
+def _ancestors(spec: dict, lab: str | None) -> list[str]:
+    return list((spec["nodes"].get(lab) or {}).get("ancestors") or []) if lab else []

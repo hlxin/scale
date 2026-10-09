@@ -1,0 +1,45 @@
+# A competency question of the catalysis domain (tools/scale/competency.py; `scale domains cq catalysis`).
+# It runs on public synthetic examples, so anyone can rerun it and see the same answer.
+id: CQ-04
+question: Which plasma-catalytic tests report an energy yield, at which discharge power and applied voltage, and
+  over which catalyst?
+description: |
+  A plasma-catalytic result is comparable only with the electrical input that produced it: the energy yield
+  is read together with the discharge power and the applied voltage of the plasma source.
+documents:
+  - examples/scale-graph/driving-force-examples/plasma.json
+plan:
+  question: Which plasma-catalytic tests report an energy yield, at which discharge power and voltage?
+  match:
+    label: CatalyticTest
+    as: test
+    where:
+      - prop: energy_yield
+        op: exists
+  steps:
+    - from: test
+      edge: USES_PLASMA
+      to: PlasmaSource
+      as: plasma
+    - from: test
+      edge: USES_CATALYST
+      to: CatalystSample
+      as: sample
+    - from: sample
+      edge: HAS_FORMULATION
+      to: Catalyst
+      as: catalyst
+  return:
+    - test.name
+    - test.energy_yield
+    - test.discharge_power
+    - test.applied_voltage
+    - plasma.name
+    - catalyst.name
+  evidence: true
+expect:
+  status: answered
+  min_rows: 1
+  values:
+    catalyst.name:
+      - Ni/Al2O3

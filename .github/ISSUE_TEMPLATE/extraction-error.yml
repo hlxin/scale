@@ -1,0 +1,28 @@
+name: Extraction error
+description: A curated value, unit, locator or quote does not match its source (routes to re-extraction).
+labels: ["gap:extraction-error", "curation"]
+body:
+  - type: input
+    id: record
+    attributes:
+      label: Record id(s)
+    validations:
+      required: true
+  - type: textarea
+    id: mismatch
+    attributes:
+      label: What is recorded vs what the source says
+      description: Include the locator (section, figure, table) and a short quote.
+    validations:
+      required: true
+  - type: input
+    id: domain
+    attributes:
+      label: Part (optional)
+      description: The part this concerns, the catalysis domain (domain/) or the science kernel (core/). Leave empty if unsure.
+      placeholder: catalysis
+  - type: input
+    id: release
+    attributes:
+      label: SCALE release in use
+      placeholder: v0.1.0

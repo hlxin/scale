@@ -1,0 +1,41 @@
+# A competency question of the catalysis domain (tools/scale/competency.py; `scale domains cq catalysis`).
+# It runs on public synthetic examples, so anyone can rerun it and see the same answer.
+id: CQ-03
+question: Which catalytic tests ran under light, with which driving forces, light source and irradiance?
+description: |
+  Light acts alone (photocatalysis) or together with heat or an applied potential; the test lists its
+  driving forces, and the light source is a record of its own. Dark controls are left out by the filter on
+  illumination, not by guessing from the name.
+documents:
+  - examples/scale-graph/driving-force-examples/photo.json
+  - examples/scale-graph/driving-force-examples/photothermo.json
+  - examples/scale-graph/driving-force-examples/photothermo-dynamic.json
+  - examples/scale-graph/driving-force-examples/photoelectro.json
+  - examples/scale-graph/driving-force-examples/electrophoto.json
+plan:
+  question: Which catalytic tests ran under light, with which light source and irradiance?
+  match:
+    label: CatalyticTest
+    as: test
+    where:
+      - prop: illumination
+        op: eq
+        value: light
+  steps:
+    - from: test
+      edge: ILLUMINATED_BY
+      to: LightSource
+      as: lamp
+  return:
+    - test.name
+    - test.driving_forces
+    - test.irradiance
+    - lamp.name
+    - lamp.source_kind
+expect:
+  status: answered
+  min_rows: 6
+  values:
+    lamp.source_kind:
+      - xenon_lamp
+      - solar_simulator

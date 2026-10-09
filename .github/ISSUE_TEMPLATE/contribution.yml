@@ -1,0 +1,83 @@
+name: Submit a contribution (no Git needed)
+description: Send records, questions, corrections or example data through an issue. A collaborator prepares the pull request and credits you.
+title: "Contribution: "
+labels: ["submission"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form if you do not use Git. Describe or attach what you would like to contribute
+        (drag files into a text box). A collaborator turns it into a pull request, which is reviewed like any
+        other: two approving reviews from reviewers other than its author.
+
+        **Credit.** If you agree below, the commit carries a `Co-authored-by` trailer with your name and
+        your GitHub no-reply address, so GitHub lists you as a co-author. We never ask for your email. With
+        your consent you are also added to the `contributors` list of the catalysis domain (or the science kernel), which is
+        copied into every official release that includes your contribution. A contributor without a GitHub
+        account is credited in that list by name or ORCID.
+
+        **Sources.** Share only what you have the right to share. For published articles, give the DOI and
+        short quotes with locators (section, figure, table), never the article text.
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What are you contributing?
+      options:
+        - curated records or measurements from a source
+        - a scientific question the records should answer
+        - a correction to existing records
+        - example data or a dataset
+        - a vocabulary or concept proposal
+        - documentation
+        - something else
+    validations:
+      required: true
+  - type: input
+    id: domain
+    attributes:
+      label: Part
+      description: The part this belongs to, the catalysis domain (domain/) or the science kernel (core/). Leave empty if unsure.
+      placeholder: catalysis
+  - type: textarea
+    id: content
+    attributes:
+      label: Your contribution
+      description: Describe it, paste it, or attach files. Spreadsheets, CSV and JSON files are fine.
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources and licence
+      description: DOIs or links of the sources, and the licence of any data you attach (if known).
+  - type: input
+    id: credit_name
+    attributes:
+      label: Name for credit
+      description: Your name as it should appear in the commit and the contributors list.
+  - type: input
+    id: orcid
+    attributes:
+      label: ORCID (optional)
+      placeholder: 0000-0000-0000-0000
+  - type: dropdown
+    id: consent
+    attributes:
+      label: How may we credit you?
+      options:
+        - Co-author trailer on the commit and the contributors list of the catalysis domain (or the science kernel)
+        - Co-author trailer on the commit only
+        - Contributors list only (no GitHub account)
+        - Do not name me
+    validations:
+      required: true
+  - type: checkboxes
+    id: rights
+    attributes:
+      label: Rights
+      options:
+        - label: >-
+            I have the right to share this content, and it may be published in this repository under the
+            licence of the place it goes to (code MIT; vocabulary, records and documentation CC-BY-4.0; see
+            governance/licensing.md). Quotes of sources are short excerpts; data under other terms is named above.
+          required: true

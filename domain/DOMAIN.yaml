@@ -1,0 +1,69 @@
+# The catalysis domain's declaration, checked by `scale domains check` and copied into every
+# release. Paths are relative to domain/, except decision_record (repository-relative). `version` states
+# the schema's one version (kernel and catalysis together), the manifest's (graph/scale-graph.yaml).
+domain: catalysis
+title: Catalysis
+status: stable
+founding: true
+version: 0.1.0
+depends_on: []
+alternative_to: null
+summary: 'Catalytic chemistry and its evidence: the catalysis domain''s graph schema, with one vocabulary and one checklist.'
+scope: |
+  In scope: catalytic chemistry and its evidence, in the catalysis domain's graph schema (the
+  science kernel and graph/catalysis.yaml): one vocabulary (chemical species, materials, samples, reactions, reactors,
+  preparations, characterizations, computations, mechanisms, catalysts, active sites, feeds,
+  catalyst samples and catalytic tests, the role a substance plays being on the edge, and the terms
+  of every driving force: heat, electrically delivered heat, an applied potential or current, light
+  and plasma, and where they act together) and one checklist of what a record must and should
+  report, whose items for a catalytic test apply by the driving forces it lists (driving_forces).
+  Out of scope: the science kernel (core/), which changes only by a kernel proposal; the
+  electrochemical and photochemical terms stay in the catalysis domain.
+# One reviewer group for the kernel and the catalysis domain for now (governance/review-policy.yaml). The two
+# placeholder seats are filled when the reviewers join (never invent them).
+maintainers:
+  team: '@hlxin'
+  people:
+    - name: Hongliang Xin
+      github: hlxin
+      since: '2026-09-26'
+      roles:
+        - steward
+    - name: TODO-reviewer-2
+      github: TODO-reviewer-2
+      placeholder: true
+      roles:
+        - maintainer
+    - name: TODO-reviewer-3
+      github: TODO-reviewer-3
+      placeholder: true
+      roles:
+        - maintainer
+review_areas:
+  - catalysis
+  - thermo
+  - electrothermo
+  - electro
+  - photo
+  - plasma
+graph:
+  manifest: graph/scale-graph.yaml
+examples:
+  - examples/scale-graph
+# public synthetic documents only (scale check requires every committed document to be public)
+example_documents:
+  graph:
+    - examples/scale-graph/example.json
+    - examples/scale-graph/driving-force-examples/*.json
+    - examples/scale-graph/source-lifecycle/*.json
+competency: competency
+tests: tests
+proposals: proposals
+docs: docs
+roadmap: ROADMAP.md
+decision_record: docs/decisions/0001-scale-0.1.0.md
+contributors:
+  - name: Hongliang Xin
+    github: hlxin
+    roles:
+      - steward

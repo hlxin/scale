@@ -1,0 +1,49 @@
+# A competency question of the catalysis domain (tools/scale/competency.py; `scale domains cq catalysis`).
+# It runs on public synthetic examples, so anyone can rerun it and see the same answer.
+id: CQ-01
+question: Which ammonia Faradaic efficiencies were measured in nitrate electroreduction, under which control mode
+  and electrode potential, on which catalyst, and where in the source is each stated?
+description: |
+  An electrocatalytic result is read with its operating context: the efficiency, the target species, how
+  the potential or current was controlled (potentiostatic or pulsed) and the catalyst, each with the
+  passage that states it. A pulsed test has no single electrode potential; the answer says so instead of
+  filling one in.
+documents:
+  - examples/scale-graph/driving-force-examples/electro.json
+  - examples/scale-graph/driving-force-examples/electro-dynamic.json
+plan:
+  question: Which ammonia Faradaic efficiencies were measured, under which control mode and potential, on which catalyst?
+  match:
+    label: CatalyticTest
+    as: test
+    where:
+      - prop: faradaic_efficiency
+        op: exists
+  steps:
+    - from: test
+      edge: OF_REACTION
+      to: Reaction
+      as: reaction
+    - from: test
+      edge: USES_CATALYST
+      to: CatalystSample
+      as: sample
+    - from: sample
+      edge: HAS_FORMULATION
+      to: Catalyst
+      as: catalyst
+  return:
+    - test.name
+    - test.control_mode
+    - test.faradaic_efficiency
+    - test.electrode_potential
+    - reaction.equation
+    - catalyst.name
+  evidence: true
+expect:
+  status: answered
+  min_rows: 3
+  values:
+    test.control_mode:
+      - potentiostatic
+      - pulsed
