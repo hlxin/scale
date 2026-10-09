@@ -176,12 +176,12 @@ def test_the_summary_names_the_reviewers(repo, capsys):
                         "domain/graph/frozen/scale-graph-0.2.0.yaml": "version: 0.2.0\n"},
                  append={"domain/graph/frozen/SHA256SUMS": "ccc  scale-graph-0.2.0.yaml\n"})
     assert res["ok"] and res["owners"]["minimal_reviewers"] == [REVIEWERS] and res["core_consultation"] is None
-    assert f"fewest approvals that satisfy code-owner review: {REVIEWERS}" in spec_changes_text(res)
+    assert f"fewest reviewers who own every changed path: {REVIEWERS}" in spec_changes_text(res)
     res = change(repo, {"core/graph/kernel.yaml": "kernel: scale-graph-kernel\nnodes: {}\n",
                         "core/proposals/000100/proposal.yaml": "id: '000100'\n"})
     assert res["core_consultation"]["domain_teams"] == [CAT]
     assert main(["--repo", str(repo), "ci", "spec-changes", "--base", "base"]) == 0
     out = capsys.readouterr().out
-    assert "how the catalysis domain is affected" in out and "two approving reviews from reviewers other than the author" in out
+    assert "how the catalysis domain is affected" in out and "one approving review from a reviewer other than the author" in out
     change(repo, {"releases/v0.1.0/RELEASE.yaml": "release: v0.1.1\n"})
     assert main(["--repo", str(repo), "ci", "spec-changes", "--base", "base", "--json"]) == 1

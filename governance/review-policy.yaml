@@ -3,21 +3,23 @@
 # person starts it for a merged proposal and its pull request (it needs the repository secret APPLY_TOKEN).
 # GitHub pull-request reviews are the approvals. Changing this file is a governance change: it needs the
 # same approvals as every other pull request.
-policy_version: 1
+policy_version: 2
 
 principles:
   - Only people approve, by reviewing the pull request on GitHub. Agents never approve, merge or apply.
-  - Every pull request to main needs two approving reviews from reviewers other than its author, once the
-    reviewer seats are filled; until then the owner merges under the bootstrap rule (governance/GOVERNANCE.md).
+  - Every pull request to main needs one approving review from a reviewer other than its author, any reviewer
+    listed below, not a particular one. Until a reviewer besides the owner has joined, the owner merges under the
+    bootstrap rule (governance/GOVERNANCE.md).
   - Schema proposals follow the same rule. After the merge, a person starts the apply-proposals workflow for
     the proposal and its pull request (or, under the bootstrap rule, the owner applies it in a pull request);
     applying it raises the schema's one version (kernel and catalysis together).
   - New concepts enter as provisional. The tier of a proposal is information for the reviewers, not a
     separate approval class.
 
-# The reviewers: one group for the kernel and the catalysis domain for now (the owner below owns every path in
-# .github/CODEOWNERS; reviewers are added there when they join). A placeholder is a seat not filled yet: it never
-# counts as an approval, and `scale check` warns until it is replaced by a person (name and GitHub handle).
+# The reviewers: one group for the kernel and the catalysis domain for now, the owner and the domain experts who
+# join (each added here, with Write access, by a pull request; CODEOWNERS routes review requests to them). Any one
+# of them other than the author approves a change. A placeholder is a seat not filled yet: it never counts as an
+# approval, and `scale check` warns until it is replaced by a person (name and GitHub handle).
 reviewers:
   team: '@hlxin'
   members:
@@ -36,12 +38,12 @@ reviewers:
 # The latest review of each reviewer counts (GitHub's review state). A reviewer whose latest review
 # requests changes blocks until they approve or their review is dismissed.
 approvals:
-  required: 2
+  required: 1
   author_counts: false
   placeholders_count: false
 
 # Tiers are stated in each proposal's reports (scale proposal check) so that reviewers know what kind
-# of change they review; every tier needs the same two approvals.
+# of change they review; every tier needs the same one approval.
 tiers:
   0:
     name: no change in meaning

@@ -24,8 +24,8 @@ a pull request (a collaborator, or a DRAFT by @scale-agent on agent/<run>-<short
         │  for a schema change, a proposal checked with `scale proposal check`
         ▼
 checks (scale check, package, specification-changes, proposal-check) and review:
-        │  TWO approving reviews from reviewers other than the author
-        │  (until the reviewer seats are filled: the owner merges under the bootstrap rule)
+        │  ONE approving review from any reviewer other than the author
+        │  (until a reviewer besides the owner has joined: the owner merges under the bootstrap rule)
         ▼
 merge to main; the branch is deleted
         │  a schema proposal is then applied: the schema's one version moves on
@@ -36,10 +36,11 @@ data repositories are updated to it (`scale kg update`); later an official relea
 1. **Comment.** Write what you need in plain language on an issue (the forms below) or on a pull request.
 2. **Or open a pull request.** Branch `<github-handle>/<topic>`, run `uv run --extra dev scale check`, push,
    open the pull request. For a schema change, add a proposal (below).
-3. **Review.** Every pull request needs **two approving reviews from reviewers other than its author**
-   ([governance/review-policy.yaml](governance/review-policy.yaml), where the reviewers are listed). A reviewer
-   who asks for changes blocks until they approve. While the two reviewer seats are placeholders, the owner
-   merges under the bootstrap rule ([governance/GOVERNANCE.md](governance/GOVERNANCE.md#bootstrap-until-the-reviewers-join)).
+3. **Review.** Every pull request needs **one approving review from a reviewer other than its author**
+   ([governance/review-policy.yaml](governance/review-policy.yaml), where the reviewers are listed); any
+   reviewer may give it. A reviewer who asks for changes blocks until they approve. A reviewer who disagrees
+   with a merged change corrects it with a pull request of their own. Until a reviewer besides the owner has
+   joined, the owner merges under the bootstrap rule ([governance/GOVERNANCE.md](governance/GOVERNANCE.md#bootstrap-until-the-reviewers-join)).
 4. **After the merge.** A schema proposal (`status: proposed`) is applied on `main`: a person starts the
    apply-proposals workflow, which records the reviews, writes the decision record, freezes the old version
    and installs the new one (under the bootstrap rule the owner applies it in a pull request). You do not
@@ -63,7 +64,7 @@ The repository is private for now and shared with collaborators.
 | Admin | the owner, `@hlxin` | repository settings, rulesets, collaborators and secrets |
 
 - **CODEOWNERS routes review; it does not restrict writes.** What protects `main` is the branch ruleset:
-  a pull request, two approvals including a code owner's, passing required checks, no force pushes and no
+  a pull request, one approval from any reviewer (not necessarily a code owner), passing required checks, no force pushes and no
   deletion ([governance/repository-settings.md](governance/repository-settings.md)).
 - **Write access is a trust grant.** It lets a collaborator start workflows and run them from a branch, and
   such a run can read the repository's secrets.
@@ -159,7 +160,7 @@ six-digit id or the directory (`scale proposal check 000001`).
 | the science kernel (`core/graph/`) | `core/proposals/<NNNNNN>/` |
 
 Every proposal raises the schema's one version (kernel and catalysis together), whichever file it changes,
-and needs the same two approvals. Two proposals built on the same schema version cannot both apply: the
+and needs the same approval. Two proposals built on the same schema version cannot both apply: the
 second is rebuilt on the new version (`scale proposal check`) after the first is applied.
 
 Every proposal needs:
@@ -197,7 +198,7 @@ the kernel.
 
 `core/` is the base layer every domain builds on, so a change there reaches the catalysis schema too. Say in
 the pull request how the catalysis domain is affected; `scale ci spec-changes` lists who must review. It is
-reviewed like every change (two approvals). Open a
+reviewed like every change (one approval). Open a
 [science-kernel issue](https://github.com/hlxin/scale/issues/new?template=core-change.yml)
 first for anything larger than a fix. See [core/README.md](core/README.md).
 

@@ -126,9 +126,9 @@ on a short-lived branch. The owner, or an agent at their request, prepares a pul
 credits its author.
 
 **How the schema evolves.** A schema change is a pull request that carries a proposal
-(`scale proposal new`, `scale proposal check`); like every change it needs two approving reviews from
-reviewers other than its author once the reviewer seats are filled, and the owner merges under the bootstrap
-rule until then ([governance/GOVERNANCE.md](governance/GOVERNANCE.md)). After it merges, the proposal is
+(`scale proposal new`, `scale proposal check`); like every change it needs one approving review from
+a reviewer other than its author once a reviewer besides the owner has joined, and the owner merges under the
+bootstrap rule until then ([governance/GOVERNANCE.md](governance/GOVERNANCE.md)). After it merges, the proposal is
 applied on `main` and the schema version moves on. People approve; agents draft.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).

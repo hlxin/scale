@@ -54,11 +54,17 @@ def test_two_approvals_apply_the_proposal_and_bump_the_version(tmp_path):
     assert load_doc(repo / "docs/decisions/log.json")["decisions"][0]["pr"] == 42
 
 
-def test_one_approval_writes_nothing(tmp_path):
+def test_one_approval_by_any_reviewer_applies_it(tmp_path):
+    repo, cs = checked(tmp_path)
+    res = apply_merged(repo, cs, 42, reviews("ben"), author="hlxin", head_sha=HEAD, check=OK)
+    assert res["status"] == "applied" and "**Approved by:** ben" in (repo / res["decision_record"]).read_text()
+
+
+def test_no_approval_writes_nothing(tmp_path):
     repo, cs = checked(tmp_path)
     before = tree(repo)
     with pytest.raises(ScaleError, match=r"#42 does not satisfy .*1 more approving review"):
-        apply_merged(repo, cs, 42, reviews("ada"), author="hlxin", head_sha=HEAD, check=OK)
+        apply_merged(repo, cs, 42, reviews("hlxin"), author="hlxin", head_sha=HEAD, check=OK)
     assert tree(repo) == before
 
 
@@ -66,7 +72,7 @@ def test_the_authors_own_approval_is_ignored(tmp_path):
     repo, cs = checked(tmp_path)
     before = tree(repo)
     with pytest.raises(ScaleError, match=r"not counted: ada \(the author of the change\)"):
-        apply_merged(repo, cs, 42, reviews("ada", "ben"), author="ada", head_sha=HEAD, check=OK)
+        apply_merged(repo, cs, 42, reviews("ada"), author="ada", head_sha=HEAD, check=OK)
     assert tree(repo) == before
 
 
@@ -77,14 +83,14 @@ def test_a_placeholder_is_ignored(tmp_path):
     (repo / "governance/review-policy.yaml").write_text(dump_yaml(pol))
     before = tree(repo)
     with pytest.raises(ScaleError, match=r"not counted: TODO-reviewer-2 \(a placeholder seat, not a person\)"):
-        apply_merged(repo, cs, 42, reviews("ben", "TODO-reviewer-2"), author="hlxin", head_sha=HEAD, check=OK)
+        apply_merged(repo, cs, 42, reviews("TODO-reviewer-2"), author="hlxin", head_sha=HEAD, check=OK)
     assert tree(repo) == before
 
 
 def test_approvals_of_an_older_commit_do_not_count(tmp_path):
     repo, cs = checked(tmp_path)
     with pytest.raises(ScaleError, match="1 more approving review"):
-        apply_merged(repo, cs, 42, reviews("ada") + reviews("ben", commit="older"), author="hlxin", head_sha=HEAD, check=OK)
+        apply_merged(repo, cs, 42, reviews("ben", commit="older"), author="hlxin", head_sha=HEAD, check=OK)
 
 
 def test_an_applied_proposal_is_left_alone(tmp_path):
@@ -202,14 +208,19 @@ def test_the_cli_runs_the_real_check_and_rolls_back(tmp_path, capsys):
     assert tree(repo) == before
 
 
-def test_a_bootstrap_bypass_is_recorded_as_such_and_only_while_seats_are_empty(tmp_path):
-    """Until the reviewers join, two approvals are impossible: a reviewer who merged under the ruleset's bootstrap
-    bypass records the decision by hand, and the record says it was not approved by two reviewers."""
+def test_a_bootstrap_bypass_is_recorded_as_such_and_only_while_no_other_reviewer_has_joined(tmp_path):
+    """Until a reviewer besides the owner joins, the owner's change cannot be approved: the owner, who merged under the
+    ruleset's bootstrap bypass, records the decision by hand, and the record says it was not approved."""
     from scale.pgraph_proposal import apply, decide
     repo, cs = checked(tmp_path)
-    with pytest.raises(ScaleError, match="every reviewer seat .* is filled"):
+    with pytest.raises(ScaleError, match="besides hlxin can approve"):
         decide(cs, repo, bootstrap_bypass="reviewers not yet added", by="hlxin")
     pol = load_yaml(repo / "governance/review-policy.yaml")
+    pol["reviewers"]["members"] = [pol["reviewers"]["members"][0], pol["reviewers"]["members"][1],
+                                   {"name": "TODO-reviewer-2", "github": "TODO-reviewer-2", "placeholder": True}]
+    (repo / "governance/review-policy.yaml").write_text(dump_yaml(pol))
+    with pytest.raises(ScaleError, match="besides hlxin can approve"):     # one expert has joined: no bypass
+        decide(cs, repo, bootstrap_bypass="reviewers not yet added", by="hlxin")
     pol["reviewers"]["members"] = [pol["reviewers"]["members"][0],
                                    {"name": "TODO-reviewer-2", "github": "TODO-reviewer-2", "placeholder": True}]
     (repo / "governance/review-policy.yaml").write_text(dump_yaml(pol))
@@ -220,7 +231,7 @@ def test_a_bootstrap_bypass_is_recorded_as_such_and_only_while_seats_are_empty(t
     with pytest.raises(ScaleError, match="TODO-reviewer-2 is not a reviewer"):
         decide(cs, repo, bootstrap_bypass="reviewers not yet added", by="TODO-reviewer-2")
     rec = decide(cs, repo, pr=3, bootstrap_bypass="reviewers not yet added", by="hlxin").read_text()
-    assert "merged under the bootstrap bypass by hlxin, without two approvals" in rec
+    assert "merged under the bootstrap bypass by hlxin, without an approval" in rec
     assert "Bootstrap bypass by hlxin: reviewers not yet added" in rec
     assert load_doc(repo / "docs/decisions/log.json")["decisions"][0]["bootstrap_bypass"] == "reviewers not yet added"
     assert apply(cs, repo, confirm=True)["dry_run"] is False
@@ -514,7 +525,7 @@ def test_the_apply_workflow_is_manual_and_pushes_only_with_its_own_token():
     actors = {(a["actor_type"], a["actor_id"], a["bypass_mode"]) for a in rules["bypass_actors"]}
     assert actors == {("RepositoryRole", 5, "always")}
     pr = next(r for r in rules["rules"] if r["type"] == "pull_request")["parameters"]
-    assert pr["required_approving_review_count"] == 2 and pr["require_code_owner_review"]
+    assert pr["required_approving_review_count"] == 1 and not pr["require_code_owner_review"]   # any one reviewer
     wf = load_yaml(REPO / ".github/workflows/apply-proposals.yml")
     assert set(wf["on"]) == {"workflow_dispatch"} and set(wf["on"]["workflow_dispatch"]["inputs"]) == {"proposal", "pr"}
     job = wf["jobs"]["apply"]

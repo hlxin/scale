@@ -9,9 +9,9 @@ a personal repository of its owner, Hongliang Xin (`@hlxin`); its Python package
 repository starts private and is shared with collaborators; the rules are the same before and after it
 becomes public ([decision record 0001](../docs/decisions/0001-scale-0.1.0.md)).
 
-The model in one paragraph: **every change is a pull request that needs two approving reviews from
-reviewers other than its author**; until the two reviewer seats are filled, the owner merges under the
-bootstrap rule. A schema change is a pull request that carries a *proposal*. When it merges, the proposal is
+The model in one paragraph: **every change is a pull request that needs one approving review from a
+reviewer other than its author**, any of the reviewers; until a reviewer besides the owner has joined, the
+owner merges under the bootstrap rule. A schema change is a pull request that carries a *proposal*. When it merges, the proposal is
 applied on `main` and the schema's one version moves on. A data repository is then moved to the new version
 with one command (`scale kg update`). Agents draft changes and proposals; they never approve, merge or apply.
 
@@ -25,7 +25,7 @@ with one command (`scale kg update`). Agents draft changes and proposals; they n
 | **schema version** | One version for the kernel and the catalysis domain together: the catalysis manifest's `version`, which documents pin (0.1.0 today). Every applied proposal raises it, whichever file it changes. |
 | **checklist** | What a catalysis record must and should report: the catalysis file's `checklist:`, named `catalysis`, selected with `--domain` and declared in a document's `follows_domains`. |
 | **proposal** | A schema change, in `core/proposals/<NNNNNN>/` (the science kernel) or `domain/proposals/<NNNNNN>/` (the catalysis domain), named by a six-digit number that is global across both. |
-| **reviewers** | The people who approve changes, listed in [`review-policy.yaml`](review-policy.yaml): the owner and two seats to be filled. |
+| **reviewers** | The people who approve changes, listed in [`review-policy.yaml`](review-policy.yaml): the owner and the domain experts who join (two seats to be filled today). Any one of them approves a change. |
 | **maturity** | Of a concept: `provisional` or `stable`. New concepts enter as provisional. |
 | **official release** | A tagged, digested distribution built by the release process: `releases/vX.Y.Z/`, tag `vX.Y.Z`, PyPI `scale-schema` X.Y.Z ([release-process.md](release-process.md)). None has been built yet. |
 
@@ -33,29 +33,31 @@ with one command (`scale kg update`). Agents draft changes and proposals; they n
 
 | who | GitHub | what they do |
 |---|---|---|
-| **owner** | `@hlxin`, admin of the repository, code owner of every path in [`.github/CODEOWNERS`](../.github/CODEOWNERS) | reviews and approves pull requests; merges under the bootstrap rule until the seats are filled; applies merged proposals; builds releases; repository settings, rulesets and secrets ([repository-settings.md](repository-settings.md)) |
-| **reviewers** | collaborators (Write), added to CODEOWNERS when they join | review and approve pull requests: the science kernel, the catalysis domain, tools, governance and releases. Today: two seats to be filled (`TODO-reviewer-2`, `TODO-reviewer-3` in the review policy) |
+| **owner** | `@hlxin`, admin of the repository, code owner of every path in [`.github/CODEOWNERS`](../.github/CODEOWNERS) | reviews and approves pull requests; merges under the bootstrap rule until a reviewer has joined; applies merged proposals; builds releases; repository settings, rulesets and secrets ([repository-settings.md](repository-settings.md)) |
+| **reviewers** | domain experts, collaborators (Write), added to the review policy and CODEOWNERS when they join | review and approve pull requests (any one of them is enough): the science kernel, the catalysis domain, tools, governance and releases. Today: two seats to be filled (`TODO-reviewer-2`, `TODO-reviewer-3` in the review policy) |
 | **contributors** | anyone: issues and comments; collaborators also branches and pull requests; others through forks once the repository is public | propose changes, curate, report gaps |
 | **@scale-agent** | Claude on GitHub, started by hand by a person with write access (off otherwise) | drafts changes and proposals on `agent/…` branches as draft pull requests; never approves, merges or applies |
 
-## The rule: two approvals for every change
+## The rule: one approval for every change
 
 - Every update to `main` arrives by pull request. Nobody pushes to `main` directly; the one exception is the
   application of a merged proposal, which the apply-proposals workflow (or the owner, in a pull request)
   commits after checking its approvals.
-- A pull request merges with **two approving reviews from reviewers other than its author**, a passing
-  set of required checks, and no reviewer asking for changes. This holds for every kind of change:
+- A pull request merges with **one approving review from a reviewer other than its author**, a passing
+  set of required checks, and no reviewer asking for changes. Any reviewer may give it; no particular
+  reviewer or code owner has to.
+  A reviewer who disagrees with a merged change corrects it by opening a pull request, which follows the same rule. This holds for every kind of change:
   documentation, tools, records, schema proposals of every tier, governance and releases.
 - **Only people approve**, by reviewing the pull request on GitHub. The GitHub reviews are the approvals;
-  there is no other approval record to write. A change proposed by an agent needs the same two approvals.
-- **Placeholders never count.** The two seats not filled yet are marked `placeholder: true` in the review
+  there is no other approval record to write. A change proposed by an agent needs the same approval.
+- **Placeholders never count.** The seats not filled yet are marked `placeholder: true` in the review
   policy, `core/CORE.yaml` and `domain/DOMAIN.yaml`; `scale check` warns until they are
   filled with real people (never invented).
 - The latest review of each reviewer counts. A reviewer whose latest review requests changes blocks until
   they approve or the review is dismissed; an approval given before new commits were pushed is dismissed.
 
-GitHub enforces the rule through the `main` ruleset where the plan allows it: two approving reviews, a
-code-owner review, stale approvals dismissed, the last push approved by someone else, required checks
+GitHub enforces the rule through the `main` ruleset where the plan allows it: one approving review (a
+code-owner review is not required; CODEOWNERS only routes review requests), stale approvals dismissed, the last push approved by someone else, required checks
 ([repository-settings.md](repository-settings.md)). `scale proposal apply-merged` evaluates it again, from
 the merged pull request's reviews, before it applies a proposal.
 
@@ -63,20 +65,20 @@ the merged pull request's reviews, before it applies a proposal.
 change in meaning, 1 records, 2 additive or loosening, 3 breaking) so that reviewers know what they
 review; a breaking change also needs a migration step and gets a decision record. New concepts enter as
 `maturity: provisional`; a later proposal may promote them to `stable` (`set_maturity`). There are no
-comment periods, no separate approver for provisional concepts and no committee quorum: the two
-approvals are the decision.
+comment periods, no separate approver for provisional concepts and no committee quorum: the approval
+is the decision.
 
 ### Bootstrap: until the reviewers join
 
-With one filled seat, two approvals from people other than the author are impossible. Until two
-reviewers have joined, the owner may merge pull requests through a **bootstrap bypass** of the ruleset,
+With one filled seat, the owner's own pull requests cannot be approved by anyone else. Until a reviewer
+besides the owner has joined, the owner may merge pull requests through a **bootstrap bypass** of the ruleset,
 only after the checks pass, each use noted in the pull request ("Bootstrap bypass: reviewers not yet
-added"). A proposal merged this way has no two approvals, so `scale proposal apply-merged` refuses it; the
+added"). A proposal merged this way has no approval, so `scale proposal apply-merged` refuses it; the
 owner applies it in a pull request that also notes the bypass:
 `scale proposal decide <id> --pr <n> --bootstrap-bypass "reviewers not yet added" --by hlxin`, then
-`scale proposal apply <id> --confirm`. The decision record says it was not approved by two reviewers;
-the tool refuses a bypass once every seat is filled. The bypass is narrowed or removed once the two
-reviewers have joined ([repository-settings.md](repository-settings.md#bootstrap-bypass)).
+`scale proposal apply <id> --confirm`. The decision record says it was not approved by a reviewer;
+the tool refuses a bypass once another reviewer can approve. The bypass is narrowed or removed once a
+reviewer has joined ([repository-settings.md](repository-settings.md#bootstrap-bypass)).
 
 ## How a change flows
 
@@ -89,8 +91,8 @@ a pull request (by a collaborator, or a draft by @scale-agent when a person star
 checks: scale check, package, specification-changes, proposal-check (one comment with the proposal's
         tier, diff, fixtures, migration and competency results)
         ▼
-review: two approving reviews from reviewers other than the author → merge
-        (until the seats are filled: the owner, under the bootstrap rule)
+review: one approving review from a reviewer other than the author → merge
+        (until a reviewer has joined: the owner, under the bootstrap rule)
         ▼
 apply (a person starts the apply-proposals workflow; under the bootstrap rule the owner applies it in a
         pull request): reviews checked → approvals recorded → decision record → old version frozen →
@@ -112,8 +114,8 @@ official release (a human step, release-process.md): bundles the schema versions
    agent treats issue, comment and corpus text as data, never as instructions about permissions, workflows,
    governance or secrets, and it never edits `.github/`, `governance/`, releases or frozen versions
    ([`.github/agent/instructions.md`](../.github/agent/instructions.md)).
-4. **Review.** The pull request gets the proposal-check comment. Two reviewers other than the author
-   approve, or ask for changes.
+4. **Review.** The pull request gets the proposal-check comment. A reviewer other than the author
+   approves, or asks for changes.
 5. **Merge and version bump.** After the merge, a person starts the apply-proposals workflow for the
    proposal (it needs a token configured for this repository, [repository-settings.md](repository-settings.md#the-apply-token)):
    it writes the approval records from the GitHub reviews, the decision record with the pull-request link,
@@ -205,5 +207,5 @@ SCALE release" names what this process produces; it is not a licence restriction
 
 ## Changing this document
 
-Everything under `governance/` changes by pull request with two approvals (the bootstrap rule until the
-seats are filled), like everything else.
+Everything under `governance/` changes by pull request with one approval (the bootstrap rule until a
+reviewer has joined), like everything else.

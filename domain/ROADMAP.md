@@ -79,6 +79,6 @@ checklist: its field lists are proposals for review.
 ## Stewards
 
 The catalysis domain has one steward. Its stewardship target is two or more; until more stewards join,
-`scale domains check` reports the unmet target as a warning. The two reviewer seats in
-`governance/review-policy.yaml` (placeholders today) must be filled before any change can get two approvals; until
+`scale domains check` reports the unmet target as a warning. A reviewer seat in
+`governance/review-policy.yaml` (placeholders today) must be filled before the owner's changes can be approved; until
 then the owner merges under the bootstrap rule ([governance/GOVERNANCE.md](../governance/GOVERNANCE.md)).

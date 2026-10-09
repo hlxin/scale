@@ -21,7 +21,7 @@ name: publish
 #    environment `pypi`.
 # 2. Repository settings → Environments → `pypi` (deployment protection rules on a private personal
 #    repository need a paid plan; without them the tag ruleset below is the boundary):
-#    - required reviewers: @hlxin (and the reviewers, once the seats are filled);
+#    - required reviewers: @hlxin (and the reviewers, as they join);
 #    - deployment branches and tags: selected tags only, rule `v*`;
 #    - no environment secrets.
 # 3. A tag ruleset that restricts creating, updating and deleting `v*` tags to the owner.

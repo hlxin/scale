@@ -96,7 +96,7 @@ what they may see).
   summaries in the repository.
 - **Publishing it** needs the partners' clearance, then: access set to `public`, the copyright cap applied
   (`scale evidence cap`), the claim statements reviewed, and a pull request that `scale check` passes and
-  two reviewers approve.
+  a reviewer approves.
 - **Synthetic look-alikes.** Where an example or fixture needs the structure of project data, it uses an
   invented source and invented values (`data_status: synthetic_example`, `ex:exmpl/` ids).
 - Laboratories that keep restricted records in their own databases pin an official release and

@@ -39,8 +39,8 @@ def invalid_fixtures(repo: Path) -> list[dict]:
 
 
 def reviewer_warnings(repo: Path) -> list[str]:
-    """Reviewer seats still held by placeholders in the review policy: until they are filled, no pull request
-    can get two approvals from reviewers other than its author (a warning, not a failure)."""
+    """Reviewer seats still held by placeholders in the review policy: seats to fill with people, and until one is,
+    no pull request of the owner's can get an approval from a reviewer other than its author (a warning, not a failure)."""
     from .policy import load_policy, placeholders
     n = len(placeholders(load_policy(repo)))
     return [f"reviewers: {n} placeholder{'s' if n != 1 else ''} to fill ({layout.REVIEW_POLICY})"] if n else []

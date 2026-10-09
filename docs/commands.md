@@ -105,10 +105,10 @@ It compares the branch with its merge base on `--base` and exits 1 when the bran
   domain is experimental at both the merge base and the head) without adding or updating a proposal
   (`core/proposals/<NNNNNN>/`, `domain/proposals/<NNNNNN>/`) or a decision record (`docs/decisions/NNNN-*.md`).
 
-It prints whose review the change needs according to `.github/CODEOWNERS` at the merge base (a code-owner
-approval from each owner set; the fewest owners that satisfy all of them), the rule that every pull request needs
-two approving reviews from reviewers other than its author (the owner merges under the bootstrap rule while the
-reviewer seats are placeholders), and, when `core/` changes, the catalysis domain it affects.
+It prints whose review the change requests according to `.github/CODEOWNERS` at the merge base (the owner sets;
+the fewest owners who own every changed path; a code owner's approval is not required), the rule that every pull
+request needs one approving review from a reviewer other than its author (the owner merges under the bootstrap rule
+until a reviewer besides the owner has joined), and, when `core/` changes, the catalysis domain it affects.
 
 `scale ci proposal-check --base origin/main` runs `scale proposal check` on every draft or proposed proposal the
 branch changes and prints the pull-request comment (tier, diff counts, fixtures, migration effects, competency
@@ -125,7 +125,7 @@ apply-proposals workflow, which a person starts by hand).
 ```bash
 scale proposal new catalysis --title "Reaction pathways as records"    # domain/proposals/000001/
 scale proposal check 000001
-# open a pull request; two reviewers other than the author approve it on GitHub; it merges; then, on main,
+# open a pull request; a reviewer other than the author approves it on GitHub; it merges; then, on main,
 # a person starts the apply-proposals workflow (with the merged pull request's reviews from the GitHub API):
 scale proposal apply-merged 000001 --pr 42 --reviews reviews.json --author AUTHOR --head-sha SHA --pr-url URL
 ```
@@ -153,8 +153,8 @@ install, raise the one schema version, gap register, `status: applied`), runs th
 tests included), and puts every file back if any step fails.
 Its output names the commit message (`Apply proposal 000001 (catalysis): schema 0.1.0 → 0.2.0 (PR #42)`; the version is the whole schema's, the
 parentheses name the proposal's folder, `core` or `catalysis`).
-`decide P --bootstrap-bypass REASON --by HANDLE` is the owner's path while reviewer seats are placeholders
-(governance/GOVERNANCE.md, "Bootstrap"); it is refused once every seat is filled.
+`decide P --bootstrap-bypass REASON --by HANDLE` is the owner's path until a reviewer besides the owner has
+joined (governance/GOVERNANCE.md, "Bootstrap"); it is refused once another reviewer can approve.
 
 ## Knowledge-graph data repositories: `scale kg update`
 

@@ -33,9 +33,9 @@ Every record names a proposal by its number: decision records and the decision l
 register, the schema manifest's `proposals` and migrated documents (`scale proposal apply` finds its
 decision record through the decision log entry for that id and its directory).
 
-Every proposal, wherever it lives, is reviewed like every change: its pull request needs two
-approving reviews from reviewers other than its author, and until the reviewer seats are filled the owner
-merges under the bootstrap rule ([governance/GOVERNANCE.md](../governance/GOVERNANCE.md)). On every pull
+Every proposal, wherever it lives, is reviewed like every change: its pull request needs one
+approving review from a reviewer other than its author, and until a reviewer besides the owner has joined the
+owner merges under the bootstrap rule ([governance/GOVERNANCE.md](../governance/GOVERNANCE.md)). On every pull
 request, `scale ci spec-changes --base <ref>` fails when the kernel's or the catalysis domain's specification
 files change without a proposal or decision record, and `scale ci proposal-check` checks every
 proposal the pull request changes and posts one comment with the results.
@@ -64,7 +64,7 @@ layers are explained in [core/graph/README.md](../core/graph/README.md).
 ## From gap to release
 
 ```
-gap (missing_concept, a     ─► a member (or an agent ─► pull request ─► 2 approvals ─► merge ─► apply (a person ─► data repositories ─► release
+gap (missing_concept, a     ─► a member (or an agent ─► pull request ─► 1 approval  ─► merge ─► apply (a person ─► data repositories ─► release
 comment, or a corpus run)       on request): new ·       proposal-check   (bootstrap:              starts it)        update (one        (a person)
                                 build · check            comment          the owner)               decision record,  command)
                                                                                                    freeze, bump
@@ -86,11 +86,11 @@ comment, or a corpus run)       on request): new ·       proposal-check   (boot
    registered in `tools/scale/pgraph_migrate.py`. In the pull request, the proposal-check workflow runs it
    again and posts the summary (tier, diff counts, fixtures, migration effects, competency results) as one
    comment.
-4. **Review.** Two approving reviews from reviewers other than the author
+4. **Review.** One approving review from any reviewer other than the author
    ([`governance/review-policy.yaml`](../governance/review-policy.yaml)). The tier tells reviewers what
    kind of change it is (2 additive or loosening, 3 breaking, which also needs a migration step); new
    concepts enter as `maturity: provisional` whatever the tier. A reviewer who requests changes blocks.
-   While the two reviewer seats are placeholders, the owner merges under the bootstrap rule and records why
+   Until a reviewer besides the owner has joined, the owner merges under the bootstrap rule and records why
    in the decision record (`scale proposal decide --bootstrap-bypass`).
 5. **Merge, decide and apply.** A person starts the apply-proposals workflow for a merged proposal with
    `status: proposed` (it needs a token configured for this repository; see

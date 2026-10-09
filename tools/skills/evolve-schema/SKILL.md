@@ -21,7 +21,7 @@ validation:
   - Fixtures include at least one counterexample that fails for a stated reason
   - Every competency question whose answer changes is declared in expected_query_changes
 human-review:
-  - Always. The pull request that carries the proposal needs two approving reviews from reviewers other than its author (governance/review-policy.yaml); new concepts enter as provisional whatever the tier. After the merge the apply-proposals workflow applies it (decision record, freeze, version bump); never apply it yourself
+  - Always. The pull request that carries the proposal needs one approving review from a reviewer other than its author (governance/review-policy.yaml); new concepts enter as provisional whatever the tier. After the merge the apply-proposals workflow applies it (decision record, freeze, version bump); never apply it yourself
   - Any breaking change, any override of a blocking objection, and any change to what a value means
 ---
 
@@ -83,8 +83,8 @@ for schema extension; extraction errors and absent source information do not.
 6. **Hand over for review.** Set `status: proposed` and open a pull request (a DRAFT when an agent
    opens it) whose body is `PR_BODY.md`; it carries the proposal and its reports, never edits to the
    schema files. `review_checklist.md` is for the reviewers. Only people approve, by reviewing the pull
-   request; two reviewers other than its author must approve (until the reviewer seats are filled, the
-   owner merges under the bootstrap rule). After the merge, the proposal is applied (`scale proposal
+   request; one reviewer other than its author must approve (until a reviewer besides the owner has
+   joined, the owner merges under the bootstrap rule). After the merge, the proposal is applied (`scale proposal
    apply-merged`, run by the apply-proposals workflow a person starts, or `decide --bootstrap-bypass` and
    `apply --confirm` under the bootstrap rule): it records the reviews, writes the decision record, freezes
    the version it replaces (the catalysis manifest and file into `domain/graph/frozen/`, the kernel into
@@ -94,7 +94,7 @@ for schema extension; extraction errors and absent source information do not.
 ## Writing a proposal
 
 - New labels, edge types and properties enter with **`maturity: provisional`**. Promote them later
-  in a separate proposal, once they have been used in real records; it needs the same two approvals.
+  in a separate proposal, once they have been used in real records; it needs the same approval.
 - Prefer **additive** operations. Express a change of meaning as a deprecation with what supersedes
   it; never delete or reuse an identifier.
 - Put the concept where it is **most generally true**: the kernel only for general scientific

@@ -1,7 +1,7 @@
 # From comments to changes
 
 SCALE is evolving, and every comment helps. This page explains how to comment, how to have a change
-drafted, and how changes are decided: by two approving reviews of a pull request.
+drafted, and how changes are decided: by an approving review of a pull request.
 
 ## Commenting
 
@@ -22,7 +22,7 @@ From the command line, `scale suggest --record <id> --text "…"` prints the sam
 ## What happens next
 
 ```
-an issue or a request ──► a pull request (a collaborator, or a draft ──► two approving reviews ──► merge
+an issue or a request ──► a pull request (a collaborator, or a draft ──► one approving review ──► merge
                           by the agent when a person starts it)          (a schema proposal is then applied
                                                                           and the version moves on)
 comments, issues, review comments, discussions
@@ -42,8 +42,8 @@ feedback digest issue (label feedback-digest) ──► a person opens a pull re
 - Topics are grouped: replies, "+1"s, near-duplicate issues and anything that mentions the same
   record, gap, proposal or competency question end up together.
 - Categories suggest the path. Only a **missing concept** can lead to a schema change; a new concept
-  enters as provisional, through a proposal whose pull request needs two approving reviews from
-  reviewers other than its author ([GOVERNANCE.md](GOVERNANCE.md)). Wrong values go to re-curation.
+  enters as provisional, through a proposal whose pull request needs one approving review from
+  a reviewer other than its author ([GOVERNANCE.md](GOVERNANCE.md)). Wrong values go to re-curation.
   Silent or ambiguous sources are recorded as such. Questions get answers.
 - Comment text is treated as data. Neither the triage system nor the agent follows instructions written
   in comments about permissions, workflows, governance or secrets.
@@ -51,8 +51,8 @@ feedback digest issue (label feedback-digest) ──► a person opens a pull re
 ## Decisions
 
 Nothing is decided in the digest or in a comment. A change is decided by the reviews of its pull request:
-two approvals from reviewers other than its author, and no reviewer asking for changes (until the reviewer
-seats are filled, the owner merges under the bootstrap rule, [GOVERNANCE.md](GOVERNANCE.md)). A schema proposal
+one approval from a reviewer other than its author, and no reviewer asking for changes (until a reviewer
+besides the owner has joined, the owner merges under the bootstrap rule, [GOVERNANCE.md](GOVERNANCE.md)). A schema proposal
 merged that way is then applied, which writes its decision record.
 
 ## For agent systems: proposing
