@@ -127,8 +127,8 @@ credits its author.
 
 **How the schema evolves.** A schema change is a pull request that carries a proposal
 (`scale proposal new`, `scale proposal check`); like every change it needs one approving review from
-a reviewer other than its author once a reviewer besides the owner has joined, and the owner merges under the
-bootstrap rule until then ([governance/GOVERNANCE.md](governance/GOVERNANCE.md)). After it merges, the proposal is
+a reviewer other than its author (the owner is a reviewer; the owner's own pull requests are merged under the
+bootstrap rule until a second reviewer joins) ([governance/GOVERNANCE.md](governance/GOVERNANCE.md)). After it merges, the proposal is
 applied on `main` and the schema version moves on. People approve; agents draft.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).

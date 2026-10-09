@@ -330,7 +330,7 @@ def proposal_comment(res: dict) -> str:
         L.append("")
     L.append("Approval: one approving review from a reviewer other than the author (governance/review-policy.yaml). "
              "After the merge, a person starts the apply-proposals workflow for each proposal, with this pull request's "
-             "number (it needs the repository secret APPLY_TOKEN); until a reviewer besides the owner has joined, the owner "
-             "applies each in a pull request under the bootstrap rule (`scale proposal decide --bootstrap-bypass`, then "
+             "number (it needs the repository secret APPLY_TOKEN); a proposal in the owner's own pull request, merged "
+             "before a second reviewer joins, the owner applies in a pull request under the bootstrap rule (`scale proposal decide --bootstrap-bypass`, then "
              "`scale proposal apply --confirm`). Applying a proposal raises the schema version.")
     return "\n".join(L) + "\n"

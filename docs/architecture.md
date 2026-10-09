@@ -153,8 +153,8 @@ All modules are in `tools/scale/`.
 - **Releases and frozen versions are immutable.** A document pins its schema version; moving it to
   a newer one is explicit. One version names the whole schema, kernel and catalysis together.
 - **Agents propose; people approve** ([review-policy.yaml](../governance/review-policy.yaml)). Every change needs one
-  approving review from a reviewer other than its author once a reviewer besides the owner has joined (the owner
-  merges under the bootstrap rule until then); new concepts enter as provisional; a merged proposal is applied by a
+  approving review from a reviewer other than its author (the owner is a reviewer; the owner's own pull requests are
+  merged under the bootstrap rule until a second reviewer joins); new concepts enter as provisional; a merged proposal is applied by a
   workflow a person starts, which checks those reviews again.
 - **Formats by author:** machine-written documents are canonical JSON; human-written specifications are block-style
   YAML ([style.md](style.md)).

@@ -999,8 +999,8 @@ scale-graph {p['base']['version']} → **{p['target_version']}** · tier **{vali
 Required: {status['required']} (governance/review-policy.yaml), given as reviews of this pull request.
 After the merge, a person starts the apply-proposals workflow for `{cs_path}` and this pull request (it needs the
 repository secret APPLY_TOKEN): it records the reviews, writes the decision record and applies the proposal
-(scale-graph {p['base']['version']} → {p['target_version']}). Until a reviewer besides the owner has joined, the owner applies it
-in a pull request under the bootstrap rule (`scale proposal decide {p['id']} --bootstrap-bypass`, then
+(scale-graph {p['base']['version']} → {p['target_version']}). If this is the owner's own pull request and no second reviewer has
+joined, the owner applies it in a pull request under the bootstrap rule (`scale proposal decide {p['id']} --bootstrap-bypass`, then
 `scale proposal apply {p['id']} --confirm`). `scale review status --proposal {p['id']}` shows what was counted.
 Agent agreement is not approval.
 {rs}"""

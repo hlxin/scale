@@ -25,7 +25,7 @@ a pull request (a collaborator, or a DRAFT by @scale-agent on agent/<run>-<short
         ▼
 checks (scale check, package, specification-changes, proposal-check) and review:
         │  ONE approving review from any reviewer other than the author
-        │  (until a reviewer besides the owner has joined: the owner merges under the bootstrap rule)
+        │  (the owner is a reviewer; the owner's own pull requests: the bootstrap rule until a second reviewer joins)
         ▼
 merge to main; the branch is deleted
         │  a schema proposal is then applied: the schema's one version moves on
@@ -39,8 +39,9 @@ data repositories are updated to it (`scale kg update`); later an official relea
 3. **Review.** Every pull request needs **one approving review from a reviewer other than its author**
    ([governance/review-policy.yaml](governance/review-policy.yaml), where the reviewers are listed); any
    reviewer may give it. A reviewer who asks for changes blocks until they approve. A reviewer who disagrees
-   with a merged change corrects it with a pull request of their own. Until a reviewer besides the owner has
-   joined, the owner merges under the bootstrap rule ([governance/GOVERNANCE.md](governance/GOVERNANCE.md#bootstrap-until-the-reviewers-join)).
+   with a merged change corrects it with a pull request of their own. The owner is a reviewer and approves
+   other people's pull requests; GitHub does not let an author approve their own, so until a second reviewer
+   joins, the owner merges their own pull requests under the bootstrap rule ([governance/GOVERNANCE.md](governance/GOVERNANCE.md#bootstrap-until-the-reviewers-join)).
 4. **After the merge.** A schema proposal (`status: proposed`) is applied on `main`: a person starts the
    apply-proposals workflow, which records the reviews, writes the decision record, freezes the old version
    and installs the new one (under the bootstrap rule the owner applies it in a pull request). You do not

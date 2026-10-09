@@ -1,6 +1,6 @@
 <!-- Every pull request to main needs one approving review from a reviewer other than its author
-(governance/review-policy.yaml; until a reviewer besides the owner has joined, the owner merges under the
-bootstrap rule). For a schema change, the proposal-check workflow posts the proposal's summary as a comment; after the
+(governance/review-policy.yaml; the owner is a reviewer and approves other people's pull requests; until a
+second reviewer joins, the owner merges their own under the bootstrap rule). For a schema change, the proposal-check workflow posts the proposal's summary as a comment; after the
 merge, the proposal is applied and the schema's one version moves on. See CONTRIBUTING.md and
 governance/GOVERNANCE.md. -->
 

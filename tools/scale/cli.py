@@ -1224,7 +1224,7 @@ def build_parser() -> argparse.ArgumentParser:
              "apply-proposals workflow runs it through apply-merged", cs)
     sp.add_argument("proposal", help=PROPOSAL_HELP); sp.add_argument("--number", type=int)
     sp.add_argument("--pr", type=int, help="the merged pull request"); sp.add_argument("--author", help="its author")
-    sp.add_argument("--bootstrap-bypass", metavar="REASON", help="a person's action while no reviewer besides the owner has joined: "
+    sp.add_argument("--bootstrap-bypass", metavar="REASON", help="the owner's action, for their own pull request, until a second reviewer joins: "
                     "record a decision merged under the ruleset's bootstrap bypass, without an approval")
     sp.add_argument("--by", help="with --bootstrap-bypass: the reviewer (GitHub handle) who merged"); out_opts(sp)
     sp = add("apply", cmd_proposal_apply, "scale-graph: freeze the base version (kernel in core/graph/frozen/, catalysis parts in domain/graph/frozen/) and install the approved candidate (--confirm)", cs)

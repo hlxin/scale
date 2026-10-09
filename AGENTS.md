@@ -53,7 +53,7 @@ repository). Use the plain `uvx scale-schema …` form only once a release is on
   the same number ([README.md](README.md#schema-versions)).
 - **Release ids:** releases are `v0.1.0` onward; none has been built yet.
 - **Humans only:** approving and merging pull requests (one reviewer other than the author approves every
-  change once a reviewer besides the owner has joined; until then the owner merges under the bootstrap rule), running
+  change; the owner is a reviewer, and merges their own pull requests under the bootstrap rule until a second reviewer joins), running
   the apply-proposals workflow, building releases and filing issues. Give the user the command from
   `status.human_only_actions`.
 

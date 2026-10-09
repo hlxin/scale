@@ -177,8 +177,8 @@ refused, and its author rebuilds it on the new version.
 
 ### Bootstrap bypass
 
-Until a reviewer besides the owner has Write access, the owner's pull requests cannot be approved by anyone
-other than their author. The ruleset therefore lets the **repository admin role** (the owner, the only admin)
+The owner is a reviewer and approves other people's pull requests. GitHub does not let an author approve their
+own, so until a second reviewer has Write access, the owner's own pull requests cannot be approved. The ruleset therefore lets the **repository admin role** (the owner, the only admin)
 bypass it:
 
 - the owner uses it only to merge pull requests whose checks pass, noting each use in the pull request
@@ -187,7 +187,7 @@ bypass it:
 - `scale proposal apply-merged` does not count a bypass as approval: a proposal merged this way is applied by
   hand (`scale proposal decide <id> --pr <n> --bootstrap-bypass "<reason>" --by hlxin`, then
   `scale proposal apply <id> --confirm`, in a pull request), and the decision record says so;
-- once a reviewer has joined, the bypass is narrowed to pull requests (`"bypass_mode": "pull_request"`)
+- once a second reviewer has joined, the bypass is narrowed to pull requests (`"bypass_mode": "pull_request"`)
   or removed, by a pull request that changes `ruleset-main.json`; the apply token then needs its own bypass
   (a GitHub App as an `Integration` actor) or proposals are applied in pull requests.
 

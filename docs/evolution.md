@@ -34,8 +34,8 @@ register, the schema manifest's `proposals` and migrated documents (`scale propo
 decision record through the decision log entry for that id and its directory).
 
 Every proposal, wherever it lives, is reviewed like every change: its pull request needs one
-approving review from a reviewer other than its author, and until a reviewer besides the owner has joined the
-owner merges under the bootstrap rule ([governance/GOVERNANCE.md](../governance/GOVERNANCE.md)). On every pull
+approving review from a reviewer other than its author, and the owner, a reviewer, merges their own pull requests
+under the bootstrap rule until a second reviewer joins ([governance/GOVERNANCE.md](../governance/GOVERNANCE.md)). On every pull
 request, `scale ci spec-changes --base <ref>` fails when the kernel's or the catalysis domain's specification
 files change without a proposal or decision record, and `scale ci proposal-check` checks every
 proposal the pull request changes and posts one comment with the results.
@@ -90,7 +90,7 @@ comment, or a corpus run)       on request): new ·       proposal-check   (boot
    ([`governance/review-policy.yaml`](../governance/review-policy.yaml)). The tier tells reviewers what
    kind of change it is (2 additive or loosening, 3 breaking, which also needs a migration step); new
    concepts enter as `maturity: provisional` whatever the tier. A reviewer who requests changes blocks.
-   Until a reviewer besides the owner has joined, the owner merges under the bootstrap rule and records why
+   The owner is a reviewer; until a second reviewer joins, the owner merges their own pull requests under the bootstrap rule and records why
    in the decision record (`scale proposal decide --bootstrap-bypass`).
 5. **Merge, decide and apply.** A person starts the apply-proposals workflow for a merged proposal with
    `status: proposed` (it needs a token configured for this repository; see

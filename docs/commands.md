@@ -107,8 +107,8 @@ It compares the branch with its merge base on `--base` and exits 1 when the bran
 
 It prints whose review the change requests according to `.github/CODEOWNERS` at the merge base (the owner sets;
 the fewest owners who own every changed path; a code owner's approval is not required), the rule that every pull
-request needs one approving review from a reviewer other than its author (the owner merges under the bootstrap rule
-until a reviewer besides the owner has joined), and, when `core/` changes, the catalysis domain it affects.
+request needs one approving review from a reviewer other than its author (the owner is a reviewer; the owner's own
+pull requests are merged under the bootstrap rule until a second reviewer joins), and, when `core/` changes, the catalysis domain it affects.
 
 `scale ci proposal-check --base origin/main` runs `scale proposal check` on every draft or proposed proposal the
 branch changes and prints the pull-request comment (tier, diff counts, fixtures, migration effects, competency
@@ -153,8 +153,8 @@ install, raise the one schema version, gap register, `status: applied`), runs th
 tests included), and puts every file back if any step fails.
 Its output names the commit message (`Apply proposal 000001 (catalysis): schema 0.1.0 → 0.2.0 (PR #42)`; the version is the whole schema's, the
 parentheses name the proposal's folder, `core` or `catalysis`).
-`decide P --bootstrap-bypass REASON --by HANDLE` is the owner's path until a reviewer besides the owner has
-joined (governance/GOVERNANCE.md, "Bootstrap"); it is refused once another reviewer can approve.
+`decide P --bootstrap-bypass REASON --by HANDLE` is the owner's path for their own pull requests until a second
+reviewer joins (governance/GOVERNANCE.md, "Bootstrap"); it is refused once another reviewer can approve.
 
 ## Knowledge-graph data repositories: `scale kg update`
 

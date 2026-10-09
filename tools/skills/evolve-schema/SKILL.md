@@ -83,8 +83,8 @@ for schema extension; extraction errors and absent source information do not.
 6. **Hand over for review.** Set `status: proposed` and open a pull request (a DRAFT when an agent
    opens it) whose body is `PR_BODY.md`; it carries the proposal and its reports, never edits to the
    schema files. `review_checklist.md` is for the reviewers. Only people approve, by reviewing the pull
-   request; one reviewer other than its author must approve (until a reviewer besides the owner has
-   joined, the owner merges under the bootstrap rule). After the merge, the proposal is applied (`scale proposal
+   request; one reviewer other than its author must approve (the owner is a reviewer; the owner's own
+   pull requests are merged under the bootstrap rule until a second reviewer joins). After the merge, the proposal is applied (`scale proposal
    apply-merged`, run by the apply-proposals workflow a person starts, or `decide --bootstrap-bypass` and
    `apply --confirm` under the bootstrap rule): it records the reviews, writes the decision record, freezes
    the version it replaces (the catalysis manifest and file into `domain/graph/frozen/`, the kernel into

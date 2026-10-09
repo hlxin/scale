@@ -10,8 +10,9 @@ repository starts private and is shared with collaborators; the rules are the sa
 becomes public ([decision record 0001](../docs/decisions/0001-scale-0.1.0.md)).
 
 The model in one paragraph: **every change is a pull request that needs one approving review from a
-reviewer other than its author**, any of the reviewers; until a reviewer besides the owner has joined, the
-owner merges under the bootstrap rule. A schema change is a pull request that carries a *proposal*. When it merges, the proposal is
+reviewer other than its author**, any of the reviewers. The owner is a reviewer and approves other people's
+pull requests; GitHub does not let an author approve their own, so until a second reviewer joins, the owner
+merges their own pull requests under the bootstrap rule. A schema change is a pull request that carries a *proposal*. When it merges, the proposal is
 applied on `main` and the schema's one version moves on. A data repository is then moved to the new version
 with one command (`scale kg update`). Agents draft changes and proposals; they never approve, merge or apply.
 
@@ -33,7 +34,7 @@ with one command (`scale kg update`). Agents draft changes and proposals; they n
 
 | who | GitHub | what they do |
 |---|---|---|
-| **owner** | `@hlxin`, admin of the repository, code owner of every path in [`.github/CODEOWNERS`](../.github/CODEOWNERS) | reviews and approves pull requests; merges under the bootstrap rule until a reviewer has joined; applies merged proposals; builds releases; repository settings, rulesets and secrets ([repository-settings.md](repository-settings.md)) |
+| **owner** | `@hlxin`, admin of the repository, code owner of every path in [`.github/CODEOWNERS`](../.github/CODEOWNERS) | a reviewer: reviews and approves other people's pull requests; merges their own under the bootstrap rule until a second reviewer joins; applies merged proposals; builds releases; repository settings, rulesets and secrets ([repository-settings.md](repository-settings.md)) |
 | **reviewers** | domain experts, collaborators (Write), added to the review policy and CODEOWNERS when they join | review and approve pull requests (any one of them is enough): the science kernel, the catalysis domain, tools, governance and releases. Today: two seats to be filled (`TODO-reviewer-2`, `TODO-reviewer-3` in the review policy) |
 | **contributors** | anyone: issues and comments; collaborators also branches and pull requests; others through forks once the repository is public | propose changes, curate, report gaps |
 | **@scale-agent** | Claude on GitHub, started by hand by a person with write access (off otherwise) | drafts changes and proposals on `agent/…` branches as draft pull requests; never approves, merges or applies |
@@ -70,15 +71,17 @@ is the decision.
 
 ### Bootstrap: until the reviewers join
 
-With one filled seat, the owner's own pull requests cannot be approved by anyone else. Until a reviewer
-besides the owner has joined, the owner may merge pull requests through a **bootstrap bypass** of the ruleset,
+The owner is a reviewer and approves other people's pull requests (an agent's draft, a contributor's) as any
+reviewer does. GitHub does not let the author of a pull request approve it, so with one filled seat the owner's
+own pull requests cannot be approved. Until a second reviewer joins, the owner may merge their own pull
+requests through a **bootstrap bypass** of the ruleset,
 only after the checks pass, each use noted in the pull request ("Bootstrap bypass: reviewers not yet
 added"). A proposal merged this way has no approval, so `scale proposal apply-merged` refuses it; the
 owner applies it in a pull request that also notes the bypass:
 `scale proposal decide <id> --pr <n> --bootstrap-bypass "reviewers not yet added" --by hlxin`, then
 `scale proposal apply <id> --confirm`. The decision record says it was not approved by a reviewer;
 the tool refuses a bypass once another reviewer can approve. The bypass is narrowed or removed once a
-reviewer has joined ([repository-settings.md](repository-settings.md#bootstrap-bypass)).
+second reviewer has joined ([repository-settings.md](repository-settings.md#bootstrap-bypass)).
 
 ## How a change flows
 
@@ -92,7 +95,7 @@ checks: scale check, package, specification-changes, proposal-check (one comment
         tier, diff, fixtures, migration and competency results)
         ▼
 review: one approving review from a reviewer other than the author → merge
-        (until a reviewer has joined: the owner, under the bootstrap rule)
+        (the owner's own pull requests, until a second reviewer joins: the bootstrap rule)
         ▼
 apply (a person starts the apply-proposals workflow; under the bootstrap rule the owner applies it in a
         pull request): reviews checked → approvals recorded → decision record → old version frozen →
@@ -207,5 +210,5 @@ SCALE release" names what this process produces; it is not a licence restriction
 
 ## Changing this document
 
-Everything under `governance/` changes by pull request with one approval (the bootstrap rule until a
-reviewer has joined), like everything else.
+Everything under `governance/` changes by pull request with one approval (the owner's own pull requests: the
+bootstrap rule until a second reviewer joins), like everything else.
