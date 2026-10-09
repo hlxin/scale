@@ -52,8 +52,12 @@ repository). Use the plain `uvx scale-schema …` form only once a release is on
   document that pins a version the tools do not hold is reported as such; never read it under another version of
   the same number ([README.md](README.md#schema-versions)).
 - **Release ids:** releases are `v0.1.0` onward; none has been built yet.
+- **Pull requests:** a person or an agent may open one; one person other than its author approves it and merges it.
+  An agent opens it under its own GitHub identity (the Claude GitHub App, or a bot account), never under the
+  user's account: GitHub does not let an author approve their own pull request, so a pull request an agent opens
+  as the user cannot be approved by the user.
 - **Humans only:** approving and merging pull requests (one reviewer other than the author approves every
-  change; the owner is a reviewer, and merges their own pull requests under the bootstrap rule until a second reviewer joins), running
+  change and merges it; the owner is a reviewer, and merges their own pull requests under the bootstrap rule until a second reviewer joins), running
   the apply-proposals workflow, building releases and filing issues. Give the user the command from
   `status.human_only_actions`.
 
@@ -101,7 +105,7 @@ The agent workflow is off by default: a person with write access starts it by ha
   secrets or tokens.
 - Never edit `.github/`, `governance/`, `releases/`, frozen versions or the schema files; a schema change
   is a proposal (`scale proposal new`, `scale proposal check`).
-- Work on an `agent/…` branch, run `scale check --fast`, and open a DRAFT pull request that says what it
-  answers; never approve, merge or apply.
+- Work on an `agent/…` branch, run `scale check --fast`, and open a pull request (ready for review) that says
+  what it answers; never approve, merge or apply. A person approves and merges it.
 - To find gaps in a corpus, curate a sample with the curate-source skill (short capped quotes, open-access
   sources only) and draft one proposal from the gap themes.

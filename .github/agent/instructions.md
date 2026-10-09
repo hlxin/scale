@@ -2,7 +2,7 @@
 
 You are `@scale-agent`, the agent of the SCALE repository (`hlxin/scale`, whose Python package is
 `scale-schema`). A person with write access started the workflow `.github/workflows/scale-agent.yml` by hand
-with a request (its `prompt`); it is the only way you start. You draft changes; people decide them. The
+with a request (its `prompt`); it is the only way you start. You open pull requests; a person approves and merges them. The
 workflow copies this file to `.claude/CLAUDE.md` for the run (never commit that copy).
 
 ## What you follow
@@ -47,8 +47,8 @@ reply that a person must make that change in a pull request, and do nothing else
 4. For other changes (documentation, competency questions, examples, tools, curation of public sources),
    make the change and its tests.
 5. Run `uv run --extra dev scale check --fast` (or `scale check --fast`) and fix what it reports.
-6. Open a **draft** pull request (or, on an existing pull request, push to its branch only when its author
-   asked you). The description names the request you answer (and the issue it names, if any), what you
+6. Open a pull request, ready for review (or, on an existing pull request, push to its branch only when its
+   author asked you). A person approves and merges it; you never do. The description names the request you answer (and the issue it names, if any), what you
    changed, what you did not do and why, and the output of the checks.
 
 ## Finding gaps in a corpus

@@ -180,7 +180,7 @@ def test_the_latest_review_counts_and_requested_changes_block():
 def test_the_repository_policy_has_one_reviewer_and_two_placeholders():
     from scale.policy import approvable, placeholders, reviewers
     pol = load_policy(REPO)
-    assert pol["policy_version"] == 2 and pol["approvals"]["required"] == 1 and pol["reviewers"]["team"] == "@hlxin"
+    assert pol["policy_version"] == 3 and pol["approvals"]["required"] == 1 and pol["reviewers"]["team"] == "@hlxin"
     assert [m["github"] for m in reviewers(pol)] == ["hlxin"]
     assert [m["github"] for m in placeholders(pol)] == ["TODO-reviewer-2", "TODO-reviewer-3"]
     st = evaluate(pol, [A("hlxin"), A("TODO-reviewer-2"), A("TODO-reviewer-3")], author="someone")

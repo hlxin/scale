@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- **People and agents open pull requests; one person approves and merges** (review policy version 3). An agent may now
+  open a pull request ready for review, no longer only a draft; one person other than its author approves it and
+  merges it, and agents still never approve, merge or apply. An agent opens its pull request under its own GitHub
+  identity (the Claude GitHub App in the scale-agent workflow, or a bot account), never a person's, since GitHub does
+  not let an author approve their own pull request (governance/repository-settings.md, "The agent"). The scale-agent
+  workflow may run `gh pr create` without `--draft`.
 - **One approval for every change (review policy version 2).** A pull request to `main` now merges with one approving
   review from any reviewer other than its author, instead of two; a reviewer who disagrees with a merged change
   corrects it with a pull request of their own. `governance/review-policy.yaml` sets `approvals.required: 1`, and the

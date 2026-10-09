@@ -26,7 +26,7 @@ Related: [CONTRIBUTING.md](../CONTRIBUTING.md), [the catalysis domain](../domain
 
 ## Human-only actions
 
-Agents draft; people decide. These steps are always done by a person:
+People and agents open pull requests; people decide. These steps are always done by a person:
 
 - approving and merging a pull request (one reviewer other than its author, the owner included; the owner's
   own pull requests under the bootstrap rule until a second reviewer joins);

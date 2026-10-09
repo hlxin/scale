@@ -135,7 +135,15 @@ read and write) and set the API key:
 gh secret set ANTHROPIC_API_KEY --repo $OWNER/$REPO
 ```
 
-The agent works on an `agent/…` branch and opens a draft pull request; it never approves, merges or applies.
+The agent works on an `agent/…` branch and opens a pull request, ready for review, with the App's token, so the
+pull request's author is the App and a person (the owner included) can approve it; it never approves, merges or
+applies.
+
+An agent working elsewhere (for example on a person's computer) opens pull requests under a **bot account** of its
+own, never under the person's account: GitHub does not let an author approve their own pull request. To set one
+up, create a GitHub account for the bot, invite it as a collaborator with Write access, and give the agent a
+fine-grained token of that account (this repository only; contents and pull requests, read and write). The bot is
+not a reviewer: it is never listed in the review policy, and its approvals would not count.
 Its commands run with the action's subprocess secret scrub (`CLAUDE_CODE_SUBPROCESS_ENV_SCRUB: "1"`), and the
 job's workflow token only reads the contents. Starting it from mentions in issues and comments needs an issue
 and comment trigger in `.github/workflows/scale-agent.yml` and a check of who may start it (only the owner and

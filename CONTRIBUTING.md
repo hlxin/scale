@@ -20,14 +20,14 @@ use case in ordinary language is as valuable as a schema change proposal.
 an issue or a comment                        or open a pull request yourself
         │                                            (a branch here: <github-handle>/<topic>; a fork once public)
         ▼
-a pull request (a collaborator, or a DRAFT by @scale-agent on agent/<run>-<short> when a person starts it)
+a pull request (a person, or an agent: @scale-agent on agent/<run>-<short> when a person starts it)
         │  for a schema change, a proposal checked with `scale proposal check`
         ▼
 checks (scale check, package, specification-changes, proposal-check) and review:
         │  ONE approving review from any reviewer other than the author
         │  (the owner is a reviewer; the owner's own pull requests: the bootstrap rule until a second reviewer joins)
         ▼
-merge to main; the branch is deleted
+the approving person merges to main; the branch is deleted
         │  a schema proposal is then applied: the schema's one version moves on
         ▼
 data repositories are updated to it (`scale kg update`); later an official release
@@ -50,8 +50,9 @@ data repositories are updated to it (`scale kg update`); later an official relea
    `scale kg update`.
 
 `@scale-agent` (Claude on GitHub) is off: a person with write access may start its workflow by hand with a
-request; it then opens a draft pull request, following [AGENTS.md](AGENTS.md) and the skills, and never
-approves, merges or applies.
+request; it then opens a pull request under the Claude GitHub App's identity, following [AGENTS.md](AGENTS.md)
+and the skills, and never approves, merges or applies. Any agent may open a pull request the same way, under its
+own GitHub identity (a bot account), never under a person's: a person approves it and merges it.
 
 ## Access levels
 
