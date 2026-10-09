@@ -182,3 +182,26 @@ def test_the_releases_are_intact_and_answer_as_recorded():
     assert m["schema"] == {"name": "scale-graph", "version": "0.1.0", "follows_domains": ["catalysis"],
                            "spec_sha256": "3c2fa7205a7bae5e0bbfa7d87826ff7ab7803e78536129064101c7d5a2c02006"}
     assert m["counts"]["sources"] == m["corpus"]["sources"] == 105 and m["validation"]["errors"] == 0
+
+
+def test_the_galaxy_bundle_is_the_release_exported_with_its_schema():
+    """galaxy/methanol-synthesis-pre1966_v1.0.0/: the GALAXY bundle of release v1.0.0, sealed (SHA256SUMS,
+    validation.json), its schema extending scale-graph by version and spec digest, its corpus the scoped manifest."""
+    import hashlib
+    b = EX / "galaxy/methanol-synthesis-pre1966_v1.0.0"
+    m = load_doc(b / "bundle.json")
+    release = load_yaml(EX / "releases/v1.0.0/RELEASE.yaml")
+    assert m["format"] == "galaxy-kg-bundle" and m["bundle_id"] == "methanol-synthesis-pre1966" and m["version"] == "1.0.0"
+    assert m["graph_sha256"] == hashlib.sha256((b / "kg/graph.json").read_bytes()).hexdigest()
+    sums = dict(reversed(line.split("  ", 1)) for line in (b / "SHA256SUMS").read_text().splitlines())
+    assert all(hashlib.sha256((b / f).read_bytes()).hexdigest() == h for f, h in sums.items())
+    v = load_doc(b / "validation.json")
+    assert v["ok"] and v["n_errors"] == 0 and v["n_warnings"] == 0
+    schema = load_doc(b / "kg/schema.json")
+    assert schema["extends"] == {"schema_id": "scale-graph", "version": release["schema"]["version"],
+                                 "sha256": release["schema"]["spec_sha256"]}
+    h = m["scale_header"]
+    assert h["graph_id"] == release["graph_id"] and h["schema_sha256"] == release["schema"]["spec_sha256"]
+    assert h["stewardship"]["access"] == "public" and m["counts"]["papers"] == 105
+    assert m["corpus"]["n_included"] == 105 and m["corpus"]["n_screened"] == 178
+    assert "### Not carried over" in (b / "CHANGELOG.md").read_text()

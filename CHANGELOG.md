@@ -18,8 +18,11 @@
   guide and assembly report, the manuscript's seven query plans and the curation tools. Its first release,
   `releases/v1.0.0/` (2026-10-09), is an immutable snapshot: the graph (sha256 `0dfc8c1c…ed13f`), the corpus list,
   the rights file and the plans, with `RELEASE.yaml` (schema 0.1.0 and its spec digest, counts, each plan's answer)
-  and `SHA256SUMS`, built and verified by `tools/release_graph.py`. The fragments, page
-  texts, OCR and GALAXY bundles stay in the restricted copy; the evidence index is built locally. New tests,
+  and `SHA256SUMS`, built and verified by `tools/release_graph.py`. Its GALAXY bundle,
+  `galaxy/methanol-synthesis-pre1966_v1.0.0/`, passes GALAXY's validator (0 errors, 0 warnings): 4,850 nodes, 14,107
+  edges; the 3,277 links whose quotes are withheld under the cap are left out until GALAXY accepts withheld-quote
+  evidence ([docs/galaxy-platform-changes.md](docs/galaxy-platform-changes.md), the changes requested of GALAXY). The fragments, page
+  texts, OCR and the earlier private GALAXY bundles stay in the restricted copy; the evidence index is built locally. New tests,
   `tools/tests/test_example_methanol.py`, run on the public files.
 - **One approval for every change (review policy version 2).** A pull request to `main` now merges with one approving
   review from any reviewer other than its author, instead of two; a reviewer who disagrees with a merged change

@@ -27,7 +27,7 @@ it with `scale evidence rehydrate`. US patents and works published before 1931 a
 US) and are not capped.
 
 **Not here** (they reproduce source text beyond the cap, or are rebuilt locally): the curation fragments
-and second readings, the page texts and OCR (`work/`, `curation/ocr/`), the GALAXY bundles and the full graph
+and second readings, the page texts and OCR (`work/`, `curation/ocr/`), the earlier private GALAXY bundles and the full graph
 (all 108 sources, tests of every reaction the sources report). They stay in the restricted copy (outside the repository, named only by the environment;
 `scale.layout.restricted_path`), at this folder's path; the curation tools read and write them there. The evidence index is not committed either: build it with
 `scale graph index methanol-synthesis.graph.json` (a few seconds).
@@ -234,9 +234,28 @@ cells marked by their rule.
 
 ## The GALAXY bundle
 
-The GALAXY knowledge-graph bundles (galaxy-kg-bundle 1.0.0; 1.0.0 and 1.1.0, scoped to CO and CO2 hydrogenation
-to methanol) ship the full quotes and the US patent texts, so they stay in the restricted copy and are built there
-(`python tools/curation.py bundle`). Any document gets the same lineage from the command line:
+[`galaxy/methanol-synthesis-pre1966_v1.0.0/`](galaxy/methanol-synthesis-pre1966_v1.0.0/bundle.json) is the GALAXY
+knowledge-graph bundle (galaxy-kg-bundle 1.0.0) of release v1.0.0, for import into the GALAXY tab (zip the folder
+and upload it): 105 publications, 4,850 nodes, 14,107 edges (8,477 substantive). It passes GALAXY's validator with
+0 errors and 0 warnings and is sealed (`SHA256SUMS`, `validation.json`); the folder is adopted as-is
+(`galaxy/.scale-verbatim`). Its schema, `kg/schema.json`, declares the 27 node types and 39 edge types it uses and
+extends scale-graph 0.1.0 by version and spec digest; `bundle.json` names the corpus (105 included of 178
+screened, [`corpus/manifest-co-co2-hydrogenation.json`](corpus/manifest-co-co2-hydrogenation.json)).
+
+It follows SCALE's rules: public, every quote within the cap. A GALAXY edge needs a verbatim quote, so the 3,277
+links whose every quote is withheld under the cap are left out (`CHANGELOG.md` in the bundle, "Not carried over"),
+as are 229 typed absences; the graph keeps them. [The changes requested of GALAXY](../../docs/galaxy-platform-changes.md)
+let a later bundle carry them. Built with:
+
+```bash
+scale graph export releases/v1.0.0/methanol-synthesis.graph.json --to galaxy \
+  --out galaxy/methanol-synthesis-pre1966_v1.0.0 --bundle-id methanol-synthesis-pre1966 --version 1.0.0 \
+  --created 2026-10-09T00:00:00Z --date 2026-10-09 --corpus corpus/manifest-co-co2-hydrogenation.json
+python bundle_validate.py galaxy/methanol-synthesis-pre1966_v1.0.0 --seal    # GALAXY's validator
+```
+
+The earlier private bundles (1.0.0 and 1.1.0 of `methanol-synthesis`, under the consortium repository's schema) are
+superseded by this one. Their tool, `python tools/curation.py bundle`, builds from the restricted copy. Any document gets the same lineage from the command line:
 `scale graph export <document> --to galaxy --out DIR --version <later version> --previous <previous bundle>
 [--replaced <merge map>] [--corpus corpus/manifest.json]`.
 
@@ -251,6 +270,8 @@ to methanol) ship the full quotes and the US patent texts, so they stay in the r
 | `curation/assembly-report.json` | Assembly: coverage per source, gaps, merge notes, validation, conformance, indexes. |
 | `queries/scale-graph/*.yaml` | The manuscript's questions as query plans. |
 | `releases/v<version>/` | Immutable, digested snapshots of the graph (`tools/release_graph.py build | verify`). |
+| `galaxy/methanol-synthesis-pre1966_v<version>/` | The GALAXY bundle of each release, sealed. |
+| `corpus/manifest-co-co2-hydrogenation.json` | The frozen manifest scoped to CO/CO2 + H2 (the 3 other in-scope sources `off_scope`, with the reason): the bundle's corpus. |
 | `tools/freeze_corpus.py`, `tools/curation.py` | Freeze, brief, check, assemble, bundle (with the restricted copy). |
 | the other `tools/` | Value census, comparison with and export to another group's workbook layout, and the record-format conversion of an earlier curation (below). |
 
