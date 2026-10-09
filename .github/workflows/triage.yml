@@ -4,8 +4,8 @@ name: triage
 # options (built-in rules, optionally refined by any external agent system), and open a feedback digest
 # issue (label feedback-digest) for the reviewers. The digest decides nothing: a person acts on a topic by
 # opening a pull request (or by starting the scale-agent workflow by hand, .github/workflows/scale-agent.yml),
-# and every change is decided by two approving reviews (the bootstrap rule until the reviewer seats are
-# filled). The repository slug comes from .github/scale-project.yml. See governance/feedback.md.
+# and every change is decided by an approving review (the owner's own pull requests: the bootstrap rule until a second
+# reviewer joins). The repository slug comes from .github/scale-project.yml. See governance/feedback.md.
 "on":
   schedule:
     - cron: "0 7 * * 1"      # Mondays 07:00 UTC

@@ -14,7 +14,7 @@ SCALE links three activities. Each can expose limitations in the others.
              │                                 EVOLUTION (proposal: build · check)
              │                                   │ fixtures · migration · competency questions
              │                                   ▼
-             │                         human review (two reviewers per pull request)
+             │                         human review (one reviewer per pull request)
              │                                   ▼
              └── kg update / migrate ◄──── apply after the merge (freeze the old version) ──► release
 ```
@@ -124,7 +124,7 @@ All modules are in `tools/scale/`.
 | `pagereading.py` | `scale pages`: readings of scanned pages by two readers, page images and positioned OCR words in a local pages folder, the tool's agreement of each reading with OCR in its region, independent second readings, and the check that every value read from an image is in a transcription or quote. |
 | `pgraph_migrate.py` | Move scale-graph documents along the version steps of the catalysis schema. |
 | `pgraph_proposal.py` | Schema change proposals on the catalysis manifest (`scale proposal new` scaffolds one): from curation gaps to a candidate (repository-relative paths), the semantic diff and its tier, checks (the target raises the one version), decision record and apply (freezing the base version: its kernel into `core/graph/frozen/kernel-<v>.yaml` and the catalysis domain's manifest and file into its `graph/frozen/`, appending digests to each `SHA256SUMS`, which `scale graph verify` checks; and raising the one version in every file that states it). |
-| `review.py`, `policy.py` | Approval records from a merged pull request's GitHub reviews and the PR body; the review policy (`governance/review-policy.yaml`): two approving reviewers other than the author, placeholders never counted, Tier 1 record samples. |
+| `review.py`, `policy.py` | Approval records from a merged pull request's GitHub reviews and the PR body; the review policy (`governance/review-policy.yaml`): one approving reviewer other than the author, placeholders never counted, Tier 1 record samples. |
 | `apply_merged.py` | `scale proposal apply-merged`: after a merge, evaluate the reviews, record them, decide, apply and run the full `scale check` (the unit tests included), all or nothing (the apply-proposals workflow). |
 | `kg.py` | `scale kg update`: move every catalysis scale-graph document in a data repository to a new schema version, validate it and rebuild its evidence index. |
 | `competency.py` | Competency questions: run each graph query plan on its public examples and compare the answer with its expectation (`scale domains cq`). |
@@ -152,9 +152,9 @@ All modules are in `tools/scale/`.
   asked for something the schema cannot express.
 - **Releases and frozen versions are immutable.** A document pins its schema version; moving it to
   a newer one is explicit. One version names the whole schema, kernel and catalysis together.
-- **Agents propose; people approve** ([review-policy.yaml](../governance/review-policy.yaml)). Every change needs two
-  approving reviews from reviewers other than its author once the reviewer seats are filled (the owner merges
-  under the bootstrap rule until then); new concepts enter as provisional; a merged proposal is applied by a
+- **Agents propose; people approve** ([review-policy.yaml](../governance/review-policy.yaml)). Every change needs one
+  approving review from a reviewer other than its author (the owner is a reviewer; the owner's own pull requests are
+  merged under the bootstrap rule until a second reviewer joins); new concepts enter as provisional; a merged proposal is applied by a
   workflow a person starts, which checks those reviews again.
 - **Formats by author:** machine-written documents are canonical JSON; human-written specifications are block-style
   YAML ([style.md](style.md)).

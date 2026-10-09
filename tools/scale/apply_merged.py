@@ -11,7 +11,7 @@ JSON; everything else happens here, so that it is tested offline with recorded r
 2. a proposal whose ``approvals/`` already holds files is refused: approvals come only from GitHub reviews,
    so a file the pull request committed there never stands in for a reviewer (``scale ci proposal-check``
    fails such a pull request before it merges);
-3. the GitHub reviews alone are evaluated against governance/review-policy.yaml: two approving reviewers
+3. the GitHub reviews alone are evaluated against governance/review-policy.yaml: one approving reviewer
    other than the author, placeholders never counted, the latest review of each person, approvals of an
    older commit than the merged head not counted; nothing is written when the policy is not satisfied;
 4. the counted reviews are recorded in ``approvals/``, the decision record is written from them (``scale
@@ -119,7 +119,7 @@ def apply_merged(repo: Path, cs: Path, pr: int, reviews: list[dict], author: str
     if held:
         raise ScaleError(f"{pid}: approvals/ already holds {len(held)} file(s) although the proposal is not applied; "
                          "approvals come only from the pull request's GitHub reviews, so files committed there are "
-                         "not counted: remove them in a pull request (with two approvals) and re-run")
+                         "not counted: remove them in a pull request (with its approval) and re-run")
     recs = from_github(reviews, pr, author, head_sha)
     val = load_doc(cs / "validation_report.json")
     st = evaluate(load_policy(repo), recs, author=author, tier=val.get("tier"))

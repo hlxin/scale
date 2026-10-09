@@ -163,13 +163,13 @@ def spec_changes_text(res: dict) -> str:
         L.append(f"specification files changed: {len(res['specification_files'])}; proposals / decision records: "
                  f"{len(res['change_records'])}")
     L += [f"FAIL {v}" for v in res["violations"]] or ["ok: no release or frozen version is modified; specification changes carry their records"]
-    L.append("approval: two approving reviews from reviewers other than the author (governance/review-policy.yaml)")
+    L.append("approval: one approving review from a reviewer other than the author (governance/review-policy.yaml)")
     o = res["owners"]
     if o.get("source"):
-        L.append(f"review (from {o['source']}; one approval from each owner set):")
+        L.append(f"review requested from (from {o['source']}; any one reviewer's approval is enough, a code owner's is not required):")
         L += [f"  - any of {' '.join(s)}" for s in o["owner_sets"]] or ["  - none"]
         if o["minimal_reviewers"]:
-            L.append(f"  fewest approvals that satisfy code-owner review: {' + '.join(o['minimal_reviewers'])}")
+            L.append(f"  fewest reviewers who own every changed path: {' + '.join(o['minimal_reviewers'])}")
         if o["unowned"]:
             L.append(f"  no owner: {', '.join(o['unowned'][:10])}")
     else:
@@ -328,9 +328,9 @@ def proposal_comment(res: dict) -> str:
         elif r.get("why"):
             L.append(f"- {r['why']}")
         L.append("")
-    L.append("Approval: two approving reviews from reviewers other than the author (governance/review-policy.yaml). "
+    L.append("Approval: one approving review from a reviewer other than the author (governance/review-policy.yaml). "
              "After the merge, a person starts the apply-proposals workflow for each proposal, with this pull request's "
-             "number (it needs the repository secret APPLY_TOKEN); while the reviewer seats are placeholders, the owner "
-             "applies each in a pull request under the bootstrap rule (`scale proposal decide --bootstrap-bypass`, then "
+             "number (it needs the repository secret APPLY_TOKEN); a proposal in the owner's own pull request, merged "
+             "before a second reviewer joins, the owner applies in a pull request under the bootstrap rule (`scale proposal decide --bootstrap-bypass`, then "
              "`scale proposal apply --confirm`). Applying a proposal raises the schema version.")
     return "\n".join(L) + "\n"

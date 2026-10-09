@@ -13,15 +13,16 @@ REPO=scale
 
 What GitHub does and does not enforce:
 
-- CODEOWNERS routes review. It does not restrict who may write. Combined with the `main` ruleset
-  (two approvals and a code-owner review) it decides who must approve a pull request.
+- CODEOWNERS routes review: it requests reviews from the owners of the changed paths. It does not restrict
+  who may write, and the `main` ruleset does not require a code owner's review: one approval from anyone with
+  Write access is enough on GitHub, and `scale proposal apply-merged` counts only the reviewers of the review policy.
 - GitHub never lets the author of a pull request approve it.
 - Events caused by the workflow token (`GITHUB_TOKEN`) do not start other workflows.
 - Anyone with Write access can push a branch with a changed workflow and run it. Such a run can read every
   repository secret. Hence the secrets section below.
 - Some protections depend on the plan: on a free personal account, rulesets and environment protection rules
   apply to public repositories only; a private repository needs GitHub Pro for them. Until then the rules of
-  GOVERNANCE.md are kept by practice, and `scale proposal apply-merged` still checks the two approvals.
+  GOVERNANCE.md are kept by practice, and `scale proposal apply-merged` still checks the approval.
 
 ## 0. The address and its earlier contents
 
@@ -147,8 +148,8 @@ collaborators); that is a decision for the owner, made by pull request.
 | rule | setting |
 |---|---|
 | changes only by pull request | required |
-| approving reviews | **2** |
-| review from a code owner | required (the owner, and the reviewers once they join) |
+| approving reviews | **1** (any reviewer) |
+| review from a code owner | not required (CODEOWNERS requests reviews from the owner and the reviewers) |
 | dismiss approvals when new commits are pushed | yes |
 | the last push must be approved by someone other than its author | yes |
 | required status checks | `test (3.10)`, `test (3.11)`, `test (3.12)`, `test (3.13)`, `package`, `specification-changes`, `proposal-check`, from GitHub Actions (`integration_id` 15368) |
@@ -165,19 +166,19 @@ To change it later, edit the JSON by pull request, then
 `gh api -X PUT repos/$OWNER/$REPO/rulesets/$ID --input governance/github/ruleset-main.json`.
 
 **The GitHub Actions app is not a bypass actor.** Anyone with Write can push a branch whose workflow asks for
-`contents: write` and runs `git push origin HEAD:main`; that run's workflow token must not get past the two
-approvals.
+`contents: write` and runs `git push origin HEAD:main`; that run's workflow token must not get past the
+approval.
 
 **Up-to-date branches are not required.** `strict_required_status_checks_policy` is `false`: with it on, every
 merge would force each open pull request to merge `main` again and, because approvals are dismissed on push, to
-be approved again by two people. Two pull requests that each pass alone can conflict once both are merged; CI
+be approved again. Two pull requests that each pass alone can conflict once both are merged; CI
 on `main` shows it at once. Two proposals built on the same schema version cannot both apply: the second is
 refused, and its author rebuilds it on the new version.
 
 ### Bootstrap bypass
 
-Until two reviewers besides the owner have Write access, no pull request can get two approvals from people
-other than its author. The ruleset therefore lets the **repository admin role** (the owner, the only admin)
+The owner is a reviewer and approves other people's pull requests. GitHub does not let an author approve their
+own, so until a second reviewer has Write access, the owner's own pull requests cannot be approved. The ruleset therefore lets the **repository admin role** (the owner, the only admin)
 bypass it:
 
 - the owner uses it only to merge pull requests whose checks pass, noting each use in the pull request
@@ -186,7 +187,7 @@ bypass it:
 - `scale proposal apply-merged` does not count a bypass as approval: a proposal merged this way is applied by
   hand (`scale proposal decide <id> --pr <n> --bootstrap-bypass "<reason>" --by hlxin`, then
   `scale proposal apply <id> --confirm`, in a pull request), and the decision record says so;
-- once the two reviewers have joined, the bypass is narrowed to pull requests (`"bypass_mode": "pull_request"`)
+- once a second reviewer has joined, the bypass is narrowed to pull requests (`"bypass_mode": "pull_request"`)
   or removed, by a pull request that changes `ruleset-main.json`; the apply token then needs its own bypass
   (a GitHub App as an `Integration` actor) or proposals are applied in pull requests.
 
@@ -234,7 +235,7 @@ Publish to PyPI only with the first release ([release-process.md](release-proces
 - [ ] workflow token read-only; Actions may not approve pull requests
 - [ ] `APPLY_TOKEN` set only when the apply-proposals workflow is used (Contents read and write on this
       repository only); `ANTHROPIC_API_KEY` and the Claude GitHub App only when the agent is used
-- [ ] `main` ruleset applied (two approvals, code owners, required checks, the admin role as the only bypass);
+- [ ] `main` ruleset applied (one approval, no code-owner requirement, required checks, the admin role as the only bypass);
       the GitHub Actions app is not a bypass actor
 - [ ] `v*` tag ruleset; `pypi` environment (`v*` tags); PyPI trusted publisher
 - [ ] reviewer seats filled (a pull request each), then the bootstrap bypass narrowed or removed

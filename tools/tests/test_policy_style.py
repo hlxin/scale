@@ -11,16 +11,17 @@ POLICY = load_policy(REPO)
 
 # ---------------------------------------------------------------- the review policy
 
-def test_every_tier_needs_the_same_two_approvals():
+def test_every_tier_needs_the_same_one_approval():
     """Tiers are information in the reports; there is no approval class per tier, no comment period and no
     development stage."""
-    assert POLICY["policy_version"] == 1
+    assert POLICY["policy_version"] == 2
     assert not {"committee", "provisional_approvers", "stage", "stages", "area_review", "objections"} & set(POLICY)
     assert all(set(t) <= {"name", "examples", "needs"} for t in POLICY["tiers"].values())
     assert POLICY["new_concepts_maturity"] == "provisional"
     approvals = [{"reviewer": "hlxin", "decision": "approve", "at": "2026-10-05T00:00:00Z"}]
-    assert [evaluate(POLICY, approvals, author="x", tier=t)["satisfied"] for t in (0, 1, 2, 3)] == [False] * 4
-    assert evaluate(POLICY, approvals, tier=3)["required"] == "2 approving reviews from reviewers other than the author"
+    assert [evaluate(POLICY, approvals, author="x", tier=t)["satisfied"] for t in (0, 1, 2, 3)] == [True] * 4
+    assert [evaluate(POLICY, approvals, author="hlxin", tier=t)["satisfied"] for t in (0, 1, 2, 3)] == [False] * 4
+    assert evaluate(POLICY, approvals, tier=3)["required"] == "1 approving review from reviewers other than the author"
 
 
 def test_records_sampling_is_configured():

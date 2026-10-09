@@ -1200,7 +1200,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     rv = sub.add_parser("review", help="human review of proposals").add_subparsers(dest="sub", required=True)
     sp = add("status", cmd_review_status, "read-only: the approvals a proposal holds (from its pull request's GitHub reviews) "
-             "against governance/review-policy.yaml (two reviewers other than the author)", rv)
+             "against governance/review-policy.yaml (one reviewer other than the author)", rv)
     sp.add_argument("proposal_pos", nargs="?", metavar="proposal", help=PROPOSAL_HELP)
     sp.add_argument("--proposal", dest="proposal", help="the same, as an option"); sp.add_argument("--tier", type=int)
     sp.add_argument("--author", help="the pull request's author (default: as recorded with the approvals)"); out_opts(sp)
@@ -1224,8 +1224,8 @@ def build_parser() -> argparse.ArgumentParser:
              "apply-proposals workflow runs it through apply-merged", cs)
     sp.add_argument("proposal", help=PROPOSAL_HELP); sp.add_argument("--number", type=int)
     sp.add_argument("--pr", type=int, help="the merged pull request"); sp.add_argument("--author", help="its author")
-    sp.add_argument("--bootstrap-bypass", metavar="REASON", help="a person's action while reviewer seats are placeholders: "
-                    "record a decision merged under the ruleset's bootstrap bypass, without two approvals")
+    sp.add_argument("--bootstrap-bypass", metavar="REASON", help="the owner's action, for their own pull request, until a second reviewer joins: "
+                    "record a decision merged under the ruleset's bootstrap bypass, without an approval")
     sp.add_argument("--by", help="with --bootstrap-bypass: the reviewer (GitHub handle) who merged"); out_opts(sp)
     sp = add("apply", cmd_proposal_apply, "scale-graph: freeze the base version (kernel in core/graph/frozen/, catalysis parts in domain/graph/frozen/) and install the approved candidate (--confirm)", cs)
     sp.add_argument("proposal", help=PROPOSAL_HELP); sp.add_argument("--confirm", action="store_true"); out_opts(sp)
