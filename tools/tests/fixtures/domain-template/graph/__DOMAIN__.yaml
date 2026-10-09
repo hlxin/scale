@@ -1,0 +1,42 @@
+# The __TITLE__ domain file: the vocabulary this domain adds to the science kernel (core/graph/kernel.yaml)
+# and, optionally, its checklist. Every kernel label and edge type is visible without an import. Declare
+# only names that the core does not declare (`scale domains check` fails on a
+# redeclaration); build on the kernel instead: a new label that refines a kernel label says `is_a`, a new
+# edge type that narrows a kernel edge says `specializes`, `extends` adds endpoints to an edge type and
+# `adds_properties` adds new properties to a label. For example:
+#
+#   nodes:
+#     ExampleSample:
+#       is_a: ObjectOfStudy
+#       maturity: provisional
+#       description: What one sample of this field is, and what it is not.
+#       properties:
+#         example_property:
+#           type: text
+#
+# The checklist (optional) says what a record must report (a missing item makes it non-conformant,
+# never invalid) and should report (a completeness score). Documents follow it with
+# follows_domains: ['__DOMAIN__']; `scale graph describe --domain __DOMAIN__` shows it. Items that depend
+# on the record go in `when` cases: each names a condition on an enum (or list-of-enum) property of the
+# label, any_of or all_of of its values, and the items that then apply (the catalysis domain keys its
+# cases on CatalyticTest.driving_forces). For example:
+#
+#   checklist:
+#     description: What a record of this field reports.
+#     labels:
+#       ExampleSample:
+#         must: [example_property]
+#         when:
+#           - example_kind: {any_of: [a, b]}
+#             must: [another_property]
+#             should: [a_third_property]
+#
+# The domain's manifest (scale-graph.yaml beside this file) assembles it with the kernel; the domain
+# enters official releases when it is promoted to stable.
+domain: '__DOMAIN__'
+maturity: provisional
+title: '__TITLE__'
+description: 'TODO: what the __TITLE__ domain describes, and what it leaves to the kernel.'
+imports: []
+nodes: {}
+edges: {}

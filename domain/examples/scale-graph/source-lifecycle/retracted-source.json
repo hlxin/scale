@@ -1,0 +1,572 @@
+{
+  "nodes": [
+    {
+      "id": "ex:exmpl/lifecycle-example/source/paper-a",
+      "label": "Source",
+      "props": {
+        "name": "Methanol over zinc oxide (invented)",
+        "kind": "article",
+        "origin": "synthetic",
+        "stewardship": {
+          "access": "public"
+        },
+        "title": "Methanol over zinc oxide (invented)",
+        "year": 2019
+      }
+    },
+    {
+      "id": "ex:exmpl/lifecycle-example/source/paper-b",
+      "label": "Source",
+      "props": {
+        "name": "Methanol over zinc chromite (invented)",
+        "kind": "article",
+        "origin": "synthetic",
+        "stewardship": {
+          "access": "public"
+        },
+        "title": "Methanol over zinc chromite (invented)",
+        "year": 2020
+      }
+    },
+    {
+      "id": "ex:exmpl/lifecycle-example/source/retraction-notice-b",
+      "label": "Source",
+      "props": {
+        "name": "Retraction notice for the zinc chromite paper (invented)",
+        "kind": "retraction_notice",
+        "origin": "synthetic",
+        "stewardship": {
+          "access": "public"
+        },
+        "title": "Retraction notice for the zinc chromite paper (invented)",
+        "year": 2022
+      }
+    },
+    {
+      "id": "ex:exmpl/org/example-lab",
+      "label": "Institution",
+      "props": {
+        "name": "Example laboratory (invented)",
+        "country": "US",
+        "institution_kind": "university",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:exmpl/project/examples",
+      "label": "Project",
+      "props": {
+        "name": "SCALE examples (invented)",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:exmpl/lifecycle-example/reaction/meoh",
+      "label": "Reaction",
+      "props": {
+        "name": "CO + 2 H2 -> CH3OH",
+        "balance_status": "balanced",
+        "direction": "forward",
+        "equation": "CO + 2 H2 -> CH3OH",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:exmpl/lifecycle-example/feed/co-2h2",
+      "label": "Feed",
+      "props": {
+        "name": "CO : H2 = 1 : 2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:exmpl/lifecycle-example/species/co",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "carbon monoxide",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 1,
+          "O": 1
+        },
+        "formula": "CO",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:exmpl/lifecycle-example/species/h2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "hydrogen",
+        "charge": 0,
+        "elemental_composition": {
+          "H": 2
+        },
+        "formula": "H2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:exmpl/lifecycle-example/species/meoh",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "methanol",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 1,
+          "H": 4,
+          "O": 1
+        },
+        "formula": "CH3OH",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:exmpl/lifecycle-example/catalyst/zno",
+      "label": "Catalyst",
+      "props": {
+        "name": "ZnO",
+        "catalyst_family": "oxide",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:exmpl/lifecycle-example/source/paper-a"
+          }
+        ],
+        "nominal_formula": "ZnO",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:exmpl/lifecycle-example/catalyst-sample/zno",
+      "label": "CatalystSample",
+      "props": {
+        "name": "ZnO charge, 40 cc",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:exmpl/lifecycle-example/source/paper-a"
+          }
+        ],
+        "origin": "synthetic",
+        "sample_kind": "reactor_charge"
+      }
+    },
+    {
+      "id": "ex:exmpl/lifecycle-example/test/zno",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "ZnO, run 1",
+        "conversion": {
+          "status": "present",
+          "basis": "CO converted to methanol per pass",
+          "target": "ex:exmpl/lifecycle-example/species/co",
+          "unit": "%",
+          "value": 6.2
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 1, run 1",
+            "note": "run 1: 6.2 % of the CO converted to methanol per pass (invented)",
+            "source": "ex:exmpl/lifecycle-example/source/paper-a"
+          }
+        ],
+        "experiment_kind": "physical",
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "note": "absolute",
+          "unit": "atm",
+          "value": 150
+        },
+        "results": {
+          "methanol_production": {
+            "status": "present",
+            "unit": "g/h",
+            "value": 52
+          }
+        },
+        "space_velocity": {
+          "status": "present",
+          "unit": "h-1",
+          "value": 12000
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 380
+        },
+        "test_kind": "activity"
+      }
+    },
+    {
+      "id": "ex:exmpl/lifecycle-example/catalyst/zncr",
+      "label": "Catalyst",
+      "props": {
+        "name": "ZnCr2O4",
+        "catalyst_family": "oxide",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:exmpl/lifecycle-example/source/paper-b"
+          }
+        ],
+        "nominal_formula": "ZnCr2O4",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:exmpl/lifecycle-example/catalyst-sample/zncr",
+      "label": "CatalystSample",
+      "props": {
+        "name": "ZnCr2O4 charge, 40 cc",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:exmpl/lifecycle-example/source/paper-b"
+          }
+        ],
+        "origin": "synthetic",
+        "sample_kind": "reactor_charge"
+      }
+    },
+    {
+      "id": "ex:exmpl/lifecycle-example/test/zncr",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "ZnCr2O4, run 1",
+        "conversion": {
+          "status": "present",
+          "basis": "CO converted to methanol per pass",
+          "target": "ex:exmpl/lifecycle-example/species/co",
+          "unit": "%",
+          "value": 9.5
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 2, run 1",
+            "note": "run 1: 9.5 % of the CO converted to methanol per pass (invented)",
+            "source": "ex:exmpl/lifecycle-example/source/paper-b"
+          }
+        ],
+        "experiment_kind": "physical",
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "note": "absolute",
+          "unit": "atm",
+          "value": 150
+        },
+        "results": {
+          "methanol_production": {
+            "status": "present",
+            "unit": "g/h",
+            "value": 80
+          }
+        },
+        "space_velocity": {
+          "status": "present",
+          "unit": "h-1",
+          "value": 12000
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 360
+        },
+        "test_kind": "activity"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:exmpl/lifecycle-example/link/participates",
+      "type": "PARTICIPATES_IN",
+      "props": {
+        "origin": "synthetic",
+        "role": "data_provider"
+      },
+      "source": "ex:exmpl/org/example-lab",
+      "target": "ex:exmpl/project/examples"
+    },
+    {
+      "id": "ex:exmpl/lifecycle-example/link/participant/co",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:exmpl/lifecycle-example/reaction/meoh",
+      "target": "ex:exmpl/lifecycle-example/species/co"
+    },
+    {
+      "id": "ex:exmpl/lifecycle-example/link/feed/co",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "fraction": {
+          "status": "present",
+          "note": "relative molar parts",
+          "unit": "1",
+          "value": 1
+        },
+        "fraction_basis": "mole",
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:exmpl/lifecycle-example/feed/co-2h2",
+      "target": "ex:exmpl/lifecycle-example/species/co"
+    },
+    {
+      "id": "ex:exmpl/lifecycle-example/link/participant/h2",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 2,
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:exmpl/lifecycle-example/reaction/meoh",
+      "target": "ex:exmpl/lifecycle-example/species/h2"
+    },
+    {
+      "id": "ex:exmpl/lifecycle-example/link/feed/h2",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "fraction": {
+          "status": "present",
+          "note": "relative molar parts",
+          "unit": "1",
+          "value": 2
+        },
+        "fraction_basis": "mole",
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:exmpl/lifecycle-example/feed/co-2h2",
+      "target": "ex:exmpl/lifecycle-example/species/h2"
+    },
+    {
+      "id": "ex:exmpl/lifecycle-example/link/participant/meoh",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "role": "product"
+      },
+      "source": "ex:exmpl/lifecycle-example/reaction/meoh",
+      "target": "ex:exmpl/lifecycle-example/species/meoh"
+    },
+    {
+      "id": "ex:exmpl/lifecycle-example/link/zno/formulation",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/lifecycle-example/catalyst-sample/zno",
+      "target": "ex:exmpl/lifecycle-example/catalyst/zno"
+    },
+    {
+      "id": "ex:exmpl/lifecycle-example/link/zno/catalyst",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:exmpl/lifecycle-example/source/paper-a"
+          }
+        ],
+        "origin": "synthetic",
+        "state": "fresh"
+      },
+      "source": "ex:exmpl/lifecycle-example/test/zno",
+      "target": "ex:exmpl/lifecycle-example/catalyst-sample/zno"
+    },
+    {
+      "id": "ex:exmpl/lifecycle-example/link/zno/feed",
+      "type": "FED_WITH",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/lifecycle-example/test/zno",
+      "target": "ex:exmpl/lifecycle-example/feed/co-2h2"
+    },
+    {
+      "id": "ex:exmpl/lifecycle-example/link/zno/reaction",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/lifecycle-example/test/zno",
+      "target": "ex:exmpl/lifecycle-example/reaction/meoh"
+    },
+    {
+      "id": "ex:exmpl/lifecycle-example/catalyst/zno/reported-in/paper-a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/lifecycle-example/catalyst/zno",
+      "target": "ex:exmpl/lifecycle-example/source/paper-a"
+    },
+    {
+      "id": "ex:exmpl/lifecycle-example/catalyst-sample/zno/reported-in/paper-a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/lifecycle-example/catalyst-sample/zno",
+      "target": "ex:exmpl/lifecycle-example/source/paper-a"
+    },
+    {
+      "id": "ex:exmpl/lifecycle-example/test/zno/reported-in/paper-a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1, run 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/lifecycle-example/test/zno",
+      "target": "ex:exmpl/lifecycle-example/source/paper-a"
+    },
+    {
+      "id": "ex:exmpl/lifecycle-example/link/zncr/formulation",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/lifecycle-example/catalyst-sample/zncr",
+      "target": "ex:exmpl/lifecycle-example/catalyst/zncr"
+    },
+    {
+      "id": "ex:exmpl/lifecycle-example/link/zncr/catalyst",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:exmpl/lifecycle-example/source/paper-b"
+          }
+        ],
+        "origin": "synthetic",
+        "state": "fresh"
+      },
+      "source": "ex:exmpl/lifecycle-example/test/zncr",
+      "target": "ex:exmpl/lifecycle-example/catalyst-sample/zncr"
+    },
+    {
+      "id": "ex:exmpl/lifecycle-example/link/zncr/feed",
+      "type": "FED_WITH",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/lifecycle-example/test/zncr",
+      "target": "ex:exmpl/lifecycle-example/feed/co-2h2"
+    },
+    {
+      "id": "ex:exmpl/lifecycle-example/link/zncr/reaction",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/lifecycle-example/test/zncr",
+      "target": "ex:exmpl/lifecycle-example/reaction/meoh"
+    },
+    {
+      "id": "ex:exmpl/lifecycle-example/catalyst/zncr/reported-in/paper-b",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/lifecycle-example/catalyst/zncr",
+      "target": "ex:exmpl/lifecycle-example/source/paper-b"
+    },
+    {
+      "id": "ex:exmpl/lifecycle-example/catalyst-sample/zncr/reported-in/paper-b",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/lifecycle-example/catalyst-sample/zncr",
+      "target": "ex:exmpl/lifecycle-example/source/paper-b"
+    },
+    {
+      "id": "ex:exmpl/lifecycle-example/test/zncr/reported-in/paper-b",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2, run 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/lifecycle-example/test/zncr",
+      "target": "ex:exmpl/lifecycle-example/source/paper-b"
+    },
+    {
+      "id": "ex:exmpl/lifecycle-example/link/retracts-b",
+      "type": "RETRACTS",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "notice, paragraph 1",
+            "note": "the article is retracted at the authors' request (invented)",
+            "source": "ex:exmpl/lifecycle-example/source/retraction-notice-b"
+          }
+        ],
+        "origin": "synthetic",
+        "reason": "the conversions of Table 2 could not be reproduced by the authors (invented)",
+        "retracted_on": "2022-02-01"
+      },
+      "source": "ex:exmpl/lifecycle-example/source/retraction-notice-b",
+      "target": "ex:exmpl/lifecycle-example/source/paper-b"
+    }
+  ],
+  "directed": true,
+  "graph": {
+    "data_status": "synthetic_example",
+    "follows_domains": [
+      "catalysis"
+    ],
+    "graph_id": "ex:exmpl/lifecycle-example/example",
+    "schema": "scale-graph",
+    "schema_version": "0.1.0",
+    "stewardship": {
+      "access": "public",
+      "contributed_by": [
+        "ex:exmpl/org/example-lab"
+      ],
+      "project": "ex:exmpl/project/examples"
+    },
+    "title": "Two invented thermocatalytic runs from two invented papers, one of which a retraction notice retracts (synthetic: the sources, the notice and every value are invented)"
+  },
+  "multigraph": true
+}

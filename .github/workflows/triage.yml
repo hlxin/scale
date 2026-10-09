@@ -1,0 +1,62 @@
+name: triage
+
+# Once a week, ingest comments, issues, review comments and discussions, group them into topics with
+# options (built-in rules, optionally refined by any external agent system), and open a feedback digest
+# issue (label feedback-digest) for the reviewers. The digest decides nothing: a person acts on a topic by
+# opening a pull request (or by starting the scale-agent workflow by hand, .github/workflows/scale-agent.yml),
+# and every change is decided by two approving reviews (the bootstrap rule until the reviewer seats are
+# filled). The repository slug comes from .github/scale-project.yml. See governance/feedback.md.
+"on":
+  schedule:
+    - cron: "0 7 * * 1"      # Mondays 07:00 UTC
+  workflow_dispatch:
+    inputs:
+      since:
+        description: "ISO time to ingest from (default: since the last digest)"
+        required: false
+        default: auto
+
+permissions:
+  contents: read
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: write
+      discussions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e .
+      - name: Ingest feedback
+        env:
+          GH_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          SINCE: "${{ inputs.since || 'auto' }}"
+        run: scale triage ingest --out triage-run --since "$SINCE"
+      - name: Propose decision paths
+        env:
+          # Optional: set a repository variable to call your own agent system:
+          #   SCALE_TRIAGE_COMMAND = "<program>"   (called as: <program> <queue.json> <proposals.json>)
+          # Setting repository variables is a human action.
+          SCALE_TRIAGE_COMMAND: ${{ vars.SCALE_TRIAGE_COMMAND }}
+        run: |
+          if [ -n "$SCALE_TRIAGE_COMMAND" ]; then
+            scale triage propose triage-run --agent-command "$SCALE_TRIAGE_COMMAND"
+          else
+            scale triage propose triage-run
+          fi
+      - name: Publish digest issue and notify threads
+        env:
+          GH_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        run: scale triage publish triage-run --publish
+      - uses: actions/upload-artifact@v4
+        with:
+          name: triage-run
+          path: triage-run/

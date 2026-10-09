@@ -1,0 +1,61 @@
+{
+  "nodes": [
+    {
+      "id": "ex:exmpl/lifecycle/source/paper-a",
+      "label": "Source",
+      "props": {
+        "name": "Methanol over an invented oxide (invented)",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "Methanol over an invented oxide (invented)",
+        "year": 2019
+      }
+    },
+    {
+      "id": "ex:exmpl/lifecycle/source/correction",
+      "label": "Source",
+      "props": {
+        "name": "Correction to the invented oxide paper (invented)",
+        "kind": "correction",
+        "origin": "synthetic",
+        "published_on": "2019-09",
+        "title": "Correction to the invented oxide paper (invented)",
+        "year": 2019
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:exmpl/lifecycle/link/corrects",
+      "type": "UPDATES",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "notice",
+            "note": "the unit of Table 1 should read mmol/(g h) (invented)",
+            "source": "ex:exmpl/lifecycle/source/correction"
+          }
+        ],
+        "origin": "synthetic",
+        "reason": "a unit in Table 1 was misprinted (invented)",
+        "update_type": "correction",
+        "updated_on": "2019-09"
+      },
+      "source": "ex:exmpl/lifecycle/source/correction",
+      "target": "ex:exmpl/lifecycle/source/paper-a"
+    }
+  ],
+  "directed": true,
+  "graph": {
+    "data_status": "synthetic_example",
+    "graph_id": "ex:exmpl/lifecycle/fixture/correction",
+    "schema": "scale-graph",
+    "schema_version": "0.1.0",
+    "stewardship": {
+      "access": "public"
+    },
+    "title": "A correction notice updates an article (synthetic)"
+  },
+  "multigraph": true
+}

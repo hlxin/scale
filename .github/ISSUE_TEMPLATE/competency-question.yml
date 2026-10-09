@@ -1,0 +1,22 @@
+name: A question the graph should answer
+description: A scientific question SCALE should be able to answer (becomes a competency question).
+labels: ["competency-question"]
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: "The question"
+      description: "Phrase it as you would ask a colleague."
+    validations:
+      required: true
+  - type: input
+    id: domain
+    attributes:
+      label: Part (optional)
+      description: The part this concerns, the catalysis domain (domain/) or the science kernel (core/). Leave empty if unsure.
+      placeholder: catalysis
+  - type: textarea
+    id: context
+    attributes:
+      label: "What must the answer include?"
+      description: "e.g. conditions, normalization basis, evidence locations."

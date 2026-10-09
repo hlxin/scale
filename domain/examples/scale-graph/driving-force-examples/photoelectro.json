@@ -1,0 +1,698 @@
+{
+  "nodes": [
+    {
+      "id": "ex:df-photoelectro/source/paper",
+      "label": "Source",
+      "props": {
+        "name": "Invented paper",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "Water oxidation on a BiVO4 photoanode: light and potential together (invented)",
+        "year": 2026
+      }
+    },
+    {
+      "id": "ex:df-photoelectro/species/water",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "H2O",
+        "charge": 0,
+        "elemental_composition": {
+          "H": 2,
+          "O": 1
+        },
+        "formula": "H2O",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:df-photoelectro/species/o2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "O2",
+        "charge": 0,
+        "elemental_composition": {
+          "O": 2
+        },
+        "formula": "O2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:df-photoelectro/species/proton",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "H+",
+        "charge": 1,
+        "elemental_composition": {
+          "H": 1
+        },
+        "formula": "H+",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:df-photoelectro/species/electron",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "e-",
+        "charge": -1,
+        "elemental_composition": {},
+        "formula": "e-",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:df-photoelectro/reaction/oer",
+      "label": "Reaction",
+      "props": {
+        "name": "2 H2O -> O2 + 4 H+ + 4 e-",
+        "balance_status": "balanced",
+        "direction": "forward",
+        "equation": "2 H2O -> O2 + 4 H+ + 4 e-",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:df-photoelectro/catalyst/bivo4",
+      "label": "Catalyst",
+      "props": {
+        "name": "BiVO4 film",
+        "catalyst_family": "oxide",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:df-photoelectro/source/paper"
+          }
+        ],
+        "nominal_formula": "BiVO4",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:df-photoelectro/sample/bivo4",
+      "label": "CatalystSample",
+      "props": {
+        "name": "BiVO4 film, batch 1",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:df-photoelectro/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "sample_kind": "powder"
+      }
+    },
+    {
+      "id": "ex:df-photoelectro/electrode/bivo4-fto",
+      "label": "Electrode",
+      "props": {
+        "name": "BiVO4 on FTO",
+        "geometric_area": {
+          "status": "present",
+          "unit": "cm2",
+          "value": 0.5
+        },
+        "origin": "synthetic",
+        "substrate": "FTO glass"
+      }
+    },
+    {
+      "id": "ex:df-photoelectro/instrument/ref",
+      "label": "ReferenceElectrode",
+      "props": {
+        "name": "Ag/AgCl reference",
+        "filling": "3 M KCl",
+        "origin": "synthetic",
+        "reference_type": "ag_agcl"
+      }
+    },
+    {
+      "id": "ex:df-photoelectro/electrolyte/kpi",
+      "label": "Electrolyte",
+      "props": {
+        "name": "0.5 M potassium phosphate",
+        "origin": "synthetic",
+        "pH": {
+          "status": "present",
+          "unit": "1",
+          "value": 7.0
+        }
+      }
+    },
+    {
+      "id": "ex:df-photoelectro/species/phosphate",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "KH2PO4",
+        "charge": 0,
+        "elemental_composition": {
+          "H": 2,
+          "K": 1,
+          "O": 4,
+          "P": 1
+        },
+        "formula": "KH2PO4",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:df-photoelectro/instrument/sim",
+      "label": "LightSource",
+      "props": {
+        "name": "Solar simulator",
+        "origin": "synthetic",
+        "source_kind": "solar_simulator",
+        "spectrum": "AM1.5G"
+      }
+    },
+    {
+      "id": "ex:df-photoelectro/variable/illumination",
+      "label": "Variable",
+      "props": {
+        "name": "Illumination",
+        "categories": [
+          "light",
+          "dark"
+        ],
+        "origin": "synthetic",
+        "scale": "nominal"
+      }
+    },
+    {
+      "id": "ex:df-photoelectro/variable/potential",
+      "label": "Variable",
+      "props": {
+        "name": "Electrode potential",
+        "origin": "synthetic",
+        "quantity_kind": "electric_potential",
+        "scale": "quantitative",
+        "unit": "V"
+      }
+    },
+    {
+      "id": "ex:df-photoelectro/test/light-1v23",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Light, 1.23 V vs RHE",
+        "abpe": {
+          "status": "present",
+          "unit": "%",
+          "value": 1.1
+        },
+        "cell_voltage": {
+          "status": "present",
+          "unit": "V",
+          "value": 1.9
+        },
+        "control_mode": "potentiostatic",
+        "current_density": {
+          "status": "present",
+          "basis": "geometric area",
+          "unit": "mA/cm2",
+          "value": 3.5
+        },
+        "driving_forces": [
+          "photo",
+          "electro"
+        ],
+        "electrode_potential": {
+          "status": "present",
+          "unit": "V",
+          "value": 1.23
+        },
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 3",
+            "source": "ex:df-photoelectro/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "faradaic_efficiency": [
+          {
+            "status": "present",
+            "target": "ex:df-photoelectro/species/o2",
+            "unit": "%",
+            "value": 95
+          }
+        ],
+        "illuminated_area": {
+          "status": "present",
+          "unit": "cm2",
+          "value": 0.5
+        },
+        "illumination": "light",
+        "ir_compensation": "not_applied",
+        "irradiance": {
+          "status": "present",
+          "unit": "mW/cm2",
+          "value": 100
+        },
+        "light_absorber": "photoelectrode",
+        "origin": "synthetic",
+        "photocurrent_density": {
+          "status": "present",
+          "unit": "mA/cm2",
+          "value": 3.5
+        },
+        "reference_scale": "rhe",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 298
+        },
+        "test_kind": "activity"
+      }
+    },
+    {
+      "id": "ex:df-photoelectro/test/dark-1v23",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Dark, 1.23 V vs RHE",
+        "control_mode": "potentiostatic",
+        "current_density": {
+          "status": "present",
+          "unit": "mA/cm2",
+          "value": 0.01
+        },
+        "driving_forces": [
+          "electro"
+        ],
+        "electrode_potential": {
+          "status": "present",
+          "unit": "V",
+          "value": 1.23
+        },
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 3",
+            "source": "ex:df-photoelectro/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "illumination": "dark",
+        "ir_compensation": "not_applied",
+        "origin": "synthetic",
+        "reference_scale": "rhe",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 298
+        },
+        "test_kind": "control"
+      }
+    },
+    {
+      "id": "ex:df-photoelectro/test/light-ocp",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Light, open circuit",
+        "control_mode": "open_circuit",
+        "driving_forces": [
+          "photo"
+        ],
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 3",
+            "source": "ex:df-photoelectro/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "illumination": "light",
+        "ir_compensation": "not_applied",
+        "irradiance": {
+          "status": "present",
+          "unit": "mW/cm2",
+          "value": 100
+        },
+        "origin": "synthetic",
+        "reference_scale": "rhe",
+        "results": {
+          "photovoltage": {
+            "status": "present",
+            "unit": "V",
+            "value": 0.45
+          }
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 298
+        },
+        "test_kind": "control"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:df-photoelectro/link/1",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 2,
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:df-photoelectro/reaction/oer",
+      "target": "ex:df-photoelectro/species/water"
+    },
+    {
+      "id": "ex:df-photoelectro/link/2",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "role": "product"
+      },
+      "source": "ex:df-photoelectro/reaction/oer",
+      "target": "ex:df-photoelectro/species/o2"
+    },
+    {
+      "id": "ex:df-photoelectro/link/3",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 4,
+        "origin": "synthetic",
+        "role": "product"
+      },
+      "source": "ex:df-photoelectro/reaction/oer",
+      "target": "ex:df-photoelectro/species/proton"
+    },
+    {
+      "id": "ex:df-photoelectro/link/4",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 4,
+        "origin": "synthetic",
+        "role": "product"
+      },
+      "source": "ex:df-photoelectro/reaction/oer",
+      "target": "ex:df-photoelectro/species/electron"
+    },
+    {
+      "id": "ex:df-photoelectro/link/5",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:df-photoelectro/sample/bivo4",
+      "target": "ex:df-photoelectro/catalyst/bivo4"
+    },
+    {
+      "id": "ex:df-photoelectro/link/6",
+      "type": "HAS_PART",
+      "props": {
+        "origin": "synthetic",
+        "role": "photoabsorber and catalyst"
+      },
+      "source": "ex:df-photoelectro/electrode/bivo4-fto",
+      "target": "ex:df-photoelectro/sample/bivo4"
+    },
+    {
+      "id": "ex:df-photoelectro/link/7",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "fraction": {
+          "status": "present",
+          "unit": "mol/L",
+          "value": 0.5
+        },
+        "fraction_basis": "not_reported",
+        "origin": "synthetic",
+        "role": "inert"
+      },
+      "source": "ex:df-photoelectro/electrolyte/kpi",
+      "target": "ex:df-photoelectro/species/phosphate"
+    },
+    {
+      "id": "ex:df-photoelectro/link/8",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "as_prepared"
+      },
+      "source": "ex:df-photoelectro/test/light-1v23",
+      "target": "ex:df-photoelectro/sample/bivo4"
+    },
+    {
+      "id": "ex:df-photoelectro/link/9",
+      "type": "USES_ELECTRODE",
+      "props": {
+        "origin": "synthetic",
+        "role": "working"
+      },
+      "source": "ex:df-photoelectro/test/light-1v23",
+      "target": "ex:df-photoelectro/electrode/bivo4-fto"
+    },
+    {
+      "id": "ex:df-photoelectro/link/10",
+      "type": "USES_ELECTRODE",
+      "props": {
+        "origin": "synthetic",
+        "role": "reference"
+      },
+      "source": "ex:df-photoelectro/test/light-1v23",
+      "target": "ex:df-photoelectro/instrument/ref"
+    },
+    {
+      "id": "ex:df-photoelectro/link/11",
+      "type": "IN_ELECTROLYTE",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:df-photoelectro/test/light-1v23",
+      "target": "ex:df-photoelectro/electrolyte/kpi"
+    },
+    {
+      "id": "ex:df-photoelectro/link/12",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:df-photoelectro/test/light-1v23",
+      "target": "ex:df-photoelectro/reaction/oer"
+    },
+    {
+      "id": "ex:df-photoelectro/link/13",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "as_prepared"
+      },
+      "source": "ex:df-photoelectro/test/dark-1v23",
+      "target": "ex:df-photoelectro/sample/bivo4"
+    },
+    {
+      "id": "ex:df-photoelectro/link/14",
+      "type": "USES_ELECTRODE",
+      "props": {
+        "origin": "synthetic",
+        "role": "working"
+      },
+      "source": "ex:df-photoelectro/test/dark-1v23",
+      "target": "ex:df-photoelectro/electrode/bivo4-fto"
+    },
+    {
+      "id": "ex:df-photoelectro/link/15",
+      "type": "USES_ELECTRODE",
+      "props": {
+        "origin": "synthetic",
+        "role": "reference"
+      },
+      "source": "ex:df-photoelectro/test/dark-1v23",
+      "target": "ex:df-photoelectro/instrument/ref"
+    },
+    {
+      "id": "ex:df-photoelectro/link/16",
+      "type": "IN_ELECTROLYTE",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:df-photoelectro/test/dark-1v23",
+      "target": "ex:df-photoelectro/electrolyte/kpi"
+    },
+    {
+      "id": "ex:df-photoelectro/link/17",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:df-photoelectro/test/dark-1v23",
+      "target": "ex:df-photoelectro/reaction/oer"
+    },
+    {
+      "id": "ex:df-photoelectro/link/18",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "as_prepared"
+      },
+      "source": "ex:df-photoelectro/test/light-ocp",
+      "target": "ex:df-photoelectro/sample/bivo4"
+    },
+    {
+      "id": "ex:df-photoelectro/link/19",
+      "type": "USES_ELECTRODE",
+      "props": {
+        "origin": "synthetic",
+        "role": "working"
+      },
+      "source": "ex:df-photoelectro/test/light-ocp",
+      "target": "ex:df-photoelectro/electrode/bivo4-fto"
+    },
+    {
+      "id": "ex:df-photoelectro/link/20",
+      "type": "USES_ELECTRODE",
+      "props": {
+        "origin": "synthetic",
+        "role": "reference"
+      },
+      "source": "ex:df-photoelectro/test/light-ocp",
+      "target": "ex:df-photoelectro/instrument/ref"
+    },
+    {
+      "id": "ex:df-photoelectro/link/21",
+      "type": "IN_ELECTROLYTE",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:df-photoelectro/test/light-ocp",
+      "target": "ex:df-photoelectro/electrolyte/kpi"
+    },
+    {
+      "id": "ex:df-photoelectro/link/22",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:df-photoelectro/test/light-ocp",
+      "target": "ex:df-photoelectro/reaction/oer"
+    },
+    {
+      "id": "ex:df-photoelectro/link/23",
+      "type": "ILLUMINATED_BY",
+      "props": {
+        "geometry": "front",
+        "origin": "synthetic"
+      },
+      "source": "ex:df-photoelectro/test/light-1v23",
+      "target": "ex:df-photoelectro/instrument/sim"
+    },
+    {
+      "id": "ex:df-photoelectro/link/24",
+      "type": "ILLUMINATED_BY",
+      "props": {
+        "geometry": "front",
+        "origin": "synthetic"
+      },
+      "source": "ex:df-photoelectro/test/light-ocp",
+      "target": "ex:df-photoelectro/instrument/sim"
+    },
+    {
+      "id": "ex:df-photoelectro/link/25",
+      "type": "CONTROL_FOR",
+      "props": {
+        "control_kind": "negative",
+        "differs_in": [
+          "ex:df-photoelectro/variable/illumination"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:df-photoelectro/test/dark-1v23",
+      "target": "ex:df-photoelectro/test/light-1v23"
+    },
+    {
+      "id": "ex:df-photoelectro/link/26",
+      "type": "CONTROL_FOR",
+      "props": {
+        "control_kind": "negative",
+        "differs_in": [
+          "ex:df-photoelectro/variable/potential"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:df-photoelectro/test/light-ocp",
+      "target": "ex:df-photoelectro/test/light-1v23"
+    },
+    {
+      "id": "ex:df-photoelectro/catalyst/bivo4/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:df-photoelectro/catalyst/bivo4",
+      "target": "ex:df-photoelectro/source/paper"
+    },
+    {
+      "id": "ex:df-photoelectro/sample/bivo4/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:df-photoelectro/sample/bivo4",
+      "target": "ex:df-photoelectro/source/paper"
+    },
+    {
+      "id": "ex:df-photoelectro/test/dark-1v23/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:df-photoelectro/test/dark-1v23",
+      "target": "ex:df-photoelectro/source/paper"
+    },
+    {
+      "id": "ex:df-photoelectro/test/light-1v23/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:df-photoelectro/test/light-1v23",
+      "target": "ex:df-photoelectro/source/paper"
+    },
+    {
+      "id": "ex:df-photoelectro/test/light-ocp/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:df-photoelectro/test/light-ocp",
+      "target": "ex:df-photoelectro/source/paper"
+    }
+  ],
+  "directed": true,
+  "graph": {
+    "data_status": "synthetic_example",
+    "follows_domains": [
+      "catalysis"
+    ],
+    "graph_id": "ex:df-photoelectro/graph",
+    "schema": "scale-graph",
+    "schema_version": "0.1.0",
+    "stewardship": {
+      "access": "public"
+    },
+    "title": "Water oxidation on a BiVO4 photoanode: light and potential together"
+  },
+  "multigraph": true
+}

@@ -1,0 +1,64 @@
+# Labels used by issue forms, discussion forms, workflows and triage.
+# Human action, once (and after adding a label here): from the repository root, with `gh` signed in
+# as an account with at least Triage access, run
+#   python -c "import yaml,subprocess;[subprocess.run(['gh','label','create',l['name'],'--color',l['color'],'--description',l['description'],'--force']) for l in yaml.safe_load(open('.github/labels.yml'))]"
+# The command reads .github/labels.yml relative to the current directory and uses the repository of
+# the current checkout. `--force` updates labels that already exist.
+
+# Feedback and curation
+- name: suggestion
+  color: "c5def5"
+  description: "Comment or suggestion from anyone"
+- name: idea
+  color: "c2e0c6"
+  description: "Idea posted in Discussions"
+- name: submission
+  color: "0075ca"
+  description: "Contribution sent through an issue; a maintainer prepares the pull request"
+- name: new-source
+  color: "bfdadc"
+  description: "Source proposed for curation"
+- name: competency-question
+  color: "d4c5f9"
+  description: "Question the graph should answer"
+- name: mapping
+  color: "fef2c0"
+  description: "Vocabulary or ontology mapping"
+- name: "gap:missing-concept"
+  color: "b60205"
+  description: "Representation cannot express a distinction"
+- name: "gap:extraction-error"
+  color: "d93f0b"
+  description: "Curated value does not match source"
+- name: "gap:absent-source-information"
+  color: "fbca04"
+  description: "Source silent on needed information"
+- name: "gap:ambiguous-source-information"
+  color: "fbca04"
+  description: "Source ambiguous or inconsistent"
+- name: feedback-digest
+  color: "0e8a16"
+  description: "Weekly digest of feedback topics for the reviewers"
+- name: gap-report
+  color: "b60205"
+  description: "Schema gaps found in a corpus; a proposal is drafted from them"
+- name: schema-evolution
+  color: "5319e7"
+  description: "Change to specifications"
+- name: curation
+  color: "1d76db"
+  description: "Curated records"
+
+# Catalysis, kernel and governance
+- name: "domain:catalysis"
+  color: "1f6feb"
+  description: "The catalysis domain (domain/)"
+- name: core
+  color: "5319e7"
+  description: "The science kernel (core/)"
+- name: governance
+  color: "000000"
+  description: "Governance, review rules or official releases"
+- name: apply-failed
+  color: "b60205"
+  description: "A run of the apply-proposals workflow failed for a merged proposal (nothing was pushed)"

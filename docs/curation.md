@@ -1,0 +1,303 @@
+# Curation as evidence-preserving translation
+
+Procedure for people and agents: [`tools/skills/curate-source/SKILL.md`](../tools/skills/curate-source/SKILL.md),
+with its recording recipes in [`references/recipes.md`](../tools/skills/curate-source/references/recipes.md). A data
+table or a lab file is curated with [`curate-dataset`](../tools/skills/curate-dataset/SKILL.md).
+
+## Split of responsibilities
+
+| step | who | output |
+|---|---|---|
+| read the source; identify the records (samples, tests, conditions, results, claims); attach evidence | person or language-model agent following the skill | a **scale-graph document** that pins the catalysis schema version and follows its checklist |
+| check the document: validity, checklist conformance, quotes verbatim in the source text, REPORTED_IN backed by evidence | `scale graph validate` (deterministic) | validation report |
+| build the evidence index | `scale graph index` (deterministic) | a vector and term statistics per quote, for `scale graph search` and text queries |
+| review | catalysis reviewer (`scale review sample` draws a reproducible sample for a Tier 1 check) | the document's review status |
+
+The extraction model is not the authority that defines the target concepts. The catalysis schema
+defines what a completed record means, and the source determines which parts can be populated.
+
+## Commands
+
+```bash
+scale call template '{"domain": "catalysis"}'            # a minimal valid document to start from
+scale graph describe CatalyticTest --domain catalysis      # the properties and the checklist items
+scale graph validate my-source.json --source-text ex:source/1=/path/to/your/copy/of/the/article.txt
+scale graph index my-source.json                           # optional: the evidence index for search
+```
+
+Before the first source, freeze the corpus: a manifest that lists every candidate source with its `status` (included,
+or the reason it is left out, such as `not_retrieved`, `off_scope` or `after_cutoff`; a bare `excluded` needs a
+`status_reason`) and `counts` that add up to the candidates. `scale corpus check corpus/manifest.json` checks it and
+prints the corpus block a GALAXY bundle carries (`scale graph export --to galaxy --corpus …`). A corpus frozen by a
+declared rule is not a database search, so it has no PRISMA identities to report.
+
+`--source-text` enables verbatim quote checks. The text is HTML-unescaped **before** matching,
+because a leftover `&gt;` makes every quote containing `>` fail (a lesson from an earlier
+extraction pipeline). Matching ignores whitespace, case, compatibility forms and dash variants, because PDF
+and HTML extraction splits tokens ("NH 3", "h −1"). Source texts are not part of this repository
+unless their licence allows it; neither are quotes beyond the copyright cap (below).
+
+## Rights: what may be quoted and who may see it
+
+Every document committed to this repository is **public**: its graph states stewardship access `public`
+and no record overrides it (`scale evidence access`, a step of `scale check`). A missing access is not
+public: the visibility rule reads it as `institution`, so state `access: public` explicitly. Project data that is not cleared for
+publication is never committed: keep it in a data repository of its own, outside this one, until it is cleared.
+
+Quotes are **short, capped excerpts**. Each folder with research-data documents has a `rights.yaml`:
+
+```yaml
+sources:
+  ex:my/source/1:
+    class: in_copyright          # public_domain | open | restricted | in_copyright | synthetic
+    licence: all rights reserved # an SPDX id (CC-BY-4.0) or a text
+    basis: journal article, 2021; no open licence on the publisher page
+    text_chars: 48210            # optional: the characters of the source's text
+```
+
+A source without an entry counts as `in_copyright`. For `restricted` and `in_copyright` sources:
+
+| cap | |
+|---|---|
+| one quoted text (`quote`, `transcription`, `second_reading`) | at most 300 characters |
+| distinct quoted characters of one source | at most 4,000, and at most 10 % of `text_chars` when known |
+
+Read the licence from the copy you read (its first page, the publisher's article page), never from aggregator metadata
+or an open-access colour, and say where in `basis`. Rights follow the text version read (`text_version` on the
+Source). Supporting information belongs to its paper's Source.
+
+Public-domain, open and synthetic sources have no cap; their quotes are still only text found
+verbatim. Distinct characters count each quoted text once per source (equal texts under the verbatim
+normalization, and texts inside a longer quote of the same source, count once). Claim statements, names
+and notes are the curator's own words and do not copy an in-copyright source beyond a short phrase
+(a curation rule; it is not machine-checked without the text).
+
+```bash
+scale evidence report my-source.json                    # quoted characters per source against the cap
+scale evidence cap my-source.json -o public.json         # keep what fits; withhold the rest
+scale evidence rehydrate public.json --texts my-texts/ -o full.json   # restore from your own copy of the sources
+```
+
+`cap` is deterministic: for each capped source it keeps texts in a stable order (evidence of quantitative
+values first, then shorter texts first, then by record id) while they fit, and withholds the rest; nothing
+is trimmed. A **withheld** text leaves the evidence item with its source, locator, kind (and passage,
+region): the text field is removed and `note` records `quote withheld: sha256:<hex> chars:<n>` (or
+`transcription withheld: …`), the digest and length of the text under the verbatim checker's normalization,
+after `"; "` when the item had a note. The encoding is valid under every scale-graph version. `rehydrate`
+finds each withheld text by sliding a window of the recorded length over the normalized source text
+(`--texts DIR` holds `<last segment of the source id>.txt`, or `--source-text ID=FILE`) and reports what it
+cannot find; a reading of a page image is not in the text layer and cannot be restored this way.
+`scale check` runs `scale evidence report --all`: every committed document that is not a synthetic example
+(`data_status` `research_data` or `mixed`) needs a rights file, every Source a rights entry, and every capped
+source must be within its cap.
+
+## What the curator must record
+
+- **Reported value, as printed**, in a value object (`{status, value, unit}`) in the unit the source
+  used, with the printed text in `as_reported` when it differs (`"approximately 16.9 kWh"`, `"> 85"`).
+- **Basis** of normalized quantities (geometric area, catalyst mass, ECSA). If the basis is
+  inferred from a unit, say so.
+- **Missingness with a reason.** A value the source does not state is `not_reported` with a
+  `missing_reason`: `not_stated_in_source`, `not_curated` (you did not look, e.g. SI or source-data
+  files not examined), `ambiguous_in_source` (keep every variant), `withheld` or `not_extractable`.
+- **Sample identity.** A catalyst (the formulation) is not a catalyst sample (a specimen). Do not
+  assert batch or replicate identity the source does not establish; copy replicate statements.
+- **Status.** Reported, curated, derived and hypothesized records stay distinct (`origin`);
+  interpretations are Claims, proposals Hypotheses.
+- **Second-hand evidence.** Record only the source's own results. A result the source reports from
+  another work (a comparison table, a review) is second-hand: its evidence has `evidence_type:
+  ECO:0000033` and names the cited work in the locator or note (the source's own work is ECO:0000006,
+  experimental, or ECO:0007672, computational). When the cited work is in the corpus, curate the value
+  from it instead. Queries name second-hand evidence and `own_work_only` leaves it out
+  ([querying.md](querying.md)); the validator counts it; a GALAXY export leaves out a source's edge
+  that rests on it alone (`second_hand_not_exported`).
+- **Keys and qualifiers.** One key per quantity, with what the value is about in its fields: the
+  species in `target`, the basis in `basis`, the measurand in `variable`, the method in `definition`.
+  Each operating point is its own test, `PART_OF` the run; repeats are linked by `REPLICATES`. A
+  product the source does not report is `not_reported`, never 0.
+- **Personal data.** A graph of project data names people who are not authors of a source by opaque
+  ids only.
+
+## Reading runs, tables and figures
+
+- **Same run.** A value and its conditions come from the same run. A condition stated once (in
+  Methods, a caption, "unless noted") is attached to every run it covers with its own evidence item,
+  listed in the value's `evidence_ids`. When the pairing is not clear, do not pair: the value is
+  `not_reported` with `ambiguous_in_source`.
+- **Several sources on one record.** Every value of a record that cites several sources gets its
+  `evidence_ids`, the evidence items that state it: only they tie a value to its source. When
+  `scale graph filter` or an export leaves out a source the audience may not see, a value whose
+  `evidence_ids` name evidence that remains stays, cited to it; a value whose ids name only the
+  withheld source's items is withheld in its place, and so is a value without `evidence_ids` on a
+  record that lost evidence (fail closed). Give them, so that the values a source the audience may see
+  states are kept.
+- **Tables, cell by cell.** One cell is one value; the locator names the table, row and column; the
+  unit comes from the column header; footnotes are read; a number in parentheses is an uncertainty
+  when a footnote or the methods say so.
+- **Several printed forms** of one value: the most precise explicit one carries it, the others stay as
+  evidence; forms that disagree are `ambiguous_in_source`.
+- **Figures.** Calibrate each axis on at least two ticks and say whether it is linear or logarithmic.
+  A value read off a plot is `approximate` with a type-B standard uncertainty (from the reading
+  resolution or the spread of two readings); the evidence note gives the axis scale and ticks, and the
+  second reading is kept. A tool's digitization is a computational Experiment (`USES_SOFTWARE`,
+  `produced_by`). A value read off a plot is never recorded without an uncertainty.
+- **Units not printed.** A number printed without a unit has `unit: "not stated"`, its printed text in
+  `as_reported` and a note saying so, until the units proposal gives values a unit status. `not stated`
+  (in any case and spacing) is a placeholder, not a unit: a query leaves its values out as
+  `unit_unstated`, `scale graph stats` counts them under `(no unit)`, and a filter in it is a plan
+  error. Never plan on it: the numbers behind it may be in any unit.
+
+## Reading scanned pages: two readers
+
+Old scans lose values in their text layer and in OCR: table cells run together, exponents and subscripts
+vanish, digits turn into letters. Read the **page image** as well as the text, and let OCR check what you read
+(`scale pages`, [tools/scale/pagereading.py](../tools/scale/pagereading.py)). The page images and OCR words
+reproduce whole pages of the source: they stay in a local pages folder and are never committed or distributed
+(keep it outside the repository, or in a `work/` folder under `domain/examples/`, which git ignores); the
+curated document keeps the agreements and the OCR engines they were computed with.
+
+1. `scale pages render PDF --source <source id> --pages DIR` renders every page
+   (`DIR/<source key>/p<N>.png`) and stores the positioned words of the text layer and of Tesseract OCR
+   (`p<N>.words.json`, with the OCR engine that wrote them: Tesseract's version and the renderer's). Look at
+   the image of every page with a table, a figure or garbled text.
+2. For a table or a dense passage, zoom in: `scale pages region --pages DIR --source <id> <page> x0 y0 x1 y1`
+   (page fractions, origin top left) writes a 400 dpi crop and prints what OCR reads there. Read the crop
+   yourself; add `--transcription "…"` to see whether OCR reads the same numbers.
+3. A value you took from the image gets evidence with the region you read and your transcription:
+
+   ```json
+   {"source": "ex:demo/source/s1", "locator": "p. 3, Table II, row 4", "kind": "table",
+    "reading": "vision_ocr", "region": [0.08, 0.41, 0.93, 0.44],
+    "transcription": "4  Cu-Zn 1:1  300  180  5.2  12.4"}
+   ```
+
+   - The locator starts with the PDF page (`p. 3`); the region is on that page.
+   - The transcription is what is printed in the region, character for character as you read it (a table
+     row with its label, a caption, a sentence). Every number of the record must appear in one of its
+     transcriptions or quotes. A transcription counts toward the copyright cap like a quote.
+   - Where the text layer or OCR renders the passage legibly, a verbatim `quote` is still best; use both
+     when you can.
+   - A value read off a plotted curve: `kind: figure`, the region of the point or the curve, the
+     transcription of what you read ("curve A at 300 °C: about 42 %"), `qualifier: approximate` (and the
+     figure rules above).
+4. `scale pages agree DOC --pages DIR` lets the tool compare each transcription with the OCR words in its
+   region and write `agreement` (agree, partial, disagree, no_ocr), and the OCR engines it used in the
+   document's top-level `ocr_engines` (beside `graph`; not a schema property). Never write `agreement` or
+   `ocr_engines` yourself. `scale pages check DOC --pages DIR` recomputes every agreement: a difference is an
+   error when the words it reads were written by the recorded engines, and a warning when they were not
+   (another Tesseract or renderer can read a region differently; the recorded agreement stands).
+   `scale pages import` brings words from another pages folder (an older cache, another machine's).
+5. A reading OCR does not confirm needs an **independent second reading**: `scale pages pending DOC --pages DIR`
+   lists the regions with their crops (never your transcription) for a second curator, whose readings
+   (`{"<region id>": "what they read"}`, one per region) go onto the evidence with
+   `scale pages merge-second DOC SECOND.json`. The numbers must be the same (a figure point: within 5 % or
+   0.3, since plotted points are read off a grid); a value that neither OCR nor a second reader confirms is
+   left out and listed as an `extraction_error` gap. A figure reading always needs a second reading: OCR
+   cannot read a plotted point.
+6. Never read a value from memory or from another source; the image of this source is the only authority,
+   as its text is.
+7. Write numbers as printed, in the transcription and in `as_reported`: decimal commas (0,305),
+   space-grouped thousands (24 250), powers of ten (2,07 × 10⁻⁵, 4,46 .10-5), raised decimal points (5·2)
+   and fractions (2½) are all read by the check. Record the value itself (`"value": 2.07e-5`), never a
+   mantissa with the power of ten moved into the unit, and never turn a number into text to satisfy the
+   check.
+8. A number printed as a label inside a figure (a stream flow on a flow sheet, a condition written on a
+   line) is text: give it `kind: text` with the figure in the locator, so that OCR can confirm it.
+   `kind: figure` is for values read off a plot's axes.
+
+## Uncertainty
+
+| the source prints | record |
+|---|---|
+| ± of unstated meaning | `uncertainty` with `uncertainty_kind: plus_minus_unspecified` |
+| a standard deviation or standard error | `standard_deviation` or `standard_error`, with `replicates` when n is given |
+| a confidence interval | the interval (`interval_lower`/`interval_upper`) or a symmetric `uncertainty`, `confidence_interval` and `confidence_level` |
+| a Monte Carlo, bootstrap or Bayesian coverage interval | `confidence_interval` with its bounds and coverage in `confidence_level` (0.9 for 5–95 %) |
+| an expanded uncertainty | `expanded_uncertainty` with `coverage_factor` or `confidence_level` |
+| a relative uncertainty (RSD, "± 5 %" of the value) | `as_reported` and `note` until the schema has a relative form (planned: [domain/ROADMAP.md](../domain/ROADMAP.md)) |
+| an interquartile range | Q1 and Q3 in `note` until the schema has the kind (planned: [domain/ROADMAP.md](../domain/ROADMAP.md)) |
+
+`± 0` is never recorded as an uncertainty.
+
+## Statement kinds
+
+An interpretation is a Claim and a proposal a Hypothesis (links `status: hypothesized`). Once the pinned
+schema declares `statement_kind` on links (planned: [domain/ROADMAP.md](../domain/ROADMAP.md); check with `scale graph describe`), interpretive
+links (HAS_SITE, INHIBITED_BY, IDENTIFIED_AS, and CATALYZES when the source infers it) say `conclusion`
+and links taken as given say `assumption`; the GALAXY export writes it as `_statement` and, until then,
+infers it and counts the inferences.
+
+## Recipes
+
+[`tools/skills/curate-source/references/recipes.md`](../tools/skills/curate-source/references/recipes.md) says how
+to record, with what the schema already has: set, nominal and specified values; conflicts between sources; rates and
+kinetics; reaction thermochemistry; computational details; reactor, bed and catalyst-body keys; pairwise and
+metals-only ratios; commercial catalysts; balances, impurities and data quality; driving forces outside the list;
+characterization results; digitizing a figure.
+
+## Retractions, corrections and other notices
+
+A source can be retracted, withdrawn, corrected or put under an expression of concern after it was
+curated. Record what you know; never delete or rewrite the records that cite it.
+
+- **A notice is a Source of its own** (`kind: retraction_notice`, `correction`, `expression_of_concern`,
+  `withdrawal_notice`, `removal_notice` or `addendum`), linked to the source it concerns and citing itself as evidence (locator and, within the
+  source's rights, a short quote):
+  - a retraction is `RETRACTS` with `reason`, `retracted_on` and `scope` (`full`, or
+    `partial` with the retracted parts in `scope_locators`). A partial retraction can also be recorded
+    record by record: a Dataset for the retracted part (a table, a figure) `INCLUDES` the affected records,
+    and the notice `RETRACTS` that Dataset; link the Dataset `REPORTED_IN` the source it comes from (or
+    cite that source in its evidence), since only the records' evidence from that source counts as
+    retracted (without either, the tools take the one source the same notice retracts in part, and none
+    when it reaches several);
+  - any other notice is `UPDATES` with `update_type` (correction, erratum, corrigendum,
+    expression_of_concern, addendum, clarification, withdrawal, removal, new_version, new_edition),
+    `updated_on` and `reason`; it requires evidence.
+- **The publication status is derived** from these links (`retracted`, `withdrawn`,
+  `partially_retracted`, `expression_of_concern`, `corrected`, `updated`, else `current_or_unknown`); it
+  is never a property you type. Set `claim_status: retracted` only when a notice retracts the claim or its
+  source, and record that notice; the validator warns otherwise (`retracted_without_notice`).
+- **The records stay.** The validator flags what rests on retracted sources
+  (`rests_on_retracted_source`, `partially_rests_on_retracted_source`, `supported_on_retracted_sources`),
+  queries leave those rows out unless asked (`include_retracted`), and the GALAXY export marks them. A
+  retraction does not make a finding false; it removes its support.
+- **Checking.** Record `status_check` (`checked_on`, `checked_via`, `result`) on a Source or
+  Dataset only when someone actually checked for notices, saying when and by what means; never as a
+  default. No SCALE tool checks registries yet (Crossref, Retraction Watch); a check is a person's.
+- **Reinstatement.** A notice that reverses a retraction or an expression of concern is recorded with
+  `UPDATES` once the schema has `update_type: reinstatement` (it needs a kernel proposal); until then it goes in
+  the retracted source's `unmodeled` list with the notice's date and locator, and the retraction stays.
+- **The text read.** Say which version of a text was read (`text_version`: submitted or
+  accepted manuscript, version of record, …) and, where useful, `text_sha256`, `retrieved_from` and
+  `retrieved_on`, so that locators and quotes can be found again; link a preprint and its article, a
+  translation or a duplicate publication with `SAME_WORK_AS` (one work, not a replication).
+
+## When the schema is inadequate
+
+Do not add properties. Put the verbatim context in the record's `unmodeled` list; it is raised as a
+`missing_concept` gap. Validation reports undeclared properties as errors precisely to stop silent
+schema changes during extraction (see the invalid fixture
+[`unknown-property.json`](../domain/tests/fixtures/invalid/unknown-property.json)).
+
+## Gap kinds
+
+| kind | example | action |
+|---|---|---|
+| missing_concept | a property the schema does not declare; a query answered with `schema_gap` | schema change proposal (`evolve-schema`) |
+| ambiguous_source_information | a reference electrode named differently in Results and Methods | source review / author query |
+| absent_source_information | a pH the source never states | source review; no schema change |
+| extraction_error | a value not in its quote, a quote not in the source | re-extract |
+| missing_source_coverage | a query with no matching record | curate more sources |
+
+## Entity resolution
+
+Similar names can refer to different batches, and two publications can report the same
+measurement. Merges must be recorded with evidence, and uncertain matches stay separate records.
+
+- Never merge catalysts, samples or tests across sources.
+- Share a species only when its identity is unambiguous: the formula fixes it, or the InChIKey or
+  InChI matches. A different polymorph or phase is a different Material.
+- When the schema has `former_ids` (planned: [domain/ROADMAP.md](../domain/ROADMAP.md)), the surviving record of a merge lists the
+  retired ids there. Until then the merge map (retired id to survivor) is kept beside the document,
+  and the GALAXY export lists retired released ids on their survivors (`--replaced FILE` with
+  `--previous`).

@@ -1,0 +1,26 @@
+SCALE — Shared Concepts, Attributes, and Links with Evidence (scale-schema)
+Copyright 2026 SCALE contributors
+
+Licences
+  Each file's licence is given by its path in REUSE.toml; the licence texts are in LICENSES/.
+  - Code (Python, tools/, packaging and CI files): MIT (LICENSE, LICENSES/MIT.txt).
+  - Vocabulary (the science kernel and the catalysis domain), curated records, examples, documentation,
+    governance, the skills' texts, the texts of the domain-template test fixture
+    (tools/tests/fixtures/domain-template/) and the releases (releases/v*): CC-BY-4.0
+    (LICENSES/CC-BY-4.0.txt). Attribute them to "SCALE contributors" with a link to the repository
+    (CITATION.cff says how to cite).
+  See governance/licensing.md.
+
+Third-party material
+  Material not created by the SCALE contributors stays under its owners' terms. The repository holds no
+  third-party text: it cites names and identifiers only.
+
+  Names of external vocabularies and standards (OWL-Time, the Evidence & Conclusion Ontology, Gene
+  Ontology causal activity models, OPTIMADE, SSSOM and others) and identifiers of their terms are cited;
+  no text of them is reproduced. The exporter for the GALAXY knowledge-graph bundle format
+  (tools/scale/galaxy.py) is SCALE code; no GALAXY code or text is included.
+
+Project data
+  Curated project data that is not cleared for publication is never committed: every committed document
+  states access public, and `scale check` verifies it. Such data stays with its project, under the
+  project's own terms; neither licence above applies to it. See governance/licensing.md.

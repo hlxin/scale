@@ -1,0 +1,512 @@
+{
+  "nodes": [
+    {
+      "id": "ex:df-photothermal/source/paper",
+      "label": "Source",
+      "props": {
+        "name": "Invented paper",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "CO2 methanation on Ru/TiO2 under light and heat (invented)",
+        "year": 2026
+      }
+    },
+    {
+      "id": "ex:df-photothermal/species/co2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "CO2",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 1,
+          "O": 2
+        },
+        "formula": "CO2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:df-photothermal/species/h2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "H2",
+        "charge": 0,
+        "elemental_composition": {
+          "H": 2
+        },
+        "formula": "H2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:df-photothermal/species/ch4",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "CH4",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 1,
+          "H": 4
+        },
+        "formula": "CH4",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:df-photothermal/species/water",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "H2O",
+        "charge": 0,
+        "elemental_composition": {
+          "H": 2,
+          "O": 1
+        },
+        "formula": "H2O",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:df-photothermal/reaction/sabatier",
+      "label": "Reaction",
+      "props": {
+        "name": "CO2 + 4 H2 -> CH4 + 2 H2O",
+        "balance_status": "balanced",
+        "direction": "forward",
+        "equation": "CO2 + 4 H2 -> CH4 + 2 H2O",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:df-photothermal/catalyst/ru",
+      "label": "Catalyst",
+      "props": {
+        "name": "Ru/TiO2",
+        "catalyst_family": "oxide",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:df-photothermal/source/paper"
+          }
+        ],
+        "nominal_formula": "Ru/TiO2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:df-photothermal/sample/ru",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Ru/TiO2, batch 1",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:df-photothermal/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "sample_kind": "powder"
+      }
+    },
+    {
+      "id": "ex:df-photothermal/feed/co2-h2",
+      "label": "Feed",
+      "props": {
+        "name": "CO2/H2 = 1/4",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:df-photothermal/instrument/xe",
+      "label": "LightSource",
+      "props": {
+        "name": "Xe lamp",
+        "origin": "synthetic",
+        "source_kind": "xenon_lamp"
+      }
+    },
+    {
+      "id": "ex:df-photothermal/instrument/reactor",
+      "label": "Reactor",
+      "props": {
+        "name": "Flow reactor with quartz window",
+        "origin": "synthetic",
+        "reactor_kind": "flow"
+      }
+    },
+    {
+      "id": "ex:df-photothermal/variable/illumination",
+      "label": "Variable",
+      "props": {
+        "name": "Illumination",
+        "categories": [
+          "light",
+          "dark"
+        ],
+        "origin": "synthetic",
+        "scale": "nominal"
+      }
+    },
+    {
+      "id": "ex:df-photothermal/test/light",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Light + 473 K",
+        "conversion": {
+          "status": "present",
+          "target": "ex:df-photothermal/species/co2",
+          "unit": "%",
+          "value": 18
+        },
+        "driving_forces": [
+          "photo",
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 3",
+            "source": "ex:df-photothermal/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "heat_source": "light_and_external",
+        "heating_mode": "external_furnace",
+        "illuminated_area": {
+          "status": "present",
+          "unit": "cm2",
+          "value": 1.2
+        },
+        "illumination": "light",
+        "irradiance": {
+          "status": "present",
+          "unit": "W/cm2",
+          "value": 2.0
+        },
+        "light_induced_temperature_rise": {
+          "status": "present",
+          "note": "bed temperature held at 473 K by the furnace controller",
+          "unit": "K",
+          "value": 0
+        },
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "unit": "atm",
+          "value": 1
+        },
+        "selectivity": {
+          "status": "present",
+          "target": "ex:df-photothermal/species/ch4",
+          "unit": "%",
+          "value": 99
+        },
+        "space_velocity": {
+          "status": "present",
+          "unit": "mL/(g*h)",
+          "value": 12000
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 473
+        },
+        "temperature_measured_at": "catalyst_bed",
+        "test_kind": "activity"
+      }
+    },
+    {
+      "id": "ex:df-photothermal/test/dark",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Dark, 473 K (same bed temperature)",
+        "conversion": {
+          "status": "present",
+          "target": "ex:df-photothermal/species/co2",
+          "unit": "%",
+          "value": 9
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 3",
+            "source": "ex:df-photothermal/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "heating_mode": "external_furnace",
+        "illumination": "dark",
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "unit": "atm",
+          "value": 1
+        },
+        "space_velocity": {
+          "status": "present",
+          "unit": "mL/(g*h)",
+          "value": 12000
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 473
+        },
+        "temperature_measured_at": "catalyst_bed",
+        "test_kind": "control"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:df-photothermal/link/1",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:df-photothermal/reaction/sabatier",
+      "target": "ex:df-photothermal/species/co2"
+    },
+    {
+      "id": "ex:df-photothermal/link/2",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 4,
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:df-photothermal/reaction/sabatier",
+      "target": "ex:df-photothermal/species/h2"
+    },
+    {
+      "id": "ex:df-photothermal/link/3",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "role": "product"
+      },
+      "source": "ex:df-photothermal/reaction/sabatier",
+      "target": "ex:df-photothermal/species/ch4"
+    },
+    {
+      "id": "ex:df-photothermal/link/4",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 2,
+        "origin": "synthetic",
+        "role": "product"
+      },
+      "source": "ex:df-photothermal/reaction/sabatier",
+      "target": "ex:df-photothermal/species/water"
+    },
+    {
+      "id": "ex:df-photothermal/link/5",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:df-photothermal/sample/ru",
+      "target": "ex:df-photothermal/catalyst/ru"
+    },
+    {
+      "id": "ex:df-photothermal/link/6",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "fraction": {
+          "status": "present",
+          "unit": "%",
+          "value": 20
+        },
+        "fraction_basis": "mole",
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:df-photothermal/feed/co2-h2",
+      "target": "ex:df-photothermal/species/co2"
+    },
+    {
+      "id": "ex:df-photothermal/link/7",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "fraction": {
+          "status": "present",
+          "unit": "%",
+          "value": 80
+        },
+        "fraction_basis": "mole",
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:df-photothermal/feed/co2-h2",
+      "target": "ex:df-photothermal/species/h2"
+    },
+    {
+      "id": "ex:df-photothermal/link/8",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "reduced"
+      },
+      "source": "ex:df-photothermal/test/light",
+      "target": "ex:df-photothermal/sample/ru"
+    },
+    {
+      "id": "ex:df-photothermal/link/9",
+      "type": "FED_WITH",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:df-photothermal/test/light",
+      "target": "ex:df-photothermal/feed/co2-h2"
+    },
+    {
+      "id": "ex:df-photothermal/link/10",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:df-photothermal/test/light",
+      "target": "ex:df-photothermal/reaction/sabatier"
+    },
+    {
+      "id": "ex:df-photothermal/link/11",
+      "type": "IN_REACTOR",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:df-photothermal/test/light",
+      "target": "ex:df-photothermal/instrument/reactor"
+    },
+    {
+      "id": "ex:df-photothermal/link/12",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "reduced"
+      },
+      "source": "ex:df-photothermal/test/dark",
+      "target": "ex:df-photothermal/sample/ru"
+    },
+    {
+      "id": "ex:df-photothermal/link/13",
+      "type": "FED_WITH",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:df-photothermal/test/dark",
+      "target": "ex:df-photothermal/feed/co2-h2"
+    },
+    {
+      "id": "ex:df-photothermal/link/14",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:df-photothermal/test/dark",
+      "target": "ex:df-photothermal/reaction/sabatier"
+    },
+    {
+      "id": "ex:df-photothermal/link/15",
+      "type": "IN_REACTOR",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:df-photothermal/test/dark",
+      "target": "ex:df-photothermal/instrument/reactor"
+    },
+    {
+      "id": "ex:df-photothermal/link/16",
+      "type": "ILLUMINATED_BY",
+      "props": {
+        "geometry": "front",
+        "origin": "synthetic"
+      },
+      "source": "ex:df-photothermal/test/light",
+      "target": "ex:df-photothermal/instrument/xe"
+    },
+    {
+      "id": "ex:df-photothermal/link/17",
+      "type": "CONTROL_FOR",
+      "props": {
+        "control_kind": "negative",
+        "differs_in": [
+          "ex:df-photothermal/variable/illumination"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:df-photothermal/test/dark",
+      "target": "ex:df-photothermal/test/light"
+    },
+    {
+      "id": "ex:df-photothermal/catalyst/ru/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:df-photothermal/catalyst/ru",
+      "target": "ex:df-photothermal/source/paper"
+    },
+    {
+      "id": "ex:df-photothermal/sample/ru/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:df-photothermal/sample/ru",
+      "target": "ex:df-photothermal/source/paper"
+    },
+    {
+      "id": "ex:df-photothermal/test/dark/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:df-photothermal/test/dark",
+      "target": "ex:df-photothermal/source/paper"
+    },
+    {
+      "id": "ex:df-photothermal/test/light/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:df-photothermal/test/light",
+      "target": "ex:df-photothermal/source/paper"
+    }
+  ],
+  "directed": true,
+  "graph": {
+    "data_status": "synthetic_example",
+    "follows_domains": [
+      "catalysis"
+    ],
+    "graph_id": "ex:df-photothermal/graph",
+    "schema": "scale-graph",
+    "schema_version": "0.1.0",
+    "stewardship": {
+      "access": "public"
+    },
+    "title": "CO2 methanation on Ru/TiO2 under light and heat"
+  },
+  "multigraph": true
+}

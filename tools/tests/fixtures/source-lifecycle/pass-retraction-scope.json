@@ -1,0 +1,178 @@
+{
+  "nodes": [
+    {
+      "id": "ex:exmpl/lifecycle/source/paper-a",
+      "label": "Source",
+      "props": {
+        "name": "Methanol over an invented oxide (invented)",
+        "kind": "article",
+        "date_basis": "published",
+        "origin": "synthetic",
+        "published_on": "2019-03-04",
+        "title": "Methanol over an invented oxide (invented)",
+        "year": 2019
+      }
+    },
+    {
+      "id": "ex:exmpl/lifecycle/source/paper-b",
+      "label": "Source",
+      "props": {
+        "name": "Kinetics over an invented alloy (invented)",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "Kinetics over an invented alloy (invented)",
+        "year": 2020
+      }
+    },
+    {
+      "id": "ex:exmpl/lifecycle/source/retraction-notice-a",
+      "label": "Source",
+      "props": {
+        "name": "Retraction notice for the invented oxide paper (invented)",
+        "kind": "retraction_notice",
+        "origin": "synthetic",
+        "title": "Retraction notice for the invented oxide paper (invented)",
+        "year": 2021
+      }
+    },
+    {
+      "id": "ex:exmpl/lifecycle/source/retraction-notice-b",
+      "label": "Source",
+      "props": {
+        "name": "Partial retraction notice for the invented alloy paper (invented)",
+        "kind": "retraction_notice",
+        "origin": "synthetic",
+        "title": "Partial retraction notice for the invented alloy paper (invented)",
+        "year": 2022
+      }
+    },
+    {
+      "id": "ex:exmpl/lifecycle/claim/b-table-2",
+      "label": "Claim",
+      "props": {
+        "name": "Rate law from Table 2",
+        "claim_kind": "finding",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 2",
+            "note": "first order in hydrogen (invented)",
+            "source": "ex:exmpl/lifecycle/source/paper-b"
+          }
+        ],
+        "origin": "synthetic",
+        "statement": "The rate is first order in hydrogen (invented)."
+      }
+    },
+    {
+      "id": "ex:exmpl/lifecycle/dataset/b-table-2",
+      "label": "Dataset",
+      "props": {
+        "name": "Table 2 of the invented alloy paper",
+        "availability": "not_reported",
+        "data_kind": "table",
+        "origin": "synthetic"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:exmpl/lifecycle/link/retracts-a",
+      "type": "RETRACTS",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "notice, paragraph 1",
+            "note": "the article is retracted in full (invented)",
+            "source": "ex:exmpl/lifecycle/source/retraction-notice-a"
+          }
+        ],
+        "origin": "synthetic",
+        "reason": "data fabrication found by the journal (invented)",
+        "retracted_on": "2021-05-01",
+        "scope": "full"
+      },
+      "source": "ex:exmpl/lifecycle/source/retraction-notice-a",
+      "target": "ex:exmpl/lifecycle/source/paper-a"
+    },
+    {
+      "id": "ex:exmpl/lifecycle/link/retracts-b",
+      "type": "RETRACTS",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "notice, paragraph 2",
+            "note": "Table 2 and Figure 3 are retracted; the rest stands (invented)",
+            "source": "ex:exmpl/lifecycle/source/retraction-notice-b"
+          }
+        ],
+        "origin": "synthetic",
+        "reason": "an error in the rate data (invented)",
+        "retracted_on": "2022-02-01",
+        "scope": "partial",
+        "scope_locators": [
+          "Table 2",
+          "Figure 3"
+        ]
+      },
+      "source": "ex:exmpl/lifecycle/source/retraction-notice-b",
+      "target": "ex:exmpl/lifecycle/source/paper-b"
+    },
+    {
+      "id": "ex:exmpl/lifecycle/link/retracts-b-table",
+      "type": "RETRACTS",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "notice, paragraph 2",
+            "note": "Table 2 is retracted (invented)",
+            "source": "ex:exmpl/lifecycle/source/retraction-notice-b"
+          }
+        ],
+        "origin": "synthetic",
+        "reason": "the retracted part (invented)",
+        "retracted_on": "2022-02-01",
+        "scope": "full"
+      },
+      "source": "ex:exmpl/lifecycle/source/retraction-notice-b",
+      "target": "ex:exmpl/lifecycle/dataset/b-table-2"
+    },
+    {
+      "id": "ex:exmpl/lifecycle/link/includes",
+      "type": "INCLUDES",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/lifecycle/dataset/b-table-2",
+      "target": "ex:exmpl/lifecycle/claim/b-table-2"
+    },
+    {
+      "id": "ex:exmpl/lifecycle/claim/b-table-2/reported-in/paper-b",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/lifecycle/claim/b-table-2",
+      "target": "ex:exmpl/lifecycle/source/paper-b"
+    }
+  ],
+  "directed": true,
+  "graph": {
+    "data_status": "synthetic_example",
+    "graph_id": "ex:exmpl/lifecycle/fixture/retraction-scope",
+    "schema": "scale-graph",
+    "schema_version": "0.1.0",
+    "stewardship": {
+      "access": "public"
+    },
+    "title": "A full and a partial retraction, the partial one also recorded as a retracted dataset that includes the affected claim (synthetic)"
+  },
+  "multigraph": true
+}

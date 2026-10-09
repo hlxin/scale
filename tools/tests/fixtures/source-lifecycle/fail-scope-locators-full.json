@@ -1,0 +1,62 @@
+{
+  "nodes": [
+    {
+      "id": "ex:exmpl/lifecycle/source/paper-a",
+      "label": "Source",
+      "props": {
+        "name": "Methanol over an invented oxide (invented)",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "Methanol over an invented oxide (invented)",
+        "year": 2019
+      }
+    },
+    {
+      "id": "ex:exmpl/lifecycle/source/retraction-notice-a",
+      "label": "Source",
+      "props": {
+        "name": "Retraction notice (invented)",
+        "kind": "retraction_notice",
+        "origin": "synthetic",
+        "title": "Retraction notice (invented)",
+        "year": 2021
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:exmpl/lifecycle/link/retracts-a",
+      "type": "RETRACTS",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "notice",
+            "note": "the article is retracted (invented)",
+            "source": "ex:exmpl/lifecycle/source/retraction-notice-a"
+          }
+        ],
+        "origin": "synthetic",
+        "retracted_on": "2021-05-01",
+        "scope": "full",
+        "scope_locators": [
+          "Table 2"
+        ]
+      },
+      "source": "ex:exmpl/lifecycle/source/retraction-notice-a",
+      "target": "ex:exmpl/lifecycle/source/paper-a"
+    }
+  ],
+  "directed": true,
+  "graph": {
+    "data_status": "synthetic_example",
+    "graph_id": "ex:exmpl/lifecycle/fixture/scope-locators-full",
+    "schema": "scale-graph",
+    "schema_version": "0.1.0",
+    "stewardship": {
+      "access": "public"
+    },
+    "title": "A full retraction that names parts (synthetic; must fail)"
+  },
+  "multigraph": true
+}

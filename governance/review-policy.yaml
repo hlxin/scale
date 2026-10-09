@@ -1,0 +1,68 @@
+# SCALE review policy (machine-readable), explained in governance/GOVERNANCE.md. Evaluated by
+# `scale review status` and by `scale proposal apply-merged`, which the apply-proposals workflow runs when a
+# person starts it for a merged proposal and its pull request (it needs the repository secret APPLY_TOKEN).
+# GitHub pull-request reviews are the approvals. Changing this file is a governance change: it needs the
+# same approvals as every other pull request.
+policy_version: 1
+
+principles:
+  - Only people approve, by reviewing the pull request on GitHub. Agents never approve, merge or apply.
+  - Every pull request to main needs two approving reviews from reviewers other than its author, once the
+    reviewer seats are filled; until then the owner merges under the bootstrap rule (governance/GOVERNANCE.md).
+  - Schema proposals follow the same rule. After the merge, a person starts the apply-proposals workflow for
+    the proposal and its pull request (or, under the bootstrap rule, the owner applies it in a pull request);
+    applying it raises the schema's one version (kernel and catalysis together).
+  - New concepts enter as provisional. The tier of a proposal is information for the reviewers, not a
+    separate approval class.
+
+# The reviewers: one group for the kernel and the catalysis domain for now (the owner below owns every path in
+# .github/CODEOWNERS; reviewers are added there when they join). A placeholder is a seat not filled yet: it never
+# counts as an approval, and `scale check` warns until it is replaced by a person (name and GitHub handle).
+reviewers:
+  team: '@hlxin'
+  members:
+    - name: Hongliang Xin
+      github: hlxin
+      since: '2026-09-26'
+    - name: TODO-reviewer-2
+      github: TODO-reviewer-2
+      placeholder: true
+    - name: TODO-reviewer-3
+      github: TODO-reviewer-3
+      placeholder: true
+
+# What a pull request needs before it merges, and what a merged proposal needs before it is applied (by the
+# apply-proposals workflow, or by the owner under the bootstrap rule).
+# The latest review of each reviewer counts (GitHub's review state). A reviewer whose latest review
+# requests changes blocks until they approve or their review is dismissed.
+approvals:
+  required: 2
+  author_counts: false
+  placeholders_count: false
+
+# Tiers are stated in each proposal's reports (scale proposal check) so that reviewers know what kind
+# of change they review; every tier needs the same two approvals.
+tiers:
+  0:
+    name: no change in meaning
+    examples: documentation, tooling, typos
+  1:
+    name: records
+    examples: new curation, corrections of curated values
+  2:
+    name: additive or loosening
+    examples: new class, property, enum value or quantity kind; refined definitions; deprecations; mappings
+  3:
+    name: breaking or redefining
+    examples: removals, narrowed ranges, newly required properties, changed normalization basis, renames
+    needs: a migration step (scale graph migrate) and a decision record, written when the proposal is applied
+      (scale proposal apply-merged in the apply-proposals workflow, or scale proposal decide under the bootstrap rule)
+
+new_concepts_maturity: provisional
+
+# Records extracted by an agent: how many a person checks against the sources (scale review sample).
+records:
+  agent_extracted_records:
+    full_check_first_batches: 3
+    sample_fraction: 0.1
+    always_check: flagged records (warnings, extraction-error gaps, low-confidence notes)

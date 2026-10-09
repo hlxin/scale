@@ -1,0 +1,51 @@
+# The licence of every file, by path (REUSE specification 3.3; checked by `reuse lint`, a step of `scale check`).
+# Code is MIT; the vocabulary, curated records and documentation are CC-BY-4.0; third-party material stays under
+# its owners' terms (NOTICE). The texts are in LICENSES/ (LICENSE at the root is the same MIT text, for GitHub).
+# When several annotations match a file, the last one wins: general rules first, exceptions after. "*" does not
+# cross "/", "**" does. Every annotation overrides what a file might say about itself: this table is the record.
+# A contribution is licensed under the licence its path has here (CONTRIBUTING.md, governance/licensing.md).
+version = 1
+SPDX-PackageName = "scale-schema"
+SPDX-PackageSupplier = "SCALE contributors"
+SPDX-PackageDownloadLocation = "https://github.com/hlxin/scale"
+
+# 1. Default: code and everything not named below (tools/, setup.py, conftest.py, pyproject.toml, MANIFEST.in,
+#    .github/, the tests and their fixtures under tools/tests/).
+[[annotations]]
+path = "**"
+precedence = "override"
+SPDX-FileCopyrightText = "2026 SCALE contributors"
+SPDX-License-Identifier = "MIT"
+
+# 2. Vocabulary (the science kernel and the catalysis domain), curated records, examples, documentation,
+#    governance, the skills' texts, the root documents and the releases.
+[[annotations]]
+path = [
+  "core/**", "domain/**", "docs/**", "governance/**", "tools/skills/**",
+  "README.md", "CONTRIBUTING.md", "PRINCIPLES.md", "CHANGELOG.md", "AGENTS.md", "CODE_OF_CONDUCT.md", "NOTICE",
+  "CITATION.cff", "scale-release.yaml", "releases/v*/**",
+]
+precedence = "override"
+SPDX-FileCopyrightText = "2026 SCALE contributors"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+# 3. Code inside those trees stays MIT (catalysis tests, example tools, figure and example builders).
+[[annotations]]
+path = ["core/**/*.py", "domain/**/*.py", "docs/**/*.py", "governance/**/*.py", "tools/skills/**/*.py"]
+precedence = "override"
+SPDX-FileCopyrightText = "2026 SCALE contributors"
+SPDX-License-Identifier = "MIT"
+
+# 4. The domain template, a test fixture: its texts are CC-BY-4.0, as the catalysis domain's in domain/, and its code
+#    stays MIT.
+[[annotations]]
+path = "tools/tests/fixtures/domain-template/**"
+precedence = "override"
+SPDX-FileCopyrightText = "2026 SCALE contributors"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
+path = "tools/tests/fixtures/domain-template/**/*.py"
+precedence = "override"
+SPDX-FileCopyrightText = "2026 SCALE contributors"
+SPDX-License-Identifier = "MIT"

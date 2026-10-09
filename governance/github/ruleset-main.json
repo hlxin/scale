@@ -1,0 +1,75 @@
+{
+  "name": "main",
+  "bypass_actors": [
+    {
+      "actor_id": 5,
+      "actor_type": "RepositoryRole",
+      "bypass_mode": "always"
+    }
+  ],
+  "conditions": {
+    "ref_name": {
+      "exclude": [],
+      "include": [
+        "~DEFAULT_BRANCH"
+      ]
+    }
+  },
+  "enforcement": "active",
+  "rules": [
+    {
+      "type": "deletion"
+    },
+    {
+      "type": "non_fast_forward"
+    },
+    {
+      "type": "pull_request",
+      "parameters": {
+        "dismiss_stale_reviews_on_push": true,
+        "require_code_owner_review": true,
+        "require_last_push_approval": true,
+        "required_approving_review_count": 2,
+        "required_review_thread_resolution": false
+      }
+    },
+    {
+      "type": "required_status_checks",
+      "parameters": {
+        "do_not_enforce_on_create": false,
+        "required_status_checks": [
+          {
+            "context": "test (3.10)",
+            "integration_id": 15368
+          },
+          {
+            "context": "test (3.11)",
+            "integration_id": 15368
+          },
+          {
+            "context": "test (3.12)",
+            "integration_id": 15368
+          },
+          {
+            "context": "test (3.13)",
+            "integration_id": 15368
+          },
+          {
+            "context": "package",
+            "integration_id": 15368
+          },
+          {
+            "context": "specification-changes",
+            "integration_id": 15368
+          },
+          {
+            "context": "proposal-check",
+            "integration_id": 15368
+          }
+        ],
+        "strict_required_status_checks_policy": false
+      }
+    }
+  ],
+  "target": "branch"
+}

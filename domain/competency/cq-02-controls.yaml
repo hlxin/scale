@@ -1,0 +1,42 @@
+# A competency question of the catalysis domain (tools/scale/competency.py; `scale domains cq catalysis`).
+# It runs on public synthetic examples, so anyone can rerun it and see the same answer.
+id: CQ-02
+question: Which catalytic tests have a control experiment, what kind of control is it, and in which variable does
+  it differ from the test?
+description: |
+  A claim that light, a plasma or a pulsed potential does something rests on its control: a dark run at the
+  same temperature, the catalyst without plasma, the steady potential. The control is a link between two
+  experiments that names its kind and the variable that differs; the answer lists both experiments.
+documents:
+  - examples/scale-graph/driving-force-examples/electro-dynamic.json
+  - examples/scale-graph/driving-force-examples/electrophoto.json
+  - examples/scale-graph/driving-force-examples/electrothermo.json
+  - examples/scale-graph/driving-force-examples/photo.json
+  - examples/scale-graph/driving-force-examples/photoelectro.json
+  - examples/scale-graph/driving-force-examples/photothermo.json
+  - examples/scale-graph/driving-force-examples/photothermo-dynamic.json
+  - examples/scale-graph/driving-force-examples/plasma.json
+plan:
+  question: Which catalytic tests have a control experiment, of what kind, differing in what?
+  match:
+    label: CatalyticTest
+    as: test
+  steps:
+    - from: test
+      edge: CONTROL_FOR
+      direction: in
+      to: Experiment
+      as: control
+      edge_as: control_for
+  return:
+    - test.name
+    - control.name
+    - control_for.control_kind
+    - control_for.differs_in
+expect:
+  status: answered
+  min_rows: 10
+  values:
+    control_for.control_kind:
+      - negative
+      - baseline

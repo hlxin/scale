@@ -1,0 +1,1159 @@
+{
+  "nodes": [
+    {
+      "id": "ex:sk-a/source/lab-a",
+      "label": "Source",
+      "props": {
+        "name": "Lab A paper (invented)",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "Zn loading and methanol activity (invented)",
+        "year": 2021
+      }
+    },
+    {
+      "id": "ex:sk-a/source/lab-b",
+      "label": "Source",
+      "props": {
+        "name": "Lab B paper (invented)",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "Reproducing the Zn effect (invented)",
+        "year": 2023
+      }
+    },
+    {
+      "id": "ex:sk-a/org/lab-a",
+      "label": "Institution",
+      "props": {
+        "name": "Lab A",
+        "institution_kind": "university",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:sk-a/org/lab-b",
+      "label": "Institution",
+      "props": {
+        "name": "Lab B",
+        "institution_kind": "government_laboratory",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:sk-a/object/methanol-synthesis",
+      "label": "ObjectOfStudy",
+      "props": {
+        "name": "Methanol synthesis over Cu–Zn catalysts",
+        "generality": "kind",
+        "object_kind": "phenomenon",
+        "origin": "synthetic",
+        "scope": "CO/CO2 hydrogenation at 523 K"
+      }
+    },
+    {
+      "id": "ex:sk-a/question/zn",
+      "label": "Question",
+      "props": {
+        "name": "Zn and activity",
+        "origin": "synthetic",
+        "statement": "Does Zn at Cu–Zn interfaces set the methanol-synthesis activity of Cu catalysts?"
+      }
+    },
+    {
+      "id": "ex:sk-a/hypothesis/interface",
+      "label": "Hypothesis",
+      "props": {
+        "name": "Interface sites",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Introduction",
+            "source": "ex:sk-a/source/lab-a"
+          }
+        ],
+        "hypothesis_kind": "mechanistic",
+        "hypothesis_status": "supported",
+        "origin": "synthetic",
+        "proposed_at": "2019",
+        "refuted_if": "The space-time yield does not rise with Zn loading at constant Cu surface area.",
+        "statement": "Cu–Zn interface sites are the active sites; the rate scales with interface area.",
+        "statistical_role": "not_applicable"
+      }
+    },
+    {
+      "id": "ex:sk-a/hypothesis/dispersion",
+      "label": "Hypothesis",
+      "props": {
+        "name": "Dispersion only",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Discussion",
+            "source": "ex:sk-a/source/lab-a"
+          }
+        ],
+        "hypothesis_kind": "competing",
+        "hypothesis_status": "proposed",
+        "origin": "synthetic",
+        "statement": "Zn only raises Cu dispersion; interface sites play no special role.",
+        "statistical_role": "not_applicable"
+      }
+    },
+    {
+      "id": "ex:sk-a/variable/zn",
+      "label": "Variable",
+      "props": {
+        "name": "Zn fraction",
+        "origin": "synthetic",
+        "quantity_kind": "mole_fraction",
+        "scale": "quantitative",
+        "unit": "mol%"
+      }
+    },
+    {
+      "id": "ex:sk-a/variable/sty",
+      "label": "Variable",
+      "props": {
+        "name": "Space-time yield",
+        "origin": "synthetic",
+        "quantity_kind": "space_time_yield",
+        "scale": "quantitative",
+        "unit": "g/(kg*h)"
+      }
+    },
+    {
+      "id": "ex:sk-a/variable/t",
+      "label": "Variable",
+      "props": {
+        "name": "Temperature",
+        "origin": "synthetic",
+        "quantity_kind": "temperature",
+        "scale": "quantitative",
+        "unit": "K"
+      }
+    },
+    {
+      "id": "ex:sk-a/prediction/rise",
+      "label": "Prediction",
+      "props": {
+        "name": "STY rises with Zn",
+        "direction": "increase",
+        "origin": "synthetic",
+        "proposed_at": "2020-01",
+        "statement": "The space-time yield rises with Zn loading up to about 30 mol%.",
+        "variable": "ex:sk-a/variable/sty"
+      }
+    },
+    {
+      "id": "ex:sk-a/design/series",
+      "label": "Design",
+      "props": {
+        "name": "Zn series",
+        "assignment_method": "systematic",
+        "design_kind": "one_factor",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Experimental, Table 1",
+            "source": "ex:sk-a/source/lab-a"
+          }
+        ],
+        "origin": "synthetic",
+        "planned_replicates": 2
+      }
+    },
+    {
+      "id": "ex:sk-a/protocol/coprecipitation",
+      "label": "Protocol",
+      "props": {
+        "name": "Co-precipitation",
+        "origin": "synthetic",
+        "protocol_kind": "synthesis",
+        "steps": [
+          "co-precipitate nitrates with Na2CO3 at pH 7",
+          "age 1 h",
+          "calcine at 623 K"
+        ]
+      }
+    },
+    {
+      "id": "ex:sk-a/object/catalyst-zn0",
+      "label": "ObjectOfStudy",
+      "props": {
+        "name": "Catalyst batch, 0 mol% Zn",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:sk-a/source/lab-a"
+          }
+        ],
+        "generality": "particular",
+        "object_kind": "thing",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:sk-a/procedure/prep-zn0",
+      "label": "Procedure",
+      "props": {
+        "name": "Preparation, 0 mol% Zn",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental",
+            "source": "ex:sk-a/source/lab-a"
+          }
+        ],
+        "method": "co-precipitation",
+        "origin": "synthetic",
+        "performed_on": "2021-02",
+        "procedure_status": "completed"
+      }
+    },
+    {
+      "id": "ex:sk-a/experiment/zn0",
+      "label": "Experiment",
+      "props": {
+        "name": "Test at 0 mol% Zn",
+        "approach": "hypothesis_driven",
+        "conditions": {
+          "temperature": {
+            "status": "present",
+            "unit": "K",
+            "value": 523,
+            "variable": "ex:sk-a/variable/t"
+          }
+        },
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:sk-a/source/lab-a"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "goal": "confirm",
+        "manipulation": "interventional",
+        "origin": "synthetic",
+        "performed_on": "2021-03",
+        "results": {
+          "space_time_yield": {
+            "status": "present",
+            "replicates": 2,
+            "uncertainty": 0.02,
+            "uncertainty_evaluation": "type_a",
+            "uncertainty_kind": "standard_deviation",
+            "unit": "g/(kg*h)",
+            "value": 0.21,
+            "variable": "ex:sk-a/variable/sty"
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:sk-a/object/catalyst-zn10",
+      "label": "ObjectOfStudy",
+      "props": {
+        "name": "Catalyst batch, 10 mol% Zn",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:sk-a/source/lab-a"
+          }
+        ],
+        "generality": "particular",
+        "object_kind": "thing",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:sk-a/procedure/prep-zn10",
+      "label": "Procedure",
+      "props": {
+        "name": "Preparation, 10 mol% Zn",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental",
+            "source": "ex:sk-a/source/lab-a"
+          }
+        ],
+        "method": "co-precipitation",
+        "origin": "synthetic",
+        "performed_on": "2021-02",
+        "procedure_status": "completed"
+      }
+    },
+    {
+      "id": "ex:sk-a/experiment/zn10",
+      "label": "Experiment",
+      "props": {
+        "name": "Test at 10 mol% Zn",
+        "approach": "hypothesis_driven",
+        "conditions": {
+          "temperature": {
+            "status": "present",
+            "unit": "K",
+            "value": 523,
+            "variable": "ex:sk-a/variable/t"
+          }
+        },
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:sk-a/source/lab-a"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "goal": "confirm",
+        "manipulation": "interventional",
+        "origin": "synthetic",
+        "performed_on": "2021-03",
+        "results": {
+          "space_time_yield": {
+            "status": "present",
+            "replicates": 2,
+            "uncertainty": 0.02,
+            "uncertainty_evaluation": "type_a",
+            "uncertainty_kind": "standard_deviation",
+            "unit": "g/(kg*h)",
+            "value": 0.48,
+            "variable": "ex:sk-a/variable/sty"
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:sk-a/object/catalyst-zn30",
+      "label": "ObjectOfStudy",
+      "props": {
+        "name": "Catalyst batch, 30 mol% Zn",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:sk-a/source/lab-a"
+          }
+        ],
+        "generality": "particular",
+        "object_kind": "thing",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:sk-a/procedure/prep-zn30",
+      "label": "Procedure",
+      "props": {
+        "name": "Preparation, 30 mol% Zn",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental",
+            "source": "ex:sk-a/source/lab-a"
+          }
+        ],
+        "method": "co-precipitation",
+        "origin": "synthetic",
+        "performed_on": "2021-02",
+        "procedure_status": "completed"
+      }
+    },
+    {
+      "id": "ex:sk-a/experiment/zn30",
+      "label": "Experiment",
+      "props": {
+        "name": "Test at 30 mol% Zn",
+        "approach": "hypothesis_driven",
+        "conditions": {
+          "temperature": {
+            "status": "present",
+            "unit": "K",
+            "value": 523,
+            "variable": "ex:sk-a/variable/t"
+          }
+        },
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:sk-a/source/lab-a"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "goal": "confirm",
+        "manipulation": "interventional",
+        "origin": "synthetic",
+        "performed_on": "2021-03",
+        "results": {
+          "space_time_yield": {
+            "status": "present",
+            "replicates": 2,
+            "uncertainty": 0.02,
+            "uncertainty_evaluation": "type_a",
+            "uncertainty_kind": "standard_deviation",
+            "unit": "g/(kg*h)",
+            "value": 0.66,
+            "variable": "ex:sk-a/variable/sty"
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:sk-a/claim/rise",
+      "label": "Claim",
+      "props": {
+        "name": "Yield rises with Zn",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:sk-a/source/lab-a"
+          }
+        ],
+        "inference_type": "interventional",
+        "origin": "synthetic",
+        "statement": "The space-time yield rose threefold from 0 to 30 mol% Zn at 523 K."
+      }
+    },
+    {
+      "id": "ex:sk-a/experiment/lab-b-zn30",
+      "label": "Experiment",
+      "props": {
+        "name": "Lab B test at 30 mol% Zn",
+        "approach": "hypothesis_driven",
+        "conditions": {
+          "temperature": {
+            "status": "present",
+            "unit": "K",
+            "value": 523,
+            "variable": "ex:sk-a/variable/t"
+          }
+        },
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:sk-a/source/lab-b"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "goal": "confirm",
+        "manipulation": "interventional",
+        "origin": "synthetic",
+        "performed_on": "2023-05",
+        "results": {
+          "space_time_yield": {
+            "status": "present",
+            "replicates": 3,
+            "uncertainty": 0.03,
+            "uncertainty_kind": "standard_deviation",
+            "unit": "g/(kg*h)",
+            "value": 0.62,
+            "variable": "ex:sk-a/variable/sty"
+          }
+        }
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:sk-a/link/1",
+      "type": "COMPETES_WITH",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-a/hypothesis/interface",
+      "target": "ex:sk-a/hypothesis/dispersion"
+    },
+    {
+      "id": "ex:sk-a/link/2",
+      "type": "ABOUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-a/hypothesis/interface",
+      "target": "ex:sk-a/object/methanol-synthesis"
+    },
+    {
+      "id": "ex:sk-a/link/3",
+      "type": "ABOUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-a/question/zn",
+      "target": "ex:sk-a/object/methanol-synthesis"
+    },
+    {
+      "id": "ex:sk-a/link/4",
+      "type": "ADDRESSES",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-a/hypothesis/interface",
+      "target": "ex:sk-a/question/zn"
+    },
+    {
+      "id": "ex:sk-a/link/5",
+      "type": "DERIVES",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-a/hypothesis/interface",
+      "target": "ex:sk-a/prediction/rise"
+    },
+    {
+      "id": "ex:sk-a/link/6",
+      "type": "ADDRESSES",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-a/design/series",
+      "target": "ex:sk-a/question/zn"
+    },
+    {
+      "id": "ex:sk-a/link/7",
+      "type": "AIMS_TO_TEST",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-a/design/series",
+      "target": "ex:sk-a/hypothesis/interface"
+    },
+    {
+      "id": "ex:sk-a/link/8",
+      "type": "HAS_VARIABLE",
+      "props": {
+        "levels": [
+          {
+            "status": "present",
+            "unit": "mol%",
+            "value": 0
+          },
+          {
+            "status": "present",
+            "unit": "mol%",
+            "value": 10
+          },
+          {
+            "status": "present",
+            "unit": "mol%",
+            "value": 30
+          }
+        ],
+        "origin": "synthetic",
+        "role": "factor"
+      },
+      "source": "ex:sk-a/design/series",
+      "target": "ex:sk-a/variable/zn"
+    },
+    {
+      "id": "ex:sk-a/link/9",
+      "type": "HAS_VARIABLE",
+      "props": {
+        "origin": "synthetic",
+        "role": "target"
+      },
+      "source": "ex:sk-a/design/series",
+      "target": "ex:sk-a/variable/sty"
+    },
+    {
+      "id": "ex:sk-a/link/10",
+      "type": "HAS_VARIABLE",
+      "props": {
+        "levels": [
+          {
+            "status": "present",
+            "unit": "K",
+            "value": 523
+          }
+        ],
+        "origin": "synthetic",
+        "role": "controlled"
+      },
+      "source": "ex:sk-a/design/series",
+      "target": "ex:sk-a/variable/t"
+    },
+    {
+      "id": "ex:sk-a/link/11",
+      "type": "FOLLOWS_PROTOCOL",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-a/procedure/prep-zn0",
+      "target": "ex:sk-a/protocol/coprecipitation"
+    },
+    {
+      "id": "ex:sk-a/link/12",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-a/procedure/prep-zn0",
+      "target": "ex:sk-a/object/catalyst-zn0"
+    },
+    {
+      "id": "ex:sk-a/link/13",
+      "type": "PART_OF_DESIGN",
+      "props": {
+        "arm": "control",
+        "experimental_unit": "ex:sk-a/object/catalyst-zn0",
+        "origin": "synthetic",
+        "run_order": 1
+      },
+      "source": "ex:sk-a/experiment/zn0",
+      "target": "ex:sk-a/design/series"
+    },
+    {
+      "id": "ex:sk-a/link/14",
+      "type": "HAS_VARIABLE",
+      "props": {
+        "level": {
+          "status": "present",
+          "unit": "mol%",
+          "value": 0
+        },
+        "origin": "synthetic",
+        "role": "factor"
+      },
+      "source": "ex:sk-a/experiment/zn0",
+      "target": "ex:sk-a/variable/zn"
+    },
+    {
+      "id": "ex:sk-a/link/15",
+      "type": "EXAMINES",
+      "props": {
+        "origin": "synthetic",
+        "role": "catalyst",
+        "state": "reduced"
+      },
+      "source": "ex:sk-a/experiment/zn0",
+      "target": "ex:sk-a/object/catalyst-zn0"
+    },
+    {
+      "id": "ex:sk-a/link/16",
+      "type": "EXAMINES",
+      "props": {
+        "origin": "synthetic",
+        "role": "reaction studied"
+      },
+      "source": "ex:sk-a/experiment/zn0",
+      "target": "ex:sk-a/object/methanol-synthesis"
+    },
+    {
+      "id": "ex:sk-a/link/17",
+      "type": "PERFORMED_BY",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-a/experiment/zn0",
+      "target": "ex:sk-a/org/lab-a"
+    },
+    {
+      "id": "ex:sk-a/link/18",
+      "type": "AIMS_TO_TEST",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-a/experiment/zn0",
+      "target": "ex:sk-a/hypothesis/interface"
+    },
+    {
+      "id": "ex:sk-a/link/19",
+      "type": "FOLLOWS_PROTOCOL",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-a/procedure/prep-zn10",
+      "target": "ex:sk-a/protocol/coprecipitation"
+    },
+    {
+      "id": "ex:sk-a/link/20",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-a/procedure/prep-zn10",
+      "target": "ex:sk-a/object/catalyst-zn10"
+    },
+    {
+      "id": "ex:sk-a/link/21",
+      "type": "PART_OF_DESIGN",
+      "props": {
+        "arm": "treatment",
+        "experimental_unit": "ex:sk-a/object/catalyst-zn10",
+        "origin": "synthetic",
+        "run_order": 2
+      },
+      "source": "ex:sk-a/experiment/zn10",
+      "target": "ex:sk-a/design/series"
+    },
+    {
+      "id": "ex:sk-a/link/22",
+      "type": "HAS_VARIABLE",
+      "props": {
+        "level": {
+          "status": "present",
+          "unit": "mol%",
+          "value": 10
+        },
+        "origin": "synthetic",
+        "role": "factor"
+      },
+      "source": "ex:sk-a/experiment/zn10",
+      "target": "ex:sk-a/variable/zn"
+    },
+    {
+      "id": "ex:sk-a/link/23",
+      "type": "EXAMINES",
+      "props": {
+        "origin": "synthetic",
+        "role": "catalyst",
+        "state": "reduced"
+      },
+      "source": "ex:sk-a/experiment/zn10",
+      "target": "ex:sk-a/object/catalyst-zn10"
+    },
+    {
+      "id": "ex:sk-a/link/24",
+      "type": "EXAMINES",
+      "props": {
+        "origin": "synthetic",
+        "role": "reaction studied"
+      },
+      "source": "ex:sk-a/experiment/zn10",
+      "target": "ex:sk-a/object/methanol-synthesis"
+    },
+    {
+      "id": "ex:sk-a/link/25",
+      "type": "PERFORMED_BY",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-a/experiment/zn10",
+      "target": "ex:sk-a/org/lab-a"
+    },
+    {
+      "id": "ex:sk-a/link/26",
+      "type": "AIMS_TO_TEST",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-a/experiment/zn10",
+      "target": "ex:sk-a/hypothesis/interface"
+    },
+    {
+      "id": "ex:sk-a/link/27",
+      "type": "FOLLOWS_PROTOCOL",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-a/procedure/prep-zn30",
+      "target": "ex:sk-a/protocol/coprecipitation"
+    },
+    {
+      "id": "ex:sk-a/link/28",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-a/procedure/prep-zn30",
+      "target": "ex:sk-a/object/catalyst-zn30"
+    },
+    {
+      "id": "ex:sk-a/link/29",
+      "type": "PART_OF_DESIGN",
+      "props": {
+        "arm": "treatment",
+        "experimental_unit": "ex:sk-a/object/catalyst-zn30",
+        "origin": "synthetic",
+        "run_order": 3
+      },
+      "source": "ex:sk-a/experiment/zn30",
+      "target": "ex:sk-a/design/series"
+    },
+    {
+      "id": "ex:sk-a/link/30",
+      "type": "HAS_VARIABLE",
+      "props": {
+        "level": {
+          "status": "present",
+          "unit": "mol%",
+          "value": 30
+        },
+        "origin": "synthetic",
+        "role": "factor"
+      },
+      "source": "ex:sk-a/experiment/zn30",
+      "target": "ex:sk-a/variable/zn"
+    },
+    {
+      "id": "ex:sk-a/link/31",
+      "type": "EXAMINES",
+      "props": {
+        "origin": "synthetic",
+        "role": "catalyst",
+        "state": "reduced"
+      },
+      "source": "ex:sk-a/experiment/zn30",
+      "target": "ex:sk-a/object/catalyst-zn30"
+    },
+    {
+      "id": "ex:sk-a/link/32",
+      "type": "EXAMINES",
+      "props": {
+        "origin": "synthetic",
+        "role": "reaction studied"
+      },
+      "source": "ex:sk-a/experiment/zn30",
+      "target": "ex:sk-a/object/methanol-synthesis"
+    },
+    {
+      "id": "ex:sk-a/link/33",
+      "type": "PERFORMED_BY",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-a/experiment/zn30",
+      "target": "ex:sk-a/org/lab-a"
+    },
+    {
+      "id": "ex:sk-a/link/34",
+      "type": "AIMS_TO_TEST",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-a/experiment/zn30",
+      "target": "ex:sk-a/hypothesis/interface"
+    },
+    {
+      "id": "ex:sk-a/link/35",
+      "type": "CONTROL_FOR",
+      "props": {
+        "control_kind": "baseline",
+        "differs_in": [
+          "ex:sk-a/variable/zn"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-a/experiment/zn0",
+      "target": "ex:sk-a/experiment/zn30"
+    },
+    {
+      "id": "ex:sk-a/link/36",
+      "type": "TESTS",
+      "props": {
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:sk-a/source/lab-a"
+          }
+        ],
+        "origin": "synthetic",
+        "outcome": "supports",
+        "result_refs": [
+          {
+            "path": "/results/space_time_yield",
+            "record": "ex:sk-a/experiment/zn30"
+          },
+          {
+            "path": "/results/space_time_yield",
+            "record": "ex:sk-a/experiment/zn0"
+          }
+        ],
+        "statistical_decision": "not_applicable",
+        "warrant": "The yield triples from 0 to 30 mol% Zn with temperature held at 523 K."
+      },
+      "source": "ex:sk-a/experiment/zn30",
+      "target": "ex:sk-a/prediction/rise"
+    },
+    {
+      "id": "ex:sk-a/link/37",
+      "type": "TESTS",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Discussion",
+            "source": "ex:sk-a/source/lab-a"
+          }
+        ],
+        "origin": "synthetic",
+        "outcome": "supports",
+        "result_refs": [
+          {
+            "path": "/results/space_time_yield",
+            "record": "ex:sk-a/experiment/zn30"
+          }
+        ],
+        "warrant": "The predicted rise is observed."
+      },
+      "source": "ex:sk-a/experiment/zn30",
+      "target": "ex:sk-a/hypothesis/interface"
+    },
+    {
+      "id": "ex:sk-a/link/38",
+      "type": "CONCLUDES",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-a/experiment/zn30",
+      "target": "ex:sk-a/claim/rise"
+    },
+    {
+      "id": "ex:sk-a/link/39",
+      "type": "ABOUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-a/claim/rise",
+      "target": "ex:sk-a/hypothesis/interface"
+    },
+    {
+      "id": "ex:sk-a/link/40",
+      "type": "PERFORMED_BY",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-a/experiment/lab-b-zn30",
+      "target": "ex:sk-a/org/lab-b"
+    },
+    {
+      "id": "ex:sk-a/link/41",
+      "type": "TESTS",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Results",
+            "source": "ex:sk-a/source/lab-b"
+          }
+        ],
+        "origin": "synthetic",
+        "outcome": "supports",
+        "result_refs": [
+          {
+            "path": "/results/space_time_yield",
+            "record": "ex:sk-a/experiment/lab-b-zn30"
+          }
+        ]
+      },
+      "source": "ex:sk-a/experiment/lab-b-zn30",
+      "target": "ex:sk-a/hypothesis/interface"
+    },
+    {
+      "id": "ex:sk-a/link/42",
+      "type": "REPLICATES",
+      "props": {
+        "agreement": "agrees",
+        "changed": [
+          "sample",
+          "team",
+          "site"
+        ],
+        "criterion": "Within two standard deviations.",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Results",
+            "source": "ex:sk-a/source/lab-b"
+          }
+        ],
+        "level": "reproduce",
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-a/experiment/lab-b-zn30",
+      "target": "ex:sk-a/experiment/zn30"
+    },
+    {
+      "id": "ex:sk-a/claim/rise/reported-in/lab-a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-a/claim/rise",
+      "target": "ex:sk-a/source/lab-a"
+    },
+    {
+      "id": "ex:sk-a/design/series/reported-in/lab-a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-a/design/series",
+      "target": "ex:sk-a/source/lab-a"
+    },
+    {
+      "id": "ex:sk-a/experiment/lab-b-zn30/reported-in/lab-b",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-a/experiment/lab-b-zn30",
+      "target": "ex:sk-a/source/lab-b"
+    },
+    {
+      "id": "ex:sk-a/experiment/zn0/reported-in/lab-a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-a/experiment/zn0",
+      "target": "ex:sk-a/source/lab-a"
+    },
+    {
+      "id": "ex:sk-a/experiment/zn10/reported-in/lab-a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-a/experiment/zn10",
+      "target": "ex:sk-a/source/lab-a"
+    },
+    {
+      "id": "ex:sk-a/experiment/zn30/reported-in/lab-a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-a/experiment/zn30",
+      "target": "ex:sk-a/source/lab-a"
+    },
+    {
+      "id": "ex:sk-a/hypothesis/dispersion/reported-in/lab-a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Discussion"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-a/hypothesis/dispersion",
+      "target": "ex:sk-a/source/lab-a"
+    },
+    {
+      "id": "ex:sk-a/hypothesis/interface/reported-in/lab-a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Introduction"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-a/hypothesis/interface",
+      "target": "ex:sk-a/source/lab-a"
+    },
+    {
+      "id": "ex:sk-a/object/catalyst-zn0/reported-in/lab-a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-a/object/catalyst-zn0",
+      "target": "ex:sk-a/source/lab-a"
+    },
+    {
+      "id": "ex:sk-a/object/catalyst-zn10/reported-in/lab-a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-a/object/catalyst-zn10",
+      "target": "ex:sk-a/source/lab-a"
+    },
+    {
+      "id": "ex:sk-a/object/catalyst-zn30/reported-in/lab-a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-a/object/catalyst-zn30",
+      "target": "ex:sk-a/source/lab-a"
+    },
+    {
+      "id": "ex:sk-a/procedure/prep-zn0/reported-in/lab-a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-a/procedure/prep-zn0",
+      "target": "ex:sk-a/source/lab-a"
+    },
+    {
+      "id": "ex:sk-a/procedure/prep-zn10/reported-in/lab-a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-a/procedure/prep-zn10",
+      "target": "ex:sk-a/source/lab-a"
+    },
+    {
+      "id": "ex:sk-a/procedure/prep-zn30/reported-in/lab-a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:sk-a/procedure/prep-zn30",
+      "target": "ex:sk-a/source/lab-a"
+    }
+  ],
+  "directed": true,
+  "graph": {
+    "data_status": "synthetic_example",
+    "graph_id": "ex:sk-a/graph",
+    "schema": "scale-graph",
+    "schema_version": "0.1.0",
+    "stewardship": {
+      "access": "public"
+    },
+    "title": "Synthetic case (a): Zn-loading series with a control, a tested hypothesis and an independent reproduction"
+  },
+  "multigraph": true
+}

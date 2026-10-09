@@ -1,0 +1,33 @@
+# Catalyst-state and context fixtures (README.md). Each pass document is valid; each fail document is rejected
+# with exactly one error, whose message contains `error`; `reason` says why the schema must reject it.
+# test_catalyst_states.py reads this index.
+pass:
+  - file: pass-states.json
+    covers: catalyst states, transitions, their triggers and drivers, pathway effects and predictions
+  - file: pass-contexts.json
+    covers: state components, molecular detection, site-scoped effects and trigger delays
+fail:
+  - file: fail-transition-kind.json
+    error: "transition_kind: 'melting' is not one of"
+    reason: A transition's kind comes from the declared list; another kind is other with the source's word in the name.
+  - file: fail-pathway-from-species.json
+    error: AFFECTS_PATHWAY source must be
+    reason: A species acts on a pathway through a state or a transition (or as an inhibitor, INHIBITED_BY), not directly.
+  - file: fail-phase-location.json
+    error: "location: 'core' is not one of"
+    reason: A phase's location comes from the declared list.
+  - file: fail-prediction-from-test.json
+    error: PREDICTS source must be
+    reason: A measurement observes; only a computation or an analysis predicts.
+  - file: fail-component-host.json
+    error: "bound_to: reference"
+    reason: bound_to names the material or site a component is bound to, not a reaction.
+  - file: fail-coverage-unit.json
+    error: "coverage: a present number needs a unit"
+    reason: A numerical coverage carries its unit (1 when dimensionless).
+  - file: fail-detection-target.json
+    error: DETECTS target must be
+    reason: A measurement detects a material or a species, not an action.
+  - file: fail-delay-unit.json
+    error: "onset_delay: a present number needs a unit"
+    reason: A numerical onset delay carries its reported unit.

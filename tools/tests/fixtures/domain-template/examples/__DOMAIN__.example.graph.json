@@ -1,0 +1,76 @@
+{
+  "nodes": [
+    {
+      "id": "ex:__DOMAIN__/source/invented",
+      "label": "Source",
+      "props": {
+        "name": "Invented source",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "An invented article for the __TITLE__ starter example",
+        "year": 2026
+      }
+    },
+    {
+      "id": "ex:__DOMAIN__/object/studied",
+      "label": "ObjectOfStudy",
+      "props": {
+        "name": "What the __TITLE__ domain studies",
+        "generality": "kind",
+        "object_kind": "phenomenon",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:__DOMAIN__/question/first",
+      "label": "Question",
+      "props": {
+        "name": "A first question",
+        "evidence": [
+          {
+            "id": "intro",
+            "kind": "text",
+            "locator": "Introduction",
+            "quote": "an invented sentence that states the question",
+            "source": "ex:__DOMAIN__/source/invented"
+          }
+        ],
+        "origin": "synthetic",
+        "question_status": "open",
+        "statement": "Which question should the __TITLE__ domain be able to answer first?"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:__DOMAIN__/link/question-about-object",
+      "type": "ABOUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:__DOMAIN__/question/first",
+      "target": "ex:__DOMAIN__/object/studied"
+    },
+    {
+      "id": "ex:__DOMAIN__/question/first/reported-in/invented",
+      "type": "REPORTED_IN",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:__DOMAIN__/question/first",
+      "target": "ex:__DOMAIN__/source/invented"
+    }
+  ],
+  "directed": true,
+  "graph": {
+    "data_status": "synthetic_example",
+    "graph_id": "ex:__DOMAIN__/example",
+    "schema": "scale-graph",
+    "schema_version": "__VERSION__",
+    "stewardship": {
+      "access": "public"
+    },
+    "title": "A synthetic starter example of the __TITLE__ domain: one question about one object of study, from one invented source. Replace it with a curated example."
+  },
+  "multigraph": true
+}

@@ -1,0 +1,48 @@
+name: Missing concept
+description: The representation cannot express a distinction that a source makes (routes to schema evolution).
+labels: ["gap:missing-concept", "schema-evolution"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this when the **schema** lacks a concept. If the source lacks the information, use
+        "Source information"; if a curated value is wrong, use "Extraction error". Unsure? Use "Comment or suggestion".
+        `scale gap issue` can pre-fill this form. If the concept is a general scientific distinction that is
+        not about catalysis, it may belong in the science kernel: use "Science-kernel change" instead.
+  - type: textarea
+    id: distinction
+    attributes:
+      label: What could not be represented?
+      description: The scientific distinction, in ordinary language.
+    validations:
+      required: true
+  - type: textarea
+    id: example
+    attributes:
+      label: Example records and source evidence
+      description: Record ids, DOI, section/figure/table locators, short quotes.
+    validations:
+      required: true
+  - type: textarea
+    id: consequence
+    attributes:
+      label: Scientific consequence
+      description: Which comparison, query or interpretation goes wrong without it?
+    validations:
+      required: true
+  - type: textarea
+    id: mappings
+    attributes:
+      label: Existing concepts or external vocabulary terms considered
+      description: Entity types, attributes, relations, vocabulary or ontology terms, and why they do or do not fit.
+  - type: input
+    id: domain
+    attributes:
+      label: Part (optional)
+      description: The part this concerns, the catalysis domain (domain/) or the science kernel (core/). Leave empty if unsure.
+      placeholder: catalysis
+  - type: input
+    id: release
+    attributes:
+      label: SCALE release in use
+      placeholder: v0.1.0

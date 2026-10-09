@@ -1,0 +1,311 @@
+{
+  "nodes": [
+    {
+      "id": "ex:exmpl/ctx/catalyst/rh-tio2",
+      "label": "Catalyst",
+      "props": {
+        "name": "Rh/TiO2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:exmpl/ctx/sample/rh-tio2",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Rh/TiO2 load",
+        "origin": "synthetic",
+        "sample_kind": "powder"
+      }
+    },
+    {
+      "id": "ex:exmpl/ctx/material/tio2",
+      "label": "Material",
+      "props": {
+        "name": "TiO2",
+        "material_family": "oxide",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:exmpl/ctx/material/overlayer",
+      "label": "Material",
+      "props": {
+        "name": "TiOx overlayer",
+        "material_family": "oxide",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:exmpl/ctx/site/rh-np",
+      "label": "ActiveSite",
+      "props": {
+        "name": "Rh nanoparticle surface",
+        "origin": "synthetic",
+        "site_kind": "metal_site"
+      }
+    },
+    {
+      "id": "ex:exmpl/ctx/site/rh1",
+      "label": "ActiveSite",
+      "props": {
+        "name": "isolated Rh atom",
+        "origin": "synthetic",
+        "site_kind": "single_atom"
+      }
+    },
+    {
+      "id": "ex:exmpl/ctx/species/hco2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "formate",
+        "formula": "HCO2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:exmpl/ctx/species/co",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "carbon monoxide",
+        "formula": "CO",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:exmpl/ctx/species/ch4",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "methane",
+        "formula": "CH4",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:exmpl/ctx/reaction/co2-methanation",
+      "label": "Reaction",
+      "props": {
+        "name": "CO2 methanation",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:exmpl/ctx/treatment/co2-h2",
+      "label": "Treatment",
+      "props": {
+        "name": "CO2/H2 treatment",
+        "origin": "synthetic",
+        "treatment_kind": "exposure"
+      }
+    },
+    {
+      "id": "ex:exmpl/ctx/test/after",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "CO2 reduction after treatment",
+        "origin": "synthetic",
+        "test_kind": "activity"
+      }
+    },
+    {
+      "id": "ex:exmpl/ctx/characterization/drifts",
+      "label": "Characterization",
+      "props": {
+        "name": "DRIFTS during treatment",
+        "observation_mode": "in_situ",
+        "origin": "synthetic",
+        "technique": "DRIFTS"
+      }
+    },
+    {
+      "id": "ex:exmpl/ctx/state/a-smsi",
+      "label": "CatalystState",
+      "props": {
+        "name": "adsorbate-covered, encapsulated state",
+        "origin": "synthetic",
+        "state_kind": "working"
+      }
+    },
+    {
+      "id": "ex:exmpl/ctx/transition/encapsulation",
+      "label": "StateTransition",
+      "props": {
+        "name": "encapsulation",
+        "origin": "synthetic",
+        "transition_kind": "encapsulation"
+      }
+    },
+    {
+      "id": "ex:exmpl/ctx/computation/mkm",
+      "label": "Computation",
+      "props": {
+        "name": "microkinetic model",
+        "origin": "synthetic"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:exmpl/ctx/link/1",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/ctx/sample/rh-tio2",
+      "target": "ex:exmpl/ctx/catalyst/rh-tio2"
+    },
+    {
+      "id": "ex:exmpl/ctx/link/2",
+      "type": "STATE_OF",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/ctx/state/a-smsi",
+      "target": "ex:exmpl/ctx/sample/rh-tio2"
+    },
+    {
+      "id": "ex:exmpl/ctx/link/3",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "bound_to": "ex:exmpl/ctx/material/tio2",
+        "coverage": {
+          "status": "present",
+          "as_reported": "high coverage",
+          "text_value": "high"
+        },
+        "origin": "synthetic",
+        "role": "adsorbate"
+      },
+      "source": "ex:exmpl/ctx/state/a-smsi",
+      "target": "ex:exmpl/ctx/species/hco2"
+    },
+    {
+      "id": "ex:exmpl/ctx/link/4",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "bound_to": "ex:exmpl/ctx/site/rh-np",
+        "coverage": {
+          "status": "present",
+          "unit": "ML",
+          "value": 0.3
+        },
+        "origin": "synthetic",
+        "role": "adsorbate",
+        "role_detail": "linear (top)"
+      },
+      "source": "ex:exmpl/ctx/state/a-smsi",
+      "target": "ex:exmpl/ctx/species/co"
+    },
+    {
+      "id": "ex:exmpl/ctx/link/5",
+      "type": "HAS_PHASE",
+      "props": {
+        "covered_sites": [
+          "ex:exmpl/ctx/site/rh-np"
+        ],
+        "location": "overlayer",
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/ctx/state/a-smsi",
+      "target": "ex:exmpl/ctx/material/overlayer"
+    },
+    {
+      "id": "ex:exmpl/ctx/link/6",
+      "type": "DETECTS",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/ctx/characterization/drifts",
+      "target": "ex:exmpl/ctx/treatment/co2-h2"
+    },
+    {
+      "id": "ex:exmpl/ctx/link/7",
+      "type": "DURING",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/ctx/characterization/drifts",
+      "target": "ex:exmpl/ctx/treatment/co2-h2"
+    },
+    {
+      "id": "ex:exmpl/ctx/link/8",
+      "type": "DETERMINED_BY",
+      "props": {
+        "status": "hypothesized",
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/ctx/state/a-smsi",
+      "target": "ex:exmpl/ctx/test/after"
+    },
+    {
+      "id": "ex:exmpl/ctx/link/9",
+      "type": "AFFECTS_PATHWAY",
+      "props": {
+        "effect": "suppresses",
+        "observable": "selectivity",
+        "origin": "synthetic",
+        "product": "ex:exmpl/ctx/species/ch4",
+        "site": "ex:exmpl/ctx/site/rh-np"
+      },
+      "source": "ex:exmpl/ctx/state/a-smsi",
+      "target": "ex:exmpl/ctx/reaction/co2-methanation"
+    },
+    {
+      "id": "ex:exmpl/ctx/link/10",
+      "type": "IN_STATE",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/ctx/computation/mkm",
+      "target": "ex:exmpl/ctx/state/a-smsi"
+    },
+    {
+      "id": "ex:exmpl/ctx/link/11",
+      "type": "HAS_REACTION_ORDER",
+      "props": {
+        "order": {
+          "status": "present",
+          "unit": "1",
+          "value": -1
+        },
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/ctx/computation/mkm",
+      "target": "ex:exmpl/ctx/species/co"
+    },
+    {
+      "id": "ex:exmpl/ctx/link/12",
+      "type": "TRIGGERED_BY",
+      "props": {
+        "onset_delay": {
+          "status": "present",
+          "unit": "s",
+          "value": 20
+        },
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/ctx/transition/encapsulation",
+      "target": "ex:exmpl/ctx/treatment/co2-h2"
+    },
+    {
+      "id": "ex:exmpl/ctx/link/13",
+      "type": "TO_STATE",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/ctx/transition/encapsulation",
+      "target": "ex:exmpl/ctx/state/a-smsi"
+    }
+  ],
+  "directed": true,
+  "graph": {
+    "data_status": "synthetic_example",
+    "graph_id": "ex:exmpl/ctx/fixture",
+    "schema": "scale-graph",
+    "schema_version": "0.1.0",
+    "stewardship": {
+      "access": "public"
+    },
+    "title": "Catalyst-context counterexample: detection-target (synthetic)"
+  },
+  "multigraph": true
+}

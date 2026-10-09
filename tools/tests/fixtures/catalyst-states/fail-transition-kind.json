@@ -1,0 +1,465 @@
+{
+  "nodes": [
+    {
+      "id": "ex:exmpl/states/catalyst/nitride",
+      "label": "Catalyst",
+      "props": {
+        "name": "synthetic nitride",
+        "catalyst_family": "nitride",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:exmpl/states/sample/nitride",
+      "label": "CatalystSample",
+      "props": {
+        "name": "synthetic nitride powder",
+        "origin": "synthetic",
+        "sample_kind": "powder"
+      }
+    },
+    {
+      "id": "ex:exmpl/states/material/nitride",
+      "label": "Material",
+      "props": {
+        "name": "nitride",
+        "material_family": "nitride",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:exmpl/states/material/carbide",
+      "label": "Material",
+      "props": {
+        "name": "carbide overlayer",
+        "material_family": "carbide",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:exmpl/states/species/co",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "carbon monoxide",
+        "formula": "CO",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:exmpl/states/species/co2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "carbon dioxide",
+        "formula": "CO2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:exmpl/states/reaction/rwgs",
+      "label": "Reaction",
+      "props": {
+        "name": "reverse water-gas shift",
+        "equation": "CO2 + H2 -> CO + H2O",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:exmpl/states/feed/rwgs",
+      "label": "Feed",
+      "props": {
+        "name": "CO2 + H2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:exmpl/states/treatment/reduce",
+      "label": "Treatment",
+      "props": {
+        "name": "reduction",
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 500
+        },
+        "treatment_kind": "reduction"
+      }
+    },
+    {
+      "id": "ex:exmpl/states/treatment/co",
+      "label": "Treatment",
+      "props": {
+        "name": "CO exposure",
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 500
+        },
+        "treatment_kind": "exposure"
+      }
+    },
+    {
+      "id": "ex:exmpl/states/test/rwgs",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "RWGS at 1 bar",
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "unit": "bar",
+          "value": 1
+        },
+        "selectivity": {
+          "status": "present",
+          "unit": "%",
+          "value": 90
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 500
+        },
+        "test_kind": "activity"
+      }
+    },
+    {
+      "id": "ex:exmpl/states/characterization/xps",
+      "label": "Characterization",
+      "props": {
+        "name": "quasi in-situ XPS",
+        "information_depth": "surface",
+        "observation_mode": "quasi_in_situ",
+        "origin": "synthetic",
+        "sampling": "ensemble",
+        "technique": "XPS",
+        "transfer": "evacuated without air exposure"
+      }
+    },
+    {
+      "id": "ex:exmpl/states/state/fresh",
+      "label": "CatalystState",
+      "props": {
+        "name": "fresh",
+        "origin": "synthetic",
+        "state_kind": "as_prepared"
+      }
+    },
+    {
+      "id": "ex:exmpl/states/state/carbide",
+      "label": "CatalystState",
+      "props": {
+        "name": "carbide overlayer on nitride",
+        "conditions": {
+          "total_pressure": {
+            "status": "present",
+            "unit": "bar",
+            "value": 1
+          }
+        },
+        "dynamics": [
+          "static"
+        ],
+        "morphology": "carbide overlayer on bulk nitride",
+        "origin": "synthetic",
+        "persistence": "stable",
+        "properties": {
+          "carbide_c_to_mo": {
+            "status": "present",
+            "unit": "1",
+            "value": 0.3
+          }
+        },
+        "regime": "steady",
+        "state_kind": "working"
+      }
+    },
+    {
+      "id": "ex:exmpl/states/transition/carburization",
+      "label": "StateTransition",
+      "props": {
+        "name": "carburization",
+        "duration": {
+          "status": "present",
+          "unit": "min",
+          "value": 10
+        },
+        "mechanism": "CO dissociation",
+        "origin": "synthetic",
+        "reversibility": "reversible",
+        "transition_kind": "melting"
+      }
+    },
+    {
+      "id": "ex:exmpl/states/computation/pd",
+      "label": "Computation",
+      "props": {
+        "name": "phase diagram",
+        "method": "ab initio thermodynamics",
+        "origin": "synthetic"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:exmpl/states/link/1",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/states/sample/nitride",
+      "target": "ex:exmpl/states/catalyst/nitride"
+    },
+    {
+      "id": "ex:exmpl/states/link/2",
+      "type": "TREATED_BY",
+      "props": {
+        "order": 1,
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/states/sample/nitride",
+      "target": "ex:exmpl/states/treatment/reduce"
+    },
+    {
+      "id": "ex:exmpl/states/link/3",
+      "type": "PRECEDES",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/states/treatment/reduce",
+      "target": "ex:exmpl/states/test/rwgs"
+    },
+    {
+      "id": "ex:exmpl/states/link/4",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "reduced"
+      },
+      "source": "ex:exmpl/states/test/rwgs",
+      "target": "ex:exmpl/states/sample/nitride"
+    },
+    {
+      "id": "ex:exmpl/states/link/5",
+      "type": "FED_WITH",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/states/test/rwgs",
+      "target": "ex:exmpl/states/feed/rwgs"
+    },
+    {
+      "id": "ex:exmpl/states/link/6",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/states/test/rwgs",
+      "target": "ex:exmpl/states/reaction/rwgs"
+    },
+    {
+      "id": "ex:exmpl/states/link/7",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "other"
+      },
+      "source": "ex:exmpl/states/characterization/xps",
+      "target": "ex:exmpl/states/sample/nitride"
+    },
+    {
+      "id": "ex:exmpl/states/link/8",
+      "type": "DETECTS",
+      "props": {
+        "dominance": "majority",
+        "location": "surface",
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/states/characterization/xps",
+      "target": "ex:exmpl/states/material/carbide"
+    },
+    {
+      "id": "ex:exmpl/states/link/9",
+      "type": "STATE_OF",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/states/state/fresh",
+      "target": "ex:exmpl/states/sample/nitride"
+    },
+    {
+      "id": "ex:exmpl/states/link/10",
+      "type": "HAS_PHASE",
+      "props": {
+        "dominance": "majority",
+        "location": "bulk",
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/states/state/fresh",
+      "target": "ex:exmpl/states/material/nitride"
+    },
+    {
+      "id": "ex:exmpl/states/link/11",
+      "type": "STATE_OF",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/states/state/carbide",
+      "target": "ex:exmpl/states/sample/nitride"
+    },
+    {
+      "id": "ex:exmpl/states/link/12",
+      "type": "REACHED_BY",
+      "props": {
+        "elapsed": {
+          "status": "present",
+          "unit": "min",
+          "value": 10
+        },
+        "origin": "synthetic",
+        "timing": "during"
+      },
+      "source": "ex:exmpl/states/state/carbide",
+      "target": "ex:exmpl/states/test/rwgs"
+    },
+    {
+      "id": "ex:exmpl/states/link/13",
+      "type": "DETERMINED_BY",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/states/state/carbide",
+      "target": "ex:exmpl/states/characterization/xps"
+    },
+    {
+      "id": "ex:exmpl/states/link/14",
+      "type": "HAS_PHASE",
+      "props": {
+        "dominance": "majority",
+        "location": "overlayer",
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/states/state/carbide",
+      "target": "ex:exmpl/states/material/carbide"
+    },
+    {
+      "id": "ex:exmpl/states/link/15",
+      "type": "IN_STATE",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/states/test/rwgs",
+      "target": "ex:exmpl/states/state/carbide"
+    },
+    {
+      "id": "ex:exmpl/states/link/16",
+      "type": "FROM_STATE",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/states/transition/carburization",
+      "target": "ex:exmpl/states/state/fresh"
+    },
+    {
+      "id": "ex:exmpl/states/link/17",
+      "type": "TO_STATE",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/states/transition/carburization",
+      "target": "ex:exmpl/states/state/carbide"
+    },
+    {
+      "id": "ex:exmpl/states/link/18",
+      "type": "TRIGGERED_BY",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/states/transition/carburization",
+      "target": "ex:exmpl/states/test/rwgs"
+    },
+    {
+      "id": "ex:exmpl/states/link/19",
+      "type": "DRIVES_TRANSITION",
+      "props": {
+        "conditions": {
+          "co_partial_pressure": {
+            "status": "present",
+            "unit": "bar",
+            "value": 0.1
+          }
+        },
+        "driver_role": "product",
+        "effect": "promotes",
+        "mechanism": "carbon deposition",
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/states/species/co",
+      "target": "ex:exmpl/states/transition/carburization"
+    },
+    {
+      "id": "ex:exmpl/states/link/20",
+      "type": "AFFECTS_PATHWAY",
+      "props": {
+        "conditions": {
+          "temperature": {
+            "status": "present",
+            "unit": "°C",
+            "value": 250
+          }
+        },
+        "effect": "enhances",
+        "magnitude": {
+          "status": "present",
+          "unit": "1",
+          "value": 2.7
+        },
+        "observable": "activity",
+        "origin": "synthetic",
+        "product": "ex:exmpl/states/species/co"
+      },
+      "source": "ex:exmpl/states/state/carbide",
+      "target": "ex:exmpl/states/reaction/rwgs"
+    },
+    {
+      "id": "ex:exmpl/states/link/21",
+      "type": "PREDICTS",
+      "props": {
+        "agreement": "agrees",
+        "compared_with": "ex:exmpl/states/state/carbide",
+        "conditions": {
+          "co_partial_pressure": {
+            "status": "present",
+            "unit": "bar",
+            "value": 0.1
+          }
+        },
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/states/computation/pd",
+      "target": "ex:exmpl/states/state/carbide"
+    },
+    {
+      "id": "ex:exmpl/states/link/22",
+      "type": "TREATED_BY",
+      "props": {
+        "order": 2,
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/states/sample/nitride",
+      "target": "ex:exmpl/states/treatment/co"
+    }
+  ],
+  "directed": true,
+  "graph": {
+    "data_status": "synthetic_example",
+    "graph_id": "ex:exmpl/states/fixture",
+    "schema": "scale-graph",
+    "schema_version": "0.1.0",
+    "stewardship": {
+      "access": "public"
+    },
+    "title": "Catalyst-state counterexample: transition-kind (synthetic)"
+  },
+  "multigraph": true
+}

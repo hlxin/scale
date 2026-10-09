@@ -1,0 +1,464 @@
+{
+  "nodes": [
+    {
+      "id": "ex:df-photo/source/paper",
+      "label": "Source",
+      "props": {
+        "name": "Invented paper",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "CO2 photoreduction on TiO2 with its dark control (invented)",
+        "year": 2026
+      }
+    },
+    {
+      "id": "ex:df-photo/species/co2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "CO2",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 1,
+          "O": 2
+        },
+        "formula": "CO2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:df-photo/species/co",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "CO",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 1,
+          "O": 1
+        },
+        "formula": "CO",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:df-photo/species/water",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "H2O",
+        "charge": 0,
+        "elemental_composition": {
+          "H": 2,
+          "O": 1
+        },
+        "formula": "H2O",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:df-photo/species/o2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "O2",
+        "charge": 0,
+        "elemental_composition": {
+          "O": 2
+        },
+        "formula": "O2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:df-photo/reaction/co2-to-co",
+      "label": "Reaction",
+      "props": {
+        "name": "2 CO2 -> 2 CO + O2",
+        "balance_status": "balanced",
+        "direction": "forward",
+        "equation": "2 CO2 -> 2 CO + O2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:df-photo/catalyst/tio2",
+      "label": "Catalyst",
+      "props": {
+        "name": "TiO2 (P25)",
+        "catalyst_family": "oxide",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:df-photo/source/paper"
+          }
+        ],
+        "nominal_formula": "TiO2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:df-photo/sample/tio2",
+      "label": "CatalystSample",
+      "props": {
+        "name": "TiO2 (P25), batch 1",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:df-photo/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "sample_kind": "powder"
+      }
+    },
+    {
+      "id": "ex:df-photo/instrument/xe",
+      "label": "LightSource",
+      "props": {
+        "name": "300 W Xe lamp",
+        "nominal_power": {
+          "status": "present",
+          "unit": "W",
+          "value": 300
+        },
+        "origin": "synthetic",
+        "source_kind": "xenon_lamp",
+        "spectrum": "full arc, AM1.5G filter"
+      }
+    },
+    {
+      "id": "ex:df-photo/variable/illumination",
+      "label": "Variable",
+      "props": {
+        "name": "Illumination",
+        "categories": [
+          "light",
+          "dark"
+        ],
+        "origin": "synthetic",
+        "scale": "nominal"
+      }
+    },
+    {
+      "id": "ex:df-photo/test/light",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "TiO2, light",
+        "apparent_quantum_yield": [
+          {
+            "status": "present",
+            "as_reported": "AQY at 365 nm",
+            "target": "ex:df-photo/species/co",
+            "unit": "%",
+            "value": 0.6
+          }
+        ],
+        "driving_forces": [
+          "photo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:df-photo/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "illuminated_area": {
+          "status": "present",
+          "unit": "cm2",
+          "value": 3.1
+        },
+        "illumination": "light",
+        "irradiance": {
+          "status": "present",
+          "unit": "mW/cm2",
+          "value": 100
+        },
+        "optical_path": "AM1.5G filter, quartz window, 10 cm to the slurry",
+        "origin": "synthetic",
+        "results": {
+          "co_rate": {
+            "status": "present",
+            "target": "ex:df-photo/species/co",
+            "unit": "umol/(g*h)",
+            "value": 12.0
+          }
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 298
+        },
+        "test_kind": "activity",
+        "wavelength": {
+          "status": "present",
+          "lower": 300,
+          "unit": "nm",
+          "upper": 800
+        }
+      }
+    },
+    {
+      "id": "ex:df-photo/test/dark",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "TiO2, dark",
+        "driving_forces": [
+          "photo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:df-photo/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "illumination": "dark",
+        "origin": "synthetic",
+        "results": {
+          "co_rate": {
+            "status": "present",
+            "target": "ex:df-photo/species/co",
+            "unit": "umol/(g*h)",
+            "value": 0.2
+          }
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 298
+        },
+        "test_kind": "control"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:df-photo/link/1",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 2,
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:df-photo/reaction/co2-to-co",
+      "target": "ex:df-photo/species/co2"
+    },
+    {
+      "id": "ex:df-photo/link/2",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 2,
+        "origin": "synthetic",
+        "role": "product"
+      },
+      "source": "ex:df-photo/reaction/co2-to-co",
+      "target": "ex:df-photo/species/co"
+    },
+    {
+      "id": "ex:df-photo/link/3",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "role": "product"
+      },
+      "source": "ex:df-photo/reaction/co2-to-co",
+      "target": "ex:df-photo/species/o2"
+    },
+    {
+      "id": "ex:df-photo/link/4",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:df-photo/sample/tio2",
+      "target": "ex:df-photo/catalyst/tio2"
+    },
+    {
+      "id": "ex:df-photo/link/5",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "as_prepared"
+      },
+      "source": "ex:df-photo/test/light",
+      "target": "ex:df-photo/sample/tio2"
+    },
+    {
+      "id": "ex:df-photo/link/6",
+      "type": "ILLUMINATED_BY",
+      "props": {
+        "geometry": "front",
+        "origin": "synthetic"
+      },
+      "source": "ex:df-photo/test/light",
+      "target": "ex:df-photo/instrument/xe"
+    },
+    {
+      "id": "ex:df-photo/link/7",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:df-photo/test/light",
+      "target": "ex:df-photo/reaction/co2-to-co"
+    },
+    {
+      "id": "ex:df-photo/link/8",
+      "type": "HAS_VARIABLE",
+      "props": {
+        "level": {
+          "status": "present",
+          "text_value": "light",
+          "variable": "ex:df-photo/variable/illumination"
+        },
+        "origin": "synthetic",
+        "role": "factor"
+      },
+      "source": "ex:df-photo/test/light",
+      "target": "ex:df-photo/variable/illumination"
+    },
+    {
+      "id": "ex:df-photo/link/9",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reagent"
+      },
+      "source": "ex:df-photo/test/light",
+      "target": "ex:df-photo/species/water"
+    },
+    {
+      "id": "ex:df-photo/link/10",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "as_prepared"
+      },
+      "source": "ex:df-photo/test/dark",
+      "target": "ex:df-photo/sample/tio2"
+    },
+    {
+      "id": "ex:df-photo/link/11",
+      "type": "ILLUMINATED_BY",
+      "props": {
+        "geometry": "front",
+        "origin": "synthetic"
+      },
+      "source": "ex:df-photo/test/dark",
+      "target": "ex:df-photo/instrument/xe"
+    },
+    {
+      "id": "ex:df-photo/link/12",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:df-photo/test/dark",
+      "target": "ex:df-photo/reaction/co2-to-co"
+    },
+    {
+      "id": "ex:df-photo/link/13",
+      "type": "HAS_VARIABLE",
+      "props": {
+        "level": {
+          "status": "present",
+          "text_value": "dark",
+          "variable": "ex:df-photo/variable/illumination"
+        },
+        "origin": "synthetic",
+        "role": "factor"
+      },
+      "source": "ex:df-photo/test/dark",
+      "target": "ex:df-photo/variable/illumination"
+    },
+    {
+      "id": "ex:df-photo/link/14",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reagent"
+      },
+      "source": "ex:df-photo/test/dark",
+      "target": "ex:df-photo/species/water"
+    },
+    {
+      "id": "ex:df-photo/link/15",
+      "type": "CONTROL_FOR",
+      "props": {
+        "control_kind": "negative",
+        "differs_in": [
+          "ex:df-photo/variable/illumination"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:df-photo/test/dark",
+      "target": "ex:df-photo/test/light"
+    },
+    {
+      "id": "ex:df-photo/catalyst/tio2/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:df-photo/catalyst/tio2",
+      "target": "ex:df-photo/source/paper"
+    },
+    {
+      "id": "ex:df-photo/sample/tio2/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:df-photo/sample/tio2",
+      "target": "ex:df-photo/source/paper"
+    },
+    {
+      "id": "ex:df-photo/test/dark/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:df-photo/test/dark",
+      "target": "ex:df-photo/source/paper"
+    },
+    {
+      "id": "ex:df-photo/test/light/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:df-photo/test/light",
+      "target": "ex:df-photo/source/paper"
+    }
+  ],
+  "directed": true,
+  "graph": {
+    "data_status": "synthetic_example",
+    "follows_domains": [
+      "catalysis"
+    ],
+    "graph_id": "ex:df-photo/graph",
+    "schema": "scale-graph",
+    "schema_version": "0.1.0",
+    "stewardship": {
+      "access": "public"
+    },
+    "title": "CO2 photoreduction on TiO2 with its dark control"
+  },
+  "multigraph": true
+}

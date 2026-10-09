@@ -1,0 +1,80 @@
+{
+  "nodes": [
+    {
+      "id": "ex:org/my-lab",
+      "label": "Institution",
+      "props": {
+        "name": "My laboratory",
+        "origin": "curated"
+      }
+    },
+    {
+      "id": "ex:project/my-project",
+      "label": "Project",
+      "props": {
+        "name": "My project",
+        "origin": "curated"
+      }
+    },
+    {
+      "id": "ex:source/1",
+      "label": "Source",
+      "props": {
+        "name": "Author et al. 2025",
+        "kind": "article",
+        "doi": "10.xxxx/xxxx",
+        "origin": "curated",
+        "title": "The article's title",
+        "year": 2025
+      }
+    },
+    {
+      "id": "ex:claim/1",
+      "label": "Claim",
+      "props": {
+        "name": "The authors' main finding",
+        "claim_kind": "finding",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Results, paragraph 2",
+            "quote": "a short verbatim excerpt that states the claim",
+            "source": "ex:source/1"
+          }
+        ],
+        "origin": "reported",
+        "statement": "What the source states, in one sentence."
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:claim/1/reported-in/1",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Results, paragraph 2"
+        ],
+        "origin": "derived"
+      },
+      "source": "ex:claim/1",
+      "target": "ex:source/1"
+    }
+  ],
+  "directed": true,
+  "graph": {
+    "data_status": "research_data",
+    "follows_domains": [
+      "catalysis"
+    ],
+    "graph_id": "ex:invalid/research-data-without-stewardship",
+    "schema": "scale-graph",
+    "schema_version": "0.1.0",
+    "stewardship": {
+      "access": "public"
+    },
+    "title": "INVALID FIXTURE (research-data-without-stewardship): research data that does not say who contributed it or which project it belongs to"
+  },
+  "multigraph": true
+}

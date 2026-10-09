@@ -1,0 +1,54 @@
+# A competency question of the catalysis domain (tools/scale/competency.py; `scale domains cq catalysis`).
+# It runs on public synthetic examples, so anyone can rerun it and see the same answer.
+id: CQ-05
+question: Which methanol conversions were measured over which catalysts, and on which sources do they rest, leaving
+  out what rests only on retracted sources?
+description: |
+  A retraction does not delete a finding; it removes its support. The example holds two invented runs from two
+  invented papers, and a retraction notice that retracts the second paper. By default the answer leaves out the
+  run that rests only on the retracted paper (it goes to excluded, with the reason rests_on_retracted_source) and
+  every evidence item carries its source's publication status, derived from the notice links. With
+  include_retracted the run comes back, its evidence labelled retracted (the source-lifecycle query behaviour).
+documents:
+  - examples/scale-graph/source-lifecycle/retracted-source.json
+plan:
+  question: Which methanol conversions were measured, over which catalysts, on which sources?
+  match:
+    label: CatalyticTest
+    as: test
+    where:
+      - prop: conversion
+        op: exists
+  return:
+    - test.name
+    - test.temperature
+    - test.conversion
+  evidence: true
+expect:
+  status: answered
+  min_rows: 1
+  max_rows: 1
+  values:
+    test.name:
+      - ZnO, run 1
+  excluded:
+    rests_on_retracted_source: 1
+  source_statuses:
+    - current_or_unknown
+variants:
+  - description: With include_retracted, the run resting on the retracted paper comes back, its evidence labelled retracted.
+    plan:
+      include_retracted: true
+    expect:
+      status: answered
+      min_rows: 2
+      max_rows: 2
+      values:
+        test.name:
+          - ZnO, run 1
+          - ZnCr2O4, run 1
+      excluded:
+        rests_on_retracted_source: 0
+      source_statuses:
+        - retracted
+        - current_or_unknown

@@ -1,0 +1,24 @@
+# Code owners of github.com/hlxin/scale.
+#
+# The owner, Hongliang Xin (@hlxin), owns everything for now. When the two reviewer seats of
+# governance/review-policy.yaml are filled, the reviewers are added here next to @hlxin, and the main-branch
+# ruleset requires two approving reviews from reviewers other than the author
+# (governance/repository-settings.md).
+#
+# How the file works
+# - The LAST matching pattern wins. General lines come first and specific lines after them.
+# - Several owners on one line means that ANY ONE of them can give the code-owner review.
+# - GitHub reads this file from the pull request's base branch, so a pull request cannot pick its own
+#   reviewers.
+# - It routes review; it does not restrict write access. Protection comes from the ruleset.
+# - An owner counts only if they have Write access to this repository.
+#
+# The catalysis domain
+# - domain/ has its own line naming its maintainers (`scale domains check` verifies it). Today that is the
+#   owner; maintainers of the catalysis domain are added on the line when they join.
+
+# Default: everything (the science kernel, tools, docs, governance, releases, workflows).
+*                                   @hlxin
+
+# The catalysis domain: domain/.
+/domain/                            @hlxin
