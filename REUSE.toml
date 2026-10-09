@@ -21,7 +21,7 @@ SPDX-License-Identifier = "MIT"
 #    governance, the skills' texts, the root documents and the releases.
 [[annotations]]
 path = [
-  "core/**", "domain/**", "docs/**", "governance/**", "tools/skills/**",
+  "core/**", "domain/**", "examples/**", "docs/**", "governance/**", "tools/skills/**",
   "README.md", "CONTRIBUTING.md", "PRINCIPLES.md", "CHANGELOG.md", "AGENTS.md", "CODE_OF_CONDUCT.md", "NOTICE",
   "CITATION.cff", "scale-release.yaml", "releases/v*/**",
 ]
@@ -31,7 +31,7 @@ SPDX-License-Identifier = "CC-BY-4.0"
 
 # 3. Code inside those trees stays MIT (catalysis tests, example tools, figure and example builders).
 [[annotations]]
-path = ["core/**/*.py", "domain/**/*.py", "docs/**/*.py", "governance/**/*.py", "tools/skills/**/*.py"]
+path = ["core/**/*.py", "domain/**/*.py", "examples/**/*.py", "docs/**/*.py", "governance/**/*.py", "tools/skills/**/*.py"]
 precedence = "override"
 SPDX-FileCopyrightText = "2026 SCALE contributors"
 SPDX-License-Identifier = "MIT"

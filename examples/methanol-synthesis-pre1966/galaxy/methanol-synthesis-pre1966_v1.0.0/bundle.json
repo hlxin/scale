@@ -1,0 +1,183 @@
+{
+ "bundle_id": "methanol-synthesis-pre1966",
+ "changes": null,
+ "corpus": {
+  "description": "methanol-synthesis historical corpus (ARPA-E CATALYST), frozen for SCALE curation; scoped to methanol synthesis from CO/CO2 + H2 (CO + D2 included). Rule: published or publicly disclosed before 1966-01-01.",
+  "n_included": 105,
+  "n_screened": 178
+ },
+ "counts": {
+  "edges": 14107,
+  "nodes": 4850,
+  "papers": 105,
+  "substantive_edges": 8477
+ },
+ "created": "2026-10-09T00:00:00Z",
+ "export_report": {
+  "absences_not_exported": {
+   "not_reported": 229
+  },
+  "access": {
+   "bundle": "public",
+   "records_by_access": {
+    "public": 13327
+   }
+  },
+  "approximate_values": {
+   "amount": 4,
+   "conversion": 41,
+   "deactivation_rate": 2,
+   "duration": 31,
+   "feed_ratio": 1,
+   "flow_rate": 26,
+   "fraction": 49,
+   "pressure": 41,
+   "production_rate": 29,
+   "space_time_yield": 8,
+   "space_velocity": 80,
+   "temperature": 36,
+   "time_on_stream": 4,
+   "volume": 3,
+   "yield": 48
+  },
+  "authors_as_properties": 151,
+  "bounds": {
+   "approach_to_equilibrium": 6,
+   "conversion": 6,
+   "duration": 8,
+   "fraction": 6,
+   "temperature": 13
+  },
+  "kept_apart_by_basis": {
+   "pressure_gauge": 2,
+   "space_velocity_exit_gas": 27
+  },
+  "nodes_not_exported_no_source": 18,
+  "nodes_without_report": 18,
+  "not_exported_links": {
+   "ABOUT": 629,
+   "CATALYZES": 84,
+   "CHARACTERIZES": 59,
+   "COMPARED_WITH": 46,
+   "COMPETES_WITH": 5,
+   "CONCLUDES": 127,
+   "CONTRADICTS": 2,
+   "CONTROL_FOR": 17,
+   "DESCRIBES_REACTION": 3,
+   "DETECTS": 4,
+   "EXAMINES": 2,
+   "FED_WITH": 225,
+   "FEEDS_INTO": 37,
+   "FUNDED_BY": 1,
+   "HAS_COMPONENT": 353,
+   "HAS_ELEMENTARY_STEP": 7,
+   "HAS_FORMULATION": 81,
+   "HAS_INPUT": 93,
+   "HAS_OPERATION": 2,
+   "HAS_OUTPUT": 4,
+   "HAS_PART": 3,
+   "HAS_PARTICIPANT": 22,
+   "HAS_PHASE": 1,
+   "HAS_REACTION_ORDER": 4,
+   "IDENTIFIED_AS": 10,
+   "INHIBITED_BY": 29,
+   "IN_REACTOR": 173,
+   "OF_REACTION": 187,
+   "PARTICIPATES_IN": 2,
+   "PART_OF": 51,
+   "PRECEDES": 37,
+   "PREPARED_BY": 120,
+   "PREPARED_FROM": 219,
+   "PROCEEDS_VIA": 1,
+   "PRODUCES": 9,
+   "REPLICATES": 1,
+   "SUPPORTS": 339,
+   "TESTS": 14,
+   "TREATED_BY": 114,
+   "USES_CATALYST": 136,
+   "USES_INSTRUMENT": 24
+  },
+  "ranges_as_midpoint": {
+   "conversion": 2,
+   "duration": 17,
+   "pressure": 63,
+   "space_velocity": 1,
+   "temperature": 144,
+   "time_on_stream": 2,
+   "yield": 3
+  },
+  "split_links": 0,
+  "statement_inferred": {
+   "conclusion": 2539,
+   "hypothesis": 138,
+   "observation": 5800
+  },
+  "values_as_text": {
+   "amount": 514,
+   "approach_to_equilibrium": 10,
+   "conversion": 6,
+   "deactivation_rate": 3,
+   "duration": 7,
+   "feed_ratio": 49,
+   "flow_rate": 126,
+   "fraction": 685,
+   "heating_rate": 17,
+   "level": 9,
+   "lifetime": 1,
+   "order": 9,
+   "pressure": 20,
+   "production_rate": 129,
+   "space_time_yield": 69,
+   "space_velocity": 310,
+   "temperature": 27,
+   "time_on_stream": 1,
+   "volume": 11,
+   "yield": 1
+  }
+ },
+ "format": "galaxy-kg-bundle",
+ "format_version": "1.0.0",
+ "graph_file": "kg/graph.json",
+ "graph_sha256": "9ec6b7f29d712e72c709e9c6e5ab05452306fabb42308c7609730f98e943032f",
+ "graph_sha256_is_of": "the uncompressed graph.json bytes",
+ "licence_policy": {
+  "note": "No source texts are shipped; sources are cited by short verbatim quotes only."
+ },
+ "pipeline_version": "scale-graph 0.1.0 export",
+ "previous": null,
+ "producer": {
+  "agent": "SCALE curation agents (curate-source skill)",
+  "models": [],
+  "prompt_version": "curate-source"
+ },
+ "publication_licences": {
+  "US patent; not subject to copyright": 38,
+  "no verified licence; short excerpts quoted as evidence under fair use": 1,
+  "no verified publisher licence; short excerpts quoted as evidence under fair use": 66
+ },
+ "redistributable_publications": 0,
+ "scale_header": {
+  "access_at_export": {
+   "date": "2026-10-09",
+   "level": "public"
+  },
+  "data_status": "research_data",
+  "follows_domains": [
+   "catalysis"
+  ],
+  "graph_id": "ex:msyn/graph/co-co2-hydrogenation",
+  "lineage": "scale",
+  "schema_sha256": "3c2fa7205a7bae5e0bbfa7d87826ff7ab7803e78536129064101c7d5a2c02006",
+  "schema_version": "0.1.0",
+  "stewardship": {
+   "access": "public",
+   "project": "scale:project/arpa-e-catalyst"
+  }
+ },
+ "schema_file": "kg/schema.json",
+ "schema_id": "methanol-synthesis-pre1966",
+ "schema_version": "1.0.0",
+ "scope": "Cutoff: published or publicly disclosed before 1966-01-01. ICI launched low-pressure methanol synthesis over Cu/ZnO/Al2O3 in 1966 (GB 1,010,871, published 1966; US 3,326,956); a cutoff of 1 January 1966 holds out that commercialization and what followed as rediscovery targets, and admits everything published before it, ICI's earlier publications included. The cutoff does not remove every Cu-Zn-Al disclosure: the corpus leakage audit (historical/LEAKAGE_AUDIT.md) lists US 2,061,470 (Larson, granted 1936), whose Example 10 is 87 CuO / 10 ZnO / 3 Al2O3, and Cu-Zn catalysts from 1928 on. They are in scope and curated as reported; a rediscovery evaluation must hold them out separately if it needs to. Each source was read and curated from its page texts (PDF text layer, or Tesseract OCR where the PDF has none); every quote is checked verbatim against those texts. Earlier extractions were used only as checklists. Scoped to CO and CO2 hydrogenation to methanol: tests of other reactions, the re",
+ "topic": "Methanol synthesis (CO and CO2 hydrogenation to methanol), historical literature published before 1966-01-01 (105 sources, 1923–1965), curated from the source texts under scale-graph 0.1.0",
+ "version": "1.0.0"
+}

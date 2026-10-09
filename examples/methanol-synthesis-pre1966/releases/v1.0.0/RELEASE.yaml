@@ -1,0 +1,55 @@
+release: v1.0.0
+date: '2026-10-09'
+title: Methanol synthesis (CO and CO2 hydrogenation to methanol), historical literature published before
+  1966-01-01 (105 sources, 1923–1965), curated from the source texts under scale-graph 0.1.0
+graph_id: ex:msyn/graph/co-co2-hydrogenation
+data_status: research_data
+access: public
+schema:
+  name: scale-graph
+  version: 0.1.0
+  spec_sha256: 3c2fa7205a7bae5e0bbfa7d87826ff7ab7803e78536129064101c7d5a2c02006
+  follows_domains:
+  - catalysis
+graph:
+  file: methanol-synthesis.graph.json
+  sha256: 0dfc8c1ca642fcb9fdabf3429e56a59516510291ecd4fa97b56a98d6e94ed13f
+  graph_sha256: a047c793ce81464b6399a827bea7b6c4c63b7ba628b2fa69d4add03948904315
+corpus:
+  file: sources.json
+  sha256: eec3b3a8babc6ccf4929ef874c6bcafac562afd50746eea4d21b6da763507c52
+  sources: 105
+  cutoff: '1966-01-01'
+counts:
+  nodes: 4868
+  links: 16586
+  sources: 105
+  catalytic_tests: 684
+  claims: 1409
+  evidence_items: 25230
+  withheld_quotes: 6920
+validation:
+  errors: 0
+  warnings: 4
+queries:
+  q1-copper-lower-temperature:
+    status: answered
+    rows: 236
+  q2-feed-poisons:
+    status: answered
+    rows: 69
+  q2b-inhibited-by:
+    status: answered
+    rows: 88
+  q3-feed-purification:
+    status: answered
+    rows: 47
+  q4-co2-feedstock:
+    status: answered
+    rows: 135
+  q5-carbon-source:
+    status: answered
+    rows: 62
+  q6-cu-zn-al-formulations:
+    status: answered
+    rows: 5

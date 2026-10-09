@@ -1,0 +1,19 @@
+question: When were feed poisons recognized before 1966, and what did the sources say they imply for Cu-containing
+  catalysts?
+manuscript: second query
+match:
+  label: Claim
+  as: claim
+text:
+  query: sulfur compounds iron carbonyl poison impurities in the gas copper catalyst activity destroyed
+  vars:
+  - claim
+  mode: hybrid
+  min_score: 0.25
+published_before: '1966-01-01'
+return:
+- claim.statement
+- claim.claim_kind
+- claim.claim_status
+evidence: true
+limit: 40
