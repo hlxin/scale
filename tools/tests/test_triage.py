@@ -75,7 +75,7 @@ def test_the_digest_decides_nothing_and_points_to_pull_requests(queue):
     props, _ = intake.merge_proposals(queue, None)
     body = intake.render_digest(queue, props, "hlxin/scale", None, [])
     assert body.startswith("# SCALE feedback digest") and "## T12" in body and "scale-triage-state" in body
-    assert "/decide" not in body and "/defer" not in body and "two approving reviews" in body
+    assert "/decide" not in body and "/defer" not in body and "an approving review" in body
     assert "open a pull request" in body and "scale-agent workflow by hand" in body and "@scale-agent" not in body
     assert not hasattr(intake, "parse_decisions") and not hasattr(intake, "append_decisions")
     assert intake.DIGEST_LABEL == "feedback-digest"

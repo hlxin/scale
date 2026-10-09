@@ -89,8 +89,8 @@ def lines_for(rules: list[Rule], pattern: str) -> list[Rule]:
 
 
 def minimal_reviewers(owner_sets: list[tuple[str, ...]]) -> list[str]:
-    """A smallest set of owners with one member in every owner set: the fewest approvals that satisfy
-    code-owner review. Exact for the handful of teams a repository has; ties go to the sorted order."""
+    """A smallest set of owners with one member in every owner set: the fewest reviewers who own every
+    changed path (whom to ask; the ruleset does not require a code owner's review). Exact for the handful of teams a repository has; ties go to the sorted order."""
     sets = [set(s) for s in owner_sets if s]
     owners = sorted(set().union(*sets)) if sets else []
     for k in range(1, len(owners) + 1):

@@ -1,7 +1,8 @@
 """scale-graph proposals: a checked, reviewed and applied schema version (with a synthetic proposal,
 proposal 009001, built on 0.1.0); one version for the kernel and the catalysis domain together, raised by
 every applied proposal; proposal names (a six-digit number, global) and numbers allocated across owners; and the
-review policy (two approving reviews from reviewers other than the author)."""
+review policy (approvals.required approving reviews from reviewers other than the author: one in the
+repository, two in the engine tests below)."""
 
 import datetime as dt
 import json
@@ -177,13 +178,18 @@ def test_the_latest_review_counts_and_requested_changes_block():
 
 
 def test_the_repository_policy_has_one_reviewer_and_two_placeholders():
-    from scale.policy import placeholders, reviewers
+    from scale.policy import approvable, placeholders, reviewers
     pol = load_policy(REPO)
-    assert pol["policy_version"] == 1 and pol["approvals"]["required"] == 2 and pol["reviewers"]["team"] == "@hlxin"
+    assert pol["policy_version"] == 2 and pol["approvals"]["required"] == 1 and pol["reviewers"]["team"] == "@hlxin"
     assert [m["github"] for m in reviewers(pol)] == ["hlxin"]
     assert [m["github"] for m in placeholders(pol)] == ["TODO-reviewer-2", "TODO-reviewer-3"]
     st = evaluate(pol, [A("hlxin"), A("TODO-reviewer-2"), A("TODO-reviewer-3")], author="someone")
-    assert not st["satisfied"] and st["approved_by"] == ["hlxin"] and st["notes"]   # cannot be satisfied yet
+    assert st["satisfied"] and st["approved_by"] == ["hlxin"]          # the owner approves someone else's change
+    st = evaluate(pol, [A("TODO-reviewer-2")], author="hlxin")
+    assert not st["satisfied"] and st["notes"]                          # the owner's own change: nobody can approve yet
+    assert not approvable(pol, "hlxin") and approvable(pol, "someone")
+    one = {**pol, "reviewers": {**pol["reviewers"], "members": [*reviewers(pol), {"name": "Ada", "github": "ada"}]}}
+    assert approvable(one, "hlxin") and evaluate(one, [A("ada")], author="hlxin")["satisfied"]   # one expert is enough
 
 
 def test_github_reviews_become_approval_records(tmp_path):

@@ -16,7 +16,7 @@ Anyone comments through GitHub issues, pull-request comments or discussions. On 
 
 Nothing is decided in the digest. A person acts on a topic by opening a pull request (or by starting the
 scale-agent workflow by hand, .github/workflows/scale-agent.yml, which drafts one); the decision is the pull
-request's two approving reviews (governance/review-policy.yaml). Agents never decide. Writing to GitHub is dry-run unless ``--publish`` is given.
+request's approving review (governance/review-policy.yaml). Agents never decide. Writing to GitHub is dry-run unless ``--publish`` is given.
 """
 
 from __future__ import annotations
@@ -347,7 +347,7 @@ def rule_proposal(c: dict) -> dict:
     opts = {
         "missing_concept": [
             O("A", "open_proposal", "Prepare a schema change proposal (tools/skills/evolve-schema; `scale proposal new`): operations, fixtures, counterexamples, migration, affected queries.",
-              "New concepts enter as provisional; the proposal's pull request needs two approving reviews from reviewers "
+              "New concepts enter as provisional; the proposal's pull request needs one approving review from a reviewer "
               "other than its author (an agent can draft it: the scale-agent workflow, started by hand)."),
             O("B", "map_to_existing", "Show that an existing label, edge type or property (or an external vocabulary term) already expresses it" +
               (f" (labels mentioned: {', '.join(refs['classes'])})" if refs.get("classes") else "") + "; document how to use it.",
@@ -436,7 +436,7 @@ def render_digest(queue: dict, proposals: list[dict], repo: str, since: str | No
          f"**{len(need)}** may need a change.", "",
          "**How to act on a topic:** open a pull request that takes one of its options (or, with write access, start "
          "the scale-agent workflow by hand with the topic and the option, and it opens a draft pull request). Every "
-         "change is decided by two approving reviews of its pull request (governance/review-policy.yaml). Agents "
+         "change is decided by an approving review of its pull request (governance/review-policy.yaml). Agents "
          "prepared these options; they do not decide.", ""]
     for p in need + info:
         c = clusters[p["cluster_id"]]

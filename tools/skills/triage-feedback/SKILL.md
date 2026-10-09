@@ -16,7 +16,7 @@ validation:
   - "`scale triage propose <dir> --proposals proposals.json --strict` accepts every proposal"
   - Every option is concrete (which record, label, source or plan) and states its consequence
 human-review:
-  - Always. The digest decides nothing: a person acts on a topic by opening a pull request, and the pull request's two approving reviews decide; proposals are advice
+  - Always. The digest decides nothing: a person acts on a topic by opening a pull request, and the pull request's approving review decides; proposals are advice
 ---
 
 # Propose decision paths for community feedback
@@ -41,7 +41,7 @@ For each topic in `queue.json`:
 5. **Recommend at most one option,** and only when the evidence is clear. Give a rationale and a
    confidence between 0 and 1. Otherwise leave `recommended_option` null.
 6. **Name the kind of review** (`domain`, `committee`, `maintainer`; informational: today one reviewer group
-   reviews everything, and every change needs two approving reviews, governance/GOVERNANCE.md).
+   reviews everything, and every change needs one approving review, governance/GOVERNANCE.md).
 7. **Never include a decision.** Never mark anything approved. Never close, label or edit GitHub
    items yourself.
 

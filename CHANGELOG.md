@@ -1,5 +1,16 @@
 # Changelog
 
+## Unreleased
+
+- **One approval for every change (review policy version 2).** A pull request to `main` now merges with one approving
+  review from any reviewer other than its author, instead of two; a reviewer who disagrees with a merged change
+  corrects it with a pull request of their own. `governance/review-policy.yaml` sets `approvals.required: 1`, and the
+  `main` ruleset (`governance/github/ruleset-main.json`) requires one approving review and no longer a code owner's,
+  so that any reviewer, not only the owner, can approve; CODEOWNERS still routes review requests. The owner is a reviewer and
+  approves other people's pull requests; the bootstrap rule covers only the owner's own pull requests (GitHub does not
+  let an author approve) and ends as soon as a second reviewer joins: `scale proposal decide --bootstrap-bypass` is refused
+  once another reviewer can approve (`policy.approvable`), not only once every seat is filled. No schema change.
+
 ## 0.1.0 — 2026-10-08
 
 The first version of SCALE — Shared Concepts, Attributes, and Links with Evidence — in `github.com/hlxin/scale`:

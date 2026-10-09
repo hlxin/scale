@@ -1,7 +1,7 @@
-"""Review policy: two approving reviews from reviewers other than the author, for every pull request.
+"""Review policy: ``approvals.required`` approving reviews (one today) from reviewers other than the author, for
+every pull request.
 
-The policy lives in ``governance/review-policy.yaml`` (explained in governance/GOVERNANCE.md, policy
-version 4). GitHub pull-request reviews are the approvals: ``scale proposal apply-merged`` turns the
+The policy lives in ``governance/review-policy.yaml`` (explained in governance/GOVERNANCE.md). GitHub pull-request reviews are the approvals: ``scale proposal apply-merged`` turns the
 reviews of a merged pull request into approval records and evaluates them here before it writes the
 decision record and applies the proposal; ``scale review status`` evaluates the records a proposal
 holds. Tiers are information in a proposal's reports, not approval classes.
@@ -56,6 +56,13 @@ def required(policy: dict) -> int:
     return n
 
 
+def approvable(policy: dict, *exclude: str | None) -> bool:
+    """Whether enough filled seats remain, besides the people in ``exclude`` (the author, the person who merges), to
+    give the required approvals. While they do not, the owner merges under the bootstrap rule."""
+    out = {_norm(x) for x in exclude} - {""}
+    return len([m for m in reviewers(policy) if _norm(m.get("github")) not in out]) >= required(policy)
+
+
 def _reviewer(policy: dict, who: str | None) -> dict | None:
     """The listed reviewer a login or name belongs to (placeholders included), or None."""
     w = _norm(who)
@@ -108,11 +115,11 @@ def evaluate(policy: dict, approvals: list[dict], author: str | None = None, tie
         missing.append("changes requested by " + ", ".join(sorted(blocking)))
     filled = reviewers(policy)
     notes = []
-    if len([m for m in filled if _norm(m.get("github")) != _norm(author)]) < need:
+    if not approvable(policy, author):
         notes.append(f"only {len(filled)} reviewer seat(s) are filled ({len(placeholders(policy))} placeholders in "
                      f"{layout.REVIEW_POLICY}); {need} approvals from reviewers other than the author cannot be given yet")
     return {"policy_version": policy.get("policy_version"), "tier": tier, "author": author,
-            "required": f"{need} approving reviews from reviewers other than the author",
+            "required": f"{need} approving review{'s' if need != 1 else ''} from reviewers other than the author",
             "approved_by": approved, "counted": sorted(counted, key=lambda a: a.get("at") or ""), "ignored": ignored, "blocking": sorted(blocking), "notes": notes,
             "missing": missing, "satisfied": not missing}
 
@@ -140,4 +147,4 @@ def sample_records(doc: dict, fraction: float, seed: int, include_flagged: list[
     return out
 
 
-__all__ = ["load_policy", "evaluate", "reviewers", "placeholders", "required", "latest", "sample_records", "ScaleError"]
+__all__ = ["load_policy", "evaluate", "reviewers", "placeholders", "required", "approvable", "latest", "sample_records", "ScaleError"]

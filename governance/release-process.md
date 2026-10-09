@@ -5,7 +5,7 @@ join), and every step that publishes something is done by a person. No release h
 first will be `v0.1.0`, with schema 0.1.0.
 
 Releases are not the version bump. The schema's one version moves on every time a proposal is applied
-(after a merge with two approvals, or under the bootstrap rule); documents pin those versions directly. A
+(after a merge with its approval, or under the bootstrap rule); documents pin those versions directly. A
 release is a human step taken now and then: it **bundles the schema versions applied since the last
 release** (the head version, with the frozen versions), the tools and the skills, under one id.
 
@@ -69,7 +69,7 @@ previous release: it is built without `--proposal` and records no comparison.
 | 3. Prepare a branch | the owner or a reviewer | branch `release/vX.Y.Z`; set `version` in `pyproject.toml` and `release` in `scale-release.yaml`; update `CHANGELOG.md`, `CITATION.cff` (version, date) and release notes |
 | 4. Check | the same | `uv run --extra dev scale check` |
 | 5. Build | **human** | `scale release build vX.Y.Z --proposal ID … --date YYYY-MM-DD` (each proposal applied since the last release; none for v0.1.0), then `scale release verify` |
-| 6. Review | two reviewers other than the author (the bootstrap rule until the seats are filled) | pull request from `release/vX.Y.Z`; the required checks pass |
+| 6. Review | one reviewer other than the author (the owner's own: the bootstrap rule until a second reviewer joins) | pull request from `release/vX.Y.Z`; the required checks pass |
 | 7. Merge | the owner or a reviewer | merge into `main` |
 | 8. Tag and release | **human** (the owner; `v*` tags are restricted to the repository admin) | `gh release create vX.Y.Z --target <merge commit> --title vX.Y.Z --notes-file <notes>` |
 | 9. Publish | **human** approves the `pypi` deployment (where the plan allows required reviewers) | the `publish` workflow checks tag = package version = `releases/vX.Y.Z/` and that the release verifies, then publishes `scale-schema` to PyPI by trusted publishing |

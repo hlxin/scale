@@ -20,7 +20,7 @@ A proposal is a directory named by its six-digit number: ``core/proposals/<NNNNN
 - ``approvals/`` — one file per review of the merged pull request, written by ``scale proposal
   apply-merged`` from GitHub's reviews; only people approve, by reviewing the pull request.
 
-``scale review status`` evaluates the approvals against ``governance/review-policy.yaml`` (two reviewers
+``scale review status`` evaluates the approvals against ``governance/review-policy.yaml`` (one reviewer
 other than the author); ``scale proposal decide`` writes the decision record; ``scale proposal apply --confirm`` freezes the base
 version (the kernel into ``core/graph/frozen/kernel-<v>.yaml``, the domain's files and manifest into
 ``domain/graph/frozen/``, all under the base's one version ``<v>``) and installs the candidate as the new head.
@@ -999,8 +999,8 @@ scale-graph {p['base']['version']} → **{p['target_version']}** · tier **{vali
 Required: {status['required']} (governance/review-policy.yaml), given as reviews of this pull request.
 After the merge, a person starts the apply-proposals workflow for `{cs_path}` and this pull request (it needs the
 repository secret APPLY_TOKEN): it records the reviews, writes the decision record and applies the proposal
-(scale-graph {p['base']['version']} → {p['target_version']}). While the reviewer seats are placeholders, the owner applies it
-in a pull request under the bootstrap rule (`scale proposal decide {p['id']} --bootstrap-bypass`, then
+(scale-graph {p['base']['version']} → {p['target_version']}). If this is the owner's own pull request and no second reviewer has
+joined, the owner applies it in a pull request under the bootstrap rule (`scale proposal decide {p['id']} --bootstrap-bypass`, then
 `scale proposal apply {p['id']} --confirm`). `scale review status --proposal {p['id']}` shows what was counted.
 Agent agreement is not approval.
 {rs}"""
@@ -1017,11 +1017,11 @@ def decide(cs: Path, repo: Path, number: int | None = None, now: _dt.datetime | 
     The author's own review never counts; ``author`` defaults to the pull-request author the records name.
 
     ``bootstrap_bypass`` (a reason) and ``by`` (the GitHub handle of the reviewer who merged under the
-    ruleset's bootstrap bypass) record a decision without two approvals. It is a person's action, allowed
-    only while reviewer seats are placeholders (two approvals are then impossible) and only by a filled
-    reviewer; the record says so plainly (governance/GOVERNANCE.md, "Bootstrap")."""
+    ruleset's bootstrap bypass) record a decision without the required approval. It is a person's action, allowed
+    only while no other filled seat can give it (no reviewer has joined besides the one who merges) and only by a
+    filled reviewer; the record says so plainly (governance/GOVERNANCE.md, "Bootstrap")."""
     from .review import approvals
-    from .policy import evaluate, load_policy, placeholders, reviewers
+    from .policy import approvable, evaluate, load_policy, placeholders, reviewers
     layout.refuse_bundled(repo, "scale proposal decide")
     now = now or _dt.datetime.now(_dt.timezone.utc)
     p = load_proposal(cs)
@@ -1033,14 +1033,14 @@ def decide(cs: Path, repo: Path, number: int | None = None, now: _dt.datetime | 
     if bootstrap_bypass is not None:
         if not bootstrap_bypass.strip() or not by:
             raise ScaleError("a bootstrap bypass needs a reason and the reviewer who merged (--by)")
-        if not placeholders(pol):
-            raise ScaleError(f"no bootstrap bypass: every reviewer seat in {layout.REVIEW_POLICY} is filled, so two "
-                             "approvals are possible; get them on the pull request")
         if not any(by.lower() == str(m.get("github", "")).lower() for m in reviewers(pol)):
             raise ScaleError(f"{by} is not a reviewer in {layout.REVIEW_POLICY}")
+        if approvable(pol, by, author):
+            raise ScaleError(f"no bootstrap bypass: reviewers in {layout.REVIEW_POLICY} besides {by} can approve; "
+                             "get the approval on the pull request")
         st = {**st, "approved_by": [by], "missing": [],
-              "notes": st["notes"] + [f"Bootstrap bypass by {by}: {bootstrap_bypass.strip()} (not approved by two reviewers; "
-                                      f"{len(placeholders(pol))} reviewer seats were still placeholders)"]}
+              "notes": st["notes"] + [f"Bootstrap bypass by {by}: {bootstrap_bypass.strip()} (not approved by a reviewer other than the "
+                                      f"author; {len(placeholders(pol))} reviewer seats were still placeholders)"]}
     elif not st["satisfied"]:
         raise ScaleError("not approved: " + "; ".join(st["missing"]))
     ddir = repo / layout.DECISIONS
@@ -1049,7 +1049,7 @@ def decide(cs: Path, repo: Path, number: int | None = None, now: _dt.datetime | 
     ev = load_doc(cs / "evidence_pack.json")
     path = ddir / f"{n:04d}-{p['id']}.md"
     where = f"pull request [#{pr}]({pr_url})" if pr and pr_url else (f"pull request #{pr}" if pr else "the recorded reviews")
-    status = (f"merged under the bootstrap bypass by {by}, without two approvals (governance/GOVERNANCE.md, Bootstrap)"
+    status = (f"merged under the bootstrap bypass by {by}, without an approval (governance/GOVERNANCE.md, Bootstrap)"
               if bootstrap_bypass else f"approved in {where} under governance/review-policy.yaml (policy version "
               f"{st['policy_version']})")
     lines = [f"# Decision record {n:04d} — proposal {p['id']}: {p['title']}", "",

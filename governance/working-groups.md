@@ -25,8 +25,8 @@ states it and must equal the catalysis manifest's (`scale domains check`); every
 
 ## What every change needs
 
-Every pull request, to the catalysis domain or to the science kernel, needs two approving reviews from
-reviewers other than its author (the bootstrap rule until the seats are filled). Nobody may redeclare an
+Every pull request, to the catalysis domain or to the science kernel, needs one approving review from
+a reviewer other than its author (the owner's own pull requests: the bootstrap rule until a second reviewer joins). Nobody may redeclare an
 identifier that the kernel or the catalysis domain declares (extend with `is_a`, `extends` or
 `adds_properties` with a new key). A schema change is a proposal, applied after the merge; official
 releases follow [release-process.md](release-process.md).
@@ -55,7 +55,7 @@ automatically. There are no permanent lab or working-group branches.
 
 ## Joining and stepping down
 
-- **Joining.** A pull request edits `DOMAIN.yaml` and CODEOWNERS (two approvals, or the bootstrap rule); the
+- **Joining.** A pull request edits `DOMAIN.yaml` and CODEOWNERS (one approval, or the bootstrap rule); the
   owner invites the person as a collaborator. Only people who agreed are added.
 - **Stepping down.** In `DOMAIN.yaml` the person moves from `maintainers.people` to `contributors`, so their
   credit stays.

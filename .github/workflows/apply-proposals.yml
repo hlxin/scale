@@ -19,7 +19,8 @@ name: apply-proposals
 # writer changes on a branch runs with that branch's copy, so it is never given write access here. The job
 # runs only from main.
 #
-# While the reviewer seats are placeholders, two approvals are impossible: the owner records a decision under
+# A proposal the owner authored cannot be approved by them (GitHub does not let an author approve) until a second reviewer
+# joins: the owner records a decision under
 # the bootstrap rule instead (`scale proposal decide --bootstrap-bypass`, governance/GOVERNANCE.md) and applies
 # the proposal locally with `scale proposal apply --confirm` in a pull request.
 "on":

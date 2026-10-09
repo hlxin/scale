@@ -153,8 +153,8 @@ TOOLS: list[dict] = [
 ]
 
 HUMAN_ONLY = {
-    "approve a pull request (two reviewers other than the author approve every change, once the reviewer seats are "
-    "filled; governance/GOVERNANCE.md, Bootstrap, until then)": "gh pr review NUMBER --approve",
+    "approve a pull request (one reviewer other than the author approves every change, once a reviewer besides the "
+    "owner has joined; governance/GOVERNANCE.md, Bootstrap, until then)": "gh pr review NUMBER --approve",
     "merge an approved pull request (a merged proposal is then applied with the apply-proposals workflow)":
         "gh pr merge NUMBER --squash",
     "apply a merged proposal (manual workflow; it needs a token configured for this repository)":
