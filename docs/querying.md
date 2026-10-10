@@ -53,9 +53,9 @@ document's digest and access, its sources' publication status, its evidence quot
 tools do this for a document given by path and keep it until the file changes.
 
 An evidence index records the digest of the document it was built from (`graph_sha256`). `scale graph
-query` (text) and `scale graph search`, and the agent tools, use an index only for that document, or for
-one whose evidence quotes it holds exactly (an index built before the digest was recorded); another
-document's index, a less open one or a stale copy, is refused with the advice to rebuild it, and a text
+query` (text) and `scale graph search`, and the agent tools, use an index only for a document whose evidence quotes it
+holds exactly, whatever digest it records (a header is no proof of what the index holds); another document's index,
+a less open one, a stale copy or one that names the document but holds other text, is refused with the advice to rebuild it, and a text
 plan never lets a quote the queried document does not hold choose a row. A `scale graph search` result
 carries `access` as a query result does: its hits are the document's verbatim quotes.
 
