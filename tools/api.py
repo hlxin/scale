@@ -119,7 +119,7 @@ TOOLS: list[dict] = [
                        "by `scale graph index`, or built in memory from the document when none is); hits lead to the records that cite each passage. The "
                        "result's access says where the hits may go: the whole document's, as scale_query's.",
         "input_schema": {"type": "object", "required": ["path", "query"], "properties": {
-            "path": _DOC["path"], "query": {"type": "string"}, "k": {"type": "integer", "default": 10},
+            "path": _DOC["path"], "query": {"type": "string"}, "k": {"type": "integer", "minimum": 1, "default": 10},
             "mode": {"type": "string", "enum": ["hybrid", "vector", "keyword", "rrf"], "default": "hybrid"},
             "published_before": {"type": "string", "description": "Only evidence from sources published before this year."}}},
     },

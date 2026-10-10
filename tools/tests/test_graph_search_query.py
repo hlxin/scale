@@ -160,6 +160,25 @@ def test_search_is_exactly_the_head_of_a_full_sort():
     assert np.array_equal(kept, blocked)
 
 
+def test_a_search_asks_for_at_least_one_hit(tmp_path, capsys, doc):
+    """k is a whole number of at least 1: zero, a negative number or a boolean is refused with a message (it crashed
+    on a match, or never returned without one); a search that matches nothing returns no hits."""
+    from scale.cli import main
+    items = [{"id": f"ex:t/r{j:02d}#evidence/0", "record": f"ex:t/r{j:02d}", "evidence": 0, "text": t}
+             for j, t in enumerate(SEARCH_TEXTS)]
+    ix = Index.build(items)
+    for k in (0, -1, True, 2.5):
+        for q in ("copper", "xyzzy"):
+            with pytest.raises(ScaleError, match="at least 1"):
+                ix.search(q, k=k, mode="keyword")
+    assert ix.search("xyzzy nothing", k=1, mode="keyword") == [] and ix.search("xyzzy", k=3, mode="rrf") == []
+    assert len(ix.ranked(ix.bm25("copper"), 0)) == 0
+    (tmp_path / "doc.json").write_text(json.dumps(doc))
+    with pytest.raises(SystemExit):
+        main(["graph", "search", str(tmp_path / "doc.json"), "copper", "-k", "0"])
+    assert "at least 1" in capsys.readouterr().err
+
+
 def test_rrf_fuses_the_keyword_and_vector_rankings():
     from scale.passages import RRF_K
     items = [{"id": f"ex:t/r{j:02d}#evidence/0", "record": f"ex:t/r{j:02d}", "evidence": 0, "text": t}
