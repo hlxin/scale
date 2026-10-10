@@ -215,6 +215,25 @@ def test_a_kept_schema_is_read_again_when_its_files_change(tk, tmp_path):
     assert "ZzProbe" in tk._spec(man)["nodes"]
 
 
+def test_a_same_size_replacement_keeping_its_timestamp_is_read_again(tk):
+    """A document replaced by one of the same size whose modification time is set back to the old one is still a new
+    version: its change time differs, and the toolkit reads it again."""
+    import os
+    import time
+    tk.call("scale_example", {"name": "electro"})
+    f = tk.workspace / "electro.json"
+    plan = {"match": {"label": "CatalyticTest", "as": "t"}, "return": ["t.name"]}
+    first = tk.call("scale_query", {"path": "electro.json", "plan": plan})["rows"][0]["values"]["t.name"]
+    st = os.stat(f)
+    time.sleep(0.01)
+    text = f.read_text()
+    renamed = "X" + first[1:]
+    f.write_text(text.replace(json.dumps(first), json.dumps(renamed), 1))
+    os.utime(f, ns=(st.st_atime_ns, st.st_mtime_ns))
+    assert os.stat(f).st_size == st.st_size and os.stat(f).st_mtime_ns == st.st_mtime_ns
+    assert tk.call("scale_query", {"path": "electro.json", "plan": plan})["rows"][0]["values"]["t.name"] == renamed
+
+
 def test_changing_an_answer_never_changes_the_loaded_document(tk):
     """A query's result shares no object with the document the toolkit keeps loaded: scrambling every value of one
     answer leaves the next answer, and the document's digest, as they were."""

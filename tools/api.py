@@ -197,6 +197,13 @@ def template(domain: str | None, version: str) -> dict:
     }
 
 
+def _file_key(st: os.stat_result) -> tuple:
+    """What tells a file's versions apart for the toolkit's caches: its identity (device, inode), its change time
+    (which copying a file's timestamps does not set) and its modification time and size. A replacement of the same
+    size that keeps the modification time is still a new version."""
+    return (st.st_dev, st.st_ino, st.st_ctime_ns, st.st_mtime_ns, st.st_size)
+
+
 class ScaleToolkit:
     """SCALE tools for an agent. ``call(name, arguments)`` never raises; errors come back as data."""
 
@@ -261,11 +268,11 @@ class ScaleToolkit:
 
     def _load(self, path: str) -> dict:
         """The document at ``path`` with what its queries reuse: ``{doc, graphs (a query Graph per schema), index}``,
-        kept while the file's modification time and size are unchanged (a long-running server loads a large graph and
-        indexes it once). The tools never change a loaded document; a few recent documents are kept."""
+        kept while the file is unchanged (:func:`_file_key`: its identity, change and modification times and size; a
+        long-running server loads a large graph and indexes it once). The tools never change a loaded document; a few recent documents are kept."""
         p = self._path(path).resolve()
         st = p.stat()
-        key = (st.st_mtime_ns, st.st_size)
+        key = _file_key(st)
         hit = self._loaded.get(str(p))
         if hit is None or hit["key"] != key:
             hit = {"key": key, "doc": load_doc(p), "graphs": {}, "index": None, "index_key": None}
@@ -292,8 +299,7 @@ class ScaleToolkit:
         from .pgraph_schema import spec_sources
         p = pgraph.pinned(manifest, version, doc)
         # kept while none of the files the schema is read from changes (a long-running server sees a new head)
-        key = tuple((str(f), f.stat().st_mtime_ns, f.stat().st_size) if f.exists() else (str(f), None, None)
-                    for f in spec_sources(p))
+        key = tuple((str(f), _file_key(f.stat()) if f.exists() else None) for f in spec_sources(p))
         hit = self._specs.get(str(p))
         if hit is None or hit[0] != key:
             hit = self._specs[str(p)] = (key, pgraph.load_spec(p))
@@ -461,7 +467,7 @@ class ScaleToolkit:
         stem = p.with_name(p.name.removesuffix(".json").removesuffix(".graph") + ".evidence")
         if hit is None:
             return index_for(stem, doc)
-        key = tuple((f.stat().st_mtime_ns, f.stat().st_size) if f.exists() else None
+        key = tuple(_file_key(f.stat()) if f.exists() else None
                     for f in (Path(f"{stem}{x}") for x in (".jsonl", ".i8", ".terms")))
         if hit["index"] is None or hit["index_key"] != key:
             hit["index"], hit["index_key"] = index_for(stem, doc), key
