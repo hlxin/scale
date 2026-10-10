@@ -177,6 +177,28 @@ def test_rrf_fuses_the_keyword_and_vector_rankings():
     assert hits == ix.search(q, k=50, mode="rrf")
 
 
+def test_saved_term_statistics_that_were_altered_are_rebuilt(tmp_path):
+    """The arrays of a saved .terms file carry their digest: two postings swapped (the file's size and header
+    unchanged) are not read; the statistics are rebuilt from the items, and the search answers as before."""
+    import numpy as np
+    from scale.passages import TERMS_MAGIC
+    items = [{"id": f"ex:t/r{j:02d}#evidence/0", "record": f"ex:t/r{j:02d}", "evidence": 0, "text": t}
+             for j, t in enumerate(SEARCH_TEXTS)]
+    a = Index.build(items)
+    a.save(tmp_path / "ix")
+    expect = a.search("copper", k=5, mode="keyword")
+    data = bytearray((tmp_path / "ix.terms").read_bytes())
+    at = len(TERMS_MAGIC)
+    at += 8 + int.from_bytes(data[at:at + 8], "little") + 8 * (len(a.vocab) + 1)     # the postings' rows
+    rows = np.frombuffer(bytes(data[at:at + 4 * len(a.post_item)]), dtype=np.int32).copy()
+    i, j = next((i, j) for i in range(len(rows)) for j in range(len(rows)) if rows[i] != rows[j])
+    rows[i], rows[j] = rows[j], rows[i]
+    data[at:at + 4 * len(rows)] = rows.tobytes()
+    (tmp_path / "ix.terms").write_bytes(bytes(data))
+    b = Index.load(tmp_path / "ix")
+    assert np.array_equal(b.post_item, a.post_item) and b.search("copper", k=5, mode="keyword") == expect
+
+
 def test_saved_term_statistics_are_used_only_with_their_items(tmp_path):
     """The inverted index saved beside an index (<stem>.terms) is read back as saved, and ignored (rebuilt from the
     items) when the items it was saved with changed or it is missing."""

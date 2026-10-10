@@ -290,14 +290,14 @@ class Index:
         Path(f"{stem}.jsonl").write_bytes(raw)
         with open(f"{stem}.i8", "wb") as f:
             f.write(np.ascontiguousarray(self.vectors, dtype=np.int8).tobytes())
+        payload = b"".join(np.ascontiguousarray(a, dtype=t).tobytes() for a, t in (
+            (self.indptr, np.int64), (self.post_item, np.int32), (self.post_count, np.int32), (self.lengths, np.int64)))
         head = json.dumps({"items_sha256": hashlib.sha256(raw).hexdigest(), "count": len(self.items),
-                           "words": len(self.vocab), "postings": int(len(self.post_item)), "vocab": self.vocab},
+                           "words": len(self.vocab), "postings": int(len(self.post_item)), "vocab": self.vocab,
+                           "payload_sha256": hashlib.sha256(payload).hexdigest()},
                           ensure_ascii=False, sort_keys=True).encode("utf-8")
         with open(f"{stem}.terms", "wb") as f:
-            f.write(TERMS_MAGIC + len(head).to_bytes(8, "little") + head)
-            for a, t in ((self.indptr, np.int64), (self.post_item, np.int32), (self.post_count, np.int32),
-                         (self.lengths, np.int64)):
-                f.write(np.ascontiguousarray(a, dtype=t).tobytes())
+            f.write(TERMS_MAGIC + len(head).to_bytes(8, "little") + head + payload)
 
     @classmethod
     def load(cls, stem: Path) -> "Index":
@@ -416,8 +416,9 @@ class Index:
 
 
 def _read_terms(stem: Path, items_raw: bytes, count: int):
-    """The inverted index saved at ``<stem>.terms``, or None (then it is rebuilt from the items) when there is none or
-    it was not saved with exactly these items."""
+    """The inverted index saved at ``<stem>.terms``, or None (then it is rebuilt from the items) when there is none, it
+    was not saved with exactly these items, its arrays do not match the digest it records, or they do not form an
+    inverted index of these items (offsets that run up to the postings, rows within the items, counts above zero)."""
     np = _np()
     p = Path(f"{stem}.terms")
     if not p.exists():
@@ -426,20 +427,30 @@ def _read_terms(stem: Path, items_raw: bytes, count: int):
     if not data.startswith(TERMS_MAGIC):
         return None
     at = len(TERMS_MAGIC)
-    size = int.from_bytes(data[at:at + 8], "little")
-    head = json.loads(data[at + 8:at + 8 + size].decode("utf-8"))
+    try:
+        size = int.from_bytes(data[at:at + 8], "little")
+        head = json.loads(data[at + 8:at + 8 + size].decode("utf-8"))
+        words, postings, vocab = int(head["words"]), int(head["postings"]), head["vocab"]
+    except (ValueError, KeyError, TypeError, UnicodeDecodeError):
+        return None
     if head.get("count") != count or head.get("items_sha256") != hashlib.sha256(items_raw).hexdigest():
         return None
     at += 8 + size
+    if head.get("payload_sha256") != hashlib.sha256(data[at:]).hexdigest():
+        return None                                   # the arrays changed since they were saved (or an older file)
     out = []
-    for t, length in ((np.int64, head["words"] + 1), (np.int32, head["postings"]), (np.int32, head["postings"]),
-                      (np.int64, count)):
+    for t, length in ((np.int64, words + 1), (np.int32, postings), (np.int32, postings), (np.int64, count)):
         nbytes = length * np.dtype(t).itemsize
         out.append(np.frombuffer(data[at:at + nbytes], dtype=t))
         at += nbytes
-    if at != len(data):
+    indptr, rows, counts, lengths = out
+    if at != len(data) or not isinstance(vocab, list) or len(vocab) != words or vocab != sorted(set(vocab)):
         return None
-    return (head["vocab"], *out)
+    if words + 1 != len(indptr) or indptr[0] != 0 or indptr[-1] != postings or (np.diff(indptr) < 0).any():
+        return None
+    if postings and (rows.min() < 0 or rows.max() >= count or counts.min() < 1):
+        return None
+    return (vocab, *out)
 
 
 def graph_sha256(doc: dict) -> str:
