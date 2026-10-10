@@ -72,7 +72,7 @@ kernel identifier; `scale domains check` reports both.
 3. Open a pull request and say how the change affects the catalysis domain; `scale ci spec-changes` lists who
    must review. The proposal-check workflow posts its summary.
 4. Review: one approving review from a reviewer other than the author, as for every change (the owner is a
-   reviewer; the owner's own pull requests are merged under the bootstrap rule until a second reviewer joins)
+   reviewer; the owner's own pull requests are merged under the bootstrap rule until another reviewer joins)
    ([governance/GOVERNANCE.md](../governance/GOVERNANCE.md)). The tier is information for the reviewers; a
    breaking change also needs a migration step.
 5. After the merge, the proposal is applied (the apply-proposals workflow, started by a person, or

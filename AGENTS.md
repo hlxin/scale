@@ -57,7 +57,7 @@ repository). Use the plain `uvx scale-schema …` form only once a release is on
   user's account: GitHub does not let an author approve their own pull request, so a pull request an agent opens
   as the user cannot be approved by the user.
 - **Humans only:** approving and merging pull requests (one reviewer other than the author approves every
-  change and merges it; the owner is a reviewer, and merges their own pull requests under the bootstrap rule until a second reviewer joins), running
+  change and merges it; the owner is a reviewer, and merges their own pull requests under the bootstrap rule until another reviewer joins), running
   the apply-proposals workflow, building releases and filing issues. Give the user the command from
   `status.human_only_actions`.
 

@@ -154,7 +154,7 @@ All modules are in `tools/scale/`.
   a newer one is explicit. One version names the whole schema, kernel and catalysis together.
 - **Agents propose; people approve** ([review-policy.yaml](../governance/review-policy.yaml)). Every change needs one
   approving review from a reviewer other than its author (the owner is a reviewer; the owner's own pull requests are
-  merged under the bootstrap rule until a second reviewer joins); new concepts enter as provisional; a merged proposal is applied by a
+  merged under the bootstrap rule until another reviewer joins); new concepts enter as provisional; a merged proposal is applied by a
   workflow a person starts, which checks those reviews again.
 - **Formats by author:** machine-written documents are canonical JSON; human-written specifications are block-style
   YAML ([style.md](style.md)).

@@ -52,7 +52,7 @@ feedback digest issue (label feedback-digest) ──► a person opens a pull re
 
 Nothing is decided in the digest or in a comment. A change is decided by the reviews of its pull request:
 one approval from a reviewer other than its author, and no reviewer asking for changes (the owner is a reviewer;
-until a second reviewer joins, the owner merges their own pull requests under the bootstrap rule, [GOVERNANCE.md](GOVERNANCE.md)). A schema proposal
+until another reviewer joins, the owner merges their own pull requests under the bootstrap rule, [GOVERNANCE.md](GOVERNANCE.md)). A schema proposal
 merged that way is then applied, which writes its decision record.
 
 ## For agent systems: proposing

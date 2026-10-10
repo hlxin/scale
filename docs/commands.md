@@ -108,7 +108,7 @@ It compares the branch with its merge base on `--base` and exits 1 when the bran
 It prints whose review the change requests according to `.github/CODEOWNERS` at the merge base (the owner sets;
 the fewest owners who own every changed path; a code owner's approval is not required), the rule that every pull
 request needs one approving review from a reviewer other than its author (the owner is a reviewer; the owner's own
-pull requests are merged under the bootstrap rule until a second reviewer joins), and, when `core/` changes, the catalysis domain it affects.
+pull requests are merged under the bootstrap rule until another reviewer joins), and, when `core/` changes, the catalysis domain it affects.
 
 `scale ci proposal-check --base origin/main` runs `scale proposal check` on every draft or proposed proposal the
 branch changes and prints the pull-request comment (tier, diff counts, fixtures, migration effects, competency
