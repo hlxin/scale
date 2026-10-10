@@ -2,6 +2,18 @@
 
 ## Unreleased
 
+- **A knowledge-graph bundle's schema is the vocabulary: scale-catalysis 0.1.0.** `kg/schema.json` is no longer the
+  subset of types a graph uses, named after the bundle and versioned with it: it is the catalysis vocabulary of the
+  scale-graph version the graph pins, every label and edge type with every property a bundle can carry, the same in
+  every bundle of that version, named `scale-catalysis` with the scale-graph version (`scale-kernel` for a kernel-only
+  graph). Its `extends` names scale-graph 0.1.0 by its spec digest, which identifies it: `scale-catalysis` was also
+  the package name of the repository SCALE replaced, whose schemas were numbered 0.1.0 to 0.8.0. A value not of its
+  property's declared type is kept as text in `<property>_as_reported` (no type is changed for a graph), property
+  names are snake_case (`pH` is `ph`), and every exported record is checked against the schema before anything is
+  written. `scale graph validate` refuses a bundle's `kg/graph.json`, whatever version it names. The methanol bundle is
+  released as 2.0.0 (`methanol-synthesis-pre1966_v2.0.0.zip`, following 1.1.1), titled "Methanol Synthesis CO/CO2+H2
+  Pre-1966"; every type and property of 1.1.1's schema is in it; the format's validator reports 0 errors and one
+  warning, that the schema's version is lower than 1.1.1's (the schema is another one, so its numbering restarts).
 - **A knowledge-graph bundle has a short title by default.** A platform names an imported graph after the bundle's
   title (`topic`, and the schema's `title`). `scale graph export --to kg-bundle` takes `--title`; by default the title
   is the graph's own when it has at most 40 characters, and otherwise its leading words, cut at a word boundary and

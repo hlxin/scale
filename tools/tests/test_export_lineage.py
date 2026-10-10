@@ -172,6 +172,31 @@ def test_a_link_resting_only_on_withheld_quotes_is_exported_with_their_digests(t
     assert f"{T}/link/uses" not in _by_scale(tmp_path / "c") and m["export_report"]["withheld_too_long"] == 1
 
 
+def test_every_bundle_of_a_version_declares_the_same_schema(tmp_path, head):
+    """kg/schema.json is the vocabulary of the scale-graph version (scale-catalysis 0.1.0), not the graph's subset: two
+    different graphs of one version export the same schema, with every label (a Source as Publication) and every edge
+    type, and a value not of its declared type is kept as text beside it."""
+    a = build()
+    b = copy.deepcopy(a)                                   # another graph of the version: its sources alone
+    b["nodes"], b["links"] = [n for n in b["nodes"] if n["label"] == "Source"], []
+    kgbundle.export(a, head, tmp_path / "a", "a", created="2026-10-06T00:00:00Z")
+    kgbundle.export(b, head, tmp_path / "b", "b", created="2026-10-06T00:00:00Z")
+    sa, sb = (json.loads((tmp_path / x / "kg/schema.json").read_text()) for x in "ab")
+    assert sa == sb and (sa["schema_id"], sa["version"]) == ("scale-" + "catalysis", head["version"])
+    assert set(sa["node_types"]) == {*head["nodes"]} - {"Source"} | {"Publication"}
+    assert set(sa["edge_types"]) == set(head["edges"])
+    assert sa["extends"] == {"schema_id": "scale-graph", "version": head["version"], "sha256": pgraph.spec_sha256(head)}
+    m = json.loads((tmp_path / "a/bundle.json").read_text())
+    assert (m["schema_id"], m["schema_version"]) == ("scale-" + "catalysis", head["version"])
+    doc = build()
+    node = next(n for n in doc["nodes"] if n["label"] == "Source")
+    node["props"]["published_on"] = "spring 1928"                        # not a date: kept as text beside it
+    kgbundle.export(doc, head, tmp_path / "c", "c", created="2026-10-06T00:00:00Z")
+    pub = next(n for n in json.loads((tmp_path / "c/kg/graph.json").read_text())["nodes"] if n["label"] == "Publication")
+    assert pub["props"]["published_on_as_reported"] == "spring 1928" and "published_on" not in pub["props"]
+    assert json.loads((tmp_path / "c/kg/schema.json").read_text()) == sa
+
+
 def test_the_bundle_title_is_short_by_default_and_can_be_named(tmp_path, head):
     """A platform names an imported graph after the bundle's title (topic, and the schema's title): the graph's title
     when it has at most 40 characters; otherwise its leading words, cut at a word boundary, with no parenthesis left
@@ -181,7 +206,8 @@ def test_the_bundle_title_is_short_by_default_and_can_be_named(tmp_path, head):
     doc["graph"]["title"] = short
     m = kgbundle.export(doc, head, tmp_path / "a", "t", created="2026-10-06T00:00:00Z")
     schema = json.loads((tmp_path / "a/kg/schema.json").read_text())
-    assert m["topic"].startswith(short) and schema["title"] == m["topic"] and "title_shortened" not in m["export_report"]
+    assert m["topic"].startswith(short) and "title_shortened" not in m["export_report"]
+    assert schema["title"] == f"{schema['schema_id']} {schema['version']}"          # the schema's own name, not the graph's
     long = ("Methanol synthesis (CO and CO2 hydrogenation to methanol), historical literature published before 1966-01-01 "
             "(105 sources, 1923-1965), curated from the source texts")
     doc["graph"]["title"] = long

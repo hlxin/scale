@@ -619,15 +619,15 @@ def test_the_bundle_export_report_counts_only_the_conversions_the_bundle_holds(t
 
 @pytest.mark.parametrize("fixture", sorted(p.name for p in P9.glob("pass-*.json")))
 def test_the_bundle_export_of_every_pass_fixture_is_a_valid_bundle(tmp_path, fixture):
-    """A document of sources and notices alone reports nothing: the bundle declares no REPORTED_IN (the format
-    rejects an edge type with an empty from), and it validates."""
+    """A document of sources and notices alone reports nothing: the bundle holds no REPORTED_IN edge (its schema, the
+    vocabulary, declares the type with every label in from), and it validates."""
     d = load_doc(P9 / fixture)
     m = kgbundle.export(d, spec_of(d), tmp_path / "b", "fx", created="2026-10-06T00:00:00Z")
     schema = json.loads((tmp_path / "b/kg/schema.json").read_text())
     assert all(t["from"] and t["to"] for t in schema["edge_types"].values())
     g = json.loads((tmp_path / "b/kg/graph.json").read_text())
     if all(n["label"] == "Source" for n in d["nodes"]):
-        assert "REPORTED_IN" not in schema["edge_types"]
+        assert not [e for e in g["links"] if e["type"] == "REPORTED_IN"]
     held = {e["props"]["scale_id"] for e in g["links"] if e["props"].get("metadata_only")}
     assert m["export_report"].get("lifecycle_links_metadata_only", 0) == len(held)
     v = _bundle_validator()
