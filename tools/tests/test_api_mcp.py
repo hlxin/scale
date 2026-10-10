@@ -301,6 +301,20 @@ def test_mcp_in_process(tk):
     assert "name: curate-source" in prompt["result"]["messages"][0]["content"]["text"]
 
 
+def test_a_malformed_message_is_answered_and_the_server_keeps_serving(tk):
+    """JSON that is not a request object (a number, a string, an empty batch, an entry of a batch) or params that are
+    not an object is answered with a JSON-RPC error, and the next request is still served."""
+    import io
+    srv = MCPServer(tk)
+    lines = ["1", '"text"', "[]", "[2]", '{"jsonrpc": "2.0", "id": 7, "method": "ping", "params": [1]}',
+             '{"jsonrpc": "2.0", "id": 8, "method": "ping"}']
+    out = io.StringIO()
+    srv.serve(io.StringIO("\n".join(lines) + "\n"), out)
+    replies = [json.loads(x) for x in out.getvalue().splitlines()]
+    assert [r.get("error", {}).get("code") for r in replies] == [-32600, -32600, -32600, -32600, -32602, None]
+    assert replies[-1] == {"jsonrpc": "2.0", "id": 8, "result": {}}
+
+
 def test_mcp_stdio_subprocess(tmp_path):
     msgs = [{"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {"protocolVersion": "2025-06-18"}},
             {"jsonrpc": "2.0", "method": "notifications/initialized"},

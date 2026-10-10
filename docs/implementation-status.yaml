@@ -195,7 +195,7 @@ capabilities:
 - name: MCP server over stdio (tools + skills as prompts), dependency-free
   status: functioning
   where: scale mcp
-  tests: [test_mcp_in_process, test_mcp_stdio_subprocess]
+  tests: [test_mcp_in_process, test_a_malformed_message_is_answered_and_the_server_keeps_serving, test_mcp_stdio_subprocess]
   notes: Verified by building the wheel and running status, the agent tools, mcp, skills install, release verify and graph describe from outside the repository; CI job `package` repeats this.
 - name: Installable without a checkout (schemas, releases, skills and examples bundled in the wheel)
   status: functioning
