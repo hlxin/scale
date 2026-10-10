@@ -1,4 +1,4 @@
-"""Export a scale-graph document as a GALAXY knowledge-graph bundle (galaxy-kg-bundle 1.0.0).
+"""Export a scale-graph document as a GALAXY knowledge-graph bundle (galaxy-kg-bundle 1.1.0).
 
     scale graph export GRAPH --to galaxy --out DIR [--bundle-id ID] [--version 1.0.0] [--text slug=file ...]
                         [--previous DIR | --ids-from DIR] [--replaced FILE] [--corpus MANIFEST]
@@ -16,7 +16,11 @@ The mapping, and what it cannot carry:
 * Links become edges with the canonical id ``e:sha256(type|source|target|source_id)[:16]``. GALAXY
   requires every edge except REPORTED_IN to carry verbatim evidence from one source: a link
   with quotes from several sources is split into one edge per source; a link with no quote is
-  not exported and is listed in the export report. The exception are the source-lifecycle links
+  not exported and is listed in the export report. A quote withheld under the copyright cap (its digest and length
+  in the evidence note) is evidence in format 1.1.0: ``quote_withheld`` ``{sha256, chars, normalization:
+  scale-match-text-1, reason: copyright}`` (a withheld transcription likewise), so a link resting only on withheld
+  quotes is still an edge; one longer than GALAXY's 600 characters is left out (``withheld_too_long``), and a source
+  whose text the bundle ships is quoted, never withheld. The exception are the source-lifecycle links
   (RETRACTS, UPDATES): a notice is bibliographic metadata, so such a link without a
   quote is exported with ``metadata_only: true`` and the notice's title as its evidence (locator: title),
   the notice being its source, and a Dataset it reaches is reported in the notice (so the link keeps both
@@ -83,11 +87,13 @@ Provenance and value detail the GALAXY format has a place for:
   ``retrieved_from`` when they are recorded.
 * A label or edge type whose ``maps_to`` names an absolute IRI (http or https) gets it as the type's ``iri``.
 
+* Typed absences (format 1.1.0): a value ``not_reported`` (with its ``missing_reason``), ``not_measured``,
+  ``not_applicable``, ``below_detection_limit`` or ``below_quantification_limit`` has no value in the bundle and is
+  listed in the record's ``_value_status`` under the property its value would have been exported as (the property
+  declared), counted by status (``absences``); a detection limit is not carried.
+
 What the GALAXY format cannot carry, and stays only in the scale-graph document:
 
-* typed absences: a value ``not_reported`` (with its ``missing_reason``), ``not_measured``, ``not_applicable``,
-  ``below_detection_limit`` or ``below_quantification_limit`` is left out, as GALAXY asks (principle 6), and counted
-  by status (``absences_not_exported``), so a host cannot answer "missing context" from a bundle;
 * intervals (``interval_lower``/``interval_upper``, ``coverage_factor``, ``confidence_level``), ``replicates``,
   a value's ``origin``, ``target``, ``variable``, ``definition``, ``produced_by``,
   ``calibration``, ``evidence_ids`` and ``note``: only the reported text survives;
@@ -156,11 +162,16 @@ import re
 import unicodedata
 from pathlib import Path
 
-from . import lifecycle, pgraph
+from . import lifecycle, pgraph, rights
 from .pgraph_query import SECOND_HAND_ECO, _eco
 from .util import ScaleError
 
-FORMAT_VERSION = "1.0.0"
+FORMAT_VERSION = "1.1.0"
+NORMALIZATION = "scale-match-text-1"   # the verbatim checker's match_text, as GALAXY names it
+WITHHELD_MAX = 600                     # GALAXY's longest quote, withheld or not
+ABSENCE_STATUSES = {"not_reported", "not_measured", "not_applicable", "below_detection_limit",
+                    "below_quantification_limit"}           # GALAXY's typed absences (_value_status)
+MISSING_REASONS = {"not_stated_in_source", "not_curated", "ambiguous_in_source", "withheld", "not_extractable"}
 # access levels a record may carry in a bundle (scale_access): the level on the export date
 SCALE_ACCESS = {"type": "enum", "values": list(pgraph.OPENNESS),
                 "description": "who may see this record under its SCALE stewardship, on the export date, where that differs "
@@ -612,8 +623,21 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
                 k = f"scale_{k}"
             if pdef.get("type") == "value":
                 tk, q, text = _quantity(k, v)
-                if isinstance(v, dict) and v.get("status", "present") != "present":     # a typed absence: left out, counted
-                    tally(owner, "absences_not_exported", str(v.get("status")))
+                if isinstance(v, dict) and v.get("status", "present") != "present":     # a typed absence (format 1.1.0)
+                    status = v.get("status")
+                    if status in ABSENCE_STATUSES:
+                        key = tk if k in CANONICAL else f"{tk}_as_reported"   # the property a value would have used
+                        if key in outp:
+                            continue
+                        declare(table, label_or_type, key, {"type": "quantity", "unit": CANONICAL[k][0]} if k in CANONICAL
+                                else {"type": "string", "description": f"{tk} as reported (not converted)"})
+                        entry = {"status": status}
+                        if status == "not_reported" and v.get("missing_reason") in MISSING_REASONS:
+                            entry["missing_reason"] = v["missing_reason"]
+                        outp.setdefault("_value_status", {})[key] = entry
+                        tally(owner, "absences", status)
+                    else:
+                        tally(owner, "absences_not_exported", str(status))
                 elif q or text:
                     value_flags(label_or_type, tk, v, table, owner, outp)
                 if isinstance(v, dict) and v.get("status", "present") == "present" and isinstance(v.get("basis"), str) \
@@ -680,15 +704,27 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
             # a reading of a page image cites its transcription, the printed text as read on the image (it
             # corrects the OCR text shipped with the bundle, so GALAXY's text check may not find it verbatim)
             text = ev.get("quote") or ev.get("transcription")
-            if not text or ev.get("source") not in src_of:
+            if ev.get("source") not in src_of:
                 continue
             sid = src_of[ev["source"]]
-            item = {"quote": text[:600], "source_id": sid, "locator": _locator(ev.get("locator"), ev.get("kind"))}
+            if text:
+                item = {"quote": text[:600], "source_id": sid, "locator": _locator(ev.get("locator"), ev.get("kind"))}
+            else:       # a quote withheld under the copyright cap: its digest and length (format 1.1.0)
+                held = sorted((f != "quote", f, h, n) for f, h, n in rights.withheld(ev) if f in ("quote", "transcription"))
+                if not held or sid in shipped_text:     # a shipped text is quoted, never withheld
+                    continue
+                _, field, h, n = held[0]
+                if not 1 <= n <= WITHHELD_MAX:
+                    report["withheld_too_long"] = report.get("withheld_too_long", 0) + 1
+                    continue
+                item = {"quote_withheld": {"sha256": h, "chars": n, "normalization": NORMALIZATION, "reason": "copyright"},
+                        "source_id": sid, "locator": _locator(ev.get("locator"), ev.get("kind"))}
+                text = None
             if not ev.get("quote") and ev.get("reading"):
                 item["reading"] = ev["reading"]
             if ev.get("evidence_type"):
                 item["evidence_type"] = ev["evidence_type"]
-            if sid in shipped_text and ev.get("quote"):          # offsets into the text the bundle ships
+            if sid in shipped_text and ev.get("quote") and "quote" in item:     # offsets into the text the bundle ships
                 if sid not in norms:
                     norms[sid] = _normalized(shipped_text[sid])
                 span = char_span(shipped_text[sid], item["quote"], norms[sid])

@@ -138,9 +138,10 @@ def test_bounds_approximations_absences_and_dates_are_exported_or_counted(tmp_pa
     t = by[f"{T}/test/1"]["props"]
     assert t["conversion"]["value"] == 5 and t["conversion_bound"] == "upper"
     assert t["temperature"]["value"] == 523.15 and t["temperature_qualifier"] == "approximate"
-    assert "pressure" not in t and "pressure_as_reported" not in t                     # a typed absence is left out ...
+    assert "pressure" not in t and "pressure_as_reported" not in t                     # a typed absence has no value ...
+    assert t["_value_status"] == {"pressure": {"status": "not_reported", "missing_reason": "not_stated_in_source"}}
     rep = m["export_report"]
-    assert rep["absences_not_exported"] == {"not_reported": 1}                         # ... and counted
+    assert rep["absences"] == {"not_reported": 1} and m["format_version"] == "1.1.0"   # ... but says why (format 1.1.0)
     assert rep["bounds"] == {"conversion": 1} and rep["approximate_values"] == {"temperature": 1}
     assert json.loads(t["results"])["selectivity_methanol"]["value"] == 42 and "results_selectivity_methanol" not in t
     pub = by[SRC]["props"]
@@ -149,6 +150,33 @@ def test_bounds_approximations_absences_and_dates_are_exported_or_counted(tmp_pa
     schema = json.loads((tmp_path / "b/kg/schema.json").read_text())
     assert schema["node_types"]["Publication"]["properties"]["published_on"] == {"type": "date"}
     assert schema["node_types"]["CatalyticTest"]["properties"]["conversion_bound"]["values"] == ["upper", "lower"]
+
+
+def test_a_link_resting_only_on_withheld_quotes_is_exported_with_their_digests(tmp_path, head):
+    """A quote withheld under the copyright cap (its sha256 and length in the evidence note) is GALAXY 1.1.0's
+    quote_withheld, so the link stays an edge; one longer than GALAXY's 600 characters is left out and counted, and a
+    source whose text the bundle ships is quoted, never withheld."""
+    from scale import rights
+    doc = build()
+    link = next(e for e in doc["links"] if e["id"] == f"{T}/link/uses")
+    h, n = rights.digest(Q_SEL)
+    link["props"]["evidence"] = [{**{k: v for k, v in link["props"]["evidence"][0].items() if k != "quote"},
+                                  "note": f"quote withheld: sha256:{h} chars:{n}"}]
+    m = galaxy.export(doc, head, tmp_path / "b", "withheld", created="2026-10-06T00:00:00Z")
+    e = _by_scale(tmp_path / "b")[f"{T}/link/uses"]["props"]
+    assert e["_evidence"] == [{"quote_withheld": {"sha256": h, "chars": n, "normalization": "scale-match-text-1",
+                                                  "reason": "copyright"}, "source_id": e["source_paper_ids"][0],
+                               "locator": {"page": 2}}]
+    assert m["format_version"] == "1.1.0" and "withheld_too_long" not in m["export_report"]
+    v = _validator()
+    if v:
+        galaxy.seal(tmp_path / "b")
+        res = v.validate_bundle(tmp_path / "b")
+        assert res.ok, [f.message for f in res.errors][:5]
+        assert h == v.withheld_quote(Q_SEL)["sha256"]                    # the same normalization on both sides
+    link["props"]["evidence"][0]["note"] = f"quote withheld: sha256:{h} chars:601"
+    m = galaxy.export(doc, head, tmp_path / "c", "withheld", created="2026-10-06T00:00:00Z")
+    assert f"{T}/link/uses" not in _by_scale(tmp_path / "c") and m["export_report"]["withheld_too_long"] == 1
 
 
 def test_locators_name_tables_and_figures_and_shipped_texts_get_char_offsets(tmp_path, head):

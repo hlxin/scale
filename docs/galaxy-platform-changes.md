@@ -1,7 +1,11 @@
 # GALAXY: changes requested by SCALE
 
 For the Alchemic platform team (`alchemic-platform`, `docs/galaxy/kg-bundle-format.md`, `src/alchemic/galaxy/`).
-Status: requested 2026-10-09; nothing here is implemented yet.
+Status: requested 2026-10-09. Changes 1, 2 and 3 are implemented in GALAXY's bundle format 1.1.0 (alchemic-platform
+`main`, 2026-10-09: withheld quotes, `extends` against a schema registry, typed absences), and SCALE's exporter
+writes format 1.1.0: the methanol bundle's release 1.1.0 carries every link, 17,563 edges (3,274 substantive edges
+resting only on withheld quotes), and 227 typed absences, and passes GALAXY's validator with 0 errors and 0
+warnings. The text below is the request as it was made.
 
 SCALE exports its knowledge graphs as GALAXY bundles (`scale graph export <graph> --to galaxy`). The bundles are
 valid today: the first public one, the bundle of the methanol example's release v1.0.0 (in the git history at

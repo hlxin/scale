@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- **GALAXY bundles in format 1.1.0: withheld quotes and typed absences.** GALAXY's bundle format 1.1.0 carries a quote
+  withheld under the copyright cap (`quote_withheld`: its sha256 and length under `scale-match-text-1`, SCALE's
+  verbatim normalization) and a value the source does not report (`_value_status`). `scale graph export --to galaxy`
+  now writes both instead of dropping them: a link whose quotes are all withheld is an edge, and a typed absence says
+  why the record has no value. The methanol graph exports as 17,563 edges instead of 14,107 (3,274 substantive edges
+  resting only on withheld quotes) with 227 typed absences, and passes GALAXY's validator with 0 errors and 0
+  warnings. A withheld quote longer than GALAXY's 600 characters is left out and counted (`withheld_too_long`: one
+  in the methanol graph).
 - **The methanol example, simplified and ready to recurate.** `examples/methanol-synthesis-pre1966/` keeps only what
   a reader and a recuration need: `sources.json` (the frozen corpus, all 178 candidates with their status, each of the
   105 in-scope sources with its PDF `pdfs/<slug>.pdf` and the PDF's sha256; it replaces `corpus/manifest.json`,
