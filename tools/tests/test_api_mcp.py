@@ -195,6 +195,26 @@ def test_search_reads_only_the_documents_own_index_and_says_its_access(tk):
     assert "was built from another document" in res["error"]
 
 
+def test_a_kept_schema_is_read_again_when_its_files_change(tk, tmp_path):
+    """The toolkit keeps a schema while none of the files it is read from changes; a new version in the manifest,
+    or a label added to the domain file, is read on the next call."""
+    import os
+    import shutil
+    for d in ("core/graph", "domain/graph", "governance/registry"):
+        shutil.copytree(REPO / d, tmp_path / d)
+    man = tmp_path / "domain/graph/scale-graph.yaml"
+    first = tk._spec(man)
+    assert tk._spec(man) is first                                            # kept while nothing changes
+    text = man.read_text()
+    man.write_text(text.replace(f"version: {first['version']}\n", "version: 9.9.9\n", 1))
+    os.utime(man, ns=(os.stat(man).st_mtime_ns + 10**9,) * 2)
+    assert tk._spec(man)["version"] == "9.9.9"
+    cat = tmp_path / "domain/graph/catalysis.yaml"
+    cat.write_text(cat.read_text().replace("\nnodes:\n", "\nnodes:\n  ZzProbe:\n    description: a probe label\n", 1))
+    os.utime(cat, ns=(os.stat(cat).st_mtime_ns + 10**9,) * 2)
+    assert "ZzProbe" in tk._spec(man)["nodes"]
+
+
 def test_changing_an_answer_never_changes_the_loaded_document(tk):
     """A query's result shares no object with the document the toolkit keeps loaded: scrambling every value of one
     answer leaves the next answer, and the document's digest, as they were."""

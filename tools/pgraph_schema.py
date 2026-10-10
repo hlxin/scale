@@ -69,6 +69,22 @@ def assemble(path: Path) -> dict:
     return assemble_manifest(load_yaml(path), Path(path).parent)
 
 
+def spec_sources(path: Path) -> list[Path]:
+    """Every file a schema is read from: a schema file itself, or a manifest with the kernel, the files it lists and
+    the extension-prefix registry it assembles (:func:`assemble_manifest`). A cache of the schema is good only while
+    none of them changes."""
+    path = Path(path)
+    man = load_yaml(path)
+    if not is_manifest(man):
+        return [path]
+    base = path.parent
+    files = [path, layout.kernel_path(base, man["kernel"])]
+    files += [base / rel for key in ("modules", "extensions", "domains") for rel in man.get(key) or []]
+    start = base.resolve()
+    files += [d / PREFIX_REGISTRY for d in [start, *start.parents] if (d / PREFIX_REGISTRY).exists()][:1]
+    return files
+
+
 def assemble_manifest(man: dict, base: Path) -> dict:
     """Assemble a manifest given as data, its paths relative to ``base`` (``scale domains check``
     composes an experimental domain's files with the kernel without writing a manifest)."""

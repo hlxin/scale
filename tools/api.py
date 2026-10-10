@@ -203,7 +203,7 @@ class ScaleToolkit:
     def __init__(self, workspace: str | os.PathLike | None = None, repo: str | os.PathLike | None = None):
         self.repo = Path(repo).resolve() if repo else find_repo_root()
         self.workspace = Path(workspace).expanduser().resolve() if workspace else default_workspace()
-        self._specs: dict[str, dict] = {}
+        self._specs: dict[str, tuple] = {}       # schema path -> (its source files' stat key, the schema)
         self._loaded: dict[str, dict] = {}      # documents by path, kept while their file is unchanged (_load)
         self._handlers: dict[str, Callable[..., dict]] = {t["name"]: getattr(self, "_" + t["name"]) for t in TOOLS}
 
@@ -289,10 +289,15 @@ class ScaleToolkit:
 
     def _spec(self, manifest: Path, version: str | None = None, doc: dict | None = None) -> dict:
         from . import pgraph
+        from .pgraph_schema import spec_sources
         p = pgraph.pinned(manifest, version, doc)
-        if str(p) not in self._specs:
-            self._specs[str(p)] = pgraph.load_spec(p)
-        return self._specs[str(p)]
+        # kept while none of the files the schema is read from changes (a long-running server sees a new head)
+        key = tuple((str(f), f.stat().st_mtime_ns, f.stat().st_size) if f.exists() else (str(f), None, None)
+                    for f in spec_sources(p))
+        hit = self._specs.get(str(p))
+        if hit is None or hit[0] != key:
+            hit = self._specs[str(p)] = (key, pgraph.load_spec(p))
+        return hit[1]
 
     def _doc_spec(self, doc: dict, domain: str | None) -> dict:
         """The schema a document pins (a version this repository does not hold is an error that says so)."""
