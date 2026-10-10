@@ -130,7 +130,7 @@ def run_question(repo: Path, domain: str, path: Path, m: dict | None = None, cac
     """Run one competency question of the domain ``domain`` (its name, catalysis) and compare it with its
     expectation."""
     from . import pgraph, pgraph_query
-    from .passages import load_for
+    from .passages import index_for
     repo = Path(repo)
     cache = {} if cache is None else cache
     base = layout.domain_layers(repo).get(domain) or repo / layout.DOMAIN
@@ -192,7 +192,7 @@ def run_question(repo: Path, domain: str, path: Path, m: dict | None = None, cac
             if str(spec_path) not in cache:
                 cache[str(spec_path)] = pgraph.load_spec(spec_path)
             stem = p.with_name(p.name.removesuffix(".json").removesuffix(".graph") + ".evidence")
-            ix = load_for(stem, doc) if q["plan"].get("text") and Path(f"{stem}.jsonl").exists() else None
+            ix = index_for(stem, doc) if q["plan"].get("text") else None
             for i, plan in enumerate(plans):
                 results[i].append(pgraph_query.run(doc, cache[str(spec_path)], plan, ix))
         except (ScaleError, OSError, ValueError, KeyError, TypeError) as exc:

@@ -115,12 +115,12 @@ TOOLS: list[dict] = [
     },
     {
         "name": "scale_search",
-        "description": "Search a document's evidence by words and meaning (its evidence index, built with "
-                       "`scale graph index` from that document); hits lead to the records that cite each passage. The "
+        "description": "Search a document's evidence by words and meaning (its evidence index: the one saved beside it "
+                       "by `scale graph index`, or built in memory from the document when none is); hits lead to the records that cite each passage. The "
                        "result's access says where the hits may go: the whole document's, as scale_query's.",
         "input_schema": {"type": "object", "required": ["path", "query"], "properties": {
             "path": _DOC["path"], "query": {"type": "string"}, "k": {"type": "integer", "default": 10},
-            "mode": {"type": "string", "enum": ["hybrid", "vector", "keyword"], "default": "hybrid"},
+            "mode": {"type": "string", "enum": ["hybrid", "vector", "keyword", "rrf"], "default": "hybrid"},
             "published_before": {"type": "string", "description": "Only evidence from sources published before this year."}}},
     },
     {
@@ -419,24 +419,20 @@ class ScaleToolkit:
         doc = self._doc(document, path)
         ix = None
         if plan.get("text"):
-            if not path:
-                raise ScaleError("a text query needs the document's evidence index: give the document by path "
-                                 "(its index <name>.evidence.* beside it, built with `scale graph index`)")
             ix = self._index(path, doc)
         res = pgraph_query.run(doc, self._doc_spec(doc, domain), plan, ix)
         if format == "markdown":
             res["markdown"] = pgraph_query.render_markdown(res)
         return res
 
-    def _index(self, path: str, doc: dict):
-        """The evidence index beside ``path``, refused unless it is ``doc``'s (:func:`passages.load_for`)."""
-        from .passages import load_for
+    def _index(self, path: str | None, doc: dict):
+        """The evidence index beside ``path``, refused unless it is ``doc``'s, or built in memory from ``doc`` when none is
+        saved there or the document came inline (:func:`passages.index_for`)."""
+        from .passages import Index, evidence_items, graph_sha256, index_for
+        if not path:
+            return Index.build(evidence_items(doc), graph_sha256=graph_sha256(doc))
         p = self._path(path)
-        stem = p.with_name(p.name.removesuffix(".json").removesuffix(".graph") + ".evidence")
-        if not Path(f"{stem}.jsonl").exists():
-            raise ScaleError(f"no evidence index beside {p.name} ({stem.name}.jsonl); a person builds it with "
-                             f"`scale graph index {p}`")
-        return load_for(stem, doc)
+        return index_for(p.with_name(p.name.removesuffix(".json").removesuffix(".graph") + ".evidence"), doc)
 
     def _scale_search(self, path: str, query: str, k: int = 10, mode: str = "hybrid",
                       published_before: str | None = None) -> dict:

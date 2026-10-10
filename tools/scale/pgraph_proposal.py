@@ -618,7 +618,7 @@ def _concepts_added(cand_dir: Path, proposal: dict) -> list[tuple[str, dict, str
 def check(cs: Path, repo: Path, now: _dt.datetime | None = None) -> dict:
     """Build, diff, validate fixtures, assess migration, re-run competency questions, criticize."""
     from . import pgraph, pgraph_query
-    from .passages import load_for
+    from .passages import index_for
     from .policy import evaluate, load_policy
     now = now or _dt.datetime.now(_dt.timezone.utc)
     p = load_proposal(cs)
@@ -781,11 +781,13 @@ def check(cs: Path, repo: Path, now: _dt.datetime | None = None) -> dict:
                           "conformance_before": conf(before), "conformance_after": conf(after)})
         ix_stem = doc_path                               # the evidence index lies beside the document
         ix_stem = ix_stem.with_name(ix_stem.name.removesuffix(".json").removesuffix(".graph") + ".evidence")
-        ix = load_for(ix_stem, doc) if Path(f"{ix_stem}.jsonl").exists() else None    # only this document's index
+        ix = None
         for plan_path in d.get("competency") or []:
             plan = load_yaml(located(plan_path, "competency"))
             if isinstance(plan, dict) and "match" not in plan and isinstance(plan.get("plan"), dict):
                 plan = plan["plan"]                     # a domain's competency question: its plan
+            if ix is None and isinstance(plan, dict) and plan.get("text"):
+                ix = index_for(ix_stem, doc)            # only this document's index, else built from it
             ra = pgraph_query.run(doc, base_spec, plan, ix)
             rb = pgraph_query.run(moved, cand_spec, plan, ix)
             changed = (ra["status"], ra.get("row_count")) != (rb["status"], rb.get("row_count"))
