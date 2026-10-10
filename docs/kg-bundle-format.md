@@ -43,6 +43,12 @@ scale graph export G.json --to kg-bundle --out DIR --bundle-id ID --version 1.1.
     --previous PREVIOUS_BUNDLE_DIR --corpus sources.json      # --previous: ids kept, the release it follows recorded
 ```
 
+**The title.** A platform names an imported graph after the bundle's title (`topic` in `bundle.json`, also the
+schema's `title`), so it is a short name: `--title` gives it; by default it is the graph's own `title` when that has
+at most 40 characters, and otherwise the title's leading words, cut at a word boundary and ending in "…" (the export
+says so, and the full title goes into the bundle's scope). Give a graph a short `title` and put its scope's details
+in `description`, and the default is right.
+
 The export seals the folder (SHA256SUMS) and prints its report: what was converted, what could not be carried
 (intervals, replicates, notes, a detection limit), what was withheld for the bundle's audience. Check the folder
 with the format's validator (`bundle_validate.py`, with `--previous` for a later release, then `--seal`), and zip
@@ -57,4 +63,4 @@ a bundle over the native document.
 
 | bundle | version | graph | edges | notes |
 |---|---|---|---:|---|
-| [`methanol-synthesis-pre1966_v1.1.0.zip`](../examples/methanol-synthesis-pre1966/methanol-synthesis-pre1966_v1.1.0.zip) | 1.1.0 | the methanol example | 17,563 | follows 1.0.0 (git history at `a169872`); 3,274 substantive edges rest only on withheld quotes; 227 typed absences |
+| [`methanol-synthesis-pre1966_v1.1.1.zip`](../examples/methanol-synthesis-pre1966/methanol-synthesis-pre1966_v1.1.1.zip) | 1.1.1 | the methanol example | 17,563 | follows 1.1.0 (its title only: "Methanol Synthesis CO/CO2+H2 Pre1966"), which followed 1.0.0; 3,274 substantive edges rest only on withheld quotes; 227 typed absences |

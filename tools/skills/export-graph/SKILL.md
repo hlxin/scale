@@ -14,7 +14,7 @@ allowed-tools:
   - "scale evidence access <doc>"                              # what is public
   - "scale graph filter <doc> --as <id> | --public"            # what the audience may see
   - "scale corpus check <manifest>"                            # the frozen corpus, for the bundle's corpus block
-  - "scale graph export <doc> --to kg-bundle --out <dir> [--public | --as <project id> | --as <institution id> ...] [--version <v>] [--previous <dir> | --ids-from <dir>] [--replaced <file>] [--corpus <manifest>] [--text <id>=<file>:<licence>]"
+  - "scale graph export <doc> --to kg-bundle --out <dir> [--public | --as <project id> | --as <institution id> ...] [--version <v>] [--previous <dir> | --ids-from <dir>] [--replaced <file>] [--corpus <manifest>] [--title <short name>] [--text <id>=<file>:<licence>]"
   - write access to the working directory only
 outputs:
   - The exported document or bundle (sealed, with SHA256SUMS), for the stated audience
@@ -68,7 +68,9 @@ lost.
      records that lost evidence of a withheld source, whose values without `evidence_ids` are withheld
      in their place) and tell the receiver what the
      bundle cannot carry (intervals, replicates, notes, a detection limit; the module docstring of
-     `tools/scale/kgbundle.py` lists them).
+     `tools/scale/kgbundle.py` lists them). A platform names the imported graph after the bundle's title:
+     give it with `--title` (a short name, at most 40 characters), or let it default to the graph's
+     `title` when that is short; a longer title is cut to its leading words, and the export says so.
 5. **Ship texts only under a stated licence:** `--text <publication id>=<file>:<licence>` for a source
    whose licence allows redistribution (a US patent, an open licence), never a text you may only quote.
 6. **Seal and link the release.** The export writes SHA256SUMS. A later release names its predecessor

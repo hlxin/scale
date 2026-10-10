@@ -68,7 +68,8 @@ impurities, driving forces outside the list, characterization results, digitizin
    cases), so record the forces the source describes; never add a force to satisfy a checklist.
 4. **Start from a template:** `scale call template '{"domain": "catalysis"}'` returns a minimal valid
    document. The header pins `schema_version`, names a `graph_id` and a `title` that states the scope
-   (e.g. "main text only; SI and Source Data not examined"), sets `data_status` (`research_data` for
+   as a short name, at most 40 characters, since a platform shows it as the graph's name (e.g. "Nitrate
+   to Ammonia on Cu"); the scope's details go in `description` (e.g. "SI and Source Data not examined"), sets `data_status` (`research_data` for
    sources; `synthetic_example` only for invented examples), follows the checklist
    (`follows_domains: ["catalysis"]`) and, for research data, gives the stewardship (`contributed_by`,
    `project`, `access`).

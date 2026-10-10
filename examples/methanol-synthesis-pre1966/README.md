@@ -12,7 +12,7 @@ and tests run on it (`tools/tests/test_example_methanol.py`).
 | `methanol-synthesis.graph.json` | The curated graph, valid under scale-graph 0.1.0: 4,866 nodes, 16,584 links, 684 catalytic tests, 25,230 evidence items. The baseline until the recuration replaces it. |
 | `rights.yaml`, `stewardship.yaml` | Each source's rights (the copyright cap), and who curated the graph for which project. |
 | `queries/*.yaml` | The manuscript's questions as query plans. |
-| `methanol-synthesis-pre1966_v1.1.0.zip` | The graph as a knowledge-graph bundle ([kg-bundle format](../../docs/kg-bundle-format.md) 1.1.0), ready to load into a platform that reads the format: 17,563 edges, withheld quotes as digests, 227 typed absences; it follows release 1.0.0. |
+| `methanol-synthesis-pre1966_v1.1.1.zip` | The graph as a knowledge-graph bundle ([kg-bundle format](../../docs/kg-bundle-format.md) 1.1.0), ready to load into a platform that reads the format, titled "Methanol Synthesis CO/CO2+H2 Pre1966": 17,563 edges, withheld quotes as digests, 227 typed absences; it follows release 1.1.0 (only the title changed). |
 
 A slug is the source's DOI with `/` written as `-` (`10.1021/ie50225a025` → `10.1021-ie50225a025.pdf`); a patent
 without a DOI uses its number (`us1625925a`), a thesis or report its corpus id (`hid-20028`). Source records in the
