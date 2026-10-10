@@ -112,7 +112,7 @@ def pinned(manifest: Path, version: str | None, doc: dict | None = None) -> Path
 def bundle_graph(doc: Any) -> bool:
     """Whether ``doc`` is the graph of a kg-bundle (its ``kg/graph.json``, as ``scale graph export --to kg-bundle``
     writes it): a header naming the bundle (``bundle_id``) and the bundle's schema (``schema_id``, e.g.
-    ``scale-catalysis 0.1.0``); it is the bundle format's graph, not a scale-graph document."""
+    ``scale-catal 0.1.0``); it is the bundle format's graph, not a scale-graph document."""
     g = doc.get("graph") if isinstance(doc, dict) else None
     return isinstance(g, dict) and isinstance(g.get("bundle_id"), str) and isinstance(g.get("schema_id"), str)
 

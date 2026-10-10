@@ -173,7 +173,7 @@ def test_a_link_resting_only_on_withheld_quotes_is_exported_with_their_digests(t
 
 
 def test_every_bundle_of_a_version_declares_the_same_schema(tmp_path, head):
-    """kg/schema.json is the vocabulary of the scale-graph version (scale-catalysis 0.1.0), not the graph's subset: two
+    """kg/schema.json is the vocabulary of the scale-graph version (scale-catal 0.1.0), not the graph's subset: two
     different graphs of one version export the same schema, with every label (a Source as Publication) and every edge
     type, and a value not of its declared type is kept as text beside it."""
     a = build()
@@ -182,12 +182,12 @@ def test_every_bundle_of_a_version_declares_the_same_schema(tmp_path, head):
     kgbundle.export(a, head, tmp_path / "a", "a", created="2026-10-06T00:00:00Z")
     kgbundle.export(b, head, tmp_path / "b", "b", created="2026-10-06T00:00:00Z")
     sa, sb = (json.loads((tmp_path / x / "kg/schema.json").read_text()) for x in "ab")
-    assert sa == sb and (sa["schema_id"], sa["version"]) == ("scale-" + "catalysis", head["version"])
+    assert sa == sb and (sa["schema_id"], sa["version"]) == ("scale-catal", head["version"])
     assert set(sa["node_types"]) == {*head["nodes"]} - {"Source"} | {"Publication"}
     assert set(sa["edge_types"]) == set(head["edges"])
     assert sa["extends"] == {"schema_id": "scale-graph", "version": head["version"], "sha256": pgraph.spec_sha256(head)}
     m = json.loads((tmp_path / "a/bundle.json").read_text())
-    assert (m["schema_id"], m["schema_version"]) == ("scale-" + "catalysis", head["version"])
+    assert (m["schema_id"], m["schema_version"]) == ("scale-catal", head["version"])
     doc = build()
     node = next(n for n in doc["nodes"] if n["label"] == "Source")
     node["props"]["published_on"] = "spring 1928"                        # not a date: kept as text beside it

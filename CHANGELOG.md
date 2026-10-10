@@ -2,12 +2,11 @@
 
 ## Unreleased
 
-- **A knowledge-graph bundle's schema is the vocabulary: scale-catalysis 0.1.0.** `kg/schema.json` is no longer the
+- **A knowledge-graph bundle's schema is the vocabulary: scale-catal 0.1.0.** `kg/schema.json` is no longer the
   subset of types a graph uses, named after the bundle and versioned with it: it is the catalysis vocabulary of the
   scale-graph version the graph pins, every label and edge type with every property a bundle can carry, the same in
-  every bundle of that version, named `scale-catalysis` with the scale-graph version (`scale-kernel` for a kernel-only
-  graph). Its `extends` names scale-graph 0.1.0 by its spec digest, which identifies it: `scale-catalysis` was also
-  the package name of the repository SCALE replaced, whose schemas were numbered 0.1.0 to 0.8.0. A value not of its
+  every bundle of that version, named `scale-catal` (catalysis) with the scale-graph version (`scale-kernel` for a
+  kernel-only graph). Its `extends` names scale-graph 0.1.0 by its spec digest, which identifies it. A value not of its
   property's declared type is kept as text in `<property>_as_reported` (no type is changed for a graph), property
   names are snake_case (`pH` is `ph`), and every exported record is checked against the schema before anything is
   written. `scale graph validate` refuses a bundle's `kg/graph.json`, whatever version it names. The methanol bundle is

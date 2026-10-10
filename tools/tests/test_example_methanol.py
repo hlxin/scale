@@ -179,7 +179,7 @@ def test_the_bundle_is_this_graph_sealed():
     m = json.loads(z.read(root + "bundle.json"))
     assert (m["format_version"], m["bundle_id"], m["version"], m["previous"]["version"]) == (
         "1.1.0", "methanol-synthesis-pre1966", "2.0.0", "1.1.1")
-    assert (m["schema_id"], m["schema_version"]) == ("scale-" + "catalysis", load_doc(GRAPH)["graph"]["schema_version"])
+    assert (m["schema_id"], m["schema_version"]) == ("scale-catal", load_doc(GRAPH)["graph"]["schema_version"])
     title = load_doc(GRAPH)["graph"]["title"]          # a platform names the imported graph after the bundle's title
     assert m["topic"] == title == "Methanol Synthesis CO/CO2+H2 Pre-1966" and len(title) <= 40
     graph = z.read(root + "kg/graph.json")

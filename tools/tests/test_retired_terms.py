@@ -28,10 +28,6 @@ OLD_EXAMPLES = ("methanol" + "-synthesis",)  # the restricted example's former f
 EARLIER_PACKAGE = "scale-" + "catalysis"               # the package of the earlier contents of github.com/hlxin/scale
 
 R1 = re.compile(rf"Shared\s+{_CAT}\s+(?:Atlas|Attributes)|SCALE\s+Science(?!\s+kernel)|SCALE-{_CAT}", re.I)
-# the one use of the earlier package's name that is not retired: the id of a kg-bundle's schema (the catalysis vocabulary
-# of scale-graph, named scale-<domain>), written as an identifier (in code font) or with its version, and identified by
-# the digest in extends; any other use of the name is still refused
-SCHEMA_ID = re.compile(rf"`{{1,2}}{EARLIER_PACKAGE}(?: \d+\.\d+\.\d+)?`{{1,2}}|{EARLIER_PACKAGE} \d+\.\d+\.\d+")
 R2 = re.compile(r"scale[-_]science|\b(?:pip3? install|uv pip install|uv tool install|uv add|uvx)(?:\s+--?[\w=.-]+)*\s+schema(?![\w-])",
                 re.I)
 R3 = re.compile("|".join([re.escape(ORG), re.escape(DATA_REPO), "kg" + "-tiers", "cath" + "anor",
@@ -68,8 +64,7 @@ def _hits(rel: str, text: str) -> list[str]:
     # this file states R2's rule with examples of what it refuses; the names of R1 and R3 it never spells
     rules = ([R1, R3] if rel == THIS else [R1, R2, R3]) + ([] if CODE.match(rel) else [R4])
     return [f"{rel}:{i}: {line.strip()[:160]}" for i, line in enumerate(text.splitlines(), 1)
-            if any(rx.search(SCHEMA_ID.sub(" ", line) if rx is R1 else line) for rx in rules)
-            and not any(f == rel and t in line for f, t in ALLOWED)]
+            if any(rx.search(line) for rx in rules) and not any(f == rel and t in line for f, t in ALLOWED)]
 
 
 def test_live_files_use_no_retired_wording():
@@ -122,9 +117,6 @@ def test_the_names_and_the_rules():
                  "examples/methanol-synthesis-pre1966/README.md"):
         assert not any(rx.search(fine) for rx in (R1, R2, R3, R4)), fine
     assert R1.search(f"the {EARLIER_PACKAGE} schema") and not _hits("README.md", f"numbering 0.1.0-0.8.0, package {EARLIER_PACKAGE});")
-    for schema_id in (f"`{EARLIER_PACKAGE}`", f"``{EARLIER_PACKAGE} 0.1.0``", f"schema {EARLIER_PACKAGE} 0.1.0"):
-        assert not _hits("x.md", schema_id), schema_id                # the bundle schema's id, as an id or with its version
-    assert _hits("x.md", f"the {EARLIER_PACKAGE} schema") and _hits("x.md", f"package {EARLIER_PACKAGE};")
     assert _hits("CHANGELOG.md", f"package {EARLIER_PACKAGE});")          # allowed only where ALLOWED says
     assert _hits("docs/commands.md", "set SCALE_RESTRICTED_DATA") and not _hits("tools/scale/layout.py", "SCALE_RESTRICTED_DATA")
     # this file spells none of the names it refuses

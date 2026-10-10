@@ -207,7 +207,7 @@ def test_a_bundle_graph_is_named_as_one_not_as_a_newer_version(tmp_path, capsys,
         f = out / "kg/graph.json"
         g = load_doc(f)
         assert g["graph"]["version"] == version and pgraph.bundle_graph(g)
-        assert (g["graph"]["schema_id"], g["graph"]["schema_version"]) == ("scale-" + "catalysis", ex["graph"]["schema_version"])
+        assert (g["graph"]["schema_id"], g["graph"]["schema_version"]) == ("scale-catal", ex["graph"]["schema_version"])
         rc, _, err = _run(["graph", "validate", "--format", "json", str(f)], capsys)
         assert rc == 2 and "the graph of a kg-bundle" in err and "not a scale-graph document" in err, err
         assert "newer than this schema's head" not in err

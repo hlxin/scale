@@ -111,7 +111,7 @@ The schema (``kg/schema.json``) is the vocabulary of the scale-graph version the
 derived from the graph: every label and edge type, with every property a bundle of that version can carry (a value's
 canonical quantity and its ``_as_reported``, ``_bound``, ``_qualifier`` and ``_basis``; the access, status and
 lifecycle properties). Every bundle of a version therefore declares the same schema, named ``scale-<domain>`` with the
-scale-graph version (``scale-catalysis 0.1.0``; ``scale-kernel`` for a kernel-only graph). A value not of its
+scale-graph version (``scale-catal 0.1.0`` for catalysis; ``scale-kernel`` for a kernel-only graph). A value not of its
 property's declared type is kept as text in ``<property>_as_reported``; property names are the format's snake_case
 (``pH`` is ``ph``). Every exported record is checked against the schema before anything is written (``_conforms``).
 
@@ -415,13 +415,17 @@ RANGE_NOTE = ("a reported range is exported as its midpoint (value), with the ra
               "high) and the reported text in as_reported")
 
 
+SCHEMA_SHORT = {"catalysis": "catal"}           # a domain's short name in its bundle schema's id
+
+
 def schema_name(doc_or_spec: dict) -> str:
-    """The bundle schema's id: scale-<domain> for a graph that follows a domain's checklist (``scale-catalysis``), else
-    scale-kernel. Its version is the scale-graph version; like any version number it names a schema only within this
-    repository's numbering, and ``extends.sha256`` names it everywhere."""
+    """The bundle schema's id: scale-<short name of the domain> for a graph that follows a domain's checklist
+    (``scale-catal`` for catalysis, :data:`SCHEMA_SHORT`), else scale-kernel. Its version is the scale-graph version;
+    like any version number it names a schema only within this repository's numbering, and ``extends.sha256`` names it
+    everywhere."""
     g = doc_or_spec.get("graph") if "graph" in doc_or_spec else None
     domains = list((g or {}).get("follows_domains") or [])
-    return f"scale-{domains[0]}" if domains else "scale-kernel"
+    return f"scale-{SCHEMA_SHORT.get(domains[0], domains[0])}" if domains else "scale-kernel"
 
 
 def bundle_prop(k: str) -> str:
@@ -1121,7 +1125,7 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
     vocab_nodes, vocab_edges = vocabulary(spec)
     _conforms(vocab_nodes, vocab_edges, kept_nodes, list(links.values()), schema_id)
     schema = {"schema_id": schema_id, "version": schema_version, "title": f"{schema_id} {schema_version}",
-              "scope": (f"The {schema_id.removeprefix('scale-')} vocabulary of SCALE's scale-graph {schema_version} "
+              "scope": (f"The {(list(doc['graph'].get('follows_domains') or ['kernel']))[0]} vocabulary of SCALE's scale-graph {schema_version} "
                         f"(spec sha256 {schema_sha}), every label and edge type with every property a bundle can carry; "
                         "a version number names a schema only within SCALE's numbering, the digest everywhere."),
               "extends": {"schema_id": "scale-graph", "version": doc["graph"].get("schema_version"), "sha256": schema_sha},
