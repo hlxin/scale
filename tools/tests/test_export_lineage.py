@@ -145,6 +145,25 @@ def test_bounds_approximations_absences_and_dates_are_exported_or_counted(tmp_pa
     assert schema["node_types"]["CatalyticTest"]["properties"]["conversion_bound"]["values"] == ["upper", "lower"]
 
 
+def test_sources_sharing_an_id_segment_get_distinct_publication_ids(tmp_path, head):
+    """A source without a DOI or patent number is keyed by the last segment of its id; two sources sharing that
+    segment are keyed by their whole ids, so neither is lost under the other. Two sources with one DOI are refused."""
+    doc = build()
+    src = next(n for n in doc["nodes"] if n["id"] == SRC)
+    other = copy.deepcopy(src)
+    other["id"], other["props"]["title"] = "ex:exmpl/other/source/paper", "Another invented paper"
+    doc["nodes"].append(other)
+    kgbundle.export(doc, head, tmp_path / "b", "ids", created="2026-10-06T00:00:00Z")
+    pubs = {n["props"]["title"]: n["id"] for n in _graph(tmp_path / "b")["nodes"] if n["label"] == "Publication"}
+    assert pubs == {"An invented paper on copper": f"Publication:scale:{SRC}",
+                    "Another invented paper": "Publication:scale:ex:exmpl/other/source/paper"}
+    alone = kgbundle.export(build(), head, tmp_path / "c", "ids", created="2026-10-06T00:00:00Z")
+    assert alone["counts"]["papers"] == 1 and "Publication:scale:paper" in {n["id"] for n in _graph(tmp_path / "c")["nodes"]}
+    src["props"]["doi"] = other["props"]["doi"] = "10.1000/one"
+    with pytest.raises(ScaleError, match="share the identifier 10.1000/one"):
+        kgbundle.export(doc, head, tmp_path / "d", "ids", created="2026-10-06T00:00:00Z")
+
+
 def test_parallel_links_with_other_values_are_listed_never_merged(tmp_path, head):
     """Two links of one type between the same records, from one source, share an edge id. The same values merge
     their evidence; other values (a second amount) leave the second link out, listed in the export report, so the
