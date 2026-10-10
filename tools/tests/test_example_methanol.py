@@ -1,8 +1,8 @@
 """The methanol-synthesis example (examples/methanol-synthesis-pre1966/): the frozen corpus (sources.json), the curated
 scale-graph and the manuscript's questions as query plans, run on the public files alone.
 
-The graph is the ARPA-E CATALYST curation of the historical methanol-synthesis literature published before 1966,
-scoped to CO and CO2 hydrogenation (105 sources), cleared for publication by the project partners, moved to today's
+The graph is the curation of the historical methanol-synthesis literature published before 1966,
+scoped to CO and CO2 hydrogenation (105 sources), cleared for publication, moved to today's
 0.1.0 and capped (scale evidence cap): quoted text beyond a source's cap is withheld as sha256 + length. The PDFs
 (pdfs/) and page texts are local; the evidence index is built here, never committed."""
 

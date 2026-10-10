@@ -1,6 +1,6 @@
 {
-  "corpus": "methanol-synthesis historical corpus (ARPA-E CATALYST), frozen for SCALE curation; scoped to methanol synthesis from CO/CO2 + H2 (CO + D2 included).",
-  "pdfs": "Local only (git-ignored, most in copyright): pdfs/<slug>.pdf for each in-scope source, copied from the project corpus (<corpus>/<corpus_pdf>, the ARPA-E CATALYST Box folder Corpus/); its sha256 must equal text.pdf_sha256. A slug is the DOI with / as - (a patent or report without a DOI: its number or hid).",
+  "corpus": "methanol-synthesis historical corpus, frozen for SCALE curation; scoped to methanol synthesis from CO/CO2 + H2 (CO + D2 included).",
+  "pdfs": "Local only (git-ignored, most in copyright): pdfs/<slug>.pdf for each in-scope source, copied from the project corpus (<corpus>/<corpus_pdf>); its sha256 must equal text.pdf_sha256. A slug is the DOI with / as - (a patent or report without a DOI: its number or hid).",
   "cutoff": {
     "caution": "The cutoff does not remove every Cu-Zn-Al disclosure: the corpus leakage audit (historical/LEAKAGE_AUDIT.md) lists US 2,061,470 (Larson, granted 1936), whose Example 10 is 87 CuO / 10 ZnO / 3 Al2O3, and Cu-Zn catalysts from 1928 on. They are in scope and curated as reported; a rediscovery evaluation must hold them out separately if it needs to.",
     "date": "1966-01-01",
