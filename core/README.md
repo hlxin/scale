@@ -21,12 +21,11 @@ The science kernel, [`graph/kernel.yaml`](graph/kernel.yaml) (`scale-graph-kerne
 
 | path | what |
 |---|---|
-| `CORE.yaml` | the declaration: the schema version, maintainers, scope, compatibility policy, examples, tests, proposals |
+| `CORE.yaml` | the declaration: the schema version, maintainers, scope, compatibility policy, examples, tests |
 | `graph/kernel.yaml` | the science kernel (it carries no version of its own) |
-| `graph/frozen/` | the kernel of each earlier schema version (`kernel-<version>.yaml`, `SHA256SUMS`), written when a proposal moves the schema on; none yet |
+| `graph/frozen/` | the kernel of each earlier schema version (`kernel-<version>.yaml`, `SHA256SUMS`), written when a schema change moves the schema on (`scale schema bump`); none yet |
 | `graph/README.md` | [the two layers and how a domain builds on the kernel](graph/README.md) |
 | `examples/science-kernel-only.yaml`, `examples/science-examples/` | the kernel on its own, with five synthetic cases ([examples](examples/README.md)) |
-| `proposals/` | schema change proposals to the kernel, one folder per proposal named by its six-digit number ([README](proposals/README.md); none yet) |
 | `tests/` | the kernel's tests |
 
 There is no repository-wide composition. The catalysis domain's manifest
@@ -43,7 +42,7 @@ field and is built only from kernel parts. Everything specific to catalysis belo
 | the method of science, evidence, provenance, the source lifecycle, people and institutions | catalysis entities: species, catalysts, reactions, catalytic tests |
 | general distinctions that recur in other sciences in the same form | the checklist of what a catalysis record must and should report; example data, competency questions and reporting guidance |
 
-The kernel changes only by a kernel proposal. The catalysis domain never copies kernel files or redeclares a
+The kernel changes only by a pull request that changes it. The catalysis domain never copies kernel files or redeclares a
 kernel identifier; `scale domains check` reports both.
 
 ## One version
@@ -53,11 +52,11 @@ kernel identifier; `scale domains check` reports both.
   together). The kernel file carries no version of its own (one that states one does not load); `CORE.yaml`
   states the same number (`version`), as do `domain/DOMAIN.yaml`, `scale-release.yaml` (`schema_version`) and
   `examples/science-kernel-only.yaml`, and `scale domains check` requires them to agree.
-- Every applied proposal raises it, whether it changes the kernel, the catalysis file or both: additive changes
-  raise the minor version; breaking changes (removals, narrowed ranges, newly required properties, changed
-  meaning) raise the major version and follow tier 3 of the review policy, with a migration step and a decision
-  record. Prefer deprecation to removal.
-- Applying a proposal freezes the version it replaces: the kernel of that version into
+- Every schema change raises it in its own pull request, whether it changes the kernel, the catalysis file or
+  both: additive changes raise the third number (0.1.0 -> 0.1.1); breaking changes (removals, narrowed ranges,
+  newly required properties, changed meaning) raise the second (0.1.0 -> 0.2.0) and need a migration rule.
+  Prefer deprecation to removal.
+- `scale schema bump` freezes the version it replaces: the kernel of that version into
   `graph/frozen/kernel-<version>.yaml`, beside the catalysis manifest and file frozen in
   `domain/graph/frozen/`. A release build refuses schema content changed since the previous release under the
   same version.
@@ -66,18 +65,15 @@ kernel identifier; `scale domains check` reports both.
 
 1. Open a [science-kernel issue](https://github.com/hlxin/scale/issues/new?template=core-change.yml) for anything
    larger than a fix.
-2. Write a proposal in `core/proposals/<NNNNNN>/` (`scale proposal new core --title "…"` allocates the next
-   number; `tools/skills/evolve-schema/SKILL.md`). Kernel operations go here; proposal numbers are global across
-   the kernel and the catalysis domain (the first is `000001`).
-3. Open a pull request and say how the change affects the catalysis domain; `scale ci spec-changes` lists who
-   must review. The proposal-check workflow posts its summary.
-4. Review: one approving review from a reviewer other than the author, as for every change (the owner is a
-   reviewer; the owner's own pull requests are merged under the bootstrap rule until another reviewer joins)
-   ([governance/GOVERNANCE.md](../governance/GOVERNANCE.md)). The tier is information for the reviewers; a
-   breaking change also needs a migration step.
-5. After the merge, the proposal is applied (the apply-proposals workflow, started by a person, or
-   `scale proposal apply --confirm` in a pull request under the bootstrap rule): the decision record is written,
-   the base version frozen, the change installed and the one schema version raised.
+   @scale-agents take it up and make the change.
+2. The change edits `graph/kernel.yaml` directly, adds a fixture that uses what it adds, raises the one version
+   (`scale schema bump --base origin/main`) and passes `scale schema check`
+   ([`tools/skills/evolve-schema/SKILL.md`](../tools/skills/evolve-schema/SKILL.md)).
+3. The pull request says how the change affects the catalysis domain; `scale ci spec-changes` lists who reviews,
+   and CI writes a summary of the schema change for the reviewer.
+4. Review: one approving review by a reviewer, as for every change (the owner's own pull requests are merged
+   under the bootstrap rule until another reviewer joins) ([governance/GOVERNANCE.md](../governance/GOVERNANCE.md)).
+   The kind of change (breaking or additive) is information for the reviewer.
 
 ## `CORE.yaml`
 
@@ -91,14 +87,14 @@ kernel identifier; `scale domains check` reports both.
 | `maintainers` | `team` (the code owner as CODEOWNERS names it: `@hlxin` today, or a team `@org/team`) and `people`: each with `name`, `github`, optional `orcid`, `since` and `roles`; a seat not filled yet has `placeholder: true` (no `since`), is nobody and is never credited |
 | `scope` | what the core covers |
 | `compatibility` | the versioning policy above |
-| `examples`, `tests`, `proposals`, `docs` | paths, relative to `core/` (`proposals` is always `proposals`) |
+| `examples`, `tests`, `docs` | paths, relative to `core/` |
 | `example_documents` | `graph`: kernel-only documents (globs allowed) that `scale domains check` validates against the kernel of the version they pin |
 | `review_areas` | `[kernel]` |
 | `contributors` | credit for core, tooling and documentation work: each with `name`, optional `github`, optional `orcid`, and `roles`; added with consent |
 
 ## Known follow-ups
 
-These wait for a kernel proposal (the kernel's content changes only through one):
+These wait for a kernel change (each its own pull request):
 
 - The kernel's informational `extensions.registry` string names `registry/extension-prefixes.yaml`; the
   registry is `governance/registry/extension-prefixes.yaml`.
@@ -111,4 +107,4 @@ These wait for a kernel proposal (the kernel's content changes only through one)
 - The kernel's text still speaks of modules in places: the `extensions` description ("a property no module
   declares", "graduate into a module"), Experiment and Procedure ("Modules specialize it"), Variable.of ("a
   module's …"), ObjectOfStudy ("Domain modules …") and EXAMINES ("Modules add the physical specimens"). A
-  kernel proposal rewords them as "domains".
+  kernel change rewords them as "domains".

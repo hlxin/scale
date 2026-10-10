@@ -6,8 +6,7 @@ Two rules, both run by ``scale check``:
   access of its graph and of each record (the graph's default overridden field by field by the record's own,
   ``pgraph.effective_stewardship``) is ``public``, stated explicitly. A missing access is not public: SCALE's
   visibility rule (``pgraph.visible``) reads it as ``institution``, so a document without one would be hidden
-  from the public by the tools while the repository publishes it. The one exemption is history: the synthetic
-  examples of an applied proposal stay as they were written (``applied_history``). Project data is never
+  from the public by the tools while the repository publishes it. Project data is never
   committed: it stays outside the repository until it is cleared for publication.
 * **Copyright cap.** A document holding research data (``data_status`` other than ``synthetic_example``) quotes
   its sources only as far as their rights allow. Each folder with such documents has a ``rights.yaml`` (the
@@ -366,29 +365,15 @@ def committed_documents(repo: str | Path) -> list[Path]:
     return out
 
 
-def applied_history(repo: Path, rel: Path, doc: dict) -> bool:
-    """A synthetic example kept in the record of an applied proposal (``status: applied`` in its proposal.yaml):
-    history, kept byte for byte as it was written, before the access rule asked for an explicit access."""
-    parts = rel.parts
-    if not (layout.is_proposal_record(parts) and (doc.get("graph") or {}).get("data_status") == "synthetic_example"):
-        return False
-    record = repo.joinpath(*layout.proposal_record(parts))
-    meta = record / "proposal.yaml"
-    return meta.is_file() and (load_yaml(meta) or {}).get("status") == "applied"
-
-
 def access_problems(repo: str | Path, docs: list[Path] | None = None) -> list[str]:
     """Committed documents whose graph or any record is not explicitly public (effective stewardship access;
-    a missing access counts as not public, as ``pgraph.visible`` reads it). The synthetic examples of applied
-    proposals are history and are not held to it (``applied_history``)."""
+    a missing access counts as not public, as ``pgraph.visible`` reads it)."""
     from .pgraph import effective_stewardship
     repo = Path(repo).resolve()
     out = []
     for p in docs if docs is not None else committed_documents(repo):
         doc = load_doc(p)
         rel = p.relative_to(repo).as_posix() if p.is_relative_to(repo) else str(p)
-        if p.is_relative_to(repo) and applied_history(repo, p.relative_to(repo), doc):
-            continue
         g = (doc.get("graph") or {}).get("stewardship") or {}
         if g.get("access") != "public":
             out.append(f"{rel}: the graph's stewardship access is {g['access']}" if g.get("access") else

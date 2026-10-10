@@ -297,7 +297,7 @@ def cmd_graph_verify(args):
     assemble, every frozen directory (the core's kernels, the catalysis versions) matches its SHA256SUMS,
     and every version's spec document keeps the digest the releases published for it (``spec_digests``)."""
     from . import pgraph
-    from .pgraph_proposal import verify_frozen
+    from .schema_change import verify_frozen
     from .releases import spec_digest_stability
     repo = _repo(args)
     res = {"heads": [], "frozen": [], "sums": verify_frozen(repo)}
@@ -477,13 +477,13 @@ def cmd_release_list(args):
         m = load_yaml(release_root(repo, r) / "RELEASE.yaml")
         out.append({"release": r, "date": m.get("date"),
                     "schema_version": ((m.get("component_versions") or {}).get("schema") or {}).get("version"),
-                    "proposals": m.get("proposals"), "previous": m.get("previous")})
+                    "previous": m.get("previous")})
     _emit(out, args)
 
 
 def cmd_release_build(args):
     from .releases import build_release
-    dest = build_release(_repo(args), args.version, Path(args.out_root) if args.out_root else None, args.proposal or [],
+    dest = build_release(_repo(args), args.version, Path(args.out_root) if args.out_root else None,
                          date=args.date, override_version=args.override_version)
     print(f"built {dest}")
 
@@ -503,82 +503,26 @@ def cmd_release_verify(args):
     return 0 if all(r["ok"] for r in res) else 1
 
 
-def _proposal(args, repo: Path | None = None) -> Path:
-    """The proposal directory a command names: a path or its six-digit id (000001)."""
-    return layout.resolve_proposal(repo or _repo(args), args.proposal)
+def cmd_schema_diff(args):
+    from .schema_change import check, summary
+    res = check(_repo(args), args.base)
+    print(to_json(res) if args.json else summary(res))
+    return 0
 
 
-def cmd_proposal_new(args):
-    from .pgraph_proposal import new_proposal
-    _emit({"proposal": str(new_proposal(_repo(args), args.owner, args.title, args.manifest))}, args)
+def cmd_schema_bump(args):
+    from .schema_change import bump
+    _emit(bump(_repo(args), args.base, args.note), args)
 
 
-def cmd_proposal_build(args):
-    from .pgraph_proposal import build
-    repo = _repo(args)
-    _emit({"candidate": str(build(_proposal(args, repo), repo))}, args)
-
-
-def cmd_proposal_check(args):
-    from .pgraph_proposal import check
-    repo = _repo(args)
-    res = check(_proposal(args, repo), repo)
-    _emit(res, args)
+def cmd_schema_check(args):
+    from .schema_change import check, summary
+    res = check(_repo(args), args.base)
+    text = summary(res)
+    if args.comment:
+        Path(args.comment).write_text(text, encoding="utf-8")
+    print(to_json(res) if args.json else text)
     return 0 if res["ok"] else 1
-
-
-def cmd_proposal_decide(args):
-    from .pgraph_proposal import decide
-    repo = _repo(args)
-    _emit({"decision_record": str(decide(_proposal(args, repo), repo, args.number, pr=args.pr, author=args.author,
-                                         bootstrap_bypass=args.bootstrap_bypass, by=args.by))}, args)
-
-
-def cmd_proposal_apply(args):
-    from .pgraph_proposal import apply
-    repo = _repo(args)
-    _emit(apply(_proposal(args, repo), repo, args.confirm), args)
-
-
-def cmd_proposal_apply_merged(args):
-    from .apply_merged import apply_merged
-    repo = _repo(args)
-    data = load_doc(args.reviews)
-    reviews = data.get("reviews") if isinstance(data, dict) else data
-    _emit(apply_merged(repo, _proposal(args, repo), args.pr, reviews, args.author, args.head_sha, args.pr_url), args)
-
-
-def cmd_proposal_register(args):
-    from .pgraph_proposal import refresh_register
-    repo = _repo(args)
-    path = refresh_register(_proposal(args, repo), repo)
-    _emit([{k: t[k] for k in ("id", "status", "gaps") if k in t} | {"open": len(t.get("open_gaps") or [])}
-           for t in load_doc(path)["themes"]], args)
-
-
-def cmd_review_status(args):
-    """Read-only: the approvals a proposal holds (recorded from its pull request's GitHub reviews) against the
-    review policy. Approving happens on GitHub; nothing here writes."""
-    from .policy import evaluate, load_policy
-    from .review import approvals
-    repo = _repo(args)
-    if args.proposal and args.proposal_pos and args.proposal != args.proposal_pos:
-        raise ScaleError(f"two different proposals named: {args.proposal_pos} and --proposal {args.proposal}")
-    args.proposal = args.proposal or args.proposal_pos
-    if not args.proposal:
-        raise ScaleError("name the proposal: scale review status <proposal> (its six-digit id or its path)")
-    cs = _proposal(args, repo)
-    proposal = load_yaml(cs / "proposal.yaml")
-    val = load_doc(cs / "validation_report.json") if (cs / "validation_report.json").exists() else {}
-    tier = args.tier if args.tier is not None else (val.get("policy") or {}).get("tier", val.get("tier"))
-    apr = approvals(cs)
-    author = args.author or next((a["pr_author"] for a in apr if a.get("pr_author")), None)
-    res = evaluate(load_policy(repo), apr, author=author, tier=tier)
-    res = {"proposal": proposal.get("id"), "status": proposal.get("status"), **{k: v for k, v in res.items() if k != "counted"}}
-    if proposal.get("status") == "applied":
-        res["note"] = "applied: its decision record names the reviews that approved it" if not res["satisfied"] else "applied"
-    _emit(res, args)
-    return 0 if res["satisfied"] or proposal.get("status") == "applied" else 1
 
 
 def cmd_review_sample(args):
@@ -595,15 +539,6 @@ def cmd_review_sample(args):
         nonconf = [v["record"] for c in ((rep.conformance or {}).get("profiles") or {}).values() for v in c["violations"]]
         flagged = sorted({w["record"] for w in rep.warnings} | set(nonconf) & ids)
     _emit({"fraction": frac, "seed": args.seed, "sample": sample_records(doc, 1.0 if args.full else frac, args.seed, flagged)}, args)
-
-
-def cmd_proposal_pr(args):
-    from .review import open_pr, proposal_pr_body
-    cs = _proposal(args)
-    if args.branch:
-        _emit(open_pr(cs, args.branch, args.base, dry_run=not args.submit), args)
-    else:
-        print(proposal_pr_body(cs).rstrip("\n"))
 
 
 def cmd_check(args):
@@ -918,21 +853,6 @@ def cmd_ci_spec_changes(args):
     return 0 if res["ok"] else 1
 
 
-def cmd_ci_proposal_check(args):
-    from .ci import proposal_checks, proposal_comment
-    res = proposal_checks(_repo(args), args.base, args.head)
-    text = proposal_comment(res)
-    if args.comment:
-        Path(args.comment).write_text(text, encoding="utf-8")
-    print(to_json(res) if args.json else text)
-    return 0 if res["ok"] else 1
-
-
-def cmd_ci_proposals(args):
-    from .ci import changed_proposals
-    print(to_json(changed_proposals(_repo(args), args.base, args.head, args.status)))
-
-
 def cmd_kg_update(args):
     from .kg import update, update_text
     res = update(_repo(args), Path(args.data), args.domain, args.to, dry_run=args.dry_run, reindex=not args.no_index)
@@ -1035,7 +955,6 @@ def build_parser() -> argparse.ArgumentParser:
         sp.set_defaults(fn=fn)
         return sp
 
-    PROPOSAL_HELP = "the proposal: its directory or its six-digit id (000001)"
     WS_HELP = "the agent tools' working directory (default: $SCALE_WORKSPACE, else ~/.scale/workspace)"
 
     def out_opts(sp, fmt=("json",)):
@@ -1195,59 +1114,35 @@ def build_parser() -> argparse.ArgumentParser:
     out_opts(sp)
     sp = add("build", cmd_release_build, "build an immutable release from the repository head (a human action)", rel)
     sp.add_argument("version")
-    sp.add_argument("--proposal", dest="proposal", action="append",
-                    help="an applied proposal the release adds (repeat for each one applied since the previous release); "
-                         + PROPOSAL_HELP)
     sp.add_argument("--out-root"); sp.add_argument("--date")
     sp.add_argument("--override-version", action="store_true",
                     help="build under a version other than scale-release.yaml's `release` (renumbering on purpose)")
     sp = add("verify", cmd_release_verify, "verify the digests of every release, or of one", rel)
     sp.add_argument("target", nargs="?"); out_opts(sp)
 
-    rv = sub.add_parser("review", help="human review of proposals").add_subparsers(dest="sub", required=True)
-    sp = add("status", cmd_review_status, "read-only: the approvals a proposal holds (from its pull request's GitHub reviews) "
-             "against governance/review-policy.yaml (one reviewer other than the author)", rv)
-    sp.add_argument("proposal_pos", nargs="?", metavar="proposal", help=PROPOSAL_HELP)
-    sp.add_argument("--proposal", dest="proposal", help="the same, as an option"); sp.add_argument("--tier", type=int)
-    sp.add_argument("--author", help="the pull request's author (default: as recorded with the approvals)"); out_opts(sp)
+    rv = sub.add_parser("review", help="human checks of curated records").add_subparsers(dest="sub", required=True)
     sp = add("sample", cmd_review_sample, "draw a reproducible sample of records for a Tier 1 human check", rv)
     sp.add_argument("graph"); sp.add_argument("--fraction", type=float); sp.add_argument("--seed", type=int, default=0)
     sp.add_argument("--full", action="store_true", help="check every record (first batches of a new pipeline)")
     sp.add_argument("--include-flagged", action="store_true", help="add records with warnings or checklist violations")
     sp.add_argument("--spec", help="a schema manifest (default: chosen by the document)"); out_opts(sp)
 
-    cs = sub.add_parser("proposal", help="schema change proposals").add_subparsers(dest="sub", required=True)
-    sp = add("new", cmd_proposal_new, "allocate the next six-digit proposal number (global) and scaffold <NNNNNN>/ "
-             "under the owner's proposals/ with a proposal.yaml to fill in", cs)
-    sp.add_argument("owner", help="whose files the proposal changes: core (the science kernel) or catalysis (the catalysis domain)")
-    sp.add_argument("--title", help="the proposal's title (it stays in proposal.yaml, not in the folder name)")
-    sp.add_argument("--manifest", help="the schema manifest it changes (default: the catalysis manifest)"); out_opts(sp)
-    sp = add("build", cmd_proposal_build, "scale-graph: apply the proposal's operations to the base schema (candidate/)", cs)
-    sp.add_argument("proposal", help=PROPOSAL_HELP); out_opts(sp)
-    sp = add("check", cmd_proposal_check, "scale-graph: build, diff, fixtures, migration, competency questions, critic, PR body", cs)
-    sp.add_argument("proposal", help=PROPOSAL_HELP); out_opts(sp)
-    sp = add("decide", cmd_proposal_decide, "scale-graph: write the decision record of an approved proposal (docs/decisions/NNNN-<id>.md); the "
-             "apply-proposals workflow runs it through apply-merged", cs)
-    sp.add_argument("proposal", help=PROPOSAL_HELP); sp.add_argument("--number", type=int)
-    sp.add_argument("--pr", type=int, help="the merged pull request"); sp.add_argument("--author", help="its author")
-    sp.add_argument("--bootstrap-bypass", metavar="REASON", help="the owner's action, for their own pull request, until another reviewer joins: "
-                    "record a decision merged under the ruleset's bootstrap bypass, without an approval")
-    sp.add_argument("--by", help="with --bootstrap-bypass: the reviewer (GitHub handle) who merged"); out_opts(sp)
-    sp = add("apply", cmd_proposal_apply, "scale-graph: freeze the base version (kernel in core/graph/frozen/, catalysis parts in domain/graph/frozen/) and install the approved candidate (--confirm)", cs)
-    sp.add_argument("proposal", help=PROPOSAL_HELP); sp.add_argument("--confirm", action="store_true"); out_opts(sp)
-    sp = add("apply-merged", cmd_proposal_apply_merged, "after its pull request merged: record the GitHub reviews, check them "
-             "against the review policy, decide, apply (version bump) and run the full `scale check`, tests included; all or nothing "
-             "(the apply-proposals workflow)", cs)
-    sp.add_argument("proposal", help=PROPOSAL_HELP); sp.add_argument("--pr", type=int, required=True, help="the merged pull request")
-    sp.add_argument("--reviews", required=True, help="JSON: the pull request's reviews as the GitHub API returns them")
-    sp.add_argument("--author", help="the pull request's author (their own review never counts)")
-    sp.add_argument("--head-sha", help="the merged head commit (approvals of older commits do not count)")
-    sp.add_argument("--pr-url", help="link to the pull request, for the decision record"); out_opts(sp)
-    sp = add("register", cmd_proposal_register, "scale-graph: recount the proposal's gap themes in docs/gaps/register.json from the fragments", cs)
-    sp.add_argument("proposal", help=PROPOSAL_HELP); out_opts(sp)
-    sp = add("pr", cmd_proposal_pr, "print the PR body, or open a PR with --branch (dry run unless --submit)", cs)
-    sp.add_argument("proposal", help=PROPOSAL_HELP); sp.add_argument("--branch"); sp.add_argument("--base", default="main"); sp.add_argument("--submit", action="store_true")
-    sp.add_argument("--out"); sp.add_argument("--format", default="json")
+    sc = sub.add_parser("schema", help="a schema change on a branch: its diff, the version bump, its checks").add_subparsers(
+        dest="sub", required=True)
+    for name, fn, hlp in (("diff", cmd_schema_diff, "what the branch changes in the schema against the base, its kind "
+                           "(breaking or additive) and the version that follows"),
+                          ("check", cmd_schema_check, "what a schema change must carry: the version raised by the rule, the "
+                           "base frozen, the migration step (and rule, if breaking), tests, a CHANGELOG line (exit 1 if not)"),
+                          ("bump", cmd_schema_bump, "freeze the base version, raise the version (breaking: the second number; "
+                           "otherwise the third) in every file that states it, and register the migration step")):
+        sp = add(name, fn, hlp, sc)
+        sp.add_argument("--base", default="origin/main", help="git ref the change merges into (default: origin/main)")
+        if name == "bump":
+            sp.add_argument("--note", help="the migration step's note (default: the kind of change)"); out_opts(sp)
+        else:
+            sp.add_argument("--json", action="store_true", help="machine-readable result")
+        if name == "check":
+            sp.add_argument("--comment", help="also write the reviewer's summary (Markdown) here")
 
     sp = add("check", cmd_check, "run every check of CI's test jobs (tests, release digests, schemas, domains, "
              "competency questions, style, links, invalid fixtures)")
@@ -1317,21 +1212,12 @@ def build_parser() -> argparse.ArgumentParser:
     sp.add_argument("--json", action="store_true", help="machine-readable result")
 
     ci = sub.add_parser("ci", help="checks CI runs on pull requests").add_subparsers(dest="sub", required=True)
-    sp = add("spec-changes", cmd_ci_spec_changes, "fail when a branch modifies archived releases or changes the "
-             "specification without a proposal or decision record; print who must review", ci)
+    sp = add("spec-changes", cmd_ci_spec_changes, "fail when a branch modifies archived releases or frozen versions, "
+             "or changes the schema without what it must carry (scale schema check); print who must review", ci)
     sp.add_argument("--base", required=True, help="git ref the pull request targets (e.g. origin/main)")
     sp.add_argument("--head", default="HEAD", help="git ref of the branch (default: HEAD)")
     sp.add_argument("--json", action="store_true", help="machine-readable result")
 
-    sp = add("proposal-check", cmd_ci_proposal_check, "run `scale proposal check` on every draft or proposed proposal a "
-             "pull request changes and print the pull-request comment (fails when a check fails)", ci)
-    sp.add_argument("--base", required=True, help="git ref the pull request targets (e.g. origin/main)")
-    sp.add_argument("--head", default="HEAD"); sp.add_argument("--comment", help="also write the comment (Markdown) here")
-    sp.add_argument("--json", action="store_true", help="machine-readable result")
-    sp = add("proposals", cmd_ci_proposals, "list the proposals changed between two commits (with --status, only those "
-             "with that status; the apply-proposals workflow asks for 'proposed')", ci)
-    sp.add_argument("--base", required=True, help="the commit before (e.g. a push's before)")
-    sp.add_argument("--head", default="HEAD"); sp.add_argument("--status", help="e.g. proposed")
 
     kg = sub.add_parser("kg", help="a knowledge-graph data repository (a folder of curated documents kept apart from this repository)").add_subparsers(dest="sub", required=True)
     sp = add("update", cmd_kg_update, "move every catalysis scale-graph document under a directory to the head (or "

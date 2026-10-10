@@ -40,7 +40,6 @@ EXAMPLES = CATALYSIS / layout.DOMAIN_EXAMPLES
 DRIVING_FORCE_EXAMPLES = EXAMPLES / "scale-graph/driving-force-examples"   # public synthetic examples
 COMPETENCY = CATALYSIS / layout.DOMAIN_COMPETENCY
 FIXTURES = CATALYSIS / "tests/fixtures"
-PROPOSALS = CATALYSIS / layout.DOMAIN_PROPOSALS                 # the catalysis domain's schema change proposals
 
 
 @pytest.fixture(scope="session")
@@ -48,10 +47,10 @@ def repo():
     return REPO
 
 
-# The schema's one version (kernel and catalysis together), read from the manifest: every applied proposal raises it
+# The schema's one version (kernel and catalysis together), read from the manifest: every schema change raises it
 # (the automatic version bump), so a test never spells the head version. A test about what a document pins reads it
 # from the document and loads that version with schema_at(), which finds the head while the head is at it and the
-# frozen copy after a later proposal moved the head on.
+# frozen copy after a later change moved the head on.
 HEAD_VERSION = load_yaml(GRAPH_MANIFEST)["version"]          # the schema's one version (scale-graph)
 
 

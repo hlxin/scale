@@ -17,7 +17,7 @@ Design rules
   ``~/.scale/workspace``), created when a tool first writes there. There is no lock and nothing to
   upgrade: a scale-graph document pins its schema version itself (``graph.schema_version``) and is
   read under that version; ``scale_migrate`` moves it to a newer one when asked.
-* **Agents propose, people decide.** Approving proposals, applying them, building releases and
+* **Agents do the work, people decide.** Approving and merging pull requests, building releases and
   filing GitHub issues are deliberately *not* agent tools; they stay in the CLI for humans
   (``status.human_only_actions`` lists the commands).
 * **Writes stay inside the working directory.** Only ``scale_example`` and ``scale_migrate`` (with
@@ -153,16 +153,13 @@ TOOLS: list[dict] = [
 ]
 
 HUMAN_ONLY = {
-    "approve a pull request (one reviewer other than the author approves every change, once a reviewer besides the "
-    "owner has joined; governance/GOVERNANCE.md, Bootstrap, until then)": "gh pr review NUMBER --approve",
-    "merge an approved pull request (a merged proposal is then applied with the apply-proposals workflow)":
-        "gh pr merge NUMBER --squash",
-    "apply a merged proposal (manual workflow; it needs a token configured for this repository)":
-        "gh workflow run apply-proposals.yml --repo hlxin/scale -f proposal=<id> -f pr=<number>",
+    "approve a pull request (one human reviewer approves every change; governance/GOVERNANCE.md)":
+        "gh pr review NUMBER --approve",
+    "merge an approved pull request": "gh pr merge NUMBER --squash --delete-branch",
     "fill a reviewer seat (replace a placeholder)": "edit governance/review-policy.yaml, core/CORE.yaml, "
                                                     "domain/DOMAIN.yaml and .github/CODEOWNERS in a pull request",
     "move a data repository's documents to the latest schema": "scale kg update --data DIR",
-    "build a release": "scale release build vX.Y.Z --proposal ID  (one --proposal per proposal applied since the last release)",
+    "build a release": "scale release build vX.Y.Z",
     "publish a release to PyPI (once the trusted publisher is configured)": "gh release create vX.Y.Z --repo hlxin/scale",
     "register the PyPI trusted publisher for scale-schema": "pypi.org, project scale-schema: add the GitHub publisher "
                                                             "hlxin/scale, workflow publish.yml, environment pypi "

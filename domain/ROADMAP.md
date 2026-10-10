@@ -1,21 +1,20 @@
 # Catalysis roadmap
 
-Open work recorded in this repository, as of schema 0.1.0 (2026-10-08). Nothing here is approved until its
-proposal or decision record is. There is no proposal yet; proposals are named by a six-digit number, global across
-the science kernel and the catalysis domain (the first is `000001`).
+Open work recorded in this repository, as of schema 0.1.0 (2026-10-08). Nothing here is approved until the
+pull request that makes it is. Each item is a suggestion @scale-agents can take up (open an issue for it).
 
-## Proposals to write
+## Schema changes to make
 
 - **Activity in a catalyst state and reaction pathways as records** (catalysis): the activity of a component in a
   catalyst state (which phase or site is active for which reaction, on what evidence), reaction pathways as
   records with their intermediates and rate-determining step, site populations in a state and a test's measured
   product distribution. The draft reporting checklist for authors,
   [docs/reporting/catalyst-state-reporting.md](docs/reporting/catalyst-state-reporting.md), names the fields such a
-  proposal would add; schema 0.1.0 does not have them.
+  change would add; schema 0.1.0 does not have them.
 - **Stability maps and the order of phenomena** (kernel): which species or phase is most stable over a region of
   condition space (phase, Pourbaix and regime maps), and the order in time between phenomena. Both are general
   scientific distinctions built from kernel parts, so they belong in the kernel.
-- **The schema's wording** (kernel and catalysis; a proposal that touches the kernel goes in `core/proposals/`): texts
+- **The schema's wording** (kernel and catalysis): texts
   left as they were, since changing them changes the schema's content ([CHANGELOG](../CHANGELOG.md), "Schema
   texts"; [core/README.md](../core/README.md), "Known follow-ups"):
   - the example in the kernel's `graph.follows_domains` description, `thermocatalysis@0.1.0`, names a frozen
@@ -28,7 +27,7 @@ the science kernel and the catalysis domain (the first is `000001`).
     thermal profile of the consortium schema repository's catalysis schema 0.1.0");
   - the kernel's `Operation` text that still speaks of driving-force domains, the descriptions that still speak of
     modules, and the informational `extensions.registry` path.
-- **Units**: unit conversion and basis reading in queries are planned with a units proposal; until then a numeric
+- **Units**: unit conversion and basis reading in queries are planned with a units change; until then a numeric
   filter compares only values in the unit it states ([docs/querying.md](../docs/querying.md)).
 - **Value and statement forms the curation guidance already plans for** (kernel; [docs/curation.md](../docs/curation.md)
   and the curate-source skill say what to record until then):
@@ -48,9 +47,9 @@ the science kernel and the catalysis domain (the first is `000001`).
 ## Open themes of the earlier gap register
 
 The gap register of the consortium schema repository was not carried; the register here
-([docs/gaps/register.json](../docs/gaps/register.json)) starts empty and `scale proposal decide | apply` fill it. The
-themes it still held open or partly resolved are tracked here until a curation closes them or a proposal takes them
-up (stability maps and the order of phenomena are under "Proposals to write"):
+([docs/gaps/register.json](../docs/gaps/register.json)) starts empty and is filled as changes answer themes. The
+themes it still held open or partly resolved are tracked here until a curation closes them or a schema change takes them
+up (stability maps and the order of phenomena are under "Schema changes to make"):
 
 - **Source lifecycle follow-ups** (kernel and tools):
   - checking sources against registries (Crossref update metadata, Retraction Watch): no tool does it yet, and
@@ -61,7 +60,7 @@ up (stability maps and the order of phenomena are under "Proposals to write"):
     notices other than a full retraction (partial retractions, corrections, expressions of concern, withdrawals);
     the text that was read; versions, translations and duplicates of one work; the dates of sources and datasets;
     which statement of a retraction prevails, and what a retraction does to the records. Each closes once a
-    curation shows that the schema records it, or leads to a proposal for what remains (such as
+    curation shows that the schema records it, or leads to a schema change for what remains (such as
     `update_type: reinstatement`, above).
 - **Catalyst states and contexts** (catalysis), partly resolved: the catalyst states and contexts of 0.1.0 answer
   these themes in the schema, but the gaps that raised them, recorded in curations that are not in this repository,
@@ -74,7 +73,7 @@ up (stability maps and the order of phenomena are under "Proposals to write"):
 ## Checklist review
 
 The reviewers of the thermo, electrothermo, electro, photo and plasma areas check each case of the catalysis
-checklist: its field lists are proposals for review.
+checklist: its field lists are suggestions for review.
 
 ## Stewards
 

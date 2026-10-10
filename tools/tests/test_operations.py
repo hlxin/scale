@@ -1,0 +1,181 @@
+"""The operating model's automation, offline: the placeholder warning of `scale check`, the review policy, who may
+start the agent and what the workflows may write, and the update of a data repository's documents to a schema
+version a change raised (`scale kg update`)."""
+
+import hashlib
+import shutil
+
+import pytest
+
+from conftest import HEAD_VERSION, REPO
+from scale.util import ScaleError, load_doc, load_yaml, write_canonical
+from test_schema_change import git
+
+TO = f"{HEAD_VERSION.rsplit('.', 1)[0]}.{int(HEAD_VERSION.rsplit('.', 1)[1]) + 1}"     # an additive change's version
+
+
+def tree(repo):
+    """Every file's digest: what 'nothing written' means."""
+    return {p.relative_to(repo).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
+            for p in sorted(repo.rglob("*")) if p.is_file() and "__pycache__" not in p.parts}
+
+
+def test_check_warns_about_placeholder_reviewers(tmp_path):
+    import io
+    import unittest.mock as mock
+    from scale import devcheck
+    assert devcheck.reviewer_warnings(REPO) == ["reviewers: 2 placeholders to fill (governance/review-policy.yaml)"]
+    (tmp_path / "governance").mkdir()
+    (tmp_path / "governance/review-policy.yaml").write_text(
+        "reviewers:\n  members:\n    - name: Ada\n      github: ada\n")
+    assert devcheck.reviewer_warnings(tmp_path) == []
+    step = devcheck.check_steps(REPO, fast=True)[0]
+    assert step["cmds"] == [] and step["warning"] is devcheck.reviewer_warnings
+    out = io.StringIO()
+    with mock.patch.object(devcheck, "check_steps", lambda *a, **k: [step]):
+        assert devcheck.run_checks(REPO, fast=True, out=out)          # a warning never fails the check
+    assert out.getvalue().splitlines()[0] == "warn reviewers: 2 placeholders to fill (governance/review-policy.yaml)"
+
+
+def test_the_repository_policy_has_one_reviewer_and_two_placeholders():
+    from scale.policy import load_policy, placeholders, reviewers
+    pol = load_policy(REPO)
+    assert pol["approvals"]["required"] == 1 and pol["reviewers"]["team"] == "@hlxin"
+    assert [m["github"] for m in reviewers(pol)] == ["hlxin"]
+    assert [m["github"] for m in placeholders(pol)] == ["TODO-reviewer-2", "TODO-reviewer-3"]
+
+
+def test_who_may_start_the_agents_and_what_workflows_may_write():
+    """@scale-agents start on their own on every new issue, comment and review (no label or tag), never on a bot's
+    event, and by hand only from main; the job token only reads the contents (the team pushes with the Claude GitHub
+    App's token); the discovery strategist's instructions and every other role are installed for the run, the evidence
+    verifier unable to edit. No workflow asks for contents: write. The main ruleset needs one approval, no code
+    owner, and lets only the repository admin bypass."""
+    import json
+    rules = json.loads((REPO / "governance/github/ruleset-main.json").read_text())
+    assert {(a["actor_type"], a["actor_id"], a["bypass_mode"]) for a in rules["bypass_actors"]} == {("RepositoryRole", 5, "always")}
+    pr = next(r for r in rules["rules"] if r["type"] == "pull_request")["parameters"]
+    assert pr["required_approving_review_count"] == 1 and not pr["require_code_owner_review"]
+    checks = next(r for r in rules["rules"] if r["type"] == "required_status_checks")["parameters"]
+    assert [c["context"] for c in checks["required_status_checks"]] == [
+        "test (3.10)", "test (3.11)", "test (3.12)", "test (3.13)", "package", "specification-changes"]
+    wf = REPO / ".github/workflows/scale-agents.yml"
+    agents = load_yaml(wf)
+    assert agents["on"] == {"issues": {"types": ["opened", "reopened"]}, "issue_comment": {"types": ["created"]},
+                            "pull_request_review": {"types": ["submitted"]},
+                            "workflow_dispatch": agents["on"]["workflow_dispatch"]}
+    job = agents["jobs"]["agents"]
+    cond = " ".join(job["if"].split())
+    assert cond == "github.event.sender.type != 'Bot' && (github.event_name != 'workflow_dispatch' || github.ref == 'refs/heads/main')"
+    assert job["permissions"]["contents"] == "read"
+    action = next(s for s in job["steps"] if str(s.get("uses", "")).startswith("anthropics/claude-code-action"))
+    assert "trigger_phrase" not in action["with"] and "label_trigger" not in action["with"]
+    assert "Task," in action["with"]["claude_args"] and "git push origin agent/" in action["with"]["claude_args"]
+    assert "github.event.issue.body" not in wf.read_text() and "github.event.comment.body" not in wf.read_text()
+    roles = {p.stem: load_yaml_front(p) for p in sorted((REPO / ".github/scale-agents/roles").glob("*.md"))}
+    assert set(roles) == {"data-scientist", "protocol-compiler", "evidence-verifier", "systems-engineer"}
+    assert all(r["name"] == n for n, r in roles.items())
+    assert not {"Edit", "Write"} & {t.strip() for t in roles["evidence-verifier"]["tools"].split(",")}
+    text = (REPO / ".github/scale-agents/instructions.md").read_text()
+    assert "discovery strategist" in text and all(part in text for part in (
+        "the proposed patch", "the evidence record", "test cases with explicit expected outcomes", "the migration assessment"))
+    for name in roles:
+        assert f"`{name}`" in (REPO / ".github/scale-agents/instructions.md").read_text(), name
+    assert not (REPO / ".github/workflows/scale-agent.yml").exists()
+    assert not (REPO / ".github/workflows/apply-proposals.yml").exists()
+    for f in sorted((REPO / ".github/workflows").glob("*.yml")):
+        perms = [load_yaml(f).get("permissions") or {}] + [j.get("permissions") or {} for j in load_yaml(f)["jobs"].values()]
+        assert all(p.get("contents") != "write" for p in perms), f.name
+
+
+def load_yaml_front(path):
+    """The YAML front matter of a role file."""
+    import yaml
+    return yaml.safe_load(path.read_text().split("---\n")[1])
+
+
+def _two_versions(tmp_path):
+    """A schema repository after an additive change (HEAD_VERSION frozen, the head at TO, the step registered), and a
+    data repository with documents at HEAD_VERSION."""
+    from scale.schema_change import bump
+    from scale.util import dump_yaml
+    repo = tmp_path / "repo"
+    shutil.copytree(REPO / "core", repo / "core", ignore=shutil.ignore_patterns("__pycache__", "frozen", "tests"))
+    shutil.copytree(REPO / "domain/graph", repo / "domain/graph", ignore=shutil.ignore_patterns("frozen"))
+    for rel in ("domain/DOMAIN.yaml", "scale-release.yaml", "CHANGELOG.md",
+                "governance/registry/extension-prefixes.yaml", "tools/scale/pgraph_migrate.py"):
+        (repo / rel).parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(REPO / rel, repo / rel)
+    git(repo, "init", "-q", "-b", "main")
+    git(repo, "add", "-A")
+    git(repo, "commit", "-q", "-m", "base")
+    cat = load_yaml(repo / "domain/graph/catalysis.yaml")
+    cat["nodes"]["CatalyticTest"]["properties"]["test_only_note"] = {"type": "text", "maturity": "provisional"}
+    (repo / "domain/graph/catalysis.yaml").write_text(dump_yaml(cat))
+    assert bump(repo, "main")["version"] == TO
+    data = tmp_path / "kg"
+    ex = data / "examples/demo"
+    ex.mkdir(parents=True)
+    src = REPO / "domain/examples/scale-graph/driving-force-examples"
+    def at_head(name):                         # an example stays at the version it pins until migrated
+        doc = load_doc(src / f"{name}.json")
+        doc["graph"]["schema_version"] = HEAD_VERSION    # the examples are valid at the head (test_examples)
+        return doc
+    write_canonical(ex / "electro.graph.json", at_head("electro"))
+    write_canonical(ex / f"electro.scale-graph-{HEAD_VERSION}.graph.json", at_head("electro"))   # a copy kept at its version
+    bad = at_head("photo")
+    bad["graph"]["follows_domains"] = ["no-such-checklist"]
+    write_canonical(ex / "odd.graph.json", bad)
+    shutil.copytree(src, data / "sealed")                                   # a sealed package is not read
+    (data / "sealed/.scale-verbatim").write_text("")
+    from scale.passages import Index, evidence_items
+    Index.build(evidence_items(load_doc(ex / "electro.graph.json"))).save(ex / "electro.evidence")
+    return repo, data, ex
+
+
+@pytest.fixture()
+def step(monkeypatch):
+    """The step HEAD_VERSION -> TO as `scale schema bump` registers it, with a rule that stops on a document it cannot
+    map (a checklist the schema does not have)."""
+    from scale import pgraph_migrate
+
+    def rule(doc, spec):
+        if doc["graph"].get("follows_domains") != ["catalysis"]:
+            raise ScaleError(f"follows_domains {doc['graph'].get('follows_domains')} cannot be mapped")
+        return []
+    monkeypatch.setitem(pgraph_migrate.STEPS, HEAD_VERSION, (TO, "additive change"))
+    monkeypatch.setitem(pgraph_migrate.STEP_RULES, HEAD_VERSION, ("checklists checked", rule))
+
+
+def test_kg_update_dry_run_writes_nothing(tmp_path, step):
+    from scale.kg import update
+    repo, data, _ = _two_versions(tmp_path)
+    before = tree(data)
+    res = update(repo, data, dry_run=True)
+    assert tree(data) == before and not res["ok"]
+    by = {r["document"].rsplit("/", 1)[-1]: r for r in res["documents"]}
+    assert set(by) == {"electro.graph.json", f"electro.scale-graph-{HEAD_VERSION}.graph.json", "odd.graph.json"}
+    assert by["electro.graph.json"]["status"] == "would update" and by["electro.graph.json"]["steps"] == [
+        f"{HEAD_VERSION} → {TO} (additive change)"]
+    assert by[f"electro.scale-graph-{HEAD_VERSION}.graph.json"]["status"] == "kept"
+    assert by["odd.graph.json"]["status"] == "refused" and "a step rule cannot migrate it" in by["odd.graph.json"]["why"]
+
+
+def test_kg_update_migrates_validates_and_reindexes(tmp_path, capsys, step):
+    from scale.cli import main
+    repo, data, ex = _two_versions(tmp_path)
+    odd, kept = (ex / "odd.graph.json").read_bytes(), (ex / f"electro.scale-graph-{HEAD_VERSION}.graph.json").read_bytes()
+    index = (ex / "electro.evidence.jsonl").stat().st_mtime_ns
+    assert main(["--repo", str(repo), "kg", "update", "--data", str(data), "--out", str(tmp_path / "r.json")]) == 1   # one refused
+    res = load_doc(tmp_path / "r.json")
+    row = next(r for r in res["documents"] if r["document"].endswith("/electro.graph.json"))
+    assert row["status"] == "updated" and row["after"]["errors"] == 0 and row["index"].endswith("electro.evidence.jsonl")
+    doc = load_doc(ex / "electro.graph.json")
+    assert doc["graph"]["schema_version"] == TO and doc["graph"]["follows_domains"] == ["catalysis"]
+    assert (ex / "odd.graph.json").read_bytes() == odd and (ex / f"electro.scale-graph-{HEAD_VERSION}.graph.json").read_bytes() == kept
+    assert (ex / "electro.evidence.jsonl").stat().st_mtime_ns != index
+    assert "refused" in capsys.readouterr().out
+    assert res["counts"] == {"kept": 1, "refused": 1, "updated": 1}
+    from scale.kg import update
+    again = update(repo, data)
+    assert next(r for r in again["documents"] if r["document"].endswith("/electro.graph.json"))["status"] == "current"

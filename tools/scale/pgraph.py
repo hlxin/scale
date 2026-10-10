@@ -120,7 +120,7 @@ def bundle_graph(doc: Any) -> bool:
 def _unknown(manifest: Path, version: str, doc: dict | None = None) -> str:
     """What a version this repository does not hold may be: the graph of a kg-bundle, whose ``schema_version``
     is the bundle's own version (:func:`bundle_graph`); a version newer than the head (the tools are older
-    than the document, or it is a proposal's candidate); else a version of another numbering, which only its spec
+    than the document); else a version of another numbering, which only its spec
     digest could tell. Only this suffix of the error says so; the error and the validity are those of a version the
     tools do not hold."""
     from .versions import parse_version
@@ -136,7 +136,7 @@ def _unknown(manifest: Path, version: str, doc: dict | None = None) -> str:
         return f"; it holds {', '.join(held)}"
     if newer:
         return (f"; {version} is newer than this schema's head {head} (update the tools, or pass --spec with that "
-                "version's manifest, e.g. a proposal's candidate)")
+                "version's manifest)")
     return (f"; it holds {', '.join(held)}. A version is identified by its spec digest (`scale graph spec`): a document "
             "written under another numbering is curated again, not read under a version of the same number")
 

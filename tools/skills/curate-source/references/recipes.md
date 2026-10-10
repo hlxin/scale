@@ -2,7 +2,7 @@
 
 Short recipes for things the schema already expresses, though not obviously. None of them adds a
 property: each says which existing label, property or link carries the information, and what to do
-until a planned proposal (domain/ROADMAP.md) is applied. Read the schema you pin with
+until a planned schema change (domain/ROADMAP.md) is merged. Read the schema you pin with
 `scale graph describe <Label> --domain catalysis` before following one; when it differs from what a
 recipe assumes, the schema wins and the context goes in `unmodeled`.
 
@@ -82,7 +82,7 @@ A value the experimenter set or the author specified is not a measurement.
   file is `configuration`, the container or environment lock `execution_environment`.
 - One `random_seed`: several seeds go in the configuration Dataset or the note.
 - A standard state or reference energy goes in the value's `basis` or `definition`.
-- The structured computation fields some platforms use stay with the deferred catalysis proposal;
+- The structured computation fields some platforms use stay with a deferred catalysis schema change;
   until then, these slots are enough.
 
 ## Reactor, bed and catalyst-body keys

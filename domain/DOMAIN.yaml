@@ -17,7 +17,7 @@ scope: |
   of every driving force: heat, electrically delivered heat, an applied potential or current, light
   and plasma, and where they act together) and one checklist of what a record must and should
   report, whose items for a catalytic test apply by the driving forces it lists (driving_forces).
-  Out of scope: the science kernel (core/), which changes only by a kernel proposal; the
+  Out of scope: the science kernel (core/), which changes only by a kernel change; the
   electrochemical and photochemical terms stay in the catalysis domain.
 # One reviewer group for the kernel and the catalysis domain for now (governance/review-policy.yaml). The two
 # placeholder seats are filled when the reviewers join (never invent them).
@@ -58,7 +58,6 @@ example_documents:
     - examples/scale-graph/source-lifecycle/*.json
 competency: competency
 tests: tests
-proposals: proposals
 docs: docs
 roadmap: ROADMAP.md
 decision_record: docs/decisions/0001-scale-0.1.0.md

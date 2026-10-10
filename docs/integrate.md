@@ -74,7 +74,7 @@ file too (`'{"name": "curate-source", "reference": "references/recipes.md"}'`).
 | `map-coverage` | a coverage map (materials by properties by conditions) from query plans, each kind of absence kept apart, gaps routed |
 | `scan-conflicts` | pair values that seem to disagree and classify each pair as genuine, apparent (with the axis) or not comparable; never rewriting a value |
 | `export-graph` | hand a document to another system: validated, capped, filtered for its audience, native or as a kg-bundle with its losses stated, sealed and linked to its previous release |
-| `evolve-schema` | turn missing-concept gaps into a reviewable schema change proposal |
+| `evolve-schema` | turn missing-concept gaps into a schema change in one reviewable pull request |
 | `triage-feedback` | sort community feedback into topics and options for the reviewers |
 
 Release v0.1.0 carries curate-source, query-graph, evolve-schema and triage-feedback in their earlier
@@ -96,7 +96,7 @@ checkout), `scale call skills` serves the head's skills.
 | `example` | list the public synthetic examples, or copy one into the working directory | the working directory |
 | `skills` | list the skills with their reference files, or return one skill's text, or one of its reference files (`reference`; after v0.1.0) | — |
 
-**Human-only by design:** approving proposals, writing decision records, applying proposals,
+**Human-only by design:** approving and merging pull requests,
 building releases and filing issues are not tools. `scale call status` returns the exact command
 for each (`human_only_actions`).
 
@@ -122,7 +122,7 @@ rather than inventing one), and the potentiostatic baseline at −1.4 V vs Ag/Ag
 | the **tool** (the `scale` package, with the schemas it bundles) | the version in the command (`scale-schema@0.1.0`) | change the version; without a pin, `uvx --refresh scale-schema …` fetches the newest |
 | the **schema version** a document follows | the document itself (`graph.schema_version`) | `scale call migrate` (or `scale graph migrate`) moves it to a newer version when you ask |
 
-A newer tool keeps every earlier schema version (its frozen copies, once a proposal has moved the schema on), so a document is
+A newer tool keeps every earlier schema version (its frozen copies, once a schema change has moved the schema on), so a document is
 always read under the version it pins; updating the tool never changes what an existing document
 means.
 

@@ -9,12 +9,11 @@ body:
         The science kernel holds the general scientific distinctions (questions, experiments, claims,
         sources, people) that every domain, catalysis first, builds on. A change here reaches every domain, so
         it is reviewed with that in mind:
-        - a proposal in `core/proposals/<NNNNNN>/` (a six-digit number, global) and a decision record in `docs/decisions/`;
-        - one approving review from a reviewer other than the author, as every change; say how the
-          catalysis domain is affected;
-        - new concepts enter as `maturity: provisional`;
-        - after the merge, the proposal is applied and the schema's one version (kernel and catalysis
-          together) moves on.
+        - one pull request that edits `core/graph/kernel.yaml` and raises the schema's one version (kernel and
+          catalysis together; `scale schema bump`), usually made by @scale-agents, which take up every issue;
+        - one approving review by a reviewer, as every change; the pull request says how the catalysis domain
+          is affected;
+        - new concepts enter as `maturity: provisional`.
 
         A concept about catalysis belongs in the catalysis domain. Use "Missing concept" for that.
   - type: textarea

@@ -17,12 +17,12 @@ scope: |
   questions), which belongs in the catalysis domain, domain/.
 compatibility: |
   The schema has one version for the kernel and the catalysis domain together: the catalysis
-  manifest's `version` (domain/graph/scale-graph.yaml), numbered from 0.1.0. Every applied proposal
-  raises it, whether it changes the kernel, the catalysis file or both: additive changes raise the
-  minor version; breaking changes (removals, narrowed ranges, newly required properties, changed
-  meaning) raise the major version, follow tier 3 of the review policy and need a migration and a
-  decision record. Prefer deprecation to removal. The kernel of each earlier version is frozen in
-  graph/frozen/kernel-<version>.yaml when a proposal moves the schema on.
+  manifest's `version` (domain/graph/scale-graph.yaml), numbered from 0.1.0. Every schema change
+  raises it in its own pull request, whether it changes the kernel, the catalysis file or both:
+  additive changes raise the third number (0.1.0 -> 0.1.1); breaking changes (removals, narrowed
+  ranges, newly required properties, changed meaning) raise the second (0.1.0 -> 0.2.0) and need a
+  migration rule. Prefer deprecation to removal. The kernel of each earlier version is frozen in
+  graph/frozen/kernel-<version>.yaml when a change moves the schema on (scale schema bump).
 # One reviewer group for the kernel and the catalysis domain for now (governance/review-policy.yaml). The two
 # placeholder seats are filled when the reviewers join (never invent them).
 maintainers:
@@ -51,7 +51,6 @@ example_documents:
   graph:
     - examples/science-examples/*.json
 tests: tests
-proposals: proposals
 docs: graph/README.md
 contributors:
   - name: Hongliang Xin

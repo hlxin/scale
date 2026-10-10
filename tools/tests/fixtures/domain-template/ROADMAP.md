@@ -1,6 +1,6 @@
 # Roadmap of the __TITLE__ domain
 
-- [ ] Replace the three competency-question stubs with questions from the new-domain proposal, each
+- [ ] Replace the three competency-question stubs with questions from the new-domain request, each
       with a plan and expectations.
 - [ ] Add the starter vocabulary to `graph/__DOMAIN__.yaml`.
 - [ ] Replace the synthetic example with a curated example document.

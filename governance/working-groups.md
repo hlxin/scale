@@ -20,15 +20,15 @@ owner keeps the two in step (a human action; see [repository-settings.md](reposi
 ## The schema version
 
 The schema has one version for the kernel and the catalysis domain together. The `version` in `DOMAIN.yaml`
-states it and must equal the catalysis manifest's (`scale domains check`); every applied proposal raises it
-(minor for additive changes, major for breaking ones), whichever file it changes.
+states it and must equal the catalysis manifest's (`scale domains check`); every schema change raises it
+(the third number for additive changes, the second for breaking ones), whichever file it changes.
 
 ## What every change needs
 
-Every pull request, to the catalysis domain or to the science kernel, needs one approving review from
-a reviewer other than its author (the owner's own pull requests: the bootstrap rule until another reviewer joins). Nobody may redeclare an
+Every pull request, to the catalysis domain or to the science kernel, needs one approving review by
+a reviewer (the owner's own pull requests: the bootstrap rule until another reviewer joins). Nobody may redeclare an
 identifier that the kernel or the catalysis domain declares (extend with `is_a`, `extends` or
-`adds_properties` with a new key). A schema change is a proposal, applied after the merge; official
+`adds_properties` with a new key). A schema change raises the version in its own pull request (`scale schema bump`); official
 releases follow [release-process.md](release-process.md).
 
 ## Shared compatibility requirements

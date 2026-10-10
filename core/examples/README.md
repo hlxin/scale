@@ -16,6 +16,6 @@ python core/examples/science-examples/build_examples.py     # rebuilds them (cor
 ```
 
 `scale graph validate … --spec core/examples/science-kernel-only.yaml` validates against the kernel alone at the
-head version, so it applies only to documents that pin the head version: once a proposal has raised the version, the
+head version, so it applies only to documents that pin the head version: once a schema change has raised the version, the
 cases (which keep pinning the version they were written under) are read under that version's frozen kernel, as
 `scale domains check` does.

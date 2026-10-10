@@ -54,7 +54,6 @@ def test_reuse_lint_passes_and_scale_check_runs_it():
     ("scale-release.yaml", {"CC-BY-4.0"}), ("releases/README.md", {"MIT"}),
     ("domain/tests/test_invalid_fixtures.py", {"MIT"}), ("domain/examples/scale-graph/driving-force-examples/build_examples.py", {"MIT"}),
     ("core/examples/science-examples/build_examples.py", {"MIT"}), ("docs/figures/science-kernel-overview.py", {"MIT"}),
-    ("domain/proposals/README.md", {"CC-BY-4.0"}), ("core/proposals/README.md", {"CC-BY-4.0"}),
     ("docs/decisions/0001-scale-0.1.0.md", {"CC-BY-4.0"}),
     # the domain template, a test fixture: its texts CC-BY-4.0, its code MIT
     ("tools/tests/fixtures/domain-template/README.md", {"CC-BY-4.0"}),

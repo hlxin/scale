@@ -4,10 +4,9 @@ There is one process for official SCALE releases. It is run by the owner (and th
 join), and every step that publishes something is done by a person. No release has been built yet: the
 first will be `v0.1.0`, with schema 0.1.0.
 
-Releases are not the version bump. The schema's one version moves on every time a proposal is applied
-(after a merge with its approval, or under the bootstrap rule); documents pin those versions directly. A
-release is a human step taken now and then: it **bundles the schema versions applied since the last
-release** (the head version, with the frozen versions), the tools and the skills, under one id.
+Releases are not the version bump. The schema's one version moves on with every schema change, in the
+pull request that makes it; documents pin those versions directly. A release is a human step taken now and
+then: it **bundles the schema versions merged since the last release** (the head version, with the frozen versions), the tools and the skills, under one id.
 
 ## What an official release is
 
@@ -36,8 +35,6 @@ when it leaves it out (`excluded_domains`; none today).
 `scale release build` writes `releases/vX.Y.Z/RELEASE.yaml`. Besides the release id, status, date,
 previous release, skills and digests of every copied file, it records:
 
-- `proposals` and `review`: the proposals applied since the previous release, each with its
-  decision record, tier and approvers;
 - `component_versions`: the schema's one version; the core, the kernel and the catalysis domain at that
   version (with the domain's status and `scale_graph`: its schema manifest); the tool package and version;
   each skill with its version;
@@ -57,19 +54,19 @@ previous release, skills and digests of every copied file, it records:
 The manifest cannot hold the commit it is part of. The tag `vX.Y.Z` identifies the commit, and with it the
 documentation of the release: the docs of a release are those of its tagged commit.
 
-A release is always built from the repository head (the applied state). The first release, `v0.1.0`, has no
-previous release: it is built without `--proposal` and records no comparison.
+A release is always built from the repository head. The first release, `v0.1.0`, has no previous release: it
+records no comparison.
 
 ## Steps
 
 | step | who | command or action |
 |---|---|---|
-| 1. Open a release issue | the owner or a reviewer | lists the proposals and changes since the last release, and the target version |
+| 1. Open a release issue | the owner or a reviewer | lists the changes since the last release (the CHANGELOG), and the target version |
 | 2. Freeze | the owner | announce on the issue; until step 7, merge only release preparation and fixes to it |
 | 3. Prepare a branch | the owner or a reviewer | branch `release/vX.Y.Z`; set `version` in `pyproject.toml` and `release` in `scale-release.yaml`; update `CHANGELOG.md`, `CITATION.cff` (version, date) and release notes |
 | 4. Check | the same | `uv run --extra dev scale check` |
-| 5. Build | **human** | `scale release build vX.Y.Z --proposal ID … --date YYYY-MM-DD` (each proposal applied since the last release; none for v0.1.0), then `scale release verify` |
-| 6. Review | one reviewer other than the author (the owner's own: the bootstrap rule until another reviewer joins) | pull request from `release/vX.Y.Z`; the required checks pass |
+| 5. Build | **human** | `scale release build vX.Y.Z --date YYYY-MM-DD`, then `scale release verify` |
+| 6. Review | one reviewer (the owner's own pull request: the bootstrap rule until another reviewer joins) | pull request from `release/vX.Y.Z`; the required checks pass |
 | 7. Merge | the owner or a reviewer | merge into `main` |
 | 8. Tag and release | **human** (the owner; `v*` tags are restricted to the repository admin) | `gh release create vX.Y.Z --target <merge commit> --title vX.Y.Z --notes-file <notes>` |
 | 9. Publish | **human** approves the `pypi` deployment (where the plan allows required reviewers) | the `publish` workflow checks tag = package version = `releases/vX.Y.Z/` and that the release verifies, then publishes `scale-schema` to PyPI by trusted publishing |
@@ -80,10 +77,7 @@ their own initiative, tag, publish or approve.
 
 The build refuses when:
 
-- the schema changed since the previous release and the proposals applied since then are not all
-  named (`--proposal`, once each), or one of them has no decision record, or no applied proposal
-  accounts for the change;
-- schema content changed while the schema version did not;
+- schema content changed since the previous release while the schema version did not;
 - an experimental folder is listed, or the schema manifests name several versions;
 - the requested version differs from `release` in `scale-release.yaml`;
 - `releases/vX.Y.Z/` already exists (releases are immutable).
@@ -98,10 +92,10 @@ say what was wrong.
 - **The schema** has one version for the science kernel and the catalysis domain together: the catalysis
   manifest's `version` (0.1.0 today), stated also by `CORE.yaml`, `DOMAIN.yaml` and `scale-release.yaml`
   (`schema_version`). Documents pin it (`graph.schema_version`); earlier versions are frozen in
-  `domain/graph/frozen/` and `core/graph/frozen/` once a proposal has moved it on. A version number names a
+  `domain/graph/frozen/` and `core/graph/frozen/` once a schema change has moved it on. A version number names a
   schema only within this repository's numbering; its spec digest identifies it.
-- Proposals (six-digit numbers, global across the kernel and the catalysis domain: `000001` …) and decision
-  records (NNNN, numbered globally from 0001) are never reused.
+- A schema change raises the second number when it is breaking (0.1.0 -> 0.2.0) and the third when it is additive
+  (0.1.0 -> 0.1.1). Decision records (NNNN, numbered globally from 0001) are never reused.
 
 ## One-time setup (human actions)
 

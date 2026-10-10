@@ -199,21 +199,6 @@ def test_committed_documents_are_public_and_respect_the_cap(tmp_path):
     write_canonical(repo / "y/unstated.json", unstated)
     assert rights.access_problems(repo, [repo / "y/unstated.json"]) == [
         "y/unstated.json: the graph states no stewardship access (read as institution); declare access: public"]
-    # the one exemption: the synthetic examples of an applied proposal are history, kept as they were written
-    for status in ("applied", "proposed"):
-        for top in ("domain/proposals/000001", "core/proposals/000002"):
-            (repo / top / "fixtures").mkdir(parents=True, exist_ok=True)
-            (repo / top / "proposal.yaml").write_text(dump_yaml({"id": top.split("/")[-1], "status": status}))
-            write_canonical(repo / top / "fixtures/pass.json", unstated)
-            write_canonical(repo / top / "fixtures/data.json", {**unstated, "graph": {**unstated["graph"], "data_status": "mixed"}})
-        probs = rights.access_problems(repo, sorted((repo / "domain").rglob("*.json")) + sorted((repo / "core").rglob("*.json")))
-        flagged = ["domain/proposals/000001/fixtures/data.json", "core/proposals/000002/fixtures/data.json"]
-        if status == "proposed":
-            flagged = ["domain/proposals/000001/fixtures/data.json", "domain/proposals/000001/fixtures/pass.json",
-                       "core/proposals/000002/fixtures/data.json", "core/proposals/000002/fixtures/pass.json"]
-        assert [x.split(":")[0] for x in probs] == flagged
-    import shutil
-    shutil.rmtree(repo / "domain"), shutil.rmtree(repo / "core")
     unstated["graph"]["stewardship"] = {"access": "public"}
     write_canonical(repo / "y/unstated.json", unstated)
     assert rights.access_problems(repo, [repo / "y/unstated.json"]) == []

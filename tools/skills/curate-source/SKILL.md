@@ -83,7 +83,7 @@ impurities, driving forces outside the list, characterization results, digitizin
 6. **Values** are `{status, value, unit, …}` in the unit the source printed; keep the printed text in
    `as_reported` (or `note`) when it differs ("~", "> 85", "0.05 m"). The schema performs no unit
    conversion. A number printed without a unit keeps `unit: "not stated"` with its printed text in
-   `as_reported`, and the note says the source states no unit (until the units proposal gives values
+   `as_reported`, and the note says the source states no unit (until the units change gives values
    a unit status). `not stated` is no unit: a query leaves such values out as `unit_unstated`, `scale
    graph stats` counts them under `(no unit)`, and no plan filters in it. Record uncertainty only as the source states it (below, **Uncertainty**).
 7. **Evidence on every stating record and every link:** `{source, locator, kind, quote}` with a

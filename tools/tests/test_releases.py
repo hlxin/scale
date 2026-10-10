@@ -24,7 +24,6 @@ def test_every_built_release_verifies_and_the_releases_chain(capsys):
     assert [r["release"] for r in rows] == RELEASES
     for i, r in enumerate(rows):                                  # each names the one before it; the first none
         assert r["previous"] == (RELEASES[i - 1] if i else None), r
-        assert isinstance(r["proposals"], list) and (i or r["proposals"] == []), r
     assert main(["release", "verify"]) == 0
     res = json.loads(capsys.readouterr().out)
     assert [x["release"] for x in res] == RELEASES and all(x["ok"] for x in res), res

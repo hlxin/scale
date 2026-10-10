@@ -11,13 +11,13 @@ self-contained: its graph schema manifest (DOMAIN.yaml ``graph.manifest``, ``gra
 the kernel with the domain's own files, listed under its ``domains:`` key; the file named after the domain
 (``domain: <name>``, for catalysis ``graph/catalysis.yaml`` with one vocabulary and one checklist) is required,
 and documents follow its checklist by the domain's name (``follows_domains``, ``--domain``). Frozen versions
-sit in ``graph/frozen/`` beside the manifest once a proposal has been applied; there is no repository-wide
+sit in ``graph/frozen/`` beside the manifest once a schema change has been merged; there is no repository-wide
 composition.
 
 The schema has **one version**, the manifest's ``version``, for the kernel and the domain together. The kernel
 and the domain files carry none; ``CORE.yaml`` and ``DOMAIN.yaml`` (``version``), ``scale-release.yaml``
 (``schema_version``) and the kernel-only example manifest state it, and ``check`` requires them to agree with the
-manifest (``scale proposal apply`` raises them all together).
+manifest (``scale schema bump`` raises them all together).
 
 ``check`` makes these declarations trustworthy: every declared path exists, the versions agree, the domain's
 manifest uses the core's kernel and lists only files inside ``domain/``, among them the one named after the
@@ -59,18 +59,18 @@ DOMAIN_KEYS: dict[str, tuple[bool | str, tuple]] = {
     "alternative_to": (False, (str, type(None))), "summary": (True, _STR), "scope": (True, _STR),
     "maintainers": (True, _DICT), "review_areas": (True, _LIST), "graph": (False, _DICT),
     "examples": (True, _LIST), "example_documents": (True, _DICT), "competency": (True, _STR), "tests": (True, _STR),
-    "proposals": (True, _STR), "docs": (False, _STR), "roadmap": (True, _STR),
+    "docs": (False, _STR), "roadmap": (True, _STR),
     "decision_record": ("stable", _STR), "deprecation": (False, _STR), "contributors": (True, _LIST),
 }
 CORE_KEYS: dict[str, tuple[bool | str, tuple]] = {
     "core": (True, _STR), "title": (True, _STR), "summary": (False, _STR), "version": (True, _STR),
     "kernel": (True, _STR), "scope": (True, _STR),
     "compatibility": (True, _STR), "maintainers": (True, _DICT), "review_areas": (True, _LIST), "examples": (True, _LIST),
-    "example_documents": (False, _DICT), "tests": (True, _STR), "proposals": (True, _STR), "docs": (False, _STR),
+    "example_documents": (False, _DICT), "tests": (True, _STR), "docs": (False, _STR),
     "contributors": (True, _LIST),
 }
 # directories the tools read by convention (layout): a DOMAIN.yaml naming another place would be ignored
-CONVENTIONS = {"competency": layout.DOMAIN_COMPETENCY, "proposals": layout.DOMAIN_PROPOSALS, "tests": "tests"}
+CONVENTIONS = {"competency": layout.DOMAIN_COMPETENCY, "tests": "tests"}
 
 
 class Problems:
@@ -137,7 +137,7 @@ def graph_files(repo: Path, name: str, m: dict) -> list[str]:
     A domain's manifest lists them under ``domains``; the keys of frozen forms (``modules``,
     ``extensions``, ``profiles``) are read too, so that ``check`` sees and refuses them."""
     import os
-    from .pgraph_proposal import PACKAGE_KEYS
+    from .schema_change import PACKAGE_KEYS
     base = Path(repo) / layout.DOMAIN
     rel = (m.get("graph") or {}).get("manifest")
     man = base / rel if isinstance(rel, str) and rel else None
@@ -321,9 +321,6 @@ def check(repo: Path, only: list[str] | None = None, examples: bool = True) -> d
     for rel in core.get("examples") or []:
         _inside(core_dir, rel, cw, "examples", pb, "dir")
     _check_dir_with(core_dir, core.get("tests"), "test_*.py", cw, "tests", pb)
-    if core.get("proposals") != layout.DOMAIN_PROPOSALS:
-        pb.error(cw, f"proposals must be {layout.DOMAIN_PROPOSALS!r} ({layout.CORE_PROPOSALS}, where the tools look)")
-    _inside(core_dir, str(core.get("proposals")), cw, "proposals", pb, "dir")
     if core.get("docs"):
         _inside(core_dir, core["docs"], cw, "docs", pb)
 
@@ -379,7 +376,7 @@ def check(repo: Path, only: list[str] | None = None, examples: bool = True) -> d
         pb.error(layout.RELEASE_MANIFEST, "graph: there is no repository-wide scale-graph composition; each domain "
                                           "declares its schema manifest in DOMAIN.yaml graph.manifest")
     # one version: the manifest's, stated alike by CORE.yaml, DOMAIN.yaml, scale-release.yaml and the kernel-only
-    # example manifest (`scale proposal apply` raises them together)
+    # example manifest (`scale schema bump` raises them together)
     sv = schema_version(repo)
     if sv is not None:
         stated = [(cw, "version", core.get("version")), (layout.RELEASE_MANIFEST, "schema_version", rel_manifest.get("schema_version"))]
@@ -392,7 +389,7 @@ def check(repo: Path, only: list[str] | None = None, examples: bool = True) -> d
                 pb.error(where, f"{key} is {v!r}; the schema has one version, the manifest's {sv} (kernel and domain "
                                 "together): state it here")
         # and one status: the kernel and the kernel-only manifest say what the head manifest says (`candidate`; a
-        # release records it as it is, and `scale proposal apply` installs the next head as `candidate`). A domain
+        # release records it as it is). A domain
         # whose manifest is still experimental (one made from the template) does not speak for the kernel.
         heads = layout.graph_manifests(repo)
         hst = (load_yaml(next(iter(heads.values()))) or {}).get("status") \
@@ -508,9 +505,8 @@ def _check_domain(repo, name, m, domains, core, kver, graph_names, core_digests,
     graph_docs = [p for rel in ex.get("graph") or [] for p in _inside(base, rel, where, "example_documents.graph", pb, "file")]
     questions = _check_dir_with(base, m.get("competency"), "*.yaml", where, "competency", pb)
     _check_dir_with(base, m.get("tests"), "test_*.py", where, "tests", pb)
-    for key in ("proposals", "docs"):
-        if m.get(key):
-            _inside(base, m[key], where, key, pb, "dir")
+    if m.get("docs"):
+        _inside(base, m["docs"], where, "docs", pb, "dir")
     if m.get("roadmap"):
         _inside(base, m["roadmap"], where, "roadmap", pb, "file")
     decision_ok = False
@@ -544,7 +540,7 @@ def _check_domain(repo, name, m, domains, core, kver, graph_names, core_digests,
     domain_spec = _check_manifest(repo, name, manifest, pb, where) if manifest else None
 
     # no copies of core files anywhere in the domain (its frozen versions included: the frozen kernels live
-    # in core/graph/frozen/), except the candidates of proposals, which mirror the files they change
+    # in core/graph/frozen/)
     for p in _files_below(repo, [base]):
         rel = p.relative_to(repo).as_posix()
         if p.suffix in (".yaml", ".yml") and re.search(r"^kernel:\s*['\"]?scale-graph-kernel", p.read_text(encoding="utf-8",
@@ -568,7 +564,7 @@ def _check_domain(repo, name, m, domains, core, kver, graph_names, core_digests,
         if not isinstance(a, str):
             pb.error(where, "review_areas must be words")
         elif policy_areas is not None and a not in policy_areas:
-            pb.warn(where, f"review area {a!r} is listed by nobody in {layout.REVIEW_POLICY}; its proposals have no area reviewer")
+            pb.warn(where, f"review area {a!r} is listed by nobody in {layout.REVIEW_POLICY}; its changes have no area reviewer")
 
     # example documents validate
     if examples:
@@ -604,13 +600,12 @@ def _check_domain(repo, name, m, domains, core, kver, graph_names, core_digests,
 
 
 def _files_below(repo: Path, roots: list[Path]) -> list[Path]:
-    """Files under the given paths, minus local material, caches and proposal candidates (G4)."""
+    """Files under the given paths, minus local material and caches (G4)."""
     out = []
     for r in roots:
         for p in ([r] if r.is_file() else sorted(r.rglob("*")) if r.is_dir() else []):
             parts = p.relative_to(repo).parts
-            cand = any(parts[i] == layout.DOMAIN_PROPOSALS and parts[i + 2:i + 3] == ("candidate",) for i in range(len(parts)))
-            if p.is_file() and not cand and not layout._is_local(parts) and "__pycache__" not in parts and p.name != ".DS_Store":
+            if p.is_file() and not layout._is_local(parts) and "__pycache__" not in parts and p.name != ".DS_Store":
                 out.append(p)
     return out
 

@@ -1,5 +1,4 @@
-"""``scale ci spec-changes | proposals | proposal-check``: what a pull request may change, who must review
-it, and the proposals it carries.
+"""``scale ci spec-changes``: what a pull request may change, what a schema change must carry, and who reviews it.
 
 CI runs this on every pull request (job ``specification-changes``). It compares the branch with the
 merge base of ``<ref>`` (what GitHub shows as the pull request's diff) and fails when the branch
@@ -10,9 +9,9 @@ merge base of ``<ref>`` (what GitHub shows as the pull request's diff) and fails
   releases and new frozen versions are additions and pass; README and CHANGELOG files directly under
   ``releases/`` may change;
 - changes the specification (``core/graph/``, or the catalysis domain's ``domain/graph/`` files, its schema
-  manifest ``graph/scale-graph.yaml`` included, unless the domain is experimental) without adding or
-  updating a proposal (``core/proposals/<NNNNNN>/``, ``domain/proposals/<NNNNNN>/``) or a decision record
-  (``docs/decisions/``).
+  manifest ``graph/scale-graph.yaml`` included, unless the domain is experimental) without what a schema change
+  must carry (:func:`scale.schema_change.check`: the version raised by the rule, the base frozen, the migration
+  step, tests, a CHANGELOG line).
 
 It also prints whose review the change needs according to ``.github/CODEOWNERS`` at the merge base
 (GitHub reads the base branch's file), and the maintainers of the catalysis domain to consult when ``core/``
@@ -28,16 +27,13 @@ from pathlib import Path
 import yaml
 
 from . import codeowners, layout
+from .schema_change import check as schema_check
 from .util import ScaleError, load_doc
 
 ALLOWED_RELEASE_NOTES = re.compile(r"^releases/(README|CHANGELOG)(\.md)?$")
 SPEC = [re.compile(r"^core/graph/")]
 # additions only; SHA256SUMS append-only
 FROZEN = re.compile(r"^(core/graph/frozen/|domain/graph/frozen/)")
-# a proposal folder is its six-digit number (global; layout.proposal_dirs refuses any other name)
-RECORDS = [re.compile(r"^core/proposals/\d{6}/"), re.compile(r"^domain/proposals/\d{6}/"),
-           re.compile(r"^docs/decisions/\d{4}-[^/]+\.md$")]
-PROPOSAL_PATH = re.compile(r"^(?:core|domain)/proposals/(\d{6})/")
 
 
 def load_yaml_text(text: str):
@@ -127,12 +123,11 @@ def spec_changes(repo: Path, base: str, head: str = "HEAD") -> dict:
             statuses[decl] = "experimental" if known == {"experimental"} else "stable"
         return statuses[decl] != "experimental"
 
-    spec = sorted(p for s, p in rows if spec_file(p))
-    records = sorted(p for s, p in rows if s != "D" and any(rx.match(p) for rx in RECORDS))
-    if spec and not records:
-        violations.append(f"the specification changes ({', '.join(spec[:5])}{' …' if len(spec) > 5 else ''}) without a "
-                          f"proposal ({layout.CORE_PROPOSALS}/ or {layout.DOMAIN}/{layout.DOMAIN_PROPOSALS}/) or a "
-                          f"decision record ({layout.DECISIONS}/)")
+    spec = sorted(p for s, p in rows if spec_file(p) and not FROZEN.match(p))
+    schema = None
+    if spec:
+        schema = schema_check(repo, base)
+        violations += [f"schema change: {x}" for x in schema["problems"]]
 
     text = _show(repo, mb, layout.CODEOWNERS)
     source = f"{layout.CODEOWNERS} at the merge base"
@@ -153,17 +148,17 @@ def spec_changes(repo: Path, base: str, head: str = "HEAD") -> dict:
                    "note": "core/ changed: the catalysis domain builds on the science kernel; say in the pull request how "
                            "the catalysis domain is affected (the reviewers review both)"}
     return {"base": base, "merge_base": mb, "head": head, "changed": [{"status": s, "path": p} for s, p in rows],
-            "specification_files": spec, "change_records": records, "violations": violations,
+            "specification_files": spec, "schema": schema, "violations": violations,
             "owners": owners, "core_consultation": consult, "ok": not violations}
 
 
 def spec_changes_text(res: dict) -> str:
     L = [f"{len(res['changed'])} changed files against {res['base']} (merge base {res['merge_base'][:12]})"]
-    if res["specification_files"]:
-        L.append(f"specification files changed: {len(res['specification_files'])}; proposals / decision records: "
-                 f"{len(res['change_records'])}")
-    L += [f"FAIL {v}" for v in res["violations"]] or ["ok: no release or frozen version is modified; specification changes carry their records"]
-    L.append("approval: one approving review from a reviewer other than the author (governance/review-policy.yaml)")
+    if res["schema"]:
+        sc = res["schema"]
+        L.append(f"schema change: {sc['kind'] or 'none'}, {sc['base_version']} -> {sc['head_version']} (needs {sc['needs_version']})")
+    L += [f"FAIL {v}" for v in res["violations"]] or ["ok: no release or frozen version is modified; a schema change carries what it must"]
+    L.append("approval: one approving review by a person, any listed reviewer (governance/review-policy.yaml)")
     o = res["owners"]
     if o.get("source"):
         L.append(f"review requested from (from {o['source']}; any one reviewer's approval is enough, a code owner's is not required):")
@@ -179,158 +174,3 @@ def spec_changes_text(res: dict) -> str:
         L.append(f"{c['note']}; teams to consult: {', '.join(c['domain_teams']) or 'none declared'}")
     return "\n".join(L)
 
-
-def changed_proposals(repo: Path, base: str, head: str = "HEAD", status: str | None = None) -> list[dict]:
-    """The proposals with a file changed between ``base`` and ``head`` (a direct diff: on main after a push,
-    the push's before and after commits), with their status at ``head`` (the working tree when ``head`` is
-    HEAD); with ``status``, only those. The apply-proposals workflow applies the ones still ``proposed``."""
-    if set(base) == {"0"}:
-        raise ScaleError(f"base {base} is no commit (a new branch); name the commit to compare with")
-    fields = _git(repo, "diff", "--name-status", "--no-renames", "-z", base, head).split("\0")
-    rows = [(fields[i][0], fields[i + 1]) for i in range(0, len(fields) - 1, 2)]
-    ids = sorted({m.group(1) for _, p in rows if (m := PROPOSAL_PATH.match(p))})
-    out = []
-    for pid in ids:
-        d = layout.proposal_dir(repo, pid)
-        if d is None or not (d / "proposal.yaml").is_file():
-            continue                                        # removed by the push
-        st = (load_yaml_text((d / "proposal.yaml").read_text()) or {}).get("status")
-        if status is None or st == status:
-            out.append({"proposal": pid, "path": d.relative_to(repo).as_posix(), "status": st})
-    return out
-
-
-def _stale(cs: Path, repo: Path, v: dict) -> str | None:
-    """Why a proposal's committed reports no longer describe it, from what needs no restricted data: the
-    proposal is built again (in a scratch copy, so the committed ``candidate/`` is left as it is) and its tier,
-    schema diff and candidate files must equal the committed ones; None when they do. A proposal.yaml that no
-    longer builds is an error (ScaleError)."""
-    import json
-    import shutil
-    import tempfile
-    from . import pgraph
-    from .pgraph_proposal import _resolved, build, candidate_differences, diff_specs, load_proposal, tier
-    with tempfile.TemporaryDirectory() as tmp:
-        t = Path(tmp) / cs.name
-        shutil.copytree(cs, t, ignore=shutil.ignore_patterns("candidate", "approvals"))
-        cand = build(t, repo)
-        _, man, *_ = _resolved(repo, load_proposal(t))
-        diff = json.loads(json.dumps(diff_specs(pgraph.load_spec(man), pgraph.load_spec(cand))))
-        if tier(diff) != v.get("tier") or diff != v.get("diff"):
-            return (f"its schema diff (tier {tier(diff)}) differs from the committed validation_report.json's "
-                    f"(tier {v.get('tier')})")
-        if not (cs / "candidate").is_dir() or candidate_differences(t / "candidate", cs / "candidate"):
-            return "the candidate it builds differs from the committed candidate/"
-    return None
-
-
-def _without_data(c: dict, cs: Path, repo: Path, absent: list[str]) -> dict:
-    """The row of a proposal some of whose declared inputs are not in the repository, while no restricted copy
-    is set either (CI). It is "needs restricted data" only when its committed
-    validation_report.json, written by a check with the data, records every one of them as a restricted input
-    and passed, and is current: the proposal still builds, to the committed candidate, tier and schema diff
-    (``_stale``). Otherwise it fails: a wrong path, reports never produced (or failing) with the data, or
-    reports older than the proposal."""
-    val = cs / "validation_report.json"
-    try:
-        v = load_doc(val) if val.is_file() else None
-    except (OSError, ValueError) as exc:
-        return {**c, "result": "failed", "why": f"{val.name} cannot be read: {exc}"}
-    named = ", ".join(absent)
-    if not isinstance(v, dict) or v.get("proposal") != c["proposal"]:
-        return {**c, "result": "failed", "why": f"not in the repository: {named}; and there is no committed "
-                f"validation_report.json for proposal {c['proposal']}: run `scale proposal check` with the restricted "
-                f"copy ({layout.RESTRICTED_ENV}) and commit its public reports, or correct the path"}
-    recorded = set(((v.get("restricted") or {}).get("inputs")) or [])
-    unknown = [a for a in absent if a not in recorded]
-    if unknown:
-        return {**c, "result": "failed", "why": f"not in the repository: {', '.join(unknown)}; and the committed "
-                "validation_report.json does not record it as restricted data: a wrong path?"}
-    if v.get("ok") is not True:
-        return {**c, "result": "failed", "committed": v, "why": f"{named} is restricted data and the committed "
-                "validation_report.json (from a check with it) did not pass"}
-    try:
-        stale = _stale(cs, repo, v)
-    except ScaleError as exc:
-        stale = f"it no longer builds ({exc})"
-    if stale:
-        return {**c, "result": "failed", "why": f"{named} is restricted data and the committed reports are "
-                f"out of date: {stale}; run `scale proposal check` with the data ({layout.RESTRICTED_ENV}) and "
-                "commit its public reports"}
-    return {**c, "result": "needs restricted data", "committed": v,
-            "why": f"{named} is restricted data, not here; its committed reports passed"}
-
-
-def proposal_checks(repo: Path, base: str, head: str = "HEAD") -> dict:
-    """Run ``scale proposal check`` on every proposal a pull request changes (against the merge base of
-    ``base``) whose status is draft or proposed; any error fails. A proposal whose inputs are restricted data
-    cannot be checked without them (CI has none): only when the data is not here, every input missing from
-    the repository is one its committed validation_report.json records as restricted, that report passed, and
-    the proposal still builds to the committed candidate, tier and diff, is it reported as "needs restricted data", with the summary the report gives, and does not fail. A
-    proposal that holds files in ``approvals/`` fails: approvals come only from GitHub reviews, recorded after
-    the merge."""
-    from .pgraph_proposal import check, declared_inputs, load_proposal
-    repo = Path(repo).resolve()
-    mb = _git(repo, "merge-base", base, head).strip()
-    data = layout.restricted_root(repo)
-    rows = []
-    for c in changed_proposals(repo, mb, head):
-        if c["status"] not in ("draft", "proposed"):
-            rows.append({**c, "result": "skipped", "why": f"status {c['status']}: history, not checked again"})
-            continue
-        cs = repo / c["path"]
-        held = sorted(p.name for p in (cs / "approvals").iterdir()) if (cs / "approvals").is_dir() else []
-        if held:
-            rows.append({**c, "result": "failed", "why": f"approvals/ holds {', '.join(held)}: approvals come only from "
-                         "this pull request's GitHub reviews, which the apply-proposals workflow records after the "
-                         "merge; remove these files"})
-            continue
-        try:
-            absent = [] if data is not None else [r for r in declared_inputs(load_proposal(cs)) if not (repo / r).exists()]
-            if absent:
-                rows.append(_without_data(c, cs, repo, absent))
-                continue
-            res = check(cs, repo)
-            rows.append({**c, "result": "ok" if res["ok"] else "failed", "check": res})
-        except ScaleError as exc:
-            rows.append({**c, "result": "failed", "why": str(exc)})
-    return {"repo": str(repo), "merge_base": mb, "proposals": rows, "ok": not any(r["result"] == "failed" for r in rows)}
-
-
-COMMENT_MARK = "<!-- scale-ci:proposal-check -->"
-
-
-def proposal_comment(res: dict) -> str:
-    """The one (sticky) pull-request comment with each proposal's check: tier, diff counts, fixtures, migration
-    effects and competency results, from the reports the check wrote."""
-    L = [COMMENT_MARK, "### Proposal check", ""]
-    if not res["proposals"]:
-        L.append("This pull request changes no proposal.")
-    for r in res["proposals"]:
-        L.append(f"**{r['proposal']}** (`{r['path']}`, status {r['status']}): **{r['result']}**")
-        chk = r.get("check")
-        if chk:
-            diff = ", ".join(f"{v} {k}" for k, v in chk["diff"].items() if v) or "no change"
-            L.append(f"- tier {chk['tier']}; schema diff: {diff}")
-            L.append(f"- fixtures {chk['fixtures']}/{chk['fixtures_total']} as expected")
-            mig = Path(res["repo"]) / r["path"] / "migration_assessment.json"
-            m = load_doc(mig) if mig.is_file() else {}
-            if m:
-                L.append(f"- migration: {m.get('summary')} ({len(m.get('documents') or [])} documents assessed); competency "
-                         f"questions changed: {sum(1 for q in m.get('competency') or [] if q.get('changed'))} of "
-                         f"{len(m.get('competency') or [])}")
-            L += [f"- problem: {x}" for x in chk["problems"]] + [f"- blocking: {x}" for x in chk["blocking"]]
-            L += [f"- warning: {x}" for x in chk.get("warnings") or []]
-        elif r["result"] == "needs restricted data":
-            v = r["committed"]
-            L.append(f"- not checked here: its inputs are restricted data (a restricted copy, {layout.RESTRICTED_ENV}). Its committed reports "
-                     f"(checked {v.get('checked_at')} with the data): tier {v.get('tier')}, ok {v.get('ok')}.")
-        elif r.get("why"):
-            L.append(f"- {r['why']}")
-        L.append("")
-    L.append("Approval: one approving review from a reviewer other than the author (governance/review-policy.yaml). "
-             "After the merge, a person starts the apply-proposals workflow for each proposal, with this pull request's "
-             "number (it needs the repository secret APPLY_TOKEN); a proposal in the owner's own pull request, merged "
-             "before another reviewer joins, the owner applies in a pull request under the bootstrap rule (`scale proposal decide --bootstrap-bypass`, then "
-             "`scale proposal apply --confirm`). Applying a proposal raises the schema version.")
-    return "\n".join(L) + "\n"

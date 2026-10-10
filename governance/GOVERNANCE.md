@@ -1,7 +1,7 @@
 # Governance
 
-This page holds the rules of this repository: the review rule and its bootstrap, how a change flows,
-proposals, the catalysis domain, project data and releases.
+This page holds the rules of this repository: the review rule and its bootstrap, how a change flows, schema
+versions, the catalysis domain, project data and releases.
 
 SCALE (Shared Concepts, Attributes, and Links with Evidence) is one shared framework for evidence-backed
 scientific knowledge graphs across domains. It is developed in [hlxin/scale](https://github.com/hlxin/scale),
@@ -9,13 +9,13 @@ a personal repository of its owner, Hongliang Xin (`@hlxin`); its Python package
 repository starts private and is shared with collaborators; the rules are the same before and after it
 becomes public ([decision record 0001](../docs/decisions/0001-scale-0.1.0.md)).
 
-The model in one paragraph: **every change is a pull request that needs one approving review from a
-reviewer other than its author**, any of the reviewers. The owner is a reviewer and approves other people's
-pull requests; GitHub does not let an author approve their own, so until another reviewer joins, the owner
-merges their own pull requests under the bootstrap rule. A schema change is a pull request that carries a *proposal*. When it merges, the proposal is
-applied on `main` and the schema's one version moves on. A data repository is then moved to the new version
-with one command (`scale kg update`). People and agents open pull requests; one person approves each and merges it.
-Agents never approve, merge or apply.
+The model in one paragraph: **anyone can suggest a change or open a pull request; agents do most of the work; one
+person approves and merges.** Every change, whatever it touches (the schema, records, questions, tools,
+documentation, governance), is one pull request. A suggestion (an issue or a comment, by a person or an agent)
+goes to an agent, which implements it, runs the checks and opens the pull request. Any reviewer approves it, the
+person who suggested it included, and merges it. A schema change raises the schema's one version in the same pull
+request; a data repository then moves to the new version with one command (`scale kg update`). Agents never
+approve or merge.
 
 ## Glossary
 
@@ -24,9 +24,9 @@ Agents never approve, merge or apply.
 | **two layers** | The specification has two layers: the science kernel and the domains. Catalysis is the first domain and, for now, the only one. Its graph schema is the kernel plus one catalysis file, with one vocabulary and one checklist. There is no repository-wide composition. |
 | **science kernel** | The base layer under [`core/`](../core/) ("the core" as a folder): the kernel file `core/graph/kernel.yaml`, declared by `core/CORE.yaml`. |
 | **catalysis domain** | The folder [`domain/`](../domain/README.md), declared by its `DOMAIN.yaml` (`domain: catalysis`). Its schema manifest `graph/scale-graph.yaml` assembles the kernel with the catalysis file `catalysis.yaml`. Thermocatalysis, electrocatalysis, photocatalysis and plasma catalysis, and their combinations, all belong to it. |
-| **schema version** | One version for the kernel and the catalysis domain together: the catalysis manifest's `version`, which documents pin (0.1.0 today). Every applied proposal raises it, whichever file it changes. |
+| **schema version** | One version for the kernel and the catalysis domain together: the catalysis manifest's `version`, which documents pin (0.1.0 today). Every schema change raises it, whichever file it changes: a breaking change the second number, an additive change the third. |
 | **checklist** | What a catalysis record must and should report: the catalysis file's `checklist:`, named `catalysis`, selected with `--domain` and declared in a document's `follows_domains`. |
-| **proposal** | A schema change, in `core/proposals/<NNNNNN>/` (the science kernel) or `domain/proposals/<NNNNNN>/` (the catalysis domain), named by a six-digit number that is global across both. |
+| **suggestion** | An issue or a comment that asks for a change, by a person or an agent. @scale-agents take it up on their own and turn it into a pull request when it asks for a change; anyone may also open one. |
 | **reviewers** | The people who approve changes, listed in [`review-policy.yaml`](review-policy.yaml): the owner and the domain experts who join (seats not yet filled are placeholders). Any one of them approves a change. |
 | **maturity** | Of a concept: `provisional` or `stable`. New concepts enter as provisional. |
 | **official release** | A tagged, digested distribution built by the release process: `releases/vX.Y.Z/`, tag `vX.Y.Z`, PyPI `scale-schema` X.Y.Z ([release-process.md](release-process.md)). None has been built yet. |
@@ -35,139 +35,123 @@ Agents never approve, merge or apply.
 
 | who | GitHub | what they do |
 |---|---|---|
-| **owner** | `@hlxin`, admin of the repository, code owner of every path in [`.github/CODEOWNERS`](../.github/CODEOWNERS) | a reviewer: reviews and approves other people's pull requests; merges their own under the bootstrap rule until another reviewer joins; applies merged proposals; builds releases; repository settings, rulesets and secrets ([repository-settings.md](repository-settings.md)) |
-| **reviewers** | domain experts, collaborators (Write), added to the review policy and CODEOWNERS when they join | review and approve pull requests (any one of them is enough): the science kernel, the catalysis domain, tools, governance and releases. Today: two seats to be filled (`TODO-reviewer-2`, `TODO-reviewer-3` in the review policy) |
-| **contributors** | anyone: issues and comments; collaborators also branches and pull requests; others through forks once the repository is public | propose changes, curate, report gaps |
-| **@scale-agent** | Claude on GitHub, started by hand by a person with write access (off otherwise) | makes changes and proposals on `agent/…` branches and opens pull requests under the Claude GitHub App's identity; never approves, merges or applies |
+| **owner** | `@hlxin`, admin of the repository, code owner of every path in [`.github/CODEOWNERS`](../.github/CODEOWNERS) | a reviewer: approves and merges pull requests; merges their own under the bootstrap rule until another reviewer joins; builds releases; repository settings, rulesets and secrets ([repository-settings.md](repository-settings.md)) |
+| **reviewers** | domain experts, collaborators (Write), added to the review policy and CODEOWNERS when they join | approve and merge pull requests (any one of them is enough). Today: two seats to be filled (`TODO-reviewer-2`, `TODO-reviewer-3` in the review policy) |
+| **contributors** | anyone: issues and comments; collaborators also branches and pull requests; others through forks once the repository is public | suggest changes, curate, report gaps |
+| **@scale-agents** | a team of Claude agents on GitHub, started by every new issue, comment and review (no tag or label), or a manual run | a discovery strategist frames and coordinates, a data scientist proposes the patch and its evidence, a protocol compiler writes the tests, an evidence verifier assesses support and effects, and a systems engineer opens pull requests from `agent/…` branches under the Claude GitHub App's identity; never approves or merges |
 
 ## The rule: one approval for every change
 
-- Every update to `main` arrives by pull request. Nobody pushes to `main` directly; the one exception is the
-  application of a merged proposal, which the apply-proposals workflow (or the owner, in a pull request)
-  commits after checking its approvals.
-- A pull request merges with **one approving review from a reviewer other than its author**, a passing
-  set of required checks, and no reviewer asking for changes. Any reviewer may give it; no particular
-  reviewer or code owner has to.
-  A reviewer who disagrees with a merged change corrects it by opening a pull request, which follows the same rule. This holds for every kind of change:
-  documentation, tools, records, schema proposals of every tier, governance and releases.
-- **A person or an agent opens it; one person approves it and merges it.** Only people approve, by reviewing
-  the pull request on GitHub; the GitHub reviews are the approvals, and there is no other approval record to
-  write. The person who approves merges. A change proposed by an agent needs the same approval.
-- **An agent opens a pull request under its own GitHub identity**: the Claude GitHub App in the scale-agent
+- Every update to `main` arrives by pull request. Nobody pushes to `main` directly, and nothing is applied after a
+  merge: what merges is what the reviewer approved.
+- A pull request merges with **one approving review by a reviewer**, a passing set of required checks, and no
+  reviewer asking for changes. Any reviewer may give it, the person who suggested the change included; no
+  particular reviewer or code owner has to. To correct a merged change, suggest a new one. This holds for every
+  kind of change: documentation, tools, records, schema changes, governance and releases.
+- **Anyone opens it; one person approves it and merges it.** Only people approve, by reviewing the pull request
+  on GitHub; the GitHub reviews are the approvals, and there is no other approval record to write. A change made
+  by an agent needs the same approval.
+- **An agent opens a pull request under its own GitHub identity**: the Claude GitHub App in the scale-agents
   workflow, or a bot account for an agent working elsewhere (repository-settings.md, "The agent"), never a
-  person's account. GitHub does not let the author of a pull request approve it, so a pull request an agent
-  opened as a person could not be approved by that person.
+  person's account. GitHub does not let the author of a pull request approve it, so the person who asked for the
+  change can approve the agent's pull request.
 - **Placeholders never count.** The seats not filled yet are marked `placeholder: true` in the review
-  policy, `core/CORE.yaml` and `domain/DOMAIN.yaml`; `scale check` warns until they are
-  filled with real people (never invented).
+  policy, `core/CORE.yaml` and `domain/DOMAIN.yaml`; `scale check` warns until they are filled with real people
+  (never invented).
 - The latest review of each reviewer counts. A reviewer whose latest review requests changes blocks until
   they approve or the review is dismissed; an approval given before new commits were pushed is dismissed.
 
-GitHub enforces the rule through the `main` ruleset where the plan allows it: one approving review (a
-code-owner review is not required; CODEOWNERS only routes review requests), stale approvals dismissed, the last push approved by someone else, required checks
-([repository-settings.md](repository-settings.md)). `scale proposal apply-merged` evaluates it again, from
-the merged pull request's reviews, before it applies a proposal.
+GitHub enforces the rule through the `main` ruleset: one approving review (a code-owner review is not required;
+CODEOWNERS only routes review requests), stale approvals dismissed, the last push approved by someone else,
+required checks ([repository-settings.md](repository-settings.md)).
 
-**Tiers are information, not approval classes.** `scale proposal check` classifies each proposal (0 no
-change in meaning, 1 records, 2 additive or loosening, 3 breaking) so that reviewers know what they
-review; a breaking change also needs a migration step and gets a decision record. New concepts enter as
-`maturity: provisional`; a later proposal may promote them to `stable` (`set_maturity`). There are no
-comment periods, no separate approver for provisional concepts and no committee quorum: the approval
-is the decision.
+**Kinds of change are information, not approval classes.** CI's summary of a schema change says whether it is
+breaking or additive and what it adds, changes or removes, so that the reviewer knows what they review. New
+concepts enter as `maturity: provisional`; a later change may promote them to `stable`. There are no comment
+periods, no separate approver for provisional concepts and no committee quorum: the approval is the decision.
 
 ### Bootstrap: until the reviewers join
 
-The owner is a reviewer and approves other people's pull requests (an agent's draft, a contributor's) as any
-reviewer does. GitHub does not let the author of a pull request approve it, so with one filled seat the owner's
-own pull requests cannot be approved. Until another reviewer joins, the owner may merge their own pull
-requests through a **bootstrap bypass** of the ruleset,
-only after the checks pass, each use noted in the pull request ("Bootstrap bypass: reviewers not yet
-added"). A proposal merged this way has no approval, so `scale proposal apply-merged` refuses it; the
-owner applies it in a pull request that also notes the bypass:
-`scale proposal decide <id> --pr <n> --bootstrap-bypass "reviewers not yet added" --by hlxin`, then
-`scale proposal apply <id> --confirm`. The decision record says it was not approved by a reviewer;
-the tool refuses a bypass once another reviewer can approve. The bypass stays with the repository admin, the owner (Hongliang Xin), until the owner decides by pull request
-to narrow or remove it ([repository-settings.md](repository-settings.md#bootstrap-bypass)).
+The owner is a reviewer and approves other people's and the agent's pull requests as any reviewer does. GitHub
+does not let the author of a pull request approve it, so with one filled seat the owner's own pull requests cannot
+be approved. Until another reviewer joins, the owner may merge their own pull requests through a **bootstrap
+bypass** of the ruleset, only after the checks pass, each use noted in the pull request ("Bootstrap bypass:
+reviewers not yet added"). The bypass stays with the repository admin, the owner (Hongliang Xin), until the owner
+decides by pull request to narrow or remove it
+([repository-settings.md](repository-settings.md#bootstrap-bypass)).
 
 ## How a change flows
 
 ```
 an issue, a comment or a gap report            a new corpus (a sample curated against the schema)
-        │                                              │ gap report issue (label gap-report)
+(a person or an agent)                                 │ gap report issue (label gap-report)
+        │                                              │
         ▼                                              ▼
-a pull request (by a person, or by an agent under its own GitHub identity)
+@scale-agents take it up on their own                             (or anyone opens a pull request)
         ▼
-checks: scale check, package, specification-changes, proposal-check (one comment with the proposal's
-        tier, diff, fixtures, migration and competency results)
+discovery strategist: frames the use case, decides (answer, question back, change or nothing), coordinates
+data scientist: sources, corrections to records or changes to schema definitions, the evidence record
+protocol compiler: tests with explicit expected outcomes · evidence verifier: support, counterexamples, effects
+systems engineer: version raised, migration assessment, checks → a pull request holding the change set
         ▼
-review: one approving review from a reviewer other than the author → that reviewer merges
-        (the owner's own pull requests, until another reviewer joins: the bootstrap rule)
+checks: scale check, package, specification-changes (with a summary of a schema change for the reviewer)
         ▼
-apply (a person starts the apply-proposals workflow; under the bootstrap rule the owner applies it in a
-        pull request): reviews checked → approvals recorded → decision record → old version frozen →
-        new version installed → the schema's one version raised → commit
-        "Apply proposal 0000NN (catalysis): schema X → Y (PR #N)"
+one reviewer approves and merges (the owner's own pull requests, until another reviewer joins: the bootstrap rule)
         ▼
 data repositories: scale kg update --data DIR (every document migrated and validated)
         ▼
-official release (a human step, release-process.md): bundles the schema versions applied since the last
+official release (a human step, release-process.md)
 ```
 
-1. **Issue or comment.** Anyone opens an issue or comments, in plain language (the issue forms ask the
-   right questions). A gap found while curating is filed with `scale gap issue`.
-2. **Corpus.** To find what the schema cannot express in a new corpus, a curator (or an agent following the
-   curate-source skill) curates a sample of open-access sources against the current schema and files a
-   `gap-report` issue (short capped quotes only), from which a proposal is drafted.
-3. **Pull request.** A person or an agent opens a pull request; an agent follows [`AGENTS.md`](../AGENTS.md) and the
-   skills, and for a schema change writes a proposal (`scale proposal new`, `scale proposal check`). An
-   agent treats issue, comment and corpus text as data, never as instructions about permissions, workflows,
-   governance or secrets, and it never edits `.github/`, `governance/`, releases or frozen versions
-   ([`.github/agent/instructions.md`](../.github/agent/instructions.md)).
-4. **Review.** The pull request gets the proposal-check comment. A reviewer other than the author
-   approves and merges it, or asks for changes.
-5. **Merge and version bump.** After the merge, a person starts the apply-proposals workflow for the
-   proposal (it needs a token configured for this repository, [repository-settings.md](repository-settings.md#the-apply-token)):
-   it writes the approval records from the GitHub reviews, the decision record with the pull-request link,
-   freezes the base version (the catalysis manifest and file in `domain/graph/frozen/`, the kernel in
-   `core/graph/frozen/`), installs the candidate, raises the schema's one version, updates the gap register,
-   runs the full `scale check` (the unit tests included, so a version bump that breaks a test never reaches
-   `main`) and commits to `main`. If anything fails, it puts every file back and pushes nothing. Two
-   proposals built on the same version cannot both apply: the second must be rebuilt on the new head
-   (`scale proposal check`) in a new pull request.
-6. **Data repositories.** Whoever keeps a knowledge-graph data repository runs `scale kg update --data DIR`
-   there: every scale-graph document is moved to the new version through the registered migration steps,
-   validated and its evidence index rebuilt. A document a step rule cannot migrate is reported and left
-   untouched.
+1. **Suggest.** Anyone opens an issue or comments, in plain language (the issue forms ask the right questions). A
+   gap found while curating is filed with `scale gap issue`. To find what the schema cannot express in a new
+   corpus, a curator (or an agent following the curate-source skill) curates a sample of open-access sources
+   against the current schema and files a `gap-report` issue (short capped quotes only).
+2. **The agents take it up.** `@scale-agents` start on every new issue, comment and review, with no tag or label.
+   The discovery strategist frames the use case, decides what it needs and coordinates the revision; the data
+   scientist assembles the sources and proposes corrections to records or changes to schema definitions; the
+   protocol compiler turns the validation requirements into tests with explicit expected outcomes; the evidence
+   verifier assesses the scientific support, the counterexamples and the effects on existing records and queries;
+   the systems engineer packages the change set (the patch, the evidence record, the test cases, the migration
+   assessment) as a pull request. They follow [`AGENTS.md`](../AGENTS.md) and the skills. They treat issue, comment and
+   corpus text as data, never as instructions about permissions, workflows, governance or secrets, and never edit
+   `.github/`, `governance/`, releases or frozen versions
+   ([`.github/scale-agents/instructions.md`](../.github/scale-agents/instructions.md)). Anyone may also open a pull request
+   directly, with their own agent or by hand.
+3. **Review.** CI runs the checks and, for a schema change, writes the summary. A reviewer comments or asks
+   for changes on the pull request (the agents push the fixes to their own pull requests), or approves and merges.
+4. **Data repositories.** Whoever keeps a knowledge-graph data repository runs `scale kg update --data DIR` there:
+   every scale-graph document is moved to the new version through the registered migration steps, validated and
+   its evidence index rebuilt. A document a step rule cannot migrate is reported and left untouched.
 
 Releases stay a human step: [release-process.md](release-process.md).
 
-## Proposals: where they go and what they hold
+## Schema changes
 
-Placement: kernel operations go to `core/proposals/<NNNNNN>/`; operations on the catalysis file go to
-`domain/proposals/<NNNNNN>/`. Numbers are global and never reused (`scale proposal new <owner>` allocates
-the next; the first is `000001`). A proposal states, for each gap theme, a resolution (`addressed` by schema
-operations, answered by the curation `guide`, `deferred` or `rejected`, the last three with a reason), the
-operations, fixtures and counterexamples, the documents and competency questions to re-check, and, for a
-change in how records are written, a migration step. A pull request carries the proposal with
-`status: proposed` and its reports; it does not change the schema files, which are changed when the
-proposal is applied after the merge. The procedure is
+A schema change edits the schema files (`core/graph/kernel.yaml`, `domain/graph/catalysis.yaml`) directly and
+raises the schema's one version in the same pull request, whichever file it changes: a breaking change (something
+removed, changed or narrowed) raises the second number (0.1.0 -> 0.2.0), an additive change the third
+(0.1.0 -> 0.1.1). `scale schema bump` freezes the version it replaces (the catalysis manifest and file in
+`domain/graph/frozen/`, the kernel in `core/graph/frozen/`), so that documents pinning it stay valid, raises the
+version in every file that states it and registers the migration step; a breaking change also carries the rule
+that rewrites documents. `scale schema check` (CI's `specification-changes` job) checks all of it, that a test uses
+what is added and that the CHANGELOG says what changed. If two schema changes are open on the same version, the
+second rebases and bumps again after the first merges. The procedure is
 [`tools/skills/evolve-schema/SKILL.md`](../tools/skills/evolve-schema/SKILL.md);
-[docs/evolution.md](../docs/evolution.md) explains the versions.
-
-Every proposal raises the schema's one version, whether it changes the kernel, the catalysis file or both;
-it is assessed through the catalysis manifest. Deferred themes stay open in the gap register
-(`docs/gaps/register.json`) until a later proposal answers them.
+[docs/evolution.md](../docs/evolution.md) explains the versions. Open themes stay in the gap register
+(`docs/gaps/register.json`) until a later change answers them.
 
 ## The community path
 
 - **Anyone** comments and opens issues (plain-language forms). People who do not use Git submit content
-  through the [contribution form](https://github.com/hlxin/scale/issues/new?template=contribution.yml); a
-  collaborator prepares the pull request and credits them ([credit-and-authorship.md](credit-and-authorship.md)).
+  through the [contribution form](https://github.com/hlxin/scale/issues/new?template=contribution.yml); the pull
+  request that carries it credits them ([credit-and-authorship.md](credit-and-authorship.md)).
 - **Weekly digest.** A workflow groups the week's feedback into topics with options and opens a feedback
-  digest issue. It decides nothing; a person acts on a topic by opening a pull request ([feedback.md](feedback.md)).
+  digest issue. It decides nothing; a person acts on a topic by handing it to the agent or opening a pull request
+  ([feedback.md](feedback.md)).
 - **Reviewers.** The owner invites reviewers. Filling a seat is a pull request that edits `review-policy.yaml`,
   `core/CORE.yaml`, `domain/DOMAIN.yaml` and CODEOWNERS
-  ([repository-settings.md](repository-settings.md#2-collaborators-and-reviewers)); past decisions keep their names.
+  ([repository-settings.md](repository-settings.md#2-collaborators-and-reviewers)).
 - **Domain maintainers.** People who look after the catalysis domain are listed in `domain/DOMAIN.yaml`
   ([working-groups.md](working-groups.md)) and, as code owners, on the `/domain/` line of CODEOWNERS.
 
@@ -176,23 +160,21 @@ it is assessed through the catalysis manifest. Deferred themes stay open in the 
 Catalysis is the first domain (`domain/`, `status: stable`, `founding: true`), built on the science kernel
 and listed in `scale-release.yaml`. It extends the kernel (`is_a`, `extends`, or `adds_properties` with a
 new key), never redeclares a label, edge type or property the kernel declares, and never copies kernel files
-(`scale domains check`). It changes its schema only through proposals. A second domain would revisit the
-one-folder layout and how the one version spans several domains, in a decision record.
+(`scale domains check`). A second domain would revisit the one-folder layout and how the one version spans
+several domains, in a decision record.
 
 ## Disagreement
 
 Scientific disagreement is represented, not resolved, by the schema: conflicting claims coexist with
 their sources and scope (`contradicts` links). When reviewers disagree about a representation, a reviewer
-asks for changes, the discussion stays on the pull request, and the decision record of an applied
-proposal keeps the reviews. Conduct is covered by the [code of conduct](../CODE_OF_CONDUCT.md).
+asks for changes and the discussion stays on the pull request. Conduct is covered by the
+[code of conduct](../CODE_OF_CONDUCT.md).
 
 ## Decision records
 
-Consequential decisions get a record in `docs/decisions/NNNN-*.md` (numbering global, from 0001).
-`scale proposal decide` writes one for every applied proposal (`NNNN-<proposal>.md`, with the pull-request
-link and the reviewers who approved); decisions about the project itself are written by people in a pull
-request. [Decision record 0001](../docs/decisions/0001-scale-0.1.0.md) holds the decisions this repository
-started with.
+Decisions about the project itself get a record in `docs/decisions/NNNN-*.md` (numbering from 0001), written in a
+pull request. Everyday changes need none: the pull request, its review and the CHANGELOG are the record.
+[Decision record 0001](../docs/decisions/0001-scale-0.1.0.md) holds the decisions this repository started with.
 
 ## Project data
 

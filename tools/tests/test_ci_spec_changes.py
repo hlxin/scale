@@ -1,6 +1,6 @@
-"""`scale ci spec-changes --base <ref>`: releases and frozen versions are immutable, specification changes carry a
-proposal or decision record, and the summary says whose review a pull request needs. Each test
-commits a change to a small git repository and compares it with the tagged base."""
+"""`scale ci spec-changes --base <ref>`: releases and frozen versions are immutable, a specification change carries
+what `scale schema check` asks (tested in test_schema_change; stubbed here), and the summary says whose review a pull
+request needs. Each test commits a change to a small git repository and compares it with the tagged base."""
 
 import os
 import shutil
@@ -57,7 +57,14 @@ def _init(r: Path, files: dict[str, str]) -> Path:
 
 
 @pytest.fixture()
-def repo(tmp_path):
+def repo(tmp_path, monkeypatch):
+    """The repository; the schema check is stubbed: it fails while the manifest is unchanged (version 0.2.0)."""
+    def stub(r, base):
+        v = (Path(r) / "domain/graph/scale-graph.yaml").read_text().strip().split()[-1]
+        probs = [] if v != "0.2.0" else ["a change raises 0.2.0 to 0.2.1; the schema is at 0.2.0 (run `scale schema bump`)"]
+        return {"kind": "additive", "base_version": "0.2.0", "head_version": v, "needs_version": "0.2.1",
+                "problems": probs, "ok": not probs}
+    monkeypatch.setattr("scale.ci.schema_check", stub)
     return _init(tmp_path / "repo", BASE)
 
 
@@ -106,31 +113,19 @@ def test_frozen_versions_may_be_added_and_sums_appended(repo):
                         "domain/graph/frozen/v0.2.0/catalysis.yaml": "domain: catalysis\n",
                         "core/graph/frozen/kernel-0.2.0.yaml": "kernel: scale-graph-kernel\n",
                         "core/graph/kernel.yaml": "kernel: scale-graph-kernel\nnodes: {}\n",
-                        "domain/graph/scale-graph.yaml": "version: 0.3.0\n",
-                        "core/proposals/000099/proposal.yaml": "id: '000099'\n"},
+                        "domain/graph/scale-graph.yaml": "version: 0.3.0\n"},
                  append={"domain/graph/frozen/SHA256SUMS": "ccc  scale-graph-0.2.0.yaml\n",
                          "core/graph/frozen/SHA256SUMS": "ddd  kernel-0.2.0.yaml\n"})
     assert res["ok"], res["violations"]
 
 
-@pytest.mark.parametrize("path", ["core/graph/kernel.yaml", "domain/graph/scale-graph.yaml",
-                                  "domain/graph/catalysis.yaml"])
-def test_a_specification_change_needs_a_proposal_or_decision_record(repo, path):
+@pytest.mark.parametrize("path", ["core/graph/kernel.yaml", "domain/graph/catalysis.yaml"])
+def test_a_specification_change_needs_the_schema_check(repo, path):
     res = change(repo, {path: "changed: true\n"})
-    assert not res["ok"] and "without a proposal" in res["violations"][-1] and res["specification_files"] == [path]
+    assert not res["ok"] and "scale schema bump" in res["violations"][-1] and res["specification_files"] == [path]
+    assert res["violations"][-1].startswith("schema change: ")
     git(repo, "reset", "-q", "--hard", "base")
-    assert change(repo, {path: "changed: true\n", "domain/proposals/000099/proposal.yaml": "id: '000099'\n"})["ok"]
-    git(repo, "reset", "-q", "--hard", "base")
-    assert change(repo, {path: "changed: true\n", "docs/decisions/0042-something.md": "# 0042\n"})["ok"]
-    git(repo, "reset", "-q", "--hard", "base")
-    assert not change(repo, {path: "changed: true\n", "docs/decisions/log.json": "[1]\n"})["ok"]   # the log alone is no record
-    for misplaced in ("domain/drafts/000099/proposal.yaml",                # not in proposals/
-                      "domain/proposals/some-change-0099/proposal.yaml",     # named by words
-                      "core/proposals/new-kernel/proposal.yaml",
-                      "domain/proposals/00099/proposal.yaml",                 # not six digits
-                      "core/proposals/0000099/proposal.yaml"):
-        git(repo, "reset", "-q", "--hard", "base")
-        assert not change(repo, {path: "changed: true\n", misplaced: "id: x\n"})["ok"], misplaced
+    assert change(repo, {path: "changed: true\n", "domain/graph/scale-graph.yaml": "version: 0.2.1\n"})["ok"]
 
 
 def test_path_rules_are_anchored(repo):
@@ -159,7 +154,7 @@ def test_demoting_a_domain_does_not_exempt_its_graph_changes(repo):
                                                          "  team: '@example-org/catalysis-maintainers'\n",
                         "domain/graph/catalysis.yaml": "domain: catalysis\nversion: 0.1.1\n"})
     assert not res["ok"] and res["specification_files"] == ["domain/graph/catalysis.yaml"], res
-    assert "without a proposal" in res["violations"][-1]
+    assert "scale schema bump" in res["violations"][-1]
 
 
 def test_promoting_a_domain_counts_its_graph_changes(repo):
@@ -171,17 +166,15 @@ def test_promoting_a_domain_counts_its_graph_changes(repo):
 
 def test_the_summary_names_the_reviewers(repo, capsys):
     res = change(repo, {"domain/graph/catalysis.yaml": "domain: catalysis\nversion: 0.1.1\n",
-                        "domain/proposals/000099/proposal.yaml": "id: '000099'\n",
                         "domain/graph/scale-graph.yaml": "version: 0.3.0\n",
                         "domain/graph/frozen/scale-graph-0.2.0.yaml": "version: 0.2.0\n"},
                  append={"domain/graph/frozen/SHA256SUMS": "ccc  scale-graph-0.2.0.yaml\n"})
     assert res["ok"] and res["owners"]["minimal_reviewers"] == [REVIEWERS] and res["core_consultation"] is None
     assert f"fewest reviewers who own every changed path: {REVIEWERS}" in spec_changes_text(res)
-    res = change(repo, {"core/graph/kernel.yaml": "kernel: scale-graph-kernel\nnodes: {}\n",
-                        "core/proposals/000100/proposal.yaml": "id: '000100'\n"})
+    res = change(repo, {"core/graph/kernel.yaml": "kernel: scale-graph-kernel\nnodes: {}\n"})
     assert res["core_consultation"]["domain_teams"] == [CAT]
     assert main(["--repo", str(repo), "ci", "spec-changes", "--base", "base"]) == 0
     out = capsys.readouterr().out
-    assert "how the catalysis domain is affected" in out and "one approving review from a reviewer other than the author" in out
+    assert "how the catalysis domain is affected" in out and "one approving review by a person" in out
     change(repo, {"releases/v0.1.0/RELEASE.yaml": "release: v0.1.1\n"})
     assert main(["--repo", str(repo), "ci", "spec-changes", "--base", "base", "--json"]) == 1

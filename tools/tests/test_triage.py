@@ -51,7 +51,7 @@ def test_rule_proposals_never_recommend_or_decide(queue):
     assert not rejected and len(props) == len(queue["clusters"])
     assert all(p["recommended_option"] is None and "decision" not in p for p in props)
     mc = next(p for p in props if p["cluster_id"] == "T12")
-    assert mc["reviewers_required"] == ["domain"] and [o["action"] for o in mc["options"]][0] == "open_proposal"
+    assert mc["reviewers_required"] == ["domain"] and [o["action"] for o in mc["options"]][0] == "change_schema"
 
 
 def test_external_proposals_are_validated(queue):
@@ -70,13 +70,13 @@ def test_external_proposals_are_validated(queue):
 
 def test_the_digest_decides_nothing_and_points_to_pull_requests(queue):
     """Decisions are pull-request reviews: the digest lists topics and options and says how to act on one (a pull
-    request, or the scale-agent workflow started by hand); there is no /decide command and nothing is written to the
+    request, or a comment that @scale-agents take up); there is no /decide command and nothing is written to the
     decision log."""
     props, _ = intake.merge_proposals(queue, None)
     body = intake.render_digest(queue, props, "hlxin/scale", None, [])
     assert body.startswith("# SCALE feedback digest") and "## T12" in body and "scale-triage-state" in body
     assert "/decide" not in body and "/defer" not in body and "an approving review" in body
-    assert "open a pull request" in body and "scale-agent workflow by hand" in body and "@scale-agent" not in body
+    assert "open a pull request" in body and "@scale-agents open a pull request" in body
     assert not hasattr(intake, "parse_decisions") and not hasattr(intake, "append_decisions")
     assert intake.DIGEST_LABEL == "feedback-digest"
 
