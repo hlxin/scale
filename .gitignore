@@ -14,7 +14,10 @@ demo-output/
 # local material of an example or corpus (source texts, OCR, scratch): never committed (layout.LOCAL_DIRS)
 /domain/examples/**/work/
 /domain/examples/**/scratchpad/
-/domain/examples/*/curation/ocr/
+/examples/**/work/
+/examples/**/scratchpad/
 
 # example corpora: source PDFs stay local (size, copyright); each example lists them with their sha256
-examples/*/corpus/pdfs/
+/examples/*/pdfs/
+# an example's evidence index is rebuilt from its graph (scale graph index)
+/examples/**/*.evidence.*

@@ -4,7 +4,7 @@ How this repository works: who approves, how a change flows from an issue or a c
 version and updated data repositories, how the catalysis domain's maintainers are recorded, how official
 releases are made and how people are credited. The model: every change is a pull request with one
 approving review from any reviewer other than its author, the owner being a reviewer, with a bootstrap rule for the
-owner's own pull requests until a second reviewer joins ([decision record 0001](../docs/decisions/0001-scale-0.1.0.md)). Everything in this directory, like
+owner's own pull requests until another reviewer joins ([decision record 0001](../docs/decisions/0001-scale-0.1.0.md)). Everything in this directory, like
 every path, is owned by the owner, `@hlxin`.
 
 | file | what it covers |
@@ -29,7 +29,7 @@ Related: [CONTRIBUTING.md](../CONTRIBUTING.md), [the catalysis domain](../domain
 People and agents open pull requests; people decide. These steps are always done by a person:
 
 - approving and merging a pull request (one reviewer other than its author, the owner included; the owner's
-  own pull requests under the bootstrap rule until a second reviewer joins);
+  own pull requests under the bootstrap rule until another reviewer joins);
 - filling a reviewer seat (a pull request that replaces a placeholder with a real person who agreed);
 - starting the apply-proposals workflow for a merged proposal, or, under the bootstrap rule, applying it
   (`scale proposal decide --bootstrap-bypass`, then `scale proposal apply --confirm`, in a pull request);

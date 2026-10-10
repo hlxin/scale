@@ -16,7 +16,7 @@ stewards are named in [`DOMAIN.yaml`](DOMAIN.yaml). A second domain would revisi
 | status | `stable`, `founding: true` (its stewardship targets are warnings) |
 | schema version | 0.1.0 (kernel and catalysis together) |
 | maintainers | `@hlxin` (the owner; reviewers join through the review policy) |
-| stewards | Hongliang Xin (`hlxin`), since 2026-09-26; two maintainer seats to be filled |
+| stewards | Hongliang Xin (`hlxin`), since 2026-09-26; maintainer seats to be filled as reviewers join |
 | review areas | `catalysis`, `thermo`, `electrothermo`, `electro`, `photo`, `plasma` |
 | declaration | [DOMAIN.yaml](DOMAIN.yaml) (`domain: catalysis`) |
 | decision record | [0001](../docs/decisions/0001-scale-0.1.0.md): SCALE 0.1.0, with catalysis stable from the start |

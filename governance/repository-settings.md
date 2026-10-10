@@ -186,17 +186,18 @@ refused, and its author rebuilds it on the new version.
 ### Bootstrap bypass
 
 The owner is a reviewer and approves other people's pull requests. GitHub does not let an author approve their
-own, so until a second reviewer has Write access, the owner's own pull requests cannot be approved. The ruleset therefore lets the **repository admin role** (the owner, the only admin)
+own, so until another reviewer has Write access, the owner's own pull requests cannot be approved. The ruleset therefore lets the **repository admin role** (the owner, the only admin)
 bypass it:
 
 - the owner uses it only to merge pull requests whose checks pass, noting each use in the pull request
   ("Bootstrap bypass: reviewers not yet added"); GitHub does not enforce either, and the ruleset's bypass log
-  shows each use (Settings → Rules → Insights). He does not push to `main` directly;
+  shows each use (Settings → Rules → Insights). The owner does not push to `main` directly;
 - `scale proposal apply-merged` does not count a bypass as approval: a proposal merged this way is applied by
   hand (`scale proposal decide <id> --pr <n> --bootstrap-bypass "<reason>" --by hlxin`, then
   `scale proposal apply <id> --confirm`, in a pull request), and the decision record says so;
-- once a second reviewer has joined, the bypass is narrowed to pull requests (`"bypass_mode": "pull_request"`)
-  or removed, by a pull request that changes `ruleset-main.json`; the apply token then needs its own bypass
+- the bypass stays with the repository admin role, the owner (Hongliang Xin), also once other reviewers have
+  joined, until the owner decides otherwise: narrowing it to pull requests (`"bypass_mode": "pull_request"`) or
+  removing it is a pull request that changes `ruleset-main.json`; the apply token then needs its own bypass
   (a GitHub App as an `Integration` actor) or proposals are applied in pull requests.
 
 ## 6. Tag ruleset and the `pypi` environment
@@ -246,4 +247,4 @@ Publish to PyPI only with the first release ([release-process.md](release-proces
 - [ ] `main` ruleset applied (one approval, no code-owner requirement, required checks, the admin role as the only bypass);
       the GitHub Actions app is not a bypass actor
 - [ ] `v*` tag ruleset; `pypi` environment (`v*` tags); PyPI trusted publisher
-- [ ] reviewer seats filled (a pull request each), then the bootstrap bypass narrowed or removed
+- [ ] reviewer seats filled (a pull request each); the bypass stays with the admin until the owner decides otherwise

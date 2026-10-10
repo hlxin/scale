@@ -209,7 +209,7 @@ def test_the_cli_runs_the_real_check_and_rolls_back(tmp_path, capsys):
 
 
 def test_a_bootstrap_bypass_is_recorded_as_such_and_only_while_no_other_reviewer_has_joined(tmp_path):
-    """Until a second reviewer joins, the owner's own change cannot be approved: the owner, who merged under the
+    """Until another reviewer joins, the owner's own change cannot be approved: the owner, who merged under the
     ruleset's bootstrap bypass, records the decision by hand, and the record says it was not approved."""
     from scale.pgraph_proposal import apply, decide
     repo, cs = checked(tmp_path)

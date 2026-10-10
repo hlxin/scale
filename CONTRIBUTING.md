@@ -14,6 +14,24 @@ holds the rules. New to SCALE? Start with the [README](README.md).
 Thank you for helping. Contributions of every size are welcome: an issue describing a scientific
 use case in ordinary language is as valuable as a schema change proposal.
 
+## Getting started as a collaborator
+
+1. **Accept the invitation** to `hlxin/scale` (Write access). The owner adds you to the reviewers in
+   [governance/review-policy.yaml](governance/review-policy.yaml) and [.github/CODEOWNERS](.github/CODEOWNERS) by a pull
+   request, with your name and GitHub handle, once you agree.
+2. **Set up and check:** `git clone https://github.com/hlxin/scale && cd scale && uv run --extra dev scale check`
+   (one line: the environment and every check CI runs). Reading PDFs needs `--extra pdf` and the `tesseract` command.
+3. **Work on a branch** `<github-handle>/<topic>`, never on `main`; run `uv run --extra dev scale check --fast` before
+   you push, and open a pull request with the template filled in.
+4. **Review each other's work.** Every pull request needs one approving review from a reviewer other than its author;
+   the reviewer who approves merges it (squash), and the branch is deleted. Ask for changes rather than approve with
+   reservations; a reviewer who disagrees with a merged change opens a pull request of their own.
+5. **AI agents** read [AGENTS.md](AGENTS.md) and the skills in `tools/skills/`. An agent may open a pull request, under
+   its own GitHub identity (the Claude GitHub App or a bot account), never yours, so that you can approve it; it never
+   approves or merges.
+6. **Keep data in its place.** Commit only public documents; source PDFs, page texts and anything not cleared for
+   publication stay local or in a private data repository (each example's `.gitignore` says what stays local).
+
 ## How a change is made
 
 ```
@@ -25,7 +43,7 @@ a pull request (a person, or an agent: @scale-agent on agent/<run>-<short> when 
         ▼
 checks (scale check, package, specification-changes, proposal-check) and review:
         │  ONE approving review from any reviewer other than the author
-        │  (the owner is a reviewer; the owner's own pull requests: the bootstrap rule until a second reviewer joins)
+        │  (the owner is a reviewer; the owner's own pull requests: the bootstrap rule until another reviewer joins)
         ▼
 the approving person merges to main; the branch is deleted
         │  a schema proposal is then applied: the schema's one version moves on
@@ -40,7 +58,7 @@ data repositories are updated to it (`scale kg update`); later an official relea
    ([governance/review-policy.yaml](governance/review-policy.yaml), where the reviewers are listed); any
    reviewer may give it. A reviewer who asks for changes blocks until they approve. A reviewer who disagrees
    with a merged change corrects it with a pull request of their own. The owner is a reviewer and approves
-   other people's pull requests; GitHub does not let an author approve their own, so until a second reviewer
+   other people's pull requests; GitHub does not let an author approve their own, so until another reviewer
    joins, the owner merges their own pull requests under the bootstrap rule ([governance/GOVERNANCE.md](governance/GOVERNANCE.md#bootstrap-until-the-reviewers-join)).
 4. **After the merge.** A schema proposal (`status: proposed`) is applied on `main`: a person starts the
    apply-proposals workflow, which records the reviews, writes the decision record, freezes the old version
@@ -62,7 +80,7 @@ The repository is private for now and shared with collaborators.
 |---|---|---|
 | — | everyone, once the repository is public | read, open issues, comment, fork and open pull requests from a fork |
 | Write | collaborators the owner invites, the reviewers among them | push branches, open and update pull requests, start the manual workflows |
-| reviewer | the reviewers of the review policy, code owners in `.github/CODEOWNERS` | the approvals every pull request needs (two, not the author's own) |
+| reviewer | the reviewers of the review policy, code owners in `.github/CODEOWNERS` | the approval every pull request needs (one, not the author's own) |
 | Admin | the owner, `@hlxin` | repository settings, rulesets, collaborators and secrets |
 
 - **CODEOWNERS routes review; it does not restrict writes.** What protects `main` is the branch ruleset:
