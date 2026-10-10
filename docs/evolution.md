@@ -8,7 +8,7 @@ it.
 ## Release ids
 
 SCALE releases are `vX.Y.Z`, starting at `v0.1.0` (`releases/vX.Y.Z/`). None has been built yet. A release's
-identity comes from its manifest (`distribution: scale-schema`).
+identity comes from its manifest (`distribution: scale-catal`).
 
 ## One version
 

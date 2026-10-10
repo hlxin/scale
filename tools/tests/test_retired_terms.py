@@ -1,6 +1,6 @@
 """Names and retired wording: SCALE is "Shared Concepts, Attributes, and Links with Evidence", one shared framework
 for evidence-backed scientific knowledge graphs across domains (catalysis first), developed at github.com/hlxin/scale.
-Its Python distribution is scale-schema, with the commands scale and scale-schema.
+Its Python distribution is scale-catal, with the commands scale and scale-catal.
 
 Live files therefore name neither the former catalysis-only expansion nor its brands (R1), nor the first package name or
 the unrelated PyPI package schema (R2), nor the organization and the data repository of the repository this one was
@@ -93,12 +93,12 @@ def test_no_archive_of_another_repository_is_kept():
 def test_the_names_and_the_rules():
     from scale import layout as lay, updates, versions
     from scale.pgraph import SPEC_LINEAGE
-    assert versions.DISTRIBUTION == "scale-schema" and SPEC_LINEAGE == "scale"
+    assert versions.DISTRIBUTION == "scale-catal" and SPEC_LINEAGE == "scale"
     assert lay.REPOSITORY_URL == "https://github.com/hlxin/scale"
     assert updates.REMOTE_URL == "https://github.com/hlxin/scale.git"
     assert "github_repo: hlxin/scale\n" in (REPO / ".github/scale-project.yml").read_text()
     text = (REPO / "pyproject.toml").read_text()
-    assert 'name = "scale-schema"' in text and 'scale-schema = "scale.cli:main"' in text and f"{OLD_PACKAGE} =" not in text
+    assert 'name = "scale-catal"' in text and 'scale-catal = "scale.cli:main"' in text and f"{OLD_PACKAGE} =" not in text
     assert "Shared Concepts, Attributes, and Links with Evidence" in text
     readme = (REPO / "README.md").read_text()
     assert ("**Shared Concepts, Attributes, and Links with Evidence: one shared framework for evidence-backed scientific\n"
@@ -110,8 +110,8 @@ def test_the_names_and_the_rules():
                 f"https://github.com/{ORG}/schema", f"the private data repository {DATA_REPO}",
                 f"domain/examples/{OLD_EXAMPLES[0]}/README.md", f"domain/examples/{OLD_EXAMPLES[0]}/tools/curation.py"):
         assert any(rx.search(old) for rx in (R1, R2, R3)), old
-    for fine in ("Shared Concepts, Attributes, and Links with Evidence", "uvx scale-schema call status",
-                 "pip install scale-schema", "the catalysis domain", "a methanol-synthesis reaction (synthetic)",
+    for fine in ("Shared Concepts, Attributes, and Links with Evidence", "uvx scale-catal call status",
+                 "pip install scale-catal", "the catalysis domain", "a methanol-synthesis reaction (synthetic)",
                  "access consortium", "the SCALE science kernel", "follows_domains", "--domain catalysis", "https://github.com/hlxin/scale",
                  "scale:project/methanol-synthesis-pre1966", "the consortium schema repository (up to 79b4fe4)",
                  "examples/methanol-synthesis-pre1966/README.md"):

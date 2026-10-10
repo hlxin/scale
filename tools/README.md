@@ -5,13 +5,13 @@ tests for both. Reviewed, like every path, by its code owner (`@hlxin` today) an
 
 | directory | what it holds |
 |---|---|
-| [`scale/`](scale/) | The Python package and the `scale` command (distribution `scale-schema`). [`scale/layout.py`](scale/layout.py) is the one place that names repository paths. |
+| [`scale/`](scale/) | The Python package and the `scale` command (distribution `scale-catal`). [`scale/layout.py`](scale/layout.py) is the one place that names repository paths. |
 | [`skills/`](skills/) | Versioned `SKILL.md` procedures for people and agents (curate-source, query-graph, evolve-schema, triage-feedback, scan-conflicts, map-coverage, curate-dataset, export-graph). Releases ship the skills their manifest lists. |
 | [`tests/`](tests/) | Tests of the tools. The kernel's tests are in `core/tests/`, the catalysis tests in `domain/tests/`; the one shared `conftest.py` is at the repository root. |
 
 ```
 tools/
-├── scale/          # the Python package `scale` (distribution `scale-schema`)
+├── scale/          # the Python package `scale` (distribution `scale-catal`)
 │   ├── layout.py   # every repository-relative path the tools use, in one place
 │   └── …           # CLI, agent interfaces, scale-graph validation and queries, schema changes, releases
 ├── skills/         # versioned SKILL.md procedures
@@ -22,8 +22,8 @@ The modules are mapped in [docs/architecture.md](../docs/architecture.md#code-ma
 
 ## The package
 
-- The distribution is `scale-schema`; the import package is `scale`; the commands are `scale`
-  and `scale-schema` (so that `uvx scale-schema …` works). Python ≥ 3.10; the runtime
+- The distribution is `scale-catal`; the import package is `scale`; the commands are `scale`
+  and `scale-catal` (so that `uvx scale-catal …` works). Python ≥ 3.10; the runtime
   dependencies are PyYAML and jsonschema.
 - The wheel bundles what the tools read at run time (`scale-release.yaml`,
   `core/`, `domain/`, `tools/skills/`, the review policy and registries, `releases/`,

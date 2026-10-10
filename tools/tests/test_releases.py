@@ -38,8 +38,8 @@ def test_release_ids_normalize_and_order():
 
 
 def test_identity_comes_from_the_manifest():
-    assert release_id({"release": "v0.2.0", "distribution": "scale-schema"}) == "v0.2.0"
-    assert release_id({"release": "0.1.0", "distribution": "scale-schema"}) == "v0.1.0"
+    assert release_id({"release": "v0.2.0", "distribution": "scale-catal"}) == "v0.2.0"
+    assert release_id({"release": "0.1.0", "distribution": "scale-catal"}) == "v0.1.0"
     assert release_id({"release": "v0.1.0", "distribution": "scale-other"}) is None      # not this distribution's
     assert release_id({"release": "v0.1.0"}) is None and release_id({}) is None
     with pytest.raises(ScaleError, match=r"Release v999.0.0 not found .*Available: "
@@ -70,7 +70,7 @@ def test_the_head_manifest_is_graph_only_and_states_the_one_version():
                          "skills"}
     assert head["framework"] == "SCALE — Shared Concepts, Attributes, and Links with Evidence"
     # the release the head describes: the latest built, or the next one being prepared (v0.1.0 before the first)
-    assert head["distribution"] == "scale-schema" and release_id(head) == normalize_release_id(head["release"])
+    assert head["distribution"] == "scale-catal" and release_id(head) == normalize_release_id(head["release"])
     if RELEASES:
         assert release_key(release_id(head)) >= release_key(RELEASES[-1])
     else:

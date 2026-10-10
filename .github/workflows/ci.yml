@@ -37,7 +37,7 @@ jobs:
         run: scale check
 
   package:
-    # A new user installs scale-schema without a checkout: build the sdist and the wheel (the wheel
+    # A new user installs scale-catal without a checkout: build the sdist and the wheel (the wheel
     # is built from the sdist, as released), install the wheel, and run it from outside the repository
     # with only the bundled data.
     runs-on: ubuntu-latest
@@ -57,24 +57,24 @@ jobs:
         env:
           SCALE_WORKSPACE: /tmp/scale-ws
         run: |
-          scale-schema status
-          scale-schema call status | grep -q '"schema_version": "[0-9]'
-          scale-schema call domains
-          scale-schema call describe '{"names": ["CatalyticTest"], "domain": "catalysis"}' | grep -q '"when"'
-          scale-schema call template '{"domain": "catalysis"}' > /tmp/template.json
+          scale-catal status
+          scale-catal call status | grep -q '"schema_version": "[0-9]'
+          scale-catal call domains
+          scale-catal call describe '{"names": ["CatalyticTest"], "domain": "catalysis"}' | grep -q '"when"'
+          scale-catal call template '{"domain": "catalysis"}' > /tmp/template.json
           python -c "import json;print(json.dumps({'document':json.load(open('/tmp/template.json'))['document']}))" \
-            | scale-schema call validate - | grep -q '"valid": true'
-          scale-schema call example '{"name": "electro"}'
-          scale-schema call query '{"path": "electro.json", "plan": {"match": {"label": "CatalyticTest", "as": "t"}, "return": ["t.name"]}}' \
+            | scale-catal call validate - | grep -q '"valid": true'
+          scale-catal call example '{"name": "electro"}'
+          scale-catal call query '{"path": "electro.json", "plan": {"match": {"label": "CatalyticTest", "as": "t"}, "return": ["t.name"]}}' \
             | grep -q '"status": "answered"'
-          scale-schema skills install /tmp/skills
+          scale-catal skills install /tmp/skills
           printf '%s\n' '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18"}}' \
                          '{"jsonrpc":"2.0","id":2,"method":"tools/list"}' \
                          '{"jsonrpc":"2.0","id":3,"method":"tools/call","params":{"name":"scale_validate","arguments":{"path":"electro.json"}}}' \
-            | scale-schema mcp | tail -1 | grep -q '"isError": false'
-          scale-schema release verify
-          scale-schema domains list
-          scale-schema graph describe CatalyticTest --domain catalysis | grep -q '"when"'   # the checklist's driving-force cases
+            | scale-catal mcp | tail -1 | grep -q '"isError": false'
+          scale-catal release verify
+          scale-catal domains list
+          scale-catal graph describe CatalyticTest --domain catalysis | grep -q '"when"'   # the checklist's driving-force cases
 
   specification-changes:
     # Pull requests only. `scale ci spec-changes` fails when a pull request

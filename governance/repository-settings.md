@@ -203,7 +203,7 @@ gh api -X POST repos/$OWNER/$REPO/environments/pypi/deployment-branch-policies -
 
 The environment deploys only from `v*` tags, which only the owner may create. Once the plan allows it, add the
 owner (and later the reviewers) as the environment's required reviewers. On pypi.org, add a trusted publisher
-for the project `scale-schema`: owner `hlxin`, repository `scale`, workflow `publish.yml`, environment `pypi`.
+for the project `scale-catal`: owner `hlxin`, repository `scale`, workflow `publish.yml`, environment `pypi`.
 No PyPI token is stored anywhere. Until the publisher is registered, `publish` fails at its upload step and
 publishes nothing.
 

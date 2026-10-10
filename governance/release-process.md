@@ -17,7 +17,7 @@ An official release `vX.Y.Z` is:
 | the science kernel | `core/` (`CORE.yaml`, the kernel and its frozen versions), copied and digested into `releases/vX.Y.Z/` |
 | the catalysis domain | `domain/DOMAIN.yaml`, the one entry of `domain_profiles` in `scale-release.yaml`, with its schema manifest (`graph/scale-graph.yaml`), every part it lists and its frozen versions, copied and digested. The two layers stay separate: there is no repository-wide composition |
 | the spec documents | every version of the released schema as a spec document (`specs/<domain>/scale-graph-<version>.json`) with its sha256, the digest a reader binds a schema by |
-| validators and tools | the Python package `scale-schema` X.Y.Z on PyPI, built from the tagged commit, with the bundled skills |
+| validators and tools | the Python package `scale-catal` X.Y.Z on PyPI, built from the tagged commit, with the bundled skills |
 | documentation | the documentation in the tagged commit `vX.Y.Z` |
 | the release manifest | `releases/vX.Y.Z/RELEASE.yaml` |
 
@@ -69,8 +69,8 @@ records no comparison.
 | 6. Review | one reviewer (the owner's own pull request: the bootstrap rule until another reviewer joins) | pull request from `release/vX.Y.Z`; the required checks pass |
 | 7. Merge | the owner or a reviewer | merge into `main` |
 | 8. Tag and release | **human** (the owner; `v*` tags are restricted to the repository admin) | `gh release create vX.Y.Z --target <merge commit> --title vX.Y.Z --notes-file <notes>` |
-| 9. Publish | **human** approves the `pypi` deployment (where the plan allows required reviewers) | the `publish` workflow checks tag = package version = `releases/vX.Y.Z/` and that the release verifies, then publishes `scale-schema` to PyPI by trusted publishing |
-| 10. Confirm | the owner or a reviewer | `uvx scale-schema@X.Y.Z call status` from a clean machine; close the release issue |
+| 9. Publish | **human** approves the `pypi` deployment (where the plan allows required reviewers) | the `publish` workflow checks tag = package version = `releases/vX.Y.Z/` and that the release verifies, then publishes `scale-catal` to PyPI by trusted publishing |
+| 10. Confirm | the owner or a reviewer | `uvx scale-catal@X.Y.Z call status` from a clean machine; close the release issue |
 
 Agents may prepare steps 1–4 and draft release notes. They never build an official release on
 their own initiative, tag, publish or approve.
@@ -100,5 +100,5 @@ say what was wrong.
 ## One-time setup (human actions)
 
 - Register `hlxin/scale`, workflow `publish.yml`, environment `pypi` as a trusted publisher of the PyPI
-  project `scale-schema` (the repository is named `scale`, the package `scale-schema`).
+  project `scale-catal` (the repository is named `scale`, the package `scale-catal`).
 - Create the `pypi` environment and the tag ruleset ([repository-settings.md](repository-settings.md)).

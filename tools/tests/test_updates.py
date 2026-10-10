@@ -30,7 +30,7 @@ def test_tool_notice_when_newer_tag_is_published(monkeypatch):
                                                                "url": "https://example.org/x.git"})
     st = tool_status()
     assert st["tool_version"] == __version__
-    assert "v99.0.0" in st["notice"] and "scale-schema@99.0.0" in st["notice"]
+    assert "v99.0.0" in st["notice"] and "scale-catal@99.0.0" in st["notice"]
     monkeypatch.setattr(upd, "remote_latest", lambda *a, **k: {"checked": True, "latest_tag": f"v{__version__}"})
     assert "notice" not in tool_status()
 

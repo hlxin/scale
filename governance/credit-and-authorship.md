@@ -87,7 +87,7 @@ requests), and the pull requests and their approvers.
 
 ## Citing the software
 
-[`CITATION.cff`](../CITATION.cff) describes how to cite SCALE (the Python package scale-schema). Today its author is the
+[`CITATION.cff`](../CITATION.cff) describes how to cite SCALE (the Python package scale-catal). Today its author is the
 collective "SCALE contributors". A rule for naming its authors (for example, the people in the latest release's
 `contributors`) is left for a later decision record.
 

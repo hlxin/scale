@@ -37,6 +37,6 @@ a person:
 - building an official release (`scale release build vX.Y.Z`), tagging it and approving the `pypi`
   deployment;
 - inviting collaborators, setting secrets and applying rulesets ([repository-settings.md](repository-settings.md));
-- registering the PyPI trusted publisher for `scale-schema`.
+- registering the PyPI trusted publisher for `scale-catal`.
 
 Nothing is applied after a merge: what merges is what the reviewer approved.

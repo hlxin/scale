@@ -3,7 +3,7 @@
 **Shared Concepts, Attributes, and Links with Evidence: one shared framework for evidence-backed scientific
 knowledge graphs across domains.**
 
-SCALE is a schema, a set of tools and a set of agent skills for building knowledge graphs in which every record
+SCALE is a schema, tools and agent skills for building knowledge graphs in which every record
 stays linked to its evidence.
 
 - **Concepts** are the kinds of nodes, edges, properties and values.
@@ -19,38 +19,14 @@ The schema has two layers. The **science kernel** holds what all sciences share:
 experiments, claims, sources, people. **Domains** build on it. **Catalysis** is the first and, for now, only
 domain: thermal, electro-, photo- and plasma catalysis, and their combinations.
 
-![scale-graph architecture](docs/figures/scale-graph-architecture.png)
-
 ## Use it
 
 ```bash
-uvx scale-schema call status
+pip install git+https://github.com/hlxin/scale
 ```
 
-[uv](https://docs.astral.sh/uv/) fetches SCALE and runs it; there is nothing to install. Documents live in a
-working directory, `~/.scale/workspace` by default (set `$SCALE_WORKSPACE` to change it).
-
-SCALE is not on PyPI yet. Until it is, run it from a clone: `uvx --from /path/to/scale scale-schema call status`,
-or `--from git+https://github.com/hlxin/scale` if you have access ([docs/integrate.md](docs/integrate.md)).
-
-```bash
-uvx scale-schema graph describe CatalyticTest --domain catalysis         # what a record may and must say
-uvx scale-schema call example '{"name": "electro"}'                      # copy a public example to query
-uvx scale-schema call                                                     # list every tool (JSON in, JSON out)
-```
-
-**For AI agents**, register SCALE as an MCP server:
-
-```bash
-claude mcp add scale -- uvx scale-schema mcp
-```
-
-Other agents can run `uvx scale-schema call <tool> '<json>'` as a shell tool, use HTTP (`scale serve`) or use
-Python (`from scale.api import ScaleToolkit`). Pin a version with `uvx scale-schema@0.1.0 …`. See
-[docs/integrate.md](docs/integrate.md) and [AGENTS.md](AGENTS.md).
-
-For a normal install, run `pip install scale-schema` and type `scale …` instead of `uvx scale-schema …`. The
-package is `scale-schema` because `scale` and `schema` are taken on PyPI.
+Then `scale call status` to start, or `claude mcp add scale -- scale mcp` to give an AI agent the tools
+([docs/integrate.md](docs/integrate.md), [AGENTS.md](AGENTS.md)).
 
 ## What's inside
 

@@ -161,7 +161,7 @@ HUMAN_ONLY = {
     "move a data repository's documents to the latest schema": "scale kg update --data DIR",
     "build a release": "scale release build vX.Y.Z",
     "publish a release to PyPI (once the trusted publisher is configured)": "gh release create vX.Y.Z --repo hlxin/scale",
-    "register the PyPI trusted publisher for scale-schema": "pypi.org, project scale-schema: add the GitHub publisher "
+    "register the PyPI trusted publisher for scale-catal": "pypi.org, project scale-catal: add the GitHub publisher "
                                                             "hlxin/scale, workflow publish.yml, environment pypi "
                                                             "(governance/repository-settings.md)",
     "apply the repository settings (ruleset, environments, secrets)": "governance/repository-settings.md (gh api commands)",

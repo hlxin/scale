@@ -1,8 +1,8 @@
-"""Is a newer scale-schema tool published?
+"""Is a newer scale-catal tool published?
 
 ``tool_status`` compares the running tool with the newest release tag of the canonical repository
 (``git ls-remote``, cached for a day in the working directory; off with ``SCALE_NO_UPDATE_CHECK=1``).
-It never changes anything: a person updates the tool (``uvx --refresh scale-schema …``). Documents
+It never changes anything: a person updates the tool (``uvx --refresh scale-catal …``). Documents
 pin their schema version themselves, so a newer tool never changes what an existing document means;
 ``scale graph migrate`` moves a document to a newer schema version when a person asks for it.
 """
@@ -68,6 +68,6 @@ def tool_status(cache_dir: Path | None = None) -> dict:
     out = {"tool_version": __version__, "remote": remote}
     tag = remote.get("latest_tag")
     if tag and _vkey(tag) > _vkey(__version__):
-        out["notice"] = (f"scale-schema {tag} is published (running {__version__}). Tell the user; a person updates "
-                         f"the tool with `uvx scale-schema@{tag.lstrip('v')} …` or `uvx --refresh scale-schema …`.")
+        out["notice"] = (f"scale-catal {tag} is published (running {__version__}). Tell the user; a person updates "
+                         f"the tool with `uvx scale-catal@{tag.lstrip('v')} …` or `uvx --refresh scale-catal …`.")
     return out

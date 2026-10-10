@@ -38,7 +38,7 @@ reproduce whole pages of the source: they stay local and are never committed or 
 the agreements and the engines they were computed with, so a reader holding the same PDF can rebuild the words
 (``render``) and re-run the check.
 
-Rendering needs PyMuPDF (``pip install "scale-schema[pdf]"``) and OCR the ``tesseract`` command; ``agree`` and
+Rendering needs PyMuPDF (``pip install "scale-catal[pdf]"``) and OCR the ``tesseract`` command; ``agree`` and
 ``check`` read only cached words until a region has none. Deterministic for the same document and cached words.
 """
 

@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- **The Python package is `scale-catal`** (was `scale-schema`): SCALE is more than a schema. The commands are
+  `scale` and `scale-catal`; the README installs it with one line.
 - **One pull request for every change; proposals retired.** Anyone, a person or an agent, suggests a change (an
   issue, a comment) or opens a pull request; agents do the work; one person approves and merges, any reviewer, the
   person who suggested the change included. A schema change is a pull request like any other: it edits

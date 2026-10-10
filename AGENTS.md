@@ -4,17 +4,17 @@
 
 SCALE (Shared Concepts, Attributes, and Links with Evidence) is one shared framework for evidence-backed
 scientific knowledge graphs across domains: a science kernel, catalysis as the first domain, tools and agent
-skills. Run SCALE with `uvx scale-schema call <tool> '<json>'`, through MCP (`uvx scale-schema mcp`) or from
+skills. Run SCALE with `uvx scale-catal call <tool> '<json>'`, through MCP (`uvx scale-catal mcp`) or from
 Python (`scale.api.ScaleToolkit`). Start with `status`, then `skills` and `describe`, to learn the format.
 SCALE has one data format: **scale-graph documents** (node-link JSON), each pinning the schema version it
 follows (`graph.schema_version`). There is no workspace lock and nothing to upgrade; documents live in the
 working directory (`$SCALE_WORKSPACE`, default `~/.scale/workspace`).
 
-**scale-schema is not on PyPI yet.** Until its first release is published, `uvx scale-schema …` does not resolve
+**scale-catal is not on PyPI yet.** Until its first release is published, `uvx scale-catal …` does not resolve
 to this project (and could run a package someone else registers under that name). In a checkout of this
 repository run `uv run scale call <tool> '<json>'` (MCP: `uv run scale mcp`); elsewhere run
-`uvx --from /path/to/scale scale-schema …` (or `--from git+https://github.com/hlxin/scale`, with access to the
-repository). Use the plain `uvx scale-schema …` form only once a release is on PyPI.
+`uvx --from /path/to/scale scale-catal …` (or `--from git+https://github.com/hlxin/scale`, with access to the
+repository). Use the plain `uvx scale-catal …` form only once a release is on PyPI.
 
 - **The schema** has two layers, the science kernel (`core/graph/kernel.yaml`) and the catalysis domain,
   whose graph schema manifest (`domain/graph/scale-graph.yaml`) assembles the kernel with one catalysis file
@@ -63,8 +63,8 @@ repository). Use the plain `uvx scale-schema …` form only once a release is on
 
 ## Working on this repository
 
-- This repository is `hlxin/scale`; its Python package is `scale-schema`, with the commands `scale` and
-  `scale-schema`. Never write `pip install schema` or `uvx schema`: `schema` on PyPI is an unrelated library.
+- This repository is `hlxin/scale`; its Python package is `scale-catal`, with the commands `scale` and
+  `scale-catal`. Never write `pip install schema` or `uvx schema`: `schema` on PyPI is an unrelated library.
 - **How a change is made (any change).** Anyone suggests a change (an issue, a comment) or opens a pull request;
   agents do the work; one person approves and merges. When you are asked to make a change: work on a branch
   (`agent/…` on GitHub), make the change and its tests, run `uv run --extra dev scale check` (every check of CI's

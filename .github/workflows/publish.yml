@@ -1,7 +1,7 @@
 name: publish
 
-# Publish scale-schema to PyPI when a reviewer publishes a GitHub release, so that
-# `uvx scale-schema …` installs the official release. The tag, the package version and an existing
+# Publish scale-catal to PyPI when a reviewer publishes a GitHub release, so that
+# `uvx scale-catal …` installs the official release. The tag, the package version and an existing
 # official release directory must agree: tag vX.Y.Z == v<pyproject version> == releases/vX.Y.Z/,
 # and that directory must verify against its RELEASE.yaml digests.
 #
@@ -16,7 +16,7 @@ name: publish
 # makes this job fail at the upload step and publishes nothing.
 #
 # One-time setup. Human actions; an agent never does these:
-# 1. pypi.org: register a trusted publisher for the project `scale-schema` (a "pending publisher" if
+# 1. pypi.org: register a trusted publisher for the project `scale-catal` (a "pending publisher" if
 #    the project does not exist yet): owner `hlxin`, repository `scale`, workflow `publish.yml`,
 #    environment `pypi`.
 # 2. Repository settings → Environments → `pypi` (deployment protection rules on a private personal
@@ -41,7 +41,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: pypi
-      url: https://pypi.org/project/scale-schema/
+      url: https://pypi.org/project/scale-catal/
     permissions:
       contents: read
       id-token: write
@@ -71,6 +71,6 @@ jobs:
           test -f "${manifest}" || { echo "::error::${manifest} does not exist; build the release first"; exit 1; }
           recorded=$(python -c "import sys,yaml;print(yaml.safe_load(open(sys.argv[1]))['release'])" "${manifest}")
           test "${recorded}" = "v${VERSION}" || { echo "::error::${manifest} records release ${recorded}"; exit 1; }
-          scale-schema release verify "v${VERSION}"
-          (cd /tmp && scale-schema release verify "v${VERSION}")   # the copy bundled in the wheel
+          scale-catal release verify "v${VERSION}"
+          (cd /tmp && scale-catal release verify "v${VERSION}")   # the copy bundled in the wheel
       - uses: pypa/gh-action-pypi-publish@release/v1

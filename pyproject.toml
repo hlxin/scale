@@ -3,7 +3,7 @@ requires = ["setuptools>=77"]        # PEP 639: an SPDX licence expression and l
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "scale-schema"
+name = "scale-catal"
 version = "0.1.0"
 description = "SCALE — Shared Concepts, Attributes, and Links with Evidence: one shared framework for evidence-backed scientific knowledge graphs across domains (science kernel; catalysis first)."
 readme = "README.md"
@@ -30,7 +30,7 @@ pdf = ["pymupdf>=1.23"]              # page texts of PDF sources (OCR also needs
 
 [project.scripts]
 scale = "scale.cli:main"
-scale-schema = "scale.cli:main"      # so that `uvx scale-schema …` works without --from
+scale-catal = "scale.cli:main"      # so that `uvx scale-catal …` works without --from
 
 [tool.setuptools.packages.find]
 where = ["tools"]

@@ -199,7 +199,7 @@ capabilities:
   notes: Verified by building the wheel and running status, the agent tools, mcp, skills install, release verify and graph describe from outside the repository; CI job `package` repeats this.
 - name: Installable without a checkout (schemas, releases, skills and examples bundled in the wheel)
   status: functioning
-  where: setup.py, pip install / uvx (commands `scale` and `scale-schema`)
+  where: setup.py, pip install / uvx (commands `scale` and `scale-catal`)
   tests: [test_skills_install]
   notes: Verified by building the wheel and running status, the agent tools, mcp, skills install, release verify and graph describe from outside the repository; CI job `package` repeats this.
 - name: One-command development check (`scale check` runs every check of CI's `test` jobs; CI calls the same command)
@@ -207,10 +207,10 @@ capabilities:
   where: tools/scale/devcheck.py, scale check, .github/workflows/ci.yml
   tests: [test_check_runs_the_ci_checks, test_check_reports_every_failure_and_keeps_going, test_check_warns_when_prose_names_an_old_schema_version]
   notes: A warning step (never failing; scale schema bump rewrites those sentences) says when the documentation names another version than the manifest (devcheck.VERSION_TEXTS).
-- name: One-line use from PyPI (`uvx scale-schema …`)
+- name: One-line use from PyPI (`uvx scale-catal …`)
   status: planned
-  where: pyproject.toml (`scale-schema` command), .github/workflows/publish.yml
-  notes: The command alias and the publish workflow exist; the package is not yet on PyPI. A maintainer sets up trusted publishing and publishes a GitHub release. Until then, use `uvx --from <checkout or git URL> scale-schema …`.
+  where: pyproject.toml (`scale-catal` command), .github/workflows/publish.yml
+  notes: The command alias and the publish workflow exist; the package is not yet on PyPI. A maintainer sets up trusted publishing and publishes a GitHub release. Until then, use `uvx --from <checkout or git URL> scale-catal …`.
 - name: Skills installation into an agent's skills folder (each skill's whole folder, its SKILL.md and the files it points to such as references/, as a release copies it)
   status: functioning
   where: scale skills install, tools/scale/releases.py (skill_folder)

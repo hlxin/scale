@@ -381,7 +381,7 @@ def test_human_only_actions_cover_the_review_gates():
     for action in ("merge an approved pull request",
                    "fill a reviewer seat (replace a placeholder)", "move a data repository's documents to the latest schema",
                    "build a release", "publish a release to PyPI (once the trusted publisher is configured)",
-                   "register the PyPI trusted publisher for scale-schema",
+                   "register the PyPI trusted publisher for scale-catal",
                    "apply the repository settings (ruleset, environments, secrets)", "file a GitHub issue"):
         assert action in HUMAN_ONLY, action
     assert any(a.startswith("approve a pull request") for a in HUMAN_ONLY)

@@ -56,7 +56,7 @@ def test_the_build_carries_core_kernel_domain_and_skills_with_the_one_version(tm
     repo = _mini(tmp_path)
     dest = build_release(repo, "v0.1.0", date="2026-10-08")
     m = load_yaml(dest / "RELEASE.yaml")
-    assert (m["distribution"], m["release"], m["status"]) == ("scale-schema", "v0.1.0", "released")
+    assert (m["distribution"], m["release"], m["status"]) == ("scale-catal", "v0.1.0", "released")
     assert m["schema_version"] == HEAD_VERSION
     assert (m["core"], m["domain_profiles"]) == ("core/CORE.yaml", ["domain/DOMAIN.yaml"]) and "graph" not in m
     for f in ["core/CORE.yaml", "domain/DOMAIN.yaml"] + GRAPH_FILES:
@@ -72,7 +72,7 @@ def test_the_build_carries_core_kernel_domain_and_skills_with_the_one_version(tm
     assert cv["domains"] == [{"domain": "catalysis", "version": HEAD_VERSION, "status": "stable",
                               "scale_graph": {"manifest": "domain/graph/scale-graph.yaml", "version": HEAD_VERSION,
                                               "status": "candidate"}}]
-    assert cv["tool"]["package"] == "scale-schema" and {s["name"] for s in cv["skills"]} == {
+    assert cv["tool"]["package"] == "scale-catal" and {s["name"] for s in cv["skills"]} == {
         "curate-source", "query-graph", "evolve-schema", "triage-feedback", "scan-conflicts", "map-coverage",
         "curate-dataset", "export-graph"}
     # a skill is its whole folder: the release carries curate-source's references with their digests

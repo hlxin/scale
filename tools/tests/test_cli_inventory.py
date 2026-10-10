@@ -63,9 +63,9 @@ def test_inventory_page_is_generated_from_the_yaml():
 def test_documented_install_command_pins_the_current_version():
     import re
     from scale import __version__
-    for doc in ("README.md", "docs/integrate.md"):
-        pins = set(re.findall(r"scale-schema@([\d.]+)", (REPO / doc).read_text()))
-        assert pins == {__version__}, (doc, pins)
+    pins = set(re.findall(r"scale-catal@([\d.]+)", (REPO / "docs/integrate.md").read_text()))
+    assert pins == {__version__}, pins
+    assert set(re.findall(r"scale-catal@([\d.]+)", (REPO / "README.md").read_text())) <= {__version__}
 
 
 

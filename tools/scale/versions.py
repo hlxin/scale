@@ -3,7 +3,7 @@
 The schema has one version for the science kernel and the catalysis domain together (the catalysis
 manifest's ``version``), a semantic version numbered from 0.1.0. Constraints such as
 ``>=0.1.0,<1.0.0`` are checked by :func:`satisfies`. A release is named ``vX.Y.Z``; its identity comes
-from its manifest (``distribution: scale-schema`` and ``release``), never from its directory's name.
+from its manifest (``distribution: scale-catal`` and ``release``), never from its directory's name.
 """
 
 from __future__ import annotations
@@ -13,7 +13,7 @@ import re
 from .util import ScaleError
 
 SEMVER = re.compile(r"^(\d+)\.(\d+)\.(\d+)$")
-DISTRIBUTION = "scale-schema"                                  # written into the manifests of releases
+DISTRIBUTION = "scale-catal"                                  # written into the manifests of releases
 
 
 def parse_version(v: str) -> tuple[int, int, int]:

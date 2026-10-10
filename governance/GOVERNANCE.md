@@ -5,7 +5,7 @@ versions, the catalysis domain, project data and releases.
 
 SCALE (Shared Concepts, Attributes, and Links with Evidence) is one shared framework for evidence-backed
 scientific knowledge graphs across domains. It is developed in [hlxin/scale](https://github.com/hlxin/scale),
-a personal repository of its owner, Hongliang Xin (`@hlxin`); its Python package is `scale-schema`. The
+a personal repository of its owner, Hongliang Xin (`@hlxin`); its Python package is `scale-catal`. The
 repository starts private and is shared with collaborators; the rules are the same before and after it
 becomes public ([decision record 0001](../docs/decisions/0001-scale-0.1.0.md)).
 
@@ -29,7 +29,7 @@ approve or merge.
 | **suggestion** | An issue or a comment that asks for a change, by a person or an agent. @scale-agents take it up on their own and turn it into a pull request when it asks for a change; anyone may also open one. |
 | **reviewers** | The people who approve changes, listed in [`review-policy.yaml`](review-policy.yaml): the owner and the domain experts who join (seats not yet filled are placeholders). Any one of them approves a change. |
 | **maturity** | Of a concept: `provisional` or `stable`. New concepts enter as provisional. |
-| **official release** | A tagged, digested distribution built by the release process: `releases/vX.Y.Z/`, tag `vX.Y.Z`, PyPI `scale-schema` X.Y.Z ([release-process.md](release-process.md)). None has been built yet. |
+| **official release** | A tagged, digested distribution built by the release process: `releases/vX.Y.Z/`, tag `vX.Y.Z`, PyPI `scale-catal` X.Y.Z ([release-process.md](release-process.md)). None has been built yet. |
 
 ## Who does what
 

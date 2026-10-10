@@ -21,7 +21,7 @@ or a licence named there has no text in `LICENSES/`. `LICENSE` at the root holds
 GitHub and package indexes detect it. The copyright holder is "SCALE contributors": contributors keep the
 copyright in their contributions and license them as below.
 
-The Python package (`scale-schema` on PyPI) declares `License-Expression: MIT AND CC-BY-4.0`, since its wheel
+The Python package (`scale-catal` on PyPI) declares `License-Expression: MIT AND CC-BY-4.0`, since its wheel
 holds code and the bundled vocabulary, records and documentation; it ships `LICENSE`, `LICENSES/MIT.txt`,
 `LICENSES/CC-BY-4.0.txt` and `NOTICE`. No file of the repository is under a third-party licence. `CITATION.cff` says `license: MIT`: it describes the software, and its format has no way to state that
 two licences apply together.

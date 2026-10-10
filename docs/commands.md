@@ -1,7 +1,7 @@
 # Commands
 
-Every command below runs the same way with `uvx scale-schema …` (no install) or `scale …`
-(after `pip install scale-schema`). `scale --help` and `scale <command> --help` list the options.
+Every command below runs the same way with `uvx scale-catal …` (no install) or `scale …`
+(after `pip install scale-catal`). `scale --help` and `scale <command> --help` list the options.
 
 | operation | command |
 |---|---|
