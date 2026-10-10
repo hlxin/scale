@@ -684,6 +684,12 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
         doc, withheld = pgraph.restrict_to(doc, declared, today)
     bundle_key = pgraph.access_key(declared, today)
     out = Path(out)
+    for name, prior_dir in (("previous", previous), ("ids_from", ids_from)):
+        if prior_dir is not None:          # read before anything is written: never export into the release it follows
+            a, b = out.resolve(), Path(prior_dir).resolve()
+            if a == b or a in b.parents or b in a.parents:
+                raise ScaleError(f"the bundle would be written over {name} ({prior_dir}), which it reads; write it to "
+                                 "a folder of its own")
     _clear_texts(out)                      # an earlier export's texts are not this bundle's (nor sealed with it)
     (out / "kg").mkdir(parents=True, exist_ok=True)
     report = {"not_exported_links": {}, "split_links": 0, "values_as_text": {}, "nodes_without_report": 0,
