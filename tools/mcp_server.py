@@ -29,12 +29,17 @@ class MCPServer:
         self.toolkit = toolkit or ScaleToolkit()
 
     # ------------------------------------------------------------ dispatch
-    def handle(self, msg: dict) -> dict | None:
+    def handle(self, msg: Any) -> dict | None:
+        if not isinstance(msg, dict):       # JSON that is not a request object: answered, never fatal
+            return {"jsonrpc": "2.0", "id": None, "error": {"code": -32600, "message": "invalid request: not a JSON object"}}
         method, mid = msg.get("method"), msg.get("id")
         if mid is None:          # notification (e.g. notifications/initialized): no response
             return None
+        params = msg.get("params")
+        if params is not None and not isinstance(params, dict):
+            return {"jsonrpc": "2.0", "id": mid, "error": {"code": -32602, "message": "invalid params: an object is expected"}}
         try:
-            result = self._dispatch(method, msg.get("params") or {})
+            result = self._dispatch(method, params or {})
             return {"jsonrpc": "2.0", "id": mid, "result": result}
         except _RPCError as exc:
             return {"jsonrpc": "2.0", "id": mid, "error": {"code": exc.code, "message": exc.message}}
@@ -89,6 +94,8 @@ class MCPServer:
                 self._send(stdout, {"jsonrpc": "2.0", "id": None, "error": {"code": -32700, "message": "parse error"}})
                 continue
             batch = msg if isinstance(msg, list) else [msg]
+            if not batch:
+                self._send(stdout, {"jsonrpc": "2.0", "id": None, "error": {"code": -32600, "message": "invalid request: empty batch"}})
             for m in batch:
                 resp = self.handle(m)
                 if resp is not None:
