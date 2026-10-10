@@ -41,7 +41,7 @@ given day (`as_of`, see Result).
 The text search has four modes. `hybrid` (the default) averages BM25 keyword relevance, scaled to the best hit, with
 the cosine of the quote vectors (negative counted as 0), so its scores run from 0 to 1; `keyword` and `vector` use one
 of them; `rrf` (reciprocal rank fusion) adds 1 / (60 + rank) from the keyword ranking and from the vector ranking,
-each read to its 1000th item, so an `rrf` score is at most 2/61, about 0.033, and a `min_score` written for
+each read to its 1000th item (with a filter, such as `published_before`, a ranking of the items it keeps), so an `rrf` score is at most 2/61, about 0.033, and a `min_score` written for
 `hybrid` (0.25, say) leaves out every row in `rrf`. Every mode is exact: each quote is scored, and ties go by item id.
 For large graphs, `scale graph index` saves the index (`<graph>.evidence.jsonl`, `.i8` and `.terms`, its keyword
 postings) so that a query reads it instead of building it; in a long-running process (the agent tools, MCP) the
