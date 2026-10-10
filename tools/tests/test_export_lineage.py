@@ -317,6 +317,22 @@ def _cli(args, capsys):
     return rc, out.out, out.err
 
 
+def test_a_bundle_is_never_written_over_the_release_it_follows(tmp_path, head):
+    """The previous release (or the build whose ids are kept) is read before anything is written, so the output
+    may not be that folder, or inside it, or hold it: refused, and the earlier release is left as it was."""
+    kgbundle.export(build(), head, tmp_path / "v1", "over", created="2026-10-06T00:00:00Z")
+    before = {p.name: p.read_bytes() for p in (tmp_path / "v1").rglob("*") if p.is_file()}
+    doc = build()
+    doc["nodes"][1]["props"]["name"] = "copper, renamed"
+    for out, opts in ((tmp_path / "v1", {"previous": tmp_path / "v1"}), (tmp_path / "v1" / "next", {"previous": tmp_path / "v1"}),
+                      (tmp_path, {"ids_from": tmp_path / "v1"})):
+        with pytest.raises(ScaleError, match="written over"):
+            kgbundle.export(doc, head, out, "over", "1.1.0", created="2026-10-06T00:00:00Z", **opts)
+    assert {p.name: p.read_bytes() for p in (tmp_path / "v1").rglob("*") if p.is_file()} == before
+    m = kgbundle.export(doc, head, tmp_path / "v2", "over", "1.1.0", created="2026-10-06T00:00:00Z", previous=tmp_path / "v1")
+    assert m["changes"]["nodes_changed"] >= 1
+
+
 def test_the_cli_export_records_the_previous_release_and_the_merged_records(tmp_path, capsys):
     f = tmp_path / "doc.json"
     doc = build()
