@@ -1,11 +1,10 @@
-"""The methanol-synthesis example (examples/methanol-synthesis-pre1966/): the frozen corpus, the curated scale-graph and the
-manuscript's questions as query plans, run on the public files alone.
+"""The methanol-synthesis example (examples/methanol-synthesis-pre1966/): the frozen corpus (sources.json), the curated
+scale-graph and the manuscript's questions as query plans, run on the public files alone.
 
 The graph is the ARPA-E CATALYST curation of the historical methanol-synthesis literature published before 1966,
-scoped to CO and CO2 hydrogenation (105 sources),
-cleared for publication by the project partners, moved to today's 0.1.0 and capped (scale evidence cap): quoted text
-beyond a source's cap is withheld as sha256 + length. The curation inputs (fragments, page texts, OCR, GALAXY bundles)
-stay in the restricted copy; the evidence index is rebuilt here (scale graph index), never committed."""
+scoped to CO and CO2 hydrogenation (105 sources), cleared for publication by the project partners, moved to today's
+0.1.0 and capped (scale evidence cap): quoted text beyond a source's cap is withheld as sha256 + length. The PDFs
+(pdfs/) and page texts are local; the evidence index is built here, never committed."""
 
 from collections import Counter
 
@@ -20,7 +19,7 @@ GRAPH = EX / "methanol-synthesis.graph.json"
 CUTOFF = "1966-01-01"
 KUME_1959 = "10.1246-nikkashi1898.62.7_939"
 ICI_1960 = "us2964551a"
-PLANS = sorted((EX / "queries/scale-graph").glob("*.yaml"))
+PLANS = sorted((EX / "queries").glob("*.yaml"))
 assert PLANS, "no methanol query plans"
 
 
@@ -31,7 +30,7 @@ def pg():
 
 @pytest.fixture(scope="module")
 def manifest():
-    return load_doc(EX / "corpus/manifest.json")
+    return load_doc(EX / "sources.json")
 
 
 @pytest.fixture(scope="module")
@@ -55,7 +54,7 @@ def test_corpus_is_frozen_before_the_cutoff(manifest):
     assert manifest["cutoff"]["date"] == CUTOFF
     srcs = {s["slug"]: s for s in manifest["sources"]}
     inscope = [s for s in manifest["sources"] if s["status"] == "in_scope"]
-    assert len(inscope) == manifest["counts"]["in_scope"] == 108
+    assert len(inscope) == manifest["counts"]["in_scope"] == 105
     assert all(int(s["published"][:4]) < 1966 for s in inscope)
     assert srcs[KUME_1959]["status"] == srcs[ICI_1960]["status"] == "in_scope"   # before 1966, ICI's own 1960 patent included
     held = [s for s in manifest["sources"] if s["status"] == "held_out_target"]
@@ -118,12 +117,6 @@ def test_the_graph_uses_the_process_and_equilibrium_concepts(pg):
     assert any(e["props"].get("negated") for e in pg["links"] if e["type"] in ("PRODUCES", "DETECTS"))
 
 
-def test_missing_concept_gaps_are_resolved_or_open():
-    gaps = [g for g in load_doc(EX / "curation/assembly-report.json")["gaps"] if g["kind"] == "missing_concept"]
-    resolved = [g for g in gaps if g.get("status") == "resolved"]
-    assert len(gaps) == 47 and len(resolved) == 39
-
-
 # ------------------------------------------------------------------------------------------ the manuscript's questions
 @pytest.mark.parametrize("plan", PLANS, ids=lambda p: p.stem)
 def test_manuscript_questions_are_answered_from_evidence_before_the_cutoff(pg, spec, index, plan):
@@ -135,73 +128,38 @@ def test_manuscript_questions_are_answered_from_evidence_before_the_cutoff(pg, s
 @pytest.mark.parametrize("plan, rows", [("q1-copper-lower-temperature", 236), ("q2b-inhibited-by", 88),
                                         ("q4-co2-feedstock", 135), ("q6-cu-zn-al-formulations", 5)])
 def test_structured_questions_keep_their_answers(pg, spec, index, plan, rows):
-    assert _run(pg, spec, index, load_yaml(EX / f"queries/scale-graph/{plan}.yaml"))["row_count"] == rows
+    assert _run(pg, spec, index, load_yaml(EX / f"queries/{plan}.yaml"))["row_count"] == rows
 
 
 def test_cu_zn_al_query_returns_the_1928_catalyst(pg, spec, index):
-    res = _run(pg, spec, index, load_yaml(EX / "queries/scale-graph/q6-cu-zn-al-formulations.yaml"))
+    res = _run(pg, spec, index, load_yaml(EX / "queries/q6-cu-zn-al-formulations.yaml"))
     assert min(r["earliest_source_year"] for r in res["rows"]) == 1928
 
 
 def test_an_earlier_cutoff_holds_out_kume_1959(pg, spec, index):
-    plan = {**load_yaml(EX / "queries/scale-graph/q4-co2-feedstock.yaml"), "published_before": "1959-01-01"}
+    plan = {**load_yaml(EX / "queries/q4-co2-feedstock.yaml"), "published_before": "1959-01-01"}
     res = _run(pg, spec, index, plan)
     years = [ev.get("source_year") or 0 for r in res["rows"] for ev in r.get("evidence") or []]
     assert res["rows"] and max(years) < 1959
 
 
-def test_the_benchmark_corpus_is_the_co_co2_hydrogenation_sources(manifest):
-    """corpus/sources.json: the in-scope sources on CO/CO2 + H2, each with the digest of its PDF (the PDFs are local)."""
-    srcs = load_doc(EX / "corpus/sources.json")
-    frozen = {s["slug"]: s for s in manifest["sources"] if s["status"] == "in_scope"}
-    kept = {s["slug"] for s in srcs["sources"]}
-    assert len(kept) == srcs["counts"]["sources"] == 105 and kept <= set(frozen)
-    assert {e["slug"] for e in srcs["excluded"]} == set(frozen) - kept
-    assert all(s["pdf_sha256"] == frozen[s["slug"]]["text"]["pdf_sha256"] and s["pdf"] == f"pdfs/{s['slug']}.pdf"
-               for s in srcs["sources"])
-    assert "corpus/pdfs/" in (EX / ".gitignore").read_text().split()
+def test_the_corpus_is_one_checked_manifest_with_local_pdfs(manifest):
+    """sources.json: every candidate source once, the counts adding up (scale corpus check); each in-scope source
+    names its local PDF by slug (pdfs/<slug>.pdf, git-ignored) with the PDF's sha256, and where the project corpus
+    keeps it."""
+    from scale import corpus
+    assert corpus.check(manifest)["ok"]
+    inscope = [s for s in manifest["sources"] if s["status"] == "in_scope"]
+    assert all(s["pdf"] == f"pdfs/{s['slug']}.pdf" and len(s["text"]["pdf_sha256"]) == 64 and s["corpus_pdf"]
+               for s in inscope)
+    assert all(s["slug"] == s["doi"].replace("/", "-") for s in inscope if s.get("doi"))
+    assert "pdfs/" in (EX / ".gitignore").read_text().split()
+    assert sorted(p.name for p in EX.iterdir() if not p.name.startswith(".") and p.name not in ("pdfs", "work")) == [
+        "README.md", "methanol-synthesis.graph.json", "queries", "rights.yaml", "sources.json", "stewardship.yaml"]
 
 
-def test_the_graph_is_scoped_to_the_benchmark_corpus(pg):
-    """The graph keeps CO and CO2 hydrogenation only: its sources are exactly the corpus's 105."""
-    kept = {s["slug"] for s in load_doc(EX / "corpus/sources.json")["sources"]}
+def test_the_graph_is_scoped_to_the_benchmark_corpus(pg, manifest):
+    """The graph keeps CO and CO2 hydrogenation only: its sources are exactly the corpus's 105 in-scope sources."""
+    kept = {s["slug"] for s in manifest["sources"] if s["status"] == "in_scope"}
     assert {n["id"].removeprefix("ex:msyn/source/") for n in pg["nodes"] if n["label"] == "Source"} == kept
     assert pg["graph"]["graph_id"] == "ex:msyn/graph/co-co2-hydrogenation" and "105 sources" in pg["graph"]["title"]
-
-
-def test_the_releases_are_intact_and_answer_as_recorded():
-    """releases/v<version>/: immutable snapshots; every file's digest, the graph's content digest and every plan's
-    answer still hold (tools/release_graph.py verify)."""
-    import importlib.util
-    spec = importlib.util.spec_from_file_location("release_graph", EX / "tools/release_graph.py")
-    rg = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(rg)
-    assert (EX / "releases/v1.0.0/RELEASE.yaml").is_file()
-    assert rg.verify() == []
-    m = load_yaml(EX / "releases/v1.0.0/RELEASE.yaml")
-    assert m["schema"] == {"name": "scale-graph", "version": "0.1.0", "follows_domains": ["catalysis"],
-                           "spec_sha256": "3c2fa7205a7bae5e0bbfa7d87826ff7ab7803e78536129064101c7d5a2c02006"}
-    assert m["counts"]["sources"] == m["corpus"]["sources"] == 105 and m["validation"]["errors"] == 0
-
-
-def test_the_galaxy_bundle_is_the_release_exported_with_its_schema():
-    """galaxy/methanol-synthesis-pre1966_v1.0.0/: the GALAXY bundle of release v1.0.0, sealed (SHA256SUMS,
-    validation.json), its schema extending scale-graph by version and spec digest, its corpus the scoped manifest."""
-    import hashlib
-    b = EX / "galaxy/methanol-synthesis-pre1966_v1.0.0"
-    m = load_doc(b / "bundle.json")
-    release = load_yaml(EX / "releases/v1.0.0/RELEASE.yaml")
-    assert m["format"] == "galaxy-kg-bundle" and m["bundle_id"] == "methanol-synthesis-pre1966" and m["version"] == "1.0.0"
-    assert m["graph_sha256"] == hashlib.sha256((b / "kg/graph.json").read_bytes()).hexdigest()
-    sums = dict(reversed(line.split("  ", 1)) for line in (b / "SHA256SUMS").read_text().splitlines())
-    assert all(hashlib.sha256((b / f).read_bytes()).hexdigest() == h for f, h in sums.items())
-    v = load_doc(b / "validation.json")
-    assert v["ok"] and v["n_errors"] == 0 and v["n_warnings"] == 0
-    schema = load_doc(b / "kg/schema.json")
-    assert schema["extends"] == {"schema_id": "scale-graph", "version": release["schema"]["version"],
-                                 "sha256": release["schema"]["spec_sha256"]}
-    h = m["scale_header"]
-    assert h["graph_id"] == release["graph_id"] and h["schema_sha256"] == release["schema"]["spec_sha256"]
-    assert h["stewardship"]["access"] == "public" and m["counts"]["papers"] == 105
-    assert m["corpus"]["n_included"] == 105 and m["corpus"]["n_screened"] == 178
-    assert "### Not carried over" in (b / "CHANGELOG.md").read_text()

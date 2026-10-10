@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- **The methanol example, simplified and ready to recurate.** `examples/methanol-synthesis-pre1966/` keeps only what
+  a reader and a recuration need: `sources.json` (the frozen corpus, all 178 candidates with their status, each of the
+  105 in-scope sources with its PDF `pdfs/<slug>.pdf` and the PDF's sha256; it replaces `corpus/manifest.json`,
+  `corpus/manifest-co-co2-hydrogenation.json` and `corpus/sources.json`), the graph, `rights.yaml`,
+  `stewardship.yaml` and `queries/*.yaml`. The PDFs are local and git-ignored, named by slug: the DOI with `/` as `-`
+  (a patent or report without a DOI: its number or corpus id). Removed and kept in the git history (commit `a169872`):
+  release `v1.0.0` (a second copy of the graph), its GALAXY bundle (regenerated with `scale graph export --to
+  galaxy`), the curation guide and assembly report, and the conversion tools of the earlier pipeline; recuration
+  follows the `curate-source` skill. The graph and its query answers are unchanged.
 - **Text queries and search build the evidence index when none is saved.** `scale graph query` (a plan with `text`),
   `scale graph search`, the agent tools `scale_query` and `scale_search`, the competency questions and `scale proposal
   check` used to fail when no index lay beside the document (three of the methanol example's seven plans stopped with
