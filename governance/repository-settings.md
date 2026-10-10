@@ -94,7 +94,7 @@ The workflow token is read-only unless a workflow asks for more in its `permissi
 |---|---|---|
 | `ci` | every pull request and push to `main` | nothing |
 | `triage` | weekly, or started by hand | nothing (it opens a digest issue with the workflow token, `issues: write`) |
-| `scale-agents` | every new issue, comment and pull-request review (not a bot's), or by hand from `main` | the secret `ANTHROPIC_API_KEY` and the Claude GitHub App (below) |
+| `scale-agents` | every new issue, comment and pull-request review (not a bot's), or by hand from `main` | the secret `CLAUDE_CODE_OAUTH_TOKEN` (or `ANTHROPIC_API_KEY`) and the Claude GitHub App (below) |
 | `publish` | a published GitHub release | the `pypi` environment and the trusted publisher (section 6); inert until configured |
 
 ## 4. Secrets
@@ -110,15 +110,20 @@ only the reviewed workflow file on `main` can read it.
 `@scale-agents` (a team of Claude agents on GitHub, `anthropics/claude-code-action`) start on their own on every new
 issue, comment and pull-request review, and when a person with write access runs the workflow by hand (Actions →
 scale-agents → Run workflow); events from bots, the agents' own comments included, are skipped. No label or tag is
-needed. Every run uses the API key, so once the repository is public and anyone can open issues, decide whether to
+needed. Every run draws on the subscription (or the API key), so once the repository is public and anyone can open issues, decide whether to
 keep this for everyone or limit it to collaborators (a condition on `author_association` in the job). To use it,
 install the
 **Claude GitHub App** (https://github.com/apps/claude) on `hlxin/scale` (contents, issues and pull requests,
-read and write) and set the API key:
+read and write) and set one secret. With a Claude subscription (Pro, Max, Team or Enterprise), run
+`claude setup-token` in a terminal, sign in, copy the token it prints (`sk-ant-oat…`, valid for a year, tied to the
+person who made it, whose usage limits the runs draw on) and save it:
 
 ```bash
-gh secret set ANTHROPIC_API_KEY --repo $OWNER/$REPO
+gh secret set CLAUDE_CODE_OAUTH_TOKEN --repo $OWNER/$REPO
 ```
+
+Or, for API billing, `gh secret set ANTHROPIC_API_KEY --repo $OWNER/$REPO`. Renew the subscription token before it
+expires.
 
 The agent works on an `agent/…` branch and opens a pull request, ready for review, with the App's token, so the
 pull request's author is the App and any reviewer, the person who asked included, can approve it; asked on its
@@ -225,7 +230,7 @@ Publish to PyPI only with the first release ([release-process.md](release-proces
 - [ ] repository created; wiki off; labels created
 - [ ] `codeowners/errors` returns no errors
 - [ ] workflow token read-only; Actions may not approve pull requests
-- [ ] `ANTHROPIC_API_KEY` and the Claude GitHub App only when the agents are used
+- [ ] `CLAUDE_CODE_OAUTH_TOKEN` (or `ANTHROPIC_API_KEY`) and the Claude GitHub App only when the agents are used
 - [ ] `main` ruleset applied (one approval, no code-owner requirement, required checks, the admin role as the only bypass);
       the GitHub Actions app is not a bypass actor
 - [ ] `v*` tag ruleset; `pypi` environment (`v*` tags); PyPI trusted publisher

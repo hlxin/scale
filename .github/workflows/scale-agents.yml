@@ -21,8 +21,9 @@ name: scale-agents
 # run) and .github/scale-agents/roles/ (the other roles, copied to .claude/agents/), with AGENTS.md and the skills in
 # tools/skills/. The App's token cannot change workflow files, so the agents cannot edit .github/workflows/.
 #
-# Human setup: install the Claude GitHub App on hlxin/scale and set the repository secret ANTHROPIC_API_KEY
-# (governance/repository-settings.md, "The agents"). No other secret is used. The agents' commands run with the
+# Human setup: install the Claude GitHub App on hlxin/scale and set the repository secret CLAUDE_CODE_OAUTH_TOKEN
+# (a Claude subscription's token from `claude setup-token`; its runs draw on that subscription) or, instead,
+# ANTHROPIC_API_KEY (API billing) (governance/repository-settings.md, "The agents"). No other secret is used. The agents' commands run with the
 # action's subprocess secret scrub on (CLAUDE_CODE_SUBPROCESS_ENV_SCRUB), and this job's GITHUB_TOKEN can only read
 # the contents.
 "on":
@@ -80,7 +81,8 @@ jobs:
         env:
           CLAUDE_CODE_SUBPROCESS_ENV_SCRUB: "1"     # the agents' commands run without the API key and tokens
         with:
-          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}   # a Claude subscription (claude setup-token)
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}               # or API billing; set one of the two
           # the event is named by numbers only; the agents read its text with gh, as data
           prompt: |
             You are the discovery strategist of @scale-agents in ${{ github.repository }}. Follow .claude/CLAUDE.md.
