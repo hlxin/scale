@@ -73,7 +73,7 @@ assembles the kernel with that domain's files; there is one domain today, cataly
   - examples: [synthetic scale-graph examples](domain/examples/scale-graph/) (invented values and sources),
     one per driving force and combination of forces.
 - **A real example** ([`examples/methanol-synthesis-pre1966/`](examples/methanol-synthesis-pre1966/README.md)): the
-  historical methanol-synthesis literature on CO/CO2 + H2 published before 1966 (105 sources, ARPA-E CATALYST),
+  historical methanol-synthesis literature on CO/CO2 + H2 published before 1966 (105 sources),
   curated from the source texts into one graph with capped quotes, and the manuscript's questions as query plans; the
   repository's tests run on it.
 - **Tools** ([`tools/`](tools/README.md)): the `scale` Python package and command, the versioned skills for

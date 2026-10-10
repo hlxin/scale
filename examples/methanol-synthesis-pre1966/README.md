@@ -1,15 +1,15 @@
 # Example — methanol synthesis from CO/CO2 + H2, literature published before 1966
 
-The knowledge graph of the historical methanol-synthesis literature of the ARPA-E CATALYST project, scoped to
-**CO and CO2 hydrogenation** (CO + D2 included): 105 sources from 1923 to 1965. It is public research data
-(`data_status: research_data`, `access: public`, cleared by the project partners), and the repository's checks
+The knowledge graph of the historical methanol-synthesis literature, scoped to **CO and CO2 hydrogenation** (CO + D2
+included): 105 sources from 1923 to 1965. It is public research data (`data_status: research_data`, `access:
+public`), maintained by SCALE's researchers, and the repository's checks
 and tests run on it (`tools/tests/test_example_methanol.py`).
 
 | file | content |
 |---|---|
 | `sources.json` | The frozen corpus: all 178 candidate sources with their status under the cutoff and the scope (105 `in_scope`, 10 held-out targets, 58 not retrieved, 4 off scope, 1 after the cutoff), and for each in-scope source its PDF and the PDF's sha256. `scale corpus check sources.json` checks it. |
 | `pdfs/<slug>.pdf` | The 105 PDFs, **local only** (git-ignored; most are in copyright). |
-| `methanol-synthesis.graph.json` | The curated graph, valid under scale-graph 0.1.0: 4,867 nodes, 16,585 links, 684 catalytic tests, 25,230 evidence items. The baseline until the recuration replaces it. |
+| `methanol-synthesis.graph.json` | The curated graph, valid under scale-graph 0.1.0: 4,866 nodes, 16,584 links, 684 catalytic tests, 25,230 evidence items. The baseline until the recuration replaces it. |
 | `rights.yaml`, `stewardship.yaml` | Each source's rights (the copyright cap), and who curated the graph for which project. |
 | `queries/*.yaml` | The manuscript's questions as query plans. |
 | `methanol-synthesis-pre1966_v1.1.0.zip` | The graph as a knowledge-graph bundle ([kg-bundle format](../../docs/kg-bundle-format.md) 1.1.0), ready to load into a platform that reads the format: 17,563 edges, withheld quotes as digests, 227 typed absences; it follows release 1.0.0. |
@@ -20,10 +20,11 @@ graph are `ex:msyn/source/<slug>`.
 
 ## Getting the PDFs
 
-Copy them from the project corpus (the ARPA-E CATALYST Box folder `Corpus/`), checking each digest:
+Copy them from a local copy of the corpus (a folder holding each source at its `corpus_pdf` path), checking each
+digest:
 
 ```bash
-CORPUS=~/Library/CloudStorage/Box-Box/ARPA-E-CATALYST/Corpus
+CORPUS=/path/to/corpus
 cd examples/methanol-synthesis-pre1966 && mkdir -p pdfs
 python3 -c "
 import json, hashlib, shutil, sys

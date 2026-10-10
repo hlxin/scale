@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- **Maintained by researchers, independent of any institution or project.** The stewardship registry names one
+  steward, "SCALE researchers" (`scale:org/scale-researchers`), and one project, `scale:project/methanol-synthesis-pre1966`
+  (the methanol benchmark); the institutions, the funder and the funded project it named before
+  are removed, as is the `vt` extension prefix (`exmpl` is now owned by the steward). The methanol example's
+  stewardship, its graph's header and its stewardship records name that steward and project.
 - **Knowledge-graph bundles in format 1.1.0: withheld quotes and typed absences.** The kg-bundle format 1.1.0 carries a quote
   withheld under the copyright cap (`quote_withheld`: its sha256 and length under `scale-match-text-1`, SCALE's
   verbatim normalization) and a value the source does not report (`_value_status`). `scale graph export --to kg-bundle`
@@ -57,8 +62,8 @@
   not let an author approve their own pull request (governance/repository-settings.md, "The agent"). The scale-agent
   workflow may run `gh pr create` without `--draft`.
 - **The methanol-synthesis example is public** (`examples/methanol-synthesis-pre1966/`), a small benchmark for the
-  repository. The ARPA-E CATALYST partners cleared the curated graph of the historical methanol-synthesis literature
-  published before 1966 for publication; the example keeps its CO and CO2 hydrogenation scope (105 sources, 4,868
+  repository. The curated graph of the historical methanol-synthesis literature published before 1966 was cleared
+  for publication; the example keeps its CO and CO2 hydrogenation scope (105 sources, 4,868
   records, 16,586 links, 684 catalytic tests). It was moved from the consortium schema repository's 0.1.0 to its 0.5.0
   with that repository's tools and re-pinned to 0.1.0 (valid, 0 errors), and its quoted text was capped (`scale
   evidence cap`, which applies to the 50 in-copyright sources only; the 55 public-domain sources, the US patents
@@ -162,9 +167,7 @@ first will be `v0.1.0`.
   activity in a catalyst state and reaction pathways). They served project data that may not be published, which is
   kept in a separate private data repository; the tooling stays in the consortium schema repository at 79b4fe4
   ([decision record 0001](docs/decisions/0001-scale-0.1.0.md), item 4). The two proposals' themes are in
-  [domain/ROADMAP.md](domain/ROADMAP.md). The stewardship registry keeps the owner's projects and their funder
-  (`scale:project/arpa-e-catalyst`, `scale:org/arpa-e`), so that documents re-curated from that
-  work can name their project.
+  [domain/ROADMAP.md](domain/ROADMAP.md).
 - **A personal repository.** The owner, Hongliang Xin (@hlxin), owns every path in `.github/CODEOWNERS`; two reviewer
   seats are placeholders, two approvals are required once they are filled, and the owner merges under the bootstrap
   rule until then. The `ci` and `proposal-check` workflows run on pull requests without secrets; `apply-proposals` is

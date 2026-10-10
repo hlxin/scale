@@ -175,7 +175,7 @@ def test_flat_export_has_primitive_properties(example):
 
 
 # ---------------------------------------------------------------- stewardship
-VT, OTHER, PROJ = "ex:exmpl/org/example-lab", "ex:exmpl/org/other", "ex:exmpl/project/examples"   # the example's
+LAB, OTHER, PROJ = "ex:exmpl/org/example-lab", "ex:exmpl/org/other", "ex:exmpl/project/examples"   # the example's
 
 
 def _viewable(doc, viewer, date="2026-09-27"):
@@ -198,10 +198,10 @@ def test_stewardship_is_inherited_and_overridden(spec, example):
 
 def test_viewers_see_by_project_institution_and_public(example):
     test = "ex:exmpl/thermo/test/zno-run-1"
-    assert test in _viewable(example, [VT])                                    # VT participates in the project
+    assert test in _viewable(example, [LAB])                                    # the lab participates in the project
     assert _viewable(example, []) == {"ex:exmpl/thermo/source/invented-paper"}             # the public: only the public source
     _node(example, test)["props"]["stewardship"] = {"access": "institution", "contributed_by": [OTHER]}
-    assert test not in _viewable(example, [VT])                                # another institution's record
+    assert test not in _viewable(example, [LAB])                                # another institution's record
     assert test in _viewable(example, [OTHER])
     kept = pgraph.filter_for(example, [], "2026-09-27")
     assert all(l["source"] in {n["id"] for n in kept["nodes"]} for l in kept["links"])
@@ -210,7 +210,7 @@ def test_viewers_see_by_project_institution_and_public(example):
 def test_members_inherit_their_institutions_access(example):
     example["nodes"].append({"id": "ex:exmpl/thermo/person/a", "label": "Person", "props": {"name": "A. Researcher",
                                                                                     "origin": "curated"}})
-    example["links"].append({"id": "ex:exmpl/thermo/link/m", "source": "ex:exmpl/thermo/person/a", "target": VT, "type": "MEMBER_OF",
+    example["links"].append({"id": "ex:exmpl/thermo/link/m", "source": "ex:exmpl/thermo/person/a", "target": LAB, "type": "MEMBER_OF",
                              "props": {"origin": "curated"}})
     assert "ex:exmpl/thermo/test/zno-run-1" in _viewable(example, ["ex:exmpl/thermo/person/a"])
 
@@ -220,7 +220,7 @@ def test_embargo_opens_on_its_date(spec, example):
     _node(example, test)["props"]["stewardship"] = {"access": "embargoed", "embargo_until": "2027-06-30",
                                                    "access_after_embargo": "public"}
     assert errors(example, spec) == []
-    assert test not in _viewable(example, [], "2027-06-30") and test in _viewable(example, [VT], "2027-06-30")
+    assert test not in _viewable(example, [], "2027-06-30") and test in _viewable(example, [LAB], "2027-06-30")
     assert test in _viewable(example, [], "2027-07-01")
     _node(example, test)["props"]["stewardship"] = {"access": "embargoed"}
     assert any("embargoed access needs embargo_until" in m for m in errors(example, spec))
@@ -229,19 +229,19 @@ def test_embargo_opens_on_its_date(spec, example):
 def test_registry_supplies_institutions_software_and_projects():
     from scale.util import load_yaml
     reg = load_yaml(REPO / "governance/registry/stewardship.yaml")
-    vt = "scale:org/virginia-tech"                                   # the registry's own entry
-    nodes, links = pgraph.registry_records(reg, {vt})
-    assert [n["label"] for n in nodes if n["id"] == vt] == ["Institution"] and links == []
+    steward = "scale:org/scale-researchers"                               # the registry's own entry
+    nodes, links = pgraph.registry_records(reg, {steward})
+    assert [n["label"] for n in nodes if n["id"] == steward] == ["Institution"] and links == []
     # a project with its funder and participants (synthetic entries added to the registry's own)
     proj, funder = "scale:project/exmpl-project", "scale:org/exmpl-funder"
     reg = {**reg, "institutions": [*reg["institutions"], {"id": funder, "name": "Example funder",
                                                           "institution_kind": "funding_agency"}],
            "projects": [{"id": proj, "name": "Example project", "funded_by": funder,
-                         "participants": [{"member": vt, "role": "data_provider"},
+                         "participants": [{"member": steward, "role": "data_provider"},
                                           {"member": funder, "role": "data_provider"}]}]}
     nodes, links = pgraph.registry_records(reg, {proj})
     ids = {n["id"] for n in nodes}
-    assert {proj, vt, funder} <= ids
+    assert {proj, steward, funder} <= ids
     assert {l["type"] for l in links} == {"FUNDED_BY", "PARTICIPATES_IN"}
     with pytest.raises(Exception, match="not in the stewardship registry"):
         pgraph.registry_records(reg, {"scale:org/unknown"})

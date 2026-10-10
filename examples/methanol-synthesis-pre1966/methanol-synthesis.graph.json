@@ -201208,33 +201208,21 @@
       }
     },
     {
-      "id": "scale:org/arpa-e",
+      "id": "scale:org/scale-researchers",
       "label": "Institution",
       "props": {
-        "name": "Advanced Research Projects Agency-Energy (ARPA-E)",
-        "country": "US",
-        "institution_kind": "funding_agency",
-        "note": "add the ROR id",
+        "name": "SCALE researchers",
+        "institution_kind": "other",
+        "note": "the researchers who curate and maintain SCALE's public graphs; no institution or person is named",
         "origin": "curated"
       }
     },
     {
-      "id": "scale:org/virginia-tech",
-      "label": "Institution",
-      "props": {
-        "name": "Virginia Tech",
-        "country": "US",
-        "institution_kind": "university",
-        "note": "add the ROR id",
-        "origin": "curated"
-      }
-    },
-    {
-      "id": "scale:project/arpa-e-catalyst",
+      "id": "scale:project/methanol-synthesis-pre1966",
       "label": "Project",
       "props": {
-        "name": "ARPA-E CATALYST",
-        "note": "add the award id and dates",
+        "name": "Methanol synthesis before 1966",
+        "note": "The public benchmark graph of examples/methanol-synthesis-pre1966, curated from the historical literature on methanol synthesis from CO/CO2 + H2.",
         "origin": "curated"
       }
     }
@@ -515263,23 +515251,14 @@
       "target": "ex:msyn/source/us2964551a"
     },
     {
-      "id": "scale:project/arpa-e-catalyst/funded-by",
-      "type": "FUNDED_BY",
-      "props": {
-        "origin": "curated"
-      },
-      "source": "scale:project/arpa-e-catalyst",
-      "target": "scale:org/arpa-e"
-    },
-    {
-      "id": "scale:project/arpa-e-catalyst/participant/virginia-tech",
+      "id": "scale:project/methanol-synthesis-pre1966/participant/scale-researchers",
+      "source": "scale:org/scale-researchers",
+      "target": "scale:project/methanol-synthesis-pre1966",
       "type": "PARTICIPATES_IN",
       "props": {
         "origin": "curated",
         "role": "data_provider"
-      },
-      "source": "scale:org/virginia-tech",
-      "target": "scale:project/arpa-e-catalyst"
+      }
     }
   ],
   "directed": true,
@@ -515300,10 +515279,10 @@
     "stewardship": {
       "access": "public",
       "contributed_by": [
-        "scale:org/virginia-tech"
+        "scale:org/scale-researchers"
       ],
       "note": "Curated by agents under the curate-source skill from the frozen corpus (sources.json); checked by the deterministic SCALE tools.",
-      "project": "scale:project/arpa-e-catalyst"
+      "project": "scale:project/methanol-synthesis-pre1966"
     },
     "title": "Methanol synthesis (CO and CO2 hydrogenation to methanol), historical literature published before 1966-01-01 (105 sources, 1923–1965), curated from the source texts under scale-graph 0.1.0"
   },

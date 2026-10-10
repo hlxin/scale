@@ -2,23 +2,17 @@
 # Edited by people and reviewed like any specification. Add a partner institution, person or project
 # here, then reference its id from a graph's stewardship file. Leave identifiers out rather than guess them.
 institutions:
-  - id: scale:org/virginia-tech
-    name: Virginia Tech
-    institution_kind: university
-    country: US
-    note: add the ROR id
-  - id: scale:org/arpa-e
-    name: Advanced Research Projects Agency-Energy (ARPA-E)
-    institution_kind: funding_agency
-    country: US
-    note: add the ROR id
+  - id: scale:org/scale-researchers
+    name: SCALE researchers
+    institution_kind: other
+    note: the researchers who curate and maintain SCALE's public graphs; no institution or person is named
 persons: []
 software: []
 projects:
-  - id: scale:project/arpa-e-catalyst
-    name: ARPA-E CATALYST
-    funded_by: scale:org/arpa-e
-    note: add the award id and dates
+  - id: scale:project/methanol-synthesis-pre1966
+    name: Methanol synthesis before 1966
+    note: The public benchmark graph of examples/methanol-synthesis-pre1966, curated from the historical literature on
+      methanol synthesis from CO/CO2 + H2.
     participants:
-      - member: scale:org/virginia-tech
+      - member: scale:org/scale-researchers
         role: data_provider

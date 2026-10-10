@@ -59,7 +59,7 @@ stable, whichever tool or agent wrote the file.
   | files keyed `domain:` | the domain's name (`domain:` in `domain/DOMAIN.yaml`): lowercase letters, digits and `-` | `catalysis` |
   | checklist references in documents (`follows_domains`) | the name of the checklist that applies | `catalysis` |
   | `when` case conditions in a checklist | a property of the label, then `any_of` or `all_of` of its enum values | `driving_forces: {all_of: [electro, photo]}` |
-  | extension keys (outside the schema) | `_<prefix>_<name>`, prefix registered in `governance/registry/extension-prefixes.yaml` | `_vt_reactor_serial` |
+  | extension keys (outside the schema) | `_<prefix>_<name>`, prefix registered in `governance/registry/extension-prefixes.yaml` | `_exmpl_reactor_serial` |
 
   Diagrams and documents use these exact names; they do not merge labels ("A / B") or split them
   into words.
