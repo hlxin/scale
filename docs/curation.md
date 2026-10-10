@@ -22,7 +22,7 @@ defines what a completed record means, and the source determines which parts can
 scale call template '{"domain": "catalysis"}'            # a minimal valid document to start from
 scale graph describe CatalyticTest --domain catalysis      # the properties and the checklist items
 scale graph validate my-source.json --source-text ex:source/1=/path/to/your/copy/of/the/article.txt
-scale graph index my-source.json                           # optional: the evidence index for search
+scale graph index my-source.json                           # optional: saves the evidence index (search builds it otherwise)
 ```
 
 Before the first source, freeze the corpus: a manifest that lists every candidate source with its `status` (included,

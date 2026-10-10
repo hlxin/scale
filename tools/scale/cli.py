@@ -388,16 +388,16 @@ def cmd_graph_index(args):
     ix = Index.build(evidence_items(doc), args.embedder, graph_sha256(doc))     # bound to this document
     stem = _index_stem(args.file, args.index)
     ix.save(stem)
-    _emit({"index": f"{stem}.jsonl", "vectors": f"{stem}.i8", "items": len(ix.items), "embedder": ix.embedder_id,
+    _emit({"index": f"{stem}.jsonl", "vectors": f"{stem}.i8", "terms": f"{stem}.terms", "items": len(ix.items), "embedder": ix.embedder_id,
            "dim": int(ix.vectors.shape[1]) if len(ix.items) else 0, "graph_sha256": ix.graph_sha256}, args)
 
 
 def cmd_graph_search(args):
     from . import pgraph
-    from .passages import load_for
+    from .passages import index_for
     from .pgraph_query import document_access
     doc = load_doc(args.file)
-    ix = load_for(_index_stem(args.file, args.index), doc)      # only an index of this document
+    ix = index_for(_index_stem(args.file, args.index), doc)     # only an index of this document, else built from it
     nodes = {n["id"]: n for n in doc["nodes"]}
     links = {e["id"]: e for e in doc["links"]}
     years = {n["id"]: n["props"].get("year") for n in doc["nodes"] if n["label"] == "Source"}
@@ -420,13 +420,13 @@ def cmd_graph_search(args):
 
 def cmd_graph_query(args):
     from . import pgraph_query
-    from .passages import load_for
+    from .passages import index_for
     doc = load_doc(args.file)
     spec = _graph_spec(args, doc)
     plan = load_doc(args.plan)
     ix = None
     if plan.get("text"):
-        ix = load_for(_index_stem(args.file, args.index), doc)     # only an index of this document
+        ix = index_for(_index_stem(args.file, args.index), doc)    # only an index of this document, else built from it
     res = pgraph_query.run(doc, spec, plan, ix)
     _emit(res, args, pgraph_query.render_markdown(res))
     return 0 if res["status"] in ("answered", "no_matching_record", "missing_context", "schema_gap") else 1
@@ -1096,7 +1096,7 @@ def build_parser() -> argparse.ArgumentParser:
     sp.add_argument("--embedder", default="scale-hash-v1"); out_opts(sp)
     sp = add("search", cmd_graph_search, "search evidence by words and meaning; hits lead to the records that cite them", gr)
     sp.add_argument("file"); sp.add_argument("query"); sp.add_argument("--index"); sp.add_argument("-k", type=int, default=10)
-    sp.add_argument("--mode", choices=["hybrid", "vector", "keyword"], default="hybrid")
+    sp.add_argument("--mode", choices=["hybrid", "vector", "keyword", "rrf"], default="hybrid")
     sp.add_argument("--published-before", help="only evidence from sources published before this date (YYYY or YYYY-MM-DD)")
     out_opts(sp, ("json", "markdown"))
     sp = add("query", cmd_graph_query, "run a graph query plan (patterns, filters, evidence search, dated paths)", gr)

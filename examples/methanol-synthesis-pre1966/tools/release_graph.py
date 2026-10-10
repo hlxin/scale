@@ -112,7 +112,7 @@ def verify(version: str | None = None) -> list[str]:
     """Problems with the releases (or one): a file whose digest changed, a file added or missing, a manifest whose
     graph digest or answers no longer hold."""
     problems = []
-    for rel in sorted(RELEASES.iterdir()) if version is None else [RELEASES / version]:
+    for rel in sorted(p for p in RELEASES.iterdir() if p.is_dir()) if version is None else [RELEASES / version]:
         sums = dict(reversed(line.split("  ", 1)) for line in (rel / SUMS).read_text().splitlines())
         files = {p.relative_to(rel).as_posix() for p in rel.rglob("*") if p.is_file()} - {SUMS}
         problems += [f"{rel.name}: {f} added" for f in sorted(files - set(sums))]
