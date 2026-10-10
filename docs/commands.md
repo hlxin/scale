@@ -173,7 +173,7 @@ A question without a plan is a stub: listed, not counted. Format reference: `too
 scale release build vX.Y.Z [--date YYYY-MM-DD]        # a human action
 ```
 
-No release has been built yet; the first will be `v0.1.0`, with schema 0.1.0. A release is always built from the
+The first release is `v0.1.0`, with schema 0.1.0. A release is always built from the
 repository head, under the version `scale-release.yaml` names (`--override-version` renumbers on purpose). It
 copies and digests the core declaration, the science kernel and its frozen versions, the catalysis domain (each
 folder in `domain_profiles`) with its `DOMAIN.yaml`, its schema manifest, every part it lists and its frozen
@@ -205,6 +205,6 @@ domain/             the catalysis domain: DOMAIN.yaml (its declaration), graph/ 
                     examples), docs/, tests/ (unit tests, invalid fixtures)
 tools/              scale/ (Python package and `scale` CLI), skills/ (versioned SKILL.md procedures), tests/
 governance/         GOVERNANCE.md, review-policy.yaml, feedback.md, and the extension-prefix and stewardship registries
-releases/           immutable releases with sha256 digests (none built yet; the first will be v0.1.0)
+releases/           immutable releases with sha256 digests (the first is v0.1.0)
 docs/               architecture, workflows, decision records, gap register, status inventory
 ```

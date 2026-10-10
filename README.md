@@ -48,8 +48,8 @@ Then `scale call status` to start, or `claude mcp add scale -- scale mcp` to giv
   tests.
 - **Governance** ([`governance/`](governance/GOVERNANCE.md)): who reviews, how changes are approved, versions and
   releases.
-- **Releases** ([`releases/`](releases/README.md)): fixed, digested releases built by a person. None exists yet;
-  the first will be `v0.1.0`.
+- **Releases** ([`releases/`](releases/README.md)): fixed, digested releases built by a person; the first
+  is `v0.1.0`.
 
 There is one data format: scale-graph documents (node-link JSON), each naming the schema version it follows.
 Your model does the judgement work, such as extracting values and writing queries; SCALE's tools are

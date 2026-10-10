@@ -29,7 +29,7 @@ approve or merge.
 | **suggestion** | An issue or a comment that asks for a change, by a person or an agent. @scale-agents take it up on their own and turn it into a pull request when it asks for a change; anyone may also open one. |
 | **reviewers** | The people who approve changes, listed in [`review-policy.yaml`](review-policy.yaml): the owner and the domain experts who join (seats not yet filled are placeholders). Any one of them approves a change. |
 | **maturity** | Of a concept: `provisional` or `stable`. New concepts enter as provisional. |
-| **official release** | A tagged, digested distribution built by the release process: `releases/vX.Y.Z/`, tag `vX.Y.Z`, PyPI `scale-catal` X.Y.Z ([release-process.md](release-process.md)). None has been built yet. |
+| **official release** | A tagged, digested distribution built by the release process: `releases/vX.Y.Z/`, tag `vX.Y.Z`, PyPI `scale-catal` X.Y.Z ([release-process.md](release-process.md)). The first is `v0.1.0`. |
 
 ## Who does what
 
@@ -188,7 +188,7 @@ competency questions or synthetic fixtures.
 
 Releases are immutable and digested (`releases/vX.Y.Z/RELEASE.yaml`) and built by a person
 ([release-process.md](release-process.md)): the tag, the PyPI package version and the release directory
-always agree. The first will be `v0.1.0`.
+always agree. The first is `v0.1.0`.
 
 Code is under the MIT licence ([LICENSE](../LICENSE)); the vocabulary, curated records and documentation
 are under CC-BY-4.0; third-party material stays under its owners' terms ([NOTICE](../NOTICE)).

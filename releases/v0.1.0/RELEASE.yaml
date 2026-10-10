@@ -1,0 +1,94 @@
+distribution: scale-catal
+framework: SCALE — Shared Concepts, Attributes, and Links with Evidence
+release: v0.1.0
+status: released
+schema_version: 0.1.0
+core: core/CORE.yaml
+domain_profiles:
+- domain/DOMAIN.yaml
+skills:
+- tools/skills/curate-source
+- tools/skills/query-graph
+- tools/skills/evolve-schema
+- tools/skills/triage-feedback
+- tools/skills/scan-conflicts
+- tools/skills/map-coverage
+- tools/skills/curate-dataset
+- tools/skills/export-graph
+date: '2026-10-10'
+previous: null
+comparison_to_previous: null
+built_with:
+  tool: scale
+  version: 0.1.0
+source:
+  repository: https://github.com/hlxin/scale
+  tag: v0.1.0
+component_versions:
+  schema:
+    version: 0.1.0
+  core:
+    name: scale-core
+    version: 0.1.0
+  kernel:
+    file: core/graph/kernel.yaml
+    version: 0.1.0
+  domains:
+  - domain: catalysis
+    version: 0.1.0
+    status: stable
+    scale_graph:
+      manifest: domain/graph/scale-graph.yaml
+      version: 0.1.0
+      status: candidate
+  tool:
+    package: scale-catal
+    version: 0.1.0
+  skills:
+  - name: curate-source
+    version: 0.1.0
+  - name: query-graph
+    version: 0.1.0
+  - name: evolve-schema
+    version: 0.2.0
+  - name: triage-feedback
+    version: 0.1.0
+  - name: scan-conflicts
+    version: 0.1.0
+  - name: map-coverage
+    version: 0.1.0
+  - name: curate-dataset
+    version: 0.1.0
+  - name: export-graph
+    version: 0.1.0
+contributors:
+- name: Hongliang Xin
+  github: hlxin
+  roles:
+  - steward
+  scopes:
+  - core
+  - catalysis
+excluded_domains: []
+spec_documents:
+- domain: catalysis
+  version: 0.1.0
+  file: specs/catalysis/scale-graph-0.1.0.json
+  sha256: 3c2fa7205a7bae5e0bbfa7d87826ff7ab7803e78536129064101c7d5a2c02006
+digests:
+  core/CORE.yaml: 1e7e2c98ffc1c857a9c34f35cd9c1474d82e753d5c9eaae9a8ff158a82f90df0
+  core/graph/kernel.yaml: c15027db4aac5bc339a0bc5cc0f47d740225f49503a76ac64a0f9a03dd21a31b
+  domain/DOMAIN.yaml: ad4065febe7595d42675a7a4ad3f484db8ea8cd633494e230358b39d0cb88ea9
+  domain/graph/catalysis.yaml: 6b2d3e6a93e1fd0502b14db57b8a5e76f7194ca5d19be7f97e7f4a660909e630
+  domain/graph/scale-graph.yaml: abe3ed459619f4abbb1d6400361d349ff06fff087d87b0998b6534b89e64229b
+  specs/catalysis/scale-graph-0.1.0.json: 3c2fa7205a7bae5e0bbfa7d87826ff7ab7803e78536129064101c7d5a2c02006
+  tools/skills/curate-dataset/SKILL.md: 1cc2008a716cb39b604e661f1cc49f82a18fbebf86a3660b84296d92a6b0e56d
+  tools/skills/curate-source/SKILL.md: 8f3aa132d18c8fae7fb31506dfd0eff70be7e3b8c86eb05ffd353491c733a868
+  tools/skills/curate-source/references/recipes.md: f5bd8e261040913d928bd1e592a42969f5b7a4d26ea3af9721085e7691f08885
+  tools/skills/evolve-schema/SKILL.md: 49a57f7e332d04d2c93ae8abe3e989c79994606b87143952610a54a06f94e8a9
+  tools/skills/export-graph/SKILL.md: a9455ce07ce661711fc6deb4b28d6bd77c84750a3d01b18dbf4fae4cb5da29dd
+  tools/skills/map-coverage/SKILL.md: 78a26f649f1c9328dbf83ae55b7aa12703ffd95de571f30f4890c95e7aad1bef
+  tools/skills/query-graph/SKILL.md: 05d299e26b82d6dd8150b73533a8a44bb8ffe5f908105dd69a257ece6bd4e13b
+  tools/skills/scan-conflicts/SKILL.md: 2e41d4020c62f410da9437ccffa10a72f3a58d1d818ae50f98179a1492e92088
+  tools/skills/triage-feedback/SKILL.md: d7c23e5a98a7ddfa4c7d9fdaf8f354e978eea46e42fd62f4de677baef81eb6a8
+  tools/skills/triage-feedback/proposal.schema.json: b4c4044b8c0ae8ac97181ce2921ec0fdf4297d1ca7a72e5695df236d8951fd33

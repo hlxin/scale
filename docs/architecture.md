@@ -97,7 +97,7 @@ elsewhere, and those numbers name other schemas). A document pins its schema ver
 every earlier version frozen beside its manifest once a schema change has moved the schema on, so a document is read
 under the version it pins, and `scale graph migrate` moves it along the version steps when someone asks. `scale schema bump`
 freezes the version it replaces, in the pull request that changes the schema: its manifest and catalysis file in `domain/graph/frozen/` and its
-kernel in `core/graph/frozen/kernel-<version>.yaml`, all under the same version. No release has been built yet;
+kernel in `core/graph/frozen/kernel-<version>.yaml`, all under the same version. The first release is `v0.1.0`;
 the release process is in [governance/release-process.md](../governance/release-process.md).
 
 A version number names a schema only within this numbering. Each version has a **spec document**, the assembled

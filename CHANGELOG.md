@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+## v0.1.0 — 2026-10-10
+
+The first official release: schema 0.1.0 (the science kernel and the catalysis domain), the `scale-catal` tools
+and the skills, with the methanol-synthesis example.
+
 - **The Python package is `scale-catal`** (was `scale-schema`): SCALE is more than a schema. The commands are
   `scale` and `scale-catal`; the README installs it with one line.
 - **One pull request for every change; proposals retired.** Anyone, a person or an agent, suggests a change (an

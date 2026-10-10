@@ -1,8 +1,8 @@
 # Official releases
 
 There is one process for official SCALE releases. It is run by the owner (and the reviewers, once they
-join), and every step that publishes something is done by a person. No release has been built yet: the
-first will be `v0.1.0`, with schema 0.1.0.
+join), and every step that publishes something is done by a person. The first release is `v0.1.0`,
+with schema 0.1.0.
 
 Releases are not the version bump. The schema's one version moves on with every schema change, in the
 pull request that makes it; documents pin those versions directly. A release is a human step taken now and

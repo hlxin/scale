@@ -12,7 +12,7 @@ domain's schema (``specs/<domain>/scale-graph-<version>.json``, the assembled sc
 :func:`pgraph.spec_document`), listed with its sha256 in ``spec_documents``: the published artifact a reader
 binds a schema by, since a bare version number names a schema only within one numbering. ``scale graph
 verify`` checks that every version keeps the digest a release published for it (:func:`spec_digest_stability`).
-No release has been built yet: the first will be v0.1.0, with schema 0.1.0.
+The first release is v0.1.0, with schema 0.1.0.
 """
 
 from __future__ import annotations
