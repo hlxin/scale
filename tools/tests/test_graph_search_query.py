@@ -160,6 +160,20 @@ def test_search_is_exactly_the_head_of_a_full_sort():
     assert np.array_equal(kept, blocked)
 
 
+def test_rrf_with_a_filter_ranks_only_the_items_it_keeps():
+    """With a filter, rrf fuses the rankings of the items the filter keeps: an eligible match past the fusion depth
+    of all items is still found, as keyword search finds it."""
+    from scale.passages import RRF_DEPTH
+    items = [{"id": f"ex:t/r{j:05d}#evidence/0", "record": f"ex:t/r{j:05d}", "evidence": 0, "text": "copper catalyst"}
+             for j in range(RRF_DEPTH + 1)]
+    ix = Index.build(items)
+    last = items[-1]["id"]
+    only = lambda it: it["id"] == last                                              # noqa: E731
+    assert [h["id"] for h in ix.search("copper", k=5, mode="keyword", where=only)] == [last]
+    hits = ix.search("copper", k=5, mode="rrf", where=only)
+    assert [h["id"] for h in hits] == [last] and hits[0]["score"] == round(2 / 61, 4)
+
+
 def test_a_search_asks_for_at_least_one_hit(tmp_path, capsys, doc):
     """k is a whole number of at least 1: zero, a negative number or a boolean is refused with a message (it crashed
     on a match, or never returned without one); a search that matches nothing returns no hits."""

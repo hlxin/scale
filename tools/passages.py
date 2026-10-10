@@ -382,7 +382,8 @@ class Index:
     def search(self, query: str, k: int = 10, mode: str = "hybrid", where: Callable[[dict], bool] | None = None) -> list[dict]:
         """The best ``k`` items for ``query`` that ``where`` keeps. hybrid: the mean of BM25 scaled to its best and the
         cosine (negative counted as 0); vector, keyword: one of them; rrf: reciprocal rank fusion of the BM25 and
-        cosine rankings (each read to RRF_DEPTH, or twice ``k``), sum of 1 / (RRF_K + rank), at most 2 / 61."""
+        cosine rankings (each read to RRF_DEPTH, or twice ``k``, among the items ``where`` keeps), sum of
+        1 / (RRF_K + rank), at most 2 / 61."""
         np = _np()
         if not isinstance(k, int) or isinstance(k, bool) or k < 1:
             raise ScaleError(f"k is how many hits to return, a whole number of at least 1 (got {k!r})")
@@ -395,8 +396,11 @@ class Index:
         vc = self.cosine(query) if mode != "keyword" else np.zeros(n)
         if mode == "rrf":
             score = np.zeros(n)
+            # with a filter, both rankings are of the items it keeps: read to a depth, a ranking of every item could
+            # hold none of them though some match
+            keep = np.fromiter((bool(where(it)) for it in self.items), dtype=bool, count=n) if where else None
             for s in (kw, vc):
-                top = self.ranked(s, max(RRF_DEPTH, 2 * k))
+                top = self.ranked(np.where(keep, s, 0.0) if where else s, max(RRF_DEPTH, 2 * k))
                 score[top] += 1.0 / (RRF_K + np.arange(1, len(top) + 1))
         elif mode == "hybrid":
             kwn = kw / kw.max() if kw.max() > 0 else kw
