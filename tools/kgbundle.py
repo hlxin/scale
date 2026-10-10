@@ -16,7 +16,11 @@ The mapping, and what it cannot carry:
 * Links become edges with the canonical id ``e:sha256(type|source|target|source_id)[:16]``. The format
   requires every edge except REPORTED_IN to carry verbatim evidence from one source: a link
   with quotes from several sources is split into one edge per source; a link with no quote is
-  not exported and is listed in the export report. A quote withheld under the copyright cap (its digest and length
+  not exported and is listed in the export report. Two links of one type between the same records with evidence
+  from one source share that edge id: with the same values the second adds its evidence; with other values (a
+  second addition of a reagent in another amount) the second is not exported and is listed in the export report
+  (``parallel_links_not_exported``: by type, and each link left out with the one kept), so no value is merged under
+  another's. A quote withheld under the copyright cap (its digest and length
   in the evidence note) is evidence in format 1.1.0: ``quote_withheld`` ``{sha256, chars, normalization:
   scale-match-text-1, reason: copyright}`` (a withheld transcription likewise), so a link resting only on withheld
   quotes is still an edge; one longer than the format's 600 characters is left out (``withheld_too_long``), and a source
@@ -1005,13 +1009,22 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
             et["properties"]["source_status"] = SOURCE_STATUS
         for sid in sorted(ev):
             eid = canonical_edge_id(e["type"], s, t, sid)
+            props = {**base, "scale_id": e["id"], "_evidence": ev[sid], "source_paper_ids": [sid], "_statement": kind,
+                     **({"metadata_only": True} if metadata_only else {}),
+                     **({"source_status": _resting(rest[e["id"]])} if e["id"] in rest else {})}
             if eid in links:
-                links[eid]["props"]["_evidence"] += [x for x in ev[sid] if x not in links[eid]["props"]["_evidence"]]
+                # one edge per type, ends and source: a second link there with the same values adds its evidence; one
+                # with other values (a second addition of a reagent, another amount) cannot be carried beside the
+                # first, so it is left out and listed, never merged under the first one's values
+                have = links[eid]["props"]
+                if _values(have) == _values(props):
+                    have["_evidence"] += [x for x in ev[sid] if x not in have["_evidence"]]
+                else:
+                    par = report.setdefault("parallel_links_not_exported", {"by_type": {}, "links": []})
+                    par["by_type"][e["type"]] = par["by_type"].get(e["type"], 0) + 1
+                    par["links"].append({"left_out": e["id"], "kept": have["scale_id"], "source_id": sid})
                 continue
-            links[eid] = {"id": eid, "type": e["type"], "source": s, "target": t,
-                          "props": {**base, "scale_id": e["id"], "_evidence": ev[sid], "source_paper_ids": [sid],
-                                    "_statement": kind, **({"metadata_only": True} if metadata_only else {}),
-                                    **({"source_status": _resting(rest[e["id"]])} if e["id"] in rest else {})}}
+            links[eid] = {"id": eid, "type": e["type"], "source": s, "target": t, "props": props}
     pubs = {n["props"].get("doi") or n["props"].get("source_id"): n["id"] for n in nodes if n["label"] == "Publication"}
     for nid, cited in sorted(reported.items()):
         if not cited:
@@ -1261,6 +1274,11 @@ def _semver_after(a: str, b: str | None) -> bool:
         return tuple(int(x) for x in m.groups()) if m else None
     ka, kb = key(a), key(b)
     return ka is not None and (kb is None or ka > kb)
+
+
+def _values(props: dict) -> dict:
+    """What an edge states, apart from its evidence and the record it comes from."""
+    return {k: v for k, v in props.items() if k not in ("_evidence", "source_paper_ids", "scale_id")}
 
 
 def _changelog(doc: dict, version: str, previous: Path | None, lineage: dict) -> str:
