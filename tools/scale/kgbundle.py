@@ -71,10 +71,8 @@ The mapping, and what it cannot carry:
 Provenance and value detail the kg-bundle format has a place for:
 
 * A link's ``confidence`` (the curator's confidence in the extraction, 0 to 1) becomes ``_confidence``, the format's
-  extraction fidelity. Where a document carries them (keys under the registered ``alchemic`` extension prefix, owned
-  by Alchemic AI, which SCALE neither defines nor asks curators to write), a record's or link's
-  ``_alchemic_extraction`` becomes ``_extraction`` and the graph header's ``_alchemic_producer`` becomes the
-  bundle's ``producer``. None of them names a person: SCALE records no curator attribution here.
+  extraction fidelity. The bundle's ``producer`` names SCALE's curation agents; no person is named: SCALE records no
+  curator attribution here.
 * An evidence item keeps its ``evidence_type`` (an ECO id: ECO:0000033 for a result the source cites from another
   work). Its locator gives the page and the rest as ``section``, the table or figure the locator names when the
   evidence is a table or figure reading (``kind``), and, for a source whose text the bundle ships under ``text/``,
@@ -762,8 +760,6 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
             continue
         props = {"name": p.get("name") or n["id"].rsplit("/", 1)[-1], "scale_id": n["id"],
                  **conv_props(n["label"], p, False, ("node", gid[n["id"]]))}
-        if isinstance(p.get("_alchemic_extraction"), dict):     # how the record was produced (the bundle's _extraction)
-            props["_extraction"] = p["_alchemic_extraction"]
         props.update(own_access(n, node_types[n["label"]]["properties"]))
         if n["id"] in rest:
             props["source_status"] = _resting(rest[n["id"]])
@@ -830,8 +826,6 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
             et["properties"]["scale_status"] = status_def
         if isinstance(ep.get("confidence"), (int, float)) and 0 <= ep["confidence"] <= 1:
             base["_confidence"] = ep["confidence"]           # extraction fidelity, as the format's _confidence means it
-        if isinstance(ep.get("_alchemic_extraction"), dict):
-            base["_extraction"] = ep["_alchemic_extraction"]
         kind, inferred = statement(e)
         if inferred:
             tally(("link", e["id"]), "statement_inferred", kind)
@@ -994,11 +988,6 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
         if n["label"] == "Publication":
             lic[n["props"].get("license", "not stated")] = lic.get(n["props"].get("license", "not stated"), 0) + 1
     producer = {"agent": "SCALE curation agents (curate-source skill)", "models": [], "prompt_version": "curate-source"}
-    ext_producer = g0.get("_alchemic_producer")
-    if isinstance(ext_producer, dict):            # the run that produced the document, as its header records it
-        producer = {**{k: v for k, v in ext_producer.items() if v not in (None, "")},
-                    "agent": ext_producer.get("agent") or producer["agent"],
-                    "models": list(ext_producer.get("models") or [])}
     if shipped:
         n_off = sum(1 for x in kept_nodes + list(links.values()) for ev in x["props"].get("_evidence") or []
                     if "char_start" in ev["locator"])

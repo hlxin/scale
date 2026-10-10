@@ -72,9 +72,7 @@ def build() -> dict:
     ]
     links = [
         {"id": f"{T}/link/uses", "type": "USES_CATALYST", "source": f"{T}/test/1", "target": f"{T}/sample/cu",
-         "props": {"status": "asserted", "confidence": 0.9, "origin": "synthetic", "evidence": [ev("p. 2", Q_SEL)],
-                   "_alchemic_extraction": {"method": "llm", "model": "a-model", "prompt_version": "curate-source 0.1.0",
-                                            "run_id": "run-1"}}},
+         "props": {"status": "asserted", "confidence": 0.9, "origin": "synthetic", "evidence": [ev("p. 2", Q_SEL)]}},
         {"id": f"{T}/link/formulation", "type": "HAS_FORMULATION", "source": f"{T}/sample/cu", "target": f"{T}/catalyst/cu",
          "props": {"origin": "synthetic", "evidence": [ev("p. 2", Q_SEL)]}},
         {"id": f"{T}/link/supports", "type": "SUPPORTS", "source": f"{T}/test/1", "target": f"{T}/claim/active",
@@ -83,8 +81,7 @@ def build() -> dict:
     doc = {"directed": True, "multigraph": True,
            "graph": {"schema": "scale-graph", "schema_version": HEAD_VERSION, "graph_id": f"{T}/graph",
                      "title": "Lineage and provenance of a kg-bundle export (synthetic)", "data_status": "synthetic_example",
-                     "follows_domains": ["catalysis"], "stewardship": {"access": "public"},
-                     "_alchemic_producer": {"agent": "a curation agent", "models": ["a-model"], "prompt_version": "p1"}},
+                     "follows_domains": ["catalysis"], "stewardship": {"access": "public"}},
            "nodes": nodes, "links": links}
     for nid, srcs in sorted(pgraph.expected_reported_in(doc).items()):
         for s in sorted(srcs):
@@ -102,7 +99,7 @@ def _by_scale(bundle):
     return {x["props"].get("scale_id"): x for x in g["nodes"] + g["links"] if x["props"].get("scale_id")}
 
 
-def test_the_export_carries_statement_kinds_status_confidence_and_extraction_runs(tmp_path, head):
+def test_the_export_carries_statement_kinds_status_and_confidence(tmp_path, head):
     doc = build()
     assert pgraph.validate(doc, head).errors == []
     doc["links"][1]["props"]["statement_kind"] = "assumption"      # a planned kernel property: read when recorded
@@ -113,18 +110,14 @@ def test_the_export_carries_statement_kinds_status_confidence_and_extraction_run
     assert uses["_statement"] == "observation" and uses["scale_status"] == "asserted"
     assert sup["_statement"] == "hypothesis" and sup["scale_status"] == "disputed"      # never a plain conclusion
     assert uses["_confidence"] == 0.9 and "confidence" not in uses
-    assert uses["_extraction"] == {"method": "llm", "model": "a-model", "prompt_version": "curate-source 0.1.0", "run_id": "run-1"}
+    assert "_extraction" not in uses
     rep = m["export_report"]
     assert rep["statement_inferred"] == {"hypothesis": 1, "observation": 1}            # the recorded kind is not counted
-    assert m["producer"] == {"agent": "a curation agent", "models": ["a-model"], "prompt_version": "p1"}
+    assert m["producer"]["agent"].startswith("SCALE curation agents") and m["producer"]["models"] == []   # no model claimed
     schema = json.loads((tmp_path / "b/kg/schema.json").read_text())
     st = schema["edge_types"]["SUPPORTS"]["properties"]["scale_status"]
     assert st["type"] == "enum" and "refuted" in st["values"]
     assert "_confidence" not in schema["edge_types"]["USES_CATALYST"]["properties"]   # a format property, not declared
-    # without a header extension the producer is SCALE's curation agents, with no model claimed
-    plain = copy.deepcopy(build())
-    plain["graph"].pop("_alchemic_producer")
-    assert kgbundle.export(plain, head, tmp_path / "p", "plain", created="2026-10-06T00:00:00Z")["producer"]["models"] == []
     v = _validator()
     if v:
         kgbundle.seal(tmp_path / "b")

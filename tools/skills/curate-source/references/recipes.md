@@ -87,8 +87,7 @@ A value the experimenter set or the author specified is not a measurement.
 
 ## Reactor, bed and catalyst-body keys
 
-Map keys, so a value can be found under one name. Most follow the quantity names of hosts such as the Alchemic
-platform (`internal_diameter`, `bed_length`, `bed_volume`, `dilution_ratio`, `particle_size`, `pellet_diameter`,
+Map keys, so a value can be found under one name. Most follow quantity names already in use on data platforms (`internal_diameter`, `bed_length`, `bed_volume`, `dilution_ratio`, `particle_size`, `pellet_diameter`,
 `pellet_length`, `sieve_size`, `bulk_density`, `void_fraction`); `length`, `wall_material`, `recycle_ratio` and
 `purge_fraction` are SCALE's own suggestions, which no host defines yet.
 

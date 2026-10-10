@@ -7,10 +7,6 @@ institutions:
     institution_kind: university
     country: US
     note: add the ROR id
-  - id: scale:org/alchemic-ai
-    name: Alchemic AI
-    institution_kind: company
-    note: add the ROR id if one exists
   - id: scale:org/arpa-e
     name: Advanced Research Projects Agency-Energy (ARPA-E)
     institution_kind: funding_agency
@@ -25,8 +21,6 @@ projects:
     note: add the award id and dates
     participants:
       - member: scale:org/virginia-tech
-        role: data_provider
-      - member: scale:org/alchemic-ai
         role: data_provider
   - id: scale:project/p2h
     name: P2H
