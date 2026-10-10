@@ -32,7 +32,7 @@ a person:
 - approving and merging a pull request (one reviewer, the person who suggested the change included; the owner's
   own pull requests under the bootstrap rule until another reviewer joins);
 - filling a reviewer seat (a pull request that replaces a placeholder with a real person who agreed);
-- handing a suggestion to the agent (the label `agent`, a `@scale-agent` comment, or a manual run);
+- @scale-agents, which take up every suggestion on their own (or a manual run);
 - updating a data repository to a new schema version (`scale kg update`) and merging that change;
 - building an official release (`scale release build vX.Y.Z`), tagging it and approving the `pypi`
   deployment;

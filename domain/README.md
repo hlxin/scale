@@ -212,7 +212,7 @@ It runs at the repository root only, as part of `scale check`.
   or 💬 next to a record in a catalogue (`scale catalogue <document>`).
 - **Curate a source** into an example, following `tools/skills/curate-source/SKILL.md` (public, open-access
   sources and short, capped quotes only).
-- **Suggest a schema change** on an issue and label it `agent`, or make it in a pull request that edits
+- **Suggest a schema change** on an issue (@scale-agents take it up), or make it in a pull request that edits
   `graph/catalysis.yaml` and raises the one version (`scale schema bump`;
   `tools/skills/evolve-schema/SKILL.md`). It needs one approval and passing checks.
 - **Add a competency question** in `competency/`: a graph query plan, the public examples it runs on

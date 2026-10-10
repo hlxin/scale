@@ -1,7 +1,7 @@
 # Catalysis roadmap
 
 Open work recorded in this repository, as of schema 0.1.0 (2026-10-08). Nothing here is approved until the
-pull request that makes it is. Each item is a suggestion an agent can take up (label its issue `agent`).
+pull request that makes it is. Each item is a suggestion @scale-agents can take up (open an issue for it).
 
 ## Schema changes to make
 

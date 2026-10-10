@@ -6,8 +6,8 @@ policy_version: 4
 principles:
   - Anyone, a person or an agent, may suggest a change (an issue, a comment) or open a pull request. Every change,
     whatever it touches, goes through one pull request.
-  - Agents do the work. A suggestion labelled `agent` (or a collaborator's `@scale-agent` comment) starts the
-    scale-agent workflow, which implements the change, runs the checks and opens a pull request under its own
+  - Agents do the work. @scale-agents take up every suggestion on their own, with no tag or label; a coordinator
+    decides and plans, specialists implement, a verifier checks, and the team opens a pull request under its own
     GitHub identity (the Claude GitHub App), never under a person's account.
   - One person approves and merges. Any reviewer listed below may approve, including the person who suggested the
     change; GitHub does not let the author of a pull request approve it, so whoever opened it needs another

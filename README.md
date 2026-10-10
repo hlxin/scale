@@ -126,8 +126,8 @@ they do not hold. Re-curate such documents under this numbering; do not validate
 
 Open an issue to comment or suggest in plain language ([comment form](https://github.com/hlxin/scale/issues/new?template=comment.yml),
 [contribution form](https://github.com/hlxin/scale/issues/new?template=contribution.yml)), or a pull request
-on a short-lived branch. A collaborator hands an issue to the agent (label `agent`, or a comment `@scale-agent …`),
-which prepares the pull request and credits the issue's author.
+on a short-lived branch. `@scale-agents` take up every issue on their own,
+prepare the pull request and credit the issue's author.
 
 **How the schema evolves.** A schema change is a pull request like any other: it edits the schema files and
 raises the version in the same pull request (`scale schema bump`, checked by `scale schema check`); like every

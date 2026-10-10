@@ -29,15 +29,15 @@ request that also carries everything the change needs. Nothing is applied after 
 the reviewer approved ([governance/GOVERNANCE.md](../governance/GOVERNANCE.md)).
 
 ```
-gap or request (an issue, ─► the agent (label `agent` ─► pull request: edit · tests ·  ─► 1 approval ─► merge ─► data repositories ─► release
-a comment, a corpus run)     or @scale-agent) or anyone   scale schema bump · check       (any reviewer)            update (one        (a person)
+gap or request (an issue, ─► @scale-agents (on     ─► pull request: edit · tests ·  ─► 1 approval ─► merge ─► data repositories ─► release
+a comment, a corpus run)     their own) or anyone   scale schema bump · check       (any reviewer)            update (one        (a person)
                                                           (CI writes the summary)                                  command)
 ```
 
 1. **Gap or request.** A curator records a `missing_concept` gap; `scale gap issue gaps/GAP-….json` renders the
    issue body (dry run; `--submit` files it with `gh`, a human action). A comment, or a `gap-report` issue (a
-   sample of a new corpus curated against the current schema), starts the same way. A collaborator hands it to
-   the agent (the label `agent`, or `@scale-agent …`), or anyone opens the pull request.
+   sample of a new corpus curated against the current schema), starts the same way. @scale-agents take it up on
+   their own, or anyone opens the pull request.
 2. **Edit and test.** The kernel or the catalysis file is edited directly: additive operations, deprecation
    instead of deletion, `maturity: provisional` for new concepts. A fixture uses every label and edge type the
    change adds, and a counterexample in `domain/tests/fixtures/invalid/` fails for its stated reason. The

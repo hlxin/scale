@@ -45,10 +45,12 @@ def test_the_repository_policy_has_one_reviewer_and_two_placeholders():
     assert [m["github"] for m in placeholders(pol)] == ["TODO-reviewer-2", "TODO-reviewer-3"]
 
 
-def test_who_may_start_the_agent_and_what_workflows_may_write():
-    """The agent starts on the label `agent`, a collaborator's `@scale-agent` comment or a manual run from main; its
-    job token only reads the contents (it pushes with the Claude GitHub App's token). No workflow asks for
-    contents: write. The main ruleset needs one approval, no code owner, and lets only the repository admin bypass."""
+def test_who_may_start_the_agents_and_what_workflows_may_write():
+    """@scale-agents start on their own on every new issue, comment and review (no label or tag), never on a bot's
+    event, and by hand only from main; the job token only reads the contents (the team pushes with the Claude GitHub
+    App's token); the coordinator's instructions and every specialist's role are installed for the run, the verifier
+    among them and unable to edit. No workflow asks for contents: write. The main ruleset needs one approval, no code
+    owner, and lets only the repository admin bypass."""
     import json
     rules = json.loads((REPO / "governance/github/ruleset-main.json").read_text())
     assert {(a["actor_type"], a["actor_id"], a["bypass_mode"]) for a in rules["bypass_actors"]} == {("RepositoryRole", 5, "always")}
@@ -57,20 +59,37 @@ def test_who_may_start_the_agent_and_what_workflows_may_write():
     checks = next(r for r in rules["rules"] if r["type"] == "required_status_checks")["parameters"]
     assert [c["context"] for c in checks["required_status_checks"]] == [
         "test (3.10)", "test (3.11)", "test (3.12)", "test (3.13)", "package", "specification-changes"]
-    agent = load_yaml(REPO / ".github/workflows/scale-agent.yml")
-    assert set(agent["on"]) == {"issues", "issue_comment", "workflow_dispatch"}
-    job = agent["jobs"]["agent"]
+    wf = REPO / ".github/workflows/scale-agents.yml"
+    agents = load_yaml(wf)
+    assert agents["on"] == {"issues": {"types": ["opened", "reopened"]}, "issue_comment": {"types": ["created"]},
+                            "pull_request_review": {"types": ["submitted"]},
+                            "workflow_dispatch": agents["on"]["workflow_dispatch"]}
+    job = agents["jobs"]["agents"]
     cond = " ".join(job["if"].split())
-    assert "github.event.label.name == 'agent'" in cond and "'@scale-agent'" in cond
-    assert 'fromJSON(\'["OWNER","MEMBER","COLLABORATOR"]\'), github.event.comment.author_association' in cond
-    assert "github.ref == 'refs/heads/main'" in cond and job["permissions"]["contents"] == "read"
+    assert cond == "github.event.sender.type != 'Bot' && (github.event_name != 'workflow_dispatch' || github.ref == 'refs/heads/main')"
+    assert job["permissions"]["contents"] == "read"
     action = next(s for s in job["steps"] if str(s.get("uses", "")).startswith("anthropics/claude-code-action"))
-    assert action["with"]["trigger_phrase"] == "@scale-agent" and action["with"]["label_trigger"] == "agent"
+    assert "trigger_phrase" not in action["with"] and "label_trigger" not in action["with"]
+    assert "Task," in action["with"]["claude_args"] and "git push origin agent/" in action["with"]["claude_args"]
+    assert "github.event.issue.body" not in wf.read_text() and "github.event.comment.body" not in wf.read_text()
+    roles = {p.stem: load_yaml_front(p) for p in sorted((REPO / ".github/scale-agents/roles").glob("*.md"))}
+    assert set(roles) == {"scale-curator", "scale-schema", "scale-analyst", "scale-engineer", "scale-verifier"}
+    assert all(r["name"] == n for n, r in roles.items())
+    assert not {"Edit", "Write"} & {t.strip() for t in roles["scale-verifier"]["tools"].split(",")}
+    assert not {"Edit", "Write"} & {t.strip() for t in roles["scale-analyst"]["tools"].split(",")}
+    for name in roles:
+        assert f"`{name}`" in (REPO / ".github/scale-agents/instructions.md").read_text(), name
+    assert not (REPO / ".github/workflows/scale-agent.yml").exists()
     assert not (REPO / ".github/workflows/apply-proposals.yml").exists()
-    assert not (REPO / ".github/workflows/proposal-check.yml").exists()
     for f in sorted((REPO / ".github/workflows").glob("*.yml")):
         perms = [load_yaml(f).get("permissions") or {}] + [j.get("permissions") or {} for j in load_yaml(f)["jobs"].values()]
         assert all(p.get("contents") != "write" for p in perms), f.name
+
+
+def load_yaml_front(path):
+    """The YAML front matter of a role file."""
+    import yaml
+    return yaml.safe_load(path.read_text().split("---\n")[1])
 
 
 def _two_versions(tmp_path):

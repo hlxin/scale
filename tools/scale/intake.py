@@ -15,7 +15,7 @@ Anyone comments through GitHub issues, pull-request comments or discussions. On 
 4. **digest** — render one feedback digest (and optionally publish it as an issue).
 
 Nothing is decided in the digest. A person acts on a topic by opening a pull request (or by labelling the
-issue `agent`, and the scale-agent workflow, .github/workflows/scale-agent.yml, opens one); the decision is the pull
+@scale-agents, .github/workflows/scale-agents.yml, open one on their own); the decision is the pull
 request's approving review (governance/review-policy.yaml). Agents never decide. Writing to GitHub is dry-run unless ``--publish`` is given.
 """
 
@@ -347,8 +347,8 @@ def rule_proposal(c: dict) -> dict:
     opts = {
         "missing_concept": [
             O("A", "change_schema", "Change the schema in a pull request (tools/skills/evolve-schema): the edit, fixtures, counterexamples, the version raised, affected queries.",
-              "New concepts enter as provisional; the pull request needs one person's approving review (label the issue "
-              "`agent` and the scale-agent workflow opens it)."),
+              "New concepts enter as provisional; the pull request needs one person's approving review "
+              "(@scale-agents open it on their own)."),
             O("B", "map_to_existing", "Show that an existing label, edge type or property (or an external vocabulary term) already expresses it" +
               (f" (labels mentioned: {', '.join(refs['classes'])})" if refs.get("classes") else "") + "; document how to use it.",
               "No schema change; curation guidance updated."),
@@ -434,8 +434,8 @@ def render_digest(queue: dict, proposals: list[dict], repo: str, since: str | No
     L = [f"# SCALE feedback digest — {queue['generated_at'][:10]}", "",
          f"Feedback since `{since or 'the beginning'}`: **{len(queue['items'])}** items in **{len(queue['clusters'])}** topics; "
          f"**{len(need)}** may need a change.", "",
-         "**How to act on a topic:** open a pull request that takes one of its options (or label the issue `agent`, or "
-         "comment `@scale-agent` with the option, and the scale-agent workflow opens a pull request). Every "
+         "**How to act on a topic:** open a pull request that takes one of its options (or comment on the issue with the "
+         "option, and @scale-agents open a pull request on their own). Every "
          "change is decided by an approving review of its pull request (governance/review-policy.yaml). Agents "
          "prepared these options; they do not decide.", ""]
     for p in need + info:

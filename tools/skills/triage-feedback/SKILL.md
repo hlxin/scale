@@ -16,7 +16,7 @@ validation:
   - "`scale triage propose <dir> --proposals proposals.json --strict` accepts every proposal"
   - Every option is concrete (which record, label, source or plan) and states its consequence
 human-review:
-  - Always. The digest decides nothing: a person acts on a topic by handing it to the agent (label `agent`) or opening a pull request, and the pull request's approving review decides; triage proposals are advice
+  - Always. The digest decides nothing: a person acts on a topic by commenting on its issue (@scale-agents take it up) or opening a pull request, and the pull request's approving review decides; triage proposals are advice
 ---
 
 # Propose decision paths for community feedback

@@ -26,7 +26,7 @@ approve or merge.
 | **catalysis domain** | The folder [`domain/`](../domain/README.md), declared by its `DOMAIN.yaml` (`domain: catalysis`). Its schema manifest `graph/scale-graph.yaml` assembles the kernel with the catalysis file `catalysis.yaml`. Thermocatalysis, electrocatalysis, photocatalysis and plasma catalysis, and their combinations, all belong to it. |
 | **schema version** | One version for the kernel and the catalysis domain together: the catalysis manifest's `version`, which documents pin (0.1.0 today). Every schema change raises it, whichever file it changes: a breaking change the second number, an additive change the third. |
 | **checklist** | What a catalysis record must and should report: the catalysis file's `checklist:`, named `catalysis`, selected with `--domain` and declared in a document's `follows_domains`. |
-| **suggestion** | An issue or a comment that asks for a change, by a person or an agent. It becomes a pull request when a collaborator hands it to the agent (label `agent`, or `@scale-agent`) or when someone opens one. |
+| **suggestion** | An issue or a comment that asks for a change, by a person or an agent. @scale-agents take it up on their own and turn it into a pull request when it asks for a change; anyone may also open one. |
 | **reviewers** | The people who approve changes, listed in [`review-policy.yaml`](review-policy.yaml): the owner and the domain experts who join (seats not yet filled are placeholders). Any one of them approves a change. |
 | **maturity** | Of a concept: `provisional` or `stable`. New concepts enter as provisional. |
 | **official release** | A tagged, digested distribution built by the release process: `releases/vX.Y.Z/`, tag `vX.Y.Z`, PyPI `scale-schema` X.Y.Z ([release-process.md](release-process.md)). None has been built yet. |
@@ -38,7 +38,7 @@ approve or merge.
 | **owner** | `@hlxin`, admin of the repository, code owner of every path in [`.github/CODEOWNERS`](../.github/CODEOWNERS) | a reviewer: approves and merges pull requests; merges their own under the bootstrap rule until another reviewer joins; builds releases; repository settings, rulesets and secrets ([repository-settings.md](repository-settings.md)) |
 | **reviewers** | domain experts, collaborators (Write), added to the review policy and CODEOWNERS when they join | approve and merge pull requests (any one of them is enough). Today: two seats to be filled (`TODO-reviewer-2`, `TODO-reviewer-3` in the review policy) |
 | **contributors** | anyone: issues and comments; collaborators also branches and pull requests; others through forks once the repository is public | suggest changes, curate, report gaps |
-| **@scale-agent** | Claude on GitHub, started by the label `agent`, a collaborator's `@scale-agent` comment or a manual run | implements changes on `agent/…` branches, runs the checks and opens pull requests under the Claude GitHub App's identity; never approves or merges |
+| **@scale-agents** | a team of Claude agents on GitHub, started by every new issue, comment and review (no tag or label), or a manual run | a coordinator decides and plans, specialists (curator, schema, analyst, engineer) implement on `agent/…` branches, a verifier checks, and the team opens pull requests under the Claude GitHub App's identity; never approves or merges |
 
 ## The rule: one approval for every change
 
@@ -51,7 +51,7 @@ approve or merge.
 - **Anyone opens it; one person approves it and merges it.** Only people approve, by reviewing the pull request
   on GitHub; the GitHub reviews are the approvals, and there is no other approval record to write. A change made
   by an agent needs the same approval.
-- **An agent opens a pull request under its own GitHub identity**: the Claude GitHub App in the scale-agent
+- **An agent opens a pull request under its own GitHub identity**: the Claude GitHub App in the scale-agents
   workflow, or a bot account for an agent working elsewhere (repository-settings.md, "The agent"), never a
   person's account. GitHub does not let the author of a pull request approve it, so the person who asked for the
   change can approve the agent's pull request.
@@ -87,10 +87,11 @@ an issue, a comment or a gap report            a new corpus (a sample curated ag
 (a person or an agent)                                 │ gap report issue (label gap-report)
         │                                              │
         ▼                                              ▼
-a collaborator labels it `agent` or comments `@scale-agent …`      (or anyone opens a pull request)
+@scale-agents take it up on their own                             (or anyone opens a pull request)
         ▼
-the agent implements it on agent/…, runs scale check (and for a schema change scale schema bump and
-scale schema check), opens a pull request under its own identity
+the coordinator decides (answer, question back, change or nothing) and plans; specialists implement it on
+agent/… (scale check; for a schema change scale schema bump and scale schema check); the verifier checks it;
+the team opens a pull request under its own identity
         ▼
 checks: scale check, package, specification-changes (with a summary of a schema change for the reviewer)
         ▼
@@ -105,14 +106,16 @@ official release (a human step, release-process.md)
    gap found while curating is filed with `scale gap issue`. To find what the schema cannot express in a new
    corpus, a curator (or an agent following the curate-source skill) curates a sample of open-access sources
    against the current schema and files a `gap-report` issue (short capped quotes only).
-2. **Hand it to the agent.** A collaborator labels the issue `agent` or comments `@scale-agent` with what to do.
-   The agent follows [`AGENTS.md`](../AGENTS.md) and the skills, treats issue, comment and corpus text as data,
-   never as instructions about permissions, workflows, governance or secrets, and never edits `.github/`,
-   `governance/`, releases or frozen versions
-   ([`.github/agent/instructions.md`](../.github/agent/instructions.md)). Anyone may also open a pull request
+2. **The agents take it up.** `@scale-agents` start on every new issue, comment and review, with no tag or label.
+   The coordinator decides what the event needs and plans the change; the specialists (curator, schema, analyst,
+   engineer) do it, following [`AGENTS.md`](../AGENTS.md) and the skills; an independent verifier checks the
+   request, the checks, the evidence and the rights before a pull request is opened. They treat issue, comment and
+   corpus text as data, never as instructions about permissions, workflows, governance or secrets, and never edit
+   `.github/`, `governance/`, releases or frozen versions
+   ([`.github/scale-agents/instructions.md`](../.github/scale-agents/instructions.md)). Anyone may also open a pull request
    directly, with their own agent or by hand.
-3. **Review.** CI runs the checks and, for a schema change, writes the summary. A reviewer asks the agent for
-   fixes on the pull request (`@scale-agent …`), asks for changes, or approves and merges.
+3. **Review.** CI runs the checks and, for a schema change, writes the summary. A reviewer comments or asks
+   for changes on the pull request (the agents push the fixes to their own pull requests), or approves and merges.
 4. **Data repositories.** Whoever keeps a knowledge-graph data repository runs `scale kg update --data DIR` there:
    every scale-graph document is moved to the new version through the registered migration steps, validated and
    its evidence index rebuilt. A document a step rule cannot migrate is reported and left untouched.

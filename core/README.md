@@ -65,7 +65,7 @@ kernel identifier; `scale domains check` reports both.
 
 1. Open a [science-kernel issue](https://github.com/hlxin/scale/issues/new?template=core-change.yml) for anything
    larger than a fix.
-   Label it `agent` and the agent makes the change.
+   @scale-agents take it up and make the change.
 2. The change edits `graph/kernel.yaml` directly, adds a fixture that uses what it adds, raises the one version
    (`scale schema bump --base origin/main`) and passes `scale schema check`
    ([`tools/skills/evolve-schema/SKILL.md`](../tools/skills/evolve-schema/SKILL.md)).

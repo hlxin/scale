@@ -94,7 +94,7 @@ The workflow token is read-only unless a workflow asks for more in its `permissi
 |---|---|---|
 | `ci` | every pull request and push to `main` | nothing |
 | `triage` | weekly, or started by hand | nothing (it opens a digest issue with the workflow token, `issues: write`) |
-| `scale-agent` | an issue labelled `agent`, a collaborator's `@scale-agent` comment, or by hand from `main` | the secret `ANTHROPIC_API_KEY` and the Claude GitHub App (below) |
+| `scale-agents` | every new issue, comment and pull-request review (not a bot's), or by hand from `main` | the secret `ANTHROPIC_API_KEY` and the Claude GitHub App (below) |
 | `publish` | a published GitHub release | the `pypi` environment and the trusted publisher (section 6); inert until configured |
 
 ## 4. Secrets
@@ -102,16 +102,17 @@ The workflow token is read-only unless a workflow asks for more in its `permissi
 No secret is needed for the checks of a pull request. One is optional, for the agent. A repository secret can be
 read by any workflow run from a branch, so add it only when the agent is used, and only while every collaborator is
 trusted with it; once the repository is public or on a plan with environment protection rules, move it into an
-environment whose deployment policy is `main` only (`agent`) and name it in the job (`environment: agent`), so that
+environment whose deployment policy is `main` only (`agents`) and name it in the job (`environment: agents`), so that
 only the reviewed workflow file on `main` can read it.
 
-### The agent
+### The agents
 
-`@scale-agent` (Claude on GitHub, `anthropics/claude-code-action`) starts when an issue is labelled `agent` (people
-with Triage access or more can label), when an owner, member or collaborator of the repository comments
-`@scale-agent …` on an issue or a pull request, or when a person with write access runs it by hand (Actions →
-scale-agent → Run workflow). Comments by anyone else do not start it. Create the `agent` label (section 2,
-`.github/labels.yml`). To use it, install the
+`@scale-agents` (a team of Claude agents on GitHub, `anthropics/claude-code-action`) start on their own on every new
+issue, comment and pull-request review, and when a person with write access runs the workflow by hand (Actions →
+scale-agents → Run workflow); events from bots, the agents' own comments included, are skipped. No label or tag is
+needed. Every run uses the API key, so once the repository is public and anyone can open issues, decide whether to
+keep this for everyone or limit it to collaborators (a condition on `author_association` in the job). To use it,
+install the
 **Claude GitHub App** (https://github.com/apps/claude) on `hlxin/scale` (contents, issues and pull requests,
 read and write) and set the API key:
 
@@ -224,7 +225,7 @@ Publish to PyPI only with the first release ([release-process.md](release-proces
 - [ ] repository created; wiki off; labels created
 - [ ] `codeowners/errors` returns no errors
 - [ ] workflow token read-only; Actions may not approve pull requests
-- [ ] `ANTHROPIC_API_KEY` and the Claude GitHub App only when the agent is used; the `agent` label created
+- [ ] `ANTHROPIC_API_KEY` and the Claude GitHub App only when the agents are used
 - [ ] `main` ruleset applied (one approval, no code-owner requirement, required checks, the admin role as the only bypass);
       the GitHub Actions app is not a bypass actor
 - [ ] `v*` tag ruleset; `pypi` environment (`v*` tags); PyPI trusted publisher

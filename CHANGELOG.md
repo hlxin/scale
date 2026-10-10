@@ -13,8 +13,11 @@
   what is added and a CHANGELOG line, and writes a summary for the reviewer. Removed: the proposal folders
   (`core/proposals/`, `domain/proposals/`), `scale proposal …`, `scale review status`, `scale ci proposal-check |
   proposals`, `scale release build --proposal`, the apply-proposals and proposal-check workflows, the `APPLY_TOKEN`
-  secret and decision records per change (`docs/decisions/` keeps decisions about the project). The scale-agent
-  workflow now starts on the issue label `agent` or a collaborator's `@scale-agent` comment as well as by hand. The
+  secret and decision records per change (`docs/decisions/` keeps decisions about the project). `@scale-agent`
+  becomes `@scale-agents` (`.github/workflows/scale-agents.yml`), a team that starts on its own on every new issue,
+  comment and pull-request review, with no tag or label: a coordinator decides what an event needs and plans, the
+  specialists curator, schema, analyst and engineer implement (`.github/scale-agents/roles/`), an independent
+  verifier checks the request, the checks, the evidence and the rights, and the team opens the pull request. The
   `main` ruleset no longer requires `proposal-check` (re-apply `governance/github/ruleset-main.json`). Review policy
   version 4.
 - **A knowledge-graph bundle's schema is the vocabulary: scale-catal 0.1.0.** `kg/schema.json` is no longer the

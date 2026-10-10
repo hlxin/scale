@@ -15,9 +15,9 @@ Anyone can suggest a change or open a pull request. Agents do most of the work. 
 
 ```
 a suggestion (an issue or a comment), by a person or an agent         or a pull request opened directly
-        │  a collaborator labels the issue `agent`, or comments `@scale-agent …`
+        │  @scale-agents take it up on their own (no tag, no label)
         ▼
-an agent implements it on a branch, runs the checks and opens a pull request
+the agents decide, implement it on a branch, verify it and open a pull request
         │  (any change: a schema change, a curation, a question, a tool, documentation)
         ▼
 CI runs the checks; for a schema change it also writes a summary for the reviewer
@@ -28,10 +28,11 @@ ONE person approves and merges (any reviewer, the person who suggested it includ
 
 - **Suggest.** Open an issue (the forms below) or comment on one, in plain language. You do not need to know the
   schema, the code or Git.
-- **Let an agent do it.** A collaborator labels the issue `agent`, or comments `@scale-agent` with what to do. The
-  agent ([AGENTS.md](AGENTS.md), the skills in `tools/skills/`) makes the change, its tests and, for a schema
-  change, the version raise, runs the checks and opens a pull request under its own GitHub identity. Ask for
-  fixes by commenting `@scale-agent …` on that pull request. Your own AI agent may do the same on your machine.
+- **The agents do it.** `@scale-agents` take up every new issue and comment on their own: a coordinator decides
+  whether it needs an answer, a question back or a change, and for a change hands the work to specialists
+  (curator, schema, analyst, engineer; [AGENTS.md](AGENTS.md), the skills in `tools/skills/`), has an independent
+  verifier check it, and opens a pull request under its own GitHub identity. Ask for fixes by commenting or
+  reviewing on that pull request; the agents push them. Your own AI agent may do the same on your machine.
 - **Or open a pull request yourself.** Branch `<github-handle>/<topic>`, make the change, run
   `uv run --extra dev scale check --fast`, push and open the pull request with the template filled in.
 - **Approve and merge.** Every pull request needs one approving review from a person listed in
@@ -65,7 +66,7 @@ The repository is private for now and shared with collaborators.
 | GitHub role | who | what it allows |
 |---|---|---|
 | — | everyone, once the repository is public | read, open issues, comment, fork and open pull requests from a fork |
-| Write | collaborators the owner invites, the reviewers among them | push branches, open pull requests, label issues `agent`, call `@scale-agent` |
+| Write | collaborators the owner invites, the reviewers among them | push branches, open pull requests, run the agents by hand |
 | reviewer | the reviewers of the review policy, code owners in `.github/CODEOWNERS` | the one approval every pull request needs |
 | Admin | the owner, `@hlxin` | repository settings, rulesets, collaborators and secrets |
 

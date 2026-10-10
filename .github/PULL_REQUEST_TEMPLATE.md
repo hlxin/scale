@@ -6,7 +6,7 @@ CONTRIBUTING.md and governance/GOVERNANCE.md. -->
 ## Summary
 
 <!-- What changes, and why. Link the issue or comment it answers (e.g. "Closes #12"). If an agent drafted
-it (@scale-agent), say which request it answers. If merged under the bootstrap rule, write "Bootstrap bypass:
+it (@scale-agents), say which request it answers and include the verifier's report. If merged under the bootstrap rule, write "Bootstrap bypass:
 reviewers not yet added". -->
 
 ## Type

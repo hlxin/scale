@@ -70,13 +70,13 @@ def test_external_proposals_are_validated(queue):
 
 def test_the_digest_decides_nothing_and_points_to_pull_requests(queue):
     """Decisions are pull-request reviews: the digest lists topics and options and says how to act on one (a pull
-    request, or the issue labelled `agent` for the scale-agent workflow); there is no /decide command and nothing is written to the
+    request, or a comment that @scale-agents take up); there is no /decide command and nothing is written to the
     decision log."""
     props, _ = intake.merge_proposals(queue, None)
     body = intake.render_digest(queue, props, "hlxin/scale", None, [])
     assert body.startswith("# SCALE feedback digest") and "## T12" in body and "scale-triage-state" in body
     assert "/decide" not in body and "/defer" not in body and "an approving review" in body
-    assert "open a pull request" in body and "label the issue `agent`" in body and "@scale-agent" in body
+    assert "open a pull request" in body and "@scale-agents open a pull request" in body
     assert not hasattr(intake, "parse_decisions") and not hasattr(intake, "append_decisions")
     assert intake.DIGEST_LABEL == "feedback-digest"
 
