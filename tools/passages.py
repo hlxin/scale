@@ -17,10 +17,10 @@ An evidence item that quotes a passage carries the passage id in ``evidence.pass
 passage hit leads to the records that cite it.
 
 An evidence index records the digest of the document it was built from (``graph_sha256``, the digest a query
-result names). :func:`load_for` uses an index for a document only when it was built from that document, or (an
-index built before the digest was recorded, or before an edit that changed no quote) when it holds exactly the
-document's evidence items: an index built from another document, a less open one or a stale copy, is refused, so no
-text the document does not hold is searched or chooses a query's rows. :func:`index_for` builds the index in memory
+result names). :func:`load_for` uses an index for a document only when it holds exactly the document's evidence
+items, whatever digest it records (an index built before an edit that changed no quote is still the document's): an
+index built from another document, a less open one or a stale copy, is refused, so no text the document does not hold
+is searched or chooses a query's rows. :func:`index_for` builds the index in memory
 when none is saved beside the document, since it is derived from the document alone.
 """
 
@@ -310,14 +310,15 @@ class Index:
         return cls(items, vec, head["embedder"], head.get("graph_sha256"), _read_terms(stem, raw, len(items)))
 
     def check_for(self, doc: dict, where: str = "the evidence index") -> "Index":
-        """This index, when it may be searched for ``doc``: built from it (its ``graph_sha256``), or holding exactly its
-        evidence items (:func:`evidence_items`); otherwise a :class:`ScaleError` that says to rebuild it."""
-        if self.graph_sha256 and self.graph_sha256 == graph_sha256(doc):
-            return self
+        """This index, when it may be searched for ``doc``: one holding exactly its evidence items
+        (:func:`evidence_items`), whatever digest its header records (a header is no proof of what the index holds);
+        otherwise a :class:`ScaleError` that says to rebuild it."""
         if self.items == evidence_items(doc):
             return self
-        built = (f"was built from another document (graph_sha256 {self.graph_sha256[:12]}, this one "
-                 f"{graph_sha256(doc)[:12]})" if self.graph_sha256 else "records no document digest")
+        digest = graph_sha256(doc)
+        built = ("records this document's digest but not its quotes" if self.graph_sha256 == digest else
+                 f"was built from another document (graph_sha256 {self.graph_sha256[:12]}, this one {digest[:12]})"
+                 if self.graph_sha256 else "records no document digest")
         raise ScaleError(f"{where} {built} and does not hold exactly this document's evidence quotes, so it is not "
                          "searched for it (its text could be another document's, or stale); rebuild it with `scale graph "
                          "index <document>`")

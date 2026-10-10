@@ -1263,6 +1263,21 @@ def test_a_malformed_stewardship_reads_as_institution_and_the_query_answers(doc,
         assert pgraph_query.run(d, spec, CU_PLAN)["access"]["level"] == "institution", bad
 
 
+def test_an_index_naming_the_document_but_holding_other_text_is_refused(tmp_path, capsys, doc):
+    """The digest an index's header records is no proof of what it holds: an index that names this document but
+    holds a quote the document does not is refused, and its text is never searched."""
+    from scale.cli import main
+    from scale.passages import graph_sha256, load_for
+    items = evidence_items(doc)
+    forged = [{**items[0], "text": "zeolite xylophone phrase"}] + items[1:]
+    Index.build(forged, graph_sha256=graph_sha256(doc)).save(tmp_path / "doc.evidence")
+    with pytest.raises(ScaleError, match="records this document's digest but not its quotes"):
+        load_for(tmp_path / "doc.evidence", doc)
+    (tmp_path / "doc.json").write_text(json.dumps(doc))
+    assert main(["graph", "search", str(tmp_path / "doc.json"), "zeolite xylophone", "--mode", "keyword"]) == 2
+    assert "zeolite" not in capsys.readouterr().out
+
+
 def test_an_evidence_index_is_searched_only_for_the_document_it_was_built_from(tmp_path, capsys, doc, spec):
     """An index records the digest of the document it was built from. query (text) and search use an index only for
     that document, or one holding exactly its evidence quotes; an index of the unfiltered document is refused for its
