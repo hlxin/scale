@@ -115,6 +115,7 @@ filter that every row passes.
 
 from __future__ import annotations
 
+import copy
 import datetime as dt
 import json
 import math
@@ -694,7 +695,12 @@ def _eco(t: Any) -> str:
 # ------------------------------------------------------------------------------------------ execution
 def run(doc: dict, spec: dict, plan: dict, evidence_index=None, graph: Graph | None = None) -> dict:
     """Run ``plan`` on ``doc``. ``graph``: the document's :class:`Graph`, when several plans run on one document (used
-    only when it was built from this document and schema)."""
+    only when it was built from this document and schema). The result shares no object with the document: a caller
+    may change it without changing the document, or a later answer drawn from it."""
+    return copy.deepcopy(_run(doc, spec, plan, evidence_index, graph))
+
+
+def _run(doc: dict, spec: dict, plan: dict, evidence_index=None, graph: Graph | None = None) -> dict:
     g = graph if graph is not None and graph.doc is doc and graph.spec is spec else Graph(doc, spec)
     plan = json.loads(json.dumps(plan, default=_plain))
     m = plan.get("match") or {}

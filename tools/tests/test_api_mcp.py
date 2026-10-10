@@ -195,6 +195,32 @@ def test_search_reads_only_the_documents_own_index_and_says_its_access(tk):
     assert "was built from another document" in res["error"]
 
 
+def test_changing_an_answer_never_changes_the_loaded_document(tk):
+    """A query's result shares no object with the document the toolkit keeps loaded: scrambling every value of one
+    answer leaves the next answer, and the document's digest, as they were."""
+    import copy
+
+    def scramble(x):
+        if isinstance(x, dict):
+            for k, v in list(x.items()):
+                if isinstance(v, (int, float)) and not isinstance(v, bool):
+                    x[k] = 999999
+                else:
+                    scramble(v)
+            x["scrambled"] = True
+        elif isinstance(x, list):
+            for v in x:
+                scramble(v)
+            x.append("scrambled")
+
+    tk.call("scale_example", {"name": "electro"})
+    plan = load_yaml(REPO / "domain/competency/cq-01-faradaic-efficiency.yaml")["plan"]
+    first = tk.call("scale_query", {"path": "electro.json", "plan": plan})
+    kept = copy.deepcopy(first)
+    scramble(first)
+    assert tk.call("scale_query", {"path": "electro.json", "plan": plan}) == kept
+
+
 def test_a_loaded_document_is_reused_until_its_file_changes(tk):
     """scale_query and scale_search keep a document loaded by path, with its query graph and evidence index, and load it
     again when the file changes."""
