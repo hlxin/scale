@@ -775,6 +775,14 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
             key = slug_key(n["props"].get("name") or n["id"].rsplit("/", 1)[-1])[:80].rstrip("-")
             gid[n["id"]] = f"{n['label']}:{key}-{hashlib.sha256(n['id'].encode()).hexdigest()[:6]}"
     src_of = {sid: pub_key(n) for sid, n in sources.items()}
+    if texts:                   # a text named by the source's scale-graph id is its publication's: one key from here on
+        named: dict[str, str] = {}
+        for k in sorted(texts):
+            pk = src_of.get(k, k)
+            if pk in named:
+                raise ScaleError(f"two texts are given for one publication ({named[pk]} and {k}, both {pk})")
+            named[pk] = k
+        texts = {pk: texts[k] for pk, k in named.items()}
     names = {n["id"]: n["props"].get("name") for n in doc["nodes"] if n["label"] in ("Person", "Institution")}
     bylines: dict[str, dict[str, list]] = {}   # Source id -> authors / assignees, in byline order
     for e in doc["links"]:
@@ -1175,7 +1183,7 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
     (out / "kg" / "graph.json").write_bytes(gbytes)
     (out / "kg" / "schema.json").write_text(json.dumps(schema, ensure_ascii=False, indent=1, sort_keys=True) + "\n")
     shipped, shipped_licences = 0, set()
-    # a text is named by its publication's key (DOI, patent:…, scale:…) or by the source's scale-graph id
+    # a text is named by its publication's key (DOI, patent:…, scale:…); one named by the source's id was renamed
     in_bundle = {k for n in kept_nodes if n["label"] == "Publication"
                  for k in (n["props"].get("scale_id"), n["props"].get("doi"), n["props"].get("source_id")) if k}
     unheld = sorted(sid for sid in texts or {} if sid not in in_bundle)
