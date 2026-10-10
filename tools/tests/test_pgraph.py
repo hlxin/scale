@@ -238,10 +238,10 @@ def test_registry_supplies_institutions_software_and_projects():
                                                           "institution_kind": "funding_agency"}],
            "projects": [{"id": proj, "name": "Example project", "funded_by": funder,
                          "participants": [{"member": vt, "role": "data_provider"},
-                                          {"member": "scale:org/alchemic-ai", "role": "data_provider"}]}]}
+                                          {"member": funder, "role": "data_provider"}]}]}
     nodes, links = pgraph.registry_records(reg, {proj})
     ids = {n["id"] for n in nodes}
-    assert {proj, vt, "scale:org/alchemic-ai", funder} <= ids
+    assert {proj, vt, funder} <= ids
     assert {l["type"] for l in links} == {"FUNDED_BY", "PARTICIPATES_IN"}
     with pytest.raises(Exception, match="not in the stewardship registry"):
         pgraph.registry_records(reg, {"scale:org/unknown"})

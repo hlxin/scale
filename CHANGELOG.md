@@ -2,14 +2,24 @@
 
 ## Unreleased
 
+- **Knowledge-graph bundles in format 1.1.0: withheld quotes and typed absences.** The kg-bundle format 1.1.0 carries a quote
+  withheld under the copyright cap (`quote_withheld`: its sha256 and length under `scale-match-text-1`, SCALE's
+  verbatim normalization) and a value the source does not report (`_value_status`). `scale graph export --to kg-bundle`
+  now writes both instead of dropping them: a link whose quotes are all withheld is an edge, and a typed absence says
+  why the record has no value. The methanol graph exports as 17,563 edges instead of 14,107 (3,274 substantive edges
+  resting only on withheld quotes) with 227 typed absences, and passes the format's validator with 0 errors and 0
+  warnings. A withheld quote longer than the format's 600 characters is left out and counted (`withheld_too_long`: one
+  in the methanol graph). The bundle is in the example folder (`methanol-synthesis-pre1966_v1.1.0.zip`), and
+  [docs/kg-bundle-format.md](docs/kg-bundle-format.md) notes the format SCALE writes. The exporter is
+  `tools/scale/kgbundle.py`, and its target `scale graph export --to kg-bundle`.
 - **The methanol example, simplified and ready to recurate.** `examples/methanol-synthesis-pre1966/` keeps only what
   a reader and a recuration need: `sources.json` (the frozen corpus, all 178 candidates with their status, each of the
   105 in-scope sources with its PDF `pdfs/<slug>.pdf` and the PDF's sha256; it replaces `corpus/manifest.json`,
   `corpus/manifest-co-co2-hydrogenation.json` and `corpus/sources.json`), the graph, `rights.yaml`,
   `stewardship.yaml` and `queries/*.yaml`. The PDFs are local and git-ignored, named by slug: the DOI with `/` as `-`
   (a patent or report without a DOI: its number or corpus id). Removed and kept in the git history (commit `a169872`):
-  release `v1.0.0` (a second copy of the graph), its GALAXY bundle (regenerated with `scale graph export --to
-  galaxy`), the curation guide and assembly report, and the conversion tools of the earlier pipeline; recuration
+  release `v1.0.0` (a second copy of the graph), its kg-bundle (regenerated with `scale graph export --to
+  kg-bundle`), the curation guide and assembly report, and the conversion tools of the earlier pipeline; recuration
   follows the `curate-source` skill. The query answers are unchanged.
 - **Methanol example: 9 runs get the pressure their source states.** Read against its PDF, Molstad and Dodge (1935,
   `10.1021-ie50302a005`) state one testing pressure for their tests in their Experimental Procedure (178
@@ -58,11 +68,11 @@
   guide and assembly report, the manuscript's seven query plans and the curation tools. Its first release,
   `releases/v1.0.0/` (2026-10-09), is an immutable snapshot: the graph (sha256 `0dfc8c1c…ed13f`), the corpus list,
   the rights file and the plans, with `RELEASE.yaml` (schema 0.1.0 and its spec digest, counts, each plan's answer)
-  and `SHA256SUMS`, built and verified by `tools/release_graph.py`. Its GALAXY bundle,
-  `galaxy/methanol-synthesis-pre1966_v1.0.0/`, passes GALAXY's validator (0 errors, 0 warnings): 4,850 nodes, 14,107
-  edges; the 3,277 links whose quotes are withheld under the cap are left out until GALAXY accepts withheld-quote
-  evidence ([docs/galaxy-platform-changes.md](docs/galaxy-platform-changes.md), the changes requested of GALAXY). The fragments, page
-  texts, OCR and the earlier private GALAXY bundles stay in the restricted copy; the evidence index is built locally. New tests,
+  and `SHA256SUMS`, built and verified by `tools/release_graph.py`. Its kg-bundle,
+  `methanol-synthesis-pre1966_v1.0.0`, passes the format's validator (0 errors, 0 warnings): 4,850 nodes, 14,107
+  edges; the 3,277 links whose quotes are withheld under the cap are left out, since format 1.0.0 has no place for
+  withheld-quote evidence. The fragments, page
+  texts, OCR and the earlier private kg-bundles stay in the restricted copy; the evidence index is built locally. New tests,
   `tools/tests/test_example_methanol.py`, run on the public files.
 - **One approval for every change (review policy version 2).** A pull request to `main` now merges with one approving
   review from any reviewer other than its author, instead of two; a reviewer who disagrees with a merged change
@@ -122,7 +132,7 @@ first will be `v0.1.0`.
   (`tools/tests/test_catalyst_states.py`), as the source-lifecycle fixtures are.
 - **Tools.** The general tools stay: the validator and checklists, curation with evidence and the copyright cap,
   graph queries with typed absences and the unit rule, evidence search, the source lifecycle, schema proposals (check,
-  decide, apply, the version bump after a merge), releases, the GALAXY export, competency questions, coverage and
+  decide, apply, the version bump after a merge), releases, the kg-bundle export, competency questions, coverage and
   conflict skills, access rules and viewer filters, the agent tools over the command line, HTTP, MCP and Python, and
   the skills (curate-source, query-graph, evolve-schema, triage-feedback, scan-conflicts, map-coverage,
   curate-dataset, export-graph). `scale proposal check` warns while a proposal's migration step (base version to

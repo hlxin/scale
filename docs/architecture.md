@@ -106,7 +106,7 @@ the same whether the version is the head or frozen: `scale graph spec` writes it
 (`specs/`, listed in `spec_documents`), and `scale graph verify` fails when a version no longer has the digest a
 release holds. A reader binds a schema by that digest (`pgraph.identify`; `scale graph spec --expect <sha256>`). A
 version number the tools do not hold is reported as unknown (newer than the head, or not a version of this
-repository; the graph of a GALAXY bundle, which pins the bundle's own version, is named as one), never assumed to
+repository; the graph of a kg-bundle, which pins the bundle's own version, is named as one), never assumed to
 be another.
 
 ## Code map
@@ -132,7 +132,7 @@ All modules are in `tools/scale/`.
 | `releases.py`, `versions.py` | Release builds from the head (graph-only, with every version's spec document), the gate on applied proposals and on the one version, the semantic comparison with the previous release, verification, the stability of released spec digests; version constraints and release ids. |
 | `ci.py`, `codeowners.py` | `scale ci spec-changes`: what a pull request changed under `releases/` and in the specifications, whether a proposal or decision record covers it, and which owners must review; a small CODEOWNERS evaluator (the last matching pattern wins). |
 | `gaps.py` | Gap reports from query results, their classification, GitHub issue rendering and dry-run or real submission. |
-| `galaxy.py` | GALAXY knowledge-graph bundles from scale-graph documents: the schema named by version and spec digest, the graph's header and stewardship in `scale_header`, only what the bundle's audience may see. |
+| `kgbundle.py` | knowledge-graph bundles (kg-bundle format) from scale-graph documents: the schema named by version and spec digest, the graph's header and stewardship in `scale_header`, only what the bundle's audience may see. |
 | `intake.py` | Community feedback: ingest, cluster, propose, record decisions (`scale triage`); record catalogues with comment links. |
 | `api.py`, `mcp_server.py`, `http_server.py`, `updates.py` | The agent tool surface (`scale call`), over MCP and local HTTP; the newer-tool check. |
 | `devcheck.py`, `style.py` | `scale check` (every check of CI's `test` jobs); formats, names, links (`scale fmt`, `scale lint`, `scale links`). |

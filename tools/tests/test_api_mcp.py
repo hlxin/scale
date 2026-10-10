@@ -394,12 +394,12 @@ def test_human_only_actions_cover_the_review_gates():
 
 
 def test_a_shipped_text_names_its_licence(tmp_path, capsys):
-    """`scale graph export --to galaxy --text ID=FILE` redistributes the text: its licence is required, never
+    """`scale graph export --to kg-bundle --text ID=FILE` redistributes the text: its licence is required, never
     assumed (it used to default to 'public domain')."""
     from scale.cli import main
     txt = tmp_path / "source.txt"
     txt.write_text("a source text")
-    args = ["--repo", str(REPO), "graph", "export", str(DRIVING_FORCE_EXAMPLES / "photo.json"), "--to", "galaxy",
+    args = ["--repo", str(REPO), "graph", "export", str(DRIVING_FORCE_EXAMPLES / "photo.json"), "--to", "kg-bundle",
             "--out", str(tmp_path / "bundle"), "--created", "2026-10-04T00:00:00Z"]
     assert main(args + ["--text", f"ex:df-photo/source/paper={txt}"]) == 2
     assert "name the text's licence" in capsys.readouterr().err

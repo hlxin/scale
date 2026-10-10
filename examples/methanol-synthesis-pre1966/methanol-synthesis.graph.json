@@ -201208,16 +201208,6 @@
       }
     },
     {
-      "id": "scale:org/alchemic-ai",
-      "label": "Institution",
-      "props": {
-        "name": "Alchemic AI",
-        "institution_kind": "company",
-        "note": "add the ROR id if one exists",
-        "origin": "curated"
-      }
-    },
-    {
       "id": "scale:org/arpa-e",
       "label": "Institution",
       "props": {
@@ -515282,16 +515272,6 @@
       "target": "scale:org/arpa-e"
     },
     {
-      "id": "scale:project/arpa-e-catalyst/participant/alchemic-ai",
-      "type": "PARTICIPATES_IN",
-      "props": {
-        "origin": "curated",
-        "role": "data_provider"
-      },
-      "source": "scale:org/alchemic-ai",
-      "target": "scale:project/arpa-e-catalyst"
-    },
-    {
       "id": "scale:project/arpa-e-catalyst/participant/virginia-tech",
       "type": "PARTICIPATES_IN",
       "props": {
@@ -515320,10 +515300,9 @@
     "stewardship": {
       "access": "public",
       "contributed_by": [
-        "scale:org/virginia-tech",
-        "scale:org/alchemic-ai"
+        "scale:org/virginia-tech"
       ],
-      "note": "Curated by agents under the curate-source skill from the frozen corpus (corpus/manifest.json); checked by the deterministic tools in tools/.",
+      "note": "Curated by agents under the curate-source skill from the frozen corpus (sources.json); checked by the deterministic SCALE tools.",
       "project": "scale:project/arpa-e-catalyst"
     },
     "title": "Methanol synthesis (CO and CO2 hydrogenation to methanol), historical literature published before 1966-01-01 (105 sources, 1923–1965), curated from the source texts under scale-graph 0.1.0"

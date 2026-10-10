@@ -103,8 +103,8 @@ def pinned(manifest: Path, version: str | None, doc: dict | None = None) -> Path
                      f"{frozen.name} in {frozen.parent}){_unknown(manifest, version, doc)}")
 
 
-def galaxy_bundle_graph(doc: Any) -> bool:
-    """Whether ``doc`` is the graph of a GALAXY bundle (its ``kg/graph.json``, as ``scale graph export --to galaxy``
+def bundle_graph(doc: Any) -> bool:
+    """Whether ``doc`` is the graph of a kg-bundle (its ``kg/graph.json``, as ``scale graph export --to kg-bundle``
     writes it): a header naming the bundle (``bundle_id``) and the bundle's own schema (``schema_id``), whose
     ``schema_version`` is the bundle's version, not a scale-graph version."""
     g = doc.get("graph") if isinstance(doc, dict) else None
@@ -112,14 +112,14 @@ def galaxy_bundle_graph(doc: Any) -> bool:
 
 
 def _unknown(manifest: Path, version: str, doc: dict | None = None) -> str:
-    """What a version this repository does not hold may be: the graph of a GALAXY bundle, whose ``schema_version``
-    is the bundle's own version (:func:`galaxy_bundle_graph`); a version newer than the head (the tools are older
+    """What a version this repository does not hold may be: the graph of a kg-bundle, whose ``schema_version``
+    is the bundle's own version (:func:`bundle_graph`); a version newer than the head (the tools are older
     than the document, or it is a proposal's candidate); else a version of another numbering, which only its spec
     digest could tell. Only this suffix of the error says so; the error and the validity are those of a version the
     tools do not hold."""
     from .versions import parse_version
-    if galaxy_bundle_graph(doc):
-        return (f"; the document is the graph of a GALAXY bundle (its header names a bundle_id and a schema_id), whose "
+    if bundle_graph(doc):
+        return (f"; the document is the graph of a kg-bundle (its header names a bundle_id and a schema_id), whose "
                 f"schema_version {version} is the bundle's own version, not a scale-graph version; validate the "
                 "scale-graph it was exported from (the bundle's bundle.json names that schema in scale_header)")
     held = sorted(public_versions(manifest), key=parse_version)
@@ -735,7 +735,7 @@ def embargo_today() -> str:
 def embargo_day(day: Any, today: str, what: str = "the date") -> str:
     """The day embargoes are read on: ``day`` (an ISO date, YYYY-MM-DD; None is ``today``) or ``today``, whichever is
     earlier. An embargo then counts as lapsed only when it has lapsed both on the given day and today: a later day (a
-    query's ``as_of``, ``scale graph filter --date``, a GALAXY bundle's ``created``) never opens one still in force; an
+    query's ``as_of``, ``scale graph filter --date``, a kg-bundle's ``created``) never opens one still in force; an
     earlier one may keep one closed. A day that is not a date of the calendar is refused, naming ``what`` it is."""
     if day is None:
         return today
@@ -1067,7 +1067,7 @@ def filter_for(doc: dict, viewer: list[str], today: str) -> dict:
 
     When the viewer may not see the graph's header stewardship (a public view of a project graph) and a stewardship
     can name the viewer (:func:`view_audience`: the public, one project, institutions), the view's header declares
-    the viewer as its audience, as a GALAXY bundle's does: its access becomes the view's (an embargo goes; the
+    the viewer as its audience, as a kg-bundle's does: its access becomes the view's (an embargo goes; the
     project or institutions the viewer is; its other keys stay). A kept record first gets the audience keys it
     inherited from the graph's header written on its own stewardship, so its access is what it was
     (:func:`_own_audience`). A query of the view then has the access of what it holds (a public view of a project

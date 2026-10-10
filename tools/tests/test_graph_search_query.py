@@ -1,4 +1,4 @@
-"""Evidence vectors and search, graph query plans with typed outcomes, and the GALAXY bundle export."""
+"""Evidence vectors and search, graph query plans with typed outcomes, and the kg-bundle export."""
 
 import copy
 import importlib.util
@@ -7,7 +7,7 @@ import json
 import pytest
 
 from conftest import GRAPH_MANIFEST, REPO
-from scale import galaxy, pgraph, pgraph_query
+from scale import kgbundle, pgraph, pgraph_query
 from scale.passages import Index, evidence_items, locate, passages_of, split_page, tokens
 from scale.util import ScaleError, load_doc
 
@@ -375,11 +375,11 @@ def test_describe_shows_what_a_domain_uses(spec):
         pgraph.describe(spec, ["NoSuchLabel"])
 
 
-# ------------------------------------------------------------------------------------------ GALAXY export
-def _galaxy_validator():
+# ------------------------------------------------------------------------------------------ kg-bundle export
+def _bundle_validator():
     import os
     from pathlib import Path
-    kit = os.environ.get("SCALE_GALAXY_VALIDATOR")                # the path of GALAXY's bundle_validate.py, if at hand
+    kit = os.environ.get("SCALE_BUNDLE_VALIDATOR")                # the path of the format's validator (bundle_validate.py), if at hand
     path = Path(kit) if kit else None
     if not path or not path.exists():
         return None
@@ -391,27 +391,27 @@ def _galaxy_validator():
     return m
 
 
-def test_galaxy_quantities_are_converted_and_keep_the_reported_text():
-    q, text = galaxy.quantity("temperature", V(360, "°C", "360° C."))
+def test_bundle_quantities_are_converted_and_keep_the_reported_text():
+    q, text = kgbundle.quantity("temperature", V(360, "°C", "360° C."))
     assert q == {"value": 633.15, "unit": "K", "as_reported": "360° C."} and text is None
-    q, _ = galaxy.quantity("pressure", {"status": "present", "lower": 200, "upper": 300, "unit": "atm"})
+    q, _ = kgbundle.quantity("pressure", {"status": "present", "lower": 200, "upper": 300, "unit": "atm"})
     assert q["unit"] == "MPa" and q["uncertainty"]["kind"] == "range"
-    assert galaxy.quantity("space_velocity", V(5, "vol/vol/h")) == (None, "5 vol/vol/h")
-    assert galaxy.quantity("conversion", {"status": "not_reported"}) == (None, None)
+    assert kgbundle.quantity("space_velocity", V(5, "vol/vol/h")) == (None, "5 vol/vol/h")
+    assert kgbundle.quantity("conversion", {"status": "not_reported"}) == (None, None)
 
 
-def test_galaxy_export(tmp_path, doc, spec):
-    m = galaxy.export(doc, spec, tmp_path / "b", "test-bundle", created="2026-09-28T00:00:00Z")
-    galaxy.seal(tmp_path / "b")
+def test_bundle_export(tmp_path, doc, spec):
+    m = kgbundle.export(doc, spec, tmp_path / "b", "test-bundle", created="2026-09-28T00:00:00Z")
+    kgbundle.seal(tmp_path / "b")
     g = json.loads((tmp_path / "b/kg/graph.json").read_text())
     ids = {n["id"] for n in g["nodes"]}
     assert "Publication:scale:lazier-1930" in ids and m["counts"]["papers"] == 3
     edges = [e for e in g["links"] if e["type"] != "REPORTED_IN"]
-    assert all(e["id"] == galaxy.canonical_edge_id(e["type"], e["source"], e["target"], e["props"]["source_paper_ids"][0]) for e in edges)
+    assert all(e["id"] == kgbundle.canonical_edge_id(e["type"], e["source"], e["target"], e["props"]["source_paper_ids"][0]) for e in edges)
     assert all(e["props"]["_evidence"] and e["props"]["_statement"] == "observation" for e in edges)
     t = next(n for n in g["nodes"] if n["props"].get("scale_id") == "ex:t/cu/test")
     assert t["props"]["temperature"] == {"value": 633.15, "unit": "K", "as_reported": "360 °C"}
-    v = _galaxy_validator()
+    v = _bundle_validator()
     if v:
         rep = v.validate_bundle(tmp_path / "b")
         assert rep.ok, [f.message for f in rep.errors][:5]

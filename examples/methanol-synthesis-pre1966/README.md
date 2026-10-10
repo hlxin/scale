@@ -9,9 +9,10 @@ and tests run on it (`tools/tests/test_example_methanol.py`).
 |---|---|
 | `sources.json` | The frozen corpus: all 178 candidate sources with their status under the cutoff and the scope (105 `in_scope`, 10 held-out targets, 58 not retrieved, 4 off scope, 1 after the cutoff), and for each in-scope source its PDF and the PDF's sha256. `scale corpus check sources.json` checks it. |
 | `pdfs/<slug>.pdf` | The 105 PDFs, **local only** (git-ignored; most are in copyright). |
-| `methanol-synthesis.graph.json` | The curated graph, valid under scale-graph 0.1.0: 4,868 nodes, 16,586 links, 684 catalytic tests, 25,230 evidence items. The baseline until the recuration replaces it. |
+| `methanol-synthesis.graph.json` | The curated graph, valid under scale-graph 0.1.0: 4,867 nodes, 16,585 links, 684 catalytic tests, 25,230 evidence items. The baseline until the recuration replaces it. |
 | `rights.yaml`, `stewardship.yaml` | Each source's rights (the copyright cap), and who curated the graph for which project. |
 | `queries/*.yaml` | The manuscript's questions as query plans. |
+| `methanol-synthesis-pre1966_v1.1.0.zip` | The graph as a knowledge-graph bundle ([kg-bundle format](../../docs/kg-bundle-format.md) 1.1.0), ready to load into a platform that reads the format: 17,563 edges, withheld quotes as digests, 227 typed absences; it follows release 1.0.0. |
 
 A slug is the source's DOI with `/` written as `-` (`10.1021/ie50225a025` → `10.1021-ie50225a025.pdf`); a patent
 without a DOI uses its number (`us1625925a`), a thesis or report its corpus id (`hid-20028`). Source records in the
@@ -75,10 +76,10 @@ Follow the `curate-source` skill (`tools/skills/curate-source/SKILL.md`) one sou
 - **Schema.** Curated under the consortium repository's scale-graph 0.1.0 (a different schema from this
   repository's 0.1.0; the numbering restarted), moved to that repository's 0.5.0 and re-pinned to this repository's
   0.1.0 (decision record 0001). The graph's title and description name the consortium's version and its tools.
-- **Release v1.0.0** (2026-10-09; graph sha256 `0dfc8c1c…ed13f`, schema spec `3c2fa720…02006`), its GALAXY bundle,
+- **Release v1.0.0** (2026-10-09; graph sha256 `0dfc8c1c…ed13f`, schema spec `3c2fa720…02006`), its kg-bundle,
   the curation guide, the assembly report (720 gaps, 47 `missing_concept`) and the curation tools are in the git
-  history (commit `a169872`, folder `examples/methanol-synthesis-pre1966/`). A GALAXY bundle is regenerated with
-  `scale graph export <graph> --to galaxy --corpus sources.json`.
+  history (commit `a169872`, folder `examples/methanol-synthesis-pre1966/`). A kg-bundle is regenerated with
+  `scale graph export <graph> --to kg-bundle --corpus sources.json`.
 - **Recuration from the PDFs.** 2026-10-09: the 9 runs of `10.1021-ie50302a005` whose pressure was not recorded
   now carry the testing pressure its Experimental Procedure states (178 atmospheres absolute); the other checklist
   gaps were checked against the sources and are theirs (112 violations: values the sources do not state, and a

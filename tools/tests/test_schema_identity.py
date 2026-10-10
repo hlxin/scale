@@ -1,6 +1,6 @@
 """Schema identity beyond a bare version number: a version's spec document and its digest (`scale graph spec`,
 `scale graph verify`, the release build), the generic check that a pinned version (and digest) is this repository's
-(`pgraph.identify`, `scale graph spec --expect`), a version the tools do not hold named as such, and the GALAXY
+(`pgraph.identify`, `scale graph spec --expect`), a version the tools do not hold named as such, and the kg-bundle
 export's digest, header and access."""
 
 import copy
@@ -11,7 +11,7 @@ import json
 import pytest
 
 from conftest import GRAPH_FROZEN, GRAPH_MANIFEST, HEAD_VERSION, REPO, spec_of
-from scale import galaxy, pgraph, pgraph_query
+from scale import kgbundle, pgraph, pgraph_query
 from scale.cli import main
 from scale.releases import build_release, spec_digest_stability
 from scale.util import ScaleError, load_doc, load_yaml, sha256_file
@@ -20,10 +20,10 @@ from scale.versions import parse_version
 X = REPO / "domain/examples/scale-graph"
 
 
-def _galaxy_validator():
-    """GALAXY's validator where SCALE_GALAXY_VALIDATOR provides it (test_graph_search_query), else None."""
+def _bundle_validator():
+    """the format's validator where SCALE_BUNDLE_VALIDATOR provides it (test_graph_search_query), else None."""
     try:
-        from test_graph_search_query import _galaxy_validator as found
+        from test_graph_search_query import _bundle_validator as found
     except (ImportError, pytest.skip.Exception):         # that module needs numpy (the dev extra)
         return None
     return found()
@@ -192,8 +192,8 @@ def test_a_version_the_tools_do_not_hold_is_named_as_such(tmp_path, capsys):
             assert rc == 2 and not (tmp_path / "o.json").exists(), args
 
 
-def test_a_galaxy_bundle_graph_is_named_as_one_not_as_a_newer_version(tmp_path, capsys, head):
-    """A GALAXY bundle's kg/graph.json pins the bundle's own version as its schema_version. Validating it fails as any
+def test_a_bundle_graph_is_named_as_one_not_as_a_newer_version(tmp_path, capsys, head):
+    """A kg-bundle's kg/graph.json pins the bundle's own version as its schema_version. Validating it fails as any
     version the tools do not hold does (the error, its start and the validity unchanged); only the suffix differs: it
     names the document as a bundle's graph, never as a newer version."""
     from scale.api import ScaleToolkit
@@ -203,26 +203,26 @@ def test_a_galaxy_bundle_graph_is_named_as_one_not_as_a_newer_version(tmp_path, 
         assert version not in held
         out = tmp_path / f"b{version}"
         ex = load_doc(X / "example.json")
-        galaxy.export(ex, spec_of(ex), out, "acc-bundle", version)
+        kgbundle.export(ex, spec_of(ex), out, "acc-bundle", version)
         f = out / "kg/graph.json"
         g = load_doc(f)
-        assert g["graph"]["schema_version"] == version and pgraph.galaxy_bundle_graph(g)
+        assert g["graph"]["schema_version"] == version and pgraph.bundle_graph(g)
         rc, _, err = _run(["graph", "validate", "--format", "json", str(f)], capsys)
         start = f"document pins scale-graph {version}, which is not a version this repository holds (no scale-graph-{version}.yaml in "
-        assert rc == 2 and start in err and "the graph of a GALAXY bundle" in err, err
+        assert rc == 2 and start in err and "the graph of a kg-bundle" in err, err
         assert "newer than this schema's head" not in err
         res = kit.call("scale_validate", {"document": g})
-        assert res["error"].startswith(start) and "the graph of a GALAXY bundle" in res["error"]
+        assert res["error"].startswith(start) and "the graph of a kg-bundle" in res["error"]
     # a scale-graph pinning a version the tools do not hold keeps its message; a header that only half names a bundle
     # is not a bundle's graph
     doc = load_doc(X / "example.json")
     doc["graph"]["schema_version"] = "9.0.0"
     with pytest.raises(ScaleError) as err:
         pgraph.pinned(GRAPH_MANIFEST, "9.0.0", doc)
-    assert "newer than this schema's head" in str(err.value) and "GALAXY bundle" not in str(err.value)
+    assert "newer than this schema's head" in str(err.value) and "kg-bundle" not in str(err.value)
     for half in ({"bundle_id": "x"}, {"schema_id": "x"}, {"bundle_id": 1, "schema_id": "x"}):
-        assert not pgraph.galaxy_bundle_graph({"graph": half})
-    assert not pgraph.galaxy_bundle_graph(None) and not pgraph.galaxy_bundle_graph({"graph": []})
+        assert not pgraph.bundle_graph({"graph": half})
+    assert not pgraph.bundle_graph(None) and not pgraph.bundle_graph({"graph": []})
 
 
 def test_kg_update_refuses_a_document_pinning_a_version_not_held(tmp_path):
@@ -239,7 +239,7 @@ def test_kg_update_refuses_a_document_pinning_a_version_not_held(tmp_path):
                                               else "would update")
 
 
-# ------------------------------------------------------------------------------------ GALAXY: digest, header, access
+# ------------------------------------------------------------------------------------ kg-bundle: digest, header, access
 P = "ex:acc/project/p"
 
 
@@ -282,7 +282,7 @@ def _names(bundle):
 def test_the_bundle_names_its_schema_by_digest_and_carries_the_scale_header(tmp_path, head):
     doc = load_doc(X / "example.json")
     spec = pgraph.load_spec(pgraph.pinned(GRAPH_MANIFEST, doc["graph"]["schema_version"]))
-    m = galaxy.export(doc, spec, tmp_path / "b", "example", created="2026-10-06T00:00:00Z")
+    m = kgbundle.export(doc, spec, tmp_path / "b", "example", created="2026-10-06T00:00:00Z")
     schema = json.loads((tmp_path / "b/kg/schema.json").read_text())
     assert schema["extends"] == {"schema_id": "scale-graph", "version": doc["graph"]["schema_version"],
                                  "sha256": pgraph.spec_sha256(spec)}
@@ -299,13 +299,13 @@ def test_the_bundle_names_its_schema_by_digest_and_carries_the_scale_header(tmp_
     assert json.loads((tmp_path / "b/kg/graph.json").read_text())["graph"]["topic"] == m["topic"]
     mixed = copy.deepcopy(doc)
     mixed["graph"]["data_status"] = "mixed"
-    assert galaxy.export(mixed, spec, tmp_path / "m", "mixed", created="2026-10-06T00:00:00Z")["scope"].startswith("Mixed data")
+    assert kgbundle.export(mixed, spec, tmp_path / "m", "mixed", created="2026-10-06T00:00:00Z")["scope"].startswith("Mixed data")
 
 
 def test_records_less_open_than_the_bundle_are_withheld_or_marked(tmp_path, head):
     doc = _access_doc()
     assert pgraph.validate(doc, head).errors == []
-    m = galaxy.export(doc, head, tmp_path / "w", "acc", created="2026-10-06T00:00:00Z")
+    m = kgbundle.export(doc, head, tmp_path / "w", "acc", created="2026-10-06T00:00:00Z")
     names = _names(tmp_path / "w")
     assert set(names) == {"project species", "public species"}            # institution and embargoed: withheld
     assert names["public species"]["scale_access"] == "public" and "scale_access" not in names["project species"]
@@ -317,27 +317,27 @@ def test_records_less_open_than_the_bundle_are_withheld_or_marked(tmp_path, head
     assert "contributed_by" not in m["scale_header"]["stewardship"]     # named for an institution bundle only
     schema = json.loads((tmp_path / "w/kg/schema.json").read_text())
     assert schema["node_types"]["ChemicalSpecies"]["properties"]["scale_access"]["type"] == "enum"
-    kept = galaxy.export(doc, head, tmp_path / "k", "acc", created="2026-10-06T00:00:00Z", keep_less_open=True)
+    kept = kgbundle.export(doc, head, tmp_path / "k", "acc", created="2026-10-06T00:00:00Z", keep_less_open=True)
     names = _names(tmp_path / "k")
     assert names["institution species"]["scale_access"] == "institution"
     assert names["embargoed species"]["scale_access"] == "institution"     # an embargo in force
     assert kept["export_report"]["access"].get("less_open_kept") and "withheld_less_open" not in kept["export_report"]["access"]
     # an export for the public declares public access: only public records remain, and nothing warns
-    pub = galaxy.export(pgraph.filter_for(doc, [], "2026-10-06"), head, tmp_path / "p", "acc",
+    pub = kgbundle.export(pgraph.filter_for(doc, [], "2026-10-06"), head, tmp_path / "p", "acc",
                         created="2026-10-06T00:00:00Z", access={"access": "public"})
     assert set(_names(tmp_path / "p")) == {"public species"} and "access_warning" not in pub["export_report"]
     assert pub["scale_header"]["stewardship"] == {"access": "public", "licence": "CC-BY-4.0"}   # the licence is kept
-    v = _galaxy_validator()
+    v = _bundle_validator()
     if v:
         for b in ("w", "k", "p"):
-            galaxy.seal(tmp_path / b)
+            kgbundle.seal(tmp_path / b)
             assert v.validate_bundle(tmp_path / b).ok
 
 
 def test_the_cli_export_warns_and_declares_public_for_the_public(tmp_path, capsys):
     f = tmp_path / "acc.json"
     f.write_text(json.dumps(_access_doc()))
-    base = ["graph", "export", str(f), "--to", "galaxy", "--created", "2026-10-06T00:00:00Z"]
+    base = ["graph", "export", str(f), "--to", "kg-bundle", "--created", "2026-10-06T00:00:00Z"]
     rc, out, err = _run(base + ["--out", str(tmp_path / "b")], capsys)
     assert rc == 0 and "scale: warning: not public" in err
     rc, out, err = _run(base + ["--out", str(tmp_path / "pub"), "--public"], capsys)
@@ -347,7 +347,7 @@ def test_the_cli_export_warns_and_declares_public_for_the_public(tmp_path, capsy
     unknown = load_doc(X / "example.json")
     unknown["graph"]["schema_version"] = "0.0.9"                     # a version this repository does not hold
     f.write_text(json.dumps(unknown))
-    rc, _, err = _run(["graph", "export", str(f), "--to", "galaxy", "--out", str(tmp_path / "x")], capsys)
+    rc, _, err = _run(["graph", "export", str(f), "--to", "kg-bundle", "--out", str(tmp_path / "x")], capsys)
     assert rc == 2 and "is not a version this repository holds" in err and not (tmp_path / "x").exists()
 
 
@@ -363,7 +363,7 @@ def test_a_later_date_never_opens_an_embargo_still_in_force(tmp_path, capsys, he
     today = pgraph.embargo_today()                  # the earlier of the local and the UTC date: every path reads it
     for created in ("2099-06-01T00:00:00Z", None):
         out = tmp_path / f"b{created is None}"
-        rc, _, err = _run(["graph", "export", str(f), "--to", "galaxy", "--out", str(out),
+        rc, _, err = _run(["graph", "export", str(f), "--to", "kg-bundle", "--out", str(out),
                            *(["--created", created] if created else [])], capsys)
         m = json.loads((out / "bundle.json").read_text())
         assert rc == 0 and set(_names(out)) == {"project species", "public species"}, err      # embargoed: withheld
@@ -377,18 +377,18 @@ def test_a_later_date_never_opens_an_embargo_still_in_force(tmp_path, capsys, he
     assert rc == 0 and "on 2020-01-01:" in json.loads(out)["graph"]["filtered_for"]
     # the export's own view (--public) and the Neo4j export read --date the same way, and the Python API reads created so
     pub = tmp_path / "pub"
-    rc, _, err = _run(["graph", "export", str(f), "--to", "galaxy", "--out", str(pub), "--public", "--date", "2099-06-01",
+    rc, _, err = _run(["graph", "export", str(f), "--to", "kg-bundle", "--out", str(pub), "--public", "--date", "2099-06-01",
                        "--created", "2099-06-01T00:00:00Z"], capsys)
     assert rc == 0 and "embargoed species" not in _names(pub) and "public species" in _names(pub), err
     rc, neo, err = _run(["graph", "export", str(f), "--to", "neo4j", "--public", "--date", "2099-06-01"], capsys)
     assert rc == 0 and "public species" in neo and "embargoed species" not in neo, err
-    m = galaxy.export(d, head, tmp_path / "py", "acc", created="2099-06-01T00:00:00Z")
+    m = kgbundle.export(d, head, tmp_path / "py", "acc", created="2099-06-01T00:00:00Z")
     assert "embargoed species" not in _names(tmp_path / "py") and m["scale_header"]["access_at_export"]["date"] == today
     for bad in ("2099-13-01", "tomorrow", "2099"):
         rc, _, err = _run(["graph", "filter", str(f), "--public", "--date", bad], capsys)
         assert rc == 2 and "--date" in err, bad
         with pytest.raises(ScaleError, match="created"):
-            galaxy.export(d, head, tmp_path / "x", "acc", created=bad)
+            kgbundle.export(d, head, tmp_path / "x", "acc", created=bad)
     assert not (tmp_path / "x").exists()
 
 
@@ -417,7 +417,7 @@ def test_every_embargo_read_takes_one_clock_the_earlier_of_the_local_and_the_utc
         assert ("embargoed species" in {n["props"].get("name") for n in view["nodes"]}) is shipped
         for extra in ([], ["--public"]):
             b = tmp_path / f"b{i}{len(extra)}"
-            rc, _, err = _run(["graph", "export", str(f), "--to", "galaxy", "--out", str(b), *extra], capsys)
+            rc, _, err = _run(["graph", "export", str(f), "--to", "kg-bundle", "--out", str(b), *extra], capsys)
             m = json.loads((b / "bundle.json").read_text())
             assert rc == 0 and ("embargoed species" in _names(b)) is shipped, (now, extra, err)
             assert m["scale_header"]["access_at_export"]["date"] == day
@@ -458,7 +458,7 @@ def test_an_institution_bundle_holds_only_what_each_of_its_institutions_may_see(
         doc = _institution_doc(lab_in_project)
         assert pgraph.validate(doc, head).errors == []
         out = tmp_path / f"i{int(lab_in_project)}"
-        m = galaxy.export(doc, head, out, "inst", created="2026-10-06T00:00:00Z")
+        m = kgbundle.export(doc, head, out, "inst", created="2026-10-06T00:00:00Z")
         names = _names(out)
         assert set(names) == want, lab_in_project
         # the same as the lab itself may see (scale graph filter)
@@ -475,12 +475,12 @@ def test_an_institution_bundle_holds_only_what_each_of_its_institutions_may_see(
     doc = _institution_doc(True)
     doc["graph"]["stewardship"]["contributed_by"] = ["ex:acc/org/lab", "ex:acc/org/other"]
     doc["nodes"].append({"id": "ex:acc/org/other", "label": "Institution", "props": {"name": "other"}})
-    galaxy.export(doc, head, tmp_path / "two", "inst", created="2026-10-06T00:00:00Z")
+    kgbundle.export(doc, head, tmp_path / "two", "inst", created="2026-10-06T00:00:00Z")
     assert set(_names(tmp_path / "two")) == {"lab species", "public species"}
     # a graph that states no stewardship: its own records share the bundle's (unnamed) audience; a project's does not
     bare = _institution_doc(True)
     bare["graph"].pop("stewardship")
-    galaxy.export(bare, head, tmp_path / "bare", "inst", created="2026-10-06T00:00:00Z")
+    kgbundle.export(bare, head, tmp_path / "bare", "inst", created="2026-10-06T00:00:00Z")
     assert set(_names(tmp_path / "bare")) == {"lab species", "public species"}
     # unit level: the audience of each level, read by visible()
     st = {"access": "project", "project": "ex:acc/project/p2"}
@@ -501,7 +501,7 @@ def test_texts_of_withheld_sources_are_not_shipped(tmp_path, capsys):
     paper, review = tmp_path / "paper.txt", tmp_path / "review.txt"
     paper.write_text("the catalyst was tested at 250 C")
     review.write_text("an institution's own review")
-    rc, out, err = _run(["graph", "export", str(f), "--to", "galaxy", "--out", str(tmp_path / "b"), "--created",
+    rc, out, err = _run(["graph", "export", str(f), "--to", "kg-bundle", "--out", str(tmp_path / "b"), "--created",
                          "2026-10-06T00:00:00Z", "--text", f"ex:acc/source/paper={paper}:CC0-1.0",
                          "--text", f"ex:acc/source/review={review}:CC0-1.0"], capsys)
     assert rc == 0 and "--text not shipped for ex:acc/source/review" in err
@@ -512,7 +512,7 @@ def test_texts_of_withheld_sources_are_not_shipped(tmp_path, capsys):
     man = json.loads((b / "bundle.json").read_text())
     assert man["export_report"]["texts_not_shipped"] == 1 and man["redistributable_publications"] == 1
     # kept with --keep-less-open, as the record is
-    rc, out, err = _run(["graph", "export", str(f), "--to", "galaxy", "--out", str(tmp_path / "k"), "--keep-less-open",
+    rc, out, err = _run(["graph", "export", str(f), "--to", "kg-bundle", "--out", str(tmp_path / "k"), "--keep-less-open",
                          "--text", f"ex:acc/source/review={review}:CC0-1.0"], capsys)
     assert rc == 0 and (tmp_path / "k/text/review.txt").exists() and "not shipped" not in err
 
@@ -527,7 +527,7 @@ def test_kept_records_of_another_audience_name_it(tmp_path, head):
     doc["nodes"].append({"id": "ex:acc/project/p2", "label": "Project", "props": {"name": "project p2"}})
     doc["links"] = [e for e in doc["links"] if e["type"] != "REPORTED_IN"] + pgraph.derive_reported_in(doc)
     assert pgraph.validate(doc, head).errors == []
-    m = galaxy.export(doc, head, tmp_path / "k", "acc", created="2026-10-06T00:00:00Z", keep_less_open=True)
+    m = kgbundle.export(doc, head, tmp_path / "k", "acc", created="2026-10-06T00:00:00Z", keep_less_open=True)
     names = _names(tmp_path / "k")
     acc_keys = ("scale_access", "scale_access_project", "scale_access_institutions")
     assert {k: names["other project species"].get(k) for k in acc_keys} == {
@@ -542,17 +542,17 @@ def test_kept_records_of_another_audience_name_it(tmp_path, head):
     assert props["scale_access_project"]["type"] == "string" and props["scale_access_institutions"]["type"] == "string[]"
     assert "scale_access_project" in m["export_report"]["access_warning"]
     # without keep_less_open the other project's record is withheld, as before
-    galaxy.export(doc, head, tmp_path / "w", "acc", created="2026-10-06T00:00:00Z")
+    kgbundle.export(doc, head, tmp_path / "w", "acc", created="2026-10-06T00:00:00Z")
     assert "other project species" not in _names(tmp_path / "w")
-    v = _galaxy_validator()
+    v = _bundle_validator()
     if v:
-        galaxy.seal(tmp_path / "k")
+        kgbundle.seal(tmp_path / "k")
         assert v.validate_bundle(tmp_path / "k").ok
 
 
 def test_no_withheld_id_stays_in_a_kept_record(tmp_path, head):
     """A kept record's references to a record left out go with it (a ref, a list entry, a record_ref, a map entry keyed
-    by it; a value about it is withheld in its place, under its key in a map), in the filter and in the GALAXY bundle,
+    by it; a value about it is withheld in its place, under its key in a map), in the filter and in the kg-bundle,
     and are counted."""
     gone, kept = "ex:acc/species/c", "ex:acc/species/b"
     doc = _access_doc()
@@ -566,7 +566,7 @@ def test_no_withheld_id_stays_in_a_kept_record(tmp_path, head):
     doc["links"] = [e for e in doc["links"] if e["type"] != "REPORTED_IN"] + pgraph.derive_reported_in(doc)
     assert pgraph.validate(doc, head).errors == []
     for name, kw in (("project", {}), ("public", {"access": {"access": "public"}})):
-        m = galaxy.export(doc, head, tmp_path / name, "acc", created="2026-10-06T00:00:00Z", **kw)
+        m = kgbundle.export(doc, head, tmp_path / name, "acc", created="2026-10-06T00:00:00Z", **kw)
         assert m["export_report"]["access"]["withheld_less_open"]["references"] == 1, name
         for f in (tmp_path / name).rglob("*"):
             assert not f.is_file() or gone not in f.read_text(), (name, f)
@@ -604,7 +604,7 @@ def test_an_export_into_an_earlier_bundle_keeps_none_of_its_texts(tmp_path, caps
     review = tmp_path / "review.txt"
     review.write_text("an institution's own review")
     b = tmp_path / "b"
-    base = ["graph", "export", str(f), "--to", "galaxy", "--out", str(b), "--text", f"ex:acc/source/review={review}:CC0-1.0"]
+    base = ["graph", "export", str(f), "--to", "kg-bundle", "--out", str(b), "--text", f"ex:acc/source/review={review}:CC0-1.0"]
     rc, _, err = _run(base + ["--keep-less-open"], capsys)
     assert rc == 0 and (b / "text/review.txt").exists()
     rc, _, err = _run(base, capsys)                       # now withheld: its text goes from the folder too
@@ -658,17 +658,17 @@ def test_a_value_naming_a_withheld_record_is_withheld_whole_in_its_place(tmp_pat
                                  {"status": "present", "value": 2, "unit": "g/kWh", "target": "ex:exmpl/thermo/species/meoh"}]
     assert pgraph.validate(out, spec).errors == []
     assert "secret" not in json.dumps(out)
-    m = galaxy.export(out, spec, tmp_path / "pub", "pub", created="2026-10-07T00:00:00Z", access={"access": "public"})
-    m2 = galaxy.export(d, spec, tmp_path / "pub2", "pub", created="2026-10-07T00:00:00Z", access={"access": "public"})
+    m = kgbundle.export(out, spec, tmp_path / "pub", "pub", created="2026-10-07T00:00:00Z", access={"access": "public"})
+    m2 = kgbundle.export(d, spec, tmp_path / "pub2", "pub", created="2026-10-07T00:00:00Z", access={"access": "public"})
     assert m2["export_report"]["access"]["withheld_less_open"] == {"nodes": 2, "links": 1, "references": 3}
     for b in ("pub", "pub2"):
         for f in (tmp_path / b).rglob("*"):
             assert not f.is_file() or "secret" not in f.read_text(), f
     assert m["counts"] == m2["counts"]
-    v = _galaxy_validator()
+    v = _bundle_validator()
     if v:
         for b in ("pub", "pub2"):
-            galaxy.seal(tmp_path / b)
+            kgbundle.seal(tmp_path / b)
             assert v.validate_bundle(tmp_path / b).ok
 
 
@@ -753,7 +753,7 @@ def test_a_record_ref_into_a_kept_record_follows_what_the_filter_removed(tmp_pat
     assert withheld == {"nodes": 3, "links": 2, "references": 9, "evidence_cut": 1} and pgraph.validate(pub, spec).errors == []
     assert [x["path"] for x in next(e for e in pub["links"] if e["id"] == sup)["props"]["premise_refs"]] == \
         ["/energy_yield/1", "/evidence/0", "/conversion"]
-    m = galaxy.export(d, spec, tmp_path / "pub", "pub", created="2026-10-07T00:00:00Z", access={"access": "public"})
+    m = kgbundle.export(d, spec, tmp_path / "pub", "pub", created="2026-10-07T00:00:00Z", access={"access": "public"})
     assert m["export_report"]["access"]["withheld_less_open"] == {"nodes": 3, "links": 2, "references": 9, "evidence_cut": 1}
     # nothing withheld: every path as it was
     same = pgraph.filter_for(d, ["ex:exmpl/project/examples"], "2026-10-07")
@@ -817,7 +817,7 @@ def test_a_value_stated_only_by_a_withheld_source_keeps_its_place_and_lost_evide
     assert "secret" not in json.dumps(out)
     _, withheld = pgraph.restrict_to(d, {"access": "public"}, "2026-10-07")
     assert withheld["evidence_cut"] == 2 and withheld["references"] == 6
-    m = galaxy.export(d, spec, tmp_path / "pub", "pub", created="2026-10-07T00:00:00Z", access={"access": "public"})
+    m = kgbundle.export(d, spec, tmp_path / "pub", "pub", created="2026-10-07T00:00:00Z", access={"access": "public"})
     assert m["export_report"]["access"]["withheld_less_open"]["evidence_cut"] == 2
     for f in (tmp_path / "pub").rglob("*"):
         assert not f.is_file() or "secret" not in f.read_text(), f
@@ -905,7 +905,7 @@ def test_an_export_for_a_viewer_declares_that_viewers_audience(tmp_path, capsys)
     d["links"] = [e for e in d["links"] if e["type"] != "REPORTED_IN"] + pgraph.derive_reported_in(d)
     f = tmp_path / "acc.json"
     f.write_text(json.dumps(d))
-    base = ["graph", "export", str(f), "--to", "galaxy", "--created", "2026-10-06T00:00:00Z", "--date", "2026-10-06"]
+    base = ["graph", "export", str(f), "--to", "kg-bundle", "--created", "2026-10-06T00:00:00Z", "--date", "2026-10-06"]
     rc, _, err = _run(base + ["--out", str(tmp_path / "p2"), "--as", p2], capsys)
     m = json.loads((tmp_path / "p2/bundle.json").read_text())
     assert rc == 0 and m["scale_header"]["stewardship"] == {"access": "project", "project": p2, "licence": "CC-BY-4.0"}
@@ -933,7 +933,7 @@ def test_records_kept_less_open_than_the_audience_are_counted_in_the_header(tmp_
     d = _access_doc()
     d["graph"]["stewardship"] = {"access": "public", "licence": "CC-BY-4.0"}
     d["nodes"][1]["props"]["stewardship"] = {"access": "project", "project": P}
-    m = galaxy.export(d, head, tmp_path / "k", "acc", created="2026-10-06T00:00:00Z", keep_less_open=True)
+    m = kgbundle.export(d, head, tmp_path / "k", "acc", created="2026-10-06T00:00:00Z", keep_less_open=True)
     h, acc = m["scale_header"], m["export_report"]["access"]
     assert h["stewardship"] == {"access": "public", "licence": "CC-BY-4.0"}
     assert h["access_at_export"] == {"level": "public", "date": "2026-10-06",
@@ -943,13 +943,13 @@ def test_records_kept_less_open_than_the_audience_are_counted_in_the_header(tmp_
     assert w.startswith("not for all of its audience") and "access 'public'" in w and "only within its own audience" in w
     assert "only within that audience" not in w
     # without it, nothing less open is held and the public bundle does not warn
-    m = galaxy.export(d, head, tmp_path / "w", "acc", created="2026-10-06T00:00:00Z")
+    m = kgbundle.export(d, head, tmp_path / "w", "acc", created="2026-10-06T00:00:00Z")
     assert "less_open_kept" not in m["scale_header"]["access_at_export"] and "access_warning" not in m["export_report"]
     # a project bundle that kept nothing less open (none to keep) says only that it is not public
     d["nodes"] = [n for n in d["nodes"] if (n["props"].get("stewardship") or {}).get("access") in (None, "public", "project")]
     d["links"] = pgraph.derive_reported_in(d)
     d["graph"]["stewardship"] = {"access": "project", "project": P, "licence": "CC-BY-4.0"}
-    m = galaxy.export(d, head, tmp_path / "p", "acc", created="2026-10-06T00:00:00Z", keep_less_open=True)
+    m = kgbundle.export(d, head, tmp_path / "p", "acc", created="2026-10-06T00:00:00Z", keep_less_open=True)
     assert m["export_report"]["access"]["less_open_kept"] is True and "less_open_kept" not in m["scale_header"]["access_at_export"]
     assert m["export_report"]["access_warning"].startswith("not public")
 
@@ -968,23 +968,23 @@ def test_an_earlier_manifest_that_names_anything_but_a_file_of_text_stops_the_ex
     for named in (str(victim / "important.txt"), "../../victim/important.txt", "sub", "link.txt", ".."):
         (out / "text" / "_manifest.json").write_text(json.dumps({"files": {"a": {"file": named},
                                                                            "b": {"file": "link.txt"}}}))
-        rc, _, err = _run(["graph", "export", str(f), "--to", "galaxy", "--out", str(out)], capsys)
+        rc, _, err = _run(["graph", "export", str(f), "--to", "kg-bundle", "--out", str(out)], capsys)
         assert rc == 2 and "not a file of" in err and "export into an empty folder" in err, named
         assert (victim / "important.txt").read_text() == "keep" and (out / "text" / "link.txt").is_symlink()
         assert not (out / "bundle.json").exists() and not (out / "kg").exists()
     (out / "text" / "_manifest.json").write_text(json.dumps({"files": ["not a map"]}))
-    rc, _, err = _run(["graph", "export", str(f), "--to", "galaxy", "--out", str(out)], capsys)
+    rc, _, err = _run(["graph", "export", str(f), "--to", "kg-bundle", "--out", str(out)], capsys)
     assert rc == 2 and "is not a bundle's text manifest" in err
     linked = tmp_path / "c"
     linked.mkdir()
     (linked / "text").symlink_to(victim)
-    rc, _, err = _run(["graph", "export", str(f), "--to", "galaxy", "--out", str(linked)], capsys)
+    rc, _, err = _run(["graph", "export", str(f), "--to", "kg-bundle", "--out", str(linked)], capsys)
     assert rc == 2 and "is a link" in err and (victim / "important.txt").exists()
 
 
 def test_a_view_declares_its_audience_and_every_record_keeps_its_access(tmp_path, head):
     """When the viewer may not see the graph's header stewardship, a view declares the viewer as its audience in its
-    header (the public, one project, institutions), as a GALAXY bundle does, after writing on each kept record the
+    header (the public, one project, institutions), as a kg-bundle does, after writing on each kept record the
     audience keys it inherited, so every record's access in the view is what it was (an embargo whose access after
     it came from the header included). A viewer who may see the header, or one no stewardship names (a person),
     leaves the header and the records as they were."""
@@ -1032,8 +1032,8 @@ def test_a_view_declares_its_audience_and_every_record_keeps_its_access(tmp_path
     assert pgraph.view_audience(d4, ["ex:acc/person/a"]) is None
     # a public bundle made from the view (the export's --public) holds what it held when the view kept the header
     kept_header = {**pub, "graph": {**pub["graph"], "stewardship": d["graph"]["stewardship"]}}
-    a = galaxy.export(pub, head, tmp_path / "a", "acc", created="2026-10-07T00:00:00Z", access={"access": "public"})
-    b = galaxy.export(kept_header, head, tmp_path / "b", "acc", created="2026-10-07T00:00:00Z", access={"access": "public"})
+    a = kgbundle.export(pub, head, tmp_path / "a", "acc", created="2026-10-07T00:00:00Z", access={"access": "public"})
+    b = kgbundle.export(kept_header, head, tmp_path / "b", "acc", created="2026-10-07T00:00:00Z", access={"access": "public"})
     assert (tmp_path / "a/kg/graph.json").read_bytes() == (tmp_path / "b/kg/graph.json").read_bytes()
     assert a["scale_header"]["stewardship"] == b["scale_header"]["stewardship"] == {"access": "public", "licence": "CC-BY-4.0"}
 
@@ -1081,28 +1081,28 @@ def test_a_malformed_stewardship_reads_as_institution_and_stops_nothing(head):
 
 
 def test_a_malformed_header_stewardship_exports_as_institution(tmp_path, capsys, head):
-    """The GALAXY export reads the graph's header stewardship as every other reader does (pgraph.stewardship_of): one
+    """The kg-bundle export reads the graph's header stewardship as every other reader does (pgraph.stewardship_of): one
     that is not an object is institution, failing closed, and a project or contributed_by that is not an id names
     none. The bundle then declares institution (or a project it cannot name) and warns; with --public it holds only
-    what is public. Nothing raises, through galaxy.export, `scale graph export` or the validator, which reports it."""
+    what is public. Nothing raises, through kgbundle.export, `scale graph export` or the validator, which reports it."""
     day = "2026-10-07T00:00:00Z"
     for bad in ("public", ["public"], 5):
         d = _access_doc()
         d["graph"]["stewardship"] = bad
-        m = galaxy.export(copy.deepcopy(d), head, tmp_path / "d", "acc", created=day)
+        m = kgbundle.export(copy.deepcopy(d), head, tmp_path / "d", "acc", created=day)
         assert m["scale_header"]["stewardship"] == {"access": "institution"}, bad
         assert m["export_report"]["access"]["bundle"] == "institution" and "no institution named" in m["export_report"]["access_warning"]
         names = _names(tmp_path / "d")      # the lab's record is not for an institution bundle that names no institution
         assert {"project species", "public species"} <= set(names) and "institution species" not in names, bad
-        m = galaxy.export(copy.deepcopy(d), head, tmp_path / "p", "acc", created=day, access={"access": "public"})
+        m = kgbundle.export(copy.deepcopy(d), head, tmp_path / "p", "acc", created=day, access={"access": "public"})
         assert m["scale_header"]["stewardship"] == {"access": "public"} and "access_warning" not in m["export_report"]
         assert set(_names(tmp_path / "p")) == {"public species"}, bad       # a record that inherits the header is not public
-        m = galaxy.export(copy.deepcopy(d), head, tmp_path / "k", "acc", created=day, keep_less_open=True)
+        m = kgbundle.export(copy.deepcopy(d), head, tmp_path / "k", "acc", created=day, keep_less_open=True)
         assert m["scale_header"]["access_at_export"]["level"] == "institution" and m["export_report"]["access_warning"]
         f = tmp_path / "bad.json"
         f.write_text(json.dumps(d))
         for extra in ([], ["--public"], ["--as", P]):
-            rc, out, err = _run(["graph", "export", str(f), "--to", "galaxy", "--out", str(tmp_path / "cli"),
+            rc, out, err = _run(["graph", "export", str(f), "--to", "kg-bundle", "--out", str(tmp_path / "cli"),
                                  "--created", day, *extra], capsys)
             assert rc == 0 and json.loads(out)["counts"] and "Traceback" not in err, (bad, extra)
     # an object whose project or institutions are not ids: the audience names none, and nothing raises
@@ -1113,13 +1113,13 @@ def test_a_malformed_header_stewardship_exports_as_institution(tmp_path, capsys,
         d = _access_doc()
         d["graph"]["stewardship"] = bad
         assert any("stewardship." in e["message"] for e in pgraph.validate(d, head).errors), bad   # reported, not raised
-        m = galaxy.export(copy.deepcopy(d), head, tmp_path / "o", "acc", created=day)
+        m = kgbundle.export(copy.deepcopy(d), head, tmp_path / "o", "acc", created=day)
         assert m["scale_header"]["stewardship"] == header and m["export_report"]["access"]["bundle"] == level, bad
         assert f"access {level!r} (no {level} named)" in m["export_report"]["access_warning"], bad
         assert "institution species" not in _names(tmp_path / "o"), bad
         restricted, _ = pgraph.restrict_to(d, bad, day[:10])
         assert "ex:acc/species/c" not in {n["id"] for n in restricted["nodes"]}, bad
-        m = galaxy.export(copy.deepcopy(d), head, tmp_path / "op", "acc", created=day, access={"access": "public"})
+        m = kgbundle.export(copy.deepcopy(d), head, tmp_path / "op", "acc", created=day, access={"access": "public"})
         assert set(_names(tmp_path / "op")) == {"public species"}, bad
     # a header that states no access (none at all, an empty one, an access null or ""): the bundle states the
     # institution SCALE reads it as, never leaves it to the host to know how an absence reads; and an embargo that
@@ -1138,12 +1138,12 @@ def test_a_malformed_header_stewardship_exports_as_institution(tmp_path, capsys,
         else:
             d["graph"]["stewardship"] = bad
         for keep in (False, True):
-            m = galaxy.export(copy.deepcopy(d), head, tmp_path / "n", "acc", created=day, keep_less_open=keep)
+            m = kgbundle.export(copy.deepcopy(d), head, tmp_path / "n", "acc", created=day, keep_less_open=keep)
             assert m["scale_header"]["stewardship"] == header, (bad, keep)
             assert m["scale_header"]["access_at_export"]["level"] == "institution", (bad, keep)
             assert m["export_report"]["access"]["bundle"] == "institution" and m["export_report"]["access_warning"], bad
             on_disk = json.loads((tmp_path / "n/bundle.json").read_text())["scale_header"]["stewardship"]
             assert on_disk == header, (bad, keep)
     # a header that states its access keeps it as stated
-    m = galaxy.export(_access_doc(), head, tmp_path / "s", "acc", created=day)
+    m = kgbundle.export(_access_doc(), head, tmp_path / "s", "acc", created=day)
     assert m["scale_header"]["stewardship"]["access"] == "project" and "access_after_embargo" not in m["scale_header"]["stewardship"]

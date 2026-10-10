@@ -110,7 +110,7 @@ A version number names a schema only within this numbering. **Bind a schema by i
 spec` writes a version's spec document (the assembled schema as canonical JSON, `lineage: scale`) and prints
 its sha256, the same whether the version is the head or frozen, and `scale graph spec --expect <sha256>`
 says whether a version and digest you hold are this repository's (`pgraph.identify`). Releases ship every
-version's spec document, `scale graph verify` checks that each keeps its digest, and a GALAXY bundle names
+version's spec document, `scale graph verify` checks that each keeps its digest, and a kg-bundle names
 its schema by version and digest. A document that pins a version these tools do not hold is reported as
 such (newer than the head, or not a version of this repository), never read under another version of the
 same number.

@@ -15,8 +15,8 @@ A source is named by ``slug`` (or ``id``) and carries a ``status``: an included 
 statuses counted. The candidates are every source listed; a declared corpus is not a database search, so there are
 no PRISMA identities (identified, deduplicated, screened) to check, only that every candidate is accounted for once.
 
-:func:`check` returns the problems and the GALAXY ``corpus`` block (``description``, ``frozen_at``, ``n_screened``:
-the candidates, ``n_included``), which ``scale graph export --to galaxy --corpus MANIFEST`` writes into bundle.json.
+:func:`check` returns the problems and the bundle ``corpus`` block (``description``, ``frozen_at``, ``n_screened``:
+the candidates, ``n_included``), which ``scale graph export --to kg-bundle --corpus MANIFEST`` writes into bundle.json.
 """
 
 from __future__ import annotations

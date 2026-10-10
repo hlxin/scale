@@ -184,7 +184,7 @@ A source's publication status is derived from the notices recorded in the graph,
   says how many. `include_retracted: true` in the plan keeps such rows, their evidence labelled.
 - A retraction never deletes a record and does not make a finding false; it removes its support.
   The validator flags the same records (`rests_on_retracted_source`,
-  `partially_rests_on_retracted_source`), and the GALAXY export marks them (`source_status`).
+  `partially_rests_on_retracted_source`), and the kg-bundle export marks them (`source_status`).
 
 A graph that records no notice answers exactly as before, apart from the `source_status` of each
 evidence item.
