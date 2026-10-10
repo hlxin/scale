@@ -145,6 +145,30 @@ def test_bounds_approximations_absences_and_dates_are_exported_or_counted(tmp_pa
     assert schema["node_types"]["CatalyticTest"]["properties"]["conversion_bound"]["values"] == ["upper", "lower"]
 
 
+def test_parallel_links_with_other_values_are_listed_never_merged(tmp_path, head):
+    """Two links of one type between the same records, from one source, share an edge id. The same values merge
+    their evidence; other values (a second amount) leave the second link out, listed in the export report, so the
+    bundle never shows one link's value with the other's evidence."""
+    doc = build()
+    uses = next(e for e in doc["links"] if e["id"] == f"{T}/link/uses")
+    uses["props"]["amount"] = V(10, "g", as_reported="10 g")
+    again = copy.deepcopy(uses)
+    again["id"], again["props"]["amount"] = f"{T}/link/uses-again", V(8.2, "g", as_reported="an additional 8.2 g")
+    again["props"]["evidence"] = [ev("p. 3", Q_TEMP)]
+    same = copy.deepcopy(uses)
+    same["id"], same["props"]["evidence"] = f"{T}/link/uses-same", [ev("p. 4", Q_CLAIM)]
+    doc["links"] += [again, same]
+    m = kgbundle.export(doc, head, tmp_path / "b", "parallel", created="2026-10-06T00:00:00Z")
+    by = _by_scale(tmp_path / "b")
+    kept = by[f"{T}/link/uses"]["props"]
+    assert kept["amount_as_reported"] == "10 g" and f"{T}/link/uses-again" not in by
+    assert [x["locator"].get("page") for x in kept["_evidence"]] == [2, 4]       # the same values: evidence merged
+    par = m["export_report"]["parallel_links_not_exported"]
+    assert par["by_type"] == {"USES_CATALYST": 1}
+    assert par["links"] == [{"left_out": f"{T}/link/uses-again", "kept": f"{T}/link/uses",
+                             "source_id": kept["source_paper_ids"][0]}]
+
+
 def test_a_link_resting_only_on_withheld_quotes_is_exported_with_their_digests(tmp_path, head):
     """A quote withheld under the copyright cap (its sha256 and length in the evidence note) is the kg-bundle 1.1.0
     quote_withheld, so the link stays an edge; one longer than the format's 600 characters is left out and counted, and a
