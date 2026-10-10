@@ -372,6 +372,17 @@ def cmd_graph_spec(args):
     print(to_json(rows if args.all else rows[0]))
 
 
+def _positive(text: str) -> int:
+    """A whole number of at least 1 (a count of hits)."""
+    try:
+        n = int(text)
+    except ValueError:
+        n = 0
+    if n < 1:
+        raise argparse.ArgumentTypeError(f"a whole number of at least 1 (got {text!r})")
+    return n
+
+
 def _rel(repo: Path, p: Path) -> str:
     try:
         return Path(p).resolve().relative_to(Path(repo).resolve()).as_posix()
@@ -1020,7 +1031,7 @@ def build_parser() -> argparse.ArgumentParser:
     sp.add_argument("file"); sp.add_argument("--index", help="index path stem (default: <graph>.evidence)")
     sp.add_argument("--embedder", default="scale-hash-v1"); out_opts(sp)
     sp = add("search", cmd_graph_search, "search evidence by words and meaning; hits lead to the records that cite them", gr)
-    sp.add_argument("file"); sp.add_argument("query"); sp.add_argument("--index"); sp.add_argument("-k", type=int, default=10)
+    sp.add_argument("file"); sp.add_argument("query"); sp.add_argument("--index"); sp.add_argument("-k", type=_positive, default=10)
     sp.add_argument("--mode", choices=["hybrid", "vector", "keyword", "rrf"], default="hybrid")
     sp.add_argument("--published-before", help="only evidence from sources published before this date (YYYY or YYYY-MM-DD)")
     out_opts(sp, ("json", "markdown"))

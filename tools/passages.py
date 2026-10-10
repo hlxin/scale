@@ -372,6 +372,8 @@ class Index:
         every item tied with the m-th best is a candidate before the candidates are sorted."""
         np = _np()
         pos = np.flatnonzero(score > 0)
+        if m < 1:
+            return pos[:0]
         if m < len(pos):
             cut = np.partition(score[pos], len(pos) - m)[len(pos) - m]
             pos = pos[score[pos] >= cut]
@@ -382,6 +384,8 @@ class Index:
         cosine (negative counted as 0); vector, keyword: one of them; rrf: reciprocal rank fusion of the BM25 and
         cosine rankings (each read to RRF_DEPTH, or twice ``k``), sum of 1 / (RRF_K + rank), at most 2 / 61."""
         np = _np()
+        if not isinstance(k, int) or isinstance(k, bool) or k < 1:
+            raise ScaleError(f"k is how many hits to return, a whole number of at least 1 (got {k!r})")
         if not self.items:
             return []
         if mode not in MODES:
