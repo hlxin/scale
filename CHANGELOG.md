@@ -2,6 +2,29 @@
 
 ## Unreleased
 
+- **The methanol example, simplified and ready to recurate.** `examples/methanol-synthesis-pre1966/` keeps only what
+  a reader and a recuration need: `sources.json` (the frozen corpus, all 178 candidates with their status, each of the
+  105 in-scope sources with its PDF `pdfs/<slug>.pdf` and the PDF's sha256; it replaces `corpus/manifest.json`,
+  `corpus/manifest-co-co2-hydrogenation.json` and `corpus/sources.json`), the graph, `rights.yaml`,
+  `stewardship.yaml` and `queries/*.yaml`. The PDFs are local and git-ignored, named by slug: the DOI with `/` as `-`
+  (a patent or report without a DOI: its number or corpus id). Removed and kept in the git history (commit `a169872`):
+  release `v1.0.0` (a second copy of the graph), its GALAXY bundle (regenerated with `scale graph export --to
+  galaxy`), the curation guide and assembly report, and the conversion tools of the earlier pipeline; recuration
+  follows the `curate-source` skill. The query answers are unchanged.
+- **Methanol example: 9 runs get the pressure their source states.** Read against its PDF, Molstad and Dodge (1935,
+  `10.1021-ie50302a005`) state one testing pressure for their tests in their Experimental Procedure (178
+  atmospheres absolute). The six runs of the high-temperature resistance test and the three Zn50Cr50 catalysts
+  (dry-process, Groger) had it as not stated; they now carry it, citing that passage (a quote already withheld
+  under the cap, so no quoted text is added), as another run of the paper did. Checklist violations: 121 → 112; the
+  graph stays valid (0 errors) and every query answers as before. The other gaps were checked and are the sources'
+  own: no temperature for the maxima of Frolich et al. (1928), no pressure for the Fig. 7 and 8 runs of
+  `10.1246-bcsj.31.45`, and patent examples that only say "similar conditions".
+- **Queries reuse what does not depend on the plan.** Every query used to hash the whole document, read its access and
+  the publication status of its sources, and gather its evidence quotes, about 100 ms on the methanol graph whatever
+  the plan. `pgraph_query.Graph` now computes each once, when first needed, and `run(..., graph=)` reuses it: the
+  agent tools keep a document loaded by path with its graph and evidence index until the file changes, and the
+  competency questions and proposal checks build one per document. A repeat query on the methanol graph takes 2-15
+  ms; the answers are identical.
 - **Text queries and search build the evidence index when none is saved.** `scale graph query` (a plan with `text`),
   `scale graph search`, the agent tools `scale_query` and `scale_search`, the competency questions and `scale proposal
   check` used to fail when no index lay beside the document (three of the methanol example's seven plans stopped with

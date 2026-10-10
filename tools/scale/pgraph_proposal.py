@@ -782,14 +782,15 @@ def check(cs: Path, repo: Path, now: _dt.datetime | None = None) -> dict:
         ix_stem = doc_path                               # the evidence index lies beside the document
         ix_stem = ix_stem.with_name(ix_stem.name.removesuffix(".json").removesuffix(".graph") + ".evidence")
         ix = None
+        ga, gb = pgraph_query.Graph(doc, base_spec), pgraph_query.Graph(moved, cand_spec)   # one each, for all plans
         for plan_path in d.get("competency") or []:
             plan = load_yaml(located(plan_path, "competency"))
             if isinstance(plan, dict) and "match" not in plan and isinstance(plan.get("plan"), dict):
                 plan = plan["plan"]                     # a domain's competency question: its plan
             if ix is None and isinstance(plan, dict) and plan.get("text"):
                 ix = index_for(ix_stem, doc)            # only this document's index, else built from it
-            ra = pgraph_query.run(doc, base_spec, plan, ix)
-            rb = pgraph_query.run(moved, cand_spec, plan, ix)
+            ra = pgraph_query.run(doc, base_spec, plan, ix, ga)
+            rb = pgraph_query.run(moved, cand_spec, plan, ix, gb)
             changed = (ra["status"], ra.get("row_count")) != (rb["status"], rb.get("row_count"))
             declared = plan_path in (p.get("expected_query_changes") or [])
             competency.append({"plan": plan_path, "baseline": {"status": ra["status"], "rows": ra.get("row_count")},

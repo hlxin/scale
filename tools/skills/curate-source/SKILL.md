@@ -51,7 +51,7 @@ impurities, driving forces outside the list, characterization results, digitizin
 
 1. **Freeze the source set** before curating: which sources, by what rule (e.g. published before a
    cutoff date; a patent by its grant date, not its priority date), with the texts used. Record it
-   (`corpus/manifest.json` in the example) so the corpus can be audited: every candidate source gets
+   (`sources.json` in the methanol example) so the corpus can be audited: every candidate source gets
    a `status` (included, or the reason it is left out: not retrieved, off scope, after the cutoff;
    a bare `excluded` needs a `status_reason`), and the `counts` add up to the candidates. Check it
    with `scale corpus check <manifest>`. A declared corpus is not a database search: there are no

@@ -193,8 +193,9 @@ def run_question(repo: Path, domain: str, path: Path, m: dict | None = None, cac
                 cache[str(spec_path)] = pgraph.load_spec(spec_path)
             stem = p.with_name(p.name.removesuffix(".json").removesuffix(".graph") + ".evidence")
             ix = index_for(stem, doc) if q["plan"].get("text") else None
+            g = pgraph_query.Graph(doc, cache[str(spec_path)])          # one per document, for all its plans
             for i, plan in enumerate(plans):
-                results[i].append(pgraph_query.run(doc, cache[str(spec_path)], plan, ix))
+                results[i].append(pgraph_query.run(doc, cache[str(spec_path)], plan, ix, g))
         except (ScaleError, OSError, ValueError, KeyError, TypeError) as exc:
             out["problems"].append(f"{rel}: the plan does not run: {exc}")
     if out["problems"]:

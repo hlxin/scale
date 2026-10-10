@@ -143,6 +143,11 @@ _PATH = re.compile(r"^(?P<prop>[^.\[\]\s]+)(?:\.(?P<entry>[^.\[\]\s]+))?(?:\[(?P
 
 
 class Graph:
+    """A document indexed for queries: its records by id, links by end and records by label, and what every query of
+    the document needs whatever its plan (its digest, its access on a day, the publication statuses of its sources,
+    the evidence quotes it holds), each computed once when first asked for. Build one per document and pass it to
+    :func:`run` for every plan run on that document; the document must not change while the Graph is in use."""
+
     def __init__(self, doc: dict, spec: dict):
         self.doc, self.spec = doc, spec
         self.nodes = {n["id"]: n for n in doc["nodes"]}
@@ -156,7 +161,39 @@ class Graph:
             for lab in [n["label"]] + (spec["nodes"].get(n["label"], {}).get("ancestors") or []):
                 self.by_label.setdefault(lab, []).append(n["id"])
         self.year = {n["id"]: _year(n["props"]) for n in doc["nodes"] if n["label"] in ("Source", "Dataset")}
-        self.digest = passages.graph_sha256(doc)
+        self._digest = self._life = self._inclusion = self._held = None
+        self._access: dict[str, dict] = {}
+
+    @property
+    def digest(self) -> str:
+        if self._digest is None:
+            self._digest = passages.graph_sha256(self.doc)
+        return self._digest
+
+    def access(self, as_of: str) -> dict:
+        """:func:`document_access` on ``as_of`` (a copy, so that an answer's access never changes another's)."""
+        if as_of not in self._access:
+            self._access[as_of] = document_access(self.doc, as_of)
+        return dict(self._access[as_of])
+
+    @property
+    def life(self) -> dict:
+        if self._life is None:
+            self._life = lifecycle.statuses(self.doc, self.spec)
+        return self._life
+
+    @property
+    def inclusion(self) -> dict:
+        if self._inclusion is None:
+            self._inclusion = lifecycle.retracted_inclusions(self.doc, self.life, self.spec)
+        return self._inclusion
+
+    @property
+    def held(self) -> set:
+        """The evidence quotes the document holds, as (record, evidence position, text)."""
+        if self._held is None:
+            self._held = {(it["record"], it["evidence"], it["text"]) for it in passages.evidence_items(self.doc)}
+        return self._held
 
     def is_a(self, nid: str, label: str) -> bool:
         n = self.nodes.get(nid)
@@ -655,8 +692,10 @@ def _eco(t: Any) -> str:
 
 
 # ------------------------------------------------------------------------------------------ execution
-def run(doc: dict, spec: dict, plan: dict, evidence_index=None) -> dict:
-    g = Graph(doc, spec)
+def run(doc: dict, spec: dict, plan: dict, evidence_index=None, graph: Graph | None = None) -> dict:
+    """Run ``plan`` on ``doc``. ``graph``: the document's :class:`Graph`, when several plans run on one document (used
+    only when it was built from this document and schema)."""
+    g = graph if graph is not None and graph.doc is doc and graph.spec is spec else Graph(doc, spec)
     plan = json.loads(json.dumps(plan, default=_plain))
     m = plan.get("match") or {}
     if not m.get("label") and not m.get("id"):
@@ -675,7 +714,7 @@ def run(doc: dict, spec: dict, plan: dict, evidence_index=None) -> dict:
             "schema_version": doc["graph"].get("schema_version"), "graph_sha256": g.digest}
     link_types = list(dict.fromkeys(st["edge"] for st in steps))
     as_of = embargo_day(plan.get("as_of"), pgraph.embargo_today())    # the day an embargo is read on (one clock)
-    access = document_access(doc, as_of)            # the whole document's: no part of an answer is more open
+    access = g.access(as_of)                        # the whole document's: no part of an answer is more open
     gaps = schema_gaps(plan, spec)
     if gaps:
         return {**base, "status": "schema_gap", "schema_gaps": gaps, "rows": [], "access": access, "excluded": [],
@@ -815,8 +854,7 @@ def run(doc: dict, spec: dict, plan: dict, evidence_index=None) -> dict:
                 out.append({"var": var, "record": nid, "evidence": i, **ev, "source_year": g.year.get(ev.get("source"))})
         return out
 
-    life = lifecycle.statuses(doc, spec)
-    inclusion = lifecycle.retracted_inclusions(doc, life, spec)
+    life, inclusion = g.life, g.inclusion
 
     def labelled(item: dict) -> dict:
         """The evidence item with its source's derived publication status (and, for a partial retraction
@@ -908,7 +946,7 @@ def run(doc: dict, spec: dict, plan: dict, evidence_index=None) -> dict:
         vars_ = tq.get("vars") or [root]
         # only the quotes this document holds choose rows: an index built from another document (a less open one, or
         # this one before an edit) never selects a row by text the document does not hold
-        held = {(it["record"], it["evidence"], it["text"]) for it in passages.evidence_items(doc)}
+        held = g.held
         hits = [h for h in evidence_index.search(tq["query"], k=tq.get("k", 500), mode=tq.get("mode", "hybrid"))
                 if (h.get("record"), h.get("evidence"), h.get("text")) in held]
         score: dict[str, float] = {}

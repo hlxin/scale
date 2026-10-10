@@ -4,8 +4,8 @@ For the Alchemic platform team (`alchemic-platform`, `docs/galaxy/kg-bundle-form
 Status: requested 2026-10-09; nothing here is implemented yet.
 
 SCALE exports its knowledge graphs as GALAXY bundles (`scale graph export <graph> --to galaxy`). The bundles are
-valid today: the first public one, `examples/methanol-synthesis-pre1966/galaxy/methanol-synthesis-pre1966_v1.0.0/`,
-passes `bundle_validate.py` with 0 errors and 0 warnings. But the format cannot carry three things SCALE's rules
+valid today: the first public one, the bundle of the methanol example's release v1.0.0 (in the git history at
+commit `a169872`, `examples/methanol-synthesis-pre1966/galaxy/methanol-synthesis-pre1966_v1.0.0/`), passes `bundle_validate.py` with 0 errors and 0 warnings. But the format cannot carry three things SCALE's rules
 require, so the bundle is smaller than the graph it comes from:
 
 | what SCALE keeps | what the bundle loses today | change |
