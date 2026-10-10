@@ -2,6 +2,21 @@
 
 ## Unreleased
 
+- **Text queries and search build the evidence index when none is saved.** `scale graph query` (a plan with `text`),
+  `scale graph search`, the agent tools `scale_query` and `scale_search`, the competency questions and `scale proposal
+  check` used to fail when no index lay beside the document (three of the methanol example's seven plans stopped with
+  a missing-file error). The index is derived from the document alone, so they now build it in memory, deterministically
+  and writing nothing, as `scale graph index` would save it; a saved index is still used only for its own document.
+  The index stays uncommitted: about 30 MB for the methanol graph, and stale after any edit of a quote.
+- **Evidence search for large graphs.** The search scored every quote in Python loops; at 930,000 quotes a query took
+  2.6-3.5 s and 3.8 GB. It now reads an inverted index (only the postings of the query's words; saved beside the
+  index as `<graph>.evidence.terms`, checked against the items it was saved with), computes the int8 cosine in exact
+  float32 blocks over norms computed once (the float32 vectors kept in memory after a first query when they fit 2 GB)
+  and sorts only the best candidates: about 20 ms (keyword) to 70 ms (hybrid) a query at 930,000 quotes once loaded.
+  Results are unchanged: the same hits, scores and order as before in hybrid, vector and keyword mode (checked on the
+  methanol graph; ties go by item id as before), so plans and their `min_score` keep their answers. Building the
+  index hashes each feature once. A new mode, `rrf` (reciprocal rank fusion of the keyword and vector rankings, scores
+  up to 2/61), is opt-in; `hybrid` stays the default.
 - **People and agents open pull requests; one person approves and merges** (review policy version 3). An agent may now
   open a pull request ready for review, no longer only a draft; one person other than its author approves it and
   merges it, and agents still never approve, merge or apply. An agent opens its pull request under its own GitHub

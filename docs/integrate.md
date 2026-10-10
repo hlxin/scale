@@ -91,7 +91,7 @@ checkout), `scale call skills` serves the head's skills.
 | `template` | a minimal valid document for the catalysis domain (or the kernel alone, `core`): header and stewardship, a Source, one evidenced record, its REPORTED_IN link | — |
 | `validate` | validate a document (inline or a path) under the version it pins: errors, warnings, checklist conformance; `source_texts` checks quotes verbatim | — |
 | `query` | run a graph query plan: rows as reported with evidence, records left out and why, a coverage block (candidates, each stage's rows, everything left out by reason, the values compared), and the answer's kind (`answered`, `no_matching_record`, `missing_context`, `schema_gap`); a numeric filter states its unit and compares only values in that unit and on the basis it states, nothing converted ([querying.md](querying.md)) | — |
-| `search` | search a document's evidence index (built with `scale graph index`) by words and meaning | — |
+| `search` | search a document's evidence index (saved by `scale graph index`, or built in memory when none is) by words and meaning | — |
 | `migrate` | move a document along the schema's version steps to a newer version (ids kept) | the working directory, with `save_as` |
 | `example` | list the public synthetic examples, or copy one into the working directory | the working directory |
 | `skills` | list the skills with their reference files, or return one skill's text, or one of its reference files (`reference`; after v0.1.0) | — |

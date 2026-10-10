@@ -30,8 +30,9 @@ restores it with `scale evidence rehydrate`. (`withheld_quotes` in a release's `
 **Not here** (they reproduce source text beyond the cap, or are rebuilt locally): the curation fragments
 and second readings, the page texts and OCR (`work/`, `curation/ocr/`), the earlier private GALAXY bundles and the full graph
 (all 108 sources, tests of every reaction the sources report). They stay in the restricted copy (outside the repository, named only by the environment;
-`scale.layout.restricted_path`), at this folder's path; the curation tools read and write them there. The evidence index is not committed either: build it with
-`scale graph index methanol-synthesis.graph.json` (a few seconds).
+`scale.layout.restricted_path`), at this folder's path; the curation tools read and write them there. The evidence index is not committed either: it is derived
+from the graph alone (about 30 MB, and stale after any edit of a quote), so `scale graph query` and `scale graph search` build it
+in memory when none is saved (about two seconds); `scale graph index methanol-synthesis.graph.json` saves it for repeated searches.
 
 **Schema version.** The fragments were curated under the scale-graph 0.1.0 of the consortium schema
 repository, a different schema from this repository's 0.1.0 (the numbering restarted). The graph was moved
@@ -176,8 +177,8 @@ To pin an analysis, record the release and its graph digest; the schema is named
 
 ## Search: evidence as vectors
 
-Every quote is indexed (`scale graph index`): `methanol-synthesis.evidence.jsonl` (the items) and
-`.i8` (a 512-dimension int8 vector per item, embedder `scale-hash-v1`: hashed words, word pairs
+Every quote is indexed (`scale graph index`): `methanol-synthesis.evidence.jsonl` (the items),
+`.terms` (the keyword postings) and `.i8` (a 512-dimension int8 vector per item, embedder `scale-hash-v1`: hashed words, word pairs
 and character 4-grams, with chemistry aliases so that "Cu" finds "copper" and "sulphur"
 "sulfur"). Search combines BM25 and cosine similarity; hits lead to the records that cite them.
 Built from the public graph, the index holds the capped quotes, so a withheld quote is found only
@@ -185,14 +186,14 @@ through its record's other text. Each evidence item names its source passage in 
 
 ```bash
 G=examples/methanol-synthesis-pre1966/methanol-synthesis.graph.json
-scale graph index $G
+scale graph index $G     # optional: saves the index; without it, search builds it in memory
 scale graph search $G "sulphur poisons the copper catalyst" --published-before 1966 --format markdown
 ```
 
 ## Queries: the manuscript's questions before the cutoff
 
 `queries/scale-graph/*.yaml` are the manuscript's methanol questions as query plans
-(`scale graph query $G <plan> --format markdown`, after `scale graph index $G`). Every answer carries each row's evidence with
+(`scale graph query $G <plan> --format markdown`; the evidence-search plans use the saved index, or build it). Every answer carries each row's evidence with
 its source year and locator; all come from sources published before 1966 (a plan run with
 `published_before: 1959-01-01` answers for the earlier cutoff). The counts of the evidence-search plans
 depend on the index, here built from the capped quotes; `tools/tests/test_example_methanol.py` keeps the

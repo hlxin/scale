@@ -20,7 +20,8 @@ An evidence index records the digest of the document it was built from (``graph_
 result names). :func:`load_for` uses an index for a document only when it was built from that document, or (an
 index built before the digest was recorded, or before an edit that changed no quote) when it holds exactly the
 document's evidence items: an index built from another document, a less open one or a stale copy, is refused, so no
-text the document does not hold is searched or chooses a query's rows.
+text the document does not hold is searched or chooses a query's rows. :func:`index_for` builds the index in memory
+when none is saved beside the document, since it is derived from the document alone.
 """
 
 from __future__ import annotations
@@ -81,15 +82,21 @@ class HashEmbedder:
     id = name
     dim = 512
 
-    def features(self, text: str) -> Counter:
+    def features(self, text: str, grams: dict | None = None) -> Counter:
+        """Weighted features: each word (1), its character 4-grams with < and > as ends (0.5 each) and each word pair
+        (1). ``grams`` caches each word's 4-grams across calls; the weights are multiples of 0.5, so the sums are exact
+        in any order."""
         ws = tokens(text)
+        grams = {} if grams is None else grams
         f: Counter = Counter()
-        for w in ws:
-            f["w:" + w] += 1.0
-            padded = f"<{w}>"
-            if len(padded) > 4:
-                for i in range(len(padded) - 3):
-                    f["c:" + padded[i:i + 4]] += 0.5
+        for w, c in Counter(ws).items():
+            f["w:" + w] += float(c)
+            g = grams.get(w)
+            if g is None:
+                padded = f"<{w}>"
+                g = grams[w] = ["c:" + padded[i:i + 4] for i in range(len(padded) - 3)] if len(padded) > 4 else []
+            for x in g:
+                f[x] += 0.5 * c
         for a, b in zip(ws, ws[1:]):
             f["b:" + a + " " + b] += 1.0
         return f
@@ -97,11 +104,15 @@ class HashEmbedder:
     def encode(self, texts: list[str]):
         np = _np()
         out = np.zeros((len(texts), self.dim), dtype=np.float64)
+        slots: dict[str, tuple[int, float]] = {}    # each feature hashed once per call (words and 4-grams recur)
+        grams: dict[str, list[str]] = {}
         for r, t in enumerate(texts):
-            for feat, tf in sorted(self.features(t).items()):
-                h = hashlib.blake2b(feat.encode("utf-8"), digest_size=8).digest()
-                idx = int.from_bytes(h[:4], "little") % self.dim
-                sign = 1.0 if h[4] & 1 else -1.0
+            for feat, tf in sorted(self.features(t, grams).items()):
+                slot = slots.get(feat)
+                if slot is None:
+                    h = hashlib.blake2b(feat.encode("utf-8"), digest_size=8).digest()
+                    slot = slots[feat] = (int.from_bytes(h[:4], "little") % self.dim, 1.0 if h[4] & 1 else -1.0)
+                idx, sign = slot
                 out[r, idx] += sign * (1.0 + math.log(tf)) if tf >= 1 else sign * tf
         return out
 
@@ -205,18 +216,62 @@ def locate(quote: str, passages: list[dict]) -> dict | None:
 
 
 # ------------------------------------------------------------------------------------------ index
-class Index:
-    """Items ({id, text, ...}) with int8 vectors and BM25 statistics."""
+MODES = ("hybrid", "vector", "keyword", "rrf")
+RRF_K = 60            # reciprocal rank fusion: an item scores 1 / (RRF_K + its rank) in each ranking it is in
+RRF_DEPTH = 1000      # how deep each ranking is read for rrf (at least twice the hits asked for)
+BLOCK = 65536         # rows of the vectors converted at a time for the cosine, bounding its working memory
+CACHE_BYTES = 2 << 30  # vectors up to this size (as float32) are converted once and kept for the next queries
+TERMS_MAGIC = b"SCALE-TERMS-1\n"
 
-    def __init__(self, items: list[dict], vectors, embedder_id: str, graph_sha256: str | None = None):
+
+def _terms(items: list[dict]):
+    """The BM25 statistics of ``items`` as an inverted index: the words in sorted order, and for each word the items
+    that hold it (in item order) with their counts (``indptr`` delimits each word's run), and each item's length."""
+    np = _np()
+    first: dict[str, int] = {}
+    words, rows, counts = [], [], []
+    lengths = np.zeros(len(items), dtype=np.int64)
+    for i, it in enumerate(items):
+        c = Counter(tokens(it["text"]))
+        lengths[i] = sum(c.values())
+        for w, f in c.items():
+            words.append(first.setdefault(w, len(first)))
+            rows.append(i)
+            counts.append(f)
+    vocab = sorted(first)
+    remap = np.empty(len(first), dtype=np.int64)
+    for new_id, w in enumerate(vocab):
+        remap[first[w]] = new_id
+    term = remap[np.asarray(words, dtype=np.int64)]
+    rows_a = np.asarray(rows, dtype=np.int32)
+    order = np.lexsort((rows_a, term))
+    indptr = np.zeros(len(vocab) + 1, dtype=np.int64)
+    np.cumsum(np.bincount(term, minlength=len(vocab)), out=indptr[1:])
+    return vocab, indptr, rows_a[order], np.asarray(counts, dtype=np.int32)[order], lengths
+
+
+class Index:
+    """Items ({id, text, ...}) with int8 vectors and BM25 statistics.
+
+    A search is exact and reads each item once: BM25 reads only the postings of the query's words (an inverted index,
+    saved beside the index as ``<stem>.terms``), the cosine is the int8 product computed in float32 blocks (exact, since
+    the integer sums of int8 products stay below 2**24) over vector norms computed once (the float32 vectors are kept
+    for the next queries when they fit CACHE_BYTES), and only the best candidates are sorted. Scores and order are those of the plain definitions, ties broken by item id."""
+
+    def __init__(self, items: list[dict], vectors, embedder_id: str, graph_sha256: str | None = None, terms=None):
+        np = _np()
         self.items, self.vectors, self.embedder_id = items, vectors, embedder_id
         self.graph_sha256 = graph_sha256            # the document it was built from, when recorded
-        self.tf = [Counter(tokens(i["text"])) for i in items]
-        self.len = [sum(c.values()) for c in self.tf]
-        self.avg = (sum(self.len) / len(self.len)) if self.len else 0.0
-        self.df: Counter = Counter()
-        for c in self.tf:
-            self.df.update(c.keys())
+        self.vocab, self.indptr, self.post_item, self.post_count, self.lengths = terms or _terms(items)
+        self.term_id = {w: i for i, w in enumerate(self.vocab)}
+        n = len(items)
+        self.avg = (int(self.lengths.sum()) / n) if n else 0.0
+        self.norms = np.ones(n)
+        for lo in range(0, n, BLOCK):
+            self.norms[lo:lo + BLOCK] = np.linalg.norm(vectors[lo:lo + BLOCK].astype(np.float64), axis=1)
+        self.norms[self.norms == 0] = 1.0
+        self._id_rank = None
+        self._converted = None                      # the vectors as float32, kept after a first cosine when they fit
 
     @classmethod
     def build(cls, items: list[dict], embedder="scale-hash-v1", graph_sha256: str | None = None) -> "Index":
@@ -227,24 +282,32 @@ class Index:
     def save(self, stem: Path) -> None:
         np = _np()
         stem.parent.mkdir(parents=True, exist_ok=True)
-        with open(f"{stem}.jsonl", "w", encoding="utf-8") as f:
-            f.write(json.dumps({"embedder": self.embedder_id, "count": len(self.items),
-                                "dim": int(self.vectors.shape[1]) if len(self.items) else 0,
-                                **({"graph_sha256": self.graph_sha256} if self.graph_sha256 else {})},
-                               sort_keys=True) + "\n")
-            for it in self.items:
-                f.write(json.dumps(it, ensure_ascii=False, sort_keys=True) + "\n")
+        lines = [json.dumps({"embedder": self.embedder_id, "count": len(self.items),
+                             "dim": int(self.vectors.shape[1]) if len(self.items) else 0,
+                             **({"graph_sha256": self.graph_sha256} if self.graph_sha256 else {})}, sort_keys=True)]
+        lines += [json.dumps(it, ensure_ascii=False, sort_keys=True) for it in self.items]
+        raw = ("\n".join(lines) + "\n").encode("utf-8")
+        Path(f"{stem}.jsonl").write_bytes(raw)
         with open(f"{stem}.i8", "wb") as f:
             f.write(np.ascontiguousarray(self.vectors, dtype=np.int8).tobytes())
+        head = json.dumps({"items_sha256": hashlib.sha256(raw).hexdigest(), "count": len(self.items),
+                           "words": len(self.vocab), "postings": int(len(self.post_item)), "vocab": self.vocab},
+                          ensure_ascii=False, sort_keys=True).encode("utf-8")
+        with open(f"{stem}.terms", "wb") as f:
+            f.write(TERMS_MAGIC + len(head).to_bytes(8, "little") + head)
+            for a, t in ((self.indptr, np.int64), (self.post_item, np.int32), (self.post_count, np.int32),
+                         (self.lengths, np.int64)):
+                f.write(np.ascontiguousarray(a, dtype=t).tobytes())
 
     @classmethod
     def load(cls, stem: Path) -> "Index":
         np = _np()
-        lines = Path(f"{stem}.jsonl").read_text(encoding="utf-8").splitlines()
+        raw = Path(f"{stem}.jsonl").read_bytes()
+        lines = raw.decode("utf-8").splitlines()
         head, items = json.loads(lines[0]), [json.loads(x) for x in lines[1:]]
-        raw = np.frombuffer(Path(f"{stem}.i8").read_bytes(), dtype=np.int8)
-        vec = raw.reshape(head["count"], head["dim"]) if head["count"] else raw.reshape(0, max(head["dim"], 1))
-        return cls(items, vec, head["embedder"], head.get("graph_sha256"))
+        vec_raw = np.frombuffer(Path(f"{stem}.i8").read_bytes(), dtype=np.int8)
+        vec = vec_raw.reshape(head["count"], head["dim"]) if head["count"] else vec_raw.reshape(0, max(head["dim"], 1))
+        return cls(items, vec, head["embedder"], head.get("graph_sha256"), _read_terms(stem, raw, len(items)))
 
     def check_for(self, doc: dict, where: str = "the evidence index") -> "Index":
         """This index, when it may be searched for ``doc``: built from it (its ``graph_sha256``), or holding exactly its
@@ -261,17 +324,17 @@ class Index:
 
     def bm25(self, query: str, k1: float = 1.2, b: float = 0.75):
         np = _np()
-        q = tokens(query)
         n = len(self.items)
         s = np.zeros(n)
-        for w in set(q):
-            if not self.df.get(w):
+        for w in sorted(set(tokens(query))):
+            t = self.term_id.get(w)
+            if t is None:
                 continue
-            idf = math.log(1 + (n - self.df[w] + 0.5) / (self.df[w] + 0.5))
-            for i, c in enumerate(self.tf):
-                f = c.get(w)
-                if f:
-                    s[i] += idf * f * (k1 + 1) / (f + k1 * (1 - b + b * self.len[i] / (self.avg or 1)))
+            lo, hi = int(self.indptr[t]), int(self.indptr[t + 1])
+            df = hi - lo
+            idf = math.log(1 + (n - df + 0.5) / (df + 0.5))
+            rows, f = self.post_item[lo:hi], self.post_count[lo:hi].astype(np.float64)
+            s[rows] += idf * f * (k1 + 1) / (f + k1 * (1 - b + b * self.lengths[rows] / (self.avg or 1)))
         return s
 
     def cosine(self, query: str, embedder=None):
@@ -279,34 +342,103 @@ class Index:
         emb = embedder or get_embedder(self.embedder_id)
         if emb.id != self.embedder_id:
             raise ScaleError(f"index built with {self.embedder_id}, query embedder is {emb.id}")
-        qv = quantize(emb.encode([query])).astype(np.float64)[0]
-        m = self.vectors.astype(np.float64)
-        norms = np.linalg.norm(m, axis=1)
-        norms[norms == 0] = 1.0
-        return m @ qv / (norms * (np.linalg.norm(qv) or 1.0))
+        qv = quantize(emb.encode([query]))[0]
+        n, dim = self.vectors.shape
+        # int8 products summed in float32 are exact while every partial sum stays below 2**24
+        exact = np.float32 if dim * 127 * 127 < 2 ** 24 else np.float64
+        q = qv.astype(exact)
+        if self._converted is None and exact is np.float32 and n * dim * 4 <= CACHE_BYTES:
+            self._converted = self.vectors.astype(np.float32)
+        if self._converted is not None:
+            dots = (self._converted @ q).astype(np.float64)
+        else:
+            dots = np.empty(n)
+            for lo in range(0, n, BLOCK):
+                dots[lo:lo + BLOCK] = self.vectors[lo:lo + BLOCK].astype(exact) @ q
+        return dots / (self.norms * (np.linalg.norm(qv.astype(np.float64)) or 1.0))
+
+    def _ids(self):
+        """Each item's position in item-id order (the tie-break of every ranking), computed once."""
+        np = _np()
+        if self._id_rank is None:
+            order = sorted(range(len(self.items)), key=lambda i: self.items[i]["id"])
+            self._id_rank = np.empty(len(self.items), dtype=np.int64)
+            self._id_rank[order] = np.arange(len(self.items))
+        return self._id_rank
+
+    def ranked(self, score, m: int):
+        """The (at most) ``m`` items of positive score, best first and ties by item id, exactly the head of a full sort:
+        every item tied with the m-th best is a candidate before the candidates are sorted."""
+        np = _np()
+        pos = np.flatnonzero(score > 0)
+        if m < len(pos):
+            cut = np.partition(score[pos], len(pos) - m)[len(pos) - m]
+            pos = pos[score[pos] >= cut]
+        return pos[np.lexsort((self._ids()[pos], -score[pos]))][:m]
 
     def search(self, query: str, k: int = 10, mode: str = "hybrid", where: Callable[[dict], bool] | None = None) -> list[dict]:
+        """The best ``k`` items for ``query`` that ``where`` keeps. hybrid: the mean of BM25 scaled to its best and the
+        cosine (negative counted as 0); vector, keyword: one of them; rrf: reciprocal rank fusion of the BM25 and
+        cosine rankings (each read to RRF_DEPTH, or twice ``k``), sum of 1 / (RRF_K + rank), at most 2 / 61."""
         np = _np()
         if not self.items:
             return []
-        if mode not in ("hybrid", "vector", "keyword"):
-            raise ScaleError("mode is hybrid, vector or keyword")
-        kw = self.bm25(query) if mode != "vector" else np.zeros(len(self.items))
-        vc = self.cosine(query) if mode != "keyword" else np.zeros(len(self.items))
-        kwn = kw / kw.max() if kw.max() > 0 else kw
-        score = {"hybrid": 0.5 * kwn + 0.5 * np.clip(vc, 0, None), "vector": vc, "keyword": kw}[mode]
-        order = sorted(range(len(self.items)), key=lambda i: (-score[i], self.items[i]["id"]))
-        out = []
-        for i in order:
-            if where and not where(self.items[i]):
-                continue
-            if score[i] <= 0:
-                break
-            out.append({**self.items[i], "score": round(float(score[i]), 4), "keyword": round(float(kw[i]), 4),
-                        "cosine": round(float(vc[i]), 4)})
-            if len(out) >= k:
-                break
-        return out
+        if mode not in MODES:
+            raise ScaleError("mode is hybrid, vector, keyword or rrf")
+        n = len(self.items)
+        kw = self.bm25(query) if mode != "vector" else np.zeros(n)
+        vc = self.cosine(query) if mode != "keyword" else np.zeros(n)
+        if mode == "rrf":
+            score = np.zeros(n)
+            for s in (kw, vc):
+                top = self.ranked(s, max(RRF_DEPTH, 2 * k))
+                score[top] += 1.0 / (RRF_K + np.arange(1, len(top) + 1))
+        elif mode == "hybrid":
+            kwn = kw / kw.max() if kw.max() > 0 else kw
+            score = 0.5 * kwn + 0.5 * np.clip(vc, 0, None)
+        else:
+            score = vc if mode == "vector" else kw
+        m = k
+        while True:                                 # widen until k items pass where, or every positive item is read
+            top = self.ranked(score, m)
+            out = []
+            for i in top:
+                if where and not where(self.items[i]):
+                    continue
+                out.append({**self.items[i], "score": round(float(score[i]), 4), "keyword": round(float(kw[i]), 4),
+                            "cosine": round(float(vc[i]), 4)})
+                if len(out) >= k:
+                    return out
+            if len(top) < m:
+                return out
+            m *= 4
+
+
+def _read_terms(stem: Path, items_raw: bytes, count: int):
+    """The inverted index saved at ``<stem>.terms``, or None (then it is rebuilt from the items) when there is none or
+    it was not saved with exactly these items."""
+    np = _np()
+    p = Path(f"{stem}.terms")
+    if not p.exists():
+        return None
+    data = p.read_bytes()
+    if not data.startswith(TERMS_MAGIC):
+        return None
+    at = len(TERMS_MAGIC)
+    size = int.from_bytes(data[at:at + 8], "little")
+    head = json.loads(data[at + 8:at + 8 + size].decode("utf-8"))
+    if head.get("count") != count or head.get("items_sha256") != hashlib.sha256(items_raw).hexdigest():
+        return None
+    at += 8 + size
+    out = []
+    for t, length in ((np.int64, head["words"] + 1), (np.int32, head["postings"]), (np.int32, head["postings"]),
+                      (np.int64, count)):
+        nbytes = length * np.dtype(t).itemsize
+        out.append(np.frombuffer(data[at:at + nbytes], dtype=t))
+        at += nbytes
+    if at != len(data):
+        return None
+    return (head["vocab"], *out)
 
 
 def graph_sha256(doc: dict) -> str:
@@ -315,9 +447,18 @@ def graph_sha256(doc: dict) -> str:
 
 
 def load_for(stem: Path, doc: dict) -> Index:
-    """The evidence index at ``stem`` (``<stem>.jsonl``, ``<stem>.i8``) for ``doc``, refused unless it may be searched
+    """The evidence index at ``stem`` (``<stem>.jsonl``, ``<stem>.i8``, ``<stem>.terms``) for ``doc``, refused unless it may be searched
     for it (:meth:`Index.check_for`)."""
     return Index.load(stem).check_for(doc, f"the evidence index {Path(f'{stem}.jsonl').name}")
+
+
+def index_for(stem: Path, doc: dict) -> Index:
+    """The evidence index of ``doc``: the one saved at ``stem`` (:func:`load_for`, refused unless it is ``doc``'s), or,
+    when none is saved there, one built in memory from ``doc`` with the default embedder (deterministic, so the same as
+    ``scale graph index`` would save; nothing is written)."""
+    if Path(f"{stem}.jsonl").exists():
+        return load_for(stem, doc)
+    return Index.build(evidence_items(doc), graph_sha256=graph_sha256(doc))
 
 
 def evidence_items(doc: dict) -> list[dict]:

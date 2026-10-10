@@ -158,10 +158,19 @@ def test_migrate_moves_a_document_along_registered_steps(tk, monkeypatch):
     assert "error" in tk.call("scale_migrate", {"document": older, "save_as": "../escape"})
 
 
-def test_search_needs_an_evidence_index(tk):
-    tk.call("scale_example", {"name": "photo"})
-    res = tk.call("scale_search", {"path": "photo.json", "query": "dark control"})
-    assert "error" in res and "scale graph index" in res["error"]
+def test_search_and_a_text_query_build_the_evidence_index_when_none_is_saved(tk):
+    """With no index beside the document (or a document given inline), scale_search and a text scale_query build it in
+    memory from the document and write nothing."""
+    from scale.passages import evidence_items
+
+    tk.call("scale_example", {"name": "c-inconsistent-reference"})
+    doc = load_doc(tk.workspace / "c-inconsistent-reference.json")
+    words = " ".join(evidence_items(doc)[0]["text"].split()[:4])
+    res = tk.call("scale_search", {"path": "c-inconsistent-reference.json", "query": words})
+    assert res["hits"] and not (tk.workspace / "c-inconsistent-reference.evidence.jsonl").exists()
+    plan = {"match": {"label": "CatalyticTest", "as": "t"}, "text": {"query": words, "mode": "keyword"},
+            "return": ["t.name"]}
+    assert "error" not in tk.call("scale_query", {"document": doc, "plan": plan})
 
 
 def test_search_reads_only_the_documents_own_index_and_says_its_access(tk):

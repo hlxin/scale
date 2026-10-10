@@ -33,9 +33,19 @@ scale graph query domain/examples/scale-graph/driving-force-examples/electro.jso
 ```
 
 A plan may also search the evidence by words and meaning (`text: {query, vars, mode, min_score}`,
-which needs the evidence index from `scale graph index`), ask for sources published before a date
+which reads the evidence index saved by `scale graph index`, or builds it in memory from the document when
+none is saved beside it), ask for sources published before a date
 (`published_before`), leave out rows that rest only on second-hand evidence (`own_work_only: true`) and read embargoes on a
 given day (`as_of`, see Result).
+
+The text search has four modes. `hybrid` (the default) averages BM25 keyword relevance, scaled to the best hit, with
+the cosine of the quote vectors (negative counted as 0), so its scores run from 0 to 1; `keyword` and `vector` use one
+of them; `rrf` (reciprocal rank fusion) adds 1 / (60 + rank) from the keyword ranking and from the vector ranking,
+each read to its 1000th item, so an `rrf` score is at most 2/61, about 0.033, and a `min_score` written for
+`hybrid` (0.25, say) leaves out every row in `rrf`. Every mode is exact: each quote is scored, and ties go by item id.
+For large graphs, `scale graph index` saves the index (`<graph>.evidence.jsonl`, `.i8` and `.terms`, its keyword
+postings) so that a query reads it instead of building it; in a long-running process (the agent tools, MCP) the
+vectors are kept in memory after the first query when they fit 2 GB (about a million quotes).
 
 An evidence index records the digest of the document it was built from (`graph_sha256`). `scale graph
 query` (text) and `scale graph search`, and the agent tools, use an index only for that document, or for

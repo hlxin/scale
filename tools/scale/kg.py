@@ -9,7 +9,7 @@ under DIR:
   the rule of each step that has one), keeping every record id;
 - validates it before and after, and reports errors, warnings and checklist conformance per document;
 - writes it in place (canonical JSON) unless ``--dry-run``, and rebuilds the evidence index beside it
-  (``<name>.evidence.jsonl`` / ``.i8``) when it has one.
+  (``<name>.evidence.jsonl`` / ``.i8`` / ``.terms``) when it has one.
 
 What it does not change: a document a step rule cannot map is refused, reported and left untouched (the
 rule says why; a curator fixes the record first); a document whose file name pins a version

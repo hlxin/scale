@@ -99,6 +99,102 @@ def test_search_finds_meaning_across_spellings(doc):
     assert ix.search("zinc chromite", k=1, mode="keyword")[0]["text"].startswith("the zinc chromite")
     with pytest.raises(ScaleError):
         ix.search("x", mode="fuzzy")
+    assert ix.search("sulphur poisoning of Cu", k=1, mode="rrf")[0]["record"] == "ex:t/claim/sulfur"
+
+
+SEARCH_TEXTS = ["copper zinc oxide catalyst", "zinc oxide", "copper catalyst", "copper zinc oxide catalyst",
+                "sulphur poisons the copper catalyst", "chromium oxide on pumice", "zinc chromite", "methanol from CO2",
+                "zinc oxide", "the copper catalyst was reduced", "", "iron carbonyl"]
+
+
+def _reference_search(ix, query, k, mode, where=None):
+    """The plain definition the index's search must match: full BM25 and cosine over every item, a full sort by score
+    and item id, positive scores only."""
+    import math
+    from collections import Counter
+
+    import numpy as np
+    from scale.passages import get_embedder, quantize
+    tf = [Counter(tokens(i["text"])) for i in ix.items]
+    n, lens = len(tf), [sum(c.values()) for c in tf]
+    avg, kw = sum(lens) / n, np.zeros(n)
+    for w in sorted(set(tokens(query))):
+        df = sum(1 for c in tf if c.get(w))
+        if df:
+            idf = math.log(1 + (n - df + 0.5) / (df + 0.5))
+            for i, c in enumerate(tf):
+                if c.get(w):
+                    kw[i] += idf * c[w] * 2.2 / (c[w] + 1.2 * (0.25 + 0.75 * lens[i] / avg))
+    m = ix.vectors.astype(np.float64)
+    qv = quantize(get_embedder().encode([query])).astype(np.float64)[0]
+    norms = np.linalg.norm(m, axis=1)
+    norms[norms == 0] = 1.0
+    vc = m @ qv / (norms * (np.linalg.norm(qv) or 1.0))
+    kwn = kw / kw.max() if kw.max() > 0 else kw
+    score = {"hybrid": 0.5 * kwn + 0.5 * np.clip(vc, 0, None), "vector": vc, "keyword": kw}[mode]
+    order = sorted(range(n), key=lambda i: (-score[i], ix.items[i]["id"]))
+    return [ix.items[i]["id"] for i in order if score[i] > 0 and (not where or where(ix.items[i]))][:k]
+
+
+def test_search_is_exactly_the_head_of_a_full_sort():
+    """The inverted index, the blocked cosine and the partial sort return what the plain definitions return, ties
+    (here: repeated texts) broken by item id, with or without a filter, and whether the vectors are kept or converted
+    block by block."""
+    import numpy as np
+    from scale import passages
+    items = [{"id": f"ex:t/r{j:02d}#evidence/0", "record": f"ex:t/r{j:02d}", "evidence": 0, "text": t,
+              "source": f"ex:t/s{j % 3}"} for j, t in enumerate(SEARCH_TEXTS * 3)]
+    ix = Index.build(items)
+    odd = lambda it: it["source"] != "ex:t/s1"                                        # noqa: E731
+    for q in ("copper zinc oxide", "zinc oxide", "sulfur poisoning", "nothing matches xyzzy", "catalyst"):
+        for mode in ("hybrid", "vector", "keyword"):
+            for k, where in ((1, None), (5, None), (100, None), (2, odd), (7, odd)):
+                got = [h["id"] for h in ix.search(q, k=k, mode=mode, where=where)]
+                assert got == _reference_search(ix, q, k, mode, where), (q, mode, k)
+    kept = ix.cosine("zinc oxide catalyst")
+    old, passages.CACHE_BYTES, passages.BLOCK = passages.CACHE_BYTES, 0, 7
+    try:
+        blocked = Index.build(items).cosine("zinc oxide catalyst")
+    finally:
+        passages.CACHE_BYTES, passages.BLOCK = old, 65536
+    assert np.array_equal(kept, blocked)
+
+
+def test_rrf_fuses_the_keyword_and_vector_rankings():
+    from scale.passages import RRF_K
+    items = [{"id": f"ex:t/r{j:02d}#evidence/0", "record": f"ex:t/r{j:02d}", "evidence": 0, "text": t}
+             for j, t in enumerate(SEARCH_TEXTS)]
+    ix = Index.build(items)
+    q = "copper zinc oxide"
+    hits = ix.search(q, k=50, mode="rrf")
+    kw = {ix.items[i]["id"]: r for r, i in enumerate(ix.ranked(ix.bm25(q), 1000), 1)}
+    vc = {ix.items[i]["id"]: r for r, i in enumerate(ix.ranked(ix.cosine(q), 1000), 1)}
+    assert {h["id"] for h in hits} == set(kw) | set(vc)
+    for h in hits:
+        expect = sum(1 / (RRF_K + r[h["id"]]) for r in (kw, vc) if h["id"] in r)
+        assert h["score"] == round(expect, 4) and h["score"] <= round(2 / (RRF_K + 1), 4)
+    assert [h["score"] for h in hits] == sorted((h["score"] for h in hits), reverse=True)
+    assert hits == ix.search(q, k=50, mode="rrf")
+
+
+def test_saved_term_statistics_are_used_only_with_their_items(tmp_path):
+    """The inverted index saved beside an index (<stem>.terms) is read back as saved, and ignored (rebuilt from the
+    items) when the items it was saved with changed or it is missing."""
+    import numpy as np
+    items = [{"id": f"ex:t/r{j:02d}#evidence/0", "record": f"ex:t/r{j:02d}", "evidence": 0, "text": t}
+             for j, t in enumerate(SEARCH_TEXTS)]
+    a = Index.build(items)
+    a.save(tmp_path / "ix")
+    b = Index.load(tmp_path / "ix")
+    assert b.vocab == a.vocab and all(np.array_equal(x, y) for x, y in (
+        (a.indptr, b.indptr), (a.post_item, b.post_item), (a.post_count, b.post_count), (a.lengths, b.lengths)))
+    assert b.search("zinc oxide", k=5) == a.search("zinc oxide", k=5)
+    j = tmp_path / "ix.jsonl"                     # the items change, the saved statistics do not
+    j.write_text(j.read_text().replace("zinc chromite", "iron oxide sludge"))
+    c = Index.load(tmp_path / "ix")
+    assert "sludge" in c.vocab and "chromite" not in c.vocab
+    (tmp_path / "ix.terms").unlink()
+    assert Index.load(tmp_path / "ix").vocab == c.vocab
 
 
 def test_passages_and_their_locations():
@@ -1203,3 +1299,30 @@ def test_an_evidence_index_is_searched_only_for_the_document_it_was_built_from(t
     assert load_for(tmp_path / "old", view).graph_sha256 is None
     with pytest.raises(ScaleError, match="records no document digest"):
         load_for(tmp_path / "old", d)
+
+
+def test_an_evidence_index_is_built_from_the_document_when_none_is_saved(tmp_path, capsys, doc):
+    """query (text) and search build the index of a document in memory when none is saved beside it: the same index
+    `scale graph index` saves, bound to the document, and nothing is written. A saved index is still refused when it is
+    not the document's."""
+    from scale.cli import main
+    from scale.passages import graph_sha256, index_for
+
+    f = tmp_path / "doc.json"
+    f.write_text(json.dumps(doc))
+    built = index_for(tmp_path / "doc.evidence", doc)
+    assert built.graph_sha256 == graph_sha256(doc) and built.items == evidence_items(doc)
+    assert sorted(x.name for x in tmp_path.iterdir()) == ["doc.json"]
+    words = " ".join(evidence_items(doc)[0]["text"].split()[:4])
+    assert main(["graph", "search", str(f), words, "--mode", "keyword"]) in (0, None)
+    on_demand = json.loads(capsys.readouterr().out)
+    assert on_demand["hits"] and sorted(x.name for x in tmp_path.iterdir()) == ["doc.json"]
+    assert main(["graph", "index", str(f)]) in (0, None)
+    capsys.readouterr()
+    assert main(["graph", "search", str(f), words, "--mode", "keyword"]) in (0, None)
+    assert json.loads(capsys.readouterr().out)["hits"] == on_demand["hits"]
+    other = copy.deepcopy(doc)                      # a quote changed: the saved index is stale for it
+    rec = next(r for r in other["nodes"] + other["links"] if any(e.get("quote") for e in r["props"].get("evidence") or []))
+    next(e for e in rec["props"]["evidence"] if e.get("quote"))["quote"] = "a quote the saved index does not hold"
+    with pytest.raises(ScaleError, match="was built from another document"):
+        index_for(tmp_path / "doc.evidence", other)
