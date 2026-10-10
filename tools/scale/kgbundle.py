@@ -195,6 +195,24 @@ SYNTHETIC_TEXT = {
                                                "examples; records whose origin is synthetic are invented, not evidence about "
                                                "the world."),
 }
+# The bundle's title (bundle.json ``topic``, kg/schema.json ``title``): a host shows it as the graph's name on import,
+# so it is a short name. A graph's own title states its scope in full and may run long; the bundle takes it when it is
+# short and its leading words otherwise (``concise_title``), unless the export names one (``title``).
+TITLE_MAX = 40
+
+
+def concise_title(title: str, limit: int = TITLE_MAX) -> str:
+    """``title`` when it has at most ``limit`` characters (whitespace collapsed); otherwise its leading words, cut at a
+    word boundary before ``limit``, without a parenthesis left open or a trailing clause mark, ending in an ellipsis."""
+    t = " ".join((title or "").split())
+    if len(t) <= limit:
+        return t
+    cut = t[:limit].rsplit(" ", 1)[0] if " " in t[:limit] else t[:limit - 1]
+    if cut.count("(") > cut.count(")"):
+        cut = cut[:cut.rfind("(")]
+    return cut.rstrip(" ,;:-\u2013\u2014") + "\u2026"
+
+
 # Set by the platform at import; a scale-graph property of that name is exported as scale_<name>.
 PLATFORM_OWNED = {"trust", "created_by", "scope", "project", "source_node_id", "source_edge_id", "bundle_source", "bundle_id",
                   "bundle_version", "graph_id", "tenant_id"}
@@ -459,8 +477,10 @@ def char_span(text: str, quote: str, norm: tuple[str, list[int]] | None = None) 
 def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0.0", texts: dict[str, str] | None = None,
            created: str | None = None, scope: str | None = None, corpus: dict | None = None, changelog: str | None = None,
            previous: Path | None = None, replaced: dict[str, str] | None = None, ids_from: Path | None = None,
-           access: dict | None = None, keep_less_open: bool = False, unshipped: list[str] | None = None) -> dict:
-    """Write the bundle folder; with ``previous`` (an earlier release folder) record it and the id changes.
+           access: dict | None = None, keep_less_open: bool = False, unshipped: list[str] | None = None,
+           title: str | None = None) -> dict:
+    """Write the bundle folder; ``title`` names the bundle (its ``topic``, which a host shows as the graph's name;
+    default: the graph's title when short, else its leading words, :func:`concise_title`); with ``previous`` (an earlier release folder) record it and the id changes.
     ``ids_from`` (an earlier build, e.g. one made before the first public release) keeps its ids,
     replaced ids and schema properties as ``previous`` does, without recording it as the previous release.
 
@@ -477,6 +497,7 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
 
     With ``previous`` the version must come after the previous release's, and without ``changelog`` the bundle's
     CHANGELOG.md gets an entry for this version above the previous release's changelog."""
+    bundle_title = " ".join((title or "").split())        # the parameter; ``title`` is reused below
     pinned = (doc.get("graph") or {}).get("schema_version") if isinstance(doc, dict) else None
     if pinned != spec.get("version"):
         raise ScaleError(f"the document pins scale-graph {pinned}; the schema given is {spec.get('version')}: a "
@@ -940,7 +961,13 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
                                     "scale_access_institutions on records whose audience differs)")
     schema_sha = pgraph.spec_sha256(spec)
     data_status = g0.get("data_status")
-    topic, scope_text = doc["graph"].get("title", "")[:300], scope or doc["graph"].get("description", "")[:1000]
+    full_title = " ".join((doc["graph"].get("title") or "").split())
+    topic = bundle_title or concise_title(full_title)
+    if not bundle_title and topic != full_title:      # the graph's title kept in full in the scope
+        report["title_shortened"] = {"title": topic, "graph_title": full_title}
+    scope_text = scope or doc["graph"].get("description", "")[:1000]
+    if topic != full_title and full_title and full_title not in scope_text:
+        scope_text = f"{full_title}. {scope_text}".strip()[:1000]
     if data_status in SYNTHETIC_TEXT:      # synthetic examples are not evidence about the world: the bundle says so
         tag, note = SYNTHETIC_TEXT[data_status]
         topic = f"{topic[:300 - len(tag) - 1]} {tag}".strip()
@@ -953,7 +980,7 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
                                    **({"less_open_kept": less_kept} if less_kept else {})},
               **({"filtered_for": g0["filtered_for"]} if g0.get("filtered_for") else {})}
     schema_id = re.sub(r"[^a-z0-9-]+", "-", bundle_id.lower())
-    schema = {"schema_id": schema_id, "version": version, "title": doc["graph"].get("title", "")[:300],
+    schema = {"schema_id": schema_id, "version": version, "title": topic,
               "scope": scope_text,
               "extends": {"schema_id": "scale-graph", "version": doc["graph"].get("schema_version"), "sha256": schema_sha},
               "node_types": dict(sorted(node_types.items())), "edge_types": dict(sorted(edge_types.items()))}

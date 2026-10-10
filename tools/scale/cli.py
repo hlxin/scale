@@ -168,10 +168,14 @@ def cmd_graph_export(args):
         lineage = _bundle_lineage(args)
         unshipped: list[str] = []
         m = kgbundle.export(doc, spec, Path(args.out), bid, lineage.pop("version"), texts or None, created=args.created,
-                          access=access, keep_less_open=args.keep_less_open, unshipped=unshipped, **lineage)
+                          access=access, keep_less_open=args.keep_less_open, unshipped=unshipped, title=args.title,
+                          **lineage)
         kgbundle.seal(Path(args.out))
         if m["export_report"].get("access_warning"):
             print(f"scale: warning: {m['export_report']['access_warning']}", file=sys.stderr)
+        if m["export_report"].get("title_shortened"):
+            print(f"scale: note: the bundle's title is {m['topic']!r}, the graph's title shortened (a host shows it as "
+                  "the graph's name); give --title to name it, or a shorter graph title", file=sys.stderr)
         if unshipped:                    # named here only: bundle.json counts them
             print(f"scale: warning: --text not shipped for {', '.join(unshipped)}: the bundle does not "
                   "hold that source (withheld as less open than the bundle, filtered out, or not in the graph)", file=sys.stderr)
@@ -1075,6 +1079,8 @@ def build_parser() -> argparse.ArgumentParser:
                     "record it was merged into; the survivor lists the retired record's released id in replaced_ids")
     sp.add_argument("--corpus", metavar="MANIFEST", help="kg-bundle: the frozen corpus manifest; checked as scale corpus check "
                     "does, it fills bundle.json's corpus block")
+    sp.add_argument("--title", help="kg-bundle: the bundle's title, which a host shows as the graph's name (default: the "
+                    "graph's title when it has at most 40 characters, else its leading words)")
     sp = add("describe", cmd_graph_describe, "labels and edge types with their properties (what a curator may use)", gr)
     sp.add_argument("names", nargs="*", help="labels or edge types (default: all)"); sp.add_argument("--domain", dest="profile", help="whose checklist to show (catalysis): its items and `when` cases next to each label")
     sp.add_argument("--spec"); out_opts(sp)

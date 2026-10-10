@@ -74,7 +74,7 @@ def test_graph_is_public_research_data_under_the_current_schema(pg, spec):
     g = pg["graph"]
     assert g["schema_version"] == "0.1.0" and g["follows_domains"] == ["catalysis"]
     assert g["data_status"] == "research_data" and g["stewardship"]["access"] == "public"
-    assert CUTOFF in g["title"] and "US 2,061,470" in g["description"]
+    assert "1966" in g["title"] and len(g["title"]) <= 40 and CUTOFF in g["description"] and "US 2,061,470" in g["description"]
     rep = pgraph.validate(pg, spec)
     assert rep.errors == [], rep.errors[:5]
     assert rights.access_problems(REPO, [GRAPH]) == []
@@ -161,7 +161,7 @@ def test_the_corpus_is_one_checked_manifest_with_local_pdfs(manifest):
     assert all(s["slug"] == s["doi"].replace("/", "-") for s in inscope if s.get("doi"))
     assert "pdfs/" in (EX / ".gitignore").read_text().split()
     assert sorted(p.name for p in EX.iterdir() if not p.name.startswith(".") and p.name not in ("pdfs", "work")) == [
-        "README.md", "methanol-synthesis-pre1966_v1.1.0.zip", "methanol-synthesis.graph.json", "queries", "rights.yaml",
+        "README.md", "methanol-synthesis-pre1966_v1.1.1.zip", "methanol-synthesis.graph.json", "queries", "rights.yaml",
         "sources.json", "stewardship.yaml"]
 
 
@@ -171,14 +171,16 @@ def test_the_bundle_is_this_graph_sealed():
     import hashlib
     import json
     import zipfile
-    z = zipfile.ZipFile(EX / "methanol-synthesis-pre1966_v1.1.0.zip")
-    root = "methanol-synthesis-pre1966_v1.1.0/"
+    z = zipfile.ZipFile(EX / "methanol-synthesis-pre1966_v1.1.1.zip")
+    root = "methanol-synthesis-pre1966_v1.1.1/"
     assert {n.split("/")[0] for n in z.namelist()} == {root.rstrip("/")}
     sums = dict(reversed(line.split("  ", 1)) for line in z.read(root + "SHA256SUMS").decode().splitlines())
     assert all(hashlib.sha256(z.read(root + f)).hexdigest() == h for f, h in sums.items())
     m = json.loads(z.read(root + "bundle.json"))
     assert (m["format_version"], m["bundle_id"], m["version"], m["previous"]["version"]) == (
-        "1.1.0", "methanol-synthesis-pre1966", "1.1.0", "1.0.0")
+        "1.1.0", "methanol-synthesis-pre1966", "1.1.1", "1.1.0")
+    title = load_doc(GRAPH)["graph"]["title"]          # a platform names the imported graph after the bundle's title
+    assert m["topic"] == json.loads(z.read(root + "kg/schema.json"))["title"] == title and len(title) <= 40
     graph = z.read(root + "kg/graph.json")
     assert m["graph_sha256"] == hashlib.sha256(graph).hexdigest() and m["counts"]["edges"] == 17563
     assert m["scale_header"]["graph_id"] == load_doc(GRAPH)["graph"]["graph_id"]
@@ -189,4 +191,4 @@ def test_the_graph_is_scoped_to_the_benchmark_corpus(pg, manifest):
     """The graph keeps CO and CO2 hydrogenation only: its sources are exactly the corpus's 105 in-scope sources."""
     kept = {s["slug"] for s in manifest["sources"] if s["status"] == "in_scope"}
     assert {n["id"].removeprefix("ex:msyn/source/") for n in pg["nodes"] if n["label"] == "Source"} == kept
-    assert pg["graph"]["graph_id"] == "ex:msyn/graph/co-co2-hydrogenation" and "105 sources" in pg["graph"]["title"]
+    assert pg["graph"]["graph_id"] == "ex:msyn/graph/co-co2-hydrogenation" and "105 sources" in pg["graph"]["description"]

@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- **A knowledge-graph bundle has a short title by default.** A platform names an imported graph after the bundle's
+  title (`topic`, and the schema's `title`). `scale graph export --to kg-bundle` takes `--title`; by default the title
+  is the graph's own when it has at most 40 characters, and otherwise its leading words, cut at a word boundary and
+  ending in "…", with the full title kept in the bundle's scope (the export says so). The curate-source skill asks for a
+  short graph title with the scope's details in `description`. The methanol graph's title is now "Methanol Synthesis
+  CO/CO2+H2 Pre1966" (its former title opens its description), and its bundle is released as 1.1.1 (`methanol-synthesis-pre1966_v1.1.1.zip`, following 1.1.0; only the title changed; the format's validator: 0
+  errors, 0 warnings).
 - **Maintained by researchers, independent of any institution or project.** The stewardship registry names one
   steward, "SCALE researchers" (`scale:org/scale-researchers`), and one project, `scale:project/methanol-synthesis-pre1966`
   (the methanol benchmark); the institutions, the funder and the funded project it named before

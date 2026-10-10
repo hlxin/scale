@@ -51974,9 +51974,9 @@
           "status": "present",
           "as_reported": "178 atmospheres absolute (2600 pounds per square inch gage)",
           "basis": "absolute",
+          "note": "the testing pressure of the Experimental Procedure, which covers the authors' tests; not restated for this test",
           "unit": "atm",
-          "value": 178,
-          "note": "the testing pressure of the Experimental Procedure, which covers the authors' tests; not restated for this test"
+          "value": 178
         },
         "results": {
           "activity_change": {
@@ -52027,9 +52027,9 @@
           "status": "present",
           "as_reported": "178 atmospheres absolute (2600 pounds per square inch gage)",
           "basis": "absolute",
+          "note": "the testing pressure of the Experimental Procedure, which covers the authors' tests; not restated for this test",
           "unit": "atm",
-          "value": 178,
-          "note": "the testing pressure of the Experimental Procedure, which covers the authors' tests; not restated for this test"
+          "value": 178
         },
         "results": {
           "activity_change": {
@@ -52087,9 +52087,9 @@
           "status": "present",
           "as_reported": "178 atmospheres absolute (2600 pounds per square inch gage)",
           "basis": "absolute",
+          "note": "the testing pressure of the Experimental Procedure, which covers the authors' tests; not restated for this test",
           "unit": "atm",
-          "value": 178,
-          "note": "the testing pressure of the Experimental Procedure, which covers the authors' tests; not restated for this test"
+          "value": 178
         },
         "temperature": {
           "status": "not_reported",
@@ -52138,9 +52138,9 @@
           "status": "present",
           "as_reported": "178 atmospheres absolute (2600 pounds per square inch gage)",
           "basis": "absolute",
+          "note": "the testing pressure of the Experimental Procedure, which covers the authors' tests; not restated for this test",
           "unit": "atm",
-          "value": 178,
-          "note": "the testing pressure of the Experimental Procedure, which covers the authors' tests; not restated for this test"
+          "value": 178
         },
         "temperature": {
           "status": "not_reported",
@@ -52190,9 +52190,9 @@
           "status": "present",
           "as_reported": "178 atmospheres absolute (2600 pounds per square inch gage)",
           "basis": "absolute",
+          "note": "the testing pressure of the Experimental Procedure, which covers the authors' tests; not restated for this test",
           "unit": "atm",
-          "value": 178,
-          "note": "the testing pressure of the Experimental Procedure, which covers the authors' tests; not restated for this test"
+          "value": 178
         },
         "temperature": {
           "status": "present",
@@ -52243,9 +52243,9 @@
           "status": "present",
           "as_reported": "178 atmospheres absolute (2600 pounds per square inch gage)",
           "basis": "absolute",
+          "note": "the testing pressure of the Experimental Procedure, which covers the authors' tests; not restated for this test",
           "unit": "atm",
-          "value": 178,
-          "note": "the testing pressure of the Experimental Procedure, which covers the authors' tests; not restated for this test"
+          "value": 178
         },
         "space_velocity": {
           "status": "present",
@@ -57893,9 +57893,9 @@
           "status": "present",
           "as_reported": "178 atmospheres absolute (2600 pounds per square inch gage)",
           "basis": "absolute",
+          "note": "the testing pressure of the Experimental Procedure, which covers the authors' tests; not restated for this test",
           "unit": "atm",
-          "value": 178,
-          "note": "the testing pressure of the Experimental Procedure, which covers the authors' tests; not restated for this test"
+          "value": 178
         },
         "temperature": {
           "status": "not_reported",
@@ -57960,9 +57960,9 @@
           "status": "present",
           "as_reported": "178 atmospheres absolute (2600 pounds per square inch gage)",
           "basis": "absolute",
+          "note": "the testing pressure of the Experimental Procedure, which covers the authors' tests; not restated for this test",
           "unit": "atm",
-          "value": 178,
-          "note": "the testing pressure of the Experimental Procedure, which covers the authors' tests; not restated for this test"
+          "value": 178
         },
         "temperature": {
           "status": "not_reported",
@@ -58019,9 +58019,9 @@
           "status": "present",
           "as_reported": "178 atmospheres absolute (2600 pounds per square inch gage)",
           "basis": "absolute",
+          "note": "the testing pressure of the Experimental Procedure, which covers the authors' tests; not restated for this test",
           "unit": "atm",
-          "value": 178,
-          "note": "the testing pressure of the Experimental Procedure, which covers the authors' tests; not restated for this test"
+          "value": 178
         },
         "temperature": {
           "status": "not_reported",
@@ -515252,19 +515252,19 @@
     },
     {
       "id": "scale:project/methanol-synthesis-pre1966/participant/scale-researchers",
-      "source": "scale:org/scale-researchers",
-      "target": "scale:project/methanol-synthesis-pre1966",
       "type": "PARTICIPATES_IN",
       "props": {
         "origin": "curated",
         "role": "data_provider"
-      }
+      },
+      "source": "scale:org/scale-researchers",
+      "target": "scale:project/methanol-synthesis-pre1966"
     }
   ],
   "directed": true,
   "graph": {
     "data_status": "research_data",
-    "description": "Cutoff: published or publicly disclosed before 1966-01-01. ICI launched low-pressure methanol synthesis over Cu/ZnO/Al2O3 in 1966 (GB 1,010,871, published 1966; US 3,326,956); a cutoff of 1 January 1966 holds out that commercialization and what followed as rediscovery targets, and admits everything published before it, ICI's earlier publications included. The cutoff does not remove every Cu-Zn-Al disclosure: the corpus leakage audit (historical/LEAKAGE_AUDIT.md) lists US 2,061,470 (Larson, granted 1936), whose Example 10 is 87 CuO / 10 ZnO / 3 Al2O3, and Cu-Zn catalysts from 1928 on. They are in scope and curated as reported; a rediscovery evaluation must hold them out separately if it needs to. Each source was read and curated from its page texts (PDF text layer, or Tesseract OCR where the PDF has none); every quote is checked verbatim against those texts. Earlier extractions were used only as checklists. Scoped to CO and CO2 hydrogenation to methanol: tests of other reactions, the records only they use and the claims resting only on them are left out (tools/curation.py scope_methanol_synthesis).",
+    "description": "Methanol synthesis (CO and CO2 hydrogenation to methanol), historical literature published before 1966-01-01 (105 sources, 1923–1965), curated from the source texts under scale-graph 0.1.0. Cutoff: published or publicly disclosed before 1966-01-01. ICI launched low-pressure methanol synthesis over Cu/ZnO/Al2O3 in 1966 (GB 1,010,871, published 1966; US 3,326,956); a cutoff of 1 January 1966 holds out that commercialization and what followed as rediscovery targets, and admits everything published before it, ICI's earlier publications included. The cutoff does not remove every Cu-Zn-Al disclosure: the corpus leakage audit (historical/LEAKAGE_AUDIT.md) lists US 2,061,470 (Larson, granted 1936), whose Example 10 is 87 CuO / 10 ZnO / 3 Al2O3, and Cu-Zn catalysts from 1928 on. They are in scope and curated as reported; a rediscovery evaluation must hold them out separately if it needs to. Each source was read and curated from its page texts (PDF text layer, or Tesseract OCR where the PDF has none); every quote is checked verbatim against those texts. Earlier extractions were used only as checklists. Scoped to CO and CO2 hydrogenation to methanol: tests of other reactions, the records only they use and the claims resting only on them are left out (tools/curation.py scope_methanol_synthesis).",
     "domains": [
       "heterogeneous catalysis",
       "thermal catalysis",
@@ -515284,7 +515284,7 @@
       "note": "Curated by agents under the curate-source skill from the frozen corpus (sources.json); checked by the deterministic SCALE tools.",
       "project": "scale:project/methanol-synthesis-pre1966"
     },
-    "title": "Methanol synthesis (CO and CO2 hydrogenation to methanol), historical literature published before 1966-01-01 (105 sources, 1923–1965), curated from the source texts under scale-graph 0.1.0"
+    "title": "Methanol Synthesis CO/CO2+H2 Pre1966"
   },
   "multigraph": true
 }

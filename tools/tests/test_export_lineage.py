@@ -172,6 +172,28 @@ def test_a_link_resting_only_on_withheld_quotes_is_exported_with_their_digests(t
     assert f"{T}/link/uses" not in _by_scale(tmp_path / "c") and m["export_report"]["withheld_too_long"] == 1
 
 
+def test_the_bundle_title_is_short_by_default_and_can_be_named(tmp_path, head):
+    """A platform names an imported graph after the bundle's title (topic, and the schema's title): the graph's title
+    when it has at most 40 characters; otherwise its leading words, cut at a word boundary, with no parenthesis left
+    open, ending in an ellipsis, the full title kept in the scope and the shortening reported; --title names it."""
+    doc = build()
+    short = "Cu catalysts for methanol"
+    doc["graph"]["title"] = short
+    m = kgbundle.export(doc, head, tmp_path / "a", "t", created="2026-10-06T00:00:00Z")
+    schema = json.loads((tmp_path / "a/kg/schema.json").read_text())
+    assert m["topic"].startswith(short) and schema["title"] == m["topic"] and "title_shortened" not in m["export_report"]
+    long = ("Methanol synthesis (CO and CO2 hydrogenation to methanol), historical literature published before 1966-01-01 "
+            "(105 sources, 1923-1965), curated from the source texts")
+    doc["graph"]["title"] = long
+    m = kgbundle.export(doc, head, tmp_path / "b", "t", created="2026-10-06T00:00:00Z")
+    t = m["export_report"]["title_shortened"]["title"]
+    assert t == kgbundle.concise_title(long) and len(t) <= 40 and t.endswith("\u2026") and long.startswith(t[:-1])
+    assert t.count("(") == t.count(")") and long in m["scope"]
+    m = kgbundle.export(doc, head, tmp_path / "c", "t", created="2026-10-06T00:00:00Z", title="Methanol before 1966")
+    assert m["topic"].startswith("Methanol before 1966") and "title_shortened" not in m["export_report"]
+    assert kgbundle.concise_title("  a   short\n title ") == "a short title"
+
+
 def test_locators_name_tables_and_figures_and_shipped_texts_get_char_offsets(tmp_path, head):
     assert kgbundle._locator("p. 2, Table 2, row 1", "table") == {"page": 2, "section": "Table 2, row 1", "table": "Table 2"}
     assert kgbundle._locator("p. 4, Fig. 3b, curve A", "figure")["figure"] == "Fig. 3b"
