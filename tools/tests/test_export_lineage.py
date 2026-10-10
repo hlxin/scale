@@ -298,6 +298,27 @@ def test_locators_name_tables_and_figures_and_shipped_texts_get_char_offsets(tmp
         assert res.ok, [f.message for f in res.errors][:5]
 
 
+def test_a_text_named_by_its_source_id_is_quoted_never_withheld(tmp_path, head):
+    """A shipped text may be named by its publication's key or by its source's scale-graph id; either way the
+    source's evidence is quoted, never withheld, since its text ships. Two texts for one publication are refused."""
+    from scale import rights
+    doc = build()
+    next(n for n in doc["nodes"] if n["id"] == SRC)["props"]["doi"] = "10.0000/invented"
+    link = next(e for e in doc["links"] if e["id"] == f"{T}/link/uses")
+    h, n = rights.digest(Q_SEL)
+    link["props"]["evidence"] = [{**{k: v for k, v in link["props"]["evidence"][0].items() if k != "quote"},
+                                  "note": f"quote withheld: sha256:{h} chars:{n}"}]
+    m = kgbundle.export(doc, head, tmp_path / "b", "texts", created="2026-10-06T00:00:00Z",
+                        texts={SRC: ("paper.txt", TEXT, "CC-BY-4.0")})
+    g = _graph(tmp_path / "b")
+    assert not any("quote_withheld" in x for e in g["links"] for x in e["props"].get("_evidence") or [])
+    assert m["redistributable_publications"] == 1
+    assert json.loads((tmp_path / "b/text/_manifest.json").read_text())["files"]["10.0000/invented"]["file"] == "paper.txt"
+    with pytest.raises(ScaleError, match="two texts are given for one publication"):
+        kgbundle.export(doc, head, tmp_path / "c", "texts", created="2026-10-06T00:00:00Z",
+                        texts={SRC: ("a.txt", TEXT, "CC-BY-4.0"), "10.0000/invented": ("b.txt", TEXT, "CC-BY-4.0")})
+
+
 def test_a_shipped_text_is_a_plain_file_in_text(tmp_path, head):
     """A shipped text's file name is checked before anything is written: a path out of text/ (../../outside.txt), a
     folder, the manifest's own name or a name two texts share is refused, and nothing is written anywhere."""
