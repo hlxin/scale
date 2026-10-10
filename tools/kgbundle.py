@@ -378,9 +378,24 @@ def target(prop: str, v: dict) -> str:
     return _quantity(prop, v)[0]
 
 
+def _absent_target(prop: str, v: object) -> str:
+    """The bundle property a value with no number (a typed absence) belongs to: as for a present value, by its unit
+    and stated basis (a gauge pressure not measured is still pressure_gauge), never by a note, which says why it is
+    missing."""
+    if not isinstance(v, dict):
+        return prop
+    unit = (v.get("unit") or "").strip() if isinstance(v.get("unit"), str) else ""
+    if prop == "pressure":
+        basis, _ = _gauge({"basis": v["basis"]} if isinstance(v.get("basis"), str) else {}, unit)
+        return "pressure_gauge" if basis == "gauge" else prop
+    if prop == "space_velocity" and unit in SV_BASIS:
+        return f"space_velocity_{SV_BASIS[unit]}"
+    return prop
+
+
 def _quantity(prop: str, v: dict) -> tuple[str, dict | None, str | None]:
     if not isinstance(v, dict) or v.get("status", "present") != "present":
-        return prop, None, None
+        return _absent_target(prop, v), None, None
     reported = v.get("as_reported") or " ".join(str(x) for x in (v.get("value", ""), v.get("unit", "")) if x != "").strip()
     if v.get("lower") is not None and v.get("upper") is not None and not reported:
         reported = f"{v['lower']}–{v['upper']} {v.get('unit', '')}".strip()
@@ -843,8 +858,13 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
                         key = tk if k in CANONICAL else f"{tk}_as_reported"   # the property a value would have used
                         if key in outp:
                             continue
-                        declare(table, label_or_type, key, {"type": "quantity", "unit": CANONICAL[k][0]} if k in CANONICAL
-                                else {"type": "string", "description": f"{tk} as reported (not converted)"})
+                        if k in CANONICAL:              # declared as a present value of that property would be
+                            unit, why = SPLIT.get(tk, (CANONICAL[k][0], None))
+                            declare(table, label_or_type, key, {"type": "quantity", "unit": unit,
+                                                                **({"description": why} if why else {})})
+                        else:
+                            declare(table, label_or_type, key,
+                                    {"type": "string", "description": f"{tk} as reported (not converted)"})
                         entry = {"status": status}
                         if status == "not_reported" and v.get("missing_reason") in MISSING_REASONS:
                             entry["missing_reason"] = v["missing_reason"]

@@ -188,6 +188,26 @@ def test_parallel_links_with_other_values_are_listed_never_merged(tmp_path, head
                              "source_id": kept["source_paper_ids"][0]}]
 
 
+def test_a_typed_absence_belongs_to_the_property_its_unit_and_basis_name(tmp_path, head):
+    """A value with no number goes where a present value in its unit would: a gauge pressure not measured is listed
+    under pressure_gauge (declared in MPa above ambient), a space velocity on hydrogen under its own property."""
+    doc = build()
+    test = next(n for n in doc["nodes"] if n["id"] == f"{T}/test/1")
+    test["props"]["pressure"] = {"status": "not_measured", "unit": "psig"}
+    test["props"]["space_velocity"] = {"status": "not_reported", "missing_reason": "not_stated_in_source",
+                                       "unit": "vol H2/vol catalyst/h"}
+    kgbundle.export(doc, head, tmp_path / "b", "absent", created="2026-10-06T00:00:00Z")
+    t = _by_scale(tmp_path / "b")[f"{T}/test/1"]["props"]
+    assert t["_value_status"] == {"pressure_gauge": {"status": "not_measured"},
+                                  "space_velocity_h2": {"status": "not_reported", "missing_reason": "not_stated_in_source"}}
+    props = json.loads((tmp_path / "b/kg/schema.json").read_text())["node_types"]["CatalyticTest"]["properties"]
+    assert props["pressure_gauge"]["unit"] == "MPa" and "gauge" in props["pressure_gauge"]["description"]
+    v = _validator()
+    if v:
+        kgbundle.seal(tmp_path / "b")
+        assert v.validate_bundle(tmp_path / "b").ok
+
+
 def test_a_link_resting_only_on_withheld_quotes_is_exported_with_their_digests(tmp_path, head):
     """A quote withheld under the copyright cap (its sha256 and length in the evidence note) is the kg-bundle 1.1.0
     quote_withheld, so the link stays an edge; one longer than the format's 600 characters is left out and counted, and a
