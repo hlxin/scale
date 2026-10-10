@@ -77,8 +77,8 @@ file too (`'{"name": "curate-source", "reference": "references/recipes.md"}'`).
 | `evolve-schema` | turn missing-concept gaps into a schema change in one reviewable pull request |
 | `triage-feedback` | sort community feedback into topics and options for the reviewers |
 
-Release v0.1.0 carries curate-source, query-graph, evolve-schema and triage-feedback in their earlier
-versions; the other four ship with the next release. On a checkout (`--repo`, or `uvx --from` a
+Release v0.1.0 carries all eight skills: curate-source, query-graph, evolve-schema, triage-feedback, scan-conflicts,
+map-coverage, curate-dataset and export-graph. On a checkout (`--repo`, or `uvx --from` a
 checkout), `scale call skills` serves the head's skills.
 
 ## The tools

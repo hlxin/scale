@@ -38,7 +38,7 @@ scale-graph documents. Paths are named in one place, `tools/layout.py`; review i
 | [`tools/`](../tools/README.md) | the `scale` package (`tools/`), the skills (`skills/`) and the tool tests | the owner and reviewers |
 | `docs/` | tool and framework documentation, [decision records](decisions/0001-scale-0.1.0.md), the gap register | the owner and reviewers |
 | [`governance/`](../governance/README.md) | governance documents, the review policy, the registries | the owner and reviewers |
-| [`releases/`](../releases/README.md) | releases `vX.Y.Z/` (none built yet) | the owner; nothing inside a release is edited |
+| [`releases/`](../releases/README.md) | releases `vX.Y.Z/` (v0.1.0 the first) | the owner; nothing inside a release is edited |
 
 ## Terms
 
