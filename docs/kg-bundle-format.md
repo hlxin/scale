@@ -24,11 +24,11 @@ named `<bundle_id>_v<version>.zip` with the folder at its top.
 ## Format version 1.1.0
 
 SCALE writes format **1.1.0** (the identifier the format requires in `bundle.json` is `FORMAT_ID` in
-`tools/scale/kgbundle.py`). Beyond 1.0.0 it carries the two things SCALE's rules need:
+`tools/kgbundle.py`). Beyond 1.0.0 it carries the two things SCALE's rules need:
 
 - **Withheld quotes.** Evidence whose quote is withheld under SCALE's copyright cap is `quote_withheld`: the sha256
   and length of the quote under `scale-match-text-1` (SCALE's verbatim normalization, `match_text` in
-  `tools/scale/util.py`), with its source and locator. A reader holding the source finds and checks the passage; no
+  `tools/util.py`), with its source and locator. A reader holding the source finds and checks the passage; no
   text is shipped. A link whose quotes are all withheld stays an edge.
 - **Typed absences.** A value the source does not report, did not measure, or gives below a limit is a
   `_value_status` entry (status and, for `not_reported`, the reason), not a missing property.
@@ -59,7 +59,7 @@ it. The tests run the validator when `SCALE_BUNDLE_VALIDATOR` names that file. A
 loads the zip as it is: the first release as a new graph, each later release as an update of it, in order.
 
 The mapping from scale-graph to the bundle (ids, units, evidence, statements, access) is described in the module
-docstring of `tools/scale/kgbundle.py`, and the export skill (`tools/skills/export-graph/SKILL.md`) says when to choose
+docstring of `tools/kgbundle.py`, and the export skill (`skills/export-graph/SKILL.md`) says when to choose
 a bundle over the native document.
 
 ## Bundles in this repository

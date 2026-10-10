@@ -41,7 +41,7 @@ pull request that makes it is. Each item is a suggestion @scale-agents can take 
     it goes in the retracted source's `unmodeled` list).
 - **Characterization results as declared properties** (catalysis): specific and external surface area, pore
   volume and diameter and the other keys the recording recipes list
-  ([tools/skills/curate-source/references/recipes.md](../tools/skills/curate-source/references/recipes.md),
+  ([skills/curate-source/references/recipes.md](../skills/curate-source/references/recipes.md),
   "Characterization results"), which go in a Characterization's `results` map until then.
 
 ## Open themes of the earlier gap register

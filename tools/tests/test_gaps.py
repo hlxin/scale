@@ -20,7 +20,7 @@ def test_issue_rendering_and_dry_run():
     assert dry["dry_run"] and "gap:missing-concept" in dry["command"]
     cmd = dry["command"]                                       # the title stays; only the body is elided
     assert cmd[3:7] == ["--title", gap["title"], "--body", "<body>"] and body not in cmd
-    assert "(tools/skills/evolve-schema/SKILL.md)" in body     # the skill paths of the repository layout
+    assert "(skills/evolve-schema/SKILL.md)" in body     # the skill paths of the repository layout
 
 
 def _run(plan: dict) -> dict:

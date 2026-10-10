@@ -28,7 +28,7 @@ def repo(tmp_path):
     shutil.copytree(REPO / "core", r / "core", ignore=shutil.ignore_patterns("__pycache__", "frozen", "tests"))
     shutil.copytree(REPO / "domain/graph", r / "domain/graph", ignore=shutil.ignore_patterns("frozen"))
     for rel in ("domain/DOMAIN.yaml", "scale-release.yaml", "CHANGELOG.md", layout.PREFIX_REGISTRY,
-                "tools/scale/pgraph_migrate.py"):
+                "tools/pgraph_migrate.py"):
         (r / rel).parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(REPO / rel, r / rel)
     git(r, "init", "-q", "-b", "main")

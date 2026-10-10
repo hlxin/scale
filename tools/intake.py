@@ -11,7 +11,7 @@ Anyone comments through GitHub issues, pull-request comments or discussions. On 
 3. **propose** — for each cluster, list decision paths with who must review and what each
    path changes. Proposals come from the built-in rules or from *any* external agent system
    that reads ``queue.json`` and writes ``proposals.json`` (validated against
-   ``tools/skills/triage-feedback/proposal.schema.json``);
+   ``skills/triage-feedback/proposal.schema.json``);
 4. **digest** — render one feedback digest (and optionally publish it as an issue).
 
 Nothing is decided in the digest. A person acts on a topic by opening a pull request (or by labelling the
@@ -346,7 +346,7 @@ def rule_proposal(c: dict) -> dict:
     O = lambda i, action, desc, cons: {"id": i, "action": action, "description": desc, "consequence": cons}
     opts = {
         "missing_concept": [
-            O("A", "change_schema", "Change the schema in a pull request (tools/skills/evolve-schema): the edit, fixtures, counterexamples, the version raised, affected queries.",
+            O("A", "change_schema", "Change the schema in a pull request (skills/evolve-schema): the edit, fixtures, counterexamples, the version raised, affected queries.",
               "New concepts enter as provisional; the pull request needs one person's approving review "
               "(@scale-agents open it on their own)."),
             O("B", "map_to_existing", "Show that an existing label, edge type or property (or an external vocabulary term) already expresses it" +
@@ -354,7 +354,7 @@ def rule_proposal(c: dict) -> dict:
               "No schema change; curation guidance updated."),
             O("C", "defer_discussion", "Move to a discussion to collect more use cases before modeling.", "No change now.")],
         "extraction_error": [
-            O("A", "re_extract", f"Re-check {recs} against the source and correct the record (tools/skills/curate-source).",
+            O("A", "re_extract", f"Re-check {recs} against the source and correct the record (skills/curate-source).",
               "Record values change; the documents' tests updated in the same PR."),
             O("B", "not_an_error", "Explain why the recorded value matches the source (quote and locator).", "No change."),
             O("C", "source_ambiguity", "Record the ambiguity as ambiguous_in_source and keep both readings.", "Record gains explicit missingness (missing_reason ambiguous_in_source).")],
@@ -387,7 +387,7 @@ def rule_proposal(c: dict) -> dict:
 
 
 def validate_proposal(p: dict, clusters: dict[str, dict]) -> list[str]:
-    """Check an externally produced proposal (see tools/skills/triage-feedback/proposal.schema.json)."""
+    """Check an externally produced proposal (see skills/triage-feedback/proposal.schema.json)."""
     errs = []
     for k in ("cluster_id", "category", "summary", "options", "proposed_by"):
         if k not in p:

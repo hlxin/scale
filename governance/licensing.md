@@ -11,7 +11,7 @@ are owned, like every path, by the owner, `@hlxin`.
 | what | licence | where |
 |---|---|---|
 | code: the `scale` package and everything under `tools/` except the skills' texts and the texts of the domain-template test fixture, every Python file anywhere (catalysis tests, example tools, builders), packaging and CI files | MIT | [`LICENSE`](../LICENSE), [`LICENSES/MIT.txt`](../LICENSES/MIT.txt) |
-| vocabulary (the science kernel `core/`, the catalysis domain `domain/`), curated records, examples and fixtures, documentation (`docs/`, the root documents), governance, the skills' texts (`tools/skills/`), the texts of the domain-template test fixture (`tools/tests/fixtures/domain-template/`, its Python files excepted), `CITATION.cff`, `scale-release.yaml` and the releases `releases/v*/` | CC-BY-4.0 | [`LICENSES/CC-BY-4.0.txt`](../LICENSES/CC-BY-4.0.txt) |
+| vocabulary (the science kernel `core/`, the catalysis domain `domain/`), curated records, examples and fixtures, documentation (`docs/`, the root documents), governance, the skills' texts (`skills/`), the texts of the domain-template test fixture (`tools/tests/fixtures/domain-template/`, its Python files excepted), `CITATION.cff`, `scale-release.yaml` and the releases `releases/v*/` | CC-BY-4.0 | [`LICENSES/CC-BY-4.0.txt`](../LICENSES/CC-BY-4.0.txt) |
 | third-party material | its owners' terms | [`NOTICE`](../NOTICE) |
 
 [`REUSE.toml`](../REUSE.toml) is the record: it gives every file its licence by path (the
@@ -51,7 +51,7 @@ you have the right to contribute the content.
 ## 3. Quoted evidence: short quotes, capped
 
 Curated records cite their sources with short verbatim excerpts. The policy, as `scale check` implements it
-(`tools/scale/rights.py`; [docs/curation.md](../docs/curation.md)):
+(`tools/rights.py`; [docs/curation.md](../docs/curation.md)):
 
 - **Rights per source.** Each folder with research-data documents has a `rights.yaml`:
   `sources: {<source id>: {class: public_domain | open | restricted | in_copyright | synthetic,

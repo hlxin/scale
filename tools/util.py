@@ -144,7 +144,7 @@ def find_repo_root(start: str | os.PathLike | None = None) -> Path:
         raise ScaleError(f"SCALE_REPO={env} is not a SCALE repository (no scale-release.yaml)")
     candidates = [Path(start or os.getcwd()).resolve()]
     # also the checkout this package was imported from (editable installs)
-    candidates.append(Path(__file__).resolve().parents[2])
+    candidates.append(Path(__file__).resolve().parents[1])
     for c in candidates:
         for p in [c, *c.parents]:
             if (p / "scale-release.yaml").exists() and (p / "releases").is_dir():

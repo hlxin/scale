@@ -73,16 +73,16 @@ repository). Use the plain `uvx scale-catal …` form only once a release is on 
   did not do and why. Humans do not run these commands; you do. Never approve or merge.
 - Read [docs/architecture.md](docs/architecture.md), [docs/implementation-status.md](docs/implementation-status.md)
   and [domain/README.md](domain/README.md) first. Update `docs/implementation-status.yaml` when a
-  capability changes. Keep tools deterministic. Code is in `tools/scale/`, skills in
-  `tools/skills/`; paths come from `tools/scale/layout.py`.
+  capability changes. Keep tools deterministic. Code is in `tools/`, skills in
+  `skills/`; paths come from `tools/layout.py`.
 - Machine documents are canonical JSON; specifications are block-style YAML.
-- **A schema change** follows `tools/skills/evolve-schema/SKILL.md`: edit `core/graph/kernel.yaml` or
+- **A schema change** follows `skills/evolve-schema/SKILL.md`: edit `core/graph/kernel.yaml` or
   `domain/graph/catalysis.yaml` directly (additive operations, deprecation instead of deletion,
   `maturity: provisional` for new concepts), add a fixture that uses what is added and a counterexample, run
   `uv run scale schema bump --base origin/main` once (it freezes the base version, raises the one version and
   registers the migration step: a breaking change raises the second number, 0.1.0 -> 0.2.0, an additive change
   the third, 0.1.0 -> 0.1.1), add the migration rule for a breaking change (`STEP_RULES` in
-  `tools/scale/pgraph_migrate.py`), update the competency questions whose answers change, add a CHANGELOG line,
+  `tools/pgraph_migrate.py`), update the competency questions whose answers change, add a CHANGELOG line,
   and run `uv run scale schema check --base origin/main` until it passes. The kernel and the catalysis file never
   carry a version of their own.
 - Never edit a release (`releases/<id>/`) or an existing frozen schema version (`core/graph/frozen/`,

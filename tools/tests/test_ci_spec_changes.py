@@ -26,7 +26,7 @@ BASE = {
     "releases/README.md": "releases\n",
     "releases/v0.1.0/RELEASE.yaml": "release: v0.1.0\n",
     "releases/v0.1.0/domain/graph/catalysis.yaml": "domain: catalysis\n",
-    "releases/v0.1.0/tools/skills/x/SKILL.md": "x\n",
+    "releases/v0.1.0/skills/x/SKILL.md": "x\n",
     "domain/DOMAIN.yaml": "domain: catalysis\nstatus: stable\nmaintainers:\n  team: '@example-org/catalysis-maintainers'\n",
     "domain/graph/scale-graph.yaml": "version: 0.2.0\n",
     "domain/graph/catalysis.yaml": "domain: catalysis\n",
@@ -35,7 +35,7 @@ BASE = {
     "domain/graph/frozen/SHA256SUMS": "aaa  scale-graph-0.1.0.yaml\n",
     "domain/examples/x.json": "{}\n",
     "docs/decisions/log.json": "[]\n",
-    "tools/scale/cli.py": "# cli\n",
+    "tools/cli.py": "# cli\n",
 }
 
 
@@ -83,14 +83,14 @@ def change(repo, write=None, delete=(), append=None):
 
 
 def test_tooling_changes_pass(repo):
-    res = change(repo, {"tools/scale/cli.py": "# better cli\n", "releases/v0.2.0/RELEASE.yaml": "release: v0.2.0\n",
+    res = change(repo, {"tools/cli.py": "# better cli\n", "releases/v0.2.0/RELEASE.yaml": "release: v0.2.0\n",
                         "releases/README.md": "more\n", "releases/CHANGELOG.md": "notes\n"})
     assert res["ok"], res["violations"]                       # a new release and the notes may change
 
 
 @pytest.mark.parametrize("edit,expected", [
     ({"write": {"releases/v0.1.0/domain/graph/catalysis.yaml": "domain: other\n"}}, "modifies a file of the release releases/v0.1.0"),
-    ({"delete": ["releases/v0.1.0/tools/skills/x/SKILL.md"]}, "deletes a file of the release releases/v0.1.0"),
+    ({"delete": ["releases/v0.1.0/skills/x/SKILL.md"]}, "deletes a file of the release releases/v0.1.0"),
     ({"write": {"releases/v0.1.0/extra.txt": "x\n"}}, "adds a file to the release releases/v0.1.0"),
     ({"write": {"domain/graph/frozen/scale-graph-0.1.0.yaml": "version: 0.1.1\n"}}, "modifies a frozen schema file"),
     ({"delete": ["domain/graph/frozen/v0.1.0/catalysis.yaml"]}, "deletes a frozen schema file"),
@@ -130,7 +130,7 @@ def test_a_specification_change_needs_the_schema_check(repo, path):
 
 def test_path_rules_are_anchored(repo):
     res = change(repo, {"domain/examples/x.json": "{\"y\": 1}\n",
-                        "tools/scale/core/graph/notes.md": "not the core\n",
+                        "tools/core/graph/notes.md": "not the core\n",
                         "tools/domain/graph/notes.md": "not the domain\n",
                         "docs/scale-graph.yaml.md": "not the manifest\n",
                         "scale-graph.yaml": "no repository-wide composition\n"})

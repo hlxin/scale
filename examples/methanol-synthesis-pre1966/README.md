@@ -58,7 +58,7 @@ searches. Current answers: q1 236 rows, q2 69, q2b 88, q3 47, q4 135, q5 62, q6 
 
 ## Recurating
 
-Follow the `curate-source` skill (`tools/skills/curate-source/SKILL.md`) one source at a time, from the PDFs:
+Follow the `curate-source` skill (`skills/curate-source/SKILL.md`) one source at a time, from the PDFs:
 
 1. **Page texts** (local; `work/` is git-ignored): `scale.sourcetext.extract_pages(pdf)` gives each page's text from
    the PDF's text layer, or Tesseract OCR where it has none, and `joined(extract_pages(pdf)["pages"])` the text to check quotes against

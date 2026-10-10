@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- **Simpler layout:** the skills are in `skills/` at the root, and the package's modules sit directly in
+  `tools/` (the folder is the package `scale`; there is no `tools/scale/`).
+
 ## v0.1.0 — 2026-10-10
 
 The first official release: schema 0.1.0 (the science kernel and the catalysis domain), the `scale-catal` tools
@@ -195,7 +198,7 @@ first will be `v0.1.0`.
   schema repository), and a later change to a skill's text raises its version.
 - **Scanned pages read by two readers: `scale pages`.** The check the consortium schema repository's methanol
   corpus tool applied to scanned sources is now a general command for any curated document and source
-  ([tools/scale/pagereading.py](tools/scale/pagereading.py); `render`, `region`, `agree`, `check`, `pending`,
+  ([tools/pagereading.py](tools/pagereading.py); `render`, `region`, `agree`, `check`, `pending`,
   `merge-second`, `import`): a reading of a page image carries its region and transcription; the tool computes its
   agreement with the OCR words in that region and records the OCR engines; a reading OCR does not confirm needs a
   matching, independent second reading; every value of a record read from an image is in a transcription or quote.

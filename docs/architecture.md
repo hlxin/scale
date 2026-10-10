@@ -27,7 +27,7 @@ framework: the specification has **two layers, the science kernel and the domain
 kernel through its graph schema manifest; catalysis is the first domain and, for now, the only one, so its
 folder is `domain/`. There is no repository-wide composition and no third layer. A second domain would revisit
 this layout (a folder per domain, and how the one schema version spans them). SCALE has one data format,
-scale-graph documents. Paths are named in one place, `tools/scale/layout.py`; review is routed by
+scale-graph documents. Paths are named in one place, `tools/layout.py`; review is routed by
 [`.github/CODEOWNERS`](../.github/CODEOWNERS).
 
 | path | what it holds | maintained by |
@@ -35,7 +35,7 @@ scale-graph documents. Paths are named in one place, `tools/scale/layout.py`; re
 | [`scale-release.yaml`](../scale-release.yaml) | the head distribution manifest: distribution, release id, the schema's one version (`schema_version`), `core`, `domain_profiles`, skills | the owner and reviewers |
 | [`core/`](../core/README.md) | the science kernel, the general base layer: `CORE.yaml`, the kernel (`graph/kernel.yaml`; the kernels of earlier versions in `graph/frozen/kernel-<version>.yaml`, once there are any), its examples and tests ([how a domain builds on it](../core/graph/README.md)) | the owner and reviewers |
 | [`domain/`](../domain/README.md) | the catalysis domain: `DOMAIN.yaml`, the graph schema manifest `graph/scale-graph.yaml` with the catalysis file (frozen versions in `graph/frozen/`, once there are any), examples, competency questions, tests, docs | the owner and reviewers |
-| [`tools/`](../tools/README.md) | the `scale` package (`tools/scale/`), the skills (`tools/skills/`) and the tool tests | the owner and reviewers |
+| [`tools/`](../tools/README.md) | the `scale` package (`tools/`), the skills (`skills/`) and the tool tests | the owner and reviewers |
 | `docs/` | tool and framework documentation, [decision records](decisions/0001-scale-0.1.0.md), the gap register | the owner and reviewers |
 | [`governance/`](../governance/README.md) | governance documents, the review policy, the registries | the owner and reviewers |
 | [`releases/`](../releases/README.md) | releases `vX.Y.Z/` (none built yet) | the owner; nothing inside a release is edited |
@@ -59,8 +59,8 @@ scale-graph documents. Paths are named in one place, `tools/scale/layout.py`; re
 | specification | `core/graph/kernel.yaml`, `domain/graph/scale-graph.yaml` and the files it lists | scale-graph: labeled property graphs in node-link JSON. The catalysis manifest assembles the kernel with the catalysis file (with its checklist); earlier versions are frozen beside it in `graph/frozen/`, their kernels in `core/graph/frozen/`, once a schema change has moved the schema on ([how a domain builds on the kernel](../core/graph/README.md)). |
 | declaration | `core/CORE.yaml`, `domain/DOMAIN.yaml` | What each layer holds, who maintains it, and the schema's one version; checked by `scale domains check`. |
 | competency | `domain/competency/*.yaml` | What the catalysis schema must answer, run on public examples by `scale domains cq` (a step of `scale check`) and so re-run on every pull request. |
-| procedure | `tools/skills/*/SKILL.md` | Instructions for people and agents: inputs, allowed tools, outputs, validation, human-review conditions. |
-| tool | `tools/scale` (`scale` CLI, agent tools) | Deterministic operations behind the procedures. |
+| procedure | `skills/*/SKILL.md` | Instructions for people and agents: inputs, allowed tools, outputs, validation, human-review conditions. |
+| tool | `tools` (`scale` CLI, agent tools) | Deterministic operations behind the procedures. |
 | release | `releases/vX.Y.Z` | Immutable snapshot, with digests, of the kernel declaration, the kernel and its frozen versions, the catalysis declaration, schema manifest, parts and frozen versions, and the skills; the schema's one version, the spec document of every version, contributors and a semantic comparison with the previous release. |
 
 A skill guides a model or person through a task; a tool performs a defined operation. Versioning
@@ -111,7 +111,7 @@ be another.
 
 ## Code map
 
-All modules are in `tools/scale/`.
+All modules are in `tools/`.
 
 | module | responsibility |
 |---|---|

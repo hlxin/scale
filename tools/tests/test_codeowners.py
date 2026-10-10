@@ -30,8 +30,8 @@ def rules():
     ("/docs/*", "docs/a.md", True),
     ("/docs/*", "docs/decisions/0001.md", False),                # `*` does not cross a directory
     ("/docs/**/log.json", "docs/decisions/log.json", True),
-    ("/tools/scale/ci.py", "tools/scale/ci.py", True),
-    ("/tools/scale/ci.py", "tools/scale/ci.pyc", False),
+    ("/tools/ci.py", "tools/ci.py", True),
+    ("/tools/ci.py", "tools/ci.pyc", False),
 ])
 def test_patterns_follow_github_rules(pattern, path, hit):
     assert bool(codeowners._regex(pattern).match(path)) is hit
@@ -60,7 +60,7 @@ def test_minimal_reviewers_is_a_smallest_cover():
 
 def test_the_owner_owns_every_path(rules):
     own = lambda p: set(codeowners.owners_for(rules, p))
-    for path in ("core/graph/kernel.yaml", "core/graph/frozen/SHA256SUMS", "tools/scale/cli.py", "tools/scale/policy.py",
+    for path in ("core/graph/kernel.yaml", "core/graph/frozen/SHA256SUMS", "tools/cli.py", "tools/policy.py",
                  "domain/graph/catalysis.yaml", "domain/graph/frozen/SHA256SUMS",
                  "domain/README.md", "domain/proposals/000001/proposal.yaml", "governance/review-policy.yaml",
                  ".github/workflows/apply-proposals.yml", ".github/CODEOWNERS", "scale-release.yaml",

@@ -127,7 +127,7 @@ narrowed) raises the second number (0.1.0 -> 0.2.0), any other change the third 
 `domain/graph/frozen/scale-graph-<v>.yaml` with its parts in `v<v>/`, digests appended to each `SHA256SUMS`),
 raises the version in the manifest, `CORE.yaml`, `DOMAIN.yaml`, `scale-release.yaml`, the kernel-only example
 manifest and the sentences of the documentation that name it, and registers `STEPS[<base>] = (<new>, <note>)` in
-`tools/scale/pgraph_migrate.py`. It refuses an unchanged schema, a version raised already and a version frozen
+`tools/pgraph_migrate.py`. It refuses an unchanged schema, a version raised already and a version frozen
 before, and writes into a repository checkout only.
 
 `check` asks for: the version raised by the rule; the base frozen, its copy's spec digest equal to the base's;
@@ -165,7 +165,7 @@ ask. Each names its `id` and `question`, the public example `documents` it runs 
 must be (`expect`: `status`, optionally `min_rows`, `max_rows`, `values` that rows must return, `schema_gaps`).
 `cq` runs each plan on each document under the schema version the document pins and compares the combined
 answer with the expectation; it exits 1 when a question does not answer as expected (a step of `scale check`).
-A question without a plan is a stub: listed, not counted. Format reference: `tools/scale/competency.py`.
+A question without a plan is a stub: listed, not counted. Format reference: `tools/competency.py`.
 
 ## Release builds: `scale release build`
 

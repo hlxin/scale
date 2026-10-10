@@ -19,7 +19,7 @@ name: scale-agents
 # approves or merges: one person approves and merges every pull request.
 # The team's rules: .github/scale-agents/instructions.md (the discovery strategist, copied to .claude/CLAUDE.md for the
 # run) and .github/scale-agents/roles/ (the other roles, copied to .claude/agents/), with AGENTS.md and the skills in
-# tools/skills/. The App's token cannot change workflow files, so the agents cannot edit .github/workflows/.
+# skills/. The App's token cannot change workflow files, so the agents cannot edit .github/workflows/.
 #
 # Human setup: install the Claude GitHub App on hlxin/scale and set the repository secret CLAUDE_CODE_OAUTH_TOKEN
 # (a Claude subscription's token from `claude setup-token`; its runs draw on that subscription) or, instead,

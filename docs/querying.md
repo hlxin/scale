@@ -1,8 +1,8 @@
 # Queries that return context, not just answers
 
-Procedure: [`tools/skills/query-graph/SKILL.md`](../tools/skills/query-graph/SKILL.md). Competency
+Procedure: [`skills/query-graph/SKILL.md`](../skills/query-graph/SKILL.md). Competency
 questions: [`domain/competency/`](../domain/competency). The plan format is
-documented in `tools/scale/pgraph_query.py`.
+documented in `tools/pgraph_query.py`.
 
 ## Query plans
 
@@ -167,7 +167,7 @@ step declares; any other name (a misspelling) is an error, not a filter that eve
 ## Retracted and corrected sources
 
 A source's publication status is derived from the notices recorded in the graph, never typed by hand
-(`tools/scale/lifecycle.py`): a `RETRACTS` link from a notice Source makes it `retracted`
+(`tools/lifecycle.py`): a `RETRACTS` link from a notice Source makes it `retracted`
 (`partially_retracted` with `scope: partial`), and an `UPDATES` link makes it `withdrawn`, `expression_of_concern`, `corrected` or `updated` by its
 `update_type`. Without a notice it is `current_or_unknown`: current, or nobody has looked
 (`status_check` says who looked, when and how).
@@ -308,7 +308,7 @@ values as reported, attribute interpretations to their authors, keep incompatibl
 say when evidence comes from a retracted, withdrawn or corrected source (its `source_status`), and put
 extrapolations in a separately labelled paragraph.
 
-The query-graph skill ([`tools/skills/query-graph/SKILL.md`](../tools/skills/query-graph/SKILL.md)) has
+The query-graph skill ([`skills/query-graph/SKILL.md`](../skills/query-graph/SKILL.md)) has
 the reading rules, one line each. In short:
 
 - Traverse every link type the question names: a link type not queried is never absent.

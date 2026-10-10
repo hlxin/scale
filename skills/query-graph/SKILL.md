@@ -42,7 +42,7 @@ A generated explanation is a presentation of the retrieved evidence, not a repla
    `scale graph stats <graph>` for the units in use per property (`units_in_use`) and the link
    patterns (`link_patterns`: source label, link type, target label, count); search the evidence for
    the words the sources use: `scale graph search <graph> "sulfur poisoning" --published-before 1959`.
-3. **Write a plan** (`tools/scale/pgraph_query.py` and docs/querying.md document the format):
+3. **Write a plan** (`tools/pgraph_query.py` and docs/querying.md document the format):
    `match` a label, follow `steps` along edges (`direction: in` for incoming ones; `edge_as` binds
    the link), `where` filters on value objects with a `unit` (and a `basis` when the values state
    one; nothing is converted, so one plan per unit and basis), paths into maps and lists

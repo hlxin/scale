@@ -55,7 +55,7 @@ def test_a_comparison_claim_across_two_projects_is_never_one_projects():
     assert not _sees_claim(safe, [P]) and not _sees_claim(safe, [Q]) and not _sees_claim(safe, [])
     assert not _sees_claim(safe, [ONLY_P])
     assert _sees_claim(safe, [BOTH])
-    text = (REPO / "tools/skills/scan-conflicts/SKILL.md").read_text()
+    text = (REPO / "skills/scan-conflicts/SKILL.md").read_text()
     assert "none of them is\n   the least open" in text and "never one project's stewardship" in text
 
 
@@ -63,7 +63,7 @@ def test_the_curation_guide_states_the_evidence_ids_rule_of_the_skill():
     """docs/curation.md states, as the curate-source skill does, that every value of a record citing several sources
     gets its evidence_ids, and that a value without them on a record that lost evidence is withheld (fail closed),
     as the filter does (test_a_filtered_value_is_never_cited_to_a_source_that_may_not_state_it)."""
-    for path in ("docs/curation.md", "tools/skills/curate-source/SKILL.md"):
+    for path in ("docs/curation.md", "skills/curate-source/SKILL.md"):
         text = " ".join((REPO / path).read_text().split())
         assert "several sources" in text and "`evidence_ids`" in text, path
         assert "a value without `evidence_ids` on a record that lost evidence (fail closed)" in text, path
@@ -75,6 +75,6 @@ def test_a_hand_written_gap_states_its_access():
     bare = make_gap("missing_concept", record="ex:c", about="a concept", detected_by="curation", schema=None)
     assert "access" not in bare and not_public(bare)
     assert not_public(json.loads(json.dumps({**bare, "access": {"level": "public", "note": ""}}))) is None
-    for path in ("tools/skills/curate-source/SKILL.md", "tools/skills/query-graph/SKILL.md"):
+    for path in ("skills/curate-source/SKILL.md", "skills/query-graph/SKILL.md"):
         text = " ".join((REPO / path).read_text().split())
         assert "write by hand states its" in text and "reads as institution" in text, path

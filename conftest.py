@@ -23,7 +23,22 @@ REPO = _find_repo(Path(__file__).resolve().parent)
 # are templates with placeholders, not tests of this repository
 collect_ignore_glob = ["tools/tests/fixtures/domain-template/*"]
 os.environ.setdefault("SCALE_NO_UPDATE_CHECK", "1")   # tests never contact the remote
-sys.path.insert(0, str(REPO / "tools"))
+
+def _load_scale(tools: Path) -> None:
+    """Import the package `scale` from this checkout's tools/ (the folder is the package), so that a copy of the
+    repository tests its own code."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("scale", tools / "__init__.py", submodule_search_locations=[str(tools)])
+    module = importlib.util.module_from_spec(spec)
+    sys.modules["scale"] = module
+    spec.loader.exec_module(module)
+
+
+_load_scale(REPO / "tools")
+# a subprocess runs this checkout's command line the same way: [sys.executable, "-c", RUN_SCALE, <args>]
+RUN_SCALE = ("import importlib.util, sys; t = sys.argv.pop(1); s = importlib.util.spec_from_file_location('scale', "
+             "t + '/__init__.py', submodule_search_locations=[t]); m = importlib.util.module_from_spec(s); "
+             "sys.modules['scale'] = m; s.loader.exec_module(m); from scale.cli import main; sys.exit(main(sys.argv[1:]))")
 
 from scale import layout  # noqa: E402
 from scale.util import load_yaml  # noqa: E402

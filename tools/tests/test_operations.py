@@ -103,7 +103,7 @@ def _two_versions(tmp_path):
     shutil.copytree(REPO / "core", repo / "core", ignore=shutil.ignore_patterns("__pycache__", "frozen", "tests"))
     shutil.copytree(REPO / "domain/graph", repo / "domain/graph", ignore=shutil.ignore_patterns("frozen"))
     for rel in ("domain/DOMAIN.yaml", "scale-release.yaml", "CHANGELOG.md",
-                "governance/registry/extension-prefixes.yaml", "tools/scale/pgraph_migrate.py"):
+                "governance/registry/extension-prefixes.yaml", "tools/pgraph_migrate.py"):
         (repo / rel).parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(REPO / rel, repo / rel)
     git(repo, "init", "-q", "-b", "main")

@@ -68,7 +68,7 @@ kernel identifier; `scale domains check` reports both.
    @scale-agents take it up and make the change.
 2. The change edits `graph/kernel.yaml` directly, adds a fixture that uses what it adds, raises the one version
    (`scale schema bump --base origin/main`) and passes `scale schema check`
-   ([`tools/skills/evolve-schema/SKILL.md`](../tools/skills/evolve-schema/SKILL.md)).
+   ([`skills/evolve-schema/SKILL.md`](../skills/evolve-schema/SKILL.md)).
 3. The pull request says how the change affects the catalysis domain; `scale ci spec-changes` lists who reviews,
    and CI writes a summary of the schema change for the reviewer.
 4. Review: one approving review by a reviewer, as for every change (the owner's own pull requests are merged

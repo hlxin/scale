@@ -32,9 +32,11 @@ pdf = ["pymupdf>=1.23"]              # page texts of PDF sources (OCR also needs
 scale = "scale.cli:main"
 scale-catal = "scale.cli:main"      # so that `uvx scale-catal …` works without --from
 
-[tool.setuptools.packages.find]
-where = ["tools"]
-include = ["scale", "scale.*"]
+[tool.setuptools]
+# the package `scale` is the folder tools/ (its tests and README are not part of it)
+package-dir = {"scale" = "tools"}
+packages = ["scale"]
+include-package-data = false
 
 [tool.pytest.ini_options]
 # the same list as scale.layout.TEST_DIRS; the domain template test fixture is not collected (conftest.py

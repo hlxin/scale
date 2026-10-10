@@ -60,9 +60,9 @@ Any agent system can produce the proposals. No particular model or framework is 
 
 - **Input:** `queue.json` from `scale triage ingest` (or the `triage-run` artifact of the weekly
   workflow).
-- **Procedure:** [`tools/skills/triage-feedback/SKILL.md`](../tools/skills/triage-feedback/SKILL.md).
+- **Procedure:** [`skills/triage-feedback/SKILL.md`](../skills/triage-feedback/SKILL.md).
 - **Output:** `proposals.json` valid against
-  [`tools/skills/triage-feedback/proposal.schema.json`](../tools/skills/triage-feedback/proposal.schema.json).
+  [`skills/triage-feedback/proposal.schema.json`](../skills/triage-feedback/proposal.schema.json).
 - **Check:** `scale triage propose <dir> --proposals proposals.json --strict`.
 - **Automatic use:** set the repository variable `SCALE_TRIAGE_COMMAND` to a program. The weekly
   workflow calls it as `<program> <queue.json> <proposals.json>`. Invalid proposals are rejected

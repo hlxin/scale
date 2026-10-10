@@ -25,7 +25,7 @@ def _mini(tmp_path):
     """The head in a scratch repository, without the releases built from it, describing
     the first release (FIRST): the tests build a first release and the ones after it, whatever the repository holds."""
     repo = tmp_path / "repo"
-    for d in ("core", "governance", "tools/skills", "domain/graph"):
+    for d in ("core", "governance", "skills", "domain/graph"):
         shutil.copytree(REPO / d, repo / d, ignore=shutil.ignore_patterns("__pycache__"))
     (repo / "releases").mkdir()
     shutil.copy2(REPO / "releases/README.md", repo / "releases/README.md")
@@ -63,7 +63,7 @@ def test_the_build_carries_core_kernel_domain_and_skills_with_the_one_version(tm
         assert m["digests"][f] == sha256_file(repo / f), f
     held = bool(list((REPO / "domain/graph/frozen").glob("scale-graph-*.yaml")))     # none at 0.1.0
     assert any("/frozen/" in k for k in m["digests"]) == held
-    assert all(s.startswith("tools/skills/") for s in m["skills"]) and "tools/skills/query-graph/SKILL.md" in m["digests"]
+    assert all(s.startswith("skills/") for s in m["skills"]) and "skills/query-graph/SKILL.md" in m["digests"]
     assert verify_release(dest, "v0.1.0")["ok"]
     cv = m["component_versions"]                       # one version for the kernel and the catalysis domain
     assert cv["schema"] == {"version": HEAD_VERSION}
@@ -76,8 +76,8 @@ def test_the_build_carries_core_kernel_domain_and_skills_with_the_one_version(tm
         "curate-source", "query-graph", "evolve-schema", "triage-feedback", "scan-conflicts", "map-coverage",
         "curate-dataset", "export-graph"}
     # a skill is its whole folder: the release carries curate-source's references with their digests
-    assert m["digests"]["tools/skills/curate-source/references/recipes.md"] == sha256_file(
-        repo / "tools/skills/curate-source/references/recipes.md")
+    assert m["digests"]["skills/curate-source/references/recipes.md"] == sha256_file(
+        repo / "skills/curate-source/references/recipes.md")
     assert m["contributors"] == [{"name": "Hongliang Xin", "github": "hlxin", "roles": ["steward"], "scopes": ["core", "catalysis"]}]
     assert m["excluded_domains"] == []
     assert m["source"] == {"repository": "https://github.com/hlxin/scale", "tag": "v0.1.0"}

@@ -9,7 +9,7 @@ import sys
 
 import pytest
 
-from conftest import DRIVING_FORCE_EXAMPLES, HEAD_VERSION, REPO
+from conftest import DRIVING_FORCE_EXAMPLES, HEAD_VERSION, REPO, RUN_SCALE
 from scale.api import HUMAN_ONLY, TOOLS, ScaleToolkit
 from scale.mcp_server import MCPServer
 from scale.util import load_doc, load_yaml, write_canonical
@@ -261,9 +261,10 @@ def test_mcp_stdio_subprocess(tmp_path):
             {"jsonrpc": "2.0", "id": 2, "method": "tools/list"},
             {"jsonrpc": "2.0", "id": 3, "method": "tools/call", "params": {"name": "scale_validate", "arguments": {
                 "path": str(DRIVING_FORCE_EXAMPLES / "plasma.json")}}}]
-    proc = subprocess.run([sys.executable, "-m", "scale.cli", "--repo", str(REPO), "mcp", "--workspace", str(tmp_path / "ws")],
+    proc = subprocess.run([sys.executable, "-c", RUN_SCALE, str(REPO / "tools"), "--repo", str(REPO), "mcp", "--workspace",
+                           str(tmp_path / "ws")],
                           input="\n".join(json.dumps(m) for m in msgs) + "\n", capture_output=True, text=True, timeout=60,
-                          env={"PYTHONPATH": str(REPO / "tools"), "PATH": "/usr/bin:/bin", "SCALE_NO_UPDATE_CHECK": "1"})
+                          env={"PATH": "/usr/bin:/bin", "SCALE_NO_UPDATE_CHECK": "1"})
     lines = [json.loads(line) for line in proc.stdout.splitlines()]
     assert [line["id"] for line in lines] == [1, 2, 3]
     assert len(lines[1]["result"]["tools"]) == len(TOOL_NAMES)
@@ -271,9 +272,9 @@ def test_mcp_stdio_subprocess(tmp_path):
 
 
 def test_call_cli_is_json_in_json_out(tmp_path):
-    env = {"PYTHONPATH": str(REPO / "tools"), "PATH": "/usr/bin:/bin", "SCALE_WORKSPACE": str(tmp_path / "ws"),
+    env = {"PATH": "/usr/bin:/bin", "SCALE_WORKSPACE": str(tmp_path / "ws"),
            "SCALE_NO_UPDATE_CHECK": "1"}
-    run = lambda *a, stdin=None: subprocess.run([sys.executable, "-m", "scale.cli", "--repo", str(REPO), "call", *a],   # noqa: E731
+    run = lambda *a, stdin=None: subprocess.run([sys.executable, "-c", RUN_SCALE, str(REPO / "tools"), "--repo", str(REPO), "call", *a],   # noqa: E731
                                                 input=stdin, capture_output=True, text=True, timeout=60, env=env)
     listing = json.loads(run().stdout)
     assert {t["name"] for t in listing["tools"]} == TOOL_NAMES
@@ -359,12 +360,13 @@ def test_http_interface(tk):
 
 def test_skills_install(tmp_path, capsys):
     from scale.cli import main
-    from scale.releases import list_releases, release_root
+    from scale.releases import list_releases, release_root, skill_files
     assert main(["--repo", str(REPO), "skills", "install", str(tmp_path / "skills")]) == 0
     # the latest release's skills; while no release is built, the head's
     rels = list_releases(REPO)
     src = release_root(REPO, rels[-1]) if rels else REPO
-    shipped = {p.parent.name for p in (src / "tools/skills").glob("*/SKILL.md")}
+    skills = {p.parent.name: p.parent for p in skill_files(src)}      # where the release's manifest puts them
+    shipped = set(skills)
     assert shipped and (rels or shipped == SKILLS)
     assert sorted(p.parent.name for p in (tmp_path / "skills").glob("*/SKILL.md")) == sorted(f"scale-{s}" for s in shipped)
     # the whole folder of each skill, not its SKILL.md alone: triage-feedback carries its schema
@@ -372,7 +374,7 @@ def test_skills_install(tmp_path, capsys):
     assert out["release"] == (rels[-1] if rels else "head (no release built yet)")
     assert out["files"]["scale-triage-feedback"] == ["SKILL.md", "proposal.schema.json"]
     assert (tmp_path / "skills/scale-triage-feedback/proposal.schema.json").read_bytes() == (
-        src / "tools/skills/triage-feedback/proposal.schema.json").read_bytes()
+        skills["triage-feedback"] / "proposal.schema.json").read_bytes()
 
 
 def test_human_only_actions_cover_the_review_gates():

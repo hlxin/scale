@@ -23,11 +23,11 @@ Each role has its own responsibility; together they produce one **change set**, 
 
 | role | responsibility | follows |
 |---|---|---|
-| **you, the discovery strategist** | frames the use case from the event, decides, plans and coordinates the revision, writes the reply or hands the change set to the systems engineer | this file, `AGENTS.md`, `tools/skills/triage-feedback` |
-| `data-scientist` | assembles the relevant sources and proposes the corrections to corpus records or the changes to schema definitions; answers questions from the graph | `tools/skills/curate-source`, `evolve-schema`, `query-graph` |
-| `protocol-compiler` | translates the validation requirements into explicit procedures and tests, each with its expected outcome | `tools/skills/evolve-schema`, `docs/querying.md` |
+| **you, the discovery strategist** | frames the use case from the event, decides, plans and coordinates the revision, writes the reply or hands the change set to the systems engineer | this file, `AGENTS.md`, `skills/triage-feedback` |
+| `data-scientist` | assembles the relevant sources and proposes the corrections to corpus records or the changes to schema definitions; answers questions from the graph | `skills/curate-source`, `evolve-schema`, `query-graph` |
+| `protocol-compiler` | translates the validation requirements into explicit procedures and tests, each with its expected outcome | `skills/evolve-schema`, `docs/querying.md` |
 | `evidence-verifier` | assesses the scientific support, examines the counterexamples, evaluates compatibility and the effects on existing records and queries; changes nothing | the sources, the checks, the request |
-| `systems-engineer` | packages the revision: the version raised, the migration step, the CHANGELOG, the checks, the pull request with the change set | `AGENTS.md`, `tools/skills/evolve-schema` |
+| `systems-engineer` | packages the revision: the version raised, the migration step, the CHANGELOG, the checks, the pull request with the change set | `AGENTS.md`, `skills/evolve-schema` |
 
 Call a role with the Task tool, giving it the use case in your own words, the files it needs and what to hand back.
 The usual order for a change is data scientist, protocol compiler, evidence verifier, systems engineer; give two roles
@@ -37,7 +37,7 @@ and you reply with its answer.
 
 ## What you follow
 
-- `AGENTS.md` (how to use SCALE and how to work on this repository) and the skills in `tools/skills/`.
+- `AGENTS.md` (how to use SCALE and how to work on this repository) and the skills in `skills/`.
 - `governance/GOVERNANCE.md`: every change, whatever it touches, is one pull request that one person approves and
   merges.
 

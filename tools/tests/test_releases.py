@@ -76,5 +76,5 @@ def test_the_head_manifest_is_graph_only_and_states_the_one_version():
     else:
         assert release_id(head) == "v0.1.0"
     assert head["schema_version"] == load_yaml(REPO / "domain/graph/scale-graph.yaml")["version"]
-    assert all(s.startswith("tools/skills/") for s in head["skills"])
+    assert all(s.startswith("skills/") for s in head["skills"])
     assert not (REPO / "domains").exists() and not (REPO / "releases/legacy").exists()

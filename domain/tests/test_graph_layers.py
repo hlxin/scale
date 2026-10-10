@@ -169,7 +169,7 @@ def test_no_text_tells_anyone_to_version_a_part_file():
                                                "carry no version, so never add or set one. apply raises the version "
                                                "of the manifest and freezes the kernel of the base version."))
     files = _advice_texts()
-    assert REPO / "tools/skills/evolve-schema/SKILL.md" in files and REPO / "AGENTS.md" in files
+    assert REPO / "skills/evolve-schema/SKILL.md" in files and REPO / "AGENTS.md" in files
     hits = [f"{f.relative_to(REPO)}: {m.group(0)}" for f in files
             for m in PART_VERSION_ADVICE.finditer(flat(f.read_text(errors="ignore")))]
     assert hits == []

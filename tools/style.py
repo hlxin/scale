@@ -87,7 +87,7 @@ def lint_yaml_file(path: Path) -> list[str]:
     return lint_yaml_text(path.read_text(encoding="utf-8"), str(path))
 
 
-LINT_TARGETS = ["scale-release.yaml", "core", "domain", "governance", "tools/skills", ".github",
+LINT_TARGETS = ["scale-release.yaml", "core", "domain", "governance", "skills", ".github",
                 "docs/implementation-status.yaml"]
 
 

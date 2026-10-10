@@ -137,7 +137,7 @@ version in every file that states it and registers the migration step; a breakin
 that rewrites documents. `scale schema check` (CI's `specification-changes` job) checks all of it, that a test uses
 what is added and that the CHANGELOG says what changed. If two schema changes are open on the same version, the
 second rebases and bumps again after the first merges. The procedure is
-[`tools/skills/evolve-schema/SKILL.md`](../tools/skills/evolve-schema/SKILL.md);
+[`skills/evolve-schema/SKILL.md`](../skills/evolve-schema/SKILL.md);
 [docs/evolution.md](../docs/evolution.md) explains the versions. Open themes stay in the gap register
 (`docs/gaps/register.json`) until a later change answers them.
 

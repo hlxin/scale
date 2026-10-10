@@ -262,7 +262,7 @@ def append_frozen_sums(fz: Path, files: list[Path]) -> None:
         fh.writelines(lines)
 
 
-MIGRATE = "tools/scale/pgraph_migrate.py"
+MIGRATE = "tools/pgraph_migrate.py"
 
 
 def repo_steps(repo: Path) -> tuple[dict[str, tuple[str, str]], set[str]]:
@@ -358,7 +358,7 @@ def bump(repo: Path, base: str = DEFAULT_BASE, note: str | None = None) -> dict:
     return {**{k: c[k] for k in ("base_version", "kind", "tier", "diff")}, "version": new,
             "frozen": [p.relative_to(repo).as_posix() for p in (frozen_kernel, frozen_man, frozen_dir)],
             "step": f"{ver} -> {new}",
-            "next": ("register the rewrite rule in tools/scale/pgraph_migrate.py STEP_RULES (a breaking change), "
+            "next": ("register the rewrite rule in tools/pgraph_migrate.py STEP_RULES (a breaking change), "
                      if c["tier"] == 3 else "") + "add tests for what was added, and a CHANGELOG line"}
 
 
@@ -433,10 +433,10 @@ def check(repo: Path, base: str = DEFAULT_BASE) -> dict:
             problems.append(f"{rel} states {key} {load_yaml(repo / rel).get(key)}, not {c['head_version']}")
     steps, rules = repo_steps(repo)
     if steps.get(ver, (None,))[0] != c["head_version"]:
-        problems.append(f"no migration step {ver} -> {c['head_version']} in tools/scale/pgraph_migrate.py STEPS "
+        problems.append(f"no migration step {ver} -> {c['head_version']} in tools/pgraph_migrate.py STEPS "
                         "(run `scale schema bump`)")
     if c["tier"] == 3 and ver not in rules:
-        problems.append(f"a breaking change needs its rewrite rule: STEP_RULES[{ver!r}] in tools/scale/pgraph_migrate.py "
+        problems.append(f"a breaking change needs its rewrite rule: STEP_RULES[{ver!r}] in tools/pgraph_migrate.py "
                         "(a function that rewrites documents, or reports that none needs it)")
     for path in _not_provisional(repo, c["diff"]):
         problems.append(f"{path} is new but not `maturity: provisional` (new concepts enter as provisional)")

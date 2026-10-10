@@ -68,7 +68,7 @@ lost.
      records that lost evidence of a withheld source, whose values without `evidence_ids` are withheld
      in their place) and tell the receiver what the
      bundle cannot carry (intervals, replicates, notes, a detection limit; the module docstring of
-     `tools/scale/kgbundle.py` lists them). A platform names the imported graph after the bundle's title:
+     `tools/kgbundle.py` lists them). A platform names the imported graph after the bundle's title:
      give it with `--title` (a short name, at most 40 characters), or let it default to the graph's
      `title` when that is short; a longer title is cut to its leading words, and the export says so.
 5. **Ship texts only under a stated licence:** `--text <publication id>=<file>:<licence>` for a source

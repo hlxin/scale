@@ -12,7 +12,7 @@ Where each Supporting Information item lives in this repository.
 | Executable commands | [`docs/commands.md`](../../docs/commands.md), `scale --help` |
 | Test descriptions | `tools/tests/`, `core/tests/`, `domain/tests/` (see `pytest`); CI steps in [`.github/workflows/ci.yml`](../../.github/workflows/ci.yml) |
 | Contribution specification | [`CONTRIBUTING.md`](../../CONTRIBUTING.md), issue templates in `.github/ISSUE_TEMPLATE/` |
-| Agent skills | [`tools/skills/`](../../tools/skills) (8 × `SKILL.md`); [`agents.md`](../../docs/agents.md) |
+| Agent skills | [`skills/`](../../skills) (8 × `SKILL.md`); [`agents.md`](../../docs/agents.md) |
 | Review | [`GOVERNANCE.md`](../../governance/GOVERNANCE.md) (one approving review per pull request; a schema change raises the version in the same pull request, `scale schema bump`), [decision record 0001](../../docs/decisions/0001-scale-0.1.0.md) |
 | Release | [`release-process.md`](../../governance/release-process.md), [`releases/`](../../releases/README.md) |
 | Migration | [`evolution.md`](../../docs/evolution.md#migration): documents move along the schema's version steps (`scale graph migrate`) |

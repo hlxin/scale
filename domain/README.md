@@ -86,7 +86,7 @@ domain/
 | `docs/` | [catalyst-state reporting](docs/reporting/catalyst-state-reporting.md) and the [supporting-information index](docs/supporting-information.md) |
 | `tests/` | the catalysis tests and the invalid scale-graph fixtures (`fixtures/invalid/`, each rejected for the reason `expect.yaml` states) |
 
-Code that the catalysis domain needs goes in `tools/scale/` ([tools/README.md](../tools/README.md)).
+Code that the catalysis domain needs goes in `tools/` ([tools/README.md](../tools/README.md)).
 
 The examples, in `examples/scale-graph/`: a synthetic thermocatalytic test (`example.json`, invented values and an
 invented source), one synthetic document per other driving force or combination (`driving-force-examples/`) and a
@@ -210,11 +210,11 @@ It runs at the repository root only, as part of `scale check`.
 
 - **Comment** without Git: the [comment form](https://github.com/hlxin/scale/issues/new?template=comment.yml),
   or 💬 next to a record in a catalogue (`scale catalogue <document>`).
-- **Curate a source** into an example, following `tools/skills/curate-source/SKILL.md` (public, open-access
+- **Curate a source** into an example, following `skills/curate-source/SKILL.md` (public, open-access
   sources and short, capped quotes only).
 - **Suggest a schema change** on an issue (@scale-agents take it up), or make it in a pull request that edits
   `graph/catalysis.yaml` and raises the one version (`scale schema bump`;
-  `tools/skills/evolve-schema/SKILL.md`). It needs one approval and passing checks.
+  `skills/evolve-schema/SKILL.md`). It needs one approval and passing checks.
 - **Add a competency question** in `competency/`: a graph query plan, the public examples it runs on
   and its expected answer; `scale domains cq catalysis` runs it.
 - **Become a maintainer:** ask on an issue. When the owner agrees, they add you to `DOMAIN.yaml`, the review

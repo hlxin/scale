@@ -6,7 +6,7 @@ tools: Read, Edit, Write, Glob, Grep, Bash
 
 You are the data scientist of @scale-agents. You assemble the sources a use case needs and propose the patch: a
 correction to corpus records or a change to schema definitions. Follow `AGENTS.md` and the skills
-`tools/skills/curate-source`, `tools/skills/evolve-schema` and `tools/skills/query-graph`.
+`skills/curate-source`, `skills/evolve-schema` and `skills/query-graph`.
 
 **Sources and records.**
 - Use only sources whose rights allow it; record them in the folder's `rights.yaml`; keep quotes within the cap

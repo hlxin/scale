@@ -82,15 +82,15 @@ Use `<github-handle>/<topic>` for your own work, one topic per pull request. The
 
 These rules hold for every pull request; the agents know them from [AGENTS.md](AGENTS.md).
 
-- **Curation** follows `tools/skills/curate-source/SKILL.md`. Documents validate with no errors, every statement
+- **Curation** follows `skills/curate-source/SKILL.md`. Documents validate with no errors, every statement
   cites evidence, quotes stay within the copyright cap in the folder's `rights.yaml`
   ([docs/curation.md](docs/curation.md)), and committed documents state `access: public`.
-- **A schema change** follows `tools/skills/evolve-schema/SKILL.md`: additions rather than deletions, new concepts
+- **A schema change** follows `skills/evolve-schema/SKILL.md`: additions rather than deletions, new concepts
   marked provisional, a passing and a failing test example, and a CHANGELOG line. Catalysis terms stay out of the
   kernel.
 - **A competency question** is a file `domain/competency/cq-NN-*.yaml`: the question, the public documents it runs
   on, a query plan and the expected answer ([docs/querying.md](docs/querying.md)).
-- **Code** lives in `tools/scale/` ([tools/README.md](tools/README.md)). It is deterministic (anything that calls
+- **Code** lives in `tools/` ([tools/README.md](tools/README.md)). It is deterministic (anything that calls
   a model sits behind a skill) and has tests in `tools/tests/`, `core/tests/` or `domain/tests/`. Update
   `docs/implementation-status.yaml` when a capability changes.
 - **Never edit a release** (`releases/<id>/`) or an existing frozen schema version (`core/graph/frozen/`,

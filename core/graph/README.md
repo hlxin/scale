@@ -116,14 +116,14 @@ sources stay usable.
 ```bash
 scale graph describe CatalyticTest --domain catalysis         # labels, edges, properties and the checklist with its cases
 scale graph validate DOC.json [--source-text ID=FILE]         # validity; conformance to follows_domains
-scale schema diff | bump | check                              # a schema change on a branch (tools/skills/evolve-schema)
+scale schema diff | bump | check                              # a schema change on a branch (skills/evolve-schema)
 scale graph verify                                            # the catalysis manifest and its frozen versions load and verify
 scale graph spec                                              # the spec document of the head version and its sha256
 scale domains check                                           # the domain's files: imports, the one version, no redeclared identifiers
 ```
 
 A schema change is a pull request that edits the schema files directly
-([`tools/skills/evolve-schema/SKILL.md`](../../tools/skills/evolve-schema/SKILL.md)): additive operations, a fixture
+([`skills/evolve-schema/SKILL.md`](../../skills/evolve-schema/SKILL.md)): additive operations, a fixture
 and a counterexample, the competency questions that change, and one person's review under
 [`governance/review-policy.yaml`](../../governance/review-policy.yaml). Every change raises the one schema version,
 whichever file it changes (breaking: the second number; additive: the third). `scale schema bump` freezes the

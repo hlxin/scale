@@ -11,7 +11,7 @@ allowed-tools:
   - read access to the repository and to the linked GitHub items
   - write access to one output file, proposals.json
 outputs:
-  - proposals.json valid against tools/skills/triage-feedback/proposal.schema.json
+  - proposals.json valid against skills/triage-feedback/proposal.schema.json
 validation:
   - "`scale triage propose <dir> --proposals proposals.json --strict` accepts every proposal"
   - Every option is concrete (which record, label, source or plan) and states its consequence

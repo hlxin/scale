@@ -1,6 +1,6 @@
 # Schema evolution, releases and migration
 
-Procedure: [`tools/skills/evolve-schema/SKILL.md`](../tools/skills/evolve-schema/SKILL.md). The schema starts at
+Procedure: [`skills/evolve-schema/SKILL.md`](../skills/evolve-schema/SKILL.md). The schema starts at
 0.1.0 with no change merged yet ([decision record 0001](decisions/0001-scale-0.1.0.md)).
 `tools/tests/test_version_bump.py` makes a synthetic schema change on a copy of the repository and runs the tests on
 it.
@@ -48,7 +48,7 @@ a comment, a corpus run)     their own) or anyone   scale schema bump · check  
    into `domain/graph/frozen/scale-graph-<version>.yaml` with its parts in `domain/graph/frozen/v<version>/`, the
    kernel of that version into `core/graph/frozen/kernel-<version>.yaml`, digests appended to each `SHA256SUMS`),
    raises the version in every file and sentence that states it, and registers the migration step in
-   `tools/scale/pgraph_migrate.py`. A breaking change also adds its rewrite rule (`STEP_RULES[<base version>]`).
+   `tools/pgraph_migrate.py`. A breaking change also adds its rewrite rule (`STEP_RULES[<base version>]`).
 4. **Check.** `scale schema check --base origin/main` asks for all of it: the version raised by the rule, the
    frozen copy equal to the base (by spec digest), every file stating the new version, the migration step (and
    rule, if breaking), a valid fixture or example that uses what is added, and a CHANGELOG line. CI's
@@ -105,7 +105,7 @@ The same diff gives a schema change its kind and the version it needs (`schema_c
 
 A document pins its schema version, and every earlier version of the schema stays frozen beside the catalysis
 manifest once a change has moved it on, so a document is always read under the version it pins. `scale graph
-migrate` (or `scale call migrate`) moves it along the version steps (`tools/scale/pgraph_migrate.py`), keeping
+migrate` (or `scale call migrate`) moves it along the version steps (`tools/pgraph_migrate.py`), keeping
 every record id. `scale schema bump` registers the step in the pull request that raises the version. An additive
 step only raises `schema_version`; a step that changes how records are written has a rule that rewrites the
 document and reports every change. A rule that meets a case it cannot map stops with an error instead of

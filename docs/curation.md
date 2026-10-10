@@ -1,8 +1,8 @@
 # Curation as evidence-preserving translation
 
-Procedure for people and agents: [`tools/skills/curate-source/SKILL.md`](../tools/skills/curate-source/SKILL.md),
-with its recording recipes in [`references/recipes.md`](../tools/skills/curate-source/references/recipes.md). A data
-table or a lab file is curated with [`curate-dataset`](../tools/skills/curate-dataset/SKILL.md).
+Procedure for people and agents: [`skills/curate-source/SKILL.md`](../skills/curate-source/SKILL.md),
+with its recording recipes in [`references/recipes.md`](../skills/curate-source/references/recipes.md). A data
+table or a lab file is curated with [`curate-dataset`](../skills/curate-dataset/SKILL.md).
 
 ## Split of responsibilities
 
@@ -151,7 +151,7 @@ source must be within its cap.
 
 Old scans lose values in their text layer and in OCR: table cells run together, exponents and subscripts
 vanish, digits turn into letters. Read the **page image** as well as the text, and let OCR check what you read
-(`scale pages`, [tools/scale/pagereading.py](../tools/scale/pagereading.py)). The page images and OCR words
+(`scale pages`, [tools/pagereading.py](../tools/pagereading.py)). The page images and OCR words
 reproduce whole pages of the source: they stay in a local pages folder and are never committed or distributed
 (keep it outside the repository, or in a `work/` folder under `domain/examples/`, which git ignores); the
 curated document keeps the agreements and the OCR engines they were computed with.
@@ -229,7 +229,7 @@ infers it and counts the inferences.
 
 ## Recipes
 
-[`tools/skills/curate-source/references/recipes.md`](../tools/skills/curate-source/references/recipes.md) says how
+[`skills/curate-source/references/recipes.md`](../skills/curate-source/references/recipes.md) says how
 to record, with what the schema already has: set, nominal and specified values; conflicts between sources; rates and
 kinetics; reaction thermochemistry; computational details; reactor, bed and catalyst-body keys; pairwise and
 metals-only ratios; commercial catalysts; balances, impurities and data quality; driving forces outside the list;

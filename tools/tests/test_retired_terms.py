@@ -36,7 +36,7 @@ R4 = re.compile(r"SCALE_RESTRICTED_DATA")
 
 TEXT = (".py", ".md", ".yaml", ".yml", ".toml", ".in", ".cfg", ".cff", ".json", ".txt", ".sh")
 NAMES = ("CODEOWNERS", "NOTICE", "LICENSE", "MANIFEST.in", ".gitignore")
-CODE = re.compile(r"^(tools/scale/|tools/tests/|core/tests/|domain/tests/|conftest\.py$|setup\.py$|\.github/workflows/)")
+CODE = re.compile(r"^(tools/|tools/tests/|core/tests/|domain/tests/|conftest\.py$|setup\.py$|\.github/workflows/)")
 THIS = "tools/tests/test_retired_terms.py"
 ALLOWED = {   # (file, text): deliberate mentions
     # agents are told never to install the unrelated package schema
@@ -70,7 +70,7 @@ def _hits(rel: str, text: str) -> list[str]:
 def test_live_files_use_no_retired_wording():
     files = _live_files()
     rels = {p.relative_to(REPO).as_posix() for p in files}
-    assert {"README.md", "AGENTS.md", "CONTRIBUTING.md", "tools/scale/mcp_server.py", "governance/GOVERNANCE.md",
+    assert {"README.md", "AGENTS.md", "CONTRIBUTING.md", "tools/mcp_server.py", "governance/GOVERNANCE.md",
             ".github/CODEOWNERS", "pyproject.toml", "CHANGELOG.md", "docs/decisions/0001-scale-0.1.0.md", THIS} <= rels
     hits = [h for p in files for h in _hits(p.relative_to(REPO).as_posix(), p.read_text(errors="ignore"))]
     assert hits == [], "retired wording:\n" + "\n".join(hits)
@@ -103,7 +103,7 @@ def test_the_names_and_the_rules():
     readme = (REPO / "README.md").read_text()
     assert ("**Shared Concepts, Attributes, and Links with Evidence: one shared framework for evidence-backed scientific\n"
             "knowledge graphs across domains.**") in readme
-    for f in ("NOTICE", "CITATION.cff", "scale-release.yaml", "tools/scale/__init__.py"):
+    for f in ("NOTICE", "CITATION.cff", "scale-release.yaml", "tools/__init__.py"):
         assert "Shared Concepts, Attributes, and Links with Evidence" in (REPO / f).read_text(), f
     # the rules: what they catch, and what they leave alone
     for old in (f"SCALE (Shared {_CAT} Atlas of Linked Evidence)", f"uvx {OLD_PACKAGE} call status", "pip install schema",
@@ -118,7 +118,7 @@ def test_the_names_and_the_rules():
         assert not any(rx.search(fine) for rx in (R1, R2, R3, R4)), fine
     assert R1.search(f"the {EARLIER_PACKAGE} schema") and not _hits("README.md", f"numbering 0.1.0-0.8.0, package {EARLIER_PACKAGE});")
     assert _hits("CHANGELOG.md", f"package {EARLIER_PACKAGE});")          # allowed only where ALLOWED says
-    assert _hits("docs/commands.md", "set SCALE_RESTRICTED_DATA") and not _hits("tools/scale/layout.py", "SCALE_RESTRICTED_DATA")
+    assert _hits("docs/commands.md", "set SCALE_RESTRICTED_DATA") and not _hits("tools/layout.py", "SCALE_RESTRICTED_DATA")
     # this file spells none of the names it refuses
     own = (REPO / THIS).read_text()
     assert not R1.search(own) and not R3.search(own) and OLD_PACKAGE not in own

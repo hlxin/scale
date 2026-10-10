@@ -1,10 +1,10 @@
 """Build hook: bundle released specifications, skills and examples into the wheel.
 
 The repository keeps them beside the code (scale-release.yaml, core/, domain/,
-releases/, tools/skills/, governance/, ...). A regular (non-editable) build copies them into
+releases/, skills/, governance/, ...). A regular (non-editable) build copies them into
 ``scale/_data``, mirroring the repository layout, so that ``pip install`` or ``uvx`` works without a
 checkout. Editable installs read them from the checkout directly. What to bundle is declared once,
-in ``tools/scale/layout.py`` (loaded by path: the package is not importable while it is built).
+in ``tools/layout.py`` (loaded by path: the package is not importable while it is built).
 """
 
 import importlib.util
@@ -15,7 +15,7 @@ from setuptools import setup
 from setuptools.command.build_py import build_py
 
 ROOT = Path(__file__).resolve().parent
-_spec = importlib.util.spec_from_file_location("_scale_layout", ROOT / "tools" / "scale" / "layout.py")
+_spec = importlib.util.spec_from_file_location("_scale_layout", ROOT / "tools" / "layout.py")
 layout = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(layout)
 
