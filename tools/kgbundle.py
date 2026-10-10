@@ -722,13 +722,30 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
     life = lifecycle.statuses(doc, spec)                       # derived publication statuses (none without notices)
     rest = lifecycle.resting(doc, spec, life)
 
-    def pub_key(n: dict) -> str:
+    def _pub_key(n: dict) -> str:
         p = n["props"]
         if p.get("doi"):
             return p["doi"].lower()
         if (p.get("identifiers") or {}).get("patent"):
             return f"patent:{p['identifiers']['patent'].lower()}"
         return "scale:" + n["id"].rsplit("/", 1)[-1]
+
+    # a source without a DOI or patent number is keyed by the last segment of its id, the whole id where two
+    # sources share that segment (ex:a/source/1, ex:b/source/1); two sources with one DOI or patent number are two
+    # records of one publication, which the bundle cannot tell apart: refused
+    by_key: dict[str, list[str]] = {}
+    for sid in sorted(sources):
+        by_key.setdefault(_pub_key(sources[sid]), []).append(sid)
+    pub_keys: dict[str, str] = {}
+    for k, sids in by_key.items():
+        if len(sids) > 1 and not k.startswith("scale:"):
+            raise ScaleError(f"sources {', '.join(sids)} share the identifier {k}: one publication is one Source record "
+                             "(merge them), or give each its own identifier")
+        for sid in sids:
+            pub_keys[sid] = k if len(sids) == 1 else f"scale:{sid}"
+
+    def pub_key(n: dict) -> str:
+        return pub_keys[n["id"]]
 
     gid: dict[str, str] = {}
     frozen: dict[str, str] = {}             # ids are frozen at first release: reuse the previous release's id
