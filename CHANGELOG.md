@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- **Fixes from a code review.** Bundle export: a parallel link with other values is listed, never merged under
+  another's values (six in the methanol graph); distinct sources never share a Publication id; an export is never
+  written over the release it follows; a shipped text is a plain file in `text/`, and one named by its source id is
+  that publication's (quoted, never withheld); a typed absence goes where its unit and basis put it. Queries and the
+  agent toolkit: a result shares no object with the document; a kept schema, document or index is read again when its
+  files change (identity and change time included). Evidence search: an index is used only when it holds the
+  document's quotes, whatever digest it names; a `.terms` file whose arrays changed is rebuilt; `k` is at least 1; `rrf`
+  with a filter ranks only the items it keeps. The MCP server answers a malformed message and keeps serving. Stale
+  counts and statements in the docs and the methanol example are corrected.
 - **Simpler layout:** the skills are in `skills/` at the root, and the package's modules sit directly in
   `tools/` (the folder is the package `scale`; there is no `tools/scale/`).
 
