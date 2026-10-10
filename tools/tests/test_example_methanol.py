@@ -39,14 +39,20 @@ def spec(pg):
 
 
 @pytest.fixture(scope="module")
+def graph(pg, spec):
+    from scale.pgraph_query import Graph
+    return Graph(pg, spec)
+
+
+@pytest.fixture(scope="module")
 def index(pg):
     from scale.passages import Index, evidence_items, graph_sha256
     return Index.build(evidence_items(pg), graph_sha256=graph_sha256(pg))
 
 
-def _run(pg, spec, index, plan: dict) -> dict:
+def _run(pg, spec, index, graph, plan: dict) -> dict:
     from scale import pgraph_query
-    return pgraph_query.run(pg, spec, plan, index if plan.get("text") else None)
+    return pgraph_query.run(pg, spec, plan, index if plan.get("text") else None, graph)
 
 
 # ------------------------------------------------------------------------------------------ the frozen corpus
@@ -119,26 +125,26 @@ def test_the_graph_uses_the_process_and_equilibrium_concepts(pg):
 
 # ------------------------------------------------------------------------------------------ the manuscript's questions
 @pytest.mark.parametrize("plan", PLANS, ids=lambda p: p.stem)
-def test_manuscript_questions_are_answered_from_evidence_before_the_cutoff(pg, spec, index, plan):
-    res = _run(pg, spec, index, load_yaml(plan))
+def test_manuscript_questions_are_answered_from_evidence_before_the_cutoff(pg, spec, index, graph, plan):
+    res = _run(pg, spec, index, graph, load_yaml(plan))
     assert res["status"] == "answered" and res["rows"]
     assert all((ev.get("source_year") or 0) < 1966 for r in res["rows"] for ev in r.get("evidence") or [])
 
 
 @pytest.mark.parametrize("plan, rows", [("q1-copper-lower-temperature", 236), ("q2b-inhibited-by", 88),
                                         ("q4-co2-feedstock", 135), ("q6-cu-zn-al-formulations", 5)])
-def test_structured_questions_keep_their_answers(pg, spec, index, plan, rows):
-    assert _run(pg, spec, index, load_yaml(EX / f"queries/{plan}.yaml"))["row_count"] == rows
+def test_structured_questions_keep_their_answers(pg, spec, index, graph, plan, rows):
+    assert _run(pg, spec, index, graph, load_yaml(EX / f"queries/{plan}.yaml"))["row_count"] == rows
 
 
-def test_cu_zn_al_query_returns_the_1928_catalyst(pg, spec, index):
-    res = _run(pg, spec, index, load_yaml(EX / "queries/q6-cu-zn-al-formulations.yaml"))
+def test_cu_zn_al_query_returns_the_1928_catalyst(pg, spec, index, graph):
+    res = _run(pg, spec, index, graph, load_yaml(EX / "queries/q6-cu-zn-al-formulations.yaml"))
     assert min(r["earliest_source_year"] for r in res["rows"]) == 1928
 
 
-def test_an_earlier_cutoff_holds_out_kume_1959(pg, spec, index):
+def test_an_earlier_cutoff_holds_out_kume_1959(pg, spec, index, graph):
     plan = {**load_yaml(EX / "queries/q4-co2-feedstock.yaml"), "published_before": "1959-01-01"}
-    res = _run(pg, spec, index, plan)
+    res = _run(pg, spec, index, graph, plan)
     years = [ev.get("source_year") or 0 for r in res["rows"] for ev in r.get("evidence") or []]
     assert res["rows"] and max(years) < 1959
 
