@@ -298,6 +298,22 @@ def test_locators_name_tables_and_figures_and_shipped_texts_get_char_offsets(tmp
         assert res.ok, [f.message for f in res.errors][:5]
 
 
+def test_a_shipped_text_is_a_plain_file_in_text(tmp_path, head):
+    """A shipped text's file name is checked before anything is written: a path out of text/ (../../outside.txt), a
+    folder, the manifest's own name or a name two texts share is refused, and nothing is written anywhere."""
+    doc = build()
+    next(n for n in doc["nodes"] if n["id"] == SRC)["props"]["doi"] = "10.0000/invented"
+    out = tmp_path / "deep" / "b"
+    for name in ("../../outside.txt", "sub/paper.txt", "/tmp/abs.txt", "..", "_manifest.json"):
+        with pytest.raises(ScaleError, match="plain file name"):
+            kgbundle.export(doc, head, out, "texts", texts={"10.0000/invented": (name, TEXT, "CC-BY-4.0")},
+                            created="2026-10-06T00:00:00Z")
+    with pytest.raises(ScaleError, match="both named"):
+        kgbundle.export(doc, head, out, "texts", created="2026-10-06T00:00:00Z",
+                        texts={"10.0000/invented": ("paper.txt", TEXT, "CC-BY-4.0"), SRC: ("Paper.TXT", TEXT, "CC-BY-4.0")})
+    assert not out.exists() and not (tmp_path / "outside.txt").exists()
+
+
 def test_a_type_gets_an_iri_only_from_an_absolute_maps_to(tmp_path, head):
     assert kgbundle.iri_of({"maps_to": ["EXPO ScientificExperiment", "http://purl.obolibrary.org/obo/OBI_0000070"]}) \
         == "http://purl.obolibrary.org/obo/OBI_0000070"
