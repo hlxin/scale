@@ -21,7 +21,7 @@ version** for the kernel and the catalysis domain together: the manifest's `vers
 | file | maintained by | what it holds |
 |---|---|---|
 | [`core/graph/kernel.yaml`](kernel.yaml) | core | The **science kernel**: the document format, the value object, the evidence item, record references, stewardship, the source lifecycle, common properties and extension keys; and the method of science — Question, Hypothesis, Prediction, Experiment, Procedure, Protocol, Operation, Design, Variable, Claim; what is studied (ObjectOfStudy); what science is done with (Instrument, Model, Source, Dataset); who does it (Person, Institution, Project, Software). Every domain file sees it without importing it. It carries no version of its own. |
-| `core/graph/frozen/` | nobody (frozen) | The **kernel of each earlier schema version**, `kernel-<version>.yaml`, with their digests in `SHA256SUMS`, written when a proposal moves the schema on (none yet). Frozen kernels live only here. |
+| `core/graph/frozen/` | nobody (frozen) | The **kernel of each earlier schema version**, `kernel-<version>.yaml`, with their digests in `SHA256SUMS`, written when a schema change moves the schema on (`scale schema bump`; none yet). Frozen kernels live only here. |
 | [`domain/graph/scale-graph.yaml`](../../domain/graph/scale-graph.yaml) | the catalysis domain | The catalysis **graph schema manifest**: the schema's one version, which documents pin, the kernel (`../../core/graph/kernel.yaml`) and the domain's files under `domains:` (`[catalysis.yaml]`), each path relative to the manifest. |
 | [`domain/graph/catalysis.yaml`](../../domain/graph/catalysis.yaml) | the catalysis domain | The **catalysis domain file** (`domain: catalysis`), catalysis as a whole: species, materials, samples, reactions, reactors, preparations, treatments, characterizations, computations, analyses, mechanisms and elementary steps, catalysts, active sites, feeds, catalyst samples, catalytic tests, process units. The role a substance plays is on the edge: `HAS_COMPONENT {role: support, promoter, binder, …}`, `PREPARED_FROM {role, amount, supplier, grade}`, `INHIBITED_BY`. It also holds the terms of every driving force (below) and the domain's one **checklist**. It carries no version of its own. |
 | `domain/graph/frozen/` | nobody (frozen) | The catalysis domain's **frozen versions** (none yet): `scale-graph-<version>.yaml` with its parts under `v<version>/`, byte-identical to what documents pinning that version were written against, and pointing at the kernel of that version in `core/graph/frozen/`; digests in `SHA256SUMS`. |
@@ -59,8 +59,7 @@ an import:
   CatalyticTest); a name already declared is an error.
 - **`extends`** — new endpoints on an edge type it can see (`HAS_COMPONENT.from` gains Electrolyte).
 
-The kernel changes only through a core proposal (`core/proposals/`); the catalysis files only through
-the catalysis domain's proposals (`domain/proposals/`). Both raise the same one version.
+The kernel and the catalysis files change by pull request, each change raising the same one version.
 
 ## Driving forces in the catalysis domain
 
@@ -110,33 +109,31 @@ sources stay usable.
 - **Extension keys:** properties outside the schema are `_<prefix>_<name>`, with the prefix
   registered in [`governance/registry/extension-prefixes.yaml`](../../governance/registry/extension-prefixes.yaml). They are kept, not checked, and never change
   the meaning of a declared property; a new driving force starts there and enters the catalysis
-  domain file (its terms and a checklist case) by proposal.
+  domain file (its terms and a checklist case) by a schema change.
 
 ## Use and evolve
 
 ```bash
 scale graph describe CatalyticTest --domain catalysis         # labels, edges, properties and the checklist with its cases
 scale graph validate DOC.json [--source-text ID=FILE]         # validity; conformance to follows_domains
-scale proposal check 000001                                    # a proposed change, by id (tools/skills/evolve-schema)
+scale schema diff | bump | check                              # a schema change on a branch (tools/skills/evolve-schema)
 scale graph verify                                            # the catalysis manifest and its frozen versions load and verify
 scale graph spec                                              # the spec document of the head version and its sha256
 scale domains check                                           # the domain's files: imports, the one version, no redeclared identifiers
 ```
 
-Changes go through proposals ([`tools/skills/evolve-schema/SKILL.md`](../../tools/skills/evolve-schema/SKILL.md)):
-additive operations, fixtures and counterexamples, a migration assessment and competency questions,
-and human review under [`governance/review-policy.yaml`](../../governance/review-policy.yaml). A
-proposal that touches the kernel lives in `core/proposals/`; one that touches only the catalysis files
-lives in `domain/proposals/`. A proposal is named by a six-digit number, global across the core and the
-catalysis domain (the first is `000001`); `scale proposal new <owner> [--title …]` (owner `core` or `catalysis`)
-takes the next number. A proposal names the manifest it is assessed against (`base.manifest`) and its operations
-name files by repository path. Every proposal raises the one schema version (`target_version`), whichever file it
-changes. Applying one freezes the current version so documents that pin it keep validating: its kernel into
+A schema change is a pull request that edits the schema files directly
+([`tools/skills/evolve-schema/SKILL.md`](../../tools/skills/evolve-schema/SKILL.md)): additive operations, a fixture
+and a counterexample, the competency questions that change, and one person's review under
+[`governance/review-policy.yaml`](../../governance/review-policy.yaml). Every change raises the one schema version,
+whichever file it changes (breaking: the second number; additive: the third). `scale schema bump` freezes the
+current version so documents that pin it keep validating: its kernel into
 `core/graph/frozen/kernel-<version>.yaml`, the catalysis parts into `domain/graph/frozen/v<version>/` with the
-manifest `frozen/scale-graph-<version>.yaml`, all under the one version; digests are appended to each `SHA256SUMS`.
+manifest `frozen/scale-graph-<version>.yaml`, all under the one version; digests are appended to each `SHA256SUMS`; it also registers the migration step.
+`scale schema check` (CI) checks all of it.
 A release build refuses schema content changed since the previous release under the same version, and `scale
 graph verify` fails when a version no longer has the spec digest a release published for it.
 
 The kernel's informational `extensions.registry: registry/extension-prefixes.yaml` predates the move of the
-registry to `governance/registry/`; the string changes only with a core proposal (the loader reads the registry
+registry to `governance/registry/`; the string changes only with a kernel change (the loader reads the registry
 from `governance/registry/`).

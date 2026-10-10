@@ -19,7 +19,7 @@ INSTRUCTIONS = (
     "into evidence-bearing scale-graph documents and answers questions with context, evidence and limitations. Call scale_status first, "
     "then scale_skills and scale_describe. Never invent missing values: declare them with a status and a reason. "
     "Never extend the schema during curation: put what it cannot express in a record's unmodeled list. Report "
-    "typed absences (schema_gap, no_matching_record, missing_context) as answers. Approvals, applying proposals, "
+    "typed absences (schema_gap, no_matching_record, missing_context) as answers. Approving and merging pull requests, "
     "releases and issue filing are human actions."
 )
 

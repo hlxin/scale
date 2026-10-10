@@ -111,7 +111,7 @@ is converted:
   that a later stage may leave out), are only counted: they never change the status.
 - A unit that is not non-empty text, a `basis` that is not non-empty text or sits on a filter that
   compares no number in a unit, a filter number that is not a number, and `convert` are plan
-  errors. Unit conversion is planned with the units proposal; until then, run one plan per unit.
+  errors. Unit conversion is planned with the units change; until then, run one plan per unit.
 - A value that is a one-sided bound (its `bound`: `upper`, "did not exceed 1 %", or `lower`, "at
   least 2") is never read as the exact number. It passes a filter only when every number the bound
   allows passes (at most 1 % passes `le 2 %`), fails when none does (`gt 1.5 %`), and is left out
@@ -277,8 +277,8 @@ must be returned, records excluded by reason code, counted in full from `coverag
 statuses the evidence must carry). A question
 may add `variants`: the same plan with some keys changed and what it must answer then (CQ-05 shows the
 default exclusion of a retracted source's row and the `include_retracted` opt-in). `scale domains cq`
-runs them; `scale check` and every proposal check re-run them, so a schema change that changes an
-answer must declare it.
+runs them; `scale check` re-runs them, so a schema change that changes an
+answer updates it in the same pull request.
 
 ## Feedback into evolution
 

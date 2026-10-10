@@ -22,7 +22,7 @@ def test_core_declaration_names_the_kernel_and_its_maintainers():
     assert [(p["github"], p.get("since"), p["roles"], p.get("placeholder", False)) for p in core["maintainers"]["people"]] == [
         ("hlxin", "2026-09-26", ["steward"], False), ("TODO-reviewer-2", None, ["maintainer"], True),
         ("TODO-reviewer-3", None, ["maintainer"], True)]
-    assert core["review_areas"] == ["kernel"] and core["proposals"] == "proposals"
+    assert core["review_areas"] == ["kernel"] and "proposals" not in core
     assert all((CORE / e).is_dir() for e in core["examples"]) and list((CORE / core["tests"]).glob("test_*.py"))
 
 

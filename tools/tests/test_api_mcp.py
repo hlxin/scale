@@ -139,7 +139,7 @@ def test_validate_reports_errors_and_writes_nothing(tk):
 
 def test_migrate_moves_a_document_along_registered_steps(tk, monkeypatch):
     """A document at the head is already current; one pinning a version this repository does not hold has no step
-    (none is registered at 0.1.0). A step a proposal registers moves a document."""
+    (none is registered at 0.1.0). A step `scale schema bump` registers moves a document."""
     from scale import pgraph, pgraph_migrate
     head = load_doc(DRIVING_FORCE_EXAMPLES / "electro.json")
     if head["graph"]["schema_version"] != HEAD_VERSION:        # an example stays at the version it pins until migrated
@@ -148,12 +148,11 @@ def test_migrate_moves_a_document_along_registered_steps(tk, monkeypatch):
     older = {**head, "graph": {**head["graph"], "schema_version": "0.0.9"}}
     assert "migrations run along the steps" in tk.call("scale_migrate", {"document": older})["error"]
     assert "is not a version this repository holds" in tk.call("scale_validate", {"document": older})["error"]
-    # a synthetic step, as the proposal that built the head registers it (a synthetic id while none has)
-    pid = (load_yaml(REPO / "domain/graph/scale-graph.yaml").get("proposals") or ["009099"])[-1]
-    monkeypatch.setitem(pgraph_migrate.STEPS, "0.0.9", (HEAD_VERSION, pid))
+    # a synthetic step, as `scale schema bump` registers it
+    monkeypatch.setitem(pgraph_migrate.STEPS, "0.0.9", (HEAD_VERSION, "additive change"))
     res = tk.call("scale_migrate", {"document": older, "save_as": "migrated"})
     assert res["from_version"] == "0.0.9" and res["to_version"] == HEAD_VERSION
-    assert [s["proposal"] for s in res["steps"]] == [pid] and res["validation"] == {"error": 0, "warning": 0}
+    assert [s["note"] for s in res["steps"]] == ["additive change"] and res["validation"] == {"error": 0, "warning": 0}
     assert res["document"] == head and res["written"] == str(tk.workspace / "migrated.json")
     assert "error" in tk.call("scale_migrate", {"document": older, "save_as": "../escape"})
 
@@ -377,10 +376,9 @@ def test_skills_install(tmp_path, capsys):
 
 
 def test_human_only_actions_cover_the_review_gates():
-    """People approve and merge; the apply-proposals workflow (run by a person) applies what they merged; there is no
-    approval command (governance/review-policy.yaml)."""
-    for action in ("merge an approved pull request (a merged proposal is then applied with the apply-proposals workflow)",
-                   "apply a merged proposal (manual workflow; it needs a token configured for this repository)",
+    """People approve and merge; nothing is applied after a merge; there is no approval command
+    (governance/review-policy.yaml)."""
+    for action in ("merge an approved pull request",
                    "fill a reviewer seat (replace a placeholder)", "move a data repository's documents to the latest schema",
                    "build a release", "publish a release to PyPI (once the trusted publisher is configured)",
                    "register the PyPI trusted publisher for scale-schema",

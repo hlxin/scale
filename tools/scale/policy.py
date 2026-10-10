@@ -1,14 +1,9 @@
-"""Review policy: ``approvals.required`` approving reviews (one today) from reviewers other than the author, for
-every pull request.
+"""Review policy: who may approve a pull request, and how many records of an agent's curation a person checks.
 
-The policy lives in ``governance/review-policy.yaml`` (explained in governance/GOVERNANCE.md). GitHub pull-request reviews are the approvals: ``scale proposal apply-merged`` turns the
-reviews of a merged pull request into approval records and evaluates them here before it writes the
-decision record and applies the proposal; ``scale review status`` evaluates the records a proposal
-holds. Tiers are information in a proposal's reports, not approval classes.
-
-Who counts: a reviewer listed in the policy who is not a placeholder (a seat not filled yet) and not the
-author of the change. The latest review of each person counts; a reviewer whose latest review requests
-changes blocks.
+The policy lives in ``governance/review-policy.yaml`` (explained in governance/GOVERNANCE.md). GitHub pull-request
+reviews are the approvals, and GitHub's ruleset on ``main`` enforces them; the tools only read the reviewers
+(``scale domains check`` routes CODEOWNERS to them, ``scale check`` warns about seats not filled yet) and the
+sampling rule for curated records (``scale review sample``).
 """
 
 from __future__ import annotations
@@ -19,7 +14,6 @@ from . import layout
 from .util import ScaleError, load_yaml
 
 MATURITY = ("provisional", "stable", "deprecated")
-DECISIONS = ("approve", "request_changes", "comment", "dismissed")
 
 
 def load_policy(repo: Path) -> dict:
@@ -49,81 +43,6 @@ def placeholders(policy: dict) -> list[dict]:
     return [m for m in reviewers(policy, placeholders=True) if m.get("placeholder")]
 
 
-def required(policy: dict) -> int:
-    n = (policy.get("approvals") or {}).get("required", 2)
-    if not isinstance(n, int) or n < 1:
-        raise ScaleError(f"{layout.REVIEW_POLICY}: approvals.required must be a positive number, got {n!r}")
-    return n
-
-
-def approvable(policy: dict, *exclude: str | None) -> bool:
-    """Whether enough filled seats remain, besides the people in ``exclude`` (the author, the person who merges), to
-    give the required approvals. While they do not, the owner merges under the bootstrap rule."""
-    out = {_norm(x) for x in exclude} - {""}
-    return len([m for m in reviewers(policy) if _norm(m.get("github")) not in out]) >= required(policy)
-
-
-def _reviewer(policy: dict, who: str | None) -> dict | None:
-    """The listed reviewer a login or name belongs to (placeholders included), or None."""
-    w = _norm(who)
-    return next((m for m in reviewers(policy, placeholders=True)
-                 if w and w in {_norm(m.get("github")), _norm(m.get("name"))} - {""}), None)
-
-
-def latest(approvals: list[dict]) -> dict[str, dict]:
-    """The latest decision of each person (by ``at``), keyed by the normalized handle. A comment does not
-    change a person's state (as on GitHub, where commenting keeps an earlier approval)."""
-    out: dict[str, dict] = {}
-    for a in sorted(approvals, key=lambda a: a.get("at") or ""):
-        if a.get("decision") == "comment":
-            continue
-        out[_norm(a.get("reviewer"))] = a
-    return out
-
-
-def evaluate(policy: dict, approvals: list[dict], author: str | None = None, tier: int | None = None) -> dict:
-    """Whether the approvals satisfy the policy: at least ``approvals.required`` distinct reviewers, not the
-    author and not placeholders, whose latest decision is ``approve``, and no reviewer whose latest
-    decision is ``request_changes``. Returns {satisfied, missing, approved_by, counted, ignored, blocking, ...};
-    ``counted`` holds the latest approving record of each reviewer in ``approved_by`` (what is recorded)."""
-    need = required(policy)
-    states = latest(approvals)
-    approved, ignored, blocking, counted = [], [], [], []
-    for who, a in states.items():
-        m = _reviewer(policy, a.get("reviewer"))
-        name = (m or {}).get("github") or a.get("reviewer")
-        if a.get("decision") == "request_changes" and m and not m.get("placeholder"):
-            blocking.append(name)
-            continue
-        if a.get("decision") != "approve":
-            continue
-        if m is None:
-            ignored.append({"reviewer": a.get("reviewer"), "why": "not a reviewer in the review policy"})
-        elif m.get("placeholder"):
-            ignored.append({"reviewer": a.get("reviewer"), "why": "a placeholder seat, not a person"})
-        elif author and _norm(author) in {who, _norm(m.get("github")), _norm(m.get("name"))}:
-            ignored.append({"reviewer": a.get("reviewer"), "why": "the author of the change"})
-        else:
-            approved.append(name)
-            counted.append(a)
-    approved = sorted(set(approved))
-    missing = []
-    if len(approved) < need:
-        missing.append(f"{need - len(approved)} more approving review(s) from reviewers other than the author "
-                       f"(has {len(approved)} of {need})")
-    if blocking:
-        missing.append("changes requested by " + ", ".join(sorted(blocking)))
-    filled = reviewers(policy)
-    notes = []
-    if not approvable(policy, author):
-        notes.append(f"only {len(filled)} reviewer seat(s) are filled ({len(placeholders(policy))} placeholders in "
-                     f"{layout.REVIEW_POLICY}); {need} approvals from reviewers other than the author cannot be given yet")
-    return {"policy_version": policy.get("policy_version"), "tier": tier, "author": author,
-            "required": f"{need} approving review{'s' if need != 1 else ''} from reviewers other than the author",
-            "approved_by": approved, "counted": sorted(counted, key=lambda a: a.get("at") or ""), "ignored": ignored, "blocking": sorted(blocking), "notes": notes,
-            "missing": missing, "satisfied": not missing}
-
-
 def sample_records(doc: dict, fraction: float, seed: int, include_flagged: list[str] | None = None) -> list[dict]:
     """A reproducible sample of the records of a scale-graph document that state something from a
     source (they carry evidence), for a human to check against the source (Tier 1 records)."""
@@ -147,4 +66,4 @@ def sample_records(doc: dict, fraction: float, seed: int, include_flagged: list[
     return out
 
 
-__all__ = ["load_policy", "evaluate", "reviewers", "placeholders", "required", "approvable", "latest", "sample_records", "ScaleError"]
+__all__ = ["load_policy", "reviewers", "placeholders", "sample_records", "ScaleError"]

@@ -40,7 +40,7 @@ def invalid_fixtures(repo: Path) -> list[dict]:
 
 def reviewer_warnings(repo: Path) -> list[str]:
     """Reviewer seats still held by placeholders in the review policy: seats to fill with people, and until one is,
-    no pull request of the owner's can get an approval from a reviewer other than its author (a warning, not a failure)."""
+    the owner merges their own pull requests under the bootstrap rule (a warning, not a failure)."""
     from .policy import load_policy, placeholders
     n = len(placeholders(load_policy(repo)))
     return [f"reviewers: {n} placeholder{'s' if n != 1 else ''} to fill ({layout.REVIEW_POLICY})"] if n else []
@@ -48,8 +48,7 @@ def reviewer_warnings(repo: Path) -> list[str]:
 
 # Prose that names the schema's one version. Each entry is a file and a pattern for the sentence; ``head`` is the
 # catalysis manifest's version (the kernel's and the catalysis file's too: they carry none of their own). A warning,
-# never a failure: the apply-proposals workflow raises the version and runs `scale check`, and a sentence left behind
-# must not undo an approved apply. Change a sentence and its pattern together.
+# never a failure (`scale schema bump` rewrites these sentences). Change a sentence and its pattern together.
 VERSION_TEXTS = (
     ("README.md", r"The schema is at \*\*(?P<head>\d+\.\d+\.\d+)\*\*"),
     ("docs/architecture.md", r"The schema is at (?P<head>\d+\.\d+\.\d+), kernel and catalysis together"),

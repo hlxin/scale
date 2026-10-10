@@ -4,7 +4,7 @@
 domain/tests/test_invalid_fixtures.py validate every document here and require that it is
 rejected with the error stated in expect.yaml. Every fixture pins the schema version its base example
 pins (VERSION, read from the example, never spelled here) and is checked under that version, so a
-proposal that raises the head leaves them failing for their stated reasons. After `scale graph migrate`
+schema change that raises the head leaves them failing for their stated reasons. After `scale graph migrate`
 moves the examples, or after a schema change that alters an error message, rerun this script and review
 the diff:
 python domain/tests/fixtures/invalid/build_fixtures.py

@@ -9,7 +9,7 @@ import yaml
 
 from conftest import EXAMPLES, GRAPH_MANIFEST, HEAD_VERSION, REPO, spec_of
 from scale import layout, pgraph
-from scale.pgraph_proposal import diff_specs
+from scale.schema_change import diff_specs
 from scale.pgraph_profiles import conformance
 from scale.util import ScaleError, load_doc
 

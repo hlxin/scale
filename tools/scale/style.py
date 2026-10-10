@@ -1,7 +1,7 @@
 """Format and naming rules (see docs/style.md).
 
 * **YAML** is for human-written, line-reviewed files (specifications, profiles, migrations,
-  proposals, competency questions, configuration). It must be *block style*: no flow mappings
+  competency questions, configuration). It must be *block style*: no flow mappings
   (``{a: b}``) and no flow sequences holding mappings or sequences, because unquoted commas,
   colons or question marks inside them silently change meaning. Ambiguous YAML 1.1 scalars
   (``yes``/``no``/``on``/``off``), duplicate keys and tab indentation are rejected too.
@@ -92,7 +92,7 @@ LINT_TARGETS = ["scale-release.yaml", "core", "domain", "governance", "tools/ski
 
 
 def yaml_files(root: Path, targets: list[str] | None = None) -> list[Path]:
-    """YAML files under the targets, minus archived releases, proposal records and local material
+    """YAML files under the targets, minus archived releases and local material
     (``layout.is_excluded``). A missing target is an error: a renamed directory must not leave the
     style check silently passing over nothing."""
     out = []
@@ -167,7 +167,7 @@ MD_REFDEF = re.compile(r"^[ \t]{0,3}\[[^\]]+\]:\s*<?(\S+?)>?(?:\s|$)", re.M)
 
 
 def markdown_files(root: Path) -> list[Path]:
-    """The live Markdown files: everything except releases, proposal records, local
+    """The live Markdown files: everything except releases, local
     material (``layout.is_excluded``) and hidden directories other than ``.github``."""
     out = []
     for p in root.rglob("*.md"):

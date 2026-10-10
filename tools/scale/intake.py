@@ -14,8 +14,8 @@ Anyone comments through GitHub issues, pull-request comments or discussions. On 
    ``tools/skills/triage-feedback/proposal.schema.json``);
 4. **digest** — render one feedback digest (and optionally publish it as an issue).
 
-Nothing is decided in the digest. A person acts on a topic by opening a pull request (or by starting the
-scale-agent workflow by hand, .github/workflows/scale-agent.yml, which drafts one); the decision is the pull
+Nothing is decided in the digest. A person acts on a topic by opening a pull request (or by labelling the
+issue `agent`, and the scale-agent workflow, .github/workflows/scale-agent.yml, opens one); the decision is the pull
 request's approving review (governance/review-policy.yaml). Agents never decide. Writing to GitHub is dry-run unless ``--publish`` is given.
 """
 
@@ -346,9 +346,9 @@ def rule_proposal(c: dict) -> dict:
     O = lambda i, action, desc, cons: {"id": i, "action": action, "description": desc, "consequence": cons}
     opts = {
         "missing_concept": [
-            O("A", "open_proposal", "Prepare a schema change proposal (tools/skills/evolve-schema; `scale proposal new`): operations, fixtures, counterexamples, migration, affected queries.",
-              "New concepts enter as provisional; the proposal's pull request needs one approving review from a reviewer "
-              "other than its author (an agent can draft it: the scale-agent workflow, started by hand)."),
+            O("A", "change_schema", "Change the schema in a pull request (tools/skills/evolve-schema): the edit, fixtures, counterexamples, the version raised, affected queries.",
+              "New concepts enter as provisional; the pull request needs one person's approving review (label the issue "
+              "`agent` and the scale-agent workflow opens it)."),
             O("B", "map_to_existing", "Show that an existing label, edge type or property (or an external vocabulary term) already expresses it" +
               (f" (labels mentioned: {', '.join(refs['classes'])})" if refs.get("classes") else "") + "; document how to use it.",
               "No schema change; curation guidance updated."),
@@ -369,7 +369,7 @@ def rule_proposal(c: dict) -> dict:
               "If it returns a schema gap, a missing_concept path follows."),
             O("B", "answer_existing", "Show an existing plan already answers it.", "Documentation only.")],
         "mapping": [
-            O("A", "add_mapping", "Record the correspondence (an exact or close match to the external term) where the label or property is described, through a proposal.", "Schema description changes."),
+            O("A", "add_mapping", "Record the correspondence (an exact or close match to the external term) where the label or property is described, in a pull request.", "Schema description changes."),
             O("B", "decline", "Explain why the relation does not hold.", "No change.")],
         "tooling": [
             O("A", "fix", "Fix in a normal pull request with tests.", "No scientific meaning change."),
@@ -434,8 +434,8 @@ def render_digest(queue: dict, proposals: list[dict], repo: str, since: str | No
     L = [f"# SCALE feedback digest — {queue['generated_at'][:10]}", "",
          f"Feedback since `{since or 'the beginning'}`: **{len(queue['items'])}** items in **{len(queue['clusters'])}** topics; "
          f"**{len(need)}** may need a change.", "",
-         "**How to act on a topic:** open a pull request that takes one of its options (or, with write access, start "
-         "the scale-agent workflow by hand with the topic and the option, and it opens a pull request). Every "
+         "**How to act on a topic:** open a pull request that takes one of its options (or label the issue `agent`, or "
+         "comment `@scale-agent` with the option, and the scale-agent workflow opens a pull request). Every "
          "change is decided by an approving review of its pull request (governance/review-policy.yaml). Agents "
          "prepared these options; they do not decide.", ""]
     for p in need + info:

@@ -1,29 +1,25 @@
-# SCALE review policy (machine-readable), explained in governance/GOVERNANCE.md. Evaluated by
-# `scale review status` and by `scale proposal apply-merged`, which the apply-proposals workflow runs when a
-# person starts it for a merged proposal and its pull request (it needs the repository secret APPLY_TOKEN).
-# GitHub pull-request reviews are the approvals. Changing this file is a governance change: it needs the
-# same approvals as every other pull request.
-policy_version: 3
+# SCALE review policy (machine-readable), explained in governance/GOVERNANCE.md. GitHub pull-request reviews are the
+# approvals and GitHub's ruleset on main enforces them. Changing this file is a governance change: it needs the same
+# approval as every other pull request.
+policy_version: 4
 
 principles:
-  - A person or an agent may open a pull request. One person other than its author approves it, by reviewing it on
-    GitHub, and merges it. Agents never approve, merge or apply.
-  - An agent opens a pull request under its own GitHub identity (the Claude GitHub App in the scale-agent workflow,
-    or a bot account), never under a person's account, so that the person can approve it.
-  - Every pull request to main needs one approving review from a reviewer other than its author, any reviewer
-    listed below, not a particular one; the owner is one of them. GitHub does not let an author approve their own
-    pull request, so until another reviewer joins, the owner merges their own under the bootstrap rule
-    (governance/GOVERNANCE.md).
-  - Schema proposals follow the same rule. After the merge, a person starts the apply-proposals workflow for
-    the proposal and its pull request (or, under the bootstrap rule, the owner applies it in a pull request);
-    applying it raises the schema's one version (kernel and catalysis together).
-  - New concepts enter as provisional. The tier of a proposal is information for the reviewers, not a
-    separate approval class.
+  - Anyone, a person or an agent, may suggest a change (an issue, a comment) or open a pull request. Every change,
+    whatever it touches, goes through one pull request.
+  - Agents do the work. A suggestion labelled `agent` (or a collaborator's `@scale-agent` comment) starts the
+    scale-agent workflow, which implements the change, runs the checks and opens a pull request under its own
+    GitHub identity (the Claude GitHub App), never under a person's account.
+  - One person approves and merges. Any reviewer listed below may approve, including the person who suggested the
+    change; GitHub does not let the author of a pull request approve it, so whoever opened it needs another
+    reviewer. Agents never approve or merge.
+  - A schema change raises the schema's one version (kernel and catalysis together) in the same pull request;
+    a breaking change raises the second number (0.1.0 -> 0.2.0), an additive change the third (0.1.0 -> 0.1.1).
+    CI checks it and posts a summary for the reviewer.
+  - New concepts enter as provisional.
 
-# The reviewers: one group for the kernel and the catalysis domain for now, the owner and the domain experts who
-# join (each added here, with Write access, by a pull request; CODEOWNERS routes review requests to them). Any one
-# of them other than the author approves a change. A placeholder is a seat not filled yet: it never counts as an
-# approval, and `scale check` warns until it is replaced by a person (name and GitHub handle).
+# The reviewers: the owner and the domain experts who join (each added here, with Write access, by a pull request;
+# CODEOWNERS routes review requests to them). Any one of them approves a change. A placeholder is a seat not filled
+# yet: `scale check` warns until it is replaced by a person (name and GitHub handle).
 reviewers:
   team: '@hlxin'
   members:
@@ -37,17 +33,13 @@ reviewers:
       github: TODO-reviewer-3
       placeholder: true
 
-# What a pull request needs before it merges, and what a merged proposal needs before it is applied (by the
-# apply-proposals workflow, or by the owner under the bootstrap rule).
-# The latest review of each reviewer counts (GitHub's review state). A reviewer whose latest review
-# requests changes blocks until they approve or their review is dismissed.
+# What a pull request needs before it merges. The latest review of each reviewer counts (GitHub's review state); a
+# reviewer whose latest review requests changes blocks until they approve or their review is dismissed.
 approvals:
   required: 1
-  author_counts: false
-  placeholders_count: false
 
-# Tiers are stated in each proposal's reports (scale proposal check) so that reviewers know what kind
-# of change they review; every tier needs the same one approval.
+# The kinds of change, stated in CI's summary so that the reviewer knows what they review; every kind needs the same
+# one approval.
 tiers:
   0:
     name: no change in meaning
@@ -58,11 +50,12 @@ tiers:
   2:
     name: additive or loosening
     examples: new class, property, enum value or quantity kind; refined definitions; deprecations; mappings
+    needs: the third version number raised (scale schema bump), a test that uses what is added
   3:
     name: breaking or redefining
     examples: removals, narrowed ranges, newly required properties, changed normalization basis, renames
-    needs: a migration step (scale graph migrate) and a decision record, written when the proposal is applied
-      (scale proposal apply-merged in the apply-proposals workflow, or scale proposal decide under the bootstrap rule)
+    needs: the second version number raised (scale schema bump) and a migration rule (STEP_RULES in
+      tools/scale/pgraph_migrate.py)
 
 new_concepts_maturity: provisional
 

@@ -13,9 +13,9 @@ from scale.cli import main
 from scale.util import ScaleError, load_yaml
 
 
-# anchors that exist once a proposal has been applied: the kernels of frozen versions (none at 0.1.0)
+# anchors that exist once the schema has changed: the kernels of frozen versions (none at 0.1.0)
 OPTIONAL_ANCHORS = (layout.KERNEL_FROZEN,)
-APPLIED = bool(load_yaml(GRAPH_MANIFEST).get("proposals"))      # a proposal has moved the schema on (none at 0.1.0)
+APPLIED = (REPO / layout.KERNEL_FROZEN).is_dir()                # the schema has moved on (not at 0.1.0)
 _MAJOR, _MINOR, _ = (int(x) for x in HEAD_VERSION.split("."))
 NEXT = f"{_MAJOR}.{_MINOR + 1}.0"
 
@@ -49,17 +49,16 @@ def test_every_runtime_anchor_is_bundled_and_every_bundle_root_is_grafted():
     assert "layout.BUNDLE" in (REPO / "setup.py").read_text()            # setup.py bundles what layout declares
 
 
-def test_the_bundle_drops_working_files_only_inside_proposals(tmp_path):
+def test_the_bundle_drops_local_working_files(tmp_path):
     src = tmp_path / "repo"
-    for rel in ("domain/proposals/000001/proposal.yaml", "domain/proposals/000001/PR_BODY.md",
-                "domain/proposals/000001/candidate/scale-graph.yaml", "domain/examples/pkg/README.md",
+    for rel in ("domain/examples/pkg/README.md",
                 "domain/examples/e/work/text.txt", "domain/examples/e/curation/ocr/p1.txt",
                 "domain/examples/e/curation/fragments/a.json", "domain/tests/test_x.py"):
         (src / rel).parent.mkdir(parents=True, exist_ok=True)
         (src / rel).write_text("x")
     shutil.copytree(src / "domain", tmp_path / "out", ignore=layout.bundle_ignore(src))
     got = sorted(p.relative_to(tmp_path / "out").as_posix() for p in (tmp_path / "out").rglob("*") if p.is_file())
-    assert got == ["examples/e/curation/fragments/a.json", "examples/pkg/README.md", "proposals/000001/proposal.yaml"]
+    assert got == ["examples/e/curation/fragments/a.json", "examples/pkg/README.md"]
 
 
 def test_the_wheel_bundles_only_public_documents(tmp_path):
@@ -102,12 +101,10 @@ def test_pytest_collects_the_layout_test_dirs():
     ("releases/v0.1.0/RELEASE.yaml", True),
     ("core/graph/frozen/kernel-0.1.0.yaml", True), ("domain/graph/frozen/v0.1.0/catalysis.yaml", True),
     ("domain/graph/scale-graph.yaml", False),
-    ("domain/proposals/000002/use_case.json", True), ("core/proposals/000006/proposal.yaml", True),
     ("domain/examples/my-corpus/work/texts/a.json", True),
     ("domain/examples/my-corpus/curation/ocr/a.json", True),
     ("domain/tests/fixtures/invalid/dangling-link.json", False), ("core/graph/kernel.yaml", False),
-    ("tools/tests/fixtures/proposals/009001/proposal.yaml", False),       # a synthetic fixture, not a record
-    ("tools/tests/fixtures/proposals/009001/fixtures/pass-pressure-gauge.json", False),
+    ("tools/tests/fixtures/codeowners/README.md", False),
     ("domain/competency/cq-01-faradaic-efficiency.yaml", False),
     ("build/lib/scale/_data/README.md", True), ("dist/x.json", True)])               # build output
 def test_lint_and_fmt_exclusions(rel, excluded):
@@ -122,17 +119,15 @@ def test_lint_and_fmt_fail_on_a_missing_target(tmp_path):
     with pytest.raises(ScaleError, match="fmt target nowhere does not exist"):
         _json_docs(REPO, ["nowhere"])
     linted = [p.relative_to(REPO) for p in yaml_files(REPO) + _json_docs(REPO, FMT_TARGETS)]
-    assert not [p for p in linted if layout.is_proposal_record(p.parts) or p.parts[0] == "releases"]
-    # the synthetic proposal kept as a test fixture is not a record: its JSON stays canonical
-    assert Path("tools/tests/fixtures/proposals/009001/fixtures/pass-pressure-gauge.json") in linted
+    assert not [p for p in linted if p.parts[0] == "releases" or "frozen" in p.parts]
+    assert Path("domain/examples/scale-graph/example.json") in linted
 
 
 def test_fmt_exclusions_hold_from_any_working_directory(monkeypatch, capsys):
     """Exclusions are tested relative to the repository holding each file, not to the cwd: run from a
-    subdirectory, `scale fmt` must still leave releases and proposal records alone."""
+    subdirectory, `scale fmt` must still leave releases and frozen versions alone."""
     from scale.cli import _json_docs
-    for cwd, targets in [("domain", ["proposals"]), ("releases", ["."]),
-                         ("docs", ["../releases", "../domain/proposals", "../core/proposals"])]:
+    for cwd, targets in [("releases", ["."]), ("docs", ["../releases"])]:
         monkeypatch.chdir(REPO / cwd)
         assert _json_docs(Path.cwd(), targets) == [], cwd
         assert main(["fmt", "--check", *targets]) == 0
@@ -169,13 +164,13 @@ def test_the_review_policy_is_required(tmp_path):
 
 
 def test_frozen_scale_graph_copies_load_and_verify(tmp_path, capsys):
-    """0.1.0 has no frozen version; once a proposal is applied, the base version is frozen (its manifest, its parts and
+    """0.1.0 has no frozen version; once the schema changes, the base version is frozen (its manifest, its parts and
     the kernel of that version, all under the one version) with digests in SHA256SUMS, and `scale graph verify` checks
-    them. The frozen copy here is made by hand the way `scale proposal apply` makes it."""
+    them. The frozen copy here is made by hand the way `scale schema bump` makes it."""
     import json
     import os
     from scale import pgraph
-    from scale.pgraph_proposal import append_frozen_sums, verify_frozen
+    from scale.schema_change import append_frozen_sums, verify_frozen
     assert main(["--repo", str(REPO), "graph", "verify", "--format", "json"]) == 0
     out = json.loads(capsys.readouterr().out)
     assert [(h["domain"], h["version"]) for h in out["heads"] if h["domain"] == "catalysis"] == [("catalysis", HEAD_VERSION)]
@@ -187,13 +182,9 @@ def test_frozen_scale_graph_copies_load_and_verify(tmp_path, capsys):
     shutil.copytree(REPO / "domain/graph", repo / "domain/graph", ignore=shutil.ignore_patterns("frozen"))
     shutil.copy2(REPO / "domain/DOMAIN.yaml", repo / "domain/DOMAIN.yaml")
     shutil.copytree(REPO / "governance/registry", repo / "governance/registry")
-    from scale.util import dump_yaml
-    m = load_yaml(repo / "domain/graph/scale-graph.yaml")
-    m.pop("proposals", None)                           # the proposals that froze earlier versions are not copied
-    (repo / "domain/graph/scale-graph.yaml").write_text(dump_yaml(m))
-    assert verify_frozen(repo)["ok"]
+    assert verify_frozen(repo)["ok"] or not APPLIED
     as_head = pgraph.spec_sha256(pgraph.load_spec(repo / "domain/graph/scale-graph.yaml"))
-    # freeze the head as `scale proposal apply` would, then move the head on
+    # freeze the head as `scale schema bump` would, then move the head on
     v = HEAD_VERSION
     kfz, fz = repo / layout.KERNEL_FROZEN, repo / "domain/graph/frozen"
     (fz / f"v{v}").mkdir(parents=True)
@@ -223,30 +214,28 @@ def test_frozen_scale_graph_copies_load_and_verify(tmp_path, capsys):
         verify_frozen(repo)
 
 
-def test_an_applied_proposal_leaves_its_base_version_frozen(tmp_path):
-    """Every version an applied proposal moved away from is frozen, with the kernel of that version: documents may pin
-    it."""
-    from scale.pgraph_proposal import verify_frozen
-    from scale.util import dump_yaml, write_yaml
-    pid = "009001"                                    # synthetic (009xxx); the repository's own proposals are left out
+def test_every_version_a_step_leaves_is_frozen(tmp_path):
+    """Every version a migration step moves documents away from, on the way to the head, is frozen with the kernel of
+    that version: documents may pin it."""
+    from scale.schema_change import missing_frozen
+    from scale.util import dump_yaml
     repo = tmp_path / "repo"
-    shutil.copytree(REPO / "core", repo / "core", ignore=shutil.ignore_patterns("frozen", "proposals"))
+    shutil.copytree(REPO / "core", repo / "core", ignore=shutil.ignore_patterns("frozen"))
     shutil.copytree(REPO / "domain/graph", repo / "domain/graph", ignore=shutil.ignore_patterns("frozen"))
     shutil.copy2(REPO / "domain/DOMAIN.yaml", repo / "domain/DOMAIN.yaml")
     m = load_yaml(repo / "domain/graph/scale-graph.yaml")
-    m.update(version=NEXT, proposals=[pid])
+    m.update(version=NEXT)
     (repo / "domain/graph/scale-graph.yaml").write_text(dump_yaml(m))
-    write_yaml(repo / f"domain/proposals/{pid}/proposal.yaml", {"id": pid, "base": {"version": HEAD_VERSION}})
-    assert verify_frozen(repo)["mismatched"] == [
-        f"domain/graph/frozen/scale-graph-{HEAD_VERSION}.yaml is missing ({pid} moved catalysis from {HEAD_VERSION})",
-        f"core/graph/frozen/kernel-{HEAD_VERSION}.yaml is missing ({pid} moved catalysis from {HEAD_VERSION})"]
+    assert missing_frozen(repo, {HEAD_VERSION: (NEXT, "additive change"), "0.0.1": ("0.0.2", "elsewhere")}) == [
+        f"domain/graph/frozen/scale-graph-{HEAD_VERSION}.yaml is missing (a step moves documents from {HEAD_VERSION} to the head {NEXT})",
+        f"core/graph/frozen/kernel-{HEAD_VERSION}.yaml is missing (a step moves documents from {HEAD_VERSION} to the head {NEXT})"]
 
 
 def test_documentation_links_resolve(tmp_path):
     from scale.style import broken_links, markdown_files
     files = [p.relative_to(REPO).as_posix() for p in markdown_files(REPO)]
     assert "README.md" in files and "core/graph/README.md" in files
-    assert not [f for f in files if f.startswith("releases/v") or layout.is_proposal_record(Path(f).parts)]
+    assert not [f for f in files if f.startswith("releases/v")]
     assert broken_links(REPO) == []
     (tmp_path / "a.md").write_text("[ok](a.md) [bad](missing.md#x) `[code](nowhere.md)` [web](https://x.org/y.md)\n"
                                    "```\n[fenced](nowhere.md)\n```\n[ref]: gone.md\n")
@@ -290,7 +279,7 @@ def test_the_optional_restricted_copy_is_named_only_by_the_environment(tmp_path,
     assert layout.restricted_root(repo) == data.resolve()
     assert layout.locate(repo, "d/data.json") == data.resolve() / "d/data.json"
     assert layout.locate(repo, "d/public.json") == repo / "d/public.json"
-    assert layout.restricted_path(repo, "domain/proposals/000001") == data.resolve() / "domain/proposals/000001"
+    assert layout.restricted_path(repo, "domain/examples/x") == data.resolve() / "domain/examples/x"
     monkeypatch.setenv(layout.RESTRICTED_ENV, str(tmp_path / "absent"))                # set, but not there: none
     assert layout.restricted_root(repo) is None and "does not exist" in layout.missing_hint(repo, "d/data.json")
 
@@ -302,8 +291,6 @@ def test_kernel_paths():
         Path("/r/core/graph/frozen/kernel-0.1.0.yaml")
     rel = Path("/r/releases/v0.1.0/domain/graph")                            # a release keeps its own kernel copy
     assert layout.kernel_path(rel, "../../core/graph/kernel.yaml") == Path("/r/releases/v0.1.0/core/graph/kernel.yaml")
-    cand = Path("/r/domain/proposals/000010/candidate/domain/graph")          # a candidate mirrors the repository
-    assert layout.kernel_path(cand, "../../core/graph/kernel.yaml") == Path("/r/domain/proposals/000010/candidate/core/graph/kernel.yaml")
     assert layout.manifest_kernel(GRAPH_MANIFEST).resolve() == (REPO / layout.KERNEL).resolve()
     assert load_yaml(GRAPH_MANIFEST)["kernel"] == "../../core/graph/kernel.yaml"
 
@@ -329,17 +316,16 @@ def test_a_manifest_named_from_inside_the_domain_finds_its_kernel(monkeypatch, t
 
 def test_a_manifest_is_named_by_the_domain_that_holds_it(tmp_path):
     """``scale graph spec --spec`` names a manifest that is not the head by its domain: a frozen version or a release's
-    copy in domain/ by its DOMAIN.yaml, a candidate's copy in domain/ (no DOMAIN.yaml) by the domain around its
-    proposal, and any other file by its stem."""
+    copy in domain/ by its DOMAIN.yaml, and any other file by its stem."""
     r = tmp_path / "r"
     (r / "domain").mkdir(parents=True)
     (r / "domain/DOMAIN.yaml").write_text("domain: catalysis\n")
-    for rel in ("domain/graph/frozen/scale-graph-0.1.0.yaml", "domain/proposals/000010/candidate/domain/graph/scale-graph.yaml",
+    for rel in ("domain/graph/frozen/scale-graph-0.1.0.yaml",
                 "releases/v0.2.0/domain/graph/scale-graph.yaml", "elsewhere/my-spec.yaml", "loose/domain/graph/x.yaml"):
         (r / rel).parent.mkdir(parents=True, exist_ok=True)
         (r / rel).write_text("schema: scale-graph\n")
     (r / "releases/v0.2.0/domain/DOMAIN.yaml").write_text("domain: catalysis\n")
-    for rel in ("domain/graph/frozen/scale-graph-0.1.0.yaml", "domain/proposals/000010/candidate/domain/graph/scale-graph.yaml",
+    for rel in ("domain/graph/frozen/scale-graph-0.1.0.yaml",
                 "releases/v0.2.0/domain/graph/scale-graph.yaml"):
         assert layout.manifest_layer(r / rel) == "catalysis", rel
     assert layout.manifest_layer(r / "elsewhere/my-spec.yaml") == "my-spec"

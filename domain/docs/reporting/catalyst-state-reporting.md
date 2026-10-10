@@ -1,13 +1,13 @@
 # Minimum information about a catalyst state and its reaction pathways
 
 **Draft 0.1 (2026-10-03), for expert review. Not endorsed by any journal or society.** It is the
-reporting companion to a planned catalysis proposal (activity in a catalyst state, reaction pathways, product
+reporting companion to a planned catalysis schema change (activity in a catalyst state, reaction pathways, product
 distributions; [ROADMAP](../../ROADMAP.md)). Some items name fields that schema 0.1.0 does not have yet, marked
 *(planned)* in the SCALE column: the link `ACTIVE_FOR` (with its `in_state`, `product`, `function`,
 `assignment_basis` and `turnover_frequency`), the label `ReactionPathway`, the test property `product_distribution`,
 the properties `order` and `intermediate_role` on `PROCEEDS_VIA` (the link itself exists, from a Reaction to a species
 or a reaction), `population` and `dominance` on `HAS_SITE`, `in_state` on `LOCATED_ON` and `kinetic_role` on
-`HAS_ELEMENTARY_STEP`. They are what that proposal would add. Item numbers are stable across drafts; wording is not.
+`HAS_ELEMENTARY_STEP`. They are what that change would add. Item numbers are stable across drafts; wording is not.
 
 ## Why a checklist
 
@@ -23,7 +23,7 @@ enzymology) stayed short, separate from the full data model, and were backed by 
 This follows that pattern: **R** = required for the record to be comparable, **E** = expected when
 it was measured. Each item names the SCALE field that holds it. For the items whose fields schema 0.1.0
 has, `scale graph validate` can check a curated paper against the list; the fields marked *(planned)* wait for
-the proposal, and until then such an item is recorded in the record's `note` or `unmodeled` list.
+that change, and until then such an item is recorded in the record's `note` or `unmodeled` list.
 
 ## A. Starting point and action history
 
@@ -104,7 +104,7 @@ Abundance is not activity: a majority phase is not reported as active unless the
   recommended minimum (for example operando presence plus one kinetic criterion) be stated for the
   word "active" in a title or abstract?
 - **Transport limits (B4)** and **balance closure (E2)** have no typed field yet; they would be a
-  later proposal.
+  later schema change.
 - **Definitions** should cite the IUPAC Gold Book (active site, turnover frequency, selectivity) and
   representative literature. The references are to be pinned from primary sources before the draft
   circulates, not written from memory.

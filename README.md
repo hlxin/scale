@@ -8,7 +8,7 @@ which every record stays linked to the evidence behind it. **Concepts** are the 
 property definitions and value kinds; **attributes** are the properties of nodes and edges; **links** are
 typed, directed edges; **evidence** (a source, a locator and a short verbatim quote) is attached to every
 node and edge that states something. People and AI agents curate sources into such graphs, query them with
-their evidence, and change the schema through reviewed proposals. Every value keeps its source location,
+their evidence, and change the schema through reviewed pull requests. Every value keeps its source location,
 its reported unit and its verbatim evidence.
 
 The framework is general: a **science kernel** holds what any science shares (questions, hypotheses,
@@ -87,7 +87,7 @@ SCALE has one data format: scale-graph documents (node-link JSON) that pin the s
 A second domain would revisit the one-folder layout ([docs/architecture.md](docs/architecture.md)).
 
 Three workflows run across all of it: curating sources with evidence, querying with context (queries
-decline rather than guess), and evolving the schema through reviewed proposals. Agents propose; people
+decline rather than guess), and evolving the schema through reviewed pull requests. Agents do the work; people
 approve. The judgment work (extraction, writing query plans) is done by your model; SCALE's tools are
 deterministic. See [implementation status](docs/implementation-status.md).
 
@@ -96,8 +96,8 @@ deterministic. See [implementation status](docs/implementation-status.md).
 The schema has **one version number** for the science kernel and the catalysis domain together: the
 `version` of the catalysis manifest, `domain/graph/scale-graph.yaml`. The kernel file and the catalysis file
 carry none of their own; `core/CORE.yaml`, `domain/DOMAIN.yaml` and `scale-release.yaml` state the same
-number, and `scale domains check` requires them to agree. Every applied proposal raises it, whether it
-changes the kernel, the catalysis file or both, and freezes the version it replaces beside the manifest
+number, and `scale domains check` requires them to agree. Every schema change raises it (breaking: the second
+number; additive: the third), whether it changes the kernel, the catalysis file or both, and freezes the version it replaces beside the manifest
 (`graph/frozen/`), so a document stays readable under the version it pins (`graph.schema_version`).
 
 The schema is at **0.1.0**, the first version of this repository's numbering (2026-10-08):
@@ -126,14 +126,15 @@ they do not hold. Re-curate such documents under this numbering; do not validate
 
 Open an issue to comment or suggest in plain language ([comment form](https://github.com/hlxin/scale/issues/new?template=comment.yml),
 [contribution form](https://github.com/hlxin/scale/issues/new?template=contribution.yml)), or a pull request
-on a short-lived branch. The owner, or an agent at their request, prepares a pull request from an issue and
-credits its author.
+on a short-lived branch. A collaborator hands an issue to the agent (label `agent`, or a comment `@scale-agent …`),
+which prepares the pull request and credits the issue's author.
 
-**How the schema evolves.** A schema change is a pull request that carries a proposal
-(`scale proposal new`, `scale proposal check`); like every change it needs one approving review from
-a reviewer other than its author (the owner is a reviewer; the owner's own pull requests are merged under the
-bootstrap rule until another reviewer joins) ([governance/GOVERNANCE.md](governance/GOVERNANCE.md)). After it merges, the proposal is
-applied on `main` and the schema version moves on. People and agents open pull requests; a person approves and merges.
+**How the schema evolves.** A schema change is a pull request like any other: it edits the schema files and
+raises the version in the same pull request (`scale schema bump`, checked by `scale schema check`); like every
+change it needs one approving review by a reviewer, the person who asked for it included (the owner's own pull
+requests are merged under the bootstrap rule until another reviewer joins)
+([governance/GOVERNANCE.md](governance/GOVERNANCE.md)). Anyone suggests a change or opens a pull request; agents
+do the work; a person approves and merges.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).
 

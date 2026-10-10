@@ -2,7 +2,7 @@
 force, and its one checklist applies its items for a catalytic test by the driving forces the test lists (``when``
 cases on ``driving_forces``). Documents follow it as ``follows_domains: ["catalysis"]``.
 
-The examples are checked under the version they pin (a later proposal that raises the head leaves them valid under
+The examples are checked under the version they pin (a later schema change that raises the head leaves them valid under
 it); the tests of the head's shape read the head manifest, and never spell its version."""
 
 import copy

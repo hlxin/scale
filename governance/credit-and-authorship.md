@@ -83,7 +83,7 @@ stays under their terms.
 
 The notes of every official release name, for the catalysis domain and for the science kernel, the
 people whose work is in the release (from the release manifest's `contributors` and the merged pull
-requests), and the proposals and their approvers.
+requests), and the pull requests and their approvers.
 
 ## Citing the software
 

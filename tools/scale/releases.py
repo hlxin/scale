@@ -6,8 +6,7 @@ domain's declaration and scale-graph schema (its manifest, the domain files it l
 versions beside it), and the skills, with a sha256 digest of every file. The files are always taken
 from the repository head, the applied state; a release is never edited afterwards. ``RELEASE.yaml``
 records the schema's one version and what it binds (``component_versions``), the people credited
-(``contributors``), the experimental domains it leaves out, the applied proposals it adds (``proposals``, with
-their decision records) and a semantic comparison of every domain's assembled schema and of the kernel with
+(``contributors``), the experimental domains it leaves out and a semantic comparison of every domain's assembled schema and of the kernel with
 the previous release. It also ships the spec document of every version of every released
 domain's schema (``specs/<domain>/scale-graph-<version>.json``, the assembled schema as canonical JSON,
 :func:`pgraph.spec_document`), listed with its sha256 in ``spec_documents``: the published artifact a reader
@@ -26,11 +25,11 @@ import shutil
 from pathlib import Path
 
 from . import __version__, layout
-from .util import ScaleError, digest_tree, load_doc, load_yaml, write_yaml
+from .util import ScaleError, digest_tree, load_yaml, write_yaml
 from .versions import DISTRIBUTION, normalize_release_id, release_id, release_key
 
 # what build_release writes into RELEASE.yaml (a head manifest never carries them)
-GENERATED_KEYS = ("status", "date", "previous", "proposals", "review", "comparison_to_previous",
+GENERATED_KEYS = ("status", "date", "previous", "comparison_to_previous",
                   "built_with", "source", "component_versions", "contributors", "excluded_domains", "spec_documents",
                   "digests")
 SPECS = "specs"            # a release's spec documents: specs/<domain>/scale-graph-<version>.json
@@ -91,7 +90,7 @@ def head_artifacts(repo: Path) -> dict:
     """The head's core declaration, the kernel and its frozen versions, and each released domain's
     declaration and scale-graph files (its manifest, the parts it lists, the frozen versions beside it),
     repository-relative, with the loaded declarations. Refuses a listed experimental domain."""
-    from .pgraph_proposal import PACKAGE_KEYS
+    from .schema_change import PACKAGE_KEYS
     repo = Path(repo)
     head = load_yaml(repo / layout.RELEASE_MANIFEST)
     core_rel, profiles = head.get("core"), head.get("domain_profiles")
@@ -119,8 +118,7 @@ def head_artifacts(repo: Path) -> dict:
                 raise ScaleError(f"{man.as_posix()} names files outside the repository: {outside}")
             files += [man.as_posix()] + [Path(x).as_posix() for x in parts]
             files += _files_in(repo, layout.frozen_graph_dir(repo / man))
-            graphs[name] = {"manifest": man.as_posix(), "version": g.get("version"), "status": g.get("status"),
-                            "proposals": layout.manifest_proposals(g, man)}
+            graphs[name] = {"manifest": man.as_posix(), "version": g.get("version"), "status": g.get("status")}
     missing = [f for f in files if not (repo / f).is_file()]
     if missing:
         raise ScaleError(f"release files missing at the head: {missing}")
@@ -184,7 +182,7 @@ def component_versions(art: dict, manifest: dict, dest: Path) -> dict:
             "core": {"name": art["core"].get("core"), "version": v},
             "kernel": {"file": layout.KERNEL, "version": v},
             "domains": [{"domain": d, "version": v, "status": m.get("status"),
-                         **({"scale_graph": {k: x for k, x in art["graphs"][d].items() if k != "proposals"}}
+                         **({"scale_graph": dict(art["graphs"][d])}
                             if d in art["graphs"] else {})}
                         for d, (_, m) in art["domains"].items()],
             "tool": {"package": DISTRIBUTION, "version": __version__},
@@ -201,7 +199,7 @@ def classify(diff: dict | None) -> str:
     loosenings), ``identical``; a schema present on one side only is ``added`` or ``removed``."""
     if diff is None:
         return "identical"
-    from .pgraph_proposal import tier
+    from .schema_change import tier
     return {3: "breaking", 2: "additive", 0: "identical"}[tier(diff)]
 
 
@@ -215,7 +213,7 @@ def kernel_spec(kernel: Path, version: str | None = None) -> dict:
 
 
 def _graph_diff(a: dict | None, b: dict | None) -> dict:
-    from .pgraph_proposal import diff_specs
+    from .schema_change import diff_specs
     if a is None or b is None:
         return {"classification": "added" if a is None else "removed", "from": (a or {}).get("version"),
                 "to": (b or {}).get("version")}
@@ -254,39 +252,6 @@ def file_changes(prev_digests: dict, new_digests: dict) -> dict:
             "changed": sorted(k for k in set(a) & set(b) if a[k] != b[k])}
 
 
-def applied_since(prev_root: Path, prev: dict, art: dict) -> list[str]:
-    """The proposals applied to a released domain since the previous release: the ids its head manifest
-    lists in ``proposals`` that the previous release's copy of the manifest did not."""
-    before = {d["domain"]: (d.get("scale_graph") or {}).get("manifest")
-              for d in (prev.get("component_versions") or {}).get("domains") or []}
-    out = []
-    for name, g in art["graphs"].items():
-        rel = before.get(name)
-        old = set(layout.manifest_proposals(load_yaml(prev_root / rel), prev_root / rel)) if rel and (prev_root / rel).is_file() else set()
-        out += [p for p in g["proposals"] if p not in old]
-    return list(dict.fromkeys(out))
-
-
-def _proposal_reviews(repo: Path, named: list[str], applied: list[str]) -> list[dict]:
-    """The applied proposals a release names (six-digit ids), each with its decision record, tier and approvers."""
-    from .pgraph_proposal import decision_record
-    from .review import approvals
-    out = []
-    applied_ids = set(applied)
-    for ref in named:
-        pid = str(ref)
-        if pid not in applied_ids:
-            raise ScaleError(f"{pid} is not among the proposals applied since the previous release "
-                             f"({', '.join(sorted(applied_ids)) or 'none'}); a release names only what it adds")
-        cs = layout.resolve_proposal(repo, ref)
-        rec = decision_record(cs, repo, pid)
-        val = load_doc(cs / "validation_report.json") if (cs / "validation_report.json").is_file() else {}
-        decided = [a for a in approvals(cs) if a.get("decision") == "approve"]
-        out.append({"id": pid, "decision_record": rec.relative_to(repo).as_posix(), "tier": val.get("tier"),
-                    "approved_by": sorted({a.get("reviewer") for a in decided})})
-    return out
-
-
 def _unbumped(prev: dict, previous: str, prev_digests: dict, art: dict, new_digests: dict) -> list[str]:
     """The schema files (the kernel and each released domain's scale-graph files) whose bytes changed since the
     previous release while the schema's one version did not."""
@@ -297,7 +262,7 @@ def _unbumped(prev: dict, previous: str, prev_digests: dict, art: dict, new_dige
     before = ((prev.get("component_versions") or {}).get("schema") or {}).get("version")
     if changed and str(before) == str(art["schema_version"]):
         return [f"{', '.join(changed[:5])}{' …' if len(changed) > 5 else ''} changed since {previous}, but the schema is "
-                f"still at {before}; schema changes reach a release through an applied proposal, which raises the version"]
+                f"still at {before}; a schema change raises the version (`scale schema bump`)"]
     return []
 
 
@@ -362,15 +327,14 @@ def _now() -> str:
     return _dt.datetime.now(_dt.timezone.utc).replace(microsecond=0).isoformat()
 
 
-def build_release(repo: Path, version: str, out_root: Path | None = None, proposals: list[str] | None = None,
+def build_release(repo: Path, version: str, out_root: Path | None = None,
                   date: str | None = None, override_version: bool = False) -> Path:
     """Snapshot the repository head into an immutable release directory ``<out_root>/<version>``.
 
     ``version`` must be the head manifest's ``release`` (``override_version`` renumbers on purpose), so a
     typo cannot publish the head under another number. When the kernel or a domain's schema differs
-    from the previous release, the release must name the proposals applied since then
-    (``proposals``), each with its decision record: a schema change reaches a release only through an
-    approved, applied proposal. The first release has no predecessor and is compared with nothing."""
+    from the previous release, the schema version must differ too (each change merged with its version raised).
+    The first release has no predecessor and is compared with nothing."""
     repo = Path(repo)
     out_root = out_root or repo / layout.RELEASES
     manifest = load_yaml(repo / layout.RELEASE_MANIFEST) or {}
@@ -400,22 +364,7 @@ def build_release(repo: Path, version: str, out_root: Path | None = None, propos
     previous = earlier[-1] if earlier else None
     prev_root = release_root(repo, previous) if previous else None
     prev = load_yaml(prev_root / "RELEASE.yaml") if prev_root else {}
-    comparison, reviews = None, []
-    if previous:
-        comparison = schema_comparison(repo, prev_root, prev, art)
-        applied = applied_since(prev_root, prev, art)
-        named = list(dict.fromkeys(proposals or []))
-        reviews = _proposal_reviews(repo, named, applied)
-        missing = sorted(set(applied) - {r["id"] for r in reviews})
-        if missing:
-            raise ScaleError(f"proposals applied since {previous} are not named: {', '.join(missing)}; pass each with "
-                             "--proposal (a release says which approved changes it carries)")
-        if comparison["classification"] != "identical" and not applied:
-            raise ScaleError(f"the scale-graph schemas changed since {previous} ({comparison['classification']}) but no "
-                             "applied proposal accounts for it: schema changes reach a release only through "
-                             "`scale proposal apply`")
-    elif proposals:
-        raise ScaleError("the first release has no previous release to add proposals to; build it without --proposal")
+    comparison = schema_comparison(repo, prev_root, prev, art) if previous else None
     dest.mkdir(parents=True)
     try:
         for f in files:
@@ -428,8 +377,6 @@ def build_release(repo: Path, version: str, out_root: Path | None = None, propos
             if k == "release":
                 rel["status"] = "released"
         rel.update({"date": date or _now()[:10], "previous": previous})
-        rel["proposals"] = [r["id"] for r in reviews]
-        rel["review"] = reviews
         specs = write_spec_documents(dest, art)
         digests = digest_tree(dest)
         if previous:

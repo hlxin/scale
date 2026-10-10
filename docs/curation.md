@@ -142,7 +142,7 @@ source must be within its cap.
   second reading is kept. A tool's digitization is a computational Experiment (`USES_SOFTWARE`,
   `produced_by`). A value read off a plot is never recorded without an uncertainty.
 - **Units not printed.** A number printed without a unit has `unit: "not stated"`, its printed text in
-  `as_reported` and a note saying so, until the units proposal gives values a unit status. `not stated`
+  `as_reported` and a note saying so, until the units change gives values a unit status. `not stated`
   (in any case and spacing) is a placeholder, not a unit: a query leaves its values out as
   `unit_unstated`, `scale graph stats` counts them under `(no unit)`, and a filter in it is a plan
   error. Never plan on it: the numbers behind it may be in any unit.
@@ -265,7 +265,7 @@ curated. Record what you know; never delete or rewrite the records that cite it.
   Dataset only when someone actually checked for notices, saying when and by what means; never as a
   default. No SCALE tool checks registries yet (Crossref, Retraction Watch); a check is a person's.
 - **Reinstatement.** A notice that reverses a retraction or an expression of concern is recorded with
-  `UPDATES` once the schema has `update_type: reinstatement` (it needs a kernel proposal); until then it goes in
+  `UPDATES` once the schema has `update_type: reinstatement` (it needs a kernel change); until then it goes in
   the retracted source's `unmodeled` list with the notice's date and locator, and the retraction stays.
 - **The text read.** Say which version of a text was read (`text_version`: submitted or
   accepted manuscript, version of record, …) and, where useful, `text_sha256`, `retrieved_from` and
@@ -283,7 +283,7 @@ schema changes during extraction (see the invalid fixture
 
 | kind | example | action |
 |---|---|---|
-| missing_concept | a property the schema does not declare; a query answered with `schema_gap` | schema change proposal (`evolve-schema`) |
+| missing_concept | a property the schema does not declare; a query answered with `schema_gap` | schema change (`evolve-schema`) |
 | ambiguous_source_information | a reference electrode named differently in Results and Methods | source review / author query |
 | absent_source_information | a pH the source never states | source review; no schema change |
 | extraction_error | a value not in its quote, a quote not in the source | re-extract |

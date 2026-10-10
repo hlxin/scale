@@ -2,6 +2,21 @@
 
 ## Unreleased
 
+- **One pull request for every change; proposals retired.** Anyone, a person or an agent, suggests a change (an
+  issue, a comment) or opens a pull request; agents do the work; one person approves and merges, any reviewer, the
+  person who suggested the change included. A schema change is a pull request like any other: it edits
+  `core/graph/kernel.yaml` or `domain/graph/catalysis.yaml` directly and raises the one version in the same pull
+  request, a breaking change the second number (0.1.0 -> 0.2.0), an additive change the third (0.1.0 -> 0.1.1).
+  New commands: `scale schema diff | bump | check` (`tools/scale/schema_change.py`); `bump` freezes the base version,
+  raises the version everywhere it is stated and registers the migration step, and `check`, run by CI's
+  `specification-changes` job, asks for the version, the frozen base, the step (and rule, if breaking), a test for
+  what is added and a CHANGELOG line, and writes a summary for the reviewer. Removed: the proposal folders
+  (`core/proposals/`, `domain/proposals/`), `scale proposal …`, `scale review status`, `scale ci proposal-check |
+  proposals`, `scale release build --proposal`, the apply-proposals and proposal-check workflows, the `APPLY_TOKEN`
+  secret and decision records per change (`docs/decisions/` keeps decisions about the project). The scale-agent
+  workflow now starts on the issue label `agent` or a collaborator's `@scale-agent` comment as well as by hand. The
+  `main` ruleset no longer requires `proposal-check` (re-apply `governance/github/ruleset-main.json`). Review policy
+  version 4.
 - **A knowledge-graph bundle's schema is the vocabulary: scale-catal 0.1.0.** `kg/schema.json` is no longer the
   subset of types a graph uses, named after the bundle and versioned with it: it is the catalysis vocabulary of the
   scale-graph version the graph pins, every label and edge type with every property a bundle can carry, the same in

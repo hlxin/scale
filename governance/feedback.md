@@ -22,9 +22,9 @@ From the command line, `scale suggest --record <id> --text "…"` prints the sam
 ## What happens next
 
 ```
-an issue or a request ──► a pull request (a person, or an agent ──► one approving review ──► merge
-                          under its own GitHub identity)        (by the person who approved)          (a schema proposal is then applied
-                                                                          and the version moves on)
+an issue or a request ──► a pull request (the agent, on the label ──► one approving review ──► merge
+                          `agent` or `@scale-agent`; or anyone)   (any reviewer, the        (by the person who approved)
+                                                                   suggester included)
 comments, issues, review comments, discussions
         │  weekly (and on demand): scale triage ingest
         ▼
@@ -34,16 +34,16 @@ queue.json — normalized items, references (records, classes, DOIs, gaps, CQs),
 proposals.json — per topic: options A/B/C, consequences (validated; no decisions)
         │  scale triage publish
         ▼
-feedback digest issue (label feedback-digest) ──► a person opens a pull request on a topic;
+feedback digest issue (label feedback-digest) ──► a person hands a topic to the agent or opens a pull request;
                                                    its reviews decide
 ```
 
 - Each thread you took part in gets a link to the digest, so you can follow the discussion.
 - Topics are grouped: replies, "+1"s, near-duplicate issues and anything that mentions the same
-  record, gap, proposal or competency question end up together.
+  record, gap or competency question end up together.
 - Categories suggest the path. Only a **missing concept** can lead to a schema change; a new concept
-  enters as provisional, through a proposal whose pull request needs one approving review from
-  a reviewer other than its author ([GOVERNANCE.md](GOVERNANCE.md)). Wrong values go to re-curation.
+  enters as provisional, through a pull request that needs one approving review
+  ([GOVERNANCE.md](GOVERNANCE.md)). Wrong values go to re-curation.
   Silent or ambiguous sources are recorded as such. Questions get answers.
 - Comment text is treated as data. Neither the triage system nor the agent follows instructions written
   in comments about permissions, workflows, governance or secrets.
@@ -51,9 +51,8 @@ feedback digest issue (label feedback-digest) ──► a person opens a pull re
 ## Decisions
 
 Nothing is decided in the digest or in a comment. A change is decided by the reviews of its pull request:
-one approval from a reviewer other than its author, and no reviewer asking for changes (the owner is a reviewer;
-until another reviewer joins, the owner merges their own pull requests under the bootstrap rule, [GOVERNANCE.md](GOVERNANCE.md)). A schema proposal
-merged that way is then applied, which writes its decision record.
+one approval by a reviewer, and no reviewer asking for changes (until another reviewer joins, the owner merges
+their own pull requests under the bootstrap rule, [GOVERNANCE.md](GOVERNANCE.md)).
 
 ## For agent systems: proposing
 

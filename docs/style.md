@@ -6,8 +6,8 @@
 
 | content | written by | format |
 |---|---|---|
-| specifications (the kernel, the catalysis file, schema manifests), the catalysis and kernel declarations (`DOMAIN.yaml`, `CORE.yaml`), schema change proposals, competency questions, skills metadata, project configuration, GitHub templates and workflows | people, reviewed line by line | **YAML**, block style |
-| scale-graph documents, curation fragments, gap reports, approvals, proposal reports, decision log, tool input and output, query results, triage queues and proposals | tools and agents (sometimes people) | **canonical JSON** |
+| specifications (the kernel, the catalysis file, schema manifests), the catalysis and kernel declarations (`DOMAIN.yaml`, `CORE.yaml`), competency questions, skills metadata, project configuration, GitHub templates and workflows | people, reviewed line by line | **YAML**, block style |
+| scale-graph documents, curation fragments, gap reports, decision log, tool input and output, query results, triage queues and proposals | tools and agents (sometimes people) | **canonical JSON** |
 | exchange with other systems | — | Neo4j JSON lines and kg-bundles (`scale graph export`) |
 
 Tools accept YAML input anywhere a JSON document is expected, and write JSON.
@@ -21,7 +21,7 @@ Tools accept YAML input anywhere a JSON document is expected, and write JSON.
 - **No ambiguous YAML 1.1 scalars.** Quote `yes`, `no`, `on`, `off`, `y` and `n` when they are
   meant as text or keys (for example the GitHub workflow key `"on":` and the slot `'n'`).
 - No duplicate keys; no tabs in indentation.
-- Archived `releases/` and proposal records (`core/proposals/`, `domain/proposals/`) are historical records and are not reformatted.
+- Archived `releases/` and frozen schema versions are historical records and are not reformatted.
 - Directories holding a `.scale-verbatim` marker contain artifacts adopted as-is from an external
   source (e.g. the catalysis schema draft); they are exempt from reformatting so their digests stay valid.
 
@@ -68,11 +68,8 @@ stable, whichever tool or agent wrote the file.
   `DOMAIN.yaml` (`catalysis`): lowercase letters, digits and `-`. Its issue label is `domain:catalysis`.
   A driving force (`thermo`, `electro`, `photo`, …) is a case of the catalysis checklist, not a domain.
 - **Numbers:** the schema has one version, `MAJOR.MINOR.PATCH`, for the kernel and the catalysis domain
-  together (0.1.0 today). A schema change proposal is a six-digit number, global across the kernel and the
-  catalysis domain (`000001`; in prose "proposal 000001"), which is also its directory's name; its title stays
-  in `proposal.yaml`, where the id is a quoted string (`id: '000001'`). A proposal has no other name.
-  Decision records are numbered globally from 0001; `scale proposal decide` writes them as `NNNN-<id>.md`
-  (`0002-000001.md`); records that decide no proposal are named by their subject (`0001-scale-0.1.0.md`).
+  together (0.1.0 today); a breaking change raises MINOR, an additive change PATCH. Decision records are numbered
+  globally from 0001 and named by their subject (`0001-scale-0.1.0.md`).
   Release ids are `vX.Y.Z`.
 - Identifiers are stable. A name that breaks these rules after release is fixed by deprecation
   with `superseded_by`, never by renaming in place.

@@ -27,7 +27,7 @@ _AMBIGUOUS = {"y", "Y", "yes", "Yes", "YES", "n", "N", "no", "No", "NO", "on", "
 
 
 def _str_presenter(dumper, data):
-    # quote YAML 1.1 boolean look-alikes (docs/style.md) and every string of digits (a proposal id such as
+    # quote YAML 1.1 boolean look-alikes (docs/style.md) and every string of digits (an id such as
     # '000008' must stay a string for any YAML reader: unquoted, 000007 is an octal 7 in YAML 1.1 and 000008 the
     # number 8 in YAML 1.2); literal block for multi-line text
     style = "|" if "\n" in data else ("'" if data in _AMBIGUOUS or (data.isascii() and data.isdigit()) else None)

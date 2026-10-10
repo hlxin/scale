@@ -9,6 +9,6 @@ and the delay from a trigger to the onset of a transition.
 
 They are the passing documents and counterexamples written with these concepts in the consortium schema
 repository (up to commit 79b4fe4), moved to today's content with `scale graph migrate` of that time (which changed
-only their version) and re-pinned to 0.1.0, with `access: public` and titles that name no proposal. The `pass-*`
+only their version) and re-pinned to 0.1.0, with `access: public` and titles that name no change request. The `pass-*`
 documents are valid; each `fail-*` document is rejected with exactly one error, the one
 [expect.yaml](expect.yaml) states, for the reason it gives. `tools/tests/test_catalyst_states.py` reads them.

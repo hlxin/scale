@@ -86,13 +86,12 @@ what they may see).
 
 - **Everything committed is public, explicitly.** Every scale-graph document in the repository states
   `access: public` for its graph and leaves every record public (`scale evidence access`, a step of
-  `scale check`). A missing access is not public: the visibility rule reads it as `institution`. The
-  synthetic examples kept in an applied proposal's record stay as they were written and are exempt.
+  `scale check`). A missing access is not public: the visibility rule reads it as `institution`.
 - **Project data stays out until cleared.** Data that its project partners have not cleared for
   publication is never committed. It stays in a data repository of its own, under the projects' own terms;
   neither licence of this repository applies to it. The tools may read inputs that may not be committed
   from an optional restricted copy outside the repository (named by an environment variable only, with no
-  default location); a proposal that reads such inputs writes its full reports there and keeps public
+  default location); a tool that reads such inputs writes its full reports there and keeps public
   summaries in the repository.
 - **Publishing it** needs the partners' clearance, then: access set to `public`, the copyright cap applied
   (`scale evidence cap`), the claim statements reviewed, and a pull request that `scale check` passes and

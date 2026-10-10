@@ -26,7 +26,6 @@ TODO: what the domain covers and what it leaves to the core or to other domains.
 | `graph/__DOMAIN__.yaml` | the domain file (`domain: __DOMAIN__`): the vocabulary added to the kernel and, optionally, the domain's checklist, with `when` cases |
 | `competency/` | competency questions: graph query plans with expected answers (`scale domains cq`); the first runs on the example, two are stubs to fill in |
 | `examples/` | example documents |
-| `proposals/` | schema change proposals that touch only this domain (`<NNNNNN>/`: a six-digit number, global across the core and the domain) |
 | `tests/` | the domain's tests (collected by pytest) |
 
 ## Checks

@@ -199,7 +199,7 @@ for i, (k, t) in enumerate(legend):
     text(x + 0.6, y, t, 11, color="#333333", ha="left")
 text(0.4, -1.75, "Dynamic is not a driving force: a dynamic run is a kernel Operation (operation_mode dynamic) under the same checklist case. "
      "Extension keys _<prefix>_<name> hold what the schema has not yet; a new driving force enters the catalysis file (its terms and a case) "
-     "by proposal.\nOne version number for the whole schema, kernel and catalysis together: every applied proposal raises it.",
+     "by a schema change.\nOne version number for the whole schema, kernel and catalysis together: every schema change raises it.",
      10.5, color="#333333", ha="left", bold=False)
 ax.texts[-1].set_bbox(dict(fc="#f4f4f4", ec="#999999", boxstyle="round,pad=0.4"))
 fig.savefig(HERE / "scale-graph-architecture.png", dpi=100, bbox_inches="tight", facecolor="white")

@@ -1,7 +1,7 @@
 """``scale kg update``: move a knowledge-graph data repository to a newer schema version.
 
 A data repository (any folder of curated documents, kept apart from this repository) holds scale-graph
-documents that each pin the schema version they were curated under. When a proposal is applied in the schema repository, the domain's
+documents that each pin the schema version they were curated under. When a schema change is merged in the schema repository, the domain's
 head version moves on; ``scale kg update --data DIR`` then, for every scale-graph document of the domain
 under DIR:
 
@@ -15,9 +15,7 @@ What it does not change: a document a step rule cannot map is refused, reported 
 rule says why; a curator fixes the record first); a document whose file name pins a version
 (``*.scale-graph-0.1.0.graph.json``) is a deliberate copy at that version and is kept; a document whose
 migrated form has more validation errors than before is not written; sealed packages (a directory with a
-``.scale-verbatim`` marker, such as kg-bundles), local ``work/`` folders and proposal folders
-(``*/proposals/<NNNNNN>/``: the inputs and history of a proposal, such as the documents it assessed, kept in
-``before-apply/`` at the versions they pinned) are not read. A document pinning a version this repository does
+``.scale-verbatim`` marker, such as kg-bundles) and local ``work/`` folders are not read. A document pinning a version this repository does
 not hold is refused (``pgraph.pinned`` says why): its number names no schema here, so no step applies to it.
 """
 
@@ -33,24 +31,18 @@ SKIP_DIRS = {".git", ".github", ".venv", "__pycache__", "work", "scratchpad", "n
 PINNED_NAME = re.compile(r"\.scale-graph-(\d+\.\d+\.\d+)\.")
 
 
-def _proposal(rel: Path) -> bool:
-    """Whether a path lies in a proposal folder (``.../proposals/<NNNNNN>/``)."""
-    parts = rel.parts[:-1]
-    return any(a == "proposals" and b.isdigit() and len(b) == 6 for a, b in zip(parts, parts[1:]))
-
-
 def _sealed(p: Path, root: Path) -> bool:
     return any((d / ".scale-verbatim").exists() for d in [p.parent, *p.parent.parents] if d == root or root in d.parents)
 
 
 def documents(data: Path) -> list[Path]:
     """The scale-graph documents under ``data`` (JSON with ``graph.schema: scale-graph``), outside sealed
-    packages, local work folders and proposal folders."""
+    packages and local work folders."""
     data = Path(data).resolve()
     out = []
     for p in sorted(data.rglob("*.json")):
         rel = p.relative_to(data)
-        if SKIP_DIRS & set(rel.parts[:-1]) or _proposal(rel) or _sealed(p, data):
+        if SKIP_DIRS & set(rel.parts[:-1]) or _sealed(p, data):
             continue
         try:
             doc = load_doc(p)
@@ -124,7 +116,7 @@ def update(repo: Path, data: Path, domain: str = "catalysis", to: str | None = N
             continue
         after = _summary(pgraph.validate(new, tspec))
         changes = sum(len(s.get("changes") or []) for s in rep["steps"])
-        row.update(steps=[f"{s['from']} → {s['to']} ({s['proposal']})" for s in rep["steps"]], changes=changes,
+        row.update(steps=[f"{s['from']} → {s['to']} ({s['note']})" for s in rep["steps"]], changes=changes,
                    before=before, after=after)
         if after["errors"] > before["errors"]:
             rows.append({**row, "status": "refused", "why": f"the migrated document has {after['errors']} validation "

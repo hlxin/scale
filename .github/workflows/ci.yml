@@ -2,8 +2,8 @@ name: ci
 
 # The status checks the main-branch ruleset may require (governance/github/ruleset-main.json) are the job
 # names below:
-#   test (3.10), test (3.11), test (3.12), test (3.13), package, specification-changes
-# and proposal-check (.github/workflows/proposal-check.yml). Renaming a job or changing the matrix
+#   test (3.10), test (3.11), test (3.12), test (3.13), package, specification-changes.
+# Renaming a job or changing the matrix
 # changes those names. Update the ruleset in the same pull request; applying the ruleset is a human
 # action (governance/repository-settings.md). Nothing here needs a secret.
 #
@@ -83,11 +83,11 @@ jobs:
     #   core/graph/frozen/ or domain/graph/frozen/ (each SHA256SUMS may only gain lines); new release
     #   directories and new frozen versions are allowed, and so are edits to README and CHANGELOG files
     #   directly under releases/;
-    # - changes core/graph/ or the catalysis domain's graph files (its schema manifest included)
-    #   without adding or updating a proposal (core/proposals/ or domain/proposals/) or a
-    #   decision record (docs/decisions/).
-    # It also prints which owners must review. On pushes to main the job is skipped, which counts as
-    # passing.
+    # - changes the schema (core/graph/, the catalysis domain's graph files) without what `scale schema check`
+    #   asks: the version raised by the rule (breaking: the second number; additive: the third), the base
+    #   version frozen, the migration step, a test for what is added and a CHANGELOG line.
+    # The reviewer's summary of a schema change is the job summary. It also prints which owners review. On
+    # pushes to main the job is skipped, which counts as passing.
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
@@ -100,8 +100,12 @@ jobs:
           python-version: "3.12"
       - name: Install
         run: pip install -e .
-      - name: Specification changes carry a proposal; releases are never edited
+      - name: Summary of the schema change for the reviewer
         env:
           # Passed through the environment, never interpolated into the script.
+          BASE_REF: ${{ github.base_ref }}
+        run: scale schema check --base "origin/${BASE_REF}" --comment "$GITHUB_STEP_SUMMARY" || true
+      - name: Schema changes carry their version and tests; releases and frozen versions are never edited
+        env:
           BASE_REF: ${{ github.base_ref }}
         run: scale ci spec-changes --base "origin/${BASE_REF}"

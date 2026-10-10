@@ -290,9 +290,6 @@ def test_domains_hold_no_copies_of_core_files(tmp_path):
     ex = repo / "domain/examples"
     shutil.copy2(repo / "core/graph/kernel.yaml", ex / "my-kernel.yaml")
     shutil.copy2(repo / "core/examples/science-examples/a-designed-series.json", ex / "copied.json")
-    cand = repo / "domain/proposals/000100/candidate/core/graph"   # G4: candidates are exempt
-    cand.mkdir(parents=True)
-    shutil.copy2(repo / "core/graph/kernel.yaml", cand / "kernel.yaml")
     frozen = repo / "domain/graph/frozen/v0.1.0"                          # frozen kernels live only in core/
     frozen.mkdir(parents=True)
     shutil.copy2(repo / "core/graph/kernel.yaml", frozen / "kernel.yaml")
@@ -303,7 +300,6 @@ def test_domains_hold_no_copies_of_core_files(tmp_path):
     assert "examples/copied.json is byte-identical to a core file" in msgs
     assert "domain/graph/frozen/v0.1.0/kernel.yaml is a copy of a scale-graph kernel" in msgs
     assert "domain/notes/CORE.yaml is byte-identical to a core file" in msgs    # anywhere in the domain
-    assert "candidate" not in msgs
 
 
 def test_example_documents_must_validate(tmp_path):
@@ -403,8 +399,7 @@ def _copy_repository(dest: Path) -> None:
 
 
 def test_the_kernel_and_the_kernel_only_manifest_state_the_manifests_status(tmp_path):
-    """The schema has one status, its manifest's (`candidate`: no release changes it, and `scale proposal apply`
-    installs the next head as `candidate`): the kernel and the kernel-only example manifest state the same, so that
+    """The schema has one status, its manifest's (`candidate`: no release changes it): the kernel and the kernel-only example manifest state the same, so that
     no file calls the version released while the manifest calls it a candidate."""
     head = load_yaml(REPO / layout.DOMAIN / layout.DOMAIN_GRAPH_MANIFEST)["status"]
     assert head == "candidate"
@@ -423,12 +418,11 @@ def test_the_kernel_and_the_kernel_only_manifest_state_the_manifests_status(tmp_
 
 def test_the_repository_holds_one_domain_beside_the_core():
     """One domain folder, domain/, declaring the catalysis domain: the domain's name read from its DOMAIN.yaml, and
-    the tools find its manifest, competency questions, examples and proposals there."""
+    the tools find its manifest, competency questions and examples there."""
     d = REPO / layout.DOMAIN
     assert not (REPO / "domains").exists()
     assert layout.domain_dirs(REPO) == [d] and layout.domain_layers(REPO) == {"catalysis": d}
     assert layout.graph_manifests(REPO) == {"catalysis": d / layout.DOMAIN_GRAPH_MANIFEST}
-    assert layout.proposal_root(REPO, "catalysis") == d / layout.DOMAIN_PROPOSALS
     assert layout.competency_files(REPO) and all(p.parent == d / layout.DOMAIN_COMPETENCY for p in layout.competency_files(REPO))
     assert layout.example_roots(REPO) == [REPO / "core/examples", d / layout.DOMAIN_EXAMPLES]
     res = check(REPO)

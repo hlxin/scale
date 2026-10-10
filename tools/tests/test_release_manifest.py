@@ -1,17 +1,16 @@
 """Release builds: the core and the released domains, each with its scale-graph schema (its manifest, its
 parts, the science kernel and any frozen versions), copied from the head and digested, with the schema's one
-version, the people credited, the experimental domains left out, the source repository, the applied
-proposals the release adds and a semantic comparison with the previous release."""
+version, the people credited, the experimental domains left out, the source repository and a semantic comparison
+with the previous release."""
 
-import json
 import shutil
 
 import pytest
 
 from conftest import HEAD_VERSION, REPO
 from scale import layout
-from scale.releases import applied_since, build_release, release_root, schema_comparison, verify_release
-from scale.util import ScaleError, dump_yaml, load_yaml, sha256_file, write_yaml
+from scale.releases import build_release, release_root, schema_comparison, verify_release
+from scale.util import ScaleError, dump_yaml, load_yaml, sha256_file
 
 # the catalysis graph schema: its manifest and one catalysis file, with the kernel
 GRAPH_FILES = ["core/graph/kernel.yaml", "domain/graph/scale-graph.yaml", "domain/graph/catalysis.yaml"]
@@ -23,11 +22,11 @@ FIRST = "v0.1.0"           # the first release of a scratch repository (whatever
 
 
 def _mini(tmp_path):
-    """The head in a scratch repository, without its proposals and without the releases built from it, describing
+    """The head in a scratch repository, without the releases built from it, describing
     the first release (FIRST): the tests build a first release and the ones after it, whatever the repository holds."""
     repo = tmp_path / "repo"
     for d in ("core", "governance", "tools/skills", "domain/graph"):
-        shutil.copytree(REPO / d, repo / d, ignore=shutil.ignore_patterns("__pycache__", "proposals"))
+        shutil.copytree(REPO / d, repo / d, ignore=shutil.ignore_patterns("__pycache__"))
     (repo / "releases").mkdir()
     shutil.copy2(REPO / "releases/README.md", repo / "releases/README.md")
     for f in ("scale-release.yaml", "domain/DOMAIN.yaml"):
@@ -43,37 +42,14 @@ def _edit(path, fn):
 
 
 def _raise_version(repo, to):
-    """What `scale proposal apply` does to the one version: every file that states it follows the manifest."""
+    """What `scale schema bump` does to the one version: every file that states it follows the manifest."""
     for rel, key in STATING:
         _edit(repo / rel, lambda m, key=key: m.update({key: to}))
 
 
-PID = "009090"            # a synthetic proposal id (009xxx: test fixtures)
 _MAJOR, _MINOR, _PATCH = (int(x) for x in HEAD_VERSION.split("."))
-NEXT = f"{_MAJOR}.{_MINOR + 1}.0"              # what a proposal applied to the head raises the one version to
-NEXT_PATCH = f"{_MAJOR}.{_MINOR}.{_PATCH + 1}"
-
-
-def _apply_fake_proposal(repo, pid=PID, decided=True, to=NEXT):
-    """What `scale proposal apply` leaves behind, in miniature: a new property in the catalysis file, the
-    proposal's id in the manifest's proposals, the one version raised, the proposal record and (when decided)
-    its decision."""
-    _edit(repo / "domain/graph/catalysis.yaml",
-          lambda m: m["nodes"]["CatalyticTest"]["properties"].update(test_only_note={"type": "text", "maturity": "provisional"}))
-    _edit(repo / "domain/graph/scale-graph.yaml", lambda m: m.update(proposals=(m.get("proposals") or []) + [pid]))
-    if to:
-        _raise_version(repo, to)
-    cs = repo / "domain/proposals" / pid
-    write_yaml(cs / "proposal.yaml", {"id": pid, "title": "A test change", "kind": "scale-graph"})
-    (cs / "validation_report.json").write_text(json.dumps({"tier": 2, "ok": True}))
-    (cs / "approvals").mkdir()
-    (cs / "approvals/domain-hlxin.json").write_text(json.dumps({"reviewer": "hlxin", "role": "domain", "decision": "approve"}))
-    if decided:
-        (repo / layout.DECISIONS).mkdir(parents=True, exist_ok=True)
-        (repo / layout.DECISIONS / f"0099-{pid}.md").write_text(f"# Decision record 0099 — {pid}\n")
-        (repo / layout.DECISION_LOG).write_text(json.dumps({"decisions": [
-            {"record": f"0099-{pid}.md", "proposal": pid, "proposal_dir": cs.relative_to(repo).as_posix()}]}))
-    _edit(repo / layout.RELEASE_MANIFEST, lambda m: m.update(release="v0.2.0"))
+NEXT = f"{_MAJOR}.{_MINOR + 1}.0"              # what a breaking change raises the one version to
+NEXT_PATCH = f"{_MAJOR}.{_MINOR}.{_PATCH + 1}"   # what an additive change raises it to
 
 
 def test_the_build_carries_core_kernel_domain_and_skills_with_the_one_version(tmp_path):
@@ -107,7 +83,7 @@ def test_the_build_carries_core_kernel_domain_and_skills_with_the_one_version(tm
     assert m["source"] == {"repository": "https://github.com/hlxin/scale", "tag": "v0.1.0"}
     # the first release: nothing to compare with
     assert m["previous"] is None and m["comparison_to_previous"] is None and "predecessor" not in m
-    assert (m["proposals"], m["review"]) == ([], [])
+    assert "proposals" not in m and "review" not in m
     # the spec document of the one version, with its digest
     from scale import pgraph
     assert m["spec_documents"] == [{"domain": "catalysis", "version": v, "file": f"specs/catalysis/scale-graph-{v}.json",
@@ -115,11 +91,6 @@ def test_the_build_carries_core_kernel_domain_and_skills_with_the_one_version(tm
                                    for v, path in pgraph.spec_versions(repo / "domain/graph/scale-graph.yaml")]
     assert m["spec_documents"][-1]["version"] == HEAD_VERSION
     assert list(m)[-1] == "digests"
-
-
-def test_the_first_release_names_no_proposals(tmp_path):
-    with pytest.raises(ScaleError, match="first release has no previous release"):
-        build_release(_mini(tmp_path), "v0.1.0", proposals=["000001"])
 
 
 def test_versions_typos_and_immutability(tmp_path):
@@ -146,50 +117,33 @@ def test_an_experimental_domain_is_never_released(tmp_path):
     assert not any(k.startswith("domain/") for k in m["digests"]) and m["spec_documents"] == []
 
 
-def test_a_schema_change_reaches_a_release_only_through_named_applied_proposals(tmp_path):
+def test_a_schema_change_with_its_version_raised_reaches_the_next_release(tmp_path):
     repo = _mini(tmp_path)
     build_release(repo, "v0.1.0", date="2026-10-08")
-    _apply_fake_proposal(repo)
-    with pytest.raises(ScaleError, match=f"proposals applied since v0.1.0 are not named: {PID}"):
-        build_release(repo, "v0.2.0", date="2026-10-09")
-    with pytest.raises(ScaleError, match="000004 is not among the proposals applied since the previous release"):
-        build_release(repo, "v0.2.0", proposals=[PID, "000004"], date="2026-10-09")
-    assert not (repo / "releases/v0.2.0").exists()
-    m = load_yaml(build_release(repo, "v0.2.0", proposals=[PID], date="2026-10-09") / "RELEASE.yaml")
-    assert m["previous"] == "v0.1.0" and m["proposals"] == [PID] and m["schema_version"] == NEXT
-    assert m["review"] == [{"id": PID, "decision_record": f"docs/decisions/0099-{PID}.md", "tier": 2,
-                            "approved_by": ["hlxin"]}]
+    _edit(repo / "domain/graph/catalysis.yaml",
+          lambda m: m["nodes"]["CatalyticTest"]["properties"].update(test_only_note={"type": "text", "maturity": "provisional"}))
+    _raise_version(repo, NEXT_PATCH)
+    _edit(repo / layout.RELEASE_MANIFEST, lambda m: m.update(release="v0.2.0"))
+    m = load_yaml(build_release(repo, "v0.2.0", date="2026-10-09") / "RELEASE.yaml")
+    assert m["previous"] == "v0.1.0" and m["schema_version"] == NEXT_PATCH
     cmp = m["comparison_to_previous"]
     assert cmp["classification"] == "additive" and cmp["kernel"]["classification"] == "identical"
-    assert (cmp["kernel"]["from"], cmp["kernel"]["to"]) == (HEAD_VERSION, NEXT)        # one version: the kernel's too
+    assert (cmp["kernel"]["from"], cmp["kernel"]["to"]) == (HEAD_VERSION, NEXT_PATCH)  # one version: the kernel's too
     cat = cmp["domains"]["catalysis"]
     assert cat["classification"] == "additive" and cat["added"] == ["nodes.CatalyticTest.test_only_note"]
-    assert (cat["from"], cat["to"]) == (HEAD_VERSION, NEXT)
-    assert m["component_versions"]["schema"] == {"version": NEXT}
+    assert m["component_versions"]["schema"] == {"version": NEXT_PATCH}
 
 
-def test_an_applied_proposal_without_a_decision_record_is_refused(tmp_path):
-    repo = _mini(tmp_path)
-    build_release(repo, "v0.1.0", date="2026-10-08")
-    _apply_fake_proposal(repo, decided=False)
-    with pytest.raises(ScaleError, match=f"no decision record for {PID}"):
-        build_release(repo, "v0.2.0", proposals=[PID], date="2026-10-09")
-
-
-def test_a_schema_edit_without_a_proposal_is_refused(tmp_path):
+def test_a_breaking_change_is_classified(tmp_path):
     repo = _mini(tmp_path)
     build_release(repo, "v0.1.0", date="2026-10-08")
     _edit(repo / "domain/graph/catalysis.yaml", lambda m: m["nodes"]["CatalyticTest"]["properties"].pop("feed_ratio"))
-    _raise_version(repo, "1.0.0")
+    _raise_version(repo, NEXT)
     _edit(repo / layout.RELEASE_MANIFEST, lambda m: m.update(release="v0.2.0"))
     prev = release_root(repo, "v0.1.0")
     from scale.releases import head_artifacts
-    art = head_artifacts(repo)
-    cmp = schema_comparison(repo, prev, load_yaml(prev / "RELEASE.yaml"), art)
+    cmp = schema_comparison(repo, prev, load_yaml(prev / "RELEASE.yaml"), head_artifacts(repo))
     assert cmp["classification"] == "breaking" and "nodes.CatalyticTest.feed_ratio" in cmp["domains"]["catalysis"]["removed"]
-    assert applied_since(prev, load_yaml(prev / "RELEASE.yaml"), art) == []
-    with pytest.raises(ScaleError, match=r"schemas changed since v0.1.0 \(breaking\) but no applied proposal accounts for it"):
-        build_release(repo, "v0.2.0", date="2026-10-09")
 
 
 @pytest.mark.parametrize("edit", ["kernel", "catalysis"])

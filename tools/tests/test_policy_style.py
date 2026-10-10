@@ -2,7 +2,7 @@ import copy
 
 from conftest import DRIVING_FORCE_EXAMPLES, GRAPH_MANIFEST, REPO
 from scale import pgraph
-from scale.policy import evaluate, load_policy, sample_records
+from scale.policy import load_policy, reviewers, sample_records
 from scale.style import fmt_file, lint_yaml_text, naming_problems
 from scale.util import dump_canonical, load_doc
 
@@ -11,17 +11,15 @@ POLICY = load_policy(REPO)
 
 # ---------------------------------------------------------------- the review policy
 
-def test_every_tier_needs_the_same_one_approval():
-    """Tiers are information in the reports; there is no approval class per tier, no comment period and no
-    development stage."""
-    assert POLICY["policy_version"] == 3
+def test_every_change_needs_one_approval():
+    """One approval for every pull request; the kinds of change are information for the reviewer, not approval
+    classes, and there is no comment period, stage or committee."""
+    assert POLICY["policy_version"] == 4
     assert not {"committee", "provisional_approvers", "stage", "stages", "area_review", "objections"} & set(POLICY)
+    assert POLICY["approvals"] == {"required": 1}
     assert all(set(t) <= {"name", "examples", "needs"} for t in POLICY["tiers"].values())
     assert POLICY["new_concepts_maturity"] == "provisional"
-    approvals = [{"reviewer": "hlxin", "decision": "approve", "at": "2026-10-05T00:00:00Z"}]
-    assert [evaluate(POLICY, approvals, author="x", tier=t)["satisfied"] for t in (0, 1, 2, 3)] == [True] * 4
-    assert [evaluate(POLICY, approvals, author="hlxin", tier=t)["satisfied"] for t in (0, 1, 2, 3)] == [False] * 4
-    assert evaluate(POLICY, approvals, tier=3)["required"] == "1 approving review from reviewers other than the author"
+    assert [m["github"] for m in reviewers(POLICY)] == ["hlxin"]
 
 
 def test_records_sampling_is_configured():

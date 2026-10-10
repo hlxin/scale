@@ -13,7 +13,7 @@ tests for both. Reviewed, like every path, by its code owner (`@hlxin` today) an
 tools/
 ├── scale/          # the Python package `scale` (distribution `scale-schema`)
 │   ├── layout.py   # every repository-relative path the tools use, in one place
-│   └── …           # CLI, agent interfaces, scale-graph validation and queries, proposals, releases
+│   └── …           # CLI, agent interfaces, scale-graph validation and queries, schema changes, releases
 ├── skills/         # versioned SKILL.md procedures
 └── tests/          # tests of the tools, with their fixtures
 ```
@@ -30,8 +30,7 @@ The modules are mapped in [docs/architecture.md](../docs/architecture.md#code-ma
   `docs/implementation-status.yaml`, `AGENTS.md`) under `scale/_data`, mirroring the repository
   layout, so the same repository-relative paths work in a checkout and in an installed wheel.
 - Paths are never hard-coded in modules: they come from `scale/layout.py`, which also finds the
-  catalysis domain (`domain/`, its name read from `domain/DOMAIN.yaml`), the proposals (`core/proposals/`
-  and `domain/proposals/`, found by six-digit id or path), the competency questions and the optional
+  catalysis domain (`domain/`, its name read from `domain/DOMAIN.yaml`), the competency questions and the optional
   restricted copy (named by an environment variable only).
 - Tools are deterministic. Anything that calls a model sits behind a skill (or, for feedback
   triage, an external command named with `--agent-command`).
@@ -47,11 +46,11 @@ The tools hold no catalysis-specific code today: the catalysis domain is data (i
 examples, competency questions) that the tools read in `domain/`. Code that only the catalysis domain
 needs would live in `tools/scale/`, reviewed like every change.
 
-Files that enforce governance: the review policy implementation (`tools/scale/policy.py`), the merged
-proposal applier (`tools/scale/apply_merged.py`, run by the apply-proposals workflow), the pull-request
-checks (`tools/scale/ci.py`: `scale ci spec-changes | proposal-check | proposals`), the catalysis and kernel declaration checks
+Files that enforce governance: the review policy implementation (`tools/scale/policy.py`), what a schema
+change must carry (`tools/scale/schema_change.py`: `scale schema diff | bump | check`), the pull-request checks
+(`tools/scale/ci.py`: `scale ci spec-changes`), the catalysis and kernel declaration checks
 (`tools/scale/domains.py`) and the CODEOWNERS evaluator (`tools/scale/codeowners.py`). Changing what they
-enforce needs a decision record. `tools/scale/kg.py` (`scale kg update`) moves a knowledge-graph data
+enforce is a pull request like any other; say so plainly in it. `tools/scale/kg.py` (`scale kg update`) moves a knowledge-graph data
 repository to a new schema version.
 
 ## Skills

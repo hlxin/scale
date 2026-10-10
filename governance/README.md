@@ -9,7 +9,7 @@ every path, is owned by the owner, `@hlxin`.
 
 | file | what it covers |
 |---|---|
-| [GOVERNANCE.md](GOVERNANCE.md) | the owner and the reviewers, one approval for every change, the bootstrap rule, the flow from an issue or a corpus to review, merge, the version bump and the data-repository update; proposals; the catalysis domain; project data |
+| [GOVERNANCE.md](GOVERNANCE.md) | the owner and the reviewers, one approval for every change, the bootstrap rule, the flow from an issue or a corpus to review, merge and the data-repository update; schema changes and their version; the catalysis domain; project data |
 | [working-groups.md](working-groups.md) | how the catalysis domain's maintainers are recorded and what every change in the catalysis domain needs |
 | [release-process.md](release-process.md) | the one process for official releases: freeze, build, review, tag, publish |
 | [licensing.md](licensing.md) | the licences (code MIT; vocabulary, records and documentation CC-BY-4.0; third-party material per NOTICE), contributions, the copyright policy for quoted evidence, project data and access levels, contributions to the catalysis domain, how to cite |
@@ -17,7 +17,7 @@ every path, is owned by the owner, `@hlxin`.
 | [repository-settings.md](repository-settings.md) | the GitHub settings the owner applies: the repository, collaborators, Actions permissions, secrets, rulesets, the `pypi` environment, sharing the repository |
 | [github/ruleset-main.json](github/ruleset-main.json) | branch ruleset for `main` (REST payload) |
 | [github/ruleset-tags.json](github/ruleset-tags.json) | tag ruleset for `v*` (REST payload) |
-| [review-policy.yaml](review-policy.yaml) | the machine-readable review policy (the reviewers, one approval), checked by `scale proposal apply-merged` and `scale review status` |
+| [review-policy.yaml](review-policy.yaml) | the machine-readable review policy (the reviewers, one approval), enforced by the `main` ruleset |
 | [feedback.md](feedback.md) | how comments become changes |
 | [`governance/registry/`](./registry/) | extension prefixes and stewardship (institutions, projects) |
 
@@ -26,19 +26,17 @@ Related: [CONTRIBUTING.md](../CONTRIBUTING.md), [the catalysis domain](../domain
 
 ## Human-only actions
 
-People and agents open pull requests; people decide. These steps are always done by a person:
+Anyone suggests changes or opens pull requests; agents do the work; people decide. These steps are always done by
+a person:
 
-- approving and merging a pull request (one reviewer other than its author, the owner included; the owner's
+- approving and merging a pull request (one reviewer, the person who suggested the change included; the owner's
   own pull requests under the bootstrap rule until another reviewer joins);
 - filling a reviewer seat (a pull request that replaces a placeholder with a real person who agreed);
-- starting the apply-proposals workflow for a merged proposal, or, under the bootstrap rule, applying it
-  (`scale proposal decide --bootstrap-bypass`, then `scale proposal apply --confirm`, in a pull request);
-- starting the scale-agent workflow;
+- handing a suggestion to the agent (the label `agent`, a `@scale-agent` comment, or a manual run);
 - updating a data repository to a new schema version (`scale kg update`) and merging that change;
 - building an official release (`scale release build vX.Y.Z`), tagging it and approving the `pypi`
   deployment;
 - inviting collaborators, setting secrets and applying rulesets ([repository-settings.md](repository-settings.md));
 - registering the PyPI trusted publisher for `scale-schema`.
 
-`scale proposal apply-merged` writes the decision record and applies a proposal only after its pull
-request merged with its approval.
+Nothing is applied after a merge: what merges is what the reviewer approved.
