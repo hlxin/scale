@@ -9,7 +9,7 @@ and tests run on it (`tools/tests/test_example_methanol.py`).
 |---|---|
 | `sources.json` | The frozen corpus: all 178 candidate sources with their status under the cutoff and the scope (105 `in_scope`, 10 held-out targets, 58 not retrieved, 4 off scope, 1 after the cutoff), and for each in-scope source its PDF and the PDF's sha256. `scale corpus check sources.json` checks it. |
 | `pdfs/<slug>.pdf` | The 105 PDFs, **local only** (git-ignored; most are in copyright). |
-| `methanol-synthesis.graph.json` | The curated graph, valid under scale-graph 0.1.0: 4,866 nodes, 16,584 links, 684 catalytic tests, 25,230 evidence items. The baseline until the recuration replaces it. |
+| `methanol-synthesis.graph.json` | The curated graph, valid under scale-graph 0.1.0: 4,866 nodes, 16,584 links, 684 catalytic tests, 25,239 evidence items. The baseline until the recuration replaces it. |
 | `rights.yaml`, `stewardship.yaml` | Each source's rights (the copyright cap), and who curated the graph for which project. |
 | `queries/*.yaml` | The manuscript's questions as query plans. |
 | `methanol-synthesis-pre1966_v2.0.0.zip` | The graph as a knowledge-graph bundle ([kg-bundle format](../../docs/kg-bundle-format.md) 1.1.0), ready to load into a platform that reads the format, titled "Methanol Synthesis CO/CO2+H2 Pre-1966", its schema scale-catal 0.1.0 (the catalysis vocabulary of scale-graph 0.1.0): 17,563 edges, withheld quotes as digests, 227 typed absences; it follows release 1.1.1. |
@@ -87,5 +87,5 @@ Follow the `curate-source` skill (`skills/curate-source/SKILL.md`) one source at
   blank run and a saturator calibration that use no catalyst, which the checklist cannot exempt yet).
 - **Quoted text.** The 55 public-domain sources (US patents, works published before 1931) keep every quote; the 50
   in-copyright sources are capped (300 characters a quote; 4,000 characters and 10 % of the text a source), and
-  6,920 evidence items carry withheld text as sha256 and length (`scale evidence rehydrate` restores them from the
+  6,929 evidence items carry withheld text as sha256 and length (`scale evidence rehydrate` restores them from the
   source texts).

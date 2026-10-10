@@ -2,7 +2,7 @@
   "corpus": "methanol-synthesis historical corpus, frozen for SCALE curation; scoped to methanol synthesis from CO/CO2 + H2 (CO + D2 included).",
   "pdfs": "Local only (git-ignored, most in copyright): pdfs/<slug>.pdf for each in-scope source, copied from the project corpus (<corpus>/<corpus_pdf>); its sha256 must equal text.pdf_sha256. A slug is the DOI with / as - (a patent or report without a DOI: its number or hid).",
   "cutoff": {
-    "caution": "The cutoff does not remove every Cu-Zn-Al disclosure: the corpus leakage audit (historical/LEAKAGE_AUDIT.md) lists US 2,061,470 (Larson, granted 1936), whose Example 10 is 87 CuO / 10 ZnO / 3 Al2O3, and Cu-Zn catalysts from 1928 on. They are in scope and curated as reported; a rediscovery evaluation must hold them out separately if it needs to.",
+    "caution": "The cutoff does not remove every Cu-Zn-Al disclosure: the corpus leakage audit of the earlier curation lists US 2,061,470 (Larson, granted 1936), whose Example 10 is 87 CuO / 10 ZnO / 3 Al2O3, and Cu-Zn catalysts from 1928 on. They are in scope and curated as reported; a rediscovery evaluation must hold them out separately if it needs to.",
     "date": "1966-01-01",
     "patents": "grant (publication) date printed on the patent, not the priority or filing date",
     "rule": "published or publicly disclosed before 1966-01-01",
@@ -782,7 +782,7 @@
       "pdf": "historical/pdfs/10.1021_j150284a006.pdf",
       "published": "1928",
       "slug": "10.1021-j150284a006",
-      "status_reason": "no test of CO or CO2 hydrogenation and no claim rests on it (CO and CO2 hydrogenation scope, tools/curation.py scope)",
+      "status_reason": "no test of CO or CO2 hydrogenation and no claim rests on it (CO and CO2 hydrogenation scope)",
       "text": {
         "chars": 7261,
         "ocr_engine": null,
@@ -2406,7 +2406,7 @@
       "pdf": "historical/pdfs/10.1246_nikkashi1898.54.446.pdf",
       "published": "1951",
       "slug": "10.1246-nikkashi1898.54.446",
-      "status_reason": "no test of CO or CO2 hydrogenation and no claim rests on it (CO and CO2 hydrogenation scope, tools/curation.py scope)",
+      "status_reason": "no test of CO or CO2 hydrogenation and no claim rests on it (CO and CO2 hydrogenation scope)",
       "text": {
         "chars": 6062,
         "ocr_engine": null,
@@ -2432,7 +2432,7 @@
       "pdf": "historical/pdfs/10.1246_nikkashi1898.54.448.pdf",
       "published": "1951",
       "slug": "10.1246-nikkashi1898.54.448",
-      "status_reason": "no test of CO or CO2 hydrogenation and no claim rests on it (CO and CO2 hydrogenation scope, tools/curation.py scope)",
+      "status_reason": "no test of CO or CO2 hydrogenation and no claim rests on it (CO and CO2 hydrogenation scope)",
       "text": {
         "chars": 5628,
         "ocr_engine": null,
