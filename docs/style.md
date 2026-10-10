@@ -8,7 +8,7 @@
 |---|---|---|
 | specifications (the kernel, the catalysis file, schema manifests), the catalysis and kernel declarations (`DOMAIN.yaml`, `CORE.yaml`), schema change proposals, competency questions, skills metadata, project configuration, GitHub templates and workflows | people, reviewed line by line | **YAML**, block style |
 | scale-graph documents, curation fragments, gap reports, approvals, proposal reports, decision log, tool input and output, query results, triage queues and proposals | tools and agents (sometimes people) | **canonical JSON** |
-| exchange with other systems | — | Neo4j JSON lines and GALAXY bundles (`scale graph export`) |
+| exchange with other systems | — | Neo4j JSON lines and kg-bundles (`scale graph export`) |
 
 Tools accept YAML input anywhere a JSON document is expected, and write JSON.
 

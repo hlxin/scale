@@ -15,7 +15,7 @@ What it does not change: a document a step rule cannot map is refused, reported 
 rule says why; a curator fixes the record first); a document whose file name pins a version
 (``*.scale-graph-0.1.0.graph.json``) is a deliberate copy at that version and is kept; a document whose
 migrated form has more validation errors than before is not written; sealed packages (a directory with a
-``.scale-verbatim`` marker, such as GALAXY bundles), local ``work/`` folders and proposal folders
+``.scale-verbatim`` marker, such as kg-bundles), local ``work/`` folders and proposal folders
 (``*/proposals/<NNNNNN>/``: the inputs and history of a proposal, such as the documents it assessed, kept in
 ``before-apply/`` at the versions they pinned) are not read. A document pinning a version this repository does
 not hold is refused (``pgraph.pinned`` says why): its number names no schema here, so no step applies to it.

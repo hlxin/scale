@@ -1,6 +1,6 @@
 """Source lifecycle (in the science kernel, and the tooling that ships with it): a source's publication status derived
 from notice links, the records that rest on retracted sources flagged by the validator, left out of query answers by
-default and marked in the GALAXY export; never rewritten, never deleted. Documents without notices are unchanged.
+default and marked in the kg-bundle export; never rewritten, never deleted. Documents without notices are unchanged.
 Documents are checked under the version they pin; the synthetic lifecycle fixtures (tools/tests/fixtures/source-lifecycle/)
 under the head."""
 
@@ -10,10 +10,10 @@ import shutil
 import pytest
 
 from conftest import COMPETENCY, REPO, spec_of
-from scale import galaxy, lifecycle, pgraph, pgraph_query
+from scale import kgbundle, lifecycle, pgraph, pgraph_query
 from scale.competency import run, run_question
 from scale.util import ScaleError, dump_yaml, load_doc, load_yaml
-from test_graph_search_query import _galaxy_validator
+from test_graph_search_query import _bundle_validator
 
 P9 = REPO / "tools/tests/fixtures/source-lifecycle"            # the fixtures/ of the lifecycle's examples
 FIXTURES_PIN = P9 / "pass-retraction-scope.json"                  # the lifecycle fixtures all pin one version
@@ -469,21 +469,21 @@ def test_the_competency_question_shows_the_exclusion_and_the_opt_in(tmp_path):
     assert "variants[0]: a variant names the plan keys it changes (plan)" in run_question(repo, "catalysis", p)["problems"]
 
 
-# ------------------------------------------------------------------------------------------ GALAXY export (SL-11, PROV-DATA-04)
-def test_the_galaxy_export_keeps_lifecycle_links_and_marks_what_rests_on_them(tmp_path, doc, spec):
-    m = galaxy.export(doc, spec, tmp_path / "b", "lifecycle", created="2026-10-06T00:00:00Z")
+# ------------------------------------------------------------------------------------------ kg-bundle export (SL-11, PROV-DATA-04)
+def test_the_bundle_export_keeps_lifecycle_links_and_marks_what_rests_on_them(tmp_path, doc, spec):
+    m = kgbundle.export(doc, spec, tmp_path / "b", "lifecycle", created="2026-10-06T00:00:00Z")
     g = json.loads((tmp_path / "b/kg/graph.json").read_text())
     nodes = {n["props"].get("scale_id"): n for n in g["nodes"]}
     assert nodes[PAPER_B]["props"]["source_status"] == "retracted" and "source_status" not in nodes[PAPER_A]["props"]
     assert nodes[TEST_B]["props"]["source_status"] == "rests_on_retracted_source" and "source_status" not in nodes[TEST_A]["props"]
     ret = [e for e in g["links"] if e["type"] == "RETRACTS"]
     notice = nodes[NOTICE]["props"]
-    # GALAXY wants a quote on every substantive edge: a notice link without one cites the notice's title
+    # the format wants a quote on every substantive edge: a notice link without one cites the notice's title
     assert len(ret) == 1 and ret[0]["props"]["metadata_only"] is True
     assert ret[0]["props"]["_evidence"] == [{"quote": notice["title"], "source_id": notice["source_id"], "locator": {"section": "title"}}]
     assert ret[0]["props"]["source_paper_ids"] == [notice["source_id"]]
     assert ret[0]["source"] == nodes[NOTICE]["id"] and ret[0]["target"] == nodes[PAPER_B]["id"]
-    # the derived properties are declared, as GALAXY asks (it reserves names that begin with an underscore)
+    # the derived properties are declared, as the format asks (it reserves names that begin with an underscore)
     schema = json.loads((tmp_path / "b/kg/schema.json").read_text())
     assert schema["node_types"]["Publication"]["properties"]["source_status"]["type"] == "enum"
     assert schema["edge_types"]["RETRACTS"]["properties"]["metadata_only"]["type"] == "boolean"
@@ -496,9 +496,9 @@ def test_the_galaxy_export_keeps_lifecycle_links_and_marks_what_rests_on_them(tm
                if x["props"].get("source_status") == "rests_on_retracted_source"}
     assert len(flagged) == 3 and rep["source_lifecycle"]["rests_on_retracted_source"] == len(flagged)
     assert rep["source_lifecycle"]["sources_by_status"] == {"retracted": 1}
-    v = _galaxy_validator()
+    v = _bundle_validator()
     if v:
-        galaxy.seal(tmp_path / "b")
+        kgbundle.seal(tmp_path / "b")
         res = v.validate_bundle(tmp_path / "b")
         assert res.ok, [f.message for f in res.errors][:5]
     # a notice without a title cannot be cited: its link is not exported, and the report says so
@@ -506,12 +506,12 @@ def test_the_galaxy_export_keeps_lifecycle_links_and_marks_what_rests_on_them(tm
     for n in untitled["nodes"]:
         if n["id"] == NOTICE:
             n["props"].pop("title"), n["props"].pop("name")
-    rep = galaxy.export(untitled, spec, tmp_path / "u", "untitled", created="2026-10-06T00:00:00Z")["export_report"]
+    rep = kgbundle.export(untitled, spec, tmp_path / "u", "untitled", created="2026-10-06T00:00:00Z")["export_report"]
     assert rep["not_exported_links"]["RETRACTS"] == 1 and "lifecycle_links_metadata_only" not in rep
     # a notice link to a Dataset keeps both ends: the dataset is reported in the notice, and the report counts only
     # the notice links the bundle holds
     cand = spec_of(load_doc(FIXTURES_PIN))
-    m = galaxy.export(load_doc(P9 / "pass-retraction-scope.json"), cand, tmp_path / "r", "scope",
+    m = kgbundle.export(load_doc(P9 / "pass-retraction-scope.json"), cand, tmp_path / "r", "scope",
                       created="2026-10-06T00:00:00Z")
     g = json.loads((tmp_path / "r/kg/graph.json").read_text())
     by_scale = {n["props"].get("scale_id"): n for n in g["nodes"]}
@@ -525,66 +525,66 @@ def test_the_galaxy_export_keeps_lifecycle_links_and_marks_what_rests_on_them(tm
     assert rep["lifecycle_links_metadata_only"] == len(held) == 3 and "RETRACTS" not in rep["not_exported_links"]
     assert {e["source"] for e in g["links"]} | {e["target"] for e in g["links"]} <= {n["id"] for n in g["nodes"]}
     if v:
-        galaxy.seal(tmp_path / "r")
+        kgbundle.seal(tmp_path / "r")
         res = v.validate_bundle(tmp_path / "r")
         assert res.ok, [f.message for f in res.errors][:5]
-    plain = galaxy.export(load_doc(X / "example.json"), spec, tmp_path / "p", "plain",
+    plain = kgbundle.export(load_doc(X / "example.json"), spec, tmp_path / "p", "plain",
                           created="2026-10-06T00:00:00Z")
     assert "source_lifecycle" not in plain["export_report"] and "source_status" not in (tmp_path / "p/kg/graph.json").read_text()
 
 
-def test_the_galaxy_export_keeps_bases_apart_and_says_what_it_converted(tmp_path, doc, spec):
+def test_the_bundle_export_keeps_bases_apart_and_says_what_it_converted(tmp_path, doc, spec):
     V = lambda value, unit, **k: {"status": "present", "value": value, "unit": unit, **k}  # noqa: E731
-    assert galaxy.target("pressure", V(100, "psig")) == "pressure_gauge"
-    assert galaxy.quantity("pressure", V(100, "psig"))[0]["value"] == pytest.approx(0.689476)      # in its unit, not + 1 atm
-    assert galaxy.target("pressure", V(100, "lbf/in2 (gauge)")) == "pressure_gauge"
-    assert galaxy.target("pressure", V(100, "atm", as_reported="100 atm. gauge")) == "pressure_gauge"
-    assert galaxy.target("pressure", V(150, "atm", note="absolute")) == "pressure"
-    assert galaxy.target("pressure", V(100, "atm", note="absolute, not gauge")) == "pressure"
+    assert kgbundle.target("pressure", V(100, "psig")) == "pressure_gauge"
+    assert kgbundle.quantity("pressure", V(100, "psig"))[0]["value"] == pytest.approx(0.689476)      # in its unit, not + 1 atm
+    assert kgbundle.target("pressure", V(100, "lbf/in2 (gauge)")) == "pressure_gauge"
+    assert kgbundle.target("pressure", V(100, "atm", as_reported="100 atm. gauge")) == "pressure_gauge"
+    assert kgbundle.target("pressure", V(150, "atm", note="absolute")) == "pressure"
+    assert kgbundle.target("pressure", V(100, "atm", note="absolute, not gauge")) == "pressure"
     # the value's own basis wins over a gauge equivalent given in parentheses
     absolute = V(178, "atm", basis="absolute", as_reported="178 atmospheres absolute (2600 pounds per square inch gage)")
-    assert galaxy.target("pressure", absolute) == "pressure"
-    assert galaxy.quantity("pressure", absolute)[0]["value"] == pytest.approx(18.03585)
-    assert galaxy.target("pressure", V(178, "atm", as_reported="178 atmospheres absolute (2600 pounds per square inch gage)")) \
+    assert kgbundle.target("pressure", absolute) == "pressure"
+    assert kgbundle.quantity("pressure", absolute)[0]["value"] == pytest.approx(18.03585)
+    assert kgbundle.target("pressure", V(178, "atm", as_reported="178 atmospheres absolute (2600 pounds per square inch gage)")) \
         == "pressure"
-    assert galaxy.target("pressure", V(2600, "psi", basis="gauge")) == "pressure_gauge"
-    assert galaxy.target("pressure", V(2600, "psia", as_reported="2600 psia (gauge reading 2585)")) == "pressure"
-    assert galaxy.target("pressure", V(4850, "psi", as_reported="4850 p.s.i.g.")) == "pressure_gauge"
-    assert galaxy.target("pressure", V(2600, "psi", as_reported="2600 pounds per square inch gage (178 atm abs.)")) \
+    assert kgbundle.target("pressure", V(2600, "psi", basis="gauge")) == "pressure_gauge"
+    assert kgbundle.target("pressure", V(2600, "psia", as_reported="2600 psia (gauge reading 2585)")) == "pressure"
+    assert kgbundle.target("pressure", V(4850, "psi", as_reported="4850 p.s.i.g.")) == "pressure_gauge"
+    assert kgbundle.target("pressure", V(2600, "psi", as_reported="2600 pounds per square inch gage (178 atm abs.)")) \
         == "pressure_gauge"
     # a parenthetical that holds only a basis is the value's own: "20 bar (gauge)", "20 bar(g)" are gauge
     for reported in ("20 bar (gauge)", "20 bar(g)", "20 bar (g)", "20 bar (gage)"):
-        assert galaxy.target("pressure", V(20, "bar", as_reported=reported)) == "pressure_gauge", reported
-        assert galaxy.quantity("pressure", V(20, "bar", as_reported=reported))[0]["value"] == pytest.approx(2.0)
-    assert galaxy.target("pressure", V(20, "bar(g)")) == "pressure_gauge"
-    assert galaxy.quantity("pressure", V(20, "bar (g)"))[0]["unit"] == "MPa"
-    assert galaxy.target("pressure", V(20, "bar(a)")) == "pressure" and galaxy.pressure_basis(V(20, "bar(a)")) == "absolute"
-    assert galaxy.pressure_basis(V(20, "bar", as_reported="20 bar (abs)")) == "absolute"
-    assert galaxy.pressure_basis(V(20, "bar", as_reported="20 bar")) == "unstated"
+        assert kgbundle.target("pressure", V(20, "bar", as_reported=reported)) == "pressure_gauge", reported
+        assert kgbundle.quantity("pressure", V(20, "bar", as_reported=reported))[0]["value"] == pytest.approx(2.0)
+    assert kgbundle.target("pressure", V(20, "bar(g)")) == "pressure_gauge"
+    assert kgbundle.quantity("pressure", V(20, "bar (g)"))[0]["unit"] == "MPa"
+    assert kgbundle.target("pressure", V(20, "bar(a)")) == "pressure" and kgbundle.pressure_basis(V(20, "bar(a)")) == "absolute"
+    assert kgbundle.pressure_basis(V(20, "bar", as_reported="20 bar (abs)")) == "absolute"
+    assert kgbundle.pressure_basis(V(20, "bar", as_reported="20 bar")) == "unstated"
     # a text that names both bases outside parentheses, with no basis stated, is not converted either way
     mixed = V(2600, "psi", as_reported="2600 psi gauge, i.e. 178 atm absolute")
-    assert galaxy.pressure_basis(mixed) == "unclear" and galaxy.target("pressure", mixed) == "pressure"
-    assert galaxy.quantity("pressure", mixed) == (None, "2600 psi gauge, i.e. 178 atm absolute")
-    assert galaxy.target("pressure", {**mixed, "basis": "gauge"}) == "pressure_gauge"            # a stated basis decides
-    assert galaxy.target("space_velocity", V(5000, "vol H2/vol catalyst/h")) == "space_velocity_h2"
-    assert galaxy.target("space_velocity", V(5000, "L exit gas (std. cond.) per L catalyst per h")) == "space_velocity_exit_gas"
-    assert galaxy.target("space_velocity", V(5000, "h-1")) == "space_velocity"
-    assert galaxy.quantity("space_velocity", V(50, "cc/cc/min"))[0]["value"] == 3000.0              # time unit only
-    q, _ = galaxy.quantity("temperature", V(380, "°C", uncertainty=2, uncertainty_kind="standard_deviation"))
+    assert kgbundle.pressure_basis(mixed) == "unclear" and kgbundle.target("pressure", mixed) == "pressure"
+    assert kgbundle.quantity("pressure", mixed) == (None, "2600 psi gauge, i.e. 178 atm absolute")
+    assert kgbundle.target("pressure", {**mixed, "basis": "gauge"}) == "pressure_gauge"            # a stated basis decides
+    assert kgbundle.target("space_velocity", V(5000, "vol H2/vol catalyst/h")) == "space_velocity_h2"
+    assert kgbundle.target("space_velocity", V(5000, "L exit gas (std. cond.) per L catalyst per h")) == "space_velocity_exit_gas"
+    assert kgbundle.target("space_velocity", V(5000, "h-1")) == "space_velocity"
+    assert kgbundle.quantity("space_velocity", V(50, "cc/cc/min"))[0]["value"] == 3000.0              # time unit only
+    q, _ = kgbundle.quantity("temperature", V(380, "°C", uncertainty=2, uncertainty_kind="standard_deviation"))
     assert q["uncertainty"] == {"kind": "std", "plus_minus": 2.0}                                    # the offset cancels
     t = next(n for n in doc["nodes"] if n["id"] == TEST_A)
     t["props"]["pressure"] = V(100, "psig")
     t["props"]["space_velocity"] = V(5000, "vol H2/vol catalyst/h", basis="H2 fed per volume of catalyst")
     t["props"]["temperature"] = {"status": "present", "lower": 350, "upper": 370, "unit": "°C"}
     next(n for n in doc["nodes"] if n["id"] == TEST_B)["props"]["pressure"] = mixed
-    m = galaxy.export(doc, spec, tmp_path / "b", "bases", created="2026-10-06T00:00:00Z")
+    m = kgbundle.export(doc, spec, tmp_path / "b", "bases", created="2026-10-06T00:00:00Z")
     g = json.loads((tmp_path / "b/kg/graph.json").read_text())
     p = next(n for n in g["nodes"] if n["props"].get("scale_id") == TEST_A)["props"]
     assert p["pressure_gauge"]["unit"] == "MPa" and "pressure" not in p
     assert p["space_velocity_h2"]["value"] == 5000.0 and p["space_velocity_h2_basis"] == "H2 fed per volume of catalyst"
     assert p["temperature"]["uncertainty"] == {"kind": "range", "low": 623.15, "high": 643.15}
     pb = next(n for n in g["nodes"] if n["props"].get("scale_id") == TEST_B)["props"]
-    assert pb["pressure_as_reported"] == mixed["as_reported"] and pb["pressure_note"] == galaxy.UNCLEAR_PRESSURE
+    assert pb["pressure_as_reported"] == mixed["as_reported"] and pb["pressure_note"] == kgbundle.UNCLEAR_PRESSURE
     assert "pressure" not in pb and "pressure_gauge" not in pb and m["export_report"]["pressure_basis_unclear"] == 1
     schema = json.loads((tmp_path / "b/kg/schema.json").read_text())["node_types"]["CatalyticTest"]["properties"]
     assert "never an absolute pressure" in schema["pressure_gauge"]["description"]
@@ -593,9 +593,9 @@ def test_the_galaxy_export_keeps_bases_apart_and_says_what_it_converted(tmp_path
     assert m["export_report"]["kept_apart_by_basis"] == {"pressure_gauge": 1, "space_velocity_h2": 1}
 
 
-def test_the_galaxy_export_report_counts_only_the_conversions_the_bundle_holds(tmp_path, doc, spec):
+def test_the_bundle_export_report_counts_only_the_conversions_the_bundle_holds(tmp_path, doc, spec):
     """A record no source reports is not exported: what converting its values did is not counted either."""
-    base = galaxy.export(json.loads(json.dumps(doc)), spec, tmp_path / "a", "base", created="2026-10-06T00:00:00Z")["export_report"]
+    base = kgbundle.export(json.loads(json.dumps(doc)), spec, tmp_path / "a", "base", created="2026-10-06T00:00:00Z")["export_report"]
     orphan = json.loads(json.dumps(next(n for n in doc["nodes"] if n["id"] == TEST_A)))
     orphan["id"] += "-unreported"
     orphan["props"].pop("evidence", None)
@@ -603,7 +603,7 @@ def test_the_galaxy_export_report_counts_only_the_conversions_the_bundle_holds(t
                            pressure={"status": "present", "value": 20, "unit": "barg"},
                            space_velocity={"status": "present", "value": 5, "unit": "vol/vol/h"})
     doc["nodes"].append(orphan)
-    rep = galaxy.export(doc, spec, tmp_path / "b", "orphan", created="2026-10-06T00:00:00Z")["export_report"]
+    rep = kgbundle.export(doc, spec, tmp_path / "b", "orphan", created="2026-10-06T00:00:00Z")["export_report"]
     g = json.loads((tmp_path / "b/kg/graph.json").read_text())
     assert orphan["id"] not in {n["props"].get("scale_id") for n in g["nodes"]}
     assert rep["nodes_not_exported_no_source"] == base.get("nodes_not_exported_no_source", 0) + 1
@@ -611,18 +611,18 @@ def test_the_galaxy_export_report_counts_only_the_conversions_the_bundle_holds(t
         assert rep.get(k) == base.get(k), k
     # the same record, reported, is counted
     orphan["props"]["evidence"] = next(n for n in doc["nodes"] if n["id"] == TEST_A)["props"]["evidence"]
-    rep = galaxy.export(doc, spec, tmp_path / "c", "reported", created="2026-10-06T00:00:00Z")["export_report"]
+    rep = kgbundle.export(doc, spec, tmp_path / "c", "reported", created="2026-10-06T00:00:00Z")["export_report"]
     assert rep["ranges_as_midpoint"]["temperature"] == (base.get("ranges_as_midpoint") or {}).get("temperature", 0) + 1
     assert rep["kept_apart_by_basis"]["pressure_gauge"] == (base.get("kept_apart_by_basis") or {}).get("pressure_gauge", 0) + 1
     assert rep["values_as_text"]["space_velocity"] == base["values_as_text"].get("space_velocity", 0) + 1
 
 
 @pytest.mark.parametrize("fixture", sorted(p.name for p in P9.glob("pass-*.json")))
-def test_the_galaxy_export_of_every_pass_fixture_is_a_valid_bundle(tmp_path, fixture):
-    """A document of sources and notices alone reports nothing: the bundle declares no REPORTED_IN (GALAXY
+def test_the_bundle_export_of_every_pass_fixture_is_a_valid_bundle(tmp_path, fixture):
+    """A document of sources and notices alone reports nothing: the bundle declares no REPORTED_IN (the format
     rejects an edge type with an empty from), and it validates."""
     d = load_doc(P9 / fixture)
-    m = galaxy.export(d, spec_of(d), tmp_path / "b", "fx", created="2026-10-06T00:00:00Z")
+    m = kgbundle.export(d, spec_of(d), tmp_path / "b", "fx", created="2026-10-06T00:00:00Z")
     schema = json.loads((tmp_path / "b/kg/schema.json").read_text())
     assert all(t["from"] and t["to"] for t in schema["edge_types"].values())
     g = json.loads((tmp_path / "b/kg/graph.json").read_text())
@@ -630,8 +630,8 @@ def test_the_galaxy_export_of_every_pass_fixture_is_a_valid_bundle(tmp_path, fix
         assert "REPORTED_IN" not in schema["edge_types"]
     held = {e["props"]["scale_id"] for e in g["links"] if e["props"].get("metadata_only")}
     assert m["export_report"].get("lifecycle_links_metadata_only", 0) == len(held)
-    v = _galaxy_validator()
+    v = _bundle_validator()
     if v:
-        galaxy.seal(tmp_path / "b")
+        kgbundle.seal(tmp_path / "b")
         res = v.validate_bundle(tmp_path / "b")
         assert res.ok, [f.message for f in res.errors][:5]

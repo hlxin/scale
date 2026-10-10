@@ -190,7 +190,7 @@ Never record `± 0`: keep the printed text in `as_reported` and leave `uncertain
   when its identity is unambiguous (the formula fixes it, or the InChIKey or InChI matches); a
   different polymorph or phase is a different Material. Uncertain matches stay separate records.
   When the schema has `former_ids` (planned: domain/ROADMAP.md), the surviving record of a merge lists the
-  retired ids there; until then the merge map is kept beside the document (the GALAXY export's
+  retired ids there; until then the merge map is kept beside the document (the kg-bundle export's
   `--replaced`).
 - **Rights follow the copy read.** Read the licence from the copy you read (its first page, the
   publisher's article page), never from aggregator metadata or open-access colour, and say where in
