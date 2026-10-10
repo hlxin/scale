@@ -73,7 +73,7 @@ file too (`'{"name": "curate-source", "reference": "references/recipes.md"}'`).
 | `query-graph` | answer a question with a graph query plan: rows as reported with evidence, what was left out and why, the coverage, the kind of answer |
 | `map-coverage` | a coverage map (materials by properties by conditions) from query plans, each kind of absence kept apart, gaps routed |
 | `scan-conflicts` | pair values that seem to disagree and classify each pair as genuine, apparent (with the axis) or not comparable; never rewriting a value |
-| `export-graph` | hand a document to another system: validated, capped, filtered for its audience, native or GALAXY with its losses stated, sealed and linked to its previous release |
+| `export-graph` | hand a document to another system: validated, capped, filtered for its audience, native or as a kg-bundle with its losses stated, sealed and linked to its previous release |
 | `evolve-schema` | turn missing-concept gaps into a reviewable schema change proposal |
 | `triage-feedback` | sort community feedback into topics and options for the reviewers |
 

@@ -28,7 +28,7 @@ scale graph index my-source.json                           # optional: saves the
 Before the first source, freeze the corpus: a manifest that lists every candidate source with its `status` (included,
 or the reason it is left out, such as `not_retrieved`, `off_scope` or `after_cutoff`; a bare `excluded` needs a
 `status_reason`) and `counts` that add up to the candidates. `scale corpus check sources.json` checks it (the methanol example's `sources.json` is one) and
-prints the corpus block a GALAXY bundle carries (`scale graph export --to galaxy --corpus …`). A corpus frozen by a
+prints the corpus block a kg-bundle carries (`scale graph export --to kg-bundle --corpus …`). A corpus frozen by a
 declared rule is not a database search, so it has no PRISMA identities to report.
 
 `--source-text` enables verbatim quote checks. The text is HTML-unescaped **before** matching,
@@ -109,7 +109,7 @@ source must be within its cap.
   ECO:0000033` and names the cited work in the locator or note (the source's own work is ECO:0000006,
   experimental, or ECO:0007672, computational). When the cited work is in the corpus, curate the value
   from it instead. Queries name second-hand evidence and `own_work_only` leaves it out
-  ([querying.md](querying.md)); the validator counts it; a GALAXY export leaves out a source's edge
+  ([querying.md](querying.md)); the validator counts it; a kg-bundle export leaves out a source's edge
   that rests on it alone (`second_hand_not_exported`).
 - **Keys and qualifiers.** One key per quantity, with what the value is about in its fields: the
   species in `target`, the basis in `basis`, the measurand in `variable`, the method in `definition`.
@@ -224,7 +224,7 @@ curated document keeps the agreements and the OCR engines they were computed wit
 An interpretation is a Claim and a proposal a Hypothesis (links `status: hypothesized`). Once the pinned
 schema declares `statement_kind` on links (planned: [domain/ROADMAP.md](../domain/ROADMAP.md); check with `scale graph describe`), interpretive
 links (HAS_SITE, INHIBITED_BY, IDENTIFIED_AS, and CATALYZES when the source infers it) say `conclusion`
-and links taken as given say `assumption`; the GALAXY export writes it as `_statement` and, until then,
+and links taken as given say `assumption`; the kg-bundle export writes it as `_statement` and, until then,
 infers it and counts the inferences.
 
 ## Recipes
@@ -259,7 +259,7 @@ curated. Record what you know; never delete or rewrite the records that cite it.
   source, and record that notice; the validator warns otherwise (`retracted_without_notice`).
 - **The records stay.** The validator flags what rests on retracted sources
   (`rests_on_retracted_source`, `partially_rests_on_retracted_source`, `supported_on_retracted_sources`),
-  queries leave those rows out unless asked (`include_retracted`), and the GALAXY export marks them. A
+  queries leave those rows out unless asked (`include_retracted`), and the kg-bundle export marks them. A
   retraction does not make a finding false; it removes its support.
 - **Checking.** Record `status_check` (`checked_on`, `checked_via`, `result`) on a Source or
   Dataset only when someone actually checked for notices, saying when and by what means; never as a
@@ -299,5 +299,5 @@ measurement. Merges must be recorded with evidence, and uncertain matches stay s
   InChI matches. A different polymorph or phase is a different Material.
 - When the schema has `former_ids` (planned: [domain/ROADMAP.md](../domain/ROADMAP.md)), the surviving record of a merge lists the
   retired ids there. Until then the merge map (retired id to survivor) is kept beside the document,
-  and the GALAXY export lists retired released ids on their survivors (`--replaced FILE` with
+  and the kg-bundle export lists retired released ids on their survivors (`--replaced FILE` with
   `--previous`).

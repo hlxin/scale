@@ -35,9 +35,9 @@ the science kernel and the catalysis domain (the first is `000001`).
   - a relative uncertainty (an RSD, "± 5 %" of the value) as a form of the value object's uncertainty, and an
     interquartile range as an uncertainty kind (until then: `as_reported` and `note`);
   - `statement_kind` on links (`conclusion` for interpretive links such as HAS_SITE, INHIBITED_BY, IDENTIFIED_AS
-    and an inferred CATALYZES; `assumption` for links taken as given), which the GALAXY export infers until then;
+    and an inferred CATALYZES; `assumption` for links taken as given), which the kg-bundle export infers until then;
   - `former_ids` on the surviving record of a merge (until then the merge map is kept beside the document and
-    given to the GALAXY export with `--replaced`);
+    given to the kg-bundle export with `--replaced`);
   - `update_type: reinstatement` for a notice that reverses a retraction or an expression of concern (until then
     it goes in the retracted source's `unmodeled` list).
 - **Characterization results as declared properties** (catalysis): specific and external surface area, pore

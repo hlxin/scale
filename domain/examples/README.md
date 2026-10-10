@@ -15,5 +15,5 @@ Every committed document is public (`scale evidence access` checks it in `scale 
 is not cleared for publication is never committed: it stays with its project. A source-grounded example added here
 quotes its sources only within the copyright cap (`rights.yaml` beside it; [docs/curation.md](../../docs/curation.md)).
 Local material of an example (source texts, OCR output, scratch: `work/`, `scratchpad/`, `curation/ocr/`) is
-ignored by git and never bundled. A directory holding a `.scale-verbatim` marker (a sealed GALAXY bundle, for
+ignored by git and never bundled. A directory holding a `.scale-verbatim` marker (a sealed kg-bundle, for
 example) is kept as-is and is not reformatted.

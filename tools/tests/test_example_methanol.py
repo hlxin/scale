@@ -161,7 +161,28 @@ def test_the_corpus_is_one_checked_manifest_with_local_pdfs(manifest):
     assert all(s["slug"] == s["doi"].replace("/", "-") for s in inscope if s.get("doi"))
     assert "pdfs/" in (EX / ".gitignore").read_text().split()
     assert sorted(p.name for p in EX.iterdir() if not p.name.startswith(".") and p.name not in ("pdfs", "work")) == [
-        "README.md", "methanol-synthesis.graph.json", "queries", "rights.yaml", "sources.json", "stewardship.yaml"]
+        "README.md", "methanol-synthesis-pre1966_v1.1.0.zip", "methanol-synthesis.graph.json", "queries", "rights.yaml",
+        "sources.json", "stewardship.yaml"]
+
+
+def test_the_bundle_is_this_graph_sealed():
+    """The knowledge-graph bundle (kg-bundle format 1.1.0): one folder at the top of the zip, every file matching
+    SHA256SUMS, the manifest's graph digest that of the graph inside, and that graph exported from this example."""
+    import hashlib
+    import json
+    import zipfile
+    z = zipfile.ZipFile(EX / "methanol-synthesis-pre1966_v1.1.0.zip")
+    root = "methanol-synthesis-pre1966_v1.1.0/"
+    assert {n.split("/")[0] for n in z.namelist()} == {root.rstrip("/")}
+    sums = dict(reversed(line.split("  ", 1)) for line in z.read(root + "SHA256SUMS").decode().splitlines())
+    assert all(hashlib.sha256(z.read(root + f)).hexdigest() == h for f, h in sums.items())
+    m = json.loads(z.read(root + "bundle.json"))
+    assert (m["format_version"], m["bundle_id"], m["version"], m["previous"]["version"]) == (
+        "1.1.0", "methanol-synthesis-pre1966", "1.1.0", "1.0.0")
+    graph = z.read(root + "kg/graph.json")
+    assert m["graph_sha256"] == hashlib.sha256(graph).hexdigest() and m["counts"]["edges"] == 17563
+    assert m["scale_header"]["graph_id"] == load_doc(GRAPH)["graph"]["graph_id"]
+    assert json.loads(z.read(root + "validation.json"))["ok"]
 
 
 def test_the_graph_is_scoped_to_the_benchmark_corpus(pg, manifest):

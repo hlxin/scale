@@ -117,13 +117,13 @@ def _viewer_doc(args, doc=None):
 
 
 def _bundle_audience(args, doc) -> dict | None:
-    """The audience a GALAXY bundle declares (galaxy.export's ``access``): public with --public; with --as, the
+    """The audience a kg-bundle declares (kgbundle.export's ``access``): public with --public; with --as, the
     viewer's own, one project ({access: project, project}) or institutions ({access: institution, contributed_by});
     otherwise None, the graph's stewardship. A person, several projects, a mix or an id the graph does not hold has
     no stewardship to declare, so it is refused."""
     from . import pgraph
     if args.public and args.viewer:
-        raise ScaleError("a GALAXY bundle has one audience: give --public or --as, not both")
+        raise ScaleError("a kg-bundle has one audience: give --public or --as, not both")
     if args.public:
         return {"access": "public"}
     if args.viewer is None:
@@ -133,7 +133,7 @@ def _bundle_audience(args, doc) -> dict | None:
         return declared
     labels = {n["id"]: n["label"] for n in doc["nodes"]}
     named = ", ".join(f"{v} ({labels.get(v) or 'not in the graph'})" for v in sorted(set(args.viewer)))
-    raise ScaleError(f"--as {named}: a GALAXY bundle declares its audience as a stewardship, so name one project or "
+    raise ScaleError(f"--as {named}: a kg-bundle declares its audience as a stewardship, so name one project or "
                      "one or more institutions of the graph (for a person, their institution), or use --public; "
                      "scale graph filter --as filters for any viewer")
 
@@ -147,10 +147,10 @@ def cmd_graph_filter(args):
 
 def cmd_graph_export(args):
     from . import pgraph
-    if args.to == "galaxy":
-        from . import galaxy
+    if args.to == "kg-bundle":
+        from . import kgbundle
         if not args.out:
-            raise ScaleError("a GALAXY bundle is a folder: give --out DIR")
+            raise ScaleError("a kg-bundle is a folder: give --out DIR")
         doc = load_doc(args.file)
         # the bundle declares its audience: the graph's stewardship, the public (--public) or the viewer's own (--as)
         access = _bundle_audience(args, doc)
@@ -167,9 +167,9 @@ def cmd_graph_export(args):
         bid = args.bundle_id or (doc["graph"].get("graph_id") or "scale-graph").split(":")[-1].replace("/", "-")
         lineage = _bundle_lineage(args)
         unshipped: list[str] = []
-        m = galaxy.export(doc, spec, Path(args.out), bid, lineage.pop("version"), texts or None, created=args.created,
+        m = kgbundle.export(doc, spec, Path(args.out), bid, lineage.pop("version"), texts or None, created=args.created,
                           access=access, keep_less_open=args.keep_less_open, unshipped=unshipped, **lineage)
-        galaxy.seal(Path(args.out))
+        kgbundle.seal(Path(args.out))
         if m["export_report"].get("access_warning"):
             print(f"scale: warning: {m['export_report']['access_warning']}", file=sys.stderr)
         if unshipped:                    # named here only: bundle.json counts them
@@ -183,7 +183,7 @@ def cmd_graph_export(args):
 
 
 def _bundle_lineage(args) -> dict:
-    """The release lineage of a GALAXY export from its options: the previous release (ids frozen, recorded as the
+    """The release lineage of a kg-bundle export from its options: the previous release (ids frozen, recorded as the
     predecessor) or an earlier build whose ids to keep, the merge map of retired records and the corpus block."""
     from . import corpus as corpus_mod
     if args.previous and args.ids_from:
@@ -194,7 +194,7 @@ def _bundle_lineage(args) -> dict:
         if opt:
             d = Path(opt)
             if not (d / "bundle.json").is_file():
-                raise ScaleError(f"{d}: not a GALAXY bundle folder (no bundle.json)")
+                raise ScaleError(f"{d}: not a kg-bundle folder (no bundle.json)")
             out[key] = d
     if args.previous and not args.version:
         prev = json.loads((Path(args.previous) / "bundle.json").read_text()).get("version")
@@ -1056,24 +1056,24 @@ def build_parser() -> argparse.ArgumentParser:
     sp = add("migrate", cmd_graph_migrate, "move a scale-graph document along the schema's version steps to the current version (ids kept)", gr)
     sp.add_argument("file"); sp.add_argument("dest", help="where to write the migrated document"); sp.add_argument("--spec")
     out_opts(sp)
-    sp = add("export", cmd_graph_export, "export: Neo4j/APOC JSON lines, or a GALAXY knowledge-graph bundle (--to galaxy)", gr)
+    sp = add("export", cmd_graph_export, "export: Neo4j/APOC JSON lines, or a knowledge-graph bundle (--to kg-bundle)", gr)
     sp.add_argument("file"); sp.add_argument("--out"); viewer_opts(sp)
-    sp.add_argument("--to", choices=["neo4j", "galaxy"], default="neo4j"); sp.add_argument("--spec")
+    sp.add_argument("--to", choices=["neo4j", "kg-bundle"], default="neo4j"); sp.add_argument("--spec")
     sp.add_argument("--bundle-id"); sp.add_argument("--version", help="the bundle's version (default 1.0.0; with --previous, "
                                                                       "required and later than the previous release's)")
     sp.add_argument("--created", help="ISO timestamp (default: now, in UTC); embargoes are read on its day or today (the "
                     "earlier of the local and the UTC date), whichever is earlier")
     sp.add_argument("--text", action="append", help="<publication source_id>=<file>:<licence> to ship a redistributable text (the licence is required)")
-    sp.add_argument("--keep-less-open", action="store_true", help="GALAXY: export records less open than the bundle's "
+    sp.add_argument("--keep-less-open", action="store_true", help="kg-bundle: export records less open than the bundle's "
                     "access (the graph's stewardship; public with --public; the viewer's, one project or institutions, with "
                     "--as), marked with scale_access and their project or institutions, instead of withholding them")
-    sp.add_argument("--previous", metavar="DIR", help="GALAXY: the previous release's bundle folder: its ids are kept, it is "
+    sp.add_argument("--previous", metavar="DIR", help="kg-bundle: the previous release's bundle folder: its ids are kept, it is "
                     "recorded as the predecessor (bundle.json previous and changes) and its changelog is carried forward")
-    sp.add_argument("--ids-from", metavar="DIR", help="GALAXY: an earlier build whose ids to keep, without recording it as "
+    sp.add_argument("--ids-from", metavar="DIR", help="kg-bundle: an earlier build whose ids to keep, without recording it as "
                     "the previous release")
-    sp.add_argument("--replaced", metavar="FILE", help="GALAXY: JSON or YAML map of a retired scale-graph id to the id of the "
+    sp.add_argument("--replaced", metavar="FILE", help="kg-bundle: JSON or YAML map of a retired scale-graph id to the id of the "
                     "record it was merged into; the survivor lists the retired record's released id in replaced_ids")
-    sp.add_argument("--corpus", metavar="MANIFEST", help="GALAXY: the frozen corpus manifest; checked as scale corpus check "
+    sp.add_argument("--corpus", metavar="MANIFEST", help="kg-bundle: the frozen corpus manifest; checked as scale corpus check "
                     "does, it fills bundle.json's corpus block")
     sp = add("describe", cmd_graph_describe, "labels and edge types with their properties (what a curator may use)", gr)
     sp.add_argument("names", nargs="*", help="labels or edge types (default: all)"); sp.add_argument("--domain", dest="profile", help="whose checklist to show (catalysis): its items and `when` cases next to each label")
@@ -1136,7 +1136,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     cp = sub.add_parser("corpus", help="a frozen corpus manifest").add_subparsers(dest="sub", required=True)
     sp = add("check", cmd_corpus_check, "every candidate source has a status (included, or the reason it was left out) and the "
-             "counts add up; prints the GALAXY corpus block", cp)
+             "counts add up; prints the bundle corpus block", cp)
     sp.add_argument("manifest", help="the corpus manifest (JSON or YAML: sources with slug and status, optional counts)")
     sp.add_argument("--included", action="append", metavar="STATUS",
                     help="a status that means included (repeatable; default: in_scope, included)")
