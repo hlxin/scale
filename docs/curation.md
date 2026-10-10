@@ -27,7 +27,7 @@ scale graph index my-source.json                           # optional: saves the
 
 Before the first source, freeze the corpus: a manifest that lists every candidate source with its `status` (included,
 or the reason it is left out, such as `not_retrieved`, `off_scope` or `after_cutoff`; a bare `excluded` needs a
-`status_reason`) and `counts` that add up to the candidates. `scale corpus check corpus/manifest.json` checks it and
+`status_reason`) and `counts` that add up to the candidates. `scale corpus check sources.json` checks it (the methanol example's `sources.json` is one) and
 prints the corpus block a GALAXY bundle carries (`scale graph export --to galaxy --corpus …`). A corpus frozen by a
 declared rule is not a database search, so it has no PRISMA identities to report.
 

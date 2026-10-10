@@ -47,6 +47,11 @@ For large graphs, `scale graph index` saves the index (`<graph>.evidence.jsonl`,
 postings) so that a query reads it instead of building it; in a long-running process (the agent tools, MCP) the
 vectors are kept in memory after the first query when they fit 2 GB (about a million quotes).
 
+To run several plans on one document from Python, build its query graph once, `g = pgraph_query.Graph(doc, spec)`,
+and pass it to each `pgraph_query.run(doc, spec, plan, index, g)`: what every query needs whatever its plan (the
+document's digest and access, its sources' publication status, its evidence quotes) is computed once. The agent
+tools do this for a document given by path and keep it until the file changes.
+
 An evidence index records the digest of the document it was built from (`graph_sha256`). `scale graph
 query` (text) and `scale graph search`, and the agent tools, use an index only for that document, or for
 one whose evidence quotes it holds exactly (an index built before the digest was recorded); another

@@ -207,6 +207,7 @@ class ScaleToolkit:
         self.repo = Path(repo).resolve() if repo else find_repo_root()
         self.workspace = Path(workspace).expanduser().resolve() if workspace else default_workspace()
         self._specs: dict[str, dict] = {}
+        self._loaded: dict[str, dict] = {}      # documents by path, kept while their file is unchanged (_load)
         self._handlers: dict[str, Callable[..., dict]] = {t["name"]: getattr(self, "_" + t["name"]) for t in TOOLS}
 
     # ------------------------------------------------------------ tool schemas
@@ -260,6 +261,22 @@ class ScaleToolkit:
         if path:
             return load_doc(self._path(path))
         raise ScaleError("give a document (inline) or a path")
+
+    def _load(self, path: str) -> dict:
+        """The document at ``path`` with what its queries reuse: ``{doc, graphs (a query Graph per schema), index}``,
+        kept while the file's modification time and size are unchanged (a long-running server loads a large graph and
+        indexes it once). The tools never change a loaded document; a few recent documents are kept."""
+        p = self._path(path).resolve()
+        st = p.stat()
+        key = (st.st_mtime_ns, st.st_size)
+        hit = self._loaded.get(str(p))
+        if hit is None or hit["key"] != key:
+            hit = {"key": key, "doc": load_doc(p), "graphs": {}, "index": None, "index_key": None}
+            self._loaded.pop(str(p), None)
+            self._loaded[str(p)] = hit
+            while len(self._loaded) > 4:
+                self._loaded.pop(next(iter(self._loaded)))
+        return hit
 
     def _manifest(self, domain: str | None, doc: dict | None = None) -> Path:
         """The schema manifest: the catalysis domain's (by its name, or by default), or the kernel alone for ``core``."""
@@ -416,30 +433,45 @@ class ScaleToolkit:
     def _scale_query(self, plan: dict, document: dict | None = None, path: str | None = None, domain: str | None = None,
                      format: str = "json") -> dict:
         from . import pgraph_query
-        doc = self._doc(document, path)
-        ix = None
-        if plan.get("text"):
-            ix = self._index(path, doc)
-        res = pgraph_query.run(doc, self._doc_spec(doc, domain), plan, ix)
+        if document is None and path:
+            hit = self._load(path)
+            doc = hit["doc"]
+            spec = self._doc_spec(doc, domain)
+            g = hit["graphs"].get(id(spec))
+            if g is None:
+                g = hit["graphs"][id(spec)] = pgraph_query.Graph(doc, spec)
+            res = pgraph_query.run(doc, spec, plan, self._index(path, doc, hit) if plan.get("text") else None, g)
+        else:
+            doc = self._doc(document, path)
+            res = pgraph_query.run(doc, self._doc_spec(doc, domain), plan, self._index(path, doc) if plan.get("text") else None)
         if format == "markdown":
             res["markdown"] = pgraph_query.render_markdown(res)
         return res
 
-    def _index(self, path: str | None, doc: dict):
+    def _index(self, path: str | None, doc: dict, hit: dict | None = None):
         """The evidence index beside ``path``, refused unless it is ``doc``'s, or built in memory from ``doc`` when none is
-        saved there or the document came inline (:func:`passages.index_for`)."""
+        saved there or the document came inline (:func:`passages.index_for`); kept with a loaded document (``hit``)
+        while the saved index files are unchanged."""
         from .passages import Index, evidence_items, graph_sha256, index_for
         if not path:
             return Index.build(evidence_items(doc), graph_sha256=graph_sha256(doc))
         p = self._path(path)
-        return index_for(p.with_name(p.name.removesuffix(".json").removesuffix(".graph") + ".evidence"), doc)
+        stem = p.with_name(p.name.removesuffix(".json").removesuffix(".graph") + ".evidence")
+        if hit is None:
+            return index_for(stem, doc)
+        key = tuple((f.stat().st_mtime_ns, f.stat().st_size) if f.exists() else None
+                    for f in (Path(f"{stem}{x}") for x in (".jsonl", ".i8", ".terms")))
+        if hit["index"] is None or hit["index_key"] != key:
+            hit["index"], hit["index_key"] = index_for(stem, doc), key
+        return hit["index"]
 
     def _scale_search(self, path: str, query: str, k: int = 10, mode: str = "hybrid",
                       published_before: str | None = None) -> dict:
         from . import pgraph
         from .pgraph_query import document_access
-        doc = load_doc(self._path(path))
-        ix = self._index(path, doc)
+        hit = self._load(path)
+        doc = hit["doc"]
+        ix = self._index(path, doc, hit)
         nodes = {n["id"]: n for n in doc["nodes"]}
         links = {e["id"]: e for e in doc["links"]}
         years = {n["id"]: n["props"].get("year") for n in doc["nodes"] if n["label"] == "Source"}

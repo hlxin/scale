@@ -216,6 +216,19 @@ CU_PLAN = {"question": "Which tests used a Cu catalyst?", "match": {"label": "Ca
            "return": ["test.name", "test.temperature", "catalyst.name"], "evidence": True}
 
 
+def test_a_shared_graph_answers_as_a_fresh_one(doc, spec):
+    """A query Graph built once for a document and passed to every run answers exactly as a run that builds its own;
+    one built from another document is not used."""
+    g = pgraph_query.Graph(doc, spec)
+    text = {**CU_PLAN, "text": {"query": "copper catalyst", "vars": ["test"], "mode": "keyword"}}
+    ix = Index.build(evidence_items(doc))
+    for plan in (CU_PLAN, text, {**CU_PLAN, "as_of": "2020-01-01"}):
+        assert pgraph_query.run(doc, spec, plan, ix, g) == pgraph_query.run(doc, spec, plan, ix)
+    other = copy.deepcopy(doc)
+    other["nodes"] = [n for n in other["nodes"] if n["label"] != "CatalyticTest"]
+    assert pgraph_query.run(other, spec, CU_PLAN, None, g)["row_count"] == 0
+
+
 def test_query_answers_with_dated_evidence(doc, spec):
     res = pgraph_query.run(doc, spec, CU_PLAN)
     assert res["status"] == "answered" and {r["bound"]["test"] for r in res["rows"]} == {"ex:t/cu/test", "ex:t/late/test"}

@@ -196,6 +196,23 @@ def test_search_reads_only_the_documents_own_index_and_says_its_access(tk):
     assert "was built from another document" in res["error"]
 
 
+def test_a_loaded_document_is_reused_until_its_file_changes(tk):
+    """scale_query and scale_search keep a document loaded by path, with its query graph and evidence index, and load it
+    again when the file changes."""
+    import os
+    tk.call("scale_example", {"name": "electro"})
+    plan = load_yaml(REPO / "domain/competency/cq-01-faradaic-efficiency.yaml")["plan"]
+    assert tk.call("scale_query", {"path": "electro.json", "plan": plan})["row_count"] == 1
+    first = tk._loaded[str((tk.workspace / "electro.json").resolve())]
+    assert tk.call("scale_query", {"path": "electro.json", "plan": plan})["row_count"] == 1
+    assert tk._loaded[str((tk.workspace / "electro.json").resolve())] is first
+    doc = load_doc(tk.workspace / "electro.json")
+    doc["nodes"] = [n for n in doc["nodes"] if n["label"] != "CatalyticTest"]
+    (tk.workspace / "electro.json").write_text(json.dumps(doc))
+    os.utime(tk.workspace / "electro.json", ns=(first["key"][0] + 10**9, first["key"][0] + 10**9))
+    assert tk.call("scale_query", {"path": "electro.json", "plan": plan})["row_count"] == 0
+
+
 def test_skills_are_listed_and_served(tk):
     skills = {s["name"]: s for s in tk.call("scale_skills")["skills"]}
     assert set(skills) == SKILLS
