@@ -690,6 +690,7 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
             if a == b or a in b.parents or b in a.parents:
                 raise ScaleError(f"the bundle would be written over {name} ({prior_dir}), which it reads; write it to "
                                  "a folder of its own")
+    _check_text_names(texts)               # a shipped text is a plain file directly in text/, before anything is written
     _clear_texts(out)                      # an earlier export's texts are not this bundle's (nor sealed with it)
     (out / "kg").mkdir(parents=True, exist_ok=True)
     report = {"not_exported_links": {}, "split_links": 0, "values_as_text": {}, "nodes_without_report": 0,
@@ -1187,7 +1188,10 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
         files = {}
         for sid, (fname, text, licence) in sorted(texts.items()):
             if sid in in_bundle:
-                (out / "text" / fname).write_text(text)
+                dest = out / "text" / fname
+                if dest.is_symlink() or (dest.exists() and not dest.is_file()):
+                    raise ScaleError(f"text/{fname} is a link or a folder; a shipped text is written only as a plain file")
+                dest.write_text(text)
                 files[sid] = {"file": fname, "license": licence, "attribution": sid}
         (out / "text" / "_manifest.json").write_text(json.dumps({"files": files}, indent=1, sort_keys=True) + "\n")
         shipped, shipped_licences = len(files), {f["license"] for f in files.values()}
@@ -1274,6 +1278,22 @@ def _clear_texts(out: Path) -> None:
     for p in [*(tdir / f for f in sorted(named)), man]:
         p.unlink(missing_ok=True)
     tdir.rmdir()
+
+
+def _check_text_names(texts: dict | None) -> None:
+    """Every shipped text names a plain file of its own directly in text/: no separator, not absolute, not ``.``,
+    ``..`` or the manifest, and no two texts with one name (letter case aside)."""
+    seen: dict[str, str] = {}
+    for sid, entry in sorted((texts or {}).items()):
+        fname = entry[0] if isinstance(entry, (tuple, list)) and entry else None
+        bad = (not isinstance(fname, str) or fname in ("", ".", "..", "_manifest.json") or "/" in fname
+               or "\\" in fname or "\0" in fname or Path(fname).is_absolute() or Path(fname).name != fname)
+        if bad:
+            raise ScaleError(f"the text of {sid} is named {fname!r}: a shipped text is a plain file name in text/ "
+                             "(no folder, not the manifest)")
+        if fname.lower() in seen:
+            raise ScaleError(f"the texts of {seen[fname.lower()]} and {sid} are both named {fname!r}")
+        seen[fname.lower()] = sid
 
 
 def _plain_file(tdir: Path, root: Path, name: object) -> bool:
