@@ -79,6 +79,10 @@ Follow the `curate-source` skill (`tools/skills/curate-source/SKILL.md`) one sou
   the curation guide, the assembly report (720 gaps, 47 `missing_concept`) and the curation tools are in the git
   history (commit `a169872`, folder `examples/methanol-synthesis-pre1966/`). A GALAXY bundle is regenerated with
   `scale graph export <graph> --to galaxy --corpus sources.json`.
+- **Recuration from the PDFs.** 2026-10-09: the 9 runs of `10.1021-ie50302a005` whose pressure was not recorded
+  now carry the testing pressure its Experimental Procedure states (178 atmospheres absolute); the other checklist
+  gaps were checked against the sources and are theirs (112 violations: values the sources do not state, and a
+  blank run and a saturator calibration that use no catalyst, which the checklist cannot exempt yet).
 - **Quoted text.** The 55 public-domain sources (US patents, works published before 1931) keep every quote; the 50
   in-copyright sources are capped (300 characters a quote; 4,000 characters and 10 % of the text a source), and
   6,920 evidence items carry withheld text as sha256 and length (`scale evidence rehydrate` restores them from the
