@@ -107,6 +107,14 @@ Release lineage (``previous``, ``ids_from``, ``replaced``; ``scale graph export 
 (``previous`` in bundle.json, with the id changes) and carries its changelog forward; a retired record's released id is
 listed in its survivor's ``replaced_ids``.
 
+The schema (``kg/schema.json``) is the vocabulary of the scale-graph version the graph pins (:func:`vocabulary`), never
+derived from the graph: every label and edge type, with every property a bundle of that version can carry (a value's
+canonical quantity and its ``_as_reported``, ``_bound``, ``_qualifier`` and ``_basis``; the access, status and
+lifecycle properties). Every bundle of a version therefore declares the same schema, named ``scale-<domain>`` with the
+scale-graph version (``scale-catal 0.1.0`` for catalysis; ``scale-kernel`` for a kernel-only graph). A value not of its
+property's declared type is kept as text in ``<property>_as_reported``; property names are the format's snake_case
+(``pH`` is ``ph``). Every exported record is checked against the schema before anything is written (``_conforms``).
+
 Identity and access, which the kg-bundle format has no field for:
 
 * The bundle schema's ``extends`` names the scale-graph schema by version **and digest**
@@ -195,7 +203,7 @@ SYNTHETIC_TEXT = {
                                                "examples; records whose origin is synthetic are invented, not evidence about "
                                                "the world."),
 }
-# The bundle's title (bundle.json ``topic``, kg/schema.json ``title``): a host shows it as the graph's name on import,
+# The bundle's title (bundle.json ``topic``): a host shows it as the graph's name on import,
 # so it is a short name. A graph's own title states its scope in full and may run long; the bundle takes it when it is
 # short and its leading words otherwise (``concise_title``), unless the export names one (``title``).
 TITLE_MAX = 40
@@ -397,6 +405,158 @@ def _quantity(prop: str, v: dict) -> tuple[str, dict | None, str | None]:
         return out, {"value": round((a + b) / 2, 6), "unit": canon[0], "as_reported": reported,
                      "uncertainty": {"kind": "range", "low": a, "high": b}}, None
     return out, None, reported or None
+
+
+# the scale-graph properties a bundle record never carries as properties (they are its evidence, stewardship and
+# statement, carried in the format's own fields, or bookkeeping the format has no place for)
+NOT_PROPERTIES = ("evidence", "stewardship", "origin", "record_version", "recorded_at", "conforms_to", "status", "basis",
+                  "confidence", "statement_kind")
+RANGE_NOTE = ("a reported range is exported as its midpoint (value), with the range in uncertainty (kind range, low, "
+              "high) and the reported text in as_reported")
+
+
+SCHEMA_SHORT = {"catalysis": "catal"}           # a domain's short name in its bundle schema's id
+
+
+def schema_name(doc_or_spec: dict) -> str:
+    """The bundle schema's id: scale-<short name of the domain> for a graph that follows a domain's checklist
+    (``scale-catal`` for catalysis, :data:`SCHEMA_SHORT`), else scale-kernel. Its version is the scale-graph version;
+    like any version number it names a schema only within this repository's numbering, and ``extends.sha256`` names it
+    everywhere."""
+    g = doc_or_spec.get("graph") if "graph" in doc_or_spec else None
+    domains = list((g or {}).get("follows_domains") or [])
+    return f"scale-{SCHEMA_SHORT.get(domains[0], domains[0])}" if domains else "scale-kernel"
+
+
+def bundle_prop(k: str) -> str:
+    """A scale-graph property's name in a bundle: the format's snake_case (``pH`` is ``ph``), platform-owned names
+    prefixed ``scale_``."""
+    k = re.sub(r"[^a-z0-9_]+", "_", k.lower()).strip("_") or "property"
+    return f"scale_{k}" if k in PLATFORM_OWNED else k
+
+
+def _value_variants(k: str) -> list[str]:
+    """The property names a value property ``k`` can be exported under (kept apart by basis)."""
+    if k == "pressure":
+        return ["pressure", "pressure_gauge"]
+    if k == "space_velocity":
+        return ["space_velocity", *sorted({f"space_velocity_{b}" for b in SV_BASIS.values()})]
+    return [k]
+
+
+def _type_props(defs: dict, is_edge: bool, status_def: dict) -> dict:
+    """The bundle properties of one label or edge type, from its scale-graph property definitions alone."""
+    out: dict[str, dict] = {"scale_id": {"type": "string", "description": "The record's id in the scale-graph document."}}
+    if not is_edge:
+        out["name"] = {"type": "string", "required": True}
+    for k, pdef in sorted(defs.items()):
+        if k in NOT_PROPERTIES or k.startswith("_") or k == "name":
+            continue
+        k2 = bundle_prop(k)
+        if pdef.get("type") == "value":
+            for tk in _value_variants(k2):
+                if k in CANONICAL:
+                    unit, why = SPLIT.get(tk, (CANONICAL[k][0], None))
+                    out[tk] = {"type": "quantity", "unit": unit, "description": "; ".join(x for x in (why, RANGE_NOTE) if x)}
+                    out[f"{tk}_basis"] = {"type": "string", "description": f"the basis of {tk} as reported"}
+                out[f"{tk}_as_reported"] = {"type": "string", "description": f"{tk} as reported (not converted)"}
+                out[f"{tk}_bound"] = BOUND
+                out[f"{tk}_qualifier"] = QUALIFIER
+            if k == "pressure":
+                out["pressure_note"] = {"type": "string", "description": "why a pressure was not converted"}
+            continue
+        gt = _ptype(pdef)
+        out[k2] = gt
+        if gt["type"] != "string":            # a value not of the declared type goes here, as text
+            out[f"{k2}_as_reported"] = {"type": "string", "description": f"{k2} as reported (not of the declared type)"}
+    out.update({k: ACCESS_PROPS[k] for k in ACCESS_PROPS})
+    out["source_status"] = SOURCE_STATUS
+    if is_edge:
+        out["scale_status"] = status_def
+        out["metadata_only"] = METADATA_ONLY
+    return out
+
+
+def vocabulary(spec: dict) -> tuple[dict, dict]:
+    """``(node_types, edge_types)``: the bundle schema of a scale-graph version, every label and edge type with every
+    property a bundle of that version can carry, from the schema alone (never from a document), so that every bundle of
+    the version declares the same schema. A Source is a Publication; an endpoint label stands for itself and every
+    label that is_a it."""
+    status_def = scale_status(spec)
+    common_n = (spec.get("common") or {}).get("node", {}).get("properties") or {}
+    common_l = (spec.get("common") or {}).get("link", {}).get("properties") or {}
+    node_types: dict[str, dict] = {}
+    for lab, d in sorted(spec["nodes"].items()):
+        if lab == "Source":
+            continue
+        node_types[lab] = {"description": (d.get("description") or lab).strip()[:2000],
+                           **({"iri": iri_of(d)} if iri_of(d) else {}),
+                           "properties": _type_props({**common_n, **(d.get("properties") or {})}, False, status_def)}
+    pub = {"title": {"type": "string", "required": True}, "doi": {"type": "string"}, "source_id": {"type": "string"},
+           "year": {"type": "integer"}, "license": {"type": "string"}, "kind": {"type": "string"},
+           "venue": {"type": "string"}, "url": {"type": "string"},
+           "authors": {"type": "string[]", "description": "Authors or inventors, in byline order."},
+           "assignees": {"type": "string[]", "description": "Patent assignees."},
+           "scale_id": {"type": "string"}, "source_status": SOURCE_STATUS, **{k: ACCESS_PROPS[k] for k in ACCESS_PROPS}}
+    for k, t in PUBLICATION_DATES.items():
+        pub[k] = {"type": t}
+        if t != "string":
+            pub[f"{k}_as_reported"] = {"type": "string", "description": f"{k} as given (not a date)"}
+    node_types["Publication"] = {"description": "A source document: article, patent, thesis or report.", "properties": pub}
+
+    def ends(labels: list) -> list[str]:
+        out = set()
+        for lab in labels or []:
+            if not isinstance(lab, str):
+                continue
+            for name, d in spec["nodes"].items():
+                if name == lab or lab in (d.get("ancestors") or []):
+                    out.add("Publication" if name == "Source" else name)
+        return sorted(x for x in out if x in node_types)
+
+    edge_types: dict[str, dict] = {}
+    for et, d in sorted(spec["edges"].items()):
+        if et == "REPORTED_IN":
+            continue
+        frm, to = ends(d.get("from")), ends(d.get("to"))
+        if not frm or not to:
+            continue
+        edge_types[et] = {"description": (d.get("description") or et).strip()[:2000], "from": frm, "to": to,
+                          **({"iri": iri_of(d)} if iri_of(d) else {}),
+                          "properties": _type_props({**common_l, **(d.get("properties") or {})}, True, status_def)}
+    edge_types["REPORTED_IN"] = {"description": "An entity -> the source that reports it.",
+                                 "from": sorted(x for x in node_types if x != "Publication"), "to": ["Publication"],
+                                 "properties": {}}
+    return node_types, edge_types
+
+
+FORMAT_FIELDS = {"source_paper_ids", "replaced_ids"}        # the format's own fields, never declared in a schema
+
+
+def _conforms(node_types: dict, edge_types: dict, nodes: list[dict], links: list[dict], schema_id: str) -> None:
+    """Every exported record within the vocabulary: its label or type declared, each property declared on it, each
+    edge between labels its type allows. A miss is a gap in :func:`vocabulary`, never something to export anyway."""
+    problems = []
+    label_of = {n["id"]: n["label"] for n in nodes}
+    for n in nodes:
+        t = node_types.get(n["label"])
+        if t is None:
+            problems.append(f"node {n['id']}: label {n['label']} is not in {schema_id}")
+            continue
+        problems += [f"node {n['id']}: {k} is not declared on {n['label']}" for k in n["props"]
+                     if not k.startswith("_") and k not in FORMAT_FIELDS and k not in t["properties"]]
+    for e in links:
+        t = edge_types.get(e["type"])
+        if t is None:
+            problems.append(f"edge {e['id']}: type {e['type']} is not in {schema_id}")
+            continue
+        s, o = label_of.get(e["source"]), label_of.get(e["target"])
+        if s and s not in t["from"] or o and o not in t["to"]:
+            problems.append(f"edge {e['id']}: {e['type']} from {s} to {o} is not allowed in {schema_id}")
+        problems += [f"edge {e['id']}: {k} is not declared on {e['type']}" for k in e["props"]
+                     if not k.startswith("_") and k not in FORMAT_FIELDS and k not in t["properties"]]
+    if problems:
+        raise ScaleError(f"the bundle does not fit {schema_id} ({len(problems)}): " + "; ".join(problems[:5]))
 
 
 def _ptype(d: dict) -> dict:
@@ -635,12 +795,10 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
         table = edge_types if is_edge else node_types
         outp = {}
         for k, v in props.items():
-            if k in ("evidence", "stewardship", "origin", "record_version", "recorded_at", "conforms_to", "status", "basis",
-                     "confidence", "statement_kind") or k.startswith("_"):
+            if k in NOT_PROPERTIES or k.startswith("_"):
                 continue
             pdef = defs.get(k) or {"type": "text"}
-            if k in PLATFORM_OWNED:
-                k = f"scale_{k}"
+            k = bundle_prop(k)
             if pdef.get("type") == "value":
                 tk, q, text = _quantity(k, v)
                 if isinstance(v, dict) and v.get("status", "present") != "present":     # a typed absence (format 1.1.0)
@@ -693,25 +851,18 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
             if isinstance(v, dict) and "status" in v and pdef.get("type") != "map":
                 continue
             gt = _ptype(pdef) if k not in ("name",) else {"type": "string"}
+            fits = {"string": True, "string[]": isinstance(v, list) and all(isinstance(x, str) for x in v),
+                    "enum": v in gt.get("values", ()), "integer": isinstance(v, int) and not isinstance(v, bool),
+                    "number": isinstance(v, (int, float)) and not isinstance(v, bool), "boolean": isinstance(v, bool),
+                    "date": isinstance(v, (str, int)) and bool(re.match(r"^\d{4}(-\d{2}(-\d{2})?)?$", str(v)))}[gt["type"]]
             if gt["type"] == "string" and not isinstance(v, str):
                 v = json.dumps(v, ensure_ascii=False, sort_keys=True)
-            if gt["type"] == "string[]" and not (isinstance(v, list) and all(isinstance(x, str) for x in v)):
-                gt, v = {"type": "string"}, json.dumps(v, ensure_ascii=False, sort_keys=True)
-            if gt["type"] == "enum" and v not in gt["values"]:
-                gt, v = {"type": "string"}, str(v)
-            if gt["type"] == "integer" and not isinstance(v, int):
-                gt, v = {"type": "string"}, str(v)
-            if gt["type"] == "number" and not isinstance(v, (int, float)):
-                gt, v = {"type": "string"}, str(v)
-            if gt["type"] == "date" and not re.match(r"^\d{4}(-\d{2}(-\d{2})?)?$", str(v)):
-                gt, v = {"type": "string"}, str(v)
+            if not fits:                    # not of the declared type: kept as text beside it, the type unchanged
+                outp[f"{k}_as_reported"] = v if isinstance(v, str) else json.dumps(v, ensure_ascii=False, sort_keys=True)
+                tally(owner, "values_as_text", k)
+                continue
             if k != "name":
-                have = table[label_or_type]["properties"].get(k)
-                if have and have["type"] != gt["type"]:
-                    v = v if isinstance(v, str) else json.dumps(v, ensure_ascii=False, sort_keys=True)
-                    table[label_or_type]["properties"][k] = {"type": "string"}
-                else:
-                    declare(table, label_or_type, k, gt)
+                declare(table, label_or_type, k, gt)
             outp[k] = v
         return outp
 
@@ -762,12 +913,9 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
             for k, t in PUBLICATION_DATES.items():          # the dates and the text read
                 if isinstance(p.get(k), (str, int)) and str(p[k]):
                     val = str(p[k])
-                    typ = t if t != "date" or re.match(r"^\d{4}(-\d{2}(-\d{2})?)?$", val) else "string"
-                    have = node_types["Publication"]["properties"].get(k)
-                    if have and have["type"] != typ:
-                        node_types["Publication"]["properties"][k] = {"type": "string"}
-                    else:
-                        declare(node_types, "Publication", k, {"type": typ})
+                    if t == "date" and not re.match(r"^\d{4}(-\d{2}(-\d{2})?)?$", val):
+                        props[f"{k}_as_reported"] = val            # not a date: kept as given, beside it
+                        continue
                     props[k] = val
             key = pub_key(n)
             props["doi" if p.get("doi") else "source_id"] = key if p.get("doi") else key
@@ -885,14 +1033,6 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
     for n in nodes:
         if n["id"] in retired:
             n["props"]["replaced_ids"] = sorted(set(retired[n["id"]]))   # a format property, not declared in the schema
-    if prior:
-        pm = json.loads((Path(prior) / "bundle.json").read_text())
-        ps = json.loads((Path(prior) / pm.get("schema_file", "kg/schema.json")).read_text())
-        for kind, table in (("node_types", node_types), ("edge_types", edge_types)):
-            for name, t in (ps.get(kind) or {}).items():
-                if name in table:
-                    for prop, pdef in (t.get("properties") or {}).items():
-                        declare(table, name, prop, pdef)
     kept_nodes = [n for n in nodes if n["label"] == "Publication" or reported.get(n["id"])]
     dropped = len(nodes) - len(kept_nodes)
     if dropped:
@@ -979,13 +1119,19 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
               "access_at_export": {"level": level, "date": today,                # and what part of it may not see
                                    **({"less_open_kept": less_kept} if less_kept else {})},
               **({"filtered_for": g0["filtered_for"]} if g0.get("filtered_for") else {})}
-    schema_id = re.sub(r"[^a-z0-9-]+", "-", bundle_id.lower())
-    schema = {"schema_id": schema_id, "version": version, "title": topic,
-              "scope": scope_text,
+    # the schema is the vocabulary of the scale-graph version the graph pins, the same in every bundle of that version
+    # (named scale-<domain> with that version), never derived from the graph; every record is checked against it
+    schema_id, schema_version = schema_name(doc), str(doc["graph"].get("schema_version"))
+    vocab_nodes, vocab_edges = vocabulary(spec)
+    _conforms(vocab_nodes, vocab_edges, kept_nodes, list(links.values()), schema_id)
+    schema = {"schema_id": schema_id, "version": schema_version, "title": f"{schema_id} {schema_version}",
+              "scope": (f"The {(list(doc['graph'].get('follows_domains') or ['kernel']))[0]} vocabulary of SCALE's scale-graph {schema_version} "
+                        f"(spec sha256 {schema_sha}), every label and edge type with every property a bundle can carry; "
+                        "a version number names a schema only within SCALE's numbering, the digest everywhere."),
               "extends": {"schema_id": "scale-graph", "version": doc["graph"].get("schema_version"), "sha256": schema_sha},
-              "node_types": dict(sorted(node_types.items())), "edge_types": dict(sorted(edge_types.items()))}
+              "node_types": vocab_nodes, "edge_types": vocab_edges}
     graph = {"directed": True, "multigraph": True,
-             "graph": {"bundle_id": bundle_id, "version": version, "schema_id": schema_id, "schema_version": version,
+             "graph": {"bundle_id": bundle_id, "version": version, "schema_id": schema_id, "schema_version": schema_version,
                        "topic": topic},
              "nodes": kept_nodes, "links": sorted(links.values(), key=lambda e: e["id"])}
     gbytes = (json.dumps(graph, ensure_ascii=False, indent=1, sort_keys=True) + "\n").encode()
@@ -1025,7 +1171,7 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
                 "created": created, "topic": topic, "scope": scope_text, "scale_header": header,
                 "graph_file": "kg/graph.json", "graph_sha256": hashlib.sha256(gbytes).hexdigest(),
                 "graph_sha256_is_of": "the uncompressed graph.json bytes", "schema_file": "kg/schema.json",
-                "schema_id": schema_id, "schema_version": version, **lineage,
+                "schema_id": schema_id, "schema_version": schema_version, **lineage,
                 "counts": {"papers": sum(1 for n in kept_nodes if n["label"] == "Publication"), "nodes": len(kept_nodes),
                            "edges": len(graph["links"]), "substantive_edges": subst},
                 "corpus": corpus or {}, "publication_licences": dict(sorted(lic.items())), "redistributable_publications": shipped,

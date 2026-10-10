@@ -193,9 +193,9 @@ def test_a_version_the_tools_do_not_hold_is_named_as_such(tmp_path, capsys):
 
 
 def test_a_bundle_graph_is_named_as_one_not_as_a_newer_version(tmp_path, capsys, head):
-    """A kg-bundle's kg/graph.json pins the bundle's own version as its schema_version. Validating it fails as any
-    version the tools do not hold does (the error, its start and the validity unchanged); only the suffix differs: it
-    names the document as a bundle's graph, never as a newer version."""
+    """A kg-bundle's kg/graph.json names its bundle and the bundle's schema (scale-<domain>, with the scale-graph
+    version it is the vocabulary of). It is the bundle format's graph, not a scale-graph document: validating it is
+    refused, whatever version it names, with a message that names it as a bundle's graph, never as a newer version."""
     from scale.api import ScaleToolkit
     kit = ScaleToolkit(repo=REPO, workspace=tmp_path / "ws")
     held = pgraph.public_versions(GRAPH_MANIFEST)
@@ -206,13 +206,13 @@ def test_a_bundle_graph_is_named_as_one_not_as_a_newer_version(tmp_path, capsys,
         kgbundle.export(ex, spec_of(ex), out, "acc-bundle", version)
         f = out / "kg/graph.json"
         g = load_doc(f)
-        assert g["graph"]["schema_version"] == version and pgraph.bundle_graph(g)
+        assert g["graph"]["version"] == version and pgraph.bundle_graph(g)
+        assert (g["graph"]["schema_id"], g["graph"]["schema_version"]) == ("scale-catal", ex["graph"]["schema_version"])
         rc, _, err = _run(["graph", "validate", "--format", "json", str(f)], capsys)
-        start = f"document pins scale-graph {version}, which is not a version this repository holds (no scale-graph-{version}.yaml in "
-        assert rc == 2 and start in err and "the graph of a kg-bundle" in err, err
+        assert rc == 2 and "the graph of a kg-bundle" in err and "not a scale-graph document" in err, err
         assert "newer than this schema's head" not in err
         res = kit.call("scale_validate", {"document": g})
-        assert res["error"].startswith(start) and "the graph of a kg-bundle" in res["error"]
+        assert "the graph of a kg-bundle" in res["error"]
     # a scale-graph pinning a version the tools do not hold keeps its message; a header that only half names a bundle
     # is not a bundle's graph
     doc = load_doc(X / "example.json")

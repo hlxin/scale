@@ -33,8 +33,11 @@ SCALE writes format **1.1.0** (the identifier the format requires in `bundle.jso
 - **Typed absences.** A value the source does not report, did not measure, or gives below a limit is a
   `_value_status` entry (status and, for `not_reported`, the reason), not a missing property.
 
-The bundle schema names scale-graph by version **and** spec digest (`extends`), so two bundles of one schema can be
-recognized as such.
+**The schema is the vocabulary, not the graph's subset.** `kg/schema.json` declares every label and edge type of the
+scale-graph version the graph pins, with every property a bundle can carry, so every bundle of that version declares
+the same schema: `scale-catal 0.1.0` for a catalysis graph (`scale-kernel` for a kernel-only one). Its `extends`
+names scale-graph by version **and** spec digest, which is what identifies it, since a version number names a schema
+only within one numbering. A value not of its property's declared type is kept as text in `<property>_as_reported`.
 
 ## Making, checking and loading one
 
@@ -63,4 +66,4 @@ a bundle over the native document.
 
 | bundle | version | graph | edges | notes |
 |---|---|---|---:|---|
-| [`methanol-synthesis-pre1966_v1.1.1.zip`](../examples/methanol-synthesis-pre1966/methanol-synthesis-pre1966_v1.1.1.zip) | 1.1.1 | the methanol example | 17,563 | follows 1.1.0 (its title only: "Methanol Synthesis CO/CO2+H2 Pre1966"), which followed 1.0.0; 3,274 substantive edges rest only on withheld quotes; 227 typed absences |
+| [`methanol-synthesis-pre1966_v2.0.0.zip`](../examples/methanol-synthesis-pre1966/methanol-synthesis-pre1966_v2.0.0.zip) | 2.0.0 | the methanol example | 17,563 | schema scale-catal 0.1.0; titled "Methanol Synthesis CO/CO2+H2 Pre-1966"; follows 1.1.1 (its schema was the graph's subset, named after the bundle), 1.1.0 and 1.0.0; 3,274 substantive edges rest only on withheld quotes; 227 typed absences |

@@ -93,7 +93,13 @@ def spec_for(repo: Path, version: str | None, explicit: str | None = None, doc: 
 def pinned(manifest: Path, version: str | None, doc: dict | None = None) -> Path:
     """A domain's manifest at ``version``: the manifest itself when it is at that version (or none is
     pinned), else its frozen copy ``frozen/scale-graph-<version>.yaml``. The error for a version with neither says
-    what the ``doc`` pinning it may be (:func:`_unknown`)."""
+    what the ``doc`` pinning it may be (:func:`_unknown`). The graph of a kg-bundle is refused whatever version it
+    names: it is the bundle format's graph, not a scale-graph document."""
+    if doc is not None and bundle_graph(doc):
+        raise ScaleError(f"the document is the graph of a kg-bundle (its header names a bundle_id and a schema_id, "
+                         f"{doc['graph'].get('schema_id')} {doc['graph'].get('schema_version')}), not a scale-graph "
+                         "document; validate the scale-graph it was exported from (the bundle's bundle.json names it "
+                         "in scale_header), and the bundle with the format's validator")
     if not version or load_yaml(manifest).get("version") == version:
         return Path(manifest)
     frozen = frozen_spec(manifest, version)
@@ -105,8 +111,8 @@ def pinned(manifest: Path, version: str | None, doc: dict | None = None) -> Path
 
 def bundle_graph(doc: Any) -> bool:
     """Whether ``doc`` is the graph of a kg-bundle (its ``kg/graph.json``, as ``scale graph export --to kg-bundle``
-    writes it): a header naming the bundle (``bundle_id``) and the bundle's own schema (``schema_id``), whose
-    ``schema_version`` is the bundle's version, not a scale-graph version."""
+    writes it): a header naming the bundle (``bundle_id``) and the bundle's schema (``schema_id``, e.g.
+    ``scale-catal 0.1.0``); it is the bundle format's graph, not a scale-graph document."""
     g = doc.get("graph") if isinstance(doc, dict) else None
     return isinstance(g, dict) and isinstance(g.get("bundle_id"), str) and isinstance(g.get("schema_id"), str)
 
