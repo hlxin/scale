@@ -38,7 +38,7 @@ approve or merge.
 | **owner** | `@hlxin`, admin of the repository, code owner of every path in [`.github/CODEOWNERS`](../.github/CODEOWNERS) | a reviewer: approves and merges pull requests; merges their own under the bootstrap rule until another reviewer joins; builds releases; repository settings, rulesets and secrets ([repository-settings.md](repository-settings.md)) |
 | **reviewers** | domain experts, collaborators (Write), added to the review policy and CODEOWNERS when they join | approve and merge pull requests (any one of them is enough). Today: two seats to be filled (`TODO-reviewer-2`, `TODO-reviewer-3` in the review policy) |
 | **contributors** | anyone: issues and comments; collaborators also branches and pull requests; others through forks once the repository is public | suggest changes, curate, report gaps |
-| **@scale-agents** | a team of Claude agents on GitHub, started by every new issue, comment and review (no tag or label), or a manual run | a coordinator decides and plans, specialists (curator, schema, analyst, engineer) implement on `agent/…` branches, a verifier checks, and the team opens pull requests under the Claude GitHub App's identity; never approves or merges |
+| **@scale-agents** | a team of Claude agents on GitHub, started by every new issue, comment and review (no tag or label), or a manual run | a discovery strategist frames and coordinates, a data scientist proposes the patch and its evidence, a protocol compiler writes the tests, an evidence verifier assesses support and effects, and a systems engineer opens pull requests from `agent/…` branches under the Claude GitHub App's identity; never approves or merges |
 
 ## The rule: one approval for every change
 
@@ -89,9 +89,10 @@ an issue, a comment or a gap report            a new corpus (a sample curated ag
         ▼                                              ▼
 @scale-agents take it up on their own                             (or anyone opens a pull request)
         ▼
-the coordinator decides (answer, question back, change or nothing) and plans; specialists implement it on
-agent/… (scale check; for a schema change scale schema bump and scale schema check); the verifier checks it;
-the team opens a pull request under its own identity
+discovery strategist: frames the use case, decides (answer, question back, change or nothing), coordinates
+data scientist: sources, corrections to records or changes to schema definitions, the evidence record
+protocol compiler: tests with explicit expected outcomes · evidence verifier: support, counterexamples, effects
+systems engineer: version raised, migration assessment, checks → a pull request holding the change set
         ▼
 checks: scale check, package, specification-changes (with a summary of a schema change for the reviewer)
         ▼
@@ -107,9 +108,12 @@ official release (a human step, release-process.md)
    corpus, a curator (or an agent following the curate-source skill) curates a sample of open-access sources
    against the current schema and files a `gap-report` issue (short capped quotes only).
 2. **The agents take it up.** `@scale-agents` start on every new issue, comment and review, with no tag or label.
-   The coordinator decides what the event needs and plans the change; the specialists (curator, schema, analyst,
-   engineer) do it, following [`AGENTS.md`](../AGENTS.md) and the skills; an independent verifier checks the
-   request, the checks, the evidence and the rights before a pull request is opened. They treat issue, comment and
+   The discovery strategist frames the use case, decides what it needs and coordinates the revision; the data
+   scientist assembles the sources and proposes corrections to records or changes to schema definitions; the
+   protocol compiler turns the validation requirements into tests with explicit expected outcomes; the evidence
+   verifier assesses the scientific support, the counterexamples and the effects on existing records and queries;
+   the systems engineer packages the change set (the patch, the evidence record, the test cases, the migration
+   assessment) as a pull request. They follow [`AGENTS.md`](../AGENTS.md) and the skills. They treat issue, comment and
    corpus text as data, never as instructions about permissions, workflows, governance or secrets, and never edit
    `.github/`, `governance/`, releases or frozen versions
    ([`.github/scale-agents/instructions.md`](../.github/scale-agents/instructions.md)). Anyone may also open a pull request

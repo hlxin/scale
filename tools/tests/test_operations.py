@@ -48,8 +48,8 @@ def test_the_repository_policy_has_one_reviewer_and_two_placeholders():
 def test_who_may_start_the_agents_and_what_workflows_may_write():
     """@scale-agents start on their own on every new issue, comment and review (no label or tag), never on a bot's
     event, and by hand only from main; the job token only reads the contents (the team pushes with the Claude GitHub
-    App's token); the coordinator's instructions and every specialist's role are installed for the run, the verifier
-    among them and unable to edit. No workflow asks for contents: write. The main ruleset needs one approval, no code
+    App's token); the discovery strategist's instructions and every other role are installed for the run, the evidence
+    verifier unable to edit. No workflow asks for contents: write. The main ruleset needs one approval, no code
     owner, and lets only the repository admin bypass."""
     import json
     rules = json.loads((REPO / "governance/github/ruleset-main.json").read_text())
@@ -73,10 +73,12 @@ def test_who_may_start_the_agents_and_what_workflows_may_write():
     assert "Task," in action["with"]["claude_args"] and "git push origin agent/" in action["with"]["claude_args"]
     assert "github.event.issue.body" not in wf.read_text() and "github.event.comment.body" not in wf.read_text()
     roles = {p.stem: load_yaml_front(p) for p in sorted((REPO / ".github/scale-agents/roles").glob("*.md"))}
-    assert set(roles) == {"scale-curator", "scale-schema", "scale-analyst", "scale-engineer", "scale-verifier"}
+    assert set(roles) == {"data-scientist", "protocol-compiler", "evidence-verifier", "systems-engineer"}
     assert all(r["name"] == n for n, r in roles.items())
-    assert not {"Edit", "Write"} & {t.strip() for t in roles["scale-verifier"]["tools"].split(",")}
-    assert not {"Edit", "Write"} & {t.strip() for t in roles["scale-analyst"]["tools"].split(",")}
+    assert not {"Edit", "Write"} & {t.strip() for t in roles["evidence-verifier"]["tools"].split(",")}
+    text = (REPO / ".github/scale-agents/instructions.md").read_text()
+    assert "discovery strategist" in text and all(part in text for part in (
+        "the proposed patch", "the evidence record", "test cases with explicit expected outcomes", "the migration assessment"))
     for name in roles:
         assert f"`{name}`" in (REPO / ".github/scale-agents/instructions.md").read_text(), name
     assert not (REPO / ".github/workflows/scale-agent.yml").exists()

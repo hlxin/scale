@@ -28,10 +28,11 @@ ONE person approves and merges (any reviewer, the person who suggested it includ
 
 - **Suggest.** Open an issue (the forms below) or comment on one, in plain language. You do not need to know the
   schema, the code or Git.
-- **The agents do it.** `@scale-agents` take up every new issue and comment on their own: a coordinator decides
-  whether it needs an answer, a question back or a change, and for a change hands the work to specialists
-  (curator, schema, analyst, engineer; [AGENTS.md](AGENTS.md), the skills in `tools/skills/`), has an independent
-  verifier check it, and opens a pull request under its own GitHub identity. Ask for fixes by commenting or
+- **The agents do it.** `@scale-agents` take up every new issue and comment on their own: a discovery strategist decides
+  whether it needs an answer, a question back or a change; for a change a data scientist proposes the patch with its
+  evidence, a protocol compiler writes the tests, an evidence verifier assesses the support and the effects on
+  existing records and queries, and a systems engineer opens the pull request, under the team's own GitHub
+  identity, with the whole change set ([AGENTS.md](AGENTS.md), the skills in `tools/skills/`). Ask for fixes by commenting or
   reviewing on that pull request; the agents push them. Your own AI agent may do the same on your machine.
 - **Or open a pull request yourself.** Branch `<github-handle>/<topic>`, make the change, run
   `uv run --extra dev scale check --fast`, push and open the pull request with the template filled in.

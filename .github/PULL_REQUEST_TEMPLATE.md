@@ -6,8 +6,18 @@ CONTRIBUTING.md and governance/GOVERNANCE.md. -->
 ## Summary
 
 <!-- What changes, and why. Link the issue or comment it answers (e.g. "Closes #12"). If an agent drafted
-it (@scale-agents), say which request it answers and include the verifier's report. If merged under the bootstrap rule, write "Bootstrap bypass:
+it (@scale-agents), say which request it answers; the agents fill in the change set below. If merged under the bootstrap rule, write "Bootstrap bypass:
 reviewers not yet added". -->
+
+## Change set
+
+<!-- What a reviewer needs to accept, request revision or reject: -->
+
+- **Proposed patch:** <!-- what changed, file by file -->
+- **Evidence record:** <!-- the sources, quotes and locators that justify it; the existing concepts considered -->
+- **Test cases and expected outcomes:** <!-- fixtures that pass, counterexamples that fail and why, competency questions and their answers -->
+- **Migration assessment:** <!-- breaking or additive, the version raised, the effect on existing records and queries (scale schema check, scale kg update --dry-run) -->
+- **Verification:** <!-- the evidence verifier's report, or how you checked it -->
 
 ## Type
 

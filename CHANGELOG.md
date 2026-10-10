@@ -15,9 +15,11 @@
   proposals`, `scale release build --proposal`, the apply-proposals and proposal-check workflows, the `APPLY_TOKEN`
   secret and decision records per change (`docs/decisions/` keeps decisions about the project). `@scale-agent`
   becomes `@scale-agents` (`.github/workflows/scale-agents.yml`), a team that starts on its own on every new issue,
-  comment and pull-request review, with no tag or label: a coordinator decides what an event needs and plans, the
-  specialists curator, schema, analyst and engineer implement (`.github/scale-agents/roles/`), an independent
-  verifier checks the request, the checks, the evidence and the rights, and the team opens the pull request. The
+  comment and pull-request review, with no tag or label: a discovery strategist frames the use case and coordinates; a
+  data scientist proposes the corrections to records or changes to schema definitions; a protocol compiler writes
+  the tests with their expected outcomes; an evidence verifier assesses the support, the counterexamples and the
+  effects on existing records and queries; a systems engineer packages the change set (patch, evidence record,
+  test cases, migration assessment) as the pull request (`.github/scale-agents/`). The
   `main` ruleset no longer requires `proposal-check` (re-apply `governance/github/ruleset-main.json`). Review policy
   version 4.
 - **A knowledge-graph bundle's schema is the vocabulary: scale-catal 0.1.0.** `kg/schema.json` is no longer the

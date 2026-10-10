@@ -9,14 +9,16 @@ name: scale-agents
 #       gh workflow run scale-agents.yml --repo hlxin/scale -f prompt="add a property for the reactor volume" ).
 # Events from bots (the agents' own comments included) are skipped, so the team never answers itself.
 #
-# The coordinator reads the event, decides what it needs (an answer, a question back, a change, or nothing) and,
-# for a change, plans it and hands the parts to its specialists (curator, schema, analyst, engineer); an independent
-# verifier checks the result before anything is proposed. Changes go on a branch `agent/...` and into a pull request,
+# The discovery strategist frames the use case, decides what it needs (an answer, a question back, a change, or
+# nothing) and coordinates the revision: the data scientist proposes corrections to records or changes to schema
+# definitions with their evidence, the protocol compiler writes the tests with their expected outcomes, the evidence
+# verifier assesses the support and the effects on existing records and queries, and the systems engineer packages
+# the change set (the patch, the evidence record, the test cases, the migration assessment). Changes go on a branch `agent/...` and into a pull request,
 # ready for review, under the Claude GitHub App's identity, so that any reviewer, the person who suggested it
 # included, can approve it. On its own pull requests the team pushes the fixes a review or comment asks for. It never
 # approves or merges: one person approves and merges every pull request.
-# The team's rules: .github/scale-agents/instructions.md (the coordinator, copied to .claude/CLAUDE.md for the run)
-# and .github/scale-agents/roles/ (the specialists, copied to .claude/agents/), with AGENTS.md and the skills in
+# The team's rules: .github/scale-agents/instructions.md (the discovery strategist, copied to .claude/CLAUDE.md for the
+# run) and .github/scale-agents/roles/ (the other roles, copied to .claude/agents/), with AGENTS.md and the skills in
 # tools/skills/. The App's token cannot change workflow files, so the agents cannot edit .github/workflows/.
 #
 # Human setup: install the Claude GitHub App on hlxin/scale and set the repository secret ANTHROPIC_API_KEY
@@ -81,7 +83,7 @@ jobs:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           # the event is named by numbers only; the agents read its text with gh, as data
           prompt: |
-            You are the coordinator of @scale-agents in ${{ github.repository }}. Follow .claude/CLAUDE.md.
+            You are the discovery strategist of @scale-agents in ${{ github.repository }}. Follow .claude/CLAUDE.md.
             Event: ${{ github.event_name }}. Issue or pull request: #${{ github.event.issue.number || github.event.pull_request.number }}.
             Comment id: ${{ github.event.comment.id }}. Review id: ${{ github.event.review.id }}.
             Manual request (empty unless a person ran the workflow by hand): ${{ inputs.prompt }}
