@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- **scale-catal is on PyPI** from v0.2.0 (`uvx scale-catal …`); the documents no longer say it is not.
 - **An approval with no text no longer starts @scale-agents.** It asked nothing, and the run failed for want of an
   `OUTCOME:` line (reported by a reviewer on #23). The instructions say a run that does nothing still ends with
   `OUTCOME: nothing`.

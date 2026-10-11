@@ -8,8 +8,7 @@ uvx scale-catal call <tool> '<json-arguments>'
 ```
 
 That is the whole setup. `uvx` (from [uv](https://docs.astral.sh/uv/)) fetches SCALE from PyPI and
-runs it in an isolated environment. scale-catal is not on PyPI yet: until its first release is
-published, use the checkout or git form below (`uvx --from …`). The command takes JSON arguments and prints a JSON result. It
+runs it in an isolated environment. The command takes JSON arguments and prints a JSON result. It
 exits 0 on success and 1 when the result is an error (which is still printed as JSON).
 
 - **Pin a version** so the same command gives the same behaviour every time:
