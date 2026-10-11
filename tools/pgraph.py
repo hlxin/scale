@@ -1217,7 +1217,8 @@ def expected_reported_in(doc: dict) -> dict[str, set]:
 
 
 def derive_reported_in(doc: dict) -> list[dict]:
-    """REPORTED_IN links for a document, one per node and cited source, listing the locators cited."""
+    """REPORTED_IN links for a document, one per node and cited source, listing the locators cited. A link's id ends
+    with the last segment of the source's id, or with the whole id where two sources the node cites end alike."""
     links = []
     for n in sorted(doc.get("nodes") or [], key=lambda n: n["id"]):
         if n.get("label") == "Source":
@@ -1226,8 +1227,13 @@ def derive_reported_in(doc: dict) -> list[dict]:
         for ev in (n.get("props") or {}).get("evidence") or []:
             if ev.get("source") and ev["source"] != n["id"]:
                 by.setdefault(ev["source"], set()).add(ev.get("locator", ""))
+        tails = [x.rsplit("/", 1)[-1] for x in by]
         for src in sorted(by):
-            links.append({"id": f"{n['id']}/reported-in/{src.rsplit('/', 1)[-1]}", "source": n["id"], "target": src,
+            tail = src.rsplit("/", 1)[-1]
+            # the last segment of the source's id, or its whole id where another cited source ends alike
+            # (ex:a/paper, ex:b/paper), so no two links of one node share an id
+            key = tail if tails.count(tail) == 1 else src
+            links.append({"id": f"{n['id']}/reported-in/{key}", "source": n["id"], "target": src,
                           "type": "REPORTED_IN", "props": {"origin": "curated",
                                                             "locators": sorted(x for x in by[src] if x)}})
     return links
