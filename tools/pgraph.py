@@ -1397,7 +1397,12 @@ def _items(c: dict, edge: bool = False, case: bool = False) -> dict:
 def describe(spec: dict, names: list[str] | None = None, profile: str | None = None) -> dict:
     """Labels and edge types with their properties, as an agent or a person reads them before curating.
 
-    With a profile, properties added by extensions of other driving forces are left out."""
+    With a profile, properties added by extensions of other driving forces are left out. The result shares no
+    object with ``spec``: a caller may change it without changing the schema a later validation reads."""
+    return copy.deepcopy(_describe(spec, names, profile))
+
+
+def _describe(spec: dict, names: list[str] | None = None, profile: str | None = None) -> dict:
     exts = _extensions_for(spec, profile)
     # the file that declares a label ("kernel" or the domain's name); a manifest that lists modules keeps their key
     owner = "module" if any(m.get("kind") == "module" for m in spec.get("modules", {}).values()) else "defined_in"
