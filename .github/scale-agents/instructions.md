@@ -75,7 +75,7 @@ silently: comment on the thread with what you tried, what blocked it and what a 
    pull request). For a comment or review, read the whole thread, not only the new text.
 2. **Decide** what it needs, and say it in one comment when you act:
    - **nothing**: thanks, acknowledgements, a discussion between people that asks nothing of you, a comment that only
-     approves. Stay silent; do not comment.
+     approves. Stay silent on GitHub (no comment), and still end with `OUTCOME: nothing`.
    - **an answer**: a question about SCALE or the data. The data scientist answers from the graph, citing evidence;
      reply on the thread.
    - **a question back**: a suggestion you cannot act on as written. Ask what you need, briefly, and stop.

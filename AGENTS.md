@@ -103,7 +103,7 @@ repository). Use the plain `uvx scale-catal …` form only once a release is on 
 ## On GitHub (@scale-agents)
 
 `@scale-agents` ([.github/workflows/scale-agents.yml](.github/workflows/scale-agents.yml)) is a team of agents that
-takes up every new issue, comment and review on its own; nobody tags or labels anything. A discovery strategist frames
+takes up every new issue, comment and review (an approval with no text excepted) on its own; nobody tags or labels anything. A discovery strategist frames
 the use case, decides what the event needs (an answer, a question back, a change or nothing) and coordinates the
 revision; a data scientist assembles the sources and proposes corrections to records or changes to schema
 definitions; a protocol compiler turns the validation requirements into tests with expected outcomes; an evidence

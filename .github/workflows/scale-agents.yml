@@ -4,7 +4,7 @@ name: scale-agents
 # its own. Nobody needs to tag, label or assign anything. It runs when
 #   - an issue is opened or reopened,
 #   - someone comments on an issue or a pull request,
-#   - a review is submitted on a pull request,
+#   - a review is submitted on a pull request (except an approval with no text),
 #   - or a person with write access runs it by hand (Actions > scale-agents > Run workflow, or
 #       gh workflow run scale-agents.yml --repo hlxin/scale -f prompt="add a property for the reactor volume" ).
 # Events from bots (the agents' own comments included) are skipped, so the team never answers itself.
@@ -58,9 +58,11 @@ concurrency:
 jobs:
   agents:
     # every human event; never a bot's (the agents' own comments included); a manual run only from main
+    # an approval with no text asks nothing (the reviewers workflow handles it): no run
     if: >-
       github.event.sender.type != 'Bot' &&
-      (github.event_name != 'workflow_dispatch' || github.ref == 'refs/heads/main')
+      (github.event_name != 'workflow_dispatch' || github.ref == 'refs/heads/main') &&
+      !(github.event_name == 'pull_request_review' && github.event.review.state == 'approved' && !github.event.review.body)
     runs-on: ubuntu-latest
     timeout-minutes: 180      # a large change takes several roles in turn
     permissions:

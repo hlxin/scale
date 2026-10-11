@@ -96,7 +96,9 @@ def test_who_may_start_the_agents_and_what_workflows_may_write():
                             "workflow_dispatch": agents["on"]["workflow_dispatch"]}
     job = agents["jobs"]["agents"]
     cond = " ".join(job["if"].split())
-    assert cond == "github.event.sender.type != 'Bot' && (github.event_name != 'workflow_dispatch' || github.ref == 'refs/heads/main')"
+    assert cond == ("github.event.sender.type != 'Bot' && (github.event_name != 'workflow_dispatch' || github.ref == 'refs/heads/main') "
+                    "&& !(github.event_name == 'pull_request_review' && github.event.review.state == 'approved' "
+                    "&& !github.event.review.body)")          # an approval with no text starts no run
     assert job["permissions"]["contents"] == "read"
     action = next(s for s in job["steps"] if str(s.get("uses", "")).startswith("anthropics/claude-code-action"))
     assert "trigger_phrase" not in action["with"] and "label_trigger" not in action["with"]
