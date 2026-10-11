@@ -232,6 +232,22 @@ def test_saved_term_statistics_that_were_altered_are_rebuilt(tmp_path):
     assert np.array_equal(b.post_item, a.post_item) and b.search("copper", k=5, mode="keyword") == expect
 
 
+def test_vectors_that_are_not_the_ones_saved_with_the_items_are_rebuilt(tmp_path):
+    """The .i8 rows carry their digest in the index's header: two rows swapped (the file's size unchanged) are not
+    read, so a search for copper never returns another quote with cosine 1; the vectors are rebuilt from the items."""
+    import numpy as np
+    items = [{"id": f"ex:t/r{j:02d}#evidence/0", "record": f"ex:t/r{j:02d}", "evidence": 0, "text": t}
+             for j, t in enumerate(["copper catalyst", "banana bread", "zinc oxide"])]
+    a = Index.build(items)
+    a.save(tmp_path / "ix")
+    vec = np.frombuffer((tmp_path / "ix.i8").read_bytes(), dtype=np.int8).reshape(3, -1).copy()
+    vec[[0, 1]] = vec[[1, 0]]
+    (tmp_path / "ix.i8").write_bytes(vec.tobytes())
+    b = Index.load(tmp_path / "ix")
+    assert np.array_equal(b.vectors, a.vectors)
+    assert b.search("copper", k=1, mode="vector")[0]["text"] == "copper catalyst"
+
+
 def test_saved_term_statistics_are_used_only_with_their_items(tmp_path):
     """The inverted index saved beside an index (<stem>.terms) is read back as saved, and ignored (rebuilt from the
     items) when the items it was saved with changed or it is missing."""

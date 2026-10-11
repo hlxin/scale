@@ -282,14 +282,15 @@ class Index:
     def save(self, stem: Path) -> None:
         np = _np()
         stem.parent.mkdir(parents=True, exist_ok=True)
+        vec_bytes = np.ascontiguousarray(self.vectors, dtype=np.int8).tobytes()
         lines = [json.dumps({"embedder": self.embedder_id, "count": len(self.items),
                              "dim": int(self.vectors.shape[1]) if len(self.items) else 0,
+                             "vectors_sha256": hashlib.sha256(vec_bytes).hexdigest(),   # binds the .i8 rows to these items
                              **({"graph_sha256": self.graph_sha256} if self.graph_sha256 else {})}, sort_keys=True)]
         lines += [json.dumps(it, ensure_ascii=False, sort_keys=True) for it in self.items]
         raw = ("\n".join(lines) + "\n").encode("utf-8")
         Path(f"{stem}.jsonl").write_bytes(raw)
-        with open(f"{stem}.i8", "wb") as f:
-            f.write(np.ascontiguousarray(self.vectors, dtype=np.int8).tobytes())
+        Path(f"{stem}.i8").write_bytes(vec_bytes)
         payload = b"".join(np.ascontiguousarray(a, dtype=t).tobytes() for a, t in (
             (self.indptr, np.int64), (self.post_item, np.int32), (self.post_count, np.int32), (self.lengths, np.int64)))
         head = json.dumps({"items_sha256": hashlib.sha256(raw).hexdigest(), "count": len(self.items),
@@ -305,8 +306,14 @@ class Index:
         raw = Path(f"{stem}.jsonl").read_bytes()
         lines = raw.decode("utf-8").splitlines()
         head, items = json.loads(lines[0]), [json.loads(x) for x in lines[1:]]
-        vec_raw = np.frombuffer(Path(f"{stem}.i8").read_bytes(), dtype=np.int8)
-        vec = vec_raw.reshape(head["count"], head["dim"]) if head["count"] else vec_raw.reshape(0, max(head["dim"], 1))
+        vec_bytes = Path(f"{stem}.i8").read_bytes() if Path(f"{stem}.i8").exists() else b""
+        count, dim = len(items), int(head.get("dim") or 0)
+        if head.get("vectors_sha256") == hashlib.sha256(vec_bytes).hexdigest() and len(vec_bytes) == count * dim:
+            raw_vec = np.frombuffer(vec_bytes, dtype=np.int8)
+            vec = raw_vec.reshape(count, dim) if count else raw_vec.reshape(0, max(dim, 1))
+        else:       # vectors that are not the ones saved with these items (or a file saved before the digest): rebuilt
+            emb = get_embedder(head["embedder"])
+            vec = quantize(emb.encode([i["text"] for i in items])) if items else _np().zeros((0, getattr(emb, "dim", 1)), dtype="int8")
         return cls(items, vec, head["embedder"], head.get("graph_sha256"), _read_terms(stem, raw, len(items)))
 
     def check_for(self, doc: dict, where: str = "the evidence index") -> "Index":
