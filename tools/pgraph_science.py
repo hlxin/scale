@@ -66,18 +66,27 @@ def _cyclic(edges: list[tuple[str, str]]) -> list[str]:
         graph[a].append(b)
     state: dict[str, int] = {}
     found: list[str] = []
-
-    def visit(n: str, stack: list[str]) -> None:
-        state[n] = 1
-        for m in graph[n]:
-            if state.get(m) == 1:
-                found.append(" -> ".join(stack[stack.index(m):] + [m]) if m in stack else m)
+    # depth first, iteratively (a chain of thousands of links is a valid graph, not a recursion limit): the path
+    # from the start to the node being visited, and each path node's position on it
+    for start in list(graph):
+        if state.get(start):
+            continue
+        path, at, todo = [start], {start: 0}, [iter(graph[start])]
+        state[start] = 1
+        while todo:
+            m = next(todo[-1], None)
+            if m is None:                                   # every link of the deepest node followed
+                n = path.pop()
+                del at[n]
+                state[n] = 2
+                todo.pop()
+            elif state.get(m) == 1:                         # back to a node on the path: a cycle
+                found.append(" -> ".join(path[at[m]:] + [m]))
             elif not state.get(m):
-                visit(m, stack + [m])
-        state[n] = 2
-    for n in list(graph):
-        if not state.get(n):
-            visit(n, [n])
+                state[m] = 1
+                at[m] = len(path)
+                path.append(m)
+                todo.append(iter(graph[m]))
     return found
 
 
