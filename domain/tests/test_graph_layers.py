@@ -1,6 +1,6 @@
 """The catalysis domain's graph schema: the science kernel (core) and the catalysis domain file, which carries the
 domain's one checklist; one version for both, the manifest's; the loader's composition rules and their counterexamples
-(profile files and further domain files are exercised on extra files); documents that follow the checklist
+(further domain files are exercised on extra files; profile files are retired by design); documents that follow the checklist
 (``follows_domains: ["catalysis"]``), checked under the version they pin. Labels and edge types name the file that
 declares them in the effective schema's internal ``module`` key."""
 
@@ -33,7 +33,7 @@ def msgs(doc, spec, kind="errors"):
     return [m["message"] for m in getattr(pgraph.validate(doc, spec), kind)]
 
 
-def manifest(tmp_path, extra_domains=(), extra_profiles=()):
+def manifest(tmp_path, extra_domains=(), extra_profiles=()):     # extra_profiles: only to show they are refused
     base = yaml.safe_load((G / "scale-graph.yaml").read_text())
     m = {"schema": "scale-graph", "version": base["version"], "status": "candidate",
          "kernel": str(layout.kernel_path(G, base["kernel"])),
@@ -193,17 +193,21 @@ def test_fixed_values_are_checked(tmp_path, spec):
 
 
 def test_conflicting_checklists_are_rejected(tmp_path):
-    files = []
-    for name, vals in (("pa", ["h_cell"]), ("pb", ["flow_cell"])):
-        p = tmp_path / f"{name}.yaml"
-        p.write_text(yaml.safe_dump({"profile": name, "version": "0.1.0", "driving_forces": ["electro"],
-                                     "profile_of": [{"module": "catalysis"}],
-                                     "constraints": {"ElectrochemicalCell": {"values": {"cell_kind": vals}}}}))
-        files.append(p)
-    c = tmp_path / "pc.yaml"
-    c.write_text(yaml.safe_dump({"profile": "pc", "version": "0.1.0", "profile_of": [{"profile": "pa"}, {"profile": "pb"}]}))
+    """A checklist that includes two others narrowing one enum to values with nothing in common is refused."""
+    files = [_dom(tmp_path, name, {"checklist": {"labels": {"ElectrochemicalCell": {"values": {"cell_kind": vals}}}}})
+             for name, vals in (("pa", ["h_cell"]), ("pb", ["flow_cell"]))]
+    files.append(_dom(tmp_path, "pc", {"imports": [{"domain": "catalysis"}, {"domain": "pa"}, {"domain": "pb"}],
+                                       "checklist": {"includes": [{"domain": "pa"}, {"domain": "pb"}]}}))
     with pytest.raises(ScaleError, match="nothing in common"):
-        pgraph.load_spec(manifest(tmp_path, extra_profiles=files + [c]))
+        pgraph.load_spec(manifest(tmp_path, extra_domains=files))
+
+
+def test_profile_files_are_retired(tmp_path):
+    """There are no profile files by design: a manifest that lists `profiles:` is refused with the reason."""
+    p = tmp_path / "old.yaml"
+    p.write_text(yaml.safe_dump({"profile": "old", "version": "0.1.0", "constraints": {}}))
+    with pytest.raises(ScaleError, match="retired by design"):
+        pgraph.load_spec(manifest(tmp_path, extra_profiles=[p]))
 
 
 # ---------------------------------------------------------------- documents

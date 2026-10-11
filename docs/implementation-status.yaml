@@ -109,10 +109,10 @@ capabilities:
   where: core/graph/kernel.yaml, core/examples/science-kernel-only.yaml, core/examples/science-examples/, tools/pgraph_science.py, domain/graph/catalysis.yaml (checklist)
   tests: [test_kernel_declares_the_science_labels, test_worked_cases_are_valid_without_warnings, test_operation_is_kernel_and_dynamic_is_not_a_driving_force, test_no_catalysis_role_labels, test_each_driving_force_case_is_enforced_where_its_forces_are_listed, test_combined_forces_get_every_items_of_each_and_single_forces_only_their_own, test_records_without_driving_forces_have_their_own_items, test_equilibrium_tests_are_exempt_under_every_driving_force, test_dynamic_operation_follows_the_same_checklist, test_driving_forces_select_the_checklist_items]
   notes: The checklist's field lists (one case per driving force or combination) are suggestions for review by the catalysis reviewers.
-- name: Schema composition rules (fixed inherited values, adds_properties, edge specialization of kernel edges, conflicting checklists as errors)
+- name: Schema composition rules (fixed inherited values, adds_properties, edge specialization of kernel edges, conflicting checklists as errors; profile files retired by design, a manifest listing profiles refused)
   status: functioning
   where: tools/pgraph_schema.py, tools/pgraph_profiles.py
-  tests: [test_a_domain_cannot_redeclare_a_property, test_a_specialization_stays_inside_its_general_edge, test_fixed_values_are_checked, test_conflicting_checklists_are_rejected]
+  tests: [test_a_domain_cannot_redeclare_a_property, test_a_specialization_stays_inside_its_general_edge, test_fixed_values_are_checked, test_conflicting_checklists_are_rejected, test_profile_files_are_retired]
 - name: One checklist with cases (the catalysis file's checklist is a contract named after it, and only such a file in domain/ carries one; `when` cases on a label or edge type apply items by a record's list or enum property, e.g. CatalyticTest.driving_forces, any_of or all_of; items of an unmet case are neither checked nor counted; unless exempts the cases; describe prints them and the semantic diff compares them)
   status: functioning
   where: tools/pgraph_profiles.py, tools/pgraph_schema.py, tools/pgraph.py, domain/graph/catalysis.yaml
