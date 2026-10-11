@@ -26,7 +26,7 @@ capabilities:
   tests: [test_a_version_the_tools_do_not_hold_is_named_as_such, test_a_bundle_graph_is_named_as_one_not_as_a_newer_version, test_kg_update_refuses_a_document_pinning_a_version_not_held, test_the_cli_export_warns_and_declares_public_for_the_public, test_migrate_moves_a_document_along_registered_steps]
   notes: 'This repository started its numbering at 0.1.0 on 2026-10-08; other repositories numbered other schemas with the same numbers. No step converts between numberings: a document written under another one is curated again.'
 # ------------------------------------------------------------------ curation
-- name: Verbatim evidence checks (quotes found in the supplied source text; values in their quotes; REPORTED_IN backed by evidence)
+- name: Verbatim evidence checks (quotes found in the supplied source text; REPORTED_IN backed by evidence; a value read from a page image found in its transcription or quote by scale pages check, while a value of an ordinary quote is not compared with it)
   status: functioning
   where: scale graph validate --source-text, scale call validate (source_texts)
   tests: [test_quotes_are_checked_verbatim, test_each_invalid_fixture_is_rejected_for_its_stated_reason]

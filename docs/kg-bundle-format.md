@@ -46,8 +46,8 @@ scale graph export G.json --to kg-bundle --out DIR --bundle-id ID --version 1.1.
     --previous PREVIOUS_BUNDLE_DIR --corpus sources.json      # --previous: ids kept, the release it follows recorded
 ```
 
-**The title.** A platform names an imported graph after the bundle's title (`topic` in `bundle.json`, also the
-schema's `title`), so it is a short name: `--title` gives it; by default it is the graph's own `title` when that has
+**The title.** A platform names an imported graph after the bundle's title (`topic` in `bundle.json`; the bundle
+schema's own `title` names the schema, e.g. `scale-catal 0.1.0`), so it is a short name: `--title` gives it; by default it is the graph's own `title` when that has
 at most 40 characters, and otherwise the title's leading words, cut at a word boundary and ending in "…" (the export
 says so, and the full title goes into the bundle's scope). Give a graph a short `title` and put its scope's details
 in `description`, and the default is right.
