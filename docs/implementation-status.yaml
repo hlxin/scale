@@ -217,9 +217,10 @@ capabilities:
   tests: [test_check_runs_the_ci_checks, test_check_reports_every_failure_and_keeps_going, test_check_warns_when_prose_names_an_old_schema_version]
   notes: A warning step (never failing; scale schema bump rewrites those sentences) says when the documentation names another version than the manifest (devcheck.VERSION_TEXTS).
 - name: One-line use from PyPI (`uvx scale-catal …`)
-  status: planned
-  where: pyproject.toml (`scale-catal` command), .github/workflows/publish.yml
-  notes: The command alias and the publish workflow exist; the package is not yet on PyPI. A maintainer sets up trusted publishing and publishes a GitHub release. Until then, use `uvx --from <checkout or git URL> scale-catal …`.
+  status: functioning
+  where: pyproject.toml (`scale-catal` command), .github/workflows/publish.yml, https://pypi.org/project/scale-catal/
+  tests: [test_a_published_release_publishes_scale_catal_by_trusted_publishing]
+  notes: Published from release v0.2.0 by trusted publishing (no stored token); a published GitHub release v* publishes its version. `uvx --from <checkout or git URL> scale-catal …` runs unreleased code.
 - name: Skills installation into an agent's skills folder (each skill's whole folder, its SKILL.md and the files it points to such as references/, as a release copies it)
   status: functioning
   where: scale skills install, tools/releases.py (skill_folder)

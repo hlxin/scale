@@ -5,6 +5,7 @@
 - **Only a collaborator's event starts @scale-agents**, now that the repository is public: a run spends the owner's
   Claude usage. Anyone's issue or comment is welcome; a collaborator's comment on it starts the team, which reads the
   whole thread as data.
+- **scale-catal is on PyPI** from v0.2.0 (`uvx scale-catal …`); the documents no longer say it is not.
 - **An approval with no text no longer starts @scale-agents.** It asked nothing, and the run failed for want of an
   `OUTCOME:` line (reported by a reviewer on #23). The instructions say a run that does nothing still ends with
   `OUTCOME: nothing`.

@@ -12,10 +12,10 @@ name: publish
 # The checks below run from the tagged commit's own copy of this file, so they are not a security
 # boundary. The boundary is the tag ruleset and the `pypi` environment.
 #
-# INERT UNTIL CONFIGURED: until the owner registers the trusted publisher below, a published GitHub release
-# makes this job fail at the upload step and publishes nothing.
+# Configured: the trusted publisher is registered on PyPI and the tag ruleset is applied; v0.2.0 was the first
+# release published this way (v0.1.0 was never on PyPI).
 #
-# One-time setup. Human actions; an agent never does these:
+# One-time setup (done). Human actions; an agent never does these:
 # 1. pypi.org: register a trusted publisher for the project `scale-catal` (a "pending publisher" if
 #    the project does not exist yet): owner `hlxin`, repository `scale`, workflow `publish.yml`,
 #    environment `pypi`.

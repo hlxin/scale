@@ -97,7 +97,7 @@ The workflow token is read-only unless a workflow asks for more in its `permissi
 | `triage` | weekly, or started by hand | nothing (it opens a digest issue with the workflow token, `issues: write`) |
 | `scale-agents` | every new issue, comment and pull-request review by a collaborator (`author_association` OWNER, MEMBER or COLLABORATOR; not a bot's, and not an approval with no text), or by hand from `main` | the secret `CLAUDE_CODE_OAUTH_TOKEN` (or `ANTHROPIC_API_KEY`) and the Claude GitHub App (below) |
 | `reviewers` | every submitted review and every push to a pull request from this repository | nothing (the workflow token, `pull-requests: write`: withdraws or renews review requests, comments) |
-| `publish` | a published GitHub release | the `pypi` environment and the trusted publisher (section 6); inert until configured |
+| `publish` | a published GitHub release | the `pypi` environment and the trusted publisher (section 6); configured, first used for v0.2.0 |
 
 ## 4. Secrets
 
@@ -230,6 +230,7 @@ Publish to PyPI only with the first release ([release-process.md](release-proces
 - [ ] `codeowners/errors` returns no errors
 - [ ] workflow token read-only; Actions may not approve pull requests
 - [ ] `CLAUDE_CODE_OAUTH_TOKEN` (or `ANTHROPIC_API_KEY`) and the Claude GitHub App only when the agents are used
-- [ ] `main` ruleset applied (one approval, no code-owner requirement, required checks, no bypass actor)
-- [ ] `v*` tag ruleset; `pypi` environment (`v*` tags); PyPI trusted publisher
+- [x] `main` ruleset applied (one approval, no code-owner requirement, required checks, no bypass actor)
+- [x] `v*` tag ruleset; `pypi` environment; PyPI trusted publisher (the environment's required reviewers and
+      `v*` tag policy once the repository is public: GitHub offers them free only on public repositories)
 - [x] reviewers beyond the owner added (more join as they are invited)

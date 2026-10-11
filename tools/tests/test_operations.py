@@ -232,3 +232,16 @@ def test_kg_update_migrates_validates_and_reindexes(tmp_path, capsys, step):
     from scale.kg import update
     again = update(repo, data)
     assert next(r for r in again["documents"] if r["document"].endswith("/electro.graph.json"))["status"] == "current"
+
+
+def test_a_published_release_publishes_scale_catal_by_trusted_publishing():
+    """A published GitHub release runs publish.yml in the pypi environment with an OIDC token (no stored secret); it
+    checks that the tag is the package version and on main and that the release directory verifies, then uploads."""
+    wf = REPO / ".github/workflows/publish.yml"
+    doc, text = load_yaml(wf), wf.read_text()
+    assert doc["on"] == {"release": {"types": ["published"]}}
+    job = doc["jobs"]["publish"]
+    assert job["environment"]["name"] == "pypi" and job["permissions"] == {"contents": "read", "id-token": "write"}
+    assert "${{ secrets." not in text and 'test "${TAG}" = "v${version}"' in text and 'release verify "v${VERSION}"' in text
+    assert job["steps"][-1]["uses"] == "pypa/gh-action-pypi-publish@release/v1"
+    assert 'scale-catal = "scale.cli:main"' in (REPO / "pyproject.toml").read_text()
