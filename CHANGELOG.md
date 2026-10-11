@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- **No bypass of the `main` ruleset.** The repository admin's bypass is removed: every change to `main`, the owner's
+  included, is a pull request approved by a reviewer other than its author.
 - **What testing @scale-agents on GitHub showed, fixed.** `scale thread N` gives the agents the whole thread of an
   issue or pull request, the line comments of reviews included (`gh pr view` leaves them out). A manual run names its
   issue and waits its turn with the other runs on it. The evidence verifier reads every line a rename changed, and a

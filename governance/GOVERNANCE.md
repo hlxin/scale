@@ -82,13 +82,11 @@ reviews:
 - **A push asks again.** A push dismisses earlier approvals (the ruleset); the workflow asks again every reviewer
   whose approval it dismissed or who asked for changes. The last pusher cannot give the approval.
 
-### The owner's bypass
+### No bypass
 
-The owner is a reviewer and approves other people's and the agent's pull requests as any reviewer does; the
-owner's own pull requests are approved by another reviewer. While the owner was the only reviewer, their own pull
-requests could not be approved, so the ruleset lets the repository admin, the owner (Hongliang Xin), bypass it. The
-bypass stays until the owner decides to narrow or remove it
-([repository-settings.md](repository-settings.md#bootstrap-bypass)).
+The owner is a reviewer and approves other people's and the agent's pull requests as any reviewer does; another
+reviewer approves the owner's. Nobody bypasses the ruleset, the owner included: every change to `main` is a pull
+request with one approval ([repository-settings.md](repository-settings.md#no-bypass)).
 
 ## How a change flows
 
