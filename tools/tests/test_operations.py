@@ -24,7 +24,7 @@ def test_check_warns_about_placeholder_reviewers(tmp_path):
     import io
     import unittest.mock as mock
     from scale import devcheck
-    assert devcheck.reviewer_warnings(REPO) == ["reviewers: 2 placeholders to fill (governance/review-policy.yaml)"]
+    assert devcheck.reviewer_warnings(REPO) == ["reviewers: 1 placeholder to fill (governance/review-policy.yaml)"]
     (tmp_path / "governance").mkdir()
     (tmp_path / "governance/review-policy.yaml").write_text(
         "reviewers:\n  members:\n    - name: Ada\n      github: ada\n")
@@ -34,15 +34,40 @@ def test_check_warns_about_placeholder_reviewers(tmp_path):
     out = io.StringIO()
     with mock.patch.object(devcheck, "check_steps", lambda *a, **k: [step]):
         assert devcheck.run_checks(REPO, fast=True, out=out)          # a warning never fails the check
-    assert out.getvalue().splitlines()[0] == "warn reviewers: 2 placeholders to fill (governance/review-policy.yaml)"
+    assert out.getvalue().splitlines()[0] == "warn reviewers: 1 placeholder to fill (governance/review-policy.yaml)"
 
 
-def test_the_repository_policy_has_one_reviewer_and_two_placeholders():
+def test_the_repository_policy_has_two_reviewers_and_one_placeholder():
     from scale.policy import load_policy, placeholders, reviewers
     pol = load_policy(REPO)
     assert pol["approvals"]["required"] == 1 and pol["reviewers"]["team"] == "@hlxin"
-    assert [m["github"] for m in reviewers(pol)] == ["hlxin"]
-    assert [m["github"] for m in placeholders(pol)] == ["TODO-reviewer-2", "TODO-reviewer-3"]
+    assert [m["github"] for m in reviewers(pol)] == ["hlxin", "mutianyou2013"]
+    assert [m["github"] for m in placeholders(pol)] == ["TODO-reviewer-3"]
+
+
+def test_every_reviewer_is_asked_and_one_approval_withdraws_the_other_requests(tmp_path):
+    """CODEOWNERS names every reviewer on every line (scale domains check fails otherwise), so GitHub asks all of
+    them; the reviewers workflow withdraws the open requests when one approves and asks again, after a push, those
+    whose approval it dismissed or who asked for changes. It reads no text a person wrote into a shell command."""
+    from scale import codeowners
+    from scale.domains import Problems, _reviewers_routed
+    rules = codeowners.load(REPO)
+    assert all({"@hlxin", "@mutianyou2013"} <= set(r.owners) for r in rules)
+    pb = Problems()
+    _reviewers_routed(REPO, codeowners.parse("*  @hlxin\n/domain/  @hlxin @mutianyou2013\n"), pb)
+    assert [e["message"] for e in pb.errors] == ["line 1 (*) does not name the reviewer @mutianyou2013 of "
+                                         "governance/review-policy.yaml: GitHub would not ask them to review"]
+    wf = REPO / ".github/workflows/reviewers.yml"
+    doc = load_yaml(wf)
+    assert doc["on"] == {"pull_request_review": {"types": ["submitted"]}, "pull_request": {"types": ["synchronize"]}}
+    job = doc["jobs"]["reviewers"]
+    assert job["permissions"] == {"pull-requests": "write"} and doc["permissions"] == {"contents": "read"}
+    assert "github.event.pull_request.head.repo.full_name == github.repository" in job["if"]
+    approve, again = job["steps"]
+    assert "approved" in approve["if"] and "DELETE" in approve["run"] and "requested_reviewers" in approve["run"]
+    assert "CHANGES_REQUESTED" in again["run"] and "DISMISSED" in again["run"] and "POST" in again["run"]
+    assert all("${{" not in s["run"] for s in job["steps"])           # event text reaches the shell only via env
+    assert "pull_request_target" not in wf.read_text() and "review.body" not in wf.read_text()
 
 
 def test_who_may_start_the_agents_and_what_workflows_may_write():

@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- **A second reviewer; every reviewer is asked, one approval is enough.** Tianyou Mou (`@mutianyou2013`) fills a
+  reviewer seat. CODEOWNERS names every reviewer on every line, so GitHub asks all of them, and `scale domains check`
+  fails when one is missing. A new `reviewers` workflow withdraws the open review requests when one reviewer approves
+  (and comments who approved and merges) and, after a push, asks again every reviewer whose approval the push
+  dismissed or who asked for changes. A request for changes still blocks the merge until its reviewer approves.
 - **Package 0.2.0, with the schema renamed.** The package version is raised to 0.2.0 for the next release, v0.2.0
   (the package and the schema keep their own versions; here both move). The methanol example's bundle is re-exported at schema scale-catal 0.2.0 (`methanol-synthesis-pre1966_v3.0.0.zip`,
   following 2.0.0; 17,563 edges, unchanged), and the governance documents name the schema `scale-catal`.

@@ -20,7 +20,7 @@ def test_core_declaration_names_the_kernel_and_its_maintainers():
     assert core["version"] == core_version(REPO) == HEAD_VERSION                  # CORE.yaml states the one version
     assert core["maintainers"]["team"] == "@hlxin"                               # the owner, the one reviewer group for now
     assert [(p["github"], p.get("since"), p["roles"], p.get("placeholder", False)) for p in core["maintainers"]["people"]] == [
-        ("hlxin", "2026-09-26", ["steward"], False), ("TODO-reviewer-2", None, ["maintainer"], True),
+        ("hlxin", "2026-09-26", ["steward"], False), ("mutianyou2013", "2026-10-11", ["maintainer"], False),
         ("TODO-reviewer-3", None, ["maintainer"], True)]
     assert core["review_areas"] == ["kernel"] and "proposals" not in core
     assert all((CORE / e).is_dir() for e in core["examples"]) and list((CORE / core["tests"]).glob("test_*.py"))

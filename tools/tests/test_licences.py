@@ -94,8 +94,8 @@ def test_licence_texts_and_package_metadata():
     assert re.search(r"^license: MIT$", (REPO / "CITATION.cff").read_text(), re.M)   # the software's licence
 
 
-def test_the_licence_files_belong_to_the_owner():
+def test_the_licence_files_belong_to_the_reviewers():
     rules = codeowners.parse((REPO / ".github/CODEOWNERS").read_text(encoding="utf-8"))
     for path in ("LICENSE", "LICENSES/CC-BY-4.0.txt", "NOTICE", "REUSE.toml"):
-        assert codeowners.owners_for(rules, path) == ("@hlxin",), path
+        assert codeowners.owners_for(rules, path) == ("@hlxin", "@mutianyou2013"), path
     assert (REPO / ".github/CODEOWNERS").read_text() == (REPO / "tools/tests/fixtures/codeowners/CODEOWNERS").read_text()

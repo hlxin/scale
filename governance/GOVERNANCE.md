@@ -36,7 +36,7 @@ approve or merge.
 | who | GitHub | what they do |
 |---|---|---|
 | **owner** | `@hlxin`, admin of the repository, code owner of every path in [`.github/CODEOWNERS`](../.github/CODEOWNERS) | a reviewer: approves and merges pull requests; merges their own under the bootstrap rule until another reviewer joins; builds releases; repository settings, rulesets and secrets ([repository-settings.md](repository-settings.md)) |
-| **reviewers** | domain experts, collaborators (Write), added to the review policy and CODEOWNERS when they join | approve and merge pull requests (any one of them is enough). Today: two seats to be filled (`TODO-reviewer-2`, `TODO-reviewer-3` in the review policy) |
+| **reviewers** | domain experts, collaborators (Write), added to the review policy and CODEOWNERS when they join | approve and merge pull requests (any one of them is enough). Today: the owner and Tianyou Mou (`@mutianyou2013`); one seat to be filled (`TODO-reviewer-3`) |
 | **contributors** | anyone: issues and comments; collaborators also branches and pull requests; others through forks once the repository is public | suggest changes, curate, report gaps |
 | **@scale-agents** | a team of Claude agents on GitHub, started by every new issue, comment and review (no tag or label), or a manual run | a discovery strategist frames and coordinates, a data scientist proposes the patch and its evidence, a protocol compiler writes the tests, an evidence verifier assesses support and effects, and a systems engineer opens pull requests from `agent/…` branches under the Claude GitHub App's identity; never approves or merges |
 
@@ -69,6 +69,19 @@ required checks ([repository-settings.md](repository-settings.md)).
 breaking or additive and what it adds, changes or removes, so that the reviewer knows what they review. New
 concepts enter as `maturity: provisional`; a later change may promote them to `stable`. There are no comment
 periods, no separate approver for provisional concepts and no committee quorum: the approval is the decision.
+
+### Every reviewer is asked; one approval is enough
+
+CODEOWNERS names every reviewer on every line, so GitHub asks all of them to review each new pull request (except
+its author); `scale domains check` fails when a reviewer of the review policy is missing from a line. Any one of them
+reviews:
+
+- **The first approval decides.** The [reviewers workflow](../.github/workflows/reviewers.yml) withdraws the review
+  requests still open and comments who approved; the approver merges once the checks pass. Others need not review.
+- **A request for changes blocks.** A reviewer who asks for changes blocks the merge until they approve or their
+  review is dismissed, whoever else approved. The agents push the fixes to the same branch.
+- **A push asks again.** A push dismisses earlier approvals (the ruleset); the workflow asks again every reviewer
+  whose approval it dismissed or who asked for changes. The last pusher cannot give the approval.
 
 ### Bootstrap: until the reviewers join
 

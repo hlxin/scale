@@ -78,7 +78,9 @@ def test_the_build_carries_core_kernel_domain_and_skills_with_the_one_version(tm
     # a skill is its whole folder: the release carries curate-source's references with their digests
     assert m["digests"]["skills/curate-source/references/recipes.md"] == sha256_file(
         repo / "skills/curate-source/references/recipes.md")
-    assert m["contributors"] == [{"name": "Hongliang Xin", "github": "hlxin", "roles": ["steward"], "scopes": ["core", "catalysis"]}]
+    assert m["contributors"] == [{"name": "Hongliang Xin", "github": "hlxin", "roles": ["steward"], "scopes": ["core", "catalysis"]},
+                                 {"name": "Tianyou Mou", "github": "mutianyou2013", "roles": ["maintainer"],
+                                  "scopes": ["core", "catalysis"]}]
     assert m["excluded_domains"] == []
     assert m["source"] == {"repository": "https://github.com/hlxin/scale", "tag": "v0.1.0"}
     # the first release: nothing to compare with

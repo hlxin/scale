@@ -81,7 +81,7 @@ def test_new_scaffolds_an_experimental_domain_that_passes_the_check(tmp_path):
     assert load_doc(d / "examples/batteries.example.graph.json")["graph"]["graph_id"] == "ex:batteries/example"
     # the domain's line, /domain/, names its team before the reviewers; the other lines are untouched
     after = codeowners.parse((repo / layout.CODEOWNERS).read_text())
-    assert [(r.pattern, r.owners) for r in after] == [(r.pattern, (TEAM, REVIEWERS) if r.pattern == "/domain/" else r.owners)
+    assert [(r.pattern, r.owners) for r in after] == [(r.pattern, (TEAM, *r.owners) if r.pattern == "/domain/" else r.owners)
                                                       for r in before]
     assert f"named {TEAM} on the /domain/ line" in res["codeowners"] and res["status"] == "experimental"
     out = check(repo)

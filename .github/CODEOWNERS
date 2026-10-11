@@ -1,9 +1,10 @@
 # Code owners of github.com/hlxin/scale.
 #
-# The owner, Hongliang Xin (@hlxin), owns everything for now. When reviewers (domain experts) join
-# governance/review-policy.yaml, they are added here next to @hlxin, so that review requests reach them. The
-# main-branch ruleset requires one approving review from any reviewer other than the author; it does not require a
-# code owner's review (governance/repository-settings.md).
+# Every reviewer of governance/review-policy.yaml is named on every line, so that GitHub asks all of them to review
+# every pull request (`scale domains check` fails when one is missing). The main-branch ruleset requires one approving
+# review from any reviewer other than the author and no code owner's review; the reviewers workflow
+# (.github/workflows/reviewers.yml) withdraws the other requests once one reviewer approves
+# (governance/repository-settings.md).
 #
 # How the file works
 # - The LAST matching pattern wins. General lines come first and specific lines after them.
@@ -15,10 +16,10 @@
 #
 # The catalysis domain
 # - domain/ has its own line naming its maintainers (`scale domains check` verifies it). Today that is the
-#   owner; maintainers of the catalysis domain are added on the line when they join.
+#   reviewers; maintainers of the catalysis domain are added on the line when they join.
 
 # Default: everything (the science kernel, tools, docs, governance, releases, workflows).
-*                                   @hlxin
+*                                   @hlxin @mutianyou2013
 
 # The catalysis domain: domain/.
-/domain/                            @hlxin
+/domain/                            @hlxin @mutianyou2013

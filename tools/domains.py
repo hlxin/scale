@@ -360,6 +360,7 @@ def check(repo: Path, only: list[str] | None = None, examples: bool = True) -> d
         team = (core.get("maintainers") or {}).get("team")
         if team and team not in codeowners.owners_for(rules, layout.CORE_MANIFEST):
             pb.error(layout.CODEOWNERS, f"{layout.CORE_MANIFEST} is not owned by the core team {team}")
+        _reviewers_routed(repo, rules, pb)
 
     # scale-release.yaml: the domain unless experimental, and the core (no repository-wide graph manifest)
     listed = rel_manifest.get("domain_profiles")
@@ -427,6 +428,22 @@ def _check_dir_with(base: Path, rel, pattern: str, where: str, what: str, pb: Pr
     if hits and not found:
         pb.error(where, f"{what}: {rel}/ has no {pattern}")
     return found
+
+
+def _reviewers_routed(repo: Path, rules: list, pb: Problems) -> None:
+    """Every reviewer of the review policy is named on every line of CODEOWNERS, so that GitHub asks each of them to
+    review every pull request (one approval is enough; the reviewers workflow withdraws the other requests)."""
+    from .policy import load_policy, reviewers
+    try:
+        people = reviewers(load_policy(repo))
+    except ScaleError:
+        return                                  # reported by _policy_areas
+    for m in people:
+        handle = f"@{m.get('github')}".lower()
+        for r in rules:
+            if handle not in {o.lower() for o in r.owners}:
+                pb.error(layout.CODEOWNERS, f"line {r.line} ({r.pattern}) does not name the reviewer {handle} of "
+                                            f"{layout.REVIEW_POLICY}: GitHub would not ask them to review")
 
 
 def _policy_areas(repo: Path, pb: Problems) -> set[str] | None:

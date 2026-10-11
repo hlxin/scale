@@ -59,12 +59,15 @@ forms in `.github/DISCUSSION_TEMPLATE/` are used once they are on. Create the la
 ## 2. Collaborators and reviewers
 
 A personal repository has its owner and collaborators; every collaborator has Write access. Today the owner,
-`@hlxin`, owns every path in [`.github/CODEOWNERS`](../.github/CODEOWNERS), and the review policy has two
-reviewer seats that are placeholders (`TODO-reviewer-2`, `TODO-reviewer-3`).
+`@hlxin`, and the reviewer Tianyou Mou, `@mutianyou2013`, are named on every line of
+[`.github/CODEOWNERS`](../.github/CODEOWNERS), and the review policy has one reviewer seat that is a placeholder
+(`TODO-reviewer-3`). GitHub asks every reviewer; the `reviewers` workflow withdraws the other requests when one
+approves ([GOVERNANCE.md](GOVERNANCE.md#every-reviewer-is-asked-one-approval-is-enough)).
 
 **Filling a reviewer seat.** When a reviewer joins, a pull request replaces one placeholder with the person's
 name and GitHub handle in `governance/review-policy.yaml`, `core/CORE.yaml` and `domain/DOMAIN.yaml` (remove
-`placeholder: true`, add `since`) and adds the handle next to `@hlxin` on the lines of `.github/CODEOWNERS`; the
+`placeholder: true`, add `since`) and adds the handle to every line of `.github/CODEOWNERS` (and its copy in
+`tools/tests/fixtures/codeowners/`; `scale domains check` fails until every line names every reviewer); the
 owner invites them as a collaborator:
 
 ```bash
@@ -95,6 +98,7 @@ The workflow token is read-only unless a workflow asks for more in its `permissi
 | `ci` | every pull request and push to `main` | nothing |
 | `triage` | weekly, or started by hand | nothing (it opens a digest issue with the workflow token, `issues: write`) |
 | `scale-agents` | every new issue, comment and pull-request review (not a bot's), or by hand from `main` | the secret `CLAUDE_CODE_OAUTH_TOKEN` (or `ANTHROPIC_API_KEY`) and the Claude GitHub App (below) |
+| `reviewers` | every submitted review and every push to a pull request from this repository | nothing (the workflow token, `pull-requests: write`: withdraws or renews review requests, comments) |
 | `publish` | a published GitHub release | the `pypi` environment and the trusted publisher (section 6); inert until configured |
 
 ## 4. Secrets

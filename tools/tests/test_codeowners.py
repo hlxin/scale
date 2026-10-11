@@ -10,7 +10,8 @@ from scale import codeowners, layout
 from scale.util import load_yaml
 
 FIXTURE = Path(__file__).parent / "fixtures/codeowners/CODEOWNERS"
-REVIEWERS = "@hlxin"                     # the owner, the reviewer group of the review policy for now
+REVIEWERS = "@hlxin"                     # the review policy's reviewer group: the owner
+EVERY_REVIEWER = {"@hlxin", "@mutianyou2013"}   # every reviewer of the review policy, asked on every path
 
 
 @pytest.fixture(scope="module")
@@ -58,14 +59,14 @@ def test_minimal_reviewers_is_a_smallest_cover():
     assert codeowners.minimal_reviewers([]) == []
 
 
-def test_the_owner_owns_every_path(rules):
+def test_every_reviewer_owns_every_path(rules):
     own = lambda p: set(codeowners.owners_for(rules, p))
     for path in ("core/graph/kernel.yaml", "core/graph/frozen/SHA256SUMS", "tools/cli.py", "tools/policy.py",
                  "domain/graph/catalysis.yaml", "domain/graph/frozen/SHA256SUMS",
                  "domain/README.md", "domain/proposals/000001/proposal.yaml", "governance/review-policy.yaml",
                  ".github/workflows/apply-proposals.yml", ".github/CODEOWNERS", "scale-release.yaml",
                  "releases/v0.1.0/RELEASE.yaml", "docs/decisions/log.json", "docs/gaps/register.json", "LICENSE"):
-        assert own(path) == {REVIEWERS}, path
+        assert own(path) == EVERY_REVIEWER, path
     # the structure stays ready for catalysis maintainers: domain/ has its own line (they join it later)
     assert codeowners.domain_line("catalysis") == codeowners.domain_line() == "/domain/"
     assert codeowners.lines_for(rules, codeowners.domain_line("catalysis"))

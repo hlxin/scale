@@ -10,6 +10,8 @@ principles:
     strategist coordinates, a data scientist, a protocol compiler and an evidence verifier prepare and assess the
     change, and a systems engineer opens a pull request holding the change set under the team's own
     GitHub identity (the Claude GitHub App), never under a person's account.
+  - Every reviewer is asked to review every pull request (CODEOWNERS); the first approval is enough, and the
+    reviewers workflow withdraws the other requests. A request for changes blocks until its reviewer approves.
   - One person approves and merges. Any reviewer listed below may approve, including the person who suggested the
     change; GitHub does not let the author of a pull request approve it, so whoever opened it needs another
     reviewer. Agents never approve or merge.
@@ -27,9 +29,9 @@ reviewers:
     - name: Hongliang Xin
       github: hlxin
       since: '2026-09-26'
-    - name: TODO-reviewer-2
-      github: TODO-reviewer-2
-      placeholder: true
+    - name: Tianyou Mou
+      github: mutianyou2013
+      since: '2026-10-11'
     - name: TODO-reviewer-3
       github: TODO-reviewer-3
       placeholder: true
