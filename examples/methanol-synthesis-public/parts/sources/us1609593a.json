@@ -1,0 +1,3280 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/source/us1609593a",
+      "label": "Source",
+      "props": {
+        "name": "Catalyst for synthetic methanol production",
+        "kind": "patent",
+        "description": "Published 1926-12-07 (grant date printed on the patent (agrees with the USPTO issue-year table)); in scope: before the 1966-01-01 cutoff. Text: 3 pages ocr (tesseract 5.5.3 (eng, 300 dpi, 2 columns)). Text not redistributed.",
+        "identifiers": {
+          "patent": "US1609593A"
+        },
+        "licence": "US patent; not subject to copyright",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "Catalyst for synthetic methanol production",
+        "url": "https://patents.google.com/patent/US1609593A",
+        "year": 1926
+      }
+    },
+    {
+      "id": "ex:msyn/us1609593a/catalyst/example-1",
+      "label": "Catalyst",
+      "props": {
+        "name": "Example I catalyst: 750 g magnesium oxide, 82 g ferric hydroxide",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example I",
+            "note": "'orams' = grams",
+            "passage": "us1609593a/p2/2",
+            "quote": "the final compo- sition of this catalyst after precipitating the iron and drying the mass is approxi- mately 750 grams magnesium oxide and 82 orams of ferric hydroxide.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ],
+        "generality": "particular",
+        "properties": {
+          "ferric_hydroxide_mass": {
+            "status": "present",
+            "as_reported": "82 orams of ferric hydroxide",
+            "qualifier": "approximate",
+            "unit": "g",
+            "value": 82
+          },
+          "magnesium_oxide_mass": {
+            "status": "present",
+            "as_reported": "approxi- mately 750 grams magnesium oxide",
+            "qualifier": "approximate",
+            "unit": "g",
+            "value": 750
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us1609593a/catalyst/example-2",
+      "label": "Catalyst",
+      "props": {
+        "name": "Example II catalyst: ferric hydroxide from 350 g ferric nitrate mixed with 900 g magnesium oxide",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "disagree",
+            "locator": "p. 2, Example II",
+            "reading": "vision_ocr",
+            "region": [
+              0.187,
+              0.592,
+              0.56,
+              0.632
+            ],
+            "second_reading": "Example II. [margin 40] 350 grams of ferric nitrate is dissolved in 5 liters of water and sufficient ammonium hydroxide is added to precipitate all of the iron as ferric hydroxide. The resultant flocculent mass is thoroughly washed with [margin 45]",
+            "source": "ex:msyn/source/us1609593a",
+            "transcription": "350 grams of ferric nitrate is dissolved in 5 liters of water and sufficient ammonium hydroxide is added to precipitate all of the"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Example II",
+            "passage": "us1609593a/p2/3",
+            "quote": "iron as ferric hydroxide. The resultant floc- eculent mass is thoroughly washed with water and after decanting the excess water, 900 grams of magnesium oxide is thoroughly",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ],
+        "generality": "particular"
+      }
+    },
+    {
+      "id": "ex:msyn/us1609593a/catalyst/mgo-ferric-hydroxide",
+      "label": "Catalyst",
+      "props": {
+        "name": "magnesium oxide–ferric hydroxide methanol catalyst",
+        "catalyst_family": "mixed_oxide",
+        "description": "Ferric hydroxide precipitated from a ferric salt in aqueous solution, incorporated with magnesium oxide, dried and broken into granules.",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1609593a/p1/6",
+            "quote": "In pre- paring our improved catalyst we employ a . mixture of magnesium oxide and ferric hy- . droxide.",
+            "source": "ex:msyn/source/us1609593a"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2",
+            "reading": "vision_ocr",
+            "region": [
+              0.187,
+              0.195,
+              0.56,
+              0.25
+            ],
+            "second_reading": "se—the exact structure of the resultant catalyst is not known to us. The amount of ferric hydroxide may vary from 3% to 25% of the weight of magnesium oxide, though we prefer to use about 10%. [margin line no. 10] The magnesium oxide may be incorporated with ferric hydroxide in any convenient manner as is indicated in the ap-",
+            "source": "ex:msyn/source/us1609593a",
+            "transcription": "The amount of ferric hydroxide may vary from 3% to 25% of the weight of magne- sium oxide, though we prefer to use about 10%."
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "stray letters at the line starts are OCR of the column margin; '1s' = 'is'",
+            "passage": "us1609593a/p1/7",
+            "quote": "hydroxide obtained by precipitation of iron o from a ferric salt in aqueous solution 1s in- ce corporated with magnesium oxide and the 18 a mass is dried and broken up into granules",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ],
+        "generality": "kind",
+        "note": "catalyst_family 'mixed_oxide' is the curator's category; the patent names the ingredients magnesium oxide and ferric hydroxide",
+        "properties": {
+          "ferric_hydroxide_per_weight_of_mgo": {
+            "status": "present",
+            "as_reported": "from 3% to 25% of the weight of magne- sium oxide",
+            "basis": "per cent of the weight of magnesium oxide",
+            "lower": 3,
+            "note": "lower limit corrected 2026-09-29 from 8 to 3: the page image prints '3%' (OCR read '8%')",
+            "unit": "%",
+            "upper": 25
+          },
+          "ferric_hydroxide_preferred": {
+            "status": "present",
+            "as_reported": "about 10%",
+            "basis": "per cent of the weight of magnesium oxide",
+            "qualifier": "approximate",
+            "unit": "%",
+            "value": 10
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us1609593a/claim/carbon-oxides-react",
+      "label": "Claim",
+      "props": {
+        "name": "Methanol is produced by combining carbon monoxide, carbon dioxide or their mixtures with h",
+        "claim_kind": "generalization",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1609593a/p1/1",
+            "quote": "Our invention relates to the production of methanol by the high pressure catalytic com- bination of oxides of carbon with hydrogen,",
+            "source": "ex:msyn/source/us1609593a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'Tt' is OCR for 'It'; '20' is a line number",
+            "passage": "us1609593a/p1/1",
+            "quote": "Tt is observed that when carbon dioxide is the oxide employed, one molecule of water 20 is formed for every molecule of methanol produced.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Methanol is produced by combining carbon monoxide, carbon dioxide or their mixtures with hydrogen over a suitable catalyst at elevated temperature and pressure; with carbon dioxide one molecule of water forms per molecule of methanol."
+      }
+    },
+    {
+      "id": "ex:msyn/us1609593a/claim/ferric-hydroxide-8-25",
+      "label": "Claim",
+      "props": {
+        "name": "The amount of ferric hydroxide may vary from 3% to 25% of the weight of magnesium oxide, a",
+        "claim_kind": "generalization",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2",
+            "reading": "vision_ocr",
+            "region": [
+              0.187,
+              0.195,
+              0.56,
+              0.25
+            ],
+            "second_reading": "se—the exact structure of the resultant catalyst is not known to us. The amount of ferric hydroxide may vary from 3% to 25% of the weight of magnesium oxide, though we prefer to use about 10%. [margin line no. 10] The magnesium oxide may be incorporated with ferric hydroxide in any convenient manner as is indicated in the ap-",
+            "source": "ex:msyn/source/us1609593a",
+            "transcription": "The amount of ferric hydroxide may vary from 3% to 25% of the weight of magne- sium oxide, though we prefer to use about 10%."
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "corrected 2026-09-29 from '8%' (OCR) to '3%' as printed on the page image; the record id keeps the old reading",
+        "statement": "The amount of ferric hydroxide may vary from 3% to 25% of the weight of magnesium oxide, about 10% being preferred."
+      }
+    },
+    {
+      "id": "ex:msyn/us1609593a/claim/literature-iron-poisons",
+      "label": "Claim",
+      "props": {
+        "name": "The literature states without exception that iron or any of its compounds in a catalyst de",
+        "claim_kind": "generalization",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "stated as what the literature says",
+            "passage": "us1609593a/p1/5",
+            "quote": "the presence of iron or any of its compounds in a catalyst destroys or poisons the catalyst 75 and inhibits methanol formation.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "stated by the patent as the teaching of the prior literature",
+        "statement": "The literature states without exception that iron or any of its compounds in a catalyst destroys or poisons the catalyst and inhibits methanol formation."
+      }
+    },
+    {
+      "id": "ex:msyn/us1609593a/claim/mgo-iron-inhibits-methane",
+      "label": "Claim",
+      "props": {
+        "name": "In a catalyst of magnesium oxide and ferric hydroxide the hydrogenating effect of the iron",
+        "claim_kind": "generalization",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'fact' is OCR for 'fect' (effect)",
+            "passage": "us1609593a/p1/6",
+            "quote": "by the desirable hydrogenating catalytic ef- 90 fact of the iron is obtained and the tendency to methane formation is inhibited.",
+            "source": "ex:msyn/source/us1609593a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1609593a/p1/6",
+            "quote": "In pre- paring our improved catalyst we employ a . mixture of magnesium oxide and ferric hy- . droxide.",
+            "source": "ex:msyn/source/us1609593a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1609593a/p1/6",
+            "quote": "Magnesium oxide—per se—has 95 1 no catalytic effect on the methanol reaction,",
+            "source": "ex:msyn/source/us1609593a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "continues 'positive inhibiting effect'",
+            "passage": "us1609593a/p1/6",
+            "quote": "while ferric hydroxide—per. se—has a posi-",
+            "source": "ex:msyn/source/us1609593a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1609593a/p1/6",
+            "quote": "these two ingredients are properly. com- r pounded a desirable. methanol catalyst is 100 produced.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "In a catalyst of magnesium oxide and ferric hydroxide the hydrogenating effect of the iron is obtained while the tendency to methane formation is inhibited; magnesium oxide alone has no catalytic effect and ferric hydroxide alone an inhibiting effect."
+      }
+    },
+    {
+      "id": "ex:msyn/us1609593a/claim/patent-claim-1",
+      "label": "Claim",
+      "props": {
+        "name": "A methanol catalyst comprising magnesium oxide and ferric hydroxide.",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 1",
+            "passage": "us1609593a/p2/4",
+            "quote": "1. A methanol catalyst comprising mag- i nesium oxide and ferric hydroxide.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "claim 1 of the patent; statement transcribed with OCR errors corrected",
+        "statement": "A methanol catalyst comprising magnesium oxide and ferric hydroxide."
+      }
+    },
+    {
+      "id": "ex:msyn/us1609593a/claim/patent-claim-10",
+      "label": "Claim",
+      "props": {
+        "name": "A process for the production of synthetic methanol which comprises passing a mixture of hy (claim 10)",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, claim 10",
+            "reading": "vision_ocr",
+            "region": [
+              0.575,
+              0.852,
+              0.929,
+              0.9
+            ],
+            "source": "ex:msyn/source/us1609593a",
+            "transcription": "mixture of hydrogen and carbon oxides at a pressure in excess of 50 atmospheres and at a temperature of 350–450° C. over a cata- lyst initially containing magnesium oxide"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 10",
+            "passage": "us1609593a/p3/1",
+            "quote": "and ferric hydroxide, cooling the reacted gases, and recovering the resultant meth- anol.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "claim 10 of the patent; statement transcribed with OCR errors corrected; the temperature 350-450° C. is confirmed on the page image (OCR had '3850-450° C.')",
+        "statement": "A process for the production of synthetic methanol which comprises passing a mixture of hydrogen and carbon oxides at a pressure in excess of 50 atmospheres and at a temperature of 350-450° C. over a catalyst initially containing magnesium oxide and ferric hydroxide, cooling the reacted gases, and recovering the resultant methanol."
+      }
+    },
+    {
+      "id": "ex:msyn/us1609593a/claim/patent-claim-11",
+      "label": "Claim",
+      "props": {
+        "name": "A process for the production of synthetic methanol which comprises passing a mixture of hy (claim 11)",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 11",
+            "passage": "us1609593a/p3/1",
+            "quote": "a pressure in excess of 50 atmospheres and at a temperature of 350-450° C. over a",
+            "source": "ex:msyn/source/us1609593a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 11",
+            "passage": "us1609593a/p3/1",
+            "quote": "catalyst initially containing 97-75% mag- ‘nesium oxide and 3-25% ferric hydroxide, 19 cooling the resultant gases, and recovering the resultant methanol.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "claim 11 of the patent; statement transcribed with OCR errors corrected",
+        "statement": "A process for the production of synthetic methanol which comprises passing a mixture of hydrogen and carbon oxides at a pressure in excess of 50 atmospheres and at a temperature of 350-450° C. over a catalyst initially containing 97-75% magnesium oxide and 3-25% ferric hydroxide, cooling the resultant gases, and recovering the resultant methanol."
+      }
+    },
+    {
+      "id": "ex:msyn/us1609593a/claim/patent-claim-2",
+      "label": "Claim",
+      "props": {
+        "name": "A methanol catalyst comprising 97-75% magnesium oxide and 3-25% ferric hydroxide.",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2, claim 2",
+            "reading": "vision_ocr",
+            "region": [
+              0.575,
+              0.306,
+              0.929,
+              0.345
+            ],
+            "second_reading": "1. A methanol catalyst comprising magnesium oxide and ferric hydroxide. 2. A methanol catalyst comprising 97-75% magnesium oxide and 3-25% ferric hydroxide. 3. A methanol catalyst comprising magnesium oxide and ferric hydroxide, the fer-",
+            "source": "ex:msyn/source/us1609593a",
+            "transcription": "2. A methanol catalyst comprising 97–75% magnesium oxide and 3–25% ferric hy- droxide."
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "claim 2 of the patent; statement transcribed with OCR errors corrected; statement corrected 2026-09-29 from the page image (OCR had '38-25%')",
+        "statement": "A methanol catalyst comprising 97-75% magnesium oxide and 3-25% ferric hydroxide."
+      }
+    },
+    {
+      "id": "ex:msyn/us1609593a/claim/patent-claim-3",
+      "label": "Claim",
+      "props": {
+        "name": "A methanol catalyst comprising magnesium oxide and ferric hydroxide, the ferric hydroxide ",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 3",
+            "note": "the numeral '3.' is OCR'd as 'do.'",
+            "quote": "nesium oxide and ferric hydroxide, the fer- ric hydroxide being formed by precipita- tion in aqueous solution from a soluble fer- ‘ric salt.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "claim 3 of the patent; statement transcribed with OCR errors corrected",
+        "statement": "A methanol catalyst comprising magnesium oxide and ferric hydroxide, the ferric hydroxide being formed by precipitation in aqueous solution from a soluble ferric salt."
+      }
+    },
+    {
+      "id": "ex:msyn/us1609593a/claim/patent-claim-4",
+      "label": "Claim",
+      "props": {
+        "name": "A methanol catalyst comprising 97-75% magnesium oxide and 3%-25% ferric hydroxide, the fer",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, claim 4",
+            "reading": "vision_ocr",
+            "region": [
+              0.575,
+              0.403,
+              0.929,
+              0.466
+            ],
+            "source": "ex:msyn/source/us1609593a",
+            "transcription": "4. A methanol catalyst comprising 97–75% magnesium oxide and 3%–25% ferric hy- droxide, the ferric hydroxide being formed by precipitation in aqueous solution from a soluble ferric salt."
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "claim 4 of the patent; statement transcribed with OCR errors corrected; statement corrected 2026-09-29 from the page image (OCR had '8%-25%')",
+        "statement": "A methanol catalyst comprising 97-75% magnesium oxide and 3%-25% ferric hydroxide, the ferric hydroxide being formed by precipitation in aqueous solution from a soluble ferric salt."
+      }
+    },
+    {
+      "id": "ex:msyn/us1609593a/claim/patent-claim-5",
+      "label": "Claim",
+      "props": {
+        "name": "A methanol catalyst comprising 750 grams of magnesium oxide and 82 grams of ferric hydroxi",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 5",
+            "note": "'%' after 750 is a stray line number",
+            "passage": "us1609593a/p2/5",
+            "quote": "5. A methanol catalyst comprising 750 % grams of magnesium oxide and 82 grams of ferric hydroxide, the ferric hydroxide being formed by precipitation in aqueous solution from a soluble ferric salt.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "claim 5 of the patent; statement transcribed with OCR errors corrected",
+        "statement": "A methanol catalyst comprising 750 grams of magnesium oxide and 82 grams of ferric hydroxide, the ferric hydroxide being formed by precipitation in aqueous solution from a soluble ferric salt."
+      }
+    },
+    {
+      "id": "ex:msyn/us1609593a/claim/patent-claim-6",
+      "label": "Claim",
+      "props": {
+        "name": "A process for the preparation of a methanol catalyst which comprises precipitating ferric ",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 6",
+            "passage": "us1609593a/p2/5",
+            "quote": "6. A process for the preparation of a 100 methanol catalyst which comprises precipi- tating ferric hydroxide from an aqueous solution of a ferric salt on magnesium oxide.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "claim 6 of the patent; statement transcribed with OCR errors corrected",
+        "statement": "A process for the preparation of a methanol catalyst which comprises precipitating ferric hydroxide from an aqueous solution of a ferric salt on magnesium oxide."
+      }
+    },
+    {
+      "id": "ex:msyn/us1609593a/claim/patent-claim-7",
+      "label": "Claim",
+      "props": {
+        "name": "A process for the preparation of a methanol catalyst which comprises precipitating 3-25% o",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, claim 7",
+            "reading": "vision_ocr",
+            "region": [
+              0.565,
+              0.585,
+              0.929,
+              0.647
+            ],
+            "source": "ex:msyn/source/us1609593a",
+            "transcription": "7. A process for the preparation of a methanol catalyst, which comprises preci- pitating from 3–25% of ferric hydroxide from an aqueous solution of a ferric salt on 97–75% of magnesium oxide."
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "claim 7 of the patent; statement transcribed with OCR errors corrected; statement corrected 2026-09-29 from the page image (OCR had '38-25%')",
+        "statement": "A process for the preparation of a methanol catalyst which comprises precipitating 3-25% of ferric hydroxide from an aqueous solution of a ferric salt on 97-75% of magnesium oxide."
+      }
+    },
+    {
+      "id": "ex:msyn/us1609593a/claim/patent-claim-8",
+      "label": "Claim",
+      "props": {
+        "name": "A process for the preparation of a methanol catalyst which comprises mixing magnesium oxid",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 8",
+            "passage": "us1609593a/p2/6",
+            "quote": "8. A process for the. preparation of a Ilu methanol catalyst which comprises mixing | magnesium oxide with an aqueous solution of a ferric salt, precipitating ferric hydrox- ide by adding ammonium hydroxide, fil- tering, washing, and drying the resultant",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "claim 8 of the patent; statement transcribed with OCR errors corrected",
+        "statement": "A process for the preparation of a methanol catalyst which comprises mixing magnesium oxide with an aqueous solution of a ferric salt, precipitating ferric hydroxide by adding ammonium hydroxide, filtering, washing, and drying the resultant [mass]."
+      }
+    },
+    {
+      "id": "ex:msyn/us1609593a/claim/patent-claim-9",
+      "label": "Claim",
+      "props": {
+        "name": "A process for the preparation of a methanol catalyst which comprises dissolving 313 grams ",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, claim 9",
+            "reading": "vision_ocr",
+            "region": [
+              0.565,
+              0.752,
+              0.929,
+              0.822
+            ],
+            "source": "ex:msyn/source/us1609593a",
+            "transcription": "ing 313 grams of ferric nitrate in 25 liters of water, adding 750 grams of magnesium oxide, precipitating the iron as ferric hy- droxide by adding ammonium hydroxide, and recovering the resultant mass in dry"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "claim 9 of the patent; statement transcribed with OCR errors corrected; statement corrected 2026-09-29 from the page image (OCR had '813 grams')",
+        "statement": "A process for the preparation of a methanol catalyst which comprises dissolving 313 grams of ferric nitrate in 25 liters of water, adding 750 grams of magnesium oxide, precipitating the iron as ferric hydroxide by adding ammonium hydroxide, and recovering the resultant mass in dry form."
+      }
+    },
+    {
+      "id": "ex:msyn/us1609593a/claim/pressure-sv-co-trends",
+      "label": "Claim",
+      "props": {
+        "name": "Increasing pressure and space velocity above the example's figures increases the condensat",
+        "claim_kind": "generalization",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1609593a/p2/4",
+            "quote": "Increase of pressure and increase of space velocity over the fig- ures given In the example increase the total amount of condensate per hour whereas an 70 increase in the percentage of carbon monox- | ide produces an increase in the percentage of methanol in the condensate.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Increasing pressure and space velocity above the example's figures increases the condensate produced per hour; increasing the percentage of carbon monoxide increases the percentage of methanol in the condensate."
+      }
+    },
+    {
+      "id": "ex:msyn/us1609593a/claim/pure-co-20",
+      "label": "Claim",
+      "props": {
+        "name": "With pure carbon monoxide as the carbon oxide its percentage may advantageously be increas",
+        "claim_kind": "generalization",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1609593a/p2/4",
+            "quote": "If pure carbon monoxide is employed as the carbon oxide the percentage may be 75 advantageously increased to 20%, the hy- (lrogen being correspondingly diminished.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "With pure carbon monoxide as the carbon oxide its percentage may advantageously be increased to 20%, hydrogen being correspondingly diminished."
+      }
+    },
+    {
+      "id": "ex:msyn/us1609593a/claim/reduced-in-synthesis-gas",
+      "label": "Claim",
+      "props": {
+        "name": "In the synthesis gas the ferric hydroxide is reduced to iron oxide; the exact structure of",
+        "claim_kind": "generalization",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1609593a/p2/1",
+            "quote": "ence of the hydrogen and carbon oxide gas mixtures used for synthesizing methanol the",
+            "source": "ex:msyn/source/us1609593a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1609593a/p2/1",
+            "quote": "ferric hydroxide is subsequently reduced to iron oxide and possibly in part to iron—per",
+            "source": "ex:msyn/source/us1609593a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1609593a/p2/1",
+            "quote": "the exact structure of the resultant catalyst is not known to us.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "In the synthesis gas the ferric hydroxide is reduced to iron oxide; the exact structure of the resulting catalyst is not known."
+      }
+    },
+    {
+      "id": "ex:msyn/us1609593a/claim/some-reaction-always",
+      "label": "Claim",
+      "props": {
+        "name": "Over a metallic-oxide catalyst above 100 atmospheres and above 250 °C, a carbon oxide–hydr",
+        "claim_kind": "generalization",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "column edge clipped; 'near!' continues as 'nearly always produced some reaction'",
+            "passage": "us1609593a/p1/3",
+            "quote": "‘produce methanol is passed over a catalyti substance consisting of metallic oxides at pressure -above 100 atmospheres and at temperature above 250° C. there is near!",
+            "source": "ex:msyn/source/us1609593a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1609593a/p1/4",
+            "quote": "always produced some reaction between. the 55 gaseous components.",
+            "source": "ex:msyn/source/us1609593a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1609593a/p1/4",
+            "quote": "The substances formed by such a process depend, both as.to identity and as to amount, almost entirely on the nature and activity of the catalytic substance present.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Over a metallic-oxide catalyst above 100 atmospheres and above 250 °C, a carbon oxide–hydrogen mixture nearly always reacts to some extent; the products depend almost entirely on the nature and activity of the catalyst."
+      }
+    },
+    {
+      "id": "ex:msyn/us1609593a/feed/h2-90-cox-10",
+      "label": "Feed",
+      "props": {
+        "name": "90% hydrogen, 10% oxides of carbon",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2",
+            "reading": "vision_ocr",
+            "region": [
+              0.187,
+              0.775,
+              0.57,
+              0.839
+            ],
+            "second_reading": "ty of another soluble ferric salt may be employed. [margin 55] When a mixture of 90% hydrogen gas with 10% oxides of carbon, comprising about 7% carbon dioxide 3% carbon monoxide is passed over 1000 cubic centimeters of catalyst granules thus prepared [margin 60] at a pressure of 2000 pounds at a temperature of about 350°-450° C. and at a space",
+            "source": "ex:msyn/source/us1609593a",
+            "transcription": "When a mixture of 90% hydrogen gas with 10% oxides of carbon, comprising about 7% carbon dioxide 3% carbon monoxide is passed over 1000 cubic centi- meters of catalyst granules thus prepared"
+          }
+        ],
+        "ratios": {
+          "carbon_oxides_percent": {
+            "status": "present",
+            "as_reported": "10% oxides of carbon",
+            "unit": "%",
+            "value": 10
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us1609593a/hypothesis/partly-reduced-to-iron",
+      "label": "Hypothesis",
+      "props": {
+        "name": "ferric hydroxide possibly reduced in part to iron",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1609593a/p2/1",
+            "quote": "ferric hydroxide is subsequently reduced to iron oxide and possibly in part to iron—per",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ],
+        "hypothesis_kind": "descriptive",
+        "hypothesis_status": "proposed",
+        "statement": "The ferric hydroxide is possibly reduced in part to iron in the synthesis gas."
+      }
+    },
+    {
+      "id": "ex:msyn/us1609593a/preparation/example-1",
+      "label": "Preparation",
+      "props": {
+        "name": "Example I: ferric hydroxide precipitated with ammonia onto magnesium oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example I",
+            "note": "heading OCR 'Example f,'; formula OCR of Fe(NO3)3·9H2O",
+            "passage": "us1609593a/p2/1",
+            "quote": "313 grams of ferric nitrate — (Fe(NO,),9H,O)",
+            "source": "ex:msyn/source/us1609593a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Example I",
+            "passage": "us1609593a/p2/2",
+            "quote": "is dissolved in 25 liters of water which is then heated to 95° C. To the hot solution is added 750 grams of magnesium oxide",
+            "source": "ex:msyn/source/us1609593a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Example I",
+            "note": "'ammonimuin' = ammonium",
+            "passage": "us1609593a/p2/2",
+            "quote": "with stirring 190 cubic centimeters of 12.38 normal ammonimuin hydroxide is added to precipitate the iron to the hydroxide form.",
+            "source": "ex:msyn/source/us1609593a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Example I",
+            "passage": "us1609593a/p2/2",
+            "quote": "The mixture ts allowed to stand, the super- natant liquid siphoned off, and the mass is filtered and washed until there is no test for nitrates in the filtrate.",
+            "source": "ex:msyn/source/us1609593a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Example I",
+            "passage": "us1609593a/p2/2",
+            "quote": "The mass is then completely dried and broken up into granules, whereupon it is ready for use.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ],
+        "method": "precipitation of ferric hydroxide from ferric nitrate solution with ammonium hydroxide in the presence of magnesium oxide",
+        "note": "steps paraphrase the OCR text with OCR errors corrected; claim 9 also prints '313 grams' (the page image shows 313; OCR read '813')",
+        "procedure_status": "completed",
+        "steps": [
+          "313 grams of ferric nitrate (Fe(NO3)3·9H2O) is dissolved in 25 liters of water which is then heated to 95° C.",
+          "To the hot solution is added 750 grams of magnesium oxide with stirring",
+          "190 cubic centimeters of 12.38 normal ammonium hydroxide is added to precipitate the iron to the hydroxide form",
+          "The mixture is allowed to stand, the supernatant liquid siphoned off, and the mass is filtered and washed until there is no test for nitrates in the filtrate",
+          "The mass is then completely dried and broken up into granules"
+        ],
+        "temperature": {
+          "status": "present",
+          "as_reported": "heated to 95° C.",
+          "note": "temperature of the ferric nitrate solution",
+          "unit": "°C",
+          "value": 95
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us1609593a/preparation/example-2",
+      "label": "Preparation",
+      "props": {
+        "name": "Example II: ferric hydroxide precipitated, washed, then mixed with magnesium oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "disagree",
+            "locator": "p. 2, Example II",
+            "reading": "vision_ocr",
+            "region": [
+              0.187,
+              0.592,
+              0.56,
+              0.632
+            ],
+            "second_reading": "Example II. [margin 40] 350 grams of ferric nitrate is dissolved in 5 liters of water and sufficient ammonium hydroxide is added to precipitate all of the iron as ferric hydroxide. The resultant flocculent mass is thoroughly washed with [margin 45]",
+            "source": "ex:msyn/source/us1609593a",
+            "transcription": "350 grams of ferric nitrate is dissolved in 5 liters of water and sufficient ammonium hydroxide is added to precipitate all of the"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Example II",
+            "passage": "us1609593a/p2/3",
+            "quote": "iron as ferric hydroxide. The resultant floc- eculent mass is thoroughly washed with water and after decanting the excess water, 900 grams of magnesium oxide is thoroughly",
+            "source": "ex:msyn/source/us1609593a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Example II",
+            "passage": "us1609593a/p2/3",
+            "quote": "mixed therewith, The mixture is then dried. and broken up into granules.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ],
+        "method": "precipitation of ferric hydroxide from ferric nitrate with ammonium hydroxide, washing, then mixing with magnesium oxide",
+        "note": "ferric nitrate amount corrected 2026-09-29 from 300 g (OCR) to 350 g and the water volume (5 liters, illegible in OCR) read from the page image",
+        "procedure_status": "completed",
+        "steps": [
+          "350 grams of ferric nitrate is dissolved in 5 liters of water and sufficient ammonium hydroxide is added to precipitate all of the iron as ferric hydroxide",
+          "The resultant flocculent mass is thoroughly washed with water and the excess water decanted",
+          "900 grams of magnesium oxide is thoroughly mixed therewith",
+          "The mixture is then dried and broken up into granules"
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1609593a/preparation/example-3",
+      "label": "Preparation",
+      "props": {
+        "name": "Example III: another soluble ferric salt in place of ferric nitrate",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example III",
+            "note": "heading OCR 'Baeample II,'",
+            "passage": "us1609593a/p2/3",
+            "quote": "In place of the ferric nitrate mentioned in Example I and II an equivalent quanti- ty of another soluble ferric salt may be. employed.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ],
+        "method": "as Examples I and II, with an equivalent quantity of another soluble ferric salt in place of ferric nitrate",
+        "procedure_status": "proposed"
+      }
+    },
+    {
+      "id": "ex:msyn/us1609593a/sample/granules-thus-prepared",
+      "label": "CatalystSample",
+      "props": {
+        "name": "1000 cc of catalyst granules 'thus prepared'",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2",
+            "reading": "vision_ocr",
+            "region": [
+              0.187,
+              0.775,
+              0.57,
+              0.839
+            ],
+            "second_reading": "ty of another soluble ferric salt may be employed. [margin 55] When a mixture of 90% hydrogen gas with 10% oxides of carbon, comprising about 7% carbon dioxide 3% carbon monoxide is passed over 1000 cubic centimeters of catalyst granules thus prepared [margin 60] at a pressure of 2000 pounds at a temperature of about 350°-450° C. and at a space",
+            "source": "ex:msyn/source/us1609593a",
+            "transcription": "When a mixture of 90% hydrogen gas with 10% oxides of carbon, comprising about 7% carbon dioxide 3% carbon monoxide is passed over 1000 cubic centi- meters of catalyst granules thus prepared"
+          }
+        ],
+        "note": "The text says 'catalyst granules thus prepared' after Examples I–III and does not say which example was used.",
+        "preparation_status": "prepared",
+        "sample_kind": "granules"
+      }
+    },
+    {
+      "id": "ex:msyn/us1609593a/species/ferric-nitrate",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "ferric nitrate",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "disagree",
+            "locator": "p. 2, Example II",
+            "reading": "vision_ocr",
+            "region": [
+              0.187,
+              0.592,
+              0.56,
+              0.632
+            ],
+            "second_reading": "Example II. [margin 40] 350 grams of ferric nitrate is dissolved in 5 liters of water and sufficient ammonium hydroxide is added to precipitate all of the iron as ferric hydroxide. The resultant flocculent mass is thoroughly washed with [margin 45]",
+            "source": "ex:msyn/source/us1609593a",
+            "transcription": "350 grams of ferric nitrate is dissolved in 5 liters of water and sufficient ammonium hydroxide is added to precipitate all of the"
+          }
+        ],
+        "note": "Example II names ferric nitrate without a formula"
+      }
+    },
+    {
+      "id": "ex:msyn/us1609593a/species/iron-carbonyl-compound",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "volatile carbonyl compound (of iron)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1609593a/p1/5",
+            "quote": "in some forms it reacts with carbon monoxide, and with mixtures.",
+            "source": "ex:msyn/source/us1609593a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'2' is OCR for 'a'",
+            "passage": "us1609593a/p1/5",
+            "quote": "used in the methanol reaction, forming 2 volatile carbonyl compound and. inhibiting the methanol reaction.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1609593a/species/soluble-ferric-salt",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "another soluble ferric salt",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example III",
+            "note": "heading OCR 'Baeample II,'",
+            "passage": "us1609593a/p2/3",
+            "quote": "In place of the ferric nitrate mentioned in Example I and II an equivalent quanti- ty of another soluble ferric salt may be. employed.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1609593a/test/example",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "methanol synthesis over 1000 cc of MgO–ferric hydroxide granules, 2000 pounds, 350–450 °C",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2",
+            "reading": "vision_ocr",
+            "region": [
+              0.187,
+              0.775,
+              0.57,
+              0.839
+            ],
+            "second_reading": "ty of another soluble ferric salt may be employed. [margin 55] When a mixture of 90% hydrogen gas with 10% oxides of carbon, comprising about 7% carbon dioxide 3% carbon monoxide is passed over 1000 cubic centimeters of catalyst granules thus prepared [margin 60] at a pressure of 2000 pounds at a temperature of about 350°-450° C. and at a space",
+            "source": "ex:msyn/source/us1609593a",
+            "transcription": "When a mixture of 90% hydrogen gas with 10% oxides of carbon, comprising about 7% carbon dioxide 3% carbon monoxide is passed over 1000 cubic centi- meters of catalyst granules thus prepared"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1609593a/p2/3",
+            "quote": "at a pressure. of 2000 pounds at a tempera- ture of about 350°-450° C., and at a space velocity of about 75,000 there will be pro- duced, hourly, about 1.5 liters of condensate containing about 55% of methanol, the re-",
+            "source": "ex:msyn/source/us1609593a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1609593a/p2/4",
+            "quote": "mainder of the condensate being substan- tially pure water.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "pressure": {
+          "status": "present",
+          "as_reported": "2000 pounds",
+          "note": "printed as '2000 pounds' without area unit",
+          "unit": "lb/in2",
+          "value": 2000
+        },
+        "production_rate": {
+          "status": "present",
+          "as_reported": "about 1.5 liters of condensate",
+          "basis": "condensate produced hourly",
+          "qualifier": "approximate",
+          "unit": "L/h",
+          "value": 1.5
+        },
+        "results": {
+          "methanol_in_condensate": {
+            "status": "present",
+            "as_reported": "about 55% of methanol",
+            "qualifier": "approximate",
+            "unit": "%",
+            "value": 55
+          },
+          "remainder_of_condensate": {
+            "status": "present",
+            "as_reported": "substan- tially pure water",
+            "text_value": "substantially pure water"
+          }
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "about 75,000",
+          "note": "no unit printed",
+          "qualifier": "approximate",
+          "unit": "not stated",
+          "value": 75000
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "about 350°-450° C.",
+          "lower": 350,
+          "qualifier": "approximate",
+          "unit": "°C",
+          "upper": 450
+        },
+        "temperature_measured_at": "not_reported",
+        "test_kind": "activity",
+        "test_label": "operating example after Example III"
+      }
+    },
+    {
+      "id": "ex:msyn/us1609593a/treatment/in-situ-reduction",
+      "label": "Treatment",
+      "props": {
+        "name": "reduction of ferric hydroxide in the synthesis gas",
+        "atmosphere": "the hydrogen and carbon oxide gas mixtures used for synthesizing methanol",
+        "duration": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source"
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1609593a/p2/1",
+            "quote": "ence of the hydrogen and carbon oxide gas mixtures used for synthesizing methanol the",
+            "source": "ex:msyn/source/us1609593a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1609593a/p2/1",
+            "quote": "ferric hydroxide is subsequently reduced to iron oxide and possibly in part to iron—per",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ],
+        "note": "in situ during synthesis; the patent is 'certain' of reduction to iron oxide and says 'possibly in part to iron'",
+        "procedure_status": "completed",
+        "temperature": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source"
+        },
+        "treatment_kind": "reduction"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/reaction/co-hydrogenation-to-methanol/reported-in/us1609593a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/source/us1609593a"
+    },
+    {
+      "id": "ex:msyn/reaction/co-methanation/reported-in/us1609593a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/reaction/co-methanation",
+      "target": "ex:msyn/source/us1609593a"
+    },
+    {
+      "id": "ex:msyn/reaction/co2-hydrogenation-to-methanol/reported-in/us1609593a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/reaction/co2-hydrogenation-to-methanol",
+      "target": "ex:msyn/source/us1609593a"
+    },
+    {
+      "id": "ex:msyn/source/us1609593a/assignee",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "role": "assignee"
+      },
+      "source": "ex:msyn/source/us1609593a",
+      "target": "ex:msyn/institution/commercial-solvents-corp"
+    },
+    {
+      "id": "ex:msyn/species/feno339h2o/reported-in/us1609593a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, Example I"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/feno339h2o",
+      "target": "ex:msyn/source/us1609593a"
+    },
+    {
+      "id": "ex:msyn/species/feoh3/reported-in/us1609593a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/feoh3",
+      "target": "ex:msyn/source/us1609593a"
+    },
+    {
+      "id": "ex:msyn/us1609593a/catalyst/example-1/reported-in/us1609593a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, Example I"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1609593a/catalyst/example-1",
+      "target": "ex:msyn/source/us1609593a"
+    },
+    {
+      "id": "ex:msyn/us1609593a/catalyst/example-2/reported-in/us1609593a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, Example II"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1609593a/catalyst/example-2",
+      "target": "ex:msyn/source/us1609593a"
+    },
+    {
+      "id": "ex:msyn/us1609593a/catalyst/mgo-ferric-hydroxide/reported-in/us1609593a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1609593a/catalyst/mgo-ferric-hydroxide",
+      "target": "ex:msyn/source/us1609593a"
+    },
+    {
+      "id": "ex:msyn/us1609593a/claim/carbon-oxides-react/reported-in/us1609593a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1609593a/claim/carbon-oxides-react",
+      "target": "ex:msyn/source/us1609593a"
+    },
+    {
+      "id": "ex:msyn/us1609593a/claim/ferric-hydroxide-8-25/reported-in/us1609593a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1609593a/claim/ferric-hydroxide-8-25",
+      "target": "ex:msyn/source/us1609593a"
+    },
+    {
+      "id": "ex:msyn/us1609593a/claim/literature-iron-poisons/reported-in/us1609593a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1609593a/claim/literature-iron-poisons",
+      "target": "ex:msyn/source/us1609593a"
+    },
+    {
+      "id": "ex:msyn/us1609593a/claim/mgo-iron-inhibits-methane/reported-in/us1609593a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1609593a/claim/mgo-iron-inhibits-methane",
+      "target": "ex:msyn/source/us1609593a"
+    },
+    {
+      "id": "ex:msyn/us1609593a/claim/patent-claim-1/reported-in/us1609593a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, claim 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1609593a/claim/patent-claim-1",
+      "target": "ex:msyn/source/us1609593a"
+    },
+    {
+      "id": "ex:msyn/us1609593a/claim/patent-claim-10/reported-in/us1609593a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, claim 10",
+          "p. 3, claim 10"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1609593a/claim/patent-claim-10",
+      "target": "ex:msyn/source/us1609593a"
+    },
+    {
+      "id": "ex:msyn/us1609593a/claim/patent-claim-11/reported-in/us1609593a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 11"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1609593a/claim/patent-claim-11",
+      "target": "ex:msyn/source/us1609593a"
+    },
+    {
+      "id": "ex:msyn/us1609593a/claim/patent-claim-2/reported-in/us1609593a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, claim 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1609593a/claim/patent-claim-2",
+      "target": "ex:msyn/source/us1609593a"
+    },
+    {
+      "id": "ex:msyn/us1609593a/claim/patent-claim-3/reported-in/us1609593a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, claim 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1609593a/claim/patent-claim-3",
+      "target": "ex:msyn/source/us1609593a"
+    },
+    {
+      "id": "ex:msyn/us1609593a/claim/patent-claim-4/reported-in/us1609593a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, claim 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1609593a/claim/patent-claim-4",
+      "target": "ex:msyn/source/us1609593a"
+    },
+    {
+      "id": "ex:msyn/us1609593a/claim/patent-claim-5/reported-in/us1609593a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, claim 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1609593a/claim/patent-claim-5",
+      "target": "ex:msyn/source/us1609593a"
+    },
+    {
+      "id": "ex:msyn/us1609593a/claim/patent-claim-6/reported-in/us1609593a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, claim 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1609593a/claim/patent-claim-6",
+      "target": "ex:msyn/source/us1609593a"
+    },
+    {
+      "id": "ex:msyn/us1609593a/claim/patent-claim-7/reported-in/us1609593a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, claim 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1609593a/claim/patent-claim-7",
+      "target": "ex:msyn/source/us1609593a"
+    },
+    {
+      "id": "ex:msyn/us1609593a/claim/patent-claim-8/reported-in/us1609593a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, claim 8"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1609593a/claim/patent-claim-8",
+      "target": "ex:msyn/source/us1609593a"
+    },
+    {
+      "id": "ex:msyn/us1609593a/claim/patent-claim-9/reported-in/us1609593a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, claim 9"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1609593a/claim/patent-claim-9",
+      "target": "ex:msyn/source/us1609593a"
+    },
+    {
+      "id": "ex:msyn/us1609593a/claim/pressure-sv-co-trends/reported-in/us1609593a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1609593a/claim/pressure-sv-co-trends",
+      "target": "ex:msyn/source/us1609593a"
+    },
+    {
+      "id": "ex:msyn/us1609593a/claim/pure-co-20/reported-in/us1609593a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1609593a/claim/pure-co-20",
+      "target": "ex:msyn/source/us1609593a"
+    },
+    {
+      "id": "ex:msyn/us1609593a/claim/reduced-in-synthesis-gas/reported-in/us1609593a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1609593a/claim/reduced-in-synthesis-gas",
+      "target": "ex:msyn/source/us1609593a"
+    },
+    {
+      "id": "ex:msyn/us1609593a/claim/some-reaction-always/reported-in/us1609593a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1609593a/claim/some-reaction-always",
+      "target": "ex:msyn/source/us1609593a"
+    },
+    {
+      "id": "ex:msyn/us1609593a/feed/h2-90-cox-10/reported-in/us1609593a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1609593a/feed/h2-90-cox-10",
+      "target": "ex:msyn/source/us1609593a"
+    },
+    {
+      "id": "ex:msyn/us1609593a/hypothesis/partly-reduced-to-iron/reported-in/us1609593a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1609593a/hypothesis/partly-reduced-to-iron",
+      "target": "ex:msyn/source/us1609593a"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/1",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1609593a/p1/6",
+            "quote": "In pre- paring our improved catalyst we employ a . mixture of magnesium oxide and ferric hy- . droxide.",
+            "source": "ex:msyn/source/us1609593a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1609593a/p1/6",
+            "quote": "Magnesium oxide—per se—has 95 1 no catalytic effect on the methanol reaction,",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ],
+        "role": "not_stated",
+        "role_detail": "magnesium oxide, per se without catalytic effect on the methanol reaction"
+      },
+      "source": "ex:msyn/us1609593a/catalyst/mgo-ferric-hydroxide",
+      "target": "ex:msyn/species/mgo"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/10",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "25 liters",
+          "unit": "L",
+          "value": 25
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example I",
+            "passage": "us1609593a/p2/2",
+            "quote": "is dissolved in 25 liters of water which is then heated to 95° C. To the hot solution is added 750 grams of magnesium oxide",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ],
+        "role": "reagent"
+      },
+      "source": "ex:msyn/us1609593a/preparation/example-1",
+      "target": "ex:msyn/species/h2o"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/11",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "750 grams",
+          "unit": "g",
+          "value": 750
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example I",
+            "passage": "us1609593a/p2/2",
+            "quote": "is dissolved in 25 liters of water which is then heated to 95° C. To the hot solution is added 750 grams of magnesium oxide",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ],
+        "role": "material"
+      },
+      "source": "ex:msyn/us1609593a/preparation/example-1",
+      "target": "ex:msyn/species/mgo"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/12",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "190 cubic centimeters of 12.38 normal",
+          "note": "12.38 normal ammonium hydroxide",
+          "unit": "cm3",
+          "value": 190
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example I",
+            "note": "'ammonimuin' = ammonium",
+            "passage": "us1609593a/p2/2",
+            "quote": "with stirring 190 cubic centimeters of 12.38 normal ammonimuin hydroxide is added to precipitate the iron to the hydroxide form.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ],
+        "role": "reagent"
+      },
+      "source": "ex:msyn/us1609593a/preparation/example-1",
+      "target": "ex:msyn/species/nh4oh"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/13",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example I",
+            "passage": "us1609593a/p2/2",
+            "quote": "The mass is then completely dried and broken up into granules, whereupon it is ready for use.",
+            "source": "ex:msyn/source/us1609593a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Example I",
+            "note": "'orams' = grams",
+            "passage": "us1609593a/p2/2",
+            "quote": "the final compo- sition of this catalyst after precipitating the iron and drying the mass is approxi- mately 750 grams magnesium oxide and 82 orams of ferric hydroxide.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1609593a/preparation/example-1",
+      "target": "ex:msyn/us1609593a/catalyst/example-1"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/14",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "350 grams",
+          "note": "corrected 2026-09-29 from 300 (OCR misreading) to 350 as printed on the page image",
+          "unit": "g",
+          "value": 350
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "disagree",
+            "locator": "p. 2, Example II",
+            "reading": "vision_ocr",
+            "region": [
+              0.187,
+              0.592,
+              0.56,
+              0.632
+            ],
+            "second_reading": "Example II. [margin 40] 350 grams of ferric nitrate is dissolved in 5 liters of water and sufficient ammonium hydroxide is added to precipitate all of the iron as ferric hydroxide. The resultant flocculent mass is thoroughly washed with [margin 45]",
+            "source": "ex:msyn/source/us1609593a",
+            "transcription": "350 grams of ferric nitrate is dissolved in 5 liters of water and sufficient ammonium hydroxide is added to precipitate all of the"
+          }
+        ],
+        "role": "reagent"
+      },
+      "source": "ex:msyn/us1609593a/preparation/example-2",
+      "target": "ex:msyn/us1609593a/species/ferric-nitrate"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/15",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "sufficient ammonium hydroxide",
+          "text_value": "sufficient"
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "disagree",
+            "locator": "p. 2, Example II",
+            "reading": "vision_ocr",
+            "region": [
+              0.187,
+              0.592,
+              0.56,
+              0.632
+            ],
+            "second_reading": "Example II. [margin 40] 350 grams of ferric nitrate is dissolved in 5 liters of water and sufficient ammonium hydroxide is added to precipitate all of the iron as ferric hydroxide. The resultant flocculent mass is thoroughly washed with [margin 45]",
+            "source": "ex:msyn/source/us1609593a",
+            "transcription": "350 grams of ferric nitrate is dissolved in 5 liters of water and sufficient ammonium hydroxide is added to precipitate all of the"
+          }
+        ],
+        "role": "reagent"
+      },
+      "source": "ex:msyn/us1609593a/preparation/example-2",
+      "target": "ex:msyn/species/nh4oh"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/16",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "900 grams",
+          "unit": "g",
+          "value": 900
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example II",
+            "passage": "us1609593a/p2/3",
+            "quote": "iron as ferric hydroxide. The resultant floc- eculent mass is thoroughly washed with water and after decanting the excess water, 900 grams of magnesium oxide is thoroughly",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ],
+        "role": "material"
+      },
+      "source": "ex:msyn/us1609593a/preparation/example-2",
+      "target": "ex:msyn/species/mgo"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/17",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example II",
+            "passage": "us1609593a/p2/3",
+            "quote": "mixed therewith, The mixture is then dried. and broken up into granules.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1609593a/preparation/example-2",
+      "target": "ex:msyn/us1609593a/catalyst/example-2"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/18",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "an equivalent quanti- ty",
+          "text_value": "an equivalent quantity"
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example III",
+            "note": "heading OCR 'Baeample II,'",
+            "passage": "us1609593a/p2/3",
+            "quote": "In place of the ferric nitrate mentioned in Example I and II an equivalent quanti- ty of another soluble ferric salt may be. employed.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ],
+        "role": "reagent"
+      },
+      "source": "ex:msyn/us1609593a/preparation/example-3",
+      "target": "ex:msyn/us1609593a/species/soluble-ferric-salt"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/19",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example III",
+            "note": "heading OCR 'Baeample II,'",
+            "passage": "us1609593a/p2/3",
+            "quote": "In place of the ferric nitrate mentioned in Example I and II an equivalent quanti- ty of another soluble ferric salt may be. employed.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1609593a/preparation/example-3",
+      "target": "ex:msyn/us1609593a/catalyst/mgo-ferric-hydroxide"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/2",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1609593a/p1/6",
+            "quote": "In pre- paring our improved catalyst we employ a . mixture of magnesium oxide and ferric hy- . droxide.",
+            "source": "ex:msyn/source/us1609593a"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2",
+            "reading": "vision_ocr",
+            "region": [
+              0.187,
+              0.195,
+              0.56,
+              0.25
+            ],
+            "second_reading": "se—the exact structure of the resultant catalyst is not known to us. The amount of ferric hydroxide may vary from 3% to 25% of the weight of magnesium oxide, though we prefer to use about 10%. [margin line no. 10] The magnesium oxide may be incorporated with ferric hydroxide in any convenient manner as is indicated in the ap-",
+            "source": "ex:msyn/source/us1609593a",
+            "transcription": "The amount of ferric hydroxide may vary from 3% to 25% of the weight of magne- sium oxide, though we prefer to use about 10%."
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "from 3% to 25% of the weight of magne- sium oxide",
+          "lower": 3,
+          "note": "per cent of the weight of magnesium oxide, not of the catalyst; preferred about 10%. Lower limit corrected 2026-09-29 from 8 to 3: the page image prints '3%' (OCR read '8%')",
+          "unit": "%",
+          "upper": 25
+        },
+        "fraction_basis": "mass",
+        "role": "not_stated",
+        "role_detail": "ferric hydroxide; the patent states the hydrogenating effect of the iron is obtained"
+      },
+      "source": "ex:msyn/us1609593a/catalyst/mgo-ferric-hydroxide",
+      "target": "ex:msyn/species/feoh3"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/20",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2",
+            "reading": "vision_ocr",
+            "region": [
+              0.187,
+              0.775,
+              0.57,
+              0.839
+            ],
+            "second_reading": "ty of another soluble ferric salt may be employed. [margin 55] When a mixture of 90% hydrogen gas with 10% oxides of carbon, comprising about 7% carbon dioxide 3% carbon monoxide is passed over 1000 cubic centimeters of catalyst granules thus prepared [margin 60] at a pressure of 2000 pounds at a temperature of about 350°-450° C. and at a space",
+            "source": "ex:msyn/source/us1609593a",
+            "transcription": "When a mixture of 90% hydrogen gas with 10% oxides of carbon, comprising about 7% carbon dioxide 3% carbon monoxide is passed over 1000 cubic centi- meters of catalyst granules thus prepared"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1609593a/p1/6",
+            "quote": "In pre- paring our improved catalyst we employ a . mixture of magnesium oxide and ferric hy- . droxide.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1609593a/sample/granules-thus-prepared",
+      "target": "ex:msyn/us1609593a/catalyst/mgo-ferric-hydroxide"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/21",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1609593a/p2/1",
+            "quote": "ence of the hydrogen and carbon oxide gas mixtures used for synthesizing methanol the",
+            "source": "ex:msyn/source/us1609593a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1609593a/p2/1",
+            "quote": "ferric hydroxide is subsequently reduced to iron oxide and possibly in part to iron—per",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ],
+        "order": 1
+      },
+      "source": "ex:msyn/us1609593a/sample/granules-thus-prepared",
+      "target": "ex:msyn/us1609593a/treatment/in-situ-reduction"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/22",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2",
+            "reading": "vision_ocr",
+            "region": [
+              0.187,
+              0.775,
+              0.57,
+              0.839
+            ],
+            "second_reading": "ty of another soluble ferric salt may be employed. [margin 55] When a mixture of 90% hydrogen gas with 10% oxides of carbon, comprising about 7% carbon dioxide 3% carbon monoxide is passed over 1000 cubic centimeters of catalyst granules thus prepared [margin 60] at a pressure of 2000 pounds at a temperature of about 350°-450° C. and at a space",
+            "source": "ex:msyn/source/us1609593a",
+            "transcription": "When a mixture of 90% hydrogen gas with 10% oxides of carbon, comprising about 7% carbon dioxide 3% carbon monoxide is passed over 1000 cubic centi- meters of catalyst granules thus prepared"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "90% hydrogen gas",
+          "unit": "%",
+          "value": 90
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1609593a/feed/h2-90-cox-10",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/23",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2",
+            "reading": "vision_ocr",
+            "region": [
+              0.187,
+              0.775,
+              0.57,
+              0.839
+            ],
+            "second_reading": "ty of another soluble ferric salt may be employed. [margin 55] When a mixture of 90% hydrogen gas with 10% oxides of carbon, comprising about 7% carbon dioxide 3% carbon monoxide is passed over 1000 cubic centimeters of catalyst granules thus prepared [margin 60] at a pressure of 2000 pounds at a temperature of about 350°-450° C. and at a space",
+            "source": "ex:msyn/source/us1609593a",
+            "transcription": "When a mixture of 90% hydrogen gas with 10% oxides of carbon, comprising about 7% carbon dioxide 3% carbon monoxide is passed over 1000 cubic centi- meters of catalyst granules thus prepared"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "about 7% carbon dioxide",
+          "qualifier": "approximate",
+          "unit": "%",
+          "value": 7
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1609593a/feed/h2-90-cox-10",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/24",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2",
+            "reading": "vision_ocr",
+            "region": [
+              0.187,
+              0.775,
+              0.57,
+              0.839
+            ],
+            "second_reading": "ty of another soluble ferric salt may be employed. [margin 55] When a mixture of 90% hydrogen gas with 10% oxides of carbon, comprising about 7% carbon dioxide 3% carbon monoxide is passed over 1000 cubic centimeters of catalyst granules thus prepared [margin 60] at a pressure of 2000 pounds at a temperature of about 350°-450° C. and at a space",
+            "source": "ex:msyn/source/us1609593a",
+            "transcription": "When a mixture of 90% hydrogen gas with 10% oxides of carbon, comprising about 7% carbon dioxide 3% carbon monoxide is passed over 1000 cubic centi- meters of catalyst granules thus prepared"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "3% carbon monoxide",
+          "note": "corrected 2026-09-29 from 8 (OCR misreading) to 3 as printed on the page image; 7% + 3% = the 10% of carbon oxides stated",
+          "unit": "%",
+          "value": 3
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1609593a/feed/h2-90-cox-10",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/25",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "1000 cubic centi- meters",
+          "unit": "cm3",
+          "value": 1000
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2",
+            "reading": "vision_ocr",
+            "region": [
+              0.187,
+              0.775,
+              0.57,
+              0.839
+            ],
+            "second_reading": "ty of another soluble ferric salt may be employed. [margin 55] When a mixture of 90% hydrogen gas with 10% oxides of carbon, comprising about 7% carbon dioxide 3% carbon monoxide is passed over 1000 cubic centimeters of catalyst granules thus prepared [margin 60] at a pressure of 2000 pounds at a temperature of about 350°-450° C. and at a space",
+            "source": "ex:msyn/source/us1609593a",
+            "transcription": "When a mixture of 90% hydrogen gas with 10% oxides of carbon, comprising about 7% carbon dioxide 3% carbon monoxide is passed over 1000 cubic centi- meters of catalyst granules thus prepared"
+          }
+        ],
+        "state": "as_prepared"
+      },
+      "source": "ex:msyn/us1609593a/test/example",
+      "target": "ex:msyn/us1609593a/sample/granules-thus-prepared"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/26",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2",
+            "reading": "vision_ocr",
+            "region": [
+              0.187,
+              0.775,
+              0.57,
+              0.839
+            ],
+            "second_reading": "ty of another soluble ferric salt may be employed. [margin 55] When a mixture of 90% hydrogen gas with 10% oxides of carbon, comprising about 7% carbon dioxide 3% carbon monoxide is passed over 1000 cubic centimeters of catalyst granules thus prepared [margin 60] at a pressure of 2000 pounds at a temperature of about 350°-450° C. and at a space",
+            "source": "ex:msyn/source/us1609593a",
+            "transcription": "When a mixture of 90% hydrogen gas with 10% oxides of carbon, comprising about 7% carbon dioxide 3% carbon monoxide is passed over 1000 cubic centi- meters of catalyst granules thus prepared"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1609593a/test/example",
+      "target": "ex:msyn/us1609593a/feed/h2-90-cox-10"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/27",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2",
+            "reading": "vision_ocr",
+            "region": [
+              0.187,
+              0.775,
+              0.57,
+              0.839
+            ],
+            "second_reading": "ty of another soluble ferric salt may be employed. [margin 55] When a mixture of 90% hydrogen gas with 10% oxides of carbon, comprising about 7% carbon dioxide 3% carbon monoxide is passed over 1000 cubic centimeters of catalyst granules thus prepared [margin 60] at a pressure of 2000 pounds at a temperature of about 350°-450° C. and at a space",
+            "source": "ex:msyn/source/us1609593a",
+            "transcription": "When a mixture of 90% hydrogen gas with 10% oxides of carbon, comprising about 7% carbon dioxide 3% carbon monoxide is passed over 1000 cubic centi- meters of catalyst granules thus prepared"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1609593a/p2/3",
+            "quote": "at a pressure. of 2000 pounds at a tempera- ture of about 350°-450° C., and at a space velocity of about 75,000 there will be pro- duced, hourly, about 1.5 liters of condensate containing about 55% of methanol, the re-",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1609593a/test/example",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/28",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2",
+            "reading": "vision_ocr",
+            "region": [
+              0.187,
+              0.775,
+              0.57,
+              0.839
+            ],
+            "second_reading": "ty of another soluble ferric salt may be employed. [margin 55] When a mixture of 90% hydrogen gas with 10% oxides of carbon, comprising about 7% carbon dioxide 3% carbon monoxide is passed over 1000 cubic centimeters of catalyst granules thus prepared [margin 60] at a pressure of 2000 pounds at a temperature of about 350°-450° C. and at a space",
+            "source": "ex:msyn/source/us1609593a",
+            "transcription": "When a mixture of 90% hydrogen gas with 10% oxides of carbon, comprising about 7% carbon dioxide 3% carbon monoxide is passed over 1000 cubic centi- meters of catalyst granules thus prepared"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1609593a/p2/3",
+            "quote": "at a pressure. of 2000 pounds at a tempera- ture of about 350°-450° C., and at a space velocity of about 75,000 there will be pro- duced, hourly, about 1.5 liters of condensate containing about 55% of methanol, the re-",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1609593a/test/example",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/29",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "context": [
+          "ex:msyn/us1609593a/test/example"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1609593a/p1/7",
+            "quote": "the resultant material produces an_ active y catalyst for the synthetic methanol reac-",
+            "source": "ex:msyn/source/us1609593a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1609593a/p2/3",
+            "quote": "at a pressure. of 2000 pounds at a tempera- ture of about 350°-450° C., and at a space velocity of about 75,000 there will be pro- duced, hourly, about 1.5 liters of condensate containing about 55% of methanol, the re-",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1609593a/catalyst/mgo-ferric-hydroxide",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/3",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example I",
+            "note": "'orams' = grams",
+            "passage": "us1609593a/p2/2",
+            "quote": "the final compo- sition of this catalyst after precipitating the iron and drying the mass is approxi- mately 750 grams magnesium oxide and 82 orams of ferric hydroxide.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "approxi- mately 750 grams",
+          "note": "mass in the batch as printed",
+          "qualifier": "approximate",
+          "unit": "g",
+          "value": 750
+        },
+        "fraction_basis": "mass",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1609593a/catalyst/example-1",
+      "target": "ex:msyn/species/mgo"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/31",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'2' is OCR for 'a'",
+            "passage": "us1609593a/p1/5",
+            "quote": "used in the methanol reaction, forming 2 volatile carbonyl compound and. inhibiting the methanol reaction.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ],
+        "inhibition_kind": "not_stated"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/us1609593a/species/iron-carbonyl-compound"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/32",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1609593a/p1/1",
+            "quote": "Our invention relates to the production of methanol by the high pressure catalytic com- bination of oxides of carbon with hydrogen,",
+            "source": "ex:msyn/source/us1609593a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'Tt' is OCR for 'It'; '20' is a line number",
+            "passage": "us1609593a/p1/1",
+            "quote": "Tt is observed that when carbon dioxide is the oxide employed, one molecule of water 20 is formed for every molecule of methanol produced.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1609593a/claim/carbon-oxides-react",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/33",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1609593a/p1/1",
+            "quote": "Our invention relates to the production of methanol by the high pressure catalytic com- bination of oxides of carbon with hydrogen,",
+            "source": "ex:msyn/source/us1609593a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'Tt' is OCR for 'It'; '20' is a line number",
+            "passage": "us1609593a/p1/1",
+            "quote": "Tt is observed that when carbon dioxide is the oxide employed, one molecule of water 20 is formed for every molecule of methanol produced.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1609593a/claim/carbon-oxides-react",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/36",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "column edge clipped; 'near!' continues as 'nearly always produced some reaction'",
+            "passage": "us1609593a/p1/3",
+            "quote": "‘produce methanol is passed over a catalyti substance consisting of metallic oxides at pressure -above 100 atmospheres and at temperature above 250° C. there is near!",
+            "source": "ex:msyn/source/us1609593a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1609593a/p1/4",
+            "quote": "always produced some reaction between. the 55 gaseous components.",
+            "source": "ex:msyn/source/us1609593a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1609593a/p1/4",
+            "quote": "The substances formed by such a process depend, both as.to identity and as to amount, almost entirely on the nature and activity of the catalytic substance present.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1609593a/claim/some-reaction-always",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/37",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "stated as what the literature says",
+            "passage": "us1609593a/p1/5",
+            "quote": "the presence of iron or any of its compounds in a catalyst destroys or poisons the catalyst 75 and inhibits methanol formation.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1609593a/claim/literature-iron-poisons",
+      "target": "ex:msyn/species/iron"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/38",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "stated as what the literature says",
+            "passage": "us1609593a/p1/5",
+            "quote": "the presence of iron or any of its compounds in a catalyst destroys or poisons the catalyst 75 and inhibits methanol formation.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1609593a/claim/literature-iron-poisons",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/4",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example I",
+            "note": "'orams' = grams",
+            "passage": "us1609593a/p2/2",
+            "quote": "the final compo- sition of this catalyst after precipitating the iron and drying the mass is approxi- mately 750 grams magnesium oxide and 82 orams of ferric hydroxide.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "82 orams",
+          "note": "mass in the batch as printed ('orams' = grams)",
+          "qualifier": "approximate",
+          "unit": "g",
+          "value": 82
+        },
+        "fraction_basis": "mass",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1609593a/catalyst/example-1",
+      "target": "ex:msyn/species/feoh3"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/42",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'fact' is OCR for 'fect' (effect)",
+            "passage": "us1609593a/p1/6",
+            "quote": "by the desirable hydrogenating catalytic ef- 90 fact of the iron is obtained and the tendency to methane formation is inhibited.",
+            "source": "ex:msyn/source/us1609593a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1609593a/p1/6",
+            "quote": "In pre- paring our improved catalyst we employ a . mixture of magnesium oxide and ferric hy- . droxide.",
+            "source": "ex:msyn/source/us1609593a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1609593a/p1/6",
+            "quote": "Magnesium oxide—per se—has 95 1 no catalytic effect on the methanol reaction,",
+            "source": "ex:msyn/source/us1609593a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "continues 'positive inhibiting effect'",
+            "passage": "us1609593a/p1/6",
+            "quote": "while ferric hydroxide—per. se—has a posi-",
+            "source": "ex:msyn/source/us1609593a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1609593a/p1/6",
+            "quote": "these two ingredients are properly. com- r pounded a desirable. methanol catalyst is 100 produced.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1609593a/claim/mgo-iron-inhibits-methane",
+      "target": "ex:msyn/us1609593a/catalyst/mgo-ferric-hydroxide"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/43",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'fact' is OCR for 'fect' (effect)",
+            "passage": "us1609593a/p1/6",
+            "quote": "by the desirable hydrogenating catalytic ef- 90 fact of the iron is obtained and the tendency to methane formation is inhibited.",
+            "source": "ex:msyn/source/us1609593a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1609593a/p1/6",
+            "quote": "In pre- paring our improved catalyst we employ a . mixture of magnesium oxide and ferric hy- . droxide.",
+            "source": "ex:msyn/source/us1609593a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1609593a/p1/6",
+            "quote": "Magnesium oxide—per se—has 95 1 no catalytic effect on the methanol reaction,",
+            "source": "ex:msyn/source/us1609593a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "continues 'positive inhibiting effect'",
+            "passage": "us1609593a/p1/6",
+            "quote": "while ferric hydroxide—per. se—has a posi-",
+            "source": "ex:msyn/source/us1609593a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1609593a/p1/6",
+            "quote": "these two ingredients are properly. com- r pounded a desirable. methanol catalyst is 100 produced.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1609593a/claim/mgo-iron-inhibits-methane",
+      "target": "ex:msyn/species/mgo"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/44",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'fact' is OCR for 'fect' (effect)",
+            "passage": "us1609593a/p1/6",
+            "quote": "by the desirable hydrogenating catalytic ef- 90 fact of the iron is obtained and the tendency to methane formation is inhibited.",
+            "source": "ex:msyn/source/us1609593a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1609593a/p1/6",
+            "quote": "In pre- paring our improved catalyst we employ a . mixture of magnesium oxide and ferric hy- . droxide.",
+            "source": "ex:msyn/source/us1609593a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1609593a/p1/6",
+            "quote": "Magnesium oxide—per se—has 95 1 no catalytic effect on the methanol reaction,",
+            "source": "ex:msyn/source/us1609593a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "continues 'positive inhibiting effect'",
+            "passage": "us1609593a/p1/6",
+            "quote": "while ferric hydroxide—per. se—has a posi-",
+            "source": "ex:msyn/source/us1609593a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1609593a/p1/6",
+            "quote": "these two ingredients are properly. com- r pounded a desirable. methanol catalyst is 100 produced.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1609593a/claim/mgo-iron-inhibits-methane",
+      "target": "ex:msyn/species/feoh3"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/45",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2",
+            "reading": "vision_ocr",
+            "region": [
+              0.187,
+              0.195,
+              0.56,
+              0.25
+            ],
+            "second_reading": "se—the exact structure of the resultant catalyst is not known to us. The amount of ferric hydroxide may vary from 3% to 25% of the weight of magnesium oxide, though we prefer to use about 10%. [margin line no. 10] The magnesium oxide may be incorporated with ferric hydroxide in any convenient manner as is indicated in the ap-",
+            "source": "ex:msyn/source/us1609593a",
+            "transcription": "The amount of ferric hydroxide may vary from 3% to 25% of the weight of magne- sium oxide, though we prefer to use about 10%."
+          }
+        ]
+      },
+      "source": "ex:msyn/us1609593a/claim/ferric-hydroxide-8-25",
+      "target": "ex:msyn/us1609593a/catalyst/mgo-ferric-hydroxide"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/46",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1609593a/p2/1",
+            "quote": "ence of the hydrogen and carbon oxide gas mixtures used for synthesizing methanol the",
+            "source": "ex:msyn/source/us1609593a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1609593a/p2/1",
+            "quote": "ferric hydroxide is subsequently reduced to iron oxide and possibly in part to iron—per",
+            "source": "ex:msyn/source/us1609593a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1609593a/p2/1",
+            "quote": "the exact structure of the resultant catalyst is not known to us.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1609593a/claim/reduced-in-synthesis-gas",
+      "target": "ex:msyn/us1609593a/catalyst/mgo-ferric-hydroxide"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/47",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1609593a/p2/1",
+            "quote": "ence of the hydrogen and carbon oxide gas mixtures used for synthesizing methanol the",
+            "source": "ex:msyn/source/us1609593a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1609593a/p2/1",
+            "quote": "ferric hydroxide is subsequently reduced to iron oxide and possibly in part to iron—per",
+            "source": "ex:msyn/source/us1609593a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1609593a/p2/1",
+            "quote": "the exact structure of the resultant catalyst is not known to us.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1609593a/claim/reduced-in-synthesis-gas",
+      "target": "ex:msyn/us1609593a/treatment/in-situ-reduction"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/48",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1609593a/p2/1",
+            "quote": "ferric hydroxide is subsequently reduced to iron oxide and possibly in part to iron—per",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1609593a/hypothesis/partly-reduced-to-iron",
+      "target": "ex:msyn/us1609593a/catalyst/mgo-ferric-hydroxide"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/49",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1609593a/p2/4",
+            "quote": "Increase of pressure and increase of space velocity over the fig- ures given In the example increase the total amount of condensate per hour whereas an 70 increase in the percentage of carbon monox- | ide produces an increase in the percentage of methanol in the condensate.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1609593a/claim/pressure-sv-co-trends",
+      "target": "ex:msyn/us1609593a/catalyst/mgo-ferric-hydroxide"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/5",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example II",
+            "passage": "us1609593a/p2/3",
+            "quote": "iron as ferric hydroxide. The resultant floc- eculent mass is thoroughly washed with water and after decanting the excess water, 900 grams of magnesium oxide is thoroughly",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "900 grams of magnesium oxide",
+          "note": "mass of magnesium oxide mixed in",
+          "unit": "g",
+          "value": 900
+        },
+        "fraction_basis": "mass",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1609593a/catalyst/example-2",
+      "target": "ex:msyn/species/mgo"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/50",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1609593a/p2/4",
+            "quote": "Increase of pressure and increase of space velocity over the fig- ures given In the example increase the total amount of condensate per hour whereas an 70 increase in the percentage of carbon monox- | ide produces an increase in the percentage of methanol in the condensate.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1609593a/claim/pressure-sv-co-trends",
+      "target": "ex:msyn/us1609593a/test/example"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/51",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1609593a/p2/4",
+            "quote": "If pure carbon monoxide is employed as the carbon oxide the percentage may be 75 advantageously increased to 20%, the hy- (lrogen being correspondingly diminished.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1609593a/claim/pure-co-20",
+      "target": "ex:msyn/us1609593a/catalyst/mgo-ferric-hydroxide"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/52",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1609593a/p2/4",
+            "quote": "If pure carbon monoxide is employed as the carbon oxide the percentage may be 75 advantageously increased to 20%, the hy- (lrogen being correspondingly diminished.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1609593a/claim/pure-co-20",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/53",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2",
+            "reading": "vision_ocr",
+            "region": [
+              0.187,
+              0.775,
+              0.57,
+              0.839
+            ],
+            "second_reading": "ty of another soluble ferric salt may be employed. [margin 55] When a mixture of 90% hydrogen gas with 10% oxides of carbon, comprising about 7% carbon dioxide 3% carbon monoxide is passed over 1000 cubic centimeters of catalyst granules thus prepared [margin 60] at a pressure of 2000 pounds at a temperature of about 350°-450° C. and at a space",
+            "source": "ex:msyn/source/us1609593a",
+            "transcription": "When a mixture of 90% hydrogen gas with 10% oxides of carbon, comprising about 7% carbon dioxide 3% carbon monoxide is passed over 1000 cubic centi- meters of catalyst granules thus prepared"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1609593a/p2/3",
+            "quote": "at a pressure. of 2000 pounds at a tempera- ture of about 350°-450° C., and at a space velocity of about 75,000 there will be pro- duced, hourly, about 1.5 liters of condensate containing about 55% of methanol, the re-",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1609593a/test/example",
+      "target": "ex:msyn/us1609593a/claim/mgo-iron-inhibits-methane"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/54",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 1",
+            "passage": "us1609593a/p2/4",
+            "quote": "1. A methanol catalyst comprising mag- i nesium oxide and ferric hydroxide.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1609593a/claim/patent-claim-1",
+      "target": "ex:msyn/us1609593a/catalyst/mgo-ferric-hydroxide"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/55",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2, claim 2",
+            "reading": "vision_ocr",
+            "region": [
+              0.575,
+              0.306,
+              0.929,
+              0.345
+            ],
+            "second_reading": "1. A methanol catalyst comprising magnesium oxide and ferric hydroxide. 2. A methanol catalyst comprising 97-75% magnesium oxide and 3-25% ferric hydroxide. 3. A methanol catalyst comprising magnesium oxide and ferric hydroxide, the fer-",
+            "source": "ex:msyn/source/us1609593a",
+            "transcription": "2. A methanol catalyst comprising 97–75% magnesium oxide and 3–25% ferric hy- droxide."
+          }
+        ]
+      },
+      "source": "ex:msyn/us1609593a/claim/patent-claim-2",
+      "target": "ex:msyn/us1609593a/catalyst/mgo-ferric-hydroxide"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/56",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 3",
+            "note": "the numeral '3.' is OCR'd as 'do.'",
+            "quote": "nesium oxide and ferric hydroxide, the fer- ric hydroxide being formed by precipita- tion in aqueous solution from a soluble fer- ‘ric salt.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1609593a/claim/patent-claim-3",
+      "target": "ex:msyn/us1609593a/catalyst/mgo-ferric-hydroxide"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/57",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, claim 4",
+            "reading": "vision_ocr",
+            "region": [
+              0.575,
+              0.403,
+              0.929,
+              0.466
+            ],
+            "source": "ex:msyn/source/us1609593a",
+            "transcription": "4. A methanol catalyst comprising 97–75% magnesium oxide and 3%–25% ferric hy- droxide, the ferric hydroxide being formed by precipitation in aqueous solution from a soluble ferric salt."
+          }
+        ]
+      },
+      "source": "ex:msyn/us1609593a/claim/patent-claim-4",
+      "target": "ex:msyn/us1609593a/catalyst/mgo-ferric-hydroxide"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/58",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 5",
+            "note": "'%' after 750 is a stray line number",
+            "passage": "us1609593a/p2/5",
+            "quote": "5. A methanol catalyst comprising 750 % grams of magnesium oxide and 82 grams of ferric hydroxide, the ferric hydroxide being formed by precipitation in aqueous solution from a soluble ferric salt.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1609593a/claim/patent-claim-5",
+      "target": "ex:msyn/us1609593a/catalyst/mgo-ferric-hydroxide"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/59",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 5",
+            "note": "'%' after 750 is a stray line number",
+            "passage": "us1609593a/p2/5",
+            "quote": "5. A methanol catalyst comprising 750 % grams of magnesium oxide and 82 grams of ferric hydroxide, the ferric hydroxide being formed by precipitation in aqueous solution from a soluble ferric salt.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1609593a/claim/patent-claim-5",
+      "target": "ex:msyn/us1609593a/catalyst/example-1"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/6",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "disagree",
+            "locator": "p. 2, Example II",
+            "reading": "vision_ocr",
+            "region": [
+              0.187,
+              0.592,
+              0.56,
+              0.632
+            ],
+            "second_reading": "Example II. [margin 40] 350 grams of ferric nitrate is dissolved in 5 liters of water and sufficient ammonium hydroxide is added to precipitate all of the iron as ferric hydroxide. The resultant flocculent mass is thoroughly washed with [margin 45]",
+            "source": "ex:msyn/source/us1609593a",
+            "transcription": "350 grams of ferric nitrate is dissolved in 5 liters of water and sufficient ammonium hydroxide is added to precipitate all of the"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Example II",
+            "passage": "us1609593a/p2/3",
+            "quote": "iron as ferric hydroxide. The resultant floc- eculent mass is thoroughly washed with water and after decanting the excess water, 900 grams of magnesium oxide is thoroughly",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ],
+        "fraction": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source"
+        },
+        "fraction_basis": "not_reported",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1609593a/catalyst/example-2",
+      "target": "ex:msyn/species/feoh3"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/60",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 6",
+            "passage": "us1609593a/p2/5",
+            "quote": "6. A process for the preparation of a 100 methanol catalyst which comprises precipi- tating ferric hydroxide from an aqueous solution of a ferric salt on magnesium oxide.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1609593a/claim/patent-claim-6",
+      "target": "ex:msyn/us1609593a/catalyst/mgo-ferric-hydroxide"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/61",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, claim 7",
+            "reading": "vision_ocr",
+            "region": [
+              0.565,
+              0.585,
+              0.929,
+              0.647
+            ],
+            "source": "ex:msyn/source/us1609593a",
+            "transcription": "7. A process for the preparation of a methanol catalyst, which comprises preci- pitating from 3–25% of ferric hydroxide from an aqueous solution of a ferric salt on 97–75% of magnesium oxide."
+          }
+        ]
+      },
+      "source": "ex:msyn/us1609593a/claim/patent-claim-7",
+      "target": "ex:msyn/us1609593a/catalyst/mgo-ferric-hydroxide"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/62",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 8",
+            "passage": "us1609593a/p2/6",
+            "quote": "8. A process for the. preparation of a Ilu methanol catalyst which comprises mixing | magnesium oxide with an aqueous solution of a ferric salt, precipitating ferric hydrox- ide by adding ammonium hydroxide, fil- tering, washing, and drying the resultant",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1609593a/claim/patent-claim-8",
+      "target": "ex:msyn/us1609593a/catalyst/mgo-ferric-hydroxide"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/63",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 8",
+            "passage": "us1609593a/p2/6",
+            "quote": "8. A process for the. preparation of a Ilu methanol catalyst which comprises mixing | magnesium oxide with an aqueous solution of a ferric salt, precipitating ferric hydrox- ide by adding ammonium hydroxide, fil- tering, washing, and drying the resultant",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1609593a/claim/patent-claim-8",
+      "target": "ex:msyn/us1609593a/preparation/example-1"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/64",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, claim 9",
+            "reading": "vision_ocr",
+            "region": [
+              0.565,
+              0.752,
+              0.929,
+              0.822
+            ],
+            "source": "ex:msyn/source/us1609593a",
+            "transcription": "ing 313 grams of ferric nitrate in 25 liters of water, adding 750 grams of magnesium oxide, precipitating the iron as ferric hy- droxide by adding ammonium hydroxide, and recovering the resultant mass in dry"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1609593a/claim/patent-claim-9",
+      "target": "ex:msyn/us1609593a/catalyst/mgo-ferric-hydroxide"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/65",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, claim 9",
+            "reading": "vision_ocr",
+            "region": [
+              0.565,
+              0.752,
+              0.929,
+              0.822
+            ],
+            "source": "ex:msyn/source/us1609593a",
+            "transcription": "ing 313 grams of ferric nitrate in 25 liters of water, adding 750 grams of magnesium oxide, precipitating the iron as ferric hy- droxide by adding ammonium hydroxide, and recovering the resultant mass in dry"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1609593a/claim/patent-claim-9",
+      "target": "ex:msyn/us1609593a/preparation/example-1"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/66",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, claim 10",
+            "reading": "vision_ocr",
+            "region": [
+              0.575,
+              0.852,
+              0.929,
+              0.9
+            ],
+            "source": "ex:msyn/source/us1609593a",
+            "transcription": "mixture of hydrogen and carbon oxides at a pressure in excess of 50 atmospheres and at a temperature of 350–450° C. over a cata- lyst initially containing magnesium oxide"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 10",
+            "passage": "us1609593a/p3/1",
+            "quote": "and ferric hydroxide, cooling the reacted gases, and recovering the resultant meth- anol.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1609593a/claim/patent-claim-10",
+      "target": "ex:msyn/us1609593a/catalyst/mgo-ferric-hydroxide"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/67",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, claim 10",
+            "reading": "vision_ocr",
+            "region": [
+              0.575,
+              0.852,
+              0.929,
+              0.9
+            ],
+            "source": "ex:msyn/source/us1609593a",
+            "transcription": "mixture of hydrogen and carbon oxides at a pressure in excess of 50 atmospheres and at a temperature of 350–450° C. over a cata- lyst initially containing magnesium oxide"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 10",
+            "passage": "us1609593a/p3/1",
+            "quote": "and ferric hydroxide, cooling the reacted gases, and recovering the resultant meth- anol.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1609593a/claim/patent-claim-10",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/68",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 11",
+            "passage": "us1609593a/p3/1",
+            "quote": "a pressure in excess of 50 atmospheres and at a temperature of 350-450° C. over a",
+            "source": "ex:msyn/source/us1609593a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 11",
+            "passage": "us1609593a/p3/1",
+            "quote": "catalyst initially containing 97-75% mag- ‘nesium oxide and 3-25% ferric hydroxide, 19 cooling the resultant gases, and recovering the resultant methanol.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1609593a/claim/patent-claim-11",
+      "target": "ex:msyn/us1609593a/catalyst/mgo-ferric-hydroxide"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/69",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 11",
+            "passage": "us1609593a/p3/1",
+            "quote": "a pressure in excess of 50 atmospheres and at a temperature of 350-450° C. over a",
+            "source": "ex:msyn/source/us1609593a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 11",
+            "passage": "us1609593a/p3/1",
+            "quote": "catalyst initially containing 97-75% mag- ‘nesium oxide and 3-25% ferric hydroxide, 19 cooling the resultant gases, and recovering the resultant methanol.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1609593a/claim/patent-claim-11",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/7",
+      "type": "HAS_PART",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1609593a/p1/6",
+            "quote": "In pre- paring our improved catalyst we employ a . mixture of magnesium oxide and ferric hy- . droxide.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ],
+        "role": "example of the claimed catalyst"
+      },
+      "source": "ex:msyn/us1609593a/catalyst/mgo-ferric-hydroxide",
+      "target": "ex:msyn/us1609593a/catalyst/example-1"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/70",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "5 liters",
+          "note": "read 2026-09-29 from the page image (OCR '®')",
+          "unit": "L",
+          "value": 5
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "disagree",
+            "locator": "p. 2, Example II",
+            "reading": "vision_ocr",
+            "region": [
+              0.187,
+              0.592,
+              0.56,
+              0.632
+            ],
+            "second_reading": "Example II. [margin 40] 350 grams of ferric nitrate is dissolved in 5 liters of water and sufficient ammonium hydroxide is added to precipitate all of the iron as ferric hydroxide. The resultant flocculent mass is thoroughly washed with [margin 45]",
+            "source": "ex:msyn/source/us1609593a",
+            "transcription": "350 grams of ferric nitrate is dissolved in 5 liters of water and sufficient ammonium hydroxide is added to precipitate all of the"
+          }
+        ],
+        "role": "reagent"
+      },
+      "source": "ex:msyn/us1609593a/preparation/example-2",
+      "target": "ex:msyn/species/h2o"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/8",
+      "type": "HAS_PART",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1609593a/p1/6",
+            "quote": "In pre- paring our improved catalyst we employ a . mixture of magnesium oxide and ferric hy- . droxide.",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ],
+        "role": "example of the claimed catalyst"
+      },
+      "source": "ex:msyn/us1609593a/catalyst/mgo-ferric-hydroxide",
+      "target": "ex:msyn/us1609593a/catalyst/example-2"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/9",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "313 grams",
+          "note": "claim 9 also prints '313 grams' (page image; OCR read '813')",
+          "unit": "g",
+          "value": 313
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example I",
+            "note": "heading OCR 'Example f,'; formula OCR of Fe(NO3)3·9H2O",
+            "passage": "us1609593a/p2/1",
+            "quote": "313 grams of ferric nitrate — (Fe(NO,),9H,O)",
+            "source": "ex:msyn/source/us1609593a"
+          }
+        ],
+        "role": "reagent"
+      },
+      "source": "ex:msyn/us1609593a/preparation/example-1",
+      "target": "ex:msyn/species/feno339h2o"
+    },
+    {
+      "id": "ex:msyn/us1609593a/preparation/example-1/reported-in/us1609593a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, Example I"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1609593a/preparation/example-1",
+      "target": "ex:msyn/source/us1609593a"
+    },
+    {
+      "id": "ex:msyn/us1609593a/preparation/example-2/reported-in/us1609593a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, Example II"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1609593a/preparation/example-2",
+      "target": "ex:msyn/source/us1609593a"
+    },
+    {
+      "id": "ex:msyn/us1609593a/preparation/example-3/reported-in/us1609593a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, Example III"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1609593a/preparation/example-3",
+      "target": "ex:msyn/source/us1609593a"
+    },
+    {
+      "id": "ex:msyn/us1609593a/sample/granules-thus-prepared/reported-in/us1609593a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1609593a/sample/granules-thus-prepared",
+      "target": "ex:msyn/source/us1609593a"
+    },
+    {
+      "id": "ex:msyn/us1609593a/species/ferric-nitrate/reported-in/us1609593a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, Example II"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1609593a/species/ferric-nitrate",
+      "target": "ex:msyn/source/us1609593a"
+    },
+    {
+      "id": "ex:msyn/us1609593a/species/iron-carbonyl-compound/reported-in/us1609593a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1609593a/species/iron-carbonyl-compound",
+      "target": "ex:msyn/source/us1609593a"
+    },
+    {
+      "id": "ex:msyn/us1609593a/species/soluble-ferric-salt/reported-in/us1609593a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, Example III"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1609593a/species/soluble-ferric-salt",
+      "target": "ex:msyn/source/us1609593a"
+    },
+    {
+      "id": "ex:msyn/us1609593a/test/example/reported-in/us1609593a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1609593a/test/example",
+      "target": "ex:msyn/source/us1609593a"
+    },
+    {
+      "id": "ex:msyn/us1609593a/treatment/in-situ-reduction/reported-in/us1609593a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1609593a/treatment/in-situ-reduction",
+      "target": "ex:msyn/source/us1609593a"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/us1609593a"
+}

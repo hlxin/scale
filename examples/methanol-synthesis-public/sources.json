@@ -1,0 +1,1404 @@
+{
+  "corpus": "The public-domain sources of the methanol-synthesis corpus (examples/methanol-synthesis-pre1966/sources.json): the in-scope sources that are public domain in the United States (works published before 1931, US patents, and a Polish patent as an official document), with their PDFs and page texts.",
+  "counts": {
+    "in_scope": 55
+  },
+  "cutoff": {
+    "caution": "The cutoff does not remove every Cu-Zn-Al disclosure: the corpus leakage audit of the earlier curation lists US 2,061,470 (Larson, granted 1936), whose Example 10 is 87 CuO / 10 ZnO / 3 Al2O3, and Cu-Zn catalysts from 1928 on. They are in scope and curated as reported; a rediscovery evaluation must hold them out separately if it needs to.",
+    "date": "1966-01-01",
+    "patents": "grant (publication) date printed on the patent, not the priority or filing date",
+    "rule": "published or publicly disclosed before 1966-01-01",
+    "why": "ICI launched low-pressure methanol synthesis over Cu/ZnO/Al2O3 in 1966 (GB 1,010,871, published 1966; US 3,326,956); a cutoff of 1 January 1966 holds out that commercialization and what followed as rediscovery targets, and admits everything published before it, ICI's earlier publications included."
+  },
+  "pdfs": "Committed: pdfs/<slug>.pdf for each source (public domain in the US); its sha256 equals text.pdf_sha256. Page texts: texts/<slug>.json, read from the PDF (text layer, or Tesseract OCR with the recorded settings).",
+  "sources": [
+    {
+      "kind": "article",
+      "status": "in_scope",
+      "authors": [
+        "Edward Frankland Armstrong",
+        "T. P. Hilditch"
+      ],
+      "corpus_pdf": "historical/pdfs/10.1098_rspa.1923.0036.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "publication year (bibliography)",
+      "doi": "10.1098/rspa.1923.0036",
+      "hid": "20001",
+      "pdf": "pdfs/10.1098-rspa.1923.0036.pdf",
+      "published": "1923",
+      "slug": "10.1098-rspa.1923.0036",
+      "text": {
+        "chars": 22179,
+        "ocr_engine": null,
+        "page_text_origins": {
+          "text_layer": 10
+        },
+        "page_texts": "texts/10.1098-rspa.1923.0036.json",
+        "pages": 10,
+        "pdf_sha256": "090b1bfcca9791ccb09888cd69d7039511310a6631a4f8035bd882a6cbf31973"
+      },
+      "title": "A study of catalytic actions at solid surfaces. X. -The interaction of carbon monoxide and hydrogen as conditioned by nickel at relatively low temperatures. -A practical synthesis of methane",
+      "venue": "Proceedings of the Royal Society of London Series A Containing Papers of a Mathematical and Physical Character"
+    },
+    {
+      "kind": "patent",
+      "status": "in_scope",
+      "assignee": "BASF (Mittasch et al.)",
+      "corpus_pdf": "historical/patents/US1558559A.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "grant date printed on the patent (agrees with the USPTO issue-year table)",
+      "patent": "US1558559A",
+      "pdf": "pdfs/us1558559a.pdf",
+      "priority_date": "1923-09-06",
+      "published": "1925-10-27",
+      "slug": "us1558559a",
+      "text": {
+        "chars": 10706,
+        "ocr_engine": null,
+        "page_text_origins": {
+          "text_layer": 3
+        },
+        "page_texts": "texts/us1558559a.json",
+        "pages": 3,
+        "pdf_sha256": "ce04e3fc9a5ab8469494ba9fb7f75d79904867665c1c9ed3343f9b2cb04320f5"
+      },
+      "title": "Production of oxygenated organic compounds"
+    },
+    {
+      "kind": "patent",
+      "status": "in_scope",
+      "assignee": "BASF (Mittasch & Pier)",
+      "corpus_pdf": "historical/patents/US1569775A.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "grant date printed on the patent (agrees with the USPTO issue-year table)",
+      "patent": "US1569775A",
+      "pdf": "pdfs/us1569775a.pdf",
+      "priority_date": "1924-09-04",
+      "published": "1926-01-12",
+      "slug": "us1569775a",
+      "text": {
+        "chars": 5978,
+        "ocr_engine": null,
+        "page_text_origins": {
+          "text_layer": 2
+        },
+        "page_texts": "texts/us1569775a.json",
+        "pages": 2,
+        "pdf_sha256": "dbb6ad3f0ce2df94348ee1d41c0e051cb1f3c7cb4a5b00800dd3d6d5e2b3a780"
+      },
+      "title": "Synthetic manufacture of methanol"
+    },
+    {
+      "kind": "patent",
+      "status": "in_scope",
+      "assignee": "Commercial Solvents Corp",
+      "corpus_pdf": "historical/patents/US1608643A.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "grant date printed on the patent (agrees with the USPTO issue-year table)",
+      "patent": "US1608643A",
+      "pdf": "pdfs/us1608643a.pdf",
+      "priority_date": "1926-05-26",
+      "published": "1926-11-30",
+      "slug": "us1608643a",
+      "text": {
+        "chars": 10143,
+        "ocr_engine": "tesseract 5.5.3 (eng, 300 dpi, 2 columns)",
+        "page_text_origins": {
+          "ocr": 3
+        },
+        "page_texts": "texts/us1608643a.json",
+        "pages": 3,
+        "pdf_sha256": "519c2703e464dd5fb5f10ab5ec6ad65eaf44bbfbb03474972a6e45c0696f5bb0"
+      },
+      "title": "Catalyst for synthetic methanol production"
+    },
+    {
+      "kind": "patent",
+      "status": "in_scope",
+      "assignee": "Commercial Solvents Corp",
+      "corpus_pdf": "historical/patents/US1609593A.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "grant date printed on the patent (agrees with the USPTO issue-year table)",
+      "patent": "US1609593A",
+      "pdf": "pdfs/us1609593a.pdf",
+      "priority_date": "1926-05-26",
+      "published": "1926-12-07",
+      "slug": "us1609593a",
+      "text": {
+        "chars": 10162,
+        "ocr_engine": "tesseract 5.5.3 (eng, 300 dpi, 2 columns)",
+        "page_text_origins": {
+          "ocr": 3
+        },
+        "page_texts": "texts/us1609593a.json",
+        "pages": 3,
+        "pdf_sha256": "4a8b0471307045f1ac7ea6f07b4610ea64a7bedabfa5bc3517290f99ecaaa48e"
+      },
+      "title": "Catalyst for synthetic methanol production"
+    },
+    {
+      "kind": "article",
+      "status": "in_scope",
+      "authors": [
+        "I. G. Farbenindustrie"
+      ],
+      "corpus_pdf": "historical/pdfs/10.1002_ange.19270400603.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "publication year (bibliography)",
+      "doi": "10.1002/ange.19270400603",
+      "hid": "20003",
+      "pdf": "pdfs/10.1002-ange.19270400603.pdf",
+      "published": "1927",
+      "slug": "10.1002-ange.19270400603",
+      "text": {
+        "chars": 6747,
+        "ocr_engine": null,
+        "page_text_origins": {
+          "text_layer": 1
+        },
+        "page_texts": "texts/10.1002-ange.19270400603.json",
+        "pages": 1,
+        "pdf_sha256": "3ccad6eb33a1bd3fd5a2d76cc7ff952721295ddcdf8709e45a49bb68891da108"
+      },
+      "title": "Zur Geschichte der Methanolsynthese",
+      "venue": "Angewandte Chemie"
+    },
+    {
+      "kind": "article",
+      "status": "in_scope",
+      "authors": [
+        "Hugh S. Taylor",
+        "G. B. Kistiakowsky"
+      ],
+      "corpus_pdf": "historical/pdfs/10.1021_ja01409a015.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "publication year (bibliography)",
+      "doi": "10.1021/ja01409a015",
+      "hid": "20002",
+      "pdf": "pdfs/10.1021-ja01409a015.pdf",
+      "published": "1927",
+      "slug": "10.1021-ja01409a015",
+      "text": {
+        "chars": 20880,
+        "ocr_engine": null,
+        "page_text_origins": {
+          "text_layer": 9
+        },
+        "page_texts": "texts/10.1021-ja01409a015.json",
+        "pages": 9,
+        "pdf_sha256": "567e3283a890a8d40bc812860ee4331926523adab36b43c2898177553a7b39f7"
+      },
+      "title": "STUDIES OF METHANOL CATALYSTS. I",
+      "venue": "Journal of the American Chemical Society"
+    },
+    {
+      "kind": "patent",
+      "status": "in_scope",
+      "assignee": "Commercial Solvents Corp",
+      "corpus_pdf": "historical/patents/US1625925A.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "grant year from the USPTO issue-year table (no legible grant date)",
+      "patent": "US1625925A",
+      "pdf": "pdfs/us1625925a.pdf",
+      "priority_date": "1926-06-21",
+      "published": "1927",
+      "slug": "us1625925a",
+      "text": {
+        "chars": 17794,
+        "ocr_engine": "tesseract 5.5.3 (eng, 300 dpi, 2 columns)",
+        "page_text_origins": {
+          "ocr": 4
+        },
+        "page_texts": "texts/us1625925a.json",
+        "pages": 4,
+        "pdf_sha256": "0d8a8ed9aeb6ba4c21685aaddba69e68332b95d203e9283b1cc48bbe7b56aa62"
+      },
+      "title": "Catalyst for synthetic-methanol production"
+    },
+    {
+      "kind": "patent",
+      "status": "in_scope",
+      "assignee": "Commercial Solvents Corp",
+      "corpus_pdf": "historical/patents/US1625926A.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "grant year from the USPTO issue-year table (no legible grant date)",
+      "patent": "US1625926A",
+      "pdf": "pdfs/us1625926a.pdf",
+      "priority_date": "1926-05-26",
+      "published": "1927",
+      "slug": "us1625926a",
+      "text": {
+        "chars": 12879,
+        "ocr_engine": "tesseract 5.5.3 (eng, 300 dpi, 2 columns)",
+        "page_text_origins": {
+          "ocr": 3
+        },
+        "page_texts": "texts/us1625926a.json",
+        "pages": 3,
+        "pdf_sha256": "b120fb98fbdafc6ab4b9f3e9ce7dee8b8cec57d2f171c5caed8c896de9b7d603"
+      },
+      "title": "Catalyst for synthetic-methanol production"
+    },
+    {
+      "kind": "patent",
+      "status": "in_scope",
+      "assignee": "Commercial Solvents Corp",
+      "corpus_pdf": "historical/patents/US1625924A.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "grant date printed on the patent (agrees with the USPTO issue-year table)",
+      "patent": "US1625924A",
+      "pdf": "pdfs/us1625924a.pdf",
+      "priority_date": "1926-05-26",
+      "published": "1927-04-26",
+      "slug": "us1625924a",
+      "text": {
+        "chars": 16266,
+        "ocr_engine": "tesseract 5.5.3 (eng, 300 dpi, 2 columns)",
+        "page_text_origins": {
+          "ocr": 4
+        },
+        "page_texts": "texts/us1625924a.json",
+        "pages": 4,
+        "pdf_sha256": "6ee8c8784c5485098f69d1017c067f77c67999ecb40bd74b62fe3b50fb29516e"
+      },
+      "title": "Catalyst for synthetic-methanol production"
+    },
+    {
+      "kind": "patent",
+      "status": "in_scope",
+      "assignee": "Commercial Solvents Corp",
+      "corpus_pdf": "historical/patents/US1625927A.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "grant date printed on the patent (agrees with the USPTO issue-year table)",
+      "patent": "US1625927A",
+      "pdf": "pdfs/us1625927a.pdf",
+      "priority_date": "1926-05-26",
+      "published": "1927-04-26",
+      "slug": "us1625927a",
+      "text": {
+        "chars": 10961,
+        "ocr_engine": null,
+        "page_text_origins": {
+          "text_layer": 3
+        },
+        "page_texts": "texts/us1625927a.json",
+        "pages": 3,
+        "pdf_sha256": "2f6da613b8a47efaba981ff62f840539b3fc91c750c1f43c03864eedfcd5d899"
+      },
+      "title": "Catalyst for synthetic-methanol production"
+    },
+    {
+      "kind": "patent",
+      "status": "in_scope",
+      "assignee": "Commercial Solvents Corp",
+      "corpus_pdf": "historical/patents/US1625928A.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "grant date printed on the patent (agrees with the USPTO issue-year table)",
+      "patent": "US1625928A",
+      "pdf": "pdfs/us1625928a.pdf",
+      "priority_date": "1926-05-26",
+      "published": "1927-04-26",
+      "slug": "us1625928a",
+      "text": {
+        "chars": 10611,
+        "ocr_engine": "tesseract 5.5.3 (eng, 300 dpi, 2 columns)",
+        "page_text_origins": {
+          "ocr": 3
+        },
+        "page_texts": "texts/us1625928a.json",
+        "pages": 3,
+        "pdf_sha256": "20843647277bba2d4a17af5342bb7f31b0631524d8c690103490a0d4d2f2c44c"
+      },
+      "title": "Cataltst for synthetic-methanol production"
+    },
+    {
+      "kind": "patent",
+      "status": "in_scope",
+      "assignee": "Commercial Solvents Corp",
+      "corpus_pdf": "historical/patents/US1625929A.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "grant date printed on the patent (agrees with the USPTO issue-year table)",
+      "patent": "US1625929A",
+      "pdf": "pdfs/us1625929a.pdf",
+      "priority_date": "1926-05-26",
+      "published": "1927-04-26",
+      "slug": "us1625929a",
+      "text": {
+        "chars": 14341,
+        "ocr_engine": "tesseract 5.5.3 (eng, 300 dpi, 2 columns)",
+        "page_text_origins": {
+          "ocr": 3
+        },
+        "page_texts": "texts/us1625929a.json",
+        "pages": 3,
+        "pdf_sha256": "d81bc522b0e252531b8534a3e5dfbb527442bbc538bdb3779ee23feeb8722610"
+      },
+      "title": "Catalyst for synthetic-methanol production"
+    },
+    {
+      "kind": "article",
+      "status": "in_scope",
+      "authors": [
+        "W. K. Lewis",
+        "Per K. Frölich"
+      ],
+      "corpus_pdf": "historical/pdfs/10.1021_ie50219a021.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "publication year (bibliography)",
+      "doi": "10.1021/ie50219a021",
+      "hid": "20005",
+      "pdf": "pdfs/10.1021-ie50219a021.pdf",
+      "published": "1928",
+      "slug": "10.1021-ie50219a021",
+      "text": {
+        "chars": 32689,
+        "ocr_engine": null,
+        "page_text_origins": {
+          "text_layer": 6
+        },
+        "page_texts": "texts/10.1021-ie50219a021.json",
+        "pages": 6,
+        "pdf_sha256": "9a1799d3a39701d2667aad7f18044b4332d0867d35a81dff9957a949581cb811"
+      },
+      "title": "Synthesis of Methanol from Carbon Monoxide and Hydrogen",
+      "venue": "Industrial & Engineering Chemistry"
+    },
+    {
+      "kind": "article",
+      "status": "in_scope",
+      "authors": [
+        "Per K. Frölich",
+        "W. K. Lewis"
+      ],
+      "corpus_pdf": "historical/pdfs/10.1021_ie50220a011.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "publication year (bibliography)",
+      "doi": "10.1021/ie50220a011",
+      "hid": "20007",
+      "pdf": "pdfs/10.1021-ie50220a011.pdf",
+      "published": "1928",
+      "slug": "10.1021-ie50220a011",
+      "text": {
+        "chars": 35796,
+        "ocr_engine": null,
+        "page_text_origins": {
+          "text_layer": 6
+        },
+        "page_texts": "texts/10.1021-ie50220a011.json",
+        "pages": 6,
+        "pdf_sha256": "655b460d4443f19362b6817c9e327e485e4905748ccfbcb75d107246068598d8"
+      },
+      "title": "Synthesis of Alcohols Higher than Methanol from Carbon Monoxide and Hydrogen",
+      "venue": "Industrial & Engineering Chemistry"
+    },
+    {
+      "kind": "article",
+      "status": "in_scope",
+      "authors": [
+        "Ralph L. Brown",
+        "A. E. Galloway"
+      ],
+      "corpus_pdf": "historical/pdfs/10.1021_ie50225a025.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "publication year (bibliography)",
+      "doi": "10.1021/ie50225a025",
+      "hid": "20010",
+      "pdf": "pdfs/10.1021-ie50225a025.pdf",
+      "published": "1928",
+      "slug": "10.1021-ie50225a025",
+      "text": {
+        "chars": 37895,
+        "ocr_engine": null,
+        "page_text_origins": {
+          "text_layer": 7
+        },
+        "page_texts": "texts/10.1021-ie50225a025.json",
+        "pages": 7,
+        "pdf_sha256": "16add6a6e6a5e482af327d76dadb9182cd20b3ce63d6d7a5b0309a179292c4e8"
+      },
+      "title": "Methanol from Hydrogen and Carbon Monoxide",
+      "venue": "Industrial & Engineering Chemistry"
+    },
+    {
+      "kind": "article",
+      "status": "in_scope",
+      "authors": [
+        "Etienne Audibert",
+        "Andrè Raineau"
+      ],
+      "corpus_pdf": "historical/pdfs/10.1021_ie50226a034.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "publication year (bibliography)",
+      "doi": "10.1021/ie50226a034",
+      "hid": "20004",
+      "pdf": "pdfs/10.1021-ie50226a034.pdf",
+      "published": "1928",
+      "slug": "10.1021-ie50226a034",
+      "text": {
+        "chars": 32511,
+        "ocr_engine": null,
+        "page_text_origins": {
+          "text_layer": 6
+        },
+        "page_texts": "texts/10.1021-ie50226a034.json",
+        "pages": 6,
+        "pdf_sha256": "5ee4dd19c61ceef8239c6b3aaf54e025e007e074213c712cc23dd25d1409f1f1"
+      },
+      "title": "A Study of the Synthesis of Methanol",
+      "venue": "Industrial & Engineering Chemistry"
+    },
+    {
+      "kind": "article",
+      "status": "in_scope",
+      "authors": [
+        "A. C. Fieldner",
+        "R. L. Brown"
+      ],
+      "corpus_pdf": "historical/pdfs/10.1021_ie50226a035.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "publication year (bibliography)",
+      "doi": "10.1021/ie50226a035",
+      "hid": "20009",
+      "pdf": "pdfs/10.1021-ie50226a035.pdf",
+      "published": "1928",
+      "slug": "10.1021-ie50226a035",
+      "text": {
+        "chars": 19525,
+        "ocr_engine": null,
+        "page_text_origins": {
+          "text_layer": 3
+        },
+        "page_texts": "texts/10.1021-ie50226a035.json",
+        "pages": 3,
+        "pdf_sha256": "8eaf3088e9cfc05fb8f3b5e135e9569836ba589bbbd2aebabcbcae472279803f"
+      },
+      "title": "Comparative Study of Values Obtained in Synthesis of Methanol",
+      "venue": "Industrial & Engineering Chemistry"
+    },
+    {
+      "kind": "article",
+      "status": "in_scope",
+      "authors": [
+        "Per K. Frölich",
+        "M. R. Fenske",
+        "Paul S. Taylor",
+        "C. A. Southwich"
+      ],
+      "corpus_pdf": "historical/pdfs/10.1021_ie50228a016.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "publication year (bibliography)",
+      "doi": "10.1021/ie50228a016",
+      "hid": "20006",
+      "pdf": "pdfs/10.1021-ie50228a016.pdf",
+      "published": "1928",
+      "slug": "10.1021-ie50228a016",
+      "text": {
+        "chars": 23716,
+        "ocr_engine": null,
+        "page_text_origins": {
+          "text_layer": 4
+        },
+        "page_texts": "texts/10.1021-ie50228a016.json",
+        "pages": 4,
+        "pdf_sha256": "43ff6c64ed3bb92ebeae23bc0e9d5c7ec6ff66e6b4aae17b3c994ec35e7d88ac"
+      },
+      "title": "Catalysts for the Formation of Alcohols from Carbon Monoxide and Hydrogen: II—Synthesis of Methanol with Catalysts Composed of Copper and Zinc",
+      "venue": "Industrial & Engineering Chemistry"
+    },
+    {
+      "kind": "article",
+      "status": "in_scope",
+      "authors": [
+        "H. H. Storch"
+      ],
+      "corpus_pdf": "historical/pdfs/10.1021_j150293a009.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "publication year (bibliography)",
+      "doi": "10.1021/j150293a009",
+      "hid": "20008",
+      "pdf": "pdfs/10.1021-j150293a009.pdf",
+      "published": "1928",
+      "slug": "10.1021-j150293a009",
+      "text": {
+        "chars": 12551,
+        "ocr_engine": null,
+        "page_text_origins": {
+          "text_layer": 5
+        },
+        "page_texts": "texts/10.1021-j150293a009.json",
+        "pages": 5,
+        "pdf_sha256": "c72559e44f0343ff2cd239229eef26a6ba37bc62565da120050d1d0cb45a97af"
+      },
+      "title": "Behavior of Zinc Oxide and Zinc Oxide Chromium Oxide Catalysis in the Decomposition and Synthesis of Methanol",
+      "venue": "The Journal of Physical Chemistry"
+    },
+    {
+      "kind": "article",
+      "status": "in_scope",
+      "authors": [
+        "A. Caress",
+        "Eric Keightley Rideal"
+      ],
+      "corpus_pdf": "historical/pdfs/10.1098_rspa.1928.0155.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "publication year (bibliography)",
+      "doi": "10.1098/rspa.1928.0155",
+      "hid": "20012",
+      "pdf": "pdfs/10.1098-rspa.1928.0155.pdf",
+      "published": "1928",
+      "slug": "10.1098-rspa.1928.0155",
+      "text": {
+        "chars": 31956,
+        "ocr_engine": null,
+        "page_text_origins": {
+          "text_layer": 16
+        },
+        "page_texts": "texts/10.1098-rspa.1928.0155.json",
+        "pages": 16,
+        "pdf_sha256": "ef908cba575659212b5ff2fdad947023bacd79f3b068dfdff80619e14cad3a9a"
+      },
+      "title": "The chemical reaction of carbon monoxide and hydrogen after collision with electrons",
+      "venue": "Proceedings of the Royal Society of London Series A Containing Papers of a Mathematical and Physical Character"
+    },
+    {
+      "kind": "patent",
+      "status": "in_scope",
+      "assignee": "Roessler & Hasslacher Chemical",
+      "corpus_pdf": "historical/patents/US1681751A.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "grant date printed on the patent (agrees with the USPTO issue-year table)",
+      "patent": "US1681751A",
+      "pdf": "pdfs/us1681751a.pdf",
+      "priority_date": "1927-05-16",
+      "published": "1928-08-21",
+      "slug": "us1681751a",
+      "text": {
+        "chars": 16467,
+        "ocr_engine": "tesseract 5.5.3 (eng, 300 dpi, 2 columns)",
+        "page_text_origins": {
+          "ocr": 4
+        },
+        "page_texts": "texts/us1681751a.json",
+        "pages": 4,
+        "pdf_sha256": "e86d801f098f6a1ff4cbfbec8b306b9c995afa2851ea9717ea7c4abdcddf99ee"
+      },
+      "title": "Synthesis of methanol"
+    },
+    {
+      "kind": "patent",
+      "status": "in_scope",
+      "assignee": "Roessler & Hasslacher Chemical",
+      "corpus_pdf": "historical/patents/US1681752A.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "grant date printed on the patent (agrees with the USPTO issue-year table)",
+      "patent": "US1681752A",
+      "pdf": "pdfs/us1681752a.pdf",
+      "priority_date": "1927-05-27",
+      "published": "1928-08-21",
+      "slug": "us1681752a",
+      "text": {
+        "chars": 16492,
+        "ocr_engine": "tesseract 5.5.3 (eng, 300 dpi, 2 columns)",
+        "page_text_origins": {
+          "ocr": 4
+        },
+        "page_texts": "texts/us1681752a.json",
+        "pages": 4,
+        "pdf_sha256": "a7aef05af352c0f56bf9e6426006f19ad392ab23f67c77f6883884ac47e70670"
+      },
+      "title": "Synthesis of methanol"
+    },
+    {
+      "kind": "patent",
+      "status": "in_scope",
+      "assignee": "Roessler & Hasslacher Chemical",
+      "corpus_pdf": "historical/patents/US1681753A.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "grant date printed on the patent (agrees with the USPTO issue-year table)",
+      "patent": "US1681753A",
+      "pdf": "pdfs/us1681753a.pdf",
+      "priority_date": "1927-06-04",
+      "published": "1928-08-21",
+      "slug": "us1681753a",
+      "text": {
+        "chars": 11430,
+        "ocr_engine": null,
+        "page_text_origins": {
+          "text_layer": 3
+        },
+        "page_texts": "texts/us1681753a.json",
+        "pages": 3,
+        "pdf_sha256": "2751754fc1227d639222164614fe5fe96c1acd8c9ec14dcdfbda90806ad3144d"
+      },
+      "title": "Synthesis of methanol"
+    },
+    {
+      "kind": "patent",
+      "status": "in_scope",
+      "assignee": "Société Anonyme Compagnie de Béthune",
+      "corpus_pdf": "historical/patents/PL9584B1.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "grant date printed on the patent (read from the page)",
+      "date_check": "page 1: 'Société Anonyme Compagnie de Bethune (Bully Les Mines Pas-de-Calais, Francja)'; 'Udzielono 10 października 1928 r.' (granted); filed 10 June 1927, priority 17 July 1926 (France)",
+      "patent": "PL9584B1",
+      "pdf": "pdfs/pl9584b1.pdf",
+      "priority_date": "1927-06-10",
+      "published": "1928-10-10",
+      "slug": "pl9584b1",
+      "text": {
+        "chars": 6370,
+        "ocr_engine": null,
+        "page_text_origins": {
+          "text_layer": 4
+        },
+        "page_texts": "texts/pl9584b1.json",
+        "pages": 4,
+        "pdf_sha256": "69eeb932228fd2d1319056797d085a5d5b62d8e59e9d903dd38b31927c911166"
+      },
+      "title": "Catalysts for the synthesis of methyl alcohol."
+    },
+    {
+      "kind": "patent",
+      "status": "in_scope",
+      "assignee": "Commercial Solvents Corp",
+      "corpus_pdf": "historical/patents/US1695447A.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "grant date printed on the patent (agrees with the USPTO issue-year table)",
+      "patent": "US1695447A",
+      "pdf": "pdfs/us1695447a.pdf",
+      "priority_date": "1926-10-25",
+      "published": "1928-12-18",
+      "slug": "us1695447a",
+      "text": {
+        "chars": 14880,
+        "ocr_engine": "tesseract 5.5.3 (eng, 300 dpi, 2 columns)",
+        "page_text_origins": {
+          "ocr": 3
+        },
+        "page_texts": "texts/us1695447a.json",
+        "pages": 3,
+        "pdf_sha256": "50ba249a9a92e6f3282bcd56f705e6b5541637dd85769a9aa5a4a57e1f6fe29b"
+      },
+      "title": "Catalyst for synthetic methanol production"
+    },
+    {
+      "kind": "article",
+      "status": "in_scope",
+      "authors": [
+        "K. Frölich",
+        "Robert L. Davidson",
+        "M. R. Fenske"
+      ],
+      "corpus_pdf": "historical/pdfs/10.1021_ie50230a003.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "publication year (bibliography)",
+      "doi": "10.1021/ie50230a003",
+      "hid": "20016",
+      "pdf": "pdfs/10.1021-ie50230a003.pdf",
+      "published": "1929",
+      "slug": "10.1021-ie50230a003",
+      "text": {
+        "chars": 17606,
+        "ocr_engine": null,
+        "page_text_origins": {
+          "text_layer": 3
+        },
+        "page_texts": "texts/10.1021-ie50230a003.json",
+        "pages": 3,
+        "pdf_sha256": "ed65acfa1dde458b988a10b409d8c1056621d05524cd9f35413b6876af2b2583"
+      },
+      "title": "Catalysts for the Formation of Alcohols from Carbon Monoxide and Hydrogen: III—X-Ray Examination of Methanol Catalysts composed of Copper and Zinc",
+      "venue": "Industrial & Engineering Chemistry"
+    },
+    {
+      "kind": "article",
+      "status": "in_scope",
+      "authors": [
+        "Ralph L. Brown",
+        "A. E. Galloway"
+      ],
+      "corpus_pdf": "historical/pdfs/10.1021_ie50232a005.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "publication year (bibliography)",
+      "doi": "10.1021/ie50232a005",
+      "hid": "20014",
+      "pdf": "pdfs/10.1021-ie50232a005.pdf",
+      "published": "1929",
+      "slug": "10.1021-ie50232a005",
+      "text": {
+        "chars": 23702,
+        "ocr_engine": null,
+        "page_text_origins": {
+          "text_layer": 4
+        },
+        "page_texts": "texts/10.1021-ie50232a005.json",
+        "pages": 4,
+        "pdf_sha256": "864b002c3772bee0bcabe9dea7165769273a93ff0dab6d944b5d233db093691d"
+      },
+      "title": "Methanol from Hydrogen and Carbon Monoxide II–Dimethyl Ether",
+      "venue": "Industrial & Engineering Chemistry"
+    },
+    {
+      "kind": "article",
+      "status": "in_scope",
+      "authors": [
+        "David F. Smith",
+        "Briant F. Branting"
+      ],
+      "corpus_pdf": "historical/pdfs/10.1021_ja01376a015.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "publication year (bibliography)",
+      "doi": "10.1021/ja01376a015",
+      "hid": "20015",
+      "pdf": "pdfs/10.1021-ja01376a015.pdf",
+      "published": "1929",
+      "slug": "10.1021-ja01376a015",
+      "text": {
+        "chars": 29176,
+        "ocr_engine": null,
+        "page_text_origins": {
+          "text_layer": 11
+        },
+        "page_texts": "texts/10.1021-ja01376a015.json",
+        "pages": 11,
+        "pdf_sha256": "70d85c2d2e2533b80f4b81bbaf262b84e571a33847168bb83bd80f5f0bac6042"
+      },
+      "title": "THE EQUILIBRIUM BETWEEN METHANOL, CARBON MONOXIDE AND HYDROGEN. PRELIMINARY PAPER",
+      "venue": "Journal of the American Chemical Society"
+    },
+    {
+      "kind": "patent",
+      "status": "in_scope",
+      "assignee": "Roessler & Hasslacher Chemical",
+      "corpus_pdf": "historical/patents/US1707331A.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "grant date printed on the patent (agrees with the USPTO issue-year table)",
+      "patent": "US1707331A",
+      "pdf": "pdfs/us1707331a.pdf",
+      "priority_date": "1927-08-02",
+      "published": "1929-04-02",
+      "slug": "us1707331a",
+      "text": {
+        "chars": 16877,
+        "ocr_engine": "tesseract 5.5.3 (eng, 300 dpi, 2 columns)",
+        "page_text_origins": {
+          "ocr": 4
+        },
+        "page_texts": "texts/us1707331a.json",
+        "pages": 4,
+        "pdf_sha256": "9649ca4c5cd6e2a5c13380146383ad9d4a5a6adf11594346b2e2a58e037a7891"
+      },
+      "title": "Process and catalyst for the synthesis of methanol"
+    },
+    {
+      "kind": "patent",
+      "status": "in_scope",
+      "assignee": "Roessler & Hasslacher Chemical",
+      "corpus_pdf": "historical/patents/US1738971A.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "grant date printed on the patent (agrees with the USPTO issue-year table)",
+      "patent": "US1738971A",
+      "pdf": "pdfs/us1738971a.pdf",
+      "priority_date": "1927-08-02",
+      "published": "1929-12-10",
+      "slug": "us1738971a",
+      "text": {
+        "chars": 15047,
+        "ocr_engine": null,
+        "page_text_origins": {
+          "text_layer": 3
+        },
+        "page_texts": "texts/us1738971a.json",
+        "pages": 3,
+        "pdf_sha256": "af64d113b1537566aae06949c5814883525d1d00b91b50e6974af555f330b84d"
+      },
+      "title": "Process and catalyst for synthesis of methanol"
+    },
+    {
+      "kind": "patent",
+      "status": "in_scope",
+      "assignee": "Dreyfus Hnnry",
+      "corpus_pdf": "historical/patents/US1738989A.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "grant date printed on the patent (agrees with the USPTO issue-year table)",
+      "patent": "US1738989A",
+      "pdf": "pdfs/us1738989a.pdf",
+      "priority_date": "1925-06-13",
+      "published": "1929-12-10",
+      "slug": "us1738989a",
+      "text": {
+        "chars": 10891,
+        "ocr_engine": "tesseract 5.5.3 (eng, 300 dpi, 2 columns)",
+        "page_text_origins": {
+          "ocr": 3
+        },
+        "page_texts": "texts/us1738989a.json",
+        "pages": 3,
+        "pdf_sha256": "42a5cc049dbf33952da2ebf8dfb4ae31b6bbd2f3805587ccbfc9839dbc987f5c"
+      },
+      "title": "Hanufacture of methyl alcohol"
+    },
+    {
+      "kind": "article",
+      "status": "in_scope",
+      "authors": [
+        "Ralph L. Brown",
+        "A. E. Galloway"
+      ],
+      "corpus_pdf": "historical/pdfs/10.1021_ie50242a022.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "publication year (bibliography)",
+      "doi": "10.1021/ie50242a022",
+      "hid": "20017",
+      "pdf": "pdfs/10.1021-ie50242a022.pdf",
+      "published": "1930",
+      "slug": "10.1021-ie50242a022",
+      "text": {
+        "chars": 11113,
+        "ocr_engine": null,
+        "page_text_origins": {
+          "text_layer": 2
+        },
+        "page_texts": "texts/10.1021-ie50242a022.json",
+        "pages": 2,
+        "pdf_sha256": "4475cbd0b0906b6e2913d0fda0f4b5cde0b04f2d3e2aabf52ce38514a52a3bc4"
+      },
+      "title": "Methanol from Hydrogen and Carbon Monoxide III—Further Work on Dimethyl Ether",
+      "venue": "Industrial & Engineering Chemistry"
+    },
+    {
+      "kind": "article",
+      "status": "in_scope",
+      "authors": [
+        "David F. Smith",
+        "L.L. Hirst"
+      ],
+      "corpus_pdf": "historical/pdfs/10.1021_ie50250a009.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "publication year (bibliography)",
+      "doi": "10.1021/ie50250a009",
+      "hid": "20018",
+      "pdf": "pdfs/10.1021-ie50250a009.pdf",
+      "published": "1930",
+      "slug": "10.1021-ie50250a009",
+      "text": {
+        "chars": 23012,
+        "ocr_engine": null,
+        "page_text_origins": {
+          "text_layer": 4
+        },
+        "page_texts": "texts/10.1021-ie50250a009.json",
+        "pages": 4,
+        "pdf_sha256": "b81199b5ca482d72e36d4d4a3f1bade1e5e60af4951d25378155b0779c516550"
+      },
+      "title": "Reactions That Occur on a Methanol Catalyst",
+      "venue": "Industrial & Engineering Chemistry"
+    },
+    {
+      "kind": "patent",
+      "status": "in_scope",
+      "assignee": "Du Pont",
+      "corpus_pdf": "historical/patents/US1746781A.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "grant date printed on the patent (agrees with the USPTO issue-year table)",
+      "patent": "US1746781A",
+      "pdf": "pdfs/us1746781a.pdf",
+      "priority_date": "1926-04-08",
+      "published": "1930-02-11",
+      "slug": "us1746781a",
+      "text": {
+        "chars": 31317,
+        "ocr_engine": null,
+        "page_text_origins": {
+          "text_layer": 7
+        },
+        "page_texts": "texts/us1746781a.json",
+        "pages": 7,
+        "pdf_sha256": "bc940b73de0f6058af0f79f233c202e52860437f0b60dd3f27a22539a4460189"
+      },
+      "title": "Catalyst and catalytic process"
+    },
+    {
+      "kind": "patent",
+      "status": "in_scope",
+      "assignee": "Commercial Solvents Corp",
+      "corpus_pdf": "historical/patents/US1754371A.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "grant date printed on the patent (agrees with the USPTO issue-year table)",
+      "patent": "US1754371A",
+      "pdf": "pdfs/us1754371a.pdf",
+      "priority_date": "1926-11-17",
+      "published": "1930-04-15",
+      "slug": "us1754371a",
+      "text": {
+        "chars": 12932,
+        "ocr_engine": "tesseract 5.5.3 (eng, 300 dpi, 2 columns)",
+        "page_text_origins": {
+          "ocr": 4
+        },
+        "page_texts": "texts/us1754371a.json",
+        "pages": 4,
+        "pdf_sha256": "63c5365b59f52b352c3a62abb673e1f1e0226f52a28605ea80057ac39062aca5"
+      },
+      "title": "Synthetic-methanol process"
+    },
+    {
+      "kind": "patent",
+      "status": "in_scope",
+      "assignee": "Ici Ltd",
+      "corpus_pdf": "historical/patents/US1774432A.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "grant date printed on the patent (agrees with the USPTO issue-year table)",
+      "patent": "US1774432A",
+      "pdf": "pdfs/us1774432a.pdf",
+      "priority_date": "1926-11-15",
+      "published": "1930-08-26",
+      "slug": "us1774432a",
+      "text": {
+        "chars": 7758,
+        "ocr_engine": "tesseract 5.5.3 (eng, 300 dpi, 2 columns)",
+        "page_text_origins": {
+          "ocr": 2
+        },
+        "page_texts": "texts/us1774432a.json",
+        "pages": 2,
+        "pdf_sha256": "0ead12a8f3ad366547ab5093a19ca80b2fc009b6220147bd6cefda519bf04dd4"
+      },
+      "title": "Catalysts for the catalytic production of methanol and other oxygenated organic &hellip;"
+    },
+    {
+      "kind": "patent",
+      "status": "in_scope",
+      "assignee": "Commercial Solvents Corp",
+      "corpus_pdf": "historical/patents/US1797569A.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "grant date printed on the patent (agrees with the USPTO issue-year table)",
+      "patent": "US1797569A",
+      "pdf": "pdfs/us1797569a.pdf",
+      "priority_date": "1926-12-13",
+      "published": "1931-03-24",
+      "slug": "us1797569a",
+      "text": {
+        "chars": 17154,
+        "ocr_engine": "tesseract 5.5.3 (eng, 300 dpi, 2 columns)",
+        "page_text_origins": {
+          "ocr": 5
+        },
+        "page_texts": "texts/us1797569a.json",
+        "pages": 5,
+        "pdf_sha256": "440c9a727ece917cc237a4d46b33b2bb22473d7b64c22ab437075a391204f6a7"
+      },
+      "title": "Synthetic methanol process"
+    },
+    {
+      "kind": "patent",
+      "status": "in_scope",
+      "assignee": "Natta Giulio",
+      "corpus_pdf": "historical/patents/US1815677A.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "grant date printed on the patent (agrees with the USPTO issue-year table)",
+      "patent": "US1815677A",
+      "pdf": "pdfs/us1815677a.pdf",
+      "priority_date": "1928-03-13",
+      "published": "1931-07-21",
+      "slug": "us1815677a",
+      "text": {
+        "chars": 8474,
+        "ocr_engine": "tesseract 5.5.3 (eng, 300 dpi, 2 columns)",
+        "page_text_origins": {
+          "ocr": 2
+        },
+        "page_texts": "texts/us1815677a.json",
+        "pages": 2,
+        "pdf_sha256": "51a1d54a66403a641cbef61138fd8a8e322cff804837b230b827e64e138dadc5"
+      },
+      "title": "Process for the manufacture of methanol"
+    },
+    {
+      "kind": "patent",
+      "status": "in_scope",
+      "assignee": "Patart Georges",
+      "corpus_pdf": "historical/patents/US1836085A.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "grant date printed on the patent (agrees with the USPTO issue-year table)",
+      "patent": "US1836085A",
+      "pdf": "pdfs/us1836085a.pdf",
+      "priority_date": "1926-01-29",
+      "published": "1931-12-15",
+      "slug": "us1836085a",
+      "text": {
+        "chars": 14478,
+        "ocr_engine": "tesseract 5.5.3 (eng, 300 dpi, 2 columns)",
+        "page_text_origins": {
+          "ocr": 3
+        },
+        "page_texts": "texts/us1836085a.json",
+        "pages": 3,
+        "pdf_sha256": "e078e3fa0f000f1508cb016b381b8e78d4ac007d9a365dc8a13e7b4e90cb7d3d"
+      },
+      "title": "Method for the simultaneous production of methyl alcohol and liquid &hellip;"
+    },
+    {
+      "kind": "patent",
+      "status": "in_scope",
+      "assignee": "Du Pont",
+      "corpus_pdf": "historical/patents/US1844129A.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "grant date printed on the patent (agrees with the USPTO issue-year table)",
+      "patent": "US1844129A",
+      "pdf": "pdfs/us1844129a.pdf",
+      "priority_date": "1927-04-14",
+      "published": "1932-02-09",
+      "slug": "us1844129a",
+      "text": {
+        "chars": 14837,
+        "ocr_engine": "tesseract 5.5.3 (eng, 300 dpi, 2 columns)",
+        "page_text_origins": {
+          "ocr": 3
+        },
+        "page_texts": "texts/us1844129a.json",
+        "pages": 3,
+        "pdf_sha256": "985f4f98e5cadd6c98b1ba1aa7f378cd65d188682098a27908d6eb7a8c06c49c"
+      },
+      "title": "Production of methanol and other carbon compounds and catalytic agents for use &hellip;"
+    },
+    {
+      "kind": "patent",
+      "status": "in_scope",
+      "assignee": "Du Pont",
+      "corpus_pdf": "historical/patents/US1844857A.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "grant date printed on the patent (agrees with the USPTO issue-year table)",
+      "patent": "US1844857A",
+      "pdf": "pdfs/us1844857a.pdf",
+      "priority_date": "1925-05-14",
+      "published": "1932-02-09",
+      "slug": "us1844857a",
+      "text": {
+        "chars": 15232,
+        "ocr_engine": "tesseract 5.5.3 (eng, 300 dpi, 2 columns)",
+        "page_text_origins": {
+          "ocr": 3
+        },
+        "page_texts": "texts/us1844857a.json",
+        "pages": 3,
+        "pdf_sha256": "aab85d24cef75b6da54eea7b08afce46e89f4bee007927cb72c08ca510cabd98"
+      },
+      "title": "Catalyst for the production of methanol and other carbon compounds and process &hellip;"
+    },
+    {
+      "kind": "patent",
+      "status": "in_scope",
+      "assignee": "Dreyfus Henry",
+      "corpus_pdf": "historical/patents/US1868096A.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "grant date printed on the patent (agrees with the USPTO issue-year table)",
+      "patent": "US1868096A",
+      "pdf": "pdfs/us1868096a.pdf",
+      "priority_date": "1929-06-05",
+      "published": "1932-07-19",
+      "slug": "us1868096a",
+      "text": {
+        "chars": 12736,
+        "ocr_engine": "tesseract 5.5.3 (eng, 300 dpi, 2 columns)",
+        "page_text_origins": {
+          "ocr": 4
+        },
+        "page_texts": "texts/us1868096a.json",
+        "pages": 4,
+        "pdf_sha256": "1cba8e9607f42f433cc25ff43b250edef2a2ddf3c748a75e8871f0cd645425a3"
+      },
+      "title": "Manufacture of methyl alcohol"
+    },
+    {
+      "kind": "patent",
+      "status": "in_scope",
+      "assignee": "Commercial Solvents Corp",
+      "corpus_pdf": "historical/patents/US1875714A.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "grant date printed on the patent (agrees with the USPTO issue-year table)",
+      "patent": "US1875714A",
+      "pdf": "pdfs/us1875714a.pdf",
+      "priority_date": "1926-12-13",
+      "published": "1932-09-06",
+      "slug": "us1875714a",
+      "text": {
+        "chars": 23051,
+        "ocr_engine": "tesseract 5.5.3 (eng, 300 dpi, 2 columns)",
+        "page_text_origins": {
+          "ocr": 6
+        },
+        "page_texts": "texts/us1875714a.json",
+        "pages": 6,
+        "pdf_sha256": "675827a62c2df2a11e32a331a448226869361064916b4a384ede151aa6a07ead"
+      },
+      "title": "Synthetic methanol process"
+    },
+    {
+      "kind": "patent",
+      "status": "in_scope",
+      "assignee": "Commercial Solvents Corp",
+      "corpus_pdf": "historical/patents/US1875722A.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "grant date printed on the patent (agrees with the USPTO issue-year table)",
+      "patent": "US1875722A",
+      "pdf": "pdfs/us1875722a.pdf",
+      "priority_date": "1925-08-27",
+      "published": "1932-09-06",
+      "slug": "us1875722a",
+      "text": {
+        "chars": 8603,
+        "ocr_engine": "tesseract 5.5.3 (eng, 300 dpi, 2 columns)",
+        "page_text_origins": {
+          "ocr": 2
+        },
+        "page_texts": "texts/us1875722a.json",
+        "pages": 2,
+        "pdf_sha256": "0cb679e3a38f5f3524539495bf2bdb500d2e0f640516aa15b2ae6eee7aa31ed9"
+      },
+      "title": "Catalyst for synthetic methanol production"
+    },
+    {
+      "kind": "patent",
+      "status": "in_scope",
+      "assignee": "Ici Ltd",
+      "corpus_pdf": "historical/patents/US1878390A.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "grant date printed on the patent (agrees with the USPTO issue-year table)",
+      "patent": "US1878390A",
+      "pdf": "pdfs/us1878390a.pdf",
+      "priority_date": "1926-12-23",
+      "published": "1932-09-20",
+      "slug": "us1878390a",
+      "text": {
+        "chars": 6117,
+        "ocr_engine": "tesseract 5.5.3 (eng, 300 dpi, 2 columns)",
+        "page_text_origins": {
+          "ocr": 2
+        },
+        "page_texts": "texts/us1878390a.json",
+        "pages": 2,
+        "pdf_sha256": "38168dc9e1bb499077a72c5e4ded41a63237acddf181ff944d88bd49f3622cee"
+      },
+      "title": "Production of methanol and other oxygenated organic compounds and preparation &hellip;"
+    },
+    {
+      "kind": "patent",
+      "status": "in_scope",
+      "assignee": "Du Pont",
+      "corpus_pdf": "historical/patents/US1939708A.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "grant year from the USPTO issue-year table",
+      "date_check": "the text gives 1853-12-19, which disagrees with the table (an OCR misreading)",
+      "patent": "US1939708A",
+      "pdf": "pdfs/us1939708a.pdf",
+      "priority_date": "1927-06-28",
+      "published": "1933",
+      "slug": "us1939708a",
+      "text": {
+        "chars": 13313,
+        "ocr_engine": "tesseract 5.5.3 (eng, 300 dpi, 2 columns)",
+        "page_text_origins": {
+          "ocr": 3
+        },
+        "page_texts": "texts/us1939708a.json",
+        "pages": 3,
+        "pdf_sha256": "419cca729cdb66ae29350e15d834e7b95e55f64edf395df6da492d1c6060a0d5"
+      },
+      "title": "Catalysts for the production of methanol and other carbon compounds"
+    },
+    {
+      "kind": "patent",
+      "status": "in_scope",
+      "assignee": "Karpen & Bros S",
+      "corpus_pdf": "historical/patents/US1908696A.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "grant date printed on the patent (agrees with the USPTO issue-year table)",
+      "patent": "US1908696A",
+      "pdf": "pdfs/us1908696a.pdf",
+      "priority_date": "1930-01-16",
+      "published": "1933-05-16",
+      "slug": "us1908696a",
+      "text": {
+        "chars": 11500,
+        "ocr_engine": "tesseract 5.5.3 (eng, 300 dpi, 2 columns)",
+        "page_text_origins": {
+          "ocr": 3
+        },
+        "page_texts": "texts/us1908696a.json",
+        "pages": 3,
+        "pdf_sha256": "07b41a2cfd107f093a5aeb85f5f0bc6d536df0bd961146cd5352851aa264b22f"
+      },
+      "title": "Catalyst for methanol manufacture and method of producing same"
+    },
+    {
+      "kind": "patent",
+      "status": "in_scope",
+      "assignee": "Nitrogen Engineering Corp",
+      "corpus_pdf": "historical/patents/US1921776A.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "grant date printed on the patent (agrees with the USPTO issue-year table)",
+      "patent": "US1921776A",
+      "pdf": "pdfs/us1921776a.pdf",
+      "priority_date": "1925-04-24",
+      "published": "1933-08-08",
+      "slug": "us1921776a",
+      "text": {
+        "chars": 24033,
+        "ocr_engine": "tesseract 5.5.3 (eng, 300 dpi, 2 columns)",
+        "page_text_origins": {
+          "ocr": 5
+        },
+        "page_texts": "texts/us1921776a.json",
+        "pages": 5,
+        "pdf_sha256": "43cae1ede727a73997ddd767f09a1654df300edfe72f57ab1ef338fe2298b031"
+      },
+      "title": "Synthetic production of methanol"
+    },
+    {
+      "kind": "patent",
+      "status": "in_scope",
+      "assignee": "Dreyfus Henry",
+      "corpus_pdf": "historical/patents/US1996101A.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "grant date printed on the patent (agrees with the USPTO issue-year table)",
+      "patent": "US1996101A",
+      "pdf": "pdfs/us1996101a.pdf",
+      "priority_date": "1929-07-24",
+      "published": "1935-04-02",
+      "slug": "us1996101a",
+      "text": {
+        "chars": 14614,
+        "ocr_engine": null,
+        "page_text_origins": {
+          "text_layer": 3
+        },
+        "page_texts": "texts/us1996101a.json",
+        "pages": 3,
+        "pdf_sha256": "53c170e2373348a973038933fd5f6875b6a5a1e6f0b2cf1302ee8ac720e9f398"
+      },
+      "title": "Manufacture of oxygenated organic compounds"
+    },
+    {
+      "kind": "patent",
+      "status": "in_scope",
+      "assignee": "Karpen & Bros S",
+      "corpus_pdf": "historical/patents/US2014883A.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "grant date printed on the patent (agrees with the USPTO issue-year table)",
+      "patent": "US2014883A",
+      "pdf": "pdfs/us2014883a.pdf",
+      "priority_date": "1931-10-23",
+      "published": "1935-09-17",
+      "slug": "us2014883a",
+      "text": {
+        "chars": 9714,
+        "ocr_engine": "tesseract 5.5.3 (eng, 300 dpi, 2 columns)",
+        "page_text_origins": {
+          "ocr": 2
+        },
+        "page_texts": "texts/us2014883a.json",
+        "pages": 2,
+        "pdf_sha256": "3c5831e21258443aa39e452f436d90274e9928f221a453a5dd55afef67ae49fd"
+      },
+      "title": "Methanol manufacture and catalyst therefor"
+    },
+    {
+      "kind": "patent",
+      "status": "in_scope",
+      "assignee": "Du Pont",
+      "corpus_pdf": "historical/patents/US2061470A.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "grant date printed on the patent (agrees with the USPTO issue-year table)",
+      "patent": "US2061470A",
+      "pdf": "pdfs/us2061470a.pdf",
+      "priority_date": "1933-11-16",
+      "published": "1936-11-17",
+      "slug": "us2061470a",
+      "text": {
+        "chars": 14084,
+        "ocr_engine": null,
+        "page_text_origins": {
+          "text_layer": 3
+        },
+        "page_texts": "texts/us2061470a.json",
+        "pages": 3,
+        "pdf_sha256": "a2037f2eb8982644119ad3075d679afc7d52b6cdbf8752265fcef743f6daf5f6"
+      },
+      "title": "Production of methanol and other carbon compounds and catalytic agents for use therein"
+    },
+    {
+      "kind": "patent",
+      "status": "in_scope",
+      "assignee": "Solvay Process Co",
+      "corpus_pdf": "historical/patents/US2281228A.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "grant date printed on the patent (agrees with the USPTO issue-year table)",
+      "patent": "US2281228A",
+      "pdf": "pdfs/us2281228a.pdf",
+      "priority_date": "1939-03-03",
+      "published": "1942-04-28",
+      "slug": "us2281228a",
+      "text": {
+        "chars": 32426,
+        "ocr_engine": null,
+        "page_text_origins": {
+          "text_layer": 6
+        },
+        "page_texts": "texts/us2281228a.json",
+        "pages": 6,
+        "pdf_sha256": "bd8561bf291c4f74453cf3472414d12499651f121582506e5b376749e8d58a58"
+      },
+      "title": "Process for synthesizing methanol"
+    },
+    {
+      "kind": "patent",
+      "status": "in_scope",
+      "assignee": "Exxon Research Engineering Co",
+      "corpus_pdf": "historical/patents/US2904575A.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "grant date printed on the patent (agrees with the USPTO issue-year table)",
+      "patent": "US2904575A",
+      "pdf": "pdfs/us2904575a.pdf",
+      "priority_date": "1957-11-21",
+      "published": "1959-09-15",
+      "slug": "us2904575a",
+      "text": {
+        "chars": 35560,
+        "ocr_engine": "tesseract 5.5.3 (eng, 300 dpi, 2 columns)",
+        "page_text_origins": {
+          "ocr": 2,
+          "text_layer": 4
+        },
+        "page_texts": "texts/us2904575a.json",
+        "pages": 6,
+        "pdf_sha256": "cb4e5c9c1a51dae5fd712a600e810e22dd13b2a2d47b21adcef4f5746238e4bf"
+      },
+      "title": "Production of methanol"
+    },
+    {
+      "kind": "patent",
+      "status": "in_scope",
+      "assignee": "Ici Ltd",
+      "corpus_pdf": "historical/patents/US2964551A.pdf",
+      "corpus_role": "input(<=1965)",
+      "date_basis": "grant date printed on the patent (agrees with the USPTO issue-year table)",
+      "patent": "US2964551A",
+      "pdf": "pdfs/us2964551a.pdf",
+      "priority_date": "1957-03-27",
+      "published": "1960-12-13",
+      "slug": "us2964551a",
+      "text": {
+        "chars": 26159,
+        "ocr_engine": "tesseract 5.5.3 (eng, 300 dpi, 2 columns)",
+        "page_text_origins": {
+          "ocr": 5
+        },
+        "page_texts": "texts/us2964551a.json",
+        "pages": 5,
+        "pdf_sha256": "2ffae4beff1013b6cc7581fb1208602cab688e43e94035b89b11e9254dfc6a9d"
+      },
+      "title": "Production of unsaturated hydrocarbons and methanol"
+    }
+  ]
+}

@@ -1,0 +1,3599 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/source/us1681753a",
+      "label": "Source",
+      "props": {
+        "name": "Synthesis of methanol",
+        "kind": "patent",
+        "description": "Published 1928-08-21 (grant date printed on the patent (agrees with the USPTO issue-year table)); in scope: before the 1966-01-01 cutoff. Text: 3 pages text_layer. Text not redistributed.",
+        "identifiers": {
+          "patent": "US1681753A"
+        },
+        "licence": "US patent; not subject to copyright",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "Synthesis of methanol",
+        "url": "https://patents.google.com/patent/US1681753A",
+        "year": 1928
+      }
+    },
+    {
+      "id": "ex:msyn/us1681753a/catalyst/pd-cerium-oxide",
+      "label": "Catalyst",
+      "props": {
+        "name": "palladium-cerium oxide",
+        "catalyst_family": "other",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 1",
+            "note": "read from the page image; the text layer reads 'Pd--CrO' and 'PdCeOs'",
+            "reading": "vision_ocr",
+            "region": [
+              0.07,
+              0.655,
+              0.44,
+              0.72
+            ],
+            "source": "ex:msyn/source/us1681753a",
+            "transcription": "Palladium+chromic oxide (Pd+Cr2O3). Palladium+zinc oxide (Pd+ZnO). Palladium+cerium oxide (Pd+Ce2O3). My method of preparation of these cata-"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1681753a/p2/2",
+            "quote": "di have also utilized Pd+CeO, cata lyst prepared by analogous methods and ob tained substantial yields of methanol.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "generality": "particular"
+      }
+    },
+    {
+      "id": "ex:msyn/us1681753a/catalyst/pd-chromic-oxide",
+      "label": "Catalyst",
+      "props": {
+        "name": "Example I: palladium-chromic oxide on 7 mesh pumice",
+        "catalyst_family": "other",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 1",
+            "note": "read from the page image; the text layer reads 'Pd--CrO' and 'PdCeOs'",
+            "reading": "vision_ocr",
+            "region": [
+              0.07,
+              0.655,
+              0.44,
+              0.72
+            ],
+            "source": "ex:msyn/source/us1681753a",
+            "transcription": "Palladium+chromic oxide (Pd+Cr2O3). Palladium+zinc oxide (Pd+ZnO). Palladium+cerium oxide (Pd+Ce2O3). My method of preparation of these cata-"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Example I",
+            "quote": "I. Pd--CrO. 50 parts by weight of 7 mesh pumice were mixed with 25 parts pal ladium nitrate solution containing 0.19) parts Pd(NO) per cubic centimeter;",
+            "source": "ex:msyn/source/us1681753a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Example I",
+            "note": "the amount '5' of chromic acid crystals is printed at the end of the previous line",
+            "passage": "us1681753a/p1/3",
+            "quote": "parts chromic acid crystals were then added, the mixture evaporated to dryness, and then further heated at 200° C. until the water and all traces of nitrogen oxides had been driven off,",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "generality": "particular",
+        "nominal_formula": "Pd--CrO (as printed)",
+        "note": "the printed formula 'Pd--CrO' is the text layer's reading of the palladium-chromic oxide formula"
+      }
+    },
+    {
+      "id": "ex:msyn/us1681753a/catalyst/pd-non-reducible-oxide",
+      "label": "Catalyst",
+      "props": {
+        "name": "palladium combined with a non-reducible metal oxide",
+        "catalyst_family": "other",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1681753a/p1/1",
+            "quote": "I have found that palladium com bined with a non-reducible metal oxide is especially useful.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "generality": "kind"
+      }
+    },
+    {
+      "id": "ex:msyn/us1681753a/catalyst/pd-zinc-oxide",
+      "label": "Catalyst",
+      "props": {
+        "name": "Example II: palladium-zinc oxide",
+        "catalyst_family": "other",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1681753a/p1/2",
+            "quote": "Palladium--zinc oxide (Pd-ZnO).",
+            "source": "ex:msyn/source/us1681753a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Example II",
+            "note": "formulae garbled in the text layer: Zn(NO3)2·6H2O, Pd(NO3)2; '70' is a margin number",
+            "passage": "us1681753a/p1/4",
+            "quote": "II.365 parts by weight of zinc nitrate Zn(NO)6HO) were dissolved in 1000 parts of water; to this solution was added 25 parts of a palladium nitrate Pd(NO), 70",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "generality": "particular",
+        "nominal_formula": "Pd-ZnO"
+      }
+    },
+    {
+      "id": "ex:msyn/us1681753a/claim/claim-1",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 1",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 1",
+            "passage": "us1681753a/p2/6",
+            "quote": "1A catalyst for the production of methanol which comprises palladium and chromic oxide.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "A catalyst for the production of methanol comprising palladium and chromic oxide."
+      }
+    },
+    {
+      "id": "ex:msyn/us1681753a/claim/claim-2",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 2",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 2",
+            "passage": "us1681753a/p2/6",
+            "quote": "catalyst comprising palladium and a non reducible metal oxide.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Process for methanol passing hydrogen and carbon monoxide containing an excess of hydrogen, under a pressure above atmospheric, over a heated catalyst comprising palladium and a non-reducible metal oxide."
+      }
+    },
+    {
+      "id": "ex:msyn/us1681753a/claim/claim-3",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 3",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 3",
+            "passage": "us1681753a/p2/7",
+            "quote": "y comprising palladium and chromic",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Process for methanol passing hydrogen and carbon monoxide containing an excess of hydrogen, under a pressure above atmospheric, over a heated catalyst comprising palladium and chromic oxide."
+      }
+    },
+    {
+      "id": "ex:msyn/us1681753a/claim/claim-4",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 4",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 4",
+            "passage": "us1681753a/p3/1",
+            "quote": "of between 5 and 300 atmospheres, incontact with a heated catalyst comprising palladium and a non-reducible metal oxide said catalyst being heated to a temperature of between 150-450° C.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Process for methanol passing hydrogen and carbon monoxide with an excess of hydrogen at 5 to 300 atmospheres over a catalyst comprising palladium and a non-reducible metal oxide heated to 150-450 °C."
+      }
+    },
+    {
+      "id": "ex:msyn/us1681753a/claim/claim-5",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 5",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 5",
+            "passage": "us1681753a/p3/1",
+            "quote": "of between 5 and 300 atmospheres, in contact with a heated catalyst comprising palladium and chromic oxide.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Process for methanol passing hydrogen and carbon monoxide with an excess of hydrogen at 5 to 300 atmospheres over a heated catalyst comprising palladium and chromic oxide."
+      }
+    },
+    {
+      "id": "ex:msyn/us1681753a/claim/claim-6",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 6",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 6",
+            "passage": "us1681753a/p3/1",
+            "quote": "heated catalyst consisting of palladium and a non-reducible metal oxide, said catalyst being maintained at a temperature of be tween 300-400° C.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Process for methanol passing hydrogen and carbon monoxide with an excess of hydrogen at about 200 atmospheres over a catalyst consisting of palladium and a non-reducible metal oxide maintained at 300-400 °C."
+      }
+    },
+    {
+      "id": "ex:msyn/us1681753a/claim/claim-7",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 7",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 7",
+            "passage": "us1681753a/p3/2",
+            "quote": "heated catalyst comprising palladium and chromic oxide, said catalyst being maintain ed at a temperature of between 300-400° C.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Process for methanol passing hydrogen and carbon monoxide with an excess of hydrogen at about 200 atmospheres over a catalyst comprising palladium and chromic oxide maintained at 300-400 °C."
+      }
+    },
+    {
+      "id": "ex:msyn/us1681753a/claim/compression",
+      "label": "Claim",
+      "props": {
+        "name": "powder can be compressed and keeps its form",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1681753a/p1/2",
+            "quote": "of powdered portions of this catalyst is also easy since it adapts itself to compression to",
+            "source": "ex:msyn/source/us1681753a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1681753a/p1/5",
+            "quote": "These reduced catalysts are usually of a hard, firm, brittle structure suited for any methanol synthesis system.",
+            "source": "ex:msyn/source/us1681753a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1681753a/p1/6",
+            "quote": "I have obtained excellent results and in general somewhat increased yields over the powdered or granular cata lysts by utilizing pills",
+            "source": "ex:msyn/source/us1681753a"
+          },
+          {
+            "kind": "text",
+            "agreement": "no_ocr",
+            "locator": "p. 1",
+            "note": "read from the page image; the text layer reads 'A inch' and '4s inch'",
+            "reading": "vision_ocr",
+            "region": [
+              0.43,
+              0.78,
+              0.83,
+              0.83
+            ],
+            "second_reading": "such as pills. I have obtained excellent results and in general somewhat increased yields over the powdered or granular catalysts by utilizing pills of about ¼ inch in diameter and about ⅛ inch thick. After compression into pills the catalyst is subjected to reduction as before, and is then",
+            "source": "ex:msyn/source/us1681753a",
+            "transcription": "yields over the powdered or granular cata- lysts by utilizing pills of about ¼ inch in diameter and about ⅛ inch thick. After"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Powdered catalyst adapts itself to compression and retains its form satisfactorily through reduction to the active stage and during use; reduced catalysts are usually hard, firm and brittle; where mechanical strength is insufficient, the dry filter cake is pulverized before reduction and compressed into pills (about ¼ inch in diameter and about ⅛ inch thick), which gave excellent results and in general somewhat increased yields over powdered or granular catalysts."
+      }
+    },
+    {
+      "id": "ex:msyn/us1681753a/claim/h2-co-ratio",
+      "label": "Claim",
+      "props": {
+        "name": "effect of hydrogen to carbon monoxide ratio",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1681753a/p2/4",
+            "quote": "if the ratio is below one to one by volume the S. T. Y. will be considerably lower than that obtained with hydrogen in excess by volume.",
+            "source": "ex:msyn/source/us1681753a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1681753a/p2/4",
+            "quote": "I have found that a gas containing about four volumes of hydrogen to each volume of car bon monoxide gives the best results, and that: with about 6 volumes of hydrogen the S.T. Y. is somewhat lower.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The catalysts form methanol from any hydrogen to carbon monoxide ratio, but below one to one by volume the S.T.Y. is considerably lower; not less hydrogen than required by 2H2 + CO = CH3OH is preferred; about four volumes of hydrogen per volume of carbon monoxide gives the best results, and with about 6 volumes the S.T.Y. is somewhat lower; not more than 6 volumes is preferred for economic reasons."
+      }
+    },
+    {
+      "id": "ex:msyn/us1681753a/claim/low-temperature-pressure",
+      "label": "Claim",
+      "props": {
+        "name": "active at relatively low temperature and pressure",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1681753a/p1/2",
+            "quote": "This catalyst is active under combinations of relatively low temperatures and pressures as will be noted below.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The catalyst is active under combinations of relatively low temperatures and pressures."
+      }
+    },
+    {
+      "id": "ex:msyn/us1681753a/claim/non-reducible-definition",
+      "label": "Claim",
+      "props": {
+        "name": "meaning of non-reducible oxide",
+        "claim_kind": "other",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1681753a/p1/2",
+            "quote": "In general these are oxides which are not reduced, or, at most, only to a very slight degree when a gas mixture composed of hydrogensaturated with meth",
+            "source": "ex:msyn/source/us1681753a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1681753a/p1/2",
+            "quote": "sanol is passed over them while heated to 150-300° C.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Non-reducible oxides are oxides non-reducible or difficultly reducible under the conditions of methanol formation: in general, oxides not reduced, or only very slightly, when hydrogen saturated with methanol is passed over them at 150-300 °C."
+      }
+    },
+    {
+      "id": "ex:msyn/us1681753a/claim/palladium-catalyzes",
+      "label": "Claim",
+      "props": {
+        "name": "palladium in several combinations catalyzes methanol synthesis",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1681753a/p1/1",
+            "quote": "I have discovered that palladium in sev",
+            "source": "ex:msyn/source/us1681753a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1681753a/p1/3",
+            "quote": "eral combinations will catalyze this reac",
+            "source": "ex:msyn/source/us1681753a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1681753a/p1/1",
+            "quote": "I have found that palladium com bined with a non-reducible metal oxide is especially useful.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Palladium in several combinations will catalyze the synthesis of methanol from hydrogen and carbon monoxide; palladium combined with a non-reducible metal oxide is especially useful."
+      }
+    },
+    {
+      "id": "ex:msyn/us1681753a/claim/poison-free-gas",
+      "label": "Claim",
+      "props": {
+        "name": "use gases free of catalyst poisons",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'substantiall ... E.' reads 'substantially ... which'",
+            "passage": "us1681753a/p1/6",
+            "quote": "it is desirable to use gases substantiall free from the common catalyst poisons E. may be present in the raw materials, such",
+            "source": "ex:msyn/source/us1681753a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1681753a/p2/1",
+            "quote": "as, for example, arsenic, sulphur, phosphor us, volatile iron compounds, or other delete rious constituents gathered during the gas production.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "In methanol synthesis with these catalysts the gases should be substantially free from the common catalyst poisons of the raw materials, such as arsenic, sulphur, phosphorus, volatile iron compounds or other deleterious constituents gathered during gas production."
+      }
+    },
+    {
+      "id": "ex:msyn/us1681753a/claim/pressure-range",
+      "label": "Claim",
+      "props": {
+        "name": "pressure range",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1681753a/p2/5",
+            "quote": "methanol will be formed in substantial amounts by these catalysts at pressures of 5 atmospheres and upwards, dependent on the temperature used.",
+            "source": "ex:msyn/source/us1681753a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1681753a/p2/5",
+            "quote": "tained at pressures lower than this; for ex ample, at one atmosphere.",
+            "source": "ex:msyn/source/us1681753a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1681753a/p2/6",
+            "quote": "the best results are secured between 200 and 300 atmospheres",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Within these temperatures methanol is formed in substantial amounts at pressures of 5 atmospheres and upwards, and substantial yields may even be obtained at one atmosphere, though then the S.T.Y. is so much lower that the process would not be economical; the best results are between 200 and 300 atmospheres."
+      }
+    },
+    {
+      "id": "ex:msyn/us1681753a/claim/reduction-practice",
+      "label": "Claim",
+      "props": {
+        "name": "preferred reduction",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1681753a/p1/3",
+            "quote": "I have utilized various reducing gases",
+            "source": "ex:msyn/source/us1681753a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1681753a/p1/4",
+            "quote": "I prefer to reduce with hydrogen saturated at room temperature with methanol.",
+            "source": "ex:msyn/source/us1681753a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1681753a/p1/4",
+            "quote": "In order to prevent large uncontrollable in-",
+            "source": "ex:msyn/source/us1681753a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'60' is a margin line number",
+            "passage": "us1681753a/p1/4",
+            "quote": "For example, a satisfactory mixture would be 3 volumes hydrogen, 2 volumes methanol 60 vapor and 95 volumes nitrogen.",
+            "source": "ex:msyn/source/us1681753a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1681753a/p1/4",
+            "quote": "heated to not over 350° C. and preferably to about 150-200° C.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Reducing gases used were hydrogen or its mixtures with carbon monoxide or methanol or both, with or without nitrogen; reduction with hydrogen saturated at room temperature with methanol is preferred, diluted with nitrogen or other inert gas to prevent uncontrollable temperature rises (for example 3 volumes hydrogen, 2 volumes methanol vapor and 95 volumes nitrogen), passed at atmospheric pressure over the dried precipitate, preferably in a copper-lined vessel, at not over 350 °C and preferably about 150-200 °C."
+      }
+    },
+    {
+      "id": "ex:msyn/us1681753a/claim/space-velocity",
+      "label": "Claim",
+      "props": {
+        "name": "preferred space velocities",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1681753a/p2/6",
+            "quote": "prefer space velocities of 2,000 to 20,000, calculated at N. T. P.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The catalysts form methanol at any space velocity; for economic reasons space velocities of 2,000 to 20,000, calculated at N.T.P., are preferred."
+      }
+    },
+    {
+      "id": "ex:msyn/us1681753a/claim/temperature-range",
+      "label": "Claim",
+      "props": {
+        "name": "temperature range",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1681753a/p2/5",
+            "quote": "These catalysts are suited for the above syntheses at temperatures ranging between 150° C. and 450° C. although I have found the best results are secured between 300° C. and 400° C.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The catalysts are suited to temperatures between 150 °C and 450 °C, the best results being secured between 300 °C and 400 °C."
+      }
+    },
+    {
+      "id": "ex:msyn/us1681753a/claim/wide-conditions",
+      "label": "Claim",
+      "props": {
+        "name": "wide range of conditions permissible",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1681753a/p2/3",
+            "quote": "These catalysts are of high activity and hence will operate over a large range of varying conditions, all combinations of which need not be given.",
+            "source": "ex:msyn/source/us1681753a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1681753a/p2/4",
+            "quote": "The off-gases may be recirculated, after separation of the methanol, with or without replenishment.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The catalysts are of high activity and operate over a large range of conditions; wide limits of pressure and temperature are permissible, and temperature, space velocity and pressure may be varied to obtain the desired S.T.Y. or conversion; off-gases may be recirculated after separation of methanol, with or without replenishment."
+      }
+    },
+    {
+      "id": "ex:msyn/us1681753a/feed/h2-co-4-1",
+      "label": "Feed",
+      "props": {
+        "name": "about 4 volumes hydrogen to 1 volume carbon monoxide, essentially free of catalyst poisons",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, Example A",
+            "note": "read from the page image; the text layer drops the '1' before 'volume carbon monoxide' and reads 'S. W. H.'",
+            "reading": "vision_ocr",
+            "region": [
+              0.13,
+              0.28,
+              0.57,
+              0.52
+            ],
+            "source": "ex:msyn/source/us1681753a",
+            "transcription": "and the whole heated to about 300° C. The gas mixture comprising essentially 4 volumes hydrogen and 1 volume carbon monoxide, and essentially free of catalyst poisons was now passed into the heated catalyst under a pressure of about 200 atmospheres and at a space velocity per hour (S. V. H.) equiv- alent to about 4700 cubic feet of gas per cubic foot of catalyst per hour, calculated at normal temperature and pressure (N. T. P.—0° C. and 1 atmosphere). During this reaction the temperature of the catalyst mass was about 350° C. A sustained yield of methanol was obtained equivalent to a space time yield (S. T. Y.) of about 440 pounds of methanol per cubic foot of cata- lyst per 24 hours."
+          }
+        ],
+        "ratios": {
+          "h2_co_ratio": {
+            "status": "present",
+            "as_reported": "4 volumes hydrogen and 1 volume carbon monoxide",
+            "note": "'essentially'; the '1' was read from the page image (missing in the text layer)",
+            "qualifier": "approximate",
+            "unit": "1",
+            "value": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us1681753a/feed/pd-ceo-gas",
+      "label": "Feed",
+      "props": {
+        "name": "hydrogen and carbon monoxide (composition not stated)",
+        "description": "The gas for the Pd-cerium oxide test is not described; the patent concerns synthesis from hydrogen and carbon monoxide.",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1681753a/p2/2",
+            "quote": "di have also utilized Pd+CeO, cata lyst prepared by analogous methods and ob tained substantial yields of methanol.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1681753a/material/non-reducible-metal-oxide",
+      "label": "Material",
+      "props": {
+        "name": "non-reducible metal oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1681753a/p1/1",
+            "quote": "I have found that palladium com bined with a non-reducible metal oxide is especially useful.",
+            "source": "ex:msyn/source/us1681753a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1681753a/p1/1",
+            "quote": "I mean oxides which are non-reducible or are difficultly",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "generality": "kind",
+        "material_family": "oxide"
+      }
+    },
+    {
+      "id": "ex:msyn/us1681753a/material/pumice-7-mesh",
+      "label": "Material",
+      "props": {
+        "name": "7 mesh pumice",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example I",
+            "quote": "I. Pd--CrO. 50 parts by weight of 7 mesh pumice were mixed with 25 parts pal ladium nitrate solution containing 0.19) parts Pd(NO) per cubic centimeter;",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "properties": {
+          "mesh": {
+            "status": "present",
+            "as_reported": "7 mesh",
+            "unit": "mesh",
+            "value": 7
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us1681753a/preparation/example-1",
+      "label": "Preparation",
+      "props": {
+        "name": "Example I preparation (Pd-chromic oxide on pumice)",
+        "conditions": {
+          "pd_nitrate_concentration": {
+            "status": "present",
+            "as_reported": "0.199 parts Pd(NO3)2 per cubic centimeter",
+            "note": "added 2026-09-29 from the page image (text layer '0.19)')",
+            "unit": "parts Pd(NO3)2 per cubic centimeter",
+            "value": 0.199
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 1, Example I",
+            "note": "read from the page image; the text layer reads '0.19)' and 'Pd(NO)'",
+            "reading": "vision_ocr",
+            "region": [
+              0.05,
+              0.72,
+              0.44,
+              0.83
+            ],
+            "source": "ex:msyn/source/us1681753a",
+            "transcription": "I. Pd+Cr2O3. 50 parts by weight of 7 mesh pumice were mixed with 25 parts pal- ladium nitrate solution containing 0.199 parts Pd(NO3)2 per cubic centimeter; 5 parts chromic acid crystals were then added, the mixture evaporated to dryness, and then further heated at 200° C. until the water and all traces of nitrogen oxides had been driven off."
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Example I",
+            "note": "the amount '5' of chromic acid crystals is printed at the end of the previous line",
+            "passage": "us1681753a/p1/3",
+            "quote": "parts chromic acid crystals were then added, the mixture evaporated to dryness, and then further heated at 200° C. until the water and all traces of nitrogen oxides had been driven off,",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "method": "impregnation of pumice with palladium nitrate solution and chromic acid, evaporation and heating",
+        "procedure_status": "completed",
+        "steps": [
+          "50 parts by weight of 7 mesh pumice mixed with 25 parts palladium nitrate solution containing 0.199 parts Pd(NO3)2 per cubic centimeter",
+          "5 parts chromic acid crystals added",
+          "mixture evaporated to dryness",
+          "further heated at 200 °C until the water and all traces of nitrogen oxides had been driven off"
+        ],
+        "temperature": {
+          "status": "present",
+          "as_reported": "200° C.",
+          "unit": "°C",
+          "value": 200
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us1681753a/preparation/example-2",
+      "label": "Preparation",
+      "props": {
+        "name": "Example II preparation (Pd-ZnO)",
+        "conditions": {
+          "drying_temperature": {
+            "status": "present",
+            "as_reported": "about 150° C.",
+            "qualifier": "approximate",
+            "unit": "°C",
+            "value": 150
+          },
+          "pd_nitrate_concentration": {
+            "status": "present",
+            "as_reported": "0.199 parts [Pd(NO3)2] to one part of water",
+            "unit": "parts Pd(NO3)2 per part water",
+            "value": 0.199
+          },
+          "water": {
+            "status": "present",
+            "as_reported": "1000 parts of water",
+            "unit": "parts",
+            "value": 1000
+          }
+        },
+        "duration": {
+          "status": "present",
+          "as_reported": "about 15 minutes",
+          "note": "boiling time",
+          "qualifier": "approximate",
+          "unit": "min",
+          "value": 15
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example II",
+            "note": "formulae garbled in the text layer: Zn(NO3)2·6H2O, Pd(NO3)2; '70' is a margin number",
+            "passage": "us1681753a/p1/4",
+            "quote": "II.365 parts by weight of zinc nitrate Zn(NO)6HO) were dissolved in 1000 parts of water; to this solution was added 25 parts of a palladium nitrate Pd(NO), 70",
+            "source": "ex:msyn/source/us1681753a"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 1, Example II",
+            "note": "read from the page image; the text layer reads 'Pd (N88:' and 'pregn-hydrogen gaS' and places 'mixture at 150° C.-200°' out of order",
+            "reading": "vision_ocr",
+            "region": [
+              0.43,
+              0.46,
+              0.82,
+              0.65
+            ],
+            "second_reading": "II. 365 parts by weight of zinc nitrate [Zn(NO3)2.6H2O] were dissolved in 1000 parts of water; to this solution was added 25 parts of a palladium nitrate [Pd(NO3)2] solution containing 0.199 parts [Pd(NO3)2] to one part of water. Sufficient sodium hydroxide solution was now added to make the mixture slightly alkaline and the whole boiled for about 15 minutes. The precipitate was now filtered out, washed until the wash water gave no test for nitrates, and the cake then dried at a temperature of about 150° C. The dried precipitate was then reduced with the nitrogen-hydrogen gas mixture at 150° C.–200° C.",
+            "source": "ex:msyn/source/us1681753a",
+            "transcription": "II. 365 parts by weight of zinc nitrate [Zn(NO3)2.6H2O] were dissolved in 1000 parts of water; to this solution was added 25 parts of a palladium nitrate [Pd(NO3)2] solution containing 0.199 parts [Pd(NO3)2] to one part of water. Sufficient sodium hy- droxide solution was now added to make the mixture slightly alkaline and the whole boiled for about 15 minutes. The precipi- tate was now filtered out, washed until the wash water gave no test for nitrates, and the cake then dried at a temperature of about 150° C. The dried precipitate was then reduced with the nitrogen-hydrogen gas mixture at 150° C.-200° C."
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Example II",
+            "quote": "Sufficient sodium hy. droxide solution was now added to make the mixture slightly alkaline and the whole boiled for about 15 minutes.",
+            "source": "ex:msyn/source/us1681753a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Example II",
+            "passage": "us1681753a/p1/5",
+            "quote": "The precipi tate was now filtered out, washed until the wash water gave no test for nitrates, and the cake then dried at a temperature of about 150° C.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "method": "co-precipitation with sodium hydroxide from zinc nitrate and palladium nitrate solution, boiling, washing, drying",
+        "procedure_status": "completed",
+        "steps": [
+          "365 parts by weight of zinc nitrate dissolved in 1000 parts of water",
+          "25 parts of palladium nitrate solution containing 0.199 parts Pd(NO3)2 to one part of water added",
+          "sufficient sodium hydroxide solution added to make the mixture slightly alkaline; boiled about 15 minutes",
+          "precipitate filtered, washed until the wash water gave no test for nitrates",
+          "cake dried at about 150 °C"
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1681753a/preparation/pd-cerium-oxide",
+      "label": "Preparation",
+      "props": {
+        "name": "Pd-cerium oxide preparation by analogous methods",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1681753a/p2/2",
+            "quote": "di have also utilized Pd+CeO, cata lyst prepared by analogous methods and ob tained substantial yields of methanol.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "method": "prepared by analogous methods (not described)",
+        "procedure_status": "completed"
+      }
+    },
+    {
+      "id": "ex:msyn/us1681753a/reactor/copper-lined-steel-bomb",
+      "label": "Reactor",
+      "props": {
+        "name": "copper lined high pressure steel bomb",
+        "description": "Copper-lined high-pressure steel bomb packed with granular catalyst; gas passed through; methanol recovered from the off-gases by cooling under pressure.",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example A",
+            "passage": "us1681753a/p2/1",
+            "quote": "The granular catalyst material was packed in a copper lined high pressure steel bomb, and the whole heated to about 300° C.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "reactor_kind": "flow"
+      }
+    },
+    {
+      "id": "ex:msyn/us1681753a/sample/example-1",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Example I granular Pd-chromic oxide mass",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example I",
+            "passage": "us1681753a/p1/3",
+            "quote": "This granular mass was now reduced by",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "preparation_status": "prepared",
+        "sample_kind": "granules"
+      }
+    },
+    {
+      "id": "ex:msyn/us1681753a/sample/example-2",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Example II Pd-ZnO precipitate",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example II",
+            "passage": "us1681753a/p1/5",
+            "quote": "The precipi tate was now filtered out, washed until the wash water gave no test for nitrates, and the cake then dried at a temperature of about 150° C.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "preparation_status": "prepared",
+        "sample_kind": "batch"
+      }
+    },
+    {
+      "id": "ex:msyn/us1681753a/sample/pd-cerium-oxide",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Pd-cerium oxide catalyst",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1681753a/p2/2",
+            "quote": "di have also utilized Pd+CeO, cata lyst prepared by analogous methods and ob tained substantial yields of methanol.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "preparation_status": "prepared",
+        "sample_kind": "batch"
+      }
+    },
+    {
+      "id": "ex:msyn/us1681753a/species/cerium-oxide",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "cerium oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 1",
+            "note": "read from the page image; the text layer reads 'Pd--CrO' and 'PdCeOs'",
+            "reading": "vision_ocr",
+            "region": [
+              0.07,
+              0.655,
+              0.44,
+              0.72
+            ],
+            "source": "ex:msyn/source/us1681753a",
+            "transcription": "Palladium+chromic oxide (Pd+Cr2O3). Palladium+zinc oxide (Pd+ZnO). Palladium+cerium oxide (Pd+Ce2O3). My method of preparation of these cata-"
+          }
+        ],
+        "formula": "Ce2O3",
+        "note": "formula printed 'Ce2O3' (read from the page image 2026-09-29; the text layer reads 'CeOs')"
+      }
+    },
+    {
+      "id": "ex:msyn/us1681753a/species/chromic-acid-crystals",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "chromic acid crystals (as named)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example I",
+            "note": "the amount '5' of chromic acid crystals is printed at the end of the previous line",
+            "passage": "us1681753a/p1/3",
+            "quote": "parts chromic acid crystals were then added, the mixture evaporated to dryness, and then further heated at 200° C. until the water and all traces of nitrogen oxides had been driven off,",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1681753a/species/volatile-iron-compounds",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "volatile iron compounds",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1681753a/p2/1",
+            "quote": "as, for example, arsenic, sulphur, phosphor us, volatile iron compounds, or other delete rious constituents gathered during the gas production.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1681753a/test/example-a",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Example A: Pd-chromic oxide, about 200 atm, catalyst about 350 °C",
+        "conditions": {
+          "initial_heating_temperature": {
+            "status": "present",
+            "as_reported": "about 300° C.",
+            "qualifier": "approximate",
+            "unit": "°C",
+            "value": 300
+          }
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example A",
+            "passage": "us1681753a/p2/1",
+            "quote": "The granular catalyst material was packed in a copper lined high pressure steel bomb, and the whole heated to about 300° C.",
+            "source": "ex:msyn/source/us1681753a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Example A",
+            "note": "'as ... ydrogen' reads 'gas ... hydrogen'",
+            "passage": "us1681753a/p2/1",
+            "quote": "as mixture comprising essentially 4 volumes ydrogen and",
+            "source": "ex:msyn/source/us1681753a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Example A",
+            "note": "the number before 'volume carbon monoxide' is missing in the text layer (read '1 volume'; the later text prefers about four volumes of hydrogen to each volume of carbon monoxide)",
+            "passage": "us1681753a/p2/1",
+            "quote": "volume carbon monoxide, and essentially free of catalyst poisons was now passed into the heated catalyst under a pressure of about 200 atmospheres",
+            "source": "ex:msyn/source/us1681753a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Example A",
+            "passage": "us1681753a/p2/1",
+            "quote": "space velocity per hour (S. W. H.) equiv alent to about 4700 cubic feet of gas per cubic foot of catalyst per hour, calculated at normal temperature and pressure",
+            "source": "ex:msyn/source/us1681753a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Example A",
+            "passage": "us1681753a/p2/2",
+            "quote": "During this reaction the temperature of the catalyst mass was about 350° C.",
+            "source": "ex:msyn/source/us1681753a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Example A",
+            "note": "'ounds' reads 'pounds'",
+            "passage": "us1681753a/p2/2",
+            "quote": "A sustained yield of methanol was obtained equivalent to a space time yield (S. T. Y.) of about 440 ounds of methanol per cubic foot of cata yst per 24 hours.",
+            "source": "ex:msyn/source/us1681753a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Example A",
+            "passage": "us1681753a/p2/2",
+            "quote": "The product was about 90% methanol and about 10% water.",
+            "source": "ex:msyn/source/us1681753a"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, Example A",
+            "note": "read from the page image; the text layer drops the '1' before 'volume carbon monoxide' and reads 'S. W. H.'",
+            "reading": "vision_ocr",
+            "region": [
+              0.13,
+              0.28,
+              0.57,
+              0.52
+            ],
+            "source": "ex:msyn/source/us1681753a",
+            "transcription": "and the whole heated to about 300° C. The gas mixture comprising essentially 4 volumes hydrogen and 1 volume carbon monoxide, and essentially free of catalyst poisons was now passed into the heated catalyst under a pressure of about 200 atmospheres and at a space velocity per hour (S. V. H.) equiv- alent to about 4700 cubic feet of gas per cubic foot of catalyst per hour, calculated at normal temperature and pressure (N. T. P.—0° C. and 1 atmosphere). During this reaction the temperature of the catalyst mass was about 350° C. A sustained yield of methanol was obtained equivalent to a space time yield (S. T. Y.) of about 440 pounds of methanol per cubic foot of cata- lyst per 24 hours."
+          }
+        ],
+        "experiment_kind": "physical",
+        "pressure": {
+          "status": "present",
+          "as_reported": "about 200 atmospheres",
+          "qualifier": "approximate",
+          "unit": "atm",
+          "value": 200
+        },
+        "results": {
+          "product_methanol_content": {
+            "status": "present",
+            "as_reported": "about 90% methanol",
+            "qualifier": "approximate",
+            "unit": "%",
+            "value": 90
+          },
+          "product_water_content": {
+            "status": "present",
+            "as_reported": "about 10% water",
+            "qualifier": "approximate",
+            "unit": "%",
+            "value": 10
+          }
+        },
+        "space_time_yield": {
+          "status": "present",
+          "as_reported": "about 440 ounds of methanol per cubic foot of cata yst per 24 hours",
+          "qualifier": "approximate",
+          "unit": "lb methanol/(ft3 catalyst 24 h)",
+          "value": 440
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "about 4700 cubic feet of gas per cubic foot of catalyst per hour",
+          "qualifier": "approximate",
+          "unit": "ft3 gas/(ft3 catalyst h) at N.T.P.",
+          "value": 4700
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "about 350° C.",
+          "note": "temperature of the catalyst mass during reaction; the bomb was first heated to about 300 °C",
+          "qualifier": "approximate",
+          "unit": "°C",
+          "value": 350
+        },
+        "temperature_measured_at": "catalyst_bed",
+        "test_kind": "activity",
+        "test_label": "A"
+      }
+    },
+    {
+      "id": "ex:msyn/us1681753a/test/example-b",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Example B: Pd-ZnO under the Example A conditions",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example B",
+            "passage": "us1681753a/p2/2",
+            "quote": "B. Pd -- ZnO, This catalyst as prepared above when utilized in a methanol synthesis under conditions as described above at a S. W. H. of about 4600 gave an S. T. Y. of about 375.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "experiment_kind": "physical",
+        "pressure": {
+          "status": "present",
+          "as_reported": "under conditions as described above",
+          "note": "conditions of Example A (about 200 atmospheres)",
+          "qualifier": "approximate",
+          "unit": "atm",
+          "value": 200
+        },
+        "space_time_yield": {
+          "status": "present",
+          "as_reported": "S. T. Y. of about 375",
+          "note": "unit not repeated; as in Example A",
+          "qualifier": "approximate",
+          "unit": "lb methanol/(ft3 catalyst 24 h)",
+          "value": 375
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "S. W. H. of about 4600",
+          "note": "unit as in Example A",
+          "qualifier": "approximate",
+          "unit": "ft3 gas/(ft3 catalyst h) at N.T.P.",
+          "value": 4600
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "under conditions as described above",
+          "note": "conditions of Example A (catalyst mass about 350 °C)",
+          "qualifier": "approximate",
+          "unit": "°C",
+          "value": 350
+        },
+        "test_kind": "activity",
+        "test_label": "B"
+      }
+    },
+    {
+      "id": "ex:msyn/us1681753a/test/pd-cerium-oxide",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Pd-cerium oxide: substantial yields of methanol",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1681753a/p2/2",
+            "quote": "di have also utilized Pd+CeO, cata lyst prepared by analogous methods and ob tained substantial yields of methanol.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "experiment_kind": "physical",
+        "pressure": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source"
+        },
+        "results": {
+          "methanol_yield": {
+            "status": "present",
+            "as_reported": "substantial yields of methanol",
+            "text_value": "substantial yields of methanol"
+          }
+        },
+        "temperature": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source"
+        },
+        "test_kind": "activity"
+      }
+    },
+    {
+      "id": "ex:msyn/us1681753a/treatment/example-1-reduction",
+      "label": "Treatment",
+      "props": {
+        "name": "Example I reduction at 150-200 °C, atmospheric pressure",
+        "atmosphere": "a reducing gas mixture (composition not given in the example)",
+        "conditions": {
+          "vessel": {
+            "status": "present",
+            "as_reported": "copper lined vessel",
+            "text_value": "copper lined vessel"
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example I",
+            "passage": "us1681753a/p1/3",
+            "quote": "This granular mass was now reduced by",
+            "source": "ex:msyn/source/us1681753a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Example I",
+            "passage": "us1681753a/p1/3",
+            "quote": "heating at 150 C-200° C. in a copper lined vessel and subjecting it at atmospheric pres suré to a reducing gas mixture.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "pressure": {
+          "status": "present",
+          "as_reported": "atmospheric pres suré",
+          "note": "printed as atmospheric pressure; recorded as 1 atm",
+          "qualifier": "approximate",
+          "unit": "atm",
+          "value": 1
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "150 C-200° C.",
+          "lower": 150,
+          "unit": "°C",
+          "upper": 200
+        },
+        "treatment_kind": "reduction"
+      }
+    },
+    {
+      "id": "ex:msyn/us1681753a/treatment/example-2-reduction",
+      "label": "Treatment",
+      "props": {
+        "name": "Example II reduction",
+        "atmosphere": "nitrogen-hydrogen gas mixture",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 1, Example II",
+            "note": "read from the page image; the text layer reads 'Pd (N88:' and 'pregn-hydrogen gaS' and places 'mixture at 150° C.-200°' out of order",
+            "reading": "vision_ocr",
+            "region": [
+              0.43,
+              0.46,
+              0.82,
+              0.65
+            ],
+            "second_reading": "II. 365 parts by weight of zinc nitrate [Zn(NO3)2.6H2O] were dissolved in 1000 parts of water; to this solution was added 25 parts of a palladium nitrate [Pd(NO3)2] solution containing 0.199 parts [Pd(NO3)2] to one part of water. Sufficient sodium hydroxide solution was now added to make the mixture slightly alkaline and the whole boiled for about 15 minutes. The precipitate was now filtered out, washed until the wash water gave no test for nitrates, and the cake then dried at a temperature of about 150° C. The dried precipitate was then reduced with the nitrogen-hydrogen gas mixture at 150° C.–200° C.",
+            "source": "ex:msyn/source/us1681753a",
+            "transcription": "II. 365 parts by weight of zinc nitrate [Zn(NO3)2.6H2O] were dissolved in 1000 parts of water; to this solution was added 25 parts of a palladium nitrate [Pd(NO3)2] solution containing 0.199 parts [Pd(NO3)2] to one part of water. Sufficient sodium hy- droxide solution was now added to make the mixture slightly alkaline and the whole boiled for about 15 minutes. The precipi- tate was now filtered out, washed until the wash water gave no test for nitrates, and the cake then dried at a temperature of about 150° C. The dried precipitate was then reduced with the nitrogen-hydrogen gas mixture at 150° C.-200° C."
+          }
+        ],
+        "temperature": {
+          "status": "present",
+          "as_reported": "150° C.-200° C.",
+          "lower": 150,
+          "note": "read from the page image, where it continues the Example II sentence (2026-09-29)",
+          "unit": "°C",
+          "upper": 200
+        },
+        "treatment_kind": "reduction"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/reaction/co-hydrogenation-to-methanol/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/source/us1681753a/assignee",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "role": "assignee"
+      },
+      "source": "ex:msyn/source/us1681753a",
+      "target": "ex:msyn/institution/roessler-hasslacher-chemical"
+    },
+    {
+      "id": "ex:msyn/species/arsenic/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/arsenic",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/species/naoh/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, Example II"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/naoh",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/species/palladium/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/palladium",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/species/pdno32/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, Example I"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/pdno32",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/species/phosphorus/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/phosphorus",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/species/znno326h2o/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, Example II"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/znno326h2o",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/us1681753a/catalyst/pd-cerium-oxide/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1681753a/catalyst/pd-cerium-oxide",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/us1681753a/catalyst/pd-chromic-oxide/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 1, Example I"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1681753a/catalyst/pd-chromic-oxide",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/us1681753a/catalyst/pd-non-reducible-oxide/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1681753a/catalyst/pd-non-reducible-oxide",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/us1681753a/catalyst/pd-zinc-oxide/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 1, Example II"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1681753a/catalyst/pd-zinc-oxide",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/us1681753a/claim/claim-1/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, claim 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1681753a/claim/claim-1",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/us1681753a/claim/claim-2/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, claim 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1681753a/claim/claim-2",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/us1681753a/claim/claim-3/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, claim 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1681753a/claim/claim-3",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/us1681753a/claim/claim-4/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1681753a/claim/claim-4",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/us1681753a/claim/claim-5/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1681753a/claim/claim-5",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/us1681753a/claim/claim-6/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1681753a/claim/claim-6",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/us1681753a/claim/claim-7/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1681753a/claim/claim-7",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/us1681753a/claim/compression/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1681753a/claim/compression",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/us1681753a/claim/h2-co-ratio/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1681753a/claim/h2-co-ratio",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/us1681753a/claim/low-temperature-pressure/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1681753a/claim/low-temperature-pressure",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/us1681753a/claim/non-reducible-definition/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1681753a/claim/non-reducible-definition",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/us1681753a/claim/palladium-catalyzes/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1681753a/claim/palladium-catalyzes",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/us1681753a/claim/poison-free-gas/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1681753a/claim/poison-free-gas",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/us1681753a/claim/pressure-range/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1681753a/claim/pressure-range",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/us1681753a/claim/reduction-practice/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1681753a/claim/reduction-practice",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/us1681753a/claim/space-velocity/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1681753a/claim/space-velocity",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/us1681753a/claim/temperature-range/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1681753a/claim/temperature-range",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/us1681753a/claim/wide-conditions/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1681753a/claim/wide-conditions",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/us1681753a/feed/h2-co-4-1/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, Example A"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1681753a/feed/h2-co-4-1",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/us1681753a/feed/pd-ceo-gas/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1681753a/feed/pd-ceo-gas",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/1",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1681753a/p1/1",
+            "quote": "I have found that palladium com bined with a non-reducible metal oxide is especially useful.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1681753a/catalyst/pd-non-reducible-oxide",
+      "target": "ex:msyn/species/palladium"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/10",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'substantiall ... E.' reads 'substantially ... which'",
+            "passage": "us1681753a/p1/6",
+            "quote": "it is desirable to use gases substantiall free from the common catalyst poisons E. may be present in the raw materials, such",
+            "source": "ex:msyn/source/us1681753a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1681753a/p2/1",
+            "quote": "as, for example, arsenic, sulphur, phosphor us, volatile iron compounds, or other delete rious constituents gathered during the gas production.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "inhibition_kind": "poison",
+        "note": "named among the common catalyst poisons from which the gases should be substantially free"
+      },
+      "source": "ex:msyn/us1681753a/catalyst/pd-non-reducible-oxide",
+      "target": "ex:msyn/species/sulfur"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/11",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'substantiall ... E.' reads 'substantially ... which'",
+            "passage": "us1681753a/p1/6",
+            "quote": "it is desirable to use gases substantiall free from the common catalyst poisons E. may be present in the raw materials, such",
+            "source": "ex:msyn/source/us1681753a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1681753a/p2/1",
+            "quote": "as, for example, arsenic, sulphur, phosphor us, volatile iron compounds, or other delete rious constituents gathered during the gas production.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "inhibition_kind": "poison",
+        "note": "named among the common catalyst poisons from which the gases should be substantially free"
+      },
+      "source": "ex:msyn/us1681753a/catalyst/pd-non-reducible-oxide",
+      "target": "ex:msyn/species/phosphorus"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/12",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'substantiall ... E.' reads 'substantially ... which'",
+            "passage": "us1681753a/p1/6",
+            "quote": "it is desirable to use gases substantiall free from the common catalyst poisons E. may be present in the raw materials, such",
+            "source": "ex:msyn/source/us1681753a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1681753a/p2/1",
+            "quote": "as, for example, arsenic, sulphur, phosphor us, volatile iron compounds, or other delete rious constituents gathered during the gas production.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "inhibition_kind": "poison",
+        "note": "named among the common catalyst poisons from which the gases should be substantially free"
+      },
+      "source": "ex:msyn/us1681753a/catalyst/pd-non-reducible-oxide",
+      "target": "ex:msyn/us1681753a/species/volatile-iron-compounds"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/13",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'substantiall ... E.' reads 'substantially ... which'",
+            "passage": "us1681753a/p1/6",
+            "quote": "it is desirable to use gases substantiall free from the common catalyst poisons E. may be present in the raw materials, such",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/claim/poison-free-gas",
+      "target": "ex:msyn/us1681753a/catalyst/pd-non-reducible-oxide"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/14",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'substantiall ... E.' reads 'substantially ... which'",
+            "passage": "us1681753a/p1/6",
+            "quote": "it is desirable to use gases substantiall free from the common catalyst poisons E. may be present in the raw materials, such",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/claim/poison-free-gas",
+      "target": "ex:msyn/species/arsenic"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/15",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'substantiall ... E.' reads 'substantially ... which'",
+            "passage": "us1681753a/p1/6",
+            "quote": "it is desirable to use gases substantiall free from the common catalyst poisons E. may be present in the raw materials, such",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/claim/poison-free-gas",
+      "target": "ex:msyn/species/sulfur"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/16",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'substantiall ... E.' reads 'substantially ... which'",
+            "passage": "us1681753a/p1/6",
+            "quote": "it is desirable to use gases substantiall free from the common catalyst poisons E. may be present in the raw materials, such",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/claim/poison-free-gas",
+      "target": "ex:msyn/species/phosphorus"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/17",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'substantiall ... E.' reads 'substantially ... which'",
+            "passage": "us1681753a/p1/6",
+            "quote": "it is desirable to use gases substantiall free from the common catalyst poisons E. may be present in the raw materials, such",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/claim/poison-free-gas",
+      "target": "ex:msyn/us1681753a/species/volatile-iron-compounds"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/18",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 1",
+            "note": "read from the page image; the text layer reads 'Pd--CrO' and 'PdCeOs'",
+            "reading": "vision_ocr",
+            "region": [
+              0.07,
+              0.655,
+              0.44,
+              0.72
+            ],
+            "source": "ex:msyn/source/us1681753a",
+            "transcription": "Palladium+chromic oxide (Pd+Cr2O3). Palladium+zinc oxide (Pd+ZnO). Palladium+cerium oxide (Pd+Ce2O3). My method of preparation of these cata-"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1681753a/catalyst/pd-chromic-oxide",
+      "target": "ex:msyn/species/palladium"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/19",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 1",
+            "note": "read from the page image; the text layer reads 'Pd--CrO' and 'PdCeOs'",
+            "reading": "vision_ocr",
+            "region": [
+              0.07,
+              0.655,
+              0.44,
+              0.72
+            ],
+            "source": "ex:msyn/source/us1681753a",
+            "transcription": "Palladium+chromic oxide (Pd+Cr2O3). Palladium+zinc oxide (Pd+ZnO). Palladium+cerium oxide (Pd+Ce2O3). My method of preparation of these cata-"
+          }
+        ],
+        "note": "'chromic oxide', printed 'Pd+Cr2O3' (page image)",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1681753a/catalyst/pd-chromic-oxide",
+      "target": "ex:msyn/species/cr2o3"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/2",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1681753a/p1/1",
+            "quote": "I have found that palladium com bined with a non-reducible metal oxide is especially useful.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1681753a/catalyst/pd-non-reducible-oxide",
+      "target": "ex:msyn/us1681753a/material/non-reducible-metal-oxide"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/20",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 1, Example I",
+            "note": "read from the page image; the text layer reads '0.19)' and 'Pd(NO)'",
+            "reading": "vision_ocr",
+            "region": [
+              0.05,
+              0.72,
+              0.44,
+              0.83
+            ],
+            "source": "ex:msyn/source/us1681753a",
+            "transcription": "I. Pd+Cr2O3. 50 parts by weight of 7 mesh pumice were mixed with 25 parts pal- ladium nitrate solution containing 0.199 parts Pd(NO3)2 per cubic centimeter; 5 parts chromic acid crystals were then added, the mixture evaporated to dryness, and then further heated at 200° C. until the water and all traces of nitrogen oxides had been driven off."
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "50 parts by weight",
+          "note": "parts of the preparation mixture",
+          "unit": "parts by weight",
+          "value": 50
+        },
+        "fraction_basis": "mass",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1681753a/catalyst/pd-chromic-oxide",
+      "target": "ex:msyn/us1681753a/material/pumice-7-mesh"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/21",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example I",
+            "quote": "I. Pd--CrO. 50 parts by weight of 7 mesh pumice were mixed with 25 parts pal ladium nitrate solution containing 0.19) parts Pd(NO) per cubic centimeter;",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/sample/example-1",
+      "target": "ex:msyn/us1681753a/catalyst/pd-chromic-oxide"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/22",
+      "type": "PREPARED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example I",
+            "note": "the amount '5' of chromic acid crystals is printed at the end of the previous line",
+            "passage": "us1681753a/p1/3",
+            "quote": "parts chromic acid crystals were then added, the mixture evaporated to dryness, and then further heated at 200° C. until the water and all traces of nitrogen oxides had been driven off,",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/sample/example-1",
+      "target": "ex:msyn/us1681753a/preparation/example-1"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/23",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example I",
+            "passage": "us1681753a/p1/3",
+            "quote": "heating at 150 C-200° C. in a copper lined vessel and subjecting it at atmospheric pres suré to a reducing gas mixture.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "order": 1
+      },
+      "source": "ex:msyn/us1681753a/sample/example-1",
+      "target": "ex:msyn/us1681753a/treatment/example-1-reduction"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/24",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "50 parts by weight",
+          "unit": "parts by weight",
+          "value": 50
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 1, Example I",
+            "note": "read from the page image; the text layer reads '0.19)' and 'Pd(NO)'",
+            "reading": "vision_ocr",
+            "region": [
+              0.05,
+              0.72,
+              0.44,
+              0.83
+            ],
+            "source": "ex:msyn/source/us1681753a",
+            "transcription": "I. Pd+Cr2O3. 50 parts by weight of 7 mesh pumice were mixed with 25 parts pal- ladium nitrate solution containing 0.199 parts Pd(NO3)2 per cubic centimeter; 5 parts chromic acid crystals were then added, the mixture evaporated to dryness, and then further heated at 200° C. until the water and all traces of nitrogen oxides had been driven off."
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1681753a/sample/example-1",
+      "target": "ex:msyn/us1681753a/material/pumice-7-mesh"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/25",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "25 parts pal ladium nitrate solution",
+          "note": "parts of palladium nitrate solution",
+          "unit": "parts",
+          "value": 25
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 1, Example I",
+            "note": "read from the page image; the text layer reads '0.19)' and 'Pd(NO)'",
+            "reading": "vision_ocr",
+            "region": [
+              0.05,
+              0.72,
+              0.44,
+              0.83
+            ],
+            "source": "ex:msyn/source/us1681753a",
+            "transcription": "I. Pd+Cr2O3. 50 parts by weight of 7 mesh pumice were mixed with 25 parts pal- ladium nitrate solution containing 0.199 parts Pd(NO3)2 per cubic centimeter; 5 parts chromic acid crystals were then added, the mixture evaporated to dryness, and then further heated at 200° C. until the water and all traces of nitrogen oxides had been driven off."
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1681753a/sample/example-1",
+      "target": "ex:msyn/species/pdno32"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/26",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "5 parts chromic acid crystals",
+          "unit": "parts",
+          "value": 5
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example I",
+            "note": "the amount '5' of chromic acid crystals is printed at the end of the previous line",
+            "passage": "us1681753a/p1/3",
+            "quote": "parts chromic acid crystals were then added, the mixture evaporated to dryness, and then further heated at 200° C. until the water and all traces of nitrogen oxides had been driven off,",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1681753a/sample/example-1",
+      "target": "ex:msyn/us1681753a/species/chromic-acid-crystals"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/27",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1681753a/p1/3",
+            "quote": "I have utilized various reducing gases",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/claim/reduction-practice",
+      "target": "ex:msyn/us1681753a/catalyst/pd-non-reducible-oxide"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/28",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1681753a/p1/2",
+            "quote": "Palladium--zinc oxide (Pd-ZnO).",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1681753a/catalyst/pd-zinc-oxide",
+      "target": "ex:msyn/species/palladium"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/29",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1681753a/p1/2",
+            "quote": "Palladium--zinc oxide (Pd-ZnO).",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1681753a/catalyst/pd-zinc-oxide",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/3",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1681753a/p1/1",
+            "quote": "I have discovered that palladium in sev",
+            "source": "ex:msyn/source/us1681753a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "continuation of 'palladium in sev-eral combinations will catalyze this reaction'; the text layer places this line later",
+            "passage": "us1681753a/p1/3",
+            "quote": "eral combinations will catalyze this reac",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/catalyst/pd-non-reducible-oxide",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/30",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example II",
+            "note": "formulae garbled in the text layer: Zn(NO3)2·6H2O, Pd(NO3)2; '70' is a margin number",
+            "passage": "us1681753a/p1/4",
+            "quote": "II.365 parts by weight of zinc nitrate Zn(NO)6HO) were dissolved in 1000 parts of water; to this solution was added 25 parts of a palladium nitrate Pd(NO), 70",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/sample/example-2",
+      "target": "ex:msyn/us1681753a/catalyst/pd-zinc-oxide"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/31",
+      "type": "PREPARED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example II",
+            "passage": "us1681753a/p1/5",
+            "quote": "The precipi tate was now filtered out, washed until the wash water gave no test for nitrates, and the cake then dried at a temperature of about 150° C.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/sample/example-2",
+      "target": "ex:msyn/us1681753a/preparation/example-2"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/32",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example II",
+            "note": "'pregn-hydrogen gaS' is garbled; possibly 'nitrogen-hydrogen gas'",
+            "passage": "us1681753a/p1/5",
+            "quote": "The dried precipitate was then reduced with the pregn-hydrogen gaS",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "order": 1
+      },
+      "source": "ex:msyn/us1681753a/sample/example-2",
+      "target": "ex:msyn/us1681753a/treatment/example-2-reduction"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/33",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "365 parts by weight",
+          "unit": "parts by weight",
+          "value": 365
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example II",
+            "note": "formulae garbled in the text layer: Zn(NO3)2·6H2O, Pd(NO3)2; '70' is a margin number",
+            "passage": "us1681753a/p1/4",
+            "quote": "II.365 parts by weight of zinc nitrate Zn(NO)6HO) were dissolved in 1000 parts of water; to this solution was added 25 parts of a palladium nitrate Pd(NO), 70",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1681753a/sample/example-2",
+      "target": "ex:msyn/species/znno326h2o"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/34",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "25 parts of a palladium nitrate",
+          "note": "parts of palladium nitrate solution",
+          "unit": "parts",
+          "value": 25
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example II",
+            "note": "formulae garbled in the text layer: Zn(NO3)2·6H2O, Pd(NO3)2; '70' is a margin number",
+            "passage": "us1681753a/p1/4",
+            "quote": "II.365 parts by weight of zinc nitrate Zn(NO)6HO) were dissolved in 1000 parts of water; to this solution was added 25 parts of a palladium nitrate Pd(NO), 70",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1681753a/sample/example-2",
+      "target": "ex:msyn/species/pdno32"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/35",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "sufficient to make the mixture slightly alkaline",
+          "text_value": "sufficient to make the mixture slightly alkaline"
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example II",
+            "quote": "Sufficient sodium hy. droxide solution was now added to make the mixture slightly alkaline and the whole boiled for about 15 minutes.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "role": "precipitant"
+      },
+      "source": "ex:msyn/us1681753a/sample/example-2",
+      "target": "ex:msyn/species/naoh"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/36",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 1",
+            "note": "read from the page image; the text layer reads 'Pd--CrO' and 'PdCeOs'",
+            "reading": "vision_ocr",
+            "region": [
+              0.07,
+              0.655,
+              0.44,
+              0.72
+            ],
+            "source": "ex:msyn/source/us1681753a",
+            "transcription": "Palladium+chromic oxide (Pd+Cr2O3). Palladium+zinc oxide (Pd+ZnO). Palladium+cerium oxide (Pd+Ce2O3). My method of preparation of these cata-"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1681753a/catalyst/pd-cerium-oxide",
+      "target": "ex:msyn/species/palladium"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/37",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 1",
+            "note": "read from the page image; the text layer reads 'Pd--CrO' and 'PdCeOs'",
+            "reading": "vision_ocr",
+            "region": [
+              0.07,
+              0.655,
+              0.44,
+              0.72
+            ],
+            "source": "ex:msyn/source/us1681753a",
+            "transcription": "Palladium+chromic oxide (Pd+Cr2O3). Palladium+zinc oxide (Pd+ZnO). Palladium+cerium oxide (Pd+Ce2O3). My method of preparation of these cata-"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1681753a/catalyst/pd-cerium-oxide",
+      "target": "ex:msyn/us1681753a/species/cerium-oxide"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/38",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1681753a/p2/2",
+            "quote": "di have also utilized Pd+CeO, cata lyst prepared by analogous methods and ob tained substantial yields of methanol.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/sample/pd-cerium-oxide",
+      "target": "ex:msyn/us1681753a/catalyst/pd-cerium-oxide"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/39",
+      "type": "PREPARED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1681753a/p2/2",
+            "quote": "di have also utilized Pd+CeO, cata lyst prepared by analogous methods and ob tained substantial yields of methanol.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/sample/pd-cerium-oxide",
+      "target": "ex:msyn/us1681753a/preparation/pd-cerium-oxide"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/4",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1681753a/p1/1",
+            "quote": "I have discovered that palladium in sev",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/claim/palladium-catalyzes",
+      "target": "ex:msyn/us1681753a/catalyst/pd-non-reducible-oxide"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/40",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, Example A",
+            "note": "read from the page image; the text layer drops the '1' before 'volume carbon monoxide' and reads 'S. W. H.'",
+            "reading": "vision_ocr",
+            "region": [
+              0.13,
+              0.28,
+              0.57,
+              0.52
+            ],
+            "source": "ex:msyn/source/us1681753a",
+            "transcription": "and the whole heated to about 300° C. The gas mixture comprising essentially 4 volumes hydrogen and 1 volume carbon monoxide, and essentially free of catalyst poisons was now passed into the heated catalyst under a pressure of about 200 atmospheres and at a space velocity per hour (S. V. H.) equiv- alent to about 4700 cubic feet of gas per cubic foot of catalyst per hour, calculated at normal temperature and pressure (N. T. P.—0° C. and 1 atmosphere). During this reaction the temperature of the catalyst mass was about 350° C. A sustained yield of methanol was obtained equivalent to a space time yield (S. T. Y.) of about 440 pounds of methanol per cubic foot of cata- lyst per 24 hours."
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "4 volumes hydrogen",
+          "note": "'essentially 4 volumes'",
+          "qualifier": "approximate",
+          "unit": "volumes",
+          "value": 4
+        },
+        "fraction_basis": "volume",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1681753a/feed/h2-co-4-1",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/41",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, Example A",
+            "note": "read from the page image; the text layer drops the '1' before 'volume carbon monoxide' and reads 'S. W. H.'",
+            "reading": "vision_ocr",
+            "region": [
+              0.13,
+              0.28,
+              0.57,
+              0.52
+            ],
+            "source": "ex:msyn/source/us1681753a",
+            "transcription": "and the whole heated to about 300° C. The gas mixture comprising essentially 4 volumes hydrogen and 1 volume carbon monoxide, and essentially free of catalyst poisons was now passed into the heated catalyst under a pressure of about 200 atmospheres and at a space velocity per hour (S. V. H.) equiv- alent to about 4700 cubic feet of gas per cubic foot of catalyst per hour, calculated at normal temperature and pressure (N. T. P.—0° C. and 1 atmosphere). During this reaction the temperature of the catalyst mass was about 350° C. A sustained yield of methanol was obtained equivalent to a space time yield (S. T. Y.) of about 440 pounds of methanol per cubic foot of cata- lyst per 24 hours."
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "1 volume carbon monoxide",
+          "note": "added 2026-09-29 from the page image; missing in the text layer",
+          "qualifier": "approximate",
+          "unit": "volumes",
+          "value": 1
+        },
+        "fraction_basis": "volume",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1681753a/feed/h2-co-4-1",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/42",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example A",
+            "passage": "us1681753a/p2/1",
+            "quote": "The granular catalyst material was packed in a copper lined high pressure steel bomb, and the whole heated to about 300° C.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "state": "reduced"
+      },
+      "source": "ex:msyn/us1681753a/test/example-a",
+      "target": "ex:msyn/us1681753a/sample/example-1"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/43",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example A",
+            "note": "the number before 'volume carbon monoxide' is missing in the text layer (read '1 volume'; the later text prefers about four volumes of hydrogen to each volume of carbon monoxide)",
+            "passage": "us1681753a/p2/1",
+            "quote": "volume carbon monoxide, and essentially free of catalyst poisons was now passed into the heated catalyst under a pressure of about 200 atmospheres",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/test/example-a",
+      "target": "ex:msyn/us1681753a/feed/h2-co-4-1"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/44",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example A",
+            "passage": "us1681753a/p2/1",
+            "quote": "The granular catalyst material was packed in a copper lined high pressure steel bomb, and the whole heated to about 300° C.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/test/example-a",
+      "target": "ex:msyn/us1681753a/reactor/copper-lined-steel-bomb"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/45",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example A",
+            "note": "'ounds' reads 'pounds'",
+            "passage": "us1681753a/p2/2",
+            "quote": "A sustained yield of methanol was obtained equivalent to a space time yield (S. T. Y.) of about 440 ounds of methanol per cubic foot of cata yst per 24 hours.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/test/example-a",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/46",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example B",
+            "passage": "us1681753a/p2/2",
+            "quote": "B. Pd -- ZnO, This catalyst as prepared above when utilized in a methanol synthesis under conditions as described above at a S. W. H. of about 4600 gave an S. T. Y. of about 375.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "state": "reduced"
+      },
+      "source": "ex:msyn/us1681753a/test/example-b",
+      "target": "ex:msyn/us1681753a/sample/example-2"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/47",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example B",
+            "passage": "us1681753a/p2/2",
+            "quote": "B. Pd -- ZnO, This catalyst as prepared above when utilized in a methanol synthesis under conditions as described above at a S. W. H. of about 4600 gave an S. T. Y. of about 375.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/test/example-b",
+      "target": "ex:msyn/us1681753a/feed/h2-co-4-1"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/48",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example B",
+            "passage": "us1681753a/p2/2",
+            "quote": "B. Pd -- ZnO, This catalyst as prepared above when utilized in a methanol synthesis under conditions as described above at a S. W. H. of about 4600 gave an S. T. Y. of about 375.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/test/example-b",
+      "target": "ex:msyn/us1681753a/reactor/copper-lined-steel-bomb"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/49",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example B",
+            "passage": "us1681753a/p2/2",
+            "quote": "B. Pd -- ZnO, This catalyst as prepared above when utilized in a methanol synthesis under conditions as described above at a S. W. H. of about 4600 gave an S. T. Y. of about 375.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/test/example-b",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/5",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1681753a/p1/1",
+            "quote": "I have discovered that palladium in sev",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/claim/palladium-catalyzes",
+      "target": "ex:msyn/species/palladium"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/50",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1681753a/p2/1",
+            "quote": "The above catalysts have been used in the synthesis of methanol from hydrogen with",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1681753a/feed/pd-ceo-gas",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/51",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1681753a/p2/1",
+            "quote": "carbon monoxide and have",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1681753a/feed/pd-ceo-gas",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/52",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1681753a/p2/2",
+            "quote": "di have also utilized Pd+CeO, cata lyst prepared by analogous methods and ob tained substantial yields of methanol.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "state": "not_reported"
+      },
+      "source": "ex:msyn/us1681753a/test/pd-cerium-oxide",
+      "target": "ex:msyn/us1681753a/sample/pd-cerium-oxide"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/53",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1681753a/p2/2",
+            "quote": "di have also utilized Pd+CeO, cata lyst prepared by analogous methods and ob tained substantial yields of methanol.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/test/pd-cerium-oxide",
+      "target": "ex:msyn/us1681753a/feed/pd-ceo-gas"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/54",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1681753a/p2/2",
+            "quote": "di have also utilized Pd+CeO, cata lyst prepared by analogous methods and ob tained substantial yields of methanol.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/test/pd-cerium-oxide",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/55",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "context": [
+          "ex:msyn/us1681753a/test/example-a"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example A",
+            "note": "'ounds' reads 'pounds'",
+            "passage": "us1681753a/p2/2",
+            "quote": "A sustained yield of methanol was obtained equivalent to a space time yield (S. T. Y.) of about 440 ounds of methanol per cubic foot of cata yst per 24 hours.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/catalyst/pd-chromic-oxide",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/56",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "context": [
+          "ex:msyn/us1681753a/test/example-b"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example B",
+            "passage": "us1681753a/p2/2",
+            "quote": "B. Pd -- ZnO, This catalyst as prepared above when utilized in a methanol synthesis under conditions as described above at a S. W. H. of about 4600 gave an S. T. Y. of about 375.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/catalyst/pd-zinc-oxide",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/57",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "context": [
+          "ex:msyn/us1681753a/test/pd-cerium-oxide"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1681753a/p2/2",
+            "quote": "di have also utilized Pd+CeO, cata lyst prepared by analogous methods and ob tained substantial yields of methanol.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/catalyst/pd-cerium-oxide",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/58",
+      "type": "COMPARED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example B",
+            "passage": "us1681753a/p2/2",
+            "quote": "B. Pd -- ZnO, This catalyst as prepared above when utilized in a methanol synthesis under conditions as described above at a S. W. H. of about 4600 gave an S. T. Y. of about 375.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "note": "S.T.Y. about 375 at S.W.H. about 4600 versus about 440 at about 4700"
+      },
+      "source": "ex:msyn/us1681753a/catalyst/pd-zinc-oxide",
+      "target": "ex:msyn/us1681753a/catalyst/pd-chromic-oxide"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/59",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1681753a/p2/3",
+            "quote": "These catalysts are of high activity and hence will operate over a large range of varying conditions, all combinations of which need not be given.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/claim/wide-conditions",
+      "target": "ex:msyn/us1681753a/catalyst/pd-non-reducible-oxide"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/6",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1681753a/p1/2",
+            "quote": "In general these are oxides which are not reduced, or, at most, only to a very slight degree when a gas mixture composed of hydrogensaturated with meth",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/claim/non-reducible-definition",
+      "target": "ex:msyn/us1681753a/material/non-reducible-metal-oxide"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/60",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1681753a/p2/3",
+            "quote": "These catalysts are of high activity and hence will operate over a large range of varying conditions, all combinations of which need not be given.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/claim/wide-conditions",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/61",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1681753a/p2/4",
+            "quote": "if the ratio is below one to one by volume the S. T. Y. will be considerably lower than that obtained with hydrogen in excess by volume.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/claim/h2-co-ratio",
+      "target": "ex:msyn/us1681753a/catalyst/pd-non-reducible-oxide"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/62",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1681753a/p2/4",
+            "quote": "if the ratio is below one to one by volume the S. T. Y. will be considerably lower than that obtained with hydrogen in excess by volume.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/claim/h2-co-ratio",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/63",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1681753a/p2/5",
+            "quote": "These catalysts are suited for the above syntheses at temperatures ranging between 150° C. and 450° C. although I have found the best results are secured between 300° C. and 400° C.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/claim/temperature-range",
+      "target": "ex:msyn/us1681753a/catalyst/pd-non-reducible-oxide"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/64",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1681753a/p2/5",
+            "quote": "These catalysts are suited for the above syntheses at temperatures ranging between 150° C. and 450° C. although I have found the best results are secured between 300° C. and 400° C.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/claim/temperature-range",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/65",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1681753a/p2/5",
+            "quote": "methanol will be formed in substantial amounts by these catalysts at pressures of 5 atmospheres and upwards, dependent on the temperature used.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/claim/pressure-range",
+      "target": "ex:msyn/us1681753a/catalyst/pd-non-reducible-oxide"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/66",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1681753a/p2/5",
+            "quote": "methanol will be formed in substantial amounts by these catalysts at pressures of 5 atmospheres and upwards, dependent on the temperature used.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/claim/pressure-range",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/67",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1681753a/p2/6",
+            "quote": "prefer space velocities of 2,000 to 20,000, calculated at N. T. P.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/claim/space-velocity",
+      "target": "ex:msyn/us1681753a/catalyst/pd-non-reducible-oxide"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/68",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1681753a/p2/6",
+            "quote": "prefer space velocities of 2,000 to 20,000, calculated at N. T. P.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/claim/space-velocity",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/69",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 1",
+            "passage": "us1681753a/p2/6",
+            "quote": "1A catalyst for the production of methanol which comprises palladium and chromic oxide.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/claim/claim-1",
+      "target": "ex:msyn/us1681753a/catalyst/pd-chromic-oxide"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/7",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1681753a/p1/2",
+            "quote": "This catalyst is active under combinations of relatively low temperatures and pressures as will be noted below.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/claim/low-temperature-pressure",
+      "target": "ex:msyn/us1681753a/catalyst/pd-non-reducible-oxide"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/70",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 2",
+            "passage": "us1681753a/p2/6",
+            "quote": "catalyst comprising palladium and a non reducible metal oxide.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/claim/claim-2",
+      "target": "ex:msyn/us1681753a/catalyst/pd-non-reducible-oxide"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/71",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 2",
+            "passage": "us1681753a/p2/6",
+            "quote": "catalyst comprising palladium and a non reducible metal oxide.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/claim/claim-2",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/72",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 3",
+            "passage": "us1681753a/p2/7",
+            "quote": "y comprising palladium and chromic",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/claim/claim-3",
+      "target": "ex:msyn/us1681753a/catalyst/pd-chromic-oxide"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/73",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 3",
+            "passage": "us1681753a/p2/7",
+            "quote": "y comprising palladium and chromic",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/claim/claim-3",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/74",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 4",
+            "passage": "us1681753a/p3/1",
+            "quote": "of between 5 and 300 atmospheres, incontact with a heated catalyst comprising palladium and a non-reducible metal oxide said catalyst being heated to a temperature of between 150-450° C.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/claim/claim-4",
+      "target": "ex:msyn/us1681753a/catalyst/pd-non-reducible-oxide"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/75",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 4",
+            "passage": "us1681753a/p3/1",
+            "quote": "of between 5 and 300 atmospheres, incontact with a heated catalyst comprising palladium and a non-reducible metal oxide said catalyst being heated to a temperature of between 150-450° C.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/claim/claim-4",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/76",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 5",
+            "passage": "us1681753a/p3/1",
+            "quote": "of between 5 and 300 atmospheres, in contact with a heated catalyst comprising palladium and chromic oxide.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/claim/claim-5",
+      "target": "ex:msyn/us1681753a/catalyst/pd-chromic-oxide"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/77",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 5",
+            "passage": "us1681753a/p3/1",
+            "quote": "of between 5 and 300 atmospheres, in contact with a heated catalyst comprising palladium and chromic oxide.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/claim/claim-5",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/78",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 6",
+            "passage": "us1681753a/p3/1",
+            "quote": "heated catalyst consisting of palladium and a non-reducible metal oxide, said catalyst being maintained at a temperature of be tween 300-400° C.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/claim/claim-6",
+      "target": "ex:msyn/us1681753a/catalyst/pd-non-reducible-oxide"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/79",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 6",
+            "passage": "us1681753a/p3/1",
+            "quote": "heated catalyst consisting of palladium and a non-reducible metal oxide, said catalyst being maintained at a temperature of be tween 300-400° C.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/claim/claim-6",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/8",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1681753a/p1/2",
+            "quote": "of powdered portions of this catalyst is also easy since it adapts itself to compression to",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/claim/compression",
+      "target": "ex:msyn/us1681753a/catalyst/pd-non-reducible-oxide"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/80",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 7",
+            "passage": "us1681753a/p3/2",
+            "quote": "heated catalyst comprising palladium and chromic oxide, said catalyst being maintain ed at a temperature of between 300-400° C.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/claim/claim-7",
+      "target": "ex:msyn/us1681753a/catalyst/pd-chromic-oxide"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/81",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 7",
+            "passage": "us1681753a/p3/2",
+            "quote": "heated catalyst comprising palladium and chromic oxide, said catalyst being maintain ed at a temperature of between 300-400° C.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1681753a/claim/claim-7",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1681753a/link/9",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'substantiall ... E.' reads 'substantially ... which'",
+            "passage": "us1681753a/p1/6",
+            "quote": "it is desirable to use gases substantiall free from the common catalyst poisons E. may be present in the raw materials, such",
+            "source": "ex:msyn/source/us1681753a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1681753a/p2/1",
+            "quote": "as, for example, arsenic, sulphur, phosphor us, volatile iron compounds, or other delete rious constituents gathered during the gas production.",
+            "source": "ex:msyn/source/us1681753a"
+          }
+        ],
+        "inhibition_kind": "poison",
+        "note": "named among the common catalyst poisons from which the gases should be substantially free"
+      },
+      "source": "ex:msyn/us1681753a/catalyst/pd-non-reducible-oxide",
+      "target": "ex:msyn/species/arsenic"
+    },
+    {
+      "id": "ex:msyn/us1681753a/material/non-reducible-metal-oxide/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1681753a/material/non-reducible-metal-oxide",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/us1681753a/material/pumice-7-mesh/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, Example I"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1681753a/material/pumice-7-mesh",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/us1681753a/preparation/example-1/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, Example I"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1681753a/preparation/example-1",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/us1681753a/preparation/example-2/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, Example II"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1681753a/preparation/example-2",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/us1681753a/preparation/pd-cerium-oxide/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1681753a/preparation/pd-cerium-oxide",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/us1681753a/reactor/copper-lined-steel-bomb/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, Example A"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1681753a/reactor/copper-lined-steel-bomb",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/us1681753a/sample/example-1/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, Example I"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1681753a/sample/example-1",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/us1681753a/sample/example-2/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, Example II"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1681753a/sample/example-2",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/us1681753a/sample/pd-cerium-oxide/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1681753a/sample/pd-cerium-oxide",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/us1681753a/species/cerium-oxide/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1681753a/species/cerium-oxide",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/us1681753a/species/chromic-acid-crystals/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, Example I"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1681753a/species/chromic-acid-crystals",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/us1681753a/species/volatile-iron-compounds/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1681753a/species/volatile-iron-compounds",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/us1681753a/test/example-a/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, Example A"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1681753a/test/example-a",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/us1681753a/test/example-b/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, Example B"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1681753a/test/example-b",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/us1681753a/test/pd-cerium-oxide/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1681753a/test/pd-cerium-oxide",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/us1681753a/treatment/example-1-reduction/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, Example I"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1681753a/treatment/example-1-reduction",
+      "target": "ex:msyn/source/us1681753a"
+    },
+    {
+      "id": "ex:msyn/us1681753a/treatment/example-2-reduction/reported-in/us1681753a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, Example II"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1681753a/treatment/example-2-reduction",
+      "target": "ex:msyn/source/us1681753a"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/us1681753a"
+}

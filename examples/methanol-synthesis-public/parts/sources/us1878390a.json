@@ -1,0 +1,2178 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/source/us1878390a",
+      "label": "Source",
+      "props": {
+        "name": "Production of methanol and other oxygenated organic compounds and preparation &hellip;",
+        "kind": "patent",
+        "description": "Published 1932-09-20 (grant date printed on the patent (agrees with the USPTO issue-year table)); in scope: before the 1966-01-01 cutoff. Text: 2 pages ocr (tesseract 5.5.3 (eng, 300 dpi, 2 columns)). Text not redistributed.",
+        "identifiers": {
+          "patent": "US1878390A"
+        },
+        "licence": "US patent; not subject to copyright",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "Production of methanol and other oxygenated organic compounds and preparation &hellip;",
+        "url": "https://patents.google.com/patent/US1878390A",
+        "year": 1932
+      }
+    },
+    {
+      "id": "ex:msyn/us1878390a/catalyst/example-1",
+      "label": "Catalyst",
+      "props": {
+        "name": "Example 1: basic zinc and chromium carbonates, chromate reduced by zinc, precipitated with soda ash",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/5",
+            "quote": "When the reduction is finished a solution of soda ash (5-10 per cent excess) 1s added; the pre- cipitate thrown down consists of a mixture of 65 basic zinc and chromium carbonates, which is separated, washed well with hot water and dried.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "generality": "particular"
+      }
+    },
+    {
+      "id": "ex:msyn/us1878390a/catalyst/example-2",
+      "label": "Catalyst",
+      "props": {
+        "name": "Example 2: basic zinc and chromium carbonates, bichromate reduced in a zinc-carbon cell, precipitated with soda ash",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/7",
+            "quote": "By taking current from the cell the bichromate is reduced and the spent electrolyte eventually contains the requisite amount of zinc and chromium sulphate for or the precipitation with soda ash, which follows | as before.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "generality": "particular"
+      }
+    },
+    {
+      "id": "ex:msyn/us1878390a/catalyst/example-3",
+      "label": "Catalyst",
+      "props": {
+        "name": "Example 3: basic zinc and chromium carbonates, basic chrome liquor with zinc sulphate, precipitated",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1878390a/p2/1",
+            "quote": "suitable amount of zinc sulphate is added to the liquor and the mixed basic carbonates 6 precipitated as before.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "generality": "particular"
+      }
+    },
+    {
+      "id": "ex:msyn/us1878390a/catalyst/zn-cr-oxide-from-carbonates",
+      "label": "Catalyst",
+      "props": {
+        "name": "zinc and chromium oxide catalyst from basic carbonates",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/1",
+            "quote": "which includes the step of heating a mixture containing zinc and chro- 15 mium in the form of carbonates.",
+            "source": "ex:msyn/source/us1878390a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'Lhe' = 'The'",
+            "passage": "us1878390a/p1/4",
+            "quote": "Lhe composition of matter containing the carbonates is then subjected to heat and is thereby converted into the improved catalyst.",
+            "source": "ex:msyn/source/us1878390a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'8.' = claim '3.'; 'zine' = 'zinc'",
+            "passage": "us1878390a/p2/2",
+            "quote": "8. Catalyst containing zine and chromium | oxides for the production of oxygenated or- ganic compounds obtained by heating to de- composition a mixture of zinc and chromium $5 carbonates.",
+            "source": "ex:msyn/source/us1878390a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'380-20' reads as '30-20'",
+            "passage": "us1878390a/p1/6",
+            "quote": "Iprefer _ to proportion the zinc and chromium so that +. | the precipitate contains 70-80 moles of zinc to 380-20 moles of chromium.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "generality": "kind",
+        "properties": {
+          "cr_moles_in_precipitate": {
+            "status": "present",
+            "as_reported": "380-20 moles of chromium",
+            "lower": 20,
+            "note": "printed '380-20' in the OCR; read as 30-20 (the zinc and chromium are given in proportion, 70-80 to 30-20); preferred",
+            "unit": "mol",
+            "upper": 30
+          },
+          "zn_moles_in_precipitate": {
+            "status": "present",
+            "as_reported": "70-80 moles of zinc",
+            "lower": 70,
+            "note": "preferred",
+            "unit": "mol",
+            "upper": 80
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us1878390a/catalyst/zn-cr-oxides-known",
+      "label": "Catalyst",
+      "props": {
+        "name": "zinc oxide or zinc-chromium oxide catalysts already known",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/1",
+            "quote": "Catalysts comprising 5 zinc oxide or mixtures of zinc and chromium oxides are already known in this art,",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "generality": "kind",
+        "note": "prior art as stated by the patent; includes mixtures of oxides prepared as such"
+      }
+    },
+    {
+      "id": "ex:msyn/us1878390a/claim/alkali-higher-alcohol",
+      "label": "Claim",
+      "props": {
+        "name": "alkali salts make the catalysts suitable for higher alcohol",
+        "claim_kind": "causal",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1878390a/p2/1",
+            "quote": "If alkali salts are allowed to remain in the catalysts, or 10 if separate additions of such are made, they become suitable for the production of higher alcohol.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "If alkali salts remain in the catalysts or are added separately, the catalysts become suitable for the production of higher alcohol."
+      }
+    },
+    {
+      "id": "ex:msyn/us1878390a/claim/basicity-depends-on-conditions",
+      "label": "Claim",
+      "props": {
+        "name": "basicity of the precipitate depends on preparation conditions",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/6",
+            "quote": "In this preparation the exact composition 70 of the precipitate as regards the basicity of __ the carbonates depends upon many factors, such as concentration of solutions, tempera- ture and amount of soda. ash added.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The exact composition of the precipitate as regards the basicity of the carbonates depends on concentration of solutions, temperature and amount of soda ash added."
+      }
+    },
+    {
+      "id": "ex:msyn/us1878390a/claim/carbonate-route-more-effective",
+      "label": "Claim",
+      "props": {
+        "name": "Zn / Zn-Cr oxide catalysts particularly effective when made from basic carbonates",
+        "claim_kind": "comparison",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/1",
+            "quote": "have found that such catalysts are particu- larly effective when they are prepared in a special way. by heating mixtures containing 10 combined carbon dioxide 1. e. basic carbon- ates.",
+            "source": "ex:msyn/source/us1878390a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "quote": "Mixtures of oxides prepared as such do not come with- in the scope of the invention.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Zinc oxide or zinc-chromium oxide catalysts are particularly effective when prepared by heating mixtures containing combined carbon dioxide, i.e. basic carbonates; mixtures of oxides prepared as such are outside the invention."
+      }
+    },
+    {
+      "id": "ex:msyn/us1878390a/claim/example-2-energy",
+      "label": "Claim",
+      "props": {
+        "name": "Example 2 recovers the free energy as electrical energy",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/7",
+            "quote": "This method of preparation has the advantage that the free energy of the re- actants is made to manifest itself as useful electrical energy instead of as heat.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The electrolytic-cell preparation of Example 2 has the advantage that the free energy of the reactants appears as useful electrical energy instead of heat."
+      }
+    },
+    {
+      "id": "ex:msyn/us1878390a/claim/high-purity-methanol",
+      "label": "Claim",
+      "props": {
+        "name": "yields methanol of high purity",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1878390a/p2/1",
+            "quote": "Catalysts prepared according to this in- vention are capable of yielding direct meth- anol of a high degree of purity.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Catalysts prepared according to the invention are capable of yielding direct methanol of a high degree of purity."
+      }
+    },
+    {
+      "id": "ex:msyn/us1878390a/claim/patent-claim-1",
+      "label": "Claim",
+      "props": {
+        "name": "claim 1: heating Zn and Cr carbonates to decomposition",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "quote": "1. Method of preparing a catalyst contain- 90 Ing zinc and chromium oxides for the pro- duction of methanol and other oxygenated organic compounds which comprises heatin to decomposition a mixture of zinc an chromium carbonates.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Method of preparing a catalyst containing zinc and chromium oxides for methanol and other oxygenated organic compounds, comprising heating to decomposition a mixture of zinc and chromium carbonates."
+      }
+    },
+    {
+      "id": "ex:msyn/us1878390a/claim/patent-claim-2",
+      "label": "Claim",
+      "props": {
+        "name": "claim 2: heating co-precipitated Zn and Cr carbonates",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1878390a/p2/2",
+            "quote": "2. Method of making catalysts containing zinc and chromium oxides which includes the step of heating to decomposition a composi- tion containing zinc and chromium carbon- ates obtained by co-precipitating the mixed go carbonates from solution.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Method of making catalysts containing zinc and chromium oxides, including heating to decomposition a composition of zinc and chromium carbonates obtained by co-precipitating the mixed carbonates from solution."
+      }
+    },
+    {
+      "id": "ex:msyn/us1878390a/claim/patent-claim-3",
+      "label": "Claim",
+      "props": {
+        "name": "claim 3: Zn-Cr oxide catalyst obtained from carbonates",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'8.' = claim '3.'; 'zine' = 'zinc'",
+            "passage": "us1878390a/p2/2",
+            "quote": "8. Catalyst containing zine and chromium | oxides for the production of oxygenated or- ganic compounds obtained by heating to de- composition a mixture of zinc and chromium $5 carbonates.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Catalyst containing zinc and chromium oxides for the production of oxygenated organic compounds, obtained by heating to decomposition a mixture of zinc and chromium carbonates."
+      }
+    },
+    {
+      "id": "ex:msyn/us1878390a/claim/preferred-preparation",
+      "label": "Claim",
+      "props": {
+        "name": "zinc and chromium substantially all as basic carbonates, mixed or coprecipitated",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/4",
+            "quote": "In the preferred form of my invention. 60 T prepare a catalyst containing both zinc and",
+            "source": "ex:msyn/source/us1878390a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/4",
+            "quote": "chromium substantially all in the basic car- bonate state.",
+            "source": "ex:msyn/source/us1878390a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/4",
+            "quote": "According to this invention zinc carbonate 40 may be mixed with chromium carbonate, or the carbonates may be coprecipitated.",
+            "source": "ex:msyn/source/us1878390a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/4",
+            "quote": "The compounds are usually prepared by precipitation, the precipitates being well washed and dried and -preferably pelleted before introduction into the catalytic appara- tus.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Preferably the zinc and chromium are substantially all in the basic carbonate state; zinc carbonate may be mixed with chromium carbonate or the carbonates coprecipitated, usually by precipitation, washed, dried and preferably pelleted before use."
+      }
+    },
+    {
+      "id": "ex:msyn/us1878390a/claim/regeneration",
+      "label": "Claim",
+      "props": {
+        "name": "poisoned catalysts may be regenerated",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1878390a/p2/1",
+            "quote": "When, through poisoning, these catalysts, become less efficient, they may be - regenerated either by heating to 800-400° C. 15 ina current of air or oxygen, or by dissolving up in sulphuric acid and reprecipitating the complex carbonates with soda ash.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "When through poisoning the catalysts become less efficient, they may be regenerated by heating in a current of air or oxygen, or by dissolving in sulphuric acid and reprecipitating the complex carbonates with soda ash."
+      }
+    },
+    {
+      "id": "ex:msyn/us1878390a/preparation/example-1",
+      "label": "Preparation",
+      "props": {
+        "name": "Example 1: chromate reduced by zinc, precipitated with soda ash",
+        "conditions": {
+          "soda_ash_excess": {
+            "status": "present",
+            "as_reported": "(5-10 per cent excess)",
+            "lower": 5,
+            "unit": "%",
+            "upper": 10
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/5",
+            "quote": "A strong solution of sodium bichromate or chromate is mixed with sulphuric acid —_ and the hot mixture (90° C.) is heated with g granulated zinc metal to effect reduction of the bichromate to chromium sulphate.",
+            "source": "ex:msyn/source/us1878390a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/5",
+            "quote": "When the reduction is finished a solution of soda ash (5-10 per cent excess) 1s added; the pre- cipitate thrown down consists of a mixture of 65 basic zinc and chromium carbonates, which is separated, washed well with hot water and dried.",
+            "source": "ex:msyn/source/us1878390a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/5",
+            "quote": "Itis then made into pellets and intro- duced. into the catalytic apparatus.",
+            "source": "ex:msyn/source/us1878390a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'380-20' reads as '30-20'",
+            "passage": "us1878390a/p1/6",
+            "quote": "Iprefer _ to proportion the zinc and chromium so that +. | the precipitate contains 70-80 moles of zinc to 380-20 moles of chromium.",
+            "source": "ex:msyn/source/us1878390a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/6",
+            "quote": "the amount of zinc may not be sufficient to effect reduction of all the chromium and addi- - tion reducing agents may then be used",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "method": "reduction of sodium bichromate or chromate in sulphuric acid with granulated zinc at 90 °C to chromium sulphate; precipitation of the basic zinc and chromium carbonates with soda ash; washing, drying, pelleting",
+        "procedure_status": "proposed",
+        "steps": [
+          "a strong solution of sodium bichromate or chromate is mixed with sulphuric acid and the hot mixture (90° C.) is heated with granulated zinc metal to reduce the bichromate to chromium sulphate",
+          "a solution of soda ash (5-10 per cent excess) is added; the precipitate is a mixture of basic zinc and chromium carbonates",
+          "the precipitate is separated, washed well with hot water and dried",
+          "it is made into pellets and introduced into the catalytic apparatus"
+        ],
+        "temperature": {
+          "status": "present",
+          "as_reported": "(90° C.)",
+          "note": "the hot mixture during reduction with zinc",
+          "unit": "°C",
+          "value": 90
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us1878390a/preparation/example-2",
+      "label": "Preparation",
+      "props": {
+        "name": "Example 2: bichromate reduced in a zinc-carbon cell, precipitated with soda ash",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/7",
+            "quote": "A solution of bichromate in aqueous sul- phuric acid is placed as electrolyte in a cell. having a zinc negative pole and a carbon positive pole.",
+            "source": "ex:msyn/source/us1878390a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/7",
+            "quote": "By taking current from the cell the bichromate is reduced and the spent electrolyte eventually contains the requisite amount of zinc and chromium sulphate for or the precipitation with soda ash, which follows | as before.",
+            "source": "ex:msyn/source/us1878390a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/7",
+            "quote": "The zinc o5 electrode may also be amalgamated to pre- vent. direct attack by the acid.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "method": "bichromate in aqueous sulphuric acid as electrolyte of a cell with zinc negative pole and carbon positive pole; current taken from the cell reduces the bichromate; the spent electrolyte (zinc and chromium sulphate) is precipitated with soda ash as in Example 1",
+        "procedure_status": "proposed",
+        "steps": [
+          "a solution of bichromate in aqueous sulphuric acid is the electrolyte of a cell with a zinc negative pole and a carbon positive pole",
+          "current is taken from the cell until the spent electrolyte contains the requisite zinc and chromium sulphate",
+          "precipitation with soda ash follows as in Example 1",
+          "the zinc electrode may be amalgamated to prevent direct attack by the acid"
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1878390a/preparation/example-3",
+      "label": "Preparation",
+      "props": {
+        "name": "Example 3: basic chrome liquor with zinc sulphate, precipitated",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/7",
+            "quote": "Basic chrome liquor of commerce, which | : consists of a solution of chromium sulphate",
+            "source": "ex:msyn/source/us1878390a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'bySO,' = 'by SO2'",
+            "passage": "us1878390a/p2/1",
+            "quote": "made by reduction of chromates bySO, or by molasses, is used as a source of chromium.",
+            "source": "ex:msyn/source/us1878390a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1878390a/p2/1",
+            "quote": "suitable amount of zinc sulphate is added to the liquor and the mixed basic carbonates 6 precipitated as before.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "method": "basic chrome liquor of commerce (chromium sulphate solution made by reducing chromates with SO2 or molasses) with a suitable amount of zinc sulphate; mixed basic carbonates precipitated as before",
+        "procedure_status": "proposed",
+        "steps": [
+          "basic chrome liquor of commerce is the source of chromium",
+          "a suitable amount of zinc sulphate is added",
+          "the mixed basic carbonates are precipitated as before"
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1878390a/reaction/co-hydrogenation-to-higher-alcohol",
+      "label": "Reaction",
+      "props": {
+        "name": "hydrogenation of carbon monoxide to higher alcohol",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1878390a/p2/1",
+            "quote": "If alkali salts are allowed to remain in the catalysts, or 10 if separate additions of such are made, they become suitable for the production of higher alcohol.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "generality": "kind"
+      }
+    },
+    {
+      "id": "ex:msyn/us1878390a/sample/example-1",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Example 1 precipitate",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/5",
+            "quote": "A strong solution of sodium bichromate or chromate is mixed with sulphuric acid —_ and the hot mixture (90° C.) is heated with g granulated zinc metal to effect reduction of the bichromate to chromium sulphate.",
+            "source": "ex:msyn/source/us1878390a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/5",
+            "quote": "When the reduction is finished a solution of soda ash (5-10 per cent excess) 1s added; the pre- cipitate thrown down consists of a mixture of 65 basic zinc and chromium carbonates, which is separated, washed well with hot water and dried.",
+            "source": "ex:msyn/source/us1878390a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/5",
+            "quote": "Itis then made into pellets and intro- duced. into the catalytic apparatus.",
+            "source": "ex:msyn/source/us1878390a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'380-20' reads as '30-20'",
+            "passage": "us1878390a/p1/6",
+            "quote": "Iprefer _ to proportion the zinc and chromium so that +. | the precipitate contains 70-80 moles of zinc to 380-20 moles of chromium.",
+            "source": "ex:msyn/source/us1878390a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/6",
+            "quote": "the amount of zinc may not be sufficient to effect reduction of all the chromium and addi- - tion reducing agents may then be used",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "preparation_status": "proposed",
+        "sample_kind": "pellet"
+      }
+    },
+    {
+      "id": "ex:msyn/us1878390a/sample/example-2",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Example 2 precipitate",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/7",
+            "quote": "A solution of bichromate in aqueous sul- phuric acid is placed as electrolyte in a cell. having a zinc negative pole and a carbon positive pole.",
+            "source": "ex:msyn/source/us1878390a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/7",
+            "quote": "By taking current from the cell the bichromate is reduced and the spent electrolyte eventually contains the requisite amount of zinc and chromium sulphate for or the precipitation with soda ash, which follows | as before.",
+            "source": "ex:msyn/source/us1878390a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/7",
+            "quote": "The zinc o5 electrode may also be amalgamated to pre- vent. direct attack by the acid.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "preparation_status": "proposed",
+        "sample_kind": "batch"
+      }
+    },
+    {
+      "id": "ex:msyn/us1878390a/sample/example-3",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Example 3 precipitate",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/7",
+            "quote": "Basic chrome liquor of commerce, which | : consists of a solution of chromium sulphate",
+            "source": "ex:msyn/source/us1878390a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'bySO,' = 'by SO2'",
+            "passage": "us1878390a/p2/1",
+            "quote": "made by reduction of chromates bySO, or by molasses, is used as a source of chromium.",
+            "source": "ex:msyn/source/us1878390a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1878390a/p2/1",
+            "quote": "suitable amount of zinc sulphate is added to the liquor and the mixed basic carbonates 6 precipitated as before.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "preparation_status": "proposed",
+        "sample_kind": "batch"
+      }
+    },
+    {
+      "id": "ex:msyn/us1878390a/species/basic-chrome-liquor",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "basic chrome liquor of commerce (chromium sulphate solution)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/7",
+            "quote": "Basic chrome liquor of commerce, which | : consists of a solution of chromium sulphate",
+            "source": "ex:msyn/source/us1878390a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'bySO,' = 'by SO2'",
+            "passage": "us1878390a/p2/1",
+            "quote": "made by reduction of chromates bySO, or by molasses, is used as a source of chromium.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1878390a/species/basic-chromium-carbonates",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "basic chromium carbonates (class)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "OCR of a list of basic chromium carbonate formulas; garbled",
+            "passage": "us1878390a/p1/3",
+            "quote": "basic chro- -mium carbonates such as 4Cr,Q0;.CO.,H.O; 2Cr.0;.CO,.6H,0; 10Cr,0;7CO,.8H.0 5 Cro- O,.CO..4H.0 and Cr.0;.2CO, may supply the chromium part",
+            "source": "ex:msyn/source/us1878390a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/5",
+            "quote": "When the reduction is finished a solution of soda ash (5-10 per cent excess) 1s added; the pre- cipitate thrown down consists of a mixture of 65 basic zinc and chromium carbonates, which is separated, washed well with hot water and dried.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1878390a/species/basic-zinc-carbonates",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "basic zinc carbonates (class)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "OCR of a list of basic zinc carbonate formulas (e.g. ZnCO3.ZnO.H2O); several are garbled",
+            "quote": "Compounds such as 5Zn0.2CQO..4H,.0; ZnCO,.(Zn0.2H..0 ;y ZnCQ;.8Zn0.2H.0; Zn- CO,.2Zn0.2H.0; ZnCO;.Zn0.H,O and the like are very suitable as a source of the zinc.",
+            "source": "ex:msyn/source/us1878390a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/5",
+            "quote": "When the reduction is finished a solution of soda ash (5-10 per cent excess) 1s added; the pre- cipitate thrown down consists of a mixture of 65 basic zinc and chromium carbonates, which is separated, washed well with hot water and dried.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1878390a/species/chromium-oxides",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "chromium oxides",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1878390a/p2/2",
+            "quote": "Catalyst containing zine and chromium | oxides for the production of oxygenated or- ganic compounds",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "note": "formula not stated"
+      }
+    },
+    {
+      "id": "ex:msyn/us1878390a/species/soda-ash",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "soda ash",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/5",
+            "quote": "When the reduction is finished a solution of soda ash (5-10 per cent excess) 1s added; the pre- cipitate thrown down consists of a mixture of 65 basic zinc and chromium carbonates, which is separated, washed well with hot water and dried.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "note": "commercial product"
+      }
+    },
+    {
+      "id": "ex:msyn/us1878390a/treatment/heating-to-decomposition",
+      "label": "Treatment",
+      "props": {
+        "name": "heating the carbonates to decomposition",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'Lhe' = 'The'",
+            "passage": "us1878390a/p1/4",
+            "quote": "Lhe composition of matter containing the carbonates is then subjected to heat and is thereby converted into the improved catalyst.",
+            "source": "ex:msyn/source/us1878390a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "quote": "1. Method of preparing a catalyst contain- 90 Ing zinc and chromium oxides for the pro- duction of methanol and other oxygenated organic compounds which comprises heatin to decomposition a mixture of zinc an chromium carbonates.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "method": "heating the mixture of zinc and chromium carbonates to decomposition, converting it into the catalyst",
+        "treatment_kind": "other"
+      }
+    },
+    {
+      "id": "ex:msyn/us1878390a/treatment/regeneration",
+      "label": "Treatment",
+      "props": {
+        "name": "regeneration of poisoned catalyst",
+        "atmosphere": "a current of air or oxygen (first method)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1878390a/p2/1",
+            "quote": "When, through poisoning, these catalysts, become less efficient, they may be - regenerated either by heating to 800-400° C. 15 ina current of air or oxygen, or by dissolving up in sulphuric acid and reprecipitating the complex carbonates with soda ash.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "method": "heating in a current of air or oxygen, or dissolving in sulphuric acid and reprecipitating the complex carbonates with soda ash",
+        "treatment_kind": "regeneration"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/reaction/co-hydrogenation-to-methanol/reported-in/us1878390a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/source/us1878390a"
+    },
+    {
+      "id": "ex:msyn/source/us1878390a/assignee",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "role": "assignee"
+      },
+      "source": "ex:msyn/source/us1878390a",
+      "target": "ex:msyn/institution/ici-ltd"
+    },
+    {
+      "id": "ex:msyn/us1878390a/catalyst/example-1/reported-in/us1878390a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1878390a/catalyst/example-1",
+      "target": "ex:msyn/source/us1878390a"
+    },
+    {
+      "id": "ex:msyn/us1878390a/catalyst/example-2/reported-in/us1878390a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1878390a/catalyst/example-2",
+      "target": "ex:msyn/source/us1878390a"
+    },
+    {
+      "id": "ex:msyn/us1878390a/catalyst/example-3/reported-in/us1878390a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1878390a/catalyst/example-3",
+      "target": "ex:msyn/source/us1878390a"
+    },
+    {
+      "id": "ex:msyn/us1878390a/catalyst/zn-cr-oxide-from-carbonates/reported-in/us1878390a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1878390a/catalyst/zn-cr-oxide-from-carbonates",
+      "target": "ex:msyn/source/us1878390a"
+    },
+    {
+      "id": "ex:msyn/us1878390a/catalyst/zn-cr-oxides-known/reported-in/us1878390a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1878390a/catalyst/zn-cr-oxides-known",
+      "target": "ex:msyn/source/us1878390a"
+    },
+    {
+      "id": "ex:msyn/us1878390a/claim/alkali-higher-alcohol/reported-in/us1878390a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1878390a/claim/alkali-higher-alcohol",
+      "target": "ex:msyn/source/us1878390a"
+    },
+    {
+      "id": "ex:msyn/us1878390a/claim/basicity-depends-on-conditions/reported-in/us1878390a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1878390a/claim/basicity-depends-on-conditions",
+      "target": "ex:msyn/source/us1878390a"
+    },
+    {
+      "id": "ex:msyn/us1878390a/claim/carbonate-route-more-effective/reported-in/us1878390a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1878390a/claim/carbonate-route-more-effective",
+      "target": "ex:msyn/source/us1878390a"
+    },
+    {
+      "id": "ex:msyn/us1878390a/claim/example-2-energy/reported-in/us1878390a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1878390a/claim/example-2-energy",
+      "target": "ex:msyn/source/us1878390a"
+    },
+    {
+      "id": "ex:msyn/us1878390a/claim/high-purity-methanol/reported-in/us1878390a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1878390a/claim/high-purity-methanol",
+      "target": "ex:msyn/source/us1878390a"
+    },
+    {
+      "id": "ex:msyn/us1878390a/claim/patent-claim-1/reported-in/us1878390a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1878390a/claim/patent-claim-1",
+      "target": "ex:msyn/source/us1878390a"
+    },
+    {
+      "id": "ex:msyn/us1878390a/claim/patent-claim-2/reported-in/us1878390a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1878390a/claim/patent-claim-2",
+      "target": "ex:msyn/source/us1878390a"
+    },
+    {
+      "id": "ex:msyn/us1878390a/claim/patent-claim-3/reported-in/us1878390a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1878390a/claim/patent-claim-3",
+      "target": "ex:msyn/source/us1878390a"
+    },
+    {
+      "id": "ex:msyn/us1878390a/claim/preferred-preparation/reported-in/us1878390a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1878390a/claim/preferred-preparation",
+      "target": "ex:msyn/source/us1878390a"
+    },
+    {
+      "id": "ex:msyn/us1878390a/claim/regeneration/reported-in/us1878390a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1878390a/claim/regeneration",
+      "target": "ex:msyn/source/us1878390a"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/1",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'8.' = claim '3.'; 'zine' = 'zinc'",
+            "passage": "us1878390a/p2/2",
+            "quote": "8. Catalyst containing zine and chromium | oxides for the production of oxygenated or- ganic compounds obtained by heating to de- composition a mixture of zinc and chromium $5 carbonates.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "note": "'zinc ... oxides'",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1878390a/catalyst/zn-cr-oxide-from-carbonates",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/10",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/5",
+            "quote": "When the reduction is finished a solution of soda ash (5-10 per cent excess) 1s added; the pre- cipitate thrown down consists of a mixture of 65 basic zinc and chromium carbonates, which is separated, washed well with hot water and dried.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1878390a/catalyst/example-1",
+      "target": "ex:msyn/us1878390a/species/basic-chromium-carbonates"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/11",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/5",
+            "quote": "A strong solution of sodium bichromate or chromate is mixed with sulphuric acid —_ and the hot mixture (90° C.) is heated with g granulated zinc metal to effect reduction of the bichromate to chromium sulphate.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1878390a/sample/example-1",
+      "target": "ex:msyn/us1878390a/catalyst/example-1"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/12",
+      "type": "PREPARED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/5",
+            "quote": "A strong solution of sodium bichromate or chromate is mixed with sulphuric acid —_ and the hot mixture (90° C.) is heated with g granulated zinc metal to effect reduction of the bichromate to chromium sulphate.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1878390a/sample/example-1",
+      "target": "ex:msyn/us1878390a/preparation/example-1"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/13",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/5",
+            "quote": "A strong solution of sodium bichromate or chromate is mixed with sulphuric acid —_ and the hot mixture (90° C.) is heated with g granulated zinc metal to effect reduction of the bichromate to chromium sulphate.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1878390a/sample/example-1",
+      "target": "ex:msyn/species/na2cr2o7"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/14",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/5",
+            "quote": "A strong solution of sodium bichromate or chromate is mixed with sulphuric acid —_ and the hot mixture (90° C.) is heated with g granulated zinc metal to effect reduction of the bichromate to chromium sulphate.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "role": "precursor (alternative to bichromate)"
+      },
+      "source": "ex:msyn/us1878390a/sample/example-1",
+      "target": "ex:msyn/species/na2cro4"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/15",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/5",
+            "quote": "A strong solution of sodium bichromate or chromate is mixed with sulphuric acid —_ and the hot mixture (90° C.) is heated with g granulated zinc metal to effect reduction of the bichromate to chromium sulphate.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "role": "reagent"
+      },
+      "source": "ex:msyn/us1878390a/sample/example-1",
+      "target": "ex:msyn/species/h2so4"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/16",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/5",
+            "quote": "A strong solution of sodium bichromate or chromate is mixed with sulphuric acid —_ and the hot mixture (90° C.) is heated with g granulated zinc metal to effect reduction of the bichromate to chromium sulphate.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "role": "reducing agent (granulated zinc metal); zinc source"
+      },
+      "source": "ex:msyn/us1878390a/sample/example-1",
+      "target": "ex:msyn/species/zinc"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/17",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/5",
+            "quote": "When the reduction is finished a solution of soda ash (5-10 per cent excess) 1s added; the pre- cipitate thrown down consists of a mixture of 65 basic zinc and chromium carbonates, which is separated, washed well with hot water and dried.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "role": "precipitant"
+      },
+      "source": "ex:msyn/us1878390a/sample/example-1",
+      "target": "ex:msyn/us1878390a/species/soda-ash"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/18",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'380-20' reads as '30-20'",
+            "passage": "us1878390a/p1/6",
+            "quote": "Iprefer _ to proportion the zinc and chromium so that +. | the precipitate contains 70-80 moles of zinc to 380-20 moles of chromium.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "70-80 moles of zinc",
+          "lower": 70,
+          "note": "preferred proportion in the precipitate",
+          "unit": "mol",
+          "upper": 80
+        },
+        "fraction_basis": "mole",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1878390a/catalyst/example-1",
+      "target": "ex:msyn/species/zinc"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/19",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/7",
+            "quote": "By taking current from the cell the bichromate is reduced and the spent electrolyte eventually contains the requisite amount of zinc and chromium sulphate for or the precipitation with soda ash, which follows | as before.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1878390a/catalyst/example-2",
+      "target": "ex:msyn/us1878390a/species/basic-zinc-carbonates"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/2",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'8.' = claim '3.'; 'zine' = 'zinc'",
+            "passage": "us1878390a/p2/2",
+            "quote": "8. Catalyst containing zine and chromium | oxides for the production of oxygenated or- ganic compounds obtained by heating to de- composition a mixture of zinc and chromium $5 carbonates.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1878390a/catalyst/zn-cr-oxide-from-carbonates",
+      "target": "ex:msyn/us1878390a/species/chromium-oxides"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/20",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/7",
+            "quote": "By taking current from the cell the bichromate is reduced and the spent electrolyte eventually contains the requisite amount of zinc and chromium sulphate for or the precipitation with soda ash, which follows | as before.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1878390a/catalyst/example-2",
+      "target": "ex:msyn/us1878390a/species/basic-chromium-carbonates"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/21",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/7",
+            "quote": "A solution of bichromate in aqueous sul- phuric acid is placed as electrolyte in a cell. having a zinc negative pole and a carbon positive pole.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1878390a/sample/example-2",
+      "target": "ex:msyn/us1878390a/catalyst/example-2"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/22",
+      "type": "PREPARED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/7",
+            "quote": "A solution of bichromate in aqueous sul- phuric acid is placed as electrolyte in a cell. having a zinc negative pole and a carbon positive pole.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1878390a/sample/example-2",
+      "target": "ex:msyn/us1878390a/preparation/example-2"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/23",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/7",
+            "quote": "A solution of bichromate in aqueous sul- phuric acid is placed as electrolyte in a cell. having a zinc negative pole and a carbon positive pole.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "role": "electrolyte (with bichromate)"
+      },
+      "source": "ex:msyn/us1878390a/sample/example-2",
+      "target": "ex:msyn/species/h2so4"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/24",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/7",
+            "quote": "A solution of bichromate in aqueous sul- phuric acid is placed as electrolyte in a cell. having a zinc negative pole and a carbon positive pole.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "role": "zinc negative pole; zinc source"
+      },
+      "source": "ex:msyn/us1878390a/sample/example-2",
+      "target": "ex:msyn/species/zinc"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/25",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/7",
+            "quote": "By taking current from the cell the bichromate is reduced and the spent electrolyte eventually contains the requisite amount of zinc and chromium sulphate for or the precipitation with soda ash, which follows | as before.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "role": "precipitant"
+      },
+      "source": "ex:msyn/us1878390a/sample/example-2",
+      "target": "ex:msyn/us1878390a/species/soda-ash"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/26",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1878390a/p2/1",
+            "quote": "suitable amount of zinc sulphate is added to the liquor and the mixed basic carbonates 6 precipitated as before.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1878390a/catalyst/example-3",
+      "target": "ex:msyn/us1878390a/species/basic-zinc-carbonates"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/27",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1878390a/p2/1",
+            "quote": "suitable amount of zinc sulphate is added to the liquor and the mixed basic carbonates 6 precipitated as before.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1878390a/catalyst/example-3",
+      "target": "ex:msyn/us1878390a/species/basic-chromium-carbonates"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/28",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/7",
+            "quote": "Basic chrome liquor of commerce, which | : consists of a solution of chromium sulphate",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1878390a/sample/example-3",
+      "target": "ex:msyn/us1878390a/catalyst/example-3"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/29",
+      "type": "PREPARED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/7",
+            "quote": "Basic chrome liquor of commerce, which | : consists of a solution of chromium sulphate",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1878390a/sample/example-3",
+      "target": "ex:msyn/us1878390a/preparation/example-3"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/3",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "OCR of a list of basic zinc carbonate formulas (e.g. ZnCO3.ZnO.H2O); several are garbled",
+            "quote": "Compounds such as 5Zn0.2CQO..4H,.0; ZnCO,.(Zn0.2H..0 ;y ZnCQ;.8Zn0.2H.0; Zn- CO,.2Zn0.2H.0; ZnCO;.Zn0.H,O and the like are very suitable as a source of the zinc.",
+            "source": "ex:msyn/source/us1878390a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/1",
+            "quote": "which includes the step of heating a mixture containing zinc and chro- 15 mium in the form of carbonates.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1878390a/catalyst/zn-cr-oxide-from-carbonates",
+      "target": "ex:msyn/us1878390a/species/basic-zinc-carbonates"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/30",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/7",
+            "quote": "Basic chrome liquor of commerce, which | : consists of a solution of chromium sulphate",
+            "source": "ex:msyn/source/us1878390a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'bySO,' = 'by SO2'",
+            "passage": "us1878390a/p2/1",
+            "quote": "made by reduction of chromates bySO, or by molasses, is used as a source of chromium.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "role": "chromium source"
+      },
+      "source": "ex:msyn/us1878390a/sample/example-3",
+      "target": "ex:msyn/us1878390a/species/basic-chrome-liquor"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/31",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1878390a/p2/1",
+            "quote": "suitable amount of zinc sulphate is added to the liquor and the mixed basic carbonates 6 precipitated as before.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "role": "zinc source"
+      },
+      "source": "ex:msyn/us1878390a/sample/example-3",
+      "target": "ex:msyn/species/znso4"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/32",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'Lhe' = 'The'",
+            "passage": "us1878390a/p1/4",
+            "quote": "Lhe composition of matter containing the carbonates is then subjected to heat and is thereby converted into the improved catalyst.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "note": "general step of the invention; not described within the example",
+        "order": 1
+      },
+      "source": "ex:msyn/us1878390a/sample/example-1",
+      "target": "ex:msyn/us1878390a/treatment/heating-to-decomposition"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/33",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'Lhe' = 'The'",
+            "passage": "us1878390a/p1/4",
+            "quote": "Lhe composition of matter containing the carbonates is then subjected to heat and is thereby converted into the improved catalyst.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "note": "general step of the invention; not described within the example",
+        "order": 1
+      },
+      "source": "ex:msyn/us1878390a/sample/example-2",
+      "target": "ex:msyn/us1878390a/treatment/heating-to-decomposition"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/34",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'Lhe' = 'The'",
+            "passage": "us1878390a/p1/4",
+            "quote": "Lhe composition of matter containing the carbonates is then subjected to heat and is thereby converted into the improved catalyst.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "note": "general step of the invention; not described within the example",
+        "order": 1
+      },
+      "source": "ex:msyn/us1878390a/sample/example-3",
+      "target": "ex:msyn/us1878390a/treatment/heating-to-decomposition"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/35",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/1",
+            "quote": "have found that such catalysts are particu- larly effective when they are prepared in a special way. by heating mixtures containing 10 combined carbon dioxide 1. e. basic carbon- ates.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1878390a/claim/carbonate-route-more-effective",
+      "target": "ex:msyn/us1878390a/catalyst/zn-cr-oxide-from-carbonates"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/36",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "quote": "Mixtures of oxides prepared as such do not come with- in the scope of the invention.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1878390a/claim/carbonate-route-more-effective",
+      "target": "ex:msyn/us1878390a/catalyst/zn-cr-oxides-known"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/37",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/4",
+            "quote": "According to this invention zinc carbonate 40 may be mixed with chromium carbonate, or the carbonates may be coprecipitated.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1878390a/claim/preferred-preparation",
+      "target": "ex:msyn/us1878390a/catalyst/zn-cr-oxide-from-carbonates"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/38",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/6",
+            "quote": "In this preparation the exact composition 70 of the precipitate as regards the basicity of __ the carbonates depends upon many factors, such as concentration of solutions, tempera- ture and amount of soda. ash added.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1878390a/claim/basicity-depends-on-conditions",
+      "target": "ex:msyn/us1878390a/preparation/example-1"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/39",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1878390a/p2/1",
+            "quote": "Catalysts prepared according to this in- vention are capable of yielding direct meth- anol of a high degree of purity.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1878390a/claim/high-purity-methanol",
+      "target": "ex:msyn/us1878390a/catalyst/zn-cr-oxide-from-carbonates"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/4",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "OCR of a list of basic chromium carbonate formulas; garbled",
+            "passage": "us1878390a/p1/3",
+            "quote": "basic chro- -mium carbonates such as 4Cr,Q0;.CO.,H.O; 2Cr.0;.CO,.6H,0; 10Cr,0;7CO,.8H.0 5 Cro- O,.CO..4H.0 and Cr.0;.2CO, may supply the chromium part",
+            "source": "ex:msyn/source/us1878390a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/1",
+            "quote": "which includes the step of heating a mixture containing zinc and chro- 15 mium in the form of carbonates.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1878390a/catalyst/zn-cr-oxide-from-carbonates",
+      "target": "ex:msyn/us1878390a/species/basic-chromium-carbonates"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/40",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1878390a/p2/1",
+            "quote": "Catalysts prepared according to this in- vention are capable of yielding direct meth- anol of a high degree of purity.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1878390a/claim/high-purity-methanol",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/41",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1878390a/p2/1",
+            "quote": "If alkali salts are allowed to remain in the catalysts, or 10 if separate additions of such are made, they become suitable for the production of higher alcohol.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1878390a/claim/alkali-higher-alcohol",
+      "target": "ex:msyn/us1878390a/catalyst/zn-cr-oxide-from-carbonates"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/42",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1878390a/p2/1",
+            "quote": "If alkali salts are allowed to remain in the catalysts, or 10 if separate additions of such are made, they become suitable for the production of higher alcohol.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1878390a/claim/alkali-higher-alcohol",
+      "target": "ex:msyn/us1878390a/reaction/co-hydrogenation-to-higher-alcohol"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/43",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1878390a/p2/1",
+            "quote": "When, through poisoning, these catalysts, become less efficient, they may be - regenerated either by heating to 800-400° C. 15 ina current of air or oxygen, or by dissolving up in sulphuric acid and reprecipitating the complex carbonates with soda ash.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1878390a/claim/regeneration",
+      "target": "ex:msyn/us1878390a/treatment/regeneration"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/44",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1878390a/p2/1",
+            "quote": "When, through poisoning, these catalysts, become less efficient, they may be - regenerated either by heating to 800-400° C. 15 ina current of air or oxygen, or by dissolving up in sulphuric acid and reprecipitating the complex carbonates with soda ash.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1878390a/claim/regeneration",
+      "target": "ex:msyn/us1878390a/catalyst/zn-cr-oxide-from-carbonates"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/45",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/7",
+            "quote": "This method of preparation has the advantage that the free energy of the re- actants is made to manifest itself as useful electrical energy instead of as heat.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1878390a/claim/example-2-energy",
+      "target": "ex:msyn/us1878390a/preparation/example-2"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/46",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "quote": "1. Method of preparing a catalyst contain- 90 Ing zinc and chromium oxides for the pro- duction of methanol and other oxygenated organic compounds which comprises heatin to decomposition a mixture of zinc an chromium carbonates.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1878390a/claim/patent-claim-1",
+      "target": "ex:msyn/us1878390a/catalyst/zn-cr-oxide-from-carbonates"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/47",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "quote": "1. Method of preparing a catalyst contain- 90 Ing zinc and chromium oxides for the pro- duction of methanol and other oxygenated organic compounds which comprises heatin to decomposition a mixture of zinc an chromium carbonates.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1878390a/claim/patent-claim-1",
+      "target": "ex:msyn/us1878390a/treatment/heating-to-decomposition"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/48",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1878390a/p2/2",
+            "quote": "2. Method of making catalysts containing zinc and chromium oxides which includes the step of heating to decomposition a composi- tion containing zinc and chromium carbon- ates obtained by co-precipitating the mixed go carbonates from solution.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1878390a/claim/patent-claim-2",
+      "target": "ex:msyn/us1878390a/catalyst/zn-cr-oxide-from-carbonates"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/49",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1878390a/p2/2",
+            "quote": "2. Method of making catalysts containing zinc and chromium oxides which includes the step of heating to decomposition a composi- tion containing zinc and chromium carbon- ates obtained by co-precipitating the mixed go carbonates from solution.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1878390a/claim/patent-claim-2",
+      "target": "ex:msyn/us1878390a/treatment/heating-to-decomposition"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/5",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1878390a/p2/1",
+            "quote": "Catalysts prepared according to this in- vention are capable of yielding direct meth- anol of a high degree of purity.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1878390a/catalyst/zn-cr-oxide-from-carbonates",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/50",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'8.' = claim '3.'; 'zine' = 'zinc'",
+            "passage": "us1878390a/p2/2",
+            "quote": "8. Catalyst containing zine and chromium | oxides for the production of oxygenated or- ganic compounds obtained by heating to de- composition a mixture of zinc and chromium $5 carbonates.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1878390a/claim/patent-claim-3",
+      "target": "ex:msyn/us1878390a/catalyst/zn-cr-oxide-from-carbonates"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/51",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'8.' = claim '3.'; 'zine' = 'zinc'",
+            "passage": "us1878390a/p2/2",
+            "quote": "8. Catalyst containing zine and chromium | oxides for the production of oxygenated or- ganic compounds obtained by heating to de- composition a mixture of zinc and chromium $5 carbonates.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1878390a/claim/patent-claim-3",
+      "target": "ex:msyn/us1878390a/treatment/heating-to-decomposition"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/6",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/1",
+            "quote": "Catalysts comprising 5 zinc oxide or mixtures of zinc and chromium oxides are already known in this art,",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1878390a/catalyst/zn-cr-oxides-known",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/7",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/1",
+            "quote": "Catalysts comprising 5 zinc oxide or mixtures of zinc and chromium oxides are already known in this art,",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1878390a/catalyst/zn-cr-oxides-known",
+      "target": "ex:msyn/us1878390a/species/chromium-oxides"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/8",
+      "type": "COMPARED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/1",
+            "quote": "have found that such catalysts are particu- larly effective when they are prepared in a special way. by heating mixtures containing 10 combined carbon dioxide 1. e. basic carbon- ates.",
+            "source": "ex:msyn/source/us1878390a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "quote": "Mixtures of oxides prepared as such do not come with- in the scope of the invention.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1878390a/catalyst/zn-cr-oxide-from-carbonates",
+      "target": "ex:msyn/us1878390a/catalyst/zn-cr-oxides-known"
+    },
+    {
+      "id": "ex:msyn/us1878390a/link/9",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1878390a/p1/5",
+            "quote": "When the reduction is finished a solution of soda ash (5-10 per cent excess) 1s added; the pre- cipitate thrown down consists of a mixture of 65 basic zinc and chromium carbonates, which is separated, washed well with hot water and dried.",
+            "source": "ex:msyn/source/us1878390a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1878390a/catalyst/example-1",
+      "target": "ex:msyn/us1878390a/species/basic-zinc-carbonates"
+    },
+    {
+      "id": "ex:msyn/us1878390a/preparation/example-1/reported-in/us1878390a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1878390a/preparation/example-1",
+      "target": "ex:msyn/source/us1878390a"
+    },
+    {
+      "id": "ex:msyn/us1878390a/preparation/example-2/reported-in/us1878390a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1878390a/preparation/example-2",
+      "target": "ex:msyn/source/us1878390a"
+    },
+    {
+      "id": "ex:msyn/us1878390a/preparation/example-3/reported-in/us1878390a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1878390a/preparation/example-3",
+      "target": "ex:msyn/source/us1878390a"
+    },
+    {
+      "id": "ex:msyn/us1878390a/reaction/co-hydrogenation-to-higher-alcohol/reported-in/us1878390a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1878390a/reaction/co-hydrogenation-to-higher-alcohol",
+      "target": "ex:msyn/source/us1878390a"
+    },
+    {
+      "id": "ex:msyn/us1878390a/sample/example-1/reported-in/us1878390a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1878390a/sample/example-1",
+      "target": "ex:msyn/source/us1878390a"
+    },
+    {
+      "id": "ex:msyn/us1878390a/sample/example-2/reported-in/us1878390a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1878390a/sample/example-2",
+      "target": "ex:msyn/source/us1878390a"
+    },
+    {
+      "id": "ex:msyn/us1878390a/sample/example-3/reported-in/us1878390a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1878390a/sample/example-3",
+      "target": "ex:msyn/source/us1878390a"
+    },
+    {
+      "id": "ex:msyn/us1878390a/species/basic-chrome-liquor/reported-in/us1878390a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1878390a/species/basic-chrome-liquor",
+      "target": "ex:msyn/source/us1878390a"
+    },
+    {
+      "id": "ex:msyn/us1878390a/species/basic-chromium-carbonates/reported-in/us1878390a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1878390a/species/basic-chromium-carbonates",
+      "target": "ex:msyn/source/us1878390a"
+    },
+    {
+      "id": "ex:msyn/us1878390a/species/basic-zinc-carbonates/reported-in/us1878390a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1878390a/species/basic-zinc-carbonates",
+      "target": "ex:msyn/source/us1878390a"
+    },
+    {
+      "id": "ex:msyn/us1878390a/species/chromium-oxides/reported-in/us1878390a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1878390a/species/chromium-oxides",
+      "target": "ex:msyn/source/us1878390a"
+    },
+    {
+      "id": "ex:msyn/us1878390a/species/soda-ash/reported-in/us1878390a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1878390a/species/soda-ash",
+      "target": "ex:msyn/source/us1878390a"
+    },
+    {
+      "id": "ex:msyn/us1878390a/treatment/heating-to-decomposition/reported-in/us1878390a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1878390a/treatment/heating-to-decomposition",
+      "target": "ex:msyn/source/us1878390a"
+    },
+    {
+      "id": "ex:msyn/us1878390a/treatment/regeneration/reported-in/us1878390a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1878390a/treatment/regeneration",
+      "target": "ex:msyn/source/us1878390a"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/us1878390a"
+}

@@ -1,0 +1,4360 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/analysis/combined-equilibrium-180atm-300",
+      "label": "Analysis",
+      "props": {
+        "name": "simultaneous methanol and ether equilibria, 180 atm, 300 °C",
+        "analysis_kind": "equilibrium",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "quote": "Similarly at 300° C. the two ratios would be, respectively, about 20:80 and 20:80 (equivalent to a molecular ratio",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50232a005/p2/4",
+            "quote": "of 1:2).",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "pressure": {
+          "status": "present",
+          "as_reported": "180 atmospheres reactant pres- sure",
+          "note": "the 300 °C case is introduced as 'similarly'; the pressure is taken from the preceding sentence",
+          "unit": "atm",
+          "value": 180
+        },
+        "results": {
+          "ch3oh_to_ch3och3_ratio": {
+            "status": "present",
+            "as_reported": "20:80 (equivalent to a molecular ratio ... of 1:2)",
+            "text_value": "20:80 (molecular ratio 1:2)"
+          },
+          "co_to_ch3oh_ratio": {
+            "status": "present",
+            "as_reported": "about 20:80",
+            "qualifier": "approximate",
+            "text_value": "about 20:80"
+          }
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "300° C.",
+          "unit": "°C",
+          "value": 300
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/analysis/combined-equilibrium-180atm-350",
+      "label": "Analysis",
+      "props": {
+        "name": "simultaneous methanol and ether equilibria, 180 atm, 350 °C",
+        "analysis_kind": "equilibrium",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50232a005/p2/3",
+            "quote": "For example, in reaction 2, at 180 atmospheres reactant pres- sure and 350° C., and at equilibrium, the ratio of CO to CH3OH (calculated to CO) is about 1:1, whereas in reaction 1, occur- ring at the same time and assuming equilibrium according to McKee and Burke, the ratio of CH3OH to CH3OCH3 (calcu- lated to CH3OH equivalents) is 22:78.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "pressure": {
+          "status": "present",
+          "as_reported": "180 atmospheres reactant pres- sure",
+          "unit": "atm",
+          "value": 180
+        },
+        "results": {
+          "ch3oh_to_ch3och3_ratio": {
+            "status": "present",
+            "as_reported": "22:78",
+            "note": "calculated to CH3OH equivalents, assuming equilibrium of reaction 1 according to McKee and Burke",
+            "text_value": "22:78"
+          },
+          "co_to_ch3oh_ratio": {
+            "status": "present",
+            "as_reported": "about 1:1",
+            "note": "ratio of CO to CH3OH (calculated to CO) at equilibrium of reaction 2",
+            "qualifier": "approximate",
+            "text_value": "about 1:1"
+          }
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "350° C.",
+          "unit": "°C",
+          "value": 350
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/analysis/equilibrium-1atm-300-assumed-kp",
+      "label": "Analysis",
+      "props": {
+        "name": "methanol and ether equilibria at atmospheric pressure, 300 °C, assumed Kp",
+        "analysis_kind": "equilibrium",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50232a005/p2/6",
+            "quote": "If, in the absence of established equilib- rium values, we assume for the sake of discussion that Kp = at 300° C. = 60.6 X 10-t, then the ratio of CO to CH3OH (as CO) at 300° C. is 99.973 to 0.027;",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2, right column",
+            "reading": "vision_ocr",
+            "region": [
+              0.48,
+              0.345,
+              0.94,
+              0.395
+            ],
+            "second_reading": "rium values, we assume for the sake of discussion that K_p = CH₃OH/(CO × H₂²) at 300° C. = 60.6 × 10⁻⁵, then the ratio of CO to CH₃OH (as CO) at 300° C. is 99.973 to 0.027; and as",
+            "source": "ex:msyn/source/10.1021-ie50232a005",
+            "transcription": "Kp = CH3OH / (CO × H2²) at 300° C. = 60.6 × 10⁻⁵, then the ratio of CO to CH3OH (as CO) at 300° C. is 99.973 to 0.027"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50232a005/p2/7",
+            "quote": "and as before the ratio of CHsOH, as such, to the methanol that has been converted to ether is, at equilibrium, 20:80 or 1:4.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50232a005/p2/6",
+            "quote": "The possibilities of ether formation at atmospheric pressure and very slow space velocities, and its influence in the de- termination of the methanol-water gas equilibrium are inter- esting to consider.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "note": "hypothetical calculation made 'in the absence of established equilibrium values'",
+        "pressure": {
+          "status": "present",
+          "as_reported": "at atmospheric pressure",
+          "note": "printed as atmospheric pressure; recorded as 1 atm",
+          "qualifier": "approximate",
+          "unit": "atm",
+          "value": 1
+        },
+        "results": {
+          "assumed_kp_methanol": {
+            "status": "present",
+            "as_reported": "Kp = CH3OH/(CO × H2²) at 300° C. = 60.6 × 10⁻⁵",
+            "note": "an assumed value 'for the sake of discussion'; the Kp expression CH3OH/(CO × H2²) and the exponent -5 are read from the page image (the text layer prints '60.6 X 10-t'); unit not printed",
+            "unit": "not stated",
+            "value": 0.000606
+          },
+          "ch3oh_to_ether_converted_ratio": {
+            "status": "present",
+            "as_reported": "20:80 or 1:4",
+            "text_value": "20:80 or 1:4"
+          },
+          "co_to_ch3oh_ratio": {
+            "status": "present",
+            "as_reported": "99.973 to 0.027",
+            "note": "CO to CH3OH (as CO)",
+            "text_value": "99.973 to 0.027"
+          }
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "300° C.",
+          "unit": "°C",
+          "value": 300
+        },
+        "verdict": "the influence of ether formation on the CO/methanol ratio measuring the equilibrium is unimportant"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/catalyst/normal-zinc-chromate",
+      "label": "Catalyst",
+      "props": {
+        "name": "normal zinc chromate",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/6",
+            "quote": "The production of methanol from a 2:1 hydrogen- carbon monoxide mixture at 180 atmospheres pressure has been studied between 300° and 400° C. with normal zinc chromate as the catalyst.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/5",
+            "quote": "The catalyst was prepared as previously described,2 and the amount used was 250 cc. (248 grams).",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "generality": "particular",
+        "note": "prepared as described in the authors' earlier paper (Brown and Galloway, 1928); the preparation is not repeated here"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/characterization/ether-identification",
+      "label": "Characterization",
+      "props": {
+        "name": "identification of dimethyl ether in the gases released from the synthetic methanol",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50232a005/p3/2",
+            "quote": "These gases were sampled after being passed through a collecting tube cooled to —80° C., and then through concentrated sulfuric acid.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50232a005/p3/2",
+            "quote": "In the tube a liquid was condensed, which proved to be largely dimethyl ether.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50232a005/p3/2",
+            "quote": "The ether that was collected in sulfuric acid had the characteristic odor and the proper boiling point of dimethyl ether.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50232a005/p3/3",
+            "quote": "was free from unsatu- rated hydrocarbons (before the sulfuric acid absorption), and boiled at —23.5° C., which excluded the presence of any appreciable amount of saturated hydrocarbons.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50232a005/p3/3",
+            "quote": "The perfect conformance of these characteristics with those of dimethyl ether fixed its identity fully.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 3, Table II",
+            "passage": "10.1021-ie50232a005/p3/5",
+            "quote": "Table II—Experimental Data on Identification of Methyl Ether",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 3, Table II",
+            "passage": "10.1021-ie50232a005/p3/5",
+            "quote": "25.3 .... 1104.6 740",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 3, Table II",
+            "passage": "10.1021-ie50232a005/p3/5",
+            "quote": "-79.0 ____ 2.530",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 3, Table II",
+            "passage": "10.1021-ie50232a005/p3/5",
+            "quote": "25.18 ____ 1104.7 739.2 +",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "experiment_status": "completed",
+        "results": {
+          "agreement_with_ict": {
+            "status": "present",
+            "as_reported": "better than 3 parts in 1000",
+            "bound": "upper",
+            "unit": "parts in 1000",
+            "value": 3
+          },
+          "boiling_point": {
+            "status": "present",
+            "as_reported": "boiled at —23.5° C.",
+            "note": "'noted in each of two chargings of gas to be about —23.5° C.'",
+            "qualifier": "approximate",
+            "unit": "°C",
+            "value": -23.5
+          },
+          "gas_density_stp": {
+            "status": "present",
+            "as_reported": "2.063 grams per liter at 0° C. and 760 mm.",
+            "note": "International Critical Tables value 2.0576",
+            "unit": "g/L",
+            "value": 2.063
+          },
+          "gas_volume_stp": {
+            "status": "present",
+            "as_reported": "986.8 cc. at 0° C. and 760 mm.",
+            "unit": "cc",
+            "value": 986.8
+          },
+          "l0": {
+            "status": "present",
+            "as_reported": "2.1155 for L0 (when 1 + X = 1.0254)",
+            "note": "International Critical Tables value 2.1098",
+            "unit": "not stated",
+            "value": 2.1155
+          },
+          "liquid_mass_if_pure_ether": {
+            "status": "present",
+            "as_reported": "2.036 — grams",
+            "unit": "g",
+            "value": 2.036
+          },
+          "liquid_volume_at_minus_23_65c": {
+            "status": "present",
+            "as_reported": "2.812 cc.",
+            "note": "read from Figure 3 (plot of Table II)",
+            "unit": "cc",
+            "value": 2.812
+          },
+          "liquid_volume_reading_accuracy": {
+            "status": "present",
+            "as_reported": "± 0.001 cc.",
+            "note": "between 2.5 and 3.0 cc",
+            "unit": "cc",
+            "value": 0.001
+          },
+          "mass_from_gas_volume": {
+            "status": "present",
+            "as_reported": "2.0304grams (or 2.805- cc.at -23.67° C.)",
+            "unit": "g",
+            "value": 2.0304
+          },
+          "molecular_weight": {
+            "status": "present",
+            "as_reported": "a mol weight of 46.17",
+            "note": "International Critical Tables value 46.046",
+            "unit": "not stated",
+            "value": 46.17
+          },
+          "specific_gravity_at_minus_23_65c": {
+            "status": "present",
+            "as_reported": "0.7240 at —23.65° C.",
+            "note": "extrapolated from the data of Cardoso and Coppola (cited)",
+            "unit": "1",
+            "value": 0.724
+          },
+          "table2_gas_25_2c_b": {
+            "status": "present",
+            "as_reported": "25.2 ____ 1103.4 740",
+            "note": "Table II volume at 25.2 °C (corrected temperature); barometric pressure 740 mm",
+            "unit": "cc",
+            "value": 1103.4
+          },
+          "table2_gas_25_3c_a": {
+            "status": "present",
+            "as_reported": "25.3 .... 1104.6 740",
+            "note": "Table II volume at 25.3 °C (corrected temperature); barometric pressure 740 mm",
+            "unit": "cc",
+            "value": 1104.6
+          },
+          "table2_gas_final_25_18c": {
+            "status": "present",
+            "as_reported": "25.18 ____ 1104.7 739.2 +",
+            "note": "Table II volume at 25.18 °C (corrected temperature); barometric pressure 739.2 mm",
+            "unit": "cc",
+            "value": 1104.7
+          },
+          "table2_gas_final_25_20c": {
+            "status": "present",
+            "as_reported": "25.20 ____ 1105.1 739.2 +",
+            "note": "Table II volume at 25.2 °C (corrected temperature); barometric pressure 739.2 mm",
+            "unit": "cc",
+            "value": 1105.1
+          },
+          "table2_liquid_minus23_0c": {
+            "status": "present",
+            "as_reported": "-23.0 ____ 2.814",
+            "note": "Table II volume at -23.0 °C (corrected temperature)",
+            "unit": "cc",
+            "value": 2.814
+          },
+          "table2_liquid_minus24_0c": {
+            "status": "present",
+            "as_reported": "-24.0 ____ 2.810",
+            "note": "Table II volume at -24.0 °C (corrected temperature)",
+            "unit": "cc",
+            "value": 2.81
+          },
+          "table2_liquid_minus25_0c": {
+            "status": "present",
+            "as_reported": "-25.0 .... 2.805",
+            "note": "Table II volume at -25.0 °C (corrected temperature)",
+            "unit": "cc",
+            "value": 2.805
+          },
+          "table2_liquid_minus26_0c": {
+            "status": "present",
+            "as_reported": "-26.0 ____ 2.801",
+            "note": "Table II volume at -26.0 °C (corrected temperature)",
+            "unit": "cc",
+            "value": 2.801
+          },
+          "table2_liquid_minus28_0c": {
+            "status": "present",
+            "as_reported": "-28.0 ____ 2.790",
+            "note": "Table II volume at -28.0 °C (corrected temperature)",
+            "unit": "cc",
+            "value": 2.79
+          },
+          "table2_liquid_minus30_0c": {
+            "status": "present",
+            "as_reported": "-30.0 ____ 2.780",
+            "note": "Table II volume at -30.0 °C (corrected temperature)",
+            "unit": "cc",
+            "value": 2.78
+          },
+          "table2_liquid_minus32_0c": {
+            "status": "present",
+            "as_reported": "-32.0 ____ 2.768",
+            "note": "Table II volume at -32.0 °C (corrected temperature)",
+            "unit": "cc",
+            "value": 2.768
+          },
+          "table2_liquid_minus34_0c": {
+            "status": "present",
+            "as_reported": "-34.0 ____ 2.759",
+            "note": "Table II volume at -34.0 °C (corrected temperature)",
+            "unit": "cc",
+            "value": 2.759
+          },
+          "table2_liquid_minus38_0c": {
+            "status": "present",
+            "as_reported": "-38.0 ____ 2.734",
+            "note": "Table II volume at -38.0 °C (corrected temperature)",
+            "unit": "cc",
+            "value": 2.734
+          },
+          "table2_liquid_minus39_0c": {
+            "status": "present",
+            "as_reported": "-39.0 ____ 2.730",
+            "note": "Table II volume at -39.0 °C (corrected temperature)",
+            "unit": "cc",
+            "value": 2.73
+          },
+          "table2_liquid_minus52_0c": {
+            "status": "present",
+            "as_reported": "-52.0 ____ 2.664",
+            "note": "Table II volume at -52.0 °C (corrected temperature)",
+            "unit": "cc",
+            "value": 2.664
+          },
+          "table2_liquid_minus53_0c": {
+            "status": "present",
+            "as_reported": "-53.0 ____ 2.659",
+            "note": "Table II volume at -53.0 °C (corrected temperature)",
+            "unit": "cc",
+            "value": 2.659
+          },
+          "table2_liquid_minus53_8c": {
+            "status": "present",
+            "as_reported": "-53.8 ____ 2.654",
+            "note": "Table II volume at -53.8 °C (corrected temperature)",
+            "unit": "cc",
+            "value": 2.654
+          },
+          "table2_liquid_minus55_0c": {
+            "status": "present",
+            "as_reported": "-55.0 ____ 2.644",
+            "note": "Table II volume at -55.0 °C (corrected temperature)",
+            "unit": "cc",
+            "value": 2.644
+          },
+          "table2_liquid_minus79_0c_a": {
+            "status": "present",
+            "as_reported": "-79.0 ____ 2.530",
+            "note": "Table II volume at -79.0 °C (corrected temperature)",
+            "unit": "cc",
+            "value": 2.53
+          },
+          "table2_liquid_minus79_0c_b": {
+            "status": "present",
+            "as_reported": "-79.0 ____ 2.533",
+            "note": "Table II volume at -79.0 °C (corrected temperature)",
+            "unit": "cc",
+            "value": 2.533
+          },
+          "unabsorbed_gas": {
+            "status": "present",
+            "as_reported": "principally car- bon dioxide and contained a little air",
+            "text_value": "principally carbon dioxide with a little air"
+          }
+        },
+        "technique": "condensation at -80 °C, fractionation, absorption in sulfuric acid, boiling point, liquid volume vs temperature and gas/liquid volume relation (molecular weight, density)"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/claim/contact-time-affects-ether",
+      "label": "Claim",
+      "props": {
+        "name": "ether formation greatly affected by time of contact",
+        "claim_kind": "causal",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ie50232a005/p4/3",
+            "quote": "The influence of time of contact is evident from the data of Table I for 350° C.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ie50232a005/p4/3",
+            "quote": "At space velocities of 3000 and 7500 the ether found was, respectively, 1.42 and 0.71 grams per pass.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ie50232a005/p4/4",
+            "quote": "Similarly, at 375° C. the production was 3.16 and 1.47 grams for the same respective space velocities.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50232a005/p2/4",
+            "quote": "the latter reaction in the case of zinc chro-",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50232a005/p2/5",
+            "quote": "mate is greatly affected by the time of contact.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50232a005/p2/5",
+            "quote": "In the pres- sure synthesis of methanol the space velocities are relatively high and the time of contact short, thus favoring the methanol reaction and limiting the formation of ether.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "inference_type": "interventional",
+        "statement": "Ether formation over zinc chromate is greatly affected by time of contact: at 350 °C the ether found was 1.42 and 0.71 grams per pass at space velocities 3000 and 7500, and at 375 °C 3.16 and 1.47 grams; the high space velocities of the pressure synthesis favor the methanol reaction and limit ether formation."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/claim/conversion-maximum-375",
+      "label": "Claim",
+      "props": {
+        "name": "CO conversion to methanol peaks near 375 °C at SV 3000",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/7",
+            "quote": "At a space velocity of 3000 the conversion of the carbon monoxide to methanol was found to increase from about 7 per cent to a maxi- mum of about 30 per cent at 375 ° C. and then to decline to 20 per cent at 400° C.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "inference_type": "interventional",
+        "statement": "At a space velocity of 3000 the conversion of carbon monoxide to methanol over normal zinc chromate at 180 atmospheres increases from about 7 per cent to a maximum of about 30 per cent at 375 °C and then declines to 20 per cent at 400 °C."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/claim/ether-by-product-increases-with-temperature",
+      "label": "Claim",
+      "props": {
+        "name": "dimethyl ether by-product increasing with temperature",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/7",
+            "quote": "Dimethyl ether has been shown to be a by-product of the reaction, being formed from the methanol in amounts which increase with temperature between 300° and 400° C.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "quote": "The data on the dimethyl ether produced between 300° and 400° C. as a by-product of the methanol synthesis (with nor- mal zinc chromate as the catalyst) are given in Table I.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "inference_type": "interventional",
+        "statement": "Dimethyl ether is a by-product of methanol synthesis over normal zinc chromate, formed from the methanol in amounts that increase with temperature between 300 and 400 °C."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/claim/ether-correction-small",
+      "label": "Claim",
+      "props": {
+        "name": "ether formation has small effect on conversions",
+        "claim_kind": "data_quality",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ie50232a005/p4/3",
+            "quote": "The extent to which this ether formation affects the values for percentage conversions of carbon monoxide to methanol in Table I is not very great.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ie50232a005/p4/3",
+            "quote": "Under the experimental condi- tions employed, the formation of ether is slow compared with the methanol reaction, and if the carbon monoxide converted ultimately to ether is subtracted from the carbon monoxide which enters the catalyst chamber, the correction is about +0.6 per cent for the conversions in runs F and H and negli- gible in the others.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "inference_type": "interventional",
+        "statement": "Under the experimental conditions the formation of ether is slow compared with the methanol reaction; subtracting the CO converted to ether from the entering CO corrects the conversions by about +0.6 per cent in runs F and H and negligibly in the others."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/claim/ether-identified",
+      "label": "Claim",
+      "props": {
+        "name": "gas identified as dimethyl ether",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50232a005/p3/2",
+            "quote": "In the tube a liquid was condensed, which proved to be largely dimethyl ether.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50232a005/p3/3",
+            "quote": "The perfect conformance of these characteristics with those of dimethyl ether fixed its identity fully.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ie50232a005/p4/1",
+            "quote": "The agreement is better than 3 parts in 1000, which represents approximately the accuracy of the apparatus and procedure, and it completes the identification of the ma- terial as dimethyl ether.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "inference_type": "observational",
+        "statement": "The liquid condensed at -80 °C from the gases released by the synthetic methanol is largely dimethyl ether; its odor, boiling point (about -23.5 °C), solubility in sulfuric acid, density and molecular weight (46.17 vs 46.046) agree with dimethyl ether within 3 parts in 1000, fixing its identity."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/claim/ether-negligible-for-1atm-equilibrium",
+      "label": "Claim",
+      "props": {
+        "name": "ether formation unimportant for equilibrium determination at 1 atm",
+        "claim_kind": "conclusion",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50232a005/p2/6",
+            "quote": "If, in the absence of established equilib- rium values, we assume for the sake of discussion that Kp = at 300° C. = 60.6 X 10-t, then the ratio of CO to CH3OH (as CO) at 300° C. is 99.973 to 0.027;",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50232a005/p2/7",
+            "quote": "The amount of ether that could be formed, although large with re- spect to the methanol, is yet so small that its influence on the ratio of carbon monoxide to methanol which measures the equilibrium is unimportant.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "inference_type": "theoretical",
+        "statement": "At atmospheric pressure and 300 °C, with an assumed methanol equilibrium constant, the ether that could form, although large with respect to the methanol, is so small that its influence on the CO/methanol ratio measuring the equilibrium is unimportant."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/claim/indirect-evidence-of-ether",
+      "label": "Claim",
+      "props": {
+        "name": "indirect evidence of ether formation",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50232a005/p2/7",
+            "quote": "In addition to these theoretical considerations, there were several indirect evidences of ether formation.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50232a005/p2/7",
+            "quote": "One was the apparently large amount of gas set free by the methanol when it was drawn from the receiver under pressure into a receiver at room temperature and 1 atmosphere.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "quote": "In those samples produced at 400° C. there was, in addition to a higher percentage of water, a corresponding increase in the amount of the crude methanol, which distilled slightly under the true boiling point of methanol.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50232a005/p2/8",
+            "quote": "A further indication was the fact that in the carbon monoxide balances there was an apparent",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50232a005/p3/1",
+            "quote": "loss on the effluent side of the catalyst or among the products plus the residual carbon monoxide.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "inference_type": "observational",
+        "statement": "Indirect evidences of ether formation were the large amount of gas set free when the methanol was let down from pressure, the distillation curves of methanol made at 400 °C (more water and more crude methanol distilling slightly below the boiling point of methanol, and volume loss), and an apparent carbon monoxide loss in the balances."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/claim/low-sv-conversion-above-estimate",
+      "label": "Claim",
+      "props": {
+        "name": "conversions at low space velocity above the estimated curve",
+        "claim_kind": "comparison",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/6",
+            "quote": "In Figure 1 the data from columns 2 and 5 of Table I have been plotted on the figure (No. 10) employed in the earlier paper2 to show the three values at 400° C. and a curve of estimated yields obtained by the Nernst approximation for- mula used empirically.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/6",
+            "quote": "It is evident from these curves that the conversions, at low space",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/7",
+            "quote": "velocities and with side reac- tions excluded, would be greater than the “estimated” curve indicates.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "inference_type": "interventional",
+        "statement": "The experimental conversion curves for space velocities 3000 and 7500 show that at low space velocities and with side reactions excluded the conversions would be greater than the 'estimated' curve (Nernst approximation formula used empirically) indicates."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/claim/methanol-fast-ether-slow",
+      "label": "Claim",
+      "props": {
+        "name": "methanol catalysts much less active for ether formation",
+        "claim_kind": "comparison",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50232a005/p2/4",
+            "quote": "In both cases the methanol catalysts (oxides) are highly active in the methanol reaction, which is rapid and much less active under the same conditions (as the writers’ experimental data on zinc chromate indicate) with respect to ether formation (re- action 1).",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50232a005/p2/3",
+            "quote": "This represents the limit, and the actual conversion depends on the activity of the methanol catalyst employed and the time of contact.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "inference_type": "interventional",
+        "statement": "The methanol catalysts (oxides) are highly active in the rapid methanol reaction and much less active under the same conditions for ether formation, as the data on zinc chromate indicate; the equilibrium ether conversion (about 78-80 per cent of the methanol) is only a limit, the actual conversion depending on catalyst activity and time of contact."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/claim/residual-gas-losses-negligible",
+      "label": "Claim",
+      "props": {
+        "name": "methanol and ether lost in residual gas negligible",
+        "claim_kind": "data_quality",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50232a005/p3/1",
+            "quote": "The first test showed that the amounts of methanol vapors and methyl ether being lost in the residual",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50232a005/p3/1",
+            "quote": "gas under the usual procedure were negligible.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "inference_type": "observational",
+        "statement": "The amounts of methanol vapor and methyl ether lost in the residual gas under the usual procedure were negligible."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/feed/h2-co-2-1",
+      "label": "Feed",
+      "props": {
+        "name": "hydrogen-carbon monoxide mixture, about 2:1",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/5",
+            "quote": "The initial gas contained on an average of 32+ per cent carbon monoxide and about twice that amount of hydro- gen.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/6",
+            "quote": "The production of methanol from a 2:1 hydrogen- carbon monoxide mixture at 180 atmospheres pressure has been studied between 300° and 400° C. with normal zinc chromate as the catalyst.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "note": "percentage basis not stated; other constituents not stated",
+        "ratios": {
+          "h2_co_ratio": {
+            "status": "present",
+            "as_reported": "a 2:1 hydrogen- carbon monoxide mixture",
+            "note": "also stated as 'about twice that amount of hydrogen'",
+            "unit": "1",
+            "value": 2
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/hypothesis/double-catalyst-enriched-gas",
+      "label": "Hypothesis",
+      "props": {
+        "name": "mixed or double catalyst for methanol and ether to enrich water gas",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50232a005/p2/5",
+            "quote": "However, with a mixed or a double catalyst to furnish high activity with respect to both reactions 1 and 2, the results should offer broad and interesting possibilities.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50232a005/p2/5",
+            "quote": "It would mean that water gas under pressure passed over such a cata- lyst or catalysts would issue—reduced in volume, to be sure— but with a materially enhanced heating value due to the ether present in it and containing a recoverable quantity of methanol.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "quote": "increasing the heating value of water gas by the catalytic forma- tion of dimethyl ether (which gasifies at —23.65° C.) seems to be á technical possibility.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "hypothesis_kind": "descriptive",
+        "hypothesis_status": "proposed",
+        "statement": "A mixed or double catalyst highly active for both methanol synthesis and ether formation would give from water gas under pressure a gas reduced in volume but of materially enhanced heating value owing to the ether, with recoverable methanol; increasing the heating value of water gas by catalytic dimethyl ether formation seems a technical possibility."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/hypothesis/oxides-dehydrate-methanol",
+      "label": "Hypothesis",
+      "props": {
+        "name": "chromic and zinc oxides function in dehydration; alumina fairly active",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50232a005/p2/1",
+            "quote": "In this dehydration, both chromic and zinc oxides might be expected to function to some degree; whereas aluminum oxide, if present, should be fairly active in the conversion of methanol to methyl ether.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "hypothesis_kind": "descriptive",
+        "hypothesis_status": "proposed",
+        "note": "argued from Sabatier's classification of oxides (cited)",
+        "statement": "In the dehydration of methanol both chromic and zinc oxides might be expected to function to some degree, whereas aluminium oxide, if present, should be fairly active in converting methanol to methyl ether."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/preparation/as-previously-described",
+      "label": "Preparation",
+      "props": {
+        "name": "preparation as previously described (reference 2)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/5",
+            "quote": "The catalyst was prepared as previously described,2 and the amount used was 250 cc. (248 grams).",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "method": "not described in this paper; 'prepared as previously described' (Brown and Galloway, Ind. Eng. Chem., 20, 960 (1928))",
+        "procedure_status": "completed"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/reactor/previously-described-apparatus",
+      "label": "Reactor",
+      "props": {
+        "name": "high-pressure apparatus previously described (reference 2)",
+        "description": "The apparatus and procedure of the authors' earlier paper; not described here.",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/5",
+            "quote": "Employing the apparatus and procedure previously de- scribed,2 the hourly production of methanol at temperatures between 300° and 400° C. and at 180 atmospheres average reactant pressure was determined for space velocities of 3000 and 7500.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "reactor_kind": "not_reported"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/sample/zinc-chromate-charge",
+      "label": "CatalystSample",
+      "props": {
+        "name": "normal zinc chromate charge, 250 cc (248 g)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/5",
+            "quote": "The catalyst was prepared as previously described,2 and the amount used was 250 cc. (248 grams).",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "note": "whether one charge served for all runs is not stated",
+        "preparation_status": "prepared",
+        "sample_kind": "reactor_charge"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/test/table1-run-a",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "methanol synthesis over normal zinc chromate, run A, 300 °C, SV 3000",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 2, Table I, run A",
+            "reading": "vision_ocr",
+            "region": [
+              0.06,
+              0.278,
+              0.48,
+              0.2865
+            ],
+            "source": "ex:msyn/source/10.1021-ie50232a005",
+            "transcription": "A 300 3000 27.6 7.0 ... .. ... ..."
+          },
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I",
+            "passage": "10.1021-ie50232a005/p2/1",
+            "quote": "Table I—Methanol and Ether Production with Normal Zinc Chromate",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/5",
+            "quote": "Employing the apparatus and procedure previously de- scribed,2 the hourly production of methanol at temperatures between 300° and 400° C. and at 180 atmospheres average reactant pressure was determined for space velocities of 3000 and 7500.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "manipulation": "interventional",
+        "note": "no ether data printed for this run (the dimethyl ether columns are printed '...')",
+        "pressure": {
+          "status": "present",
+          "as_reported": "180 atmospheres average reactant pressure",
+          "unit": "atm",
+          "value": 180
+        },
+        "production_rate": {
+          "status": "present",
+          "as_reported": "27.6 G./hr.",
+          "basis": "pure CH3OH",
+          "unit": "g/h",
+          "value": 27.6
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "3000",
+          "note": "unit not stated in the source",
+          "unit": "not stated",
+          "value": 3000
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "300",
+          "note": "'Av. Temp.' column of Table I",
+          "unit": "°C",
+          "value": 300
+        },
+        "test_kind": "activity",
+        "test_label": "Table I, run A",
+        "yield": {
+          "status": "present",
+          "as_reported": "7.0",
+          "basis": "conversion of CO to CH3OH per pass",
+          "unit": "%",
+          "value": 7.0
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/test/table1-run-b",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "methanol synthesis over normal zinc chromate, run B, 307 °C, SV 3000",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 2, Table I, run B",
+            "reading": "vision_ocr",
+            "region": [
+              0.06,
+              0.2855,
+              0.48,
+              0.294
+            ],
+            "source": "ex:msyn/source/10.1021-ie50232a005",
+            "transcription": "B 307 3000 29.7 9.1 1.0 1.65 0.7 1.0"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I",
+            "passage": "10.1021-ie50232a005/p2/1",
+            "quote": "Table I—Methanol and Ether Production with Normal Zinc Chromate",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/5",
+            "quote": "Employing the apparatus and procedure previously de- scribed,2 the hourly production of methanol at temperatures between 300° and 400° C. and at 180 atmospheres average reactant pressure was determined for space velocities of 3000 and 7500.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "manipulation": "interventional",
+        "note": "equivalent conversion printed '1.0' in the page image (the text layer reads 'i.o')",
+        "pressure": {
+          "status": "present",
+          "as_reported": "180 atmospheres average reactant pressure",
+          "unit": "atm",
+          "value": 180
+        },
+        "production_rate": {
+          "status": "present",
+          "as_reported": "29.7 G./hr.",
+          "basis": "pure CH3OH",
+          "unit": "g/h",
+          "value": 29.7
+        },
+        "results": {
+          "co_to_ether_equivalent_conversion_per_pass": {
+            "status": "present",
+            "as_reported": "1.0",
+            "note": "Table I, dimethyl ether column 'Conversion CO to ether per pass' (%)",
+            "unit": "%",
+            "value": 1.0
+          },
+          "dimethyl_ether_liquid_products_percent": {
+            "status": "present",
+            "as_reported": "1.65",
+            "note": "Table I, dimethyl ether column 'Liquid products' (%), header read from the page image",
+            "unit": "%",
+            "value": 1.65
+          },
+          "dimethyl_ether_total": {
+            "status": "present",
+            "as_reported": "1.0",
+            "note": "Table I, dimethyl ether column 'Total for run' (Grams)",
+            "unit": "g",
+            "value": 1.0
+          },
+          "equivalent_methanol_production_rate": {
+            "status": "present",
+            "as_reported": "0.7",
+            "note": "Table I, dimethyl ether columns, 'Equivalent methanol' (G./hr.): the column header read from the page image; earlier read as a dimethyl-ether rate from the garbled text layer",
+            "unit": "g/h",
+            "value": 0.7
+          }
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "3000",
+          "note": "unit not stated in the source",
+          "unit": "not stated",
+          "value": 3000
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "307",
+          "note": "'Av. Temp.' column of Table I",
+          "unit": "°C",
+          "value": 307
+        },
+        "test_kind": "activity",
+        "test_label": "Table I, run B",
+        "yield": {
+          "status": "present",
+          "as_reported": "9.1",
+          "basis": "conversion of CO to CH3OH per pass",
+          "unit": "%",
+          "value": 9.1
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/test/table1-run-c",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "methanol synthesis over normal zinc chromate, run C, 311 °C, SV 3000",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I, run C",
+            "passage": "10.1021-ie50232a005/p2/1",
+            "quote": "C 311 3000 38.1 10.9 1.9 1.95 1.1 1.2",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 2, Table I, run C",
+            "reading": "vision_ocr",
+            "region": [
+              0.06,
+              0.293,
+              0.48,
+              0.3015
+            ],
+            "source": "ex:msyn/source/10.1021-ie50232a005",
+            "transcription": "C 311 3000 38.1 10.9 1.9 1.95 1.1 1.2"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I",
+            "passage": "10.1021-ie50232a005/p2/1",
+            "quote": "Table I—Methanol and Ether Production with Normal Zinc Chromate",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/5",
+            "quote": "Employing the apparatus and procedure previously de- scribed,2 the hourly production of methanol at temperatures between 300° and 400° C. and at 180 atmospheres average reactant pressure was determined for space velocities of 3000 and 7500.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "manipulation": "interventional",
+        "pressure": {
+          "status": "present",
+          "as_reported": "180 atmospheres average reactant pressure",
+          "unit": "atm",
+          "value": 180
+        },
+        "production_rate": {
+          "status": "present",
+          "as_reported": "38.1 G./hr.",
+          "basis": "pure CH3OH",
+          "unit": "g/h",
+          "value": 38.1
+        },
+        "results": {
+          "co_to_ether_equivalent_conversion_per_pass": {
+            "status": "present",
+            "as_reported": "1.2",
+            "note": "Table I, dimethyl ether column 'Conversion CO to ether per pass' (%)",
+            "unit": "%",
+            "value": 1.2
+          },
+          "dimethyl_ether_liquid_products_percent": {
+            "status": "present",
+            "as_reported": "1.95",
+            "note": "Table I, dimethyl ether column 'Liquid products' (%), header read from the page image",
+            "unit": "%",
+            "value": 1.95
+          },
+          "dimethyl_ether_total": {
+            "status": "present",
+            "as_reported": "1.9",
+            "note": "Table I, dimethyl ether column 'Total for run' (Grams)",
+            "unit": "g",
+            "value": 1.9
+          },
+          "equivalent_methanol_production_rate": {
+            "status": "present",
+            "as_reported": "1.1",
+            "note": "Table I, dimethyl ether columns, 'Equivalent methanol' (G./hr.): the column header read from the page image; earlier read as a dimethyl-ether rate from the garbled text layer",
+            "unit": "g/h",
+            "value": 1.1
+          }
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "3000",
+          "note": "unit not stated in the source",
+          "unit": "not stated",
+          "value": 3000
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "311",
+          "note": "'Av. Temp.' column of Table I",
+          "unit": "°C",
+          "value": 311
+        },
+        "test_kind": "activity",
+        "test_label": "Table I, run C",
+        "yield": {
+          "status": "present",
+          "as_reported": "10.9",
+          "basis": "conversion of CO to CH3OH per pass",
+          "unit": "%",
+          "value": 10.9
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/test/table1-run-d",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "methanol synthesis over normal zinc chromate, run D, 350 °C, SV 3000",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I, run D",
+            "passage": "10.1021-ie50232a005/p2/1",
+            "quote": "D 350 3000 83.3 22.5 4.8 2.95 3.34 1.7",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 2, Table I, run D",
+            "reading": "vision_ocr",
+            "region": [
+              0.06,
+              0.3005,
+              0.48,
+              0.309
+            ],
+            "source": "ex:msyn/source/10.1021-ie50232a005",
+            "transcription": "D 350 3000 83.3 22.5 4.8 2.95 3.34 1.7"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I",
+            "passage": "10.1021-ie50232a005/p2/1",
+            "quote": "Table I—Methanol and Ether Production with Normal Zinc Chromate",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/5",
+            "quote": "Employing the apparatus and procedure previously de- scribed,2 the hourly production of methanol at temperatures between 300° and 400° C. and at 180 atmospheres average reactant pressure was determined for space velocities of 3000 and 7500.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ie50232a005/p4/3",
+            "quote": "At space velocities of 3000 and 7500 the ether found was, respectively, 1.42 and 0.71 grams per pass.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "manipulation": "interventional",
+        "pressure": {
+          "status": "present",
+          "as_reported": "180 atmospheres average reactant pressure",
+          "unit": "atm",
+          "value": 180
+        },
+        "production_rate": {
+          "status": "present",
+          "as_reported": "83.3 G./hr.",
+          "basis": "pure CH3OH",
+          "unit": "g/h",
+          "value": 83.3
+        },
+        "results": {
+          "co_to_ether_equivalent_conversion_per_pass": {
+            "status": "present",
+            "as_reported": "1.7",
+            "note": "Table I, dimethyl ether column 'Conversion CO to ether per pass' (%)",
+            "unit": "%",
+            "value": 1.7
+          },
+          "dimethyl_ether_liquid_products_percent": {
+            "status": "present",
+            "as_reported": "2.95",
+            "note": "Table I, dimethyl ether column 'Liquid products' (%), header read from the page image",
+            "unit": "%",
+            "value": 2.95
+          },
+          "dimethyl_ether_per_pass": {
+            "status": "present",
+            "as_reported": "1.42 grams per pass",
+            "unit": "g",
+            "value": 1.42
+          },
+          "dimethyl_ether_total": {
+            "status": "present",
+            "as_reported": "4.8",
+            "note": "Table I, dimethyl ether column 'Total for run' (Grams)",
+            "unit": "g",
+            "value": 4.8
+          },
+          "equivalent_methanol_production_rate": {
+            "status": "present",
+            "as_reported": "3.34",
+            "note": "Table I, dimethyl ether columns, 'Equivalent methanol' (G./hr.): the column header read from the page image; earlier read as a dimethyl-ether rate from the garbled text layer",
+            "unit": "g/h",
+            "value": 3.34
+          }
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "3000",
+          "note": "unit not stated in the source",
+          "unit": "not stated",
+          "value": 3000
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "350",
+          "note": "'Av. Temp.' column of Table I",
+          "unit": "°C",
+          "value": 350
+        },
+        "test_kind": "activity",
+        "test_label": "Table I, run D",
+        "yield": {
+          "status": "present",
+          "as_reported": "22.5",
+          "basis": "conversion of CO to CH3OH per pass",
+          "unit": "%",
+          "value": 22.5
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/test/table1-run-e",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "methanol synthesis over normal zinc chromate, run E, 350 °C, SV 7500",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 2, Table I, run E",
+            "reading": "vision_ocr",
+            "region": [
+              0.06,
+              0.308,
+              0.48,
+              0.3165
+            ],
+            "source": "ex:msyn/source/10.1021-ie50232a005",
+            "transcription": "E 350 7500 100.2 13.2 4.2+ 2.75 3.8 0.7"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I",
+            "passage": "10.1021-ie50232a005/p2/1",
+            "quote": "Table I—Methanol and Ether Production with Normal Zinc Chromate",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/5",
+            "quote": "Employing the apparatus and procedure previously de- scribed,2 the hourly production of methanol at temperatures between 300° and 400° C. and at 180 atmospheres average reactant pressure was determined for space velocities of 3000 and 7500.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ie50232a005/p4/3",
+            "quote": "At space velocities of 3000 and 7500 the ether found was, respectively, 1.42 and 0.71 grams per pass.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "manipulation": "interventional",
+        "note": "run letter printed 'E' in the page image (the text layer reads 'K'); ether total printed '4.2+'",
+        "pressure": {
+          "status": "present",
+          "as_reported": "180 atmospheres average reactant pressure",
+          "unit": "atm",
+          "value": 180
+        },
+        "production_rate": {
+          "status": "present",
+          "as_reported": "100.2 G./hr.",
+          "basis": "pure CH3OH",
+          "unit": "g/h",
+          "value": 100.2
+        },
+        "results": {
+          "co_to_ether_equivalent_conversion_per_pass": {
+            "status": "present",
+            "as_reported": "0.7",
+            "note": "Table I, dimethyl ether column 'Conversion CO to ether per pass' (%)",
+            "unit": "%",
+            "value": 0.7
+          },
+          "dimethyl_ether_liquid_products_percent": {
+            "status": "present",
+            "as_reported": "2.75",
+            "note": "Table I, dimethyl ether column 'Liquid products' (%), header read from the page image",
+            "unit": "%",
+            "value": 2.75
+          },
+          "dimethyl_ether_per_pass": {
+            "status": "present",
+            "as_reported": "0.71 grams per pass",
+            "unit": "g",
+            "value": 0.71
+          },
+          "dimethyl_ether_total": {
+            "status": "present",
+            "as_reported": "4.2+",
+            "note": "Table I, dimethyl ether column 'Total for run' (Grams)",
+            "unit": "g",
+            "value": 4.2
+          },
+          "equivalent_methanol_production_rate": {
+            "status": "present",
+            "as_reported": "3.8",
+            "note": "Table I, dimethyl ether columns, 'Equivalent methanol' (G./hr.): the column header read from the page image; earlier read as a dimethyl-ether rate from the garbled text layer",
+            "unit": "g/h",
+            "value": 3.8
+          }
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "7500",
+          "note": "unit not stated in the source",
+          "unit": "not stated",
+          "value": 7500
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "350",
+          "note": "'Av. Temp.' column of Table I",
+          "unit": "°C",
+          "value": 350
+        },
+        "test_kind": "activity",
+        "test_label": "Table I, run E",
+        "yield": {
+          "status": "present",
+          "as_reported": "13.2",
+          "basis": "conversion of CO to CH3OH per pass",
+          "unit": "%",
+          "value": 13.2
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/test/table1-run-f",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "methanol synthesis over normal zinc chromate, run F, 375 °C, SV 3000",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I, run F",
+            "passage": "10.1021-ie50232a005/p2/1",
+            "quote": "F 375 3000 95.6 28.94 8.0 5.45 7.4 3.3",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 2, Table I, run F",
+            "reading": "vision_ocr",
+            "region": [
+              0.06,
+              0.3155,
+              0.48,
+              0.324
+            ],
+            "source": "ex:msyn/source/10.1021-ie50232a005",
+            "transcription": "F 375 3000 95.6 28.94 8.0 5.45 7.4 3.3"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I",
+            "passage": "10.1021-ie50232a005/p2/1",
+            "quote": "Table I—Methanol and Ether Production with Normal Zinc Chromate",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/5",
+            "quote": "Employing the apparatus and procedure previously de- scribed,2 the hourly production of methanol at temperatures between 300° and 400° C. and at 180 atmospheres average reactant pressure was determined for space velocities of 3000 and 7500.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ie50232a005/p4/4",
+            "quote": "Similarly, at 375° C. the production was 3.16 and 1.47 grams for the same respective space velocities.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ie50232a005/p4/3",
+            "quote": "Under the experimental condi- tions employed, the formation of ether is slow compared with the methanol reaction, and if the carbon monoxide converted ultimately to ether is subtracted from the carbon monoxide which enters the catalyst chamber, the correction is about +0.6 per cent for the conversions in runs F and H and negli- gible in the others.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "manipulation": "interventional",
+        "pressure": {
+          "status": "present",
+          "as_reported": "180 atmospheres average reactant pressure",
+          "unit": "atm",
+          "value": 180
+        },
+        "production_rate": {
+          "status": "present",
+          "as_reported": "95.6 G./hr.",
+          "basis": "pure CH3OH",
+          "unit": "g/h",
+          "value": 95.6
+        },
+        "results": {
+          "co_to_ether_equivalent_conversion_per_pass": {
+            "status": "present",
+            "as_reported": "3.3",
+            "note": "Table I, dimethyl ether column 'Conversion CO to ether per pass' (%)",
+            "unit": "%",
+            "value": 3.3
+          },
+          "dimethyl_ether_liquid_products_percent": {
+            "status": "present",
+            "as_reported": "5.45",
+            "note": "Table I, dimethyl ether column 'Liquid products' (%), header read from the page image",
+            "unit": "%",
+            "value": 5.45
+          },
+          "dimethyl_ether_per_pass": {
+            "status": "present",
+            "as_reported": "3.16 grams",
+            "unit": "g",
+            "value": 3.16
+          },
+          "dimethyl_ether_total": {
+            "status": "present",
+            "as_reported": "8.0",
+            "note": "Table I, dimethyl ether column 'Total for run' (Grams)",
+            "unit": "g",
+            "value": 8.0
+          },
+          "equivalent_methanol_production_rate": {
+            "status": "present",
+            "as_reported": "7.4",
+            "note": "Table I, dimethyl ether columns, 'Equivalent methanol' (G./hr.): the column header read from the page image; earlier read as a dimethyl-ether rate from the garbled text layer",
+            "unit": "g/h",
+            "value": 7.4
+          },
+          "ether_correction_to_methanol_conversion": {
+            "status": "present",
+            "as_reported": "about +0.6 per cent",
+            "note": "correction to the CO-to-methanol conversion if the CO converted to ether is subtracted from the entering CO",
+            "qualifier": "approximate",
+            "unit": "%",
+            "value": 0.6
+          }
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "3000",
+          "note": "unit not stated in the source",
+          "unit": "not stated",
+          "value": 3000
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "375",
+          "note": "'Av. Temp.' column of Table I",
+          "unit": "°C",
+          "value": 375
+        },
+        "test_kind": "activity",
+        "test_label": "Table I, run F",
+        "yield": {
+          "status": "present",
+          "as_reported": "28.94",
+          "basis": "conversion of CO to CH3OH per pass",
+          "unit": "%",
+          "value": 28.94
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/test/table1-run-g",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "methanol synthesis over normal zinc chromate, run G, 375 °C, SV 7500",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 2, Table I, run G",
+            "reading": "vision_ocr",
+            "region": [
+              0.06,
+              0.323,
+              0.48,
+              0.3315
+            ],
+            "source": "ex:msyn/source/10.1021-ie50232a005",
+            "transcription": "G 375 7500 123.5 16.4 5.6 4.45 7.8 1.2"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I",
+            "passage": "10.1021-ie50232a005/p2/1",
+            "quote": "Table I—Methanol and Ether Production with Normal Zinc Chromate",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/5",
+            "quote": "Employing the apparatus and procedure previously de- scribed,2 the hourly production of methanol at temperatures between 300° and 400° C. and at 180 atmospheres average reactant pressure was determined for space velocities of 3000 and 7500.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ie50232a005/p4/4",
+            "quote": "Similarly, at 375° C. the production was 3.16 and 1.47 grams for the same respective space velocities.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "manipulation": "interventional",
+        "note": "run letter printed 'G' in the page image (the text layer reads 'Ct')",
+        "pressure": {
+          "status": "present",
+          "as_reported": "180 atmospheres average reactant pressure",
+          "unit": "atm",
+          "value": 180
+        },
+        "production_rate": {
+          "status": "present",
+          "as_reported": "123.5 G./hr.",
+          "basis": "pure CH3OH",
+          "unit": "g/h",
+          "value": 123.5
+        },
+        "results": {
+          "co_to_ether_equivalent_conversion_per_pass": {
+            "status": "present",
+            "as_reported": "1.2",
+            "note": "Table I, dimethyl ether column 'Conversion CO to ether per pass' (%)",
+            "unit": "%",
+            "value": 1.2
+          },
+          "dimethyl_ether_liquid_products_percent": {
+            "status": "present",
+            "as_reported": "4.45",
+            "note": "Table I, dimethyl ether column 'Liquid products' (%), header read from the page image",
+            "unit": "%",
+            "value": 4.45
+          },
+          "dimethyl_ether_per_pass": {
+            "status": "present",
+            "as_reported": "1.47 grams",
+            "unit": "g",
+            "value": 1.47
+          },
+          "dimethyl_ether_total": {
+            "status": "present",
+            "as_reported": "5.6",
+            "note": "Table I, dimethyl ether column 'Total for run' (Grams)",
+            "unit": "g",
+            "value": 5.6
+          },
+          "equivalent_methanol_production_rate": {
+            "status": "present",
+            "as_reported": "7.8",
+            "note": "Table I, dimethyl ether columns, 'Equivalent methanol' (G./hr.): the column header read from the page image; earlier read as a dimethyl-ether rate from the garbled text layer",
+            "unit": "g/h",
+            "value": 7.8
+          }
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "7500",
+          "note": "unit not stated in the source",
+          "unit": "not stated",
+          "value": 7500
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "375",
+          "note": "'Av. Temp.' column of Table I",
+          "unit": "°C",
+          "value": 375
+        },
+        "test_kind": "activity",
+        "test_label": "Table I, run G",
+        "yield": {
+          "status": "present",
+          "as_reported": "16.4",
+          "basis": "conversion of CO to CH3OH per pass",
+          "unit": "%",
+          "value": 16.4
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/test/table1-run-h",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "methanol synthesis over normal zinc chromate, run H, 397 °C, SV 3000",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 2, Table I, run H",
+            "reading": "vision_ocr",
+            "region": [
+              0.06,
+              0.3305,
+              0.48,
+              0.339
+            ],
+            "source": "ex:msyn/source/10.1021-ie50232a005",
+            "transcription": "H 397 3000 68.0 21.4 7.5 8.6 8.4 5.2+"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I",
+            "passage": "10.1021-ie50232a005/p2/1",
+            "quote": "Table I—Methanol and Ether Production with Normal Zinc Chromate",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/5",
+            "quote": "Employing the apparatus and procedure previously de- scribed,2 the hourly production of methanol at temperatures between 300° and 400° C. and at 180 atmospheres average reactant pressure was determined for space velocities of 3000 and 7500.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ie50232a005/p4/3",
+            "quote": "Under the experimental condi- tions employed, the formation of ether is slow compared with the methanol reaction, and if the carbon monoxide converted ultimately to ether is subtracted from the carbon monoxide which enters the catalyst chamber, the correction is about +0.6 per cent for the conversions in runs F and H and negli- gible in the others.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "manipulation": "interventional",
+        "note": "conversion printed '21.4' in the page image (the text layer reads '21,4'); equivalent ether conversion printed '5.2+'",
+        "pressure": {
+          "status": "present",
+          "as_reported": "180 atmospheres average reactant pressure",
+          "unit": "atm",
+          "value": 180
+        },
+        "production_rate": {
+          "status": "present",
+          "as_reported": "68.0 G./hr.",
+          "basis": "pure CH3OH",
+          "unit": "g/h",
+          "value": 68.0
+        },
+        "results": {
+          "co_to_ether_equivalent_conversion_per_pass": {
+            "status": "present",
+            "as_reported": "5.2+",
+            "note": "Table I, dimethyl ether column 'Conversion CO to ether per pass' (%)",
+            "unit": "%",
+            "value": 5.2
+          },
+          "dimethyl_ether_liquid_products_percent": {
+            "status": "present",
+            "as_reported": "8.6",
+            "note": "Table I, dimethyl ether column 'Liquid products' (%), header read from the page image",
+            "unit": "%",
+            "value": 8.6
+          },
+          "dimethyl_ether_total": {
+            "status": "present",
+            "as_reported": "7.5",
+            "note": "Table I, dimethyl ether column 'Total for run' (Grams)",
+            "unit": "g",
+            "value": 7.5
+          },
+          "equivalent_methanol_production_rate": {
+            "status": "present",
+            "as_reported": "8.4",
+            "note": "Table I, dimethyl ether columns, 'Equivalent methanol' (G./hr.): the column header read from the page image; earlier read as a dimethyl-ether rate from the garbled text layer",
+            "unit": "g/h",
+            "value": 8.4
+          },
+          "ether_correction_to_methanol_conversion": {
+            "status": "present",
+            "as_reported": "about +0.6 per cent",
+            "note": "correction to the CO-to-methanol conversion if the CO converted to ether is subtracted from the entering CO",
+            "qualifier": "approximate",
+            "unit": "%",
+            "value": 0.6
+          }
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "3000",
+          "note": "unit not stated in the source",
+          "unit": "not stated",
+          "value": 3000
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "397",
+          "note": "'Av. Temp.' column of Table I",
+          "unit": "°C",
+          "value": 397
+        },
+        "test_kind": "activity",
+        "test_label": "Table I, run H",
+        "yield": {
+          "status": "present",
+          "as_reported": "21.4",
+          "basis": "conversion of CO to CH3OH per pass",
+          "unit": "%",
+          "value": 21.4
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/test/table1-run-i",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "methanol synthesis over normal zinc chromate, run I, 398 °C, SV 3000",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I, run I",
+            "passage": "10.1021-ie50232a005/p2/2",
+            "quote": "I 398 3000 72.4 20.5",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 2, Table I, run I",
+            "reading": "vision_ocr",
+            "region": [
+              0.06,
+              0.338,
+              0.48,
+              0.3465
+            ],
+            "source": "ex:msyn/source/10.1021-ie50232a005",
+            "transcription": "I 398 3000 72.4 20.5 ... .. ... ..."
+          },
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I",
+            "passage": "10.1021-ie50232a005/p2/1",
+            "quote": "Table I—Methanol and Ether Production with Normal Zinc Chromate",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/5",
+            "quote": "Employing the apparatus and procedure previously de- scribed,2 the hourly production of methanol at temperatures between 300° and 400° C. and at 180 atmospheres average reactant pressure was determined for space velocities of 3000 and 7500.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "manipulation": "interventional",
+        "note": "no ether data printed for this run (the dimethyl ether columns are printed '...')",
+        "pressure": {
+          "status": "present",
+          "as_reported": "180 atmospheres average reactant pressure",
+          "unit": "atm",
+          "value": 180
+        },
+        "production_rate": {
+          "status": "present",
+          "as_reported": "72.4 G./hr.",
+          "basis": "pure CH3OH",
+          "unit": "g/h",
+          "value": 72.4
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "3000",
+          "note": "unit not stated in the source",
+          "unit": "not stated",
+          "value": 3000
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "398",
+          "note": "'Av. Temp.' column of Table I",
+          "unit": "°C",
+          "value": 398
+        },
+        "test_kind": "activity",
+        "test_label": "Table I, run I",
+        "yield": {
+          "status": "present",
+          "as_reported": "20.5",
+          "basis": "conversion of CO to CH3OH per pass",
+          "unit": "%",
+          "value": 20.5
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/source/10.1021-ie50232a005",
+      "label": "Source",
+      "props": {
+        "name": "Methanol from Hydrogen and Carbon Monoxide II–Dimethyl Ether",
+        "kind": "article",
+        "description": "Published 1929 (publication year (bibliography)); in scope: before the 1966-01-01 cutoff. Text: 4 pages text_layer. Text not redistributed.",
+        "doi": "10.1021/ie50232a005",
+        "licence": "no verified publisher licence; short excerpts quoted as evidence under fair use",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "Methanol from Hydrogen and Carbon Monoxide II–Dimethyl Ether",
+        "url": "https://doi.org/10.1021/ie50232a005",
+        "venue": "Industrial & Engineering Chemistry",
+        "year": 1929
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/analysis/combined-equilibrium-180atm-300/reported-in/10.1021-ie50232a005",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/analysis/combined-equilibrium-180atm-300",
+      "target": "ex:msyn/source/10.1021-ie50232a005"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/analysis/combined-equilibrium-180atm-350/reported-in/10.1021-ie50232a005",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/analysis/combined-equilibrium-180atm-350",
+      "target": "ex:msyn/source/10.1021-ie50232a005"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/analysis/equilibrium-1atm-300-assumed-kp/reported-in/10.1021-ie50232a005",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 2, right column"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/analysis/equilibrium-1atm-300-assumed-kp",
+      "target": "ex:msyn/source/10.1021-ie50232a005"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/catalyst/normal-zinc-chromate/reported-in/10.1021-ie50232a005",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/catalyst/normal-zinc-chromate",
+      "target": "ex:msyn/source/10.1021-ie50232a005"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/characterization/ether-identification/reported-in/10.1021-ie50232a005",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3",
+          "p. 3, Table II"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/characterization/ether-identification",
+      "target": "ex:msyn/source/10.1021-ie50232a005"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/claim/contact-time-affects-ether/reported-in/10.1021-ie50232a005",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/claim/contact-time-affects-ether",
+      "target": "ex:msyn/source/10.1021-ie50232a005"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/claim/conversion-maximum-375/reported-in/10.1021-ie50232a005",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/claim/conversion-maximum-375",
+      "target": "ex:msyn/source/10.1021-ie50232a005"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/claim/ether-by-product-increases-with-temperature/reported-in/10.1021-ie50232a005",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/claim/ether-by-product-increases-with-temperature",
+      "target": "ex:msyn/source/10.1021-ie50232a005"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/claim/ether-correction-small/reported-in/10.1021-ie50232a005",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/claim/ether-correction-small",
+      "target": "ex:msyn/source/10.1021-ie50232a005"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/claim/ether-identified/reported-in/10.1021-ie50232a005",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3",
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/claim/ether-identified",
+      "target": "ex:msyn/source/10.1021-ie50232a005"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/claim/ether-negligible-for-1atm-equilibrium/reported-in/10.1021-ie50232a005",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/claim/ether-negligible-for-1atm-equilibrium",
+      "target": "ex:msyn/source/10.1021-ie50232a005"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/claim/indirect-evidence-of-ether/reported-in/10.1021-ie50232a005",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/claim/indirect-evidence-of-ether",
+      "target": "ex:msyn/source/10.1021-ie50232a005"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/claim/low-sv-conversion-above-estimate/reported-in/10.1021-ie50232a005",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/claim/low-sv-conversion-above-estimate",
+      "target": "ex:msyn/source/10.1021-ie50232a005"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/claim/methanol-fast-ether-slow/reported-in/10.1021-ie50232a005",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/claim/methanol-fast-ether-slow",
+      "target": "ex:msyn/source/10.1021-ie50232a005"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/claim/residual-gas-losses-negligible/reported-in/10.1021-ie50232a005",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/claim/residual-gas-losses-negligible",
+      "target": "ex:msyn/source/10.1021-ie50232a005"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/feed/h2-co-2-1/reported-in/10.1021-ie50232a005",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/feed/h2-co-2-1",
+      "target": "ex:msyn/source/10.1021-ie50232a005"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/hypothesis/double-catalyst-enriched-gas/reported-in/10.1021-ie50232a005",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/hypothesis/double-catalyst-enriched-gas",
+      "target": "ex:msyn/source/10.1021-ie50232a005"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/hypothesis/oxides-dehydrate-methanol/reported-in/10.1021-ie50232a005",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/hypothesis/oxides-dehydrate-methanol",
+      "target": "ex:msyn/source/10.1021-ie50232a005"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/1",
+      "type": "IDENTIFIED_AS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/6",
+            "quote": "The production of methanol from a 2:1 hydrogen- carbon monoxide mixture at 180 atmospheres pressure has been studied between 300° and 400° C. with normal zinc chromate as the catalyst.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/catalyst/normal-zinc-chromate",
+      "target": "ex:msyn/species/zncro4"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/10",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I",
+            "passage": "10.1021-ie50232a005/p2/1",
+            "quote": "Table I—Methanol and Ether Production with Normal Zinc Chromate",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-a",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/103",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50232a005/p2/1",
+            "quote": "In this dehydration, both chromic and zinc oxides might be expected to function to some degree; whereas aluminum oxide, if present, should be fairly active in the conversion of methanol to methyl ether.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/hypothesis/oxides-dehydrate-methanol",
+      "target": "ex:msyn/species/cr2o3"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/104",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50232a005/p2/1",
+            "quote": "In this dehydration, both chromic and zinc oxides might be expected to function to some degree; whereas aluminum oxide, if present, should be fairly active in the conversion of methanol to methyl ether.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/hypothesis/oxides-dehydrate-methanol",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/105",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50232a005/p2/1",
+            "quote": "In this dehydration, both chromic and zinc oxides might be expected to function to some degree; whereas aluminum oxide, if present, should be fairly active in the conversion of methanol to methyl ether.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/hypothesis/oxides-dehydrate-methanol",
+      "target": "ex:msyn/species/al2o3"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/108",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50232a005/p2/5",
+            "quote": "However, with a mixed or a double catalyst to furnish high activity with respect to both reactions 1 and 2, the results should offer broad and interesting possibilities.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/hypothesis/double-catalyst-enriched-gas",
+      "target": "ex:msyn/reaction/dimethyl-ether-formation"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/109",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50232a005/p2/5",
+            "quote": "However, with a mixed or a double catalyst to furnish high activity with respect to both reactions 1 and 2, the results should offer broad and interesting possibilities.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/hypothesis/double-catalyst-enriched-gas",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/11",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "250 cc. (248 grams)",
+          "unit": "cc",
+          "value": 250
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/5",
+            "quote": "The catalyst was prepared as previously described,2 and the amount used was 250 cc. (248 grams).",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "state": "not_reported"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-b",
+      "target": "ex:msyn/10.1021-ie50232a005/sample/zinc-chromate-charge"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/12",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/5",
+            "quote": "The initial gas contained on an average of 32+ per cent carbon monoxide and about twice that amount of hydro- gen.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-b",
+      "target": "ex:msyn/10.1021-ie50232a005/feed/h2-co-2-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/13",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/5",
+            "quote": "Employing the apparatus and procedure previously de- scribed,2 the hourly production of methanol at temperatures between 300° and 400° C. and at 180 atmospheres average reactant pressure was determined for space velocities of 3000 and 7500.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-b",
+      "target": "ex:msyn/10.1021-ie50232a005/reactor/previously-described-apparatus"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/14",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I",
+            "passage": "10.1021-ie50232a005/p2/1",
+            "quote": "Table I—Methanol and Ether Production with Normal Zinc Chromate",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-b",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/15",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "quote": "The data on the dimethyl ether produced between 300° and 400° C. as a by-product of the methanol synthesis (with nor- mal zinc chromate as the catalyst) are given in Table I.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "role": "by-product dimethyl ether formation"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-b",
+      "target": "ex:msyn/reaction/dimethyl-ether-formation"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/16",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "250 cc. (248 grams)",
+          "unit": "cc",
+          "value": 250
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/5",
+            "quote": "The catalyst was prepared as previously described,2 and the amount used was 250 cc. (248 grams).",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "state": "not_reported"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-c",
+      "target": "ex:msyn/10.1021-ie50232a005/sample/zinc-chromate-charge"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/17",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/5",
+            "quote": "The initial gas contained on an average of 32+ per cent carbon monoxide and about twice that amount of hydro- gen.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-c",
+      "target": "ex:msyn/10.1021-ie50232a005/feed/h2-co-2-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/18",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/5",
+            "quote": "Employing the apparatus and procedure previously de- scribed,2 the hourly production of methanol at temperatures between 300° and 400° C. and at 180 atmospheres average reactant pressure was determined for space velocities of 3000 and 7500.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-c",
+      "target": "ex:msyn/10.1021-ie50232a005/reactor/previously-described-apparatus"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/19",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I",
+            "passage": "10.1021-ie50232a005/p2/1",
+            "quote": "Table I—Methanol and Ether Production with Normal Zinc Chromate",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-c",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/2",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/6",
+            "quote": "The production of methanol from a 2:1 hydrogen- carbon monoxide mixture at 180 atmospheres pressure has been studied between 300° and 400° C. with normal zinc chromate as the catalyst.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/catalyst/normal-zinc-chromate",
+      "target": "ex:msyn/species/zncro4"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/20",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "quote": "The data on the dimethyl ether produced between 300° and 400° C. as a by-product of the methanol synthesis (with nor- mal zinc chromate as the catalyst) are given in Table I.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "role": "by-product dimethyl ether formation"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-c",
+      "target": "ex:msyn/reaction/dimethyl-ether-formation"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/21",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "250 cc. (248 grams)",
+          "unit": "cc",
+          "value": 250
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/5",
+            "quote": "The catalyst was prepared as previously described,2 and the amount used was 250 cc. (248 grams).",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "state": "not_reported"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-d",
+      "target": "ex:msyn/10.1021-ie50232a005/sample/zinc-chromate-charge"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/22",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/5",
+            "quote": "The initial gas contained on an average of 32+ per cent carbon monoxide and about twice that amount of hydro- gen.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-d",
+      "target": "ex:msyn/10.1021-ie50232a005/feed/h2-co-2-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/23",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/5",
+            "quote": "Employing the apparatus and procedure previously de- scribed,2 the hourly production of methanol at temperatures between 300° and 400° C. and at 180 atmospheres average reactant pressure was determined for space velocities of 3000 and 7500.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-d",
+      "target": "ex:msyn/10.1021-ie50232a005/reactor/previously-described-apparatus"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/24",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I",
+            "passage": "10.1021-ie50232a005/p2/1",
+            "quote": "Table I—Methanol and Ether Production with Normal Zinc Chromate",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-d",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/25",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "quote": "The data on the dimethyl ether produced between 300° and 400° C. as a by-product of the methanol synthesis (with nor- mal zinc chromate as the catalyst) are given in Table I.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "role": "by-product dimethyl ether formation"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-d",
+      "target": "ex:msyn/reaction/dimethyl-ether-formation"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/26",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "250 cc. (248 grams)",
+          "unit": "cc",
+          "value": 250
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/5",
+            "quote": "The catalyst was prepared as previously described,2 and the amount used was 250 cc. (248 grams).",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "state": "not_reported"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-e",
+      "target": "ex:msyn/10.1021-ie50232a005/sample/zinc-chromate-charge"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/27",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/5",
+            "quote": "The initial gas contained on an average of 32+ per cent carbon monoxide and about twice that amount of hydro- gen.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-e",
+      "target": "ex:msyn/10.1021-ie50232a005/feed/h2-co-2-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/28",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/5",
+            "quote": "Employing the apparatus and procedure previously de- scribed,2 the hourly production of methanol at temperatures between 300° and 400° C. and at 180 atmospheres average reactant pressure was determined for space velocities of 3000 and 7500.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-e",
+      "target": "ex:msyn/10.1021-ie50232a005/reactor/previously-described-apparatus"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/29",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I",
+            "passage": "10.1021-ie50232a005/p2/1",
+            "quote": "Table I—Methanol and Ether Production with Normal Zinc Chromate",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-e",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/3",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/5",
+            "quote": "The catalyst was prepared as previously described,2 and the amount used was 250 cc. (248 grams).",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/sample/zinc-chromate-charge",
+      "target": "ex:msyn/10.1021-ie50232a005/catalyst/normal-zinc-chromate"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/30",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "quote": "The data on the dimethyl ether produced between 300° and 400° C. as a by-product of the methanol synthesis (with nor- mal zinc chromate as the catalyst) are given in Table I.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "role": "by-product dimethyl ether formation"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-e",
+      "target": "ex:msyn/reaction/dimethyl-ether-formation"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/31",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "250 cc. (248 grams)",
+          "unit": "cc",
+          "value": 250
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/5",
+            "quote": "The catalyst was prepared as previously described,2 and the amount used was 250 cc. (248 grams).",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "state": "not_reported"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-f",
+      "target": "ex:msyn/10.1021-ie50232a005/sample/zinc-chromate-charge"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/32",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/5",
+            "quote": "The initial gas contained on an average of 32+ per cent carbon monoxide and about twice that amount of hydro- gen.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-f",
+      "target": "ex:msyn/10.1021-ie50232a005/feed/h2-co-2-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/33",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/5",
+            "quote": "Employing the apparatus and procedure previously de- scribed,2 the hourly production of methanol at temperatures between 300° and 400° C. and at 180 atmospheres average reactant pressure was determined for space velocities of 3000 and 7500.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-f",
+      "target": "ex:msyn/10.1021-ie50232a005/reactor/previously-described-apparatus"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/34",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I",
+            "passage": "10.1021-ie50232a005/p2/1",
+            "quote": "Table I—Methanol and Ether Production with Normal Zinc Chromate",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-f",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/35",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "quote": "The data on the dimethyl ether produced between 300° and 400° C. as a by-product of the methanol synthesis (with nor- mal zinc chromate as the catalyst) are given in Table I.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "role": "by-product dimethyl ether formation"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-f",
+      "target": "ex:msyn/reaction/dimethyl-ether-formation"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/36",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "250 cc. (248 grams)",
+          "unit": "cc",
+          "value": 250
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/5",
+            "quote": "The catalyst was prepared as previously described,2 and the amount used was 250 cc. (248 grams).",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "state": "not_reported"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-g",
+      "target": "ex:msyn/10.1021-ie50232a005/sample/zinc-chromate-charge"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/37",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/5",
+            "quote": "The initial gas contained on an average of 32+ per cent carbon monoxide and about twice that amount of hydro- gen.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-g",
+      "target": "ex:msyn/10.1021-ie50232a005/feed/h2-co-2-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/38",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/5",
+            "quote": "Employing the apparatus and procedure previously de- scribed,2 the hourly production of methanol at temperatures between 300° and 400° C. and at 180 atmospheres average reactant pressure was determined for space velocities of 3000 and 7500.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-g",
+      "target": "ex:msyn/10.1021-ie50232a005/reactor/previously-described-apparatus"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/39",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I",
+            "passage": "10.1021-ie50232a005/p2/1",
+            "quote": "Table I—Methanol and Ether Production with Normal Zinc Chromate",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-g",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/4",
+      "type": "PREPARED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/5",
+            "quote": "The catalyst was prepared as previously described,2 and the amount used was 250 cc. (248 grams).",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/sample/zinc-chromate-charge",
+      "target": "ex:msyn/10.1021-ie50232a005/preparation/as-previously-described"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/40",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "quote": "The data on the dimethyl ether produced between 300° and 400° C. as a by-product of the methanol synthesis (with nor- mal zinc chromate as the catalyst) are given in Table I.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "role": "by-product dimethyl ether formation"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-g",
+      "target": "ex:msyn/reaction/dimethyl-ether-formation"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/41",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "250 cc. (248 grams)",
+          "unit": "cc",
+          "value": 250
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/5",
+            "quote": "The catalyst was prepared as previously described,2 and the amount used was 250 cc. (248 grams).",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "state": "not_reported"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-h",
+      "target": "ex:msyn/10.1021-ie50232a005/sample/zinc-chromate-charge"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/42",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/5",
+            "quote": "The initial gas contained on an average of 32+ per cent carbon monoxide and about twice that amount of hydro- gen.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-h",
+      "target": "ex:msyn/10.1021-ie50232a005/feed/h2-co-2-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/43",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/5",
+            "quote": "Employing the apparatus and procedure previously de- scribed,2 the hourly production of methanol at temperatures between 300° and 400° C. and at 180 atmospheres average reactant pressure was determined for space velocities of 3000 and 7500.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-h",
+      "target": "ex:msyn/10.1021-ie50232a005/reactor/previously-described-apparatus"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/44",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I",
+            "passage": "10.1021-ie50232a005/p2/1",
+            "quote": "Table I—Methanol and Ether Production with Normal Zinc Chromate",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-h",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/45",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "quote": "The data on the dimethyl ether produced between 300° and 400° C. as a by-product of the methanol synthesis (with nor- mal zinc chromate as the catalyst) are given in Table I.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "role": "by-product dimethyl ether formation"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-h",
+      "target": "ex:msyn/reaction/dimethyl-ether-formation"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/46",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "250 cc. (248 grams)",
+          "unit": "cc",
+          "value": 250
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/5",
+            "quote": "The catalyst was prepared as previously described,2 and the amount used was 250 cc. (248 grams).",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "state": "not_reported"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-i",
+      "target": "ex:msyn/10.1021-ie50232a005/sample/zinc-chromate-charge"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/47",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/5",
+            "quote": "The initial gas contained on an average of 32+ per cent carbon monoxide and about twice that amount of hydro- gen.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-i",
+      "target": "ex:msyn/10.1021-ie50232a005/feed/h2-co-2-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/48",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/5",
+            "quote": "Employing the apparatus and procedure previously de- scribed,2 the hourly production of methanol at temperatures between 300° and 400° C. and at 180 atmospheres average reactant pressure was determined for space velocities of 3000 and 7500.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-i",
+      "target": "ex:msyn/10.1021-ie50232a005/reactor/previously-described-apparatus"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/49",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I",
+            "passage": "10.1021-ie50232a005/p2/1",
+            "quote": "Table I—Methanol and Ether Production with Normal Zinc Chromate",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-i",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/5",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/5",
+            "quote": "The initial gas contained on an average of 32+ per cent carbon monoxide and about twice that amount of hydro- gen.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "on an average of 32+ per cent",
+          "note": "printed '32+', an average",
+          "qualifier": "approximate",
+          "unit": "%",
+          "value": 32
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/feed/h2-co-2-1",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/50",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "context": [
+          "ex:msyn/10.1021-ie50232a005/test/table1-run-a",
+          "ex:msyn/10.1021-ie50232a005/test/table1-run-b",
+          "ex:msyn/10.1021-ie50232a005/test/table1-run-c",
+          "ex:msyn/10.1021-ie50232a005/test/table1-run-d",
+          "ex:msyn/10.1021-ie50232a005/test/table1-run-e",
+          "ex:msyn/10.1021-ie50232a005/test/table1-run-f",
+          "ex:msyn/10.1021-ie50232a005/test/table1-run-g",
+          "ex:msyn/10.1021-ie50232a005/test/table1-run-h",
+          "ex:msyn/10.1021-ie50232a005/test/table1-run-i"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/6",
+            "quote": "The production of methanol from a 2:1 hydrogen- carbon monoxide mixture at 180 atmospheres pressure has been studied between 300° and 400° C. with normal zinc chromate as the catalyst.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/catalyst/normal-zinc-chromate",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/51",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "context": [
+          "ex:msyn/10.1021-ie50232a005/test/table1-run-b",
+          "ex:msyn/10.1021-ie50232a005/test/table1-run-c",
+          "ex:msyn/10.1021-ie50232a005/test/table1-run-d",
+          "ex:msyn/10.1021-ie50232a005/test/table1-run-e",
+          "ex:msyn/10.1021-ie50232a005/test/table1-run-f",
+          "ex:msyn/10.1021-ie50232a005/test/table1-run-g",
+          "ex:msyn/10.1021-ie50232a005/test/table1-run-h"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/7",
+            "quote": "Dimethyl ether has been shown to be a by-product of the reaction, being formed from the methanol in amounts which increase with temperature between 300° and 400° C.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "quote": "The data on the dimethyl ether produced between 300° and 400° C. as a by-product of the methanol synthesis (with nor- mal zinc chromate as the catalyst) are given in Table I.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/catalyst/normal-zinc-chromate",
+      "target": "ex:msyn/reaction/dimethyl-ether-formation"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/52",
+      "type": "PRODUCES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "quote": "The data on the dimethyl ether produced between 300° and 400° C. as a by-product of the methanol synthesis (with nor- mal zinc chromate as the catalyst) are given in Table I.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/catalyst/normal-zinc-chromate",
+      "target": "ex:msyn/species/ch3och3"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/55",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50232a005/p2/3",
+            "quote": "For example, in reaction 2, at 180 atmospheres reactant pres- sure and 350° C., and at equilibrium, the ratio of CO to CH3OH (calculated to CO) is about 1:1, whereas in reaction 1, occur- ring at the same time and assuming equilibrium according to McKee and Burke, the ratio of CH3OH to CH3OCH3 (calcu- lated to CH3OH equivalents) is 22:78.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "role": "equilibrium computed"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/analysis/combined-equilibrium-180atm-350",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/56",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50232a005/p2/3",
+            "quote": "For example, in reaction 2, at 180 atmospheres reactant pres- sure and 350° C., and at equilibrium, the ratio of CO to CH3OH (calculated to CO) is about 1:1, whereas in reaction 1, occur- ring at the same time and assuming equilibrium according to McKee and Burke, the ratio of CH3OH to CH3OCH3 (calcu- lated to CH3OH equivalents) is 22:78.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "role": "equilibrium computed"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/analysis/combined-equilibrium-180atm-350",
+      "target": "ex:msyn/reaction/dimethyl-ether-formation"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/57",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "quote": "Similarly at 300° C. the two ratios would be, respectively, about 20:80 and 20:80 (equivalent to a molecular ratio",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "role": "equilibrium computed"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/analysis/combined-equilibrium-180atm-300",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/58",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "quote": "Similarly at 300° C. the two ratios would be, respectively, about 20:80 and 20:80 (equivalent to a molecular ratio",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "role": "equilibrium computed"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/analysis/combined-equilibrium-180atm-300",
+      "target": "ex:msyn/reaction/dimethyl-ether-formation"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/59",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50232a005/p2/6",
+            "quote": "If, in the absence of established equilib- rium values, we assume for the sake of discussion that Kp = at 300° C. = 60.6 X 10-t, then the ratio of CO to CH3OH (as CO) at 300° C. is 99.973 to 0.027;",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "role": "equilibrium computed"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/analysis/equilibrium-1atm-300-assumed-kp",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/6",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/5",
+            "quote": "The initial gas contained on an average of 32+ per cent carbon monoxide and about twice that amount of hydro- gen.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "about twice that amount of hydro- gen",
+          "qualifier": "approximate",
+          "text_value": "about twice the carbon monoxide"
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/feed/h2-co-2-1",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/60",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50232a005/p2/6",
+            "quote": "If, in the absence of established equilib- rium values, we assume for the sake of discussion that Kp = at 300° C. = 60.6 X 10-t, then the ratio of CO to CH3OH (as CO) at 300° C. is 99.973 to 0.027;",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "role": "equilibrium computed"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/analysis/equilibrium-1atm-300-assumed-kp",
+      "target": "ex:msyn/reaction/dimethyl-ether-formation"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/61",
+      "type": "EXAMINES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50232a005/p3/3",
+            "quote": "The perfect conformance of these characteristics with those of dimethyl ether fixed its identity fully.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/characterization/ether-identification",
+      "target": "ex:msyn/species/ch3och3"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/62",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/7",
+            "quote": "At a space velocity of 3000 the conversion of the carbon monoxide to methanol was found to increase from about 7 per cent to a maxi- mum of about 30 per cent at 375 ° C. and then to decline to 20 per cent at 400° C.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-a",
+      "target": "ex:msyn/10.1021-ie50232a005/claim/conversion-maximum-375"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/63",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/7",
+            "quote": "At a space velocity of 3000 the conversion of the carbon monoxide to methanol was found to increase from about 7 per cent to a maxi- mum of about 30 per cent at 375 ° C. and then to decline to 20 per cent at 400° C.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-d",
+      "target": "ex:msyn/10.1021-ie50232a005/claim/conversion-maximum-375"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/64",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/7",
+            "quote": "At a space velocity of 3000 the conversion of the carbon monoxide to methanol was found to increase from about 7 per cent to a maxi- mum of about 30 per cent at 375 ° C. and then to decline to 20 per cent at 400° C.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-f",
+      "target": "ex:msyn/10.1021-ie50232a005/claim/conversion-maximum-375"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/65",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/7",
+            "quote": "At a space velocity of 3000 the conversion of the carbon monoxide to methanol was found to increase from about 7 per cent to a maxi- mum of about 30 per cent at 375 ° C. and then to decline to 20 per cent at 400° C.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-h",
+      "target": "ex:msyn/10.1021-ie50232a005/claim/conversion-maximum-375"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/66",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/7",
+            "quote": "At a space velocity of 3000 the conversion of the carbon monoxide to methanol was found to increase from about 7 per cent to a maxi- mum of about 30 per cent at 375 ° C. and then to decline to 20 per cent at 400° C.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-i",
+      "target": "ex:msyn/10.1021-ie50232a005/claim/conversion-maximum-375"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/67",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/7",
+            "quote": "At a space velocity of 3000 the conversion of the carbon monoxide to methanol was found to increase from about 7 per cent to a maxi- mum of about 30 per cent at 375 ° C. and then to decline to 20 per cent at 400° C.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/claim/conversion-maximum-375",
+      "target": "ex:msyn/10.1021-ie50232a005/catalyst/normal-zinc-chromate"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/68",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "quote": "The data on the dimethyl ether produced between 300° and 400° C. as a by-product of the methanol synthesis (with nor- mal zinc chromate as the catalyst) are given in Table I.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-b",
+      "target": "ex:msyn/10.1021-ie50232a005/claim/ether-by-product-increases-with-temperature"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/69",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "quote": "The data on the dimethyl ether produced between 300° and 400° C. as a by-product of the methanol synthesis (with nor- mal zinc chromate as the catalyst) are given in Table I.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-c",
+      "target": "ex:msyn/10.1021-ie50232a005/claim/ether-by-product-increases-with-temperature"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/7",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "250 cc. (248 grams)",
+          "unit": "cc",
+          "value": 250
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/5",
+            "quote": "The catalyst was prepared as previously described,2 and the amount used was 250 cc. (248 grams).",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ],
+        "state": "not_reported"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-a",
+      "target": "ex:msyn/10.1021-ie50232a005/sample/zinc-chromate-charge"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/70",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "quote": "The data on the dimethyl ether produced between 300° and 400° C. as a by-product of the methanol synthesis (with nor- mal zinc chromate as the catalyst) are given in Table I.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-d",
+      "target": "ex:msyn/10.1021-ie50232a005/claim/ether-by-product-increases-with-temperature"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/71",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "quote": "The data on the dimethyl ether produced between 300° and 400° C. as a by-product of the methanol synthesis (with nor- mal zinc chromate as the catalyst) are given in Table I.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-f",
+      "target": "ex:msyn/10.1021-ie50232a005/claim/ether-by-product-increases-with-temperature"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/72",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "quote": "The data on the dimethyl ether produced between 300° and 400° C. as a by-product of the methanol synthesis (with nor- mal zinc chromate as the catalyst) are given in Table I.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-h",
+      "target": "ex:msyn/10.1021-ie50232a005/claim/ether-by-product-increases-with-temperature"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/73",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50232a005/p3/2",
+            "quote": "In the tube a liquid was condensed, which proved to be largely dimethyl ether.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/characterization/ether-identification",
+      "target": "ex:msyn/10.1021-ie50232a005/claim/ether-by-product-increases-with-temperature"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/74",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/7",
+            "quote": "Dimethyl ether has been shown to be a by-product of the reaction, being formed from the methanol in amounts which increase with temperature between 300° and 400° C.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/claim/ether-by-product-increases-with-temperature",
+      "target": "ex:msyn/species/ch3och3"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/75",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "quote": "The data on the dimethyl ether produced between 300° and 400° C. as a by-product of the methanol synthesis (with nor- mal zinc chromate as the catalyst) are given in Table I.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/claim/ether-by-product-increases-with-temperature",
+      "target": "ex:msyn/10.1021-ie50232a005/catalyst/normal-zinc-chromate"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/76",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ie50232a005/p4/1",
+            "quote": "The agreement is better than 3 parts in 1000, which represents approximately the accuracy of the apparatus and procedure, and it completes the identification of the ma- terial as dimethyl ether.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/characterization/ether-identification",
+      "target": "ex:msyn/10.1021-ie50232a005/claim/ether-identified"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/77",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50232a005/p3/3",
+            "quote": "The perfect conformance of these characteristics with those of dimethyl ether fixed its identity fully.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/claim/ether-identified",
+      "target": "ex:msyn/species/ch3och3"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/78",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50232a005/p2/7",
+            "quote": "In addition to these theoretical considerations, there were several indirect evidences of ether formation.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/claim/indirect-evidence-of-ether",
+      "target": "ex:msyn/species/ch3och3"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/79",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50232a005/p3/1",
+            "quote": "The first test showed that the amounts of methanol vapors and methyl ether being lost in the residual",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/claim/residual-gas-losses-negligible",
+      "target": "ex:msyn/species/ch3och3"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/8",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/5",
+            "quote": "The initial gas contained on an average of 32+ per cent carbon monoxide and about twice that amount of hydro- gen.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-a",
+      "target": "ex:msyn/10.1021-ie50232a005/feed/h2-co-2-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/80",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ie50232a005/p4/3",
+            "quote": "Under the experimental condi- tions employed, the formation of ether is slow compared with the methanol reaction, and if the carbon monoxide converted ultimately to ether is subtracted from the carbon monoxide which enters the catalyst chamber, the correction is about +0.6 per cent for the conversions in runs F and H and negli- gible in the others.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-f",
+      "target": "ex:msyn/10.1021-ie50232a005/claim/ether-correction-small"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/81",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ie50232a005/p4/3",
+            "quote": "Under the experimental condi- tions employed, the formation of ether is slow compared with the methanol reaction, and if the carbon monoxide converted ultimately to ether is subtracted from the carbon monoxide which enters the catalyst chamber, the correction is about +0.6 per cent for the conversions in runs F and H and negli- gible in the others.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-h",
+      "target": "ex:msyn/10.1021-ie50232a005/claim/ether-correction-small"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/82",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ie50232a005/p4/3",
+            "quote": "Under the experimental condi- tions employed, the formation of ether is slow compared with the methanol reaction, and if the carbon monoxide converted ultimately to ether is subtracted from the carbon monoxide which enters the catalyst chamber, the correction is about +0.6 per cent for the conversions in runs F and H and negli- gible in the others.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/claim/ether-correction-small",
+      "target": "ex:msyn/reaction/dimethyl-ether-formation"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/83",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ie50232a005/p4/3",
+            "quote": "The influence of time of contact is evident from the data of Table I for 350° C.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-d",
+      "target": "ex:msyn/10.1021-ie50232a005/claim/contact-time-affects-ether"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/84",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ie50232a005/p4/3",
+            "quote": "The influence of time of contact is evident from the data of Table I for 350° C.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-e",
+      "target": "ex:msyn/10.1021-ie50232a005/claim/contact-time-affects-ether"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/85",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ie50232a005/p4/3",
+            "quote": "The influence of time of contact is evident from the data of Table I for 350° C.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-f",
+      "target": "ex:msyn/10.1021-ie50232a005/claim/contact-time-affects-ether"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/86",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ie50232a005/p4/3",
+            "quote": "The influence of time of contact is evident from the data of Table I for 350° C.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-g",
+      "target": "ex:msyn/10.1021-ie50232a005/claim/contact-time-affects-ether"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/87",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ie50232a005/p4/3",
+            "quote": "The influence of time of contact is evident from the data of Table I for 350° C.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/claim/contact-time-affects-ether",
+      "target": "ex:msyn/reaction/dimethyl-ether-formation"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/88",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50232a005/p2/4",
+            "quote": "the latter reaction in the case of zinc chro-",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/claim/contact-time-affects-ether",
+      "target": "ex:msyn/10.1021-ie50232a005/catalyst/normal-zinc-chromate"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/9",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/5",
+            "quote": "Employing the apparatus and procedure previously de- scribed,2 the hourly production of methanol at temperatures between 300° and 400° C. and at 180 atmospheres average reactant pressure was determined for space velocities of 3000 and 7500.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-a",
+      "target": "ex:msyn/10.1021-ie50232a005/reactor/previously-described-apparatus"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/90",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50232a005/p2/4",
+            "quote": "In both cases the methanol catalysts (oxides) are highly active in the methanol reaction, which is rapid and much less active under the same conditions (as the writers’ experimental data on zinc chromate indicate) with respect to ether formation (re- action 1).",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-d",
+      "target": "ex:msyn/10.1021-ie50232a005/claim/methanol-fast-ether-slow"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/91",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50232a005/p2/4",
+            "quote": "In both cases the methanol catalysts (oxides) are highly active in the methanol reaction, which is rapid and much less active under the same conditions (as the writers’ experimental data on zinc chromate indicate) with respect to ether formation (re- action 1).",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/claim/methanol-fast-ether-slow",
+      "target": "ex:msyn/10.1021-ie50232a005/catalyst/normal-zinc-chromate"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/92",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/6",
+            "quote": "In Figure 1 the data from columns 2 and 5 of Table I have been plotted on the figure (No. 10) employed in the earlier paper2 to show the three values at 400° C. and a curve of estimated yields obtained by the Nernst approximation for- mula used empirically.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-a",
+      "target": "ex:msyn/10.1021-ie50232a005/claim/low-sv-conversion-above-estimate"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/93",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/6",
+            "quote": "In Figure 1 the data from columns 2 and 5 of Table I have been plotted on the figure (No. 10) employed in the earlier paper2 to show the three values at 400° C. and a curve of estimated yields obtained by the Nernst approximation for- mula used empirically.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-d",
+      "target": "ex:msyn/10.1021-ie50232a005/claim/low-sv-conversion-above-estimate"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/94",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/6",
+            "quote": "In Figure 1 the data from columns 2 and 5 of Table I have been plotted on the figure (No. 10) employed in the earlier paper2 to show the three values at 400° C. and a curve of estimated yields obtained by the Nernst approximation for- mula used empirically.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-e",
+      "target": "ex:msyn/10.1021-ie50232a005/claim/low-sv-conversion-above-estimate"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/95",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/6",
+            "quote": "In Figure 1 the data from columns 2 and 5 of Table I have been plotted on the figure (No. 10) employed in the earlier paper2 to show the three values at 400° C. and a curve of estimated yields obtained by the Nernst approximation for- mula used empirically.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-f",
+      "target": "ex:msyn/10.1021-ie50232a005/claim/low-sv-conversion-above-estimate"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/96",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/6",
+            "quote": "In Figure 1 the data from columns 2 and 5 of Table I have been plotted on the figure (No. 10) employed in the earlier paper2 to show the three values at 400° C. and a curve of estimated yields obtained by the Nernst approximation for- mula used empirically.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-g",
+      "target": "ex:msyn/10.1021-ie50232a005/claim/low-sv-conversion-above-estimate"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/97",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50232a005/p1/6",
+            "quote": "In Figure 1 the data from columns 2 and 5 of Table I have been plotted on the figure (No. 10) employed in the earlier paper2 to show the three values at 400° C. and a curve of estimated yields obtained by the Nernst approximation for- mula used empirically.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/claim/low-sv-conversion-above-estimate",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/98",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50232a005/p2/7",
+            "quote": "The amount of ether that could be formed, although large with re- spect to the methanol, is yet so small that its influence on the ratio of carbon monoxide to methanol which measures the equilibrium is unimportant.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/analysis/equilibrium-1atm-300-assumed-kp",
+      "target": "ex:msyn/10.1021-ie50232a005/claim/ether-negligible-for-1atm-equilibrium"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/link/99",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50232a005/p2/7",
+            "quote": "The amount of ether that could be formed, although large with re- spect to the methanol, is yet so small that its influence on the ratio of carbon monoxide to methanol which measures the equilibrium is unimportant.",
+            "source": "ex:msyn/source/10.1021-ie50232a005"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/claim/ether-negligible-for-1atm-equilibrium",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/preparation/as-previously-described/reported-in/10.1021-ie50232a005",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/preparation/as-previously-described",
+      "target": "ex:msyn/source/10.1021-ie50232a005"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/reactor/previously-described-apparatus/reported-in/10.1021-ie50232a005",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/reactor/previously-described-apparatus",
+      "target": "ex:msyn/source/10.1021-ie50232a005"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/sample/zinc-chromate-charge/reported-in/10.1021-ie50232a005",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/sample/zinc-chromate-charge",
+      "target": "ex:msyn/source/10.1021-ie50232a005"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/test/table1-run-a/reported-in/10.1021-ie50232a005",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 2, Table I",
+          "p. 2, Table I, run A"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-a",
+      "target": "ex:msyn/source/10.1021-ie50232a005"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/test/table1-run-b/reported-in/10.1021-ie50232a005",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 2, Table I",
+          "p. 2, Table I, run B"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-b",
+      "target": "ex:msyn/source/10.1021-ie50232a005"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/test/table1-run-c/reported-in/10.1021-ie50232a005",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 2, Table I",
+          "p. 2, Table I, run C"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-c",
+      "target": "ex:msyn/source/10.1021-ie50232a005"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/test/table1-run-d/reported-in/10.1021-ie50232a005",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 2, Table I",
+          "p. 2, Table I, run D",
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-d",
+      "target": "ex:msyn/source/10.1021-ie50232a005"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/test/table1-run-e/reported-in/10.1021-ie50232a005",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 2, Table I",
+          "p. 2, Table I, run E",
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-e",
+      "target": "ex:msyn/source/10.1021-ie50232a005"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/test/table1-run-f/reported-in/10.1021-ie50232a005",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 2, Table I",
+          "p. 2, Table I, run F",
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-f",
+      "target": "ex:msyn/source/10.1021-ie50232a005"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/test/table1-run-g/reported-in/10.1021-ie50232a005",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 2, Table I",
+          "p. 2, Table I, run G",
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-g",
+      "target": "ex:msyn/source/10.1021-ie50232a005"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/test/table1-run-h/reported-in/10.1021-ie50232a005",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 2, Table I",
+          "p. 2, Table I, run H",
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-h",
+      "target": "ex:msyn/source/10.1021-ie50232a005"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50232a005/test/table1-run-i/reported-in/10.1021-ie50232a005",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 2, Table I",
+          "p. 2, Table I, run I"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50232a005/test/table1-run-i",
+      "target": "ex:msyn/source/10.1021-ie50232a005"
+    },
+    {
+      "id": "ex:msyn/source/10.1021-ie50232a005/authored-by/1",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 1,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/10.1021-ie50232a005",
+      "target": "ex:msyn/person/ralph-l-brown"
+    },
+    {
+      "id": "ex:msyn/source/10.1021-ie50232a005/authored-by/2",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 2,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/10.1021-ie50232a005",
+      "target": "ex:msyn/person/a-e-galloway"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/10.1021-ie50232a005"
+}

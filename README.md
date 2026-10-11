@@ -44,6 +44,8 @@ Then `scale call status` to start, or `claude mcp add scale -- scale mcp` to giv
 - **A real example** ([`examples/methanol-synthesis-pre1966/`](examples/methanol-synthesis-pre1966/README.md)):
   105 sources on methanol synthesis from CO/CO2 and H2 published before 1966, curated into one graph with short
   quotes. The tests run on it.
+- **A fully open example** ([`examples/methanol-synthesis-public/`](examples/methanol-synthesis-public/README.md)):
+  its 55 public-domain sources, with their PDFs and page texts and every quote in full, kept as one part per source.
 - **Tools** ([`tools/`](tools/README.md)): the `scale` Python package and command, the agent skills and their
   tests.
 - **Governance** ([`governance/`](governance/GOVERNANCE.md)): who reviews, how changes are approved, versions and

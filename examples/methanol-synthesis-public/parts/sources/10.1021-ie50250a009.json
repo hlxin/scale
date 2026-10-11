@@ -1,0 +1,4880 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/analysis/table2-run-1",
+      "label": "Analysis",
+      "props": {
+        "name": "Table II run 1: equilibrium constants of four reactions at 304 °C",
+        "analysis_kind": "equilibrium",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table II, run 1",
+            "reading": "vision_ocr",
+            "region": [
+              0.02,
+              0.817,
+              0.98,
+              0.827
+            ],
+            "source": "ex:msyn/source/10.1021-ie50250a009",
+            "transcription": "1 3.8 × 10⁻⁴ +9037 −28,886 6.8 × 10⁻¹ +437 −29,447 8.9 × 10⁻⁶ +13,345 −28,597 42 −4300"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 3, Table II",
+            "passage": "10.1021-ie50250a009/p3/7",
+            "quote": "Table II—“Equilibrium” in Four Possible Reactions at 304° G.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "The data in Table II are calculated from those given in Table I. They show equilibrium constants and correspond- ing values of the free-energy change for four possible reactions.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "are calculated from the corresponding AF and Eastman’s (2) values for the free energies of carbon monoxide, carbon dioxide, and water.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "experiment_status": "completed",
+        "note": "K exponents, lost in the text layer, read from the page image (vision_ocr evidence); the fourth reaction's heading reads 'CO + H2O = H2 + CO2' on the page image",
+        "results": {
+          "df0_ch3oh_2h2_co_ch3oh": {
+            "status": "present",
+            "as_reported": "−28,886",
+            "note": "ΔF° of CH3OH derived from this reaction and Eastman's free energies of CO, CO2 and water",
+            "unit": "unit not stated",
+            "value": -28886
+          },
+          "df0_ch3oh_3co_2h2o_ch3oh_2co2": {
+            "status": "present",
+            "as_reported": "−29,447",
+            "note": "ΔF° of CH3OH derived from this reaction and Eastman's free energies of CO, CO2 and water",
+            "unit": "unit not stated",
+            "value": -29447
+          },
+          "df0_ch3oh_co2_3h2_ch3oh_h2o": {
+            "status": "present",
+            "as_reported": "−28,597",
+            "note": "ΔF° of CH3OH derived from this reaction and Eastman's free energies of CO, CO2 and water",
+            "unit": "unit not stated",
+            "value": -28597
+          },
+          "df_2h2_co_ch3oh": {
+            "status": "present",
+            "as_reported": "+9037",
+            "note": "free-energy change ΔF as printed; unit not printed in Table II (the text gives free energies in calories)",
+            "unit": "unit not stated",
+            "value": 9037
+          },
+          "df_3co_2h2o_ch3oh_2co2": {
+            "status": "present",
+            "as_reported": "+437",
+            "note": "free-energy change ΔF as printed; unit not printed in Table II (the text gives free energies in calories)",
+            "unit": "unit not stated",
+            "value": 437
+          },
+          "df_co2_3h2_ch3oh_h2o": {
+            "status": "present",
+            "as_reported": "+13,345",
+            "note": "free-energy change ΔF as printed; unit not printed in Table II (the text gives free energies in calories)",
+            "unit": "unit not stated",
+            "value": 13345
+          },
+          "df_co_h2o_h2_co2": {
+            "status": "present",
+            "as_reported": "−4300",
+            "note": "free-energy change ΔF as printed; unit not printed in Table II (the text gives free energies in calories)",
+            "unit": "unit not stated",
+            "value": -4300
+          },
+          "k_2h2_co_ch3oh": {
+            "status": "present",
+            "as_reported": "3.8 × 10⁻⁴",
+            "note": "equilibrium constant as printed in Table II; unit not printed; as_reported corrected from the text-layer string '3.8 x 10-4' to the printed form read on the page image (value unchanged)",
+            "unit": "unit not stated",
+            "value": 0.00038
+          },
+          "k_3co_2h2o_ch3oh_2co2": {
+            "status": "present",
+            "as_reported": "6.8 × 10⁻¹",
+            "note": "equilibrium constant as printed in Table II; unit not printed; as_reported corrected from the text-layer string '6.8 X 10-1' to the printed form read on the page image (value unchanged)",
+            "unit": "unit not stated",
+            "value": 0.68
+          },
+          "k_co2_3h2_ch3oh_h2o": {
+            "status": "present",
+            "as_reported": "8.9 × 10⁻⁶",
+            "note": "equilibrium constant as printed in Table II; unit not printed; as_reported corrected from the text-layer string '8.9 X 10-6' to the printed form read on the page image (value unchanged)",
+            "unit": "unit not stated",
+            "value": 8.9e-06
+          },
+          "k_co_h2o_h2_co2": {
+            "status": "present",
+            "as_reported": "42",
+            "note": "equilibrium constant as printed in Table II; unit not printed",
+            "unit": "unit not stated",
+            "value": 42
+          }
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "at 304° G.",
+          "note": "Table II caption; text layer 'G' for C",
+          "unit": "°C",
+          "value": 304
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/analysis/table2-run-2",
+      "label": "Analysis",
+      "props": {
+        "name": "Table II run 2: equilibrium constants of four reactions at 304 °C",
+        "analysis_kind": "equilibrium",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table II, run 2",
+            "reading": "vision_ocr",
+            "region": [
+              0.02,
+              0.826,
+              0.98,
+              0.834
+            ],
+            "source": "ex:msyn/source/10.1021-ie50250a009",
+            "transcription": "2 6.7 × 10⁻⁴ +8390 −29,533 17.0 × 10⁻¹ −595 −30,480 13.0 × 10⁻⁶ +12,897 −29,045 50 −4498"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 3, Table II",
+            "passage": "10.1021-ie50250a009/p3/7",
+            "quote": "Table II—“Equilibrium” in Four Possible Reactions at 304° G.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "The data in Table II are calculated from those given in Table I. They show equilibrium constants and correspond- ing values of the free-energy change for four possible reactions.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "are calculated from the corresponding AF and Eastman’s (2) values for the free energies of carbon monoxide, carbon dioxide, and water.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "experiment_status": "completed",
+        "note": "K exponents, lost in the text layer, read from the page image (vision_ocr evidence); the fourth reaction's heading reads 'CO + H2O = H2 + CO2' on the page image",
+        "results": {
+          "df0_ch3oh_2h2_co_ch3oh": {
+            "status": "present",
+            "as_reported": "−29,533",
+            "note": "ΔF° of CH3OH derived from this reaction and Eastman's free energies of CO, CO2 and water",
+            "unit": "unit not stated",
+            "value": -29533
+          },
+          "df0_ch3oh_3co_2h2o_ch3oh_2co2": {
+            "status": "present",
+            "as_reported": "−30,480",
+            "note": "ΔF° of CH3OH derived from this reaction and Eastman's free energies of CO, CO2 and water",
+            "unit": "unit not stated",
+            "value": -30480
+          },
+          "df0_ch3oh_co2_3h2_ch3oh_h2o": {
+            "status": "present",
+            "as_reported": "−29,045",
+            "note": "ΔF° of CH3OH derived from this reaction and Eastman's free energies of CO, CO2 and water",
+            "unit": "unit not stated",
+            "value": -29045
+          },
+          "df_2h2_co_ch3oh": {
+            "status": "present",
+            "as_reported": "+8390",
+            "note": "free-energy change ΔF as printed; unit not printed in Table II (the text gives free energies in calories)",
+            "unit": "unit not stated",
+            "value": 8390
+          },
+          "df_3co_2h2o_ch3oh_2co2": {
+            "status": "present",
+            "as_reported": "−595",
+            "note": "free-energy change ΔF as printed; unit not printed in Table II (the text gives free energies in calories)",
+            "unit": "unit not stated",
+            "value": -595
+          },
+          "df_co2_3h2_ch3oh_h2o": {
+            "status": "present",
+            "as_reported": "+12,897",
+            "note": "free-energy change ΔF as printed; unit not printed in Table II (the text gives free energies in calories)",
+            "unit": "unit not stated",
+            "value": 12897
+          },
+          "df_co_h2o_h2_co2": {
+            "status": "present",
+            "as_reported": "−4498",
+            "note": "free-energy change ΔF as printed; unit not printed in Table II (the text gives free energies in calories)",
+            "unit": "unit not stated",
+            "value": -4498
+          },
+          "k_2h2_co_ch3oh": {
+            "status": "present",
+            "as_reported": "6.7 × 10⁻⁴",
+            "note": "equilibrium constant as printed in Table II; unit not printed; as_reported corrected from the text-layer string '6.7 X 10-1' to the printed form read on the page image (value unchanged)",
+            "unit": "unit not stated",
+            "value": 0.00067
+          },
+          "k_3co_2h2o_ch3oh_2co2": {
+            "status": "present",
+            "as_reported": "17.0 × 10⁻¹",
+            "note": "equilibrium constant as printed in Table II; unit not printed; as_reported corrected from the text-layer string '17.0 X 10-!' to the printed form read on the page image (value unchanged)",
+            "unit": "unit not stated",
+            "value": 1.7
+          },
+          "k_co2_3h2_ch3oh_h2o": {
+            "status": "present",
+            "as_reported": "13.0 × 10⁻⁶",
+            "note": "equilibrium constant as printed in Table II; unit not printed; as_reported corrected from the text-layer string '13.0 X 10-6' to the printed form read on the page image (value unchanged)",
+            "unit": "unit not stated",
+            "value": 1.3e-05
+          },
+          "k_co_h2o_h2_co2": {
+            "status": "present",
+            "as_reported": "50",
+            "note": "equilibrium constant as printed in Table II; unit not printed",
+            "unit": "unit not stated",
+            "value": 50
+          }
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "at 304° G.",
+          "note": "Table II caption; text layer 'G' for C",
+          "unit": "°C",
+          "value": 304
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/analysis/table2-run-3",
+      "label": "Analysis",
+      "props": {
+        "name": "Table II run 3: equilibrium constants of four reactions at 304 °C",
+        "analysis_kind": "equilibrium",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table II, run 3",
+            "reading": "vision_ocr",
+            "region": [
+              0.02,
+              0.834,
+              0.98,
+              0.842
+            ],
+            "source": "ex:msyn/source/10.1021-ie50250a009",
+            "transcription": "3 2.4 × 10⁻⁴ +9300 −28,623 4.2 × 10⁻¹ +995 −28,890 5.7 × 10⁻⁶ +13,857 −28,085 41 −4264"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 3, Table II",
+            "passage": "10.1021-ie50250a009/p3/7",
+            "quote": "Table II—“Equilibrium” in Four Possible Reactions at 304° G.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "The data in Table II are calculated from those given in Table I. They show equilibrium constants and correspond- ing values of the free-energy change for four possible reactions.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "are calculated from the corresponding AF and Eastman’s (2) values for the free energies of carbon monoxide, carbon dioxide, and water.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "experiment_status": "completed",
+        "note": "K exponents, lost in the text layer, read from the page image (vision_ocr evidence); the fourth reaction's heading reads 'CO + H2O = H2 + CO2' on the page image",
+        "results": {
+          "df0_ch3oh_2h2_co_ch3oh": {
+            "status": "present",
+            "as_reported": "−28,623",
+            "note": "ΔF° of CH3OH derived from this reaction and Eastman's free energies of CO, CO2 and water",
+            "unit": "unit not stated",
+            "value": -28623
+          },
+          "df0_ch3oh_3co_2h2o_ch3oh_2co2": {
+            "status": "present",
+            "as_reported": "−28,890",
+            "note": "ΔF° of CH3OH derived from this reaction and Eastman's free energies of CO, CO2 and water",
+            "unit": "unit not stated",
+            "value": -28890
+          },
+          "df0_ch3oh_co2_3h2_ch3oh_h2o": {
+            "status": "present",
+            "as_reported": "−28,085",
+            "note": "ΔF° of CH3OH derived from this reaction and Eastman's free energies of CO, CO2 and water",
+            "unit": "unit not stated",
+            "value": -28085
+          },
+          "df_2h2_co_ch3oh": {
+            "status": "present",
+            "as_reported": "+9300",
+            "note": "free-energy change ΔF as printed; unit not printed in Table II (the text gives free energies in calories)",
+            "unit": "unit not stated",
+            "value": 9300
+          },
+          "df_3co_2h2o_ch3oh_2co2": {
+            "status": "present",
+            "as_reported": "+995",
+            "note": "free-energy change ΔF as printed; unit not printed in Table II (the text gives free energies in calories)",
+            "unit": "unit not stated",
+            "value": 995
+          },
+          "df_co2_3h2_ch3oh_h2o": {
+            "status": "present",
+            "as_reported": "+13,857",
+            "note": "free-energy change ΔF as printed; unit not printed in Table II (the text gives free energies in calories)",
+            "unit": "unit not stated",
+            "value": 13857
+          },
+          "df_co_h2o_h2_co2": {
+            "status": "present",
+            "as_reported": "−4264",
+            "note": "free-energy change ΔF as printed; unit not printed in Table II (the text gives free energies in calories)",
+            "unit": "unit not stated",
+            "value": -4264
+          },
+          "k_2h2_co_ch3oh": {
+            "status": "present",
+            "as_reported": "2.4 × 10⁻⁴",
+            "note": "equilibrium constant as printed in Table II; unit not printed; as_reported corrected from the text-layer string '2.4 x 10-1' to the printed form read on the page image (value unchanged)",
+            "unit": "unit not stated",
+            "value": 0.00024
+          },
+          "k_3co_2h2o_ch3oh_2co2": {
+            "status": "present",
+            "as_reported": "4.2 × 10⁻¹",
+            "note": "equilibrium constant as printed in Table II; unit not printed; as_reported corrected from the text-layer string '4.2 X 10-1' to the printed form read on the page image (value unchanged)",
+            "unit": "unit not stated",
+            "value": 0.42
+          },
+          "k_co2_3h2_ch3oh_h2o": {
+            "status": "present",
+            "as_reported": "5.7 × 10⁻⁶",
+            "note": "equilibrium constant as printed in Table II; unit not printed; as_reported corrected from the text-layer string '5.7 X 10-6' to the printed form read on the page image (value unchanged)",
+            "unit": "unit not stated",
+            "value": 5.7e-06
+          },
+          "k_co_h2o_h2_co2": {
+            "status": "present",
+            "as_reported": "41",
+            "note": "equilibrium constant as printed in Table II; unit not printed",
+            "unit": "unit not stated",
+            "value": 41
+          }
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "at 304° G.",
+          "note": "Table II caption; text layer 'G' for C",
+          "unit": "°C",
+          "value": 304
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/analysis/table2-run-4",
+      "label": "Analysis",
+      "props": {
+        "name": "Table II run 4: equilibrium constants of four reactions at 304 °C",
+        "analysis_kind": "equilibrium",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table II, run 4",
+            "reading": "vision_ocr",
+            "region": [
+              0.02,
+              0.842,
+              0.98,
+              0.851
+            ],
+            "source": "ex:msyn/source/10.1021-ie50250a009",
+            "transcription": "4 3.67 × 10⁻⁴ +9078 −28.845 24.8 × 10⁻¹ −1043 −30,928 4.5 × 10⁻⁶ +14,128 −27,814 80 —5029"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 3, Table II",
+            "passage": "10.1021-ie50250a009/p3/7",
+            "quote": "Table II—“Equilibrium” in Four Possible Reactions at 304° G.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "The data in Table II are calculated from those given in Table I. They show equilibrium constants and correspond- ing values of the free-energy change for four possible reactions.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "are calculated from the corresponding AF and Eastman’s (2) values for the free energies of carbon monoxide, carbon dioxide, and water.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "experiment_status": "completed",
+        "note": "K exponents, lost in the text layer, read from the page image (vision_ocr evidence); the fourth reaction's heading reads 'CO + H2O = H2 + CO2' on the page image",
+        "results": {
+          "df0_ch3oh_2h2_co_ch3oh": {
+            "status": "present",
+            "as_reported": "−28.845",
+            "note": "ΔF° of CH3OH derived from this reaction and Eastman's free energies of CO, CO2 and water; printed '-28.845' in the text layer; the rendered PDF shows -28,845; printed '−28.845' with a point where the other entries have a thousands comma; recorded as −28845 like the other entries of the column",
+            "unit": "unit not stated",
+            "value": -28845
+          },
+          "df0_ch3oh_3co_2h2o_ch3oh_2co2": {
+            "status": "present",
+            "as_reported": "−30,928",
+            "note": "ΔF° of CH3OH derived from this reaction and Eastman's free energies of CO, CO2 and water",
+            "unit": "unit not stated",
+            "value": -30928
+          },
+          "df0_ch3oh_co2_3h2_ch3oh_h2o": {
+            "status": "present",
+            "as_reported": "−27,814",
+            "note": "ΔF° of CH3OH derived from this reaction and Eastman's free energies of CO, CO2 and water",
+            "unit": "unit not stated",
+            "value": -27814
+          },
+          "df_2h2_co_ch3oh": {
+            "status": "present",
+            "as_reported": "+9078",
+            "note": "free-energy change ΔF as printed; unit not printed in Table II (the text gives free energies in calories)",
+            "unit": "unit not stated",
+            "value": 9078
+          },
+          "df_3co_2h2o_ch3oh_2co2": {
+            "status": "present",
+            "as_reported": "−1043",
+            "note": "free-energy change ΔF as printed; unit not printed in Table II (the text gives free energies in calories)",
+            "unit": "unit not stated",
+            "value": -1043
+          },
+          "df_co2_3h2_ch3oh_h2o": {
+            "status": "present",
+            "as_reported": "+14,128",
+            "note": "free-energy change ΔF as printed; unit not printed in Table II (the text gives free energies in calories)",
+            "unit": "unit not stated",
+            "value": 14128
+          },
+          "df_co_h2o_h2_co2": {
+            "status": "present",
+            "as_reported": "—5029",
+            "note": "free-energy change ΔF as printed; unit not printed in Table II (the text gives free energies in calories)",
+            "unit": "unit not stated",
+            "value": -5029
+          },
+          "k_2h2_co_ch3oh": {
+            "status": "present",
+            "as_reported": "3.67 × 10⁻⁴",
+            "note": "equilibrium constant as printed in Table II; unit not printed; printed '-28.845' in the text layer; the rendered PDF shows -28,845; as_reported corrected from the text-layer string '3.67 x 10-4' to the printed form read on the page image (value unchanged)",
+            "unit": "unit not stated",
+            "value": 0.000367
+          },
+          "k_3co_2h2o_ch3oh_2co2": {
+            "status": "present",
+            "as_reported": "24.8 × 10⁻¹",
+            "note": "equilibrium constant as printed in Table II; unit not printed; as_reported corrected from the text-layer string '24.8 X 10-1' to the printed form read on the page image (value unchanged)",
+            "unit": "unit not stated",
+            "value": 2.48
+          },
+          "k_co2_3h2_ch3oh_h2o": {
+            "status": "present",
+            "as_reported": "4.5 × 10⁻⁶",
+            "note": "equilibrium constant as printed in Table II; unit not printed; as_reported corrected from the text-layer string '4.5 X 10-6' to the printed form read on the page image (value unchanged)",
+            "unit": "unit not stated",
+            "value": 4.5e-06
+          },
+          "k_co_h2o_h2_co2": {
+            "status": "present",
+            "as_reported": "80",
+            "note": "equilibrium constant as printed in Table II; unit not printed",
+            "unit": "unit not stated",
+            "value": 80
+          }
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "at 304° G.",
+          "note": "Table II caption; text layer 'G' for C",
+          "unit": "°C",
+          "value": 304
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/catalyst/zno-cr2o3-4-1",
+      "label": "Catalyst",
+      "props": {
+        "name": "zinc oxide-chromium oxide catalyst, about 4 Zn : 1 Cr (atomic)",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/2",
+            "quote": "The catalysts used in the following work were prepared by adding chromic acid solution to purified zinc oxide. The atomic proportions were about 4 Zn to 1 Cr.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50250a009/p1/5",
+            "quote": "It has been shown that carbon dioxide and hydrogen react upon a zinc oxide-chromium oxide catalyst at 304° C. to form methanol, carbon monoxide, and water.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/4",
+            "quote": "Reaction upon Zn0-Cr203 Catalyst",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "generality": "particular",
+        "properties": {
+          "zn_cr_atomic_proportion": {
+            "status": "present",
+            "as_reported": "about 4 Zn to 1 Cr",
+            "qualifier": "approximate",
+            "text_value": "about 4:1"
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/claim/K-agreement",
+      "label": "Claim",
+      "props": {
+        "name": "calculated K 7.4 x 10^-4 agrees with 5.6 x 10^-4",
+        "claim_kind": "comparison",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/9",
+            "quote": "The equilibrium constant calculated from this equation for 304° C. is 7.4 X 10 ~4. This is in very satisfactory agreement with the value 5.6 X 10~4 experimentally determined by Smith and Branting (/).",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "inference_type": "computational",
+        "note": "5.6 x 10^-4 is cited from Smith and Branting",
+        "statement": "The equilibrium constant of Reaction 1 at 304° C. calculated from the new free-energy equation, 7.4 x 10^-4, is in very satisfactory agreement with the value 5.6 x 10^-4 determined experimentally by Smith and Branting."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/claim/catalysts-produce-co2-water",
+      "label": "Claim",
+      "props": {
+        "name": "most known methanol catalysts give CO2 or water with methanol",
+        "claim_kind": "generalization",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ie50250a009/p4/1",
+            "quote": "However, most meth- anol catalysts of which we have knowledge produce carbon dioxide or water or both with methanol.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50250a009/p1/7",
+            "quote": "As most known methanol catalysts produce carbon dioxide or water or both along with methanol, it is possible that the formation of metha- nol from carbon monoxide and hydrogen may not be direct, especially as a steady state is approached.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "statement": "Most methanol catalysts known to the authors produce carbon dioxide or water or both with methanol."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/claim/co2-h2-gives-meoh-co-water",
+      "label": "Claim",
+      "props": {
+        "name": "CO2 + H2 on ZnO-Cr oxide at 304 °C give methanol, CO and water",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50250a009/p1/5",
+            "quote": "It has been shown that carbon dioxide and hydrogen react upon a zinc oxide-chromium oxide catalyst at 304° C. to form methanol, carbon monoxide, and water.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "inference_type": "interventional",
+        "statement": "Carbon dioxide and hydrogen react upon a zinc oxide-chromium oxide catalyst at 304° C. to form methanol, carbon monoxide, and water."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/claim/colorimetric-accuracy",
+      "label": "Claim",
+      "props": {
+        "name": "colorimetric methanol determination accurate only near the standard's concentration",
+        "claim_kind": "data_quality",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/2",
+            "quote": "By checking against known solutions of pure methanol it was found, as stated by Smith and Branting, that accurate results could be obtained only when the unknown solution was very close in concentration to the known solution with which it was compared.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/3",
+            "quote": "Some of the data reported in the preliminary experiments of Smith and Branting may be in error on this score.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "inference_type": "observational",
+        "statement": "The colorimetric determination of methanol gives accurate results only when the unknown solution is very close in concentration to the known solution with which it is compared; some of the preliminary data of Smith and Branting may be in error on this score."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/claim/constant-comparable",
+      "label": "Claim",
+      "props": {
+        "name": "CH3OH/CO(H2)2 from CO2-H2 comparable with CO-H2 values",
+        "claim_kind": "comparison",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/5",
+            "quote": "the constant CH3OH/CO(H2)2 was calculated to be 3.68 X 10~4.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/5",
+            "quote": "This value is comparable",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/1",
+            "quote": "with those obtained using carbon monoxide-hydrogen mixtures, in spite of the fact that in this case reactions other than those that produce methanol have taken place to a large extent.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "inference_type": "interventional",
+        "statement": "The constant CH3OH/CO(H2)2 of 3.68 x 10^-4 obtained from the CO2-H2 mixture is comparable with those obtained using carbon monoxide-hydrogen mixtures, although reactions other than those producing methanol took place to a large extent."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/claim/improved-apparatus-scatter",
+      "label": "Claim",
+      "props": {
+        "name": "improved-apparatus CO-H2 results scattered beyond error",
+        "claim_kind": "data_quality",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/3",
+            "quote": "Experiments with this improved apparatus gave results in which the variations were more than seemed to be ac- counted for by the limits of error of the method,",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/3",
+            "quote": "and the ap- parent nearness of approach to equilibrium did not corre- spond to what would be expected from the rates of gas flow used in different experiments.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "inference_type": "observational",
+        "statement": "With the improved apparatus the variations of the results were more than accounted for by the limits of error of the method, and the apparent nearness of approach to equilibrium did not correspond to what would be expected from the gas flow rates."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/claim/nearest-equilibrium-undetermined",
+      "label": "Claim",
+      "props": {
+        "name": "which reaction is nearest equilibrium could not be determined",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "quote": "304° C. upon hydrogen-carbon dioxide-water mixtures, it has not been found possible to determine which reaction comes nearest to equilibrium.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "It was hoped in this series of experiments to determine which of these possible reactions came nearest to equilib- rium at the different rates of gas flow. This purpose was probably defeated by uncontrollable changes in activity of the catalyst.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "inference_type": "interventional",
+        "statement": "It was not found possible to determine which of the reactions occurring on the catalyst at 304° C. upon hydrogen-carbon dioxide-water mixtures comes nearest to equilibrium."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/claim/no-single-reaction",
+      "label": "Claim",
+      "props": {
+        "name": "inconsistent to pick one methanol reaction as nearest equilibrium",
+        "claim_kind": "conclusion",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "However, examination of the data recorded in Table II, together with the facts presented above, shows the inconsistency of picking out any one reaction involving methanol (for example, the hydrogen-carbon monoxide reaction) as the one in which the methanol is nearest to equilibrium.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "inference_type": "observational",
+        "statement": "The data of Table II together with the other facts show the inconsistency of picking out any one reaction involving methanol (for example, the hydrogen-carbon monoxide reaction) as the one in which the methanol is nearest to equilibrium."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/claim/side-reactions-error",
+      "label": "Claim",
+      "props": {
+        "name": "side reactions may introduce error into methanol-equilibrium measurements",
+        "claim_kind": "conclusion",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/7",
+            "quote": "The writers believe that the data presented here indicate that side reactions may under certain conditions introduce some error into measurements of the methanol equilibrium.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "inference_type": "observational",
+        "statement": "Side reactions may under certain conditions introduce some error into measurements of the methanol equilibrium."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/claim/water-deactivates",
+      "label": "Claim",
+      "props": {
+        "name": "large water-vapour concentrations deteriorate the catalyst",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/1",
+            "quote": "although large concentrations of water vapor in the gas at temperatures as low as 300° C. caused a rather rapid deterioration in the activity of the catalyst—probably accompanying hydration of the chromium oxide.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "inference_type": "interventional",
+        "statement": "Large concentrations of water vapor in the gas at temperatures as low as 300° C. caused a rather rapid deterioration in the activity of the catalyst."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/computation/reaction1-free-energy-equation",
+      "label": "Computation",
+      "props": {
+        "name": "free-energy equation of Reaction 1 and K at 304 °C",
+        "conditions": {
+          "heat_of_combustion_liquid_methanol": {
+            "status": "present",
+            "as_reported": "173,300 calories per gram-molecule",
+            "note": "Roth's value, personal communication, used as input",
+            "unit": "cal per gram-molecule",
+            "value": 173300
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/7",
+            "quote": "He finds the heat of combustion of liquid methanol to be 173,300 calories per gram-molecule at constant pressure and (presumably) 18° C.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/7",
+            "quote": "Using the specific-heat data given by Kelley (3), the free energy",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 3, note, equation for Reaction 1",
+            "reading": "vision_ocr",
+            "region": [
+              0.48,
+              0.895,
+              0.98,
+              0.903
+            ],
+            "second_reading": "ΔF = − 18,050 + 45.00 T log10 T − 0.01586T² − 69.4T",
+            "source": "ex:msyn/source/10.1021-ie50250a009",
+            "transcription": "ΔF = − 18,050 + 45.00 T log₁₀ T − 0.01586T² − 69.4T"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 3, note",
+            "reading": "vision_ocr",
+            "region": [
+              0.48,
+              0.9035,
+              0.98,
+              0.9225
+            ],
+            "source": "ex:msyn/source/10.1021-ie50250a009",
+            "transcription": "The equilibrium constant calculated from this equation for 304° C. is 7.4 × 10⁻⁴."
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/9",
+            "quote": "The equilibrium constant calculated from this equation for 304° C. is 7.4 X 10 ~4. This is in very satisfactory agreement with the value 5.6 X 10~4 experimentally determined by Smith and Branting (/).",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/9",
+            "quote": "gives —29,590 calories for the free-energy of CHsOH(g) at 304° C., which may be compared with the data in Table II.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "experiment_status": "completed",
+        "note": "Uses Kelley's specific-heat data, Eastman's free energy of CO and Roth's heat of combustion (all cited). The printed equation, garbled in the text layer, was read on the page image (vision_ocr evidence).",
+        "results": {
+          "df_ch3oh_g_304c": {
+            "status": "present",
+            "as_reported": "—29,590 calories",
+            "unit": "cal",
+            "value": -29590
+          },
+          "k_reaction1_304c": {
+            "status": "present",
+            "as_reported": "7.4 × 10⁻⁴",
+            "note": "as_reported corrected from the text-layer string '7.4 X 10 ~4' to the printed form read on the page image (value unchanged)",
+            "unit": "unit not stated",
+            "value": 0.00074
+          }
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "304° C.",
+          "unit": "°C",
+          "value": 304
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/feed/co-h2",
+      "label": "Feed",
+      "props": {
+        "name": "carbon monoxide-hydrogen mixture (composition not stated)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/4",
+            "quote": "This gas mixture was passed over the catalyst at about the space velocity used in previous equilibrium experiments with carbon monoxide-hydrogen mixtures.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/feed/co2-h2-24-74",
+      "label": "Feed",
+      "props": {
+        "name": "CO2-H2 mixture, 24 % CO2, 74 % H2, 2 % N2",
+        "description": "made from commercial carbon dioxide and electrolytic hydrogen; passed over hot platinized asbestos",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/4",
+            "quote": "A mixture of carbon dioxide and hydrogen was made from commercial carbon dioxide and electrolytic hydrogen. After passing over hot platinized asbestos, the mixture analyzed 24 per cent C02, 74 per cent H2, and 2 per cent N2.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/feed/co2-h2-water-20c",
+      "label": "Feed",
+      "props": {
+        "name": "CO2-H2 mixture saturated with water vapour at 20 °C",
+        "description": "gas of 24 per cent CO2, 74 per cent H2, 2 per cent N2 after platinized asbestos, saturated with the vapor from water held at 20° C.",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/5",
+            "quote": "The gas used in these experiments originally analyzed 24 per cent CO2, 74 per cent H2, and 2 per cent N2 after passage over the platinized asbestos. This gas was saturated with the vapor from water held at 20° C.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/hypothesis/activity-changes-defeated-purpose",
+      "label": "Hypothesis",
+      "props": {
+        "name": "uncontrollable changes in catalyst activity probably defeated the purpose",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "It was hoped in this series of experiments to determine which of these possible reactions came nearest to equilib- rium at the different rates of gas flow. This purpose was probably defeated by uncontrollable changes in activity of the catalyst.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "hypothesis_kind": "auxiliary",
+        "hypothesis_status": "proposed",
+        "statement": "The purpose of determining which reaction came nearest to equilibrium at different gas flow rates was probably defeated by uncontrollable changes in activity of the catalyst."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/hypothesis/mechanism-not-direct",
+      "label": "Hypothesis",
+      "props": {
+        "name": "methanol formation from CO and H2 may not be direct",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50250a009/p1/7",
+            "quote": "As most known methanol catalysts produce carbon dioxide or water or both along with methanol, it is possible that the formation of metha- nol from carbon monoxide and hydrogen may not be direct, especially as a steady state is approached.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ie50250a009/p4/1",
+            "quote": "It is possible that the mechanism of formation of methanol from hydrogen and carbon monoxide may not be so simple as indicated by Equation 1, especially as a steady state is approached.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/1",
+            "quote": "But this need not be the case, particularly if the mechanism of the reaction by which methanol is produced is not simply that indicated by Equation 1.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "hypothesis_kind": "mechanistic",
+        "hypothesis_status": "proposed",
+        "statement": "The mechanism of formation of methanol from hydrogen and carbon monoxide may not be so simple as indicated by Equation 1 (it may not be direct), especially as a steady state is approached."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/hypothesis/side-reactions-block-equilibrium",
+      "label": "Hypothesis",
+      "props": {
+        "name": "other reactions at comparable rates may prevent the methanol equilibrium being reached",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50250a009/p1/7",
+            "quote": "If, as an equilibrium condition is approached in one reaction, other reactions are taking place at rates comparable with that of the reaction in question, equilibrium may not be",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/1",
+            "quote": "readily reached. The object of the work described herein was to determine whether such a condition existed in the case of measurements thus far made of the methanol equi- librium.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "hypothesis_kind": "explanatory",
+        "hypothesis_status": "proposed",
+        "statement": "If, as equilibrium is approached in one reaction, other reactions take place at comparable rates, equilibrium may not be readily reached; the work was to determine whether this was so for the measurements of the methanol equilibrium."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/preparation/chromic-acid-on-zno",
+      "label": "Preparation",
+      "props": {
+        "name": "chromic acid solution added to purified zinc oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/2",
+            "quote": "The catalysts used in the following work were prepared by adding chromic acid solution to purified zinc oxide. The atomic proportions were about 4 Zn to 1 Cr.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "method": "addition of chromic acid solution to purified zinc oxide",
+        "procedure_status": "completed",
+        "steps": [
+          "prepared by adding chromic acid solution to purified zinc oxide"
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/reaction/co-water-to-methanol",
+      "label": "Reaction",
+      "props": {
+        "name": "3CO + 2H2O = CH3OH + 2CO2",
+        "equation": "3 CO + 2 H2O -> CH3OH + 2 CO2",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 3, Table II",
+            "passage": "10.1021-ie50250a009/p3/7",
+            "quote": "3CO + 2HsO = CH3OH + 2C02",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "note": "Table II heading; text layer reads '3CO + 2HsO = CH3OH + 2C02'"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/reactor/figure1-atmospheric",
+      "label": "Reactor",
+      "props": {
+        "name": "Figure 1 apparatus for H2-CO2 at atmospheric pressure",
+        "description": "gas from a storage cylinder through reducing valve and flowmeter, platinized-asbestos tube removing oxygen, water saturator at 20 °C, heated tubing 1.5 mm i.d., catalyst surrounded by a thin metal umbrella and heated by the vapor of boiling benzophenone; traps cooled in acetone-carbon dioxide snow and a weighed amount of water in a wash coil",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "p. 2, Figure 1",
+            "passage": "10.1021-ie50250a009/p2/1",
+            "quote": "Figure 1—Apparatus Used in Experiments with Hydrogen and Carbon Dioxide at Atmospheric Pressure",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/3",
+            "quote": "The gas from the cylinder passed through a high grade reducing valve, b, by means of which the rate of gas flow, as indicated by the flowmeter, d, was controlled.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/3",
+            "quote": "A tube, g, containing platinized asbestos, removed oxygen from the gas, and a magnetically operated device, p, introduced water to the saturator, $i, kept at a constant temperature of 20° C.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/4",
+            "quote": "catalyst, h, was surrounded by a thin metal “umbrella” and heated by the vapor of boiling benzophenone.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "reactor_kind": "flow"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/reactor/improved-smith-branting",
+      "label": "Reactor",
+      "props": {
+        "name": "Smith and Branting apparatus with improvements (off-gas to calibrated evacuated cylinder)",
+        "description": "flow apparatus of Smith and Branting with improvements: off-gas exhausted through an electrically operated pressure regulator into an evacuated cylinder of known volume with thermometer and manometer; methanol removed in water wash coils at 0 °C",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/2",
+            "quote": "At first several experiments were made essentially as de- scribed by Smith and Branting, but with some improvements.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/2",
+            "quote": "The total volume of gas passed over the catalyst was measured by exhausting the off-gas through an electrically operated pressure regulator into an evacuated cylinder whose volume was carefully determined",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "reactor_kind": "flow"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/sample/zno-cr-charge-600cc",
+      "label": "CatalystSample",
+      "props": {
+        "name": "ZnO-Cr oxide catalyst charge, 600 cc (the 'original catalyst')",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/2",
+            "quote": "All of the following work was done at 304° C. on 600 cc. of catalyst.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/2",
+            "quote": "It was thought of interest to study in greater detail the reaction between hydrogen and cartoon dioxide using the original catalyst and determining the partial pressure of water in the equilibrium mixtures.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "note": "The source says 'catalysts' were prepared; whether the charges of the successive apparatus were one batch is not stated",
+        "preparation_status": "prepared",
+        "sample_kind": "reactor_charge"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/species/chromic-acid",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "chromic acid solution",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/2",
+            "quote": "The catalysts used in the following work were prepared by adding chromic acid solution to purified zinc oxide. The atomic proportions were about 4 Zn to 1 Cr.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/test/co2-h2-304",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "CO2 + H2 over ZnO-Cr2O3 at 304 °C",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/4",
+            "quote": "As the reaction of carbon dioxide and hydrogen to form methanol and water was known to take place on a catalyst very similar to the one we were using, we were led to in- vestigate this reaction upon our catalyst.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/4",
+            "quote": "A mixture of carbon dioxide and hydrogen was made from commercial carbon dioxide and electrolytic hydrogen. After passing over hot platinized asbestos, the mixture analyzed 24 per cent C02, 74 per cent H2, and 2 per cent N2.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/4",
+            "quote": "This gas mixture was passed over the catalyst at about the space velocity used in previous equilibrium experiments with carbon monoxide-hydrogen mixtures.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "quote": "The first wash coil recovered 0.00095 gram of methanol. No detectable amount of methanol was found in the second wash coil.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/5",
+            "quote": "The off-gas analyzed 14.1 per cent C02, 69 per cent H2, and 12.3 per cent CO.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/5",
+            "quote": "the constant CH3OH/CO(H2)2 was calculated to be 3.68 X 10~4.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "pressure": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source"
+        },
+        "results": {
+          "constant_ch3oh_over_co_h2_squared": {
+            "status": "present",
+            "as_reported": "3.68 X 10~4",
+            "note": "CH3OH/CO(H2)2, calculated by the authors from the data, the total pressure and the total gas collected; printed '10~4' for 10^-4",
+            "unit": "unit not stated",
+            "value": 0.000368
+          },
+          "methanol_first_wash_coil": {
+            "status": "present",
+            "as_reported": "0.00095 gram of methanol",
+            "unit": "g",
+            "value": 0.00095
+          },
+          "methanol_second_wash_coil": {
+            "status": "present",
+            "as_reported": "No detectable amount of methanol",
+            "text_value": "none detectable"
+          },
+          "off_gas_co": {
+            "status": "present",
+            "as_reported": "12.3 per cent CO",
+            "unit": "%",
+            "value": 12.3
+          },
+          "off_gas_co2": {
+            "status": "present",
+            "as_reported": "14.1 per cent C02",
+            "unit": "%",
+            "value": 14.1
+          },
+          "off_gas_h2": {
+            "status": "present",
+            "as_reported": "69 per cent H2",
+            "unit": "%",
+            "value": 69
+          }
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "about the space velocity used in previous equilibrium experiments with carbon monoxide-hydrogen mixtures",
+          "qualifier": "approximate",
+          "text_value": "about the space velocity of the previous CO-H2 equilibrium experiments"
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "304° C.",
+          "unit": "°C",
+          "value": 304
+        },
+        "test_kind": "activity"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/test/improved-co-h2-equilibrium",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "CO-H2 methanol equilibrium experiments with the improved apparatus",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/2",
+            "quote": "At first several experiments were made essentially as de- scribed by Smith and Branting, but with some improvements.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/3",
+            "quote": "Experiments with this improved apparatus gave results in which the variations were more than seemed to be ac- counted for by the limits of error of the method,",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/3",
+            "quote": "and the ap- parent nearness of approach to equilibrium did not corre- spond to what would be expected from the rates of gas flow used in different experiments.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/2",
+            "quote": "All of the following work was done at 304° C. on 600 cc. of catalyst.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "note": "several experiments on the methanol equilibrium from CO-H2; no numbers given",
+        "pressure": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source"
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "304° C.",
+          "unit": "°C",
+          "value": 304
+        },
+        "test_kind": "other"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/test/table1-expt-1",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Table I experiment 1: H2-CO2-H2O at 304 °C",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 3, Table I",
+            "passage": "10.1021-ie50250a009/p3/5",
+            "quote": "1 0.6 0.0008 1.95 20.0 66.0 13.2 800 41.0",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, expt. 1",
+            "reading": "vision_ocr",
+            "region": [
+              0.5,
+              0.3755,
+              0.9,
+              0.3835
+            ],
+            "source": "ex:msyn/source/10.1021-ie50250a009",
+            "transcription": "1 0.6 0.0008 1.95 20.0 66.0 13.2 800 41.0"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 3, Table I",
+            "passage": "10.1021-ie50250a009/p3/5",
+            "quote": "Table I—“Equilibrium” In System H.-C02-C0-H20-CH,0H at 304° G,",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/5",
+            "quote": "The data obtained in four experiments are recorded in Table I.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "flow_rate": {
+          "status": "present",
+          "as_reported": "0.6",
+          "note": "gas flow rate, liters per hour (unit read from the rendered PDF; text layer shows 'Liters per')",
+          "unit": "L/h",
+          "value": 0.6
+        },
+        "pressure": {
+          "status": "present",
+          "as_reported": "800",
+          "note": "Table I column 'Total Pressure', Mm. Hg. (heading read from the rendered PDF)",
+          "unit": "mm Hg",
+          "value": 800.0
+        },
+        "results": {
+          "ch3oh": {
+            "status": "present",
+            "as_reported": "0.0008",
+            "unit": "g",
+            "value": 0.0008
+          },
+          "h2o": {
+            "status": "present",
+            "as_reported": "1.95",
+            "unit": "g",
+            "value": 1.95
+          },
+          "off_gas_co": {
+            "status": "present",
+            "as_reported": "13.2",
+            "unit": "%",
+            "value": 13.2
+          },
+          "off_gas_co2": {
+            "status": "present",
+            "as_reported": "20.0",
+            "unit": "%",
+            "value": 20.0
+          },
+          "off_gas_h2": {
+            "status": "present",
+            "as_reported": "66.0",
+            "unit": "%",
+            "value": 66.0
+          },
+          "volume_off_gas_stp": {
+            "status": "present",
+            "as_reported": "41.0",
+            "unit": "L",
+            "value": 41.0
+          }
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "at 304° G,",
+          "note": "Table I caption; text layer 'G' for C",
+          "unit": "°C",
+          "value": 304
+        },
+        "test_kind": "activity",
+        "test_label": "1"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/test/table1-expt-2",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Table I experiment 2: H2-CO2-H2O at 304 °C",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 3, Table I",
+            "quote": "2 0.8 0.0006 1.87 27.2 64.6 5. 1 817 34.9",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, expt. 2",
+            "reading": "vision_ocr",
+            "region": [
+              0.5,
+              0.3835,
+              0.9,
+              0.391
+            ],
+            "source": "ex:msyn/source/10.1021-ie50250a009",
+            "transcription": "2 0.8 0.0006 1.87 27.2 64.6 5.1 817 34.9"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 3, Table I",
+            "passage": "10.1021-ie50250a009/p3/5",
+            "quote": "Table I—“Equilibrium” In System H.-C02-C0-H20-CH,0H at 304° G,",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/5",
+            "quote": "The data obtained in four experiments are recorded in Table I.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "flow_rate": {
+          "status": "present",
+          "as_reported": "0.8",
+          "note": "gas flow rate, liters per hour (unit read from the rendered PDF; text layer shows 'Liters per')",
+          "unit": "L/h",
+          "value": 0.8
+        },
+        "pressure": {
+          "status": "present",
+          "as_reported": "817",
+          "note": "Table I column 'Total Pressure', Mm. Hg. (heading read from the rendered PDF)",
+          "unit": "mm Hg",
+          "value": 817.0
+        },
+        "results": {
+          "ch3oh": {
+            "status": "present",
+            "as_reported": "0.0006",
+            "unit": "g",
+            "value": 0.0006
+          },
+          "h2o": {
+            "status": "present",
+            "as_reported": "1.87",
+            "unit": "g",
+            "value": 1.87
+          },
+          "off_gas_co": {
+            "status": "present",
+            "as_reported": "5.1",
+            "note": "as_reported from the page image (text layer split the digits)",
+            "unit": "%",
+            "value": 5.1
+          },
+          "off_gas_co2": {
+            "status": "present",
+            "as_reported": "27.2",
+            "unit": "%",
+            "value": 27.2
+          },
+          "off_gas_h2": {
+            "status": "present",
+            "as_reported": "64.6",
+            "unit": "%",
+            "value": 64.6
+          },
+          "volume_off_gas_stp": {
+            "status": "present",
+            "as_reported": "34.9",
+            "unit": "L",
+            "value": 34.9
+          }
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "at 304° G,",
+          "note": "Table I caption; text layer 'G' for C",
+          "unit": "°C",
+          "value": 304
+        },
+        "test_kind": "activity",
+        "test_label": "2"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/test/table1-expt-3",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Table I experiment 3: H2-CO2-H2O at 304 °C",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 3, Table I",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "3 0.33 0.00024 1.97 25.6 67.3 5.2 813 30.5",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, expt. 3",
+            "reading": "vision_ocr",
+            "region": [
+              0.5,
+              0.391,
+              0.9,
+              0.399
+            ],
+            "source": "ex:msyn/source/10.1021-ie50250a009",
+            "transcription": "3 0.33 0.00024 1.97 25.6 67.3 5.2 813 30.5"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 3, Table I",
+            "passage": "10.1021-ie50250a009/p3/5",
+            "quote": "Table I—“Equilibrium” In System H.-C02-C0-H20-CH,0H at 304° G,",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/5",
+            "quote": "The data obtained in four experiments are recorded in Table I.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "flow_rate": {
+          "status": "present",
+          "as_reported": "0.33",
+          "note": "gas flow rate, liters per hour (unit read from the rendered PDF; text layer shows 'Liters per')",
+          "unit": "L/h",
+          "value": 0.33
+        },
+        "pressure": {
+          "status": "present",
+          "as_reported": "813",
+          "note": "Table I column 'Total Pressure', Mm. Hg. (heading read from the rendered PDF)",
+          "unit": "mm Hg",
+          "value": 813.0
+        },
+        "results": {
+          "ch3oh": {
+            "status": "present",
+            "as_reported": "0.00024",
+            "unit": "g",
+            "value": 0.00024
+          },
+          "h2o": {
+            "status": "present",
+            "as_reported": "1.97",
+            "unit": "g",
+            "value": 1.97
+          },
+          "off_gas_co": {
+            "status": "present",
+            "as_reported": "5.2",
+            "unit": "%",
+            "value": 5.2
+          },
+          "off_gas_co2": {
+            "status": "present",
+            "as_reported": "25.6",
+            "unit": "%",
+            "value": 25.6
+          },
+          "off_gas_h2": {
+            "status": "present",
+            "as_reported": "67.3",
+            "unit": "%",
+            "value": 67.3
+          },
+          "volume_off_gas_stp": {
+            "status": "present",
+            "as_reported": "30.5",
+            "unit": "L",
+            "value": 30.5
+          }
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "at 304° G,",
+          "note": "Table I caption; text layer 'G' for C",
+          "unit": "°C",
+          "value": 304
+        },
+        "test_kind": "activity",
+        "test_label": "3"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/test/table1-expt-4",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Table I experiment 4: H2-CO2-H2O at 304 °C",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 3, Table I",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "4 0.93 0.00030 1.03 25.5 66. 1 4.8 817 30.9",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, expt. 4",
+            "reading": "vision_ocr",
+            "region": [
+              0.5,
+              0.399,
+              0.9,
+              0.4065
+            ],
+            "source": "ex:msyn/source/10.1021-ie50250a009",
+            "transcription": "4 0.93 0.00030 1.03 25.5 66.1 4.8 817 30.9"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 3, Table I",
+            "passage": "10.1021-ie50250a009/p3/5",
+            "quote": "Table I—“Equilibrium” In System H.-C02-C0-H20-CH,0H at 304° G,",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/5",
+            "quote": "The data obtained in four experiments are recorded in Table I.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "flow_rate": {
+          "status": "present",
+          "as_reported": "0.93",
+          "note": "gas flow rate, liters per hour (unit read from the rendered PDF; text layer shows 'Liters per')",
+          "unit": "L/h",
+          "value": 0.93
+        },
+        "pressure": {
+          "status": "present",
+          "as_reported": "817",
+          "note": "Table I column 'Total Pressure', Mm. Hg. (heading read from the rendered PDF)",
+          "unit": "mm Hg",
+          "value": 817.0
+        },
+        "results": {
+          "ch3oh": {
+            "status": "present",
+            "as_reported": "0.00030",
+            "unit": "g",
+            "value": 0.0003
+          },
+          "h2o": {
+            "status": "present",
+            "as_reported": "1.03",
+            "unit": "g",
+            "value": 1.03
+          },
+          "off_gas_co": {
+            "status": "present",
+            "as_reported": "4.8",
+            "unit": "%",
+            "value": 4.8
+          },
+          "off_gas_co2": {
+            "status": "present",
+            "as_reported": "25.5",
+            "unit": "%",
+            "value": 25.5
+          },
+          "off_gas_h2": {
+            "status": "present",
+            "as_reported": "66.1",
+            "note": "as_reported from the page image (text layer split the digits)",
+            "unit": "%",
+            "value": 66.1
+          },
+          "volume_off_gas_stp": {
+            "status": "present",
+            "as_reported": "30.9",
+            "unit": "L",
+            "value": 30.9
+          }
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "at 304° G,",
+          "note": "Table I caption; text layer 'G' for C",
+          "unit": "°C",
+          "value": 304
+        },
+        "test_kind": "activity",
+        "test_label": "4"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/treatment/equilibration-several-days",
+      "label": "Treatment",
+      "props": {
+        "name": "several days' flow of the H2-CO2-H2O mixture",
+        "atmosphere": "H2-CO2-H2O mixture",
+        "duration": {
+          "status": "present",
+          "as_reported": "several days",
+          "qualifier": "approximate",
+          "text_value": "several days"
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/4",
+            "quote": "The gas was passed through the apparatus for several days in order to bring the catalyst into equilibrium with the H2-CO2-H2O mixture.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "note": "to bring the catalyst into equilibrium with the H2-CO2-H2O mixture before the Table I experiments",
+        "procedure_status": "completed",
+        "temperature": {
+          "status": "present",
+          "as_reported": "304° C.",
+          "unit": "°C",
+          "value": 304
+        },
+        "treatment_kind": "activation"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/treatment/hot-evacuation",
+      "label": "Treatment",
+      "props": {
+        "name": "evacuation of the hot catalyst with a mercury diffusion pump",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/3",
+            "quote": "But the entering gas was purified by remaining in a liquid-air trap for from 30 to 60 minutes and, in the present work, the catalyst, while hot, was thoroughly evacuated with a mercury diffusion pump.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/4",
+            "quote": "After thorough evacuation of the heated catalyst with a mercury diffusion pump, the gas was introduced to the apparatus and the saturator, si, was filled with water by operating the slug, pi.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "method": "thorough evacuation of the heated catalyst with a mercury diffusion pump",
+        "procedure_status": "completed",
+        "treatment_kind": "other"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/variable/gas-flow-rate",
+      "label": "Variable",
+      "props": {
+        "name": "gas flow rate",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "It was hoped in this series of experiments to determine which of these possible reactions came nearest to equilib- rium at the different rates of gas flow. This purpose was probably defeated by uncontrollable changes in activity of the catalyst.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "quantity_kind": "volumetric_flow_rate",
+        "scale": "quantitative",
+        "unit": "L/h"
+      }
+    },
+    {
+      "id": "ex:msyn/source/10.1021-ie50250a009",
+      "label": "Source",
+      "props": {
+        "name": "Reactions That Occur on a Methanol Catalyst",
+        "kind": "article",
+        "description": "Published 1930 (publication year (bibliography)); in scope: before the 1966-01-01 cutoff. Text: 4 pages text_layer. Text not redistributed.",
+        "doi": "10.1021/ie50250a009",
+        "licence": "no verified publisher licence; short excerpts quoted as evidence under fair use",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "Reactions That Occur on a Methanol Catalyst",
+        "url": "https://doi.org/10.1021/ie50250a009",
+        "venue": "Industrial & Engineering Chemistry",
+        "year": 1930
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/analysis/table2-run-1/reported-in/10.1021-ie50250a009",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3",
+          "p. 3, Table II",
+          "p. 3, Table II, run 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/analysis/table2-run-1",
+      "target": "ex:msyn/source/10.1021-ie50250a009"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/analysis/table2-run-2/reported-in/10.1021-ie50250a009",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3",
+          "p. 3, Table II",
+          "p. 3, Table II, run 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/analysis/table2-run-2",
+      "target": "ex:msyn/source/10.1021-ie50250a009"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/analysis/table2-run-3/reported-in/10.1021-ie50250a009",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3",
+          "p. 3, Table II",
+          "p. 3, Table II, run 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/analysis/table2-run-3",
+      "target": "ex:msyn/source/10.1021-ie50250a009"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/analysis/table2-run-4/reported-in/10.1021-ie50250a009",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3",
+          "p. 3, Table II",
+          "p. 3, Table II, run 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/analysis/table2-run-4",
+      "target": "ex:msyn/source/10.1021-ie50250a009"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/catalyst/zno-cr2o3-4-1/reported-in/10.1021-ie50250a009",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/catalyst/zno-cr2o3-4-1",
+      "target": "ex:msyn/source/10.1021-ie50250a009"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/claim/K-agreement/reported-in/10.1021-ie50250a009",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/claim/K-agreement",
+      "target": "ex:msyn/source/10.1021-ie50250a009"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/claim/catalysts-produce-co2-water/reported-in/10.1021-ie50250a009",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/claim/catalysts-produce-co2-water",
+      "target": "ex:msyn/source/10.1021-ie50250a009"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/claim/co2-h2-gives-meoh-co-water/reported-in/10.1021-ie50250a009",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/claim/co2-h2-gives-meoh-co-water",
+      "target": "ex:msyn/source/10.1021-ie50250a009"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/claim/colorimetric-accuracy/reported-in/10.1021-ie50250a009",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/claim/colorimetric-accuracy",
+      "target": "ex:msyn/source/10.1021-ie50250a009"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/claim/constant-comparable/reported-in/10.1021-ie50250a009",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/claim/constant-comparable",
+      "target": "ex:msyn/source/10.1021-ie50250a009"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/claim/improved-apparatus-scatter/reported-in/10.1021-ie50250a009",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/claim/improved-apparatus-scatter",
+      "target": "ex:msyn/source/10.1021-ie50250a009"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/claim/nearest-equilibrium-undetermined/reported-in/10.1021-ie50250a009",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/claim/nearest-equilibrium-undetermined",
+      "target": "ex:msyn/source/10.1021-ie50250a009"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/claim/no-single-reaction/reported-in/10.1021-ie50250a009",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/claim/no-single-reaction",
+      "target": "ex:msyn/source/10.1021-ie50250a009"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/claim/side-reactions-error/reported-in/10.1021-ie50250a009",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/claim/side-reactions-error",
+      "target": "ex:msyn/source/10.1021-ie50250a009"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/claim/water-deactivates/reported-in/10.1021-ie50250a009",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/claim/water-deactivates",
+      "target": "ex:msyn/source/10.1021-ie50250a009"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/computation/reaction1-free-energy-equation/reported-in/10.1021-ie50250a009",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3",
+          "p. 3, note",
+          "p. 3, note, equation for Reaction 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/computation/reaction1-free-energy-equation",
+      "target": "ex:msyn/source/10.1021-ie50250a009"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/feed/co-h2/reported-in/10.1021-ie50250a009",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/feed/co-h2",
+      "target": "ex:msyn/source/10.1021-ie50250a009"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/feed/co2-h2-24-74/reported-in/10.1021-ie50250a009",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/feed/co2-h2-24-74",
+      "target": "ex:msyn/source/10.1021-ie50250a009"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/feed/co2-h2-water-20c/reported-in/10.1021-ie50250a009",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/feed/co2-h2-water-20c",
+      "target": "ex:msyn/source/10.1021-ie50250a009"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/hypothesis/activity-changes-defeated-purpose/reported-in/10.1021-ie50250a009",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/hypothesis/activity-changes-defeated-purpose",
+      "target": "ex:msyn/source/10.1021-ie50250a009"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/hypothesis/mechanism-not-direct/reported-in/10.1021-ie50250a009",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 2",
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/hypothesis/mechanism-not-direct",
+      "target": "ex:msyn/source/10.1021-ie50250a009"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/hypothesis/side-reactions-block-equilibrium/reported-in/10.1021-ie50250a009",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/hypothesis/side-reactions-block-equilibrium",
+      "target": "ex:msyn/source/10.1021-ie50250a009"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/1",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "status": "asserted",
+        "coefficient": 3,
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 3, Table II",
+            "passage": "10.1021-ie50250a009/p3/7",
+            "quote": "3CO + 2HsO = CH3OH + 2C02",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/reaction/co-water-to-methanol",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/10",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/2",
+            "quote": "The catalysts used in the following work were prepared by adding chromic acid solution to purified zinc oxide. The atomic proportions were about 4 Zn to 1 Cr.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/sample/zno-cr-charge-600cc",
+      "target": "ex:msyn/10.1021-ie50250a009/species/chromic-acid"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/100",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "The data in Table II are calculated from those given in Table I. They show equilibrium constants and correspond- ing values of the free-energy change for four possible reactions.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/analysis/table2-run-3",
+      "target": "ex:msyn/10.1021-ie50250a009/reaction/co-water-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/101",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "The data in Table II are calculated from those given in Table I. They show equilibrium constants and correspond- ing values of the free-energy change for four possible reactions.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/analysis/table2-run-3",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/102",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "The data in Table II are calculated from those given in Table I. They show equilibrium constants and correspond- ing values of the free-energy change for four possible reactions.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/analysis/table2-run-3",
+      "target": "ex:msyn/reaction/water-gas-shift"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/103",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "The data in Table II are calculated from those given in Table I. They show equilibrium constants and correspond- ing values of the free-energy change for four possible reactions.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "role": "data"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/analysis/table2-run-4",
+      "target": "ex:msyn/10.1021-ie50250a009/test/table1-expt-4"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/104",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "The data in Table II are calculated from those given in Table I. They show equilibrium constants and correspond- ing values of the free-energy change for four possible reactions.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/analysis/table2-run-4",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/105",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "The data in Table II are calculated from those given in Table I. They show equilibrium constants and correspond- ing values of the free-energy change for four possible reactions.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/analysis/table2-run-4",
+      "target": "ex:msyn/10.1021-ie50250a009/reaction/co-water-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/106",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "The data in Table II are calculated from those given in Table I. They show equilibrium constants and correspond- ing values of the free-energy change for four possible reactions.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/analysis/table2-run-4",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/107",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "The data in Table II are calculated from those given in Table I. They show equilibrium constants and correspond- ing values of the free-energy change for four possible reactions.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/analysis/table2-run-4",
+      "target": "ex:msyn/reaction/water-gas-shift"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/108",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/9",
+            "quote": "the equation for the free-energy change in Reaction 1 is AF = - 18,050 + 45.00 T logic T - 0.01586 * - 69.4",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/computation/reaction1-free-energy-equation",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/109",
+      "type": "HAS_VARIABLE",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "It was hoped in this series of experiments to determine which of these possible reactions came nearest to equilib- rium at the different rates of gas flow. This purpose was probably defeated by uncontrollable changes in activity of the catalyst.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "level": {
+          "status": "present",
+          "as_reported": "0.6",
+          "unit": "L/h",
+          "value": 0.6
+        },
+        "role": "factor"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/table1-expt-1",
+      "target": "ex:msyn/10.1021-ie50250a009/variable/gas-flow-rate"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/11",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/3",
+            "quote": "But the entering gas was purified by remaining in a liquid-air trap for from 30 to 60 minutes and, in the present work, the catalyst, while hot, was thoroughly evacuated with a mercury diffusion pump.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "order": 1
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/sample/zno-cr-charge-600cc",
+      "target": "ex:msyn/10.1021-ie50250a009/treatment/hot-evacuation"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/110",
+      "type": "HAS_VARIABLE",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "It was hoped in this series of experiments to determine which of these possible reactions came nearest to equilib- rium at the different rates of gas flow. This purpose was probably defeated by uncontrollable changes in activity of the catalyst.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "level": {
+          "status": "present",
+          "as_reported": "0.8",
+          "unit": "L/h",
+          "value": 0.8
+        },
+        "role": "factor"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/table1-expt-2",
+      "target": "ex:msyn/10.1021-ie50250a009/variable/gas-flow-rate"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/111",
+      "type": "HAS_VARIABLE",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "It was hoped in this series of experiments to determine which of these possible reactions came nearest to equilib- rium at the different rates of gas flow. This purpose was probably defeated by uncontrollable changes in activity of the catalyst.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "level": {
+          "status": "present",
+          "as_reported": "0.33",
+          "unit": "L/h",
+          "value": 0.33
+        },
+        "role": "factor"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/table1-expt-3",
+      "target": "ex:msyn/10.1021-ie50250a009/variable/gas-flow-rate"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/112",
+      "type": "HAS_VARIABLE",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "It was hoped in this series of experiments to determine which of these possible reactions came nearest to equilib- rium at the different rates of gas flow. This purpose was probably defeated by uncontrollable changes in activity of the catalyst.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "level": {
+          "status": "present",
+          "as_reported": "0.93",
+          "unit": "L/h",
+          "value": 0.93
+        },
+        "role": "factor"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/table1-expt-4",
+      "target": "ex:msyn/10.1021-ie50250a009/variable/gas-flow-rate"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/113",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50250a009/p1/5",
+            "quote": "It has been shown that carbon dioxide and hydrogen react upon a zinc oxide-chromium oxide catalyst at 304° C. to form methanol, carbon monoxide, and water.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/co2-h2-304",
+      "target": "ex:msyn/10.1021-ie50250a009/claim/co2-h2-gives-meoh-co-water"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/114",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/1",
+            "quote": "with those obtained using carbon monoxide-hydrogen mixtures, in spite of the fact that in this case reactions other than those that produce methanol have taken place to a large extent.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/co2-h2-304",
+      "target": "ex:msyn/10.1021-ie50250a009/claim/constant-comparable"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/12",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/4",
+            "quote": "The gas was passed through the apparatus for several days in order to bring the catalyst into equilibrium with the H2-CO2-H2O mixture.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "order": 2
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/sample/zno-cr-charge-600cc",
+      "target": "ex:msyn/10.1021-ie50250a009/treatment/equilibration-several-days"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/126",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "However, examination of the data recorded in Table II, together with the facts presented above, shows the inconsistency of picking out any one reaction involving methanol (for example, the hydrogen-carbon monoxide reaction) as the one in which the methanol is nearest to equilibrium.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/analysis/table2-run-1",
+      "target": "ex:msyn/10.1021-ie50250a009/claim/no-single-reaction"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/127",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "It was hoped in this series of experiments to determine which of these possible reactions came nearest to equilib- rium at the different rates of gas flow. This purpose was probably defeated by uncontrollable changes in activity of the catalyst.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/analysis/table2-run-1",
+      "target": "ex:msyn/10.1021-ie50250a009/claim/nearest-equilibrium-undetermined"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/128",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/7",
+            "quote": "The writers believe that the data presented here indicate that side reactions may under certain conditions introduce some error into measurements of the methanol equilibrium.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/analysis/table2-run-1",
+      "target": "ex:msyn/10.1021-ie50250a009/claim/side-reactions-error"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/13",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/4",
+            "quote": "A mixture of carbon dioxide and hydrogen was made from commercial carbon dioxide and electrolytic hydrogen. After passing over hot platinized asbestos, the mixture analyzed 24 per cent C02, 74 per cent H2, and 2 per cent N2.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "24 per cent",
+          "unit": "%",
+          "value": 24
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/feed/co2-h2-24-74",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/130",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "However, examination of the data recorded in Table II, together with the facts presented above, shows the inconsistency of picking out any one reaction involving methanol (for example, the hydrogen-carbon monoxide reaction) as the one in which the methanol is nearest to equilibrium.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/analysis/table2-run-2",
+      "target": "ex:msyn/10.1021-ie50250a009/claim/no-single-reaction"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/131",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "It was hoped in this series of experiments to determine which of these possible reactions came nearest to equilib- rium at the different rates of gas flow. This purpose was probably defeated by uncontrollable changes in activity of the catalyst.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/analysis/table2-run-2",
+      "target": "ex:msyn/10.1021-ie50250a009/claim/nearest-equilibrium-undetermined"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/132",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/7",
+            "quote": "The writers believe that the data presented here indicate that side reactions may under certain conditions introduce some error into measurements of the methanol equilibrium.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/analysis/table2-run-2",
+      "target": "ex:msyn/10.1021-ie50250a009/claim/side-reactions-error"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/134",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "However, examination of the data recorded in Table II, together with the facts presented above, shows the inconsistency of picking out any one reaction involving methanol (for example, the hydrogen-carbon monoxide reaction) as the one in which the methanol is nearest to equilibrium.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/analysis/table2-run-3",
+      "target": "ex:msyn/10.1021-ie50250a009/claim/no-single-reaction"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/135",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "It was hoped in this series of experiments to determine which of these possible reactions came nearest to equilib- rium at the different rates of gas flow. This purpose was probably defeated by uncontrollable changes in activity of the catalyst.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/analysis/table2-run-3",
+      "target": "ex:msyn/10.1021-ie50250a009/claim/nearest-equilibrium-undetermined"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/136",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/7",
+            "quote": "The writers believe that the data presented here indicate that side reactions may under certain conditions introduce some error into measurements of the methanol equilibrium.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/analysis/table2-run-3",
+      "target": "ex:msyn/10.1021-ie50250a009/claim/side-reactions-error"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/138",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "However, examination of the data recorded in Table II, together with the facts presented above, shows the inconsistency of picking out any one reaction involving methanol (for example, the hydrogen-carbon monoxide reaction) as the one in which the methanol is nearest to equilibrium.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/analysis/table2-run-4",
+      "target": "ex:msyn/10.1021-ie50250a009/claim/no-single-reaction"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/139",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "It was hoped in this series of experiments to determine which of these possible reactions came nearest to equilib- rium at the different rates of gas flow. This purpose was probably defeated by uncontrollable changes in activity of the catalyst.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/analysis/table2-run-4",
+      "target": "ex:msyn/10.1021-ie50250a009/claim/nearest-equilibrium-undetermined"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/14",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/4",
+            "quote": "A mixture of carbon dioxide and hydrogen was made from commercial carbon dioxide and electrolytic hydrogen. After passing over hot platinized asbestos, the mixture analyzed 24 per cent C02, 74 per cent H2, and 2 per cent N2.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "74 per cent",
+          "unit": "%",
+          "value": 74
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/feed/co2-h2-24-74",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/140",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/7",
+            "quote": "The writers believe that the data presented here indicate that side reactions may under certain conditions introduce some error into measurements of the methanol equilibrium.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/analysis/table2-run-4",
+      "target": "ex:msyn/10.1021-ie50250a009/claim/side-reactions-error"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/141",
+      "type": "AIMS_TO_TEST",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "It was hoped in this series of experiments to determine which of these possible reactions came nearest to equilib- rium at the different rates of gas flow. This purpose was probably defeated by uncontrollable changes in activity of the catalyst.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/table1-expt-1",
+      "target": "ex:msyn/10.1021-ie50250a009/hypothesis/side-reactions-block-equilibrium"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/142",
+      "type": "AIMS_TO_TEST",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "It was hoped in this series of experiments to determine which of these possible reactions came nearest to equilib- rium at the different rates of gas flow. This purpose was probably defeated by uncontrollable changes in activity of the catalyst.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/table1-expt-2",
+      "target": "ex:msyn/10.1021-ie50250a009/hypothesis/side-reactions-block-equilibrium"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/143",
+      "type": "AIMS_TO_TEST",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "It was hoped in this series of experiments to determine which of these possible reactions came nearest to equilib- rium at the different rates of gas flow. This purpose was probably defeated by uncontrollable changes in activity of the catalyst.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/table1-expt-3",
+      "target": "ex:msyn/10.1021-ie50250a009/hypothesis/side-reactions-block-equilibrium"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/144",
+      "type": "AIMS_TO_TEST",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "It was hoped in this series of experiments to determine which of these possible reactions came nearest to equilib- rium at the different rates of gas flow. This purpose was probably defeated by uncontrollable changes in activity of the catalyst.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/table1-expt-4",
+      "target": "ex:msyn/10.1021-ie50250a009/hypothesis/side-reactions-block-equilibrium"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/146",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/3",
+            "quote": "Experiments with this improved apparatus gave results in which the variations were more than seemed to be ac- counted for by the limits of error of the method,",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/3",
+            "quote": "and the ap- parent nearness of approach to equilibrium did not corre- spond to what would be expected from the rates of gas flow used in different experiments.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/improved-co-h2-equilibrium",
+      "target": "ex:msyn/10.1021-ie50250a009/claim/improved-apparatus-scatter"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/147",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/9",
+            "quote": "The equilibrium constant calculated from this equation for 304° C. is 7.4 X 10 ~4. This is in very satisfactory agreement with the value 5.6 X 10~4 experimentally determined by Smith and Branting (/).",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/computation/reaction1-free-energy-equation",
+      "target": "ex:msyn/10.1021-ie50250a009/claim/K-agreement"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/148",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/7",
+            "quote": "The writers believe that the data presented here indicate that side reactions may under certain conditions introduce some error into measurements of the methanol equilibrium.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/claim/no-single-reaction",
+      "target": "ex:msyn/10.1021-ie50250a009/claim/side-reactions-error"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/149",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/7",
+            "quote": "The writers believe that the data presented here indicate that side reactions may under certain conditions introduce some error into measurements of the methanol equilibrium.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "warrant": "side reactions may introduce error into equilibrium measurements"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/claim/side-reactions-error",
+      "target": "ex:msyn/10.1021-ie50250a009/hypothesis/side-reactions-block-equilibrium"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/15",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/4",
+            "quote": "A mixture of carbon dioxide and hydrogen was made from commercial carbon dioxide and electrolytic hydrogen. After passing over hot platinized asbestos, the mixture analyzed 24 per cent C02, 74 per cent H2, and 2 per cent N2.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "2 per cent",
+          "unit": "%",
+          "value": 2
+        },
+        "fraction_basis": "not_reported",
+        "role": "diluent"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/feed/co2-h2-24-74",
+      "target": "ex:msyn/species/n2"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/150",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50250a009/p1/7",
+            "quote": "As most known methanol catalysts produce carbon dioxide or water or both along with methanol, it is possible that the formation of metha- nol from carbon monoxide and hydrogen may not be direct, especially as a steady state is approached.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "warrant": "most methanol catalysts produce CO2 or water or both with methanol"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/claim/catalysts-produce-co2-water",
+      "target": "ex:msyn/10.1021-ie50250a009/hypothesis/mechanism-not-direct"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/152",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/1",
+            "quote": "readily reached. The object of the work described herein was to determine whether such a condition existed in the case of measurements thus far made of the methanol equi- librium.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "warrant": "the scatter led to the investigation"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/claim/improved-apparatus-scatter",
+      "target": "ex:msyn/10.1021-ie50250a009/hypothesis/side-reactions-block-equilibrium"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/153",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50250a009/p1/5",
+            "quote": "It has been shown that carbon dioxide and hydrogen react upon a zinc oxide-chromium oxide catalyst at 304° C. to form methanol, carbon monoxide, and water.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/claim/co2-h2-gives-meoh-co-water",
+      "target": "ex:msyn/10.1021-ie50250a009/catalyst/zno-cr2o3-4-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/155",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/5",
+            "quote": "the constant CH3OH/CO(H2)2 was calculated to be 3.68 X 10~4.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/claim/constant-comparable",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/157",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/1",
+            "quote": "although large concentrations of water vapor in the gas at temperatures as low as 300° C. caused a rather rapid deterioration in the activity of the catalyst—probably accompanying hydration of the chromium oxide.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/claim/water-deactivates",
+      "target": "ex:msyn/10.1021-ie50250a009/catalyst/zno-cr2o3-4-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/159",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "quote": "304° C. upon hydrogen-carbon dioxide-water mixtures, it has not been found possible to determine which reaction comes nearest to equilibrium.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/claim/nearest-equilibrium-undetermined",
+      "target": "ex:msyn/10.1021-ie50250a009/catalyst/zno-cr2o3-4-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/16",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/5",
+            "quote": "The gas used in these experiments originally analyzed 24 per cent CO2, 74 per cent H2, and 2 per cent N2 after passage over the platinized asbestos. This gas was saturated with the vapor from water held at 20° C.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "24 per cent",
+          "note": "before saturation with water vapour",
+          "unit": "%",
+          "value": 24
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/feed/co2-h2-water-20c",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/160",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "However, examination of the data recorded in Table II, together with the facts presented above, shows the inconsistency of picking out any one reaction involving methanol (for example, the hydrogen-carbon monoxide reaction) as the one in which the methanol is nearest to equilibrium.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/claim/no-single-reaction",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/161",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/7",
+            "quote": "The writers believe that the data presented here indicate that side reactions may under certain conditions introduce some error into measurements of the methanol equilibrium.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/claim/side-reactions-error",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/162",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/3",
+            "quote": "Experiments with this improved apparatus gave results in which the variations were more than seemed to be ac- counted for by the limits of error of the method,",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/3",
+            "quote": "and the ap- parent nearness of approach to equilibrium did not corre- spond to what would be expected from the rates of gas flow used in different experiments.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/claim/improved-apparatus-scatter",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/163",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/2",
+            "quote": "By checking against known solutions of pure methanol it was found, as stated by Smith and Branting, that accurate results could be obtained only when the unknown solution was very close in concentration to the known solution with which it was compared.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/claim/colorimetric-accuracy",
+      "target": "ex:msyn/species/ch3oh"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/164",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/9",
+            "quote": "The equilibrium constant calculated from this equation for 304° C. is 7.4 X 10 ~4. This is in very satisfactory agreement with the value 5.6 X 10~4 experimentally determined by Smith and Branting (/).",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/claim/K-agreement",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/165",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50250a009/p1/7",
+            "quote": "As most known methanol catalysts produce carbon dioxide or water or both along with methanol, it is possible that the formation of metha- nol from carbon monoxide and hydrogen may not be direct, especially as a steady state is approached.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/hypothesis/mechanism-not-direct",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/166",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50250a009/p1/7",
+            "quote": "If, as an equilibrium condition is approached in one reaction, other reactions are taking place at rates comparable with that of the reaction in question, equilibrium may not be",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/hypothesis/side-reactions-block-equilibrium",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/169",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "It was hoped in this series of experiments to determine which of these possible reactions came nearest to equilib- rium at the different rates of gas flow. This purpose was probably defeated by uncontrollable changes in activity of the catalyst.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/hypothesis/activity-changes-defeated-purpose",
+      "target": "ex:msyn/10.1021-ie50250a009/catalyst/zno-cr2o3-4-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/17",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/5",
+            "quote": "The gas used in these experiments originally analyzed 24 per cent CO2, 74 per cent H2, and 2 per cent N2 after passage over the platinized asbestos. This gas was saturated with the vapor from water held at 20° C.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "74 per cent",
+          "note": "before saturation with water vapour",
+          "unit": "%",
+          "value": 74
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/feed/co2-h2-water-20c",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/170",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ie50250a009/p4/1",
+            "quote": "However, most meth- anol catalysts of which we have knowledge produce carbon dioxide or water or both with methanol.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/claim/catalysts-produce-co2-water",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/18",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/5",
+            "quote": "The gas used in these experiments originally analyzed 24 per cent CO2, 74 per cent H2, and 2 per cent N2 after passage over the platinized asbestos. This gas was saturated with the vapor from water held at 20° C.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "2 per cent",
+          "note": "before saturation with water vapour",
+          "unit": "%",
+          "value": 2
+        },
+        "fraction_basis": "not_reported",
+        "role": "diluent"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/feed/co2-h2-water-20c",
+      "target": "ex:msyn/species/n2"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/19",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/5",
+            "quote": "The gas used in these experiments originally analyzed 24 per cent CO2, 74 per cent H2, and 2 per cent N2 after passage over the platinized asbestos. This gas was saturated with the vapor from water held at 20° C.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "role": "reactant",
+        "role_detail": "saturated with the vapor from water held at 20° C."
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/feed/co2-h2-water-20c",
+      "target": "ex:msyn/species/h2o"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/2",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "status": "asserted",
+        "coefficient": 2,
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 3, Table II",
+            "passage": "10.1021-ie50250a009/p3/7",
+            "quote": "3CO + 2HsO = CH3OH + 2C02",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/reaction/co-water-to-methanol",
+      "target": "ex:msyn/species/h2o"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/24",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/4",
+            "quote": "This gas mixture was passed over the catalyst at about the space velocity used in previous equilibrium experiments with carbon monoxide-hydrogen mixtures.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/feed/co-h2",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/25",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/4",
+            "quote": "This gas mixture was passed over the catalyst at about the space velocity used in previous equilibrium experiments with carbon monoxide-hydrogen mixtures.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/feed/co-h2",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/26",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "600 cc. of catalyst",
+          "unit": "cc",
+          "value": 600
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/2",
+            "quote": "All of the following work was done at 304° C. on 600 cc. of catalyst.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "state": "not_reported"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/improved-co-h2-equilibrium",
+      "target": "ex:msyn/10.1021-ie50250a009/sample/zno-cr-charge-600cc"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/27",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/2",
+            "quote": "At first several experiments were made essentially as de- scribed by Smith and Branting, but with some improvements.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/improved-co-h2-equilibrium",
+      "target": "ex:msyn/10.1021-ie50250a009/feed/co-h2"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/28",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/2",
+            "quote": "At first several experiments were made essentially as de- scribed by Smith and Branting, but with some improvements.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/improved-co-h2-equilibrium",
+      "target": "ex:msyn/10.1021-ie50250a009/reactor/improved-smith-branting"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/29",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/3",
+            "quote": "Experiments with this improved apparatus gave results in which the variations were more than seemed to be ac- counted for by the limits of error of the method,",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/3",
+            "quote": "and the ap- parent nearness of approach to equilibrium did not corre- spond to what would be expected from the rates of gas flow used in different experiments.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/improved-co-h2-equilibrium",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/3",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "status": "asserted",
+        "coefficient": 1,
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 3, Table II",
+            "passage": "10.1021-ie50250a009/p3/7",
+            "quote": "3CO + 2HsO = CH3OH + 2C02",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "role": "product"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/reaction/co-water-to-methanol",
+      "target": "ex:msyn/species/ch3oh"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/30",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "600 cc. of catalyst",
+          "unit": "cc",
+          "value": 600
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/4",
+            "quote": "As the reaction of carbon dioxide and hydrogen to form methanol and water was known to take place on a catalyst very similar to the one we were using, we were led to in- vestigate this reaction upon our catalyst.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "state": "not_reported"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/co2-h2-304",
+      "target": "ex:msyn/10.1021-ie50250a009/sample/zno-cr-charge-600cc"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/31",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/4",
+            "quote": "A mixture of carbon dioxide and hydrogen was made from commercial carbon dioxide and electrolytic hydrogen. After passing over hot platinized asbestos, the mixture analyzed 24 per cent C02, 74 per cent H2, and 2 per cent N2.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/co2-h2-304",
+      "target": "ex:msyn/10.1021-ie50250a009/feed/co2-h2-24-74"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/32",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/4",
+            "quote": "After passage over the catalyst the methanol was removed by passage through two efficient water wash coils at 0° C.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/co2-h2-304",
+      "target": "ex:msyn/10.1021-ie50250a009/reactor/improved-smith-branting"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/33",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50250a009/p1/5",
+            "quote": "It has been shown that carbon dioxide and hydrogen react upon a zinc oxide-chromium oxide catalyst at 304° C. to form methanol, carbon monoxide, and water.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/co2-h2-304",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/34",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50250a009/p1/5",
+            "quote": "It has been shown that carbon dioxide and hydrogen react upon a zinc oxide-chromium oxide catalyst at 304° C. to form methanol, carbon monoxide, and water.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/co2-h2-304",
+      "target": "ex:msyn/reaction/reverse-water-gas-shift"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/4",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "status": "asserted",
+        "coefficient": 2,
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 3, Table II",
+            "passage": "10.1021-ie50250a009/p3/7",
+            "quote": "3CO + 2HsO = CH3OH + 2C02",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "role": "product"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/reaction/co-water-to-methanol",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/5",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/2",
+            "quote": "The catalysts used in the following work were prepared by adding chromic acid solution to purified zinc oxide. The atomic proportions were about 4 Zn to 1 Cr.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/4",
+            "quote": "Reaction upon Zn0-Cr203 Catalyst",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "fraction_basis": "atom",
+        "role": "not_stated",
+        "role_detail": "prepared from purified zinc oxide; Zn:Cr about 4 to 1"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/catalyst/zno-cr2o3-4-1",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/52",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "600 cc. of catalyst",
+          "unit": "cc",
+          "value": 600
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/2",
+            "quote": "It was thought of interest to study in greater detail the reaction between hydrogen and cartoon dioxide using the original catalyst and determining the partial pressure of water in the equilibrium mixtures.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "state": "activated"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/table1-expt-1",
+      "target": "ex:msyn/10.1021-ie50250a009/sample/zno-cr-charge-600cc"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/53",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/5",
+            "quote": "The gas used in these experiments originally analyzed 24 per cent CO2, 74 per cent H2, and 2 per cent N2 after passage over the platinized asbestos. This gas was saturated with the vapor from water held at 20° C.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/table1-expt-1",
+      "target": "ex:msyn/10.1021-ie50250a009/feed/co2-h2-water-20c"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/54",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "p. 2, Figure 1",
+            "passage": "10.1021-ie50250a009/p2/1",
+            "quote": "Figure 1—Apparatus Used in Experiments with Hydrogen and Carbon Dioxide at Atmospheric Pressure",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/table1-expt-1",
+      "target": "ex:msyn/10.1021-ie50250a009/reactor/figure1-atmospheric"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/55",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "The data in Table II are calculated from those given in Table I. They show equilibrium constants and correspond- ing values of the free-energy change for four possible reactions.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/table1-expt-1",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/56",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "The data in Table II are calculated from those given in Table I. They show equilibrium constants and correspond- ing values of the free-energy change for four possible reactions.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/table1-expt-1",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/57",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "The data in Table II are calculated from those given in Table I. They show equilibrium constants and correspond- ing values of the free-energy change for four possible reactions.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/table1-expt-1",
+      "target": "ex:msyn/10.1021-ie50250a009/reaction/co-water-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/58",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "The data in Table II are calculated from those given in Table I. They show equilibrium constants and correspond- ing values of the free-energy change for four possible reactions.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/table1-expt-1",
+      "target": "ex:msyn/reaction/water-gas-shift"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/59",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "600 cc. of catalyst",
+          "unit": "cc",
+          "value": 600
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/2",
+            "quote": "It was thought of interest to study in greater detail the reaction between hydrogen and cartoon dioxide using the original catalyst and determining the partial pressure of water in the equilibrium mixtures.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "state": "activated"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/table1-expt-2",
+      "target": "ex:msyn/10.1021-ie50250a009/sample/zno-cr-charge-600cc"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/6",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/4",
+            "quote": "Reaction upon Zn0-Cr203 Catalyst",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/1",
+            "quote": "although large concentrations of water vapor in the gas at temperatures as low as 300° C. caused a rather rapid deterioration in the activity of the catalyst—probably accompanying hydration of the chromium oxide.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "fraction_basis": "atom",
+        "role": "not_stated",
+        "role_detail": "'chromium oxide' in the text, 'Cr203' in the heading"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/catalyst/zno-cr2o3-4-1",
+      "target": "ex:msyn/species/cr2o3"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/60",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/5",
+            "quote": "The gas used in these experiments originally analyzed 24 per cent CO2, 74 per cent H2, and 2 per cent N2 after passage over the platinized asbestos. This gas was saturated with the vapor from water held at 20° C.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/table1-expt-2",
+      "target": "ex:msyn/10.1021-ie50250a009/feed/co2-h2-water-20c"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/61",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "p. 2, Figure 1",
+            "passage": "10.1021-ie50250a009/p2/1",
+            "quote": "Figure 1—Apparatus Used in Experiments with Hydrogen and Carbon Dioxide at Atmospheric Pressure",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/table1-expt-2",
+      "target": "ex:msyn/10.1021-ie50250a009/reactor/figure1-atmospheric"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/62",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "The data in Table II are calculated from those given in Table I. They show equilibrium constants and correspond- ing values of the free-energy change for four possible reactions.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/table1-expt-2",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/63",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "The data in Table II are calculated from those given in Table I. They show equilibrium constants and correspond- ing values of the free-energy change for four possible reactions.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/table1-expt-2",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/64",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "The data in Table II are calculated from those given in Table I. They show equilibrium constants and correspond- ing values of the free-energy change for four possible reactions.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/table1-expt-2",
+      "target": "ex:msyn/10.1021-ie50250a009/reaction/co-water-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/65",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "The data in Table II are calculated from those given in Table I. They show equilibrium constants and correspond- ing values of the free-energy change for four possible reactions.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/table1-expt-2",
+      "target": "ex:msyn/reaction/water-gas-shift"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/66",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "600 cc. of catalyst",
+          "unit": "cc",
+          "value": 600
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/2",
+            "quote": "It was thought of interest to study in greater detail the reaction between hydrogen and cartoon dioxide using the original catalyst and determining the partial pressure of water in the equilibrium mixtures.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "state": "activated"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/table1-expt-3",
+      "target": "ex:msyn/10.1021-ie50250a009/sample/zno-cr-charge-600cc"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/67",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/5",
+            "quote": "The gas used in these experiments originally analyzed 24 per cent CO2, 74 per cent H2, and 2 per cent N2 after passage over the platinized asbestos. This gas was saturated with the vapor from water held at 20° C.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/table1-expt-3",
+      "target": "ex:msyn/10.1021-ie50250a009/feed/co2-h2-water-20c"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/68",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "p. 2, Figure 1",
+            "passage": "10.1021-ie50250a009/p2/1",
+            "quote": "Figure 1—Apparatus Used in Experiments with Hydrogen and Carbon Dioxide at Atmospheric Pressure",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/table1-expt-3",
+      "target": "ex:msyn/10.1021-ie50250a009/reactor/figure1-atmospheric"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/69",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "The data in Table II are calculated from those given in Table I. They show equilibrium constants and correspond- ing values of the free-energy change for four possible reactions.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/table1-expt-3",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/7",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/2",
+            "quote": "The catalysts used in the following work were prepared by adding chromic acid solution to purified zinc oxide. The atomic proportions were about 4 Zn to 1 Cr.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/sample/zno-cr-charge-600cc",
+      "target": "ex:msyn/10.1021-ie50250a009/catalyst/zno-cr2o3-4-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/70",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "The data in Table II are calculated from those given in Table I. They show equilibrium constants and correspond- ing values of the free-energy change for four possible reactions.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/table1-expt-3",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/71",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "The data in Table II are calculated from those given in Table I. They show equilibrium constants and correspond- ing values of the free-energy change for four possible reactions.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/table1-expt-3",
+      "target": "ex:msyn/10.1021-ie50250a009/reaction/co-water-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/72",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "The data in Table II are calculated from those given in Table I. They show equilibrium constants and correspond- ing values of the free-energy change for four possible reactions.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/table1-expt-3",
+      "target": "ex:msyn/reaction/water-gas-shift"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/73",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "600 cc. of catalyst",
+          "unit": "cc",
+          "value": 600
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/2",
+            "quote": "It was thought of interest to study in greater detail the reaction between hydrogen and cartoon dioxide using the original catalyst and determining the partial pressure of water in the equilibrium mixtures.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "state": "activated"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/table1-expt-4",
+      "target": "ex:msyn/10.1021-ie50250a009/sample/zno-cr-charge-600cc"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/74",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/5",
+            "quote": "The gas used in these experiments originally analyzed 24 per cent CO2, 74 per cent H2, and 2 per cent N2 after passage over the platinized asbestos. This gas was saturated with the vapor from water held at 20° C.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/table1-expt-4",
+      "target": "ex:msyn/10.1021-ie50250a009/feed/co2-h2-water-20c"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/75",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "p. 2, Figure 1",
+            "passage": "10.1021-ie50250a009/p2/1",
+            "quote": "Figure 1—Apparatus Used in Experiments with Hydrogen and Carbon Dioxide at Atmospheric Pressure",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/table1-expt-4",
+      "target": "ex:msyn/10.1021-ie50250a009/reactor/figure1-atmospheric"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/76",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "The data in Table II are calculated from those given in Table I. They show equilibrium constants and correspond- ing values of the free-energy change for four possible reactions.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/table1-expt-4",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/77",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "The data in Table II are calculated from those given in Table I. They show equilibrium constants and correspond- ing values of the free-energy change for four possible reactions.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/table1-expt-4",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/78",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "The data in Table II are calculated from those given in Table I. They show equilibrium constants and correspond- ing values of the free-energy change for four possible reactions.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/table1-expt-4",
+      "target": "ex:msyn/10.1021-ie50250a009/reaction/co-water-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/79",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "The data in Table II are calculated from those given in Table I. They show equilibrium constants and correspond- ing values of the free-energy change for four possible reactions.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/table1-expt-4",
+      "target": "ex:msyn/reaction/water-gas-shift"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/8",
+      "type": "PREPARED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/2",
+            "quote": "The catalysts used in the following work were prepared by adding chromic acid solution to purified zinc oxide. The atomic proportions were about 4 Zn to 1 Cr.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/sample/zno-cr-charge-600cc",
+      "target": "ex:msyn/10.1021-ie50250a009/preparation/chromic-acid-on-zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/80",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/1",
+            "quote": "although large concentrations of water vapor in the gas at temperatures as low as 300° C. caused a rather rapid deterioration in the activity of the catalyst—probably accompanying hydration of the chromium oxide.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "inhibition_kind": "not_stated",
+        "note": "large concentrations of water vapour at 300 °C caused rather rapid deterioration of activity"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/catalyst/zno-cr2o3-4-1",
+      "target": "ex:msyn/species/h2o"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/81",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "context": [
+          "ex:msyn/10.1021-ie50250a009/test/co2-h2-304"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50250a009/p1/5",
+            "quote": "It has been shown that carbon dioxide and hydrogen react upon a zinc oxide-chromium oxide catalyst at 304° C. to form methanol, carbon monoxide, and water.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/catalyst/zno-cr2o3-4-1",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/82",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "context": [
+          "ex:msyn/10.1021-ie50250a009/test/co2-h2-304"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50250a009/p1/5",
+            "quote": "It has been shown that carbon dioxide and hydrogen react upon a zinc oxide-chromium oxide catalyst at 304° C. to form methanol, carbon monoxide, and water.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/catalyst/zno-cr2o3-4-1",
+      "target": "ex:msyn/reaction/reverse-water-gas-shift"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/83",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50250a009/p1/6",
+            "quote": "Likewise carbon monoxide and water react to form car- bon dioxide and hydrogen and equilibrium can be closely approached in the water-gas reaction.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/catalyst/zno-cr2o3-4-1",
+      "target": "ex:msyn/reaction/water-gas-shift"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/84",
+      "type": "PRODUCES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50250a009/p1/5",
+            "quote": "It has been shown that carbon dioxide and hydrogen react upon a zinc oxide-chromium oxide catalyst at 304° C. to form methanol, carbon monoxide, and water.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/catalyst/zno-cr2o3-4-1",
+      "target": "ex:msyn/species/ch3oh"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/85",
+      "type": "PRODUCES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50250a009/p1/5",
+            "quote": "It has been shown that carbon dioxide and hydrogen react upon a zinc oxide-chromium oxide catalyst at 304° C. to form methanol, carbon monoxide, and water.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/catalyst/zno-cr2o3-4-1",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/86",
+      "type": "PRODUCES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50250a009/p1/5",
+            "quote": "It has been shown that carbon dioxide and hydrogen react upon a zinc oxide-chromium oxide catalyst at 304° C. to form methanol, carbon monoxide, and water.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/catalyst/zno-cr2o3-4-1",
+      "target": "ex:msyn/species/h2o"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/88",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "The data in Table II are calculated from those given in Table I. They show equilibrium constants and correspond- ing values of the free-energy change for four possible reactions.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "role": "data"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/analysis/table2-run-1",
+      "target": "ex:msyn/10.1021-ie50250a009/test/table1-expt-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/89",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "The data in Table II are calculated from those given in Table I. They show equilibrium constants and correspond- ing values of the free-energy change for four possible reactions.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/analysis/table2-run-1",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/9",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50250a009/p2/2",
+            "quote": "The catalysts used in the following work were prepared by adding chromic acid solution to purified zinc oxide. The atomic proportions were about 4 Zn to 1 Cr.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "grade": "purified",
+        "role": "precursor"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/sample/zno-cr-charge-600cc",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/90",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "The data in Table II are calculated from those given in Table I. They show equilibrium constants and correspond- ing values of the free-energy change for four possible reactions.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/analysis/table2-run-1",
+      "target": "ex:msyn/10.1021-ie50250a009/reaction/co-water-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/91",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "The data in Table II are calculated from those given in Table I. They show equilibrium constants and correspond- ing values of the free-energy change for four possible reactions.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/analysis/table2-run-1",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/92",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "The data in Table II are calculated from those given in Table I. They show equilibrium constants and correspond- ing values of the free-energy change for four possible reactions.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/analysis/table2-run-1",
+      "target": "ex:msyn/reaction/water-gas-shift"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/93",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "The data in Table II are calculated from those given in Table I. They show equilibrium constants and correspond- ing values of the free-energy change for four possible reactions.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "role": "data"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/analysis/table2-run-2",
+      "target": "ex:msyn/10.1021-ie50250a009/test/table1-expt-2"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/94",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "The data in Table II are calculated from those given in Table I. They show equilibrium constants and correspond- ing values of the free-energy change for four possible reactions.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/analysis/table2-run-2",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/95",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "The data in Table II are calculated from those given in Table I. They show equilibrium constants and correspond- ing values of the free-energy change for four possible reactions.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/analysis/table2-run-2",
+      "target": "ex:msyn/10.1021-ie50250a009/reaction/co-water-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/96",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "The data in Table II are calculated from those given in Table I. They show equilibrium constants and correspond- ing values of the free-energy change for four possible reactions.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/analysis/table2-run-2",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/97",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "The data in Table II are calculated from those given in Table I. They show equilibrium constants and correspond- ing values of the free-energy change for four possible reactions.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/analysis/table2-run-2",
+      "target": "ex:msyn/reaction/water-gas-shift"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/98",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "The data in Table II are calculated from those given in Table I. They show equilibrium constants and correspond- ing values of the free-energy change for four possible reactions.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ],
+        "role": "data"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/analysis/table2-run-3",
+      "target": "ex:msyn/10.1021-ie50250a009/test/table1-expt-3"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/link/99",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50250a009/p3/6",
+            "quote": "The data in Table II are calculated from those given in Table I. They show equilibrium constants and correspond- ing values of the free-energy change for four possible reactions.",
+            "source": "ex:msyn/source/10.1021-ie50250a009"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/analysis/table2-run-3",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/preparation/chromic-acid-on-zno/reported-in/10.1021-ie50250a009",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/preparation/chromic-acid-on-zno",
+      "target": "ex:msyn/source/10.1021-ie50250a009"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/reaction/co-water-to-methanol/reported-in/10.1021-ie50250a009",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, Table II"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/reaction/co-water-to-methanol",
+      "target": "ex:msyn/source/10.1021-ie50250a009"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/reactor/figure1-atmospheric/reported-in/10.1021-ie50250a009",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, Figure 1",
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/reactor/figure1-atmospheric",
+      "target": "ex:msyn/source/10.1021-ie50250a009"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/reactor/improved-smith-branting/reported-in/10.1021-ie50250a009",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/reactor/improved-smith-branting",
+      "target": "ex:msyn/source/10.1021-ie50250a009"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/sample/zno-cr-charge-600cc/reported-in/10.1021-ie50250a009",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/sample/zno-cr-charge-600cc",
+      "target": "ex:msyn/source/10.1021-ie50250a009"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/species/chromic-acid/reported-in/10.1021-ie50250a009",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/species/chromic-acid",
+      "target": "ex:msyn/source/10.1021-ie50250a009"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/test/co2-h2-304/reported-in/10.1021-ie50250a009",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/co2-h2-304",
+      "target": "ex:msyn/source/10.1021-ie50250a009"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/test/improved-co-h2-equilibrium/reported-in/10.1021-ie50250a009",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/improved-co-h2-equilibrium",
+      "target": "ex:msyn/source/10.1021-ie50250a009"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/test/table1-expt-1/reported-in/10.1021-ie50250a009",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3",
+          "p. 3, Table I",
+          "p. 3, Table I, expt. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/table1-expt-1",
+      "target": "ex:msyn/source/10.1021-ie50250a009"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/test/table1-expt-2/reported-in/10.1021-ie50250a009",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3",
+          "p. 3, Table I",
+          "p. 3, Table I, expt. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/table1-expt-2",
+      "target": "ex:msyn/source/10.1021-ie50250a009"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/test/table1-expt-3/reported-in/10.1021-ie50250a009",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3",
+          "p. 3, Table I",
+          "p. 3, Table I, expt. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/table1-expt-3",
+      "target": "ex:msyn/source/10.1021-ie50250a009"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/test/table1-expt-4/reported-in/10.1021-ie50250a009",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3",
+          "p. 3, Table I",
+          "p. 3, Table I, expt. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/test/table1-expt-4",
+      "target": "ex:msyn/source/10.1021-ie50250a009"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/treatment/equilibration-several-days/reported-in/10.1021-ie50250a009",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/treatment/equilibration-several-days",
+      "target": "ex:msyn/source/10.1021-ie50250a009"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/treatment/hot-evacuation/reported-in/10.1021-ie50250a009",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/treatment/hot-evacuation",
+      "target": "ex:msyn/source/10.1021-ie50250a009"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50250a009/variable/gas-flow-rate/reported-in/10.1021-ie50250a009",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50250a009/variable/gas-flow-rate",
+      "target": "ex:msyn/source/10.1021-ie50250a009"
+    },
+    {
+      "id": "ex:msyn/source/10.1021-ie50250a009/authored-by/1",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 1,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/10.1021-ie50250a009",
+      "target": "ex:msyn/person/david-f-smith"
+    },
+    {
+      "id": "ex:msyn/source/10.1021-ie50250a009/authored-by/2",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 2,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/10.1021-ie50250a009",
+      "target": "ex:msyn/person/l-l-hirst"
+    },
+    {
+      "id": "ex:msyn/species/cr2o3/reported-in/10.1021-ie50250a009",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/cr2o3",
+      "target": "ex:msyn/source/10.1021-ie50250a009"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/10.1021-ie50250a009"
+}

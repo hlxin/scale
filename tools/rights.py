@@ -79,8 +79,9 @@ def load_rights(path: str | Path) -> dict[str, dict]:
 
 def rights_file(doc_path: str | Path, repo: str | Path | None = None) -> Path | None:
     """The rights file that covers a document: the nearest ``rights.yaml`` in its folder or above (not above the
-    repository root, when one is given)."""
-    p = Path(doc_path).resolve().parent
+    repository root, when one is given); a graph kept as parts is its folder, so the search starts in it."""
+    p = Path(doc_path).resolve()
+    p = p if p.is_dir() else p.parent
     stop = Path(repo).resolve() if repo else None
     for d in [p, *p.parents]:
         if (d / RIGHTS_FILE).is_file():
@@ -345,7 +346,8 @@ def read_texts(directory: str | Path | None = None, pairs: list[str] | None = No
 
 # ---------------------------------------------------------------- the repository
 def committed_documents(repo: str | Path) -> list[Path]:
-    """Every scale-catal document in the repository tree (the files a clone has: no local or build material)."""
+    """Every scale-catal document in the repository tree (the files a clone has: no local or build material); a
+    graph kept as parts (``<folder>/parts/header.json``) is its folder, which ``load_doc`` builds."""
     repo = Path(repo).resolve()
     out = []
     for p in sorted(repo.rglob("*.json")):
@@ -361,7 +363,7 @@ def committed_documents(repo: str | Path) -> list[Path]:
         except ValueError:
             continue
         if isinstance(doc, dict) and isinstance(doc.get("graph"), dict) and doc["graph"].get("schema") == "scale-catal":
-            out.append(p)
+            out.append(p.parent.parent if rel.parts[-2:] == ("parts", "header.json") else p)
     return out
 
 

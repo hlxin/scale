@@ -1,0 +1,3527 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/source/us2014883a",
+      "label": "Source",
+      "props": {
+        "name": "Methanol manufacture and catalyst therefor",
+        "kind": "patent",
+        "description": "Published 1935-09-17 (grant date printed on the patent (agrees with the USPTO issue-year table)); in scope: before the 1966-01-01 cutoff. Text: 2 pages ocr (tesseract 5.5.3 (eng, 300 dpi, 2 columns)). Text not redistributed.",
+        "identifiers": {
+          "patent": "US2014883A"
+        },
+        "licence": "US patent; not subject to copyright",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "Methanol manufacture and catalyst therefor",
+        "url": "https://patents.google.com/patent/US2014883A",
+        "year": 1935
+      }
+    },
+    {
+      "id": "ex:msyn/us2014883a/catalyst/claimed-zn-cr-oxides-free-cu",
+      "label": "Catalyst",
+      "props": {
+        "name": "zinc and chromium oxides with finely divided free copper, Zn:Cu 2 to 4½ atoms : 1",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 1",
+            "passage": "us2014883a/p2/5",
+            "quote": "over a catalyst compris- 20 ing essentially an intimate mixture of zinc and chromium oxides and finely divided free copper,",
+            "source": "ex:msyn/source/us2014883a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 1",
+            "note": "'44%' is the OCR of 4½ (claims 2-4 print '4144', '4%4')",
+            "passage": "us2014883a/p2/5",
+            "quote": "(he molecular ratio of zine to. copper heing of the order of 2 to 44% atoms of zinc to one atom of copper.",
+            "source": "ex:msyn/source/us2014883a"
+          },
+          {
+            "kind": "text",
+            "agreement": "no_ocr",
+            "locator": "p. 2, claim 1",
+            "reading": "vision_ocr",
+            "region": [
+              0.57,
+              0.345,
+              0.95,
+              0.365
+            ],
+            "second_reading": "chromium oxides and finely divided free copper, the molecular ratio of zinc to copper being of the order of 2 to 4½ atoms of zinc to one atom of copper.",
+            "source": "ex:msyn/source/us2014883a",
+            "transcription": "the order of 2 to 4½ atoms of zinc to one atom"
+          }
+        ],
+        "generality": "kind",
+        "properties": {
+          "zn_cu_atom_ratio": {
+            "status": "present",
+            "as_reported": "of the order of 2 to 4½ atoms of zinc to one atom of copper",
+            "lower": 2,
+            "note": "upper limit printed 4½ in claims 1-4, read on the page image (re-curation 2026-09-29); OCR renders it '44%', '4144', '4%4'",
+            "qualifier": "approximate",
+            "unit": "1",
+            "upper": 4.5
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us2014883a/catalyst/cu-zn-patent-1908696",
+      "label": "Catalyst",
+      "props": {
+        "name": "copper-zinc catalyst of Patent No. 1,908,696 (no chromium)",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/2",
+            "quote": "catalysts containing copper and zinc 20. initially in the form of carbonates or hydroxides of the metals are particularly active:",
+            "source": "ex:msyn/source/us2014883a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/2",
+            "quote": "Such a catalyst shows-a gradual decline in yield even when used at normal operating tem- perature,",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "generality": "kind",
+        "note": "the patentee's own earlier Patent No. 1,908,696 ('1,908,696, issued May 16, 1983' in the OCR); only what this patent says of it is recorded"
+      }
+    },
+    {
+      "id": "ex:msyn/us2014883a/catalyst/zn-cu-cr-high-cr",
+      "label": "Catalyst",
+      "props": {
+        "name": "Zn45Cu10Cr45 catalyst",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/5",
+            "quote": "On the other hand, a catalyst of the composition ZnaCuiCras while considerably less 10 active, is very resistant to the eifect of elevated temperatures",
+            "source": "ex:msyn/source/us2014883a"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 1, right column, lines 9-11",
+            "note": "subscripts 45, 10, 45 read on the page image (OCR 'ZnaCuiCras'/'Zn4sCuioCras'); the trailing '10' is a line number",
+            "reading": "vision_ocr",
+            "region": [
+              0.44,
+              0.4,
+              0.95,
+              0.44
+            ],
+            "second_reading": "heating. On the other hand, a catalyst of the composition Zn45Cu10Cr45 while considerably less active, is very resistant to the effect of elevated temperatures and in fact its activity is increased",
+            "source": "ex:msyn/source/us2014883a",
+            "transcription": "ably more resistant to continued heating or over- heating. On the other hand, a catalyst of the composition Zn45Cu10Cr45 while considerably less 10 active, is very resistant to the effect of elevated"
+          }
+        ],
+        "generality": "kind",
+        "nominal_formula": "Zn45Cu10Cr45",
+        "note": "formula read on the page image (re-curation 2026-09-29) as Zn45Cu10Cr45; OCR renders it 'ZnaCuiCras'. The formula gives the metals only (atomic proportions)"
+      }
+    },
+    {
+      "id": "ex:msyn/us2014883a/catalyst/zn-cu-cr-improved",
+      "label": "Catalyst",
+      "props": {
+        "name": "improved zinc-copper-chromium catalyst (chromium added to a copper-zinc catalyst)",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/3",
+            "quote": "The present invention is based upon the dis- — covery that the addition of a chromium com- pound to such a copper-zine catalyst tends to. considerably retard the loss of activity",
+            "source": "ex:msyn/source/us2014883a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/3",
+            "quote": "The improved catalysts described are halide-free.",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "generality": "kind",
+        "note": "'copper-zine' reads 'copper-zinc'"
+      }
+    },
+    {
+      "id": "ex:msyn/us2014883a/catalyst/zn-cu-without-chromium",
+      "label": "Catalyst",
+      "props": {
+        "name": "similar zinc-copper catalyst without the chromium",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/5",
+            "quote": "however, only slightly less active than a similar catalyst without the chromium,",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "generality": "kind"
+      }
+    },
+    {
+      "id": "ex:msyn/us2014883a/catalyst/zn5-cu1-weight",
+      "label": "Catalyst",
+      "props": {
+        "name": "zinc-copper catalyst, 5 parts Zn : 1 part Cu by weight",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'29.' is a line number",
+            "passage": "us2014883a/p1/6",
+            "quote": "Such a zinc-copper catalyst may be prepared. as 29. follows: Five parts by weight of zinc and one part . by weight of copper (or their chemical equiva- lents) are converted into nitrates",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "generality": "kind"
+      }
+    },
+    {
+      "id": "ex:msyn/us2014883a/catalyst/zn60cu30cr10",
+      "label": "Catalyst",
+      "props": {
+        "name": "Zn60Cu30Cr10 catalyst",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "OCR 'ZnsoCuz0Crio' reads Zn60Cu30Cr10 (sixty, thirty, ten atoms as spelled out); '2 catalyst' reads 'a catalyst'; '45' is a line number",
+            "passage": "us2014883a/p1/3",
+            "quote": "For example, 2 catalyst — 45 referred to as ZnsoCuz0Crio Means one containing these metals in their proportion of sixty atoms of zinc, to thirty -atoms of copper to ten atoms of chromium.",
+            "source": "ex:msyn/source/us2014883a"
+          },
+          {
+            "kind": "text",
+            "agreement": "disagree",
+            "locator": "p. 1, left column, line 45",
+            "note": "leading '5' is the cut-off line number 45 (the patent's margin line number is not part of the text)",
+            "reading": "vision_ocr",
+            "region": [
+              0.05,
+              0.808,
+              0.45,
+              0.826
+            ],
+            "second_reading": "45 referred to as Zn60Cu30Cr10 means one containing these metals in their proportion of sixty atoms of zinc, to thirty atoms of copper to ten",
+            "source": "ex:msyn/source/us2014883a",
+            "transcription": "referred to as Zn60Cu30Cr10 means one containing"
+          }
+        ],
+        "generality": "kind",
+        "nominal_formula": "Zn60Cu30Cr10",
+        "note": "the formula gives the metals only; the non-metallic constituents vary with treatment"
+      }
+    },
+    {
+      "id": "ex:msyn/us2014883a/claim/avoid-sulfur-halides",
+      "label": "Claim",
+      "props": {
+        "name": "avoid sulfur and halides; the catalysts are halide-free",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/3",
+            "quote": "It is important, how-~- ever, to avoid the presence of impurities or con- taminating substances which may have a del- ecerious effect.",
+            "source": "ex:msyn/source/us2014883a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/3",
+            "quote": "Thus, it is desirable to avoid the presence. of sulphur (free or combined), the halides, etc. The improved catalysts described are halide-free.",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Impurities that may have a deleterious effect are to be avoided, such as sulphur (free or combined) and the halides; the improved catalysts are halide-free."
+      }
+    },
+    {
+      "id": "ex:msyn/us2014883a/claim/chromium-addition-routes",
+      "label": "Claim",
+      "props": {
+        "name": "chromium by coprecipitation or by precipitation on a Zn-Cu catalyst",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/6",
+            "quote": "For example, it may be simultaneously precipi- tated with the zinc and copper from a salution containing all three metals, by various precipi- tating agents, such as alkalies or alkali car- 20 bonates;",
+            "source": "ex:msyn/source/us2014883a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/6",
+            "quote": "or a zinc-copper catalyst may be first | made in the desired manner and chromium pre- ‘cipitated upon it as a carbonate, hydroxide or other suitable compound.",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Chromium may be coprecipitated with zinc and copper from a solution of all three metals by alkalies or alkali carbonates, or precipitated as carbonate, hydroxide or other compound on a previously made zinc-copper catalyst."
+      }
+    },
+    {
+      "id": "ex:msyn/us2014883a/claim/chromium-less-active",
+      "label": "Claim",
+      "props": {
+        "name": "chromium makes the catalyst more heat-stable but somewhat less active",
+        "claim_kind": "causal",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/5",
+            "quote": "‘The effect of the addition of chromium to a Zinc-copper catalyst is to render it more stable under the action of heat and on the other hand in general tends to make it somewhat less active.",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Adding chromium to a zinc-copper catalyst renders it more stable under heat but in general tends to make it somewhat less active."
+      }
+    },
+    {
+      "id": "ex:msyn/us2014883a/claim/chromium-stabilizes",
+      "label": "Claim",
+      "props": {
+        "name": "chromium retards loss of activity and stabilizes against heat",
+        "claim_kind": "causal",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/3",
+            "quote": "covery that the addition of a chromium com- pound to such a copper-zine catalyst tends to. considerably retard the loss of activity and to | _ stabilize it to the action of heat.",
+            "source": "ex:msyn/source/us2014883a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/3",
+            "quote": "Chromium may 40 pe added in various ways and in widely varying - gamounts.",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Adding a chromium compound to a copper-zinc catalyst considerably retards its loss of activity and stabilizes it to the action of heat; chromium may be added in various ways and in widely varying amounts."
+      }
+    },
+    {
+      "id": "ex:msyn/us2014883a/claim/copper-air-stable",
+      "label": "Claim",
+      "props": {
+        "name": "copper so produced does not deteriorate in air",
+        "claim_kind": "finding",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "quote": "Cop- per producec by the method described does not deteriorate if exposed to air.",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Copper produced by the method described does not deteriorate if exposed to air."
+      }
+    },
+    {
+      "id": "ex:msyn/us2014883a/claim/cu-zn-decline",
+      "label": "Claim",
+      "props": {
+        "name": "copper-zinc catalyst declines gradually in yield, more when overheated",
+        "claim_kind": "finding",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/2",
+            "quote": "Such a catalyst shows-a gradual decline in yield even when used at normal operating tem- perature,",
+            "source": "ex:msyn/source/us2014883a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/3",
+            "quote": "This decline is rendered more pro- nounced in case the catalyst is overheated.",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The copper-zinc catalyst of Patent 1,908,696 shows a gradual decline in yield even at normal operating temperature; the decline is more pronounced if the catalyst is overheated."
+      }
+    },
+    {
+      "id": "ex:msyn/us2014883a/claim/formula-convention",
+      "label": "Claim",
+      "props": {
+        "name": "composition formulas give atomic proportions of the metals only",
+        "claim_kind": "other",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/3",
+            "quote": "the compositions of the cat- alysts are hereinafter expressed in atomic pro- portions of the metals.",
+            "source": "ex:msyn/source/us2014883a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "quote": "Such formula, of course, _ does not indicate the non-metallic constituents 50 of the catalyst which will vary in kind and proportion according to the treatment the cat-— alyst has received,",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Catalyst compositions are expressed in atomic proportions of the metals; the formula does not indicate the non-metallic constituents, which vary with the treatment."
+      }
+    },
+    {
+      "id": "ex:msyn/us2014883a/claim/high-cr-activation",
+      "label": "Claim",
+      "props": {
+        "name": "Zn45Cu10Cr45 less active, very heat resistant, activity rises on long heating",
+        "claim_kind": "finding",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/5",
+            "quote": "a catalyst of the composition ZnaCuiCras while considerably less 10 active, is very resistant to the eifect of elevated temperatures and in fact its activity is increased",
+            "source": "ex:msyn/source/us2014883a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'7' is a line number; 'overating' reads 'operating'",
+            "passage": "us2014883a/p1/5",
+            "quote": "and only reaches a maximum after heating for a long period at a temperature of 100° to 200° C. 7 above its optimum overating temperatures.",
+            "source": "ex:msyn/source/us2014883a"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 1, right column, lines 9-11",
+            "note": "subscripts 45, 10, 45 read on the page image (OCR 'ZnaCuiCras'/'Zn4sCuioCras'); the trailing '10' is a line number",
+            "reading": "vision_ocr",
+            "region": [
+              0.44,
+              0.4,
+              0.95,
+              0.44
+            ],
+            "second_reading": "heating. On the other hand, a catalyst of the composition Zn45Cu10Cr45 while considerably less active, is very resistant to the effect of elevated temperatures and in fact its activity is increased",
+            "source": "ex:msyn/source/us2014883a",
+            "transcription": "ably more resistant to continued heating or over- heating. On the other hand, a catalyst of the composition Zn45Cu10Cr45 while considerably less 10 active, is very resistant to the effect of elevated"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "A catalyst of the composition Zn45Cu10Cr45 is considerably less active but very resistant to elevated temperatures; its activity increases and reaches a maximum only after heating for a long period at 100 to 200 C above its optimum operating temperature."
+      }
+    },
+    {
+      "id": "ex:msyn/us2014883a/claim/large-chromium-coprecipitation",
+      "label": "Claim",
+      "props": {
+        "name": "over 20 atomic % chromium: simultaneous precipitation",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/2",
+            "quote": "Where it is desired to prepare a catalyst con- taining chromium in percentages of more than twenty atomic percent, the preferred method is to prepare a solution containing the ions of Zinc, copper and trivalent chromium",
+            "source": "ex:msyn/source/us2014883a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/2",
+            "quote": "This method may, of course, also be used where the percentage of chromium is to be small.",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "For more than twenty atomic percent chromium the preferred method is to precipitate zinc, copper and trivalent chromium simultaneously as hydroxides, carbonates or other salts that decompose easily on heating to the oxides; the method may also be used for small chromium contents."
+      }
+    },
+    {
+      "id": "ex:msyn/us2014883a/claim/low-temperature-activity",
+      "label": "Claim",
+      "props": {
+        "name": "catalyst produces methanol at as low as 200 C",
+        "claim_kind": "finding",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/4",
+            "quote": "A catalyst produced as described above is so active that it will produce methanol in appre- clable quantities at temperatures as low as 200° C. with pressure of 2600 pounds per sq. in.,",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "A catalyst produced as described is so active that it produces methanol in appreciable quantities at temperatures as low as 200 C with 2600 pounds per sq. in. and an approximately 2:1 hydrogen:carbon monoxide gas."
+      }
+    },
+    {
+      "id": "ex:msyn/us2014883a/claim/nitrates-preferred",
+      "label": "Claim",
+      "props": {
+        "name": "precipitation preferably from mixed nitrates",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/3",
+            "quote": "It is preferred to effect precipitation in either method of preparation from a solution of the mixed nitrates, but it is possible to use other solv- ble salts of the metals.",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Precipitation is preferably effected from a solution of the mixed nitrates, though other soluble salts of the metals may be used."
+      }
+    },
+    {
+      "id": "ex:msyn/us2014883a/claim/object-stable-catalyst",
+      "label": "Claim",
+      "props": {
+        "name": "object: rapid methanol production with a highly stabilized catalyst",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/1",
+            "quote": "‘The primary object of this invention is to provide for the production of methanol at a 10. rapid rate by means of a highly stabilized cata- lyst.",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The object of the invention is the production of methanol at a rapid rate by means of a highly stabilized catalyst."
+      }
+    },
+    {
+      "id": "ex:msyn/us2014883a/claim/patent-claim-1",
+      "label": "Claim",
+      "props": {
+        "name": "claim 1: methanol process over Zn/Cr oxides + free Cu, Zn:Cu 2-4½",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 1",
+            "passage": "us2014883a/p2/4",
+            "quote": "i, Lhe method of producing methanol. which comprises passing a mixture of hydrogen and a carbon ox.de, at a pressure substantially above atmospheric pressure and a temperature sub- Stantiaily above 200° C.,",
+            "source": "ex:msyn/source/us2014883a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 1",
+            "passage": "us2014883a/p2/5",
+            "quote": "over a catalyst compris- 20 ing essentially an intimate mixture of zinc and chromium oxides and finely divided free copper,",
+            "source": "ex:msyn/source/us2014883a"
+          },
+          {
+            "kind": "text",
+            "agreement": "no_ocr",
+            "locator": "p. 2, claim 1",
+            "reading": "vision_ocr",
+            "region": [
+              0.57,
+              0.345,
+              0.95,
+              0.365
+            ],
+            "second_reading": "chromium oxides and finely divided free copper, the molecular ratio of zinc to copper being of the order of 2 to 4½ atoms of zinc to one atom of copper.",
+            "source": "ex:msyn/source/us2014883a",
+            "transcription": "the order of 2 to 4½ atoms of zinc to one atom"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The method of producing methanol by passing hydrogen and a carbon oxide, at a pressure substantially above atmospheric and a temperature substantially above 200 C, over a catalyst essentially an intimate mixture of zinc and chromium oxides and finely divided free copper, with 2 to 4½ atoms of zinc per atom of copper."
+      }
+    },
+    {
+      "id": "ex:msyn/us2014883a/claim/patent-claim-2",
+      "label": "Claim",
+      "props": {
+        "name": "claim 2: catalyst of free Cu with Zn and Cr oxygen compounds",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 2",
+            "passage": "us2014883a/p2/5",
+            "quote": "2. A methanol catalyst comprising essentially intimately mixed finely divided free copper and oxysen compounds of zinc and chromium, the molecular ratio of zine to copper being of the",
+            "source": "ex:msyn/source/us2014883a"
+          },
+          {
+            "kind": "text",
+            "agreement": "no_ocr",
+            "locator": "p. 2, claim 2",
+            "reading": "vision_ocr",
+            "region": [
+              0.57,
+              0.413,
+              0.95,
+              0.432
+            ],
+            "second_reading": "oxygen compounds of zinc and chromium, the molecular ratio of zinc to copper being of the order of 2 to 4½ atoms of zinc to one atom of copper.",
+            "source": "ex:msyn/source/us2014883a",
+            "transcription": "order of 2 to 4½ atoms of zinc to one atom of"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "A methanol catalyst comprising essentially intimately mixed finely divided free copper and oxygen compounds of zinc and chromium, with 2 to 4½ atoms of zinc per atom of copper."
+      }
+    },
+    {
+      "id": "ex:msyn/us2014883a/claim/patent-claim-3",
+      "label": "Claim",
+      "props": {
+        "name": "claim 3: as claim 2, copper so finely divided as to be purplish",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 3",
+            "passage": "us2014883a/p2/5",
+            "quote": "3. A methanol catalyst comprising essentially intimately mixed finely divided free copper, the extent of the division of the copper being such ; as to produce a purplish color,",
+            "source": "ex:msyn/source/us2014883a"
+          },
+          {
+            "kind": "text",
+            "agreement": "no_ocr",
+            "locator": "p. 2, claim 3",
+            "reading": "vision_ocr",
+            "region": [
+              0.57,
+              0.5,
+              0.95,
+              0.515
+            ],
+            "second_reading": "pounds of zinc and chromium, and the ratio of zinc to copper being of the order of 2 to 4½ atoms of zinc to one atom of copper.",
+            "source": "ex:msyn/source/us2014883a",
+            "transcription": "zinc to copper being of the order of 2 to 4½ atoms of zinc to one atom of copper."
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "A methanol catalyst of intimately mixed finely divided free copper, divided so as to produce a purplish color, and oxygen compounds of zinc and chromium, with 2 to 4½ atoms of zinc per atom of copper."
+      }
+    },
+    {
+      "id": "ex:msyn/us2014883a/claim/patent-claim-4",
+      "label": "Claim",
+      "props": {
+        "name": "claim 4: stabilizing a Zn oxide/free Cu catalyst by mixing in a chromium oxygen compound",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 4",
+            "note": "'&.' is the OCR of '4.'",
+            "quote": "&. The method of stabilizing a heat unstable inethanol catalyst comprising essentially zinc 40 oxide and finely divided free copper",
+            "source": "ex:msyn/source/us2014883a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 4",
+            "passage": "us2014883a/p2/6",
+            "quote": "which comprises Intimately mixing therewith a chromium oxygen compound.",
+            "source": "ex:msyn/source/us2014883a"
+          },
+          {
+            "kind": "text",
+            "agreement": "no_ocr",
+            "locator": "p. 2, claim 4",
+            "reading": "vision_ocr",
+            "region": [
+              0.57,
+              0.545,
+              0.95,
+              0.565
+            ],
+            "second_reading": "methanol catalyst comprising essentially zinc oxide and finely divided free copper in a ratio of the order of 2 to 4½ atoms of zinc to one atom of copper, which comprises intimately mixing therewith a chromium oxygen compound.",
+            "source": "ex:msyn/source/us2014883a",
+            "transcription": "of the order of 2 to 4½ atoms of zinc to one atom"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The method of stabilizing a heat-unstable methanol catalyst of zinc oxide and finely divided free copper (2 to 4½ atoms of zinc per atom of copper) by intimately mixing therewith a chromium oxygen compound."
+      }
+    },
+    {
+      "id": "ex:msyn/us2014883a/claim/small-chromium-chromic-acid",
+      "label": "Claim",
+      "props": {
+        "name": "small chromium: chromic acid treatment of a chromium-free precipitate",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/8",
+            "quote": "Where the catalyst is to contain chromium in _relatively small proportion, 2 chromium-free cata- | lyst may be prepared in any desired manner,",
+            "source": "ex:msyn/source/us2014883a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/1",
+            "quote": "of the zinc and copper oxygen compounds are converted into chromates. The resulting pre- cip.tate is then treated with a reducing gas at an elevated temperature,",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "For a relatively small chromium content, a chromium-free precipitate is treated with an appropriate amount of chromic acid, converting some zinc and copper oxygen compounds into chromates, and then treated with a reducing gas at elevated temperature."
+      }
+    },
+    {
+      "id": "ex:msyn/us2014883a/claim/zn60cu30cr10-comparison",
+      "label": "Claim",
+      "props": {
+        "name": "Zn60Cu30Cr10 slightly less active but much more heat-resistant",
+        "claim_kind": "comparison",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/5",
+            "quote": "A catalyst of the cemposition ZnsoCuz0Crio is, 5- however, only slightly less active than a similar catalyst without the chromium, but is consider- ably more resistant to continued heating or over- heating.",
+            "source": "ex:msyn/source/us2014883a"
+          },
+          {
+            "kind": "text",
+            "agreement": "disagree",
+            "locator": "p. 1, right column, line 5",
+            "note": "trailing '5' is a line number (the patent's margin line number is not part of the text)",
+            "reading": "vision_ocr",
+            "region": [
+              0.44,
+              0.362,
+              0.95,
+              0.38
+            ],
+            "second_reading": "A catalyst of the composition Zn60Cu30Cr10 is, however, only slightly less active than a similar catalyst without the chromium,",
+            "source": "ex:msyn/source/us2014883a",
+            "transcription": "A catalyst of the composition Zn60Cu30Cr10 is,"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "A catalyst Zn60Cu30Cr10 is only slightly less active than a similar catalyst without chromium but considerably more resistant to continued heating or overheating."
+      }
+    },
+    {
+      "id": "ex:msyn/us2014883a/claim/zno-structure",
+      "label": "Claim",
+      "props": {
+        "name": "zinc oxide acquires a well-adapted physical structure",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/3",
+            "quote": "the zinc oxide possesses as a result of the treat- ment, a physical structure which is well adapted to the purpose of the catalyst.",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "stated with reference to the co-pending application 421,263 (Patent 1,908,696)",
+        "statement": "As a result of the treatment, the zinc oxide possesses a physical structure well adapted to the purpose of the catalyst."
+      }
+    },
+    {
+      "id": "ex:msyn/us2014883a/feed/h2-co-2-1",
+      "label": "Feed",
+      "props": {
+        "name": "hydrogen : carbon monoxide approximately 2 : 1 by volume",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'5' is a line number; 'oi' reads 'of'",
+            "passage": "us2014883a/p2/4",
+            "quote": "using a gas mixture containing approximately two parts 5 oi hydrogen to one part of carbon monoxide by volume,",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "ratios": {
+          "h2_co_ratio": {
+            "status": "present",
+            "as_reported": "approximately two parts oi hydrogen to one part of carbon monoxide by volume",
+            "basis": "volume",
+            "qualifier": "approximate",
+            "unit": "1",
+            "value": 2
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us2014883a/hypothesis/chromate-reduction",
+      "label": "Hypothesis",
+      "props": {
+        "name": "chromates decomposed, hexavalent Cr reduced to trivalent during reducing treatment",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/1",
+            "quote": "during which treatment the chromates are presumably decomposed and the hexavalent chromium reduced to trivalent chromium.",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "hypothesis_kind": "mechanistic",
+        "hypothesis_status": "proposed",
+        "statement": "During the reducing-gas treatment the chromates are presumably decomposed and hexavalent chromium reduced to trivalent chromium."
+      }
+    },
+    {
+      "id": "ex:msyn/us2014883a/hypothesis/decline-physical-structure",
+      "label": "Hypothesis",
+      "props": {
+        "name": "decline due to change of physical structure, not poisoning",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'80' is a line number",
+            "passage": "us2014883a/p1/2",
+            "quote": "which apparently is due to a change in. 80 the physical structure of the catalyst, and not due to any poisoning either by foreign bodies contained in the gases or produced by chemical reaction.",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "hypothesis_kind": "explanatory",
+        "hypothesis_status": "proposed",
+        "statement": "The gradual decline in yield of the copper-zinc catalyst is apparently due to a change in its physical structure, not to poisoning by foreign bodies in the gases or produced by reaction."
+      }
+    },
+    {
+      "id": "ex:msyn/us2014883a/hypothesis/purple-copper-active",
+      "label": "Hypothesis",
+      "props": {
+        "name": "deep purple copper color characteristic of a very active condition",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/3",
+            "quote": "copper, aS a result of the treatment, possess a deep purple, or dark reddish purple color, which — apparently is characteristic of a vary active con- dition of the copper for catalysis purposes.",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "hypothesis_kind": "descriptive",
+        "hypothesis_status": "proposed",
+        "statement": "The deep purple or dark reddish purple color of the copper particles after the treatment is apparently characteristic of a very active condition of the copper for catalysis."
+      }
+    },
+    {
+      "id": "ex:msyn/us2014883a/preparation/chromic-acid-route",
+      "label": "Preparation",
+      "props": {
+        "name": "chromium added to a chromium-free Zn-Cu precipitate slurry as chromic acid, evaporated to dryness",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/8",
+            "quote": "Where the catalyst is to contain chromium in _relatively small proportion, 2 chromium-free cata- | lyst may be prepared in any desired manner,",
+            "source": "ex:msyn/source/us2014883a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/1",
+            "quote": "the preferred method is to stop the preparation of the Zinc~ copper catalyst at the point where a thick slurry of mixed precipitates and water is formed to which a solution of chromic acid is added",
+            "source": "ex:msyn/source/us2014883a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/1",
+            "quote": "and the re- sulting mixture thereupon evaporated to dryness with frequent agitation.",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "method": "chromium-free zinc-copper carbonate/hydroxide precipitate slurry treated with chromic acid solution and evaporated to dryness with agitation; then treated with a reducing gas at elevated temperature",
+        "procedure_status": "proposed"
+      }
+    },
+    {
+      "id": "ex:msyn/us2014883a/preparation/coprecipitation-route",
+      "label": "Preparation",
+      "props": {
+        "name": "simultaneous precipitation of zinc, copper and trivalent chromium",
+        "conditions": {
+          "chromium_content": {
+            "status": "present",
+            "as_reported": "more than twenty atomic percent",
+            "bound": "lower",
+            "note": "preferred route above this chromium content; may also be used for small percentages",
+            "unit": "atomic percent",
+            "value": 20
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/2",
+            "quote": "Where it is desired to prepare a catalyst con- taining chromium in percentages of more than twenty atomic percent, the preferred method is to prepare a solution containing the ions of Zinc, copper and trivalent chromium",
+            "source": "ex:msyn/source/us2014883a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/2",
+            "quote": "and precipitate the three metals simultaneously as hydroxides, carbonates, or other salts, which upon heating easily decompose to give the oxides.",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "method": "precipitation of zinc, copper and trivalent chromium together as hydroxides, carbonates or other salts from a solution of their ions (preferably nitrates), by alkalies or alkali carbonates",
+        "procedure_status": "proposed"
+      }
+    },
+    {
+      "id": "ex:msyn/us2014883a/preparation/zn5-cu1",
+      "label": "Preparation",
+      "props": {
+        "name": "coprecipitation of zinc and copper carbonates with sodium carbonate from nitrate solution",
+        "conditions": {
+          "metal_concentration": {
+            "status": "present",
+            "as_reported": "approximately 15 grams of the total metal per ter",
+            "note": "'per ter' read as 'per liter'",
+            "qualifier": "approximate",
+            "unit": "g/L",
+            "value": 15
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'20' is a line number; 'per ter' reads 'per liter'",
+            "passage": "us2014883a/p1/6",
+            "quote": "are converted into nitrates and dissolved in sufficient water to produce a solution whose concentration is approximately 15 grams of the 20 total metal per ter.",
+            "source": "ex:msyn/source/us2014883a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/7",
+            "quote": "This solution is then treated at room temperature or higher with a saturated solution of sodium carbonate to effect the simul- tanecus precipitation of the zine and copper car- bonates, intimately commingled.",
+            "source": "ex:msyn/source/us2014883a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/7",
+            "quote": "is washed to remove nitrates, filtered, pressed in a hydraulic press, dried and broken up into gran- ules of any desired size.",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "method": "coprecipitation of zinc and copper carbonates from the mixed nitrate solution with saturated sodium carbonate solution; washing, filtering, pressing, drying, granulating",
+        "procedure_status": "proposed",
+        "steps": [
+          "five parts by weight of zinc and one part by weight of copper (or chemical equivalents) are converted into nitrates and dissolved in water to about 15 grams total metal per liter",
+          "the solution is treated at room temperature or higher with a saturated sodium carbonate solution to precipitate the zinc and copper carbonates together",
+          "the precipitate is washed free of nitrates, filtered, pressed in a hydraulic press, dried and broken into granules"
+        ],
+        "temperature": {
+          "status": "present",
+          "as_reported": "at room temperature or higher",
+          "note": "no number printed",
+          "text_value": "room temperature or higher"
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us2014883a/sample/catalyst-produced-as-described",
+      "label": "CatalystSample",
+      "props": {
+        "name": "a catalyst produced as described above",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/4",
+            "quote": "A catalyst produced as described above is so active that it will produce methanol in appre- clable quantities",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "preparation_status": "prepared",
+        "sample_kind": "other"
+      }
+    },
+    {
+      "id": "ex:msyn/us2014883a/sample/chromic-acid-route",
+      "label": "CatalystSample",
+      "props": {
+        "name": "zinc-copper-chromium catalyst made by the chromic acid route (general)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/1",
+            "quote": "The resulting pre- cip.tate is then treated with a reducing gas at an elevated temperature,",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "preparation_status": "proposed",
+        "sample_kind": "other"
+      }
+    },
+    {
+      "id": "ex:msyn/us2014883a/sample/coprecipitation-route",
+      "label": "CatalystSample",
+      "props": {
+        "name": "zinc-copper-chromium catalyst made by simultaneous precipitation (general)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/2",
+            "quote": "and precipitate the three metals simultaneously as hydroxides, carbonates, or other salts,",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "preparation_status": "proposed",
+        "sample_kind": "other"
+      }
+    },
+    {
+      "id": "ex:msyn/us2014883a/sample/zn5-cu1",
+      "label": "CatalystSample",
+      "props": {
+        "name": "zinc-copper catalyst granules (general preparation)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'8°' is a line number",
+            "passage": "us2014883a/p1/7",
+            "quote": "The precipitate 8° is washed to remove nitrates, filtered, pressed in a hydraulic press, dried and broken up into gran- ules of any desired size.",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "preparation_status": "proposed",
+        "sample_kind": "granules"
+      }
+    },
+    {
+      "id": "ex:msyn/us2014883a/species/chromates",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "chromates of zinc and copper",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/1",
+            "quote": "of the zinc and copper oxygen compounds are converted into chromates.",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us2014883a/species/chromic-acid",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "chromic acid",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/8",
+            "quote": "tate may. subsequently be treated with an ap- propriate amount of chromic acid,",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "note": "formula not stated"
+      }
+    },
+    {
+      "id": "ex:msyn/us2014883a/species/chromium-compound",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "chromium compound / chromium oxygen compound (unspecified)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/3",
+            "quote": "the addition of a chromium com- pound to such a copper-zine catalyst",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "note": "the compound is not specified; claims name 'oxygen compounds of zinc and chromium' and 'a chromium oxygen compound'"
+      }
+    },
+    {
+      "id": "ex:msyn/us2014883a/species/chromium-oxides",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "chromium oxides",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 1",
+            "passage": "us2014883a/p2/5",
+            "quote": "an intimate mixture of zinc and chromium oxides and finely divided free copper,",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "note": "formula not stated"
+      }
+    },
+    {
+      "id": "ex:msyn/us2014883a/species/halides",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "halides (class)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/3",
+            "quote": "presence. of sulphur (free or combined), the halides, etc.",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us2014883a/species/zinc-oxygen-compounds",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "oxygen compounds of zinc",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 2",
+            "note": "'oxysen' reads 'oxygen'",
+            "passage": "us2014883a/p2/5",
+            "quote": "oxysen compounds of zinc and chromium,",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us2014883a/test/low-temperature-activity",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "methanol production at temperatures as low as 200 C and 2600 lb/sq in",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'appre- clable' reads 'appreciable'",
+            "passage": "us2014883a/p2/4",
+            "quote": "A catalyst produced as described above is so active that it will produce methanol in appre- clable quantities at temperatures as low as 200° C. with pressure of 2600 pounds per sq. in.,",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "experiment_kind": "physical",
+        "pressure": {
+          "status": "present",
+          "as_reported": "2600 pounds per sq. in.",
+          "unit": "lb/in2",
+          "value": 2600
+        },
+        "results": {
+          "methanol_production": {
+            "status": "present",
+            "as_reported": "will produce methanol in appre- clable quantities",
+            "text_value": "appreciable quantities of methanol"
+          }
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "as low as 200° C.",
+          "bound": "lower",
+          "note": "lowest temperature at which appreciable methanol is produced",
+          "unit": "°C",
+          "value": 200
+        },
+        "temperature_measured_at": "not_reported",
+        "test_kind": "activity"
+      }
+    },
+    {
+      "id": "ex:msyn/us2014883a/treatment/chromic-acid-route-reduction",
+      "label": "Treatment",
+      "props": {
+        "name": "reducing-gas treatment of the chromated precipitate",
+        "atmosphere": "a reducing gas",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/1",
+            "quote": "The resulting pre- cip.tate is then treated with a reducing gas at an elevated temperature,",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "procedure_status": "proposed",
+        "temperature": {
+          "status": "present",
+          "as_reported": "at an elevated temperature",
+          "text_value": "elevated temperature"
+        },
+        "treatment_kind": "reduction"
+      }
+    },
+    {
+      "id": "ex:msyn/us2014883a/treatment/zn5-cu1-reduction",
+      "label": "Treatment",
+      "props": {
+        "name": "treatment of the granules with hydrogen and/or carbon monoxide",
+        "atmosphere": "hydrogen, carbon monoxide, or mixtures of them",
+        "conditions": {
+          "preferred_final_temperature": {
+            "status": "present",
+            "as_reported": "raising the temperature to 300° C.",
+            "unit": "°C",
+            "value": 300
+          },
+          "preferred_initial_temperature": {
+            "status": "present",
+            "as_reported": "heating at 150°",
+            "note": "unit printed as '°' only",
+            "unit": "°",
+            "value": 150
+          }
+        },
+        "duration": {
+          "status": "present",
+          "as_reported": "a pericd of 8 to 12 hours",
+          "lower": 8,
+          "note": "found very satisfactory; 'several hours' in general",
+          "unit": "h",
+          "upper": 12
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'40' and '©' are OCR artifacts; the image prints 'ranging from 100° C.' (OCR '190°')",
+            "passage": "us2014883a/p1/7",
+            "quote": "To produce the final cat- alyst, preferably these granules are treated with hydrogen, carbon monoxide, or mixtures of them, 40 at atmospheric pressure and at temperatures © ranging “from 190° C. to 450° C.",
+            "source": "ex:msyn/source/us2014883a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/7",
+            "quote": "Preferably, this treatment is carried out by heating at 150° for a - time, and ultimately raising the temperature to 300° C.",
+            "source": "ex:msyn/source/us2014883a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'45' is a line number",
+            "passage": "us2014883a/p1/7",
+            "quote": "The time of treatment may extend over 45 a period of several hours, a pericd of 8 to 12 hours having been found very satisfactory.",
+            "source": "ex:msyn/source/us2014883a"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 1, right column, line 42",
+            "reading": "vision_ocr",
+            "region": [
+              0.45,
+              0.776,
+              0.7,
+              0.79
+            ],
+            "source": "ex:msyn/source/us2014883a",
+            "transcription": "ranging from 100° C. to 450° C."
+          }
+        ],
+        "pressure": {
+          "status": "present",
+          "as_reported": "at atmospheric pressure",
+          "note": "printed as atmospheric pressure; recorded as 1 atm",
+          "qualifier": "approximate",
+          "unit": "atm",
+          "value": 1
+        },
+        "procedure_status": "proposed",
+        "temperature": {
+          "status": "present",
+          "as_reported": "from 100° C. to 450° C.",
+          "lower": 100,
+          "note": "corrected 2026-09-29 from 190 to 100: the page image prints '100° C.' (OCR of the text layer read '190°')",
+          "unit": "°C",
+          "upper": 450
+        },
+        "treatment_kind": "reduction"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/reaction/co-hydrogenation-to-methanol/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/source/us2014883a/assignee",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "role": "assignee"
+      },
+      "source": "ex:msyn/source/us2014883a",
+      "target": "ex:msyn/institution/karpen-bros-s"
+    },
+    {
+      "id": "ex:msyn/species/chromium/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/chromium",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/species/na2co3/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/na2co3",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/us2014883a/catalyst/claimed-zn-cr-oxides-free-cu/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, claim 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2014883a/catalyst/claimed-zn-cr-oxides-free-cu",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/us2014883a/catalyst/cu-zn-patent-1908696/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2014883a/catalyst/cu-zn-patent-1908696",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/us2014883a/catalyst/zn-cu-cr-high-cr/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 1, right column, lines 9-11"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2014883a/catalyst/zn-cu-cr-high-cr",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/us2014883a/catalyst/zn-cu-cr-improved/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2014883a/catalyst/zn-cu-cr-improved",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/us2014883a/catalyst/zn-cu-without-chromium/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2014883a/catalyst/zn-cu-without-chromium",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/us2014883a/catalyst/zn5-cu1-weight/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2014883a/catalyst/zn5-cu1-weight",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/us2014883a/catalyst/zn60cu30cr10/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 1, left column, line 45"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2014883a/catalyst/zn60cu30cr10",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/us2014883a/claim/avoid-sulfur-halides/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2014883a/claim/avoid-sulfur-halides",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/us2014883a/claim/chromium-addition-routes/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2014883a/claim/chromium-addition-routes",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/us2014883a/claim/chromium-less-active/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2014883a/claim/chromium-less-active",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/us2014883a/claim/chromium-stabilizes/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2014883a/claim/chromium-stabilizes",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/us2014883a/claim/copper-air-stable/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2014883a/claim/copper-air-stable",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/us2014883a/claim/cu-zn-decline/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2014883a/claim/cu-zn-decline",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/us2014883a/claim/formula-convention/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2014883a/claim/formula-convention",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/us2014883a/claim/high-cr-activation/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 1, right column, lines 9-11"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2014883a/claim/high-cr-activation",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/us2014883a/claim/large-chromium-coprecipitation/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2014883a/claim/large-chromium-coprecipitation",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/us2014883a/claim/low-temperature-activity/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2014883a/claim/low-temperature-activity",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/us2014883a/claim/nitrates-preferred/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2014883a/claim/nitrates-preferred",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/us2014883a/claim/object-stable-catalyst/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2014883a/claim/object-stable-catalyst",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/us2014883a/claim/patent-claim-1/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, claim 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2014883a/claim/patent-claim-1",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/us2014883a/claim/patent-claim-2/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, claim 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2014883a/claim/patent-claim-2",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/us2014883a/claim/patent-claim-3/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, claim 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2014883a/claim/patent-claim-3",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/us2014883a/claim/patent-claim-4/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, claim 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2014883a/claim/patent-claim-4",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/us2014883a/claim/small-chromium-chromic-acid/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2014883a/claim/small-chromium-chromic-acid",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/us2014883a/claim/zn60cu30cr10-comparison/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 1, right column, line 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2014883a/claim/zn60cu30cr10-comparison",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/us2014883a/claim/zno-structure/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2014883a/claim/zno-structure",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/us2014883a/feed/h2-co-2-1/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2014883a/feed/h2-co-2-1",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/us2014883a/hypothesis/chromate-reduction/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2014883a/hypothesis/chromate-reduction",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/us2014883a/hypothesis/decline-physical-structure/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2014883a/hypothesis/decline-physical-structure",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/us2014883a/hypothesis/purple-copper-active/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2014883a/hypothesis/purple-copper-active",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/1",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/3",
+            "quote": "the compositions of the cat- alysts are hereinafter expressed in atomic pro- portions of the metals.",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us2014883a/catalyst/zn-cu-cr-improved",
+      "target": "ex:msyn/species/zinc"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/10",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/5",
+            "quote": "The effect of the addition of chromium to a Zinc-copper catalyst is to render it more stable",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us2014883a/catalyst/zn-cu-without-chromium",
+      "target": "ex:msyn/species/copper"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/11",
+      "type": "COMPARED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'cemposition' reads 'composition'; '5-' is a line number",
+            "passage": "us2014883a/p1/5",
+            "quote": "A catalyst of the cemposition ZnsoCuz0Crio is, 5- however, only slightly less active than a similar catalyst without the chromium, but is consider- ably more resistant to continued heating or over- heating.",
+            "source": "ex:msyn/source/us2014883a"
+          },
+          {
+            "kind": "text",
+            "agreement": "disagree",
+            "locator": "p. 1, right column, line 5",
+            "note": "trailing '5' is a line number (the patent's margin line number is not part of the text)",
+            "reading": "vision_ocr",
+            "region": [
+              0.44,
+              0.362,
+              0.95,
+              0.38
+            ],
+            "second_reading": "A catalyst of the composition Zn60Cu30Cr10 is, however, only slightly less active than a similar catalyst without the chromium,",
+            "source": "ex:msyn/source/us2014883a",
+            "transcription": "A catalyst of the composition Zn60Cu30Cr10 is,"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2014883a/catalyst/zn60cu30cr10",
+      "target": "ex:msyn/us2014883a/catalyst/zn-cu-without-chromium"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/12",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/5",
+            "quote": "a catalyst of the composition ZnaCuiCras while considerably less",
+            "source": "ex:msyn/source/us2014883a"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 1, right column, lines 9-11",
+            "note": "subscripts 45, 10, 45 read on the page image (OCR 'ZnaCuiCras'/'Zn4sCuioCras'); the trailing '10' is a line number",
+            "reading": "vision_ocr",
+            "region": [
+              0.44,
+              0.4,
+              0.95,
+              0.44
+            ],
+            "second_reading": "heating. On the other hand, a catalyst of the composition Zn45Cu10Cr45 while considerably less active, is very resistant to the effect of elevated temperatures and in fact its activity is increased",
+            "source": "ex:msyn/source/us2014883a",
+            "transcription": "ably more resistant to continued heating or over- heating. On the other hand, a catalyst of the composition Zn45Cu10Cr45 while considerably less 10 active, is very resistant to the effect of elevated"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "Zn45Cu10Cr45",
+          "note": "atomic proportion from the subscript of the printed formula, read on the page image (re-curation 2026-09-29)",
+          "unit": "1",
+          "value": 45
+        },
+        "fraction_basis": "atom",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us2014883a/catalyst/zn-cu-cr-high-cr",
+      "target": "ex:msyn/species/zinc"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/13",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/5",
+            "quote": "a catalyst of the composition ZnaCuiCras while considerably less",
+            "source": "ex:msyn/source/us2014883a"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 1, right column, lines 9-11",
+            "note": "subscripts 45, 10, 45 read on the page image (OCR 'ZnaCuiCras'/'Zn4sCuioCras'); the trailing '10' is a line number",
+            "reading": "vision_ocr",
+            "region": [
+              0.44,
+              0.4,
+              0.95,
+              0.44
+            ],
+            "second_reading": "heating. On the other hand, a catalyst of the composition Zn45Cu10Cr45 while considerably less active, is very resistant to the effect of elevated temperatures and in fact its activity is increased",
+            "source": "ex:msyn/source/us2014883a",
+            "transcription": "ably more resistant to continued heating or over- heating. On the other hand, a catalyst of the composition Zn45Cu10Cr45 while considerably less 10 active, is very resistant to the effect of elevated"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "Zn45Cu10Cr45",
+          "note": "atomic proportion from the subscript of the printed formula, read on the page image (re-curation 2026-09-29)",
+          "unit": "1",
+          "value": 10
+        },
+        "fraction_basis": "atom",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us2014883a/catalyst/zn-cu-cr-high-cr",
+      "target": "ex:msyn/species/copper"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/14",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/5",
+            "quote": "a catalyst of the composition ZnaCuiCras while considerably less",
+            "source": "ex:msyn/source/us2014883a"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 1, right column, lines 9-11",
+            "note": "subscripts 45, 10, 45 read on the page image (OCR 'ZnaCuiCras'/'Zn4sCuioCras'); the trailing '10' is a line number",
+            "reading": "vision_ocr",
+            "region": [
+              0.44,
+              0.4,
+              0.95,
+              0.44
+            ],
+            "second_reading": "heating. On the other hand, a catalyst of the composition Zn45Cu10Cr45 while considerably less active, is very resistant to the effect of elevated temperatures and in fact its activity is increased",
+            "source": "ex:msyn/source/us2014883a",
+            "transcription": "ably more resistant to continued heating or over- heating. On the other hand, a catalyst of the composition Zn45Cu10Cr45 while considerably less 10 active, is very resistant to the effect of elevated"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "Zn45Cu10Cr45",
+          "note": "atomic proportion from the subscript of the printed formula, read on the page image (re-curation 2026-09-29)",
+          "unit": "1",
+          "value": 45
+        },
+        "fraction_basis": "atom",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us2014883a/catalyst/zn-cu-cr-high-cr",
+      "target": "ex:msyn/species/chromium"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/15",
+      "type": "COMPARED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "compared with the zinc-copper catalyst without chromium discussed in the same passage; '10' is a line number",
+            "passage": "us2014883a/p1/5",
+            "quote": "a catalyst of the composition ZnaCuiCras while considerably less 10 active, is very resistant to the eifect of elevated temperatures",
+            "source": "ex:msyn/source/us2014883a"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 1, right column, lines 9-11",
+            "note": "subscripts 45, 10, 45 read on the page image (OCR 'ZnaCuiCras'/'Zn4sCuioCras'); the trailing '10' is a line number",
+            "reading": "vision_ocr",
+            "region": [
+              0.44,
+              0.4,
+              0.95,
+              0.44
+            ],
+            "second_reading": "heating. On the other hand, a catalyst of the composition Zn45Cu10Cr45 while considerably less active, is very resistant to the effect of elevated temperatures and in fact its activity is increased",
+            "source": "ex:msyn/source/us2014883a",
+            "transcription": "ably more resistant to continued heating or over- heating. On the other hand, a catalyst of the composition Zn45Cu10Cr45 while considerably less 10 active, is very resistant to the effect of elevated"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2014883a/catalyst/zn-cu-cr-high-cr",
+      "target": "ex:msyn/us2014883a/catalyst/zn-cu-without-chromium"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/16",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/6",
+            "quote": "Five parts by weight of zinc and one part . by weight of copper (or their chemical equiva- lents)",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "Five parts by weight of zinc",
+          "unit": "1",
+          "value": 5
+        },
+        "fraction_basis": "mass",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us2014883a/catalyst/zn5-cu1-weight",
+      "target": "ex:msyn/species/zinc"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/17",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/6",
+            "quote": "Five parts by weight of zinc and one part . by weight of copper (or their chemical equiva- lents)",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "one part . by weight of copper",
+          "unit": "1",
+          "value": 1
+        },
+        "fraction_basis": "mass",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us2014883a/catalyst/zn5-cu1-weight",
+      "target": "ex:msyn/species/copper"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/18",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/6",
+            "quote": "Such a zinc-copper catalyst may be prepared. as 29. follows:",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2014883a/sample/zn5-cu1",
+      "target": "ex:msyn/us2014883a/catalyst/zn5-cu1-weight"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/19",
+      "type": "PREPARED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/6",
+            "quote": "Such a zinc-copper catalyst may be prepared. as 29. follows:",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2014883a/sample/zn5-cu1",
+      "target": "ex:msyn/us2014883a/preparation/zn5-cu1"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/2",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/3",
+            "quote": "the compositions of the cat- alysts are hereinafter expressed in atomic pro- portions of the metals.",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us2014883a/catalyst/zn-cu-cr-improved",
+      "target": "ex:msyn/species/copper"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/20",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/6",
+            "quote": "Five parts by weight of zinc and one part . by weight of copper (or their chemical equiva- lents) are converted into nitrates",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "note": "zinc nitrate",
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us2014883a/sample/zn5-cu1",
+      "target": "ex:msyn/species/znno32"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/21",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/6",
+            "quote": "Five parts by weight of zinc and one part . by weight of copper (or their chemical equiva- lents) are converted into nitrates",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "note": "copper nitrate; valence not printed",
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us2014883a/sample/zn5-cu1",
+      "target": "ex:msyn/species/cuno32"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/22",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/7",
+            "quote": "with a saturated solution of sodium carbonate to effect the simul- tanecus precipitation",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "role": "precipitant"
+      },
+      "source": "ex:msyn/us2014883a/sample/zn5-cu1",
+      "target": "ex:msyn/species/na2co3"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/23",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/7",
+            "quote": "To produce the final cat- alyst, preferably these granules are treated with hydrogen, carbon monoxide, or mixtures of them,",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "order": 1
+      },
+      "source": "ex:msyn/us2014883a/sample/zn5-cu1",
+      "target": "ex:msyn/us2014883a/treatment/zn5-cu1-reduction"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/24",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/8",
+            "quote": "Where the catalyst is to contain chromium in _relatively small proportion,",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2014883a/sample/chromic-acid-route",
+      "target": "ex:msyn/us2014883a/catalyst/zn-cu-cr-improved"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/25",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/2",
+            "quote": "Where it is desired to prepare a catalyst con- taining chromium in percentages of more than twenty atomic percent,",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2014883a/sample/coprecipitation-route",
+      "target": "ex:msyn/us2014883a/catalyst/zn-cu-cr-improved"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/26",
+      "type": "PREPARED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/1",
+            "quote": "the preferred method is to stop the preparation of the Zinc~ copper catalyst at the point where a thick slurry of mixed precipitates and water is formed to which a solution of chromic acid is added",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2014883a/sample/chromic-acid-route",
+      "target": "ex:msyn/us2014883a/preparation/chromic-acid-route"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/27",
+      "type": "PREPARED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/2",
+            "quote": "the preferred method is to prepare a solution containing the ions of Zinc, copper and trivalent chromium",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2014883a/sample/coprecipitation-route",
+      "target": "ex:msyn/us2014883a/preparation/coprecipitation-route"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/28",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "an ap- propriate amount",
+          "text_value": "an appropriate amount"
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/8",
+            "quote": "tate may. subsequently be treated with an ap- propriate amount of chromic acid,",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "role": "chromium source"
+      },
+      "source": "ex:msyn/us2014883a/sample/chromic-acid-route",
+      "target": "ex:msyn/us2014883a/species/chromic-acid"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/29",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/1",
+            "quote": "The resulting pre- cip.tate is then treated with a reducing gas at an elevated temperature,",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "order": 1
+      },
+      "source": "ex:msyn/us2014883a/sample/chromic-acid-route",
+      "target": "ex:msyn/us2014883a/treatment/chromic-acid-route-reduction"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/3",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/3",
+            "quote": "the addition of a chromium com- pound to such a copper-zine catalyst tends to. considerably retard the loss of activity",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "role": "not_stated",
+        "role_detail": "stabilizer against heat (as stated)"
+      },
+      "source": "ex:msyn/us2014883a/catalyst/zn-cu-cr-improved",
+      "target": "ex:msyn/us2014883a/species/chromium-compound"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/30",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/3",
+            "quote": "It is preferred to effect precipitation in either method of preparation from a solution of the mixed nitrates,",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us2014883a/sample/coprecipitation-route",
+      "target": "ex:msyn/species/znno32"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/31",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/3",
+            "quote": "It is preferred to effect precipitation in either method of preparation from a solution of the mixed nitrates,",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us2014883a/sample/coprecipitation-route",
+      "target": "ex:msyn/species/cuno32"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/32",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 4",
+            "passage": "us2014883a/p2/6",
+            "quote": "inethanol catalyst comprising essentially zinc 40 oxide and finely divided free copper",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us2014883a/catalyst/claimed-zn-cr-oxides-free-cu",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/33",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 1",
+            "passage": "us2014883a/p2/5",
+            "quote": "an intimate mixture of zinc and chromium oxides and finely divided free copper,",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us2014883a/catalyst/claimed-zn-cr-oxides-free-cu",
+      "target": "ex:msyn/us2014883a/species/chromium-oxides"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/34",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 1",
+            "passage": "us2014883a/p2/5",
+            "quote": "an intimate mixture of zinc and chromium oxides and finely divided free copper,",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "role": "not_stated",
+        "role_detail": "finely divided free copper"
+      },
+      "source": "ex:msyn/us2014883a/catalyst/claimed-zn-cr-oxides-free-cu",
+      "target": "ex:msyn/species/copper"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/35",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 1",
+            "passage": "us2014883a/p2/4",
+            "quote": "i, Lhe method of producing methanol. which comprises passing a mixture of hydrogen and a carbon ox.de,",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2014883a/catalyst/claimed-zn-cr-oxides-free-cu",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/36",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/4",
+            "quote": "approximately two parts 5 oi hydrogen to one part of carbon monoxide by volume,",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "approximately two parts",
+          "qualifier": "approximate",
+          "unit": "1",
+          "value": 2
+        },
+        "fraction_basis": "volume",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us2014883a/feed/h2-co-2-1",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/37",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/4",
+            "quote": "approximately two parts 5 oi hydrogen to one part of carbon monoxide by volume,",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "one part",
+          "qualifier": "approximate",
+          "unit": "1",
+          "value": 1
+        },
+        "fraction_basis": "volume",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us2014883a/feed/h2-co-2-1",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/38",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/4",
+            "quote": "A catalyst produced as described above is so active",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "note": "which of the described catalysts is not stated"
+      },
+      "source": "ex:msyn/us2014883a/sample/catalyst-produced-as-described",
+      "target": "ex:msyn/us2014883a/catalyst/zn-cu-cr-improved"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/39",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/4",
+            "quote": "A catalyst produced as described above is so active that it will produce methanol",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "state": "not_reported"
+      },
+      "source": "ex:msyn/us2014883a/test/low-temperature-activity",
+      "target": "ex:msyn/us2014883a/sample/catalyst-produced-as-described"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/4",
+      "type": "COMPARED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'23' is a line number",
+            "passage": "us2014883a/p1/2",
+            "quote": "In addition, it is remarkably stable in use and thus possesses long life as a catalyst. In 23 this respect, it possesses important advantages | over the catalyst disclosed in said patent.",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2014883a/catalyst/zn-cu-cr-improved",
+      "target": "ex:msyn/us2014883a/catalyst/cu-zn-patent-1908696"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/40",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/4",
+            "quote": "using a gas mixture containing approximately two parts 5 oi hydrogen to one part of carbon monoxide by volume,",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2014883a/test/low-temperature-activity",
+      "target": "ex:msyn/us2014883a/feed/h2-co-2-1"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/41",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/4",
+            "quote": "it will produce methanol in appre- clable quantities at temperatures as low as 200° C.",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2014883a/test/low-temperature-activity",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/42",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "context": [
+          "ex:msyn/us2014883a/test/low-temperature-activity"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/4",
+            "quote": "A catalyst produced as described above is so active that it will produce methanol in appre- clable quantities",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2014883a/catalyst/zn-cu-cr-improved",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/43",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/1",
+            "quote": "provide for the production of methanol at a 10. rapid rate by means of a highly stabilized cata- lyst.",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2014883a/claim/object-stable-catalyst",
+      "target": "ex:msyn/us2014883a/catalyst/zn-cu-cr-improved"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/44",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/2",
+            "quote": "Such a catalyst shows-a gradual decline in yield even when used at normal operating tem- perature,",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2014883a/claim/cu-zn-decline",
+      "target": "ex:msyn/us2014883a/catalyst/cu-zn-patent-1908696"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/45",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/2",
+            "quote": "which apparently is due to a change in. 80 the physical structure of the catalyst,",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2014883a/hypothesis/decline-physical-structure",
+      "target": "ex:msyn/us2014883a/catalyst/cu-zn-patent-1908696"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/46",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/3",
+            "quote": "the addition of a chromium com- pound to such a copper-zine catalyst tends to. considerably retard the loss of activity",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2014883a/claim/chromium-stabilizes",
+      "target": "ex:msyn/us2014883a/catalyst/zn-cu-cr-improved"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/47",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/3",
+            "quote": "the addition of a chromium com- pound to such a copper-zine catalyst tends to. considerably retard the loss of activity",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2014883a/claim/chromium-stabilizes",
+      "target": "ex:msyn/us2014883a/species/chromium-compound"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/48",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/5",
+            "quote": "The effect of the addition of chromium to a Zinc-copper catalyst is to render it more stable",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2014883a/claim/chromium-less-active",
+      "target": "ex:msyn/us2014883a/catalyst/zn-cu-cr-improved"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/49",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/5",
+            "quote": "A catalyst of the cemposition ZnsoCuz0Crio is, 5- however, only slightly less active",
+            "source": "ex:msyn/source/us2014883a"
+          },
+          {
+            "kind": "text",
+            "agreement": "disagree",
+            "locator": "p. 1, right column, line 5",
+            "note": "trailing '5' is a line number (the patent's margin line number is not part of the text)",
+            "reading": "vision_ocr",
+            "region": [
+              0.44,
+              0.362,
+              0.95,
+              0.38
+            ],
+            "second_reading": "A catalyst of the composition Zn60Cu30Cr10 is, however, only slightly less active than a similar catalyst without the chromium,",
+            "source": "ex:msyn/source/us2014883a",
+            "transcription": "A catalyst of the composition Zn60Cu30Cr10 is,"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2014883a/claim/zn60cu30cr10-comparison",
+      "target": "ex:msyn/us2014883a/catalyst/zn60cu30cr10"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/5",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/2",
+            "quote": "The im- - proved catalyst herein described is likewise high- ly active.",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2014883a/catalyst/zn-cu-cr-improved",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/50",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/5",
+            "quote": "a catalyst of the composition ZnaCuiCras while considerably less 10 active, is very resistant to the eifect of elevated temperatures",
+            "source": "ex:msyn/source/us2014883a"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 1, right column, lines 9-11",
+            "note": "subscripts 45, 10, 45 read on the page image (OCR 'ZnaCuiCras'/'Zn4sCuioCras'); the trailing '10' is a line number",
+            "reading": "vision_ocr",
+            "region": [
+              0.44,
+              0.4,
+              0.95,
+              0.44
+            ],
+            "second_reading": "heating. On the other hand, a catalyst of the composition Zn45Cu10Cr45 while considerably less active, is very resistant to the effect of elevated temperatures and in fact its activity is increased",
+            "source": "ex:msyn/source/us2014883a",
+            "transcription": "ably more resistant to continued heating or over- heating. On the other hand, a catalyst of the composition Zn45Cu10Cr45 while considerably less 10 active, is very resistant to the effect of elevated"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2014883a/claim/high-cr-activation",
+      "target": "ex:msyn/us2014883a/catalyst/zn-cu-cr-high-cr"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/51",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/3",
+            "quote": "the compositions of the cat- alysts are hereinafter expressed in atomic pro- portions of the metals.",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2014883a/claim/formula-convention",
+      "target": "ex:msyn/us2014883a/catalyst/zn60cu30cr10"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/52",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/6",
+            "quote": "it may be simultaneously precipi- tated with the zinc and copper from a salution containing all three metals,",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2014883a/claim/chromium-addition-routes",
+      "target": "ex:msyn/us2014883a/preparation/coprecipitation-route"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/53",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/6",
+            "quote": "or a zinc-copper catalyst may be first | made in the desired manner and chromium pre- ‘cipitated upon it",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2014883a/claim/chromium-addition-routes",
+      "target": "ex:msyn/us2014883a/preparation/chromic-acid-route"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/54",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/8",
+            "quote": "Where the catalyst is to contain chromium in _relatively small proportion,",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2014883a/claim/small-chromium-chromic-acid",
+      "target": "ex:msyn/us2014883a/preparation/chromic-acid-route"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/55",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/1",
+            "quote": "of the zinc and copper oxygen compounds are converted into chromates.",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2014883a/claim/small-chromium-chromic-acid",
+      "target": "ex:msyn/us2014883a/species/chromates"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/56",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/1",
+            "quote": "during which treatment the chromates are presumably decomposed",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2014883a/hypothesis/chromate-reduction",
+      "target": "ex:msyn/us2014883a/treatment/chromic-acid-route-reduction"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/57",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/2",
+            "quote": "the preferred method is to prepare a solution containing the ions of Zinc, copper and trivalent chromium",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2014883a/claim/large-chromium-coprecipitation",
+      "target": "ex:msyn/us2014883a/preparation/coprecipitation-route"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/58",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/3",
+            "quote": "It is preferred to effect precipitation in either method of preparation from a solution of the mixed nitrates,",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2014883a/claim/nitrates-preferred",
+      "target": "ex:msyn/us2014883a/preparation/coprecipitation-route"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/59",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/3",
+            "quote": "It is preferred to effect precipitation in either method of preparation from a solution of the mixed nitrates,",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2014883a/claim/nitrates-preferred",
+      "target": "ex:msyn/us2014883a/preparation/chromic-acid-route"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/6",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/3",
+            "quote": "these metals in their proportion of sixty atoms of zinc, to thirty -atoms of copper to ten atoms of chromium.",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "sixty atoms of zinc",
+          "unit": "1",
+          "value": 60
+        },
+        "fraction_basis": "atom",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us2014883a/catalyst/zn60cu30cr10",
+      "target": "ex:msyn/species/zinc"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/60",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/3",
+            "quote": "Thus, it is desirable to avoid the presence. of sulphur (free or combined),",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2014883a/claim/avoid-sulfur-halides",
+      "target": "ex:msyn/species/sulfur"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/61",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/3",
+            "quote": "of sulphur (free or combined), the halides, etc. The improved catalysts described are halide-free.",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2014883a/claim/avoid-sulfur-halides",
+      "target": "ex:msyn/us2014883a/species/halides"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/62",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/3",
+            "quote": "The improved catalysts described are halide-free.",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2014883a/claim/avoid-sulfur-halides",
+      "target": "ex:msyn/us2014883a/catalyst/zn-cu-cr-improved"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/63",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'del- ecerious' reads 'deleterious'",
+            "passage": "us2014883a/p2/3",
+            "quote": "which may have a del- ecerious effect. Thus, it is desirable to avoid the presence. of sulphur (free or combined),",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "inhibition_kind": "not_stated"
+      },
+      "source": "ex:msyn/us2014883a/catalyst/zn-cu-cr-improved",
+      "target": "ex:msyn/species/sulfur"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/64",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/3",
+            "quote": "which may have a del- ecerious effect. Thus, it is desirable to avoid the presence. of sulphur (free or combined), the halides, etc.",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "inhibition_kind": "not_stated"
+      },
+      "source": "ex:msyn/us2014883a/catalyst/zn-cu-cr-improved",
+      "target": "ex:msyn/us2014883a/species/halides"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/65",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/3",
+            "quote": "the zinc oxide possesses as a result of the treat- ment, a physical structure which is well adapted",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2014883a/claim/zno-structure",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/66",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/3",
+            "quote": "The particles of copper, aS a result of the treatment, possess a deep purple, or dark reddish purple color,",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2014883a/hypothesis/purple-copper-active",
+      "target": "ex:msyn/species/copper"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/67",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "quote": "Cop- per producec by the method described does not deteriorate if exposed to air.",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2014883a/claim/copper-air-stable",
+      "target": "ex:msyn/species/copper"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/68",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/4",
+            "quote": "A catalyst produced as described above is so active",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2014883a/claim/low-temperature-activity",
+      "target": "ex:msyn/us2014883a/catalyst/zn-cu-cr-improved"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/69",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2014883a/p2/4",
+            "quote": "A catalyst produced as described above is so active that it will produce methanol in appre- clable quantities",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2014883a/test/low-temperature-activity",
+      "target": "ex:msyn/us2014883a/claim/low-temperature-activity"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/7",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/3",
+            "quote": "these metals in their proportion of sixty atoms of zinc, to thirty -atoms of copper to ten atoms of chromium.",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "thirty -atoms of copper",
+          "unit": "1",
+          "value": 30
+        },
+        "fraction_basis": "atom",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us2014883a/catalyst/zn60cu30cr10",
+      "target": "ex:msyn/species/copper"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/70",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 1",
+            "passage": "us2014883a/p2/5",
+            "quote": "over a catalyst compris- 20 ing essentially an intimate mixture of zinc and chromium oxides and finely divided free copper,",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2014883a/claim/patent-claim-1",
+      "target": "ex:msyn/us2014883a/catalyst/claimed-zn-cr-oxides-free-cu"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/71",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 1",
+            "passage": "us2014883a/p2/4",
+            "quote": "i, Lhe method of producing methanol. which comprises passing a mixture of hydrogen and a carbon ox.de,",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2014883a/claim/patent-claim-1",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/72",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 2",
+            "passage": "us2014883a/p2/5",
+            "quote": "2. A methanol catalyst comprising essentially intimately mixed finely divided free copper and oxysen compounds of zinc and chromium,",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2014883a/claim/patent-claim-2",
+      "target": "ex:msyn/us2014883a/catalyst/claimed-zn-cr-oxides-free-cu"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/73",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 2",
+            "passage": "us2014883a/p2/5",
+            "quote": "intimately mixed finely divided free copper and oxysen compounds of zinc and chromium,",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "note": "claim 2 wording",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us2014883a/catalyst/claimed-zn-cr-oxides-free-cu",
+      "target": "ex:msyn/us2014883a/species/zinc-oxygen-compounds"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/74",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 3",
+            "passage": "us2014883a/p2/5",
+            "quote": "3. A methanol catalyst comprising essentially intimately mixed finely divided free copper,",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2014883a/claim/patent-claim-3",
+      "target": "ex:msyn/us2014883a/catalyst/claimed-zn-cr-oxides-free-cu"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/75",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 4",
+            "passage": "us2014883a/p2/6",
+            "quote": "which comprises Intimately mixing therewith a chromium oxygen compound.",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2014883a/claim/patent-claim-4",
+      "target": "ex:msyn/us2014883a/catalyst/claimed-zn-cr-oxides-free-cu"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/76",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 4",
+            "quote": "The method of stabilizing a heat unstable inethanol catalyst comprising essentially zinc 40 oxide and finely divided free copper",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2014883a/claim/patent-claim-4",
+      "target": "ex:msyn/us2014883a/catalyst/zn-cu-without-chromium"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/8",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/3",
+            "quote": "these metals in their proportion of sixty atoms of zinc, to thirty -atoms of copper to ten atoms of chromium.",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "ten atoms of chromium",
+          "unit": "1",
+          "value": 10
+        },
+        "fraction_basis": "atom",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us2014883a/catalyst/zn60cu30cr10",
+      "target": "ex:msyn/species/chromium"
+    },
+    {
+      "id": "ex:msyn/us2014883a/link/9",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us2014883a/p1/5",
+            "quote": "The effect of the addition of chromium to a Zinc-copper catalyst is to render it more stable",
+            "source": "ex:msyn/source/us2014883a"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us2014883a/catalyst/zn-cu-without-chromium",
+      "target": "ex:msyn/species/zinc"
+    },
+    {
+      "id": "ex:msyn/us2014883a/preparation/chromic-acid-route/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2014883a/preparation/chromic-acid-route",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/us2014883a/preparation/coprecipitation-route/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2014883a/preparation/coprecipitation-route",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/us2014883a/preparation/zn5-cu1/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2014883a/preparation/zn5-cu1",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/us2014883a/sample/catalyst-produced-as-described/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2014883a/sample/catalyst-produced-as-described",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/us2014883a/sample/chromic-acid-route/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2014883a/sample/chromic-acid-route",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/us2014883a/sample/coprecipitation-route/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2014883a/sample/coprecipitation-route",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/us2014883a/sample/zn5-cu1/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2014883a/sample/zn5-cu1",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/us2014883a/species/chromates/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2014883a/species/chromates",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/us2014883a/species/chromic-acid/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2014883a/species/chromic-acid",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/us2014883a/species/chromium-compound/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2014883a/species/chromium-compound",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/us2014883a/species/chromium-oxides/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, claim 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2014883a/species/chromium-oxides",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/us2014883a/species/halides/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2014883a/species/halides",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/us2014883a/species/zinc-oxygen-compounds/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, claim 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2014883a/species/zinc-oxygen-compounds",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/us2014883a/test/low-temperature-activity/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2014883a/test/low-temperature-activity",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/us2014883a/treatment/chromic-acid-route-reduction/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2014883a/treatment/chromic-acid-route-reduction",
+      "target": "ex:msyn/source/us2014883a"
+    },
+    {
+      "id": "ex:msyn/us2014883a/treatment/zn5-cu1-reduction/reported-in/us2014883a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 1, right column, line 42"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2014883a/treatment/zn5-cu1-reduction",
+      "target": "ex:msyn/source/us2014883a"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/us2014883a"
+}

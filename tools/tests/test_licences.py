@@ -12,6 +12,8 @@ from conftest import REPO
 from scale import codeowners, devcheck
 
 LICENCES = ("MIT", "CC-BY-4.0")            # the project's own; anything else is third-party (NOTICE)
+PUBLIC_DOMAIN = "LicenseRef-PublicDomain-US"     # copies of public-domain works (NOTICE)
+PUBLIC_DOMAIN_PATHS = ("examples/methanol-synthesis-public/pdfs/", "examples/methanol-synthesis-public/texts/")
 
 
 def _reuse(*args: str) -> subprocess.CompletedProcess:
@@ -67,11 +69,16 @@ def test_each_path_has_the_licence_of_its_kind(file_licences, path, licences):
 
 
 def test_no_file_is_under_a_third_party_licence(file_licences):
-    """Every file is under the project's own licences and LICENSES/ holds only their texts; the repository holds no
-    third-party text (NOTICE). Material under another licence would need a REUSE.toml entry, its text in LICENSES/
-    and a NOTICE line (licensing.md)."""
-    assert {f: lic for f, lic in file_licences.items() if lic - set(LICENCES)} == {}
-    assert sorted(p.name for p in (REPO / "LICENSES").iterdir()) == [f"{lic}.txt" for lic in sorted(LICENCES)]
+    """Every file is under the project's own licences, except the copies of public-domain works of the public
+    methanol example, and LICENSES/ holds only those texts; the repository holds no third-party text under copyright
+    (NOTICE). Material under another licence would need a REUSE.toml entry, its text in LICENSES/ and a NOTICE line
+    (licensing.md)."""
+    pd = {f for f, lic in file_licences.items() if lic == {PUBLIC_DOMAIN}}
+    assert pd and all(f.startswith(PUBLIC_DOMAIN_PATHS) for f in pd)
+    assert {f: lic for f, lic in file_licences.items() if f not in pd and lic - set(LICENCES)} == {}
+    assert sorted(p.name for p in (REPO / "LICENSES").iterdir()) == sorted(
+        [f"{lic}.txt" for lic in LICENCES] + [f"{PUBLIC_DOMAIN}.txt"])
+    assert "Public-domain works: examples/methanol-synthesis-public/" in (REPO / "NOTICE").read_text()
     assert "NC-ND" not in (REPO / "REUSE.toml").read_text()
     assert not re.search(r"^exclude ", (REPO / "MANIFEST.in").read_text(), re.M)    # nothing left out of the sdist
     assert "The repository holds no\n  third-party text" in (REPO / "NOTICE").read_text()

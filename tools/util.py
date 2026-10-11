@@ -52,7 +52,12 @@ def write_yaml(path: str | os.PathLike, data: Any) -> None:
 
 
 def load_doc(path: str | os.PathLike) -> Any:
+    """A JSON or YAML document; a folder holding a graph kept as parts (``parts/header.json``) is built
+    (:mod:`scale.graphparts`)."""
     p = Path(path)
+    if p.is_dir() and (p / "parts" / "header.json").is_file():
+        from .graphparts import build_folder
+        return build_folder(p)
     if p.suffix == ".json" or p.suffix == ".jsonld":
         return json.loads(p.read_text(encoding="utf-8"))
     return load_yaml(p)

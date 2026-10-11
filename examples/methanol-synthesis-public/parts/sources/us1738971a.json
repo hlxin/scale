@@ -1,0 +1,3375 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/source/us1738971a",
+      "label": "Source",
+      "props": {
+        "name": "Process and catalyst for synthesis of methanol",
+        "kind": "patent",
+        "description": "Published 1929-12-10 (grant date printed on the patent (agrees with the USPTO issue-year table)); in scope: before the 1966-01-01 cutoff. Text: 3 pages text_layer. Text not redistributed.",
+        "identifiers": {
+          "patent": "US1738971A"
+        },
+        "licence": "US patent; not subject to copyright",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "Process and catalyst for synthesis of methanol",
+        "url": "https://patents.google.com/patent/US1738971A",
+        "year": 1929
+      }
+    },
+    {
+      "id": "ex:msyn/us1738971a/catalyst/cu-mgo-sio2",
+      "label": "Catalyst",
+      "props": {
+        "name": "copper, magnesia and silica (coprecipitated), Cu-MgO-SiO2",
+        "catalyst_family": "mixed_oxide",
+        "description": "Coprecipitated from sodium silicate, magnesium nitrate and copper nitrate with sodium hydroxide; empirical composition after drying about 28.3 % CuO, 28.8 % MgO, 42.9 % SiO2, after reduction about 24 % Cu, 30.5 % MgO, 45.5 % SiO2. Not to be confused with copper deposited on asbestos.",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1738971a/p1/1",
+            "quote": "I have found that a catalyst mass compris ing copper, magnesia and silica gives surpris ingly better results, than either of these mate rials alone, or the copper and magnesia.",
+            "source": "ex:msyn/source/us1738971a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'35.' is a line number",
+            "quote": "35. After drying the empirical composition of the catalyst was about 28.3% CuO, 28.8% MgO and 42.9% SiO,",
+            "source": "ex:msyn/source/us1738971a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'SiO,' = SiO2",
+            "passage": "us1738971a/p1/3",
+            "quote": "After this reducing treatment the empirical composition of the catalyst was about 24% Cu, 30.5% MgO, and 45.5% SiO,",
+            "source": "ex:msyn/source/us1738971a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1738971a/p1/5",
+            "quote": "In this final form the catalyst is probably of a complex structure, as yet un known, but which I formulate as Cu-MgO-SiO, and call copper, magnesia and silica,",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "generality": "particular",
+        "nominal_formula": "Cu-MgO-SiO2",
+        "properties": {
+          "dried_cuo": {
+            "status": "present",
+            "as_reported": "about 28.3% CuO",
+            "qualifier": "approximate",
+            "unit": "%",
+            "value": 28.3
+          },
+          "dried_mgo": {
+            "status": "present",
+            "as_reported": "28.8% MgO",
+            "qualifier": "approximate",
+            "unit": "%",
+            "value": 28.8
+          },
+          "dried_sio2": {
+            "status": "present",
+            "as_reported": "42.9% SiO,",
+            "note": "SiO2",
+            "qualifier": "approximate",
+            "unit": "%",
+            "value": 42.9
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/better-than-components",
+      "label": "Claim",
+      "props": {
+        "name": "Cu-MgO-SiO2 better than components alone or Cu-MgO",
+        "claim_kind": "comparison",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1738971a/p1/1",
+            "quote": "I have found that a catalyst mass compris ing copper, magnesia and silica gives surpris ingly better results, than either of these mate rials alone, or the copper and magnesia.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "A catalyst mass comprising copper, magnesia and silica gives surprisingly better results than either of these materials alone, or copper and magnesia."
+      }
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/copper-content-limits",
+      "label": "Claim",
+      "props": {
+        "name": "copper up to 50 %, at least 5-10 %, best 25-30 % by weight",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/4",
+            "quote": "I have found in general that these catalyst materials are valuable with proportions of copper running up to 50% by weight of the",
+            "source": "ex:msyn/source/us1738971a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/4",
+            "quote": "If the per cent of metallic reduced copper is above this amount, I have found that the catalysts sin ter very easily and lose their effectiveness as methanol catalysts.",
+            "source": "ex:msyn/source/us1738971a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/4",
+            "quote": "If the percentage of copper is less than 5 or 10% by weight of the catalyst mass, I have found that the rate of conver sion is not satisfactory.",
+            "source": "ex:msyn/source/us1738971a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/5",
+            "quote": "I have found that in general approximately 25-30% by weight of metallic copper gives the best results.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The catalysts are valuable with up to 50 % by weight copper; above this they sinter very easily and lose effectiveness; below 5 or 10 % the rate of conversion is not satisfactory; approximately 25-30 % by weight metallic copper gives the best results."
+      }
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/granules-hard",
+      "label": "Claim",
+      "props": {
+        "name": "reduced granules hard and firm, suited to any synthesis system",
+        "claim_kind": "finding",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1738971a/p1/5",
+            "quote": "After reduction the granules were dark copper colored, and of a hard, firm, though brittle structure suited for any methanol syn thesis system.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "After reduction the granules were dark copper coloured and of a hard, firm though brittle structure suited for any methanol synthesis system."
+      }
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/h2-co-ratio",
+      "label": "Claim",
+      "props": {
+        "name": "any H2/CO ratio works; about 4:1 best, below 1:1 much lower S.T.Y.",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/6",
+            "quote": "My catalyst will form methanol from a gas mixture having any ratio of hydrogen to carbon monoxide, but if the ratio is below one to one by volume the S.T.Y. will be con siderably lower",
+            "source": "ex:msyn/source/us1738971a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/7",
+            "quote": "I have found that a gas containing about four volumes of hydro gen to each volume of carbon monoxide gives the best results, and that with about 6 vol umes of hydrogen the S. T.Y. is somewhat lower.",
+            "source": "ex:msyn/source/us1738971a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/6",
+            "quote": "In general, I prefer not to use less hydrogen than that required theoretically by the equation 2H + CO = CHOH.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The catalyst forms methanol from any ratio of hydrogen to carbon monoxide, but below one to one by volume the S.T.Y. is considerably lower; about four volumes hydrogen per volume CO gives the best results; with about 6 volumes the S.T.Y. is somewhat lower; preferably not less hydrogen than theoretically required and not over 6 volumes per volume CO."
+      }
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/mgo-sio2-equimolecular",
+      "label": "Claim",
+      "props": {
+        "name": "MgO and SiO2 in equimolecular amounts form the balance",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/5",
+            "quote": "that the MgO and SiO, present in equimolecular amounts.",
+            "source": "ex:msyn/source/us1738971a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/5",
+            "quote": "the MgO and SiO, form the balance of the catalyst preferably in the proportions noted.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The MgO and SiO2 are present in equimolecular amounts and form the balance of the catalyst, preferably in these proportions."
+      }
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/not-copper-on-asbestos",
+      "label": "Claim",
+      "props": {
+        "name": "the coprecipitated catalyst is distinct from copper on asbestos",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1738971a/p1/5",
+            "quote": "However, this catalyst is not to be confused with one prepared by depositing copper on asbestos as a support.",
+            "source": "ex:msyn/source/us1738971a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1738971a/p1/6",
+            "quote": "My copper-magnesia-silica definition is accordingly to be applied only to my copre cipitated product, as herein described, and asbestos is disclaimed from this definition.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The catalyst is not to be confused with copper deposited on asbestos; the copper-magnesia-silica definition applies only to the coprecipitated product, though it may be deposited on asbestos or another carrier."
+      }
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/patent-claim-1",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 1",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 1",
+            "quote": "1. A catalyst for the production of metha nol from hydrogen and carbon monoxide which comprises copper, magnesia and silica.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "A catalyst for the production of methanol from hydrogen and carbon monoxide which comprises copper, magnesia and silica."
+      }
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/patent-claim-10",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 10",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 10",
+            "quote": "10. Process for the production of methano which comprises passing a gaseous mixture of hydrogen and carbon monoxide, contain ing an excess of hydrogen at a pressure of between 5 and 300 atmospheres in contact with a catalyst mass comprising copper, magnesia, so",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Process: hydrogen and carbon monoxide with excess hydrogen at 5 to 300 atmospheres over a copper-magnesia-silica catalyst maintained at 150-450 °C."
+      }
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/patent-claim-11",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 11",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 11",
+            "passage": "us1738971a/p3/5",
+            "quote": "with a catalyst mass comprising copper, mag nesia and silica, said being main tained at a temperature of between 300 and 400° C.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Process: hydrogen and carbon monoxide with excess hydrogen at 5 to 300 atmospheres over a copper-magnesia-silica catalyst maintained at 300-400 °C."
+      }
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/patent-claim-12",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 12",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 12",
+            "quote": "12. Process for the production of methanol which comprises passing a gaseous mixture of essentially four volumes of hydrogen and one volume of carbon monoxide, at a pressure of between 5 and 300 atmospheres",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Process: essentially 4 volumes hydrogen and 1 volume carbon monoxide at 5 to 300 atmospheres over a catalyst of up to 50 % by weight reduced copper, balance magnesia and silica, at 300-400 °C."
+      }
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/patent-claim-13",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 13",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 13",
+            "passage": "us1738971a/p3/4",
+            "quote": "balance magnesia and silica in equimolecular proportions, said catalyst being maintained at a temperature of between 300 and 400° C. Signed at Perth Amboy",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "As claim 12, with magnesia and silica in equimolecular proportions."
+      }
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/patent-claim-2",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 2",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 2",
+            "passage": "us1738971a/p3/2",
+            "quote": "2. A catalyst for the production of metha nol from hydrogen and carbon monoxide which comprises reduced copper, magnesia and silica.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "A catalyst for methanol from hydrogen and carbon monoxide comprising reduced copper, magnesia and silica."
+      }
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/patent-claim-3",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 3",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 3",
+            "passage": "us1738971a/p3/2",
+            "quote": "3. A catalyst for the production of metha nol from hydrogen and carbon monoxide which comprises up to 50% by weight of re 30 duced copper and the balance magnesia and silica.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "A catalyst for methanol from hydrogen and carbon monoxide comprising up to 50 % by weight of reduced copper and the balance magnesia and silica."
+      }
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/patent-claim-4",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 4",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 4",
+            "passage": "us1738971a/p3/2",
+            "quote": "which comprises up to 50% by weight of re duced copper and the balance magnesia and silica in equimolecular proportions. 5. Process",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "As claim 3, with magnesia and silica in equimolecular proportions."
+      }
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/patent-claim-5",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 5",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 5",
+            "passage": "us1738971a/p3/2",
+            "quote": "5. Process for the production of methanol which comprises passing a gaseous mixture of hydrogen and carbon monoxide in contact with a hot catalyst mass comprising copper, magnesia and silica.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Process for methanol: passing hydrogen and carbon monoxide in contact with a hot catalyst mass comprising copper, magnesia and silica."
+      }
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/patent-claim-6",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 6",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 6",
+            "passage": "us1738971a/p3/3",
+            "quote": "ing an excess of hydrogen, at a pressure above atmospheric in contact with a hot catalyst mass comprising up to 50% by weight of re duced copper and the balance magnesia and silica in equimolecular proportions.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Process: hydrogen and carbon monoxide with excess hydrogen, above atmospheric pressure, over a hot catalyst of up to 50 % by weight reduced copper, balance magnesia and silica in equimolecular proportions."
+      }
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/patent-claim-7",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 7",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 7",
+            "passage": "us1738971a/p3/3",
+            "quote": "ing an excess of hydrogen at a pressure of between 5 and 300 atmospheres in contact with a hot catalyst mass comprising copper, magnesia and silica. 8. Process",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Process: hydrogen and carbon monoxide with excess hydrogen at 5 to 300 atmospheres over a hot copper-magnesia-silica catalyst."
+      }
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/patent-claim-8",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 8",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 8",
+            "passage": "us1738971a/p3/4",
+            "quote": "comprising copper, magnesia and silica, said catalyst being maintained at a temperature of between 150° C. and 450° C. . 9. Process",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Process: hydrogen and carbon monoxide with excess hydrogen above atmospheric pressure over a copper-magnesia-silica catalyst maintained at 150-450 °C."
+      }
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/patent-claim-9",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 9",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 9",
+            "passage": "us1738971a/p3/4",
+            "quote": "comprising up to 50% by weight of reduced copper, and the balance magnesia and silica in equimolecular proportions, said catalyst 70. being maintained at a temperature of be tween 150° C. and 450° C.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "As claim 8, with up to 50 % by weight reduced copper, balance magnesia and silica in equimolecular proportions."
+      }
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/poison-free-gas",
+      "label": "Claim",
+      "props": {
+        "name": "use gas free from arsenic, sulphur, phosphorus, volatile iron compounds",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1738971a/p1/6",
+            "quote": "it is desirable to use gases substantially free from the common catalyst poisons which may be present in the raw materials, such as,",
+            "source": "ex:msyn/source/us1738971a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/1",
+            "quote": "for example, arsenic, sulphur, phosphorous, volatile iron compounds, or other deleterious constituents gathered during the gas produc tion.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "For methanol synthesis with this catalyst the gases should be substantially free from the common catalyst poisons such as arsenic, sulphur, phosphorus, volatile iron compounds or other deleterious constituents."
+      }
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/pressure-range",
+      "label": "Claim",
+      "props": {
+        "name": "methanol from 5 atm upward (even 1 atm), best 200-300 atm",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1738971a/p3/1",
+            "quote": "methanoi will be formed in substan tial amounts by this catalyst at pressures of 5 atmospheres and upwards, dependent on the temperature used.",
+            "source": "ex:msyn/source/us1738971a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1738971a/p3/1",
+            "quote": "Substantial yields of methanol may even be obtained at pressures lower than this; for example, at one atmos here.",
+            "source": "ex:msyn/source/us1738971a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1738971a/p3/1",
+            "quote": "In gen eral, I have found that the best results are secured between 200 and 300 atmospheres,",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Within these temperatures methanol is formed in substantial amounts at 5 atmospheres and upwards, and even at one atmosphere, though then the S.T.Y. is so much lower as to be uneconomical; the best results are between 200 and 300 atmospheres."
+      }
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/proportions-may-vary",
+      "label": "Claim",
+      "props": {
+        "name": "quantities and proportions of the preparation may be varied",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "quote": "the exact quantities, proportions, etc. given in the pre ferred examples of catalyst manufacture may be varied, and my catalyst can still be obtained,",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The exact quantities and proportions given in the preferred examples of catalyst manufacture may be varied and the catalyst still obtained."
+      }
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/reduction-dilution",
+      "label": "Claim",
+      "props": {
+        "name": "dilute the reducing gas with nitrogen to avoid temperature rises",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'(50' is a line number",
+            "passage": "us1738971a/p1/3",
+            "quote": "In order to prevent large uncontrollable increases in temperature (50 during reduction it is usually desirable to",
+            "source": "ex:msyn/source/us1738971a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1738971a/p1/3",
+            "quote": "dilute the reducing gas with nitrogen or other inert gas.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "To prevent large uncontrollable temperature increases during reduction the reducing gas should be diluted with nitrogen or another inert gas."
+      }
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/space-velocity-range",
+      "label": "Claim",
+      "props": {
+        "name": "any space velocity; preferably 2000-20,000 at N.T.P.",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1738971a/p3/1",
+            "quote": "The catalyst will form methanol under the pressure and temperature limits given above at any space velocity. Because of economic reasons, however, prefer space velocities of 2000 to 20,000 calculated at N. T. P.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The catalyst forms methanol at any space velocity within these limits; for economic reasons space velocities of 2000 to 20,000 calculated at N.T.P. are preferred."
+      }
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/temperature-range",
+      "label": "Claim",
+      "props": {
+        "name": "150-450 °C, best 300-400 °C",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/7",
+            "quote": "This catalyst is suited for the above syn theses at temperatures ranging between 150° C. and 450° C. although I have found the best results are secured between 300° C. and",
+            "source": "ex:msyn/source/us1738971a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1738971a/p3/1",
+            "quote": "400° C.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The catalyst is suited for the synthesis between 150 °C and 450 °C, with the best results between 300 °C and 400 °C."
+      }
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/wide-conditions",
+      "label": "Claim",
+      "props": {
+        "name": "high activity; wide limits of pressure and temperature",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/5",
+            "quote": "This catalyst is of high activity and hence will operate over a large range of varying conditions,",
+            "source": "ex:msyn/source/us1738971a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/5",
+            "quote": "find that wide limits of pressure and tem perature are permissible.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The catalyst is of high activity and operates over a large range of conditions; wide limits of pressure and temperature are permissible, and temperature, space velocity and pressure may be varied to obtain the desired space-time yields or conversions."
+      }
+    },
+    {
+      "id": "ex:msyn/us1738971a/feed/h2-co-4-1",
+      "label": "Feed",
+      "props": {
+        "name": "4 volumes H2 : 1 volume CO, essentially free of catalyst poisons",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/1",
+            "quote": "A gas mixture, comprising essen tially 4 volumes hydrogen and one volume carbon monoxide, and essentially free of",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "ratios": {
+          "h2_co_ratio": {
+            "status": "present",
+            "as_reported": "4 volumes hydrogen and one volume carbon monoxide",
+            "basis": "volume",
+            "unit": "1",
+            "value": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us1738971a/feed/h2-co-4-1-low-pressure",
+      "label": "Feed",
+      "props": {
+        "name": "4 volumes H2 to 1 of CO (low-pressure experiment)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/2",
+            "quote": "Sure was 67 atmospheres, the gas mixture 4 volumes of hydrogen to 1 of CO,",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "ratios": {
+          "h2_co_ratio": {
+            "status": "present",
+            "as_reported": "4 volumes of hydrogen to 1 of CO",
+            "basis": "volume",
+            "unit": "1",
+            "value": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us1738971a/hypothesis/complex-structure",
+      "label": "Hypothesis",
+      "props": {
+        "name": "final catalyst probably of an unknown complex structure",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1738971a/p1/5",
+            "quote": "In this final form the catalyst is probably of a complex structure, as yet un known, but which I formulate as Cu-MgO-SiO, and call copper, magnesia and silica,",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "hypothesis_kind": "descriptive",
+        "hypothesis_status": "proposed",
+        "statement": "In its final form the catalyst is probably of a complex structure, as yet unknown, formulated as Cu-MgO-SiO2; it may be of different structure."
+      }
+    },
+    {
+      "id": "ex:msyn/us1738971a/hypothesis/mgo-sio2-unaffected",
+      "label": "Hypothesis",
+      "props": {
+        "name": "MgO and SiO2 probably unaffected by reduction",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1738971a/p1/4",
+            "quote": "All of the CuO is reduced to the metallic copper, the MgO and SiO, being probably unaffected.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "hypothesis_kind": "descriptive",
+        "hypothesis_status": "proposed",
+        "statement": "In the reduction all CuO is reduced to metallic copper, while MgO and SiO2 are probably unaffected."
+      }
+    },
+    {
+      "id": "ex:msyn/us1738971a/preparation/coprecipitation",
+      "label": "Preparation",
+      "props": {
+        "name": "coprecipitation from sodium silicate, magnesium nitrate and copper nitrate with sodium hydroxide",
+        "conditions": {
+          "drying_temperature": {
+            "status": "present",
+            "as_reported": "about 150-200° C.",
+            "lower": 150,
+            "qualifier": "approximate",
+            "unit": "°C",
+            "upper": 200
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1738971a/p1/2",
+            "quote": "284 parts by weight of sodium silicate (NaSiO3.9H2O) in 1000 parts by weight of water was mixed with a solution containing 256 parts of magnesium nitrate in 1000 parts of water.",
+            "source": "ex:msyn/source/us1738971a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "text layer 'Cu(NaOs).3H2O' for Cu(NO3)2.3H2O; '25' is a line number",
+            "passage": "us1738971a/p1/2",
+            "quote": "A solution contain ing 120 parts of copper nitrate Cu(NaOs).3H2O 25 in 500 parts of water was now thoroughly mixed into the first solution,",
+            "source": "ex:msyn/source/us1738971a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1738971a/p1/2",
+            "quote": "and then a solu tion containing 40 parts by weight of sodium hydroxide in 500 parts of water was stirred in, and the whole heated to boiling.",
+            "source": "ex:msyn/source/us1738971a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1738971a/p1/2",
+            "quote": "The pre 30 cipitate which formed was then filtered out on the suction filter and washed until tests showed it to be free from nitrates; the cake was then dried at about 150-200° C. and crushed to granules of about 10-30 mesh,",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "method": "coprecipitation",
+        "procedure_status": "completed",
+        "steps": [
+          "284 parts by weight of sodium silicate (NaSiO3.9H2O) in 1000 parts by weight of water was mixed with a solution containing 256 parts of magnesium nitrate in 1000 parts of water",
+          "A solution containing 120 parts of copper nitrate Cu(NO3)2.3H2O in 500 parts of water was now thoroughly mixed into the first solution",
+          "then a solution containing 40 parts by weight of sodium hydroxide in 500 parts of water was stirred in, and the whole heated to boiling",
+          "The precipitate which formed was then filtered out on the suction filter and washed until tests showed it to be free from nitrates",
+          "the cake was then dried at about 150-200° C. and crushed to granules of about 10-30 mesh"
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1738971a/preparation/pilling",
+      "label": "Preparation",
+      "props": {
+        "name": "pulverizing the dried material and compressing into pills before reduction",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'duried' = dried",
+            "passage": "us1738971a/p2/3",
+            "quote": "A highly suitable method of utilizing my catalyst is to prepare it in the form of pills. For this purpose I prefer to pulverize the duried material before reduction and then compress this powder into small compact masses of desired form,",
+            "source": "ex:msyn/source/us1738971a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/3",
+            "quote": "I have obtained excellent results with pills about, one-fourth inch in diameter and about one-eighth inch thick. After compres sion into pills the catalyst is reduced as be fore and is then ready for use.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "method": "compression into pills",
+        "procedure_status": "completed",
+        "steps": [
+          "pulverize the dried material before reduction",
+          "compress this powder into small compact masses of desired form, such as pills",
+          "pills about one-fourth inch in diameter and about one-eighth inch thick",
+          "after compression into pills the catalyst is reduced as before"
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1738971a/reactor/copper-lined-steel-bomb",
+      "label": "Reactor",
+      "props": {
+        "name": "copper-lined high-pressure steel bomb",
+        "description": "Copper-lined high-pressure steel bomb packed with the catalyst; outer shell held at about 270 °C; products recovered by cooling under pressure.",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/1",
+            "quote": "was packed in a copper lined high pres sure steel bomb and the whole heated to about 270° C.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "reactor_kind": "fixed_bed"
+      }
+    },
+    {
+      "id": "ex:msyn/us1738971a/sample/granular",
+      "label": "CatalystSample",
+      "props": {
+        "name": "granular copper-magnesia-silica catalyst (10-30 mesh)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1738971a/p1/2",
+            "quote": "284 parts by weight of sodium silicate (NaSiO3.9H2O) in 1000 parts by weight of water was mixed with a solution containing 256 parts of magnesium nitrate in 1000 parts of water.",
+            "source": "ex:msyn/source/us1738971a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "text layer 'Cu(NaOs).3H2O' for Cu(NO3)2.3H2O; '25' is a line number",
+            "passage": "us1738971a/p1/2",
+            "quote": "A solution contain ing 120 parts of copper nitrate Cu(NaOs).3H2O 25 in 500 parts of water was now thoroughly mixed into the first solution,",
+            "source": "ex:msyn/source/us1738971a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1738971a/p1/2",
+            "quote": "and then a solu tion containing 40 parts by weight of sodium hydroxide in 500 parts of water was stirred in, and the whole heated to boiling.",
+            "source": "ex:msyn/source/us1738971a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1738971a/p1/2",
+            "quote": "The pre 30 cipitate which formed was then filtered out on the suction filter and washed until tests showed it to be free from nitrates; the cake was then dried at about 150-200° C. and crushed to granules of about 10-30 mesh,",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "preparation_status": "prepared",
+        "sample_kind": "granules"
+      }
+    },
+    {
+      "id": "ex:msyn/us1738971a/sample/pills",
+      "label": "CatalystSample",
+      "props": {
+        "name": "copper-magnesia-silica pills (about 1/4 inch diameter, 1/8 inch thick)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'duried' = dried",
+            "passage": "us1738971a/p2/3",
+            "quote": "A highly suitable method of utilizing my catalyst is to prepare it in the form of pills. For this purpose I prefer to pulverize the duried material before reduction and then compress this powder into small compact masses of desired form,",
+            "source": "ex:msyn/source/us1738971a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/3",
+            "quote": "I have obtained excellent results with pills about, one-fourth inch in diameter and about one-eighth inch thick. After compres sion into pills the catalyst is reduced as be fore and is then ready for use.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "preparation_status": "prepared",
+        "sample_kind": "pellet"
+      }
+    },
+    {
+      "id": "ex:msyn/us1738971a/species/sodium-silicate",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "sodium silicate (printed NaSiO3.9H2O)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1738971a/p1/2",
+            "quote": "284 parts by weight of sodium silicate (NaSiO3.9H2O) in 1000 parts by weight of water was mixed with a solution containing 256 parts of magnesium nitrate in 1000 parts of water.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1738971a/species/volatile-iron-compounds",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "volatile iron compounds",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/1",
+            "quote": "for example, arsenic, sulphur, phosphorous, volatile iron compounds, or other deleterious constituents gathered during the gas produc tion.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1738971a/test/high-pressure-200-atm",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "granular Cu-MgO-SiO2, 4H2:1CO, about 200 atm, 270-335 °C",
+        "conditions": {
+          "exit_catalyst_temperature": {
+            "status": "present",
+            "as_reported": "about 335 C.",
+            "qualifier": "approximate",
+            "unit": "°C",
+            "value": 335
+          },
+          "inlet_catalyst_temperature": {
+            "status": "present",
+            "as_reported": "about 270-300° C.",
+            "lower": 270,
+            "qualifier": "approximate",
+            "unit": "°C",
+            "upper": 300
+          },
+          "shell_temperature": {
+            "status": "present",
+            "as_reported": "about 270° C.",
+            "qualifier": "approximate",
+            "unit": "°C",
+            "value": 270
+          }
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/1",
+            "quote": "A gas mixture, comprising essen tially 4 volumes hydrogen and one volume carbon monoxide, and essentially free of",
+            "source": "ex:msyn/source/us1738971a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/1",
+            "quote": "catalyst poisons was now passed through the heated catalyst under a pressure of about 200 atmospheres and at a space velocity per hour (S. W. H.) equivalent to about 8100 cubic feet of gas per cubic foot of catalyst per hour,",
+            "source": "ex:msyn/source/us1738971a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/1",
+            "quote": "calculated at normal temperature and pres sure, (N. T. P. 0° C. and 1 atmosphere). During this reaction the temperature of the catalyst mass was about 270–335° C.",
+            "source": "ex:msyn/source/us1738971a"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, left column, lines 22-24",
+            "note": "the page image prints 2530 with no decimal point; the text layer's '25.30' is a text-layer error",
+            "reading": "vision_ocr",
+            "region": [
+              0.18,
+              0.405,
+              0.58,
+              0.445
+            ],
+            "source": "ex:msyn/source/us1738971a",
+            "transcription": "equivalent to a space time yield (S. T. Y.) of 2530 pounds of methanol per cubic foot of catalyst per 24 hours."
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/2",
+            "quote": "The product was about 95% methanol. The catalyst re tained its granular form after use in the above manner for extended periods of time.",
+            "source": "ex:msyn/source/us1738971a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/2",
+            "quote": "The catalyst temperature at the gas inlet was about 270-300° C. and at the exit was about 335 C.; the outer shell of the bomb contain ing the catalyst was maintained at a temper ature of about 270° C.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "experiment_kind": "physical",
+        "feed_ratio": {
+          "status": "present",
+          "as_reported": "4 volumes hydrogen and one volume carbon monoxide",
+          "basis": "H2/CO by volume",
+          "unit": "1",
+          "value": 4
+        },
+        "pressure": {
+          "status": "present",
+          "as_reported": "about 200 atmospheres",
+          "qualifier": "approximate",
+          "unit": "atm",
+          "value": 200
+        },
+        "results": {
+          "methanol_in_product": {
+            "status": "present",
+            "as_reported": "about 95% methanol",
+            "qualifier": "approximate",
+            "unit": "%",
+            "value": 95
+          }
+        },
+        "space_time_yield": {
+          "status": "present",
+          "as_reported": "2530 pounds of methanol per cubic foot of catalyst per 24 hours",
+          "note": "corrected 2026-09-29 from 25.30 to 2530: the page image prints '2530' (Tesseract OCR also reads 2530); the text layer's '25.30' was a text-layer error",
+          "unit": "lb/(ft3·24 h)",
+          "value": 2530
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "about 8100 cubic feet of gas per cubic foot of catalyst per hour",
+          "basis": "calculated at N.T.P. (0 °C and 1 atmosphere)",
+          "qualifier": "approximate",
+          "unit": "ft3/(ft3·h)",
+          "value": 8100
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "about 270–335° C.",
+          "lower": 270,
+          "qualifier": "approximate",
+          "unit": "°C",
+          "upper": 335
+        },
+        "temperature_measured_at": "catalyst_bed",
+        "test_kind": "activity",
+        "test_label": "preferred example (high pressure)",
+        "time_on_stream": {
+          "status": "present",
+          "as_reported": "for extended periods of time",
+          "text_value": "extended periods of time"
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us1738971a/test/low-pressure-67-atm",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Cu-MgO-SiO2, 4H2:1CO, 67 atm, 270-300 °C",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/2",
+            "quote": "The copper, magnesia and silica catalyst as prepared above was also utilized in a low pressure experiment.",
+            "source": "ex:msyn/source/us1738971a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/2",
+            "quote": "In this case the pres Sure was 67 atmospheres, the gas mixture 4 volumes of hydrogen to 1 of CO, catalyst temperature 270 to 300° C. S. W. H. 8000. Under the above conditions an S.T.Y. of 670 was obtained.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "experiment_kind": "physical",
+        "feed_ratio": {
+          "status": "present",
+          "as_reported": "4 volumes of hydrogen to 1 of CO",
+          "basis": "H2/CO by volume",
+          "unit": "1",
+          "value": 4
+        },
+        "pressure": {
+          "status": "present",
+          "as_reported": "67 atmospheres",
+          "unit": "atm",
+          "value": 67
+        },
+        "space_time_yield": {
+          "status": "present",
+          "as_reported": "an S.T.Y. of 670",
+          "note": "no unit printed",
+          "unit": "1",
+          "value": 670
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "S. W. H. 8000",
+          "note": "no unit printed; S.W.H. defined above as volume of gas per volume of catalyst per hour at N.T.P.; the page image prints 'S. V. H.' (text layer 'S. W. H.')",
+          "unit": "not stated",
+          "value": 8000
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "catalyst temperature 270 to 300° C.",
+          "lower": 270,
+          "unit": "°C",
+          "upper": 300
+        },
+        "temperature_measured_at": "catalyst_bed",
+        "test_kind": "activity",
+        "test_label": "low pressure experiment"
+      }
+    },
+    {
+      "id": "ex:msyn/us1738971a/treatment/reduction",
+      "label": "Treatment",
+      "props": {
+        "name": "reduction with hydrogen/methanol vapour diluted with nitrogen",
+        "atmosphere": "e.g. 3 volumes hydrogen, 2 volumes methanol vapor and 95 volumes nitrogen",
+        "conditions": {
+          "preferred_temperature": {
+            "status": "present",
+            "as_reported": "prefer ably to about 150-200° C.",
+            "lower": 150,
+            "qualifier": "approximate",
+            "unit": "°C",
+            "upper": 200
+          }
+        },
+        "duration": {
+          "status": "present",
+          "as_reported": "a further reduction period of about an hour",
+          "note": "after the maximum temperature has been passed",
+          "qualifier": "approximate",
+          "unit": "h",
+          "value": 1
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1738971a/p1/3",
+            "quote": "The mixture was now treated with a reduc ing gas such as will be described below.",
+            "source": "ex:msyn/source/us1738971a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1738971a/p1/3",
+            "quote": "I prefer to re duce with hydrogen saturated at room tem perature with methanol.",
+            "source": "ex:msyn/source/us1738971a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1738971a/p1/4",
+            "quote": "For example, a satisfactory mix ture would be 3 volumes hydrogen, 2 vol umes methanol vapor and 95 volumes nitro gen.",
+            "source": "ex:msyn/source/us1738971a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1738971a/p1/4",
+            "quote": "This reducing mixture is passed at at mospheric pressure over the dried precipitate preferably contained in a copper lined vessel and heated to not over 350° C. and prefer ably to about 150-200° C.",
+            "source": "ex:msyn/source/us1738971a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1738971a/p1/4",
+            "quote": "The reduction is complete when no further condensation of wa ter is observed upon cooling the off-gases.",
+            "source": "ex:msyn/source/us1738971a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1738971a/p1/4",
+            "quote": "After the maxi mum temperature has been passed a further reduction period of about an hour generally suffices to complete the reduction.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "method": "passing a reducing gas (preferably hydrogen saturated with methanol; e.g. 3 vol H2, 2 vol methanol vapour, 95 vol N2) at atmospheric pressure over the dried precipitate in a copper-lined vessel",
+        "note": "end point: no further condensation of water from the cooled off-gases; hydrogen or mixtures with CO or methanol may also be used",
+        "pressure": {
+          "status": "present",
+          "as_reported": "at at mospheric pressure",
+          "note": "printed as atmospheric pressure; recorded as 1 atm",
+          "qualifier": "approximate",
+          "unit": "atm",
+          "value": 1
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "not over 350° C. and prefer ably to about 150-200° C.",
+          "bound": "upper",
+          "note": "preferably about 150-200 °C",
+          "unit": "°C",
+          "value": 350
+        },
+        "treatment_kind": "reduction"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/source/us1738971a/assignee",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "role": "assignee"
+      },
+      "source": "ex:msyn/source/us1738971a",
+      "target": "ex:msyn/institution/roessler-hasslacher-chemical"
+    },
+    {
+      "id": "ex:msyn/us1738971a/catalyst/cu-mgo-sio2/reported-in/us1738971a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1738971a/catalyst/cu-mgo-sio2",
+      "target": "ex:msyn/source/us1738971a"
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/better-than-components/reported-in/us1738971a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1738971a/claim/better-than-components",
+      "target": "ex:msyn/source/us1738971a"
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/copper-content-limits/reported-in/us1738971a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1738971a/claim/copper-content-limits",
+      "target": "ex:msyn/source/us1738971a"
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/granules-hard/reported-in/us1738971a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1738971a/claim/granules-hard",
+      "target": "ex:msyn/source/us1738971a"
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/h2-co-ratio/reported-in/us1738971a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1738971a/claim/h2-co-ratio",
+      "target": "ex:msyn/source/us1738971a"
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/mgo-sio2-equimolecular/reported-in/us1738971a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1738971a/claim/mgo-sio2-equimolecular",
+      "target": "ex:msyn/source/us1738971a"
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/not-copper-on-asbestos/reported-in/us1738971a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1738971a/claim/not-copper-on-asbestos",
+      "target": "ex:msyn/source/us1738971a"
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/patent-claim-1/reported-in/us1738971a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1738971a/claim/patent-claim-1",
+      "target": "ex:msyn/source/us1738971a"
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/patent-claim-10/reported-in/us1738971a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 10"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1738971a/claim/patent-claim-10",
+      "target": "ex:msyn/source/us1738971a"
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/patent-claim-11/reported-in/us1738971a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 11"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1738971a/claim/patent-claim-11",
+      "target": "ex:msyn/source/us1738971a"
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/patent-claim-12/reported-in/us1738971a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 12"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1738971a/claim/patent-claim-12",
+      "target": "ex:msyn/source/us1738971a"
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/patent-claim-13/reported-in/us1738971a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 13"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1738971a/claim/patent-claim-13",
+      "target": "ex:msyn/source/us1738971a"
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/patent-claim-2/reported-in/us1738971a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1738971a/claim/patent-claim-2",
+      "target": "ex:msyn/source/us1738971a"
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/patent-claim-3/reported-in/us1738971a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1738971a/claim/patent-claim-3",
+      "target": "ex:msyn/source/us1738971a"
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/patent-claim-4/reported-in/us1738971a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1738971a/claim/patent-claim-4",
+      "target": "ex:msyn/source/us1738971a"
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/patent-claim-5/reported-in/us1738971a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1738971a/claim/patent-claim-5",
+      "target": "ex:msyn/source/us1738971a"
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/patent-claim-6/reported-in/us1738971a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1738971a/claim/patent-claim-6",
+      "target": "ex:msyn/source/us1738971a"
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/patent-claim-7/reported-in/us1738971a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1738971a/claim/patent-claim-7",
+      "target": "ex:msyn/source/us1738971a"
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/patent-claim-8/reported-in/us1738971a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 8"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1738971a/claim/patent-claim-8",
+      "target": "ex:msyn/source/us1738971a"
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/patent-claim-9/reported-in/us1738971a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 9"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1738971a/claim/patent-claim-9",
+      "target": "ex:msyn/source/us1738971a"
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/poison-free-gas/reported-in/us1738971a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1738971a/claim/poison-free-gas",
+      "target": "ex:msyn/source/us1738971a"
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/pressure-range/reported-in/us1738971a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1738971a/claim/pressure-range",
+      "target": "ex:msyn/source/us1738971a"
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/proportions-may-vary/reported-in/us1738971a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1738971a/claim/proportions-may-vary",
+      "target": "ex:msyn/source/us1738971a"
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/reduction-dilution/reported-in/us1738971a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1738971a/claim/reduction-dilution",
+      "target": "ex:msyn/source/us1738971a"
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/space-velocity-range/reported-in/us1738971a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1738971a/claim/space-velocity-range",
+      "target": "ex:msyn/source/us1738971a"
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/temperature-range/reported-in/us1738971a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1738971a/claim/temperature-range",
+      "target": "ex:msyn/source/us1738971a"
+    },
+    {
+      "id": "ex:msyn/us1738971a/claim/wide-conditions/reported-in/us1738971a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1738971a/claim/wide-conditions",
+      "target": "ex:msyn/source/us1738971a"
+    },
+    {
+      "id": "ex:msyn/us1738971a/feed/h2-co-4-1-low-pressure/reported-in/us1738971a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1738971a/feed/h2-co-4-1-low-pressure",
+      "target": "ex:msyn/source/us1738971a"
+    },
+    {
+      "id": "ex:msyn/us1738971a/feed/h2-co-4-1/reported-in/us1738971a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1738971a/feed/h2-co-4-1",
+      "target": "ex:msyn/source/us1738971a"
+    },
+    {
+      "id": "ex:msyn/us1738971a/hypothesis/complex-structure/reported-in/us1738971a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1738971a/hypothesis/complex-structure",
+      "target": "ex:msyn/source/us1738971a"
+    },
+    {
+      "id": "ex:msyn/us1738971a/hypothesis/mgo-sio2-unaffected/reported-in/us1738971a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1738971a/hypothesis/mgo-sio2-unaffected",
+      "target": "ex:msyn/source/us1738971a"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/1",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'SiO,' = SiO2",
+            "passage": "us1738971a/p1/3",
+            "quote": "After this reducing treatment the empirical composition of the catalyst was about 24% Cu, 30.5% MgO, and 45.5% SiO,",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "about 24% Cu",
+          "qualifier": "approximate",
+          "unit": "%",
+          "value": 24
+        },
+        "fraction_basis": "not_reported",
+        "note": "empirical composition after the reducing treatment",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1738971a/catalyst/cu-mgo-sio2",
+      "target": "ex:msyn/species/copper"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/10",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1738971a/p1/3",
+            "quote": "The mixture was now treated with a reduc ing gas such as will be described below.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "order": 1
+      },
+      "source": "ex:msyn/us1738971a/sample/granular",
+      "target": "ex:msyn/us1738971a/treatment/reduction"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/11",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1738971a/p1/4",
+            "quote": "All of the CuO is reduced to the metallic copper, the MgO and SiO, being probably unaffected.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/hypothesis/mgo-sio2-unaffected",
+      "target": "ex:msyn/us1738971a/treatment/reduction"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/12",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1738971a/p1/5",
+            "quote": "In this final form the catalyst is probably of a complex structure, as yet un known, but which I formulate as Cu-MgO-SiO, and call copper, magnesia and silica,",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/hypothesis/complex-structure",
+      "target": "ex:msyn/us1738971a/catalyst/cu-mgo-sio2"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/13",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/1",
+            "quote": "A gas mixture, comprising essen tially 4 volumes hydrogen and one volume carbon monoxide, and essentially free of",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "4 volumes hydrogen",
+          "unit": "volumes",
+          "value": 4
+        },
+        "fraction_basis": "volume",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1738971a/feed/h2-co-4-1",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/14",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/1",
+            "quote": "A gas mixture, comprising essen tially 4 volumes hydrogen and one volume carbon monoxide, and essentially free of",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "one volume carbon monoxide",
+          "unit": "volumes",
+          "value": 1
+        },
+        "fraction_basis": "volume",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1738971a/feed/h2-co-4-1",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/15",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/1",
+            "quote": "The granular catalyst material which has been treated by reducing gases as described above was packed in a copper lined high pres sure steel bomb",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "state": "reduced"
+      },
+      "source": "ex:msyn/us1738971a/test/high-pressure-200-atm",
+      "target": "ex:msyn/us1738971a/sample/granular"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/16",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/1",
+            "quote": "A gas mixture, comprising essen tially 4 volumes hydrogen and one volume carbon monoxide, and essentially free of",
+            "source": "ex:msyn/source/us1738971a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/1",
+            "quote": "catalyst poisons was now passed through the heated catalyst under a pressure of about 200 atmospheres and at a space velocity per hour (S. W. H.) equivalent to about 8100 cubic feet of gas per cubic foot of catalyst per hour,",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/test/high-pressure-200-atm",
+      "target": "ex:msyn/us1738971a/feed/h2-co-4-1"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/17",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/1",
+            "quote": "was packed in a copper lined high pres sure steel bomb and the whole heated to about 270° C.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/test/high-pressure-200-atm",
+      "target": "ex:msyn/us1738971a/reactor/copper-lined-steel-bomb"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/18",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "printed '25.30' in the text layer; see gap",
+            "passage": "us1738971a/p2/2",
+            "quote": "A sustained yield of methanol was obtained equivalent to a space time yield (S.T.Y.) of 25.30 pounds of methanol per cubic foot of catalyst per 24 hours.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/test/high-pressure-200-atm",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/19",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/2",
+            "quote": "Sure was 67 atmospheres, the gas mixture 4 volumes of hydrogen to 1 of CO,",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "4 volumes of hydrogen",
+          "unit": "volumes",
+          "value": 4
+        },
+        "fraction_basis": "volume",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1738971a/feed/h2-co-4-1-low-pressure",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/2",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'SiO,' = SiO2",
+            "passage": "us1738971a/p1/3",
+            "quote": "After this reducing treatment the empirical composition of the catalyst was about 24% Cu, 30.5% MgO, and 45.5% SiO,",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "30.5% MgO",
+          "qualifier": "approximate",
+          "unit": "%",
+          "value": 30.5
+        },
+        "fraction_basis": "not_reported",
+        "note": "empirical composition after the reducing treatment",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1738971a/catalyst/cu-mgo-sio2",
+      "target": "ex:msyn/species/mgo"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/20",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/2",
+            "quote": "Sure was 67 atmospheres, the gas mixture 4 volumes of hydrogen to 1 of CO,",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "1 of CO",
+          "unit": "volumes",
+          "value": 1
+        },
+        "fraction_basis": "volume",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1738971a/feed/h2-co-4-1-low-pressure",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/21",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/2",
+            "quote": "The copper, magnesia and silica catalyst as prepared above was also utilized in a low pressure experiment.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "note": "'as prepared above'; whether the same charge is not stated",
+        "state": "reduced"
+      },
+      "source": "ex:msyn/us1738971a/test/low-pressure-67-atm",
+      "target": "ex:msyn/us1738971a/sample/granular"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/22",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/2",
+            "quote": "In this case the pres Sure was 67 atmospheres, the gas mixture 4 volumes of hydrogen to 1 of CO, catalyst temperature 270 to 300° C. S. W. H. 8000. Under the above conditions an S.T.Y. of 670 was obtained.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/test/low-pressure-67-atm",
+      "target": "ex:msyn/us1738971a/feed/h2-co-4-1-low-pressure"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/23",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/2",
+            "quote": "In this case the pres Sure was 67 atmospheres, the gas mixture 4 volumes of hydrogen to 1 of CO, catalyst temperature 270 to 300° C. S. W. H. 8000. Under the above conditions an S.T.Y. of 670 was obtained.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/test/low-pressure-67-atm",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/24",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "context": [
+          "ex:msyn/us1738971a/test/high-pressure-200-atm",
+          "ex:msyn/us1738971a/test/low-pressure-67-atm"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "printed '25.30' in the text layer; see gap",
+            "passage": "us1738971a/p2/2",
+            "quote": "A sustained yield of methanol was obtained equivalent to a space time yield (S.T.Y.) of 25.30 pounds of methanol per cubic foot of catalyst per 24 hours.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/catalyst/cu-mgo-sio2",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/25",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1738971a/p1/6",
+            "quote": "it is desirable to use gases substantially free from the common catalyst poisons which may be present in the raw materials, such as,",
+            "source": "ex:msyn/source/us1738971a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/1",
+            "quote": "for example, arsenic, sulphur, phosphorous, volatile iron compounds, or other deleterious constituents gathered during the gas produc tion.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "inhibition_kind": "poison"
+      },
+      "source": "ex:msyn/us1738971a/catalyst/cu-mgo-sio2",
+      "target": "ex:msyn/species/arsenic"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/26",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1738971a/p1/6",
+            "quote": "it is desirable to use gases substantially free from the common catalyst poisons which may be present in the raw materials, such as,",
+            "source": "ex:msyn/source/us1738971a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/1",
+            "quote": "for example, arsenic, sulphur, phosphorous, volatile iron compounds, or other deleterious constituents gathered during the gas produc tion.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "inhibition_kind": "poison",
+        "note": "printed 'sulphur'"
+      },
+      "source": "ex:msyn/us1738971a/catalyst/cu-mgo-sio2",
+      "target": "ex:msyn/species/sulfur"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/27",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1738971a/p1/6",
+            "quote": "it is desirable to use gases substantially free from the common catalyst poisons which may be present in the raw materials, such as,",
+            "source": "ex:msyn/source/us1738971a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/1",
+            "quote": "for example, arsenic, sulphur, phosphorous, volatile iron compounds, or other deleterious constituents gathered during the gas produc tion.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "inhibition_kind": "poison",
+        "note": "printed 'phosphorous'"
+      },
+      "source": "ex:msyn/us1738971a/catalyst/cu-mgo-sio2",
+      "target": "ex:msyn/species/phosphorus"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/28",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1738971a/p1/6",
+            "quote": "it is desirable to use gases substantially free from the common catalyst poisons which may be present in the raw materials, such as,",
+            "source": "ex:msyn/source/us1738971a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/1",
+            "quote": "for example, arsenic, sulphur, phosphorous, volatile iron compounds, or other deleterious constituents gathered during the gas produc tion.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "inhibition_kind": "poison"
+      },
+      "source": "ex:msyn/us1738971a/catalyst/cu-mgo-sio2",
+      "target": "ex:msyn/us1738971a/species/volatile-iron-compounds"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/29",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'duried' = dried",
+            "passage": "us1738971a/p2/3",
+            "quote": "A highly suitable method of utilizing my catalyst is to prepare it in the form of pills. For this purpose I prefer to pulverize the duried material before reduction and then compress this powder into small compact masses of desired form,",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/sample/pills",
+      "target": "ex:msyn/us1738971a/catalyst/cu-mgo-sio2"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/3",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'SiO,' = SiO2",
+            "passage": "us1738971a/p1/3",
+            "quote": "After this reducing treatment the empirical composition of the catalyst was about 24% Cu, 30.5% MgO, and 45.5% SiO,",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "45.5% SiO,",
+          "qualifier": "approximate",
+          "unit": "%",
+          "value": 45.5
+        },
+        "fraction_basis": "not_reported",
+        "note": "empirical composition after the reducing treatment",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1738971a/catalyst/cu-mgo-sio2",
+      "target": "ex:msyn/species/sio2"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/30",
+      "type": "PREPARED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'duried' = dried",
+            "passage": "us1738971a/p2/3",
+            "quote": "A highly suitable method of utilizing my catalyst is to prepare it in the form of pills. For this purpose I prefer to pulverize the duried material before reduction and then compress this powder into small compact masses of desired form,",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/sample/pills",
+      "target": "ex:msyn/us1738971a/preparation/coprecipitation"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/31",
+      "type": "PREPARED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'duried' = dried",
+            "passage": "us1738971a/p2/3",
+            "quote": "A highly suitable method of utilizing my catalyst is to prepare it in the form of pills. For this purpose I prefer to pulverize the duried material before reduction and then compress this powder into small compact masses of desired form,",
+            "source": "ex:msyn/source/us1738971a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/3",
+            "quote": "I have obtained excellent results with pills about, one-fourth inch in diameter and about one-eighth inch thick. After compres sion into pills the catalyst is reduced as be fore and is then ready for use.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/sample/pills",
+      "target": "ex:msyn/us1738971a/preparation/pilling"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/32",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/3",
+            "quote": "I have obtained excellent results with pills about, one-fourth inch in diameter and about one-eighth inch thick. After compres sion into pills the catalyst is reduced as be fore and is then ready for use.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "order": 1
+      },
+      "source": "ex:msyn/us1738971a/sample/pills",
+      "target": "ex:msyn/us1738971a/treatment/reduction"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/33",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1738971a/p1/1",
+            "quote": "I have found that a catalyst mass compris ing copper, magnesia and silica gives surpris ingly better results, than either of these mate rials alone, or the copper and magnesia.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/claim/better-than-components",
+      "target": "ex:msyn/us1738971a/catalyst/cu-mgo-sio2"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/34",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1738971a/p1/5",
+            "quote": "However, this catalyst is not to be confused with one prepared by depositing copper on asbestos as a support.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/claim/not-copper-on-asbestos",
+      "target": "ex:msyn/us1738971a/catalyst/cu-mgo-sio2"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/35",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1738971a/p1/6",
+            "quote": "it is desirable to use gases substantially free from the common catalyst poisons which may be present in the raw materials, such as,",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/claim/poison-free-gas",
+      "target": "ex:msyn/us1738971a/catalyst/cu-mgo-sio2"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/36",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1738971a/p1/6",
+            "quote": "it is desirable to use gases substantially free from the common catalyst poisons which may be present in the raw materials, such as,",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/claim/poison-free-gas",
+      "target": "ex:msyn/species/arsenic"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/37",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1738971a/p1/6",
+            "quote": "it is desirable to use gases substantially free from the common catalyst poisons which may be present in the raw materials, such as,",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/claim/poison-free-gas",
+      "target": "ex:msyn/species/sulfur"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/38",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1738971a/p1/6",
+            "quote": "it is desirable to use gases substantially free from the common catalyst poisons which may be present in the raw materials, such as,",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/claim/poison-free-gas",
+      "target": "ex:msyn/species/phosphorus"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/39",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1738971a/p1/6",
+            "quote": "it is desirable to use gases substantially free from the common catalyst poisons which may be present in the raw materials, such as,",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/claim/poison-free-gas",
+      "target": "ex:msyn/us1738971a/species/volatile-iron-compounds"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/4",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'SiO,' = SiO2",
+            "passage": "us1738971a/p1/3",
+            "quote": "After this reducing treatment the empirical composition of the catalyst was about 24% Cu, 30.5% MgO, and 45.5% SiO,",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/sample/granular",
+      "target": "ex:msyn/us1738971a/catalyst/cu-mgo-sio2"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/40",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/4",
+            "quote": "I have found in general that these catalyst materials are valuable with proportions of copper running up to 50% by weight of the",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/claim/copper-content-limits",
+      "target": "ex:msyn/us1738971a/catalyst/cu-mgo-sio2"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/41",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/4",
+            "quote": "I have found in general that these catalyst materials are valuable with proportions of copper running up to 50% by weight of the",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/claim/copper-content-limits",
+      "target": "ex:msyn/species/copper"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/42",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/5",
+            "quote": "that the MgO and SiO, present in equimolecular amounts.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/claim/mgo-sio2-equimolecular",
+      "target": "ex:msyn/us1738971a/catalyst/cu-mgo-sio2"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/43",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/5",
+            "quote": "that the MgO and SiO, present in equimolecular amounts.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/claim/mgo-sio2-equimolecular",
+      "target": "ex:msyn/species/mgo"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/44",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/5",
+            "quote": "that the MgO and SiO, present in equimolecular amounts.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/claim/mgo-sio2-equimolecular",
+      "target": "ex:msyn/species/sio2"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/45",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "quote": "the exact quantities, proportions, etc. given in the pre ferred examples of catalyst manufacture may be varied, and my catalyst can still be obtained,",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/claim/proportions-may-vary",
+      "target": "ex:msyn/us1738971a/preparation/coprecipitation"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/46",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/5",
+            "quote": "This catalyst is of high activity and hence will operate over a large range of varying conditions,",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/claim/wide-conditions",
+      "target": "ex:msyn/us1738971a/catalyst/cu-mgo-sio2"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/47",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/6",
+            "quote": "My catalyst will form methanol from a gas mixture having any ratio of hydrogen to carbon monoxide, but if the ratio is below one to one by volume the S.T.Y. will be con siderably lower",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/claim/h2-co-ratio",
+      "target": "ex:msyn/us1738971a/catalyst/cu-mgo-sio2"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/48",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/6",
+            "quote": "My catalyst will form methanol from a gas mixture having any ratio of hydrogen to carbon monoxide, but if the ratio is below one to one by volume the S.T.Y. will be con siderably lower",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/claim/h2-co-ratio",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/49",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/7",
+            "quote": "This catalyst is suited for the above syn theses at temperatures ranging between 150° C. and 450° C. although I have found the best results are secured between 300° C. and",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/claim/temperature-range",
+      "target": "ex:msyn/us1738971a/catalyst/cu-mgo-sio2"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/5",
+      "type": "PREPARED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1738971a/p1/2",
+            "quote": "284 parts by weight of sodium silicate (NaSiO3.9H2O) in 1000 parts by weight of water was mixed with a solution containing 256 parts of magnesium nitrate in 1000 parts of water.",
+            "source": "ex:msyn/source/us1738971a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "text layer 'Cu(NaOs).3H2O' for Cu(NO3)2.3H2O; '25' is a line number",
+            "passage": "us1738971a/p1/2",
+            "quote": "A solution contain ing 120 parts of copper nitrate Cu(NaOs).3H2O 25 in 500 parts of water was now thoroughly mixed into the first solution,",
+            "source": "ex:msyn/source/us1738971a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1738971a/p1/2",
+            "quote": "and then a solu tion containing 40 parts by weight of sodium hydroxide in 500 parts of water was stirred in, and the whole heated to boiling.",
+            "source": "ex:msyn/source/us1738971a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1738971a/p1/2",
+            "quote": "The pre 30 cipitate which formed was then filtered out on the suction filter and washed until tests showed it to be free from nitrates; the cake was then dried at about 150-200° C. and crushed to granules of about 10-30 mesh,",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/sample/granular",
+      "target": "ex:msyn/us1738971a/preparation/coprecipitation"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/50",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1738971a/p3/1",
+            "quote": "methanoi will be formed in substan tial amounts by this catalyst at pressures of 5 atmospheres and upwards, dependent on the temperature used.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/claim/pressure-range",
+      "target": "ex:msyn/us1738971a/catalyst/cu-mgo-sio2"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/51",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1738971a/p3/1",
+            "quote": "The catalyst will form methanol under the pressure and temperature limits given above at any space velocity. Because of economic reasons, however, prefer space velocities of 2000 to 20,000 calculated at N. T. P.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/claim/space-velocity-range",
+      "target": "ex:msyn/us1738971a/catalyst/cu-mgo-sio2"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/52",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'(50' is a line number",
+            "passage": "us1738971a/p1/3",
+            "quote": "In order to prevent large uncontrollable increases in temperature (50 during reduction it is usually desirable to",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/claim/reduction-dilution",
+      "target": "ex:msyn/us1738971a/treatment/reduction"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/53",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1738971a/p1/5",
+            "quote": "After reduction the granules were dark copper colored, and of a hard, firm, though brittle structure suited for any methanol syn thesis system.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/claim/granules-hard",
+      "target": "ex:msyn/us1738971a/sample/granular"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/54",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 1",
+            "quote": "1. A catalyst for the production of metha nol from hydrogen and carbon monoxide which comprises copper, magnesia and silica.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/claim/patent-claim-1",
+      "target": "ex:msyn/us1738971a/catalyst/cu-mgo-sio2"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/55",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 2",
+            "passage": "us1738971a/p3/2",
+            "quote": "2. A catalyst for the production of metha nol from hydrogen and carbon monoxide which comprises reduced copper, magnesia and silica.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/claim/patent-claim-2",
+      "target": "ex:msyn/us1738971a/catalyst/cu-mgo-sio2"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/56",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 3",
+            "passage": "us1738971a/p3/2",
+            "quote": "3. A catalyst for the production of metha nol from hydrogen and carbon monoxide which comprises up to 50% by weight of re 30 duced copper and the balance magnesia and silica.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/claim/patent-claim-3",
+      "target": "ex:msyn/us1738971a/catalyst/cu-mgo-sio2"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/57",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 4",
+            "passage": "us1738971a/p3/2",
+            "quote": "which comprises up to 50% by weight of re duced copper and the balance magnesia and silica in equimolecular proportions. 5. Process",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/claim/patent-claim-4",
+      "target": "ex:msyn/us1738971a/catalyst/cu-mgo-sio2"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/58",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 5",
+            "passage": "us1738971a/p3/2",
+            "quote": "5. Process for the production of methanol which comprises passing a gaseous mixture of hydrogen and carbon monoxide in contact with a hot catalyst mass comprising copper, magnesia and silica.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/claim/patent-claim-5",
+      "target": "ex:msyn/us1738971a/catalyst/cu-mgo-sio2"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/59",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 5",
+            "passage": "us1738971a/p3/2",
+            "quote": "5. Process for the production of methanol which comprises passing a gaseous mixture of hydrogen and carbon monoxide in contact with a hot catalyst mass comprising copper, magnesia and silica.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/claim/patent-claim-5",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/6",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "284 parts by weight of sodium silicate",
+          "unit": "parts by weight",
+          "value": 284
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1738971a/p1/2",
+            "quote": "284 parts by weight of sodium silicate (NaSiO3.9H2O) in 1000 parts by weight of water was mixed with a solution containing 256 parts of magnesium nitrate in 1000 parts of water.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1738971a/sample/granular",
+      "target": "ex:msyn/us1738971a/species/sodium-silicate"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/60",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 6",
+            "passage": "us1738971a/p3/3",
+            "quote": "ing an excess of hydrogen, at a pressure above atmospheric in contact with a hot catalyst mass comprising up to 50% by weight of re duced copper and the balance magnesia and silica in equimolecular proportions.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/claim/patent-claim-6",
+      "target": "ex:msyn/us1738971a/catalyst/cu-mgo-sio2"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/61",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 6",
+            "passage": "us1738971a/p3/3",
+            "quote": "ing an excess of hydrogen, at a pressure above atmospheric in contact with a hot catalyst mass comprising up to 50% by weight of re duced copper and the balance magnesia and silica in equimolecular proportions.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/claim/patent-claim-6",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/62",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 7",
+            "passage": "us1738971a/p3/3",
+            "quote": "ing an excess of hydrogen at a pressure of between 5 and 300 atmospheres in contact with a hot catalyst mass comprising copper, magnesia and silica. 8. Process",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/claim/patent-claim-7",
+      "target": "ex:msyn/us1738971a/catalyst/cu-mgo-sio2"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/63",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 7",
+            "passage": "us1738971a/p3/3",
+            "quote": "ing an excess of hydrogen at a pressure of between 5 and 300 atmospheres in contact with a hot catalyst mass comprising copper, magnesia and silica. 8. Process",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/claim/patent-claim-7",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/64",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 8",
+            "passage": "us1738971a/p3/4",
+            "quote": "comprising copper, magnesia and silica, said catalyst being maintained at a temperature of between 150° C. and 450° C. . 9. Process",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/claim/patent-claim-8",
+      "target": "ex:msyn/us1738971a/catalyst/cu-mgo-sio2"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/65",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 8",
+            "passage": "us1738971a/p3/4",
+            "quote": "comprising copper, magnesia and silica, said catalyst being maintained at a temperature of between 150° C. and 450° C. . 9. Process",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/claim/patent-claim-8",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/66",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 9",
+            "passage": "us1738971a/p3/4",
+            "quote": "comprising up to 50% by weight of reduced copper, and the balance magnesia and silica in equimolecular proportions, said catalyst 70. being maintained at a temperature of be tween 150° C. and 450° C.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/claim/patent-claim-9",
+      "target": "ex:msyn/us1738971a/catalyst/cu-mgo-sio2"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/67",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 9",
+            "passage": "us1738971a/p3/4",
+            "quote": "comprising up to 50% by weight of reduced copper, and the balance magnesia and silica in equimolecular proportions, said catalyst 70. being maintained at a temperature of be tween 150° C. and 450° C.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/claim/patent-claim-9",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/68",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 10",
+            "quote": "10. Process for the production of methano which comprises passing a gaseous mixture of hydrogen and carbon monoxide, contain ing an excess of hydrogen at a pressure of between 5 and 300 atmospheres in contact with a catalyst mass comprising copper, magnesia, so",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/claim/patent-claim-10",
+      "target": "ex:msyn/us1738971a/catalyst/cu-mgo-sio2"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/69",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 10",
+            "quote": "10. Process for the production of methano which comprises passing a gaseous mixture of hydrogen and carbon monoxide, contain ing an excess of hydrogen at a pressure of between 5 and 300 atmospheres in contact with a catalyst mass comprising copper, magnesia, so",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/claim/patent-claim-10",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/7",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "256 parts of magnesium nitrate",
+          "unit": "parts by weight",
+          "value": 256
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1738971a/p1/2",
+            "quote": "284 parts by weight of sodium silicate (NaSiO3.9H2O) in 1000 parts by weight of water was mixed with a solution containing 256 parts of magnesium nitrate in 1000 parts of water.",
+            "source": "ex:msyn/source/us1738971a"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 1, left column, lines 18-19",
+            "reading": "vision_ocr",
+            "region": [
+              0.05,
+              0.528,
+              0.36,
+              0.568
+            ],
+            "source": "ex:msyn/source/us1738971a",
+            "transcription": "256 parts of magnesium nitrate Mg(NO3)2.6H2O"
+          }
+        ],
+        "note": "the page image prints the formula Mg(NO3)2.6H2O (the hexahydrate) under 'magnesium nitrate'; the text layer omits it (corrected 2026-09-29 from 'hydrate not stated')",
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1738971a/sample/granular",
+      "target": "ex:msyn/species/mgno32"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/70",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 11",
+            "passage": "us1738971a/p3/5",
+            "quote": "with a catalyst mass comprising copper, mag nesia and silica, said being main tained at a temperature of between 300 and 400° C.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/claim/patent-claim-11",
+      "target": "ex:msyn/us1738971a/catalyst/cu-mgo-sio2"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/71",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 11",
+            "passage": "us1738971a/p3/5",
+            "quote": "with a catalyst mass comprising copper, mag nesia and silica, said being main tained at a temperature of between 300 and 400° C.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/claim/patent-claim-11",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/72",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 12",
+            "quote": "12. Process for the production of methanol which comprises passing a gaseous mixture of essentially four volumes of hydrogen and one volume of carbon monoxide, at a pressure of between 5 and 300 atmospheres",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/claim/patent-claim-12",
+      "target": "ex:msyn/us1738971a/catalyst/cu-mgo-sio2"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/73",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 12",
+            "quote": "12. Process for the production of methanol which comprises passing a gaseous mixture of essentially four volumes of hydrogen and one volume of carbon monoxide, at a pressure of between 5 and 300 atmospheres",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/claim/patent-claim-12",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/74",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 13",
+            "passage": "us1738971a/p3/4",
+            "quote": "balance magnesia and silica in equimolecular proportions, said catalyst being maintained at a temperature of between 300 and 400° C. Signed at Perth Amboy",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/claim/patent-claim-13",
+      "target": "ex:msyn/us1738971a/catalyst/cu-mgo-sio2"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/75",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 13",
+            "passage": "us1738971a/p3/4",
+            "quote": "balance magnesia and silica in equimolecular proportions, said catalyst being maintained at a temperature of between 300 and 400° C. Signed at Perth Amboy",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1738971a/claim/patent-claim-13",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/76",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "printed '25.30' in the text layer; see gap",
+            "passage": "us1738971a/p2/2",
+            "quote": "A sustained yield of methanol was obtained equivalent to a space time yield (S.T.Y.) of 25.30 pounds of methanol per cubic foot of catalyst per 24 hours.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "warrant": "the example runs pass H2/CO over the hot copper-magnesia-silica mass and give methanol"
+      },
+      "source": "ex:msyn/us1738971a/test/high-pressure-200-atm",
+      "target": "ex:msyn/us1738971a/claim/patent-claim-5"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/77",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1738971a/p2/2",
+            "quote": "In this case the pres Sure was 67 atmospheres, the gas mixture 4 volumes of hydrogen to 1 of CO, catalyst temperature 270 to 300° C. S. W. H. 8000. Under the above conditions an S.T.Y. of 670 was obtained.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "warrant": "the example runs pass H2/CO over the hot copper-magnesia-silica mass and give methanol"
+      },
+      "source": "ex:msyn/us1738971a/test/low-pressure-67-atm",
+      "target": "ex:msyn/us1738971a/claim/patent-claim-5"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/8",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "120 parts of copper nitrate",
+          "unit": "parts by weight",
+          "value": 120
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "text layer 'Cu(NaOs).3H2O' for Cu(NO3)2.3H2O; '25' is a line number",
+            "passage": "us1738971a/p1/2",
+            "quote": "A solution contain ing 120 parts of copper nitrate Cu(NaOs).3H2O 25 in 500 parts of water was now thoroughly mixed into the first solution,",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "note": "printed 'Cu(NaOs).3H2O' (the trihydrate)",
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1738971a/sample/granular",
+      "target": "ex:msyn/species/cuno32"
+    },
+    {
+      "id": "ex:msyn/us1738971a/link/9",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "40 parts by weight of sodium hydroxide",
+          "unit": "parts by weight",
+          "value": 40
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1738971a/p1/2",
+            "quote": "and then a solu tion containing 40 parts by weight of sodium hydroxide in 500 parts of water was stirred in, and the whole heated to boiling.",
+            "source": "ex:msyn/source/us1738971a"
+          }
+        ],
+        "note": "precipitant",
+        "role": "precipitant"
+      },
+      "source": "ex:msyn/us1738971a/sample/granular",
+      "target": "ex:msyn/species/naoh"
+    },
+    {
+      "id": "ex:msyn/us1738971a/preparation/coprecipitation/reported-in/us1738971a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1738971a/preparation/coprecipitation",
+      "target": "ex:msyn/source/us1738971a"
+    },
+    {
+      "id": "ex:msyn/us1738971a/preparation/pilling/reported-in/us1738971a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1738971a/preparation/pilling",
+      "target": "ex:msyn/source/us1738971a"
+    },
+    {
+      "id": "ex:msyn/us1738971a/reactor/copper-lined-steel-bomb/reported-in/us1738971a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1738971a/reactor/copper-lined-steel-bomb",
+      "target": "ex:msyn/source/us1738971a"
+    },
+    {
+      "id": "ex:msyn/us1738971a/sample/granular/reported-in/us1738971a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1738971a/sample/granular",
+      "target": "ex:msyn/source/us1738971a"
+    },
+    {
+      "id": "ex:msyn/us1738971a/sample/pills/reported-in/us1738971a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1738971a/sample/pills",
+      "target": "ex:msyn/source/us1738971a"
+    },
+    {
+      "id": "ex:msyn/us1738971a/species/sodium-silicate/reported-in/us1738971a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1738971a/species/sodium-silicate",
+      "target": "ex:msyn/source/us1738971a"
+    },
+    {
+      "id": "ex:msyn/us1738971a/species/volatile-iron-compounds/reported-in/us1738971a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1738971a/species/volatile-iron-compounds",
+      "target": "ex:msyn/source/us1738971a"
+    },
+    {
+      "id": "ex:msyn/us1738971a/test/high-pressure-200-atm/reported-in/us1738971a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 2, left column, lines 22-24"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1738971a/test/high-pressure-200-atm",
+      "target": "ex:msyn/source/us1738971a"
+    },
+    {
+      "id": "ex:msyn/us1738971a/test/low-pressure-67-atm/reported-in/us1738971a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1738971a/test/low-pressure-67-atm",
+      "target": "ex:msyn/source/us1738971a"
+    },
+    {
+      "id": "ex:msyn/us1738971a/treatment/reduction/reported-in/us1738971a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1738971a/treatment/reduction",
+      "target": "ex:msyn/source/us1738971a"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/us1738971a"
+}

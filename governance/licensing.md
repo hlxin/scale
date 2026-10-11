@@ -12,6 +12,7 @@ are owned, like every path, by the owner, `@hlxin`.
 |---|---|---|
 | code: the `scale` package and everything under `tools/` except the skills' texts and the texts of the domain-template test fixture, every Python file anywhere (catalysis tests, example tools, builders), packaging and CI files | MIT | [`LICENSE`](../LICENSE), [`LICENSES/MIT.txt`](../LICENSES/MIT.txt) |
 | vocabulary (the science kernel `core/`, the catalysis domain `domain/`), curated records, examples and fixtures, documentation (`docs/`, the root documents), governance, the skills' texts (`skills/`), the texts of the domain-template test fixture (`tools/tests/fixtures/domain-template/`, its Python files excepted), `CITATION.cff`, `scale-release.yaml` and the releases `releases/v*/` | CC-BY-4.0 | [`LICENSES/CC-BY-4.0.txt`](../LICENSES/CC-BY-4.0.txt) |
+| copies of public-domain works: the PDFs and page texts of [`examples/methanol-synthesis-public/`](../examples/methanol-synthesis-public/README.md) (public domain in the United States; each source's basis in that folder's `rights.yaml`) | none needed in the US (`LicenseRef-PublicDomain-US`); outside the US some may remain in copyright | [`LICENSES/LicenseRef-PublicDomain-US.txt`](../LICENSES/LicenseRef-PublicDomain-US.txt) |
 | third-party material | its owners' terms | [`NOTICE`](../NOTICE) |
 
 [`REUSE.toml`](../REUSE.toml) is the record: it gives every file its licence by path (the
@@ -23,7 +24,7 @@ copyright in their contributions and license them as below.
 
 The Python package (`scale-catal` on PyPI) declares `License-Expression: MIT AND CC-BY-4.0`, since its wheel
 holds code and the bundled vocabulary, records and documentation; it ships `LICENSE`, `LICENSES/MIT.txt`,
-`LICENSES/CC-BY-4.0.txt` and `NOTICE`. No file of the repository is under a third-party licence. `CITATION.cff` says `license: MIT`: it describes the software, and its format has no way to state that
+`LICENSES/CC-BY-4.0.txt` and `NOTICE`. No file of the repository is under a third-party licence; the only material not created by the contributors is the public-domain copies above. `CITATION.cff` says `license: MIT`: it describes the software, and its format has no way to state that
 two licences apply together.
 
 **Official releases are not a licence restriction.** "Official SCALE release" names what this repository's

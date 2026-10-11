@@ -1,0 +1,3404 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/source/us1908696a",
+      "label": "Source",
+      "props": {
+        "name": "Catalyst for methanol manufacture and method of producing same",
+        "kind": "patent",
+        "description": "Published 1933-05-16 (grant date printed on the patent (agrees with the USPTO issue-year table)); in scope: before the 1966-01-01 cutoff. Text: 3 pages ocr (tesseract 5.5.3 (eng, 300 dpi, 2 columns)). Text not redistributed.",
+        "identifiers": {
+          "patent": "US1908696A"
+        },
+        "licence": "US patent; not subject to copyright",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "Catalyst for methanol manufacture and method of producing same",
+        "url": "https://patents.google.com/patent/US1908696A",
+        "year": 1933
+      }
+    },
+    {
+      "id": "ex:msyn/us1908696a/catalyst/zn-cu-naoh",
+      "label": "Catalyst",
+      "props": {
+        "name": "Zn-Cu catalyst precipitated with sodium hydroxide",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'owever' = 'However'",
+            "passage": "us1908696a/p2/5",
+            "quote": "owever, a reasonably active catalyst may ®& be obtained by precipitating from the ni-",
+            "source": "ex:msyn/source/us1908696a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/6",
+            "quote": "trate solution of zinc and copper mentioned above zinc and copper compounde by means of a hydroxide of an elemental alkali metal, sodium or potassium.",
+            "source": "ex:msyn/source/us1908696a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/6",
+            "quote": "Thus ‘sodium by- droxide may be employed for effecting the precipitation and the resulting compounds ‘may be washed, dried and granulated and then subjected to reducing treatment in the manner stated above to obtain the catalyst;",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "generality": "particular",
+        "note": "precipitated from the same zinc-copper nitrate solution as the preferred catalyst"
+      }
+    },
+    {
+      "id": "ex:msyn/us1908696a/catalyst/zn-cu-nh4oh",
+      "label": "Catalyst",
+      "props": {
+        "name": "Zn-Cu catalyst precipitated with ammonium hydroxide",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/7",
+            "quote": "It is also possible to use: ammonium hy- droxide to precipitate the metals from the _ solution: of soluble salts, but.a decidedly less active catalyst results.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "generality": "kind"
+      }
+    },
+    {
+      "id": "ex:msyn/us1908696a/catalyst/zn5-cu1-carbonate",
+      "label": "Catalyst",
+      "props": {
+        "name": "Zn 5 : Cu 1 (by weight), carbonate-precipitated and reduced (preferred method)",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'‘ive' = 'Five'; '60' is a line number",
+            "passage": "us1908696a/p1/5",
+            "quote": "‘ive parts by weight of zinc and one part . by weight of copper (or their chemical equiv- alents) are converted into nitrates and dis- solved in sufficient water to produce a solu- ._. tion whosé concentration is approximately 15 60 grams of the total metal per liter.",
+            "source": "ex:msyn/source/us1908696a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1908696a/p1/5",
+            "quote": "This so- lution is then treated at room temperature or higher with a saturated solution of sodium carbonate to effect the simultaneous precipi-_ . tation of the zinc and copper carbonates, in- 85 timately commingled.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "generality": "particular"
+      }
+    },
+    {
+      "id": "ex:msyn/us1908696a/catalyst/zno-cu-kind",
+      "label": "Catalyst",
+      "props": {
+        "name": "zinc oxide - free copper catalyst, Zn:Cu at least 2:1 atomic",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1908696a/p3/1",
+            "quote": "4. A stable highly active copper zinc oxide catalyst comprising zinc oxide and purplish free copper in the proportion of at least two atoms of zinc to one atom of copper.",
+            "source": "ex:msyn/source/us1908696a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/3",
+            "quote": "The composition can be varied within quite wide limits. It seems quite important, how- ever, to employ a large excess of zinc. Pref- erably, the ratio of zinc to copper (atomic proportions) is at least four to one, but this may be reduced to two to one, or even lower, but. with less satisfactory results.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "generality": "kind",
+        "properties": {
+          "zn_cu_atomic_ratio_min": {
+            "status": "present",
+            "as_reported": "at least two atoms of zinc to one atom of copper",
+            "bound": "lower",
+            "note": "claim 4; preferably at least four to one",
+            "unit": "1",
+            "value": 2
+          },
+          "zn_cu_atomic_ratio_preferred_min": {
+            "status": "present",
+            "as_reported": "at least four to one",
+            "bound": "lower",
+            "unit": "1",
+            "value": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us1908696a/claim/active-at-200c",
+      "label": "Claim",
+      "props": {
+        "name": "catalyst active from 200 °C",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'go' = 'so'; 'pewnds per 16 59. in.' = 'pounds per sq. in.' (16 is a line number)",
+            "passage": "us1908696a/p2/2",
+            "quote": "A catalyst produced as described above is go active that it. will. produce methanol in appreciable quantities:at temperatures as low as 200° C. with pressure of 2600 pewnds per 16 59. in.,",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "inference_type": "interventional",
+        "statement": "The catalyst is so active that it produces methanol in appreciable quantities at temperatures as low as 200° C. at 2600 pounds per sq. in. with about 2:1 hydrogen to carbon monoxide."
+      }
+    },
+    {
+      "id": "ex:msyn/us1908696a/claim/avoid-sulphur-halides",
+      "label": "Claim",
+      "props": {
+        "name": "avoid sulphur and halides",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/7",
+            "quote": "It is important, however, to avoid 10 the. presence of impurities or contaminatin substances which may have a deleterious ef. fect. Thus, it is desirable to avoid the pres- ence of sulphur, the halides, ete.",
+            "source": "ex:msyn/source/us1908696a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/8",
+            "quote": "reved. catalysts described are halide-free, 105 they are simply and cheaply produced and are highly resistant in the sense that they are well adapted to retain for a long period.of | time, the proper qualities to serve as a cat- |",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Impurities with a deleterious effect must be avoided, in particular sulphur and the halides; the catalysts described are halide-free, simply and cheaply produced and retain their catalytic qualities for a long time."
+      }
+    },
+    {
+      "id": "ex:msyn/us1908696a/claim/copper-activity-vs-life",
+      "label": "Claim",
+      "props": {
+        "name": "more copper: more activity, shorter life",
+        "claim_kind": "comparison",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/8",
+            "quote": "the activity of the catalyst may be increased by lessening the atomic per cent of zinc and correspondingly 120 increasing that of copper. Thus 4 to 1,3 to 1, 2 to 1 and 1 to 1 ratios give larger yields at lower operating temperatures than'a 5 to 1 tatio.",
+            "source": "ex:msyn/source/us1908696a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/9",
+            "quote": "On the other hand, the higher the copper percentage the shorter the life or 125 stability of the catalyst.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Lessening the zinc and increasing the copper raises activity: 4:1, 3:1, 2:1 and 1:1 ratios give larger yields at lower temperatures than a 5:1 ratio; but the higher the copper percentage the shorter the life or stability, so a high zinc atomic per cent is desirable even at some loss in activity."
+      }
+    },
+    {
+      "id": "ex:msyn/us1908696a/claim/large-excess-zinc",
+      "label": "Claim",
+      "props": {
+        "name": "large excess of zinc; Zn:Cu at least 4:1 preferred",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/3",
+            "quote": "The composition can be varied within quite wide limits. It seems quite important, how- ever, to employ a large excess of zinc. Pref- erably, the ratio of zinc to copper (atomic proportions) is at least four to one, but this may be reduced to two to one, or even lower, but. with less satisfactory results.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The composition can be varied widely, but a large excess of zinc is important: preferably the zinc to copper atomic ratio is at least four to one; it may be reduced to two to one or lower with less satisfactory results."
+      }
+    },
+    {
+      "id": "ex:msyn/us1908696a/claim/operating-conditions",
+      "label": "Claim",
+      "props": {
+        "name": "high pressure, moderately high temperature",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "continues on p. 2",
+            "passage": "us1908696a/p1/7",
+            "quote": "The ranges of speed, temperature 100",
+            "source": "ex:msyn/source/us1908696a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/1",
+            "quote": "and pressure known in the art are suitable, but it is preferred to employ high pressures rather than low pressures. On the other hand, the temperatures:in the reaction cham- § ber need be only moderately high.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The ranges of speed, temperature and pressure known in the art are suitable; high pressures are preferred, while the temperatures need be only moderately high."
+      }
+    },
+    {
+      "id": "ex:msyn/us1908696a/claim/patent-claim-1",
+      "label": "Claim",
+      "props": {
+        "name": "claim 1: reducing Cu and Zn carbonates (Zn:Cu at least 2:1) in heated reducing gas",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1908696a/p3/1",
+            "quote": "1. The method of producing a stable highly active copper zinc oxide catalyst. which com- prises reducing copper carbonate admixed with zinc. carbonate in the proportion of at 5 least two atoms of zinc and one of copper,",
+            "source": "ex:msyn/source/us1908696a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1908696a/p3/1",
+            "quote": "in a heated reducing gas, whereby a stable - highly active catalyst comprising zinc oxide and a stable purplish free copper is pro- duced.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Method of producing a stable highly active copper zinc oxide catalyst: reducing copper carbonate admixed with zinc carbonate, at least two atoms of zinc to one of copper, in a heated reducing gas, giving zinc oxide and stable purplish free copper."
+      }
+    },
+    {
+      "id": "ex:msyn/us1908696a/claim/patent-claim-2",
+      "label": "Claim",
+      "props": {
+        "name": "claim 2: at least four atoms of zinc per copper",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "'9.' = '2.'",
+            "passage": "us1908696a/p3/1",
+            "quote": "9. The method as set forth in claim 1 in which the zinc is taken in the proportion of — at: least four atoms to one of copper.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The method of claim 1 with zinc in the proportion of at least four atoms to one of copper."
+      }
+    },
+    {
+      "id": "ex:msyn/us1908696a/claim/patent-claim-3",
+      "label": "Claim",
+      "props": {
+        "name": "claim 3: freshly prepared carbonates",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1908696a/p3/1",
+            "quote": "3. The method as set forth in claim 1 in which the carbonates are freshly prepared.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The method of claim 1 in which the carbonates are freshly prepared."
+      }
+    },
+    {
+      "id": "ex:msyn/us1908696a/claim/patent-claim-4",
+      "label": "Claim",
+      "props": {
+        "name": "claim 4: zinc oxide and purplish free copper, Zn:Cu at least 2:1",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1908696a/p3/1",
+            "quote": "4. A stable highly active copper zinc oxide catalyst comprising zinc oxide and purplish free copper in the proportion of at least two atoms of zinc to one atom of copper.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "A stable highly active copper zinc oxide catalyst comprising zinc oxide and purplish free copper, at least two atoms of zinc to one atom of copper."
+      }
+    },
+    {
+      "id": "ex:msyn/us1908696a/claim/patent-claim-5",
+      "label": "Claim",
+      "props": {
+        "name": "claim 5: at least four atoms of zinc per copper",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1908696a/p3/1",
+            "quote": "5. A catalyst as set forth in claim 4 in 20 which there are at least four atoms of zinc © — to each atom of copper.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The catalyst of claim 4 with at least four atoms of zinc to each atom of copper."
+      }
+    },
+    {
+      "id": "ex:msyn/us1908696a/claim/patent-claim-6",
+      "label": "Claim",
+      "props": {
+        "name": "claim 6: form from reduction of carbonates in heated reducing gas",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1908696a/p3/2",
+            "quote": "6. A catalyst as set forth in claim 4 in which the catalyst is of the form resulting from the reduction of zinc and copper car- 25 bonates in.a heated reducing gas.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The catalyst of claim 4 in the form resulting from the reduction of zinc and copper carbonates in a heated reducing gas."
+      }
+    },
+    {
+      "id": "ex:msyn/us1908696a/claim/precipitant-effect",
+      "label": "Claim",
+      "props": {
+        "name": "alkali carbonate best; NaOH reasonably active; NH4OH decidedly less active",
+        "claim_kind": "comparison",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/5",
+            "quote": "Thus, the best re- sults are obtained by employing an alkali metal carbonate for precipitating the zinc and copper compounds.",
+            "source": "ex:msyn/source/us1908696a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'owever' = 'However'",
+            "passage": "us1908696a/p2/5",
+            "quote": "owever, a reasonably active catalyst may ®& be obtained by precipitating from the ni-",
+            "source": "ex:msyn/source/us1908696a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/7",
+            "quote": "It is also possible to use: ammonium hy- droxide to precipitate the metals from the _ solution: of soluble salts, but.a decidedly less active catalyst results.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "inference_type": "interventional",
+        "statement": "The best results are obtained by precipitating with an alkali metal carbonate; precipitation with sodium or potassium hydroxide gives a reasonably active catalyst, with ammonium hydroxide a decidedly less active one."
+      }
+    },
+    {
+      "id": "ex:msyn/us1908696a/claim/precipitation-reasons",
+      "label": "Claim",
+      "props": {
+        "name": "precipitation for purity and form; joint precipitation perhaps not essential",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/4",
+            "quote": "The initial compounds of the improved catalyst are produced by precipitation of the compounds from solutions of the metals for two reasons. One is to insure purity; and another is to insure the desired form of the catalyst",
+            "source": "ex:msyn/source/us1908696a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/4",
+            "quote": "The joint precipi- _ tation, while important from the standpoint of easy production of an intimately com- mingled mixture perhaps is not an abselute essential..",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The initial compounds are made by precipitation from solutions to insure purity and the desired form of the catalyst; joint precipitation gives an intimately commingled mixture but is perhaps not absolutely essential."
+      }
+    },
+    {
+      "id": "ex:msyn/us1908696a/claim/treated-structure",
+      "label": "Claim",
+      "props": {
+        "name": "treated zinc oxide well structured; copper stable in air",
+        "claim_kind": "structure_property",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1908696a/p1/6",
+            "quote": "The zinc 85 — oxide possesses as a result of the treatment, a physical structure which is well adapted to— the purpose of the catalyst.",
+            "source": "ex:msyn/source/us1908696a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'deteriovate' = 'deteriorate'",
+            "passage": "us1908696a/p1/7",
+            "quote": "Copper produced by the method - described does. not.deteriovate if exposed to ~ ; air.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "After the treatment the zinc oxide has a physical structure well adapted to the purpose of the catalyst, and the copper produced does not deteriorate if exposed to air."
+      }
+    },
+    {
+      "id": "ex:msyn/us1908696a/claim/zno-cu-effective",
+      "label": "Claim",
+      "props": {
+        "name": "zinc oxide - copper mixtures as highly effective contact body",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1908696a/p1/4",
+            "quote": "it is possible to prepare mixtures of zine oxide and copper in such a state or condition that a highly effective contact body is afforded;",
+            "source": "ex:msyn/source/us1908696a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1908696a/p1/3",
+            "quote": "ex- a5 perience has shown that the physical. condi- tion of the materials in the mixture is a most important factor, as is also the composition of the materials employed.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Mixtures of zinc oxide and copper can be prepared in a state giving a highly effective contact body for the reaction of carbon oxides and hydrogen; the physical condition as well as the composition of the materials is a most important factor."
+      }
+    },
+    {
+      "id": "ex:msyn/us1908696a/feed/h2-carbon-oxide-2-1",
+      "label": "Feed",
+      "props": {
+        "name": "H2 2 parts : carbon oxide 1 part by volume",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'pla in:' = 'placed in a'",
+            "passage": "us1908696a/p2/3",
+            "quote": "when the improved catalyst is pla in: & copper lined steel *5 bomb and.exposed to a gas:composed substan- tially of two parts by volume of hydrogen and one of carbon oxide, at a pressure of 2600 pounds per sq. in. and. a temperature of 300°",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "generality": "particular",
+        "ratios": {
+          "h2_carbon_oxide_ratio": {
+            "status": "present",
+            "as_reported": "two parts by volume of hydrogen and one of carbon oxide",
+            "basis": "volume",
+            "unit": "1",
+            "value": 2
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us1908696a/feed/h2-co-2-1",
+      "label": "Feed",
+      "props": {
+        "name": "H2 2 parts : CO 1 part by volume",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/6",
+            "quote": "Using a catalyst obtained in this manner, placed in a copper- lined steel bomb and exposed to a gas:com-. prising two parts by volume of hydrogen % and one of CO at a.pressure of 2600 pounds: per sq. in. at a temperature of 300° C with: a",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "generality": "particular",
+        "ratios": {
+          "h2_co_ratio": {
+            "status": "present",
+            "as_reported": "two parts by volume of hydrogen % and one of CO",
+            "basis": "volume",
+            "unit": "1",
+            "value": 2
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us1908696a/feed/h2-co-2-1-approx",
+      "label": "Feed",
+      "props": {
+        "name": "H2:CO approximately 2:1 by volume",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'parte' = 'parts', 'hydregen' = 'hydrogen'",
+            "passage": "us1908696a/p2/2",
+            "quote": "using a gas: mixture containing ap- _ proximately two. parte: of hydregen to one _ part of carbon monoxide by volume.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "generality": "particular",
+        "ratios": {
+          "h2_co_ratio": {
+            "status": "present",
+            "as_reported": "ap- _ proximately two. parte: of hydregen to one _ part of carbon monoxide by volume",
+            "basis": "volume",
+            "qualifier": "approximate",
+            "unit": "1",
+            "value": 2
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us1908696a/hypothesis/purple-copper-active",
+      "label": "Hypothesis",
+      "props": {
+        "name": "purple colour marks very active copper",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1908696a/p1/7",
+            "quote": "The particles of copper, as a result’of the treatment, possess a deep purple, or dark reddish purple color, _ which apparently is characteristic of a very - active condition of the copper for catalysis purposes.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "hypothesis_kind": "descriptive",
+        "hypothesis_status": "proposed",
+        "statement": "The deep purple or dark reddish purple colour of the copper particles after the treatment is apparently characteristic of a very active condition of the copper for catalysis."
+      }
+    },
+    {
+      "id": "ex:msyn/us1908696a/hypothesis/reduction-effect",
+      "label": "Hypothesis",
+      "props": {
+        "name": "reduction gives fine copper dispersed in zinc oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1908696a/p1/6",
+            "quote": "The effect of the treatment probably is to 8° decompose the carbonates, or reduce them to _ oxides, and reduce the copper oxide to metal- lic copper, which is thus present in the mix- ture in the form of. very fine particles dis- persed throughout the zine oxide.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "hypothesis_kind": "mechanistic",
+        "hypothesis_status": "proposed",
+        "statement": "The reducing treatment probably decomposes the carbonates (or reduces them to oxides) and reduces the copper oxide to metallic copper, present as very fine particles dispersed throughout the zinc oxide."
+      }
+    },
+    {
+      "id": "ex:msyn/us1908696a/preparation/carbonate-coprecipitation",
+      "label": "Preparation",
+      "props": {
+        "name": "co-precipitation of zinc and copper carbonates with sodium carbonate",
+        "conditions": {
+          "metal_concentration": {
+            "status": "present",
+            "as_reported": "approximately 15 60 grams of the total metal per liter",
+            "note": "'60' is a line number",
+            "qualifier": "approximate",
+            "unit": "g/L",
+            "value": 15
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'‘ive' = 'Five'; '60' is a line number",
+            "passage": "us1908696a/p1/5",
+            "quote": "‘ive parts by weight of zinc and one part . by weight of copper (or their chemical equiv- alents) are converted into nitrates and dis- solved in sufficient water to produce a solu- ._. tion whosé concentration is approximately 15 60 grams of the total metal per liter.",
+            "source": "ex:msyn/source/us1908696a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1908696a/p1/5",
+            "quote": "This so- lution is then treated at room temperature or higher with a saturated solution of sodium carbonate to effect the simultaneous precipi-_ . tation of the zinc and copper carbonates, in- 85 timately commingled.",
+            "source": "ex:msyn/source/us1908696a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'oranules' = 'granules'",
+            "passage": "us1908696a/p1/5",
+            "quote": "‘he precipitate 1s ‘washed to remove nitrates, filtered, pressed in a hydraulic press, dried and broken up into oranules of any desired size.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "method": "co-precipitation of zinc and copper carbonates from the nitrate solution with saturated sodium carbonate; washing, filtering, pressing, drying, granulating",
+        "procedure_status": "completed",
+        "steps": [
+          "five parts by weight of zinc and one part by weight of copper (or chemical equivalents) are converted into nitrates and dissolved in water to about 15 grams of total metal per liter",
+          "the solution is treated at room temperature or higher with a saturated solution of sodium carbonate, precipitating the zinc and copper carbonates together",
+          "the precipitate is washed free of nitrates, filtered, pressed in a hydraulic press, dried and broken into granules"
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1908696a/preparation/naoh-precipitation",
+      "label": "Preparation",
+      "props": {
+        "name": "precipitation with sodium hydroxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/6",
+            "quote": "trate solution of zinc and copper mentioned above zinc and copper compounde by means of a hydroxide of an elemental alkali metal, sodium or potassium.",
+            "source": "ex:msyn/source/us1908696a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/6",
+            "quote": "Thus ‘sodium by- droxide may be employed for effecting the precipitation and the resulting compounds ‘may be washed, dried and granulated and then subjected to reducing treatment in the manner stated above to obtain the catalyst;",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "method": "precipitation of zinc and copper compounds from the nitrate solution with sodium hydroxide; washing, drying, granulating",
+        "procedure_status": "completed"
+      }
+    },
+    {
+      "id": "ex:msyn/us1908696a/preparation/nh4oh-precipitation",
+      "label": "Preparation",
+      "props": {
+        "name": "precipitation with ammonium hydroxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/7",
+            "quote": "It is also possible to use: ammonium hy- droxide to precipitate the metals from the _ solution: of soluble salts, but.a decidedly less active catalyst results.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "method": "precipitation of the metals from the solution of soluble salts with ammonium hydroxide"
+      }
+    },
+    {
+      "id": "ex:msyn/us1908696a/reactor/copper-lined-steel-bomb",
+      "label": "Reactor",
+      "props": {
+        "name": "copper-lined steel bomb",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'pla in:' = 'placed in a'",
+            "passage": "us1908696a/p2/3",
+            "quote": "when the improved catalyst is pla in: & copper lined steel *5 bomb and.exposed to a gas:composed substan- tially of two parts by volume of hydrogen and one of carbon oxide, at a pressure of 2600 pounds per sq. in. and. a temperature of 300°",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "note": "gas flows through at a stated space velocity",
+        "reactor_kind": "flow"
+      }
+    },
+    {
+      "id": "ex:msyn/us1908696a/sample/zn-cu-naoh",
+      "label": "CatalystSample",
+      "props": {
+        "name": "granules of the NaOH-precipitated catalyst",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/6",
+            "quote": "Thus ‘sodium by- droxide may be employed for effecting the precipitation and the resulting compounds ‘may be washed, dried and granulated and then subjected to reducing treatment in the manner stated above to obtain the catalyst;",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "preparation_status": "prepared",
+        "sample_kind": "granules"
+      }
+    },
+    {
+      "id": "ex:msyn/us1908696a/sample/zn-cu-nh4oh",
+      "label": "CatalystSample",
+      "props": {
+        "name": "NH4OH-precipitated catalyst",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/7",
+            "quote": "It is also possible to use: ammonium hy- droxide to precipitate the metals from the _ solution: of soluble salts, but.a decidedly less active catalyst results.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "preparation_status": "not_reported",
+        "sample_kind": "batch"
+      }
+    },
+    {
+      "id": "ex:msyn/us1908696a/sample/zn5-cu1-carbonate",
+      "label": "CatalystSample",
+      "props": {
+        "name": "granules of the preferred Zn-Cu catalyst",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'oranules' = 'granules'",
+            "passage": "us1908696a/p1/5",
+            "quote": "‘he precipitate 1s ‘washed to remove nitrates, filtered, pressed in a hydraulic press, dried and broken up into oranules of any desired size.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "preparation_status": "prepared",
+        "sample_kind": "granules"
+      }
+    },
+    {
+      "id": "ex:msyn/us1908696a/species/halides",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "the halides (class)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/7",
+            "quote": "It is important, however, to avoid 10 the. presence of impurities or contaminatin substances which may have a deleterious ef. fect. Thus, it is desirable to avoid the pres- ence of sulphur, the halides, ete.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1908696a/test/200c",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "preferred catalyst at 200 °C, 2600 lb/sq in",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'go' = 'so'; 'pewnds per 16 59. in.' = 'pounds per sq. in.' (16 is a line number)",
+            "passage": "us1908696a/p2/2",
+            "quote": "A catalyst produced as described above is go active that it. will. produce methanol in appreciable quantities:at temperatures as low as 200° C. with pressure of 2600 pewnds per 16 59. in.,",
+            "source": "ex:msyn/source/us1908696a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'parte' = 'parts', 'hydregen' = 'hydrogen'",
+            "passage": "us1908696a/p2/2",
+            "quote": "using a gas: mixture containing ap- _ proximately two. parte: of hydregen to one _ part of carbon monoxide by volume.",
+            "source": "ex:msyn/source/us1908696a"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, col. 1, lines 9-12",
+            "reading": "vision_ocr",
+            "region": [
+              0.17,
+              0.198,
+              0.56,
+              0.227
+            ],
+            "source": "ex:msyn/source/us1908696a",
+            "transcription": "as 200° C. with pressure of 2600 pounds per sq. in., using a gas mixture containing ap-"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "note": "methanol produced in appreciable quantities; no figure given",
+        "pressure": {
+          "status": "present",
+          "as_reported": "2600 pounds per sq. in.",
+          "note": "read from the page image (OCR 'pewnds per 16 59. in.'); re-curation 2026-09-29",
+          "unit": "lb/in2",
+          "value": 2600
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "as low as 200° C.",
+          "unit": "°C",
+          "value": 200
+        },
+        "temperature_measured_at": "not_reported",
+        "test_kind": "activity"
+      }
+    },
+    {
+      "id": "ex:msyn/us1908696a/test/250c-sv10000",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "preferred catalyst at 250 °C, space velocity approx. 10,000",
+        "conversion": {
+          "status": "present",
+          "as_reported": "about 60% of the car- bon monoxide is.converted to methanol",
+          "basis": "carbon monoxide to methanol",
+          "qualifier": "approximate",
+          "unit": "%",
+          "value": 60
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/2",
+            "quote": "Ata _ temperature of 250° C., about 60% of the car- bon monoxide is.converted to methanol under the conditions jnst stated, usinga space ve- locity of approximately 10,000",
+            "source": "ex:msyn/source/us1908696a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'go' = 'so'; 'pewnds per 16 59. in.' = 'pounds per sq. in.' (16 is a line number)",
+            "passage": "us1908696a/p2/2",
+            "quote": "A catalyst produced as described above is go active that it. will. produce methanol in appreciable quantities:at temperatures as low as 200° C. with pressure of 2600 pewnds per 16 59. in.,",
+            "source": "ex:msyn/source/us1908696a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'parte' = 'parts', 'hydregen' = 'hydrogen'",
+            "passage": "us1908696a/p2/2",
+            "quote": "using a gas: mixture containing ap- _ proximately two. parte: of hydregen to one _ part of carbon monoxide by volume.",
+            "source": "ex:msyn/source/us1908696a"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, col. 1, lines 9-12",
+            "reading": "vision_ocr",
+            "region": [
+              0.17,
+              0.198,
+              0.56,
+              0.227
+            ],
+            "source": "ex:msyn/source/us1908696a",
+            "transcription": "as 200° C. with pressure of 2600 pounds per sq. in., using a gas mixture containing ap-"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "pressure": {
+          "status": "present",
+          "as_reported": "2600 pounds per sq. in.",
+          "note": "'under the conditions just stated'; read from the page image (OCR 'pewnds per 16 59. in.')",
+          "unit": "lb/in2",
+          "value": 2600
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "approximately 10,000",
+          "note": "no unit printed here",
+          "qualifier": "approximate",
+          "unit": "not stated",
+          "value": 10000
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "250° C.",
+          "unit": "°C",
+          "value": 250
+        },
+        "temperature_measured_at": "not_reported",
+        "test_kind": "activity"
+      }
+    },
+    {
+      "id": "ex:msyn/us1908696a/test/250c-sv100600",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "preferred catalyst at about 250 °C, space velocity approx. 100,000",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'gais' = 'gals'; '*0' is a line number",
+            "passage": "us1908696a/p2/2",
+            "quote": "At a space velocity of approximately 100,600, this cata- lyst gives a -time-yield (S. T. Y.) of about 2270 gais: of methanol per 24 hrs. per *0 cu. ft. of catalyst space, employing a temper- ature of about:250° C. and: 2600 pounds per",
+            "source": "ex:msyn/source/us1908696a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'parte' = 'parts', 'hydregen' = 'hydrogen'",
+            "passage": "us1908696a/p2/2",
+            "quote": "using a gas: mixture containing ap- _ proximately two. parte: of hydregen to one _ part of carbon monoxide by volume.",
+            "source": "ex:msyn/source/us1908696a"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2, col. 1, line 17",
+            "reading": "vision_ocr",
+            "region": [
+              0.17,
+              0.294,
+              0.56,
+              0.307
+            ],
+            "second_reading": "the conditions just stated, using a space velocity of approximately 10,000. At a space velocity of approximately 10?,?00, this catalyst gives a space-time-yield (S. T. Y.) of about 2270 gals. of methanol per 24 hrs. per ... [the second number is heavily over-inked: '1', '0' and the last two '0' are clear; the 3rd digit (before the comma) and the 4th digit (first after the comma) are ink-filled oval glyphs that could be 0 or 6 - undecidable]",
+            "source": "ex:msyn/source/us1908696a",
+            "transcription": "velocity of approximately 10?,?00, this cata-"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, col. 1, lines 18-23",
+            "reading": "vision_ocr",
+            "region": [
+              0.17,
+              0.305,
+              0.56,
+              0.372
+            ],
+            "source": "ex:msyn/source/us1908696a",
+            "transcription": "lyst gives a space-time-yield (S. T. Y.) of about 2270 gals. of methanol per 24 hrs. per cu. ft. of catalyst space, employing a temperature of about 250° C. and 2600 pounds per sq. in. pressure."
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "pressure": {
+          "status": "present",
+          "as_reported": "2600 pounds per sq. in. pressure",
+          "note": "unit read from the page image (cut off in OCR text)",
+          "unit": "lb/in2",
+          "value": 2600
+        },
+        "space_time_yield": {
+          "status": "present",
+          "as_reported": "about 2270 gals. of methanol per 24 hrs. per cu. ft. of catalyst space",
+          "basis": "methanol",
+          "note": "as_reported from the page image; value 2270 confirmed",
+          "qualifier": "approximate",
+          "unit": "gal/(24 h·ft3 catalyst space)",
+          "value": 2270
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "approximately 10?,?00",
+          "note": "the third and fourth digits are over-inked (each 0 or 6): the first reading had 100,000, an independent second reading could not decide, and the OCR text has 100,600 or 106,600; no number is recorded",
+          "text_value": "approximately 10?,?00"
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "about:250° C.",
+          "qualifier": "approximate",
+          "unit": "°C",
+          "value": 250
+        },
+        "temperature_measured_at": "not_reported",
+        "test_kind": "activity"
+      }
+    },
+    {
+      "id": "ex:msyn/us1908696a/test/300c-sv31700",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "preferred catalyst in copper-lined bomb, 300°, SV 31,700",
+        "conversion": {
+          "status": "present",
+          "as_reported": "about 33.7% - of the CO to methanol",
+          "basis": "CO to methanol",
+          "qualifier": "approximate",
+          "unit": "%",
+          "value": 33.7
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'pla in:' = 'placed in a'",
+            "passage": "us1908696a/p2/3",
+            "quote": "when the improved catalyst is pla in: & copper lined steel *5 bomb and.exposed to a gas:composed substan- tially of two parts by volume of hydrogen and one of carbon oxide, at a pressure of 2600 pounds per sq. in. and. a temperature of 300°",
+            "source": "ex:msyn/source/us1908696a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/3",
+            "quote": "with: the gas flowing at a space velocity of $° 31,700 (‘volumes of gas measured at standard conditions entering per hour per volume of catalyst), the catalyst. converted about 33.7%",
+            "source": "ex:msyn/source/us1908696a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/3",
+            "quote": "of the CO to methanol and gave a S. T. Y. of 1054 gallons per 24 hours, per cubic foot of catalyst space.",
+            "source": "ex:msyn/source/us1908696a"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, col. 1, lines 28-31",
+            "reading": "vision_ocr",
+            "region": [
+              0.17,
+              0.425,
+              0.56,
+              0.475
+            ],
+            "source": "ex:msyn/source/us1908696a",
+            "transcription": "pounds per sq. in. and a temperature of 300° C., with the gas flowing at a space velocity of 31,700 (volumes of gas measured at standard conditions entering per hour per volume of"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "pressure": {
+          "status": "present",
+          "as_reported": "2600 pounds per sq. in.",
+          "unit": "lb/in2",
+          "value": 2600
+        },
+        "space_time_yield": {
+          "status": "present",
+          "as_reported": "1054 gallons per 24 hours, per cubic foot of catalyst space",
+          "basis": "methanol (S. T. Y.)",
+          "unit": "gal/(24 h·ft3 catalyst space)",
+          "value": 1054
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "31,700 (‘volumes of gas measured at standard conditions entering per hour per volume of catalyst)",
+          "note": "gas volumes at standard conditions",
+          "unit": "vol/(h·vol catalyst)",
+          "value": 31700
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "300° C.",
+          "note": "the page image shows '300° C.' ('C.' begins the next line, dropped by OCR); earlier note said printed without 'C.'",
+          "unit": "°C",
+          "value": 300
+        },
+        "temperature_measured_at": "not_reported",
+        "test_kind": "activity"
+      }
+    },
+    {
+      "id": "ex:msyn/us1908696a/test/naoh-300c-sv25000",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "NaOH-precipitated catalyst in copper-lined bomb, 300 °C, SV 25,000",
+        "conversion": {
+          "status": "present",
+          "as_reported": "about: 13 per cent of the CO is.converted to metii-. _ anol in one pass",
+          "basis": "CO to methanol, one pass",
+          "qualifier": "approximate",
+          "unit": "%",
+          "value": 13
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/6",
+            "quote": "Using a catalyst obtained in this manner, placed in a copper- lined steel bomb and exposed to a gas:com-. prising two parts by volume of hydrogen % and one of CO at a.pressure of 2600 pounds: per sq. in. at a temperature of 300° C with: a",
+            "source": "ex:msyn/source/us1908696a"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, col. 2, lines 81-87",
+            "reading": "vision_ocr",
+            "region": [
+              0.55,
+              0.29,
+              0.95,
+              0.37
+            ],
+            "source": "ex:msyn/source/us1908696a",
+            "transcription": "and one of CO at a pressure of 2600 pounds per sq. in. at a temperature of 300° C with a gas flowing at a space velocity of 25,000, about 13 per cent of the CO is converted to meth- anol in one pass, and a space-time-yield of 313 gallons of methanol per twenty four hours per cubic foot of catalyst space is obtained."
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "pressure": {
+          "status": "present",
+          "as_reported": "2600 pounds: per sq. in.",
+          "unit": "lb/in2",
+          "value": 2600
+        },
+        "space_time_yield": {
+          "status": "present",
+          "as_reported": "313 gallons of methanol per twenty four hours per cubic foot of catalyst space",
+          "basis": "methanol",
+          "note": "corrected from 813 (OCR text layer misread) to 313 as printed on the page image; OCR of the region also reads 313",
+          "unit": "gal/(24 h·ft3 catalyst space)",
+          "value": 313
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "25,000",
+          "note": "no unit printed here",
+          "unit": "not stated",
+          "value": 25000
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "300° C",
+          "unit": "°C",
+          "value": 300
+        },
+        "temperature_measured_at": "not_reported",
+        "test_kind": "activity"
+      }
+    },
+    {
+      "id": "ex:msyn/us1908696a/treatment/reduction",
+      "label": "Treatment",
+      "props": {
+        "name": "reduction in H2, CO or mixtures at atmospheric pressure, 150 then 300 °C, 8-12 h",
+        "atmosphere": "hydrogen, carbon monoxide, or mixtures of them",
+        "conditions": {
+          "final_temperature": {
+            "status": "present",
+            "as_reported": "raising the temperature to 300° C.",
+            "note": "preferred",
+            "unit": "°C",
+            "value": 300
+          },
+          "initial_temperature": {
+            "status": "present",
+            "as_reported": "heating at 150° C. for a time",
+            "note": "preferred",
+            "unit": "°C",
+            "value": 150
+          }
+        },
+        "duration": {
+          "status": "present",
+          "as_reported": "8 to 12 hours",
+          "lower": 8,
+          "note": "found very satisfactory; may extend over several hours",
+          "unit": "h",
+          "upper": 12
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1908696a/p1/6",
+            "quote": "preferably these granules ?° are treated with hydrogen, carbon monoxide, or mixtures of them, at atmospheric pressure and at temperatures ranging from 100° C. to 450° C.",
+            "source": "ex:msyn/source/us1908696a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1908696a/p1/6",
+            "quote": "Preferably, this treatment 1s car- __. ried out by heating at 150° C. for a time, and 15 ultimately raising the temperature to 300° C. The time of treatment may extend over a pe- riod of several hours, a period of 8 to 12 hours having been found very satisfactory.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "pressure": {
+          "status": "present",
+          "as_reported": "at atmospheric pressure",
+          "note": "printed 'atmospheric pressure'",
+          "unit": "atm",
+          "value": 1
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "from 100° C. to 450° C.",
+          "lower": 100,
+          "note": "range; preferably 150° C. then raised to 300° C.",
+          "unit": "°C",
+          "upper": 450
+        },
+        "treatment_kind": "reduction"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/reaction/co-hydrogenation-to-methanol/reported-in/us1908696a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/source/us1908696a"
+    },
+    {
+      "id": "ex:msyn/source/us1908696a/assignee",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "role": "assignee"
+      },
+      "source": "ex:msyn/source/us1908696a",
+      "target": "ex:msyn/institution/karpen-bros-s"
+    },
+    {
+      "id": "ex:msyn/us1908696a/catalyst/zn-cu-naoh/reported-in/us1908696a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1908696a/catalyst/zn-cu-naoh",
+      "target": "ex:msyn/source/us1908696a"
+    },
+    {
+      "id": "ex:msyn/us1908696a/catalyst/zn-cu-nh4oh/reported-in/us1908696a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1908696a/catalyst/zn-cu-nh4oh",
+      "target": "ex:msyn/source/us1908696a"
+    },
+    {
+      "id": "ex:msyn/us1908696a/catalyst/zn5-cu1-carbonate/reported-in/us1908696a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1908696a/catalyst/zn5-cu1-carbonate",
+      "target": "ex:msyn/source/us1908696a"
+    },
+    {
+      "id": "ex:msyn/us1908696a/catalyst/zno-cu-kind/reported-in/us1908696a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1908696a/catalyst/zno-cu-kind",
+      "target": "ex:msyn/source/us1908696a"
+    },
+    {
+      "id": "ex:msyn/us1908696a/claim/active-at-200c/reported-in/us1908696a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1908696a/claim/active-at-200c",
+      "target": "ex:msyn/source/us1908696a"
+    },
+    {
+      "id": "ex:msyn/us1908696a/claim/avoid-sulphur-halides/reported-in/us1908696a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1908696a/claim/avoid-sulphur-halides",
+      "target": "ex:msyn/source/us1908696a"
+    },
+    {
+      "id": "ex:msyn/us1908696a/claim/copper-activity-vs-life/reported-in/us1908696a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1908696a/claim/copper-activity-vs-life",
+      "target": "ex:msyn/source/us1908696a"
+    },
+    {
+      "id": "ex:msyn/us1908696a/claim/large-excess-zinc/reported-in/us1908696a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1908696a/claim/large-excess-zinc",
+      "target": "ex:msyn/source/us1908696a"
+    },
+    {
+      "id": "ex:msyn/us1908696a/claim/operating-conditions/reported-in/us1908696a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1908696a/claim/operating-conditions",
+      "target": "ex:msyn/source/us1908696a"
+    },
+    {
+      "id": "ex:msyn/us1908696a/claim/patent-claim-1/reported-in/us1908696a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1908696a/claim/patent-claim-1",
+      "target": "ex:msyn/source/us1908696a"
+    },
+    {
+      "id": "ex:msyn/us1908696a/claim/patent-claim-2/reported-in/us1908696a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1908696a/claim/patent-claim-2",
+      "target": "ex:msyn/source/us1908696a"
+    },
+    {
+      "id": "ex:msyn/us1908696a/claim/patent-claim-3/reported-in/us1908696a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1908696a/claim/patent-claim-3",
+      "target": "ex:msyn/source/us1908696a"
+    },
+    {
+      "id": "ex:msyn/us1908696a/claim/patent-claim-4/reported-in/us1908696a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1908696a/claim/patent-claim-4",
+      "target": "ex:msyn/source/us1908696a"
+    },
+    {
+      "id": "ex:msyn/us1908696a/claim/patent-claim-5/reported-in/us1908696a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1908696a/claim/patent-claim-5",
+      "target": "ex:msyn/source/us1908696a"
+    },
+    {
+      "id": "ex:msyn/us1908696a/claim/patent-claim-6/reported-in/us1908696a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1908696a/claim/patent-claim-6",
+      "target": "ex:msyn/source/us1908696a"
+    },
+    {
+      "id": "ex:msyn/us1908696a/claim/precipitant-effect/reported-in/us1908696a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1908696a/claim/precipitant-effect",
+      "target": "ex:msyn/source/us1908696a"
+    },
+    {
+      "id": "ex:msyn/us1908696a/claim/precipitation-reasons/reported-in/us1908696a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1908696a/claim/precipitation-reasons",
+      "target": "ex:msyn/source/us1908696a"
+    },
+    {
+      "id": "ex:msyn/us1908696a/claim/treated-structure/reported-in/us1908696a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1908696a/claim/treated-structure",
+      "target": "ex:msyn/source/us1908696a"
+    },
+    {
+      "id": "ex:msyn/us1908696a/claim/zno-cu-effective/reported-in/us1908696a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1908696a/claim/zno-cu-effective",
+      "target": "ex:msyn/source/us1908696a"
+    },
+    {
+      "id": "ex:msyn/us1908696a/feed/h2-carbon-oxide-2-1/reported-in/us1908696a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1908696a/feed/h2-carbon-oxide-2-1",
+      "target": "ex:msyn/source/us1908696a"
+    },
+    {
+      "id": "ex:msyn/us1908696a/feed/h2-co-2-1-approx/reported-in/us1908696a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1908696a/feed/h2-co-2-1-approx",
+      "target": "ex:msyn/source/us1908696a"
+    },
+    {
+      "id": "ex:msyn/us1908696a/feed/h2-co-2-1/reported-in/us1908696a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1908696a/feed/h2-co-2-1",
+      "target": "ex:msyn/source/us1908696a"
+    },
+    {
+      "id": "ex:msyn/us1908696a/hypothesis/purple-copper-active/reported-in/us1908696a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1908696a/hypothesis/purple-copper-active",
+      "target": "ex:msyn/source/us1908696a"
+    },
+    {
+      "id": "ex:msyn/us1908696a/hypothesis/reduction-effect/reported-in/us1908696a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1908696a/hypothesis/reduction-effect",
+      "target": "ex:msyn/source/us1908696a"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/1",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'‘ive' = 'Five'; '60' is a line number",
+            "passage": "us1908696a/p1/5",
+            "quote": "‘ive parts by weight of zinc and one part . by weight of copper (or their chemical equiv- alents) are converted into nitrates and dis- solved in sufficient water to produce a solu- ._. tion whosé concentration is approximately 15 60 grams of the total metal per liter.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "‘ive parts by weight of zinc",
+          "note": "'‘ive' = 'Five'; or the chemical equivalent",
+          "unit": "parts by weight",
+          "value": 5
+        },
+        "fraction_basis": "mass",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1908696a/catalyst/zn5-cu1-carbonate",
+      "target": "ex:msyn/species/zinc"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/10",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/6",
+            "quote": "trate solution of zinc and copper mentioned above zinc and copper compounde by means of a hydroxide of an elemental alkali metal, sodium or potassium.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1908696a/catalyst/zn-cu-naoh",
+      "target": "ex:msyn/species/copper"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/11",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/6",
+            "quote": "Thus ‘sodium by- droxide may be employed for effecting the precipitation and the resulting compounds ‘may be washed, dried and granulated and then subjected to reducing treatment in the manner stated above to obtain the catalyst;",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/sample/zn-cu-naoh",
+      "target": "ex:msyn/us1908696a/catalyst/zn-cu-naoh"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/12",
+      "type": "PREPARED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/6",
+            "quote": "Thus ‘sodium by- droxide may be employed for effecting the precipitation and the resulting compounds ‘may be washed, dried and granulated and then subjected to reducing treatment in the manner stated above to obtain the catalyst;",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/sample/zn-cu-naoh",
+      "target": "ex:msyn/us1908696a/preparation/naoh-precipitation"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/13",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/6",
+            "quote": "Thus ‘sodium by- droxide may be employed for effecting the precipitation and the resulting compounds ‘may be washed, dried and granulated and then subjected to reducing treatment in the manner stated above to obtain the catalyst;",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "role": "precipitant"
+      },
+      "source": "ex:msyn/us1908696a/sample/zn-cu-naoh",
+      "target": "ex:msyn/species/naoh"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/14",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/6",
+            "quote": "trate solution of zinc and copper mentioned above zinc and copper compounde by means of a hydroxide of an elemental alkali metal, sodium or potassium.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "role": "precursor (nitrate solution)"
+      },
+      "source": "ex:msyn/us1908696a/sample/zn-cu-naoh",
+      "target": "ex:msyn/species/znno32"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/15",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/6",
+            "quote": "trate solution of zinc and copper mentioned above zinc and copper compounde by means of a hydroxide of an elemental alkali metal, sodium or potassium.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "role": "precursor (nitrate solution)"
+      },
+      "source": "ex:msyn/us1908696a/sample/zn-cu-naoh",
+      "target": "ex:msyn/species/cuno32"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/16",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/6",
+            "quote": "Thus ‘sodium by- droxide may be employed for effecting the precipitation and the resulting compounds ‘may be washed, dried and granulated and then subjected to reducing treatment in the manner stated above to obtain the catalyst;",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "order": 1
+      },
+      "source": "ex:msyn/us1908696a/sample/zn-cu-naoh",
+      "target": "ex:msyn/us1908696a/treatment/reduction"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/17",
+      "type": "COMPARED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/5",
+            "quote": "Thus, the best re- sults are obtained by employing an alkali metal carbonate for precipitating the zinc and copper compounds.",
+            "source": "ex:msyn/source/us1908696a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'owever' = 'However'",
+            "passage": "us1908696a/p2/5",
+            "quote": "owever, a reasonably active catalyst may ®& be obtained by precipitating from the ni-",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/catalyst/zn-cu-naoh",
+      "target": "ex:msyn/us1908696a/catalyst/zn5-cu1-carbonate"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/18",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/7",
+            "quote": "It is also possible to use: ammonium hy- droxide to precipitate the metals from the _ solution: of soluble salts, but.a decidedly less active catalyst results.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "note": "'the metals'",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1908696a/catalyst/zn-cu-nh4oh",
+      "target": "ex:msyn/species/zinc"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/19",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/7",
+            "quote": "It is also possible to use: ammonium hy- droxide to precipitate the metals from the _ solution: of soluble salts, but.a decidedly less active catalyst results.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "note": "'the metals'",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1908696a/catalyst/zn-cu-nh4oh",
+      "target": "ex:msyn/species/copper"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/2",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'‘ive' = 'Five'; '60' is a line number",
+            "passage": "us1908696a/p1/5",
+            "quote": "‘ive parts by weight of zinc and one part . by weight of copper (or their chemical equiv- alents) are converted into nitrates and dis- solved in sufficient water to produce a solu- ._. tion whosé concentration is approximately 15 60 grams of the total metal per liter.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "one part . by weight of copper",
+          "unit": "parts by weight",
+          "value": 1
+        },
+        "fraction_basis": "mass",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1908696a/catalyst/zn5-cu1-carbonate",
+      "target": "ex:msyn/species/copper"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/20",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/7",
+            "quote": "It is also possible to use: ammonium hy- droxide to precipitate the metals from the _ solution: of soluble salts, but.a decidedly less active catalyst results.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/sample/zn-cu-nh4oh",
+      "target": "ex:msyn/us1908696a/catalyst/zn-cu-nh4oh"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/21",
+      "type": "PREPARED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/7",
+            "quote": "It is also possible to use: ammonium hy- droxide to precipitate the metals from the _ solution: of soluble salts, but.a decidedly less active catalyst results.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/sample/zn-cu-nh4oh",
+      "target": "ex:msyn/us1908696a/preparation/nh4oh-precipitation"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/22",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/7",
+            "quote": "It is also possible to use: ammonium hy- droxide to precipitate the metals from the _ solution: of soluble salts, but.a decidedly less active catalyst results.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "role": "precipitant"
+      },
+      "source": "ex:msyn/us1908696a/sample/zn-cu-nh4oh",
+      "target": "ex:msyn/species/nh4oh"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/23",
+      "type": "COMPARED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/7",
+            "quote": "It is also possible to use: ammonium hy- droxide to precipitate the metals from the _ solution: of soluble salts, but.a decidedly less active catalyst results.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/catalyst/zn-cu-nh4oh",
+      "target": "ex:msyn/us1908696a/catalyst/zn5-cu1-carbonate"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/24",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1908696a/p3/1",
+            "quote": "4. A stable highly active copper zinc oxide catalyst comprising zinc oxide and purplish free copper in the proportion of at least two atoms of zinc to one atom of copper.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1908696a/catalyst/zno-cu-kind",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/25",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1908696a/p3/1",
+            "quote": "4. A stable highly active copper zinc oxide catalyst comprising zinc oxide and purplish free copper in the proportion of at least two atoms of zinc to one atom of copper.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "role": "not_stated",
+        "role_detail": "purplish free copper"
+      },
+      "source": "ex:msyn/us1908696a/catalyst/zno-cu-kind",
+      "target": "ex:msyn/species/copper"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/26",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'parte' = 'parts', 'hydregen' = 'hydrogen'",
+            "passage": "us1908696a/p2/2",
+            "quote": "using a gas: mixture containing ap- _ proximately two. parte: of hydregen to one _ part of carbon monoxide by volume.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1908696a/feed/h2-co-2-1-approx",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/27",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'parte' = 'parts', 'hydregen' = 'hydrogen'",
+            "passage": "us1908696a/p2/2",
+            "quote": "using a gas: mixture containing ap- _ proximately two. parte: of hydregen to one _ part of carbon monoxide by volume.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1908696a/feed/h2-co-2-1-approx",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/28",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'pla in:' = 'placed in a'",
+            "passage": "us1908696a/p2/3",
+            "quote": "when the improved catalyst is pla in: & copper lined steel *5 bomb and.exposed to a gas:composed substan- tially of two parts by volume of hydrogen and one of carbon oxide, at a pressure of 2600 pounds per sq. in. and. a temperature of 300°",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1908696a/feed/h2-carbon-oxide-2-1",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/29",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'pla in:' = 'placed in a'",
+            "passage": "us1908696a/p2/3",
+            "quote": "when the improved catalyst is pla in: & copper lined steel *5 bomb and.exposed to a gas:composed substan- tially of two parts by volume of hydrogen and one of carbon oxide, at a pressure of 2600 pounds per sq. in. and. a temperature of 300°",
+            "source": "ex:msyn/source/us1908696a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/3",
+            "quote": "of the CO to methanol and gave a S. T. Y. of 1054 gallons per 24 hours, per cubic foot of catalyst space.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "note": "printed 'carbon oxide'; the conversion is reported of 'the CO'",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1908696a/feed/h2-carbon-oxide-2-1",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/3",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'‘ive' = 'Five'; '60' is a line number",
+            "passage": "us1908696a/p1/5",
+            "quote": "‘ive parts by weight of zinc and one part . by weight of copper (or their chemical equiv- alents) are converted into nitrates and dis- solved in sufficient water to produce a solu- ._. tion whosé concentration is approximately 15 60 grams of the total metal per liter.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/sample/zn5-cu1-carbonate",
+      "target": "ex:msyn/us1908696a/catalyst/zn5-cu1-carbonate"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/30",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/6",
+            "quote": "Using a catalyst obtained in this manner, placed in a copper- lined steel bomb and exposed to a gas:com-. prising two parts by volume of hydrogen % and one of CO at a.pressure of 2600 pounds: per sq. in. at a temperature of 300° C with: a",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1908696a/feed/h2-co-2-1",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/31",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/6",
+            "quote": "Using a catalyst obtained in this manner, placed in a copper- lined steel bomb and exposed to a gas:com-. prising two parts by volume of hydrogen % and one of CO at a.pressure of 2600 pounds: per sq. in. at a temperature of 300° C with: a",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1908696a/feed/h2-co-2-1",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/32",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/2",
+            "quote": "A catalyst produced as described above is go active",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "note": "the catalyst 'produced as described above' (after the reducing treatment)",
+        "state": "reduced"
+      },
+      "source": "ex:msyn/us1908696a/test/200c",
+      "target": "ex:msyn/us1908696a/sample/zn5-cu1-carbonate"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/33",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'parte' = 'parts', 'hydregen' = 'hydrogen'",
+            "passage": "us1908696a/p2/2",
+            "quote": "using a gas: mixture containing ap- _ proximately two. parte: of hydregen to one _ part of carbon monoxide by volume.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/test/200c",
+      "target": "ex:msyn/us1908696a/feed/h2-co-2-1-approx"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/34",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/2",
+            "quote": "Ata _ temperature of 250° C., about 60% of the car- bon monoxide is.converted to methanol under the conditions jnst stated, usinga space ve- locity of approximately 10,000",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/test/200c",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/35",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/2",
+            "quote": "A catalyst produced as described above is go active",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "note": "the catalyst 'produced as described above' (after the reducing treatment)",
+        "state": "reduced"
+      },
+      "source": "ex:msyn/us1908696a/test/250c-sv10000",
+      "target": "ex:msyn/us1908696a/sample/zn5-cu1-carbonate"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/36",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/2",
+            "quote": "Ata _ temperature of 250° C., about 60% of the car- bon monoxide is.converted to methanol under the conditions jnst stated, usinga space ve- locity of approximately 10,000",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/test/250c-sv10000",
+      "target": "ex:msyn/us1908696a/feed/h2-co-2-1-approx"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/37",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/2",
+            "quote": "Ata _ temperature of 250° C., about 60% of the car- bon monoxide is.converted to methanol under the conditions jnst stated, usinga space ve- locity of approximately 10,000",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/test/250c-sv10000",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/38",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/2",
+            "quote": "A catalyst produced as described above is go active",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "note": "the catalyst 'produced as described above' (after the reducing treatment)",
+        "state": "reduced"
+      },
+      "source": "ex:msyn/us1908696a/test/250c-sv100600",
+      "target": "ex:msyn/us1908696a/sample/zn5-cu1-carbonate"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/39",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'gais' = 'gals'; '*0' is a line number",
+            "passage": "us1908696a/p2/2",
+            "quote": "At a space velocity of approximately 100,600, this cata- lyst gives a -time-yield (S. T. Y.) of about 2270 gais: of methanol per 24 hrs. per *0 cu. ft. of catalyst space, employing a temper- ature of about:250° C. and: 2600 pounds per",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/test/250c-sv100600",
+      "target": "ex:msyn/us1908696a/feed/h2-co-2-1-approx"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/4",
+      "type": "PREPARED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1908696a/p1/5",
+            "quote": "This so- lution is then treated at room temperature or higher with a saturated solution of sodium carbonate to effect the simultaneous precipi-_ . tation of the zinc and copper carbonates, in- 85 timately commingled.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/sample/zn5-cu1-carbonate",
+      "target": "ex:msyn/us1908696a/preparation/carbonate-coprecipitation"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/40",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/2",
+            "quote": "Ata _ temperature of 250° C., about 60% of the car- bon monoxide is.converted to methanol under the conditions jnst stated, usinga space ve- locity of approximately 10,000",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/test/250c-sv100600",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/41",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'pla in:' = 'placed in a'",
+            "passage": "us1908696a/p2/3",
+            "quote": "when the improved catalyst is pla in: & copper lined steel *5 bomb and.exposed to a gas:composed substan- tially of two parts by volume of hydrogen and one of carbon oxide, at a pressure of 2600 pounds per sq. in. and. a temperature of 300°",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "note": "the catalyst 'produced as described above' (after the reducing treatment)",
+        "state": "reduced"
+      },
+      "source": "ex:msyn/us1908696a/test/300c-sv31700",
+      "target": "ex:msyn/us1908696a/sample/zn5-cu1-carbonate"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/42",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'pla in:' = 'placed in a'",
+            "passage": "us1908696a/p2/3",
+            "quote": "when the improved catalyst is pla in: & copper lined steel *5 bomb and.exposed to a gas:composed substan- tially of two parts by volume of hydrogen and one of carbon oxide, at a pressure of 2600 pounds per sq. in. and. a temperature of 300°",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/test/300c-sv31700",
+      "target": "ex:msyn/us1908696a/feed/h2-carbon-oxide-2-1"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/43",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/3",
+            "quote": "of the CO to methanol and gave a S. T. Y. of 1054 gallons per 24 hours, per cubic foot of catalyst space.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/test/300c-sv31700",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/44",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'pla in:' = 'placed in a'",
+            "passage": "us1908696a/p2/3",
+            "quote": "when the improved catalyst is pla in: & copper lined steel *5 bomb and.exposed to a gas:composed substan- tially of two parts by volume of hydrogen and one of carbon oxide, at a pressure of 2600 pounds per sq. in. and. a temperature of 300°",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/test/300c-sv31700",
+      "target": "ex:msyn/us1908696a/reactor/copper-lined-steel-bomb"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/45",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/6",
+            "quote": "Using a catalyst obtained in this manner, placed in a copper- lined steel bomb and exposed to a gas:com-. prising two parts by volume of hydrogen % and one of CO at a.pressure of 2600 pounds: per sq. in. at a temperature of 300° C with: a",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "state": "reduced"
+      },
+      "source": "ex:msyn/us1908696a/test/naoh-300c-sv25000",
+      "target": "ex:msyn/us1908696a/sample/zn-cu-naoh"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/46",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/6",
+            "quote": "Using a catalyst obtained in this manner, placed in a copper- lined steel bomb and exposed to a gas:com-. prising two parts by volume of hydrogen % and one of CO at a.pressure of 2600 pounds: per sq. in. at a temperature of 300° C with: a",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/test/naoh-300c-sv25000",
+      "target": "ex:msyn/us1908696a/feed/h2-co-2-1"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/47",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/6",
+            "quote": "gas flowing ata space velocity.af 25,000; about: 13 per cent of the CO is.converted to metii-. _ anol in one pass, and a: space-time-yield. of 813 gallons of methanol pertwenty four hours. per cubic foot of catalyst:space is obtained..",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/test/naoh-300c-sv25000",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/48",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/6",
+            "quote": "Using a catalyst obtained in this manner, placed in a copper- lined steel bomb and exposed to a gas:com-. prising two parts by volume of hydrogen % and one of CO at a.pressure of 2600 pounds: per sq. in. at a temperature of 300° C with: a",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/test/naoh-300c-sv25000",
+      "target": "ex:msyn/us1908696a/reactor/copper-lined-steel-bomb"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/49",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "context": [
+          "ex:msyn/us1908696a/test/200c",
+          "ex:msyn/us1908696a/test/250c-sv10000",
+          "ex:msyn/us1908696a/test/250c-sv100600",
+          "ex:msyn/us1908696a/test/300c-sv31700"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/2",
+            "quote": "Ata _ temperature of 250° C., about 60% of the car- bon monoxide is.converted to methanol under the conditions jnst stated, usinga space ve- locity of approximately 10,000",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/catalyst/zn5-cu1-carbonate",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/5",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'‘ive' = 'Five'; '60' is a line number",
+            "passage": "us1908696a/p1/5",
+            "quote": "‘ive parts by weight of zinc and one part . by weight of copper (or their chemical equiv- alents) are converted into nitrates and dis- solved in sufficient water to produce a solu- ._. tion whosé concentration is approximately 15 60 grams of the total metal per liter.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "role": "precursor (zinc converted into nitrate)"
+      },
+      "source": "ex:msyn/us1908696a/sample/zn5-cu1-carbonate",
+      "target": "ex:msyn/species/znno32"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/50",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "context": [
+          "ex:msyn/us1908696a/test/naoh-300c-sv25000"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/6",
+            "quote": "gas flowing ata space velocity.af 25,000; about: 13 per cent of the CO is.converted to metii-. _ anol in one pass, and a: space-time-yield. of 813 gallons of methanol pertwenty four hours. per cubic foot of catalyst:space is obtained..",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/catalyst/zn-cu-naoh",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/51",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1908696a/p1/6",
+            "quote": "The effect of the treatment probably is to 8° decompose the carbonates, or reduce them to _ oxides, and reduce the copper oxide to metal- lic copper, which is thus present in the mix- ture in the form of. very fine particles dis- persed throughout the zine oxide.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/hypothesis/reduction-effect",
+      "target": "ex:msyn/us1908696a/treatment/reduction"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/52",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1908696a/p1/6",
+            "quote": "The effect of the treatment probably is to 8° decompose the carbonates, or reduce them to _ oxides, and reduce the copper oxide to metal- lic copper, which is thus present in the mix- ture in the form of. very fine particles dis- persed throughout the zine oxide.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/hypothesis/reduction-effect",
+      "target": "ex:msyn/us1908696a/catalyst/zn5-cu1-carbonate"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/53",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1908696a/p1/7",
+            "quote": "The particles of copper, as a result’of the treatment, possess a deep purple, or dark reddish purple color, _ which apparently is characteristic of a very - active condition of the copper for catalysis purposes.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/hypothesis/purple-copper-active",
+      "target": "ex:msyn/species/copper"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/54",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1908696a/p1/7",
+            "quote": "The particles of copper, as a result’of the treatment, possess a deep purple, or dark reddish purple color, _ which apparently is characteristic of a very - active condition of the copper for catalysis purposes.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/hypothesis/purple-copper-active",
+      "target": "ex:msyn/us1908696a/catalyst/zn5-cu1-carbonate"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/55",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1908696a/p1/6",
+            "quote": "The zinc 85 — oxide possesses as a result of the treatment, a physical structure which is well adapted to— the purpose of the catalyst.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/claim/treated-structure",
+      "target": "ex:msyn/us1908696a/catalyst/zn5-cu1-carbonate"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/56",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1908696a/p1/6",
+            "quote": "The zinc 85 — oxide possesses as a result of the treatment, a physical structure which is well adapted to— the purpose of the catalyst.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/claim/treated-structure",
+      "target": "ex:msyn/us1908696a/treatment/reduction"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/57",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1908696a/p1/4",
+            "quote": "it is possible to prepare mixtures of zine oxide and copper in such a state or condition that a highly effective contact body is afforded;",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/claim/zno-cu-effective",
+      "target": "ex:msyn/us1908696a/catalyst/zno-cu-kind"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/58",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'go' = 'so'; 'pewnds per 16 59. in.' = 'pounds per sq. in.' (16 is a line number)",
+            "passage": "us1908696a/p2/2",
+            "quote": "A catalyst produced as described above is go active that it. will. produce methanol in appreciable quantities:at temperatures as low as 200° C. with pressure of 2600 pewnds per 16 59. in.,",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/test/200c",
+      "target": "ex:msyn/us1908696a/claim/active-at-200c"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/59",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'go' = 'so'; 'pewnds per 16 59. in.' = 'pounds per sq. in.' (16 is a line number)",
+            "passage": "us1908696a/p2/2",
+            "quote": "A catalyst produced as described above is go active that it. will. produce methanol in appreciable quantities:at temperatures as low as 200° C. with pressure of 2600 pewnds per 16 59. in.,",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/claim/active-at-200c",
+      "target": "ex:msyn/us1908696a/catalyst/zn5-cu1-carbonate"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/6",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'‘ive' = 'Five'; '60' is a line number",
+            "passage": "us1908696a/p1/5",
+            "quote": "‘ive parts by weight of zinc and one part . by weight of copper (or their chemical equiv- alents) are converted into nitrates and dis- solved in sufficient water to produce a solu- ._. tion whosé concentration is approximately 15 60 grams of the total metal per liter.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "role": "precursor (copper converted into nitrate)"
+      },
+      "source": "ex:msyn/us1908696a/sample/zn5-cu1-carbonate",
+      "target": "ex:msyn/species/cuno32"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/60",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/2",
+            "quote": "Ata _ temperature of 250° C., about 60% of the car- bon monoxide is.converted to methanol under the conditions jnst stated, usinga space ve- locity of approximately 10,000",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/test/250c-sv10000",
+      "target": "ex:msyn/us1908696a/claim/active-at-200c"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/61",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'gais' = 'gals'; '*0' is a line number",
+            "passage": "us1908696a/p2/2",
+            "quote": "At a space velocity of approximately 100,600, this cata- lyst gives a -time-yield (S. T. Y.) of about 2270 gais: of methanol per 24 hrs. per *0 cu. ft. of catalyst space, employing a temper- ature of about:250° C. and: 2600 pounds per",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/test/250c-sv100600",
+      "target": "ex:msyn/us1908696a/claim/active-at-200c"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/62",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/3",
+            "quote": "of the CO to methanol and gave a S. T. Y. of 1054 gallons per 24 hours, per cubic foot of catalyst space.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/test/300c-sv31700",
+      "target": "ex:msyn/us1908696a/claim/active-at-200c"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/63",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/1",
+            "quote": "and pressure known in the art are suitable, but it is preferred to employ high pressures rather than low pressures. On the other hand, the temperatures:in the reaction cham- § ber need be only moderately high.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/claim/operating-conditions",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/64",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/3",
+            "quote": "The composition can be varied within quite wide limits. It seems quite important, how- ever, to employ a large excess of zinc. Pref- erably, the ratio of zinc to copper (atomic proportions) is at least four to one, but this may be reduced to two to one, or even lower, but. with less satisfactory results.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/claim/large-excess-zinc",
+      "target": "ex:msyn/us1908696a/catalyst/zno-cu-kind"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/65",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/8",
+            "quote": "the activity of the catalyst may be increased by lessening the atomic per cent of zinc and correspondingly 120 increasing that of copper. Thus 4 to 1,3 to 1, 2 to 1 and 1 to 1 ratios give larger yields at lower operating temperatures than'a 5 to 1 tatio.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/claim/copper-activity-vs-life",
+      "target": "ex:msyn/us1908696a/catalyst/zno-cu-kind"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/66",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/8",
+            "quote": "the activity of the catalyst may be increased by lessening the atomic per cent of zinc and correspondingly 120 increasing that of copper. Thus 4 to 1,3 to 1, 2 to 1 and 1 to 1 ratios give larger yields at lower operating temperatures than'a 5 to 1 tatio.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/claim/copper-activity-vs-life",
+      "target": "ex:msyn/us1908696a/catalyst/zn5-cu1-carbonate"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/67",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/4",
+            "quote": "The initial compounds of the improved catalyst are produced by precipitation of the compounds from solutions of the metals for two reasons. One is to insure purity; and another is to insure the desired form of the catalyst",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/claim/precipitation-reasons",
+      "target": "ex:msyn/us1908696a/preparation/carbonate-coprecipitation"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/68",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/5",
+            "quote": "Thus, the best re- sults are obtained by employing an alkali metal carbonate for precipitating the zinc and copper compounds.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/claim/precipitant-effect",
+      "target": "ex:msyn/us1908696a/catalyst/zn5-cu1-carbonate"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/69",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'owever' = 'However'",
+            "passage": "us1908696a/p2/5",
+            "quote": "owever, a reasonably active catalyst may ®& be obtained by precipitating from the ni-",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/claim/precipitant-effect",
+      "target": "ex:msyn/us1908696a/catalyst/zn-cu-naoh"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/7",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1908696a/p1/5",
+            "quote": "This so- lution is then treated at room temperature or higher with a saturated solution of sodium carbonate to effect the simultaneous precipi-_ . tation of the zinc and copper carbonates, in- 85 timately commingled.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "role": "precipitant (saturated solution)"
+      },
+      "source": "ex:msyn/us1908696a/sample/zn5-cu1-carbonate",
+      "target": "ex:msyn/species/na2co3"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/70",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/7",
+            "quote": "It is also possible to use: ammonium hy- droxide to precipitate the metals from the _ solution: of soluble salts, but.a decidedly less active catalyst results.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/claim/precipitant-effect",
+      "target": "ex:msyn/us1908696a/catalyst/zn-cu-nh4oh"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/71",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/6",
+            "quote": "gas flowing ata space velocity.af 25,000; about: 13 per cent of the CO is.converted to metii-. _ anol in one pass, and a: space-time-yield. of 813 gallons of methanol pertwenty four hours. per cubic foot of catalyst:space is obtained..",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/test/naoh-300c-sv25000",
+      "target": "ex:msyn/us1908696a/claim/precipitant-effect"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/72",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/3",
+            "quote": "of the CO to methanol and gave a S. T. Y. of 1054 gallons per 24 hours, per cubic foot of catalyst space.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/test/300c-sv31700",
+      "target": "ex:msyn/us1908696a/claim/precipitant-effect"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/73",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/7",
+            "quote": "It is important, however, to avoid 10 the. presence of impurities or contaminatin substances which may have a deleterious ef. fect. Thus, it is desirable to avoid the pres- ence of sulphur, the halides, ete.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/claim/avoid-sulphur-halides",
+      "target": "ex:msyn/species/sulfur"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/74",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/7",
+            "quote": "It is important, however, to avoid 10 the. presence of impurities or contaminatin substances which may have a deleterious ef. fect. Thus, it is desirable to avoid the pres- ence of sulphur, the halides, ete.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/claim/avoid-sulphur-halides",
+      "target": "ex:msyn/us1908696a/species/halides"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/75",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/7",
+            "quote": "It is important, however, to avoid 10 the. presence of impurities or contaminatin substances which may have a deleterious ef. fect. Thus, it is desirable to avoid the pres- ence of sulphur, the halides, ete.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/claim/avoid-sulphur-halides",
+      "target": "ex:msyn/us1908696a/catalyst/zno-cu-kind"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/76",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/7",
+            "quote": "It is important, however, to avoid 10 the. presence of impurities or contaminatin substances which may have a deleterious ef. fect. Thus, it is desirable to avoid the pres- ence of sulphur, the halides, ete.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "inhibition_kind": "not_stated",
+        "note": "'impurities or contaminating substances which may have a deleterious effect'"
+      },
+      "source": "ex:msyn/us1908696a/catalyst/zno-cu-kind",
+      "target": "ex:msyn/species/sulfur"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/77",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/7",
+            "quote": "It is important, however, to avoid 10 the. presence of impurities or contaminatin substances which may have a deleterious ef. fect. Thus, it is desirable to avoid the pres- ence of sulphur, the halides, ete.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "inhibition_kind": "not_stated",
+        "note": "'impurities or contaminating substances which may have a deleterious effect'"
+      },
+      "source": "ex:msyn/us1908696a/catalyst/zno-cu-kind",
+      "target": "ex:msyn/us1908696a/species/halides"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/78",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1908696a/p3/1",
+            "quote": "1. The method of producing a stable highly active copper zinc oxide catalyst. which com- prises reducing copper carbonate admixed with zinc. carbonate in the proportion of at 5 least two atoms of zinc and one of copper,",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/claim/patent-claim-1",
+      "target": "ex:msyn/us1908696a/catalyst/zno-cu-kind"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/79",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1908696a/p3/1",
+            "quote": "in a heated reducing gas, whereby a stable - highly active catalyst comprising zinc oxide and a stable purplish free copper is pro- duced.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/claim/patent-claim-1",
+      "target": "ex:msyn/us1908696a/treatment/reduction"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/8",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1908696a/p1/6",
+            "quote": "preferably these granules ?° are treated with hydrogen, carbon monoxide, or mixtures of them, at atmospheric pressure and at temperatures ranging from 100° C. to 450° C.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "order": 1
+      },
+      "source": "ex:msyn/us1908696a/sample/zn5-cu1-carbonate",
+      "target": "ex:msyn/us1908696a/treatment/reduction"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/80",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "'9.' = '2.'",
+            "passage": "us1908696a/p3/1",
+            "quote": "9. The method as set forth in claim 1 in which the zinc is taken in the proportion of — at: least four atoms to one of copper.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/claim/patent-claim-2",
+      "target": "ex:msyn/us1908696a/catalyst/zno-cu-kind"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/81",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1908696a/p3/1",
+            "quote": "3. The method as set forth in claim 1 in which the carbonates are freshly prepared.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/claim/patent-claim-3",
+      "target": "ex:msyn/us1908696a/catalyst/zno-cu-kind"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/82",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1908696a/p3/1",
+            "quote": "3. The method as set forth in claim 1 in which the carbonates are freshly prepared.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/claim/patent-claim-3",
+      "target": "ex:msyn/us1908696a/treatment/reduction"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/83",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1908696a/p3/1",
+            "quote": "4. A stable highly active copper zinc oxide catalyst comprising zinc oxide and purplish free copper in the proportion of at least two atoms of zinc to one atom of copper.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/claim/patent-claim-4",
+      "target": "ex:msyn/us1908696a/catalyst/zno-cu-kind"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/84",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1908696a/p3/1",
+            "quote": "5. A catalyst as set forth in claim 4 in 20 which there are at least four atoms of zinc © — to each atom of copper.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/claim/patent-claim-5",
+      "target": "ex:msyn/us1908696a/catalyst/zno-cu-kind"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/85",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1908696a/p3/2",
+            "quote": "6. A catalyst as set forth in claim 4 in which the catalyst is of the form resulting from the reduction of zinc and copper car- 25 bonates in.a heated reducing gas.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/claim/patent-claim-6",
+      "target": "ex:msyn/us1908696a/catalyst/zno-cu-kind"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/86",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1908696a/p3/2",
+            "quote": "6. A catalyst as set forth in claim 4 in which the catalyst is of the form resulting from the reduction of zinc and copper car- 25 bonates in.a heated reducing gas.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1908696a/claim/patent-claim-6",
+      "target": "ex:msyn/us1908696a/treatment/reduction"
+    },
+    {
+      "id": "ex:msyn/us1908696a/link/9",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1908696a/p2/6",
+            "quote": "trate solution of zinc and copper mentioned above zinc and copper compounde by means of a hydroxide of an elemental alkali metal, sodium or potassium.",
+            "source": "ex:msyn/source/us1908696a"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1908696a/catalyst/zn-cu-naoh",
+      "target": "ex:msyn/species/zinc"
+    },
+    {
+      "id": "ex:msyn/us1908696a/preparation/carbonate-coprecipitation/reported-in/us1908696a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1908696a/preparation/carbonate-coprecipitation",
+      "target": "ex:msyn/source/us1908696a"
+    },
+    {
+      "id": "ex:msyn/us1908696a/preparation/naoh-precipitation/reported-in/us1908696a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1908696a/preparation/naoh-precipitation",
+      "target": "ex:msyn/source/us1908696a"
+    },
+    {
+      "id": "ex:msyn/us1908696a/preparation/nh4oh-precipitation/reported-in/us1908696a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1908696a/preparation/nh4oh-precipitation",
+      "target": "ex:msyn/source/us1908696a"
+    },
+    {
+      "id": "ex:msyn/us1908696a/reactor/copper-lined-steel-bomb/reported-in/us1908696a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1908696a/reactor/copper-lined-steel-bomb",
+      "target": "ex:msyn/source/us1908696a"
+    },
+    {
+      "id": "ex:msyn/us1908696a/sample/zn-cu-naoh/reported-in/us1908696a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1908696a/sample/zn-cu-naoh",
+      "target": "ex:msyn/source/us1908696a"
+    },
+    {
+      "id": "ex:msyn/us1908696a/sample/zn-cu-nh4oh/reported-in/us1908696a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1908696a/sample/zn-cu-nh4oh",
+      "target": "ex:msyn/source/us1908696a"
+    },
+    {
+      "id": "ex:msyn/us1908696a/sample/zn5-cu1-carbonate/reported-in/us1908696a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1908696a/sample/zn5-cu1-carbonate",
+      "target": "ex:msyn/source/us1908696a"
+    },
+    {
+      "id": "ex:msyn/us1908696a/species/halides/reported-in/us1908696a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1908696a/species/halides",
+      "target": "ex:msyn/source/us1908696a"
+    },
+    {
+      "id": "ex:msyn/us1908696a/test/200c/reported-in/us1908696a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 2, col. 1, lines 9-12"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1908696a/test/200c",
+      "target": "ex:msyn/source/us1908696a"
+    },
+    {
+      "id": "ex:msyn/us1908696a/test/250c-sv10000/reported-in/us1908696a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 2, col. 1, lines 9-12"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1908696a/test/250c-sv10000",
+      "target": "ex:msyn/source/us1908696a"
+    },
+    {
+      "id": "ex:msyn/us1908696a/test/250c-sv100600/reported-in/us1908696a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 2, col. 1, line 17",
+          "p. 2, col. 1, lines 18-23"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1908696a/test/250c-sv100600",
+      "target": "ex:msyn/source/us1908696a"
+    },
+    {
+      "id": "ex:msyn/us1908696a/test/300c-sv31700/reported-in/us1908696a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 2, col. 1, lines 28-31"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1908696a/test/300c-sv31700",
+      "target": "ex:msyn/source/us1908696a"
+    },
+    {
+      "id": "ex:msyn/us1908696a/test/naoh-300c-sv25000/reported-in/us1908696a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 2, col. 2, lines 81-87"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1908696a/test/naoh-300c-sv25000",
+      "target": "ex:msyn/source/us1908696a"
+    },
+    {
+      "id": "ex:msyn/us1908696a/treatment/reduction/reported-in/us1908696a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1908696a/treatment/reduction",
+      "target": "ex:msyn/source/us1908696a"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/us1908696a"
+}

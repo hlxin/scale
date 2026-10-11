@@ -1,0 +1,5713 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/source/us1875714a",
+      "label": "Source",
+      "props": {
+        "name": "Synthetic methanol process",
+        "kind": "patent",
+        "description": "Published 1932-09-06 (grant date printed on the patent (agrees with the USPTO issue-year table)); in scope: before the 1966-01-01 cutoff. Text: 6 pages ocr (tesseract 5.5.3 (eng, 300 dpi, 2 columns)). Text not redistributed.",
+        "identifiers": {
+          "patent": "US1875714A"
+        },
+        "licence": "US patent; not subject to copyright",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "Synthetic methanol process",
+        "url": "https://patents.google.com/patent/US1875714A",
+        "year": 1932
+      }
+    },
+    {
+      "id": "ex:msyn/us1875714a/catalyst/any-methanol-catalyst",
+      "label": "Catalyst",
+      "props": {
+        "name": "any catalyst suitable for synthetic methanol production",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/5",
+            "quote": "My process is in no way dependent on the use of a specific catalyst.",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/5",
+            "quote": "In general, any catalyst suitable for synthetic methanol pro-- go duction may be employed in the process, these . catalysts ordinarily consisting of mixtures of _ metallic oxides",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "generality": "kind",
+        "note": "the patent refers to catalysts described in U.S. Patents 1,558,559, 1,608,648(?), 1,609,593 and English Patents 229,714(?) and 229,715; the numbers are OCR readings"
+      }
+    },
+    {
+      "id": "ex:msyn/us1875714a/catalyst/zn-cr-oxides",
+      "label": "Catalyst",
+      "props": {
+        "name": "methanol catalyst of zinc and chromium oxides (typical experiment)",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1875714a/p3/5",
+            "quote": "circulated over a methanol catalyst contain-— Ing a mixture of zinc and chromium oxides for a period of 12 hours.",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "generality": "particular"
+      }
+    },
+    {
+      "id": "ex:msyn/us1875714a/claim/1-5-percent-co2-most-favorable",
+      "label": "Claim",
+      "props": {
+        "name": "1-5% CO2 / 99-95% H2 over the catalyst most favorable",
+        "claim_kind": "generalization",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/1",
+            "quote": "hydrogen is greatly decreased the percentage of methanol in the condensate approaches more closely the theoretical figure, (approxi- mately 70%), which indieates that by the use of such proportions the undesirable side",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/1",
+            "quote": "when the gas mixture passing over the catalyst comprises 1-5% carbon di- oxide and 99-95% hydrogen, the most favor- IS able results are obtained.",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "inference_type": "interventional",
+        "scope": "gas mixture passing over the catalyst",
+        "statement": "When the proportion of carbon dioxide to hydrogen is greatly decreased the methanol in the condensate approaches the theoretical figure (approximately 70%), undesirable side reactions being partially or wholly inhibited; the most favorable results are obtained with 1-5% carbon dioxide and 99-95% hydrogen in the gas passing over the catalyst."
+      }
+    },
+    {
+      "id": "ex:msyn/us1875714a/claim/390c-more-favorable",
+      "label": "Claim",
+      "props": {
+        "name": "390 °C more favorable than 420 °C for purity",
+        "claim_kind": "comparison",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/4",
+            "quote": "Since the temperature — employed (390° C.) is a more favorable one, © the purity of the methanol thus produced — is greater;",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/4",
+            "quote": "is greater; for example, Experiment 7 pro- | duced a condensate containing practically the yg theoretical proportions of methanol and.",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "inference_type": "interventional",
+        "statement": "The temperature of 390° C. (Table II) is a more favorable one than that of Table I; the purity of the methanol produced is greater, Experiment 7 giving practically the theoretical proportions of methanol and water."
+      }
+    },
+    {
+      "id": "ex:msyn/us1875714a/claim/above-5-percent-loss",
+      "label": "Claim",
+      "props": {
+        "name": "above 5% CO2 in circulating gas, loss of gases",
+        "claim_kind": "generalization",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/7",
+            "quote": "However if this adjustment produces a cir- 93. culating system gas which contains more ~ than 5% of carbon dioxide, a loss of gases. will occur.on account of the undesirable reac- tions previously described.",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "inference_type": "interventional",
+        "statement": "If the circulating system gas contains more than 5% of carbon dioxide, a loss of gases occurs through the undesirable reactions: large quantities of methane and carbon monoxide build up and the methanol yield is much lower than theoretically obtainable."
+      }
+    },
+    {
+      "id": "ex:msyn/us1875714a/claim/alternative-operation",
+      "label": "Claim",
+      "props": {
+        "name": "3% CO2 with replenishment, or catalyst beds in series",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/6",
+            "quote": "passing a gas of the pro- _ - portion of 3% carbon dioxide and 97% hy- 105 drogen into the system under pressure,",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/7",
+            "quote": "the circulating system may be dispensed _ with and a gas of the correct proportions ,). may be passed through a number of catalyst beds in series,",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The small proportion of carbon dioxide may also be used by circulating a 3% carbon dioxide / 97% hydrogen gas and gradually adding carbon dioxide and occasionally hydrogen, or, without a circulating system, by passing a gas of correct proportions through a number of catalyst beds in series under pressure."
+      }
+    },
+    {
+      "id": "ex:msyn/us1875714a/claim/catalyst-independent",
+      "label": "Claim",
+      "props": {
+        "name": "process not dependent on a specific catalyst",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/5",
+            "quote": "My process is in no way dependent on the use of a specific catalyst.",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/5",
+            "quote": "In general, any catalyst suitable for synthetic methanol pro-- go duction may be employed in the process, these . catalysts ordinarily consisting of mixtures of _ metallic oxides",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The process is in no way dependent on the use of a specific catalyst; any catalyst suitable for synthetic methanol production may be employed, ordinarily mixtures of metallic oxides."
+      }
+    },
+    {
+      "id": "ex:msyn/us1875714a/claim/economy-over-hourly-yield",
+      "label": "Claim",
+      "props": {
+        "name": "economy lies in avoiding side reactions, not in hourly yield",
+        "claim_kind": "comparison",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/2",
+            "quote": "While Experiment 2, employing 6.5% car- bon dioxide in the circulating system, gave’ 30 the largest yield of condensate per hour,",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/3",
+            "quote": "the same volume of condensate per hour as was obtained in Experiment 2 may ‘be obtained in Experiment 4 by. merely doubling the amount of catalyst employed,",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "inference_type": "theoretical",
+        "statement": "Experiment 2 (6.5% CO2) gave the largest yield of condensate per hour, but this is not of prime importance: greatest economy is attained when all gases removed from the process form methanol and water; the hourly volume of Experiment 2 could be obtained under the conditions of Experiment 4 by doubling the catalyst."
+      }
+    },
+    {
+      "id": "ex:msyn/us1875714a/claim/low-co2-optimum",
+      "label": "Claim",
+      "props": {
+        "name": "optimum only with CO2 in extremely small proportion",
+        "claim_kind": "generalization",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'‘Yesults' = 'results'",
+            "passage": "us1875714a/p2/2",
+            "quote": "and pressures to produce methanol, optimum ‘Yesults are obtained only when the carbon dioxide is present in extremely small propor-",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "inference_type": "interventional",
+        "statement": "In the catalytic interaction of carbon dioxide and hydrogen at elevated temperatures and pressures to produce methanol, optimum results are obtained only when the carbon dioxide is present in extremely small proportion to the hydrogen, far less than the theoretical proportion."
+      }
+    },
+    {
+      "id": "ex:msyn/us1875714a/claim/lowered-yield-side-reactions",
+      "label": "Claim",
+      "props": {
+        "name": "lowered methanol in condensate due to side reactions",
+        "claim_kind": "causal",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1875714a/p3/7",
+            "quote": "methanol: in the condensate is attributable NS only to the disadvantageous reactions pre- — ‘viously mentioned,",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "inference_type": "observational",
+        "statement": "The lowered yield of methanol in the condensate (60% instead of 70%) is attributable only to the disadvantageous side reactions, which decompose carbon dioxide and hydrogen without corresponding methanol production."
+      }
+    },
+    {
+      "id": "ex:msyn/us1875714a/claim/patent-claim-1",
+      "label": "Claim",
+      "props": {
+        "name": "claim 1: 1-5% CO2 gas, CO2 kept below approx. 5%",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "claim 1 begins on p. 5",
+            "passage": "us1875714a/p5/7",
+            "quote": "ing a gas consisting of 1-5% carbon dioxide 130",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "us1875714a/p6/1",
+            "quote": "and 99-95% hydrogen over said catalyst, _ circulating said gas mixture to make meth- anol, adding hydrogen and carbon dioxide to the system to replenish that consumed,",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "us1875714a/p6/1",
+            "quote": "being always maintained below approximate- — «ly 5%.",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Process of manufacturing methanol from hydrogen and carbon dioxide over a catalyst at elevated pressure and temperature: passing a gas of 1-5% carbon dioxide and 99-95% hydrogen over the catalyst, circulating it, adding hydrogen and carbon dioxide to replenish that consumed, the carbon dioxide in the system always below approximately 5%."
+      }
+    },
+    {
+      "id": "ex:msyn/us1875714a/claim/patent-claim-2",
+      "label": "Claim",
+      "props": {
+        "name": "claim 2: approx. 3% CO2 / 97% H2 circulated",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "us1875714a/p6/1",
+            "quote": "ing a gas consisting of approximately 3% carbon dioxide and 97% hydrogen over said",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "us1875714a/p6/2",
+            "quote": "system being maintained at approximately",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 6, claim 2",
+            "reading": "vision_ocr",
+            "region": [
+              0.03,
+              0.395,
+              0.41,
+              0.425
+            ],
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "system being maintained at approximately 3%."
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Process as in claim 1 with a gas of approximately 3% carbon dioxide and 97% hydrogen, gradually adding carbon dioxide and sufficient hydrogen to maintain the proportions, the carbon dioxide maintained at approximately 3%."
+      }
+    },
+    {
+      "id": "ex:msyn/us1875714a/claim/patent-claim-3",
+      "label": "Claim",
+      "props": {
+        "name": "claim 3: 1-5% CO2 gas, residual gases replenished",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "us1875714a/p6/3",
+            "quote": "Ing a gas consisting of 1-5% carbon dioxide 8 and 99-95% hydrogen over said catalyst, adding to the residual gases hydrogen and carbon dioxide in sufficient uantities",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "us1875714a/p6/3",
+            "quote": "of system being maintained below approximate- Y 0%.",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 6, claim 3",
+            "reading": "vision_ocr",
+            "region": [
+              0.03,
+              0.56,
+              0.41,
+              0.59
+            ],
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "system being maintained below approximately 5%."
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Process of manufacturing methanol from hydrogen and carbon dioxide: passing a gas of 1-5% carbon dioxide and 99-95% hydrogen over the catalyst, adding to the residual gases hydrogen and carbon dioxide to replenish those consumed, the carbon dioxide maintained below approximately 5%."
+      }
+    },
+    {
+      "id": "ex:msyn/us1875714a/claim/patent-claim-4",
+      "label": "Claim",
+      "props": {
+        "name": "claim 4: approx. 3% CO2 gas, residual gases replenished",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "'8%' is the OCR of '3%' (it complements 97% hydrogen and the claim ends 'approximately 3%')",
+            "passage": "us1875714a/p6/3",
+            "quote": "ing a gas consisting of approximately 8% carbon dioxide and 97% hydrogen over said",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "us1875714a/p6/4",
+            "quote": "being maintained at approximately 3%.",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Process as in claim 3 with a gas of approximately 3% carbon dioxide and 97% hydrogen, the carbon dioxide in the system maintained at approximately 3%."
+      }
+    },
+    {
+      "id": "ex:msyn/us1875714a/claim/pre-catalyst-purifier",
+      "label": "Claim",
+      "props": {
+        "name": "pre-catalyst section removes poisons",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'te' = 'to'",
+            "passage": "us1875714a/p2/6",
+            "quote": "is designed te act as a “pre-catalyst” or puri- — fier, to destroy or absorb any catalyst poisons",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "A first catalyst section acts as a pre-catalyst or purifier to destroy or absorb any catalyst poisons in the gas and so preserve the activity of the main section for the methanol reaction."
+      }
+    },
+    {
+      "id": "ex:msyn/us1875714a/claim/start-up-with-hydrogen",
+      "label": "Claim",
+      "props": {
+        "name": "fill circulating system with hydrogen, then feed theoretical make-up gas",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/3",
+            "quote": "the circu- latory system in which the process operate is _ filled with substantially pure hydrogen gas at 40 a pressure somewhat below the pressure de- _ sired for operation.",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/3",
+            "quote": "a mixture of carbon dioxide and hydrogen’ in the proportions theoretically required to make methanol is supplied to the system.",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/5",
+            "quote": "In this manner a most desirable “static condition” is set up",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "the patent states this start-up process is the subject of application Serial No. 154,635 and that the invention does not depend on it",
+        "statement": "The circulating system is filled with substantially pure hydrogen (or a gas with some carbon dioxide) and then supplied with make-up gas of theoretical CO2/H2 proportions at a rate keeping the pressure constant, so that the carbon dioxide at the catalyst is very small and a static condition of unvarying circulating-gas composition is set up."
+      }
+    },
+    {
+      "id": "ex:msyn/us1875714a/claim/static-condition",
+      "label": "Claim",
+      "props": {
+        "name": "static condition reached in the circulating gas",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1875714a/p3/7",
+            "quote": "prior gas analyses showed that a practically q10 . static condition had been reached.",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "inference_type": "observational",
+        "statement": "With a gas mixture of theoretical proportions a practically static condition is reached in the circulating system after a time: the proportions of methane and carbon monoxide are no longer increasing."
+      }
+    },
+    {
+      "id": "ex:msyn/us1875714a/claim/table-i-trend",
+      "label": "Claim",
+      "props": {
+        "name": "less CO2 in circulating gas, more methanol in condensate",
+        "claim_kind": "comparison",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/1",
+            "quote": "Table I indicates that as the percentage of carbon dioxide in the circulating gases was 45 reduced from 11% to 2%, the per cent of _°“ ynethanol in the condensate was increased - from 60.5% to 66%.",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/1",
+            "quote": "The_ percentages of methane and carbon monoxide present in the. circulating system are also reduced _as the 15 result of the dimunition in earbon dioxide.",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "inference_type": "interventional",
+        "statement": "As the carbon dioxide in the circulating gases was reduced from 11% to 2%, methanol in the condensate increased from 60.5% to 66%, and methane and carbon monoxide in the circulating system were also reduced."
+      }
+    },
+    {
+      "id": "ex:msyn/us1875714a/claim/theoretical-proportions-side-products",
+      "label": "Claim",
+      "props": {
+        "name": "methane, CO, carbon and excess water at theoretical proportions",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1875714a/p3/3",
+            "quote": "I have discovered that when methanol is produced from a mixture of theoretical pro- portions of carbon dioxide and hydrogen,",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1875714a/p3/3",
+            "quote": "there is a formation of methane and carbon monoxide in the circulating gas. mixture and, further that free carbon is deposited in the appa- ratus.",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1875714a/p3/3",
+            "quote": "Also, the proportion of water found with the methanol when the mixture is re- moved, by: condensation, from the apparatus, is much greater than that that should be formed by the methanol reaction,",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "inference_type": "observational",
+        "statement": "When methanol is produced from theoretical (or somewhat lower) proportions of carbon dioxide and hydrogen, methane and carbon monoxide form in the circulating gas, free carbon is deposited in the apparatus, and the water with the methanol is much greater than the methanol reaction should form."
+      }
+    },
+    {
+      "id": "ex:msyn/us1875714a/feed/table-i-exp-1-circulating-gas",
+      "label": "Feed",
+      "props": {
+        "name": "Table I Exp. 1: gas circulating over catalyst",
+        "description": "analysis of the gas circulating over the catalyst at the time of test (make-up gas of approximately theoretical CO2/H2 proportions)",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 4, Table I",
+            "passage": "us1875714a/p4/8",
+            "quote": "1__.ei ie 110!] .°7.5 10 71.5 2.9] 60.5 12",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 4, Table I, Expt. 1",
+            "reading": "vision_ocr",
+            "region": [
+              0.41,
+              0.772,
+              0.79,
+              0.781
+            ],
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "1........ 11.0 7.5 10 71.5 2.9 60.5 12"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "Analysis of gases circulating - | | |",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "generality": "particular"
+      }
+    },
+    {
+      "id": "ex:msyn/us1875714a/feed/table-i-exp-2-circulating-gas",
+      "label": "Feed",
+      "props": {
+        "name": "Table I Exp. 2: gas circulating over catalyst",
+        "description": "analysis of the gas circulating over the catalyst at the time of test (make-up gas of approximately theoretical CO2/H2 proportions)",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 4, Table I",
+            "passage": "us1875714a/p4/8",
+            "quote": "2 ---- 6.5 7.0 9] 77.5 3.4) 62../ It",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 4, Table I, Expt. 2",
+            "reading": "vision_ocr",
+            "region": [
+              0.41,
+              0.78,
+              0.79,
+              0.788
+            ],
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "2........ 6.5 7.0 9 77.5 3.4 62 11"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "Analysis of gases circulating - | | |",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "generality": "particular"
+      }
+    },
+    {
+      "id": "ex:msyn/us1875714a/feed/table-i-exp-3-circulating-gas",
+      "label": "Feed",
+      "props": {
+        "name": "Table I Exp. 3: gas circulating over catalyst",
+        "description": "analysis of the gas circulating over the catalyst at the time of test (make-up gas of approximately theoretical CO2/H2 proportions)",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 4, Table I",
+            "passage": "us1875714a/p4/8",
+            "quote": "3... ..-. 3,2 5.2 6 85. 6 3.1; -:63 12",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 4, Table I, Expt. 3",
+            "reading": "vision_ocr",
+            "region": [
+              0.41,
+              0.786,
+              0.79,
+              0.796
+            ],
+            "second_reading": "3 | 3.2 | 5.2 | 6 | 85.6 | 3.1 | 63 | 12",
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "3........ 3.2 5.2 6 85.6 3.1 63 12"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "Analysis of gases circulating - | | |",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "generality": "particular"
+      }
+    },
+    {
+      "id": "ex:msyn/us1875714a/feed/table-i-exp-4-circulating-gas",
+      "label": "Feed",
+      "props": {
+        "name": "Table I Exp. 4: gas circulating over catalyst",
+        "description": "analysis of the gas circulating over the catalyst at the time of test (make-up gas of approximately theoretical CO2/H2 proportions)",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 4, Table I",
+            "note": "row of Experiment 4 (row label garbled)",
+            "passage": "us1875714a/p4/8",
+            "quote": ": ee 2.0 3.2 2 92,8 2.0] ‘66 10",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 4, Table I, Expt. 4",
+            "reading": "vision_ocr",
+            "region": [
+              0.41,
+              0.794,
+              0.79,
+              0.803
+            ],
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "4........ 2.0 3.2 2 92.8 2.0 66 10"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "Analysis of gases circulating - | | |",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "generality": "particular"
+      }
+    },
+    {
+      "id": "ex:msyn/us1875714a/feed/table-ii-exp-5-circulating-gas",
+      "label": "Feed",
+      "props": {
+        "name": "Table II Exp. 5: gas circulating over catalyst",
+        "description": "analysis of the gas circulating over the catalyst at the time of test (make-up gas of approximately theoretical CO2/H2 proportions)",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 5, Table II, Expt. 5",
+            "reading": "vision_ocr",
+            "region": [
+              0.19,
+              0.774,
+              0.57,
+              0.789
+            ],
+            "second_reading": "5 | 11 | 15 | 8 | 66 | 2.45 | 63 | 12",
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "5........ 11 15 8 66 2.45 63 12"
+          }
+        ],
+        "generality": "particular"
+      }
+    },
+    {
+      "id": "ex:msyn/us1875714a/feed/table-ii-exp-6-circulating-gas",
+      "label": "Feed",
+      "props": {
+        "name": "Table II Exp. 6: gas circulating over catalyst",
+        "description": "analysis of the gas circulating over the catalyst at the time of test (make-up gas of approximately theoretical CO2/H2 proportions)",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 5, Table II, Expt. 6",
+            "reading": "vision_ocr",
+            "region": [
+              0.19,
+              0.783,
+              0.57,
+              0.797
+            ],
+            "second_reading": "6 | 7.2 | 13 | 6 | 73.8 | 1.95 | 65 | 12",
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "6........ 7.2 13 6 73.8 1.95 65 12"
+          }
+        ],
+        "generality": "particular"
+      }
+    },
+    {
+      "id": "ex:msyn/us1875714a/feed/table-ii-exp-7-circulating-gas",
+      "label": "Feed",
+      "props": {
+        "name": "Table II Exp. 7: gas circulating over catalyst",
+        "description": "analysis of the gas circulating over the catalyst at the time of test (make-up gas of approximately theoretical CO2/H2 proportions)",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "disagree",
+            "locator": "p. 5, Table II, Expt. 7",
+            "reading": "vision_ocr",
+            "region": [
+              0.19,
+              0.79,
+              0.57,
+              0.805
+            ],
+            "second_reading": "7 | 3 | 2.5 | 1 | 93.5 | 1.85 | 69 | 10",
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "7........ 3 2.5 1 93.5 1.85 69 10"
+          }
+        ],
+        "generality": "particular"
+      }
+    },
+    {
+      "id": "ex:msyn/us1875714a/feed/theoretical-co2-h2",
+      "label": "Feed",
+      "props": {
+        "name": "CO2 + H2 in theoretical proportions (approx. 25% CO2)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "'(1. 80 e.' = '(i. e.'; 80 is a line number",
+            "passage": "us1875714a/p3/5",
+            "quote": "A gas mixture comprising theoretical pro- portions of hydrogen and carbon dioxide (1. 80 e. approximately 25% carbon dioxide)",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "generality": "kind"
+      }
+    },
+    {
+      "id": "ex:msyn/us1875714a/hypothesis/ch4-co-formed-early",
+      "label": "Hypothesis",
+      "props": {
+        "name": "methane and CO formed in the first stages",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/2",
+            "quote": "The fact that in Experiment 4 the percentage _ of carbon monoxide in the circulating gases exceeded the percentage of carbon dioxide is ~ of no importance,",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "'Ap-' ends the previous line: 'Apparently'",
+            "passage": "us1875714a/p5/2",
+            "quote": "parently the methane and carbon monoxide 93 were formed during the first stages of reac- - tion before a static condition in the circulat- ing system was attained.",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "hypothesis_kind": "explanatory",
+        "hypothesis_status": "proposed",
+        "statement": "In Experiment 4 the methane and carbon monoxide were apparently formed during the first stages of reaction, before a static condition in the circulating system was attained."
+      }
+    },
+    {
+      "id": "ex:msyn/us1875714a/hypothesis/several-primary-reactions",
+      "label": "Hypothesis",
+      "props": {
+        "name": "several primary reactions at different rates",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1875714a/p3/3",
+            "quote": "From the results thus attained it appears that there are a number of primary reactions occurring at different rates, rather than one or two simple reactions.",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "'occur 12' = 'occur in'",
+            "passage": "us1875714a/p3/3",
+            "quote": "The group of reactions which occur 12 varying degrees is believed to be as follows",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 3, reactions (1)-(7)",
+            "reading": "vision_ocr",
+            "region": [
+              0.22,
+              0.73,
+              0.54,
+              0.825
+            ],
+            "second_reading": "The group of reactions which occur in varying degrees is believed to be as follows:— (1) 3H2+CO2⇄H2O+CH3OH; (2) CO2+H2⇄CO+H2O; (3) CO2+4H2⇄CH4+H2O; (4) CO+3H2⇄CH4+H2O; (5) CO+2H2⇄CH3OH; (6) CH4+CO2+H2⇄2CH3OH; (7) 2CO→CO2+C.",
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "(1) 3H2+CO2⇄H2O+CH3OH; (2) CO2+H2⇄CO+H2O; (3) CO2+4H2⇄CH4+H2O; (4) CO+3H2⇄CH4+H2O; (5) CO+2H2⇄CH3OH; (6) CH4+CO2+H2⇄2CH3OH; (7) 2CO→CO2+C."
+          }
+        ],
+        "hypothesis_kind": "mechanistic",
+        "hypothesis_status": "proposed",
+        "statement": "A number of primary reactions occur at different rates, rather than one or two simple reactions; the group is believed to be (1) 3H2+CO2⇄H2O+CH3OH; (2) CO2+H2⇄CO+H2O; (3) CO2+4H2⇄CH4+H2O; (4) CO+3H2⇄CH4+H2O; (5) CO+2H2⇄CH3OH; (6) CH4+CO2+H2⇄2CH3OH; (7) 2CO→CO2+C."
+      }
+    },
+    {
+      "id": "ex:msyn/us1875714a/reactor/circulating-system",
+      "label": "Reactor",
+      "props": {
+        "name": "circulating system of the experiments",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "quote": "The residual (unre- 9 acted) gases were supplemented by fresh gas _ and recirculated.",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "reactor_kind": "circulating"
+      }
+    },
+    {
+      "id": "ex:msyn/us1875714a/reactor/fig1-converter",
+      "label": "Reactor",
+      "props": {
+        "name": "Fig. 1 apparatus: converter G with catalyst basket in a gas circulating system",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1875714a/p2/5",
+            "quote": "F into the converter (catalyst bomb) G.",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1875714a/p2/4",
+            "quote": "to recirculate the residual gases over the cata-. lyst in cyclic fashion, nothing being removed from the process except the water and meth- anol which are formed.",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'te' = 'to'",
+            "passage": "us1875714a/p2/6",
+            "quote": "is designed te act as a “pre-catalyst” or puri- — fier, to destroy or absorb any catalyst poisons",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "reactor_kind": "circulating",
+        "specifications": {
+          "catalyst_sections": {
+            "status": "present",
+            "as_reported": "two sections, J and J’",
+            "note": "section J a pre-catalyst or purifier, section J' for the methanol reaction",
+            "unit": "1",
+            "value": 2
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us1875714a/sample/table-i",
+      "label": "CatalystSample",
+      "props": {
+        "name": "catalyst of the Table I experiments (not identified)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "Liters of condensate per hour per liter of catalyst.",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "preparation_status": "not_reported",
+        "sample_kind": "reactor_charge"
+      }
+    },
+    {
+      "id": "ex:msyn/us1875714a/sample/table-ii",
+      "label": "CatalystSample",
+      "props": {
+        "name": "catalyst of the Table II experiments (not identified)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/3",
+            "quote": "In the experiments reported in Table Il a pressure of 3500 pounds was employed",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "preparation_status": "not_reported",
+        "sample_kind": "reactor_charge"
+      }
+    },
+    {
+      "id": "ex:msyn/us1875714a/sample/typical-experiment",
+      "label": "CatalystSample",
+      "props": {
+        "name": "catalyst charge of the typical experiment",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1875714a/p3/5",
+            "quote": "circulated over a methanol catalyst contain-— Ing a mixture of zinc and chromium oxides for a period of 12 hours.",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "preparation_status": "not_reported",
+        "sample_kind": "reactor_charge"
+      }
+    },
+    {
+      "id": "ex:msyn/us1875714a/species/chromium-oxide",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "chromium oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1875714a/p3/5",
+            "quote": "Ing a mixture of zinc and chromium oxides",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "note": "formula not stated"
+      }
+    },
+    {
+      "id": "ex:msyn/us1875714a/species/metallic-oxides",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "mixtures of metallic oxides (class)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/5",
+            "quote": "catalysts ordinarily consisting of mixtures of _ metallic oxides",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1875714a/test/table-i-exp-1",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Table I, Experiment 1",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 4, Table I",
+            "passage": "us1875714a/p4/8",
+            "quote": "1__.ei ie 110!] .°7.5 10 71.5 2.9] 60.5 12",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 4, Table I, Expt. 1",
+            "reading": "vision_ocr",
+            "region": [
+              0.41,
+              0.772,
+              0.79,
+              0.781
+            ],
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "1........ 11.0 7.5 10 71.5 2.9 60.5 12"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "The tem- perature employed was 420° C. in each case,",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/1",
+            "quote": "and a. space velocity, of 100,000 was em- ployed.",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "Liters of condensate per hour per liter of catalyst.",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 4",
+            "note": "'Fercent' = 'Percent'",
+            "passage": "us1875714a/p4/8",
+            "quote": "Fercent by volume of methanol in condensate (remainder being",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "Hours of operation at time of test",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "In the experiments above reported, a pres- sure of 3500 pounds was employed",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "pressure": {
+          "status": "present",
+          "as_reported": "3500 pounds",
+          "note": "per square inch not printed",
+          "unit": "lb/in2",
+          "value": 3500
+        },
+        "results": {
+          "methanol_in_condensate": {
+            "status": "present",
+            "as_reported": "60.5",
+            "note": "column 'Purity**': percent by volume of methanol in condensate, remainder water",
+            "unit": "% by volume",
+            "value": 60.5
+          }
+        },
+        "space_time_yield": {
+          "status": "present",
+          "as_reported": "2.9",
+          "note": "column 'Yield*': liters of condensate per hour per liter of catalyst",
+          "unit": "L/(h·L catalyst)",
+          "value": 2.9
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "100,000",
+          "note": "no unit printed",
+          "unit": "not stated",
+          "value": 100000
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "420° C. in each case",
+          "unit": "°C",
+          "value": 420
+        },
+        "temperature_measured_at": "not_reported",
+        "test_kind": "activity",
+        "test_label": "Experiment 1",
+        "time_on_stream": {
+          "status": "present",
+          "as_reported": "12",
+          "note": "column 'Operation***': hours of operation at time of test",
+          "unit": "h",
+          "value": 12
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us1875714a/test/table-i-exp-2",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Table I, Experiment 2",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 4, Table I",
+            "passage": "us1875714a/p4/8",
+            "quote": "2 ---- 6.5 7.0 9] 77.5 3.4) 62../ It",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 4, Table I, Expt. 2",
+            "reading": "vision_ocr",
+            "region": [
+              0.41,
+              0.78,
+              0.79,
+              0.788
+            ],
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "2........ 6.5 7.0 9 77.5 3.4 62 11"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "The tem- perature employed was 420° C. in each case,",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/1",
+            "quote": "and a. space velocity, of 100,000 was em- ployed.",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "Liters of condensate per hour per liter of catalyst.",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 4",
+            "note": "'Fercent' = 'Percent'",
+            "passage": "us1875714a/p4/8",
+            "quote": "Fercent by volume of methanol in condensate (remainder being",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "Hours of operation at time of test",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "In the experiments above reported, a pres- sure of 3500 pounds was employed",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "pressure": {
+          "status": "present",
+          "as_reported": "3500 pounds",
+          "note": "per square inch not printed",
+          "unit": "lb/in2",
+          "value": 3500
+        },
+        "results": {
+          "methanol_in_condensate": {
+            "status": "present",
+            "as_reported": "62",
+            "note": "column 'Purity**': percent by volume of methanol in condensate, remainder water; OCR read '62../', the page image reads '62' (re-curation 2026-09-29)",
+            "unit": "% by volume",
+            "value": 62
+          }
+        },
+        "space_time_yield": {
+          "status": "present",
+          "as_reported": "3.4",
+          "note": "column 'Yield*': liters of condensate per hour per liter of catalyst",
+          "unit": "L/(h·L catalyst)",
+          "value": 3.4
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "100,000",
+          "note": "no unit printed",
+          "unit": "not stated",
+          "value": 100000
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "420° C. in each case",
+          "unit": "°C",
+          "value": 420
+        },
+        "temperature_measured_at": "not_reported",
+        "test_kind": "activity",
+        "test_label": "Experiment 2",
+        "time_on_stream": {
+          "status": "present",
+          "as_reported": "11",
+          "note": "column 'Operation***': hours of operation at time of test; OCR read 'It', the page image reads '11' (re-curation 2026-09-29)",
+          "unit": "h",
+          "value": 11
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us1875714a/test/table-i-exp-3",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Table I, Experiment 3",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 4, Table I",
+            "passage": "us1875714a/p4/8",
+            "quote": "3... ..-. 3,2 5.2 6 85. 6 3.1; -:63 12",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 4, Table I, Expt. 3",
+            "reading": "vision_ocr",
+            "region": [
+              0.41,
+              0.786,
+              0.79,
+              0.796
+            ],
+            "second_reading": "3 | 3.2 | 5.2 | 6 | 85.6 | 3.1 | 63 | 12",
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "3........ 3.2 5.2 6 85.6 3.1 63 12"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "The tem- perature employed was 420° C. in each case,",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/1",
+            "quote": "and a. space velocity, of 100,000 was em- ployed.",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "Liters of condensate per hour per liter of catalyst.",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 4",
+            "note": "'Fercent' = 'Percent'",
+            "passage": "us1875714a/p4/8",
+            "quote": "Fercent by volume of methanol in condensate (remainder being",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "Hours of operation at time of test",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "In the experiments above reported, a pres- sure of 3500 pounds was employed",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "pressure": {
+          "status": "present",
+          "as_reported": "3500 pounds",
+          "note": "per square inch not printed",
+          "unit": "lb/in2",
+          "value": 3500
+        },
+        "results": {
+          "methanol_in_condensate": {
+            "status": "present",
+            "as_reported": "63",
+            "note": "column 'Purity**': percent by volume of methanol in condensate, remainder water",
+            "unit": "% by volume",
+            "value": 63
+          }
+        },
+        "space_time_yield": {
+          "status": "present",
+          "as_reported": "3.1",
+          "note": "column 'Yield*': liters of condensate per hour per liter of catalyst",
+          "unit": "L/(h·L catalyst)",
+          "value": 3.1
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "100,000",
+          "note": "no unit printed",
+          "unit": "not stated",
+          "value": 100000
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "420° C. in each case",
+          "unit": "°C",
+          "value": 420
+        },
+        "temperature_measured_at": "not_reported",
+        "test_kind": "activity",
+        "test_label": "Experiment 3",
+        "time_on_stream": {
+          "status": "present",
+          "as_reported": "12",
+          "note": "column 'Operation***': hours of operation at time of test",
+          "unit": "h",
+          "value": 12
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us1875714a/test/table-i-exp-4",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Table I, Experiment 4",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 4, Table I",
+            "note": "row of Experiment 4 (row label garbled)",
+            "passage": "us1875714a/p4/8",
+            "quote": ": ee 2.0 3.2 2 92,8 2.0] ‘66 10",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 4, Table I, Expt. 4",
+            "reading": "vision_ocr",
+            "region": [
+              0.41,
+              0.794,
+              0.79,
+              0.803
+            ],
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "4........ 2.0 3.2 2 92.8 2.0 66 10"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "The tem- perature employed was 420° C. in each case,",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/1",
+            "quote": "and a. space velocity, of 100,000 was em- ployed.",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "Liters of condensate per hour per liter of catalyst.",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 4",
+            "note": "'Fercent' = 'Percent'",
+            "passage": "us1875714a/p4/8",
+            "quote": "Fercent by volume of methanol in condensate (remainder being",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "Hours of operation at time of test",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "In the experiments above reported, a pres- sure of 3500 pounds was employed",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "pressure": {
+          "status": "present",
+          "as_reported": "3500 pounds",
+          "note": "per square inch not printed",
+          "unit": "lb/in2",
+          "value": 3500
+        },
+        "results": {
+          "methanol_in_condensate": {
+            "status": "present",
+            "as_reported": "66",
+            "note": "column 'Purity**': percent by volume of methanol in condensate, remainder water",
+            "unit": "% by volume",
+            "value": 66
+          }
+        },
+        "space_time_yield": {
+          "status": "present",
+          "as_reported": "2.0",
+          "note": "column 'Yield*': liters of condensate per hour per liter of catalyst",
+          "unit": "L/(h·L catalyst)",
+          "value": 2.0
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "100,000",
+          "note": "no unit printed",
+          "unit": "not stated",
+          "value": 100000
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "420° C. in each case",
+          "unit": "°C",
+          "value": 420
+        },
+        "temperature_measured_at": "not_reported",
+        "test_kind": "activity",
+        "test_label": "Experiment 4",
+        "time_on_stream": {
+          "status": "present",
+          "as_reported": "10",
+          "note": "column 'Operation***': hours of operation at time of test",
+          "unit": "h",
+          "value": 10
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us1875714a/test/table-ii-exp-5",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Table II, Experiment 5",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 5, Table II, Expt. 5",
+            "reading": "vision_ocr",
+            "region": [
+              0.19,
+              0.774,
+              0.57,
+              0.789
+            ],
+            "second_reading": "5 | 11 | 15 | 8 | 66 | 2.45 | 63 | 12",
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "5........ 11 15 8 66 2.45 63 12"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/3",
+            "quote": "In the experiments reported in Table Il a pressure of 3500 pounds was employed",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/4",
+            "quote": "each case a temperature of 390° C. and & . space velocity of 60,000 was employed.",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 5, Table II footnotes",
+            "passage": "us1875714a/p4/8",
+            "quote": "Liters of condensate per hour per liter of catalyst.",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "pressure": {
+          "status": "present",
+          "as_reported": "3500 pounds",
+          "note": "per square inch not printed",
+          "unit": "lb/in2",
+          "value": 3500
+        },
+        "results": {
+          "methanol_in_condensate": {
+            "status": "present",
+            "as_reported": "63",
+            "note": "column 'Purity**': percent by volume of methanol in condensate, remainder water",
+            "unit": "% by volume",
+            "value": 63
+          }
+        },
+        "space_time_yield": {
+          "status": "present",
+          "as_reported": "2.45",
+          "note": "column 'Yield*': liters of condensate per hour per liter of catalyst",
+          "unit": "L/(h·L catalyst)",
+          "value": 2.45
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "60,000",
+          "note": "no unit printed",
+          "unit": "not stated",
+          "value": 60000
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "390° C.",
+          "unit": "°C",
+          "value": 390
+        },
+        "temperature_measured_at": "not_reported",
+        "test_kind": "activity",
+        "test_label": "Experiment 5",
+        "time_on_stream": {
+          "status": "present",
+          "as_reported": "12",
+          "note": "column 'Time of operation***': hours of operation at time of test",
+          "unit": "h",
+          "value": 12
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us1875714a/test/table-ii-exp-6",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Table II, Experiment 6",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 5, Table II, Expt. 6",
+            "reading": "vision_ocr",
+            "region": [
+              0.19,
+              0.783,
+              0.57,
+              0.797
+            ],
+            "second_reading": "6 | 7.2 | 13 | 6 | 73.8 | 1.95 | 65 | 12",
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "6........ 7.2 13 6 73.8 1.95 65 12"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/3",
+            "quote": "In the experiments reported in Table Il a pressure of 3500 pounds was employed",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/4",
+            "quote": "each case a temperature of 390° C. and & . space velocity of 60,000 was employed.",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 5, Table II footnotes",
+            "passage": "us1875714a/p4/8",
+            "quote": "Liters of condensate per hour per liter of catalyst.",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "pressure": {
+          "status": "present",
+          "as_reported": "3500 pounds",
+          "note": "per square inch not printed",
+          "unit": "lb/in2",
+          "value": 3500
+        },
+        "results": {
+          "methanol_in_condensate": {
+            "status": "present",
+            "as_reported": "65",
+            "note": "column 'Purity**': percent by volume of methanol in condensate, remainder water",
+            "unit": "% by volume",
+            "value": 65
+          }
+        },
+        "space_time_yield": {
+          "status": "present",
+          "as_reported": "1.95",
+          "note": "column 'Yield*': liters of condensate per hour per liter of catalyst",
+          "unit": "L/(h·L catalyst)",
+          "value": 1.95
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "60,000",
+          "note": "no unit printed",
+          "unit": "not stated",
+          "value": 60000
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "390° C.",
+          "unit": "°C",
+          "value": 390
+        },
+        "temperature_measured_at": "not_reported",
+        "test_kind": "activity",
+        "test_label": "Experiment 6",
+        "time_on_stream": {
+          "status": "present",
+          "as_reported": "12",
+          "note": "column 'Time of operation***': hours of operation at time of test",
+          "unit": "h",
+          "value": 12
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us1875714a/test/table-ii-exp-7",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Table II, Experiment 7",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "disagree",
+            "locator": "p. 5, Table II, Expt. 7",
+            "reading": "vision_ocr",
+            "region": [
+              0.19,
+              0.79,
+              0.57,
+              0.805
+            ],
+            "second_reading": "7 | 3 | 2.5 | 1 | 93.5 | 1.85 | 69 | 10",
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "7........ 3 2.5 1 93.5 1.85 69 10"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/3",
+            "quote": "In the experiments reported in Table Il a pressure of 3500 pounds was employed",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/4",
+            "quote": "each case a temperature of 390° C. and & . space velocity of 60,000 was employed.",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 5, Table II footnotes",
+            "passage": "us1875714a/p4/8",
+            "quote": "Liters of condensate per hour per liter of catalyst.",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/4",
+            "quote": "is greater; for example, Experiment 7 pro- | duced a condensate containing practically the yg theoretical proportions of methanol and.",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "note": "the text says Experiment 7 produced a condensate containing practically the theoretical proportions of methanol and water",
+        "pressure": {
+          "status": "present",
+          "as_reported": "3500 pounds",
+          "note": "per square inch not printed",
+          "unit": "lb/in2",
+          "value": 3500
+        },
+        "results": {
+          "methanol_in_condensate": {
+            "status": "present",
+            "as_reported": "69",
+            "note": "column 'Purity**': percent by volume of methanol in condensate, remainder water",
+            "unit": "% by volume",
+            "value": 69
+          }
+        },
+        "space_time_yield": {
+          "status": "present",
+          "as_reported": "1.85",
+          "note": "column 'Yield*': liters of condensate per hour per liter of catalyst",
+          "unit": "L/(h·L catalyst)",
+          "value": 1.85
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "60,000",
+          "note": "no unit printed",
+          "unit": "not stated",
+          "value": 60000
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "390° C.",
+          "unit": "°C",
+          "value": 390
+        },
+        "temperature_measured_at": "not_reported",
+        "test_kind": "activity",
+        "test_label": "Experiment 7",
+        "time_on_stream": {
+          "status": "present",
+          "as_reported": "10",
+          "note": "column 'Time of operation***': hours of operation at time of test",
+          "unit": "h",
+          "value": 10
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us1875714a/test/table-ii-series",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Table II experiments at 390 °C (series; rows 5-7 recorded as tests table-ii-exp-5..7)",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/3",
+            "quote": "In the experiments reported in Table Il a pressure of 3500 pounds was employed",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/4",
+            "quote": "each case a temperature of 390° C. and & . space velocity of 60,000 was employed.",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/4",
+            "quote": "is greater; for example, Experiment 7 pro- | duced a condensate containing practically the yg theoretical proportions of methanol and.",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "note": "Experiment 7 produced a condensate containing practically the theoretical proportions of methanol and water",
+        "pressure": {
+          "status": "present",
+          "as_reported": "3500 pounds",
+          "note": "per square inch not printed",
+          "unit": "lb/in2",
+          "value": 3500
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "60,000",
+          "note": "no unit printed",
+          "unit": "not stated",
+          "value": 60000
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "390° C.",
+          "unit": "°C",
+          "value": 390
+        },
+        "temperature_measured_at": "not_reported",
+        "test_kind": "activity",
+        "test_label": "Table II"
+      }
+    },
+    {
+      "id": "ex:msyn/us1875714a/test/typical-experiment",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "typical experiment with theoretical CO2/H2 proportions",
+        "driving_forces": [
+          "thermo"
+        ],
+        "duration": {
+          "status": "present",
+          "as_reported": "12 hours",
+          "unit": "h",
+          "value": 12
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "'(1. 80 e.' = '(i. e.'; 80 is a line number",
+            "passage": "us1875714a/p3/5",
+            "quote": "A gas mixture comprising theoretical pro- portions of hydrogen and carbon dioxide (1. 80 e. approximately 25% carbon dioxide)",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1875714a/p3/5",
+            "quote": "circulated over a methanol catalyst contain-— Ing a mixture of zinc and chromium oxides for a period of 12 hours.",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1875714a/p3/5",
+            "quote": "The catalyst tem- ‘perature was 420° C. and the gas pressure 85 ‘was 3500 pounds.",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1875714a/p3/6",
+            "quote": "Under these conditions there was produced 1.5 liters of liquid per hour per liter of catalyst, the liquid showing 60% methanol on analysis where theoreti- 95 cally it should contain 70% by volume.",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1875714a/p3/6",
+            "quote": "An analysis of the circulating gas after 12 hours of reaction showed the following composi-— tion",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1875714a/p3/6",
+            "quote": "Carbon dioxide _..21",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1875714a/p3/6",
+            "quote": "Carbon monoxide. 12",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 3, gas analysis",
+            "reading": "vision_ocr",
+            "region": [
+              0.63,
+              0.555,
+              0.86,
+              0.61
+            ],
+            "second_reading": "Percent; Carbon dioxide | 21; Carbon monoxide | 12; Methane | 5.2; Hydrogen | 61.8",
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "Per cent Carbon dioxide---21 Carbon monoxide-12 Methane--------- 5.2 Hydrogen-------- 61.8"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "pressure": {
+          "status": "present",
+          "as_reported": "3500 pounds",
+          "note": "printed '3500 pounds'; per square inch not printed",
+          "unit": "lb/in2",
+          "value": 3500
+        },
+        "results": {
+          "circulating_gas_ch4_after_12_h": {
+            "status": "present",
+            "as_reported": "Methane--------- 5.2",
+            "note": "unit 'Per cent' from the heading; read from the page image (OCR line garbled)",
+            "unit": "%",
+            "value": 5.2
+          },
+          "circulating_gas_co2_after_12_h": {
+            "status": "present",
+            "as_reported": "Carbon dioxide _..21",
+            "note": "unit 'Percent' from the table heading",
+            "unit": "%",
+            "value": 21
+          },
+          "circulating_gas_co_after_12_h": {
+            "status": "present",
+            "as_reported": "Carbon monoxide. 12",
+            "note": "unit 'Percent' from the table heading",
+            "unit": "%",
+            "value": 12
+          },
+          "circulating_gas_h2_after_12_h": {
+            "status": "present",
+            "as_reported": "Hydrogen-------- 61.8",
+            "note": "unit 'Per cent' from the heading; read from the page image (line lost in the OCR text)",
+            "unit": "%",
+            "value": 61.8
+          },
+          "methanol_in_liquid": {
+            "status": "present",
+            "as_reported": "60% methanol",
+            "unit": "%",
+            "value": 60
+          },
+          "theoretical_methanol_in_liquid": {
+            "status": "present",
+            "as_reported": "70% by volume",
+            "note": "what the liquid theoretically should contain",
+            "unit": "% by volume",
+            "value": 70
+          }
+        },
+        "space_time_yield": {
+          "status": "present",
+          "as_reported": "1.5 liters of liquid per hour per liter of catalyst",
+          "basis": "liquid condensate",
+          "unit": "L/(h·L catalyst)",
+          "value": 1.5
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "420° C.",
+          "note": "catalyst temperature",
+          "unit": "°C",
+          "value": 420
+        },
+        "temperature_measured_at": "catalyst_bed",
+        "test_kind": "activity"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/reaction/co-hydrogenation-to-methanol/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/source/us1875714a"
+    },
+    {
+      "id": "ex:msyn/reaction/co2-hydrogenation-to-methanol/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/reaction/co2-hydrogenation-to-methanol",
+      "target": "ex:msyn/source/us1875714a"
+    },
+    {
+      "id": "ex:msyn/source/us1875714a/assignee",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "role": "assignee"
+      },
+      "source": "ex:msyn/source/us1875714a",
+      "target": "ex:msyn/institution/commercial-solvents-corp"
+    },
+    {
+      "id": "ex:msyn/us1875714a/catalyst/any-methanol-catalyst/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875714a/catalyst/any-methanol-catalyst",
+      "target": "ex:msyn/source/us1875714a"
+    },
+    {
+      "id": "ex:msyn/us1875714a/catalyst/zn-cr-oxides/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875714a/catalyst/zn-cr-oxides",
+      "target": "ex:msyn/source/us1875714a"
+    },
+    {
+      "id": "ex:msyn/us1875714a/claim/1-5-percent-co2-most-favorable/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875714a/claim/1-5-percent-co2-most-favorable",
+      "target": "ex:msyn/source/us1875714a"
+    },
+    {
+      "id": "ex:msyn/us1875714a/claim/390c-more-favorable/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875714a/claim/390c-more-favorable",
+      "target": "ex:msyn/source/us1875714a"
+    },
+    {
+      "id": "ex:msyn/us1875714a/claim/above-5-percent-loss/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875714a/claim/above-5-percent-loss",
+      "target": "ex:msyn/source/us1875714a"
+    },
+    {
+      "id": "ex:msyn/us1875714a/claim/alternative-operation/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875714a/claim/alternative-operation",
+      "target": "ex:msyn/source/us1875714a"
+    },
+    {
+      "id": "ex:msyn/us1875714a/claim/catalyst-independent/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875714a/claim/catalyst-independent",
+      "target": "ex:msyn/source/us1875714a"
+    },
+    {
+      "id": "ex:msyn/us1875714a/claim/economy-over-hourly-yield/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875714a/claim/economy-over-hourly-yield",
+      "target": "ex:msyn/source/us1875714a"
+    },
+    {
+      "id": "ex:msyn/us1875714a/claim/low-co2-optimum/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875714a/claim/low-co2-optimum",
+      "target": "ex:msyn/source/us1875714a"
+    },
+    {
+      "id": "ex:msyn/us1875714a/claim/lowered-yield-side-reactions/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875714a/claim/lowered-yield-side-reactions",
+      "target": "ex:msyn/source/us1875714a"
+    },
+    {
+      "id": "ex:msyn/us1875714a/claim/patent-claim-1/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5",
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875714a/claim/patent-claim-1",
+      "target": "ex:msyn/source/us1875714a"
+    },
+    {
+      "id": "ex:msyn/us1875714a/claim/patent-claim-2/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6",
+          "p. 6, claim 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875714a/claim/patent-claim-2",
+      "target": "ex:msyn/source/us1875714a"
+    },
+    {
+      "id": "ex:msyn/us1875714a/claim/patent-claim-3/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6",
+          "p. 6, claim 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875714a/claim/patent-claim-3",
+      "target": "ex:msyn/source/us1875714a"
+    },
+    {
+      "id": "ex:msyn/us1875714a/claim/patent-claim-4/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875714a/claim/patent-claim-4",
+      "target": "ex:msyn/source/us1875714a"
+    },
+    {
+      "id": "ex:msyn/us1875714a/claim/pre-catalyst-purifier/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875714a/claim/pre-catalyst-purifier",
+      "target": "ex:msyn/source/us1875714a"
+    },
+    {
+      "id": "ex:msyn/us1875714a/claim/start-up-with-hydrogen/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875714a/claim/start-up-with-hydrogen",
+      "target": "ex:msyn/source/us1875714a"
+    },
+    {
+      "id": "ex:msyn/us1875714a/claim/static-condition/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875714a/claim/static-condition",
+      "target": "ex:msyn/source/us1875714a"
+    },
+    {
+      "id": "ex:msyn/us1875714a/claim/table-i-trend/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875714a/claim/table-i-trend",
+      "target": "ex:msyn/source/us1875714a"
+    },
+    {
+      "id": "ex:msyn/us1875714a/claim/theoretical-proportions-side-products/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875714a/claim/theoretical-proportions-side-products",
+      "target": "ex:msyn/source/us1875714a"
+    },
+    {
+      "id": "ex:msyn/us1875714a/feed/table-i-exp-1-circulating-gas/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4",
+          "p. 4, Table I",
+          "p. 4, Table I, Expt. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875714a/feed/table-i-exp-1-circulating-gas",
+      "target": "ex:msyn/source/us1875714a"
+    },
+    {
+      "id": "ex:msyn/us1875714a/feed/table-i-exp-2-circulating-gas/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4",
+          "p. 4, Table I",
+          "p. 4, Table I, Expt. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875714a/feed/table-i-exp-2-circulating-gas",
+      "target": "ex:msyn/source/us1875714a"
+    },
+    {
+      "id": "ex:msyn/us1875714a/feed/table-i-exp-3-circulating-gas/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4",
+          "p. 4, Table I",
+          "p. 4, Table I, Expt. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875714a/feed/table-i-exp-3-circulating-gas",
+      "target": "ex:msyn/source/us1875714a"
+    },
+    {
+      "id": "ex:msyn/us1875714a/feed/table-i-exp-4-circulating-gas/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4",
+          "p. 4, Table I",
+          "p. 4, Table I, Expt. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875714a/feed/table-i-exp-4-circulating-gas",
+      "target": "ex:msyn/source/us1875714a"
+    },
+    {
+      "id": "ex:msyn/us1875714a/feed/table-ii-exp-5-circulating-gas/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5, Table II, Expt. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875714a/feed/table-ii-exp-5-circulating-gas",
+      "target": "ex:msyn/source/us1875714a"
+    },
+    {
+      "id": "ex:msyn/us1875714a/feed/table-ii-exp-6-circulating-gas/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5, Table II, Expt. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875714a/feed/table-ii-exp-6-circulating-gas",
+      "target": "ex:msyn/source/us1875714a"
+    },
+    {
+      "id": "ex:msyn/us1875714a/feed/table-ii-exp-7-circulating-gas/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5, Table II, Expt. 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875714a/feed/table-ii-exp-7-circulating-gas",
+      "target": "ex:msyn/source/us1875714a"
+    },
+    {
+      "id": "ex:msyn/us1875714a/feed/theoretical-co2-h2/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875714a/feed/theoretical-co2-h2",
+      "target": "ex:msyn/source/us1875714a"
+    },
+    {
+      "id": "ex:msyn/us1875714a/hypothesis/ch4-co-formed-early/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875714a/hypothesis/ch4-co-formed-early",
+      "target": "ex:msyn/source/us1875714a"
+    },
+    {
+      "id": "ex:msyn/us1875714a/hypothesis/several-primary-reactions/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3",
+          "p. 3, reactions (1)-(7)"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875714a/hypothesis/several-primary-reactions",
+      "target": "ex:msyn/source/us1875714a"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/1",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1875714a/p3/5",
+            "quote": "circulated over a methanol catalyst contain-— Ing a mixture of zinc and chromium oxides for a period of 12 hours.",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1875714a/catalyst/zn-cr-oxides",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/10",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "'(1. 80 e.' = '(i. e.'; 80 is a line number",
+            "passage": "us1875714a/p3/5",
+            "quote": "A gas mixture comprising theoretical pro- portions of hydrogen and carbon dioxide (1. 80 e. approximately 25% carbon dioxide)",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/typical-experiment",
+      "target": "ex:msyn/us1875714a/feed/theoretical-co2-h2"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/100",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 5, Table II, Expt. 5",
+            "reading": "vision_ocr",
+            "region": [
+              0.19,
+              0.774,
+              0.57,
+              0.789
+            ],
+            "second_reading": "5 | 11 | 15 | 8 | 66 | 2.45 | 63 | 12",
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "5........ 11 15 8 66 2.45 63 12"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-ii-exp-5",
+      "target": "ex:msyn/us1875714a/feed/table-ii-exp-5-circulating-gas"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/101",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "quote": "the “make-up” gas supplied to the process was a mixture of carbon dioxide and hydro- gen of approximately the theoretical propor-",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-ii-exp-5",
+      "target": "ex:msyn/us1875714a/feed/theoretical-co2-h2"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/102",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/3",
+            "quote": "In the experiments reported in Table Il a pressure of 3500 pounds was employed",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-ii-exp-5",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/103",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/3",
+            "quote": "In the experiments reported in Table Il a pressure of 3500 pounds was employed",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-ii-exp-5",
+      "target": "ex:msyn/us1875714a/reactor/circulating-system"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/104",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/4",
+            "quote": "Table II confirms Table I in showing the",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-ii-exp-5",
+      "target": "ex:msyn/us1875714a/claim/1-5-percent-co2-most-favorable"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/105",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/4",
+            "quote": "Since the temperature — employed (390° C.) is a more favorable one, © the purity of the methanol thus produced — is greater;",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-ii-exp-5",
+      "target": "ex:msyn/us1875714a/claim/390c-more-favorable"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/106",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 5, Table II, Expt. 6",
+            "reading": "vision_ocr",
+            "region": [
+              0.19,
+              0.783,
+              0.57,
+              0.797
+            ],
+            "second_reading": "6 | 7.2 | 13 | 6 | 73.8 | 1.95 | 65 | 12",
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "6........ 7.2 13 6 73.8 1.95 65 12"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "7.2",
+          "unit": "%",
+          "value": 7.2
+        },
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1875714a/feed/table-ii-exp-6-circulating-gas",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/107",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 5, Table II, Expt. 6",
+            "reading": "vision_ocr",
+            "region": [
+              0.19,
+              0.783,
+              0.57,
+              0.797
+            ],
+            "second_reading": "6 | 7.2 | 13 | 6 | 73.8 | 1.95 | 65 | 12",
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "6........ 7.2 13 6 73.8 1.95 65 12"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "13",
+          "unit": "%",
+          "value": 13
+        },
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1875714a/feed/table-ii-exp-6-circulating-gas",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/108",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 5, Table II, Expt. 6",
+            "reading": "vision_ocr",
+            "region": [
+              0.19,
+              0.783,
+              0.57,
+              0.797
+            ],
+            "second_reading": "6 | 7.2 | 13 | 6 | 73.8 | 1.95 | 65 | 12",
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "6........ 7.2 13 6 73.8 1.95 65 12"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "6",
+          "unit": "%",
+          "value": 6
+        },
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1875714a/feed/table-ii-exp-6-circulating-gas",
+      "target": "ex:msyn/species/ch4"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/109",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 5, Table II, Expt. 6",
+            "reading": "vision_ocr",
+            "region": [
+              0.19,
+              0.783,
+              0.57,
+              0.797
+            ],
+            "second_reading": "6 | 7.2 | 13 | 6 | 73.8 | 1.95 | 65 | 12",
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "6........ 7.2 13 6 73.8 1.95 65 12"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "73.8",
+          "unit": "%",
+          "value": 73.8
+        },
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1875714a/feed/table-ii-exp-6-circulating-gas",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/11",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "'(1. 80 e.' = '(i. e.'; 80 is a line number",
+            "passage": "us1875714a/p3/5",
+            "quote": "A gas mixture comprising theoretical pro- portions of hydrogen and carbon dioxide (1. 80 e. approximately 25% carbon dioxide)",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/typical-experiment",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/110",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 5, Table II, Expt. 6",
+            "reading": "vision_ocr",
+            "region": [
+              0.19,
+              0.783,
+              0.57,
+              0.797
+            ],
+            "second_reading": "6 | 7.2 | 13 | 6 | 73.8 | 1.95 | 65 | 12",
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "6........ 7.2 13 6 73.8 1.95 65 12"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/3",
+            "quote": "In the experiments reported in Table Il a pressure of 3500 pounds was employed",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "state": "not_reported"
+      },
+      "source": "ex:msyn/us1875714a/test/table-ii-exp-6",
+      "target": "ex:msyn/us1875714a/sample/table-ii"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/111",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 5, Table II, Expt. 6",
+            "reading": "vision_ocr",
+            "region": [
+              0.19,
+              0.783,
+              0.57,
+              0.797
+            ],
+            "second_reading": "6 | 7.2 | 13 | 6 | 73.8 | 1.95 | 65 | 12",
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "6........ 7.2 13 6 73.8 1.95 65 12"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-ii-exp-6",
+      "target": "ex:msyn/us1875714a/feed/table-ii-exp-6-circulating-gas"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/112",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "quote": "the “make-up” gas supplied to the process was a mixture of carbon dioxide and hydro- gen of approximately the theoretical propor-",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-ii-exp-6",
+      "target": "ex:msyn/us1875714a/feed/theoretical-co2-h2"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/113",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/3",
+            "quote": "In the experiments reported in Table Il a pressure of 3500 pounds was employed",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-ii-exp-6",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/114",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/3",
+            "quote": "In the experiments reported in Table Il a pressure of 3500 pounds was employed",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-ii-exp-6",
+      "target": "ex:msyn/us1875714a/reactor/circulating-system"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/115",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/4",
+            "quote": "Table II confirms Table I in showing the",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-ii-exp-6",
+      "target": "ex:msyn/us1875714a/claim/1-5-percent-co2-most-favorable"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/116",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/4",
+            "quote": "Since the temperature — employed (390° C.) is a more favorable one, © the purity of the methanol thus produced — is greater;",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-ii-exp-6",
+      "target": "ex:msyn/us1875714a/claim/390c-more-favorable"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/117",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "disagree",
+            "locator": "p. 5, Table II, Expt. 7",
+            "reading": "vision_ocr",
+            "region": [
+              0.19,
+              0.79,
+              0.57,
+              0.805
+            ],
+            "second_reading": "7 | 3 | 2.5 | 1 | 93.5 | 1.85 | 69 | 10",
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "7........ 3 2.5 1 93.5 1.85 69 10"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "3",
+          "unit": "%",
+          "value": 3
+        },
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1875714a/feed/table-ii-exp-7-circulating-gas",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/118",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "disagree",
+            "locator": "p. 5, Table II, Expt. 7",
+            "reading": "vision_ocr",
+            "region": [
+              0.19,
+              0.79,
+              0.57,
+              0.805
+            ],
+            "second_reading": "7 | 3 | 2.5 | 1 | 93.5 | 1.85 | 69 | 10",
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "7........ 3 2.5 1 93.5 1.85 69 10"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "2.5",
+          "unit": "%",
+          "value": 2.5
+        },
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1875714a/feed/table-ii-exp-7-circulating-gas",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/119",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "disagree",
+            "locator": "p. 5, Table II, Expt. 7",
+            "reading": "vision_ocr",
+            "region": [
+              0.19,
+              0.79,
+              0.57,
+              0.805
+            ],
+            "second_reading": "7 | 3 | 2.5 | 1 | 93.5 | 1.85 | 69 | 10",
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "7........ 3 2.5 1 93.5 1.85 69 10"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "1",
+          "unit": "%",
+          "value": 1
+        },
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1875714a/feed/table-ii-exp-7-circulating-gas",
+      "target": "ex:msyn/species/ch4"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/12",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "quote": "The residual (unre- 9 acted) gases were supplemented by fresh gas _ and recirculated.",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/typical-experiment",
+      "target": "ex:msyn/us1875714a/reactor/circulating-system"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/120",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "disagree",
+            "locator": "p. 5, Table II, Expt. 7",
+            "reading": "vision_ocr",
+            "region": [
+              0.19,
+              0.79,
+              0.57,
+              0.805
+            ],
+            "second_reading": "7 | 3 | 2.5 | 1 | 93.5 | 1.85 | 69 | 10",
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "7........ 3 2.5 1 93.5 1.85 69 10"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "93.5",
+          "unit": "%",
+          "value": 93.5
+        },
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1875714a/feed/table-ii-exp-7-circulating-gas",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/121",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "disagree",
+            "locator": "p. 5, Table II, Expt. 7",
+            "reading": "vision_ocr",
+            "region": [
+              0.19,
+              0.79,
+              0.57,
+              0.805
+            ],
+            "second_reading": "7 | 3 | 2.5 | 1 | 93.5 | 1.85 | 69 | 10",
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "7........ 3 2.5 1 93.5 1.85 69 10"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/3",
+            "quote": "In the experiments reported in Table Il a pressure of 3500 pounds was employed",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "state": "not_reported"
+      },
+      "source": "ex:msyn/us1875714a/test/table-ii-exp-7",
+      "target": "ex:msyn/us1875714a/sample/table-ii"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/122",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "disagree",
+            "locator": "p. 5, Table II, Expt. 7",
+            "reading": "vision_ocr",
+            "region": [
+              0.19,
+              0.79,
+              0.57,
+              0.805
+            ],
+            "second_reading": "7 | 3 | 2.5 | 1 | 93.5 | 1.85 | 69 | 10",
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "7........ 3 2.5 1 93.5 1.85 69 10"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-ii-exp-7",
+      "target": "ex:msyn/us1875714a/feed/table-ii-exp-7-circulating-gas"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/123",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "quote": "the “make-up” gas supplied to the process was a mixture of carbon dioxide and hydro- gen of approximately the theoretical propor-",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-ii-exp-7",
+      "target": "ex:msyn/us1875714a/feed/theoretical-co2-h2"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/124",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/3",
+            "quote": "In the experiments reported in Table Il a pressure of 3500 pounds was employed",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-ii-exp-7",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/125",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/3",
+            "quote": "In the experiments reported in Table Il a pressure of 3500 pounds was employed",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-ii-exp-7",
+      "target": "ex:msyn/us1875714a/reactor/circulating-system"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/126",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/4",
+            "quote": "Table II confirms Table I in showing the",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-ii-exp-7",
+      "target": "ex:msyn/us1875714a/claim/1-5-percent-co2-most-favorable"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/127",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/4",
+            "quote": "Since the temperature — employed (390° C.) is a more favorable one, © the purity of the methanol thus produced — is greater;",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-ii-exp-7",
+      "target": "ex:msyn/us1875714a/claim/390c-more-favorable"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/13",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 4, Table I",
+            "passage": "us1875714a/p4/8",
+            "quote": "1__.ei ie 110!] .°7.5 10 71.5 2.9] 60.5 12",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "Analysis of gases circulating - | | |",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 4, Table I, Expt. 1",
+            "reading": "vision_ocr",
+            "region": [
+              0.41,
+              0.772,
+              0.79,
+              0.781
+            ],
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "1........ 11.0 7.5 10 71.5 2.9 60.5 12"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "11.0",
+          "note": "OCR read '110!]'; page image reads '11.0' (re-curation 2026-09-29)",
+          "unit": "%",
+          "value": 11.0
+        },
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1875714a/feed/table-i-exp-1-circulating-gas",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/14",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 4, Table I",
+            "passage": "us1875714a/p4/8",
+            "quote": "1__.ei ie 110!] .°7.5 10 71.5 2.9] 60.5 12",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "Analysis of gases circulating - | | |",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 4, Table I, Expt. 1",
+            "reading": "vision_ocr",
+            "region": [
+              0.41,
+              0.772,
+              0.79,
+              0.781
+            ],
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "1........ 11.0 7.5 10 71.5 2.9 60.5 12"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "7.5",
+          "note": "OCR read '.°7.5'; page image reads '7.5' (re-curation 2026-09-29)",
+          "unit": "%",
+          "value": 7.5
+        },
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1875714a/feed/table-i-exp-1-circulating-gas",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/15",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 4, Table I",
+            "passage": "us1875714a/p4/8",
+            "quote": "1__.ei ie 110!] .°7.5 10 71.5 2.9] 60.5 12",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "Analysis of gases circulating - | | |",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 4, Table I, Expt. 1",
+            "reading": "vision_ocr",
+            "region": [
+              0.41,
+              0.772,
+              0.79,
+              0.781
+            ],
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "1........ 11.0 7.5 10 71.5 2.9 60.5 12"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "10",
+          "unit": "%",
+          "value": 10
+        },
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1875714a/feed/table-i-exp-1-circulating-gas",
+      "target": "ex:msyn/species/ch4"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/16",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 4, Table I",
+            "passage": "us1875714a/p4/8",
+            "quote": "1__.ei ie 110!] .°7.5 10 71.5 2.9] 60.5 12",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "Analysis of gases circulating - | | |",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 4, Table I, Expt. 1",
+            "reading": "vision_ocr",
+            "region": [
+              0.41,
+              0.772,
+              0.79,
+              0.781
+            ],
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "1........ 11.0 7.5 10 71.5 2.9 60.5 12"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "71.5",
+          "unit": "%",
+          "value": 71.5
+        },
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1875714a/feed/table-i-exp-1-circulating-gas",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/17",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "Liters of condensate per hour per liter of catalyst.",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "state": "not_reported"
+      },
+      "source": "ex:msyn/us1875714a/test/table-i-exp-1",
+      "target": "ex:msyn/us1875714a/sample/table-i"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/18",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 4, Table I",
+            "passage": "us1875714a/p4/8",
+            "quote": "1__.ei ie 110!] .°7.5 10 71.5 2.9] 60.5 12",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "Analysis of gases circulating - | | |",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-i-exp-1",
+      "target": "ex:msyn/us1875714a/feed/table-i-exp-1-circulating-gas"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/19",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "In the experiments above reported, a pres- sure of 3500 pounds was employed, and the 125 “make-up gas” supplied to the process was a mixture of carbon dioxide and hydrogen of approximately the theoretical proportions",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-i-exp-1",
+      "target": "ex:msyn/us1875714a/feed/theoretical-co2-h2"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/2",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1875714a/p3/5",
+            "quote": "circulated over a methanol catalyst contain-— Ing a mixture of zinc and chromium oxides for a period of 12 hours.",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1875714a/catalyst/zn-cr-oxides",
+      "target": "ex:msyn/us1875714a/species/chromium-oxide"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/20",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "In the experiments above reported, a pres- sure of 3500 pounds was employed, and the 125 “make-up gas” supplied to the process was a mixture of carbon dioxide and hydrogen of approximately the theoretical proportions",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-i-exp-1",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/21",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/1",
+            "quote": "The variance in results shown In. the experiments is due to variance in the gas present in the circulating system before the",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-i-exp-1",
+      "target": "ex:msyn/us1875714a/reactor/circulating-system"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/22",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 4, Table I",
+            "passage": "us1875714a/p4/8",
+            "quote": "2 ---- 6.5 7.0 9] 77.5 3.4) 62../ It",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "Analysis of gases circulating - | | |",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 4, Table I, Expt. 2",
+            "reading": "vision_ocr",
+            "region": [
+              0.41,
+              0.78,
+              0.79,
+              0.788
+            ],
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "2........ 6.5 7.0 9 77.5 3.4 62 11"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "6.5",
+          "unit": "%",
+          "value": 6.5
+        },
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1875714a/feed/table-i-exp-2-circulating-gas",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/23",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 4, Table I",
+            "passage": "us1875714a/p4/8",
+            "quote": "2 ---- 6.5 7.0 9] 77.5 3.4) 62../ It",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "Analysis of gases circulating - | | |",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 4, Table I, Expt. 2",
+            "reading": "vision_ocr",
+            "region": [
+              0.41,
+              0.78,
+              0.79,
+              0.788
+            ],
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "2........ 6.5 7.0 9 77.5 3.4 62 11"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "7.0",
+          "unit": "%",
+          "value": 7.0
+        },
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1875714a/feed/table-i-exp-2-circulating-gas",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/24",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 4, Table I",
+            "passage": "us1875714a/p4/8",
+            "quote": "2 ---- 6.5 7.0 9] 77.5 3.4) 62../ It",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "Analysis of gases circulating - | | |",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 4, Table I, Expt. 2",
+            "reading": "vision_ocr",
+            "region": [
+              0.41,
+              0.78,
+              0.79,
+              0.788
+            ],
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "2........ 6.5 7.0 9 77.5 3.4 62 11"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "9",
+          "note": "OCR read '9]'; page image reads '9' (re-curation 2026-09-29)",
+          "unit": "%",
+          "value": 9
+        },
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1875714a/feed/table-i-exp-2-circulating-gas",
+      "target": "ex:msyn/species/ch4"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/25",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 4, Table I",
+            "passage": "us1875714a/p4/8",
+            "quote": "2 ---- 6.5 7.0 9] 77.5 3.4) 62../ It",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "Analysis of gases circulating - | | |",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 4, Table I, Expt. 2",
+            "reading": "vision_ocr",
+            "region": [
+              0.41,
+              0.78,
+              0.79,
+              0.788
+            ],
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "2........ 6.5 7.0 9 77.5 3.4 62 11"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "77.5",
+          "unit": "%",
+          "value": 77.5
+        },
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1875714a/feed/table-i-exp-2-circulating-gas",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/26",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "Liters of condensate per hour per liter of catalyst.",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "state": "not_reported"
+      },
+      "source": "ex:msyn/us1875714a/test/table-i-exp-2",
+      "target": "ex:msyn/us1875714a/sample/table-i"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/27",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 4, Table I",
+            "passage": "us1875714a/p4/8",
+            "quote": "2 ---- 6.5 7.0 9] 77.5 3.4) 62../ It",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "Analysis of gases circulating - | | |",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-i-exp-2",
+      "target": "ex:msyn/us1875714a/feed/table-i-exp-2-circulating-gas"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/28",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "In the experiments above reported, a pres- sure of 3500 pounds was employed, and the 125 “make-up gas” supplied to the process was a mixture of carbon dioxide and hydrogen of approximately the theoretical proportions",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-i-exp-2",
+      "target": "ex:msyn/us1875714a/feed/theoretical-co2-h2"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/29",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "In the experiments above reported, a pres- sure of 3500 pounds was employed, and the 125 “make-up gas” supplied to the process was a mixture of carbon dioxide and hydrogen of approximately the theoretical proportions",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-i-exp-2",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/3",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/5",
+            "quote": "In general, any catalyst suitable for synthetic methanol pro-- go duction may be employed in the process, these . catalysts ordinarily consisting of mixtures of _ metallic oxides",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1875714a/catalyst/any-methanol-catalyst",
+      "target": "ex:msyn/us1875714a/species/metallic-oxides"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/30",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/1",
+            "quote": "The variance in results shown In. the experiments is due to variance in the gas present in the circulating system before the",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-i-exp-2",
+      "target": "ex:msyn/us1875714a/reactor/circulating-system"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/31",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 4, Table I",
+            "passage": "us1875714a/p4/8",
+            "quote": "3... ..-. 3,2 5.2 6 85. 6 3.1; -:63 12",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "Analysis of gases circulating - | | |",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 4, Table I, Expt. 3",
+            "reading": "vision_ocr",
+            "region": [
+              0.41,
+              0.786,
+              0.79,
+              0.796
+            ],
+            "second_reading": "3 | 3.2 | 5.2 | 6 | 85.6 | 3.1 | 63 | 12",
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "3........ 3.2 5.2 6 85.6 3.1 63 12"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "3.2",
+          "note": "OCR read '3,2'; page image reads '3.2' (re-curation 2026-09-29)",
+          "unit": "%",
+          "value": 3.2
+        },
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1875714a/feed/table-i-exp-3-circulating-gas",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/32",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 4, Table I",
+            "passage": "us1875714a/p4/8",
+            "quote": "3... ..-. 3,2 5.2 6 85. 6 3.1; -:63 12",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "Analysis of gases circulating - | | |",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 4, Table I, Expt. 3",
+            "reading": "vision_ocr",
+            "region": [
+              0.41,
+              0.786,
+              0.79,
+              0.796
+            ],
+            "second_reading": "3 | 3.2 | 5.2 | 6 | 85.6 | 3.1 | 63 | 12",
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "3........ 3.2 5.2 6 85.6 3.1 63 12"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "5.2",
+          "unit": "%",
+          "value": 5.2
+        },
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1875714a/feed/table-i-exp-3-circulating-gas",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/33",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 4, Table I",
+            "passage": "us1875714a/p4/8",
+            "quote": "3... ..-. 3,2 5.2 6 85. 6 3.1; -:63 12",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "Analysis of gases circulating - | | |",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 4, Table I, Expt. 3",
+            "reading": "vision_ocr",
+            "region": [
+              0.41,
+              0.786,
+              0.79,
+              0.796
+            ],
+            "second_reading": "3 | 3.2 | 5.2 | 6 | 85.6 | 3.1 | 63 | 12",
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "3........ 3.2 5.2 6 85.6 3.1 63 12"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "6",
+          "unit": "%",
+          "value": 6
+        },
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1875714a/feed/table-i-exp-3-circulating-gas",
+      "target": "ex:msyn/species/ch4"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/34",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 4, Table I",
+            "passage": "us1875714a/p4/8",
+            "quote": "3... ..-. 3,2 5.2 6 85. 6 3.1; -:63 12",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "Analysis of gases circulating - | | |",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 4, Table I, Expt. 3",
+            "reading": "vision_ocr",
+            "region": [
+              0.41,
+              0.786,
+              0.79,
+              0.796
+            ],
+            "second_reading": "3 | 3.2 | 5.2 | 6 | 85.6 | 3.1 | 63 | 12",
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "3........ 3.2 5.2 6 85.6 3.1 63 12"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "85.6",
+          "note": "OCR read '85. 6'; page image reads '85.6' (re-curation 2026-09-29)",
+          "unit": "%",
+          "value": 85.6
+        },
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1875714a/feed/table-i-exp-3-circulating-gas",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/35",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "Liters of condensate per hour per liter of catalyst.",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "state": "not_reported"
+      },
+      "source": "ex:msyn/us1875714a/test/table-i-exp-3",
+      "target": "ex:msyn/us1875714a/sample/table-i"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/36",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 4, Table I",
+            "passage": "us1875714a/p4/8",
+            "quote": "3... ..-. 3,2 5.2 6 85. 6 3.1; -:63 12",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "Analysis of gases circulating - | | |",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-i-exp-3",
+      "target": "ex:msyn/us1875714a/feed/table-i-exp-3-circulating-gas"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/37",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "In the experiments above reported, a pres- sure of 3500 pounds was employed, and the 125 “make-up gas” supplied to the process was a mixture of carbon dioxide and hydrogen of approximately the theoretical proportions",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-i-exp-3",
+      "target": "ex:msyn/us1875714a/feed/theoretical-co2-h2"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/38",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "In the experiments above reported, a pres- sure of 3500 pounds was employed, and the 125 “make-up gas” supplied to the process was a mixture of carbon dioxide and hydrogen of approximately the theoretical proportions",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-i-exp-3",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/39",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/1",
+            "quote": "The variance in results shown In. the experiments is due to variance in the gas present in the circulating system before the",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-i-exp-3",
+      "target": "ex:msyn/us1875714a/reactor/circulating-system"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/4",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1875714a/p3/5",
+            "quote": "circulated over a methanol catalyst contain-— Ing a mixture of zinc and chromium oxides for a period of 12 hours.",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/sample/typical-experiment",
+      "target": "ex:msyn/us1875714a/catalyst/zn-cr-oxides"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/40",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 4, Table I",
+            "note": "row of Experiment 4 (row label garbled)",
+            "passage": "us1875714a/p4/8",
+            "quote": ": ee 2.0 3.2 2 92,8 2.0] ‘66 10",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "Analysis of gases circulating - | | |",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 4, Table I, Expt. 4",
+            "reading": "vision_ocr",
+            "region": [
+              0.41,
+              0.794,
+              0.79,
+              0.803
+            ],
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "4........ 2.0 3.2 2 92.8 2.0 66 10"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "2.0",
+          "unit": "%",
+          "value": 2.0
+        },
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1875714a/feed/table-i-exp-4-circulating-gas",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/41",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 4, Table I",
+            "note": "row of Experiment 4 (row label garbled)",
+            "passage": "us1875714a/p4/8",
+            "quote": ": ee 2.0 3.2 2 92,8 2.0] ‘66 10",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "Analysis of gases circulating - | | |",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 4, Table I, Expt. 4",
+            "reading": "vision_ocr",
+            "region": [
+              0.41,
+              0.794,
+              0.79,
+              0.803
+            ],
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "4........ 2.0 3.2 2 92.8 2.0 66 10"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "3.2",
+          "unit": "%",
+          "value": 3.2
+        },
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1875714a/feed/table-i-exp-4-circulating-gas",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/42",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 4, Table I",
+            "note": "row of Experiment 4 (row label garbled)",
+            "passage": "us1875714a/p4/8",
+            "quote": ": ee 2.0 3.2 2 92,8 2.0] ‘66 10",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "Analysis of gases circulating - | | |",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 4, Table I, Expt. 4",
+            "reading": "vision_ocr",
+            "region": [
+              0.41,
+              0.794,
+              0.79,
+              0.803
+            ],
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "4........ 2.0 3.2 2 92.8 2.0 66 10"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "2",
+          "unit": "%",
+          "value": 2
+        },
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1875714a/feed/table-i-exp-4-circulating-gas",
+      "target": "ex:msyn/species/ch4"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/43",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 4, Table I",
+            "note": "row of Experiment 4 (row label garbled)",
+            "passage": "us1875714a/p4/8",
+            "quote": ": ee 2.0 3.2 2 92,8 2.0] ‘66 10",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "Analysis of gases circulating - | | |",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 4, Table I, Expt. 4",
+            "reading": "vision_ocr",
+            "region": [
+              0.41,
+              0.794,
+              0.79,
+              0.803
+            ],
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "4........ 2.0 3.2 2 92.8 2.0 66 10"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "92.8",
+          "note": "OCR read '92,8'; page image reads '92.8' (re-curation 2026-09-29)",
+          "unit": "%",
+          "value": 92.8
+        },
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1875714a/feed/table-i-exp-4-circulating-gas",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/44",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "Liters of condensate per hour per liter of catalyst.",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "state": "not_reported"
+      },
+      "source": "ex:msyn/us1875714a/test/table-i-exp-4",
+      "target": "ex:msyn/us1875714a/sample/table-i"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/45",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 4, Table I",
+            "note": "row of Experiment 4 (row label garbled)",
+            "passage": "us1875714a/p4/8",
+            "quote": ": ee 2.0 3.2 2 92,8 2.0] ‘66 10",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "Analysis of gases circulating - | | |",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-i-exp-4",
+      "target": "ex:msyn/us1875714a/feed/table-i-exp-4-circulating-gas"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/46",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "In the experiments above reported, a pres- sure of 3500 pounds was employed, and the 125 “make-up gas” supplied to the process was a mixture of carbon dioxide and hydrogen of approximately the theoretical proportions",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-i-exp-4",
+      "target": "ex:msyn/us1875714a/feed/theoretical-co2-h2"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/47",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/8",
+            "quote": "In the experiments above reported, a pres- sure of 3500 pounds was employed, and the 125 “make-up gas” supplied to the process was a mixture of carbon dioxide and hydrogen of approximately the theoretical proportions",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-i-exp-4",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/48",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/1",
+            "quote": "The variance in results shown In. the experiments is due to variance in the gas present in the circulating system before the",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-i-exp-4",
+      "target": "ex:msyn/us1875714a/reactor/circulating-system"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/49",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/3",
+            "quote": "In the experiments reported in Table Il a pressure of 3500 pounds was employed",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "state": "not_reported"
+      },
+      "source": "ex:msyn/us1875714a/test/table-ii-series",
+      "target": "ex:msyn/us1875714a/sample/table-ii"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/5",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1875714a/p2/3",
+            "quote": "over suitable catalytic agents at temperatures of 300-500° C., and at pressures in excess of 50 atmospheres.",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/5",
+            "quote": "In general, any catalyst suitable for synthetic methanol pro-- go duction may be employed in the process, these . catalysts ordinarily consisting of mixtures of _ metallic oxides",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "note": "the patent does not name the catalyst of Tables I and II; it says any suitable methanol catalyst may be employed"
+      },
+      "source": "ex:msyn/us1875714a/sample/table-i",
+      "target": "ex:msyn/us1875714a/catalyst/any-methanol-catalyst"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/50",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "continues 'tions required for methanol production'",
+            "quote": "the “make-up” gas supplied to the process was a mixture of carbon dioxide and hydrogen of approximately the theoretical propor-",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-ii-series",
+      "target": "ex:msyn/us1875714a/feed/theoretical-co2-h2"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/51",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/3",
+            "quote": "In the experiments reported in Table Il a pressure of 3500 pounds was employed",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-ii-series",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/52",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/3",
+            "quote": "In the experiments reported in Table Il a pressure of 3500 pounds was employed",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-ii-series",
+      "target": "ex:msyn/us1875714a/reactor/circulating-system"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/53",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'‘Yesults' = 'results'",
+            "passage": "us1875714a/p2/2",
+            "quote": "and pressures to produce methanol, optimum ‘Yesults are obtained only when the carbon dioxide is present in extremely small propor-",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/claim/low-co2-optimum",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/54",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'‘Yesults' = 'results'",
+            "passage": "us1875714a/p2/2",
+            "quote": "and pressures to produce methanol, optimum ‘Yesults are obtained only when the carbon dioxide is present in extremely small propor-",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/claim/low-co2-optimum",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/55",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1875714a/p3/3",
+            "quote": "there is a formation of methane and carbon monoxide in the circulating gas. mixture and, further that free carbon is deposited in the appa- ratus.",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/claim/theoretical-proportions-side-products",
+      "target": "ex:msyn/species/ch4"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/56",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1875714a/p3/3",
+            "quote": "there is a formation of methane and carbon monoxide in the circulating gas. mixture and, further that free carbon is deposited in the appa- ratus.",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/claim/theoretical-proportions-side-products",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/57",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1875714a/p3/3",
+            "quote": "there is a formation of methane and carbon monoxide in the circulating gas. mixture and, further that free carbon is deposited in the appa- ratus.",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/claim/theoretical-proportions-side-products",
+      "target": "ex:msyn/species/carbon"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/58",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1875714a/p3/3",
+            "quote": "Also, the proportion of water found with the methanol when the mixture is re- moved, by: condensation, from the apparatus, is much greater than that that should be formed by the methanol reaction,",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/claim/theoretical-proportions-side-products",
+      "target": "ex:msyn/species/h2o"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/59",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1875714a/p3/6",
+            "quote": "Under these conditions there was produced 1.5 liters of liquid per hour per liter of catalyst, the liquid showing 60% methanol on analysis where theoreti- 95 cally it should contain 70% by volume.",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1875714a/p3/6",
+            "quote": "Carbon dioxide _..21",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1875714a/p3/6",
+            "quote": "Carbon monoxide. 12",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/typical-experiment",
+      "target": "ex:msyn/us1875714a/claim/theoretical-proportions-side-products"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/6",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1875714a/p2/3",
+            "quote": "over suitable catalytic agents at temperatures of 300-500° C., and at pressures in excess of 50 atmospheres.",
+            "source": "ex:msyn/source/us1875714a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/5",
+            "quote": "In general, any catalyst suitable for synthetic methanol pro-- go duction may be employed in the process, these . catalysts ordinarily consisting of mixtures of _ metallic oxides",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "note": "the patent does not name the catalyst of Tables I and II; it says any suitable methanol catalyst may be employed"
+      },
+      "source": "ex:msyn/us1875714a/sample/table-ii",
+      "target": "ex:msyn/us1875714a/catalyst/any-methanol-catalyst"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/60",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1875714a/p3/3",
+            "quote": "From the results thus attained it appears that there are a number of primary reactions occurring at different rates, rather than one or two simple reactions.",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/hypothesis/several-primary-reactions",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/61",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "'ma' = 'may'",
+            "passage": "us1875714a/p3/4",
+            "quote": "carbon.monoxide formed in reaction 2 ma ~ react advantageously with hydrogen to pre duce methanol according to reaction 5",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/hypothesis/several-primary-reactions",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/62",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1875714a/p3/7",
+            "quote": "methanol: in the condensate is attributable NS only to the disadvantageous reactions pre- — ‘viously mentioned,",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/typical-experiment",
+      "target": "ex:msyn/us1875714a/claim/lowered-yield-side-reactions"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/63",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1875714a/p3/7",
+            "quote": "methanol: in the condensate is attributable NS only to the disadvantageous reactions pre- — ‘viously mentioned,",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/claim/lowered-yield-side-reactions",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/64",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1875714a/p3/7",
+            "quote": "prior gas analyses showed that a practically q10 . static condition had been reached.",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/typical-experiment",
+      "target": "ex:msyn/us1875714a/claim/static-condition"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/65",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/1",
+            "quote": "when the gas mixture passing over the catalyst comprises 1-5% carbon di- oxide and 99-95% hydrogen, the most favor- IS able results are obtained.",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/claim/1-5-percent-co2-most-favorable",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/66",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/1",
+            "quote": "when the gas mixture passing over the catalyst comprises 1-5% carbon di- oxide and 99-95% hydrogen, the most favor- IS able results are obtained.",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/claim/1-5-percent-co2-most-favorable",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/67",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/1",
+            "quote": "Table I indicates that as the percentage of carbon dioxide in the circulating gases was 45 reduced from 11% to 2%, the per cent of _°“ ynethanol in the condensate was increased - from 60.5% to 66%.",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-i-exp-1",
+      "target": "ex:msyn/us1875714a/claim/1-5-percent-co2-most-favorable"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/68",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/1",
+            "quote": "Table I indicates that as the percentage of carbon dioxide in the circulating gases was 45 reduced from 11% to 2%, the per cent of _°“ ynethanol in the condensate was increased - from 60.5% to 66%.",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-i-exp-2",
+      "target": "ex:msyn/us1875714a/claim/1-5-percent-co2-most-favorable"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/69",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/1",
+            "quote": "Table I indicates that as the percentage of carbon dioxide in the circulating gases was 45 reduced from 11% to 2%, the per cent of _°“ ynethanol in the condensate was increased - from 60.5% to 66%.",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-i-exp-3",
+      "target": "ex:msyn/us1875714a/claim/1-5-percent-co2-most-favorable"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/7",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "'(1. 80 e.' = '(i. e.'; 80 is a line number",
+            "passage": "us1875714a/p3/5",
+            "quote": "A gas mixture comprising theoretical pro- portions of hydrogen and carbon dioxide (1. 80 e. approximately 25% carbon dioxide)",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "approximately 25% carbon dioxide",
+          "qualifier": "approximate",
+          "unit": "%",
+          "value": 25
+        },
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1875714a/feed/theoretical-co2-h2",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/70",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/1",
+            "quote": "Table I indicates that as the percentage of carbon dioxide in the circulating gases was 45 reduced from 11% to 2%, the per cent of _°“ ynethanol in the condensate was increased - from 60.5% to 66%.",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-i-exp-4",
+      "target": "ex:msyn/us1875714a/claim/1-5-percent-co2-most-favorable"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/71",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/4",
+            "quote": "Table II confirms Table I in showing the favorable effect obtained by employing a gas”. mixture containing only a small proportion qq — of carbon dioxide.",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-ii-series",
+      "target": "ex:msyn/us1875714a/claim/1-5-percent-co2-most-favorable"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/72",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/1",
+            "quote": "Table I indicates that as the percentage of carbon dioxide in the circulating gases was 45 reduced from 11% to 2%, the per cent of _°“ ynethanol in the condensate was increased - from 60.5% to 66%.",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-i-exp-1",
+      "target": "ex:msyn/us1875714a/claim/table-i-trend"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/73",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/1",
+            "quote": "Table I indicates that as the percentage of carbon dioxide in the circulating gases was 45 reduced from 11% to 2%, the per cent of _°“ ynethanol in the condensate was increased - from 60.5% to 66%.",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-i-exp-2",
+      "target": "ex:msyn/us1875714a/claim/table-i-trend"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/74",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/1",
+            "quote": "Table I indicates that as the percentage of carbon dioxide in the circulating gases was 45 reduced from 11% to 2%, the per cent of _°“ ynethanol in the condensate was increased - from 60.5% to 66%.",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-i-exp-3",
+      "target": "ex:msyn/us1875714a/claim/table-i-trend"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/75",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/1",
+            "quote": "Table I indicates that as the percentage of carbon dioxide in the circulating gases was 45 reduced from 11% to 2%, the per cent of _°“ ynethanol in the condensate was increased - from 60.5% to 66%.",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-i-exp-4",
+      "target": "ex:msyn/us1875714a/claim/table-i-trend"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/76",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/1",
+            "quote": "Table I indicates that as the percentage of carbon dioxide in the circulating gases was 45 reduced from 11% to 2%, the per cent of _°“ ynethanol in the condensate was increased - from 60.5% to 66%.",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/claim/table-i-trend",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/77",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/2",
+            "quote": "The fact that in Experiment 4 the percentage _ of carbon monoxide in the circulating gases exceeded the percentage of carbon dioxide is ~ of no importance,",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/hypothesis/ch4-co-formed-early",
+      "target": "ex:msyn/us1875714a/test/table-i-exp-4"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/78",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/2",
+            "quote": "While Experiment 2, employing 6.5% car- bon dioxide in the circulating system, gave’ 30 the largest yield of condensate per hour,",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/claim/economy-over-hourly-yield",
+      "target": "ex:msyn/us1875714a/test/table-i-exp-2"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/79",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/3",
+            "quote": "the same volume of condensate per hour as was obtained in Experiment 2 may ‘be obtained in Experiment 4 by. merely doubling the amount of catalyst employed,",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/claim/economy-over-hourly-yield",
+      "target": "ex:msyn/us1875714a/test/table-i-exp-4"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/8",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "'(1. 80 e.' = '(i. e.'; 80 is a line number",
+            "passage": "us1875714a/p3/5",
+            "quote": "A gas mixture comprising theoretical pro- portions of hydrogen and carbon dioxide (1. 80 e. approximately 25% carbon dioxide)",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1875714a/feed/theoretical-co2-h2",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/80",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/4",
+            "quote": "Since the temperature — employed (390° C.) is a more favorable one, © the purity of the methanol thus produced — is greater;",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/test/table-ii-series",
+      "target": "ex:msyn/us1875714a/claim/390c-more-favorable"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/81",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/7",
+            "quote": "However if this adjustment produces a cir- 93. culating system gas which contains more ~ than 5% of carbon dioxide, a loss of gases. will occur.on account of the undesirable reac- tions previously described.",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/claim/above-5-percent-loss",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/82",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/3",
+            "quote": "a mixture of carbon dioxide and hydrogen’ in the proportions theoretically required to make methanol is supplied to the system.",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/claim/start-up-with-hydrogen",
+      "target": "ex:msyn/us1875714a/feed/theoretical-co2-h2"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/83",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1875714a/p4/3",
+            "quote": "the circu- latory system in which the process operate is _ filled with substantially pure hydrogen gas at 40 a pressure somewhat below the pressure de- _ sired for operation.",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/claim/start-up-with-hydrogen",
+      "target": "ex:msyn/us1875714a/reactor/circulating-system"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/84",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/6",
+            "quote": "passing a gas of the pro- _ - portion of 3% carbon dioxide and 97% hy- 105 drogen into the system under pressure,",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/claim/alternative-operation",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/85",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/5",
+            "quote": "In general, any catalyst suitable for synthetic methanol pro-- go duction may be employed in the process, these . catalysts ordinarily consisting of mixtures of _ metallic oxides",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/claim/catalyst-independent",
+      "target": "ex:msyn/us1875714a/catalyst/any-methanol-catalyst"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/86",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'te' = 'to'",
+            "passage": "us1875714a/p2/6",
+            "quote": "is designed te act as a “pre-catalyst” or puri- — fier, to destroy or absorb any catalyst poisons",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/claim/pre-catalyst-purifier",
+      "target": "ex:msyn/us1875714a/reactor/fig1-converter"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/87",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "claim 1 begins on p. 5",
+            "passage": "us1875714a/p5/7",
+            "quote": "ing a gas consisting of 1-5% carbon dioxide 130",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/claim/patent-claim-1",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/88",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "claim 1 begins on p. 5",
+            "passage": "us1875714a/p5/7",
+            "quote": "ing a gas consisting of 1-5% carbon dioxide 130",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/claim/patent-claim-1",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/89",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "us1875714a/p6/1",
+            "quote": "ing a gas consisting of approximately 3% carbon dioxide and 97% hydrogen over said",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/claim/patent-claim-2",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/9",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1875714a/p3/5",
+            "quote": "circulated over a methanol catalyst contain-— Ing a mixture of zinc and chromium oxides for a period of 12 hours.",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "state": "not_reported"
+      },
+      "source": "ex:msyn/us1875714a/test/typical-experiment",
+      "target": "ex:msyn/us1875714a/sample/typical-experiment"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/90",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "us1875714a/p6/1",
+            "quote": "ing a gas consisting of approximately 3% carbon dioxide and 97% hydrogen over said",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/claim/patent-claim-2",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/91",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "us1875714a/p6/3",
+            "quote": "Ing a gas consisting of 1-5% carbon dioxide 8 and 99-95% hydrogen over said catalyst, adding to the residual gases hydrogen and carbon dioxide in sufficient uantities",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/claim/patent-claim-3",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/92",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "us1875714a/p6/3",
+            "quote": "Ing a gas consisting of 1-5% carbon dioxide 8 and 99-95% hydrogen over said catalyst, adding to the residual gases hydrogen and carbon dioxide in sufficient uantities",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/claim/patent-claim-3",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/93",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "'8%' is the OCR of '3%' (it complements 97% hydrogen and the claim ends 'approximately 3%')",
+            "passage": "us1875714a/p6/3",
+            "quote": "ing a gas consisting of approximately 8% carbon dioxide and 97% hydrogen over said",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/claim/patent-claim-4",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/94",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "'8%' is the OCR of '3%' (it complements 97% hydrogen and the claim ends 'approximately 3%')",
+            "passage": "us1875714a/p6/3",
+            "quote": "ing a gas consisting of approximately 8% carbon dioxide and 97% hydrogen over said",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875714a/claim/patent-claim-4",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/95",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 5, Table II, Expt. 5",
+            "reading": "vision_ocr",
+            "region": [
+              0.19,
+              0.774,
+              0.57,
+              0.789
+            ],
+            "second_reading": "5 | 11 | 15 | 8 | 66 | 2.45 | 63 | 12",
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "5........ 11 15 8 66 2.45 63 12"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "11",
+          "unit": "%",
+          "value": 11
+        },
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1875714a/feed/table-ii-exp-5-circulating-gas",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/96",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 5, Table II, Expt. 5",
+            "reading": "vision_ocr",
+            "region": [
+              0.19,
+              0.774,
+              0.57,
+              0.789
+            ],
+            "second_reading": "5 | 11 | 15 | 8 | 66 | 2.45 | 63 | 12",
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "5........ 11 15 8 66 2.45 63 12"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "15",
+          "unit": "%",
+          "value": 15
+        },
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1875714a/feed/table-ii-exp-5-circulating-gas",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/97",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 5, Table II, Expt. 5",
+            "reading": "vision_ocr",
+            "region": [
+              0.19,
+              0.774,
+              0.57,
+              0.789
+            ],
+            "second_reading": "5 | 11 | 15 | 8 | 66 | 2.45 | 63 | 12",
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "5........ 11 15 8 66 2.45 63 12"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "8",
+          "unit": "%",
+          "value": 8
+        },
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1875714a/feed/table-ii-exp-5-circulating-gas",
+      "target": "ex:msyn/species/ch4"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/98",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 5, Table II, Expt. 5",
+            "reading": "vision_ocr",
+            "region": [
+              0.19,
+              0.774,
+              0.57,
+              0.789
+            ],
+            "second_reading": "5 | 11 | 15 | 8 | 66 | 2.45 | 63 | 12",
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "5........ 11 15 8 66 2.45 63 12"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "66",
+          "unit": "%",
+          "value": 66
+        },
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1875714a/feed/table-ii-exp-5-circulating-gas",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/us1875714a/link/99",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 5, Table II, Expt. 5",
+            "reading": "vision_ocr",
+            "region": [
+              0.19,
+              0.774,
+              0.57,
+              0.789
+            ],
+            "second_reading": "5 | 11 | 15 | 8 | 66 | 2.45 | 63 | 12",
+            "source": "ex:msyn/source/us1875714a",
+            "transcription": "5........ 11 15 8 66 2.45 63 12"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "us1875714a/p5/3",
+            "quote": "In the experiments reported in Table Il a pressure of 3500 pounds was employed",
+            "source": "ex:msyn/source/us1875714a"
+          }
+        ],
+        "state": "not_reported"
+      },
+      "source": "ex:msyn/us1875714a/test/table-ii-exp-5",
+      "target": "ex:msyn/us1875714a/sample/table-ii"
+    },
+    {
+      "id": "ex:msyn/us1875714a/reactor/circulating-system/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875714a/reactor/circulating-system",
+      "target": "ex:msyn/source/us1875714a"
+    },
+    {
+      "id": "ex:msyn/us1875714a/reactor/fig1-converter/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875714a/reactor/fig1-converter",
+      "target": "ex:msyn/source/us1875714a"
+    },
+    {
+      "id": "ex:msyn/us1875714a/sample/table-i/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875714a/sample/table-i",
+      "target": "ex:msyn/source/us1875714a"
+    },
+    {
+      "id": "ex:msyn/us1875714a/sample/table-ii/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875714a/sample/table-ii",
+      "target": "ex:msyn/source/us1875714a"
+    },
+    {
+      "id": "ex:msyn/us1875714a/sample/typical-experiment/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875714a/sample/typical-experiment",
+      "target": "ex:msyn/source/us1875714a"
+    },
+    {
+      "id": "ex:msyn/us1875714a/species/chromium-oxide/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875714a/species/chromium-oxide",
+      "target": "ex:msyn/source/us1875714a"
+    },
+    {
+      "id": "ex:msyn/us1875714a/species/metallic-oxides/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875714a/species/metallic-oxides",
+      "target": "ex:msyn/source/us1875714a"
+    },
+    {
+      "id": "ex:msyn/us1875714a/test/table-i-exp-1/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4",
+          "p. 4, Table I",
+          "p. 4, Table I, Expt. 1",
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875714a/test/table-i-exp-1",
+      "target": "ex:msyn/source/us1875714a"
+    },
+    {
+      "id": "ex:msyn/us1875714a/test/table-i-exp-2/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4",
+          "p. 4, Table I",
+          "p. 4, Table I, Expt. 2",
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875714a/test/table-i-exp-2",
+      "target": "ex:msyn/source/us1875714a"
+    },
+    {
+      "id": "ex:msyn/us1875714a/test/table-i-exp-3/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4",
+          "p. 4, Table I",
+          "p. 4, Table I, Expt. 3",
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875714a/test/table-i-exp-3",
+      "target": "ex:msyn/source/us1875714a"
+    },
+    {
+      "id": "ex:msyn/us1875714a/test/table-i-exp-4/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4",
+          "p. 4, Table I",
+          "p. 4, Table I, Expt. 4",
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875714a/test/table-i-exp-4",
+      "target": "ex:msyn/source/us1875714a"
+    },
+    {
+      "id": "ex:msyn/us1875714a/test/table-ii-exp-5/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5",
+          "p. 5, Table II footnotes",
+          "p. 5, Table II, Expt. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875714a/test/table-ii-exp-5",
+      "target": "ex:msyn/source/us1875714a"
+    },
+    {
+      "id": "ex:msyn/us1875714a/test/table-ii-exp-6/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5",
+          "p. 5, Table II footnotes",
+          "p. 5, Table II, Expt. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875714a/test/table-ii-exp-6",
+      "target": "ex:msyn/source/us1875714a"
+    },
+    {
+      "id": "ex:msyn/us1875714a/test/table-ii-exp-7/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5",
+          "p. 5, Table II footnotes",
+          "p. 5, Table II, Expt. 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875714a/test/table-ii-exp-7",
+      "target": "ex:msyn/source/us1875714a"
+    },
+    {
+      "id": "ex:msyn/us1875714a/test/table-ii-series/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875714a/test/table-ii-series",
+      "target": "ex:msyn/source/us1875714a"
+    },
+    {
+      "id": "ex:msyn/us1875714a/test/typical-experiment/reported-in/us1875714a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3",
+          "p. 3, gas analysis"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875714a/test/typical-experiment",
+      "target": "ex:msyn/source/us1875714a"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/us1875714a"
+}
