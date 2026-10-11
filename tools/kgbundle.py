@@ -790,15 +790,30 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
     def pub_key(n: dict) -> str:
         return pub_keys[n["id"]]
 
-    for n in doc["nodes"]:
+    fresh = []
+    for n in sorted(doc["nodes"], key=lambda n: n["id"]):
         if n["id"] in frozen and n["label"] != "Source" and frozen[n["id"]].split(":", 1)[0] == n["label"]:
             gid[n["id"]] = frozen[n["id"]]
-            continue
-        if n["label"] == "Source":
+        elif n["label"] == "Source":
             gid[n["id"]] = f"Publication:{pub_key(n)}"
         else:
-            key = slug_key(n["props"].get("name") or n["id"].rsplit("/", 1)[-1])[:80].rstrip("-")
-            gid[n["id"]] = f"{n['label']}:{key}-{hashlib.sha256(n['id'].encode()).hexdigest()[:6]}"
+            fresh.append(n)
+    # a new record's id is its name's slug and a short digest of its scale-graph id; where two records' ids would
+    # meet (one name, digests sharing six characters, or a released id), the digest grows, so no two records share
+    # an id and no id seen before changes
+    taken = set(gid.values()) | set(frozen.values())
+    for n in fresh:
+        key = slug_key(n["props"].get("name") or n["id"].rsplit("/", 1)[-1])[:80].rstrip("-")
+        digest = hashlib.sha256(n["id"].encode()).hexdigest()
+        for width in (6, 16, 64):
+            candidate = f"{n['label']}:{key}-{digest[:width]}"
+            if candidate not in taken:
+                break
+        gid[n["id"]] = candidate
+        taken.add(candidate)
+    if len(set(gid.values())) != len(gid):
+        clash = sorted(v for v in set(gid.values()) if list(gid.values()).count(v) > 1)
+        raise ScaleError(f"two records would share a bundle id: {clash[:3]}")
     src_of = {sid: pub_key(n) for sid, n in sources.items()}
     if texts:                   # a text named by the source's scale-graph id is its publication's: one key from here on
         named: dict[str, str] = {}
