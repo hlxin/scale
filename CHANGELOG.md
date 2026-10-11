@@ -3,6 +3,14 @@
 ## Unreleased
 
 - **scale-catal is on PyPI** from v0.2.0 (`uvx scale-catal …`); the documents no longer say it is not.
+- **An approval with no text no longer starts @scale-agents.** It asked nothing, and the run failed for want of an
+  `OUTCOME:` line (reported by a reviewer on #23). The instructions say a run that does nothing still ends with
+  `OUTCOME: nothing`.
+- **@scale-agents loads its instructions on every event.** On an event about a pull request the action restores
+  `.claude/` from `main` (the head is untrusted), which removed the copied `.claude/CLAUDE.md` and roles: the agents
+  ran without their rules and ended without an `OUTCOME:` line (#24). The workflow installs the instructions and
+  roles, as on `main`, in `~/.claude/` (user memory and subagents), and the prompt says how to read the event
+  (`scale thread`) and how to end.
 ## v0.2.0 — 2026-10-11
 
 Schema 0.2.0, renamed `scale-catal` (breaking: the name only; documents at 0.1.0 migrate with `scale graph migrate`),
