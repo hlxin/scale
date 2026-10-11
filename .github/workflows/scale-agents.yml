@@ -77,6 +77,9 @@ jobs:
           cp .github/scale-agents/instructions.md .claude/CLAUDE.md
           cp .github/scale-agents/roles/*.md .claude/agents/
           echo ".claude/" >> .git/info/exclude
+      - name: Install bubblewrap (the sandbox the subprocess secret scrub needs)
+        # without it Claude Code refuses to start while CLAUDE_CODE_SUBPROCESS_ENV_SCRUB is on (the runner lacks it)
+        run: sudo apt-get update -q && sudo apt-get install -y -q bubblewrap
       - uses: anthropics/claude-code-action@v1
         env:
           CLAUDE_CODE_SUBPROCESS_ENV_SCRUB: "1"     # the agents' commands run without the API key and tokens
