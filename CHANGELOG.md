@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+- **Fixes from a second code review.** Profile files are retired by design: a manifest listing `profiles:` is refused,
+  and conformance reads `follows_domains` only. Bundle export: a released Publication keeps its id in later releases;
+  two records never share a bundle id; every destination is checked before the first write (no link, nothing inside
+  `--previous`), so a refused export changes nothing; a text may not be named like the manifest in any case. Evidence
+  index: vectors not saved with their items, and a `.terms` file whose words changed, are rebuilt. Queries: a plan's
+  text search ranks only the evidence of the rows it keeps (the methanol evidence-search plans now find q2 86, q3 92
+  and q5 108 rows); a description shares no object with the kept schema. Schema change: a nested change that can
+  invalidate documents is breaking. Validation: NaN and infinity are not values; a long chain is checked for cycles
+  without recursion. REPORTED_IN ids of sources ending alike are distinct. Page reading compares every record of a
+  PDF with its digest. The MCP server answers a line it cannot parse.
 - **Fixes from a code review.** Bundle export: a parallel link with other values is listed, never merged under
   another's values (six in the methanol graph); distinct sources never share a Publication id; an export is never
   written over the release it follows; a shipped text is a plain file in `text/`, and one named by its source id is
