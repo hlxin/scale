@@ -29,7 +29,8 @@ Each role has its own responsibility; together they produce one **change set**, 
 | `evidence-verifier` | assesses the scientific support, examines the counterexamples, evaluates compatibility and the effects on existing records and queries; changes nothing | the sources, the checks, the request |
 | `systems-engineer` | packages the revision: the version raised, the migration step, the CHANGELOG, the checks, the pull request with the change set | `AGENTS.md`, `skills/evolve-schema` |
 
-Call a role with the Agent tool (named Task in older versions), giving it the use case in your own words, the files it needs and what to hand back.
+Call a role with the Agent tool (named Task in older versions), in the foreground, and wait for its result: the run
+ends when you stop, and a role still working is lost. Never end your turn while the change is unfinished. Give each role the use case in your own words, the files it needs and what to hand back.
 The usual order for a change is data scientist, protocol compiler, evidence verifier, systems engineer; give two roles
 the same file only one after the other. The evidence verifier never verifies its own work and always runs before the
 systems engineer opens or updates a pull request. A question that needs no change goes to the data scientist alone,

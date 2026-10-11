@@ -85,6 +85,9 @@ jobs:
           # comment, open the pull request); off, as in the action's own examples. The guards are the allowed tools
           # below, issue and comment text read as data (.claude/CLAUDE.md), and this job's minimal permissions
           CLAUDE_CODE_SUBPROCESS_ENV_SCRUB: "0"
+          # each role runs in the foreground and hands back its result; in the background it would be lost when the
+          # strategist ends the run
+          CLAUDE_CODE_DISABLE_BACKGROUND_TASKS: "1"
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}   # a Claude subscription (claude setup-token)
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}               # or API billing; set one of the two
