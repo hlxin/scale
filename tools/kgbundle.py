@@ -706,8 +706,6 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
                 raise ScaleError(f"the bundle would be written over {name} ({prior_dir}), which it reads; write it to "
                                  "a folder of its own")
     _check_text_names(texts)               # a shipped text is a plain file directly in text/, before anything is written
-    _clear_texts(out)                      # an earlier export's texts are not this bundle's (nor sealed with it)
-    (out / "kg").mkdir(parents=True, exist_ok=True)
     report = {"not_exported_links": {}, "split_links": 0, "values_as_text": {}, "nodes_without_report": 0,
               "ranges_as_midpoint": {}, "kept_apart_by_basis": {}}
     status_def = scale_status(spec)
@@ -1225,6 +1223,12 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
                        "topic": topic},
              "nodes": kept_nodes, "links": sorted(links.values(), key=lambda e: e["id"])}
     gbytes = (json.dumps(graph, ensure_ascii=False, indent=1, sort_keys=True) + "\n").encode()
+    # everything is checked and the release followed is read before the folder is touched: a refused export changes
+    # nothing, and no file is written through a link or into the release it follows
+    lineage = _previous(previous, graph)
+    _check_destinations(out, [x for x in (previous, ids_from) if x], texts)
+    _clear_texts(out)                      # an earlier export's texts are not this bundle's (nor sealed with it)
+    (out / "kg").mkdir(parents=True, exist_ok=True)
     (out / "kg" / "graph.json").write_bytes(gbytes)
     (out / "kg" / "schema.json").write_text(json.dumps(schema, ensure_ascii=False, indent=1, sort_keys=True) + "\n")
     shipped, shipped_licences = 0, set()
@@ -1259,7 +1263,6 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
                     if "char_start" in ev["locator"])
         if n_off:
             report["evidence_with_char_offsets"] = n_off
-    lineage = _previous(previous, graph)
     manifest = {"format": FORMAT_ID, "format_version": FORMAT_VERSION, "bundle_id": bundle_id, "version": version,
                 "created": created, "topic": topic, "scope": scope_text, "scale_header": header,
                 "graph_file": "kg/graph.json", "graph_sha256": hashlib.sha256(gbytes).hexdigest(),
@@ -1299,6 +1302,25 @@ def _header_stewardship(declared: dict, level: str) -> dict:
     if level == "institution" and pgraph.institutions(declared):
         st["contributed_by"] = pgraph.institutions(declared)
     return st
+
+
+BUNDLE_FILES = ("kg", "kg/graph.json", "kg/schema.json", "text", "text/_manifest.json", "bundle.json", "CHANGELOG.md",
+                "SHA256SUMS", "validation.json")
+
+
+def _check_destinations(out: Path, priors: list, texts: dict | None) -> None:
+    """Every path the export writes (and sealing adds) is checked before the first write: none may be a link, and none
+    may lie in the release it follows or the build whose ids it keeps, whatever links lead there."""
+    roots = [Path(x).resolve() for x in priors]
+    rels = [*BUNDLE_FILES, *(f"text/{e[0]}" for e in (texts or {}).values())]
+    for rel in rels:
+        dest = Path(out) / rel
+        if dest.is_symlink():
+            raise ScaleError(f"{dest} is a link; a bundle is written only as plain files and folders: export into a "
+                             "folder of its own")
+        real = dest.resolve()
+        if any(real == r or r in real.parents for r in roots):
+            raise ScaleError(f"{dest} lies in the release the bundle follows ({real}); write it to a folder of its own")
 
 
 def _clear_texts(out: Path) -> None:
