@@ -135,9 +135,12 @@ own, never under the person's account: GitHub does not let an author approve the
 up, create a GitHub account for the bot, invite it as a collaborator with Write access, and give the agent a
 fine-grained token of that account (this repository only; contents and pull requests, read and write). The bot is
 not a reviewer: it is never listed in the review policy, and its approvals would not count.
-Its commands run with the action's subprocess secret scrub (`CLAUDE_CODE_SUBPROCESS_ENV_SCRUB: "1"`), for which the
-workflow installs `bubblewrap` (the sandbox the scrub needs; without it Claude Code does not start), and the job's
-workflow token only reads the contents.
+Its commands run with the action's subprocess secret scrub off (`CLAUDE_CODE_SUBPROCESS_ENV_SCRUB: "0"`), as in the
+action's own examples: the scrub would strip the GitHub token from the agents' `gh` commands (reading the event,
+commenting, opening the pull request), and they stopped without a reply. The guards are the allowed tools, issue and
+comment text read as data, and minimal permissions; the job's workflow token only reads the contents. Each run's
+summary shows what the agents did (`display_report`). For a public repository, consider the action's own GitHub tools
+in place of `gh`, so that the scrub can stay on.
 
 ## 5. Branch ruleset for `main`
 

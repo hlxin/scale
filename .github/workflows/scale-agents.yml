@@ -24,8 +24,9 @@ name: scale-agents
 # Human setup: install the Claude GitHub App on hlxin/scale and set the repository secret CLAUDE_CODE_OAUTH_TOKEN
 # (a Claude subscription's token from `claude setup-token`; its runs draw on that subscription) or, instead,
 # ANTHROPIC_API_KEY (API billing) (governance/repository-settings.md, "The agents"). No other secret is used. The agents' commands run with the
-# action's subprocess secret scrub on (CLAUDE_CODE_SUBPROCESS_ENV_SCRUB), and this job's GITHUB_TOKEN can only read
-# the contents.
+# action's subprocess secret scrub off (CLAUDE_CODE_SUBPROCESS_ENV_SCRUB: "0"): it would strip the GitHub token their
+# gh commands need. Each run's summary shows what the agents did (display_report), and this job's GITHUB_TOKEN can
+# only read the contents.
 "on":
   issues:
     types:
@@ -77,13 +78,12 @@ jobs:
           cp .github/scale-agents/instructions.md .claude/CLAUDE.md
           cp .github/scale-agents/roles/*.md .claude/agents/
           echo ".claude/" >> .git/info/exclude
-      - name: Install bubblewrap (the sandbox the subprocess secret scrub needs)
-        # without it Claude Code refuses to start while CLAUDE_CODE_SUBPROCESS_ENV_SCRUB is on (the runner lacks it)
-        # installed only when the runner image lacks it (a fresh runner each run; free once an image ships it)
-        run: command -v bwrap >/dev/null || { sudo apt-get update -q && sudo apt-get install -y -q bubblewrap; }
       - uses: anthropics/claude-code-action@v1
         env:
-          CLAUDE_CODE_SUBPROCESS_ENV_SCRUB: "1"     # the agents' commands run without the API key and tokens
+          # the scrub would strip the GitHub token from the agents' commands, and they work through gh (read the event,
+          # comment, open the pull request); off, as in the action's own examples. The guards are the allowed tools
+          # below, issue and comment text read as data (.claude/CLAUDE.md), and this job's minimal permissions
+          CLAUDE_CODE_SUBPROCESS_ENV_SCRUB: "0"
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}   # a Claude subscription (claude setup-token)
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}               # or API billing; set one of the two
@@ -94,6 +94,7 @@ jobs:
             Comment id: ${{ github.event.comment.id }}. Review id: ${{ github.event.review.id }}.
             Manual request (empty unless a person ran the workflow by hand): ${{ inputs.prompt }}
           branch_prefix: agent/
+          display_report: "true"      # what the agents did, in the run's summary (Claude's own text; the repo is private)
           claude_args: >-
             --max-turns 120
             --allowedTools "Task,Read,Edit,Write,Glob,Grep,Bash(uv run scale:*),Bash(uv run --extra dev scale:*),Bash(uv run --extra dev pytest:*),Bash(git status:*),Bash(git diff:*),Bash(git log:*),Bash(git add:*),Bash(git commit:*),Bash(git fetch:*),Bash(git checkout:*),Bash(git switch:*),Bash(git push origin agent/:*),Bash(gh issue view:*),Bash(gh issue comment:*),Bash(gh pr view:*),Bash(gh pr diff:*),Bash(gh pr checkout:*),Bash(gh pr create:*),Bash(gh pr comment:*)"
