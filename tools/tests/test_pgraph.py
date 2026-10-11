@@ -398,3 +398,15 @@ def test_reported_in_links_of_sources_ending_alike_get_distinct_ids():
     assert set(ids) == {"ex:t/claim/1/reported-in/ex:a/paper", "ex:t/claim/1/reported-in/ex:b/paper",
                         "ex:t/claim/2/reported-in/paper"}
 
+
+def test_a_long_chain_is_checked_for_cycles_without_recursion():
+    """The cycle check of PART_OF, PRECEDES, HAS_PART and REVISES follows a chain of thousands of links (it recursed,
+    and a valid chain of about a thousand failed), and still names a cycle by its path."""
+    import sys
+    from scale.pgraph_science import _cyclic
+    n = sys.getrecursionlimit() * 3
+    chain = [(f"ex:t/step/{i}", f"ex:t/step/{i + 1}") for i in range(n)]
+    assert _cyclic(chain) == []
+    back = _cyclic(chain + [(f"ex:t/step/{n}", "ex:t/step/0")])
+    assert len(back) == 1 and back[0].startswith("ex:t/step/0 -> ex:t/step/1 -> ") and back[0].endswith(" -> ex:t/step/0")
+
