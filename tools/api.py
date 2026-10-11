@@ -1,4 +1,4 @@
-"""Agent-facing toolkit: one small, safe, vendor-neutral tool surface over scale-graph documents.
+"""Agent-facing toolkit: one small, safe, vendor-neutral tool surface over scale-catal documents.
 
 The same tools are reachable in every way an agentic system can call software, all from
 one install and none tied to a model provider:
@@ -15,7 +15,7 @@ Design rules
 ------------
 * **Zero configuration.** Documents live in a working directory (``$SCALE_WORKSPACE`` or
   ``~/.scale/workspace``), created when a tool first writes there. There is no lock and nothing to
-  upgrade: a scale-graph document pins its schema version itself (``graph.schema_version``) and is
+  upgrade: a scale-catal document pins its schema version itself (``graph.schema_version``) and is
   read under that version; ``scale_migrate`` moves it to a newer one when asked.
 * **Agents do the work, people decide.** Approving and merging pull requests, building releases and
   filing GitHub issues are deliberately *not* agent tools; they stay in the CLI for humans
@@ -48,7 +48,7 @@ def default_workspace() -> Path:
 # ---------------------------------------------------------------- tool definitions (JSON Schema)
 
 _DOC = {
-    "document": {"type": "object", "description": "A scale-graph document (node-link JSON), inline."},
+    "document": {"type": "object", "description": "A scale-catal document (node-link JSON), inline."},
     "path": {"type": "string", "description": "Or a document file: a path relative to the working directory, or absolute."},
 }
 _DOMAIN = {"domain": {"type": "string", "description": "Whose schema to use: catalysis (the catalysis domain, "
@@ -83,14 +83,14 @@ TOOLS: list[dict] = [
     },
     {
         "name": "scale_template",
-        "description": "A minimal valid scale-graph document for the catalysis domain (or, with domain core, the "
+        "description": "A minimal valid scale-catal document for the catalysis domain (or, with domain core, the "
                        "science kernel alone): the graph header with stewardship, a Source, one evidenced record and "
                        "its REPORTED_IN link, with notes on what to fill in.",
         "input_schema": {"type": "object", "properties": {**_DOMAIN}},
     },
     {
         "name": "scale_validate",
-        "description": "Validate a scale-graph document under the schema version it pins. Returns errors (invalid), "
+        "description": "Validate a scale-catal document under the schema version it pins. Returns errors (invalid), "
                        "warnings, and conformance to the catalysis checklist it follows (must items missing make a "
                        "record non-conformant, not invalid). Writes nothing.",
         "input_schema": {"type": "object", "properties": {**_DOC, **_DOMAIN,
@@ -99,7 +99,7 @@ TOOLS: list[dict] = [
     },
     {
         "name": "scale_query",
-        "description": "Run a scale-graph query plan (match, steps, where, return, evidence, order_by, limit) over a "
+        "description": "Run a scale-catal query plan (match, steps, where, return, evidence, order_by, limit) over a "
                        "document. Returns rows with the values as reported and their evidence (each item with its "
                        "source's kind, peer review and publication status, and whether it is second-hand), records left "
                        "out and why, a coverage block (candidates, each stage's rows in and out, everything left out by "
@@ -171,14 +171,14 @@ HUMAN_ONLY = {
 
 
 def template(domain: str | None, version: str) -> dict:
-    """A minimal valid scale-graph document: header and stewardship, the institution and project the
+    """A minimal valid scale-catal document: header and stewardship, the institution and project the
     stewardship names, a Source, one evidenced Claim (a kernel label, valid with or without the catalysis checklist) and its
     REPORTED_IN link."""
     ev = {"source": "ex:source/1", "locator": "Results, paragraph 2", "kind": "text",
           "quote": "a short verbatim excerpt that states the claim"}
     return {
         "directed": True, "multigraph": True,
-        "graph": {"schema": "scale-graph", "schema_version": version, "graph_id": "ex:my-graph",
+        "graph": {"schema": "scale-catal", "schema_version": version, "graph_id": "ex:my-graph",
                   "title": "State what was curated and what was left out (e.g. main text only; SI not examined).",
                   "data_status": "research_data", **({"follows_domains": [domain]} if domain else {}),
                   "stewardship": {"contributed_by": ["ex:org/my-lab"], "project": "ex:project/my-project",
@@ -261,7 +261,7 @@ class ScaleToolkit:
     def _doc(self, document: dict | None, path: str | None) -> dict:
         if document is not None:
             if not isinstance(document, dict):
-                raise ScaleError("document must be a JSON object (a scale-graph document)")
+                raise ScaleError("document must be a JSON object (a scale-catal document)")
             return document
         if path:
             return load_doc(self._path(path))
@@ -291,7 +291,7 @@ class ScaleToolkit:
         if domain:
             mans = layout.graph_manifests(self.repo, experimental=True)
             if domain not in mans:
-                raise ScaleError(f"no scale-graph schema for {domain!r}; use {', '.join(mans)} (or core)")
+                raise ScaleError(f"no scale-catal schema for {domain!r}; use {', '.join(mans)} (or core)")
             return mans[domain]
         return pgraph.spec_path(self.repo, None, doc)
 
@@ -322,7 +322,7 @@ class ScaleToolkit:
                     g = load_doc(p).get("graph") or {}
                 except Exception:
                     continue
-                if g.get("schema") == "scale-graph" and g.get("data_status") == "synthetic_example" \
+                if g.get("schema") == "scale-catal" and g.get("data_status") == "synthetic_example" \
                         and (g.get("stewardship") or {}).get("access") == "public":    # missing: not public
                     out.setdefault(p.stem, p)
         return out
@@ -378,7 +378,7 @@ class ScaleToolkit:
         for r in list_domains(self.repo):
             man = mans.get(r["domain"])
             g = load_yaml(man) if man and man.is_file() else {}
-            frozen = sorted(p.stem.removeprefix("scale-graph-") for p in layout.frozen_graph_dir(man).glob("scale-graph-*.yaml")) \
+            frozen = sorted(p.stem.removeprefix("scale-catal-") for p in layout.frozen_graph_dir(man).glob("scale-catal-*.yaml")) \
                 if man else []
             plans = {}
             for q in sorted((self.repo / r["path"] / layout.DOMAIN_COMPETENCY).glob("*.yaml")):
@@ -505,9 +505,9 @@ class ScaleToolkit:
         spec = self._spec(man, target)
         have = (doc.get("graph") or {}).get("schema_version")
         if have == target:
-            return {"error": f"the document is already at scale-graph {have}"}
+            return {"error": f"the document is already at scale-catal {have}"}
         if have not in STEPS:
-            return {"error": f"the document pins scale-graph {have}; migrations run along the steps {sorted(STEPS) or '(none yet)'}"}
+            return {"error": f"the document pins scale-catal {have}; migrations run along the steps {sorted(STEPS) or '(none yet)'}"}
         new, rep = raise_version(doc, target, spec)
         rep["validation"] = pgraph.validate(new, spec).as_dict()["summary"]
         written = None

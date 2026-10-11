@@ -7,7 +7,7 @@ revisit the layout); the tests scaffold a synthetic domain in temporary reposito
 exercise the rules on another one.
 
 The specification has two layers: the science kernel (``core/graph/kernel.yaml``) and the domain. The domain is
-self-contained: its graph schema manifest (DOMAIN.yaml ``graph.manifest``, ``graph/scale-graph.yaml``) assembles
+self-contained: its graph schema manifest (DOMAIN.yaml ``graph.manifest``, ``graph/scale-catal.yaml``) assembles
 the kernel with the domain's own files, listed under its ``domains:`` key; the file named after the domain
 (``domain: <name>``, for catalysis ``graph/catalysis.yaml`` with one vocabulary and one checklist) is required,
 and documents follow its checklist by the domain's name (``follows_domains``, ``--domain``). Frozen versions
@@ -132,7 +132,7 @@ def manifest_path(name: str | None = None) -> str:
 
 
 def graph_files(repo: Path, name: str, m: dict) -> list[str]:
-    """The domain's scale-graph files, relative to the domain directory: the entries of its manifest
+    """The domain's scale-catal files, relative to the domain directory: the entries of its manifest
     (DOMAIN.yaml ``graph.manifest``) that lie inside the domain (``check`` reports the others).
     A domain's manifest lists them under ``domains``; the keys of frozen forms (``modules``, ``extensions``) and of
     retired profile files (``profiles``) are read too, so that ``check`` sees and refuses them."""
@@ -259,15 +259,15 @@ def _inside(base: Path, rel: str, where: str, what: str, pb: Problems, kind: str
 # ---------------------------------------------------------------- identifiers
 
 def declarations(doc: dict) -> list[tuple[str, str]]:
-    """What a scale-graph file declares: its own name, labels, edge types, and properties per label
+    """What a scale-catal file declares: its own name, labels, edge types, and properties per label
     (on its labels, and those it adds to other labels, bridges included). Extending is not declaring:
     ``is_a``, ``extends`` and ``adds_properties`` with a new key."""
     out = []
     for key in ("domain", "module", "extension"):
         if isinstance(doc.get(key), str):
-            out.append(("scale-graph file name", doc[key]))
+            out.append(("scale-catal file name", doc[key]))
     if isinstance(doc.get("kernel"), str):
-        out.append(("scale-graph file name", "kernel"))
+        out.append(("scale-catal file name", "kernel"))
     for lab, nd in (doc.get("nodes") or {}).items():
         out.append(("label", lab))
         out += [("property", f"{lab}.{k}") for k in ((nd or {}).get("properties") or {})]
@@ -317,7 +317,7 @@ def check(repo: Path, only: list[str] | None = None, examples: bool = True) -> d
     core_dir = repo / layout.CORE
     kernel_rel = f"{layout.CORE}/{core.get('kernel')}"
     if (repo / kernel_rel).is_file() and not isinstance((load_yaml(repo / kernel_rel) or {}).get("kernel"), str):
-        pb.error(cw, f"kernel: {core.get('kernel')} is not a scale-graph kernel file (no `kernel:` key)")
+        pb.error(cw, f"kernel: {core.get('kernel')} is not a scale-catal kernel file (no `kernel:` key)")
     for rel in core.get("examples") or []:
         _inside(core_dir, rel, cw, "examples", pb, "dir")
     _check_dir_with(core_dir, core.get("tests"), "test_*.py", cw, "tests", pb)
@@ -329,7 +329,7 @@ def check(repo: Path, only: list[str] | None = None, examples: bool = True) -> d
     if kernel_rel != layout.KERNEL:
         pb.error(cw, f"kernel is {core.get('kernel')!r}; the tools and every domain manifest read {layout.KERNEL}")
     index = identifier_index(repo, core, domains)
-    graph_names = {n for kind, n in index if kind.startswith("scale-graph")}
+    graph_names = {n for kind, n in index if kind.startswith("scale-catal")}
 
     # identifiers: one index over the kernel and the domain; the incumbent, the core, is named first and the
     # error goes to the later owner (sorted() is stable, so the domain's own files keep the index order)
@@ -373,7 +373,7 @@ def check(repo: Path, only: list[str] | None = None, examples: bool = True) -> d
     if rel_manifest.get("core") != layout.CORE_MANIFEST:
         pb.error(layout.RELEASE_MANIFEST, f"core must be {layout.CORE_MANIFEST}")
     if "graph" in rel_manifest:
-        pb.error(layout.RELEASE_MANIFEST, "graph: there is no repository-wide scale-graph composition; each domain "
+        pb.error(layout.RELEASE_MANIFEST, "graph: there is no repository-wide scale-catal composition; each domain "
                                           "declares its schema manifest in DOMAIN.yaml graph.manifest")
     # one version: the manifest's, stated alike by CORE.yaml, DOMAIN.yaml, scale-release.yaml and the kernel-only
     # example manifest (`scale schema bump` raises them together)
@@ -471,14 +471,14 @@ def _check_domain(repo, name, m, domains, core, kver, graph_names, core_digests,
             pb.error(where, f"{k} must be {conv!r}: the tools read {layout.DOMAIN}/{conv}")
 
     # dependencies and alternatives: there is no other domain to depend on yet; the keys stay in DOMAIN.yaml,
-    # empty, and an alternative may only name a scale-graph file
+    # empty, and an alternative may only name a scale-catal file
     for i, dep in enumerate(m.get("depends_on") or []):
         what = dep.get("domain") if isinstance(dep, dict) else dep
         pb.error(where, f"depends_on[{i}] names {what!r}: catalysis is the only domain beside the core, so "
                         "depends_on stays empty")
     alt = m.get("alternative_to")
     if alt and alt not in graph_names:
-        pb.error(where, f"alternative_to names {alt!r}, which is not the name of a scale-graph file")
+        pb.error(where, f"alternative_to names {alt!r}, which is not the name of a scale-catal file")
 
     # declared paths
     gfiles = graph_files(repo, name, m)
@@ -490,7 +490,7 @@ def _check_domain(repo, name, m, domains, core, kver, graph_names, core_digests,
     for f in gfiles:
         _inside(base, f, where, "graph", pb, "file")
     manifest = None
-    if "graph" in m and not g.get("manifest"):          # a domain without scale-graph files has no `graph:`
+    if "graph" in m and not g.get("manifest"):          # a domain without scale-catal files has no `graph:`
         pb.error(where, f"graph.manifest is required: the domain's schema manifest ({layout.DOMAIN_GRAPH_MANIFEST}) "
                         "assembles the science kernel with the domain's files")
     elif g:
@@ -521,9 +521,9 @@ def _check_domain(repo, name, m, domains, core, kver, graph_names, core_digests,
         if not isinstance(doc, dict) or not doc.get("question"):
             pb.error(where, f"competency/{q.name}: a competency question states its question (`question`)")
 
-    # scale-graph files: what each names itself, what it imports, and the domain's own manifest
+    # scale-catal files: what each names itself, what it imports, and the domain's own manifest
     visible = {n for f in gfiles if (base / f).is_file()
-               for kind, n in declarations(load_yaml(base / f) or {}) if kind.startswith("scale-graph")} | {"kernel"}
+               for kind, n in declarations(load_yaml(base / f) or {}) if kind.startswith("scale-catal")} | {"kernel"}
     for f in gfiles:
         p = base / f
         if not p.is_file():
@@ -543,9 +543,9 @@ def _check_domain(repo, name, m, domains, core, kver, graph_names, core_digests,
     # in core/graph/frozen/)
     for p in _files_below(repo, [base]):
         rel = p.relative_to(repo).as_posix()
-        if p.suffix in (".yaml", ".yml") and re.search(r"^kernel:\s*['\"]?scale-graph-kernel", p.read_text(encoding="utf-8",
+        if p.suffix in (".yaml", ".yml") and re.search(r"^kernel:\s*['\"]?scale-kernel", p.read_text(encoding="utf-8",
                                                                                                           errors="ignore"), re.M):
-            pb.error(where, f"{rel} is a copy of a scale-graph kernel; domains use the core's kernel "
+            pb.error(where, f"{rel} is a copy of a scale-catal kernel; domains use the core's kernel "
                             f"({layout.KERNEL}, the kernels of frozen versions in {layout.KERNEL_FROZEN}/)")
         elif p.stat().st_size and sha256_file(p) in core_digests:
             pb.error(where, f"{rel} is byte-identical to a core file; refer to the core instead of copying it")
@@ -619,8 +619,8 @@ def _check_manifest(repo: Path, name: str, manifest: Path, pb: Problems, where: 
     rel_of = lambda p: Path(os.path.normpath(p)).relative_to(Path(os.path.normpath(repo))).as_posix()   # noqa: E731
     man = load_yaml(manifest) or {}
     mrel = rel_of(manifest)
-    if man.get("schema") != "scale-graph" or not is_manifest(man) or not isinstance(man.get("domains"), list):
-        pb.error(where, f"{mrel} is not a domain's scale-graph manifest (schema: scale-graph, kernel, domains)")
+    if man.get("schema") != "scale-catal" or not is_manifest(man) or not isinstance(man.get("domains"), list):
+        pb.error(where, f"{mrel} is not a domain's scale-catal manifest (schema: scale-catal, kernel, domains)")
         return None
     for key in ("modules", "extensions"):
         if key in man:
@@ -717,9 +717,9 @@ def new_domain(repo: Path, name: str, title: str, steward_name: str, steward_git
     if not DATE.match(since):
         raise ScaleError(f"--since {since!r} is not a date YYYY-MM-DD")
     taken = {n for kind, n in identifier_index(repo, load_core(repo), load_domains(repo))
-             if kind.startswith("scale-graph")}
+             if kind.startswith("scale-catal")}
     if name in taken:
-        raise ScaleError(f"{name!r} already names a scale-graph file (the kernel's); choose another domain name")
+        raise ScaleError(f"{name!r} already names a scale-catal file (the kernel's); choose another domain name")
     template = repo / layout.DOMAIN_TEMPLATE
     if not (template / layout.DOMAIN_MANIFEST).is_file():
         raise ScaleError(f"no domain template: {template / layout.DOMAIN_MANIFEST} is missing")

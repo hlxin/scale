@@ -59,8 +59,8 @@ def test_a_schema_gap_can_be_the_expected_answer(tmp_path):
 
 
 def test_questions_run_only_on_declared_public_examples(tmp_path):
-    repo, p = _question(tmp_path, documents=["examples/scale-graph/example.json"])     # declared, made project data here
-    ex = repo / "domain/examples/scale-graph/example.json"
+    repo, p = _question(tmp_path, documents=["examples/scale-catal/example.json"])     # declared, made project data here
+    ex = repo / "domain/examples/scale-catal/example.json"
     write_canonical(ex, as_project_data(load_doc(ex)))
     r = run_question(repo, "catalysis", p)
     assert not r["ok"] and "is not public (stewardship access project)" in r["problems"][0]

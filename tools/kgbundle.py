@@ -1,12 +1,12 @@
-"""Export a scale-graph document as a knowledge-graph bundle (kg-bundle format 1.1.0).
+"""Export a scale-catal document as a knowledge-graph bundle (kg-bundle format 1.1.0).
 
     scale graph export GRAPH --to kg-bundle --out DIR [--bundle-id ID] [--version 1.0.0] [--text slug=file ...]
                         [--previous DIR | --ids-from DIR] [--replaced FILE] [--corpus MANIFEST]
 
 The mapping, and what it cannot carry:
 
-* Nodes become ``<Label>:<key>`` with key = slug of the name plus a short hash of the scale-graph
-  id (unique); the scale-graph id is kept in ``scale_id``. With a previous release, a record it
+* Nodes become ``<Label>:<key>`` with key = slug of the name plus a short hash of the scale-catal
+  id (unique); the scale-catal id is kept in ``scale_id``. With a previous release, a record it
   contained keeps its id there, even if its name changed (ids are frozen at first release). Source nodes become
   ``Publication:<doi or source id>``.
 * A node is reported in (REPORTED_IN) every source its own evidence or its links' evidence quotes. A reading
@@ -94,7 +94,7 @@ Provenance and value detail the kg-bundle format has a place for:
   listed in the record's ``_value_status`` under the property its value would have been exported as (the property
   declared), counted by status (``absences``); a detection limit is not carried.
 
-What the kg-bundle format cannot carry, and stays only in the scale-graph document:
+What the kg-bundle format cannot carry, and stays only in the scale-catal document:
 
 * intervals (``interval_lower``/``interval_upper``, ``coverage_factor``, ``confidence_level``), ``replicates``,
   a value's ``origin``, ``target``, ``variable``, ``definition``, ``produced_by``,
@@ -103,7 +103,7 @@ What the kg-bundle format cannot carry, and stays only in the scale-graph docume
   passages, regions, transcriptions' agreement and second readings.
 
 A host that needs these (an answer that reports missing context, the lifecycle of a source) should import the
-scale-graph document natively and read it with SCALE's rules. Platform-owned names (:data:`PLATFORM_OWNED`: trust,
+scale-catal document natively and read it with SCALE's rules. Platform-owned names (:data:`PLATFORM_OWNED`: trust,
 scope, project, …) are exported as ``scale_<name>``, since the platform sets its own at import.
 
 Release lineage (``previous``, ``ids_from``, ``replaced``; ``scale graph export --to kg-bundle --previous DIR``,
@@ -111,18 +111,19 @@ Release lineage (``previous``, ``ids_from``, ``replaced``; ``scale graph export 
 (``previous`` in bundle.json, with the id changes) and carries its changelog forward; a retired record's released id is
 listed in its survivor's ``replaced_ids``.
 
-The schema (``kg/schema.json``) is the vocabulary of the scale-graph version the graph pins (:func:`vocabulary`), never
+The schema (``kg/schema.json``) is the vocabulary of the scale-catal version the graph pins (:func:`vocabulary`), never
 derived from the graph: every label and edge type, with every property a bundle of that version can carry (a value's
 canonical quantity and its ``_as_reported``, ``_bound``, ``_qualifier`` and ``_basis``; the access, status and
 lifecycle properties). Every bundle of a version therefore declares the same schema, named ``scale-<domain>`` with the
-scale-graph version (``scale-catal 0.1.0`` for catalysis; ``scale-kernel`` for a kernel-only graph). A value not of its
+scale-catal version (``scale-catal 0.1.0`` for catalysis; ``scale-kernel`` for a kernel-only graph). A value not of its
 property's declared type is kept as text in ``<property>_as_reported``; property names are the format's snake_case
 (``pH`` is ``ph``). Every exported record is checked against the schema before anything is written (``_conforms``).
 
 Identity and access, which the kg-bundle format has no field for:
 
-* The bundle schema's ``extends`` names the scale-graph schema by version **and digest**
-  (``{schema_id: scale-graph, version, sha256}``, the sha256 of the version's spec document,
+* The bundle schema's ``extends`` names the scale-catal schema by version **and digest**
+  (``{schema_id: scale-catal, version, sha256}``: the bundle schema and the graph schema it extends share a name, so the
+  version and the digest identify them; the extended schema's own name, ``scale-graph`` at 0.1.0; the sha256 of the version's spec document,
   :func:`pgraph.spec_sha256`, as ``scale graph spec`` writes it), since a bare version number names a schema only
   within one numbering; a document is exported only with the schema of the version it pins.
 * ``bundle.json`` carries ``scale_header``: the graph's ``data_status``, ``schema_version``,
@@ -172,7 +173,7 @@ import re
 import unicodedata
 from pathlib import Path
 
-from . import lifecycle, pgraph, rights
+from . import layout, lifecycle, pgraph, rights
 from .pgraph_query import SECOND_HAND_ECO, _eco
 from .util import ScaleError
 
@@ -225,7 +226,7 @@ def concise_title(title: str, limit: int = TITLE_MAX) -> str:
     return cut.rstrip(" ,;:-\u2013\u2014") + "\u2026"
 
 
-# Set by the platform at import; a scale-graph property of that name is exported as scale_<name>.
+# Set by the platform at import; a scale-catal property of that name is exported as scale_<name>.
 PLATFORM_OWNED = {"trust", "created_by", "scope", "project", "source_node_id", "source_edge_id", "bundle_source", "bundle_id",
                   "bundle_version", "graph_id", "tenant_id"}
 _GREEK = dict(zip("αβγδεζηθικλμνξοπρστυφχψω", ["alpha", "beta", "gamma", "delta", "epsilon", "zeta", "eta", "theta", "iota",
@@ -275,7 +276,7 @@ RESTING = ("rests_on_retracted_source", "partially_rests_on_retracted_source")
 SOURCE_STATUS = {"type": "enum", "values": [*lifecycle.STATUSES[:-1], *RESTING],
                  "description": "derived from notice links (RETRACTS, UPDATES): a source's or dataset's publication status, "
                                 "or, on a record or link, whether its evidence rests on retracted sources (all of it or part)"}
-METADATA_ONLY = {"type": "boolean", "description": "a notice link that carries no quote in the scale-graph document (a notice is "
+METADATA_ONLY = {"type": "boolean", "description": "a notice link that carries no quote in the scale-catal document (a notice is "
                                                    "bibliographic metadata): its evidence is the notice's title"}
 CANONICAL = {"temperature": ("K", _T), "pressure": ("MPa", _P), "duration": ("h", _H), "time_on_stream": ("h", _H),
              "lifetime": ("h", _H), "space_velocity": ("h-1", _SV), "conversion": ("%", _PCT), "yield": ("%", _PCT),
@@ -353,11 +354,11 @@ _FIGURE = re.compile(r"\b(?:Figure|Fig\.)\s*[A-Z]?\d+(?:[a-z]\b|\s*\([a-z]\))?",
 
 
 def scale_status(spec: dict) -> dict:
-    """The bundle schema entry of ``scale_status``: the link status values of the bound scale-graph schema."""
+    """The bundle schema entry of ``scale_status``: the link status values of the bound scale-catal schema."""
     values = list(((spec.get("common") or {}).get("link") or {}).get("properties", {}).get("status", {}).get("values")
                   or ["asserted", "hypothesized", "supported", "disputed", "refuted"])
     return {"type": "enum", "values": values,
-            "description": "the link's status in the scale-graph document: how firmly the source states the relationship "
+            "description": "the link's status in the scale-catal document: how firmly the source states the relationship "
                            "(asserted, hypothesized, supported, disputed or refuted); a disputed or refuted link is "
                            "contested or rejected, whatever its _statement"}
 
@@ -368,7 +369,7 @@ def iri_of(d: dict) -> str | None:
 
 
 def quantity(prop: str, v: dict) -> tuple[dict | None, str | None]:
-    """(bundle quantity, None) or (None, reported text) for a scale-graph value object. The quantity is that of
+    """(bundle quantity, None) or (None, reported text) for a scale-catal value object. The quantity is that of
     :func:`target` (``pressure_gauge`` for a gauge pressure, …)."""
     return _quantity(prop, v)[1:]
 
@@ -426,7 +427,7 @@ def _quantity(prop: str, v: dict) -> tuple[str, dict | None, str | None]:
     return out, None, reported or None
 
 
-# the scale-graph properties a bundle record never carries as properties (they are its evidence, stewardship and
+# the scale-catal properties a bundle record never carries as properties (they are its evidence, stewardship and
 # statement, carried in the format's own fields, or bookkeeping the format has no place for)
 NOT_PROPERTIES = ("evidence", "stewardship", "origin", "record_version", "recorded_at", "conforms_to", "status", "basis",
                   "confidence", "statement_kind")
@@ -439,7 +440,7 @@ SCHEMA_SHORT = {"catalysis": "catal"}           # a domain's short name in its b
 
 def schema_name(doc_or_spec: dict) -> str:
     """The bundle schema's id: scale-<short name of the domain> for a graph that follows a domain's checklist
-    (``scale-catal`` for catalysis, :data:`SCHEMA_SHORT`), else scale-kernel. Its version is the scale-graph version;
+    (``scale-catal`` for catalysis, :data:`SCHEMA_SHORT`), else scale-kernel. Its version is the scale-catal version;
     like any version number it names a schema only within this repository's numbering, and ``extends.sha256`` names it
     everywhere."""
     g = doc_or_spec.get("graph") if "graph" in doc_or_spec else None
@@ -448,7 +449,7 @@ def schema_name(doc_or_spec: dict) -> str:
 
 
 def bundle_prop(k: str) -> str:
-    """A scale-graph property's name in a bundle: the format's snake_case (``pH`` is ``ph``), platform-owned names
+    """A scale-catal property's name in a bundle: the format's snake_case (``pH`` is ``ph``), platform-owned names
     prefixed ``scale_``."""
     k = re.sub(r"[^a-z0-9_]+", "_", k.lower()).strip("_") or "property"
     return f"scale_{k}" if k in PLATFORM_OWNED else k
@@ -464,8 +465,8 @@ def _value_variants(k: str) -> list[str]:
 
 
 def _type_props(defs: dict, is_edge: bool, status_def: dict) -> dict:
-    """The bundle properties of one label or edge type, from its scale-graph property definitions alone."""
-    out: dict[str, dict] = {"scale_id": {"type": "string", "description": "The record's id in the scale-graph document."}}
+    """The bundle properties of one label or edge type, from its scale-catal property definitions alone."""
+    out: dict[str, dict] = {"scale_id": {"type": "string", "description": "The record's id in the scale-catal document."}}
     if not is_edge:
         out["name"] = {"type": "string", "required": True}
     for k, pdef in sorted(defs.items()):
@@ -497,7 +498,7 @@ def _type_props(defs: dict, is_edge: bool, status_def: dict) -> dict:
 
 
 def vocabulary(spec: dict) -> tuple[dict, dict]:
-    """``(node_types, edge_types)``: the bundle schema of a scale-graph version, every label and edge type with every
+    """``(node_types, edge_types)``: the bundle schema of a scale-catal version, every label and edge type with every
     property a bundle of that version can carry, from the schema alone (never from a document), so that every bundle of
     the version declares the same schema. A Source is a Publication; an endpoint label stands for itself and every
     label that is_a it."""
@@ -614,7 +615,7 @@ def _statement(e: dict) -> str:
 
 
 def _locator(loc: str | None, kind: str | None = None) -> dict:
-    """the format's locator from a scale-graph one: the page (``p. N``), the rest as ``section``, and, for a table or
+    """the format's locator from a scale-catal one: the page (``p. N``), the rest as ``section``, and, for a table or
     figure reading (the evidence's ``kind``), the table or figure the locator names."""
     m = re.match(r"^p\. ?(\d+)", loc or "")
     out = {"page": int(m.group(1))} if m else {}
@@ -663,7 +664,7 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
     ``ids_from`` (an earlier build, e.g. one made before the first public release) keeps its ids,
     replaced ids and schema properties as ``previous`` does, without recording it as the previous release.
 
-    ``replaced`` maps a retired scale-graph id to the record it was merged into; with ``previous``, the
+    ``replaced`` maps a retired scale-catal id to the record it was merged into; with ``previous``, the
     survivor lists the retired record's released id in ``replaced_ids``. The schema keeps every
     property the previous release declared on a type it still has (a schema never shrinks).
 
@@ -679,7 +680,7 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
     bundle_title = " ".join((title or "").split())        # the parameter; ``title`` is reused below
     pinned = (doc.get("graph") or {}).get("schema_version") if isinstance(doc, dict) else None
     if pinned != spec.get("version"):
-        raise ScaleError(f"the document pins scale-graph {pinned}; the schema given is {spec.get('version')}: a "
+        raise ScaleError(f"the document pins scale-catal {pinned}; the schema given is {spec.get('version')}: a "
                          "kg-bundle names its schema by the version and digest the document pins, so it is not exported")
     if previous:
         pv = json.loads((Path(previous) / "bundle.json").read_text()).get("version")
@@ -796,7 +797,7 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
             gid[n["id"]] = f"Publication:{pub_key(n)}"
         else:
             fresh.append(n)
-    # a new record's id is its name's slug and a short digest of its scale-graph id; where two records' ids would
+    # a new record's id is its name's slug and a short digest of its scale-catal id; where two records' ids would
     # meet (one name, digests sharing six characters, or a released id), the digest grows, so no two records share
     # an id and no id seen before changes
     taken = set(gid.values()) | set(frozen.values())
@@ -813,7 +814,7 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
         clash = sorted(v for v in set(gid.values()) if list(gid.values()).count(v) > 1)
         raise ScaleError(f"two records would share a bundle id: {clash[:3]}")
     src_of = {sid: pub_key(n) for sid, n in sources.items()}
-    if texts:                   # a text named by the source's scale-graph id is its publication's: one key from here on
+    if texts:                   # a text named by the source's scale-catal id is its publication's: one key from here on
         named: dict[str, str] = {}
         for k in sorted(texts):
             pk = src_of.get(k, k)
@@ -843,7 +844,7 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
         node_types[lab] = {"description": (d.get("description") or lab).strip()[:2000],
                            **({"iri": iri_of(d)} if iri_of(d) else {}),
                            "properties": {"name": {"type": "string", "required": True},
-                                          "scale_id": {"type": "string", "description": "The record's id in the scale-graph document."}}}
+                                          "scale_id": {"type": "string", "description": "The record's id in the scale-catal document."}}}
     node_types["Publication"] = {"description": "A source document: article, patent, thesis or report.",
                                  "properties": {"title": {"type": "string", "required": True}, "doi": {"type": "string"},
                                                 "source_id": {"type": "string"}, "year": {"type": "integer"}, "license": {"type": "string"},
@@ -1207,16 +1208,19 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
               "access_at_export": {"level": level, "date": today,                # and what part of it may not see
                                    **({"less_open_kept": less_kept} if less_kept else {})},
               **({"filtered_for": g0["filtered_for"]} if g0.get("filtered_for") else {})}
-    # the schema is the vocabulary of the scale-graph version the graph pins, the same in every bundle of that version
+    # the schema is the vocabulary of the scale-catal version the graph pins, the same in every bundle of that version
     # (named scale-<domain> with that version), never derived from the graph; every record is checked against it
     schema_id, schema_version = schema_name(doc), str(doc["graph"].get("schema_version"))
+    extends_id = spec.get("schema") or layout.SCHEMA_NAME        # the graph schema the pinned version names (scale-graph at 0.1.0)
     vocab_nodes, vocab_edges = vocabulary(spec)
     _conforms(vocab_nodes, vocab_edges, kept_nodes, list(links.values()), schema_id)
     schema = {"schema_id": schema_id, "version": schema_version, "title": f"{schema_id} {schema_version}",
-              "scope": (f"The {(list(doc['graph'].get('follows_domains') or ['kernel']))[0]} vocabulary of SCALE's scale-graph {schema_version} "
-                        f"(spec sha256 {schema_sha}), every label and edge type with every property a bundle can carry; "
-                        "a version number names a schema only within SCALE's numbering, the digest everywhere."),
-              "extends": {"schema_id": "scale-graph", "version": doc["graph"].get("schema_version"), "sha256": schema_sha},
+              "scope": (f"This bundle schema, {schema_id} {schema_version}, is the {(list(doc['graph'].get('follows_domains') or ['kernel']))[0]} "
+                        f"vocabulary of the SCALE graph schema it extends ({extends_id} {schema_version}, spec sha256 {schema_sha}), "
+                        "every label and edge type with every property a bundle can carry. The two share a name and a version "
+                        "but are different things (the bundle's vocabulary, and the graph schema's rules); a version number names "
+                        "a schema only within SCALE's numbering, the digest of the extended schema's spec document everywhere."),
+              "extends": {"schema_id": extends_id, "version": doc["graph"].get("schema_version"), "sha256": schema_sha},
               "node_types": vocab_nodes, "edge_types": vocab_edges}
     graph = {"directed": True, "multigraph": True,
              "graph": {"bundle_id": bundle_id, "version": version, "schema_id": schema_id, "schema_version": schema_version,
@@ -1275,7 +1279,7 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
                                             f"text/_manifest.json ({'; '.join(sorted(shipped_licences))}). Other sources "
                                             "are cited by short verbatim quotes only.") if shipped else
                                    "No source texts are shipped; sources are cited by short verbatim quotes only."},
-                "pipeline_version": f"scale-graph {doc['graph'].get('schema_version')} export",
+                "pipeline_version": f"scale-catal {doc['graph'].get('schema_version')} export",
                 "producer": producer,
                 "export_report": report}
     (out / "bundle.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=1, sort_keys=True) + "\n")
@@ -1405,9 +1409,9 @@ def _changelog(doc: dict, version: str, previous: Path | None, lineage: dict) ->
     g = doc.get("graph") or {}
     head = f"# Changelog\n\n## {version}\n\n"
     if not previous:
-        return head + f"First release, exported from scale-graph {g.get('schema_version')} ({g.get('graph_id')}).\n"
+        return head + f"First release, exported from scale-catal {g.get('schema_version')} ({g.get('graph_id')}).\n"
     prev, ch = lineage["previous"], lineage["changes"]
-    entry = (f"Exported from scale-graph {g.get('schema_version')} ({g.get('graph_id')}); previous release {prev['version']}. "
+    entry = (f"Exported from scale-catal {g.get('schema_version')} ({g.get('graph_id')}); previous release {prev['version']}. "
              f"Nodes: {ch['nodes_added']} added, {ch['nodes_removed']} removed, {ch['nodes_changed']} changed; edges: "
              f"{ch['edges_added']} added, {ch['edges_removed']} removed, {ch['edges_changed']} changed.\n")
     old = Path(previous) / "CHANGELOG.md"

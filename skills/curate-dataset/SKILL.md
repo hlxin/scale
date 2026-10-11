@@ -1,7 +1,7 @@
 ---
 name: curate-dataset
 version: 0.1.0
-description: Turn a data table or a lab file into a scale-graph document under the schema version it pins — the file as a Dataset with its digest, column dictionary and licence, every record citing its row, values in the file's units with their origin, and the stewardship access its owners set — recording gaps instead of changing the schema.
+description: Turn a data table or a lab file into a scale-catal document under the schema version it pins — the file as a Dataset with its digest, column dictionary and licence, every record citing its row, values in the file's units with their origin, and the stewardship access its owners set — recording gaps instead of changing the schema.
 scale_release: ">=v0.1.0"
 inputs:
   - A data file (CSV, a spreadsheet exported to CSV, a JSON or text export of an instrument or a lab notebook)
@@ -16,7 +16,7 @@ allowed-tools:
   - "scale evidence access <doc>"                       # before anything is committed to the public repository
   - read access to the data file; write access to the working directory only
 outputs:
-  - A scale-graph document with a Dataset for the file and records citing its rows
+  - A scale-catal document with a Dataset for the file and records citing its rows
   - The validation report (errors, warnings, checklist conformance)
   - Gaps for columns the schema cannot express (missing_concept) and values the file does not give
 validation:
@@ -30,7 +30,7 @@ human-review:
   - Whenever the document would change its access (filtered for another audience, or committed anywhere)
 ---
 
-# Curate a data file into a scale-graph document
+# Curate a data file into a scale-catal document
 
 A data file is a source like a paper, with two differences: its rows are the evidence, and its owners,
 not a publisher, decide who may see it. The schema defines what a completed record means; the file

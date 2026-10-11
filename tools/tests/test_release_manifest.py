@@ -1,4 +1,4 @@
-"""Release builds: the core and the released domains, each with its scale-graph schema (its manifest, its
+"""Release builds: the core and the released domains, each with its scale-catal schema (its manifest, its
 parts, the science kernel and any frozen versions), copied from the head and digested, with the schema's one
 version, the people credited, the experimental domains left out, the source repository and a semantic comparison
 with the previous release."""
@@ -13,8 +13,8 @@ from scale.releases import build_release, release_root, schema_comparison, verif
 from scale.util import ScaleError, dump_yaml, load_yaml, sha256_file
 
 # the catalysis graph schema: its manifest and one catalysis file, with the kernel
-GRAPH_FILES = ["core/graph/kernel.yaml", "domain/graph/scale-graph.yaml", "domain/graph/catalysis.yaml"]
-STATING = [("core/CORE.yaml", "version"), ("domain/DOMAIN.yaml", "version"), ("domain/graph/scale-graph.yaml", "version"),
+GRAPH_FILES = ["core/graph/kernel.yaml", "domain/graph/scale-catal.yaml", "domain/graph/catalysis.yaml"]
+STATING = [("core/CORE.yaml", "version"), ("domain/DOMAIN.yaml", "version"), ("domain/graph/scale-catal.yaml", "version"),
            ("scale-release.yaml", "schema_version"), ("core/examples/science-kernel-only.yaml", "version")]
 
 
@@ -61,7 +61,7 @@ def test_the_build_carries_core_kernel_domain_and_skills_with_the_one_version(tm
     assert (m["core"], m["domain_profiles"]) == ("core/CORE.yaml", ["domain/DOMAIN.yaml"]) and "graph" not in m
     for f in ["core/CORE.yaml", "domain/DOMAIN.yaml"] + GRAPH_FILES:
         assert m["digests"][f] == sha256_file(repo / f), f
-    held = bool(list((REPO / "domain/graph/frozen").glob("scale-graph-*.yaml")))     # none at 0.1.0
+    held = bool(list((REPO / "domain/graph/frozen").glob("scale-catal-*.yaml")))     # none at 0.1.0
     assert any("/frozen/" in k for k in m["digests"]) == held
     assert all(s.startswith("skills/") for s in m["skills"]) and "skills/query-graph/SKILL.md" in m["digests"]
     assert verify_release(dest, "v0.1.0")["ok"]
@@ -70,7 +70,7 @@ def test_the_build_carries_core_kernel_domain_and_skills_with_the_one_version(tm
     assert cv["core"] == {"name": "scale-core", "version": HEAD_VERSION}
     assert cv["kernel"] == {"file": layout.KERNEL, "version": HEAD_VERSION}
     assert cv["domains"] == [{"domain": "catalysis", "version": HEAD_VERSION, "status": "stable",
-                              "scale_graph": {"manifest": "domain/graph/scale-graph.yaml", "version": HEAD_VERSION,
+                              "scale_graph": {"manifest": "domain/graph/scale-catal.yaml", "version": HEAD_VERSION,
                                               "status": "candidate"}}]
     assert cv["tool"]["package"] == "scale-catal" and {s["name"] for s in cv["skills"]} == {
         "curate-source", "query-graph", "evolve-schema", "triage-feedback", "scan-conflicts", "map-coverage",
@@ -86,9 +86,9 @@ def test_the_build_carries_core_kernel_domain_and_skills_with_the_one_version(tm
     assert "proposals" not in m and "review" not in m
     # the spec document of the one version, with its digest
     from scale import pgraph
-    assert m["spec_documents"] == [{"domain": "catalysis", "version": v, "file": f"specs/catalysis/scale-graph-{v}.json",
+    assert m["spec_documents"] == [{"domain": "catalysis", "version": v, "file": f"specs/catalysis/scale-catal-{v}.json",
                                     "sha256": pgraph.spec_sha256(pgraph.load_spec(path))}
-                                   for v, path in pgraph.spec_versions(repo / "domain/graph/scale-graph.yaml")]
+                                   for v, path in pgraph.spec_versions(repo / "domain/graph/scale-catal.yaml")]
     assert m["spec_documents"][-1]["version"] == HEAD_VERSION
     assert list(m)[-1] == "digests"
 
@@ -172,10 +172,10 @@ def test_the_released_spec_digest_stays_put(tmp_path):
     from scale.releases import spec_digest_stability
     repo = _mini(tmp_path)
     build_release(repo, "v0.1.0", date="2026-10-08")
-    man = repo / "domain/graph/scale-graph.yaml"
+    man = repo / "domain/graph/scale-catal.yaml"
     now = {("catalysis", v): pgraph.spec_sha256(pgraph.load_spec(path)) for v, path in pgraph.spec_versions(man)}
     assert spec_digest_stability(repo, now)["ok"]
     _edit(repo / "domain/graph/catalysis.yaml", lambda m: m["nodes"]["CatalyticTest"]["properties"].pop("feed_ratio"))
     drift = {**now, ("catalysis", HEAD_VERSION): pgraph.spec_sha256(pgraph.load_spec(man))}
     res = spec_digest_stability(repo, drift)
-    assert not res["ok"] and f"catalysis scale-graph {HEAD_VERSION}: release v0.1.0 has spec digest" in res["problems"][0]
+    assert not res["ok"] and f"catalysis scale-catal {HEAD_VERSION}: release v0.1.0 has spec digest" in res["problems"][0]

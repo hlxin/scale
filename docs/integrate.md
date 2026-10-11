@@ -32,7 +32,7 @@ scale call query - < plan.json               # "-" reads arguments from stdin (l
 ```
 
 Tool names work with or without the `scale_` prefix. There is no configuration to write and nothing
-to upgrade. SCALE reads and writes one data format, **scale-graph documents** (node-link JSON), and
+to upgrade. SCALE reads and writes one data format, **scale-catal documents** (node-link JSON), and
 each document pins the schema version it follows (`graph.schema_version`). Documents live in a
 working directory, `$SCALE_WORKSPACE` (default `~/.scale/workspace`): a relative `path` argument is
 read there, and the two tools that write (`example`, and `migrate` with `save_as`) write only there.
@@ -68,7 +68,7 @@ file too (`'{"name": "curate-source", "reference": "references/recipes.md"}'`).
 
 | skill | what it is for |
 |---|---|
-| `curate-source` | translate a declared source (an article, a patent, a report) into a scale-graph document: values as printed, evidence, typed absences, gaps instead of schema changes; with recording recipes |
+| `curate-source` | translate a declared source (an article, a patent, a report) into a scale-catal document: values as printed, evidence, typed absences, gaps instead of schema changes; with recording recipes |
 | `curate-dataset` | turn a data table or a lab file into a document: the file as a Dataset with its digest and column dictionary, records citing their rows, the access its owners set |
 | `query-graph` | answer a question with a graph query plan: rows as reported with evidence, what was left out and why, the coverage, the kind of answer |
 | `map-coverage` | a coverage map (materials by properties by conditions) from query plans, each kind of absence kept apart, gaps routed |

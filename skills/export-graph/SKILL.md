@@ -1,10 +1,10 @@
 ---
 name: export-graph
 version: 0.1.0
-description: Hand a scale-graph document to another system — validated under the public schema it pins, its quotes within the copyright cap, filtered for the audience that will see it, as the native document or as a kg-bundle whose losses are read and stated, with texts shipped only under a stated licence, sealed and linked to its previous release.
+description: Hand a scale-catal document to another system — validated under the public schema it pins, its quotes within the copyright cap, filtered for the audience that will see it, as the native document or as a kg-bundle whose losses are read and stated, with texts shipped only under a stated licence, sealed and linked to its previous release.
 scale_release: ">=v0.1.0"
 inputs:
-  - A scale-graph document (it pins its schema version)
+  - A scale-catal document (it pins its schema version)
   - The audience the export is for (the public, a project, an institution) and the system that will read it
   - For a later release, the previous release's bundle folder
 allowed-tools:
@@ -29,9 +29,9 @@ human-review:
   - Whenever the export is not public (access_warning), and before any text ships under text/
 ---
 
-# Export a scale-graph document to another system
+# Export a scale-catal document to another system
 
-SCALE assumes nothing about the receiving system. A native scale-graph document is lossless; a
+SCALE assumes nothing about the receiving system. A native scale-catal document is lossless; a
 knowledge-graph bundle (kg-bundle format) is a node-link folder other platforms can load, and it loses what that format
 has no place for. Either way the export is valid, capped, filtered for its audience, and says what it
 lost.
@@ -58,7 +58,7 @@ lost.
    (`scale_access`, `scale_access_project`, `scale_access_institutions`), and the bundle as a whole only
    to those who may see every record in it.
 4. **Choose the form:**
-   - **native** — the scale-graph document itself: value objects, typed absences with their reasons,
+   - **native** — the scale-catal document itself: value objects, typed absences with their reasons,
      ranges and bounds, the source lifecycle, evidence with passages and readings. The receiver
      should validate it with `scale graph validate` and answer with SCALE's query rules. Choose it
      when the receiver must report missing context or retractions.

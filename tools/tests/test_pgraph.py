@@ -1,6 +1,6 @@
-"""scale-graph: labeled property graphs in node-link JSON — the validator against the catalysis domain's
-schema (domain/graph/scale-graph.yaml: the science kernel plus the catalysis domain file with its
-one checklist) and its worked example (domain/examples/scale-graph/example.json), which is checked under
+"""scale-catal: labeled property graphs in node-link JSON — the validator against the catalysis domain's
+schema (domain/graph/scale-catal.yaml: the science kernel plus the catalysis domain file with its
+one checklist) and its worked example (domain/examples/scale-catal/example.json), which is checked under
 the version it pins (a later proposal that raises the head leaves it valid under that version)."""
 
 import copy
@@ -14,7 +14,7 @@ from conftest import GRAPH_MANIFEST, HEAD_VERSION, REPO, as_project_data, spec_o
 from scale import pgraph
 from scale.util import ScaleError, load_doc
 
-EXAMPLES = REPO / "domain/examples/scale-graph"
+EXAMPLES = REPO / "domain/examples/scale-catal"
 
 
 @pytest.fixture(scope="module")
@@ -51,25 +51,25 @@ def test_the_schema_reads_the_governance_registry(spec, tmp_path):
     shutil.copy2(REPO / "scale-release.yaml", repo / "scale-release.yaml")
     (repo / "releases").mkdir()
     with pytest.raises(ScaleError, match="no extension-prefix registry"):
-        pgraph.load_spec(repo / "domain/graph/scale-graph.yaml")
+        pgraph.load_spec(repo / "domain/graph/scale-catal.yaml")
 
 
 def test_the_default_schema_is_the_catalysis_domains(tmp_path):
-    assert pgraph.spec_path(REPO) == GRAPH_MANIFEST == REPO / "domain/graph/scale-graph.yaml"   # the one domain's schema
+    assert pgraph.spec_path(REPO) == GRAPH_MANIFEST == REPO / "domain/graph/scale-catal.yaml"   # the one domain's schema
     assert pgraph.spec_for(REPO, HEAD_VERSION) == GRAPH_MANIFEST
     with pytest.raises(ScaleError, match="is not a version this repository holds"):
         pgraph.spec_for(REPO, "0.0.9")
     repo = tmp_path / "repo"
     repo.mkdir()
     doc = {"graph": {"follows_domains": ["catalysis"]}, "nodes": []}
-    with pytest.raises(ScaleError, match=r"no scale-graph schema found: .* domain/DOMAIN.yaml \(pass --spec\)"):
+    with pytest.raises(ScaleError, match=r"no scale-catal schema found: .* domain/DOMAIN.yaml \(pass --spec\)"):
         pgraph.spec_path(repo, doc=doc)                                   # no domain/: give the schema
     assert pgraph.spec_path(repo, "x/explicit.yaml", doc) == Path("x/explicit.yaml")
 
 
 def test_candidate_spec_is_found_and_provisional(head):
     spec = head
-    assert spec["schema"] == "scale-graph" and spec["status"] == "candidate" and spec["maturity"] == "provisional"
+    assert spec["schema"] == "scale-catal" and spec["status"] == "candidate" and spec["maturity"] == "provisional"
     assert spec["version"] == HEAD_VERSION
     # 0.1.0 has 55 labels and 97 edge types; later proposals only add (labels and edge types are deprecated, never deleted)
     assert len(spec["nodes"]) >= 55 and len(spec["edges"]) >= 97
@@ -416,7 +416,7 @@ def test_a_value_that_is_not_a_finite_number_is_an_error():
     whose temperature is made NaN, or infinite, fails validation, naming the path."""
     import copy
     from conftest import EXAMPLES, spec_of
-    doc = load_doc(EXAMPLES / "scale-graph/example.json")
+    doc = load_doc(EXAMPLES / "scale-catal/example.json")
     spec = spec_of(doc)                                          # the schema the document pins
     assert pgraph.validate(doc, spec).errors == []
     test = next(n for n in doc["nodes"] if n["label"] == "CatalyticTest")

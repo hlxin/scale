@@ -1,5 +1,5 @@
 """The methanol-synthesis example (examples/methanol-synthesis-pre1966/): the frozen corpus (sources.json), the curated
-scale-graph and the manuscript's questions as query plans, run on the public files alone.
+scale-catal and the manuscript's questions as query plans, run on the public files alone.
 
 The graph is the curation of the historical methanol-synthesis literature published before 1966,
 scoped to CO and CO2 hydrogenation (105 sources), cleared for publication, moved to today's
@@ -72,7 +72,7 @@ def test_corpus_is_frozen_before_the_cutoff(manifest):
 def test_graph_is_public_research_data_under_the_current_schema(pg, spec):
     from scale import pgraph
     g = pg["graph"]
-    assert g["schema_version"] == "0.1.0" and g["follows_domains"] == ["catalysis"]
+    assert g["schema_version"] == "0.2.0" and g["follows_domains"] == ["catalysis"]
     assert g["data_status"] == "research_data" and g["stewardship"]["access"] == "public"
     assert "1966" in g["title"] and len(g["title"]) <= 40 and CUTOFF in g["description"] and "US 2,061,470" in g["description"]
     rep = pgraph.validate(pg, spec)
@@ -179,7 +179,12 @@ def test_the_bundle_is_this_graph_sealed():
     m = json.loads(z.read(root + "bundle.json"))
     assert (m["format_version"], m["bundle_id"], m["version"], m["previous"]["version"]) == (
         "1.1.0", "methanol-synthesis-pre1966", "2.0.0", "1.1.1")
-    assert (m["schema_id"], m["schema_version"]) == ("scale-catal", load_doc(GRAPH)["graph"]["schema_version"])
+    # the bundle was exported from the graph at schema 0.1.0, before the graph was migrated to 0.2.0 (the rename of
+    # scale-graph to scale-catal, which changed no record); it stays a sealed release until it is exported again
+    from scale import pgraph
+    assert (m["schema_id"], m["schema_version"]) == ("scale-catal", "0.1.0")
+    assert m["scale_header"]["schema_sha256"] == pgraph.spec_sha256(pgraph.load_spec(pgraph.frozen_spec(
+        pgraph.spec_path(REPO), "0.1.0")))
     title = load_doc(GRAPH)["graph"]["title"]          # a platform names the imported graph after the bundle's title
     assert m["topic"] == title == "Methanol Synthesis CO/CO2+H2 Pre-1966" and len(title) <= 40
     graph = z.read(root + "kg/graph.json")

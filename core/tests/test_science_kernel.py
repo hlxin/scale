@@ -246,7 +246,7 @@ def test_inputs_used_at_an_old_version_are_flagged(spec):
 
 
 def test_existing_schema_versions_are_unaffected():
-    ex = json.loads((EXAMPLES / "scale-graph/example.json").read_text())
+    ex = json.loads((EXAMPLES / "scale-catal/example.json").read_text())
     assert validate(copy.deepcopy(ex), spec_of(ex)).errors == []          # under the version it pins, head or frozen
 
 

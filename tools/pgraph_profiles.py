@@ -1,4 +1,4 @@
-"""scale-graph conformance contracts: the domain files' checklists over the vocabulary.
+"""scale-catal conformance contracts: the domain files' checklists over the vocabulary.
 
 A domain file's checklist (``must``, ``should``) is turned into a contract (named after the domain; the conformance
 report lists contracts under ``profiles``, its historical key). There are no profile files: they are retired by

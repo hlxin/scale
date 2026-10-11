@@ -1,10 +1,10 @@
 ---
 name: scan-conflicts
 version: 0.1.0
-description: Find values in scale-graph documents that seem to disagree, by pairing them with query plans that state units and bases, and classify each pair as a genuine conflict, an apparent one (with the axis that explains it) or not comparable — as a report, or as comparison claims a person reviews; never rewriting a value.
+description: Find values in scale-catal documents that seem to disagree, by pairing them with query plans that state units and bases, and classify each pair as a genuine conflict, an apparent one (with the axis that explains it) or not comparable — as a report, or as comparison claims a person reviews; never rewriting a value.
 scale_release: ">=v0.1.0"
 inputs:
-  - The scale-graph documents to scan (each pins its schema version)
+  - The scale-catal documents to scan (each pins its schema version)
   - What to scan (a quantity on a kind of record, e.g. methanol space-time yield of Cu/ZnO catalysts), or a question
 allowed-tools:
   - "scale graph describe [labels] --domain <domain>"   # what the schema can express
@@ -28,7 +28,7 @@ human-review:
   - Whenever the pair spans sources of different kinds (a patent and an article, a review and its primary work)
 ---
 
-# Scan scale-graph documents for conflicting values
+# Scan scale-catal documents for conflicting values
 
 A conflict is two statements about the same thing under the same conditions that cannot both hold.
 Most disagreements between sources are not that: they differ in the catalyst, the conditions, the

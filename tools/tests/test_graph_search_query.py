@@ -12,7 +12,7 @@ from scale.passages import Index, evidence_items, locate, passages_of, split_pag
 from scale.util import ScaleError, load_doc
 
 pytest.importorskip("numpy")
-X = REPO / "domain/examples/scale-graph"
+X = REPO / "domain/examples/scale-catal"
 HEAD_VERSION = __import__("yaml").safe_load((GRAPH_MANIFEST).read_text())["version"]
 SRC = "ex:t/source/lazier-1930"
 OLD = "ex:t/source/old-1928"
@@ -63,7 +63,7 @@ def doc():
                                                                          "claim_kind": "finding", "claim_status": "proposed",
                                                                          "evidence": [ev(OLD, "p. 1", q_s)]}})
     d = {"directed": True, "multigraph": True,
-         "graph": {"schema": "scale-graph", "schema_version": HEAD_VERSION, "graph_id": "ex:t/graph", "title": "test graph",
+         "graph": {"schema": "scale-catal", "schema_version": HEAD_VERSION, "graph_id": "ex:t/graph", "title": "test graph",
                    "data_status": "synthetic_example"}, "nodes": nodes, "links": links}
     d["links"] += pgraph.derive_reported_in(d)
     for r in d["nodes"] + d["links"]:

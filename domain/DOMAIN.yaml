@@ -1,11 +1,11 @@
 # The catalysis domain's declaration, checked by `scale domains check` and copied into every
 # release. Paths are relative to domain/, except decision_record (repository-relative). `version` states
-# the schema's one version (kernel and catalysis together), the manifest's (graph/scale-graph.yaml).
+# the schema's one version (kernel and catalysis together), the manifest's (graph/scale-catal.yaml).
 domain: catalysis
 title: Catalysis
 status: stable
 founding: true
-version: 0.1.0
+version: 0.2.0
 depends_on: []
 alternative_to: null
 summary: 'Catalytic chemistry and its evidence: the catalysis domain''s graph schema, with one vocabulary and one checklist.'
@@ -47,15 +47,15 @@ review_areas:
   - photo
   - plasma
 graph:
-  manifest: graph/scale-graph.yaml
+  manifest: graph/scale-catal.yaml
 examples:
-  - examples/scale-graph
+  - examples/scale-catal
 # public synthetic documents only (scale check requires every committed document to be public)
 example_documents:
   graph:
-    - examples/scale-graph/example.json
-    - examples/scale-graph/driving-force-examples/*.json
-    - examples/scale-graph/source-lifecycle/*.json
+    - examples/scale-catal/example.json
+    - examples/scale-catal/driving-force-examples/*.json
+    - examples/scale-catal/source-lifecycle/*.json
 competency: competency
 tests: tests
 docs: docs

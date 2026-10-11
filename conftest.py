@@ -50,9 +50,9 @@ CATALYSIS = REPO / layout.DOMAIN
 # two layers: the science kernel (core/) and the catalysis domain (domain/), whose graph schema manifest
 # assembles the kernel with the catalysis file (catalysis.yaml), which carries the one checklist
 GRAPH_MANIFEST = CATALYSIS / layout.DOMAIN_GRAPH_MANIFEST
-GRAPH_FROZEN = layout.frozen_graph_dir(GRAPH_MANIFEST)       # its frozen versions (scale-graph-<v>.yaml, v<v>/), once any
+GRAPH_FROZEN = layout.frozen_graph_dir(GRAPH_MANIFEST)       # its frozen versions (scale-catal-<v>.yaml, v<v>/), once any
 EXAMPLES = CATALYSIS / layout.DOMAIN_EXAMPLES
-DRIVING_FORCE_EXAMPLES = EXAMPLES / "scale-graph/driving-force-examples"   # public synthetic examples
+DRIVING_FORCE_EXAMPLES = EXAMPLES / "scale-catal/driving-force-examples"   # public synthetic examples
 COMPETENCY = CATALYSIS / layout.DOMAIN_COMPETENCY
 FIXTURES = CATALYSIS / "tests/fixtures"
 
@@ -66,7 +66,7 @@ def repo():
 # (the automatic version bump), so a test never spells the head version. A test about what a document pins reads it
 # from the document and loads that version with schema_at(), which finds the head while the head is at it and the
 # frozen copy after a later change moved the head on.
-HEAD_VERSION = load_yaml(GRAPH_MANIFEST)["version"]          # the schema's one version (scale-graph)
+HEAD_VERSION = load_yaml(GRAPH_MANIFEST)["version"]          # the schema's one version (scale-catal)
 
 
 def schema_at(version: str) -> Path:
@@ -100,10 +100,10 @@ def pinned_schema(doc: dict) -> Path:
     the domain)."""
     from scale import pgraph
     v, head = doc["graph"]["schema_version"], HEAD_VERSION
-    frozen = sorted(p.name.removeprefix("scale-graph-").removesuffix(".yaml") for p in GRAPH_FROZEN.glob("scale-graph-*.yaml"))
-    assert v == head or v in frozen, f"pins scale-graph {v}: neither the head {head} nor a frozen version {frozen}"
+    frozen = sorted(p.name.removeprefix("scale-catal-").removesuffix(".yaml") for p in GRAPH_FROZEN.glob("scale-catal-*.yaml"))
+    assert v == head or v in frozen, f"pins scale-catal {v}: neither the head {head} nor a frozen version {frozen}"
     path = pgraph.spec_for(REPO, v, doc=doc)
-    assert path == (GRAPH_MANIFEST if v == head else GRAPH_FROZEN / f"scale-graph-{v}.yaml"), path
+    assert path == (GRAPH_MANIFEST if v == head else GRAPH_FROZEN / f"scale-catal-{v}.yaml"), path
     kernel = layout.manifest_kernel(path).resolve()
     assert kernel == (KERNEL.resolve() if v == head else (KERNEL_FROZEN / f"kernel-{v}.yaml").resolve()), kernel
     return path

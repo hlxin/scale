@@ -1,8 +1,8 @@
 # Knowledge-graph bundles (kg-bundle format)
 
-SCALE writes a scale-graph document as a **knowledge-graph bundle**: a self-describing folder, shipped as one zip,
+SCALE writes a scale-catal document as a **knowledge-graph bundle**: a self-describing folder, shipped as one zip,
 that a platform reading this format can load and display without SCALE. SCALE follows the format as published by
-its maintainers; it neither defines nor endorses any platform that reads it. The scale-graph document stays the
+its maintainers; it neither defines nor endorses any platform that reads it. The scale-catal document stays the
 lossless original; a bundle is an export of it.
 
 ## What a bundle holds
@@ -14,7 +14,7 @@ lossless original; a bundle is an export of it.
 ├── SHA256SUMS         digest of every file except itself and validation.json
 ├── validation.json    the format validator's report for this exact bundle (written when it seals the bundle)
 └── kg/
-    ├── schema.json    the bundle schema: node and edge types, typed properties, `extends` naming scale-graph
+    ├── schema.json    the bundle schema: node and edge types, typed properties, `extends` naming scale-catal
     └── graph.json     the graph, node-link JSON
 ```
 
@@ -34,9 +34,9 @@ SCALE writes format **1.1.0** (the identifier the format requires in `bundle.jso
   `_value_status` entry (status and, for `not_reported`, the reason), not a missing property.
 
 **The schema is the vocabulary, not the graph's subset.** `kg/schema.json` declares every label and edge type of the
-scale-graph version the graph pins, with every property a bundle can carry, so every bundle of that version declares
+scale-catal version the graph pins, with every property a bundle can carry, so every bundle of that version declares
 the same schema: `scale-catal 0.1.0` for a catalysis graph (`scale-kernel` for a kernel-only one). Its `extends`
-names scale-graph by version **and** spec digest, which is what identifies it, since a version number names a schema
+names scale-catal by version **and** spec digest, which is what identifies it, since a version number names a schema
 only within one numbering. A value not of its property's declared type is kept as text in `<property>_as_reported`.
 
 ## Making, checking and loading one
@@ -58,7 +58,7 @@ with the format's validator (`bundle_validate.py`, with `--previous` for a later
 it. The tests run the validator when `SCALE_BUNDLE_VALIDATOR` names that file. Any platform that reads the format
 loads the zip as it is: the first release as a new graph, each later release as an update of it, in order.
 
-The mapping from scale-graph to the bundle (ids, units, evidence, statements, access) is described in the module
+The mapping from scale-catal to the bundle (ids, units, evidence, statements, access) is described in the module
 docstring of `tools/kgbundle.py`, and the export skill (`skills/export-graph/SKILL.md`) says when to choose
 a bundle over the native document.
 

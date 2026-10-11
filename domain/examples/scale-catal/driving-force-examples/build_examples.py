@@ -1,4 +1,4 @@
-"""Build one synthetic document per driving force (and per combination of forces) for the catalysis domain's scale-graph
+"""Build one synthetic document per driving force (and per combination of forces) for the catalysis domain's scale-catal
 schema (all values invented). Every document follows the one catalysis checklist (follows_domains: [catalysis]); its
 items for a catalytic test apply by the driving forces the test lists.
 
@@ -53,7 +53,7 @@ class Doc:
     def __init__(self, key: str, title: str):
         self.p = f"ex:df-{key}"
         self.doc = {"directed": True, "multigraph": True,
-                    "graph": {"schema": "scale-graph", "schema_version": HEAD_VERSION, "graph_id": f"{self.p}/graph", "title": title,
+                    "graph": {"schema": "scale-catal", "schema_version": HEAD_VERSION, "graph_id": f"{self.p}/graph", "title": title,
                               "data_status": "synthetic_example", "follows_domains": ["catalysis"],
                               "stewardship": {"access": "public"}},      # committed documents say so (scale check)
                     "nodes": [], "links": []}

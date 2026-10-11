@@ -1,4 +1,4 @@
-"""Gap reports: what a scale-graph query could not answer becomes a classified gap; only a missing
+"""Gap reports: what a scale-catal query could not answer becomes a classified gap; only a missing
 concept leads to a schema change proposal, and a GitHub issue is filed only by a person."""
 
 import json
@@ -12,10 +12,10 @@ from scale.util import load_doc
 
 def test_issue_rendering_and_dry_run():
     gap = make_gap("missing_concept", record="ex:c", about="operating program", detected_by="curation",
-                   schema="scale-graph 0.4.0", evidence=["ex:ev/1"])
+                   schema="scale-catal 0.4.0", evidence=["ex:ev/1"])
     body = render_issue(gap)
     assert "`missing_concept`" in body and "ex:ev/1" in body and "schema change request" in body.lower()
-    assert "**Schema:** `scale-graph 0.4.0`" in body
+    assert "**Schema:** `scale-catal 0.4.0`" in body
     dry = submit_issue(gap)
     assert dry["dry_run"] and "gap:missing-concept" in dry["command"]
     cmd = dry["command"]                                       # the title stays; only the body is elided
@@ -31,7 +31,7 @@ def _run(plan: dict) -> dict:
 def test_query_absences_route_to_gap_kinds():
     gap = gaps_from_query(_run({"match": {"label": "CatalyticTest", "as": "t", "where": [{"prop": "site_turnover", "op": "exists"}]}}))
     assert [(g["kind"], g["about"]) for g in gap] == [("missing_concept", "CatalyticTest.site_turnover is not declared")]
-    assert gap[0]["schema"] == f"scale-graph {load_doc(DRIVING_FORCE_EXAMPLES / 'electro-dynamic.json')['graph']['schema_version']}"
+    assert gap[0]["schema"] == f"scale-catal {load_doc(DRIVING_FORCE_EXAMPLES / 'electro-dynamic.json')['graph']['schema_version']}"
     none = gaps_from_query(_run({"match": {"label": "CatalyticTest", "as": "t", "where": [{"prop": "control_mode", "op": "eq",
                                                                                          "value": "galvanostatic"}]}}))
     assert [g["kind"] for g in none] == ["missing_source_coverage"]

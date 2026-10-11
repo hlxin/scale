@@ -8,7 +8,7 @@ and the catalysis domain) and declared in [CORE.yaml](CORE.yaml).
 
 ## Scope
 
-The science kernel, [`graph/kernel.yaml`](graph/kernel.yaml) (`scale-graph-kernel`):
+The science kernel, [`graph/kernel.yaml`](graph/kernel.yaml) (`scale-kernel`):
 
 - the method of science: Question, Hypothesis, Prediction, Experiment, Procedure, Protocol,
   Operation, Design, Variable, Claim;
@@ -29,7 +29,7 @@ The science kernel, [`graph/kernel.yaml`](graph/kernel.yaml) (`scale-graph-kerne
 | `tests/` | the kernel's tests |
 
 There is no repository-wide composition. The catalysis domain's manifest
-([`domain/graph/scale-graph.yaml`](../domain/graph/scale-graph.yaml)) assembles the kernel with one catalysis
+([`domain/graph/scale-catal.yaml`](../domain/graph/scale-catal.yaml)) assembles the kernel with one catalysis
 file (`catalysis.yaml`), with one vocabulary and one checklist.
 
 ## Science kernel or domain?
@@ -48,7 +48,7 @@ kernel identifier; `scale domains check` reports both.
 ## One version
 
 - **The schema has one version for the kernel and the catalysis domain together**: the `version` of the
-  catalysis manifest, `domain/graph/scale-graph.yaml`. Today the schema is at 0.1.0 (kernel and catalysis
+  catalysis manifest, `domain/graph/scale-catal.yaml`. Today the schema is at 0.2.0 (kernel and catalysis
   together). The kernel file carries no version of its own (one that states one does not load); `CORE.yaml`
   states the same number (`version`), as do `domain/DOMAIN.yaml`, `scale-release.yaml` (`schema_version`) and
   `examples/science-kernel-only.yaml`, and `scale domains check` requires them to agree.

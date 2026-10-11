@@ -12,7 +12,7 @@ from pathlib import Path
 from . import layout
 from .util import ScaleError, load_yaml
 
-# a small set of invalid scale-graph documents, each rejected for a reason its index states
+# a small set of invalid scale-catal documents, each rejected for a reason its index states
 INVALID_FIXTURES = f"{layout.DOMAIN}/tests/fixtures/invalid"
 INVALID_INDEX = "expect.yaml"
 
@@ -95,7 +95,7 @@ def check_steps(repo: Path, fast: bool = False) -> list[dict]:
         {"name": "the documentation names the current schema version", "cmds": [], "warning": version_text_warnings},
         {"name": "unit tests", "cmds": [[sys.executable, "-m", "pytest", "-q"]], "slow": True},
         {"name": "releases are unchanged (digests)", "cmds": [scale + ["release", "verify"]]},
-        {"name": "scale-graph schemas load (head and frozen)", "cmds": [scale + ["graph", "verify"]]},
+        {"name": "scale-catal schemas load (head and frozen)", "cmds": [scale + ["graph", "verify"]]},
         {"name": "domain and core manifests are complete, compatible and do not redefine identifiers",
          "cmds": [scale + ["domains", "check"]]},
         {"name": "competency questions answer as expected", "cmds": [scale + ["domains", "cq"]]},
@@ -106,7 +106,7 @@ def check_steps(repo: Path, fast: bool = False) -> list[dict]:
         # REUSE.toml gives every file a licence and LICENSES/ holds each licence it names (the dev extra installs
         # reuse; it reads the git checkout, so files git ignores are not checked)
         {"name": "licence annotations are complete (reuse lint)", "cmds": [[sys.executable, "-m", "reuse", "--root", str(repo), "lint"]]},
-        {"name": "invalid scale-graph fixtures are rejected for their stated reasons",
+        {"name": "invalid scale-catal fixtures are rejected for their stated reasons",
          "cmds": [scale + ["graph", "validate", "--format", "json", f["path"]] for f in fixtures],
          "expect_errors": [f["error"] for f in fixtures]},
     ]

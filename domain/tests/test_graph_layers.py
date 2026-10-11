@@ -14,7 +14,7 @@ from scale import layout, pgraph
 from scale.util import ScaleError, load_doc, write_canonical
 
 G = GRAPH_MANIFEST.parent                   # the catalysis domain's graph directory: its manifest and parts
-X = REPO / "domain/examples/scale-graph"
+X = REPO / "domain/examples/scale-catal"
 DF = X / "driving-force-examples"
 
 
@@ -26,7 +26,7 @@ def spec():
 
 @pytest.fixture(scope="module")
 def head():
-    return pgraph.load_spec(G / "scale-graph.yaml")
+    return pgraph.load_spec(G / "scale-catal.yaml")
 
 
 def msgs(doc, spec, kind="errors"):
@@ -34,13 +34,13 @@ def msgs(doc, spec, kind="errors"):
 
 
 def manifest(tmp_path, extra_domains=(), extra_profiles=()):     # extra_profiles: only to show they are refused
-    base = yaml.safe_load((G / "scale-graph.yaml").read_text())
-    m = {"schema": "scale-graph", "version": base["version"], "status": "candidate",
+    base = yaml.safe_load((G / "scale-catal.yaml").read_text())
+    m = {"schema": "scale-catal", "version": base["version"], "status": "candidate",
          "kernel": str(layout.kernel_path(G, base["kernel"])),
          "domains": [str(G / p) for p in base["domains"]] + [str(x) for x in extra_domains]}
     if extra_profiles:
         m["profiles"] = [str(x) for x in extra_profiles]
-    p = tmp_path / "scale-graph.yaml"
+    p = tmp_path / "scale-catal.yaml"
     p.write_text(yaml.safe_dump(m, sort_keys=False))
     return p
 
@@ -133,8 +133,8 @@ def test_a_part_carries_no_version_and_imports_name_no_version(tmp_path):
     with pytest.raises(ScaleError, match="an import names a file only"):
         pgraph.load_spec(manifest(tmp_path, extra_domains=[pinned]))
     k = tmp_path / "kernel.yaml"
-    k.write_text((REPO / "core/graph/kernel.yaml").read_text().replace("kernel: scale-graph-kernel\n",
-                                                                         "kernel: scale-graph-kernel\nversion: 0.2.0\n", 1))
+    k.write_text((REPO / "core/graph/kernel.yaml").read_text().replace("kernel: scale-kernel\n",
+                                                                         "kernel: scale-kernel\nversion: 0.2.0\n", 1))
     m = yaml.safe_load(manifest(tmp_path).read_text())
     m["kernel"] = str(k)
     (tmp_path / "m.yaml").write_text(yaml.safe_dump(m))

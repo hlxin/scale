@@ -21,6 +21,6 @@ def test___SNAKE___declaration_passes_the_domain_check():
 
 def test___SNAKE___example_is_a_scale_graph_document():
     doc = load_doc(DOMAIN / "examples" / f"{NAME}.example.graph.json")
-    assert doc["graph"]["schema"] == "scale-graph" and doc["nodes"]
+    assert doc["graph"]["schema"] == "scale-catal" and doc["nodes"]
     spec = pgraph.load_spec(DOMAIN / layout.DOMAIN_GRAPH_MANIFEST)
     assert spec["version"] == doc["graph"]["schema_version"] and pgraph.validate(doc, spec).errors == []

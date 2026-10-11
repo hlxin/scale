@@ -44,7 +44,7 @@ def placeholders(policy: dict) -> list[dict]:
 
 
 def sample_records(doc: dict, fraction: float, seed: int, include_flagged: list[str] | None = None) -> list[dict]:
-    """A reproducible sample of the records of a scale-graph document that state something from a
+    """A reproducible sample of the records of a scale-catal document that state something from a
     source (they carry evidence), for a human to check against the source (Tier 1 records)."""
     import random
     nodes = {n["id"]: n for n in doc.get("nodes", [])}

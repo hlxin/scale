@@ -1,13 +1,13 @@
-# scale-graph — the science kernel and how a domain builds on it
+# scale-catal — the science kernel and how a domain builds on it
 
-scale-graph is the knowledge and data graph schema: a labeled property graph in node-link JSON (as
+scale-catal is the knowledge and data graph schema: a labeled property graph in node-link JSON (as
 NetworkX writes and D3 reads). Nodes and edges both carry typed properties; evidence sits on every
 node and edge that states something. The decisions behind it are in
 [decision record 0001](../../docs/decisions/0001-scale-0.1.0.md); every concept is provisional.
-Naming rules: [docs/style.md](../../docs/style.md). "scale-graph" names the format and the schema
-family that documents pin (`schema: scale-graph`, `graph.schema_version`).
+Naming rules: [docs/style.md](../../docs/style.md). "scale-catal" names the format and the schema
+family that documents pin (`schema: scale-catal`, `graph.schema_version`).
 
-![architecture](../../docs/figures/scale-graph-architecture.png)
+![architecture](../../docs/figures/scale-catal-architecture.png)
 
 ## Two layers
 
@@ -22,9 +22,9 @@ version** for the kernel and the catalysis domain together: the manifest's `vers
 |---|---|---|
 | [`core/graph/kernel.yaml`](kernel.yaml) | core | The **science kernel**: the document format, the value object, the evidence item, record references, stewardship, the source lifecycle, common properties and extension keys; and the method of science — Question, Hypothesis, Prediction, Experiment, Procedure, Protocol, Operation, Design, Variable, Claim; what is studied (ObjectOfStudy); what science is done with (Instrument, Model, Source, Dataset); who does it (Person, Institution, Project, Software). Every domain file sees it without importing it. It carries no version of its own. |
 | `core/graph/frozen/` | nobody (frozen) | The **kernel of each earlier schema version**, `kernel-<version>.yaml`, with their digests in `SHA256SUMS`, written when a schema change moves the schema on (`scale schema bump`; none yet). Frozen kernels live only here. |
-| [`domain/graph/scale-graph.yaml`](../../domain/graph/scale-graph.yaml) | the catalysis domain | The catalysis **graph schema manifest**: the schema's one version, which documents pin, the kernel (`../../core/graph/kernel.yaml`) and the domain's files under `domains:` (`[catalysis.yaml]`), each path relative to the manifest. |
+| [`domain/graph/scale-catal.yaml`](../../domain/graph/scale-catal.yaml) | the catalysis domain | The catalysis **graph schema manifest**: the schema's one version, which documents pin, the kernel (`../../core/graph/kernel.yaml`) and the domain's files under `domains:` (`[catalysis.yaml]`), each path relative to the manifest. |
 | [`domain/graph/catalysis.yaml`](../../domain/graph/catalysis.yaml) | the catalysis domain | The **catalysis domain file** (`domain: catalysis`), catalysis as a whole: species, materials, samples, reactions, reactors, preparations, treatments, characterizations, computations, analyses, mechanisms and elementary steps, catalysts, active sites, feeds, catalyst samples, catalytic tests, process units. The role a substance plays is on the edge: `HAS_COMPONENT {role: support, promoter, binder, …}`, `PREPARED_FROM {role, amount, supplier, grade}`, `INHIBITED_BY`. It also holds the terms of every driving force (below) and the domain's one **checklist**. It carries no version of its own. |
-| `domain/graph/frozen/` | nobody (frozen) | The catalysis domain's **frozen versions** (none yet): `scale-graph-<version>.yaml` with its parts under `v<version>/`, byte-identical to what documents pinning that version were written against, and pointing at the kernel of that version in `core/graph/frozen/`; digests in `SHA256SUMS`. |
+| `domain/graph/frozen/` | nobody (frozen) | The catalysis domain's **frozen versions** (none yet): `scale-catal-<version>.yaml` with its parts under `v<version>/`, byte-identical to what documents pinning that version were written against, and pointing at the kernel of that version in `core/graph/frozen/`; digests in `SHA256SUMS`. |
 
 Terms: the catalysis domain is the folder `domain/`; its name, `catalysis`, is the `domain:` its
 `DOMAIN.yaml` declares. Its **domain file** (`domain: catalysis`, listed under the manifest's `domains:`)
@@ -130,7 +130,7 @@ and a counterexample, the competency questions that change, and one person's rev
 whichever file it changes (breaking: the second number; additive: the third). `scale schema bump` freezes the
 current version so documents that pin it keep validating: its kernel into
 `core/graph/frozen/kernel-<version>.yaml`, the catalysis parts into `domain/graph/frozen/v<version>/` with the
-manifest `frozen/scale-graph-<version>.yaml`, all under the one version; digests are appended to each `SHA256SUMS`; it also registers the migration step.
+manifest `frozen/scale-catal-<version>.yaml`, all under the one version; digests are appended to each `SHA256SUMS`; it also registers the migration step.
 `scale schema check` (CI) checks all of it.
 A release build refuses schema content changed since the previous release under the same version, and `scale
 graph verify` fails when a version no longer has the spec digest a release published for it.

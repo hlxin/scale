@@ -71,12 +71,12 @@ def test_new_scaffolds_an_experimental_domain_that_passes_the_check(tmp_path):
                                                           "roles": ["steward"]}]}
     assert len(list((d / "competency").glob("*.yaml"))) == 3 and (d / "tests/test_batteries_domain.py").is_file()
     assert load_yaml(d / "graph/batteries.yaml")["domain"] == "batteries"   # the domain file, named after the domain
-    man = load_yaml(d / "graph/scale-graph.yaml")                          # the domain's own schema manifest
-    assert (m["graph"], man["version"], man["domains"]) == ({"manifest": "graph/scale-graph.yaml"}, HEAD_VERSION, ["batteries.yaml"])
+    man = load_yaml(d / "graph/scale-catal.yaml")                          # the domain's own schema manifest
+    assert (m["graph"], man["version"], man["domains"]) == ({"manifest": "graph/scale-catal.yaml"}, HEAD_VERSION, ["batteries.yaml"])
     assert "version" not in load_yaml(d / "graph/batteries.yaml")          # the domain file carries none
     assert "modules" not in man and not any("module" in p.read_text() for p in d.rglob("*") if p.is_file())
     assert man["kernel"] == "../../core/graph/kernel.yaml"
-    assert layout.manifest_kernel(d / "graph/scale-graph.yaml").resolve() == (repo / layout.KERNEL).resolve()
+    assert layout.manifest_kernel(d / "graph/scale-catal.yaml").resolve() == (repo / layout.KERNEL).resolve()
     assert load_doc(d / "examples/batteries.example.graph.json")["graph"]["schema_version"] == HEAD_VERSION
     assert load_doc(d / "examples/batteries.example.graph.json")["graph"]["graph_id"] == "ex:batteries/example"
     # the domain's line, /domain/, names its team before the reviewers; the other lines are untouched
@@ -132,7 +132,7 @@ def test_redeclaring_a_core_or_domain_name_is_an_error_naming_both_owners(tmp_pa
         "domain": "battery-cells", "imports": [],
         "nodes": {"Cell": {"is_a": "ObjectOfStudy", "description": "a cell again"}},
         "adds_properties": {"Experiment": {"cycle_count": {"type": "integer"}}}}))
-    _edit(repo / "domain/graph/scale-graph.yaml", lambda m: m.update(domains=["batteries.yaml", "cells.yaml"]))
+    _edit(repo / "domain/graph/scale-catal.yaml", lambda m: m.update(domains=["batteries.yaml", "cells.yaml"]))
     msgs = _messages(check(repo, examples=False))
     assert "label Cell is declared by batteries (domain/graph/batteries.yaml) and again by batteries (domain/graph/cells.yaml)" in msgs
     assert "property Experiment.cycle_count is declared by batteries (domain/graph/batteries.yaml)" in msgs
@@ -141,7 +141,7 @@ def test_redeclaring_a_core_or_domain_name_is_an_error_naming_both_owners(tmp_pa
 def test_declarations_cover_labels_edges_properties_and_bridges():
     doc = {"domain": "d", "nodes": {"A": {"properties": {"p": {}}}}, "edges": {"E": {}},
            "adds_properties": {"B": {"q": {}}}, "bridges": {"other": {"edges": {"F": {}}, "adds_properties": {"C": {"r": {}}}}}}
-    assert set(declarations(doc)) == {("scale-graph file name", "d"), ("label", "A"), ("property", "A.p"),
+    assert set(declarations(doc)) == {("scale-catal file name", "d"), ("label", "A"), ("property", "A.p"),
                                       ("edge type", "E"), ("property", "B.q"), ("edge type", "F"), ("property", "C.r")}
 
 
@@ -183,7 +183,7 @@ def test_placeholder_maintainers_are_seats_not_people(tmp_path):
 def test_a_domain_manifest_uses_the_core_kernel_and_its_own_domain_files(tmp_path):
     repo = _mini(tmp_path)
     _new(repo)
-    man = repo / "domain/graph/scale-graph.yaml"
+    man = repo / "domain/graph/scale-catal.yaml"
     (repo / "elsewhere").mkdir()
     shutil.copy2(repo / "domain/graph/batteries.yaml", repo / "elsewhere/solar.yaml")
     _edit(repo / "elsewhere/solar.yaml", lambda m: m.update(domain="solar"))
@@ -218,8 +218,8 @@ def test_a_domain_manifest_uses_the_core_kernel_and_its_own_domain_files(tmp_pat
 
 def test_the_release_manifest_has_no_repository_wide_graph(tmp_path):
     repo = _mini(tmp_path)
-    _edit(repo / layout.RELEASE_MANIFEST, lambda m: m.update(graph="scale-graph.yaml"))
-    assert "there is no repository-wide scale-graph composition" in _messages(check(repo, examples=False))
+    _edit(repo / layout.RELEASE_MANIFEST, lambda m: m.update(graph="scale-catal.yaml"))
+    assert "there is no repository-wide scale-catal composition" in _messages(check(repo, examples=False))
 
 
 def test_a_promoted_domain_needs_the_promotion_criteria_unless_founding(tmp_path):
@@ -256,7 +256,7 @@ def test_one_version_dependencies_and_conventions(tmp_path):
     assert f"version is '0.9.0'; the schema has one version, the manifest's {HEAD_VERSION}" in msgs
     assert "unknown key 'compatible_core'" in msgs                     # no separate kernel versions to be compatible with
     assert "depends_on[0] names 'optics': catalysis is the only domain beside the core" in msgs   # one domain
-    assert "alternative_to names 'nowhere', which is not the name of a scale-graph file" in msgs
+    assert "alternative_to names 'nowhere', which is not the name of a scale-catal file" in msgs
     assert "competency must be 'competency': the tools read domain/competency" in msgs and "unknown key 'colour'" in msgs
     _edit(dm, lambda m: [m.pop(k) for k in ("colour", "depends_on", "alternative_to", "compatible_core")] and None)
     _edit(dm, lambda m: m.update(version=HEAD_VERSION, competency="competency", domain="Two Words"))
@@ -296,9 +296,9 @@ def test_domains_hold_no_copies_of_core_files(tmp_path):
     (repo / "domain/notes").mkdir()
     shutil.copy2(repo / "core/CORE.yaml", repo / "domain/notes/CORE.yaml")
     msgs = _messages(check(repo, examples=False))
-    assert "examples/my-kernel.yaml is a copy of a scale-graph kernel" in msgs
+    assert "examples/my-kernel.yaml is a copy of a scale-catal kernel" in msgs
     assert "examples/copied.json is byte-identical to a core file" in msgs
-    assert "domain/graph/frozen/v0.1.0/kernel.yaml is a copy of a scale-graph kernel" in msgs
+    assert "domain/graph/frozen/v0.1.0/kernel.yaml is a copy of a scale-catal kernel" in msgs
     assert "domain/notes/CORE.yaml is byte-identical to a core file" in msgs    # anywhere in the domain
 
 
@@ -375,7 +375,7 @@ def test_scale_check_runs_the_domain_check():
     from scale.devcheck import check_steps
     steps = {s["name"]: s["cmds"] for s in check_steps(REPO, fast=True)}
     cmds = steps["domain and core manifests are complete, compatible and do not redefine identifiers"]
-    assert [c[-2:] for c in cmds] == [["domains", "check"]] and "scale-graph schemas load (head and frozen)" in steps
+    assert [c[-2:] for c in cmds] == [["domains", "check"]] and "scale-catal schemas load (head and frozen)" in steps
     assert [c[-2:] for c in steps["competency questions answer as expected"]] == [["domains", "cq"]]
 
 

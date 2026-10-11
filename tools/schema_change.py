@@ -12,7 +12,7 @@ is checked here, against the base the pull request merges into (``origin/main`` 
   by the rule :func:`next_version`: a breaking change (something removed, changed or narrowed) raises the second
   number (0.1.0 -> 0.2.0), any other change the third (0.1.0 -> 0.1.1);
 * **the frozen base.** The version it replaces is frozen, unchanged (``core/graph/frozen/kernel-<v>.yaml``,
-  ``domain/graph/frozen/scale-graph-<v>.yaml`` and ``v<v>/``), so that documents pinning it stay valid;
+  ``domain/graph/frozen/scale-catal-<v>.yaml`` and ``v<v>/``), so that documents pinning it stay valid;
 * **the step.** ``pgraph_migrate.STEPS[<base>] = (<new>, <note>)`` lets ``scale kg update`` move documents; a
   breaking change also registers its rule (``STEP_RULES[<base>]``), which rewrites what it must;
 * **provisional.** Every label, edge type and property the change adds is ``maturity: provisional``;
@@ -59,7 +59,7 @@ def _props(d: dict) -> dict:
 
 
 def diff_specs(a: dict, b: dict) -> dict:
-    """Additions, removals and changes between two assembled scale-graph schemas."""
+    """Additions, removals and changes between two assembled scale-catal schemas."""
     out = {"added": [], "removed": [], "changed": [], "narrowed": [], "loosened": []}
 
     def cmp_def(where: str, da: dict, db: dict) -> None:
@@ -96,6 +96,11 @@ def diff_specs(a: dict, b: dict) -> dict:
             elif pa[k] != pb[k]:
                 out["changed"].append(f"{where}.{k}: {pa[k]!r} -> {pb[k]!r}")
 
+    # the names documents pin: a renamed schema or kernel invalidates every pin of the old name (a breaking change)
+    if a.get("schema") != b.get("schema"):
+        out["changed"].append(f"schema name: {a.get('schema')} -> {b.get('schema')}")
+    if (a.get("kernel") or {}).get("name") != (b.get("kernel") or {}).get("name"):
+        out["changed"].append(f"kernel name: {(a.get('kernel') or {}).get('name')} -> {(b.get('kernel') or {}).get('name')}")
     # the kernel's shared structures: the evidence item, the value object, the record reference and
     # the properties every node and link carries
     for where, fa, fb in (("evidence", (a.get("evidence") or {}).get("fields") or {}, (b.get("evidence") or {}).get("fields") or {}),
@@ -224,7 +229,10 @@ def base_tree(repo: Path, ref: str, dest: Path) -> Path:
 
 
 def _manifest(root: Path) -> Path:
-    return Path(root) / layout.DOMAIN / layout.DOMAIN_GRAPH_MANIFEST
+    """The domain's manifest under ``root``; a base tree from before the rename holds it as ``scale-graph.yaml``."""
+    m = Path(root) / layout.DOMAIN / layout.DOMAIN_GRAPH_MANIFEST
+    old = m.with_name(f"{layout.LEGACY_SCHEMA_NAME}.yaml")
+    return old if not m.exists() and old.exists() else m
 
 
 def compare(repo: Path, base: str = DEFAULT_BASE) -> dict:
@@ -346,7 +354,7 @@ def bump(repo: Path, base: str = DEFAULT_BASE, note: str | None = None) -> dict:
         raise ScaleError(f"the schema is at {c['head_version']} already (the base is {ver}); bump once per change")
     man = _manifest(repo)
     fz, kfz = layout.frozen_graph_dir(man), repo / layout.KERNEL_FROZEN
-    frozen_dir, frozen_man, frozen_kernel = fz / f"v{ver}", fz / f"scale-graph-{ver}.yaml", kfz / f"kernel-{ver}.yaml"
+    frozen_dir, frozen_man, frozen_kernel = fz / f"v{ver}", fz / f"scale-catal-{ver}.yaml", kfz / f"kernel-{ver}.yaml"
     for p in (frozen_dir, frozen_man, frozen_kernel):
         if p.exists():
             raise ScaleError(f"{p.relative_to(repo)} exists already: version {ver} was frozen before")
@@ -368,7 +376,7 @@ def bump(repo: Path, base: str = DEFAULT_BASE, note: str | None = None) -> dict:
         if key in head:
             fm[key] = [f"v{ver}/{x}" for x in head.get(key) or []]
     frozen_man.parent.mkdir(parents=True, exist_ok=True)
-    frozen_man.write_text(f"# Frozen copy of scale-graph {ver}. Documents that pin {ver} validate against it. Do not edit;\n"
+    frozen_man.write_text(f"# Frozen copy of scale-catal {ver}. Documents that pin {ver} validate against it. Do not edit;\n"
                           f"# the current version is ../{man.name}.\n" + dump_yaml(fm))
     append_frozen_sums(fz, [frozen_man] + [frozen_dir / rel for rel in parts])
     set_version(man, "version", new)
@@ -440,7 +448,7 @@ def check(repo: Path, base: str = DEFAULT_BASE) -> dict:
         problems.append(f"a {c['kind']} change raises {ver} to {new}; the schema is at {c['head_version']} "
                         f"(run `scale schema bump`)")
     man = _manifest(repo)
-    frozen_man = layout.frozen_graph_dir(man) / f"scale-graph-{ver}.yaml"
+    frozen_man = layout.frozen_graph_dir(man) / f"scale-catal-{ver}.yaml"
     frozen_kernel = repo / layout.KERNEL_FROZEN / f"kernel-{ver}.yaml"
     if not frozen_man.is_file() or not frozen_kernel.is_file():
         problems.append(f"the base version {ver} is not frozen (run `scale schema bump`)")
@@ -475,7 +483,7 @@ def summary(res: dict) -> str:
     if not res["changed"]:
         return "This pull request does not change the schema."
     d = res["diff"]
-    L = [f"**Schema change: {res['kind']}**, scale-graph {res['base_version']} -> {res['head_version']} "
+    L = [f"**Schema change: {res['kind']}**, scale-catal {res['base_version']} -> {res['head_version']} "
          f"(needs {res['needs_version']}).", ""]
     for key in ("added", "loosened", "changed", "narrowed", "removed"):
         if d[key]:
@@ -486,7 +494,7 @@ def summary(res: dict) -> str:
 
 
 def verify_frozen(repo: Path) -> dict:
-    """The frozen scale-graph copies are unchanged: in every frozen directory each file is listed in its SHA256SUMS
+    """The frozen scale-catal copies are unchanged: in every frozen directory each file is listed in its SHA256SUMS
     with its digest, and every listed file exists. A schema never changed yet (0.1.0) has no frozen version."""
     repo = Path(repo)
     bad, files, dirs = [], 0, []
@@ -524,7 +532,7 @@ def missing_frozen(repo: Path, steps: dict | None = None) -> list[str]:
             v = steps[v][0]
         if v != head:
             continue
-        for f in (layout.frozen_graph_dir(man) / f"scale-graph-{frm}.yaml", repo / layout.KERNEL_FROZEN / f"kernel-{frm}.yaml"):
+        for f in (layout.frozen_graph_dir(man) / f"scale-catal-{frm}.yaml", repo / layout.KERNEL_FROZEN / f"kernel-{frm}.yaml"):
             if not f.is_file():
                 out.append(f"{f.relative_to(repo).as_posix()} is missing (a step moves documents from {frm} to the head {head})")
     return out

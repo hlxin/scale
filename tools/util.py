@@ -175,6 +175,6 @@ def normalize_for_match(text: str) -> str:
 
 
 def match_text(text: str) -> str:
-    """Normalization for scale-graph quote checks: as normalize_for_match, and hyphens ignored too,
+    """Normalization for scale-catal quote checks: as normalize_for_match, and hyphens ignored too,
     since page texts break words at line ends ("hydrox-\nides") and a quote may or may not keep the break."""
     return normalize_for_match(text.replace("\u00ad", "")).replace("-", "")      # soft hyphens too

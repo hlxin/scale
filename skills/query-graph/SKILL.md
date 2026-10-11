@@ -1,11 +1,11 @@
 ---
 name: query-graph
 version: 0.1.0
-description: Answer a scientific question from scale-graph documents by writing and running a graph query plan that returns rows as reported, with evidence, the records left out and why, its coverage and the kind of answer — reporting absences instead of filling them.
+description: Answer a scientific question from scale-catal documents by writing and running a graph query plan that returns rows as reported, with evidence, the records left out and why, its coverage and the kind of answer — reporting absences instead of filling them.
 scale_release: ">=v0.1.0"
 inputs:
   - A natural-language question
-  - The scale-graph documents to query (each pins its schema version)
+  - The scale-catal documents to query (each pins its schema version)
 allowed-tools:
   - "scale graph describe [labels] --domain <domain>"   # what the schema can express
   - "scale graph stats <graph>"                         # the units in use and the link patterns of a document
@@ -29,7 +29,7 @@ human-review:
   - Whenever the presentation goes beyond the returned rows (extrapolation or hypothesis)
 ---
 
-# Query scale-graph documents
+# Query scale-catal documents
 
 A generated explanation is a presentation of the retrieved evidence, not a replacement for it.
 

@@ -13,7 +13,7 @@ identity comes from its manifest (`distribution: scale-catal`).
 ## One version
 
 The schema has one version for the science kernel and the catalysis domain together: the `version` of the
-catalysis manifest, `domain/graph/scale-graph.yaml`, which documents pin (`graph.schema_version`). The kernel
+catalysis manifest, `domain/graph/scale-catal.yaml`, which documents pin (`graph.schema_version`). The kernel
 file and the catalysis file carry none; `core/CORE.yaml`, `domain/DOMAIN.yaml`, `scale-release.yaml`
 (`schema_version`) and the kernel-only example manifest state the same number, and `scale domains check`
 requires them to agree. Every schema change raises it, whichever file it changes: a breaking change (something
@@ -23,7 +23,7 @@ removed, changed in type or narrowed) raises the second number (0.1.0 -> 0.2.0),
 ## A schema change is a pull request
 
 SCALE's schema has two layers, the science kernel (`core/graph/kernel.yaml`) and the domains; the catalysis
-domain's graph schema manifest (`domain/graph/scale-graph.yaml`) assembles the kernel with one catalysis file,
+domain's graph schema manifest (`domain/graph/scale-catal.yaml`) assembles the kernel with one catalysis file,
 with one vocabulary and one checklist. A schema change edits those files directly, on a branch, in one pull
 request that also carries everything the change needs. Nothing is applied after the merge: what merges is what
 the reviewer approved ([governance/GOVERNANCE.md](../governance/GOVERNANCE.md)).
@@ -45,7 +45,7 @@ a comment, a corpus run)     their own) or anyone   scale schema bump · check  
 3. **Bump.** `scale schema diff --base origin/main` compares the branch's schema with the merge base (rebuilt
    from git) and names the kind of change and the version it needs. `scale schema bump --base origin/main
    [--note …]` then freezes the base version, so documents that pin it keep validating (the catalysis manifest
-   into `domain/graph/frozen/scale-graph-<version>.yaml` with its parts in `domain/graph/frozen/v<version>/`, the
+   into `domain/graph/frozen/scale-catal-<version>.yaml` with its parts in `domain/graph/frozen/v<version>/`, the
    kernel of that version into `core/graph/frozen/kernel-<version>.yaml`, digests appended to each `SHA256SUMS`),
    raises the version in every file and sentence that states it, and registers the migration step in
    `tools/pgraph_migrate.py`. A breaking change also adds its rewrite rule (`STEP_RULES[<base version>]`).
@@ -61,10 +61,10 @@ a comment, a corpus run)     their own) or anyone   scale schema bump · check  
    own pull requests under the bootstrap rule. If another schema change merged first on the same version, the
    pull request rebases and runs `scale schema bump` again.
 6. **Data repositories.** A knowledge-graph data repository kept apart from this one is moved to the new
-   version with `scale kg update --data <dir>`: every scale-graph document of the catalysis domain goes to
+   version with `scale kg update --data <dir>`: every scale-catal document of the catalysis domain goes to
    the new version through the registered steps, is validated before and after, written in place and its
    evidence index rebuilt; a document a rule cannot map is refused and left untouched, and a file whose name
-   pins a version (`*.scale-graph-0.1.0.graph.json`) is kept. Run `--dry-run` first.
+   pins a version (`*.scale-catal-0.1.0.graph.json`) is kept. Run `--dry-run` first.
 7. **Release.** `scale release build vX.Y.Z` (a human action) bundles the schema versions merged since the last
    release; it refuses schema content changed since then under the same version. `releases/vX.Y.Z/RELEASE.yaml`
    records a semantic comparison with the previous release, the versions, the contributors and sha256 digests

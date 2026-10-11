@@ -17,7 +17,7 @@ from test_graph_search_query import _bundle_validator
 
 P9 = REPO / "tools/tests/fixtures/source-lifecycle"            # the fixtures/ of the lifecycle's examples
 FIXTURES_PIN = P9 / "pass-retraction-scope.json"                  # the lifecycle fixtures all pin one version
-X = REPO / "domain/examples/scale-graph"
+X = REPO / "domain/examples/scale-catal"
 EXAMPLE = X / "source-lifecycle/retracted-source.json"
 Y = "ex:exmpl/lifecycle-example"
 PAPER_A, PAPER_B, NOTICE = f"{Y}/source/paper-a", f"{Y}/source/paper-b", f"{Y}/source/retraction-notice-b"

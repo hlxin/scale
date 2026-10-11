@@ -1,9 +1,9 @@
-"""Assemble a scale-graph schema from its parts: the science kernel + a domain's files -> one effective schema.
+"""Assemble a scale-catal schema from its parts: the science kernel + a domain's files -> one effective schema.
 
 There are two layers. The science kernel (``core/graph/kernel.yaml``) holds the document format, the
 shared structures (value object, evidence, record reference, stewardship, common properties) and the
 domain-neutral labels and edges of the method of science. A domain's manifest (the catalysis domain's
-``domain/graph/scale-graph.yaml``) names the kernel and the domain's own files (``domains``); a
+``domain/graph/scale-catal.yaml``) names the kernel and the domain's own files (``domains``); a
 domain file names itself with ``domain:`` and builds on the kernel, which it sees without importing
 it: it declares new labels (a label that refines a kernel label says ``is_a``), new edge types (one
 that narrows a kernel edge says ``specializes``), *extends* an edge type's endpoints, adds properties

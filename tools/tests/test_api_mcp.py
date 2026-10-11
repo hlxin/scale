@@ -1,4 +1,4 @@
-"""The agent tools over scale-graph documents: one tool set (TOOLS) behind Python, `scale call`, HTTP and
+"""The agent tools over scale-catal documents: one tool set (TOOLS) behind Python, `scale call`, HTTP and
 MCP; zero configuration (a working directory, no lock, no upgrades); errors as data; human actions
 never exposed."""
 
@@ -48,7 +48,7 @@ def test_status_is_zero_config_and_writes_nothing(tk):
     assert st["schema_version"] == HEAD_VERSION and st["kernel"] == {"file": "core/graph/kernel.yaml", "schema_version": HEAD_VERSION}
     cat = next(d for d in st["domains"] if d["domain"] == "catalysis")
     from scale import pgraph
-    frozen = [v for v, _ in pgraph.spec_versions(REPO / "domain/graph/scale-graph.yaml")[:-1]]          # none at 0.1.0
+    frozen = [v for v, _ in pgraph.spec_versions(REPO / "domain/graph/scale-catal.yaml")[:-1]]          # none at 0.1.0
     assert cat["version"] == cat["schema"]["version"] == HEAD_VERSION and cat["schema"]["frozen_versions"] == frozen
     assert st["documents"] == [] and not tk.workspace.exists()          # nothing written until a tool writes
     assert set(st["skills"]) == SKILLS
@@ -70,7 +70,7 @@ def test_only_public_synthetic_documents_are_served_as_examples(tmp_path):
     repo = tmp_path / "repo"
     (repo / "releases").mkdir(parents=True)
     shutil.copy2(REPO / "scale-release.yaml", repo / "scale-release.yaml")
-    ex = repo / "domain/examples/scale-graph"
+    ex = repo / "domain/examples/scale-catal"
     ex.mkdir(parents=True)
     doc = load_doc(DRIVING_FORCE_EXAMPLES / "photo.json")
     write_canonical(ex / "public.json", doc)
@@ -143,7 +143,7 @@ def test_migrate_moves_a_document_along_registered_steps(tk, monkeypatch):
     from scale import pgraph, pgraph_migrate
     head = load_doc(DRIVING_FORCE_EXAMPLES / "electro.json")
     if head["graph"]["schema_version"] != HEAD_VERSION:        # an example stays at the version it pins until migrated
-        head = pgraph_migrate.raise_version(head, HEAD_VERSION, pgraph.load_spec(REPO / "domain/graph/scale-graph.yaml"))[0]
+        head = pgraph_migrate.raise_version(head, HEAD_VERSION, pgraph.load_spec(REPO / "domain/graph/scale-catal.yaml"))[0]
     assert "already at" in tk.call("scale_migrate", {"document": head})["error"]
     older = {**head, "graph": {**head["graph"], "schema_version": "0.0.9"}}
     assert "migrations run along the steps" in tk.call("scale_migrate", {"document": older})["error"]
@@ -202,7 +202,7 @@ def test_a_kept_schema_is_read_again_when_its_files_change(tk, tmp_path):
     import shutil
     for d in ("core/graph", "domain/graph", "governance/registry"):
         shutil.copytree(REPO / d, tmp_path / d)
-    man = tmp_path / "domain/graph/scale-graph.yaml"
+    man = tmp_path / "domain/graph/scale-catal.yaml"
     first = tk._spec(man)
     assert tk._spec(man) is first                                            # kept while nothing changes
     text = man.read_text()
@@ -329,7 +329,7 @@ def test_errors_are_data_not_exceptions(tk):
 def test_mcp_in_process(tk):
     srv = MCPServer(tk)
     init = srv.handle({"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {"protocolVersion": "2025-06-18"}})
-    assert init["result"]["protocolVersion"] == "2025-06-18" and "scale-graph" in init["result"]["instructions"]
+    assert init["result"]["protocolVersion"] == "2025-06-18" and "scale-catal" in init["result"]["instructions"]
     assert srv.handle({"jsonrpc": "2.0", "method": "notifications/initialized"}) is None
     lst = srv.handle({"jsonrpc": "2.0", "id": 2, "method": "tools/list"})["result"]["tools"]
     assert {t["name"] for t in lst} == TOOL_NAMES and all("inputSchema" in t for t in lst)

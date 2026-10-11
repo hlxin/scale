@@ -5,8 +5,8 @@ The catalysis domain keeps its questions in ``domain/competency/*.yaml``, one qu
     id: CQ-01
     question: Which ammonia Faradaic efficiencies were measured in nitrate electroreduction, and how?
     documents:                     # public example documents (among the domain's example_documents.graph),
-      - examples/scale-graph/driving-force-examples/electro.json        # relative to domain/
-    plan:                          # a scale-graph query plan (docs/querying.md)
+      - examples/scale-catal/driving-force-examples/electro.json        # relative to domain/
+    plan:                          # a scale-catal query plan (docs/querying.md)
       match: {label: CatalyticTest, as: test, where: [{prop: faradaic_efficiency, op: exists}]}
       return: [test.name, test.faradaic_efficiency]
     expect:                        # what the answer must be
@@ -168,7 +168,7 @@ def run_question(repo: Path, domain: str, path: Path, m: dict | None = None, cac
     declared = _declared_examples(base, m)
     manifest = layout.graph_manifests(repo, experimental=True).get(domain)
     if manifest is None:
-        out["problems"].append(f"{domain} has no scale-graph schema (DOMAIN.yaml graph.manifest)")
+        out["problems"].append(f"{domain} has no scale-catal schema (DOMAIN.yaml graph.manifest)")
     if out["problems"]:
         return out
     plans = [q["plan"]] + [{**q["plan"], **v["plan"]} for v in variants]

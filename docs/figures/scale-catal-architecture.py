@@ -2,10 +2,10 @@
 one vocabulary and its one checklist, read from the catalysis manifest (matplotlib). One version for the whole schema:
 the manifest's.
 
-    python scale-graph-architecture.py        # writes scale-graph-architecture.png beside this file
+    python scale-catal-architecture.py        # writes scale-catal-architecture.png beside this file
 
 Everything shown — the labels of the kernel and the catalysis file, the checklist's items for every record and its cases,
-each keyed on the driving forces a catalytic test lists — is read from domain/graph/scale-graph.yaml and
+each keyed on the driving forces a catalytic test lists — is read from domain/graph/scale-catal.yaml and
 the files it names.
 """
 
@@ -30,7 +30,7 @@ def _repo_root(*starts: Path) -> Path:
 
 HERE = Path(__file__).resolve().parent
 G = _repo_root(HERE, Path.cwd()) / "domain/graph"   # the manifest's directory: its parts are relative to it
-MAN = yaml.safe_load((G / "scale-graph.yaml").read_text())
+MAN = yaml.safe_load((G / "scale-catal.yaml").read_text())
 ROOT = G.parent.parent
 KERNEL = yaml.safe_load((ROOT / "core/graph/kernel.yaml").read_text())   # the manifest's kernel (layout.kernel_path)
 FILES = {d["domain"]: d for d in (yaml.safe_load((G / p).read_text()) for p in MAN["domains"])}
@@ -202,5 +202,5 @@ text(0.4, -1.75, "Dynamic is not a driving force: a dynamic run is a kernel Oper
      "by a schema change.\nOne version number for the whole schema, kernel and catalysis together: every schema change raises it.",
      10.5, color="#333333", ha="left", bold=False)
 ax.texts[-1].set_bbox(dict(fc="#f4f4f4", ec="#999999", boxstyle="round,pad=0.4"))
-fig.savefig(HERE / "scale-graph-architecture.png", dpi=100, bbox_inches="tight", facecolor="white")
-print("wrote", HERE / "scale-graph-architecture.png")
+fig.savefig(HERE / "scale-catal-architecture.png", dpi=100, bbox_inches="tight", facecolor="white")
+print("wrote", HERE / "scale-catal-architecture.png")

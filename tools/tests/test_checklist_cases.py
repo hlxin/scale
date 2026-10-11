@@ -13,7 +13,7 @@ from scale.schema_change import diff_specs
 from scale.pgraph_profiles import conformance
 from scale.util import ScaleError, load_doc
 
-DF = EXAMPLES / "scale-graph/driving-force-examples"
+DF = EXAMPLES / "scale-catal/driving-force-examples"
 
 
 @pytest.fixture(scope="module")
@@ -23,7 +23,7 @@ def cand():
 
 
 def _ex(name):
-    return load_doc(EXAMPLES / "scale-graph/example.json" if name == "example.json" else DF / name)
+    return load_doc(EXAMPLES / "scale-catal/example.json" if name == "example.json" else DF / name)
 
 
 def _test(doc, forces=None):
@@ -46,7 +46,7 @@ def _copy_head(tmp_path):
     (root / "core/graph").mkdir(parents=True)
     shutil.copy2(REPO / layout.KERNEL, root / layout.KERNEL)
     shutil.copytree(GRAPH_MANIFEST.parent, root / "domain/graph", ignore=shutil.ignore_patterns("frozen"))
-    return root / "domain/graph/scale-graph.yaml", root / "domain/graph/catalysis.yaml"
+    return root / "domain/graph/scale-catal.yaml", root / "domain/graph/catalysis.yaml"
 
 
 def _variant(tmp_path, mutate):
@@ -90,14 +90,14 @@ def test_documents_use_the_one_domain_schema_whatever_they_follow(tmp_path):
     repo = tmp_path / "repo"
     d = repo / layout.DOMAIN
     (d / "graph").mkdir(parents=True)
-    (d / layout.DOMAIN_MANIFEST).write_text("domain: catalysis\nstatus: stable\ngraph:\n  manifest: graph/scale-graph.yaml\n")
-    (d / "graph/scale-graph.yaml").write_text("schema: scale-graph\nversion: 0.1.0\nkernel: k.yaml\ndomains:\n- catalysis.yaml\n")
+    (d / layout.DOMAIN_MANIFEST).write_text("domain: catalysis\nstatus: stable\ngraph:\n  manifest: graph/scale-catal.yaml\n")
+    (d / "graph/scale-catal.yaml").write_text("schema: scale-catal\nversion: 0.1.0\nkernel: k.yaml\ndomains:\n- catalysis.yaml\n")
     (d / "graph/catalysis.yaml").write_text("domain: catalysis\nchecklist:\n  labels: {}\n")
     doc = lambda *f: {"graph": {"follows_domains": list(f)}, "nodes": []}   # noqa: E731
     for follows in (("catalysis",), ("thermocatalysis@0.1.0",), ("optics",), ()):
-        assert pgraph.spec_path(repo, doc=doc(*follows)) == d / "graph/scale-graph.yaml", follows
-    (d / layout.DOMAIN_MANIFEST).write_text("domain: catalysis\nstatus: experimental\ngraph:\n  manifest: graph/scale-graph.yaml\n")
-    with pytest.raises(ScaleError, match="no scale-graph schema found: no released domain declares graph.manifest in "
+        assert pgraph.spec_path(repo, doc=doc(*follows)) == d / "graph/scale-catal.yaml", follows
+    (d / layout.DOMAIN_MANIFEST).write_text("domain: catalysis\nstatus: experimental\ngraph:\n  manifest: graph/scale-catal.yaml\n")
+    with pytest.raises(ScaleError, match="no scale-catal schema found: no released domain declares graph.manifest in "
                                          "domain/DOMAIN.yaml"):
         pgraph.spec_path(repo, doc=doc("catalysis"))
 

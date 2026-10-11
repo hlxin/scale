@@ -6,7 +6,7 @@ SCALE (Shared Concepts, Attributes, and Links with Evidence) is one shared frame
 scientific knowledge graphs across domains: a science kernel, catalysis as the first domain, tools and agent
 skills. Run SCALE with `uvx scale-catal call <tool> '<json>'`, through MCP (`uvx scale-catal mcp`) or from
 Python (`scale.api.ScaleToolkit`). Start with `status`, then `skills` and `describe`, to learn the format.
-SCALE has one data format: **scale-graph documents** (node-link JSON), each pinning the schema version it
+SCALE has one data format: **scale-catal documents** (node-link JSON), each pinning the schema version it
 follows (`graph.schema_version`). There is no workspace lock and nothing to upgrade; documents live in the
 working directory (`$SCALE_WORKSPACE`, default `~/.scale/workspace`).
 
@@ -17,7 +17,7 @@ repository run `uv run scale call <tool> '<json>'` (MCP: `uv run scale mcp`); el
 repository). Use the plain `uvx scale-catal …` form only once a release is on PyPI.
 
 - **The schema** has two layers, the science kernel (`core/graph/kernel.yaml`) and the catalysis domain,
-  whose graph schema manifest (`domain/graph/scale-graph.yaml`) assembles the kernel with one catalysis file
+  whose graph schema manifest (`domain/graph/scale-catal.yaml`) assembles the kernel with one catalysis file
   (`catalysis.yaml`) holding one vocabulary and one checklist; the checklist's items for a catalytic test apply
   by the driving forces it lists. The schema has **one version** for the kernel and the catalysis domain
   together (the manifest's). Read it with `describe` (or `scale graph describe <Label> --domain catalysis`).
@@ -46,7 +46,7 @@ repository). Use the plain `uvx scale-catal …` form only once a release is on 
   newer one when the user asks. If `status.updates` reports a newer tool, tell the user once; never
   update on your own.
 - **Schema identity:** a version number names a schema only within this repository's numbering. This repository
-  replaced the earlier contents of github.com/hlxin/scale (its own scale-graph numbering 0.1.0-0.8.0,
+  replaced the earlier contents of github.com/hlxin/scale (its own scale-catal numbering 0.1.0-0.8.0,
   package scale-catalysis); versions here restart at 0.1.0 and are a separate line. Bind a schema by its spec
   digest (`scale graph spec`; `scale graph spec --expect <sha256>` checks a version and digest you hold). A
   document that pins a version the tools do not hold is reported as such; never read it under another version of

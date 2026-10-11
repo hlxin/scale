@@ -29,7 +29,7 @@ def _doc(quotes):
         if quant:
             props["value"] = {"status": "present", "value": 6.2, "unit": "%", "evidence_ids": [f"e{i}"]}
         nodes.append({"id": f"ex:t/claim/{i}", "label": "Claim", "props": props})
-    return {"directed": True, "multigraph": True, "graph": {"schema": "scale-graph", "data_status": "research_data"},
+    return {"directed": True, "multigraph": True, "graph": {"schema": "scale-catal", "data_status": "research_data"},
             "nodes": nodes, "links": []}
 
 
@@ -92,7 +92,7 @@ def test_cap_keeps_quantitative_evidence_first_then_shorter_and_withholds_the_re
 
 def test_withheld_text_is_valid_under_the_schema_and_keeps_an_earlier_note():
     from conftest import EXAMPLES, spec_of
-    doc = as_project_data(load_doc(EXAMPLES / "scale-graph/example.json"))
+    doc = as_project_data(load_doc(EXAMPLES / "scale-catal/example.json"))
     spec = spec_of(doc)                                                     # the version the example pins
     test = next(n for n in doc["nodes"] if n["label"] == "CatalyticTest")
     src = test["props"]["evidence"][0]["source"]
@@ -172,7 +172,7 @@ def test_committed_documents_are_public_and_respect_the_cap(tmp_path):
     repo = tmp_path / "repo"
     (repo / "x").mkdir(parents=True)
     from conftest import EXAMPLES
-    ex = load_doc(EXAMPLES / "scale-graph/example.json")
+    ex = load_doc(EXAMPLES / "scale-catal/example.json")
     write_canonical(repo / "x/public.json", ex)
     write_canonical(repo / "x/project.json", as_project_data(ex))
     hidden = json.loads(json.dumps(ex))

@@ -7,7 +7,7 @@ in [`../skills/`](../skills/).
 tools/
 ├── layout.py   # every repository-relative path the tools use, in one place
 ├── cli.py      # the `scale` command
-├── …           # agent interfaces, scale-graph validation and queries, schema changes, releases
+├── …           # agent interfaces, scale-catal validation and queries, schema changes, releases
 └── tests/      # tests of the tools, with their fixtures
 ```
 
@@ -27,7 +27,7 @@ The modules are mapped in [docs/architecture.md](../docs/architecture.md#code-ma
   restricted copy (named by an environment variable only).
 - Tools are deterministic. Anything that calls a model sits behind a skill (or, for feedback
   triage, an external command named with `--agent-command`).
-- They read and write one data format, scale-graph documents, each pinning the schema version it follows
+- They read and write one data format, scale-catal documents, each pinning the schema version it follows
   (one version for the kernel and the catalysis domain together).
 
 Commands are listed in [docs/commands.md](../docs/commands.md); agent interfaces (`scale call`,

@@ -48,11 +48,11 @@ def test_reuse_lint_passes_and_scale_check_runs_it():
 @pytest.mark.parametrize("path,licences", [
     ("tools/cli.py", {"MIT"}), ("setup.py", {"MIT"}), ("pyproject.toml", {"MIT"}), (".github/CODEOWNERS", {"MIT"}),
     ("core/graph/kernel.yaml", {"CC-BY-4.0"}), ("domain/graph/catalysis.yaml", {"CC-BY-4.0"}),
-    ("domain/examples/scale-graph/example.json", {"CC-BY-4.0"}), ("docs/architecture.md", {"CC-BY-4.0"}),
+    ("domain/examples/scale-catal/example.json", {"CC-BY-4.0"}), ("docs/architecture.md", {"CC-BY-4.0"}),
     ("governance/GOVERNANCE.md", {"CC-BY-4.0"}), ("skills/curate-source/SKILL.md", {"CC-BY-4.0"}),
     ("README.md", {"CC-BY-4.0"}), ("CITATION.cff", {"CC-BY-4.0"}), ("NOTICE", {"CC-BY-4.0"}),
     ("scale-release.yaml", {"CC-BY-4.0"}), ("releases/README.md", {"MIT"}),
-    ("domain/tests/test_invalid_fixtures.py", {"MIT"}), ("domain/examples/scale-graph/driving-force-examples/build_examples.py", {"MIT"}),
+    ("domain/tests/test_invalid_fixtures.py", {"MIT"}), ("domain/examples/scale-catal/driving-force-examples/build_examples.py", {"MIT"}),
     ("core/examples/science-examples/build_examples.py", {"MIT"}), ("docs/figures/science-kernel-overview.py", {"MIT"}),
     ("docs/decisions/0001-scale-0.1.0.md", {"CC-BY-4.0"}),
     # the domain template, a test fixture: its texts CC-BY-4.0, its code MIT

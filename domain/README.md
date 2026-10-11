@@ -5,7 +5,7 @@ framework and, for now, the only one. SCALE's schema has **two layers: the scien
 The science kernel ([`core/`](../core/README.md)) is the general base layer; this folder, `domain/`, is the
 catalysis domain built on it. Its graph schema is the kernel plus one catalysis file,
 [`graph/catalysis.yaml`](graph/catalysis.yaml) (one vocabulary and one checklist), assembled by its graph schema
-manifest, [`graph/scale-graph.yaml`](graph/scale-graph.yaml). It covers thermocatalysis, electrocatalysis,
+manifest, [`graph/scale-catal.yaml`](graph/scale-catal.yaml). It covers thermocatalysis, electrocatalysis,
 photocatalysis and plasma catalysis, and their combinations, as driving forces of one checklist. The owner owns
 the folder in `.github/CODEOWNERS` (the `/domain/` line, ready for the domain's own maintainers), and its
 stewards are named in [`DOMAIN.yaml`](DOMAIN.yaml). A second domain would revisit the one-folder layout
@@ -14,7 +14,7 @@ stewards are named in [`DOMAIN.yaml`](DOMAIN.yaml). A second domain would revisi
 | | |
 |---|---|
 | status | `stable`, `founding: true` (its stewardship targets are warnings) |
-| schema version | 0.1.0 (kernel and catalysis together) |
+| schema version | 0.2.0 (kernel and catalysis together) |
 | maintainers | `@hlxin` (the owner; reviewers join through the review policy) |
 | stewards | Hongliang Xin (`hlxin`), since 2026-09-26; maintainer seats to be filled as reviewers join |
 | review areas | `catalysis`, `thermo`, `electrothermo`, `electro`, `photo`, `plasma` |
@@ -33,7 +33,7 @@ name is not.
 
 ## Scope
 
-**In scope:** catalytic chemistry and its evidence, in scale-graph documents (labeled property graphs):
+**In scope:** catalytic chemistry and its evidence, in scale-catal documents (labeled property graphs):
 
 - the catalysis domain's graph schema, with one vocabulary (chemical species, materials, samples, reactions,
   reactors, preparations, characterizations, computations, mechanisms, catalysts, active sites, feeds, catalyst
@@ -57,8 +57,8 @@ terms (electrodes, electrolytes, cells) and the other driving-force terms stay h
 | the catalysis domain | the folder `domain/` with its `DOMAIN.yaml` |
 | the schema version | one number for the kernel and the catalysis domain together: the manifest's `version`; `DOMAIN.yaml` states it too |
 | the science kernel | the general base layer (`core/`) |
-| the catalysis file | `domain/graph/catalysis.yaml`, a scale-graph schema file keyed `domain: catalysis` that adds the catalysis vocabulary to the kernel and carries the **checklist** (`checklist:`: what a record must and should report, with `when` cases that apply items by a record's property, e.g. the driving forces of a catalytic test); it carries no version of its own |
-| graph schema manifest | `domain/graph/scale-graph.yaml`: the science kernel (`core/graph/kernel.yaml`) plus the catalysis file, listed under `domains:`. Its `version` is the schema's one version, which documents pin (`graph.schema_version`); there is no repository-wide composition |
+| the catalysis file | `domain/graph/catalysis.yaml`, a scale-catal schema file keyed `domain: catalysis` that adds the catalysis vocabulary to the kernel and carries the **checklist** (`checklist:`: what a record must and should report, with `when` cases that apply items by a record's property, e.g. the driving forces of a catalytic test); it carries no version of its own |
+| graph schema manifest | `domain/graph/scale-catal.yaml`: the science kernel (`core/graph/kernel.yaml`) plus the catalysis file, listed under `domains:`. Its `version` is the schema's one version, which documents pin (`graph.schema_version`); there is no repository-wide composition |
 | checklist | what documents follow (`follows_domains: ["catalysis"]`, selected with `--domain catalysis`): the catalysis file's `checklist:` |
 | concept promotion | a concept moves from `maturity: provisional` to `stable` through a schema change; the stable catalysis domain holds provisional concepts |
 
@@ -69,7 +69,7 @@ domain/
 ├── DOMAIN.yaml         # the declaration below; checked by `scale domains check`
 ├── README.md           # this file: scope, maintainers, contents, the declaration's fields, how to contribute
 ├── ROADMAP.md          # open work
-├── graph/              # scale-graph.yaml (the graph schema manifest), catalysis.yaml (with the checklist)
+├── graph/              # scale-catal.yaml (the graph schema manifest), catalysis.yaml (with the checklist)
 ├── competency/         # competency questions: cq-NN-*.yaml (graph query plans with expected answers)
 ├── examples/           # public synthetic example documents
 ├── docs/               # catalysis documentation (reporting guidance)
@@ -78,17 +78,17 @@ domain/
 
 | path | what |
 |---|---|
-| `graph/scale-graph.yaml` | the catalysis graph schema manifest: the schema's one version, the science kernel (`../../core/graph/kernel.yaml`) and the catalysis file |
+| `graph/scale-catal.yaml` | the catalysis graph schema manifest: the schema's one version, the science kernel (`../../core/graph/kernel.yaml`) and the catalysis file |
 | `graph/catalysis.yaml` | the catalysis file (`domain: catalysis`): the vocabulary and the checklist |
-| `graph/frozen/` | the frozen schema versions (`scale-graph-<version>.yaml`, `v<version>/`, `SHA256SUMS`), written when a schema change moves the schema on (`scale schema bump`); none yet |
+| `graph/frozen/` | the frozen schema versions (`scale-catal-<version>.yaml`, `v<version>/`, `SHA256SUMS`), written when a schema change moves the schema on (`scale schema bump`); none yet |
 | `competency/` | competency questions CQ-01 … CQ-05: graph query plans over the public examples, with their expected answers |
 | `examples/` | the public synthetic examples ([overview](./examples/README.md)) |
 | `docs/` | [catalyst-state reporting](docs/reporting/catalyst-state-reporting.md) and the [supporting-information index](docs/supporting-information.md) |
-| `tests/` | the catalysis tests and the invalid scale-graph fixtures (`fixtures/invalid/`, each rejected for the reason `expect.yaml` states) |
+| `tests/` | the catalysis tests and the invalid scale-catal fixtures (`fixtures/invalid/`, each rejected for the reason `expect.yaml` states) |
 
 Code that the catalysis domain needs goes in `tools/` ([tools/README.md](../tools/README.md)).
 
-The examples, in `examples/scale-graph/`: a synthetic thermocatalytic test (`example.json`, invented values and an
+The examples, in `examples/scale-catal/`: a synthetic thermocatalytic test (`example.json`, invented values and an
 invented source), one synthetic document per other driving force or combination (`driving-force-examples/`) and a
 source's lifecycle (`source-lifecycle/`), all public.
 
@@ -96,7 +96,7 @@ source's lifecycle (`source-lifecycle/`), all public.
 
 | part | version |
 |---|---|
-| the schema (`graph/scale-graph.yaml`: the kernel with the catalysis file), which documents pin; `DOMAIN.yaml`, `core/CORE.yaml` and `scale-release.yaml` state it | 0.1.0 |
+| the schema (`graph/scale-catal.yaml`: the kernel with the catalysis file), which documents pin; `DOMAIN.yaml`, `core/CORE.yaml` and `scale-release.yaml` state it | 0.1.0 |
 | the kernel and the catalysis file | none of their own |
 
 This repository started its numbering at 0.1.0 on 2026-10-08. `scale graph spec` gives each version's digest
@@ -120,14 +120,14 @@ other value.
 | `founding` | no | `true` for catalysis; an unmet stewardship target (below) is then a warning |
 | `version` | yes | the schema's one version (the manifest's); `scale domains check` requires them to agree and `scale schema bump` raises both |
 | `depends_on` | no | empty: there is no other domain to depend on |
-| `alternative_to` | no | kept for the code and unused (null); it may only name a scale-graph file. Disagreement inside catalysis is a pull request plus `contradicts` links ([governance](../governance/GOVERNANCE.md#disagreement)) |
+| `alternative_to` | no | kept for the code and unused (null); it may only name a scale-catal file. Disagreement inside catalysis is a pull request plus `contradicts` links ([governance](../governance/GOVERNANCE.md#disagreement)) |
 | `summary` | yes | one line |
 | `scope` | yes | what is in scope and what is not |
 | `maintainers` | yes | `team` (the code owner as CODEOWNERS names it: a user such as `@hlxin`, or a team `@org/team`) and `people`: each with `name`, `github`, optional `orcid`, `since` and `roles` (`steward` or `maintainer`); a seat not filled yet has `placeholder: true` and no `since`, and is never counted or credited |
 | `review_areas` | yes | the review-policy areas of catalysis changes |
-| `graph` | no | `manifest` only (required with `graph`): the graph schema manifest, `graph/scale-graph.yaml`, which lists the catalysis file under `domains:` |
+| `graph` | no | `manifest` only (required with `graph`): the graph schema manifest, `graph/scale-catal.yaml`, which lists the catalysis file under `domains:` |
 | `examples` | yes | example directories |
-| `example_documents` | yes | `graph`: scale-graph documents (globs allowed) that `scale domains check` validates under their pinned versions |
+| `example_documents` | yes | `graph`: scale-catal documents (globs allowed) that `scale domains check` validates under their pinned versions |
 | `competency` | yes | the competency-question directory (always `competency`): graph query plans with expected answers, run on public examples by `scale domains cq` |
 | `tests` | yes | the test directory (always `tests`; at least one `test_*.py`) |
 | `docs` | no | the documentation directory |
@@ -160,7 +160,7 @@ review_areas:
   - photo
   - plasma
 graph:
-  manifest: graph/scale-graph.yaml   # lists graph/catalysis.yaml (domain: catalysis), with the one checklist
+  manifest: graph/scale-catal.yaml   # lists graph/catalysis.yaml (domain: catalysis), with the one checklist
 ```
 
 Release manifests take their credits from `maintainers` and `contributors` (deduplicated by GitHub handle, or
@@ -184,7 +184,7 @@ named in `decision_record`. Catalysis has one steward today, so the first target
   state none (they do not load if they do).
 - The tests directory has at least one `test_*.py`; the competency directory has questions;
   `maintainers.people` is not empty; `depends_on` is empty.
-- Every scale-graph `imports` resolves to the kernel or the catalysis domain's own files, and names no version.
+- Every scale-catal `imports` resolves to the kernel or the catalysis domain's own files, and names no version.
 - The graph schema manifest (`graph.manifest`) uses the kernel (`core/graph/kernel.yaml`), lists under
   `domains:` only files inside `domain/`, among them the one named after the domain (`domain: catalysis`),
   and loads; it has no `modules:`, `extensions:` or `profiles:`, and each of its files names itself with
@@ -200,7 +200,7 @@ named in `decision_record`. Catalysis has one steward today, so the first target
 - `.github/CODEOWNERS` gives `core/CORE.yaml` to the code owner named in it, and has a `/domain/` line naming
   the domain's code owner, which owns `DOMAIN.yaml`.
 - `example_documents` validate: graph documents against the catalysis manifest at the version they
-  pin (the head, or `graph/frozen/scale-graph-<version>.yaml`); the core's against the kernel of the version
+  pin (the head, or `graph/frozen/scale-catal-<version>.yaml`); the core's against the kernel of the version
   they pin.
 - A warning when no one in `governance/review-policy.yaml` lists the catalysis `review_areas`.
 

@@ -9,7 +9,7 @@ merge base of ``<ref>`` (what GitHub shows as the pull request's diff) and fails
   releases and new frozen versions are additions and pass; README and CHANGELOG files directly under
   ``releases/`` may change;
 - changes the specification (``core/graph/``, or the catalysis domain's ``domain/graph/`` files, its schema
-  manifest ``graph/scale-graph.yaml`` included, unless the domain is experimental) without what a schema change
+  manifest ``graph/scale-catal.yaml`` included, unless the domain is experimental) without what a schema change
   must carry (:func:`scale.schema_change.check`: the version raised by the rule, the base frozen, the migration
   step, tests, a CHANGELOG line).
 

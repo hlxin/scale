@@ -5,9 +5,9 @@
   (``{a: b}``) and no flow sequences holding mappings or sequences, because unquoted commas,
   colons or question marks inside them silently change meaning. Ambiguous YAML 1.1 scalars
   (``yes``/``no``/``on``/``off``), duplicate keys and tab indentation are rejected too.
-* **JSON** is for machine-written documents (scale-graph documents, patches, gap reports, logs,
+* **JSON** is for machine-written documents (scale-catal documents, patches, gap reports, logs,
   approvals, reports), stored in canonical form (``util.dump_canonical``).
-* **Names** in scale-graph schemas: labels PascalCase, edge types UPPER_SNAKE_CASE, properties
+* **Names** in scale-catal schemas: labels PascalCase, edge types UPPER_SNAKE_CASE, properties
   snake_case.
 """
 
@@ -111,7 +111,7 @@ UPPER_SNAKE = re.compile(r"^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$")
 
 
 def naming_problems(spec: dict) -> list[str]:
-    """Naming rules of an assembled scale-graph schema (docs/style.md): labels PascalCase, edge types
+    """Naming rules of an assembled scale-catal schema (docs/style.md): labels PascalCase, edge types
     UPPER_SNAKE_CASE, properties snake_case (the established symbol pH allowed, alone and as a token)."""
     problems = []
 
@@ -122,11 +122,11 @@ def naming_problems(spec: dict) -> list[str]:
             problems.append(f"{where}: {kind} {name!r} should be {want}")
 
     for lab, d in sorted({**(spec.get("abstract") or {}), **spec["nodes"]}.items()):
-        need("label", lab, PASCAL, f"scale-graph {spec.get('version')}")
+        need("label", lab, PASCAL, f"scale-catal {spec.get('version')}")
         for k in (d.get("properties") or {}):
             need("property", k, SNAKE, lab)
     for e, d in sorted(spec["edges"].items()):
-        need("edge type", e, UPPER_SNAKE, f"scale-graph {spec.get('version')}")
+        need("edge type", e, UPPER_SNAKE, f"scale-catal {spec.get('version')}")
         for k in (d.get("properties") or {}):
             need("property", k, SNAKE, e)
     return problems
@@ -146,7 +146,7 @@ def fmt_file(path: Path, check: bool = False) -> str | None:
 
 
 def machine_yaml_docs(root: Path) -> list[Path]:
-    """YAML files that hold machine-style documents (scale-graph documents, patches) and should be JSON."""
+    """YAML files that hold machine-style documents (scale-catal documents, patches) and should be JSON."""
     out = []
     targets = ["core/examples"] + [str(p.relative_to(root)) for d in layout.domain_dirs(root)
                                    for p in (d / layout.DOMAIN_EXAMPLES, d / "tests") if p.is_dir()]

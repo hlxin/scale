@@ -1,5 +1,5 @@
 """domain/DOMAIN.yaml: the catalysis domain, the first, stable and `founding: true`. Its own graph schema
-manifest (graph/scale-graph.yaml) assembles the science kernel with its one file (graph/catalysis.yaml,
+manifest (graph/scale-catal.yaml) assembles the science kernel with its one file (graph/catalysis.yaml,
 `domain: catalysis`, which carries the one catalysis checklist), its competency questions answer as
 expected on public examples, and it passes `scale domains check` (unmet stewardship targets are warnings
 for it)."""
@@ -25,7 +25,7 @@ def test_catalysis_is_the_founding_stable_domain(decl):
     assert decl["maintainers"]["team"] == "@hlxin"                                # the owner, for now
     assert [p["github"] for p in stewards(decl)] == ["hlxin"]
     assert decl["decision_record"] == "docs/decisions/0001-scale-0.1.0.md" and (REPO / decl["decision_record"]).is_file()
-    assert decl["examples"] == ["examples/scale-graph"]                         # public synthetic examples only
+    assert decl["examples"] == ["examples/scale-catal"]                         # public synthetic examples only
 
 
 def test_catalysis_graph_files_are_the_parts_of_its_own_manifest(decl):
@@ -50,7 +50,7 @@ def test_catalysis_has_at_least_three_competency_questions_that_answer_as_expect
     res = run(REPO, ["catalysis"])
     assert res["ok"] and res["stubs"] == 0 and res["answered_as_expected"] >= 3
     for q in res["questions"]:                                               # run on public synthetic examples
-        assert all(d.startswith("examples/scale-graph/") for d in load_yaml(REPO / q["file"])["documents"])
+        assert all(d.startswith("examples/scale-catal/") for d in load_yaml(REPO / q["file"])["documents"])
 
 
 def test_the_repository_passes_the_domain_check():

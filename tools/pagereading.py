@@ -29,7 +29,7 @@ of the page, origin top left, on the PDF page its ``locator`` starts with: ``p. 
 3. **Every number of a record read from an image is in one of its transcriptions or quotes** (unsigned; a value
    printed in words, such as "atmospheric pressure", has no printed number to find).
 
-DOC is a curated document: a scale-graph document or a curation fragment (any JSON object with ``nodes`` and
+DOC is a curated document: a scale-catal document or a curation fragment (any JSON object with ``nodes`` and
 ``links``). DIR, the pages folder, holds for each source ``DIR/<key>/`` (key: the Source id's last segment):
 ``p<N>.png`` (page images, for the curator's eyes), ``p<N>.words.json`` (the positioned words of the text layer and
 of OCR, with the engine that wrote them), ``regions/<region key>.json`` (a 400 dpi OCR of a region, cached),

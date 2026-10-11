@@ -1,11 +1,11 @@
-"""SCALE graph schema (scale-graph): labeled property graphs in node-link JSON.
+"""SCALE graph schema (scale-catal): labeled property graphs in node-link JSON.
 
 A document is ``{"directed", "multigraph", "graph", "nodes", "links"}``; a node is
 ``{"id", "label", "props"}`` and a link ``{"id", "source", "target", "type", "props"}``. The
-catalysis schema (``domain/graph/scale-graph.yaml``: the science kernel plus the catalysis domain's
+catalysis schema (``domain/graph/scale-catal.yaml``: the science kernel plus the catalysis domain's
 files) declares node labels, edge types with their endpoint labels, and a typed property set for
-each, plus the value object and the evidence item. "scale-graph" names the format and schema family
-that documents pin (``schema: scale-graph``, ``schema_version``); a domain's schema version is the
+each, plus the value object and the evidence item. "scale-catal" names the format and schema family
+that documents pin (``schema: scale-catal``, ``schema_version``); a domain's schema version is the
 version of its manifest.
 
 This module loads the schema, validates documents against it (errors for malformed records,
@@ -72,20 +72,20 @@ def follows(doc: dict | None) -> set[str]:
 
 def spec_path(repo: Path, explicit: str | None = None, doc: dict | None = None) -> Path:
     """The schema manifest to use: an explicit one as given; else the catalysis domain's
-    ``domain/graph/scale-graph.yaml`` (the one domain for now; there is no repository-wide schema).
+    ``domain/graph/scale-catal.yaml`` (the one domain for now; there is no repository-wide schema).
     ``doc`` is accepted for the callers that pass the document; the one manifest needs no choosing."""
     if explicit:
         return Path(explicit)
     mans = layout.graph_manifests(repo)
     if len(mans) == 1:
         return next(iter(mans.values()))
-    raise ScaleError(f"no scale-graph schema found: no released domain declares graph.manifest in "
+    raise ScaleError(f"no scale-catal schema found: no released domain declares graph.manifest in "
                      f"{layout.DOMAIN_DECLARATION} (pass --spec)")
 
 
 def spec_for(repo: Path, version: str | None, explicit: str | None = None, doc: dict | None = None) -> Path:
     """The schema a document pins: the domain's current manifest if its version matches, else the
-    frozen ``frozen/scale-graph-<version>.yaml`` beside it; the current manifest when the document pins
+    frozen ``frozen/scale-catal-<version>.yaml`` beside it; the current manifest when the document pins
     nothing. An explicit spec is used as given."""
     main = spec_path(repo, explicit, doc)
     return main if explicit else pinned(main, version, doc)
@@ -93,27 +93,27 @@ def spec_for(repo: Path, version: str | None, explicit: str | None = None, doc: 
 
 def pinned(manifest: Path, version: str | None, doc: dict | None = None) -> Path:
     """A domain's manifest at ``version``: the manifest itself when it is at that version (or none is
-    pinned), else its frozen copy ``frozen/scale-graph-<version>.yaml``. The error for a version with neither says
+    pinned), else its frozen copy ``frozen/scale-catal-<version>.yaml``. The error for a version with neither says
     what the ``doc`` pinning it may be (:func:`_unknown`). The graph of a kg-bundle is refused whatever version it
-    names: it is the bundle format's graph, not a scale-graph document."""
+    names: it is the bundle format's graph, not a scale-catal document."""
     if doc is not None and bundle_graph(doc):
         raise ScaleError(f"the document is the graph of a kg-bundle (its header names a bundle_id and a schema_id, "
-                         f"{doc['graph'].get('schema_id')} {doc['graph'].get('schema_version')}), not a scale-graph "
-                         "document; validate the scale-graph it was exported from (the bundle's bundle.json names it "
+                         f"{doc['graph'].get('schema_id')} {doc['graph'].get('schema_version')}), not a scale-catal "
+                         "document; validate the scale-catal it was exported from (the bundle's bundle.json names it "
                          "in scale_header), and the bundle with the format's validator")
     if not version or load_yaml(manifest).get("version") == version:
         return Path(manifest)
     frozen = frozen_spec(manifest, version)
     if frozen.exists():
         return frozen
-    raise ScaleError(f"document pins scale-graph {version}, which is not a version this repository holds (no "
+    raise ScaleError(f"document pins scale-catal {version}, which is not a version this repository holds (no "
                      f"{frozen.name} in {frozen.parent}){_unknown(manifest, version, doc)}")
 
 
 def bundle_graph(doc: Any) -> bool:
     """Whether ``doc`` is the graph of a kg-bundle (its ``kg/graph.json``, as ``scale graph export --to kg-bundle``
     writes it): a header naming the bundle (``bundle_id``) and the bundle's schema (``schema_id``, e.g.
-    ``scale-catal 0.1.0``); it is the bundle format's graph, not a scale-graph document."""
+    ``scale-catal 0.1.0``); it is the bundle format's graph, not a scale-catal document."""
     g = doc.get("graph") if isinstance(doc, dict) else None
     return isinstance(g, dict) and isinstance(g.get("bundle_id"), str) and isinstance(g.get("schema_id"), str)
 
@@ -127,8 +127,8 @@ def _unknown(manifest: Path, version: str, doc: dict | None = None) -> str:
     from .versions import parse_version
     if bundle_graph(doc):
         return (f"; the document is the graph of a kg-bundle (its header names a bundle_id and a schema_id), whose "
-                f"schema_version {version} is the bundle's own version, not a scale-graph version; validate the "
-                "scale-graph it was exported from (the bundle's bundle.json names that schema in scale_header)")
+                f"schema_version {version} is the bundle's own version, not a scale-catal version; validate the "
+                "scale-catal it was exported from (the bundle's bundle.json names that schema in scale_header)")
     held = sorted(public_versions(manifest), key=parse_version)
     head = str(load_yaml(manifest).get("version"))
     try:
@@ -151,23 +151,24 @@ def kernel_only_spec(repo: Path, version: str | None) -> dict:
     if not version or str(load_yaml(ko).get("version")) == str(version):
         return load_spec(ko)
     fk = Path(repo) / layout.KERNEL_FROZEN / f"kernel-{version}.yaml"
+    legacy = fk.is_file() and str(load_yaml(fk).get("kernel", "")).startswith(layout.LEGACY_SCHEMA_NAME)
     if not fk.is_file():
-        raise ScaleError(f"document pins scale-graph {version}; neither {layout.KERNEL_ONLY_MANIFEST} (at "
+        raise ScaleError(f"document pins scale-catal {version}; neither {layout.KERNEL_ONLY_MANIFEST} (at "
                          f"{load_yaml(ko).get('version')}) nor a frozen {fk.name} in {layout.KERNEL_FROZEN}/ is that version")
-    return assemble_manifest({"schema": "scale-graph", "version": str(version), "status": "frozen", "kernel": fk.name,
+    return assemble_manifest({"schema": layout.LEGACY_SCHEMA_NAME if legacy else layout.SCHEMA_NAME, "version": str(version), "status": "frozen", "kernel": fk.name,
                               "domains": []}, fk.parent)
 
 
 def frozen_spec(manifest: Path, version: str) -> Path:
     """Where the frozen copy of version ``version`` of a domain's schema lives (whether or not it exists)."""
-    return layout.frozen_graph_dir(manifest) / f"scale-graph-{version}.yaml"
+    return layout.frozen_graph_dir(manifest) / f"scale-catal-{version}.yaml"
 
 
 def load_spec(path: Path) -> dict:
-    """A schema file as written, or a manifest (a domain's scale-graph.yaml) assembled from its parts."""
+    """A schema file as written, or a manifest (a domain's scale-catal.yaml) assembled from its parts."""
     spec = load_yaml(path)
-    if spec.get("schema") != "scale-graph":
-        raise ScaleError(f"{path} is not a scale-graph schema")
+    if spec.get("schema") not in (layout.SCHEMA_NAME, layout.LEGACY_SCHEMA_NAME):    # frozen 0.1.0 files keep scale-graph
+        raise ScaleError(f"{path} is not a scale-catal schema")
     from .pgraph_schema import assemble, is_manifest
     return assemble(Path(path)) if is_manifest(spec) else spec
 
@@ -186,13 +187,13 @@ def spec_versions(manifest: Path) -> list[tuple[str, Path]]:
     """Every version of a domain's schema this repository holds, oldest first: (version, the manifest or its
     frozen copy). The head comes last."""
     from .versions import parse_version
-    frozen = [(m.stem.removeprefix("scale-graph-"), m) for m in layout.frozen_graph_dir(manifest).glob("scale-graph-*.yaml")]
+    frozen = [(m.stem.removeprefix("scale-catal-"), m) for m in layout.frozen_graph_dir(manifest).glob("scale-catal-*.yaml")]
     head = str(load_yaml(manifest).get("version"))
     return sorted(frozen, key=lambda x: parse_version(x[0])) + [(head, Path(manifest))]
 
 
 def public_versions(manifest: Path) -> set[str]:
-    """The scale-graph versions of a domain's schema in this repository (the head and its frozen copies)."""
+    """The scale-catal versions of a domain's schema in this repository (the head and its frozen copies)."""
     return {v for v, _ in spec_versions(manifest)}
 
 
@@ -227,11 +228,11 @@ def identify(manifest: Path, version: str | None, sha256: str | None = None) -> 
     held = dict(spec_versions(manifest))
     if version not in held:
         return {"version": version, "known": False, "sha256": None, "matches": False if sha256 else None,
-                "message": f"scale-graph {version} is not a version this repository holds{_unknown(manifest, str(version))}"}
+                "message": f"scale-catal {version} is not a version this repository holds{_unknown(manifest, str(version))}"}
     digest = spec_sha256(load_spec(held[version]))
     ok = None if sha256 is None else sha256 == digest
     return {"version": version, "known": True, "sha256": digest, "matches": ok,
-            **({"message": f"scale-graph {version} here has spec digest {digest}, not {sha256}: the schema named is "
+            **({"message": f"scale-catal {version} here has spec digest {digest}, not {sha256}: the schema named is "
                            "another one of the same number"} if ok is False else {})}
 
 
@@ -455,7 +456,7 @@ class Validator:
             rep.add("error", "<document>", "expected a node-link document with nodes and links")
             return rep
         if doc.get("directed") is not True or doc.get("multigraph") is not True:
-            rep.add("error", "<document>", "a scale-graph document is directed and a multigraph")
+            rep.add("error", "<document>", "a scale-catal document is directed and a multigraph")
         g = doc.get("graph") or {}
         ids: dict[str, str] = {}
         for n in doc["nodes"]:
@@ -474,8 +475,16 @@ class Validator:
                                       "states, or a status")
         gp = self.spec["format"]["graph_props"]
         self.check_props(g, gp["properties"], gp["required"], "<graph>", rep, ids)
+        want = self.spec.get("schema") or layout.SCHEMA_NAME
+        if g.get("schema") and g["schema"] != want:
+            if g["schema"] == layout.LEGACY_SCHEMA_NAME:
+                rep.add("error", "<graph>", f"document names its schema {g['schema']!r}, the name before 0.2.0; this schema "
+                        f"is {want} {self.spec['version']}: run `scale graph migrate` (or `scale kg update`), which renames "
+                        f"the pin to {want} (a document of {layout.LEGACY_SCHEMA_NAME} 0.1.0 is valid against its frozen copy)")
+            else:
+                rep.add("error", "<graph>", f"document names its schema {g['schema']!r}; this schema is {want}")
         if g.get("schema_version") and g["schema_version"] != self.spec["version"]:
-            rep.add("error", "<graph>", f"document pins scale-graph {g['schema_version']}; this schema is {self.spec['version']}")
+            rep.add("error", "<graph>", f"document pins scale-catal {g['schema_version']}; this schema is {self.spec['version']}")
         if g.get("data_status") == "research_data":
             st = stewardship_of(g.get("stewardship"))         # not an object: reported above, read as institution
             missing = [k for k in ("contributed_by", "project", "access") if not st.get(k)]

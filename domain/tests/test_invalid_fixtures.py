@@ -1,4 +1,4 @@
-"""Invalid scale-graph documents, one defect each: every one is rejected, for the reason expect.yaml
+"""Invalid scale-catal documents, one defect each: every one is rejected, for the reason expect.yaml
 states, and nothing else is wrong with it (so the fixture tests the rule it names). Each is checked under the version
 it pins, as `scale graph validate` (and so `scale check`) checks it; they all pin their base example's version."""
 
@@ -26,7 +26,7 @@ def test_the_index_names_every_fixture_and_scale_check_uses_it():
     from conftest import REPO
     assert len(invalid_fixtures(REPO)) == len(INDEX) >= 8
     assert sorted(p.name for p in (FIXTURES / "invalid").glob("*.json")) == sorted(e["file"] for e in INDEX)
-    base = load_doc(REPO / "domain/examples/scale-graph/driving-force-examples/electro.json")
+    base = load_doc(REPO / "domain/examples/scale-catal/driving-force-examples/electro.json")
     pins = {load_doc(FIXTURES / "invalid" / e["file"])["graph"]["schema_version"] for e in INDEX}
     assert pins == {base["graph"]["schema_version"]}, pins                   # one version: the base example's (build_fixtures)
     assert pinned_schema(base)                                                # the head or a frozen version
