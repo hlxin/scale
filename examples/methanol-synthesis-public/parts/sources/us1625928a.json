@@ -1,0 +1,2995 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/source/us1625928a",
+      "label": "Source",
+      "props": {
+        "name": "Cataltst for synthetic-methanol production",
+        "kind": "patent",
+        "description": "Published 1927-04-26 (grant date printed on the patent (agrees with the USPTO issue-year table)); in scope: before the 1966-01-01 cutoff. Text: 3 pages ocr (tesseract 5.5.3 (eng, 300 dpi, 2 columns)). Text not redistributed.",
+        "identifiers": {
+          "patent": "US1625928A"
+        },
+        "licence": "US patent; not subject to copyright",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "Cataltst for synthetic-methanol production",
+        "url": "https://patents.google.com/patent/US1625928A",
+        "year": 1927
+      }
+    },
+    {
+      "id": "ex:msyn/us1625928a/catalyst/specific-example",
+      "label": "Catalyst",
+      "props": {
+        "name": "Specific example: zinc oxide, black copper oxide, cuprous chloride, dextrin",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Specific example",
+            "passage": "us1625928a/p2/6",
+            "quote": "2600 grams of zinc oxide in powdered form is mixed by thorough sifting with 500 grams of black copper oxide.",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Specific example",
+            "passage": "us1625928a/p2/6",
+            "quote": "The resultant mix- 85 ture is moistened with an aqueous solution containing 150 grams cuprous chloride and 200 grams of dextrin.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ],
+        "generality": "particular",
+        "properties": {
+          "black_copper_oxide_mass": {
+            "status": "present",
+            "as_reported": "500 grams",
+            "unit": "g",
+            "value": 500
+          },
+          "cuprous_chloride_mass": {
+            "status": "present",
+            "as_reported": "150 grams",
+            "unit": "g",
+            "value": 150
+          },
+          "dextrin_mass": {
+            "status": "present",
+            "as_reported": "200 grams",
+            "unit": "g",
+            "value": 200
+          },
+          "zinc_oxide_mass": {
+            "status": "present",
+            "as_reported": "2600 grams",
+            "unit": "g",
+            "value": 2600
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us1625928a/catalyst/three-element-halide",
+      "label": "Catalyst",
+      "props": {
+        "name": "methanol catalyst of non-reducible metal oxide, easily reducible metal oxide and metallic halide",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1625928a/p1/6",
+            "quote": "valuable methanol catalyst which comprises three main elements—i. e. — (1) One or more non-reducible metal 95. oxides such as zinc, magnesium, cadmium, — chromium, vanadium, tungsten, etc.;",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'easil' = easily; 'ete.' = etc.",
+            "passage": "us1625928a/p1/6",
+            "quote": "(2) One or more easil reducible metal oxides such’as copper, silver, iron, nickel, cobalt, ete.; ee (3) A metallic halide.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ],
+        "generality": "kind",
+        "note": "catalyst_family is the curator's category; the patent names three main elements"
+      }
+    },
+    {
+      "id": "ex:msyn/us1625928a/claim/halide-amount",
+      "label": "Claim",
+      "props": {
+        "name": "The amount of metallic halide need bear no exact weight relation to the other constituents",
+        "claim_kind": "generalization",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1625928a/p2/3",
+            "quote": "not necessary that the amount of. metallic halide added bear any exact weight relation to the remaining constituents of the cata- lyst;",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'sho d' split by OCR: 'should preferably be'",
+            "passage": "us1625928a/p2/3",
+            "quote": "d preferably be less than one chemical equivalent of the amount of principal metal- lic oxide present in the catalyst.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The amount of metallic halide need bear no exact weight relation to the other constituents, but should preferably be less than one chemical equivalent of the principal metallic oxide."
+      }
+    },
+    {
+      "id": "ex:msyn/us1625928a/claim/halide-catalyst-better",
+      "label": "Claim",
+      "props": {
+        "name": "The catalysts of non-reducible oxide, easily reducible oxide and metallic halide give a hi",
+        "claim_kind": "generalization",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1625928a/p1/5",
+            "quote": "We have discovered a new type of meth- | anol catalyst which produces a higher yield | of methanol than those formerly employed . in the art, and at the same time produces a 85 very pure methanol, uncontaminated by by- — products,",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1625928a/p1/5",
+            "quote": "formation of methane in the process—with - the consequent destruction of valuable hy- 90 drogen—is practically eliminated.",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1625928a/p2/1",
+            "quote": "however, our improved catalysts containing halides produce far better results than those known in the art for otherwise identical catalyst mixtures.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The catalysts of non-reducible oxide, easily reducible oxide and metallic halide give a higher yield of very pure methanol than earlier catalysts, practically eliminating methane formation; with halide they give far better results than otherwise identical mixtures."
+      }
+    },
+    {
+      "id": "ex:msyn/us1625928a/claim/mechanism-unknown",
+      "label": "Claim",
+      "props": {
+        "name": "The precise way the metallic halides produce the improvement is not known and forms no par",
+        "claim_kind": "generalization",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1625928a/p2/1",
+            "quote": "The precise method by which the metallic halides produce the improvement is not known to us.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The precise way the metallic halides produce the improvement is not known and forms no part of the invention."
+      }
+    },
+    {
+      "id": "ex:msyn/us1625928a/claim/methanating-metals-serve",
+      "label": "Claim",
+      "props": {
+        "name": "In the halide catalysts the normally deleterious methanating metals iron, nickel or cobalt",
+        "claim_kind": "generalization",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1625928a/p1/6",
+            "quote": "catalyst we may employ substances normally deleterious tothe methanol reaction—namely _ the “methanating metals”—iron, nickel, or 106 cobalt.",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1625928a/p2/1",
+            "quote": "tions these normally deleterious substances serve advantageously, apparently exerting only a normal hydrogenating catalytic ac- tion productive of methanol.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "In the halide catalysts the normally deleterious methanating metals iron, nickel or cobalt serve advantageously, apparently exerting only a normal hydrogenating action productive of methanol."
+      }
+    },
+    {
+      "id": "ex:msyn/us1625928a/claim/past-catalyst-types",
+      "label": "Claim",
+      "props": {
+        "name": "Methanol catalysts proposed in the past were of two types: mixtures of finely divided meta",
+        "claim_kind": "generalization",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1625928a/p1/4",
+            "quote": "catalysts proposed in the past have been of two principal types:—i. e.— 1. Mixtures of finely divided metals, or, what is equivalent, mixtures of easily re-. ducible metal oxides; oe 2. Mixtures of oxides of metals non-re- ducible, or difficultly reducible under the",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "the patent's account of prior catalysts",
+        "statement": "Methanol catalysts proposed in the past were of two types: mixtures of finely divided metals (or easily reducible metal oxides), and mixtures of non-reducible or difficultly reducible metal oxides."
+      }
+    },
+    {
+      "id": "ex:msyn/us1625928a/claim/patent-claim-1",
+      "label": "Claim",
+      "props": {
+        "name": "A methanol catalyst initially comprising a plurality of difficultly reducible metal oxides",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 1",
+            "passage": "us1625928a/p2/7",
+            "quote": "1. A methanol catalyst initially com- prising a plurality of. difficultly reducible metal oxides, copper oxide, and a metallic 105 halide,",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "claim 1 of the patent; statement transcribed with OCR errors corrected",
+        "statement": "A methanol catalyst initially comprising a plurality of difficultly reducible metal oxides, copper oxide, and a metallic halide."
+      }
+    },
+    {
+      "id": "ex:msyn/us1625928a/claim/patent-claim-2",
+      "label": "Claim",
+      "props": {
+        "name": "A methanol catalyst initially comprising a difficultly reducible metal oxide, copper oxide",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 2",
+            "passage": "us1625928a/p2/7",
+            "quote": "2. A methanol catalyst initially comprising a difficultly reducible metal oxide, copper oxide, and a metallic halide.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "claim 2 of the patent; statement transcribed with OCR errors corrected",
+        "statement": "A methanol catalyst initially comprising a difficultly reducible metal oxide, copper oxide, and a metallic halide."
+      }
+    },
+    {
+      "id": "ex:msyn/us1625928a/claim/patent-claim-3",
+      "label": "Claim",
+      "props": {
+        "name": "A methanol catalyst initially comprising zinc oxide, chromium oxide, copper oxide, and a m",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 3",
+            "note": "numeral OCR'd as '8.'",
+            "passage": "us1625928a/p2/7",
+            "quote": "8. A methanol catalyst initially compris- 110 ing zinc oxide, chromium oxide, copper oxide, and a: metallic halide.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "claim 3 of the patent; statement transcribed with OCR errors corrected",
+        "statement": "A methanol catalyst initially comprising zinc oxide, chromium oxide, copper oxide, and a metallic halide."
+      }
+    },
+    {
+      "id": "ex:msyn/us1625928a/claim/patent-claim-4",
+      "label": "Claim",
+      "props": {
+        "name": "A methanol catalyst initially comprising zinc oxide, copper oxide, and a metallic halide.",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 4",
+            "passage": "us1625928a/p2/7",
+            "quote": "4, A methanol catalyst initially compris- ing zinc oxide, copper oxide, and a metallic halide.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "claim 4 of the patent; statement transcribed with OCR errors corrected",
+        "statement": "A methanol catalyst initially comprising zinc oxide, copper oxide, and a metallic halide."
+      }
+    },
+    {
+      "id": "ex:msyn/us1625928a/claim/patent-claim-5",
+      "label": "Claim",
+      "props": {
+        "name": "A methanol catalyst initially comprising zinc oxide, chromium oxide, copper oxide, and cup",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 5",
+            "note": "numeral OCR'd as '6.'",
+            "passage": "us1625928a/p2/7",
+            "quote": "6. A methanol catalyst initially compris- ing zinc oxide, chromium oxide, copper ox- ide, and cuprous chloride.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "claim 5 of the patent; statement transcribed with OCR errors corrected",
+        "statement": "A methanol catalyst initially comprising zinc oxide, chromium oxide, copper oxide, and cuprous chloride."
+      }
+    },
+    {
+      "id": "ex:msyn/us1625928a/claim/patent-claim-6",
+      "label": "Claim",
+      "props": {
+        "name": "A methanol catalyst initially comprising zinc oxide, copper oxide, and cuprous chloride.",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 6",
+            "passage": "us1625928a/p2/7",
+            "quote": "6. A methanol catalyst intially compris- ing zinc oxide, copper oxide, and cuprous 120 chloride,",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "claim 6 of the patent; statement transcribed with OCR errors corrected",
+        "statement": "A methanol catalyst initially comprising zinc oxide, copper oxide, and cuprous chloride."
+      }
+    },
+    {
+      "id": "ex:msyn/us1625928a/claim/patent-claim-7",
+      "label": "Claim",
+      "props": {
+        "name": "A process for the production of synthetic methanol which comprises passing a mixture of hy (claim 7)",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 7",
+            "note": "numeral OCR'd as '¢.'",
+            "passage": "us1625928a/p2/8",
+            "quote": "c methanol which comprises passing 2-mix- ture of hydrogen and carbon oxides at ¢ pressure In excess of 50 atmospheres and !25 — at a temperature of 350-450° C. over a cat- alyst initially comprising a plurality of diff- cultly reducible metal oxides, copper oxide, and a metallic halide.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "claim 7 of the patent; statement transcribed with OCR errors corrected",
+        "statement": "A process for the production of synthetic methanol which comprises passing a mixture of hydrogen and carbon oxides at a pressure in excess of 50 atmospheres and at a temperature of 350-450° C. over a catalyst initially comprising a plurality of difficultly reducible metal oxides, copper oxide, and a metallic halide."
+      }
+    },
+    {
+      "id": "ex:msyn/us1625928a/claim/patent-claim-8",
+      "label": "Claim",
+      "props": {
+        "name": "A process for the production of synthetic methanol which comprises passing a mixture of hy (claim 8)",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 8",
+            "passage": "us1625928a/p2/8",
+            "quote": "8. A process for the production of synthet- 134",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 8",
+            "passage": "us1625928a/p3/1",
+            "quote": "pressure in excess of 50 atmospheres, and at a temperature of 350-450° C. over a-cata- ; lyst initially comprising a difficultly reduc- ‘ble metal oxide, copper oxide and a metallic halide.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "claim 8 of the patent; statement transcribed with OCR errors corrected",
+        "statement": "A process for the production of synthetic methanol which comprises passing a mixture of hydrogen and carbon oxides at a pressure in excess of 50 atmospheres, and at a temperature of 350-450° C. over a catalyst initially comprising a difficultly reducible metal oxide, copper oxide and a metallic halide."
+      }
+    },
+    {
+      "id": "ex:msyn/us1625928a/claim/patent-claim-9",
+      "label": "Claim",
+      "props": {
+        "name": "A process for the production of synthetic methanol which comprises passing a mixture of hy (claim 9)",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 9",
+            "passage": "us1625928a/p3/1",
+            "quote": "9, A process for the production of synthet- ic methanol which comprises passing @ mix-",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 9",
+            "passage": "us1625928a/p3/1",
+            "quote": "pressure in excess of 50 atmospheres, and at — a temperature of 350-450° C. over a catalyst initially comprising zinc oxide, copper oxide, and cuprous chloride.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "claim 9 of the patent; statement transcribed with OCR errors corrected",
+        "statement": "A process for the production of synthetic methanol which comprises passing a mixture of hydrogen and carbon oxides at a pressure in excess of 50 atmospheres, and at a temperature of 350-450° C. over a catalyst initially comprising zinc oxide, copper oxide, and cuprous chloride."
+      }
+    },
+    {
+      "id": "ex:msyn/us1625928a/claim/some-reaction-always",
+      "label": "Claim",
+      "props": {
+        "name": "Over metals or their oxides above 50 atmospheres and 250 °C the carbon oxides and hydrogen",
+        "claim_kind": "generalization",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1625928a/p1/3",
+            "quote": "substance comprising metals or their oxides ' . at a pressure above 50 atmospheres and at a",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1625928a/p1/4",
+            "quote": "temperature above 250° C. there is nearly always produced some reaction between the 55 gaseous components.",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1625928a/p1/4",
+            "quote": "The substances formed by such a process depend both as to identity and as to amount, almost entirely on the nature and activity of the catalytic substance present.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Over metals or their oxides above 50 atmospheres and 250 °C the carbon oxides and hydrogen nearly always react to some extent; the products depend almost entirely on the nature and activity of the catalyst."
+      }
+    },
+    {
+      "id": "ex:msyn/us1625928a/claim/sv-pressure-co-trends",
+      "label": "Claim",
+      "props": {
+        "name": "Increased space velocity or operating pressure increases the hourly yield; pure carbon mon",
+        "claim_kind": "generalization",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1625928a/p2/5",
+            "quote": "an increased space velocity produces an increased hourly yield and an increase in operating pressure has the same effect.",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1625928a/p2/5",
+            "quote": "the use of pure carbon monoxide as distinguished from carbon di- 75 oxide or a mixture of the two results in an increased methanol percentage in the con- densate, and, stmce carbon monoxide seems to react more readily, an increased conden- sate volume.",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1625928a/p2/5",
+            "quote": "the results will al- ways be proportionate to the catalyst em- ployed.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Increased space velocity or operating pressure increases the hourly yield; pure carbon monoxide instead of carbon dioxide or a mixture gives a higher methanol percentage in the condensate and a larger condensate volume; results are always proportionate to the catalyst."
+      }
+    },
+    {
+      "id": "ex:msyn/us1625928a/feed/standard",
+      "label": "Feed",
+      "props": {
+        "name": "standard gas: 8% CO2, 3% CO, 89% H2",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2, standard conditions",
+            "note": "read from the page image; the OCR text layer reads '8% of carbon monoxide' and '©' for 'C.'; the image clearly prints '3%'; '100,-/000' is broken across a line and joined here",
+            "reading": "vision_ocr",
+            "region": [
+              0.15,
+              0.8,
+              0.555,
+              0.87
+            ],
+            "second_reading": "catalyst is based on the effect produced when a gas mixture comprising 8% carbon dioxide, 3% of carbon monoxide and 89% hydrogen is passed through 1 liter of catalyst granules at a space velocity of 75,000–100,000, at a pressure of 2000 pounds, and at a temperature of 340–400° C. In selecting a standard set of conditions",
+            "source": "ex:msyn/source/us1625928a",
+            "transcription": "a gas mixture comprising 8% carbon diox- ide, 3% of carbon monoxide and 89% hydro- gen is passed through 1 liter of catalyst granules at a space velocity of 75,000-100,000, at a pressure of 2000 pounds, and at a temperature of 340-400° C."
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1625928a/hypothesis/co-reacts-more-readily",
+      "label": "Hypothesis",
+      "props": {
+        "name": "carbon monoxide seems to react more readily",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1625928a/p2/5",
+            "quote": "the use of pure carbon monoxide as distinguished from carbon di- 75 oxide or a mixture of the two results in an increased methanol percentage in the con- densate, and, stmce carbon monoxide seems to react more readily, an increased conden- sate volume.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ],
+        "hypothesis_kind": "explanatory",
+        "hypothesis_status": "proposed",
+        "statement": "Carbon monoxide seems to react more readily than carbon dioxide."
+      }
+    },
+    {
+      "id": "ex:msyn/us1625928a/hypothesis/halide-promoter",
+      "label": "Hypothesis",
+      "props": {
+        "name": "The metallic halide acts as an ordinary promoter increasing catalyst activity.",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1625928a/p2/2",
+            "quote": "(1) The metallic halide acts as an ordi- nary “promoter” in increasing catalyst ac- tivity;",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1625928a/p2/1",
+            "quote": "The precise method by which the metallic halides produce the improvement is not known to us.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ],
+        "hypothesis_kind": "competing",
+        "hypothesis_status": "proposed",
+        "statement": "The metallic halide acts as an ordinary promoter increasing catalyst activity."
+      }
+    },
+    {
+      "id": "ex:msyn/us1625928a/hypothesis/halide-reduced-to-metal",
+      "label": "Hypothesis",
+      "props": {
+        "name": "The metallic halide is reduced by hydrogen and carbon oxides at the start of use",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'(8)' is OCR for '(3)'",
+            "passage": "us1625928a/p2/2",
+            "quote": "(8) The metdllic halide may be reduced by the high pressure contact with hydrogen and carbon oxides during the commencement of its use as a catalyst and the resultant finely divided metal may increase the catalyst .ac- tivity,",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1625928a/p2/2",
+            "quote": "or alternatively, the metallic halide may first react with some other metal pro- ducing the halide thereof, which may be re- — duced in the same manner.",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1625928a/p2/1",
+            "quote": "The precise method by which the metallic halides produce the improvement is not known to us.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ],
+        "hypothesis_kind": "competing",
+        "hypothesis_status": "proposed",
+        "statement": "The metallic halide is reduced by hydrogen and carbon oxides at the start of use and the finely divided metal increases activity, or it first reacts with another metal whose halide is then reduced."
+      }
+    },
+    {
+      "id": "ex:msyn/us1625928a/hypothesis/oxychloride",
+      "label": "Hypothesis",
+      "props": {
+        "name": "The metallic halide interacts with other metallic oxides to form oxychloride com",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1625928a/p2/2",
+            "quote": "(2) The metallic halide interacts with other metallic oxides present in the catalyst to produce oxychloride compounds which, in turn, either serve as catalyst promoters, or may so modify the purely physical state of the mass as to produce a more active cata-",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1625928a/p2/1",
+            "quote": "The precise method by which the metallic halides produce the improvement is not known to us.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ],
+        "hypothesis_kind": "competing",
+        "hypothesis_status": "proposed",
+        "statement": "The metallic halide interacts with other metallic oxides to form oxychloride compounds that act as promoters or modify the physical state of the mass."
+      }
+    },
+    {
+      "id": "ex:msyn/us1625928a/preparation/specific-example",
+      "label": "Preparation",
+      "props": {
+        "name": "sifting ZnO with black copper oxide, moistening with cuprous chloride–dextrin solution, drying",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Specific example",
+            "passage": "us1625928a/p2/6",
+            "quote": "2600 grams of zinc oxide in powdered form is mixed by thorough sifting with 500 grams of black copper oxide.",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Specific example",
+            "passage": "us1625928a/p2/6",
+            "quote": "The resultant mix- 85 ture is moistened with an aqueous solution containing 150 grams cuprous chloride and 200 grams of dextrin.",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Specific example",
+            "passage": "us1625928a/p2/6",
+            "quote": "is dried and broken up into pieces where- upon it is ready for use.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ],
+        "method": "dry mixing by sifting, moistening with an aqueous solution of cuprous chloride and dextrin, drying and breaking into pieces",
+        "procedure_status": "completed",
+        "steps": [
+          "2600 grams of zinc oxide in powdered form is mixed by thorough sifting with 500 grams of black copper oxide",
+          "The resultant mixture is moistened with an aqueous solution containing 150 grams cuprous chloride and 200 grams of dextrin",
+          "The resultant mass is dried and broken up into pieces"
+        ],
+        "temperature": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source"
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us1625928a/sample/specific-example",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Specific example catalyst, 1 liter of granules",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Specific example",
+            "passage": "us1625928a/p2/6",
+            "quote": "is dried and broken up into pieces where- upon it is ready for use.",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2, standard conditions",
+            "note": "read from the page image; the OCR text layer reads '8% of carbon monoxide' and '©' for 'C.'; the image clearly prints '3%'; '100,-/000' is broken across a line and joined here",
+            "reading": "vision_ocr",
+            "region": [
+              0.15,
+              0.8,
+              0.555,
+              0.87
+            ],
+            "second_reading": "catalyst is based on the effect produced when a gas mixture comprising 8% carbon dioxide, 3% of carbon monoxide and 89% hydrogen is passed through 1 liter of catalyst granules at a space velocity of 75,000–100,000, at a pressure of 2000 pounds, and at a temperature of 340–400° C. In selecting a standard set of conditions",
+            "source": "ex:msyn/source/us1625928a",
+            "transcription": "a gas mixture comprising 8% carbon diox- ide, 3% of carbon monoxide and 89% hydro- gen is passed through 1 liter of catalyst granules at a space velocity of 75,000-100,000, at a pressure of 2000 pounds, and at a temperature of 340-400° C."
+          }
+        ],
+        "preparation_status": "prepared",
+        "sample_kind": "batch"
+      }
+    },
+    {
+      "id": "ex:msyn/us1625928a/species/black-copper-oxide",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "black copper oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Specific example",
+            "passage": "us1625928a/p2/6",
+            "quote": "2600 grams of zinc oxide in powdered form is mixed by thorough sifting with 500 grams of black copper oxide.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1625928a/species/chromium-oxide",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "chromium oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 3",
+            "note": "numeral OCR'd as '8.'",
+            "passage": "us1625928a/p2/7",
+            "quote": "8. A methanol catalyst initially compris- 110 ing zinc oxide, chromium oxide, copper oxide, and a: metallic halide.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ],
+        "note": "named 'chromium oxide' in claims 3 and 5; which oxide is not stated"
+      }
+    },
+    {
+      "id": "ex:msyn/us1625928a/species/copper-oxide",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "copper oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 2",
+            "passage": "us1625928a/p2/7",
+            "quote": "2. A methanol catalyst initially comprising a difficultly reducible metal oxide, copper oxide, and a metallic halide.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ],
+        "note": "named 'copper oxide' in the claims; which oxide is not stated"
+      }
+    },
+    {
+      "id": "ex:msyn/us1625928a/species/dextrin",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "dextrin",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Specific example",
+            "passage": "us1625928a/p2/6",
+            "quote": "The resultant mix- 85 ture is moistened with an aqueous solution containing 150 grams cuprous chloride and 200 grams of dextrin.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1625928a/species/easily-reducible-metal-oxide",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "easily reducible metal oxide, e.g. of copper, silver, iron, nickel, cobalt",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'easil' = easily; 'ete.' = etc.",
+            "passage": "us1625928a/p1/6",
+            "quote": "(2) One or more easil reducible metal oxides such’as copper, silver, iron, nickel, cobalt, ete.; ee (3) A metallic halide.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1625928a/species/metallic-halide",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "metallic halide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'easil' = easily; 'ete.' = etc.",
+            "passage": "us1625928a/p1/6",
+            "quote": "(2) One or more easil reducible metal oxides such’as copper, silver, iron, nickel, cobalt, ete.; ee (3) A metallic halide.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1625928a/species/non-reducible-metal-oxide",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "non-reducible (difficultly reducible) metal oxide, e.g. of zinc, magnesium, cadmium, chromium, vanadium, tungsten",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1625928a/p1/6",
+            "quote": "valuable methanol catalyst which comprises three main elements—i. e. — (1) One or more non-reducible metal 95. oxides such as zinc, magnesium, cadmium, — chromium, vanadium, tungsten, etc.;",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1625928a/test/specific-example",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Specific example under the standard conditions: 2000 pounds, 340–400 °C",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1625928a/p2/4",
+            "quote": "In order to indicate the efficacy of our cat- alysts in methanol] production we have se- lected a standard set of conditions of use as follows:",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2, standard conditions",
+            "note": "read from the page image; the OCR text layer reads '8% of carbon monoxide' and '©' for 'C.'; the image clearly prints '3%'; '100,-/000' is broken across a line and joined here",
+            "reading": "vision_ocr",
+            "region": [
+              0.15,
+              0.8,
+              0.555,
+              0.87
+            ],
+            "second_reading": "catalyst is based on the effect produced when a gas mixture comprising 8% carbon dioxide, 3% of carbon monoxide and 89% hydrogen is passed through 1 liter of catalyst granules at a space velocity of 75,000–100,000, at a pressure of 2000 pounds, and at a temperature of 340–400° C. In selecting a standard set of conditions",
+            "source": "ex:msyn/source/us1625928a",
+            "transcription": "a gas mixture comprising 8% carbon diox- ide, 3% of carbon monoxide and 89% hydro- gen is passed through 1 liter of catalyst granules at a space velocity of 75,000-100,000, at a pressure of 2000 pounds, and at a temperature of 340-400° C."
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Specific example",
+            "note": "'contaming' = containing",
+            "passage": "us1625928a/p2/6",
+            "quote": "The hourly yield of condensate is about 1.2 liters contaming about 40% of methanol.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "pressure": {
+          "status": "present",
+          "as_reported": "2000 pounds",
+          "note": "printed as '2000 pounds' without area unit",
+          "unit": "lb/in2",
+          "value": 2000
+        },
+        "production_rate": {
+          "status": "present",
+          "as_reported": "about 1.2 liters",
+          "basis": "hourly yield of condensate",
+          "qualifier": "approximate",
+          "unit": "L/h",
+          "value": 1.2
+        },
+        "results": {
+          "methanol_in_condensate": {
+            "status": "present",
+            "as_reported": "about 40% of methanol",
+            "qualifier": "approximate",
+            "unit": "%",
+            "value": 40
+          }
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "75,000-100.- 000",
+          "lower": 75000,
+          "note": "no unit printed",
+          "unit": "not stated",
+          "upper": 100000
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "340-400° ©",
+          "lower": 340,
+          "unit": "°C",
+          "upper": 400
+        },
+        "temperature_measured_at": "not_reported",
+        "test_kind": "activity",
+        "test_label": "Specific example"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/reaction/co-hydrogenation-to-methanol/reported-in/us1625928a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/source/us1625928a"
+    },
+    {
+      "id": "ex:msyn/reaction/co-methanation/reported-in/us1625928a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/reaction/co-methanation",
+      "target": "ex:msyn/source/us1625928a"
+    },
+    {
+      "id": "ex:msyn/reaction/co2-hydrogenation-to-methanol/reported-in/us1625928a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/reaction/co2-hydrogenation-to-methanol",
+      "target": "ex:msyn/source/us1625928a"
+    },
+    {
+      "id": "ex:msyn/source/us1625928a/assignee",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "role": "assignee"
+      },
+      "source": "ex:msyn/source/us1625928a",
+      "target": "ex:msyn/institution/commercial-solvents-corp"
+    },
+    {
+      "id": "ex:msyn/species/cucl/reported-in/us1625928a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, Specific example"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/cucl",
+      "target": "ex:msyn/source/us1625928a"
+    },
+    {
+      "id": "ex:msyn/us1625928a/catalyst/specific-example/reported-in/us1625928a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, Specific example"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625928a/catalyst/specific-example",
+      "target": "ex:msyn/source/us1625928a"
+    },
+    {
+      "id": "ex:msyn/us1625928a/catalyst/three-element-halide/reported-in/us1625928a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625928a/catalyst/three-element-halide",
+      "target": "ex:msyn/source/us1625928a"
+    },
+    {
+      "id": "ex:msyn/us1625928a/claim/halide-amount/reported-in/us1625928a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625928a/claim/halide-amount",
+      "target": "ex:msyn/source/us1625928a"
+    },
+    {
+      "id": "ex:msyn/us1625928a/claim/halide-catalyst-better/reported-in/us1625928a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625928a/claim/halide-catalyst-better",
+      "target": "ex:msyn/source/us1625928a"
+    },
+    {
+      "id": "ex:msyn/us1625928a/claim/mechanism-unknown/reported-in/us1625928a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625928a/claim/mechanism-unknown",
+      "target": "ex:msyn/source/us1625928a"
+    },
+    {
+      "id": "ex:msyn/us1625928a/claim/methanating-metals-serve/reported-in/us1625928a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625928a/claim/methanating-metals-serve",
+      "target": "ex:msyn/source/us1625928a"
+    },
+    {
+      "id": "ex:msyn/us1625928a/claim/past-catalyst-types/reported-in/us1625928a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625928a/claim/past-catalyst-types",
+      "target": "ex:msyn/source/us1625928a"
+    },
+    {
+      "id": "ex:msyn/us1625928a/claim/patent-claim-1/reported-in/us1625928a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, claim 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625928a/claim/patent-claim-1",
+      "target": "ex:msyn/source/us1625928a"
+    },
+    {
+      "id": "ex:msyn/us1625928a/claim/patent-claim-2/reported-in/us1625928a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, claim 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625928a/claim/patent-claim-2",
+      "target": "ex:msyn/source/us1625928a"
+    },
+    {
+      "id": "ex:msyn/us1625928a/claim/patent-claim-3/reported-in/us1625928a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, claim 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625928a/claim/patent-claim-3",
+      "target": "ex:msyn/source/us1625928a"
+    },
+    {
+      "id": "ex:msyn/us1625928a/claim/patent-claim-4/reported-in/us1625928a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, claim 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625928a/claim/patent-claim-4",
+      "target": "ex:msyn/source/us1625928a"
+    },
+    {
+      "id": "ex:msyn/us1625928a/claim/patent-claim-5/reported-in/us1625928a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, claim 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625928a/claim/patent-claim-5",
+      "target": "ex:msyn/source/us1625928a"
+    },
+    {
+      "id": "ex:msyn/us1625928a/claim/patent-claim-6/reported-in/us1625928a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, claim 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625928a/claim/patent-claim-6",
+      "target": "ex:msyn/source/us1625928a"
+    },
+    {
+      "id": "ex:msyn/us1625928a/claim/patent-claim-7/reported-in/us1625928a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, claim 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625928a/claim/patent-claim-7",
+      "target": "ex:msyn/source/us1625928a"
+    },
+    {
+      "id": "ex:msyn/us1625928a/claim/patent-claim-8/reported-in/us1625928a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, claim 8",
+          "p. 3, claim 8"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625928a/claim/patent-claim-8",
+      "target": "ex:msyn/source/us1625928a"
+    },
+    {
+      "id": "ex:msyn/us1625928a/claim/patent-claim-9/reported-in/us1625928a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 9"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625928a/claim/patent-claim-9",
+      "target": "ex:msyn/source/us1625928a"
+    },
+    {
+      "id": "ex:msyn/us1625928a/claim/some-reaction-always/reported-in/us1625928a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625928a/claim/some-reaction-always",
+      "target": "ex:msyn/source/us1625928a"
+    },
+    {
+      "id": "ex:msyn/us1625928a/claim/sv-pressure-co-trends/reported-in/us1625928a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625928a/claim/sv-pressure-co-trends",
+      "target": "ex:msyn/source/us1625928a"
+    },
+    {
+      "id": "ex:msyn/us1625928a/feed/standard/reported-in/us1625928a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, standard conditions"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625928a/feed/standard",
+      "target": "ex:msyn/source/us1625928a"
+    },
+    {
+      "id": "ex:msyn/us1625928a/hypothesis/co-reacts-more-readily/reported-in/us1625928a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625928a/hypothesis/co-reacts-more-readily",
+      "target": "ex:msyn/source/us1625928a"
+    },
+    {
+      "id": "ex:msyn/us1625928a/hypothesis/halide-promoter/reported-in/us1625928a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625928a/hypothesis/halide-promoter",
+      "target": "ex:msyn/source/us1625928a"
+    },
+    {
+      "id": "ex:msyn/us1625928a/hypothesis/halide-reduced-to-metal/reported-in/us1625928a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625928a/hypothesis/halide-reduced-to-metal",
+      "target": "ex:msyn/source/us1625928a"
+    },
+    {
+      "id": "ex:msyn/us1625928a/hypothesis/oxychloride/reported-in/us1625928a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625928a/hypothesis/oxychloride",
+      "target": "ex:msyn/source/us1625928a"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/1",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1625928a/p1/6",
+            "quote": "valuable methanol catalyst which comprises three main elements—i. e. — (1) One or more non-reducible metal 95. oxides such as zinc, magnesium, cadmium, — chromium, vanadium, tungsten, etc.;",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ],
+        "role": "not_stated",
+        "role_detail": "(1) one or more non-reducible metal oxides"
+      },
+      "source": "ex:msyn/us1625928a/catalyst/three-element-halide",
+      "target": "ex:msyn/us1625928a/species/non-reducible-metal-oxide"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/10",
+      "type": "PREPARED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Specific example",
+            "passage": "us1625928a/p2/6",
+            "quote": "2600 grams of zinc oxide in powdered form is mixed by thorough sifting with 500 grams of black copper oxide.",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Specific example",
+            "passage": "us1625928a/p2/6",
+            "quote": "The resultant mix- 85 ture is moistened with an aqueous solution containing 150 grams cuprous chloride and 200 grams of dextrin.",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Specific example",
+            "passage": "us1625928a/p2/6",
+            "quote": "is dried and broken up into pieces where- upon it is ready for use.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/sample/specific-example",
+      "target": "ex:msyn/us1625928a/preparation/specific-example"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/11",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "2600 grams",
+          "unit": "g",
+          "value": 2600
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Specific example",
+            "passage": "us1625928a/p2/6",
+            "quote": "2600 grams of zinc oxide in powdered form is mixed by thorough sifting with 500 grams of black copper oxide.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1625928a/sample/specific-example",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/12",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "500 grams",
+          "unit": "g",
+          "value": 500
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Specific example",
+            "passage": "us1625928a/p2/6",
+            "quote": "2600 grams of zinc oxide in powdered form is mixed by thorough sifting with 500 grams of black copper oxide.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1625928a/sample/specific-example",
+      "target": "ex:msyn/us1625928a/species/black-copper-oxide"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/13",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "150 grams",
+          "unit": "g",
+          "value": 150
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Specific example",
+            "passage": "us1625928a/p2/6",
+            "quote": "The resultant mix- 85 ture is moistened with an aqueous solution containing 150 grams cuprous chloride and 200 grams of dextrin.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1625928a/sample/specific-example",
+      "target": "ex:msyn/species/cucl"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/14",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "200 grams",
+          "unit": "g",
+          "value": 200
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Specific example",
+            "passage": "us1625928a/p2/6",
+            "quote": "The resultant mix- 85 ture is moistened with an aqueous solution containing 150 grams cuprous chloride and 200 grams of dextrin.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1625928a/sample/specific-example",
+      "target": "ex:msyn/us1625928a/species/dextrin"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/15",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2, standard conditions",
+            "note": "read from the page image; the OCR text layer reads '8% of carbon monoxide' and '©' for 'C.'; the image clearly prints '3%'; '100,-/000' is broken across a line and joined here",
+            "reading": "vision_ocr",
+            "region": [
+              0.15,
+              0.8,
+              0.555,
+              0.87
+            ],
+            "second_reading": "catalyst is based on the effect produced when a gas mixture comprising 8% carbon dioxide, 3% of carbon monoxide and 89% hydrogen is passed through 1 liter of catalyst granules at a space velocity of 75,000–100,000, at a pressure of 2000 pounds, and at a temperature of 340–400° C. In selecting a standard set of conditions",
+            "source": "ex:msyn/source/us1625928a",
+            "transcription": "a gas mixture comprising 8% carbon diox- ide, 3% of carbon monoxide and 89% hydro- gen is passed through 1 liter of catalyst granules at a space velocity of 75,000-100,000, at a pressure of 2000 pounds, and at a temperature of 340-400° C."
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "8% carbon diox- ide",
+          "unit": "%",
+          "value": 8
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1625928a/feed/standard",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/16",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2, standard conditions",
+            "note": "read from the page image; the OCR text layer reads '8% of carbon monoxide' and '©' for 'C.'; the image clearly prints '3%'; '100,-/000' is broken across a line and joined here",
+            "reading": "vision_ocr",
+            "region": [
+              0.15,
+              0.8,
+              0.555,
+              0.87
+            ],
+            "second_reading": "catalyst is based on the effect produced when a gas mixture comprising 8% carbon dioxide, 3% of carbon monoxide and 89% hydrogen is passed through 1 liter of catalyst granules at a space velocity of 75,000–100,000, at a pressure of 2000 pounds, and at a temperature of 340–400° C. In selecting a standard set of conditions",
+            "source": "ex:msyn/source/us1625928a",
+            "transcription": "a gas mixture comprising 8% carbon diox- ide, 3% of carbon monoxide and 89% hydro- gen is passed through 1 liter of catalyst granules at a space velocity of 75,000-100,000, at a pressure of 2000 pounds, and at a temperature of 340-400° C."
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "3% of carbon monoxide",
+          "note": "corrected 2026-09-29 from 8 to 3: the page image prints '3%'; the OCR text read '8%'",
+          "unit": "%",
+          "value": 3
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1625928a/feed/standard",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/17",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2, standard conditions",
+            "note": "read from the page image; the OCR text layer reads '8% of carbon monoxide' and '©' for 'C.'; the image clearly prints '3%'; '100,-/000' is broken across a line and joined here",
+            "reading": "vision_ocr",
+            "region": [
+              0.15,
+              0.8,
+              0.555,
+              0.87
+            ],
+            "second_reading": "catalyst is based on the effect produced when a gas mixture comprising 8% carbon dioxide, 3% of carbon monoxide and 89% hydrogen is passed through 1 liter of catalyst granules at a space velocity of 75,000–100,000, at a pressure of 2000 pounds, and at a temperature of 340–400° C. In selecting a standard set of conditions",
+            "source": "ex:msyn/source/us1625928a",
+            "transcription": "a gas mixture comprising 8% carbon diox- ide, 3% of carbon monoxide and 89% hydro- gen is passed through 1 liter of catalyst granules at a space velocity of 75,000-100,000, at a pressure of 2000 pounds, and at a temperature of 340-400° C."
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "89% hydro- gen",
+          "unit": "%",
+          "value": 89
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1625928a/feed/standard",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/18",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "1 liter of catalyst granules",
+          "unit": "L",
+          "value": 1
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2, standard conditions",
+            "note": "read from the page image; the OCR text layer reads '8% of carbon monoxide' and '©' for 'C.'; the image clearly prints '3%'; '100,-/000' is broken across a line and joined here",
+            "reading": "vision_ocr",
+            "region": [
+              0.15,
+              0.8,
+              0.555,
+              0.87
+            ],
+            "second_reading": "catalyst is based on the effect produced when a gas mixture comprising 8% carbon dioxide, 3% of carbon monoxide and 89% hydrogen is passed through 1 liter of catalyst granules at a space velocity of 75,000–100,000, at a pressure of 2000 pounds, and at a temperature of 340–400° C. In selecting a standard set of conditions",
+            "source": "ex:msyn/source/us1625928a",
+            "transcription": "a gas mixture comprising 8% carbon diox- ide, 3% of carbon monoxide and 89% hydro- gen is passed through 1 liter of catalyst granules at a space velocity of 75,000-100,000, at a pressure of 2000 pounds, and at a temperature of 340-400° C."
+          }
+        ],
+        "state": "as_prepared"
+      },
+      "source": "ex:msyn/us1625928a/test/specific-example",
+      "target": "ex:msyn/us1625928a/sample/specific-example"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/19",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2, standard conditions",
+            "note": "read from the page image; the OCR text layer reads '8% of carbon monoxide' and '©' for 'C.'; the image clearly prints '3%'; '100,-/000' is broken across a line and joined here",
+            "reading": "vision_ocr",
+            "region": [
+              0.15,
+              0.8,
+              0.555,
+              0.87
+            ],
+            "second_reading": "catalyst is based on the effect produced when a gas mixture comprising 8% carbon dioxide, 3% of carbon monoxide and 89% hydrogen is passed through 1 liter of catalyst granules at a space velocity of 75,000–100,000, at a pressure of 2000 pounds, and at a temperature of 340–400° C. In selecting a standard set of conditions",
+            "source": "ex:msyn/source/us1625928a",
+            "transcription": "a gas mixture comprising 8% carbon diox- ide, 3% of carbon monoxide and 89% hydro- gen is passed through 1 liter of catalyst granules at a space velocity of 75,000-100,000, at a pressure of 2000 pounds, and at a temperature of 340-400° C."
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/test/specific-example",
+      "target": "ex:msyn/us1625928a/feed/standard"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/2",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'easil' = easily; 'ete.' = etc.",
+            "passage": "us1625928a/p1/6",
+            "quote": "(2) One or more easil reducible metal oxides such’as copper, silver, iron, nickel, cobalt, ete.; ee (3) A metallic halide.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ],
+        "role": "not_stated",
+        "role_detail": "(2) one or more easily reducible metal oxides"
+      },
+      "source": "ex:msyn/us1625928a/catalyst/three-element-halide",
+      "target": "ex:msyn/us1625928a/species/easily-reducible-metal-oxide"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/20",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2, standard conditions",
+            "note": "read from the page image; the OCR text layer reads '8% of carbon monoxide' and '©' for 'C.'; the image clearly prints '3%'; '100,-/000' is broken across a line and joined here",
+            "reading": "vision_ocr",
+            "region": [
+              0.15,
+              0.8,
+              0.555,
+              0.87
+            ],
+            "second_reading": "catalyst is based on the effect produced when a gas mixture comprising 8% carbon dioxide, 3% of carbon monoxide and 89% hydrogen is passed through 1 liter of catalyst granules at a space velocity of 75,000–100,000, at a pressure of 2000 pounds, and at a temperature of 340–400° C. In selecting a standard set of conditions",
+            "source": "ex:msyn/source/us1625928a",
+            "transcription": "a gas mixture comprising 8% carbon diox- ide, 3% of carbon monoxide and 89% hydro- gen is passed through 1 liter of catalyst granules at a space velocity of 75,000-100,000, at a pressure of 2000 pounds, and at a temperature of 340-400° C."
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Specific example",
+            "note": "'contaming' = containing",
+            "passage": "us1625928a/p2/6",
+            "quote": "The hourly yield of condensate is about 1.2 liters contaming about 40% of methanol.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/test/specific-example",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/21",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2, standard conditions",
+            "note": "read from the page image; the OCR text layer reads '8% of carbon monoxide' and '©' for 'C.'; the image clearly prints '3%'; '100,-/000' is broken across a line and joined here",
+            "reading": "vision_ocr",
+            "region": [
+              0.15,
+              0.8,
+              0.555,
+              0.87
+            ],
+            "second_reading": "catalyst is based on the effect produced when a gas mixture comprising 8% carbon dioxide, 3% of carbon monoxide and 89% hydrogen is passed through 1 liter of catalyst granules at a space velocity of 75,000–100,000, at a pressure of 2000 pounds, and at a temperature of 340–400° C. In selecting a standard set of conditions",
+            "source": "ex:msyn/source/us1625928a",
+            "transcription": "a gas mixture comprising 8% carbon diox- ide, 3% of carbon monoxide and 89% hydro- gen is passed through 1 liter of catalyst granules at a space velocity of 75,000-100,000, at a pressure of 2000 pounds, and at a temperature of 340-400° C."
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Specific example",
+            "note": "'contaming' = containing",
+            "passage": "us1625928a/p2/6",
+            "quote": "The hourly yield of condensate is about 1.2 liters contaming about 40% of methanol.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/test/specific-example",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/22",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "context": [
+          "ex:msyn/us1625928a/test/specific-example"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Specific example",
+            "note": "'contaming' = containing",
+            "passage": "us1625928a/p2/6",
+            "quote": "The hourly yield of condensate is about 1.2 liters contaming about 40% of methanol.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/catalyst/specific-example",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/28",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1625928a/p1/3",
+            "quote": "substance comprising metals or their oxides ' . at a pressure above 50 atmospheres and at a",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1625928a/p1/4",
+            "quote": "temperature above 250° C. there is nearly always produced some reaction between the 55 gaseous components.",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1625928a/p1/4",
+            "quote": "The substances formed by such a process depend both as to identity and as to amount, almost entirely on the nature and activity of the catalytic substance present.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/claim/some-reaction-always",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/29",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1625928a/p1/4",
+            "quote": "catalysts proposed in the past have been of two principal types:—i. e.— 1. Mixtures of finely divided metals, or, what is equivalent, mixtures of easily re-. ducible metal oxides; oe 2. Mixtures of oxides of metals non-re- ducible, or difficultly reducible under the",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/claim/past-catalyst-types",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/3",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'easil' = easily; 'ete.' = etc.",
+            "passage": "us1625928a/p1/6",
+            "quote": "(2) One or more easil reducible metal oxides such’as copper, silver, iron, nickel, cobalt, ete.; ee (3) A metallic halide.",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'sho d' split by OCR: 'should preferably be'",
+            "passage": "us1625928a/p2/3",
+            "quote": "d preferably be less than one chemical equivalent of the amount of principal metal- lic oxide present in the catalyst.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "less than one chemical equivalent of the amount of principal metal- lic oxide",
+          "basis": "chemical equivalents of the principal metallic oxide",
+          "bound": "upper",
+          "note": "preferred, not required",
+          "unit": "1",
+          "value": 1
+        },
+        "role": "not_stated",
+        "role_detail": "(3) a metallic halide; preferably less than one chemical equivalent of the principal metallic oxide"
+      },
+      "source": "ex:msyn/us1625928a/catalyst/three-element-halide",
+      "target": "ex:msyn/us1625928a/species/metallic-halide"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/34",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1625928a/p1/5",
+            "quote": "We have discovered a new type of meth- | anol catalyst which produces a higher yield | of methanol than those formerly employed . in the art, and at the same time produces a 85 very pure methanol, uncontaminated by by- — products,",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1625928a/p1/5",
+            "quote": "formation of methane in the process—with - the consequent destruction of valuable hy- 90 drogen—is practically eliminated.",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1625928a/p2/1",
+            "quote": "however, our improved catalysts containing halides produce far better results than those known in the art for otherwise identical catalyst mixtures.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/claim/halide-catalyst-better",
+      "target": "ex:msyn/us1625928a/catalyst/three-element-halide"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/35",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1625928a/p1/5",
+            "quote": "We have discovered a new type of meth- | anol catalyst which produces a higher yield | of methanol than those formerly employed . in the art, and at the same time produces a 85 very pure methanol, uncontaminated by by- — products,",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1625928a/p1/5",
+            "quote": "formation of methane in the process—with - the consequent destruction of valuable hy- 90 drogen—is practically eliminated.",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1625928a/p2/1",
+            "quote": "however, our improved catalysts containing halides produce far better results than those known in the art for otherwise identical catalyst mixtures.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/claim/halide-catalyst-better",
+      "target": "ex:msyn/us1625928a/species/metallic-halide"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/36",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1625928a/p1/6",
+            "quote": "catalyst we may employ substances normally deleterious tothe methanol reaction—namely _ the “methanating metals”—iron, nickel, or 106 cobalt.",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1625928a/p2/1",
+            "quote": "tions these normally deleterious substances serve advantageously, apparently exerting only a normal hydrogenating catalytic ac- tion productive of methanol.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/claim/methanating-metals-serve",
+      "target": "ex:msyn/us1625928a/catalyst/three-element-halide"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/37",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1625928a/p1/6",
+            "quote": "catalyst we may employ substances normally deleterious tothe methanol reaction—namely _ the “methanating metals”—iron, nickel, or 106 cobalt.",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1625928a/p2/1",
+            "quote": "tions these normally deleterious substances serve advantageously, apparently exerting only a normal hydrogenating catalytic ac- tion productive of methanol.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/claim/methanating-metals-serve",
+      "target": "ex:msyn/species/iron"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/38",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1625928a/p1/6",
+            "quote": "catalyst we may employ substances normally deleterious tothe methanol reaction—namely _ the “methanating metals”—iron, nickel, or 106 cobalt.",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1625928a/p2/1",
+            "quote": "tions these normally deleterious substances serve advantageously, apparently exerting only a normal hydrogenating catalytic ac- tion productive of methanol.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/claim/methanating-metals-serve",
+      "target": "ex:msyn/species/nickel"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/39",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1625928a/p1/6",
+            "quote": "catalyst we may employ substances normally deleterious tothe methanol reaction—namely _ the “methanating metals”—iron, nickel, or 106 cobalt.",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1625928a/p2/1",
+            "quote": "tions these normally deleterious substances serve advantageously, apparently exerting only a normal hydrogenating catalytic ac- tion productive of methanol.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/claim/methanating-metals-serve",
+      "target": "ex:msyn/species/cobalt"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/4",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Specific example",
+            "passage": "us1625928a/p2/6",
+            "quote": "2600 grams of zinc oxide in powdered form is mixed by thorough sifting with 500 grams of black copper oxide.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "2600 grams",
+          "note": "mass in the batch",
+          "unit": "g",
+          "value": 2600
+        },
+        "fraction_basis": "mass",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1625928a/catalyst/specific-example",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/40",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1625928a/p2/3",
+            "quote": "not necessary that the amount of. metallic halide added bear any exact weight relation to the remaining constituents of the cata- lyst;",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'sho d' split by OCR: 'should preferably be'",
+            "passage": "us1625928a/p2/3",
+            "quote": "d preferably be less than one chemical equivalent of the amount of principal metal- lic oxide present in the catalyst.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/claim/halide-amount",
+      "target": "ex:msyn/us1625928a/catalyst/three-element-halide"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/41",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1625928a/p2/3",
+            "quote": "not necessary that the amount of. metallic halide added bear any exact weight relation to the remaining constituents of the cata- lyst;",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'sho d' split by OCR: 'should preferably be'",
+            "passage": "us1625928a/p2/3",
+            "quote": "d preferably be less than one chemical equivalent of the amount of principal metal- lic oxide present in the catalyst.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/claim/halide-amount",
+      "target": "ex:msyn/us1625928a/species/metallic-halide"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/42",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1625928a/p2/1",
+            "quote": "The precise method by which the metallic halides produce the improvement is not known to us.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/claim/mechanism-unknown",
+      "target": "ex:msyn/us1625928a/species/metallic-halide"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/43",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1625928a/p2/5",
+            "quote": "an increased space velocity produces an increased hourly yield and an increase in operating pressure has the same effect.",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1625928a/p2/5",
+            "quote": "the use of pure carbon monoxide as distinguished from carbon di- 75 oxide or a mixture of the two results in an increased methanol percentage in the con- densate, and, stmce carbon monoxide seems to react more readily, an increased conden- sate volume.",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1625928a/p2/5",
+            "quote": "the results will al- ways be proportionate to the catalyst em- ployed.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/claim/sv-pressure-co-trends",
+      "target": "ex:msyn/us1625928a/catalyst/three-element-halide"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/44",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1625928a/p2/5",
+            "quote": "an increased space velocity produces an increased hourly yield and an increase in operating pressure has the same effect.",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1625928a/p2/5",
+            "quote": "the use of pure carbon monoxide as distinguished from carbon di- 75 oxide or a mixture of the two results in an increased methanol percentage in the con- densate, and, stmce carbon monoxide seems to react more readily, an increased conden- sate volume.",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1625928a/p2/5",
+            "quote": "the results will al- ways be proportionate to the catalyst em- ployed.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/claim/sv-pressure-co-trends",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/45",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Specific example",
+            "note": "'contaming' = containing",
+            "passage": "us1625928a/p2/6",
+            "quote": "The hourly yield of condensate is about 1.2 liters contaming about 40% of methanol.",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1625928a/p2/4",
+            "quote": "In order to indicate the efficacy of our cat- alysts in methanol] production we have se- lected a standard set of conditions of use as follows:",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/test/specific-example",
+      "target": "ex:msyn/us1625928a/claim/halide-catalyst-better"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/46",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1625928a/p2/2",
+            "quote": "(1) The metallic halide acts as an ordi- nary “promoter” in increasing catalyst ac- tivity;",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/hypothesis/halide-promoter",
+      "target": "ex:msyn/us1625928a/species/metallic-halide"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/47",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1625928a/p2/2",
+            "quote": "(2) The metallic halide interacts with other metallic oxides present in the catalyst to produce oxychloride compounds which, in turn, either serve as catalyst promoters, or may so modify the purely physical state of the mass as to produce a more active cata-",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/hypothesis/oxychloride",
+      "target": "ex:msyn/us1625928a/species/metallic-halide"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/48",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'(8)' is OCR for '(3)'",
+            "passage": "us1625928a/p2/2",
+            "quote": "(8) The metdllic halide may be reduced by the high pressure contact with hydrogen and carbon oxides during the commencement of its use as a catalyst and the resultant finely divided metal may increase the catalyst .ac- tivity,",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1625928a/p2/2",
+            "quote": "or alternatively, the metallic halide may first react with some other metal pro- ducing the halide thereof, which may be re- — duced in the same manner.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/hypothesis/halide-reduced-to-metal",
+      "target": "ex:msyn/us1625928a/species/metallic-halide"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/49",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1625928a/p2/5",
+            "quote": "the use of pure carbon monoxide as distinguished from carbon di- 75 oxide or a mixture of the two results in an increased methanol percentage in the con- densate, and, stmce carbon monoxide seems to react more readily, an increased conden- sate volume.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/hypothesis/co-reacts-more-readily",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/5",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Specific example",
+            "passage": "us1625928a/p2/6",
+            "quote": "2600 grams of zinc oxide in powdered form is mixed by thorough sifting with 500 grams of black copper oxide.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "500 grams",
+          "note": "mass in the batch",
+          "unit": "g",
+          "value": 500
+        },
+        "fraction_basis": "mass",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1625928a/catalyst/specific-example",
+      "target": "ex:msyn/us1625928a/species/black-copper-oxide"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/50",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 1",
+            "passage": "us1625928a/p2/7",
+            "quote": "1. A methanol catalyst initially com- prising a plurality of. difficultly reducible metal oxides, copper oxide, and a metallic 105 halide,",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/claim/patent-claim-1",
+      "target": "ex:msyn/us1625928a/catalyst/three-element-halide"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/51",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 1",
+            "passage": "us1625928a/p2/7",
+            "quote": "1. A methanol catalyst initially com- prising a plurality of. difficultly reducible metal oxides, copper oxide, and a metallic 105 halide,",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/claim/patent-claim-1",
+      "target": "ex:msyn/us1625928a/species/copper-oxide"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/52",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 1",
+            "passage": "us1625928a/p2/7",
+            "quote": "1. A methanol catalyst initially com- prising a plurality of. difficultly reducible metal oxides, copper oxide, and a metallic 105 halide,",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/claim/patent-claim-1",
+      "target": "ex:msyn/us1625928a/species/metallic-halide"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/53",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 2",
+            "passage": "us1625928a/p2/7",
+            "quote": "2. A methanol catalyst initially comprising a difficultly reducible metal oxide, copper oxide, and a metallic halide.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/claim/patent-claim-2",
+      "target": "ex:msyn/us1625928a/catalyst/three-element-halide"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/54",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 2",
+            "passage": "us1625928a/p2/7",
+            "quote": "2. A methanol catalyst initially comprising a difficultly reducible metal oxide, copper oxide, and a metallic halide.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/claim/patent-claim-2",
+      "target": "ex:msyn/us1625928a/species/copper-oxide"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/55",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 2",
+            "passage": "us1625928a/p2/7",
+            "quote": "2. A methanol catalyst initially comprising a difficultly reducible metal oxide, copper oxide, and a metallic halide.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/claim/patent-claim-2",
+      "target": "ex:msyn/us1625928a/species/metallic-halide"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/56",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 3",
+            "note": "numeral OCR'd as '8.'",
+            "passage": "us1625928a/p2/7",
+            "quote": "8. A methanol catalyst initially compris- 110 ing zinc oxide, chromium oxide, copper oxide, and a: metallic halide.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/claim/patent-claim-3",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/57",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 3",
+            "note": "numeral OCR'd as '8.'",
+            "passage": "us1625928a/p2/7",
+            "quote": "8. A methanol catalyst initially compris- 110 ing zinc oxide, chromium oxide, copper oxide, and a: metallic halide.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/claim/patent-claim-3",
+      "target": "ex:msyn/us1625928a/species/chromium-oxide"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/58",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 3",
+            "note": "numeral OCR'd as '8.'",
+            "passage": "us1625928a/p2/7",
+            "quote": "8. A methanol catalyst initially compris- 110 ing zinc oxide, chromium oxide, copper oxide, and a: metallic halide.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/claim/patent-claim-3",
+      "target": "ex:msyn/us1625928a/species/copper-oxide"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/59",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 3",
+            "note": "numeral OCR'd as '8.'",
+            "passage": "us1625928a/p2/7",
+            "quote": "8. A methanol catalyst initially compris- 110 ing zinc oxide, chromium oxide, copper oxide, and a: metallic halide.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/claim/patent-claim-3",
+      "target": "ex:msyn/us1625928a/species/metallic-halide"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/6",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Specific example",
+            "passage": "us1625928a/p2/6",
+            "quote": "The resultant mix- 85 ture is moistened with an aqueous solution containing 150 grams cuprous chloride and 200 grams of dextrin.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "150 grams",
+          "note": "mass in the moistening solution",
+          "unit": "g",
+          "value": 150
+        },
+        "fraction_basis": "mass",
+        "role": "not_stated",
+        "role_detail": "the metallic halide"
+      },
+      "source": "ex:msyn/us1625928a/catalyst/specific-example",
+      "target": "ex:msyn/species/cucl"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/60",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 4",
+            "passage": "us1625928a/p2/7",
+            "quote": "4, A methanol catalyst initially compris- ing zinc oxide, copper oxide, and a metallic halide.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/claim/patent-claim-4",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/61",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 4",
+            "passage": "us1625928a/p2/7",
+            "quote": "4, A methanol catalyst initially compris- ing zinc oxide, copper oxide, and a metallic halide.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/claim/patent-claim-4",
+      "target": "ex:msyn/us1625928a/species/copper-oxide"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/62",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 4",
+            "passage": "us1625928a/p2/7",
+            "quote": "4, A methanol catalyst initially compris- ing zinc oxide, copper oxide, and a metallic halide.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/claim/patent-claim-4",
+      "target": "ex:msyn/us1625928a/species/metallic-halide"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/63",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 5",
+            "note": "numeral OCR'd as '6.'",
+            "passage": "us1625928a/p2/7",
+            "quote": "6. A methanol catalyst initially compris- ing zinc oxide, chromium oxide, copper ox- ide, and cuprous chloride.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/claim/patent-claim-5",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/64",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 5",
+            "note": "numeral OCR'd as '6.'",
+            "passage": "us1625928a/p2/7",
+            "quote": "6. A methanol catalyst initially compris- ing zinc oxide, chromium oxide, copper ox- ide, and cuprous chloride.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/claim/patent-claim-5",
+      "target": "ex:msyn/us1625928a/species/chromium-oxide"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/65",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 5",
+            "note": "numeral OCR'd as '6.'",
+            "passage": "us1625928a/p2/7",
+            "quote": "6. A methanol catalyst initially compris- ing zinc oxide, chromium oxide, copper ox- ide, and cuprous chloride.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/claim/patent-claim-5",
+      "target": "ex:msyn/us1625928a/species/copper-oxide"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/66",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 5",
+            "note": "numeral OCR'd as '6.'",
+            "passage": "us1625928a/p2/7",
+            "quote": "6. A methanol catalyst initially compris- ing zinc oxide, chromium oxide, copper ox- ide, and cuprous chloride.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/claim/patent-claim-5",
+      "target": "ex:msyn/species/cucl"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/67",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 6",
+            "passage": "us1625928a/p2/7",
+            "quote": "6. A methanol catalyst intially compris- ing zinc oxide, copper oxide, and cuprous 120 chloride,",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/claim/patent-claim-6",
+      "target": "ex:msyn/us1625928a/catalyst/specific-example"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/68",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 6",
+            "passage": "us1625928a/p2/7",
+            "quote": "6. A methanol catalyst intially compris- ing zinc oxide, copper oxide, and cuprous 120 chloride,",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/claim/patent-claim-6",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/69",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 6",
+            "passage": "us1625928a/p2/7",
+            "quote": "6. A methanol catalyst intially compris- ing zinc oxide, copper oxide, and cuprous 120 chloride,",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/claim/patent-claim-6",
+      "target": "ex:msyn/us1625928a/species/copper-oxide"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/7",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Specific example",
+            "passage": "us1625928a/p2/6",
+            "quote": "The resultant mix- 85 ture is moistened with an aqueous solution containing 150 grams cuprous chloride and 200 grams of dextrin.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "200 grams",
+          "note": "mass in the moistening solution",
+          "unit": "g",
+          "value": 200
+        },
+        "fraction_basis": "mass",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1625928a/catalyst/specific-example",
+      "target": "ex:msyn/us1625928a/species/dextrin"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/70",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 6",
+            "passage": "us1625928a/p2/7",
+            "quote": "6. A methanol catalyst intially compris- ing zinc oxide, copper oxide, and cuprous 120 chloride,",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/claim/patent-claim-6",
+      "target": "ex:msyn/species/cucl"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/71",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 7",
+            "note": "numeral OCR'd as '¢.'",
+            "passage": "us1625928a/p2/8",
+            "quote": "c methanol which comprises passing 2-mix- ture of hydrogen and carbon oxides at ¢ pressure In excess of 50 atmospheres and !25 — at a temperature of 350-450° C. over a cat- alyst initially comprising a plurality of diff- cultly reducible metal oxides, copper oxide, and a metallic halide.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/claim/patent-claim-7",
+      "target": "ex:msyn/us1625928a/catalyst/three-element-halide"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/72",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 7",
+            "note": "numeral OCR'd as '¢.'",
+            "passage": "us1625928a/p2/8",
+            "quote": "c methanol which comprises passing 2-mix- ture of hydrogen and carbon oxides at ¢ pressure In excess of 50 atmospheres and !25 — at a temperature of 350-450° C. over a cat- alyst initially comprising a plurality of diff- cultly reducible metal oxides, copper oxide, and a metallic halide.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/claim/patent-claim-7",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/73",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 8",
+            "passage": "us1625928a/p2/8",
+            "quote": "8. A process for the production of synthet- 134",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 8",
+            "passage": "us1625928a/p3/1",
+            "quote": "pressure in excess of 50 atmospheres, and at a temperature of 350-450° C. over a-cata- ; lyst initially comprising a difficultly reduc- ‘ble metal oxide, copper oxide and a metallic halide.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/claim/patent-claim-8",
+      "target": "ex:msyn/us1625928a/catalyst/three-element-halide"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/74",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 8",
+            "passage": "us1625928a/p2/8",
+            "quote": "8. A process for the production of synthet- 134",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 8",
+            "passage": "us1625928a/p3/1",
+            "quote": "pressure in excess of 50 atmospheres, and at a temperature of 350-450° C. over a-cata- ; lyst initially comprising a difficultly reduc- ‘ble metal oxide, copper oxide and a metallic halide.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/claim/patent-claim-8",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/75",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 9",
+            "passage": "us1625928a/p3/1",
+            "quote": "9, A process for the production of synthet- ic methanol which comprises passing @ mix-",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 9",
+            "passage": "us1625928a/p3/1",
+            "quote": "pressure in excess of 50 atmospheres, and at — a temperature of 350-450° C. over a catalyst initially comprising zinc oxide, copper oxide, and cuprous chloride.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/claim/patent-claim-9",
+      "target": "ex:msyn/us1625928a/catalyst/specific-example"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/76",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 9",
+            "passage": "us1625928a/p3/1",
+            "quote": "9, A process for the production of synthet- ic methanol which comprises passing @ mix-",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 9",
+            "passage": "us1625928a/p3/1",
+            "quote": "pressure in excess of 50 atmospheres, and at — a temperature of 350-450° C. over a catalyst initially comprising zinc oxide, copper oxide, and cuprous chloride.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/claim/patent-claim-9",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/8",
+      "type": "HAS_PART",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Specific example",
+            "passage": "us1625928a/p2/6",
+            "quote": "2600 grams of zinc oxide in powdered form is mixed by thorough sifting with 500 grams of black copper oxide.",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Specific example",
+            "passage": "us1625928a/p2/6",
+            "quote": "The resultant mix- 85 ture is moistened with an aqueous solution containing 150 grams cuprous chloride and 200 grams of dextrin.",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1625928a/p1/6",
+            "quote": "valuable methanol catalyst which comprises three main elements—i. e. — (1) One or more non-reducible metal 95. oxides such as zinc, magnesium, cadmium, — chromium, vanadium, tungsten, etc.;",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ],
+        "role": "specific example"
+      },
+      "source": "ex:msyn/us1625928a/catalyst/three-element-halide",
+      "target": "ex:msyn/us1625928a/catalyst/specific-example"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/9",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Specific example",
+            "passage": "us1625928a/p2/6",
+            "quote": "2600 grams of zinc oxide in powdered form is mixed by thorough sifting with 500 grams of black copper oxide.",
+            "source": "ex:msyn/source/us1625928a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Specific example",
+            "passage": "us1625928a/p2/6",
+            "quote": "The resultant mix- 85 ture is moistened with an aqueous solution containing 150 grams cuprous chloride and 200 grams of dextrin.",
+            "source": "ex:msyn/source/us1625928a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625928a/sample/specific-example",
+      "target": "ex:msyn/us1625928a/catalyst/specific-example"
+    },
+    {
+      "id": "ex:msyn/us1625928a/preparation/specific-example/reported-in/us1625928a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, Specific example"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625928a/preparation/specific-example",
+      "target": "ex:msyn/source/us1625928a"
+    },
+    {
+      "id": "ex:msyn/us1625928a/sample/specific-example/reported-in/us1625928a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, Specific example",
+          "p. 2, standard conditions"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625928a/sample/specific-example",
+      "target": "ex:msyn/source/us1625928a"
+    },
+    {
+      "id": "ex:msyn/us1625928a/species/black-copper-oxide/reported-in/us1625928a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, Specific example"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625928a/species/black-copper-oxide",
+      "target": "ex:msyn/source/us1625928a"
+    },
+    {
+      "id": "ex:msyn/us1625928a/species/chromium-oxide/reported-in/us1625928a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, claim 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625928a/species/chromium-oxide",
+      "target": "ex:msyn/source/us1625928a"
+    },
+    {
+      "id": "ex:msyn/us1625928a/species/copper-oxide/reported-in/us1625928a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, claim 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625928a/species/copper-oxide",
+      "target": "ex:msyn/source/us1625928a"
+    },
+    {
+      "id": "ex:msyn/us1625928a/species/dextrin/reported-in/us1625928a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, Specific example"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625928a/species/dextrin",
+      "target": "ex:msyn/source/us1625928a"
+    },
+    {
+      "id": "ex:msyn/us1625928a/species/easily-reducible-metal-oxide/reported-in/us1625928a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625928a/species/easily-reducible-metal-oxide",
+      "target": "ex:msyn/source/us1625928a"
+    },
+    {
+      "id": "ex:msyn/us1625928a/species/metallic-halide/reported-in/us1625928a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625928a/species/metallic-halide",
+      "target": "ex:msyn/source/us1625928a"
+    },
+    {
+      "id": "ex:msyn/us1625928a/species/non-reducible-metal-oxide/reported-in/us1625928a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625928a/species/non-reducible-metal-oxide",
+      "target": "ex:msyn/source/us1625928a"
+    },
+    {
+      "id": "ex:msyn/us1625928a/test/specific-example/reported-in/us1625928a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 2, Specific example",
+          "p. 2, standard conditions"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625928a/test/specific-example",
+      "target": "ex:msyn/source/us1625928a"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/us1625928a"
+}

@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- **A graph kept as one part per source; a fully open methanol example.** `scale graph split` writes a graph as
+  `parts/` (the header, the shared records, one file per source) and `scale graph build` builds it back, sorted by id;
+  every command reads such a folder as one graph. The methanol graph splits and builds back to the identical file.
+  `examples/methanol-synthesis-public/` holds its 55 public-domain sources (16 articles of 1923-1930, 39 patents)
+  as parts, with their PDFs and page texts (`LicenseRef-PublicDomain-US`, NOTICE) and every quote in full; a test
+  finds every quote in its source's page texts. The publication and copyright checks read a parts folder as one
+  graph.
 - **No bypass of the `main` ruleset.** The repository admin's bypass is removed: every change to `main`, the owner's
   included, is a pull request approved by a reviewer other than its author.
 - **What testing @scale-agents on GitHub showed, fixed.** `scale thread N` gives the agents the whole thread of an

@@ -1,0 +1,4343 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/catalyst/cu-cr-oxide-3-1",
+      "label": "Catalyst",
+      "props": {
+        "name": "copper-chromium oxide catalyst, Cu:Cr 3:1 (atomic)",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/3",
+            "quote": "The catalyst was a mixture of reduced copper and chro- mium oxides, in which the atomic ratio of Cu to Cr was 3 to 1.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "quote": "A copper-chromium oxide catalyst in contact with a 2:1 hydrogen-carbon monoxide mixture has been found to yield, in addition to methanol, large quantities of dimethyl ether.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "generality": "particular",
+        "properties": {
+          "cu_cr_atomic_ratio": {
+            "status": "present",
+            "as_reported": "atomic ratio of Cu to Cr was 3 to 1",
+            "text_value": "3:1"
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/characterization/reduction-weight-loss",
+      "label": "Characterization",
+      "props": {
+        "name": "weight loss on reduction",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/5",
+            "quote": "The mixed oxides lost on re- duction 21 per cent of their weight.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "experiment_status": "completed",
+        "results": {
+          "weight_loss_on_reduction": {
+            "status": "present",
+            "as_reported": "21 per cent of their weight",
+            "unit": "%",
+            "value": 21
+          }
+        },
+        "technique": "gravimetry (weight loss on reduction)"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/claim/cu-cr-yields-much-ether",
+      "label": "Claim",
+      "props": {
+        "name": "Cu-Cr oxide gives methanol and large quantities of dimethyl ether",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "quote": "A copper-chromium oxide catalyst in contact with a 2:1 hydrogen-carbon monoxide mixture has been found to yield, in addition to methanol, large quantities of dimethyl ether.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "inference_type": "interventional",
+        "statement": "A copper-chromium oxide catalyst in contact with a 2:1 hydrogen-carbon monoxide mixture yields, in addition to methanol, large quantities of dimethyl ether."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/claim/ether-curve-shape",
+      "label": "Claim",
+      "props": {
+        "name": "ether formation follows and depends on methanol formation",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/5",
+            "quote": "the ether formation begins below the lowest temperature (265° C.) and increases moderately with temperature at first and then rapidly be- tween about 290° and 310° C.,",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/5",
+            "quote": "where it enters a maximal region and then falls away similarly to the decrease of methanol formation, upon which it is obviously dependent.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "inference_type": "interventional",
+        "statement": "Ether formation begins below 265° C., increases moderately with temperature at first and then rapidly between about 290° and 310° C., enters a maximal region and then falls away similarly to the decrease of methanol formation, upon which it is dependent."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/claim/ether-via-reaction-1",
+      "label": "Claim",
+      "props": {
+        "name": "ether formed largely by methanol dehydration (Reaction 1)",
+        "claim_kind": "conclusion",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "quote": "The source of the ether is undoubtedly largely by Reaction 1.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/4",
+            "quote": "In view of the small quantity of carbon dioxide found and the practically equivalent quantity of hydrocarbons— methane containing a little ethane—together with the amounts of water found in the crude methanol,",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/4",
+            "quote": "not more than a slight amount of the ether obtained could have been pro- duced by any other reaction than by Reaction 1.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "inference_type": "observational",
+        "statement": "The ether is formed largely by Reaction 1 (2CH3OH = CH3OCH3 + H2O); in view of the small quantity of carbon dioxide and the practically equivalent quantity of hydrocarbons found, together with the water found in the crude methanol, not more than a slight amount of the ether could have been produced by any other reaction."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/claim/max-conversion-315-320",
+      "label": "Claim",
+      "props": {
+        "name": "maximal conversion at 315-320 °C, about 30 mol %",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/7",
+            "quote": "The region of maxi- mal conversion was 315° to 320° C., and the conversions were of the order of 30 mol per cent, that to ether being the larger.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "inference_type": "interventional",
+        "statement": "The region of maximal conversion was 315° to 320° C., and the conversions (at 180 atmospheres reactant pressure) were of the order of 30 mol per cent, that to ether being the larger."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/claim/methanol-check-and-water",
+      "label": "Claim",
+      "props": {
+        "name": "methanol by fractionation checked by specific gravity; water slightly below theoretical",
+        "claim_kind": "data_quality",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/6",
+            "quote": "The methanol as determined by fractionation was closely checked by the amounts indicated by the specific gravity determinations.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/6",
+            "quote": "The quantities of water found were slightly smaller than the theoretical values calculated from the ether obtained. The differences were due to the water left in the pieces of apparatus during the distillation and fractionation.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "inference_type": "observational",
+        "statement": "The methanol determined by fractionation was closely checked by specific gravity determinations; the water found was slightly smaller than the theoretical amount calculated from the ether obtained, the differences being due to water left in the apparatus during distillation and fractionation."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/claim/methanol-curve-shape",
+      "label": "Claim",
+      "props": {
+        "name": "methanol formation begins under 260 °C, peaks about 318-320 °C",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/3",
+            "quote": "The forma- tion of methanol begins under 260° C. and rises in a typical way for an activity curve up to about 318-320° C. and falls away rather rapidly.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "inference_type": "interventional",
+        "statement": "The formation of methanol begins under 260° C., rises in a typical way for an activity curve up to about 318-320° C. and falls away rather rapidly."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/claim/more-points-needed",
+      "label": "Claim",
+      "props": {
+        "name": "more points between 300 and 340 °C needed",
+        "claim_kind": "data_quality",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/5",
+            "quote": "Obviously, in view of the form these curves take, more points between 300° and 340° C. would be of advantage in drawing more",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/3",
+            "quote": "exactly the maximal portions of the two curves.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "statement": "More points between 300° and 340° C. would be of advantage in drawing the maximal portions of the two curves."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/feed/h2-co-2-1",
+      "label": "Feed",
+      "props": {
+        "name": "2:1 hydrogen-carbon monoxide gas with about 11 per cent inerts",
+        "description": "Initial and make-up gas: 2:1 H2:CO with an average of 11 per cent inerts, mainly nitrogen containing about 10 per cent carbon dioxide and traces of hydrocarbons. Inerts in the residual gas varied between runs.",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/3",
+            "quote": "The gas was a 2:1 mixture of hydrogen and carbon monoxide, containing an average of 11 per cent of inerts (mainly nitrogen containing about 10 per cent carbon dioxide and traces of hydrocarbons) in the initial and make-up gas.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/3",
+            "quote": "The inerts in the residual gas, and hence the average reactant pressure, varied in the several experiments, notwithstanding the fact that the total gas pressure in the system was maintained at 200 atmos- pheres at all times.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "ratios": {
+          "h2_co_ratio": {
+            "status": "present",
+            "as_reported": "2:1 mixture of hydrogen and carbon monoxide",
+            "text_value": "2:1"
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/hypothesis/break-by-sodium",
+      "label": "Hypothesis",
+      "props": {
+        "name": "the break in the methanol curve is presumably due to traces of sodium compounds",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/4",
+            "quote": "it is reported that the presence of traces of sodium hydroxide or sodium nitrate in copper catalysts pro- motes them, and also causes them to lose their activity above the melting points of those materials (318° and 316° C.,",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/5",
+            "quote": "The methanol curve in Figure 2 shows such a break and presumably it is to be so explained, since it is evident that the production of the methyl ether likewise goes through a similar maximum.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "hypothesis_kind": "explanatory",
+        "hypothesis_status": "proposed",
+        "note": "the explanation relies on a result cited from Frolich, Fenske, Perry and Hurd; the source does not state that its catalyst contained sodium, though it was precipitated with sodium hydroxide",
+        "statement": "The break (fall of activity above about 318-320° C.) in the methanol curve of Figure 2 is presumably to be explained as Frolich and co-workers explained the loss of activity above the melting points of sodium hydroxide or sodium nitrate present as traces in copper catalysts; the methyl ether production goes through a similar maximum."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/hypothesis/methyl-formate-route",
+      "label": "Hypothesis",
+      "props": {
+        "name": "ether via methyl formate (Reactions 2-4)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/3",
+            "quote": "There is, of course, the thermodynamic possibility of the formation of methyl formate, as, for example, by",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/3",
+            "quote": "and its subsequent decomposition according to the reaction",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "hypothesis_kind": "competing",
+        "hypothesis_status": "disputed",
+        "note": "the authors raise this possibility and conclude that not more than a slight amount of ether could have formed by any reaction other than Reaction 1",
+        "statement": "Dimethyl ether could be formed via methyl formate (Reactions 2 or 3) and its subsequent decomposition (Reaction 4), which is thermodynamically possible."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/preparation/naoh-coprecipitation",
+      "label": "Preparation",
+      "props": {
+        "name": "coprecipitation of Cu and Cr from nitrates with sodium hydroxide",
+        "conditions": {
+          "naoh_excess": {
+            "status": "present",
+            "as_reported": "6 per cent in excess of that calculated to pre- cipitate the metals",
+            "unit": "%",
+            "value": 6
+          },
+          "thread_diameter": {
+            "status": "present",
+            "as_reported": "2 mm. diameter",
+            "unit": "mm",
+            "value": 2
+          },
+          "washings": {
+            "status": "present",
+            "as_reported": "Eleven successive washings",
+            "text_value": "eleven"
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/4",
+            "quote": "A boiling solution of copper and chromium nitrates in the atomic ratio of 3 Cu to 1 Cr was added slowly and with efficient stirring to a boiling solution of sodium hydroxide containing 6 per cent in excess of that calculated to pre- cipitate the metals.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/4",
+            "quote": "The precipitate was washed by vigorous mechanical stirring in large volumes of hot water. Eleven successive washings were given the precipitate.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/4",
+            "quote": "The wash water from the several final washings persisted in giving a very feeble test with phenolphthalein for hydroxyl ions.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/4",
+            "quote": "The moist precipitate was extruded to yield threads (2 mm. diameter), which were air-dried first at room tem- perature, broken into uni- form lengths, and dried at 105° C.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "method": "precipitation from boiling nitrate solution added to boiling sodium hydroxide (6 per cent excess), hot-water washing, extrusion and drying",
+        "procedure_status": "completed",
+        "steps": [
+          "A boiling solution of copper and chromium nitrates in the atomic ratio of 3 Cu to 1 Cr was added slowly and with efficient stirring to a boiling solution of sodium hydroxide containing 6 per cent in excess of that calculated to precipitate the metals.",
+          "The precipitate was washed by vigorous mechanical stirring in large volumes of hot water; eleven successive washings were given.",
+          "The wash water from the several final washings persisted in giving a very feeble test with phenolphthalein for hydroxyl ions.",
+          "The moist precipitate was extruded to yield threads (2 mm. diameter), air-dried first at room temperature, broken into uniform lengths, and dried at 105° C."
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/reaction/methanol-co-to-methyl-formate",
+      "label": "Reaction",
+      "props": {
+        "name": "methanol + CO to methyl formate (Reaction 2)",
+        "equation": "CH3OH + CO -> HCOOCH3",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/3",
+            "quote": "There is, of course, the thermodynamic possibility of the formation of methyl formate, as, for example, by",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/3",
+            "quote": "CHsOH + CO = H.COOCHs",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "note": "printed 'CHsOH + CO = H.COOCHs' (text-layer errors for CH3OH and H.COOCH3)"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/reaction/methyl-formate-decomposition",
+      "label": "Reaction",
+      "props": {
+        "name": "methyl formate decomposition to ether (Reaction 4)",
+        "equation": "2 HCOOCH3 -> CO2 + CH3OCH3 + H2CO (or H2 + CO)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/3",
+            "quote": "and its subsequent decomposition according to the reaction",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/3",
+            "quote": "2HCOOCH3 = C02 + CH3OCH3 + H2CO (or H2 + CO) (4)",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "note": "printed 'C02' for CO2"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/reactor/bureau-of-mines-apparatus",
+      "label": "Reactor",
+      "props": {
+        "name": "high-pressure apparatus of the earlier paper",
+        "description": "The apparatus is described only by reference to an earlier paper; initial and make-up gas and residual gas are mentioned.",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "quote": "The apparatus and the preparation of the gas employed has been described in an earlier paper (S).",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "reactor_kind": "not_reported",
+        "specifications": {
+          "catalyst_mass": {
+            "status": "present",
+            "as_reported": "177 grams",
+            "unit": "g",
+            "value": 177
+          },
+          "catalyst_volume": {
+            "status": "present",
+            "as_reported": "Two hundred and fifty cubic centimeters",
+            "unit": "cc",
+            "value": 250
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/sample/cu-cr-batch",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Cu-Cr oxide catalyst charge (250 cc, 177 g)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/4",
+            "quote": "Two hundred and fifty cubic centimeters (177 grams) of this catalyst were employed.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "preparation_status": "prepared",
+        "sample_kind": "batch"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/species/chromium-oxide",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "chromium oxide (reduced catalyst)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/3",
+            "quote": "The catalyst was a mixture of reduced copper and chro- mium oxides, in which the atomic ratio of Cu to Cr was 3 to 1.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "note": "the source says 'chromium oxides' without naming the oxide"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/species/hydrocarbons",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "hydrocarbons (traces in the inerts)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/3",
+            "quote": "The gas was a 2:1 mixture of hydrogen and carbon monoxide, containing an average of 11 per cent of inerts (mainly nitrogen containing about 10 per cent carbon dioxide and traces of hydrocarbons) in the initial and make-up gas.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/species/reduced-copper-oxide",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "reduced copper oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/3",
+            "quote": "The catalyst was a mixture of reduced copper and chro- mium oxides, in which the atomic ratio of Cu to Cr was 3 to 1.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "note": "the source says 'reduced copper and chromium oxides'"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/test/table1-run-a",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Table I run A, 265.5 °C",
+        "conditions": {
+          "average_reactant_pressure": {
+            "status": "present",
+            "as_reported": "179",
+            "note": "product of total pressure and average percentage of CO + H2",
+            "unit": "atm",
+            "value": 179.0
+          },
+          "co_content_initial": {
+            "status": "present",
+            "as_reported": "30.0",
+            "unit": "%",
+            "value": 30.0
+          },
+          "co_content_residual": {
+            "status": "present",
+            "as_reported": "26.3",
+            "unit": "%",
+            "value": 26.3
+          }
+        },
+        "conversion": {
+          "status": "present",
+          "as_reported": "7.15",
+          "note": "conversion of CO to CH3OH per pass at the run's reactant pressure (Table I column 9)",
+          "unit": "mol %",
+          "value": 7.15
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I",
+            "passage": "10.1021-ie50242a022/p2/1",
+            "quote": "A 265.5 179 30.0 26.3 4.50 0.76 0.322 7.15 0.16 + 0.068 3.1 7.2 3.1",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 2, Table I, run A",
+            "reading": "vision_ocr",
+            "region": [
+              0.1,
+              0.1825,
+              0.95,
+              0.1905
+            ],
+            "source": "ex:msyn/source/10.1021-ie50242a022",
+            "transcription": "A 265.5 179 30.0 26.3 4.50 0.76 0.322 7.15 0.16+ 0.068 3.1 7.2 3.1"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I",
+            "passage": "10.1021-ie50242a022/p2/1",
+            "quote": "Table I—Methanol and Ether Production with a Copper-Chromium Oxide Catalyst",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/6",
+            "quote": "Runs were made at five reaction temperatures between 265° and 355° C. The total gas pressure was maintained at 200 atmospheres and a space velocity of 3000 was employed in each run.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, abstract",
+            "passage": "10.1021-ie50242a022/p1/7",
+            "quote": "ether were, respectively: at 265° C., 7 and 4; at 285° C., 14 and 6; at 305° C., 24 and 22; at 340° C., 17 and 20; and at 355° C., 11.5 and 13.5.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "note": "Table I columns: 2 average reaction temperature, 3 average reactant pressure, 4-6 CO content of gas (initial %, residual %, 'Av.' in mols), 7-9 methanol (mols per hour, mols per pass, mol % CO conversion per pass), 10-12 methyl ether (same), 13-14 approximate conversion at 180 atm.",
+        "pressure": {
+          "status": "present",
+          "as_reported": "200 atmospheres",
+          "note": "total gas pressure",
+          "unit": "atm",
+          "value": 200
+        },
+        "results": {
+          "abstract_co_to_ether_at_180_atm": {
+            "status": "present",
+            "as_reported": "265° C., 7 and 4",
+            "note": "rounded figure given in the abstract",
+            "unit": "mol %",
+            "value": 4
+          },
+          "abstract_co_to_methanol_at_180_atm": {
+            "status": "present",
+            "as_reported": "265° C., 7 and 4",
+            "note": "rounded figure given in the abstract",
+            "unit": "mol %",
+            "value": 7
+          },
+          "approx_co_to_ether_conversion_at_180_atm": {
+            "status": "present",
+            "as_reported": "3.1",
+            "note": "column 14, calculated by the authors assuming the same methanol:ether ratio at 180 atm",
+            "unit": "mol %",
+            "value": 3.1
+          },
+          "approx_co_to_methanol_conversion_at_180_atm": {
+            "status": "present",
+            "as_reported": "7.2",
+            "note": "column 13, approximated by the authors by scaling column 9 to 180 atm reactant pressure",
+            "unit": "mol %",
+            "value": 7.2
+          },
+          "co_content_average_mols": {
+            "status": "present",
+            "as_reported": "4.50",
+            "note": "column headed CO Content of Gas, Av., unit row 'Mols'",
+            "unit": "mol",
+            "value": 4.5
+          },
+          "co_to_ether_conversion_per_pass": {
+            "status": "present",
+            "as_reported": "3.1",
+            "note": "two mols of CO are required for each mol of ether",
+            "unit": "mol %",
+            "value": 3.1
+          },
+          "co_to_methanol_conversion_per_pass": {
+            "status": "present",
+            "as_reported": "7.15",
+            "unit": "mol %",
+            "value": 7.15
+          },
+          "methanol_produced_mols_per_hour": {
+            "status": "present",
+            "as_reported": "0.76",
+            "unit": "mol/h",
+            "value": 0.76
+          },
+          "methanol_produced_mols_per_pass": {
+            "status": "present",
+            "as_reported": "0.322",
+            "unit": "mol per pass",
+            "value": 0.322
+          },
+          "methyl_ether_mols_per_hour": {
+            "status": "present",
+            "as_reported": "0.16 +",
+            "note": "printed with a trailing '+' whose meaning the source does not explain",
+            "unit": "mol/h",
+            "value": 0.16
+          },
+          "methyl_ether_mols_per_pass": {
+            "status": "present",
+            "as_reported": "0.068",
+            "unit": "mol per pass",
+            "value": 0.068
+          }
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "a space velocity of 3000",
+          "note": "unit and basis not stated",
+          "text_value": "3000"
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "265.5",
+          "note": "average reaction temperature",
+          "unit": "°C",
+          "value": 265.5
+        },
+        "test_kind": "activity",
+        "test_label": "A"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/test/table1-run-b",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Table I run B, 285.5 °C",
+        "conditions": {
+          "average_reactant_pressure": {
+            "status": "present",
+            "as_reported": "166",
+            "note": "product of total pressure and average percentage of CO + H2",
+            "unit": "atm",
+            "value": 166.0
+          },
+          "co_content_initial": {
+            "status": "present",
+            "as_reported": "30.1",
+            "unit": "%",
+            "value": 30.1
+          },
+          "co_content_residual": {
+            "status": "present",
+            "as_reported": "25.1",
+            "unit": "%",
+            "value": 25.1
+          }
+        },
+        "conversion": {
+          "status": "present",
+          "as_reported": "12.75",
+          "note": "conversion of CO to CH3OH per pass at the run's reactant pressure (Table I column 9)",
+          "unit": "mol %",
+          "value": 12.75
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I",
+            "passage": "10.1021-ie50242a022/p2/1",
+            "quote": "B 285.5 166 30.1 25.1 4.40 1.32 0.563 12.75 0.28 0.119 5.4 14.3 6.1",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 2, Table I, run B",
+            "reading": "vision_ocr",
+            "region": [
+              0.1,
+              0.1905,
+              0.95,
+              0.1985
+            ],
+            "source": "ex:msyn/source/10.1021-ie50242a022",
+            "transcription": "B 285.5 166 30.1 25.1 4.40 1.32 0.563 12.75 0.28 0.119 5.4 14.3 6.1"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I",
+            "passage": "10.1021-ie50242a022/p2/1",
+            "quote": "Table I—Methanol and Ether Production with a Copper-Chromium Oxide Catalyst",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/6",
+            "quote": "Runs were made at five reaction temperatures between 265° and 355° C. The total gas pressure was maintained at 200 atmospheres and a space velocity of 3000 was employed in each run.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, abstract",
+            "passage": "10.1021-ie50242a022/p1/7",
+            "quote": "ether were, respectively: at 265° C., 7 and 4; at 285° C., 14 and 6; at 305° C., 24 and 22; at 340° C., 17 and 20; and at 355° C., 11.5 and 13.5.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "note": "Table I columns: 2 average reaction temperature, 3 average reactant pressure, 4-6 CO content of gas (initial %, residual %, 'Av.' in mols), 7-9 methanol (mols per hour, mols per pass, mol % CO conversion per pass), 10-12 methyl ether (same), 13-14 approximate conversion at 180 atm.",
+        "pressure": {
+          "status": "present",
+          "as_reported": "200 atmospheres",
+          "note": "total gas pressure",
+          "unit": "atm",
+          "value": 200
+        },
+        "results": {
+          "abstract_co_to_ether_at_180_atm": {
+            "status": "present",
+            "as_reported": "285° C., 14 and 6",
+            "note": "rounded figure given in the abstract",
+            "unit": "mol %",
+            "value": 6
+          },
+          "abstract_co_to_methanol_at_180_atm": {
+            "status": "present",
+            "as_reported": "285° C., 14 and 6",
+            "note": "rounded figure given in the abstract",
+            "unit": "mol %",
+            "value": 14
+          },
+          "approx_co_to_ether_conversion_at_180_atm": {
+            "status": "present",
+            "as_reported": "6.1",
+            "note": "column 14, calculated by the authors assuming the same methanol:ether ratio at 180 atm",
+            "unit": "mol %",
+            "value": 6.1
+          },
+          "approx_co_to_methanol_conversion_at_180_atm": {
+            "status": "present",
+            "as_reported": "14.3",
+            "note": "column 13, approximated by the authors by scaling column 9 to 180 atm reactant pressure",
+            "unit": "mol %",
+            "value": 14.3
+          },
+          "co_content_average_mols": {
+            "status": "present",
+            "as_reported": "4.40",
+            "note": "column headed CO Content of Gas, Av., unit row 'Mols'",
+            "unit": "mol",
+            "value": 4.4
+          },
+          "co_to_ether_conversion_per_pass": {
+            "status": "present",
+            "as_reported": "5.4",
+            "note": "two mols of CO are required for each mol of ether",
+            "unit": "mol %",
+            "value": 5.4
+          },
+          "co_to_methanol_conversion_per_pass": {
+            "status": "present",
+            "as_reported": "12.75",
+            "unit": "mol %",
+            "value": 12.75
+          },
+          "methanol_produced_mols_per_hour": {
+            "status": "present",
+            "as_reported": "1.32",
+            "unit": "mol/h",
+            "value": 1.32
+          },
+          "methanol_produced_mols_per_pass": {
+            "status": "present",
+            "as_reported": "0.563",
+            "unit": "mol per pass",
+            "value": 0.563
+          },
+          "methyl_ether_mols_per_hour": {
+            "status": "present",
+            "as_reported": "0.28",
+            "unit": "mol/h",
+            "value": 0.28
+          },
+          "methyl_ether_mols_per_pass": {
+            "status": "present",
+            "as_reported": "0.119",
+            "unit": "mol per pass",
+            "value": 0.119
+          }
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "a space velocity of 3000",
+          "note": "unit and basis not stated",
+          "text_value": "3000"
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "285.5",
+          "note": "average reaction temperature",
+          "unit": "°C",
+          "value": 285.5
+        },
+        "test_kind": "activity",
+        "test_label": "B"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/test/table1-run-c",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Table I run C, 305 + °C",
+        "conditions": {
+          "average_reactant_pressure": {
+            "status": "present",
+            "as_reported": "158",
+            "note": "product of total pressure and average percentage of CO + H2",
+            "unit": "atm",
+            "value": 158.0
+          },
+          "co_content_initial": {
+            "status": "present",
+            "as_reported": "30.3",
+            "unit": "%",
+            "value": 30.3
+          },
+          "co_content_residual": {
+            "status": "present",
+            "as_reported": "20.0",
+            "unit": "%",
+            "value": 20.0
+          }
+        },
+        "conversion": {
+          "status": "present",
+          "as_reported": "19.8",
+          "note": "conversion of CO to CH3OH per pass at the run's reactant pressure (Table I column 9)",
+          "unit": "mol %",
+          "value": 19.8
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I",
+            "passage": "10.1021-ie50242a022/p2/1",
+            "quote": "C 305 + 158 30.3 20.0 4.00 1.85 0.790 19.8 0.87 0.370 18.5 23.8 22.3",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 2, Table I, run C",
+            "reading": "vision_ocr",
+            "region": [
+              0.1,
+              0.1985,
+              0.95,
+              0.2065
+            ],
+            "source": "ex:msyn/source/10.1021-ie50242a022",
+            "transcription": "C 305+ 158 30.3 20.0 4.00 1.85 0.790 19.8 0.87 0.370 18.5 23.8 22.3"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I",
+            "passage": "10.1021-ie50242a022/p2/1",
+            "quote": "Table I—Methanol and Ether Production with a Copper-Chromium Oxide Catalyst",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/6",
+            "quote": "Runs were made at five reaction temperatures between 265° and 355° C. The total gas pressure was maintained at 200 atmospheres and a space velocity of 3000 was employed in each run.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, abstract",
+            "passage": "10.1021-ie50242a022/p1/7",
+            "quote": "ether were, respectively: at 265° C., 7 and 4; at 285° C., 14 and 6; at 305° C., 24 and 22; at 340° C., 17 and 20; and at 355° C., 11.5 and 13.5.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "note": "Table I columns: 2 average reaction temperature, 3 average reactant pressure, 4-6 CO content of gas (initial %, residual %, 'Av.' in mols), 7-9 methanol (mols per hour, mols per pass, mol % CO conversion per pass), 10-12 methyl ether (same), 13-14 approximate conversion at 180 atm.",
+        "pressure": {
+          "status": "present",
+          "as_reported": "200 atmospheres",
+          "note": "total gas pressure",
+          "unit": "atm",
+          "value": 200
+        },
+        "results": {
+          "abstract_co_to_ether_at_180_atm": {
+            "status": "present",
+            "as_reported": "305° C., 24 and 22",
+            "note": "rounded figure given in the abstract",
+            "unit": "mol %",
+            "value": 22
+          },
+          "abstract_co_to_methanol_at_180_atm": {
+            "status": "present",
+            "as_reported": "305° C., 24 and 22",
+            "note": "rounded figure given in the abstract",
+            "unit": "mol %",
+            "value": 24
+          },
+          "approx_co_to_ether_conversion_at_180_atm": {
+            "status": "present",
+            "as_reported": "22.3",
+            "note": "column 14, calculated by the authors assuming the same methanol:ether ratio at 180 atm",
+            "unit": "mol %",
+            "value": 22.3
+          },
+          "approx_co_to_methanol_conversion_at_180_atm": {
+            "status": "present",
+            "as_reported": "23.8",
+            "note": "column 13, approximated by the authors by scaling column 9 to 180 atm reactant pressure",
+            "unit": "mol %",
+            "value": 23.8
+          },
+          "co_content_average_mols": {
+            "status": "present",
+            "as_reported": "4.00",
+            "note": "column headed CO Content of Gas, Av., unit row 'Mols'",
+            "unit": "mol",
+            "value": 4.0
+          },
+          "co_to_ether_conversion_per_pass": {
+            "status": "present",
+            "as_reported": "18.5",
+            "note": "two mols of CO are required for each mol of ether",
+            "unit": "mol %",
+            "value": 18.5
+          },
+          "co_to_methanol_conversion_per_pass": {
+            "status": "present",
+            "as_reported": "19.8",
+            "unit": "mol %",
+            "value": 19.8
+          },
+          "methanol_produced_mols_per_hour": {
+            "status": "present",
+            "as_reported": "1.85",
+            "unit": "mol/h",
+            "value": 1.85
+          },
+          "methanol_produced_mols_per_pass": {
+            "status": "present",
+            "as_reported": "0.790",
+            "unit": "mol per pass",
+            "value": 0.79
+          },
+          "methyl_ether_mols_per_hour": {
+            "status": "present",
+            "as_reported": "0.87",
+            "unit": "mol/h",
+            "value": 0.87
+          },
+          "methyl_ether_mols_per_pass": {
+            "status": "present",
+            "as_reported": "0.370",
+            "unit": "mol per pass",
+            "value": 0.37
+          }
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "a space velocity of 3000",
+          "note": "unit and basis not stated",
+          "text_value": "3000"
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "305 +",
+          "note": "average reaction temperature; printed with a trailing '+' whose meaning the source does not explain",
+          "unit": "°C",
+          "value": 305.0
+        },
+        "test_kind": "activity",
+        "test_label": "C"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/test/table1-run-d",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Table I run D, 337 °C",
+        "conditions": {
+          "average_reactant_pressure": {
+            "status": "present",
+            "as_reported": "159",
+            "note": "product of total pressure and average percentage of CO + H2",
+            "unit": "atm",
+            "value": 159.0
+          },
+          "co_content_initial": {
+            "status": "present",
+            "as_reported": "29.9",
+            "unit": "%",
+            "value": 29.9
+          },
+          "co_content_residual": {
+            "status": "present",
+            "as_reported": "18.0",
+            "unit": "%",
+            "value": 18.0
+          }
+        },
+        "conversion": {
+          "status": "present",
+          "as_reported": "15.4",
+          "note": "conversion of CO to CH3OH per pass at the run's reactant pressure (Table I column 9)",
+          "unit": "mol %",
+          "value": 15.4
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I",
+            "passage": "10.1021-ie50242a022/p2/1",
+            "quote": "D 337 159 29.9 18.0 3.79 1.37 0.584 15.4 0.87 0.370 18.5 18.4- 22.0",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 2, Table I, run D",
+            "reading": "vision_ocr",
+            "region": [
+              0.1,
+              0.2065,
+              0.95,
+              0.2145
+            ],
+            "source": "ex:msyn/source/10.1021-ie50242a022",
+            "transcription": "D 337 159 29.9 18.0 3.79 1.37 0.584 15.4 0.87 0.370 18.5 18.4- 22.0"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I",
+            "passage": "10.1021-ie50242a022/p2/1",
+            "quote": "Table I—Methanol and Ether Production with a Copper-Chromium Oxide Catalyst",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/6",
+            "quote": "Runs were made at five reaction temperatures between 265° and 355° C. The total gas pressure was maintained at 200 atmospheres and a space velocity of 3000 was employed in each run.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, abstract",
+            "passage": "10.1021-ie50242a022/p1/7",
+            "quote": "ether were, respectively: at 265° C., 7 and 4; at 285° C., 14 and 6; at 305° C., 24 and 22; at 340° C., 17 and 20; and at 355° C., 11.5 and 13.5.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "note": "Table I columns: 2 average reaction temperature, 3 average reactant pressure, 4-6 CO content of gas (initial %, residual %, 'Av.' in mols), 7-9 methanol (mols per hour, mols per pass, mol % CO conversion per pass), 10-12 methyl ether (same), 13-14 approximate conversion at 180 atm.",
+        "pressure": {
+          "status": "present",
+          "as_reported": "200 atmospheres",
+          "note": "total gas pressure",
+          "unit": "atm",
+          "value": 200
+        },
+        "results": {
+          "abstract_co_to_ether_at_180_atm": {
+            "status": "present",
+            "as_reported": "340° C., 17 and 20",
+            "note": "rounded figure given in the abstract",
+            "unit": "mol %",
+            "value": 20
+          },
+          "abstract_co_to_methanol_at_180_atm": {
+            "status": "present",
+            "as_reported": "340° C., 17 and 20",
+            "note": "rounded figure given in the abstract",
+            "unit": "mol %",
+            "value": 17
+          },
+          "approx_co_to_ether_conversion_at_180_atm": {
+            "status": "present",
+            "as_reported": "22.0",
+            "note": "column 14, calculated by the authors assuming the same methanol:ether ratio at 180 atm",
+            "unit": "mol %",
+            "value": 22.0
+          },
+          "approx_co_to_methanol_conversion_at_180_atm": {
+            "status": "present",
+            "as_reported": "18.4-",
+            "note": "column 13, approximated by the authors by scaling column 9 to 180 atm reactant pressure; printed with a trailing '-' whose meaning the source does not explain",
+            "unit": "mol %",
+            "value": 18.4
+          },
+          "co_content_average_mols": {
+            "status": "present",
+            "as_reported": "3.79",
+            "note": "column headed CO Content of Gas, Av., unit row 'Mols'",
+            "unit": "mol",
+            "value": 3.79
+          },
+          "co_to_ether_conversion_per_pass": {
+            "status": "present",
+            "as_reported": "18.5",
+            "note": "two mols of CO are required for each mol of ether",
+            "unit": "mol %",
+            "value": 18.5
+          },
+          "co_to_methanol_conversion_per_pass": {
+            "status": "present",
+            "as_reported": "15.4",
+            "unit": "mol %",
+            "value": 15.4
+          },
+          "methanol_produced_mols_per_hour": {
+            "status": "present",
+            "as_reported": "1.37",
+            "unit": "mol/h",
+            "value": 1.37
+          },
+          "methanol_produced_mols_per_pass": {
+            "status": "present",
+            "as_reported": "0.584",
+            "unit": "mol per pass",
+            "value": 0.584
+          },
+          "methyl_ether_mols_per_hour": {
+            "status": "present",
+            "as_reported": "0.87",
+            "unit": "mol/h",
+            "value": 0.87
+          },
+          "methyl_ether_mols_per_pass": {
+            "status": "present",
+            "as_reported": "0.370",
+            "unit": "mol per pass",
+            "value": 0.37
+          }
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "a space velocity of 3000",
+          "note": "unit and basis not stated",
+          "text_value": "3000"
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "337",
+          "note": "average reaction temperature",
+          "unit": "°C",
+          "value": 337.0
+        },
+        "test_kind": "activity",
+        "test_label": "D"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/test/table1-run-e",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Table I run E, 353 °C",
+        "conditions": {
+          "average_reactant_pressure": {
+            "status": "present",
+            "as_reported": "153",
+            "note": "product of total pressure and average percentage of CO + H2",
+            "unit": "atm",
+            "value": 153.0
+          },
+          "co_content_initial": {
+            "status": "present",
+            "as_reported": "29.9",
+            "unit": "%",
+            "value": 29.9
+          },
+          "co_content_residual": {
+            "status": "present",
+            "as_reported": "16.1",
+            "unit": "%",
+            "value": 16.1
+          }
+        },
+        "conversion": {
+          "status": "present",
+          "as_reported": "9.6",
+          "note": "conversion of CO to CH3OH per pass at the run's reactant pressure (Table I column 9)",
+          "unit": "mol %",
+          "value": 9.6
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I",
+            "passage": "10.1021-ie50242a022/p2/1",
+            "quote": "E 353 153 29.9 16.1 3.56 0.80 0.341 9.6 0.48 0.205 11.4 +",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 2, Table I, run E",
+            "reading": "vision_ocr",
+            "region": [
+              0.1,
+              0.2145,
+              0.95,
+              0.2225
+            ],
+            "source": "ex:msyn/source/10.1021-ie50242a022",
+            "transcription": "E 353 153 29.9 16.1 3.56 0.80 0.341 9.6 0.48 0.205 11.4+ 12.1 14.5"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I",
+            "passage": "10.1021-ie50242a022/p2/1",
+            "quote": "12.1 14.5",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I",
+            "passage": "10.1021-ie50242a022/p2/1",
+            "quote": "Table I—Methanol and Ether Production with a Copper-Chromium Oxide Catalyst",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/6",
+            "quote": "Runs were made at five reaction temperatures between 265° and 355° C. The total gas pressure was maintained at 200 atmospheres and a space velocity of 3000 was employed in each run.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, abstract",
+            "passage": "10.1021-ie50242a022/p1/7",
+            "quote": "ether were, respectively: at 265° C., 7 and 4; at 285° C., 14 and 6; at 305° C., 24 and 22; at 340° C., 17 and 20; and at 355° C., 11.5 and 13.5.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "note": "Table I columns: 2 average reaction temperature, 3 average reactant pressure, 4-6 CO content of gas (initial %, residual %, 'Av.' in mols), 7-9 methanol (mols per hour, mols per pass, mol % CO conversion per pass), 10-12 methyl ether (same), 13-14 approximate conversion at 180 atm.",
+        "pressure": {
+          "status": "present",
+          "as_reported": "200 atmospheres",
+          "note": "total gas pressure",
+          "unit": "atm",
+          "value": 200
+        },
+        "results": {
+          "abstract_co_to_ether_at_180_atm": {
+            "status": "present",
+            "as_reported": "355° C., 11.5 and 13.5",
+            "note": "rounded figure given in the abstract",
+            "unit": "mol %",
+            "value": 13.5
+          },
+          "abstract_co_to_methanol_at_180_atm": {
+            "status": "present",
+            "as_reported": "355° C., 11.5 and 13.5",
+            "note": "rounded figure given in the abstract",
+            "unit": "mol %",
+            "value": 11.5
+          },
+          "approx_co_to_ether_conversion_at_180_atm": {
+            "status": "present",
+            "as_reported": "14.5",
+            "note": "column 14, calculated by the authors assuming the same methanol:ether ratio at 180 atm",
+            "unit": "mol %",
+            "value": 14.5
+          },
+          "approx_co_to_methanol_conversion_at_180_atm": {
+            "status": "present",
+            "as_reported": "12.1",
+            "note": "column 13, approximated by the authors by scaling column 9 to 180 atm reactant pressure",
+            "unit": "mol %",
+            "value": 12.1
+          },
+          "co_content_average_mols": {
+            "status": "present",
+            "as_reported": "3.56",
+            "note": "column headed CO Content of Gas, Av., unit row 'Mols'",
+            "unit": "mol",
+            "value": 3.56
+          },
+          "co_to_ether_conversion_per_pass": {
+            "status": "present",
+            "as_reported": "11.4 +",
+            "note": "two mols of CO are required for each mol of ether; printed with a trailing '+' whose meaning the source does not explain",
+            "unit": "mol %",
+            "value": 11.4
+          },
+          "co_to_methanol_conversion_per_pass": {
+            "status": "present",
+            "as_reported": "9.6",
+            "unit": "mol %",
+            "value": 9.6
+          },
+          "methanol_produced_mols_per_hour": {
+            "status": "present",
+            "as_reported": "0.80",
+            "unit": "mol/h",
+            "value": 0.8
+          },
+          "methanol_produced_mols_per_pass": {
+            "status": "present",
+            "as_reported": "0.341",
+            "unit": "mol per pass",
+            "value": 0.341
+          },
+          "methyl_ether_mols_per_hour": {
+            "status": "present",
+            "as_reported": "0.48",
+            "unit": "mol/h",
+            "value": 0.48
+          },
+          "methyl_ether_mols_per_pass": {
+            "status": "present",
+            "as_reported": "0.205",
+            "unit": "mol per pass",
+            "value": 0.205
+          }
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "a space velocity of 3000",
+          "note": "unit and basis not stated",
+          "text_value": "3000"
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "353",
+          "note": "average reaction temperature",
+          "unit": "°C",
+          "value": 353.0
+        },
+        "test_kind": "activity",
+        "test_label": "E"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/treatment/drying",
+      "label": "Treatment",
+      "props": {
+        "name": "air-drying then drying at 105 °C",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/4",
+            "quote": "The moist precipitate was extruded to yield threads (2 mm. diameter), which were air-dried first at room tem- perature, broken into uni- form lengths, and dried at 105° C.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "note": "first air-dried at room temperature; duration not stated",
+        "procedure_status": "completed",
+        "temperature": {
+          "status": "present",
+          "as_reported": "105° C.",
+          "unit": "°C",
+          "value": 105
+        },
+        "treatment_kind": "drying"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/treatment/reduction-co-h2",
+      "label": "Treatment",
+      "props": {
+        "name": "reduction with 19:1 CO-H2 at 200-240 °C",
+        "atmosphere": "slow stream of a mixture of 19 parts carbon monoxide and 1 part hydrogen; hydrogen proportion increased as reduction neared completion",
+        "duration": {
+          "status": "present",
+          "as_reported": "about 15 hours",
+          "qualifier": "approximate",
+          "unit": "h",
+          "value": 15
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/5",
+            "quote": "The precipitate was reduced at 200-240° C. over a period of about 15 hours with a slow stream of a mixture of 19 parts of car- bon monoxide and 1 part hydrogen.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/5",
+            "quote": "The proportion of hydrogen wras increased as the reduction neared com- pletion and the tendency for rapid temperature in- crease became small.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "pressure": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source"
+        },
+        "procedure_status": "completed",
+        "temperature": {
+          "status": "present",
+          "as_reported": "200-240° C.",
+          "lower": 200,
+          "unit": "°C",
+          "upper": 240
+        },
+        "treatment_kind": "reduction"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/variable/temperature",
+      "label": "Variable",
+      "props": {
+        "name": "temperature",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/6",
+            "quote": "Runs were made at five reaction temperatures between 265° and 355° C. The total gas pressure was maintained at 200 atmospheres and a space velocity of 3000 was employed in each run.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "quantity_kind": "temperature",
+        "scale": "quantitative",
+        "unit": "°C"
+      }
+    },
+    {
+      "id": "ex:msyn/source/10.1021-ie50242a022",
+      "label": "Source",
+      "props": {
+        "name": "Methanol from Hydrogen and Carbon Monoxide III—Further Work on Dimethyl Ether",
+        "kind": "article",
+        "description": "Published 1930 (publication year (bibliography)); in scope: before the 1966-01-01 cutoff. Text: 2 pages text_layer. Text not redistributed.",
+        "doi": "10.1021/ie50242a022",
+        "licence": "no verified publisher licence; short excerpts quoted as evidence under fair use",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "Methanol from Hydrogen and Carbon Monoxide III—Further Work on Dimethyl Ether",
+        "url": "https://doi.org/10.1021/ie50242a022",
+        "venue": "Industrial & Engineering Chemistry",
+        "year": 1930
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/catalyst/cu-cr-oxide-3-1/reported-in/10.1021-ie50242a022",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/catalyst/cu-cr-oxide-3-1",
+      "target": "ex:msyn/source/10.1021-ie50242a022"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/characterization/reduction-weight-loss/reported-in/10.1021-ie50242a022",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/characterization/reduction-weight-loss",
+      "target": "ex:msyn/source/10.1021-ie50242a022"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/claim/cu-cr-yields-much-ether/reported-in/10.1021-ie50242a022",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/claim/cu-cr-yields-much-ether",
+      "target": "ex:msyn/source/10.1021-ie50242a022"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/claim/ether-curve-shape/reported-in/10.1021-ie50242a022",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/claim/ether-curve-shape",
+      "target": "ex:msyn/source/10.1021-ie50242a022"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/claim/ether-via-reaction-1/reported-in/10.1021-ie50242a022",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/claim/ether-via-reaction-1",
+      "target": "ex:msyn/source/10.1021-ie50242a022"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/claim/max-conversion-315-320/reported-in/10.1021-ie50242a022",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/claim/max-conversion-315-320",
+      "target": "ex:msyn/source/10.1021-ie50242a022"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/claim/methanol-check-and-water/reported-in/10.1021-ie50242a022",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/claim/methanol-check-and-water",
+      "target": "ex:msyn/source/10.1021-ie50242a022"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/claim/methanol-curve-shape/reported-in/10.1021-ie50242a022",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/claim/methanol-curve-shape",
+      "target": "ex:msyn/source/10.1021-ie50242a022"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/claim/more-points-needed/reported-in/10.1021-ie50242a022",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/claim/more-points-needed",
+      "target": "ex:msyn/source/10.1021-ie50242a022"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/feed/h2-co-2-1/reported-in/10.1021-ie50242a022",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/feed/h2-co-2-1",
+      "target": "ex:msyn/source/10.1021-ie50242a022"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/hypothesis/break-by-sodium/reported-in/10.1021-ie50242a022",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/hypothesis/break-by-sodium",
+      "target": "ex:msyn/source/10.1021-ie50242a022"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/hypothesis/methyl-formate-route/reported-in/10.1021-ie50242a022",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/hypothesis/methyl-formate-route",
+      "target": "ex:msyn/source/10.1021-ie50242a022"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/10",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/3",
+            "quote": "The catalyst was a mixture of reduced copper and chro- mium oxides, in which the atomic ratio of Cu to Cr was 3 to 1.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "fraction_basis": "atom",
+        "role": "not_stated",
+        "role_detail": "copper; Cu:Cr atomic ratio 3 to 1"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/catalyst/cu-cr-oxide-3-1",
+      "target": "ex:msyn/10.1021-ie50242a022/species/reduced-copper-oxide"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/101",
+      "type": "CONTRADICTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/4",
+            "quote": "In view of the small quantity of carbon dioxide found and the practically equivalent quantity of hydrocarbons— methane containing a little ethane—together with the amounts of water found in the crude methanol,",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/4",
+            "quote": "not more than a slight amount of the ether obtained could have been pro- duced by any other reaction than by Reaction 1.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/claim/ether-via-reaction-1",
+      "target": "ex:msyn/10.1021-ie50242a022/hypothesis/methyl-formate-route"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/102",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/5",
+            "quote": "the ether formation begins below the lowest temperature (265° C.) and increases moderately with temperature at first and then rapidly be- tween about 290° and 310° C.,",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/5",
+            "quote": "where it enters a maximal region and then falls away similarly to the decrease of methanol formation, upon which it is obviously dependent.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "warrant": "ether formation follows methanol formation, upon which it is dependent"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/claim/ether-curve-shape",
+      "target": "ex:msyn/10.1021-ie50242a022/claim/ether-via-reaction-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/103",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "quote": "A copper-chromium oxide catalyst in contact with a 2:1 hydrogen-carbon monoxide mixture has been found to yield, in addition to methanol, large quantities of dimethyl ether.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/claim/cu-cr-yields-much-ether",
+      "target": "ex:msyn/10.1021-ie50242a022/catalyst/cu-cr-oxide-3-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/104",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/7",
+            "quote": "The region of maxi- mal conversion was 315° to 320° C., and the conversions were of the order of 30 mol per cent, that to ether being the larger.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/claim/max-conversion-315-320",
+      "target": "ex:msyn/10.1021-ie50242a022/catalyst/cu-cr-oxide-3-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/105",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/3",
+            "quote": "The forma- tion of methanol begins under 260° C. and rises in a typical way for an activity curve up to about 318-320° C. and falls away rather rapidly.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/claim/methanol-curve-shape",
+      "target": "ex:msyn/10.1021-ie50242a022/catalyst/cu-cr-oxide-3-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/106",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/5",
+            "quote": "the ether formation begins below the lowest temperature (265° C.) and increases moderately with temperature at first and then rapidly be- tween about 290° and 310° C.,",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/5",
+            "quote": "where it enters a maximal region and then falls away similarly to the decrease of methanol formation, upon which it is obviously dependent.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/claim/ether-curve-shape",
+      "target": "ex:msyn/reaction/dimethyl-ether-formation"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/107",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "quote": "The source of the ether is undoubtedly largely by Reaction 1.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/claim/ether-via-reaction-1",
+      "target": "ex:msyn/reaction/dimethyl-ether-formation"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/109",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/6",
+            "quote": "The methanol as determined by fractionation was closely checked by the amounts indicated by the specific gravity determinations.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/claim/methanol-check-and-water",
+      "target": "ex:msyn/species/ch3oh"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/11",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/3",
+            "quote": "The catalyst was a mixture of reduced copper and chro- mium oxides, in which the atomic ratio of Cu to Cr was 3 to 1.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/2",
+            "quote": "It was considered that the chromium oxide of the re- duced catalyst might, in ad- dition to serving as a pro- moter, function effectively as a dehydrating catalyst toward the methanol formed from carbon monoxide and hydrogen.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "fraction_basis": "atom",
+        "role": "promoter",
+        "role_detail": "the authors considered that the chromium oxide might, in addition to serving as a promoter, act as a dehydrating catalyst toward methanol"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/catalyst/cu-cr-oxide-3-1",
+      "target": "ex:msyn/10.1021-ie50242a022/species/chromium-oxide"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/110",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/5",
+            "quote": "Obviously, in view of the form these curves take, more points between 300° and 340° C. would be of advantage in drawing more",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/claim/more-points-needed",
+      "target": "ex:msyn/10.1021-ie50242a022/test/table1-run-c"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/111",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/3",
+            "quote": "The forma- tion of methanol begins under 260° C. and rises in a typical way for an activity curve up to about 318-320° C. and falls away rather rapidly.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/claim/methanol-curve-shape",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/112",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/5",
+            "quote": "Obviously, in view of the form these curves take, more points between 300° and 340° C. would be of advantage in drawing more",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/claim/more-points-needed",
+      "target": "ex:msyn/10.1021-ie50242a022/test/table1-run-d"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/115",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/5",
+            "quote": "The methanol curve in Figure 2 shows such a break and presumably it is to be so explained, since it is evident that the production of the methyl ether likewise goes through a similar maximum.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/hypothesis/break-by-sodium",
+      "target": "ex:msyn/10.1021-ie50242a022/catalyst/cu-cr-oxide-3-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/116",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/4",
+            "quote": "it is reported that the presence of traces of sodium hydroxide or sodium nitrate in copper catalysts pro- motes them, and also causes them to lose their activity above the melting points of those materials (318° and 316° C.,",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/hypothesis/break-by-sodium",
+      "target": "ex:msyn/species/naoh"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/118",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/3",
+            "quote": "There is, of course, the thermodynamic possibility of the formation of methyl formate, as, for example, by",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/hypothesis/methyl-formate-route",
+      "target": "ex:msyn/10.1021-ie50242a022/reaction/methanol-co-to-methyl-formate"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/119",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/3",
+            "quote": "and its subsequent decomposition according to the reaction",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/hypothesis/methyl-formate-route",
+      "target": "ex:msyn/10.1021-ie50242a022/reaction/methyl-formate-decomposition"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/12",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "context": [
+          "ex:msyn/10.1021-ie50242a022/test/table1-run-a",
+          "ex:msyn/10.1021-ie50242a022/test/table1-run-b",
+          "ex:msyn/10.1021-ie50242a022/test/table1-run-c",
+          "ex:msyn/10.1021-ie50242a022/test/table1-run-d",
+          "ex:msyn/10.1021-ie50242a022/test/table1-run-e"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "quote": "A copper-chromium oxide catalyst in contact with a 2:1 hydrogen-carbon monoxide mixture has been found to yield, in addition to methanol, large quantities of dimethyl ether.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/catalyst/cu-cr-oxide-3-1",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/121",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/5",
+            "quote": "The methanol curve in Figure 2 shows such a break and presumably it is to be so explained, since it is evident that the production of the methyl ether likewise goes through a similar maximum.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "warrant": "the fall of conversion above about 318-320 °C forms the break to be explained"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-d",
+      "target": "ex:msyn/10.1021-ie50242a022/hypothesis/break-by-sodium"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/122",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/5",
+            "quote": "The methanol curve in Figure 2 shows such a break and presumably it is to be so explained, since it is evident that the production of the methyl ether likewise goes through a similar maximum.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "warrant": "the fall of conversion above about 318-320 °C forms the break to be explained"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-e",
+      "target": "ex:msyn/10.1021-ie50242a022/hypothesis/break-by-sodium"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/13",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "context": [
+          "ex:msyn/10.1021-ie50242a022/test/table1-run-a",
+          "ex:msyn/10.1021-ie50242a022/test/table1-run-b",
+          "ex:msyn/10.1021-ie50242a022/test/table1-run-c",
+          "ex:msyn/10.1021-ie50242a022/test/table1-run-d",
+          "ex:msyn/10.1021-ie50242a022/test/table1-run-e"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "quote": "The source of the ether is undoubtedly largely by Reaction 1.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "quote": "A copper-chromium oxide catalyst in contact with a 2:1 hydrogen-carbon monoxide mixture has been found to yield, in addition to methanol, large quantities of dimethyl ether.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/catalyst/cu-cr-oxide-3-1",
+      "target": "ex:msyn/reaction/dimethyl-ether-formation"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/14",
+      "type": "PRODUCES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "quote": "A copper-chromium oxide catalyst in contact with a 2:1 hydrogen-carbon monoxide mixture has been found to yield, in addition to methanol, large quantities of dimethyl ether.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/catalyst/cu-cr-oxide-3-1",
+      "target": "ex:msyn/species/ch3oh"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/15",
+      "type": "PRODUCES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "quote": "A copper-chromium oxide catalyst in contact with a 2:1 hydrogen-carbon monoxide mixture has been found to yield, in addition to methanol, large quantities of dimethyl ether.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/catalyst/cu-cr-oxide-3-1",
+      "target": "ex:msyn/species/ch3och3"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/16",
+      "type": "PRODUCES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/4",
+            "quote": "In view of the small quantity of carbon dioxide found and the practically equivalent quantity of hydrocarbons— methane containing a little ethane—together with the amounts of water found in the crude methanol,",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/4",
+            "quote": "not more than a slight amount of the ether obtained could have been pro- duced by any other reaction than by Reaction 1.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "note": "small quantities of hydrocarbons, methane containing a little ethane, were found"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/catalyst/cu-cr-oxide-3-1",
+      "target": "ex:msyn/species/ch4"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/17",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/4",
+            "quote": "Two hundred and fifty cubic centimeters (177 grams) of this catalyst were employed.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/sample/cu-cr-batch",
+      "target": "ex:msyn/10.1021-ie50242a022/catalyst/cu-cr-oxide-3-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/18",
+      "type": "PREPARED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/4",
+            "quote": "A boiling solution of copper and chromium nitrates in the atomic ratio of 3 Cu to 1 Cr was added slowly and with efficient stirring to a boiling solution of sodium hydroxide containing 6 per cent in excess of that calculated to pre- cipitate the metals.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/sample/cu-cr-batch",
+      "target": "ex:msyn/10.1021-ie50242a022/preparation/naoh-coprecipitation"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/19",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/4",
+            "quote": "A boiling solution of copper and chromium nitrates in the atomic ratio of 3 Cu to 1 Cr was added slowly and with efficient stirring to a boiling solution of sodium hydroxide containing 6 per cent in excess of that calculated to pre- cipitate the metals.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/sample/cu-cr-batch",
+      "target": "ex:msyn/species/cuno32"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/20",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/4",
+            "quote": "A boiling solution of copper and chromium nitrates in the atomic ratio of 3 Cu to 1 Cr was added slowly and with efficient stirring to a boiling solution of sodium hydroxide containing 6 per cent in excess of that calculated to pre- cipitate the metals.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/sample/cu-cr-batch",
+      "target": "ex:msyn/species/crno33"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/21",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/4",
+            "quote": "A boiling solution of copper and chromium nitrates in the atomic ratio of 3 Cu to 1 Cr was added slowly and with efficient stirring to a boiling solution of sodium hydroxide containing 6 per cent in excess of that calculated to pre- cipitate the metals.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "role": "precipitant"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/sample/cu-cr-batch",
+      "target": "ex:msyn/species/naoh"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/22",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/4",
+            "quote": "The moist precipitate was extruded to yield threads (2 mm. diameter), which were air-dried first at room tem- perature, broken into uni- form lengths, and dried at 105° C.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "order": 1
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/sample/cu-cr-batch",
+      "target": "ex:msyn/10.1021-ie50242a022/treatment/drying"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/23",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/5",
+            "quote": "The precipitate was reduced at 200-240° C. over a period of about 15 hours with a slow stream of a mixture of 19 parts of car- bon monoxide and 1 part hydrogen.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "order": 2
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/sample/cu-cr-batch",
+      "target": "ex:msyn/10.1021-ie50242a022/treatment/reduction-co-h2"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/24",
+      "type": "CHARACTERIZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/5",
+            "quote": "The mixed oxides lost on re- duction 21 per cent of their weight.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "state": "reduced"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/characterization/reduction-weight-loss",
+      "target": "ex:msyn/10.1021-ie50242a022/sample/cu-cr-batch"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/25",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/3",
+            "quote": "The gas was a 2:1 mixture of hydrogen and carbon monoxide, containing an average of 11 per cent of inerts (mainly nitrogen containing about 10 per cent carbon dioxide and traces of hydrocarbons) in the initial and make-up gas.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/feed/h2-co-2-1",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/26",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/3",
+            "quote": "The gas was a 2:1 mixture of hydrogen and carbon monoxide, containing an average of 11 per cent of inerts (mainly nitrogen containing about 10 per cent carbon dioxide and traces of hydrocarbons) in the initial and make-up gas.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/feed/h2-co-2-1",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/27",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/3",
+            "quote": "The gas was a 2:1 mixture of hydrogen and carbon monoxide, containing an average of 11 per cent of inerts (mainly nitrogen containing about 10 per cent carbon dioxide and traces of hydrocarbons) in the initial and make-up gas.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "fraction_basis": "not_reported",
+        "role": "diluent",
+        "role_detail": "main constituent of the inerts, which averaged 11 per cent of the gas"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/feed/h2-co-2-1",
+      "target": "ex:msyn/species/n2"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/28",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/3",
+            "quote": "The gas was a 2:1 mixture of hydrogen and carbon monoxide, containing an average of 11 per cent of inerts (mainly nitrogen containing about 10 per cent carbon dioxide and traces of hydrocarbons) in the initial and make-up gas.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "about 10 per cent",
+          "note": "per cent of the nitrogen-rich inerts, not of the whole gas",
+          "qualifier": "approximate",
+          "unit": "%",
+          "value": 10
+        },
+        "fraction_basis": "not_reported",
+        "role": "diluent"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/feed/h2-co-2-1",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/29",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/3",
+            "quote": "The gas was a 2:1 mixture of hydrogen and carbon monoxide, containing an average of 11 per cent of inerts (mainly nitrogen containing about 10 per cent carbon dioxide and traces of hydrocarbons) in the initial and make-up gas.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "role": "inert",
+        "role_detail": "traces in the inerts"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/feed/h2-co-2-1",
+      "target": "ex:msyn/10.1021-ie50242a022/species/hydrocarbons"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/30",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "Two hundred and fifty cubic centimeters (177 grams)",
+          "unit": "cc",
+          "value": 250
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/4",
+            "quote": "Two hundred and fifty cubic centimeters (177 grams) of this catalyst were employed.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/5",
+            "quote": "The precipitate was reduced at 200-240° C. over a period of about 15 hours with a slow stream of a mixture of 19 parts of car- bon monoxide and 1 part hydrogen.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "state": "reduced"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-a",
+      "target": "ex:msyn/10.1021-ie50242a022/sample/cu-cr-batch"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/31",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/3",
+            "quote": "The gas was a 2:1 mixture of hydrogen and carbon monoxide, containing an average of 11 per cent of inerts (mainly nitrogen containing about 10 per cent carbon dioxide and traces of hydrocarbons) in the initial and make-up gas.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-a",
+      "target": "ex:msyn/10.1021-ie50242a022/feed/h2-co-2-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/32",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "quote": "The apparatus and the preparation of the gas employed has been described in an earlier paper (S).",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-a",
+      "target": "ex:msyn/10.1021-ie50242a022/reactor/bureau-of-mines-apparatus"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/33",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I",
+            "passage": "10.1021-ie50242a022/p2/1",
+            "quote": "A 265.5 179 30.0 26.3 4.50 0.76 0.322 7.15 0.16 + 0.068 3.1 7.2 3.1",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "role": "main"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-a",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/34",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "quote": "The source of the ether is undoubtedly largely by Reaction 1.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "role": "side"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-a",
+      "target": "ex:msyn/reaction/dimethyl-ether-formation"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/35",
+      "type": "HAS_VARIABLE",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/6",
+            "quote": "Runs were made at five reaction temperatures between 265° and 355° C. The total gas pressure was maintained at 200 atmospheres and a space velocity of 3000 was employed in each run.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "level": {
+          "status": "present",
+          "as_reported": "265.5",
+          "unit": "°C",
+          "value": 265.5
+        },
+        "role": "factor"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-a",
+      "target": "ex:msyn/10.1021-ie50242a022/variable/temperature"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/36",
+      "type": "EXAMINES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/5",
+            "quote": "The methyl ether, by reason of its widely different boiling point, was easily separated.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "role": "product"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-a",
+      "target": "ex:msyn/species/ch3och3"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/37",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "Two hundred and fifty cubic centimeters (177 grams)",
+          "unit": "cc",
+          "value": 250
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/4",
+            "quote": "Two hundred and fifty cubic centimeters (177 grams) of this catalyst were employed.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/5",
+            "quote": "The precipitate was reduced at 200-240° C. over a period of about 15 hours with a slow stream of a mixture of 19 parts of car- bon monoxide and 1 part hydrogen.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "state": "reduced"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-b",
+      "target": "ex:msyn/10.1021-ie50242a022/sample/cu-cr-batch"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/38",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/3",
+            "quote": "The gas was a 2:1 mixture of hydrogen and carbon monoxide, containing an average of 11 per cent of inerts (mainly nitrogen containing about 10 per cent carbon dioxide and traces of hydrocarbons) in the initial and make-up gas.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-b",
+      "target": "ex:msyn/10.1021-ie50242a022/feed/h2-co-2-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/39",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "quote": "The apparatus and the preparation of the gas employed has been described in an earlier paper (S).",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-b",
+      "target": "ex:msyn/10.1021-ie50242a022/reactor/bureau-of-mines-apparatus"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/4",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/3",
+            "quote": "CHsOH + CO = H.COOCHs",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/reaction/methanol-co-to-methyl-formate",
+      "target": "ex:msyn/species/ch3oh"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/40",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I",
+            "passage": "10.1021-ie50242a022/p2/1",
+            "quote": "B 285.5 166 30.1 25.1 4.40 1.32 0.563 12.75 0.28 0.119 5.4 14.3 6.1",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "role": "main"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-b",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/41",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "quote": "The source of the ether is undoubtedly largely by Reaction 1.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "role": "side"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-b",
+      "target": "ex:msyn/reaction/dimethyl-ether-formation"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/42",
+      "type": "HAS_VARIABLE",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/6",
+            "quote": "Runs were made at five reaction temperatures between 265° and 355° C. The total gas pressure was maintained at 200 atmospheres and a space velocity of 3000 was employed in each run.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "level": {
+          "status": "present",
+          "as_reported": "285.5",
+          "unit": "°C",
+          "value": 285.5
+        },
+        "role": "factor"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-b",
+      "target": "ex:msyn/10.1021-ie50242a022/variable/temperature"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/43",
+      "type": "EXAMINES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/5",
+            "quote": "The methyl ether, by reason of its widely different boiling point, was easily separated.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "role": "product"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-b",
+      "target": "ex:msyn/species/ch3och3"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/44",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "Two hundred and fifty cubic centimeters (177 grams)",
+          "unit": "cc",
+          "value": 250
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/4",
+            "quote": "Two hundred and fifty cubic centimeters (177 grams) of this catalyst were employed.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/5",
+            "quote": "The precipitate was reduced at 200-240° C. over a period of about 15 hours with a slow stream of a mixture of 19 parts of car- bon monoxide and 1 part hydrogen.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "state": "reduced"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-c",
+      "target": "ex:msyn/10.1021-ie50242a022/sample/cu-cr-batch"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/45",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/3",
+            "quote": "The gas was a 2:1 mixture of hydrogen and carbon monoxide, containing an average of 11 per cent of inerts (mainly nitrogen containing about 10 per cent carbon dioxide and traces of hydrocarbons) in the initial and make-up gas.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-c",
+      "target": "ex:msyn/10.1021-ie50242a022/feed/h2-co-2-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/46",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "quote": "The apparatus and the preparation of the gas employed has been described in an earlier paper (S).",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-c",
+      "target": "ex:msyn/10.1021-ie50242a022/reactor/bureau-of-mines-apparatus"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/47",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I",
+            "passage": "10.1021-ie50242a022/p2/1",
+            "quote": "C 305 + 158 30.3 20.0 4.00 1.85 0.790 19.8 0.87 0.370 18.5 23.8 22.3",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "role": "main"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-c",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/48",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "quote": "The source of the ether is undoubtedly largely by Reaction 1.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "role": "side"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-c",
+      "target": "ex:msyn/reaction/dimethyl-ether-formation"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/49",
+      "type": "HAS_VARIABLE",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/6",
+            "quote": "Runs were made at five reaction temperatures between 265° and 355° C. The total gas pressure was maintained at 200 atmospheres and a space velocity of 3000 was employed in each run.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "level": {
+          "status": "present",
+          "as_reported": "305 +",
+          "unit": "°C",
+          "value": 305.0
+        },
+        "role": "factor"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-c",
+      "target": "ex:msyn/10.1021-ie50242a022/variable/temperature"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/5",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/3",
+            "quote": "CHsOH + CO = H.COOCHs",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/reaction/methanol-co-to-methyl-formate",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/50",
+      "type": "EXAMINES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/5",
+            "quote": "The methyl ether, by reason of its widely different boiling point, was easily separated.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "role": "product"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-c",
+      "target": "ex:msyn/species/ch3och3"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/51",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "Two hundred and fifty cubic centimeters (177 grams)",
+          "unit": "cc",
+          "value": 250
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/4",
+            "quote": "Two hundred and fifty cubic centimeters (177 grams) of this catalyst were employed.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/5",
+            "quote": "The precipitate was reduced at 200-240° C. over a period of about 15 hours with a slow stream of a mixture of 19 parts of car- bon monoxide and 1 part hydrogen.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "state": "reduced"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-d",
+      "target": "ex:msyn/10.1021-ie50242a022/sample/cu-cr-batch"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/52",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/3",
+            "quote": "The gas was a 2:1 mixture of hydrogen and carbon monoxide, containing an average of 11 per cent of inerts (mainly nitrogen containing about 10 per cent carbon dioxide and traces of hydrocarbons) in the initial and make-up gas.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-d",
+      "target": "ex:msyn/10.1021-ie50242a022/feed/h2-co-2-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/53",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "quote": "The apparatus and the preparation of the gas employed has been described in an earlier paper (S).",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-d",
+      "target": "ex:msyn/10.1021-ie50242a022/reactor/bureau-of-mines-apparatus"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/54",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I",
+            "passage": "10.1021-ie50242a022/p2/1",
+            "quote": "D 337 159 29.9 18.0 3.79 1.37 0.584 15.4 0.87 0.370 18.5 18.4- 22.0",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "role": "main"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-d",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/55",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "quote": "The source of the ether is undoubtedly largely by Reaction 1.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "role": "side"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-d",
+      "target": "ex:msyn/reaction/dimethyl-ether-formation"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/56",
+      "type": "HAS_VARIABLE",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/6",
+            "quote": "Runs were made at five reaction temperatures between 265° and 355° C. The total gas pressure was maintained at 200 atmospheres and a space velocity of 3000 was employed in each run.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "level": {
+          "status": "present",
+          "as_reported": "337",
+          "unit": "°C",
+          "value": 337.0
+        },
+        "role": "factor"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-d",
+      "target": "ex:msyn/10.1021-ie50242a022/variable/temperature"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/57",
+      "type": "EXAMINES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/5",
+            "quote": "The methyl ether, by reason of its widely different boiling point, was easily separated.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "role": "product"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-d",
+      "target": "ex:msyn/species/ch3och3"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/58",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "Two hundred and fifty cubic centimeters (177 grams)",
+          "unit": "cc",
+          "value": 250
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/4",
+            "quote": "Two hundred and fifty cubic centimeters (177 grams) of this catalyst were employed.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/5",
+            "quote": "The precipitate was reduced at 200-240° C. over a period of about 15 hours with a slow stream of a mixture of 19 parts of car- bon monoxide and 1 part hydrogen.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "state": "reduced"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-e",
+      "target": "ex:msyn/10.1021-ie50242a022/sample/cu-cr-batch"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/59",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/3",
+            "quote": "The gas was a 2:1 mixture of hydrogen and carbon monoxide, containing an average of 11 per cent of inerts (mainly nitrogen containing about 10 per cent carbon dioxide and traces of hydrocarbons) in the initial and make-up gas.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-e",
+      "target": "ex:msyn/10.1021-ie50242a022/feed/h2-co-2-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/6",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/3",
+            "quote": "CHsOH + CO = H.COOCHs",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "role": "product"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/reaction/methanol-co-to-methyl-formate",
+      "target": "ex:msyn/species/hcooch3"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/60",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "quote": "The apparatus and the preparation of the gas employed has been described in an earlier paper (S).",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-e",
+      "target": "ex:msyn/10.1021-ie50242a022/reactor/bureau-of-mines-apparatus"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/61",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I",
+            "passage": "10.1021-ie50242a022/p2/1",
+            "quote": "E 353 153 29.9 16.1 3.56 0.80 0.341 9.6 0.48 0.205 11.4 +",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "role": "main"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-e",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/62",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "quote": "The source of the ether is undoubtedly largely by Reaction 1.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "role": "side"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-e",
+      "target": "ex:msyn/reaction/dimethyl-ether-formation"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/63",
+      "type": "HAS_VARIABLE",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/6",
+            "quote": "Runs were made at five reaction temperatures between 265° and 355° C. The total gas pressure was maintained at 200 atmospheres and a space velocity of 3000 was employed in each run.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "level": {
+          "status": "present",
+          "as_reported": "353",
+          "unit": "°C",
+          "value": 353.0
+        },
+        "role": "factor"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-e",
+      "target": "ex:msyn/10.1021-ie50242a022/variable/temperature"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/64",
+      "type": "EXAMINES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/5",
+            "quote": "The methyl ether, by reason of its widely different boiling point, was easily separated.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "role": "product"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-e",
+      "target": "ex:msyn/species/ch3och3"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/66",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "quote": "A copper-chromium oxide catalyst in contact with a 2:1 hydrogen-carbon monoxide mixture has been found to yield, in addition to methanol, large quantities of dimethyl ether.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "figure",
+            "locator": "p. 2, Figure 2",
+            "passage": "10.1021-ie50242a022/p2/5",
+            "quote": "Figure 2—Conversion of Carbon Monoxide to Methanol and Methyl Ether in Mol Per Cent",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-a",
+      "target": "ex:msyn/10.1021-ie50242a022/claim/cu-cr-yields-much-ether"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/67",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "quote": "A copper-chromium oxide catalyst in contact with a 2:1 hydrogen-carbon monoxide mixture has been found to yield, in addition to methanol, large quantities of dimethyl ether.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "figure",
+            "locator": "p. 2, Figure 2",
+            "passage": "10.1021-ie50242a022/p2/5",
+            "quote": "Figure 2—Conversion of Carbon Monoxide to Methanol and Methyl Ether in Mol Per Cent",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-b",
+      "target": "ex:msyn/10.1021-ie50242a022/claim/cu-cr-yields-much-ether"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/68",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "quote": "A copper-chromium oxide catalyst in contact with a 2:1 hydrogen-carbon monoxide mixture has been found to yield, in addition to methanol, large quantities of dimethyl ether.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "figure",
+            "locator": "p. 2, Figure 2",
+            "passage": "10.1021-ie50242a022/p2/5",
+            "quote": "Figure 2—Conversion of Carbon Monoxide to Methanol and Methyl Ether in Mol Per Cent",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-c",
+      "target": "ex:msyn/10.1021-ie50242a022/claim/cu-cr-yields-much-ether"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/69",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "quote": "A copper-chromium oxide catalyst in contact with a 2:1 hydrogen-carbon monoxide mixture has been found to yield, in addition to methanol, large quantities of dimethyl ether.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "figure",
+            "locator": "p. 2, Figure 2",
+            "passage": "10.1021-ie50242a022/p2/5",
+            "quote": "Figure 2—Conversion of Carbon Monoxide to Methanol and Methyl Ether in Mol Per Cent",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-d",
+      "target": "ex:msyn/10.1021-ie50242a022/claim/cu-cr-yields-much-ether"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/7",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/3",
+            "quote": "2HCOOCH3 = C02 + CH3OCH3 + H2CO (or H2 + CO) (4)",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/reaction/methyl-formate-decomposition",
+      "target": "ex:msyn/species/hcooch3"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/70",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "quote": "A copper-chromium oxide catalyst in contact with a 2:1 hydrogen-carbon monoxide mixture has been found to yield, in addition to methanol, large quantities of dimethyl ether.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "figure",
+            "locator": "p. 2, Figure 2",
+            "passage": "10.1021-ie50242a022/p2/5",
+            "quote": "Figure 2—Conversion of Carbon Monoxide to Methanol and Methyl Ether in Mol Per Cent",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-e",
+      "target": "ex:msyn/10.1021-ie50242a022/claim/cu-cr-yields-much-ether"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/71",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/7",
+            "quote": "The region of maxi- mal conversion was 315° to 320° C., and the conversions were of the order of 30 mol per cent, that to ether being the larger.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "figure",
+            "locator": "p. 2, Figure 2",
+            "passage": "10.1021-ie50242a022/p2/5",
+            "quote": "Figure 2—Conversion of Carbon Monoxide to Methanol and Methyl Ether in Mol Per Cent",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-a",
+      "target": "ex:msyn/10.1021-ie50242a022/claim/max-conversion-315-320"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/72",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/7",
+            "quote": "The region of maxi- mal conversion was 315° to 320° C., and the conversions were of the order of 30 mol per cent, that to ether being the larger.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "figure",
+            "locator": "p. 2, Figure 2",
+            "passage": "10.1021-ie50242a022/p2/5",
+            "quote": "Figure 2—Conversion of Carbon Monoxide to Methanol and Methyl Ether in Mol Per Cent",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-b",
+      "target": "ex:msyn/10.1021-ie50242a022/claim/max-conversion-315-320"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/73",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/7",
+            "quote": "The region of maxi- mal conversion was 315° to 320° C., and the conversions were of the order of 30 mol per cent, that to ether being the larger.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "figure",
+            "locator": "p. 2, Figure 2",
+            "passage": "10.1021-ie50242a022/p2/5",
+            "quote": "Figure 2—Conversion of Carbon Monoxide to Methanol and Methyl Ether in Mol Per Cent",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-c",
+      "target": "ex:msyn/10.1021-ie50242a022/claim/max-conversion-315-320"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/74",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/7",
+            "quote": "The region of maxi- mal conversion was 315° to 320° C., and the conversions were of the order of 30 mol per cent, that to ether being the larger.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "figure",
+            "locator": "p. 2, Figure 2",
+            "passage": "10.1021-ie50242a022/p2/5",
+            "quote": "Figure 2—Conversion of Carbon Monoxide to Methanol and Methyl Ether in Mol Per Cent",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-d",
+      "target": "ex:msyn/10.1021-ie50242a022/claim/max-conversion-315-320"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/75",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50242a022/p1/7",
+            "quote": "The region of maxi- mal conversion was 315° to 320° C., and the conversions were of the order of 30 mol per cent, that to ether being the larger.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "figure",
+            "locator": "p. 2, Figure 2",
+            "passage": "10.1021-ie50242a022/p2/5",
+            "quote": "Figure 2—Conversion of Carbon Monoxide to Methanol and Methyl Ether in Mol Per Cent",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-e",
+      "target": "ex:msyn/10.1021-ie50242a022/claim/max-conversion-315-320"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/76",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/3",
+            "quote": "The forma- tion of methanol begins under 260° C. and rises in a typical way for an activity curve up to about 318-320° C. and falls away rather rapidly.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "figure",
+            "locator": "p. 2, Figure 2",
+            "passage": "10.1021-ie50242a022/p2/5",
+            "quote": "Figure 2—Conversion of Carbon Monoxide to Methanol and Methyl Ether in Mol Per Cent",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-a",
+      "target": "ex:msyn/10.1021-ie50242a022/claim/methanol-curve-shape"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/77",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/3",
+            "quote": "The forma- tion of methanol begins under 260° C. and rises in a typical way for an activity curve up to about 318-320° C. and falls away rather rapidly.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "figure",
+            "locator": "p. 2, Figure 2",
+            "passage": "10.1021-ie50242a022/p2/5",
+            "quote": "Figure 2—Conversion of Carbon Monoxide to Methanol and Methyl Ether in Mol Per Cent",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-b",
+      "target": "ex:msyn/10.1021-ie50242a022/claim/methanol-curve-shape"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/78",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/3",
+            "quote": "The forma- tion of methanol begins under 260° C. and rises in a typical way for an activity curve up to about 318-320° C. and falls away rather rapidly.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "figure",
+            "locator": "p. 2, Figure 2",
+            "passage": "10.1021-ie50242a022/p2/5",
+            "quote": "Figure 2—Conversion of Carbon Monoxide to Methanol and Methyl Ether in Mol Per Cent",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-c",
+      "target": "ex:msyn/10.1021-ie50242a022/claim/methanol-curve-shape"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/79",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/3",
+            "quote": "The forma- tion of methanol begins under 260° C. and rises in a typical way for an activity curve up to about 318-320° C. and falls away rather rapidly.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "figure",
+            "locator": "p. 2, Figure 2",
+            "passage": "10.1021-ie50242a022/p2/5",
+            "quote": "Figure 2—Conversion of Carbon Monoxide to Methanol and Methyl Ether in Mol Per Cent",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-d",
+      "target": "ex:msyn/10.1021-ie50242a022/claim/methanol-curve-shape"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/8",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/3",
+            "quote": "2HCOOCH3 = C02 + CH3OCH3 + H2CO (or H2 + CO) (4)",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "role": "product"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/reaction/methyl-formate-decomposition",
+      "target": "ex:msyn/species/ch3och3"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/80",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/3",
+            "quote": "The forma- tion of methanol begins under 260° C. and rises in a typical way for an activity curve up to about 318-320° C. and falls away rather rapidly.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "figure",
+            "locator": "p. 2, Figure 2",
+            "passage": "10.1021-ie50242a022/p2/5",
+            "quote": "Figure 2—Conversion of Carbon Monoxide to Methanol and Methyl Ether in Mol Per Cent",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-e",
+      "target": "ex:msyn/10.1021-ie50242a022/claim/methanol-curve-shape"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/81",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/5",
+            "quote": "the ether formation begins below the lowest temperature (265° C.) and increases moderately with temperature at first and then rapidly be- tween about 290° and 310° C.,",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/5",
+            "quote": "where it enters a maximal region and then falls away similarly to the decrease of methanol formation, upon which it is obviously dependent.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "figure",
+            "locator": "p. 2, Figure 2",
+            "passage": "10.1021-ie50242a022/p2/5",
+            "quote": "Figure 2—Conversion of Carbon Monoxide to Methanol and Methyl Ether in Mol Per Cent",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-a",
+      "target": "ex:msyn/10.1021-ie50242a022/claim/ether-curve-shape"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/82",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/5",
+            "quote": "the ether formation begins below the lowest temperature (265° C.) and increases moderately with temperature at first and then rapidly be- tween about 290° and 310° C.,",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/5",
+            "quote": "where it enters a maximal region and then falls away similarly to the decrease of methanol formation, upon which it is obviously dependent.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "figure",
+            "locator": "p. 2, Figure 2",
+            "passage": "10.1021-ie50242a022/p2/5",
+            "quote": "Figure 2—Conversion of Carbon Monoxide to Methanol and Methyl Ether in Mol Per Cent",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-b",
+      "target": "ex:msyn/10.1021-ie50242a022/claim/ether-curve-shape"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/83",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/5",
+            "quote": "the ether formation begins below the lowest temperature (265° C.) and increases moderately with temperature at first and then rapidly be- tween about 290° and 310° C.,",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/5",
+            "quote": "where it enters a maximal region and then falls away similarly to the decrease of methanol formation, upon which it is obviously dependent.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "figure",
+            "locator": "p. 2, Figure 2",
+            "passage": "10.1021-ie50242a022/p2/5",
+            "quote": "Figure 2—Conversion of Carbon Monoxide to Methanol and Methyl Ether in Mol Per Cent",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-c",
+      "target": "ex:msyn/10.1021-ie50242a022/claim/ether-curve-shape"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/84",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/5",
+            "quote": "the ether formation begins below the lowest temperature (265° C.) and increases moderately with temperature at first and then rapidly be- tween about 290° and 310° C.,",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/5",
+            "quote": "where it enters a maximal region and then falls away similarly to the decrease of methanol formation, upon which it is obviously dependent.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "figure",
+            "locator": "p. 2, Figure 2",
+            "passage": "10.1021-ie50242a022/p2/5",
+            "quote": "Figure 2—Conversion of Carbon Monoxide to Methanol and Methyl Ether in Mol Per Cent",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-d",
+      "target": "ex:msyn/10.1021-ie50242a022/claim/ether-curve-shape"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/85",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/5",
+            "quote": "the ether formation begins below the lowest temperature (265° C.) and increases moderately with temperature at first and then rapidly be- tween about 290° and 310° C.,",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/5",
+            "quote": "where it enters a maximal region and then falls away similarly to the decrease of methanol formation, upon which it is obviously dependent.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "figure",
+            "locator": "p. 2, Figure 2",
+            "passage": "10.1021-ie50242a022/p2/5",
+            "quote": "Figure 2—Conversion of Carbon Monoxide to Methanol and Methyl Ether in Mol Per Cent",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-e",
+      "target": "ex:msyn/10.1021-ie50242a022/claim/ether-curve-shape"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/86",
+      "type": "CONTRADICTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/4",
+            "quote": "In view of the small quantity of carbon dioxide found and the practically equivalent quantity of hydrocarbons— methane containing a little ethane—together with the amounts of water found in the crude methanol,",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/4",
+            "quote": "not more than a slight amount of the ether obtained could have been pro- duced by any other reaction than by Reaction 1.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "warrant": "small CO2, near-equivalent hydrocarbons and the water in the crude methanol leave little room for ether by another route"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-a",
+      "target": "ex:msyn/10.1021-ie50242a022/hypothesis/methyl-formate-route"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/87",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/4",
+            "quote": "In view of the small quantity of carbon dioxide found and the practically equivalent quantity of hydrocarbons— methane containing a little ethane—together with the amounts of water found in the crude methanol,",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/4",
+            "quote": "not more than a slight amount of the ether obtained could have been pro- duced by any other reaction than by Reaction 1.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-a",
+      "target": "ex:msyn/10.1021-ie50242a022/claim/ether-via-reaction-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/89",
+      "type": "CONTRADICTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/4",
+            "quote": "In view of the small quantity of carbon dioxide found and the practically equivalent quantity of hydrocarbons— methane containing a little ethane—together with the amounts of water found in the crude methanol,",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/4",
+            "quote": "not more than a slight amount of the ether obtained could have been pro- duced by any other reaction than by Reaction 1.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "warrant": "small CO2, near-equivalent hydrocarbons and the water in the crude methanol leave little room for ether by another route"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-b",
+      "target": "ex:msyn/10.1021-ie50242a022/hypothesis/methyl-formate-route"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/9",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/3",
+            "quote": "2HCOOCH3 = C02 + CH3OCH3 + H2CO (or H2 + CO) (4)",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "role": "product"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/reaction/methyl-formate-decomposition",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/90",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/4",
+            "quote": "In view of the small quantity of carbon dioxide found and the practically equivalent quantity of hydrocarbons— methane containing a little ethane—together with the amounts of water found in the crude methanol,",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/4",
+            "quote": "not more than a slight amount of the ether obtained could have been pro- duced by any other reaction than by Reaction 1.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-b",
+      "target": "ex:msyn/10.1021-ie50242a022/claim/ether-via-reaction-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/92",
+      "type": "CONTRADICTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/4",
+            "quote": "In view of the small quantity of carbon dioxide found and the practically equivalent quantity of hydrocarbons— methane containing a little ethane—together with the amounts of water found in the crude methanol,",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/4",
+            "quote": "not more than a slight amount of the ether obtained could have been pro- duced by any other reaction than by Reaction 1.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "warrant": "small CO2, near-equivalent hydrocarbons and the water in the crude methanol leave little room for ether by another route"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-c",
+      "target": "ex:msyn/10.1021-ie50242a022/hypothesis/methyl-formate-route"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/93",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/4",
+            "quote": "In view of the small quantity of carbon dioxide found and the practically equivalent quantity of hydrocarbons— methane containing a little ethane—together with the amounts of water found in the crude methanol,",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/4",
+            "quote": "not more than a slight amount of the ether obtained could have been pro- duced by any other reaction than by Reaction 1.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-c",
+      "target": "ex:msyn/10.1021-ie50242a022/claim/ether-via-reaction-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/95",
+      "type": "CONTRADICTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/4",
+            "quote": "In view of the small quantity of carbon dioxide found and the practically equivalent quantity of hydrocarbons— methane containing a little ethane—together with the amounts of water found in the crude methanol,",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/4",
+            "quote": "not more than a slight amount of the ether obtained could have been pro- duced by any other reaction than by Reaction 1.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "warrant": "small CO2, near-equivalent hydrocarbons and the water in the crude methanol leave little room for ether by another route"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-d",
+      "target": "ex:msyn/10.1021-ie50242a022/hypothesis/methyl-formate-route"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/96",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/4",
+            "quote": "In view of the small quantity of carbon dioxide found and the practically equivalent quantity of hydrocarbons— methane containing a little ethane—together with the amounts of water found in the crude methanol,",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/4",
+            "quote": "not more than a slight amount of the ether obtained could have been pro- duced by any other reaction than by Reaction 1.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-d",
+      "target": "ex:msyn/10.1021-ie50242a022/claim/ether-via-reaction-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/98",
+      "type": "CONTRADICTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/4",
+            "quote": "In view of the small quantity of carbon dioxide found and the practically equivalent quantity of hydrocarbons— methane containing a little ethane—together with the amounts of water found in the crude methanol,",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/4",
+            "quote": "not more than a slight amount of the ether obtained could have been pro- duced by any other reaction than by Reaction 1.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ],
+        "warrant": "small CO2, near-equivalent hydrocarbons and the water in the crude methanol leave little room for ether by another route"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-e",
+      "target": "ex:msyn/10.1021-ie50242a022/hypothesis/methyl-formate-route"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/link/99",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/4",
+            "quote": "In view of the small quantity of carbon dioxide found and the practically equivalent quantity of hydrocarbons— methane containing a little ethane—together with the amounts of water found in the crude methanol,",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50242a022/p2/4",
+            "quote": "not more than a slight amount of the ether obtained could have been pro- duced by any other reaction than by Reaction 1.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-e",
+      "target": "ex:msyn/10.1021-ie50242a022/claim/ether-via-reaction-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/preparation/naoh-coprecipitation/reported-in/10.1021-ie50242a022",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/preparation/naoh-coprecipitation",
+      "target": "ex:msyn/source/10.1021-ie50242a022"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/reaction/methanol-co-to-methyl-formate/reported-in/10.1021-ie50242a022",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/reaction/methanol-co-to-methyl-formate",
+      "target": "ex:msyn/source/10.1021-ie50242a022"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/reaction/methyl-formate-decomposition/reported-in/10.1021-ie50242a022",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/reaction/methyl-formate-decomposition",
+      "target": "ex:msyn/source/10.1021-ie50242a022"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/reactor/bureau-of-mines-apparatus/reported-in/10.1021-ie50242a022",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/reactor/bureau-of-mines-apparatus",
+      "target": "ex:msyn/source/10.1021-ie50242a022"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/sample/cu-cr-batch/reported-in/10.1021-ie50242a022",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/sample/cu-cr-batch",
+      "target": "ex:msyn/source/10.1021-ie50242a022"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/species/chromium-oxide/reported-in/10.1021-ie50242a022",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/species/chromium-oxide",
+      "target": "ex:msyn/source/10.1021-ie50242a022"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/species/hydrocarbons/reported-in/10.1021-ie50242a022",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/species/hydrocarbons",
+      "target": "ex:msyn/source/10.1021-ie50242a022"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/species/reduced-copper-oxide/reported-in/10.1021-ie50242a022",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/species/reduced-copper-oxide",
+      "target": "ex:msyn/source/10.1021-ie50242a022"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/test/table1-run-a/reported-in/10.1021-ie50242a022",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 1, abstract",
+          "p. 2, Table I",
+          "p. 2, Table I, run A"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-a",
+      "target": "ex:msyn/source/10.1021-ie50242a022"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/test/table1-run-b/reported-in/10.1021-ie50242a022",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 1, abstract",
+          "p. 2, Table I",
+          "p. 2, Table I, run B"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-b",
+      "target": "ex:msyn/source/10.1021-ie50242a022"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/test/table1-run-c/reported-in/10.1021-ie50242a022",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 1, abstract",
+          "p. 2, Table I",
+          "p. 2, Table I, run C"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-c",
+      "target": "ex:msyn/source/10.1021-ie50242a022"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/test/table1-run-d/reported-in/10.1021-ie50242a022",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 1, abstract",
+          "p. 2, Table I",
+          "p. 2, Table I, run D"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-d",
+      "target": "ex:msyn/source/10.1021-ie50242a022"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/test/table1-run-e/reported-in/10.1021-ie50242a022",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 1, abstract",
+          "p. 2, Table I",
+          "p. 2, Table I, run E"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/test/table1-run-e",
+      "target": "ex:msyn/source/10.1021-ie50242a022"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/treatment/drying/reported-in/10.1021-ie50242a022",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/treatment/drying",
+      "target": "ex:msyn/source/10.1021-ie50242a022"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/treatment/reduction-co-h2/reported-in/10.1021-ie50242a022",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/treatment/reduction-co-h2",
+      "target": "ex:msyn/source/10.1021-ie50242a022"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50242a022/variable/temperature/reported-in/10.1021-ie50242a022",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50242a022/variable/temperature",
+      "target": "ex:msyn/source/10.1021-ie50242a022"
+    },
+    {
+      "id": "ex:msyn/source/10.1021-ie50242a022/authored-by/1",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 1,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/10.1021-ie50242a022",
+      "target": "ex:msyn/person/ralph-l-brown"
+    },
+    {
+      "id": "ex:msyn/source/10.1021-ie50242a022/authored-by/2",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 2,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/10.1021-ie50242a022",
+      "target": "ex:msyn/person/a-e-galloway"
+    },
+    {
+      "id": "ex:msyn/species/c2h6/reported-in/10.1021-ie50242a022",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/c2h6",
+      "target": "ex:msyn/source/10.1021-ie50242a022"
+    },
+    {
+      "id": "ex:msyn/species/naoh/reported-in/10.1021-ie50242a022",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/naoh",
+      "target": "ex:msyn/source/10.1021-ie50242a022"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/10.1021-ie50242a022"
+}

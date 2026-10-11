@@ -1,0 +1,2717 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/source/us1774432a",
+      "label": "Source",
+      "props": {
+        "name": "Catalysts for the catalytic production of methanol and other oxygenated organic &hellip;",
+        "kind": "patent",
+        "description": "Published 1930-08-26 (grant date printed on the patent (agrees with the USPTO issue-year table)); in scope: before the 1966-01-01 cutoff. Text: 2 pages ocr (tesseract 5.5.3 (eng, 300 dpi, 2 columns)). Text not redistributed.",
+        "identifiers": {
+          "patent": "US1774432A"
+        },
+        "licence": "US patent; not subject to copyright",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "Catalysts for the catalytic production of methanol and other oxygenated organic &hellip;",
+        "url": "https://patents.google.com/patent/US1774432A",
+        "year": 1930
+      }
+    },
+    {
+      "id": "ex:msyn/us1774432a/catalyst/example-1",
+      "label": "Catalyst",
+      "props": {
+        "name": "Example 1: basic zinc carbonate digested with chromic acid",
+        "catalyst_family": "not_reported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example 1",
+            "passage": "us1774432a/p1/3",
+            "quote": "The moist precipitate of basic zinc carbonate is then",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Example 1",
+            "note": "'CrQ;' = 'CrO3'",
+            "passage": "us1774432a/p1/3",
+            "quote": "digested with a solution of 95 gms of chromic _ acid (CrQ;) in 9 litres of water.",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Example 1",
+            "passage": "us1774432a/p1/3",
+            "quote": "is filtered off, dried. and formed. into _ suitable granules or, pellets for introduction",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "generality": "particular"
+      }
+    },
+    {
+      "id": "ex:msyn/us1774432a/catalyst/example-2",
+      "label": "Catalyst",
+      "props": {
+        "name": "Example 2: coprecipitate of zinc sulphate, soda ash and sodium bichromate",
+        "catalyst_family": "not_reported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example 2",
+            "passage": "us1774432a/p1/5",
+            "quote": "A solution of 40 gms of zinc sulphate is added to a solution of 15 gms of soda ash and 11 gms of sodium bichromate, the total volume of solution being about 9—10 litres.",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Example 2",
+            "passage": "us1774432a/p1/5",
+            "quote": "After boiling for several minutes the precipi- tate is filtered off and washed and dried. It is then suitable for introduction into the. catalytic apparatus.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "generality": "particular"
+      }
+    },
+    {
+      "id": "ex:msyn/us1774432a/catalyst/prior-zn-cr-oxides",
+      "label": "Catalyst",
+      "props": {
+        "name": "compositions of zinc and chromium oxides (prior proposals)",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1774432a/p1/1",
+            "quote": "taining zinc and chromium oxides containing various ratios of zinc and chromium, and it has been proposed to prepare these in various ways,",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "generality": "kind",
+        "note": "cited as previously proposed"
+      }
+    },
+    {
+      "id": "ex:msyn/us1774432a/catalyst/zn-cr-from-zinc-carbonate",
+      "label": "Catalyst",
+      "props": {
+        "name": "zinc-chromium catalyst prepared from a zinc carbonate (preferred Zn:Cr 9:1)",
+        "catalyst_family": "not_reported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'zine' = 'zinc'",
+            "passage": "us1774432a/p1/1",
+            "quote": "way to prepare these catalysts is to employ zine carbonate or basic zine carbonate as a basis for the preparations of zinc-chromium compositions, especially by the reaction be- tween the zinc carbonate or basic zinc carbon-",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1774432a/p1/1",
+            "quote": "ate. and a soluble chromium compound.",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1774432a/p1/2",
+            "quote": "Such catalysts aré particularly effective when the molecular ratio of zinc to chromium is nine to one (Zn: Cr).",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "generality": "kind",
+        "properties": {
+          "zn_cr_molar_ratio_preferred": {
+            "status": "present",
+            "as_reported": "nine to one (Zn: Cr)",
+            "basis": "molecular ratio Zn:Cr",
+            "note": "preferred; 'particularly effective'",
+            "unit": "1",
+            "value": 9
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us1774432a/claim/alkali-higher-alcohols",
+      "label": "Claim",
+      "props": {
+        "name": "alkali salts + slower gas + higher temperature give higher alcohols",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1774432a/p1/6",
+            "quote": "When the catalyst contains soluble alkali salts and when the gas current is slower and the temperature somewhat higher, higher al- cohols and other organic compounds are. pro- duced.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "When the catalyst contains soluble alkali salts, and the gas current is slower and the temperature somewhat higher, higher alcohols and other organic compounds are produced."
+      }
+    },
+    {
+      "id": "ex:msyn/us1774432a/claim/careful-reduction",
+      "label": "Claim",
+      "props": {
+        "name": "reduce carefully, avoid overheating",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1774432a/p1/6",
+            "quote": "The reduction of the catalyst prior to its use Should be carried out as carefully as pos- sible with strict avoidance of-overheating.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The reduction of the catalyst before use should be carried out as carefully as possible with strict avoidance of overheating."
+      }
+    },
+    {
+      "id": "ex:msyn/us1774432a/claim/carrier",
+      "label": "Claim",
+      "props": {
+        "name": "zinc carbonate may be precipitated on asbestos or pumice",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1774432a/p1/3",
+            "quote": "The zinc carbonate may also be precipitated on a carrier such as asbestos or pumice, by impregnating same with the solution of zinc sulphate and then treating with a soluble",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1774432a/p1/5",
+            "quote": "then be treated with chromic acid solution as before.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The zinc carbonate may also be precipitated on a carrier such as asbestos or pumice, by impregnating it with zinc sulphate solution and treating with a soluble carbonate; the carrier is then treated with chromic acid solution as before."
+      }
+    },
+    {
+      "id": "ex:msyn/us1774432a/claim/chromic-acid-excess",
+      "label": "Claim",
+      "props": {
+        "name": "only about 20% of the chromic acid is fixed; the excess is necessary",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example 1",
+            "passage": "us1774432a/p1/5",
+            "quote": "above represents a considerable excess, since",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Example 1",
+            "passage": "us1774432a/p1/5",
+            "quote": "only about 20% is fixed by the zinc carbonate.",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Example 1",
+            "passage": "us1774432a/p1/5",
+            "quote": "The excess, however, is necessary in the meth-",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Example 1",
+            "passage": "us1774432a/p1/5",
+            "quote": "as if smaller proportions are employed a cor- respondingly smaller amount is fixed by the",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The chromic acid of Example 1 is a considerable excess, since only about 20% is fixed by the zinc carbonate; the excess is necessary in this method, as smaller proportions give correspondingly smaller amounts fixed."
+      }
+    },
+    {
+      "id": "ex:msyn/us1774432a/claim/chromium-range",
+      "label": "Claim",
+      "props": {
+        "name": "catalysts with more or less chromium, e.g. 2 wt%, included",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1774432a/p1/6",
+            "quote": "The in- vention also includes catalysts prepared as above and containing more or less chromium e. g. 2% by weight of the finished catalyst.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The invention also includes catalysts prepared as above containing more or less chromium, e.g. 2% by weight of the finished catalyst."
+      }
+    },
+    {
+      "id": "ex:msyn/us1774432a/claim/patent-claim-1",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 1",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, claim 1",
+            "passage": "us1774432a/p1/7",
+            "quote": "The process.of preparing a catalyst for.",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 1",
+            "passage": "us1774432a/p2/1",
+            "quote": "pounds, particularly methanol, from carbon monoxide and hydrogen which includes the step of heating a mixture containing a zinc carbonate and a zine chromate to decompose the carbonate.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The process of preparing a catalyst for the production of oxygenated organic compounds, particularly methanol, from carbon monoxide and hydrogen which includes the step of heating a mixture containing a zinc carbonate and a zinc chromate to decompose the carbonate."
+      }
+    },
+    {
+      "id": "ex:msyn/us1774432a/claim/patent-claim-10",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 10",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 10",
+            "passage": "us1774432a/p2/4",
+            "quote": "10. Catalyst consisting of the heated and",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 10",
+            "passage": "us1774432a/p2/4",
+            "quote": "reduced reaction product of a zinc salt, a",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 10",
+            "passage": "us1774432a/p2/4",
+            "quote": "earbonate and a salt.of chromic acid in which",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 10",
+            "passage": "us1774432a/p2/4",
+            "quote": "the molecular ratio of zinc to chromium Js",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 10",
+            "note": "reads 'about nine to one'",
+            "passage": "us1774432a/p2/4",
+            "quote": "gbouthinetoone",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Catalyst consisting of the heated and reduced reaction product of a zinc salt, a carbonate and a salt of chromic acid in which the molecular ratio of zinc to chromium is about nine to one."
+      }
+    },
+    {
+      "id": "ex:msyn/us1774432a/claim/patent-claim-11",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 11",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 11",
+            "passage": "us1774432a/p2/1",
+            "quote": "Process of preparing a catalyst for the",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 11",
+            "passage": "us1774432a/p2/4",
+            "quote": "production’ of oxygenated organic com:",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 11",
+            "passage": "us1774432a/p2/4",
+            "quote": "step of heating a mixture contaliing a zinc carbonate and a chromium compound, not chemically changed by heat, so as to decom-",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 11",
+            "passage": "us1774432a/p2/4",
+            "quote": "pose the zine carbonate.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Process of preparing a catalyst for the production of oxygenated organic compounds, particularly methanol, from carbon monoxide and hydrogen which includes the step of heating a mixture containing a zinc carbonate and a chromium compound, not chemically changed by heat, so as to decompose the zinc carbonate."
+      }
+    },
+    {
+      "id": "ex:msyn/us1774432a/claim/patent-claim-2",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 2",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 2",
+            "passage": "us1774432a/p2/1",
+            "quote": "Monoxide and’ hydrogen, which consists 1n heating a mixture containing a zinc carbonate",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 2",
+            "passage": "us1774432a/p2/1",
+            "quote": "and a zinc chromate to decompose the carbon- ate in presence of a reducing gas.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The process of preparing a catalyst for the production of oxygenated organic compounds, particularly methanol, from carbon monoxide and hydrogen, which consists in heating a mixture containing a zinc carbonate and a zinc chromate to decompose the carbonate in presence of a reducing gas."
+      }
+    },
+    {
+      "id": "ex:msyn/us1774432a/claim/patent-claim-3",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 3",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 3",
+            "passage": "us1774432a/p2/1",
+            "quote": "3. The process of preparing a catalyst for the production of oxygenated organic com. pounds, particularly methanol, from carbon monoxide and hydrogen which consists in heating a mixture containing a zinc carbonate",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 3",
+            "passage": "us1774432a/p2/1",
+            "quote": "anda zinc chromate to decompose the carbon-",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 3",
+            "passage": "us1774432a/p2/1",
+            "quote": "ate in presence of the reaction gases.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The process of preparing a catalyst for the production of oxygenated organic compounds, particularly methanol, from carbon monoxide and hydrogen which consists in heating a mixture containing a zinc carbonate and a zinc chromate to decompose the carbonate in presence of the reaction gases."
+      }
+    },
+    {
+      "id": "ex:msyn/us1774432a/claim/patent-claim-4",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 4",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 4",
+            "passage": "us1774432a/p2/2",
+            "quote": "4. Method of preparing a catalyst for the production of oxygenated organic. com- pounds, particularly methanol from carbon monoxide and hydrogen, which includes the",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 4",
+            "passage": "us1774432a/p2/2",
+            "quote": "step of causing a soluble acidic chromium",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 4",
+            "passage": "us1774432a/p2/2",
+            "quote": "compound to react with excess of a zinc carbonate.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Method of preparing a catalyst for the production of oxygenated organic compounds, particularly methanol, from carbon monoxide and hydrogen, which includes the step of causing a soluble acidic chromium compound to react with excess of a zinc carbonate."
+      }
+    },
+    {
+      "id": "ex:msyn/us1774432a/claim/patent-claim-5",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 5",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 5",
+            "passage": "us1774432a/p2/2",
+            "quote": "Method of preparizig a catalyst for the production of oxygenated organic com-",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 5",
+            "passage": "us1774432a/p2/2",
+            "quote": "pounds particularly methanol from carbon monoxide: and hydrogen, which consists in causing.a soluble acidic chromium compound to react with excess of a zinc carbonate, dry-",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 5",
+            "passage": "us1774432a/p2/2",
+            "quote": "ing the precipitate, heating it to decompose",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 5",
+            "passage": "us1774432a/p2/2",
+            "quote": "the,carbonate and reducing it.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Method of preparing a catalyst for the production of oxygenated organic compounds, particularly methanol, from carbon monoxide and hydrogen, which consists in causing a soluble acidic chromium compound to react with excess of a zinc carbonate, drying the precipitate, heating it to decompose the carbonate and reducing it."
+      }
+    },
+    {
+      "id": "ex:msyn/us1774432a/claim/patent-claim-6",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 6",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 6",
+            "passage": "us1774432a/p2/2",
+            "quote": "Method of preparing a catalyst for the production of oxygenated organic com- pounds, particularly methanol, from carbon monoxide and hydrogen which includes the",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 6",
+            "passage": "us1774432a/p2/2",
+            "quote": "step of precipitating a soluble zinc salt with a salt of chromic acid in presence of a soluble carbonate.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Method of preparing a catalyst for the production of oxygenated organic compounds, particularly methanol, from carbon monoxide and hydrogen which includes the step of precipitating a soluble zinc salt with a salt of chromic acid in presence of a soluble carbonate."
+      }
+    },
+    {
+      "id": "ex:msyn/us1774432a/claim/patent-claim-7",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 7",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 7",
+            "passage": "us1774432a/p2/3",
+            "quote": "Method of preparing a cataiyst for-the production of oxygenated organic com-",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 7",
+            "passage": "us1774432a/p2/3",
+            "quote": "monoxide and hydrogen which includes the step of precipitating a soluble zinc salt with an acid salt of chromic acid, in presence of a",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 7",
+            "passage": "us1774432a/p2/2",
+            "quote": "soluble carbonate.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Method of preparing a catalyst for the production of oxygenated organic compounds, particularly methanol, from carbon monoxide and hydrogen which includes the step of precipitating a soluble zinc salt with an acid salt of chromic acid, in presence of a soluble carbonate."
+      }
+    },
+    {
+      "id": "ex:msyn/us1774432a/claim/patent-claim-8",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 8",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 8",
+            "passage": "us1774432a/p2/3",
+            "quote": "8. Method of preparing a catalyst contain- ing zine and chromium in the molecular ratio of about nine to one, which Includes the step treating excess of zinc carbonate with chro-",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 8",
+            "passage": "us1774432a/p2/3",
+            "quote": "mic acid in slight excess over the theoretical",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Method of preparing a catalyst containing zinc and chromium in the molecular ratio of about nine to one, which includes the step of treating excess of zinc carbonate with chromic acid in slight excess over the theoretical amount."
+      }
+    },
+    {
+      "id": "ex:msyn/us1774432a/claim/patent-claim-9",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 9",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 9",
+            "passage": "us1774432a/p2/3",
+            "quote": "9, Catalyst consisting of the heated, and",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 9",
+            "passage": "us1774432a/p2/4",
+            "quote": "reduced reaction product of a zinc salt, a car- bonate and a salt of chromic acid.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Catalyst consisting of the heated and reduced reaction product of a zinc salt, a carbonate and a salt of chromic acid."
+      }
+    },
+    {
+      "id": "ex:msyn/us1774432a/claim/preferred-process",
+      "label": "Claim",
+      "props": {
+        "name": "preferred form: chromic acid on zinc carbonate, pellets, reduction, usual synthesis",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1774432a/p1/2",
+            "quote": "its preferred form zinc carbonate or basic car- bonate is treated with chromic acid in aque- ous solution, the product is dried and brought into a suitable form e. g. pellets for introduc- tion into a converter where it is exposed to",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1774432a/p1/2",
+            "quote": "a gaseous mixture containing carbon mon- oxide and hydrogen. After reduction of the catalyst, the synthesis of methanol may be carried on in the usual manner.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "In the preferred form, zinc carbonate or basic carbonate is treated with chromic acid in aqueous solution, dried and formed (e.g. pellets) for a converter where it is exposed to carbon monoxide and hydrogen; after reduction the methanol synthesis is carried on in the usual manner."
+      }
+    },
+    {
+      "id": "ex:msyn/us1774432a/claim/ratio-9-1",
+      "label": "Claim",
+      "props": {
+        "name": "Zn:Cr 9:1 particularly effective",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1774432a/p1/2",
+            "quote": "Such catalysts aré particularly effective when the molecular ratio of zinc to chromium is nine to one (Zn: Cr).",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Such catalysts are particularly effective when the molecular ratio of zinc to chromium is nine to one."
+      }
+    },
+    {
+      "id": "ex:msyn/us1774432a/claim/test-ratio",
+      "label": "Claim",
+      "props": {
+        "name": "composition varies; final product must be tested for the 9:1 ratio",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1774432a/p1/6",
+            "quote": "and in making my preferred -cata- lyst (having a ratio Zn: Cr of 9:1) it is neces- sary to test the final product to be sure that the desired ratio has been obtained and if not, the preparation must be repeated.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The composition of the precipitate varies with slight changes in the preparation conditions; in making the preferred 9:1 Zn:Cr catalyst the final product must be tested and the preparation repeated if the ratio is not obtained."
+      }
+    },
+    {
+      "id": "ex:msyn/us1774432a/claim/zinc-carbonate-basis",
+      "label": "Claim",
+      "props": {
+        "name": "a zinc carbonate is a very good basis for Zn-Cr catalysts",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1774432a/p1/1",
+            "quote": "I have now discovered that a very good",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'zine' = 'zinc'",
+            "passage": "us1774432a/p1/1",
+            "quote": "way to prepare these catalysts is to employ zine carbonate or basic zine carbonate as a basis for the preparations of zinc-chromium compositions, especially by the reaction be- tween the zinc carbonate or basic zinc carbon-",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1774432a/p1/1",
+            "quote": "ate. and a soluble chromium compound.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "A very good way to prepare zinc-chromium catalysts is to use zinc carbonate or basic zinc carbonate as the basis, especially by reacting it with a soluble chromium compound."
+      }
+    },
+    {
+      "id": "ex:msyn/us1774432a/preparation/example-1",
+      "label": "Preparation",
+      "props": {
+        "name": "Example 1: precipitation of basic zinc carbonate with soda ash, digestion with chromic acid",
+        "duration": {
+          "status": "present",
+          "as_reported": "boiled fer 10 minutes",
+          "note": "boiling time of the carbonate precipitation",
+          "unit": "min",
+          "value": 10
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example 1",
+            "note": "the hundreds digit of the zinc sulphate mass is illegible ('%00')",
+            "passage": "us1774432a/p1/3",
+            "quote": "%00 gms. of zinc sulphate, ZnSO., 7H.0O, are dissolved in 5 litres of water and‘a solu- tion of 270 gms of soda ash (Na,CO,) is",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Example 1",
+            "passage": "us1774432a/p1/3",
+            "quote": "added to the solution. The mixture is boiled fer 10 minutes and then the precipitate is filtered off and washed until the washings. are free from sodium sulphate.",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Example 1",
+            "passage": "us1774432a/p1/3",
+            "quote": "The moist precipitate of basic zinc carbonate is then",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Example 1",
+            "note": "'CrQ;' = 'CrO3'",
+            "passage": "us1774432a/p1/3",
+            "quote": "digested with a solution of 95 gms of chromic _ acid (CrQ;) in 9 litres of water.",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Example 1",
+            "passage": "us1774432a/p1/3",
+            "quote": "is filtered off, dried. and formed. into _ suitable granules or, pellets for introduction",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "method": "basic zinc carbonate precipitated from zinc sulphate with soda ash, boiled, filtered, washed; digested with chromic acid solution; filtered, dried, formed into granules or pellets",
+        "procedure_status": "completed",
+        "steps": [
+          "zinc sulphate ZnSO4.7H2O (mass illegible, '%00 gms.') dissolved in 5 litres of water",
+          "a solution of 270 gms soda ash (Na2CO3) added",
+          "boiled for 10 minutes",
+          "precipitate filtered off and washed until the washings are free from sodium sulphate",
+          "moist basic zinc carbonate digested with 95 gms chromic acid (CrO3) in 9 litres of water",
+          "precipitate filtered off, dried and formed into granules or pellets"
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1774432a/preparation/example-2",
+      "label": "Preparation",
+      "props": {
+        "name": "Example 2: zinc sulphate added to soda ash + sodium bichromate, boiled",
+        "conditions": {
+          "total_solution_volume": {
+            "status": "present",
+            "as_reported": "about 9—10 litres",
+            "lower": 9,
+            "qualifier": "approximate",
+            "unit": "L",
+            "upper": 10
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example 2",
+            "passage": "us1774432a/p1/5",
+            "quote": "A solution of 40 gms of zinc sulphate is added to a solution of 15 gms of soda ash and 11 gms of sodium bichromate, the total volume of solution being about 9—10 litres.",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Example 2",
+            "passage": "us1774432a/p1/5",
+            "quote": "After boiling for several minutes the precipi- tate is filtered off and washed and dried. It is then suitable for introduction into the. catalytic apparatus.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "method": "zinc sulphate solution added to a solution of soda ash and sodium bichromate, boiled for several minutes, precipitate filtered, washed, dried",
+        "procedure_status": "completed",
+        "steps": [
+          "a solution of 40 gms zinc sulphate added to a solution of 15 gms soda ash and 11 gms sodium bichromate (total volume about 9-10 litres)",
+          "boiled for several minutes",
+          "precipitate filtered off, washed and dried"
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1774432a/preparation/zinc-carbonate-route",
+      "label": "Preparation",
+      "props": {
+        "name": "preferred preparation: a zinc carbonate treated with chromic acid, dried, pelleted, reduced in the converter",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1774432a/p1/2",
+            "quote": "its preferred form zinc carbonate or basic car- bonate is treated with chromic acid in aque- ous solution, the product is dried and brought into a suitable form e. g. pellets for introduc- tion into a converter where it is exposed to",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1774432a/p1/2",
+            "quote": "a gaseous mixture containing carbon mon- oxide and hydrogen. After reduction of the catalyst, the synthesis of methanol may be carried on in the usual manner.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "method": "zinc carbonate or basic carbonate treated with aqueous chromic acid; product dried and formed (e.g. pellets); reduced in the converter in CO + H2 before synthesis",
+        "procedure_status": "proposed"
+      }
+    },
+    {
+      "id": "ex:msyn/us1774432a/species/basic-zinc-carbonate",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "basic zinc carbonate",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'zine' = 'zinc'",
+            "passage": "us1774432a/p1/1",
+            "quote": "way to prepare these catalysts is to employ zine carbonate or basic zine carbonate as a basis for the preparations of zinc-chromium compositions, especially by the reaction be- tween the zinc carbonate or basic zinc carbon-",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1774432a/species/chromium-oxide",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "chromium oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1774432a/p1/1",
+            "quote": "taining zinc and chromium oxides containing various ratios of zinc and chromium, and it has been proposed to prepare these in various ways,",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "note": "formula not stated"
+      }
+    },
+    {
+      "id": "ex:msyn/us1774432a/species/soluble-alkali-salts",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "soluble alkali salts",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1774432a/p1/6",
+            "quote": "When the catalyst contains soluble alkali salts and when the gas current is slower and the temperature somewhat higher, higher al- cohols and other organic compounds are. pro- duced.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1774432a/species/zinc-sulphate",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "zinc sulphate (hydrate not stated)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example 2",
+            "passage": "us1774432a/p1/5",
+            "quote": "A solution of 40 gms of zinc sulphate is added to a solution of 15 gms of soda ash and 11 gms of sodium bichromate, the total volume of solution being about 9—10 litres.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ]
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/source/us1774432a/assignee",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "role": "assignee"
+      },
+      "source": "ex:msyn/source/us1774432a",
+      "target": "ex:msyn/institution/ici-ltd"
+    },
+    {
+      "id": "ex:msyn/us1774432a/catalyst/example-1/reported-in/us1774432a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, Example 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1774432a/catalyst/example-1",
+      "target": "ex:msyn/source/us1774432a"
+    },
+    {
+      "id": "ex:msyn/us1774432a/catalyst/example-2/reported-in/us1774432a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, Example 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1774432a/catalyst/example-2",
+      "target": "ex:msyn/source/us1774432a"
+    },
+    {
+      "id": "ex:msyn/us1774432a/catalyst/prior-zn-cr-oxides/reported-in/us1774432a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1774432a/catalyst/prior-zn-cr-oxides",
+      "target": "ex:msyn/source/us1774432a"
+    },
+    {
+      "id": "ex:msyn/us1774432a/catalyst/zn-cr-from-zinc-carbonate/reported-in/us1774432a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1774432a/catalyst/zn-cr-from-zinc-carbonate",
+      "target": "ex:msyn/source/us1774432a"
+    },
+    {
+      "id": "ex:msyn/us1774432a/claim/alkali-higher-alcohols/reported-in/us1774432a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1774432a/claim/alkali-higher-alcohols",
+      "target": "ex:msyn/source/us1774432a"
+    },
+    {
+      "id": "ex:msyn/us1774432a/claim/careful-reduction/reported-in/us1774432a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1774432a/claim/careful-reduction",
+      "target": "ex:msyn/source/us1774432a"
+    },
+    {
+      "id": "ex:msyn/us1774432a/claim/carrier/reported-in/us1774432a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1774432a/claim/carrier",
+      "target": "ex:msyn/source/us1774432a"
+    },
+    {
+      "id": "ex:msyn/us1774432a/claim/chromic-acid-excess/reported-in/us1774432a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, Example 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1774432a/claim/chromic-acid-excess",
+      "target": "ex:msyn/source/us1774432a"
+    },
+    {
+      "id": "ex:msyn/us1774432a/claim/chromium-range/reported-in/us1774432a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1774432a/claim/chromium-range",
+      "target": "ex:msyn/source/us1774432a"
+    },
+    {
+      "id": "ex:msyn/us1774432a/claim/patent-claim-1/reported-in/us1774432a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, claim 1",
+          "p. 2, claim 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1774432a/claim/patent-claim-1",
+      "target": "ex:msyn/source/us1774432a"
+    },
+    {
+      "id": "ex:msyn/us1774432a/claim/patent-claim-10/reported-in/us1774432a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, claim 10"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1774432a/claim/patent-claim-10",
+      "target": "ex:msyn/source/us1774432a"
+    },
+    {
+      "id": "ex:msyn/us1774432a/claim/patent-claim-11/reported-in/us1774432a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, claim 11"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1774432a/claim/patent-claim-11",
+      "target": "ex:msyn/source/us1774432a"
+    },
+    {
+      "id": "ex:msyn/us1774432a/claim/patent-claim-2/reported-in/us1774432a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, claim 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1774432a/claim/patent-claim-2",
+      "target": "ex:msyn/source/us1774432a"
+    },
+    {
+      "id": "ex:msyn/us1774432a/claim/patent-claim-3/reported-in/us1774432a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, claim 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1774432a/claim/patent-claim-3",
+      "target": "ex:msyn/source/us1774432a"
+    },
+    {
+      "id": "ex:msyn/us1774432a/claim/patent-claim-4/reported-in/us1774432a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, claim 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1774432a/claim/patent-claim-4",
+      "target": "ex:msyn/source/us1774432a"
+    },
+    {
+      "id": "ex:msyn/us1774432a/claim/patent-claim-5/reported-in/us1774432a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, claim 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1774432a/claim/patent-claim-5",
+      "target": "ex:msyn/source/us1774432a"
+    },
+    {
+      "id": "ex:msyn/us1774432a/claim/patent-claim-6/reported-in/us1774432a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, claim 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1774432a/claim/patent-claim-6",
+      "target": "ex:msyn/source/us1774432a"
+    },
+    {
+      "id": "ex:msyn/us1774432a/claim/patent-claim-7/reported-in/us1774432a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, claim 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1774432a/claim/patent-claim-7",
+      "target": "ex:msyn/source/us1774432a"
+    },
+    {
+      "id": "ex:msyn/us1774432a/claim/patent-claim-8/reported-in/us1774432a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, claim 8"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1774432a/claim/patent-claim-8",
+      "target": "ex:msyn/source/us1774432a"
+    },
+    {
+      "id": "ex:msyn/us1774432a/claim/patent-claim-9/reported-in/us1774432a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, claim 9"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1774432a/claim/patent-claim-9",
+      "target": "ex:msyn/source/us1774432a"
+    },
+    {
+      "id": "ex:msyn/us1774432a/claim/preferred-process/reported-in/us1774432a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1774432a/claim/preferred-process",
+      "target": "ex:msyn/source/us1774432a"
+    },
+    {
+      "id": "ex:msyn/us1774432a/claim/ratio-9-1/reported-in/us1774432a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1774432a/claim/ratio-9-1",
+      "target": "ex:msyn/source/us1774432a"
+    },
+    {
+      "id": "ex:msyn/us1774432a/claim/test-ratio/reported-in/us1774432a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1774432a/claim/test-ratio",
+      "target": "ex:msyn/source/us1774432a"
+    },
+    {
+      "id": "ex:msyn/us1774432a/claim/zinc-carbonate-basis/reported-in/us1774432a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1774432a/claim/zinc-carbonate-basis",
+      "target": "ex:msyn/source/us1774432a"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/1",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1774432a/p1/2",
+            "quote": "Such catalysts aré particularly effective when the molecular ratio of zinc to chromium is nine to one (Zn: Cr).",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "nine to one (Zn: Cr)",
+          "note": "molecular ratio Zn:Cr, preferred",
+          "unit": "1",
+          "value": 9
+        },
+        "fraction_basis": "mole",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1774432a/catalyst/zn-cr-from-zinc-carbonate",
+      "target": "ex:msyn/species/zinc"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/10",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1774432a/p1/2",
+            "quote": "its preferred form zinc carbonate or basic car- bonate is treated with chromic acid in aque- ous solution, the product is dried and brought into a suitable form e. g. pellets for introduc- tion into a converter where it is exposed to",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "role": "material"
+      },
+      "source": "ex:msyn/us1774432a/preparation/zinc-carbonate-route",
+      "target": "ex:msyn/us1774432a/species/basic-zinc-carbonate"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/11",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example 1",
+            "passage": "us1774432a/p1/3",
+            "quote": "The moist precipitate of basic zinc carbonate is then",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Example 1",
+            "note": "'CrQ;' = 'CrO3'",
+            "passage": "us1774432a/p1/3",
+            "quote": "digested with a solution of 95 gms of chromic _ acid (CrQ;) in 9 litres of water.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1774432a/catalyst/example-1",
+      "target": "ex:msyn/us1774432a/species/basic-zinc-carbonate"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/12",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example 1",
+            "note": "'CrQ;' = 'CrO3'",
+            "passage": "us1774432a/p1/3",
+            "quote": "digested with a solution of 95 gms of chromic _ acid (CrQ;) in 9 litres of water.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "note": "only about 20% of the chromic acid is fixed by the zinc carbonate",
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1774432a/catalyst/example-1",
+      "target": "ex:msyn/species/cro3"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/13",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example 1",
+            "passage": "us1774432a/p1/3",
+            "quote": "is filtered off, dried. and formed. into _ suitable granules or, pellets for introduction",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1774432a/preparation/example-1",
+      "target": "ex:msyn/us1774432a/catalyst/example-1"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/14",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "%00 gms.",
+          "note": "hundreds digit illegible in the OCR text",
+          "text_value": "illegible"
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example 1",
+            "note": "the hundreds digit of the zinc sulphate mass is illegible ('%00')",
+            "passage": "us1774432a/p1/3",
+            "quote": "%00 gms. of zinc sulphate, ZnSO., 7H.0O, are dissolved in 5 litres of water and‘a solu- tion of 270 gms of soda ash (Na,CO,) is",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "role": "reagent"
+      },
+      "source": "ex:msyn/us1774432a/preparation/example-1",
+      "target": "ex:msyn/species/znso47h2o"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/15",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "270 gms",
+          "unit": "g",
+          "value": 270
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example 1",
+            "note": "the hundreds digit of the zinc sulphate mass is illegible ('%00')",
+            "passage": "us1774432a/p1/3",
+            "quote": "%00 gms. of zinc sulphate, ZnSO., 7H.0O, are dissolved in 5 litres of water and‘a solu- tion of 270 gms of soda ash (Na,CO,) is",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "role": "reagent"
+      },
+      "source": "ex:msyn/us1774432a/preparation/example-1",
+      "target": "ex:msyn/species/na2co3"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/16",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "95 gms",
+          "unit": "g",
+          "value": 95
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example 1",
+            "note": "'CrQ;' = 'CrO3'",
+            "passage": "us1774432a/p1/3",
+            "quote": "digested with a solution of 95 gms of chromic _ acid (CrQ;) in 9 litres of water.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "role": "reagent"
+      },
+      "source": "ex:msyn/us1774432a/preparation/example-1",
+      "target": "ex:msyn/species/cro3"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/17",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "5 litres",
+          "note": "for the zinc sulphate; 9 litres for the chromic acid",
+          "unit": "L",
+          "value": 5
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example 1",
+            "note": "the hundreds digit of the zinc sulphate mass is illegible ('%00')",
+            "passage": "us1774432a/p1/3",
+            "quote": "%00 gms. of zinc sulphate, ZnSO., 7H.0O, are dissolved in 5 litres of water and‘a solu- tion of 270 gms of soda ash (Na,CO,) is",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Example 1",
+            "note": "'CrQ;' = 'CrO3'",
+            "passage": "us1774432a/p1/3",
+            "quote": "digested with a solution of 95 gms of chromic _ acid (CrQ;) in 9 litres of water.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "role": "material"
+      },
+      "source": "ex:msyn/us1774432a/preparation/example-1",
+      "target": "ex:msyn/species/h2o"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/18",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example 2",
+            "passage": "us1774432a/p1/5",
+            "quote": "A solution of 40 gms of zinc sulphate is added to a solution of 15 gms of soda ash and 11 gms of sodium bichromate, the total volume of solution being about 9—10 litres.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "note": "from zinc sulphate; the composition of the precipitate is not stated",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1774432a/catalyst/example-2",
+      "target": "ex:msyn/species/zinc"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/19",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example 2",
+            "passage": "us1774432a/p1/5",
+            "quote": "A solution of 40 gms of zinc sulphate is added to a solution of 15 gms of soda ash and 11 gms of sodium bichromate, the total volume of solution being about 9—10 litres.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "note": "from sodium bichromate; the composition of the precipitate is not stated",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1774432a/catalyst/example-2",
+      "target": "ex:msyn/species/chromium"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/2",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1774432a/p1/2",
+            "quote": "Such catalysts aré particularly effective when the molecular ratio of zinc to chromium is nine to one (Zn: Cr).",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "nine to one (Zn: Cr)",
+          "note": "molecular ratio Zn:Cr, preferred",
+          "unit": "1",
+          "value": 1
+        },
+        "fraction_basis": "mole",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1774432a/catalyst/zn-cr-from-zinc-carbonate",
+      "target": "ex:msyn/species/chromium"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/20",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example 2",
+            "passage": "us1774432a/p1/5",
+            "quote": "After boiling for several minutes the precipi- tate is filtered off and washed and dried. It is then suitable for introduction into the. catalytic apparatus.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1774432a/preparation/example-2",
+      "target": "ex:msyn/us1774432a/catalyst/example-2"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/21",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "40 gms",
+          "unit": "g",
+          "value": 40
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example 2",
+            "passage": "us1774432a/p1/5",
+            "quote": "A solution of 40 gms of zinc sulphate is added to a solution of 15 gms of soda ash and 11 gms of sodium bichromate, the total volume of solution being about 9—10 litres.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "role": "reagent"
+      },
+      "source": "ex:msyn/us1774432a/preparation/example-2",
+      "target": "ex:msyn/us1774432a/species/zinc-sulphate"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/22",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "15 gms of soda ash",
+          "unit": "g",
+          "value": 15
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example 2",
+            "passage": "us1774432a/p1/5",
+            "quote": "A solution of 40 gms of zinc sulphate is added to a solution of 15 gms of soda ash and 11 gms of sodium bichromate, the total volume of solution being about 9—10 litres.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "role": "reagent"
+      },
+      "source": "ex:msyn/us1774432a/preparation/example-2",
+      "target": "ex:msyn/species/na2co3"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/23",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "11 gms of sodium bichromate",
+          "unit": "g",
+          "value": 11
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example 2",
+            "passage": "us1774432a/p1/5",
+            "quote": "A solution of 40 gms of zinc sulphate is added to a solution of 15 gms of soda ash and 11 gms of sodium bichromate, the total volume of solution being about 9—10 litres.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "role": "reagent"
+      },
+      "source": "ex:msyn/us1774432a/preparation/example-2",
+      "target": "ex:msyn/species/na2cr2o7"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/24",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1774432a/p1/1",
+            "quote": "I have now discovered that a very good",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'zine' = 'zinc'",
+            "passage": "us1774432a/p1/1",
+            "quote": "way to prepare these catalysts is to employ zine carbonate or basic zine carbonate as a basis for the preparations of zinc-chromium compositions, especially by the reaction be- tween the zinc carbonate or basic zinc carbon-",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1774432a/p1/1",
+            "quote": "ate. and a soluble chromium compound.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1774432a/claim/zinc-carbonate-basis",
+      "target": "ex:msyn/us1774432a/catalyst/zn-cr-from-zinc-carbonate"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/25",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1774432a/p1/1",
+            "quote": "I have now discovered that a very good",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'zine' = 'zinc'",
+            "passage": "us1774432a/p1/1",
+            "quote": "way to prepare these catalysts is to employ zine carbonate or basic zine carbonate as a basis for the preparations of zinc-chromium compositions, especially by the reaction be- tween the zinc carbonate or basic zinc carbon-",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1774432a/p1/1",
+            "quote": "ate. and a soluble chromium compound.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1774432a/claim/zinc-carbonate-basis",
+      "target": "ex:msyn/us1774432a/preparation/zinc-carbonate-route"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/26",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1774432a/p1/2",
+            "quote": "Such catalysts aré particularly effective when the molecular ratio of zinc to chromium is nine to one (Zn: Cr).",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1774432a/claim/ratio-9-1",
+      "target": "ex:msyn/us1774432a/catalyst/zn-cr-from-zinc-carbonate"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/27",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1774432a/p1/2",
+            "quote": "its preferred form zinc carbonate or basic car- bonate is treated with chromic acid in aque- ous solution, the product is dried and brought into a suitable form e. g. pellets for introduc- tion into a converter where it is exposed to",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1774432a/p1/2",
+            "quote": "a gaseous mixture containing carbon mon- oxide and hydrogen. After reduction of the catalyst, the synthesis of methanol may be carried on in the usual manner.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1774432a/claim/preferred-process",
+      "target": "ex:msyn/us1774432a/catalyst/zn-cr-from-zinc-carbonate"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/28",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1774432a/p1/2",
+            "quote": "its preferred form zinc carbonate or basic car- bonate is treated with chromic acid in aque- ous solution, the product is dried and brought into a suitable form e. g. pellets for introduc- tion into a converter where it is exposed to",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1774432a/p1/2",
+            "quote": "a gaseous mixture containing carbon mon- oxide and hydrogen. After reduction of the catalyst, the synthesis of methanol may be carried on in the usual manner.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1774432a/claim/preferred-process",
+      "target": "ex:msyn/us1774432a/preparation/zinc-carbonate-route"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/29",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1774432a/p1/3",
+            "quote": "The zinc carbonate may also be precipitated on a carrier such as asbestos or pumice, by impregnating same with the solution of zinc sulphate and then treating with a soluble",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1774432a/p1/5",
+            "quote": "then be treated with chromic acid solution as before.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1774432a/claim/carrier",
+      "target": "ex:msyn/us1774432a/catalyst/zn-cr-from-zinc-carbonate"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/3",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1774432a/p1/2",
+            "quote": "a gaseous mixture containing carbon mon- oxide and hydrogen. After reduction of the catalyst, the synthesis of methanol may be carried on in the usual manner.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1774432a/catalyst/zn-cr-from-zinc-carbonate",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/30",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1774432a/p1/3",
+            "quote": "The zinc carbonate may also be precipitated on a carrier such as asbestos or pumice, by impregnating same with the solution of zinc sulphate and then treating with a soluble",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1774432a/p1/5",
+            "quote": "then be treated with chromic acid solution as before.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1774432a/claim/carrier",
+      "target": "ex:msyn/us1774432a/preparation/zinc-carbonate-route"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/31",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example 1",
+            "passage": "us1774432a/p1/5",
+            "quote": "above represents a considerable excess, since",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Example 1",
+            "passage": "us1774432a/p1/5",
+            "quote": "only about 20% is fixed by the zinc carbonate.",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Example 1",
+            "passage": "us1774432a/p1/5",
+            "quote": "The excess, however, is necessary in the meth-",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Example 1",
+            "passage": "us1774432a/p1/5",
+            "quote": "as if smaller proportions are employed a cor- respondingly smaller amount is fixed by the",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1774432a/claim/chromic-acid-excess",
+      "target": "ex:msyn/us1774432a/catalyst/example-1"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/32",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example 1",
+            "passage": "us1774432a/p1/5",
+            "quote": "above represents a considerable excess, since",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Example 1",
+            "passage": "us1774432a/p1/5",
+            "quote": "only about 20% is fixed by the zinc carbonate.",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Example 1",
+            "passage": "us1774432a/p1/5",
+            "quote": "The excess, however, is necessary in the meth-",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Example 1",
+            "passage": "us1774432a/p1/5",
+            "quote": "as if smaller proportions are employed a cor- respondingly smaller amount is fixed by the",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1774432a/claim/chromic-acid-excess",
+      "target": "ex:msyn/us1774432a/preparation/example-1"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/33",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1774432a/p1/6",
+            "quote": "and in making my preferred -cata- lyst (having a ratio Zn: Cr of 9:1) it is neces- sary to test the final product to be sure that the desired ratio has been obtained and if not, the preparation must be repeated.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1774432a/claim/test-ratio",
+      "target": "ex:msyn/us1774432a/catalyst/zn-cr-from-zinc-carbonate"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/34",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1774432a/p1/6",
+            "quote": "The in- vention also includes catalysts prepared as above and containing more or less chromium e. g. 2% by weight of the finished catalyst.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1774432a/claim/chromium-range",
+      "target": "ex:msyn/us1774432a/catalyst/zn-cr-from-zinc-carbonate"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/35",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1774432a/p1/6",
+            "quote": "The reduction of the catalyst prior to its use Should be carried out as carefully as pos- sible with strict avoidance of-overheating.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1774432a/claim/careful-reduction",
+      "target": "ex:msyn/us1774432a/catalyst/zn-cr-from-zinc-carbonate"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/36",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1774432a/p1/6",
+            "quote": "When the catalyst contains soluble alkali salts and when the gas current is slower and the temperature somewhat higher, higher al- cohols and other organic compounds are. pro- duced.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1774432a/claim/alkali-higher-alcohols",
+      "target": "ex:msyn/us1774432a/catalyst/zn-cr-from-zinc-carbonate"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/37",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1774432a/p1/6",
+            "quote": "When the catalyst contains soluble alkali salts and when the gas current is slower and the temperature somewhat higher, higher al- cohols and other organic compounds are. pro- duced.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1774432a/claim/alkali-higher-alcohols",
+      "target": "ex:msyn/us1774432a/species/soluble-alkali-salts"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/38",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, claim 1",
+            "passage": "us1774432a/p1/7",
+            "quote": "The process.of preparing a catalyst for.",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 1",
+            "passage": "us1774432a/p2/1",
+            "quote": "pounds, particularly methanol, from carbon monoxide and hydrogen which includes the step of heating a mixture containing a zinc carbonate and a zine chromate to decompose the carbonate.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1774432a/claim/patent-claim-1",
+      "target": "ex:msyn/us1774432a/catalyst/zn-cr-from-zinc-carbonate"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/39",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, claim 1",
+            "passage": "us1774432a/p1/7",
+            "quote": "The process.of preparing a catalyst for.",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 1",
+            "passage": "us1774432a/p2/1",
+            "quote": "pounds, particularly methanol, from carbon monoxide and hydrogen which includes the step of heating a mixture containing a zinc carbonate and a zine chromate to decompose the carbonate.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1774432a/claim/patent-claim-1",
+      "target": "ex:msyn/species/zncro4"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/4",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1774432a/p1/1",
+            "quote": "taining zinc and chromium oxides containing various ratios of zinc and chromium, and it has been proposed to prepare these in various ways,",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1774432a/catalyst/prior-zn-cr-oxides",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/40",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 2",
+            "passage": "us1774432a/p2/1",
+            "quote": "Monoxide and’ hydrogen, which consists 1n heating a mixture containing a zinc carbonate",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 2",
+            "passage": "us1774432a/p2/1",
+            "quote": "and a zinc chromate to decompose the carbon- ate in presence of a reducing gas.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1774432a/claim/patent-claim-2",
+      "target": "ex:msyn/us1774432a/catalyst/zn-cr-from-zinc-carbonate"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/41",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 2",
+            "passage": "us1774432a/p2/1",
+            "quote": "Monoxide and’ hydrogen, which consists 1n heating a mixture containing a zinc carbonate",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 2",
+            "passage": "us1774432a/p2/1",
+            "quote": "and a zinc chromate to decompose the carbon- ate in presence of a reducing gas.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1774432a/claim/patent-claim-2",
+      "target": "ex:msyn/species/zncro4"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/42",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 3",
+            "passage": "us1774432a/p2/1",
+            "quote": "3. The process of preparing a catalyst for the production of oxygenated organic com. pounds, particularly methanol, from carbon monoxide and hydrogen which consists in heating a mixture containing a zinc carbonate",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 3",
+            "passage": "us1774432a/p2/1",
+            "quote": "anda zinc chromate to decompose the carbon-",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 3",
+            "passage": "us1774432a/p2/1",
+            "quote": "ate in presence of the reaction gases.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1774432a/claim/patent-claim-3",
+      "target": "ex:msyn/us1774432a/catalyst/zn-cr-from-zinc-carbonate"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/43",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 3",
+            "passage": "us1774432a/p2/1",
+            "quote": "3. The process of preparing a catalyst for the production of oxygenated organic com. pounds, particularly methanol, from carbon monoxide and hydrogen which consists in heating a mixture containing a zinc carbonate",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 3",
+            "passage": "us1774432a/p2/1",
+            "quote": "anda zinc chromate to decompose the carbon-",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 3",
+            "passage": "us1774432a/p2/1",
+            "quote": "ate in presence of the reaction gases.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1774432a/claim/patent-claim-3",
+      "target": "ex:msyn/species/zncro4"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/44",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 4",
+            "passage": "us1774432a/p2/2",
+            "quote": "4. Method of preparing a catalyst for the production of oxygenated organic. com- pounds, particularly methanol from carbon monoxide and hydrogen, which includes the",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 4",
+            "passage": "us1774432a/p2/2",
+            "quote": "step of causing a soluble acidic chromium",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 4",
+            "passage": "us1774432a/p2/2",
+            "quote": "compound to react with excess of a zinc carbonate.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1774432a/claim/patent-claim-4",
+      "target": "ex:msyn/us1774432a/catalyst/zn-cr-from-zinc-carbonate"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/45",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 4",
+            "passage": "us1774432a/p2/2",
+            "quote": "4. Method of preparing a catalyst for the production of oxygenated organic. com- pounds, particularly methanol from carbon monoxide and hydrogen, which includes the",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 4",
+            "passage": "us1774432a/p2/2",
+            "quote": "step of causing a soluble acidic chromium",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 4",
+            "passage": "us1774432a/p2/2",
+            "quote": "compound to react with excess of a zinc carbonate.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1774432a/claim/patent-claim-4",
+      "target": "ex:msyn/us1774432a/preparation/zinc-carbonate-route"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/46",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 5",
+            "passage": "us1774432a/p2/2",
+            "quote": "Method of preparizig a catalyst for the production of oxygenated organic com-",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 5",
+            "passage": "us1774432a/p2/2",
+            "quote": "pounds particularly methanol from carbon monoxide: and hydrogen, which consists in causing.a soluble acidic chromium compound to react with excess of a zinc carbonate, dry-",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 5",
+            "passage": "us1774432a/p2/2",
+            "quote": "ing the precipitate, heating it to decompose",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 5",
+            "passage": "us1774432a/p2/2",
+            "quote": "the,carbonate and reducing it.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1774432a/claim/patent-claim-5",
+      "target": "ex:msyn/us1774432a/catalyst/zn-cr-from-zinc-carbonate"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/47",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 5",
+            "passage": "us1774432a/p2/2",
+            "quote": "Method of preparizig a catalyst for the production of oxygenated organic com-",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 5",
+            "passage": "us1774432a/p2/2",
+            "quote": "pounds particularly methanol from carbon monoxide: and hydrogen, which consists in causing.a soluble acidic chromium compound to react with excess of a zinc carbonate, dry-",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 5",
+            "passage": "us1774432a/p2/2",
+            "quote": "ing the precipitate, heating it to decompose",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 5",
+            "passage": "us1774432a/p2/2",
+            "quote": "the,carbonate and reducing it.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1774432a/claim/patent-claim-5",
+      "target": "ex:msyn/us1774432a/preparation/zinc-carbonate-route"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/48",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 6",
+            "passage": "us1774432a/p2/2",
+            "quote": "Method of preparing a catalyst for the production of oxygenated organic com- pounds, particularly methanol, from carbon monoxide and hydrogen which includes the",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 6",
+            "passage": "us1774432a/p2/2",
+            "quote": "step of precipitating a soluble zinc salt with a salt of chromic acid in presence of a soluble carbonate.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1774432a/claim/patent-claim-6",
+      "target": "ex:msyn/us1774432a/catalyst/zn-cr-from-zinc-carbonate"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/49",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 7",
+            "passage": "us1774432a/p2/3",
+            "quote": "Method of preparing a cataiyst for-the production of oxygenated organic com-",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 7",
+            "passage": "us1774432a/p2/3",
+            "quote": "monoxide and hydrogen which includes the step of precipitating a soluble zinc salt with an acid salt of chromic acid, in presence of a",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 7",
+            "passage": "us1774432a/p2/2",
+            "quote": "soluble carbonate.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1774432a/claim/patent-claim-7",
+      "target": "ex:msyn/us1774432a/catalyst/zn-cr-from-zinc-carbonate"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/5",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1774432a/p1/1",
+            "quote": "taining zinc and chromium oxides containing various ratios of zinc and chromium, and it has been proposed to prepare these in various ways,",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1774432a/catalyst/prior-zn-cr-oxides",
+      "target": "ex:msyn/us1774432a/species/chromium-oxide"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/50",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 8",
+            "passage": "us1774432a/p2/3",
+            "quote": "8. Method of preparing a catalyst contain- ing zine and chromium in the molecular ratio of about nine to one, which Includes the step treating excess of zinc carbonate with chro-",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 8",
+            "passage": "us1774432a/p2/3",
+            "quote": "mic acid in slight excess over the theoretical",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1774432a/claim/patent-claim-8",
+      "target": "ex:msyn/us1774432a/catalyst/zn-cr-from-zinc-carbonate"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/51",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 8",
+            "passage": "us1774432a/p2/3",
+            "quote": "8. Method of preparing a catalyst contain- ing zine and chromium in the molecular ratio of about nine to one, which Includes the step treating excess of zinc carbonate with chro-",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 8",
+            "passage": "us1774432a/p2/3",
+            "quote": "mic acid in slight excess over the theoretical",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1774432a/claim/patent-claim-8",
+      "target": "ex:msyn/us1774432a/preparation/zinc-carbonate-route"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/52",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 9",
+            "passage": "us1774432a/p2/3",
+            "quote": "9, Catalyst consisting of the heated, and",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 9",
+            "passage": "us1774432a/p2/4",
+            "quote": "reduced reaction product of a zinc salt, a car- bonate and a salt of chromic acid.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1774432a/claim/patent-claim-9",
+      "target": "ex:msyn/us1774432a/catalyst/zn-cr-from-zinc-carbonate"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/53",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 10",
+            "passage": "us1774432a/p2/4",
+            "quote": "10. Catalyst consisting of the heated and",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 10",
+            "passage": "us1774432a/p2/4",
+            "quote": "reduced reaction product of a zinc salt, a",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 10",
+            "passage": "us1774432a/p2/4",
+            "quote": "earbonate and a salt.of chromic acid in which",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 10",
+            "passage": "us1774432a/p2/4",
+            "quote": "the molecular ratio of zinc to chromium Js",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 10",
+            "note": "reads 'about nine to one'",
+            "passage": "us1774432a/p2/4",
+            "quote": "gbouthinetoone",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1774432a/claim/patent-claim-10",
+      "target": "ex:msyn/us1774432a/catalyst/zn-cr-from-zinc-carbonate"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/54",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 11",
+            "passage": "us1774432a/p2/1",
+            "quote": "Process of preparing a catalyst for the",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 11",
+            "passage": "us1774432a/p2/4",
+            "quote": "production’ of oxygenated organic com:",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 11",
+            "passage": "us1774432a/p2/4",
+            "quote": "step of heating a mixture contaliing a zinc carbonate and a chromium compound, not chemically changed by heat, so as to decom-",
+            "source": "ex:msyn/source/us1774432a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 11",
+            "passage": "us1774432a/p2/4",
+            "quote": "pose the zine carbonate.",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1774432a/claim/patent-claim-11",
+      "target": "ex:msyn/us1774432a/catalyst/zn-cr-from-zinc-carbonate"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/6",
+      "type": "COMPARED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'zine' = 'zinc'",
+            "passage": "us1774432a/p1/1",
+            "quote": "way to prepare these catalysts is to employ zine carbonate or basic zine carbonate as a basis for the preparations of zinc-chromium compositions, especially by the reaction be- tween the zinc carbonate or basic zinc carbon-",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "note": "the zinc carbonate route is presented as a very good way to prepare these compositions"
+      },
+      "source": "ex:msyn/us1774432a/catalyst/zn-cr-from-zinc-carbonate",
+      "target": "ex:msyn/us1774432a/catalyst/prior-zn-cr-oxides"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/7",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1774432a/p1/2",
+            "quote": "its preferred form zinc carbonate or basic car- bonate is treated with chromic acid in aque- ous solution, the product is dried and brought into a suitable form e. g. pellets for introduc- tion into a converter where it is exposed to",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1774432a/preparation/zinc-carbonate-route",
+      "target": "ex:msyn/us1774432a/catalyst/zn-cr-from-zinc-carbonate"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/8",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1774432a/p1/2",
+            "quote": "its preferred form zinc carbonate or basic car- bonate is treated with chromic acid in aque- ous solution, the product is dried and brought into a suitable form e. g. pellets for introduc- tion into a converter where it is exposed to",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "role": "reagent"
+      },
+      "source": "ex:msyn/us1774432a/preparation/zinc-carbonate-route",
+      "target": "ex:msyn/species/cro3"
+    },
+    {
+      "id": "ex:msyn/us1774432a/link/9",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1774432a/p1/2",
+            "quote": "its preferred form zinc carbonate or basic car- bonate is treated with chromic acid in aque- ous solution, the product is dried and brought into a suitable form e. g. pellets for introduc- tion into a converter where it is exposed to",
+            "source": "ex:msyn/source/us1774432a"
+          }
+        ],
+        "role": "material"
+      },
+      "source": "ex:msyn/us1774432a/preparation/zinc-carbonate-route",
+      "target": "ex:msyn/species/znco3"
+    },
+    {
+      "id": "ex:msyn/us1774432a/preparation/example-1/reported-in/us1774432a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, Example 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1774432a/preparation/example-1",
+      "target": "ex:msyn/source/us1774432a"
+    },
+    {
+      "id": "ex:msyn/us1774432a/preparation/example-2/reported-in/us1774432a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, Example 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1774432a/preparation/example-2",
+      "target": "ex:msyn/source/us1774432a"
+    },
+    {
+      "id": "ex:msyn/us1774432a/preparation/zinc-carbonate-route/reported-in/us1774432a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1774432a/preparation/zinc-carbonate-route",
+      "target": "ex:msyn/source/us1774432a"
+    },
+    {
+      "id": "ex:msyn/us1774432a/species/basic-zinc-carbonate/reported-in/us1774432a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1774432a/species/basic-zinc-carbonate",
+      "target": "ex:msyn/source/us1774432a"
+    },
+    {
+      "id": "ex:msyn/us1774432a/species/chromium-oxide/reported-in/us1774432a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1774432a/species/chromium-oxide",
+      "target": "ex:msyn/source/us1774432a"
+    },
+    {
+      "id": "ex:msyn/us1774432a/species/soluble-alkali-salts/reported-in/us1774432a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1774432a/species/soluble-alkali-salts",
+      "target": "ex:msyn/source/us1774432a"
+    },
+    {
+      "id": "ex:msyn/us1774432a/species/zinc-sulphate/reported-in/us1774432a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, Example 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1774432a/species/zinc-sulphate",
+      "target": "ex:msyn/source/us1774432a"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/us1774432a"
+}

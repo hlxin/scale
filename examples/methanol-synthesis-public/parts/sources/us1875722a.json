@@ -1,0 +1,2151 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/source/us1875722a",
+      "label": "Source",
+      "props": {
+        "name": "Catalyst for synthetic methanol production",
+        "kind": "patent",
+        "description": "Published 1932-09-06 (grant date printed on the patent (agrees with the USPTO issue-year table)); in scope: before the 1966-01-01 cutoff. Text: 2 pages ocr (tesseract 5.5.3 (eng, 300 dpi, 2 columns)). Text not redistributed.",
+        "identifiers": {
+          "patent": "US1875722A"
+        },
+        "licence": "US patent; not subject to copyright",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "Catalyst for synthetic methanol production",
+        "url": "https://patents.google.com/patent/US1875722A",
+        "year": 1932
+      }
+    },
+    {
+      "id": "ex:msyn/us1875722a/catalyst/brass",
+      "label": "Catalyst",
+      "props": {
+        "name": "Brass (zinc 1 part, copper 2-5 parts)",
+        "catalyst_family": "alloy",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1875722a/p1/3",
+            "quote": "The following substances are typical alloys, such as are contemplated for use in our process.",
+            "source": "ex:msyn/source/us1875722a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1875722a/p1/3",
+            "quote": "Brass—zinc, 1 part; copper, 2-5 parts",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ],
+        "generality": "kind"
+      }
+    },
+    {
+      "id": "ex:msyn/us1875722a/catalyst/bronze",
+      "label": "Catalyst",
+      "props": {
+        "name": "Bronze (zinc 1-2, copper 7-9, tin 1-2 parts)",
+        "catalyst_family": "alloy",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1875722a/p1/3",
+            "quote": "The following substances are typical alloys, such as are contemplated for use in our process.",
+            "source": "ex:msyn/source/us1875722a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'6' is a line number",
+            "passage": "us1875722a/p1/3",
+            "quote": "Bronze—zinc, 1-2 parts; copper, 7-9 parts; 6 and tin, 1-2 parts",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ],
+        "generality": "kind"
+      }
+    },
+    {
+      "id": "ex:msyn/us1875722a/catalyst/cu-zn-alloy",
+      "label": "Catalyst",
+      "props": {
+        "name": "copper-zinc alloy, copper predominating (activated)",
+        "catalyst_family": "alloy",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'Asa' = 'As a', 'zine' = 'zinc', '1s' = 'is'",
+            "passage": "us1875722a/p1/3",
+            "quote": "Asa catalyst we employ a metallic alloy of zine and copper in which the copper 1s present in larger proportion than the zinc.",
+            "source": "ex:msyn/source/us1875722a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1875722a/p1/3",
+            "quote": "The copper-zinc alloy may also contain a small percentage of another metal such as 45 tin or manganese.",
+            "source": "ex:msyn/source/us1875722a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1875722a/p1/4",
+            "quote": "On ex- @g posure to a reducing atmosphere, such as hy- drogen gas, the oxidized surface is partially reduced to metal and the complex mixture of copper alloy and derived oxides constitutes . an active. methanol catalyst.",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ],
+        "generality": "kind",
+        "note": "in use, the partially reduced oxidized surface: a complex mixture of copper alloy and derived oxides"
+      }
+    },
+    {
+      "id": "ex:msyn/us1875722a/catalyst/manganese-bronze",
+      "label": "Catalyst",
+      "props": {
+        "name": "Manganese bronze (ordinary bronze with about .3% manganese)",
+        "catalyst_family": "alloy",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "disagree",
+            "locator": "p. 1, manganese bronze",
+            "note": "the brief's OCR text reads '.38%'; the page image shows '.3%'",
+            "reading": "vision_ocr",
+            "region": [
+              0.4,
+              0.293,
+              0.78,
+              0.322
+            ],
+            "second_reading": "Manganese bronze—which is an ordinary bronze containing about .3% of manganese",
+            "source": "ex:msyn/source/us1875722a",
+            "transcription": "Manganese bronze—which is an ordinary bronze containing about .3% of manganese"
+          }
+        ],
+        "generality": "kind"
+      }
+    },
+    {
+      "id": "ex:msyn/us1875722a/claim/anodic-oxidation-better",
+      "label": "Claim",
+      "props": {
+        "name": "anodic oxidation gives a particularly active catalyst",
+        "claim_kind": "comparison",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1875722a/p1/5",
+            "quote": "a particularly active and efficient form of catalyst of the above type, suitable for the production of — methyl alcohol, may be obtained by activat-' ing the catalyst by means of a process de- q9 scribed as “anodic oxidation.”",
+            "source": "ex:msyn/source/us1875722a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'alodic' = 'anodic'",
+            "passage": "us1875722a/p2/1",
+            "quote": "The alodic oxidation method produces a better _ product,",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Activating the copper-alloy catalyst by anodic oxidation gives a particularly active and efficient catalyst; it produces a better product than oxidation in oxygen at elevated temperature."
+      }
+    },
+    {
+      "id": "ex:msyn/us1875722a/claim/feed-ratios",
+      "label": "Claim",
+      "props": {
+        "name": "H2 excess: 5 per CO; about 20 per CO2",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1875722a/p2/2",
+            "quote": "Where pure carbon monoxide gas is used, we prefer to use an excess of hydrogen in the 30 relation of one molecule of carbon monoxide to five molecules of hydrogen.",
+            "source": "ex:msyn/source/us1875722a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1875722a/p2/2",
+            "quote": "A gaseous mixture of carbon monoxide with carbon di- oXide or pure carbon dioxide gas may be also employed, but in this case more hydrogen 35 must be used as some is consumed.in produc- ‘Ing water according to the reaction",
+            "source": "ex:msyn/source/us1875722a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "quote": "we prefer to use a much larger excess of hydrogen—for example, twenty molecules of hydrogen per molecule of carbon dioxide.",
+            "source": "ex:msyn/source/us1875722a"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2, equation after 'according to the reaction'",
+            "note": "the equation is missing from the brief's OCR text; read from the page image (subscripts printed small)",
+            "reading": "vision_ocr",
+            "region": [
+              0.19,
+              0.545,
+              0.58,
+              0.565
+            ],
+            "second_reading": "ing water according to the reaction CO2+3H2=CH?OH+H2O",
+            "source": "ex:msyn/source/us1875722a",
+            "transcription": "CO2+3H2=CH3OH+H2O"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "With pure carbon monoxide an excess of hydrogen of five molecules per molecule of carbon monoxide is preferred; with carbon dioxide more hydrogen is needed since some forms water, e.g. twenty molecules of hydrogen per molecule of carbon dioxide."
+      }
+    },
+    {
+      "id": "ex:msyn/us1875722a/claim/methane-nitrogen-tolerated",
+      "label": "Claim",
+      "props": {
+        "name": "small methane and nitrogen without bad results",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1875722a/p2/4",
+            "quote": "small percentages of gaseous hydrocarbons such as methane and inert gases such as nitrogen may be present",
+            "source": "ex:msyn/source/us1875722a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1875722a/p2/4",
+            "quote": "in the gaseous mixture without bad results.",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Small percentages of gaseous hydrocarbons such as methane and inert gases such as nitrogen may be present in the gas without bad results."
+      }
+    },
+    {
+      "id": "ex:msyn/us1875722a/claim/operating-conditions",
+      "label": "Claim",
+      "props": {
+        "name": "above 100 atm and 200 °C, catalyst below 600 °C; preferred 100-200 atm, 250-300 °C",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1875722a/p2/1",
+            "quote": "Pressures in excess of 100 atmospheres and temperatures in excess of 200° C. should be is employed.",
+            "source": "ex:msyn/source/us1875722a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1875722a/p2/1",
+            "quote": "The reaction temperature—i. e., of the catalyst mass—should not exceed 600° - C.",
+            "source": "ex:msyn/source/us1875722a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1875722a/p2/2",
+            "quote": "In general, we prefer to use pressures between 100-200 atmosphere and a temperature of 250-300° C.",
+            "source": "ex:msyn/source/us1875722a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1875722a/p2/2",
+            "quote": "At pressures and temperatures within the range described, methanol will be produced in every case by the use of our copper alloy catalysts.",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "scope": "methanol synthesis over the copper-alloy catalysts",
+        "statement": "Pressures above 100 atmospheres and temperatures above 200° C. should be employed, the catalyst temperature not exceeding 600° C.; no definite upper pressure limit; preferred 100-200 atmospheres and 250-300° C. Within this range methanol is produced in every case with the copper alloy catalysts."
+      }
+    },
+    {
+      "id": "ex:msyn/us1875722a/claim/oxidation-porous-surface",
+      "label": "Claim",
+      "props": {
+        "name": "oxidation makes the surface irregular and porous",
+        "claim_kind": "structure_property",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1875722a/p1/4",
+            "quote": "the surface of the catalyst is rendered irregular and porous.",
+            "source": "ex:msyn/source/us1875722a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1875722a/p1/4",
+            "quote": "On ex- @g posure to a reducing atmosphere, such as hy- drogen gas, the oxidized surface is partially reduced to metal and the complex mixture of copper alloy and derived oxides constitutes . an active. methanol catalyst.",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "During the oxidation the surface of the catalyst is rendered irregular and porous; on reduction the oxidized surface is partially reduced to metal and the mixture of copper alloy and derived oxides is the active catalyst."
+      }
+    },
+    {
+      "id": "ex:msyn/us1875722a/claim/patent-claim-1",
+      "label": "Claim",
+      "props": {
+        "name": "claim 1: Cu-predominant Cu-Zn alloy with partially reduced surface oxides",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 1",
+            "note": "'zine' = 'zinc'",
+            "passage": "us1875722a/p2/4",
+            "quote": "1. A methanol catalyst which comprises a copper-zine alloy in which the copper pre- dominates, the surface of which comprises the partially reduced oxides of the alloy sur-",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "A methanol catalyst comprising a copper-zinc alloy in which copper predominates, the surface of which comprises the partially reduced oxides of the alloy surface."
+      }
+    },
+    {
+      "id": "ex:msyn/us1875722a/claim/patent-claim-2",
+      "label": "Claim",
+      "props": {
+        "name": "claim 2: as claim 1, as filings",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 2",
+            "note": "'zine' = 'zinc'",
+            "passage": "us1875722a/p2/4",
+            "quote": "2. A methanol catalyst which comprises filings of a copper-zine alloy in which the copper predominates, the surface of which comprises the partially reduced oxides of the 80 alloy surface.",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "A methanol catalyst comprising filings of a copper-zinc alloy in which copper predominates, the surface of which comprises the partially reduced oxides of the alloy surface."
+      }
+    },
+    {
+      "id": "ex:msyn/us1875722a/claim/patent-claim-3",
+      "label": "Claim",
+      "props": {
+        "name": "claim 3: as claim 1, anodically oxidized surface",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 3",
+            "passage": "us1875722a/p2/5",
+            "quote": "3. A methanol catalyst which comprises a copper-zinc alloy in which the copper pre- dominates, the surface of which comprises the partially reduced oxides of the anodi- 85 cally oxidized alloy surface.",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "A methanol catalyst comprising a copper-zinc alloy in which copper predominates, the surface of which comprises the partially reduced oxides of the anodically oxidized alloy surface."
+      }
+    },
+    {
+      "id": "ex:msyn/us1875722a/claim/patent-claim-4",
+      "label": "Claim",
+      "props": {
+        "name": "claim 4: filings, anodically oxidized surface",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 4",
+            "note": "'zine' = 'zinc'",
+            "passage": "us1875722a/p2/5",
+            "quote": "4 methanol catalyst which comprises filings of a copper-zine alloy in which the copper predominates, the surface of which comprises the partially reduced oxides of the 90 anodically oxidized alloy surface.",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "A methanol catalyst comprising filings of a copper-zinc alloy in which copper predominates, the surface of which comprises the partially reduced oxides of the anodically oxidized alloy surface."
+      }
+    },
+    {
+      "id": "ex:msyn/us1875722a/claim/substantially-pure-methanol",
+      "label": "Claim",
+      "props": {
+        "name": "copper-alloy catalysts give substantially pure methanol",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1875722a/p2/1",
+            "quote": "When carbon monoxide gas in the presence of a molecular excess of hydrogen is passed 19 Over one of our copper-alloy catalysts at ele- vated temperature and pressure, methyl al-. cohol is produced in substantially pure form.",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Carbon monoxide with a molecular excess of hydrogen passed over the copper-alloy catalysts at elevated temperature and pressure produces methyl alcohol in substantially pure form."
+      }
+    },
+    {
+      "id": "ex:msyn/us1875722a/claim/yield-varies",
+      "label": "Claim",
+      "props": {
+        "name": "yield varies with pressure, temperature and flow",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1875722a/p2/2",
+            "quote": "TThe yield will vary with the pressure, temperature, and rate of gas flow",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The yield varies with the pressure, temperature and rate of gas flow over the catalyst."
+      }
+    },
+    {
+      "id": "ex:msyn/us1875722a/feed/co-h2-1-5",
+      "label": "Feed",
+      "props": {
+        "name": "CO + H2, 1 volume to 5",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1875722a/p2/3",
+            "quote": "When a mixture of carbon monoxide and «> hydrogen, in the proportion of one volume of the former to five of the latter, is passed over our copper-alloy catalyst at a pressure of 200 atmospheres and a temperature of 280° C. at",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ],
+        "generality": "particular",
+        "ratios": {
+          "h2_co_ratio": {
+            "status": "present",
+            "as_reported": "one volume of the former to five of the latter",
+            "basis": "volume",
+            "unit": "1",
+            "value": 5
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us1875722a/material/brass-filings",
+      "label": "Material",
+      "props": {
+        "name": "brass filings",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1875722a/p1/5",
+            "quote": "if a cell is constructed in which 80 pounds of brass fil- ings contained in a cylindrical column 30 inches high and 4-5 inches in diameter and located 2—4 inches from a cathode of about go equal size,",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ],
+        "material_family": "alloy"
+      }
+    },
+    {
+      "id": "ex:msyn/us1875722a/preparation/anodic-oxidation-example",
+      "label": "Preparation",
+      "props": {
+        "name": "anodic oxidation of brass filings in sodium carbonate",
+        "conditions": {
+          "anode_cathode_distance": {
+            "status": "present",
+            "as_reported": "2—4 inches",
+            "lower": 2,
+            "unit": "in",
+            "upper": 4
+          },
+          "column_diameter": {
+            "status": "present",
+            "as_reported": "4-5 inches in diameter",
+            "lower": 4,
+            "unit": "in",
+            "upper": 5
+          },
+          "column_height": {
+            "status": "present",
+            "as_reported": "30 inches high",
+            "unit": "in",
+            "value": 30
+          },
+          "current": {
+            "status": "present",
+            "as_reported": "30-50 aniperes",
+            "lower": 30,
+            "note": "'aniperes' = amperes",
+            "unit": "A",
+            "upper": 50
+          },
+          "electrolyte_concentration": {
+            "status": "present",
+            "as_reported": "a 2% solution of sodium carbonate",
+            "unit": "%",
+            "value": 2
+          },
+          "voltage": {
+            "status": "present",
+            "as_reported": "10 volts",
+            "unit": "V",
+            "value": 10
+          }
+        },
+        "duration": {
+          "status": "present",
+          "as_reported": "about 30 hours",
+          "qualifier": "approximate",
+          "unit": "h",
+          "value": 30
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1875722a/p1/5",
+            "quote": "a particularly active and efficient form of catalyst of the above type, suitable for the production of — methyl alcohol, may be obtained by activat-' ing the catalyst by means of a process de- q9 scribed as “anodic oxidation.”",
+            "source": "ex:msyn/source/us1875722a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1875722a/p1/5",
+            "quote": "the brass or bronze filings may be made to . serve as the anode in an electrolytic cell. Nickel or carbon may be used as the cathode, and a 2% solution of sodium carbonate is a qg suitable-electrolyte.",
+            "source": "ex:msyn/source/us1875722a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "the OCR text reads '80 pounds'; the page image shows '30 pounds' (see the vision_ocr evidence)",
+            "passage": "us1875722a/p1/5",
+            "quote": "if a cell is constructed in which 80 pounds of brass fil- ings contained in a cylindrical column 30 inches high and 4-5 inches in diameter and located 2—4 inches from a cathode of about go equal size,",
+            "source": "ex:msyn/source/us1875722a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'aniperes' = 'amperes'",
+            "passage": "us1875722a/p1/5",
+            "quote": "are exposed to a current of 10 volts and 30-50 aniperes for about 30 hours, there will result an anodic oxidation of the entire surface to a sufficient depth to form an active _ catalyst.",
+            "source": "ex:msyn/source/us1875722a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1875722a/p1/6",
+            "quote": "This anodic oxidation results in a surface : change on the metal and the formation of a penetrable film of oxides.",
+            "source": "ex:msyn/source/us1875722a"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 1, anodic oxidation example",
+            "note": "the brief's OCR text reads '80 pounds'; the page image shows '30 pounds'",
+            "reading": "vision_ocr",
+            "region": [
+              0.4,
+              0.602,
+              0.78,
+              0.643
+            ],
+            "second_reading": "and a 2% solution of sodium carbonate is a suitable electrolyte. For example, if a cell is constructed in which 30 pounds of brass filings contained in a cylindrical column 30 inches high and 4–5 inches in diameter and located 2–4 inches from a cathode of about",
+            "source": "ex:msyn/source/us1875722a",
+            "transcription": "suitable electrolyte. For example, if a cell is constructed in which 30 pounds of brass fil- ings contained in a cylindrical column 30"
+          }
+        ],
+        "method": "anodic oxidation: brass filings as anode of an electrolytic cell, nickel or carbon cathode, 2% sodium carbonate electrolyte",
+        "procedure_status": "completed",
+        "steps": [
+          "brass filings (30 pounds) in a cylindrical column 30 inches high and 4-5 inches in diameter serve as the anode, 2-4 inches from a cathode (nickel or carbon) of about equal size",
+          "a 2% solution of sodium carbonate is the electrolyte",
+          "a current of 10 volts and 30-50 amperes is applied for about 30 hours, oxidizing the entire surface to a sufficient depth"
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1875722a/reactor/recirculation",
+      "label": "Reactor",
+      "props": {
+        "name": "recirculating system",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1875722a/p2/3",
+            "quote": "The residual gas 55 mixture is continually recirculated over the catalyst",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ],
+        "reactor_kind": "circulating"
+      }
+    },
+    {
+      "id": "ex:msyn/us1875722a/sample/anodic-brass-example",
+      "label": "CatalystSample",
+      "props": {
+        "name": "30 lb of anodically oxidized brass filings (example cell)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "the OCR text reads '80 pounds'; the page image shows '30 pounds' (see the vision_ocr evidence)",
+            "passage": "us1875722a/p1/5",
+            "quote": "if a cell is constructed in which 80 pounds of brass fil- ings contained in a cylindrical column 30 inches high and 4-5 inches in diameter and located 2—4 inches from a cathode of about go equal size,",
+            "source": "ex:msyn/source/us1875722a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'aniperes' = 'amperes'",
+            "passage": "us1875722a/p1/5",
+            "quote": "are exposed to a current of 10 volts and 30-50 aniperes for about 30 hours, there will result an anodic oxidation of the entire surface to a sufficient depth to form an active _ catalyst.",
+            "source": "ex:msyn/source/us1875722a"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 1, anodic oxidation example",
+            "note": "the brief's OCR text reads '80 pounds'; the page image shows '30 pounds'",
+            "reading": "vision_ocr",
+            "region": [
+              0.4,
+              0.602,
+              0.78,
+              0.643
+            ],
+            "second_reading": "and a 2% solution of sodium carbonate is a suitable electrolyte. For example, if a cell is constructed in which 30 pounds of brass filings contained in a cylindrical column 30 inches high and 4–5 inches in diameter and located 2–4 inches from a cathode of about",
+            "source": "ex:msyn/source/us1875722a",
+            "transcription": "suitable electrolyte. For example, if a cell is constructed in which 30 pounds of brass fil- ings contained in a cylindrical column 30"
+          }
+        ],
+        "preparation_status": "prepared",
+        "sample_kind": "batch"
+      }
+    },
+    {
+      "id": "ex:msyn/us1875722a/sample/operating-example",
+      "label": "CatalystSample",
+      "props": {
+        "name": "copper-alloy catalyst of the operating example (alloy not identified)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1875722a/p2/3",
+            "quote": "When a mixture of carbon monoxide and «> hydrogen, in the proportion of one volume of the former to five of the latter, is passed over our copper-alloy catalyst at a pressure of 200 atmospheres and a temperature of 280° C. at",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ],
+        "preparation_status": "not_reported",
+        "sample_kind": "reactor_charge"
+      }
+    },
+    {
+      "id": "ex:msyn/us1875722a/test/operating-example",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "CO/H2 1:5 over copper-alloy catalyst at 200 atm, 280 °C",
+        "conversion": {
+          "status": "present",
+          "as_reported": "about 15% of the car- bon monoxide present is converted to methyl alcohol",
+          "basis": "carbon monoxide to methyl alcohol, per passage",
+          "qualifier": "approximate",
+          "unit": "%",
+          "value": 15
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1875722a/p2/3",
+            "quote": "When a mixture of carbon monoxide and «> hydrogen, in the proportion of one volume of the former to five of the latter, is passed over our copper-alloy catalyst at a pressure of 200 atmospheres and a temperature of 280° C. at",
+            "source": "ex:msyn/source/us1875722a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'60' is a line number",
+            "passage": "us1875722a/p2/3",
+            "quote": "a speed of about 10 cubic meters of gas per 60 kilogram of catalyst, about 15% of the car- bon monoxide present is converted to methyl alcohol,",
+            "source": "ex:msyn/source/us1875722a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1875722a/p2/3",
+            "quote": "The residual gas 55 mixture is continually recirculated over the catalyst",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "pressure": {
+          "status": "present",
+          "as_reported": "200 atmospheres",
+          "unit": "atm",
+          "value": 200
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "about 10 cubic meters of gas per 60 kilogram of catalyst",
+          "note": "printed as a 'speed'; no time unit printed; '60' is a line number",
+          "qualifier": "approximate",
+          "unit": "m3 gas/kg catalyst",
+          "value": 10
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "280° C.",
+          "unit": "°C",
+          "value": 280
+        },
+        "temperature_measured_at": "not_reported",
+        "test_kind": "activity"
+      }
+    },
+    {
+      "id": "ex:msyn/us1875722a/treatment/h2-reduction-200c",
+      "label": "Treatment",
+      "props": {
+        "name": "partial reduction in hydrogen at about 200 °C",
+        "atmosphere": "hydrogen",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1875722a/p1/6",
+            "quote": "If this catalyst mass is now partially reduced to metallic state by heating it in a current of hydrogen, 90 ‘avery active methyl alcohol catalyst will re- sult.",
+            "source": "ex:msyn/source/us1875722a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1875722a/p1/6",
+            "quote": "We prefer to reduce the mass immedi- ately prior to methanol production by pass- ing hydrogen over it at a temperature of about 200° C.",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ],
+        "method": "partial reduction to metallic state by passing hydrogen over the oxidized mass, preferably immediately prior to methanol production",
+        "temperature": {
+          "status": "present",
+          "as_reported": "about 200° C.",
+          "qualifier": "approximate",
+          "unit": "°C",
+          "value": 200
+        },
+        "treatment_kind": "reduction"
+      }
+    },
+    {
+      "id": "ex:msyn/us1875722a/treatment/oxidation-general",
+      "label": "Treatment",
+      "props": {
+        "name": "oxidation of alloy filings or turnings (anodic, or in oxygen at elevated temperature)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1875722a/p1/4",
+            "quote": "Before use as catalysts these alloys must be preliminarily activated.",
+            "source": "ex:msyn/source/us1875722a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1875722a/p1/4",
+            "quote": "This may be accom- plished by reducing the alloy to a finely di- 55 vided condition in the form of filings or | turnings, and then subjecting the finely di- vided material to an oxidizing action.",
+            "source": "ex:msyn/source/us1875722a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "continues 'these catalysts may be oxidized by other' on p. 1",
+            "passage": "us1875722a/p2/1",
+            "quote": "means, such as exposure to an atmosphere of ' oxygen at an elevated temperature.",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ],
+        "method": "finely divided alloy (filings or turnings) subjected to an oxidizing action: anodic oxidation (preferred) or exposure to oxygen at an elevated temperature",
+        "treatment_kind": "oxidation"
+      }
+    },
+    {
+      "id": "ex:msyn/us1875722a/treatment/reduction-general",
+      "label": "Treatment",
+      "props": {
+        "name": "partial reduction of the oxidized alloy in a reducing atmosphere",
+        "atmosphere": "a reducing atmosphere, such as hydrogen gas",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1875722a/p1/4",
+            "quote": "On ex- @g posure to a reducing atmosphere, such as hy- drogen gas, the oxidized surface is partially reduced to metal and the complex mixture of copper alloy and derived oxides constitutes . an active. methanol catalyst.",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ],
+        "treatment_kind": "reduction"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/reaction/co-hydrogenation-to-methanol/reported-in/us1875722a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/source/us1875722a"
+    },
+    {
+      "id": "ex:msyn/reaction/co2-hydrogenation-to-methanol/reported-in/us1875722a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/reaction/co2-hydrogenation-to-methanol",
+      "target": "ex:msyn/source/us1875722a"
+    },
+    {
+      "id": "ex:msyn/source/us1875722a/assignee",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "role": "assignee"
+      },
+      "source": "ex:msyn/source/us1875722a",
+      "target": "ex:msyn/institution/commercial-solvents-corp"
+    },
+    {
+      "id": "ex:msyn/us1875722a/catalyst/brass/reported-in/us1875722a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875722a/catalyst/brass",
+      "target": "ex:msyn/source/us1875722a"
+    },
+    {
+      "id": "ex:msyn/us1875722a/catalyst/bronze/reported-in/us1875722a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875722a/catalyst/bronze",
+      "target": "ex:msyn/source/us1875722a"
+    },
+    {
+      "id": "ex:msyn/us1875722a/catalyst/cu-zn-alloy/reported-in/us1875722a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875722a/catalyst/cu-zn-alloy",
+      "target": "ex:msyn/source/us1875722a"
+    },
+    {
+      "id": "ex:msyn/us1875722a/catalyst/manganese-bronze/reported-in/us1875722a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, manganese bronze"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875722a/catalyst/manganese-bronze",
+      "target": "ex:msyn/source/us1875722a"
+    },
+    {
+      "id": "ex:msyn/us1875722a/claim/anodic-oxidation-better/reported-in/us1875722a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875722a/claim/anodic-oxidation-better",
+      "target": "ex:msyn/source/us1875722a"
+    },
+    {
+      "id": "ex:msyn/us1875722a/claim/feed-ratios/reported-in/us1875722a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 2, equation after 'according to the reaction'"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875722a/claim/feed-ratios",
+      "target": "ex:msyn/source/us1875722a"
+    },
+    {
+      "id": "ex:msyn/us1875722a/claim/methane-nitrogen-tolerated/reported-in/us1875722a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875722a/claim/methane-nitrogen-tolerated",
+      "target": "ex:msyn/source/us1875722a"
+    },
+    {
+      "id": "ex:msyn/us1875722a/claim/operating-conditions/reported-in/us1875722a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875722a/claim/operating-conditions",
+      "target": "ex:msyn/source/us1875722a"
+    },
+    {
+      "id": "ex:msyn/us1875722a/claim/oxidation-porous-surface/reported-in/us1875722a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875722a/claim/oxidation-porous-surface",
+      "target": "ex:msyn/source/us1875722a"
+    },
+    {
+      "id": "ex:msyn/us1875722a/claim/patent-claim-1/reported-in/us1875722a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, claim 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875722a/claim/patent-claim-1",
+      "target": "ex:msyn/source/us1875722a"
+    },
+    {
+      "id": "ex:msyn/us1875722a/claim/patent-claim-2/reported-in/us1875722a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, claim 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875722a/claim/patent-claim-2",
+      "target": "ex:msyn/source/us1875722a"
+    },
+    {
+      "id": "ex:msyn/us1875722a/claim/patent-claim-3/reported-in/us1875722a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, claim 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875722a/claim/patent-claim-3",
+      "target": "ex:msyn/source/us1875722a"
+    },
+    {
+      "id": "ex:msyn/us1875722a/claim/patent-claim-4/reported-in/us1875722a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, claim 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875722a/claim/patent-claim-4",
+      "target": "ex:msyn/source/us1875722a"
+    },
+    {
+      "id": "ex:msyn/us1875722a/claim/substantially-pure-methanol/reported-in/us1875722a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875722a/claim/substantially-pure-methanol",
+      "target": "ex:msyn/source/us1875722a"
+    },
+    {
+      "id": "ex:msyn/us1875722a/claim/yield-varies/reported-in/us1875722a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875722a/claim/yield-varies",
+      "target": "ex:msyn/source/us1875722a"
+    },
+    {
+      "id": "ex:msyn/us1875722a/feed/co-h2-1-5/reported-in/us1875722a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875722a/feed/co-h2-1-5",
+      "target": "ex:msyn/source/us1875722a"
+    },
+    {
+      "id": "ex:msyn/us1875722a/link/1",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'Asa' = 'As a', 'zine' = 'zinc', '1s' = 'is'",
+            "passage": "us1875722a/p1/3",
+            "quote": "Asa catalyst we employ a metallic alloy of zine and copper in which the copper 1s present in larger proportion than the zinc.",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ],
+        "role": "not_stated",
+        "role_detail": "copper present in larger proportion than zinc"
+      },
+      "source": "ex:msyn/us1875722a/catalyst/cu-zn-alloy",
+      "target": "ex:msyn/species/copper"
+    },
+    {
+      "id": "ex:msyn/us1875722a/link/10",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "disagree",
+            "locator": "p. 1, manganese bronze",
+            "note": "the brief's OCR text reads '.38%'; the page image shows '.3%'",
+            "reading": "vision_ocr",
+            "region": [
+              0.4,
+              0.293,
+              0.78,
+              0.322
+            ],
+            "second_reading": "Manganese bronze—which is an ordinary bronze containing about .3% of manganese",
+            "source": "ex:msyn/source/us1875722a",
+            "transcription": "Manganese bronze—which is an ordinary bronze containing about .3% of manganese"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "about .3% of manganese",
+          "note": "corrected on re-curation 2026-09-29 from 0.38 (OCR '.38%') to 0.3: the page image shows '.3%'",
+          "qualifier": "approximate",
+          "unit": "%",
+          "value": 0.3
+        },
+        "fraction_basis": "not_reported",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1875722a/catalyst/manganese-bronze",
+      "target": "ex:msyn/species/manganese"
+    },
+    {
+      "id": "ex:msyn/us1875722a/link/11",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1875722a/p1/5",
+            "quote": "if a cell is constructed in which 80 pounds of brass fil- ings contained in a cylindrical column 30 inches high and 4-5 inches in diameter and located 2—4 inches from a cathode of about go equal size,",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875722a/sample/anodic-brass-example",
+      "target": "ex:msyn/us1875722a/catalyst/brass"
+    },
+    {
+      "id": "ex:msyn/us1875722a/link/12",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "30 pounds of brass fil- ings",
+          "note": "corrected on re-curation 2026-09-29 from 80 (OCR '80 pounds') to 30: the page image shows '30 pounds'",
+          "unit": "lb",
+          "value": 30
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 1, anodic oxidation example",
+            "note": "the brief's OCR text reads '80 pounds'; the page image shows '30 pounds'",
+            "reading": "vision_ocr",
+            "region": [
+              0.4,
+              0.602,
+              0.78,
+              0.643
+            ],
+            "second_reading": "and a 2% solution of sodium carbonate is a suitable electrolyte. For example, if a cell is constructed in which 30 pounds of brass filings contained in a cylindrical column 30 inches high and 4–5 inches in diameter and located 2–4 inches from a cathode of about",
+            "source": "ex:msyn/source/us1875722a",
+            "transcription": "suitable electrolyte. For example, if a cell is constructed in which 30 pounds of brass fil- ings contained in a cylindrical column 30"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1875722a/sample/anodic-brass-example",
+      "target": "ex:msyn/us1875722a/material/brass-filings"
+    },
+    {
+      "id": "ex:msyn/us1875722a/link/13",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1875722a/p1/5",
+            "quote": "the brass or bronze filings may be made to . serve as the anode in an electrolytic cell. Nickel or carbon may be used as the cathode, and a 2% solution of sodium carbonate is a qg suitable-electrolyte.",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ],
+        "role": "electrolyte (2% solution)"
+      },
+      "source": "ex:msyn/us1875722a/sample/anodic-brass-example",
+      "target": "ex:msyn/species/na2co3"
+    },
+    {
+      "id": "ex:msyn/us1875722a/link/14",
+      "type": "PREPARED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1875722a/p1/5",
+            "quote": "if a cell is constructed in which 80 pounds of brass fil- ings contained in a cylindrical column 30 inches high and 4-5 inches in diameter and located 2—4 inches from a cathode of about go equal size,",
+            "source": "ex:msyn/source/us1875722a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'aniperes' = 'amperes'",
+            "passage": "us1875722a/p1/5",
+            "quote": "are exposed to a current of 10 volts and 30-50 aniperes for about 30 hours, there will result an anodic oxidation of the entire surface to a sufficient depth to form an active _ catalyst.",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875722a/sample/anodic-brass-example",
+      "target": "ex:msyn/us1875722a/preparation/anodic-oxidation-example"
+    },
+    {
+      "id": "ex:msyn/us1875722a/link/15",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1875722a/p1/6",
+            "quote": "If this catalyst mass is now partially reduced to metallic state by heating it in a current of hydrogen, 90 ‘avery active methyl alcohol catalyst will re- sult.",
+            "source": "ex:msyn/source/us1875722a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1875722a/p1/6",
+            "quote": "We prefer to reduce the mass immedi- ately prior to methanol production by pass- ing hydrogen over it at a temperature of about 200° C.",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ],
+        "order": 1
+      },
+      "source": "ex:msyn/us1875722a/sample/anodic-brass-example",
+      "target": "ex:msyn/us1875722a/treatment/h2-reduction-200c"
+    },
+    {
+      "id": "ex:msyn/us1875722a/link/16",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1875722a/p2/3",
+            "quote": "When a mixture of carbon monoxide and «> hydrogen, in the proportion of one volume of the former to five of the latter, is passed over our copper-alloy catalyst at a pressure of 200 atmospheres and a temperature of 280° C. at",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875722a/sample/operating-example",
+      "target": "ex:msyn/us1875722a/catalyst/cu-zn-alloy"
+    },
+    {
+      "id": "ex:msyn/us1875722a/link/17",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1875722a/p1/4",
+            "quote": "Before use as catalysts these alloys must be preliminarily activated.",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ],
+        "note": "the patent says the alloys must be activated before use; the activation of this charge is not described",
+        "order": 1
+      },
+      "source": "ex:msyn/us1875722a/sample/operating-example",
+      "target": "ex:msyn/us1875722a/treatment/oxidation-general"
+    },
+    {
+      "id": "ex:msyn/us1875722a/link/18",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1875722a/p1/4",
+            "quote": "On ex- @g posure to a reducing atmosphere, such as hy- drogen gas, the oxidized surface is partially reduced to metal and the complex mixture of copper alloy and derived oxides constitutes . an active. methanol catalyst.",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ],
+        "note": "general activation; not described for this charge",
+        "order": 2
+      },
+      "source": "ex:msyn/us1875722a/sample/operating-example",
+      "target": "ex:msyn/us1875722a/treatment/reduction-general"
+    },
+    {
+      "id": "ex:msyn/us1875722a/link/19",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1875722a/p2/3",
+            "quote": "When a mixture of carbon monoxide and «> hydrogen, in the proportion of one volume of the former to five of the latter, is passed over our copper-alloy catalyst at a pressure of 200 atmospheres and a temperature of 280° C. at",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1875722a/feed/co-h2-1-5",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/us1875722a/link/2",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'Asa' = 'As a', 'zine' = 'zinc', '1s' = 'is'",
+            "passage": "us1875722a/p1/3",
+            "quote": "Asa catalyst we employ a metallic alloy of zine and copper in which the copper 1s present in larger proportion than the zinc.",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1875722a/catalyst/cu-zn-alloy",
+      "target": "ex:msyn/species/zinc"
+    },
+    {
+      "id": "ex:msyn/us1875722a/link/20",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1875722a/p2/3",
+            "quote": "When a mixture of carbon monoxide and «> hydrogen, in the proportion of one volume of the former to five of the latter, is passed over our copper-alloy catalyst at a pressure of 200 atmospheres and a temperature of 280° C. at",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1875722a/feed/co-h2-1-5",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/us1875722a/link/21",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1875722a/p2/3",
+            "quote": "When a mixture of carbon monoxide and «> hydrogen, in the proportion of one volume of the former to five of the latter, is passed over our copper-alloy catalyst at a pressure of 200 atmospheres and a temperature of 280° C. at",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ],
+        "state": "not_reported"
+      },
+      "source": "ex:msyn/us1875722a/test/operating-example",
+      "target": "ex:msyn/us1875722a/sample/operating-example"
+    },
+    {
+      "id": "ex:msyn/us1875722a/link/22",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1875722a/p2/3",
+            "quote": "When a mixture of carbon monoxide and «> hydrogen, in the proportion of one volume of the former to five of the latter, is passed over our copper-alloy catalyst at a pressure of 200 atmospheres and a temperature of 280° C. at",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875722a/test/operating-example",
+      "target": "ex:msyn/us1875722a/feed/co-h2-1-5"
+    },
+    {
+      "id": "ex:msyn/us1875722a/link/23",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'60' is a line number",
+            "passage": "us1875722a/p2/3",
+            "quote": "a speed of about 10 cubic meters of gas per 60 kilogram of catalyst, about 15% of the car- bon monoxide present is converted to methyl alcohol,",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875722a/test/operating-example",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1875722a/link/24",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1875722a/p2/3",
+            "quote": "The residual gas 55 mixture is continually recirculated over the catalyst",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875722a/test/operating-example",
+      "target": "ex:msyn/us1875722a/reactor/recirculation"
+    },
+    {
+      "id": "ex:msyn/us1875722a/link/25",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "context": [
+          "ex:msyn/us1875722a/test/operating-example"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'60' is a line number",
+            "passage": "us1875722a/p2/3",
+            "quote": "a speed of about 10 cubic meters of gas per 60 kilogram of catalyst, about 15% of the car- bon monoxide present is converted to methyl alcohol,",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875722a/catalyst/cu-zn-alloy",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1875722a/link/26",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1875722a/p1/5",
+            "quote": "a particularly active and efficient form of catalyst of the above type, suitable for the production of — methyl alcohol, may be obtained by activat-' ing the catalyst by means of a process de- q9 scribed as “anodic oxidation.”",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875722a/claim/anodic-oxidation-better",
+      "target": "ex:msyn/us1875722a/preparation/anodic-oxidation-example"
+    },
+    {
+      "id": "ex:msyn/us1875722a/link/27",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "continues 'these catalysts may be oxidized by other' on p. 1",
+            "passage": "us1875722a/p2/1",
+            "quote": "means, such as exposure to an atmosphere of ' oxygen at an elevated temperature.",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875722a/claim/anodic-oxidation-better",
+      "target": "ex:msyn/us1875722a/treatment/oxidation-general"
+    },
+    {
+      "id": "ex:msyn/us1875722a/link/28",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1875722a/p1/4",
+            "quote": "On ex- @g posure to a reducing atmosphere, such as hy- drogen gas, the oxidized surface is partially reduced to metal and the complex mixture of copper alloy and derived oxides constitutes . an active. methanol catalyst.",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875722a/claim/oxidation-porous-surface",
+      "target": "ex:msyn/us1875722a/catalyst/cu-zn-alloy"
+    },
+    {
+      "id": "ex:msyn/us1875722a/link/29",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1875722a/p2/1",
+            "quote": "When carbon monoxide gas in the presence of a molecular excess of hydrogen is passed 19 Over one of our copper-alloy catalysts at ele- vated temperature and pressure, methyl al-. cohol is produced in substantially pure form.",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875722a/claim/substantially-pure-methanol",
+      "target": "ex:msyn/us1875722a/catalyst/cu-zn-alloy"
+    },
+    {
+      "id": "ex:msyn/us1875722a/link/3",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1875722a/p1/3",
+            "quote": "The copper-zinc alloy may also contain a small percentage of another metal such as 45 tin or manganese.",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ],
+        "role": "not_stated",
+        "role_detail": "optional; a small percentage of another metal"
+      },
+      "source": "ex:msyn/us1875722a/catalyst/cu-zn-alloy",
+      "target": "ex:msyn/species/tin"
+    },
+    {
+      "id": "ex:msyn/us1875722a/link/30",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1875722a/p2/1",
+            "quote": "When carbon monoxide gas in the presence of a molecular excess of hydrogen is passed 19 Over one of our copper-alloy catalysts at ele- vated temperature and pressure, methyl al-. cohol is produced in substantially pure form.",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875722a/catalyst/cu-zn-alloy",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1875722a/link/31",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1875722a/p2/2",
+            "quote": "At pressures and temperatures within the range described, methanol will be produced in every case by the use of our copper alloy catalysts.",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875722a/claim/operating-conditions",
+      "target": "ex:msyn/us1875722a/catalyst/cu-zn-alloy"
+    },
+    {
+      "id": "ex:msyn/us1875722a/link/32",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1875722a/p2/1",
+            "quote": "Pressures in excess of 100 atmospheres and temperatures in excess of 200° C. should be is employed.",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875722a/claim/operating-conditions",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1875722a/link/33",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1875722a/p2/2",
+            "quote": "TThe yield will vary with the pressure, temperature, and rate of gas flow",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875722a/claim/yield-varies",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1875722a/link/34",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1875722a/p2/2",
+            "quote": "Where pure carbon monoxide gas is used, we prefer to use an excess of hydrogen in the 30 relation of one molecule of carbon monoxide to five molecules of hydrogen.",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875722a/claim/feed-ratios",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1875722a/link/35",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "quote": "we prefer to use a much larger excess of hydrogen—for example, twenty molecules of hydrogen per molecule of carbon dioxide.",
+            "source": "ex:msyn/source/us1875722a"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2, equation after 'according to the reaction'",
+            "note": "the equation is missing from the brief's OCR text; read from the page image (subscripts printed small)",
+            "reading": "vision_ocr",
+            "region": [
+              0.19,
+              0.545,
+              0.58,
+              0.565
+            ],
+            "second_reading": "ing water according to the reaction CO2+3H2=CH?OH+H2O",
+            "source": "ex:msyn/source/us1875722a",
+            "transcription": "CO2+3H2=CH3OH+H2O"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875722a/claim/feed-ratios",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1875722a/link/36",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "quote": "we prefer to use a much larger excess of hydrogen—for example, twenty molecules of hydrogen per molecule of carbon dioxide.",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875722a/claim/feed-ratios",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/us1875722a/link/37",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1875722a/p2/4",
+            "quote": "small percentages of gaseous hydrocarbons such as methane and inert gases such as nitrogen may be present",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875722a/claim/methane-nitrogen-tolerated",
+      "target": "ex:msyn/species/ch4"
+    },
+    {
+      "id": "ex:msyn/us1875722a/link/38",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1875722a/p2/4",
+            "quote": "small percentages of gaseous hydrocarbons such as methane and inert gases such as nitrogen may be present",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875722a/claim/methane-nitrogen-tolerated",
+      "target": "ex:msyn/species/n2"
+    },
+    {
+      "id": "ex:msyn/us1875722a/link/39",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1875722a/p2/4",
+            "quote": "small percentages of gaseous hydrocarbons such as methane and inert gases such as nitrogen may be present",
+            "source": "ex:msyn/source/us1875722a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1875722a/p2/4",
+            "quote": "in the gaseous mixture without bad results.",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ],
+        "inhibition_kind": "not_stated",
+        "negated": true
+      },
+      "source": "ex:msyn/us1875722a/catalyst/cu-zn-alloy",
+      "target": "ex:msyn/species/ch4"
+    },
+    {
+      "id": "ex:msyn/us1875722a/link/4",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1875722a/p1/3",
+            "quote": "The copper-zinc alloy may also contain a small percentage of another metal such as 45 tin or manganese.",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ],
+        "role": "not_stated",
+        "role_detail": "optional; a small percentage of another metal"
+      },
+      "source": "ex:msyn/us1875722a/catalyst/cu-zn-alloy",
+      "target": "ex:msyn/species/manganese"
+    },
+    {
+      "id": "ex:msyn/us1875722a/link/40",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1875722a/p2/4",
+            "quote": "small percentages of gaseous hydrocarbons such as methane and inert gases such as nitrogen may be present",
+            "source": "ex:msyn/source/us1875722a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1875722a/p2/4",
+            "quote": "in the gaseous mixture without bad results.",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ],
+        "inhibition_kind": "not_stated",
+        "negated": true
+      },
+      "source": "ex:msyn/us1875722a/catalyst/cu-zn-alloy",
+      "target": "ex:msyn/species/n2"
+    },
+    {
+      "id": "ex:msyn/us1875722a/link/41",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 1",
+            "note": "'zine' = 'zinc'",
+            "passage": "us1875722a/p2/4",
+            "quote": "1. A methanol catalyst which comprises a copper-zine alloy in which the copper pre- dominates, the surface of which comprises the partially reduced oxides of the alloy sur-",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875722a/claim/patent-claim-1",
+      "target": "ex:msyn/us1875722a/catalyst/cu-zn-alloy"
+    },
+    {
+      "id": "ex:msyn/us1875722a/link/42",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 2",
+            "note": "'zine' = 'zinc'",
+            "passage": "us1875722a/p2/4",
+            "quote": "2. A methanol catalyst which comprises filings of a copper-zine alloy in which the copper predominates, the surface of which comprises the partially reduced oxides of the 80 alloy surface.",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875722a/claim/patent-claim-2",
+      "target": "ex:msyn/us1875722a/catalyst/cu-zn-alloy"
+    },
+    {
+      "id": "ex:msyn/us1875722a/link/43",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 3",
+            "passage": "us1875722a/p2/5",
+            "quote": "3. A methanol catalyst which comprises a copper-zinc alloy in which the copper pre- dominates, the surface of which comprises the partially reduced oxides of the anodi- 85 cally oxidized alloy surface.",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875722a/claim/patent-claim-3",
+      "target": "ex:msyn/us1875722a/catalyst/cu-zn-alloy"
+    },
+    {
+      "id": "ex:msyn/us1875722a/link/44",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 3",
+            "passage": "us1875722a/p2/5",
+            "quote": "3. A methanol catalyst which comprises a copper-zinc alloy in which the copper pre- dominates, the surface of which comprises the partially reduced oxides of the anodi- 85 cally oxidized alloy surface.",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875722a/claim/patent-claim-3",
+      "target": "ex:msyn/us1875722a/preparation/anodic-oxidation-example"
+    },
+    {
+      "id": "ex:msyn/us1875722a/link/45",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 4",
+            "note": "'zine' = 'zinc'",
+            "passage": "us1875722a/p2/5",
+            "quote": "4 methanol catalyst which comprises filings of a copper-zine alloy in which the copper predominates, the surface of which comprises the partially reduced oxides of the 90 anodically oxidized alloy surface.",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875722a/claim/patent-claim-4",
+      "target": "ex:msyn/us1875722a/catalyst/cu-zn-alloy"
+    },
+    {
+      "id": "ex:msyn/us1875722a/link/46",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 4",
+            "note": "'zine' = 'zinc'",
+            "passage": "us1875722a/p2/5",
+            "quote": "4 methanol catalyst which comprises filings of a copper-zine alloy in which the copper predominates, the surface of which comprises the partially reduced oxides of the 90 anodically oxidized alloy surface.",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1875722a/claim/patent-claim-4",
+      "target": "ex:msyn/us1875722a/preparation/anodic-oxidation-example"
+    },
+    {
+      "id": "ex:msyn/us1875722a/link/5",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1875722a/p1/3",
+            "quote": "Brass—zinc, 1 part; copper, 2-5 parts",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "zinc, 1 part",
+          "unit": "parts",
+          "value": 1
+        },
+        "fraction_basis": "not_reported",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1875722a/catalyst/brass",
+      "target": "ex:msyn/species/zinc"
+    },
+    {
+      "id": "ex:msyn/us1875722a/link/6",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1875722a/p1/3",
+            "quote": "Brass—zinc, 1 part; copper, 2-5 parts",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "copper, 2-5 parts",
+          "lower": 2,
+          "unit": "parts",
+          "upper": 5
+        },
+        "fraction_basis": "not_reported",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1875722a/catalyst/brass",
+      "target": "ex:msyn/species/copper"
+    },
+    {
+      "id": "ex:msyn/us1875722a/link/7",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'6' is a line number",
+            "passage": "us1875722a/p1/3",
+            "quote": "Bronze—zinc, 1-2 parts; copper, 7-9 parts; 6 and tin, 1-2 parts",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "zinc, 1-2 parts",
+          "lower": 1,
+          "unit": "parts",
+          "upper": 2
+        },
+        "fraction_basis": "not_reported",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1875722a/catalyst/bronze",
+      "target": "ex:msyn/species/zinc"
+    },
+    {
+      "id": "ex:msyn/us1875722a/link/8",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'6' is a line number",
+            "passage": "us1875722a/p1/3",
+            "quote": "Bronze—zinc, 1-2 parts; copper, 7-9 parts; 6 and tin, 1-2 parts",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "copper, 7-9 parts",
+          "lower": 7,
+          "unit": "parts",
+          "upper": 9
+        },
+        "fraction_basis": "not_reported",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1875722a/catalyst/bronze",
+      "target": "ex:msyn/species/copper"
+    },
+    {
+      "id": "ex:msyn/us1875722a/link/9",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'6' is a line number",
+            "passage": "us1875722a/p1/3",
+            "quote": "Bronze—zinc, 1-2 parts; copper, 7-9 parts; 6 and tin, 1-2 parts",
+            "source": "ex:msyn/source/us1875722a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "tin, 1-2 parts",
+          "lower": 1,
+          "unit": "parts",
+          "upper": 2
+        },
+        "fraction_basis": "not_reported",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1875722a/catalyst/bronze",
+      "target": "ex:msyn/species/tin"
+    },
+    {
+      "id": "ex:msyn/us1875722a/material/brass-filings/reported-in/us1875722a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875722a/material/brass-filings",
+      "target": "ex:msyn/source/us1875722a"
+    },
+    {
+      "id": "ex:msyn/us1875722a/preparation/anodic-oxidation-example/reported-in/us1875722a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 1, anodic oxidation example"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875722a/preparation/anodic-oxidation-example",
+      "target": "ex:msyn/source/us1875722a"
+    },
+    {
+      "id": "ex:msyn/us1875722a/reactor/recirculation/reported-in/us1875722a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875722a/reactor/recirculation",
+      "target": "ex:msyn/source/us1875722a"
+    },
+    {
+      "id": "ex:msyn/us1875722a/sample/anodic-brass-example/reported-in/us1875722a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 1, anodic oxidation example"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875722a/sample/anodic-brass-example",
+      "target": "ex:msyn/source/us1875722a"
+    },
+    {
+      "id": "ex:msyn/us1875722a/sample/operating-example/reported-in/us1875722a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875722a/sample/operating-example",
+      "target": "ex:msyn/source/us1875722a"
+    },
+    {
+      "id": "ex:msyn/us1875722a/test/operating-example/reported-in/us1875722a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875722a/test/operating-example",
+      "target": "ex:msyn/source/us1875722a"
+    },
+    {
+      "id": "ex:msyn/us1875722a/treatment/h2-reduction-200c/reported-in/us1875722a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875722a/treatment/h2-reduction-200c",
+      "target": "ex:msyn/source/us1875722a"
+    },
+    {
+      "id": "ex:msyn/us1875722a/treatment/oxidation-general/reported-in/us1875722a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875722a/treatment/oxidation-general",
+      "target": "ex:msyn/source/us1875722a"
+    },
+    {
+      "id": "ex:msyn/us1875722a/treatment/reduction-general/reported-in/us1875722a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1875722a/treatment/reduction-general",
+      "target": "ex:msyn/source/us1875722a"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/us1875722a"
+}

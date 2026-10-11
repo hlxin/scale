@@ -1,0 +1,1823 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/catalyst/reduced-normal-zinc-chromate",
+      "label": "Catalyst",
+      "props": {
+        "name": "reduced normal zinc chromate (catalyst of Brown and Galloway)",
+        "catalyst_family": "not_reported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50226a035/p2/8",
+            "quote": "it does seem evident, however, from the above ratios that the reduced nor- mal zinc chromate is an effective catalyst under the conditions obtaining in this comparison.",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          }
+        ],
+        "note": "The catalyst of the writers' own work (Brown and Galloway, published elsewhere); its composition and preparation are not given in this source."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/claim/kf-same-order-lower-than-kelley",
+      "label": "Claim",
+      "props": {
+        "name": "The K_f values calculated with partial fugacities are of approximately the same ",
+        "claim_kind": "comparison",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'Kv' and 'K/' are the text layer's renderings of Kp and K_f",
+            "passage": "10.1021-ie50226a035/p2/5",
+            "quote": "As was the case for Kv, the relative values of K/ are of approximately the same order and much lower than the values of KP calculated from thermodynamical data by Kelly,",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          }
+        ],
+        "inference_type": "computational",
+        "statement": "The K_f values calculated with partial fugacities are of approximately the same order and much lower than the Kp values calculated from thermodynamical data by Kelley."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/claim/kp-same-order",
+      "label": "Claim",
+      "props": {
+        "name": "The Kp values calculated from the experimental conversions of the three sets of ",
+        "claim_kind": "comparison",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50226a035/p2/3",
+            "quote": "It is evident that these values are of the same order of magnitude and possess a relative posi- tion which might be well expected from the activities of the respective catalysts and the relative space velocities employed.",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          }
+        ],
+        "inference_type": "computational",
+        "statement": "The Kp values calculated from the experimental conversions of the three sets of investigators are of the same order of magnitude and have a relative position that might be expected from the activities of the respective catalysts and the space velocities employed."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/claim/no-equilibrium-close-agreement",
+      "label": "Claim",
+      "props": {
+        "name": "No attempts have apparently been made by the three sets of investigators to esta",
+        "claim_kind": "comparison",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50226a035/p3/1",
+            "quote": "no attempts have apparently been made to establish complete equilibrium.",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50226a035/p3/1",
+            "quote": "It is noteworthy, however, that there is such close agreement between the results from the inde- pendent laboratories, notwithstanding the differences in types of catalysts, in the probable purity of the reactant gases, the types of apparatus used, and other working conditions.",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          }
+        ],
+        "inference_type": "meta_analysis",
+        "statement": "No attempts have apparently been made by the three sets of investigators to establish complete equilibrium; nevertheless the results of the independent laboratories agree closely despite differences in catalysts, gas purity, apparatus and working conditions."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/claim/zinc-chromate-effective",
+      "label": "Claim",
+      "props": {
+        "name": "From the ratios of space-time yields to calculated equilibrium conversions, the ",
+        "claim_kind": "conclusion",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50226a035/p2/8",
+            "quote": "it does seem evident, however, from the above ratios that the reduced nor- mal zinc chromate is an effective catalyst under the conditions obtaining in this comparison.",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          }
+        ],
+        "inference_type": "computational",
+        "limitations": "Quantitative deductions from the ratios can hardly be drawn with safety: in the two other cases the amount of catalyst was a small fraction of the liter to which the values are approximated; pressure, CO:H2 ratio and catalyst density differ (density neglected).",
+        "statement": "From the ratios of space-time yields to calculated equilibrium conversions, the reduced normal zinc chromate is an effective catalyst under the conditions of this comparison."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/computation/space-time-yields",
+      "label": "Computation",
+      "props": {
+        "name": "Approximate space-time yields at 400 °C of the three sets of investigators, reduced to a CO:2H2 mixture",
+        "conditions": {
+          "catalyst_volume_c": {
+            "status": "present",
+            "as_reported": "250 cc.",
+            "note": "catalyst volume in the writers' own tests (Brown and Galloway)",
+            "unit": "cc",
+            "value": 250
+          },
+          "pressures": {
+            "status": "present",
+            "as_reported": "at 150 atmospheres ... at 204 atmospheres ... at 180 atmospheres",
+            "text_value": "A 150 atm, B 204 atm, C 180 atm"
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50226a035/p2/6",
+            "quote": "The space-time yields from each of the three publications under discussion may be roughly approximated for the one temperature being considered.",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50226a035/p2/6",
+            "quote": "=  248 grams per liter per hour, which represents their maximum value for a space velocity of 5000;",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50226a035/p2/6",
+            "quote": "is equivalent to 260 grams per liter per hour at a space velocity of 5000;",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50226a035/p2/6",
+            "quote": "and this 104 grams X 1000/250 = 416 grams per liter per hour.",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50226a035/p2/7",
+            "quote": "= 300 grams per liter per hour at 150 atmospheres.",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50226a035/p2/7",
+            "quote": "the yield would be 260 grams X 22.6/27 X 2.7/2.0 = 295 grams per liter per hour at 204 atmospheres.",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50226a035/p2/7",
+            "quote": "In case C with a ratio CO:H2 = 1:2, the value is 416 grams per liter per hour at 180 atmospheres.",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50226a035/p2/8",
+            "quote": "calculated equilibrium conversions in per cent at the above pressures and 400° C. of 14.6, 22.6, 19.0, which have the ratio 1.0, 1.55, 1.30.",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50226a035/p2/8",
+            "quote": "The space-time yields approxi- mated above have the ratios, respectively, 300, 295, 416, or 1.0, 1.0, 1.4.",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          }
+        ],
+        "experiment_kind": "computational",
+        "experiment_status": "completed",
+        "method": "scaling of published yields to one liter of catalyst and a space velocity of 5000; correction for CO:H2 ratio using Nernst-formula theoretical conversions; catalyst density neglected",
+        "note": "Inputs are the published yields of the three cited works; the scaling and reduction are this source's.",
+        "results": {
+          "equilibrium_conversion_a_b_c": {
+            "status": "present",
+            "as_reported": "14.6, 22.6, 19.0, which have the ratio 1.0, 1.55, 1.30",
+            "text_value": "14.6, 22.6, 19.0 per cent; ratio 1.0, 1.55, 1.30"
+          },
+          "sty_a_audibert_raineau": {
+            "status": "present",
+            "as_reported": "248 grams per liter per hour",
+            "note": "space velocity 5000",
+            "unit": "g/(L h)",
+            "value": 248
+          },
+          "sty_a_reduced_co_2h2": {
+            "status": "present",
+            "as_reported": "300 grams per liter per hour at 150 atmospheres",
+            "unit": "g/(L h)",
+            "value": 300
+          },
+          "sty_b_lewis_frolich": {
+            "status": "present",
+            "as_reported": "260 grams per liter per hour",
+            "note": "at a space velocity of 5000",
+            "unit": "g/(L h)",
+            "value": 260
+          },
+          "sty_b_reduced_co_2h2": {
+            "status": "present",
+            "as_reported": "295 grams per liter per hour at 204 atmospheres",
+            "unit": "g/(L h)",
+            "value": 295
+          },
+          "sty_c_brown_galloway": {
+            "status": "present",
+            "as_reported": "416 grams per liter per hour",
+            "unit": "g/(L h)",
+            "value": 416
+          },
+          "sty_c_co_2h2": {
+            "status": "present",
+            "as_reported": "416 grams per liter per hour at 180 atmospheres",
+            "unit": "g/(L h)",
+            "value": 416
+          },
+          "sty_ratio_a_b_c": {
+            "status": "present",
+            "as_reported": "300, 295, 416, or 1.0, 1.0, 1.4",
+            "text_value": "1.0, 1.0, 1.4"
+          },
+          "yield_c_brown_galloway_interpolated": {
+            "status": "present",
+            "as_reported": "about 104 grams at 5000",
+            "qualifier": "approximate",
+            "unit": "g",
+            "value": 104
+          }
+        },
+        "task": "rough approximation of space-time yields from the published results of Audibert and Raineau (A), Lewis and Frolich (B) and Brown and Galloway (C), and reduction to equivalent values for a CO:2H2 mixture",
+        "temperature": {
+          "status": "present",
+          "as_reported": "400° C.",
+          "unit": "°C",
+          "value": 400
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/computation/table1-audibert-raineau-x",
+      "label": "Computation",
+      "props": {
+        "name": "Table I: Nernst conversion, partial pressures and equilibrium quotients, Audibert and Raineau (x), S. V. 5000",
+        "conditions": {
+          "experimental_conversion": {
+            "status": "present",
+            "as_reported": "22.5",
+            "note": "column 5, CO to methanol input value from the cited work, not measured in this source",
+            "unit": "%",
+            "value": 22.5
+          },
+          "original_gas_mixture": {
+            "status": "present",
+            "as_reported": "CO + 5H2",
+            "note": "input value from the cited work, not measured in this source",
+            "text_value": "CO + 5H2"
+          },
+          "space_velocity": {
+            "status": "present",
+            "as_reported": "S. V. 5000",
+            "note": "no unit printed input value from the cited work, not measured in this source",
+            "text_value": "S. V. 5000"
+          }
+        },
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I",
+            "passage": "10.1021-ie50226a035/p2/1",
+            "quote": "Table I—Comparison of Experimental and Calculated Conversions Obtained by Three Sets of Investigators",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I",
+            "note": "row 'Audibert and Raineau (x), S. V. 5000' of Table I (text layer scrambles the table; values assigned by row order)",
+            "passage": "10.1021-ie50226a035/p2/1",
+            "quote": "20.95",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50226a035/p2/2",
+            "quote": "Column 5 gives the experimental conversions and column 6 the ones calculated as stated above.",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "quote": "They have been calculated on the basis of the experimental conversions of column 5. From these, KP (column 10) has been calculated, assuming no departure from the perfect gas laws.",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50226a035/p2/5",
+            "quote": "The fugacities (or effective pressures) at the exact pressures employed by the three sets of investigators are given in the (a) values of columns 11, 12, and 13 of Table I;",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'Kj' is the text layer's rendering of K_f",
+            "passage": "10.1021-ie50226a035/p2/5",
+            "quote": "These latter have been used in arriving at the new set of K’s which have been designated Kj and are given in column 14 of Table I.",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          }
+        ],
+        "experiment_kind": "computational",
+        "experiment_status": "completed",
+        "method": "Nernst approximation formula (5) in the total-pressure form; Kp assuming perfect gas laws; fugacities after Lewis and Randall from van der Waals constants",
+        "note": "The experimental conversions and conditions are those of Audibert and Raineau (cited); the calculations are this source's.",
+        "pressure": {
+          "status": "present",
+          "as_reported": "150",
+          "unit": "atm",
+          "value": 150
+        },
+        "results": {
+          "conversion_calculated_by_writers": {
+            "status": "present",
+            "as_reported": "Our calculations give 22.4.",
+            "note": "footnote to the 24 in column 6",
+            "unit": "%",
+            "value": 22.4
+          },
+          "conversion_calculated_nernst": {
+            "status": "present",
+            "as_reported": "24",
+            "note": "column 6, calculated by the Nernst approximation formula (5); footnote: 'Our calculations give 22.4.'",
+            "unit": "%",
+            "value": 24
+          },
+          "fugacity_co_a": {
+            "status": "present",
+            "as_reported": "156",
+            "note": "(a) calculated from van der Waals constants at the total pressure and 400 °C; The text layer lists this (a)/(b)/Kf group first in the 150-atmosphere block; whether it belongs to row (x) or row (y) is not clear from the text layer.",
+            "unit": "atm",
+            "value": 156
+          },
+          "fugacity_h2_a": {
+            "status": "present",
+            "as_reported": "159.8",
+            "note": "(a) calculated from van der Waals constants at the total pressure and 400 °C; The text layer lists this (a)/(b)/Kf group first in the 150-atmosphere block; whether it belongs to row (x) or row (y) is not clear from the text layer.",
+            "unit": "atm",
+            "value": 159.8
+          },
+          "fugacity_methanol_a": {
+            "status": "present",
+            "as_reported": "109.9",
+            "note": "(a) calculated from van der Waals constants at the total pressure and 400 °C; The text layer lists this (a)/(b)/Kf group first in the 150-atmosphere block; whether it belongs to row (x) or row (y) is not clear from the text layer.",
+            "unit": "atm",
+            "value": 109.9
+          },
+          "kf": {
+            "status": "present",
+            "as_reported": "1.19 X 10-s",
+            "note": "column 14, K_f from partial fugacities; exponent rendered '10-s' in the text layer (the 's' is garbled, probably 5); The text layer lists this (a)/(b)/Kf group first in the 150-atmosphere block; whether it belongs to row (x) or row (y) is not clear from the text layer.",
+            "text_value": "1.19 X 10-s"
+          },
+          "kp": {
+            "status": "present",
+            "as_reported": "1.92 X 10\"5",
+            "note": "column 10, Kp = p_MeOH/(p_CO x p_H2^2), assuming perfect gas laws; exponent rendered '10\"5' in the text layer (sign garbled)",
+            "text_value": "1.92 X 10\"5"
+          },
+          "partial_fugacity_co_b": {
+            "status": "present",
+            "as_reported": "49.18",
+            "note": "(b) f x mol fraction; The text layer lists this (a)/(b)/Kf group first in the 150-atmosphere block; whether it belongs to row (x) or row (y) is not clear from the text layer.",
+            "unit": "atm",
+            "value": 49.18
+          },
+          "partial_fugacity_h2_b": {
+            "status": "present",
+            "as_reported": "100.76",
+            "note": "(b) f x mol fraction; The text layer lists this (a)/(b)/Kf group first in the 150-atmosphere block; whether it belongs to row (x) or row (y) is not clear from the text layer.",
+            "unit": "atm",
+            "value": 100.76
+          },
+          "partial_fugacity_methanol_b": {
+            "status": "present",
+            "as_reported": "5.952",
+            "note": "(b) f x mol fraction; The text layer lists this (a)/(b)/Kf group first in the 150-atmosphere block; whether it belongs to row (x) or row (y) is not clear from the text layer.",
+            "unit": "atm",
+            "value": 5.952
+          },
+          "partial_pressure_co": {
+            "status": "present",
+            "as_reported": "20.95",
+            "note": "column 7, calculated from the experimental conversion",
+            "unit": "atm",
+            "value": 20.95
+          },
+          "partial_pressure_h2": {
+            "status": "present",
+            "as_reported": "122.97",
+            "note": "column 8",
+            "unit": "atm",
+            "value": 122.97
+          },
+          "partial_pressure_methanol": {
+            "status": "present",
+            "as_reported": "6.08",
+            "note": "column 9",
+            "unit": "atm",
+            "value": 6.08
+          }
+        },
+        "task": "calculated Nernst-approximation conversion, partial pressures attained, Kp and (where given) fugacities and K_f for the conditions of Audibert and Raineau",
+        "temperature": {
+          "status": "present",
+          "as_reported": "400",
+          "unit": "°C",
+          "value": 400
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/computation/table1-audibert-raineau-y",
+      "label": "Computation",
+      "props": {
+        "name": "Table I: Nernst conversion, partial pressures and equilibrium quotients, Audibert and Raineau (y), calculated from (x)",
+        "conditions": {
+          "experimental_conversion": {
+            "status": "present",
+            "as_reported": "14.66",
+            "note": "column 5, CO to methanol input value from the cited work, not measured in this source",
+            "unit": "%",
+            "value": 14.66
+          },
+          "original_gas_mixture": {
+            "status": "present",
+            "as_reported": "CO + 2H2",
+            "note": "input value from the cited work, not measured in this source",
+            "text_value": "CO + 2H2"
+          }
+        },
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I",
+            "passage": "10.1021-ie50226a035/p2/1",
+            "quote": "Table I—Comparison of Experimental and Calculated Conversions Obtained by Three Sets of Investigators",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I",
+            "note": "row 'Audibert and Raineau (y), calculated from (x)' of Table I (text layer scrambles the table; values assigned by row order)",
+            "passage": "10.1021-ie50226a035/p2/1",
+            "quote": "47.29",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50226a035/p2/2",
+            "quote": "Column 5 gives the experimental conversions and column 6 the ones calculated as stated above.",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "quote": "They have been calculated on the basis of the experimental conversions of column 5. From these, KP (column 10) has been calculated, assuming no departure from the perfect gas laws.",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          }
+        ],
+        "experiment_kind": "computational",
+        "experiment_status": "completed",
+        "method": "Nernst approximation formula (5) in the total-pressure form; Kp assuming perfect gas laws; fugacities after Lewis and Randall from van der Waals constants",
+        "note": "The experimental conversions and conditions are those of Audibert and Raineau (cited); the calculations are this source's.",
+        "pressure": {
+          "status": "present",
+          "as_reported": "150",
+          "unit": "atm",
+          "value": 150
+        },
+        "results": {
+          "conversion_calculated_nernst": {
+            "status": "present",
+            "as_reported": "14.6",
+            "note": "column 6, calculated by the Nernst approximation formula (5)",
+            "unit": "%",
+            "value": 14.6
+          },
+          "kp": {
+            "status": "present",
+            "as_reported": "1.92 X 10-6",
+            "note": "column 10, Kp = p_MeOH/(p_CO x p_H2^2), assuming perfect gas laws; printed '10-6' in the text layer, while row (x) prints '10\"5' with the same mantissa",
+            "text_value": "1.92 X 10-6"
+          },
+          "partial_pressure_co": {
+            "status": "present",
+            "as_reported": "47.29",
+            "note": "column 7, calculated from the experimental conversion",
+            "unit": "atm",
+            "value": 47.29
+          },
+          "partial_pressure_h2": {
+            "status": "present",
+            "as_reported": "94.58",
+            "note": "column 8",
+            "unit": "atm",
+            "value": 94.58
+          },
+          "partial_pressure_methanol": {
+            "status": "present",
+            "as_reported": "8.12",
+            "note": "column 9",
+            "unit": "atm",
+            "value": 8.12
+          }
+        },
+        "task": "calculated Nernst-approximation conversion, partial pressures attained, Kp and (where given) fugacities and K_f for the conditions of Audibert and Raineau",
+        "temperature": {
+          "status": "present",
+          "as_reported": "400",
+          "unit": "°C",
+          "value": 400
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/computation/table1-brown-galloway-sv3000",
+      "label": "Computation",
+      "props": {
+        "name": "Table I: Nernst conversion, partial pressures and equilibrium quotients, Brown and Galloway, S. V. 3000",
+        "conditions": {
+          "experimental_conversion": {
+            "status": "present",
+            "as_reported": "19.5",
+            "note": "column 5, CO to methanol input value from the cited work, not measured in this source",
+            "unit": "%",
+            "value": 19.5
+          },
+          "original_gas_mixture": {
+            "status": "present",
+            "as_reported": "CO + 2H2",
+            "note": "input value from the cited work, not measured in this source",
+            "text_value": "CO + 2H2"
+          },
+          "space_velocity": {
+            "status": "present",
+            "as_reported": "S. V. 3000",
+            "note": "no unit printed input value from the cited work, not measured in this source",
+            "text_value": "S. V. 3000"
+          }
+        },
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I",
+            "passage": "10.1021-ie50226a035/p2/1",
+            "quote": "Table I—Comparison of Experimental and Calculated Conversions Obtained by Three Sets of Investigators",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I",
+            "note": "row 'Brown and Galloway, S. V. 3000' of Table I (text layer scrambles the table; values assigned by row order)",
+            "passage": "10.1021-ie50226a035/p2/1",
+            "quote": "55.52",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50226a035/p2/2",
+            "quote": "Column 5 gives the experimental conversions and column 6 the ones calculated as stated above.",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "quote": "They have been calculated on the basis of the experimental conversions of column 5. From these, KP (column 10) has been calculated, assuming no departure from the perfect gas laws.",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50226a035/p2/5",
+            "quote": "The fugacities (or effective pressures) at the exact pressures employed by the three sets of investigators are given in the (a) values of columns 11, 12, and 13 of Table I;",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'Kj' is the text layer's rendering of K_f",
+            "passage": "10.1021-ie50226a035/p2/5",
+            "quote": "These latter have been used in arriving at the new set of K’s which have been designated Kj and are given in column 14 of Table I.",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          }
+        ],
+        "experiment_kind": "computational",
+        "experiment_status": "completed",
+        "method": "Nernst approximation formula (5) in the total-pressure form; Kp assuming perfect gas laws; fugacities after Lewis and Randall from van der Waals constants",
+        "note": "The experimental conversions and conditions are those of Brown and Galloway (cited); the calculations are this source's.",
+        "pressure": {
+          "status": "present",
+          "as_reported": "180",
+          "unit": "atm",
+          "value": 180
+        },
+        "results": {
+          "conversion_calculated_nernst": {
+            "status": "present",
+            "as_reported": "19.0",
+            "note": "column 6, calculated by the Nernst approximation formula (5)",
+            "unit": "%",
+            "value": 19.0
+          },
+          "fugacity_note": {
+            "status": "present",
+            "as_reported": "(b) 58.6 120.78 9.25 1.08 X 10-s",
+            "text_value": "no separate (a) values printed for this row; the row shares the 180-atmosphere pressure of the S. V. 7500 row"
+          },
+          "kf": {
+            "status": "present",
+            "as_reported": "1.08 X 10-s",
+            "note": "column 14, K_f from partial fugacities; exponent rendered '10-s' in the text layer (the 's' is garbled, probably 5)",
+            "text_value": "1.08 X 10-s"
+          },
+          "kp": {
+            "status": "present",
+            "as_reported": "1.98 X 10\"6",
+            "note": "column 10, Kp = p_MeOH/(p_CO x p_H2^2), assuming perfect gas laws; exponent rendered '10\"6' in the text layer (sign garbled)",
+            "text_value": "1.98 X 10\"6"
+          },
+          "partial_fugacity_co_b": {
+            "status": "present",
+            "as_reported": "58.6",
+            "note": "(b) f x mol fraction",
+            "unit": "atm",
+            "value": 58.6
+          },
+          "partial_fugacity_h2_b": {
+            "status": "present",
+            "as_reported": "120.78",
+            "note": "(b) f x mol fraction",
+            "unit": "atm",
+            "value": 120.78
+          },
+          "partial_fugacity_methanol_b": {
+            "status": "present",
+            "as_reported": "9.25",
+            "note": "(b) f x mol fraction",
+            "unit": "atm",
+            "value": 9.25
+          },
+          "partial_pressure_co": {
+            "status": "present",
+            "as_reported": "55.52",
+            "note": "column 7, calculated from the experimental conversion",
+            "unit": "atm",
+            "value": 55.52
+          },
+          "partial_pressure_h2": {
+            "status": "present",
+            "as_reported": "111.04",
+            "note": "column 8",
+            "unit": "atm",
+            "value": 111.04
+          },
+          "partial_pressure_methanol": {
+            "status": "present",
+            "as_reported": "13.44",
+            "note": "column 9",
+            "unit": "atm",
+            "value": 13.44
+          }
+        },
+        "task": "calculated Nernst-approximation conversion, partial pressures attained, Kp and (where given) fugacities and K_f for the conditions of Brown and Galloway",
+        "temperature": {
+          "status": "present",
+          "as_reported": "400",
+          "unit": "°C",
+          "value": 400
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/computation/table1-brown-galloway-sv7500",
+      "label": "Computation",
+      "props": {
+        "name": "Table I: Nernst conversion, partial pressures and equilibrium quotients, Brown and Galloway, S. V. 7500",
+        "conditions": {
+          "experimental_conversion": {
+            "status": "present",
+            "as_reported": "16.8",
+            "note": "column 5, CO to methanol input value from the cited work, not measured in this source",
+            "unit": "%",
+            "value": 16.8
+          },
+          "original_gas_mixture": {
+            "status": "present",
+            "as_reported": "CO + 2H2",
+            "note": "input value from the cited work, not measured in this source",
+            "text_value": "CO + 2H2"
+          },
+          "space_velocity": {
+            "status": "present",
+            "as_reported": "S. V. 7500",
+            "note": "no unit printed input value from the cited work, not measured in this source",
+            "text_value": "S. V. 7500"
+          }
+        },
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I",
+            "passage": "10.1021-ie50226a035/p2/1",
+            "quote": "Table I—Comparison of Experimental and Calculated Conversions Obtained by Three Sets of Investigators",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I",
+            "note": "row 'Brown and Galloway, S. V. 7500' of Table I (text layer scrambles the table; values assigned by row order)",
+            "passage": "10.1021-ie50226a035/p2/1",
+            "quote": "56.17",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50226a035/p2/2",
+            "quote": "Column 5 gives the experimental conversions and column 6 the ones calculated as stated above.",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "quote": "They have been calculated on the basis of the experimental conversions of column 5. From these, KP (column 10) has been calculated, assuming no departure from the perfect gas laws.",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50226a035/p2/5",
+            "quote": "The fugacities (or effective pressures) at the exact pressures employed by the three sets of investigators are given in the (a) values of columns 11, 12, and 13 of Table I;",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'Kj' is the text layer's rendering of K_f",
+            "passage": "10.1021-ie50226a035/p2/5",
+            "quote": "These latter have been used in arriving at the new set of K’s which have been designated Kj and are given in column 14 of Table I.",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          }
+        ],
+        "experiment_kind": "computational",
+        "experiment_status": "completed",
+        "method": "Nernst approximation formula (5) in the total-pressure form; Kp assuming perfect gas laws; fugacities after Lewis and Randall from van der Waals constants",
+        "note": "The experimental conversions and conditions are those of Brown and Galloway (cited); the calculations are this source's.",
+        "pressure": {
+          "status": "present",
+          "as_reported": "180",
+          "unit": "atm",
+          "value": 180
+        },
+        "results": {
+          "conversion_calculated_nernst": {
+            "status": "present",
+            "as_reported": "19.0",
+            "note": "column 6, calculated by the Nernst approximation formula (5)",
+            "unit": "%",
+            "value": 19.0
+          },
+          "fugacity_co_a": {
+            "status": "present",
+            "as_reported": "190",
+            "note": "(a) calculated from van der Waals constants at the total pressure and 400 °C",
+            "unit": "atm",
+            "value": 190
+          },
+          "fugacity_h2_a": {
+            "status": "present",
+            "as_reported": "195.8",
+            "note": "(a) calculated from van der Waals constants at the total pressure and 400 °C",
+            "unit": "atm",
+            "value": 195.8
+          },
+          "fugacity_methanol_a": {
+            "status": "present",
+            "as_reported": "123.8",
+            "note": "(a) calculated from van der Waals constants at the total pressure and 400 °C",
+            "unit": "atm",
+            "value": 123.8
+          },
+          "kf": {
+            "status": "present",
+            "as_reported": "0.89 X 10-s",
+            "note": "column 14, K_f from partial fugacities; exponent rendered '10-s' in the text layer (the 's' is garbled, probably 5)",
+            "text_value": "0.89 X 10-s"
+          },
+          "kp": {
+            "status": "present",
+            "as_reported": "1.62 X  \"6",
+            "note": "column 10, Kp = p_MeOH/(p_CO x p_H2^2), assuming perfect gas laws; exponent rendered ' \"6' in the text layer (base and sign garbled)",
+            "text_value": "1.62 X  \"6"
+          },
+          "partial_fugacity_co_b": {
+            "status": "present",
+            "as_reported": "59.29",
+            "note": "(b) f x mol fraction",
+            "unit": "atm",
+            "value": 59.29
+          },
+          "partial_fugacity_h2_b": {
+            "status": "present",
+            "as_reported": "122.19",
+            "note": "(b) f x mol fraction",
+            "unit": "atm",
+            "value": 122.19
+          },
+          "partial_fugacity_methanol_b": {
+            "status": "present",
+            "as_reported": "7.912",
+            "note": "(b) f x mol fraction",
+            "unit": "atm",
+            "value": 7.912
+          },
+          "partial_pressure_co": {
+            "status": "present",
+            "as_reported": "56.17",
+            "note": "column 7, calculated from the experimental conversion",
+            "unit": "atm",
+            "value": 56.17
+          },
+          "partial_pressure_h2": {
+            "status": "present",
+            "as_reported": "112.33",
+            "note": "column 8",
+            "unit": "atm",
+            "value": 112.33
+          },
+          "partial_pressure_methanol": {
+            "status": "present",
+            "as_reported": "11.51",
+            "note": "column 9",
+            "unit": "atm",
+            "value": 11.51
+          }
+        },
+        "task": "calculated Nernst-approximation conversion, partial pressures attained, Kp and (where given) fugacities and K_f for the conditions of Brown and Galloway",
+        "temperature": {
+          "status": "present",
+          "as_reported": "400",
+          "unit": "°C",
+          "value": 400
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/computation/table1-lewis-frolich",
+      "label": "Computation",
+      "props": {
+        "name": "Table I: Nernst conversion, partial pressures and equilibrium quotients, Lewis and Frolich, S. V. 625",
+        "conditions": {
+          "experimental_conversion": {
+            "status": "present",
+            "as_reported": "26",
+            "note": "column 5, CO to methanol input value from the cited work, not measured in this source",
+            "unit": "%",
+            "value": 26
+          },
+          "original_gas_mixture": {
+            "status": "present",
+            "as_reported": "CO + 2.7H2",
+            "note": "input value from the cited work, not measured in this source",
+            "text_value": "CO + 2.7H2"
+          },
+          "space_velocity": {
+            "status": "present",
+            "as_reported": "S. V. 625",
+            "note": "no unit printed input value from the cited work, not measured in this source",
+            "text_value": "S. V. 625"
+          }
+        },
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I",
+            "passage": "10.1021-ie50226a035/p2/1",
+            "quote": "Table I—Comparison of Experimental and Calculated Conversions Obtained by Three Sets of Investigators",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 2, Table I",
+            "note": "row 'Lewis and Frolich, S. V. 625' of Table I (text layer scrambles the table; values assigned by row order)",
+            "passage": "10.1021-ie50226a035/p2/1",
+            "quote": "47.47",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50226a035/p2/2",
+            "quote": "Column 5 gives the experimental conversions and column 6 the ones calculated as stated above.",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "quote": "They have been calculated on the basis of the experimental conversions of column 5. From these, KP (column 10) has been calculated, assuming no departure from the perfect gas laws.",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50226a035/p2/5",
+            "quote": "The fugacities (or effective pressures) at the exact pressures employed by the three sets of investigators are given in the (a) values of columns 11, 12, and 13 of Table I;",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'Kj' is the text layer's rendering of K_f",
+            "passage": "10.1021-ie50226a035/p2/5",
+            "quote": "These latter have been used in arriving at the new set of K’s which have been designated Kj and are given in column 14 of Table I.",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          }
+        ],
+        "experiment_kind": "computational",
+        "experiment_status": "completed",
+        "method": "Nernst approximation formula (5) in the total-pressure form; Kp assuming perfect gas laws; fugacities after Lewis and Randall from van der Waals constants",
+        "note": "The experimental conversions and conditions are those of Lewis and Frolich (cited); the calculations are this source's.",
+        "pressure": {
+          "status": "present",
+          "as_reported": "204",
+          "unit": "atm",
+          "value": 204
+        },
+        "results": {
+          "conversion_calculated_nernst": {
+            "status": "present",
+            "as_reported": "27.0",
+            "note": "column 6, calculated by the Nernst approximation formula (5)",
+            "unit": "%",
+            "value": 27.0
+          },
+          "fugacity_co_a": {
+            "status": "present",
+            "as_reported": "216.3",
+            "note": "(a) calculated from van der Waals constants at the total pressure and 400 °C",
+            "unit": "atm",
+            "value": 216.3
+          },
+          "fugacity_h2_a": {
+            "status": "present",
+            "as_reported": "225.5",
+            "note": "(a) calculated from van der Waals constants at the total pressure and 400 °C",
+            "unit": "atm",
+            "value": 225.5
+          },
+          "fugacity_methanol_a": {
+            "status": "present",
+            "as_reported": "134.3",
+            "note": "(a) calculated from van der Waals constants at the total pressure and 400 °C",
+            "unit": "atm",
+            "value": 134.3
+          },
+          "kf": {
+            "status": "present",
+            "as_reported": "0.91 X 10-s",
+            "note": "column 14, K_f from partial fugacities; exponent rendered '10-s' in the text layer (the 's' is garbled, probably 5)",
+            "text_value": "0.91 X 10-s"
+          },
+          "kp": {
+            "status": "present",
+            "as_reported": "1.80 X 10\"s",
+            "note": "column 10, Kp = p_MeOH/(p_CO x p_H2^2), assuming perfect gas laws; exponent rendered '10\"s' in the text layer (garbled)",
+            "text_value": "1.80 X 10\"s"
+          },
+          "partial_fugacity_co_b": {
+            "status": "present",
+            "as_reported": "50.33",
+            "note": "(b) f x mol fraction",
+            "unit": "atm",
+            "value": 50.33
+          },
+          "partial_fugacity_h2_b": {
+            "status": "present",
+            "as_reported": "154.87",
+            "note": "(b) f x mol fraction",
+            "unit": "atm",
+            "value": 154.87
+          },
+          "partial_fugacity_methanol_b": {
+            "status": "present",
+            "as_reported": "10.981",
+            "note": "(b) f x mol fraction",
+            "unit": "atm",
+            "value": 10.981
+          },
+          "partial_pressure_co": {
+            "status": "present",
+            "as_reported": "47.47",
+            "note": "column 7, calculated from the experimental conversion",
+            "unit": "atm",
+            "value": 47.47
+          },
+          "partial_pressure_h2": {
+            "status": "present",
+            "as_reported": "139.85",
+            "note": "column 8",
+            "unit": "atm",
+            "value": 139.85
+          },
+          "partial_pressure_methanol": {
+            "status": "present",
+            "as_reported": "16.68",
+            "note": "column 9",
+            "unit": "atm",
+            "value": 16.68
+          }
+        },
+        "task": "calculated Nernst-approximation conversion, partial pressures attained, Kp and (where given) fugacities and K_f for the conditions of Lewis and Frolich",
+        "temperature": {
+          "status": "present",
+          "as_reported": "400",
+          "unit": "°C",
+          "value": 400
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/hypothesis/kelley-kp-too-high",
+      "label": "Hypothesis",
+      "props": {
+        "name": "Kelley's thermodynamically calculated Kp values are probably much too high",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50226a035/p2/5",
+            "quote": "much lower than the values of KP calculated from thermodynamical data by Kelly,8 whose values are probably much too high.",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          }
+        ],
+        "hypothesis_kind": "explanatory",
+        "hypothesis_status": "proposed",
+        "statement": "The values of Kp calculated from thermodynamical data by Kelley are probably much too high."
+      }
+    },
+    {
+      "id": "ex:msyn/source/10.1021-ie50226a035",
+      "label": "Source",
+      "props": {
+        "name": "Comparative Study of Values Obtained in Synthesis of Methanol",
+        "kind": "article",
+        "description": "Published 1928 (publication year (bibliography)); in scope: before the 1966-01-01 cutoff. Text: 3 pages text_layer. Text not redistributed.",
+        "doi": "10.1021/ie50226a035",
+        "licence": "no verified publisher licence; short excerpts quoted as evidence under fair use",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "Comparative Study of Values Obtained in Synthesis of Methanol",
+        "url": "https://doi.org/10.1021/ie50226a035",
+        "venue": "Industrial & Engineering Chemistry",
+        "year": 1928
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/catalyst/reduced-normal-zinc-chromate/reported-in/10.1021-ie50226a035",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50226a035/catalyst/reduced-normal-zinc-chromate",
+      "target": "ex:msyn/source/10.1021-ie50226a035"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/claim/kf-same-order-lower-than-kelley/reported-in/10.1021-ie50226a035",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50226a035/claim/kf-same-order-lower-than-kelley",
+      "target": "ex:msyn/source/10.1021-ie50226a035"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/claim/kp-same-order/reported-in/10.1021-ie50226a035",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50226a035/claim/kp-same-order",
+      "target": "ex:msyn/source/10.1021-ie50226a035"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/claim/no-equilibrium-close-agreement/reported-in/10.1021-ie50226a035",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50226a035/claim/no-equilibrium-close-agreement",
+      "target": "ex:msyn/source/10.1021-ie50226a035"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/claim/zinc-chromate-effective/reported-in/10.1021-ie50226a035",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50226a035/claim/zinc-chromate-effective",
+      "target": "ex:msyn/source/10.1021-ie50226a035"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/computation/space-time-yields/reported-in/10.1021-ie50226a035",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50226a035/computation/space-time-yields",
+      "target": "ex:msyn/source/10.1021-ie50226a035"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/computation/table1-audibert-raineau-x/reported-in/10.1021-ie50226a035",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 2, Table I"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50226a035/computation/table1-audibert-raineau-x",
+      "target": "ex:msyn/source/10.1021-ie50226a035"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/computation/table1-audibert-raineau-y/reported-in/10.1021-ie50226a035",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 2, Table I"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50226a035/computation/table1-audibert-raineau-y",
+      "target": "ex:msyn/source/10.1021-ie50226a035"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/computation/table1-brown-galloway-sv3000/reported-in/10.1021-ie50226a035",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 2, Table I"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50226a035/computation/table1-brown-galloway-sv3000",
+      "target": "ex:msyn/source/10.1021-ie50226a035"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/computation/table1-brown-galloway-sv7500/reported-in/10.1021-ie50226a035",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 2, Table I"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50226a035/computation/table1-brown-galloway-sv7500",
+      "target": "ex:msyn/source/10.1021-ie50226a035"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/computation/table1-lewis-frolich/reported-in/10.1021-ie50226a035",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 2, Table I"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50226a035/computation/table1-lewis-frolich",
+      "target": "ex:msyn/source/10.1021-ie50226a035"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/hypothesis/kelley-kp-too-high/reported-in/10.1021-ie50226a035",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50226a035/hypothesis/kelley-kp-too-high",
+      "target": "ex:msyn/source/10.1021-ie50226a035"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/link/1",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'CHsOH' is the text layer's rendering of CH3OH",
+            "passage": "10.1021-ie50226a035/p1/5",
+            "quote": "For the reaction CO + 2H2 = CHsOH + Q calories (1) we have after Nernst",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50226a035/p1/5",
+            "quote": "In this they have limited themselves to one temperature, 400° C., for which their results have been published.",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          }
+        ],
+        "role": "equilibrium computed"
+      },
+      "source": "ex:msyn/10.1021-ie50226a035/computation/table1-audibert-raineau-x",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/link/10",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50226a035/p2/3",
+            "quote": "It is evident that these values are of the same order of magnitude and possess a relative posi- tion which might be well expected from the activities of the respective catalysts and the relative space velocities employed.",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50226a035/computation/table1-brown-galloway-sv7500",
+      "target": "ex:msyn/10.1021-ie50226a035/claim/kp-same-order"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/link/11",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50226a035/p2/3",
+            "quote": "It is evident that these values are of the same order of magnitude and possess a relative posi- tion which might be well expected from the activities of the respective catalysts and the relative space velocities employed.",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50226a035/computation/table1-brown-galloway-sv3000",
+      "target": "ex:msyn/10.1021-ie50226a035/claim/kp-same-order"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/link/12",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50226a035/p2/5",
+            "quote": "As was the case for Kv, the relative values of K/ are of approximately the same order and much lower than the values of KP calculated from thermodynamical data by Kelly,",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50226a035/computation/table1-audibert-raineau-x",
+      "target": "ex:msyn/10.1021-ie50226a035/claim/kf-same-order-lower-than-kelley"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/link/13",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50226a035/p2/5",
+            "quote": "As was the case for Kv, the relative values of K/ are of approximately the same order and much lower than the values of KP calculated from thermodynamical data by Kelly,",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50226a035/computation/table1-lewis-frolich",
+      "target": "ex:msyn/10.1021-ie50226a035/claim/kf-same-order-lower-than-kelley"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/link/14",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50226a035/p2/5",
+            "quote": "As was the case for Kv, the relative values of K/ are of approximately the same order and much lower than the values of KP calculated from thermodynamical data by Kelly,",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50226a035/computation/table1-brown-galloway-sv7500",
+      "target": "ex:msyn/10.1021-ie50226a035/claim/kf-same-order-lower-than-kelley"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/link/15",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50226a035/p2/5",
+            "quote": "As was the case for Kv, the relative values of K/ are of approximately the same order and much lower than the values of KP calculated from thermodynamical data by Kelly,",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50226a035/computation/table1-brown-galloway-sv3000",
+      "target": "ex:msyn/10.1021-ie50226a035/claim/kf-same-order-lower-than-kelley"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/link/16",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50226a035/p2/8",
+            "quote": "it does seem evident, however, from the above ratios that the reduced nor- mal zinc chromate is an effective catalyst under the conditions obtaining in this comparison.",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50226a035/computation/space-time-yields",
+      "target": "ex:msyn/10.1021-ie50226a035/claim/zinc-chromate-effective"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/link/17",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50226a035/p2/8",
+            "quote": "the reduced nor- mal zinc chromate is an effective catalyst under the conditions obtaining in this comparison.",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50226a035/claim/zinc-chromate-effective",
+      "target": "ex:msyn/10.1021-ie50226a035/catalyst/reduced-normal-zinc-chromate"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/link/18",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50226a035/p2/8",
+            "quote": "the reduced nor- mal zinc chromate is an effective catalyst under the conditions obtaining in this comparison.",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          }
+        ],
+        "note": "stated for the methanol reaction (1) considered throughout; the source's own tests are published elsewhere"
+      },
+      "source": "ex:msyn/10.1021-ie50226a035/catalyst/reduced-normal-zinc-chromate",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/link/19",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50226a035/p1/5",
+            "quote": "In this they have limited themselves to one temperature, 400° C., for which their results have been published.",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50226a035/claim/kp-same-order",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/link/2",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'CHsOH' is the text layer's rendering of CH3OH",
+            "passage": "10.1021-ie50226a035/p1/5",
+            "quote": "For the reaction CO + 2H2 = CHsOH + Q calories (1) we have after Nernst",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50226a035/p1/5",
+            "quote": "In this they have limited themselves to one temperature, 400° C., for which their results have been published.",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          }
+        ],
+        "role": "equilibrium computed"
+      },
+      "source": "ex:msyn/10.1021-ie50226a035/computation/table1-audibert-raineau-y",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/link/20",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50226a035/p1/5",
+            "quote": "In this they have limited themselves to one temperature, 400° C., for which their results have been published.",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50226a035/claim/kf-same-order-lower-than-kelley",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/link/21",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50226a035/p1/5",
+            "quote": "In this they have limited themselves to one temperature, 400° C., for which their results have been published.",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50226a035/claim/no-equilibrium-close-agreement",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/link/22",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50226a035/p2/5",
+            "quote": "much lower than the values of KP calculated from thermodynamical data by Kelly,8 whose values are probably much too high.",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50226a035/hypothesis/kelley-kp-too-high",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/link/23",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50226a035/p2/5",
+            "quote": "much lower than the values of KP calculated from thermodynamical data by Kelly,8 whose values are probably much too high.",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50226a035/claim/kf-same-order-lower-than-kelley",
+      "target": "ex:msyn/10.1021-ie50226a035/hypothesis/kelley-kp-too-high"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/link/24",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50226a035/p3/1",
+            "quote": "there is such close agreement between the results from the inde- pendent laboratories,",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50226a035/computation/table1-audibert-raineau-x",
+      "target": "ex:msyn/10.1021-ie50226a035/claim/no-equilibrium-close-agreement"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/link/25",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50226a035/p3/1",
+            "quote": "there is such close agreement between the results from the inde- pendent laboratories,",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50226a035/computation/table1-audibert-raineau-y",
+      "target": "ex:msyn/10.1021-ie50226a035/claim/no-equilibrium-close-agreement"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/link/26",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50226a035/p3/1",
+            "quote": "there is such close agreement between the results from the inde- pendent laboratories,",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50226a035/computation/table1-lewis-frolich",
+      "target": "ex:msyn/10.1021-ie50226a035/claim/no-equilibrium-close-agreement"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/link/27",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50226a035/p3/1",
+            "quote": "there is such close agreement between the results from the inde- pendent laboratories,",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50226a035/computation/table1-brown-galloway-sv7500",
+      "target": "ex:msyn/10.1021-ie50226a035/claim/no-equilibrium-close-agreement"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/link/28",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50226a035/p3/1",
+            "quote": "there is such close agreement between the results from the inde- pendent laboratories,",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50226a035/computation/table1-brown-galloway-sv3000",
+      "target": "ex:msyn/10.1021-ie50226a035/claim/no-equilibrium-close-agreement"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/link/3",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'CHsOH' is the text layer's rendering of CH3OH",
+            "passage": "10.1021-ie50226a035/p1/5",
+            "quote": "For the reaction CO + 2H2 = CHsOH + Q calories (1) we have after Nernst",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50226a035/p1/5",
+            "quote": "In this they have limited themselves to one temperature, 400° C., for which their results have been published.",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          }
+        ],
+        "role": "equilibrium computed"
+      },
+      "source": "ex:msyn/10.1021-ie50226a035/computation/table1-lewis-frolich",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/link/4",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'CHsOH' is the text layer's rendering of CH3OH",
+            "passage": "10.1021-ie50226a035/p1/5",
+            "quote": "For the reaction CO + 2H2 = CHsOH + Q calories (1) we have after Nernst",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50226a035/p1/5",
+            "quote": "In this they have limited themselves to one temperature, 400° C., for which their results have been published.",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          }
+        ],
+        "role": "equilibrium computed"
+      },
+      "source": "ex:msyn/10.1021-ie50226a035/computation/table1-brown-galloway-sv7500",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/link/5",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'CHsOH' is the text layer's rendering of CH3OH",
+            "passage": "10.1021-ie50226a035/p1/5",
+            "quote": "For the reaction CO + 2H2 = CHsOH + Q calories (1) we have after Nernst",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50226a035/p1/5",
+            "quote": "In this they have limited themselves to one temperature, 400° C., for which their results have been published.",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          }
+        ],
+        "role": "equilibrium computed"
+      },
+      "source": "ex:msyn/10.1021-ie50226a035/computation/table1-brown-galloway-sv3000",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/link/6",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50226a035/p2/7",
+            "quote": "In order to reduce the three yields being compared to their equivalent values for a CO:2H2 mixture, we have proceeded as follows:",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          }
+        ],
+        "role": "space-time yield comparison"
+      },
+      "source": "ex:msyn/10.1021-ie50226a035/computation/space-time-yields",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/link/7",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50226a035/p2/3",
+            "quote": "It is evident that these values are of the same order of magnitude and possess a relative posi- tion which might be well expected from the activities of the respective catalysts and the relative space velocities employed.",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50226a035/computation/table1-audibert-raineau-x",
+      "target": "ex:msyn/10.1021-ie50226a035/claim/kp-same-order"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/link/8",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50226a035/p2/3",
+            "quote": "It is evident that these values are of the same order of magnitude and possess a relative posi- tion which might be well expected from the activities of the respective catalysts and the relative space velocities employed.",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50226a035/computation/table1-audibert-raineau-y",
+      "target": "ex:msyn/10.1021-ie50226a035/claim/kp-same-order"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50226a035/link/9",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50226a035/p2/3",
+            "quote": "It is evident that these values are of the same order of magnitude and possess a relative posi- tion which might be well expected from the activities of the respective catalysts and the relative space velocities employed.",
+            "source": "ex:msyn/source/10.1021-ie50226a035"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50226a035/computation/table1-lewis-frolich",
+      "target": "ex:msyn/10.1021-ie50226a035/claim/kp-same-order"
+    },
+    {
+      "id": "ex:msyn/source/10.1021-ie50226a035/authored-by/1",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 1,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/10.1021-ie50226a035",
+      "target": "ex:msyn/person/a-c-fieldner"
+    },
+    {
+      "id": "ex:msyn/source/10.1021-ie50226a035/authored-by/2",
+      "type": "AUTHORED_BY",
+      "props": {
+        "note": "byline: R. L. Brown",
+        "origin": "curated",
+        "position": 2,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/10.1021-ie50226a035",
+      "target": "ex:msyn/person/ralph-l-brown"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/10.1021-ie50226a035"
+}

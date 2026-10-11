@@ -1,0 +1,98 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/10.1098-rspa.1928.0155/characterization/co-h2-products",
+      "label": "Characterization",
+      "props": {
+        "name": "chemical tests on products of CO + H2 reactions (testing trap)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 10",
+            "passage": "10.1098-rspa.1928.0155/p10/1",
+            "quote": "In all cases there was a permanent decrease of pressure and formaldehyde was detected in the testing trap.",
+            "source": "ex:msyn/source/10.1098-rspa.1928.0155"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 10",
+            "passage": "10.1098-rspa.1928.0155/p10/1",
+            "quote": "Neither methane, water, carbon nor methyl alcohol (as methyl salicylate) could be detected with equimolecular mixtures of carbon monoxide and hydrogen,",
+            "source": "ex:msyn/source/10.1098-rspa.1928.0155"
+          }
+        ],
+        "results": {
+          "formaldehyde": {
+            "status": "present",
+            "as_reported": "formaldehyde was detected in the testing trap",
+            "text_value": "detected in all cases"
+          },
+          "methane_water_carbon_methanol": {
+            "status": "present",
+            "as_reported": "Neither methane, water, carbon nor methyl alcohol (as methyl salicylate) could be detected",
+            "text_value": "none detected, even after collecting the product of several experiments"
+          }
+        },
+        "technique": "chemical tests in the cooled trap (resorcinol, gallic acid; methyl salicylate test for methanol)"
+      }
+    },
+    {
+      "id": "ex:msyn/source/10.1098-rspa.1928.0155",
+      "label": "Source",
+      "props": {
+        "name": "The chemical reaction of carbon monoxide and hydrogen after collision with electrons",
+        "kind": "article",
+        "description": "Published 1928 (publication year (bibliography)); in scope: before the 1966-01-01 cutoff. Text: 16 pages text_layer. Text not redistributed.",
+        "doi": "10.1098/rspa.1928.0155",
+        "licence": "no verified publisher licence; short excerpts quoted as evidence under fair use",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "The chemical reaction of carbon monoxide and hydrogen after collision with electrons",
+        "url": "https://doi.org/10.1098/rspa.1928.0155",
+        "venue": "Proceedings of the Royal Society of London Series A Containing Papers of a Mathematical and Physical Character",
+        "year": 1928
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/10.1098-rspa.1928.0155/characterization/co-h2-products/reported-in/10.1098-rspa.1928.0155",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 10"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1098-rspa.1928.0155/characterization/co-h2-products",
+      "target": "ex:msyn/source/10.1098-rspa.1928.0155"
+    },
+    {
+      "id": "ex:msyn/source/10.1098-rspa.1928.0155/authored-by/1",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 1,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/10.1098-rspa.1928.0155",
+      "target": "ex:msyn/person/a-caress"
+    },
+    {
+      "id": "ex:msyn/source/10.1098-rspa.1928.0155/authored-by/2",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 2,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/10.1098-rspa.1928.0155",
+      "target": "ex:msyn/person/eric-keightley-rideal"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/10.1098-rspa.1928.0155"
+}

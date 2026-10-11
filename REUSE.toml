@@ -49,3 +49,11 @@ path = "tools/tests/fixtures/domain-template/**/*.py"
 precedence = "override"
 SPDX-FileCopyrightText = "2026 SCALE contributors"
 SPDX-License-Identifier = "MIT"
+
+# 5. Copies of public-domain works: the PDFs and page texts of the public-domain methanol-synthesis example
+#    (public domain in the United States; each source's basis is in the folder's rights.yaml).
+[[annotations]]
+path = ["examples/methanol-synthesis-public/pdfs/**", "examples/methanol-synthesis-public/texts/**"]
+precedence = "override"
+SPDX-FileCopyrightText = "NONE"
+SPDX-License-Identifier = "LicenseRef-PublicDomain-US"

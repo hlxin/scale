@@ -1,0 +1,2840 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/catalyst/cu-zno-series",
+      "label": "Catalyst",
+      "props": {
+        "name": "copper-zinc oxide catalysts (complete series of compositions)",
+        "catalyst_family": "mixed_oxide",
+        "description": "The binary copper-zinc oxide catalyst mixtures previously used in the authors' methanol decomposition and synthesis experiments, examined here by x-rays after use. Individual compositions are shown only on the abscissa of Figure 1 (mol per cent), which is not read here.",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/4",
+            "quote": "The study of the complete series of copper-zinc oxide mix- tures demonstrates that at every composition the catalyst is decidedly crystalline, possessing the characteristic crystal structure of the two components.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/5",
+            "quote": "It is interesting to compare these results with the activity measurements previously made with the same catalysts.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "generality": "kind"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/catalyst/pure-zno",
+      "label": "Catalyst",
+      "props": {
+        "name": "pure zinc oxide",
+        "catalyst_family": "oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50230a003/p3/1",
+            "quote": "even in the absence of copper the zinc oxide suffers some change during the treatment with methanol vapor at 200- 220° C., as evidenced by the fact that the pure zinc oxide thus treated has a=somewhat smaller unit cell than usually, 5.213 A. vs. 5.226 A.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "generality": "particular"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/catalyst/zno-90",
+      "label": "Catalyst",
+      "props": {
+        "name": "copper-zinc oxide, 90 mol per cent zinc oxide",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/5",
+            "quote": "The maxi- mum elongation recorded is 1.3 per cent, corresponding to 90 mol per cent zinc oxide, which is the highest concentration studied.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "generality": "particular",
+        "nominal_formula": "ZnO 90 mol per cent, remainder copper",
+        "properties": {
+          "zno_mol_percent": {
+            "status": "present",
+            "as_reported": "90 mol per cent zinc oxide",
+            "unit": "mol %",
+            "value": 90
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/characterization/weight-loss-on-reduction",
+      "label": "Characterization",
+      "props": {
+        "name": "loss in weight on reduction (chemical analysis)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50230a003/p1/8",
+            "quote": "The reduction manifested itself in the present cata- lyst mixtures by a somewhat greater loss in weight than that corresponding to reduction of the copper oxide alone.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50230a003/p3/1",
+            "quote": "It has already been mentioned that some of the zinc oxide is reduced in the presence of copper, as shown by chemical analysis.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "experiment_status": "completed",
+        "note": "no numbers are given",
+        "results": {
+          "weight_loss": {
+            "status": "present",
+            "as_reported": "a somewhat greater loss in weight than that corresponding to reduction of the copper oxide alone",
+            "text_value": "somewhat greater than that corresponding to reduction of the copper oxide alone"
+          }
+        },
+        "technique": "loss in weight on reduction"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/characterization/xray-pure-zno",
+      "label": "Characterization",
+      "props": {
+        "name": "x-ray unit cell of pure zinc oxide treated with methanol vapor",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50230a003/p3/1",
+            "quote": "even in the absence of copper the zinc oxide suffers some change during the treatment with methanol vapor at 200- 220° C., as evidenced by the fact that the pure zinc oxide thus treated has a=somewhat smaller unit cell than usually, 5.213 A. vs. 5.226 A.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "experiment_status": "completed",
+        "results": {
+          "unit_cell_a": {
+            "status": "present",
+            "as_reported": "5.213 A.",
+            "note": "the text layer prints 'a=somewhat smaller unit cell'; the value is compared with the usual 5.226 A.",
+            "unit": "Å",
+            "value": 5.213
+          },
+          "usual_unit_cell_a": {
+            "status": "present",
+            "as_reported": "5.226 A.",
+            "note": "the usual value, given for comparison; its origin is not stated",
+            "unit": "Å",
+            "value": 5.226
+          }
+        },
+        "technique": "x-ray diffraction (lattice dimensions, photographic film)"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/characterization/xray-series",
+      "label": "Characterization",
+      "props": {
+        "name": "x-ray examination of the copper-zinc oxide series",
+        "conditions": {
+          "particle_size": {
+            "status": "present",
+            "as_reported": "finely divided cata- lyst (60 mesh)",
+            "unit": "mesh",
+            "value": 60
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/3",
+            "quote": "To obtain further information along this line, the spent catalysts were therefore examined by x-rays.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/4",
+            "quote": "The study of the complete series of copper-zinc oxide mix- tures demonstrates that at every composition the catalyst is decidedly crystalline, possessing the characteristic crystal structure of the two components.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/4",
+            "quote": "However, the unit-cell sizes of both are markedly influenced by the presence of the other constituent.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          },
+          {
+            "kind": "figure",
+            "locator": "p. 3, Figure 1",
+            "passage": "10.1021-ie50230a003/p3/1",
+            "quote": "Figure 1—Distance between Atoms in Cop- per-Zinc Oxide Catalysts as Function of Catalyst Composition",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "experiment_status": "completed",
+        "note": "Figure 1 values other than those printed in the text are not read; the details of procedure and calculations are left to a separate publication by R. H. Aborn",
+        "results": {
+          "copper_lattice_maximum_position": {
+            "status": "present",
+            "as_reported": "between 50 and 60 mol per cent zinc oxide",
+            "lower": 50,
+            "unit": "mol % ZnO",
+            "upper": 60
+          },
+          "copper_lattice_trend": {
+            "status": "present",
+            "as_reported": "passes through a maximum between 50 and 60 mol per cent zinc oxide, decreases somewhat, and then rises again",
+            "text_value": "expands with increasing zinc oxide; maximum between 50 and 60 mol per cent ZnO; decreases somewhat; rises again"
+          },
+          "crystallinity": {
+            "status": "present",
+            "as_reported": "at every composition the catalyst is decidedly crystalline",
+            "text_value": "decidedly crystalline at every composition"
+          },
+          "zinc_oxide_axial_ratio": {
+            "status": "present",
+            "as_reported": "the axial ratio remains practically constant",
+            "text_value": "practically constant"
+          },
+          "zinc_oxide_lattice_minimum_position": {
+            "status": "present",
+            "as_reported": "10 to 20 mol per cent copper",
+            "lower": 10,
+            "unit": "mol % Cu",
+            "upper": 20
+          },
+          "zinc_oxide_lattice_trend": {
+            "status": "present",
+            "as_reported": "the curve first passes through a minimum value for 10 to 20 mol per cent copper",
+            "text_value": "elongates on addition of copper, first passing through a minimum"
+          }
+        },
+        "technique": "x-ray diffraction (lattice dimensions, photographic film)"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/characterization/xray-zno-90",
+      "label": "Characterization",
+      "props": {
+        "name": "x-ray lattice dimension of copper, 90 mol per cent zinc oxide catalyst",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/5",
+            "quote": "The maxi- mum elongation recorded is 1.3 per cent, corresponding to 90 mol per cent zinc oxide, which is the highest concentration studied.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "experiment_status": "completed",
+        "results": {
+          "copper_lattice_elongation": {
+            "status": "present",
+            "as_reported": "1.3 per cent",
+            "note": "maximum elongation recorded, at 90 mol per cent zinc oxide, the highest concentration studied",
+            "unit": "%",
+            "value": 1.3
+          }
+        },
+        "technique": "x-ray diffraction (lattice dimensions, photographic film)"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/claim/activity-breaks-match-lattice-discontinuities",
+      "label": "Claim",
+      "props": {
+        "name": "breaks in activity curves match lattice discontinuities",
+        "claim_kind": "structure_property",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/8",
+            "quote": "It is particularly interesting to note that a break in the activity curves invariably corre- sponds to a point of discontinuity in the lattice dimensions.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/8",
+            "quote": "the only difference being that the atomic disarrangement occurs within a somewhat wider range of catalyst composition than does the change in preferential catalytic activity.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "inference_type": "observational",
+        "statement": "A break in the activity curves invariably corresponds to a point of discontinuity in the lattice dimensions, even for the small zinc oxide percentages that cause the methyl formate peak; the atomic disarrangement occurs within a somewhat wider composition range than the change in preferential catalytic activity."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/claim/catalysis-linked-to-internal-structure",
+      "label": "Claim",
+      "props": {
+        "name": "catalysis associated with internal crystal structure",
+        "claim_kind": "conclusion",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50230a003/p3/4",
+            "quote": "The foregoing re- sults point to an im- portant relation be- tween selective cata- lytic activity and distance between the atoms in mixed cata- lysts.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50230a003/p3/4",
+            "quote": "It is particu- larly noteworthy that catalysis, which apparently is a sur- face effect, seems to be closely associated with the internal structure of the crys- talline catalytic material as disclosed by x-ray analysis.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "inference_type": "observational",
+        "statement": "The results point to an important relation between selective catalytic activity and interatomic distance in mixed catalysts; catalysis, apparently a surface effect, seems closely associated with the internal structure of the crystalline catalytic material as disclosed by x-ray analysis."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/claim/copper-lattice-expands",
+      "label": "Claim",
+      "props": {
+        "name": "copper lattice expands with zinc oxide",
+        "claim_kind": "structure_property",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/4",
+            "quote": "However, the unit-cell sizes of both are markedly influenced by the presence of the other constituent.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/4",
+            "quote": "the side of the unit cell of the copper lattice expands with increasing additions of zinc oxide, passes through a maximum between 50 and 60 mol per cent zinc oxide, decreases somewhat, and then rises again.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/5",
+            "quote": "The maxi- mum elongation recorded is 1.3 per cent, corresponding to 90 mol per cent zinc oxide, which is the highest concentration studied.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "inference_type": "observational",
+        "statement": "The unit cell of the copper lattice expands with increasing zinc oxide, passes through a maximum between 50 and 60 mol per cent zinc oxide, decreases somewhat and rises again; the maximum elongation recorded is 1.3 per cent at 90 mol per cent zinc oxide, the highest concentration studied."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/claim/crystalline-at-every-composition",
+      "label": "Claim",
+      "props": {
+        "name": "catalysts decidedly crystalline at every composition",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/4",
+            "quote": "The study of the complete series of copper-zinc oxide mix- tures demonstrates that at every composition the catalyst is decidedly crystalline, possessing the characteristic crystal structure of the two components.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/4",
+            "quote": "The copper has the same structure as that of the metal in bulk, and the zinc oxide has the same structure as when prepared by any other method.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/9",
+            "quote": "Over the whole range the structure of the catalyst mixtures is decidedly crystalline.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "inference_type": "observational",
+        "statement": "At every composition the copper-zinc oxide catalyst is decidedly crystalline, possessing the characteristic crystal structures of the two components: copper with the structure of the bulk metal and zinc oxide with its usual structure."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/claim/essential-feature-selectivity",
+      "label": "Claim",
+      "props": {
+        "name": "essential feature is selectivity of decomposition mechanism",
+        "claim_kind": "conclusion",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50230a003/p3/2",
+            "quote": "it was pointed out in the first paper of this series2 that the percentage methanol decomposed varied only slightly after a small percentage of zinc oxide had been added to the relatively inactive pure copper.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50230a003/p3/2",
+            "quote": "Thus, the es- sential feature of these catalysts is their selec- tive nature with respect to the mechanism by which the decomposi- tion occurs.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "based on the decomposition results of the first paper of the series (reference 2), cited",
+        "statement": "Since the percentage of methanol decomposed varied only slightly once a small percentage of zinc oxide had been added to pure copper, the essential feature of these catalysts is their selective nature with respect to the mechanism of decomposition."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/claim/no-final-generalization",
+      "label": "Claim",
+      "props": {
+        "name": "no final conclusions without data on other catalysts",
+        "claim_kind": "data_quality",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50230a003/p3/3",
+            "quote": "it is not justifiable to draw any final conclusions or make generalizations in the absence of data on other catalysts.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "statement": "While a simple relation may exist between selective catalytic activity and interatomic distance, it is not justifiable to draw final conclusions or generalize in the absence of data on other catalysts."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/claim/products-associated-with-ends",
+      "label": "Claim",
+      "props": {
+        "name": "formaldehyde/methyl formate at copper end, CO with zinc oxide",
+        "claim_kind": "structure_property",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/6",
+            "quote": "formaldehyde and particu- larly methyl formate pro- duction is characteristic of the copper end of the dia- gram, while carbon mon- oxide formation is closely associated with the zinc oxide.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "drawn from the cited decomposition data of Figure 2",
+        "statement": "From the decomposition data, formaldehyde and particularly methyl formate production is characteristic of the copper end of the diagram, while carbon monoxide formation is closely associated with the zinc oxide."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/claim/pure-zno-changed-by-treatment",
+      "label": "Claim",
+      "props": {
+        "name": "pure zinc oxide changed by methanol-vapor treatment",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50230a003/p3/1",
+            "quote": "even in the absence of copper the zinc oxide suffers some change during the treatment with methanol vapor at 200- 220° C., as evidenced by the fact that the pure zinc oxide thus treated has a=somewhat smaller unit cell than usually, 5.213 A. vs. 5.226 A.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "inference_type": "observational",
+        "statement": "Even in the absence of copper, zinc oxide suffers some change during treatment with methanol vapor at 200-220 °C: the treated pure zinc oxide has a somewhat smaller unit cell than usual, 5.213 A. vs. 5.226 A."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/claim/reduction-to-zinc-undecided",
+      "label": "Claim",
+      "props": {
+        "name": "whether reduction goes to elementary zinc undecided",
+        "claim_kind": "finding",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/9",
+            "quote": "It is not possible to de- cide, however, whether this reduction proceeds down to elementary zinc, although the indications are that this is the case.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "inference_type": "observational",
+        "statement": "It is not possible to decide whether the reduction of zinc oxide proceeds down to elementary zinc, although the indications are that this is the case."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/claim/selectivity-relates-to-atomic-spacing",
+      "label": "Claim",
+      "props": {
+        "name": "selective catalytic activity related to atomic spacing",
+        "claim_kind": "structure_property",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/7",
+            "quote": "The similarity in the shape of the curves in Figures 3 and 4 cannot be coincidental.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/7",
+            "quote": "The general character of the two diagrams is convincing evidence of a relation between the selective catalytic activity and the atomic spacing of the copper-zinc oxide mixtures.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/9",
+            "quote": "The results point to a definite relation between the specific catalytic effect and the distance between the atoms of the two components,",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          },
+          {
+            "kind": "figure",
+            "locator": "p. 3, Figure 3",
+            "passage": "10.1021-ie50230a003/p3/4",
+            "quote": "Figure 3—Expansion of Copper Lattice Compared with Methyl Formate Produc- tion (dotted line), Both as Function of Catalyst Composition",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          },
+          {
+            "kind": "figure",
+            "locator": "p. 3, Figure 4",
+            "passage": "10.1021-ie50230a003/p3/5",
+            "quote": "Figure 4—Change in Zinc Oxide Lattice Compared with Carbon Monoxide Forma- tion (dotted line), Both as Function of Catalyst Composition",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "inference_type": "observational",
+        "statement": "The similarity in shape of the lattice-dimension curves and the methyl formate and carbon monoxide curves (Figures 3 and 4) cannot be coincidental and is convincing evidence of a relation between the selective catalytic activity and the atomic spacing of the copper-zinc oxide mixtures."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/claim/weight-loss-not-quantitative",
+      "label": "Claim",
+      "props": {
+        "name": "weight loss not absolutely quantitative",
+        "claim_kind": "data_quality",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/2",
+            "quote": "the results thus obtained are not absolutely quantitative since there is always a possibility of the oxide mixtures not being com- pletely dehydrated when the reduction is started.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/2",
+            "quote": "Further- more, the loss in weight does not tell whether the zinc is reduced to the free metal or merely to a lower stage of oxi- dation.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "statement": "The loss in weight on reduction is not absolutely quantitative, because the oxide mixtures may not have been completely dehydrated when the reduction started, and it does not tell whether the zinc is reduced to the free metal or to a lower stage of oxidation."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/claim/zinc-oxide-lattice-elongates",
+      "label": "Claim",
+      "props": {
+        "name": "zinc oxide lattice elongates with copper",
+        "claim_kind": "structure_property",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/5",
+            "quote": "The unit cell of the zinc oxide suffers a similar elongation on addition of copper, with the exception that the curve first passes through a minimum value for 10 to 20 mol per cent copper.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/5",
+            "quote": "The dimensions of the zinc oxide lattice have been determined along both the vertical and horizontal axes, but since the axial ratio remains practically constant it is apparent that the two curves have the same general form",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "inference_type": "observational",
+        "statement": "The unit cell of zinc oxide suffers a similar elongation on addition of copper, except that the curve first passes through a minimum at 10 to 20 mol per cent copper; the axial ratio remains practically constant."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/claim/zno-partly-reduced-with-cuo",
+      "label": "Claim",
+      "props": {
+        "name": "zinc oxide partly reduced in presence of copper oxide",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50230a003/p1/7",
+            "quote": "Although zinc oxide is usually considered non-reducible at this temperature, it was, nevertheless, found to be partly reduced by the above treatment when present in mixture with copper oxide.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50230a003/p1/8",
+            "quote": "The reduction manifested itself in the present cata- lyst mixtures by a somewhat greater loss in weight than that corresponding to reduction of the copper oxide alone.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/9",
+            "quote": "Zinc oxide, ordinarily considered a non- reducible compound, is undoubtedly partly reduced in the presence of copper oxide.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "inference_type": "observational",
+        "limitations": "the loss-in-weight results are not absolutely quantitative, since the oxide mixtures may not have been completely dehydrated when reduction started",
+        "statement": "Zinc oxide, ordinarily considered non-reducible, is partly reduced by the methanol-vapor treatment at about 200-220 °C when present in mixture with copper oxide, as shown by a greater loss in weight than corresponds to reduction of the copper oxide alone."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/hypothesis/cuo-reduction-supplies-energy",
+      "label": "Hypothesis",
+      "props": {
+        "name": "exothermic copper oxide reduction supplies energy for zinc oxide reduction",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/2",
+            "quote": "Furthermore, the re- duction of copper oxide by methanol is exothermic and could furnish the necessary energy for the zinc oxide to be reduced when these two compounds are present in an intimate mix- ture.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "hypothesis_kind": "mechanistic",
+        "hypothesis_status": "proposed",
+        "statement": "The reduction of copper oxide by methanol is exothermic and could furnish the energy needed for zinc oxide to be reduced when the two are present in an intimate mixture."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/hypothesis/methyl-formate-by-polymerization",
+      "label": "Hypothesis",
+      "props": {
+        "name": "methyl formate from polymerization of formaldehyde",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/6",
+            "quote": "From these curves it follows that formaldehyde is the principal product of decomposition with pure copper, but that small amounts of zinc oxide greatly favor production of methyl formate, presumably due to polymerization of initially formed formaldehyde.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "hypothesis_kind": "mechanistic",
+        "hypothesis_status": "proposed",
+        "note": "interpretation of the cited decomposition data",
+        "statement": "The methyl formate favored by small amounts of zinc oxide is presumably due to polymerization of initially formed formaldehyde."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/hypothesis/molecule-size-vs-surface-spacing",
+      "label": "Hypothesis",
+      "props": {
+        "name": "product-molecule size vs surface interatomic distance governs specificity",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50230a003/p3/4",
+            "quote": "It seems very likely that one of the governing factors in determining the specific nature of a catalyst is the rela- tion between the size of the molecules of the possible reaction products and the dis- tance between the atoms on the surface of the catalyst.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50230a003/p3/5",
+            "quote": "This effect may be purely geometrical, or it may be the result of a change in the dis- tribution of the residual forces or valences on the sur- face of the catalyst with changing in- teratomic distances.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50230a003/p3/5",
+            "quote": "it will probably serve the purpose better to present these data simply as evidence of the future possibilities in this field of research.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "hypothesis_kind": "explanatory",
+        "hypothesis_status": "proposed",
+        "note": "the authors decline to attempt a specific explanation and present the data as evidence of future possibilities",
+        "statement": "One of the governing factors in the specific nature of a catalyst is very likely the relation between the size of the molecules of the possible reaction products and the distance between the atoms on the catalyst surface; the effect may be purely geometrical or a change in the distribution of residual forces or valences on the surface with interatomic distance."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/hypothesis/zinc-dissolves-as-alpha-brass",
+      "label": "Hypothesis",
+      "props": {
+        "name": "reduced zinc in solid solution in copper as alpha brass",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50230a003/p3/1",
+            "quote": "On the assumption that this reduction results in the formation of elementary zinc, it is probable that the zinc goes into solid solution in the copper as alpha brass.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50230a003/p3/1",
+            "quote": "Although there is room for other interpretations of the x-ray data,6",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "hypothesis_kind": "explanatory",
+        "hypothesis_status": "proposed",
+        "note": "the authors note there is room for other interpretations of the x-ray data",
+        "statement": "If the reduction of zinc oxide gives elementary zinc, the zinc probably goes into solid solution in the copper as alpha brass, expanding the copper lattice."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/hypothesis/zno-reduction-ill-defined",
+      "label": "Hypothesis",
+      "props": {
+        "name": "zinc oxide reduction gives metallic zinc and a lower oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50230a003/p3/2",
+            "quote": "It seems, therefore, that the reduction of the zinc oxide is not very well defined, and may perhaps involve the formation of both metallic zinc and a compound corresponding to a lower stage of oxidation.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "hypothesis_kind": "explanatory",
+        "hypothesis_status": "proposed",
+        "statement": "The reduction of zinc oxide is not very well defined and may perhaps involve the formation of both metallic zinc and a compound corresponding to a lower stage of oxidation."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/instrument/mo-coolidge-tube",
+      "label": "Instrument",
+      "props": {
+        "name": "molybdenum-target Coolidge x-ray tube with zirconium oxide filter; photographic film",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/3",
+            "quote": "The source of x-rays used in determining the lattice di- mensions was a molybdenum target Coolidge tube.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/3",
+            "quote": "By employing a zirconium oxide filter, the beam was made es- sentially monochromatic,",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/3",
+            "quote": "wave lengths of 0.708 Á. (   ) and 0.712 A. (Ka2).",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/3",
+            "quote": "The diffraction pattern was re- corded on a photographic film in regular way by pass- ing the x-ray beam through a capillary glass tube hold- ing the finely divided cata- lyst (60 mesh).",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "instrument_kind": "x-ray diffraction apparatus",
+        "settings": {
+          "detector": {
+            "status": "present",
+            "as_reported": "recorded on a photographic film",
+            "text_value": "photographic film"
+          },
+          "filter": {
+            "status": "present",
+            "as_reported": "zirconium oxide filter",
+            "text_value": "zirconium oxide"
+          },
+          "sample_holder": {
+            "status": "present",
+            "as_reported": "capillary glass tube",
+            "text_value": "capillary glass tube"
+          },
+          "target": {
+            "status": "present",
+            "as_reported": "molybdenum target Coolidge tube",
+            "text_value": "molybdenum"
+          },
+          "wavelength_1": {
+            "status": "present",
+            "as_reported": "0.708 Á.",
+            "note": "the line label is lost in the text layer",
+            "unit": "Å",
+            "value": 0.708
+          },
+          "wavelength_2": {
+            "status": "present",
+            "as_reported": "0.712 A. (Ka2)",
+            "unit": "Å",
+            "value": 0.712
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/material/alpha-brass",
+      "label": "Material",
+      "props": {
+        "name": "alpha brass (zinc in solid solution in copper), proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50230a003/p3/1",
+            "quote": "On the assumption that this reduction results in the formation of elementary zinc, it is probable that the zinc goes into solid solution in the copper as alpha brass.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "material_family": "alloy",
+        "note": "proposed by the authors, on the assumption that the reduction of zinc oxide yields elementary zinc",
+        "polymorph": "alpha"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/material/copper-metal-lattice",
+      "label": "Material",
+      "props": {
+        "name": "copper phase with the structure of bulk copper metal",
+        "crystallinity": "crystalline",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/4",
+            "quote": "The copper has the same structure as that of the metal in bulk, and the zinc oxide has the same structure as when prepared by any other method.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "formula": "Cu",
+        "material_family": "metal"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/material/zinc-oxide-lattice",
+      "label": "Material",
+      "props": {
+        "name": "zinc oxide phase with the usual zinc oxide structure",
+        "crystallinity": "crystalline",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/4",
+            "quote": "The copper has the same structure as that of the metal in bulk, and the zinc oxide has the same structure as when prepared by any other method.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "formula": "ZnO",
+        "material_family": "oxide"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/preparation/mixed-hydrate-precipitation",
+      "label": "Preparation",
+      "props": {
+        "name": "precipitation of mixed hydrates from nitrate solutions and dehydration of the gel",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50230a003/p1/7",
+            "quote": "the catalysts com- posed of copper and zinc were prepared by precipitating the mixed hydrates from the corresponding nitrate solutions, dehydrating the gel, and subsequently reducing the oxides with methanol vapor",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "quote": "to Miss D. Quiggle for preparation of the catalysts.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "method": "precipitation of the mixed hydrates from the corresponding nitrate solutions; dehydration of the gel",
+        "note": "described as the preparation used in the previously reported experiments; the acknowledgment credits Miss D. Quiggle with preparation of the catalysts; precipitant, temperatures and durations not stated",
+        "procedure_status": "completed",
+        "steps": [
+          "precipitating the mixed hydrates from the corresponding nitrate solutions",
+          "dehydrating the gel"
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/sample/spent-series",
+      "label": "CatalystSample",
+      "props": {
+        "name": "spent copper-zinc oxide catalysts (series)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/3",
+            "quote": "To obtain further information along this line, the spent catalysts were therefore examined by x-rays.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/5",
+            "quote": "It is interesting to compare these results with the activity measurements previously made with the same catalysts.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "preparation_status": "prepared",
+        "sample_kind": "batch"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/sample/spent-zno-90",
+      "label": "CatalystSample",
+      "props": {
+        "name": "spent catalyst, 90 mol per cent zinc oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/5",
+            "quote": "The maxi- mum elongation recorded is 1.3 per cent, corresponding to 90 mol per cent zinc oxide, which is the highest concentration studied.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "preparation_status": "prepared",
+        "sample_kind": "batch"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/sample/treated-pure-zno",
+      "label": "CatalystSample",
+      "props": {
+        "name": "pure zinc oxide treated with methanol vapor at 200-220 °C",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50230a003/p3/1",
+            "quote": "even in the absence of copper the zinc oxide suffers some change during the treatment with methanol vapor at 200- 220° C., as evidenced by the fact that the pure zinc oxide thus treated has a=somewhat smaller unit cell than usually, 5.213 A. vs. 5.226 A.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "preparation_status": "prepared",
+        "sample_kind": "batch"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/treatment/methanol-vapor-reduction",
+      "label": "Treatment",
+      "props": {
+        "name": "reduction of the oxides with methanol vapor at about 200-220 °C",
+        "atmosphere": "methanol vapor",
+        "duration": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source"
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50230a003/p1/7",
+            "quote": "reducing the oxides with methanol vapor at the lowest temperature at which re- duction would possibly take place—i. e., about 200° to 220° C.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "method": "reduction of the oxides with methanol vapor at the lowest temperature at which reduction would possibly take place",
+        "pressure": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source"
+        },
+        "procedure_status": "completed",
+        "temperature": {
+          "status": "present",
+          "as_reported": "about 200° to 220° C.",
+          "lower": 200,
+          "qualifier": "approximate",
+          "unit": "°C",
+          "upper": 220
+        },
+        "treatment_kind": "reduction"
+      }
+    },
+    {
+      "id": "ex:msyn/source/10.1021-ie50230a003",
+      "label": "Source",
+      "props": {
+        "name": "Catalysts for the Formation of Alcohols from Carbon Monoxide and Hydrogen: III—X-Ray Examination of Methanol Catalysts composed of Copper and Zinc",
+        "kind": "article",
+        "description": "Published 1929 (publication year (bibliography)); in scope: before the 1966-01-01 cutoff. Text: 3 pages text_layer. Text not redistributed.",
+        "doi": "10.1021/ie50230a003",
+        "licence": "no verified publisher licence; short excerpts quoted as evidence under fair use",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "Catalysts for the Formation of Alcohols from Carbon Monoxide and Hydrogen: III—X-Ray Examination of Methanol Catalysts composed of Copper and Zinc",
+        "url": "https://doi.org/10.1021/ie50230a003",
+        "venue": "Industrial & Engineering Chemistry",
+        "year": 1929
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/catalyst/cu-zno-series/reported-in/10.1021-ie50230a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/catalyst/cu-zno-series",
+      "target": "ex:msyn/source/10.1021-ie50230a003"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/catalyst/pure-zno/reported-in/10.1021-ie50230a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/catalyst/pure-zno",
+      "target": "ex:msyn/source/10.1021-ie50230a003"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/catalyst/zno-90/reported-in/10.1021-ie50230a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/catalyst/zno-90",
+      "target": "ex:msyn/source/10.1021-ie50230a003"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/characterization/weight-loss-on-reduction/reported-in/10.1021-ie50230a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/characterization/weight-loss-on-reduction",
+      "target": "ex:msyn/source/10.1021-ie50230a003"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/characterization/xray-pure-zno/reported-in/10.1021-ie50230a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/characterization/xray-pure-zno",
+      "target": "ex:msyn/source/10.1021-ie50230a003"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/characterization/xray-series/reported-in/10.1021-ie50230a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 3, Figure 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/characterization/xray-series",
+      "target": "ex:msyn/source/10.1021-ie50230a003"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/characterization/xray-zno-90/reported-in/10.1021-ie50230a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/characterization/xray-zno-90",
+      "target": "ex:msyn/source/10.1021-ie50230a003"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/claim/activity-breaks-match-lattice-discontinuities/reported-in/10.1021-ie50230a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/claim/activity-breaks-match-lattice-discontinuities",
+      "target": "ex:msyn/source/10.1021-ie50230a003"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/claim/catalysis-linked-to-internal-structure/reported-in/10.1021-ie50230a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/claim/catalysis-linked-to-internal-structure",
+      "target": "ex:msyn/source/10.1021-ie50230a003"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/claim/copper-lattice-expands/reported-in/10.1021-ie50230a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/claim/copper-lattice-expands",
+      "target": "ex:msyn/source/10.1021-ie50230a003"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/claim/crystalline-at-every-composition/reported-in/10.1021-ie50230a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/claim/crystalline-at-every-composition",
+      "target": "ex:msyn/source/10.1021-ie50230a003"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/claim/essential-feature-selectivity/reported-in/10.1021-ie50230a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/claim/essential-feature-selectivity",
+      "target": "ex:msyn/source/10.1021-ie50230a003"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/claim/no-final-generalization/reported-in/10.1021-ie50230a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/claim/no-final-generalization",
+      "target": "ex:msyn/source/10.1021-ie50230a003"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/claim/products-associated-with-ends/reported-in/10.1021-ie50230a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/claim/products-associated-with-ends",
+      "target": "ex:msyn/source/10.1021-ie50230a003"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/claim/pure-zno-changed-by-treatment/reported-in/10.1021-ie50230a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/claim/pure-zno-changed-by-treatment",
+      "target": "ex:msyn/source/10.1021-ie50230a003"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/claim/reduction-to-zinc-undecided/reported-in/10.1021-ie50230a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/claim/reduction-to-zinc-undecided",
+      "target": "ex:msyn/source/10.1021-ie50230a003"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/claim/selectivity-relates-to-atomic-spacing/reported-in/10.1021-ie50230a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 3, Figure 3",
+          "p. 3, Figure 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/claim/selectivity-relates-to-atomic-spacing",
+      "target": "ex:msyn/source/10.1021-ie50230a003"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/claim/weight-loss-not-quantitative/reported-in/10.1021-ie50230a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/claim/weight-loss-not-quantitative",
+      "target": "ex:msyn/source/10.1021-ie50230a003"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/claim/zinc-oxide-lattice-elongates/reported-in/10.1021-ie50230a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/claim/zinc-oxide-lattice-elongates",
+      "target": "ex:msyn/source/10.1021-ie50230a003"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/claim/zno-partly-reduced-with-cuo/reported-in/10.1021-ie50230a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/claim/zno-partly-reduced-with-cuo",
+      "target": "ex:msyn/source/10.1021-ie50230a003"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/hypothesis/cuo-reduction-supplies-energy/reported-in/10.1021-ie50230a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/hypothesis/cuo-reduction-supplies-energy",
+      "target": "ex:msyn/source/10.1021-ie50230a003"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/hypothesis/methyl-formate-by-polymerization/reported-in/10.1021-ie50230a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/hypothesis/methyl-formate-by-polymerization",
+      "target": "ex:msyn/source/10.1021-ie50230a003"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/hypothesis/molecule-size-vs-surface-spacing/reported-in/10.1021-ie50230a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/hypothesis/molecule-size-vs-surface-spacing",
+      "target": "ex:msyn/source/10.1021-ie50230a003"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/hypothesis/zinc-dissolves-as-alpha-brass/reported-in/10.1021-ie50230a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/hypothesis/zinc-dissolves-as-alpha-brass",
+      "target": "ex:msyn/source/10.1021-ie50230a003"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/hypothesis/zno-reduction-ill-defined/reported-in/10.1021-ie50230a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/hypothesis/zno-reduction-ill-defined",
+      "target": "ex:msyn/source/10.1021-ie50230a003"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/instrument/mo-coolidge-tube/reported-in/10.1021-ie50230a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/instrument/mo-coolidge-tube",
+      "target": "ex:msyn/source/10.1021-ie50230a003"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/1",
+      "type": "IDENTIFIED_AS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/4",
+            "quote": "The copper has the same structure as that of the metal in bulk, and the zinc oxide has the same structure as when prepared by any other method.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/material/copper-metal-lattice",
+      "target": "ex:msyn/species/copper"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/10",
+      "type": "IDENTIFIED_AS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50230a003/p3/1",
+            "quote": "even in the absence of copper the zinc oxide suffers some change during the treatment with methanol vapor at 200- 220° C., as evidenced by the fact that the pure zinc oxide thus treated has a=somewhat smaller unit cell than usually, 5.213 A. vs. 5.226 A.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/catalyst/pure-zno",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/11",
+      "type": "COMPARED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/5",
+            "quote": "The maxi- mum elongation recorded is 1.3 per cent, corresponding to 90 mol per cent zinc oxide, which is the highest concentration studied.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50230a003/p3/1",
+            "quote": "even in the absence of copper the zinc oxide suffers some change during the treatment with methanol vapor at 200- 220° C., as evidenced by the fact that the pure zinc oxide thus treated has a=somewhat smaller unit cell than usually, 5.213 A. vs. 5.226 A.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "note": "lattice dimensions compared along the composition series of Figure 1"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/catalyst/zno-90",
+      "target": "ex:msyn/10.1021-ie50230a003/catalyst/pure-zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/12",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/3",
+            "quote": "To obtain further information along this line, the spent catalysts were therefore examined by x-rays.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/sample/spent-series",
+      "target": "ex:msyn/10.1021-ie50230a003/catalyst/cu-zno-series"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/13",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50230a003/p1/7",
+            "quote": "reducing the oxides with methanol vapor at the lowest temperature at which re- duction would possibly take place—i. e., about 200° to 220° C.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "order": 1
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/sample/spent-series",
+      "target": "ex:msyn/10.1021-ie50230a003/treatment/methanol-vapor-reduction"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/14",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/3",
+            "quote": "To obtain further information along this line, the spent catalysts were therefore examined by x-rays.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/sample/spent-zno-90",
+      "target": "ex:msyn/10.1021-ie50230a003/catalyst/zno-90"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/15",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50230a003/p1/7",
+            "quote": "reducing the oxides with methanol vapor at the lowest temperature at which re- duction would possibly take place—i. e., about 200° to 220° C.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "order": 1
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/sample/spent-zno-90",
+      "target": "ex:msyn/10.1021-ie50230a003/treatment/methanol-vapor-reduction"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/16",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50230a003/p3/1",
+            "quote": "even in the absence of copper the zinc oxide suffers some change during the treatment with methanol vapor at 200- 220° C., as evidenced by the fact that the pure zinc oxide thus treated has a=somewhat smaller unit cell than usually, 5.213 A. vs. 5.226 A.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/sample/treated-pure-zno",
+      "target": "ex:msyn/10.1021-ie50230a003/catalyst/pure-zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/17",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50230a003/p3/1",
+            "quote": "even in the absence of copper the zinc oxide suffers some change during the treatment with methanol vapor at 200- 220° C., as evidenced by the fact that the pure zinc oxide thus treated has a=somewhat smaller unit cell than usually, 5.213 A. vs. 5.226 A.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "order": 1
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/sample/treated-pure-zno",
+      "target": "ex:msyn/10.1021-ie50230a003/treatment/methanol-vapor-reduction"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/18",
+      "type": "PREPARED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50230a003/p1/7",
+            "quote": "the catalysts com- posed of copper and zinc were prepared by precipitating the mixed hydrates from the corresponding nitrate solutions, dehydrating the gel, and subsequently reducing the oxides with methanol vapor",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/sample/spent-series",
+      "target": "ex:msyn/10.1021-ie50230a003/preparation/mixed-hydrate-precipitation"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/19",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50230a003/p1/7",
+            "quote": "the catalysts com- posed of copper and zinc were prepared by precipitating the mixed hydrates from the corresponding nitrate solutions, dehydrating the gel, and subsequently reducing the oxides with methanol vapor",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "note": "'the corresponding nitrate solutions'",
+        "role": "precursor"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/sample/spent-series",
+      "target": "ex:msyn/species/cuno32"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/2",
+      "type": "IDENTIFIED_AS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/4",
+            "quote": "The copper has the same structure as that of the metal in bulk, and the zinc oxide has the same structure as when prepared by any other method.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/material/zinc-oxide-lattice",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/20",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50230a003/p1/7",
+            "quote": "the catalysts com- posed of copper and zinc were prepared by precipitating the mixed hydrates from the corresponding nitrate solutions, dehydrating the gel, and subsequently reducing the oxides with methanol vapor",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "note": "'the corresponding nitrate solutions'",
+        "role": "precursor"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/sample/spent-series",
+      "target": "ex:msyn/species/znno32"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/21",
+      "type": "PREPARED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50230a003/p1/7",
+            "quote": "the catalysts com- posed of copper and zinc were prepared by precipitating the mixed hydrates from the corresponding nitrate solutions, dehydrating the gel, and subsequently reducing the oxides with methanol vapor",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/sample/spent-zno-90",
+      "target": "ex:msyn/10.1021-ie50230a003/preparation/mixed-hydrate-precipitation"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/22",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50230a003/p1/7",
+            "quote": "the catalysts com- posed of copper and zinc were prepared by precipitating the mixed hydrates from the corresponding nitrate solutions, dehydrating the gel, and subsequently reducing the oxides with methanol vapor",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "note": "'the corresponding nitrate solutions'",
+        "role": "precursor"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/sample/spent-zno-90",
+      "target": "ex:msyn/species/cuno32"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/23",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50230a003/p1/7",
+            "quote": "the catalysts com- posed of copper and zinc were prepared by precipitating the mixed hydrates from the corresponding nitrate solutions, dehydrating the gel, and subsequently reducing the oxides with methanol vapor",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "note": "'the corresponding nitrate solutions'",
+        "role": "precursor"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/sample/spent-zno-90",
+      "target": "ex:msyn/species/znno32"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/24",
+      "type": "CHARACTERIZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/3",
+            "quote": "To obtain further information along this line, the spent catalysts were therefore examined by x-rays.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "state": "spent"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/characterization/xray-series",
+      "target": "ex:msyn/10.1021-ie50230a003/sample/spent-series"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/25",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/3",
+            "quote": "The source of x-rays used in determining the lattice di- mensions was a molybdenum target Coolidge tube.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "role": "measurement"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/characterization/xray-series",
+      "target": "ex:msyn/10.1021-ie50230a003/instrument/mo-coolidge-tube"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/26",
+      "type": "DETECTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/4",
+            "quote": "The copper has the same structure as that of the metal in bulk, and the zinc oxide has the same structure as when prepared by any other method.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/characterization/xray-series",
+      "target": "ex:msyn/10.1021-ie50230a003/material/copper-metal-lattice"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/27",
+      "type": "DETECTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/4",
+            "quote": "The copper has the same structure as that of the metal in bulk, and the zinc oxide has the same structure as when prepared by any other method.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/characterization/xray-series",
+      "target": "ex:msyn/10.1021-ie50230a003/material/zinc-oxide-lattice"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/28",
+      "type": "CHARACTERIZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/5",
+            "quote": "The maxi- mum elongation recorded is 1.3 per cent, corresponding to 90 mol per cent zinc oxide, which is the highest concentration studied.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "state": "spent"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/characterization/xray-zno-90",
+      "target": "ex:msyn/10.1021-ie50230a003/sample/spent-zno-90"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/29",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/3",
+            "quote": "The source of x-rays used in determining the lattice di- mensions was a molybdenum target Coolidge tube.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "role": "measurement"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/characterization/xray-zno-90",
+      "target": "ex:msyn/10.1021-ie50230a003/instrument/mo-coolidge-tube"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/3",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/4",
+            "quote": "The copper has the same structure as that of the metal in bulk, and the zinc oxide has the same structure as when prepared by any other method.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "note": "the reduced catalysts contain copper with the structure of the bulk metal",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/catalyst/cu-zno-series",
+      "target": "ex:msyn/species/copper"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/30",
+      "type": "PART_OF",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/5",
+            "quote": "The maxi- mum elongation recorded is 1.3 per cent, corresponding to 90 mol per cent zinc oxide, which is the highest concentration studied.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/characterization/xray-zno-90",
+      "target": "ex:msyn/10.1021-ie50230a003/characterization/xray-series"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/31",
+      "type": "CHARACTERIZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50230a003/p3/1",
+            "quote": "even in the absence of copper the zinc oxide suffers some change during the treatment with methanol vapor at 200- 220° C., as evidenced by the fact that the pure zinc oxide thus treated has a=somewhat smaller unit cell than usually, 5.213 A. vs. 5.226 A.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "note": "after treatment with methanol vapor at 200-220 °C",
+        "state": "other"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/characterization/xray-pure-zno",
+      "target": "ex:msyn/10.1021-ie50230a003/sample/treated-pure-zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/32",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/3",
+            "quote": "The source of x-rays used in determining the lattice di- mensions was a molybdenum target Coolidge tube.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "role": "measurement"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/characterization/xray-pure-zno",
+      "target": "ex:msyn/10.1021-ie50230a003/instrument/mo-coolidge-tube"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/33",
+      "type": "DETECTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50230a003/p3/1",
+            "quote": "even in the absence of copper the zinc oxide suffers some change during the treatment with methanol vapor at 200- 220° C., as evidenced by the fact that the pure zinc oxide thus treated has a=somewhat smaller unit cell than usually, 5.213 A. vs. 5.226 A.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/characterization/xray-pure-zno",
+      "target": "ex:msyn/10.1021-ie50230a003/material/zinc-oxide-lattice"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/34",
+      "type": "CHARACTERIZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50230a003/p1/8",
+            "quote": "The reduction manifested itself in the present cata- lyst mixtures by a somewhat greater loss in weight than that corresponding to reduction of the copper oxide alone.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "state": "reduced"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/characterization/weight-loss-on-reduction",
+      "target": "ex:msyn/10.1021-ie50230a003/sample/spent-series"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/4",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/4",
+            "quote": "The copper has the same structure as that of the metal in bulk, and the zinc oxide has the same structure as when prepared by any other method.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/catalyst/cu-zno-series",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/41",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/4",
+            "quote": "The study of the complete series of copper-zinc oxide mix- tures demonstrates that at every composition the catalyst is decidedly crystalline, possessing the characteristic crystal structure of the two components.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/characterization/xray-series",
+      "target": "ex:msyn/10.1021-ie50230a003/claim/crystalline-at-every-composition"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/42",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/4",
+            "quote": "The study of the complete series of copper-zinc oxide mix- tures demonstrates that at every composition the catalyst is decidedly crystalline, possessing the characteristic crystal structure of the two components.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/claim/crystalline-at-every-composition",
+      "target": "ex:msyn/10.1021-ie50230a003/catalyst/cu-zno-series"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/43",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/4",
+            "quote": "the side of the unit cell of the copper lattice expands with increasing additions of zinc oxide, passes through a maximum between 50 and 60 mol per cent zinc oxide, decreases somewhat, and then rises again.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/characterization/xray-series",
+      "target": "ex:msyn/10.1021-ie50230a003/claim/copper-lattice-expands"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/44",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/5",
+            "quote": "The maxi- mum elongation recorded is 1.3 per cent, corresponding to 90 mol per cent zinc oxide, which is the highest concentration studied.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/characterization/xray-zno-90",
+      "target": "ex:msyn/10.1021-ie50230a003/claim/copper-lattice-expands"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/45",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/4",
+            "quote": "the side of the unit cell of the copper lattice expands with increasing additions of zinc oxide, passes through a maximum between 50 and 60 mol per cent zinc oxide, decreases somewhat, and then rises again.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/claim/copper-lattice-expands",
+      "target": "ex:msyn/10.1021-ie50230a003/catalyst/cu-zno-series"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/46",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/4",
+            "quote": "the side of the unit cell of the copper lattice expands with increasing additions of zinc oxide, passes through a maximum between 50 and 60 mol per cent zinc oxide, decreases somewhat, and then rises again.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/claim/copper-lattice-expands",
+      "target": "ex:msyn/10.1021-ie50230a003/material/copper-metal-lattice"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/47",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/5",
+            "quote": "The unit cell of the zinc oxide suffers a similar elongation on addition of copper, with the exception that the curve first passes through a minimum value for 10 to 20 mol per cent copper.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/characterization/xray-series",
+      "target": "ex:msyn/10.1021-ie50230a003/claim/zinc-oxide-lattice-elongates"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/48",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/5",
+            "quote": "The unit cell of the zinc oxide suffers a similar elongation on addition of copper, with the exception that the curve first passes through a minimum value for 10 to 20 mol per cent copper.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/claim/zinc-oxide-lattice-elongates",
+      "target": "ex:msyn/10.1021-ie50230a003/material/zinc-oxide-lattice"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/49",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/5",
+            "quote": "The unit cell of the zinc oxide suffers a similar elongation on addition of copper, with the exception that the curve first passes through a minimum value for 10 to 20 mol per cent copper.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/claim/zinc-oxide-lattice-elongates",
+      "target": "ex:msyn/10.1021-ie50230a003/catalyst/cu-zno-series"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/5",
+      "type": "HAS_PHASE",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/4",
+            "quote": "The study of the complete series of copper-zinc oxide mix- tures demonstrates that at every composition the catalyst is decidedly crystalline, possessing the characteristic crystal structure of the two components.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/catalyst/cu-zno-series",
+      "target": "ex:msyn/10.1021-ie50230a003/material/copper-metal-lattice"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/50",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50230a003/p1/8",
+            "quote": "The reduction manifested itself in the present cata- lyst mixtures by a somewhat greater loss in weight than that corresponding to reduction of the copper oxide alone.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/characterization/weight-loss-on-reduction",
+      "target": "ex:msyn/10.1021-ie50230a003/claim/zno-partly-reduced-with-cuo"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/51",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/9",
+            "quote": "Zinc oxide, ordinarily considered a non- reducible compound, is undoubtedly partly reduced in the presence of copper oxide.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/claim/zno-partly-reduced-with-cuo",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/52",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1021-ie50230a003/p1/7",
+            "quote": "Although zinc oxide is usually considered non-reducible at this temperature, it was, nevertheless, found to be partly reduced by the above treatment when present in mixture with copper oxide.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/claim/zno-partly-reduced-with-cuo",
+      "target": "ex:msyn/10.1021-ie50230a003/treatment/methanol-vapor-reduction"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/53",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/2",
+            "quote": "the results thus obtained are not absolutely quantitative since there is always a possibility of the oxide mixtures not being com- pletely dehydrated when the reduction is started.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/claim/weight-loss-not-quantitative",
+      "target": "ex:msyn/10.1021-ie50230a003/characterization/weight-loss-on-reduction"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/54",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/9",
+            "quote": "It is not possible to de- cide, however, whether this reduction proceeds down to elementary zinc, although the indications are that this is the case.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/claim/reduction-to-zinc-undecided",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/55",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/9",
+            "quote": "It is not possible to de- cide, however, whether this reduction proceeds down to elementary zinc, although the indications are that this is the case.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/claim/reduction-to-zinc-undecided",
+      "target": "ex:msyn/species/zinc"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/56",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50230a003/p3/1",
+            "quote": "On the assumption that this reduction results in the formation of elementary zinc, it is probable that the zinc goes into solid solution in the copper as alpha brass.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/hypothesis/zinc-dissolves-as-alpha-brass",
+      "target": "ex:msyn/10.1021-ie50230a003/material/alpha-brass"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/57",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50230a003/p3/1",
+            "quote": "On the assumption that this reduction results in the formation of elementary zinc, it is probable that the zinc goes into solid solution in the copper as alpha brass.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/hypothesis/zinc-dissolves-as-alpha-brass",
+      "target": "ex:msyn/10.1021-ie50230a003/material/copper-metal-lattice"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/58",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50230a003/p3/1",
+            "quote": "it is significant that the amount of zinc required for the observed elongation of the copper lattice on the basis of alpha brass7 is always less than that present according to the loss in weight on reduction of the catalysts.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "warrant": "the zinc required for the observed copper-lattice elongation on the alpha-brass basis is always less than that indicated by the loss in weight on reduction"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/characterization/xray-series",
+      "target": "ex:msyn/10.1021-ie50230a003/hypothesis/zinc-dissolves-as-alpha-brass"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/59",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50230a003/p3/1",
+            "quote": "it is significant that the amount of zinc required for the observed elongation of the copper lattice on the basis of alpha brass7 is always less than that present according to the loss in weight on reduction of the catalysts.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/characterization/weight-loss-on-reduction",
+      "target": "ex:msyn/10.1021-ie50230a003/hypothesis/zinc-dissolves-as-alpha-brass"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/6",
+      "type": "HAS_PHASE",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/4",
+            "quote": "The study of the complete series of copper-zinc oxide mix- tures demonstrates that at every composition the catalyst is decidedly crystalline, possessing the characteristic crystal structure of the two components.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/catalyst/cu-zno-series",
+      "target": "ex:msyn/10.1021-ie50230a003/material/zinc-oxide-lattice"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/60",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50230a003/p3/1",
+            "quote": "even in the absence of copper the zinc oxide suffers some change during the treatment with methanol vapor at 200- 220° C., as evidenced by the fact that the pure zinc oxide thus treated has a=somewhat smaller unit cell than usually, 5.213 A. vs. 5.226 A.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/characterization/xray-pure-zno",
+      "target": "ex:msyn/10.1021-ie50230a003/claim/pure-zno-changed-by-treatment"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/61",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50230a003/p3/1",
+            "quote": "even in the absence of copper the zinc oxide suffers some change during the treatment with methanol vapor at 200- 220° C., as evidenced by the fact that the pure zinc oxide thus treated has a=somewhat smaller unit cell than usually, 5.213 A. vs. 5.226 A.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/claim/pure-zno-changed-by-treatment",
+      "target": "ex:msyn/10.1021-ie50230a003/catalyst/pure-zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/62",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50230a003/p3/2",
+            "quote": "It seems, therefore, that the reduction of the zinc oxide is not very well defined, and may perhaps involve the formation of both metallic zinc and a compound corresponding to a lower stage of oxidation.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/hypothesis/zno-reduction-ill-defined",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/63",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50230a003/p3/2",
+            "quote": "It seems, therefore, that the reduction of the zinc oxide is not very well defined, and may perhaps involve the formation of both metallic zinc and a compound corresponding to a lower stage of oxidation.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/characterization/xray-pure-zno",
+      "target": "ex:msyn/10.1021-ie50230a003/hypothesis/zno-reduction-ill-defined"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/64",
+      "type": "COMPETES_WITH",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50230a003/p3/2",
+            "quote": "It seems, therefore, that the reduction of the zinc oxide is not very well defined, and may perhaps involve the formation of both metallic zinc and a compound corresponding to a lower stage of oxidation.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/hypothesis/zno-reduction-ill-defined",
+      "target": "ex:msyn/10.1021-ie50230a003/hypothesis/zinc-dissolves-as-alpha-brass"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/68",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/2",
+            "quote": "Furthermore, the re- duction of copper oxide by methanol is exothermic and could furnish the necessary energy for the zinc oxide to be reduced when these two compounds are present in an intimate mix- ture.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/hypothesis/cuo-reduction-supplies-energy",
+      "target": "ex:msyn/species/cuo"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/69",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/2",
+            "quote": "Furthermore, the re- duction of copper oxide by methanol is exothermic and could furnish the necessary energy for the zinc oxide to be reduced when these two compounds are present in an intimate mix- ture.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/hypothesis/cuo-reduction-supplies-energy",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/7",
+      "type": "HAS_PHASE",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50230a003/p3/1",
+            "quote": "On the assumption that this reduction results in the formation of elementary zinc, it is probable that the zinc goes into solid solution in the copper as alpha brass.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/catalyst/cu-zno-series",
+      "target": "ex:msyn/10.1021-ie50230a003/material/alpha-brass"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/72",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/6",
+            "quote": "From these curves it follows that formaldehyde is the principal product of decomposition with pure copper, but that small amounts of zinc oxide greatly favor production of methyl formate, presumably due to polymerization of initially formed formaldehyde.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/hypothesis/methyl-formate-by-polymerization",
+      "target": "ex:msyn/species/hcooch3"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/73",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/6",
+            "quote": "From these curves it follows that formaldehyde is the principal product of decomposition with pure copper, but that small amounts of zinc oxide greatly favor production of methyl formate, presumably due to polymerization of initially formed formaldehyde.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/hypothesis/methyl-formate-by-polymerization",
+      "target": "ex:msyn/species/hcho"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/74",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/6",
+            "quote": "formaldehyde and particu- larly methyl formate pro- duction is characteristic of the copper end of the dia- gram, while carbon mon- oxide formation is closely associated with the zinc oxide.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/claim/products-associated-with-ends",
+      "target": "ex:msyn/10.1021-ie50230a003/catalyst/cu-zno-series"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/76",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/7",
+            "quote": "The general character of the two diagrams is convincing evidence of a relation between the selective catalytic activity and the atomic spacing of the copper-zinc oxide mixtures.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/characterization/xray-series",
+      "target": "ex:msyn/10.1021-ie50230a003/claim/selectivity-relates-to-atomic-spacing"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/78",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/7",
+            "quote": "The general character of the two diagrams is convincing evidence of a relation between the selective catalytic activity and the atomic spacing of the copper-zinc oxide mixtures.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/claim/selectivity-relates-to-atomic-spacing",
+      "target": "ex:msyn/10.1021-ie50230a003/catalyst/cu-zno-series"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/79",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/8",
+            "quote": "It is particularly interesting to note that a break in the activity curves invariably corre- sponds to a point of discontinuity in the lattice dimensions.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/characterization/xray-series",
+      "target": "ex:msyn/10.1021-ie50230a003/claim/activity-breaks-match-lattice-discontinuities"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/8",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/5",
+            "quote": "The maxi- mum elongation recorded is 1.3 per cent, corresponding to 90 mol per cent zinc oxide, which is the highest concentration studied.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "90 mol per cent zinc oxide",
+          "unit": "mol %",
+          "value": 90
+        },
+        "fraction_basis": "mole",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/catalyst/zno-90",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/80",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/8",
+            "quote": "It is particularly interesting to note that a break in the activity curves invariably corre- sponds to a point of discontinuity in the lattice dimensions.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/claim/activity-breaks-match-lattice-discontinuities",
+      "target": "ex:msyn/10.1021-ie50230a003/catalyst/cu-zno-series"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/81",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/8",
+            "quote": "It is particularly interesting to note that a break in the activity curves invariably corre- sponds to a point of discontinuity in the lattice dimensions.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/claim/activity-breaks-match-lattice-discontinuities",
+      "target": "ex:msyn/10.1021-ie50230a003/claim/selectivity-relates-to-atomic-spacing"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/82",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50230a003/p3/2",
+            "quote": "Thus, the es- sential feature of these catalysts is their selec- tive nature with respect to the mechanism by which the decomposi- tion occurs.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/claim/essential-feature-selectivity",
+      "target": "ex:msyn/10.1021-ie50230a003/catalyst/cu-zno-series"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/83",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50230a003/p3/3",
+            "quote": "it is not justifiable to draw any final conclusions or make generalizations in the absence of data on other catalysts.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/claim/no-final-generalization",
+      "target": "ex:msyn/10.1021-ie50230a003/claim/selectivity-relates-to-atomic-spacing"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/84",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50230a003/p3/4",
+            "quote": "The foregoing re- sults point to an im- portant relation be- tween selective cata- lytic activity and distance between the atoms in mixed cata- lysts.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/claim/catalysis-linked-to-internal-structure",
+      "target": "ex:msyn/10.1021-ie50230a003/catalyst/cu-zno-series"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/85",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50230a003/p3/4",
+            "quote": "The foregoing re- sults point to an im- portant relation be- tween selective cata- lytic activity and distance between the atoms in mixed cata- lysts.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/claim/selectivity-relates-to-atomic-spacing",
+      "target": "ex:msyn/10.1021-ie50230a003/claim/catalysis-linked-to-internal-structure"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/86",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50230a003/p3/4",
+            "quote": "It seems very likely that one of the governing factors in determining the specific nature of a catalyst is the rela- tion between the size of the molecules of the possible reaction products and the dis- tance between the atoms on the surface of the catalyst.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/hypothesis/molecule-size-vs-surface-spacing",
+      "target": "ex:msyn/10.1021-ie50230a003/catalyst/cu-zno-series"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/87",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ie50230a003/p3/4",
+            "quote": "It seems very likely that one of the governing factors in determining the specific nature of a catalyst is the rela- tion between the size of the molecules of the possible reaction products and the dis- tance between the atoms on the surface of the catalyst.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/claim/selectivity-relates-to-atomic-spacing",
+      "target": "ex:msyn/10.1021-ie50230a003/hypothesis/molecule-size-vs-surface-spacing"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/link/9",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ie50230a003/p2/5",
+            "quote": "The maxi- mum elongation recorded is 1.3 per cent, corresponding to 90 mol per cent zinc oxide, which is the highest concentration studied.",
+            "source": "ex:msyn/source/10.1021-ie50230a003"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/catalyst/zno-90",
+      "target": "ex:msyn/species/copper"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/material/alpha-brass/reported-in/10.1021-ie50230a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/material/alpha-brass",
+      "target": "ex:msyn/source/10.1021-ie50230a003"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/material/copper-metal-lattice/reported-in/10.1021-ie50230a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/material/copper-metal-lattice",
+      "target": "ex:msyn/source/10.1021-ie50230a003"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/material/zinc-oxide-lattice/reported-in/10.1021-ie50230a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/material/zinc-oxide-lattice",
+      "target": "ex:msyn/source/10.1021-ie50230a003"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/preparation/mixed-hydrate-precipitation/reported-in/10.1021-ie50230a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/preparation/mixed-hydrate-precipitation",
+      "target": "ex:msyn/source/10.1021-ie50230a003"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/sample/spent-series/reported-in/10.1021-ie50230a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/sample/spent-series",
+      "target": "ex:msyn/source/10.1021-ie50230a003"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/sample/spent-zno-90/reported-in/10.1021-ie50230a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/sample/spent-zno-90",
+      "target": "ex:msyn/source/10.1021-ie50230a003"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/sample/treated-pure-zno/reported-in/10.1021-ie50230a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/sample/treated-pure-zno",
+      "target": "ex:msyn/source/10.1021-ie50230a003"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50230a003/treatment/methanol-vapor-reduction/reported-in/10.1021-ie50230a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ie50230a003/treatment/methanol-vapor-reduction",
+      "target": "ex:msyn/source/10.1021-ie50230a003"
+    },
+    {
+      "id": "ex:msyn/source/10.1021-ie50230a003/authored-by/1",
+      "type": "AUTHORED_BY",
+      "props": {
+        "note": "byline: K. Frölich",
+        "origin": "curated",
+        "position": 1,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/10.1021-ie50230a003",
+      "target": "ex:msyn/person/per-k-frolich"
+    },
+    {
+      "id": "ex:msyn/source/10.1021-ie50230a003/authored-by/2",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 2,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/10.1021-ie50230a003",
+      "target": "ex:msyn/person/robert-l-davidson"
+    },
+    {
+      "id": "ex:msyn/source/10.1021-ie50230a003/authored-by/3",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 3,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/10.1021-ie50230a003",
+      "target": "ex:msyn/person/m-r-fenske"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/10.1021-ie50230a003"
+}

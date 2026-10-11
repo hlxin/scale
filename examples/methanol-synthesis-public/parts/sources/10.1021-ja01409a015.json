@@ -1,0 +1,5123 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/analysis/heat-of-adsorption",
+      "label": "Analysis",
+      "props": {
+        "name": "rough heats of adsorption from the 0 and 100° isotherms",
+        "analysis_kind": "thermodynamic",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "passage": "10.1021-ja01409a015/p8/2",
+            "quote": "Rough calculations from the ad- sorption isotherms at 0 and 100° confirm this conclusion and indicate heats of adsorption of the same order of magnitude as are involved in adsorption of the gases on metal catalysts",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "experiment_kind": "computational",
+        "method": "rough calculations from the adsorption isotherms at 0 and 100°",
+        "results": {
+          "heat_of_adsorption": {
+            "status": "present",
+            "as_reported": "heats of adsorption of the same order of magnitude as are involved in adsorption of the gases on metal catalysts and considerably greater than the heats of liquefaction of the gases",
+            "text_value": "same order of magnitude as on metal catalysts; considerably greater than the heats of liquefaction"
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/catalyst/zno",
+      "label": "Catalyst",
+      "props": {
+        "name": "zinc oxide",
+        "catalyst_family": "oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ja01409a015/p2/2",
+            "quote": "The present paper records the results of adsorption studies with two typical methanol catalysts, zinc oxide and a mixture of zinc and chromium oxides.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/2",
+            "quote": "The zinc oxide was prepared by ignition at 450°, special precautions being taken to ensure that the catalyst was entirely free even from traces of alkaline or acid ions",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "nominal_formula": "ZnO"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/catalyst/zno-cr2o3-2-1",
+      "label": "Catalyst",
+      "props": {
+        "name": "zinc oxide-chromium oxide (approx. 2 ZnO : 1 Cr2O3)",
+        "catalyst_family": "mixed_oxide",
+        "description": "Mixed zinc oxide-chromium oxide of the type described in patents of the Badische Company.",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/2",
+            "quote": "The mixed zinc oxide-chromium oxide was of the type described in patents of the Badische Company,8",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "OCR 'Cr2C>3' reads Cr2O3",
+            "passage": "10.1021-ja01409a015/p3/2",
+            "quote": "It contained approximately two moles of ZnO to one mole of Cr2C>3.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "properties": {
+          "zno_cr2o3_mole_ratio": {
+            "status": "present",
+            "as_reported": "approximately two moles of ZnO to one mole of Cr2C>3",
+            "qualifier": "approximate",
+            "unit": "mol/mol",
+            "value": 2
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/characterization/early-evac-300",
+      "label": "Characterization",
+      "props": {
+        "name": "no adsorption after one hour evacuation at 300°; adsorption after 300-400°",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/3",
+            "quote": "It was soon found that both zinc oxide and the mixed oxide catalyst showed no adsorption for either hydrogen or carbon monoxide even after evacuation for one hour at 300° in the high-vacuum system already described.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/3",
+            "quote": "Between 300 and 400°, however, a rapid evolution of adsorbed water vapor and carbon dioxide occurred, after which the surface of the catalyst immediately revealed pronounced adsorptive capacity for both gases.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "experiment_kind": "physical",
+        "note": "the zinc oxide sample used is not stated",
+        "results": {
+          "adsorption_after_300": {
+            "status": "present",
+            "as_reported": "showed no adsorption for either hydrogen or carbon monoxide",
+            "text_value": "no adsorption of hydrogen or carbon monoxide"
+          },
+          "evolution_300_400": {
+            "status": "present",
+            "as_reported": "a rapid evolution of adsorbed water vapor and carbon dioxide occurred",
+            "text_value": "rapid evolution of adsorbed water vapor and carbon dioxide"
+          }
+        },
+        "technique": "gas adsorption (volumetric)"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/characterization/mixed-200-300",
+      "label": "Characterization",
+      "props": {
+        "name": "mixed oxide after evacuation at 200 or 300°: no adsorption",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01409a015/p6/1",
+            "quote": "This adsorbed neither gas after evacuation at 200 or 300°.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "experiment_kind": "physical",
+        "results": {
+          "adsorption": {
+            "status": "present",
+            "as_reported": "This adsorbed neither gas",
+            "text_value": "neither gas adsorbed"
+          }
+        },
+        "technique": "gas adsorption (volumetric)"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/characterization/mixed-fig4-curve-1",
+      "label": "Characterization",
+      "props": {
+        "name": "mixed oxide, hydrogen after evacuation 1 at 400° (Fig. 4, Curve I)",
+        "conditions": {
+          "adsorbate": {
+            "status": "present",
+            "as_reported": "hydrogen",
+            "text_value": "hydrogen"
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01409a015/p6/1",
+            "quote": "After half an hour of evacuation at 400°, Curve I, Fig. 4, with hydrogen was ob- tained.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "experiment_kind": "physical",
+        "results": {
+          "isotherm": {
+            "status": "present",
+            "as_reported": "Curve I",
+            "text_value": "plotted in Fig. 4, Curve I"
+          }
+        },
+        "technique": "gas adsorption (volumetric)"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/characterization/mixed-fig4-curve-2",
+      "label": "Characterization",
+      "props": {
+        "name": "mixed oxide, hydrogen after evacuation 2 at 400° (Fig. 4, Curve II)",
+        "conditions": {
+          "adsorbate": {
+            "status": "present",
+            "as_reported": "hydrogen",
+            "text_value": "hydrogen"
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01409a015/p6/1",
+            "quote": "A further half hour of evacuation at 400° gave with hydrogen the results in Curve II.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "experiment_kind": "physical",
+        "results": {
+          "isotherm": {
+            "status": "present",
+            "as_reported": "Curve II",
+            "text_value": "plotted in Fig. 4, Curve II"
+          }
+        },
+        "technique": "gas adsorption (volumetric)"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/characterization/mixed-fig4-curve-3",
+      "label": "Characterization",
+      "props": {
+        "name": "mixed oxide, carbon monoxide after evacuation 3 at 400° (Fig. 4, Curve III)",
+        "conditions": {
+          "adsorbate": {
+            "status": "present",
+            "as_reported": "carbon monoxide",
+            "text_value": "carbon monoxide"
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01409a015/p6/1",
+            "quote": "Curve III records results with carbon monoxide",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01409a015/p6/1",
+            "quote": "after a further half hour of evacuation at 400°.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "experiment_kind": "physical",
+        "results": {
+          "isotherm": {
+            "status": "present",
+            "as_reported": "Curve III",
+            "text_value": "plotted in Fig. 4, Curve III"
+          }
+        },
+        "technique": "gas adsorption (volumetric)"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/characterization/mixed-fig4-curve-4",
+      "label": "Characterization",
+      "props": {
+        "name": "mixed oxide, hydrogen after evacuation 4 at 400° (Fig. 4, Curve IV)",
+        "conditions": {
+          "adsorbate": {
+            "status": "present",
+            "as_reported": "hydrogen",
+            "text_value": "hydrogen"
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01409a015/p6/1",
+            "quote": "Curve IV gave hydrogen adsorption after one further evacuation for half an hour at 400°.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "experiment_kind": "physical",
+        "results": {
+          "isotherm": {
+            "status": "present",
+            "as_reported": "Curve IV",
+            "text_value": "plotted in Fig. 4, Curve IV"
+          }
+        },
+        "technique": "gas adsorption (volumetric)"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/characterization/table1-zno",
+      "label": "Characterization",
+      "props": {
+        "name": "Table I: hydrogen adsorption on ZnO",
+        "conditions": {
+          "adsorbate": {
+            "status": "present",
+            "as_reported": "hydrogen",
+            "text_value": "hydrogen"
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01409a015/p7/2",
+            "quote": "This is readily seen from the appended Table I, which gives a few selected data of maximum adsorptions found in the earlier studies at Princeton on metal catalysts, under a variety of conditions, as well as some typical results from the present research.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 7, Table I",
+            "passage": "10.1021-ja01409a015/p7/3",
+            "quote": "ZnO 50 0 20 Taylor and Kistiakowsky",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "experiment_kind": "physical",
+        "note": "which zinc oxide sample is not stated",
+        "pressure": {
+          "status": "present",
+          "as_reported": "20",
+          "note": "printed 'mm' (millimetres of mercury)",
+          "unit": "mm Hg",
+          "value": 20
+        },
+        "results": {
+          "h2_adsorbed_per_100g": {
+            "status": "present",
+            "as_reported": "50",
+            "note": "'Ce. H2 adsorbed' per 100 g. of catalyst",
+            "unit": "cc per 100 g",
+            "value": 50
+          }
+        },
+        "technique": "gas adsorption (volumetric)",
+        "temperature": {
+          "status": "present",
+          "as_reported": "0",
+          "unit": "°C",
+          "value": 0
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/characterization/table1-zno-cr2o3",
+      "label": "Characterization",
+      "props": {
+        "name": "Table I: hydrogen adsorption on ZnO-Cr2O3",
+        "conditions": {
+          "adsorbate": {
+            "status": "present",
+            "as_reported": "hydrogen",
+            "text_value": "hydrogen"
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01409a015/p7/2",
+            "quote": "This is readily seen from the appended Table I, which gives a few selected data of maximum adsorptions found in the earlier studies at Princeton on metal catalysts, under a variety of conditions, as well as some typical results from the present research.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 7, Table I",
+            "note": "OCR 'Cr2Oa' reads Cr2O3",
+            "passage": "10.1021-ja01409a015/p7/3",
+            "quote": "ZnO-Cr2Oa 184 100 1 Taylor and Kistiakowsky",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "experiment_kind": "physical",
+        "pressure": {
+          "status": "present",
+          "as_reported": "1",
+          "note": "printed 'mm' (millimetres of mercury)",
+          "unit": "mm Hg",
+          "value": 1
+        },
+        "results": {
+          "h2_adsorbed_per_100g": {
+            "status": "present",
+            "as_reported": "184",
+            "note": "'Ce. H2 adsorbed' per 100 g. of catalyst",
+            "unit": "cc per 100 g",
+            "value": 184
+          }
+        },
+        "technique": "gas adsorption (volumetric)",
+        "temperature": {
+          "status": "present",
+          "as_reported": "100",
+          "unit": "°C",
+          "value": 100
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/characterization/tenacious-adsorption-reduction",
+      "label": "Characterization",
+      "props": {
+        "name": "tenacious adsorption and partial reduction; gray spots",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01409a015/p4/1",
+            "quote": "We have found that portions of both gases are adsorbed very tenaciously and are only removed from the surface in the oxidized condition either as carbon dioxide or water vapor, partial reduction of the catalyst to a corresponding amount occurring.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01409a015/p4/2",
+            "quote": "The reduction produces gray spots in the otherwise white zinc oxide.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01409a015/p4/2",
+            "quote": "since the gray spots grow with increased treatment.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "experiment_kind": "physical",
+        "note": "the zinc oxide sample is not named",
+        "results": {
+          "appearance": {
+            "status": "present",
+            "as_reported": "The reduction produces gray spots in the otherwise white zinc oxide.",
+            "text_value": "gray spots in the white zinc oxide, growing with increased treatment"
+          },
+          "removal": {
+            "status": "present",
+            "as_reported": "are only removed from the surface in the oxidized condition either as carbon dioxide or water vapor",
+            "text_value": "adsorbed gas removed only as carbon dioxide or water vapor, with partial reduction"
+          }
+        },
+        "technique": "gas adsorption and desorption; visual observation"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/characterization/zno-co2-fig5",
+      "label": "Characterization",
+      "props": {
+        "name": "carbon dioxide adsorption on zinc oxide (Fig. 5)",
+        "conditions": {
+          "adsorbate": {
+            "status": "present",
+            "as_reported": "carbon dioxide",
+            "text_value": "carbon dioxide"
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01409a015/p6/1",
+            "quote": "Fig. 5 shows the extraordinary adsorption of carbon dioxide by the zinc oxide catalyst.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "quote": "Thus the admission of 21.70 cc. of this gas to the catalyst at 100° produced a pressure of only 5 mm., and this pressure may be due in part to impurities, since tank carbon dioxide only was used;",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01409a015/p6/2",
+            "quote": "in the preceding runs with hydrogen and carbon monoxide the same amount of these gases had produced pressures of approximately 250 mm.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "experiment_kind": "physical",
+        "note": "the zinc oxide sample is not named",
+        "results": {
+          "co2_admitted": {
+            "status": "present",
+            "as_reported": "21.70 cc.",
+            "unit": "cc.",
+            "value": 21.7
+          },
+          "equilibrium_pressure": {
+            "status": "present",
+            "as_reported": "only 5 mm.",
+            "note": "may be due in part to impurities (tank carbon dioxide); printed 'mm' (millimetres of mercury)",
+            "unit": "mm Hg",
+            "value": 5
+          },
+          "h2_co_pressure_same_amount": {
+            "status": "present",
+            "as_reported": "approximately 250 mm.",
+            "note": "printed 'mm' (millimetres of mercury)",
+            "qualifier": "approximate",
+            "unit": "mm Hg",
+            "value": 250
+          }
+        },
+        "technique": "gas adsorption (volumetric)",
+        "temperature": {
+          "status": "present",
+          "as_reported": "100°",
+          "unit": "°C",
+          "value": 100
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/characterization/zno1-co-510",
+      "label": "Characterization",
+      "props": {
+        "name": "zinc oxide No. 1, CO after three hours evacuation at 510° (Fig. 1, curves 3a, 3b)",
+        "conditions": {
+          "adsorbate": {
+            "status": "present",
+            "as_reported": "carbon monoxide",
+            "text_value": "carbon monoxide"
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01409a015/p4/1",
+            "quote": "Curves 3a and 3b were obtained after evacuation for three hours at 510°.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "experiment_kind": "physical",
+        "note": "values not read from the figure",
+        "results": {
+          "isotherm": {
+            "status": "present",
+            "as_reported": "Curves 3a and 3b",
+            "text_value": "plotted in Fig. 1, curves 3a and 3b"
+          }
+        },
+        "technique": "gas adsorption (volumetric)",
+        "temperature": {
+          "status": "present",
+          "as_reported": "at 100 and 0°",
+          "text_value": "0 and 100",
+          "unit": "°C"
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/characterization/zno1-co-fig1",
+      "label": "Characterization",
+      "props": {
+        "name": "zinc oxide No. 1, CO adsorption with increasing surface cleanliness (Fig. 1)",
+        "conditions": {
+          "adsorbate": {
+            "status": "present",
+            "as_reported": "carbon monoxide",
+            "text_value": "carbon monoxide"
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/3",
+            "quote": "Fig. 1 shows graphically the increase in adsorptive capacity for carbon monoxide of zinc oxide, No. 1, consequent on the increasing cleanliness of the surface, due to better evacuation.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/3",
+            "quote": "The curves la and lb, etc., are corresponding runs at 100 and 0°.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01409a015/p4/1",
+            "quote": "The succeeding results, recorded in the order of their performance, show the progressive increase in the adsorptive capacity of the catalyst.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "experiment_kind": "physical",
+        "note": "isotherm values are plotted only (Fig. 1) and were not read",
+        "results": {
+          "trend": {
+            "status": "present",
+            "as_reported": "show the progressive increase in the adsorptive capacity of the catalyst",
+            "text_value": "progressive increase in adsorptive capacity for CO with better evacuation"
+          }
+        },
+        "technique": "gas adsorption (volumetric)",
+        "temperature": {
+          "status": "present",
+          "as_reported": "at 100 and 0°",
+          "text_value": "0 and 100",
+          "unit": "°C"
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/characterization/zno1-co-initial",
+      "label": "Characterization",
+      "props": {
+        "name": "zinc oxide No. 1, CO after pumping off at 200°: zero adsorption",
+        "conditions": {
+          "adsorbate": {
+            "status": "present",
+            "as_reported": "carbon monoxide",
+            "text_value": "carbon monoxide"
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/3",
+            "quote": "The initial runs with this gas,",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01409a015/p4/1",
+            "quote": "after pumping off at 200°, showed identical values for nitrogen and carbon monoxide, indicating zero adsorption of the latter.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "experiment_kind": "physical",
+        "results": {
+          "co_adsorption": {
+            "status": "present",
+            "as_reported": "indicating zero adsorption of the latter",
+            "text_value": "zero (identical values for nitrogen and carbon monoxide)"
+          }
+        },
+        "technique": "gas adsorption (volumetric)"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/characterization/zno1-h2",
+      "label": "Characterization",
+      "props": {
+        "name": "zinc oxide No. 1, hydrogen (Fig. 1, curves 4a, 4b)",
+        "conditions": {
+          "adsorbate": {
+            "status": "present",
+            "as_reported": "hydrogen",
+            "text_value": "hydrogen"
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01409a015/p4/1",
+            "quote": "One result with hydrogen, 4a and 4b, is also included for comparative purposes.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "experiment_kind": "physical",
+        "results": {
+          "isotherm": {
+            "status": "present",
+            "as_reported": "4a and 4b",
+            "text_value": "plotted in Fig. 1, curves 4a and 4b"
+          }
+        },
+        "technique": "gas adsorption (volumetric)",
+        "temperature": {
+          "status": "present",
+          "as_reported": "at 100 and 0°",
+          "text_value": "0 and 100",
+          "unit": "°C"
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/characterization/zno2-h2-450",
+      "label": "Characterization",
+      "props": {
+        "name": "zinc oxide No. 2, hydrogen after evacuation at 450° (Fig. 2, Curve I)",
+        "conditions": {
+          "adsorbate": {
+            "status": "present",
+            "as_reported": "hydrogen",
+            "text_value": "hydrogen"
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01409a015/p4/2",
+            "quote": "Our experiments on zinc oxide No. 2, carried out exclusively with hydrogen, disposed of this possibility since here again the gray specks formed.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "quote": "The adsorption of hydrogen on this catalyst is shown in Fig. 2, Curve I, after evacuation at 450°.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "experiment_kind": "physical",
+        "results": {
+          "appearance": {
+            "status": "present",
+            "as_reported": "here again the gray specks formed",
+            "text_value": "gray specks formed"
+          },
+          "isotherm": {
+            "status": "present",
+            "as_reported": "Fig. 2, Curve I",
+            "text_value": "plotted in Fig. 2, Curve I"
+          }
+        },
+        "technique": "gas adsorption (volumetric)"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/characterization/zno2-h2-after-o2",
+      "label": "Characterization",
+      "props": {
+        "name": "zinc oxide No. 2, hydrogen after oxygen at 500° (Fig. 2, Curve II)",
+        "conditions": {
+          "adsorbate": {
+            "status": "present",
+            "as_reported": "hydrogen",
+            "text_value": "hydrogen"
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01409a015/p4/3",
+            "quote": "Since we found that a treatment at 500° with oxygen partially destroyed the adsorptive capacity (Curve II) and since oxygen was partially con- sumed in the process",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "experiment_kind": "physical",
+        "results": {
+          "adsorptive_capacity": {
+            "status": "present",
+            "as_reported": "partially destroyed the adsorptive capacity",
+            "text_value": "partially destroyed"
+          },
+          "oxygen": {
+            "status": "present",
+            "as_reported": "oxygen was partially con- sumed in the process",
+            "text_value": "partially consumed"
+          }
+        },
+        "technique": "gas adsorption (volumetric)"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/characterization/zno2-h2-after-o2-18h",
+      "label": "Characterization",
+      "props": {
+        "name": "zinc oxide No. 2, hydrogen after 18 h oxygen and evacuation at 500° (Fig. 2, Curve III)",
+        "conditions": {
+          "adsorbate": {
+            "status": "present",
+            "as_reported": "hydrogen",
+            "text_value": "hydrogen"
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "10.1021-ja01409a015/p5/1",
+            "quote": "An extended treatment with oxygen for 18 hours, followed by evacuation at 500°, gave a surface which subse- quently showed (Curve III) high adsorption for hydrogen",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "experiment_kind": "physical",
+        "results": {
+          "h2_adsorption": {
+            "status": "present",
+            "as_reported": "high adsorption for hydrogen",
+            "text_value": "high"
+          }
+        },
+        "technique": "gas adsorption (volumetric)"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/characterization/zno3-500",
+      "label": "Characterization",
+      "props": {
+        "name": "zinc oxide No. 3 after evacuation at 500°, no reducing gas (Fig. 3, Curve I)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "10.1021-ja01409a015/p5/1",
+            "quote": "by evacuating zinc oxide No. 3 thoroughly at 500° before bringing the sample into contact with any reducing gas.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "10.1021-ja01409a015/p5/1",
+            "quote": "Curve I in Fig. 3 shows the high adsorptive capacity attained.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "experiment_kind": "physical",
+        "note": "the adsorbate is not named in the text",
+        "results": {
+          "adsorptive_capacity": {
+            "status": "present",
+            "as_reported": "the high adsorptive capacity attained",
+            "text_value": "high"
+          }
+        },
+        "technique": "gas adsorption (volumetric)"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/characterization/zno3-600",
+      "label": "Characterization",
+      "props": {
+        "name": "zinc oxide No. 3 after evacuation at 600° (Fig. 3, Curve II)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "10.1021-ja01409a015/p5/2",
+            "quote": "since Curve II shows the diminished adsorption after evacuation at 600°.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "10.1021-ja01409a015/p5/2",
+            "quote": "This sample was very dark in color after this treat- ment.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "experiment_kind": "physical",
+        "results": {
+          "adsorption": {
+            "status": "present",
+            "as_reported": "the diminished adsorption",
+            "text_value": "diminished"
+          },
+          "appearance": {
+            "status": "present",
+            "as_reported": "very dark in color",
+            "text_value": "very dark in color"
+          }
+        },
+        "technique": "gas adsorption (volumetric)"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/claim/activity-onset",
+      "label": "Claim",
+      "props": {
+        "name": "activity begins where CO2 and water evaporate freely",
+        "claim_kind": "other",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "quote": "It is significant that the activity of these methanol catalysts begins in the temperature range in which free evaporation of carbon dioxide and water vapor occur.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "statement": "The activity of these methanol catalysts begins in the temperature range in which free evaporation of carbon dioxide and water vapor occurs."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/claim/capacity-exceeds-metals",
+      "label": "Claim",
+      "props": {
+        "name": "adsorptive capacity many times that of metal catalysts",
+        "claim_kind": "comparison",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01409a015/p7/1",
+            "quote": "They show many times the adsorptive capacity of the metal catalysts under the same conditions.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01409a015/p7/3",
+            "quote": "a 13-fold better adsorptive capacity than a very active sample of reduced copper at 110° and 760 mm. pressure.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "inference_type": "interventional",
+        "note": "the metal-catalyst values of Table I are cited from earlier Princeton studies (Taylor and Dew; Taylor and Beebe) and are not recorded as this source's measurements",
+        "statement": "The oxide catalysts show many times the adsorptive capacity of metal catalysts under the same conditions; at 100° and 1 mm the zinc oxide-chromium oxide catalyst adsorbs more hydrogen than the best nickel catalyst the authors prepared at 0° and 760 mm, and 13-fold more than a very active reduced copper at 110° and 760 mm."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/claim/clean-surface-needed",
+      "label": "Claim",
+      "props": {
+        "name": "surface must be cleaned by evacuation at 400°",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/3",
+            "quote": "Our early experiments showed that the adsorptive capacity of a sample of the oxide was very sensitive to the cleanness of the surface.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "passage": "10.1021-ja01409a015/p8/3",
+            "quote": "the catalyst surface must be cleaned of adsorbed water vapor and carbon dioxide by evacuation at 400°.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "inference_type": "interventional",
+        "statement": "The adsorptive capacity is very sensitive to the cleanness of the surface; to obtain adsorption measurements the catalyst surface must be cleaned of adsorbed water vapor and carbon dioxide by evacuation at 400°."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/claim/co2-strongly-adsorbed",
+      "label": "Claim",
+      "props": {
+        "name": "extraordinary adsorption of CO2 on zinc oxide",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "quote": "Thus the admission of 21.70 cc. of this gas to the catalyst at 100° produced a pressure of only 5 mm., and this pressure may be due in part to impurities, since tank carbon dioxide only was used;",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01409a015/p6/2",
+            "quote": "This experiment confirms our observation in the evacuation process of the tenacity with which both carbon dioxide and water are adsorbed.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "inference_type": "interventional",
+        "statement": "Zinc oxide adsorbs carbon dioxide extraordinarily: 21.70 cc admitted at 100° gave a pressure of only 5 mm, against about 250 mm for the same amount of hydrogen or carbon monoxide; this confirms the tenacity with which carbon dioxide and water are adsorbed."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/claim/h2-vs-co-selectivity",
+      "label": "Claim",
+      "props": {
+        "name": "H2 adsorbed more than CO on the mixed oxide; the reverse on ZnO",
+        "claim_kind": "comparison",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01409a015/p6/1",
+            "quote": "It is very definitely established from these results that the hydrogen adsorption is more marked than that of carbon monoxide on the mixed oxide catalyst, while the reverse is true on the single zinc oxide (Fig. 1).",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "inference_type": "interventional",
+        "statement": "The hydrogen adsorption is more marked than that of carbon monoxide on the mixed oxide catalyst, while the reverse is true on the single zinc oxide."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/claim/harmony-with-activity",
+      "label": "Claim",
+      "props": {
+        "name": "results in harmony with known methanol activity",
+        "claim_kind": "conclusion",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "passage": "10.1021-ja01409a015/p8/2",
+            "quote": "The experiments recorded here are in complete harmony with the known activity of zinc oxide and zinc oxide-chromium oxide catalysts as agents for the synthesis of methanol.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "passage": "10.1021-ja01409a015/p8/3",
+            "quote": "to ascertain why other oxides, for example magnesium oxide, cannot be utilized for such purposes with efficiency.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "statement": "The experiments are in complete harmony with the known activity of zinc oxide and zinc oxide-chromium oxide catalysts for methanol synthesis, and suggest investigation of why other oxides, e.g. magnesium oxide, cannot be used efficiently."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/claim/high-heats-of-adsorption",
+      "label": "Claim",
+      "props": {
+        "name": "high heats of adsorption",
+        "claim_kind": "conclusion",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "passage": "10.1021-ja01409a015/p8/2",
+            "quote": "The rapid saturation of the surface at low pressures or the small change in total adsorption at higher pressures is characteristic of adsorptions involving high heats of adsorption.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "passage": "10.1021-ja01409a015/p8/2",
+            "quote": "and considerably greater than the heats of liquefaction of the gases.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "inference_type": "computational",
+        "statement": "Rapid saturation at low pressures is characteristic of high heats of adsorption; rough calculations indicate heats of adsorption of the same order as on metal catalysts and considerably greater than the heats of liquefaction."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/claim/mixed-greater-surface",
+      "label": "Claim",
+      "props": {
+        "name": "active surface of the mixed oxide far greater than that of ZnO",
+        "claim_kind": "comparison",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01409a015/p7/4",
+            "quote": "Both the curves and the table show that the active surface in a mixed zinc oxide-chromium oxide catalyst is far greater than that of a correspond- ing weight of zinc oxide catalyst.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 9",
+            "passage": "10.1021-ja01409a015/p9/1",
+            "quote": "The mixed oxide catalyst shows greater adsorptive capacity than the zinc oxide in harmony with its higher order of catalytic activity.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "inference_type": "interventional",
+        "note": "the higher activity of the mixed catalyst is taken from patent and technical literature ('it is well known'), not measured here",
+        "statement": "The active surface in a mixed zinc oxide-chromium oxide catalyst is far greater than that of a corresponding weight of zinc oxide, so it is no surprise that such mixed catalysts are preferred to the single zinc oxide; the mixed catalyst's greater adsorptive capacity is in harmony with its higher catalytic activity."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/claim/ratio-change",
+      "label": "Claim",
+      "props": {
+        "name": "aH2/aCO changes from about unity to about 0.5",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "passage": "10.1021-ja01409a015/p8/1",
+            "quote": "It will be noted that the ratio aH¡/aCo changes from approximately unity to approximately 0.5 at, for example, 100 mm. pressure.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7–8",
+            "passage": "10.1021-ja01409a015/p8/1",
+            "quote": "the change in ratio of adsorption aH,/aco, with change from a single to a mixed oxide catalyst is significant in the synthesis of methanol cannot be deduced from these experiments.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "inference_type": "interventional",
+        "note": "as printed; see the gap on the direction of this ratio",
+        "statement": "With change from the single to the mixed oxide the adsorption ratio aH2/aCO changes from approximately unity to approximately 0.5 at, for example, 100 mm pressure; whether this is significant for methanol synthesis cannot be deduced from these experiments."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/claim/same-type-as-metals",
+      "label": "Claim",
+      "props": {
+        "name": "same type of adsorption as metal catalysts",
+        "claim_kind": "conclusion",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01409a015/p7/1",
+            "quote": "The experimental results demonstrate conclusively that zinc oxide and /inc oxide-chromium oxide catalysts show the same type of adsorption for the reactants of the methanol synthesis that is shown by metal cata- lysts in hydrogenation reactions.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01409a015/p7/1",
+            "quote": "There is strong adsorption at low pressures with relative saturation of the surface at these low pressures and little increase in adsorption with a many fold increase in pressure.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "inference_type": "interventional",
+        "statement": "Zinc oxide and zinc oxide-chromium oxide catalysts show the same type of adsorption for the reactants of the methanol synthesis as metal catalysts in hydrogenation: strong adsorption at low pressures with relative saturation there and little increase with many-fold increase in pressure."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/claim/too-high-temperature",
+      "label": "Claim",
+      "props": {
+        "name": "evacuation at 600° lowers adsorption",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "10.1021-ja01409a015/p5/1",
+            "quote": "With this catalyst we also showed the adverse effect of too",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "inference_type": "interventional",
+        "statement": "Too high a temperature is adverse: after evacuation at 600° zinc oxide No. 3 showed diminished adsorption and was very dark in colour."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/claim/unreduced-surfaces-adsorb",
+      "label": "Claim",
+      "props": {
+        "name": "clean unreduced surfaces adsorb strongly",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "quote": "we now have full evidence that even unreduced but clean surfaces of these catalysts show large adsorptive capacity for the two gases.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "10.1021-ja01409a015/p5/1",
+            "quote": "thus discrediting the theory that adsorption is due solely to metal atoms.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "inference_type": "interventional",
+        "statement": "Even unreduced but clean surfaces of these catalysts show large adsorptive capacity for hydrogen and carbon monoxide; adsorption is not due solely to metal atoms."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/hypothesis/adsorption-by-reduced-zinc",
+      "label": "Hypothesis",
+      "props": {
+        "name": "adsorption due solely to reduced zinc nuclei",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01409a015/p4/1",
+            "quote": "At first we were inclined to ascribe all of the increase in adsorptive capacity to this reduction process",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4–5",
+            "passage": "10.1021-ja01409a015/p4/3",
+            "quote": "we asumed this to be evidence in favor of adsorption",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "10.1021-ja01409a015/p5/1",
+            "quote": "by reduced zinc nuclei in the mass.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "hypothesis_kind": "explanatory",
+        "hypothesis_status": "refuted",
+        "note": "first assumed, then discredited by the authors",
+        "statement": "Adsorption is due to reduced zinc nuclei (metal atoms) in the mass, and the increase in adsorptive capacity is due to the reduction process."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/hypothesis/carbon-deposition-spots",
+      "label": "Hypothesis",
+      "props": {
+        "name": "dark spots from carbon deposited by 2CO = CO2 + C",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01409a015/p4/2",
+            "quote": "At first we considered the possibility that the dark spots might be due to catalytic decomposition of carbon monoxide by the reaction, 2CO = CO2 + C, carbon being deposited in the oxide.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "hypothesis_kind": "competing",
+        "hypothesis_status": "refuted",
+        "note": "disposed of by the authors with the hydrogen-only experiments on zinc oxide No. 2",
+        "statement": "The dark spots might be due to catalytic decomposition of carbon monoxide by 2CO = CO2 + C, carbon being deposited in the oxide."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/hypothesis/co2-water-temporary-poisons",
+      "label": "Hypothesis",
+      "props": {
+        "name": "CO2 and water are temporary poisons in methanol synthesis",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "passage": "10.1021-ja01409a015/p8/1",
+            "quote": "indicate that both gases are temporary poisons for these catalysts in methanol synthesis.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "hypothesis_kind": "explanatory",
+        "hypothesis_status": "proposed",
+        "statement": "The very pronounced adsorption of carbon dioxide, and the strong retention of water vapour and carbon dioxide (no measurable adsorption after evacuation at or below 300°), indicate that both gases are temporary poisons for these catalysts in methanol synthesis."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/hypothesis/poison-tolerance",
+      "label": "Hypothesis",
+      "props": {
+        "name": "oxide catalysts tolerate much more reversible poison",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01409a015/p7/3",
+            "quote": "The extremely high adsorptive capacity at low pressures thus revealed implies a very con- siderable amount of active catalytic surface per unit weight of material.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "quote": "It may be concluded that such catalysts will tolerate concentrations of reversible poisons many fold greater than those which, with metal catalysts, produce a given diminution in catalytic activity.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "hypothesis_kind": "explanatory",
+        "hypothesis_status": "proposed",
+        "statement": "The extremely high adsorptive capacity at low pressures implies a very considerable active catalytic surface per unit weight, hence a corresponding insensitiveness to poisons: such oxide catalysts will tolerate concentrations of reversible poisons many fold greater than those that produce a given loss of activity with metal catalysts."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/hypothesis/reduction-interface-reaction",
+      "label": "Hypothesis",
+      "props": {
+        "name": "reduction of zinc oxide is an interface reaction",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01409a015/p4/2",
+            "quote": "The reduction process is very probably an interface reaction as with copper oxide10 since the gray spots grow with increased treatment.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "hypothesis_kind": "mechanistic",
+        "hypothesis_status": "proposed",
+        "statement": "The reduction process is very probably an interface reaction, as with copper oxide, since the gray spots grow with increased treatment."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/instrument/adsorption-apparatus",
+      "label": "Instrument",
+      "props": {
+        "name": "volumetric adsorption apparatus",
+        "description": "Catalyst vessel connected through three-way stopcocks with a manometer, gas buret and pump system (two mercury vapour pumps in series with a high-vacuum oil pump as fore-vacuum); free space determined with a non-adsorbed gas such as nitrogen.",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/1",
+            "quote": "A vessel contain- ing the catalyst was connected through three-way stopcocks with a mano- meter, gas buret and pump system for evacuation purposes.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/1",
+            "quote": "the latter consisted of two mercury vapor pumps in series with a high-vacuum oil pump as fore-vacuum.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/1",
+            "quote": "The free space in the catalyst vessel was determined by a series of measurements of volume and pressure of a non-adsorbed gas, for example, nitrogen, at a controlled tem- perature.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "instrument_kind": "volumetric adsorption apparatus"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/preparation/zinc-chromate-precipitation",
+      "label": "Preparation",
+      "props": {
+        "name": "precipitation of zinc chromate, washing, drying, ignition at 450°",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/2",
+            "quote": "obtained by precipitating zinc chromate from a solution of the nitrate, thoroughly washing the precipitate, drying and igniting at 450°.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "method": "precipitation",
+        "procedure_status": "completed",
+        "steps": [
+          "precipitating zinc chromate from a solution of the nitrate",
+          "thoroughly washing the precipitate",
+          "drying",
+          "igniting at 450°"
+        ],
+        "temperature": {
+          "status": "present",
+          "as_reported": "450°",
+          "unit": "°C",
+          "value": 450
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/preparation/zno-ignition",
+      "label": "Preparation",
+      "props": {
+        "name": "zinc oxide by ignition at 450°",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/2",
+            "quote": "The zinc oxide was prepared by ignition at 450°, special precautions being taken to ensure that the catalyst was entirely free even from traces of alkaline or acid ions",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "method": "ignition",
+        "note": "the material ignited is not stated",
+        "procedure_status": "completed",
+        "steps": [
+          "prepared by ignition at 450°",
+          "special precautions to ensure the catalyst was entirely free even from traces of alkaline or acid ions"
+        ],
+        "temperature": {
+          "status": "present",
+          "as_reported": "450°",
+          "unit": "°C",
+          "value": 450
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/sample/zno-1",
+      "label": "CatalystSample",
+      "props": {
+        "name": "zinc oxide No. 1",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "quote": "Three samples of a single preparation of zinc oxide and one of a mixed zinc oxide-chromium oxide were studied.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/2",
+            "quote": "The zinc oxide samples were, respectively, 39, 39 and 32 g.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "note": "mass 39 g ('respectively, 39, 39 and 32 g', taken in the order No. 1, 2, 3)",
+        "preparation_status": "prepared",
+        "sample_kind": "batch"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/sample/zno-2",
+      "label": "CatalystSample",
+      "props": {
+        "name": "zinc oxide No. 2",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "quote": "Three samples of a single preparation of zinc oxide and one of a mixed zinc oxide-chromium oxide were studied.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/2",
+            "quote": "The zinc oxide samples were, respectively, 39, 39 and 32 g.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "note": "mass 39 g ('respectively, 39, 39 and 32 g', taken in the order No. 1, 2, 3)",
+        "preparation_status": "prepared",
+        "sample_kind": "batch"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/sample/zno-3",
+      "label": "CatalystSample",
+      "props": {
+        "name": "zinc oxide No. 3",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "quote": "Three samples of a single preparation of zinc oxide and one of a mixed zinc oxide-chromium oxide were studied.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/2",
+            "quote": "The zinc oxide samples were, respectively, 39, 39 and 32 g.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "note": "mass 32 g ('respectively, 39, 39 and 32 g', taken in the order No. 1, 2, 3)",
+        "preparation_status": "prepared",
+        "sample_kind": "batch"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/sample/zno-cr2o3",
+      "label": "CatalystSample",
+      "props": {
+        "name": "zinc oxide-chromium oxide sample (25 g)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "quote": "Three samples of a single preparation of zinc oxide and one of a mixed zinc oxide-chromium oxide were studied.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "quote": "The zinc oxide-chromium oxide sample weighed 25 g.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "preparation_status": "prepared",
+        "sample_kind": "batch"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/species/the-nitrate",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "'the nitrate' (solution from which zinc chromate was precipitated)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/2",
+            "quote": "obtained by precipitating zinc chromate from a solution of the nitrate, thoroughly washing the precipitate, drying and igniting at 450°.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "note": "the source does not name the nitrate further"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/species/zinc-chromate",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "zinc chromate",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/2",
+            "quote": "obtained by precipitating zinc chromate from a solution of the nitrate, thoroughly washing the precipitate, drying and igniting at 450°.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/treatment/mixed-evac-200-300",
+      "label": "Treatment",
+      "props": {
+        "name": "evacuation at 200 or 300°",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01409a015/p6/1",
+            "quote": "This adsorbed neither gas after evacuation at 200 or 300°.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "method": "evacuation",
+        "procedure_status": "completed",
+        "temperature": {
+          "status": "present",
+          "as_reported": "200 or 300°",
+          "text_value": "200 or 300",
+          "unit": "°C"
+        },
+        "treatment_kind": "other"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/treatment/mixed-evac-400-1",
+      "label": "Treatment",
+      "props": {
+        "name": "evacuation 1 for half an hour at 400°",
+        "duration": {
+          "status": "present",
+          "as_reported": "half an hour",
+          "unit": "h",
+          "value": 0.5
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01409a015/p6/1",
+            "quote": "After half an hour of evacuation at 400°, Curve I, Fig. 4, with hydrogen was ob- tained.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "method": "evacuation",
+        "procedure_status": "completed",
+        "temperature": {
+          "status": "present",
+          "as_reported": "400°",
+          "unit": "°C",
+          "value": 400
+        },
+        "treatment_kind": "other"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/treatment/mixed-evac-400-2",
+      "label": "Treatment",
+      "props": {
+        "name": "evacuation 2 for half an hour at 400°",
+        "duration": {
+          "status": "present",
+          "as_reported": "half an hour",
+          "unit": "h",
+          "value": 0.5
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01409a015/p6/1",
+            "quote": "A further half hour of evacuation at 400° gave with hydrogen the results in Curve II.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "method": "evacuation",
+        "procedure_status": "completed",
+        "temperature": {
+          "status": "present",
+          "as_reported": "400°",
+          "unit": "°C",
+          "value": 400
+        },
+        "treatment_kind": "other"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/treatment/mixed-evac-400-3",
+      "label": "Treatment",
+      "props": {
+        "name": "evacuation 3 for half an hour at 400°",
+        "duration": {
+          "status": "present",
+          "as_reported": "half an hour",
+          "unit": "h",
+          "value": 0.5
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01409a015/p6/1",
+            "quote": "after a further half hour of evacuation at 400°.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "method": "evacuation",
+        "procedure_status": "completed",
+        "temperature": {
+          "status": "present",
+          "as_reported": "400°",
+          "unit": "°C",
+          "value": 400
+        },
+        "treatment_kind": "other"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/treatment/mixed-evac-400-4",
+      "label": "Treatment",
+      "props": {
+        "name": "evacuation 4 for half an hour at 400°",
+        "duration": {
+          "status": "present",
+          "as_reported": "half an hour",
+          "unit": "h",
+          "value": 0.5
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01409a015/p6/1",
+            "quote": "Curve IV gave hydrogen adsorption after one further evacuation for half an hour at 400°.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "method": "evacuation",
+        "procedure_status": "completed",
+        "temperature": {
+          "status": "present",
+          "as_reported": "400°",
+          "unit": "°C",
+          "value": 400
+        },
+        "treatment_kind": "other"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/treatment/zno1-evac-200",
+      "label": "Treatment",
+      "props": {
+        "name": "evacuation (pumping off) at 200°",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01409a015/p4/1",
+            "quote": "after pumping off at 200°, showed identical values for nitrogen and carbon monoxide, indicating zero adsorption of the latter.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "method": "evacuation",
+        "procedure_status": "completed",
+        "temperature": {
+          "status": "present",
+          "as_reported": "200°",
+          "unit": "°C",
+          "value": 200
+        },
+        "treatment_kind": "other"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/treatment/zno1-evac-510-3h",
+      "label": "Treatment",
+      "props": {
+        "name": "evacuation for three hours at 510°",
+        "duration": {
+          "status": "present",
+          "as_reported": "three hours",
+          "unit": "h",
+          "value": 3
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01409a015/p4/1",
+            "quote": "Curves 3a and 3b were obtained after evacuation for three hours at 510°.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "method": "evacuation",
+        "procedure_status": "completed",
+        "temperature": {
+          "status": "present",
+          "as_reported": "510°",
+          "unit": "°C",
+          "value": 510
+        },
+        "treatment_kind": "other"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/treatment/zno2-evac-450",
+      "label": "Treatment",
+      "props": {
+        "name": "evacuation at 450°",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "quote": "The adsorption of hydrogen on this catalyst is shown in Fig. 2, Curve I, after evacuation at 450°.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "method": "evacuation",
+        "procedure_status": "completed",
+        "temperature": {
+          "status": "present",
+          "as_reported": "450°",
+          "unit": "°C",
+          "value": 450
+        },
+        "treatment_kind": "other"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/treatment/zno2-oxygen-18h-evac-500",
+      "label": "Treatment",
+      "props": {
+        "name": "extended oxygen treatment for 18 hours, then evacuation at 500°",
+        "atmosphere": "oxygen",
+        "duration": {
+          "status": "present",
+          "as_reported": "18 hours",
+          "note": "duration of the oxygen treatment",
+          "unit": "h",
+          "value": 18
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "10.1021-ja01409a015/p5/1",
+            "quote": "An extended treatment with oxygen for 18 hours, followed by evacuation at 500°, gave a surface which subse- quently showed (Curve III) high adsorption for hydrogen",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "procedure_status": "completed",
+        "temperature": {
+          "status": "present",
+          "as_reported": "500°",
+          "note": "the evacuation temperature; the oxygen treatment temperature is not stated",
+          "unit": "°C",
+          "value": 500
+        },
+        "treatment_kind": "oxidation"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/treatment/zno2-oxygen-500",
+      "label": "Treatment",
+      "props": {
+        "name": "treatment with oxygen at 500°",
+        "atmosphere": "oxygen",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01409a015/p4/3",
+            "quote": "Since we found that a treatment at 500° with oxygen partially destroyed the adsorptive capacity (Curve II)",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "procedure_status": "completed",
+        "temperature": {
+          "status": "present",
+          "as_reported": "500°",
+          "unit": "°C",
+          "value": 500
+        },
+        "treatment_kind": "oxidation"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/treatment/zno3-evac-500",
+      "label": "Treatment",
+      "props": {
+        "name": "thorough evacuation at 500° before contact with any reducing gas",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "10.1021-ja01409a015/p5/1",
+            "quote": "by evacuating zinc oxide No. 3 thoroughly at 500° before bringing the sample into contact with any reducing gas.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "method": "evacuation",
+        "procedure_status": "completed",
+        "temperature": {
+          "status": "present",
+          "as_reported": "500°",
+          "unit": "°C",
+          "value": 500
+        },
+        "treatment_kind": "other"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/treatment/zno3-evac-600",
+      "label": "Treatment",
+      "props": {
+        "name": "evacuation at 600°",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "10.1021-ja01409a015/p5/2",
+            "quote": "since Curve II shows the diminished adsorption after evacuation at 600°.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "method": "evacuation",
+        "procedure_status": "completed",
+        "temperature": {
+          "status": "present",
+          "as_reported": "600°",
+          "unit": "°C",
+          "value": 600
+        },
+        "treatment_kind": "other"
+      }
+    },
+    {
+      "id": "ex:msyn/source/10.1021-ja01409a015",
+      "label": "Source",
+      "props": {
+        "name": "STUDIES OF METHANOL CATALYSTS. I",
+        "kind": "article",
+        "description": "Published 1927 (publication year (bibliography)); in scope: before the 1966-01-01 cutoff. Text: 9 pages text_layer. Text not redistributed.",
+        "doi": "10.1021/ja01409a015",
+        "licence": "no verified publisher licence; short excerpts quoted as evidence under fair use",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "STUDIES OF METHANOL CATALYSTS. I",
+        "url": "https://doi.org/10.1021/ja01409a015",
+        "venue": "Journal of the American Chemical Society",
+        "year": 1927
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/analysis/heat-of-adsorption/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 8"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/analysis/heat-of-adsorption",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/catalyst/zno-cr2o3-2-1/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/catalyst/zno-cr2o3-2-1",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/catalyst/zno/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/catalyst/zno",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/characterization/early-evac-300/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/early-evac-300",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/characterization/mixed-200-300/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/mixed-200-300",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/characterization/mixed-fig4-curve-1/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/mixed-fig4-curve-1",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/characterization/mixed-fig4-curve-2/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/mixed-fig4-curve-2",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/characterization/mixed-fig4-curve-3/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/mixed-fig4-curve-3",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/characterization/mixed-fig4-curve-4/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/mixed-fig4-curve-4",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/characterization/table1-zno-cr2o3/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 7",
+          "p. 7, Table I"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/table1-zno-cr2o3",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/characterization/table1-zno/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 7",
+          "p. 7, Table I"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/table1-zno",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/characterization/tenacious-adsorption-reduction/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/tenacious-adsorption-reduction",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/characterization/zno-co2-fig5/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/zno-co2-fig5",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/characterization/zno1-co-510/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/zno1-co-510",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/characterization/zno1-co-fig1/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3",
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/zno1-co-fig1",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/characterization/zno1-co-initial/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3",
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/zno1-co-initial",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/characterization/zno1-h2/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/zno1-h2",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/characterization/zno2-h2-450/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/zno2-h2-450",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/characterization/zno2-h2-after-o2-18h/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/zno2-h2-after-o2-18h",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/characterization/zno2-h2-after-o2/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/zno2-h2-after-o2",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/characterization/zno3-500/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/zno3-500",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/characterization/zno3-600/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/zno3-600",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/claim/activity-onset/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 8"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/claim/activity-onset",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/claim/capacity-exceeds-metals/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/claim/capacity-exceeds-metals",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/claim/clean-surface-needed/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3",
+          "p. 8"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/claim/clean-surface-needed",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/claim/co2-strongly-adsorbed/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/claim/co2-strongly-adsorbed",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/claim/h2-vs-co-selectivity/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/claim/h2-vs-co-selectivity",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/claim/harmony-with-activity/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 8"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/claim/harmony-with-activity",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/claim/high-heats-of-adsorption/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 8"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/claim/high-heats-of-adsorption",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/claim/mixed-greater-surface/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 7",
+          "p. 9"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/claim/mixed-greater-surface",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/claim/ratio-change/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 7–8",
+          "p. 8"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/claim/ratio-change",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/claim/same-type-as-metals/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/claim/same-type-as-metals",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/claim/too-high-temperature/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/claim/too-high-temperature",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/claim/unreduced-surfaces-adsorb/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4",
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/claim/unreduced-surfaces-adsorb",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/hypothesis/adsorption-by-reduced-zinc/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4",
+          "p. 4–5",
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/hypothesis/adsorption-by-reduced-zinc",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/hypothesis/carbon-deposition-spots/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/hypothesis/carbon-deposition-spots",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/hypothesis/co2-water-temporary-poisons/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 8"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/hypothesis/co2-water-temporary-poisons",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/hypothesis/poison-tolerance/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/hypothesis/poison-tolerance",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/hypothesis/reduction-interface-reaction/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/hypothesis/reduction-interface-reaction",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/instrument/adsorption-apparatus/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/instrument/adsorption-apparatus",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/1",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/2",
+            "quote": "The zinc oxide was prepared by ignition at 450°, special precautions being taken to ensure that the catalyst was entirely free even from traces of alkaline or acid ions",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/catalyst/zno",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/10",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "quote": "Three samples of a single preparation of zinc oxide and one of a mixed zinc oxide-chromium oxide were studied.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/sample/zno-2",
+      "target": "ex:msyn/10.1021-ja01409a015/catalyst/zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/100",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "10.1021-ja01409a015/p5/1",
+            "quote": "With this catalyst we also showed the adverse effect of too",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/claim/too-high-temperature",
+      "target": "ex:msyn/10.1021-ja01409a015/catalyst/zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/101",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "10.1021-ja01409a015/p5/1",
+            "quote": "With this catalyst we also showed the adverse effect of too",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/zno3-600",
+      "target": "ex:msyn/10.1021-ja01409a015/claim/too-high-temperature"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/102",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01409a015/p6/1",
+            "quote": "It is very definitely established from these results that the hydrogen adsorption is more marked than that of carbon monoxide on the mixed oxide catalyst, while the reverse is true on the single zinc oxide (Fig. 1).",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/claim/h2-vs-co-selectivity",
+      "target": "ex:msyn/10.1021-ja01409a015/catalyst/zno-cr2o3-2-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/103",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01409a015/p6/1",
+            "quote": "It is very definitely established from these results that the hydrogen adsorption is more marked than that of carbon monoxide on the mixed oxide catalyst, while the reverse is true on the single zinc oxide (Fig. 1).",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/claim/h2-vs-co-selectivity",
+      "target": "ex:msyn/10.1021-ja01409a015/catalyst/zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/104",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01409a015/p6/1",
+            "quote": "It is very definitely established from these results that the hydrogen adsorption is more marked than that of carbon monoxide on the mixed oxide catalyst, while the reverse is true on the single zinc oxide (Fig. 1).",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/mixed-fig4-curve-1",
+      "target": "ex:msyn/10.1021-ja01409a015/claim/h2-vs-co-selectivity"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/105",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01409a015/p6/1",
+            "quote": "It is very definitely established from these results that the hydrogen adsorption is more marked than that of carbon monoxide on the mixed oxide catalyst, while the reverse is true on the single zinc oxide (Fig. 1).",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/mixed-fig4-curve-2",
+      "target": "ex:msyn/10.1021-ja01409a015/claim/h2-vs-co-selectivity"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/106",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01409a015/p6/1",
+            "quote": "It is very definitely established from these results that the hydrogen adsorption is more marked than that of carbon monoxide on the mixed oxide catalyst, while the reverse is true on the single zinc oxide (Fig. 1).",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/mixed-fig4-curve-3",
+      "target": "ex:msyn/10.1021-ja01409a015/claim/h2-vs-co-selectivity"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/107",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01409a015/p6/1",
+            "quote": "It is very definitely established from these results that the hydrogen adsorption is more marked than that of carbon monoxide on the mixed oxide catalyst, while the reverse is true on the single zinc oxide (Fig. 1).",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/mixed-fig4-curve-4",
+      "target": "ex:msyn/10.1021-ja01409a015/claim/h2-vs-co-selectivity"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/108",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01409a015/p6/1",
+            "quote": "It is very definitely established from these results that the hydrogen adsorption is more marked than that of carbon monoxide on the mixed oxide catalyst, while the reverse is true on the single zinc oxide (Fig. 1).",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/zno1-co-fig1",
+      "target": "ex:msyn/10.1021-ja01409a015/claim/h2-vs-co-selectivity"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/109",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01409a015/p6/1",
+            "quote": "It is very definitely established from these results that the hydrogen adsorption is more marked than that of carbon monoxide on the mixed oxide catalyst, while the reverse is true on the single zinc oxide (Fig. 1).",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/zno1-h2",
+      "target": "ex:msyn/10.1021-ja01409a015/claim/h2-vs-co-selectivity"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/11",
+      "type": "PREPARED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/2",
+            "quote": "The zinc oxide was prepared by ignition at 450°, special precautions being taken to ensure that the catalyst was entirely free even from traces of alkaline or acid ions",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/sample/zno-2",
+      "target": "ex:msyn/10.1021-ja01409a015/preparation/zno-ignition"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/110",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "passage": "10.1021-ja01409a015/p8/1",
+            "quote": "It will be noted that the ratio aH¡/aCo changes from approximately unity to approximately 0.5 at, for example, 100 mm. pressure.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/claim/ratio-change",
+      "target": "ex:msyn/10.1021-ja01409a015/catalyst/zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/111",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "passage": "10.1021-ja01409a015/p8/1",
+            "quote": "It will be noted that the ratio aH¡/aCo changes from approximately unity to approximately 0.5 at, for example, 100 mm. pressure.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/claim/ratio-change",
+      "target": "ex:msyn/10.1021-ja01409a015/catalyst/zno-cr2o3-2-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/112",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "quote": "Thus the admission of 21.70 cc. of this gas to the catalyst at 100° produced a pressure of only 5 mm., and this pressure may be due in part to impurities, since tank carbon dioxide only was used;",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/claim/co2-strongly-adsorbed",
+      "target": "ex:msyn/10.1021-ja01409a015/catalyst/zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/113",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "quote": "Thus the admission of 21.70 cc. of this gas to the catalyst at 100° produced a pressure of only 5 mm., and this pressure may be due in part to impurities, since tank carbon dioxide only was used;",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/claim/co2-strongly-adsorbed",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/114",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01409a015/p6/2",
+            "quote": "This experiment confirms our observation in the evacuation process of the tenacity with which both carbon dioxide and water are adsorbed.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/zno-co2-fig5",
+      "target": "ex:msyn/10.1021-ja01409a015/claim/co2-strongly-adsorbed"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/115",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01409a015/p7/1",
+            "quote": "The experimental results demonstrate conclusively that zinc oxide and /inc oxide-chromium oxide catalysts show the same type of adsorption for the reactants of the methanol synthesis that is shown by metal cata- lysts in hydrogenation reactions.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/claim/same-type-as-metals",
+      "target": "ex:msyn/10.1021-ja01409a015/catalyst/zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/116",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01409a015/p7/1",
+            "quote": "The experimental results demonstrate conclusively that zinc oxide and /inc oxide-chromium oxide catalysts show the same type of adsorption for the reactants of the methanol synthesis that is shown by metal cata- lysts in hydrogenation reactions.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/claim/same-type-as-metals",
+      "target": "ex:msyn/10.1021-ja01409a015/catalyst/zno-cr2o3-2-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/117",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01409a015/p7/1",
+            "quote": "There is strong adsorption at low pressures with relative saturation of the surface at these low pressures and little increase in adsorption with a many fold increase in pressure.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/zno1-co-fig1",
+      "target": "ex:msyn/10.1021-ja01409a015/claim/same-type-as-metals"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/118",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01409a015/p7/1",
+            "quote": "There is strong adsorption at low pressures with relative saturation of the surface at these low pressures and little increase in adsorption with a many fold increase in pressure.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/mixed-fig4-curve-1",
+      "target": "ex:msyn/10.1021-ja01409a015/claim/same-type-as-metals"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/119",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01409a015/p7/1",
+            "quote": "There is strong adsorption at low pressures with relative saturation of the surface at these low pressures and little increase in adsorption with a many fold increase in pressure.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/zno2-h2-450",
+      "target": "ex:msyn/10.1021-ja01409a015/claim/same-type-as-metals"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/12",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "quote": "Three samples of a single preparation of zinc oxide and one of a mixed zinc oxide-chromium oxide were studied.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/sample/zno-3",
+      "target": "ex:msyn/10.1021-ja01409a015/catalyst/zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/120",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01409a015/p7/1",
+            "quote": "They show many times the adsorptive capacity of the metal catalysts under the same conditions.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/claim/capacity-exceeds-metals",
+      "target": "ex:msyn/10.1021-ja01409a015/catalyst/zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/121",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01409a015/p7/1",
+            "quote": "They show many times the adsorptive capacity of the metal catalysts under the same conditions.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/claim/capacity-exceeds-metals",
+      "target": "ex:msyn/10.1021-ja01409a015/catalyst/zno-cr2o3-2-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/122",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01409a015/p7/3",
+            "quote": "a 13-fold better adsorptive capacity than a very active sample of reduced copper at 110° and 760 mm. pressure.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/table1-zno-cr2o3",
+      "target": "ex:msyn/10.1021-ja01409a015/claim/capacity-exceeds-metals"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/123",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01409a015/p7/3",
+            "quote": "a 13-fold better adsorptive capacity than a very active sample of reduced copper at 110° and 760 mm. pressure.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/table1-zno",
+      "target": "ex:msyn/10.1021-ja01409a015/claim/capacity-exceeds-metals"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/124",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01409a015/p7/4",
+            "quote": "Both the curves and the table show that the active surface in a mixed zinc oxide-chromium oxide catalyst is far greater than that of a correspond- ing weight of zinc oxide catalyst.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/claim/mixed-greater-surface",
+      "target": "ex:msyn/10.1021-ja01409a015/catalyst/zno-cr2o3-2-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/125",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01409a015/p7/4",
+            "quote": "Both the curves and the table show that the active surface in a mixed zinc oxide-chromium oxide catalyst is far greater than that of a correspond- ing weight of zinc oxide catalyst.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/claim/mixed-greater-surface",
+      "target": "ex:msyn/10.1021-ja01409a015/catalyst/zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/126",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 9",
+            "passage": "10.1021-ja01409a015/p9/1",
+            "quote": "The mixed oxide catalyst shows greater adsorptive capacity than the zinc oxide in harmony with its higher order of catalytic activity.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/table1-zno-cr2o3",
+      "target": "ex:msyn/10.1021-ja01409a015/claim/mixed-greater-surface"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/127",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 9",
+            "passage": "10.1021-ja01409a015/p9/1",
+            "quote": "The mixed oxide catalyst shows greater adsorptive capacity than the zinc oxide in harmony with its higher order of catalytic activity.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/table1-zno",
+      "target": "ex:msyn/10.1021-ja01409a015/claim/mixed-greater-surface"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/128",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "quote": "It is significant that the activity of these methanol catalysts begins in the temperature range in which free evaporation of carbon dioxide and water vapor occur.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/claim/activity-onset",
+      "target": "ex:msyn/10.1021-ja01409a015/catalyst/zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/129",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "quote": "It is significant that the activity of these methanol catalysts begins in the temperature range in which free evaporation of carbon dioxide and water vapor occur.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/claim/activity-onset",
+      "target": "ex:msyn/10.1021-ja01409a015/catalyst/zno-cr2o3-2-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/13",
+      "type": "PREPARED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/2",
+            "quote": "The zinc oxide was prepared by ignition at 450°, special precautions being taken to ensure that the catalyst was entirely free even from traces of alkaline or acid ions",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/sample/zno-3",
+      "target": "ex:msyn/10.1021-ja01409a015/preparation/zno-ignition"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/130",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "passage": "10.1021-ja01409a015/p8/2",
+            "quote": "The rapid saturation of the surface at low pressures or the small change in total adsorption at higher pressures is characteristic of adsorptions involving high heats of adsorption.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/claim/high-heats-of-adsorption",
+      "target": "ex:msyn/10.1021-ja01409a015/catalyst/zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/131",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "passage": "10.1021-ja01409a015/p8/2",
+            "quote": "The rapid saturation of the surface at low pressures or the small change in total adsorption at higher pressures is characteristic of adsorptions involving high heats of adsorption.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/claim/high-heats-of-adsorption",
+      "target": "ex:msyn/10.1021-ja01409a015/catalyst/zno-cr2o3-2-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/132",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "passage": "10.1021-ja01409a015/p8/2",
+            "quote": "and considerably greater than the heats of liquefaction of the gases.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/analysis/heat-of-adsorption",
+      "target": "ex:msyn/10.1021-ja01409a015/claim/high-heats-of-adsorption"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/133",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "passage": "10.1021-ja01409a015/p8/2",
+            "quote": "The experiments recorded here are in complete harmony with the known activity of zinc oxide and zinc oxide-chromium oxide catalysts as agents for the synthesis of methanol.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/claim/harmony-with-activity",
+      "target": "ex:msyn/10.1021-ja01409a015/catalyst/zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/134",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "passage": "10.1021-ja01409a015/p8/2",
+            "quote": "The experiments recorded here are in complete harmony with the known activity of zinc oxide and zinc oxide-chromium oxide catalysts as agents for the synthesis of methanol.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/claim/harmony-with-activity",
+      "target": "ex:msyn/10.1021-ja01409a015/catalyst/zno-cr2o3-2-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/135",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "passage": "10.1021-ja01409a015/p8/2",
+            "quote": "The experiments recorded here are in complete harmony with the known activity of zinc oxide and zinc oxide-chromium oxide catalysts as agents for the synthesis of methanol.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/claim/harmony-with-activity",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/14",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "quote": "Three samples of a single preparation of zinc oxide and one of a mixed zinc oxide-chromium oxide were studied.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/sample/zno-cr2o3",
+      "target": "ex:msyn/10.1021-ja01409a015/catalyst/zno-cr2o3-2-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/15",
+      "type": "PREPARED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/2",
+            "quote": "obtained by precipitating zinc chromate from a solution of the nitrate, thoroughly washing the precipitate, drying and igniting at 450°.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/sample/zno-cr2o3",
+      "target": "ex:msyn/10.1021-ja01409a015/preparation/zinc-chromate-precipitation"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/16",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/2",
+            "quote": "obtained by precipitating zinc chromate from a solution of the nitrate, thoroughly washing the precipitate, drying and igniting at 450°.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "role": "precipitate"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/sample/zno-cr2o3",
+      "target": "ex:msyn/10.1021-ja01409a015/species/zinc-chromate"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/17",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/2",
+            "quote": "obtained by precipitating zinc chromate from a solution of the nitrate, thoroughly washing the precipitate, drying and igniting at 450°.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/sample/zno-cr2o3",
+      "target": "ex:msyn/10.1021-ja01409a015/species/the-nitrate"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/18",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01409a015/p4/1",
+            "quote": "after pumping off at 200°, showed identical values for nitrogen and carbon monoxide, indicating zero adsorption of the latter.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "order": 1
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/sample/zno-1",
+      "target": "ex:msyn/10.1021-ja01409a015/treatment/zno1-evac-200"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/19",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01409a015/p4/1",
+            "quote": "Curves 3a and 3b were obtained after evacuation for three hours at 510°.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "order": 2
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/sample/zno-1",
+      "target": "ex:msyn/10.1021-ja01409a015/treatment/zno1-evac-510-3h"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/2",
+      "type": "IDENTIFIED_AS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/2",
+            "quote": "The zinc oxide was prepared by ignition at 450°, special precautions being taken to ensure that the catalyst was entirely free even from traces of alkaline or acid ions",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/catalyst/zno",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/20",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "quote": "The adsorption of hydrogen on this catalyst is shown in Fig. 2, Curve I, after evacuation at 450°.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "order": 1
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/sample/zno-2",
+      "target": "ex:msyn/10.1021-ja01409a015/treatment/zno2-evac-450"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/21",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01409a015/p4/3",
+            "quote": "Since we found that a treatment at 500° with oxygen partially destroyed the adsorptive capacity (Curve II)",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "order": 2
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/sample/zno-2",
+      "target": "ex:msyn/10.1021-ja01409a015/treatment/zno2-oxygen-500"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/22",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "10.1021-ja01409a015/p5/1",
+            "quote": "An extended treatment with oxygen for 18 hours, followed by evacuation at 500°, gave a surface which subse- quently showed (Curve III) high adsorption for hydrogen",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "order": 3
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/sample/zno-2",
+      "target": "ex:msyn/10.1021-ja01409a015/treatment/zno2-oxygen-18h-evac-500"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/23",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "10.1021-ja01409a015/p5/1",
+            "quote": "by evacuating zinc oxide No. 3 thoroughly at 500° before bringing the sample into contact with any reducing gas.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "order": 1
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/sample/zno-3",
+      "target": "ex:msyn/10.1021-ja01409a015/treatment/zno3-evac-500"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/24",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "10.1021-ja01409a015/p5/2",
+            "quote": "since Curve II shows the diminished adsorption after evacuation at 600°.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "order": 2
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/sample/zno-3",
+      "target": "ex:msyn/10.1021-ja01409a015/treatment/zno3-evac-600"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/25",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01409a015/p6/1",
+            "quote": "This adsorbed neither gas after evacuation at 200 or 300°.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "order": 1
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/sample/zno-cr2o3",
+      "target": "ex:msyn/10.1021-ja01409a015/treatment/mixed-evac-200-300"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/26",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01409a015/p6/1",
+            "quote": "After half an hour of evacuation at 400°, Curve I, Fig. 4, with hydrogen was ob- tained.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "order": 2
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/sample/zno-cr2o3",
+      "target": "ex:msyn/10.1021-ja01409a015/treatment/mixed-evac-400-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/27",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01409a015/p6/1",
+            "quote": "A further half hour of evacuation at 400° gave with hydrogen the results in Curve II.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "order": 3
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/sample/zno-cr2o3",
+      "target": "ex:msyn/10.1021-ja01409a015/treatment/mixed-evac-400-2"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/28",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01409a015/p6/1",
+            "quote": "after a further half hour of evacuation at 400°.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "order": 4
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/sample/zno-cr2o3",
+      "target": "ex:msyn/10.1021-ja01409a015/treatment/mixed-evac-400-3"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/29",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01409a015/p6/1",
+            "quote": "Curve IV gave hydrogen adsorption after one further evacuation for half an hour at 400°.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "order": 5
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/sample/zno-cr2o3",
+      "target": "ex:msyn/10.1021-ja01409a015/treatment/mixed-evac-400-4"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/3",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "OCR 'Cr2C>3' reads Cr2O3",
+            "passage": "10.1021-ja01409a015/p3/2",
+            "quote": "It contained approximately two moles of ZnO to one mole of Cr2C>3.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "approximately two moles of ZnO",
+          "qualifier": "approximate",
+          "unit": "mol",
+          "value": 2
+        },
+        "fraction_basis": "mole",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/catalyst/zno-cr2o3-2-1",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/30",
+      "type": "EXAMINES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/3",
+            "quote": "It was soon found that both zinc oxide and the mixed oxide catalyst showed no adsorption for either hydrogen or carbon monoxide even after evacuation for one hour at 300° in the high-vacuum system already described.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/early-evac-300",
+      "target": "ex:msyn/10.1021-ja01409a015/catalyst/zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/31",
+      "type": "EXAMINES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/3",
+            "quote": "It was soon found that both zinc oxide and the mixed oxide catalyst showed no adsorption for either hydrogen or carbon monoxide even after evacuation for one hour at 300° in the high-vacuum system already described.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/early-evac-300",
+      "target": "ex:msyn/10.1021-ja01409a015/catalyst/zno-cr2o3-2-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/32",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/1",
+            "quote": "From the volumes of hydrogen or carbon monoxide required to fill the vessel to a given pressure at the same temperature, the extent of adsorption at this pressure could be determined.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "role": "measurement"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/early-evac-300",
+      "target": "ex:msyn/10.1021-ja01409a015/instrument/adsorption-apparatus"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/33",
+      "type": "CHARACTERIZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/3",
+            "quote": "The initial runs with this gas,",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "state": "heat_treated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/zno1-co-initial",
+      "target": "ex:msyn/10.1021-ja01409a015/sample/zno-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/34",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/1",
+            "quote": "From the volumes of hydrogen or carbon monoxide required to fill the vessel to a given pressure at the same temperature, the extent of adsorption at this pressure could be determined.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "role": "measurement"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/zno1-co-initial",
+      "target": "ex:msyn/10.1021-ja01409a015/instrument/adsorption-apparatus"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/35",
+      "type": "CHARACTERIZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/3",
+            "quote": "Fig. 1 shows graphically the increase in adsorptive capacity for carbon monoxide of zinc oxide, No. 1, consequent on the increasing cleanliness of the surface, due to better evacuation.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "state": "heat_treated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/zno1-co-fig1",
+      "target": "ex:msyn/10.1021-ja01409a015/sample/zno-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/36",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/1",
+            "quote": "From the volumes of hydrogen or carbon monoxide required to fill the vessel to a given pressure at the same temperature, the extent of adsorption at this pressure could be determined.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "role": "measurement"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/zno1-co-fig1",
+      "target": "ex:msyn/10.1021-ja01409a015/instrument/adsorption-apparatus"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/37",
+      "type": "CHARACTERIZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01409a015/p4/1",
+            "quote": "Curves 3a and 3b were obtained after evacuation for three hours at 510°.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "state": "heat_treated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/zno1-co-510",
+      "target": "ex:msyn/10.1021-ja01409a015/sample/zno-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/38",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/1",
+            "quote": "From the volumes of hydrogen or carbon monoxide required to fill the vessel to a given pressure at the same temperature, the extent of adsorption at this pressure could be determined.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "role": "measurement"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/zno1-co-510",
+      "target": "ex:msyn/10.1021-ja01409a015/instrument/adsorption-apparatus"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/39",
+      "type": "CHARACTERIZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01409a015/p4/1",
+            "quote": "One result with hydrogen, 4a and 4b, is also included for comparative purposes.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "state": "heat_treated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/zno1-h2",
+      "target": "ex:msyn/10.1021-ja01409a015/sample/zno-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/4",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "OCR 'Cr2C>3' reads Cr2O3",
+            "passage": "10.1021-ja01409a015/p3/2",
+            "quote": "It contained approximately two moles of ZnO to one mole of Cr2C>3.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "one mole of Cr2C>3",
+          "note": "OCR 'Cr2C>3' reads Cr2O3",
+          "qualifier": "approximate",
+          "unit": "mol",
+          "value": 1
+        },
+        "fraction_basis": "mole",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/catalyst/zno-cr2o3-2-1",
+      "target": "ex:msyn/species/cr2o3"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/40",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/1",
+            "quote": "From the volumes of hydrogen or carbon monoxide required to fill the vessel to a given pressure at the same temperature, the extent of adsorption at this pressure could be determined.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "role": "measurement"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/zno1-h2",
+      "target": "ex:msyn/10.1021-ja01409a015/instrument/adsorption-apparatus"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/41",
+      "type": "EXAMINES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01409a015/p4/1",
+            "quote": "We have found that portions of both gases are adsorbed very tenaciously and are only removed from the surface in the oxidized condition either as carbon dioxide or water vapor, partial reduction of the catalyst to a corresponding amount occurring.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/tenacious-adsorption-reduction",
+      "target": "ex:msyn/10.1021-ja01409a015/catalyst/zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/42",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/1",
+            "quote": "From the volumes of hydrogen or carbon monoxide required to fill the vessel to a given pressure at the same temperature, the extent of adsorption at this pressure could be determined.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "role": "measurement"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/tenacious-adsorption-reduction",
+      "target": "ex:msyn/10.1021-ja01409a015/instrument/adsorption-apparatus"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/43",
+      "type": "CHARACTERIZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01409a015/p4/2",
+            "quote": "Our experiments on zinc oxide No. 2, carried out exclusively with hydrogen, disposed of this possibility since here again the gray specks formed.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "state": "heat_treated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/zno2-h2-450",
+      "target": "ex:msyn/10.1021-ja01409a015/sample/zno-2"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/44",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/1",
+            "quote": "From the volumes of hydrogen or carbon monoxide required to fill the vessel to a given pressure at the same temperature, the extent of adsorption at this pressure could be determined.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "role": "measurement"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/zno2-h2-450",
+      "target": "ex:msyn/10.1021-ja01409a015/instrument/adsorption-apparatus"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/45",
+      "type": "CHARACTERIZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01409a015/p4/3",
+            "quote": "Since we found that a treatment at 500° with oxygen partially destroyed the adsorptive capacity (Curve II) and since oxygen was partially con- sumed in the process",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "state": "heat_treated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/zno2-h2-after-o2",
+      "target": "ex:msyn/10.1021-ja01409a015/sample/zno-2"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/46",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/1",
+            "quote": "From the volumes of hydrogen or carbon monoxide required to fill the vessel to a given pressure at the same temperature, the extent of adsorption at this pressure could be determined.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "role": "measurement"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/zno2-h2-after-o2",
+      "target": "ex:msyn/10.1021-ja01409a015/instrument/adsorption-apparatus"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/47",
+      "type": "CHARACTERIZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "10.1021-ja01409a015/p5/1",
+            "quote": "An extended treatment with oxygen for 18 hours, followed by evacuation at 500°, gave a surface which subse- quently showed (Curve III) high adsorption for hydrogen",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "state": "heat_treated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/zno2-h2-after-o2-18h",
+      "target": "ex:msyn/10.1021-ja01409a015/sample/zno-2"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/48",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/1",
+            "quote": "From the volumes of hydrogen or carbon monoxide required to fill the vessel to a given pressure at the same temperature, the extent of adsorption at this pressure could be determined.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "role": "measurement"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/zno2-h2-after-o2-18h",
+      "target": "ex:msyn/10.1021-ja01409a015/instrument/adsorption-apparatus"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/49",
+      "type": "CHARACTERIZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "10.1021-ja01409a015/p5/1",
+            "quote": "by evacuating zinc oxide No. 3 thoroughly at 500° before bringing the sample into contact with any reducing gas.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "state": "heat_treated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/zno3-500",
+      "target": "ex:msyn/10.1021-ja01409a015/sample/zno-3"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/5",
+      "type": "COMPARED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01409a015/p7/4",
+            "quote": "Both the curves and the table show that the active surface in a mixed zinc oxide-chromium oxide catalyst is far greater than that of a correspond- ing weight of zinc oxide catalyst.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/catalyst/zno-cr2o3-2-1",
+      "target": "ex:msyn/10.1021-ja01409a015/catalyst/zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/50",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/1",
+            "quote": "From the volumes of hydrogen or carbon monoxide required to fill the vessel to a given pressure at the same temperature, the extent of adsorption at this pressure could be determined.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "role": "measurement"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/zno3-500",
+      "target": "ex:msyn/10.1021-ja01409a015/instrument/adsorption-apparatus"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/51",
+      "type": "CHARACTERIZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "10.1021-ja01409a015/p5/2",
+            "quote": "since Curve II shows the diminished adsorption after evacuation at 600°.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "state": "heat_treated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/zno3-600",
+      "target": "ex:msyn/10.1021-ja01409a015/sample/zno-3"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/52",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/1",
+            "quote": "From the volumes of hydrogen or carbon monoxide required to fill the vessel to a given pressure at the same temperature, the extent of adsorption at this pressure could be determined.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "role": "measurement"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/zno3-600",
+      "target": "ex:msyn/10.1021-ja01409a015/instrument/adsorption-apparatus"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/53",
+      "type": "CHARACTERIZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01409a015/p6/1",
+            "quote": "This adsorbed neither gas after evacuation at 200 or 300°.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "state": "heat_treated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/mixed-200-300",
+      "target": "ex:msyn/10.1021-ja01409a015/sample/zno-cr2o3"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/54",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/1",
+            "quote": "From the volumes of hydrogen or carbon monoxide required to fill the vessel to a given pressure at the same temperature, the extent of adsorption at this pressure could be determined.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "role": "measurement"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/mixed-200-300",
+      "target": "ex:msyn/10.1021-ja01409a015/instrument/adsorption-apparatus"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/55",
+      "type": "CHARACTERIZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01409a015/p6/1",
+            "quote": "After half an hour of evacuation at 400°, Curve I, Fig. 4, with hydrogen was ob- tained.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "state": "heat_treated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/mixed-fig4-curve-1",
+      "target": "ex:msyn/10.1021-ja01409a015/sample/zno-cr2o3"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/56",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/1",
+            "quote": "From the volumes of hydrogen or carbon monoxide required to fill the vessel to a given pressure at the same temperature, the extent of adsorption at this pressure could be determined.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "role": "measurement"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/mixed-fig4-curve-1",
+      "target": "ex:msyn/10.1021-ja01409a015/instrument/adsorption-apparatus"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/57",
+      "type": "CHARACTERIZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01409a015/p6/1",
+            "quote": "A further half hour of evacuation at 400° gave with hydrogen the results in Curve II.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "state": "heat_treated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/mixed-fig4-curve-2",
+      "target": "ex:msyn/10.1021-ja01409a015/sample/zno-cr2o3"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/58",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/1",
+            "quote": "From the volumes of hydrogen or carbon monoxide required to fill the vessel to a given pressure at the same temperature, the extent of adsorption at this pressure could be determined.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "role": "measurement"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/mixed-fig4-curve-2",
+      "target": "ex:msyn/10.1021-ja01409a015/instrument/adsorption-apparatus"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/59",
+      "type": "CHARACTERIZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01409a015/p6/1",
+            "quote": "Curve III records results with carbon monoxide",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "state": "heat_treated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/mixed-fig4-curve-3",
+      "target": "ex:msyn/10.1021-ja01409a015/sample/zno-cr2o3"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/6",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/2",
+            "quote": "With both these catalysts meth- anol can be readily made from mixtures of hydrogen and carbon mon- oxide;",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "note": "stated by the source; no synthesis test is reported in this paper"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/catalyst/zno",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/60",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/1",
+            "quote": "From the volumes of hydrogen or carbon monoxide required to fill the vessel to a given pressure at the same temperature, the extent of adsorption at this pressure could be determined.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "role": "measurement"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/mixed-fig4-curve-3",
+      "target": "ex:msyn/10.1021-ja01409a015/instrument/adsorption-apparatus"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/61",
+      "type": "CHARACTERIZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01409a015/p6/1",
+            "quote": "Curve IV gave hydrogen adsorption after one further evacuation for half an hour at 400°.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "state": "heat_treated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/mixed-fig4-curve-4",
+      "target": "ex:msyn/10.1021-ja01409a015/sample/zno-cr2o3"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/62",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/1",
+            "quote": "From the volumes of hydrogen or carbon monoxide required to fill the vessel to a given pressure at the same temperature, the extent of adsorption at this pressure could be determined.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "role": "measurement"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/mixed-fig4-curve-4",
+      "target": "ex:msyn/10.1021-ja01409a015/instrument/adsorption-apparatus"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/63",
+      "type": "EXAMINES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01409a015/p6/1",
+            "quote": "Fig. 5 shows the extraordinary adsorption of carbon dioxide by the zinc oxide catalyst.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/zno-co2-fig5",
+      "target": "ex:msyn/10.1021-ja01409a015/catalyst/zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/64",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/1",
+            "quote": "From the volumes of hydrogen or carbon monoxide required to fill the vessel to a given pressure at the same temperature, the extent of adsorption at this pressure could be determined.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "role": "measurement"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/zno-co2-fig5",
+      "target": "ex:msyn/10.1021-ja01409a015/instrument/adsorption-apparatus"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/65",
+      "type": "CHARACTERIZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01409a015/p7/2",
+            "quote": "This is readily seen from the appended Table I, which gives a few selected data of maximum adsorptions found in the earlier studies at Princeton on metal catalysts, under a variety of conditions, as well as some typical results from the present research.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "state": "heat_treated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/table1-zno-cr2o3",
+      "target": "ex:msyn/10.1021-ja01409a015/sample/zno-cr2o3"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/66",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/1",
+            "quote": "From the volumes of hydrogen or carbon monoxide required to fill the vessel to a given pressure at the same temperature, the extent of adsorption at this pressure could be determined.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "role": "measurement"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/table1-zno-cr2o3",
+      "target": "ex:msyn/10.1021-ja01409a015/instrument/adsorption-apparatus"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/67",
+      "type": "EXAMINES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01409a015/p7/2",
+            "quote": "This is readily seen from the appended Table I, which gives a few selected data of maximum adsorptions found in the earlier studies at Princeton on metal catalysts, under a variety of conditions, as well as some typical results from the present research.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/table1-zno",
+      "target": "ex:msyn/10.1021-ja01409a015/catalyst/zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/68",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/1",
+            "quote": "From the volumes of hydrogen or carbon monoxide required to fill the vessel to a given pressure at the same temperature, the extent of adsorption at this pressure could be determined.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "role": "measurement"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/table1-zno",
+      "target": "ex:msyn/10.1021-ja01409a015/instrument/adsorption-apparatus"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/69",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "passage": "10.1021-ja01409a015/p8/2",
+            "quote": "Rough calculations from the ad- sorption isotherms at 0 and 100° confirm this conclusion",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/analysis/heat-of-adsorption",
+      "target": "ex:msyn/10.1021-ja01409a015/characterization/zno1-co-fig1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/7",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/2",
+            "quote": "With both these catalysts meth- anol can be readily made from mixtures of hydrogen and carbon mon- oxide;",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "note": "stated by the source; no synthesis test is reported in this paper"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/catalyst/zno-cr2o3-2-1",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/70",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "passage": "10.1021-ja01409a015/p8/2",
+            "quote": "Rough calculations from the ad- sorption isotherms at 0 and 100° confirm this conclusion",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/analysis/heat-of-adsorption",
+      "target": "ex:msyn/10.1021-ja01409a015/characterization/mixed-fig4-curve-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/71",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01409a015/p4/2",
+            "quote": "The reduction process is very probably an interface reaction as with copper oxide10 since the gray spots grow with increased treatment.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/hypothesis/reduction-interface-reaction",
+      "target": "ex:msyn/10.1021-ja01409a015/catalyst/zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/72",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01409a015/p4/2",
+            "quote": "since the gray spots grow with increased treatment.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/tenacious-adsorption-reduction",
+      "target": "ex:msyn/10.1021-ja01409a015/hypothesis/reduction-interface-reaction"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/73",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01409a015/p4/2",
+            "quote": "At first we considered the possibility that the dark spots might be due to catalytic decomposition of carbon monoxide by the reaction, 2CO = CO2 + C, carbon being deposited in the oxide.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/hypothesis/carbon-deposition-spots",
+      "target": "ex:msyn/10.1021-ja01409a015/catalyst/zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/74",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01409a015/p4/2",
+            "quote": "At first we considered the possibility that the dark spots might be due to catalytic decomposition of carbon monoxide by the reaction, 2CO = CO2 + C, carbon being deposited in the oxide.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/hypothesis/carbon-deposition-spots",
+      "target": "ex:msyn/reaction/boudouard"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/75",
+      "type": "TESTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01409a015/p4/2",
+            "quote": "Our experiments on zinc oxide No. 2, carried out exclusively with hydrogen, disposed of this possibility since here again the gray specks formed.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "outcome": "refutes"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/zno2-h2-450",
+      "target": "ex:msyn/10.1021-ja01409a015/hypothesis/carbon-deposition-spots"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/76",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01409a015/p4/1",
+            "quote": "At first we were inclined to ascribe all of the increase in adsorptive capacity to this reduction process",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/hypothesis/adsorption-by-reduced-zinc",
+      "target": "ex:msyn/10.1021-ja01409a015/catalyst/zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/77",
+      "type": "TESTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01409a015/p4/3",
+            "quote": "we asumed this to be evidence in favor of adsorption",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "outcome": "supports",
+        "warrant": "the authors' first reading, later withdrawn"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/zno2-h2-after-o2",
+      "target": "ex:msyn/10.1021-ja01409a015/hypothesis/adsorption-by-reduced-zinc"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/78",
+      "type": "TESTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "10.1021-ja01409a015/p5/1",
+            "quote": "thus discrediting the theory that adsorption is due solely to metal atoms.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "outcome": "refutes"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/zno2-h2-after-o2-18h",
+      "target": "ex:msyn/10.1021-ja01409a015/hypothesis/adsorption-by-reduced-zinc"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/79",
+      "type": "TESTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "10.1021-ja01409a015/p5/1",
+            "quote": "We disposed of this metal theory of adsorption by evacuating zinc oxide No. 3 thoroughly at 500° before bringing the sample into contact with any reducing gas.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "outcome": "refutes"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/zno3-500",
+      "target": "ex:msyn/10.1021-ja01409a015/hypothesis/adsorption-by-reduced-zinc"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/8",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "quote": "Three samples of a single preparation of zinc oxide and one of a mixed zinc oxide-chromium oxide were studied.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/sample/zno-1",
+      "target": "ex:msyn/10.1021-ja01409a015/catalyst/zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/80",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01409a015/p7/3",
+            "quote": "The extremely high adsorptive capacity at low pressures thus revealed implies a very con- siderable amount of active catalytic surface per unit weight of material.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/hypothesis/poison-tolerance",
+      "target": "ex:msyn/10.1021-ja01409a015/catalyst/zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/81",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01409a015/p7/3",
+            "quote": "The extremely high adsorptive capacity at low pressures thus revealed implies a very con- siderable amount of active catalytic surface per unit weight of material.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/hypothesis/poison-tolerance",
+      "target": "ex:msyn/10.1021-ja01409a015/catalyst/zno-cr2o3-2-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/82",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "passage": "10.1021-ja01409a015/p8/1",
+            "quote": "indicate that both gases are temporary poisons for these catalysts in methanol synthesis.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/hypothesis/co2-water-temporary-poisons",
+      "target": "ex:msyn/10.1021-ja01409a015/catalyst/zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/83",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "passage": "10.1021-ja01409a015/p8/1",
+            "quote": "indicate that both gases are temporary poisons for these catalysts in methanol synthesis.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/hypothesis/co2-water-temporary-poisons",
+      "target": "ex:msyn/10.1021-ja01409a015/catalyst/zno-cr2o3-2-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/84",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "passage": "10.1021-ja01409a015/p8/1",
+            "quote": "indicate that both gases are temporary poisons for these catalysts in methanol synthesis.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/hypothesis/co2-water-temporary-poisons",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/85",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "passage": "10.1021-ja01409a015/p8/1",
+            "quote": "The very pronounced adsorption of carbon dioxide shown in -Fig. 5,",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/zno-co2-fig5",
+      "target": "ex:msyn/10.1021-ja01409a015/hypothesis/co2-water-temporary-poisons"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/86",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "passage": "10.1021-ja01409a015/p8/1",
+            "quote": "so strongly retained by these catalysts that no measurable adsorptions were shown by samples evacuated at or below 300°",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/early-evac-300",
+      "target": "ex:msyn/10.1021-ja01409a015/hypothesis/co2-water-temporary-poisons"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/87",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "passage": "10.1021-ja01409a015/p8/1",
+            "quote": "indicate that both gases are temporary poisons for these catalysts in methanol synthesis.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "inhibition_kind": "reversible_inhibitor",
+        "note": "the source says 'temporary poisons'"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/catalyst/zno",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/88",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "passage": "10.1021-ja01409a015/p8/1",
+            "quote": "indicate that both gases are temporary poisons for these catalysts in methanol synthesis.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "inhibition_kind": "reversible_inhibitor",
+        "note": "the source says 'temporary poisons'"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/catalyst/zno",
+      "target": "ex:msyn/species/h2o"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/89",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "passage": "10.1021-ja01409a015/p8/1",
+            "quote": "indicate that both gases are temporary poisons for these catalysts in methanol synthesis.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "inhibition_kind": "reversible_inhibitor",
+        "note": "the source says 'temporary poisons'"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/catalyst/zno-cr2o3-2-1",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/9",
+      "type": "PREPARED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/2",
+            "quote": "The zinc oxide was prepared by ignition at 450°, special precautions being taken to ensure that the catalyst was entirely free even from traces of alkaline or acid ions",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/sample/zno-1",
+      "target": "ex:msyn/10.1021-ja01409a015/preparation/zno-ignition"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/90",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "passage": "10.1021-ja01409a015/p8/1",
+            "quote": "indicate that both gases are temporary poisons for these catalysts in methanol synthesis.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ],
+        "inhibition_kind": "reversible_inhibitor",
+        "note": "the source says 'temporary poisons'"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/catalyst/zno-cr2o3-2-1",
+      "target": "ex:msyn/species/h2o"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/91",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/3",
+            "quote": "Our early experiments showed that the adsorptive capacity of a sample of the oxide was very sensitive to the cleanness of the surface.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/claim/clean-surface-needed",
+      "target": "ex:msyn/10.1021-ja01409a015/catalyst/zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/92",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01409a015/p3/3",
+            "quote": "Our early experiments showed that the adsorptive capacity of a sample of the oxide was very sensitive to the cleanness of the surface.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/claim/clean-surface-needed",
+      "target": "ex:msyn/10.1021-ja01409a015/catalyst/zno-cr2o3-2-1"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/93",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "passage": "10.1021-ja01409a015/p8/3",
+            "quote": "the catalyst surface must be cleaned of adsorbed water vapor and carbon dioxide by evacuation at 400°.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/early-evac-300",
+      "target": "ex:msyn/10.1021-ja01409a015/claim/clean-surface-needed"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/94",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "passage": "10.1021-ja01409a015/p8/3",
+            "quote": "the catalyst surface must be cleaned of adsorbed water vapor and carbon dioxide by evacuation at 400°.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/zno1-co-initial",
+      "target": "ex:msyn/10.1021-ja01409a015/claim/clean-surface-needed"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/95",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "passage": "10.1021-ja01409a015/p8/3",
+            "quote": "the catalyst surface must be cleaned of adsorbed water vapor and carbon dioxide by evacuation at 400°.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/zno1-co-fig1",
+      "target": "ex:msyn/10.1021-ja01409a015/claim/clean-surface-needed"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/96",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "passage": "10.1021-ja01409a015/p8/3",
+            "quote": "the catalyst surface must be cleaned of adsorbed water vapor and carbon dioxide by evacuation at 400°.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/mixed-200-300",
+      "target": "ex:msyn/10.1021-ja01409a015/claim/clean-surface-needed"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/97",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "quote": "we now have full evidence that even unreduced but clean surfaces of these catalysts show large adsorptive capacity for the two gases.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/claim/unreduced-surfaces-adsorb",
+      "target": "ex:msyn/10.1021-ja01409a015/catalyst/zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/98",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "10.1021-ja01409a015/p5/1",
+            "quote": "thus discrediting the theory that adsorption is due solely to metal atoms.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/zno3-500",
+      "target": "ex:msyn/10.1021-ja01409a015/claim/unreduced-surfaces-adsorb"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/link/99",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "10.1021-ja01409a015/p5/1",
+            "quote": "thus discrediting the theory that adsorption is due solely to metal atoms.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/characterization/zno2-h2-after-o2-18h",
+      "target": "ex:msyn/10.1021-ja01409a015/claim/unreduced-surfaces-adsorb"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/preparation/zinc-chromate-precipitation/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/preparation/zinc-chromate-precipitation",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/preparation/zno-ignition/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/preparation/zno-ignition",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/sample/zno-1/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/sample/zno-1",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/sample/zno-2/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/sample/zno-2",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/sample/zno-3/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/sample/zno-3",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/sample/zno-cr2o3/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/sample/zno-cr2o3",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/species/the-nitrate/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/species/the-nitrate",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/species/zinc-chromate/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/species/zinc-chromate",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/treatment/mixed-evac-200-300/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/treatment/mixed-evac-200-300",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/treatment/mixed-evac-400-1/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/treatment/mixed-evac-400-1",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/treatment/mixed-evac-400-2/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/treatment/mixed-evac-400-2",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/treatment/mixed-evac-400-3/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/treatment/mixed-evac-400-3",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/treatment/mixed-evac-400-4/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/treatment/mixed-evac-400-4",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/treatment/zno1-evac-200/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/treatment/zno1-evac-200",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/treatment/zno1-evac-510-3h/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/treatment/zno1-evac-510-3h",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/treatment/zno2-evac-450/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/treatment/zno2-evac-450",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/treatment/zno2-oxygen-18h-evac-500/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/treatment/zno2-oxygen-18h-evac-500",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/treatment/zno2-oxygen-500/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/treatment/zno2-oxygen-500",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/treatment/zno3-evac-500/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/treatment/zno3-evac-500",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01409a015/treatment/zno3-evac-600/reported-in/10.1021-ja01409a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01409a015/treatment/zno3-evac-600",
+      "target": "ex:msyn/source/10.1021-ja01409a015"
+    },
+    {
+      "id": "ex:msyn/source/10.1021-ja01409a015/authored-by/1",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 1,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/10.1021-ja01409a015",
+      "target": "ex:msyn/person/hugh-s-taylor"
+    },
+    {
+      "id": "ex:msyn/source/10.1021-ja01409a015/authored-by/2",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 2,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/10.1021-ja01409a015",
+      "target": "ex:msyn/person/g-b-kistiakowsky"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/10.1021-ja01409a015"
+}

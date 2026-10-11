@@ -145,6 +145,45 @@ def cmd_graph_filter(args):
     _emit(_viewer_doc(args), args)
 
 
+def cmd_graph_split(args):
+    from . import graphparts as gp
+    parts = gp.split(load_doc(args.file))
+    if args.sources:
+        names = args.sources[1:] if args.sources.startswith("@") else args.sources
+        slugs = (Path(names).read_text(encoding="utf-8").split() if args.sources.startswith("@")
+                 else [s for s in names.split(",") if s])
+        parts = gp.subset(parts, slugs)
+    root = gp.write_parts(parts, args.out)
+    print(f"{len(parts['sources'])} sources and {len(parts['shared']['nodes'])} shared nodes in {root}")
+    return 0
+
+
+def _built_file(folder: Path, out: str | None) -> Path:
+    if out:
+        return Path(out)
+    found = sorted(folder.glob("*.graph.json"))
+    if len(found) > 1:
+        raise ScaleError(f"{folder}: name the built graph with --out (found {len(found)} *.graph.json files)")
+    return found[0] if found else folder / f"{folder.resolve().name}.graph.json"
+
+
+def cmd_graph_build(args):
+    from . import graphparts as gp
+    from .util import write_canonical
+    folder = Path(args.folder)
+    doc, target = gp.build_folder(folder), _built_file(folder, args.out)
+    if args.check:                       # the parts build (build_folder raised otherwise); a built copy is current
+        if not target.is_file() or gp.same(doc, target):
+            print(f"{folder}: the parts build ({len(doc['nodes'])} nodes, {len(doc['links'])} links)"
+                  + (f"; {target.name} is current" if target.is_file() else ""))
+            return 0
+        print(f"{target} is not what its parts build: run scale graph build {folder}", file=sys.stderr)
+        return 1
+    write_canonical(target, doc)
+    print(f"{target}: {len(doc['nodes'])} nodes, {len(doc['links'])} links")
+    return 0
+
+
 def cmd_graph_export(args):
     from . import pgraph
     if args.to == "kg-bundle":
@@ -997,6 +1036,15 @@ def build_parser() -> argparse.ArgumentParser:
     sp = add("migrate", cmd_graph_migrate, "move a scale-catal document along the schema's version steps to the current version (ids kept)", gr)
     sp.add_argument("file"); sp.add_argument("dest", help="where to write the migrated document"); sp.add_argument("--spec")
     out_opts(sp)
+    sp = add("split", cmd_graph_split, "keep a graph as one part per source: write parts/ (header, shared records, "
+             "sources/<slug>.json) from a document", gr)
+    sp.add_argument("file"); sp.add_argument("--out", required=True, help="the graph's folder (parts/ is written in it)")
+    sp.add_argument("--sources", help="keep only these sources: slugs separated by commas, or @FILE (one per line); the "
+                    "shared records they reach stay, with only their evidence")
+    sp = add("build", cmd_graph_build, "build a graph kept as parts (FOLDER/parts/) into one document, sorted by id", gr)
+    sp.add_argument("folder"); sp.add_argument("--out", help="the built graph (default: the folder's one *.graph.json, else <folder>.graph.json)")
+    sp.add_argument("--check", action="store_true", help="write nothing; exit 1 unless the parts build and a built copy, "
+                    "if there is one, is current")
     sp = add("export", cmd_graph_export, "export: Neo4j/APOC JSON lines, or a knowledge-graph bundle (--to kg-bundle)", gr)
     sp.add_argument("file"); sp.add_argument("--out"); viewer_opts(sp)
     sp.add_argument("--to", choices=["neo4j", "kg-bundle"], default="neo4j"); sp.add_argument("--spec")

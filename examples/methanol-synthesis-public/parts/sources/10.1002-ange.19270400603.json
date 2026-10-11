@@ -1,0 +1,452 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/10.1002-ange.19270400603/claim/high-percentage-methanol-1923",
+      "label": "Claim",
+      "props": {
+        "name": "high-percentage methanol from CO and excess H2 in 1923",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1002-ange.19270400603/p1/4",
+            "quote": "bei denen hochprozen- tiges Methanol aus Kohlenoxyd und uberschussigeni Wasserstoff erhalten wurde",
+            "source": "ex:msyn/source/10.1002-ange.19270400603"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1002-ange.19270400603/p1/4",
+            "quote": "die zu unifassenden Patentanmeldungen und weiterhin zur technischen Durchfuhrung des Methanol- I erfahrens in Leuna fiihrten.",
+            "source": "ex:msyn/source/10.1002-ange.19270400603"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 1, left column, Ludwigshafen trial dates",
+            "note": "'Ludwigshaf' is cut at the region edge; the page image prints '1922 ²)' where the text layer reads '1923 *)'",
+            "reading": "vision_ocr",
+            "region": [
+              0.06,
+              0.686,
+              0.46,
+              0.715
+            ],
+            "second_reading": "laboratorium Oppau nach Versuchen im Oktober und November²), welche Öle ergeben hatten, am 16. und 27. Januar 1923, im Hauptlaboratorium Ludwigshafen am 13. November 1922²) und 17. Januar 1923.",
+            "source": "ex:msyn/source/10.1002-ange.19270400603",
+            "transcription": "27. Januar 1923, im Hauptlaboratorium Ludwigshaf 13. November 1922 ²) und 17. Januar 1923."
+          }
+        ],
+        "inference_type": "interventional",
+        "statement": "Particularly promising trials, in which high-percentage methanol was obtained from carbon monoxide and excess hydrogen, succeeded at the Oppau ammonia laboratory on 16 and 27 January 1923 and at the Ludwigshafen main laboratory on 13 November 1922 and 17 January 1923; these quickly led to comprehensive patent applications and to the technical implementation of the methanol process at Leuna."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1002-ange.19270400603/claim/interruptions",
+      "label": "Claim",
+      "props": {
+        "name": "work interrupted by the war and the Oppau explosion",
+        "claim_kind": "other",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1002-ange.19270400603/p1/2",
+            "quote": "Die Arbeiten auf diesem Gebiet wurden durch den Krieg und seine Aufgaben, namentlich die grofitech- nische Durchfuhrung der Ammoniaksynthese, beein- trachtigt",
+            "source": "ex:msyn/source/10.1002-ange.19270400603"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1002-ange.19270400603/p1/2",
+            "quote": "Ganz geruht haben sie nie.",
+            "source": "ex:msyn/source/10.1002-ange.19270400603"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1002-ange.19270400603/p1/3",
+            "quote": "Vorbereitungen zu neuen Hochdruckversuchsreihen auf dem Gebiet der Methanolgewinnung wurden an zwei verschiedenen Stellen unseres Werkes unabhangig von- einander im Sommer 1922 getroffen",
+            "source": "ex:msyn/source/10.1002-ange.19270400603"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Work in this field was impaired by the war (large-scale ammonia synthesis), resumed soon after, disturbed again by the Oppau explosion and other circumstances, but never entirely stopped; preparations for new high-pressure series on methanol were made independently at two places in the works in summer 1922 and experiments began in autumn 1922."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1002-ange.19270400603/claim/no-fischer-influence",
+      "label": "Claim",
+      "props": {
+        "name": "Fischer's statements had no influence",
+        "claim_kind": "other",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1002-ange.19270400603/p1/4",
+            "quote": "Die Aufierungen und Veroffentlichungen von Herrii F. F i s c h e r hahen keinerlei EinfluG auf unsere Arbei- ten gehabt.",
+            "source": "ex:msyn/source/10.1002-ange.19270400603"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1002-ange.19270400603/p1/5",
+            "quote": "Diese Versuche liegen vor dem von Herrii F. F i s c h e r erwahnten Gesprach",
+            "source": "ex:msyn/source/10.1002-ange.19270400603"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "statement": "The statements and publications of F. Fischer had no influence whatever on the company's work; the October-November trials preceded the conversation mentioned by Fischer."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1002-ange.19270400603/feed/co-excess-h2",
+      "label": "Feed",
+      "props": {
+        "name": "carbon monoxide with excess hydrogen",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1002-ange.19270400603/p1/4",
+            "quote": "bei denen hochprozen- tiges Methanol aus Kohlenoxyd und uberschussigeni Wasserstoff erhalten wurde",
+            "source": "ex:msyn/source/10.1002-ange.19270400603"
+          }
+        ],
+        "ratios": {
+          "h2_co": {
+            "status": "present",
+            "as_reported": "uberschussigeni Wasserstoff",
+            "note": "OCR for 'überschüssigem'",
+            "text_value": "excess hydrogen"
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1002-ange.19270400603/test/high-pressure-methanol-trials-1922-1923",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "high-pressure methanol trials, Oppau and Ludwigshafen, 1922-1923",
+        "conditions": {
+          "dates": {
+            "status": "present",
+            "as_reported": "am 16. und 27. Januar 1923, im Hauptlaboratorium Ludwigshafen am 13. November 1922 ²) und 17. Januar 1923",
+            "note": "corrected 2026-09-29: the page image prints '13. November 1922 ²)' (footnote 2); the text layer read '1923 *)'",
+            "text_value": "Oppau ammonia laboratory 16 and 27 January 1923 (after trials in October and November); Ludwigshafen main laboratory 13 November 1922 and 17 January 1923"
+          }
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1002-ange.19270400603/p1/3",
+            "quote": "und es wurde rnit den Versuchen im Herbst 1922 begonnen.",
+            "source": "ex:msyn/source/10.1002-ange.19270400603"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1002-ange.19270400603/p1/4",
+            "quote": "Besonders erfolgversprechende Versuche, bei denen hochprozen- tiges Methanol aus Kohlenoxyd und uberschussigeni Wasserstoff erhalten wurde, gelangen im Ammoniak- laboratorium Oppau",
+            "source": "ex:msyn/source/10.1002-ange.19270400603"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1002-ange.19270400603/p1/4",
+            "quote": "am 16. und 27. Januar 1923, im Hauptlaboratorium Ludwigshafen an1 13. November 1923 *) und 17. Januar 1923.",
+            "source": "ex:msyn/source/10.1002-ange.19270400603"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 1, left column, Ludwigshafen trial dates",
+            "note": "'Ludwigshaf' is cut at the region edge; the page image prints '1922 ²)' where the text layer reads '1923 *)'",
+            "reading": "vision_ocr",
+            "region": [
+              0.06,
+              0.686,
+              0.46,
+              0.715
+            ],
+            "second_reading": "laboratorium Oppau nach Versuchen im Oktober und November²), welche Öle ergeben hatten, am 16. und 27. Januar 1923, im Hauptlaboratorium Ludwigshafen am 13. November 1922²) und 17. Januar 1923.",
+            "source": "ex:msyn/source/10.1002-ange.19270400603",
+            "transcription": "27. Januar 1923, im Hauptlaboratorium Ludwigshaf 13. November 1922 ²) und 17. Januar 1923."
+          }
+        ],
+        "experiment_kind": "physical",
+        "note": "Reported as the company's own unpublished trials; the catalyst, temperature and pressure are not given.",
+        "pressure": {
+          "status": "present",
+          "as_reported": "Hochdruckversuchsreihen",
+          "note": "no pressure value given",
+          "text_value": "high pressure"
+        },
+        "results": {
+          "product": {
+            "status": "present",
+            "as_reported": "hochprozen- tiges Methanol",
+            "text_value": "high-percentage methanol"
+          }
+        },
+        "temperature": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source"
+        },
+        "test_kind": "activity"
+      }
+    },
+    {
+      "id": "ex:msyn/source/10.1002-ange.19270400603",
+      "label": "Source",
+      "props": {
+        "name": "Zur Geschichte der Methanolsynthese",
+        "kind": "article",
+        "description": "Published 1927 (publication year (bibliography)); in scope: before the 1966-01-01 cutoff. Text: 1 pages text_layer. Text not redistributed.",
+        "doi": "10.1002/ange.19270400603",
+        "licence": "no verified publisher licence; short excerpts quoted as evidence under fair use",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "Zur Geschichte der Methanolsynthese",
+        "url": "https://doi.org/10.1002/ange.19270400603",
+        "venue": "Angewandte Chemie",
+        "year": 1927
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/10.1002-ange.19270400603/claim/high-percentage-methanol-1923/reported-in/10.1002-ange.19270400603",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 1, left column, Ludwigshafen trial dates"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1002-ange.19270400603/claim/high-percentage-methanol-1923",
+      "target": "ex:msyn/source/10.1002-ange.19270400603"
+    },
+    {
+      "id": "ex:msyn/10.1002-ange.19270400603/claim/interruptions/reported-in/10.1002-ange.19270400603",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1002-ange.19270400603/claim/interruptions",
+      "target": "ex:msyn/source/10.1002-ange.19270400603"
+    },
+    {
+      "id": "ex:msyn/10.1002-ange.19270400603/claim/no-fischer-influence/reported-in/10.1002-ange.19270400603",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1002-ange.19270400603/claim/no-fischer-influence",
+      "target": "ex:msyn/source/10.1002-ange.19270400603"
+    },
+    {
+      "id": "ex:msyn/10.1002-ange.19270400603/feed/co-excess-h2/reported-in/10.1002-ange.19270400603",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1002-ange.19270400603/feed/co-excess-h2",
+      "target": "ex:msyn/source/10.1002-ange.19270400603"
+    },
+    {
+      "id": "ex:msyn/10.1002-ange.19270400603/link/11",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1002-ange.19270400603/p1/4",
+            "quote": "bei denen hochprozen- tiges Methanol aus Kohlenoxyd und uberschussigeni Wasserstoff erhalten wurde",
+            "source": "ex:msyn/source/10.1002-ange.19270400603"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1002-ange.19270400603/claim/high-percentage-methanol-1923",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1002-ange.19270400603/link/12",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1002-ange.19270400603/p1/4",
+            "quote": "die zu unifassenden Patentanmeldungen und weiterhin zur technischen Durchfuhrung des Methanol- I erfahrens in Leuna fiihrten.",
+            "source": "ex:msyn/source/10.1002-ange.19270400603"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1002-ange.19270400603/test/high-pressure-methanol-trials-1922-1923",
+      "target": "ex:msyn/10.1002-ange.19270400603/claim/high-percentage-methanol-1923"
+    },
+    {
+      "id": "ex:msyn/10.1002-ange.19270400603/link/16",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1002-ange.19270400603/p1/2",
+            "quote": "Die Arbeiten auf diesem Gebiet wurden durch den Krieg und seine Aufgaben, namentlich die grofitech- nische Durchfuhrung der Ammoniaksynthese, beein- trachtigt",
+            "source": "ex:msyn/source/10.1002-ange.19270400603"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1002-ange.19270400603/claim/interruptions",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1002-ange.19270400603/link/17",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1002-ange.19270400603/p1/4",
+            "quote": "Die Aufierungen und Veroffentlichungen von Herrii F. F i s c h e r hahen keinerlei EinfluG auf unsere Arbei- ten gehabt.",
+            "source": "ex:msyn/source/10.1002-ange.19270400603"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1002-ange.19270400603/claim/no-fischer-influence",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1002-ange.19270400603/link/5",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1002-ange.19270400603/p1/4",
+            "quote": "bei denen hochprozen- tiges Methanol aus Kohlenoxyd und uberschussigeni Wasserstoff erhalten wurde",
+            "source": "ex:msyn/source/10.1002-ange.19270400603"
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1002-ange.19270400603/feed/co-excess-h2",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/10.1002-ange.19270400603/link/6",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1002-ange.19270400603/p1/4",
+            "quote": "bei denen hochprozen- tiges Methanol aus Kohlenoxyd und uberschussigeni Wasserstoff erhalten wurde",
+            "source": "ex:msyn/source/10.1002-ange.19270400603"
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1002-ange.19270400603/feed/co-excess-h2",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/10.1002-ange.19270400603/link/7",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1002-ange.19270400603/p1/4",
+            "quote": "bei denen hochprozen- tiges Methanol aus Kohlenoxyd und uberschussigeni Wasserstoff erhalten wurde",
+            "source": "ex:msyn/source/10.1002-ange.19270400603"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1002-ange.19270400603/test/high-pressure-methanol-trials-1922-1923",
+      "target": "ex:msyn/10.1002-ange.19270400603/feed/co-excess-h2"
+    },
+    {
+      "id": "ex:msyn/10.1002-ange.19270400603/link/8",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "10.1002-ange.19270400603/p1/4",
+            "quote": "bei denen hochprozen- tiges Methanol aus Kohlenoxyd und uberschussigeni Wasserstoff erhalten wurde",
+            "source": "ex:msyn/source/10.1002-ange.19270400603"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1002-ange.19270400603/test/high-pressure-methanol-trials-1922-1923",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1002-ange.19270400603/test/high-pressure-methanol-trials-1922-1923/reported-in/10.1002-ange.19270400603",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 1, left column, Ludwigshafen trial dates"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1002-ange.19270400603/test/high-pressure-methanol-trials-1922-1923",
+      "target": "ex:msyn/source/10.1002-ange.19270400603"
+    },
+    {
+      "id": "ex:msyn/source/10.1002-ange.19270400603/authored-by/1",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 1,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/10.1002-ange.19270400603",
+      "target": "ex:msyn/person/i-g-farbenindustrie"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/10.1002-ange.19270400603"
+}

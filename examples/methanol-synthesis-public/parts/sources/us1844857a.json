@@ -1,0 +1,3006 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/source/us1844857a",
+      "label": "Source",
+      "props": {
+        "name": "Catalyst for the production of methanol and other carbon compounds and process &hellip;",
+        "kind": "patent",
+        "description": "Published 1932-02-09 (grant date printed on the patent (agrees with the USPTO issue-year table)); in scope: before the 1966-01-01 cutoff. Text: 3 pages ocr (tesseract 5.5.3 (eng, 300 dpi, 2 columns)). Text not redistributed.",
+        "identifiers": {
+          "patent": "US1844857A"
+        },
+        "licence": "US patent; not subject to copyright",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "Catalyst for the production of methanol and other carbon compounds and process &hellip;",
+        "url": "https://patents.google.com/patent/US1844857A",
+        "year": 1932
+      }
+    },
+    {
+      "id": "ex:msyn/us1844857a/analysis/equilibrium-300c-200atm",
+      "label": "Analysis",
+      "props": {
+        "name": "equilibrium methanol at 300 °C and 200 atm (Nernst heat theorem)",
+        "analysis_kind": "equilibrium",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "preceded by 'By means of calculations based on the Nernst heat' and the line number '30'",
+            "passage": "us1844857a/p1/2",
+            "quote": "theorem, it may be shown that the amounts of methanol in equilibrium with carbon mon- oxide and hydrogen at pressures near atmos- pheric are exceedingly small.",
+            "source": "ex:msyn/source/us1844857a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "continues 'pressure, for example, 45% methanol formation is possible'",
+            "passage": "us1844857a/p1/3",
+            "quote": "At 300° C. and 200 atmospheres",
+            "source": "ex:msyn/source/us1844857a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1844857a/p1/3",
+            "quote": "pressure, for example, 45% methanol forma- tion is possible.",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "method": "calculations based on the Nernst heat theorem",
+        "pressure": {
+          "status": "present",
+          "as_reported": "200 atmospheres",
+          "unit": "atm",
+          "value": 200
+        },
+        "results": {
+          "equilibrium_methanol": {
+            "status": "present",
+            "as_reported": "45% methanol forma- tion is possible",
+            "unit": "%",
+            "value": 45
+          }
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "300° C.",
+          "unit": "°C",
+          "value": 300
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us1844857a/analysis/equilibrium-near-atmospheric",
+      "label": "Analysis",
+      "props": {
+        "name": "equilibrium methanol near atmospheric pressure (Nernst heat theorem)",
+        "analysis_kind": "equilibrium",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "preceded by 'By means of calculations based on the Nernst heat' and the line number '30'",
+            "passage": "us1844857a/p1/2",
+            "quote": "theorem, it may be shown that the amounts of methanol in equilibrium with carbon mon- oxide and hydrogen at pressures near atmos- pheric are exceedingly small.",
+            "source": "ex:msyn/source/us1844857a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "continues after the line number '35' (printed '85'): '0.1% methanol can be formed'",
+            "passage": "us1844857a/p1/2",
+            "quote": "at any temperature above 250° C. less than",
+            "source": "ex:msyn/source/us1844857a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1844857a/p1/3",
+            "quote": "0.1% methanol can be formed.",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "method": "calculations based on the Nernst heat theorem",
+        "pressure": {
+          "status": "present",
+          "as_reported": "at pressures near atmos- pheric",
+          "note": "printed as near atmospheric pressure; recorded as 1 atm",
+          "qualifier": "approximate",
+          "unit": "atm",
+          "value": 1
+        },
+        "results": {
+          "equilibrium_methanol": {
+            "status": "present",
+            "as_reported": "less than 0.1% methanol can be formed",
+            "bound": "upper",
+            "unit": "%",
+            "value": 0.1
+          }
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "at any temperature above 250° C.",
+          "bound": "lower",
+          "unit": "°C",
+          "value": 250
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us1844857a/catalyst/example-1",
+      "label": "Catalyst",
+      "props": {
+        "name": "Example I: fused copper oxide 8-9 parts (as Cu) + manganese oxide 1-2 parts (as Mn), reduced",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example I",
+            "passage": "us1844857a/p2/2",
+            "quote": "Example I—A mixture comprising 8-9 parts copper oxide (calculated as metallic copper) and 1-2 parts manganese oxide (cal- culated as metallic manganese) is slowly fused under an electric arc or an oxy-hy- drogen torch.",
+            "source": "ex:msyn/source/us1844857a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Example I",
+            "note": "'2590—850° C.' is an OCR misreading of the reduction temperature interval",
+            "passage": "us1844857a/p2/2",
+            "quote": "The fused mass is allowed to cool, crushed and screened to size, and finally reduced in hydrogen at ordinary pressures and at temperatures within the interval 2590—850° C.",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "generality": "particular"
+      }
+    },
+    {
+      "id": "ex:msyn/us1844857a/catalyst/fused-cu-mn-oxide",
+      "label": "Catalyst",
+      "props": {
+        "name": "reduction product of fused copper oxide and manganese oxide (claims 6, 7)",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 6",
+            "passage": "us1844857a/p3/5",
+            "quote": "uct of a fused mixture of copper oxide ‘and",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "generality": "kind"
+      }
+    },
+    {
+      "id": "ex:msyn/us1844857a/catalyst/fused-cu-oxide-catalytic-oxide",
+      "label": "Catalyst",
+      "props": {
+        "name": "reduced fused mixture of copper oxide and catalytic oxide(s) (generic)",
+        "catalyst_family": "mixed_oxide",
+        "description": "pure copper oxide melted with one or more catalytic oxides, cooled, broken into fragments and reduced in hydrogen: a metal oxide admixed with metallic copper",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1844857a/p2/1",
+            "quote": "Now, I have discovered a method for pre- paring a metal oxide admixed with metallic copper, which results in the formation of a highly reactive catalyst well suited to the",
+            "source": "ex:msyn/source/us1844857a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1844857a/p2/1",
+            "quote": "I melt a mixture of pure copper oxide and one or more catalytic oxides such as are mentioned above, allow the mass to cool, break into fragments of suitable size, and finally reduce in hydrogen.",
+            "source": "ex:msyn/source/us1844857a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1844857a/p2/1",
+            "quote": "The gran- ules produced by this method are hard, co- herent, highly porous, and very reactive at relatively low temperatures.",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "generality": "kind"
+      }
+    },
+    {
+      "id": "ex:msyn/us1844857a/catalyst/fused-heat-conducting-metal",
+      "label": "Catalyst",
+      "props": {
+        "name": "catalytic oxide intimately associated with a good heat-conducting metal (claims 1, 2, 4, 5, 8)",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 1",
+            "passage": "us1844857a/p3/3",
+            "quote": "perature, to form a catalytic oxide intimately",
+            "source": "ex:msyn/source/us1844857a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 1",
+            "passage": "us1844857a/p3/3",
+            "quote": "heat-conducting metal, to produce a uniform",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "generality": "kind"
+      }
+    },
+    {
+      "id": "ex:msyn/us1844857a/catalyst/precipitated-cr-cu-oxide",
+      "label": "Catalyst",
+      "props": {
+        "name": "co-precipitated chromium oxide and copper oxide reduced in hydrogen (prior art)",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "continues 'simultaneously and the oxide mixture reduced in hydrogen. None of these methods, however, has yielded satisfactory results.'",
+            "passage": "us1844857a/p1/5",
+            "quote": "For example, chromium oxide and copper oxide have been precipitated",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "generality": "kind",
+        "note": "prior art described by the patent"
+      }
+    },
+    {
+      "id": "ex:msyn/us1844857a/claim/catalyst-and-conditions-needed",
+      "label": "Claim",
+      "props": {
+        "name": "equilibrium is not sufficient: catalysts and exact conditions are needed",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "line number '45' printed '5 eonditions' precedes",
+            "passage": "us1844857a/p1/3",
+            "quote": "the formation of methanol from carbon monoxide and hy- drogen proceeds with extreme slowness and suitable catalyzers must be employed before",
+            "source": "ex:msyn/source/us1844857a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "continues 'tectable amounts of methanol are formed'",
+            "passage": "us1844857a/p1/4",
+            "quote": "Indeed, under certain operating conditions and with certain catalyzers, no de- .",
+            "source": "ex:msyn/source/us1844857a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "continues 'changing the operating conditions different products may be obtained'",
+            "passage": "us1844857a/p1/4",
+            "quote": "Even with the same catalyzer, by simply",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Methanol formation from carbon monoxide and hydrogen proceeds with extreme slowness, so suitable catalyzers are needed; and CO and H2 may form other products, even with the same catalyzer under changed conditions, so both catalyzer and operating conditions must be carefully selected for a single product."
+      }
+    },
+    {
+      "id": "ex:msyn/us1844857a/claim/copper-lining",
+      "label": "Claim",
+      "props": {
+        "name": "protect steel surfaces with copper against carbon deposition and carbonyl formation",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1844857a/p3/1",
+            "quote": "wherever there is danger of carbon deposition or of carbonyl formation",
+            "source": "ex:msyn/source/us1844857a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "part of 'wherever there is danger of carbon deposition or of carbonyl formation the pressure resisting apparatus ought to be suitably protected from contact with the compressed carbon monoxide'",
+            "passage": "us1844857a/p3/1",
+            "quote": "the pressure resist-",
+            "source": "ex:msyn/source/us1844857a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1844857a/p3/1",
+            "quote": "Since copper does not readily re- act with carbon monoxide, it forms an effi- cient and practical protector for the steel sur-",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Wherever there is danger of carbon deposition or carbonyl formation the pressure apparatus should be protected from contact with compressed carbon monoxide; copper, which does not readily react with carbon monoxide, is an efficient protector for the steel surfaces."
+      }
+    },
+    {
+      "id": "ex:msyn/us1844857a/claim/equilibrium-t-p",
+      "label": "Claim",
+      "props": {
+        "name": "equilibrium methanol rises with falling temperature and rising pressure",
+        "claim_kind": "conclusion",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1844857a/p1/2",
+            "quote": "heat, it is obvious that the amount of methanol in an equilibrium mixture increases as the temperature of the reaction decreases.",
+            "source": "ex:msyn/source/us1844857a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1844857a/p1/2",
+            "quote": "it is also obvious that the methanol in an equilibrium mixture increases as the pressure of the reacting gases increases.",
+            "source": "ex:msyn/source/us1844857a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "preceded by 'By means of calculations based on the Nernst heat' and the line number '30'",
+            "passage": "us1844857a/p1/2",
+            "quote": "theorem, it may be shown that the amounts of methanol in equilibrium with carbon mon- oxide and hydrogen at pressures near atmos- pheric are exceedingly small.",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "inference_type": "theoretical",
+        "statement": "Because the reaction liberates heat, equilibrium methanol increases as the temperature decreases; because it involves a decrease in volume, it increases with pressure: near atmospheric pressure it is exceedingly small (less than 0.1% above 250° C.) but it increases rapidly with pressure (45% possible at 300° C. and 200 atmospheres)."
+      }
+    },
+    {
+      "id": "ex:msyn/us1844857a/claim/exclude-impurities",
+      "label": "Claim",
+      "props": {
+        "name": "exclude sulfur, phosphorus compounds and iron carbonyl from water gas",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "continues '(line 30) ally present. These impurities should be carefully excluded if the best results are to be obtained.'",
+            "passage": "us1844857a/p3/2",
+            "quote": "For example, sulfur and phosphorus com- pounds, also, traces of iron carbonyl are usu-",
+            "source": "ex:msyn/source/us1844857a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1844857a/p3/2",
+            "quote": "carefully excluded if the best results are to be obtained.",
+            "source": "ex:msyn/source/us1844857a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1844857a/p3/2",
+            "quote": "A carbon monoxide-hydrogen gas mixture for the synthesis of methanol may be made by the well-known water-gas process",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Water gas made from steam and incandescent coke usually contains sulfur and phosphorus compounds and traces of iron carbonyl, which should be carefully excluded for the best results."
+      }
+    },
+    {
+      "id": "ex:msyn/us1844857a/claim/fused-method",
+      "label": "Claim",
+      "props": {
+        "name": "melting copper oxide with catalytic oxides, then reducing, gives hard, porous, reactive granules",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1844857a/p2/1",
+            "quote": "I melt a mixture of pure copper oxide and one or more catalytic oxides such as are mentioned above, allow the mass to cool, break into fragments of suitable size, and finally reduce in hydrogen.",
+            "source": "ex:msyn/source/us1844857a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1844857a/p2/1",
+            "quote": "The gran- ules produced by this method are hard, co- herent, highly porous, and very reactive at relatively low temperatures.",
+            "source": "ex:msyn/source/us1844857a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1844857a/p2/1",
+            "quote": "Now, I have discovered a method for pre- paring a metal oxide admixed with metallic copper, which results in the formation of a highly reactive catalyst well suited to the",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Melting pure copper oxide with one or more catalytic oxides, cooling, breaking into fragments and reducing in hydrogen gives a metal oxide admixed with metallic copper; the granules are hard, coherent, highly porous and very reactive at relatively low temperatures."
+      }
+    },
+    {
+      "id": "ex:msyn/us1844857a/claim/iron-carbonyl-harm",
+      "label": "Claim",
+      "props": {
+        "name": "iron carbonyl from steel deposits iron on the catalyst, unfavorable to methanol",
+        "claim_kind": "causal",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "continues 'in the gas mixture and eventually comes into contact with the catalyst'",
+            "passage": "us1844857a/p3/1",
+            "quote": "second reaction occurs, iron carbonyl collects",
+            "source": "ex:msyn/source/us1844857a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1844857a/p3/1",
+            "quote": "Since iron car- | bonyl decomposes at the temperature of the | active catalyst, deposition of 1ron upon the -",
+            "source": "ex:msyn/source/us1844857a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1844857a/p3/1",
+            "quote": "The iron carbonyl therefore — introduces an ingredient which is not favor- — able to methanol formation,",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Iron carbonyl formed from carbon monoxide and the steel apparatus collects in the gas and decomposes at the temperature of the active catalyst, depositing iron, an ingredient unfavorable to methanol formation."
+      }
+    },
+    {
+      "id": "ex:msyn/us1844857a/claim/other-heat-conducting-metals",
+      "label": "Claim",
+      "props": {
+        "name": "reducible oxides of iron, cobalt, nickel may replace copper (esp. for other products)",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "continues 'ample, iron, cobalt, or nickel, etc., (particularly in the synthesis of carbon compounds other than methanol) may be melted together with one or more catalytic oxides'",
+            "passage": "us1844857a/p2/5",
+            "quote": "readily reducible oxides of good heat conducting metals other than copper, for ex- 75",
+            "source": "ex:msyn/source/us1844857a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1844857a/p2/5",
+            "quote": "ample, iron, cobalt, or nickel, etc., (particu- larly in the synthesis of carbon compounds |",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Readily reducible oxides of good heat-conducting metals other than copper, e.g. iron, cobalt or nickel, may be melted with one or more catalytic oxides, particularly for carbon compounds other than methanol; such catalysts are within the invention."
+      }
+    },
+    {
+      "id": "ex:msyn/us1844857a/claim/patent-claim-1",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 1",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 1",
+            "passage": "us1844857a/p3/2",
+            "quote": "melting together an oxide of a metal which is a member of the group consisting of titanium,",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Claim 1: process of making a catalyst for combining hydrogen with carbon monoxide: melting together an oxide of titanium, chromium, manganese, zinc or molybdenum with a readily reducible oxide of a good heat-conducting metal, cooling, granulating and reducing with hydrogen at an elevated temperature, forming a catalytic oxide intimately associated with a good heat-conducting metal."
+      }
+    },
+    {
+      "id": "ex:msyn/us1844857a/claim/patent-claim-2",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 2",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 2",
+            "note": "claim 2 is printed '9.'",
+            "passage": "us1844857a/p3/3",
+            "quote": "an oxide of a metal having an atomic weight between 48 and 55, and a readily reducible oxide of a good heat-con-",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Claim 2: process of making such a catalyst by melting together an oxide of a metal of atomic weight between 48 and 55 with a readily reducible oxide of a good heat-conducting metal, solidifying and reducing with hydrogen."
+      }
+    },
+    {
+      "id": "ex:msyn/us1844857a/claim/patent-claim-3",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 3",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 3",
+            "note": "claim 3 is printed '8.'",
+            "passage": "us1844857a/p3/4",
+            "quote": "melting together a metallic oxide capable of accelerating said reaction and copper oxide,",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Claim 3: process of making such a catalyst by melting together a catalytic metallic oxide and copper oxide, cooling, subdividing and reducing the copper oxide to metallic copper."
+      }
+    },
+    {
+      "id": "ex:msyn/us1844857a/claim/patent-claim-4",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 4",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 4",
+            "passage": "us1844857a/p3/4",
+            "quote": "said catalyst comprising an oxide which is a catalyst for said reaction, inti- mately associated with a good heat-conduct- ing metal,",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Claim 4: a catalyst comprising a catalytic oxide intimately associated with a good heat-conducting metal, obtained by fusing the oxide with the oxide of the metal and reducing the subdivided solidified mixture in hydrogen at high temperature."
+      }
+    },
+    {
+      "id": "ex:msyn/us1844857a/claim/patent-claim-5",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 5",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 5",
+            "passage": "us1844857a/p3/5",
+            "quote": "said catalyst comprising an oxide of a metal which is a member of a group con- sisting of titanium, chromium, manganese,",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Claim 5: a catalyst comprising an oxide of titanium, chromium, manganese, zinc or molybdenum intimately associated with a good heat-conducting metal, obtained by fusing the oxides together and reducing in hydrogen."
+      }
+    },
+    {
+      "id": "ex:msyn/us1844857a/claim/patent-claim-6",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 6",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 6",
+            "passage": "us1844857a/p3/5",
+            "quote": "said catalyst being the reduction prod- uct of a fused mixture of copper oxide ‘and an oxide of manganese.",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Claim 6: a catalyst being the reduction product of a fused mixture of copper oxide and an oxide of manganese."
+      }
+    },
+    {
+      "id": "ex:msyn/us1844857a/claim/patent-claim-7",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 7",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 7",
+            "passage": "us1844857a/p3/6",
+            "quote": "in hydrogen at a temperature between about | 250 and 350° C.",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Claim 7: the catalyst of copper oxide and manganese oxide obtained by reducing the solidified subdivided mixture in hydrogen at about 250 to 350° C."
+      }
+    },
+    {
+      "id": "ex:msyn/us1844857a/claim/patent-claim-8",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 8",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 8",
+            "passage": "us1844857a/p3/6",
+            "quote": "A catalytic body comprising the reduc- tion product of a fused mixture of copper",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Claim 8: a catalytic body comprising the reduction product of a fused mixture of copper oxide and a metal oxide capable of accelerating the combination of hydrogen with carbon monoxide."
+      }
+    },
+    {
+      "id": "ex:msyn/us1844857a/claim/pressure-range",
+      "label": "Claim",
+      "props": {
+        "name": "practical yields from 20 atm; 200-300 atm preferred; up to 1000 atm",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1844857a/p2/6",
+            "quote": "When a suitable catalyst is employed, prac- tical yields of methanol can be obtained at pressures as low as 20 atmospheres.",
+            "source": "ex:msyn/source/us1844857a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "preceded by '|' (I); 'preter' = prefer",
+            "passage": "us1844857a/p2/6",
+            "quote": "preter to operate the process within the range of 200-300 atmospheres pressure,",
+            "source": "ex:msyn/source/us1844857a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1844857a/p2/6",
+            "quote": "although synthesis may be carried on suceess- fully at pressures as high as 1,000 atmos- pheres,",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "With a suitable catalyst practical methanol yields are obtained at pressures as low as 20 atmospheres, better at higher pressures; the preferred range is 200-300 atmospheres, though synthesis succeeds up to 1,000 atmospheres."
+      }
+    },
+    {
+      "id": "ex:msyn/us1844857a/claim/prior-art-shortcomings",
+      "label": "Claim",
+      "props": {
+        "name": "prior copper-containing catalysts unsatisfactory",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "continues 'simultaneously and the oxide mixture reduced in hydrogen. None of these methods, however, has yielded satisfactory results.'",
+            "passage": "us1844857a/p1/5",
+            "quote": "For example, chromium oxide and copper oxide have been precipitated",
+            "source": "ex:msyn/source/us1844857a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1844857a/p1/5",
+            "quote": "methanol because of its tendency to crumble into a fine powder during the reduction and the synthesis.",
+            "source": "ex:msyn/source/us1844857a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1844857a/p1/6",
+            "quote": "Such materials, however, do not contribute to the synthesis, and constitute an undesirable dilu- tion of the catalyst material.",
+            "source": "ex:msyn/source/us1844857a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "continues 'duction of methanol'",
+            "passage": "us1844857a/p1/6",
+            "quote": "have not been reactive at the low temperatures favorable to the pro-_",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "the patent's account of prior art, partly citing U.S. Patents 1,201,850 and 1,271,013 and German Patent 295,202",
+        "statement": "Prior catalysts (oxides of chromium, titanium, molybdenum, zinc, manganese; with copper turnings, wool, gauze or reduced copper oxide; co-precipitated chromium and copper oxides reduced in hydrogen) did not give satisfactory results: the precipitated mixture crumbles to powder, supports such as asbestos dilute the catalyst, and copper catalysts were not reactive at the low temperatures favorable to methanol."
+      }
+    },
+    {
+      "id": "ex:msyn/us1844857a/claim/recycle",
+      "label": "Claim",
+      "props": {
+        "name": "unreacted gas is recycled after separating the product",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1844857a/p2/7",
+            "quote": "In any catalytic process where the reaction is only partialiy completed, the product of the reaction must be sevarated",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Where the reaction is only partially completed, the product must be separated from the reacting gases and the uncombined gases brought again into contact with the catalyst."
+      }
+    },
+    {
+      "id": "ex:msyn/us1844857a/claim/selectivity",
+      "label": "Claim",
+      "props": {
+        "name": "greater selectivity; methanol principal product under regulated pressure and temperature",
+        "claim_kind": "finding",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'carson' = carbon",
+            "passage": "us1844857a/p2/2",
+            "quote": "The catalysts produced by my improved method have been found-to permit a greater selectivity in the production of carson com-",
+            "source": "ex:msyn/source/us1844857a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "OCR of 'under a pressure of 250-?00 atmospheres'; the upper number is doubtful",
+            "passage": "us1844857a/p2/3",
+            "quote": "Thus, when a mixture of carbon monoxide and hydrogen under « wressuve of 250-800.",
+            "source": "ex:msyn/source/us1844857a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "continues 'product obtained will be methanol'; '800' is doubtful OCR",
+            "passage": "us1844857a/p2/3",
+            "quote": "lysts heated to 275-800° C., the principal",
+            "source": "ex:msyn/source/us1844857a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1844857a/p2/3",
+            "quote": "product obtained will be methanol.",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "OCR of both ranges is doubtful; see gaps",
+        "statement": "The catalysts permit greater selectivity than heretofore; by regulating pressure and catalyst temperature the reaction can be largely confined to methanol: with CO and H2 at a pressure printed '250-800' atmospheres over the catalysts heated to a temperature printed '275-800° C.', the principal product is methanol."
+      }
+    },
+    {
+      "id": "ex:msyn/us1844857a/hypothesis/copper-dissipates-heat",
+      "label": "Hypothesis",
+      "props": {
+        "name": "copper may act by dissipating the heat of reaction",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "continues 'of a catalyst for the methanol synthesis to its ability to dissipate heat as rapidly as it is liberated'",
+            "passage": "us1844857a/p2/4",
+            "quote": "Copper, being an excellent conductor of heat, may owe its beneficial action as a constituens }",
+            "source": "ex:msyn/source/us1844857a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1844857a/p2/5",
+            "quote": "its ability to dissipate heat as rapidly as it is liberated.",
+            "source": "ex:msyn/source/us1844857a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "continues 'this theory would be obtained when the copper was brought into very intimate contact with the catalytic material used'",
+            "passage": "us1844857a/p2/5",
+            "quote": "The best results according to",
+            "source": "ex:msyn/source/us1844857a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1844857a/p2/5",
+            "quote": "per was brought into very intimate contact with the catalytic material used.",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "hypothesis_kind": "mechanistic",
+        "hypothesis_status": "proposed",
+        "statement": "Copper, an excellent conductor of heat, may owe its beneficial action in methanol catalysts to its ability to dissipate heat as rapidly as it is liberated; by this theory the best results come from very intimate contact of copper with the catalytic material, as achieved by the fusion method."
+      }
+    },
+    {
+      "id": "ex:msyn/us1844857a/hypothesis/narrow-catalyst-temperature",
+      "label": "Hypothesis",
+      "props": {
+        "name": "real catalyst temperature must be confined to a narrow range for selectivity",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "garbled OCR of 'it has probably been difficult to confine the real temperature of the catalyst (as distinguished from the apparent temperature as indicated by the temperature of the reacting gases)'",
+            "passage": "us1844857a/p2/4",
+            "quote": "it has probably becn diffeult te von-",
+            "source": "ex:msyn/source/us1844857a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1844857a/p2/4",
+            "quote": "distinguished from the apparent temperature",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "hypothesis_kind": "explanatory",
+        "hypothesis_status": "proposed",
+        "note": "this passage is heavily garbled in the OCR; statement read from the legible fragments",
+        "statement": "The real catalyst temperature (as distinguished from the apparent temperature of the reacting gases) probably must be confined within a rather narrow range for selectivity, which has been difficult because of the heat evolved."
+      }
+    },
+    {
+      "id": "ex:msyn/us1844857a/material/asbestos",
+      "label": "Material",
+      "props": {
+        "name": "asbestos (support, prior art)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1844857a/p1/6",
+            "quote": "Such materials, however, do not contribute to the synthesis, and constitute an undesirable dilu- tion of the catalyst material.",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1844857a/preparation/example-1",
+      "label": "Preparation",
+      "props": {
+        "name": "slow fusion under electric arc or oxy-hydrogen torch",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example I",
+            "passage": "us1844857a/p2/2",
+            "quote": "Example I—A mixture comprising 8-9 parts copper oxide (calculated as metallic copper) and 1-2 parts manganese oxide (cal- culated as metallic manganese) is slowly fused under an electric arc or an oxy-hy- drogen torch.",
+            "source": "ex:msyn/source/us1844857a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Example I",
+            "note": "'2590—850° C.' is an OCR misreading of the reduction temperature interval",
+            "passage": "us1844857a/p2/2",
+            "quote": "The fused mass is allowed to cool, crushed and screened to size, and finally reduced in hydrogen at ordinary pressures and at temperatures within the interval 2590—850° C.",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "method": "fusion under an electric arc or an oxy-hydrogen torch",
+        "steps": [
+          "a mixture of 8-9 parts copper oxide (as metallic copper) and 1-2 parts manganese oxide (as metallic manganese) is slowly fused under an electric arc or an oxy-hydrogen torch",
+          "the fused mass is allowed to cool, crushed and screened to size"
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1844857a/reaction/iron-carbonyl-formation",
+      "label": "Reaction",
+      "props": {
+        "name": "formation of iron carbonyl from carbon monoxide and the iron of steel",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "continues 'in the gas mixture and eventually comes into contact with the catalyst'",
+            "passage": "us1844857a/p3/1",
+            "quote": "second reaction occurs, iron carbonyl collects",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "generality": "kind",
+        "note": "the printed equation is garbled by OCR ('5U0+Fe-sFe(CO);'); cited from a British patent to Mond"
+      }
+    },
+    {
+      "id": "ex:msyn/us1844857a/sample/example-1",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Example I crushed and screened fused catalyst",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example I",
+            "note": "'2590—850° C.' is an OCR misreading of the reduction temperature interval",
+            "passage": "us1844857a/p2/2",
+            "quote": "The fused mass is allowed to cool, crushed and screened to size, and finally reduced in hydrogen at ordinary pressures and at temperatures within the interval 2590—850° C.",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "preparation_status": "prepared",
+        "sample_kind": "granules"
+      }
+    },
+    {
+      "id": "ex:msyn/us1844857a/species/catalytic-oxide",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "catalytic oxide (oxide of titanium, chromium, manganese, zinc or molybdenum)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1844857a/p2/1",
+            "quote": "I melt a mixture of pure copper oxide and one or more catalytic oxides such as are mentioned above, allow the mass to cool, break into fragments of suitable size, and finally reduce in hydrogen.",
+            "source": "ex:msyn/source/us1844857a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 1",
+            "passage": "us1844857a/p3/2",
+            "quote": "chromium, manganese, zinc, and molybde-",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "generality": "kind",
+        "species_kind": "other"
+      }
+    },
+    {
+      "id": "ex:msyn/us1844857a/species/copper-oxide",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "copper oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1844857a/p2/1",
+            "quote": "I melt a mixture of pure copper oxide and one or more catalytic oxides such as are mentioned above, allow the mass to cool, break into fragments of suitable size, and finally reduce in hydrogen.",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "note": "oxidation state not stated"
+      }
+    },
+    {
+      "id": "ex:msyn/us1844857a/species/iron-carbonyl",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "iron carbonyl",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "continues 'in the gas mixture and eventually comes into contact with the catalyst'",
+            "passage": "us1844857a/p3/1",
+            "quote": "second reaction occurs, iron carbonyl collects",
+            "source": "ex:msyn/source/us1844857a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "continues '(line 30) ally present. These impurities should be carefully excluded if the best results are to be obtained.'",
+            "passage": "us1844857a/p3/2",
+            "quote": "For example, sulfur and phosphorus com- pounds, also, traces of iron carbonyl are usu-",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "note": "printed formula garbled (Fe(CO)?)"
+      }
+    },
+    {
+      "id": "ex:msyn/us1844857a/species/manganese-oxide",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "manganese oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example I",
+            "passage": "us1844857a/p2/2",
+            "quote": "Example I—A mixture comprising 8-9 parts copper oxide (calculated as metallic copper) and 1-2 parts manganese oxide (cal- culated as metallic manganese) is slowly fused under an electric arc or an oxy-hy- drogen torch.",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "note": "oxidation state not stated"
+      }
+    },
+    {
+      "id": "ex:msyn/us1844857a/species/phosphorus-compounds",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "phosphorus compounds",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "continues '(line 30) ally present. These impurities should be carefully excluded if the best results are to be obtained.'",
+            "passage": "us1844857a/p3/2",
+            "quote": "For example, sulfur and phosphorus com- pounds, also, traces of iron carbonyl are usu-",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "generality": "kind",
+        "species_kind": "other"
+      }
+    },
+    {
+      "id": "ex:msyn/us1844857a/species/reducible-oxide-of-heat-conducting-metal",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "readily reducible oxide of a good heat-conducting metal",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 1",
+            "passage": "us1844857a/p3/3",
+            "quote": "heat-conducting metal, to produce a uniform",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "generality": "kind",
+        "species_kind": "other"
+      }
+    },
+    {
+      "id": "ex:msyn/us1844857a/species/sulfur-compounds",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "sulfur compounds",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "continues '(line 30) ally present. These impurities should be carefully excluded if the best results are to be obtained.'",
+            "passage": "us1844857a/p3/2",
+            "quote": "For example, sulfur and phosphorus com- pounds, also, traces of iron carbonyl are usu-",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "generality": "kind",
+        "species_kind": "other"
+      }
+    },
+    {
+      "id": "ex:msyn/us1844857a/treatment/example-1",
+      "label": "Treatment",
+      "props": {
+        "name": "reduction in hydrogen at ordinary pressure",
+        "atmosphere": "hydrogen",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example I",
+            "note": "'2590—850° C.' is an OCR misreading of the reduction temperature interval",
+            "passage": "us1844857a/p2/2",
+            "quote": "The fused mass is allowed to cool, crushed and screened to size, and finally reduced in hydrogen at ordinary pressures and at temperatures within the interval 2590—850° C.",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "note": "temperature interval printed '2590—850° C.' (illegible OCR); claim 7 gives about 250 and 350° C. for the Cu-Mn catalyst",
+        "pressure": {
+          "status": "present",
+          "as_reported": "at ordinary pressures",
+          "text_value": "ordinary"
+        },
+        "treatment_kind": "reduction"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/reaction/co-hydrogenation-to-methanol/reported-in/us1844857a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/source/us1844857a"
+    },
+    {
+      "id": "ex:msyn/source/us1844857a/assignee",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "role": "assignee"
+      },
+      "source": "ex:msyn/source/us1844857a",
+      "target": "ex:msyn/institution/du-pont"
+    },
+    {
+      "id": "ex:msyn/us1844857a/analysis/equilibrium-300c-200atm/reported-in/us1844857a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1844857a/analysis/equilibrium-300c-200atm",
+      "target": "ex:msyn/source/us1844857a"
+    },
+    {
+      "id": "ex:msyn/us1844857a/analysis/equilibrium-near-atmospheric/reported-in/us1844857a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1844857a/analysis/equilibrium-near-atmospheric",
+      "target": "ex:msyn/source/us1844857a"
+    },
+    {
+      "id": "ex:msyn/us1844857a/catalyst/example-1/reported-in/us1844857a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, Example I"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1844857a/catalyst/example-1",
+      "target": "ex:msyn/source/us1844857a"
+    },
+    {
+      "id": "ex:msyn/us1844857a/catalyst/fused-cu-mn-oxide/reported-in/us1844857a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1844857a/catalyst/fused-cu-mn-oxide",
+      "target": "ex:msyn/source/us1844857a"
+    },
+    {
+      "id": "ex:msyn/us1844857a/catalyst/fused-cu-oxide-catalytic-oxide/reported-in/us1844857a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1844857a/catalyst/fused-cu-oxide-catalytic-oxide",
+      "target": "ex:msyn/source/us1844857a"
+    },
+    {
+      "id": "ex:msyn/us1844857a/catalyst/fused-heat-conducting-metal/reported-in/us1844857a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1844857a/catalyst/fused-heat-conducting-metal",
+      "target": "ex:msyn/source/us1844857a"
+    },
+    {
+      "id": "ex:msyn/us1844857a/catalyst/precipitated-cr-cu-oxide/reported-in/us1844857a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1844857a/catalyst/precipitated-cr-cu-oxide",
+      "target": "ex:msyn/source/us1844857a"
+    },
+    {
+      "id": "ex:msyn/us1844857a/claim/catalyst-and-conditions-needed/reported-in/us1844857a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1844857a/claim/catalyst-and-conditions-needed",
+      "target": "ex:msyn/source/us1844857a"
+    },
+    {
+      "id": "ex:msyn/us1844857a/claim/copper-lining/reported-in/us1844857a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1844857a/claim/copper-lining",
+      "target": "ex:msyn/source/us1844857a"
+    },
+    {
+      "id": "ex:msyn/us1844857a/claim/equilibrium-t-p/reported-in/us1844857a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1844857a/claim/equilibrium-t-p",
+      "target": "ex:msyn/source/us1844857a"
+    },
+    {
+      "id": "ex:msyn/us1844857a/claim/exclude-impurities/reported-in/us1844857a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1844857a/claim/exclude-impurities",
+      "target": "ex:msyn/source/us1844857a"
+    },
+    {
+      "id": "ex:msyn/us1844857a/claim/fused-method/reported-in/us1844857a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1844857a/claim/fused-method",
+      "target": "ex:msyn/source/us1844857a"
+    },
+    {
+      "id": "ex:msyn/us1844857a/claim/iron-carbonyl-harm/reported-in/us1844857a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1844857a/claim/iron-carbonyl-harm",
+      "target": "ex:msyn/source/us1844857a"
+    },
+    {
+      "id": "ex:msyn/us1844857a/claim/other-heat-conducting-metals/reported-in/us1844857a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1844857a/claim/other-heat-conducting-metals",
+      "target": "ex:msyn/source/us1844857a"
+    },
+    {
+      "id": "ex:msyn/us1844857a/claim/patent-claim-1/reported-in/us1844857a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1844857a/claim/patent-claim-1",
+      "target": "ex:msyn/source/us1844857a"
+    },
+    {
+      "id": "ex:msyn/us1844857a/claim/patent-claim-2/reported-in/us1844857a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1844857a/claim/patent-claim-2",
+      "target": "ex:msyn/source/us1844857a"
+    },
+    {
+      "id": "ex:msyn/us1844857a/claim/patent-claim-3/reported-in/us1844857a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1844857a/claim/patent-claim-3",
+      "target": "ex:msyn/source/us1844857a"
+    },
+    {
+      "id": "ex:msyn/us1844857a/claim/patent-claim-4/reported-in/us1844857a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1844857a/claim/patent-claim-4",
+      "target": "ex:msyn/source/us1844857a"
+    },
+    {
+      "id": "ex:msyn/us1844857a/claim/patent-claim-5/reported-in/us1844857a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1844857a/claim/patent-claim-5",
+      "target": "ex:msyn/source/us1844857a"
+    },
+    {
+      "id": "ex:msyn/us1844857a/claim/patent-claim-6/reported-in/us1844857a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1844857a/claim/patent-claim-6",
+      "target": "ex:msyn/source/us1844857a"
+    },
+    {
+      "id": "ex:msyn/us1844857a/claim/patent-claim-7/reported-in/us1844857a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1844857a/claim/patent-claim-7",
+      "target": "ex:msyn/source/us1844857a"
+    },
+    {
+      "id": "ex:msyn/us1844857a/claim/patent-claim-8/reported-in/us1844857a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 8"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1844857a/claim/patent-claim-8",
+      "target": "ex:msyn/source/us1844857a"
+    },
+    {
+      "id": "ex:msyn/us1844857a/claim/pressure-range/reported-in/us1844857a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1844857a/claim/pressure-range",
+      "target": "ex:msyn/source/us1844857a"
+    },
+    {
+      "id": "ex:msyn/us1844857a/claim/prior-art-shortcomings/reported-in/us1844857a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1844857a/claim/prior-art-shortcomings",
+      "target": "ex:msyn/source/us1844857a"
+    },
+    {
+      "id": "ex:msyn/us1844857a/claim/recycle/reported-in/us1844857a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1844857a/claim/recycle",
+      "target": "ex:msyn/source/us1844857a"
+    },
+    {
+      "id": "ex:msyn/us1844857a/claim/selectivity/reported-in/us1844857a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1844857a/claim/selectivity",
+      "target": "ex:msyn/source/us1844857a"
+    },
+    {
+      "id": "ex:msyn/us1844857a/hypothesis/copper-dissipates-heat/reported-in/us1844857a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1844857a/hypothesis/copper-dissipates-heat",
+      "target": "ex:msyn/source/us1844857a"
+    },
+    {
+      "id": "ex:msyn/us1844857a/hypothesis/narrow-catalyst-temperature/reported-in/us1844857a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1844857a/hypothesis/narrow-catalyst-temperature",
+      "target": "ex:msyn/source/us1844857a"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/1",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1844857a/p2/1",
+            "quote": "I melt a mixture of pure copper oxide and one or more catalytic oxides such as are mentioned above, allow the mass to cool, break into fragments of suitable size, and finally reduce in hydrogen.",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1844857a/catalyst/fused-cu-oxide-catalytic-oxide",
+      "target": "ex:msyn/us1844857a/species/copper-oxide"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/10",
+      "type": "PRODUCES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "continues 'product obtained will be methanol'; '800' is doubtful OCR",
+            "passage": "us1844857a/p2/3",
+            "quote": "lysts heated to 275-800° C., the principal",
+            "source": "ex:msyn/source/us1844857a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1844857a/p2/3",
+            "quote": "product obtained will be methanol.",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/catalyst/fused-cu-oxide-catalytic-oxide",
+      "target": "ex:msyn/species/ch3oh"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/11",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1844857a/p3/1",
+            "quote": "Since iron car- | bonyl decomposes at the temperature of the | active catalyst, deposition of 1ron upon the -",
+            "source": "ex:msyn/source/us1844857a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1844857a/p3/1",
+            "quote": "The iron carbonyl therefore — introduces an ingredient which is not favor- — able to methanol formation,",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "inhibition_kind": "not_stated",
+        "note": "iron carbonyl decomposes on the active catalyst and deposits iron"
+      },
+      "source": "ex:msyn/us1844857a/catalyst/fused-cu-oxide-catalytic-oxide",
+      "target": "ex:msyn/us1844857a/species/iron-carbonyl"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/12",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1844857a/p3/1",
+            "quote": "Since iron car- | bonyl decomposes at the temperature of the | active catalyst, deposition of 1ron upon the -",
+            "source": "ex:msyn/source/us1844857a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1844857a/p3/1",
+            "quote": "The iron carbonyl therefore — introduces an ingredient which is not favor- — able to methanol formation,",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "inhibition_kind": "not_stated"
+      },
+      "source": "ex:msyn/us1844857a/catalyst/fused-cu-oxide-catalytic-oxide",
+      "target": "ex:msyn/species/iron"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/13",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "continues '(line 30) ally present. These impurities should be carefully excluded if the best results are to be obtained.'",
+            "passage": "us1844857a/p3/2",
+            "quote": "For example, sulfur and phosphorus com- pounds, also, traces of iron carbonyl are usu-",
+            "source": "ex:msyn/source/us1844857a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1844857a/p3/2",
+            "quote": "carefully excluded if the best results are to be obtained.",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "inhibition_kind": "not_stated",
+        "note": "impurities of water gas to be carefully excluded for best results"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/us1844857a/species/sulfur-compounds"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/14",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "continues '(line 30) ally present. These impurities should be carefully excluded if the best results are to be obtained.'",
+            "passage": "us1844857a/p3/2",
+            "quote": "For example, sulfur and phosphorus com- pounds, also, traces of iron carbonyl are usu-",
+            "source": "ex:msyn/source/us1844857a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1844857a/p3/2",
+            "quote": "carefully excluded if the best results are to be obtained.",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "inhibition_kind": "not_stated",
+        "note": "impurities of water gas to be carefully excluded for best results"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/us1844857a/species/phosphorus-compounds"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/15",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "continues '(line 30) ally present. These impurities should be carefully excluded if the best results are to be obtained.'",
+            "passage": "us1844857a/p3/2",
+            "quote": "For example, sulfur and phosphorus com- pounds, also, traces of iron carbonyl are usu-",
+            "source": "ex:msyn/source/us1844857a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1844857a/p3/2",
+            "quote": "carefully excluded if the best results are to be obtained.",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "inhibition_kind": "not_stated"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/us1844857a/species/iron-carbonyl"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/19",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1844857a/p1/3",
+            "quote": "0.1% methanol can be formed.",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "role": "equilibrium computed"
+      },
+      "source": "ex:msyn/us1844857a/analysis/equilibrium-near-atmospheric",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/2",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1844857a/p2/1",
+            "quote": "I melt a mixture of pure copper oxide and one or more catalytic oxides such as are mentioned above, allow the mass to cool, break into fragments of suitable size, and finally reduce in hydrogen.",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1844857a/catalyst/fused-cu-oxide-catalytic-oxide",
+      "target": "ex:msyn/us1844857a/species/catalytic-oxide"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/20",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1844857a/p1/3",
+            "quote": "pressure, for example, 45% methanol forma- tion is possible.",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "role": "equilibrium computed"
+      },
+      "source": "ex:msyn/us1844857a/analysis/equilibrium-300c-200atm",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/21",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1844857a/p1/2",
+            "quote": "heat, it is obvious that the amount of methanol in an equilibrium mixture increases as the temperature of the reaction decreases.",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/claim/equilibrium-t-p",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/22",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "preceded by 'By means of calculations based on the Nernst heat' and the line number '30'",
+            "passage": "us1844857a/p1/2",
+            "quote": "theorem, it may be shown that the amounts of methanol in equilibrium with carbon mon- oxide and hydrogen at pressures near atmos- pheric are exceedingly small.",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/analysis/equilibrium-near-atmospheric",
+      "target": "ex:msyn/us1844857a/claim/equilibrium-t-p"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/23",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1844857a/p1/3",
+            "quote": "pressure, for example, 45% methanol forma- tion is possible.",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/analysis/equilibrium-300c-200atm",
+      "target": "ex:msyn/us1844857a/claim/equilibrium-t-p"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/24",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "line number '45' printed '5 eonditions' precedes",
+            "passage": "us1844857a/p1/3",
+            "quote": "the formation of methanol from carbon monoxide and hy- drogen proceeds with extreme slowness and suitable catalyzers must be employed before",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/claim/catalyst-and-conditions-needed",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/25",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "continues 'simultaneously and the oxide mixture reduced in hydrogen. None of these methods, however, has yielded satisfactory results.'",
+            "passage": "us1844857a/p1/5",
+            "quote": "For example, chromium oxide and copper oxide have been precipitated",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/claim/prior-art-shortcomings",
+      "target": "ex:msyn/us1844857a/catalyst/precipitated-cr-cu-oxide"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/26",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "continues 'simultaneously and the oxide mixture reduced in hydrogen. None of these methods, however, has yielded satisfactory results.'",
+            "passage": "us1844857a/p1/5",
+            "quote": "For example, chromium oxide and copper oxide have been precipitated",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/claim/prior-art-shortcomings",
+      "target": "ex:msyn/us1844857a/material/asbestos"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/27",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1844857a/p2/1",
+            "quote": "I melt a mixture of pure copper oxide and one or more catalytic oxides such as are mentioned above, allow the mass to cool, break into fragments of suitable size, and finally reduce in hydrogen.",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/claim/fused-method",
+      "target": "ex:msyn/us1844857a/catalyst/fused-cu-oxide-catalytic-oxide"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/28",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'carson' = carbon",
+            "passage": "us1844857a/p2/2",
+            "quote": "The catalysts produced by my improved method have been found-to permit a greater selectivity in the production of carson com-",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/claim/selectivity",
+      "target": "ex:msyn/us1844857a/catalyst/fused-cu-oxide-catalytic-oxide"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/29",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'carson' = carbon",
+            "passage": "us1844857a/p2/2",
+            "quote": "The catalysts produced by my improved method have been found-to permit a greater selectivity in the production of carson com-",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/claim/selectivity",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/3",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1844857a/p2/1",
+            "quote": "Now, I have discovered a method for pre- paring a metal oxide admixed with metallic copper, which results in the formation of a highly reactive catalyst well suited to the",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "role": "not_stated",
+        "role_detail": "metallic copper admixed with the metal oxide after reduction"
+      },
+      "source": "ex:msyn/us1844857a/catalyst/fused-cu-oxide-catalytic-oxide",
+      "target": "ex:msyn/species/copper"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/30",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "continues 'ample, iron, cobalt, or nickel, etc., (particularly in the synthesis of carbon compounds other than methanol) may be melted together with one or more catalytic oxides'",
+            "passage": "us1844857a/p2/5",
+            "quote": "readily reducible oxides of good heat conducting metals other than copper, for ex- 75",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/claim/other-heat-conducting-metals",
+      "target": "ex:msyn/us1844857a/catalyst/fused-heat-conducting-metal"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/31",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "continues 'ample, iron, cobalt, or nickel, etc., (particularly in the synthesis of carbon compounds other than methanol) may be melted together with one or more catalytic oxides'",
+            "passage": "us1844857a/p2/5",
+            "quote": "readily reducible oxides of good heat conducting metals other than copper, for ex- 75",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/claim/other-heat-conducting-metals",
+      "target": "ex:msyn/species/iron"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/32",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "continues 'ample, iron, cobalt, or nickel, etc., (particularly in the synthesis of carbon compounds other than methanol) may be melted together with one or more catalytic oxides'",
+            "passage": "us1844857a/p2/5",
+            "quote": "readily reducible oxides of good heat conducting metals other than copper, for ex- 75",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/claim/other-heat-conducting-metals",
+      "target": "ex:msyn/species/cobalt"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/33",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "continues 'ample, iron, cobalt, or nickel, etc., (particularly in the synthesis of carbon compounds other than methanol) may be melted together with one or more catalytic oxides'",
+            "passage": "us1844857a/p2/5",
+            "quote": "readily reducible oxides of good heat conducting metals other than copper, for ex- 75",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/claim/other-heat-conducting-metals",
+      "target": "ex:msyn/species/nickel"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/34",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1844857a/p2/6",
+            "quote": "When a suitable catalyst is employed, prac- tical yields of methanol can be obtained at pressures as low as 20 atmospheres.",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/claim/pressure-range",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/35",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1844857a/p2/6",
+            "quote": "When a suitable catalyst is employed, prac- tical yields of methanol can be obtained at pressures as low as 20 atmospheres.",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/claim/pressure-range",
+      "target": "ex:msyn/us1844857a/catalyst/fused-cu-oxide-catalytic-oxide"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/36",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1844857a/p2/7",
+            "quote": "In any catalytic process where the reaction is only partialiy completed, the product of the reaction must be sevarated",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/claim/recycle",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/37",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "continues 'in the gas mixture and eventually comes into contact with the catalyst'",
+            "passage": "us1844857a/p3/1",
+            "quote": "second reaction occurs, iron carbonyl collects",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/claim/iron-carbonyl-harm",
+      "target": "ex:msyn/us1844857a/species/iron-carbonyl"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/38",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "continues 'in the gas mixture and eventually comes into contact with the catalyst'",
+            "passage": "us1844857a/p3/1",
+            "quote": "second reaction occurs, iron carbonyl collects",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/claim/iron-carbonyl-harm",
+      "target": "ex:msyn/species/iron"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/39",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "continues 'in the gas mixture and eventually comes into contact with the catalyst'",
+            "passage": "us1844857a/p3/1",
+            "quote": "second reaction occurs, iron carbonyl collects",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/claim/iron-carbonyl-harm",
+      "target": "ex:msyn/us1844857a/catalyst/fused-cu-oxide-catalytic-oxide"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/4",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 1",
+            "passage": "us1844857a/p3/3",
+            "quote": "perature, to form a catalytic oxide intimately",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1844857a/catalyst/fused-heat-conducting-metal",
+      "target": "ex:msyn/us1844857a/species/catalytic-oxide"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/40",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "continues 'in the gas mixture and eventually comes into contact with the catalyst'",
+            "passage": "us1844857a/p3/1",
+            "quote": "second reaction occurs, iron carbonyl collects",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/claim/iron-carbonyl-harm",
+      "target": "ex:msyn/us1844857a/reaction/iron-carbonyl-formation"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/41",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1844857a/p3/1",
+            "quote": "wherever there is danger of carbon deposition or of carbonyl formation",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/claim/copper-lining",
+      "target": "ex:msyn/species/copper"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/42",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1844857a/p3/1",
+            "quote": "wherever there is danger of carbon deposition or of carbonyl formation",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/claim/copper-lining",
+      "target": "ex:msyn/species/carbon"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/43",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1844857a/p3/1",
+            "quote": "wherever there is danger of carbon deposition or of carbonyl formation",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/claim/copper-lining",
+      "target": "ex:msyn/us1844857a/species/iron-carbonyl"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/44",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "continues '(line 30) ally present. These impurities should be carefully excluded if the best results are to be obtained.'",
+            "passage": "us1844857a/p3/2",
+            "quote": "For example, sulfur and phosphorus com- pounds, also, traces of iron carbonyl are usu-",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/claim/exclude-impurities",
+      "target": "ex:msyn/us1844857a/species/sulfur-compounds"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/45",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "continues '(line 30) ally present. These impurities should be carefully excluded if the best results are to be obtained.'",
+            "passage": "us1844857a/p3/2",
+            "quote": "For example, sulfur and phosphorus com- pounds, also, traces of iron carbonyl are usu-",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/claim/exclude-impurities",
+      "target": "ex:msyn/us1844857a/species/phosphorus-compounds"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/46",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "continues '(line 30) ally present. These impurities should be carefully excluded if the best results are to be obtained.'",
+            "passage": "us1844857a/p3/2",
+            "quote": "For example, sulfur and phosphorus com- pounds, also, traces of iron carbonyl are usu-",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/claim/exclude-impurities",
+      "target": "ex:msyn/us1844857a/species/iron-carbonyl"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/5",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 1",
+            "passage": "us1844857a/p3/3",
+            "quote": "heat-conducting metal, to produce a uniform",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1844857a/catalyst/fused-heat-conducting-metal",
+      "target": "ex:msyn/us1844857a/species/reducible-oxide-of-heat-conducting-metal"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/51",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "continues 'of a catalyst for the methanol synthesis to its ability to dissipate heat as rapidly as it is liberated'",
+            "passage": "us1844857a/p2/4",
+            "quote": "Copper, being an excellent conductor of heat, may owe its beneficial action as a constituens }",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/hypothesis/copper-dissipates-heat",
+      "target": "ex:msyn/species/copper"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/52",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1844857a/p2/5",
+            "quote": "per was brought into very intimate contact with the catalytic material used.",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/hypothesis/copper-dissipates-heat",
+      "target": "ex:msyn/us1844857a/catalyst/fused-cu-oxide-catalytic-oxide"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/53",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1844857a/p2/4",
+            "quote": "distinguished from the apparent temperature",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/hypothesis/narrow-catalyst-temperature",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/54",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example I",
+            "passage": "us1844857a/p2/2",
+            "quote": "Example I—A mixture comprising 8-9 parts copper oxide (calculated as metallic copper) and 1-2 parts manganese oxide (cal- culated as metallic manganese) is slowly fused under an electric arc or an oxy-hy- drogen torch.",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "8-9 parts",
+          "basis": "calculated as metallic copper",
+          "lower": 8,
+          "unit": "1",
+          "upper": 9
+        },
+        "fraction_basis": "not_reported",
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1844857a/catalyst/example-1",
+      "target": "ex:msyn/us1844857a/species/copper-oxide"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/55",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example I",
+            "passage": "us1844857a/p2/2",
+            "quote": "Example I—A mixture comprising 8-9 parts copper oxide (calculated as metallic copper) and 1-2 parts manganese oxide (cal- culated as metallic manganese) is slowly fused under an electric arc or an oxy-hy- drogen torch.",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "1-2 parts",
+          "basis": "calculated as metallic manganese",
+          "lower": 1,
+          "unit": "1",
+          "upper": 2
+        },
+        "fraction_basis": "not_reported",
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1844857a/catalyst/example-1",
+      "target": "ex:msyn/us1844857a/species/manganese-oxide"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/56",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example I",
+            "passage": "us1844857a/p2/2",
+            "quote": "Example I—A mixture comprising 8-9 parts copper oxide (calculated as metallic copper) and 1-2 parts manganese oxide (cal- culated as metallic manganese) is slowly fused under an electric arc or an oxy-hy- drogen torch.",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/sample/example-1",
+      "target": "ex:msyn/us1844857a/catalyst/example-1"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/57",
+      "type": "PREPARED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example I",
+            "passage": "us1844857a/p2/2",
+            "quote": "Example I—A mixture comprising 8-9 parts copper oxide (calculated as metallic copper) and 1-2 parts manganese oxide (cal- culated as metallic manganese) is slowly fused under an electric arc or an oxy-hy- drogen torch.",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/sample/example-1",
+      "target": "ex:msyn/us1844857a/preparation/example-1"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/58",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "8-9 parts",
+          "basis": "calculated as metallic copper",
+          "lower": 8,
+          "unit": "1",
+          "upper": 9
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example I",
+            "passage": "us1844857a/p2/2",
+            "quote": "Example I—A mixture comprising 8-9 parts copper oxide (calculated as metallic copper) and 1-2 parts manganese oxide (cal- culated as metallic manganese) is slowly fused under an electric arc or an oxy-hy- drogen torch.",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1844857a/sample/example-1",
+      "target": "ex:msyn/us1844857a/species/copper-oxide"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/59",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "1-2 parts",
+          "basis": "calculated as metallic manganese",
+          "lower": 1,
+          "unit": "1",
+          "upper": 2
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example I",
+            "passage": "us1844857a/p2/2",
+            "quote": "Example I—A mixture comprising 8-9 parts copper oxide (calculated as metallic copper) and 1-2 parts manganese oxide (cal- culated as metallic manganese) is slowly fused under an electric arc or an oxy-hy- drogen torch.",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1844857a/sample/example-1",
+      "target": "ex:msyn/us1844857a/species/manganese-oxide"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/6",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 6",
+            "passage": "us1844857a/p3/5",
+            "quote": "uct of a fused mixture of copper oxide ‘and",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1844857a/catalyst/fused-cu-mn-oxide",
+      "target": "ex:msyn/us1844857a/species/copper-oxide"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/60",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example I",
+            "note": "'2590—850° C.' is an OCR misreading of the reduction temperature interval",
+            "passage": "us1844857a/p2/2",
+            "quote": "The fused mass is allowed to cool, crushed and screened to size, and finally reduced in hydrogen at ordinary pressures and at temperatures within the interval 2590—850° C.",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "order": 1
+      },
+      "source": "ex:msyn/us1844857a/sample/example-1",
+      "target": "ex:msyn/us1844857a/treatment/example-1"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/61",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 1",
+            "passage": "us1844857a/p3/2",
+            "quote": "melting together an oxide of a metal which is a member of the group consisting of titanium,",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/claim/patent-claim-1",
+      "target": "ex:msyn/us1844857a/catalyst/fused-heat-conducting-metal"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/62",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 1",
+            "passage": "us1844857a/p3/2",
+            "quote": "melting together an oxide of a metal which is a member of the group consisting of titanium,",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/claim/patent-claim-1",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/63",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 2",
+            "note": "claim 2 is printed '9.'",
+            "passage": "us1844857a/p3/3",
+            "quote": "an oxide of a metal having an atomic weight between 48 and 55, and a readily reducible oxide of a good heat-con-",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/claim/patent-claim-2",
+      "target": "ex:msyn/us1844857a/catalyst/fused-heat-conducting-metal"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/64",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 2",
+            "note": "claim 2 is printed '9.'",
+            "passage": "us1844857a/p3/3",
+            "quote": "an oxide of a metal having an atomic weight between 48 and 55, and a readily reducible oxide of a good heat-con-",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/claim/patent-claim-2",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/65",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 3",
+            "note": "claim 3 is printed '8.'",
+            "passage": "us1844857a/p3/4",
+            "quote": "melting together a metallic oxide capable of accelerating said reaction and copper oxide,",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/claim/patent-claim-3",
+      "target": "ex:msyn/us1844857a/catalyst/fused-cu-oxide-catalytic-oxide"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/66",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 3",
+            "note": "claim 3 is printed '8.'",
+            "passage": "us1844857a/p3/4",
+            "quote": "melting together a metallic oxide capable of accelerating said reaction and copper oxide,",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/claim/patent-claim-3",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/67",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 4",
+            "passage": "us1844857a/p3/4",
+            "quote": "said catalyst comprising an oxide which is a catalyst for said reaction, inti- mately associated with a good heat-conduct- ing metal,",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/claim/patent-claim-4",
+      "target": "ex:msyn/us1844857a/catalyst/fused-heat-conducting-metal"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/68",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 4",
+            "passage": "us1844857a/p3/4",
+            "quote": "said catalyst comprising an oxide which is a catalyst for said reaction, inti- mately associated with a good heat-conduct- ing metal,",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/claim/patent-claim-4",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/69",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 5",
+            "passage": "us1844857a/p3/5",
+            "quote": "said catalyst comprising an oxide of a metal which is a member of a group con- sisting of titanium, chromium, manganese,",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/claim/patent-claim-5",
+      "target": "ex:msyn/us1844857a/catalyst/fused-heat-conducting-metal"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/7",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 7",
+            "passage": "us1844857a/p3/6",
+            "quote": "uct of a fused mixture of copper oxide and an oxide of manganese, and obtained by re-",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1844857a/catalyst/fused-cu-mn-oxide",
+      "target": "ex:msyn/us1844857a/species/manganese-oxide"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/70",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 5",
+            "passage": "us1844857a/p3/5",
+            "quote": "said catalyst comprising an oxide of a metal which is a member of a group con- sisting of titanium, chromium, manganese,",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/claim/patent-claim-5",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/71",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 6",
+            "passage": "us1844857a/p3/5",
+            "quote": "said catalyst being the reduction prod- uct of a fused mixture of copper oxide ‘and an oxide of manganese.",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/claim/patent-claim-6",
+      "target": "ex:msyn/us1844857a/catalyst/fused-cu-mn-oxide"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/72",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 6",
+            "passage": "us1844857a/p3/5",
+            "quote": "said catalyst being the reduction prod- uct of a fused mixture of copper oxide ‘and an oxide of manganese.",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/claim/patent-claim-6",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/73",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 7",
+            "passage": "us1844857a/p3/6",
+            "quote": "in hydrogen at a temperature between about | 250 and 350° C.",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/claim/patent-claim-7",
+      "target": "ex:msyn/us1844857a/catalyst/fused-cu-mn-oxide"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/74",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 7",
+            "passage": "us1844857a/p3/6",
+            "quote": "in hydrogen at a temperature between about | 250 and 350° C.",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/claim/patent-claim-7",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/75",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 8",
+            "passage": "us1844857a/p3/6",
+            "quote": "A catalytic body comprising the reduc- tion product of a fused mixture of copper",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/claim/patent-claim-8",
+      "target": "ex:msyn/us1844857a/catalyst/fused-cu-oxide-catalytic-oxide"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/76",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 8",
+            "passage": "us1844857a/p3/6",
+            "quote": "A catalytic body comprising the reduc- tion product of a fused mixture of copper",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/claim/patent-claim-8",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/8",
+      "type": "COMPARED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "continues 'duction of methanol'",
+            "passage": "us1844857a/p1/6",
+            "quote": "have not been reactive at the low temperatures favorable to the pro-_",
+            "source": "ex:msyn/source/us1844857a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1844857a/p2/1",
+            "quote": "The gran- ules produced by this method are hard, co- herent, highly porous, and very reactive at relatively low temperatures.",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/catalyst/fused-cu-oxide-catalytic-oxide",
+      "target": "ex:msyn/us1844857a/catalyst/precipitated-cr-cu-oxide"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/9",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1844857a/p2/1",
+            "quote": "Now, I have discovered a method for pre- paring a metal oxide admixed with metallic copper, which results in the formation of a highly reactive catalyst well suited to the",
+            "source": "ex:msyn/source/us1844857a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1844857a/catalyst/fused-cu-oxide-catalytic-oxide",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1844857a/material/asbestos/reported-in/us1844857a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1844857a/material/asbestos",
+      "target": "ex:msyn/source/us1844857a"
+    },
+    {
+      "id": "ex:msyn/us1844857a/preparation/example-1/reported-in/us1844857a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, Example I"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1844857a/preparation/example-1",
+      "target": "ex:msyn/source/us1844857a"
+    },
+    {
+      "id": "ex:msyn/us1844857a/reaction/iron-carbonyl-formation/reported-in/us1844857a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1844857a/reaction/iron-carbonyl-formation",
+      "target": "ex:msyn/source/us1844857a"
+    },
+    {
+      "id": "ex:msyn/us1844857a/sample/example-1/reported-in/us1844857a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, Example I"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1844857a/sample/example-1",
+      "target": "ex:msyn/source/us1844857a"
+    },
+    {
+      "id": "ex:msyn/us1844857a/species/catalytic-oxide/reported-in/us1844857a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 3, claim 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1844857a/species/catalytic-oxide",
+      "target": "ex:msyn/source/us1844857a"
+    },
+    {
+      "id": "ex:msyn/us1844857a/species/copper-oxide/reported-in/us1844857a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1844857a/species/copper-oxide",
+      "target": "ex:msyn/source/us1844857a"
+    },
+    {
+      "id": "ex:msyn/us1844857a/species/iron-carbonyl/reported-in/us1844857a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1844857a/species/iron-carbonyl",
+      "target": "ex:msyn/source/us1844857a"
+    },
+    {
+      "id": "ex:msyn/us1844857a/species/manganese-oxide/reported-in/us1844857a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, Example I"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1844857a/species/manganese-oxide",
+      "target": "ex:msyn/source/us1844857a"
+    },
+    {
+      "id": "ex:msyn/us1844857a/species/phosphorus-compounds/reported-in/us1844857a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1844857a/species/phosphorus-compounds",
+      "target": "ex:msyn/source/us1844857a"
+    },
+    {
+      "id": "ex:msyn/us1844857a/species/reducible-oxide-of-heat-conducting-metal/reported-in/us1844857a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1844857a/species/reducible-oxide-of-heat-conducting-metal",
+      "target": "ex:msyn/source/us1844857a"
+    },
+    {
+      "id": "ex:msyn/us1844857a/species/sulfur-compounds/reported-in/us1844857a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1844857a/species/sulfur-compounds",
+      "target": "ex:msyn/source/us1844857a"
+    },
+    {
+      "id": "ex:msyn/us1844857a/treatment/example-1/reported-in/us1844857a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, Example I"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1844857a/treatment/example-1",
+      "target": "ex:msyn/source/us1844857a"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/us1844857a"
+}
