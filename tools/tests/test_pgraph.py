@@ -415,9 +415,9 @@ def test_a_value_that_is_not_a_finite_number_is_an_error():
     """NaN and infinity (which Python's JSON reader and YAML accept) are no numbers a source reports: a valid test
     whose temperature is made NaN, or infinite, fails validation, naming the path."""
     import copy
-    from conftest import EXAMPLES, GRAPH_MANIFEST
-    spec = pgraph.load_spec(GRAPH_MANIFEST)
+    from conftest import EXAMPLES, spec_of
     doc = load_doc(EXAMPLES / "scale-graph/example.json")
+    spec = spec_of(doc)                                          # the schema the document pins
     assert pgraph.validate(doc, spec).errors == []
     test = next(n for n in doc["nodes"] if n["label"] == "CatalyticTest")
     for bad in (float("nan"), float("inf"), float("-inf")):
