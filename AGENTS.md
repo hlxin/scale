@@ -10,11 +10,9 @@ SCALE has one data format: **scale-catal documents** (node-link JSON), each pinn
 follows (`graph.schema_version`). There is no workspace lock and nothing to upgrade; documents live in the
 working directory (`$SCALE_WORKSPACE`, default `~/.scale/workspace`).
 
-**scale-catal is not on PyPI yet.** Until its first release is published, `uvx scale-catal …` does not resolve
-to this project (and could run a package someone else registers under that name). In a checkout of this
-repository run `uv run scale call <tool> '<json>'` (MCP: `uv run scale mcp`); elsewhere run
-`uvx --from /path/to/scale scale-catal …` (or `--from git+https://github.com/hlxin/scale`, with access to the
-repository). Use the plain `uvx scale-catal …` form only once a release is on PyPI.
+**scale-catal is on PyPI** (from release v0.2.0): `uvx scale-catal …` runs the latest release, `uvx
+scale-catal@0.2.0 …` a pinned one. In a checkout of this repository run `uv run scale call <tool> '<json>'` (MCP:
+`uv run scale mcp`) to use the code as it is on the branch.
 
 - **The schema** has two layers, the science kernel (`core/graph/kernel.yaml`) and the catalysis domain,
   whose graph schema manifest (`domain/graph/scale-catal.yaml`) assembles the kernel with one catalysis file

@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- **scale-catal is on PyPI** from v0.2.0 (`uvx scale-catal …`); the documents no longer say it is not.
 ## v0.2.0 — 2026-10-11
 
 Schema 0.2.0, renamed `scale-catal` (breaking: the name only; documents at 0.1.0 migrate with `scale graph migrate`),
