@@ -28,12 +28,13 @@ import calendar
 import copy
 import hashlib
 import json
+import math
 import re
 from collections import Counter
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any
+from typing import Any, Iterator
 
 from . import layout
 from .util import ScaleError, dump_canonical, load_yaml, match_text
@@ -465,6 +466,12 @@ class Validator:
             if nid in ids:
                 rep.add("error", nid, "duplicate id")
             ids[nid] = n.get("label")
+        # a number a source reports is finite: NaN and infinity (which Python's JSON reader and YAML accept) are not
+        for rid, where, body in [("<graph>", "graph", g), *((str(r.get("id")), "props", r.get("props"))
+                                                          for r in [*doc["nodes"], *doc["links"]] if isinstance(r, dict))]:
+            for path in _nonfinite(body, where):
+                rep.add("error", rid, f"{path} is not a finite number (NaN or infinity): a value is a number the source "
+                                      "states, or a status")
         gp = self.spec["format"]["graph_props"]
         self.check_props(g, gp["properties"], gp["required"], "<graph>", rep, ids)
         if g.get("schema_version") and g["schema_version"] != self.spec["version"]:
@@ -1214,6 +1221,18 @@ def expected_reported_in(doc: dict) -> dict[str, set]:
         if srcs:
             out[n["id"]] = srcs
     return out
+
+
+def _nonfinite(x: Any, path: str) -> Iterator[str]:
+    """The paths in ``x`` (a record's properties, nested maps and lists) that hold NaN or an infinity."""
+    if isinstance(x, float) and not math.isfinite(x):
+        yield path
+    elif isinstance(x, dict):
+        for k, v in x.items():
+            yield from _nonfinite(v, f"{path}.{k}")
+    elif isinstance(x, list):
+        for i, v in enumerate(x):
+            yield from _nonfinite(v, f"{path}[{i}]")
 
 
 def derive_reported_in(doc: dict) -> list[dict]:

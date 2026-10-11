@@ -410,3 +410,21 @@ def test_a_long_chain_is_checked_for_cycles_without_recursion():
     back = _cyclic(chain + [(f"ex:t/step/{n}", "ex:t/step/0")])
     assert len(back) == 1 and back[0].startswith("ex:t/step/0 -> ex:t/step/1 -> ") and back[0].endswith(" -> ex:t/step/0")
 
+
+def test_a_value_that_is_not_a_finite_number_is_an_error():
+    """NaN and infinity (which Python's JSON reader and YAML accept) are no numbers a source reports: a valid test
+    whose temperature is made NaN, or infinite, fails validation, naming the path."""
+    import copy
+    from conftest import EXAMPLES, GRAPH_MANIFEST
+    spec = pgraph.load_spec(GRAPH_MANIFEST)
+    doc = load_doc(EXAMPLES / "scale-graph/example.json")
+    assert pgraph.validate(doc, spec).errors == []
+    test = next(n for n in doc["nodes"] if n["label"] == "CatalyticTest")
+    for bad in (float("nan"), float("inf"), float("-inf")):
+        d = copy.deepcopy(doc)
+        t = next(n for n in d["nodes"] if n["id"] == test["id"])
+        t["props"]["temperature"] = {**t["props"]["temperature"], "value": bad}
+        msgs = [(e["record"], e["message"]) for e in pgraph.validate(d, spec).errors]
+        assert (test["id"], "props.temperature.value is not a finite number (NaN or infinity): a value is a number "
+                            "the source states, or a status") in msgs, bad
+
