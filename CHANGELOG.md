@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+## v0.2.0 — 2026-10-11
+
+Schema 0.2.0, renamed `scale-catal` (breaking: the name only; documents at 0.1.0 migrate with `scale graph migrate`),
+the `scale-catal` tools 0.2.0 and the skills; graphs kept as one part per source, and a fully open methanol example
+with its public-domain sources, PDFs and page texts.
+
 - **A graph kept as one part per source; a fully open methanol example.** `scale graph split` writes a graph as
   `parts/` (the header, the shared records, one file per source) and `scale graph build` builds it back, sorted by id;
   every command reads such a folder as one graph. The methanol graph splits and builds back to the identical file.
