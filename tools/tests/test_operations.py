@@ -70,7 +70,10 @@ def test_who_may_start_the_agents_and_what_workflows_may_write():
     assert job["permissions"]["contents"] == "read"
     action = next(s for s in job["steps"] if str(s.get("uses", "")).startswith("anthropics/claude-code-action"))
     assert "trigger_phrase" not in action["with"] and "label_trigger" not in action["with"]
-    assert "Task," in action["with"]["claude_args"] and "git push origin agent/" in action["with"]["claude_args"]
+    args = action["with"]["claude_args"]
+    assert "Agent," in args and ",Bash\"" in args
+    for denied in ("git push origin main", "gh pr merge", "gh pr review", "gh api", "gh secret", "gh workflow", "git tag"):
+        assert f"Bash({denied}:*)" in args, denied
     assert "github.event.issue.body" not in wf.read_text() and "github.event.comment.body" not in wf.read_text()
     roles = {p.stem: load_yaml_front(p) for p in sorted((REPO / ".github/scale-agents/roles").glob("*.md"))}
     assert set(roles) == {"data-scientist", "protocol-compiler", "evidence-verifier", "systems-engineer"}
