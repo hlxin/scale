@@ -379,7 +379,7 @@ def test_a_shipped_text_is_a_plain_file_in_text(tmp_path, head):
     doc = build()
     next(n for n in doc["nodes"] if n["id"] == SRC)["props"]["doi"] = "10.0000/invented"
     out = tmp_path / "deep" / "b"
-    for name in ("../../outside.txt", "sub/paper.txt", "/tmp/abs.txt", "..", "_manifest.json"):
+    for name in ("../../outside.txt", "sub/paper.txt", "/tmp/abs.txt", "..", "_manifest.json", "_MANIFEST.JSON"):
         with pytest.raises(ScaleError, match="plain file name"):
             kgbundle.export(doc, head, out, "texts", texts={"10.0000/invented": (name, TEXT, "CC-BY-4.0")},
                             created="2026-10-06T00:00:00Z")
