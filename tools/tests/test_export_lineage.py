@@ -179,6 +179,25 @@ def test_a_released_publication_keeps_its_id_when_a_later_source_shares_its_segm
     assert m["changes"]["nodes_removed"] == 0 and m["changes"]["edges_removed"] == 0
 
 
+def test_two_records_whose_bundle_ids_would_meet_get_distinct_ids(tmp_path, head):
+    """Two catalysts named copper whose scale-graph ids' digests share their first six characters: the first keeps
+    the short id, the second's digest grows, and both are exported."""
+    import hashlib
+    doc = build()
+    cat = next(n for n in doc["nodes"] if n["id"] == f"{T}/catalyst/cu")
+    a, b = "ex:exmpl/collide/1072", "ex:exmpl/collide/3480"
+    assert hashlib.sha256(a.encode()).hexdigest()[:6] == hashlib.sha256(b.encode()).hexdigest()[:6]
+    for nid in (a, b):
+        doc["nodes"].append({**copy.deepcopy(cat), "id": nid})
+    kgbundle.export(doc, head, tmp_path / "b", "ids", created="2026-10-06T00:00:00Z")
+    by = _by_scale(tmp_path / "b")
+    digest = hashlib.sha256(b.encode()).hexdigest()
+    assert by[a]["id"] == f"Catalyst:copper-{hashlib.sha256(a.encode()).hexdigest()[:6]}"
+    assert by[b]["id"] == f"Catalyst:copper-{digest[:16]}"
+    ids = [n["id"] for n in _graph(tmp_path / "b")["nodes"]]
+    assert len(ids) == len(set(ids))
+
+
 def test_parallel_links_with_other_values_are_listed_never_merged(tmp_path, head):
     """Two links of one type between the same records, from one source, share an edge id. The same values merge
     their evidence; other values (a second amount) leave the second link out, listed in the export report, so the
