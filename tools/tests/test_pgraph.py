@@ -384,3 +384,17 @@ def test_a_query_returns_the_properties_of_a_bound_link(head):
     assert res["status"] == "answered" and {"working", "counter"} <= roles, res
     gap = pgraph_query.run(doc, head, {**plan, "return": ["u.no_such"]})
     assert gap["status"] == "schema_gap" and "USES_ELECTRODE.no_such is not declared" in gap["schema_gaps"]
+
+
+def test_reported_in_links_of_sources_ending_alike_get_distinct_ids():
+    """A record citing ex:a/paper and ex:b/paper gets two REPORTED_IN links with distinct ids (the sources' whole ids);
+    one citing a single source keeps the short id."""
+    ev = lambda src: {"source": src, "locator": "p. 1", "kind": "text", "quote": "q"}          # noqa: E731
+    doc = {"nodes": [{"id": "ex:t/claim/1", "label": "Claim", "props": {"evidence": [ev("ex:a/paper"), ev("ex:b/paper")]}},
+                     {"id": "ex:t/claim/2", "label": "Claim", "props": {"evidence": [ev("ex:a/paper")]}}], "links": []}
+    links = pgraph.derive_reported_in(doc)
+    ids = [x["id"] for x in links]
+    assert len(ids) == len(set(ids)) == 3
+    assert set(ids) == {"ex:t/claim/1/reported-in/ex:a/paper", "ex:t/claim/1/reported-in/ex:b/paper",
+                        "ex:t/claim/2/reported-in/paper"}
+
