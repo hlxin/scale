@@ -13,7 +13,7 @@ published, use the checkout or git form below (`uvx --from …`). The command ta
 exits 0 on success and 1 when the result is an error (which is still printed as JSON).
 
 - **Pin a version** so the same command gives the same behaviour every time:
-  `uvx scale-catal@0.1.0 call …` (see [Staying current](#staying-current)).
+  `uvx scale-catal@0.2.0 call …` (see [Staying current](#staying-current)).
 - **MCP** (Claude Code, Claude Desktop and other MCP hosts): `claude mcp add scale -- uvx scale-catal mcp`,
   or register the command `uvx scale-catal mcp` in your host's MCP settings.
 - **Install once instead:** `pip install scale-catal`, then call `scale call …` directly.
@@ -54,7 +54,7 @@ tools from a schema file. JSON Schema is the format most function-calling interf
 ## Skills (procedures) for systems that load instruction files
 
 ```bash
-uvx scale-catal@0.1.0 skills install <your-agent-skills-folder>
+uvx scale-catal@0.2.0 skills install <your-agent-skills-folder>
 ```
 
 This copies the versioned `SKILL.md` procedures that the latest release lists (`--release <id>` for
@@ -119,7 +119,7 @@ rather than inventing one), and the potentiostatic baseline at −1.4 V vs Ag/Ag
 
 | what | pinned by | how it updates |
 |---|---|---|
-| the **tool** (the `scale` package, with the schemas it bundles) | the version in the command (`scale-catal@0.1.0`) | change the version; without a pin, `uvx --refresh scale-catal …` fetches the newest |
+| the **tool** (the `scale` package, with the schemas it bundles) | the version in the command (`scale-catal@0.2.0`) | change the version; without a pin, `uvx --refresh scale-catal …` fetches the newest |
 | the **schema version** a document follows | the document itself (`graph.schema_version`) | `scale call migrate` (or `scale graph migrate`) moves it to a newer version when you ask |
 
 A newer tool keeps every earlier schema version (its frozen copies, once a schema change has moved the schema on), so a document is

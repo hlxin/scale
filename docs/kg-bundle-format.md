@@ -66,4 +66,4 @@ a bundle over the native document.
 
 | bundle | version | graph | edges | notes |
 |---|---|---|---:|---|
-| [`methanol-synthesis-pre1966_v2.0.0.zip`](../examples/methanol-synthesis-pre1966/methanol-synthesis-pre1966_v2.0.0.zip) | 2.0.0 | the methanol example | 17,563 | schema scale-catal 0.1.0; titled "Methanol Synthesis CO/CO2+H2 Pre-1966"; follows 1.1.1 (its schema was the graph's subset, named after the bundle), 1.1.0 and 1.0.0; 3,274 substantive edges rest only on withheld quotes; 227 typed absences |
+| [`methanol-synthesis-pre1966_v3.0.0.zip`](../examples/methanol-synthesis-pre1966/methanol-synthesis-pre1966_v3.0.0.zip) | 3.0.0 | the methanol example | 17,563 | schema scale-catal 0.2.0; titled "Methanol Synthesis CO/CO2+H2 Pre-1966"; follows 2.0.0 (schema scale-catal 0.1.0), 1.1.1 (its schema was the graph's subset, named after the bundle), 1.1.0 and 1.0.0; 3,274 substantive edges rest only on withheld quotes; 227 typed absences |

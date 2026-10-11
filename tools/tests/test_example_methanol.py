@@ -161,7 +161,7 @@ def test_the_corpus_is_one_checked_manifest_with_local_pdfs(manifest):
     assert all(s["slug"] == s["doi"].replace("/", "-") for s in inscope if s.get("doi"))
     assert "pdfs/" in (EX / ".gitignore").read_text().split()
     assert sorted(p.name for p in EX.iterdir() if not p.name.startswith(".") and p.name not in ("pdfs", "work")) == [
-        "README.md", "methanol-synthesis-pre1966_v2.0.0.zip", "methanol-synthesis.graph.json", "queries", "rights.yaml",
+        "README.md", "methanol-synthesis-pre1966_v3.0.0.zip", "methanol-synthesis.graph.json", "queries", "rights.yaml",
         "sources.json", "stewardship.yaml"]
 
 
@@ -171,20 +171,21 @@ def test_the_bundle_is_this_graph_sealed():
     import hashlib
     import json
     import zipfile
-    z = zipfile.ZipFile(EX / "methanol-synthesis-pre1966_v2.0.0.zip")
-    root = "methanol-synthesis-pre1966_v2.0.0/"
+    z = zipfile.ZipFile(EX / "methanol-synthesis-pre1966_v3.0.0.zip")
+    root = "methanol-synthesis-pre1966_v3.0.0/"
     assert {n.split("/")[0] for n in z.namelist()} == {root.rstrip("/")}
     sums = dict(reversed(line.split("  ", 1)) for line in z.read(root + "SHA256SUMS").decode().splitlines())
     assert all(hashlib.sha256(z.read(root + f)).hexdigest() == h for f, h in sums.items())
     m = json.loads(z.read(root + "bundle.json"))
     assert (m["format_version"], m["bundle_id"], m["version"], m["previous"]["version"]) == (
-        "1.1.0", "methanol-synthesis-pre1966", "2.0.0", "1.1.1")
-    # the bundle was exported from the graph at schema 0.1.0, before the graph was migrated to 0.2.0 (the rename of
-    # scale-graph to scale-catal, which changed no record); it stays a sealed release until it is exported again
+        "1.1.0", "methanol-synthesis-pre1966", "3.0.0", "2.0.0")
+    # exported from the graph at the schema it pins (the head)
     from scale import pgraph
-    assert (m["schema_id"], m["schema_version"]) == ("scale-catal", "0.1.0")
-    assert m["scale_header"]["schema_sha256"] == pgraph.spec_sha256(pgraph.load_spec(pgraph.frozen_spec(
-        pgraph.spec_path(REPO), "0.1.0")))
+    pinned = load_doc(GRAPH)["graph"]["schema_version"]
+    assert (m["schema_id"], m["schema_version"]) == ("scale-catal", pinned)
+    head = pgraph.spec_path(REPO)
+    spec = head if str(pgraph.load_spec(head)["version"]) == pinned else pgraph.frozen_spec(head, pinned)
+    assert m["scale_header"]["schema_sha256"] == pgraph.spec_sha256(pgraph.load_spec(spec))
     title = load_doc(GRAPH)["graph"]["title"]          # a platform names the imported graph after the bundle's title
     assert m["topic"] == title == "Methanol Synthesis CO/CO2+H2 Pre-1966" and len(title) <= 40
     graph = z.read(root + "kg/graph.json")

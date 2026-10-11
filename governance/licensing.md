@@ -84,7 +84,7 @@ of the graph), `project` (the record's project), `institution` (the contributing
 header gives the default and a record may override it field by field (`scale graph filter` shows a viewer
 what they may see).
 
-- **Everything committed is public, explicitly.** Every scale-graph document in the repository states
+- **Everything committed is public, explicitly.** Every scale-catal document in the repository states
   `access: public` for its graph and leaves every record public (`scale evidence access`, a step of
   `scale check`). A missing access is not public: the visibility rule reads it as `institution`.
 - **Project data stays out until cleared.** Data that its project partners have not cleared for
@@ -117,6 +117,6 @@ data follows sections 3 and 4.
   (GitHub's "Cite this repository" renders it); tagged releases will be archived with a DOI.
 - **Attribution under CC-BY-4.0**: "SCALE contributors", the title of the material, a link to
   `https://github.com/hlxin/scale` (or the release), the licence, and whether you changed
-  it. For a schema, name its version and spec digest (`scale-graph 0.1.0`, catalysis); for a record, its id and release.
+  it. For a schema, name its version and spec digest (`scale-catal 0.2.0`, catalysis); for a record, its id and release.
 - **The sources behind a record**: cite the publications its evidence names, not only SCALE.
 - Who is credited in releases, and authorship of publications: [credit-and-authorship.md](credit-and-authorship.md).

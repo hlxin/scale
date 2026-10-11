@@ -75,7 +75,7 @@ A version number only means something within this repository, so identify a sche
 (`scale graph spec` prints it).
 
 **Documents from the earlier contents of github.com/hlxin/scale.** This repository replaced them (its own
-scale-catal numbering 0.1.0-0.8.0, package scale-catalysis); versions here restart at 0.1.0 and are a separate
+scale-graph numbering 0.1.0-0.8.0, package scale-catalysis); versions here restart at 0.1.0 and are a separate
 line. Re-curate documents from there; do not validate them as they are.
 
 ## Contribute

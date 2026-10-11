@@ -15,8 +15,8 @@ An official release `vX.Y.Z` is:
 | part | where |
 |---|---|
 | the science kernel | `core/` (`CORE.yaml`, the kernel and its frozen versions), copied and digested into `releases/vX.Y.Z/` |
-| the catalysis domain | `domain/DOMAIN.yaml`, the one entry of `domain_profiles` in `scale-release.yaml`, with its schema manifest (`graph/scale-graph.yaml`), every part it lists and its frozen versions, copied and digested. The two layers stay separate: there is no repository-wide composition |
-| the spec documents | every version of the released schema as a spec document (`specs/<domain>/scale-graph-<version>.json`) with its sha256, the digest a reader binds a schema by |
+| the catalysis domain | `domain/DOMAIN.yaml`, the one entry of `domain_profiles` in `scale-release.yaml`, with its schema manifest (`graph/scale-catal.yaml`), every part it lists and its frozen versions, copied and digested. The two layers stay separate: there is no repository-wide composition |
+| the spec documents | every version of the released schema as a spec document (`specs/<domain>/scale-catal-<version>.json`) with its sha256, the digest a reader binds a schema by |
 | validators and tools | the Python package `scale-catal` X.Y.Z on PyPI, built from the tagged commit, with the bundled skills |
 | documentation | the documentation in the tagged commit `vX.Y.Z` |
 | the release manifest | `releases/vX.Y.Z/RELEASE.yaml` |

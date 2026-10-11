@@ -46,7 +46,7 @@ repository). Use the plain `uvx scale-catal …` form only once a release is on 
   newer one when the user asks. If `status.updates` reports a newer tool, tell the user once; never
   update on your own.
 - **Schema identity:** a version number names a schema only within this repository's numbering. This repository
-  replaced the earlier contents of github.com/hlxin/scale (its own scale-catal numbering 0.1.0-0.8.0,
+  replaced the earlier contents of github.com/hlxin/scale (its own scale-graph numbering 0.1.0-0.8.0,
   package scale-catalysis); versions here restart at 0.1.0 and are a separate line. Bind a schema by its spec
   digest (`scale graph spec`; `scale graph spec --expect <sha256>` checks a version and digest you hold). A
   document that pins a version the tools do not hold is reported as such; never read it under another version of

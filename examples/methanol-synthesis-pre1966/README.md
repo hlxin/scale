@@ -12,7 +12,7 @@ and tests run on it (`tools/tests/test_example_methanol.py`).
 | `methanol-synthesis.graph.json` | The curated graph, valid under scale-catal 0.2.0 (migrated from scale-graph 0.1.0 by `scale graph migrate`; only the pin changed): 4,866 nodes, 16,584 links, 684 catalytic tests, 25,239 evidence items. The baseline until the recuration replaces it. |
 | `rights.yaml`, `stewardship.yaml` | Each source's rights (the copyright cap), and who curated the graph for which project. |
 | `queries/*.yaml` | The manuscript's questions as query plans. |
-| `methanol-synthesis-pre1966_v2.0.0.zip` | The graph as a knowledge-graph bundle ([kg-bundle format](../../docs/kg-bundle-format.md) 1.1.0), ready to load into a platform that reads the format, titled "Methanol Synthesis CO/CO2+H2 Pre-1966", its schema scale-catal 0.1.0 (named scale-graph 0.1.0 when it was exported; the catalysis vocabulary of that version): 17,563 edges, withheld quotes as digests, 227 typed absences; it follows release 1.1.1. |
+| `methanol-synthesis-pre1966_v3.0.0.zip` | The graph as a knowledge-graph bundle ([kg-bundle format](../../docs/kg-bundle-format.md) 1.1.0), ready to load into a platform that reads the format, titled "Methanol Synthesis CO/CO2+H2 Pre-1966", its schema scale-catal 0.2.0: 17,563 edges, withheld quotes as digests, 227 typed absences; it follows release 2.0.0 (schema 0.1.0). |
 
 A slug is the source's DOI with `/` written as `-` (`10.1021/ie50225a025` → `10.1021-ie50225a025.pdf`); a patent
 without a DOI uses its number (`us1625925a`), a thesis or report its corpus id (`hid-20028`). Source records in the
