@@ -80,7 +80,9 @@ silently: comment on the thread with what you tried, what blocked it and what a 
    extraction error, source information, new source, competency question, tooling).
 4. **Do it** on a branch `agent/<issue>-<short>` from `origin/main`; on your own pull request (its branch starts with
    `agent/`), check out that branch and push the fixes a review or comment asks for. On anyone else's pull request,
-   reply with your findings and push nothing. The data scientist proposes the patch and its evidence record; the
+   reply with your findings and push nothing. **Save as you go:** after each role hands back, commit its work and push the
+   branch (`git push origin agent/…`), so that a run cut off by its time limit leaves the work for the next run, which
+   continues from that branch instead of starting again. The data scientist proposes the patch and its evidence record; the
    protocol compiler writes the tests with their expected outcomes.
 5. **Verify.** Hand the branch to `evidence-verifier`. Send what it reports back to the role that did the work and
    verify again; after three rounds without a pass, open no pull request and say on the thread what is unresolved.
