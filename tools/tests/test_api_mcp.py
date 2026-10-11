@@ -234,6 +234,30 @@ def test_a_same_size_replacement_keeping_its_timestamp_is_read_again(tk):
     assert tk.call("scale_query", {"path": "electro.json", "plan": plan})["rows"][0]["values"]["t.name"] == renamed
 
 
+def test_changing_a_description_never_changes_the_kept_schema(tk):
+    """scale_describe returns parts of no kept schema: appending to a returned required list, or to the overview's
+    ancestry, leaves the next validation and description as they were."""
+    tk.call("scale_example", {"name": "electro"})
+    before = tk.call("scale_validate", {"path": "electro.json"})
+    d = tk.call("scale_describe", {"names": ["CatalyticTest"], "domain": "catalysis"})
+
+    def grow(x):
+        if isinstance(x, dict):
+            for v in x.values():
+                grow(v)
+        elif isinstance(x, list):
+            for v in x:
+                grow(v)
+            x.append("description")
+
+    grow(d)
+    overview = tk.call("scale_describe", {"domain": "catalysis"})
+    grow(overview)
+    assert tk.call("scale_validate", {"path": "electro.json"}) == before
+    assert tk.call("scale_describe", {"names": ["CatalyticTest"], "domain": "catalysis"}) != d
+    assert "description" not in tk.call("scale_describe", {"domain": "catalysis"})["labels"]["CatalyticTest"]["is_a"]
+
+
 def test_changing_an_answer_never_changes_the_loaded_document(tk):
     """A query's result shares no object with the document the toolkit keeps loaded: scrambling every value of one
     answer leaves the next answer, and the document's digest, as they were."""

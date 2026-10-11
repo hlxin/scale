@@ -28,6 +28,7 @@ Design rules
 
 from __future__ import annotations
 
+import copy
 import os
 import re
 import shutil
@@ -400,14 +401,14 @@ class ScaleToolkit:
         if names:
             return pgraph.describe(spec, list(names), profile)
         first = lambda t: (t or "").strip().split("\n")[0]   # noqa: E731
-        return {"schema_version": spec["version"], "domain": domain,
+        return copy.deepcopy({"schema_version": spec["version"], "domain": domain,
                 "labels": {n: {"is_a": d.get("ancestors") or [], "description": first(d.get("description"))}
                            for n, d in sorted(spec["nodes"].items())},
                 "edges": {n: {"from": d.get("from"), "to": d.get("to"), "description": first(d.get("description"))}
                           for n, d in sorted(spec["edges"].items())},
                 "checklists": sorted(spec.get("profiles") or {}),
                 "value_fields": sorted(spec["value"]["fields"]), "evidence_fields": sorted(spec["evidence"]["fields"]),
-                "next": "scale_describe with names (and domain) for properties and the checklist items"}
+                "next": "scale_describe with names (and domain) for properties and the checklist items"})
 
     def _scale_template(self, domain: str | None = None) -> dict:
         from . import pgraph
