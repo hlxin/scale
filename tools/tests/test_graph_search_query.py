@@ -424,7 +424,7 @@ def test_describe_shows_what_a_domain_uses(spec):
     assert "role" in d["edges"]["HAS_COMPONENT"]["properties"]
     assert d["labels"]["CatalyticTest"]["defined_in"] == "catalysis" and "module" not in d["labels"]["CatalyticTest"]
     assert pgraph.describe(spec, ["Operation"])["labels"]["Operation"]["defined_in"] == "kernel"
-    with pytest.raises(ScaleError, match="unknown domain or profile 'thermocatalysis'"):
+    with pytest.raises(ScaleError, match="unknown domain 'thermocatalysis'"):
         pgraph.describe(spec, ["CatalyticTest"], profile="thermocatalysis")
     with pytest.raises(ScaleError):
         pgraph.describe(spec, ["NoSuchLabel"])
