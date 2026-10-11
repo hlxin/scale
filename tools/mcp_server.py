@@ -90,7 +90,7 @@ class MCPServer:
                 continue
             try:
                 msg = json.loads(line)
-            except json.JSONDecodeError:
+            except (ValueError, RecursionError):     # not JSON, an integer too long to read, nesting too deep
                 self._send(stdout, {"jsonrpc": "2.0", "id": None, "error": {"code": -32700, "message": "parse error"}})
                 continue
             batch = msg if isinstance(msg, list) else [msg]
