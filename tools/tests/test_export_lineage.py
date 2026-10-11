@@ -424,6 +424,39 @@ def test_a_bundle_is_never_written_over_the_release_it_follows(tmp_path, head):
     assert m["changes"]["nodes_changed"] >= 1
 
 
+def test_no_file_is_written_through_a_link_into_the_release_followed(tmp_path, head):
+    """An output folder whose kg/ is a link to the previous release's kg/ passes a check of the folders alone; every
+    path the export writes is checked, so it is refused and the previous release is left as it was."""
+    import os
+    kgbundle.export(build(), head, tmp_path / "v1", "links", created="2026-10-06T00:00:00Z")
+    before = (tmp_path / "v1/kg/graph.json").read_bytes()
+    (tmp_path / "next").mkdir()
+    os.symlink(tmp_path / "v1" / "kg", tmp_path / "next" / "kg")
+    doc = build()
+    doc["nodes"][1]["props"]["name"] = "copper, renamed"
+    with pytest.raises(ScaleError, match="is a link"):
+        kgbundle.export(doc, head, tmp_path / "next", "links", "1.1.0", created="2026-10-06T00:00:00Z",
+                        previous=tmp_path / "v1")
+    assert (tmp_path / "v1/kg/graph.json").read_bytes() == before
+
+
+def test_a_refused_export_leaves_the_folder_as_it_was(tmp_path, head):
+    """An export refused late (two sources with one DOI) has removed nothing: the texts an earlier export shipped
+    into the folder are still there, with their manifest."""
+    doc = build()
+    next(n for n in doc["nodes"] if n["id"] == SRC)["props"]["doi"] = "10.0000/invented"
+    kgbundle.export(doc, head, tmp_path / "b", "refused", created="2026-10-06T00:00:00Z",
+                    texts={"10.0000/invented": ("paper.txt", TEXT, "CC-BY-4.0")})
+    before = {q.relative_to(tmp_path).as_posix(): q.read_bytes() for q in (tmp_path / "b").rglob("*") if q.is_file()}
+    twin = copy.deepcopy(next(n for n in doc["nodes"] if n["id"] == SRC))
+    twin["id"] = "ex:exmpl/other/source/twin"
+    doc["nodes"].append(twin)
+    with pytest.raises(ScaleError, match="share the identifier"):
+        kgbundle.export(doc, head, tmp_path / "b", "refused", created="2026-10-06T00:00:00Z")
+    after = {q.relative_to(tmp_path).as_posix(): q.read_bytes() for q in (tmp_path / "b").rglob("*") if q.is_file()}
+    assert after == before and "b/text/paper.txt" in after
+
+
 def test_the_cli_export_records_the_previous_release_and_the_merged_records(tmp_path, capsys):
     f = tmp_path / "doc.json"
     doc = build()
