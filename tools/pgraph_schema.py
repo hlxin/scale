@@ -15,8 +15,9 @@ constrain (see ``pgraph_profiles``).
 The schema has one version: the manifest's ``version``, for the kernel and the domain files together. The
 kernel and the domain files carry no version of their own (a ``version:`` in one is an error); every part
 reports the manifest's. Besides ``domains``, a manifest may list vocabulary-only files under ``modules`` (a
-file keyed ``module:``, without a checklist), extension files that only add vocabulary (``extensions``) and
-profile files that only constrain (``profiles``); a domain file may import another (``imports``), and may carry
+file keyed ``module:``, without a checklist) and extension files that only add vocabulary (``extensions``); there
+are no profile files (retired by design: a domain file carries its checklist, and a manifest listing ``profiles``
+is refused). A domain file may import another (``imports``), and may carry
 *bridges* that apply only when another named file is loaded.
 
 The effective schema has the same shape as a monolithic spec (``nodes``, ``edges``, ``value``, …),
@@ -89,6 +90,9 @@ def assemble_manifest(man: dict, base: Path) -> dict:
     """Assemble a manifest given as data, its paths relative to ``base`` (``scale domains check``
     composes an experimental domain's files with the kernel without writing a manifest)."""
     version = man.get("version")                 # the one version of the schema: every part reports it
+    if man.get("profiles"):
+        raise ScaleError("profile files (`profiles:`) are retired by design: a domain file carries its checklist "
+                         "(`checklist:`), and documents follow it with follows_domains")
     kernel = load_yaml(layout.kernel_path(base, man["kernel"]))
     if "version" in kernel:
         raise ScaleError(f"{man['kernel']}: the kernel carries no version of its own; the schema's one version is the "
@@ -317,8 +321,7 @@ def assemble_manifest(man: dict, base: Path) -> dict:
                        for n, m in mods.items()}
     spec["extension_prefixes"] = _registry(base)
     from .pgraph_profiles import domain_contract, load_profiles
-    spec["profiles"] = load_profiles([base / p for p in man.get("profiles") or []]
-                                     + [domain_contract(d, rel) for rel, d in domain_files], spec)
+    spec["profiles"] = load_profiles([domain_contract(d, rel) for rel, d in domain_files], spec)   # the checklists
     spec["domains"] = {d["domain"]: {"version": d["version"], "title": d.get("title"), "driving_forces": d.get("driving_forces") or [],
                                      "replaces": d.get("replaces") or {}, "path": rel} for rel, d in domain_files}
     return spec

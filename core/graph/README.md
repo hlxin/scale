@@ -39,9 +39,10 @@ reads the catalysis manifest (or `--spec`) and then the head or the frozen copy 
 `scale graph verify` checks that the manifest and its frozen versions load and that every frozen directory
 matches its `SHA256SUMS`.
 
-A manifest may also list vocabulary-only files (`modules:`), optional vocabularies (`extensions:`) and
-profile files that only constrain (`profiles:`, followed through `conforms_to`); the loader reads them, and
-`scale domains check` keeps a domain's own manifest to `domains:`.
+A manifest may also list vocabulary-only files (`modules:`) and optional vocabularies (`extensions:`); the loader
+reads them, and `scale domains check` keeps a domain's own manifest to `domains:`. There are no profile files: they
+are retired by design. A domain file carries its checklist, documents follow it with `follows_domains`, and a manifest
+that lists `profiles:` is refused.
 
 ## How a domain file builds on the kernel
 

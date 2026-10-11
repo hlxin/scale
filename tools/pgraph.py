@@ -526,7 +526,7 @@ class Validator:
         if source_texts:
             self.check_quotes(doc, source_texts, rep)
         rep.counts = {"nodes": len(doc["nodes"]), "links": len(doc["links"])}
-        declared = any(g.get(k) or any((n.get("props") or {}).get(k) for n in doc["nodes"]) for k in ("conforms_to", "follows_domains"))
+        declared = any(g.get(k) or any((n.get("props") or {}).get(k) for n in doc["nodes"]) for k in ("follows_domains",))
         if declared and self.spec.get("profiles") is not None:
             from .pgraph_profiles import conformance
             rep.conformance = conformance(doc, self.spec)
@@ -1356,7 +1356,7 @@ def _extensions_for(spec: dict, profile: str | None) -> set[str] | None:
         return None
     name = profile.split("@")[0]
     if name not in spec["profiles"]:
-        raise ScaleError(f"unknown domain or profile {profile!r}; known: {sorted(spec['profiles'])}")
+        raise ScaleError(f"unknown domain {profile!r}; known: {sorted(spec['profiles'])}")
     forces = set(spec["profiles"][name]["driving_forces"])
     if not forces:
         return None

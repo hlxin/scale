@@ -134,8 +134,8 @@ def manifest_path(name: str | None = None) -> str:
 def graph_files(repo: Path, name: str, m: dict) -> list[str]:
     """The domain's scale-graph files, relative to the domain directory: the entries of its manifest
     (DOMAIN.yaml ``graph.manifest``) that lie inside the domain (``check`` reports the others).
-    A domain's manifest lists them under ``domains``; the keys of frozen forms (``modules``,
-    ``extensions``, ``profiles``) are read too, so that ``check`` sees and refuses them."""
+    A domain's manifest lists them under ``domains``; the keys of frozen forms (``modules``, ``extensions``) and of
+    retired profile files (``profiles``) are read too, so that ``check`` sees and refuses them."""
     import os
     from .schema_change import PACKAGE_KEYS
     base = Path(repo) / layout.DOMAIN
@@ -622,10 +622,13 @@ def _check_manifest(repo: Path, name: str, manifest: Path, pb: Problems, where: 
     if man.get("schema") != "scale-graph" or not is_manifest(man) or not isinstance(man.get("domains"), list):
         pb.error(where, f"{mrel} is not a domain's scale-graph manifest (schema: scale-graph, kernel, domains)")
         return None
-    for key in ("modules", "extensions", "profiles"):
+    for key in ("modules", "extensions"):
         if key in man:
             pb.error(where, f"{mrel}: `{key}:` is a form of frozen versions; a domain's manifest lists its files under "
                             "`domains:`")
+    if "profiles" in man:
+        pb.error(where, f"{mrel}: `profiles:` lists profile files, which are retired by design; the domain file carries "
+                        "its checklist")
     try:
         kernel = rel_of(layout.manifest_kernel(manifest, str(man["kernel"])))
         listed = {rel_of(manifest.parent / str(x)) for key in ("modules", "extensions", "profiles", "domains")

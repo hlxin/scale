@@ -1,12 +1,14 @@
-"""scale-graph conformance contracts: domain checklists and profile files over the vocabulary.
+"""scale-graph conformance contracts: the domain files' checklists over the vocabulary.
 
-A domain file's checklist (``must``, ``should``) is turned into the same contract as a profile file. A contract never adds labels, edge types or properties, and never loosens the vocabulary. It can:
+A domain file's checklist (``must``, ``should``) is turned into a contract (named after the domain; the conformance
+report lists contracts under ``profiles``, its historical key). There are no profile files: they are retired by
+design. A contract never adds labels, edge types or properties, and never loosens the vocabulary. It can:
 - make a property required or recommended on a label (an abstract label applies to every label
   that is_a it);
 - narrow the units a value may carry and the values an enum may take;
 - require or recommend outgoing edges of a type, and properties on those edges;
 - exempt some records from a label's constraints: ``unless: {test_kind: [equilibrium_estimate]}``
-  (a computed equilibrium needs no catalyst or feed). Merged profiles keep an
+  (a computed equilibrium needs no catalyst or feed). Merged checklists keep an
   exemption only when every one of them grants it, so a merge is never looser than either side;
 - apply some items only to the records they describe: ``when`` lists cases, each a condition on a
   list (or enum) property of the record and the items that hold when it is met, e.g.
@@ -15,11 +17,11 @@ A domain file's checklist (``must``, ``should``) is turned into the same contrac
   block is evaluated on the edge's source record. Items of a case that does not match are not
   checked and do not count towards completeness; a label's ``unless`` exempts its cases too. The
   catalysis domain's one checklist keys its cases on a test's ``driving_forces``.
-A profile may be a profile of other profiles (``profile_of``); their constraints apply as well.
+A checklist may include the checklists of other domain files (``includes``, kept as ``profile_of``); their
+constraints apply as well.
 
 A document declares the domains it follows in ``graph.follows_domains`` (a node may override that
-with its own ``follows_domains``), as ``name`` or ``name@version``; a schema with profile files uses
-``conforms_to`` for them. Validity (the kernel and the domain's vocabulary) and conformance
+with its own ``follows_domains``), as ``name`` or ``name@version``. Validity (the kernel and the domain's vocabulary) and conformance
 (checklists) are reported separately: a valid document can fail a checklist, and that is itself an
 answer about what its sources report.
 """
@@ -100,17 +102,18 @@ def domain_contract(dom: dict, rel: str) -> dict:
             "_path": rel, "_domain": True}
 
 
-def load_profiles(paths: list, spec: dict) -> dict:
-    """Profile files and domain checklists (dicts from ``domain_contract``)."""
+def load_profiles(contracts: list, spec: dict) -> dict:
+    """The domain files' checklists (``domain_contract``), resolved with the checklists they include. (There are no
+    profile files: they are retired by design.)"""
     raw = {}
-    for p in paths:
-        pr = dict(p) if isinstance(p, dict) else load_yaml(p)
+    for p in contracts:
+        pr = dict(p)
         extra = set(pr) - PROFILE_KEYS - {"_path", "_domain"}
         if extra:
             raise ScaleError(f"{pr.get('_path') or p.name}: unknown profile keys {sorted(extra)}")
         if pr["profile"] in raw:
             raise ScaleError(f"profile {pr['profile']} is listed twice")
-        pr.setdefault("_path", p.name if not isinstance(p, dict) else pr.get("_path"))
+        pr.setdefault("_path", pr.get("_path"))
         raw[pr["profile"]] = pr
     out = {}
     for name in raw:
@@ -354,10 +357,9 @@ def _filled(v) -> tuple[bool, str | None]:
 
 
 def declared_key(doc: dict) -> str:
-    """Which declaration a document uses: follows_domains (domains) or conforms_to (profile files)."""
-    uses_domains = "follows_domains" in (doc.get("graph") or {}) or any(
-        "follows_domains" in (n.get("props") or {}) for n in doc.get("nodes") or [])
-    return "follows_domains" if uses_domains else "conforms_to"
+    """The declaration a document follows checklists by: follows_domains (profile files and their conforms_to are
+    retired by design)."""
+    return "follows_domains"
 
 
 def refs_of(p: dict, default: list, key: str) -> list:
@@ -366,13 +368,13 @@ def refs_of(p: dict, default: list, key: str) -> list:
 
 
 def conformance(doc: dict, spec: dict, by_record: bool = False) -> dict:
-    """Check every node against the domain checklists it follows (``follows_domains``; profile files
-    through ``conforms_to``): its own declaration, else the graph's. ``by_record`` also reports, per
+    """Check every node against the domain checklists it follows (``follows_domains``): its own declaration, else
+    the graph's. ``by_record`` also reports, per
     checklist, each node's own outcome (``records``: checked, violations, should filled and expected,
     the should items it misses), its outgoing edges' included; the totals are the same either way."""
     profiles = spec.get("profiles") or {}
     key = declared_key(doc)
-    what = "domain" if key == "follows_domains" else "profile"
+    what = "domain"
     default = (doc.get("graph") or {}).get(key) or []
     out: dict = {}
     problems: list[str] = []
