@@ -2,8 +2,8 @@
 
 ## Unreleased
 
-- **Package 0.2.0, with the schema renamed.** The package version follows the schema to 0.2.0 (the next release is
-  v0.2.0). The methanol example's bundle is re-exported at schema scale-catal 0.2.0 (`methanol-synthesis-pre1966_v3.0.0.zip`,
+- **Package 0.2.0, with the schema renamed.** The package version is raised to 0.2.0 for the next release, v0.2.0
+  (the package and the schema keep their own versions; here both move). The methanol example's bundle is re-exported at schema scale-catal 0.2.0 (`methanol-synthesis-pre1966_v3.0.0.zip`,
   following 2.0.0; 17,563 edges, unchanged), and the governance documents name the schema `scale-catal`.
 - **Breaking: the schema `scale-graph` is renamed `scale-catal` (0.1.0 -> 0.2.0, issue #16).** The kernel
   `scale-graph-kernel` is `scale-kernel`; the manifest is `domain/graph/scale-catal.yaml`, the examples are in
