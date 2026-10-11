@@ -1,0 +1,170 @@
+distribution: scale-catal
+framework: SCALE — Shared Concepts, Attributes, and Links with Evidence
+release: v0.2.0
+status: released
+schema_version: 0.2.0
+core: core/CORE.yaml
+domain_profiles:
+- domain/DOMAIN.yaml
+skills:
+- skills/curate-source
+- skills/query-graph
+- skills/evolve-schema
+- skills/triage-feedback
+- skills/scan-conflicts
+- skills/map-coverage
+- skills/curate-dataset
+- skills/export-graph
+date: '2026-10-11'
+previous: v0.1.0
+comparison_to_previous:
+  kernel:
+    classification: breaking
+    from: 0.1.0
+    to: 0.2.0
+    changed:
+    - 'kernel name: scale-graph-kernel -> scale-kernel'
+  domains:
+    catalysis:
+      classification: breaking
+      from: 0.1.0
+      to: 0.2.0
+      changed:
+      - 'schema name: scale-graph -> scale-catal'
+      - 'kernel name: scale-graph-kernel -> scale-kernel'
+  classification: breaking
+  files:
+    added:
+    - core/graph/frozen/SHA256SUMS
+    - core/graph/frozen/kernel-0.1.0.yaml
+    - domain/graph/frozen/SHA256SUMS
+    - domain/graph/frozen/scale-catal-0.1.0.yaml
+    - domain/graph/frozen/v0.1.0/catalysis.yaml
+    - domain/graph/scale-catal.yaml
+    - skills/curate-dataset/SKILL.md
+    - skills/curate-source/SKILL.md
+    - skills/curate-source/references/recipes.md
+    - skills/evolve-schema/SKILL.md
+    - skills/export-graph/SKILL.md
+    - skills/map-coverage/SKILL.md
+    - skills/query-graph/SKILL.md
+    - skills/scan-conflicts/SKILL.md
+    - skills/triage-feedback/SKILL.md
+    - skills/triage-feedback/proposal.schema.json
+    - specs/catalysis/scale-catal-0.1.0.json
+    - specs/catalysis/scale-catal-0.2.0.json
+    removed:
+    - domain/graph/scale-graph.yaml
+    - specs/catalysis/scale-graph-0.1.0.json
+    - tools/skills/curate-dataset/SKILL.md
+    - tools/skills/curate-source/SKILL.md
+    - tools/skills/curate-source/references/recipes.md
+    - tools/skills/evolve-schema/SKILL.md
+    - tools/skills/export-graph/SKILL.md
+    - tools/skills/map-coverage/SKILL.md
+    - tools/skills/query-graph/SKILL.md
+    - tools/skills/scan-conflicts/SKILL.md
+    - tools/skills/triage-feedback/SKILL.md
+    - tools/skills/triage-feedback/proposal.schema.json
+    changed:
+    - core/CORE.yaml
+    - core/graph/kernel.yaml
+    - domain/DOMAIN.yaml
+built_with:
+  tool: scale
+  version: 0.2.0
+source:
+  repository: https://github.com/hlxin/scale
+  tag: v0.2.0
+component_versions:
+  schema:
+    version: 0.2.0
+  core:
+    name: scale-core
+    version: 0.2.0
+  kernel:
+    file: core/graph/kernel.yaml
+    version: 0.2.0
+  domains:
+  - domain: catalysis
+    version: 0.2.0
+    status: stable
+    scale_graph:
+      manifest: domain/graph/scale-catal.yaml
+      version: 0.2.0
+      status: candidate
+  tool:
+    package: scale-catal
+    version: 0.2.0
+  skills:
+  - name: curate-source
+    version: 0.1.0
+  - name: query-graph
+    version: 0.1.0
+  - name: evolve-schema
+    version: 0.2.0
+  - name: triage-feedback
+    version: 0.1.0
+  - name: scan-conflicts
+    version: 0.1.0
+  - name: map-coverage
+    version: 0.1.0
+  - name: curate-dataset
+    version: 0.1.0
+  - name: export-graph
+    version: 0.1.0
+contributors:
+- name: Hongliang Xin
+  github: hlxin
+  roles:
+  - steward
+  scopes:
+  - core
+  - catalysis
+- name: Tianyou Mou
+  github: mutianyou2013
+  roles:
+  - maintainer
+  scopes:
+  - core
+  - catalysis
+- name: Raul Diaz
+  github: diazr04
+  roles:
+  - maintainer
+  scopes:
+  - core
+  - catalysis
+excluded_domains: []
+spec_documents:
+- domain: catalysis
+  version: 0.1.0
+  file: specs/catalysis/scale-catal-0.1.0.json
+  sha256: 3c2fa7205a7bae5e0bbfa7d87826ff7ab7803e78536129064101c7d5a2c02006
+- domain: catalysis
+  version: 0.2.0
+  file: specs/catalysis/scale-catal-0.2.0.json
+  sha256: 166bfc5539df7f44de075a4fb504c54170af32d6b3a01a916d6171bfcecec714
+digests:
+  core/CORE.yaml: c17a366c055bd0f50cb2d86a6a5d935d928f0cefa62a1d97b73456495ab6cc50
+  core/graph/frozen/SHA256SUMS: 5dab1fd0ae1cc153d1f10c733b99ad7139b5352d397f16a474f74a5cca8dda6e
+  core/graph/frozen/kernel-0.1.0.yaml: c15027db4aac5bc339a0bc5cc0f47d740225f49503a76ac64a0f9a03dd21a31b
+  core/graph/kernel.yaml: 4f5ac82ddd97ee533b54e20e10e50be6c8c7b992d3b6796dd70d184f31ac3323
+  domain/DOMAIN.yaml: ba7423ff42b1b0a465608b0cf3eab215a220391ec947d9c9adc6cc6e0ad14c30
+  domain/graph/catalysis.yaml: 6b2d3e6a93e1fd0502b14db57b8a5e76f7194ca5d19be7f97e7f4a660909e630
+  domain/graph/frozen/SHA256SUMS: 672fc4c4e4b3c2a3470812dade89b225a69022c7e549489baeacce6048ed1595
+  domain/graph/frozen/scale-catal-0.1.0.yaml: 28007408d4d3610d6ae6efd06516c19209e8b412104705f5988d900c471542d8
+  domain/graph/frozen/v0.1.0/catalysis.yaml: 6b2d3e6a93e1fd0502b14db57b8a5e76f7194ca5d19be7f97e7f4a660909e630
+  domain/graph/scale-catal.yaml: 20bd1045db1113f9e2570c659ba482ba455d254b0098459d28aaaef592335ba1
+  skills/curate-dataset/SKILL.md: b2449d316bcd3386a2f944d5afce383ca24a3e0ce6f1a7d504fb6e6090e6f867
+  skills/curate-source/SKILL.md: 26ac58a9be8715a99c1e2b80c1e58ec4f060ce9a189fa161b03a6d863c477c63
+  skills/curate-source/references/recipes.md: f5bd8e261040913d928bd1e592a42969f5b7a4d26ea3af9721085e7691f08885
+  skills/evolve-schema/SKILL.md: 4782db1ffa73131a5b15f926bff61da2698991ece6c299b6e8474f4ab238ac7c
+  skills/export-graph/SKILL.md: bdc57c704fb5b7c2c2824b604d49747ff1904672241d543666514d1823268d87
+  skills/map-coverage/SKILL.md: 1ebff2586cdb361eaa6085a2a39302521e51a52c53f55073c715e2a2139224e2
+  skills/query-graph/SKILL.md: 8bd34d3ff06fafecbaa95f0edf55db195db2949665d2a4165bbab65c98149e80
+  skills/scan-conflicts/SKILL.md: ace891f7bd6bce78e8115b1830b496a53ef16f4b4761cf2bd86ac2c197b0d72e
+  skills/triage-feedback/SKILL.md: f08dbcb1227e1c03ffd6d515b20db8307060a3862f2a51d7727e0cb89a573b4d
+  skills/triage-feedback/proposal.schema.json: b4c4044b8c0ae8ac97181ce2921ec0fdf4297d1ca7a72e5695df236d8951fd33
+  specs/catalysis/scale-catal-0.1.0.json: 3c2fa7205a7bae5e0bbfa7d87826ff7ab7803e78536129064101c7d5a2c02006
+  specs/catalysis/scale-catal-0.2.0.json: 166bfc5539df7f44de075a4fb504c54170af32d6b3a01a916d6171bfcecec714
