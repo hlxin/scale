@@ -122,3 +122,13 @@ def test_the_names_and_the_rules():
     # this file spells none of the names it refuses
     own = (REPO / THIS).read_text()
     assert not R1.search(own) and not R3.search(own) and OLD_PACKAGE not in own
+
+
+def test_history_keeps_the_names_things_had():
+    """The repository this one replaced numbered its own scale-graph schemas 0.1.0-0.8.0. A rename of the schema (to
+    scale-catal from 0.2.0) never reaches that history: a sentence about the past keeps the old name."""
+    import re
+    for f in ("AGENTS.md", "README.md", "governance/repository-settings.md"):
+        text = re.sub(r"\s+", " ", (REPO / f).read_text())
+        assert "scale-graph numbering 0.1.0-0.8.0" in text, f
+        assert "scale-catal numbering 0.1.0-0.8.0" not in text, f

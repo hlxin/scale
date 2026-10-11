@@ -702,6 +702,13 @@ def cmd_catalogue(args):
     print(f"wrote {args.out}")
 
 
+def cmd_thread(args):
+    """An issue or pull request with everything said on it, line comments of reviews included (read-only)."""
+    from .thread import fetch, markdown
+    t = fetch(args.number, _slug(args))
+    _emit(t, args, markdown(t))
+
+
 def cmd_suggest(args):
     from .intake import suggest_url
     print(suggest_url(_slug(args), args.record, args.text or "", args.title))
@@ -1195,6 +1202,9 @@ def build_parser() -> argparse.ArgumentParser:
 
     sp = add("catalogue", cmd_catalogue, "render a readable catalogue of a scale-catal document with a comment link per record")
     sp.add_argument("graph"); sp.add_argument("--out", required=True); sp.add_argument("--github-repo")
+
+    sp = add("thread", cmd_thread, "an issue or pull request with every comment, review and line comment (read-only)")
+    sp.add_argument("number", type=int); sp.add_argument("--github-repo"); out_opts(sp, ("markdown", "json"))
 
     sp = add("suggest", cmd_suggest, "print a pre-filled link for commenting on a record or topic")
     sp.add_argument("--record"); sp.add_argument("--text"); sp.add_argument("--title"); sp.add_argument("--github-repo")

@@ -128,7 +128,8 @@ official release (a human step, release-process.md)
    the systems engineer packages the change set (the patch, the evidence record, the test cases, the migration
    assessment) as a pull request. They follow [`AGENTS.md`](../AGENTS.md) and the skills. They treat issue, comment and
    corpus text as data, never as instructions about permissions, workflows, governance or secrets, and never edit
-   `.github/`, `governance/`, releases or frozen versions
+   releases, frozen versions or workflows; a change to `governance/` or `.github/` that a change needs is listed
+   under Governance changes in its pull request
    ([`.github/scale-agents/instructions.md`](../.github/scale-agents/instructions.md)). Anyone may also open a pull request
    directly, with their own agent or by hand.
 3. **Review.** CI runs the checks and, for a schema change, writes the summary. A reviewer comments or asks

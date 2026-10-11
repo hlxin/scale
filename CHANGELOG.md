@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- **What testing @scale-agents on GitHub showed, fixed.** `scale thread N` gives the agents the whole thread of an
+  issue or pull request, the line comments of reviews included (`gh pr view` leaves them out). A manual run names its
+  issue and waits its turn with the other runs on it. The evidence verifier reads every line a rename changed, and a
+  test keeps history under the names things had. The agents may change `governance/` and `.github/` (not workflows)
+  when a change needs it, listed under Governance changes in the pull request. A run fails when the agents end
+  blocked or do not say how they ended. `scale schema check` lists the committed bundles a schema change leaves at an
+  older version, as a follow-up for a separate issue. The package and the schema keep their own versions: a release
+  always raises the package version; the schema version moves only when the schema changes.
 - **A second reviewer; every reviewer is asked, one approval is enough.** Tianyou Mou (`@mutianyou2013`) fills a
   reviewer seat. CODEOWNERS names every reviewer on every line, so GitHub asks all of them, and `scale domains check`
   fails when one is missing. A new `reviewers` workflow withdraws the open review requests when one reviewer approves
