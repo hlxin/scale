@@ -164,6 +164,21 @@ def test_sources_sharing_an_id_segment_get_distinct_publication_ids(tmp_path, he
         kgbundle.export(doc, head, tmp_path / "d", "ids", created="2026-10-06T00:00:00Z")
 
 
+def test_a_released_publication_keeps_its_id_when_a_later_source_shares_its_segment(tmp_path, head):
+    """A source released as Publication:scale:paper keeps that id in the next release when a new source ending in
+    /paper is added; only the new source is keyed by its whole id."""
+    kgbundle.export(build(), head, tmp_path / "v1", "ids", created="2026-10-06T00:00:00Z")
+    doc = build()
+    other = copy.deepcopy(next(n for n in doc["nodes"] if n["id"] == SRC))
+    other["id"], other["props"]["title"] = "ex:exmpl/other/source/paper", "Another invented paper"
+    doc["nodes"].append(other)
+    m = kgbundle.export(doc, head, tmp_path / "v2", "ids", "1.1.0", created="2026-10-06T00:00:00Z", previous=tmp_path / "v1")
+    pubs = {n["props"]["title"]: n["id"] for n in _graph(tmp_path / "v2")["nodes"] if n["label"] == "Publication"}
+    assert pubs == {"An invented paper on copper": "Publication:scale:paper",
+                    "Another invented paper": "Publication:scale:ex:exmpl/other/source/paper"}
+    assert m["changes"]["nodes_removed"] == 0 and m["changes"]["edges_removed"] == 0
+
+
 def test_parallel_links_with_other_values_are_listed_never_merged(tmp_path, head):
     """Two links of one type between the same records, from one source, share an edge id. The same values merge
     their evidence; other values (a second amount) leave the second link out, listed in the export report, so the

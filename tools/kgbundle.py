@@ -752,23 +752,6 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
             return f"patent:{p['identifiers']['patent'].lower()}"
         return "scale:" + n["id"].rsplit("/", 1)[-1]
 
-    # a source without a DOI or patent number is keyed by the last segment of its id, the whole id where two
-    # sources share that segment (ex:a/source/1, ex:b/source/1); two sources with one DOI or patent number are two
-    # records of one publication, which the bundle cannot tell apart: refused
-    by_key: dict[str, list[str]] = {}
-    for sid in sorted(sources):
-        by_key.setdefault(_pub_key(sources[sid]), []).append(sid)
-    pub_keys: dict[str, str] = {}
-    for k, sids in by_key.items():
-        if len(sids) > 1 and not k.startswith("scale:"):
-            raise ScaleError(f"sources {', '.join(sids)} share the identifier {k}: one publication is one Source record "
-                             "(merge them), or give each its own identifier")
-        for sid in sids:
-            pub_keys[sid] = k if len(sids) == 1 else f"scale:{sid}"
-
-    def pub_key(n: dict) -> str:
-        return pub_keys[n["id"]]
-
     gid: dict[str, str] = {}
     frozen: dict[str, str] = {}             # ids are frozen at first release: reuse the previous release's id
     kept_replaced: dict[str, list[str]] = {}  # replaced_ids stay on the survivor in later releases
@@ -780,6 +763,33 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
                 frozen[n["props"]["scale_id"]] = n["id"]
             if n.get("props", {}).get("replaced_ids"):
                 kept_replaced[n["id"]] = n["props"]["replaced_ids"]
+
+    # a source without a DOI or patent number is keyed by the last segment of its id, or the key an earlier release
+    # gave it, which stays; a new source whose segment another source holds (ex:a/source/1, ex:b/source/1), or
+    # that a released source's key holds, is keyed by its whole id. Two sources with one DOI or patent number are
+    # two records of one publication, which the bundle cannot tell apart: refused
+    pub_keys: dict[str, str] = {}
+    by_key: dict[str, list[str]] = {}
+    for sid in sorted(sources):
+        k = _pub_key(sources[sid])
+        released = frozen.get(sid, "")
+        if k.startswith("scale:") and released.startswith("Publication:scale:"):
+            pub_keys[sid] = released.removeprefix("Publication:")
+        else:
+            by_key.setdefault(k, []).append(sid)
+    taken = set(pub_keys.values())
+    for k, sids in sorted(by_key.items()):
+        if len(sids) > 1 and not k.startswith("scale:"):
+            raise ScaleError(f"sources {', '.join(sids)} share the identifier {k}: one publication is one Source record "
+                             "(merge them), or give each its own identifier")
+        for sid in sids:
+            pub_keys[sid] = k if len(sids) == 1 and k not in taken else f"scale:{sid}"
+    if len(set(pub_keys.values())) != len(pub_keys):
+        raise ScaleError("two sources would share a Publication id; give one of them a DOI or a patent number")
+
+    def pub_key(n: dict) -> str:
+        return pub_keys[n["id"]]
+
     for n in doc["nodes"]:
         if n["id"] in frozen and n["label"] != "Source" and frozen[n["id"]].split(":", 1)[0] == n["label"]:
             gid[n["id"]] = frozen[n["id"]]
