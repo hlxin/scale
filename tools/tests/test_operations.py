@@ -80,10 +80,10 @@ def test_who_may_start_the_agents_and_what_workflows_may_write():
     event, and by hand only from main; the job token only reads the contents (the team pushes with the Claude GitHub
     App's token); the discovery strategist's instructions and every other role are installed for the run, the evidence
     verifier unable to edit. No workflow asks for contents: write. The main ruleset needs one approval, no code
-    owner, and lets only the repository admin bypass."""
+    owner, and lets nobody bypass it, the owner included."""
     import json
     rules = json.loads((REPO / "governance/github/ruleset-main.json").read_text())
-    assert {(a["actor_type"], a["actor_id"], a["bypass_mode"]) for a in rules["bypass_actors"]} == {("RepositoryRole", 5, "always")}
+    assert rules["bypass_actors"] == []
     pr = next(r for r in rules["rules"] if r["type"] == "pull_request")["parameters"]
     assert pr["required_approving_review_count"] == 1 and not pr["require_code_owner_review"]
     checks = next(r for r in rules["rules"] if r["type"] == "required_status_checks")["parameters"]

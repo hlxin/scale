@@ -9,7 +9,7 @@ every reviewer, so all of them are asked.
 
 | file | what it covers |
 |---|---|
-| [GOVERNANCE.md](GOVERNANCE.md) | the owner and the reviewers, one approval for every change, the owner's bypass, the flow from an issue or a corpus to review, merge and the data-repository update; schema changes and their version; the catalysis domain; project data |
+| [GOVERNANCE.md](GOVERNANCE.md) | the owner and the reviewers, one approval for every change and no bypass, the flow from an issue or a corpus to review, merge and the data-repository update; schema changes and their version; the catalysis domain; project data |
 | [working-groups.md](working-groups.md) | how the catalysis domain's maintainers are recorded and what every change in the catalysis domain needs |
 | [release-process.md](release-process.md) | the one process for official releases: freeze, build, review, tag, publish |
 | [licensing.md](licensing.md) | the licences (code MIT; vocabulary, records and documentation CC-BY-4.0; third-party material per NOTICE), contributions, the copyright policy for quoted evidence, project data and access levels, contributions to the catalysis domain, how to cite |

@@ -63,7 +63,7 @@ owner `@hlxin` and the people listed in [`review-policy.yaml`](review-policy.yam
 [`.github/CODEOWNERS`](../.github/CODEOWNERS). The list is open: more reviewers are invited as people join. GitHub asks every reviewer; the `reviewers` workflow withdraws the other requests when one
 approves ([GOVERNANCE.md](GOVERNANCE.md#every-reviewer-is-asked-one-approval-is-enough)).
 
-**Adding a reviewer.** When a reviewer joins, the owner adds the person's name, GitHub handle and `since` to
+**Adding a reviewer.** When a reviewer joins, a pull request adds the person's name, GitHub handle and `since` to
 `governance/review-policy.yaml`, `core/CORE.yaml` and `domain/DOMAIN.yaml` (with `roles: [maintainer]`) and adds the handle to every line of `.github/CODEOWNERS` (and its copy in
 `tools/tests/fixtures/codeowners/`; `scale domains check` fails until every line names every reviewer); the
 owner invites them as a collaborator:
@@ -158,7 +158,7 @@ in place of `gh`, so that the scrub can stay on.
 | required status checks | `test (3.10)`, `test (3.11)`, `test (3.12)`, `test (3.13)`, `package`, `specification-changes`, from GitHub Actions (`integration_id` 15368) |
 | branch must be up to date before merging | no (below) |
 | force pushes, deletion | blocked |
-| bypass | the repository admin role (the owner), always: the owner's bypass; never the GitHub Actions app |
+| bypass | nobody: the owner, the GitHub Actions app and every other actor go through a pull request |
 
 ```bash
 gh api -X POST repos/$OWNER/$REPO/rulesets --input governance/github/ruleset-main.json
@@ -171,7 +171,7 @@ id is 24803060: `gh api -X PUT repos/hlxin/scale/rulesets/24803060 --input gover
 Re-apply it after a pull request that changes the JSON merges, for example the one that dropped the
 `proposal-check` required check.
 
-**The GitHub Actions app is not a bypass actor.** Anyone with Write can push a branch whose workflow asks for
+**No workflow gets past the approval.** Anyone with Write can push a branch whose workflow asks for
 `contents: write` and runs `git push origin HEAD:main`; that run's workflow token must not get past the
 approval.
 
@@ -181,17 +181,11 @@ be approved again. Two pull requests that each pass alone can conflict once both
 on `main` shows it at once. Two schema changes built on the same version cannot both merge as they are: once the
 first merges, `scale schema check` fails the second, which rebases and runs `scale schema bump` again.
 
-### Bootstrap bypass
+### No bypass
 
-The owner is a reviewer and approves other people's pull requests; another reviewer approves the owner's. While the
-owner was the only reviewer, their own pull requests could not be approved, so the ruleset lets the **repository
-admin role** (the owner, the only admin) bypass it:
-
-- the owner uses it only for changes whose checks pass, such as adding a reviewer; GitHub does not enforce either, and the ruleset's bypass log
-  shows each use (Settings → Rules → Insights). The owner does not push to `main` directly;
-- the bypass stays with the repository admin role, the owner (Hongliang Xin), also once other reviewers have
-  joined, until the owner decides otherwise: narrowing it to pull requests (`"bypass_mode": "pull_request"`) or
-  removing it is a pull request that changes `ruleset-main.json`.
+Nobody bypasses the `main` ruleset, the owner included: every change to `main`, a documentation change or a new
+reviewer included, is a pull request approved by a reviewer other than its author. (While the owner was the only
+reviewer, the repository admin could bypass it; that ended once other reviewers joined.)
 
 ## 6. Tag ruleset and the `pypi` environment
 
@@ -236,7 +230,6 @@ Publish to PyPI only with the first release ([release-process.md](release-proces
 - [ ] `codeowners/errors` returns no errors
 - [ ] workflow token read-only; Actions may not approve pull requests
 - [ ] `CLAUDE_CODE_OAUTH_TOKEN` (or `ANTHROPIC_API_KEY`) and the Claude GitHub App only when the agents are used
-- [ ] `main` ruleset applied (one approval, no code-owner requirement, required checks, the admin role as the only bypass);
-      the GitHub Actions app is not a bypass actor
+- [ ] `main` ruleset applied (one approval, no code-owner requirement, required checks, no bypass actor)
 - [ ] `v*` tag ruleset; `pypi` environment (`v*` tags); PyPI trusted publisher
-- [x] reviewers beyond the owner added (more join as they are invited); the bypass stays with the admin until the owner decides otherwise
+- [x] reviewers beyond the owner added (more join as they are invited)
