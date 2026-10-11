@@ -54,7 +54,7 @@ scale graph search $G "sulphur poisons the copper catalyst" --published-before 1
 ```
 
 Text plans and search build the evidence index in memory; `scale graph index $G` saves it (git-ignored) for repeated
-searches. Current answers: q1 236 rows, q2 69, q2b 88, q3 47, q4 135, q5 62, q6 5.
+searches. Current answers: q1 236 rows, q2 86, q2b 88, q3 92, q4 135, q5 108, q6 5.
 
 ## Recurating
 
