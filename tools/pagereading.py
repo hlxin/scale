@@ -99,7 +99,7 @@ def ocr_engine() -> str:
     return f"{sourcetext.tesseract_version()} (eng); pymupdf {sourcetext._fitz().__version__}"
 
 
-_PDF_CHECKED: dict[tuple, Path] = {}
+_PDF_DIGESTS: dict[tuple, str] = {}     # a PDF's sha256 by the file's identity and times: read once while unchanged
 
 
 def pdf_of(pages: str | Path, source_id: str) -> Path:
@@ -113,11 +113,11 @@ def pdf_of(pages: str | Path, source_id: str) -> Path:
     if not pdf.is_file():
         raise ScaleError(f"{f}: the PDF {pdf} is not there; render the pages again from the PDF you hold")
     st = pdf.stat()
-    key = (str(pdf), st.st_size, st.st_mtime_ns)
-    if key not in _PDF_CHECKED:
-        if rec.get("sha256") and sha256_file(pdf) != rec["sha256"]:
-            raise ScaleError(f"{pdf} is not the PDF {f} records (sha256 differs); render the pages again")
-        _PDF_CHECKED[key] = pdf
+    key = (str(pdf.resolve()), st.st_dev, st.st_ino, st.st_ctime_ns, st.st_mtime_ns, st.st_size)
+    if key not in _PDF_DIGESTS:
+        _PDF_DIGESTS[key] = sha256_file(pdf)
+    if rec.get("sha256") and _PDF_DIGESTS[key] != rec["sha256"]:    # every record's digest is compared, each time
+        raise ScaleError(f"{pdf} is not the PDF {f} records (sha256 differs); render the pages again")
     return pdf
 
 
