@@ -1357,11 +1357,12 @@ def _clear_texts(out: Path) -> None:
 
 def _check_text_names(texts: dict | None) -> None:
     """Every shipped text names a plain file of its own directly in text/: no separator, not absolute, not ``.``,
-    ``..`` or the manifest, and no two texts with one name (letter case aside)."""
+    ``..`` or the manifest (in any letter case, which a case-insensitive file system does not tell apart), and no two
+    texts with one name (letter case aside)."""
     seen: dict[str, str] = {}
     for sid, entry in sorted((texts or {}).items()):
         fname = entry[0] if isinstance(entry, (tuple, list)) and entry else None
-        bad = (not isinstance(fname, str) or fname in ("", ".", "..", "_manifest.json") or "/" in fname
+        bad = (not isinstance(fname, str) or fname in ("", ".", "..") or fname.lower() == "_manifest.json" or "/" in fname
                or "\\" in fname or "\0" in fname or Path(fname).is_absolute() or Path(fname).name != fname)
         if bad:
             raise ScaleError(f"the text of {sid} is named {fname!r}: a shipped text is a plain file name in text/ "
