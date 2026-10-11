@@ -50,6 +50,10 @@ FIXTURE_ROOTS = ("domain/tests/fixtures", "domain/examples", "core/examples", "c
 
 
 # ------------------------------------------------------------------------------------------ the diff
+# the keys of a property definition that say what it means or where it comes from, not what is valid
+DESCRIPTIVE_KEYS = {"description", "maturity", "added_by", "title", "examples", "note", "maps_to", "iri", "see_also"}
+
+
 def _props(d: dict) -> dict:
     return d.get("properties") or {}
 
@@ -58,21 +62,39 @@ def diff_specs(a: dict, b: dict) -> dict:
     """Additions, removals and changes between two assembled scale-graph schemas."""
     out = {"added": [], "removed": [], "changed": [], "narrowed": [], "loosened": []}
 
+    def cmp_def(where: str, da: dict, db: dict) -> None:
+        """One property definition against another, every part that decides what is valid compared (nested
+        ``items`` too); a difference outside the descriptive keys that is not read as narrowing or loosening is a
+        change, so nothing that can invalidate a document passes as no change."""
+        if da.get("type") != db.get("type"):
+            out["changed"].append(f"{where}: type {da.get('type')} -> {db.get('type')}")
+        va, vb = set(da.get("values") or []), set(db.get("values") or [])
+        if vb - va:
+            out["added"] += [f"{where} = {v}" for v in sorted(vb - va)]
+        if va - vb:
+            out["removed"] += [f"{where} = {v}" for v in sorted(va - vb)]
+        ta, tb = set(da.get("targets") or []), set(db.get("targets") or [])
+        out["loosened"] += [f"{where} may target {x}" for x in sorted(tb - ta)]
+        out["narrowed"] += [f"{where} may no longer target {x}" for x in sorted(ta - tb)]
+        ia, ib = da.get("items"), db.get("items")
+        if isinstance(ia, dict) and isinstance(ib, dict):
+            cmp_def(f"{where}[items]", ia, ib)
+        elif ia != ib:
+            out["changed"].append(f"{where}: items {ia!r} -> {ib!r}")
+        for key in sorted((set(da) | set(db)) - DESCRIPTIVE_KEYS - {"type", "values", "targets", "items"}):
+            if da.get(key) != db.get(key):
+                out["changed"].append(f"{where}: {key} {da.get(key)!r} -> {db.get(key)!r}")
+
     def cmp_props(where: str, pa: dict, pb: dict) -> None:
         for k in sorted(set(pa) | set(pb)):
             if k not in pa:
                 out["added"].append(f"{where}.{k}")
             elif k not in pb:
                 out["removed"].append(f"{where}.{k}")
-            else:
-                da, db = pa[k], pb[k]
-                if da.get("type") != db.get("type"):
-                    out["changed"].append(f"{where}.{k}: type {da.get('type')} -> {db.get('type')}")
-                va, vb = set(da.get("values") or []), set(db.get("values") or [])
-                if vb - va:
-                    out["added"] += [f"{where}.{k} = {v}" for v in sorted(vb - va)]
-                if va - vb:
-                    out["removed"] += [f"{where}.{k} = {v}" for v in sorted(va - vb)]
+            elif isinstance(pa[k], dict) and isinstance(pb[k], dict):
+                cmp_def(f"{where}.{k}", pa[k], pb[k])
+            elif pa[k] != pb[k]:
+                out["changed"].append(f"{where}.{k}: {pa[k]!r} -> {pb[k]!r}")
 
     # the kernel's shared structures: the evidence item, the value object, the record reference and
     # the properties every node and link carries

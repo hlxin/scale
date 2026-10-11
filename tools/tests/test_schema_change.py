@@ -74,6 +74,19 @@ def test_a_breaking_change_raises_the_second_number_and_needs_a_rule(repo):
     assert "**Schema change: breaking**" in summary(res) and "- removed (" in summary(res)
 
 
+def test_a_nested_change_that_can_invalidate_documents_is_breaking(repo):
+    """A property's nested definition is compared too: identifiers' items made integer (strings fail it) is a breaking
+    change; a description changed alone is no change."""
+    _edit(repo / "core/graph/kernel.yaml",
+          lambda k: k["common"]["node"]["properties"]["identifiers"].__setitem__("description", "Reworded only."))
+    assert compare(repo, "main")["kind"] == "no change in meaning"
+    _edit(repo / "core/graph/kernel.yaml",
+          lambda k: k["common"]["node"]["properties"]["identifiers"]["items"].__setitem__("type", "integer"))
+    c = compare(repo, "main")
+    assert c["kind"] == "breaking" and c["needs_version"] == next_version(HEAD_VERSION, 3)
+    assert "common.node.identifiers[items]: type string -> integer" in c["diff"]["changed"]
+
+
 def test_check_finds_an_unraised_version_and_an_edited_frozen_copy(repo, capsys):
     _edit(repo / "domain/graph/catalysis.yaml",
           lambda m: m["nodes"]["CatalyticTest"]["properties"].update(test_only_note={"type": "text", "maturity": "provisional"}))
