@@ -38,7 +38,7 @@ approve or merge.
 | **owner** | `@hlxin`, admin of the repository, code owner of every path in [`.github/CODEOWNERS`](../.github/CODEOWNERS) | a reviewer: approves and merges pull requests (their own are approved by another reviewer); invites reviewers; builds releases; repository settings, rulesets and secrets ([repository-settings.md](repository-settings.md)) |
 | **reviewers** | domain experts, collaborators (Write), added to the review policy and CODEOWNERS when they join; no fixed number | approve and merge pull requests (any one of them is enough). The current list is in [`review-policy.yaml`](review-policy.yaml) |
 | **contributors** | anyone: issues and comments; collaborators also branches and pull requests; others through forks once the repository is public | suggest changes, curate, report gaps |
-| **@scale-agents** | a team of Claude agents on GitHub, started by every new issue, comment and review (no tag or label), or a manual run | a discovery strategist frames and coordinates, a data scientist proposes the patch and its evidence, a protocol compiler writes the tests, an evidence verifier assesses support and effects, and a systems engineer opens pull requests from `agent/…` branches under the Claude GitHub App's identity; never approves or merges |
+| **@scale-agents** | a team of Claude agents on GitHub, started by every new issue, comment and review by a collaborator (no tag or label; anyone else's once a collaborator comments on it), or a manual run | a discovery strategist frames and coordinates, a data scientist proposes the patch and its evidence, a protocol compiler writes the tests, an evidence verifier assesses support and effects, and a systems engineer opens pull requests from `agent/…` branches under the Claude GitHub App's identity; never approves or merges |
 
 ## The rule: one approval for every change
 
@@ -115,7 +115,8 @@ official release (a human step, release-process.md)
    gap found while curating is filed with `scale gap issue`. To find what the schema cannot express in a new
    corpus, a curator (or an agent following the curate-source skill) curates a sample of open-access sources
    against the current schema and files a `gap-report` issue (short capped quotes only).
-2. **The agents take it up.** `@scale-agents` start on every new issue, comment and review, with no tag or label.
+2. **The agents take it up.** `@scale-agents` start on every new issue, comment and review by a collaborator, with no tag or label; on anyone
+   else's issue or comment, once a collaborator comments on it (a run spends the owner's Claude usage).
    The discovery strategist frames the use case, decides what it needs and coordinates the revision; the data
    scientist assembles the sources and proposes corrections to records or changes to schema definitions; the
    protocol compiler turns the validation requirements into tests with explicit expected outcomes; the evidence

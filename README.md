@@ -85,7 +85,8 @@ line. Re-curate documents from there; do not validate them as they are.
 Every change is one pull request. Anyone can suggest a change in an issue or a comment
 ([comment form](https://github.com/hlxin/scale/issues/new?template=comment.yml),
 [contribution form](https://github.com/hlxin/scale/issues/new?template=contribution.yml)) or open a pull request.
-`@scale-agents` pick up every new issue, comment and review on their own and prepare the pull request. One
+`@scale-agents` pick up collaborators' issues, comments and reviews on their own (anyone else's once a collaborator
+comments on it) and prepare the pull request. One
 reviewer approves and merges it; this may be the person who suggested it. Agents never approve or merge.
 
 A schema change edits the schema files directly and raises the version in the same pull request
