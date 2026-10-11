@@ -26,7 +26,7 @@ validation:
   - "`scale graph validate <doc> --source-text <source-id>=<file>` reports zero errors"
   - Every node and link that states something carries evidence (source, locator, kind, quote)
   - Every quote is found verbatim in the source text (whitespace, case and dash variants ignored)
-  - Every reported value appears in at least one cited quote
+  - Every reported value appears in at least one cited quote (the curator checks this; the tools compare values with the text only for readings of page images, `scale pages check`)
   - "`scale corpus check <manifest>` reports ok: every candidate source accounted for once, the counts adding up"
   - "`scale evidence report <doc>` lists no violation and no source without a rights entry (rights.yaml)"
 human-review:
