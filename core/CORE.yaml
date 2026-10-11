@@ -23,8 +23,8 @@ compatibility: |
   ranges, newly required properties, changed meaning) raise the second (0.1.0 -> 0.2.0) and need a
   migration rule. Prefer deprecation to removal. The kernel of each earlier version is frozen in
   graph/frozen/kernel-<version>.yaml when a change moves the schema on (scale schema bump).
-# One reviewer group for the kernel and the catalysis domain for now (governance/review-policy.yaml). A
-# placeholder seat is filled when a reviewer joins (never invent one).
+# One reviewer group for the kernel and the catalysis domain for now (governance/review-policy.yaml); a reviewer
+# who joins is added here too (never invent one).
 maintainers:
   team: '@hlxin'
   people:
@@ -38,9 +38,9 @@ maintainers:
       since: '2026-10-11'
       roles:
         - maintainer
-    - name: TODO-reviewer-3
-      github: TODO-reviewer-3
-      placeholder: true
+    - name: Raul Diaz
+      github: diazr04
+      since: '2026-10-11'
       roles:
         - maintainer
 review_areas:

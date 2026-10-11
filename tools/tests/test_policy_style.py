@@ -19,7 +19,7 @@ def test_every_change_needs_one_approval():
     assert POLICY["approvals"] == {"required": 1}
     assert all(set(t) <= {"name", "examples", "needs"} for t in POLICY["tiers"].values())
     assert POLICY["new_concepts_maturity"] == "provisional"
-    assert [m["github"] for m in reviewers(POLICY)] == ["hlxin", "mutianyou2013"]
+    assert [m["github"] for m in reviewers(POLICY)] == ["hlxin", "mutianyou2013", "diazr04"]
 
 
 def test_records_sampling_is_configured():

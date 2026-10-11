@@ -11,7 +11,7 @@ from scale.util import load_yaml
 
 FIXTURE = Path(__file__).parent / "fixtures/codeowners/CODEOWNERS"
 REVIEWERS = "@hlxin"                     # the review policy's reviewer group: the owner
-EVERY_REVIEWER = {"@hlxin", "@mutianyou2013"}   # every reviewer of the review policy, asked on every path
+EVERY_REVIEWER = {"@hlxin", "@mutianyou2013", "@diazr04"}   # every reviewer of the review policy, asked on every path
 
 
 @pytest.fixture(scope="module")
@@ -87,12 +87,12 @@ def _catalysis_proposal_changed_paths(pid: str = "000001", ver: str = "0.1.0") -
         f"{layout.DECISIONS}/0002-{pid}.md", layout.DECISION_LOG, layout.GAP_REGISTER]
 
 
-def test_a_catalysis_proposal_and_a_core_change_go_to_the_owner(rules):
+def test_a_catalysis_proposal_and_a_core_change_go_to_every_reviewer(rules):
     req = codeowners.review_requirements(rules, _catalysis_proposal_changed_paths())
-    assert not req["unowned"] and req["minimal_reviewers"] == [REVIEWERS]
+    assert not req["unowned"] and req["owner_sets"] == [sorted(EVERY_REVIEWER)] and len(req["minimal_reviewers"]) == 1
     req = codeowners.review_requirements(rules, ["core/graph/kernel.yaml", "core/proposals/000002/proposal.yaml",
                                                  "core/graph/frozen/kernel-0.1.0.yaml", "core/graph/frozen/SHA256SUMS"])
-    assert req["minimal_reviewers"] == [REVIEWERS]
+    assert req["owner_sets"] == [sorted(EVERY_REVIEWER)]
 
 
 def test_fixture_rules_match_the_repository_file():

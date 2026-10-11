@@ -24,25 +24,30 @@ def test_check_warns_about_placeholder_reviewers(tmp_path):
     import io
     import unittest.mock as mock
     from scale import devcheck
-    assert devcheck.reviewer_warnings(REPO) == ["reviewers: 1 placeholder to fill (governance/review-policy.yaml)"]
+    assert devcheck.reviewer_warnings(REPO) == []                    # every seat is filled
     (tmp_path / "governance").mkdir()
     (tmp_path / "governance/review-policy.yaml").write_text(
         "reviewers:\n  members:\n    - name: Ada\n      github: ada\n")
     assert devcheck.reviewer_warnings(tmp_path) == []
+    (tmp_path / "governance/review-policy.yaml").write_text(
+        "reviewers:\n  members:\n    - name: Ada\n      github: ada\n    - name: TODO-reviewer-2\n"
+        "      github: TODO-reviewer-2\n      placeholder: true\n")
+    assert devcheck.reviewer_warnings(tmp_path) == ["reviewers: 1 placeholder to fill (governance/review-policy.yaml)"]
     step = devcheck.check_steps(REPO, fast=True)[0]
     assert step["cmds"] == [] and step["warning"] is devcheck.reviewer_warnings
     out = io.StringIO()
+    step = {**step, "warning": lambda repo: devcheck.reviewer_warnings(tmp_path)}
     with mock.patch.object(devcheck, "check_steps", lambda *a, **k: [step]):
         assert devcheck.run_checks(REPO, fast=True, out=out)          # a warning never fails the check
     assert out.getvalue().splitlines()[0] == "warn reviewers: 1 placeholder to fill (governance/review-policy.yaml)"
 
 
-def test_the_repository_policy_has_two_reviewers_and_one_placeholder():
+def test_the_repository_policy_has_three_reviewers_and_no_placeholder():
     from scale.policy import load_policy, placeholders, reviewers
     pol = load_policy(REPO)
     assert pol["approvals"]["required"] == 1 and pol["reviewers"]["team"] == "@hlxin"
-    assert [m["github"] for m in reviewers(pol)] == ["hlxin", "mutianyou2013"]
-    assert [m["github"] for m in placeholders(pol)] == ["TODO-reviewer-3"]
+    assert [m["github"] for m in reviewers(pol)] == ["hlxin", "mutianyou2013", "diazr04"]
+    assert placeholders(pol) == []
 
 
 def test_every_reviewer_is_asked_and_one_approval_withdraws_the_other_requests(tmp_path):
@@ -52,9 +57,9 @@ def test_every_reviewer_is_asked_and_one_approval_withdraws_the_other_requests(t
     from scale import codeowners
     from scale.domains import Problems, _reviewers_routed
     rules = codeowners.load(REPO)
-    assert all({"@hlxin", "@mutianyou2013"} <= set(r.owners) for r in rules)
+    assert all({"@hlxin", "@mutianyou2013", "@diazr04"} <= set(r.owners) for r in rules)
     pb = Problems()
-    _reviewers_routed(REPO, codeowners.parse("*  @hlxin\n/domain/  @hlxin @mutianyou2013\n"), pb)
+    _reviewers_routed(REPO, codeowners.parse("*  @hlxin @diazr04\n/domain/  @hlxin @mutianyou2013 @diazr04\n"), pb)
     assert [e["message"] for e in pb.errors] == ["line 1 (*) does not name the reviewer @mutianyou2013 of "
                                          "governance/review-policy.yaml: GitHub would not ask them to review"]
     wf = REPO / ".github/workflows/reviewers.yml"

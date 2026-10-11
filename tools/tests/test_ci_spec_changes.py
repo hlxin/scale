@@ -14,7 +14,7 @@ from scale.cli import main
 
 FIXTURE_CODEOWNERS = Path(__file__).parent / "fixtures/codeowners/CODEOWNERS"
 CAT = "@example-org/catalysis-maintainers"           # a synthetic team named by a DOMAIN.yaml
-REVIEWERS = "@hlxin"                                # the repository's CODEOWNERS: the owner
+EVERY_REVIEWER = {"@hlxin", "@mutianyou2013", "@diazr04"}   # the repository's CODEOWNERS: every reviewer
 ENV = {**os.environ, "GIT_AUTHOR_NAME": "t", "GIT_AUTHOR_EMAIL": "t@example.org", "GIT_COMMITTER_NAME": "t",
        "GIT_COMMITTER_EMAIL": "t@example.org", "GIT_CONFIG_GLOBAL": os.devnull, "GIT_CONFIG_SYSTEM": os.devnull}
 
@@ -169,8 +169,10 @@ def test_the_summary_names_the_reviewers(repo, capsys):
                         "domain/graph/scale-catal.yaml": "version: 0.3.0\n",
                         "domain/graph/frozen/scale-catal-0.2.0.yaml": "version: 0.2.0\n"},
                  append={"domain/graph/frozen/SHA256SUMS": "ccc  scale-catal-0.2.0.yaml\n"})
-    assert res["ok"] and res["owners"]["minimal_reviewers"] == [REVIEWERS] and res["core_consultation"] is None
-    assert f"fewest reviewers who own every changed path: {REVIEWERS}" in spec_changes_text(res)
+    # every reviewer is asked; one approval is enough
+    assert res["ok"] and res["owners"]["owner_sets"] == [sorted(EVERY_REVIEWER)] and res["core_consultation"] is None
+    text = spec_changes_text(res)
+    assert f"  - any of {' '.join(sorted(EVERY_REVIEWER))}" in text and "fewest reviewers" not in text
     res = change(repo, {"core/graph/kernel.yaml": "kernel: scale-kernel\nnodes: {}\n"})
     assert res["core_consultation"]["domain_teams"] == [CAT]
     assert main(["--repo", str(repo), "ci", "spec-changes", "--base", "base"]) == 0

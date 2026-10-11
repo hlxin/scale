@@ -10,8 +10,8 @@
   blocked or do not say how they ended. `scale schema check` lists the committed bundles a schema change leaves at an
   older version, as a follow-up for a separate issue. The package and the schema keep their own versions: a release
   always raises the package version; the schema version moves only when the schema changes.
-- **A second reviewer; every reviewer is asked, one approval is enough.** Tianyou Mou (`@mutianyou2013`) fills a
-  reviewer seat. CODEOWNERS names every reviewer on every line, so GitHub asks all of them, and `scale domains check`
+- **Two reviewers join; every reviewer is asked, one approval is enough.** Tianyou Mou (`@mutianyou2013`) and Raul
+  Diaz (`@diazr04`) fill the reviewer seats. CODEOWNERS names every reviewer on every line, so GitHub asks all of them, and `scale domains check`
   fails when one is missing. A new `reviewers` workflow withdraws the open review requests when one reviewer approves
   (and comments who approved and merges) and, after a push, asks again every reviewer whose approval the push
   dismissed or who asked for changes. A request for changes still blocks the merge until its reviewer approves.

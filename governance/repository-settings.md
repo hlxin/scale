@@ -59,9 +59,9 @@ forms in `.github/DISCUSSION_TEMPLATE/` are used once they are on. Create the la
 ## 2. Collaborators and reviewers
 
 A personal repository has its owner and collaborators; every collaborator has Write access. Today the owner,
-`@hlxin`, and the reviewer Tianyou Mou, `@mutianyou2013`, are named on every line of
-[`.github/CODEOWNERS`](../.github/CODEOWNERS), and the review policy has one reviewer seat that is a placeholder
-(`TODO-reviewer-3`). GitHub asks every reviewer; the `reviewers` workflow withdraws the other requests when one
+`@hlxin`, and the reviewers Tianyou Mou, `@mutianyou2013`, and Raul Diaz, `@diazr04`, are named on every line of
+[`.github/CODEOWNERS`](../.github/CODEOWNERS); the review policy has no placeholder seat left (a new reviewer is
+added as an entry). GitHub asks every reviewer; the `reviewers` workflow withdraws the other requests when one
 approves ([GOVERNANCE.md](GOVERNANCE.md#every-reviewer-is-asked-one-approval-is-enough)).
 
 **Filling a reviewer seat.** When a reviewer joins, a pull request replaces one placeholder with the person's

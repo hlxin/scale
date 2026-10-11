@@ -80,6 +80,8 @@ def test_the_build_carries_core_kernel_domain_and_skills_with_the_one_version(tm
         repo / "skills/curate-source/references/recipes.md")
     assert m["contributors"] == [{"name": "Hongliang Xin", "github": "hlxin", "roles": ["steward"], "scopes": ["core", "catalysis"]},
                                  {"name": "Tianyou Mou", "github": "mutianyou2013", "roles": ["maintainer"],
+                                  "scopes": ["core", "catalysis"]},
+                                 {"name": "Raul Diaz", "github": "diazr04", "roles": ["maintainer"],
                                   "scopes": ["core", "catalysis"]}]
     assert m["excluded_domains"] == []
     assert m["source"] == {"repository": "https://github.com/hlxin/scale", "tag": "v0.1.0"}

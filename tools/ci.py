@@ -163,7 +163,7 @@ def spec_changes_text(res: dict) -> str:
     if o.get("source"):
         L.append(f"review requested from (from {o['source']}; any one reviewer's approval is enough, a code owner's is not required):")
         L += [f"  - any of {' '.join(s)}" for s in o["owner_sets"]] or ["  - none"]
-        if o["minimal_reviewers"]:
+        if len(o["owner_sets"]) > 1:                    # with one set, "any of" already says it
             L.append(f"  fewest reviewers who own every changed path: {' + '.join(o['minimal_reviewers'])}")
         if o["unowned"]:
             L.append(f"  no owner: {', '.join(o['unowned'][:10])}")
