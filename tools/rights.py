@@ -2,7 +2,7 @@
 
 Two rules, both run by ``scale check``:
 
-* **Access.** Every scale-graph document committed to the repository is public: the effective stewardship
+* **Access.** Every scale-catal document committed to the repository is public: the effective stewardship
   access of its graph and of each record (the graph's default overridden field by field by the record's own,
   ``pgraph.effective_stewardship``) is ``public``, stated explicitly. A missing access is not public: SCALE's
   visibility rule (``pgraph.visible``) reads it as ``institution``, so a document without one would be hidden
@@ -345,7 +345,7 @@ def read_texts(directory: str | Path | None = None, pairs: list[str] | None = No
 
 # ---------------------------------------------------------------- the repository
 def committed_documents(repo: str | Path) -> list[Path]:
-    """Every scale-graph document in the repository tree (the files a clone has: no local or build material)."""
+    """Every scale-catal document in the repository tree (the files a clone has: no local or build material)."""
     repo = Path(repo).resolve()
     out = []
     for p in sorted(repo.rglob("*.json")):
@@ -355,12 +355,12 @@ def committed_documents(repo: str | Path) -> list[Path]:
             continue
         try:
             head = p.read_text(encoding="utf-8", errors="ignore")
-            if '"scale-graph"' not in head:
+            if '"scale-catal"' not in head:
                 continue
             doc = json.loads(head)
         except ValueError:
             continue
-        if isinstance(doc, dict) and isinstance(doc.get("graph"), dict) and doc["graph"].get("schema") == "scale-graph":
+        if isinstance(doc, dict) and isinstance(doc.get("graph"), dict) and doc["graph"].get("schema") == "scale-catal":
             out.append(p)
     return out
 

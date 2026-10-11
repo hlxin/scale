@@ -95,7 +95,7 @@ def not_public(gap: dict) -> str | None:
 
 
 def gaps_from_query(result: dict, detected_by: str | None = None) -> list[dict]:
-    """Gap reports from a scale-graph query result (``scale graph query``): a ``schema_gap`` names what
+    """Gap reports from a scale-catal query result (``scale graph query``): a ``schema_gap`` names what
     the schema cannot express (a missing concept); ``no_matching_record`` asks for more sources; values
     the source does not report or reports ambiguously (``missing_context`` and ``excluded``) go to source
     review. Values not curated yet are curation backlog, not gaps; nor are values withheld from the view the query
@@ -105,7 +105,7 @@ def gaps_from_query(result: dict, detected_by: str | None = None) -> list[dict]:
     by = detected_by or f"query: {result.get('question') or 'plan'}"
     access = result.get("access") if isinstance(result.get("access"), dict) else UNSTATED_ACCESS
     graph = result.get("graph_id") or "graph"
-    version = f"scale-graph {result['schema_version']}" if result.get("schema_version") else None
+    version = f"scale-catal {result['schema_version']}" if result.get("schema_version") else None
     out = []
     if result.get("status") == "schema_gap":
         out += [make_gap("missing_concept", record=graph, about=g, detected_by=by, schema=version, access=access,

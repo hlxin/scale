@@ -27,7 +27,7 @@ def _repo_root(*starts: Path) -> Path:
 HERE = Path(__file__).resolve().parent
 REPO = _repo_root(HERE, Path.cwd())
 K = yaml.safe_load((REPO / "core/graph/kernel.yaml").read_text())          # the science kernel (core layer)
-V = yaml.safe_load((REPO / "domain/graph/scale-graph.yaml").read_text())["version"]   # the schema's one version
+V = yaml.safe_load((REPO / "domain/graph/scale-catal.yaml").read_text())["version"]   # the schema's one version
 
 METHOD, THINGS, WHO, EXP, STUDIED = "#2b5c8a", "#2e7d45", "#6b3f8f", "#b5651d", "#a8323e"
 W, H = 3.3, 1.1

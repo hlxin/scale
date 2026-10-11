@@ -17,7 +17,7 @@ from scale.releases import build_release, spec_digest_stability
 from scale.util import ScaleError, load_doc, load_yaml, sha256_file
 from scale.versions import parse_version
 
-X = REPO / "domain/examples/scale-graph"
+X = REPO / "domain/examples/scale-catal"
 
 
 def _bundle_validator():
@@ -50,7 +50,7 @@ def test_a_version_has_one_spec_digest_whatever_state_it_is_held_in(head):
     assert not {"status", "extension_prefixes"} & set(doc)
     assert all("path" not in e for b in ("modules", "domains", "profiles") for e in doc[b].values())
     # one version: the kernel, the catalysis file and its checklist all report the manifest's
-    assert doc["kernel"] == {"name": "scale-graph-kernel", "version": HEAD_VERSION}
+    assert doc["kernel"] == {"name": "scale-kernel", "version": HEAD_VERSION}
     assert {m["version"] for m in doc["modules"].values()} == {HEAD_VERSION}
     assert doc["domains"]["catalysis"]["version"] == doc["profiles"]["catalysis"]["version"] == HEAD_VERSION
     assert pgraph.spec_bytes(head) == pgraph.spec_bytes(pgraph.load_spec(GRAPH_MANIFEST))      # deterministic
@@ -60,8 +60,8 @@ def test_a_version_has_one_spec_digest_whatever_state_it_is_held_in(head):
     assert pgraph.spec_sha256(other) == pgraph.spec_sha256(head)                 # the state is not the schema
 
 
-# a recorded spec digest in the documentation: "scale-graph 0.1.0 ... `<sha256>`" on one line
-RECORDED_DIGEST = __import__("re").compile(r"scale-graph (\d+\.\d+\.\d+)\b[^\n]*?`([0-9a-f]{64})`")
+# a recorded spec digest in the documentation: "scale-catal 0.2.0 ... `<sha256>`" on one line (0.1.0 was named scale-graph)
+RECORDED_DIGEST = __import__("re").compile(r"scale-(?:catal|graph) (\d+\.\d+\.\d+)\b[^\n]*?`([0-9a-f]{64})`")
 
 
 def test_the_documented_spec_digests_are_the_ones_held(head):
@@ -71,15 +71,15 @@ def test_the_documented_spec_digests_are_the_ones_held(head):
     held = dict(pgraph.spec_versions(GRAPH_MANIFEST))
     for f in ("README.md", "CHANGELOG.md"):
         recorded = RECORDED_DIGEST.findall((REPO / f).read_text())
-        assert ("0.1.0" in {v for v, _ in recorded}), f"{f} records no spec digest of scale-graph 0.1.0"
+        assert ("0.1.0" in {v for v, _ in recorded}), f"{f} records no spec digest of scale-catal 0.1.0"
         for v, digest in recorded:
             assert v in held and pgraph.spec_sha256(pgraph.load_spec(held[v])) == digest, (f, v, digest)
-    assert RECORDED_DIGEST.findall("scale-graph 0.1.0 (spec digest `" + "a" * 64 + "`)") == [("0.1.0", "a" * 64)]
+    assert RECORDED_DIGEST.findall("scale-catal 0.1.0 (spec digest `" + "a" * 64 + "`)") == [("0.1.0", "a" * 64)]
 
 
 def test_every_version_is_listed_oldest_first_with_the_head_last():
     versions = pgraph.spec_versions(GRAPH_MANIFEST)
-    frozen = sorted((p.stem.removeprefix("scale-graph-"), p) for p in GRAPH_FROZEN.glob("scale-graph-*.yaml"))
+    frozen = sorted((p.stem.removeprefix("scale-catal-"), p) for p in GRAPH_FROZEN.glob("scale-catal-*.yaml"))
     assert versions[-1] == (HEAD_VERSION, GRAPH_MANIFEST) and sorted(versions[:-1]) == frozen   # 0.1.0: none frozen yet
     assert [parse_version(v) for v, _ in versions] == sorted(parse_version(v) for v, _ in versions)
     assert pgraph.public_versions(GRAPH_MANIFEST) == {v for v, _ in versions}
@@ -93,14 +93,14 @@ def test_graph_spec_writes_canonical_json_and_prints_its_digest(tmp_path, capsys
     one = tmp_path / "one.json"
     rc, out, _ = _run(["graph", "spec", "--version", HEAD_VERSION, "--out", str(one)], capsys)
     row = json.loads(out)
-    assert row["manifest"] == "domain/graph/scale-graph.yaml"
+    assert row["manifest"] == "domain/graph/scale-catal.yaml"
     assert hashlib.sha256(one.read_bytes()).hexdigest() == row["sha256"] and json.loads(one.read_text())["version"] == HEAD_VERSION
     rc, out, _ = _run(["graph", "spec", "--all", "--out", str(tmp_path / "all")], capsys)
     rows = json.loads(out)
     assert [r["version"] for r in rows] == [v for v, _ in pgraph.spec_versions(GRAPH_MANIFEST)]
     sums = (tmp_path / "all/SHA256SUMS").read_text().splitlines()
-    assert sums == [f"{r['sha256']}  catalysis/scale-graph-{r['version']}.json" for r in rows]
-    assert all(sha256_file(tmp_path / "all/catalysis" / f"scale-graph-{r['version']}.json") == r["sha256"] for r in rows)
+    assert sums == [f"{r['sha256']}  catalysis/scale-catal-{r['version']}.json" for r in rows]
+    assert all(sha256_file(tmp_path / "all/catalysis" / f"scale-catal-{r['version']}.json") == r["sha256"] for r in rows)
     assert _run(["graph", "spec", "--version", "9.9.9"], capsys)[0] == 2
 
 
@@ -116,7 +116,7 @@ def test_a_pinned_version_and_digest_are_checked_against_this_repository(capsys,
     assert other["matches"] is False and "another one of the same number" in other["message"]
     unknown = pgraph.identify(GRAPH_MANIFEST, "99.0.0", "0" * 64)
     assert unknown["known"] is False and unknown["matches"] is False
-    assert "scale-graph 99.0.0 is not a version this repository holds" in unknown["message"]
+    assert "scale-catal 99.0.0 is not a version this repository holds" in unknown["message"]
     rc, out, _ = _run(["graph", "spec", "--expect", digest], capsys)
     assert rc == 0 and json.loads(out)["matches"] is True
     rc, out, _ = _run(["graph", "spec", "--expect", "0" * 64], capsys)
@@ -134,7 +134,7 @@ def test_graph_spec_names_a_manifest_by_its_domain(tmp_path, capsys):
     shutil.copytree(REPO / "domain/graph", tree / "domain/graph")
     shutil.copy2(REPO / "domain/DOMAIN.yaml", tree / "domain/DOMAIN.yaml")
     shutil.copytree(REPO / "governance/registry", tree / "governance/registry")
-    rc, out, _ = _run(["graph", "spec", "--spec", str(tree / "domain/graph/scale-graph.yaml")], capsys)
+    rc, out, _ = _run(["graph", "spec", "--spec", str(tree / "domain/graph/scale-catal.yaml")], capsys)
     assert rc in (0, None) and json.loads(out)["domain"] == "catalysis"
     assert json.loads(out)["sha256"] == pgraph.spec_sha256(pgraph.load_spec(GRAPH_MANIFEST))   # the same schema, the same digest
 
@@ -162,7 +162,7 @@ def test_a_release_ships_the_spec_document_of_every_version(tmp_path):
     docs = m["spec_documents"]
     assert [d["version"] for d in docs] == [v for v, _ in pgraph.spec_versions(GRAPH_MANIFEST)]
     for d in docs:
-        assert d["file"] == f"specs/catalysis/scale-graph-{d['version']}.json"
+        assert d["file"] == f"specs/catalysis/scale-catal-{d['version']}.json"
         assert m["digests"][d["file"]] == d["sha256"] == sha256_file(dest / d["file"])
         held = dict(pgraph.spec_versions(GRAPH_MANIFEST))[d["version"]]
         assert d["sha256"] == pgraph.spec_sha256(pgraph.load_spec(held))       # the same digest as the repository's
@@ -182,7 +182,7 @@ def test_a_version_the_tools_do_not_hold_is_named_as_such(tmp_path, capsys):
         f = tmp_path / f"doc-{v}.json"
         f.write_text(json.dumps(doc))
         rc, _, err = _run(["graph", "validate", "--format", "json", str(f)], capsys)
-        assert rc == 2 and f"document pins scale-graph {v}, which is not a version this repository holds" in err and says in err
+        assert rc == 2 and f"document pins scale-catal {v}, which is not a version this repository holds" in err and says in err
         assert "lineage" not in err
         res = kit.call("scale_validate", {"document": doc})
         assert says in res["error"]
@@ -193,8 +193,8 @@ def test_a_version_the_tools_do_not_hold_is_named_as_such(tmp_path, capsys):
 
 
 def test_a_bundle_graph_is_named_as_one_not_as_a_newer_version(tmp_path, capsys, head):
-    """A kg-bundle's kg/graph.json names its bundle and the bundle's schema (scale-<domain>, with the scale-graph
-    version it is the vocabulary of). It is the bundle format's graph, not a scale-graph document: validating it is
+    """A kg-bundle's kg/graph.json names its bundle and the bundle's schema (scale-<domain>, with the scale-catal
+    version it is the vocabulary of). It is the bundle format's graph, not a scale-catal document: validating it is
     refused, whatever version it names, with a message that names it as a bundle's graph, never as a newer version."""
     from scale.api import ScaleToolkit
     kit = ScaleToolkit(repo=REPO, workspace=tmp_path / "ws")
@@ -209,11 +209,11 @@ def test_a_bundle_graph_is_named_as_one_not_as_a_newer_version(tmp_path, capsys,
         assert g["graph"]["version"] == version and pgraph.bundle_graph(g)
         assert (g["graph"]["schema_id"], g["graph"]["schema_version"]) == ("scale-catal", ex["graph"]["schema_version"])
         rc, _, err = _run(["graph", "validate", "--format", "json", str(f)], capsys)
-        assert rc == 2 and "the graph of a kg-bundle" in err and "not a scale-graph document" in err, err
+        assert rc == 2 and "the graph of a kg-bundle" in err and "not a scale-catal document" in err, err
         assert "newer than this schema's head" not in err
         res = kit.call("scale_validate", {"document": g})
         assert "the graph of a kg-bundle" in res["error"]
-    # a scale-graph pinning a version the tools do not hold keeps its message; a header that only half names a bundle
+    # a scale-catal pinning a version the tools do not hold keeps its message; a header that only half names a bundle
     # is not a bundle's graph
     doc = load_doc(X / "example.json")
     doc["graph"]["schema_version"] = "9.0.0"
@@ -265,7 +265,7 @@ def _access_doc():
              {"id": P, "label": "Project", "props": {"name": "project p"}},
              {"id": "ex:acc/org/lab", "label": "Institution", "props": {"name": "lab"}}]
     d = {"directed": True, "multigraph": True,
-         "graph": {"schema": "scale-graph", "schema_version": HEAD_VERSION, "graph_id": "ex:acc/graph", "title": "access test",
+         "graph": {"schema": "scale-catal", "schema_version": HEAD_VERSION, "graph_id": "ex:acc/graph", "title": "access test",
                    "data_status": "research_data", "follows_domains": ["catalysis"],
                    "stewardship": {"access": "project", "project": P, "contributed_by": ["ex:acc/org/lab"],
                                    "licence": "CC-BY-4.0"}},
@@ -284,7 +284,7 @@ def test_the_bundle_names_its_schema_by_digest_and_carries_the_scale_header(tmp_
     spec = pgraph.load_spec(pgraph.pinned(GRAPH_MANIFEST, doc["graph"]["schema_version"]))
     m = kgbundle.export(doc, spec, tmp_path / "b", "example", created="2026-10-06T00:00:00Z")
     schema = json.loads((tmp_path / "b/kg/schema.json").read_text())
-    assert schema["extends"] == {"schema_id": "scale-graph", "version": doc["graph"]["schema_version"],
+    assert schema["extends"] == {"schema_id": "scale-catal", "version": doc["graph"]["schema_version"],
                                  "sha256": pgraph.spec_sha256(spec)}
     h = m["scale_header"]
     assert h == json.loads((tmp_path / "b/bundle.json").read_text())["scale_header"]

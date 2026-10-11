@@ -2,6 +2,21 @@
 
 ## Unreleased
 
+- **Package 0.2.0, with the schema renamed.** The package version is raised to 0.2.0 for the next release, v0.2.0
+  (the package and the schema keep their own versions; here both move). The methanol example's bundle is re-exported at schema scale-catal 0.2.0 (`methanol-synthesis-pre1966_v3.0.0.zip`,
+  following 2.0.0; 17,563 edges, unchanged), and the governance documents name the schema `scale-catal`.
+- **Breaking: the schema `scale-graph` is renamed `scale-catal` (0.1.0 -> 0.2.0, issue #16).** The kernel
+  `scale-graph-kernel` is `scale-kernel`; the manifest is `domain/graph/scale-catal.yaml`, the examples are in
+  `domain/examples/scale-catal/`, and documents pin `"schema": "scale-catal"`. No label, edge type or property changes.
+  Version 0.1.0 is frozen as it was (`domain/graph/frozen/scale-catal-0.1.0.yaml` and `core/graph/frozen/`, which still
+  say `scale-graph`; digest unchanged), so a document pinning `scale-graph` 0.1.0 still validates against it. Migration
+  step 0.1.0 -> 0.2.0 rewrites the pin (`scale graph migrate`, `scale kg update`); a document at 0.2.0 that still
+  names `scale-graph` is rejected with a message pointing to it. `scale schema diff` reads a renamed schema or kernel
+  as a breaking change. The kg-bundle schema and its `extends` entry are both `scale-catal` (`extends` names the graph
+  schema's own name, `scale-graph` at 0.1.0); the version and the spec digest identify them, and the descriptions say
+  which is which. The methanol graph is migrated to 0.2.0 (only the pin changed); its bundle is still the sealed
+  release exported from 0.1.0. Spec digest of scale-catal 0.2.0: `166bfc5539df7f44de075a4fb504c54170af32d6b3a01a916d6171bfcecec714`.
+  The v0.1.0 release and the 0.1.0 entries below keep the old name as history.
 - **Fixes from a second code review.** Profile files are retired by design: a manifest listing `profiles:` is refused,
   and conformance reads `follows_domains` only. Bundle export: a released Publication keeps its id in later releases;
   two records never share a bundle id; every destination is checked before the first write (no link, nothing inside

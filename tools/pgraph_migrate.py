@@ -1,4 +1,4 @@
-"""Move scale-graph documents along the version steps of the schema.
+"""Move scale-catal documents along the version steps of the schema.
 
     scale graph migrate IN.json OUT.json
 
@@ -21,8 +21,23 @@ from .util import ScaleError
 STEPS: dict[str, tuple[str, str]] = {
     # "<from version>": ("<to version>", "<note>"), one line per change that raises the version, oldest first
     # (none before the first change: the schema starts at 0.1.0)
+    "0.1.0": ("0.2.0", 'the schema is renamed scale-graph -> scale-catal (kernel scale-graph-kernel -> scale-kernel); documents pin the new name'),
 }
-STEP_RULES: dict[str, tuple[str, Callable[[dict, dict | None], list]]] = {}
+
+
+def _rename_schema(doc: dict, spec: dict | None) -> list:
+    """0.1.0 -> 0.2.0: the schema is renamed scale-graph -> scale-catal (the kernel scale-graph-kernel -> scale-kernel,
+    which a document never names). The pin ``graph.schema`` is rewritten; no record changes."""
+    g = doc["graph"]
+    if g.get("schema") == "scale-graph":
+        g["schema"] = "scale-catal"
+        return ["graph.schema: scale-graph -> scale-catal"]
+    return []                                   # already names the new schema: nothing to rewrite
+
+
+STEP_RULES: dict[str, tuple[str, Callable[[dict, dict | None], list]]] = {
+    "0.1.0": ("graph.schema renamed scale-graph -> scale-catal; every record, id and value kept", _rename_schema),
+}
 
 
 def route(have: str | None, to: str) -> list[tuple[str, str, str]] | None:
@@ -46,7 +61,7 @@ def raise_version(doc: dict, to: str, spec: dict | None = None) -> tuple[dict, d
     steps = []
     while have != to:
         if have not in STEPS:
-            raise ScaleError(f"no step from scale-graph {have} towards {to}")
+            raise ScaleError(f"no step from scale-catal {have} towards {to}")
         nxt, cs = STEPS[have]
         rule, fn = STEP_RULES.get(have, ("schema_version raised; meaning_preserving", None))
         step = {"from": have, "to": nxt, "note": cs, "rule": rule}

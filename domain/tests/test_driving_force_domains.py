@@ -14,7 +14,7 @@ from scale import layout, pgraph
 from scale.pgraph_profiles import domain_contract
 from scale.util import load_doc, load_yaml
 
-X = CATALYSIS / "examples/scale-graph"
+X = CATALYSIS / "examples/scale-catal"
 EXAMPLES = [X / "example.json"] + sorted((X / "driving-force-examples").glob("*.json"))
 assert len(EXAMPLES) == 10, f"driving-force examples are missing from {X}"
 FORCES = {"thermo", "electrothermo", "electro", "photo", "plasma"}
@@ -49,17 +49,17 @@ def _violations(doc: dict, spec: dict) -> list[str]:
 # ---------------------------------------------------------------- one domain file, one checklist
 def test_the_schema_is_the_kernel_and_one_domain_file_with_its_checklist(head):
     spec = head
-    man = load_yaml(GRAPH_MANIFEST)                                           # domain/graph/scale-graph.yaml
+    man = load_yaml(GRAPH_MANIFEST)                                           # domain/graph/scale-catal.yaml
     assert spec["version"] == HEAD_VERSION and man["domains"] == ["catalysis.yaml"] and "modules" not in man
     assert layout.manifest_kernel(GRAPH_MANIFEST).resolve() == (REPO / "core/graph/kernel.yaml").resolve()
     assert "extensions" not in man and "profiles" not in man
-    assert sorted(p.name for p in GRAPH_MANIFEST.parent.glob("*.yaml")) == ["catalysis.yaml", "scale-graph.yaml"]
+    assert sorted(p.name for p in GRAPH_MANIFEST.parent.glob("*.yaml")) == ["catalysis.yaml", "scale-catal.yaml"]
     assert set(spec["domains"]) == set(spec["profiles"]) == {"catalysis"}     # the checklist is named after the domain
     c = spec["profiles"]["catalysis"]
     # one version: the checklist and the catalysis file report the manifest's; the file itself carries none
     assert c["driving_forces"] == [] and c["version"] == spec["modules"]["catalysis"]["version"] == HEAD_VERSION
     assert "version" not in load_yaml(GRAPH_MANIFEST.parent / "catalysis.yaml")
-    assert load_yaml(CATALYSIS / "DOMAIN.yaml")["graph"] == {"manifest": "graph/scale-graph.yaml"}
+    assert load_yaml(CATALYSIS / "DOMAIN.yaml")["graph"] == {"manifest": "graph/scale-catal.yaml"}
 
 
 def test_the_domain_file_holds_the_vocabulary_of_every_driving_force(head):

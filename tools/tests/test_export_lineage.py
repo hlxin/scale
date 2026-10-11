@@ -79,7 +79,7 @@ def build() -> dict:
          "props": {"status": "disputed", "origin": "synthetic", "evidence": [ev("p. 2", Q_CLAIM)]}},
     ]
     doc = {"directed": True, "multigraph": True,
-           "graph": {"schema": "scale-graph", "schema_version": HEAD_VERSION, "graph_id": f"{T}/graph",
+           "graph": {"schema": "scale-catal", "schema_version": HEAD_VERSION, "graph_id": f"{T}/graph",
                      "title": "Lineage and provenance of a kg-bundle export (synthetic)", "data_status": "synthetic_example",
                      "follows_domains": ["catalysis"], "stewardship": {"access": "public"}},
            "nodes": nodes, "links": links}
@@ -180,7 +180,7 @@ def test_a_released_publication_keeps_its_id_when_a_later_source_shares_its_segm
 
 
 def test_two_records_whose_bundle_ids_would_meet_get_distinct_ids(tmp_path, head):
-    """Two catalysts named copper whose scale-graph ids' digests share their first six characters: the first keeps
+    """Two catalysts named copper whose scale-catal ids' digests share their first six characters: the first keeps
     the short id, the second's digest grows, and both are exported."""
     import hashlib
     doc = build()
@@ -270,7 +270,7 @@ def test_a_link_resting_only_on_withheld_quotes_is_exported_with_their_digests(t
 
 
 def test_every_bundle_of_a_version_declares_the_same_schema(tmp_path, head):
-    """kg/schema.json is the vocabulary of the scale-graph version (scale-catal 0.1.0), not the graph's subset: two
+    """kg/schema.json is the vocabulary of the scale-catal version (scale-catal 0.1.0), not the graph's subset: two
     different graphs of one version export the same schema, with every label (a Source as Publication) and every edge
     type, and a value not of its declared type is kept as text beside it."""
     a = build()
@@ -282,7 +282,7 @@ def test_every_bundle_of_a_version_declares_the_same_schema(tmp_path, head):
     assert sa == sb and (sa["schema_id"], sa["version"]) == ("scale-catal", head["version"])
     assert set(sa["node_types"]) == {*head["nodes"]} - {"Source"} | {"Publication"}
     assert set(sa["edge_types"]) == set(head["edges"])
-    assert sa["extends"] == {"schema_id": "scale-graph", "version": head["version"], "sha256": pgraph.spec_sha256(head)}
+    assert sa["extends"] == {"schema_id": "scale-catal", "version": head["version"], "sha256": pgraph.spec_sha256(head)}
     m = json.loads((tmp_path / "a/bundle.json").read_text())
     assert (m["schema_id"], m["schema_version"]) == ("scale-catal", head["version"])
     doc = build()
@@ -353,7 +353,7 @@ def test_locators_name_tables_and_figures_and_shipped_texts_get_char_offsets(tmp
 
 
 def test_a_text_named_by_its_source_id_is_quoted_never_withheld(tmp_path, head):
-    """A shipped text may be named by its publication's key or by its source's scale-graph id; either way the
+    """A shipped text may be named by its publication's key or by its source's scale-catal id; either way the
     source's evidence is quoted, never withheld, since its text ships. Two texts for one publication are refused."""
     from scale import rights
     doc = build()

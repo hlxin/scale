@@ -1,4 +1,4 @@
-"""Queries over scale-graph documents: graph patterns, property filters, evidence search, dated paths.
+"""Queries over scale-catal documents: graph patterns, property filters, evidence search, dated paths.
 
 A query plan (YAML or JSON)::
 
@@ -1242,7 +1242,7 @@ def _render_coverage(cov: dict) -> list[str]:
 def render_markdown(res: dict) -> str:
     acc = res.get("access") or {}
     lines = [f"# {res.get('question') or 'Query'}", "", f"status: **{res['status']}** · rows: {res.get('row_count', 0)} · "
-             f"graph {res['graph_id']} (scale-graph {res['schema_version']}, sha256 {res['graph_sha256'][:12]})"
+             f"graph {res['graph_id']} (scale-catal {res['schema_version']}, sha256 {res['graph_sha256'][:12]})"
              + (f" · access: **{acc['level']}**" if acc.get("level") else ""), ""]
     if acc.get("level") and acc["level"] != "public":
         lines += [f"Access: {acc['note']}", ""]

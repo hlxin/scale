@@ -6,7 +6,7 @@ Where each Supporting Information item lives in this repository.
 |---|---|
 | Schema reference (labels, edge types, properties, the checklist) | `scale graph describe [labels] --domain catalysis`; the schema files [`../graph/catalysis.yaml`](../graph/catalysis.yaml) and [`../../core/graph/kernel.yaml`](../../core/graph/kernel.yaml) |
 | Implementation-status inventory | [`implementation-status.md`](../../docs/implementation-status.md) / [`implementation-status.yaml`](../../docs/implementation-status.yaml) |
-| Synthetic example graphs | [`scale-graph/driving-force-examples/`](../examples/scale-graph/driving-force-examples) (one per driving force and combination); the science kernel's in [`core/examples/`](../../core/examples/README.md) |
+| Synthetic example graphs | [`scale-catal/driving-force-examples/`](../examples/scale-catal/driving-force-examples) (one per driving force and combination); the science kernel's in [`core/examples/`](../../core/examples/README.md) |
 | Competency-query examples | [`competency/`](../competency) (graph query plans with their expected answers; `scale domains cq catalysis`) |
 | Invalid examples, each rejected for a stated reason | [`domain/tests/fixtures/invalid/`](../tests/fixtures/invalid) (`expect.yaml`) |
 | Executable commands | [`docs/commands.md`](../../docs/commands.md), `scale --help` |

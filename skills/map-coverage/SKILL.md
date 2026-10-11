@@ -1,10 +1,10 @@
 ---
 name: map-coverage
 version: 0.1.0
-description: Build a coverage map of scale-graph documents — materials by properties by conditions — from query plans and stats, keeping apart what the sources did not state, what they say was not measured or does not apply, what was not curated, what is withheld from the view, what is ambiguous, what is a one-sided bound, what is recorded in another unit or basis and what the schema cannot say, and route the gaps.
+description: Build a coverage map of scale-catal documents — materials by properties by conditions — from query plans and stats, keeping apart what the sources did not state, what they say was not measured or does not apply, what was not curated, what is withheld from the view, what is ambiguous, what is a one-sided bound, what is recorded in another unit or basis and what the schema cannot say, and route the gaps.
 scale_release: ">=v0.1.0"
 inputs:
-  - The scale-graph documents to map (each pins its schema version)
+  - The scale-catal documents to map (each pins its schema version)
   - The axes of the map (e.g. catalyst families × results × temperature bands), or a question the map should answer
 allowed-tools:
   - "scale graph describe [labels] --domain <domain>"   # what the schema can express
@@ -27,7 +27,7 @@ human-review:
   - Whenever a cell is read as "untested" beyond the queried graph
 ---
 
-# Map what scale-graph documents cover
+# Map what scale-catal documents cover
 
 A coverage map shows where the evidence is and where it is not. Its value is in the empty cells,
 so each must say why it is empty: the source did not state it, the source says it was not measured

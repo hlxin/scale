@@ -1,6 +1,6 @@
-"""Build the invalid scale-graph fixtures from a valid public example, one defect each.
+"""Build the invalid scale-catal fixtures from a valid public example, one defect each.
 
-`scale check` (step "invalid scale-graph fixtures are rejected for their stated reasons") and
+`scale check` (step "invalid scale-catal fixtures are rejected for their stated reasons") and
 domain/tests/test_invalid_fixtures.py validate every document here and require that it is
 rejected with the error stated in expect.yaml. Every fixture pins the schema version its base example
 pins (VERSION, read from the example, never spelled here) and is checked under that version, so a
@@ -31,7 +31,7 @@ sys.path.insert(0, str(REPO / "tools"))
 from scale.api import template  # noqa: E402
 from scale.util import load_doc, write_canonical  # noqa: E402
 
-BASE = REPO / "domain/examples/scale-graph/driving-force-examples/electro.json"
+BASE = REPO / "domain/examples/scale-catal/driving-force-examples/electro.json"
 VERSION = load_doc(BASE)["graph"]["schema_version"]      # the one version every fixture pins: the base example's
 
 

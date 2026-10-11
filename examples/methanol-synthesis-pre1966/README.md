@@ -9,10 +9,10 @@ and tests run on it (`tools/tests/test_example_methanol.py`).
 |---|---|
 | `sources.json` | The frozen corpus: all 178 candidate sources with their status under the cutoff and the scope (105 `in_scope`, 10 held-out targets, 58 not retrieved, 4 off scope, 1 after the cutoff), and for each in-scope source its PDF and the PDF's sha256. `scale corpus check sources.json` checks it. |
 | `pdfs/<slug>.pdf` | The 105 PDFs, **local only** (git-ignored; most are in copyright). |
-| `methanol-synthesis.graph.json` | The curated graph, valid under scale-graph 0.1.0: 4,866 nodes, 16,584 links, 684 catalytic tests, 25,239 evidence items. The baseline until the recuration replaces it. |
+| `methanol-synthesis.graph.json` | The curated graph, valid under scale-catal 0.2.0 (migrated from scale-graph 0.1.0 by `scale graph migrate`; only the pin changed): 4,866 nodes, 16,584 links, 684 catalytic tests, 25,239 evidence items. The baseline until the recuration replaces it. |
 | `rights.yaml`, `stewardship.yaml` | Each source's rights (the copyright cap), and who curated the graph for which project. |
 | `queries/*.yaml` | The manuscript's questions as query plans. |
-| `methanol-synthesis-pre1966_v2.0.0.zip` | The graph as a knowledge-graph bundle ([kg-bundle format](../../docs/kg-bundle-format.md) 1.1.0), ready to load into a platform that reads the format, titled "Methanol Synthesis CO/CO2+H2 Pre-1966", its schema scale-catal 0.1.0 (the catalysis vocabulary of scale-graph 0.1.0): 17,563 edges, withheld quotes as digests, 227 typed absences; it follows release 1.1.1. |
+| `methanol-synthesis-pre1966_v3.0.0.zip` | The graph as a knowledge-graph bundle ([kg-bundle format](../../docs/kg-bundle-format.md) 1.1.0), ready to load into a platform that reads the format, titled "Methanol Synthesis CO/CO2+H2 Pre-1966", its schema scale-catal 0.2.0: 17,563 edges, withheld quotes as digests, 227 typed absences; it follows release 2.0.0 (schema 0.1.0). |
 
 A slug is the source's DOI with `/` written as `-` (`10.1021/ie50225a025` → `10.1021-ie50225a025.pdf`); a patent
 without a DOI uses its number (`us1625925a`), a thesis or report its corpus id (`hid-20028`). Source records in the
@@ -64,7 +64,7 @@ Follow the `curate-source` skill (`skills/curate-source/SKILL.md`) one source at
    the PDF's text layer, or Tesseract OCR where it has none, and `joined(extract_pages(pdf)["pages"])` the text to check quotes against
    (needs `pip install pymupdf` and, for OCR, `tesseract`). For scanned pages whose values OCR loses:
    `scale pages render pdfs/<slug>.pdf --source ex:msyn/source/<slug> --pages work/pages`.
-2. **Curate** into a scale-graph document (`scale call template '{"domain": "catalysis"}'`, `scale graph describe
+2. **Curate** into a scale-catal document (`scale call template '{"domain": "catalysis"}'`, `scale graph describe
    <Label> --domain catalysis`), every value as printed, every record with its evidence, every unknown with its
    `missing_reason`.
 3. **Check:** `scale graph validate <doc> --source-text ex:msyn/source/<slug>=<page text>` (0 errors), then
@@ -76,7 +76,7 @@ Follow the `curate-source` skill (`skills/curate-source/SKILL.md`) one source at
 
 - **Schema.** Curated under the consortium repository's scale-graph 0.1.0 (a different schema from this
   repository's 0.1.0; the numbering restarted), moved to that repository's 0.5.0 and re-pinned to this repository's
-  0.1.0 (decision record 0001). The graph's title and description name the consortium's version and its tools.
+  0.1.0 (decision record 0001), then to scale-catal 0.2.0 (the schema's rename, issue #16). The graph's title and description name the consortium's version and its tools.
 - **Release v1.0.0** (2026-10-09; graph sha256 `0dfc8c1c…ed13f`, schema spec `3c2fa720…02006`), its kg-bundle,
   the curation guide, the assembly report (720 gaps, 47 `missing_concept`) and the curation tools are in the git
   history (commit `a169872`, folder `examples/methanol-synthesis-pre1966/`). A kg-bundle is regenerated with

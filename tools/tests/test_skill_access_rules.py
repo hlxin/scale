@@ -34,7 +34,7 @@ def _two_projects(claim_stewardship: dict) -> dict:
         links.append({"id": f"l/about-{key}", "source": "ex:mix/claim/1", "target": f"ex:mix/test/{key}", "type": "ABOUT",
                       "props": {"stewardship": claim_stewardship}})
     return {"directed": True, "multigraph": True,
-            "graph": {"schema": "scale-graph", "graph_id": "ex:mix/graph", "data_status": "research_data",
+            "graph": {"schema": "scale-catal", "graph_id": "ex:mix/graph", "data_status": "research_data",
                       "stewardship": {"access": "institution", "contributed_by": [BOTH]}},
             "nodes": nodes, "links": links}
 

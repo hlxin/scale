@@ -119,13 +119,13 @@ def _two_versions(tmp_path):
     data = tmp_path / "kg"
     ex = data / "examples/demo"
     ex.mkdir(parents=True)
-    src = REPO / "domain/examples/scale-graph/driving-force-examples"
+    src = REPO / "domain/examples/scale-catal/driving-force-examples"
     def at_head(name):                         # an example stays at the version it pins until migrated
         doc = load_doc(src / f"{name}.json")
         doc["graph"]["schema_version"] = HEAD_VERSION    # the examples are valid at the head (test_examples)
         return doc
     write_canonical(ex / "electro.graph.json", at_head("electro"))
-    write_canonical(ex / f"electro.scale-graph-{HEAD_VERSION}.graph.json", at_head("electro"))   # a copy kept at its version
+    write_canonical(ex / f"electro.scale-catal-{HEAD_VERSION}.graph.json", at_head("electro"))   # a copy kept at its version
     bad = at_head("photo")
     bad["graph"]["follows_domains"] = ["no-such-checklist"]
     write_canonical(ex / "odd.graph.json", bad)
@@ -157,17 +157,17 @@ def test_kg_update_dry_run_writes_nothing(tmp_path, step):
     res = update(repo, data, dry_run=True)
     assert tree(data) == before and not res["ok"]
     by = {r["document"].rsplit("/", 1)[-1]: r for r in res["documents"]}
-    assert set(by) == {"electro.graph.json", f"electro.scale-graph-{HEAD_VERSION}.graph.json", "odd.graph.json"}
+    assert set(by) == {"electro.graph.json", f"electro.scale-catal-{HEAD_VERSION}.graph.json", "odd.graph.json"}
     assert by["electro.graph.json"]["status"] == "would update" and by["electro.graph.json"]["steps"] == [
         f"{HEAD_VERSION} → {TO} (additive change)"]
-    assert by[f"electro.scale-graph-{HEAD_VERSION}.graph.json"]["status"] == "kept"
+    assert by[f"electro.scale-catal-{HEAD_VERSION}.graph.json"]["status"] == "kept"
     assert by["odd.graph.json"]["status"] == "refused" and "a step rule cannot migrate it" in by["odd.graph.json"]["why"]
 
 
 def test_kg_update_migrates_validates_and_reindexes(tmp_path, capsys, step):
     from scale.cli import main
     repo, data, ex = _two_versions(tmp_path)
-    odd, kept = (ex / "odd.graph.json").read_bytes(), (ex / f"electro.scale-graph-{HEAD_VERSION}.graph.json").read_bytes()
+    odd, kept = (ex / "odd.graph.json").read_bytes(), (ex / f"electro.scale-catal-{HEAD_VERSION}.graph.json").read_bytes()
     index = (ex / "electro.evidence.jsonl").stat().st_mtime_ns
     assert main(["--repo", str(repo), "kg", "update", "--data", str(data), "--out", str(tmp_path / "r.json")]) == 1   # one refused
     res = load_doc(tmp_path / "r.json")
@@ -175,7 +175,7 @@ def test_kg_update_migrates_validates_and_reindexes(tmp_path, capsys, step):
     assert row["status"] == "updated" and row["after"]["errors"] == 0 and row["index"].endswith("electro.evidence.jsonl")
     doc = load_doc(ex / "electro.graph.json")
     assert doc["graph"]["schema_version"] == TO and doc["graph"]["follows_domains"] == ["catalysis"]
-    assert (ex / "odd.graph.json").read_bytes() == odd and (ex / f"electro.scale-graph-{HEAD_VERSION}.graph.json").read_bytes() == kept
+    assert (ex / "odd.graph.json").read_bytes() == odd and (ex / f"electro.scale-catal-{HEAD_VERSION}.graph.json").read_bytes() == kept
     assert (ex / "electro.evidence.jsonl").stat().st_mtime_ns != index
     assert "refused" in capsys.readouterr().out
     assert res["counts"] == {"kept": 1, "refused": 1, "updated": 1}

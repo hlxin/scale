@@ -2,7 +2,7 @@
 
 The repository root holds ``scale-release.yaml`` and ``releases/``. The specification has two
 layers: the science kernel in ``core/`` and the catalysis domain in ``domain/`` (its graph schema
-manifest ``graph/scale-graph.yaml`` assembles the kernel with the catalysis file
+manifest ``graph/scale-catal.yaml`` assembles the kernel with the catalysis file
 ``graph/catalysis.yaml``: one vocabulary and one checklist), declared by ``domain/DOMAIN.yaml``, whose
 ``domain:`` key names the domain (``catalysis``). The manifest's ``version`` is the one version of the whole
 schema, kernel and catalysis together; the kernel and the catalysis file carry none. The tooling lives in
@@ -59,8 +59,10 @@ RESTRICTED_ENV = "SCALE_RESTRICTED_DATA"
 # `scale domains check` requires these names, because the tools look nowhere else
 DOMAIN_COMPETENCY = "competency"
 DOMAIN_EXAMPLES = "examples"
-DOMAIN_GRAPH_MANIFEST = "graph/scale-graph.yaml"  # a domain's schema manifest (DOMAIN.yaml graph.manifest)
-GRAPH_FROZEN = "frozen"                          # beside a domain's manifest: scale-graph-<v>.yaml and their v<v>/ parts
+SCHEMA_NAME = "scale-catal"                      # the name documents pin (graph.schema) from 0.2.0 on
+LEGACY_SCHEMA_NAME = "scale-graph"               # the name of the same schema in 0.1.0 (frozen copies and documents keep it)
+DOMAIN_GRAPH_MANIFEST = "graph/scale-catal.yaml"  # a domain's schema manifest (DOMAIN.yaml graph.manifest)
+GRAPH_FROZEN = "frozen"                          # beside a domain's manifest: scale-catal-<v>.yaml and their v<v>/ parts
 FROZEN_SUMS = "SHA256SUMS"                       # in every frozen directory: the digests of its files (append-only)
 
 # pytest collects these (pyproject testpaths must say the same)
@@ -89,7 +91,7 @@ def is_local(rel: str | PurePath) -> bool:
 
 
 def is_frozen(parts: tuple[str, ...]) -> bool:
-    """A path inside a frozen scale-graph directory: ``core/graph/frozen/`` or ``domain/graph/frozen/``."""
+    """A path inside a frozen scale-catal directory: ``core/graph/frozen/`` or ``domain/graph/frozen/``."""
     return any(parts[i:i + 2] == ("graph", GRAPH_FROZEN) for i in range(len(parts) - 1))
 
 
@@ -166,7 +168,7 @@ def domain_layers(repo: Path) -> dict[str, Path]:
 
 
 def graph_manifests(repo: Path, experimental: bool = False) -> dict[str, Path]:
-    """Each domain's scale-graph manifest by domain name (DOMAIN.yaml ``graph.manifest``), for the
+    """Each domain's scale-catal manifest by domain name (DOMAIN.yaml ``graph.manifest``), for the
     released (non-experimental) domains unless ``experimental``. There is no repository-wide
     composition: a domain's manifest assembles the science kernel with that domain's own files."""
     from .util import load_yaml           # lazily: setup.py loads this file alone
@@ -185,14 +187,14 @@ def frozen_graph_dir(manifest: Path) -> Path:
 
 
 def frozen_graph_dirs(repo: Path) -> list[Path]:
-    """Every frozen scale-graph directory: the core's frozen kernels, then each domain's frozen versions."""
+    """Every frozen scale-catal directory: the core's frozen kernels, then each domain's frozen versions."""
     dirs = [Path(repo) / KERNEL_FROZEN] + [frozen_graph_dir(m) for m in graph_manifests(repo, experimental=True).values()]
     return [d for d in dirs if d.is_dir()]
 
 
 # ---------------------------------------------------------------- manifests
 def kernel_path(base: Path, ref: str) -> Path:
-    """The kernel file a scale-graph manifest in directory ``base`` names (its ``kernel:`` entry ``ref``), lexically
+    """The kernel file a scale-catal manifest in directory ``base`` names (its ``kernel:`` entry ``ref``), lexically
     normalized and built on ``base`` as given (a repository-relative base gives a repository-relative path). When the
     base passes through a symbolic link, lexical normalization no longer says where ``..`` leads; the path is then the
     file the system reaches (absolute), as when the reference is opened as written."""
@@ -203,7 +205,7 @@ def kernel_path(base: Path, ref: str) -> Path:
 
 
 def manifest_kernel(manifest: Path, ref: str | None = None) -> Path:
-    """The kernel file a scale-graph manifest names (:func:`kernel_path`); ``ref`` when the manifest is given
+    """The kernel file a scale-catal manifest names (:func:`kernel_path`); ``ref`` when the manifest is given
     as data, else its ``kernel:`` as the file says."""
     if ref is None:
         from .util import load_yaml       # lazily: setup.py loads this file alone
@@ -212,7 +214,7 @@ def manifest_kernel(manifest: Path, ref: str | None = None) -> Path:
 
 
 def manifest_layer(manifest: Path) -> str:
-    """The name of the domain a scale-graph manifest given by its path belongs to (``catalysis``): the ``domain/``
+    """The name of the domain a scale-catal manifest given by its path belongs to (``catalysis``): the ``domain/``
     folder holding it whose DOMAIN.yaml declares the domain (:func:`domain_name`; the head, a frozen version, a
     release). The file's
     stem when no folder holding it is one."""

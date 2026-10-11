@@ -13,7 +13,7 @@ published, use the checkout or git form below (`uvx --from …`). The command ta
 exits 0 on success and 1 when the result is an error (which is still printed as JSON).
 
 - **Pin a version** so the same command gives the same behaviour every time:
-  `uvx scale-catal@0.1.0 call …` (see [Staying current](#staying-current)).
+  `uvx scale-catal@0.2.0 call …` (see [Staying current](#staying-current)).
 - **MCP** (Claude Code, Claude Desktop and other MCP hosts): `claude mcp add scale -- uvx scale-catal mcp`,
   or register the command `uvx scale-catal mcp` in your host's MCP settings.
 - **Install once instead:** `pip install scale-catal`, then call `scale call …` directly.
@@ -32,7 +32,7 @@ scale call query - < plan.json               # "-" reads arguments from stdin (l
 ```
 
 Tool names work with or without the `scale_` prefix. There is no configuration to write and nothing
-to upgrade. SCALE reads and writes one data format, **scale-graph documents** (node-link JSON), and
+to upgrade. SCALE reads and writes one data format, **scale-catal documents** (node-link JSON), and
 each document pins the schema version it follows (`graph.schema_version`). Documents live in a
 working directory, `$SCALE_WORKSPACE` (default `~/.scale/workspace`): a relative `path` argument is
 read there, and the two tools that write (`example`, and `migrate` with `save_as`) write only there.
@@ -54,7 +54,7 @@ tools from a schema file. JSON Schema is the format most function-calling interf
 ## Skills (procedures) for systems that load instruction files
 
 ```bash
-uvx scale-catal@0.1.0 skills install <your-agent-skills-folder>
+uvx scale-catal@0.2.0 skills install <your-agent-skills-folder>
 ```
 
 This copies the versioned `SKILL.md` procedures that the latest release lists (`--release <id>` for
@@ -68,7 +68,7 @@ file too (`'{"name": "curate-source", "reference": "references/recipes.md"}'`).
 
 | skill | what it is for |
 |---|---|
-| `curate-source` | translate a declared source (an article, a patent, a report) into a scale-graph document: values as printed, evidence, typed absences, gaps instead of schema changes; with recording recipes |
+| `curate-source` | translate a declared source (an article, a patent, a report) into a scale-catal document: values as printed, evidence, typed absences, gaps instead of schema changes; with recording recipes |
 | `curate-dataset` | turn a data table or a lab file into a document: the file as a Dataset with its digest and column dictionary, records citing their rows, the access its owners set |
 | `query-graph` | answer a question with a graph query plan: rows as reported with evidence, what was left out and why, the coverage, the kind of answer |
 | `map-coverage` | a coverage map (materials by properties by conditions) from query plans, each kind of absence kept apart, gaps routed |
@@ -119,7 +119,7 @@ rather than inventing one), and the potentiostatic baseline at −1.4 V vs Ag/Ag
 
 | what | pinned by | how it updates |
 |---|---|---|
-| the **tool** (the `scale` package, with the schemas it bundles) | the version in the command (`scale-catal@0.1.0`) | change the version; without a pin, `uvx --refresh scale-catal …` fetches the newest |
+| the **tool** (the `scale` package, with the schemas it bundles) | the version in the command (`scale-catal@0.2.0`) | change the version; without a pin, `uvx --refresh scale-catal …` fetches the newest |
 | the **schema version** a document follows | the document itself (`graph.schema_version`) | `scale call migrate` (or `scale graph migrate`) moves it to a newer version when you ask |
 
 A newer tool keeps every earlier schema version (its frozen copies, once a schema change has moved the schema on), so a document is

@@ -43,7 +43,7 @@ def _change(repo) -> None:
 
 
 def _fixture(repo, version: str) -> None:
-    ex = load_doc(REPO / "domain/examples/scale-graph/example.json")
+    ex = load_doc(REPO / "domain/examples/scale-catal/example.json")
     src, test = "ex:exmpl/thermo/source/invented-paper", "ex:exmpl/thermo/test/zno-run-1"
     ev = [{"kind": "text", "locator": "Experimental section", "source": src}]
     ex["graph"]["schema_version"] = version
@@ -108,12 +108,12 @@ def test_a_version_bump_keeps_the_tests_green(tmp_path):
     changelog.write_text(changelog.read_text().replace("## Unreleased\n", "## Unreleased\n\n- Synthetic probe (test).\n", 1))
     res = check(repo, "main")
     assert res["ok"], res["problems"]
-    assert load_yaml(repo / "domain/graph/scale-graph.yaml")["version"] == to
+    assert load_yaml(repo / "domain/graph/scale-catal.yaml")["version"] == to
     assert "version" not in load_yaml(repo / "core/graph/kernel.yaml")              # the kernel carries none
     assert load_yaml(repo / "core/CORE.yaml")["version"] == load_yaml(repo / "domain/DOMAIN.yaml")["version"] == to
     assert load_yaml(repo / "scale-release.yaml")["schema_version"] == to
     assert load_yaml(repo / "core/examples/science-kernel-only.yaml")["version"] == to
-    assert (repo / f"domain/graph/frozen/scale-graph-{HEAD_VERSION}.yaml").is_file()
+    assert (repo / f"domain/graph/frozen/scale-catal-{HEAD_VERSION}.yaml").is_file()
     assert (repo / f"core/graph/frozen/kernel-{HEAD_VERSION}.yaml").is_file()         # the kernel of the base version
     assert list_releases(repo)[-1] == rid                                             # released before the bump
     # the whole suite on the copy: a release built, the schema changed, the version raised

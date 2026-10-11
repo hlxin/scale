@@ -23,7 +23,7 @@ approve or merge.
 |---|---|
 | **two layers** | The specification has two layers: the science kernel and the domains. Catalysis is the first domain and, for now, the only one. Its graph schema is the kernel plus one catalysis file, with one vocabulary and one checklist. There is no repository-wide composition. |
 | **science kernel** | The base layer under [`core/`](../core/) ("the core" as a folder): the kernel file `core/graph/kernel.yaml`, declared by `core/CORE.yaml`. |
-| **catalysis domain** | The folder [`domain/`](../domain/README.md), declared by its `DOMAIN.yaml` (`domain: catalysis`). Its schema manifest `graph/scale-graph.yaml` assembles the kernel with the catalysis file `catalysis.yaml`. Thermocatalysis, electrocatalysis, photocatalysis and plasma catalysis, and their combinations, all belong to it. |
+| **catalysis domain** | The folder [`domain/`](../domain/README.md), declared by its `DOMAIN.yaml` (`domain: catalysis`). Its schema manifest `graph/scale-catal.yaml` assembles the kernel with the catalysis file `catalysis.yaml`. Thermocatalysis, electrocatalysis, photocatalysis and plasma catalysis, and their combinations, all belong to it. |
 | **schema version** | One version for the kernel and the catalysis domain together: the catalysis manifest's `version`, which documents pin (0.1.0 today). Every schema change raises it, whichever file it changes: a breaking change the second number, an additive change the third. |
 | **checklist** | What a catalysis record must and should report: the catalysis file's `checklist:`, named `catalysis`, selected with `--domain` and declared in a document's `follows_domains`. |
 | **suggestion** | An issue or a comment that asks for a change, by a person or an agent. @scale-agents take it up on their own and turn it into a pull request when it asks for a change; anyone may also open one. |
@@ -121,7 +121,7 @@ official release (a human step, release-process.md)
 3. **Review.** CI runs the checks and, for a schema change, writes the summary. A reviewer comments or asks
    for changes on the pull request (the agents push the fixes to their own pull requests), or approves and merges.
 4. **Data repositories.** Whoever keeps a knowledge-graph data repository runs `scale kg update --data DIR` there:
-   every scale-graph document is moved to the new version through the registered migration steps, validated and
+   every scale-catal document is moved to the new version through the registered migration steps, validated and
    its evidence index rebuilt. A document a step rule cannot migrate is reported and left untouched.
 
 Releases stay a human step: [release-process.md](release-process.md).

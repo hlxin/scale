@@ -34,12 +34,12 @@ Then `scale call status` to start, or `claude mcp add scale -- scale mcp` to giv
   object, the evidence item and record references ([how a domain builds on it](core/graph/README.md)).
 - **The catalysis domain** ([`domain/`](domain/README.md)):
   - `catalysis.yaml`: species, materials, reactions, catalysts and the terms for each driving force (heat,
-    electrical heating, potential, light, plasma). [`domain/graph/scale-graph.yaml`](domain/graph/scale-graph.yaml)
+    electrical heating, potential, light, plasma). [`domain/graph/scale-catal.yaml`](domain/graph/scale-catal.yaml)
     joins it with the kernel. Its checklist says what a record **must** and **should** report; the items for a
     catalytic test depend on the driving forces the test lists. A document follows it with
     `follows_domains: ["catalysis"]`. Every concept is provisional.
   - competency questions: query plans with their expected answers, run on public examples (`scale domains cq`);
-  - [synthetic examples](domain/examples/scale-graph/) with invented values, one per driving force and
+  - [synthetic examples](domain/examples/scale-catal/) with invented values, one per driving force and
     combination.
 - **A real example** ([`examples/methanol-synthesis-pre1966/`](examples/methanol-synthesis-pre1966/README.md)):
   105 sources on methanol synthesis from CO/CO2 and H2 published before 1966, curated into one graph with short
@@ -51,23 +51,25 @@ Then `scale call status` to start, or `claude mcp add scale -- scale mcp` to giv
 - **Releases** ([`releases/`](releases/README.md)): fixed, digested releases built by a person; the first
   is `v0.1.0`.
 
-There is one data format: scale-graph documents (node-link JSON), each naming the schema version it follows.
+There is one data format: scale-catal documents (node-link JSON), each naming the schema version it follows.
 Your model does the judgement work, such as extracting values and writing queries; SCALE's tools are
 deterministic. Queries decline rather than guess. See the [implementation status](docs/implementation-status.md)
 and the [architecture](docs/architecture.md).
 
 ## Schema versions
 
-The kernel and the catalysis domain share **one version number**, set in `domain/graph/scale-graph.yaml`.
+The kernel and the catalysis domain share **one version number**, set in `domain/graph/scale-catal.yaml`.
 `core/CORE.yaml`, `domain/DOMAIN.yaml` and `scale-release.yaml` repeat it, and `scale domains check` makes sure
 they agree. Every schema change raises it: the second number for a breaking change, the third for an additive
 one. The old version is frozen in `graph/frozen/`, so a document stays readable under the version it names.
 
-The schema is at **0.1.0**, the first version of this repository's numbering (2026-10-08):
+The schema is at **0.2.0**; 0.1.0 (2026-10-08) was the first version of this repository's numbering. The schema was
+named `scale-graph` until 0.1.0 and is `scale-catal` from 0.2.0 on (a breaking change: documents pin the name):
 
 | version | spec digest (sha256 of the spec document) |
 |---|---|
-| scale-graph 0.1.0 | `3c2fa7205a7bae5e0bbfa7d87826ff7ab7803e78536129064101c7d5a2c02006` |
+| scale-graph 0.1.0 (frozen) | `3c2fa7205a7bae5e0bbfa7d87826ff7ab7803e78536129064101c7d5a2c02006` |
+| scale-catal 0.2.0 | `166bfc5539df7f44de075a4fb504c54170af32d6b3a01a916d6171bfcecec714` |
 
 A version number only means something within this repository, so identify a schema by its digest
 (`scale graph spec` prints it).

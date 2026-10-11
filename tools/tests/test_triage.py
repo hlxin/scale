@@ -106,7 +106,7 @@ def test_agent_command_hook(tmp_path):
 
 
 def test_catalogue_and_suggest_links(tmp_path):
-    doc = load_doc(REPO / "domain/examples/scale-graph/driving-force-examples/electro.json")
+    doc = load_doc(REPO / "domain/examples/scale-catal/driving-force-examples/electro.json")
     md = intake.catalogue_markdown(doc, "hlxin/scale")
     assert "## CatalyticTest" in md and "ex:df-electro/test/m03" in md and "template=comment.yml" in md
     assert "current_density -120 mA/cm2" in md                       # values as reported, with units

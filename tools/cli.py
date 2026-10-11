@@ -52,9 +52,9 @@ def cmd_graph_migrate(args):
     spec = pgraph.load_spec(manifest)
     have = (doc.get("graph") or {}).get("schema_version")
     if have == spec["version"]:
-        raise ScaleError(f"{args.file} is already at scale-graph {have}")
+        raise ScaleError(f"{args.file} is already at scale-catal {have}")
     if have not in STEPS:
-        raise ScaleError(f"{args.file} pins scale-graph {have}; migrations run along the steps {sorted(STEPS) or '(none yet)'} "
+        raise ScaleError(f"{args.file} pins scale-catal {have}; migrations run along the steps {sorted(STEPS) or '(none yet)'} "
                          f"to {spec['version']}")
     new, rep = raise_version(doc, spec["version"], spec)
     rep["validation"] = pgraph.validate(new, spec).as_dict()["summary"]
@@ -78,7 +78,7 @@ def cmd_graph_validate(args):
     else:
         for f, r in reports.items():
             spec = versions[f]
-            print(f"{f}: scale-graph {spec['version']} ({spec['status']}): {'VALID' if r['valid'] else 'INVALID'} "
+            print(f"{f}: {spec.get('schema', 'scale-catal')} {spec['version']} ({spec['status']}): {'VALID' if r['valid'] else 'INVALID'} "
                   f"{ {k: r['summary'][k] for k in ('error', 'warning')} } {r['counts']}")
             for i in r["errors"][:50] + (r["warnings"][:20] if args.verbose else []):
                 print(f"  {i['record']}: {i['message']}")
@@ -164,7 +164,7 @@ def cmd_graph_export(args):
                 raise ScaleError(f"--text {t}: name the text's licence, <source id>=<file>:<licence> (an SPDX id or the "
                                  "source's own licence statement; 'unknown' when it is not known)")
             texts[sid] = (Path(fname).name, Path(fname).read_text(encoding="utf-8"), licence.strip())
-        bid = args.bundle_id or (doc["graph"].get("graph_id") or "scale-graph").split(":")[-1].replace("/", "-")
+        bid = args.bundle_id or (doc["graph"].get("graph_id") or "scale-catal").split(":")[-1].replace("/", "-")
         lineage = _bundle_lineage(args)
         unshipped: list[str] = []
         m = kgbundle.export(doc, spec, Path(args.out), bid, lineage.pop("version"), texts or None, created=args.created,
@@ -208,7 +208,7 @@ def _bundle_lineage(args) -> dict:
             raise ScaleError("--replaced lists retired records by their released ids: give --previous or --ids-from too")
         rmap = load_doc(args.replaced)
         if not isinstance(rmap, dict) or not all(isinstance(k, str) and isinstance(v, str) for k, v in rmap.items()):
-            raise ScaleError(f"{args.replaced}: a map of retired scale-graph id to the id of the record it was merged into")
+            raise ScaleError(f"{args.replaced}: a map of retired scale-catal id to the id of the record it was merged into")
         out["replaced"] = rmap
     if args.corpus:
         res = corpus_mod.check(corpus_mod.load(args.corpus))
@@ -293,7 +293,7 @@ def cmd_graph_describe(args):
 
 
 def cmd_graph_verify(args):
-    """The catalysis scale-graph manifest (domain/graph/scale-graph.yaml) and each of its frozen versions
+    """The catalysis scale-catal manifest (domain/graph/scale-catal.yaml) and each of its frozen versions
     assemble, every frozen directory (the core's kernels, the catalysis versions) matches its SHA256SUMS,
     and every version's spec document keeps the digest the releases published for it (``spec_digests``)."""
     from . import pgraph
@@ -309,9 +309,9 @@ def cmd_graph_verify(args):
                              "labels": len(head["nodes"]), "edges": len(head["edges"]),
                              "extension_prefixes": sorted(head.get("extension_prefixes") or {}),
                              "spec_sha256": digests[(name, head["version"])]})
-        for m in sorted(layout.frozen_graph_dir(man).glob("scale-graph-*.yaml")):
+        for m in sorted(layout.frozen_graph_dir(man).glob("scale-catal-*.yaml")):
             spec = pgraph.load_spec(m)
-            want = m.stem.removeprefix("scale-graph-")
+            want = m.stem.removeprefix("scale-catal-")
             digests[(name, spec["version"])] = pgraph.spec_sha256(spec)
             res["frozen"].append({"domain": name, "manifest": m.relative_to(repo).as_posix(), "version": spec["version"],
                                   "spec_sha256": digests[(name, spec["version"])], "ok": spec["version"] == want})
@@ -340,7 +340,7 @@ def cmd_graph_spec(args):
     every = layout.graph_manifests(repo, experimental=True)
     if args.domain:
         if args.domain not in every:
-            raise ScaleError(f"no scale-graph schema for {args.domain!r}; use {', '.join(sorted(every))}")
+            raise ScaleError(f"no scale-catal schema for {args.domain!r}; use {', '.join(sorted(every))}")
         mans = {args.domain: every[args.domain]}
     elif args.spec or not args.all:
         man = Path(pgraph.spec_path(repo, args.spec))
@@ -353,7 +353,7 @@ def cmd_graph_spec(args):
     for name, man in mans.items():
         held = dict(pgraph.spec_versions(man))
         if args.version and args.version not in held:
-            raise ScaleError(f"{name} has no scale-graph {args.version} (versions: {', '.join(held)})")
+            raise ScaleError(f"{name} has no scale-catal {args.version} (versions: {', '.join(held)})")
         wanted = list(held) if args.all else [args.version or str(load_yaml(man).get("version"))]
         for v in wanted:
             spec = pgraph.load_spec(held[v])
@@ -361,13 +361,13 @@ def cmd_graph_spec(args):
             row = {"domain": name, "version": v, "manifest": _rel(repo, held[v]), "sha256": hashlib.sha256(data).hexdigest(),
                    "bytes": len(data)}
             if out:
-                dest = out / name / f"scale-graph-{v}.json" if args.all else out
+                dest = out / name / f"scale-catal-{v}.json" if args.all else out
                 dest.parent.mkdir(parents=True, exist_ok=True)
                 dest.write_bytes(data)
                 row["written"] = str(dest)
             rows.append(row)
     if out and args.all:                       # the digests beside the files, as in a frozen directory
-        (out / "SHA256SUMS").write_text("".join(f"{r['sha256']}  {r['domain']}/scale-graph-{r['version']}.json\n"
+        (out / "SHA256SUMS").write_text("".join(f"{r['sha256']}  {r['domain']}/scale-catal-{r['version']}.json\n"
                                                 for r in rows))
     print(to_json(rows if args.all else rows[0]))
 
@@ -972,9 +972,9 @@ def build_parser() -> argparse.ArgumentParser:
         sp.add_argument("--out", help="write output to a file")
         sp.add_argument("--format", choices=list(fmt), default=fmt[0])
 
-    gr = sub.add_parser("graph", help="scale-graph property graphs in node-link JSON").add_subparsers(dest="sub", required=True)
-    sp = add("validate", cmd_graph_validate, "validate node-link documents against the scale-graph schema", gr)
-    sp.add_argument("files", nargs="+"); sp.add_argument("--spec", help="a schema manifest, e.g. domain/graph/scale-graph.yaml (default: the catalysis manifest)")
+    gr = sub.add_parser("graph", help="scale-catal property graphs in node-link JSON").add_subparsers(dest="sub", required=True)
+    sp = add("validate", cmd_graph_validate, "validate node-link documents against the scale-catal schema", gr)
+    sp.add_argument("files", nargs="+"); sp.add_argument("--spec", help="a schema manifest, e.g. domain/graph/scale-catal.yaml (default: the catalysis manifest)")
     sp.add_argument("--source-text", action="append", help="<source-id>=<file> for verbatim quote checks")
     sp.add_argument("-v", "--verbose", action="store_true"); out_opts(sp, ("text", "json"))
     sp = add("stats", cmd_graph_stats, "count labels, edge types, properties and units in use, and link patterns", gr)
@@ -987,7 +987,7 @@ def build_parser() -> argparse.ArgumentParser:
                         "local and the UTC date; never later than today)")
     sp = add("filter", cmd_graph_filter, "keep only what a viewer may see under each record's stewardship", gr)
     sp.add_argument("file"); sp.add_argument("--out"); viewer_opts(sp)
-    sp = add("migrate", cmd_graph_migrate, "move a scale-graph document along the schema's version steps to the current version (ids kept)", gr)
+    sp = add("migrate", cmd_graph_migrate, "move a scale-catal document along the schema's version steps to the current version (ids kept)", gr)
     sp.add_argument("file"); sp.add_argument("dest", help="where to write the migrated document"); sp.add_argument("--spec")
     out_opts(sp)
     sp = add("export", cmd_graph_export, "export: Neo4j/APOC JSON lines, or a knowledge-graph bundle (--to kg-bundle)", gr)
@@ -1005,7 +1005,7 @@ def build_parser() -> argparse.ArgumentParser:
                     "recorded as the predecessor (bundle.json previous and changes) and its changelog is carried forward")
     sp.add_argument("--ids-from", metavar="DIR", help="kg-bundle: an earlier build whose ids to keep, without recording it as "
                     "the previous release")
-    sp.add_argument("--replaced", metavar="FILE", help="kg-bundle: JSON or YAML map of a retired scale-graph id to the id of the "
+    sp.add_argument("--replaced", metavar="FILE", help="kg-bundle: JSON or YAML map of a retired scale-catal id to the id of the "
                     "record it was merged into; the survivor lists the retired record's released id in replaced_ids")
     sp.add_argument("--corpus", metavar="MANIFEST", help="kg-bundle: the frozen corpus manifest; checked as scale corpus check "
                     "does, it fills bundle.json's corpus block")
@@ -1023,7 +1023,7 @@ def build_parser() -> argparse.ArgumentParser:
     sp.add_argument("--domain", help="whose schema to write (catalysis)")
     sp.add_argument("--version", help="the version (default: the head); a frozen one is read from graph/frozen/")
     sp.add_argument("--all", action="store_true", help="every version of the catalysis schema (or of --domain): --out is then a "
-                                                      "directory, with <domain>/scale-graph-<version>.json and SHA256SUMS")
+                                                      "directory, with <domain>/scale-catal-<version>.json and SHA256SUMS")
     sp.add_argument("--out", help="the file to write (a directory with --all); without it only the digest is printed")
     sp.add_argument("--expect", metavar="SHA256", help="check that the version is the schema of this spec digest here "
                     "(exit 1 when it is not, or when the version is not held here)")
@@ -1067,7 +1067,7 @@ def build_parser() -> argparse.ArgumentParser:
     sp.add_argument("file"); sp.add_argument("--rights", help="the rights file of the corpus's sources")
     sp.add_argument("--corpus", help="the corpus path: its nearest rights.yaml (in it or above, within the working directory)")
     sp.add_argument("-o", "--output", help="write the Markdown here when the report passes")
-    sp = add("access", cmd_evidence_access, "every committed scale-graph document (or the given ones) states access public: graph and records (a missing access is not public)", ev)
+    sp = add("access", cmd_evidence_access, "every committed scale-catal document (or the given ones) states access public: graph and records (a missing access is not public)", ev)
     sp.add_argument("files", nargs="*")
 
     cp = sub.add_parser("corpus", help="a frozen corpus manifest").add_subparsers(dest="sub", required=True)
@@ -1099,7 +1099,7 @@ def build_parser() -> argparse.ArgumentParser:
     sp.add_argument("--transcription", help="what you read there, to see whether OCR reads the same numbers"); out_opts(sp)
     sp = add("agree", cmd_pages_agree, "write the tool's agreement onto every evidence item read from a page image, and the "
              "OCR engines used in the document's ocr_engines (never written by hand)", pg)
-    sp.add_argument("doc", help="a curated document (scale-graph or a curation fragment)")
+    sp.add_argument("doc", help="a curated document (scale-catal or a curation fragment)")
     sp.add_argument("--pages", required=True, help=PAGES_HELP); out_opts(sp)
     sp = add("check", cmd_pages_check, "the two-reader rule: each agreement recomputed (a difference from another OCR engine "
              "is a warning), a reading OCR does not confirm has a matching independent second reading, every value of a "
@@ -1193,7 +1193,7 @@ def build_parser() -> argparse.ArgumentParser:
     sp = add("publish", cmd_triage_publish, "open the digest issue and notify threads (dry run unless --publish)", tr)
     sp.add_argument("dir"); sp.add_argument("--github-repo"); sp.add_argument("--publish", action="store_true")
 
-    sp = add("catalogue", cmd_catalogue, "render a readable catalogue of a scale-graph document with a comment link per record")
+    sp = add("catalogue", cmd_catalogue, "render a readable catalogue of a scale-catal document with a comment link per record")
     sp.add_argument("graph"); sp.add_argument("--out", required=True); sp.add_argument("--github-repo")
 
     sp = add("suggest", cmd_suggest, "print a pre-filled link for commenting on a record or topic")
@@ -1231,7 +1231,7 @@ def build_parser() -> argparse.ArgumentParser:
 
 
     kg = sub.add_parser("kg", help="a knowledge-graph data repository (a folder of curated documents kept apart from this repository)").add_subparsers(dest="sub", required=True)
-    sp = add("update", cmd_kg_update, "move every catalysis scale-graph document under a directory to the head (or "
+    sp = add("update", cmd_kg_update, "move every catalysis scale-catal document under a directory to the head (or "
              "--to) schema version through the registered steps, validate, and write in place (not with --dry-run)", kg)
     sp.add_argument("--data", default=".", help="the data directory (default: the current directory)")
     sp.add_argument("--domain", default="catalysis", help="whose schema the documents follow (default: catalysis)")

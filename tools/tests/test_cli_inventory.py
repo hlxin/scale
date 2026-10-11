@@ -72,7 +72,7 @@ def test_documented_install_command_pins_the_current_version():
 def test_check_runs_the_ci_checks(capsys):
     assert main(["--repo", str(REPO), "check", "--fast"]) == 0
     out = capsys.readouterr().out
-    assert "invalid scale-graph fixtures are rejected for their stated reasons" in out
+    assert "invalid scale-catal fixtures are rejected for their stated reasons" in out
     assert "competency questions answer as expected" in out and out.rstrip().endswith("all checks passed")
 
 

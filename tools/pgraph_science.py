@@ -1,4 +1,4 @@
-"""Science checks of the scale-graph science kernel.
+"""Science checks of the scale-catal science kernel.
 
 Rules about the method of science that a type check cannot express: tests that assert an outcome
 cite what it rests on; predictions made after the result are flagged; a fit does not confirm its

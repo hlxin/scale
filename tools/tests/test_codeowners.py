@@ -73,16 +73,16 @@ def test_the_owner_owns_every_path(rules):
 
 
 def _catalysis_proposal_changed_paths(pid: str = "000001", ver: str = "0.1.0") -> list[str]:
-    """What applying a catalysis-only scale-graph proposal changes in a pull request: its record, the domain file it
+    """What applying a catalysis-only scale-catal proposal changes in a pull request: its record, the domain file it
     installs, the domain's schema manifest, the files that state the one version, the frozen copy of the base
     version with its kernel and their SHA256SUMS lines, the decision record with its log entry and the gap register."""
     cs = f"domain/proposals/{pid}"
     record = [f"{cs}/proposal.yaml", f"{cs}/candidate/domain/graph/catalysis.yaml", f"{cs}/validation_report.json"]
     fz = "domain/graph/frozen"
-    frozen = [f"{fz}/scale-graph-{ver}.yaml", f"{fz}/{layout.FROZEN_SUMS}", f"{fz}/v{ver}/catalysis.yaml",
+    frozen = [f"{fz}/scale-catal-{ver}.yaml", f"{fz}/{layout.FROZEN_SUMS}", f"{fz}/v{ver}/catalysis.yaml",
               f"core/graph/frozen/kernel-{ver}.yaml", f"core/graph/frozen/{layout.FROZEN_SUMS}"]
     stating = ["core/CORE.yaml", "domain/DOMAIN.yaml", "scale-release.yaml", "core/examples/science-kernel-only.yaml"]
-    return record + ["domain/graph/catalysis.yaml", "domain/graph/scale-graph.yaml"] + stating + frozen + [
+    return record + ["domain/graph/catalysis.yaml", "domain/graph/scale-catal.yaml"] + stating + frozen + [
         f"{layout.DECISIONS}/0002-{pid}.md", layout.DECISION_LOG, layout.GAP_REGISTER]
 
 

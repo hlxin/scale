@@ -61,11 +61,11 @@ def test_a_breaking_change_raises_the_second_number_and_needs_a_rule(repo):
     assert out["version"] == to and "STEP_RULES" in out["next"]
     steps, rules = repo_steps(repo)
     assert steps[HEAD_VERSION] == (to, "feed_ratio removed") and HEAD_VERSION not in rules
-    for rel, key in (("domain/graph/scale-graph.yaml", "version"), ("core/CORE.yaml", "version"),
+    for rel, key in (("domain/graph/scale-catal.yaml", "version"), ("core/CORE.yaml", "version"),
                      ("domain/DOMAIN.yaml", "version"), ("scale-release.yaml", "schema_version"),
                      ("core/examples/science-kernel-only.yaml", "version")):
         assert str(load_yaml(repo / rel)[key]) == to, rel
-    frozen = repo / f"domain/graph/frozen/scale-graph-{HEAD_VERSION}.yaml"
+    frozen = repo / f"domain/graph/frozen/scale-catal-{HEAD_VERSION}.yaml"
     assert load_yaml(frozen)["status"] == "frozen" and (repo / f"core/graph/frozen/kernel-{HEAD_VERSION}.yaml").is_file()
     with pytest.raises(ScaleError, match="bump once per change"):
         bump(repo, "main")

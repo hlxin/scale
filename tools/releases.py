@@ -2,13 +2,13 @@
 
 A SCALE release (``releases/<version>/``, ids ``vX.Y.Z``) binds, at their repository-relative
 paths: the core's declaration and the science kernel with its frozen versions, each released
-domain's declaration and scale-graph schema (its manifest, the domain files it lists and the frozen
+domain's declaration and scale-catal schema (its manifest, the domain files it lists and the frozen
 versions beside it), and the skills, with a sha256 digest of every file. The files are always taken
 from the repository head, the applied state; a release is never edited afterwards. ``RELEASE.yaml``
 records the schema's one version and what it binds (``component_versions``), the people credited
 (``contributors``), the experimental domains it leaves out and a semantic comparison of every domain's assembled schema and of the kernel with
 the previous release. It also ships the spec document of every version of every released
-domain's schema (``specs/<domain>/scale-graph-<version>.json``, the assembled schema as canonical JSON,
+domain's schema (``specs/<domain>/scale-catal-<version>.json``, the assembled schema as canonical JSON,
 :func:`pgraph.spec_document`), listed with its sha256 in ``spec_documents``: the published artifact a reader
 binds a schema by, since a bare version number names a schema only within one numbering. ``scale graph
 verify`` checks that every version keeps the digest a release published for it (:func:`spec_digest_stability`).
@@ -32,7 +32,7 @@ from .versions import DISTRIBUTION, normalize_release_id, release_id, release_ke
 GENERATED_KEYS = ("status", "date", "previous", "comparison_to_previous",
                   "built_with", "source", "component_versions", "contributors", "excluded_domains", "spec_documents",
                   "digests")
-SPECS = "specs"            # a release's spec documents: specs/<domain>/scale-graph-<version>.json
+SPECS = "specs"            # a release's spec documents: specs/<domain>/scale-catal-<version>.json
 
 
 # ---------------------------------------------------------------- discovery
@@ -88,7 +88,7 @@ def skill_folder(skill: Path) -> list[Path]:
 
 def head_artifacts(repo: Path) -> dict:
     """The head's core declaration, the kernel and its frozen versions, and each released domain's
-    declaration and scale-graph files (its manifest, the parts it lists, the frozen versions beside it),
+    declaration and scale-catal files (its manifest, the parts it lists, the frozen versions beside it),
     repository-relative, with the loaded declarations. Refuses a listed experimental domain."""
     from .schema_change import PACKAGE_KEYS
     repo = Path(repo)
@@ -176,7 +176,7 @@ def credited_people(art: dict) -> list[dict]:
 
 def component_versions(art: dict, manifest: dict, dest: Path) -> dict:
     """The schema's one version (its manifest's, which documents pin), the core and each released domain at that
-    version with the domain's scale-graph manifest; the tool and the skills."""
+    version with the domain's scale-catal manifest; the tool and the skills."""
     v = art["schema_version"]
     return {"schema": {"version": v},
             "core": {"name": art["core"].get("core"), "version": v},
@@ -208,7 +208,7 @@ def kernel_spec(kernel: Path, version: str | None = None) -> dict:
     two kernels."""
     from .pgraph_schema import assemble_manifest
     k = load_yaml(kernel)
-    return assemble_manifest({"schema": "scale-graph", "version": version, "status": k.get("status"),
+    return assemble_manifest({"schema": "scale-catal", "version": version, "status": k.get("status"),
                               "kernel": Path(kernel).name, "domains": []}, Path(kernel).parent)
 
 
@@ -253,7 +253,7 @@ def file_changes(prev_digests: dict, new_digests: dict) -> dict:
 
 
 def _unbumped(prev: dict, previous: str, prev_digests: dict, art: dict, new_digests: dict) -> list[str]:
-    """The schema files (the kernel and each released domain's scale-graph files) whose bytes changed since the
+    """The schema files (the kernel and each released domain's scale-catal files) whose bytes changed since the
     previous release while the schema's one version did not."""
     schema_files = {layout.KERNEL} | {f for g in art["graphs"].values() for f in art["files"]
                                       if f.startswith(f"{Path(g['manifest']).parent.as_posix()}/")}
@@ -270,14 +270,14 @@ def _unbumped(prev: dict, previous: str, prev_digests: dict, art: dict, new_dige
 
 def write_spec_documents(dest: Path, art: dict) -> list[dict]:
     """Write the spec document of every version of every released domain's schema, as the release holds it
-    (its manifest and the frozen versions beside it), into ``specs/<domain>/scale-graph-<version>.json``;
+    (its manifest and the frozen versions beside it), into ``specs/<domain>/scale-catal-<version>.json``;
     returns ``spec_documents``: domain, version, file and sha256 of each."""
     from . import pgraph
     out = []
     for name, g in art["graphs"].items():
         for v, path in pgraph.spec_versions(Path(dest) / g["manifest"]):
             data = pgraph.spec_bytes(pgraph.load_spec(path))
-            rel = f"{SPECS}/{name}/scale-graph-{v}.json"
+            rel = f"{SPECS}/{name}/scale-catal-{v}.json"
             (Path(dest) / rel).parent.mkdir(parents=True, exist_ok=True)
             (Path(dest) / rel).write_bytes(data)
             out.append({"domain": name, "version": v, "file": rel, "sha256": hashlib.sha256(data).hexdigest()})
@@ -316,7 +316,7 @@ def spec_digest_stability(repo: Path, digests: dict[tuple[str, str], str]) -> di
             checked.append({"release": rid, "domain": d["domain"], "version": d["version"], "sha256": d["sha256"],
                             "basis": d["basis"], "ok": ok})
             if not ok:
-                problems.append(f"{d['domain']} scale-graph {d['version']}: release {rid} has spec digest {d['sha256']}, "
+                problems.append(f"{d['domain']} scale-catal {d['version']}: release {rid} has spec digest {d['sha256']}, "
                                 + (f"the repository's now {now}" if now else "and the repository no longer holds that version"))
     return {"ok": not problems, "checked": checked, "problems": problems}
 

@@ -23,7 +23,7 @@ pull request that makes it is. Each item is a suggestion @scale-agents can take 
     `catalysis@0.1.0`;
   - the checklist's `basis` in `graph/catalysis.yaml` cites "the adopted catalysis schema 0.1.0" three times (the
     thermal, electrochemical and photochemical profiles): the catalysis schema 0.1.0 of that earlier numbering, not
-    this repository's scale-graph 0.1.0; the text names where the profiles came from instead (for example "the
+    this repository's scale-catal 0.1.0; the text names where the profiles came from instead (for example "the
     thermal profile of the consortium schema repository's catalysis schema 0.1.0");
   - the kernel's `Operation` text that still speaks of driving-force domains, the descriptions that still speak of
     modules, and the informational `extensions.registry` path.

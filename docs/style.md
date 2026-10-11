@@ -7,7 +7,7 @@
 | content | written by | format |
 |---|---|---|
 | specifications (the kernel, the catalysis file, schema manifests), the catalysis and kernel declarations (`DOMAIN.yaml`, `CORE.yaml`), competency questions, skills metadata, project configuration, GitHub templates and workflows | people, reviewed line by line | **YAML**, block style |
-| scale-graph documents, curation fragments, gap reports, decision log, tool input and output, query results, triage queues and proposals | tools and agents (sometimes people) | **canonical JSON** |
+| scale-catal documents, curation fragments, gap reports, decision log, tool input and output, query results, triage queues and proposals | tools and agents (sometimes people) | **canonical JSON** |
 | exchange with other systems | — | Neo4j JSON lines and kg-bundles (`scale graph export`) |
 
 Tools accept YAML input anywhere a JSON document is expected, and write JSON.
@@ -50,7 +50,7 @@ stable, whichever tool or agent wrote the file.
   `prov:wasGeneratedBy`; nothing in SCALE is renamed to follow another vocabulary's case.
 - **Graph databases:** an export may render predicates as `UPPER_SNAKE` (e.g. `GENERATED_BY`)
   without changing stored names.
-- **scale-graph** (`core/graph/`, `domain/graph/`) follows the labeled-property-graph convention:
+- **scale-catal** (`core/graph/`, `domain/graph/`) follows the labeled-property-graph convention:
   | thing | style | examples |
   |---|---|---|
   | node labels | PascalCase, one word, no spaces or slashes | `CatalyticTest`, `ChemicalSpecies`, `Institution` |

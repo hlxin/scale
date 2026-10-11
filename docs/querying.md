@@ -29,7 +29,7 @@ limit: 50
 (Competency questions are written in block-style YAML; the flow style here is for brevity.)
 
 ```bash
-scale graph query domain/examples/scale-graph/driving-force-examples/electro.json plan.yaml --format markdown
+scale graph query domain/examples/scale-catal/driving-force-examples/electro.json plan.yaml --format markdown
 ```
 
 A plan may also search the evidence by words and meaning (`text: {query, vars, mode, min_score}`,

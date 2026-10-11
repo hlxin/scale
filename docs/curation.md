@@ -8,7 +8,7 @@ table or a lab file is curated with [`curate-dataset`](../skills/curate-dataset/
 
 | step | who | output |
 |---|---|---|
-| read the source; identify the records (samples, tests, conditions, results, claims); attach evidence | person or language-model agent following the skill | a **scale-graph document** that pins the catalysis schema version and follows its checklist |
+| read the source; identify the records (samples, tests, conditions, results, claims); attach evidence | person or language-model agent following the skill | a **scale-catal document** that pins the catalysis schema version and follows its checklist |
 | check the document: validity, checklist conformance, quotes verbatim in the source text, REPORTED_IN backed by evidence | `scale graph validate` (deterministic) | validation report |
 | build the evidence index | `scale graph index` (deterministic) | a vector and term statistics per quote, for `scale graph search` and text queries |
 | review | catalysis reviewer (`scale review sample` draws a reproducible sample for a Tier 1 check) | the document's review status |
@@ -83,7 +83,7 @@ values first, then shorter texts first, then by record id) while they fit, and w
 is trimmed. A **withheld** text leaves the evidence item with its source, locator, kind (and passage,
 region): the text field is removed and `note` records `quote withheld: sha256:<hex> chars:<n>` (or
 `transcription withheld: …`), the digest and length of the text under the verbatim checker's normalization,
-after `"; "` when the item had a note. The encoding is valid under every scale-graph version. `rehydrate`
+after `"; "` when the item had a note. The encoding is valid under every scale-catal version. `rehydrate`
 finds each withheld text by sliding a window of the recorded length over the normalized source text
 (`--texts DIR` holds `<last segment of the source id>.txt`, or `--source-text ID=FILE`) and reports what it
 cannot find; a reading of a page image is not in the text layer and cannot be restored this way.

@@ -47,7 +47,7 @@ class Doc:
     def __init__(self, gid: str, title: str):
         self.p = gid
         self.doc = {"directed": True, "multigraph": True,
-                    "graph": {"schema": "scale-graph", "schema_version": VERSION, "graph_id": f"{gid}/graph",
+                    "graph": {"schema": "scale-catal", "schema_version": VERSION, "graph_id": f"{gid}/graph",
                               "title": title, "data_status": "synthetic_example",
                               "stewardship": {"access": "public"}},      # committed documents say so (scale check)
                     "nodes": [], "links": []}

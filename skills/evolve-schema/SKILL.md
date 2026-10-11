@@ -1,12 +1,12 @@
 ---
 name: evolve-schema
 version: 0.2.0
-description: Turn missing-concept gaps or a person's request into a scale-graph schema change in one pull request — the edit to the schema files, fixtures and counterexamples, the version raised by the rule, the migration step and the competency questions to re-run — for one person's approval.
+description: Turn missing-concept gaps or a person's request into a scale-catal schema change in one pull request — the edit to the schema files, fixtures and counterexamples, the version raised by the rule, the migration step and the competency questions to re-run — for one person's approval.
 scale_release: ">=v0.1.0"
 inputs:
   - Gap reports of kind missing_concept (curation fragments, `scale gap from-query`, a GitHub issue, a `gap-report` issue from a corpus run, or a person's request)
   - The documents containing the motivating records
-  - The schema files (core/graph/kernel.yaml, domain/graph/catalysis.yaml; the manifest domain/graph/scale-graph.yaml)
+  - The schema files (core/graph/kernel.yaml, domain/graph/catalysis.yaml; the manifest domain/graph/scale-catal.yaml)
 allowed-tools:
   - "scale schema diff | bump | check --base origin/main"
   - "scale graph describe | validate | query | search | migrate"
@@ -41,7 +41,7 @@ other: it edits the schema files directly, and CI checks that it carries what it
    first**). Write the decisions in the pull request description.
 3. **Edit the schema files** on a branch: the science kernel `core/graph/kernel.yaml` for general scientific
    distinctions, the catalysis file `domain/graph/catalysis.yaml` for everything about catalysis. The schema has
-   **one version** for both, the manifest's (`domain/graph/scale-graph.yaml`); the part files carry no `version`,
+   **one version** for both, the manifest's (`domain/graph/scale-catal.yaml`); the part files carry no `version`,
    so never add one. Prefer additions; new labels, edge types and properties enter with
    **`maturity: provisional`**. Loosen a checklist with `unless` exemptions rather than removing requirements;
    items that hold only for some records go in a `when` case (a condition such as

@@ -1,7 +1,7 @@
 ---
 name: curate-source
 version: 0.1.0
-description: Translate a declared source into a scale-graph document (node-link JSON) under the schema version it pins, preserving source locations, reported values, units, explicit missingness and evidential status; record gaps instead of changing the schema.
+description: Translate a declared source into a scale-catal document (node-link JSON) under the schema version it pins, preserving source locations, reported values, units, explicit missingness and evidential status; record gaps instead of changing the schema.
 scale_release: ">=v0.1.0"
 inputs:
   - A declared source set (identifiers and, where licensing permits, local text for verbatim checks)
@@ -18,7 +18,7 @@ allowed-tools:
   - read access to the declared source text
   - write access to the working directory only
 outputs:
-  - A scale-graph document (graph header, nodes, links) that pins the catalysis schema version and follows its checklist
+  - A scale-catal document (graph header, nodes, links) that pins the catalysis schema version and follows its checklist
   - The validation report (errors, warnings, checklist conformance)
   - Gaps classified as missing_concept, extraction_error, absent_source_information, ambiguous_source_information
   - The frozen corpus manifest (every candidate source with its status, and a reason when it is left out)
@@ -36,11 +36,11 @@ human-review:
   - Whenever a gap of kind missing_concept is raised
 ---
 
-# Curate a source into a scale-graph document
+# Curate a source into a scale-catal document
 
 The schema constrains what a completed record means; the source determines which parts can
 actually be populated. The extraction model is not the authority that defines the target concepts.
-Worked examples of what it produces are the synthetic documents in `domain/examples/scale-graph/`
+Worked examples of what it produces are the synthetic documents in `domain/examples/scale-catal/`
 (one per driving force and combination). Short recording recipes for
 situations the schema covers less obviously (set and nominal values, conflicts, kinetics,
 thermochemistry, computations, reactor and bed keys, ratios, commercial catalysts, balances and
@@ -62,7 +62,7 @@ impurities, driving forces outside the list, characterization results, digitizin
    reading's region and transcription on the evidence, the tool's agreement, an independent second
    reading where OCR does not confirm it; docs/curation.md, "Reading scanned pages: two readers").
 3. **Read the schema, not your memory of it:** `scale graph describe <Label> --domain catalysis`
-   (the schema is the catalysis graph schema manifest, `domain/graph/scale-graph.yaml`: the
+   (the schema is the catalysis graph schema manifest, `domain/graph/scale-catal.yaml`: the
    science kernel plus the catalysis file (`catalysis.yaml`) with its one checklist). What a catalytic test must
    and should report depends on the driving forces it lists (`driving_forces`: the checklist's `when`
    cases), so record the forces the source describes; never add a force to satisfy a checklist.
