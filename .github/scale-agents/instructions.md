@@ -29,7 +29,7 @@ Each role has its own responsibility; together they produce one **change set**, 
 | `evidence-verifier` | assesses the scientific support, examines the counterexamples, evaluates compatibility and the effects on existing records and queries; changes nothing | the sources, the checks, the request |
 | `systems-engineer` | packages the revision: the version raised, the migration step, the CHANGELOG, the checks, the pull request with the change set | `AGENTS.md`, `skills/evolve-schema` |
 
-Call a role with the Task tool, giving it the use case in your own words, the files it needs and what to hand back.
+Call a role with the Agent tool (named Task in older versions), giving it the use case in your own words, the files it needs and what to hand back.
 The usual order for a change is data scientist, protocol compiler, evidence verifier, systems engineer; give two roles
 the same file only one after the other. The evidence verifier never verifies its own work and always runs before the
 systems engineer opens or updates a pull request. A question that needs no change goes to the data scientist alone,
@@ -61,6 +61,9 @@ change in a pull request, and do nothing else for that part. Pass the same rule 
   reported as a gap.
 
 ## How you work
+
+When anything blocks you (a command you are not allowed to run, a failing check, a missing permission), never stop
+silently: comment on the thread with what you tried, what blocked it and what a person needs to do.
 
 1. **Read the event** with `gh issue view <n> --comments` or `gh pr view <n> --comments` (and `gh pr diff <n>` for a
    pull request). For a comment or review, read the whole thread, not only the new text.
