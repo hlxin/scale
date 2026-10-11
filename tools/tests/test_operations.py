@@ -96,7 +96,9 @@ def test_who_may_start_the_agents_and_what_workflows_may_write():
                             "workflow_dispatch": agents["on"]["workflow_dispatch"]}
     job = agents["jobs"]["agents"]
     cond = " ".join(job["if"].split())
-    assert cond == "github.event.sender.type != 'Bot' && (github.event_name != 'workflow_dispatch' || github.ref == 'refs/heads/main')"
+    assert cond == ("github.event.sender.type != 'Bot' && (github.event_name != 'workflow_dispatch' || github.ref == 'refs/heads/main') "
+                    "&& !(github.event_name == 'pull_request_review' && github.event.review.state == 'approved' "
+                    "&& !github.event.review.body)")          # an approval with no text starts no run
     assert job["permissions"]["contents"] == "read"
     action = next(s for s in job["steps"] if str(s.get("uses", "")).startswith("anthropics/claude-code-action"))
     assert "trigger_phrase" not in action["with"] and "label_trigger" not in action["with"]
@@ -119,6 +121,15 @@ def test_who_may_start_the_agents_and_what_workflows_may_write():
     assert "inputs.issue" in agents["concurrency"]["group"] and "issue" in agents["on"]["workflow_dispatch"]["inputs"]
     last = job["steps"][-1]["run"]
     assert "OUTCOME: [a-z]*" in last and "exit 1" in last
+    # the instructions and roles go outside the checkout, from main: on an event about a pull request the action resets
+    # the checkout's .claude/ to main's, which has none; the prompt itself says how to read the event and how to end
+    names = [s.get("name", s.get("uses", "")) for s in job["steps"]]
+    install = next(s for s in job["steps"] if "~/.claude/CLAUDE.md" in s.get("run", ""))
+    assert names.index(install["name"]) < job["steps"].index(action)
+    assert "git show origin/main:.github/scale-agents/instructions.md > ~/.claude/CLAUDE.md" in install["run"]
+    assert "~/.claude/agents/" in install["run"] and " .claude/" not in install["run"]
+    assert "uv run scale thread" in action["with"]["prompt"] and "OUTCOME: blocked" in action["with"]["prompt"]
+    assert "Follow .claude/CLAUDE.md" not in wf.read_text()
     assert "OUTCOME: blocked" in (REPO / ".github/scale-agents/instructions.md").read_text()
     assert not (REPO / ".github/workflows/scale-agent.yml").exists()
     assert not (REPO / ".github/workflows/apply-proposals.yml").exists()
