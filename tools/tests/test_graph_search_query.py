@@ -232,6 +232,28 @@ def test_saved_term_statistics_that_were_altered_are_rebuilt(tmp_path):
     assert np.array_equal(b.post_item, a.post_item) and b.search("copper", k=5, mode="keyword") == expect
 
 
+def test_saved_term_statistics_whose_words_were_altered_are_rebuilt(tmp_path):
+    """The digest of a .terms file covers its words as well as its arrays: a word renamed in the header (the list
+    still sorted, the arrays unchanged) is not read, so a search for copper still finds its quote."""
+    from scale.passages import TERMS_MAGIC
+    items = [{"id": f"ex:t/r{j:02d}#evidence/0", "record": f"ex:t/r{j:02d}", "evidence": 0, "text": t}
+             for j, t in enumerate(SEARCH_TEXTS)]
+    a = Index.build(items)
+    a.save(tmp_path / "ix")
+    expect = a.search("copper", k=5, mode="keyword")
+    data = (tmp_path / "ix.terms").read_bytes()
+    at = len(TERMS_MAGIC)
+    size = int.from_bytes(data[at:at + 8], "little")
+    head = json.loads(data[at + 8:at + 8 + size])
+    i = head["vocab"].index("copper")
+    head["vocab"][i] = "coppes"
+    assert head["vocab"] == sorted(set(head["vocab"]))
+    new = json.dumps(head, ensure_ascii=False, sort_keys=True).encode()
+    (tmp_path / "ix.terms").write_bytes(TERMS_MAGIC + len(new).to_bytes(8, "little") + new + data[at + 8 + size:])
+    b = Index.load(tmp_path / "ix")
+    assert "copper" in b.vocab and b.search("copper", k=5, mode="keyword") == expect
+
+
 def test_vectors_that_are_not_the_ones_saved_with_the_items_are_rebuilt(tmp_path):
     """The .i8 rows carry their digest in the index's header: two rows swapped (the file's size unchanged) are not
     read, so a search for copper never returns another quote with cosine 1; the vectors are rebuilt from the items."""
