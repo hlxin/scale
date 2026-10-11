@@ -953,8 +953,13 @@ def _run(doc: dict, spec: dict, plan: dict, evidence_index=None, graph: Graph | 
         # only the quotes this document holds choose rows: an index built from another document (a less open one, or
         # this one before an edit) never selects a row by text the document does not hold
         held = g.held
-        hits = [h for h in evidence_index.search(tq["query"], k=tq.get("k", 500), mode=tq.get("mode", "hybrid"))
-                if (h.get("record"), h.get("evidence"), h.get("text")) in held]
+        # only the evidence of the records the rows still hold competes for the hits: ranked among themselves (an
+        # rrf fusion, a k), the quotes of rows a filter (published_before, retractions, a where) left out never
+        # crowd out those of the rows it kept
+        eligible = {row[v] for row in rows for v in vars_ if row.get(v)} | {lid for row in rows for lid in row["_links"]}
+        hits = evidence_index.search(tq["query"], k=tq.get("k", 500), mode=tq.get("mode", "hybrid"),
+                                     where=lambda it: it.get("record") in eligible
+                                     and (it.get("record"), it.get("evidence"), it.get("text")) in held)
         score: dict[str, float] = {}
         for h in hits:
             if h["score"] >= tq.get("min_score", 0.0):

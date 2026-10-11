@@ -322,6 +322,17 @@ def test_a_shared_graph_answers_as_a_fresh_one(doc, spec):
     assert pgraph_query.run(other, spec, CU_PLAN, None, g)["row_count"] == 0
 
 
+def test_a_text_plan_ranks_only_the_evidence_of_the_rows_it_keeps(doc, spec):
+    """A plan's text search ranks the evidence of the rows its filters kept: with k = 1, the 1962 quote that scores
+    best (its row left out by published_before) never takes the place of the 1930 one, in any mode."""
+    ix = Index.build(evidence_items(doc))
+    for mode in ("keyword", "hybrid", "rrf"):
+        plan = {**CU_PLAN, "published_before": "1950",
+                "text": {"query": "purified gas passed over the copper catalyst", "vars": ["test"], "mode": mode, "k": 1}}
+        res = pgraph_query.run(doc, spec, plan, ix)
+        assert [r["values"]["test.name"] for r in res["rows"]] == ["cu test"], mode
+
+
 def test_query_answers_with_dated_evidence(doc, spec):
     res = pgraph_query.run(doc, spec, CU_PLAN)
     assert res["status"] == "answered" and {r["bound"]["test"] for r in res["rows"]} == {"ex:t/cu/test", "ex:t/late/test"}

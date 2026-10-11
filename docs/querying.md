@@ -38,7 +38,9 @@ none is saved beside it), ask for sources published before a date
 (`published_before`), leave out rows that rest only on second-hand evidence (`own_work_only: true`) and read embargoes on a
 given day (`as_of`, see Result).
 
-The text search has four modes. `hybrid` (the default) averages BM25 keyword relevance, scaled to the best hit, with
+A plan's text search ranks only the evidence of the records its rows still hold, after the plan's other filters
+(`where`, retractions, `published_before`): its `k` hits (500 by default) and an `rrf` fusion are counted among
+them, so quotes of rows a filter left out never crowd out those of the rows it kept. The text search has four modes. `hybrid` (the default) averages BM25 keyword relevance, scaled to the best hit, with
 the cosine of the quote vectors (negative counted as 0), so its scores run from 0 to 1; `keyword` and `vector` use one
 of them; `rrf` (reciprocal rank fusion) adds 1 / (60 + rank) from the keyword ranking and from the vector ranking,
 each read to its 1000th item (with a filter, such as `published_before`, a ranking of the items it keeps), so an `rrf` score is at most 2/61, about 0.033, and a `min_score` written for
