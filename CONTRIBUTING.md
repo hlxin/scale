@@ -29,7 +29,8 @@ ONE reviewer approves and merges (the person who suggested it may be that review
 
 - **Suggest.** Open an issue (see [Suggesting without Git](#suggesting-without-git)) or comment on one, in plain
   language. You do not need to know the schema, the code or Git.
-- **The agents do it.** `@scale-agents` pick up every new issue, comment and review (an approval with no text excepted) on their own; nobody needs to
+- **The agents do it.** `@scale-agents` pick up every new issue, comment and review by a collaborator (an approval with no text
+  excepted) on their own, and yours once a collaborator comments on it; nobody needs to
   tag anything. Five roles share the work, from framing the request to verifying the evidence
   ([`.github/scale-agents/`](.github/scale-agents/instructions.md)). Each pull request they open carries the patch,
   its evidence, its tests and a migration assessment. Comment on it or review it to ask for fixes.

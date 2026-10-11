@@ -95,7 +95,7 @@ The workflow token is read-only unless a workflow asks for more in its `permissi
 |---|---|---|
 | `ci` | every pull request and push to `main` | nothing |
 | `triage` | weekly, or started by hand | nothing (it opens a digest issue with the workflow token, `issues: write`) |
-| `scale-agents` | every new issue, comment and pull-request review (not a bot's, and not an approval with no text), or by hand from `main` | the secret `CLAUDE_CODE_OAUTH_TOKEN` (or `ANTHROPIC_API_KEY`) and the Claude GitHub App (below) |
+| `scale-agents` | every new issue, comment and pull-request review by a collaborator (`author_association` OWNER, MEMBER or COLLABORATOR; not a bot's, and not an approval with no text), or by hand from `main` | the secret `CLAUDE_CODE_OAUTH_TOKEN` (or `ANTHROPIC_API_KEY`) and the Claude GitHub App (below) |
 | `reviewers` | every submitted review and every push to a pull request from this repository | nothing (the workflow token, `pull-requests: write`: withdraws or renews review requests, comments) |
 | `publish` | a published GitHub release | the `pypi` environment and the trusted publisher (section 6); inert until configured |
 

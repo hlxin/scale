@@ -60,10 +60,14 @@ jobs:
   agents:
     # every human event; never a bot's (the agents' own comments included); a manual run only from main
     # an approval with no text asks nothing (the reviewers workflow handles it): no run
+    # only a collaborator's event starts a run (the repository is public; a run spends the owner's Claude usage). Anyone's
+    # issue or comment is welcome: a collaborator's comment on it starts the team, which reads the whole thread as data.
     if: >-
       github.event.sender.type != 'Bot' &&
       (github.event_name != 'workflow_dispatch' || github.ref == 'refs/heads/main') &&
-      !(github.event_name == 'pull_request_review' && github.event.review.state == 'approved' && !github.event.review.body)
+      !(github.event_name == 'pull_request_review' && github.event.review.state == 'approved' && !github.event.review.body) &&
+      (github.event_name == 'workflow_dispatch' || contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'),
+        github.event.comment.author_association || github.event.review.author_association || github.event.issue.author_association))
     runs-on: ubuntu-latest
     timeout-minutes: 180      # a large change takes several roles in turn
     permissions:
