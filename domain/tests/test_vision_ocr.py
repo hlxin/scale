@@ -265,3 +265,24 @@ def test_render_and_region_read_a_pdf(tmp_path):
     d2.save(other)
     with pytest.raises(Exception, match="holds the pages of"):
         pagereading.render(other, SRC, pages)
+
+
+def test_every_record_of_one_pdf_is_compared_with_its_digest(tmp_path):
+    """Two sources' records name one PDF: once it has been read for the first (whose digest it has), the second, which
+    records another digest, is still refused; the digest is cached, the comparison is not."""
+    import hashlib
+    import json as _json
+    from scale import pagereading
+    from scale.util import ScaleError as _ScaleError
+    pdf = tmp_path / "paper.pdf"
+    pdf.write_bytes(b"%PDF-1.4 a paper")
+    good = hashlib.sha256(pdf.read_bytes()).hexdigest()
+    pages = tmp_path / "pages"
+    for sid, digest in (("ex:t/source/a", good), ("ex:t/source/b", "0" * 64)):
+        d = pagereading.folder(pages, sid)
+        d.mkdir(parents=True)
+        (d / "source.json").write_text(_json.dumps({"pdf": str(pdf), "sha256": digest}))
+    assert pagereading.pdf_of(pages, "ex:t/source/a") == pdf
+    with pytest.raises(_ScaleError, match="sha256 differs"):
+        pagereading.pdf_of(pages, "ex:t/source/b")
+
