@@ -79,7 +79,8 @@ jobs:
           echo ".claude/" >> .git/info/exclude
       - name: Install bubblewrap (the sandbox the subprocess secret scrub needs)
         # without it Claude Code refuses to start while CLAUDE_CODE_SUBPROCESS_ENV_SCRUB is on (the runner lacks it)
-        run: sudo apt-get update -q && sudo apt-get install -y -q bubblewrap
+        # installed only when the runner image lacks it (a fresh runner each run; free once an image ships it)
+        run: command -v bwrap >/dev/null || { sudo apt-get update -q && sudo apt-get install -y -q bubblewrap; }
       - uses: anthropics/claude-code-action@v1
         env:
           CLAUDE_CODE_SUBPROCESS_ENV_SCRUB: "1"     # the agents' commands run without the API key and tokens
