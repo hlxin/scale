@@ -24,6 +24,7 @@ Every command below runs the same way with `uvx scale-catal …` (no install) or
 | every check of CI's `test` jobs, before a pull request | `scale check [--fast]` |
 | formats and names, documentation links | `scale fmt [--check]`, `scale lint`, `scale links` |
 | community feedback → a weekly digest for the reviewers | `scale triage ingest\|propose\|publish` ([governance/feedback.md](../governance/feedback.md)) |
+| an issue or pull request with every comment, review and line comment (read-only; what the agents read) | `scale thread N [--format json]` |
 | readable catalogue of a document, comment links | `scale catalogue G --out FILE`, `scale suggest --record ID \| --text … [--title …]` |
 | implementation-status inventory | `scale status [--format markdown] [--out FILE]` |
 

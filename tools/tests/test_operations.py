@@ -109,6 +109,12 @@ def test_who_may_start_the_agents_and_what_workflows_may_write():
         "the proposed patch", "the evidence record", "test cases with explicit expected outcomes", "the migration assessment"))
     for name in roles:
         assert f"`{name}`" in (REPO / ".github/scale-agents/instructions.md").read_text(), name
+    # a manual run names its issue and waits its turn with the runs on that issue; a run that ends blocked, or without
+    # saying how it ended, fails
+    assert "inputs.issue" in agents["concurrency"]["group"] and "issue" in agents["on"]["workflow_dispatch"]["inputs"]
+    last = job["steps"][-1]["run"]
+    assert "OUTCOME: [a-z]*" in last and "exit 1" in last
+    assert "OUTCOME: blocked" in (REPO / ".github/scale-agents/instructions.md").read_text()
     assert not (REPO / ".github/workflows/scale-agent.yml").exists()
     assert not (REPO / ".github/workflows/apply-proposals.yml").exists()
     for f in sorted((REPO / ".github/workflows").glob("*.yml")):

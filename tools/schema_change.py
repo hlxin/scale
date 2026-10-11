@@ -27,6 +27,7 @@ from __future__ import annotations
 import copy
 import hashlib
 import io
+import json
 import os
 import re
 import shutil
@@ -475,7 +476,29 @@ def check(repo: Path, base: str = DEFAULT_BASE) -> dict:
             problems.append(f"{kind[:-1]} {name} is added but used in no valid fixture or example document (add a test)")
     if (repo / "CHANGELOG.md").read_bytes() == _git(repo, "show", f"{c['merge_base']}:CHANGELOG.md"):
         problems.append("the schema changes but CHANGELOG.md does not (add a line under Unreleased)")
-    return {**c, "problems": problems, "ok": not problems}
+    return {**c, "problems": problems, "follow_ups": stale_bundles(repo, c["head_version"]), "ok": not problems}
+
+
+BUNDLE_ROOTS = ("examples", "domain/examples", "core/examples")
+
+
+def stale_bundles(repo: Path, version: str) -> list[dict]:
+    """Knowledge-graph bundles (zips holding a ``bundle.json``) under the example folders whose schema version is not
+    ``version``: a follow-up for a separate issue (re-export them), never a reason to hold the change back."""
+    import zipfile
+    out = []
+    for root in BUNDLE_ROOTS:
+        for z in sorted((Path(repo) / root).rglob("*.zip")) if (Path(repo) / root).is_dir() else []:
+            try:
+                with zipfile.ZipFile(z) as f:
+                    name = next((n for n in f.namelist() if n.count("/") == 1 and n.endswith("/bundle.json")), None)
+                    m = json.loads(f.read(name)) if name else None
+            except (zipfile.BadZipFile, ValueError, KeyError):
+                continue
+            if m and str(m.get("schema_version")) != str(version):
+                out.append({"bundle": z.relative_to(repo).as_posix(), "schema_version": m.get("schema_version"),
+                            "version": m.get("version")})
+    return out
 
 
 def summary(res: dict) -> str:
@@ -490,6 +513,10 @@ def summary(res: dict) -> str:
             L.append(f"- {key} ({len(d[key])}): " + "; ".join(d[key][:12]) + (" …" if len(d[key]) > 12 else ""))
     L += ["", "**Checks:** " + ("all pass." if res["ok"] else "")]
     L += [f"- {p}" for p in res["problems"]]
+    if res.get("follow_ups"):
+        L += ["", f"**Follow-ups (a separate issue, not part of this change):** re-export these bundles at schema "
+                  f"{res['head_version']}:"]
+        L += [f"- `{b['bundle']}` (bundle {b['version']}, schema {b['schema_version']})" for b in res["follow_ups"]]
     return "\n".join(L)
 
 

@@ -87,6 +87,9 @@ say what was wrong.
 
 ## Version numbers
 
+- **The package and the schema have their own versions.** A release always raises the package version (and the
+  release id with it). The schema version moves only when the schema changes, in the pull request that changes it;
+  a release with no schema change keeps the schema version and raises the package version alone.
 - **Distribution** `vX.Y.Z`: the official release, versioned semantically. `comparison_to_previous`
   in `RELEASE.yaml` classifies the schema change (`identical`, `additive` or `breaking`).
 - **The schema** has one version for the science kernel and the catalysis domain together: the catalysis

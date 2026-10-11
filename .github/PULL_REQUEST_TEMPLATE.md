@@ -17,6 +17,8 @@ reviewers not yet added". -->
 - **Evidence record:** <!-- the sources, quotes and locators that justify it; the existing concepts considered -->
 - **Test cases and expected outcomes:** <!-- fixtures that pass, counterexamples that fail and why, competency questions and their answers -->
 - **Migration assessment:** <!-- breaking or additive, the version raised, the effect on existing records and queries (scale schema check, scale kg update --dry-run) -->
+- **Governance changes:** <!-- every file changed in governance/ or .github/, and why; none if none -->
+- **Follow-ups:** <!-- what this change leaves for a separate issue (e.g. bundles to re-export at the new schema version) -->
 - **Verification:** <!-- the evidence verifier's report, or how you checked it -->
 
 ## Type

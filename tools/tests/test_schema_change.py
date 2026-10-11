@@ -115,3 +115,25 @@ def test_new_concepts_enter_as_provisional(repo):
     problems = check(repo, "main")["problems"]
     assert [p for p in problems if "provisional" in p] == [
         "nodes.CatalyticTest.stable_note is new but not `maturity: provisional` (new concepts enter as provisional)"]
+
+
+def test_a_bundle_at_another_schema_version_is_a_follow_up_not_a_problem(repo):
+    """A committed knowledge-graph bundle that pins the schema version a change leaves is listed for re-export in a
+    separate issue; it never fails the check."""
+    import json
+    import zipfile
+    (repo / "examples/demo").mkdir(parents=True)
+    with zipfile.ZipFile(repo / "examples/demo/demo_v1.0.0.zip", "w") as z:
+        z.writestr("demo_v1.0.0/bundle.json", json.dumps({"version": "1.0.0", "schema_version": HEAD_VERSION}))
+    git(repo, "add", "-A")
+    git(repo, "commit", "-q", "-m", "a bundle")
+    git(repo, "branch", "-f", "main")
+    _edit(repo / "domain/graph/catalysis.yaml",
+          lambda m: m["nodes"]["CatalyticTest"]["properties"].update(test_only_note={"type": "text", "maturity": "provisional"}))
+    bump(repo, "main")
+    changelog = repo / "CHANGELOG.md"
+    changelog.write_text(changelog.read_text().replace("## Unreleased\n", "## Unreleased\n\n- A note (test).\n", 1))
+    res = check(repo, "main")
+    assert res["ok"] and res["follow_ups"] == [{"bundle": "examples/demo/demo_v1.0.0.zip", "schema_version": HEAD_VERSION,
+                                                "version": "1.0.0"}]
+    assert "re-export these bundles" in summary(res) and "`examples/demo/demo_v1.0.0.zip`" in summary(res)
