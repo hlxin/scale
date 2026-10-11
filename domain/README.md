@@ -15,8 +15,8 @@ stewards are named in [`DOMAIN.yaml`](DOMAIN.yaml). A second domain would revisi
 |---|---|
 | status | `stable`, `founding: true` (its stewardship targets are warnings) |
 | schema version | 0.2.0 (kernel and catalysis together) |
-| maintainers | `@hlxin` (the owner; reviewers join through the review policy) |
-| stewards | Hongliang Xin (`hlxin`), since 2026-09-26; maintainer seats to be filled as reviewers join |
+| maintainers | `@hlxin` (the owner) and the reviewers of the review policy, open to more as they join |
+| stewards | Hongliang Xin (`hlxin`), since 2026-09-26 |
 | review areas | `catalysis`, `thermo`, `electrothermo`, `electro`, `photo`, `plasma` |
 | declaration | [DOMAIN.yaml](DOMAIN.yaml) (`domain: catalysis`) |
 | decision record | [0001](../docs/decisions/0001-scale-0.1.0.md): SCALE 0.1.0, with catalysis stable from the start |
@@ -123,7 +123,7 @@ other value.
 | `alternative_to` | no | kept for the code and unused (null); it may only name a scale-catal file. Disagreement inside catalysis is a pull request plus `contradicts` links ([governance](../governance/GOVERNANCE.md#disagreement)) |
 | `summary` | yes | one line |
 | `scope` | yes | what is in scope and what is not |
-| `maintainers` | yes | `team` (the code owner as CODEOWNERS names it: a user such as `@hlxin`, or a team `@org/team`) and `people`: each with `name`, `github`, optional `orcid`, `since` and `roles` (`steward` or `maintainer`); a seat not filled yet has `placeholder: true` and no `since`, and is never counted or credited |
+| `maintainers` | yes | `team` (the code owner as CODEOWNERS names it: a user such as `@hlxin`, or a team `@org/team`) and `people`: each with `name`, `github`, optional `orcid`, `since` and `roles` (`steward` or `maintainer`); an entry for nobody yet has `placeholder: true` and no `since`, and is never counted or credited |
 | `review_areas` | yes | the review-policy areas of catalysis changes |
 | `graph` | no | `manifest` only (required with `graph`): the graph schema manifest, `graph/scale-catal.yaml`, which lists the catalysis file under `domains:` |
 | `examples` | yes | example directories |

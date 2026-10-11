@@ -152,8 +152,8 @@ All modules are in `tools/`.
 - **Releases and frozen versions are immutable.** A document pins its schema version; moving it to
   a newer one is explicit. One version names the whole schema, kernel and catalysis together.
 - **Agents do the work; people approve** ([review-policy.yaml](../governance/review-policy.yaml)). Anyone suggests a
-  change or opens a pull request; every change is one pull request with one approving review by a reviewer (the
-  owner's own pull requests are merged under the bootstrap rule until another reviewer joins); new concepts enter as
+  change or opens a pull request; every change is one pull request with one approving review by a reviewer other
+  than its author (every reviewer is asked; the first approval is enough); new concepts enter as
   provisional; what merges is what was approved, nothing is applied afterwards.
 - **Formats by author:** machine-written documents are canonical JSON; human-written specifications are block-style
   YAML ([style.md](style.md)).

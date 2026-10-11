@@ -1,13 +1,12 @@
 <!-- Every pull request to main needs one approving review by a reviewer (governance/review-policy.yaml), the
-person who suggested the change included; until another reviewer joins, the owner merges their own under the
-bootstrap rule. For a schema change, CI's specification-changes job writes a summary for the reviewer. See
+person who suggested the change included (never its author). Every reviewer is asked; the first approval is
+enough. For a schema change, CI's specification-changes job writes a summary for the reviewer. See
 CONTRIBUTING.md and governance/GOVERNANCE.md. -->
 
 ## Summary
 
 <!-- What changes, and why. Link the issue or comment it answers (e.g. "Closes #12"). If an agent drafted
-it (@scale-agents), say which request it answers; the agents fill in the change set below. If merged under the bootstrap rule, write "Bootstrap bypass:
-reviewers not yet added". -->
+it (@scale-agents), say which request it answers; the agents fill in the change set below. -->
 
 ## Change set
 

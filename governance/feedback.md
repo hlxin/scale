@@ -51,8 +51,7 @@ feedback digest issue (label feedback-digest) ──► a person hands a topic t
 ## Decisions
 
 Nothing is decided in the digest or in a comment. A change is decided by the reviews of its pull request:
-one approval by a reviewer, and no reviewer asking for changes (until another reviewer joins, the owner merges
-their own pull requests under the bootstrap rule, [GOVERNANCE.md](GOVERNANCE.md)).
+one approval by a reviewer other than the author, and no reviewer asking for changes ([GOVERNANCE.md](GOVERNANCE.md)).
 
 ## For agent systems: proposing
 

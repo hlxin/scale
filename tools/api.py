@@ -157,8 +157,8 @@ HUMAN_ONLY = {
     "approve a pull request (one human reviewer approves every change; governance/GOVERNANCE.md)":
         "gh pr review NUMBER --approve",
     "merge an approved pull request": "gh pr merge NUMBER --squash --delete-branch",
-    "fill a reviewer seat (replace a placeholder)": "edit governance/review-policy.yaml, core/CORE.yaml, "
-                                                    "domain/DOMAIN.yaml and .github/CODEOWNERS in a pull request",
+    "add a reviewer (a real person who agreed; no fixed number)": "edit governance/review-policy.yaml, core/CORE.yaml, "
+                                                                  "domain/DOMAIN.yaml and every line of .github/CODEOWNERS",
     "move a data repository's documents to the latest schema": "scale kg update --data DIR",
     "build a release": "scale release build vX.Y.Z",
     "publish a release to PyPI (once the trusted publisher is configured)": "gh release create vX.Y.Z --repo hlxin/scale",

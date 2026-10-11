@@ -58,15 +58,13 @@ forms in `.github/DISCUSSION_TEMPLATE/` are used once they are on. Create the la
 
 ## 2. Collaborators and reviewers
 
-A personal repository has its owner and collaborators; every collaborator has Write access. Today the owner,
-`@hlxin`, and the reviewers Tianyou Mou, `@mutianyou2013`, and Raul Diaz, `@diazr04`, are named on every line of
-[`.github/CODEOWNERS`](../.github/CODEOWNERS); the review policy has no placeholder seat left (a new reviewer is
-added as an entry). GitHub asks every reviewer; the `reviewers` workflow withdraws the other requests when one
+A personal repository has its owner and collaborators; every collaborator has Write access. The reviewers, the
+owner `@hlxin` and the people listed in [`review-policy.yaml`](review-policy.yaml), are named on every line of
+[`.github/CODEOWNERS`](../.github/CODEOWNERS). The list is open: more reviewers are invited as people join. GitHub asks every reviewer; the `reviewers` workflow withdraws the other requests when one
 approves ([GOVERNANCE.md](GOVERNANCE.md#every-reviewer-is-asked-one-approval-is-enough)).
 
-**Filling a reviewer seat.** When a reviewer joins, a pull request replaces one placeholder with the person's
-name and GitHub handle in `governance/review-policy.yaml`, `core/CORE.yaml` and `domain/DOMAIN.yaml` (remove
-`placeholder: true`, add `since`) and adds the handle to every line of `.github/CODEOWNERS` (and its copy in
+**Adding a reviewer.** When a reviewer joins, the owner adds the person's name, GitHub handle and `since` to
+`governance/review-policy.yaml`, `core/CORE.yaml` and `domain/DOMAIN.yaml` (with `roles: [maintainer]`) and adds the handle to every line of `.github/CODEOWNERS` (and its copy in
 `tools/tests/fixtures/codeowners/`; `scale domains check` fails until every line names every reviewer); the
 owner invites them as a collaborator:
 
@@ -75,8 +73,8 @@ gh api -X PUT repos/$OWNER/$REPO/collaborators/<handle>     # they accept the in
 gh api repos/$OWNER/$REPO/codeowners/errors                 # must report no errors
 ```
 
-Never write a name or handle that is not a real person who agreed to review. `scale check` warns while
-placeholders remain. A code owner counts only with Write access, so a reviewer is invited before the
+Never write a name or handle that is not a real person who agreed to review (an entry marked `placeholder: true`
+is nobody, and `scale check` warns while one is listed). A code owner counts only with Write access, so a reviewer is invited before the
 CODEOWNERS pull request merges.
 
 Moving the repository to an organization later (to give teams their own lines in CODEOWNERS, or Triage access
@@ -160,7 +158,7 @@ in place of `gh`, so that the scrub can stay on.
 | required status checks | `test (3.10)`, `test (3.11)`, `test (3.12)`, `test (3.13)`, `package`, `specification-changes`, from GitHub Actions (`integration_id` 15368) |
 | branch must be up to date before merging | no (below) |
 | force pushes, deletion | blocked |
-| bypass | the repository admin role (the owner), always: the bootstrap rule; never the GitHub Actions app |
+| bypass | the repository admin role (the owner), always: the owner's bypass; never the GitHub Actions app |
 
 ```bash
 gh api -X POST repos/$OWNER/$REPO/rulesets --input governance/github/ruleset-main.json
@@ -185,12 +183,11 @@ first merges, `scale schema check` fails the second, which rebases and runs `sca
 
 ### Bootstrap bypass
 
-The owner is a reviewer and approves other people's pull requests. GitHub does not let an author approve their
-own, so until another reviewer has Write access, the owner's own pull requests cannot be approved. The ruleset therefore lets the **repository admin role** (the owner, the only admin)
-bypass it:
+The owner is a reviewer and approves other people's pull requests; another reviewer approves the owner's. While the
+owner was the only reviewer, their own pull requests could not be approved, so the ruleset lets the **repository
+admin role** (the owner, the only admin) bypass it:
 
-- the owner uses it only to merge pull requests whose checks pass, noting each use in the pull request
-  ("Bootstrap bypass: reviewers not yet added"); GitHub does not enforce either, and the ruleset's bypass log
+- the owner uses it only for changes whose checks pass, such as adding a reviewer; GitHub does not enforce either, and the ruleset's bypass log
   shows each use (Settings → Rules → Insights). The owner does not push to `main` directly;
 - the bypass stays with the repository admin role, the owner (Hongliang Xin), also once other reviewers have
   joined, until the owner decides otherwise: narrowing it to pull requests (`"bypass_mode": "pull_request"`) or
@@ -242,4 +239,4 @@ Publish to PyPI only with the first release ([release-process.md](release-proces
 - [ ] `main` ruleset applied (one approval, no code-owner requirement, required checks, the admin role as the only bypass);
       the GitHub Actions app is not a bypass actor
 - [ ] `v*` tag ruleset; `pypi` environment (`v*` tags); PyPI trusted publisher
-- [ ] reviewer seats filled (a pull request each); the bypass stays with the admin until the owner decides otherwise
+- [x] reviewers beyond the owner added (more join as they are invited); the bypass stays with the admin until the owner decides otherwise

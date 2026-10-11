@@ -10,7 +10,7 @@ are several; until then, the owner and the reviewers look after the kernel and t
 |---|---|
 | **code owner** | `maintainers.team` in `domain/DOMAIN.yaml`, and the `/domain/` line in [CODEOWNERS](../.github/CODEOWNERS); today `@hlxin` (a team `@org/team` is accepted too, should the repository move to an organization) |
 | **stewards** | `maintainers.people` with `roles: [steward]` |
-| **maintainers** | `maintainers.people` with `roles: [maintainer]`; a seat not filled yet is `placeholder: true` and is nobody |
+| **maintainers** | `maintainers.people` with `roles: [maintainer]`; an entry marked `placeholder: true` is nobody |
 | **contributors** | `contributors` in `DOMAIN.yaml` ([credit-and-authorship.md](credit-and-authorship.md)) |
 | **review areas** | `review_areas` in `DOMAIN.yaml` |
 
@@ -26,7 +26,7 @@ states it and must equal the catalysis manifest's (`scale domains check`); every
 ## What every change needs
 
 Every pull request, to the catalysis domain or to the science kernel, needs one approving review by
-a reviewer (the owner's own pull requests: the bootstrap rule until another reviewer joins). Nobody may redeclare an
+a reviewer other than its author. Nobody may redeclare an
 identifier that the kernel or the catalysis domain declares (extend with `is_a`, `extends` or
 `adds_properties` with a new key). A schema change raises the version in its own pull request (`scale schema bump`); official
 releases follow [release-process.md](release-process.md).
@@ -55,7 +55,7 @@ automatically. There are no permanent lab or working-group branches.
 
 ## Joining and stepping down
 
-- **Joining.** A pull request edits `DOMAIN.yaml` and CODEOWNERS (one approval, or the bootstrap rule); the
+- **Joining.** A pull request edits `DOMAIN.yaml` and CODEOWNERS (one approval); the
   owner invites the person as a collaborator. Only people who agreed are added.
 - **Stepping down.** In `DOMAIN.yaml` the person moves from `maintainers.people` to `contributors`, so their
   credit stays.

@@ -20,9 +20,9 @@ principles:
     CI checks it and posts a summary for the reviewer.
   - New concepts enter as provisional.
 
-# The reviewers: the owner and the domain experts who join (each added here, with Write access, by a pull request;
-# CODEOWNERS routes review requests to them). Any one of them approves a change. A placeholder is a seat not filled
-# yet: `scale check` warns until it is replaced by a person (name and GitHub handle).
+# The reviewers: the owner and the domain experts invited to review, with no fixed number (each added here and on
+# every line of CODEOWNERS, with Write access). Every reviewer is asked; any one of them approves a change. Only real
+# people who agreed are listed; an entry marked `placeholder: true` is nobody, and `scale check` warns about it.
 reviewers:
   team: '@hlxin'
   members:

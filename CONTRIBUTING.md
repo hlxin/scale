@@ -37,7 +37,8 @@ ONE reviewer approves and merges (the person who suggested it may be that review
   `uv run --extra dev scale check --fast`, push and fill in the pull request template.
 - **Approve and merge.** Every pull request needs one approving review from a reviewer listed in
   [governance/review-policy.yaml](governance/review-policy.yaml). GitHub does not let a pull request's author
-  approve it, so a pull request you opened needs another reviewer. The reviewer who approves also merges. Agents never
+  approve it, so a pull request you opened needs another reviewer. Every reviewer is asked; the first who approves
+  also merges. Agents never
   approve or merge.
 
 ### Schema changes

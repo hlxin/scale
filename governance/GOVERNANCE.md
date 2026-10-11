@@ -27,7 +27,7 @@ approve or merge.
 | **schema version** | One version for the kernel and the catalysis domain together: the catalysis manifest's `version`, which documents pin (0.1.0 today). Every schema change raises it, whichever file it changes: a breaking change the second number, an additive change the third. |
 | **checklist** | What a catalysis record must and should report: the catalysis file's `checklist:`, named `catalysis`, selected with `--domain` and declared in a document's `follows_domains`. |
 | **suggestion** | An issue or a comment that asks for a change, by a person or an agent. @scale-agents take it up on their own and turn it into a pull request when it asks for a change; anyone may also open one. |
-| **reviewers** | The people who approve changes, listed in [`review-policy.yaml`](review-policy.yaml): the owner and the domain experts who join (seats not yet filled are placeholders). Any one of them approves a change. |
+| **reviewers** | The people who approve changes, listed in [`review-policy.yaml`](review-policy.yaml): the owner and the domain experts invited to review. The list is open: more people are added as they join. Any one of them approves a change. |
 | **maturity** | Of a concept: `provisional` or `stable`. New concepts enter as provisional. |
 | **official release** | A tagged, digested distribution built by the release process: `releases/vX.Y.Z/`, tag `vX.Y.Z`, PyPI `scale-catal` X.Y.Z ([release-process.md](release-process.md)). The first is `v0.1.0`. |
 
@@ -35,8 +35,8 @@ approve or merge.
 
 | who | GitHub | what they do |
 |---|---|---|
-| **owner** | `@hlxin`, admin of the repository, code owner of every path in [`.github/CODEOWNERS`](../.github/CODEOWNERS) | a reviewer: approves and merges pull requests; merges their own under the bootstrap rule until another reviewer joins; builds releases; repository settings, rulesets and secrets ([repository-settings.md](repository-settings.md)) |
-| **reviewers** | domain experts, collaborators (Write), added to the review policy and CODEOWNERS when they join | approve and merge pull requests (any one of them is enough). Today: the owner, Tianyou Mou (`@mutianyou2013`) and Raul Diaz (`@diazr04`) |
+| **owner** | `@hlxin`, admin of the repository, code owner of every path in [`.github/CODEOWNERS`](../.github/CODEOWNERS) | a reviewer: approves and merges pull requests (their own are approved by another reviewer); invites reviewers; builds releases; repository settings, rulesets and secrets ([repository-settings.md](repository-settings.md)) |
+| **reviewers** | domain experts, collaborators (Write), added to the review policy and CODEOWNERS when they join; no fixed number | approve and merge pull requests (any one of them is enough). The current list is in [`review-policy.yaml`](review-policy.yaml) |
 | **contributors** | anyone: issues and comments; collaborators also branches and pull requests; others through forks once the repository is public | suggest changes, curate, report gaps |
 | **@scale-agents** | a team of Claude agents on GitHub, started by every new issue, comment and review (no tag or label), or a manual run | a discovery strategist frames and coordinates, a data scientist proposes the patch and its evidence, a protocol compiler writes the tests, an evidence verifier assesses support and effects, and a systems engineer opens pull requests from `agent/…` branches under the Claude GitHub App's identity; never approves or merges |
 
@@ -55,9 +55,8 @@ approve or merge.
   workflow, or a bot account for an agent working elsewhere (repository-settings.md, "The agent"), never a
   person's account. GitHub does not let the author of a pull request approve it, so the person who asked for the
   change can approve the agent's pull request.
-- **Placeholders never count.** The seats not filled yet are marked `placeholder: true` in the review
-  policy, `core/CORE.yaml` and `domain/DOMAIN.yaml`; `scale check` warns until they are filled with real people
-  (never invented).
+- **Only real people count.** Every reviewer is a real person who agreed to review (never invented). An entry
+  marked `placeholder: true` is nobody: it never counts, and `scale check` warns while one is listed.
 - The latest review of each reviewer counts. A reviewer whose latest review requests changes blocks until
   they approve or the review is dismissed; an approval given before new commits were pushed is dismissed.
 
@@ -83,14 +82,12 @@ reviews:
 - **A push asks again.** A push dismisses earlier approvals (the ruleset); the workflow asks again every reviewer
   whose approval it dismissed or who asked for changes. The last pusher cannot give the approval.
 
-### Bootstrap: until the reviewers join
+### The owner's bypass
 
-The owner is a reviewer and approves other people's and the agent's pull requests as any reviewer does. GitHub
-does not let the author of a pull request approve it, so with one filled seat the owner's own pull requests cannot
-be approved. Until another reviewer joins, the owner may merge their own pull requests through a **bootstrap
-bypass** of the ruleset, only after the checks pass, each use noted in the pull request ("Bootstrap bypass:
-reviewers not yet added"). The bypass stays with the repository admin, the owner (Hongliang Xin), until the owner
-decides by pull request to narrow or remove it
+The owner is a reviewer and approves other people's and the agent's pull requests as any reviewer does; the
+owner's own pull requests are approved by another reviewer. While the owner was the only reviewer, their own pull
+requests could not be approved, so the ruleset lets the repository admin, the owner (Hongliang Xin), bypass it. The
+bypass stays until the owner decides to narrow or remove it
 ([repository-settings.md](repository-settings.md#bootstrap-bypass)).
 
 ## How a change flows
@@ -109,7 +106,7 @@ systems engineer: version raised, migration assessment, checks → a pull reques
         ▼
 checks: scale check, package, specification-changes (with a summary of a schema change for the reviewer)
         ▼
-one reviewer approves and merges (the owner's own pull requests, until another reviewer joins: the bootstrap rule)
+every reviewer is asked; one, not the author, approves and merges
         ▼
 data repositories: scale kg update --data DIR (every document migrated and validated)
         ▼
@@ -163,7 +160,7 @@ second rebases and bumps again after the first merges. The procedure is
 - **Weekly digest.** A workflow groups the week's feedback into topics with options and opens a feedback
   digest issue. It decides nothing; a person acts on a topic by handing it to the agent or opening a pull request
   ([feedback.md](feedback.md)).
-- **Reviewers.** The owner invites reviewers. Filling a seat is a pull request that edits `review-policy.yaml`,
+- **Reviewers.** The owner invites reviewers; there is no fixed number. Adding one edits `review-policy.yaml`,
   `core/CORE.yaml`, `domain/DOMAIN.yaml` and CODEOWNERS
   ([repository-settings.md](repository-settings.md#2-collaborators-and-reviewers)).
 - **Domain maintainers.** People who look after the catalysis domain are listed in `domain/DOMAIN.yaml`
@@ -212,5 +209,4 @@ SCALE release" names what this process produces; it is not a licence restriction
 
 ## Changing this document
 
-Everything under `governance/` changes by pull request with one approval (the owner's own pull requests: the
-bootstrap rule until another reviewer joins), like everything else.
+Everything under `governance/` changes by pull request with one approval, like everything else.

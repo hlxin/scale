@@ -57,8 +57,8 @@ repository). Use the plain `uvx scale-catal …` form only once a release is on 
   never under the user's account: GitHub does not let an author approve their own pull request, so the user who
   asked for the change can approve the agent's pull request.
 - **Humans only:** approving and merging pull requests (one reviewer approves every change and merges it, the
-  person who asked for it included; the owner merges their own pull requests under the bootstrap rule until
-  another reviewer joins), building releases and filing issues. Give the user the command from
+  person who asked for it included, never its author; every reviewer is asked and the first approval is enough),
+  building releases and filing issues. Give the user the command from
   `status.human_only_actions`.
 
 ## Working on this repository

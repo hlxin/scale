@@ -7,7 +7,7 @@ publications.
 
 | record | who is in it | where |
 |---|---|---|
-| core maintainers and contributors | people who review, maintain or contributed to the core and the tools (a placeholder seat is nobody and is never credited) | `core/CORE.yaml`: `maintainers.people`, `contributors` |
+| core maintainers and contributors | people who review, maintain or contributed to the core and the tools (a placeholder entry is nobody and is never credited) | `core/CORE.yaml`: `maintainers.people`, `contributors` |
 | catalysis stewards, maintainers and contributors | people who maintain or contributed to the catalysis domain | `domain/DOMAIN.yaml`: `maintainers.people`, `contributors` |
 | release contributors | everyone in `CORE.yaml` and the released `DOMAIN.yaml`, deduplicated by GitHub handle (or ORCID, or name, when there is no handle), with their roles | `releases/vX.Y.Z/RELEASE.yaml`: `contributors` |
 | commits | authors and co-authors | git history (`Co-authored-by` trailers) |
@@ -39,7 +39,7 @@ contributors:
 - `roles` are short words describing the work, such as `steward`, `maintainer`, `curation`,
   `review`, `questions`, `examples`, `tooling`, `documentation`.
 - Add a person, handle or ORCID only with that person's agreement, and never guess an identifier.
-  A seat not filled yet is a placeholder (`placeholder: true`): it is nobody and is never credited.
+  An entry marked `placeholder: true`: it is nobody and is never credited.
 
 **Stewardship credit.** Maintaining the catalysis domain is scientific work. Stewards are listed in
 `maintainers.people` with `since`, and in every release that contains their work. When they step

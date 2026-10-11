@@ -155,13 +155,13 @@ def _skill_meta(root: Path, skills: list[str]) -> list[dict]:
 
 def credited_people(art: dict) -> list[dict]:
     """Everyone the core and the released domains credit (maintainers and contributors, never a placeholder
-    seat), deduplicated by GitHub handle (else ORCID, else name), with their roles and where they hold them."""
+    entry), deduplicated by GitHub handle (else ORCID, else name), with their roles and where they hold them."""
     out: dict[str, dict] = {}
     sources = [("core", art["core"])] + [(d, m) for d, (_, m) in art["domains"].items()]
     for scope, m in sources:
         people = list((m.get("maintainers") or {}).get("people") or []) + list(m.get("contributors") or [])
         for p in people:
-            if p.get("placeholder"):                # a reviewer seat not filled yet: nobody to credit
+            if p.get("placeholder"):                # a placeholder entry: nobody to credit
                 continue
             key = (p.get("github") or "").lower() or p.get("orcid") or (p.get("name") or "").strip().lower()
             e = out.setdefault(key, {"name": p.get("name"), **({"github": p["github"]} if p.get("github") else {}),

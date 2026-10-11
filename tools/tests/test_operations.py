@@ -24,7 +24,7 @@ def test_check_warns_about_placeholder_reviewers(tmp_path):
     import io
     import unittest.mock as mock
     from scale import devcheck
-    assert devcheck.reviewer_warnings(REPO) == []                    # every seat is filled
+    assert devcheck.reviewer_warnings(REPO) == []                    # no placeholder listed
     (tmp_path / "governance").mkdir()
     (tmp_path / "governance/review-policy.yaml").write_text(
         "reviewers:\n  members:\n    - name: Ada\n      github: ada\n")

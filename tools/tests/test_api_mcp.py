@@ -485,7 +485,7 @@ def test_human_only_actions_cover_the_review_gates():
     """People approve and merge; nothing is applied after a merge; there is no approval command
     (governance/review-policy.yaml)."""
     for action in ("merge an approved pull request",
-                   "fill a reviewer seat (replace a placeholder)", "move a data repository's documents to the latest schema",
+                   "add a reviewer (a real person who agreed; no fixed number)", "move a data repository's documents to the latest schema",
                    "build a release", "publish a release to PyPI (once the trusted publisher is configured)",
                    "register the PyPI trusted publisher for scale-catal",
                    "apply the repository settings (ruleset, environments, secrets)", "file a GitHub issue"):

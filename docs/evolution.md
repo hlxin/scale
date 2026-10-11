@@ -57,8 +57,8 @@ a comment, a corpus run)     their own) or anyone   scale schema bump · check  
    summary for the reviewer.
 5. **Review and merge.** One approving review by any reviewer, the person who asked for the change included
    ([`governance/review-policy.yaml`](../governance/review-policy.yaml)). The kind of change tells the reviewer
-   what they review; a reviewer who requests changes blocks. Until another reviewer joins, the owner merges their
-   own pull requests under the bootstrap rule. If another schema change merged first on the same version, the
+   what they review; every reviewer is asked, the first approval is enough, and a reviewer who requests changes
+   blocks. If another schema change merged first on the same version, the
    pull request rebases and runs `scale schema bump` again.
 6. **Data repositories.** A knowledge-graph data repository kept apart from this one is moved to the new
    version with `scale kg update --data <dir>`: every scale-catal document of the catalysis domain goes to

@@ -54,7 +54,7 @@ NAME (`catalysis`) limits the check to the core's rules and the domain's when it
 - `core/CORE.yaml` and `domain/DOMAIN.yaml`: required keys and types, no unknown keys, semantic versions,
   `domain` a name (lowercase letters, digits and single hyphens), the one shape for people (`maintainers: {team,
   people: [{name, github, orcid?, since, roles: [steward|maintainer]}]}`, `contributors: [{name, github?, orcid?,
-  roles}]`; a seat not filled yet has `placeholder: true`), at least one steward; every declared path exists;
+  roles}]`; an entry for nobody yet has `placeholder: true`), at least one steward; every declared path exists;
   `competency` and `tests` use the names the tools read; the tests directory holds a `test_*.py`,
   the competency directory a question;
 - **one version**: `version` in `CORE.yaml` and `DOMAIN.yaml`, `schema_version` in `scale-release.yaml` and the
@@ -105,10 +105,9 @@ It compares the branch with its merge base on `--base` and exits 1 when the bran
 - changes `core/graph/` or the catalysis domain's `domain/graph/` files (schema manifest included; not while the
   domain is experimental at both the merge base and the head) without what `scale schema check` asks (below).
 
-It prints whose review the change requests according to `.github/CODEOWNERS` at the merge base (the owner sets;
-the fewest owners who own every changed path; a code owner's approval is not required), the rule that every pull
-request needs one approving review by a person, any listed reviewer (the owner's own pull requests are merged under
-the bootstrap rule until another reviewer joins), and, when `core/` changes, the catalysis domain it affects.
+It prints whose review the change requests according to `.github/CODEOWNERS` at the merge base (the owner sets,
+and the fewest owners who own every changed path when the sets differ; a code owner's approval is not required), the
+rule that every pull request needs one approving review by a person, any listed reviewer other than the author, and, when `core/` changes, the catalysis domain it affects.
 
 ## Schema changes: `scale schema`
 

@@ -39,8 +39,7 @@ def invalid_fixtures(repo: Path) -> list[dict]:
 
 
 def reviewer_warnings(repo: Path) -> list[str]:
-    """Reviewer seats still held by placeholders in the review policy: seats to fill with people, and until one is,
-    the owner merges their own pull requests under the bootstrap rule (a warning, not a failure)."""
+    """Placeholder entries in the review policy: they are nobody and never approve (a warning, not a failure)."""
     from .policy import load_policy, placeholders
     n = len(placeholders(load_policy(repo)))
     return [f"reviewers: {n} placeholder{'s' if n != 1 else ''} to fill ({layout.REVIEW_POLICY})"] if n else []
@@ -91,7 +90,7 @@ def check_steps(repo: Path, fast: bool = False) -> list[dict]:
     scale = [sys.executable, "-m", "scale.cli", "--repo", str(repo)]
     fixtures = invalid_fixtures(repo)
     steps = [
-        {"name": "reviewers: every seat in the review policy is filled", "cmds": [], "warning": reviewer_warnings},
+        {"name": "reviewers: the review policy lists no placeholder", "cmds": [], "warning": reviewer_warnings},
         {"name": "the documentation names the current schema version", "cmds": [], "warning": version_text_warnings},
         {"name": "unit tests", "cmds": [[sys.executable, "-m", "pytest", "-q"]], "slow": True},
         {"name": "releases are unchanged (digests)", "cmds": [scale + ["release", "verify"]]},

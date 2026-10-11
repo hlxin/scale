@@ -71,8 +71,8 @@ kernel identifier; `scale domains check` reports both.
    ([`skills/evolve-schema/SKILL.md`](../skills/evolve-schema/SKILL.md)).
 3. The pull request says how the change affects the catalysis domain; `scale ci spec-changes` lists who reviews,
    and CI writes a summary of the schema change for the reviewer.
-4. Review: one approving review by a reviewer, as for every change (the owner's own pull requests are merged
-   under the bootstrap rule until another reviewer joins) ([governance/GOVERNANCE.md](../governance/GOVERNANCE.md)).
+4. Review: one approving review by a reviewer other than the author, as for every change
+   ([governance/GOVERNANCE.md](../governance/GOVERNANCE.md)).
    The kind of change (breaking or additive) is information for the reviewer.
 
 ## `CORE.yaml`
@@ -84,7 +84,7 @@ kernel identifier; `scale domains check` reports both.
 | `summary` | one line |
 | `version` | the schema's one version (the catalysis manifest's); `scale domains check` requires it to agree |
 | `kernel` | `graph/kernel.yaml` |
-| `maintainers` | `team` (the code owner as CODEOWNERS names it: `@hlxin` today, or a team `@org/team`) and `people`: each with `name`, `github`, optional `orcid`, `since` and `roles`; a seat not filled yet has `placeholder: true` (no `since`), is nobody and is never credited |
+| `maintainers` | `team` (the code owner as CODEOWNERS names it: `@hlxin` today, or a team `@org/team`) and `people`: each with `name`, `github`, optional `orcid`, `since` and `roles`; an entry for nobody yet has `placeholder: true` (no `since`), is nobody and is never credited |
 | `scope` | what the core covers |
 | `compatibility` | the versioning policy above |
 | `examples`, `tests`, `docs` | paths, relative to `core/` |

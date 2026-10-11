@@ -166,8 +166,8 @@ def test_a_domain_line_must_name_its_team(tmp_path):
     assert f"a later line overrides /domain/: {TEAM} does not own domain/" in _messages(check(repo, examples=False))
 
 
-def test_placeholder_maintainers_are_seats_not_people(tmp_path):
-    """A placeholder seat needs no start date and never counts as a steward (nor as a person credited)."""
+def test_placeholder_maintainers_are_not_people(tmp_path):
+    """A placeholder entry needs no start date and never counts as a steward (nor as a person credited)."""
     repo = _mini(tmp_path)
     _new(repo)
     _edit(repo / "domain/DOMAIN.yaml", lambda m: m["maintainers"]["people"].append(

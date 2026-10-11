@@ -156,7 +156,7 @@ def graph_files(repo: Path, name: str, m: dict) -> list[str]:
 
 
 def stewards(m: dict) -> list[dict]:
-    """The stewards who are people (a placeholder seat is not one)."""
+    """The stewards who are people (a placeholder entry is not one)."""
     return [p for p in (m.get("maintainers") or {}).get("people") or []
             if "steward" in (p.get("roles") or []) and not p.get("placeholder")]
 

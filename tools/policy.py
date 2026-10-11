@@ -2,7 +2,7 @@
 
 The policy lives in ``governance/review-policy.yaml`` (explained in governance/GOVERNANCE.md). GitHub pull-request
 reviews are the approvals, and GitHub's ruleset on ``main`` enforces them; the tools only read the reviewers
-(``scale domains check`` routes CODEOWNERS to them, ``scale check`` warns about seats not filled yet) and the
+(``scale domains check`` routes CODEOWNERS to them, ``scale check`` warns about placeholder entries) and the
 sampling rule for curated records (``scale review sample``).
 """
 
@@ -33,13 +33,13 @@ def _norm(s: str | None) -> str:
 
 
 def reviewers(policy: dict, placeholders: bool = False) -> list[dict]:
-    """The reviewers the policy lists; without ``placeholders``, only the seats filled by a person."""
+    """The reviewers the policy lists; without ``placeholders``, only real people."""
     return [m for m in (policy.get("reviewers") or {}).get("members") or []
             if isinstance(m, dict) and (placeholders or not m.get("placeholder"))]
 
 
 def placeholders(policy: dict) -> list[dict]:
-    """Reviewer seats not filled yet (``placeholder: true``): they never count as approvals."""
+    """Placeholder entries (``placeholder: true``): they are nobody and never count as approvals."""
     return [m for m in reviewers(policy, placeholders=True) if m.get("placeholder")]
 
 

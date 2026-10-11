@@ -11,10 +11,11 @@
   older version, as a follow-up for a separate issue. The package and the schema keep their own versions: a release
   always raises the package version; the schema version moves only when the schema changes.
 - **Two reviewers join; every reviewer is asked, one approval is enough.** Tianyou Mou (`@mutianyou2013`) and Raul
-  Diaz (`@diazr04`) fill the reviewer seats. CODEOWNERS names every reviewer on every line, so GitHub asks all of them, and `scale domains check`
+  Diaz (`@diazr04`) join as reviewers; the list stays open, with no fixed number, and more are added as they join. CODEOWNERS names every reviewer on every line, so GitHub asks all of them, and `scale domains check`
   fails when one is missing. A new `reviewers` workflow withdraws the open review requests when one reviewer approves
   (and comments who approved and merges) and, after a push, asks again every reviewer whose approval the push
-  dismissed or who asked for changes. A request for changes still blocks the merge until its reviewer approves.
+  dismissed or who asked for changes. A request for changes still blocks the merge until its reviewer approves. The
+  documents no longer speak of reviewer seats or of a bootstrap rule pending a second reviewer.
 - **Package 0.2.0, with the schema renamed.** The package version is raised to 0.2.0 for the next release, v0.2.0
   (the package and the schema keep their own versions; here both move). The methanol example's bundle is re-exported at schema scale-catal 0.2.0 (`methanol-synthesis-pre1966_v3.0.0.zip`,
   following 2.0.0; 17,563 edges, unchanged), and the governance documents name the schema `scale-catal`.

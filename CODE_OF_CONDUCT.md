@@ -9,5 +9,5 @@ To report a concern, write to the owner, Hongliang Xin (GitHub [@hlxin](https://
 at TODO-contact (a contact address the owner adds here before collaborators are invited; until it is set, open an
 issue that only asks the owner for a private channel, without describing the concern). Do not report a concern in
 an issue. The owner decides what happens, which may be a warning, the removal of content or exclusion from the
-repository, and keeps reports confidential. Once reviewers join, the owner and one reviewer not involved in the
-concern decide together.
+repository, and keeps reports confidential. The owner and one reviewer not involved in the concern decide
+together.
