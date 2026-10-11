@@ -295,7 +295,7 @@ class Index:
             (self.indptr, np.int64), (self.post_item, np.int32), (self.post_count, np.int32), (self.lengths, np.int64)))
         head = json.dumps({"items_sha256": hashlib.sha256(raw).hexdigest(), "count": len(self.items),
                            "words": len(self.vocab), "postings": int(len(self.post_item)), "vocab": self.vocab,
-                           "payload_sha256": hashlib.sha256(payload).hexdigest()},
+                           "payload_sha256": _terms_digest(self.vocab, payload)},
                           ensure_ascii=False, sort_keys=True).encode("utf-8")
         with open(f"{stem}.terms", "wb") as f:
             f.write(TERMS_MAGIC + len(head).to_bytes(8, "little") + head + payload)
@@ -430,6 +430,11 @@ class Index:
             m *= 4
 
 
+def _terms_digest(vocab: list, payload: bytes) -> str:
+    """The digest of a .terms file's words and arrays together: the words say which postings are whose."""
+    return hashlib.sha256(json.dumps(vocab, ensure_ascii=False).encode("utf-8") + b"\0" + payload).hexdigest()
+
+
 def _read_terms(stem: Path, items_raw: bytes, count: int):
     """The inverted index saved at ``<stem>.terms``, or None (then it is rebuilt from the items) when there is none, it
     was not saved with exactly these items, its arrays do not match the digest it records, or they do not form an
@@ -451,8 +456,8 @@ def _read_terms(stem: Path, items_raw: bytes, count: int):
     if head.get("count") != count or head.get("items_sha256") != hashlib.sha256(items_raw).hexdigest():
         return None
     at += 8 + size
-    if head.get("payload_sha256") != hashlib.sha256(data[at:]).hexdigest():
-        return None                                   # the arrays changed since they were saved (or an older file)
+    if not isinstance(vocab, list) or head.get("payload_sha256") != _terms_digest(vocab, data[at:]):
+        return None                       # the words or the arrays changed since they were saved (or an older file)
     out = []
     for t, length in ((np.int64, words + 1), (np.int32, postings), (np.int32, postings), (np.int64, count)):
         nbytes = length * np.dtype(t).itemsize
