@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+- **The full methanol example leaves the repository; the public one stays.** `examples/methanol-synthesis-pre1966/`
+  (105 sources, most in copyright: the graph with capped quotes, its corpus list, rights and the bundle zip) is removed
+  and kept outside the repository, until a legal way to curate community graphs is settled. The public-domain example,
+  `examples/methanol-synthesis-public/` (55 sources with their PDFs and page texts), stays and now carries the
+  manuscript's seven query plans (`queries/`), and its tests check their answers. The test that it is exactly the
+  public-domain part of the full graph runs where a restricted copy holds that graph (docs/commands.md); the
+  parts round-trip test uses the public example. The earlier versions remain in the git history.
+- **The package carries the public example.** `examples/` is bundled into the wheel (`scale/_data/examples/`): the
+  public-domain methanol example whole, its parts, PDFs, page texts and query plans, shared directly as they are. The
+  wheel grows from about 0.8 MB to about 27 MB; an installed package validates and queries the example on its own.
 - **Only a collaborator's event starts @scale-agents**, now that the repository is public: a run spends the owner's
   Claude usage. Anyone's issue or comment is welcome; a collaborator's comment on it starts the team, which reads the
   whole thread as data.

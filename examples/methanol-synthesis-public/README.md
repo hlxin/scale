@@ -1,6 +1,7 @@
 # Example — methanol synthesis, public-domain sources
 
-The public-domain part of the methanol-synthesis graph ([`../methanol-synthesis-pre1966/`](../methanol-synthesis-pre1966/)):
+The public-domain part of the methanol-synthesis graph (the full curation, 105 sources, most in copyright, is kept
+outside this repository):
 55 sources on CO and CO2 hydrogenation to methanol, **with their PDFs and page texts** and every quote in full. Anyone can
 reproduce the curation from this folder alone, and every quote is checked against its source's text
 (`tools/tests/test_example_methanol_public.py`).
@@ -24,6 +25,7 @@ basis is in `rights.yaml`.
 | `pdfs/<slug>.pdf` | the source (its sha256 is `text.pdf_sha256` in `sources.json`) |
 | `texts/<slug>.json` | its page texts, the ones it was curated from: the PDF's text layer, or Tesseract OCR with the settings in `ocr_engine` |
 | `sources.json`, `rights.yaml`, `stewardship.yaml` | the corpus, each source's rights, the default stewardship |
+| `queries/*.yaml` | the manuscript's questions as query plans; on these 55 sources: q1 117 rows, q2 71, q2b 60, q3 70, q4 55, q5 102, q6 3 |
 
 Tools read the folder as one graph: they build it from its parts
 ([docs/graph-parts.md](../../docs/graph-parts.md)). `scale graph build examples/methanol-synthesis-public` writes the
@@ -32,13 +34,24 @@ built copy (`methanol-synthesis-public.graph.json`, git-ignored).
 ```bash
 G=examples/methanol-synthesis-public
 scale graph validate $G                                    # 2,851 nodes, 9,335 links, 0 errors
-scale graph query $G examples/methanol-synthesis-pre1966/queries/q1-copper-lower-temperature.yaml --format markdown
+scale graph query $G $G/queries/q1-copper-lower-temperature.yaml --format markdown
 scale graph search $G "sulphur poisons the copper catalyst" --format markdown
 ```
 
 A source's records are those of the full graph, unchanged; shared records keep only the evidence of these 55
-sources. `scale graph split ../methanol-synthesis-pre1966/methanol-synthesis.graph.json --out . --sources @LIST` makes
-the parts again, and a test checks that this folder is exactly that.
+sources. `scale graph split <the full graph> --out . --sources @LIST` makes the parts again, and a test checks that
+this folder is exactly that where a restricted copy holds the full graph ([docs/commands.md](../../docs/commands.md)).
+
+## In the installed package
+
+The package (`pip install scale-catal`, or `uvx scale-catal`) carries this whole example: its parts, PDFs, page texts
+and query plans, every source public domain and shared as it is. From an installed package:
+
+```bash
+EX=$(python -c "import scale, pathlib; print(pathlib.Path(scale.__file__).parent / '_data/examples/methanol-synthesis-public')")
+scale graph validate $EX
+scale graph query $EX $EX/queries/q6-cu-zn-al-formulations.yaml --format markdown
+```
 
 ## Checking a quote against its source
 

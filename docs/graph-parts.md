@@ -36,7 +36,8 @@ scale graph validate DIR                             # any command reads DIR as 
 
 `build` is deterministic, and it refuses a record in the wrong part, an id used twice, a part at another schema
 version or a link to a record no part holds. Splitting a graph and building it back gives the same document: the
-methanol graph (105 sources, 261 shared records) does.
+public methanol example (55 sources) does, and so does the full methanol graph (105 sources, 261 shared records),
+which is kept outside this repository.
 
 A subset (`--sources`) keeps the sources named, the shared records they reach (through their links, then through
 links between shared records) and those the header names, and keeps in shared records only the evidence of those
@@ -44,6 +45,7 @@ sources. [`examples/methanol-synthesis-public/`](../examples/methanol-synthesis-
 
 ## Next
 
-The full methanol graph moves to parts; a registry of shared records with a check for near-duplicates
+Community graphs: how sources are curated and kept within the law (the full methanol graph, most of whose sources are
+in copyright, is kept outside the repository until that is settled); a registry of shared records with a check for near-duplicates
 (`dreyfus-henry` and `dreyfus-hnnry` are both in the methanol graph today); and a file for links between sources
 (one source confirms or contradicts another).
