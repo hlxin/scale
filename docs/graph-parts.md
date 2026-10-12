@@ -19,7 +19,7 @@ read the folder as the one graph its parts build.
 - **A source's records** are its Source record (`<ns>/source/<slug>`) and every record whose id starts with
   `<ns>/<slug>/`: its catalysts, samples, tests, conditions, claims.
 - **Shared records** are all others. Sources refer to them by id (`ex:msyn/species/zno`), and that shared id is
-  what connects the sources in the built graph: 65 sources of the methanol graph point to the same ZnO.
+  what connects the sources in the built graph: 39 of the 55 sources of the public methanol example point to the same ZnO.
 - **A link** goes with the source of its first endpoint that belongs to one; a link between two shared records is
   shared. A link between the records of two sources has no part yet and is refused.
 - **Every part states the schema version** it follows, which must be the header's.
