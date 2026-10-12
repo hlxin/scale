@@ -46,7 +46,7 @@ Then `scale call status` to start, or `claude mcp add scale -- scale mcp` to giv
   texts and every quote in full, kept as one part per source, with the manuscript's questions as query plans. The
   tests run on it.
 - **Graphs** ([`graphs/`](graphs/README.md)): the graphs SCALE curates and shares, each source quoted only as far as
-  its rights allow: the catalysis commons, an evolving graph grown one source at a time, and the methanol-synthesis
+  its rights allow: catal-commons, an evolving graph grown one source at a time, and the methanol-synthesis
   graph (105 sources before 1966, no quoted text of a source in copyright).
 - **Tools** ([`tools/`](tools/README.md)): the `scale` Python package and command, the agent skills and their
   tests.

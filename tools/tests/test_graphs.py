@@ -14,7 +14,7 @@ METHANOL = GRAPHS / "methanol-synthesis-pre1966"
 
 
 def test_the_graphs_are_the_commons_and_the_methanol_graph():
-    assert [f.name for f in FOLDERS] == ["catalysis-commons", "methanol-synthesis-pre1966"]
+    assert [f.name for f in FOLDERS] == ["catal-commons", "methanol-synthesis-pre1966"]
 
 
 @pytest.mark.parametrize("folder", FOLDERS, ids=lambda f: f.name)

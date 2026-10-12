@@ -6,7 +6,7 @@
   from the worked examples. Every graph is kept as parts with its `rights.yaml`, `stewardship.yaml` and corpus, and
   quotes each source only as far as its rights allow: `limits: {quote_chars: 0, source_chars: 0}` withholds every
   quote of a source in copyright (sha256 and length kept, `scale evidence rehydrate` restores it), and no source text
-  is committed. `graphs/catalysis-commons/` is SCALE's evolving catalysis graph (empty: its steward and project);
+  is committed. `graphs/catal-commons/` is SCALE's evolving catalysis graph (empty: its steward and project);
   `graphs/methanol-synthesis-pre1966/` is the full methanol graph back in the repository (105 sources: the 55
   public-domain ones quoted in full, the 50 in copyright with no quoted text); the public example is checked again to
   be exactly its public-domain part. A rights file's `limits`, and a source's own

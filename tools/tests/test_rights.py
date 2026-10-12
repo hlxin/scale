@@ -193,7 +193,7 @@ def test_committed_documents_are_public_and_respect_the_cap(tmp_path):
     assert res["ok"], res["problems"]
     assert [d["document"] for d in res["documents"]] == ["domain/tests/fixtures/invalid/research-data-without-stewardship.json",
                                                      "examples/methanol-synthesis-public",    # graphs kept as parts
-                                                     "graphs/catalysis-commons", "graphs/methanol-synthesis-pre1966"]
+                                                     "graphs/catal-commons", "graphs/methanol-synthesis-pre1966"]
     # a project's document, or a research document without rights, is found
     repo = tmp_path / "repo"
     (repo / "x").mkdir(parents=True)

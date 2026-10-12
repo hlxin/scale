@@ -5,7 +5,7 @@ that anyone can reproduce from their files; `graphs/` holds the graphs that grow
 
 | folder | what it is |
 |---|---|
-| [`catalysis-commons/`](catalysis-commons/README.md) | SCALE's evolving catalysis graph, grown one source at a time through pull requests (empty so far) |
+| [`catal-commons/`](catal-commons/README.md) | SCALE's evolving catalysis graph, grown one source at a time through pull requests (empty so far) |
 | [`methanol-synthesis-pre1966/`](methanol-synthesis-pre1966/README.md) | methanol synthesis from CO/CO2 + H2, literature published before 1966: 105 sources |
 
 ## A graph here

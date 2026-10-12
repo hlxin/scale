@@ -45,7 +45,7 @@ sources. [`examples/methanol-synthesis-public/`](../examples/methanol-synthesis-
 
 ## Next
 
-The skills that find, download and curate sources for the commons (`graphs/catalysis-commons/`); merging graphs into
+The skills that find, download and curate sources for the commons (`graphs/catal-commons/`); merging graphs into
 bundles, once the commons and a few more graphs are curated; a registry of shared records with a check for near-duplicates
 (`dreyfus-henry` and `dreyfus-hnnry` are both in the methanol graph today); and a file for links between sources
 (one source confirms or contradicts another).
