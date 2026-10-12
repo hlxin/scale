@@ -11,7 +11,7 @@ from scale import graphparts as gp
 from scale.cli import main
 from scale.util import ScaleError, dump_canonical, load_doc
 
-METHANOL = REPO / "examples/methanol-synthesis-pre1966/methanol-synthesis.graph.json"
+METHANOL = REPO / "examples/methanol-synthesis-public"           # kept as parts: load_doc builds it
 
 
 def tiny() -> dict:
@@ -45,10 +45,11 @@ def test_a_graph_splits_into_one_part_per_source_and_builds_back():
 
 
 def test_the_methanol_graph_builds_back_exactly_from_its_parts(tmp_path):
-    parts = gp.split(load_doc(METHANOL))
-    assert len(parts["sources"]) == 105 and len(parts["shared"]["nodes"]) == 261
+    doc = load_doc(METHANOL)
+    parts = gp.split(doc)
+    assert len(parts["sources"]) == 55 and parts["sources"] == gp.read_parts(METHANOL)["sources"]
     gp.write_parts(parts, tmp_path)
-    assert gp.same(load_doc(tmp_path), METHANOL)                 # load_doc builds a folder kept as parts
+    assert dump_canonical(load_doc(tmp_path)) == dump_canonical(doc)   # load_doc builds a folder kept as parts
     assert main(["graph", "build", str(tmp_path), "--check"]) == 0
 
 
