@@ -1,0 +1,239 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/hid-20037/claim/methyl-iodide-identity-confirmed",
+      "label": "Claim",
+      "props": {
+        "name": "methyl iodide identity confirmed",
+        "claim_kind": "data_quality",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:4240ea45edf731dcf5a5cdcbccb8fc93916fbf6c14a7fb527610afcd80216f8b chars:92",
+            "passage": "hid-20037/p8/1",
+            "source": "ex:msyn/source/hid-20037"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:b8a861d0d83f96142a2e91038f067a58e4026d8b6aeb68b9245bbd8bd073c09c chars:147",
+            "passage": "hid-20037/p8/1",
+            "source": "ex:msyn/source/hid-20037"
+          }
+        ],
+        "inference_type": "observational",
+        "statement": "The identity of the methyl iodide was confirmed by boiling point and refractive index; its conversion to acetic acid gave the correct equivalent weight, also indicating the absence of higher molecular weight analogues."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20037/claim/steam-distillation-pure-but-slow",
+      "label": "Claim",
+      "props": {
+        "name": "steam distillation pure but slow",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 9",
+            "note": "quote withheld: sha256:1ff8c98447ae0e9945c16d1322b128f5c3b4da37f3eebac6f5e8fe423b6a48ff chars:102",
+            "passage": "hid-20037/p9/2",
+            "source": "ex:msyn/source/hid-20037"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Steam distillation of the formic acid gives a very pure product, but it is slow."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20037/species/methyl-iodide-c14",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "methyl iodide-C14 (C14H3I)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:649d38d395c4d05c537ce56e36e9531a3c3a86af9cee140f936c7e68a00c12ad chars:119",
+            "passage": "hid-20037/p5/1",
+            "source": "ex:msyn/source/hid-20037"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "title: the synthesis of methanol-C14 and methyl iodide-C14; quote withheld: sha256:aa49261713ba09c3ef477e002e74bcb0888bc6b7b0c135ca0300463dd15b5f37 chars:52",
+            "passage": "hid-20037/p6/1",
+            "source": "ex:msyn/source/hid-20037"
+          }
+        ],
+        "formula": "C14H3I",
+        "isotopic_label": "C14"
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20037/species/potassium-formate-c14",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "potassium formate-C14 (HC14O2K)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 10",
+            "note": "quote withheld: sha256:6c6c8ca9cde4f769f8e4dd5327fb8414b11ef8bdcd3b44bb62cdc60655e5761b chars:137",
+            "passage": "hid-20037/p10/1",
+            "source": "ex:msyn/source/hid-20037"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "section heading: potassium formate-C14; quote withheld: sha256:8f9cd90d2bfd6f4c1d6232f15beb4ac10a70855519c892397e8ac62b62ba7f6c chars:20",
+            "passage": "hid-20037/p8/2",
+            "source": "ex:msyn/source/hid-20037"
+          }
+        ],
+        "formula": "HC14O2K",
+        "isotopic_label": "C14"
+      }
+    },
+    {
+      "id": "ex:msyn/source/hid-20037",
+      "label": "Source",
+      "props": {
+        "name": "THE SYNTHESIS OF METHANOL-C14 AND METHYL IODIDE-C14 BY HIGH PRESSURE HYDROGENATION",
+        "kind": "article",
+        "description": "Published 1951 (publication year (bibliography)); in scope: before the 1966-01-01 cutoff. Text: 11 pages text_layer. Text not redistributed.",
+        "licence": "no verified publisher licence; short excerpts quoted as evidence under fair use",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "THE SYNTHESIS OF METHANOL-C14 AND METHYL IODIDE-C14 BY HIGH PRESSURE HYDROGENATION",
+        "venue": "eScholarship (California Digital Library)",
+        "year": 1951
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/hid-20037/claim/methyl-iodide-identity-confirmed/reported-in/hid-20037",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 8"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20037/claim/methyl-iodide-identity-confirmed",
+      "target": "ex:msyn/source/hid-20037"
+    },
+    {
+      "id": "ex:msyn/hid-20037/claim/steam-distillation-pure-but-slow/reported-in/hid-20037",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 9"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20037/claim/steam-distillation-pure-but-slow",
+      "target": "ex:msyn/source/hid-20037"
+    },
+    {
+      "id": "ex:msyn/hid-20037/link/29",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:4240ea45edf731dcf5a5cdcbccb8fc93916fbf6c14a7fb527610afcd80216f8b chars:92",
+            "passage": "hid-20037/p8/1",
+            "source": "ex:msyn/source/hid-20037"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:b8a861d0d83f96142a2e91038f067a58e4026d8b6aeb68b9245bbd8bd073c09c chars:147",
+            "passage": "hid-20037/p8/1",
+            "source": "ex:msyn/source/hid-20037"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20037/claim/methyl-iodide-identity-confirmed",
+      "target": "ex:msyn/hid-20037/species/methyl-iodide-c14"
+    },
+    {
+      "id": "ex:msyn/hid-20037/link/35",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 9",
+            "note": "quote withheld: sha256:1ff8c98447ae0e9945c16d1322b128f5c3b4da37f3eebac6f5e8fe423b6a48ff chars:102",
+            "passage": "hid-20037/p9/2",
+            "source": "ex:msyn/source/hid-20037"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20037/claim/steam-distillation-pure-but-slow",
+      "target": "ex:msyn/hid-20037/species/potassium-formate-c14"
+    },
+    {
+      "id": "ex:msyn/hid-20037/species/methyl-iodide-c14/reported-in/hid-20037",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5",
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20037/species/methyl-iodide-c14",
+      "target": "ex:msyn/source/hid-20037"
+    },
+    {
+      "id": "ex:msyn/hid-20037/species/potassium-formate-c14/reported-in/hid-20037",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 10",
+          "p. 8"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20037/species/potassium-formate-c14",
+      "target": "ex:msyn/source/hid-20037"
+    },
+    {
+      "id": "ex:msyn/source/hid-20037/authored-by/1",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 1,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/hid-20037",
+      "target": "ex:msyn/person/p-t-adams"
+    },
+    {
+      "id": "ex:msyn/species/naoh/reported-in/hid-20037",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 10"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/naoh",
+      "target": "ex:msyn/source/hid-20037"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/hid-20037"
+}

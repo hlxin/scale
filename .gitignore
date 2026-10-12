@@ -24,3 +24,10 @@ demo-output/
 
 # the public-domain example commits its PDFs (public domain in the US)
 !/examples/methanol-synthesis-public/pdfs/
+
+# graphs/: no source PDFs or local material; built graphs and evidence indexes are rebuilt from the parts
+/graphs/*/pdfs/
+/graphs/**/work/
+/graphs/**/scratchpad/
+/graphs/**/*.graph.json
+/graphs/**/*.evidence.*

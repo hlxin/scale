@@ -1,8 +1,8 @@
 """The public-domain methanol-synthesis example (examples/methanol-synthesis-public/): 55 sources that are public domain
 in the United States, kept as parts, with their PDFs and page texts. It is exactly the public-domain part of the full
 graph, every source is public domain, every quote is in full and is found verbatim in its source's page texts, and the
-manuscript's questions are answered from it. The full graph (105 sources, most in copyright) is kept outside this
-repository; the test that this folder is its public-domain part runs where a restricted copy holds it."""
+manuscript's questions are answered from it. The full graph (105 sources) is graphs/methanol-synthesis-pre1966, which
+quotes no text of its sources in copyright."""
 
 import pytest
 
@@ -13,8 +13,7 @@ from scale.sourcetext import joined, sha256_file
 from scale.util import load_doc, load_yaml
 
 EX = REPO / "examples/methanol-synthesis-public"
-# the full graph is kept outside the repository: found only in a restricted copy (SCALE_RESTRICTED_DATA)
-FULL = layout.locate(REPO, "examples/methanol-synthesis-pre1966/methanol-synthesis.graph.json")
+FULL = REPO / layout.GRAPHS / "methanol-synthesis-pre1966"            # kept as parts: load_doc builds it
 PLANS = sorted((EX / "queries").glob("*.yaml"))
 
 
@@ -28,7 +27,6 @@ def doc():
     return load_doc(EX)
 
 
-@pytest.mark.skipif(FULL is None, reason="the full methanol graph is kept outside the repository (a restricted copy)")
 def test_it_is_the_public_domain_part_of_the_full_graph(manifest):
     slugs = [s["slug"] for s in manifest["sources"]]
     assert len(slugs) == 55 and manifest["counts"] == {"in_scope": 55}

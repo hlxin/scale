@@ -1,0 +1,4949 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/source/us1625926a",
+      "label": "Source",
+      "props": {
+        "name": "Catalyst for synthetic-methanol production",
+        "kind": "patent",
+        "description": "Published 1927 (grant year from the USPTO issue-year table (no legible grant date)); in scope: before the 1966-01-01 cutoff. Text: 3 pages ocr (tesseract 5.5.3 (eng, 300 dpi, 2 columns)). Text not redistributed.",
+        "identifiers": {
+          "patent": "US1625926A"
+        },
+        "licence": "US patent; not subject to copyright",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "Catalyst for synthetic-methanol production",
+        "url": "https://patents.google.com/patent/US1625926A",
+        "year": 1927
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/catalyst/example-1",
+      "label": "Catalyst",
+      "props": {
+        "name": "Example I: chromium hydroxide-nickel hydrate precipitate moistened with zinc chloride",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, col. 2, Example I",
+            "note": "the formula printed below it reads (Cr(NO3)3.9H2O)",
+            "reading": "vision_ocr",
+            "region": [
+              0.535,
+              0.374,
+              0.905,
+              0.393
+            ],
+            "source": "ex:msyn/source/us1625926a",
+            "transcription": "8 kilograms of chromic nitrate"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2, Example I",
+            "note": "formula printed '(Ni(NO,),.6H,0)' = Ni(NO3)2.6H2O",
+            "passage": "us1625926a/p2/5",
+            "quote": "and 1.5 kilograms of nickel nitrate",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2, Example I",
+            "passage": "us1625926a/p2/5",
+            "quote": "are dissolved in 150 liters of water, and to this solution there is added the theoretical amount (5.4 liters of 12.75 normal) of am- monium hydroxide to precipitate chromium hydroxide and nickel hydrate.",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2, Example I",
+            "passage": "us1625926a/p2/6",
+            "quote": "The resultant granules are moistened with an aqueous solution of 200 grams zinc chlo- ride and again dried, whereupon they are ready for use.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "generality": "particular",
+        "properties": {
+          "chromic_nitrate": {
+            "status": "present",
+            "as_reported": "8 kilograms",
+            "unit": "kg",
+            "value": 8
+          },
+          "nickel_nitrate": {
+            "status": "present",
+            "as_reported": "1.5 kilograms",
+            "unit": "kg",
+            "value": 1.5
+          },
+          "zinc_chloride": {
+            "status": "present",
+            "as_reported": "200 grams zinc chlo- ride",
+            "unit": "g",
+            "value": 200
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/catalyst/example-2",
+      "label": "Catalyst",
+      "props": {
+        "name": "Example II: zinc oxide with precipitated nickel hydrate, 740 g zinc chloride",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2, Example II",
+            "note": "formula printed '(Ni(NO,)..6H,O)' = Ni(NO3)2.6H2O",
+            "passage": "us1625926a/p2/6",
+            "quote": "2250 grams of nickel nitrate",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2, Example II",
+            "passage": "us1625926a/p2/6",
+            "quote": "solution is heated to 95° C. 7500 grams of zinc oxide is then added with stirring. To this solution there is added sufficient am- monium hydroxide to precipitate the nickel -as nickel hydrate.",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2, Example II",
+            "passage": "us1625926a/p2/6",
+            "quote": "To this mass is added a solution containing 740 grams of zinc chloride and the mass is again dried.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "generality": "particular",
+        "properties": {
+          "nickel_nitrate": {
+            "status": "present",
+            "as_reported": "2250 grams",
+            "unit": "g",
+            "value": 2250
+          },
+          "zinc_chloride": {
+            "status": "present",
+            "as_reported": "740 grams",
+            "unit": "g",
+            "value": 740
+          },
+          "zinc_oxide": {
+            "status": "present",
+            "as_reported": "7500 grams",
+            "unit": "g",
+            "value": 7500
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/catalyst/example-2-double-zncl2",
+      "label": "Catalyst",
+      "props": {
+        "name": "Example II variant with the amount of zinc chloride doubled",
+        "catalyst_family": "mixed_oxide",
+        "description": "As Example II, with the amount of zinc chloride doubled (the doubled mass is not printed).",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2, col. 2, Example II",
+            "reading": "vision_ocr",
+            "region": [
+              0.535,
+              0.878,
+              0.906,
+              0.943
+            ],
+            "second_reading": "The hourly yield of condensate is about 1 liter and contains about 30% of methanol. If the amount of zinc chloride used is doubled, the hourly condensate will be increased to about 2.5 liters and the percentage of methanol will be increased to about 56%. Substitution of chemically equivalent",
+            "source": "ex:msyn/source/us1625926a",
+            "transcription": "If the amount of zinc chloride used is doubled, the hourly condensate will be in- creased to about 2.5 liters and the percent- age of methanol will be increased to about 56%."
+          }
+        ],
+        "generality": "particular"
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/catalyst/example-3",
+      "label": "Catalyst",
+      "props": {
+        "name": "Example III: chromic oxide, nickel oxide and zinc oxide (from nitrates), moistened with zinc chloride",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1, Example III",
+            "note": "formula printed '(Cr(NO,),.9H,O)' = Cr(NO3)3.9H2O",
+            "passage": "us1625926a/p3/1",
+            "quote": "4 kilograms chromic nitrate",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1, Example III",
+            "note": "formula printed '(Ni(NO,)..6H,O)'",
+            "passage": "us1625926a/p3/1",
+            "quote": "and 750 grams nickel nitrate",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1, Example III",
+            "note": "'15' is a stray line number",
+            "passage": "us1625926a/p3/1",
+            "quote": "are dissolved in 5 liters of water. 2.5 kilo- grams of zinc oxide is added with stirring and the mass is heated to dryness and is then 15 further heated till no more nitric oxide fumes are given off,",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1, Example III",
+            "passage": "us1625926a/p3/1",
+            "quote": "whereby the mixture is transformed to chromic oxide, nickel oxide, . and zinc oxide.",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1, Example III",
+            "passage": "us1625926a/p3/1",
+            "quote": "The resultant mass is bro- ‘ken up into granules and is then moistened 20 with a solution containing 450 grams of zinc chloride. The granules are again dried and are ready for use.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "generality": "particular",
+        "properties": {
+          "chromic_nitrate": {
+            "status": "present",
+            "as_reported": "4 kilograms",
+            "unit": "kg",
+            "value": 4
+          },
+          "nickel_nitrate": {
+            "status": "present",
+            "as_reported": "750 grams",
+            "unit": "g",
+            "value": 750
+          },
+          "zinc_chloride": {
+            "status": "present",
+            "as_reported": "450 grams",
+            "unit": "g",
+            "value": 450
+          },
+          "zinc_oxide": {
+            "status": "present",
+            "as_reported": "2.5 kilo- grams",
+            "unit": "kg",
+            "value": 2.5
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/catalyst/example-4",
+      "label": "Catalyst",
+      "props": {
+        "name": "Example IV: Example III granules moistened with chromic chloride instead of zinc chloride",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1, Example IV",
+            "note": "'sranules' = granules",
+            "passage": "us1625926a/p3/2",
+            "quote": "In place of moistening the sranules of the catalyst in Example III with zinc chloride a chemically equivalent amount of chromic chloride may be employed.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "generality": "particular"
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/catalyst/three-element-halide-catalyst",
+      "label": "Catalyst",
+      "props": {
+        "name": "methanol catalyst of non-reducible metal oxide(s), easily reducible metal oxide(s) and a metallic halide",
+        "catalyst_family": "mixed_oxide",
+        "description": "The new type of methanol catalyst: (1) one or more non-reducible metal oxides (zinc, magnesium, cadmium, chromium, vanadium, tungsten, etc.), (2) one or more easily reducible metal oxides (copper, silver, iron, nickel, cobalt, etc.), (3) a metallic halide.",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, col. 2",
+            "passage": "us1625926a/p1/5",
+            "quote": "We have now discovered a new type of valuable methanol catalyst which comprises three main elements—1. e. —",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, col. 2",
+            "note": "'9 —' is the stray line number 95; 'magnezium' = magnesium",
+            "passage": "us1625926a/p1/6",
+            "quote": "(1) One or more non-reducible metal 9 — ‘oxides such as zinc, magnezium, cadmium, chromium, vanadium, tungsten, etc.",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, col. 2",
+            "note": "'eas#ly' = easily; 'ete.' = etc.",
+            "passage": "us1625926a/p1/6",
+            "quote": "(2) One or more eas#ly reducible metal oxides such as copper, silver, iron, nickel, cobalt, ete.;",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, col. 2",
+            "passage": "us1625926a/p1/6",
+            "quote": "(3) A metallic. halide.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "generality": "kind"
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/claim/claim-1",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 1",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 2, claim 1",
+            "passage": "us1625926a/p3/2",
+            "quote": "1. A methanol catalyst initially compris-",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 2, claim 1",
+            "note": "'halied' = halide",
+            "passage": "us1625926a/p3/3",
+            "quote": "ing a plurality of difficultly reducible metal oxides, nickel oxide, and a metallic halied.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Claim 1: A methanol catalyst initially comprising a plurality of difficultly reducible metal oxides, nickel oxide, and a metallic halide."
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/claim/claim-2",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 2",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 2, claim 2",
+            "passage": "us1625926a/p3/3",
+            "quote": "2. A methanol catalyst initially: compris- ing a difficultly reducible metal oxide, nickel oxide, and a metallic halide.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Claim 2: A methanol catalyst initially comprising a difficultly reducible metal oxide, nickel oxide, and a metallic halide."
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/claim/claim-3",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 3",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 2, claim 3",
+            "passage": "us1625926a/p3/3",
+            "quote": "3. A methanol catalyst initially compris- ing zinc oxide, chromium oxide, nickel ox- ide, and a metallic halide,",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Claim 3: A methanol catalyst initially comprising zinc oxide, chromium oxide, nickel oxide, and a metallic halide."
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/claim/claim-4",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 4",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 2, claim 4",
+            "passage": "us1625926a/p3/3",
+            "quote": "4. A methanol catalyst initially compris- . ing zinc oxide, nickel oxide, and a metallic 55",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Claim 4: A methanol catalyst initially comprising zinc oxide, nickel oxide, and a metallic halide."
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/claim/claim-5",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 5",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 2, claim 5",
+            "passage": "us1625926a/p3/3",
+            "quote": "5. A methanol catalyst initially compris- ing zinc oxide, chromium oxide, nickel ox- ide, and zine chloride.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Claim 5: A methanol catalyst initially comprising zinc oxide, chromium oxide, nickel oxide, and zinc chloride."
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/claim/claim-6",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 6",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 2, claim 6",
+            "passage": "us1625926a/p3/3",
+            "quote": "6. A methanol catalyst initially compris 60",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 2, claim 6",
+            "passage": "us1625926a/p3/3",
+            "quote": "Ing zinc oxide, nick",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 2, claim 6",
+            "passage": "us1625926a/p3/3",
+            "quote": "el -oxide, and zinc",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 2, claim 6",
+            "passage": "us1625926a/p3/1",
+            "quote": "chloride.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Claim 6: A methanol catalyst initially comprising zinc oxide, nickel oxide, and zinc chloride."
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/claim/claim-7",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 7",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 2, claim 7",
+            "passage": "us1625926a/p3/4",
+            "quote": "at a temperature of 350-450° C. over a catalyst imitially comprising a plurality of difficultly reducible metal oxides, nickel ox- _ ide, and a metallic halide.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Claim 7: A process for synthetic methanol: passing hydrogen and carbon oxides at a pressure in excess of 50 atmospheres and 350-450° C. over a catalyst initially comprising a plurality of difficultly reducible metal oxides, nickel oxide and a metallic halide."
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/claim/claim-8",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 8",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 2, claim 8",
+            "passage": "us1625926a/p3/4",
+            "quote": "at a temperature of 350-450° C. over a 75",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 2, claim 8",
+            "passage": "us1625926a/p3/4",
+            "quote": "ducible metal oxide; nickel oxide and a . metal halide.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Claim 8: A process for synthetic methanol: passing hydrogen and carbon oxides at a pressure in excess of 50 atmospheres and 350-450° C. over a catalyst initially comprising a difficultly reducible metal oxide, nickel oxide and a metal halide."
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/claim/claim-9",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 9",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 2, claim 9",
+            "passage": "us1625926a/p3/4",
+            "quote": "catalyst initially comprising zinc oxide, chromium oxide, nickel oxide, and zinc 85",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Claim 9: A process for synthetic methanol: passing hydrogen and carbon oxides at a pressure in excess of 50 atmospheres and 350-450° C. over a catalyst initially comprising zinc oxide, chromium oxide, nickel oxide and zinc chloride."
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/claim/dextrin-optional",
+      "label": "Claim",
+      "props": {
+        "name": "dextrin gives firmer granules",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1, Example III",
+            "passage": "us1625926a/p3/1",
+            "quote": "If desired, 450 grams of dextrin or a similar agglutinating agent may be added with the zinc chloride, where- 25 by firmer granules are obtained:on drying.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "450 grams of dextrin or a similar agglutinating agent may optionally be added with the zinc chloride in Example III, giving firmer granules on drying."
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/claim/example-4-similar",
+      "label": "Claim",
+      "props": {
+        "name": "chromic chloride in place of zinc chloride: results not greatly varied",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1, Example IV",
+            "note": "'sranules' = granules",
+            "passage": "us1625926a/p3/2",
+            "quote": "In place of moistening the sranules of the catalyst in Example III with zinc chloride a chemically equivalent amount of chromic chloride may be employed.",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1, Example IV",
+            "passage": "us1625926a/p3/2",
+            "quote": "The results will not be greatly varied.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Moistening the Example III granules with a chemically equivalent amount of chromic chloride instead of zinc chloride does not greatly vary the results."
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/claim/halide-amount",
+      "label": "Claim",
+      "props": {
+        "name": "amount of metallic halide",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/3",
+            "quote": "To produce our improved catalysts it is not necessary that the amount of metallic",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/3",
+            "quote": "halide added bear any exact weight relation to the remaining constituents of the catalyst, though the amount of halide added should preferably be less than one chemical equiva- lent of the amount of principal metallic oxide present in the catalyst.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The amount of metallic halide need bear no exact weight relation to the other constituents, but should preferably be less than one chemical equivalent of the amount of principal metallic oxide present."
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/claim/halide-improves-cu-ag",
+      "label": "Claim",
+      "props": {
+        "name": "halide improves otherwise identical catalysts with copper or silver oxides",
+        "claim_kind": "comparison",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/1",
+            "quote": "Or we may employ easily reducible oxides such as those of copper or silver which are already known in the art as advantageous compo- nents of certain methanol catalysts.",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/1",
+            "quote": "In these cases however, our improved catalysts containing halides produce far better results than those known in the art for otherwise identical catalyst mixtures.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "With easily reducible oxides such as those of copper or silver, the improved catalysts containing halides produce far better results than those known in the art for otherwise identical catalyst mixtures."
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/claim/higher-yield-pure-methanol",
+      "label": "Claim",
+      "props": {
+        "name": "halide-containing catalyst gives higher yield of purer methanol and practically no methane",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, col. 2",
+            "note": "'85_' is a stray line number",
+            "passage": "us1625926a/p1/5",
+            "quote": "We have discovered a new type of metha- nol catalyst which produces a higher yield of methanol than those formerly employed in the art, and at the same time produces a 85_ very pure methanol, uncontaminated by by- —",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, col. 2",
+            "passage": "us1625926a/p1/5",
+            "quote": "An additional advantage accru-. ing from the use of our catalysts is that the formation of methane in the process—with the consequent destruction of valuable hy- 90 drogen—is practically eliminated.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "inference_type": "interventional",
+        "statement": "The new type of methanol catalyst produces a higher yield of methanol than those formerly employed, a very pure methanol uncontaminated by by-products, and practically eliminates the formation of methane."
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/claim/methanating-metals-usable",
+      "label": "Claim",
+      "props": {
+        "name": "methanating metals serve advantageously in the halide catalysts",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, col. 2",
+            "note": "'Tt' = It; '06 —' stray line number; 'vobalt' = cobalt",
+            "passage": "us1625926a/p1/6",
+            "quote": "Tt will be observed that in our-improved catalyst we may employ substances normally deleterious to the methanol reaction— namely the “methanating metals”—iron. 06 — nickel; or vobalt,",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/1",
+            "quote": "compositions these normally deleterious sub- stances serve advantageously, apparently ex- erting only a normal hydrogenating cata- lytic action productive of methanol.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "In the improved (halide-containing) catalyst compositions the normally deleterious 'methanating metals' iron, nickel or cobalt may be employed and serve advantageously, apparently exerting only a normal hydrogenating catalytic action productive of methanol."
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/claim/mgcl2-znbr2-substitution",
+      "label": "Claim",
+      "props": {
+        "name": "magnesium chloride or zinc bromide in place of zinc chloride give similar results",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2",
+            "passage": "us1625926a/p2/7",
+            "quote": "Substitution of chemically equivalent",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1",
+            "passage": "us1625926a/p3/1",
+            "quote": "quantities of magnesium chloride or zinc",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1",
+            "passage": "us1625926a/p3/1",
+            "quote": "bromide for the zinc chloride produces simi- lar results,",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Substitution of chemically equivalent quantities of magnesium chloride or zinc bromide for the zinc chloride (in Example II) produces similar results."
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/claim/pure-co-more-methanol",
+      "label": "Claim",
+      "props": {
+        "name": "pure CO gives higher methanol percentage",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2",
+            "passage": "us1625926a/p2/5",
+            "quote": "Likewise the use of pure carbon monoxide as distinguished from carbon di- oxide or a mixture of the two results in an increased methanol percentage in the con- densate,",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2",
+            "passage": "us1625926a/p2/5",
+            "quote": "since carbon monoxide seems to react more readily, an increased con- densate volume.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Pure carbon monoxide, as distinguished from carbon dioxide or a mixture of the two, results in an increased methanol percentage in the condensate and, since carbon monoxide seems to react more readily, an increased condensate volume."
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/claim/standard-conditions",
+      "label": "Claim",
+      "props": {
+        "name": "standard conditions of the examples",
+        "claim_kind": "other",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/4",
+            "quote": "The reported yields of con- densate from the methanol reaction by use of the following catalysts is based on the effect produced when a gas mixture com-",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, col. 1",
+            "reading": "vision_ocr",
+            "region": [
+              0.158,
+              0.862,
+              0.54,
+              0.94
+            ],
+            "source": "ex:msyn/source/us1625926a",
+            "transcription": "prising 8% carbon dioxide, 3% of carbon monoxide and 89% hydrogen is passed through 1 liter of catalyst granules at a space velocity of 75,000–100,000, at a pres- sure of 2000 pounds, and at a temperature of 340–400° C."
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2",
+            "passage": "us1625926a/p2/4",
+            "quote": "it is our intention only to thus display the catalyst efficacy and by no means to limit the scope of our invention.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The yields of the examples refer to a standard set of conditions: the standard gas passed through 1 liter of catalyst granules at a space velocity of 75,000-100,000, 2000 pounds pressure and 340-400° C.; the conditions only display catalyst efficacy and do not limit the invention."
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/claim/sv-pressure-increase-yield",
+      "label": "Claim",
+      "props": {
+        "name": "higher space velocity or pressure increases hourly yield",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2",
+            "note": "'or example' = 'For example'",
+            "passage": "us1625926a/p2/5",
+            "quote": "or example, an increased space velocity produces an increased hourly yield and an increase in operating’ pressure has the same effect.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "An increased space velocity produces an increased hourly yield, and an increase in operating pressure has the same effect."
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/feed/standard-gas",
+      "label": "Feed",
+      "props": {
+        "name": "standard gas: 8% carbon dioxide, 3% carbon monoxide, 89% hydrogen",
+        "description": "The standard test gas of the examples: 8% carbon dioxide, 3% of carbon monoxide and 89% hydrogen (read from the page image; the OCR text reads '8%' for the carbon monoxide).",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/4",
+            "quote": "The reported yields of con- densate from the methanol reaction by use of the following catalysts is based on the effect produced when a gas mixture com-",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, col. 1",
+            "reading": "vision_ocr",
+            "region": [
+              0.158,
+              0.862,
+              0.54,
+              0.94
+            ],
+            "source": "ex:msyn/source/us1625926a",
+            "transcription": "prising 8% carbon dioxide, 3% of carbon monoxide and 89% hydrogen is passed through 1 liter of catalyst granules at a space velocity of 75,000–100,000, at a pres- sure of 2000 pounds, and at a temperature of 340–400° C."
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/hypothesis/halide-oxychloride",
+      "label": "Hypothesis",
+      "props": {
+        "name": "The metallic halide interacts with other metallic oxides in the catalyst to prod",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/2",
+            "quote": "(2) The metallic halide interacts with other metallic oxides present in the catalyst to produce oxychloride compounds which, in turn, elther serve as catalyst promoters,",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/1",
+            "quote": "The precise method by which the metallic",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/1",
+            "quote": "halides produce the improvement is not",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "hypothesis_kind": "competing",
+        "hypothesis_status": "proposed",
+        "note": "one of three theories the patent offers; it states the precise method is not known and forms no part of the invention",
+        "statement": "The metallic halide interacts with other metallic oxides in the catalyst to produce oxychloride compounds which either serve as promoters or modify the physical state of the mass to give a more active catalyst."
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/hypothesis/halide-promoter",
+      "label": "Hypothesis",
+      "props": {
+        "name": "The metallic halide acts as an ordinary promoter in increasing catalyst activity",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/2",
+            "quote": "(1) The metallic halide acts as an ordi- nary “promoter” in increasing catalyst ac- tivity;",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/1",
+            "quote": "The precise method by which the metallic",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/1",
+            "quote": "halides produce the improvement is not",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "hypothesis_kind": "competing",
+        "hypothesis_status": "proposed",
+        "note": "one of three theories the patent offers; it states the precise method is not known and forms no part of the invention",
+        "statement": "The metallic halide acts as an ordinary promoter in increasing catalyst activity."
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/hypothesis/halide-reduced-to-metal",
+      "label": "Hypothesis",
+      "props": {
+        "name": "The metallic halide may be reduced by high-pressure contact with hydrogen and ca",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/2",
+            "quote": "(3) The metallic- halide may be reduced by the high pressure contact with hydrogen and carbon oxides during the commence- ment of its use as a catalyst",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/1",
+            "quote": "The precise method by which the metallic",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/1",
+            "quote": "halides produce the improvement is not",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "hypothesis_kind": "competing",
+        "hypothesis_status": "proposed",
+        "note": "one of three theories the patent offers; it states the precise method is not known and forms no part of the invention",
+        "statement": "The metallic halide may be reduced by high-pressure contact with hydrogen and carbon oxides at the start of use, the resulting finely divided metal increasing activity; or it may first react with another metal to give that metal's halide, which is reduced in the same way."
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/preparation/example-1",
+      "label": "Preparation",
+      "props": {
+        "name": "Example I: ammonia precipitation, centrifuging, washing, drying, granulating, impregnation with ZnCl2",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2, Example I",
+            "passage": "us1625926a/p2/5",
+            "quote": "are dissolved in 150 liters of water, and to this solution there is added the theoretical amount (5.4 liters of 12.75 normal) of am- monium hydroxide to precipitate chromium hydroxide and nickel hydrate.",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2, Example I",
+            "passage": "us1625926a/p2/5",
+            "quote": "The solu- tion is then centrifuged to recover the pre- cipitated hydrates and the resultant pre- cipitate is thoroughly washed with water, dried, and broken up into granules.",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2, Example I",
+            "passage": "us1625926a/p2/6",
+            "quote": "The resultant granules are moistened with an aqueous solution of 200 grams zinc chlo- ride and again dried, whereupon they are ready for use.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "method": "co-precipitation with ammonium hydroxide, then impregnation with zinc chloride solution",
+        "procedure_status": "completed",
+        "steps": [
+          "8 kg chromic nitrate and 1.5 kg nickel nitrate dissolved in 150 liters of water",
+          "theoretical amount (5.4 liters of 12.75 normal) of ammonium hydroxide added to precipitate chromium hydroxide and nickel hydrate",
+          "centrifuged; precipitate thoroughly washed with water, dried, broken up into granules",
+          "granules moistened with an aqueous solution of 200 grams zinc chloride and again dried"
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/preparation/example-2",
+      "label": "Preparation",
+      "props": {
+        "name": "Example II: nickel hydrate precipitated onto zinc oxide at 95 °C, impregnation with ZnCl2",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2, Example II",
+            "passage": "us1625926a/p2/6",
+            "quote": "are dissolved in 250 liters of water and the",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2, Example II",
+            "passage": "us1625926a/p2/6",
+            "quote": "solution is heated to 95° C. 7500 grams of zinc oxide is then added with stirring. To this solution there is added sufficient am- monium hydroxide to precipitate the nickel -as nickel hydrate.",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2, Example II",
+            "passage": "us1625926a/p2/6",
+            "quote": "The precipitated mass is recovered by decantation and filtration, is ‘washed, dried, and broken up into gran- ules.",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2, Example II",
+            "passage": "us1625926a/p2/6",
+            "quote": "To this mass is added a solution containing 740 grams of zinc chloride and the mass is again dried.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "method": "precipitation of nickel hydrate with ammonium hydroxide in a hot suspension of zinc oxide, then impregnation with zinc chloride",
+        "procedure_status": "completed",
+        "steps": [
+          "2250 grams nickel nitrate dissolved in 250 liters of water; solution heated to 95° C.",
+          "7500 grams zinc oxide added with stirring",
+          "sufficient ammonium hydroxide added to precipitate the nickel as nickel hydrate",
+          "recovered by decantation and filtration, washed, dried, broken up into granules",
+          "solution containing 740 grams zinc chloride added; mass again dried"
+        ],
+        "temperature": {
+          "status": "present",
+          "as_reported": "95° C.",
+          "unit": "°C",
+          "value": 95
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/preparation/example-3",
+      "label": "Preparation",
+      "props": {
+        "name": "Example III: nitrates with zinc oxide evaporated and decomposed, granulated, impregnated with ZnCl2",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1, Example III",
+            "note": "'15' is a stray line number",
+            "passage": "us1625926a/p3/1",
+            "quote": "are dissolved in 5 liters of water. 2.5 kilo- grams of zinc oxide is added with stirring and the mass is heated to dryness and is then 15 further heated till no more nitric oxide fumes are given off,",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1, Example III",
+            "passage": "us1625926a/p3/1",
+            "quote": "whereby the mixture is transformed to chromic oxide, nickel oxide, . and zinc oxide.",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1, Example III",
+            "passage": "us1625926a/p3/1",
+            "quote": "The resultant mass is bro- ‘ken up into granules and is then moistened 20 with a solution containing 450 grams of zinc chloride. The granules are again dried and are ready for use.",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1, Example III",
+            "passage": "us1625926a/p3/1",
+            "quote": "If desired, 450 grams of dextrin or a similar agglutinating agent may be added with the zinc chloride, where- 25 by firmer granules are obtained:on drying.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "method": "evaporation of nitrate solution with zinc oxide to dryness and thermal decomposition of the nitrates, then impregnation with zinc chloride",
+        "procedure_status": "completed",
+        "steps": [
+          "4 kg chromic nitrate and 750 grams nickel nitrate dissolved in 5 liters of water",
+          "2.5 kg zinc oxide added with stirring; mass heated to dryness",
+          "further heated till no more nitric oxide fumes are given off (transformed to chromic oxide, nickel oxide and zinc oxide)",
+          "broken up into granules; moistened with a solution containing 450 grams zinc chloride; again dried",
+          "optional: 450 grams dextrin or similar agglutinating agent added with the zinc chloride for firmer granules"
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/preparation/example-4",
+      "label": "Preparation",
+      "props": {
+        "name": "Example IV: as Example III with chromic chloride instead of zinc chloride",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1, Example IV",
+            "note": "'sranules' = granules",
+            "passage": "us1625926a/p3/2",
+            "quote": "In place of moistening the sranules of the catalyst in Example III with zinc chloride a chemically equivalent amount of chromic chloride may be employed.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "method": "as Example III, moistening the granules with a chemically equivalent amount of chromic chloride",
+        "procedure_status": "proposed",
+        "steps": [
+          "granules of the catalyst of Example III moistened with a chemically equivalent amount of chromic chloride in place of zinc chloride"
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/sample/example-1",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Example I catalyst granules",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2, Example I",
+            "passage": "us1625926a/p2/5",
+            "quote": "The solu- tion is then centrifuged to recover the pre- cipitated hydrates and the resultant pre- cipitate is thoroughly washed with water, dried, and broken up into granules.",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2, Example I",
+            "passage": "us1625926a/p2/6",
+            "quote": "The resultant granules are moistened with an aqueous solution of 200 grams zinc chlo- ride and again dried, whereupon they are ready for use.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "preparation_status": "prepared",
+        "sample_kind": "granules"
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/sample/example-2",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Example II catalyst granules",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2, Example II",
+            "passage": "us1625926a/p2/6",
+            "quote": "The precipitated mass is recovered by decantation and filtration, is ‘washed, dried, and broken up into gran- ules.",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2, Example II",
+            "passage": "us1625926a/p2/6",
+            "quote": "To this mass is added a solution containing 740 grams of zinc chloride and the mass is again dried.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "preparation_status": "prepared",
+        "sample_kind": "granules"
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/sample/example-2-double-zncl2",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Example II catalyst with doubled zinc chloride",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2, col. 2, Example II",
+            "reading": "vision_ocr",
+            "region": [
+              0.535,
+              0.878,
+              0.906,
+              0.943
+            ],
+            "second_reading": "The hourly yield of condensate is about 1 liter and contains about 30% of methanol. If the amount of zinc chloride used is doubled, the hourly condensate will be increased to about 2.5 liters and the percentage of methanol will be increased to about 56%. Substitution of chemically equivalent",
+            "source": "ex:msyn/source/us1625926a",
+            "transcription": "If the amount of zinc chloride used is doubled, the hourly condensate will be in- creased to about 2.5 liters and the percent- age of methanol will be increased to about 56%."
+          }
+        ],
+        "preparation_status": "prepared",
+        "sample_kind": "granules"
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/sample/example-3",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Example III catalyst granules",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1, Example III",
+            "passage": "us1625926a/p3/1",
+            "quote": "The resultant mass is bro- ‘ken up into granules and is then moistened 20 with a solution containing 450 grams of zinc chloride. The granules are again dried and are ready for use.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "preparation_status": "prepared",
+        "sample_kind": "granules"
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/species/chromium-hydroxide",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "chromium hydroxide (as precipitated)"
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/species/dextrin",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "dextrin",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1, Example III",
+            "passage": "us1625926a/p3/1",
+            "quote": "If desired, 450 grams of dextrin or a similar agglutinating agent may be added with the zinc chloride, where- 25 by firmer granules are obtained:on drying.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "note": "optional agglutinating agent"
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/species/easily-reducible-metal-oxides",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "easily reducible metal oxides (copper, silver, iron, nickel, cobalt, etc.)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, col. 2",
+            "note": "'eas#ly' = easily; 'ete.' = etc.",
+            "passage": "us1625926a/p1/6",
+            "quote": "(2) One or more eas#ly reducible metal oxides such as copper, silver, iron, nickel, cobalt, ete.;",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "note": "a class named in the patent, not one compound"
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/species/metallic-halide",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "metallic halide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, col. 2",
+            "passage": "us1625926a/p1/6",
+            "quote": "(3) A metallic. halide.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "note": "a class named in the patent"
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/species/nickel-hydrate",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "nickel hydrate (as precipitated)",
+        "note": "'nickel hydrate' as the patent names it"
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/species/non-reducible-metal-oxides",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "non-reducible metal oxides (zinc, magnesium, cadmium, chromium, vanadium, tungsten, etc.)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, col. 2",
+            "note": "'9 —' is the stray line number 95; 'magnezium' = magnesium",
+            "passage": "us1625926a/p1/6",
+            "quote": "(1) One or more non-reducible metal 9 — ‘oxides such as zinc, magnezium, cadmium, chromium, vanadium, tungsten, etc.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "note": "a class named in the patent, not one compound"
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/test/example-1",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Example I, standard conditions",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/4",
+            "quote": "The reported yields of con- densate from the methanol reaction by use of the following catalysts is based on the effect produced when a gas mixture com-",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, col. 1",
+            "reading": "vision_ocr",
+            "region": [
+              0.158,
+              0.862,
+              0.54,
+              0.94
+            ],
+            "source": "ex:msyn/source/us1625926a",
+            "transcription": "prising 8% carbon dioxide, 3% of carbon monoxide and 89% hydrogen is passed through 1 liter of catalyst granules at a space velocity of 75,000–100,000, at a pres- sure of 2000 pounds, and at a temperature of 340–400° C."
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, col. 2, Example I",
+            "reading": "vision_ocr",
+            "region": [
+              0.535,
+              0.613,
+              0.905,
+              0.642
+            ],
+            "source": "ex:msyn/source/us1625926a",
+            "transcription": "The hourly yield of condensate is about 1 liter, which analyzes about 35% methanol."
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "manipulation": "interventional",
+        "pressure": {
+          "status": "present",
+          "as_reported": "2000 pounds",
+          "note": "(per square inch not printed); printed 'pounds'; a pressure, in pounds per square inch",
+          "unit": "lb/in2",
+          "value": 2000
+        },
+        "results": {
+          "condensate_hourly_yield": {
+            "status": "present",
+            "as_reported": "The hourly yield of condensate is about 1 liter",
+            "qualifier": "approximate",
+            "unit": "L/h",
+            "value": 1
+          },
+          "methanol_in_condensate": {
+            "status": "present",
+            "as_reported": "about 35% methanol",
+            "qualifier": "approximate",
+            "unit": "%",
+            "value": 35
+          }
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "75,000–100,000",
+          "lower": 75000,
+          "note": "no unit printed; recorded 2026-09-29 as numbers with unit 'not stated' (was text only)",
+          "unit": "not stated",
+          "upper": 100000
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "340–400° C.",
+          "lower": 340,
+          "unit": "°C",
+          "upper": 400
+        },
+        "test_kind": "activity",
+        "test_label": "Example I, standard conditions"
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/test/example-2",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Example II, standard conditions",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/4",
+            "quote": "The reported yields of con- densate from the methanol reaction by use of the following catalysts is based on the effect produced when a gas mixture com-",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, col. 1",
+            "reading": "vision_ocr",
+            "region": [
+              0.158,
+              0.862,
+              0.54,
+              0.94
+            ],
+            "source": "ex:msyn/source/us1625926a",
+            "transcription": "prising 8% carbon dioxide, 3% of carbon monoxide and 89% hydrogen is passed through 1 liter of catalyst granules at a space velocity of 75,000–100,000, at a pres- sure of 2000 pounds, and at a temperature of 340–400° C."
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2, Example II",
+            "passage": "us1625926a/p2/6",
+            "quote": "The hourly yield of condensate is about 1 liter and contains about 30% of methanol.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "manipulation": "interventional",
+        "pressure": {
+          "status": "present",
+          "as_reported": "2000 pounds",
+          "note": "(per square inch not printed); printed 'pounds'; a pressure, in pounds per square inch",
+          "unit": "lb/in2",
+          "value": 2000
+        },
+        "results": {
+          "condensate_hourly_yield": {
+            "status": "present",
+            "as_reported": "The hourly yield of condensate is about 1 liter",
+            "qualifier": "approximate",
+            "unit": "L/h",
+            "value": 1
+          },
+          "methanol_in_condensate": {
+            "status": "present",
+            "as_reported": "about 30% of methanol",
+            "qualifier": "approximate",
+            "unit": "%",
+            "value": 30
+          }
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "75,000–100,000",
+          "lower": 75000,
+          "note": "no unit printed; recorded 2026-09-29 as numbers with unit 'not stated' (was text only)",
+          "unit": "not stated",
+          "upper": 100000
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "340–400° C.",
+          "lower": 340,
+          "unit": "°C",
+          "upper": 400
+        },
+        "test_kind": "activity",
+        "test_label": "Example II, standard conditions"
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/test/example-2-double-zncl2",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Example II with doubled zinc chloride, standard conditions",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/4",
+            "quote": "The reported yields of con- densate from the methanol reaction by use of the following catalysts is based on the effect produced when a gas mixture com-",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, col. 1",
+            "reading": "vision_ocr",
+            "region": [
+              0.158,
+              0.862,
+              0.54,
+              0.94
+            ],
+            "source": "ex:msyn/source/us1625926a",
+            "transcription": "prising 8% carbon dioxide, 3% of carbon monoxide and 89% hydrogen is passed through 1 liter of catalyst granules at a space velocity of 75,000–100,000, at a pres- sure of 2000 pounds, and at a temperature of 340–400° C."
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2, col. 2, Example II",
+            "reading": "vision_ocr",
+            "region": [
+              0.535,
+              0.878,
+              0.906,
+              0.943
+            ],
+            "second_reading": "The hourly yield of condensate is about 1 liter and contains about 30% of methanol. If the amount of zinc chloride used is doubled, the hourly condensate will be increased to about 2.5 liters and the percentage of methanol will be increased to about 56%. Substitution of chemically equivalent",
+            "source": "ex:msyn/source/us1625926a",
+            "transcription": "If the amount of zinc chloride used is doubled, the hourly condensate will be in- creased to about 2.5 liters and the percent- age of methanol will be increased to about 56%."
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "manipulation": "interventional",
+        "pressure": {
+          "status": "present",
+          "as_reported": "2000 pounds",
+          "note": "(per square inch not printed); printed 'pounds'; a pressure, in pounds per square inch",
+          "unit": "lb/in2",
+          "value": 2000
+        },
+        "results": {
+          "condensate_hourly_yield": {
+            "status": "present",
+            "as_reported": "the hourly condensate will be in- creased to about 2.5 liters",
+            "qualifier": "approximate",
+            "unit": "L/h",
+            "value": 2.5
+          },
+          "methanol_in_condensate": {
+            "status": "present",
+            "as_reported": "increased to about 56%",
+            "qualifier": "approximate",
+            "unit": "%",
+            "value": 56
+          }
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "75,000–100,000",
+          "lower": 75000,
+          "note": "no unit printed; recorded 2026-09-29 as numbers with unit 'not stated' (was text only)",
+          "unit": "not stated",
+          "upper": 100000
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "340–400° C.",
+          "lower": 340,
+          "unit": "°C",
+          "upper": 400
+        },
+        "test_kind": "activity",
+        "test_label": "Example II with doubled zinc chloride, standard conditions"
+      }
+    },
+    {
+      "id": "ex:msyn/us1625926a/test/example-3",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Example III, standard conditions",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/4",
+            "quote": "The reported yields of con- densate from the methanol reaction by use of the following catalysts is based on the effect produced when a gas mixture com-",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, col. 1",
+            "reading": "vision_ocr",
+            "region": [
+              0.158,
+              0.862,
+              0.54,
+              0.94
+            ],
+            "source": "ex:msyn/source/us1625926a",
+            "transcription": "prising 8% carbon dioxide, 3% of carbon monoxide and 89% hydrogen is passed through 1 liter of catalyst granules at a space velocity of 75,000–100,000, at a pres- sure of 2000 pounds, and at a temperature of 340–400° C."
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1, Example III",
+            "quote": "The hourly yield of condensate is about 2.5 liters containing about 58% methanol.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "manipulation": "interventional",
+        "pressure": {
+          "status": "present",
+          "as_reported": "2000 pounds",
+          "note": "(per square inch not printed); printed 'pounds'; a pressure, in pounds per square inch",
+          "unit": "lb/in2",
+          "value": 2000
+        },
+        "results": {
+          "condensate_hourly_yield": {
+            "status": "present",
+            "as_reported": "The hourly yield of condensate is about 2.5 liters",
+            "qualifier": "approximate",
+            "unit": "L/h",
+            "value": 2.5
+          },
+          "methanol_in_condensate": {
+            "status": "present",
+            "as_reported": "about 58% methanol",
+            "qualifier": "approximate",
+            "unit": "%",
+            "value": 58
+          }
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "75,000–100,000",
+          "lower": 75000,
+          "note": "no unit printed; recorded 2026-09-29 as numbers with unit 'not stated' (was text only)",
+          "unit": "not stated",
+          "upper": 100000
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "340–400° C.",
+          "lower": 340,
+          "unit": "°C",
+          "upper": 400
+        },
+        "test_kind": "activity",
+        "test_label": "Example III, standard conditions"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/source/us1625926a/assignee",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "role": "assignee"
+      },
+      "source": "ex:msyn/source/us1625926a",
+      "target": "ex:msyn/institution/commercial-solvents-corp"
+    },
+    {
+      "id": "ex:msyn/us1625926a/catalyst/example-1/reported-in/us1625926a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, col. 2, Example I"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625926a/catalyst/example-1",
+      "target": "ex:msyn/source/us1625926a"
+    },
+    {
+      "id": "ex:msyn/us1625926a/catalyst/example-2-double-zncl2/reported-in/us1625926a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, col. 2, Example II"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625926a/catalyst/example-2-double-zncl2",
+      "target": "ex:msyn/source/us1625926a"
+    },
+    {
+      "id": "ex:msyn/us1625926a/catalyst/example-2/reported-in/us1625926a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, col. 2, Example II"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625926a/catalyst/example-2",
+      "target": "ex:msyn/source/us1625926a"
+    },
+    {
+      "id": "ex:msyn/us1625926a/catalyst/example-3/reported-in/us1625926a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, col. 1, Example III"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625926a/catalyst/example-3",
+      "target": "ex:msyn/source/us1625926a"
+    },
+    {
+      "id": "ex:msyn/us1625926a/catalyst/example-4/reported-in/us1625926a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, col. 1, Example IV"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625926a/catalyst/example-4",
+      "target": "ex:msyn/source/us1625926a"
+    },
+    {
+      "id": "ex:msyn/us1625926a/catalyst/three-element-halide-catalyst/reported-in/us1625926a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, col. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625926a/catalyst/three-element-halide-catalyst",
+      "target": "ex:msyn/source/us1625926a"
+    },
+    {
+      "id": "ex:msyn/us1625926a/claim/claim-1/reported-in/us1625926a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, col. 2, claim 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625926a/claim/claim-1",
+      "target": "ex:msyn/source/us1625926a"
+    },
+    {
+      "id": "ex:msyn/us1625926a/claim/claim-2/reported-in/us1625926a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, col. 2, claim 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625926a/claim/claim-2",
+      "target": "ex:msyn/source/us1625926a"
+    },
+    {
+      "id": "ex:msyn/us1625926a/claim/claim-3/reported-in/us1625926a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, col. 2, claim 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625926a/claim/claim-3",
+      "target": "ex:msyn/source/us1625926a"
+    },
+    {
+      "id": "ex:msyn/us1625926a/claim/claim-4/reported-in/us1625926a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, col. 2, claim 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625926a/claim/claim-4",
+      "target": "ex:msyn/source/us1625926a"
+    },
+    {
+      "id": "ex:msyn/us1625926a/claim/claim-5/reported-in/us1625926a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, col. 2, claim 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625926a/claim/claim-5",
+      "target": "ex:msyn/source/us1625926a"
+    },
+    {
+      "id": "ex:msyn/us1625926a/claim/claim-6/reported-in/us1625926a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, col. 2, claim 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625926a/claim/claim-6",
+      "target": "ex:msyn/source/us1625926a"
+    },
+    {
+      "id": "ex:msyn/us1625926a/claim/claim-7/reported-in/us1625926a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, col. 2, claim 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625926a/claim/claim-7",
+      "target": "ex:msyn/source/us1625926a"
+    },
+    {
+      "id": "ex:msyn/us1625926a/claim/claim-8/reported-in/us1625926a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, col. 2, claim 8"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625926a/claim/claim-8",
+      "target": "ex:msyn/source/us1625926a"
+    },
+    {
+      "id": "ex:msyn/us1625926a/claim/claim-9/reported-in/us1625926a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, col. 2, claim 9"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625926a/claim/claim-9",
+      "target": "ex:msyn/source/us1625926a"
+    },
+    {
+      "id": "ex:msyn/us1625926a/claim/dextrin-optional/reported-in/us1625926a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, col. 1, Example III"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625926a/claim/dextrin-optional",
+      "target": "ex:msyn/source/us1625926a"
+    },
+    {
+      "id": "ex:msyn/us1625926a/claim/example-4-similar/reported-in/us1625926a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, col. 1, Example IV"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625926a/claim/example-4-similar",
+      "target": "ex:msyn/source/us1625926a"
+    },
+    {
+      "id": "ex:msyn/us1625926a/claim/halide-amount/reported-in/us1625926a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, col. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625926a/claim/halide-amount",
+      "target": "ex:msyn/source/us1625926a"
+    },
+    {
+      "id": "ex:msyn/us1625926a/claim/halide-improves-cu-ag/reported-in/us1625926a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, col. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625926a/claim/halide-improves-cu-ag",
+      "target": "ex:msyn/source/us1625926a"
+    },
+    {
+      "id": "ex:msyn/us1625926a/claim/higher-yield-pure-methanol/reported-in/us1625926a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, col. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625926a/claim/higher-yield-pure-methanol",
+      "target": "ex:msyn/source/us1625926a"
+    },
+    {
+      "id": "ex:msyn/us1625926a/claim/methanating-metals-usable/reported-in/us1625926a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, col. 2",
+          "p. 2, col. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625926a/claim/methanating-metals-usable",
+      "target": "ex:msyn/source/us1625926a"
+    },
+    {
+      "id": "ex:msyn/us1625926a/claim/mgcl2-znbr2-substitution/reported-in/us1625926a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, col. 2",
+          "p. 3, col. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625926a/claim/mgcl2-znbr2-substitution",
+      "target": "ex:msyn/source/us1625926a"
+    },
+    {
+      "id": "ex:msyn/us1625926a/claim/pure-co-more-methanol/reported-in/us1625926a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, col. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625926a/claim/pure-co-more-methanol",
+      "target": "ex:msyn/source/us1625926a"
+    },
+    {
+      "id": "ex:msyn/us1625926a/claim/standard-conditions/reported-in/us1625926a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, col. 1",
+          "p. 2, col. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625926a/claim/standard-conditions",
+      "target": "ex:msyn/source/us1625926a"
+    },
+    {
+      "id": "ex:msyn/us1625926a/claim/sv-pressure-increase-yield/reported-in/us1625926a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, col. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625926a/claim/sv-pressure-increase-yield",
+      "target": "ex:msyn/source/us1625926a"
+    },
+    {
+      "id": "ex:msyn/us1625926a/feed/standard-gas/reported-in/us1625926a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, col. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625926a/feed/standard-gas",
+      "target": "ex:msyn/source/us1625926a"
+    },
+    {
+      "id": "ex:msyn/us1625926a/hypothesis/halide-oxychloride/reported-in/us1625926a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, col. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625926a/hypothesis/halide-oxychloride",
+      "target": "ex:msyn/source/us1625926a"
+    },
+    {
+      "id": "ex:msyn/us1625926a/hypothesis/halide-promoter/reported-in/us1625926a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, col. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625926a/hypothesis/halide-promoter",
+      "target": "ex:msyn/source/us1625926a"
+    },
+    {
+      "id": "ex:msyn/us1625926a/hypothesis/halide-reduced-to-metal/reported-in/us1625926a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, col. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625926a/hypothesis/halide-reduced-to-metal",
+      "target": "ex:msyn/source/us1625926a"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/1",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/4",
+            "quote": "The reported yields of con- densate from the methanol reaction by use of the following catalysts is based on the effect produced when a gas mixture com-",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, col. 1",
+            "reading": "vision_ocr",
+            "region": [
+              0.158,
+              0.862,
+              0.54,
+              0.94
+            ],
+            "source": "ex:msyn/source/us1625926a",
+            "transcription": "prising 8% carbon dioxide, 3% of carbon monoxide and 89% hydrogen is passed through 1 liter of catalyst granules at a space velocity of 75,000–100,000, at a pres- sure of 2000 pounds, and at a temperature of 340–400° C."
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "8%",
+          "note": "read from the page image 2026-09-29; 8% + 3% + 89% = 100%",
+          "unit": "%",
+          "value": 8
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1625926a/feed/standard-gas",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/10",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, col. 2",
+            "note": "'Tt' = It; '06 —' stray line number; 'vobalt' = cobalt",
+            "passage": "us1625926a/p1/6",
+            "quote": "Tt will be observed that in our-improved catalyst we may employ substances normally deleterious to the methanol reaction— namely the “methanating metals”—iron. 06 — nickel; or vobalt,",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/1",
+            "quote": "compositions these normally deleterious sub- stances serve advantageously, apparently ex- erting only a normal hydrogenating cata- lytic action productive of methanol.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/claim/methanating-metals-usable",
+      "target": "ex:msyn/us1625926a/catalyst/three-element-halide-catalyst"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/100",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 2, claim 7",
+            "passage": "us1625926a/p3/4",
+            "quote": "at a temperature of 350-450° C. over a catalyst imitially comprising a plurality of difficultly reducible metal oxides, nickel ox- _ ide, and a metallic halide.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/claim/claim-7",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/101",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 2, claim 8",
+            "passage": "us1625926a/p3/4",
+            "quote": "at a temperature of 350-450° C. over a 75",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 2, claim 8",
+            "passage": "us1625926a/p3/4",
+            "quote": "ducible metal oxide; nickel oxide and a . metal halide.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/claim/claim-8",
+      "target": "ex:msyn/us1625926a/catalyst/three-element-halide-catalyst"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/102",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 2, claim 8",
+            "passage": "us1625926a/p3/4",
+            "quote": "at a temperature of 350-450° C. over a 75",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 2, claim 8",
+            "passage": "us1625926a/p3/4",
+            "quote": "ducible metal oxide; nickel oxide and a . metal halide.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/claim/claim-8",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/103",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 2, claim 9",
+            "passage": "us1625926a/p3/4",
+            "quote": "catalyst initially comprising zinc oxide, chromium oxide, nickel oxide, and zinc 85",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/claim/claim-9",
+      "target": "ex:msyn/us1625926a/catalyst/example-3"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/104",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 2, claim 9",
+            "passage": "us1625926a/p3/4",
+            "quote": "catalyst initially comprising zinc oxide, chromium oxide, nickel oxide, and zinc 85",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/claim/claim-9",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/105",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "150 liters",
+          "unit": "L",
+          "value": 150
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2, Example I",
+            "passage": "us1625926a/p2/5",
+            "quote": "are dissolved in 150 liters of water, and to",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "role": "solvent"
+      },
+      "source": "ex:msyn/us1625926a/sample/example-1",
+      "target": "ex:msyn/species/h2o"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/106",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "250 liters",
+          "unit": "L",
+          "value": 250
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2, Example II",
+            "passage": "us1625926a/p2/6",
+            "quote": "are dissolved in 250 liters of water and the",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "role": "solvent"
+      },
+      "source": "ex:msyn/us1625926a/sample/example-2",
+      "target": "ex:msyn/species/h2o"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/107",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "5 liters",
+          "unit": "L",
+          "value": 5
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1, Example III",
+            "passage": "us1625926a/p3/1",
+            "quote": "are dissolved in 5 liters of water.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "role": "solvent"
+      },
+      "source": "ex:msyn/us1625926a/sample/example-3",
+      "target": "ex:msyn/species/h2o"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/11",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, col. 2",
+            "note": "'Tt' = It; '06 —' stray line number; 'vobalt' = cobalt",
+            "passage": "us1625926a/p1/6",
+            "quote": "Tt will be observed that in our-improved catalyst we may employ substances normally deleterious to the methanol reaction— namely the “methanating metals”—iron. 06 — nickel; or vobalt,",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/1",
+            "quote": "compositions these normally deleterious sub- stances serve advantageously, apparently ex- erting only a normal hydrogenating cata- lytic action productive of methanol.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/claim/methanating-metals-usable",
+      "target": "ex:msyn/species/iron"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/12",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, col. 2",
+            "note": "'Tt' = It; '06 —' stray line number; 'vobalt' = cobalt",
+            "passage": "us1625926a/p1/6",
+            "quote": "Tt will be observed that in our-improved catalyst we may employ substances normally deleterious to the methanol reaction— namely the “methanating metals”—iron. 06 — nickel; or vobalt,",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/1",
+            "quote": "compositions these normally deleterious sub- stances serve advantageously, apparently ex- erting only a normal hydrogenating cata- lytic action productive of methanol.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/claim/methanating-metals-usable",
+      "target": "ex:msyn/species/nickel"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/13",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, col. 2",
+            "note": "'Tt' = It; '06 —' stray line number; 'vobalt' = cobalt",
+            "passage": "us1625926a/p1/6",
+            "quote": "Tt will be observed that in our-improved catalyst we may employ substances normally deleterious to the methanol reaction— namely the “methanating metals”—iron. 06 — nickel; or vobalt,",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/1",
+            "quote": "compositions these normally deleterious sub- stances serve advantageously, apparently ex- erting only a normal hydrogenating cata- lytic action productive of methanol.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/claim/methanating-metals-usable",
+      "target": "ex:msyn/species/cobalt"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/18",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/1",
+            "quote": "Or we may employ easily reducible oxides such as those of copper or silver which are already known in the art as advantageous compo- nents of certain methanol catalysts.",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/1",
+            "quote": "In these cases however, our improved catalysts containing halides produce far better results than those known in the art for otherwise identical catalyst mixtures.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/claim/halide-improves-cu-ag",
+      "target": "ex:msyn/us1625926a/catalyst/three-element-halide-catalyst"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/19",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/1",
+            "quote": "Or we may employ easily reducible oxides such as those of copper or silver which are already known in the art as advantageous compo- nents of certain methanol catalysts.",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/1",
+            "quote": "In these cases however, our improved catalysts containing halides produce far better results than those known in the art for otherwise identical catalyst mixtures.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/claim/halide-improves-cu-ag",
+      "target": "ex:msyn/us1625926a/species/metallic-halide"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/2",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/4",
+            "quote": "The reported yields of con- densate from the methanol reaction by use of the following catalysts is based on the effect produced when a gas mixture com-",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, col. 1",
+            "reading": "vision_ocr",
+            "region": [
+              0.158,
+              0.862,
+              0.54,
+              0.94
+            ],
+            "source": "ex:msyn/source/us1625926a",
+            "transcription": "prising 8% carbon dioxide, 3% of carbon monoxide and 89% hydrogen is passed through 1 liter of catalyst granules at a space velocity of 75,000–100,000, at a pres- sure of 2000 pounds, and at a temperature of 340–400° C."
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "3%",
+          "note": "corrected 2026-09-29 from 8 (OCR misreading) to 3 as printed on the page image; 8% + 3% + 89% = 100%",
+          "unit": "%",
+          "value": 3
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1625926a/feed/standard-gas",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/20",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/3",
+            "quote": "To produce our improved catalysts it is not necessary that the amount of metallic",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/3",
+            "quote": "halide added bear any exact weight relation to the remaining constituents of the catalyst, though the amount of halide added should preferably be less than one chemical equiva- lent of the amount of principal metallic oxide present in the catalyst.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/claim/halide-amount",
+      "target": "ex:msyn/us1625926a/catalyst/three-element-halide-catalyst"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/21",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/3",
+            "quote": "To produce our improved catalysts it is not necessary that the amount of metallic",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/3",
+            "quote": "halide added bear any exact weight relation to the remaining constituents of the catalyst, though the amount of halide added should preferably be less than one chemical equiva- lent of the amount of principal metallic oxide present in the catalyst.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/claim/halide-amount",
+      "target": "ex:msyn/us1625926a/species/metallic-halide"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/22",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/2",
+            "quote": "(1) The metallic halide acts as an ordi- nary “promoter” in increasing catalyst ac- tivity;",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/hypothesis/halide-promoter",
+      "target": "ex:msyn/us1625926a/species/metallic-halide"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/23",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/2",
+            "quote": "(2) The metallic halide interacts with other metallic oxides present in the catalyst to produce oxychloride compounds which, in turn, elther serve as catalyst promoters,",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/hypothesis/halide-oxychloride",
+      "target": "ex:msyn/us1625926a/species/metallic-halide"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/24",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/2",
+            "quote": "(3) The metallic- halide may be reduced by the high pressure contact with hydrogen and carbon oxides during the commence- ment of its use as a catalyst",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/hypothesis/halide-reduced-to-metal",
+      "target": "ex:msyn/us1625926a/species/metallic-halide"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/25",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2",
+            "note": "'or example' = 'For example'",
+            "passage": "us1625926a/p2/5",
+            "quote": "or example, an increased space velocity produces an increased hourly yield and an increase in operating’ pressure has the same effect.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/claim/sv-pressure-increase-yield",
+      "target": "ex:msyn/us1625926a/catalyst/three-element-halide-catalyst"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/26",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2",
+            "passage": "us1625926a/p2/5",
+            "quote": "Likewise the use of pure carbon monoxide as distinguished from carbon di- oxide or a mixture of the two results in an increased methanol percentage in the con- densate,",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2",
+            "passage": "us1625926a/p2/5",
+            "quote": "since carbon monoxide seems to react more readily, an increased con- densate volume.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/claim/pure-co-more-methanol",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/27",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2",
+            "passage": "us1625926a/p2/5",
+            "quote": "Likewise the use of pure carbon monoxide as distinguished from carbon di- oxide or a mixture of the two results in an increased methanol percentage in the con- densate,",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2",
+            "passage": "us1625926a/p2/5",
+            "quote": "since carbon monoxide seems to react more readily, an increased con- densate volume.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/claim/pure-co-more-methanol",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/28",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/4",
+            "quote": "The reported yields of con- densate from the methanol reaction by use of the following catalysts is based on the effect produced when a gas mixture com-",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, col. 1",
+            "reading": "vision_ocr",
+            "region": [
+              0.158,
+              0.862,
+              0.54,
+              0.94
+            ],
+            "source": "ex:msyn/source/us1625926a",
+            "transcription": "prising 8% carbon dioxide, 3% of carbon monoxide and 89% hydrogen is passed through 1 liter of catalyst granules at a space velocity of 75,000–100,000, at a pres- sure of 2000 pounds, and at a temperature of 340–400° C."
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2",
+            "passage": "us1625926a/p2/4",
+            "quote": "it is our intention only to thus display the catalyst efficacy and by no means to limit the scope of our invention.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/claim/standard-conditions",
+      "target": "ex:msyn/us1625926a/feed/standard-gas"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/29",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2, Example I",
+            "passage": "us1625926a/p2/5",
+            "quote": "are dissolved in 150 liters of water, and to this solution there is added the theoretical amount (5.4 liters of 12.75 normal) of am- monium hydroxide to precipitate chromium hydroxide and nickel hydrate.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "8 kilograms of chromic nitrate",
+          "note": "parts as printed: mass of chromic nitrate nonahydrate precipitated as chromium hydroxide",
+          "unit": "kg",
+          "value": 8
+        },
+        "fraction_basis": "mass",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1625926a/catalyst/example-1",
+      "target": "ex:msyn/us1625926a/species/chromium-hydroxide"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/3",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/4",
+            "quote": "The reported yields of con- densate from the methanol reaction by use of the following catalysts is based on the effect produced when a gas mixture com-",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, col. 1",
+            "reading": "vision_ocr",
+            "region": [
+              0.158,
+              0.862,
+              0.54,
+              0.94
+            ],
+            "source": "ex:msyn/source/us1625926a",
+            "transcription": "prising 8% carbon dioxide, 3% of carbon monoxide and 89% hydrogen is passed through 1 liter of catalyst granules at a space velocity of 75,000–100,000, at a pres- sure of 2000 pounds, and at a temperature of 340–400° C."
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "89%",
+          "note": "read from the page image 2026-09-29; 8% + 3% + 89% = 100%",
+          "unit": "%",
+          "value": 89
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1625926a/feed/standard-gas",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/30",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2, Example I",
+            "passage": "us1625926a/p2/5",
+            "quote": "are dissolved in 150 liters of water, and to this solution there is added the theoretical amount (5.4 liters of 12.75 normal) of am- monium hydroxide to precipitate chromium hydroxide and nickel hydrate.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "1.5 kilograms of nickel nitrate",
+          "note": "parts as printed: mass of nickel nitrate hexahydrate precipitated as nickel hydrate",
+          "unit": "kg",
+          "value": 1.5
+        },
+        "fraction_basis": "mass",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1625926a/catalyst/example-1",
+      "target": "ex:msyn/us1625926a/species/nickel-hydrate"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/31",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2, Example I",
+            "passage": "us1625926a/p2/6",
+            "quote": "The resultant granules are moistened with an aqueous solution of 200 grams zinc chlo- ride and again dried, whereupon they are ready for use.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "200 grams zinc chlo- ride",
+          "unit": "g",
+          "value": 200
+        },
+        "fraction_basis": "mass",
+        "role": "not_stated",
+        "role_detail": "the metallic halide"
+      },
+      "source": "ex:msyn/us1625926a/catalyst/example-1",
+      "target": "ex:msyn/species/zncl2"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/32",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2, Example I",
+            "passage": "us1625926a/p2/5",
+            "quote": "The solu- tion is then centrifuged to recover the pre- cipitated hydrates and the resultant pre- cipitate is thoroughly washed with water, dried, and broken up into granules.",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2, Example I",
+            "passage": "us1625926a/p2/6",
+            "quote": "The resultant granules are moistened with an aqueous solution of 200 grams zinc chlo- ride and again dried, whereupon they are ready for use.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/sample/example-1",
+      "target": "ex:msyn/us1625926a/catalyst/example-1"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/33",
+      "type": "PREPARED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2, Example I",
+            "passage": "us1625926a/p2/5",
+            "quote": "The solu- tion is then centrifuged to recover the pre- cipitated hydrates and the resultant pre- cipitate is thoroughly washed with water, dried, and broken up into granules.",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2, Example I",
+            "passage": "us1625926a/p2/6",
+            "quote": "The resultant granules are moistened with an aqueous solution of 200 grams zinc chlo- ride and again dried, whereupon they are ready for use.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/sample/example-1",
+      "target": "ex:msyn/us1625926a/preparation/example-1"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/34",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "8 kilograms",
+          "unit": "kg",
+          "value": 8
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, col. 2, Example I",
+            "note": "the formula printed below it reads (Cr(NO3)3.9H2O)",
+            "reading": "vision_ocr",
+            "region": [
+              0.535,
+              0.374,
+              0.905,
+              0.393
+            ],
+            "source": "ex:msyn/source/us1625926a",
+            "transcription": "8 kilograms of chromic nitrate"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1625926a/sample/example-1",
+      "target": "ex:msyn/species/crno339h2o"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/35",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "1.5 kilograms",
+          "unit": "kg",
+          "value": 1.5
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2, Example I",
+            "note": "formula printed '(Ni(NO,),.6H,0)' = Ni(NO3)2.6H2O",
+            "passage": "us1625926a/p2/5",
+            "quote": "and 1.5 kilograms of nickel nitrate",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1625926a/sample/example-1",
+      "target": "ex:msyn/species/nino326h2o"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/36",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "5.4 liters of 12.75 normal",
+          "note": "12.75 normal",
+          "unit": "L",
+          "value": 5.4
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2, Example I",
+            "passage": "us1625926a/p2/5",
+            "quote": "are dissolved in 150 liters of water, and to this solution there is added the theoretical amount (5.4 liters of 12.75 normal) of am- monium hydroxide to precipitate chromium hydroxide and nickel hydrate.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "role": "precipitant"
+      },
+      "source": "ex:msyn/us1625926a/sample/example-1",
+      "target": "ex:msyn/species/nh4oh"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/37",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "200 grams",
+          "unit": "g",
+          "value": 200
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2, Example I",
+            "passage": "us1625926a/p2/6",
+            "quote": "The resultant granules are moistened with an aqueous solution of 200 grams zinc chlo- ride and again dried, whereupon they are ready for use.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1625926a/sample/example-1",
+      "target": "ex:msyn/species/zncl2"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/38",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "1 liter of catalyst granules",
+          "unit": "L",
+          "value": 1
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, col. 1",
+            "reading": "vision_ocr",
+            "region": [
+              0.158,
+              0.862,
+              0.54,
+              0.94
+            ],
+            "source": "ex:msyn/source/us1625926a",
+            "transcription": "prising 8% carbon dioxide, 3% of carbon monoxide and 89% hydrogen is passed through 1 liter of catalyst granules at a space velocity of 75,000–100,000, at a pres- sure of 2000 pounds, and at a temperature of 340–400° C."
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2, Example I",
+            "passage": "us1625926a/p2/6",
+            "quote": "The resultant granules are moistened with an aqueous solution of 200 grams zinc chlo- ride and again dried, whereupon they are ready for use.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "state": "as_prepared"
+      },
+      "source": "ex:msyn/us1625926a/test/example-1",
+      "target": "ex:msyn/us1625926a/sample/example-1"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/39",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/4",
+            "quote": "The reported yields of con- densate from the methanol reaction by use of the following catalysts is based on the effect produced when a gas mixture com-",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, col. 1",
+            "reading": "vision_ocr",
+            "region": [
+              0.158,
+              0.862,
+              0.54,
+              0.94
+            ],
+            "source": "ex:msyn/source/us1625926a",
+            "transcription": "prising 8% carbon dioxide, 3% of carbon monoxide and 89% hydrogen is passed through 1 liter of catalyst granules at a space velocity of 75,000–100,000, at a pres- sure of 2000 pounds, and at a temperature of 340–400° C."
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/test/example-1",
+      "target": "ex:msyn/us1625926a/feed/standard-gas"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/4",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, col. 2",
+            "note": "'9 —' is the stray line number 95; 'magnezium' = magnesium",
+            "passage": "us1625926a/p1/6",
+            "quote": "(1) One or more non-reducible metal 9 — ‘oxides such as zinc, magnezium, cadmium, chromium, vanadium, tungsten, etc.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "role": "not_stated",
+        "role_detail": "main element (1)"
+      },
+      "source": "ex:msyn/us1625926a/catalyst/three-element-halide-catalyst",
+      "target": "ex:msyn/us1625926a/species/non-reducible-metal-oxides"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/40",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/4",
+            "quote": "The reported yields of con- densate from the methanol reaction by use of the following catalysts is based on the effect produced when a gas mixture com-",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, col. 1",
+            "reading": "vision_ocr",
+            "region": [
+              0.158,
+              0.862,
+              0.54,
+              0.94
+            ],
+            "source": "ex:msyn/source/us1625926a",
+            "transcription": "prising 8% carbon dioxide, 3% of carbon monoxide and 89% hydrogen is passed through 1 liter of catalyst granules at a space velocity of 75,000–100,000, at a pres- sure of 2000 pounds, and at a temperature of 340–400° C."
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, col. 1",
+            "note": "OCR of 'Carbon monoxide—CO + 2H2 → CH3OH'",
+            "passage": "us1625926a/p1/1",
+            "quote": "Carbon nionoxide—CO + 2H,—@CH,0H",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/test/example-1",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/41",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/4",
+            "quote": "The reported yields of con- densate from the methanol reaction by use of the following catalysts is based on the effect produced when a gas mixture com-",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, col. 1",
+            "reading": "vision_ocr",
+            "region": [
+              0.158,
+              0.862,
+              0.54,
+              0.94
+            ],
+            "source": "ex:msyn/source/us1625926a",
+            "transcription": "prising 8% carbon dioxide, 3% of carbon monoxide and 89% hydrogen is passed through 1 liter of catalyst granules at a space velocity of 75,000–100,000, at a pres- sure of 2000 pounds, and at a temperature of 340–400° C."
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, col. 1",
+            "passage": "us1625926a/p1/2",
+            "quote": "It is observed that when carbon dioxide is the oxide employed, one molecule of water is formed for every molecule of methanol produced.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/test/example-1",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/42",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2, Example II",
+            "passage": "us1625926a/p2/6",
+            "quote": "solution is heated to 95° C. 7500 grams of zinc oxide is then added with stirring. To this solution there is added sufficient am- monium hydroxide to precipitate the nickel -as nickel hydrate.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "7500 grams of zinc oxide",
+          "unit": "g",
+          "value": 7500
+        },
+        "fraction_basis": "mass",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1625926a/catalyst/example-2",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/43",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2, Example II",
+            "passage": "us1625926a/p2/6",
+            "quote": "solution is heated to 95° C. 7500 grams of zinc oxide is then added with stirring. To this solution there is added sufficient am- monium hydroxide to precipitate the nickel -as nickel hydrate.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "2250 grams of nickel nitrate",
+          "note": "parts as printed: mass of nickel nitrate precipitated as nickel hydrate",
+          "unit": "g",
+          "value": 2250
+        },
+        "fraction_basis": "mass",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1625926a/catalyst/example-2",
+      "target": "ex:msyn/us1625926a/species/nickel-hydrate"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/44",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2, Example II",
+            "passage": "us1625926a/p2/6",
+            "quote": "To this mass is added a solution containing 740 grams of zinc chloride and the mass is again dried.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "740 grams of zinc chloride",
+          "unit": "g",
+          "value": 740
+        },
+        "fraction_basis": "mass",
+        "role": "not_stated",
+        "role_detail": "the metallic halide"
+      },
+      "source": "ex:msyn/us1625926a/catalyst/example-2",
+      "target": "ex:msyn/species/zncl2"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/45",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2, Example II",
+            "passage": "us1625926a/p2/6",
+            "quote": "The precipitated mass is recovered by decantation and filtration, is ‘washed, dried, and broken up into gran- ules.",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2, Example II",
+            "passage": "us1625926a/p2/6",
+            "quote": "To this mass is added a solution containing 740 grams of zinc chloride and the mass is again dried.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/sample/example-2",
+      "target": "ex:msyn/us1625926a/catalyst/example-2"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/46",
+      "type": "PREPARED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2, Example II",
+            "passage": "us1625926a/p2/6",
+            "quote": "The precipitated mass is recovered by decantation and filtration, is ‘washed, dried, and broken up into gran- ules.",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2, Example II",
+            "passage": "us1625926a/p2/6",
+            "quote": "To this mass is added a solution containing 740 grams of zinc chloride and the mass is again dried.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/sample/example-2",
+      "target": "ex:msyn/us1625926a/preparation/example-2"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/47",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "2250 grams",
+          "unit": "g",
+          "value": 2250
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2, Example II",
+            "note": "formula printed '(Ni(NO,)..6H,O)' = Ni(NO3)2.6H2O",
+            "passage": "us1625926a/p2/6",
+            "quote": "2250 grams of nickel nitrate",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1625926a/sample/example-2",
+      "target": "ex:msyn/species/nino326h2o"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/48",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "7500 grams",
+          "unit": "g",
+          "value": 7500
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2, Example II",
+            "passage": "us1625926a/p2/6",
+            "quote": "solution is heated to 95° C. 7500 grams of zinc oxide is then added with stirring. To this solution there is added sufficient am- monium hydroxide to precipitate the nickel -as nickel hydrate.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1625926a/sample/example-2",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/49",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "740 grams",
+          "unit": "g",
+          "value": 740
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2, Example II",
+            "passage": "us1625926a/p2/6",
+            "quote": "To this mass is added a solution containing 740 grams of zinc chloride and the mass is again dried.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1625926a/sample/example-2",
+      "target": "ex:msyn/species/zncl2"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/5",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, col. 2",
+            "note": "'eas#ly' = easily; 'ete.' = etc.",
+            "passage": "us1625926a/p1/6",
+            "quote": "(2) One or more eas#ly reducible metal oxides such as copper, silver, iron, nickel, cobalt, ete.;",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "role": "not_stated",
+        "role_detail": "main element (2)"
+      },
+      "source": "ex:msyn/us1625926a/catalyst/three-element-halide-catalyst",
+      "target": "ex:msyn/us1625926a/species/easily-reducible-metal-oxides"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/50",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2, Example II",
+            "passage": "us1625926a/p2/6",
+            "quote": "solution is heated to 95° C. 7500 grams of zinc oxide is then added with stirring. To this solution there is added sufficient am- monium hydroxide to precipitate the nickel -as nickel hydrate.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "role": "precipitant"
+      },
+      "source": "ex:msyn/us1625926a/sample/example-2",
+      "target": "ex:msyn/species/nh4oh"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/51",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "1 liter of catalyst granules",
+          "unit": "L",
+          "value": 1
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, col. 1",
+            "reading": "vision_ocr",
+            "region": [
+              0.158,
+              0.862,
+              0.54,
+              0.94
+            ],
+            "source": "ex:msyn/source/us1625926a",
+            "transcription": "prising 8% carbon dioxide, 3% of carbon monoxide and 89% hydrogen is passed through 1 liter of catalyst granules at a space velocity of 75,000–100,000, at a pres- sure of 2000 pounds, and at a temperature of 340–400° C."
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2, Example II",
+            "passage": "us1625926a/p2/6",
+            "quote": "To this mass is added a solution containing 740 grams of zinc chloride and the mass is again dried.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "state": "as_prepared"
+      },
+      "source": "ex:msyn/us1625926a/test/example-2",
+      "target": "ex:msyn/us1625926a/sample/example-2"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/52",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/4",
+            "quote": "The reported yields of con- densate from the methanol reaction by use of the following catalysts is based on the effect produced when a gas mixture com-",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, col. 1",
+            "reading": "vision_ocr",
+            "region": [
+              0.158,
+              0.862,
+              0.54,
+              0.94
+            ],
+            "source": "ex:msyn/source/us1625926a",
+            "transcription": "prising 8% carbon dioxide, 3% of carbon monoxide and 89% hydrogen is passed through 1 liter of catalyst granules at a space velocity of 75,000–100,000, at a pres- sure of 2000 pounds, and at a temperature of 340–400° C."
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/test/example-2",
+      "target": "ex:msyn/us1625926a/feed/standard-gas"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/53",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/4",
+            "quote": "The reported yields of con- densate from the methanol reaction by use of the following catalysts is based on the effect produced when a gas mixture com-",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, col. 1",
+            "reading": "vision_ocr",
+            "region": [
+              0.158,
+              0.862,
+              0.54,
+              0.94
+            ],
+            "source": "ex:msyn/source/us1625926a",
+            "transcription": "prising 8% carbon dioxide, 3% of carbon monoxide and 89% hydrogen is passed through 1 liter of catalyst granules at a space velocity of 75,000–100,000, at a pres- sure of 2000 pounds, and at a temperature of 340–400° C."
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, col. 1",
+            "note": "OCR of 'Carbon monoxide—CO + 2H2 → CH3OH'",
+            "passage": "us1625926a/p1/1",
+            "quote": "Carbon nionoxide—CO + 2H,—@CH,0H",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/test/example-2",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/54",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/4",
+            "quote": "The reported yields of con- densate from the methanol reaction by use of the following catalysts is based on the effect produced when a gas mixture com-",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, col. 1",
+            "reading": "vision_ocr",
+            "region": [
+              0.158,
+              0.862,
+              0.54,
+              0.94
+            ],
+            "source": "ex:msyn/source/us1625926a",
+            "transcription": "prising 8% carbon dioxide, 3% of carbon monoxide and 89% hydrogen is passed through 1 liter of catalyst granules at a space velocity of 75,000–100,000, at a pres- sure of 2000 pounds, and at a temperature of 340–400° C."
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, col. 1",
+            "passage": "us1625926a/p1/2",
+            "quote": "It is observed that when carbon dioxide is the oxide employed, one molecule of water is formed for every molecule of methanol produced.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/test/example-2",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/55",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2, Example II",
+            "passage": "us1625926a/p2/6",
+            "quote": "solution is heated to 95° C. 7500 grams of zinc oxide is then added with stirring. To this solution there is added sufficient am- monium hydroxide to precipitate the nickel -as nickel hydrate.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "7500 grams of zinc oxide",
+          "unit": "g",
+          "value": 7500
+        },
+        "fraction_basis": "mass",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1625926a/catalyst/example-2-double-zncl2",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/56",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2, Example II",
+            "passage": "us1625926a/p2/6",
+            "quote": "solution is heated to 95° C. 7500 grams of zinc oxide is then added with stirring. To this solution there is added sufficient am- monium hydroxide to precipitate the nickel -as nickel hydrate.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1625926a/catalyst/example-2-double-zncl2",
+      "target": "ex:msyn/us1625926a/species/nickel-hydrate"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/57",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2, col. 2, Example II",
+            "reading": "vision_ocr",
+            "region": [
+              0.535,
+              0.878,
+              0.906,
+              0.943
+            ],
+            "second_reading": "The hourly yield of condensate is about 1 liter and contains about 30% of methanol. If the amount of zinc chloride used is doubled, the hourly condensate will be increased to about 2.5 liters and the percentage of methanol will be increased to about 56%. Substitution of chemically equivalent",
+            "source": "ex:msyn/source/us1625926a",
+            "transcription": "If the amount of zinc chloride used is doubled, the hourly condensate will be in- creased to about 2.5 liters and the percent- age of methanol will be increased to about 56%."
+          }
+        ],
+        "role": "not_stated",
+        "role_detail": "the metallic halide; amount doubled relative to Example II"
+      },
+      "source": "ex:msyn/us1625926a/catalyst/example-2-double-zncl2",
+      "target": "ex:msyn/species/zncl2"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/58",
+      "type": "COMPARED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2, col. 2, Example II",
+            "reading": "vision_ocr",
+            "region": [
+              0.535,
+              0.878,
+              0.906,
+              0.943
+            ],
+            "second_reading": "The hourly yield of condensate is about 1 liter and contains about 30% of methanol. If the amount of zinc chloride used is doubled, the hourly condensate will be increased to about 2.5 liters and the percentage of methanol will be increased to about 56%. Substitution of chemically equivalent",
+            "source": "ex:msyn/source/us1625926a",
+            "transcription": "If the amount of zinc chloride used is doubled, the hourly condensate will be in- creased to about 2.5 liters and the percent- age of methanol will be increased to about 56%."
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/catalyst/example-2-double-zncl2",
+      "target": "ex:msyn/us1625926a/catalyst/example-2"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/59",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2, col. 2, Example II",
+            "reading": "vision_ocr",
+            "region": [
+              0.535,
+              0.878,
+              0.906,
+              0.943
+            ],
+            "second_reading": "The hourly yield of condensate is about 1 liter and contains about 30% of methanol. If the amount of zinc chloride used is doubled, the hourly condensate will be increased to about 2.5 liters and the percentage of methanol will be increased to about 56%. Substitution of chemically equivalent",
+            "source": "ex:msyn/source/us1625926a",
+            "transcription": "If the amount of zinc chloride used is doubled, the hourly condensate will be in- creased to about 2.5 liters and the percent- age of methanol will be increased to about 56%."
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/sample/example-2-double-zncl2",
+      "target": "ex:msyn/us1625926a/catalyst/example-2-double-zncl2"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/6",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, col. 2",
+            "passage": "us1625926a/p1/6",
+            "quote": "(3) A metallic. halide.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "role": "not_stated",
+        "role_detail": "main element (3)"
+      },
+      "source": "ex:msyn/us1625926a/catalyst/three-element-halide-catalyst",
+      "target": "ex:msyn/us1625926a/species/metallic-halide"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/60",
+      "type": "PREPARED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2, col. 2, Example II",
+            "reading": "vision_ocr",
+            "region": [
+              0.535,
+              0.878,
+              0.906,
+              0.943
+            ],
+            "second_reading": "The hourly yield of condensate is about 1 liter and contains about 30% of methanol. If the amount of zinc chloride used is doubled, the hourly condensate will be increased to about 2.5 liters and the percentage of methanol will be increased to about 56%. Substitution of chemically equivalent",
+            "source": "ex:msyn/source/us1625926a",
+            "transcription": "If the amount of zinc chloride used is doubled, the hourly condensate will be in- creased to about 2.5 liters and the percent- age of methanol will be increased to about 56%."
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/sample/example-2-double-zncl2",
+      "target": "ex:msyn/us1625926a/preparation/example-2"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/61",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "the amount of zinc chloride used is doubled",
+          "text_value": "double the Example II amount"
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2, col. 2, Example II",
+            "reading": "vision_ocr",
+            "region": [
+              0.535,
+              0.878,
+              0.906,
+              0.943
+            ],
+            "second_reading": "The hourly yield of condensate is about 1 liter and contains about 30% of methanol. If the amount of zinc chloride used is doubled, the hourly condensate will be increased to about 2.5 liters and the percentage of methanol will be increased to about 56%. Substitution of chemically equivalent",
+            "source": "ex:msyn/source/us1625926a",
+            "transcription": "If the amount of zinc chloride used is doubled, the hourly condensate will be in- creased to about 2.5 liters and the percent- age of methanol will be increased to about 56%."
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1625926a/sample/example-2-double-zncl2",
+      "target": "ex:msyn/species/zncl2"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/62",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "1 liter of catalyst granules",
+          "unit": "L",
+          "value": 1
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, col. 1",
+            "reading": "vision_ocr",
+            "region": [
+              0.158,
+              0.862,
+              0.54,
+              0.94
+            ],
+            "source": "ex:msyn/source/us1625926a",
+            "transcription": "prising 8% carbon dioxide, 3% of carbon monoxide and 89% hydrogen is passed through 1 liter of catalyst granules at a space velocity of 75,000–100,000, at a pres- sure of 2000 pounds, and at a temperature of 340–400° C."
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2, col. 2, Example II",
+            "reading": "vision_ocr",
+            "region": [
+              0.535,
+              0.878,
+              0.906,
+              0.943
+            ],
+            "second_reading": "The hourly yield of condensate is about 1 liter and contains about 30% of methanol. If the amount of zinc chloride used is doubled, the hourly condensate will be increased to about 2.5 liters and the percentage of methanol will be increased to about 56%. Substitution of chemically equivalent",
+            "source": "ex:msyn/source/us1625926a",
+            "transcription": "If the amount of zinc chloride used is doubled, the hourly condensate will be in- creased to about 2.5 liters and the percent- age of methanol will be increased to about 56%."
+          }
+        ],
+        "state": "as_prepared"
+      },
+      "source": "ex:msyn/us1625926a/test/example-2-double-zncl2",
+      "target": "ex:msyn/us1625926a/sample/example-2-double-zncl2"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/63",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/4",
+            "quote": "The reported yields of con- densate from the methanol reaction by use of the following catalysts is based on the effect produced when a gas mixture com-",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, col. 1",
+            "reading": "vision_ocr",
+            "region": [
+              0.158,
+              0.862,
+              0.54,
+              0.94
+            ],
+            "source": "ex:msyn/source/us1625926a",
+            "transcription": "prising 8% carbon dioxide, 3% of carbon monoxide and 89% hydrogen is passed through 1 liter of catalyst granules at a space velocity of 75,000–100,000, at a pres- sure of 2000 pounds, and at a temperature of 340–400° C."
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/test/example-2-double-zncl2",
+      "target": "ex:msyn/us1625926a/feed/standard-gas"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/64",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/4",
+            "quote": "The reported yields of con- densate from the methanol reaction by use of the following catalysts is based on the effect produced when a gas mixture com-",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, col. 1",
+            "reading": "vision_ocr",
+            "region": [
+              0.158,
+              0.862,
+              0.54,
+              0.94
+            ],
+            "source": "ex:msyn/source/us1625926a",
+            "transcription": "prising 8% carbon dioxide, 3% of carbon monoxide and 89% hydrogen is passed through 1 liter of catalyst granules at a space velocity of 75,000–100,000, at a pres- sure of 2000 pounds, and at a temperature of 340–400° C."
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, col. 1",
+            "note": "OCR of 'Carbon monoxide—CO + 2H2 → CH3OH'",
+            "passage": "us1625926a/p1/1",
+            "quote": "Carbon nionoxide—CO + 2H,—@CH,0H",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/test/example-2-double-zncl2",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/65",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/4",
+            "quote": "The reported yields of con- densate from the methanol reaction by use of the following catalysts is based on the effect produced when a gas mixture com-",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, col. 1",
+            "reading": "vision_ocr",
+            "region": [
+              0.158,
+              0.862,
+              0.54,
+              0.94
+            ],
+            "source": "ex:msyn/source/us1625926a",
+            "transcription": "prising 8% carbon dioxide, 3% of carbon monoxide and 89% hydrogen is passed through 1 liter of catalyst granules at a space velocity of 75,000–100,000, at a pres- sure of 2000 pounds, and at a temperature of 340–400° C."
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, col. 1",
+            "passage": "us1625926a/p1/2",
+            "quote": "It is observed that when carbon dioxide is the oxide employed, one molecule of water is formed for every molecule of methanol produced.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/test/example-2-double-zncl2",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/66",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2",
+            "passage": "us1625926a/p2/7",
+            "quote": "Substitution of chemically equivalent",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1",
+            "passage": "us1625926a/p3/1",
+            "quote": "quantities of magnesium chloride or zinc",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1",
+            "passage": "us1625926a/p3/1",
+            "quote": "bromide for the zinc chloride produces simi- lar results,",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/claim/mgcl2-znbr2-substitution",
+      "target": "ex:msyn/us1625926a/catalyst/example-2"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/67",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2",
+            "passage": "us1625926a/p2/7",
+            "quote": "Substitution of chemically equivalent",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1",
+            "passage": "us1625926a/p3/1",
+            "quote": "quantities of magnesium chloride or zinc",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1",
+            "passage": "us1625926a/p3/1",
+            "quote": "bromide for the zinc chloride produces simi- lar results,",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/claim/mgcl2-znbr2-substitution",
+      "target": "ex:msyn/species/mgcl2"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/68",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 2",
+            "passage": "us1625926a/p2/7",
+            "quote": "Substitution of chemically equivalent",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1",
+            "passage": "us1625926a/p3/1",
+            "quote": "quantities of magnesium chloride or zinc",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1",
+            "passage": "us1625926a/p3/1",
+            "quote": "bromide for the zinc chloride produces simi- lar results,",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/claim/mgcl2-znbr2-substitution",
+      "target": "ex:msyn/species/znbr2"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/69",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1, Example III",
+            "passage": "us1625926a/p3/1",
+            "quote": "whereby the mixture is transformed to chromic oxide, nickel oxide, . and zinc oxide.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "4 kilograms chromic nitrate",
+          "note": "parts as printed: mass of chromic nitrate transformed to chromic oxide",
+          "unit": "kg",
+          "value": 4
+        },
+        "fraction_basis": "mass",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1625926a/catalyst/example-3",
+      "target": "ex:msyn/species/cr2o3"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/7",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, col. 2",
+            "note": "'85_' is a stray line number",
+            "passage": "us1625926a/p1/5",
+            "quote": "We have discovered a new type of metha- nol catalyst which produces a higher yield of methanol than those formerly employed in the art, and at the same time produces a 85_ very pure methanol, uncontaminated by by- —",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/catalyst/three-element-halide-catalyst",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/70",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1, Example III",
+            "passage": "us1625926a/p3/1",
+            "quote": "whereby the mixture is transformed to chromic oxide, nickel oxide, . and zinc oxide.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "750 grams nickel nitrate",
+          "note": "parts as printed: mass of nickel nitrate transformed to nickel oxide",
+          "unit": "g",
+          "value": 750
+        },
+        "fraction_basis": "mass",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1625926a/catalyst/example-3",
+      "target": "ex:msyn/species/nio"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/71",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1, Example III",
+            "passage": "us1625926a/p3/1",
+            "quote": "whereby the mixture is transformed to chromic oxide, nickel oxide, . and zinc oxide.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "2.5 kilo- grams of zinc oxide",
+          "unit": "kg",
+          "value": 2.5
+        },
+        "fraction_basis": "mass",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1625926a/catalyst/example-3",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/72",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1, Example III",
+            "passage": "us1625926a/p3/1",
+            "quote": "The resultant mass is bro- ‘ken up into granules and is then moistened 20 with a solution containing 450 grams of zinc chloride. The granules are again dried and are ready for use.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "450 grams of zinc chloride",
+          "unit": "g",
+          "value": 450
+        },
+        "fraction_basis": "mass",
+        "role": "not_stated",
+        "role_detail": "the metallic halide"
+      },
+      "source": "ex:msyn/us1625926a/catalyst/example-3",
+      "target": "ex:msyn/species/zncl2"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/73",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1, Example III",
+            "passage": "us1625926a/p3/1",
+            "quote": "The resultant mass is bro- ‘ken up into granules and is then moistened 20 with a solution containing 450 grams of zinc chloride. The granules are again dried and are ready for use.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/sample/example-3",
+      "target": "ex:msyn/us1625926a/catalyst/example-3"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/74",
+      "type": "PREPARED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1, Example III",
+            "passage": "us1625926a/p3/1",
+            "quote": "The resultant mass is bro- ‘ken up into granules and is then moistened 20 with a solution containing 450 grams of zinc chloride. The granules are again dried and are ready for use.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/sample/example-3",
+      "target": "ex:msyn/us1625926a/preparation/example-3"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/75",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "4 kilograms",
+          "unit": "kg",
+          "value": 4
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1, Example III",
+            "note": "formula printed '(Cr(NO,),.9H,O)' = Cr(NO3)3.9H2O",
+            "passage": "us1625926a/p3/1",
+            "quote": "4 kilograms chromic nitrate",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1625926a/sample/example-3",
+      "target": "ex:msyn/species/crno339h2o"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/76",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "750 grams",
+          "unit": "g",
+          "value": 750
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1, Example III",
+            "note": "formula printed '(Ni(NO,)..6H,O)'",
+            "passage": "us1625926a/p3/1",
+            "quote": "and 750 grams nickel nitrate",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1625926a/sample/example-3",
+      "target": "ex:msyn/species/nino326h2o"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/77",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "2.5 kilo- grams",
+          "unit": "kg",
+          "value": 2.5
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1, Example III",
+            "note": "'15' is a stray line number",
+            "passage": "us1625926a/p3/1",
+            "quote": "are dissolved in 5 liters of water. 2.5 kilo- grams of zinc oxide is added with stirring and the mass is heated to dryness and is then 15 further heated till no more nitric oxide fumes are given off,",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1625926a/sample/example-3",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/78",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "450 grams",
+          "unit": "g",
+          "value": 450
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1, Example III",
+            "passage": "us1625926a/p3/1",
+            "quote": "The resultant mass is bro- ‘ken up into granules and is then moistened 20 with a solution containing 450 grams of zinc chloride. The granules are again dried and are ready for use.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1625926a/sample/example-3",
+      "target": "ex:msyn/species/zncl2"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/79",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1, Example III",
+            "passage": "us1625926a/p3/1",
+            "quote": "If desired, 450 grams of dextrin or a similar agglutinating agent may be added with the zinc chloride, where- 25 by firmer granules are obtained:on drying.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/claim/dextrin-optional",
+      "target": "ex:msyn/us1625926a/preparation/example-3"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/8",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, col. 2",
+            "note": "'85_' is a stray line number",
+            "passage": "us1625926a/p1/5",
+            "quote": "We have discovered a new type of metha- nol catalyst which produces a higher yield of methanol than those formerly employed in the art, and at the same time produces a 85_ very pure methanol, uncontaminated by by- —",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, col. 2",
+            "passage": "us1625926a/p1/5",
+            "quote": "An additional advantage accru-. ing from the use of our catalysts is that the formation of methane in the process—with the consequent destruction of valuable hy- 90 drogen—is practically eliminated.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/claim/higher-yield-pure-methanol",
+      "target": "ex:msyn/us1625926a/catalyst/three-element-halide-catalyst"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/80",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1, Example III",
+            "passage": "us1625926a/p3/1",
+            "quote": "If desired, 450 grams of dextrin or a similar agglutinating agent may be added with the zinc chloride, where- 25 by firmer granules are obtained:on drying.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/claim/dextrin-optional",
+      "target": "ex:msyn/us1625926a/species/dextrin"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/81",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "1 liter of catalyst granules",
+          "unit": "L",
+          "value": 1
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, col. 1",
+            "reading": "vision_ocr",
+            "region": [
+              0.158,
+              0.862,
+              0.54,
+              0.94
+            ],
+            "source": "ex:msyn/source/us1625926a",
+            "transcription": "prising 8% carbon dioxide, 3% of carbon monoxide and 89% hydrogen is passed through 1 liter of catalyst granules at a space velocity of 75,000–100,000, at a pres- sure of 2000 pounds, and at a temperature of 340–400° C."
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1, Example III",
+            "passage": "us1625926a/p3/1",
+            "quote": "The resultant mass is bro- ‘ken up into granules and is then moistened 20 with a solution containing 450 grams of zinc chloride. The granules are again dried and are ready for use.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "state": "as_prepared"
+      },
+      "source": "ex:msyn/us1625926a/test/example-3",
+      "target": "ex:msyn/us1625926a/sample/example-3"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/82",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/4",
+            "quote": "The reported yields of con- densate from the methanol reaction by use of the following catalysts is based on the effect produced when a gas mixture com-",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, col. 1",
+            "reading": "vision_ocr",
+            "region": [
+              0.158,
+              0.862,
+              0.54,
+              0.94
+            ],
+            "source": "ex:msyn/source/us1625926a",
+            "transcription": "prising 8% carbon dioxide, 3% of carbon monoxide and 89% hydrogen is passed through 1 liter of catalyst granules at a space velocity of 75,000–100,000, at a pres- sure of 2000 pounds, and at a temperature of 340–400° C."
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/test/example-3",
+      "target": "ex:msyn/us1625926a/feed/standard-gas"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/83",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/4",
+            "quote": "The reported yields of con- densate from the methanol reaction by use of the following catalysts is based on the effect produced when a gas mixture com-",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, col. 1",
+            "reading": "vision_ocr",
+            "region": [
+              0.158,
+              0.862,
+              0.54,
+              0.94
+            ],
+            "source": "ex:msyn/source/us1625926a",
+            "transcription": "prising 8% carbon dioxide, 3% of carbon monoxide and 89% hydrogen is passed through 1 liter of catalyst granules at a space velocity of 75,000–100,000, at a pres- sure of 2000 pounds, and at a temperature of 340–400° C."
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, col. 1",
+            "note": "OCR of 'Carbon monoxide—CO + 2H2 → CH3OH'",
+            "passage": "us1625926a/p1/1",
+            "quote": "Carbon nionoxide—CO + 2H,—@CH,0H",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/test/example-3",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/84",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, col. 1",
+            "passage": "us1625926a/p2/4",
+            "quote": "The reported yields of con- densate from the methanol reaction by use of the following catalysts is based on the effect produced when a gas mixture com-",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, col. 1",
+            "reading": "vision_ocr",
+            "region": [
+              0.158,
+              0.862,
+              0.54,
+              0.94
+            ],
+            "source": "ex:msyn/source/us1625926a",
+            "transcription": "prising 8% carbon dioxide, 3% of carbon monoxide and 89% hydrogen is passed through 1 liter of catalyst granules at a space velocity of 75,000–100,000, at a pres- sure of 2000 pounds, and at a temperature of 340–400° C."
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, col. 1",
+            "passage": "us1625926a/p1/2",
+            "quote": "It is observed that when carbon dioxide is the oxide employed, one molecule of water is formed for every molecule of methanol produced.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/test/example-3",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/85",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1, Example III",
+            "passage": "us1625926a/p3/1",
+            "quote": "whereby the mixture is transformed to chromic oxide, nickel oxide, . and zinc oxide.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1625926a/catalyst/example-4",
+      "target": "ex:msyn/species/cr2o3"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/86",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1, Example III",
+            "passage": "us1625926a/p3/1",
+            "quote": "whereby the mixture is transformed to chromic oxide, nickel oxide, . and zinc oxide.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1625926a/catalyst/example-4",
+      "target": "ex:msyn/species/nio"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/87",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1, Example III",
+            "passage": "us1625926a/p3/1",
+            "quote": "whereby the mixture is transformed to chromic oxide, nickel oxide, . and zinc oxide.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1625926a/catalyst/example-4",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/88",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1, Example IV",
+            "note": "'sranules' = granules",
+            "passage": "us1625926a/p3/2",
+            "quote": "In place of moistening the sranules of the catalyst in Example III with zinc chloride a chemically equivalent amount of chromic chloride may be employed.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ],
+        "role": "not_stated",
+        "role_detail": "the metallic halide; chemically equivalent amount to the zinc chloride of Example III"
+      },
+      "source": "ex:msyn/us1625926a/catalyst/example-4",
+      "target": "ex:msyn/species/crcl3"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/89",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1, Example IV",
+            "note": "'sranules' = granules",
+            "passage": "us1625926a/p3/2",
+            "quote": "In place of moistening the sranules of the catalyst in Example III with zinc chloride a chemically equivalent amount of chromic chloride may be employed.",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1, Example IV",
+            "passage": "us1625926a/p3/2",
+            "quote": "The results will not be greatly varied.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/claim/example-4-similar",
+      "target": "ex:msyn/us1625926a/catalyst/example-4"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/9",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, col. 2",
+            "note": "'85_' is a stray line number",
+            "passage": "us1625926a/p1/5",
+            "quote": "We have discovered a new type of metha- nol catalyst which produces a higher yield of methanol than those formerly employed in the art, and at the same time produces a 85_ very pure methanol, uncontaminated by by- —",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, col. 2",
+            "passage": "us1625926a/p1/5",
+            "quote": "An additional advantage accru-. ing from the use of our catalysts is that the formation of methane in the process—with the consequent destruction of valuable hy- 90 drogen—is practically eliminated.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/claim/higher-yield-pure-methanol",
+      "target": "ex:msyn/reaction/co-methanation"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/90",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1, Example IV",
+            "note": "'sranules' = granules",
+            "passage": "us1625926a/p3/2",
+            "quote": "In place of moistening the sranules of the catalyst in Example III with zinc chloride a chemically equivalent amount of chromic chloride may be employed.",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1, Example IV",
+            "passage": "us1625926a/p3/2",
+            "quote": "The results will not be greatly varied.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/claim/example-4-similar",
+      "target": "ex:msyn/us1625926a/preparation/example-4"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/91",
+      "type": "COMPARED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1, Example IV",
+            "note": "'sranules' = granules",
+            "passage": "us1625926a/p3/2",
+            "quote": "In place of moistening the sranules of the catalyst in Example III with zinc chloride a chemically equivalent amount of chromic chloride may be employed.",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 1, Example IV",
+            "passage": "us1625926a/p3/2",
+            "quote": "The results will not be greatly varied.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/catalyst/example-4",
+      "target": "ex:msyn/us1625926a/catalyst/example-3"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/92",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 2, claim 1",
+            "passage": "us1625926a/p3/2",
+            "quote": "1. A methanol catalyst initially compris-",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 2, claim 1",
+            "note": "'halied' = halide",
+            "passage": "us1625926a/p3/3",
+            "quote": "ing a plurality of difficultly reducible metal oxides, nickel oxide, and a metallic halied.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/claim/claim-1",
+      "target": "ex:msyn/us1625926a/catalyst/three-element-halide-catalyst"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/93",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 2, claim 2",
+            "passage": "us1625926a/p3/3",
+            "quote": "2. A methanol catalyst initially: compris- ing a difficultly reducible metal oxide, nickel oxide, and a metallic halide.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/claim/claim-2",
+      "target": "ex:msyn/us1625926a/catalyst/three-element-halide-catalyst"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/94",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 2, claim 3",
+            "passage": "us1625926a/p3/3",
+            "quote": "3. A methanol catalyst initially compris- ing zinc oxide, chromium oxide, nickel ox- ide, and a metallic halide,",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/claim/claim-3",
+      "target": "ex:msyn/us1625926a/catalyst/example-3"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/95",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 2, claim 3",
+            "passage": "us1625926a/p3/3",
+            "quote": "3. A methanol catalyst initially compris- ing zinc oxide, chromium oxide, nickel ox- ide, and a metallic halide,",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/claim/claim-3",
+      "target": "ex:msyn/us1625926a/catalyst/example-4"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/96",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 2, claim 4",
+            "passage": "us1625926a/p3/3",
+            "quote": "4. A methanol catalyst initially compris- . ing zinc oxide, nickel oxide, and a metallic 55",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/claim/claim-4",
+      "target": "ex:msyn/us1625926a/catalyst/example-2"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/97",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 2, claim 5",
+            "passage": "us1625926a/p3/3",
+            "quote": "5. A methanol catalyst initially compris- ing zinc oxide, chromium oxide, nickel ox- ide, and zine chloride.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/claim/claim-5",
+      "target": "ex:msyn/us1625926a/catalyst/example-3"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/98",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 2, claim 6",
+            "passage": "us1625926a/p3/3",
+            "quote": "6. A methanol catalyst initially compris 60",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 2, claim 6",
+            "passage": "us1625926a/p3/3",
+            "quote": "Ing zinc oxide, nick",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 2, claim 6",
+            "passage": "us1625926a/p3/3",
+            "quote": "el -oxide, and zinc",
+            "source": "ex:msyn/source/us1625926a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 2, claim 6",
+            "passage": "us1625926a/p3/1",
+            "quote": "chloride.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/claim/claim-6",
+      "target": "ex:msyn/us1625926a/catalyst/example-2"
+    },
+    {
+      "id": "ex:msyn/us1625926a/link/99",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, col. 2, claim 7",
+            "passage": "us1625926a/p3/4",
+            "quote": "at a temperature of 350-450° C. over a catalyst imitially comprising a plurality of difficultly reducible metal oxides, nickel ox- _ ide, and a metallic halide.",
+            "source": "ex:msyn/source/us1625926a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1625926a/claim/claim-7",
+      "target": "ex:msyn/us1625926a/catalyst/three-element-halide-catalyst"
+    },
+    {
+      "id": "ex:msyn/us1625926a/preparation/example-1/reported-in/us1625926a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, col. 2, Example I"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625926a/preparation/example-1",
+      "target": "ex:msyn/source/us1625926a"
+    },
+    {
+      "id": "ex:msyn/us1625926a/preparation/example-2/reported-in/us1625926a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, col. 2, Example II"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625926a/preparation/example-2",
+      "target": "ex:msyn/source/us1625926a"
+    },
+    {
+      "id": "ex:msyn/us1625926a/preparation/example-3/reported-in/us1625926a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, col. 1, Example III"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625926a/preparation/example-3",
+      "target": "ex:msyn/source/us1625926a"
+    },
+    {
+      "id": "ex:msyn/us1625926a/preparation/example-4/reported-in/us1625926a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, col. 1, Example IV"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625926a/preparation/example-4",
+      "target": "ex:msyn/source/us1625926a"
+    },
+    {
+      "id": "ex:msyn/us1625926a/sample/example-1/reported-in/us1625926a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, col. 2, Example I"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625926a/sample/example-1",
+      "target": "ex:msyn/source/us1625926a"
+    },
+    {
+      "id": "ex:msyn/us1625926a/sample/example-2-double-zncl2/reported-in/us1625926a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, col. 2, Example II"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625926a/sample/example-2-double-zncl2",
+      "target": "ex:msyn/source/us1625926a"
+    },
+    {
+      "id": "ex:msyn/us1625926a/sample/example-2/reported-in/us1625926a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, col. 2, Example II"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625926a/sample/example-2",
+      "target": "ex:msyn/source/us1625926a"
+    },
+    {
+      "id": "ex:msyn/us1625926a/sample/example-3/reported-in/us1625926a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, col. 1, Example III"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625926a/sample/example-3",
+      "target": "ex:msyn/source/us1625926a"
+    },
+    {
+      "id": "ex:msyn/us1625926a/species/dextrin/reported-in/us1625926a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, col. 1, Example III"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625926a/species/dextrin",
+      "target": "ex:msyn/source/us1625926a"
+    },
+    {
+      "id": "ex:msyn/us1625926a/species/easily-reducible-metal-oxides/reported-in/us1625926a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, col. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625926a/species/easily-reducible-metal-oxides",
+      "target": "ex:msyn/source/us1625926a"
+    },
+    {
+      "id": "ex:msyn/us1625926a/species/metallic-halide/reported-in/us1625926a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, col. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625926a/species/metallic-halide",
+      "target": "ex:msyn/source/us1625926a"
+    },
+    {
+      "id": "ex:msyn/us1625926a/species/non-reducible-metal-oxides/reported-in/us1625926a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, col. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625926a/species/non-reducible-metal-oxides",
+      "target": "ex:msyn/source/us1625926a"
+    },
+    {
+      "id": "ex:msyn/us1625926a/test/example-1/reported-in/us1625926a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, col. 1",
+          "p. 2, col. 2, Example I"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625926a/test/example-1",
+      "target": "ex:msyn/source/us1625926a"
+    },
+    {
+      "id": "ex:msyn/us1625926a/test/example-2-double-zncl2/reported-in/us1625926a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, col. 1",
+          "p. 2, col. 2, Example II"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625926a/test/example-2-double-zncl2",
+      "target": "ex:msyn/source/us1625926a"
+    },
+    {
+      "id": "ex:msyn/us1625926a/test/example-2/reported-in/us1625926a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, col. 1",
+          "p. 2, col. 2, Example II"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625926a/test/example-2",
+      "target": "ex:msyn/source/us1625926a"
+    },
+    {
+      "id": "ex:msyn/us1625926a/test/example-3/reported-in/us1625926a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, col. 1",
+          "p. 3, col. 1, Example III"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1625926a/test/example-3",
+      "target": "ex:msyn/source/us1625926a"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/us1625926a"
+}

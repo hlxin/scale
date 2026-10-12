@@ -17,6 +17,11 @@ two shared nodes is shared. Every part states the schema version it follows, whi
 ``build`` is deterministic: the nodes and the links of every part, sorted by id, under the header. Splitting a graph
 and building it back gives the same document. ``subset`` keeps some sources and the shared records they reach, and
 drops from shared records the evidence of the sources left out.
+
+``merge`` joins several graphs into one (a bundle, ``graphs/bundles/<name>.yaml``): every source once (a source in
+two graphs must be the same part in both), shared records joined by id (the same record apart from its evidence,
+whose items are pooled), each source's records keeping the stewardship of the graph they came from, and their
+rights files joined (a source with two different rights entries is refused).
 """
 
 from __future__ import annotations
@@ -212,4 +217,114 @@ def subset(parts: dict, slugs: list[str], header: dict | None = None) -> dict:
     return {"header": head, "shared": {**parts["shared"], "nodes": nodes, "links": links}, "sources": chosen}
 
 
-__all__ = ["split", "write_parts", "read_parts", "problems", "build", "build_folder", "same", "subset"]
+def _without_evidence(rec: dict) -> dict:
+    props = {k: v for k, v in (rec.get("props") or {}).items() if k != "evidence"}
+    return {**rec, "props": props} if "props" in rec else rec
+
+
+def _with_stewardship(rec: dict, default: dict) -> dict:
+    """A record keeping its graph's default stewardship, overridden by its own, as its own."""
+    props = rec.get("props") if isinstance(rec.get("props"), dict) else {}
+    return {**rec, "props": {**props, "stewardship": {**default, **(props.get("stewardship") or {})}}}
+
+
+def merge(members: list[tuple[str, dict]], graph: dict) -> dict:
+    """The parts of one graph made of several: ``members`` are (name, parts) and ``graph`` the bundle's own object
+    (graph_id, title, description, stewardship, ...); the members must follow the same schema version. Refuses a
+    source two members hold differently and a shared record two members state differently (evidence apart)."""
+    if not members:
+        raise ScaleError("a bundle needs at least one graph")
+    versions = {name: (p["header"].get("graph") or {}).get("schema_version") for name, p in members}
+    if len(set(versions.values())) != 1:
+        raise ScaleError("the graphs follow different schema versions (migrate them first): " +
+                         ", ".join(f"{n} {v}" for n, v in versions.items()))
+    version = next(iter(versions.values()))
+    default = graph.get("stewardship") or {}
+    sources: dict[str, dict] = {}
+    whose: dict[str, str] = {}
+    shared: dict[str, dict[str, dict]] = {"nodes": {}, "links": {}}
+    bad: list[str] = []
+    for name, parts in members:
+        own = (parts["header"].get("graph") or {}).get("stewardship") or {}
+        for slug, part in parts["sources"].items():
+            if own != default:
+                part = {**part, "nodes": [_with_stewardship(n, own) for n in part["nodes"]],
+                        "links": [_with_stewardship(lk, own) for lk in part["links"]]}
+            if slug in sources and sources[slug] != part:
+                bad.append(f"source {slug}: {whose[slug]} and {name} hold it differently")
+            sources.setdefault(slug, part)
+            whose.setdefault(slug, name)
+        for kind in ("nodes", "links"):
+            for rec in parts["shared"].get(kind) or []:
+                have = shared[kind].get(rec["id"])
+                if have is None:
+                    shared[kind][rec["id"]] = rec
+                    continue
+                if _without_evidence(have) != _without_evidence(rec):
+                    bad.append(f"shared {kind[:-1]} {rec['id']}: {name} states it differently from an earlier graph")
+                    continue
+                ev = list((have.get("props") or {}).get("evidence") or [])
+                seen = {dump_canonical(e) for e in ev}
+                ev += [e for e in (rec.get("props") or {}).get("evidence") or [] if dump_canonical(e) not in seen]
+                if ev:
+                    shared[kind][rec["id"]] = {**have, "props": {**have.get("props", {}), "evidence": ev}}
+    if bad:
+        raise ScaleError("the graphs do not merge:\n  " + "\n  ".join(bad[:20]) +
+                         (f"\n  … and {len(bad) - 20} more" if len(bad) > 20 else ""))
+    first = members[0][1]["header"]
+    header = {**{k: v for k, v in first.items() if k != "graph"},
+              "graph": {**{k: v for k, v in (first.get("graph") or {}).items() if k in ("schema", "follows_domains")},
+                        **graph, "schema_version": version}}
+    return {"header": header,
+            "shared": {"schema_version": version, "nodes": list(shared["nodes"].values()),
+                       "links": list(shared["links"].values())},
+            "sources": dict(sorted(sources.items()))}
+
+
+def merge_rights(members: list[tuple[str, dict]]) -> dict:
+    """One rights file's sources from several: a source two files list differently is refused."""
+    out: dict[str, dict] = {}
+    whose: dict[str, str] = {}
+    bad = []
+    for name, rights in members:
+        for sid, e in rights.items():
+            if sid in out and out[sid] != e:
+                bad.append(f"{sid}: {whose[sid]} and {name} give it different rights")
+            out.setdefault(sid, e)
+            whose.setdefault(sid, name)
+    if bad:
+        raise ScaleError("the rights files do not merge:\n  " + "\n  ".join(bad[:20]))
+    return dict(sorted(out.items()))
+
+
+def load_bundle(path: str | Path, repo: str | Path) -> dict:
+    """A bundle definition (YAML): ``graph`` (the bundle's own object: graph_id, title, description, data_status,
+    stewardship, ...) and ``graphs`` (the member folders, kept as parts, relative to the repository)."""
+    from .util import load_yaml
+    data = load_yaml(Path(path)) or {}
+    if not isinstance(data, dict) or set(data) != {"graph", "graphs"} or not isinstance(data["graph"], dict) \
+            or not isinstance(data["graphs"], list) or not data["graphs"]:
+        raise ScaleError(f"{path}: a bundle holds graph (its own object) and graphs (a list of folders kept as parts)")
+    for k in ("graph_id", "title", "description", "stewardship"):
+        if not data["graph"].get(k):
+            raise ScaleError(f"{path}: graph.{k} is required")
+    folders = [Path(repo) / g for g in data["graphs"]]
+    for f in folders:
+        if not (f / PARTS / HEADER).is_file():
+            raise ScaleError(f"{path}: {f} is not a graph kept as parts (no parts/header.json)")
+    return {"graph": data["graph"], "folders": folders}
+
+
+def build_bundle(path: str | Path, repo: str | Path) -> tuple[dict, dict]:
+    """The parts and the rights (``sources``) of a bundle."""
+    from .rights import RIGHTS_FILE, load_rights
+    b = load_bundle(path, repo)
+    names = [f.relative_to(Path(repo)).as_posix() if f.is_relative_to(Path(repo)) else str(f) for f in b["folders"]]
+    parts = merge([(n, read_parts(f)) for n, f in zip(names, b["folders"])], b["graph"])
+    rights = merge_rights([(n, load_rights(f / RIGHTS_FILE)) for n, f in zip(names, b["folders"])
+                           if (f / RIGHTS_FILE).is_file()])
+    return parts, rights
+
+
+__all__ = ["split", "write_parts", "read_parts", "problems", "build", "build_folder", "same", "subset", "merge",
+           "merge_rights", "load_bundle", "build_bundle"]

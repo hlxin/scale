@@ -1,0 +1,36 @@
+{
+  "nodes": [
+    {
+      "id": "scale:org/scale-researchers",
+      "label": "Institution",
+      "props": {
+        "name": "SCALE researchers",
+        "institution_kind": "other",
+        "note": "the researchers who curate and maintain SCALE's public graphs; no institution or person is named",
+        "origin": "curated"
+      }
+    },
+    {
+      "id": "scale:project/catalysis-commons",
+      "label": "Project",
+      "props": {
+        "name": "Catalysis commons",
+        "note": "SCALE's evolving catalysis graph (graphs/catalysis-commons), grown one source at a time through pull requests.",
+        "origin": "curated"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "scale:project/catalysis-commons/participant/scale-researchers",
+      "type": "PARTICIPATES_IN",
+      "props": {
+        "origin": "curated",
+        "role": "data_provider"
+      },
+      "source": "scale:org/scale-researchers",
+      "target": "scale:project/catalysis-commons"
+    }
+  ],
+  "schema_version": "0.2.0"
+}

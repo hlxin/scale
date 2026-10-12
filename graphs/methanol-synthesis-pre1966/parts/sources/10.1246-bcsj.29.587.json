@@ -1,0 +1,112 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/10.1246-bcsj.29.587/material/zinc-oxide-phase",
+      "label": "Material",
+      "props": {
+        "name": "zinc oxide (phase seen by X-ray)",
+        "crystallinity": "crystalline",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:ea74a42c060353700a1d9de3eea39a8bf54a3774904264146e8668d3451ece40 chars:42",
+            "passage": "10.1246-bcsj.29.587/p4/5",
+            "source": "ex:msyn/source/10.1246-bcsj.29.587"
+          }
+        ],
+        "formula": "ZnO",
+        "material_family": "oxide",
+        "note": "the source names the phase only as zinc oxide; no polymorph given"
+      }
+    },
+    {
+      "id": "ex:msyn/source/10.1246-bcsj.29.587",
+      "label": "Source",
+      "props": {
+        "name": "Study on Zinc Oxide-Chromium Oxide Catalyst. II. Variation of Catalytic Activity for Methanol Decomposition with Addition of Chromia and Structural Dependence of Activity",
+        "kind": "article",
+        "description": "Published 1956 (publication year (bibliography)); in scope: before the 1966-01-01 cutoff. Text: 8 pages text_layer. Text not redistributed.",
+        "doi": "10.1246/bcsj.29.587",
+        "licence": "no verified publisher licence; short excerpts quoted as evidence under fair use",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "Study on Zinc Oxide-Chromium Oxide Catalyst. II. Variation of Catalytic Activity for Methanol Decomposition with Addition of Chromia and Structural Dependence of Activity",
+        "url": "https://doi.org/10.1246/bcsj.29.587",
+        "venue": "Bulletin of the Chemical Society of Japan",
+        "year": 1956
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/10.1246-bcsj.29.587/link/1",
+      "type": "IDENTIFIED_AS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:ea74a42c060353700a1d9de3eea39a8bf54a3774904264146e8668d3451ece40 chars:42",
+            "passage": "10.1246-bcsj.29.587/p4/5",
+            "source": "ex:msyn/source/10.1246-bcsj.29.587"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.29.587/material/zinc-oxide-phase",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.29.587/material/zinc-oxide-phase/reported-in/10.1246-bcsj.29.587",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-bcsj.29.587/material/zinc-oxide-phase",
+      "target": "ex:msyn/source/10.1246-bcsj.29.587"
+    },
+    {
+      "id": "ex:msyn/material/zncr2o4-spinel/reported-in/10.1246-bcsj.29.587",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/material/zncr2o4-spinel",
+      "target": "ex:msyn/source/10.1246-bcsj.29.587"
+    },
+    {
+      "id": "ex:msyn/source/10.1246-bcsj.29.587/authored-by/1",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 1,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/10.1246-bcsj.29.587",
+      "target": "ex:msyn/person/hiroshi-uchida"
+    },
+    {
+      "id": "ex:msyn/source/10.1246-bcsj.29.587/authored-by/2",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 2,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/10.1246-bcsj.29.587",
+      "target": "ex:msyn/person/yoshisada-ogino"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/10.1246-bcsj.29.587"
+}

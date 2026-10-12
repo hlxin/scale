@@ -1,0 +1,5455 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/analysis/a-reactor-profile-calculation",
+      "label": "Analysis",
+      "props": {
+        "name": "step-by-step calculation of the axial temperature profiles in bed and exchanger tube, A reactor, Exp. 4",
+        "analysis_kind": "transport_check",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:d21f9cdcaa51aa0f697f778043d8c270c142049e9755a514b4af1aaa5afd29b4 chars:141",
+            "passage": "10.1246-bcsj.35.1638/p7/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7, footnote 17",
+            "note": "quote withheld: sha256:8dea5719ddb706fd7aa6f7027d0c662f6083e59c97f210ea3785c945137404ca chars:80",
+            "passage": "10.1246-bcsj.35.1638/p7/5",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7, footnote 17",
+            "note": "quote withheld: sha256:75db869ec1c586fffe74a0591b8991c6ca0cc67b3175fb7850153d4684b57a2b chars:47",
+            "passage": "10.1246-bcsj.35.1638/p7/5",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7, footnote 18",
+            "note": "quote withheld: sha256:89a1b6d227ce366e45e44bc56883a4d08e2f270a0d4a0cadcfad114c7f1f8d2f chars:81",
+            "passage": "10.1246-bcsj.35.1638/p7/5",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "method": "Eqs. 6 and 7 with ΔQn from Fig. 5, Bcalcd from the formula of Leva et al. and U1b averaged over the bed; catalyst inlet temperature assumed identical with the temperature at the end of the heat exchanger tube",
+        "results": {
+          "b_calcd": {
+            "status": "present",
+            "as_reported": "1.0684m-1",
+            "unit": "m-1",
+            "value": 1.0684
+          },
+          "catalyst_inlet_temperature": {
+            "status": "present",
+            "as_reported": "348℃",
+            "unit": "°C",
+            "value": 348
+          },
+          "exp4_h_double_prime": {
+            "status": "present",
+            "as_reported": "2.465×103kcal./m2hr.℃",
+            "note": "h\", heat transfer coefficient across the film on the inner surface of the reactor, evaluated for Exp. 4 (footnote 18); the hL of footnote 18 is cited from the preceding paper and not recorded here",
+            "unit": "kcal/m2 hr °C",
+            "value": 2465
+          },
+          "u1b_mean": {
+            "status": "present",
+            "as_reported": "1.524×102 kcal./m2hr.℃",
+            "unit": "kcal/m2 hr °C",
+            "value": 152.4
+          }
+        },
+        "verdict": "the calculated and experimental profiles accord well (Fig. 7)"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/analysis/b-c-exchanger-profiles",
+      "label": "Analysis",
+      "props": {
+        "name": "calculated temperature profiles in the B- and C-type double-tube heat exchangers (Exps. 6 and 7)",
+        "analysis_kind": "transport_check",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:6391332b3ca5ef3becdd6e854f00069988992347f5ffd47cdde827ac5e0f28ad chars:102",
+            "passage": "10.1246-bcsj.35.1638/p8/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 8, Table VII",
+            "note": "quote withheld: sha256:255135462fbf24501c5cce03ac5ba1b113da2179d3859dfb01cde923d18d22a4 chars:65",
+            "passage": "10.1246-bcsj.35.1638/p8/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 8, Table VII, Exp. 6, passages I and II",
+            "note": "transcription withheld: sha256:7885d6918978b5d743baec091f3ca53ec764ee517b0979840e4d8a86ddc17f61 chars:60; second_reading withheld: sha256:960566f64b1291a12f37f65d9c879fb71dd29e07dd933669633a8c49f905569a chars:70",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.161,
+              0.92,
+              0.175
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 8, Table VII, Exp. 7, passages I and II",
+            "note": "transcription withheld: sha256:3b0579addf1a7e2ab019181bff7520149352d36b8ee607a7b91528a1d6a78d56 chars:60; second_reading withheld: sha256:35c455e0f6a9608ad41d054c4b8f2b79295b1568d28ec3ff0fd0edcaca9b758b chars:70",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.176,
+              0.92,
+              0.19
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 8, Table VII, Exp. 6, passage III and overall coefficients",
+            "note": "transcription withheld: sha256:a7d66af8e9ae1bf455a24bc1a35796da372b14420996985cdd3a2a57a306c901 chars:56; second_reading withheld: sha256:c80f429959c4541fb6f2623f9f9accafc2276a72a8c2ea9b10dc7ac5f613c4d9 chars:67",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.259,
+              0.92,
+              0.273
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 8, Table VII, Exp. 7, passage III and overall coefficients",
+            "note": "transcription withheld: sha256:ad7474068d61c93f66677839f35dce47333a841bcd6f9386eee1b4a43821e124 chars:59; second_reading withheld: sha256:a35f537f752e041b670f0a932f7158ad21fcf1ca83967189da735b865d55a4a1 chars:70",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.274,
+              0.92,
+              0.288
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "method": "heat balances Eqs. 14-16 for the bed (1), annular space (2) and inner tube (3); t2 from Eq. 14 with dt1/dx from the experimental bed profiles, then t3 from Eq. 15; coefficients of Table VII (h from formula A of Table II; ha from Eqs. 11 and 12)",
+        "results": {
+          "exp6_passage1_h": {
+            "status": "present",
+            "as_reported": "7.698×10²",
+            "unit": "kcal/m2 hr °C",
+            "value": 769.8
+          },
+          "exp6_passage1_rep": {
+            "status": "present",
+            "as_reported": "2.97×10²",
+            "unit": "1",
+            "value": 297
+          },
+          "exp6_passage2_ha": {
+            "status": "present",
+            "as_reported": "6.361×10²",
+            "unit": "kcal/m2 hr °C",
+            "value": 636.1
+          },
+          "exp6_passage2_rep": {
+            "status": "present",
+            "as_reported": "3.55×10³",
+            "unit": "1",
+            "value": 3550
+          },
+          "exp6_passage3_ha": {
+            "status": "present",
+            "as_reported": "1.399×10³",
+            "unit": "kcal/m2 hr °C",
+            "value": 1399
+          },
+          "exp6_passage3_rep": {
+            "status": "present",
+            "as_reported": "1.24×10⁴",
+            "unit": "1",
+            "value": 12400
+          },
+          "exp6_u12": {
+            "status": "present",
+            "as_reported": "3.060×10²",
+            "unit": "kcal/m2 hr °C",
+            "value": 306.0
+          },
+          "exp6_u1b": {
+            "status": "present",
+            "as_reported": "8×10²",
+            "unit": "kcal/m2 hr °C",
+            "value": 800
+          },
+          "exp6_u23": {
+            "status": "present",
+            "as_reported": "3.771×10²",
+            "unit": "kcal/m2 hr °C",
+            "value": 377.1
+          },
+          "exp7_passage1_h": {
+            "status": "present",
+            "as_reported": "9.072×10²",
+            "unit": "kcal/m2 hr °C",
+            "value": 907.2
+          },
+          "exp7_passage1_rep": {
+            "status": "present",
+            "as_reported": "4.05×10²",
+            "unit": "1",
+            "value": 405
+          },
+          "exp7_passage2_ha": {
+            "status": "present",
+            "as_reported": "1.302×10³",
+            "unit": "kcal/m2 hr °C",
+            "value": 1302
+          },
+          "exp7_passage2_rep": {
+            "status": "present",
+            "as_reported": "4.84×10³",
+            "unit": "1",
+            "value": 4840
+          },
+          "exp7_passage3_ha": {
+            "status": "present",
+            "as_reported": "2.038×10³",
+            "unit": "kcal/m2 hr °C",
+            "value": 2038
+          },
+          "exp7_passage3_rep": {
+            "status": "present",
+            "as_reported": "8.46×10³",
+            "unit": "1",
+            "value": 8460
+          },
+          "exp7_u12": {
+            "status": "present",
+            "as_reported": "4.841×10²",
+            "unit": "kcal/m2 hr °C",
+            "value": 484.1
+          },
+          "exp7_u1b": {
+            "status": "present",
+            "as_reported": "1.27×10²",
+            "unit": "kcal/m2 hr °C",
+            "value": 127
+          },
+          "exp7_u23": {
+            "status": "present",
+            "as_reported": "6.615×10²",
+            "unit": "kcal/m2 hr °C",
+            "value": 661.5
+          }
+        },
+        "verdict": "owing to efficient heat transfer between passages II and III the profile in the second passage always slopes down markedly in the upper zone, so the catalyst inlet temperature is kept comparatively low"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/analysis/cooling-coefficient-a-reactor",
+      "label": "Analysis",
+      "props": {
+        "name": "cooling coefficient B of the A-type heat exchanger tube from the profiles of Exps. 1-4, compared with calculated values",
+        "analysis_kind": "transport_check",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:b7663739ad34fe1c3f8da0c70c3fbc1b401197b5f62ce0c1630ed2e40dc2a5c5 chars:82",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:fe6bc52d3d314b02bc7ca56dd11dfcf89346781559752cd8add9012db69ebde8 chars:83",
+            "passage": "10.1246-bcsj.35.1638/p4/5",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:65114d0d9581140b85543f7d5a5feb18906a718b0be204e3cf3b6ad86ba9b6f1 chars:74",
+            "passage": "10.1246-bcsj.35.1638/p5/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 5, Table III",
+            "note": "quote withheld: sha256:0a35139cff02c520442788312c2f0446950233de80a412a3f4249141897c2431 chars:41",
+            "passage": "10.1246-bcsj.35.1638/p5/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 5, Table III, Exp. 1",
+            "note": "transcription withheld: sha256:62315fbfb97c8c88c7954cc69f383d28f813295709598b732b5341abc29886af chars:45; second_reading withheld: sha256:a4aa4ee95fdea9a54d994531749437a6a071a541cc6c4710253bd1875a272740 chars:55",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.309,
+              0.92,
+              0.323
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 5, Table III, Exp. 2",
+            "note": "transcription withheld: sha256:b8087734b4bb2b8980c61aec47a9c062d0455179ed0c7091d01f939dfed9d28b chars:45; second_reading withheld: sha256:ae82e36fc19906e624aafa1357927450eaea2fd1143903346a61482db085da30 chars:55",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.323,
+              0.92,
+              0.337
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 5, Table III, Exp. 3",
+            "note": "transcription withheld: sha256:c4ded13426f685b4e89e72e1d9176a64a5fea2aef834be11d84e17dfb607384a chars:47; second_reading withheld: sha256:8225a9d6845d8a1070da68d4d72d945850e5484b08d2d1399d0a5561d6c55aa9 chars:57",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.338,
+              0.92,
+              0.352
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 5, Table III, Exp. 4",
+            "note": "transcription withheld: sha256:1b9074bfa48ecc45af380a59e47000556a0ba068448c9cf7ab1717a16f8bbd50 chars:46; second_reading withheld: sha256:6411580cc8339d2f9c42fa8bdcf0e16db597f202298616a262443f3aa32c33ba chars:56",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.352,
+              0.92,
+              0.366
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 6, Table V",
+            "note": "quote withheld: sha256:8661e086e9a7de10c53e98adf78ec8433bdbbbada1e07fa7706282d2261f91af chars:33",
+            "passage": "10.1246-bcsj.35.1638/p6/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 6, Table V, Exp. 1",
+            "note": "transcription withheld: sha256:b494206a222d7a4f996d6329dfcbad14f176578e43f2c38d7c88b7510c705492 chars:36",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.145,
+              0.92,
+              0.159
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 6, Table V, Exp. 2",
+            "note": "transcription withheld: sha256:6818096bb57d13975077994dfa7dfb4d19ae12460a64c604a3f13ecb755e1504 chars:36",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.16,
+              0.92,
+              0.174
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 6, Table V, Exp. 3",
+            "note": "transcription withheld: sha256:6faa42b999f57da4a76ff8283a6a8c19fba6d3c918bf8a7c4478398b8167380e chars:36",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.174,
+              0.92,
+              0.188
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 6, Table V, Exp. 4",
+            "note": "transcription withheld: sha256:cb21e4252ae0865d11f7605f3af2817aa3d3c783ba2cc0df9e9c18063401ad6f chars:36",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.189,
+              0.92,
+              0.203
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 6, Table VI",
+            "note": "quote withheld: sha256:7c3c5f65912540f90d0d6a094d579c6ed69ab90bb65c2cb46c64c32a3f23cf29 chars:31",
+            "passage": "10.1246-bcsj.35.1638/p6/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 6, Table VI, Exp. 1",
+            "note": "transcription withheld: sha256:2184daf38493073297b29b165420616c353c80c123b0af9b2e59d511786b56ad chars:46",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.247,
+              0.92,
+              0.261
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 6, Table VI, Exp. 4",
+            "note": "transcription withheld: sha256:1a2fcff3a40513214b50445ad6f8f22cf9d461d73f2aca8063bc0f73b9a39109 chars:46",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.261,
+              0.92,
+              0.275
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "method": "heat balances for the bed (Eq. 1) and the exchanger gas (Eq. 2) transformed to difference equations (S1Cp1G1 = S2Cp2G2, v constant within a step); B = U12F12/A from Eq. 5 with t1 the arithmetic mean of the two off-center temperatures; steps 0.29 m then 0.15 m; B̄exp averaged over the bed and compared with Bcalcd = U12F12/A (Eq. 8) with U12 from Eq. 9 or 10 and h from formulae A-E, h' from formula F (Table II), ha from Eq. 11 (laminar) or 12 (turbulent)",
+        "results": {
+          "exp1_b_calc_formula_a": {
+            "status": "present",
+            "as_reported": "0.954",
+            "note": "Bcalc with h (or h' for F) from formula A of Table II",
+            "unit": "m-1",
+            "value": 0.954
+          },
+          "exp1_b_calc_formula_b": {
+            "status": "present",
+            "as_reported": "1.163",
+            "note": "Bcalc with h (or h' for F) from formula B of Table II",
+            "unit": "m-1",
+            "value": 1.163
+          },
+          "exp1_b_calc_formula_c": {
+            "status": "present",
+            "as_reported": "0.955",
+            "note": "Bcalc with h (or h' for F) from formula C of Table II",
+            "unit": "m-1",
+            "value": 0.955
+          },
+          "exp1_b_calc_formula_d": {
+            "status": "present",
+            "as_reported": "0.630",
+            "note": "Bcalc with h (or h' for F) from formula D of Table II",
+            "unit": "m-1",
+            "value": 0.63
+          },
+          "exp1_b_calc_formula_e": {
+            "status": "present",
+            "as_reported": "0.227",
+            "note": "Bcalc with h (or h' for F) from formula E of Table II",
+            "unit": "m-1",
+            "value": 0.227
+          },
+          "exp1_b_calc_formula_f": {
+            "status": "present",
+            "as_reported": "0.922",
+            "note": "Bcalc with h (or h' for F) from formula F of Table II",
+            "unit": "m-1",
+            "value": 0.922
+          },
+          "exp1_b_exp_mean": {
+            "status": "present",
+            "as_reported": "1.005",
+            "note": "B̄exp, cooling coefficient averaged over the bed length (Table V)",
+            "unit": "m-1",
+            "value": 1.005
+          },
+          "exp1_cp": {
+            "status": "present",
+            "as_reported": "0.654",
+            "unit": "kcal/kg °C",
+            "value": 0.654
+          },
+          "exp1_k": {
+            "status": "present",
+            "as_reported": "0.204",
+            "unit": "kcal/m hr °C",
+            "value": 0.204
+          },
+          "exp1_lambda_e": {
+            "status": "present",
+            "as_reported": "6.15",
+            "unit": "kcal/m hr °C",
+            "value": 6.15
+          },
+          "exp1_mass_velocity_g": {
+            "status": "present",
+            "as_reported": "8.41×10³",
+            "unit": "kg/m2 hr",
+            "value": 8410
+          },
+          "exp1_rep_catalyst_bed": {
+            "status": "present",
+            "as_reported": "3.03×10²",
+            "unit": "1",
+            "value": 303
+          },
+          "exp1_rep_heat_exchanger_tube": {
+            "status": "present",
+            "as_reported": "3.62×10³",
+            "unit": "1",
+            "value": 3620
+          },
+          "exp1_resistance_bed_r2_lambda_e_ln": {
+            "status": "present",
+            "as_reported": "1.026×10⁻³",
+            "note": "Table VI heat transfer resistance; unit not printed",
+            "unit": "not stated",
+            "value": 0.001026
+          },
+          "exp1_resistance_inv_h_prime": {
+            "status": "present",
+            "as_reported": "3.701×10⁻⁴",
+            "note": "Table VI heat transfer resistance; unit not printed",
+            "unit": "not stated",
+            "value": 0.0003701
+          },
+          "exp1_resistance_inv_ha_r2_r1": {
+            "status": "present",
+            "as_reported": "1.967×10⁻³",
+            "note": "Table VI heat transfer resistance; unit not printed",
+            "unit": "not stated",
+            "value": 0.001967
+          },
+          "exp1_resistance_inv_u12": {
+            "status": "present",
+            "as_reported": "3.370×10⁻³",
+            "note": "Table VI heat transfer resistance; unit not printed",
+            "unit": "not stated",
+            "value": 0.00337
+          },
+          "exp1_resistance_wall_r2_lambda_s_ln": {
+            "status": "present",
+            "as_reported": "3.537×10⁻⁶",
+            "note": "Table VI heat transfer resistance; unit not printed",
+            "unit": "not stated",
+            "value": 3.537e-06
+          },
+          "exp1_viscosity": {
+            "status": "present",
+            "as_reported": "0.0972",
+            "unit": "kg/m hr",
+            "value": 0.0972
+          },
+          "exp2_b_calc_formula_a": {
+            "status": "present",
+            "as_reported": "1.077",
+            "note": "Bcalc with h (or h' for F) from formula A of Table II",
+            "unit": "m-1",
+            "value": 1.077
+          },
+          "exp2_b_calc_formula_b": {
+            "status": "present",
+            "as_reported": "1.325",
+            "note": "Bcalc with h (or h' for F) from formula B of Table II",
+            "unit": "m-1",
+            "value": 1.325
+          },
+          "exp2_b_calc_formula_c": {
+            "status": "present",
+            "as_reported": "1.068",
+            "note": "Bcalc with h (or h' for F) from formula C of Table II",
+            "unit": "m-1",
+            "value": 1.068
+          },
+          "exp2_b_calc_formula_d": {
+            "status": "present",
+            "as_reported": "0.685",
+            "note": "Bcalc with h (or h' for F) from formula D of Table II",
+            "unit": "m-1",
+            "value": 0.685
+          },
+          "exp2_b_calc_formula_e": {
+            "status": "present",
+            "as_reported": "0.259",
+            "note": "Bcalc with h (or h' for F) from formula E of Table II",
+            "unit": "m-1",
+            "value": 0.259
+          },
+          "exp2_b_calc_formula_f": {
+            "status": "present",
+            "as_reported": "1.033",
+            "note": "Bcalc with h (or h' for F) from formula F of Table II",
+            "unit": "m-1",
+            "value": 1.033
+          },
+          "exp2_b_exp_mean": {
+            "status": "present",
+            "as_reported": "0.880",
+            "note": "B̄exp, cooling coefficient averaged over the bed length (Table V)",
+            "unit": "m-1",
+            "value": 0.88
+          },
+          "exp2_cp": {
+            "status": "present",
+            "as_reported": "0.701",
+            "unit": "kcal/kg °C",
+            "value": 0.701
+          },
+          "exp2_k": {
+            "status": "present",
+            "as_reported": "0.210",
+            "unit": "kcal/m hr °C",
+            "value": 0.21
+          },
+          "exp2_lambda_e": {
+            "status": "present",
+            "as_reported": "5.15",
+            "unit": "kcal/m hr °C",
+            "value": 5.15
+          },
+          "exp2_mass_velocity_g": {
+            "status": "present",
+            "as_reported": "6.47×10³",
+            "unit": "kg/m2 hr",
+            "value": 6470
+          },
+          "exp2_rep_catalyst_bed": {
+            "status": "present",
+            "as_reported": "2.39×10²",
+            "unit": "1",
+            "value": 239
+          },
+          "exp2_rep_heat_exchanger_tube": {
+            "status": "present",
+            "as_reported": "2.85×10³",
+            "unit": "1",
+            "value": 2850
+          },
+          "exp2_viscosity": {
+            "status": "present",
+            "as_reported": "0.0948",
+            "unit": "kg/m hr",
+            "value": 0.0948
+          },
+          "exp3_b_calc_formula_a": {
+            "status": "present",
+            "as_reported": "1.073",
+            "note": "Bcalc with h (or h' for F) from formula A of Table II",
+            "unit": "m-1",
+            "value": 1.073
+          },
+          "exp3_b_calc_formula_b": {
+            "status": "present",
+            "as_reported": "1.423",
+            "note": "Bcalc with h (or h' for F) from formula B of Table II",
+            "unit": "m-1",
+            "value": 1.423
+          },
+          "exp3_b_calc_formula_c": {
+            "status": "present",
+            "as_reported": "1.110",
+            "note": "Bcalc with h (or h' for F) from formula C of Table II",
+            "unit": "m-1",
+            "value": 1.11
+          },
+          "exp3_b_calc_formula_d": {
+            "status": "present",
+            "as_reported": "0.732",
+            "note": "Bcalc with h (or h' for F) from formula D of Table II",
+            "unit": "m-1",
+            "value": 0.732
+          },
+          "exp3_b_calc_formula_e": {
+            "status": "present",
+            "as_reported": "0.174",
+            "note": "Bcalc with h (or h' for F) from formula E of Table II",
+            "unit": "m-1",
+            "value": 0.174
+          },
+          "exp3_b_calc_formula_f": {
+            "status": "present",
+            "as_reported": "1.020",
+            "note": "Bcalc with h (or h' for F) from formula F of Table II",
+            "unit": "m-1",
+            "value": 1.02
+          },
+          "exp3_b_exp_mean": {
+            "status": "present",
+            "as_reported": "0.837",
+            "note": "B̄exp, cooling coefficient averaged over the bed length (Table V)",
+            "unit": "m-1",
+            "value": 0.837
+          },
+          "exp3_cp": {
+            "status": "present",
+            "as_reported": "0.607",
+            "unit": "kcal/kg °C",
+            "value": 0.607
+          },
+          "exp3_k": {
+            "status": "present",
+            "as_reported": "0.205",
+            "unit": "kcal/m hr °C",
+            "value": 0.205
+          },
+          "exp3_lambda_e": {
+            "status": "present",
+            "as_reported": "10.47",
+            "unit": "kcal/m hr °C",
+            "value": 10.47
+          },
+          "exp3_mass_velocity_g": {
+            "status": "present",
+            "as_reported": "15.90×10³",
+            "unit": "kg/m2 hr",
+            "value": 15900
+          },
+          "exp3_rep_catalyst_bed": {
+            "status": "present",
+            "as_reported": "5.56×10²",
+            "unit": "1",
+            "value": 556
+          },
+          "exp3_rep_heat_exchanger_tube": {
+            "status": "present",
+            "as_reported": "6.64×10³",
+            "unit": "1",
+            "value": 6640
+          },
+          "exp3_viscosity": {
+            "status": "present",
+            "as_reported": "0.1001",
+            "unit": "kg/m hr",
+            "value": 0.1001
+          },
+          "exp4_b_calc_formula_a": {
+            "status": "present",
+            "as_reported": "1.046",
+            "note": "Bcalc with h (or h' for F) from formula A of Table II",
+            "unit": "m-1",
+            "value": 1.046
+          },
+          "exp4_b_calc_formula_b": {
+            "status": "present",
+            "as_reported": "1.388",
+            "note": "Bcalc with h (or h' for F) from formula B of Table II",
+            "unit": "m-1",
+            "value": 1.388
+          },
+          "exp4_b_calc_formula_c": {
+            "status": "present",
+            "as_reported": "1.068",
+            "note": "Bcalc with h (or h' for F) from formula C of Table II",
+            "unit": "m-1",
+            "value": 1.068
+          },
+          "exp4_b_calc_formula_d": {
+            "status": "present",
+            "as_reported": "0.678",
+            "note": "Bcalc with h (or h' for F) from formula D of Table II",
+            "unit": "m-1",
+            "value": 0.678
+          },
+          "exp4_b_calc_formula_e": {
+            "status": "present",
+            "as_reported": "0.169",
+            "note": "Bcalc with h (or h' for F) from formula E of Table II",
+            "unit": "m-1",
+            "value": 0.169
+          },
+          "exp4_b_calc_formula_f": {
+            "status": "present",
+            "as_reported": "0.999",
+            "note": "Bcalc with h (or h' for F) from formula F of Table II",
+            "unit": "m-1",
+            "value": 0.999
+          },
+          "exp4_b_exp_mean": {
+            "status": "present",
+            "as_reported": "0.942",
+            "note": "B̄exp, cooling coefficient averaged over the bed length (Table V)",
+            "unit": "m-1",
+            "value": 0.942
+          },
+          "exp4_cp": {
+            "status": "present",
+            "as_reported": "0.800",
+            "unit": "kcal/kg °C",
+            "value": 0.8
+          },
+          "exp4_k": {
+            "status": "present",
+            "as_reported": "0.222",
+            "unit": "kcal/m hr °C",
+            "value": 0.222
+          },
+          "exp4_lambda_e": {
+            "status": "present",
+            "as_reported": "9.21",
+            "unit": "kcal/m hr °C",
+            "value": 9.21
+          },
+          "exp4_mass_velocity_g": {
+            "status": "present",
+            "as_reported": "11.68×10³",
+            "unit": "kg/m2 hr",
+            "value": 11680
+          },
+          "exp4_rep_catalyst_bed": {
+            "status": "present",
+            "as_reported": "4.37×10²",
+            "unit": "1",
+            "value": 437
+          },
+          "exp4_rep_heat_exchanger_tube": {
+            "status": "present",
+            "as_reported": "5.22×10³",
+            "unit": "1",
+            "value": 5220
+          },
+          "exp4_resistance_bed_r2_lambda_e_ln": {
+            "status": "present",
+            "as_reported": "6.867×10⁻⁴",
+            "note": "Table VI heat transfer resistance; unit not printed",
+            "unit": "not stated",
+            "value": 0.0006867
+          },
+          "exp4_resistance_inv_h_prime": {
+            "status": "present",
+            "as_reported": "3.401×10⁻⁴",
+            "note": "Table VI heat transfer resistance; unit not printed",
+            "unit": "not stated",
+            "value": 0.0003401
+          },
+          "exp4_resistance_inv_ha_r2_r1": {
+            "status": "present",
+            "as_reported": "8.029×10⁻⁴",
+            "note": "Table VI heat transfer resistance; unit not printed",
+            "unit": "not stated",
+            "value": 0.0008029
+          },
+          "exp4_resistance_inv_u12": {
+            "status": "present",
+            "as_reported": "1.837×10⁻³",
+            "note": "Table VI heat transfer resistance; unit not printed",
+            "unit": "not stated",
+            "value": 0.001837
+          },
+          "exp4_resistance_wall_r2_lambda_s_ln": {
+            "status": "present",
+            "as_reported": "3.537×10⁻⁶",
+            "note": "Table VI heat transfer resistance; unit not printed",
+            "unit": "not stated",
+            "value": 3.537e-06
+          },
+          "exp4_viscosity": {
+            "status": "present",
+            "as_reported": "0.0936",
+            "unit": "kg/m hr",
+            "value": 0.0936
+          },
+          "lambda_s_heat_exchanger_tube": {
+            "status": "present",
+            "as_reported": "315kcal./m. hr.℃",
+            "note": "thermal conductivity of the heat exchanger tube material",
+            "unit": "kcal/m hr °C",
+            "value": 315
+          }
+        },
+        "verdict": "Bcalcd from the h of formulae A, C and E, and from h' of formula F, are consistent with B̄exp; the resistance across the catalyst bed is about one-third of the overall heat transfer resistance"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/catalyst/zno-cr2o3-cuo",
+      "label": "Catalyst",
+      "props": {
+        "name": "three-component catalyst ZnO-Cr2O3-CuO (composition as in the preceding study)",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:85d090d134925f830cc6f669b544856d39eff36a89b16f7e319c5a37fb8df0e4 chars:162",
+            "passage": "10.1246-bcsj.35.1638/p2/2",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "nominal_formula": "ZnO-Cr2O3-CuO",
+        "note": "the composition is not given in this paper, only that it is the same as in the preceding study (ref. 1)"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/claim/a-reactor-doubles-sty",
+      "label": "Claim",
+      "props": {
+        "name": "A reactor doubles the space-time yield",
+        "claim_kind": "comparison",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:68fb6a1e36684a39b8f992feb33a84e114dca4aa492b6e112f16c8d0911fb4c5 chars:228",
+            "passage": "10.1246-bcsj.35.1638/p2/4",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "inference_type": "interventional",
+        "note": "the O-reactor runs I and I' are data of the preceding paper (ref. 1), included in Table I for comparison (I: 34470 l/hr, H2/CO 3.0 (7.7), 295 °C, preheat 295 °C, 42.2 kg/day, 1.01 kg/l hr; I': 33570 l/hr, 8.5 (10.5), 295 °C, preheat 219 °C, 50.6 kg/day, 1.21 kg/l hr; 1.74 l catalyst); they are not recorded as tests of this source",
+        "statement": "The A reactor produced a much larger amount of methanol than the reactor with no heat exchanger (O reactor), its space-time yield reaching twice that of the O reactor (Exp. I vs Exp. 3), provided the synthesis gas was preheated at a higher temperature (Exps. 2 and 3)."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/claim/b-reactor-smaller-increase",
+      "label": "Claim",
+      "props": {
+        "name": "B reactor smaller gain than A",
+        "claim_kind": "comparison",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:573b930b240fb7430ad2b28ea37a7ea9543351dbfbd8a210847173dab27931f9 chars:155",
+            "passage": "10.1246-bcsj.35.1638/p2/4",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "inference_type": "interventional",
+        "statement": "The B reactor also produced more methanol than the O reactor, but the increase was rather low compared with the A reactor (Exp. 1 vs Exp. 6)."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/claim/bcalc-consistent",
+      "label": "Claim",
+      "props": {
+        "name": "Bcalc from formulae A, C, E, F consistent",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "'Bealed's' and 'Bested' are the text layer's readings of Bcalcd; quote withheld: sha256:713006a93f1a39832c18723fee420cdbd5d78234701985f242b57385a0efc490 chars:150",
+            "passage": "10.1246-bcsj.35.1638/p6/2",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "inference_type": "computational",
+        "statement": "The Bcalcd values obtained with h from formulae A, C and E, and with h' from formula F, are consistent with the bed-averaged B̄exp."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/claim/bed-resistance-one-third",
+      "label": "Claim",
+      "props": {
+        "name": "bed resistance about one-third",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:c832d557f1076a07a8a6a03948ad3b453a79d39a87f00ee9f6206393ff408cd5 chars:132",
+            "passage": "10.1246-bcsj.35.1638/p6/2",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "inference_type": "computational",
+        "statement": "The heat transfer resistance across the catalyst bed is so high as to account for about one-third of the overall heat transfer resistance between the gas in the bed and the gas in the heat exchanger tube."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/claim/bexp-maximum",
+      "label": "Claim",
+      "props": {
+        "name": "Bexp maximum near 0.4 m",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:94ff733e90435288bbebded61b286f0daa21c2648bb5563b21973d903bc4a0e0 chars:93",
+            "passage": "10.1246-bcsj.35.1638/p4/5",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "inference_type": "computational",
+        "statement": "The experimental cooling coefficient Bexp differs with bed length, with a maximum at about x = 0.4 m."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/claim/c-reactor-overcooled",
+      "label": "Claim",
+      "props": {
+        "name": "C reactor overcools the bed",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:b50d826f52f2b5acd0ee4da25fccc6714ac4628e5abd29cf9a22fa7f6d1ea9cf chars:130",
+            "passage": "10.1246-bcsj.35.1638/p2/4",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:5594a0cd90101631ac9f5e7d3fdaf1f267a432c5b7b217355712d8cfcd8d1520 chars:133",
+            "passage": "10.1246-bcsj.35.1638/p2/4",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "inference_type": "interventional",
+        "statement": "Reliable performance data could not be collected with the C reactor until the incoming gas had been preheated to a much higher temperature (Exp. 7); in this reactor the heat exchanger tube cooled the catalyst bed so much that the bed temperature would decrease too low to allow the progress of the synthesis."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/claim/calculated-profile-agrees",
+      "label": "Claim",
+      "props": {
+        "name": "calculated A-reactor profiles agree",
+        "claim_kind": "conclusion",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:f4bb6a2a77c7586f81c1555615d2f92954751adfc27bd10bfffd5ce9d7824198 chars:195",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "inference_type": "computational",
+        "statement": "The axial temperature profiles calculated for Exp. 4 accord well with the experimental ones, indicating that an adequate Bcalcd from any of the formulae proposed so far can be used for the profile calculation without serious errors."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/claim/profile-maxima",
+      "label": "Claim",
+      "props": {
+        "name": "profile maxima: upper half in A, bottom in B and C",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:fd485ffcb9fed7972e9a52f1ecef1cb6fe35af84cb9f3af58456986dc2eb6e20 chars:133",
+            "passage": "10.1246-bcsj.35.1638/p3/2",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:49a254eed37425df1d0b0619d81336fdbafa72ef39161055f2df95b1224226e5 chars:256",
+            "passage": "10.1246-bcsj.35.1638/p3/2",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "inference_type": "observational",
+        "statement": "The temperature maximum appears in the upper half of the catalyst bed of the A reactor but near the bottom of the B and C reactors, whose catalyst-inlet temperature is kept considerably lower even with higher preheating; in the A reactor methanol is already produced in the top zone and increases rather monotonously with bed length, whereas in B and C only a small amount appears after more than a quarter of the bed; the B and C profiles are essentially the same in tendency as with the O reactor."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/claim/second-passage-slopes-down",
+      "label": "Claim",
+      "props": {
+        "name": "B/C second passage cools the inlet",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:936f5660fcbfb208363f4fb32a9775f02c7ca0ebb7952c46723f94f13db15492 chars:252",
+            "passage": "10.1246-bcsj.35.1638/p8/2",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "inference_type": "computational",
+        "statement": "Owing to the efficient heat transfer between the gases in passages II and III, the temperature profile in the second passage of the B and C exchangers always slopes down markedly in the upper zone, and as a consequence the catalyst inlet temperature is kept comparatively low."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/claim/summary-only-single-tube",
+      "label": "Claim",
+      "props": {
+        "name": "only the single-tube countercurrent exchanger raises production",
+        "claim_kind": "conclusion",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8, Summary",
+            "note": "quote withheld: sha256:be09269d6ddffd055f1bd563e71b5fb16d463bba5535a2ba8ad9ac8506c02601 chars:265",
+            "passage": "10.1246-bcsj.35.1638/p8/3",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "inference_type": "interventional",
+        "statement": "Among the single-tube countercurrent, double-tube countercurrent and double-tube concurrent heat exchanger tubes, only the first serves to increase methanol production considerably compared with the previously tested reactor with no heat exchanger tube."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp1",
+      "label": "Feed",
+      "props": {
+        "name": "inlet gas of Exp. 1 (H2/CO 2.92, inert 11.0 vol.%)",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 1",
+            "note": "transcription withheld: sha256:77713b58fed9702b5d6c1c44872f3e84428b55af4a017cb976f2a1b433216377 chars:34",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.14,
+              0.92,
+              0.154
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 3, Table I, footnote a",
+            "note": "quote withheld: sha256:4fe9907f5ef8f7b54aa5a2b878ff49ca59e2de6528164a9e313618a896d4b421 chars:56",
+            "passage": "10.1246-bcsj.35.1638/p3/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "ratios": {
+          "h2_co_ratio": {
+            "status": "present",
+            "as_reported": "2.92 (11.0)",
+            "note": "Table I 'Composition of inlet gas, H2/CO'",
+            "unit": "1",
+            "value": 2.92
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp2",
+      "label": "Feed",
+      "props": {
+        "name": "inlet gas of Exp. 2 (H2/CO 2.92, inert 9.4 vol.%)",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 2",
+            "note": "transcription withheld: sha256:73389c5c57cf3e4f29274ae20cb0ca7b9226fbbbca1e57e3111ce681df72935a chars:32",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.154,
+              0.92,
+              0.168
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 3, Table I, footnote a",
+            "note": "quote withheld: sha256:4fe9907f5ef8f7b54aa5a2b878ff49ca59e2de6528164a9e313618a896d4b421 chars:56",
+            "passage": "10.1246-bcsj.35.1638/p3/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "ratios": {
+          "h2_co_ratio": {
+            "status": "present",
+            "as_reported": "2.92 (9.4)",
+            "note": "Table I 'Composition of inlet gas, H2/CO'",
+            "unit": "1",
+            "value": 2.92
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp3",
+      "label": "Feed",
+      "props": {
+        "name": "inlet gas of Exp. 3 (H2/CO 2.71, inert 13.3 vol.%)",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 3",
+            "note": "transcription withheld: sha256:398a523c185ae68d212c7afa9de8c877c2d54d0a616dc37f2916bb81b2c22310 chars:36",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.169,
+              0.92,
+              0.183
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 3, Table I, footnote a",
+            "note": "quote withheld: sha256:4fe9907f5ef8f7b54aa5a2b878ff49ca59e2de6528164a9e313618a896d4b421 chars:56",
+            "passage": "10.1246-bcsj.35.1638/p3/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "ratios": {
+          "h2_co_ratio": {
+            "status": "present",
+            "as_reported": "2.71 (13.3)",
+            "note": "Table I 'Composition of inlet gas, H2/CO'",
+            "unit": "1",
+            "value": 2.71
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp4",
+      "label": "Feed",
+      "props": {
+        "name": "inlet gas of Exp. 4 (H2/CO 4.59, inert 10.2 vol.%)",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 4",
+            "note": "transcription withheld: sha256:912c0f8f32ed4fe1f1fc923948b09f9d69946dcb9c4d25888d97ab864d6ae7d4 chars:34",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.183,
+              0.92,
+              0.197
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 3, Table I, footnote a",
+            "note": "quote withheld: sha256:4fe9907f5ef8f7b54aa5a2b878ff49ca59e2de6528164a9e313618a896d4b421 chars:56",
+            "passage": "10.1246-bcsj.35.1638/p3/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "ratios": {
+          "h2_co_ratio": {
+            "status": "present",
+            "as_reported": "4.59 (10.2)",
+            "note": "Table I 'Composition of inlet gas, H2/CO'",
+            "unit": "1",
+            "value": 4.59
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp5",
+      "label": "Feed",
+      "props": {
+        "name": "inlet gas of Exp. 5 (H2/CO 4.4, inert 3.3 vol.%)",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 5",
+            "note": "transcription withheld: sha256:f61ad3024ebba94cd3ca9462a8430891873e0285dc5dbe0c386dda71202fcfb8 chars:32",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.197,
+              0.92,
+              0.211
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 3, Table I, footnote a",
+            "note": "quote withheld: sha256:4fe9907f5ef8f7b54aa5a2b878ff49ca59e2de6528164a9e313618a896d4b421 chars:56",
+            "passage": "10.1246-bcsj.35.1638/p3/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "ratios": {
+          "h2_co_ratio": {
+            "status": "present",
+            "as_reported": "4.40 (3.3)",
+            "note": "Table I 'Composition of inlet gas, H2/CO'",
+            "unit": "1",
+            "value": 4.4
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp6",
+      "label": "Feed",
+      "props": {
+        "name": "inlet gas of Exp. 6 (H2/CO 3.15, inert 7.2 vol.%)",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 6",
+            "note": "transcription withheld: sha256:8af851cfb18b185550b6da8c4ee019e9dd5ddb7b75937c2cc845c22946baa3c4 chars:34",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.212,
+              0.92,
+              0.226
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 3, Table I, footnote a",
+            "note": "quote withheld: sha256:4fe9907f5ef8f7b54aa5a2b878ff49ca59e2de6528164a9e313618a896d4b421 chars:56",
+            "passage": "10.1246-bcsj.35.1638/p3/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "ratios": {
+          "h2_co_ratio": {
+            "status": "present",
+            "as_reported": "3.15 (7.2)",
+            "note": "Table I 'Composition of inlet gas, H2/CO'",
+            "unit": "1",
+            "value": 3.15
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp7",
+      "label": "Feed",
+      "props": {
+        "name": "inlet gas of Exp. 7 (H2/CO 2.5, inert 9.2 vol.%)",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 7",
+            "note": "transcription withheld: sha256:873e170ee52554d26cc63860c7857941fa3ea921cccba543d6fc75d91ec0a1e6 chars:34",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.226,
+              0.92,
+              0.24
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 3, Table I, footnote a",
+            "note": "quote withheld: sha256:4fe9907f5ef8f7b54aa5a2b878ff49ca59e2de6528164a9e313618a896d4b421 chars:56",
+            "passage": "10.1246-bcsj.35.1638/p3/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "ratios": {
+          "h2_co_ratio": {
+            "status": "present",
+            "as_reported": "2.50 (9.2)",
+            "note": "Table I 'Composition of inlet gas, H2/CO'",
+            "unit": "1",
+            "value": 2.5
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/hypothesis/b-c-no-yield-gain",
+      "label": "Hypothesis",
+      "props": {
+        "name": "B/C exchangers give no remarkable yield gain unless U23 is lowered in the upper part",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:d437b752304599c340cb2cc710305dacbf8136e533b1a70432298f5e1433d06c chars:271",
+            "passage": "10.1246-bcsj.35.1638/p8/2",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "hypothesis_kind": "explanatory",
+        "hypothesis_status": "proposed",
+        "statement": "Taking the most favorable temperature profile into consideration, any remarkable increase in methanol yield is scarcely to be expected from B- and C-type heat exchanger tubes unless special treatment lowers U23 in the upper part of the tubes; this may have resulted in the lower methanol yields of the B and C reactors compared with the A reactor."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/hypothesis/b-c-profile-like-o",
+      "label": "Hypothesis",
+      "props": {
+        "name": "low inlet temperature makes B/C bed profiles like the O reactor's",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:e24b7b3fc1c8e9ef415721a0b5d71571f88b7b4dba2db6f4e4644a4123d61f59 chars:139",
+            "passage": "10.1246-bcsj.35.1638/p8/2",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "hypothesis_kind": "explanatory",
+        "hypothesis_status": "proposed",
+        "statement": "The comparatively low catalyst inlet temperature in the B and C reactors may have led to the axial bed temperature profile being almost identical in tendency with that of the reactor with no heat exchanger tube."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/hypothesis/steep-radial-rise",
+      "label": "Hypothesis",
+      "props": {
+        "name": "steep radial temperature rise in the annular bed and at tube surfaces",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:7a7a2b51c449f76d817e68e2eb046e82a28a8fa541430fc984c97f55c6d1b35f chars:138",
+            "passage": "10.1246-bcsj.35.1638/p4/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:003dffcf069e18f732a3ff9ee0a31a0b852a00c451e18b52c6bf40e1f0a73e6e chars:161",
+            "passage": "10.1246-bcsj.35.1638/p7/3",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "hypothesis_kind": "descriptive",
+        "hypothesis_status": "proposed",
+        "statement": "A rough estimate from the available data leads to the expectation of a steep temperature rise in the middle across the annular bed of the A reactor; steep rises are also expected at the outer surface of the heat exchanger tube and at the inner and outer surfaces of the reactor, though nothing decisive can be said."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/preparation/as-preceding-study",
+      "label": "Preparation",
+      "props": {
+        "name": "preparation by the same procedure as in the preceding study (ref. 1)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:85d090d134925f830cc6f669b544856d39eff36a89b16f7e319c5a37fb8df0e4 chars:162",
+            "passage": "10.1246-bcsj.35.1638/p2/2",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "method": "not described in this paper: 'prepared by the same procedure as those of the catalyst in the preceding study' (ref. 1: H. Uchida, Y. Ogino, M. Oba and K. Shimomura, this Bulletin, 35, 1400 (1962))",
+        "procedure_status": "completed"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/reactor/a-reactor",
+      "label": "Reactor",
+      "props": {
+        "name": "A reactor: single-tube countercurrent heat exchanger at the center axis",
+        "description": "The tubular reactor of the preceding paper (in a flowing-oil heat-transfer medium) equipped with a copper heat exchanger tube in the catalyst bed; catalyst bed 1090 mm high between 350 and 1440 mm from the bottom; off-center thermocouples at r = 15 and 22 mm in protection tubes (5 mm o.d., 1 mm thick).",
+        "design_status": "built",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:6a0a8bf5503ed213c8a6d8f5c2086fc23171d18656ca26bb408e6ca38d8a1a90 chars:127",
+            "passage": "10.1246-bcsj.35.1638/p1/3",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:acadd2efe85a2a3033aaf1482ea4f567dc20da139dfbaa1952e12d19debc6abb chars:148",
+            "passage": "10.1246-bcsj.35.1638/p1/3",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:7d9b1ca8ef1b7a4267c1525406a466d7efb2f11cda649217b485a53528c783de chars:101",
+            "passage": "10.1246-bcsj.35.1638/p1/3",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:cd95c705cd82a502e3b0f711dfe0a36a2008e0d3ced2976dcf90c41fbe458252 chars:113",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "reactor_kind": "fixed_bed",
+        "specifications": {
+          "catalyst_bed_height": {
+            "status": "present",
+            "as_reported": "1090mm.",
+            "unit": "mm",
+            "value": 1090
+          },
+          "catalyst_bed_position": {
+            "status": "present",
+            "as_reported": "between 1440 and 350mm. from the bottom",
+            "lower": 350,
+            "unit": "mm",
+            "upper": 1440
+          },
+          "catalyst_charge_mass": {
+            "status": "present",
+            "as_reported": "3.012kg.",
+            "unit": "kg",
+            "value": 3.012
+          },
+          "catalyst_charge_volume": {
+            "status": "present",
+            "as_reported": "Two liters",
+            "unit": "l",
+            "value": 2
+          },
+          "catalyst_granule_size": {
+            "status": "present",
+            "as_reported": "3mm. in diameter by 4mm. high",
+            "text_value": "3 mm diameter by 4 mm high"
+          },
+          "heat_exchanger_flow": {
+            "status": "present",
+            "as_reported": "countercurrent types (types A and B)",
+            "text_value": "countercurrent"
+          },
+          "heat_exchanger_tube": {
+            "status": "present",
+            "as_reported": "a single tube of 10mm. O. D. and 8mm. I. D.",
+            "text_value": "single tube, 10 mm O.D., 8 mm I.D., at the center axis; stainless thermocouple tube 5 mm O.D., 1 mm thick, coaxially inside"
+          },
+          "heat_exchanger_tube_material": {
+            "status": "present",
+            "as_reported": "all three types of heat exchanger tubes were copper",
+            "text_value": "copper"
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/reactor/b-reactor",
+      "label": "Reactor",
+      "props": {
+        "name": "B reactor: double-tube countercurrent heat exchanger (gas first flows down the inner tube)",
+        "description": "The tubular reactor of the preceding paper (in a flowing-oil heat-transfer medium) equipped with a copper heat exchanger tube in the catalyst bed; catalyst bed 1090 mm high between 350 and 1440 mm from the bottom; off-center thermocouples at r = 15 and 22 mm in protection tubes (5 mm o.d., 1 mm thick).",
+        "design_status": "built",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:6a0a8bf5503ed213c8a6d8f5c2086fc23171d18656ca26bb408e6ca38d8a1a90 chars:127",
+            "passage": "10.1246-bcsj.35.1638/p1/3",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:acadd2efe85a2a3033aaf1482ea4f567dc20da139dfbaa1952e12d19debc6abb chars:148",
+            "passage": "10.1246-bcsj.35.1638/p1/3",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:4bb09a1e4633e77f75f7eb394e8b880c9a49f73a01676d36991dcacb173572bc chars:174",
+            "passage": "10.1246-bcsj.35.1638/p1/4",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:51684a8e187cbe3d145694019d784c5db197ffc31d29e768a478e08d75dbaedf chars:109",
+            "passage": "10.1246-bcsj.35.1638/p2/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "reactor_kind": "fixed_bed",
+        "specifications": {
+          "catalyst_bed_height": {
+            "status": "present",
+            "as_reported": "1090mm.",
+            "unit": "mm",
+            "value": 1090
+          },
+          "catalyst_bed_position": {
+            "status": "present",
+            "as_reported": "between 1440 and 350mm. from the bottom",
+            "lower": 350,
+            "unit": "mm",
+            "upper": 1440
+          },
+          "catalyst_charge_mass": {
+            "status": "present",
+            "as_reported": "3.012kg.",
+            "unit": "kg",
+            "value": 3.012
+          },
+          "catalyst_charge_volume": {
+            "status": "present",
+            "as_reported": "Two liters",
+            "unit": "l",
+            "value": 2
+          },
+          "catalyst_granule_size": {
+            "status": "present",
+            "as_reported": "3mm. in diameter by 4mm. high",
+            "text_value": "3 mm diameter by 4 mm high"
+          },
+          "heat_exchanger_flow": {
+            "status": "present",
+            "as_reported": "countercurrent types (types A and B)",
+            "text_value": "countercurrent"
+          },
+          "heat_exchanger_tube": {
+            "status": "present",
+            "as_reported": "an outer tube, sealed at one end, of 10mm. O. D. and an inner tube of 6 mm. O. D., each of them having a thickness of 1mm.",
+            "text_value": "double tube: outer tube sealed at one end, 10 mm O.D.; inner tube 6 mm O.D.; each 1 mm thick"
+          },
+          "heat_exchanger_tube_material": {
+            "status": "present",
+            "as_reported": "all three types of heat exchanger tubes were copper",
+            "text_value": "copper"
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/reactor/c-reactor",
+      "label": "Reactor",
+      "props": {
+        "name": "C reactor: double-tube concurrent heat exchanger (gas first flows down the annular space)",
+        "description": "The tubular reactor of the preceding paper (in a flowing-oil heat-transfer medium) equipped with a copper heat exchanger tube in the catalyst bed; catalyst bed 1090 mm high between 350 and 1440 mm from the bottom; off-center thermocouples at r = 15 and 22 mm in protection tubes (5 mm o.d., 1 mm thick).",
+        "design_status": "built",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:6a0a8bf5503ed213c8a6d8f5c2086fc23171d18656ca26bb408e6ca38d8a1a90 chars:127",
+            "passage": "10.1246-bcsj.35.1638/p1/3",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:acadd2efe85a2a3033aaf1482ea4f567dc20da139dfbaa1952e12d19debc6abb chars:148",
+            "passage": "10.1246-bcsj.35.1638/p1/3",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:f871149c79176872c316c601e26acce025558034f9fbcf8cf2da495e8b09f88e chars:64",
+            "passage": "10.1246-bcsj.35.1638/p1/4",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:f2319a6688c5a22a1c80cfd3ba7956c2577dea7b93196de2a472a390886cccde chars:101",
+            "passage": "10.1246-bcsj.35.1638/p2/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "reactor_kind": "fixed_bed",
+        "specifications": {
+          "catalyst_bed_height": {
+            "status": "present",
+            "as_reported": "1090mm.",
+            "unit": "mm",
+            "value": 1090
+          },
+          "catalyst_bed_position": {
+            "status": "present",
+            "as_reported": "between 1440 and 350mm. from the bottom",
+            "lower": 350,
+            "unit": "mm",
+            "upper": 1440
+          },
+          "catalyst_charge_mass": {
+            "status": "present",
+            "as_reported": "3.012kg.",
+            "unit": "kg",
+            "value": 3.012
+          },
+          "catalyst_charge_volume": {
+            "status": "present",
+            "as_reported": "Two liters",
+            "unit": "l",
+            "value": 2
+          },
+          "catalyst_granule_size": {
+            "status": "present",
+            "as_reported": "3mm. in diameter by 4mm. high",
+            "text_value": "3 mm diameter by 4 mm high"
+          },
+          "heat_exchanger_flow": {
+            "status": "present",
+            "as_reported": "a concurrent type (type C)",
+            "text_value": "concurrent"
+          },
+          "heat_exchanger_tube": {
+            "status": "present",
+            "as_reported": "double tubes of the same dimensions",
+            "text_value": "double tube of the same dimensions as type B"
+          },
+          "heat_exchanger_tube_material": {
+            "status": "present",
+            "as_reported": "all three types of heat exchanger tubes were copper",
+            "text_value": "copper"
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/sample/reactor-charge-2l",
+      "label": "CatalystSample",
+      "props": {
+        "name": "two liters of reduced catalyst granules (3.012 kg) charged to the A, B and C reactors",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:cf52d3f527636f9a01f4c3f09a9514e9bb03b5c77ac4fb815dc8f39a9be137fe chars:223",
+            "passage": "10.1246-bcsj.35.1638/p2/2",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "note": "whether the same charge was used in all three reactors is not stated",
+        "preparation_status": "prepared",
+        "sample_kind": "reactor_charge"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/species/inert-gas",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "inert gas (of the synthesis gas)",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 3, Table I, footnote a",
+            "note": "quote withheld: sha256:4fe9907f5ef8f7b54aa5a2b878ff49ca59e2de6528164a9e313618a896d4b421 chars:56",
+            "passage": "10.1246-bcsj.35.1638/p3/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "note": "composition of the inert gas not stated"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp1",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Table I, Exp. 1 (A reactor)",
+        "conditions": {
+          "preheated_gas_temperature": {
+            "status": "present",
+            "as_reported": "210",
+            "note": "measured immediately after the preheater (Table I, footnote b)",
+            "unit": "°C",
+            "value": 210
+          }
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 1",
+            "note": "transcription withheld: sha256:77713b58fed9702b5d6c1c44872f3e84428b55af4a017cb976f2a1b433216377 chars:34",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.14,
+              0.92,
+              0.154
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 3, Table I, footnote",
+            "note": "quote withheld: sha256:5cccfdb20f73b165da7f38648b1c87d814d993725756f68f93f5ae29ca4c143d chars:45",
+            "passage": "10.1246-bcsj.35.1638/p3/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 3, Table I, footnote b",
+            "note": "quote withheld: sha256:10428843340b57bcbaed9fe68abb92dee1f0d1cec9168802e2253b102c3db409 chars:56",
+            "passage": "10.1246-bcsj.35.1638/p3/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "experiment_kind": "physical",
+        "flow_rate": {
+          "status": "present",
+          "as_reported": "32170",
+          "note": "flow rate of inlet gas",
+          "unit": "l/hr",
+          "value": 32170
+        },
+        "heating_mode": "fluid_bath",
+        "manipulation": "interventional",
+        "pressure": {
+          "status": "present",
+          "as_reported": "200kg./cm2",
+          "unit": "kg/cm2",
+          "value": 200
+        },
+        "production_rate": {
+          "status": "present",
+          "as_reported": "89",
+          "note": "methanol yield",
+          "unit": "kg/day",
+          "value": 89
+        },
+        "space_time_yield": {
+          "status": "present",
+          "as_reported": "1.86",
+          "note": "space-time-yield of reactor",
+          "unit": "kg/l hr",
+          "value": 1.86
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "310",
+          "note": "oil bath temperature, Table I",
+          "unit": "°C",
+          "value": 310
+        },
+        "test_kind": "activity",
+        "test_label": "Exp. 1"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp2",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Table I, Exp. 2 (A reactor)",
+        "conditions": {
+          "preheated_gas_temperature": {
+            "status": "present",
+            "as_reported": "208",
+            "note": "measured immediately after the preheater (Table I, footnote b)",
+            "unit": "°C",
+            "value": 208
+          }
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 2",
+            "note": "transcription withheld: sha256:73389c5c57cf3e4f29274ae20cb0ca7b9226fbbbca1e57e3111ce681df72935a chars:32",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.154,
+              0.92,
+              0.168
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 3, Table I, footnote",
+            "note": "quote withheld: sha256:5cccfdb20f73b165da7f38648b1c87d814d993725756f68f93f5ae29ca4c143d chars:45",
+            "passage": "10.1246-bcsj.35.1638/p3/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 3, Table I, footnote b",
+            "note": "quote withheld: sha256:10428843340b57bcbaed9fe68abb92dee1f0d1cec9168802e2253b102c3db409 chars:56",
+            "passage": "10.1246-bcsj.35.1638/p3/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "experiment_kind": "physical",
+        "flow_rate": {
+          "status": "present",
+          "as_reported": "27810",
+          "note": "flow rate of inlet gas",
+          "unit": "l/hr",
+          "value": 27810
+        },
+        "heating_mode": "fluid_bath",
+        "manipulation": "interventional",
+        "pressure": {
+          "status": "present",
+          "as_reported": "200kg./cm2",
+          "unit": "kg/cm2",
+          "value": 200
+        },
+        "production_rate": {
+          "status": "present",
+          "as_reported": "90",
+          "note": "methanol yield",
+          "unit": "kg/day",
+          "value": 90
+        },
+        "space_time_yield": {
+          "status": "present",
+          "as_reported": "1.87",
+          "note": "space-time-yield of reactor",
+          "unit": "kg/l hr",
+          "value": 1.87
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "315",
+          "note": "oil bath temperature, Table I",
+          "unit": "°C",
+          "value": 315
+        },
+        "test_kind": "activity",
+        "test_label": "Exp. 2"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp3",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Table I, Exp. 3 (A reactor)",
+        "conditions": {
+          "preheated_gas_temperature": {
+            "status": "present",
+            "as_reported": "275",
+            "note": "measured immediately after the preheater (Table I, footnote b)",
+            "unit": "°C",
+            "value": 275
+          }
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 3",
+            "note": "transcription withheld: sha256:398a523c185ae68d212c7afa9de8c877c2d54d0a616dc37f2916bb81b2c22310 chars:36",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.169,
+              0.92,
+              0.183
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 3, Table I, footnote",
+            "note": "quote withheld: sha256:5cccfdb20f73b165da7f38648b1c87d814d993725756f68f93f5ae29ca4c143d chars:45",
+            "passage": "10.1246-bcsj.35.1638/p3/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 3, Table I, footnote b",
+            "note": "quote withheld: sha256:10428843340b57bcbaed9fe68abb92dee1f0d1cec9168802e2253b102c3db409 chars:56",
+            "passage": "10.1246-bcsj.35.1638/p3/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "experiment_kind": "physical",
+        "flow_rate": {
+          "status": "present",
+          "as_reported": "56650",
+          "note": "flow rate of inlet gas",
+          "unit": "l/hr",
+          "value": 56650
+        },
+        "heating_mode": "fluid_bath",
+        "manipulation": "interventional",
+        "pressure": {
+          "status": "present",
+          "as_reported": "200kg./cm2",
+          "unit": "kg/cm2",
+          "value": 200
+        },
+        "production_rate": {
+          "status": "present",
+          "as_reported": "104.5",
+          "note": "methanol yield",
+          "unit": "kg/day",
+          "value": 104.5
+        },
+        "space_time_yield": {
+          "status": "present",
+          "as_reported": "2.27",
+          "note": "space-time-yield of reactor",
+          "unit": "kg/l hr",
+          "value": 2.27
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "310",
+          "note": "oil bath temperature, Table I",
+          "unit": "°C",
+          "value": 310
+        },
+        "test_kind": "activity",
+        "test_label": "Exp. 3"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp4",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Table I, Exp. 4 (A reactor)",
+        "conditions": {
+          "preheated_gas_temperature": {
+            "status": "present",
+            "as_reported": "275",
+            "note": "measured immediately after the preheater (Table I, footnote b)",
+            "unit": "°C",
+            "value": 275
+          }
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 4",
+            "note": "transcription withheld: sha256:912c0f8f32ed4fe1f1fc923948b09f9d69946dcb9c4d25888d97ab864d6ae7d4 chars:34",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.183,
+              0.92,
+              0.197
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 3, Table I, footnote",
+            "note": "quote withheld: sha256:5cccfdb20f73b165da7f38648b1c87d814d993725756f68f93f5ae29ca4c143d chars:45",
+            "passage": "10.1246-bcsj.35.1638/p3/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 3, Table I, footnote b",
+            "note": "quote withheld: sha256:10428843340b57bcbaed9fe68abb92dee1f0d1cec9168802e2253b102c3db409 chars:56",
+            "passage": "10.1246-bcsj.35.1638/p3/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "figure",
+            "locator": "p. 2, Fig. 2",
+            "note": "quote withheld: sha256:7c1016d3b0d616b262be61a21ce87cabc4160f9bac69ad79a9bac7452efc80f2 chars:53",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7, footnote 17",
+            "note": "quote withheld: sha256:75db869ec1c586fffe74a0591b8991c6ca0cc67b3175fb7850153d4684b57a2b chars:47",
+            "passage": "10.1246-bcsj.35.1638/p7/5",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "figure",
+            "agreement": "no_ocr",
+            "locator": "p. 2, Fig. 2, methanol concentration profile at catalyst outlet",
+            "note": "transcription withheld: sha256:6f9bad36c0c22d1fc613ab3149b933aa4facc5f58dafa019faf117d4740090c4 chars:75; second_reading withheld: sha256:375db8461e4b9a7e4bfad608a46b8bb8eeb5fa83c4168f125fe9d7e11a58f687 chars:357; quote withheld: sha256:7c1016d3b0d616b262be61a21ce87cabc4160f9bac69ad79a9bac7452efc80f2 chars:53",
+            "reading": "vision_ocr",
+            "region": [
+              0.84,
+              0.6,
+              0.9,
+              0.63
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "experiment_kind": "physical",
+        "flow_rate": {
+          "status": "present",
+          "as_reported": "54570",
+          "note": "flow rate of inlet gas",
+          "unit": "l/hr",
+          "value": 54570
+        },
+        "heating_mode": "fluid_bath",
+        "manipulation": "interventional",
+        "pressure": {
+          "status": "present",
+          "as_reported": "200kg./cm2",
+          "unit": "kg/cm2",
+          "value": 200
+        },
+        "production_rate": {
+          "status": "present",
+          "as_reported": "101",
+          "note": "methanol yield",
+          "unit": "kg/day",
+          "value": 101
+        },
+        "results": {
+          "axial_profiles": {
+            "status": "present",
+            "as_reported": "Fig. 2. Axial temperature and concentration profiles. Exp. 4.",
+            "text_value": "plotted in Figs. 2, 4, 5 and 7; not read"
+          },
+          "catalyst_inlet_temperature": {
+            "status": "present",
+            "as_reported": "348℃",
+            "unit": "°C",
+            "value": 348
+          },
+          "outlet_methanol_concentration": {
+            "status": "present",
+            "as_reported": "about 6 mole %",
+            "note": "read from Figure 2; last point of the methanol concentration profile (right-hand axis, mole %)",
+            "qualifier": "approximate",
+            "unit": "mol%",
+            "value": 6
+          }
+        },
+        "space_time_yield": {
+          "status": "present",
+          "as_reported": "2.11",
+          "note": "space-time-yield of reactor",
+          "unit": "kg/l hr",
+          "value": 2.11
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "310",
+          "note": "oil bath temperature, Table I",
+          "unit": "°C",
+          "value": 310
+        },
+        "test_kind": "activity",
+        "test_label": "Exp. 4"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp5",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Table I, Exp. 5 (B reactor)",
+        "conditions": {
+          "preheated_gas_temperature": {
+            "status": "present",
+            "as_reported": "240",
+            "note": "measured immediately after the preheater (Table I, footnote b)",
+            "unit": "°C",
+            "value": 240
+          }
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 5",
+            "note": "transcription withheld: sha256:f61ad3024ebba94cd3ca9462a8430891873e0285dc5dbe0c386dda71202fcfb8 chars:32",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.197,
+              0.92,
+              0.211
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 3, Table I, footnote",
+            "note": "quote withheld: sha256:5cccfdb20f73b165da7f38648b1c87d814d993725756f68f93f5ae29ca4c143d chars:45",
+            "passage": "10.1246-bcsj.35.1638/p3/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 3, Table I, footnote b",
+            "note": "quote withheld: sha256:10428843340b57bcbaed9fe68abb92dee1f0d1cec9168802e2253b102c3db409 chars:56",
+            "passage": "10.1246-bcsj.35.1638/p3/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "experiment_kind": "physical",
+        "flow_rate": {
+          "status": "present",
+          "as_reported": "32080",
+          "note": "flow rate of inlet gas",
+          "unit": "l/hr",
+          "value": 32080
+        },
+        "heating_mode": "fluid_bath",
+        "manipulation": "interventional",
+        "pressure": {
+          "status": "present",
+          "as_reported": "200kg./cm2",
+          "unit": "kg/cm2",
+          "value": 200
+        },
+        "production_rate": {
+          "status": "present",
+          "as_reported": "69",
+          "note": "methanol yield",
+          "unit": "kg/day",
+          "value": 69
+        },
+        "space_time_yield": {
+          "status": "present",
+          "as_reported": "1.44",
+          "note": "space-time-yield of reactor",
+          "unit": "kg/l hr",
+          "value": 1.44
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "310",
+          "note": "oil bath temperature, Table I",
+          "unit": "°C",
+          "value": 310
+        },
+        "test_kind": "activity",
+        "test_label": "Exp. 5"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp6",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Table I, Exp. 6 (B reactor)",
+        "conditions": {
+          "preheated_gas_temperature": {
+            "status": "present",
+            "as_reported": "222",
+            "note": "measured immediately after the preheater (Table I, footnote b)",
+            "unit": "°C",
+            "value": 222
+          }
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 6",
+            "note": "transcription withheld: sha256:8af851cfb18b185550b6da8c4ee019e9dd5ddb7b75937c2cc845c22946baa3c4 chars:34",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.212,
+              0.92,
+              0.226
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 3, Table I, footnote",
+            "note": "quote withheld: sha256:5cccfdb20f73b165da7f38648b1c87d814d993725756f68f93f5ae29ca4c143d chars:45",
+            "passage": "10.1246-bcsj.35.1638/p3/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 3, Table I, footnote b",
+            "note": "quote withheld: sha256:10428843340b57bcbaed9fe68abb92dee1f0d1cec9168802e2253b102c3db409 chars:56",
+            "passage": "10.1246-bcsj.35.1638/p3/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "figure",
+            "locator": "p. 3, Fig. 3",
+            "note": "quote withheld: sha256:f7a332d950d216bdc95f3de22d5c8dac278c8e82f335084f094d37e42d285f99 chars:58",
+            "passage": "10.1246-bcsj.35.1638/p3/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "figure",
+            "agreement": "no_ocr",
+            "locator": "p. 3, Fig. 3, methanol concentration profile at catalyst outlet",
+            "note": "transcription withheld: sha256:bd07ab252d1ad433d49f4a4ce0848b8de4fd8e6aed1886be2546a9961c8640b5 chars:81; second_reading withheld: sha256:50e5c64e983f855ceb622dc8282a3e67fa1a1fcdcf5ed62c739efef433dedf54 chars:196; quote withheld: sha256:f7a332d950d216bdc95f3de22d5c8dac278c8e82f335084f094d37e42d285f99 chars:58",
+            "passage": "10.1246-bcsj.35.1638/p3/1",
+            "reading": "vision_ocr",
+            "region": [
+              0.42,
+              0.455,
+              0.47,
+              0.478
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "experiment_kind": "physical",
+        "flow_rate": {
+          "status": "present",
+          "as_reported": "32170",
+          "note": "flow rate of inlet gas",
+          "unit": "l/hr",
+          "value": 32170
+        },
+        "heating_mode": "fluid_bath",
+        "manipulation": "interventional",
+        "pressure": {
+          "status": "present",
+          "as_reported": "200kg./cm2",
+          "unit": "kg/cm2",
+          "value": 200
+        },
+        "production_rate": {
+          "status": "present",
+          "as_reported": "67.5",
+          "note": "methanol yield",
+          "unit": "kg/day",
+          "value": 67.5
+        },
+        "results": {
+          "axial_profiles": {
+            "status": "present",
+            "as_reported": "Fig. 3. Axial temperature and concentra- tion profiles. Exps. 6 and 7.",
+            "text_value": "plotted in Figs. 3, 5 and 8; not read"
+          },
+          "outlet_methanol_concentration": {
+            "status": "present",
+            "as_reported": "about 7 mole %",
+            "note": "read from Figure 3; last point of the methanol concentration profile (right-hand axis, mole %)",
+            "qualifier": "approximate",
+            "unit": "mol%",
+            "value": 7
+          }
+        },
+        "space_time_yield": {
+          "status": "present",
+          "as_reported": "1.41",
+          "note": "space-time-yield of reactor",
+          "unit": "kg/l hr",
+          "value": 1.41
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "302",
+          "note": "oil bath temperature, Table I",
+          "unit": "°C",
+          "value": 302
+        },
+        "test_kind": "activity",
+        "test_label": "Exp. 6"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp7",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Table I, Exp. 7 (C reactor)",
+        "conditions": {
+          "preheated_gas_temperature": {
+            "status": "present",
+            "as_reported": "310",
+            "note": "measured immediately after the preheater (Table I, footnote b)",
+            "unit": "°C",
+            "value": 310
+          }
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 7",
+            "note": "transcription withheld: sha256:873e170ee52554d26cc63860c7857941fa3ea921cccba543d6fc75d91ec0a1e6 chars:34",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.226,
+              0.92,
+              0.24
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 3, Table I, footnote",
+            "note": "quote withheld: sha256:5cccfdb20f73b165da7f38648b1c87d814d993725756f68f93f5ae29ca4c143d chars:45",
+            "passage": "10.1246-bcsj.35.1638/p3/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 3, Table I, footnote b",
+            "note": "quote withheld: sha256:10428843340b57bcbaed9fe68abb92dee1f0d1cec9168802e2253b102c3db409 chars:56",
+            "passage": "10.1246-bcsj.35.1638/p3/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "figure",
+            "locator": "p. 3, Fig. 3",
+            "note": "quote withheld: sha256:f7a332d950d216bdc95f3de22d5c8dac278c8e82f335084f094d37e42d285f99 chars:58",
+            "passage": "10.1246-bcsj.35.1638/p3/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          },
+          {
+            "kind": "figure",
+            "agreement": "no_ocr",
+            "locator": "p. 3, Fig. 3, methanol concentration profile at catalyst outlet",
+            "note": "transcription withheld: sha256:dee88fa81f3ec8e0f9f43fdf85697398ca9a649f981e9c4a4aef882afc6abe7e chars:83; second_reading withheld: sha256:e4295523823e6dc91cf378f6dd574e8b23c622f5657831cba463ba3af5bbf579 chars:199; quote withheld: sha256:f7a332d950d216bdc95f3de22d5c8dac278c8e82f335084f094d37e42d285f99 chars:58",
+            "passage": "10.1246-bcsj.35.1638/p3/1",
+            "reading": "vision_ocr",
+            "region": [
+              0.42,
+              0.475,
+              0.47,
+              0.5
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "experiment_kind": "physical",
+        "flow_rate": {
+          "status": "present",
+          "as_reported": "44050",
+          "note": "flow rate of inlet gas",
+          "unit": "l/hr",
+          "value": 44050
+        },
+        "heating_mode": "fluid_bath",
+        "manipulation": "interventional",
+        "pressure": {
+          "status": "present",
+          "as_reported": "200kg./cm2",
+          "unit": "kg/cm2",
+          "value": 200
+        },
+        "production_rate": {
+          "status": "present",
+          "as_reported": "80.5",
+          "note": "methanol yield",
+          "unit": "kg/day",
+          "value": 80.5
+        },
+        "results": {
+          "axial_profiles": {
+            "status": "present",
+            "as_reported": "Fig. 3. Axial temperature and concentra- tion profiles. Exps. 6 and 7.",
+            "text_value": "plotted in Figs. 3, 5 and 8; not read"
+          },
+          "outlet_methanol_concentration": {
+            "status": "present",
+            "as_reported": "about 6 mole %",
+            "note": "read from Figure 3; last point of the methanol concentration profile (right-hand axis, mole %)",
+            "qualifier": "approximate",
+            "unit": "mol%",
+            "value": 6
+          }
+        },
+        "space_time_yield": {
+          "status": "present",
+          "as_reported": "1.68",
+          "note": "space-time-yield of reactor",
+          "unit": "kg/l hr",
+          "value": 1.68
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "310",
+          "note": "oil bath temperature, Table I",
+          "unit": "°C",
+          "value": 310
+        },
+        "test_kind": "activity",
+        "test_label": "Exp. 7"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/treatment/reduction",
+      "label": "Treatment",
+      "props": {
+        "name": "reduction (conditions not stated in this paper)",
+        "duration": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source"
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:585d40be855f0090a1b188052d1b581ade2f4858084100bddbdd6dacb09ad80f chars:37",
+            "passage": "10.1246-bcsj.35.1638/p2/2",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "pressure": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source"
+        },
+        "procedure_status": "completed",
+        "temperature": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source"
+        },
+        "treatment_kind": "reduction"
+      }
+    },
+    {
+      "id": "ex:msyn/source/10.1246-bcsj.35.1638",
+      "label": "Source",
+      "props": {
+        "name": "Concentration and Temperature Profiles in a Tubular Reactor for Methanol Synthesis with the Outer-wall of a Uniform Temperature. II. Profiles in Reactors with a Heat Exchanger Tube in the Catalyst Bed",
+        "kind": "article",
+        "description": "Published 1962 (publication year (bibliography)); in scope: before the 1966-01-01 cutoff. Text: 8 pages text_layer. Text not redistributed.",
+        "doi": "10.1246/bcsj.35.1638",
+        "licence": "no verified publisher licence; short excerpts quoted as evidence under fair use",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "Concentration and Temperature Profiles in a Tubular Reactor for Methanol Synthesis with the Outer-wall of a Uniform Temperature. II. Profiles in Reactors with a Heat Exchanger Tube in the Catalyst Bed",
+        "url": "https://doi.org/10.1246/bcsj.35.1638",
+        "venue": "Bulletin of the Chemical Society of Japan",
+        "year": 1962
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/analysis/a-reactor-profile-calculation/reported-in/10.1246-bcsj.35.1638",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 7",
+          "p. 7, footnote 17",
+          "p. 7, footnote 18"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/analysis/a-reactor-profile-calculation",
+      "target": "ex:msyn/source/10.1246-bcsj.35.1638"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/analysis/b-c-exchanger-profiles/reported-in/10.1246-bcsj.35.1638",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 8",
+          "p. 8, Table VII",
+          "p. 8, Table VII, Exp. 6, passage III and overall coefficients",
+          "p. 8, Table VII, Exp. 6, passages I and II",
+          "p. 8, Table VII, Exp. 7, passage III and overall coefficients",
+          "p. 8, Table VII, Exp. 7, passages I and II"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/analysis/b-c-exchanger-profiles",
+      "target": "ex:msyn/source/10.1246-bcsj.35.1638"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/analysis/cooling-coefficient-a-reactor/reported-in/10.1246-bcsj.35.1638",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4",
+          "p. 5",
+          "p. 5, Table III",
+          "p. 5, Table III, Exp. 1",
+          "p. 5, Table III, Exp. 2",
+          "p. 5, Table III, Exp. 3",
+          "p. 5, Table III, Exp. 4",
+          "p. 6, Table V",
+          "p. 6, Table V, Exp. 1",
+          "p. 6, Table V, Exp. 2",
+          "p. 6, Table V, Exp. 3",
+          "p. 6, Table V, Exp. 4",
+          "p. 6, Table VI",
+          "p. 6, Table VI, Exp. 1",
+          "p. 6, Table VI, Exp. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/analysis/cooling-coefficient-a-reactor",
+      "target": "ex:msyn/source/10.1246-bcsj.35.1638"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/catalyst/zno-cr2o3-cuo/reported-in/10.1246-bcsj.35.1638",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/catalyst/zno-cr2o3-cuo",
+      "target": "ex:msyn/source/10.1246-bcsj.35.1638"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/claim/a-reactor-doubles-sty/reported-in/10.1246-bcsj.35.1638",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/claim/a-reactor-doubles-sty",
+      "target": "ex:msyn/source/10.1246-bcsj.35.1638"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/claim/b-reactor-smaller-increase/reported-in/10.1246-bcsj.35.1638",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/claim/b-reactor-smaller-increase",
+      "target": "ex:msyn/source/10.1246-bcsj.35.1638"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/claim/bcalc-consistent/reported-in/10.1246-bcsj.35.1638",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/claim/bcalc-consistent",
+      "target": "ex:msyn/source/10.1246-bcsj.35.1638"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/claim/bed-resistance-one-third/reported-in/10.1246-bcsj.35.1638",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/claim/bed-resistance-one-third",
+      "target": "ex:msyn/source/10.1246-bcsj.35.1638"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/claim/bexp-maximum/reported-in/10.1246-bcsj.35.1638",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/claim/bexp-maximum",
+      "target": "ex:msyn/source/10.1246-bcsj.35.1638"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/claim/c-reactor-overcooled/reported-in/10.1246-bcsj.35.1638",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/claim/c-reactor-overcooled",
+      "target": "ex:msyn/source/10.1246-bcsj.35.1638"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/claim/calculated-profile-agrees/reported-in/10.1246-bcsj.35.1638",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/claim/calculated-profile-agrees",
+      "target": "ex:msyn/source/10.1246-bcsj.35.1638"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/claim/profile-maxima/reported-in/10.1246-bcsj.35.1638",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/claim/profile-maxima",
+      "target": "ex:msyn/source/10.1246-bcsj.35.1638"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/claim/second-passage-slopes-down/reported-in/10.1246-bcsj.35.1638",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 8"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/claim/second-passage-slopes-down",
+      "target": "ex:msyn/source/10.1246-bcsj.35.1638"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/claim/summary-only-single-tube/reported-in/10.1246-bcsj.35.1638",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 8, Summary"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/claim/summary-only-single-tube",
+      "target": "ex:msyn/source/10.1246-bcsj.35.1638"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp1/reported-in/10.1246-bcsj.35.1638",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, Table I, Exp. 1",
+          "p. 3, Table I, footnote a"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp1",
+      "target": "ex:msyn/source/10.1246-bcsj.35.1638"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp2/reported-in/10.1246-bcsj.35.1638",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, Table I, Exp. 2",
+          "p. 3, Table I, footnote a"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp2",
+      "target": "ex:msyn/source/10.1246-bcsj.35.1638"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp3/reported-in/10.1246-bcsj.35.1638",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, Table I, Exp. 3",
+          "p. 3, Table I, footnote a"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp3",
+      "target": "ex:msyn/source/10.1246-bcsj.35.1638"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp4/reported-in/10.1246-bcsj.35.1638",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, Table I, Exp. 4",
+          "p. 3, Table I, footnote a"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp4",
+      "target": "ex:msyn/source/10.1246-bcsj.35.1638"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp5/reported-in/10.1246-bcsj.35.1638",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, Table I, Exp. 5",
+          "p. 3, Table I, footnote a"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp5",
+      "target": "ex:msyn/source/10.1246-bcsj.35.1638"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp6/reported-in/10.1246-bcsj.35.1638",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, Table I, Exp. 6",
+          "p. 3, Table I, footnote a"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp6",
+      "target": "ex:msyn/source/10.1246-bcsj.35.1638"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp7/reported-in/10.1246-bcsj.35.1638",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, Table I, Exp. 7",
+          "p. 3, Table I, footnote a"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp7",
+      "target": "ex:msyn/source/10.1246-bcsj.35.1638"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/hypothesis/b-c-no-yield-gain/reported-in/10.1246-bcsj.35.1638",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 8"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/hypothesis/b-c-no-yield-gain",
+      "target": "ex:msyn/source/10.1246-bcsj.35.1638"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/hypothesis/b-c-profile-like-o/reported-in/10.1246-bcsj.35.1638",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 8"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/hypothesis/b-c-profile-like-o",
+      "target": "ex:msyn/source/10.1246-bcsj.35.1638"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/hypothesis/steep-radial-rise/reported-in/10.1246-bcsj.35.1638",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4",
+          "p. 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/hypothesis/steep-radial-rise",
+      "target": "ex:msyn/source/10.1246-bcsj.35.1638"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/1",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:85d090d134925f830cc6f669b544856d39eff36a89b16f7e319c5a37fb8df0e4 chars:162",
+            "passage": "10.1246-bcsj.35.1638/p2/2",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/catalyst/zno-cr2o3-cuo",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/10",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 1",
+            "note": "transcription withheld: sha256:77713b58fed9702b5d6c1c44872f3e84428b55af4a017cb976f2a1b433216377 chars:34",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.14,
+              0.92,
+              0.154
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "state": "reduced"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp1",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/sample/reactor-charge-2l"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/100",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 4",
+            "note": "transcription withheld: sha256:912c0f8f32ed4fe1f1fc923948b09f9d69946dcb9c4d25888d97ab864d6ae7d4 chars:34",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.183,
+              0.92,
+              0.197
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp4",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/claim/summary-only-single-tube"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/101",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 5",
+            "note": "transcription withheld: sha256:f61ad3024ebba94cd3ca9462a8430891873e0285dc5dbe0c386dda71202fcfb8 chars:32",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.197,
+              0.92,
+              0.211
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp5",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/claim/summary-only-single-tube"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/102",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 6",
+            "note": "transcription withheld: sha256:8af851cfb18b185550b6da8c4ee019e9dd5ddb7b75937c2cc845c22946baa3c4 chars:34",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.212,
+              0.92,
+              0.226
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp6",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/claim/summary-only-single-tube"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/103",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 7",
+            "note": "transcription withheld: sha256:873e170ee52554d26cc63860c7857941fa3ea921cccba543d6fc75d91ec0a1e6 chars:34",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.226,
+              0.92,
+              0.24
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp7",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/claim/summary-only-single-tube"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/104",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8, Summary",
+            "note": "quote withheld: sha256:b4d9b4989c510d475d4d6b90e890ac63216f8163ff2883d57003648f6d9053d4 chars:64",
+            "passage": "10.1246-bcsj.35.1638/p8/3",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/claim/summary-only-single-tube",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/reactor/a-reactor"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/105",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "context": [
+          "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp1",
+          "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp2",
+          "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp3",
+          "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp4",
+          "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp5",
+          "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp6",
+          "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp7"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:85d090d134925f830cc6f669b544856d39eff36a89b16f7e319c5a37fb8df0e4 chars:162",
+            "passage": "10.1246-bcsj.35.1638/p2/2",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/catalyst/zno-cr2o3-cuo",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/11",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 1",
+            "note": "transcription withheld: sha256:77713b58fed9702b5d6c1c44872f3e84428b55af4a017cb976f2a1b433216377 chars:34",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.14,
+              0.92,
+              0.154
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp1",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp1"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/12",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 1",
+            "note": "transcription withheld: sha256:77713b58fed9702b5d6c1c44872f3e84428b55af4a017cb976f2a1b433216377 chars:34",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.14,
+              0.92,
+              0.154
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp1",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/reactor/a-reactor"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/13",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 1",
+            "note": "transcription withheld: sha256:77713b58fed9702b5d6c1c44872f3e84428b55af4a017cb976f2a1b433216377 chars:34",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.14,
+              0.92,
+              0.154
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp1",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/14",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 2",
+            "note": "transcription withheld: sha256:73389c5c57cf3e4f29274ae20cb0ca7b9226fbbbca1e57e3111ce681df72935a chars:32",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.154,
+              0.92,
+              0.168
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp2",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/15",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 2",
+            "note": "transcription withheld: sha256:73389c5c57cf3e4f29274ae20cb0ca7b9226fbbbca1e57e3111ce681df72935a chars:32",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.154,
+              0.92,
+              0.168
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp2",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/16",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 3, Table I, footnote a",
+            "note": "quote withheld: sha256:4fe9907f5ef8f7b54aa5a2b878ff49ca59e2de6528164a9e313618a896d4b421 chars:56",
+            "passage": "10.1246-bcsj.35.1638/p3/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "(9.4)",
+          "unit": "vol.%",
+          "value": 9.4
+        },
+        "fraction_basis": "volume",
+        "role": "inert"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp2",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/species/inert-gas"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/17",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 2",
+            "note": "transcription withheld: sha256:73389c5c57cf3e4f29274ae20cb0ca7b9226fbbbca1e57e3111ce681df72935a chars:32",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.154,
+              0.92,
+              0.168
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "state": "reduced"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp2",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/sample/reactor-charge-2l"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/18",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 2",
+            "note": "transcription withheld: sha256:73389c5c57cf3e4f29274ae20cb0ca7b9226fbbbca1e57e3111ce681df72935a chars:32",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.154,
+              0.92,
+              0.168
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp2",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp2"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/19",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 2",
+            "note": "transcription withheld: sha256:73389c5c57cf3e4f29274ae20cb0ca7b9226fbbbca1e57e3111ce681df72935a chars:32",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.154,
+              0.92,
+              0.168
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp2",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/reactor/a-reactor"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/2",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:85d090d134925f830cc6f669b544856d39eff36a89b16f7e319c5a37fb8df0e4 chars:162",
+            "passage": "10.1246-bcsj.35.1638/p2/2",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/catalyst/zno-cr2o3-cuo",
+      "target": "ex:msyn/species/cr2o3"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/20",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 2",
+            "note": "transcription withheld: sha256:73389c5c57cf3e4f29274ae20cb0ca7b9226fbbbca1e57e3111ce681df72935a chars:32",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.154,
+              0.92,
+              0.168
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp2",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/21",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 3",
+            "note": "transcription withheld: sha256:398a523c185ae68d212c7afa9de8c877c2d54d0a616dc37f2916bb81b2c22310 chars:36",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.169,
+              0.92,
+              0.183
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp3",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/22",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 3",
+            "note": "transcription withheld: sha256:398a523c185ae68d212c7afa9de8c877c2d54d0a616dc37f2916bb81b2c22310 chars:36",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.169,
+              0.92,
+              0.183
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp3",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/23",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 3, Table I, footnote a",
+            "note": "quote withheld: sha256:4fe9907f5ef8f7b54aa5a2b878ff49ca59e2de6528164a9e313618a896d4b421 chars:56",
+            "passage": "10.1246-bcsj.35.1638/p3/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "(13.3)",
+          "unit": "vol.%",
+          "value": 13.3
+        },
+        "fraction_basis": "volume",
+        "role": "inert"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp3",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/species/inert-gas"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/24",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 3",
+            "note": "transcription withheld: sha256:398a523c185ae68d212c7afa9de8c877c2d54d0a616dc37f2916bb81b2c22310 chars:36",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.169,
+              0.92,
+              0.183
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "state": "reduced"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp3",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/sample/reactor-charge-2l"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/25",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 3",
+            "note": "transcription withheld: sha256:398a523c185ae68d212c7afa9de8c877c2d54d0a616dc37f2916bb81b2c22310 chars:36",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.169,
+              0.92,
+              0.183
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp3",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp3"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/26",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 3",
+            "note": "transcription withheld: sha256:398a523c185ae68d212c7afa9de8c877c2d54d0a616dc37f2916bb81b2c22310 chars:36",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.169,
+              0.92,
+              0.183
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp3",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/reactor/a-reactor"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/27",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 3",
+            "note": "transcription withheld: sha256:398a523c185ae68d212c7afa9de8c877c2d54d0a616dc37f2916bb81b2c22310 chars:36",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.169,
+              0.92,
+              0.183
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp3",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/28",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 4",
+            "note": "transcription withheld: sha256:912c0f8f32ed4fe1f1fc923948b09f9d69946dcb9c4d25888d97ab864d6ae7d4 chars:34",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.183,
+              0.92,
+              0.197
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp4",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/29",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 4",
+            "note": "transcription withheld: sha256:912c0f8f32ed4fe1f1fc923948b09f9d69946dcb9c4d25888d97ab864d6ae7d4 chars:34",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.183,
+              0.92,
+              0.197
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp4",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/3",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:85d090d134925f830cc6f669b544856d39eff36a89b16f7e319c5a37fb8df0e4 chars:162",
+            "passage": "10.1246-bcsj.35.1638/p2/2",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/catalyst/zno-cr2o3-cuo",
+      "target": "ex:msyn/species/cuo"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/30",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 3, Table I, footnote a",
+            "note": "quote withheld: sha256:4fe9907f5ef8f7b54aa5a2b878ff49ca59e2de6528164a9e313618a896d4b421 chars:56",
+            "passage": "10.1246-bcsj.35.1638/p3/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "(10.2)",
+          "unit": "vol.%",
+          "value": 10.2
+        },
+        "fraction_basis": "volume",
+        "role": "inert"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp4",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/species/inert-gas"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/31",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 4",
+            "note": "transcription withheld: sha256:912c0f8f32ed4fe1f1fc923948b09f9d69946dcb9c4d25888d97ab864d6ae7d4 chars:34",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.183,
+              0.92,
+              0.197
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "state": "reduced"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp4",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/sample/reactor-charge-2l"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/32",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 4",
+            "note": "transcription withheld: sha256:912c0f8f32ed4fe1f1fc923948b09f9d69946dcb9c4d25888d97ab864d6ae7d4 chars:34",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.183,
+              0.92,
+              0.197
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp4",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp4"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/33",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 4",
+            "note": "transcription withheld: sha256:912c0f8f32ed4fe1f1fc923948b09f9d69946dcb9c4d25888d97ab864d6ae7d4 chars:34",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.183,
+              0.92,
+              0.197
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp4",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/reactor/a-reactor"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/34",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 4",
+            "note": "transcription withheld: sha256:912c0f8f32ed4fe1f1fc923948b09f9d69946dcb9c4d25888d97ab864d6ae7d4 chars:34",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.183,
+              0.92,
+              0.197
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp4",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/35",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 5",
+            "note": "transcription withheld: sha256:f61ad3024ebba94cd3ca9462a8430891873e0285dc5dbe0c386dda71202fcfb8 chars:32",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.197,
+              0.92,
+              0.211
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp5",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/36",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 5",
+            "note": "transcription withheld: sha256:f61ad3024ebba94cd3ca9462a8430891873e0285dc5dbe0c386dda71202fcfb8 chars:32",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.197,
+              0.92,
+              0.211
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp5",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/37",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 3, Table I, footnote a",
+            "note": "quote withheld: sha256:4fe9907f5ef8f7b54aa5a2b878ff49ca59e2de6528164a9e313618a896d4b421 chars:56",
+            "passage": "10.1246-bcsj.35.1638/p3/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "(3.3)",
+          "unit": "vol.%",
+          "value": 3.3
+        },
+        "fraction_basis": "volume",
+        "role": "inert"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp5",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/species/inert-gas"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/38",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 5",
+            "note": "transcription withheld: sha256:f61ad3024ebba94cd3ca9462a8430891873e0285dc5dbe0c386dda71202fcfb8 chars:32",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.197,
+              0.92,
+              0.211
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "state": "reduced"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp5",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/sample/reactor-charge-2l"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/39",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 5",
+            "note": "transcription withheld: sha256:f61ad3024ebba94cd3ca9462a8430891873e0285dc5dbe0c386dda71202fcfb8 chars:32",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.197,
+              0.92,
+              0.211
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp5",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp5"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/4",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:85d090d134925f830cc6f669b544856d39eff36a89b16f7e319c5a37fb8df0e4 chars:162",
+            "passage": "10.1246-bcsj.35.1638/p2/2",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/sample/reactor-charge-2l",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/catalyst/zno-cr2o3-cuo"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/40",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 5",
+            "note": "transcription withheld: sha256:f61ad3024ebba94cd3ca9462a8430891873e0285dc5dbe0c386dda71202fcfb8 chars:32",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.197,
+              0.92,
+              0.211
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp5",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/reactor/b-reactor"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/41",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 5",
+            "note": "transcription withheld: sha256:f61ad3024ebba94cd3ca9462a8430891873e0285dc5dbe0c386dda71202fcfb8 chars:32",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.197,
+              0.92,
+              0.211
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp5",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/42",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 6",
+            "note": "transcription withheld: sha256:8af851cfb18b185550b6da8c4ee019e9dd5ddb7b75937c2cc845c22946baa3c4 chars:34",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.212,
+              0.92,
+              0.226
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp6",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/43",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 6",
+            "note": "transcription withheld: sha256:8af851cfb18b185550b6da8c4ee019e9dd5ddb7b75937c2cc845c22946baa3c4 chars:34",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.212,
+              0.92,
+              0.226
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp6",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/44",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 3, Table I, footnote a",
+            "note": "quote withheld: sha256:4fe9907f5ef8f7b54aa5a2b878ff49ca59e2de6528164a9e313618a896d4b421 chars:56",
+            "passage": "10.1246-bcsj.35.1638/p3/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "(7.2)",
+          "unit": "vol.%",
+          "value": 7.2
+        },
+        "fraction_basis": "volume",
+        "role": "inert"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp6",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/species/inert-gas"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/45",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 6",
+            "note": "transcription withheld: sha256:8af851cfb18b185550b6da8c4ee019e9dd5ddb7b75937c2cc845c22946baa3c4 chars:34",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.212,
+              0.92,
+              0.226
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "state": "reduced"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp6",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/sample/reactor-charge-2l"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/46",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 6",
+            "note": "transcription withheld: sha256:8af851cfb18b185550b6da8c4ee019e9dd5ddb7b75937c2cc845c22946baa3c4 chars:34",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.212,
+              0.92,
+              0.226
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp6",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp6"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/47",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 6",
+            "note": "transcription withheld: sha256:8af851cfb18b185550b6da8c4ee019e9dd5ddb7b75937c2cc845c22946baa3c4 chars:34",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.212,
+              0.92,
+              0.226
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp6",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/reactor/b-reactor"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/48",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 6",
+            "note": "transcription withheld: sha256:8af851cfb18b185550b6da8c4ee019e9dd5ddb7b75937c2cc845c22946baa3c4 chars:34",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.212,
+              0.92,
+              0.226
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp6",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/49",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 7",
+            "note": "transcription withheld: sha256:873e170ee52554d26cc63860c7857941fa3ea921cccba543d6fc75d91ec0a1e6 chars:34",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.226,
+              0.92,
+              0.24
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp7",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/5",
+      "type": "PREPARED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:85d090d134925f830cc6f669b544856d39eff36a89b16f7e319c5a37fb8df0e4 chars:162",
+            "passage": "10.1246-bcsj.35.1638/p2/2",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/sample/reactor-charge-2l",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/preparation/as-preceding-study"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/50",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 7",
+            "note": "transcription withheld: sha256:873e170ee52554d26cc63860c7857941fa3ea921cccba543d6fc75d91ec0a1e6 chars:34",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.226,
+              0.92,
+              0.24
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp7",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/51",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 3, Table I, footnote a",
+            "note": "quote withheld: sha256:4fe9907f5ef8f7b54aa5a2b878ff49ca59e2de6528164a9e313618a896d4b421 chars:56",
+            "passage": "10.1246-bcsj.35.1638/p3/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "(9.2)",
+          "unit": "vol.%",
+          "value": 9.2
+        },
+        "fraction_basis": "volume",
+        "role": "inert"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp7",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/species/inert-gas"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/52",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 7",
+            "note": "transcription withheld: sha256:873e170ee52554d26cc63860c7857941fa3ea921cccba543d6fc75d91ec0a1e6 chars:34",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.226,
+              0.92,
+              0.24
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "state": "reduced"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp7",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/sample/reactor-charge-2l"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/53",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 7",
+            "note": "transcription withheld: sha256:873e170ee52554d26cc63860c7857941fa3ea921cccba543d6fc75d91ec0a1e6 chars:34",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.226,
+              0.92,
+              0.24
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp7",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp7"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/54",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 7",
+            "note": "transcription withheld: sha256:873e170ee52554d26cc63860c7857941fa3ea921cccba543d6fc75d91ec0a1e6 chars:34",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.226,
+              0.92,
+              0.24
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp7",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/reactor/c-reactor"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/55",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 7",
+            "note": "transcription withheld: sha256:873e170ee52554d26cc63860c7857941fa3ea921cccba543d6fc75d91ec0a1e6 chars:34",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.226,
+              0.92,
+              0.24
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp7",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/56",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:b7663739ad34fe1c3f8da0c70c3fbc1b401197b5f62ce0c1630ed2e40dc2a5c5 chars:82",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "role": "data"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/analysis/cooling-coefficient-a-reactor",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp1"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/57",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:b7663739ad34fe1c3f8da0c70c3fbc1b401197b5f62ce0c1630ed2e40dc2a5c5 chars:82",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "role": "data"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/analysis/cooling-coefficient-a-reactor",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp2"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/58",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:b7663739ad34fe1c3f8da0c70c3fbc1b401197b5f62ce0c1630ed2e40dc2a5c5 chars:82",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "role": "data"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/analysis/cooling-coefficient-a-reactor",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp3"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/59",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:b7663739ad34fe1c3f8da0c70c3fbc1b401197b5f62ce0c1630ed2e40dc2a5c5 chars:82",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "role": "data"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/analysis/cooling-coefficient-a-reactor",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp4"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/6",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:585d40be855f0090a1b188052d1b581ade2f4858084100bddbdd6dacb09ad80f chars:37",
+            "passage": "10.1246-bcsj.35.1638/p2/2",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "order": 1
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/sample/reactor-charge-2l",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/treatment/reduction"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/60",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:49d25b5695d7de98eba4a2d1e54d6afaee94c704c5a734a523d059d109ccdf2f chars:19",
+            "passage": "10.1246-bcsj.35.1638/p4/3",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "role": "heat balance"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/analysis/cooling-coefficient-a-reactor",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/61",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:a57df2701f0d50fed7d72994671faa3ea2c1bb0afeff16d3370cb932b89b377e chars:54",
+            "passage": "10.1246-bcsj.35.1638/p7/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "role": "data"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/analysis/a-reactor-profile-calculation",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp4"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/62",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:b01083b4af04cd4afab09227e340bf08c12123140d3d1ee34d32f1a817cccab2 chars:99",
+            "passage": "10.1246-bcsj.35.1638/p7/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "role": "parameter"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/analysis/a-reactor-profile-calculation",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/analysis/cooling-coefficient-a-reactor"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/63",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:f5918ef1a8725a274b61621adfe1a6f1057ef3d942fcb09ab57eef13c42b07df chars:75",
+            "passage": "10.1246-bcsj.35.1638/p8/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "role": "data"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/analysis/b-c-exchanger-profiles",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp6"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/64",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:f5918ef1a8725a274b61621adfe1a6f1057ef3d942fcb09ab57eef13c42b07df chars:75",
+            "passage": "10.1246-bcsj.35.1638/p8/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "role": "data"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/analysis/b-c-exchanger-profiles",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp7"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/65",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:c1e5b6e0e663d3f44e60fff0e4dccf6a67621fb6d79a65e5be4603b1ef983703 chars:24",
+            "passage": "10.1246-bcsj.35.1638/p2/4",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp2",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/claim/a-reactor-doubles-sty"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/66",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:c1e5b6e0e663d3f44e60fff0e4dccf6a67621fb6d79a65e5be4603b1ef983703 chars:24",
+            "passage": "10.1246-bcsj.35.1638/p2/4",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp3",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/claim/a-reactor-doubles-sty"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/67",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:e69708b58fee185f143f4c81e2c701056de5f55dcd819182f25f3ddaf606e7ed chars:61",
+            "passage": "10.1246-bcsj.35.1638/p2/4",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/claim/a-reactor-doubles-sty",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/reactor/a-reactor"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/68",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:bec0f598390840e459a918947e9c60c31d50aa1cc550830ca7a9140b2d20d80a chars:23",
+            "passage": "10.1246-bcsj.35.1638/p2/4",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp1",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/claim/b-reactor-smaller-increase"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/69",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:bec0f598390840e459a918947e9c60c31d50aa1cc550830ca7a9140b2d20d80a chars:23",
+            "passage": "10.1246-bcsj.35.1638/p2/4",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp6",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/claim/b-reactor-smaller-increase"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/7",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 1",
+            "note": "transcription withheld: sha256:77713b58fed9702b5d6c1c44872f3e84428b55af4a017cb976f2a1b433216377 chars:34",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.14,
+              0.92,
+              0.154
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp1",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/70",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:a8f87ddd3f8afc3338ccacc08cbcac91f6c4e2cb46db554f4da3c3e562edb258 chars:65",
+            "passage": "10.1246-bcsj.35.1638/p2/4",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/claim/b-reactor-smaller-increase",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/reactor/b-reactor"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/71",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:345c35595ca76d16026c2970a6b14b8d3e2011c474d8c19711663209a13f06bc chars:10",
+            "passage": "10.1246-bcsj.35.1638/p2/4",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp7",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/claim/c-reactor-overcooled"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/72",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:e5287745562f671ac7f66189db3bd00a3395bffe1e455c02813c444fc6778b07 chars:60",
+            "passage": "10.1246-bcsj.35.1638/p2/4",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/claim/c-reactor-overcooled",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/reactor/c-reactor"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/73",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:830cd7ababbe6227cf34fab33ef9dbf551eea82787c270016b544266a074f13e chars:172",
+            "passage": "10.1246-bcsj.35.1638/p3/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp4",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/claim/profile-maxima"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/74",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:830cd7ababbe6227cf34fab33ef9dbf551eea82787c270016b544266a074f13e chars:172",
+            "passage": "10.1246-bcsj.35.1638/p3/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp6",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/claim/profile-maxima"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/75",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:830cd7ababbe6227cf34fab33ef9dbf551eea82787c270016b544266a074f13e chars:172",
+            "passage": "10.1246-bcsj.35.1638/p3/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp7",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/claim/profile-maxima"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/76",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:a0e18105842158b941e5cfd91ad17a5fdfb3704f6cecfd571aac696c0f3f59a2 chars:71",
+            "passage": "10.1246-bcsj.35.1638/p3/2",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/claim/profile-maxima",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/reactor/a-reactor"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/77",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:a0e18105842158b941e5cfd91ad17a5fdfb3704f6cecfd571aac696c0f3f59a2 chars:71",
+            "passage": "10.1246-bcsj.35.1638/p3/2",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/claim/profile-maxima",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/reactor/b-reactor"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/78",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:a0e18105842158b941e5cfd91ad17a5fdfb3704f6cecfd571aac696c0f3f59a2 chars:71",
+            "passage": "10.1246-bcsj.35.1638/p3/2",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/claim/profile-maxima",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/reactor/c-reactor"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/79",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:11a48c010e13b82cedf93fbaed87f4378b362b8300422f8c695e49dad1c6b368 chars:122",
+            "passage": "10.1246-bcsj.35.1638/p4/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/hypothesis/steep-radial-rise",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/reactor/a-reactor"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/8",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 1",
+            "note": "transcription withheld: sha256:77713b58fed9702b5d6c1c44872f3e84428b55af4a017cb976f2a1b433216377 chars:34",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.14,
+              0.92,
+              0.154
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp1",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/80",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:56117b7cb6172bc1df49a2baed3ce43c53096d21cb48d43a12c46e9581602b90 chars:63",
+            "passage": "10.1246-bcsj.35.1638/p4/5",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/analysis/cooling-coefficient-a-reactor",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/claim/bexp-maximum"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/81",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:b2b28682a20555a2285ada011a37dd03ee8ac71197bca0c42619a203e380b7c3 chars:81",
+            "passage": "10.1246-bcsj.35.1638/p4/4",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/claim/bexp-maximum",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/reactor/a-reactor"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/82",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:a59d247f181bb7a33bce2181dc32cb3b1c4f56b9ca61e66fbb9ae2cc833ad3b7 chars:117",
+            "passage": "10.1246-bcsj.35.1638/p6/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/analysis/cooling-coefficient-a-reactor",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/claim/bcalc-consistent"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/83",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:f47a1e210c97d37a0d9d56e226d26129d13433e59c4596239d41be64eb632b1e chars:36",
+            "passage": "10.1246-bcsj.35.1638/p6/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/claim/bcalc-consistent",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/analysis/cooling-coefficient-a-reactor"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/84",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:616d615ae0305e4af78b094b467afbfa2e3acdd1c1726df09204db74b6985c97 chars:21",
+            "passage": "10.1246-bcsj.35.1638/p6/2",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/analysis/cooling-coefficient-a-reactor",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/claim/bed-resistance-one-third"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/85",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:3ab505ab6c7d78d4ca6b2c8ffd79fc35777ba94907f0383098f32280f824faea chars:92",
+            "passage": "10.1246-bcsj.35.1638/p6/2",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/claim/bed-resistance-one-third",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/reactor/a-reactor"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/86",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:02e61d40aed3f8e37fc77fef747c8fce9c8e1bba266283e3e7a8c4f2233405e7 chars:47",
+            "passage": "10.1246-bcsj.35.1638/p7/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/analysis/a-reactor-profile-calculation",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/claim/calculated-profile-agrees"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/87",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "p. 7, Fig. 7",
+            "note": "quote withheld: sha256:f841f5bfa9c4671dde7dd1c8689c67152d8646942115c300dcea39e2b37e4483 chars:74",
+            "passage": "10.1246-bcsj.35.1638/p7/2",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/claim/calculated-profile-agrees",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/reactor/a-reactor"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/88",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:2894db8f0bf8eb7b23f427228b8be840a2359f7aa74d31e9efc592602d5d1a94 chars:32",
+            "passage": "10.1246-bcsj.35.1638/p8/2",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/analysis/b-c-exchanger-profiles",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/claim/second-passage-slopes-down"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/89",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:2e8578257a4e41b8a70822b90b70c757e8826a8f0cef8a9e11865f616f1e08d4 chars:77",
+            "passage": "10.1246-bcsj.35.1638/p8/2",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/claim/second-passage-slopes-down",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/reactor/b-reactor"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/9",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 3, Table I, footnote a",
+            "note": "quote withheld: sha256:4fe9907f5ef8f7b54aa5a2b878ff49ca59e2de6528164a9e313618a896d4b421 chars:56",
+            "passage": "10.1246-bcsj.35.1638/p3/1",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "(11.0)",
+          "unit": "vol.%",
+          "value": 11.0
+        },
+        "fraction_basis": "volume",
+        "role": "inert"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/feed/inlet-exp1",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/species/inert-gas"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/90",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:2e8578257a4e41b8a70822b90b70c757e8826a8f0cef8a9e11865f616f1e08d4 chars:77",
+            "passage": "10.1246-bcsj.35.1638/p8/2",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/claim/second-passage-slopes-down",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/reactor/c-reactor"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/91",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:e4ac7423a648601531ad5c30a62f12e126f105aa08640709d02e58d7f5fed529 chars:33",
+            "passage": "10.1246-bcsj.35.1638/p7/3",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/hypothesis/b-c-profile-like-o",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/reactor/b-reactor"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/92",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:e4ac7423a648601531ad5c30a62f12e126f105aa08640709d02e58d7f5fed529 chars:33",
+            "passage": "10.1246-bcsj.35.1638/p7/3",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/hypothesis/b-c-profile-like-o",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/reactor/c-reactor"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/93",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:2894db8f0bf8eb7b23f427228b8be840a2359f7aa74d31e9efc592602d5d1a94 chars:32",
+            "passage": "10.1246-bcsj.35.1638/p8/2",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/analysis/b-c-exchanger-profiles",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/hypothesis/b-c-profile-like-o"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/94",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:e4ac7423a648601531ad5c30a62f12e126f105aa08640709d02e58d7f5fed529 chars:33",
+            "passage": "10.1246-bcsj.35.1638/p7/3",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/hypothesis/b-c-no-yield-gain",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/reactor/b-reactor"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/95",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:e4ac7423a648601531ad5c30a62f12e126f105aa08640709d02e58d7f5fed529 chars:33",
+            "passage": "10.1246-bcsj.35.1638/p7/3",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/hypothesis/b-c-no-yield-gain",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/reactor/c-reactor"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/96",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:2894db8f0bf8eb7b23f427228b8be840a2359f7aa74d31e9efc592602d5d1a94 chars:32",
+            "passage": "10.1246-bcsj.35.1638/p8/2",
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/analysis/b-c-exchanger-profiles",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/hypothesis/b-c-no-yield-gain"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/97",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 1",
+            "note": "transcription withheld: sha256:77713b58fed9702b5d6c1c44872f3e84428b55af4a017cb976f2a1b433216377 chars:34",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.14,
+              0.92,
+              0.154
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp1",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/claim/summary-only-single-tube"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/98",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 2",
+            "note": "transcription withheld: sha256:73389c5c57cf3e4f29274ae20cb0ca7b9226fbbbca1e57e3111ce681df72935a chars:32",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.154,
+              0.92,
+              0.168
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp2",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/claim/summary-only-single-tube"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/link/99",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table I, Exp. 3",
+            "note": "transcription withheld: sha256:398a523c185ae68d212c7afa9de8c877c2d54d0a616dc37f2916bb81b2c22310 chars:36",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.169,
+              0.92,
+              0.183
+            ],
+            "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp3",
+      "target": "ex:msyn/10.1246-bcsj.35.1638/claim/summary-only-single-tube"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/preparation/as-preceding-study/reported-in/10.1246-bcsj.35.1638",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/preparation/as-preceding-study",
+      "target": "ex:msyn/source/10.1246-bcsj.35.1638"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/reactor/a-reactor/reported-in/10.1246-bcsj.35.1638",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/reactor/a-reactor",
+      "target": "ex:msyn/source/10.1246-bcsj.35.1638"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/reactor/b-reactor/reported-in/10.1246-bcsj.35.1638",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/reactor/b-reactor",
+      "target": "ex:msyn/source/10.1246-bcsj.35.1638"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/reactor/c-reactor/reported-in/10.1246-bcsj.35.1638",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/reactor/c-reactor",
+      "target": "ex:msyn/source/10.1246-bcsj.35.1638"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/sample/reactor-charge-2l/reported-in/10.1246-bcsj.35.1638",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/sample/reactor-charge-2l",
+      "target": "ex:msyn/source/10.1246-bcsj.35.1638"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/species/inert-gas/reported-in/10.1246-bcsj.35.1638",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, Table I, footnote a"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/species/inert-gas",
+      "target": "ex:msyn/source/10.1246-bcsj.35.1638"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp1/reported-in/10.1246-bcsj.35.1638",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, Table I, Exp. 1",
+          "p. 3, Table I, footnote",
+          "p. 3, Table I, footnote b"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp1",
+      "target": "ex:msyn/source/10.1246-bcsj.35.1638"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp2/reported-in/10.1246-bcsj.35.1638",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, Table I, Exp. 2",
+          "p. 3, Table I, footnote",
+          "p. 3, Table I, footnote b"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp2",
+      "target": "ex:msyn/source/10.1246-bcsj.35.1638"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp3/reported-in/10.1246-bcsj.35.1638",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, Table I, Exp. 3",
+          "p. 3, Table I, footnote",
+          "p. 3, Table I, footnote b"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp3",
+      "target": "ex:msyn/source/10.1246-bcsj.35.1638"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp4/reported-in/10.1246-bcsj.35.1638",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, Fig. 2",
+          "p. 2, Fig. 2, methanol concentration profile at catalyst outlet",
+          "p. 3, Table I, Exp. 4",
+          "p. 3, Table I, footnote",
+          "p. 3, Table I, footnote b",
+          "p. 7, footnote 17"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp4",
+      "target": "ex:msyn/source/10.1246-bcsj.35.1638"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp5/reported-in/10.1246-bcsj.35.1638",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, Table I, Exp. 5",
+          "p. 3, Table I, footnote",
+          "p. 3, Table I, footnote b"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp5",
+      "target": "ex:msyn/source/10.1246-bcsj.35.1638"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp6/reported-in/10.1246-bcsj.35.1638",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, Fig. 3",
+          "p. 3, Fig. 3, methanol concentration profile at catalyst outlet",
+          "p. 3, Table I, Exp. 6",
+          "p. 3, Table I, footnote",
+          "p. 3, Table I, footnote b"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp6",
+      "target": "ex:msyn/source/10.1246-bcsj.35.1638"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp7/reported-in/10.1246-bcsj.35.1638",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, Fig. 3",
+          "p. 3, Fig. 3, methanol concentration profile at catalyst outlet",
+          "p. 3, Table I, Exp. 7",
+          "p. 3, Table I, footnote",
+          "p. 3, Table I, footnote b"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/test/table1-exp7",
+      "target": "ex:msyn/source/10.1246-bcsj.35.1638"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.35.1638/treatment/reduction/reported-in/10.1246-bcsj.35.1638",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-bcsj.35.1638/treatment/reduction",
+      "target": "ex:msyn/source/10.1246-bcsj.35.1638"
+    },
+    {
+      "id": "ex:msyn/source/10.1246-bcsj.35.1638/authored-by/1",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 1,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/10.1246-bcsj.35.1638",
+      "target": "ex:msyn/person/yoshisada-ogino"
+    },
+    {
+      "id": "ex:msyn/source/10.1246-bcsj.35.1638/authored-by/2",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 2,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/10.1246-bcsj.35.1638",
+      "target": "ex:msyn/person/masaaki-oba"
+    },
+    {
+      "id": "ex:msyn/source/10.1246-bcsj.35.1638/authored-by/3",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 3,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/10.1246-bcsj.35.1638",
+      "target": "ex:msyn/person/kin-ya-shimomura"
+    },
+    {
+      "id": "ex:msyn/source/10.1246-bcsj.35.1638/authored-by/4",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 4,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/10.1246-bcsj.35.1638",
+      "target": "ex:msyn/person/hiroshi-uchida"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/10.1246-bcsj.35.1638"
+}

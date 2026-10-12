@@ -1,0 +1,428 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/10.1007-bf00462114/catalyst/methanol-katalysator",
+      "label": "Catalyst",
+      "props": {
+        "name": "Methanol-Katalysator (methanol catalyst, composition not stated)",
+        "catalyst_family": "not_reported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Belavskaja abstract",
+            "note": "quote withheld: sha256:848c4e12534c06a9325b727e1a52213b4dae368804c161718d35b8d868d891a0 chars:118",
+            "passage": "10.1007-bf00462114/p1/3",
+            "source": "ex:msyn/source/10.1007-bf00462114"
+          }
+        ],
+        "note": "The abstract names only a 'Methanol-Katalysator' in which zinc oxide is determined; no composition is given."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1007-bf00462114/characterization/complexometric-zno",
+      "label": "Characterization",
+      "props": {
+        "name": "complexometric (EDTA) titration of zinc oxide in the methanol catalyst",
+        "conditions": {
+          "aliquot": {
+            "status": "present",
+            "as_reported": "100 ml",
+            "unit": "ml",
+            "value": 100
+          },
+          "buffer": {
+            "status": "present",
+            "as_reported": "10 ml PufferlSsung",
+            "unit": "ml",
+            "value": 10
+          },
+          "end_point": {
+            "status": "present",
+            "as_reported": "bis zum Farbumsehlag nach Grtin",
+            "text_value": "colour change to green"
+          },
+          "indicator_drops": {
+            "status": "present",
+            "as_reported": "8--10 Tropfen IndioatorlSsung",
+            "lower": 8,
+            "unit": "drops",
+            "upper": 10
+          },
+          "kclo3_mixed": {
+            "status": "present",
+            "as_reported": "5 g KCIO a",
+            "note": "mixed with the sample",
+            "unit": "g",
+            "value": 5
+          },
+          "kclo3_overlay": {
+            "status": "present",
+            "as_reported": ",1--2 g I(ClOa",
+            "lower": 1,
+            "note": "layered evenly over the mixture",
+            "unit": "g",
+            "upper": 2
+          },
+          "leach_hcl": {
+            "status": "present",
+            "as_reported": "5ml konz. Salzs/~ure",
+            "unit": "ml",
+            "value": 5
+          },
+          "leach_water": {
+            "status": "present",
+            "as_reported": "100--150ml heil3em Wasser",
+            "lower": 100,
+            "unit": "ml",
+            "upper": 150
+          },
+          "made_up_volume": {
+            "status": "present",
+            "as_reported": "auf 500 ml",
+            "unit": "ml",
+            "value": 500
+          },
+          "sample_mass": {
+            "status": "present",
+            "as_reported": "1 g feingepulverter Katalysator",
+            "unit": "g",
+            "value": 1
+          },
+          "titrant": {
+            "status": "present",
+            "as_reported": "0,1 n J~DTA-LSsung",
+            "text_value": "0.1 n ÄDTA solution"
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Belavskaja abstract",
+            "note": "quote withheld: sha256:848c4e12534c06a9325b727e1a52213b4dae368804c161718d35b8d868d891a0 chars:118",
+            "passage": "10.1007-bf00462114/p1/3",
+            "source": "ex:msyn/source/10.1007-bf00462114"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Belavskaja abstract",
+            "note": "quote withheld: sha256:e78d557003231b6b3149a987cdcd2e2b655eedf30e807d7a1082ad52f6e46790 chars:128",
+            "passage": "10.1007-bf00462114/p1/4",
+            "source": "ex:msyn/source/10.1007-bf00462114"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Belavskaja abstract",
+            "note": "quote withheld: sha256:d8e1bd77fca24b17e619474489d213ddb8fe2ff8a2066359c060fb709f9f4746 chars:108",
+            "passage": "10.1007-bf00462114/p1/4",
+            "source": "ex:msyn/source/10.1007-bf00462114"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Belavskaja abstract",
+            "note": "quote withheld: sha256:56c8aee2813b28864676a2fa24e1d8381d433a81cca4ffe01ab40b89865af35e chars:111",
+            "passage": "10.1007-bf00462114/p1/5",
+            "source": "ex:msyn/source/10.1007-bf00462114"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Belavskaja abstract",
+            "note": "quote withheld: sha256:8598f7ad3432813ea785cbe7dbcaedea8409bdebf32577d593595870751f0749 chars:108",
+            "passage": "10.1007-bf00462114/p2/1",
+            "source": "ex:msyn/source/10.1007-bf00462114"
+          }
+        ],
+        "experiment_status": "completed",
+        "note": "Fusion with KClO3 in a porcelain crucible, leaching with hot water and conc. HCl, neutralisation with ammonia (Congo paper), EDTA titration with chrome dark blue indicator. abstract by A. v. Wilpert of Ju. I. Belavskaja, Zavodskaja Laborat. 22, 422-423 (1956) [Russian].",
+        "results": {
+          "assessment": {
+            "status": "present",
+            "as_reported": "Die Ergebnisse sind in beiden F~llen befriedigend",
+            "text_value": "satisfactory"
+          }
+        },
+        "technique": "komplexometrische Titration (complexometric titration with ÄDTA solution)"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1007-bf00462114/claim/method-satisfactory",
+      "label": "Claim",
+      "props": {
+        "name": "complexometric ZnO determination satisfactory",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Belavskaja abstract",
+            "note": "quote withheld: sha256:e95356aa84469e61fb2bfc6b7276baf9568461bdbfbee8f45e8c0d916f1e9404 chars:141",
+            "passage": "10.1007-bf00462114/p2/1",
+            "source": "ex:msyn/source/10.1007-bf00462114"
+          }
+        ],
+        "inference_type": "interventional",
+        "note": "the result is Belavskaja's, as reported in this abstract (abstract by A. v. Wilpert of Ju. I. Belavskaja, Zavodskaja Laborat. 22, 422-423 (1956) [Russian])",
+        "statement": "The complexometric titration gives satisfactory results for zinc oxide both in zinc white and in the methanol catalyst; the deviations from the official method (GOST 202-41) are attributed to the inaccuracy of the latter."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1007-bf00462114/sample/catalyst-powder-1g",
+      "label": "CatalystSample",
+      "props": {
+        "name": "1 g finely powdered methanol catalyst (analysis portion)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Belavskaja abstract",
+            "note": "quote withheld: sha256:e78d557003231b6b3149a987cdcd2e2b655eedf30e807d7a1082ad52f6e46790 chars:128",
+            "passage": "10.1007-bf00462114/p1/4",
+            "source": "ex:msyn/source/10.1007-bf00462114"
+          }
+        ],
+        "preparation_status": "not_reported",
+        "sample_kind": "powder"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1007-bf00462114/species/zinkweiss",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "Zinkweiß (zinc white)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Belavskaja abstract",
+            "note": "quote withheld: sha256:7775f0453a632fa3eb7d676f6cf9ad672a6c748b18a56b0eaf33d745bc6c7339 chars:115",
+            "passage": "10.1007-bf00462114/p1/3",
+            "source": "ex:msyn/source/10.1007-bf00462114"
+          }
+        ],
+        "note": "a commercial pigment; kept source-specific. 'Zinkwei$' is the text layer's rendering of 'Zinkweiß'"
+      }
+    },
+    {
+      "id": "ex:msyn/source/10.1007-bf00462114",
+      "label": "Source",
+      "props": {
+        "name": "Für die Bestimmung des Zinkoxyds im Zinkweiß und im Methanol-Katalysator",
+        "kind": "article",
+        "description": "Published 1957 (publication year (bibliography)); in scope: before the 1966-01-01 cutoff. Text: 2 pages text_layer. Text not redistributed.",
+        "doi": "10.1007/bf00462114",
+        "licence": "no verified publisher licence; short excerpts quoted as evidence under fair use",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "Für die Bestimmung des Zinkoxyds im Zinkweiß und im Methanol-Katalysator",
+        "url": "https://doi.org/10.1007/bf00462114",
+        "venue": "Fresenius' Zeitschrift für analytische Chemie",
+        "year": 1957
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/10.1007-bf00462114/catalyst/methanol-katalysator/reported-in/10.1007-bf00462114",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, Belavskaja abstract"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1007-bf00462114/catalyst/methanol-katalysator",
+      "target": "ex:msyn/source/10.1007-bf00462114"
+    },
+    {
+      "id": "ex:msyn/10.1007-bf00462114/characterization/complexometric-zno/reported-in/10.1007-bf00462114",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, Belavskaja abstract",
+          "p. 2, Belavskaja abstract"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1007-bf00462114/characterization/complexometric-zno",
+      "target": "ex:msyn/source/10.1007-bf00462114"
+    },
+    {
+      "id": "ex:msyn/10.1007-bf00462114/claim/method-satisfactory/reported-in/10.1007-bf00462114",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, Belavskaja abstract"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1007-bf00462114/claim/method-satisfactory",
+      "target": "ex:msyn/source/10.1007-bf00462114"
+    },
+    {
+      "id": "ex:msyn/10.1007-bf00462114/link/1",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Belavskaja abstract",
+            "note": "quote withheld: sha256:848c4e12534c06a9325b727e1a52213b4dae368804c161718d35b8d868d891a0 chars:118",
+            "passage": "10.1007-bf00462114/p1/3",
+            "source": "ex:msyn/source/10.1007-bf00462114"
+          }
+        ],
+        "note": "zinc oxide is the analyte determined in the catalyst; its fraction is not given",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/10.1007-bf00462114/catalyst/methanol-katalysator",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/10.1007-bf00462114/link/2",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Belavskaja abstract",
+            "note": "quote withheld: sha256:e78d557003231b6b3149a987cdcd2e2b655eedf30e807d7a1082ad52f6e46790 chars:128",
+            "passage": "10.1007-bf00462114/p1/4",
+            "source": "ex:msyn/source/10.1007-bf00462114"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1007-bf00462114/sample/catalyst-powder-1g",
+      "target": "ex:msyn/10.1007-bf00462114/catalyst/methanol-katalysator"
+    },
+    {
+      "id": "ex:msyn/10.1007-bf00462114/link/3",
+      "type": "CHARACTERIZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Belavskaja abstract",
+            "note": "quote withheld: sha256:e78d557003231b6b3149a987cdcd2e2b655eedf30e807d7a1082ad52f6e46790 chars:128",
+            "passage": "10.1007-bf00462114/p1/4",
+            "source": "ex:msyn/source/10.1007-bf00462114"
+          }
+        ],
+        "state": "not_reported"
+      },
+      "source": "ex:msyn/10.1007-bf00462114/characterization/complexometric-zno",
+      "target": "ex:msyn/10.1007-bf00462114/sample/catalyst-powder-1g"
+    },
+    {
+      "id": "ex:msyn/10.1007-bf00462114/link/4",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Belavskaja abstract",
+            "note": "quote withheld: sha256:e95356aa84469e61fb2bfc6b7276baf9568461bdbfbee8f45e8c0d916f1e9404 chars:141",
+            "passage": "10.1007-bf00462114/p2/1",
+            "source": "ex:msyn/source/10.1007-bf00462114"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1007-bf00462114/characterization/complexometric-zno",
+      "target": "ex:msyn/10.1007-bf00462114/claim/method-satisfactory"
+    },
+    {
+      "id": "ex:msyn/10.1007-bf00462114/link/5",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Belavskaja abstract",
+            "note": "quote withheld: sha256:848c4e12534c06a9325b727e1a52213b4dae368804c161718d35b8d868d891a0 chars:118",
+            "passage": "10.1007-bf00462114/p1/3",
+            "source": "ex:msyn/source/10.1007-bf00462114"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1007-bf00462114/claim/method-satisfactory",
+      "target": "ex:msyn/10.1007-bf00462114/catalyst/methanol-katalysator"
+    },
+    {
+      "id": "ex:msyn/10.1007-bf00462114/link/6",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Belavskaja abstract",
+            "note": "quote withheld: sha256:848c4e12534c06a9325b727e1a52213b4dae368804c161718d35b8d868d891a0 chars:118",
+            "passage": "10.1007-bf00462114/p1/3",
+            "source": "ex:msyn/source/10.1007-bf00462114"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1007-bf00462114/claim/method-satisfactory",
+      "target": "ex:msyn/10.1007-bf00462114/species/zinkweiss"
+    },
+    {
+      "id": "ex:msyn/10.1007-bf00462114/link/7",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Belavskaja abstract",
+            "note": "quote withheld: sha256:848c4e12534c06a9325b727e1a52213b4dae368804c161718d35b8d868d891a0 chars:118",
+            "passage": "10.1007-bf00462114/p1/3",
+            "source": "ex:msyn/source/10.1007-bf00462114"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1007-bf00462114/claim/method-satisfactory",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/10.1007-bf00462114/sample/catalyst-powder-1g/reported-in/10.1007-bf00462114",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, Belavskaja abstract"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1007-bf00462114/sample/catalyst-powder-1g",
+      "target": "ex:msyn/source/10.1007-bf00462114"
+    },
+    {
+      "id": "ex:msyn/10.1007-bf00462114/species/zinkweiss/reported-in/10.1007-bf00462114",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, Belavskaja abstract"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1007-bf00462114/species/zinkweiss",
+      "target": "ex:msyn/source/10.1007-bf00462114"
+    },
+    {
+      "id": "ex:msyn/source/10.1007-bf00462114/authored-by/1",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 1,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/10.1007-bf00462114",
+      "target": "ex:msyn/person/a-v-wilpert"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/10.1007-bf00462114"
+}

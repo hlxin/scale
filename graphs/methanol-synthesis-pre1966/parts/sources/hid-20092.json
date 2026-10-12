@@ -1,0 +1,4358 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/hid-20092/catalyst/methanol-synthesis-catalyst",
+      "label": "Catalyst",
+      "props": {
+        "name": "methanol-synthesis catalyst of the design (composition not stated)",
+        "catalyst_family": "not_reported",
+        "description": "The catalyst of the designed methanol converter: small cylinders 1 cm long and 1 cm in diameter, 1 m3 in 6 catalyst zones. The report does not name its composition.",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 40, Bijlage 3 A",
+            "note": "quote withheld: sha256:0a6500a63859a83e05826724df8eed0a89f7aa73463ed40dd98cfdcea3f26b7f chars:82",
+            "passage": "hid-20092/p40/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 39, Bijlage 3 A",
+            "note": "quote withheld: sha256:8e638ca2d797eb740931756f13f700f6fb6970620a926a085b9defacae6af5b1 chars:77",
+            "passage": "hid-20092/p39/2",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 40, Bijlage 3 A",
+            "note": "quote withheld: sha256:5c6fe89f10783a5a514ed58e5bdfb3b5242230a976b52f7e3562ee7f9c5db7fe chars:60",
+            "passage": "hid-20092/p40/2",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 40, Bijlage 3 A",
+            "note": "quote withheld: sha256:193885f1bcb7ab42cb0c5d832551c126360af461550f4834a748fe2d75ed9d39 chars:45",
+            "passage": "hid-20092/p40/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "generality": "particular",
+        "properties": {
+          "catalyst_volume": {
+            "status": "present",
+            "as_reported": "werd voor het katalysatorvolume 1 m3 genomen",
+            "unit": "m3",
+            "value": 1
+          },
+          "equivalent_sphere_diameter": {
+            "status": "present",
+            "as_reported": "wordt dan 1,15 cm",
+            "basis": "mean diameter of a 1 cm cylinder referred to a sphere of the same volume",
+            "unit": "cm",
+            "value": 1.15
+          },
+          "number_of_catalyst_zones": {
+            "status": "present",
+            "as_reported": "6 kat.zones",
+            "unit": "1",
+            "value": 6
+          },
+          "pellet_diameter": {
+            "status": "present",
+            "as_reported": "een lengte en diameter van 1 cm",
+            "unit": "cm",
+            "value": 1
+          },
+          "pellet_length": {
+            "status": "present",
+            "as_reported": "een lengte en diameter van 1 cm",
+            "unit": "cm",
+            "value": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20092/catalyst/nickel-on-ceramic-cubes",
+      "label": "Catalyst",
+      "props": {
+        "name": "metallic nickel on ceramic cubes (synthesis-gas reactor)",
+        "catalyst_family": "metal",
+        "description": "Catalyst mass of the tubes of the synthesis-gas reactor: ceramic cubes of 0.75 in. covered with metallic nickel.",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 33, Bijlage 1 C",
+            "note": "quote withheld: sha256:adcd70797c3d7c62af2eb405fe6202e946433550ec69442f4341d1fb5b5e7562 chars:93",
+            "passage": "hid-20092/p33/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "generality": "particular",
+        "nominal_formula": "Ni"
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/active-carbon-removes-poisons",
+      "label": "Claim",
+      "props": {
+        "name": "active carbon removes poisons",
+        "claim_kind": "other",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 22, Actieve koolvat",
+            "note": "quote withheld: sha256:3f1a27fabd330e21bd7742a6845ecf20ec6c537e3134216acb4eebd2153da645 chars:176",
+            "passage": "hid-20092/p22/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "statement": "Before the synthesis the gas is passed at room temperature through a vessel of active carbon pellets (7 x 10 mm) to remove any Fe(CO)5 formed and other compounds poisonous to the catalyst (COS)."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/catalyst-choice-avoids-byproducts",
+      "label": "Claim",
+      "props": {
+        "name": "catalyst choice avoids byproducts",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5, II A",
+            "note": "quote withheld: sha256:794f7ae85bda8f37fbc19b2bfe2e23fc48cd44085c98dac0c27b38d8e62498b8 chars:102",
+            "passage": "hid-20092/p5/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "statement": "In the high-pressure synthesis from CO and H2 the choice of catalyst and reaction conditions is very important to prevent by-product formation."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/co-below-20-percent",
+      "label": "Claim",
+      "props": {
+        "name": "co below 20 percent",
+        "claim_kind": "causal",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 37, Bijlage 3",
+            "note": "quote withheld: sha256:d852a11bb0a8198196a9179f9991159d1a997cb131937890f851f3acbae5690a chars:163",
+            "passage": "hid-20092/p37/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "cited from litt. 16 (FIAT Final Report 888)",
+        "statement": "The CO content of the converter inlet gas must be below 20 %, otherwise too many higher alcohols are formed; hence the H2/CO ratio must be much higher than 2 : 1."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/co2-route-less-exothermic",
+      "label": "Claim",
+      "props": {
+        "name": "co2 route less exothermic",
+        "claim_kind": "comparison",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5, II B",
+            "note": "quote withheld: sha256:10face16df1279bfe76ba5adea5cd4f1973bede42f55b0d65a190daedee73a6f chars:170",
+            "passage": "hid-20092/p5/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "inference_type": "theoretical",
+        "statement": "In the synthesis from CO2 and H2 the hydrogen consumption per mol methanol is higher than from CO, but the reaction is much less exothermic, so local overheating of the catalyst mass is more easily avoided."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/cold-gas-15-percent-exit-360c",
+      "label": "Claim",
+      "props": {
+        "name": "cold-gas fraction and exit temperature",
+        "claim_kind": "other",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 39, Bijlage 3",
+            "note": "quote withheld: sha256:7fdd2bba5e73c646719f1a6836f95da77f9db367644fac87589e4995be59c99c chars:62",
+            "passage": "hid-20092/p39/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 39, Bijlage 3",
+            "note": "quote withheld: sha256:a47dbbf6903cfcd6bae3d0296af2503440b3d112bb5fe6ec893cabe01a431bef chars:94",
+            "passage": "hid-20092/p39/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 41, Bijlage 3 B",
+            "note": "quote withheld: sha256:57720f7d9b7dab1c7841331a28a6d60cb512d6237724c4e866f6a9b5ccb4fe38 chars:109",
+            "passage": "hid-20092/p41/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 41, Bijlage 3 B",
+            "note": "quote withheld: sha256:e2d67a844949c1024f49aafb99b876e82c9dbaa9d4bf82883c57ffd2a9e3a090 chars:70",
+            "passage": "hid-20092/p41/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "inference_type": "computational",
+        "statement": "About 15 % (6000 Nm3/h, 15.5 % of the total gas) of cold synthesis gas is used instead of the about 25 % needed for isothermal operation; with the hot gas entering at 330 °C the exit temperature is about 360 °C (361.5 °C calculated), which is not harmful because the equilibrium approach is small."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/converter-cooling-needed",
+      "label": "Claim",
+      "props": {
+        "name": "converter cooling needed",
+        "claim_kind": "causal",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 38, Bijlage 3",
+            "note": "quote withheld: sha256:14af32d0f1eed8e54232d7bf7f39c9ca419854a57affe7014b733ccd309f3751 chars:223",
+            "passage": "hid-20092/p38/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 38, Bijlage 3",
+            "note": "quote withheld: sha256:e2cce3e7dcc9184d1bbfc444ec8109da0e2f45632a796f6725640c9d8a098a5d chars:155",
+            "passage": "hid-20092/p38/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "inference_type": "theoretical",
+        "statement": "Methanol formation is exothermic; because the temperature rise shifts the equilibrium unfavourably and increases the unwanted side reactions, the gases in the reactor should be cooled, here by injecting cold synthesis gas between the catalyst zones."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/crude-methanol-byproducts",
+      "label": "Claim",
+      "props": {
+        "name": "crude methanol byproducts",
+        "claim_kind": "other",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 21, VI B",
+            "note": "quote withheld: sha256:ccf32ba05c29f7a82b4716927af8124a46dfed3dd451baad35f2d2ae9f6cbdc1 chars:132",
+            "passage": "hid-20092/p21/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 21, VI B",
+            "note": "quote withheld: sha256:bed674afccb7d76de2c6ab2ebe491a1628b3415cda7b1844a0018b0d5b7a2010 chars:60",
+            "passage": "hid-20092/p21/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 13, V C",
+            "note": "quote withheld: sha256:ed0a3132e46818d001e222430aaedbe6af0715503be127791a65285d4644fefb chars:135",
+            "passage": "hid-20092/p13/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "assumption based on litt. 10 and 16",
+        "statement": "The crude methanol was assumed, in rough agreement with industrial data, to contain besides methanol dimethyl ether, isobutyl alcohol, a di-isopropyl alcohol and oil (heptene); dimethyl ether is removed by a pre-distillation."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/design-conversion-15-percent",
+      "label": "Claim",
+      "props": {
+        "name": "design conversion 15 % per pass",
+        "claim_kind": "other",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 37, Bijlage 3",
+            "note": "quote withheld: sha256:63c9ea5f9b707f45b4080247b211486bd9701e7a857f687320ea3a79ad127977 chars:175",
+            "passage": "hid-20092/p37/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 37, Bijlage 3",
+            "note": "quote withheld: sha256:b24a18f75b1bdc8545a464cdd14633403b04592b08d70199700522c26a7da958 chars:114",
+            "passage": "hid-20092/p37/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "statement": "A conversion of 15 % per pass (on CO fed) is the economic optimum: a very high conversion needs so long a contact time that too many by-products form and the reactor becomes too large; a very low conversion gives too large a circulation and pumping cost and a harder separation of crude methanol."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/design-h2-co-3-7",
+      "label": "Claim",
+      "props": {
+        "name": "design H2/CO 3.7 at converter inlet",
+        "claim_kind": "other",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 37, Bijlage 3",
+            "note": "quote withheld: sha256:fbc9c3d9c92d28bcc09232eabeccad8b8761ccf259fdf85f32d5f5d211aaf145 chars:79",
+            "passage": "hid-20092/p37/2",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 20, VI B",
+            "note": "quote withheld: sha256:39774796e05745dd4ba02721dec55ef7df970c1ca1e7d9e0e9500fb3241babdf chars:164",
+            "passage": "hid-20092/p20/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "statement": "The H2/CO ratio in the converter inlet gas was set at 3.7; in practice 3.5 to 4 is used."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/design-pressure-260-atm",
+      "label": "Claim",
+      "props": {
+        "name": "design pressure 260 atm",
+        "claim_kind": "other",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 37, Bijlage 3, De werkdruk",
+            "note": "quote withheld: sha256:4123f18273c675320ebb5420ab92045d9a329bdd605b3c98d6aa2dc9ff9e3ec1 chars:136",
+            "passage": "hid-20092/p37/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "statement": "The working pressure was set at 260 atm, a compromise between the more favourable equilibrium at higher pressure and the larger equipment and compression costs."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/design-temperature-330c",
+      "label": "Claim",
+      "props": {
+        "name": "design reaction temperature about 330 °C",
+        "claim_kind": "other",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 37, Bijlage 3, De reactie temperatuur",
+            "note": "'3300C' reads 330 °C; quote withheld: sha256:0a152c049f721e9759e796450004bde6383c87e3d9e87e5f559f3728e045964f chars:158",
+            "passage": "hid-20092/p37/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "statement": "The reaction temperature of the converter is about 330 °C: at lower temperature the reaction rate is too low; much higher, the equilibrium shifts unfavourably and more by-products form."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/equilibrium-constants-newton-dodge",
+      "label": "Claim",
+      "props": {
+        "name": "equilibrium constants newton dodge",
+        "claim_kind": "finding",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12, B",
+            "note": "quote withheld: sha256:4776f0f129698757a5d793cb27b5439b4f53266c8950c27efd3b6ccf3b050226 chars:69",
+            "passage": "hid-20092/p12/2",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 12, B, table of K",
+            "note": "columns t °C and K; K is 1,5 x 10-3 at 260, 3,1 x 10-4 at 300, 8,7 x 10-5 at 340 and 2,7 x 10-5 at 380 (OCR of the multiplication signs); quote withheld: sha256:6b1e1b7174f11d013f111d83180e1fb8528ab827a647cf408fe42a3904df704e chars:42",
+            "passage": "hid-20092/p12/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "cited from Newton and Dodge (litt. 9, J. Am. Chem. Soc.)",
+        "statement": "Equilibrium constant of CO + 2 H2 -> CH3OH: 1.5 x 10^-3 at 260 °C, 3.1 x 10^-4 at 300 °C, 8.7 x 10^-5 at 340 °C and 2.7 x 10^-5 at 380 °C."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/fresh-gas-h2-co-2-35",
+      "label": "Claim",
+      "props": {
+        "name": "fresh gas h2 co 2 35",
+        "claim_kind": "other",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 30, Bijlage 1 A",
+            "note": "quote withheld: sha256:f265c8b0c1bc0fee55fb70fe8650d7c0d5799d58208d19590f24face892ea657 chars:85",
+            "passage": "hid-20092/p30/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 30, Bijlage 1 A",
+            "note": "quote withheld: sha256:839a61141ce9a12d10fc5272ac166fbde7806fca059c4b3d24fbf430d1b3d634 chars:134",
+            "passage": "hid-20092/p30/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "inference_type": "computational",
+        "statement": "The fresh synthesis gas must have an H2/CO ratio of 2.2 to 2.4; the synthesis-gas reactor conditions were calculated for H2/CO = 2.35 in the product."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/gas-load-40000",
+      "label": "Claim",
+      "props": {
+        "name": "gas load 40000",
+        "claim_kind": "other",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 39, Bijlage 3 A",
+            "note": "quote withheld: sha256:2b0dc38f348dd0bd2a956b639565be0066ef6ff143f5bfc5a3617486a4694077 chars:140",
+            "passage": "hid-20092/p39/2",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 39, Bijlage 3 A",
+            "note": "quote withheld: sha256:8e638ca2d797eb740931756f13f700f6fb6970620a926a085b9defacae6af5b1 chars:77",
+            "passage": "hid-20092/p39/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "the gas load is cited from litt. 15 (Winnacker-Weingaertner)",
+        "statement": "The gas load of a methanol reactor working under analogous conditions and with the same catalyst is about 40,000 Nm3/hr per m3 of catalyst; for the 38,830 Nm3/hr of this reactor a catalyst volume of 1 m3 was taken."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/h2-co-4-at-8-10-fold-recycle",
+      "label": "Claim",
+      "props": {
+        "name": "h2 co 4 at 8 10 fold recycle",
+        "claim_kind": "finding",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 20, VI B",
+            "note": "quote withheld: sha256:1f034e7f18c952d796cb426b26ad8b6bdad8e770b089209801007880336db997 chars:86",
+            "passage": "hid-20092/p20/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "cited from litt. 15 (Winnacker-Weingaertner)",
+        "statement": "With an 8- to 10-fold gas recycle an H2/CO ratio of about 4 proved very effective."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/heat-of-methanol-formation",
+      "label": "Claim",
+      "props": {
+        "name": "heat of methanol formation",
+        "claim_kind": "other",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 41, Bijlage 3 B",
+            "note": "quote withheld: sha256:e52236b17a258c678b80d82fff54e01bf7e11b37b5b5e278a4cd01c90618eb04 chars:93",
+            "passage": "hid-20092/p41/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 41, Bijlage 3 B",
+            "note": "quote withheld: sha256:ff2aaba11d68814e73513f0ed471a0b35d6be12595b0a25dee9dac4e90bd8f85 chars:29",
+            "passage": "hid-20092/p41/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "inference_type": "computational",
+        "note": "21600 is printed with the unit kcal/mol, 21,6 kcal on p. 5",
+        "statement": "The heat released in methanol formation is 21600 kcal/mol (as printed); the methanol production is 43.9 kmol per hour, giving a heat release of 950,000 kcal/hr in the reactor."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/high-pressure-favours-conversion",
+      "label": "Claim",
+      "props": {
+        "name": "high pressure favours conversion",
+        "claim_kind": "causal",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 13, B",
+            "note": "quote withheld: sha256:9b80961461374bff3286fa1d395f48343e11887314796ecb42346032dba9c6f5 chars:143",
+            "passage": "hid-20092/p13/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "inference_type": "theoretical",
+        "statement": "Because of the volume decrease of the reaction, high pressure (a few hundred atm) favours the conversion considerably."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/inert-gas-13-percent",
+      "label": "Claim",
+      "props": {
+        "name": "inert gas 13 percent",
+        "claim_kind": "other",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 20, VI B",
+            "note": "quote withheld: sha256:f828576cedc9efbfa833aea241718e6402116c3eb18f39c327b566cf92956d80 chars:78",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "statement": "There is an optimum inert-gas (mainly N2) percentage in the recycle gas: a high percentage gives high pumping costs and a less favourable conversion, a low one needs much purge; in practice it is allowed to rise to about 13 %."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/narrow-temperature-window",
+      "label": "Claim",
+      "props": {
+        "name": "narrow temperature window",
+        "claim_kind": "conclusion",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12, B",
+            "note": "quote withheld: sha256:082ecef785d5e4a3b47969c0a6d1b660202d9b006b705f933e7ceb635839ee7e chars:227",
+            "passage": "hid-20092/p12/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "inference_type": "theoretical",
+        "statement": "The temperature range in which the synthesis can be realized is small: well below 300 °C the reaction rate is so small that the reactor capacity becomes very low; above 400 °C the equilibrium becomes unfavourable."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/nh3-o2-injection-sulfur",
+      "label": "Claim",
+      "props": {
+        "name": "nh3 o2 injection sulfur",
+        "claim_kind": "other",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 24, VI B",
+            "note": "quote withheld: sha256:97a83340b2dd2bd1d1fa5dc227bec941f45972807e9e192895f4fd8edd06b041 chars:90",
+            "passage": "hid-20092/p24/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "statement": "Beforehand the gas is injected with 0.5 g NH3 per m3 gas with some O2 to oxidize the sulfur compounds."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/no-temperature-gradient-needed",
+      "label": "Claim",
+      "props": {
+        "name": "no temperature gradient needed",
+        "claim_kind": "conclusion",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 39, Bijlage 3",
+            "note": "quote withheld: sha256:6e30030aa1f4da444b33d46d624650ae477fce21a2e2bc48da7e15502dabe2a1 chars:88",
+            "passage": "hid-20092/p39/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 39, Bijlage 3",
+            "note": "quote withheld: sha256:01216c980e3652392414dc5da4da4a3c373e67f13e4334abff0d56ee49f5043d chars:130",
+            "passage": "hid-20092/p39/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "inference_type": "computational",
+        "statement": "Since equilibrium is far from being approached at both 340 °C and 360 °C (equilibrium approach 22.8 % and 26.6 %), applying an optimal falling temperature gradient over the reactor has no point."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/recycle-ratio-9-74",
+      "label": "Claim",
+      "props": {
+        "name": "recycle ratio 9 74",
+        "claim_kind": "other",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 22, VI B",
+            "note": "quote withheld: sha256:eb7a1d48cf3f0a77509583b43690a6650b3f0a9f9a7a1c64773f3f3ad02175d7 chars:45",
+            "passage": "hid-20092/p22/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "inference_type": "computational",
+        "statement": "The material balance gives a recycle ratio (reactor gas B / fresh feed A, in moles) of x = 9.74."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/route-a-co-h2-chosen",
+      "label": "Claim",
+      "props": {
+        "name": "design choice: methanol from CO and H2",
+        "claim_kind": "other",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6, II",
+            "note": "quote withheld: sha256:530b5cc9fc1a9e4d02a12e8e66177178ecafc95e322697277df913d1a91cc8c0 chars:184",
+            "passage": "hid-20092/p6/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "statement": "Method A, high-pressure synthesis from CO and H2, was chosen because by-products were not wanted and the aim was only methanol with the lowest possible hydrogen consumption."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/small-co2-excess-not-removed",
+      "label": "Claim",
+      "props": {
+        "name": "small co2 excess not removed",
+        "claim_kind": "other",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 19, Zuivering van het synthesegas",
+            "note": "quote withheld: sha256:797b663000643c41b97e7a79bafe37c2f0615b30c99b9938371a70eb4704a17c chars:176",
+            "passage": "hid-20092/p19/2",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 19, Zuivering van het synthesegas",
+            "note": "quote withheld: sha256:2cb6506e84288df5ae480b9cb8e2d3356ad33bd4fe012961bcceb4db67e36016 chars:159",
+            "passage": "hid-20092/p19/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "statement": "The small excess of CO2 in the synthesis gas does not disturb the methanol synthesis and can also be converted to methanol, so removing it was not considered worthwhile; the amount is too small to justify a CO2 absorption plant."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/zno-absorbs-sulfur",
+      "label": "Claim",
+      "props": {
+        "name": "zno absorbs sulfur",
+        "claim_kind": "other",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 16, Absorptietank voor Zwavelverbindingen",
+            "note": "quote withheld: sha256:4b0002af193f1e1aafc7fd63ece83719c0bffccc96ad8216c9ecfb361cf8306c chars:113",
+            "passage": "hid-20092/p16/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 15",
+            "note": "quote withheld: sha256:054601ef37ff2c0365ee1b4b12002cf6e88ad4d806cb9daf8af2ed3d09ff15dc chars:47",
+            "passage": "hid-20092/p15/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "statement": "Although the natural gas was assumed sulfur-free, the gas can if needed be passed through a tank of cylindrical zinc-oxide tablets (0.1875 x 0.5 in.) that convert H2S and mercaptans into ZnS."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20092/feed/converter-inlet-gas",
+      "label": "Feed",
+      "props": {
+        "name": "methanol converter inlet gas (reactor gas B)",
+        "description": "Composition of the gas entering the methanol converter (fresh gas plus recycle), mol %: H2 67.4, CO 18.3, N2 13.0, CH4 0.6, CO2 0.7. Assumed equal to the reactor gas of the I.G. Farben plant at Oppau.",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 42, Bijlage 4",
+            "note": "quote withheld: sha256:37f59182575a91c743fc3f9266248262360a3d0a699a4d5b1b4067e7ad3ad5c5 chars:26",
+            "passage": "hid-20092/p42/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 42, Bijlage 4, inlet gas",
+            "note": "'CBit-' is CH4 in the text layer; quote withheld: sha256:616adaf7a15fb4b3e407be862a70ba8d7a123bedaba2de5c4db15752e5f62176 chars:45",
+            "passage": "hid-20092/p42/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 21, VI B",
+            "note": "quote withheld: sha256:c1adbac925cf27756cb8d49a9a7d7945bc741c232fdb67356b9d4614f28fb5f2 chars:101",
+            "passage": "hid-20092/p21/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "ratios": {
+          "h2_co_ratio": {
+            "status": "present",
+            "as_reported": "Wij stelden een verhouding van 3,7.",
+            "note": "the design H2/CO ratio at the converter inlet (p. 37)",
+            "unit": "1",
+            "value": 3.7
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20092/feed/fresh-synthesis-gas",
+      "label": "Feed",
+      "props": {
+        "name": "fresh synthesis gas to the methanol synthesis (H2/CO = 2.35)",
+        "description": "Calculated composition of the synthesis gas after the water is condensed (feed A of the methanol synthesis): H2 68.2 %, CO 29.1 %, CO2 0.8 %, CH4 0.1 %, N2 1.8 %; H2/CO = 2.35. The CO2 is not removed.",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 19, Zuivering van het synthesegas",
+            "note": "quote withheld: sha256:fcec577e34a8878d4eba32847c722be10c5a0962755e2f2bb17bd4012cfdc40b chars:175",
+            "passage": "hid-20092/p19/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 19, Zuivering van het synthesegas",
+            "note": "quote withheld: sha256:7e60667e66f23dcc832ab607310c09b199c87df2d965d9571af599103ebe1fd7 chars:32",
+            "passage": "hid-20092/p19/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 19, Zuivering van het synthesegas",
+            "note": "quote withheld: sha256:c626d4e8c74100e33c23e7ce340f46e61d333c3ba751ec7a26df48511713287d chars:21",
+            "passage": "hid-20092/p19/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 19, Zuivering van het synthesegas",
+            "note": "quote withheld: sha256:06286fcbe387ff69fd73c21d609403600cb873a8260ca7f2d1a4fc9444af8bb1 chars:19",
+            "passage": "hid-20092/p19/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 19, Zuivering van het synthesegas",
+            "note": "'C~' is CH4; quote withheld: sha256:072dd4d7873efe4384f207cf215a1a928effa685d90f706361ed97bb97ee8403 chars:18",
+            "passage": "hid-20092/p19/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 19, Zuivering van het synthesegas",
+            "note": "quote withheld: sha256:3ede60d7d1ce27f235240e94393243109bbafd8903e669b43076a578e8cc41d6 chars:18",
+            "passage": "hid-20092/p19/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "ratios": {
+          "h2_co_ratio": {
+            "status": "present",
+            "as_reported": "H2ICO = 2,35",
+            "unit": "1",
+            "value": 2.35
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20092/feed/natural-gas-wanneperveen",
+      "label": "Feed",
+      "props": {
+        "name": "natural gas (assumed analysis of the Wanneperveen wells)",
+        "description": "Natural gas composition assumed for the design, cited from an analysis of the wells at Wanneperveen (litt. 2); contains no hydrogen sulfide or mercaptans; 1042 Nm3/h to the synthesis-gas reactor.",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 15",
+            "note": "quote withheld: sha256:02da5128a58c0f395583873dbde13d3029d384b93878a2e8758bcdcb69076b93 chars:101",
+            "passage": "hid-20092/p15/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 15, natural gas analysis",
+            "note": "OCR of the text layer: 'Cl' = C1, '03' = C3, '04' = C4, '002' = CO2, '02' = O2; quote withheld: sha256:df0dd29581575afa337c217aa09b1b647c93569c7462f9f9b42853e1a38c185f chars:56",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 15",
+            "note": "quote withheld: sha256:054601ef37ff2c0365ee1b4b12002cf6e88ad4d806cb9daf8af2ed3d09ff15dc chars:47",
+            "passage": "hid-20092/p15/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "note": "cited from litt. 2 (Chem. Weekblad 48, 1952, 591)"
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20092/hypothesis/rate-proportional-to-distance-from-equilibrium",
+      "label": "Hypothesis",
+      "props": {
+        "name": "rate proportional to distance from equilibrium",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 38, Bijlage 3",
+            "note": "quote withheld: sha256:8d03c3aa32cb6561a243dadb84f4e2c2b0eb0527068743fd229bec8ecca33030 chars:63",
+            "passage": "hid-20092/p38/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 38, Bijlage 3",
+            "note": "quote withheld: sha256:610dd92d2b261fd6aa06a9468a1a810f4103725d9561f8fde1c967ae63737b98 chars:88",
+            "passage": "hid-20092/p38/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "hypothesis_kind": "auxiliary",
+        "hypothesis_status": "proposed",
+        "note": "the equation is garbled in the text layer ('dp = K (p - p) cit· evenwicht')",
+        "statement": "The rate of methanol formation can be written dp/dt = K (p_equilibrium - p), with p the partial pressure of CH3OH in the reactor gas and K the rate constant under the reactor conditions and catalyst activity; the reactor then works optimally at a maximum of K (p_eq - p) in each catalyst zone."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20092/material/ceramic-cubes",
+      "label": "Material",
+      "props": {
+        "name": "ceramic cubes of 0.75 in. (keramische kubi van 0,75\")",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 33, Bijlage 1 C",
+            "note": "quote withheld: sha256:e3887212deca031a802a011753fa8a402dc1917b7dba982bc3ab860203d5cacd chars:49",
+            "passage": "hid-20092/p33/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20092/reaction/co2-reforming",
+      "label": "Reaction",
+      "props": {
+        "name": "CO2 reforming of methane (reaction 6)",
+        "equation": "CH4 + CO2 -> 2 CO + 2 H2",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 10, reaction (6)",
+            "note": "'C~' is CH4 in the text layer; quote withheld: sha256:f58974000e605b629e0e5a4169937a0a72f719e285321c811669780d9cbec68c chars:14",
+            "passage": "hid-20092/p10/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20092/reaction/steam-reforming-to-co",
+      "label": "Reaction",
+      "props": {
+        "name": "steam reforming of methane to CO and H2 (reaction 4)",
+        "equation": "CH4 + H2O -> 3 H2 + CO",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 10, reaction (4)",
+            "note": "quote withheld: sha256:81a2a0f0ac9aca2cb00267710ab10547d7931db2c5a1ebabd19a7e674ded9642 chars:16",
+            "passage": "hid-20092/p10/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20092/reactor/methanol-converter",
+      "label": "Reactor",
+      "props": {
+        "name": "designed methanol converter (6 catalyst zones, cold-gas injection)",
+        "description": "Catalyst bed of 0.53 m diameter and 3.5 m length in 6 catalyst zones with 5 cooling zones between them, cooled by injecting cold synthesis gas; total length 7 m.",
+        "design_status": "planned",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 38, Bijlage 3",
+            "note": "quote withheld: sha256:e2cce3e7dcc9184d1bbfc444ec8109da0e2f45632a796f6725640c9d8a098a5d chars:155",
+            "passage": "hid-20092/p38/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 39, Bijlage 3 A",
+            "note": "quote withheld: sha256:4a40bc1fc9f5d9d9574175baafd7445f27e429544df9566729e20117c9e1eb10 chars:34",
+            "passage": "hid-20092/p39/2",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 40, Bijlage 3 A",
+            "note": "quote withheld: sha256:7b824938b503912f1f83e80a5d00fe1c641d28b77c0688ea26c014e68787bdf8 chars:17",
+            "passage": "hid-20092/p40/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 40, Bijlage 3 A",
+            "note": "quote withheld: sha256:3915fc08ec950fbf7caaf13c26029cd87b741cab8dbe8abbd77c8853cc431b6f chars:90",
+            "passage": "hid-20092/p40/2",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 41, Bijlage 3 B",
+            "note": "quote withheld: sha256:df2d5f7210a816ddaaa2057cc2029c874f0d9f71e6868eae6525c9b4be9df1a4 chars:120",
+            "passage": "hid-20092/p41/2",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 40, Bijlage 3 A, pressure drop",
+            "note": "quote withheld: sha256:28a2fb14412108799195474bada747abd90561fae6ce74507c1d232e590eede2 chars:8",
+            "passage": "hid-20092/p40/2",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 25",
+            "note": "quote withheld: sha256:0644a0d960e96f0a58dbd91ed049986d063f929464e9749614bdca9a70a50068 chars:83",
+            "passage": "hid-20092/p25/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "text layer for 'fabrieksschema' (plant design); quote withheld: sha256:e2947b42a78c2ab2c9defc75ec29d22db4da36bd556982acd12af3507dd87a48 chars:53",
+            "passage": "hid-20092/p1/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 40, Bijlage 3 A, v0",
+            "note": "transcription withheld: sha256:463e3eabe6cdb1ab032cc6ed2dae1261c3048ec070ad57d0874332e4886fa17d chars:121; second_reading withheld: sha256:3b7ddb99c6067ee57a6fe31fc85ee7502d55451b10f5c83f3372e898350424f5 chars:125",
+            "reading": "vision_ocr",
+            "region": [
+              0.23,
+              0.2,
+              0.98,
+              0.31
+            ],
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 40, Bijlage 3 A",
+            "note": "quote withheld: sha256:c548dd5e7c1fe7a785280084f0afa976f85340751162c6b1d15f9af0bf773213 chars:21",
+            "passage": "hid-20092/p40/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 40, Bijlage 3 A",
+            "note": "quote withheld: sha256:575a1e9870e9debafc36381ff3dc50fe719828a06848477d29497d225e4f042c chars:51",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 40, Bijlage 3 A, S",
+            "note": "transcription withheld: sha256:718836452f6e5006618be32960b1ff45413bab481aa639fb8d22a14a61a4aafe chars:40; second_reading withheld: sha256:0dee90f5f3d9c4a4df6a2d08d16e77c1926b26b180daa48a4d6945d406633b24 chars:65",
+            "reading": "vision_ocr",
+            "region": [
+              0.23,
+              0.705,
+              0.98,
+              0.735
+            ],
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 41, Bijlage 3 B",
+            "note": "transcription withheld: sha256:f9a968976b225acc323423911880be6a62579acefcc40d25b3af2dc5bb31da32 chars:42; second_reading withheld: sha256:f9a968976b225acc323423911880be6a62579acefcc40d25b3af2dc5bb31da32 chars:42",
+            "reading": "vision_ocr",
+            "region": [
+              0.23,
+              0.84,
+              0.98,
+              0.89
+            ],
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "reactor_kind": "fixed_bed",
+        "specifications": {
+          "bed_cross_section": {
+            "status": "present",
+            "as_reported": "O = 0,286 m2 (dwarsoppervlak van kat.bed.)",
+            "note": "read on the page image (text layer '0,286 m2 (dwar s oppervlak van kat •. bedi. )')",
+            "unit": "m2",
+            "value": 0.286
+          },
+          "bed_diameter": {
+            "status": "present",
+            "as_reported": "Een diameter van 0,53 m bleek te voldoen.",
+            "unit": "m",
+            "value": 0.53
+          },
+          "bed_length": {
+            "status": "present",
+            "as_reported": "bed-lengte: L ~ 3,5 m.",
+            "unit": "m",
+            "value": 3.5
+          },
+          "bed_porosity": {
+            "status": "present",
+            "as_reported": "Voor ε werd genomen 0,4.",
+            "note": "assumed value",
+            "unit": "1",
+            "value": 0.4
+          },
+          "cold_gas_per_cooling_zone": {
+            "status": "present",
+            "as_reported": "6000/5 = 1200 Nm3/hr.",
+            "note": "read on the page image (a fraction 6000 over 5; the text layer prints '6~00 = 1200')",
+            "unit": "Nm3/hr",
+            "value": 1200
+          },
+          "friction_factor": {
+            "status": "present",
+            "as_reported": "werd voor f1 gevonden 17",
+            "note": "from graph P5 (litt. 18)",
+            "unit": "1",
+            "value": 17
+          },
+          "pressure_drop": {
+            "status": "present",
+            "as_reported": "= 7,5 atm.",
+            "unit": "atm",
+            "value": 7.5
+          },
+          "specific_surface": {
+            "status": "present",
+            "as_reported": "3,14 . 10^2/m",
+            "note": "specific surface of the bed, S = 6(1-ε)/α; read on the page image (text layer '<3,14 • 102/m'); kept as text because the fragment check cannot read a power of ten",
+            "text_value": "3,14 . 10^2 /m"
+          },
+          "total_length": {
+            "status": "present",
+            "as_reported": "De totale lengte werd op 7 m gesteld.",
+            "unit": "m",
+            "value": 7
+          }
+        },
+        "volume": {
+          "status": "present",
+          "as_reported": "katalysatorvolume 1 m3",
+          "note": "catalyst volume",
+          "unit": "m3",
+          "value": 1
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20092/sample/planned-converter-charge",
+      "label": "CatalystSample",
+      "props": {
+        "name": "planned catalyst charge of the methanol converter (1 m3)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 39, Bijlage 3 A",
+            "note": "quote withheld: sha256:8e638ca2d797eb740931756f13f700f6fb6970620a926a085b9defacae6af5b1 chars:77",
+            "passage": "hid-20092/p39/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "generality": "particular",
+        "preparation_status": "proposed",
+        "sample_kind": "reactor_charge"
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20092/species/c2-hydrocarbons",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "C2 hydrocarbons (natural gas component 'C2')",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 15, natural gas analysis",
+            "note": "OCR of the text layer: 'Cl' = C1, '03' = C3, '04' = C4, '002' = CO2, '02' = O2; quote withheld: sha256:df0dd29581575afa337c217aa09b1b647c93569c7462f9f9b42853e1a38c185f chars:56",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20092/species/c3-hydrocarbons",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "C3 hydrocarbons (natural gas component, printed '03')",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 15, natural gas analysis",
+            "note": "OCR of the text layer: 'Cl' = C1, '03' = C3, '04' = C4, '002' = CO2, '02' = O2; quote withheld: sha256:df0dd29581575afa337c217aa09b1b647c93569c7462f9f9b42853e1a38c185f chars:56",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20092/species/c4-and-higher-hydrocarbons",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "C4 and higher hydrocarbons (printed '04 en hoger')",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 15, natural gas analysis",
+            "note": "OCR of the text layer: 'Cl' = C1, '03' = C3, '04' = C4, '002' = CO2, '02' = O2; quote withheld: sha256:df0dd29581575afa337c217aa09b1b647c93569c7462f9f9b42853e1a38c185f chars:56",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20092/species/mercaptans",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "mercaptans (mercaptanen)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 15",
+            "note": "quote withheld: sha256:054601ef37ff2c0365ee1b4b12002cf6e88ad4d806cb9daf8af2ed3d09ff15dc chars:47",
+            "passage": "hid-20092/p15/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20092/test/equilibrium-approach-340c",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "equilibrium approach of the converter at 340 °C and 260 atm (calculation, Bijlage 4)",
+        "conditions": {
+          "kp": {
+            "status": "present",
+            "as_reported": "8,7 x 10-5",
+            "note": "equilibrium constant Kp; no unit printed",
+            "text_value": "8.7 x 10^-5"
+          }
+        },
+        "conversion": {
+          "status": "present",
+          "as_reported": "een omzetting hebben van 15 % (betrokken op 00)",
+          "note": "the design conversion, on CO, used in the calculation",
+          "unit": "%",
+          "value": 15
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 42, Bijlage 4",
+            "note": "quote withheld: sha256:7bff359260f9bb2f32c5fbdda1a9208d5648db6b6a820c8a0aced07f0f7c0d2c chars:20",
+            "passage": "hid-20092/p42/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 42, Bijlage 4",
+            "note": "quote withheld: sha256:0f8db648503979a3f63e53bef1daaa0d16e26f278f64a3780ce8d2702a35dd12 chars:26",
+            "passage": "hid-20092/p42/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 39, Bijlage 3",
+            "note": "quote withheld: sha256:6e30030aa1f4da444b33d46d624650ae477fce21a2e2bc48da7e15502dabe2a1 chars:88",
+            "passage": "hid-20092/p39/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 43, Bijlage 4",
+            "note": "quote withheld: sha256:beb2de8f178b1882bc941ded45e72e13fbcfcfc9d0f8c7ca55a9e14edc1872bf chars:106",
+            "passage": "hid-20092/p43/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "experiment_kind": "computational",
+        "experiment_status": "completed",
+        "goal": "compute",
+        "pressure": {
+          "status": "present",
+          "as_reported": "P = 260 atm.",
+          "unit": "atm",
+          "value": 260
+        },
+        "results": {
+          "equilibrium_approach": {
+            "status": "present",
+            "as_reported": "22,8 %",
+            "note": "called 'evenwichtsbenadering' on p. 39 and 'evenwichtsomzetting' on p. 43",
+            "unit": "%",
+            "value": 22.8
+          },
+          "max_mol_ch3oh_per_100_mol_inlet_gas": {
+            "status": "present",
+            "as_reported": "x = 12",
+            "unit": "mol per 100 mol inlet gas",
+            "value": 12
+          }
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "340°0",
+          "unit": "°C",
+          "value": 340
+        },
+        "test_kind": "equilibrium_estimate",
+        "test_label": "Bijlage 4, 1)"
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20092/test/equilibrium-approach-360c",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "equilibrium approach of the converter at 360 °C and 260 atm (calculation, Bijlage 4)",
+        "conditions": {
+          "kp": {
+            "status": "present",
+            "as_reported": "Kp = 5,2 x 10-5",
+            "note": "equilibrium constant Kp; no unit printed",
+            "text_value": "5.2 x 10^-5"
+          }
+        },
+        "conversion": {
+          "status": "present",
+          "as_reported": "een omzetting hebben van 15 % (betrokken op 00)",
+          "note": "the design conversion, on CO, used in the calculation",
+          "unit": "%",
+          "value": 15
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 42, Bijlage 4",
+            "note": "quote withheld: sha256:e5b5e59c9645b40d538e24133906baf0a38e3f31782a34e0a29678d491c1c932 chars:18",
+            "passage": "hid-20092/p42/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 43, Bijlage 4",
+            "note": "quote withheld: sha256:f4547c2aeeb82772fff3cd5319ca9cdab2f4269d0ad678b06706fcabf6f6b4c9 chars:20",
+            "passage": "hid-20092/p43/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 39, Bijlage 3",
+            "note": "quote withheld: sha256:6e30030aa1f4da444b33d46d624650ae477fce21a2e2bc48da7e15502dabe2a1 chars:88",
+            "passage": "hid-20092/p39/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 43, Bijlage 4",
+            "note": "quote withheld: sha256:beb2de8f178b1882bc941ded45e72e13fbcfcfc9d0f8c7ca55a9e14edc1872bf chars:106",
+            "passage": "hid-20092/p43/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "experiment_kind": "computational",
+        "experiment_status": "completed",
+        "goal": "compute",
+        "pressure": {
+          "status": "present",
+          "as_reported": "P = 260 atm",
+          "unit": "atm",
+          "value": 260
+        },
+        "results": {
+          "equilibrium_approach": {
+            "status": "present",
+            "as_reported": "26,6 %",
+            "note": "called 'evenwichtsbenadering' on p. 39 and 'evenwichtsomzetting' on p. 43",
+            "unit": "%",
+            "value": 26.6
+          }
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "360°0",
+          "unit": "°C",
+          "value": 360
+        },
+        "test_kind": "equilibrium_estimate",
+        "test_label": "Bijlage 4, 2)"
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20092/test/planned-converter-operation",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "design operating point of the planned methanol converter (330 °C, 260 atm, 15 % conversion per pass)",
+        "conditions": {
+          "cold_gas_injected": {
+            "status": "present",
+            "as_reported": "Wjj koelen met 6000 Nm3 = 267 kmol koud synthesegas",
+            "note": "15,5 % of the total gas stream, as printed",
+            "unit": "Nm3",
+            "value": 6000
+          },
+          "gas_density": {
+            "status": "present",
+            "as_reported": "53,5 kg/m3.",
+            "basis": "from the mean molecular weight of the gas mixture by the ideal gas law",
+            "unit": "kg/m3",
+            "value": 53.5
+          },
+          "mean_bed_pressure": {
+            "status": "present",
+            "as_reported": "P = 256 atm.",
+            "note": "value used in the pressure-drop calculation; read on the page image (the text layer prints '2:59~ätm.')",
+            "unit": "atm",
+            "value": 256
+          },
+          "mean_bed_temperature": {
+            "status": "present",
+            "as_reported": "t = 345°C.",
+            "note": "value used in the pressure-drop calculation (p. 40)",
+            "unit": "°C",
+            "value": 345
+          },
+          "mean_gas_load": {
+            "status": "present",
+            "as_reported": "a = 35830 (Nm3/hr) (= gem.gasbelasting van de reactor)",
+            "basis": "mean gas load of the reactor, used for the superficial velocity (p. 40)",
+            "unit": "Nm3/hr",
+            "value": 35830
+          },
+          "outlet_temperature": {
+            "status": "present",
+            "as_reported": "de uitgangstemperatuur ca. 360°0",
+            "qualifier": "approximate",
+            "unit": "°C",
+            "value": 360
+          },
+          "recycle_ratio": {
+            "status": "present",
+            "as_reported": "x = 9,74 (= gasomloop-verhouding)",
+            "basis": "recycle gas / fresh feed, moles (B/A)",
+            "unit": "1",
+            "value": 9.74
+          },
+          "superficial_gas_velocity": {
+            "status": "present",
+            "as_reported": "vo = 0,31 m/sec.",
+            "basis": "linear gas velocity referred to the empty reactor",
+            "note": "read on the page image (the text layer prints '0,3L.')",
+            "unit": "m/sec",
+            "value": 0.31
+          }
+        },
+        "conversion": {
+          "status": "present",
+          "as_reported": "een conversie van 15 % (betrokken op CO-invoer)",
+          "basis": "per pass, on CO fed (betrokken op CO-invoer)",
+          "unit": "%",
+          "value": 15
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 37, Bijlage 3",
+            "note": "text layer '3300C' = 330 °C; quote withheld: sha256:1d7be54e8685f098afce82528632e9a2140f0e83f04b736828ec2f2fd6dd84fb chars:25",
+            "passage": "hid-20092/p37/2",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 37, Bijlage 3",
+            "note": "quote withheld: sha256:231cea9628b0d0f7622ba57899ac1b595605097309169fcd6938cae8edb71224 chars:21",
+            "passage": "hid-20092/p37/2",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 37, Bijlage 3",
+            "note": "quote withheld: sha256:b24a18f75b1bdc8545a464cdd14633403b04592b08d70199700522c26a7da958 chars:114",
+            "passage": "hid-20092/p37/2",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 37, Bijlage 3",
+            "note": "quote withheld: sha256:5c2ea00cf82c58b7f29ecea94b136ada027718585f81af48a0700fd663c7843d chars:30",
+            "passage": "hid-20092/p37/2",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 39, Bijlage 3 A",
+            "note": "quote withheld: sha256:8e638ca2d797eb740931756f13f700f6fb6970620a926a085b9defacae6af5b1 chars:77",
+            "passage": "hid-20092/p39/2",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 39, Bijlage 3",
+            "note": "text layer '°0' = °C; quote withheld: sha256:a47dbbf6903cfcd6bae3d0296af2503440b3d112bb5fe6ec893cabe01a431bef chars:94",
+            "passage": "hid-20092/p39/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 41, Bijlage 3 B",
+            "note": "quote withheld: sha256:ddb3470bc4a1f97305409189031c3b49553a79132c430d7bbe600e4197450a2e chars:36",
+            "passage": "hid-20092/p41/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 41, Bijlage 3 B",
+            "note": "quote withheld: sha256:57720f7d9b7dab1c7841331a28a6d60cb512d6237724c4e866f6a9b5ccb4fe38 chars:109",
+            "passage": "hid-20092/p41/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 40, Bijlage 3 A, v0",
+            "note": "transcription withheld: sha256:463e3eabe6cdb1ab032cc6ed2dae1261c3048ec070ad57d0874332e4886fa17d chars:121; second_reading withheld: sha256:3b7ddb99c6067ee57a6fe31fc85ee7502d55451b10f5c83f3372e898350424f5 chars:125",
+            "reading": "vision_ocr",
+            "region": [
+              0.23,
+              0.2,
+              0.98,
+              0.31
+            ],
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 40, Bijlage 3 A",
+            "note": "quote withheld: sha256:282079d2e895f4d9bf9f17be64f5df300192d874f06e047948fffd740e9c1b49 chars:10",
+            "passage": "hid-20092/p40/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 22, VI B",
+            "note": "quote withheld: sha256:2981697a153b478cb21ff60783dfdf23660baf11b10fa3f53e926be629d790e1 chars:45",
+            "passage": "hid-20092/p22/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 41, Bijlage 3 B",
+            "note": "transcription withheld: sha256:0cc5d57587c31e5145a9f51b789cf630bc2bf75e968bf07ddf3016ac7bfbad31 chars:24",
+            "reading": "vision_ocr",
+            "region": [
+              0.23,
+              0.74,
+              0.98,
+              0.77
+            ],
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 41, Bijlage 3 B",
+            "note": "quote withheld: sha256:9e604b41624f945d0629bee1253e1dec1dfe266c5d41a8ef59de572812c81dc4 chars:46",
+            "passage": "hid-20092/p41/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 21, VI B, composition of crude methanol D",
+            "note": "transcription withheld: sha256:79d226d0f84d7e2e39117d29fb46fe29a9dc7d7f6ce392d9b175ddc652f3b507 chars:97; second_reading withheld: sha256:5206a558411ce5a05bde3ce712571100911976ffab5715b11c6b83ac26471e69 chars:102",
+            "reading": "vision_ocr",
+            "region": [
+              0.28,
+              0.245,
+              0.72,
+              0.375
+            ],
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 34, Bijlage 2, Tabel V",
+            "note": "columns: Af te koelen gas kmol/h, kg/h; Op te warmen gas kmol/h (blank cells left out); transcription withheld: sha256:33c8a9c02787ef7b4db6b793c2e65552f1bf109d3f902857b49be3f0e1850e74 chars:117",
+            "reading": "vision_ocr",
+            "region": [
+              0.11,
+              0.41,
+              0.58,
+              0.71
+            ],
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 34, Bijlage 2",
+            "note": "quote withheld: sha256:07257c5c8f4d92b61b3bc290ed471d2f7c4cb1d3dc99c1daf2321640e75b7295 chars:49",
+            "passage": "hid-20092/p34/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "planned",
+        "feed_ratio": {
+          "status": "present",
+          "as_reported": "Wij stelden een verhouding van 3,7.",
+          "basis": "H2/CO at the converter inlet",
+          "unit": "1",
+          "value": 3.7
+        },
+        "flow_rate": {
+          "status": "present",
+          "as_reported": "38830 Nm3 gas/hr",
+          "unit": "Nm3/hr",
+          "value": 38830
+        },
+        "note": "Planned conditions worked out in the plant design; the rationale for each is in the Claims about the converter.",
+        "pressure": {
+          "status": "present",
+          "as_reported": "Werd op 260 atm. gesteld.",
+          "unit": "atm",
+          "value": 260
+        },
+        "production_rate": {
+          "status": "present",
+          "as_reported": "De methanol productie per uur is 43,9 kmol.",
+          "unit": "kmol/h",
+          "value": 43.9
+        },
+        "results": {
+          "assumed_crude_methanol_ch3oh": {
+            "status": "present",
+            "as_reported": "90 %",
+            "basis": "assumed composition of the crude methanol D, 'in globale overeenstemming met industrie-gegevens (litt. 10, 16)'; basis of the percentages not stated",
+            "note": "read on the page image of p. 21 (the text layer gives the names and the numbers apart)",
+            "unit": "%",
+            "value": 90
+          },
+          "assumed_crude_methanol_diisopropyl_alcohol": {
+            "status": "present",
+            "as_reported": "0,5 %",
+            "basis": "assumed composition of the crude methanol D, 'in globale overeenstemming met industrie-gegevens (litt. 10, 16)'; basis of the percentages not stated",
+            "note": "read on the page image of p. 21 (the text layer gives the names and the numbers apart)",
+            "unit": "%",
+            "value": 0.5
+          },
+          "assumed_crude_methanol_dimethyl_ether": {
+            "status": "present",
+            "as_reported": "2 %",
+            "basis": "assumed composition of the crude methanol D, 'in globale overeenstemming met industrie-gegevens (litt. 10, 16)'; basis of the percentages not stated",
+            "note": "read on the page image of p. 21 (the text layer gives the names and the numbers apart); the 2 is typed over another character",
+            "unit": "%",
+            "value": 2
+          },
+          "assumed_crude_methanol_isobutyl_alcohol": {
+            "status": "present",
+            "as_reported": "0,5 %",
+            "basis": "assumed composition of the crude methanol D, 'in globale overeenstemming met industrie-gegevens (litt. 10, 16)'; basis of the percentages not stated",
+            "note": "read on the page image of p. 21 (the text layer gives the names and the numbers apart)",
+            "unit": "%",
+            "value": 0.5
+          },
+          "assumed_crude_methanol_oil_heptene": {
+            "status": "present",
+            "as_reported": "1,9 %",
+            "basis": "assumed composition of the crude methanol D, 'in globale overeenstemming met industrie-gegevens (litt. 10, 16)'; basis of the percentages not stated",
+            "note": "read on the page image of p. 21 (the text layer gives the names and the numbers apart)",
+            "unit": "%",
+            "value": 1.9
+          },
+          "assumed_crude_methanol_water": {
+            "status": "present",
+            "as_reported": "5,1 %",
+            "basis": "assumed composition of the crude methanol D, 'in globale overeenstemming met industrie-gegevens (litt. 10, 16)'; basis of the percentages not stated",
+            "note": "read on the page image of p. 21 (the text layer gives the names and the numbers apart)",
+            "unit": "%",
+            "value": 5.1
+          },
+          "calculated_final_temperature": {
+            "status": "present",
+            "as_reported": "361,5°C",
+            "basis": "end temperature from the heat balance with 267 kmol cold gas (p. 41)",
+            "note": "read on the page image (the text layer prints \"'361,50 C\")",
+            "unit": "°C",
+            "value": 361.5
+          },
+          "converter_exit_c7h14_flow": {
+            "status": "present",
+            "as_reported": "0,3",
+            "basis": "product gas to be cooled in the high-pressure heat exchanger (Tabel V, 'Af te koelen gas')",
+            "unit": "kmol/h",
+            "value": 0.3
+          },
+          "converter_exit_c7h14_mass_flow": {
+            "status": "present",
+            "as_reported": "29,9",
+            "basis": "Tabel V, 'Af te koelen gas', kg/h",
+            "unit": "kg/h",
+            "value": 29.9
+          },
+          "converter_exit_ch3oh_flow": {
+            "status": "present",
+            "as_reported": "44",
+            "basis": "product gas to be cooled in the high-pressure heat exchanger (Tabel V, 'Af te koelen gas')",
+            "unit": "kmol/h",
+            "value": 44
+          },
+          "converter_exit_ch3oh_mass_flow": {
+            "status": "present",
+            "as_reported": "1406",
+            "basis": "Tabel V, 'Af te koelen gas', kg/h",
+            "unit": "kg/h",
+            "value": 1406
+          },
+          "converter_exit_ch4_flow": {
+            "status": "present",
+            "as_reported": "10,3",
+            "basis": "product gas to be cooled in the high-pressure heat exchanger (Tabel V, 'Af te koelen gas')",
+            "unit": "kmol/h",
+            "value": 10.3
+          },
+          "converter_exit_co2_flow": {
+            "status": "present",
+            "as_reported": "11,1",
+            "basis": "product gas to be cooled in the high-pressure heat exchanger (Tabel V, 'Af te koelen gas')",
+            "unit": "kmol/h",
+            "value": 11.1
+          },
+          "converter_exit_co_flow": {
+            "status": "present",
+            "as_reported": "270",
+            "basis": "product gas to be cooled in the high-pressure heat exchanger (Tabel V, 'Af te koelen gas')",
+            "unit": "kmol/h",
+            "value": 270
+          },
+          "converter_exit_dimethyl_ether_flow": {
+            "status": "present",
+            "as_reported": "0,7",
+            "basis": "product gas to be cooled in the high-pressure heat exchanger (Tabel V, 'Af te koelen gas')",
+            "unit": "kmol/h",
+            "value": 0.7
+          },
+          "converter_exit_dimethyl_ether_mass_flow": {
+            "status": "present",
+            "as_reported": "31,2",
+            "basis": "Tabel V, 'Af te koelen gas', kg/h",
+            "unit": "kg/h",
+            "value": 31.2
+          },
+          "converter_exit_h2_flow": {
+            "status": "present",
+            "as_reported": "1061",
+            "basis": "product gas to be cooled in the high-pressure heat exchanger (Tabel V, 'Af te koelen gas')",
+            "unit": "kmol/h",
+            "value": 1061
+          },
+          "converter_exit_h2o_flow": {
+            "status": "present",
+            "as_reported": "4,4",
+            "basis": "product gas to be cooled in the high-pressure heat exchanger (Tabel V, 'Af te koelen gas')",
+            "unit": "kmol/h",
+            "value": 4.4
+          },
+          "converter_exit_h2o_mass_flow": {
+            "status": "present",
+            "as_reported": "79,4",
+            "basis": "Tabel V, 'Af te koelen gas', kg/h",
+            "unit": "kg/h",
+            "value": 79.4
+          },
+          "converter_exit_higher_alcohols_flow": {
+            "status": "present",
+            "as_reported": "0,2",
+            "basis": "product gas to be cooled in the high-pressure heat exchanger (Tabel V, 'Af te koelen gas')",
+            "unit": "kmol/h",
+            "value": 0.2
+          },
+          "converter_exit_higher_alcohols_mass_flow": {
+            "status": "present",
+            "as_reported": "15",
+            "basis": "Tabel V, 'Af te koelen gas', kg/h",
+            "unit": "kg/h",
+            "value": 15
+          },
+          "converter_exit_n2_flow": {
+            "status": "present",
+            "as_reported": "225,2",
+            "basis": "product gas to be cooled in the high-pressure heat exchanger (Tabel V, 'Af te koelen gas')",
+            "unit": "kmol/h",
+            "value": 225.2
+          },
+          "heated_synthesis_gas_ch4_flow": {
+            "status": "present",
+            "as_reported": "8,7",
+            "basis": "synthesis gas to be heated in the high-pressure heat exchanger before the converter (Tabel V, 'Op te warmen gas')",
+            "unit": "kmol/h",
+            "value": 8.7
+          },
+          "heated_synthesis_gas_co2_flow": {
+            "status": "present",
+            "as_reported": "10,1",
+            "basis": "synthesis gas to be heated in the high-pressure heat exchanger before the converter (Tabel V, 'Op te warmen gas')",
+            "unit": "kmol/h",
+            "value": 10.1
+          },
+          "heated_synthesis_gas_co_flow": {
+            "status": "present",
+            "as_reported": "268",
+            "basis": "synthesis gas to be heated in the high-pressure heat exchanger before the converter (Tabel V, 'Op te warmen gas')",
+            "unit": "kmol/h",
+            "value": 268
+          },
+          "heated_synthesis_gas_h2_flow": {
+            "status": "present",
+            "as_reported": "985",
+            "basis": "synthesis gas to be heated in the high-pressure heat exchanger before the converter (Tabel V, 'Op te warmen gas')",
+            "unit": "kmol/h",
+            "value": 985
+          },
+          "heated_synthesis_gas_n2_flow": {
+            "status": "present",
+            "as_reported": "190",
+            "basis": "synthesis gas to be heated in the high-pressure heat exchanger before the converter (Tabel V, 'Op te warmen gas')",
+            "unit": "kmol/h",
+            "value": 190
+          },
+          "total_gas_through_reactor": {
+            "status": "present",
+            "as_reported": "1723 kmol/hr",
+            "basis": "total gas fed through the reactor (heat balance, p. 41)",
+            "unit": "kmol/hr",
+            "value": 1723
+          }
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "ca. 3300C",
+          "note": "text layer '3300C' = 330 °C; the hot gas enters at 330 °C",
+          "qualifier": "approximate",
+          "unit": "°C",
+          "value": 330
+        },
+        "temperature_profile": "not_reported",
+        "test_kind": "activity",
+        "test_label": "Bijlage 3, design of the methanol converter"
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20092/unit/hp-heat-exchanger",
+      "label": "ProcessUnit",
+      "props": {
+        "name": "high-pressure heat exchanger (synthesis gas against converter exit gas)",
+        "design_status": "planned",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 24",
+            "note": "quote withheld: sha256:bb135b4b6e2458ea3d7531d37b9ffbb6d73dc439b4ae86a27a1a543768f6ba0e chars:83",
+            "passage": "hid-20092/p24/2",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 24",
+            "note": "quote withheld: sha256:9771ceb1454df9a48653a711d47347bbaa4a848c3fc007863b9cb09482273b4f chars:61",
+            "passage": "hid-20092/p24/2",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 24",
+            "note": "quote withheld: sha256:c708fdf4ee48ecc1c29cc41634732df7c37344c1d8e7670d2252e89c88e31f22 chars:108",
+            "passage": "hid-20092/p24/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "instrument_kind": "process_unit",
+        "specifications": {
+          "diameter": {
+            "status": "present",
+            "as_reported": "diameter: 0,82 m.",
+            "unit": "m",
+            "value": 0.82
+          },
+          "length": {
+            "status": "present",
+            "as_reported": "lengte: 5,30 m.",
+            "unit": "m",
+            "value": 5.3
+          },
+          "reactor_gas_inlet_temperature": {
+            "status": "present",
+            "as_reported": "inga~nd react~rgas 350°C.",
+            "unit": "°C",
+            "value": 350
+          },
+          "reactor_gas_outlet_temperature": {
+            "status": "present",
+            "as_reported": "uitgaand reactorgas 180°0.",
+            "unit": "°C",
+            "value": 180
+          },
+          "synthesis_gas_inlet_temperature": {
+            "status": "present",
+            "as_reported": "ingaand synthesegas ,25°C.",
+            "unit": "°C",
+            "value": 25
+          },
+          "synthesis_gas_outlet_temperature": {
+            "status": "present",
+            "as_reported": "uitgaand synthesegas 216°C.",
+            "unit": "°C",
+            "value": 216
+          }
+        },
+        "unit_kind": "heat_exchanger"
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20092/unit/preheater",
+      "label": "ProcessUnit",
+      "props": {
+        "name": "electric preheater before the methanol converter",
+        "design_status": "planned",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 24",
+            "note": "quote withheld: sha256:cf9c7a262dbdd9f8c1da3bf8e2d4ec965442b87d9c32e16ddebaa32a527348d5 chars:128",
+            "passage": "hid-20092/p24/2",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 24",
+            "note": "quote withheld: sha256:e526006e140bb95081166ec86fc51b96a74dc05d8f6d71c6b7c5058be24b0dae chars:39",
+            "passage": "hid-20092/p24/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "instrument_kind": "process_unit",
+        "specifications": {
+          "diameter": {
+            "status": "present",
+            "as_reported": "diameter 0,4 m.",
+            "unit": "m",
+            "value": 0.4
+          },
+          "height": {
+            "status": "present",
+            "as_reported": "hoogte ,: 3,9 m.",
+            "unit": "m",
+            "value": 3.9
+          }
+        },
+        "unit_kind": "preheater"
+      }
+    },
+    {
+      "id": "ex:msyn/source/hid-20092",
+      "label": "Source",
+      "props": {
+        "name": "De fabricage van methanol: verslag van een fabrieksschema",
+        "kind": "thesis",
+        "description": "Published 1955 (publication year (bibliography)); in scope: before the 1966-01-01 cutoff. Text: 1 pages ocr, 43 pages text_layer (tesseract 5.5.3 (eng, 300 dpi, 1 column)). Text not redistributed.",
+        "licence": "no verified publisher licence; short excerpts quoted as evidence under fair use",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "De fabricage van methanol: verslag van een fabrieksschema",
+        "venue": "TU Delft process-design report (repository.tudelft.nl)",
+        "year": 1955
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/hid-20092/catalyst/methanol-synthesis-catalyst/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 39, Bijlage 3 A",
+          "p. 40, Bijlage 3 A"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20092/catalyst/methanol-synthesis-catalyst",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/hid-20092/catalyst/nickel-on-ceramic-cubes/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 33, Bijlage 1 C"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20092/catalyst/nickel-on-ceramic-cubes",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/active-carbon-removes-poisons/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 22, Actieve koolvat"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20092/claim/active-carbon-removes-poisons",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/catalyst-choice-avoids-byproducts/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5, II A"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20092/claim/catalyst-choice-avoids-byproducts",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/co-below-20-percent/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 37, Bijlage 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20092/claim/co-below-20-percent",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/co2-route-less-exothermic/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5, II B"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20092/claim/co2-route-less-exothermic",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/cold-gas-15-percent-exit-360c/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 39, Bijlage 3",
+          "p. 41, Bijlage 3 B"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20092/claim/cold-gas-15-percent-exit-360c",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/converter-cooling-needed/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 38, Bijlage 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20092/claim/converter-cooling-needed",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/crude-methanol-byproducts/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 13, V C",
+          "p. 21, VI B"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20092/claim/crude-methanol-byproducts",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/design-conversion-15-percent/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 37, Bijlage 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20092/claim/design-conversion-15-percent",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/design-h2-co-3-7/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 20, VI B",
+          "p. 37, Bijlage 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20092/claim/design-h2-co-3-7",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/design-pressure-260-atm/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 37, Bijlage 3, De werkdruk"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20092/claim/design-pressure-260-atm",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/design-temperature-330c/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 37, Bijlage 3, De reactie temperatuur"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20092/claim/design-temperature-330c",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/equilibrium-constants-newton-dodge/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 12, B",
+          "p. 12, B, table of K"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20092/claim/equilibrium-constants-newton-dodge",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/fresh-gas-h2-co-2-35/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 30, Bijlage 1 A"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20092/claim/fresh-gas-h2-co-2-35",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/gas-load-40000/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 39, Bijlage 3 A"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20092/claim/gas-load-40000",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/h2-co-4-at-8-10-fold-recycle/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 20, VI B"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20092/claim/h2-co-4-at-8-10-fold-recycle",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/heat-of-methanol-formation/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 41, Bijlage 3 B"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20092/claim/heat-of-methanol-formation",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/high-pressure-favours-conversion/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 13, B"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20092/claim/high-pressure-favours-conversion",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/inert-gas-13-percent/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 20, VI B"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20092/claim/inert-gas-13-percent",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/narrow-temperature-window/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 12, B"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20092/claim/narrow-temperature-window",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/nh3-o2-injection-sulfur/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 24, VI B"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20092/claim/nh3-o2-injection-sulfur",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/no-temperature-gradient-needed/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 39, Bijlage 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20092/claim/no-temperature-gradient-needed",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/recycle-ratio-9-74/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 22, VI B"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20092/claim/recycle-ratio-9-74",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/route-a-co-h2-chosen/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6, II"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20092/claim/route-a-co-h2-chosen",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/small-co2-excess-not-removed/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 19, Zuivering van het synthesegas"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20092/claim/small-co2-excess-not-removed",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/hid-20092/claim/zno-absorbs-sulfur/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 15",
+          "p. 16, Absorptietank voor Zwavelverbindingen"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20092/claim/zno-absorbs-sulfur",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/hid-20092/feed/converter-inlet-gas/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 21, VI B",
+          "p. 42, Bijlage 4",
+          "p. 42, Bijlage 4, inlet gas"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20092/feed/converter-inlet-gas",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/hid-20092/feed/fresh-synthesis-gas/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 19, Zuivering van het synthesegas"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20092/feed/fresh-synthesis-gas",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/hid-20092/feed/natural-gas-wanneperveen/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 15",
+          "p. 15, natural gas analysis"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20092/feed/natural-gas-wanneperveen",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/hid-20092/hypothesis/rate-proportional-to-distance-from-equilibrium/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 38, Bijlage 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20092/hypothesis/rate-proportional-to-distance-from-equilibrium",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/1",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 39, Bijlage 3 A",
+            "note": "quote withheld: sha256:2b0dc38f348dd0bd2a956b639565be0066ef6ff143f5bfc5a3617486a4694077 chars:140",
+            "passage": "hid-20092/p39/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/catalyst/methanol-synthesis-catalyst",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/10",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 15, natural gas analysis",
+            "note": "OCR of the text layer: 'Cl' = C1, '03' = C3, '04' = C4, '002' = CO2, '02' = O2; quote withheld: sha256:df0dd29581575afa337c217aa09b1b647c93569c7462f9f9b42853e1a38c185f chars:56",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "0,73 %",
+          "unit": "%",
+          "value": 0.73
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/hid-20092/feed/natural-gas-wanneperveen",
+      "target": "ex:msyn/hid-20092/species/c3-hydrocarbons"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/11",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 15, natural gas analysis",
+            "note": "OCR of the text layer: 'Cl' = C1, '03' = C3, '04' = C4, '002' = CO2, '02' = O2; quote withheld: sha256:df0dd29581575afa337c217aa09b1b647c93569c7462f9f9b42853e1a38c185f chars:56",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "0;38 %",
+          "unit": "%",
+          "value": 0.38
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/hid-20092/feed/natural-gas-wanneperveen",
+      "target": "ex:msyn/hid-20092/species/c4-and-higher-hydrocarbons"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/12",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 15, natural gas analysis",
+            "note": "OCR of the text layer: 'Cl' = C1, '03' = C3, '04' = C4, '002' = CO2, '02' = O2; quote withheld: sha256:df0dd29581575afa337c217aa09b1b647c93569c7462f9f9b42853e1a38c185f chars:56",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "0,1 %",
+          "unit": "%",
+          "value": 0.1
+        },
+        "fraction_basis": "not_reported",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/hid-20092/feed/natural-gas-wanneperveen",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/13",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 15, natural gas analysis",
+            "note": "OCR of the text layer: 'Cl' = C1, '03' = C3, '04' = C4, '002' = CO2, '02' = O2; quote withheld: sha256:df0dd29581575afa337c217aa09b1b647c93569c7462f9f9b42853e1a38c185f chars:56",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "0,1 %",
+          "unit": "%",
+          "value": 0.1
+        },
+        "fraction_basis": "not_reported",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/hid-20092/feed/natural-gas-wanneperveen",
+      "target": "ex:msyn/species/o2"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/14",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 15, natural gas analysis",
+            "note": "OCR of the text layer: 'Cl' = C1, '03' = C3, '04' = C4, '002' = CO2, '02' = O2; quote withheld: sha256:df0dd29581575afa337c217aa09b1b647c93569c7462f9f9b42853e1a38c185f chars:56",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "6,8 %",
+          "unit": "%",
+          "value": 6.8
+        },
+        "fraction_basis": "not_reported",
+        "role": "inert"
+      },
+      "source": "ex:msyn/hid-20092/feed/natural-gas-wanneperveen",
+      "target": "ex:msyn/species/n2"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/18",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 19, Zuivering van het synthesegas",
+            "note": "quote withheld: sha256:7e60667e66f23dcc832ab607310c09b199c87df2d965d9571af599103ebe1fd7 chars:32",
+            "passage": "hid-20092/p19/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "68,2 %",
+          "unit": "%",
+          "value": 68.2
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/hid-20092/feed/fresh-synthesis-gas",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/19",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 19, Zuivering van het synthesegas",
+            "note": "quote withheld: sha256:c626d4e8c74100e33c23e7ce340f46e61d333c3ba751ec7a26df48511713287d chars:21",
+            "passage": "hid-20092/p19/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "29,1 %",
+          "unit": "%",
+          "value": 29.1
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/hid-20092/feed/fresh-synthesis-gas",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/2",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 22, Actieve koolvat",
+            "note": "quote withheld: sha256:3f1a27fabd330e21bd7742a6845ecf20ec6c537e3134216acb4eebd2153da645 chars:176",
+            "passage": "hid-20092/p22/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "inhibition_kind": "poison"
+      },
+      "source": "ex:msyn/hid-20092/catalyst/methanol-synthesis-catalyst",
+      "target": "ex:msyn/species/feco5"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/20",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 19, Zuivering van het synthesegas",
+            "note": "quote withheld: sha256:06286fcbe387ff69fd73c21d609403600cb873a8260ca7f2d1a4fc9444af8bb1 chars:19",
+            "passage": "hid-20092/p19/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "0,8 %",
+          "unit": "%",
+          "value": 0.8
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/hid-20092/feed/fresh-synthesis-gas",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/21",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 19, Zuivering van het synthesegas",
+            "note": "'C~' is CH4; quote withheld: sha256:072dd4d7873efe4384f207cf215a1a928effa685d90f706361ed97bb97ee8403 chars:18",
+            "passage": "hid-20092/p19/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "0,1 %",
+          "unit": "%",
+          "value": 0.1
+        },
+        "fraction_basis": "not_reported",
+        "role": "inert"
+      },
+      "source": "ex:msyn/hid-20092/feed/fresh-synthesis-gas",
+      "target": "ex:msyn/species/ch4"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/22",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 19, Zuivering van het synthesegas",
+            "note": "quote withheld: sha256:3ede60d7d1ce27f235240e94393243109bbafd8903e669b43076a578e8cc41d6 chars:18",
+            "passage": "hid-20092/p19/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "1,8 %",
+          "unit": "%",
+          "value": 1.8
+        },
+        "fraction_basis": "not_reported",
+        "role": "inert"
+      },
+      "source": "ex:msyn/hid-20092/feed/fresh-synthesis-gas",
+      "target": "ex:msyn/species/n2"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/23",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 42, Bijlage 4, inlet gas",
+            "note": "'CBit-' is CH4 in the text layer; quote withheld: sha256:616adaf7a15fb4b3e407be862a70ba8d7a123bedaba2de5c4db15752e5f62176 chars:45",
+            "passage": "hid-20092/p42/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "67,4",
+          "unit": "mol %",
+          "value": 67.4
+        },
+        "fraction_basis": "mole",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/hid-20092/feed/converter-inlet-gas",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/24",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 42, Bijlage 4, inlet gas",
+            "note": "'CBit-' is CH4 in the text layer; quote withheld: sha256:616adaf7a15fb4b3e407be862a70ba8d7a123bedaba2de5c4db15752e5f62176 chars:45",
+            "passage": "hid-20092/p42/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "18,3",
+          "unit": "mol %",
+          "value": 18.3
+        },
+        "fraction_basis": "mole",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/hid-20092/feed/converter-inlet-gas",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/25",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 42, Bijlage 4, inlet gas",
+            "note": "'CBit-' is CH4 in the text layer; quote withheld: sha256:616adaf7a15fb4b3e407be862a70ba8d7a123bedaba2de5c4db15752e5f62176 chars:45",
+            "passage": "hid-20092/p42/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "13,0",
+          "unit": "mol %",
+          "value": 13.0
+        },
+        "fraction_basis": "mole",
+        "role": "inert"
+      },
+      "source": "ex:msyn/hid-20092/feed/converter-inlet-gas",
+      "target": "ex:msyn/species/n2"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/26",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 42, Bijlage 4, inlet gas",
+            "note": "'CBit-' is CH4 in the text layer; quote withheld: sha256:616adaf7a15fb4b3e407be862a70ba8d7a123bedaba2de5c4db15752e5f62176 chars:45",
+            "passage": "hid-20092/p42/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "0,6",
+          "unit": "mol %",
+          "value": 0.6
+        },
+        "fraction_basis": "mole",
+        "role": "inert"
+      },
+      "source": "ex:msyn/hid-20092/feed/converter-inlet-gas",
+      "target": "ex:msyn/species/ch4"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/27",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 42, Bijlage 4, inlet gas",
+            "note": "'CBit-' is CH4 in the text layer; quote withheld: sha256:616adaf7a15fb4b3e407be862a70ba8d7a123bedaba2de5c4db15752e5f62176 chars:45",
+            "passage": "hid-20092/p42/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "0,7",
+          "unit": "mol %",
+          "value": 0.7
+        },
+        "fraction_basis": "mole",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/hid-20092/feed/converter-inlet-gas",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/28",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 42, Bijlage 4",
+            "note": "quote withheld: sha256:a773b3a4f4d24a5734dad9b8c857ddd0f068c0982dccc418e6007df834c33f79 chars:46",
+            "passage": "hid-20092/p42/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "role": "equilibrium computed"
+      },
+      "source": "ex:msyn/hid-20092/test/equilibrium-approach-340c",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/29",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 42, Bijlage 4, inlet gas",
+            "note": "'CBit-' is CH4 in the text layer; quote withheld: sha256:616adaf7a15fb4b3e407be862a70ba8d7a123bedaba2de5c4db15752e5f62176 chars:45",
+            "passage": "hid-20092/p42/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/test/equilibrium-approach-340c",
+      "target": "ex:msyn/hid-20092/feed/converter-inlet-gas"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/3",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 22, Actieve koolvat",
+            "note": "quote withheld: sha256:3f1a27fabd330e21bd7742a6845ecf20ec6c537e3134216acb4eebd2153da645 chars:176",
+            "passage": "hid-20092/p22/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "inhibition_kind": "poison"
+      },
+      "source": "ex:msyn/hid-20092/catalyst/methanol-synthesis-catalyst",
+      "target": "ex:msyn/species/cos"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/30",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 42, Bijlage 4",
+            "note": "quote withheld: sha256:a773b3a4f4d24a5734dad9b8c857ddd0f068c0982dccc418e6007df834c33f79 chars:46",
+            "passage": "hid-20092/p42/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "role": "equilibrium computed"
+      },
+      "source": "ex:msyn/hid-20092/test/equilibrium-approach-360c",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/31",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 42, Bijlage 4, inlet gas",
+            "note": "'CBit-' is CH4 in the text layer; quote withheld: sha256:616adaf7a15fb4b3e407be862a70ba8d7a123bedaba2de5c4db15752e5f62176 chars:45",
+            "passage": "hid-20092/p42/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/test/equilibrium-approach-360c",
+      "target": "ex:msyn/hid-20092/feed/converter-inlet-gas"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/32",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 39, Bijlage 3",
+            "note": "quote withheld: sha256:6e30030aa1f4da444b33d46d624650ae477fce21a2e2bc48da7e15502dabe2a1 chars:88",
+            "passage": "hid-20092/p39/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 39, Bijlage 3",
+            "note": "quote withheld: sha256:01216c980e3652392414dc5da4da4a3c373e67f13e4334abff0d56ee49f5043d chars:130",
+            "passage": "hid-20092/p39/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/claim/no-temperature-gradient-needed",
+      "target": "ex:msyn/hid-20092/reactor/methanol-converter"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/33",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 39, Bijlage 3",
+            "note": "quote withheld: sha256:6e30030aa1f4da444b33d46d624650ae477fce21a2e2bc48da7e15502dabe2a1 chars:88",
+            "passage": "hid-20092/p39/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/test/equilibrium-approach-340c",
+      "target": "ex:msyn/hid-20092/claim/no-temperature-gradient-needed"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/34",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 39, Bijlage 3",
+            "note": "quote withheld: sha256:6e30030aa1f4da444b33d46d624650ae477fce21a2e2bc48da7e15502dabe2a1 chars:88",
+            "passage": "hid-20092/p39/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/test/equilibrium-approach-360c",
+      "target": "ex:msyn/hid-20092/claim/no-temperature-gradient-needed"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/39",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6, II",
+            "note": "quote withheld: sha256:530b5cc9fc1a9e4d02a12e8e66177178ecafc95e322697277df913d1a91cc8c0 chars:184",
+            "passage": "hid-20092/p6/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/claim/route-a-co-h2-chosen",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/4",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 33, Bijlage 1 C",
+            "note": "quote withheld: sha256:adcd70797c3d7c62af2eb405fe6202e946433550ec69442f4341d1fb5b5e7562 chars:93",
+            "passage": "hid-20092/p33/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "role": "not_stated",
+        "role_detail": "metallic nickel covering the ceramic cubes"
+      },
+      "source": "ex:msyn/hid-20092/catalyst/nickel-on-ceramic-cubes",
+      "target": "ex:msyn/species/nickel"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/40",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5, II B",
+            "note": "quote withheld: sha256:10face16df1279bfe76ba5adea5cd4f1973bede42f55b0d65a190daedee73a6f chars:170",
+            "passage": "hid-20092/p5/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/claim/co2-route-less-exothermic",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/41",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5, II A",
+            "note": "quote withheld: sha256:794f7ae85bda8f37fbc19b2bfe2e23fc48cd44085c98dac0c27b38d8e62498b8 chars:102",
+            "passage": "hid-20092/p5/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/claim/catalyst-choice-avoids-byproducts",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/46",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12, B",
+            "note": "quote withheld: sha256:4776f0f129698757a5d793cb27b5439b4f53266c8950c27efd3b6ccf3b050226 chars:69",
+            "passage": "hid-20092/p12/2",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 12, B, table of K",
+            "note": "columns t °C and K; K is 1,5 x 10-3 at 260, 3,1 x 10-4 at 300, 8,7 x 10-5 at 340 and 2,7 x 10-5 at 380 (OCR of the multiplication signs); quote withheld: sha256:6b1e1b7174f11d013f111d83180e1fb8528ab827a647cf408fe42a3904df704e chars:42",
+            "passage": "hid-20092/p12/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/claim/equilibrium-constants-newton-dodge",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/47",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12, B",
+            "note": "quote withheld: sha256:082ecef785d5e4a3b47969c0a6d1b660202d9b006b705f933e7ceb635839ee7e chars:227",
+            "passage": "hid-20092/p12/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/claim/narrow-temperature-window",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/48",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 13, B",
+            "note": "quote withheld: sha256:9b80961461374bff3286fa1d395f48343e11887314796ecb42346032dba9c6f5 chars:143",
+            "passage": "hid-20092/p13/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/claim/high-pressure-favours-conversion",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/49",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 37, Bijlage 3",
+            "note": "quote withheld: sha256:63c9ea5f9b707f45b4080247b211486bd9701e7a857f687320ea3a79ad127977 chars:175",
+            "passage": "hid-20092/p37/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 37, Bijlage 3",
+            "note": "quote withheld: sha256:b24a18f75b1bdc8545a464cdd14633403b04592b08d70199700522c26a7da958 chars:114",
+            "passage": "hid-20092/p37/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/claim/design-conversion-15-percent",
+      "target": "ex:msyn/hid-20092/reactor/methanol-converter"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/5",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 33, Bijlage 1 C",
+            "note": "quote withheld: sha256:adcd70797c3d7c62af2eb405fe6202e946433550ec69442f4341d1fb5b5e7562 chars:93",
+            "passage": "hid-20092/p33/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "role": "not_stated",
+        "role_detail": "ceramic cubes of 0.75 in. that carry the metallic nickel"
+      },
+      "source": "ex:msyn/hid-20092/catalyst/nickel-on-ceramic-cubes",
+      "target": "ex:msyn/hid-20092/material/ceramic-cubes"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/50",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 37, Bijlage 3",
+            "note": "quote withheld: sha256:d852a11bb0a8198196a9179f9991159d1a997cb131937890f851f3acbae5690a chars:163",
+            "passage": "hid-20092/p37/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/claim/co-below-20-percent",
+      "target": "ex:msyn/hid-20092/feed/converter-inlet-gas"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/51",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 37, Bijlage 3",
+            "note": "quote withheld: sha256:d852a11bb0a8198196a9179f9991159d1a997cb131937890f851f3acbae5690a chars:163",
+            "passage": "hid-20092/p37/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/claim/co-below-20-percent",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/52",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 37, Bijlage 3",
+            "note": "quote withheld: sha256:fbc9c3d9c92d28bcc09232eabeccad8b8761ccf259fdf85f32d5f5d211aaf145 chars:79",
+            "passage": "hid-20092/p37/2",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 20, VI B",
+            "note": "quote withheld: sha256:39774796e05745dd4ba02721dec55ef7df970c1ca1e7d9e0e9500fb3241babdf chars:164",
+            "passage": "hid-20092/p20/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/claim/design-h2-co-3-7",
+      "target": "ex:msyn/hid-20092/feed/converter-inlet-gas"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/53",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 37, Bijlage 3, De reactie temperatuur",
+            "note": "'3300C' reads 330 °C; quote withheld: sha256:0a152c049f721e9759e796450004bde6383c87e3d9e87e5f559f3728e045964f chars:158",
+            "passage": "hid-20092/p37/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/claim/design-temperature-330c",
+      "target": "ex:msyn/hid-20092/reactor/methanol-converter"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/54",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 37, Bijlage 3, De reactie temperatuur",
+            "note": "'3300C' reads 330 °C; quote withheld: sha256:0a152c049f721e9759e796450004bde6383c87e3d9e87e5f559f3728e045964f chars:158",
+            "passage": "hid-20092/p37/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/claim/design-temperature-330c",
+      "target": "ex:msyn/hid-20092/catalyst/methanol-synthesis-catalyst"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/55",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 37, Bijlage 3, De werkdruk",
+            "note": "quote withheld: sha256:4123f18273c675320ebb5420ab92045d9a329bdd605b3c98d6aa2dc9ff9e3ec1 chars:136",
+            "passage": "hid-20092/p37/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/claim/design-pressure-260-atm",
+      "target": "ex:msyn/hid-20092/reactor/methanol-converter"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/56",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 38, Bijlage 3",
+            "note": "quote withheld: sha256:14af32d0f1eed8e54232d7bf7f39c9ca419854a57affe7014b733ccd309f3751 chars:223",
+            "passage": "hid-20092/p38/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 38, Bijlage 3",
+            "note": "quote withheld: sha256:e2cce3e7dcc9184d1bbfc444ec8109da0e2f45632a796f6725640c9d8a098a5d chars:155",
+            "passage": "hid-20092/p38/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/claim/converter-cooling-needed",
+      "target": "ex:msyn/hid-20092/reactor/methanol-converter"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/57",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 39, Bijlage 3",
+            "note": "quote withheld: sha256:7fdd2bba5e73c646719f1a6836f95da77f9db367644fac87589e4995be59c99c chars:62",
+            "passage": "hid-20092/p39/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 39, Bijlage 3",
+            "note": "quote withheld: sha256:a47dbbf6903cfcd6bae3d0296af2503440b3d112bb5fe6ec893cabe01a431bef chars:94",
+            "passage": "hid-20092/p39/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 41, Bijlage 3 B",
+            "note": "quote withheld: sha256:57720f7d9b7dab1c7841331a28a6d60cb512d6237724c4e866f6a9b5ccb4fe38 chars:109",
+            "passage": "hid-20092/p41/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 41, Bijlage 3 B",
+            "note": "quote withheld: sha256:e2d67a844949c1024f49aafb99b876e82c9dbaa9d4bf82883c57ffd2a9e3a090 chars:70",
+            "passage": "hid-20092/p41/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/claim/cold-gas-15-percent-exit-360c",
+      "target": "ex:msyn/hid-20092/reactor/methanol-converter"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/58",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 39, Bijlage 3 A",
+            "note": "quote withheld: sha256:2b0dc38f348dd0bd2a956b639565be0066ef6ff143f5bfc5a3617486a4694077 chars:140",
+            "passage": "hid-20092/p39/2",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 39, Bijlage 3 A",
+            "note": "quote withheld: sha256:8e638ca2d797eb740931756f13f700f6fb6970620a926a085b9defacae6af5b1 chars:77",
+            "passage": "hid-20092/p39/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/claim/gas-load-40000",
+      "target": "ex:msyn/hid-20092/catalyst/methanol-synthesis-catalyst"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/59",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 39, Bijlage 3 A",
+            "note": "quote withheld: sha256:2b0dc38f348dd0bd2a956b639565be0066ef6ff143f5bfc5a3617486a4694077 chars:140",
+            "passage": "hid-20092/p39/2",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 39, Bijlage 3 A",
+            "note": "quote withheld: sha256:8e638ca2d797eb740931756f13f700f6fb6970620a926a085b9defacae6af5b1 chars:77",
+            "passage": "hid-20092/p39/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/claim/gas-load-40000",
+      "target": "ex:msyn/hid-20092/reactor/methanol-converter"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/6",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 33, Bijlage 1 C",
+            "note": "quote withheld: sha256:adcd70797c3d7c62af2eb405fe6202e946433550ec69442f4341d1fb5b5e7562 chars:93",
+            "passage": "hid-20092/p33/2",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 32, Bijlage 1 B",
+            "note": "quote withheld: sha256:98d9d8001030afd2d4687ead49f2ca9f34a8dba82c72c8ae26a0ccb631644727 chars:72",
+            "passage": "hid-20092/p32/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 33, Bijlage 1 B",
+            "note": "quote withheld: sha256:dcfd06e23c74633b103e4483b3b684346e3ca7190fb6d98622e466ea25274767 chars:17",
+            "passage": "hid-20092/p33/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/catalyst/nickel-on-ceramic-cubes",
+      "target": "ex:msyn/hid-20092/reaction/steam-reforming-to-co"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/60",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 41, Bijlage 3 B",
+            "note": "quote withheld: sha256:e52236b17a258c678b80d82fff54e01bf7e11b37b5b5e278a4cd01c90618eb04 chars:93",
+            "passage": "hid-20092/p41/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 41, Bijlage 3 B",
+            "note": "quote withheld: sha256:ff2aaba11d68814e73513f0ed471a0b35d6be12595b0a25dee9dac4e90bd8f85 chars:29",
+            "passage": "hid-20092/p41/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/claim/heat-of-methanol-formation",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/61",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 38, Bijlage 3",
+            "note": "quote withheld: sha256:8d03c3aa32cb6561a243dadb84f4e2c2b0eb0527068743fd229bec8ecca33030 chars:63",
+            "passage": "hid-20092/p38/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 38, Bijlage 3",
+            "note": "quote withheld: sha256:610dd92d2b261fd6aa06a9468a1a810f4103725d9561f8fde1c967ae63737b98 chars:88",
+            "passage": "hid-20092/p38/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/hypothesis/rate-proportional-to-distance-from-equilibrium",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/62",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 20, VI B",
+            "note": "quote withheld: sha256:f828576cedc9efbfa833aea241718e6402116c3eb18f39c327b566cf92956d80 chars:78",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/claim/inert-gas-13-percent",
+      "target": "ex:msyn/hid-20092/feed/converter-inlet-gas"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/63",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 20, VI B",
+            "note": "quote withheld: sha256:1f034e7f18c952d796cb426b26ad8b6bdad8e770b089209801007880336db997 chars:86",
+            "passage": "hid-20092/p20/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/claim/h2-co-4-at-8-10-fold-recycle",
+      "target": "ex:msyn/hid-20092/feed/converter-inlet-gas"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/64",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 22, VI B",
+            "note": "quote withheld: sha256:eb7a1d48cf3f0a77509583b43690a6650b3f0a9f9a7a1c64773f3f3ad02175d7 chars:45",
+            "passage": "hid-20092/p22/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/claim/recycle-ratio-9-74",
+      "target": "ex:msyn/hid-20092/feed/converter-inlet-gas"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/65",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 22, VI B",
+            "note": "quote withheld: sha256:eb7a1d48cf3f0a77509583b43690a6650b3f0a9f9a7a1c64773f3f3ad02175d7 chars:45",
+            "passage": "hid-20092/p22/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/claim/recycle-ratio-9-74",
+      "target": "ex:msyn/hid-20092/feed/fresh-synthesis-gas"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/66",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 30, Bijlage 1 A",
+            "note": "quote withheld: sha256:f265c8b0c1bc0fee55fb70fe8650d7c0d5799d58208d19590f24face892ea657 chars:85",
+            "passage": "hid-20092/p30/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 30, Bijlage 1 A",
+            "note": "quote withheld: sha256:839a61141ce9a12d10fc5272ac166fbde7806fca059c4b3d24fbf430d1b3d634 chars:134",
+            "passage": "hid-20092/p30/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/claim/fresh-gas-h2-co-2-35",
+      "target": "ex:msyn/hid-20092/feed/fresh-synthesis-gas"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/67",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 19, Zuivering van het synthesegas",
+            "note": "quote withheld: sha256:797b663000643c41b97e7a79bafe37c2f0615b30c99b9938371a70eb4704a17c chars:176",
+            "passage": "hid-20092/p19/2",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 19, Zuivering van het synthesegas",
+            "note": "quote withheld: sha256:2cb6506e84288df5ae480b9cb8e2d3356ad33bd4fe012961bcceb4db67e36016 chars:159",
+            "passage": "hid-20092/p19/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/claim/small-co2-excess-not-removed",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/68",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 19, Zuivering van het synthesegas",
+            "note": "quote withheld: sha256:797b663000643c41b97e7a79bafe37c2f0615b30c99b9938371a70eb4704a17c chars:176",
+            "passage": "hid-20092/p19/2",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 19, Zuivering van het synthesegas",
+            "note": "quote withheld: sha256:2cb6506e84288df5ae480b9cb8e2d3356ad33bd4fe012961bcceb4db67e36016 chars:159",
+            "passage": "hid-20092/p19/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/claim/small-co2-excess-not-removed",
+      "target": "ex:msyn/hid-20092/feed/fresh-synthesis-gas"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/69",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 19, Zuivering van het synthesegas",
+            "note": "quote withheld: sha256:797b663000643c41b97e7a79bafe37c2f0615b30c99b9938371a70eb4704a17c chars:176",
+            "passage": "hid-20092/p19/2",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 19, Zuivering van het synthesegas",
+            "note": "quote withheld: sha256:2cb6506e84288df5ae480b9cb8e2d3356ad33bd4fe012961bcceb4db67e36016 chars:159",
+            "passage": "hid-20092/p19/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/claim/small-co2-excess-not-removed",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/7",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 33, Bijlage 1 C",
+            "note": "quote withheld: sha256:adcd70797c3d7c62af2eb405fe6202e946433550ec69442f4341d1fb5b5e7562 chars:93",
+            "passage": "hid-20092/p33/2",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 32, Bijlage 1 B",
+            "note": "quote withheld: sha256:98d9d8001030afd2d4687ead49f2ca9f34a8dba82c72c8ae26a0ccb631644727 chars:72",
+            "passage": "hid-20092/p32/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 33, Bijlage 1 B",
+            "note": "quote withheld: sha256:d8493d1bc6f4130de84fd28e8777a640454019d8a56757e0c14daa84c89d00b8 chars:32",
+            "passage": "hid-20092/p33/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/catalyst/nickel-on-ceramic-cubes",
+      "target": "ex:msyn/hid-20092/reaction/co2-reforming"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/70",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 22, Actieve koolvat",
+            "note": "quote withheld: sha256:3f1a27fabd330e21bd7742a6845ecf20ec6c537e3134216acb4eebd2153da645 chars:176",
+            "passage": "hid-20092/p22/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/claim/active-carbon-removes-poisons",
+      "target": "ex:msyn/species/feco5"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/71",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 22, Actieve koolvat",
+            "note": "quote withheld: sha256:3f1a27fabd330e21bd7742a6845ecf20ec6c537e3134216acb4eebd2153da645 chars:176",
+            "passage": "hid-20092/p22/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/claim/active-carbon-removes-poisons",
+      "target": "ex:msyn/species/cos"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/72",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 22, Actieve koolvat",
+            "note": "quote withheld: sha256:3f1a27fabd330e21bd7742a6845ecf20ec6c537e3134216acb4eebd2153da645 chars:176",
+            "passage": "hid-20092/p22/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/claim/active-carbon-removes-poisons",
+      "target": "ex:msyn/hid-20092/catalyst/methanol-synthesis-catalyst"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/73",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 24, VI B",
+            "note": "quote withheld: sha256:97a83340b2dd2bd1d1fa5dc227bec941f45972807e9e192895f4fd8edd06b041 chars:90",
+            "passage": "hid-20092/p24/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/claim/nh3-o2-injection-sulfur",
+      "target": "ex:msyn/species/nh3"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/74",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 24, VI B",
+            "note": "quote withheld: sha256:97a83340b2dd2bd1d1fa5dc227bec941f45972807e9e192895f4fd8edd06b041 chars:90",
+            "passage": "hid-20092/p24/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/claim/nh3-o2-injection-sulfur",
+      "target": "ex:msyn/hid-20092/feed/fresh-synthesis-gas"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/75",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 16, Absorptietank voor Zwavelverbindingen",
+            "note": "quote withheld: sha256:4b0002af193f1e1aafc7fd63ece83719c0bffccc96ad8216c9ecfb361cf8306c chars:113",
+            "passage": "hid-20092/p16/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 15",
+            "note": "quote withheld: sha256:054601ef37ff2c0365ee1b4b12002cf6e88ad4d806cb9daf8af2ed3d09ff15dc chars:47",
+            "passage": "hid-20092/p15/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/claim/zno-absorbs-sulfur",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/76",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 16, Absorptietank voor Zwavelverbindingen",
+            "note": "quote withheld: sha256:4b0002af193f1e1aafc7fd63ece83719c0bffccc96ad8216c9ecfb361cf8306c chars:113",
+            "passage": "hid-20092/p16/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 15",
+            "note": "quote withheld: sha256:054601ef37ff2c0365ee1b4b12002cf6e88ad4d806cb9daf8af2ed3d09ff15dc chars:47",
+            "passage": "hid-20092/p15/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/claim/zno-absorbs-sulfur",
+      "target": "ex:msyn/species/h2s"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/77",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 16, Absorptietank voor Zwavelverbindingen",
+            "note": "quote withheld: sha256:4b0002af193f1e1aafc7fd63ece83719c0bffccc96ad8216c9ecfb361cf8306c chars:113",
+            "passage": "hid-20092/p16/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 15",
+            "note": "quote withheld: sha256:054601ef37ff2c0365ee1b4b12002cf6e88ad4d806cb9daf8af2ed3d09ff15dc chars:47",
+            "passage": "hid-20092/p15/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/claim/zno-absorbs-sulfur",
+      "target": "ex:msyn/hid-20092/species/mercaptans"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/78",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 21, VI B",
+            "note": "quote withheld: sha256:ccf32ba05c29f7a82b4716927af8124a46dfed3dd451baad35f2d2ae9f6cbdc1 chars:132",
+            "passage": "hid-20092/p21/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 21, VI B",
+            "note": "quote withheld: sha256:bed674afccb7d76de2c6ab2ebe491a1628b3415cda7b1844a0018b0d5b7a2010 chars:60",
+            "passage": "hid-20092/p21/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 13, V C",
+            "note": "quote withheld: sha256:ed0a3132e46818d001e222430aaedbe6af0715503be127791a65285d4644fefb chars:135",
+            "passage": "hid-20092/p13/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/claim/crude-methanol-byproducts",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/79",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 21, VI B",
+            "note": "quote withheld: sha256:ccf32ba05c29f7a82b4716927af8124a46dfed3dd451baad35f2d2ae9f6cbdc1 chars:132",
+            "passage": "hid-20092/p21/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 21, VI B",
+            "note": "quote withheld: sha256:bed674afccb7d76de2c6ab2ebe491a1628b3415cda7b1844a0018b0d5b7a2010 chars:60",
+            "passage": "hid-20092/p21/1",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 13, V C",
+            "note": "quote withheld: sha256:ed0a3132e46818d001e222430aaedbe6af0715503be127791a65285d4644fefb chars:135",
+            "passage": "hid-20092/p13/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/claim/crude-methanol-byproducts",
+      "target": "ex:msyn/species/ch3och3"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/8",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 15, natural gas analysis",
+            "note": "OCR of the text layer: 'Cl' = C1, '03' = C3, '04' = C4, '002' = CO2, '02' = O2; quote withheld: sha256:df0dd29581575afa337c217aa09b1b647c93569c7462f9f9b42853e1a38c185f chars:56",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "89,15 %",
+          "unit": "%",
+          "value": 89.15
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/hid-20092/feed/natural-gas-wanneperveen",
+      "target": "ex:msyn/species/ch4"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/9",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 15, natural gas analysis",
+            "note": "OCR of the text layer: 'Cl' = C1, '03' = C3, '04' = C4, '002' = CO2, '02' = O2; quote withheld: sha256:df0dd29581575afa337c217aa09b1b647c93569c7462f9f9b42853e1a38c185f chars:56",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "2,74 %",
+          "unit": "%",
+          "value": 2.74
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/hid-20092/feed/natural-gas-wanneperveen",
+      "target": "ex:msyn/hid-20092/species/c2-hydrocarbons"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/cs5-1",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "werd voor het katalysatorvolume 1 m3 genomen",
+          "unit": "m3",
+          "value": 1
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 39, Bijlage 3 A",
+            "note": "quote withheld: sha256:8e638ca2d797eb740931756f13f700f6fb6970620a926a085b9defacae6af5b1 chars:77",
+            "passage": "hid-20092/p39/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "state": "operating"
+      },
+      "source": "ex:msyn/hid-20092/test/planned-converter-operation",
+      "target": "ex:msyn/hid-20092/sample/planned-converter-charge"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/cs5-10",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 24",
+            "note": "quote withheld: sha256:cf9c7a262dbdd9f8c1da3bf8e2d4ec965442b87d9c32e16ddebaa32a527348d5 chars:128",
+            "passage": "hid-20092/p24/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/test/planned-converter-operation",
+      "target": "ex:msyn/hid-20092/unit/preheater"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/cs5-2",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 39, Bijlage 3 A",
+            "note": "quote withheld: sha256:8e638ca2d797eb740931756f13f700f6fb6970620a926a085b9defacae6af5b1 chars:77",
+            "passage": "hid-20092/p39/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/sample/planned-converter-charge",
+      "target": "ex:msyn/hid-20092/catalyst/methanol-synthesis-catalyst"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/cs5-3",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 37, Bijlage 3",
+            "note": "quote withheld: sha256:5c2ea00cf82c58b7f29ecea94b136ada027718585f81af48a0700fd663c7843d chars:30",
+            "passage": "hid-20092/p37/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/test/planned-converter-operation",
+      "target": "ex:msyn/hid-20092/feed/converter-inlet-gas"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/cs5-4",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 37, Bijlage 3",
+            "note": "text layer '3300C' = 330 °C; quote withheld: sha256:1d7be54e8685f098afce82528632e9a2140f0e83f04b736828ec2f2fd6dd84fb chars:25",
+            "passage": "hid-20092/p37/2",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 37, Bijlage 3",
+            "note": "quote withheld: sha256:231cea9628b0d0f7622ba57899ac1b595605097309169fcd6938cae8edb71224 chars:21",
+            "passage": "hid-20092/p37/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/test/planned-converter-operation",
+      "target": "ex:msyn/hid-20092/reactor/methanol-converter"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/cs5-5",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 37, Bijlage 3",
+            "note": "quote withheld: sha256:b24a18f75b1bdc8545a464cdd14633403b04592b08d70199700522c26a7da958 chars:114",
+            "passage": "hid-20092/p37/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/test/planned-converter-operation",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/cs5-6",
+      "type": "FEEDS_INTO",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 24",
+            "note": "quote withheld: sha256:cf9c7a262dbdd9f8c1da3bf8e2d4ec965442b87d9c32e16ddebaa32a527348d5 chars:128",
+            "passage": "hid-20092/p24/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "order": 1,
+        "stream": "synthesis gas preheated in the heat exchanger (25 → 216 °C)"
+      },
+      "source": "ex:msyn/hid-20092/unit/hp-heat-exchanger",
+      "target": "ex:msyn/hid-20092/unit/preheater"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/cs5-7",
+      "type": "FEEDS_INTO",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 24",
+            "note": "quote withheld: sha256:cf9c7a262dbdd9f8c1da3bf8e2d4ec965442b87d9c32e16ddebaa32a527348d5 chars:128",
+            "passage": "hid-20092/p24/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "order": 2,
+        "stream": "synthesis gas brought to the temperature for methanol conversion"
+      },
+      "source": "ex:msyn/hid-20092/unit/preheater",
+      "target": "ex:msyn/hid-20092/reactor/methanol-converter"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/cs5-8",
+      "type": "FEEDS_INTO",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 24",
+            "note": "quote withheld: sha256:bb135b4b6e2458ea3d7531d37b9ffbb6d73dc439b4ae86a27a1a543768f6ba0e chars:83",
+            "passage": "hid-20092/p24/2",
+            "source": "ex:msyn/source/hid-20092"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 25",
+            "note": "quote withheld: sha256:ce3997f3423c60703f3e64ffb8797bb3d1182b14a47248ea732dd8537bcd8215 chars:83",
+            "passage": "hid-20092/p25/1",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ],
+        "order": 3,
+        "stream": "hot converter exit gas (about 350 °C), cooled to about 180 °C"
+      },
+      "source": "ex:msyn/hid-20092/reactor/methanol-converter",
+      "target": "ex:msyn/hid-20092/unit/hp-heat-exchanger"
+    },
+    {
+      "id": "ex:msyn/hid-20092/link/cs5-9",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 24",
+            "note": "quote withheld: sha256:bb135b4b6e2458ea3d7531d37b9ffbb6d73dc439b4ae86a27a1a543768f6ba0e chars:83",
+            "passage": "hid-20092/p24/2",
+            "source": "ex:msyn/source/hid-20092"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20092/test/planned-converter-operation",
+      "target": "ex:msyn/hid-20092/unit/hp-heat-exchanger"
+    },
+    {
+      "id": "ex:msyn/hid-20092/material/ceramic-cubes/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 33, Bijlage 1 C"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20092/material/ceramic-cubes",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/hid-20092/reaction/co2-reforming/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 10, reaction (6)"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20092/reaction/co2-reforming",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/hid-20092/reaction/steam-reforming-to-co/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 10, reaction (4)"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20092/reaction/steam-reforming-to-co",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/hid-20092/reactor/methanol-converter/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 25",
+          "p. 38, Bijlage 3",
+          "p. 39, Bijlage 3 A",
+          "p. 40, Bijlage 3 A",
+          "p. 40, Bijlage 3 A, S",
+          "p. 40, Bijlage 3 A, pressure drop",
+          "p. 40, Bijlage 3 A, v0",
+          "p. 41, Bijlage 3 B"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20092/reactor/methanol-converter",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/hid-20092/sample/planned-converter-charge/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 39, Bijlage 3 A"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20092/sample/planned-converter-charge",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/hid-20092/species/c2-hydrocarbons/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 15, natural gas analysis"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20092/species/c2-hydrocarbons",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/hid-20092/species/c3-hydrocarbons/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 15, natural gas analysis"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20092/species/c3-hydrocarbons",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/hid-20092/species/c4-and-higher-hydrocarbons/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 15, natural gas analysis"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20092/species/c4-and-higher-hydrocarbons",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/hid-20092/species/mercaptans/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 15"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20092/species/mercaptans",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/hid-20092/test/equilibrium-approach-340c/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 39, Bijlage 3",
+          "p. 42, Bijlage 4",
+          "p. 43, Bijlage 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20092/test/equilibrium-approach-340c",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/hid-20092/test/equilibrium-approach-360c/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 39, Bijlage 3",
+          "p. 42, Bijlage 4",
+          "p. 43, Bijlage 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20092/test/equilibrium-approach-360c",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/hid-20092/test/planned-converter-operation/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 21, VI B, composition of crude methanol D",
+          "p. 22, VI B",
+          "p. 34, Bijlage 2",
+          "p. 34, Bijlage 2, Tabel V",
+          "p. 37, Bijlage 3",
+          "p. 39, Bijlage 3",
+          "p. 39, Bijlage 3 A",
+          "p. 40, Bijlage 3 A",
+          "p. 40, Bijlage 3 A, v0",
+          "p. 41, Bijlage 3 B"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20092/test/planned-converter-operation",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/hid-20092/unit/hp-heat-exchanger/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 24"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20092/unit/hp-heat-exchanger",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/hid-20092/unit/preheater/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 24"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20092/unit/preheater",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/reaction/boudouard/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 13, B",
+          "p. 13, reaction (10)"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/reaction/boudouard",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/reaction/co-hydrogenation-to-methanol/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5, II A"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/reaction/co-methanation/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 13, B",
+          "p. 13, reaction (8)"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/reaction/co-methanation",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/reaction/co2-hydrogenation-to-methanol/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5, II B"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/reaction/co2-hydrogenation-to-methanol",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/reaction/water-gas-shift/reported-in/hid-20092",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 30, Bijlage 1 A"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/reaction/water-gas-shift",
+      "target": "ex:msyn/source/hid-20092"
+    },
+    {
+      "id": "ex:msyn/source/hid-20092/authored-by/1",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 1,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/hid-20092",
+      "target": "ex:msyn/person/r-a-t-o-nijsing"
+    },
+    {
+      "id": "ex:msyn/source/hid-20092/authored-by/2",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 2,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/hid-20092",
+      "target": "ex:msyn/person/j-w-keasberry"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/hid-20092"
+}

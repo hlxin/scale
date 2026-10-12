@@ -1,0 +1,3829 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/analysis/check-pasquon-vs-natta",
+      "label": "Analysis",
+      "props": {
+        "name": "check of Pasquon's rate equation against Natta's measured isotherm at 397 °C (Abb. 1)",
+        "analysis_kind": "kinetic_fit",
+        "conditions": {
+          "h2_fraction": {
+            "status": "present",
+            "as_reported": "H2 = 90,9%",
+            "note": "feed H2 of Natta's isotherm, Abb. 1 legend; basis not stated",
+            "unit": "%",
+            "value": 90.9
+          }
+        },
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "p. 3, Abb. 1",
+            "note": "quote withheld: sha256:85d8d40e8e7f0a689d5ab0725ff8f8fe89fb534b0cd20e6653e8dfe1d8c0f651 chars:48",
+            "passage": "10.1515-zpch-1964-22523/p3/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:4e39af35e3c7ce1ab728c36bc49f86522b027e0f2149d6032ccddb0346a16ae9 chars:64",
+            "passage": "10.1515-zpch-1964-22523/p3/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:b1ea9d738cc89db6b325e7f23b552cee2c6960c7ce4a10cc72b53d296f563259 chars:72",
+            "passage": "10.1515-zpch-1964-22523/p3/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:0af08d5f9ac73922353f1324fe6fef2b18a83f10ea69459eb409ec8a6ff65370 chars:64",
+            "passage": "10.1515-zpch-1964-22523/p4/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 3, Abb. 1 (legend)",
+            "note": "second_reading withheld: sha256:ecb5be6a68f8315898925498aea80a371c0dac36a8f8fcbf423f8db7f8d9f6da chars:92; transcription withheld: sha256:2230ee3ec529d41d042ea2efde44943a2ec3b25374dffe6856bafab12f015f84 chars:32",
+            "reading": "vision_ocr",
+            "region": [
+              0.54,
+              0.51,
+              0.7,
+              0.585
+            ],
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "method": "Natta's measured isotherm differentiated graphically and compared with rates from Pasquon's equation with Newton fugacity coefficients",
+        "pressure": {
+          "status": "present",
+          "as_reported": "p = 220 at",
+          "note": "conditions of Natta's isotherm as given in the Abb. 1 legend; read from the page image (re-curation 2026-09-29)",
+          "unit": "at",
+          "value": 220
+        },
+        "results": {
+          "max_deviation_single_isotherms": {
+            "status": "present",
+            "as_reported": "bis zu 15%",
+            "bound": "upper",
+            "unit": "%",
+            "value": 15
+          }
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "397 °C",
+          "unit": "°C",
+          "value": 397
+        },
+        "verdict": "deviations small at 397 °C; up to 15% on single isotherms; Natta's own equation reproduces the data only slightly worse"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/catalyst/leuna-kontakt",
+      "label": "Catalyst",
+      "props": {
+        "name": "Leuna-Kontakt (Leuna methanol catalyst, 5 mm and 9 mm pellets)",
+        "catalyst_family": "not_reported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:104f4b973365d689d7873f83529f738f988cfeacb360846a3e5a155bd0d0b575 chars:62",
+            "passage": "10.1515-zpch-1964-22523/p2/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 14",
+            "note": "quote withheld: sha256:976c34ecbb472243d29a48485e9edbbc8f33563a74e05acdaae61c8992caee85 chars:43",
+            "passage": "10.1515-zpch-1964-22523/p14/3",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 14",
+            "note": "quote withheld: sha256:9d1e3b9df03e0c9cbde5ad82dbf1d2fe48468d5112a5b9f01af06cade383ca38 chars:68",
+            "passage": "10.1515-zpch-1964-22523/p14/3",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "generality": "kind",
+        "note": "composition and preparation are not stated in this paper",
+        "properties": {
+          "mean_bulk_density": {
+            "status": "present",
+            "as_reported": "1,60 g/cm3",
+            "basis": "mittleres Schüttgewicht",
+            "unit": "g/cm3",
+            "value": 1.6
+          },
+          "pellet_sizes": {
+            "status": "present",
+            "as_reported": "5-mm- und 9-mm-Pillen",
+            "text_value": "5 mm and 9 mm pellets"
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/catalyst/montecatini-kontakt",
+      "label": "Catalyst",
+      "props": {
+        "name": "Montecatini-Kontakt of Natta's test reactor (0.6-0.9 mm grains)",
+        "catalyst_family": "not_reported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 14",
+            "note": "quote withheld: sha256:edbcdee2aaa7b92d1614fc5edc83e07221510a7c4c4d77f982a93d2fb0f7da77 chars:67",
+            "passage": "10.1515-zpch-1964-22523/p14/3",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 14",
+            "note": "quote withheld: sha256:81e42f88e3ba9b5acb60925b3ee4e2b64ea7d8fc336d36a29004c85fe2bb6ead chars:64",
+            "passage": "10.1515-zpch-1964-22523/p14/3",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "generality": "kind",
+        "note": "cited from Natta's work; only its bulk density and grain size are stated here",
+        "properties": {
+          "bulk_density": {
+            "status": "present",
+            "as_reported": "etwa 0,85 g/cm3",
+            "qualifier": "approximate",
+            "unit": "g/cm3",
+            "value": 0.85
+          },
+          "grain_size": {
+            "status": "present",
+            "as_reported": "0,6 · · 0,9 mm",
+            "lower": 0.6,
+            "unit": "mm",
+            "upper": 0.9
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/catalyst/zno-cr2o3-cuo-pasquon",
+      "label": "Catalyst",
+      "props": {
+        "name": "ZnO-Cr2O3-CuO contact (Pasquon, cited)",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:33e3424b1ea31fc6c5600512ab9ba0ca3783c397001bd32c561800af728e2f95 chars:55",
+            "passage": "10.1515-zpch-1964-22523/p2/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "generality": "kind",
+        "note": "cited from Pasquon's work"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/catalyst/zno-cr2o3-pasquon",
+      "label": "Catalyst",
+      "props": {
+        "name": "ZnO-Cr2O3 contact (Pasquon, cited)",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:134b71f36cbc2b3d3b43017a2c1a30e23c7d2aeb98923a6adcc53e166d1ac221 chars:63",
+            "passage": "10.1515-zpch-1964-22523/p1/3",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "generality": "kind",
+        "note": "cited from Pasquon's work"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/claim/adsorption-constants",
+      "label": "Claim",
+      "props": {
+        "name": "CO adsorption constant about 6 times that of H2, and CH3OH larger than CO (Natta and Pasquon, cited)",
+        "claim_kind": "finding",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:711865d685fc8fcbda8528149a0575a2a838bede3986351244e82f2eb0b68af2 chars:68",
+            "passage": "10.1515-zpch-1964-22523/p2/2",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:abe9f664af3a256a329880bfc6e10b9df363fd04aa0b22e11c84f936e2acda1f chars:62",
+            "passage": "10.1515-zpch-1964-22523/p2/2",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "cited from Natta and Pasquon",
+        "statement": "Natta and Pasquon report that the adsorption equilibrium constant of CO is about 6 times that of H2 and that of CH3OH larger again than that of CO, consistent with the maximum rate occurring at H2/CO ratios above stoichiometric and with reaction in the adsorbed phase."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/claim/agreement",
+      "label": "Claim",
+      "props": {
+        "name": "the recalculation with Pasquon's equation agrees well with the plant measurements (final conversion 4.3% calculated vs 3.6% measured; wall temperatures)",
+        "claim_kind": "conclusion",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:29edfcbc19a7a0adf42a5856db7d2a797fd3d1e7997619c6129bcca4785c474a chars:81",
+            "passage": "10.1515-zpch-1964-22523/p1/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 14",
+            "note": "quote withheld: sha256:c97659277892980126e3b3796a472d650cdaf1cbf6e24f87a7b0342725f99021 chars:59",
+            "passage": "10.1515-zpch-1964-22523/p14/2",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "inference_type": "computational",
+        "statement": "The recalculation of the Leuna converter with Pasquon's kinetic equation agrees well with the operating measurements: the calculated final conversion of 4.3% is higher than the measured 3.6%, and the furnace wall temperatures agree, supporting the use of Pasquon's equation for reactors with the Leuna catalyst."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/claim/hottest-lower-third",
+      "label": "Claim",
+      "props": {
+        "name": "highest temperatures can lie in the lower third of the converter (confirms plant observation)",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:e1b0f71b306c7294cf37cefe28b9749c560f325e754b627d5b8f49904e710c0a chars:62",
+            "passage": "10.1515-zpch-1964-22523/p8/3",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:266c86592899b1b67f5535267aae7376e94a0cb4c2e9118b6a9400a38a5c2bbb chars:69",
+            "passage": "10.1515-zpch-1964-22523/p8/3",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "inference_type": "computational",
+        "statement": "The calculated temperature profile confirms the plant observation that the highest temperatures can lie in the lower third of the converter, explained by the different cold-gas amounts and layer heights with an almost linear increase of conversion."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/claim/inflection-at-max-rate",
+      "label": "Claim",
+      "props": {
+        "name": "the inflection of the temperature profile between cold-gas feeds lies where the rate is maximal; the 2nd cold-gas amount was much too small",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:4fe430aa36b73d4b83bd5ead5a48f7ac46da18035dad72b2b81adeb35ca59804 chars:63",
+            "passage": "10.1515-zpch-1964-22523/p8/3",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 9",
+            "note": "quote withheld: sha256:bd29be728997bf8cbffdcc39517b1d8c52a6703e2edac5541fe69489d66fed03 chars:31",
+            "passage": "10.1515-zpch-1964-22523/p9/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 9",
+            "note": "quote withheld: sha256:aec91207035402ea1aa823afaf375822849cf30bb9a690161efdcfc41ebcb3b5 chars:67",
+            "passage": "10.1515-zpch-1964-22523/p9/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "inference_type": "computational",
+        "statement": "Between two cold-gas injections the temperature profile has an inflection point where the reaction rate reaches its maximum; the second cold-gas amount was much too small, so the temperature of maximum rate was not reached in that section and the rate fell continuously."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/claim/inlet-temperatures",
+      "label": "Claim",
+      "props": {
+        "name": "inlet temperature of the first stage too low and of the third too high: layer heights wrongly designed",
+        "claim_kind": "conclusion",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 13",
+            "note": "quote withheld: sha256:80775f03f01a4984c888c9e18c28f98b41d97c16b5442ba4b1e24b943799497f chars:65",
+            "passage": "10.1515-zpch-1964-22523/p13/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 13",
+            "note": "quote withheld: sha256:e4a0c950d332c0ccbe7c4624c8c6cb6d2fc98d53a8521a6044a91a71bfbf2b27 chars:71",
+            "passage": "10.1515-zpch-1964-22523/p13/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 14",
+            "note": "quote withheld: sha256:ca8aa8e69e59e5cdd898b63e6491a9fcb027e9a46731b697e11f4f0fa432565e chars:70",
+            "passage": "10.1515-zpch-1964-22523/p14/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "inference_type": "computational",
+        "statement": "The recalculation showed that the inlet temperature of the first stage is too low and that of the third stage too high; both stages were controlled so that the outlet approaches the permitted 400 °C. The unfavourable inlet temperatures are ultimately due to a wrong design of the catalyst layer heights."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/claim/leuna-twice-per-volume",
+      "label": "Claim",
+      "props": {
+        "name": "per reactor volume the Leuna converter does almost twice as much as Natta's test reactor",
+        "claim_kind": "comparison",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 14",
+            "note": "quote withheld: sha256:9d1e3b9df03e0c9cbde5ad82dbf1d2fe48468d5112a5b9f01af06cade383ca38 chars:68",
+            "passage": "10.1515-zpch-1964-22523/p14/3",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 14",
+            "note": "quote withheld: sha256:fdf356832c48aafe69d8db61f8a90b3b6ef5df1484e0dbec1848c7a14d4a2ba9 chars:68",
+            "passage": "10.1515-zpch-1964-22523/p14/3",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Because the rates were referred to catalyst weight and the Leuna catalyst's mean bulk density is 1.60 g/cm3 against about 0.85 g/cm3 for the Montecatini catalyst, the Leuna converter does almost twice as much per reactor volume as Natta's test reactor."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/claim/limit-400",
+      "label": "Claim",
+      "props": {
+        "name": "in practice temperatures of about 400 °C must not be exceeded because strongly exothermic methane formation sets in",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:8d75c0308291eda4174eb7239d3811054f6fbf2b9e72ab6f7820a56745f69157 chars:64",
+            "passage": "10.1515-zpch-1964-22523/p12/4",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:095396e1ba339a3fb9eb889cfc8e7d9f9639d52636e2ec63e479ea47638d5385 chars:71",
+            "passage": "10.1515-zpch-1964-22523/p12/4",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "In practice temperatures of about 400 °C must not be exceeded, since otherwise the strongly exothermic methane formation occurs; only a limited number of cold-gas lines can be fitted, and at higher methanol concentrations the rate maxima move to lower temperatures."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/claim/longer-converter",
+      "label": "Claim",
+      "props": {
+        "name": "at 7.1 m bed height no limit is reached; a longer converter would raise conversion appreciably; reactor gives about 50% of equilibrium conversion",
+        "claim_kind": "conclusion",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:0d65f5b87a3abb135d0dfdba7b9e504cb0cfd861df5ad1b978efdc05bf5bdcfe chars:67",
+            "passage": "10.1515-zpch-1964-22523/p8/2",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:f33a475ef7c0b166bad07cb5cc8c4df1fed82e98f7afd3243c282bb944e7b960 chars:67",
+            "passage": "10.1515-zpch-1964-22523/p8/2",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "inference_type": "computational",
+        "statement": "At a catalyst height of 7.1 m the conversion has not reached a limiting value, so lengthening the converter would noticeably increase conversion; the equilibrium conversion at outlet conditions is about 7.5% methanol, so the reactor achieves only about 50% of the thermodynamically possible conversion."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/claim/optimum-inflection-mid-layer",
+      "label": "Claim",
+      "props": {
+        "name": "the converter runs optimally when the inflection point lies about in the middle of a catalyst section",
+        "claim_kind": "conclusion",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:f1ebd3846d9e5b2dfad409a2661514c611a55f9efb49d4be5bf2b174f6ae7a3d chars:58",
+            "passage": "10.1515-zpch-1964-22523/p12/2",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:99f4bac0acf23071adae8dfdd598ab878aa57bdda9ea3b76a0ec9478bbbfc73c chars:65",
+            "passage": "10.1515-zpch-1964-22523/p12/2",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "inference_type": "theoretical",
+        "statement": "Since the rate curves are roughly symmetric about their maximum, the reactor is run optimally under the given conditions when the inflection of the temperature profile lies about in the middle of a catalyst section."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/claim/pasquon-mechanism",
+      "label": "Claim",
+      "props": {
+        "name": "Pasquon (cited): rate governed by third-order surface reactions with atomic hydrogen; on ZnO-Cr2O3 CO + 2H = CH2O and CH2O + 2H = CH3OH, on ZnO-Cr2O3-CuO only formaldehyde formation",
+        "claim_kind": "mechanism",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:134b71f36cbc2b3d3b43017a2c1a30e23c7d2aeb98923a6adcc53e166d1ac221 chars:63",
+            "passage": "10.1515-zpch-1964-22523/p1/3",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:1baa0a97ac5b444a089620fa06ca74f07056acf30bc57cf72c141aec243f3672 chars:67",
+            "passage": "10.1515-zpch-1964-22523/p1/3",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:33e3424b1ea31fc6c5600512ab9ba0ca3783c397001bd32c561800af728e2f95 chars:55",
+            "passage": "10.1515-zpch-1964-22523/p2/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "cited from Pasquon (ref. 7) and Natta (ref. 5)",
+        "statement": "According to Pasquon, the overall rate is determined by at least one third-order surface reaction in the adsorbed phase with hydrogen adsorbed atomically; on a ZnO-Cr2O3 contact two third-order reactions, CO + 2H = CH2O and CH2O + 2H = CH3OH, are rate-determining, whereas on a ZnO-Cr2O3-CuO contact only the formation of formaldehyde matters."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/claim/planned-test-reactor",
+      "label": "Claim",
+      "props": {
+        "name": "an experimental reactor for the kinetics with the Leuna catalyst is planned; further optimisation on the ZRA 1 computer",
+        "claim_kind": "other",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 14",
+            "note": "quote withheld: sha256:a394f15c82dc051d7469f43b3c876fe32d46206b4854d2ae6b2dfa7309557641 chars:66",
+            "passage": "10.1515-zpch-1964-22523/p14/4",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 14",
+            "note": "quote withheld: sha256:1e951389e1601664743fb4af0c83e3085c476563fe04996b761ed729525dbe7b chars:66",
+            "passage": "10.1515-zpch-1964-22523/p14/2",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Differences such as 3.6% measured versus 4.3% calculated conversion are of the order of the possible improvement in optimisation, so an experimental reactor for the kinetics of methanol synthesis with the Leuna catalyst is to be set up; further optimisation calculations will be done with the ZRA 1 computer."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/claim/temperature-effect",
+      "label": "Claim",
+      "props": {
+        "name": "temperature strongly affects the rate at low methanol concentration (345 to 365 °C: about +67%); above about 2.5% methanol the optimum falls to 375-380 °C",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:b04a2f909515dccb75d221b6767fde4e7e775253c1f36e8374e05b0bb39ee54b chars:68",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:ea7072ba086ca46b6b7256e2381c2c0cc46dfd8cb70ffe89b3b9db1ab328d6af chars:68",
+            "passage": "10.1515-zpch-1964-22523/p12/3",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 14",
+            "note": "quote withheld: sha256:0e1c5e0ea2d8740e32c1e7d5c7630515f93fe09422ba1b6905e4e015009020f1 chars:68",
+            "passage": "10.1515-zpch-1964-22523/p14/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "inference_type": "computational",
+        "statement": "At low methanol concentrations temperature has a large influence on the rate: gas entering the first layer at 365 instead of 345 °C would raise the rate by about 67%; the influence decreases with rising methanol concentration, and from about 2.5% methanol the optimum temperature falls to 375-380 °C."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/computation/abb9-rate-map",
+      "label": "Computation",
+      "props": {
+        "name": "influence of methanol concentration and temperature on the reaction rate (Abb. 9)",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "p. 13, Abb. 9",
+            "note": "quote withheld: sha256:56671245cd6bc5cda99feb3ca82a0d702a762442ef56585a7543451f8677525c chars:65",
+            "passage": "10.1515-zpch-1964-22523/p13/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:ea7072ba086ca46b6b7256e2381c2c0cc46dfd8cb70ffe89b3b9db1ab328d6af chars:68",
+            "passage": "10.1515-zpch-1964-22523/p12/3",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 14",
+            "note": "quote withheld: sha256:4c5838591131e216a5b1fba9fdbe200d1a96284d07d27c8d83adbb9f97077500 chars:20",
+            "passage": "10.1515-zpch-1964-22523/p14/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "results": {
+          "optimum_temperature_above_2_5pct_methanol": {
+            "status": "present",
+            "as_reported": "375 \" 380 °C",
+            "basis": "optimum temperature from about 2.5% methanol upward",
+            "lower": 375,
+            "unit": "°C",
+            "upper": 380
+          },
+          "rate_increase_345_to_365": {
+            "status": "present",
+            "as_reported": "um etwa 67%",
+            "basis": "increase of the reaction rate if the gas reached the first layer at 365 instead of 345 °C",
+            "qualifier": "approximate",
+            "unit": "%",
+            "value": 67
+          }
+        },
+        "task": "rate versus temperature at constant methanol concentrations"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/computation/converter-recalculation",
+      "label": "Computation",
+      "props": {
+        "name": "iterative kinetic recalculation of the Leuna converter with Pasquon's rate equation",
+        "conditions": {
+          "external_temperature": {
+            "status": "present",
+            "as_reported": "tA = 20°",
+            "note": "outside temperature t_A of the heat-loss balance, labelled in Abb. 3; unit from the nomenclature (t_A Außentemperatur [°C])",
+            "unit": "°C",
+            "value": 20
+          }
+        },
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 7, Tabelle 1",
+            "note": "quote withheld: sha256:35038551913d502977c697e3f8fb61282f23c80cbecaf6300df219afb9739322 chars:32",
+            "passage": "10.1515-zpch-1964-22523/p7/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 8, Tabelle 1",
+            "note": "continuation of Tabelle 1 for 500-1000 mm; quote withheld: sha256:ec6f557c3d3fab4a46e8be2d7e17314ea2e4dd004a08f15f838c8988f575f3fd chars:23",
+            "passage": "10.1515-zpch-1964-22523/p8/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:fd3f762d4d34a738824f368887fb3e746ad05798b209b638e63ddd2896a140e3 chars:61",
+            "passage": "10.1515-zpch-1964-22523/p4/2",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:86082cf9ec3808954b6483d68d22a3746cf39a53adc7f85b9b3d9ca2718d938a chars:66",
+            "passage": "10.1515-zpch-1964-22523/p7/3",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:c186039dac4f8d62d672bd8c1e732bcaa1692049221bc1dc6b8ceb2de94b3ebc chars:71",
+            "passage": "10.1515-zpch-1964-22523/p8/2",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:c827797a728f10cf84521cb888f48bb40ff53998902cab63afbec0961fc80e6b chars:63",
+            "passage": "10.1515-zpch-1964-22523/p8/2",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 7, Tabelle 1",
+            "note": "row 2 (t_E), layers 100-400 mm; quote withheld: sha256:faf5ee655a05f3f93f4d0663fd30bc4e0fd174d546131c8ef73cac55689ee318 chars:24",
+            "passage": "10.1515-zpch-1964-22523/p7/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 7, Tabelle 1",
+            "note": "row 17 (r_m·10^2), layers 100-400 mm; quote withheld: sha256:896a558cf0825ce72d92d628312b57129b76a0a243077362647c496defff9f35 chars:20",
+            "passage": "10.1515-zpch-1964-22523/p7/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 7, Tabelle 1",
+            "note": "row 24 (t_A), layers 100-400 mm; quote withheld: sha256:c3a5810bcdca713341783b2cac560625643dfcc99d459fe89c3421d983df87b1 chars:34",
+            "passage": "10.1515-zpch-1964-22523/p7/2",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 7, Tabelle 1",
+            "note": "row 25 (wall temperature, 40 mm insulation), layers 100-400 mm; quote withheld: sha256:42bee1d55d410a49a7d670045c75de4e0eaea7ebdef91f71448b0e8abb4f1f4d chars:42",
+            "passage": "10.1515-zpch-1964-22523/p7/2",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 8, Tabelle 1",
+            "note": "heights 500-1000 mm and row 2 (t_E); quote withheld: sha256:b0a263d30742713ce23d260b91870442fcbe2d86d0b79731b2b8b39a9eea995e chars:49",
+            "passage": "10.1515-zpch-1964-22523/p8/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 8, Tabelle 1",
+            "note": "row 17 (r_m·10^2), layers 500-1000 mm; quote withheld: sha256:331fe528f3e4d6f1d49b65d61f1b4f554a142634744b9e285092e5adff648b8b chars:31",
+            "passage": "10.1515-zpch-1964-22523/p8/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 8, Tabelle 1",
+            "note": "row 19 (Δx calculated), layers 500-1000 mm; quote withheld: sha256:289c269a15eb3e1fc72dfef96824eedff4f0090bbcb0f8ebe4e8af3193e60eaf chars:42",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 8, Tabelle 1",
+            "note": "rows 24 (t_A) and 25 (wall temperature, 40 mm insulation), layers 500-1000 mm; quote withheld: sha256:99ac1a4676e0ade93f9fe623b6e1d4c05783007f91b3fe67817386677e7037f6 chars:60",
+            "passage": "10.1515-zpch-1964-22523/p8/2",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:e41f20df7086b0e81036c327b8ddbc4cb7641c83a137f98aca90134579c95eed chars:37",
+            "passage": "10.1515-zpch-1964-22523/p5/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 7, Tabelle 1",
+            "note": "row 19 (Δx calculated), layers 100-400 mm; quote withheld: sha256:5afd8233badb0c2c4e3c646547b47844388098a4f6b85131e6eed114173f9921 chars:28",
+            "passage": "10.1515-zpch-1964-22523/p7/2",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "figure",
+            "agreement": "no_ocr",
+            "locator": "p. 10, Abb. 6",
+            "note": "transcription withheld: sha256:1456e008cdf2748cc1a2d01cbcf857f16b4ed71e63c4aa4eeffb066488c0788a chars:124; second_reading withheld: sha256:5dcc73fe9caddb7f7994f723037e14c12b06ce7d4090e5c2c075ef437abc6cae chars:818",
+            "reading": "vision_ocr",
+            "region": [
+              0.1,
+              0.5,
+              0.9,
+              0.69
+            ],
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "figure",
+            "locator": "p. 10, Abb. 6",
+            "note": "quote withheld: sha256:301e46a1cf5e47ff77a76934bea34350a28d8d0967fee5073dfe5ce5ed06c9bf chars:36",
+            "passage": "10.1515-zpch-1964-22523/p10/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 6, Abb. 3 (label)",
+            "note": "transcription withheld: sha256:9ae7674e1cd6953ca53e4aca6d52c9abab88acc1e540ec934a6fa19abb040149 chars:6",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.555,
+              0.2,
+              0.585
+            ],
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "method": "Pasquon's kinetic equation with fugacity coefficients after Newton; heat transfer to the tube wall after Leva, heat loss equation after Schack; desk calculating machine",
+        "pressure": {
+          "status": "present",
+          "as_reported": "pm = 240 at",
+          "note": "mean gas pressure for the property calculations",
+          "unit": "at",
+          "value": 240
+        },
+        "results": {
+          "calculated_temperature_after_kg1": {
+            "status": "present",
+            "as_reported": "about 357 °C",
+            "note": "read from Abb. 6 (calculated t_m,i over the bed height), after the 1st cold-gas feed",
+            "qualifier": "approximate",
+            "unit": "°C",
+            "value": 357
+          },
+          "calculated_temperature_after_kg2": {
+            "status": "present",
+            "as_reported": "about 390 °C",
+            "note": "read from Abb. 6 (calculated t_m,i over the bed height), after the 2nd cold-gas feed",
+            "qualifier": "approximate",
+            "unit": "°C",
+            "value": 390
+          },
+          "calculated_temperature_after_kg3": {
+            "status": "present",
+            "as_reported": "about 362 °C",
+            "note": "read from Abb. 6 (calculated t_m,i over the bed height), after the 3rd cold-gas feed",
+            "qualifier": "approximate",
+            "unit": "°C",
+            "value": 362
+          },
+          "calculated_temperature_outlet": {
+            "status": "present",
+            "as_reported": "about 384 °C",
+            "note": "read from Abb. 6 (calculated t_m,i over the bed height), at the bed outlet (about 7.1 m)",
+            "qualifier": "approximate",
+            "unit": "°C",
+            "value": 384
+          },
+          "calculated_temperature_peak_before_kg1": {
+            "status": "present",
+            "as_reported": "about 407 °C",
+            "note": "read from Abb. 6 (calculated t_m,i over the bed height), at the 1st cold-gas feed (about 1.6 m), before mixing",
+            "qualifier": "approximate",
+            "unit": "°C",
+            "value": 407
+          },
+          "calculated_temperature_peak_before_kg2": {
+            "status": "present",
+            "as_reported": "about 406 °C",
+            "note": "read from Abb. 6 (calculated t_m,i over the bed height), at the 2nd cold-gas feed (about 3.6 m), before mixing",
+            "qualifier": "approximate",
+            "unit": "°C",
+            "value": 406
+          },
+          "calculated_temperature_peak_before_kg3": {
+            "status": "present",
+            "as_reported": "about 413 °C",
+            "note": "read from Abb. 6 (calculated t_m,i over the bed height), at the 3rd cold-gas feed (about 5.4 m), before mixing",
+            "qualifier": "approximate",
+            "unit": "°C",
+            "value": 413
+          },
+          "catalyst_per_layer": {
+            "status": "present",
+            "as_reported": "185000 gm Katal",
+            "basis": "catalyst in one calculation layer of Δh = 100 mm",
+            "unit": "g",
+            "value": 185000
+          },
+          "equilibrium_conversion_outlet": {
+            "status": "present",
+            "as_reported": "ungefähr bei 7,5% Methanol",
+            "basis": "thermodynamic equilibrium conversion at reactor outlet conditions",
+            "qualifier": "approximate",
+            "unit": "%",
+            "value": 7.5
+          },
+          "final_conversion_calculated": {
+            "status": "present",
+            "as_reported": "4,3 %",
+            "basis": "calculated final reduced methanol conversion, mol CH3OH per mol total feed",
+            "unit": "%",
+            "value": 4.3
+          },
+          "fraction_of_equilibrium": {
+            "status": "present",
+            "as_reported": "etwa 50%",
+            "basis": "share of the thermodynamically possible conversion the reactor achieves",
+            "qualifier": "approximate",
+            "unit": "%",
+            "value": 50
+          },
+          "layer_1000mm_conversion_increment": {
+            "status": "present",
+            "as_reported": "0,00149",
+            "basis": "Tabelle 1, cumulative height 1000 mm: Δx calculated (row 19)",
+            "unit": "mol CH3OH/mol feed",
+            "value": 0.00149
+          },
+          "layer_1000mm_inlet_temperature": {
+            "status": "present",
+            "as_reported": "374,9",
+            "basis": "Tabelle 1, cumulative height 1000 mm: t_E of the layer",
+            "unit": "°C",
+            "value": 374.9
+          },
+          "layer_1000mm_outlet_temperature": {
+            "status": "present",
+            "as_reported": "379,4",
+            "basis": "Tabelle 1, cumulative height 1000 mm: t_A of the layer (row 24)",
+            "unit": "°C",
+            "value": 379.4
+          },
+          "layer_1000mm_rate": {
+            "status": "present",
+            "as_reported": "10,266",
+            "basis": "Tabelle 1, cumulative height 1000 mm: r_m·10^2 (row 17)",
+            "unit": "× 10^-2 mol CH3OH/(g catalyst h)",
+            "value": 10.266
+          },
+          "layer_1000mm_wall_temperature_40mm": {
+            "status": "present",
+            "as_reported": "305,5",
+            "basis": "Tabelle 1, cumulative height 1000 mm: wall temperature t0 with 40 mm insulation (row 25)",
+            "unit": "°C",
+            "value": 305.5
+          },
+          "layer_100mm_conversion_increment": {
+            "status": "present",
+            "as_reported": "0,00083",
+            "basis": "Tabelle 1, cumulative height 100 mm: Δx calculated (row 19)",
+            "unit": "mol CH3OH/mol feed",
+            "value": 0.00083
+          },
+          "layer_100mm_inlet_temperature": {
+            "status": "present",
+            "as_reported": "345",
+            "basis": "Tabelle 1, cumulative height 100 mm: t_E of the layer",
+            "unit": "°C",
+            "value": 345.0
+          },
+          "layer_100mm_outlet_temperature": {
+            "status": "present",
+            "as_reported": "347,6",
+            "basis": "Tabelle 1, cumulative height 100 mm: t_A of the layer (row 24)",
+            "unit": "°C",
+            "value": 347.6
+          },
+          "layer_100mm_rate": {
+            "status": "present",
+            "as_reported": "6,200",
+            "basis": "Tabelle 1, cumulative height 100 mm: r_m·10^2 (row 17)",
+            "unit": "× 10^-2 mol CH3OH/(g catalyst h)",
+            "value": 6.2
+          },
+          "layer_100mm_wall_temperature_40mm": {
+            "status": "present",
+            "as_reported": "280,9",
+            "basis": "Tabelle 1, cumulative height 100 mm: wall temperature t0 with 40 mm insulation (row 25)",
+            "unit": "°C",
+            "value": 280.9
+          },
+          "layer_200mm_conversion_increment": {
+            "status": "present",
+            "as_reported": "0,00095",
+            "basis": "Tabelle 1, cumulative height 200 mm: Δx calculated (row 19)",
+            "unit": "mol CH3OH/mol feed",
+            "value": 0.00095
+          },
+          "layer_200mm_inlet_temperature": {
+            "status": "present",
+            "as_reported": "347,6",
+            "basis": "Tabelle 1, cumulative height 200 mm: t_E of the layer",
+            "unit": "°C",
+            "value": 347.6
+          },
+          "layer_200mm_outlet_temperature": {
+            "status": "present",
+            "as_reported": "350,6",
+            "basis": "Tabelle 1, cumulative height 200 mm: t_A of the layer (row 24)",
+            "unit": "°C",
+            "value": 350.6
+          },
+          "layer_200mm_rate": {
+            "status": "present",
+            "as_reported": "6,653",
+            "basis": "Tabelle 1, cumulative height 200 mm: r_m·10^2 (row 17)",
+            "unit": "× 10^-2 mol CH3OH/(g catalyst h)",
+            "value": 6.653
+          },
+          "layer_200mm_wall_temperature_40mm": {
+            "status": "present",
+            "as_reported": "283,0",
+            "basis": "Tabelle 1, cumulative height 200 mm: wall temperature t0 with 40 mm insulation (row 25)",
+            "unit": "°C",
+            "value": 283.0
+          },
+          "layer_300mm_conversion_increment": {
+            "status": "present",
+            "as_reported": "0,00100",
+            "basis": "Tabelle 1, cumulative height 300 mm: Δx calculated (row 19)",
+            "unit": "mol CH3OH/mol feed",
+            "value": 0.001
+          },
+          "layer_300mm_inlet_temperature": {
+            "status": "present",
+            "as_reported": "350,6",
+            "basis": "Tabelle 1, cumulative height 300 mm: t_E of the layer",
+            "unit": "°C",
+            "value": 350.6
+          },
+          "layer_300mm_outlet_temperature": {
+            "status": "present",
+            "as_reported": "352,2",
+            "basis": "Tabelle 1, cumulative height 300 mm: t_A of the layer (row 24)",
+            "unit": "°C",
+            "value": 352.2
+          },
+          "layer_300mm_rate": {
+            "status": "present",
+            "as_reported": "6,972",
+            "basis": "Tabelle 1, cumulative height 300 mm: r_m·10^2 (row 17)",
+            "unit": "× 10^-2 mol CH3OH/(g catalyst h)",
+            "value": 6.972
+          },
+          "layer_300mm_wall_temperature_40mm": {
+            "status": "present",
+            "as_reported": "284,3",
+            "basis": "Tabelle 1, cumulative height 300 mm: wall temperature t0 with 40 mm insulation (row 25)",
+            "unit": "°C",
+            "value": 284.3
+          },
+          "layer_400mm_conversion_increment": {
+            "status": "present",
+            "as_reported": "0,00104",
+            "basis": "Tabelle 1, cumulative height 400 mm: Δx calculated (row 19)",
+            "unit": "mol CH3OH/mol feed",
+            "value": 0.00104
+          },
+          "layer_400mm_inlet_temperature": {
+            "status": "present",
+            "as_reported": "352,2",
+            "basis": "Tabelle 1, cumulative height 400 mm: t_E of the layer",
+            "unit": "°C",
+            "value": 352.2
+          },
+          "layer_400mm_outlet_temperature": {
+            "status": "present",
+            "as_reported": "355,5",
+            "basis": "Tabelle 1, cumulative height 400 mm: t_A of the layer (row 24)",
+            "unit": "°C",
+            "value": 355.5
+          },
+          "layer_400mm_rate": {
+            "status": "present",
+            "as_reported": "7,236",
+            "basis": "Tabelle 1, cumulative height 400 mm: r_m·10^2 (row 17)",
+            "unit": "× 10^-2 mol CH3OH/(g catalyst h)",
+            "value": 7.236
+          },
+          "layer_400mm_wall_temperature_40mm": {
+            "status": "present",
+            "as_reported": "286,8",
+            "basis": "Tabelle 1, cumulative height 400 mm: wall temperature t0 with 40 mm insulation (row 25)",
+            "unit": "°C",
+            "value": 286.8
+          },
+          "layer_500mm_conversion_increment": {
+            "status": "present",
+            "as_reported": "0,00111",
+            "basis": "Tabelle 1, cumulative height 500 mm: Δx calculated (row 19)",
+            "unit": "mol CH3OH/mol feed",
+            "value": 0.00111
+          },
+          "layer_500mm_inlet_temperature": {
+            "status": "present",
+            "as_reported": "355,4",
+            "basis": "Tabelle 1, cumulative height 500 mm: t_E of the layer",
+            "unit": "°C",
+            "value": 355.4
+          },
+          "layer_500mm_outlet_temperature": {
+            "status": "present",
+            "as_reported": "358,9",
+            "basis": "Tabelle 1, cumulative height 500 mm: t_A of the layer (row 24)",
+            "unit": "°C",
+            "value": 358.9
+          },
+          "layer_500mm_rate": {
+            "status": "present",
+            "as_reported": "7,709",
+            "basis": "Tabelle 1, cumulative height 500 mm: r_m·10^2 (row 17)",
+            "unit": "× 10^-2 mol CH3OH/(g catalyst h)",
+            "value": 7.709
+          },
+          "layer_500mm_wall_temperature_40mm": {
+            "status": "present",
+            "as_reported": "289,5",
+            "basis": "Tabelle 1, cumulative height 500 mm: wall temperature t0 with 40 mm insulation (row 25)",
+            "unit": "°C",
+            "value": 289.5
+          },
+          "layer_600mm_conversion_increment": {
+            "status": "present",
+            "as_reported": "0,00118",
+            "basis": "Tabelle 1, cumulative height 600 mm: Δx calculated (row 19)",
+            "unit": "mol CH3OH/mol feed",
+            "value": 0.00118
+          },
+          "layer_600mm_inlet_temperature": {
+            "status": "present",
+            "as_reported": "358,8",
+            "basis": "Tabelle 1, cumulative height 600 mm: t_E of the layer",
+            "unit": "°C",
+            "value": 358.8
+          },
+          "layer_600mm_outlet_temperature": {
+            "status": "present",
+            "as_reported": "362,5",
+            "basis": "Tabelle 1, cumulative height 600 mm: t_A of the layer (row 24)",
+            "unit": "°C",
+            "value": 362.5
+          },
+          "layer_600mm_rate": {
+            "status": "present",
+            "as_reported": "8,206",
+            "basis": "Tabelle 1, cumulative height 600 mm: r_m·10^2 (row 17)",
+            "unit": "× 10^-2 mol CH3OH/(g catalyst h)",
+            "value": 8.206
+          },
+          "layer_600mm_wall_temperature_40mm": {
+            "status": "present",
+            "as_reported": "292,3",
+            "basis": "Tabelle 1, cumulative height 600 mm: wall temperature t0 with 40 mm insulation (row 25)",
+            "unit": "°C",
+            "value": 292.3
+          },
+          "layer_700mm_conversion_increment": {
+            "status": "present",
+            "as_reported": "0,00127",
+            "basis": "Tabelle 1, cumulative height 700 mm: Δx calculated (row 19)",
+            "unit": "mol CH3OH/mol feed",
+            "value": 0.00127
+          },
+          "layer_700mm_inlet_temperature": {
+            "status": "present",
+            "as_reported": "362,5",
+            "basis": "Tabelle 1, cumulative height 700 mm: t_E of the layer",
+            "unit": "°C",
+            "value": 362.5
+          },
+          "layer_700mm_outlet_temperature": {
+            "status": "present",
+            "as_reported": "366,4",
+            "basis": "Tabelle 1, cumulative height 700 mm: t_A of the layer (row 24)",
+            "unit": "°C",
+            "value": 366.4
+          },
+          "layer_700mm_rate": {
+            "status": "present",
+            "as_reported": "8,812",
+            "basis": "Tabelle 1, cumulative height 700 mm: r_m·10^2 (row 17)",
+            "unit": "× 10^-2 mol CH3OH/(g catalyst h)",
+            "value": 8.812
+          },
+          "layer_700mm_wall_temperature_40mm": {
+            "status": "present",
+            "as_reported": "295,3",
+            "basis": "Tabelle 1, cumulative height 700 mm: wall temperature t0 with 40 mm insulation (row 25)",
+            "unit": "°C",
+            "value": 295.3
+          },
+          "layer_800mm_conversion_increment": {
+            "status": "present",
+            "as_reported": "0,00135",
+            "basis": "Tabelle 1, cumulative height 800 mm: Δx calculated (row 19)",
+            "unit": "mol CH3OH/mol feed",
+            "value": 0.00135
+          },
+          "layer_800mm_inlet_temperature": {
+            "status": "present",
+            "as_reported": "366,4",
+            "basis": "Tabelle 1, cumulative height 800 mm: t_E of the layer",
+            "unit": "°C",
+            "value": 366.4
+          },
+          "layer_800mm_outlet_temperature": {
+            "status": "present",
+            "as_reported": "370,5",
+            "basis": "Tabelle 1, cumulative height 800 mm: t_A of the layer (row 24)",
+            "unit": "°C",
+            "value": 370.5
+          },
+          "layer_800mm_rate": {
+            "status": "present",
+            "as_reported": "9,347",
+            "basis": "Tabelle 1, cumulative height 800 mm: r_m·10^2 (row 17)",
+            "unit": "× 10^-2 mol CH3OH/(g catalyst h)",
+            "value": 9.347
+          },
+          "layer_800mm_wall_temperature_40mm": {
+            "status": "present",
+            "as_reported": "298,6",
+            "basis": "Tabelle 1, cumulative height 800 mm: wall temperature t0 with 40 mm insulation (row 25)",
+            "unit": "°C",
+            "value": 298.6
+          },
+          "layer_900mm_conversion_increment": {
+            "status": "present",
+            "as_reported": "0,00143",
+            "basis": "Tabelle 1, cumulative height 900 mm: Δx calculated (row 19)",
+            "unit": "mol CH3OH/mol feed",
+            "value": 0.00143
+          },
+          "layer_900mm_inlet_temperature": {
+            "status": "present",
+            "as_reported": "370,5",
+            "basis": "Tabelle 1, cumulative height 900 mm: t_E of the layer",
+            "unit": "°C",
+            "value": 370.5
+          },
+          "layer_900mm_outlet_temperature": {
+            "status": "present",
+            "as_reported": "374,9",
+            "basis": "Tabelle 1, cumulative height 900 mm: t_A of the layer (row 24)",
+            "unit": "°C",
+            "value": 374.9
+          },
+          "layer_900mm_rate": {
+            "status": "present",
+            "as_reported": "9,826",
+            "basis": "Tabelle 1, cumulative height 900 mm: r_m·10^2 (row 17)",
+            "unit": "× 10^-2 mol CH3OH/(g catalyst h)",
+            "value": 9.826
+          },
+          "layer_900mm_wall_temperature_40mm": {
+            "status": "present",
+            "as_reported": "301,9",
+            "basis": "Tabelle 1, cumulative height 900 mm: wall temperature t0 with 40 mm insulation (row 25)",
+            "unit": "°C",
+            "value": 301.9
+          }
+        },
+        "task": "layer-by-layer energy and conversion balance of the converter (layers of 100 mm), with cold-gas mixing assumed complete"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/feed/entry-gas",
+      "label": "Feed",
+      "props": {
+        "name": "converter entry gas: 69.36% H2, 17.04% CO, 13.60% inerts",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 7, Tabelle 1",
+            "note": "quote withheld: sha256:3f8683b8b6fdb51abb8cfdf93bdf9028be6bb7e22bb60230b7db7a7972926d11 chars:53",
+            "passage": "10.1515-zpch-1964-22523/p7/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "figure",
+            "locator": "p. 13, Abb. 9",
+            "note": "quote withheld: sha256:5bfa5c7b9baf1827cd94435716c38ab2fa9498531aacc25c811351bf886eca9f chars:52",
+            "passage": "10.1515-zpch-1964-22523/p13/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "generality": "particular"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/hypothesis/leuna-both-steps",
+      "label": "Hypothesis",
+      "props": {
+        "name": "for the Leuna catalyst both third-order steps should govern the rate; the other steps at equilibrium",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:104f4b973365d689d7873f83529f738f988cfeacb360846a3e5a155bd0d0b575 chars:62",
+            "passage": "10.1515-zpch-1964-22523/p2/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:931b4cc31e214ebb044386bd4405eb7d6e00340777617741c5a9eb3b719930df chars:65",
+            "passage": "10.1515-zpch-1964-22523/p2/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:03f20ca6e6d9eb1d63ea58df6c87e3fe9871895b88c97bc4ffc36beed9841c8f chars:59",
+            "passage": "10.1515-zpch-1964-22523/p2/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "hypothesis_kind": "auxiliary",
+        "hypothesis_status": "proposed",
+        "statement": "For the Leuna catalyst both reactions (CO + 2H = CH2O and CH2O + 2H = CH3OH) should determine the course of the overall process, so the other steps (adsorption of H2 and CO, desorption of methanol) can be treated as at equilibrium."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/hypothesis/natta-pasquon-close-to-real",
+      "label": "Hypothesis",
+      "props": {
+        "name": "the Natta-Pasquon kinetic approach probably comes close to the real course of methanol catalysis",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:e56d313600ec662a5ad93af2ea0d5e2e3698dae790fbd9bceb612c3e504f2352 chars:66",
+            "passage": "10.1515-zpch-1964-22523/p2/3",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:16be036c4c578eb7fe6a8e5bcecf9eda62b0105da8f83bec3676e33f85afe232 chars:64",
+            "passage": "10.1515-zpch-1964-22523/p2/3",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "hypothesis_kind": "descriptive",
+        "hypothesis_status": "proposed",
+        "statement": "Since Natta's adsorption enthalpies from the temperature dependence of the adsorption constants agreed well with calorimetric heats, the kinetic approach of Natta and Pasquon probably comes close to the real course of the methanol catalysis."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/hypothesis/pore-diffusion-small",
+      "label": "Hypothesis",
+      "props": {
+        "name": "similar conversions with 0.6-0.9 mm grains and 5-9 mm pellets suggest pore diffusion has little influence (conclusion called risky)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 14",
+            "note": "quote withheld: sha256:1ce4eece52bdfe992d75c8af87f9f6c8e253d1691d830ea4e82abe5f00efa2c8 chars:65",
+            "passage": "10.1515-zpch-1964-22523/p14/3",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 14",
+            "note": "quote withheld: sha256:c05d49e3207e843487a05a9c19d5576bb6028ed1414e7158513b584c8bd92acb chars:64",
+            "passage": "10.1515-zpch-1964-22523/p14/3",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 14",
+            "note": "quote withheld: sha256:3b83ae05b509fea1de0b0a1a01f5d8231a5d5bfec6b9a2a9fee8c9f24a0d23b0 chars:68",
+            "passage": "10.1515-zpch-1964-22523/p14/3",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "hypothesis_kind": "explanatory",
+        "hypothesis_status": "proposed",
+        "statement": "The approximately equal conversions with 0.6-0.9 mm grains in Natta's test reactor and 5 mm and 9 mm pellets in the Leuna reactor suggest that the reaction is only slightly influenced by pore diffusion; given the different preparation of the two catalysts, conclusions on the mechanism on the Leuna catalyst are called risky."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/hypothesis/wall-measurement-error",
+      "label": "Hypothesis",
+      "props": {
+        "name": "the last two wall-temperature points are high most probably because of measurement errors",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:d63b54227c1598e2cd32a1c235ffad47496fd6e4bc8c05c5bff2c8b5b5219ff3 chars:66",
+            "passage": "10.1515-zpch-1964-22523/p12/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:062d14aa88fa2bb6e32bf355823edfe3c2c6daa30d59f0df2b18f2180dad0bf1 chars:68",
+            "passage": "10.1515-zpch-1964-22523/p12/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:477be71b0859550eef8af7e7e654b186330a92383cd8c2fd46e50ee702335ea0 chars:66",
+            "passage": "10.1515-zpch-1964-22523/p12/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "hypothesis_kind": "auxiliary",
+        "hypothesis_status": "proposed",
+        "statement": "The last two measured wall temperatures lie above the calculated curve most probably because of measurement errors: a wall temperature of 322 °C near the outlet would correspond to a calculated gas temperature of 402 °C, whereas the measured outlet temperature is 40 °C lower, and such a drop between converter and recuperator is unlikely."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/reactor/leuna-converter",
+      "label": "Reactor",
+      "props": {
+        "name": "technical methanol synthesis converter, VEB Leuna-Werke (catalyst bed 7.1 m, central tube, three cold-gas injections)",
+        "description": "Annular catalyst bed around a central tube inside a high-pressure shell with external insulation (20 mm and 40 mm considered); cold gas injected at three points into the bed without a mixing device; recuperator after the converter. Pellet sizes by section (Abb. 2): 5 mm; 5 + 9 mm (75/25%); 5 + 9 mm (50/50%); 9 mm.",
+        "design_status": "built",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:302fce4e2b0654e69f0913198bf6c8c5a814da6b032866bc8d39480fc7516193 chars:76",
+            "passage": "10.1515-zpch-1964-22523/p1/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "figure",
+            "locator": "p. 5, Abb. 2",
+            "note": "quote withheld: sha256:934b6ca003defaf205ff7f9b786d83e98f23f0487fe423c680a22691b699edd3 chars:56",
+            "passage": "10.1515-zpch-1964-22523/p5/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:0d65f5b87a3abb135d0dfdba7b9e504cb0cfd861df5ad1b978efdc05bf5bdcfe chars:67",
+            "passage": "10.1515-zpch-1964-22523/p8/2",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:a02caa933cf44ed050f4334d378d2da3c1903fca427b9030f5ca1e9f2d724670 chars:69",
+            "passage": "10.1515-zpch-1964-22523/p7/2",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:c97da647b56b548e361782af2bf32bc4100492d26a001cd0ce89bfb89e613e72 chars:49",
+            "passage": "10.1515-zpch-1964-22523/p7/2",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 5, Abb. 2 (label KG 3)",
+            "note": "transcription withheld: sha256:417690d2e67c039d432c1292dc5a4ea32346ede17835a4b796bf183ef65cecde chars:15; second_reading withheld: sha256:69a1964749c5eae59425829a9680bb32d8c6cdd2d215c7fb9c9db1f4dafa54a9 chars:52",
+            "reading": "vision_ocr",
+            "region": [
+              0.67,
+              0.33,
+              0.83,
+              0.36
+            ],
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 5, Abb. 2 (label KG 6)",
+            "note": "transcription withheld: sha256:7fd25847908de62e7714c93b731040ce23f95426e562e90c6a57be1537a76c04 chars:14; second_reading withheld: sha256:ee86d4c6466f4db88575929e92973a4ff9bb411a606712dd8d2c1c48ec5d734f chars:51",
+            "reading": "vision_ocr",
+            "region": [
+              0.67,
+              0.43,
+              0.83,
+              0.465
+            ],
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "agreement": "disagree",
+            "locator": "p. 5, Abb. 2 (label KG 8)",
+            "note": "transcription withheld: sha256:019d17655dd149e7c5290acc006c7866c92cc284db68a2ea48d4ba6b878a9cdc chars:14; second_reading withheld: sha256:019d17655dd149e7c5290acc006c7866c92cc284db68a2ea48d4ba6b878a9cdc chars:14",
+            "reading": "vision_ocr",
+            "region": [
+              0.67,
+              0.56,
+              0.83,
+              0.595
+            ],
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "agreement": "disagree",
+            "locator": "p. 5, Abb. 2 (dimension lines, right)",
+            "note": "transcription withheld: sha256:c86f0a2124958b30c4951f9e7e56c181e62ef20d214270bfbcb9b26a171ede9c chars:16; second_reading withheld: sha256:a935dcbda383309a7ca75331309e0f267f1e1d019562623dea51a1aa44c1c62b chars:49",
+            "reading": "vision_ocr",
+            "region": [
+              0.74,
+              0.28,
+              0.87,
+              0.66
+            ],
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "agreement": "disagree",
+            "locator": "p. 5, Abb. 2 (dimension lines, left)",
+            "note": "transcription withheld: sha256:ac31625ab836feefaa3a99faff34044f2fb9edf789f308f8b7a83e0e33c02da2 chars:16; second_reading withheld: sha256:527ada8f2be0c1295ac4d30ce2910aee62e788c9fa7812e722f19e1064b6d075 chars:48",
+            "reading": "vision_ocr",
+            "region": [
+              0.19,
+              0.28,
+              0.29,
+              0.66
+            ],
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "agreement": "no_ocr",
+            "locator": "p. 5, Abb. 2 (label, 5 mm section)",
+            "note": "transcription withheld: sha256:424442dc8adebf5cded73abdcfac0eb3d3b64718c266628100e03fdd0c05e381 chars:11; second_reading withheld: sha256:424442dc8adebf5cded73abdcfac0eb3d3b64718c266628100e03fdd0c05e381 chars:11",
+            "reading": "vision_ocr",
+            "region": [
+              0.55,
+              0.295,
+              0.66,
+              0.33
+            ],
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 5, Abb. 2 (label, 75/25% section)",
+            "note": "transcription withheld: sha256:0ae73e08318cc388efa76c9bfcbe788f8d8fe6f002c422f6d0983e7504c3fce4 chars:12; second_reading withheld: sha256:0ae73e08318cc388efa76c9bfcbe788f8d8fe6f002c422f6d0983e7504c3fce4 chars:12",
+            "reading": "vision_ocr",
+            "region": [
+              0.55,
+              0.39,
+              0.66,
+              0.425
+            ],
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 5, Abb. 2 (label, 50/50% section)",
+            "note": "transcription withheld: sha256:f090ff51f7c2bbffe33599ac0c302d2e2abd7a28aacac21a20fa70250493de31 chars:11",
+            "reading": "vision_ocr",
+            "region": [
+              0.55,
+              0.495,
+              0.66,
+              0.53
+            ],
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 5, Abb. 2 (label, 9 mm section)",
+            "note": "transcription withheld: sha256:24a3ca2c149f7d8f036a4a95cf76644434344fdb7445cf2012c9a932a01a9790 chars:11; second_reading withheld: sha256:102f242aca7a5e7760313f040de53ed6b01a66f4abd1a92dc283fe3561f792be chars:26",
+            "reading": "vision_ocr",
+            "region": [
+              0.55,
+              0.615,
+              0.66,
+              0.655
+            ],
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 6, Abb. 3 (diameters)",
+            "note": "transcription withheld: sha256:799a90fa810d95619ab86c4ee2bcb04e469d161957098ace8e677c2b8e3e71fb chars:93; second_reading withheld: sha256:cf6e578991573191e6ac9dbc71465a1ec0dea40a3ec9054d48446134e598f8db chars:131",
+            "reading": "vision_ocr",
+            "region": [
+              0.35,
+              0.585,
+              0.95,
+              0.765
+            ],
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "figure",
+            "locator": "p. 6, Abb. 3",
+            "note": "quote withheld: sha256:84542a54e100d3ac7b92141045899a17a7e1af2614acae14d2c3c544223ac063 chars:66",
+            "passage": "10.1515-zpch-1964-22523/p6/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "reactor_kind": "fixed_bed",
+        "specifications": {
+          "bed_height_dimension": {
+            "status": "present",
+            "as_reported": "7100",
+            "note": "overall dimension line of the bed in Abb. 2 (the text gives 7,1 m); unit not printed",
+            "unit": "not stated",
+            "value": 7100
+          },
+          "bulk_density_section_1": {
+            "status": "present",
+            "as_reported": "≈ 1,7 [g/cm3]",
+            "note": "bulk density of the 5 mm pellets section as labelled in Abb. 2; read from the page image (was only in the sample's note)",
+            "qualifier": "approximate",
+            "unit": "g/cm3",
+            "value": 1.7
+          },
+          "bulk_density_section_2": {
+            "status": "present",
+            "as_reported": "≈ 1,65 [g/cm3]",
+            "note": "bulk density of the 5 + 9 mm (75/25%) section as labelled in Abb. 2; read from the page image (was only in the sample's note)",
+            "qualifier": "approximate",
+            "unit": "g/cm3",
+            "value": 1.65
+          },
+          "bulk_density_section_3": {
+            "status": "present",
+            "as_reported": "≈ 1,6 [g/cm3]",
+            "note": "bulk density of the 5 + 9 mm (50/50%) section as labelled in Abb. 2; read from the page image (was only in the sample's note)",
+            "qualifier": "approximate",
+            "unit": "g/cm3",
+            "value": 1.6
+          },
+          "bulk_density_section_4": {
+            "status": "present",
+            "as_reported": "≈ 1,5 [g/cm3]",
+            "note": "bulk density of the 9 mm pellets section as labelled in Abb. 2; read from the page image (was only in the sample's note)",
+            "qualifier": "approximate",
+            "unit": "g/cm3",
+            "value": 1.5
+          },
+          "catalyst_bed_height": {
+            "status": "present",
+            "as_reported": "7,1 m",
+            "unit": "m",
+            "value": 7.1
+          },
+          "cold_gas_injections": {
+            "status": "present",
+            "as_reported": "KG 3, KG 6, KG 8",
+            "note": "three cold-gas feed points labelled KG 3, KG 6 and KG 8 in Abb. 2 (count of the labels); the text names the 1st cold-gas feed after the 16th layer",
+            "unit": "1",
+            "value": 3
+          },
+          "cold_gas_kg3_position": {
+            "status": "present",
+            "as_reported": "1615",
+            "note": "dimension line in Abb. 2 from the top of the bed to the KG 3 feed; unit not printed; read from the page image (re-curation 2026-09-29)",
+            "unit": "not stated",
+            "value": 1615
+          },
+          "cold_gas_kg6_position": {
+            "status": "present",
+            "as_reported": "3605",
+            "note": "dimension line in Abb. 2 from the top of the bed to the KG 6 feed; unit not printed; read from the page image (re-curation 2026-09-29)",
+            "unit": "not stated",
+            "value": 3605
+          },
+          "cold_gas_kg8_position": {
+            "status": "present",
+            "as_reported": "5365",
+            "note": "dimension line in Abb. 2 from the top of the bed to the KG 8 feed; unit not printed; read from the page image (re-curation 2026-09-29)",
+            "unit": "not stated",
+            "value": 5365
+          },
+          "diameter_d1": {
+            "status": "present",
+            "as_reported": "400⌀ (with MnCu lining 396⌀)",
+            "note": "diameter in the cross-section Abb. 3; unit not printed at the label (the nomenclature gives D1-D7 in [m]); read from the page image (re-curation 2026-09-29)",
+            "unit": "not stated",
+            "value": 400
+          },
+          "diameter_d1_with_lining": {
+            "status": "present",
+            "as_reported": "mit MnCu 396⌀",
+            "note": "D1 with the 2 mm MnCu lining, Abb. 3; unit not printed",
+            "unit": "not stated",
+            "value": 396
+          },
+          "diameter_d2": {
+            "status": "present",
+            "as_reported": "415⌀",
+            "note": "diameter in the cross-section Abb. 3; unit not printed at the label (the nomenclature gives D1-D7 in [m]); read from the page image (re-curation 2026-09-29)",
+            "unit": "not stated",
+            "value": 415
+          },
+          "diameter_d3": {
+            "status": "present",
+            "as_reported": "≈ 440⌀",
+            "note": "diameter in the cross-section Abb. 3; unit not printed at the label (the nomenclature gives D1-D7 in [m]); read from the page image (re-curation 2026-09-29)",
+            "qualifier": "approximate",
+            "unit": "not stated",
+            "value": 440
+          },
+          "diameter_d4": {
+            "status": "present",
+            "as_reported": "500⌀ (with MnCu lining 496⌀)",
+            "note": "diameter in the cross-section Abb. 3; unit not printed at the label (the nomenclature gives D1-D7 in [m]); read from the page image (re-curation 2026-09-29)",
+            "unit": "not stated",
+            "value": 500
+          },
+          "diameter_d4_with_lining": {
+            "status": "present",
+            "as_reported": "mit MnCu 496⌀",
+            "note": "D4 with the 2 mm MnCu lining, Abb. 3; unit not printed",
+            "unit": "not stated",
+            "value": 496
+          },
+          "diameter_d5": {
+            "status": "present",
+            "as_reported": "518⌀",
+            "note": "diameter in the cross-section Abb. 3; unit not printed at the label (the nomenclature gives D1-D7 in [m]); read from the page image (re-curation 2026-09-29)",
+            "unit": "not stated",
+            "value": 518
+          },
+          "diameter_d6": {
+            "status": "present",
+            "as_reported": "676⌀",
+            "note": "diameter in the cross-section Abb. 3; unit not printed at the label (the nomenclature gives D1-D7 in [m]); read from the page image (re-curation 2026-09-29)",
+            "unit": "not stated",
+            "value": 676
+          },
+          "diameter_d7_20mm_insulation": {
+            "status": "present",
+            "as_reported": "716 (20mm Jsol.)",
+            "note": "diameter in the cross-section Abb. 3; unit not printed at the label (the nomenclature gives D1-D7 in [m]); read from the page image (re-curation 2026-09-29)",
+            "unit": "not stated",
+            "value": 716
+          },
+          "diameter_d7_40mm_insulation": {
+            "status": "present",
+            "as_reported": "756 (40mm Jsol.)",
+            "note": "diameter in the cross-section Abb. 3; unit not printed at the label (the nomenclature gives D1-D7 in [m]); read from the page image (re-curation 2026-09-29)",
+            "unit": "not stated",
+            "value": 756
+          },
+          "external_insulation": {
+            "status": "present",
+            "as_reported": "Außenwand-Isolierungsstärken von 20 mm und 40 mm",
+            "text_value": "40 mm (calculation also for 20 mm)"
+          },
+          "section_boundary_1": {
+            "status": "present",
+            "as_reported": "1840",
+            "note": "dimension line in Abb. 2 from the top of the bed to the end of the 5 mm section; unit not printed; read from the page image (re-curation 2026-09-29)",
+            "unit": "not stated",
+            "value": 1840
+          },
+          "section_boundary_2": {
+            "status": "present",
+            "as_reported": "3680",
+            "note": "dimension line in Abb. 2 from the top of the bed to the end of the 5 + 9 mm (75/25%) section; unit not printed; read from the page image (re-curation 2026-09-29)",
+            "unit": "not stated",
+            "value": 3680
+          },
+          "section_boundary_3": {
+            "status": "present",
+            "as_reported": "6640",
+            "note": "dimension line in Abb. 2 from the top of the bed to the end of the 5 + 9 mm (50/50%) section; unit not printed; read from the page image (re-curation 2026-09-29)",
+            "unit": "not stated",
+            "value": 6640
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/sample/charge-5-9mm-50-50",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Leuna converter charge: 5 mm + 9 mm pellets (50/50%)",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "p. 5, Abb. 2",
+            "note": "read from Abb. 2: section of 5 mm + 9 mm pellets (50/50%), bulk density ≈ 1.6 g/cm3; quote withheld: sha256:934b6ca003defaf205ff7f9b786d83e98f23f0487fe423c680a22691b699edd3 chars:56",
+            "passage": "10.1515-zpch-1964-22523/p5/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:c6fb2108864a3ba59ce978c755b6fb3ce71f24a963f1041e0e734daaa40b2e7f chars:71",
+            "passage": "10.1515-zpch-1964-22523/p4/2",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "note": "bulk density ≈ 1.6 g/cm3 as labelled in Abb. 2",
+        "preparation_status": "not_reported",
+        "sample_kind": "reactor_charge"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/sample/charge-5-9mm-75-25",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Leuna converter charge: 5 mm + 9 mm pellets (75/25%)",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "p. 5, Abb. 2",
+            "note": "read from Abb. 2: section of 5 mm + 9 mm pellets (75/25%), bulk density ≈ 1.65 g/cm3; quote withheld: sha256:934b6ca003defaf205ff7f9b786d83e98f23f0487fe423c680a22691b699edd3 chars:56",
+            "passage": "10.1515-zpch-1964-22523/p5/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:c6fb2108864a3ba59ce978c755b6fb3ce71f24a963f1041e0e734daaa40b2e7f chars:71",
+            "passage": "10.1515-zpch-1964-22523/p4/2",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "note": "bulk density ≈ 1.65 g/cm3 as labelled in Abb. 2",
+        "preparation_status": "not_reported",
+        "sample_kind": "reactor_charge"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/sample/charge-5mm",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Leuna converter charge: 5 mm pellets (top section)",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "p. 5, Abb. 2",
+            "note": "read from Abb. 2: section of 5 mm pellets (top section), bulk density ≈ 1.7 g/cm3; quote withheld: sha256:934b6ca003defaf205ff7f9b786d83e98f23f0487fe423c680a22691b699edd3 chars:56",
+            "passage": "10.1515-zpch-1964-22523/p5/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:c6fb2108864a3ba59ce978c755b6fb3ce71f24a963f1041e0e734daaa40b2e7f chars:71",
+            "passage": "10.1515-zpch-1964-22523/p4/2",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "note": "bulk density ≈ 1.7 g/cm3 as labelled in Abb. 2",
+        "preparation_status": "not_reported",
+        "sample_kind": "reactor_charge"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/sample/charge-9mm",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Leuna converter charge: 9 mm pellets (bottom section)",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "p. 5, Abb. 2",
+            "note": "read from Abb. 2: section of 9 mm pellets (bottom section), bulk density ≈ 1.5 g/cm3; quote withheld: sha256:934b6ca003defaf205ff7f9b786d83e98f23f0487fe423c680a22691b699edd3 chars:56",
+            "passage": "10.1515-zpch-1964-22523/p5/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:c6fb2108864a3ba59ce978c755b6fb3ce71f24a963f1041e0e734daaa40b2e7f chars:71",
+            "passage": "10.1515-zpch-1964-22523/p4/2",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "note": "bulk density ≈ 1.5 g/cm3 as labelled in Abb. 2",
+        "preparation_status": "not_reported",
+        "sample_kind": "reactor_charge"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/species/inerte",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "inert gases (Inerte)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7, Tabelle 1",
+            "note": "quote withheld: sha256:3f8683b8b6fdb51abb8cfdf93bdf9028be6bb7e22bb60230b7db7a7972926d11 chars:53",
+            "passage": "10.1515-zpch-1964-22523/p7/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "generality": "kind",
+        "note": "not specified",
+        "species_kind": "other"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/test/leuna-converter-operation",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "operation of the Leuna methanol converter (plant measurements): measured final conversion 3.6%",
+        "conditions": {
+          "cold_gas_kg3": {
+            "status": "present",
+            "as_reported": "4400 [Nm3/h]",
+            "note": "label in Abb. 2, read from the page image",
+            "unit": "Nm3/h",
+            "value": 4400
+          },
+          "cold_gas_kg6": {
+            "status": "present",
+            "as_reported": "1500 [Nm3/h]",
+            "note": "label in Abb. 2, read from the page image",
+            "unit": "Nm3/h",
+            "value": 1500
+          },
+          "cold_gas_kg8": {
+            "status": "present",
+            "as_reported": "5400 [Nm3/h]",
+            "note": "label in Abb. 2, read from the page image",
+            "unit": "Nm3/h",
+            "value": 5400
+          },
+          "recycle_gas": {
+            "status": "present",
+            "as_reported": "VReg = 29200 [Nm3/h]",
+            "note": "label in Abb. 2, read from the page image",
+            "unit": "Nm3/h",
+            "value": 29200
+          },
+          "recycle_gas_temperature": {
+            "status": "present",
+            "as_reported": "338°C",
+            "note": "label in Abb. 2 at the V_Reg = 29200 Nm3/h line where it enters the central tube; read from the page image (re-curation 2026-09-29)",
+            "unit": "°C",
+            "value": 338
+          },
+          "total_gas": {
+            "status": "present",
+            "as_reported": "VKG6 + VCH3OH = 37572 [Nm3/h]",
+            "note": "V_KG6 + V_CH3OH as labelled below the bed in Abb. 2; the text layer reads '37S7Z'; read from the page image (re-curation 2026-09-29)",
+            "unit": "Nm3/h",
+            "value": 37572
+          }
+        },
+        "conversion": {
+          "status": "present",
+          "as_reported": "3,6%",
+          "basis": "reduced methanol conversion, mol CH3OH per mol total feed, measured at the converter end",
+          "unit": "%",
+          "value": 3.6
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:de2fdc9e02aa3bd328ca040d40d46010919631f8ece89c697cb41ddf8b5515e9 chars:23",
+            "passage": "10.1515-zpch-1964-22523/p7/3",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:29edfcbc19a7a0adf42a5856db7d2a797fd3d1e7997619c6129bcca4785c474a chars:81",
+            "passage": "10.1515-zpch-1964-22523/p1/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "figure",
+            "locator": "p. 5, Abb. 2",
+            "note": "values printed in the figure: gas to the bed about 345 °C; cold gas KG 3 4400, KG 6 1500, KG 8 5400 Nm3/h; V_KG6 + V_CH3OH = 37572 Nm3/h; V_Reg = 29200 Nm3/h; quote withheld: sha256:934b6ca003defaf205ff7f9b786d83e98f23f0487fe423c680a22691b699edd3 chars:56",
+            "passage": "10.1515-zpch-1964-22523/p5/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:bd2189bf725599ac977a246594ffb1a0ca81af66ecddab586cdf74e69dee2566 chars:64",
+            "passage": "10.1515-zpch-1964-22523/p12/3",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "figure",
+            "locator": "p. 10, Abb. 5",
+            "note": "quote withheld: sha256:4006a5976f5b1272fd5c7454f6c4e04c070d1745fbc47e3c23231822d3ef6aa3 chars:29",
+            "passage": "10.1515-zpch-1964-22523/p10/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:b1888e3fc0189a8daf214425f2bfe3f9adce690ed7dafa7a4cc9e74296ef00c8 chars:43",
+            "passage": "10.1515-zpch-1964-22523/p12/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "agreement": "disagree",
+            "locator": "p. 5, Abb. 2 (label at the gas inlet)",
+            "note": "transcription withheld: sha256:4e582b903cae12ce270c58ee10d67d76750ffdf46e9e0272a2837c54565a8dc4 chars:6; second_reading withheld: sha256:4e582b903cae12ce270c58ee10d67d76750ffdf46e9e0272a2837c54565a8dc4 chars:6",
+            "reading": "vision_ocr",
+            "region": [
+              0.55,
+              0.22,
+              0.69,
+              0.255
+            ],
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 5, Abb. 2 (label KG 3)",
+            "note": "transcription withheld: sha256:417690d2e67c039d432c1292dc5a4ea32346ede17835a4b796bf183ef65cecde chars:15; second_reading withheld: sha256:69a1964749c5eae59425829a9680bb32d8c6cdd2d215c7fb9c9db1f4dafa54a9 chars:52",
+            "reading": "vision_ocr",
+            "region": [
+              0.67,
+              0.33,
+              0.83,
+              0.36
+            ],
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 5, Abb. 2 (label KG 6)",
+            "note": "transcription withheld: sha256:7fd25847908de62e7714c93b731040ce23f95426e562e90c6a57be1537a76c04 chars:14; second_reading withheld: sha256:ee86d4c6466f4db88575929e92973a4ff9bb411a606712dd8d2c1c48ec5d734f chars:51",
+            "reading": "vision_ocr",
+            "region": [
+              0.67,
+              0.43,
+              0.83,
+              0.465
+            ],
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "agreement": "disagree",
+            "locator": "p. 5, Abb. 2 (label KG 8)",
+            "note": "transcription withheld: sha256:019d17655dd149e7c5290acc006c7866c92cc284db68a2ea48d4ba6b878a9cdc chars:14; second_reading withheld: sha256:019d17655dd149e7c5290acc006c7866c92cc284db68a2ea48d4ba6b878a9cdc chars:14",
+            "reading": "vision_ocr",
+            "region": [
+              0.67,
+              0.56,
+              0.83,
+              0.595
+            ],
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 5, Abb. 2 (labels below the bed)",
+            "note": "transcription withheld: sha256:dc65ac69c49c8f98931213941852ec402d89a98d2f82cef8c3c114fdac17a7b7 chars:67; second_reading withheld: sha256:49377d0477cec2ba558499775c1def07bc1bd0ebaf4c2a669bd9044dd0e52f48 chars:143",
+            "reading": "vision_ocr",
+            "region": [
+              0.26,
+              0.655,
+              0.86,
+              0.76
+            ],
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "figure",
+            "agreement": "no_ocr",
+            "locator": "p. 11, Abb. 8",
+            "note": "transcription withheld: sha256:38ad379f4fb27640fa9d47eadf10bdb485b368283b7f300239d400c6fae3a37e chars:122; second_reading withheld: sha256:547bbc8c39f121fe628f1c282688959adcb11d4b2d9d88319a6c252d138b4d83 chars:423",
+            "reading": "vision_ocr",
+            "region": [
+              0.18,
+              0.52,
+              0.9,
+              0.72
+            ],
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "figure",
+            "locator": "p. 11, Abb. 8",
+            "note": "quote withheld: sha256:2c6e49875be11033b02a850ea5237aa6611475cf3aa29a78757b69b3c1962c2a chars:41",
+            "passage": "10.1515-zpch-1964-22523/p11/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "flow_rate": {
+          "status": "present",
+          "as_reported": "Nte, = 1804 [kmol/h]",
+          "basis": "total feed to which the conversion is referred (Abb. 5)",
+          "unit": "kmol/h",
+          "value": 1804
+        },
+        "manipulation": "observational",
+        "note": "plant measurements of the converter; the operating pressure of the plant is not stated",
+        "pressure": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source",
+          "note": "the calculation used a mean gas pressure p_m = 240 at"
+        },
+        "results": {
+          "outlet_gas_temperature": {
+            "status": "present",
+            "as_reported": "361°C",
+            "note": "label in Abb. 2 on the gas leaving the bottom of the bed (V_KG6 + V_CH3OH = 37572 Nm3/h); read from the page image (re-curation 2026-09-29)",
+            "unit": "°C",
+            "value": 361
+          },
+          "outlet_temperature_vs_calculated": {
+            "status": "present",
+            "as_reported": "liegt aber 40 °C tiefer",
+            "basis": "measured temperature at the reactor outlet lies 40 °C below the 402 °C gas temperature calculated from the last wall reading",
+            "unit": "°C",
+            "value": 40
+          },
+          "wall_temperature_measured_1": {
+            "status": "present",
+            "as_reported": "x at about 0.7 m: about 299 °C",
+            "note": "read from Abb. 8 (measured inner furnace-wall temperature t_0,i, cross); the bed height is also read off the plot (about 0.7 m); 40 mm external insulation",
+            "qualifier": "approximate",
+            "unit": "°C",
+            "value": 299
+          },
+          "wall_temperature_measured_2": {
+            "status": "present",
+            "as_reported": "x at about 2.9 m: about 320 °C",
+            "note": "read from Abb. 8 (measured inner furnace-wall temperature t_0,i, cross); the bed height is also read off the plot (about 2.9 m); 40 mm external insulation",
+            "qualifier": "approximate",
+            "unit": "°C",
+            "value": 320
+          },
+          "wall_temperature_measured_3": {
+            "status": "present",
+            "as_reported": "x at about 3.2 m: about 320 °C",
+            "note": "read from Abb. 8 (measured inner furnace-wall temperature t_0,i, cross); the bed height is also read off the plot (about 3.2 m); 40 mm external insulation",
+            "qualifier": "approximate",
+            "unit": "°C",
+            "value": 320
+          },
+          "wall_temperature_measured_4": {
+            "status": "present",
+            "as_reported": "x at about 4.9 m: about 330 °C",
+            "note": "read from Abb. 8 (measured inner furnace-wall temperature t_0,i, cross); the bed height is also read off the plot (about 4.9 m); 40 mm external insulation",
+            "qualifier": "approximate",
+            "unit": "°C",
+            "value": 330
+          },
+          "wall_temperature_measured_5": {
+            "status": "present",
+            "as_reported": "x at about 6.1 m: about 313 °C",
+            "note": "read from Abb. 8 (measured inner furnace-wall temperature t_0,i, cross); the bed height is also read off the plot (about 6.1 m); 40 mm external insulation",
+            "qualifier": "approximate",
+            "unit": "°C",
+            "value": 313
+          },
+          "wall_temperature_measured_6": {
+            "status": "present",
+            "as_reported": "x at about 6.9 m: about 321 °C",
+            "note": "read from Abb. 8 (measured inner furnace-wall temperature t_0,i, cross); the bed height is also read off the plot (about 6.9 m); 40 mm external insulation",
+            "qualifier": "approximate",
+            "unit": "°C",
+            "value": 321
+          }
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "345 °C",
+          "note": "temperature of the synthesis gas reaching the first catalyst layer (text p. 12 and Abb. 2)",
+          "unit": "°C",
+          "value": 345
+        },
+        "temperature_measured_at": "gas_inlet",
+        "temperature_profile": "adiabatic",
+        "test_kind": "activity",
+        "test_label": "plant operation"
+      }
+    },
+    {
+      "id": "ex:msyn/source/10.1515-zpch-1964-22523",
+      "label": "Source",
+      "props": {
+        "name": "Die reaktionskinetische Untersuchung eines technischen Methanol-Syntheseofens",
+        "kind": "article",
+        "description": "Published 1964 (publication year (bibliography)); in scope: before the 1966-01-01 cutoff. Text: 15 pages text_layer. Text not redistributed.",
+        "doi": "10.1515/zpch-1964-22523",
+        "licence": "no verified publisher licence; short excerpts quoted as evidence under fair use",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "Die reaktionskinetische Untersuchung eines technischen Methanol-Syntheseofens",
+        "url": "https://doi.org/10.1515/zpch-1964-22523",
+        "venue": "Zeitschrift für Physikalische Chemie",
+        "year": 1964
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/analysis/check-pasquon-vs-natta/reported-in/10.1515-zpch-1964-22523",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3",
+          "p. 3, Abb. 1",
+          "p. 3, Abb. 1 (legend)",
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/analysis/check-pasquon-vs-natta",
+      "target": "ex:msyn/source/10.1515-zpch-1964-22523"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/catalyst/leuna-kontakt/reported-in/10.1515-zpch-1964-22523",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 14",
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/catalyst/leuna-kontakt",
+      "target": "ex:msyn/source/10.1515-zpch-1964-22523"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/catalyst/montecatini-kontakt/reported-in/10.1515-zpch-1964-22523",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 14"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/catalyst/montecatini-kontakt",
+      "target": "ex:msyn/source/10.1515-zpch-1964-22523"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/catalyst/zno-cr2o3-cuo-pasquon/reported-in/10.1515-zpch-1964-22523",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/catalyst/zno-cr2o3-cuo-pasquon",
+      "target": "ex:msyn/source/10.1515-zpch-1964-22523"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/catalyst/zno-cr2o3-pasquon/reported-in/10.1515-zpch-1964-22523",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/catalyst/zno-cr2o3-pasquon",
+      "target": "ex:msyn/source/10.1515-zpch-1964-22523"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/claim/adsorption-constants/reported-in/10.1515-zpch-1964-22523",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/claim/adsorption-constants",
+      "target": "ex:msyn/source/10.1515-zpch-1964-22523"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/claim/agreement/reported-in/10.1515-zpch-1964-22523",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 14"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/claim/agreement",
+      "target": "ex:msyn/source/10.1515-zpch-1964-22523"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/claim/hottest-lower-third/reported-in/10.1515-zpch-1964-22523",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 8"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/claim/hottest-lower-third",
+      "target": "ex:msyn/source/10.1515-zpch-1964-22523"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/claim/inflection-at-max-rate/reported-in/10.1515-zpch-1964-22523",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 8",
+          "p. 9"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/claim/inflection-at-max-rate",
+      "target": "ex:msyn/source/10.1515-zpch-1964-22523"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/claim/inlet-temperatures/reported-in/10.1515-zpch-1964-22523",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 13",
+          "p. 14"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/claim/inlet-temperatures",
+      "target": "ex:msyn/source/10.1515-zpch-1964-22523"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/claim/leuna-twice-per-volume/reported-in/10.1515-zpch-1964-22523",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 14"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/claim/leuna-twice-per-volume",
+      "target": "ex:msyn/source/10.1515-zpch-1964-22523"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/claim/limit-400/reported-in/10.1515-zpch-1964-22523",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 12"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/claim/limit-400",
+      "target": "ex:msyn/source/10.1515-zpch-1964-22523"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/claim/longer-converter/reported-in/10.1515-zpch-1964-22523",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 8"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/claim/longer-converter",
+      "target": "ex:msyn/source/10.1515-zpch-1964-22523"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/claim/optimum-inflection-mid-layer/reported-in/10.1515-zpch-1964-22523",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 12"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/claim/optimum-inflection-mid-layer",
+      "target": "ex:msyn/source/10.1515-zpch-1964-22523"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/claim/pasquon-mechanism/reported-in/10.1515-zpch-1964-22523",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/claim/pasquon-mechanism",
+      "target": "ex:msyn/source/10.1515-zpch-1964-22523"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/claim/planned-test-reactor/reported-in/10.1515-zpch-1964-22523",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 14"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/claim/planned-test-reactor",
+      "target": "ex:msyn/source/10.1515-zpch-1964-22523"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/claim/temperature-effect/reported-in/10.1515-zpch-1964-22523",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 12",
+          "p. 14"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/claim/temperature-effect",
+      "target": "ex:msyn/source/10.1515-zpch-1964-22523"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/computation/abb9-rate-map/reported-in/10.1515-zpch-1964-22523",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 12",
+          "p. 13, Abb. 9",
+          "p. 14"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/computation/abb9-rate-map",
+      "target": "ex:msyn/source/10.1515-zpch-1964-22523"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/computation/converter-recalculation/reported-in/10.1515-zpch-1964-22523",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 10, Abb. 6",
+          "p. 4",
+          "p. 5",
+          "p. 6, Abb. 3 (label)",
+          "p. 7",
+          "p. 7, Tabelle 1",
+          "p. 8",
+          "p. 8, Tabelle 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/computation/converter-recalculation",
+      "target": "ex:msyn/source/10.1515-zpch-1964-22523"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/feed/entry-gas/reported-in/10.1515-zpch-1964-22523",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 13, Abb. 9",
+          "p. 7, Tabelle 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/feed/entry-gas",
+      "target": "ex:msyn/source/10.1515-zpch-1964-22523"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/hypothesis/leuna-both-steps/reported-in/10.1515-zpch-1964-22523",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/hypothesis/leuna-both-steps",
+      "target": "ex:msyn/source/10.1515-zpch-1964-22523"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/hypothesis/natta-pasquon-close-to-real/reported-in/10.1515-zpch-1964-22523",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/hypothesis/natta-pasquon-close-to-real",
+      "target": "ex:msyn/source/10.1515-zpch-1964-22523"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/hypothesis/pore-diffusion-small/reported-in/10.1515-zpch-1964-22523",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 14"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/hypothesis/pore-diffusion-small",
+      "target": "ex:msyn/source/10.1515-zpch-1964-22523"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/hypothesis/wall-measurement-error/reported-in/10.1515-zpch-1964-22523",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 12"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/hypothesis/wall-measurement-error",
+      "target": "ex:msyn/source/10.1515-zpch-1964-22523"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/1",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "context": [
+          "ex:msyn/10.1515-zpch-1964-22523/test/leuna-converter-operation"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 14",
+            "note": "quote withheld: sha256:f5dbcebfbfb3a065659ac0fc3010cb807a5b3010dc9585f0204a5e38a8f5f9ce chars:60",
+            "passage": "10.1515-zpch-1964-22523/p14/2",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/catalyst/leuna-kontakt",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/10",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 14",
+            "note": "quote withheld: sha256:976c34ecbb472243d29a48485e9edbbc8f33563a74e05acdaae61c8992caee85 chars:43",
+            "passage": "10.1515-zpch-1964-22523/p14/3",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/sample/charge-5-9mm-50-50",
+      "target": "ex:msyn/10.1515-zpch-1964-22523/catalyst/leuna-kontakt"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/11",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 14",
+            "note": "quote withheld: sha256:976c34ecbb472243d29a48485e9edbbc8f33563a74e05acdaae61c8992caee85 chars:43",
+            "passage": "10.1515-zpch-1964-22523/p14/3",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/sample/charge-9mm",
+      "target": "ex:msyn/10.1515-zpch-1964-22523/catalyst/leuna-kontakt"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/12",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 7, Tabelle 1",
+            "note": "quote withheld: sha256:3f8683b8b6fdb51abb8cfdf93bdf9028be6bb7e22bb60230b7db7a7972926d11 chars:53",
+            "passage": "10.1515-zpch-1964-22523/p7/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "69,36% H 2",
+          "unit": "%",
+          "value": 69.36
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/feed/entry-gas",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/13",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 7, Tabelle 1",
+            "note": "quote withheld: sha256:3f8683b8b6fdb51abb8cfdf93bdf9028be6bb7e22bb60230b7db7a7972926d11 chars:53",
+            "passage": "10.1515-zpch-1964-22523/p7/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "17,04% CO",
+          "unit": "%",
+          "value": 17.04
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/feed/entry-gas",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/14",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 7, Tabelle 1",
+            "note": "quote withheld: sha256:3f8683b8b6fdb51abb8cfdf93bdf9028be6bb7e22bb60230b7db7a7972926d11 chars:53",
+            "passage": "10.1515-zpch-1964-22523/p7/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "13,60% Inerte",
+          "unit": "%",
+          "value": 13.6
+        },
+        "fraction_basis": "not_reported",
+        "role": "diluent"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/feed/entry-gas",
+      "target": "ex:msyn/10.1515-zpch-1964-22523/species/inerte"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/15",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "bed_position": 1,
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "p. 5, Abb. 2",
+            "note": "values printed in the figure: gas to the bed about 345 °C; cold gas KG 3 4400, KG 6 1500, KG 8 5400 Nm3/h; V_KG6 + V_CH3OH = 37572 Nm3/h; V_Reg = 29200 Nm3/h; quote withheld: sha256:934b6ca003defaf205ff7f9b786d83e98f23f0487fe423c680a22691b699edd3 chars:56",
+            "passage": "10.1515-zpch-1964-22523/p5/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "state": "operating"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/test/leuna-converter-operation",
+      "target": "ex:msyn/10.1515-zpch-1964-22523/sample/charge-5mm"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/16",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "bed_position": 2,
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "p. 5, Abb. 2",
+            "note": "values printed in the figure: gas to the bed about 345 °C; cold gas KG 3 4400, KG 6 1500, KG 8 5400 Nm3/h; V_KG6 + V_CH3OH = 37572 Nm3/h; V_Reg = 29200 Nm3/h; quote withheld: sha256:934b6ca003defaf205ff7f9b786d83e98f23f0487fe423c680a22691b699edd3 chars:56",
+            "passage": "10.1515-zpch-1964-22523/p5/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "state": "operating"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/test/leuna-converter-operation",
+      "target": "ex:msyn/10.1515-zpch-1964-22523/sample/charge-5-9mm-75-25"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/17",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "bed_position": 3,
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "p. 5, Abb. 2",
+            "note": "values printed in the figure: gas to the bed about 345 °C; cold gas KG 3 4400, KG 6 1500, KG 8 5400 Nm3/h; V_KG6 + V_CH3OH = 37572 Nm3/h; V_Reg = 29200 Nm3/h; quote withheld: sha256:934b6ca003defaf205ff7f9b786d83e98f23f0487fe423c680a22691b699edd3 chars:56",
+            "passage": "10.1515-zpch-1964-22523/p5/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "state": "operating"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/test/leuna-converter-operation",
+      "target": "ex:msyn/10.1515-zpch-1964-22523/sample/charge-5-9mm-50-50"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/18",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "bed_position": 4,
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "p. 5, Abb. 2",
+            "note": "values printed in the figure: gas to the bed about 345 °C; cold gas KG 3 4400, KG 6 1500, KG 8 5400 Nm3/h; V_KG6 + V_CH3OH = 37572 Nm3/h; V_Reg = 29200 Nm3/h; quote withheld: sha256:934b6ca003defaf205ff7f9b786d83e98f23f0487fe423c680a22691b699edd3 chars:56",
+            "passage": "10.1515-zpch-1964-22523/p5/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "state": "operating"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/test/leuna-converter-operation",
+      "target": "ex:msyn/10.1515-zpch-1964-22523/sample/charge-9mm"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/19",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "p. 13, Abb. 9",
+            "note": "quote withheld: sha256:5bfa5c7b9baf1827cd94435716c38ab2fa9498531aacc25c811351bf886eca9f chars:52",
+            "passage": "10.1515-zpch-1964-22523/p13/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/test/leuna-converter-operation",
+      "target": "ex:msyn/10.1515-zpch-1964-22523/feed/entry-gas"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/2",
+      "type": "COMPARED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 14",
+            "note": "quote withheld: sha256:9d1e3b9df03e0c9cbde5ad82dbf1d2fe48468d5112a5b9f01af06cade383ca38 chars:68",
+            "passage": "10.1515-zpch-1964-22523/p14/3",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 14",
+            "note": "quote withheld: sha256:fdf356832c48aafe69d8db61f8a90b3b6ef5df1484e0dbec1848c7a14d4a2ba9 chars:68",
+            "passage": "10.1515-zpch-1964-22523/p14/3",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "note": "per reactor volume the Leuna converter does almost twice as much as Natta's test reactor, since rates are per catalyst weight and the bulk densities are 1.60 vs about 0.85 g/cm3"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/catalyst/leuna-kontakt",
+      "target": "ex:msyn/10.1515-zpch-1964-22523/catalyst/montecatini-kontakt"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/20",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:302fce4e2b0654e69f0913198bf6c8c5a814da6b032866bc8d39480fc7516193 chars:76",
+            "passage": "10.1515-zpch-1964-22523/p1/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/test/leuna-converter-operation",
+      "target": "ex:msyn/10.1515-zpch-1964-22523/reactor/leuna-converter"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/21",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:269472fdf890b96a17b6dc9995785b47e2c99aedc27595d2d30d18aae889a8ec chars:62",
+            "passage": "10.1515-zpch-1964-22523/p7/3",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/test/leuna-converter-operation",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/22",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 7, Tabelle 1",
+            "note": "quote withheld: sha256:35038551913d502977c697e3f8fb61282f23c80cbecaf6300df219afb9739322 chars:32",
+            "passage": "10.1515-zpch-1964-22523/p7/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/computation/converter-recalculation",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/23",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 7, Tabelle 1",
+            "note": "quote withheld: sha256:3f8683b8b6fdb51abb8cfdf93bdf9028be6bb7e22bb60230b7db7a7972926d11 chars:53",
+            "passage": "10.1515-zpch-1964-22523/p7/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "role": "parameter"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/computation/converter-recalculation",
+      "target": "ex:msyn/10.1515-zpch-1964-22523/feed/entry-gas"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/24",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:ade5e5211c5d97b5f876dbf13dfb07b9dd5177dc23aeafa781cc782500c79180 chars:69",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "role": "other"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/computation/converter-recalculation",
+      "target": "ex:msyn/10.1515-zpch-1964-22523/reactor/leuna-converter"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/25",
+      "type": "EVALUATES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:de2fdc9e02aa3bd328ca040d40d46010919631f8ece89c697cb41ddf8b5515e9 chars:23",
+            "passage": "10.1515-zpch-1964-22523/p7/3",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 11",
+            "note": "quote withheld: sha256:8eec8f2e89fd75023275299eeaaa6957d95a6041596dd895b30a8bd5270b017e chars:65",
+            "passage": "10.1515-zpch-1964-22523/p11/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/computation/converter-recalculation",
+      "target": "ex:msyn/10.1515-zpch-1964-22523/test/leuna-converter-operation"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/26",
+      "type": "EXAMINES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 14",
+            "note": "quote withheld: sha256:f5dbcebfbfb3a065659ac0fc3010cb807a5b3010dc9585f0204a5e38a8f5f9ce chars:60",
+            "passage": "10.1515-zpch-1964-22523/p14/2",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/computation/converter-recalculation",
+      "target": "ex:msyn/10.1515-zpch-1964-22523/catalyst/leuna-kontakt"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/27",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "p. 13, Abb. 9",
+            "note": "quote withheld: sha256:56671245cd6bc5cda99feb3ca82a0d702a762442ef56585a7543451f8677525c chars:65",
+            "passage": "10.1515-zpch-1964-22523/p13/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/computation/abb9-rate-map",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/28",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "p. 13, Abb. 9",
+            "note": "quote withheld: sha256:5bfa5c7b9baf1827cd94435716c38ab2fa9498531aacc25c811351bf886eca9f chars:52",
+            "passage": "10.1515-zpch-1964-22523/p13/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "role": "parameter"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/computation/abb9-rate-map",
+      "target": "ex:msyn/10.1515-zpch-1964-22523/feed/entry-gas"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/29",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:4e39af35e3c7ce1ab728c36bc49f86522b027e0f2149d6032ccddb0346a16ae9 chars:64",
+            "passage": "10.1515-zpch-1964-22523/p3/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/analysis/check-pasquon-vs-natta",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/3",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:134b71f36cbc2b3d3b43017a2c1a30e23c7d2aeb98923a6adcc53e166d1ac221 chars:63",
+            "passage": "10.1515-zpch-1964-22523/p1/3",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/catalyst/zno-cr2o3-pasquon",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/30",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:29edfcbc19a7a0adf42a5856db7d2a797fd3d1e7997619c6129bcca4785c474a chars:81",
+            "passage": "10.1515-zpch-1964-22523/p1/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/claim/agreement",
+      "target": "ex:msyn/10.1515-zpch-1964-22523/catalyst/leuna-kontakt"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/31",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:29edfcbc19a7a0adf42a5856db7d2a797fd3d1e7997619c6129bcca4785c474a chars:81",
+            "passage": "10.1515-zpch-1964-22523/p1/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/claim/agreement",
+      "target": "ex:msyn/10.1515-zpch-1964-22523/reactor/leuna-converter"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/32",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:86082cf9ec3808954b6483d68d22a3746cf39a53adc7f85b9b3d9ca2718d938a chars:66",
+            "passage": "10.1515-zpch-1964-22523/p7/3",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/computation/converter-recalculation",
+      "target": "ex:msyn/10.1515-zpch-1964-22523/claim/agreement"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/33",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:de2fdc9e02aa3bd328ca040d40d46010919631f8ece89c697cb41ddf8b5515e9 chars:23",
+            "passage": "10.1515-zpch-1964-22523/p7/3",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/test/leuna-converter-operation",
+      "target": "ex:msyn/10.1515-zpch-1964-22523/claim/agreement"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/34",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:0d65f5b87a3abb135d0dfdba7b9e504cb0cfd861df5ad1b978efdc05bf5bdcfe chars:67",
+            "passage": "10.1515-zpch-1964-22523/p8/2",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/claim/longer-converter",
+      "target": "ex:msyn/10.1515-zpch-1964-22523/reactor/leuna-converter"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/35",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:0d65f5b87a3abb135d0dfdba7b9e504cb0cfd861df5ad1b978efdc05bf5bdcfe chars:67",
+            "passage": "10.1515-zpch-1964-22523/p8/2",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/computation/converter-recalculation",
+      "target": "ex:msyn/10.1515-zpch-1964-22523/claim/longer-converter"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/36",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:e1b0f71b306c7294cf37cefe28b9749c560f325e754b627d5b8f49904e710c0a chars:62",
+            "passage": "10.1515-zpch-1964-22523/p8/3",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/claim/hottest-lower-third",
+      "target": "ex:msyn/10.1515-zpch-1964-22523/reactor/leuna-converter"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/37",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:266c86592899b1b67f5535267aae7376e94a0cb4c2e9118b6a9400a38a5c2bbb chars:69",
+            "passage": "10.1515-zpch-1964-22523/p8/3",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/computation/converter-recalculation",
+      "target": "ex:msyn/10.1515-zpch-1964-22523/claim/hottest-lower-third"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/38",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:4fe430aa36b73d4b83bd5ead5a48f7ac46da18035dad72b2b81adeb35ca59804 chars:63",
+            "passage": "10.1515-zpch-1964-22523/p8/3",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/claim/inflection-at-max-rate",
+      "target": "ex:msyn/10.1515-zpch-1964-22523/reactor/leuna-converter"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/39",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 9",
+            "note": "quote withheld: sha256:aec91207035402ea1aa823afaf375822849cf30bb9a690161efdcfc41ebcb3b5 chars:67",
+            "passage": "10.1515-zpch-1964-22523/p9/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/computation/converter-recalculation",
+      "target": "ex:msyn/10.1515-zpch-1964-22523/claim/inflection-at-max-rate"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/4",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:134b71f36cbc2b3d3b43017a2c1a30e23c7d2aeb98923a6adcc53e166d1ac221 chars:63",
+            "passage": "10.1515-zpch-1964-22523/p1/3",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/catalyst/zno-cr2o3-pasquon",
+      "target": "ex:msyn/species/cr2o3"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/40",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:f1ebd3846d9e5b2dfad409a2661514c611a55f9efb49d4be5bf2b174f6ae7a3d chars:58",
+            "passage": "10.1515-zpch-1964-22523/p12/2",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/claim/optimum-inflection-mid-layer",
+      "target": "ex:msyn/10.1515-zpch-1964-22523/reactor/leuna-converter"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/41",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:8d75c0308291eda4174eb7239d3811054f6fbf2b9e72ab6f7820a56745f69157 chars:64",
+            "passage": "10.1515-zpch-1964-22523/p12/4",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/claim/limit-400",
+      "target": "ex:msyn/reaction/co-methanation"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/42",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:8d75c0308291eda4174eb7239d3811054f6fbf2b9e72ab6f7820a56745f69157 chars:64",
+            "passage": "10.1515-zpch-1964-22523/p12/4",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/claim/limit-400",
+      "target": "ex:msyn/10.1515-zpch-1964-22523/reactor/leuna-converter"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/43",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:8d75c0308291eda4174eb7239d3811054f6fbf2b9e72ab6f7820a56745f69157 chars:64",
+            "passage": "10.1515-zpch-1964-22523/p12/4",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/claim/limit-400",
+      "target": "ex:msyn/species/ch4"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/44",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 13",
+            "note": "quote withheld: sha256:80775f03f01a4984c888c9e18c28f98b41d97c16b5442ba4b1e24b943799497f chars:65",
+            "passage": "10.1515-zpch-1964-22523/p13/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/claim/inlet-temperatures",
+      "target": "ex:msyn/10.1515-zpch-1964-22523/reactor/leuna-converter"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/45",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 13",
+            "note": "quote withheld: sha256:e4a0c950d332c0ccbe7c4624c8c6cb6d2fc98d53a8521a6044a91a71bfbf2b27 chars:71",
+            "passage": "10.1515-zpch-1964-22523/p13/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/computation/converter-recalculation",
+      "target": "ex:msyn/10.1515-zpch-1964-22523/claim/inlet-temperatures"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/46",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:b04a2f909515dccb75d221b6767fde4e7e775253c1f36e8374e05b0bb39ee54b chars:68",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/claim/temperature-effect",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/47",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:ea7072ba086ca46b6b7256e2381c2c0cc46dfd8cb70ffe89b3b9db1ab328d6af chars:68",
+            "passage": "10.1515-zpch-1964-22523/p12/3",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/computation/abb9-rate-map",
+      "target": "ex:msyn/10.1515-zpch-1964-22523/claim/temperature-effect"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/48",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 14",
+            "note": "quote withheld: sha256:9d1e3b9df03e0c9cbde5ad82dbf1d2fe48468d5112a5b9f01af06cade383ca38 chars:68",
+            "passage": "10.1515-zpch-1964-22523/p14/3",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/claim/leuna-twice-per-volume",
+      "target": "ex:msyn/10.1515-zpch-1964-22523/catalyst/leuna-kontakt"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/49",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 14",
+            "note": "quote withheld: sha256:9d1e3b9df03e0c9cbde5ad82dbf1d2fe48468d5112a5b9f01af06cade383ca38 chars:68",
+            "passage": "10.1515-zpch-1964-22523/p14/3",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/claim/leuna-twice-per-volume",
+      "target": "ex:msyn/10.1515-zpch-1964-22523/catalyst/montecatini-kontakt"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/5",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:33e3424b1ea31fc6c5600512ab9ba0ca3783c397001bd32c561800af728e2f95 chars:55",
+            "passage": "10.1515-zpch-1964-22523/p2/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/catalyst/zno-cr2o3-cuo-pasquon",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/50",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:134b71f36cbc2b3d3b43017a2c1a30e23c7d2aeb98923a6adcc53e166d1ac221 chars:63",
+            "passage": "10.1515-zpch-1964-22523/p1/3",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/claim/pasquon-mechanism",
+      "target": "ex:msyn/10.1515-zpch-1964-22523/catalyst/zno-cr2o3-pasquon"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/51",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:134b71f36cbc2b3d3b43017a2c1a30e23c7d2aeb98923a6adcc53e166d1ac221 chars:63",
+            "passage": "10.1515-zpch-1964-22523/p1/3",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/claim/pasquon-mechanism",
+      "target": "ex:msyn/10.1515-zpch-1964-22523/catalyst/zno-cr2o3-cuo-pasquon"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/52",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:134b71f36cbc2b3d3b43017a2c1a30e23c7d2aeb98923a6adcc53e166d1ac221 chars:63",
+            "passage": "10.1515-zpch-1964-22523/p1/3",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/claim/pasquon-mechanism",
+      "target": "ex:msyn/species/hcho"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/53",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:711865d685fc8fcbda8528149a0575a2a838bede3986351244e82f2eb0b68af2 chars:68",
+            "passage": "10.1515-zpch-1964-22523/p2/2",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/claim/adsorption-constants",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/54",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:711865d685fc8fcbda8528149a0575a2a838bede3986351244e82f2eb0b68af2 chars:68",
+            "passage": "10.1515-zpch-1964-22523/p2/2",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/claim/adsorption-constants",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/55",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:711865d685fc8fcbda8528149a0575a2a838bede3986351244e82f2eb0b68af2 chars:68",
+            "passage": "10.1515-zpch-1964-22523/p2/2",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/claim/adsorption-constants",
+      "target": "ex:msyn/species/ch3oh"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/56",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:931b4cc31e214ebb044386bd4405eb7d6e00340777617741c5a9eb3b719930df chars:65",
+            "passage": "10.1515-zpch-1964-22523/p2/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/hypothesis/leuna-both-steps",
+      "target": "ex:msyn/10.1515-zpch-1964-22523/catalyst/leuna-kontakt"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/57",
+      "type": "TESTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 14",
+            "note": "quote withheld: sha256:c97659277892980126e3b3796a472d650cdaf1cbf6e24f87a7b0342725f99021 chars:59",
+            "passage": "10.1515-zpch-1964-22523/p14/2",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "outcome": "supports",
+        "warrant": "the relatively good agreement supports using Pasquon's equation for the Leuna catalyst"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/computation/converter-recalculation",
+      "target": "ex:msyn/10.1515-zpch-1964-22523/hypothesis/leuna-both-steps"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/58",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:16be036c4c578eb7fe6a8e5bcecf9eda62b0105da8f83bec3676e33f85afe232 chars:64",
+            "passage": "10.1515-zpch-1964-22523/p2/3",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/hypothesis/natta-pasquon-close-to-real",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/59",
+      "type": "TESTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:b1ea9d738cc89db6b325e7f23b552cee2c6960c7ce4a10cc72b53d296f563259 chars:72",
+            "passage": "10.1515-zpch-1964-22523/p3/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "outcome": "supports"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/analysis/check-pasquon-vs-natta",
+      "target": "ex:msyn/10.1515-zpch-1964-22523/hypothesis/natta-pasquon-close-to-real"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/6",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:33e3424b1ea31fc6c5600512ab9ba0ca3783c397001bd32c561800af728e2f95 chars:55",
+            "passage": "10.1515-zpch-1964-22523/p2/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/catalyst/zno-cr2o3-cuo-pasquon",
+      "target": "ex:msyn/species/cr2o3"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/60",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 14",
+            "note": "quote withheld: sha256:c05d49e3207e843487a05a9c19d5576bb6028ed1414e7158513b584c8bd92acb chars:64",
+            "passage": "10.1515-zpch-1964-22523/p14/3",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/hypothesis/pore-diffusion-small",
+      "target": "ex:msyn/10.1515-zpch-1964-22523/catalyst/leuna-kontakt"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/61",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:d63b54227c1598e2cd32a1c235ffad47496fd6e4bc8c05c5bff2c8b5b5219ff3 chars:66",
+            "passage": "10.1515-zpch-1964-22523/p12/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/hypothesis/wall-measurement-error",
+      "target": "ex:msyn/10.1515-zpch-1964-22523/test/leuna-converter-operation"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/62",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 14",
+            "note": "quote withheld: sha256:a394f15c82dc051d7469f43b3c876fe32d46206b4854d2ae6b2dfa7309557641 chars:66",
+            "passage": "10.1515-zpch-1964-22523/p14/4",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/claim/planned-test-reactor",
+      "target": "ex:msyn/10.1515-zpch-1964-22523/catalyst/leuna-kontakt"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/7",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:33e3424b1ea31fc6c5600512ab9ba0ca3783c397001bd32c561800af728e2f95 chars:55",
+            "passage": "10.1515-zpch-1964-22523/p2/1",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/catalyst/zno-cr2o3-cuo-pasquon",
+      "target": "ex:msyn/species/cuo"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/8",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 14",
+            "note": "quote withheld: sha256:976c34ecbb472243d29a48485e9edbbc8f33563a74e05acdaae61c8992caee85 chars:43",
+            "passage": "10.1515-zpch-1964-22523/p14/3",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/sample/charge-5mm",
+      "target": "ex:msyn/10.1515-zpch-1964-22523/catalyst/leuna-kontakt"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/link/9",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 14",
+            "note": "quote withheld: sha256:976c34ecbb472243d29a48485e9edbbc8f33563a74e05acdaae61c8992caee85 chars:43",
+            "passage": "10.1515-zpch-1964-22523/p14/3",
+            "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/sample/charge-5-9mm-75-25",
+      "target": "ex:msyn/10.1515-zpch-1964-22523/catalyst/leuna-kontakt"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/reactor/leuna-converter/reported-in/10.1515-zpch-1964-22523",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 5, Abb. 2",
+          "p. 5, Abb. 2 (dimension lines, left)",
+          "p. 5, Abb. 2 (dimension lines, right)",
+          "p. 5, Abb. 2 (label KG 3)",
+          "p. 5, Abb. 2 (label KG 6)",
+          "p. 5, Abb. 2 (label KG 8)",
+          "p. 5, Abb. 2 (label, 5 mm section)",
+          "p. 5, Abb. 2 (label, 50/50% section)",
+          "p. 5, Abb. 2 (label, 75/25% section)",
+          "p. 5, Abb. 2 (label, 9 mm section)",
+          "p. 6, Abb. 3",
+          "p. 6, Abb. 3 (diameters)",
+          "p. 7",
+          "p. 8"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/reactor/leuna-converter",
+      "target": "ex:msyn/source/10.1515-zpch-1964-22523"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/sample/charge-5-9mm-50-50/reported-in/10.1515-zpch-1964-22523",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4",
+          "p. 5, Abb. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/sample/charge-5-9mm-50-50",
+      "target": "ex:msyn/source/10.1515-zpch-1964-22523"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/sample/charge-5-9mm-75-25/reported-in/10.1515-zpch-1964-22523",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4",
+          "p. 5, Abb. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/sample/charge-5-9mm-75-25",
+      "target": "ex:msyn/source/10.1515-zpch-1964-22523"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/sample/charge-5mm/reported-in/10.1515-zpch-1964-22523",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4",
+          "p. 5, Abb. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/sample/charge-5mm",
+      "target": "ex:msyn/source/10.1515-zpch-1964-22523"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/sample/charge-9mm/reported-in/10.1515-zpch-1964-22523",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4",
+          "p. 5, Abb. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/sample/charge-9mm",
+      "target": "ex:msyn/source/10.1515-zpch-1964-22523"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/species/inerte/reported-in/10.1515-zpch-1964-22523",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 7, Tabelle 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/species/inerte",
+      "target": "ex:msyn/source/10.1515-zpch-1964-22523"
+    },
+    {
+      "id": "ex:msyn/10.1515-zpch-1964-22523/test/leuna-converter-operation/reported-in/10.1515-zpch-1964-22523",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 10, Abb. 5",
+          "p. 11, Abb. 8",
+          "p. 12",
+          "p. 5, Abb. 2",
+          "p. 5, Abb. 2 (label KG 3)",
+          "p. 5, Abb. 2 (label KG 6)",
+          "p. 5, Abb. 2 (label KG 8)",
+          "p. 5, Abb. 2 (label at the gas inlet)",
+          "p. 5, Abb. 2 (labels below the bed)",
+          "p. 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1515-zpch-1964-22523/test/leuna-converter-operation",
+      "target": "ex:msyn/source/10.1515-zpch-1964-22523"
+    },
+    {
+      "id": "ex:msyn/reaction/co-hydrogenation-to-methanol/reported-in/10.1515-zpch-1964-22523",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/source/10.1515-zpch-1964-22523"
+    },
+    {
+      "id": "ex:msyn/reaction/co-methanation/reported-in/10.1515-zpch-1964-22523",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 12"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/reaction/co-methanation",
+      "target": "ex:msyn/source/10.1515-zpch-1964-22523"
+    },
+    {
+      "id": "ex:msyn/source/10.1515-zpch-1964-22523/authored-by/1",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 1,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/10.1515-zpch-1964-22523",
+      "target": "ex:msyn/person/j-wermann"
+    },
+    {
+      "id": "ex:msyn/source/10.1515-zpch-1964-22523/authored-by/2",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 2,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/10.1515-zpch-1964-22523",
+      "target": "ex:msyn/person/k-lucas"
+    },
+    {
+      "id": "ex:msyn/source/10.1515-zpch-1964-22523/authored-by/3",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 3,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/10.1515-zpch-1964-22523",
+      "target": "ex:msyn/person/d-gelbin"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/10.1515-zpch-1964-22523"
+}

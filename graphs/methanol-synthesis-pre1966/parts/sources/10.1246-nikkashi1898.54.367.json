@@ -1,0 +1,313 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/10.1246-nikkashi1898.54.367/characterization/thermobalance-zinc-nitrate",
+      "label": "Characterization",
+      "props": {
+        "name": "thermal decomposition curve of Zn(NO3)2·6H2O (Figure 1)",
+        "atmosphere": "dry air, 3 l/hr",
+        "conditions": {
+          "sample_mass": {
+            "status": "present",
+            "as_reported": "試料0・22509",
+            "note": "Figure 1 caption; text layer '0・22509' for 0.2250 g",
+            "unit": "g",
+            "value": 0.225
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:0b5bf3b136e6bbf7f4f3a11b94bd757d9709e3149a6ad0a966e7eddcd3f1b0dc chars:96",
+            "passage": "10.1246-nikkashi1898.54.367/p1/2",
+            "source": "ex:msyn/source/10.1246-nikkashi1898.54.367"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:159dd23b6069d1421b7692089bf21d4c98d42def7fed0ca71a095b880d9682ae chars:56",
+            "passage": "10.1246-nikkashi1898.54.367/p2/1",
+            "source": "ex:msyn/source/10.1246-nikkashi1898.54.367"
+          },
+          {
+            "kind": "figure",
+            "locator": "p. 2, Figure 1",
+            "note": "quote withheld: sha256:db6ede235555ca625b2da8b183712c048c0050a0433fab91b030f9d4a9d424a6 chars:33",
+            "passage": "10.1246-nikkashi1898.54.367/p2/1",
+            "source": "ex:msyn/source/10.1246-nikkashi1898.54.367"
+          }
+        ],
+        "experiment_status": "completed",
+        "results": {
+          "complete_conversion_to_zno": {
+            "status": "present",
+            "as_reported": "295℃附近に於て完全にZ轟0となる",
+            "qualifier": "approximate",
+            "unit": "°C",
+            "value": 295
+          },
+          "loss_of_crystal_water": {
+            "status": "present",
+            "as_reported": "140℃附近に於て6キルの結晶水を失い",
+            "note": "six molecules of water of crystallization lost near 140 °C (text layer '6キル')",
+            "qualifier": "approximate",
+            "unit": "°C",
+            "value": 140
+          },
+          "vigorous_decomposition_from": {
+            "status": "present",
+            "as_reported": "230℃附近よりは分解叢も盛んとなり",
+            "qualifier": "approximate",
+            "unit": "°C",
+            "value": 230
+          }
+        },
+        "technique": "thermobalance (大嶋・繭田式熱天秤 as printed)"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1246-nikkashi1898.54.367/claim/eguchi-mechanism-doubtful",
+      "label": "Claim",
+      "props": {
+        "name": "the formic-acid route of the synthesis mechanism is doubtful for decomposition over ZnO",
+        "claim_kind": "mechanism",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:44febb3fc52dd69136b21d0fe0b9d0a558a5b4bec82d69607296637550fab618 chars:144",
+            "passage": "10.1246-nikkashi1898.54.367/p3/3",
+            "source": "ex:msyn/source/10.1246-nikkashi1898.54.367"
+          }
+        ],
+        "inference_type": "theoretical",
+        "note": "the mechanisms discussed (Morgan et al.; Eguchi) and the dehydrogenation of formic acid over ZnO (Sabatier and Senderens) are cited from other work",
+        "statement": "Whether water bound to ZnO accelerates HCHO decomposition by the same mechanism proposed for methanol synthesis (CO + H2O ⇌ HCOOH, etc.) is doubtful, because ZnO acts as a dehydrogenation catalyst toward formic acid, so the reverse of reaction (1) (HCOOH → CO + H2O) cannot occur."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1246-nikkashi1898.54.367/hypothesis/water-monolayer-on-zno",
+      "label": "Hypothesis",
+      "props": {
+        "name": "water bound as a monomolecular layer on the ZnO surface",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:60faba4ee7986a87878ca3dafe9db922d0d9a3d446c4ae1eb4f787f59e79331a chars:60",
+            "passage": "10.1246-nikkashi1898.54.367/p3/2",
+            "source": "ex:msyn/source/10.1246-nikkashi1898.54.367"
+          }
+        ],
+        "hypothesis_kind": "auxiliary",
+        "hypothesis_status": "proposed",
+        "note": "working assumption; Boswell's NiO model is cited",
+        "statement": "As in Boswell's model for NiO, water molecules are assumed to be bound or adsorbed on the ZnO surface as a monomolecular layer."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1246-nikkashi1898.54.367/species/zinc-nitrate-hexahydrate",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "zinc nitrate hexahydrate (recrystallized, Kojima guaranteed grade)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "melting point printed 36.4 °C; the composition Zn(NO3)2·6H2O as printed (text layer '6H20'); quote withheld: sha256:1b1dbf0f237c509446ef038bce965389682279e27c72f2ae5af4f4d02e52cf08 chars:53",
+            "passage": "10.1246-nikkashi1898.54.367/p1/2",
+            "source": "ex:msyn/source/10.1246-nikkashi1898.54.367"
+          }
+        ],
+        "formula": "Zn(NO3)2·6H2O",
+        "properties": {
+          "melting_point": {
+            "status": "present",
+            "as_reported": "融点36.4℃",
+            "note": "text layer reads '融点36・4℃'",
+            "unit": "°C",
+            "value": 36.4
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/source/10.1246-nikkashi1898.54.367",
+      "label": "Source",
+      "props": {
+        "name": "(183-184)Studies on the Zinc System Catalyst for Methanol-Synthesis.IV-V.",
+        "kind": "article",
+        "description": "Published 1951 (publication year (bibliography)); in scope: before the 1966-01-01 cutoff. Text: 4 pages text_layer. Text not redistributed.",
+        "doi": "10.1246/nikkashi1898.54.367",
+        "licence": "no verified publisher licence; short excerpts quoted as evidence under fair use",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "(183-184)Studies on the Zinc System Catalyst for Methanol-Synthesis.IV-V.",
+        "url": "https://doi.org/10.1246/nikkashi1898.54.367",
+        "venue": "The Journal of the Society of Chemical Industry Japan",
+        "year": 1951
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/10.1246-nikkashi1898.54.367/characterization/thermobalance-zinc-nitrate/reported-in/10.1246-nikkashi1898.54.367",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 2",
+          "p. 2, Figure 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-nikkashi1898.54.367/characterization/thermobalance-zinc-nitrate",
+      "target": "ex:msyn/source/10.1246-nikkashi1898.54.367"
+    },
+    {
+      "id": "ex:msyn/10.1246-nikkashi1898.54.367/claim/eguchi-mechanism-doubtful/reported-in/10.1246-nikkashi1898.54.367",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-nikkashi1898.54.367/claim/eguchi-mechanism-doubtful",
+      "target": "ex:msyn/source/10.1246-nikkashi1898.54.367"
+    },
+    {
+      "id": "ex:msyn/10.1246-nikkashi1898.54.367/hypothesis/water-monolayer-on-zno/reported-in/10.1246-nikkashi1898.54.367",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-nikkashi1898.54.367/hypothesis/water-monolayer-on-zno",
+      "target": "ex:msyn/source/10.1246-nikkashi1898.54.367"
+    },
+    {
+      "id": "ex:msyn/10.1246-nikkashi1898.54.367/link/87",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:60faba4ee7986a87878ca3dafe9db922d0d9a3d446c4ae1eb4f787f59e79331a chars:60",
+            "passage": "10.1246-nikkashi1898.54.367/p3/2",
+            "source": "ex:msyn/source/10.1246-nikkashi1898.54.367"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-nikkashi1898.54.367/hypothesis/water-monolayer-on-zno",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/10.1246-nikkashi1898.54.367/link/88",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:60faba4ee7986a87878ca3dafe9db922d0d9a3d446c4ae1eb4f787f59e79331a chars:60",
+            "passage": "10.1246-nikkashi1898.54.367/p3/2",
+            "source": "ex:msyn/source/10.1246-nikkashi1898.54.367"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-nikkashi1898.54.367/hypothesis/water-monolayer-on-zno",
+      "target": "ex:msyn/species/h2o"
+    },
+    {
+      "id": "ex:msyn/10.1246-nikkashi1898.54.367/link/89",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:44febb3fc52dd69136b21d0fe0b9d0a558a5b4bec82d69607296637550fab618 chars:144",
+            "passage": "10.1246-nikkashi1898.54.367/p3/3",
+            "source": "ex:msyn/source/10.1246-nikkashi1898.54.367"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-nikkashi1898.54.367/claim/eguchi-mechanism-doubtful",
+      "target": "ex:msyn/species/hcooh"
+    },
+    {
+      "id": "ex:msyn/10.1246-nikkashi1898.54.367/link/9",
+      "type": "EXAMINES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "p. 2, Figure 1",
+            "note": "quote withheld: sha256:db6ede235555ca625b2da8b183712c048c0050a0433fab91b030f9d4a9d424a6 chars:33",
+            "passage": "10.1246-nikkashi1898.54.367/p2/1",
+            "source": "ex:msyn/source/10.1246-nikkashi1898.54.367"
+          }
+        ],
+        "role": "precursor of ZnO-(I)"
+      },
+      "source": "ex:msyn/10.1246-nikkashi1898.54.367/characterization/thermobalance-zinc-nitrate",
+      "target": "ex:msyn/10.1246-nikkashi1898.54.367/species/zinc-nitrate-hexahydrate"
+    },
+    {
+      "id": "ex:msyn/10.1246-nikkashi1898.54.367/link/90",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:44febb3fc52dd69136b21d0fe0b9d0a558a5b4bec82d69607296637550fab618 chars:144",
+            "passage": "10.1246-nikkashi1898.54.367/p3/3",
+            "source": "ex:msyn/source/10.1246-nikkashi1898.54.367"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-nikkashi1898.54.367/claim/eguchi-mechanism-doubtful",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/10.1246-nikkashi1898.54.367/species/zinc-nitrate-hexahydrate/reported-in/10.1246-nikkashi1898.54.367",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-nikkashi1898.54.367/species/zinc-nitrate-hexahydrate",
+      "target": "ex:msyn/source/10.1246-nikkashi1898.54.367"
+    },
+    {
+      "id": "ex:msyn/source/10.1246-nikkashi1898.54.367/authored-by/1",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 1,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/10.1246-nikkashi1898.54.367",
+      "target": "ex:msyn/person/akira-tomita"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/10.1246-nikkashi1898.54.367"
+}

@@ -1,0 +1,2015 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/source/us1569775a",
+      "label": "Source",
+      "props": {
+        "name": "Synthetic manufacture of methanol",
+        "kind": "patent",
+        "description": "Published 1926-01-12 (grant date printed on the patent (agrees with the USPTO issue-year table)); in scope: before the 1966-01-01 cutoff. Text: 2 pages text_layer. Text not redistributed.",
+        "identifiers": {
+          "patent": "US1569775A"
+        },
+        "licence": "US patent; not subject to copyright",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "Synthetic manufacture of methanol",
+        "url": "https://patents.google.com/patent/US1569775A",
+        "year": 1926
+      }
+    },
+    {
+      "id": "ex:msyn/us1569775a/catalyst/cu-cr-oxide",
+      "label": "Catalyst",
+      "props": {
+        "name": "copper and chromium oxide contact mass",
+        "catalyst_family": "other",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/6",
+            "quote": "With other contact masses, for example such as are composed of copper and chro mium oxid, or the oxids of zinc and chro mium, the result is very similar.",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ],
+        "generality": "kind"
+      }
+    },
+    {
+      "id": "ex:msyn/us1569775a/catalyst/example-cr-mn-oxide",
+      "label": "Catalyst",
+      "props": {
+        "name": "Example: chromium oxide-manganese oxide contact mass (equal molecular proportions)",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/5",
+            "quote": "A tube capable of resisting high pressure is lined inside with copper and provided with a granular contact mass composed of equal molecular proportions of chromium oxid and manganese oxid",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ],
+        "generality": "particular",
+        "properties": {
+          "cr_oxide_mn_oxide_molar_proportion": {
+            "status": "present",
+            "as_reported": "equal molecular proportions",
+            "text_value": "equal molecular proportions"
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us1569775a/catalyst/reducible-oxide-k2co3",
+      "label": "Catalyst",
+      "props": {
+        "name": "difficultly reducible metal oxides with a small addition of potassium carbonate",
+        "catalyst_family": "other",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/6",
+            "quote": "with a contact mass containing besides difficultly reducible metal oxids a small addition of potassium carbonate and preferably with a higher per centage of carbon monoxid and a reduced velocity of the gas current",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ],
+        "generality": "kind"
+      }
+    },
+    {
+      "id": "ex:msyn/us1569775a/catalyst/zn-cr-oxides",
+      "label": "Catalyst",
+      "props": {
+        "name": "oxides of zinc and chromium contact mass",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/6",
+            "quote": "With other contact masses, for example such as are composed of copper and chro mium oxid, or the oxids of zinc and chro mium, the result is very similar.",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ],
+        "generality": "kind"
+      }
+    },
+    {
+      "id": "ex:msyn/us1569775a/claim/alloys",
+      "label": "Claim",
+      "props": {
+        "name": "metal alloys may be used",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/7",
+            "quote": "or metal alloys for example chromium and manganese, copper and zinc and others.",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Metal alloys, for example chromium and manganese, copper and zinc and others, may be employed."
+      }
+    },
+    {
+      "id": "ex:msyn/us1569775a/claim/claim-1",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 1",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, claim 1",
+            "passage": "us1569775a/p1/7",
+            "quote": "1. In the process of manufacturing me. thanol by the interaction of carbon monoxid",
+            "source": "ex:msyn/source/us1569775a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, claim 1",
+            "passage": "us1569775a/p1/7",
+            "quote": "the step of completely excluding iron from the reac tion,",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "In the process of manufacturing methanol by the interaction of carbon monoxide and hydrogen in the presence of a catalyst capable of causing its formation, the step of completely excluding iron from the reaction."
+      }
+    },
+    {
+      "id": "ex:msyn/us1569775a/claim/claim-2",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 2",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 2",
+            "passage": "us1569775a/p2/1",
+            "quote": "2. The process of manufacturing methanol by the interaction of carbon monoxid and hydrogen in the presence of a catalyst ca-. pable of causing the formation of methanol",
+            "source": "ex:msyn/source/us1569775a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 2",
+            "passage": "us1569775a/p2/1",
+            "quote": "employing a catalyst, which is free from iron and a non-ferrous inner wall of the contact space and a gas mixture which is completely free from either suspended or",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The process of manufacturing methanol from carbon monoxide and hydrogen over a catalyst capable of forming methanol, employing a catalyst free from iron, a non-ferrous inner wall of the contact space and a gas mixture completely free from suspended or vaporized iron."
+      }
+    },
+    {
+      "id": "ex:msyn/us1569775a/claim/claim-3",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 3",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 3",
+            "passage": "us1569775a/p2/2",
+            "quote": "said interaction and at a pressure of more than 50 atmospheres and a temperature of between about 250 degrees and 600 degrees centigrade which consists in employing a catalyst which is free from iron",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The process of claim 2 carried out at a pressure of more than 50 atmospheres and a temperature between about 250 and 600 degrees centigrade, employing an iron-free catalyst, a non-ferrous inner wall of the contact space and a gas mixture completely free from suspended or vaporized iron."
+      }
+    },
+    {
+      "id": "ex:msyn/us1569775a/claim/contact-masses-vary-widely",
+      "label": "Claim",
+      "props": {
+        "name": "contact masses may vary widely",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/3",
+            "quote": "Provided the above conditions be observed, the other conditions may be varied within very wide limits.",
+            "source": "ex:msyn/source/us1569775a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/3",
+            "quote": "The nature of the contact masses may vary very considerably and the said masses may contain either metals or oxids or mixtures of more than one metal",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Provided iron is excluded, the other conditions may vary within very wide limits; the contact masses may contain metals or oxides or mixtures of more than one metal, more than one oxide, or of metals and oxides."
+      }
+    },
+    {
+      "id": "ex:msyn/us1569775a/claim/inert-gases",
+      "label": "Claim",
+      "props": {
+        "name": "inert gases may be present",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/4",
+            "quote": "In addition to carbon monoxid and hydrogen, other inert gases may be present",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Other inert gases may be present in addition to carbon monoxide and hydrogen."
+      }
+    },
+    {
+      "id": "ex:msyn/us1569775a/claim/iron-must-be-excluded",
+      "label": "Claim",
+      "props": {
+        "name": "iron must be kept out of the contact space",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/2",
+            "quote": "We have now found that methanol can be obtained by the interaction of carbon",
+            "source": "ex:msyn/source/us1569775a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "the stray '2' is a truncated line number (25) of the patent's margin",
+            "passage": "us1569775a/p1/2",
+            "quote": "provided the interior 2 of the contact space be kept completely free from iron.",
+            "source": "ex:msyn/source/us1569775a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/3",
+            "quote": "In order to carry out this in vention, the contact masses must be free from iron, the inner surface of the walls of the reaction chamber must not consist of iron and the gases must not carry any iron",
+            "source": "ex:msyn/source/us1569775a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/3",
+            "quote": "either in the form of fine particles or of volatile compounds of iron such as iron carbonyl.",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Methanol can be obtained from carbon monoxide and hydrogen at elevated temperature and pressure with contact masses capable of forming methanol and higher alcohols, provided the interior of the contact space is kept completely free from iron: the contact masses must be free from iron, the inner walls of the reaction chamber must not consist of iron, and the gases must not carry iron as fine particles or volatile compounds such as iron carbonyl."
+      }
+    },
+    {
+      "id": "ex:msyn/us1569775a/claim/metals-with-promoter",
+      "label": "Claim",
+      "props": {
+        "name": "metals with a promoter oxide or salt",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/7",
+            "quote": "or metals such as copper, silver, lead, zinc in con junction with a metal oxid or a metal salt acting as a promoter especially derived from a metal belonging to the fourth to the seventh groups of the periodic system",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Metals such as copper, silver, lead or zinc may be employed in conjunction with a metal oxide or metal salt acting as a promoter, especially one derived from a metal of the fourth to seventh groups of the periodic system."
+      }
+    },
+    {
+      "id": "ex:msyn/us1569775a/claim/non-reducible-oxides",
+      "label": "Claim",
+      "props": {
+        "name": "non-reducible oxides may be used",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/7",
+            "quote": "Contact masses containing oxids of vanadium, uranium, aluminium or other oxids non-reducible under the conditions of working may also be employed",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Contact masses containing oxides of vanadium, uranium, aluminium or other oxides non-reducible under the working conditions may also be employed."
+      }
+    },
+    {
+      "id": "ex:msyn/us1569775a/claim/other-contact-masses-similar",
+      "label": "Claim",
+      "props": {
+        "name": "Cu-Cr oxide and Zn-Cr oxide give very similar results",
+        "claim_kind": "comparison",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/6",
+            "quote": "With other contact masses, for example such as are composed of copper and chro mium oxid, or the oxids of zinc and chro mium, the result is very similar.",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "With other contact masses, for example copper and chromium oxide, or the oxides of zinc and chromium, the result is very similar to that of the chromium oxide-manganese oxide example."
+      }
+    },
+    {
+      "id": "ex:msyn/us1569775a/claim/pressure-temperature-range",
+      "label": "Claim",
+      "props": {
+        "name": "preferred pressure and temperature",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/4",
+            "quote": "the pressure being preferably from 50 at mospheres upwards and the temperature be tween say about 250 degrees and 600 degrees centigrade, depending on the efficiency of the contact mass in each individual case.",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The pressure is preferably from 50 atmospheres upwards and the temperature between about 250 and 600 degrees centigrade, depending on the efficiency of the contact mass in each case."
+      }
+    },
+    {
+      "id": "ex:msyn/us1569775a/claim/prior-art-methane-hydrocarbons",
+      "label": "Claim",
+      "props": {
+        "name": "earlier CO/H2 catalysis gave methane or liquid hydrocarbons",
+        "claim_kind": "other",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/2",
+            "quote": "Mixtures of carbon monoxid and hydro gen have repeatedly been exposed to the ac",
+            "source": "ex:msyn/source/us1569775a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/2",
+            "quote": "with the result that methane or liquid hydrocarbons have been obtained in so far as a reaction could be effected at all.",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "the patent's account of earlier work; not the patent's own tests",
+        "statement": "Mixtures of carbon monoxide and hydrogen exposed to catalysts under various conditions have given methane or liquid hydrocarbons, in so far as a reaction could be effected at all."
+      }
+    },
+    {
+      "id": "ex:msyn/us1569775a/claim/product-composition",
+      "label": "Claim",
+      "props": {
+        "name": "product pure or mixed with higher alcohols",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/4",
+            "quote": "The methanol produced in accordance with this invention is either pure or mixed with higher alcohols and other organic com",
+            "source": "ex:msyn/source/us1569775a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "continuation of 'other organic com-' after the OCR interleaved lines ('... depending on the special conditions of working employed.')",
+            "passage": "us1569775a/p1/4",
+            "quote": "pounds containing oxygen, depending on",
+            "source": "ex:msyn/source/us1569775a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/4",
+            "quote": "the special conditions of working employed.",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The methanol produced is either pure or mixed with higher alcohols and other oxygen-containing organic compounds, depending on the special conditions of working."
+      }
+    },
+    {
+      "id": "ex:msyn/us1569775a/feed/example-h2-co",
+      "label": "Feed",
+      "props": {
+        "name": "about 80 vol% hydrogen, 20 vol% carbon monoxide, freed from iron compounds",
+        "description": "Carefully freed from any volatile iron compounds and suspended iron particles; residual gas may be recycled after adding fresh gas mixture.",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/5",
+            "quote": "A gas mixture con taining about 80 per cent, by volume, of hydrogen and 20 per cent, by volume, of car bon monoxid which has been carefully freed from any volatile iron compounds and sus pended iron particles",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1569775a/material/difficultly-reducible-metal-oxides",
+      "label": "Material",
+      "props": {
+        "name": "difficultly reducible metal oxides",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/6",
+            "quote": "with a contact mass containing besides difficultly reducible metal oxids a small addition of potassium carbonate and preferably with a higher per centage of carbon monoxid and a reduced velocity of the gas current",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ],
+        "material_family": "oxide"
+      }
+    },
+    {
+      "id": "ex:msyn/us1569775a/reaction/co-hydrogenation-to-methanol-and-higher-alcohols",
+      "label": "Reaction",
+      "props": {
+        "name": "Formation of methanol and higher alcohols from carbon monoxide and hydrogen",
+        "description": "Interaction of carbon monoxide and hydrogen giving higher alcohols such as propyl, butyl and amyl alcohols besides methanol; no equation is given.",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/6",
+            "quote": "with a contact mass containing besides difficultly reducible metal oxids a small addition of potassium carbonate and preferably with a higher per centage of carbon monoxid and a reduced velocity of the gas current",
+            "source": "ex:msyn/source/us1569775a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/6",
+            "quote": "higher alcohols such as propyl, butyl and amyl alcohols are formed besides methanol, the proportions varying according to the exact conditions, especially the temperature employed.",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ],
+        "generality": "kind"
+      }
+    },
+    {
+      "id": "ex:msyn/us1569775a/reactor/copper-lined-tube",
+      "label": "Reactor",
+      "props": {
+        "name": "high-pressure tube lined inside with copper",
+        "description": "Tube capable of resisting high pressure, lined inside with copper; gas passed through; reaction gas led through a cooler without releasing the pressure; residual gas may be led back after adding fresh gas.",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/5",
+            "quote": "A tube capable of resisting high pressure is lined inside with copper and provided with a granular contact mass composed of equal molecular proportions of chromium oxid and manganese oxid",
+            "source": "ex:msyn/source/us1569775a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/5",
+            "quote": "is then passed through the said tube at a pressure of about 220 atmospheres while maintaining the tempera ture at 450 degrees centigrade.",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ],
+        "reactor_kind": "flow"
+      }
+    },
+    {
+      "id": "ex:msyn/us1569775a/sample/example-contact-mass",
+      "label": "CatalystSample",
+      "props": {
+        "name": "granular chromium oxide-manganese oxide contact mass of the example",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/5",
+            "quote": "A tube capable of resisting high pressure is lined inside with copper and provided with a granular contact mass composed of equal molecular proportions of chromium oxid and manganese oxid",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ],
+        "preparation_status": "not_reported",
+        "sample_kind": "granules"
+      }
+    },
+    {
+      "id": "ex:msyn/us1569775a/species/chromium-oxide",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "chromium oxide (oxidation state not stated)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/5",
+            "quote": "A tube capable of resisting high pressure is lined inside with copper and provided with a granular contact mass composed of equal molecular proportions of chromium oxid and manganese oxid",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1569775a/species/higher-alcohols",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "higher alcohols (propyl, butyl and amyl alcohols)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/6",
+            "quote": "higher alcohols such as propyl, butyl and amyl alcohols are formed besides methanol, the proportions varying according to the exact conditions, especially the temperature employed.",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1569775a/species/iron-carbonyl",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "iron carbonyl (as named in the patent)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/3",
+            "quote": "either in the form of fine particles or of volatile compounds of iron such as iron carbonyl.",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1569775a/species/liquid-hydrocarbons",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "liquid hydrocarbons",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/2",
+            "quote": "with the result that methane or liquid hydrocarbons have been obtained in so far as a reaction could be effected at all.",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1569775a/species/manganese-oxide",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "manganese oxide (oxidation state not stated)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/5",
+            "quote": "A tube capable of resisting high pressure is lined inside with copper and provided with a granular contact mass composed of equal molecular proportions of chromium oxid and manganese oxid",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1569775a/species/zinc-oxide",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "oxide of zinc (as named in the patent)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/6",
+            "quote": "With other contact masses, for example such as are composed of copper and chro mium oxid, or the oxids of zinc and chro mium, the result is very similar.",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1569775a/test/example",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Example: methanol from H2/CO over Cr-Mn oxide at 450 °C and about 220 atm",
+        "conditions": {
+          "product_separation": {
+            "status": "present",
+            "as_reported": "reaction gas led through a cooler without releasing the pressure",
+            "text_value": "reaction gas led through a cooler without releasing the pressure"
+          }
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/5",
+            "quote": "A tube capable of resisting high pressure is lined inside with copper and provided with a granular contact mass composed of equal molecular proportions of chromium oxid and manganese oxid",
+            "source": "ex:msyn/source/us1569775a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/5",
+            "quote": "and heated to . 450 degrees centigrade.",
+            "source": "ex:msyn/source/us1569775a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/5",
+            "quote": "A gas mixture con taining about 80 per cent, by volume, of hydrogen and 20 per cent, by volume, of car bon monoxid which has been carefully freed from any volatile iron compounds and sus pended iron particles",
+            "source": "ex:msyn/source/us1569775a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/5",
+            "quote": "is then passed through the said tube at a pressure of about 220 atmospheres while maintaining the tempera ture at 450 degrees centigrade.",
+            "source": "ex:msyn/source/us1569775a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/5",
+            "quote": "The reac tion gas is led through a cooler without re leasing the pressure, when ample quantities of methanol will separate out.",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ],
+        "experiment_kind": "physical",
+        "flow_rate": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source"
+        },
+        "pressure": {
+          "status": "present",
+          "as_reported": "about 220 atmospheres",
+          "qualifier": "approximate",
+          "unit": "atm",
+          "value": 220
+        },
+        "results": {
+          "methanol_obtained": {
+            "status": "present",
+            "as_reported": "ample quantities of methanol will separate out",
+            "note": "no quantity given",
+            "text_value": "ample quantities of methanol will separate out"
+          }
+        },
+        "space_velocity": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source"
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "450 degrees centigrade",
+          "unit": "°C",
+          "value": 450
+        },
+        "test_kind": "activity",
+        "test_label": "Example"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/source/us1569775a/assignee",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "role": "assignee"
+      },
+      "source": "ex:msyn/source/us1569775a",
+      "target": "ex:msyn/institution/basf"
+    },
+    {
+      "id": "ex:msyn/species/k2co3/reported-in/us1569775a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/k2co3",
+      "target": "ex:msyn/source/us1569775a"
+    },
+    {
+      "id": "ex:msyn/us1569775a/catalyst/cu-cr-oxide/reported-in/us1569775a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1569775a/catalyst/cu-cr-oxide",
+      "target": "ex:msyn/source/us1569775a"
+    },
+    {
+      "id": "ex:msyn/us1569775a/catalyst/example-cr-mn-oxide/reported-in/us1569775a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1569775a/catalyst/example-cr-mn-oxide",
+      "target": "ex:msyn/source/us1569775a"
+    },
+    {
+      "id": "ex:msyn/us1569775a/catalyst/reducible-oxide-k2co3/reported-in/us1569775a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1569775a/catalyst/reducible-oxide-k2co3",
+      "target": "ex:msyn/source/us1569775a"
+    },
+    {
+      "id": "ex:msyn/us1569775a/catalyst/zn-cr-oxides/reported-in/us1569775a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1569775a/catalyst/zn-cr-oxides",
+      "target": "ex:msyn/source/us1569775a"
+    },
+    {
+      "id": "ex:msyn/us1569775a/claim/alloys/reported-in/us1569775a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1569775a/claim/alloys",
+      "target": "ex:msyn/source/us1569775a"
+    },
+    {
+      "id": "ex:msyn/us1569775a/claim/claim-1/reported-in/us1569775a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, claim 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1569775a/claim/claim-1",
+      "target": "ex:msyn/source/us1569775a"
+    },
+    {
+      "id": "ex:msyn/us1569775a/claim/claim-2/reported-in/us1569775a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, claim 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1569775a/claim/claim-2",
+      "target": "ex:msyn/source/us1569775a"
+    },
+    {
+      "id": "ex:msyn/us1569775a/claim/claim-3/reported-in/us1569775a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, claim 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1569775a/claim/claim-3",
+      "target": "ex:msyn/source/us1569775a"
+    },
+    {
+      "id": "ex:msyn/us1569775a/claim/contact-masses-vary-widely/reported-in/us1569775a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1569775a/claim/contact-masses-vary-widely",
+      "target": "ex:msyn/source/us1569775a"
+    },
+    {
+      "id": "ex:msyn/us1569775a/claim/inert-gases/reported-in/us1569775a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1569775a/claim/inert-gases",
+      "target": "ex:msyn/source/us1569775a"
+    },
+    {
+      "id": "ex:msyn/us1569775a/claim/iron-must-be-excluded/reported-in/us1569775a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1569775a/claim/iron-must-be-excluded",
+      "target": "ex:msyn/source/us1569775a"
+    },
+    {
+      "id": "ex:msyn/us1569775a/claim/metals-with-promoter/reported-in/us1569775a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1569775a/claim/metals-with-promoter",
+      "target": "ex:msyn/source/us1569775a"
+    },
+    {
+      "id": "ex:msyn/us1569775a/claim/non-reducible-oxides/reported-in/us1569775a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1569775a/claim/non-reducible-oxides",
+      "target": "ex:msyn/source/us1569775a"
+    },
+    {
+      "id": "ex:msyn/us1569775a/claim/other-contact-masses-similar/reported-in/us1569775a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1569775a/claim/other-contact-masses-similar",
+      "target": "ex:msyn/source/us1569775a"
+    },
+    {
+      "id": "ex:msyn/us1569775a/claim/pressure-temperature-range/reported-in/us1569775a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1569775a/claim/pressure-temperature-range",
+      "target": "ex:msyn/source/us1569775a"
+    },
+    {
+      "id": "ex:msyn/us1569775a/claim/prior-art-methane-hydrocarbons/reported-in/us1569775a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1569775a/claim/prior-art-methane-hydrocarbons",
+      "target": "ex:msyn/source/us1569775a"
+    },
+    {
+      "id": "ex:msyn/us1569775a/claim/product-composition/reported-in/us1569775a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1569775a/claim/product-composition",
+      "target": "ex:msyn/source/us1569775a"
+    },
+    {
+      "id": "ex:msyn/us1569775a/feed/example-h2-co/reported-in/us1569775a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1569775a/feed/example-h2-co",
+      "target": "ex:msyn/source/us1569775a"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/1",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/6",
+            "quote": "with a contact mass containing besides difficultly reducible metal oxids a small addition of potassium carbonate and preferably with a higher per centage of carbon monoxid and a reduced velocity of the gas current",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1569775a/reaction/co-hydrogenation-to-methanol-and-higher-alcohols",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/10",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/5",
+            "quote": "A gas mixture con taining about 80 per cent, by volume, of hydrogen and 20 per cent, by volume, of car bon monoxid which has been carefully freed from any volatile iron compounds and sus pended iron particles",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1569775a/test/example",
+      "target": "ex:msyn/us1569775a/feed/example-h2-co"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/11",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/5",
+            "quote": "is then passed through the said tube at a pressure of about 220 atmospheres while maintaining the tempera ture at 450 degrees centigrade.",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1569775a/test/example",
+      "target": "ex:msyn/us1569775a/reactor/copper-lined-tube"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/12",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/5",
+            "quote": "The reac tion gas is led through a cooler without re leasing the pressure, when ample quantities of methanol will separate out.",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1569775a/test/example",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/13",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/6",
+            "quote": "With other contact masses, for example such as are composed of copper and chro mium oxid, or the oxids of zinc and chro mium, the result is very similar.",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1569775a/catalyst/cu-cr-oxide",
+      "target": "ex:msyn/species/copper"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/14",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/6",
+            "quote": "With other contact masses, for example such as are composed of copper and chro mium oxid, or the oxids of zinc and chro mium, the result is very similar.",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1569775a/catalyst/cu-cr-oxide",
+      "target": "ex:msyn/us1569775a/species/chromium-oxide"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/15",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/6",
+            "quote": "With other contact masses, for example such as are composed of copper and chro mium oxid, or the oxids of zinc and chro mium, the result is very similar.",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1569775a/catalyst/zn-cr-oxides",
+      "target": "ex:msyn/us1569775a/species/zinc-oxide"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/16",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/6",
+            "quote": "With other contact masses, for example such as are composed of copper and chro mium oxid, or the oxids of zinc and chro mium, the result is very similar.",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1569775a/catalyst/zn-cr-oxides",
+      "target": "ex:msyn/us1569775a/species/chromium-oxide"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/17",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "context": [
+          "ex:msyn/us1569775a/test/example"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/5",
+            "quote": "The reac tion gas is led through a cooler without re leasing the pressure, when ample quantities of methanol will separate out.",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1569775a/catalyst/example-cr-mn-oxide",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/18",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/6",
+            "quote": "With other contact masses, for example such as are composed of copper and chro mium oxid, or the oxids of zinc and chro mium, the result is very similar.",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1569775a/catalyst/cu-cr-oxide",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/19",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/6",
+            "quote": "With other contact masses, for example such as are composed of copper and chro mium oxid, or the oxids of zinc and chro mium, the result is very similar.",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1569775a/catalyst/zn-cr-oxides",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/2",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/6",
+            "quote": "higher alcohols such as propyl, butyl and amyl alcohols are formed besides methanol, the proportions varying according to the exact conditions, especially the temperature employed.",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ],
+        "role": "product"
+      },
+      "source": "ex:msyn/us1569775a/reaction/co-hydrogenation-to-methanol-and-higher-alcohols",
+      "target": "ex:msyn/species/ch3oh"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/20",
+      "type": "COMPARED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/6",
+            "quote": "With other contact masses, for example such as are composed of copper and chro mium oxid, or the oxids of zinc and chro mium, the result is very similar.",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ],
+        "note": "the result is very similar"
+      },
+      "source": "ex:msyn/us1569775a/catalyst/cu-cr-oxide",
+      "target": "ex:msyn/us1569775a/catalyst/example-cr-mn-oxide"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/21",
+      "type": "COMPARED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/6",
+            "quote": "With other contact masses, for example such as are composed of copper and chro mium oxid, or the oxids of zinc and chro mium, the result is very similar.",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ],
+        "note": "the result is very similar"
+      },
+      "source": "ex:msyn/us1569775a/catalyst/zn-cr-oxides",
+      "target": "ex:msyn/us1569775a/catalyst/example-cr-mn-oxide"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/22",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/6",
+            "quote": "with a contact mass containing besides difficultly reducible metal oxids a small addition of potassium carbonate and preferably with a higher per centage of carbon monoxid and a reduced velocity of the gas current",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1569775a/catalyst/reducible-oxide-k2co3",
+      "target": "ex:msyn/us1569775a/material/difficultly-reducible-metal-oxides"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/23",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/6",
+            "quote": "with a contact mass containing besides difficultly reducible metal oxids a small addition of potassium carbonate and preferably with a higher per centage of carbon monoxid and a reduced velocity of the gas current",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "a small addition",
+          "text_value": "a small addition"
+        },
+        "role": "not_stated",
+        "role_detail": "a small addition"
+      },
+      "source": "ex:msyn/us1569775a/catalyst/reducible-oxide-k2co3",
+      "target": "ex:msyn/species/k2co3"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/24",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/6",
+            "quote": "higher alcohols such as propyl, butyl and amyl alcohols are formed besides methanol, the proportions varying according to the exact conditions, especially the temperature employed.",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1569775a/catalyst/reducible-oxide-k2co3",
+      "target": "ex:msyn/us1569775a/reaction/co-hydrogenation-to-methanol-and-higher-alcohols"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/25",
+      "type": "PRODUCES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/6",
+            "quote": "higher alcohols such as propyl, butyl and amyl alcohols are formed besides methanol, the proportions varying according to the exact conditions, especially the temperature employed.",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1569775a/catalyst/reducible-oxide-k2co3",
+      "target": "ex:msyn/us1569775a/species/higher-alcohols"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/26",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/2",
+            "quote": "We have now found that methanol can be obtained by the interaction of carbon",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1569775a/claim/iron-must-be-excluded",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/27",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/2",
+            "quote": "We have now found that methanol can be obtained by the interaction of carbon",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1569775a/claim/iron-must-be-excluded",
+      "target": "ex:msyn/species/iron"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/28",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/2",
+            "quote": "We have now found that methanol can be obtained by the interaction of carbon",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1569775a/claim/iron-must-be-excluded",
+      "target": "ex:msyn/us1569775a/species/iron-carbonyl"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/3",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/6",
+            "quote": "higher alcohols such as propyl, butyl and amyl alcohols are formed besides methanol, the proportions varying according to the exact conditions, especially the temperature employed.",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ],
+        "role": "product"
+      },
+      "source": "ex:msyn/us1569775a/reaction/co-hydrogenation-to-methanol-and-higher-alcohols",
+      "target": "ex:msyn/us1569775a/species/higher-alcohols"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/30",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/3",
+            "quote": "In order to carry out this in vention, the contact masses must be free from iron, the inner surface of the walls of the reaction chamber must not consist of iron and the gases must not carry any iron",
+            "source": "ex:msyn/source/us1569775a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/3",
+            "quote": "either in the form of fine particles or of volatile compounds of iron such as iron carbonyl.",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ],
+        "inhibition_kind": "not_stated",
+        "note": "volatile compounds of iron such as iron carbonyl must not be carried by the gas"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/us1569775a/species/iron-carbonyl"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/31",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/2",
+            "quote": "Mixtures of carbon monoxid and hydro gen have repeatedly been exposed to the ac",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1569775a/claim/prior-art-methane-hydrocarbons",
+      "target": "ex:msyn/species/ch4"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/32",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/2",
+            "quote": "Mixtures of carbon monoxid and hydro gen have repeatedly been exposed to the ac",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1569775a/claim/prior-art-methane-hydrocarbons",
+      "target": "ex:msyn/us1569775a/species/liquid-hydrocarbons"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/33",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/3",
+            "quote": "Provided the above conditions be observed, the other conditions may be varied within very wide limits.",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1569775a/claim/contact-masses-vary-widely",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/34",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/4",
+            "quote": "In addition to carbon monoxid and hydrogen, other inert gases may be present",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1569775a/claim/inert-gases",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/35",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/4",
+            "quote": "the pressure being preferably from 50 at mospheres upwards and the temperature be tween say about 250 degrees and 600 degrees centigrade, depending on the efficiency of the contact mass in each individual case.",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1569775a/claim/pressure-temperature-range",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/36",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/4",
+            "quote": "The methanol produced in accordance with this invention is either pure or mixed with higher alcohols and other organic com",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1569775a/claim/product-composition",
+      "target": "ex:msyn/species/ch3oh"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/37",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/4",
+            "quote": "The methanol produced in accordance with this invention is either pure or mixed with higher alcohols and other organic com",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1569775a/claim/product-composition",
+      "target": "ex:msyn/us1569775a/species/higher-alcohols"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/38",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/6",
+            "quote": "With other contact masses, for example such as are composed of copper and chro mium oxid, or the oxids of zinc and chro mium, the result is very similar.",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1569775a/claim/other-contact-masses-similar",
+      "target": "ex:msyn/us1569775a/catalyst/cu-cr-oxide"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/39",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/6",
+            "quote": "With other contact masses, for example such as are composed of copper and chro mium oxid, or the oxids of zinc and chro mium, the result is very similar.",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1569775a/claim/other-contact-masses-similar",
+      "target": "ex:msyn/us1569775a/catalyst/zn-cr-oxides"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/4",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/5",
+            "quote": "A tube capable of resisting high pressure is lined inside with copper and provided with a granular contact mass composed of equal molecular proportions of chromium oxid and manganese oxid",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "equal molecular proportions",
+          "text_value": "equal molecular proportions"
+        },
+        "fraction_basis": "mole",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1569775a/catalyst/example-cr-mn-oxide",
+      "target": "ex:msyn/us1569775a/species/chromium-oxide"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/42",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/7",
+            "quote": "Contact masses containing oxids of vanadium, uranium, aluminium or other oxids non-reducible under the conditions of working may also be employed",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1569775a/claim/non-reducible-oxides",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/43",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/7",
+            "quote": "or metals such as copper, silver, lead, zinc in con junction with a metal oxid or a metal salt acting as a promoter especially derived from a metal belonging to the fourth to the seventh groups of the periodic system",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1569775a/claim/metals-with-promoter",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/44",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/7",
+            "quote": "or metals such as copper, silver, lead, zinc in con junction with a metal oxid or a metal salt acting as a promoter especially derived from a metal belonging to the fourth to the seventh groups of the periodic system",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1569775a/claim/metals-with-promoter",
+      "target": "ex:msyn/species/copper"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/45",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/7",
+            "quote": "or metal alloys for example chromium and manganese, copper and zinc and others.",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1569775a/claim/alloys",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/46",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, claim 1",
+            "passage": "us1569775a/p1/7",
+            "quote": "1. In the process of manufacturing me. thanol by the interaction of carbon monoxid",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1569775a/claim/claim-1",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/47",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, claim 1",
+            "passage": "us1569775a/p1/7",
+            "quote": "1. In the process of manufacturing me. thanol by the interaction of carbon monoxid",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1569775a/claim/claim-1",
+      "target": "ex:msyn/species/iron"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/48",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 2",
+            "passage": "us1569775a/p2/1",
+            "quote": "2. The process of manufacturing methanol by the interaction of carbon monoxid and hydrogen in the presence of a catalyst ca-. pable of causing the formation of methanol",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1569775a/claim/claim-2",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/49",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 2",
+            "passage": "us1569775a/p2/1",
+            "quote": "2. The process of manufacturing methanol by the interaction of carbon monoxid and hydrogen in the presence of a catalyst ca-. pable of causing the formation of methanol",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1569775a/claim/claim-2",
+      "target": "ex:msyn/species/iron"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/5",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/5",
+            "quote": "A tube capable of resisting high pressure is lined inside with copper and provided with a granular contact mass composed of equal molecular proportions of chromium oxid and manganese oxid",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "equal molecular proportions",
+          "text_value": "equal molecular proportions"
+        },
+        "fraction_basis": "mole",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1569775a/catalyst/example-cr-mn-oxide",
+      "target": "ex:msyn/us1569775a/species/manganese-oxide"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/50",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 3",
+            "passage": "us1569775a/p2/2",
+            "quote": "said interaction and at a pressure of more than 50 atmospheres and a temperature of between about 250 degrees and 600 degrees centigrade which consists in employing a catalyst which is free from iron",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1569775a/claim/claim-3",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/51",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, claim 3",
+            "passage": "us1569775a/p2/2",
+            "quote": "said interaction and at a pressure of more than 50 atmospheres and a temperature of between about 250 degrees and 600 degrees centigrade which consists in employing a catalyst which is free from iron",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1569775a/claim/claim-3",
+      "target": "ex:msyn/species/iron"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/6",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/5",
+            "quote": "A tube capable of resisting high pressure is lined inside with copper and provided with a granular contact mass composed of equal molecular proportions of chromium oxid and manganese oxid",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1569775a/sample/example-contact-mass",
+      "target": "ex:msyn/us1569775a/catalyst/example-cr-mn-oxide"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/7",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/5",
+            "quote": "A gas mixture con taining about 80 per cent, by volume, of hydrogen and 20 per cent, by volume, of car bon monoxid which has been carefully freed from any volatile iron compounds and sus pended iron particles",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "about 80 per cent, by volume",
+          "qualifier": "approximate",
+          "unit": "%",
+          "value": 80
+        },
+        "fraction_basis": "volume",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1569775a/feed/example-h2-co",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/8",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/5",
+            "quote": "A gas mixture con taining about 80 per cent, by volume, of hydrogen and 20 per cent, by volume, of car bon monoxid which has been carefully freed from any volatile iron compounds and sus pended iron particles",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "20 per cent, by volume",
+          "note": "'about' is printed once, before 80 per cent",
+          "qualifier": "approximate",
+          "unit": "%",
+          "value": 20
+        },
+        "fraction_basis": "volume",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1569775a/feed/example-h2-co",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/9",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1569775a/p1/5",
+            "quote": "A tube capable of resisting high pressure is lined inside with copper and provided with a granular contact mass composed of equal molecular proportions of chromium oxid and manganese oxid",
+            "source": "ex:msyn/source/us1569775a"
+          }
+        ],
+        "state": "not_reported"
+      },
+      "source": "ex:msyn/us1569775a/test/example",
+      "target": "ex:msyn/us1569775a/sample/example-contact-mass"
+    },
+    {
+      "id": "ex:msyn/us1569775a/material/difficultly-reducible-metal-oxides/reported-in/us1569775a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1569775a/material/difficultly-reducible-metal-oxides",
+      "target": "ex:msyn/source/us1569775a"
+    },
+    {
+      "id": "ex:msyn/us1569775a/reaction/co-hydrogenation-to-methanol-and-higher-alcohols/reported-in/us1569775a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1569775a/reaction/co-hydrogenation-to-methanol-and-higher-alcohols",
+      "target": "ex:msyn/source/us1569775a"
+    },
+    {
+      "id": "ex:msyn/us1569775a/reactor/copper-lined-tube/reported-in/us1569775a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1569775a/reactor/copper-lined-tube",
+      "target": "ex:msyn/source/us1569775a"
+    },
+    {
+      "id": "ex:msyn/us1569775a/sample/example-contact-mass/reported-in/us1569775a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1569775a/sample/example-contact-mass",
+      "target": "ex:msyn/source/us1569775a"
+    },
+    {
+      "id": "ex:msyn/us1569775a/species/chromium-oxide/reported-in/us1569775a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1569775a/species/chromium-oxide",
+      "target": "ex:msyn/source/us1569775a"
+    },
+    {
+      "id": "ex:msyn/us1569775a/species/higher-alcohols/reported-in/us1569775a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1569775a/species/higher-alcohols",
+      "target": "ex:msyn/source/us1569775a"
+    },
+    {
+      "id": "ex:msyn/us1569775a/species/iron-carbonyl/reported-in/us1569775a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1569775a/species/iron-carbonyl",
+      "target": "ex:msyn/source/us1569775a"
+    },
+    {
+      "id": "ex:msyn/us1569775a/species/liquid-hydrocarbons/reported-in/us1569775a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1569775a/species/liquid-hydrocarbons",
+      "target": "ex:msyn/source/us1569775a"
+    },
+    {
+      "id": "ex:msyn/us1569775a/species/manganese-oxide/reported-in/us1569775a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1569775a/species/manganese-oxide",
+      "target": "ex:msyn/source/us1569775a"
+    },
+    {
+      "id": "ex:msyn/us1569775a/species/zinc-oxide/reported-in/us1569775a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1569775a/species/zinc-oxide",
+      "target": "ex:msyn/source/us1569775a"
+    },
+    {
+      "id": "ex:msyn/us1569775a/test/example/reported-in/us1569775a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1569775a/test/example",
+      "target": "ex:msyn/source/us1569775a"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/us1569775a"
+}

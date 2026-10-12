@@ -72,6 +72,31 @@ def test_the_report_counts_distinct_characters_against_each_class_cap():
     assert rep["unlisted"] == [BOOK, PAPER] and rep["sources"][BOOK]["class"] == "in_copyright"
 
 
+def test_limits_only_lower_the_cap_and_zero_keeps_no_text_of_a_source(tmp_path):
+    """A rights file's limits (and a source's own quote_chars, source_chars) lower the caps of the sources in copyright;
+    0 withholds every quote of such a source, and open sources keep theirs."""
+    f = tmp_path / "rights.yaml"
+    f.write_text(dump_yaml({"limits": {"quote_chars": 0, "source_chars": 0},
+                            "sources": {**RIGHTS, BOOK: {**RIGHTS[BOOK], "quote_chars": 20, "source_chars": 50}}}))
+    r = rights.load_rights(f)
+    assert (r[PAPER]["quote_chars"], rights.limit(r[PAPER]), rights.item_limit(r[PAPER])) == (0, 0, 0)
+    assert (rights.limit(r[BOOK]), rights.item_limit(r[BOOK])) == (50, 20)       # its own limits win over the file's
+    assert rights.limit(r[OPEN]) is None and rights.item_limit(r[OPEN]) is None
+    assert rights.limit({**RIGHTS[PAPER], "source_chars": 9000}) == 4000          # never above the cap
+    doc = _doc([(PAPER, "the conversion of carbon monoxide", True), (OPEN, "reached 6.2 per cent per pass", True)])
+    rep = rights.report(doc, r)
+    assert rep["violations"] == [f"{PAPER}: 1 quoted texts longer than 0 characters (longest 33)",
+                                 f"{PAPER}: 33 distinct quoted characters; the cap is 0"]
+    capped, summary = rights.cap(doc, r)
+    assert summary["sources"][PAPER]["withheld"] == 1 and summary["sources"][OPEN]["kept"] == 1
+    assert rights.report(capped, r)["ok"]
+    for bad in ({"limits": {"quote_chars": -1}, "sources": {}}, {"limits": {"chars": 0}, "sources": {}},
+                {"sources": {PAPER: {**RIGHTS[PAPER], "source_chars": True}}}):
+        f.write_text(dump_yaml(bad))
+        with pytest.raises(ScaleError, match="limits|source_chars|quote_chars"):
+            rights.load_rights(f)
+
+
 def test_cap_keeps_quantitative_evidence_first_then_shorter_and_withholds_the_rest():
     q = [TEXT[0:60], TEXT[100:150], TEXT[200:230], TEXT[250:400]]          # 60, 50, 30, 150 characters
     doc = _doc([(BOOK, q[0], True), (BOOK, q[1], False), (BOOK, q[2], False), (BOOK, q[3], False), (OPEN, TEXT[:500], False)])
@@ -167,7 +192,8 @@ def test_committed_documents_are_public_and_respect_the_cap(tmp_path):
     res = rights.copyright_check(REPO)
     assert res["ok"], res["problems"]
     assert [d["document"] for d in res["documents"]] == ["domain/tests/fixtures/invalid/research-data-without-stewardship.json",
-                                                     "examples/methanol-synthesis-public"]    # a graph kept as parts
+                                                     "examples/methanol-synthesis-public",    # graphs kept as parts
+                                                     "graphs/catalysis-commons", "graphs/methanol-synthesis-pre1966"]
     # a project's document, or a research document without rights, is found
     repo = tmp_path / "repo"
     (repo / "x").mkdir(parents=True)

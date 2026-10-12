@@ -1,0 +1,2891 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/source/us1797569a",
+      "label": "Source",
+      "props": {
+        "name": "Synthetic methanol process",
+        "kind": "patent",
+        "description": "Published 1931-03-24 (grant date printed on the patent (agrees with the USPTO issue-year table)); in scope: before the 1966-01-01 cutoff. Text: 5 pages ocr (tesseract 5.5.3 (eng, 300 dpi, 2 columns)). Text not redistributed.",
+        "identifiers": {
+          "patent": "US1797569A"
+        },
+        "licence": "US patent; not subject to copyright",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "Synthetic methanol process",
+        "url": "https://patents.google.com/patent/US1797569A",
+        "year": 1931
+      }
+    },
+    {
+      "id": "ex:msyn/us1797569a/catalyst/zinc-chromic-oxide",
+      "label": "Catalyst",
+      "props": {
+        "name": "zinc oxide–chromic oxide catalyst",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, Example I",
+            "passage": "us1797569a/p3/4",
+            "quote": "The catalyst employed was one containing a mixture of zinc oxide anc chromic oxide, and the temperature of the reaction was maintained at 420° C.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ],
+        "generality": "particular"
+      }
+    },
+    {
+      "id": "ex:msyn/us1797569a/claim/conditions",
+      "label": "Claim",
+      "props": {
+        "name": "Methanol is produced when carbon oxide–hydrogen mixtures in theoretical proportions or wit",
+        "claim_kind": "generalization",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1797569a/p2/4",
+            "quote": "are passed over suitable catalysts at temperatures of from 300 to 500° C. and 55 at pressures in excess of 50 atmospheres.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1797569a/p2/4",
+            "quote": "If operating 6 conditions are not correctly adjusted, or if — improper catalysts are employed, side-reac- tions occur producing products other than methanol and water.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Methanol is produced when carbon oxide–hydrogen mixtures in theoretical proportions or with excess hydrogen pass over suitable catalysts at 300 to 500° C. and above 50 atmospheres; wrong conditions or improper catalysts cause side reactions."
+      }
+    },
+    {
+      "id": "ex:msyn/us1797569a/claim/excess-hydrogen",
+      "label": "Claim",
+      "props": {
+        "name": "Optimum results are obtained when hydrogen exceeds the theoretical proportion to carbon ox",
+        "claim_kind": "generalization",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1797569a/p2/3",
+            "quote": "it is well known that optimum results are obtained in methanol synthesis when the proportion of hydrogen to carbon oxides is greater than that theoretically required.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1797569a/p2/3",
+            "quote": "the presence of.an‘éxcess of hydrogen over that theoretically required to react with the carbon oxides present tends to prevent the occurrence of undesirable side- reactions which produce free'carbon, meth- ane, water, etc., rather than methanol.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "stated as well known (Cf. English Patent 229,714)",
+        "statement": "Optimum results are obtained when hydrogen exceeds the theoretical proportion to carbon oxides, since excess hydrogen tends to prevent side reactions producing free carbon, methane, water and so on."
+      }
+    },
+    {
+      "id": "ex:msyn/us1797569a/claim/hydrogen-fill-steady-state",
+      "label": "Claim",
+      "props": {
+        "name": "Filling the circulating system with substantially pure hydrogen and then supplying make-up",
+        "claim_kind": "generalization",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1797569a/p4/1",
+            "quote": "We may accomplish this — result by filling the apparatus with a gas consisting of substantially pure hydrogen at. a pressure somewhat below the pressure de- sired for the reaction.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1797569a/p4/1",
+            "quote": "a mixture of hydrogen and carbon oxides in the proportions theo- retically required for methanol synthesis is 5 passed into the apparatus.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1797569a/p3/7",
+            "quote": "it 1s pos- _ sible to obtain the economic advantages of --employing an excess of hydrogen 1n the gases passing over the catalyst, and at the same ; time to maintain a static condition whereby . the composition of the gas in the circulating - system remains substantially unchanged dur- ; Ing operation",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1797569a/p4/2",
+            "quote": "since the methanol reaction constant- ly removes carbon oxides and hydrogen in the same proportion in which they are in- 49 troduced in the “make-up” gas.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1797569a/p4/2",
+            "quote": "the gas passing >) through the catalyst J—J’ contains a great. preponderance of hydrogen over carbon ox- ides, and desirable conditions for the con- _ version of all of the carbon oxides to meth- anol are thus attained.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Filling the circulating system with substantially pure hydrogen and then supplying make-up gas of theoretical proportions gives a large hydrogen excess over the catalyst while the circulating composition stays unchanged, since the reaction removes carbon oxides and hydrogen in the make-up proportion."
+      }
+    },
+    {
+      "id": "ex:msyn/us1797569a/claim/improved-over-theoretical",
+      "label": "Claim",
+      "props": {
+        "name": "Operation with excess hydrogen in the circulating system gives a much improved result over",
+        "claim_kind": "comparison",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, Example II",
+            "passage": "us1797569a/p4/4",
+            "quote": "It is observed that the prac tice of our invention which made possibl 33 the employment of an excess of hydrogen 1",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4, Example II",
+            "passage": "us1797569a/p4/5",
+            "quote": "the circulating system. produced a much im- | proved result over Example I in which a theoretical gas mixture was employed.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4, Example III",
+            "passage": "us1797569a/p4/6",
+            "quote": "when similar reaction conditions were enployed and a gas mixture of theoretical | proportions was passed over the catalyst a ° yield of only 0.7 liters of condensate per hour per liter of catalyst was obtained.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Operation with excess hydrogen in the circulating system gives a much improved result over passing a theoretical gas mixture over the catalyst."
+      }
+    },
+    {
+      "id": "ex:msyn/us1797569a/claim/output-depends",
+      "label": "Claim",
+      "props": {
+        "name": "The methanol produced per hour varies with the quantity of catalyst, the space velocity, a",
+        "claim_kind": "generalization",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1797569a/p2/5",
+            "quote": "The amount of methanol produced per hour va- ?@ ries with the quantity of catalyst employed, _ and with the space velocity of gas passage, as well as with the precise temperature and pressure.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The methanol produced per hour varies with the quantity of catalyst, the space velocity, and the temperature and pressure."
+      }
+    },
+    {
+      "id": "ex:msyn/us1797569a/claim/patent-claim-1",
+      "label": "Claim",
+      "props": {
+        "name": "In a process for methanol by catalytic interaction at elevated pressure of carbon oxides w",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, claim 1",
+            "passage": "us1797569a/p4/6",
+            "quote": "steps which comprise first circulating sub- stantially pure hydrogen over a catalyst for the reaction, adding to said circulating gas a 100 mixture of hydrogen and carbon oxides in- proportions required to produce methanol,",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "claim 1 of the patent; condensed",
+        "statement": "In a process for methanol by catalytic interaction at elevated pressure of carbon oxides with hydrogen, first circulating substantially pure hydrogen over the catalyst, adding a mixture of hydrogen and carbon oxides in the proportions required to produce methanol, and continuing to add it at a rate sufficient to maintain the pressure."
+      }
+    },
+    {
+      "id": "ex:msyn/us1797569a/claim/patent-claim-2",
+      "label": "Claim",
+      "props": {
+        "name": "As claim 1, with carbon dioxide and hydrogen.",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, claim 2",
+            "note": "numeral OCR'd as '9.'",
+            "passage": "us1797569a/p4/7",
+            "quote": "vated pressure of carbon dioxide with hydro- ven, the steps which comprise first circulating substantially pure hydrogen over a catalyst 1:0",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "claim 2 of the patent; condensed",
+        "statement": "As claim 1, with carbon dioxide and hydrogen."
+      }
+    },
+    {
+      "id": "ex:msyn/us1797569a/claim/patent-claim-3",
+      "label": "Claim",
+      "props": {
+        "name": "As claim 1, circulating hydrogen at an elevated pressure and then increasing the pressure ",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, claim 3",
+            "passage": "us1797569a/p4/8",
+            "quote": "stantially pure hydrogen over a catalyst for the reaction at an elevated pressure, then in- 1 creasing said pressure by adding a mixture of 1 hydrogen and carbon oxides in the propor- -+-9",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "claim 3 of the patent; condensed",
+        "statement": "As claim 1, circulating hydrogen at an elevated pressure and then increasing the pressure by adding the hydrogen–carbon oxide mixture in the required proportions, continued at a rate sufficient to maintain the pressure."
+      }
+    },
+    {
+      "id": "ex:msyn/us1797569a/claim/patent-claim-4",
+      "label": "Claim",
+      "props": {
+        "name": "As claim 3, with carbon dioxide and hydrogen.",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5, claim 4",
+            "passage": "us1797569a/p5/1",
+            "quote": "the steps which comprise first circulating sub- — stantially pure hydrogen over a catalyst for the reaction at an elevated pressure, then , increasing said pressure by adding a mixture of hydrogen and carbon dioxide in the pro- portions required tc produce methanol,",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "claim 4 of the patent; condensed",
+        "statement": "As claim 3, with carbon dioxide and hydrogen."
+      }
+    },
+    {
+      "id": "ex:msyn/us1797569a/claim/patent-claim-5",
+      "label": "Claim",
+      "props": {
+        "name": "As claim 4, circulating hydrogen at about 1,800 pounds and increasing the pressure to abou",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5, claim 5",
+            "passage": "us1797569a/p5/1",
+            "quote": "substantially pure hydrogen over a catalyst | 15 for the reaction at a pressure of about 1,800 pounds, then increasing said pressure to about 3,500 pounds by adding a mixture of hydrogen and carbon dioxide in the propor- tions required for the production of meth-",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "claim 5 of the patent; condensed",
+        "statement": "As claim 4, circulating hydrogen at about 1,800 pounds and increasing the pressure to about 3,500 pounds by adding hydrogen and carbon dioxide in the proportions required for methanol."
+      }
+    },
+    {
+      "id": "ex:msyn/us1797569a/claim/pre-catalyst",
+      "label": "Claim",
+      "props": {
+        "name": "A first catalyst section acting as a pre-catalyst or purifier destroys or absorbs catalyst",
+        "claim_kind": "generalization",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, Fig. 1",
+            "passage": "us1797569a/p3/1",
+            "quote": "Section J is designed to act as a “pre-catalyst” or purifier, to destroy or absorb any catalyst ; poisons which may be present in the gas, and thus to preserve the catalytic activity of sec- tion J’ for the methanol reaction.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "A first catalyst section acting as a pre-catalyst or purifier destroys or absorbs catalyst poisons in the gas and preserves the activity of the main catalyst section."
+      }
+    },
+    {
+      "id": "ex:msyn/us1797569a/claim/recirculation-drift",
+      "label": "Claim",
+      "props": {
+        "name": "In a recirculating system fed with make-up gas of non-theoretical proportions the circulat",
+        "claim_kind": "generalization",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1797569a/p3/5",
+            "quote": "when such recirculation is at- tempted difficulties arise if one attempts to use a gas mixture containing a proportion of carbon oxides to hydrogen that. is ciffer- 80 ent from that theoretically required.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1797569a/p3/6",
+            "quote": "the proportion of hydrogen in the circulating system increases as the process is continued, until eventually the proportion of carbon monoxide in the sys- tem grows so small that practically no methanol is produced.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1797569a/p3/7",
+            "quote": "A precisely similar phenomenon occurs when one attempts to operate on a mixture of carbon dioxide and: hydrogen not in theoretical proportions.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "In a recirculating system fed with make-up gas of non-theoretical proportions the circulating gas composition drifts; with excess hydrogen the carbon monoxide falls until practically no methanol is produced; the same holds for CO2–H2 mixtures."
+      }
+    },
+    {
+      "id": "ex:msyn/us1797569a/feed/example-1",
+      "label": "Feed",
+      "props": {
+        "name": "Example I gas: 25% CO2 and 75% hydrogen (approximately theoretical)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, Example I",
+            "note": "heading OCR 'Heample f'",
+            "passage": "us1797569a/p3/4",
+            "quote": "A gas mixture consisting of approximately theoretical proportions of carbon dioxide and hydrogen (25% carbon dioxide and 15% hydrogen) was continually supplied to the",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 3, Example I",
+            "note": "the OCR text layer of the page reads '15% hydrogen'; the page image prints '75% hydrogen'",
+            "reading": "vision_ocr",
+            "region": [
+              0.19,
+              0.744,
+              0.57,
+              0.772
+            ],
+            "source": "ex:msyn/source/us1797569a",
+            "transcription": "theoretical proportions of carbon dioxide and hydrogen (25% carbon dioxide and 75%"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1797569a/feed/example-2-makeup",
+      "label": "Feed",
+      "props": {
+        "name": "Example II make-up gas: carbon dioxide and hydrogen in theoretical proportions, after filling with hydrogen",
+        "description": "Hydrogen supplied until 2,000 pounds, then CO2 + H2 in theoretical proportions until 3,500 pounds, then only enough make-up gas to hold the pressure; the circulating gas analysed 11% CO2 by volume.",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, Example II",
+            "note": "heading OCR 'EFeample Ll'",
+            "passage": "us1797569a/p4/3",
+            "quote": "Hydrogen gas was supplied to the process through the “make-up” gas pipe A until the pressure had been built up to 2,000 pounds",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4, Example II",
+            "passage": "us1797569a/p4/3",
+            "quote": "a mixture of carbon dioxide and hydrogen in theoretical proportions wa: passed into the apparatus until the pressure had reached 3,500 pounds.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ],
+        "ratios": {
+          "proportions": {
+            "status": "present",
+            "as_reported": "in theoretical proportions",
+            "text_value": "theoretical proportions"
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us1797569a/feed/example-3-comparison",
+      "label": "Feed",
+      "props": {
+        "name": "theoretical CO:H2 mixture passed over the catalyst (comparison to Example III)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, Example III",
+            "passage": "us1797569a/p4/6",
+            "quote": "when similar reaction conditions were enployed and a gas mixture of theoretical | proportions was passed over the catalyst a ° yield of only 0.7 liters of condensate per hour per liter of catalyst was obtained.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ],
+        "ratios": {
+          "proportions": {
+            "status": "present",
+            "as_reported": "a gas mixture of theoretical | proportions",
+            "text_value": "theoretical proportions"
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us1797569a/feed/example-3-makeup",
+      "label": "Feed",
+      "props": {
+        "name": "Example III make-up gas: CO:H2 33:66, after filling with hydrogen",
+        "description": "Hydrogen supplied until 1,800 pounds, then CO + H2 (33:66) until 3,300 pounds, then only enough make-up gas to hold the pressure; the circulating gas analysed 14% CO.",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, Example III",
+            "note": "heading OCR 'Keample MIL'",
+            "passage": "us1797569a/p4/5",
+            "quote": "presstire had been built up to 1,800 pounds. A gas mixture containing theoretical -propor- tions (33:66) of carbon monoxide and hy- ;; drogen was then passed into the apparatus until the pressure had reached 3,300 pouncs.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ],
+        "ratios": {
+          "co_h2_ratio": {
+            "status": "present",
+            "as_reported": "theoretical -propor- tions (33:66)",
+            "text_value": "33:66"
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us1797569a/hypothesis/co2-two-step",
+      "label": "Hypothesis",
+      "props": {
+        "name": "CO2 reacts to methanol in two steps via CO",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "OCR of CO2 + H2 = CO + H2O and CO + 2H2 = CH3OH",
+            "passage": "us1797569a/p2/2",
+            "quote": "When carbon dioxide reacts with hydrogen to. form methanol it has been generally assumed that the reaction may be written in two steps, thus: : CO,+H:2C0+H,0 CO +2H,@CH,0H",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ],
+        "hypothesis_kind": "mechanistic",
+        "hypothesis_status": "proposed",
+        "note": "stated as 'generally assumed'",
+        "statement": "The reaction of carbon dioxide with hydrogen to methanol may be written in two steps: CO2 + H2 = CO + H2O, then CO + 2H2 = CH3OH."
+      }
+    },
+    {
+      "id": "ex:msyn/us1797569a/reactor/circulating-converter",
+      "label": "Reactor",
+      "props": {
+        "name": "circulating system with converter (catalyst bomb) G, heat exchanger D, condenser O, circulating pump R (Fig. 1)",
+        "description": "Make-up gas enters at A and mixes with circulating gas at B; heat exchanger D; converter G with catalyst basket H holding catalyst sections J (pre-catalyst/purifier) and J'; electric heating elements K, K'; condenser O; receiver P; circulating pump R.",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Fig. 1",
+            "passage": "us1797569a/p2/6",
+            "quote": "From the exchanger the warmed gas passes downward through pipe F into the converter (catalyst bomb) &.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Fig. 1",
+            "passage": "us1797569a/p2/6",
+            "quote": "This gas mixes with the gas of the circulating system at connection B, and the __. mixed gases pass upward into the internal ® | passage C of heat exchanger D.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, Fig. 1",
+            "passage": "us1797569a/p3/1",
+            "quote": "The ele- vated temperature in the converter (7 is large- ly maintained by the heat of reaction, but -y9 supplementary heat is provided for by means | of electric heating elements K, K’,",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, Fig. 1",
+            "passage": "us1797569a/p3/3",
+            "quote": "In operating the process, the circulating pump K serves to circulate the gas through the system to over- come pressure drops due to friction in the pipes and catalyst chamber.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, Fig. 1",
+            "passage": "us1797569a/p3/1",
+            "quote": "Section J is designed to act as a “pre-catalyst” or purifier, to destroy or absorb any catalyst ; poisons which may be present in the gas, and thus to preserve the catalytic activity of sec- tion J’ for the methanol reaction.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ],
+        "reactor_kind": "circulating"
+      }
+    },
+    {
+      "id": "ex:msyn/us1797569a/sample/example-1",
+      "label": "CatalystSample",
+      "props": {
+        "name": "catalyst of Example I (zinc oxide–chromic oxide)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, Example I",
+            "passage": "us1797569a/p3/4",
+            "quote": "The catalyst employed was one containing a mixture of zinc oxide anc chromic oxide, and the temperature of the reaction was maintained at 420° C.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ],
+        "preparation_status": "not_reported",
+        "sample_kind": "reactor_charge"
+      }
+    },
+    {
+      "id": "ex:msyn/us1797569a/sample/examples-2-3",
+      "label": "CatalystSample",
+      "props": {
+        "name": "catalyst J–J' of the apparatus in Examples II and III (composition not stated for these examples)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, Example II",
+            "passage": "us1797569a/p4/3",
+            "quote": "At : space velocity of 100,000, and a cataylst tem perature of 420° C., 2.9 liters of condensat was produced per hour per liter of catalyst",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4, Example III",
+            "passage": "us1797569a/p4/5",
+            "quote": "At a space velocity of 50,000 and go . a catalyst temperature of 420° C., 1.2 liters . of condensate per hour per liter of catalyst . was produced, this condensate containing _ 93% methanol.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ],
+        "preparation_status": "not_reported",
+        "sample_kind": "reactor_charge"
+      }
+    },
+    {
+      "id": "ex:msyn/us1797569a/test/example-1",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Example I: theoretical CO2/H2 gas, 3,500 pounds, 420 °C, S.V. 100,000",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, Example I",
+            "note": "heading OCR 'Heample f'",
+            "passage": "us1797569a/p3/4",
+            "quote": "A gas mixture consisting of approximately theoretical proportions of carbon dioxide and hydrogen (25% carbon dioxide and 15% hydrogen) was continually supplied to the",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 3, Example I",
+            "note": "the OCR text layer of the page reads '15% hydrogen'; the page image prints '75% hydrogen'",
+            "reading": "vision_ocr",
+            "region": [
+              0.19,
+              0.744,
+              0.57,
+              0.772
+            ],
+            "source": "ex:msyn/source/us1797569a",
+            "transcription": "theoretical proportions of carbon dioxide and hydrogen (25% carbon dioxide and 75%"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, Example I",
+            "passage": "us1797569a/p3/4",
+            "quote": "apparatus at a pressure of 3,500 pounds, and passed through the catalyst at a space ve- ‘locity of 100,000.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, Example I",
+            "passage": "us1797569a/p3/4",
+            "quote": "The catalyst employed was one containing a mixture of zinc oxide anc chromic oxide, and the temperature of the reaction was maintained at 420° C.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 3, Example I",
+            "note": "the OCR text layer reads 'about L.! liters'; the page image prints 'about 1.5 liters'",
+            "reading": "vision_ocr",
+            "region": [
+              0.19,
+              0.85,
+              0.57,
+              0.878
+            ],
+            "source": "ex:msyn/source/us1797569a",
+            "transcription": "these conditions there was produced about 1.5 liters of condensate per hour per liter of"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, Example I",
+            "passage": "us1797569a/p3/4",
+            "quote": "This experiment is typical of th results attained when hydrogen and carbo: oxides are present in theoretical proportion: while passing over a methanol catalyst.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "note": "Condensate yield about 1.5 liters per hour per liter of catalyst (read from the page image; the OCR gives 'L.!'); typical of theoretical gas proportions.",
+        "pressure": {
+          "status": "present",
+          "as_reported": "3,500 pounds",
+          "note": "printed in 'pounds' without area unit",
+          "unit": "lb/in2",
+          "value": 3500
+        },
+        "production_rate": {
+          "status": "present",
+          "as_reported": "about 1.5 liters of condensate per hour per liter of catalyst",
+          "basis": "condensate",
+          "note": "illegible in the OCR ('L.!'); read from the page image (vision_ocr)",
+          "qualifier": "approximate",
+          "unit": "L/(h·L catalyst)",
+          "value": 1.5
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "space ve- ‘locity of 100,000",
+          "note": "no unit printed",
+          "unit": "not stated",
+          "value": 100000
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "maintained at 420° C.",
+          "note": "temperature of the reaction",
+          "unit": "°C",
+          "value": 420
+        },
+        "temperature_measured_at": "not_reported",
+        "test_kind": "control",
+        "test_label": "Example I"
+      }
+    },
+    {
+      "id": "ex:msyn/us1797569a/test/example-2",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Example II: hydrogen-filled circulating system, CO2/H2 make-up, 3,500 pounds, 420 °C",
+        "conditions": {
+          "hydrogen_fill_pressure": {
+            "status": "present",
+            "as_reported": "2,000 pounds",
+            "note": "printed in 'pounds' without area unit",
+            "unit": "lb/in2",
+            "value": 2000
+          }
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, Example II",
+            "note": "heading OCR 'EFeample Ll'",
+            "passage": "us1797569a/p4/3",
+            "quote": "Hydrogen gas was supplied to the process through the “make-up” gas pipe A until the pressure had been built up to 2,000 pounds",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4, Example II",
+            "passage": "us1797569a/p4/3",
+            "quote": "a mixture of carbon dioxide and hydrogen in theoretical proportions wa: passed into the apparatus until the pressure had reached 3,500 pounds.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4, Example II",
+            "passage": "us1797569a/p4/3",
+            "quote": "At : space velocity of 100,000, and a cataylst tem perature of 420° C., 2.9 liters of condensat was produced per hour per liter of catalyst",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4, Example II",
+            "passage": "us1797569a/p4/3",
+            "quote": "this condensate containing 60.5% methano C) by volume. Analysis of the gases showe 11% carbon dioxide by volume, this cond tion remaining constant over twelve hour",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4, Example II",
+            "passage": "us1797569a/p4/3",
+            "quote": "Thereafter onl) sufficient make-up gas to maintain the de {3 sired reaction pressure was supplied.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "pressure": {
+          "status": "present",
+          "as_reported": "3,500 pounds",
+          "note": "printed in 'pounds' without area unit",
+          "unit": "lb/in2",
+          "value": 3500
+        },
+        "production_rate": {
+          "status": "present",
+          "as_reported": "2.9 liters of condensat was produced per hour per liter of catalyst",
+          "basis": "condensate",
+          "unit": "L/(h·L catalyst)",
+          "value": 2.9
+        },
+        "results": {
+          "co2_in_circulating_gas": {
+            "status": "present",
+            "as_reported": "11% carbon dioxide by volume",
+            "basis": "by volume",
+            "unit": "%",
+            "value": 11
+          },
+          "methanol_in_condensate": {
+            "status": "present",
+            "as_reported": "60.5% methano C) by volume",
+            "basis": "by volume",
+            "unit": "%",
+            "value": 60.5
+          }
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "space velocity of 100,000",
+          "note": "no unit printed",
+          "unit": "not stated",
+          "value": 100000
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "cataylst tem perature of 420° C.",
+          "unit": "°C",
+          "value": 420
+        },
+        "temperature_measured_at": "catalyst_bed",
+        "test_kind": "activity",
+        "test_label": "Example II",
+        "time_on_stream": {
+          "status": "present",
+          "as_reported": "twelve hour",
+          "note": "the gas analysis remained constant over twelve hours of operation",
+          "unit": "h",
+          "value": 12
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us1797569a/test/example-3",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Example III: hydrogen-filled circulating system, CO/H2 33:66 make-up, 3,300 pounds, 420 °C",
+        "conditions": {
+          "hydrogen_fill_pressure": {
+            "status": "present",
+            "as_reported": "1,800 pounds",
+            "note": "printed in 'pounds' without area unit",
+            "unit": "lb/in2",
+            "value": 1800
+          }
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, Example III",
+            "note": "heading OCR 'Keample MIL'",
+            "passage": "us1797569a/p4/5",
+            "quote": "presstire had been built up to 1,800 pounds. A gas mixture containing theoretical -propor- tions (33:66) of carbon monoxide and hy- ;; drogen was then passed into the apparatus until the pressure had reached 3,300 pouncs.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4, Example III",
+            "passage": "us1797569a/p4/5",
+            "quote": "At a space velocity of 50,000 and go . a catalyst temperature of 420° C., 1.2 liters . of condensate per hour per liter of catalyst . was produced, this condensate containing _ 93% methanol.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4, Example III",
+            "passage": "us1797569a/p4/5",
+            "quote": "The gas mixture passing. _ through the circulating system showed 14% 3. carbon monoxide, on analysis.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4, Example III",
+            "passage": "us1797569a/p4/5",
+            "quote": "Thereafter only sufficient “make-up” gas to maintain the desired reaction pressure was _ supplied.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "pressure": {
+          "status": "present",
+          "as_reported": "3,300 pouncs",
+          "note": "printed in 'pounds' without area unit",
+          "unit": "lb/in2",
+          "value": 3300
+        },
+        "production_rate": {
+          "status": "present",
+          "as_reported": "1.2 liters . of condensate per hour per liter of catalyst",
+          "basis": "condensate",
+          "unit": "L/(h·L catalyst)",
+          "value": 1.2
+        },
+        "results": {
+          "co_in_circulating_gas": {
+            "status": "present",
+            "as_reported": "14% 3. carbon monoxide",
+            "note": "'3.' is a line number",
+            "unit": "%",
+            "value": 14
+          },
+          "methanol_in_condensate": {
+            "status": "present",
+            "as_reported": "93% methanol",
+            "unit": "%",
+            "value": 93
+          }
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "space velocity of 50,000",
+          "note": "no unit printed",
+          "unit": "not stated",
+          "value": 50000
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "a catalyst temperature of 420° C.",
+          "unit": "°C",
+          "value": 420
+        },
+        "temperature_measured_at": "catalyst_bed",
+        "test_kind": "activity",
+        "test_label": "Example III"
+      }
+    },
+    {
+      "id": "ex:msyn/us1797569a/test/example-3-comparison",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "comparison to Example III: theoretical gas passed over the catalyst, similar conditions",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, Example III",
+            "passage": "us1797569a/p4/6",
+            "quote": "when similar reaction conditions were enployed and a gas mixture of theoretical | proportions was passed over the catalyst a ° yield of only 0.7 liters of condensate per hour per liter of catalyst was obtained.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "pressure": {
+          "status": "present",
+          "as_reported": "similar reaction conditions",
+          "text_value": "similar reaction conditions"
+        },
+        "production_rate": {
+          "status": "present",
+          "as_reported": "only 0.7 liters of condensate per hour per liter of catalyst",
+          "basis": "condensate",
+          "unit": "L/(h·L catalyst)",
+          "value": 0.7
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "similar reaction conditions",
+          "text_value": "similar reaction conditions"
+        },
+        "test_kind": "control",
+        "test_label": "comparison in Example III"
+      }
+    },
+    {
+      "id": "ex:msyn/us1797569a/variable/hydrogen-rich-circulation",
+      "label": "Variable",
+      "props": {
+        "name": "circulating gas started from hydrogen (excess hydrogen over the catalyst) or theoretical gas",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1797569a/p4/1",
+            "quote": "We may accomplish this — result by filling the apparatus with a gas consisting of substantially pure hydrogen at. a pressure somewhat below the pressure de- sired for the reaction.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4, Example II",
+            "passage": "us1797569a/p4/5",
+            "quote": "the circulating system. produced a much im- | proved result over Example I in which a theoretical gas mixture was employed.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ],
+        "scale": "nominal"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/reaction/co-hydrogenation-to-methanol/reported-in/us1797569a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/source/us1797569a"
+    },
+    {
+      "id": "ex:msyn/reaction/co2-hydrogenation-to-methanol/reported-in/us1797569a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/reaction/co2-hydrogenation-to-methanol",
+      "target": "ex:msyn/source/us1797569a"
+    },
+    {
+      "id": "ex:msyn/reaction/reverse-water-gas-shift/reported-in/us1797569a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/reaction/reverse-water-gas-shift",
+      "target": "ex:msyn/source/us1797569a"
+    },
+    {
+      "id": "ex:msyn/source/us1797569a/assignee",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "role": "assignee"
+      },
+      "source": "ex:msyn/source/us1797569a",
+      "target": "ex:msyn/institution/commercial-solvents-corp"
+    },
+    {
+      "id": "ex:msyn/us1797569a/catalyst/zinc-chromic-oxide/reported-in/us1797569a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, Example I"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1797569a/catalyst/zinc-chromic-oxide",
+      "target": "ex:msyn/source/us1797569a"
+    },
+    {
+      "id": "ex:msyn/us1797569a/claim/conditions/reported-in/us1797569a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1797569a/claim/conditions",
+      "target": "ex:msyn/source/us1797569a"
+    },
+    {
+      "id": "ex:msyn/us1797569a/claim/excess-hydrogen/reported-in/us1797569a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1797569a/claim/excess-hydrogen",
+      "target": "ex:msyn/source/us1797569a"
+    },
+    {
+      "id": "ex:msyn/us1797569a/claim/hydrogen-fill-steady-state/reported-in/us1797569a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3",
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1797569a/claim/hydrogen-fill-steady-state",
+      "target": "ex:msyn/source/us1797569a"
+    },
+    {
+      "id": "ex:msyn/us1797569a/claim/improved-over-theoretical/reported-in/us1797569a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4, Example II",
+          "p. 4, Example III"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1797569a/claim/improved-over-theoretical",
+      "target": "ex:msyn/source/us1797569a"
+    },
+    {
+      "id": "ex:msyn/us1797569a/claim/output-depends/reported-in/us1797569a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1797569a/claim/output-depends",
+      "target": "ex:msyn/source/us1797569a"
+    },
+    {
+      "id": "ex:msyn/us1797569a/claim/patent-claim-1/reported-in/us1797569a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4, claim 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1797569a/claim/patent-claim-1",
+      "target": "ex:msyn/source/us1797569a"
+    },
+    {
+      "id": "ex:msyn/us1797569a/claim/patent-claim-2/reported-in/us1797569a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4, claim 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1797569a/claim/patent-claim-2",
+      "target": "ex:msyn/source/us1797569a"
+    },
+    {
+      "id": "ex:msyn/us1797569a/claim/patent-claim-3/reported-in/us1797569a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4, claim 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1797569a/claim/patent-claim-3",
+      "target": "ex:msyn/source/us1797569a"
+    },
+    {
+      "id": "ex:msyn/us1797569a/claim/patent-claim-4/reported-in/us1797569a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5, claim 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1797569a/claim/patent-claim-4",
+      "target": "ex:msyn/source/us1797569a"
+    },
+    {
+      "id": "ex:msyn/us1797569a/claim/patent-claim-5/reported-in/us1797569a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5, claim 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1797569a/claim/patent-claim-5",
+      "target": "ex:msyn/source/us1797569a"
+    },
+    {
+      "id": "ex:msyn/us1797569a/claim/pre-catalyst/reported-in/us1797569a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, Fig. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1797569a/claim/pre-catalyst",
+      "target": "ex:msyn/source/us1797569a"
+    },
+    {
+      "id": "ex:msyn/us1797569a/claim/recirculation-drift/reported-in/us1797569a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1797569a/claim/recirculation-drift",
+      "target": "ex:msyn/source/us1797569a"
+    },
+    {
+      "id": "ex:msyn/us1797569a/feed/example-1/reported-in/us1797569a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, Example I"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1797569a/feed/example-1",
+      "target": "ex:msyn/source/us1797569a"
+    },
+    {
+      "id": "ex:msyn/us1797569a/feed/example-2-makeup/reported-in/us1797569a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4, Example II"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1797569a/feed/example-2-makeup",
+      "target": "ex:msyn/source/us1797569a"
+    },
+    {
+      "id": "ex:msyn/us1797569a/feed/example-3-comparison/reported-in/us1797569a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4, Example III"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1797569a/feed/example-3-comparison",
+      "target": "ex:msyn/source/us1797569a"
+    },
+    {
+      "id": "ex:msyn/us1797569a/feed/example-3-makeup/reported-in/us1797569a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4, Example III"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1797569a/feed/example-3-makeup",
+      "target": "ex:msyn/source/us1797569a"
+    },
+    {
+      "id": "ex:msyn/us1797569a/hypothesis/co2-two-step/reported-in/us1797569a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1797569a/hypothesis/co2-two-step",
+      "target": "ex:msyn/source/us1797569a"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/1",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, Example I",
+            "passage": "us1797569a/p3/4",
+            "quote": "The catalyst employed was one containing a mixture of zinc oxide anc chromic oxide, and the temperature of the reaction was maintained at 420° C.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ],
+        "fraction": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source"
+        },
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1797569a/catalyst/zinc-chromic-oxide",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/10",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, Example III",
+            "passage": "us1797569a/p4/6",
+            "quote": "when similar reaction conditions were enployed and a gas mixture of theoretical | proportions was passed over the catalyst a ° yield of only 0.7 liters of condensate per hour per liter of catalyst was obtained.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ],
+        "fraction": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source"
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1797569a/feed/example-3-comparison",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/11",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, Example III",
+            "passage": "us1797569a/p4/6",
+            "quote": "when similar reaction conditions were enployed and a gas mixture of theoretical | proportions was passed over the catalyst a ° yield of only 0.7 liters of condensate per hour per liter of catalyst was obtained.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ],
+        "fraction": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source"
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1797569a/feed/example-3-comparison",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/12",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, Example I",
+            "note": "heading OCR 'Heample f'",
+            "passage": "us1797569a/p3/4",
+            "quote": "A gas mixture consisting of approximately theoretical proportions of carbon dioxide and hydrogen (25% carbon dioxide and 15% hydrogen) was continually supplied to the",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 3, Example I",
+            "note": "the OCR text layer of the page reads '15% hydrogen'; the page image prints '75% hydrogen'",
+            "reading": "vision_ocr",
+            "region": [
+              0.19,
+              0.744,
+              0.57,
+              0.772
+            ],
+            "source": "ex:msyn/source/us1797569a",
+            "transcription": "theoretical proportions of carbon dioxide and hydrogen (25% carbon dioxide and 75%"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, Example I",
+            "passage": "us1797569a/p3/4",
+            "quote": "The catalyst employed was one containing a mixture of zinc oxide anc chromic oxide, and the temperature of the reaction was maintained at 420° C.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ],
+        "state": "not_reported"
+      },
+      "source": "ex:msyn/us1797569a/test/example-1",
+      "target": "ex:msyn/us1797569a/sample/example-1"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/13",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, Example I",
+            "note": "heading OCR 'Heample f'",
+            "passage": "us1797569a/p3/4",
+            "quote": "A gas mixture consisting of approximately theoretical proportions of carbon dioxide and hydrogen (25% carbon dioxide and 15% hydrogen) was continually supplied to the",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 3, Example I",
+            "note": "the OCR text layer of the page reads '15% hydrogen'; the page image prints '75% hydrogen'",
+            "reading": "vision_ocr",
+            "region": [
+              0.19,
+              0.744,
+              0.57,
+              0.772
+            ],
+            "source": "ex:msyn/source/us1797569a",
+            "transcription": "theoretical proportions of carbon dioxide and hydrogen (25% carbon dioxide and 75%"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, Example I",
+            "passage": "us1797569a/p3/4",
+            "quote": "The catalyst employed was one containing a mixture of zinc oxide anc chromic oxide, and the temperature of the reaction was maintained at 420° C.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1797569a/test/example-1",
+      "target": "ex:msyn/us1797569a/feed/example-1"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/14",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, Example I",
+            "note": "heading OCR 'Heample f'",
+            "passage": "us1797569a/p3/4",
+            "quote": "A gas mixture consisting of approximately theoretical proportions of carbon dioxide and hydrogen (25% carbon dioxide and 15% hydrogen) was continually supplied to the",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 3, Example I",
+            "note": "the OCR text layer of the page reads '15% hydrogen'; the page image prints '75% hydrogen'",
+            "reading": "vision_ocr",
+            "region": [
+              0.19,
+              0.744,
+              0.57,
+              0.772
+            ],
+            "source": "ex:msyn/source/us1797569a",
+            "transcription": "theoretical proportions of carbon dioxide and hydrogen (25% carbon dioxide and 75%"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, Example I",
+            "passage": "us1797569a/p3/4",
+            "quote": "The catalyst employed was one containing a mixture of zinc oxide anc chromic oxide, and the temperature of the reaction was maintained at 420° C.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1797569a/test/example-1",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/15",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, Example I",
+            "note": "heading OCR 'Heample f'",
+            "passage": "us1797569a/p3/4",
+            "quote": "A gas mixture consisting of approximately theoretical proportions of carbon dioxide and hydrogen (25% carbon dioxide and 15% hydrogen) was continually supplied to the",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 3, Example I",
+            "note": "the OCR text layer of the page reads '15% hydrogen'; the page image prints '75% hydrogen'",
+            "reading": "vision_ocr",
+            "region": [
+              0.19,
+              0.744,
+              0.57,
+              0.772
+            ],
+            "source": "ex:msyn/source/us1797569a",
+            "transcription": "theoretical proportions of carbon dioxide and hydrogen (25% carbon dioxide and 75%"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3, Example I",
+            "passage": "us1797569a/p3/4",
+            "quote": "The catalyst employed was one containing a mixture of zinc oxide anc chromic oxide, and the temperature of the reaction was maintained at 420° C.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Fig. 1",
+            "passage": "us1797569a/p2/6",
+            "quote": "From the exchanger the warmed gas passes downward through pipe F into the converter (catalyst bomb) &.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1797569a/test/example-1",
+      "target": "ex:msyn/us1797569a/reactor/circulating-converter"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/16",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, Example II",
+            "passage": "us1797569a/p4/3",
+            "quote": "a mixture of carbon dioxide and hydrogen in theoretical proportions wa: passed into the apparatus until the pressure had reached 3,500 pounds.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4, Example II",
+            "passage": "us1797569a/p4/3",
+            "quote": "At : space velocity of 100,000, and a cataylst tem perature of 420° C., 2.9 liters of condensat was produced per hour per liter of catalyst",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ],
+        "state": "not_reported"
+      },
+      "source": "ex:msyn/us1797569a/test/example-2",
+      "target": "ex:msyn/us1797569a/sample/examples-2-3"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/17",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, Example II",
+            "passage": "us1797569a/p4/3",
+            "quote": "a mixture of carbon dioxide and hydrogen in theoretical proportions wa: passed into the apparatus until the pressure had reached 3,500 pounds.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4, Example II",
+            "passage": "us1797569a/p4/3",
+            "quote": "At : space velocity of 100,000, and a cataylst tem perature of 420° C., 2.9 liters of condensat was produced per hour per liter of catalyst",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1797569a/test/example-2",
+      "target": "ex:msyn/us1797569a/feed/example-2-makeup"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/18",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, Example II",
+            "passage": "us1797569a/p4/3",
+            "quote": "a mixture of carbon dioxide and hydrogen in theoretical proportions wa: passed into the apparatus until the pressure had reached 3,500 pounds.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4, Example II",
+            "passage": "us1797569a/p4/3",
+            "quote": "At : space velocity of 100,000, and a cataylst tem perature of 420° C., 2.9 liters of condensat was produced per hour per liter of catalyst",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1797569a/test/example-2",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/19",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, Example II",
+            "passage": "us1797569a/p4/3",
+            "quote": "a mixture of carbon dioxide and hydrogen in theoretical proportions wa: passed into the apparatus until the pressure had reached 3,500 pounds.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4, Example II",
+            "passage": "us1797569a/p4/3",
+            "quote": "At : space velocity of 100,000, and a cataylst tem perature of 420° C., 2.9 liters of condensat was produced per hour per liter of catalyst",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Fig. 1",
+            "passage": "us1797569a/p2/6",
+            "quote": "From the exchanger the warmed gas passes downward through pipe F into the converter (catalyst bomb) &.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1797569a/test/example-2",
+      "target": "ex:msyn/us1797569a/reactor/circulating-converter"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/2",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, Example I",
+            "passage": "us1797569a/p3/4",
+            "quote": "The catalyst employed was one containing a mixture of zinc oxide anc chromic oxide, and the temperature of the reaction was maintained at 420° C.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ],
+        "fraction": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source"
+        },
+        "note": "'chromic oxide' as printed, taken as chromium(III) oxide by its name",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1797569a/catalyst/zinc-chromic-oxide",
+      "target": "ex:msyn/species/cr2o3"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/20",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, Example III",
+            "note": "heading OCR 'Keample MIL'",
+            "passage": "us1797569a/p4/5",
+            "quote": "presstire had been built up to 1,800 pounds. A gas mixture containing theoretical -propor- tions (33:66) of carbon monoxide and hy- ;; drogen was then passed into the apparatus until the pressure had reached 3,300 pouncs.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4, Example III",
+            "passage": "us1797569a/p4/5",
+            "quote": "At a space velocity of 50,000 and go . a catalyst temperature of 420° C., 1.2 liters . of condensate per hour per liter of catalyst . was produced, this condensate containing _ 93% methanol.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ],
+        "state": "not_reported"
+      },
+      "source": "ex:msyn/us1797569a/test/example-3",
+      "target": "ex:msyn/us1797569a/sample/examples-2-3"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/21",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, Example III",
+            "note": "heading OCR 'Keample MIL'",
+            "passage": "us1797569a/p4/5",
+            "quote": "presstire had been built up to 1,800 pounds. A gas mixture containing theoretical -propor- tions (33:66) of carbon monoxide and hy- ;; drogen was then passed into the apparatus until the pressure had reached 3,300 pouncs.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4, Example III",
+            "passage": "us1797569a/p4/5",
+            "quote": "At a space velocity of 50,000 and go . a catalyst temperature of 420° C., 1.2 liters . of condensate per hour per liter of catalyst . was produced, this condensate containing _ 93% methanol.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1797569a/test/example-3",
+      "target": "ex:msyn/us1797569a/feed/example-3-makeup"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/22",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, Example III",
+            "note": "heading OCR 'Keample MIL'",
+            "passage": "us1797569a/p4/5",
+            "quote": "presstire had been built up to 1,800 pounds. A gas mixture containing theoretical -propor- tions (33:66) of carbon monoxide and hy- ;; drogen was then passed into the apparatus until the pressure had reached 3,300 pouncs.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4, Example III",
+            "passage": "us1797569a/p4/5",
+            "quote": "At a space velocity of 50,000 and go . a catalyst temperature of 420° C., 1.2 liters . of condensate per hour per liter of catalyst . was produced, this condensate containing _ 93% methanol.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1797569a/test/example-3",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/23",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, Example III",
+            "note": "heading OCR 'Keample MIL'",
+            "passage": "us1797569a/p4/5",
+            "quote": "presstire had been built up to 1,800 pounds. A gas mixture containing theoretical -propor- tions (33:66) of carbon monoxide and hy- ;; drogen was then passed into the apparatus until the pressure had reached 3,300 pouncs.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4, Example III",
+            "passage": "us1797569a/p4/5",
+            "quote": "At a space velocity of 50,000 and go . a catalyst temperature of 420° C., 1.2 liters . of condensate per hour per liter of catalyst . was produced, this condensate containing _ 93% methanol.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Fig. 1",
+            "passage": "us1797569a/p2/6",
+            "quote": "From the exchanger the warmed gas passes downward through pipe F into the converter (catalyst bomb) &.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1797569a/test/example-3",
+      "target": "ex:msyn/us1797569a/reactor/circulating-converter"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/24",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, Example III",
+            "passage": "us1797569a/p4/6",
+            "quote": "when similar reaction conditions were enployed and a gas mixture of theoretical | proportions was passed over the catalyst a ° yield of only 0.7 liters of condensate per hour per liter of catalyst was obtained.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ],
+        "state": "not_reported"
+      },
+      "source": "ex:msyn/us1797569a/test/example-3-comparison",
+      "target": "ex:msyn/us1797569a/sample/examples-2-3"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/25",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, Example III",
+            "passage": "us1797569a/p4/6",
+            "quote": "when similar reaction conditions were enployed and a gas mixture of theoretical | proportions was passed over the catalyst a ° yield of only 0.7 liters of condensate per hour per liter of catalyst was obtained.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1797569a/test/example-3-comparison",
+      "target": "ex:msyn/us1797569a/feed/example-3-comparison"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/26",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, Example III",
+            "passage": "us1797569a/p4/6",
+            "quote": "when similar reaction conditions were enployed and a gas mixture of theoretical | proportions was passed over the catalyst a ° yield of only 0.7 liters of condensate per hour per liter of catalyst was obtained.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1797569a/test/example-3-comparison",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/27",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, Example III",
+            "passage": "us1797569a/p4/6",
+            "quote": "when similar reaction conditions were enployed and a gas mixture of theoretical | proportions was passed over the catalyst a ° yield of only 0.7 liters of condensate per hour per liter of catalyst was obtained.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Fig. 1",
+            "passage": "us1797569a/p2/6",
+            "quote": "From the exchanger the warmed gas passes downward through pipe F into the converter (catalyst bomb) &.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1797569a/test/example-3-comparison",
+      "target": "ex:msyn/us1797569a/reactor/circulating-converter"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/28",
+      "type": "CONTROL_FOR",
+      "props": {
+        "status": "asserted",
+        "control_kind": "baseline",
+        "differs_in": [
+          "ex:msyn/us1797569a/variable/hydrogen-rich-circulation"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, Example II",
+            "passage": "us1797569a/p4/4",
+            "quote": "It is observed that the prac tice of our invention which made possibl 33 the employment of an excess of hydrogen 1",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4, Example II",
+            "passage": "us1797569a/p4/5",
+            "quote": "the circulating system. produced a much im- | proved result over Example I in which a theoretical gas mixture was employed.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1797569a/test/example-1",
+      "target": "ex:msyn/us1797569a/test/example-2"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/29",
+      "type": "CONTROL_FOR",
+      "props": {
+        "status": "asserted",
+        "control_kind": "baseline",
+        "differs_in": [
+          "ex:msyn/us1797569a/variable/hydrogen-rich-circulation"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, Example III",
+            "passage": "us1797569a/p4/6",
+            "quote": "when similar reaction conditions were enployed and a gas mixture of theoretical | proportions was passed over the catalyst a ° yield of only 0.7 liters of condensate per hour per liter of catalyst was obtained.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1797569a/test/example-3-comparison",
+      "target": "ex:msyn/us1797569a/test/example-3"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/3",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, Example I",
+            "passage": "us1797569a/p3/4",
+            "quote": "The catalyst employed was one containing a mixture of zinc oxide anc chromic oxide, and the temperature of the reaction was maintained at 420° C.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1797569a/sample/example-1",
+      "target": "ex:msyn/us1797569a/catalyst/zinc-chromic-oxide"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/30",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1797569a/p2/3",
+            "quote": "it is well known that optimum results are obtained in methanol synthesis when the proportion of hydrogen to carbon oxides is greater than that theoretically required.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1797569a/p2/3",
+            "quote": "the presence of.an‘éxcess of hydrogen over that theoretically required to react with the carbon oxides present tends to prevent the occurrence of undesirable side- reactions which produce free'carbon, meth- ane, water, etc., rather than methanol.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1797569a/claim/excess-hydrogen",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/31",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1797569a/p2/3",
+            "quote": "it is well known that optimum results are obtained in methanol synthesis when the proportion of hydrogen to carbon oxides is greater than that theoretically required.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1797569a/p2/3",
+            "quote": "the presence of.an‘éxcess of hydrogen over that theoretically required to react with the carbon oxides present tends to prevent the occurrence of undesirable side- reactions which produce free'carbon, meth- ane, water, etc., rather than methanol.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1797569a/claim/excess-hydrogen",
+      "target": "ex:msyn/species/carbon"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/32",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1797569a/p2/3",
+            "quote": "it is well known that optimum results are obtained in methanol synthesis when the proportion of hydrogen to carbon oxides is greater than that theoretically required.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1797569a/p2/3",
+            "quote": "the presence of.an‘éxcess of hydrogen over that theoretically required to react with the carbon oxides present tends to prevent the occurrence of undesirable side- reactions which produce free'carbon, meth- ane, water, etc., rather than methanol.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1797569a/claim/excess-hydrogen",
+      "target": "ex:msyn/species/ch4"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/33",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1797569a/p2/4",
+            "quote": "are passed over suitable catalysts at temperatures of from 300 to 500° C. and 55 at pressures in excess of 50 atmospheres.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1797569a/p2/4",
+            "quote": "If operating 6 conditions are not correctly adjusted, or if — improper catalysts are employed, side-reac- tions occur producing products other than methanol and water.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1797569a/claim/conditions",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/34",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1797569a/p2/4",
+            "quote": "are passed over suitable catalysts at temperatures of from 300 to 500° C. and 55 at pressures in excess of 50 atmospheres.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1797569a/p2/4",
+            "quote": "If operating 6 conditions are not correctly adjusted, or if — improper catalysts are employed, side-reac- tions occur producing products other than methanol and water.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1797569a/claim/conditions",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/35",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1797569a/p2/5",
+            "quote": "The amount of methanol produced per hour va- ?@ ries with the quantity of catalyst employed, _ and with the space velocity of gas passage, as well as with the precise temperature and pressure.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1797569a/claim/output-depends",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/36",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, Fig. 1",
+            "passage": "us1797569a/p3/1",
+            "quote": "Section J is designed to act as a “pre-catalyst” or purifier, to destroy or absorb any catalyst ; poisons which may be present in the gas, and thus to preserve the catalytic activity of sec- tion J’ for the methanol reaction.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1797569a/claim/pre-catalyst",
+      "target": "ex:msyn/us1797569a/reactor/circulating-converter"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/37",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1797569a/p3/5",
+            "quote": "when such recirculation is at- tempted difficulties arise if one attempts to use a gas mixture containing a proportion of carbon oxides to hydrogen that. is ciffer- 80 ent from that theoretically required.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1797569a/p3/6",
+            "quote": "the proportion of hydrogen in the circulating system increases as the process is continued, until eventually the proportion of carbon monoxide in the sys- tem grows so small that practically no methanol is produced.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1797569a/p3/7",
+            "quote": "A precisely similar phenomenon occurs when one attempts to operate on a mixture of carbon dioxide and: hydrogen not in theoretical proportions.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1797569a/claim/recirculation-drift",
+      "target": "ex:msyn/us1797569a/reactor/circulating-converter"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/38",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1797569a/p3/5",
+            "quote": "when such recirculation is at- tempted difficulties arise if one attempts to use a gas mixture containing a proportion of carbon oxides to hydrogen that. is ciffer- 80 ent from that theoretically required.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1797569a/p3/6",
+            "quote": "the proportion of hydrogen in the circulating system increases as the process is continued, until eventually the proportion of carbon monoxide in the sys- tem grows so small that practically no methanol is produced.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1797569a/p3/7",
+            "quote": "A precisely similar phenomenon occurs when one attempts to operate on a mixture of carbon dioxide and: hydrogen not in theoretical proportions.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1797569a/claim/recirculation-drift",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/39",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1797569a/p3/5",
+            "quote": "when such recirculation is at- tempted difficulties arise if one attempts to use a gas mixture containing a proportion of carbon oxides to hydrogen that. is ciffer- 80 ent from that theoretically required.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1797569a/p3/6",
+            "quote": "the proportion of hydrogen in the circulating system increases as the process is continued, until eventually the proportion of carbon monoxide in the sys- tem grows so small that practically no methanol is produced.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1797569a/p3/7",
+            "quote": "A precisely similar phenomenon occurs when one attempts to operate on a mixture of carbon dioxide and: hydrogen not in theoretical proportions.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1797569a/claim/recirculation-drift",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/4",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, Example I",
+            "note": "heading OCR 'Heample f'",
+            "passage": "us1797569a/p3/4",
+            "quote": "A gas mixture consisting of approximately theoretical proportions of carbon dioxide and hydrogen (25% carbon dioxide and 15% hydrogen) was continually supplied to the",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 3, Example I",
+            "note": "the OCR text layer of the page reads '15% hydrogen'; the page image prints '75% hydrogen'",
+            "reading": "vision_ocr",
+            "region": [
+              0.19,
+              0.744,
+              0.57,
+              0.772
+            ],
+            "source": "ex:msyn/source/us1797569a",
+            "transcription": "theoretical proportions of carbon dioxide and hydrogen (25% carbon dioxide and 75%"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "25% carbon dioxide",
+          "unit": "%",
+          "value": 25
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1797569a/feed/example-1",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/40",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1797569a/p4/1",
+            "quote": "We may accomplish this — result by filling the apparatus with a gas consisting of substantially pure hydrogen at. a pressure somewhat below the pressure de- sired for the reaction.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1797569a/p4/1",
+            "quote": "a mixture of hydrogen and carbon oxides in the proportions theo- retically required for methanol synthesis is 5 passed into the apparatus.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1797569a/p3/7",
+            "quote": "it 1s pos- _ sible to obtain the economic advantages of --employing an excess of hydrogen 1n the gases passing over the catalyst, and at the same ; time to maintain a static condition whereby . the composition of the gas in the circulating - system remains substantially unchanged dur- ; Ing operation",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1797569a/p4/2",
+            "quote": "since the methanol reaction constant- ly removes carbon oxides and hydrogen in the same proportion in which they are in- 49 troduced in the “make-up” gas.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1797569a/p4/2",
+            "quote": "the gas passing >) through the catalyst J—J’ contains a great. preponderance of hydrogen over carbon ox- ides, and desirable conditions for the con- _ version of all of the carbon oxides to meth- anol are thus attained.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1797569a/claim/hydrogen-fill-steady-state",
+      "target": "ex:msyn/us1797569a/reactor/circulating-converter"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/41",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1797569a/p4/1",
+            "quote": "We may accomplish this — result by filling the apparatus with a gas consisting of substantially pure hydrogen at. a pressure somewhat below the pressure de- sired for the reaction.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1797569a/p4/1",
+            "quote": "a mixture of hydrogen and carbon oxides in the proportions theo- retically required for methanol synthesis is 5 passed into the apparatus.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1797569a/p3/7",
+            "quote": "it 1s pos- _ sible to obtain the economic advantages of --employing an excess of hydrogen 1n the gases passing over the catalyst, and at the same ; time to maintain a static condition whereby . the composition of the gas in the circulating - system remains substantially unchanged dur- ; Ing operation",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1797569a/p4/2",
+            "quote": "since the methanol reaction constant- ly removes carbon oxides and hydrogen in the same proportion in which they are in- 49 troduced in the “make-up” gas.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1797569a/p4/2",
+            "quote": "the gas passing >) through the catalyst J—J’ contains a great. preponderance of hydrogen over carbon ox- ides, and desirable conditions for the con- _ version of all of the carbon oxides to meth- anol are thus attained.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1797569a/claim/hydrogen-fill-steady-state",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/42",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1797569a/p4/1",
+            "quote": "We may accomplish this — result by filling the apparatus with a gas consisting of substantially pure hydrogen at. a pressure somewhat below the pressure de- sired for the reaction.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1797569a/p4/1",
+            "quote": "a mixture of hydrogen and carbon oxides in the proportions theo- retically required for methanol synthesis is 5 passed into the apparatus.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1797569a/p3/7",
+            "quote": "it 1s pos- _ sible to obtain the economic advantages of --employing an excess of hydrogen 1n the gases passing over the catalyst, and at the same ; time to maintain a static condition whereby . the composition of the gas in the circulating - system remains substantially unchanged dur- ; Ing operation",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1797569a/p4/2",
+            "quote": "since the methanol reaction constant- ly removes carbon oxides and hydrogen in the same proportion in which they are in- 49 troduced in the “make-up” gas.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1797569a/p4/2",
+            "quote": "the gas passing >) through the catalyst J—J’ contains a great. preponderance of hydrogen over carbon ox- ides, and desirable conditions for the con- _ version of all of the carbon oxides to meth- anol are thus attained.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1797569a/claim/hydrogen-fill-steady-state",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/43",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, Example II",
+            "passage": "us1797569a/p4/4",
+            "quote": "It is observed that the prac tice of our invention which made possibl 33 the employment of an excess of hydrogen 1",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4, Example II",
+            "passage": "us1797569a/p4/5",
+            "quote": "the circulating system. produced a much im- | proved result over Example I in which a theoretical gas mixture was employed.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4, Example III",
+            "passage": "us1797569a/p4/6",
+            "quote": "when similar reaction conditions were enployed and a gas mixture of theoretical | proportions was passed over the catalyst a ° yield of only 0.7 liters of condensate per hour per liter of catalyst was obtained.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1797569a/claim/improved-over-theoretical",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/44",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, Example II",
+            "passage": "us1797569a/p4/4",
+            "quote": "It is observed that the prac tice of our invention which made possibl 33 the employment of an excess of hydrogen 1",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4, Example II",
+            "passage": "us1797569a/p4/5",
+            "quote": "the circulating system. produced a much im- | proved result over Example I in which a theoretical gas mixture was employed.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4, Example III",
+            "passage": "us1797569a/p4/6",
+            "quote": "when similar reaction conditions were enployed and a gas mixture of theoretical | proportions was passed over the catalyst a ° yield of only 0.7 liters of condensate per hour per liter of catalyst was obtained.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1797569a/claim/improved-over-theoretical",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/45",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, Example II",
+            "passage": "us1797569a/p4/4",
+            "quote": "It is observed that the prac tice of our invention which made possibl 33 the employment of an excess of hydrogen 1",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4, Example II",
+            "passage": "us1797569a/p4/5",
+            "quote": "the circulating system. produced a much im- | proved result over Example I in which a theoretical gas mixture was employed.",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4, Example II",
+            "passage": "us1797569a/p4/3",
+            "quote": "this condensate containing 60.5% methano C) by volume. Analysis of the gases showe 11% carbon dioxide by volume, this cond tion remaining constant over twelve hour",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1797569a/test/example-2",
+      "target": "ex:msyn/us1797569a/claim/hydrogen-fill-steady-state"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/46",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, Example III",
+            "passage": "us1797569a/p4/6",
+            "quote": "when similar reaction conditions were enployed and a gas mixture of theoretical | proportions was passed over the catalyst a ° yield of only 0.7 liters of condensate per hour per liter of catalyst was obtained.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1797569a/test/example-3",
+      "target": "ex:msyn/us1797569a/claim/hydrogen-fill-steady-state"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/47",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "OCR of CO2 + H2 = CO + H2O and CO + 2H2 = CH3OH",
+            "passage": "us1797569a/p2/2",
+            "quote": "When carbon dioxide reacts with hydrogen to. form methanol it has been generally assumed that the reaction may be written in two steps, thus: : CO,+H:2C0+H,0 CO +2H,@CH,0H",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1797569a/hypothesis/co2-two-step",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/48",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "OCR of CO2 + H2 = CO + H2O and CO + 2H2 = CH3OH",
+            "passage": "us1797569a/p2/2",
+            "quote": "When carbon dioxide reacts with hydrogen to. form methanol it has been generally assumed that the reaction may be written in two steps, thus: : CO,+H:2C0+H,0 CO +2H,@CH,0H",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1797569a/hypothesis/co2-two-step",
+      "target": "ex:msyn/reaction/reverse-water-gas-shift"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/49",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, claim 1",
+            "passage": "us1797569a/p4/6",
+            "quote": "steps which comprise first circulating sub- stantially pure hydrogen over a catalyst for the reaction, adding to said circulating gas a 100 mixture of hydrogen and carbon oxides in- proportions required to produce methanol,",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1797569a/claim/patent-claim-1",
+      "target": "ex:msyn/us1797569a/reactor/circulating-converter"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/5",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, Example I",
+            "note": "heading OCR 'Heample f'",
+            "passage": "us1797569a/p3/4",
+            "quote": "A gas mixture consisting of approximately theoretical proportions of carbon dioxide and hydrogen (25% carbon dioxide and 15% hydrogen) was continually supplied to the",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 3, Example I",
+            "note": "the OCR text layer of the page reads '15% hydrogen'; the page image prints '75% hydrogen'",
+            "reading": "vision_ocr",
+            "region": [
+              0.19,
+              0.744,
+              0.57,
+              0.772
+            ],
+            "source": "ex:msyn/source/us1797569a",
+            "transcription": "theoretical proportions of carbon dioxide and hydrogen (25% carbon dioxide and 75%"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "75% hydrogen",
+          "note": "corrected 2026-09-29 from 15 (OCR misreading of '75%'); read from the page image (vision_ocr)",
+          "unit": "%",
+          "value": 75
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1797569a/feed/example-1",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/50",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, claim 1",
+            "passage": "us1797569a/p4/6",
+            "quote": "steps which comprise first circulating sub- stantially pure hydrogen over a catalyst for the reaction, adding to said circulating gas a 100 mixture of hydrogen and carbon oxides in- proportions required to produce methanol,",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1797569a/claim/patent-claim-1",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/51",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, claim 2",
+            "note": "numeral OCR'd as '9.'",
+            "passage": "us1797569a/p4/7",
+            "quote": "vated pressure of carbon dioxide with hydro- ven, the steps which comprise first circulating substantially pure hydrogen over a catalyst 1:0",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1797569a/claim/patent-claim-2",
+      "target": "ex:msyn/us1797569a/reactor/circulating-converter"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/52",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, claim 2",
+            "note": "numeral OCR'd as '9.'",
+            "passage": "us1797569a/p4/7",
+            "quote": "vated pressure of carbon dioxide with hydro- ven, the steps which comprise first circulating substantially pure hydrogen over a catalyst 1:0",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1797569a/claim/patent-claim-2",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/53",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, claim 3",
+            "passage": "us1797569a/p4/8",
+            "quote": "stantially pure hydrogen over a catalyst for the reaction at an elevated pressure, then in- 1 creasing said pressure by adding a mixture of 1 hydrogen and carbon oxides in the propor- -+-9",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1797569a/claim/patent-claim-3",
+      "target": "ex:msyn/us1797569a/reactor/circulating-converter"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/54",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, claim 3",
+            "passage": "us1797569a/p4/8",
+            "quote": "stantially pure hydrogen over a catalyst for the reaction at an elevated pressure, then in- 1 creasing said pressure by adding a mixture of 1 hydrogen and carbon oxides in the propor- -+-9",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1797569a/claim/patent-claim-3",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/55",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5, claim 4",
+            "passage": "us1797569a/p5/1",
+            "quote": "the steps which comprise first circulating sub- — stantially pure hydrogen over a catalyst for the reaction at an elevated pressure, then , increasing said pressure by adding a mixture of hydrogen and carbon dioxide in the pro- portions required tc produce methanol,",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1797569a/claim/patent-claim-4",
+      "target": "ex:msyn/us1797569a/reactor/circulating-converter"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/56",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5, claim 4",
+            "passage": "us1797569a/p5/1",
+            "quote": "the steps which comprise first circulating sub- — stantially pure hydrogen over a catalyst for the reaction at an elevated pressure, then , increasing said pressure by adding a mixture of hydrogen and carbon dioxide in the pro- portions required tc produce methanol,",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1797569a/claim/patent-claim-4",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/57",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5, claim 5",
+            "passage": "us1797569a/p5/1",
+            "quote": "substantially pure hydrogen over a catalyst | 15 for the reaction at a pressure of about 1,800 pounds, then increasing said pressure to about 3,500 pounds by adding a mixture of hydrogen and carbon dioxide in the propor- tions required for the production of meth-",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1797569a/claim/patent-claim-5",
+      "target": "ex:msyn/us1797569a/reactor/circulating-converter"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/58",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5, claim 5",
+            "passage": "us1797569a/p5/1",
+            "quote": "substantially pure hydrogen over a catalyst | 15 for the reaction at a pressure of about 1,800 pounds, then increasing said pressure to about 3,500 pounds by adding a mixture of hydrogen and carbon dioxide in the propor- tions required for the production of meth-",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1797569a/claim/patent-claim-5",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/6",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, Example II",
+            "passage": "us1797569a/p4/3",
+            "quote": "a mixture of carbon dioxide and hydrogen in theoretical proportions wa: passed into the apparatus until the pressure had reached 3,500 pounds.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ],
+        "fraction": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source"
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1797569a/feed/example-2-makeup",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/7",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, Example II",
+            "note": "heading OCR 'EFeample Ll'",
+            "passage": "us1797569a/p4/3",
+            "quote": "Hydrogen gas was supplied to the process through the “make-up” gas pipe A until the pressure had been built up to 2,000 pounds",
+            "source": "ex:msyn/source/us1797569a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4, Example II",
+            "passage": "us1797569a/p4/3",
+            "quote": "a mixture of carbon dioxide and hydrogen in theoretical proportions wa: passed into the apparatus until the pressure had reached 3,500 pounds.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ],
+        "fraction": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source"
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1797569a/feed/example-2-makeup",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/8",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, Example III",
+            "note": "heading OCR 'Keample MIL'",
+            "passage": "us1797569a/p4/5",
+            "quote": "presstire had been built up to 1,800 pounds. A gas mixture containing theoretical -propor- tions (33:66) of carbon monoxide and hy- ;; drogen was then passed into the apparatus until the pressure had reached 3,300 pouncs.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "33",
+          "note": "parts in the ratio (33:66)",
+          "unit": "1",
+          "value": 33
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1797569a/feed/example-3-makeup",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/us1797569a/link/9",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, Example III",
+            "note": "heading OCR 'Keample MIL'",
+            "passage": "us1797569a/p4/5",
+            "quote": "presstire had been built up to 1,800 pounds. A gas mixture containing theoretical -propor- tions (33:66) of carbon monoxide and hy- ;; drogen was then passed into the apparatus until the pressure had reached 3,300 pouncs.",
+            "source": "ex:msyn/source/us1797569a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "66",
+          "note": "parts in the ratio (33:66)",
+          "unit": "1",
+          "value": 66
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1797569a/feed/example-3-makeup",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/us1797569a/reactor/circulating-converter/reported-in/us1797569a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, Fig. 1",
+          "p. 3, Fig. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1797569a/reactor/circulating-converter",
+      "target": "ex:msyn/source/us1797569a"
+    },
+    {
+      "id": "ex:msyn/us1797569a/sample/example-1/reported-in/us1797569a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, Example I"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1797569a/sample/example-1",
+      "target": "ex:msyn/source/us1797569a"
+    },
+    {
+      "id": "ex:msyn/us1797569a/sample/examples-2-3/reported-in/us1797569a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4, Example II",
+          "p. 4, Example III"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1797569a/sample/examples-2-3",
+      "target": "ex:msyn/source/us1797569a"
+    },
+    {
+      "id": "ex:msyn/us1797569a/test/example-1/reported-in/us1797569a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, Example I"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1797569a/test/example-1",
+      "target": "ex:msyn/source/us1797569a"
+    },
+    {
+      "id": "ex:msyn/us1797569a/test/example-2/reported-in/us1797569a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4, Example II"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1797569a/test/example-2",
+      "target": "ex:msyn/source/us1797569a"
+    },
+    {
+      "id": "ex:msyn/us1797569a/test/example-3-comparison/reported-in/us1797569a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4, Example III"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1797569a/test/example-3-comparison",
+      "target": "ex:msyn/source/us1797569a"
+    },
+    {
+      "id": "ex:msyn/us1797569a/test/example-3/reported-in/us1797569a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4, Example III"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1797569a/test/example-3",
+      "target": "ex:msyn/source/us1797569a"
+    },
+    {
+      "id": "ex:msyn/us1797569a/variable/hydrogen-rich-circulation/reported-in/us1797569a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4",
+          "p. 4, Example II"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1797569a/variable/hydrogen-rich-circulation",
+      "target": "ex:msyn/source/us1797569a"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/us1797569a"
+}

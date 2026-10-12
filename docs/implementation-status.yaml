@@ -167,7 +167,12 @@ capabilities:
   status: functioning
   where: tools/graphparts.py, scale graph split, scale graph build, scale.util.load_doc, examples/methanol-synthesis-public, docs/graph-parts.md
   tests: [test_a_graph_splits_into_one_part_per_source_and_builds_back, test_the_methanol_graph_builds_back_exactly_from_its_parts, test_the_parts_refuse_a_record_in_the_wrong_place, test_a_subset_keeps_what_its_sources_reach_and_only_their_evidence, test_build_writes_the_graph_and_check_finds_a_stale_copy, test_it_is_the_public_domain_part_of_the_full_graph, test_every_source_is_public_domain_with_its_pdf_and_page_texts, test_every_quote_is_in_full_and_found_in_its_page_texts]
-  notes: The full methanol graph (105 sources, most in copyright) is kept outside the repository; only its public-domain part is committed, as parts. A legal path for curating community graphs, a registry of shared records with near-duplicate checks, and links between sources are the next steps.
+  notes: The public example is checked to be exactly the public-domain part of the full methanol graph (graphs/methanol-synthesis-pre1966). A registry of shared records with near-duplicate checks, and links between sources, are the next steps.
+- name: 'graphs/: the graphs SCALE curates and shares (the catalysis commons, evolving; the methanol-synthesis graph, 105 sources), each kept as parts and quoting no text of a source in copyright (rights.yaml limits 0), merged into bundles (scale graph bundle graphs/bundles/<name>.yaml)'
+  status: functioning
+  where: graphs/, tools/graphparts.py (merge, merge_rights, build_bundle), tools/rights.py (limits), scale graph bundle, graphs/README.md
+  tests: [test_every_graph_builds_validates_and_respects_each_sources_rights, test_the_methanol_graph_keeps_public_domain_quotes_and_withholds_the_rest, test_the_catalysis_bundle_merges_the_graphs_into_one_valid_graph, test_merge_pools_shared_evidence_and_keeps_each_graphs_stewardship, test_merge_refuses_what_two_graphs_state_differently, test_a_bundle_definition_is_checked, test_limits_only_lower_the_cap_and_zero_keeps_no_text_of_a_source]
+  notes: The commons is empty (its steward and project); the skills that find, download and curate sources for it, and the agents that grow it with spare compute, come later. Bundles are built into build/bundles/ (git-ignored), not committed.
 - name: The whole thread of an issue or pull request for the agents (scale thread N; its comments, the reviews and every line comment of a review, oldest first; GET requests only)
   status: functioning
   where: tools/thread.py, scale thread

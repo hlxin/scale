@@ -1,0 +1,18 @@
+# A bundle: the graphs below merged into one (scale graph bundle graphs/bundles/catalysis.yaml, written to
+# build/bundles/catalysis/, git-ignored). Every source once, shared records joined by id with their evidence pooled,
+# each source's records keeping the stewardship of the graph they came from, the rights files joined.
+graph:
+  graph_id: scale:commons/graph/catalysis-bundle
+  title: SCALE Catalysis Bundle
+  description: The catalysis commons and the methanol-synthesis graph (literature before 1966) merged into one graph;
+    each source quoted only as far as its rights allow.
+  data_status: research_data
+  domains: [heterogeneous catalysis, thermal catalysis, methanol synthesis]
+  stewardship:
+    access: public
+    contributed_by: [scale:org/scale-researchers]
+    project: scale:project/catalysis-commons
+    note: Merged from the graphs in graphs/ by scale graph bundle.
+graphs:
+  - graphs/catalysis-commons
+  - graphs/methanol-synthesis-pre1966

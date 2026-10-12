@@ -1,0 +1,279 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/10.1098-rspa.1923.0036/characterization/water-soluble-products",
+      "label": "Characterization",
+      "props": {
+        "name": "search for formaldehyde, methyl formate and methyl alcohol in the exit gas",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "10.1098-rspa.1923.0036/p5/2",
+            "quote": "A large volume of the gases emerging from the catalyst has been thoroughly scrubbed through a small quantity of water and the solution carefully examined.",
+            "source": "ex:msyn/source/10.1098-rspa.1923.0036"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "10.1098-rspa.1923.0036/p5/2",
+            "quote": "in no instance was the iodoform test responded to, as would have been the case in presence of traces of formal­dehyde",
+            "source": "ex:msyn/source/10.1098-rspa.1923.0036"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "10.1098-rspa.1923.0036/p5/2",
+            "quote": "careful fractionation through an 8-pear Young-Thomas column revealed no trace of any liquid boiling below 100° C. (methyl formate or methyl alcohol).",
+            "source": "ex:msyn/source/10.1098-rspa.1923.0036"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "10.1098-rspa.1923.0036/p5/3",
+            "quote": "it answers to tests characteristic of formic acid but not to those which would indicate formaldehyde or methyl alcohol.",
+            "source": "ex:msyn/source/10.1098-rspa.1923.0036"
+          }
+        ],
+        "experiment_kind": "physical",
+        "note": "examination of the gases emerging from the nickel catalyst; the conclusion drawn is that no formaldehyde, methyl formate or methyl alcohol is present",
+        "results": {
+          "formaldehyde": {
+            "status": "present",
+            "as_reported": "in no instance was the iodoform test responded to",
+            "text_value": "iodoform test not responded to"
+          },
+          "low_boiling_liquid": {
+            "status": "present",
+            "as_reported": "revealed no trace of any liquid boiling below 100° C. (methyl formate or methyl alcohol)",
+            "text_value": "no liquid boiling below 100 °C (methyl formate or methyl alcohol)"
+          },
+          "reducing_action": {
+            "status": "present",
+            "as_reported": "The solution exerts some slight reducing action on ammoniacal silver nitrate and on mercuric chloride",
+            "text_value": "slight reducing action on ammoniacal silver nitrate and mercuric chloride; answers to tests of formic acid"
+          }
+        },
+        "technique": "exit gas scrubbed through water; iodoform test; fractionation through an 8-pear Young-Thomas column"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1098-rspa.1923.0036/reaction/co-h2-to-co2-ch4",
+      "label": "Reaction",
+      "props": {
+        "name": "2CO + 2H2 = CO2 + CH4",
+        "description": "The action the authors report for equal volumes of CO and H2 over nickel below 300 °C.",
+        "equation": "2 CO + 2 H2 -> CO2 + CH4",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1098-rspa.1923.0036/p3/3",
+            "quote": "the only action being one which has apparently hitherto escaped observation, namely, 2CO+2H2 = C02+CH4.",
+            "source": "ex:msyn/source/10.1098-rspa.1923.0036"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/source/10.1098-rspa.1923.0036",
+      "label": "Source",
+      "props": {
+        "name": "A study of catalytic actions at solid surfaces. X. -The interaction of carbon monoxide and hydrogen as conditioned by nickel at relatively low temperatures. -A practical synthesis of methane",
+        "kind": "article",
+        "description": "Published 1923 (publication year (bibliography)); in scope: before the 1966-01-01 cutoff. Text: 10 pages text_layer. Text not redistributed.",
+        "doi": "10.1098/rspa.1923.0036",
+        "licence": "no verified publisher licence; short excerpts quoted as evidence under fair use",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "A study of catalytic actions at solid surfaces. X. -The interaction of carbon monoxide and hydrogen as conditioned by nickel at relatively low temperatures. -A practical synthesis of methane",
+        "url": "https://doi.org/10.1098/rspa.1923.0036",
+        "venue": "Proceedings of the Royal Society of London Series A Containing Papers of a Mathematical and Physical Character",
+        "year": 1923
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/10.1098-rspa.1923.0036/characterization/water-soluble-products/reported-in/10.1098-rspa.1923.0036",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1098-rspa.1923.0036/characterization/water-soluble-products",
+      "target": "ex:msyn/source/10.1098-rspa.1923.0036"
+    },
+    {
+      "id": "ex:msyn/10.1098-rspa.1923.0036/link/1",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1098-rspa.1923.0036/p3/3",
+            "quote": "the only action being one which has apparently hitherto escaped observation, namely, 2CO+2H2 = C02+CH4.",
+            "source": "ex:msyn/source/10.1098-rspa.1923.0036"
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1098-rspa.1923.0036/reaction/co-h2-to-co2-ch4",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/10.1098-rspa.1923.0036/link/124",
+      "type": "EXAMINES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "10.1098-rspa.1923.0036/p5/2",
+            "quote": "Against this must be set the fact that we have been unable to detect the slightest trace of either of these compounds.",
+            "source": "ex:msyn/source/10.1098-rspa.1923.0036"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1098-rspa.1923.0036/characterization/water-soluble-products",
+      "target": "ex:msyn/10.1098-rspa.1923.0036/reaction/co-h2-to-co2-ch4"
+    },
+    {
+      "id": "ex:msyn/10.1098-rspa.1923.0036/link/126",
+      "type": "PROCEEDS_VIA",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1098-rspa.1923.0036/p4/3",
+            "quote": "(i) CO + h 2o = c o 2 + h 2,",
+            "source": "ex:msyn/source/10.1098-rspa.1923.0036"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1098-rspa.1923.0036/reaction/co-h2-to-co2-ch4",
+      "target": "ex:msyn/reaction/water-gas-shift"
+    },
+    {
+      "id": "ex:msyn/10.1098-rspa.1923.0036/link/127",
+      "type": "PROCEEDS_VIA",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1098-rspa.1923.0036/p4/3",
+            "quote": "\\(ii) CO + 2H2 + H 2 = CH4 + H20,",
+            "source": "ex:msyn/source/10.1098-rspa.1923.0036"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1098-rspa.1923.0036/reaction/co-h2-to-co2-ch4",
+      "target": "ex:msyn/reaction/co-methanation"
+    },
+    {
+      "id": "ex:msyn/10.1098-rspa.1923.0036/link/2",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1098-rspa.1923.0036/p3/3",
+            "quote": "the only action being one which has apparently hitherto escaped observation, namely, 2CO+2H2 = C02+CH4.",
+            "source": "ex:msyn/source/10.1098-rspa.1923.0036"
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1098-rspa.1923.0036/reaction/co-h2-to-co2-ch4",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/10.1098-rspa.1923.0036/link/3",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1098-rspa.1923.0036/p3/3",
+            "quote": "the only action being one which has apparently hitherto escaped observation, namely, 2CO+2H2 = C02+CH4.",
+            "source": "ex:msyn/source/10.1098-rspa.1923.0036"
+          }
+        ],
+        "role": "product"
+      },
+      "source": "ex:msyn/10.1098-rspa.1923.0036/reaction/co-h2-to-co2-ch4",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/10.1098-rspa.1923.0036/link/4",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1098-rspa.1923.0036/p3/3",
+            "quote": "the only action being one which has apparently hitherto escaped observation, namely, 2CO+2H2 = C02+CH4.",
+            "source": "ex:msyn/source/10.1098-rspa.1923.0036"
+          }
+        ],
+        "role": "product"
+      },
+      "source": "ex:msyn/10.1098-rspa.1923.0036/reaction/co-h2-to-co2-ch4",
+      "target": "ex:msyn/species/ch4"
+    },
+    {
+      "id": "ex:msyn/10.1098-rspa.1923.0036/reaction/co-h2-to-co2-ch4/reported-in/10.1098-rspa.1923.0036",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1098-rspa.1923.0036/reaction/co-h2-to-co2-ch4",
+      "target": "ex:msyn/source/10.1098-rspa.1923.0036"
+    },
+    {
+      "id": "ex:msyn/source/10.1098-rspa.1923.0036/authored-by/1",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 1,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/10.1098-rspa.1923.0036",
+      "target": "ex:msyn/person/edward-frankland-armstrong"
+    },
+    {
+      "id": "ex:msyn/source/10.1098-rspa.1923.0036/authored-by/2",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 2,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/10.1098-rspa.1923.0036",
+      "target": "ex:msyn/person/t-p-hilditch"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/10.1098-rspa.1923.0036"
+}

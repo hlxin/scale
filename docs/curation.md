@@ -62,6 +62,10 @@ A source without an entry counts as `in_copyright`. For `restricted` and `in_cop
 | one quoted text (`quote`, `transcription`, `second_reading`) | at most 300 characters |
 | distinct quoted characters of one source | at most 4,000, and at most 10 % of `text_chars` when known |
 
+A rights file's `limits: {quote_chars: <n>, source_chars: <n>}`, and a source's own `quote_chars` and `source_chars`,
+only lower these caps; 0 keeps no verbatim text of the source. Every graph in `graphs/` sets both to 0
+([graphs/README.md](../graphs/README.md)).
+
 Read the licence from the copy you read (its first page, the publisher's article page), never from aggregator metadata
 or an open-access colour, and say where in `basis`. Rights follow the text version read (`text_version` on the
 Source). Supporting information belongs to its paper's Source.

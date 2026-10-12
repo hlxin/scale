@@ -184,6 +184,25 @@ def cmd_graph_build(args):
     return 0
 
 
+def cmd_graph_bundle(args):
+    from . import graphparts as gp
+    from .rights import RIGHTS_FILE
+    from .util import write_yaml
+    repo = _repo(args)
+    parts, rights = gp.build_bundle(args.file, repo)
+    doc = gp.build(parts)
+    summary = (f"{len(parts['sources'])} sources, {len(doc['nodes'])} nodes, {len(doc['links'])} links, "
+               f"{len(rights)} rights entries")
+    if args.check:
+        print(f"{args.file}: the graphs merge ({summary})")
+        return 0
+    out = Path(args.out) if args.out else repo / "build" / "bundles" / Path(args.file).stem
+    gp.write_parts(parts, out)
+    write_yaml(out / RIGHTS_FILE, {"sources": rights})
+    print(f"{out}: {summary}; tools read the folder as one graph (scale graph validate {out})")
+    return 0
+
+
 def cmd_graph_export(args):
     from . import pgraph
     if args.to == "kg-bundle":
@@ -1045,6 +1064,10 @@ def build_parser() -> argparse.ArgumentParser:
     sp.add_argument("folder"); sp.add_argument("--out", help="the built graph (default: the folder's one *.graph.json, else <folder>.graph.json)")
     sp.add_argument("--check", action="store_true", help="write nothing; exit 1 unless the parts build and a built copy, "
                     "if there is one, is current")
+    sp = add("bundle", cmd_graph_bundle, "merge the graphs a bundle definition names (graphs/bundles/<name>.yaml) into one "
+             "graph kept as parts, with their rights joined", gr)
+    sp.add_argument("file"); sp.add_argument("--out", help="the bundle's folder (default: build/bundles/<name>/)")
+    sp.add_argument("--check", action="store_true", help="write nothing; exit 1 unless the graphs merge")
     sp = add("export", cmd_graph_export, "export: Neo4j/APOC JSON lines, or a knowledge-graph bundle (--to kg-bundle)", gr)
     sp.add_argument("file"); sp.add_argument("--out"); viewer_opts(sp)
     sp.add_argument("--to", choices=["neo4j", "kg-bundle"], default="neo4j"); sp.add_argument("--spec")

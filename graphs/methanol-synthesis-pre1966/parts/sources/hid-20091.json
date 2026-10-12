@@ -1,0 +1,268 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/hid-20091/claim/stable-oxide-by-honjo-diagram",
+      "label": "Claim",
+      "props": {
+        "name": "From Honjo's diagram (cited), Cu2O would be the stable oxide at about 900 °C in ",
+        "claim_kind": "other",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 104",
+            "note": "quote withheld: sha256:fa3f872c115e0c35669319097f7a68073150e8497d4a249e30529fc646a5d4b6 chars:208",
+            "passage": "hid-20091/p104/1",
+            "source": "ex:msyn/source/hid-20091"
+          }
+        ],
+        "inference_type": "theoretical",
+        "note": "based on a diagram cited from Honjo (ref. 59); not measured on these catalysts",
+        "statement": "From Honjo's diagram (cited), Cu2O would be the stable oxide at about 900 °C in the pressure range used (flame-quenched, furnace-quenched, electrically heated catalysts), and CuO under the low-temperature oxidation conditions (300 °C, 60 cm oxygen)."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20091/hypothesis/all-catalysts-p-type",
+      "label": "Hypothesis",
+      "props": {
+        "name": "All the oxidised copper catalysts are p-type semiconductors, with more cation va",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 106",
+            "note": "quote withheld: sha256:f33c21c26d8fdae72d16ed33d0772c19ecd02df9ddba218289f2570d7b99e3df chars:99",
+            "passage": "hid-20091/p106/1",
+            "source": "ex:msyn/source/hid-20091"
+          }
+        ],
+        "hypothesis_kind": "auxiliary",
+        "hypothesis_status": "proposed",
+        "statement": "All the oxidised copper catalysts are p-type semiconductors, with more cation vacancies and Cu2+ ions the greater the pre-oxidation (supposition from conductivity work of Stone and Smith on oxidised copper films)."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20091/hypothesis/p-type-cu2o-defect-activity",
+      "label": "Hypothesis",
+      "props": {
+        "name": "The activity of the oxidised copper catalysts is due to a p-type semiconducting ",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:431803b739def1410e94f9d18e5842b0f2a044dfb88061e89adacddb94af64f1 chars:115",
+            "passage": "hid-20091/p7/1",
+            "source": "ex:msyn/source/hid-20091"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 110",
+            "note": "quote withheld: sha256:6b904f738713636a40ad6a3cf23d5fdd675d77b828a9bf60a2600e21e23ef986 chars:152",
+            "passage": "hid-20091/p110/1",
+            "source": "ex:msyn/source/hid-20091"
+          }
+        ],
+        "hypothesis_kind": "explanatory",
+        "hypothesis_status": "proposed",
+        "statement": "The activity of the oxidised copper catalysts is due to a p-type semiconducting cuprous oxide defect structure; this is contrary to the opinion that dehydrogenation is facilitated by n-type oxides."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20091/material/copper-oxide-layer",
+      "label": "Material",
+      "props": {
+        "name": "copper oxide formed on the copper (composition not determined)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 45",
+            "note": "quote withheld: sha256:1dfe21366f420494b6e0b8a687ce47301048e4bcb95831b808a3e7db5ea40854 chars:85",
+            "passage": "hid-20091/p45/1",
+            "source": "ex:msyn/source/hid-20091"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 74",
+            "note": "quote withheld: sha256:e9fafd3fce2591cd659647e98bdb2df788a8c19275e68043cab0e12f86f3278a chars:119",
+            "passage": "hid-20091/p74/1",
+            "source": "ex:msyn/source/hid-20091"
+          }
+        ],
+        "material_family": "oxide",
+        "note": "The thesis measures the oxygen taken up (mg) but does not determine the oxide phase; it assumes Cu2O for thickness estimates and proposes defect structures of Cu2O (see the hypotheses)."
+      }
+    },
+    {
+      "id": "ex:msyn/source/hid-20091",
+      "label": "Source",
+      "props": {
+        "name": "Methanol reactions on copper",
+        "kind": "thesis",
+        "description": "Published 1962 (publication year (bibliography)); in scope: before the 1966-01-01 cutoff. Text: 10 pages ocr, 239 pages text_layer (tesseract 5.5.3 (eng, 300 dpi, 1 column)). Text not redistributed.",
+        "licence": "no verified publisher licence; short excerpts quoted as evidence under fair use",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "Methanol reactions on copper",
+        "venue": "PhD thesis, University of Glasgow (Enlighten)",
+        "year": 1962
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/hid-20091/claim/stable-oxide-by-honjo-diagram/reported-in/hid-20091",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 104"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20091/claim/stable-oxide-by-honjo-diagram",
+      "target": "ex:msyn/source/hid-20091"
+    },
+    {
+      "id": "ex:msyn/hid-20091/hypothesis/all-catalysts-p-type/reported-in/hid-20091",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 106"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20091/hypothesis/all-catalysts-p-type",
+      "target": "ex:msyn/source/hid-20091"
+    },
+    {
+      "id": "ex:msyn/hid-20091/hypothesis/p-type-cu2o-defect-activity/reported-in/hid-20091",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 110",
+          "p. 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20091/hypothesis/p-type-cu2o-defect-activity",
+      "target": "ex:msyn/source/hid-20091"
+    },
+    {
+      "id": "ex:msyn/hid-20091/link/534",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 104",
+            "note": "quote withheld: sha256:fa3f872c115e0c35669319097f7a68073150e8497d4a249e30529fc646a5d4b6 chars:208",
+            "passage": "hid-20091/p104/1",
+            "source": "ex:msyn/source/hid-20091"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20091/claim/stable-oxide-by-honjo-diagram",
+      "target": "ex:msyn/species/cu2o"
+    },
+    {
+      "id": "ex:msyn/hid-20091/link/535",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 104",
+            "note": "quote withheld: sha256:fa3f872c115e0c35669319097f7a68073150e8497d4a249e30529fc646a5d4b6 chars:208",
+            "passage": "hid-20091/p104/1",
+            "source": "ex:msyn/source/hid-20091"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20091/claim/stable-oxide-by-honjo-diagram",
+      "target": "ex:msyn/species/cuo"
+    },
+    {
+      "id": "ex:msyn/hid-20091/link/536",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:431803b739def1410e94f9d18e5842b0f2a044dfb88061e89adacddb94af64f1 chars:115",
+            "passage": "hid-20091/p7/1",
+            "source": "ex:msyn/source/hid-20091"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20091/hypothesis/p-type-cu2o-defect-activity",
+      "target": "ex:msyn/species/cu2o"
+    },
+    {
+      "id": "ex:msyn/hid-20091/link/537",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:431803b739def1410e94f9d18e5842b0f2a044dfb88061e89adacddb94af64f1 chars:115",
+            "passage": "hid-20091/p7/1",
+            "source": "ex:msyn/source/hid-20091"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20091/hypothesis/p-type-cu2o-defect-activity",
+      "target": "ex:msyn/hid-20091/material/copper-oxide-layer"
+    },
+    {
+      "id": "ex:msyn/hid-20091/link/538",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 106",
+            "note": "quote withheld: sha256:f33c21c26d8fdae72d16ed33d0772c19ecd02df9ddba218289f2570d7b99e3df chars:99",
+            "passage": "hid-20091/p106/1",
+            "source": "ex:msyn/source/hid-20091"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20091/hypothesis/all-catalysts-p-type",
+      "target": "ex:msyn/hid-20091/material/copper-oxide-layer"
+    },
+    {
+      "id": "ex:msyn/hid-20091/material/copper-oxide-layer/reported-in/hid-20091",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 45",
+          "p. 74"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20091/material/copper-oxide-layer",
+      "target": "ex:msyn/source/hid-20091"
+    },
+    {
+      "id": "ex:msyn/source/hid-20091/authored-by/1",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 1,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/hid-20091",
+      "target": "ex:msyn/person/alexander-lawson"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/hid-20091"
+}

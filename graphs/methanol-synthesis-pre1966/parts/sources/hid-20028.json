@@ -1,0 +1,3895 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/hid-20028/catalyst/zinc-chromate",
+      "label": "Catalyst",
+      "props": {
+        "name": "zinc chromate methanol catalyst (Oppau)",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 11",
+            "note": "OCR: 'Cro0z' = Cr2O3, 'Zn0' = ZnO, 'H20' = H2O; quote withheld: sha256:9d7892e954445a79a3b924020c6aaedc3feb177ff6e3bd3b95dec23d93e680f2 chars:147",
+            "passage": "hid-20028/p11/4",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "generality": "kind",
+        "nominal_formula": "26–30% Cr2O3, 59–64% ZnO, 1–1.5% graphite, 9–10% H2O (before reduction)"
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20028/claim/activated-carbon-removes-poisons",
+      "label": "Claim",
+      "props": {
+        "name": "activated carbon removes COS and iron carbonyl at room temperature",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:02ac054472b83653b0b05d3dd039ad7fc828db013100e993093a571214cc8944 chars:119",
+            "passage": "hid-20028/p7/2",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:ec9f35f4d357978a43262800dc2ddbd6e480c7c35f409acd49148f99ebfeb515 chars:221",
+            "passage": "hid-20028/p7/2",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "inference_type": "observational",
+        "statement": "Passing the make-up gas through activated carbon removes catalyst poisons such as carbon oxysulfide and iron carbonyl at room temperature; this requires injecting about 0.5 g ammonia per m3 and oxygen slightly above the stoichiometric amount for oxidizing the sulfur."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20028/claim/bromine-number",
+      "label": "Claim",
+      "props": {
+        "name": "low bromine number indicates good raw methanol",
+        "claim_kind": "data_quality",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 10",
+            "note": "quote withheld: sha256:fcd4965e2d41603477d83336abaa9b575914a9d63520275dd605891e770be46c chars:110",
+            "passage": "hid-20028/p10/4",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 11",
+            "note": "quote withheld: sha256:962d13d8b0948ed211374a1c73df3bbb2ded4c0aba18831adf5fe211627ff2b2 chars:109",
+            "passage": "hid-20028/p11/1",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "statement": "According to the operators the bromine number of the raw methanol should be as low as possible; a high number indicates unsaturated alcohols and ketones; the upper limit is 5 to 7, good product 3 and excellent 1."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20028/claim/catalyst-life",
+      "label": "Claim",
+      "props": {
+        "name": "catalyst life 6 months to 1 year; spent charge largely pulverized",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:0528c417e5cca3be7b2850736fc795554a64afd31dde409a92fe5c67f04cd5fc chars:108",
+            "passage": "hid-20028/p12/3",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:0ed4d90c97eeb2ab21511bb830d5f3817d8ef9ae57b685b74bc585dae708996e chars:87",
+            "passage": "hid-20028/p12/3",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "inference_type": "observational",
+        "statement": "The normal catalyst life is said to be 6 months to 1 year; about 60–70% of a spent charge is found pulverized, and the catalyst is changed when the converter pressure drop reaches about 20 atm."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20028/claim/co-below-20",
+      "label": "Claim",
+      "props": {
+        "name": "converter inlet CO must be below 20% to avoid higher alcohols",
+        "claim_kind": "causal",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 10",
+            "note": "quote withheld: sha256:cc9bbd5883a6c16251b5afe8648ab091061dabecfaf8af2222976ed94f074215 chars:157",
+            "passage": "hid-20028/p10/2",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "inference_type": "observational",
+        "statement": "Plant experience indicates that the CO content of the gas entering the converters must be less than 20% to prevent formation of appreciable quantities of higher alcohols."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20028/claim/constant-pressure-drop",
+      "label": "Claim",
+      "props": {
+        "name": "constant converter pressure drop is important",
+        "claim_kind": "causal",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 10",
+            "note": "quote withheld: sha256:1bfc0b2651a882c8bd53cd8f742d1b41c863b42c25e5908a40a1a75dd8d0d05a chars:206",
+            "passage": "hid-20028/p10/3",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 10",
+            "note": "quote withheld: sha256:cbbd3d6153d40826e48c71368ebcc488f246b81adce1ba6466ee7516b099368a chars:127",
+            "passage": "hid-20028/p10/3",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "statement": "It is very important to maintain a constant pressure drop across the converter, since a sudden variation of even a few atmospheres increases the undesirable components of the raw methanol; as the catalyst ages the pressure drop is increased very gradually with the circulator by-pass valve to maintain production."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20028/claim/dme-side-reaction",
+      "label": "Claim",
+      "props": {
+        "name": "dimethyl ether forms as an undesirable side reaction",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "OCR of 2 CH3OH -> (CH3)2O + H2O; quote withheld: sha256:2402033f1fb79cb76ff2e139ee485dfe0f190b3626dc95278caf4f8a04d43324 chars:102",
+            "passage": "hid-20028/p6/2",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "inference_type": "observational",
+        "statement": "An undesirable side reaction giving small amounts of dimethyl ether also takes place (2 CH3OH → (CH3)2O + H2O)."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20028/claim/graphite-below-30",
+      "label": "Claim",
+      "props": {
+        "name": "graphite must be added below 30 °C",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:fc2f1a28b2d1464092d92a2affd79cb9e285833874f1a5e023cc0bcb60a3a801 chars:76",
+            "passage": "hid-20028/p12/2",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:308ec25fb146d91e9115abc159c0ee2fe842e60a9279bb75f2485d728c46eec8 chars:71",
+            "passage": "hid-20028/p12/2",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "statement": "In the new Oppau method, the temperature must not exceed 30 °C when graphite is added, otherwise lumps are formed; the method has not yet been used on a large scale."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20028/claim/modern-plants",
+      "label": "Claim",
+      "props": {
+        "name": "modern plants use a different catalyst and about 3 times the space velocity of isobutyl synthesis",
+        "claim_kind": "comparison",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:5490b54016cdb6aaf69880ee72b5976364710df792ec911e975c73d2b2087c9f chars:176",
+            "passage": "hid-20028/p6/2",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:9ce7a6dcbf9aae58f8a022cc8eda55828d8d4a77ba6143a926e16a0783fce785 chars:102",
+            "passage": "hid-20028/p6/2",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "note": "neither catalyst is identified",
+        "statement": "According to interrogated personnel, the modern methanol plants built elsewhere by I.G. are very similar to the new isobutyl plant at Oppau, but a different catalyst is used and the space velocity for methanol synthesis is about 3 times that for isobutyl synthesis."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20028/claim/rapid-chromic-addition",
+      "label": "Claim",
+      "props": {
+        "name": "chromic oxide must be added rapidly (thixotropic mixture)",
+        "claim_kind": "causal",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:8d66bc1113104df70b7afd0f7d2c05f637772991d59f62b6d3d0e04ebf605b33 chars:155",
+            "passage": "hid-20028/p12/1",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "statement": "According to Leuna, the chromic oxide must be added very rapidly because the zinc chromate mixture is thixotropic and a non-homogeneous product may result, giving a poor-quality catalyst."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20028/claim/similar-to-us",
+      "label": "Claim",
+      "props": {
+        "name": "Oppau process generally similar to that used in the United States",
+        "claim_kind": "comparison",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:bb2ea325f38aa48335261efc658664b911738a9d6f1ceb519ce886c0fb5686af chars:275",
+            "passage": "hid-20028/p5/1",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "statement": "In general the Oppau methanol synthesis process is similar to that used in the United States, but certain process and design features and improvements in newer German plants are of particular interest."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20028/feed/converter-inlet-gas",
+      "label": "Feed",
+      "props": {
+        "name": "converter inlet gas (typical, Oppau loop)",
+        "description": "Make-up gas mixed with recycled loop gas; circulation about 8 times the make-up.",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 10",
+            "note": "OCR: 'Hp' = H2, '005' = CO2; quote withheld: sha256:6487ef15e8947c96429107d031d83b8797a9d62f28bc3061c15806407f702bb5 chars:107",
+            "passage": "hid-20028/p10/2",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20028/feed/fresh-make-up-gas",
+      "label": "Feed",
+      "props": {
+        "name": "fresh make-up gas (after purification, about 260 atm)",
+        "description": "Passed through activated carbon at room temperature (removing carbon oxysulfide and iron carbonyl), with about 0.5 g ammonia per m3 and oxygen slightly over the stoichiometric amount for oxidizing the sulfur injected; maximum sulfur content 1 to 2 mg per m3.",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "OCR: 'Ho' = H2, 'CHy' = CH4; the line '0.58 we' is illegible (probably a CO2 or inert content); quote withheld: sha256:08c8ab5c1df2631354a72149ebb40d3810ed84e2e1b5efd77ab797fdfe7ed716 chars:136",
+            "passage": "hid-20028/p7/1",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:ea0d489985999bcf9914aa34481bae48ca7eed49d238c2f58f62c87c7b89effc chars:102",
+            "passage": "hid-20028/p7/1",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 7, Process Description, fresh make-up gas",
+            "note": "transcription withheld: sha256:41d411de0a1853fe8fb021131dc965bdf8d96fe8254bb183bab2eaa50f181981 chars:91; second_reading withheld: sha256:ea21a13eff2c032497b713db8822bb017c10ecfe91cf7f4ef407a8267eb9d5ab chars:97",
+            "reading": "vision_ocr",
+            "region": [
+              0.17,
+              0.31,
+              0.78,
+              0.4
+            ],
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "ratios": {
+          "h2_co_ratio": {
+            "status": "present",
+            "as_reported": "Ratio H2/CO = 2.2 to 2.4",
+            "lower": 2.2,
+            "note": "printed 'Ratio H2/CO = 2.2 to 2.4' (read from the page image; the OCR text layer loses the fraction)",
+            "unit": "mol/mol",
+            "upper": 2.4
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20028/feed/raw-water-gas",
+      "label": "Feed",
+      "props": {
+        "name": "raw water gas (Oppau)",
+        "description": "Water gas; sulfur removed by activated carbon at low pressure; a portion sent through a low-pressure CO conversion system to adjust the H2:CO ratio; compressed to 25–27 atm, scrubbed with water for CO2 removal, compressed to about 260 atm to give the fresh make-up gas.",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "OCR: 'Hp' = H2, '5€ 005' = 5% CO2, 'Np' = N2; quote withheld: sha256:221bca104a8efda636e98b90c2c9667580762e05ec3f6d8bdab2e8878b1901d9 chars:125",
+            "passage": "hid-20028/p6/3",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20028/material/m-kohle",
+      "label": "Material",
+      "props": {
+        "name": "activated carbon (M Kohle) for feed purification",
+        "description": "Prepared from Ruhr anthracite (1 to 10 mm): a charge of 400 liters ignited in a brick-lined furnace with air, water gas and steam for temperature control; 920 °C (not above 950 °C) for 3 hours; bulk density 700 → 900 → 550 g/l; screened to 7–10 mm.",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 11",
+            "note": "quote withheld: sha256:82314d8351c27a83ea29dd358cca83185a9d6cf1a29d46993a741235db761d8d chars:171",
+            "passage": "hid-20028/p11/3",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 11",
+            "note": "quote withheld: sha256:49a41f98ee4f5178c354cdc5b8e86a681c347cf7edf885fc9d48f25d04ad2a30 chars:60",
+            "passage": "hid-20028/p11/3",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 11",
+            "note": "quote withheld: sha256:b8ce603999f0503794574e36008796463bb46f2edadd53d01a3781129ae5cfef chars:167",
+            "passage": "hid-20028/p11/3",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 11",
+            "note": "quote withheld: sha256:3e09ee0bdd2ce74e67f60d8aec5f82e4d2295007727e203642e6ccdf3d74fa4c chars:86",
+            "passage": "hid-20028/p11/3",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:f0d7827ba802f38336af9cce56c1fb92ff6fc32b3fff271268ee0c2ad77aa871 chars:104",
+            "passage": "hid-20028/p8/1",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 11, Catalysts, activated carbon",
+            "note": "transcription withheld: sha256:293e5ca48a50880da00d3ad3a19b5fe65f30c5b2dbaba1726ec2365895ec9551 chars:120",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.585,
+              0.84,
+              0.62
+            ],
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "material_family": "carbon",
+        "properties": {
+          "anthracite_charge": {
+            "status": "present",
+            "as_reported": "400 liters of this material are charged",
+            "note": "read from the page image (OCR ''oO liters')",
+            "unit": "l",
+            "value": 400
+          },
+          "final_bulk_density": {
+            "status": "present",
+            "as_reported": "550 gm/liter",
+            "unit": "g/l",
+            "value": 550
+          },
+          "preparation_duration": {
+            "status": "present",
+            "as_reported": "3 hours",
+            "unit": "h",
+            "value": 3
+          },
+          "preparation_temperature": {
+            "status": "present",
+            "as_reported": "920°C, (not to exceed 950°C)",
+            "unit": "°C",
+            "value": 920
+          },
+          "size": {
+            "status": "present",
+            "as_reported": "7 to 10 mm.",
+            "lower": 7,
+            "unit": "mm",
+            "upper": 10
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20028/preparation/leuna",
+      "label": "Preparation",
+      "props": {
+        "name": "Leuna preparation of the zinc chromate catalyst",
+        "conditions": {
+          "chromic_oxide": {
+            "status": "present",
+            "as_reported": "50 kg.",
+            "unit": "kg",
+            "value": 50
+          },
+          "water": {
+            "status": "present",
+            "as_reported": "240 liters",
+            "unit": "l",
+            "value": 240
+          },
+          "water_removed": {
+            "status": "present",
+            "as_reported": "Approximately 150 liters",
+            "qualifier": "approximate",
+            "unit": "l",
+            "value": 150
+          },
+          "zinc_oxide": {
+            "status": "present",
+            "as_reported": "100 kg.",
+            "unit": "kg",
+            "value": 100
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:aadd83ee35791665586672a5984645191d2a892e606b61b3a9ff5c5764f5a43c chars:53",
+            "passage": "hid-20028/p12/1",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:45c2ca761d5d6971aa03fede3a6a9d1df7400d590aa9ece0dc005e075369f97e chars:114",
+            "passage": "hid-20028/p12/1",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:8d66bc1113104df70b7afd0f7d2c05f637772991d59f62b6d3d0e04ebf605b33 chars:155",
+            "passage": "hid-20028/p12/1",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:0eaf3093dcde4a1e0faa9c10f4b927adcffbc42c1e824374592ff367e9594075 chars:153",
+            "passage": "hid-20028/p12/1",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:1b585236ac12b18ad2d2cc68b9a5f57a3b4d8062a72f4778eb1807203c44c228 chars:69",
+            "passage": "hid-20028/p12/1",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "method": "suspension of zinc oxide in water, rapid addition of chromic oxide, pressing, drying, milling, tabletting with graphite",
+        "procedure_status": "completed",
+        "steps": [
+          "100 kg of finely powdered zinc oxide mixed with 240 liters of water to a suspension",
+          "50 kg of chromic oxide added very rapidly (the zinc chromate mixture is thixotropic)",
+          "about 150 liters of the water removed in a press",
+          "dried in a shelf dryer with air at 110 °C",
+          "pulverised in a mill, mixed with graphite, tabletted",
+          "cylinders 10 mm diameter x 10 mm high"
+        ],
+        "temperature": {
+          "status": "present",
+          "as_reported": "at 110°C",
+          "note": "drying temperature",
+          "unit": "°C",
+          "value": 110
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20028/preparation/oppau-new",
+      "label": "Preparation",
+      "props": {
+        "name": "new simpler Oppau preparation of the zinc chromate catalyst",
+        "conditions": {
+          "chromic_oxide": {
+            "status": "present",
+            "as_reported": "40 kg. of pure crystalline chromic oxide",
+            "note": "read from the page image (OCR 'IT) kg.')",
+            "unit": "kg",
+            "value": 40
+          },
+          "graphite": {
+            "status": "present",
+            "as_reported": "2 kg.",
+            "unit": "kg",
+            "value": 2
+          },
+          "max_temperature_on_graphite_addition": {
+            "status": "present",
+            "as_reported": "must not exceed 30°C.",
+            "bound": "upper",
+            "unit": "°C",
+            "value": 30
+          },
+          "water": {
+            "status": "present",
+            "as_reported": "40 liters",
+            "unit": "l",
+            "value": 40
+          },
+          "zinc_oxide": {
+            "status": "present",
+            "as_reported": "100 kg.",
+            "unit": "kg",
+            "value": 100
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "the chromic-oxide amount is illegible in the OCR ('IT) kg.'); quote withheld: sha256:d50180275fd9fbef0c460efa8ed23a1534d03ffcddf698f084f6e9025ece5f9b chars:230",
+            "passage": "hid-20028/p12/2",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:fc2f1a28b2d1464092d92a2affd79cb9e285833874f1a5e023cc0bcb60a3a801 chars:76",
+            "passage": "hid-20028/p12/2",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:7c680cfa0643f9b543ac3f1850a884655b505ef88a5309c38460c6e82a394fdd chars:113",
+            "passage": "hid-20028/p12/2",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 12, Catalysts, new Oppau preparation",
+            "note": "transcription withheld: sha256:d2bb26d2f7baf6eda5b6f4e9ab08609c87c738e70e997488517fa0e01e67e3d1 chars:120; second_reading withheld: sha256:d2bb26d2f7baf6eda5b6f4e9ab08609c87c738e70e997488517fa0e01e67e3d1 chars:120",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.395,
+              0.95,
+              0.44
+            ],
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "method": "dry mixing of zinc oxide and chromic oxide with water and graphite, pelleting",
+        "procedure_status": "completed",
+        "steps": [
+          "100 kg pure powdered zinc oxide and pure crystalline chromic oxide (40 kg) mixed in a stainless steel (18-8) mixer",
+          "40 liters of water and 2 kg of graphite added; temperature must not exceed 30 °C when graphite is added",
+          "sent to the pelleting machine"
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20028/reaction/higher-alcohol-formation",
+      "label": "Reaction",
+      "props": {
+        "name": "formation of higher alcohols",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 10",
+            "note": "quote withheld: sha256:c2bdd5bde78556c3f47b37664ce8d5e16184f168347d53a509f826c3f730e4f9 chars:68",
+            "passage": "hid-20028/p10/2",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "generality": "kind",
+        "note": "no equation given"
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20028/reactor/new-type-converter",
+      "label": "Reactor",
+      "props": {
+        "name": "new-type 6-bed methanol converter (e.g. Hydebreck plant)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 9",
+            "note": "quote withheld: sha256:20d3e346e20ddf9b3d640f5650fa1d737a38856b6323b670c7a70f54d65f3709 chars:131",
+            "passage": "hid-20028/p9/3",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 9",
+            "note": "quote withheld: sha256:7c9819d35808faecdf7a6fa851384b0da27bef361ce58246e3f0ae371f00e647 chars:164",
+            "passage": "hid-20028/p9/4",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 9",
+            "note": "spans the OCR line break on p. 9; quote withheld: sha256:91bac19d6faae2833493586b8fe230ebdfdd2e551386b083dda5261e01bb0314 chars:202",
+            "passage": "hid-20028/p9/4",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "instrument_kind": "reactor",
+        "reactor_kind": "fixed_bed",
+        "specifications": {
+          "catalyst_beds": {
+            "status": "present",
+            "as_reported": "6 catalyst beds",
+            "unit": "beds",
+            "value": 6
+          },
+          "maximum_capacity": {
+            "status": "present",
+            "as_reported": "possible maximum cf 150 tons per day at 300 atm. pressure",
+            "unit": "t/day",
+            "value": 150
+          },
+          "normal_capacity": {
+            "status": "present",
+            "as_reported": "110 tons of raw methanol per day",
+            "unit": "t raw methanol/day",
+            "value": 110
+          }
+        },
+        "volume": {
+          "status": "present",
+          "as_reported": "approximately 3 cu. m. of catalyst",
+          "note": "catalyst charge",
+          "qualifier": "approximate",
+          "unit": "cu. m",
+          "value": 3
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20028/reactor/oppau-converter",
+      "label": "Reactor",
+      "props": {
+        "name": "Oppau methanol converter (old-type catalyst basket)",
+        "description": "Steel-forging shell 800 mm I.D. x 12 m long with 10 mm special-steel liner and 2 mm brass liner; gas enters at the bottom, rises through a central tube with a heating element and flows down through a basket completely filled with catalyst; cold gas injected through five perforated pipe rings.",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 9",
+            "note": "quote withheld: sha256:d4f43930c3bfd6924982d64cbfe1aebc396e0a4cecb073c5887584c435f1c354 chars:61",
+            "passage": "hid-20028/p9/2",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 9",
+            "note": "quote withheld: sha256:ba137c31f4aecbfa1a3d50eb1375445adf477a72ec7d2e4ce66054c39c6a71c3 chars:169",
+            "passage": "hid-20028/p9/3",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 9",
+            "note": "quote withheld: sha256:fb3670c8f957936ae9d64525bd33f68503ebefb0489b42aaa0730454987e5265 chars:133",
+            "passage": "hid-20028/p9/3",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 9",
+            "note": "quote withheld: sha256:f8a578d31b0684828302d4b3fafb305d40f012d6d18fdb18d1385a9a7573679f chars:158",
+            "passage": "hid-20028/p9/3",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "instrument_kind": "reactor",
+        "reactor_kind": "fixed_bed",
+        "specifications": {
+          "design_pressure": {
+            "status": "present",
+            "as_reported": "maximum pressure of 325 atm.",
+            "unit": "atm",
+            "value": 325
+          },
+          "inside_diameter": {
+            "status": "present",
+            "as_reported": "800 mm. I.D.",
+            "unit": "mm",
+            "value": 800
+          },
+          "length": {
+            "status": "present",
+            "as_reported": "12 n. long",
+            "note": "OCR 'n.' = m.",
+            "unit": "m",
+            "value": 12
+          },
+          "rated_capacity": {
+            "status": "present",
+            "as_reported": "90 to’ 100 tons per day at 260 atm. pressure",
+            "lower": 90,
+            "unit": "t/day",
+            "upper": 100
+          }
+        },
+        "volume": {
+          "status": "present",
+          "as_reported": "approximately 2.6 to 2.7 cu. m. of catalyst",
+          "lower": 2.6,
+          "note": "catalyst charge",
+          "qualifier": "approximate",
+          "unit": "cu. m",
+          "upper": 2.7
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20028/sample/new-type-converter-charge",
+      "label": "CatalystSample",
+      "props": {
+        "name": "catalyst charge of a new-type (6-bed) converter",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 9",
+            "note": "spans the OCR line break on p. 9; quote withheld: sha256:91bac19d6faae2833493586b8fe230ebdfdd2e551386b083dda5261e01bb0314 chars:202",
+            "passage": "hid-20028/p9/4",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "note": "the report does not say which catalyst or preparation is used in the newer plants; modern plants are said to use 'a different catalyst' from isobutyl synthesis",
+        "preparation_status": "not_reported",
+        "sample_kind": "reactor_charge"
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20028/sample/oppau-new-method-pellets",
+      "label": "CatalystSample",
+      "props": {
+        "name": "pellets made by the new Oppau method",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:7c680cfa0643f9b543ac3f1850a884655b505ef88a5309c38460c6e82a394fdd chars:113",
+            "passage": "hid-20028/p12/2",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "preparation_status": "prepared",
+        "sample_kind": "pellet"
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20028/sample/oppau-old-converter-charge",
+      "label": "CatalystSample",
+      "props": {
+        "name": "zinc chromate charge of an Oppau (old-type) converter",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 9",
+            "note": "quote withheld: sha256:f8a578d31b0684828302d4b3fafb305d40f012d6d18fdb18d1385a9a7573679f chars:158",
+            "passage": "hid-20028/p9/3",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 11",
+            "note": "OCR: 'Cro0z' = Cr2O3, 'Zn0' = ZnO, 'H20' = H2O; quote withheld: sha256:9d7892e954445a79a3b924020c6aaedc3feb177ff6e3bd3b95dec23d93e680f2 chars:147",
+            "passage": "hid-20028/p11/4",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "note": "the report says the catalyst is prepared at Leuna by the method described",
+        "preparation_status": "prepared",
+        "sample_kind": "reactor_charge"
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20028/species/chromic-oxide",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "chromic oxide (as named in the preparation)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:45c2ca761d5d6971aa03fede3a6a9d1df7400d590aa9ece0dc005e075369f97e chars:114",
+            "passage": "hid-20028/p12/1",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "note": "the preparation names 'chromic oxide' / 'pure crystalline chromic oxide'; its formula is not given"
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20028/species/graphite",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "graphite",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 11",
+            "note": "OCR: 'Cro0z' = Cr2O3, 'Zn0' = ZnO, 'H20' = H2O; quote withheld: sha256:9d7892e954445a79a3b924020c6aaedc3feb177ff6e3bd3b95dec23d93e680f2 chars:147",
+            "passage": "hid-20028/p11/4",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "formula": "C"
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20028/species/inert-gases",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "inert gases (unspecified)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 10",
+            "note": "OCR: 'Hp' = H2, '005' = CO2; quote withheld: sha256:6487ef15e8947c96429107d031d83b8797a9d62f28bc3061c15806407f702bb5 chars:107",
+            "passage": "hid-20028/p10/2",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20028/species/iron-carbonyl",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "iron carbonyl",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:02ac054472b83653b0b05d3dd039ad7fc828db013100e993093a571214cc8944 chars:119",
+            "passage": "hid-20028/p7/2",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "note": "named only as 'iron carbonyl'"
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20028/test/new-converter-loop",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "synthesis loop with the new-type converter: capacity, conversion per pass and yields",
+        "conversion": {
+          "status": "present",
+          "as_reported": "between 12 and 16% of the amount of CO fed to the converter",
+          "basis": "per pass, of CO fed to the converter",
+          "lower": 12,
+          "unit": "%",
+          "upper": 16
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 11",
+            "note": "quote withheld: sha256:671de9f7bfd4cbe675271196c40c3aff888067b1bb452751e58bc8793b7cbdc7 chars:181",
+            "passage": "hid-20028/p11/1",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 11",
+            "note": "OCR 'Ho' = H2; quote withheld: sha256:7c69067ecafceff93bf3f2ca672286f150afd72a0afaac3d1cf2a1d17f4efdd2 chars:145",
+            "passage": "hid-20028/p11/1",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "manipulation": "observational",
+        "note": "the section does not restate temperature or pressure; the new-type converter is rated 110 t/d normally and up to 150 t/d at 300 atm",
+        "pressure": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source"
+        },
+        "production_rate": {
+          "status": "present",
+          "as_reported": "normal capacity of 110 tons of raw methanol per day",
+          "unit": "t raw methanol/day",
+          "value": 110
+        },
+        "results": {
+          "yield_based_on_h2": {
+            "status": "present",
+            "as_reported": "approximately 62%",
+            "note": "methanol in raw product based on H2 fed into the system",
+            "qualifier": "approximate",
+            "unit": "%",
+            "value": 62
+          }
+        },
+        "temperature": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source"
+        },
+        "temperature_measured_at": "not_reported",
+        "test_kind": "activity",
+        "test_label": "Production capacity and yields (section c)",
+        "yield": {
+          "status": "present",
+          "as_reported": "approximately 72%",
+          "basis": "methanol in raw product, based on CO fed into the system",
+          "qualifier": "approximate",
+          "unit": "%",
+          "value": 72
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20028/test/oppau-loop-operation",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Oppau methanol synthesis loop, normal operation (old-type converter)",
+        "conditions": {
+          "fig1_converter_bottom_line_pressure": {
+            "status": "present",
+            "as_reported": "250 ATM",
+            "note": "Fig. 1 label on the same line",
+            "unit": "atm",
+            "value": 250
+          },
+          "fig1_converter_bottom_line_temperature": {
+            "status": "present",
+            "as_reported": "380° C",
+            "note": "label printed on the Fig. 1 flow diagram, on the line from the bottom of the converter to the interchanger",
+            "unit": "°C",
+            "value": 380
+          },
+          "fig1_gas_to_converter_pressure": {
+            "status": "present",
+            "as_reported": "260 ATM",
+            "note": "Fig. 1 label on the same line",
+            "unit": "atm",
+            "value": 260
+          },
+          "fig1_gas_to_converter_temperature": {
+            "status": "present",
+            "as_reported": "330-340°C",
+            "lower": 330,
+            "note": "label printed on the Fig. 1 flow diagram, on the line from the starting heater to the top of the converter; the diagram does not say which converter stream this is in words",
+            "unit": "°C",
+            "upper": 340
+          }
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:5c5fa84d47f0e4fbb5aedcb3180aa167998a5f8ac8d17925ffe94d741475989b chars:118",
+            "passage": "hid-20028/p6/1",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:14332c24dfdcefca7c776f03646ef9e8a129ab27ab8dfb698471bbfeccc3a2c3 chars:114",
+            "passage": "hid-20028/p7/1",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 10",
+            "note": "quote withheld: sha256:4dabe06a27f9c20160967fcff82a926461644da72f358e918bc2ccf35b3750f1 chars:68",
+            "passage": "hid-20028/p10/3",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 10",
+            "note": "OCR: 'Hp' = H2, '005' = CO2; quote withheld: sha256:6487ef15e8947c96429107d031d83b8797a9d62f28bc3061c15806407f702bb5 chars:107",
+            "passage": "hid-20028/p10/2",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 10",
+            "note": "quote withheld: sha256:f42147115125f0378bb5fe1f10056a1706f24947441b16b2d3cdf28304b025b4 chars:139",
+            "passage": "hid-20028/p10/3",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 10",
+            "note": "OCR: '(CHz)s0' = (CH3)2O, 'Hp0' = H2O, 'CHzOH' = CH3OH; quote withheld: sha256:65485cc83f7d4d10296e164b3eaca9e9ce35034dc6106e204e60cb587b2d1ebe chars:142",
+            "passage": "hid-20028/p10/4",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 11",
+            "note": "quote withheld: sha256:eab3e6078e2dd079848770fcff18223dc28089dabed236810de4c6c99c99a453 chars:220",
+            "passage": "hid-20028/p11/1",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:0528c417e5cca3be7b2850736fc795554a64afd31dde409a92fe5c67f04cd5fc chars:108",
+            "passage": "hid-20028/p12/3",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 11",
+            "note": "quote withheld: sha256:f1c12adda816740b13a48d4b4e9fdd3de04e873f85fa98ac81191b7363e8a28e chars:176",
+            "passage": "hid-20028/p11/2",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "figure",
+            "agreement": "no_ocr",
+            "locator": "p. 20, Fig. 1, label on the line from the starting heater to the top of the converter",
+            "note": "transcription withheld: sha256:e007f71760e7fe583fd9a759fa56c8ff1f0e3a38fa91c0b7120ebd822515651c chars:14; second_reading withheld: sha256:f60384e97cc51f57e8c8e1d5a4f2fd9ff4946a437d98c236acdd58a084130ec9 chars:106",
+            "reading": "vision_ocr",
+            "region": [
+              0.325,
+              0.155,
+              0.36,
+              0.195
+            ],
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "figure",
+            "agreement": "no_ocr",
+            "locator": "p. 20, Fig. 1, label on the line from the bottom of the converter to the interchanger",
+            "note": "second_reading withheld: sha256:e6e285da87e111a868b3942356e8af3ec778c465a7cc1af13615cde56494c50c chars:163; transcription withheld: sha256:e094288c3f8720f8e157b49365ffa2d3b586ee8743436d63b009735ec73eb740 chars:11",
+            "reading": "vision_ocr",
+            "region": [
+              0.555,
+              0.17,
+              0.585,
+              0.21
+            ],
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 11, Utilities",
+            "note": "transcription withheld: sha256:dd14a238b4d45e6928ac27b15c85ca592e8be970a70057889d35ec5f967b5045 chars:76",
+            "reading": "vision_ocr",
+            "region": [
+              0.18,
+              0.455,
+              0.8,
+              0.52
+            ],
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "running",
+        "flow_rate": {
+          "status": "present",
+          "as_reported": "approximately 100,000 cu. m. per hovr",
+          "note": "circulation rate, about 8 times the make-up",
+          "qualifier": "approximate",
+          "unit": "cu. m. per hour",
+          "value": 100000
+        },
+        "heating_mode": "self_heating",
+        "lifetime": {
+          "status": "present",
+          "as_reported": "from 6 months to l year",
+          "lower": 6,
+          "note": "normal catalyst life, 'said to be'; OCR 'l year' = 1 year",
+          "unit": "months",
+          "upper": 12
+        },
+        "manipulation": "observational",
+        "note": "plant operating data reported from interrogation of personnel; the catalyst charge is changed when the pressure drop reaches about 20 atm",
+        "pressure": {
+          "status": "present",
+          "as_reported": "250 to 260 atm",
+          "lower": 250,
+          "unit": "atm",
+          "upper": 260
+        },
+        "production_rate": {
+          "status": "present",
+          "as_reported": "Capacity of 90 to 100 tons per day",
+          "lower": 90,
+          "unit": "t/day per loop",
+          "upper": 100
+        },
+        "results": {
+          "bleed": {
+            "status": "present",
+            "as_reported": "about 15% of the fresh feed or 450 cu. m. per ton of raw methanol",
+            "qualifier": "approximate",
+            "unit": "% of fresh feed",
+            "value": 15
+          },
+          "cooling_water": {
+            "status": "present",
+            "as_reported": "130 cu. m.",
+            "unit": "cu. m./t raw methanol",
+            "value": 130
+          },
+          "electricity": {
+            "status": "present",
+            "as_reported": "25 kwh.",
+            "unit": "kwh/t raw methanol",
+            "value": 25
+          },
+          "fresh_feed_per_ton_raw_methanol": {
+            "status": "present",
+            "as_reported": "Approximately 3000 cu. m.",
+            "qualifier": "approximate",
+            "unit": "cu. m./t",
+            "value": 3000
+          },
+          "operating_labor": {
+            "status": "present",
+            "as_reported": "1.54 man hours",
+            "unit": "man hours/t raw methanol",
+            "value": 1.54
+          },
+          "pressure_drop_after_6_months": {
+            "status": "present",
+            "as_reported": "about 20 atm.",
+            "qualifier": "approximate",
+            "unit": "atm",
+            "value": 20
+          },
+          "pressure_drop_new_charge": {
+            "status": "present",
+            "as_reported": "12 to 14 atm.",
+            "lower": 12,
+            "unit": "atm",
+            "upper": 14
+          },
+          "raw_methanol_ch3oh": {
+            "status": "present",
+            "as_reported": "90% CHzOH",
+            "qualifier": "approximate",
+            "unit": "%",
+            "value": 90
+          },
+          "raw_methanol_dimethyl_ether": {
+            "status": "present",
+            "as_reported": "1 to 2% (CHz)s0",
+            "lower": 1,
+            "unit": "%",
+            "upper": 2
+          },
+          "raw_methanol_h2o": {
+            "status": "present",
+            "as_reported": "6 to 8% Hp0",
+            "lower": 6,
+            "unit": "%",
+            "upper": 8
+          },
+          "raw_methanol_higher_alcohols_and_ketones": {
+            "status": "present",
+            "as_reported": "0.8 to 1.0% higher alcohols and ketones",
+            "lower": 0.8,
+            "unit": "%",
+            "upper": 1.0
+          },
+          "spent_charge_pulverized": {
+            "status": "present",
+            "as_reported": "about 60 to 70% is found to be pulverized",
+            "lower": 60,
+            "qualifier": "approximate",
+            "unit": "%",
+            "upper": 70
+          },
+          "steam": {
+            "status": "present",
+            "as_reported": "0.3 tons",
+            "unit": "t/t raw methanol",
+            "value": 0.3
+          }
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "between “ 360 and 390°C.",
+          "lower": 360,
+          "note": "maximum operating temperature in the catalyst bed",
+          "unit": "°C",
+          "upper": 390
+        },
+        "temperature_measured_at": "catalyst_bed",
+        "test_kind": "stability",
+        "test_label": "plant operating data, Oppau"
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20028/test/waldenburg-raw-methanol",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Waldenburg plant: composition and properties of raw methanol",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 10",
+            "note": "quote withheld: sha256:51e882fdff198a381f0a2ea48cffc4081dbff242b6b3dc96e8671c176c306e4f chars:115",
+            "passage": "hid-20028/p10/4",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 10",
+            "note": "quote withheld: sha256:0b376169d358a102bd4819e8433f7ccc0adbc4361781ee624b6a8291b007030e chars:234",
+            "passage": "hid-20028/p10/4",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "manipulation": "observational",
+        "note": "the Waldenburg plant has 3 methanol loops for a total production of 300 tons per day; catalyst and conditions are not stated",
+        "pressure": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source"
+        },
+        "results": {
+          "appearance": {
+            "status": "present",
+            "as_reported": "clear and colorless",
+            "text_value": "clear and colorless"
+          },
+          "bromine_number": {
+            "status": "present",
+            "as_reported": "2 to 3",
+            "text_value": "2 to 3"
+          },
+          "dimethyl_ether": {
+            "status": "present",
+            "as_reported": "lO to 12 c.c./500 c.c,.",
+            "lower": 10,
+            "unit": "c.c./500 c.c.",
+            "upper": 12
+          },
+          "free_acid": {
+            "status": "present",
+            "as_reported": "2 to 5",
+            "note": "unit not stated",
+            "text_value": "2 to 5"
+          },
+          "saponification_number": {
+            "status": "present",
+            "as_reported": "5 to 8",
+            "text_value": "5 to 8"
+          },
+          "specific_weight_20c": {
+            "status": "present",
+            "as_reported": "0.821",
+            "note": "'Specific weight at 20°C'; unit not printed",
+            "unit": "g/cm3",
+            "value": 0.821
+          },
+          "water": {
+            "status": "present",
+            "as_reported": "10 to 13",
+            "lower": 10,
+            "unit": "%",
+            "upper": 13
+          }
+        },
+        "temperature": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source"
+        },
+        "temperature_measured_at": "not_reported",
+        "test_kind": "other",
+        "test_label": "operating data, Waldenburg plant"
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20028/treatment/in-situ-reduction",
+      "label": "Treatment",
+      "props": {
+        "name": "in-situ reduction of a new catalyst charge with fresh synthesis gas",
+        "atmosphere": "fresh make-up gas fed slowly into the nitrogen-purged loop",
+        "conditions": {
+          "circulation_rate": {
+            "status": "present",
+            "as_reported": "about 1/3 of the normal rate (30,000 cu. m. per hour)",
+            "qualifier": "approximate",
+            "unit": "cu. m. per hour",
+            "value": 30000
+          },
+          "final_heating_duration": {
+            "status": "present",
+            "as_reported": "2 to 3 hours",
+            "lower": 2,
+            "unit": "h",
+            "upper": 3
+          },
+          "initial_nitrogen_pressure": {
+            "status": "present",
+            "as_reported": "2 to 3 atm. of nitrogen",
+            "lower": 2,
+            "unit": "atm",
+            "upper": 3
+          },
+          "second_stage_duration": {
+            "status": "present",
+            "as_reported": "24 to 36 hours",
+            "lower": 24,
+            "unit": "h",
+            "upper": 36
+          },
+          "second_stage_temperature": {
+            "status": "present",
+            "as_reported": "250°C",
+            "unit": "°C",
+            "value": 250
+          }
+        },
+        "duration": {
+          "status": "present",
+          "as_reported": "30 to 48 hours",
+          "lower": 30,
+          "note": "first stage; corrected from 45: the page image prints '48' (OCR '4S')",
+          "unit": "h",
+          "upper": 48
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:3f84ed93275a36278121abaacf13ac266cb37d3eabba6e1267d03255e87b7755 chars:127",
+            "passage": "hid-20028/p12/3",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:f474b41228a5aab4b41182c2e38c4e090e8b0db5beebdcecc411ac8df84e9114 chars:102",
+            "passage": "hid-20028/p12/3",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:25371ab809e2ef54f6091bc497772884033f0556e176e86f452ba0e347010375 chars:121",
+            "passage": "hid-20028/p12/3",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "OCR '4S' probably 45; quote withheld: sha256:51ffd92cd0a899bc4c41d8a9cbbaf5cfe287b0157510d51ed247b0093cb6ea45 chars:173",
+            "passage": "hid-20028/p12/4",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:b01fb4d7e73bb5cfbae20c8dba2dd860771816fe873ecaea5f866c4b7969d79c chars:73",
+            "passage": "hid-20028/p12/4",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 12, Catalysts, reduction of a new charge",
+            "note": "second_reading withheld: sha256:74b0710d4b01065e0d552ee184e37b7071a7c03931f4bf7d56d8af2d8ae1bf8c chars:134; transcription withheld: sha256:d87009b963a86d068b90ac2a5d775d7f676343349851afe853af57228d7f8014 chars:59",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.86,
+              0.95,
+              0.895
+            ],
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "method": "start-up reduction in the synthesis loop",
+        "pressure": {
+          "status": "present",
+          "as_reported": "the pressure to 260 atm.",
+          "unit": "atm",
+          "value": 260
+        },
+        "procedure_status": "completed",
+        "temperature": {
+          "status": "present",
+          "as_reported": "100 to 110°C",
+          "lower": 100,
+          "note": "first stage; then raised to 250 °C over 24 to 36 hours, then to normal operating temperature in 2 to 3 hours",
+          "unit": "°C",
+          "upper": 110
+        },
+        "treatment_kind": "reduction"
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20028/treatment/make-up-gas-carbon-purification",
+      "label": "Treatment",
+      "props": {
+        "name": "activated-carbon purification of the fresh make-up gas (NH3 and O2 injected)",
+        "conditions": {
+          "ammonia_injected": {
+            "status": "present",
+            "as_reported": "about 0.5 gm. of ammonia per 1 cu.m. of gas",
+            "qualifier": "approximate",
+            "unit": "g/cu.m",
+            "value": 0.5
+          },
+          "oxygen_injected": {
+            "status": "present",
+            "as_reported": "oxygen in slightly over the stoichiometric amount for oxidizing the sulfur contained in the gas",
+            "text_value": "slightly over the stoichiometric amount for oxidizing the sulfur"
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:02ac054472b83653b0b05d3dd039ad7fc828db013100e993093a571214cc8944 chars:119",
+            "passage": "hid-20028/p7/2",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:ec9f35f4d357978a43262800dc2ddbd6e480c7c35f409acd49148f99ebfeb515 chars:221",
+            "passage": "hid-20028/p7/2",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "method": "passage through activated carbon (M Kohle), removing carbon oxysulfide and iron carbonyl, with ammonia and oxygen injected",
+        "procedure_status": "completed",
+        "temperature": {
+          "status": "present",
+          "as_reported": "takes place at room temperature",
+          "text_value": "room temperature"
+        },
+        "treatment_kind": "purification"
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20028/treatment/raw-gas-purification",
+      "label": "Treatment",
+      "props": {
+        "name": "purification of the raw water gas to fresh make-up gas",
+        "conditions": {
+          "final_compression_pressure": {
+            "status": "present",
+            "as_reported": "a final compression to about 260 atm.",
+            "qualifier": "approximate",
+            "unit": "atm",
+            "value": 260
+          },
+          "scrubbing_pressure": {
+            "status": "present",
+            "as_reported": "compressed to 25 to 27 atm.",
+            "lower": 25,
+            "unit": "atm",
+            "upper": 27
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "OCR 'Hp' = H2; quote withheld: sha256:9656c1b6476cb2a2c0d560470f742cadde1cad577048a457b3ec46e4a2092026 chars:177",
+            "passage": "hid-20028/p7/1",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "OCR 'CO..' = CO2; quote withheld: sha256:65a96c7b8476c56e2f72b461e90f8e132c6b718f61dd1425c23d5c9cae885721 chars:85",
+            "passage": "hid-20028/p7/1",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:ea0d489985999bcf9914aa34481bae48ca7eed49d238c2f58f62c87c7b89effc chars:102",
+            "passage": "hid-20028/p7/1",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "method": "sulfur removal on activated carbon at low pressure; a portion through low-pressure CO conversion to adjust H2:CO; compression to 25-27 atm and water scrubbing for CO2 removal; final compression to about 260 atm",
+        "procedure_status": "completed",
+        "treatment_kind": "purification"
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20028/unit/activated-carbon-vessels",
+      "label": "ProcessUnit",
+      "props": {
+        "name": "activated-carbon vessels for the fresh make-up gas (M Kohle)",
+        "description": "Two vertical towers (one operated, one spare), suitable for 2 or 3 synthesis loops; they remove catalyst poisons such as carbon oxysulfide and iron carbonyl at room temperature, with ammonia and oxygen injected into the gas.",
+        "design_status": "built",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:02ac054472b83653b0b05d3dd039ad7fc828db013100e993093a571214cc8944 chars:119",
+            "passage": "hid-20028/p7/2",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:ec9f35f4d357978a43262800dc2ddbd6e480c7c35f409acd49148f99ebfeb515 chars:221",
+            "passage": "hid-20028/p7/2",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "OCR 'mn.' = mm; the packing height '}t meters' is illegible; quote withheld: sha256:4b7d6b54d22ee2f5096c3ca1b14353c526c02480b78c6b93a7b9b9e20290983a chars:191",
+            "passage": "hid-20028/p8/1",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:ac16d7bd5f7d17ae3c0296940af81008a8667425278472fe12c45ff188f6dee2 chars:79",
+            "passage": "hid-20028/p8/1",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 8, Description of Equipment, activated carbon vessels",
+            "note": "transcription withheld: sha256:272573ae36c199675c3905fce89ad95576deb13eed695375efe3a48179777924 chars:53",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.18,
+              0.88,
+              0.2
+            ],
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "instrument_kind": "process_unit",
+        "specifications": {
+          "activated_carbon_packing": {
+            "status": "present",
+            "as_reported": "each contains 4 meters of activated carbon (M Khole) packing",
+            "note": "read from the page image (OCR '}t meters'); the printed quantity is a length in meters",
+            "unit": "m",
+            "value": 4
+          },
+          "height": {
+            "status": "present",
+            "as_reported": "8 m. high",
+            "unit": "m",
+            "value": 8
+          },
+          "inside_diameter": {
+            "status": "present",
+            "as_reported": "800 mn. ‘I.D.",
+            "note": "OCR 'mn.' = mm",
+            "unit": "mm",
+            "value": 800
+          },
+          "number_of_vessels": {
+            "status": "present",
+            "as_reported": "2 Activated carbon vessels",
+            "unit": "1",
+            "value": 2
+          },
+          "operating_temperature": {
+            "status": "present",
+            "as_reported": "takes place at room temperature",
+            "text_value": "room temperature"
+          },
+          "packing_size": {
+            "status": "present",
+            "as_reported": "7 to 10 mn. in size",
+            "lower": 7,
+            "note": "OCR 'mn.' = mm",
+            "unit": "mm",
+            "upper": 10
+          }
+        },
+        "unit_kind": "purification"
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20028/unit/co2-water-scrubber",
+      "label": "ProcessUnit",
+      "props": {
+        "name": "water scrubber for CO2 removal (25-27 atm)",
+        "design_status": "built",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "OCR 'CO..' = CO2; quote withheld: sha256:65a96c7b8476c56e2f72b461e90f8e132c6b718f61dd1425c23d5c9cae885721 chars:85",
+            "passage": "hid-20028/p7/1",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "instrument_kind": "process_unit",
+        "specifications": {
+          "operating_pressure": {
+            "status": "present",
+            "as_reported": "compressed to 25 to 27 atm.",
+            "lower": 25,
+            "unit": "atm",
+            "upper": 27
+          }
+        },
+        "unit_kind": "scrubber"
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20028/unit/lp-activated-carbon",
+      "label": "ProcessUnit",
+      "props": {
+        "name": "low-pressure activated-carbon sulfur removal (raw water gas)",
+        "design_status": "built",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "OCR 'Hp' = H2; quote withheld: sha256:9656c1b6476cb2a2c0d560470f742cadde1cad577048a457b3ec46e4a2092026 chars:177",
+            "passage": "hid-20028/p7/1",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "instrument_kind": "process_unit",
+        "unit_kind": "purification"
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20028/unit/lp-co-conversion",
+      "label": "ProcessUnit",
+      "props": {
+        "name": "low-pressure CO conversion system (H2:CO adjustment)",
+        "design_status": "built",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "OCR 'Hp' = H2; quote withheld: sha256:9656c1b6476cb2a2c0d560470f742cadde1cad577048a457b3ec46e4a2092026 chars:177",
+            "passage": "hid-20028/p7/1",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "instrument_kind": "process_unit",
+        "unit_kind": "shift_converter"
+      }
+    },
+    {
+      "id": "ex:msyn/source/hid-20028",
+      "label": "Source",
+      "props": {
+        "name": "Methanol synthesis at I. G. Farbenindustrie Plant at Oppau",
+        "kind": "article",
+        "description": "Published 1946 (publication year (bibliography)); in scope: before the 1966-01-01 cutoff. Text: 25 pages ocr (tesseract 5.5.3 (eng, 300 dpi, 1 column)). Text not redistributed.",
+        "licence": "no verified publisher licence; short excerpts quoted as evidence under fair use",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "Methanol synthesis at I. G. Farbenindustrie Plant at Oppau",
+        "venue": "OSTI OAI (U.S. Department of Energy Office of Scientific and Technical Information)",
+        "year": 1946
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/hid-20028/catalyst/zinc-chromate/reported-in/hid-20028",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 11"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20028/catalyst/zinc-chromate",
+      "target": "ex:msyn/source/hid-20028"
+    },
+    {
+      "id": "ex:msyn/hid-20028/claim/activated-carbon-removes-poisons/reported-in/hid-20028",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20028/claim/activated-carbon-removes-poisons",
+      "target": "ex:msyn/source/hid-20028"
+    },
+    {
+      "id": "ex:msyn/hid-20028/claim/bromine-number/reported-in/hid-20028",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 10",
+          "p. 11"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20028/claim/bromine-number",
+      "target": "ex:msyn/source/hid-20028"
+    },
+    {
+      "id": "ex:msyn/hid-20028/claim/catalyst-life/reported-in/hid-20028",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 12"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20028/claim/catalyst-life",
+      "target": "ex:msyn/source/hid-20028"
+    },
+    {
+      "id": "ex:msyn/hid-20028/claim/co-below-20/reported-in/hid-20028",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 10"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20028/claim/co-below-20",
+      "target": "ex:msyn/source/hid-20028"
+    },
+    {
+      "id": "ex:msyn/hid-20028/claim/constant-pressure-drop/reported-in/hid-20028",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 10"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20028/claim/constant-pressure-drop",
+      "target": "ex:msyn/source/hid-20028"
+    },
+    {
+      "id": "ex:msyn/hid-20028/claim/dme-side-reaction/reported-in/hid-20028",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20028/claim/dme-side-reaction",
+      "target": "ex:msyn/source/hid-20028"
+    },
+    {
+      "id": "ex:msyn/hid-20028/claim/graphite-below-30/reported-in/hid-20028",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 12"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20028/claim/graphite-below-30",
+      "target": "ex:msyn/source/hid-20028"
+    },
+    {
+      "id": "ex:msyn/hid-20028/claim/modern-plants/reported-in/hid-20028",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20028/claim/modern-plants",
+      "target": "ex:msyn/source/hid-20028"
+    },
+    {
+      "id": "ex:msyn/hid-20028/claim/rapid-chromic-addition/reported-in/hid-20028",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 12"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20028/claim/rapid-chromic-addition",
+      "target": "ex:msyn/source/hid-20028"
+    },
+    {
+      "id": "ex:msyn/hid-20028/claim/similar-to-us/reported-in/hid-20028",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20028/claim/similar-to-us",
+      "target": "ex:msyn/source/hid-20028"
+    },
+    {
+      "id": "ex:msyn/hid-20028/feed/converter-inlet-gas/reported-in/hid-20028",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 10"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20028/feed/converter-inlet-gas",
+      "target": "ex:msyn/source/hid-20028"
+    },
+    {
+      "id": "ex:msyn/hid-20028/feed/fresh-make-up-gas/reported-in/hid-20028",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 7",
+          "p. 7, Process Description, fresh make-up gas"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20028/feed/fresh-make-up-gas",
+      "target": "ex:msyn/source/hid-20028"
+    },
+    {
+      "id": "ex:msyn/hid-20028/feed/raw-water-gas/reported-in/hid-20028",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20028/feed/raw-water-gas",
+      "target": "ex:msyn/source/hid-20028"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/1",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "OCR: 'Hp' = H2, '5€ 005' = 5% CO2, 'Np' = N2; quote withheld: sha256:221bca104a8efda636e98b90c2c9667580762e05ec3f6d8bdab2e8878b1901d9 chars:125",
+            "passage": "hid-20028/p6/3",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "52.5% Hp",
+          "qualifier": "approximate",
+          "unit": "%",
+          "value": 52.5
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/hid-20028/feed/raw-water-gas",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/10",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:ec9f35f4d357978a43262800dc2ddbd6e480c7c35f409acd49148f99ebfeb515 chars:221",
+            "passage": "hid-20028/p7/2",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "role": "other",
+        "role_detail": "injected slightly over the stoichiometric amount for oxidizing the sulfur"
+      },
+      "source": "ex:msyn/hid-20028/feed/fresh-make-up-gas",
+      "target": "ex:msyn/species/o2"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/11",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 10",
+            "note": "OCR: 'Hp' = H2, '005' = CO2; quote withheld: sha256:6487ef15e8947c96429107d031d83b8797a9d62f28bc3061c15806407f702bb5 chars:107",
+            "passage": "hid-20028/p10/2",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "18.4% CO",
+          "unit": "%",
+          "value": 18.4
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/hid-20028/feed/converter-inlet-gas",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/12",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 10",
+            "note": "OCR: 'Hp' = H2, '005' = CO2; quote withheld: sha256:6487ef15e8947c96429107d031d83b8797a9d62f28bc3061c15806407f702bb5 chars:107",
+            "passage": "hid-20028/p10/2",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "67.2% Hp",
+          "unit": "%",
+          "value": 67.2
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/hid-20028/feed/converter-inlet-gas",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/13",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 10",
+            "note": "OCR: 'Hp' = H2, '005' = CO2; quote withheld: sha256:6487ef15e8947c96429107d031d83b8797a9d62f28bc3061c15806407f702bb5 chars:107",
+            "passage": "hid-20028/p10/2",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 10, Operating Conditions",
+            "note": "transcription withheld: sha256:30a9d7a78e0b512dec8d955f5be45eb6826334ee0d957297ba851900c4d3e6f9 chars:58; second_reading withheld: sha256:1de7be3356f19ed91af3c42412608ba9c24ff3c482c7c7bafbab57f7f5c7f034 chars:107",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.32,
+              0.82,
+              0.345
+            ],
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "0.7% CO2",
+          "unit": "%",
+          "value": 0.7
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/hid-20028/feed/converter-inlet-gas",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/14",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 10",
+            "note": "OCR: 'Hp' = H2, '005' = CO2; quote withheld: sha256:6487ef15e8947c96429107d031d83b8797a9d62f28bc3061c15806407f702bb5 chars:107",
+            "passage": "hid-20028/p10/2",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "0.6% CH4",
+          "unit": "%",
+          "value": 0.6
+        },
+        "fraction_basis": "not_reported",
+        "role": "diluent"
+      },
+      "source": "ex:msyn/hid-20028/feed/converter-inlet-gas",
+      "target": "ex:msyn/species/ch4"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/15",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 10",
+            "note": "OCR: 'Hp' = H2, '005' = CO2; quote withheld: sha256:6487ef15e8947c96429107d031d83b8797a9d62f28bc3061c15806407f702bb5 chars:107",
+            "passage": "hid-20028/p10/2",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "13.1% inert gases",
+          "unit": "%",
+          "value": 13.1
+        },
+        "fraction_basis": "not_reported",
+        "role": "diluent"
+      },
+      "source": "ex:msyn/hid-20028/feed/converter-inlet-gas",
+      "target": "ex:msyn/hid-20028/species/inert-gases"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/16",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 11",
+            "note": "OCR: 'Cro0z' = Cr2O3, 'Zn0' = ZnO, 'H20' = H2O; quote withheld: sha256:9d7892e954445a79a3b924020c6aaedc3feb177ff6e3bd3b95dec23d93e680f2 chars:147",
+            "passage": "hid-20028/p11/4",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "26 to 30% Cro0z",
+          "lower": 26,
+          "note": "composition before reduction; OCR-corrected formula",
+          "unit": "%",
+          "upper": 30
+        },
+        "fraction_basis": "not_reported",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/hid-20028/catalyst/zinc-chromate",
+      "target": "ex:msyn/species/cr2o3"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/17",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 11",
+            "note": "OCR: 'Cro0z' = Cr2O3, 'Zn0' = ZnO, 'H20' = H2O; quote withheld: sha256:9d7892e954445a79a3b924020c6aaedc3feb177ff6e3bd3b95dec23d93e680f2 chars:147",
+            "passage": "hid-20028/p11/4",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "59 to 64% Zn0",
+          "lower": 59,
+          "note": "composition before reduction; OCR-corrected formula",
+          "unit": "%",
+          "upper": 64
+        },
+        "fraction_basis": "not_reported",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/hid-20028/catalyst/zinc-chromate",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/18",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 11",
+            "note": "OCR: 'Cro0z' = Cr2O3, 'Zn0' = ZnO, 'H20' = H2O; quote withheld: sha256:9d7892e954445a79a3b924020c6aaedc3feb177ff6e3bd3b95dec23d93e680f2 chars:147",
+            "passage": "hid-20028/p11/4",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "1 to 1.5% graphite",
+          "lower": 1,
+          "note": "composition before reduction",
+          "unit": "%",
+          "upper": 1.5
+        },
+        "fraction_basis": "not_reported",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/hid-20028/catalyst/zinc-chromate",
+      "target": "ex:msyn/hid-20028/species/graphite"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/19",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 11",
+            "note": "OCR: 'Cro0z' = Cr2O3, 'Zn0' = ZnO, 'H20' = H2O; quote withheld: sha256:9d7892e954445a79a3b924020c6aaedc3feb177ff6e3bd3b95dec23d93e680f2 chars:147",
+            "passage": "hid-20028/p11/4",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "9 to 10% H20",
+          "lower": 9,
+          "note": "composition before reduction; OCR-corrected formula",
+          "unit": "%",
+          "upper": 10
+        },
+        "fraction_basis": "not_reported",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/hid-20028/catalyst/zinc-chromate",
+      "target": "ex:msyn/species/h2o"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/2",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "OCR: 'Hp' = H2, '5€ 005' = 5% CO2, 'Np' = N2; quote withheld: sha256:221bca104a8efda636e98b90c2c9667580762e05ec3f6d8bdab2e8878b1901d9 chars:125",
+            "passage": "hid-20028/p6/3",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "41% CO",
+          "qualifier": "approximate",
+          "unit": "%",
+          "value": 41
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/hid-20028/feed/raw-water-gas",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/20",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "context": [],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 11",
+            "note": "quote withheld: sha256:efb566828a3613432ec8d3eafbb4bd8de6638ccb4defa87035996e330281ead3 chars:50",
+            "passage": "hid-20028/p11/4",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20028/catalyst/zinc-chromate",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/21",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:02ac054472b83653b0b05d3dd039ad7fc828db013100e993093a571214cc8944 chars:119",
+            "passage": "hid-20028/p7/2",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "inhibition_kind": "poison",
+        "note": "OCR 'carbon oxysulfide'; stated as catalyst poisons removed from the make-up gas"
+      },
+      "source": "ex:msyn/hid-20028/catalyst/zinc-chromate",
+      "target": "ex:msyn/species/cos"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/22",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:02ac054472b83653b0b05d3dd039ad7fc828db013100e993093a571214cc8944 chars:119",
+            "passage": "hid-20028/p7/2",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "inhibition_kind": "poison"
+      },
+      "source": "ex:msyn/hid-20028/catalyst/zinc-chromate",
+      "target": "ex:msyn/hid-20028/species/iron-carbonyl"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/23",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 11",
+            "note": "OCR: 'Cro0z' = Cr2O3, 'Zn0' = ZnO, 'H20' = H2O; quote withheld: sha256:9d7892e954445a79a3b924020c6aaedc3feb177ff6e3bd3b95dec23d93e680f2 chars:147",
+            "passage": "hid-20028/p11/4",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20028/sample/oppau-old-converter-charge",
+      "target": "ex:msyn/hid-20028/catalyst/zinc-chromate"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/24",
+      "type": "PREPARED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:aadd83ee35791665586672a5984645191d2a892e606b61b3a9ff5c5764f5a43c chars:53",
+            "passage": "hid-20028/p12/1",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20028/sample/oppau-old-converter-charge",
+      "target": "ex:msyn/hid-20028/preparation/leuna"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/25",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "100 kg.",
+          "unit": "kg",
+          "value": 100
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:45c2ca761d5d6971aa03fede3a6a9d1df7400d590aa9ece0dc005e075369f97e chars:114",
+            "passage": "hid-20028/p12/1",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "role": "precursor (zinc oxide, fine powder)"
+      },
+      "source": "ex:msyn/hid-20028/sample/oppau-old-converter-charge",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/26",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "50 kg.",
+          "unit": "kg",
+          "value": 50
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:45c2ca761d5d6971aa03fede3a6a9d1df7400d590aa9ece0dc005e075369f97e chars:114",
+            "passage": "hid-20028/p12/1",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "role": "precursor (chromic oxide)"
+      },
+      "source": "ex:msyn/hid-20028/sample/oppau-old-converter-charge",
+      "target": "ex:msyn/hid-20028/species/chromic-oxide"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/27",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:e1c657b685c4a6291cc6d10ed97ebfbcd5ec16067f3a131ad0e7066df8269b12 chars:53",
+            "passage": "hid-20028/p12/1",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "role": "tabletting additive"
+      },
+      "source": "ex:msyn/hid-20028/sample/oppau-old-converter-charge",
+      "target": "ex:msyn/hid-20028/species/graphite"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/28",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:3f84ed93275a36278121abaacf13ac266cb37d3eabba6e1267d03255e87b7755 chars:127",
+            "passage": "hid-20028/p12/3",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "order": 1
+      },
+      "source": "ex:msyn/hid-20028/sample/oppau-old-converter-charge",
+      "target": "ex:msyn/hid-20028/treatment/in-situ-reduction"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/29",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:2de366acf2e820a16243099a5001a6494f523d06dc4518d936fc6ea487c35897 chars:32",
+            "passage": "hid-20028/p12/2",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20028/sample/oppau-new-method-pellets",
+      "target": "ex:msyn/hid-20028/catalyst/zinc-chromate"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/3",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "OCR: 'Hp' = H2, '5€ 005' = 5% CO2, 'Np' = N2; quote withheld: sha256:221bca104a8efda636e98b90c2c9667580762e05ec3f6d8bdab2e8878b1901d9 chars:125",
+            "passage": "hid-20028/p6/3",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 6, General, raw water gas",
+            "note": "transcription withheld: sha256:a1f5cdd5668e1c4c06c69b87b67bd28de0ee3a1a801196687458135e3ced00ff chars:29; second_reading withheld: sha256:1ee5b155d617c78551a954e0f05c8683a994c0495fc3e2e88c4591926bff5506 chars:86",
+            "reading": "vision_ocr",
+            "region": [
+              0.25,
+              0.75,
+              0.68,
+              0.785
+            ],
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "5% OO2",
+          "note": "printed '5% OO2' on the page image (OCR '5€ 005'); read as 5% CO2, the typed 'OO2' standing for CO2 in the list H2, CO, CO2, N2",
+          "qualifier": "approximate",
+          "unit": "%",
+          "value": 5
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/hid-20028/feed/raw-water-gas",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/30",
+      "type": "PREPARED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:0e3637aeb71591f84976c46abfdf3bf1d634fc95cc5cfe864f4f476a349527d6 chars:78",
+            "passage": "hid-20028/p12/2",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20028/sample/oppau-new-method-pellets",
+      "target": "ex:msyn/hid-20028/preparation/oppau-new"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/31",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "100 kg.",
+          "unit": "kg",
+          "value": 100
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:e5bf30777f24077f3e3a15cc1a70f9c43b2e4c5863fe72a1c7453369f09954cf chars:29",
+            "passage": "hid-20028/p12/2",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "grade": "pure, powdered",
+        "role": "precursor"
+      },
+      "source": "ex:msyn/hid-20028/sample/oppau-new-method-pellets",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/32",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "40 kg.",
+          "note": "read from the page image (OCR 'IT) kg.')",
+          "unit": "kg",
+          "value": 40
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:c95966f93185800edd9f78ea8042146f1ab99ef5ce6b55c491bef351adf576af chars:35",
+            "passage": "hid-20028/p12/2",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 12, Catalysts, new Oppau preparation",
+            "note": "transcription withheld: sha256:d2bb26d2f7baf6eda5b6f4e9ab08609c87c738e70e997488517fa0e01e67e3d1 chars:120; second_reading withheld: sha256:d2bb26d2f7baf6eda5b6f4e9ab08609c87c738e70e997488517fa0e01e67e3d1 chars:120",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.395,
+              0.95,
+              0.44
+            ],
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "grade": "pure crystalline",
+        "role": "precursor"
+      },
+      "source": "ex:msyn/hid-20028/sample/oppau-new-method-pellets",
+      "target": "ex:msyn/hid-20028/species/chromic-oxide"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/33",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "2 kg.",
+          "unit": "kg",
+          "value": 2
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:96e2789c35a6b398a5f65b6b5ff6d9a6eaec0b5d763abadd11fec930c74e20df chars:23",
+            "passage": "hid-20028/p12/2",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "role": "additive"
+      },
+      "source": "ex:msyn/hid-20028/sample/oppau-new-method-pellets",
+      "target": "ex:msyn/hid-20028/species/graphite"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/34",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "approximately 2.6 to 2.7 cu. m. of catalyst",
+          "lower": 2.6,
+          "unit": "cu. m",
+          "upper": 2.7
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 9",
+            "note": "quote withheld: sha256:f8a578d31b0684828302d4b3fafb305d40f012d6d18fdb18d1385a9a7573679f chars:158",
+            "passage": "hid-20028/p9/3",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 11",
+            "note": "OCR: 'Cro0z' = Cr2O3, 'Zn0' = ZnO, 'H20' = H2O; quote withheld: sha256:9d7892e954445a79a3b924020c6aaedc3feb177ff6e3bd3b95dec23d93e680f2 chars:147",
+            "passage": "hid-20028/p11/4",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "state": "operating"
+      },
+      "source": "ex:msyn/hid-20028/test/oppau-loop-operation",
+      "target": "ex:msyn/hid-20028/sample/oppau-old-converter-charge"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/35",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 10",
+            "note": "OCR: 'Hp' = H2, '005' = CO2; quote withheld: sha256:6487ef15e8947c96429107d031d83b8797a9d62f28bc3061c15806407f702bb5 chars:107",
+            "passage": "hid-20028/p10/2",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20028/test/oppau-loop-operation",
+      "target": "ex:msyn/hid-20028/feed/converter-inlet-gas"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/36",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:9d30dcad832a012d32cb2a5e32b40415dce844cf111e6fe9838f6bb9ac82ee10 chars:78",
+            "passage": "hid-20028/p7/2",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20028/test/oppau-loop-operation",
+      "target": "ex:msyn/hid-20028/feed/fresh-make-up-gas"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/37",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 9",
+            "note": "quote withheld: sha256:9db30b07d289381fe150faf37e9bfc23b0c51c8b7c7f839b3de897070d5d27f6 chars:67",
+            "passage": "hid-20028/p9/3",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20028/test/oppau-loop-operation",
+      "target": "ex:msyn/hid-20028/reactor/oppau-converter"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/38",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:e4352df8fa9900c0f5d66b80d740cd17c5de7e852583c052876a1711d8116a4e chars:113",
+            "passage": "hid-20028/p6/2",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20028/test/oppau-loop-operation",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/39",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "OCR of 2 CH3OH -> (CH3)2O + H2O; quote withheld: sha256:2402033f1fb79cb76ff2e139ee485dfe0f190b3626dc95278caf4f8a04d43324 chars:102",
+            "passage": "hid-20028/p6/2",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20028/test/oppau-loop-operation",
+      "target": "ex:msyn/reaction/dimethyl-ether-formation"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/4",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "OCR: 'Hp' = H2, '5€ 005' = 5% CO2, 'Np' = N2; quote withheld: sha256:221bca104a8efda636e98b90c2c9667580762e05ec3f6d8bdab2e8878b1901d9 chars:125",
+            "passage": "hid-20028/p6/3",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "1.5% Np",
+          "qualifier": "approximate",
+          "unit": "%",
+          "value": 1.5
+        },
+        "fraction_basis": "not_reported",
+        "role": "diluent"
+      },
+      "source": "ex:msyn/hid-20028/feed/raw-water-gas",
+      "target": "ex:msyn/species/n2"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/40",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "approximately 3 cu. m. of catalyst",
+          "qualifier": "approximate",
+          "unit": "cu. m",
+          "value": 3
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 9",
+            "note": "spans the OCR line break on p. 9; quote withheld: sha256:91bac19d6faae2833493586b8fe230ebdfdd2e551386b083dda5261e01bb0314 chars:202",
+            "passage": "hid-20028/p9/4",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "state": "operating"
+      },
+      "source": "ex:msyn/hid-20028/test/new-converter-loop",
+      "target": "ex:msyn/hid-20028/sample/new-type-converter-charge"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/41",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 11",
+            "note": "quote withheld: sha256:671de9f7bfd4cbe675271196c40c3aff888067b1bb452751e58bc8793b7cbdc7 chars:181",
+            "passage": "hid-20028/p11/1",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20028/test/new-converter-loop",
+      "target": "ex:msyn/hid-20028/reactor/new-type-converter"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/42",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 11",
+            "note": "quote withheld: sha256:671de9f7bfd4cbe675271196c40c3aff888067b1bb452751e58bc8793b7cbdc7 chars:181",
+            "passage": "hid-20028/p11/1",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20028/test/new-converter-loop",
+      "target": "ex:msyn/hid-20028/feed/converter-inlet-gas"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/43",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 11",
+            "note": "OCR 'Ho' = H2; quote withheld: sha256:7c69067ecafceff93bf3f2ca672286f150afd72a0afaac3d1cf2a1d17f4efdd2 chars:145",
+            "passage": "hid-20028/p11/1",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20028/test/new-converter-loop",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/44",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 10",
+            "note": "quote withheld: sha256:51e882fdff198a381f0a2ea48cffc4081dbff242b6b3dc96e8671c176c306e4f chars:115",
+            "passage": "hid-20028/p10/4",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20028/test/waldenburg-raw-methanol",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/45",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 10",
+            "note": "quote withheld: sha256:c2bdd5bde78556c3f47b37664ce8d5e16184f168347d53a509f826c3f730e4f9 chars:68",
+            "passage": "hid-20028/p10/2",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20028/claim/co-below-20",
+      "target": "ex:msyn/hid-20028/reaction/higher-alcohol-formation"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/46",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 10",
+            "note": "quote withheld: sha256:adac0dba75b3344264d3d2fbb8b35f66689c56b23f347c7e1907ed6056f9f49c chars:89",
+            "passage": "hid-20028/p10/2",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20028/test/oppau-loop-operation",
+      "target": "ex:msyn/hid-20028/claim/co-below-20"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/47",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 10",
+            "note": "quote withheld: sha256:c771831a2af84f4b4daeba50b3bc9ba73217f2a4d243030c80e4a38c56110e23 chars:38",
+            "passage": "hid-20028/p10/3",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20028/test/oppau-loop-operation",
+      "target": "ex:msyn/hid-20028/claim/constant-pressure-drop"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/49",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "OCR of 2 CH3OH -> (CH3)2O + H2O; quote withheld: sha256:2402033f1fb79cb76ff2e139ee485dfe0f190b3626dc95278caf4f8a04d43324 chars:102",
+            "passage": "hid-20028/p6/2",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20028/claim/dme-side-reaction",
+      "target": "ex:msyn/reaction/dimethyl-ether-formation"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/5",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "OCR: 'Ho' = H2, 'CHy' = CH4; the line '0.58 we' is illegible (probably a CO2 or inert content); quote withheld: sha256:08c8ab5c1df2631354a72149ebb40d3810ed84e2e1b5efd77ab797fdfe7ed716 chars:136",
+            "passage": "hid-20028/p7/1",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "68.0% Ho",
+          "qualifier": "approximate",
+          "unit": "%",
+          "value": 68.0
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/hid-20028/feed/fresh-make-up-gas",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/50",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 10",
+            "note": "OCR: '(CHz)s0' = (CH3)2O, 'Hp0' = H2O, 'CHzOH' = CH3OH; quote withheld: sha256:65485cc83f7d4d10296e164b3eaca9e9ce35034dc6106e204e60cb587b2d1ebe chars:142",
+            "passage": "hid-20028/p10/4",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20028/test/oppau-loop-operation",
+      "target": "ex:msyn/hid-20028/claim/dme-side-reaction"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/51",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:0528c417e5cca3be7b2850736fc795554a64afd31dde409a92fe5c67f04cd5fc chars:108",
+            "passage": "hid-20028/p12/3",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20028/claim/catalyst-life",
+      "target": "ex:msyn/hid-20028/catalyst/zinc-chromate"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/52",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:0528c417e5cca3be7b2850736fc795554a64afd31dde409a92fe5c67f04cd5fc chars:108",
+            "passage": "hid-20028/p12/3",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20028/test/oppau-loop-operation",
+      "target": "ex:msyn/hid-20028/claim/catalyst-life"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/53",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:33f4f329fa98c1963706fb455e120713ff6d9b87325100746ddcb3060566bebe chars:45",
+            "passage": "hid-20028/p12/1",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20028/claim/rapid-chromic-addition",
+      "target": "ex:msyn/hid-20028/preparation/leuna"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/54",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:ad2baa6deed0d09e3eeded67853ef535cd9cad25211a6c51030e96407968d990 chars:51",
+            "passage": "hid-20028/p12/2",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20028/claim/graphite-below-30",
+      "target": "ex:msyn/hid-20028/preparation/oppau-new"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/55",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:02ac054472b83653b0b05d3dd039ad7fc828db013100e993093a571214cc8944 chars:119",
+            "passage": "hid-20028/p7/2",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20028/claim/activated-carbon-removes-poisons",
+      "target": "ex:msyn/species/cos"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/56",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:02ac054472b83653b0b05d3dd039ad7fc828db013100e993093a571214cc8944 chars:119",
+            "passage": "hid-20028/p7/2",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20028/claim/activated-carbon-removes-poisons",
+      "target": "ex:msyn/hid-20028/species/iron-carbonyl"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/57",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:02ac054472b83653b0b05d3dd039ad7fc828db013100e993093a571214cc8944 chars:119",
+            "passage": "hid-20028/p7/2",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20028/claim/activated-carbon-removes-poisons",
+      "target": "ex:msyn/hid-20028/material/m-kohle"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/58",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 10",
+            "note": "quote withheld: sha256:e0648d291dd2abc16a25fd797b0ebe9ab83947b66db8a169cbc6b144d677e7b5 chars:38",
+            "passage": "hid-20028/p10/4",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20028/test/waldenburg-raw-methanol",
+      "target": "ex:msyn/hid-20028/claim/bromine-number"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/6",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "OCR: 'Ho' = H2, 'CHy' = CH4; the line '0.58 we' is illegible (probably a CO2 or inert content); quote withheld: sha256:08c8ab5c1df2631354a72149ebb40d3810ed84e2e1b5efd77ab797fdfe7ed716 chars:136",
+            "passage": "hid-20028/p7/1",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "29.0% CO",
+          "qualifier": "approximate",
+          "unit": "%",
+          "value": 29.0
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/hid-20028/feed/fresh-make-up-gas",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/7",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "OCR: 'Ho' = H2, 'CHy' = CH4; the line '0.58 we' is illegible (probably a CO2 or inert content); quote withheld: sha256:08c8ab5c1df2631354a72149ebb40d3810ed84e2e1b5efd77ab797fdfe7ed716 chars:136",
+            "passage": "hid-20028/p7/1",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "0.2% CHy",
+          "qualifier": "approximate",
+          "unit": "%",
+          "value": 0.2
+        },
+        "fraction_basis": "not_reported",
+        "role": "diluent"
+      },
+      "source": "ex:msyn/hid-20028/feed/fresh-make-up-gas",
+      "target": "ex:msyn/species/ch4"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/8",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "OCR: 'Ho' = H2, 'CHy' = CH4; the line '0.58 we' is illegible (probably a CO2 or inert content); quote withheld: sha256:08c8ab5c1df2631354a72149ebb40d3810ed84e2e1b5efd77ab797fdfe7ed716 chars:136",
+            "passage": "hid-20028/p7/1",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "Maximum sulfur content, 1 to 2 mg/cu.m. of gas",
+          "lower": 1,
+          "unit": "mg/cu.m",
+          "upper": 2
+        },
+        "role": "other",
+        "role_detail": "impurity, maximum content"
+      },
+      "source": "ex:msyn/hid-20028/feed/fresh-make-up-gas",
+      "target": "ex:msyn/species/sulfur"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/9",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:ec9f35f4d357978a43262800dc2ddbd6e480c7c35f409acd49148f99ebfeb515 chars:221",
+            "passage": "hid-20028/p7/2",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "about 0.5 gm. of ammonia per 1 cu.m. of gas",
+          "qualifier": "approximate",
+          "unit": "g/cu.m",
+          "value": 0.5
+        },
+        "role": "other",
+        "role_detail": "injected for the activated-carbon purification"
+      },
+      "source": "ex:msyn/hid-20028/feed/fresh-make-up-gas",
+      "target": "ex:msyn/species/nh3"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/cs5-1",
+      "type": "FEEDS_INTO",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "OCR 'Hp' = H2; quote withheld: sha256:9656c1b6476cb2a2c0d560470f742cadde1cad577048a457b3ec46e4a2092026 chars:177",
+            "passage": "hid-20028/p7/1",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "order": 1,
+        "stream": "a portion of the desulfurized raw water gas"
+      },
+      "source": "ex:msyn/hid-20028/unit/lp-activated-carbon",
+      "target": "ex:msyn/hid-20028/unit/lp-co-conversion"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/cs5-10",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "OCR 'CO..' = CO2; quote withheld: sha256:65a96c7b8476c56e2f72b461e90f8e132c6b718f61dd1425c23d5c9cae885721 chars:85",
+            "passage": "hid-20028/p7/1",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20028/treatment/raw-gas-purification",
+      "target": "ex:msyn/hid-20028/unit/co2-water-scrubber"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/cs5-11",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:ea0d489985999bcf9914aa34481bae48ca7eed49d238c2f58f62c87c7b89effc chars:102",
+            "passage": "hid-20028/p7/1",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20028/treatment/raw-gas-purification",
+      "target": "ex:msyn/hid-20028/feed/fresh-make-up-gas"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/cs5-12",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:02ac054472b83653b0b05d3dd039ad7fc828db013100e993093a571214cc8944 chars:119",
+            "passage": "hid-20028/p7/2",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:ec9f35f4d357978a43262800dc2ddbd6e480c7c35f409acd49148f99ebfeb515 chars:221",
+            "passage": "hid-20028/p7/2",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "order": 1
+      },
+      "source": "ex:msyn/hid-20028/feed/fresh-make-up-gas",
+      "target": "ex:msyn/hid-20028/treatment/make-up-gas-carbon-purification"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/cs5-13",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:02ac054472b83653b0b05d3dd039ad7fc828db013100e993093a571214cc8944 chars:119",
+            "passage": "hid-20028/p7/2",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20028/treatment/make-up-gas-carbon-purification",
+      "target": "ex:msyn/hid-20028/unit/activated-carbon-vessels"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/cs5-14",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "OCR 'mn.' = mm; the packing height '}t meters' is illegible; quote withheld: sha256:4b7d6b54d22ee2f5096c3ca1b14353c526c02480b78c6b93a7b9b9e20290983a chars:191",
+            "passage": "hid-20028/p8/1",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:9d30dcad832a012d32cb2a5e32b40415dce844cf111e6fe9838f6bb9ac82ee10 chars:78",
+            "passage": "hid-20028/p7/2",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20028/test/oppau-loop-operation",
+      "target": "ex:msyn/hid-20028/unit/activated-carbon-vessels"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/cs5-2",
+      "type": "FEEDS_INTO",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "OCR 'Hp' = H2; quote withheld: sha256:9656c1b6476cb2a2c0d560470f742cadde1cad577048a457b3ec46e4a2092026 chars:177",
+            "passage": "hid-20028/p7/1",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "OCR 'CO..' = CO2; quote withheld: sha256:65a96c7b8476c56e2f72b461e90f8e132c6b718f61dd1425c23d5c9cae885721 chars:85",
+            "passage": "hid-20028/p7/1",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "order": 2,
+        "stream": "desulfurized gas, combined with the converted portion and compressed to 25 to 27 atm"
+      },
+      "source": "ex:msyn/hid-20028/unit/lp-activated-carbon",
+      "target": "ex:msyn/hid-20028/unit/co2-water-scrubber"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/cs5-3",
+      "type": "FEEDS_INTO",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "OCR 'CO..' = CO2; quote withheld: sha256:65a96c7b8476c56e2f72b461e90f8e132c6b718f61dd1425c23d5c9cae885721 chars:85",
+            "passage": "hid-20028/p7/1",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "order": 2,
+        "stream": "converted portion, combined with the rest of the gas and compressed to 25 to 27 atm"
+      },
+      "source": "ex:msyn/hid-20028/unit/lp-co-conversion",
+      "target": "ex:msyn/hid-20028/unit/co2-water-scrubber"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/cs5-4",
+      "type": "FEEDS_INTO",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:ea0d489985999bcf9914aa34481bae48ca7eed49d238c2f58f62c87c7b89effc chars:102",
+            "passage": "hid-20028/p7/1",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:02ac054472b83653b0b05d3dd039ad7fc828db013100e993093a571214cc8944 chars:119",
+            "passage": "hid-20028/p7/2",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "order": 3,
+        "stream": "scrubbed gas after final compression to about 260 atm (fresh make-up gas)"
+      },
+      "source": "ex:msyn/hid-20028/unit/co2-water-scrubber",
+      "target": "ex:msyn/hid-20028/unit/activated-carbon-vessels"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/cs5-5",
+      "type": "FEEDS_INTO",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:9d30dcad832a012d32cb2a5e32b40415dce844cf111e6fe9838f6bb9ac82ee10 chars:78",
+            "passage": "hid-20028/p7/2",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "order": 4,
+        "stream": "purified gas, introduced into the synthesis loop at the suction side of the circulator"
+      },
+      "source": "ex:msyn/hid-20028/unit/activated-carbon-vessels",
+      "target": "ex:msyn/hid-20028/reactor/oppau-converter"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/cs5-6",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "OCR 'mn.' = mm; the packing height '}t meters' is illegible; quote withheld: sha256:4b7d6b54d22ee2f5096c3ca1b14353c526c02480b78c6b93a7b9b9e20290983a chars:191",
+            "passage": "hid-20028/p8/1",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:ac16d7bd5f7d17ae3c0296940af81008a8667425278472fe12c45ff188f6dee2 chars:79",
+            "passage": "hid-20028/p8/1",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "role": "other",
+        "role_detail": "adsorbent packing"
+      },
+      "source": "ex:msyn/hid-20028/unit/activated-carbon-vessels",
+      "target": "ex:msyn/hid-20028/material/m-kohle"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/cs5-7",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "OCR 'Hp' = H2; quote withheld: sha256:9656c1b6476cb2a2c0d560470f742cadde1cad577048a457b3ec46e4a2092026 chars:177",
+            "passage": "hid-20028/p7/1",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "OCR 'CO..' = CO2; quote withheld: sha256:65a96c7b8476c56e2f72b461e90f8e132c6b718f61dd1425c23d5c9cae885721 chars:85",
+            "passage": "hid-20028/p7/1",
+            "source": "ex:msyn/source/hid-20028"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:ea0d489985999bcf9914aa34481bae48ca7eed49d238c2f58f62c87c7b89effc chars:102",
+            "passage": "hid-20028/p7/1",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "order": 1
+      },
+      "source": "ex:msyn/hid-20028/feed/raw-water-gas",
+      "target": "ex:msyn/hid-20028/treatment/raw-gas-purification"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/cs5-8",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "OCR 'Hp' = H2; quote withheld: sha256:9656c1b6476cb2a2c0d560470f742cadde1cad577048a457b3ec46e4a2092026 chars:177",
+            "passage": "hid-20028/p7/1",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20028/treatment/raw-gas-purification",
+      "target": "ex:msyn/hid-20028/unit/lp-activated-carbon"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/cs5-9",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "OCR 'Hp' = H2; quote withheld: sha256:9656c1b6476cb2a2c0d560470f742cadde1cad577048a457b3ec46e4a2092026 chars:177",
+            "passage": "hid-20028/p7/1",
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20028/treatment/raw-gas-purification",
+      "target": "ex:msyn/hid-20028/unit/lp-co-conversion"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/vis-1",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 7, Process Description, fresh make-up gas",
+            "note": "transcription withheld: sha256:41d411de0a1853fe8fb021131dc965bdf8d96fe8254bb183bab2eaa50f181981 chars:91; second_reading withheld: sha256:ea21a13eff2c032497b713db8822bb017c10ecfe91cf7f4ef407a8267eb9d5ab chars:97",
+            "reading": "vision_ocr",
+            "region": [
+              0.17,
+              0.31,
+              0.78,
+              0.4
+            ],
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "0.5% CO2",
+          "note": "read from the page image (the OCR text layer prints '0.58 we' and drops the N2 line); the composition is 'approximate'",
+          "qualifier": "approximate",
+          "unit": "%",
+          "value": 0.5
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/hid-20028/feed/fresh-make-up-gas",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/hid-20028/link/vis-2",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 7, Process Description, fresh make-up gas",
+            "note": "transcription withheld: sha256:41d411de0a1853fe8fb021131dc965bdf8d96fe8254bb183bab2eaa50f181981 chars:91; second_reading withheld: sha256:ea21a13eff2c032497b713db8822bb017c10ecfe91cf7f4ef407a8267eb9d5ab chars:97",
+            "reading": "vision_ocr",
+            "region": [
+              0.17,
+              0.31,
+              0.78,
+              0.4
+            ],
+            "source": "ex:msyn/source/hid-20028"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "2.1% N2",
+          "note": "read from the page image (the OCR text layer prints '0.58 we' and drops the N2 line); the composition is 'approximate'",
+          "qualifier": "approximate",
+          "unit": "%",
+          "value": 2.1
+        },
+        "fraction_basis": "not_reported",
+        "role": "diluent"
+      },
+      "source": "ex:msyn/hid-20028/feed/fresh-make-up-gas",
+      "target": "ex:msyn/species/n2"
+    },
+    {
+      "id": "ex:msyn/hid-20028/material/m-kohle/reported-in/hid-20028",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 11",
+          "p. 11, Catalysts, activated carbon",
+          "p. 8"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20028/material/m-kohle",
+      "target": "ex:msyn/source/hid-20028"
+    },
+    {
+      "id": "ex:msyn/hid-20028/preparation/leuna/reported-in/hid-20028",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 12"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20028/preparation/leuna",
+      "target": "ex:msyn/source/hid-20028"
+    },
+    {
+      "id": "ex:msyn/hid-20028/preparation/oppau-new/reported-in/hid-20028",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 12",
+          "p. 12, Catalysts, new Oppau preparation"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20028/preparation/oppau-new",
+      "target": "ex:msyn/source/hid-20028"
+    },
+    {
+      "id": "ex:msyn/hid-20028/reaction/higher-alcohol-formation/reported-in/hid-20028",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 10"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20028/reaction/higher-alcohol-formation",
+      "target": "ex:msyn/source/hid-20028"
+    },
+    {
+      "id": "ex:msyn/hid-20028/reactor/new-type-converter/reported-in/hid-20028",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 9"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20028/reactor/new-type-converter",
+      "target": "ex:msyn/source/hid-20028"
+    },
+    {
+      "id": "ex:msyn/hid-20028/reactor/oppau-converter/reported-in/hid-20028",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 9"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20028/reactor/oppau-converter",
+      "target": "ex:msyn/source/hid-20028"
+    },
+    {
+      "id": "ex:msyn/hid-20028/sample/new-type-converter-charge/reported-in/hid-20028",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 9"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20028/sample/new-type-converter-charge",
+      "target": "ex:msyn/source/hid-20028"
+    },
+    {
+      "id": "ex:msyn/hid-20028/sample/oppau-new-method-pellets/reported-in/hid-20028",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 12"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20028/sample/oppau-new-method-pellets",
+      "target": "ex:msyn/source/hid-20028"
+    },
+    {
+      "id": "ex:msyn/hid-20028/sample/oppau-old-converter-charge/reported-in/hid-20028",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 11",
+          "p. 9"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20028/sample/oppau-old-converter-charge",
+      "target": "ex:msyn/source/hid-20028"
+    },
+    {
+      "id": "ex:msyn/hid-20028/species/chromic-oxide/reported-in/hid-20028",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 12"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20028/species/chromic-oxide",
+      "target": "ex:msyn/source/hid-20028"
+    },
+    {
+      "id": "ex:msyn/hid-20028/species/graphite/reported-in/hid-20028",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 11"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20028/species/graphite",
+      "target": "ex:msyn/source/hid-20028"
+    },
+    {
+      "id": "ex:msyn/hid-20028/species/inert-gases/reported-in/hid-20028",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 10"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20028/species/inert-gases",
+      "target": "ex:msyn/source/hid-20028"
+    },
+    {
+      "id": "ex:msyn/hid-20028/species/iron-carbonyl/reported-in/hid-20028",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20028/species/iron-carbonyl",
+      "target": "ex:msyn/source/hid-20028"
+    },
+    {
+      "id": "ex:msyn/hid-20028/test/new-converter-loop/reported-in/hid-20028",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 11"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20028/test/new-converter-loop",
+      "target": "ex:msyn/source/hid-20028"
+    },
+    {
+      "id": "ex:msyn/hid-20028/test/oppau-loop-operation/reported-in/hid-20028",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 10",
+          "p. 11",
+          "p. 11, Utilities",
+          "p. 12",
+          "p. 20, Fig. 1, label on the line from the bottom of the converter to the interchanger",
+          "p. 20, Fig. 1, label on the line from the starting heater to the top of the converter",
+          "p. 6",
+          "p. 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20028/test/oppau-loop-operation",
+      "target": "ex:msyn/source/hid-20028"
+    },
+    {
+      "id": "ex:msyn/hid-20028/test/waldenburg-raw-methanol/reported-in/hid-20028",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 10"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20028/test/waldenburg-raw-methanol",
+      "target": "ex:msyn/source/hid-20028"
+    },
+    {
+      "id": "ex:msyn/hid-20028/treatment/in-situ-reduction/reported-in/hid-20028",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 12",
+          "p. 12, Catalysts, reduction of a new charge"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20028/treatment/in-situ-reduction",
+      "target": "ex:msyn/source/hid-20028"
+    },
+    {
+      "id": "ex:msyn/hid-20028/treatment/make-up-gas-carbon-purification/reported-in/hid-20028",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20028/treatment/make-up-gas-carbon-purification",
+      "target": "ex:msyn/source/hid-20028"
+    },
+    {
+      "id": "ex:msyn/hid-20028/treatment/raw-gas-purification/reported-in/hid-20028",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20028/treatment/raw-gas-purification",
+      "target": "ex:msyn/source/hid-20028"
+    },
+    {
+      "id": "ex:msyn/hid-20028/unit/activated-carbon-vessels/reported-in/hid-20028",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 7",
+          "p. 8",
+          "p. 8, Description of Equipment, activated carbon vessels"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20028/unit/activated-carbon-vessels",
+      "target": "ex:msyn/source/hid-20028"
+    },
+    {
+      "id": "ex:msyn/hid-20028/unit/co2-water-scrubber/reported-in/hid-20028",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20028/unit/co2-water-scrubber",
+      "target": "ex:msyn/source/hid-20028"
+    },
+    {
+      "id": "ex:msyn/hid-20028/unit/lp-activated-carbon/reported-in/hid-20028",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20028/unit/lp-activated-carbon",
+      "target": "ex:msyn/source/hid-20028"
+    },
+    {
+      "id": "ex:msyn/hid-20028/unit/lp-co-conversion/reported-in/hid-20028",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20028/unit/lp-co-conversion",
+      "target": "ex:msyn/source/hid-20028"
+    },
+    {
+      "id": "ex:msyn/source/hid-20028/authored-by/1",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 1,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/hid-20028",
+      "target": "ex:msyn/person/john-robell"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/hid-20028"
+}

@@ -1,0 +1,1149 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/analysis/kp1-kp2-product-250",
+      "label": "Analysis",
+      "props": {
+        "name": "Kp1 × Kp2 at 250° from equations (1) and (2)",
+        "analysis_kind": "equilibrium",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 11",
+            "note": "quote withheld: sha256:e903003072a091f179c04e797cdc3440cf89f08f8e64864a0b9ba67d678c18fd chars:121",
+            "passage": "10.1021-ja01339a003/p11/4",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:be87c69ba30167d986415a6caf2b61edcc433ee6ecd552ad6cec904857a99b13 chars:113",
+            "passage": "10.1021-ja01339a003/p12/1",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          }
+        ],
+        "experiment_kind": "computational",
+        "note": "compared with published values of the methanol synthesis equilibrium constant (1 × 10^-3 to 5 × 10^-3), which are cited, not measured here",
+        "results": {
+          "kp1_x_kp2": {
+            "status": "present",
+            "as_reported": "4 X 10~3",
+            "unit": "not stated",
+            "value": 0.004
+          }
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "250°",
+          "unit": "°C",
+          "value": 250
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/catalyst/no-10",
+      "label": "Catalyst",
+      "props": {
+        "name": "catalyst No. 10 (Pt)",
+        "catalyst_family": "not_reported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6, Table II",
+            "note": "quote withheld: sha256:1e70a124d61ae32e28c4e376c42f39f56a903657698d5d7c0d5907c1ad8853cb chars:24",
+            "passage": "10.1021-ja01339a003/p6/2",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6, Table II footnote a",
+            "note": "quote withheld: sha256:1bc0f4e2ddb18507c318bae9b78fab5a73cd502136720c1f22c44112aef20d3d chars:37",
+            "passage": "10.1021-ja01339a003/p6/2",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          }
+        ],
+        "generality": "kind",
+        "nominal_formula": "Pt",
+        "properties": {
+          "molal_composition": {
+            "status": "present",
+            "as_reported": "Pt",
+            "basis": "determined from the weights of metals used",
+            "note": "subscripts read from the rendered page image; text layer reads 'Pt'",
+            "text_value": "Pt"
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/catalyst/no-9",
+      "label": "Catalyst",
+      "props": {
+        "name": "catalyst No. 9 (Os)",
+        "catalyst_family": "not_reported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6, Table II",
+            "note": "quote withheld: sha256:76b162ced565f2d7d1ecb86fbae18b40dd33403dc56077293632a7736f017079 chars:18",
+            "passage": "10.1021-ja01339a003/p6/2",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6, Table II footnote a",
+            "note": "quote withheld: sha256:1bc0f4e2ddb18507c318bae9b78fab5a73cd502136720c1f22c44112aef20d3d chars:37",
+            "passage": "10.1021-ja01339a003/p6/2",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          }
+        ],
+        "generality": "kind",
+        "nominal_formula": "Os",
+        "properties": {
+          "molal_composition": {
+            "status": "present",
+            "as_reported": "Os",
+            "basis": "determined from the weights of metals used",
+            "note": "subscripts read from the rendered page image; text layer reads 'Os'",
+            "text_value": "Os"
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/claim/no-methylal-interference",
+      "label": "Claim",
+      "props": {
+        "name": "methylal not present in amounts affecting the analyses",
+        "claim_kind": "data_quality",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:bf838870419e354ad9da5f41aa70c8ebf342629bfa8465a9fe2fcd16fae73ae4 chars:110",
+            "passage": "10.1021-ja01339a003/p5/4",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          }
+        ],
+        "inference_type": "observational",
+        "statement": "Methylal was not present in sufficient amount to affect either the formaldehyde or the methanol determinations."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/claim/product-matches-methanol-equilibrium",
+      "label": "Claim",
+      "props": {
+        "name": "Kp1 × Kp2 agrees with published methanol equilibrium constants",
+        "claim_kind": "data_quality",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:be87c69ba30167d986415a6caf2b61edcc433ee6ecd552ad6cec904857a99b13 chars:113",
+            "passage": "10.1021-ja01339a003/p12/1",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          }
+        ],
+        "inference_type": "computational",
+        "note": "the methanol synthesis constants (1 × 10^-3 to 5 × 10^-3) are cited from published work, not measured in this paper",
+        "statement": "Kp1 × Kp2 at 250° calculated from equations (1) and (2) is 4 × 10^-3, within the range of published values of the methanol synthesis equilibrium constant (1 × 10^-3 to 5 × 10^-3), showing that the measured constants are of the correct order of magnitude."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/material/acid-washed-pumice",
+      "label": "Material",
+      "props": {
+        "name": "acid-washed pumice",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6, Table II",
+            "note": "quote withheld: sha256:ae1f470ce820c67d6d85ff609337d14c4a4c20f15243ac8c2d367771beb03963 chars:24",
+            "passage": "10.1021-ja01339a003/p6/2",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6, Table II",
+            "note": "quote withheld: sha256:71c814a6152b50f1f7cf33d1e64d06a4d6bfcc2fc8f2bcea462117f79985613b chars:16",
+            "passage": "10.1021-ja01339a003/p6/2",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/preparation/no-10",
+      "label": "Preparation",
+      "props": {
+        "name": "preparation of catalyst No. 10",
+        "conditions": {
+          "precipitant": {
+            "status": "present",
+            "as_reported": "Alkaline formalin",
+            "text_value": "Alkaline formalin"
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6, Table II",
+            "note": "quote withheld: sha256:1e70a124d61ae32e28c4e376c42f39f56a903657698d5d7c0d5907c1ad8853cb chars:24",
+            "passage": "10.1021-ja01339a003/p6/2",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:ab80743c901fdf5c3254b40f9039cceaf9909fe664bc82b1ac128a3e5566625b chars:105",
+            "passage": "10.1021-ja01339a003/p5/4",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6, Table II",
+            "note": "quote withheld: sha256:ae1f470ce820c67d6d85ff609337d14c4a4c20f15243ac8c2d367771beb03963 chars:24",
+            "passage": "10.1021-ja01339a003/p6/2",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6, Table II",
+            "note": "quote withheld: sha256:71c814a6152b50f1f7cf33d1e64d06a4d6bfcc2fc8f2bcea462117f79985613b chars:16",
+            "passage": "10.1021-ja01339a003/p6/2",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          }
+        ],
+        "method": "precipitation with Alkaline formalin",
+        "note": "The platinum and osmium catalysts were not prepared by the common procedure; the source gives only the precipitant and 'Precipitated on acid-washed pumice'.",
+        "procedure_status": "completed",
+        "steps": [
+          "precipitant: Alkaline formalin",
+          "precipitated on acid-washed pumice (Table II, printed across the rows of Nos. 9 and 10)"
+        ],
+        "temperature": {
+          "status": "present",
+          "as_reported": "Room",
+          "text_value": "room temperature"
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/preparation/no-9",
+      "label": "Preparation",
+      "props": {
+        "name": "preparation of catalyst No. 9",
+        "conditions": {
+          "precipitant": {
+            "status": "present",
+            "as_reported": "Concd. NH4OH",
+            "text_value": "Concd. NH4OH"
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6, Table II",
+            "note": "quote withheld: sha256:76b162ced565f2d7d1ecb86fbae18b40dd33403dc56077293632a7736f017079 chars:18",
+            "passage": "10.1021-ja01339a003/p6/2",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:ab80743c901fdf5c3254b40f9039cceaf9909fe664bc82b1ac128a3e5566625b chars:105",
+            "passage": "10.1021-ja01339a003/p5/4",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6, Table II",
+            "note": "quote withheld: sha256:ae1f470ce820c67d6d85ff609337d14c4a4c20f15243ac8c2d367771beb03963 chars:24",
+            "passage": "10.1021-ja01339a003/p6/2",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6, Table II",
+            "note": "quote withheld: sha256:71c814a6152b50f1f7cf33d1e64d06a4d6bfcc2fc8f2bcea462117f79985613b chars:16",
+            "passage": "10.1021-ja01339a003/p6/2",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          }
+        ],
+        "method": "precipitation with Concd. NH4OH",
+        "note": "The platinum and osmium catalysts were not prepared by the common procedure; the source gives only the precipitant and 'Precipitated on acid-washed pumice'.",
+        "procedure_status": "completed",
+        "steps": [
+          "precipitant: Concd. NH4OH",
+          "precipitated on acid-washed pumice (Table II, printed across the rows of Nos. 9 and 10)"
+        ],
+        "temperature": {
+          "status": "present",
+          "as_reported": "Room",
+          "text_value": "room temperature"
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/reaction/formaldehyde-hydrogenation",
+      "label": "Reaction",
+      "props": {
+        "name": "hydrogenation of formaldehyde to methanol (reaction 2); reverse: dehydrogenation of methanol",
+        "balance_status": "balanced",
+        "direction": "reversible",
+        "equation": "H2 + HCOH -> CH3OH",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12, Summary",
+            "note": "quote withheld: sha256:5371c77c227c73e62086a7f199b478200be40d5f7b3ab5e22c50b284644fd43f chars:143",
+            "passage": "10.1021-ja01339a003/p12/3",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:2cb2fcd166e16d08029b06a30f86e8ce16d22358c8c526eee82e468bfebb3f36 chars:81",
+            "passage": "10.1021-ja01339a003/p2/1",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          }
+        ],
+        "generality": "kind"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/reaction/formaldehyde-synthesis",
+      "label": "Reaction",
+      "props": {
+        "name": "formaldehyde synthesis from carbon monoxide and hydrogen (reaction 1)",
+        "balance_status": "balanced",
+        "direction": "reversible",
+        "equation": "CO + H2 -> HCOH",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12, Summary",
+            "note": "quote withheld: sha256:5371c77c227c73e62086a7f199b478200be40d5f7b3ab5e22c50b284644fd43f chars:143",
+            "passage": "10.1021-ja01339a003/p12/3",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          }
+        ],
+        "generality": "kind",
+        "note": "the source writes the equilibrium CO + H2 ⇌ HCOH; the double arrow is lost in the text layer"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/sample/no-10",
+      "label": "CatalystSample",
+      "props": {
+        "name": "catalyst batch 10",
+        "batch_identifier": "10",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6, Table II",
+            "note": "quote withheld: sha256:1e70a124d61ae32e28c4e376c42f39f56a903657698d5d7c0d5907c1ad8853cb chars:24",
+            "passage": "10.1021-ja01339a003/p6/2",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          }
+        ],
+        "preparation_status": "prepared",
+        "sample_kind": "batch"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/sample/no-9",
+      "label": "CatalystSample",
+      "props": {
+        "name": "catalyst batch 9",
+        "batch_identifier": "9",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6, Table II",
+            "note": "quote withheld: sha256:76b162ced565f2d7d1ecb86fbae18b40dd33403dc56077293632a7736f017079 chars:18",
+            "passage": "10.1021-ja01339a003/p6/2",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          }
+        ],
+        "preparation_status": "prepared",
+        "sample_kind": "batch"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/species/alkaline-formalin",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "alkaline formalin",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6, Table II",
+            "note": "quote withheld: sha256:8dc0daf5c0440fb72137470437401ab31da5fe9062a958cf912db36c6a7ef433 chars:20",
+            "passage": "10.1021-ja01339a003/p6/2",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/treatment/reduction-h2",
+      "label": "Treatment",
+      "props": {
+        "name": "in-place reduction with pure hydrogen (Pt and Os catalysts)",
+        "atmosphere": "pure hydrogen",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:e06813c15344fce6e232d5b9a3309019ef0752e8336d8d7f85604708ae6f91e4 chars:167",
+            "passage": "10.1021-ja01339a003/p6/3",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "'2000' is the text layer's reading of '200°'; quote withheld: sha256:473662bd79f16e2c06f58bda1befd95df7898238037b4a1f79adf39c994e22e9 chars:168",
+            "passage": "10.1021-ja01339a003/p6/3",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          }
+        ],
+        "procedure_status": "completed",
+        "temperature": {
+          "status": "present",
+          "as_reported": "about 200°",
+          "note": "the heating schedule is stated for the reduction in general",
+          "qualifier": "approximate",
+          "unit": "°C",
+          "value": 200
+        },
+        "treatment_kind": "reduction"
+      }
+    },
+    {
+      "id": "ex:msyn/source/10.1021-ja01339a003",
+      "label": "Source",
+      "props": {
+        "name": "The Equilibrium between Carbon Monoxide, Hydrogen, Formaldehyde and Methanol.1 I. The Reactions CO + H2 ⥨ HCOH and H2 + HCOH ⥦ CH3OH",
+        "kind": "article",
+        "description": "Published 1933 (publication year (bibliography)); in scope: before the 1966-01-01 cutoff. Text: 13 pages text_layer. Text not redistributed.",
+        "doi": "10.1021/ja01339a003",
+        "licence": "no verified publisher licence; short excerpts quoted as evidence under fair use",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "The Equilibrium between Carbon Monoxide, Hydrogen, Formaldehyde and Methanol.1 I. The Reactions CO + H2 ⥨ HCOH and H2 + HCOH ⥦ CH3OH",
+        "url": "https://doi.org/10.1021/ja01339a003",
+        "venue": "Journal of the American Chemical Society",
+        "year": 1933
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/analysis/kp1-kp2-product-250/reported-in/10.1021-ja01339a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 11",
+          "p. 12"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01339a003/analysis/kp1-kp2-product-250",
+      "target": "ex:msyn/source/10.1021-ja01339a003"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/catalyst/no-10/reported-in/10.1021-ja01339a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6, Table II",
+          "p. 6, Table II footnote a"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01339a003/catalyst/no-10",
+      "target": "ex:msyn/source/10.1021-ja01339a003"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/catalyst/no-9/reported-in/10.1021-ja01339a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6, Table II",
+          "p. 6, Table II footnote a"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01339a003/catalyst/no-9",
+      "target": "ex:msyn/source/10.1021-ja01339a003"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/claim/no-methylal-interference/reported-in/10.1021-ja01339a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01339a003/claim/no-methylal-interference",
+      "target": "ex:msyn/source/10.1021-ja01339a003"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/claim/product-matches-methanol-equilibrium/reported-in/10.1021-ja01339a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 12"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01339a003/claim/product-matches-methanol-equilibrium",
+      "target": "ex:msyn/source/10.1021-ja01339a003"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/link/1",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "status": "asserted",
+        "coefficient": 1,
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12, Summary",
+            "note": "quote withheld: sha256:5371c77c227c73e62086a7f199b478200be40d5f7b3ab5e22c50b284644fd43f chars:143",
+            "passage": "10.1021-ja01339a003/p12/3",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1021-ja01339a003/reaction/formaldehyde-synthesis",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/link/137",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:e06813c15344fce6e232d5b9a3309019ef0752e8336d8d7f85604708ae6f91e4 chars:167",
+            "passage": "10.1021-ja01339a003/p6/3",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          }
+        ],
+        "order": 1
+      },
+      "source": "ex:msyn/10.1021-ja01339a003/sample/no-9",
+      "target": "ex:msyn/10.1021-ja01339a003/treatment/reduction-h2"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/link/138",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:e06813c15344fce6e232d5b9a3309019ef0752e8336d8d7f85604708ae6f91e4 chars:167",
+            "passage": "10.1021-ja01339a003/p6/3",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          }
+        ],
+        "order": 1
+      },
+      "source": "ex:msyn/10.1021-ja01339a003/sample/no-10",
+      "target": "ex:msyn/10.1021-ja01339a003/treatment/reduction-h2"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/link/2",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "status": "asserted",
+        "coefficient": 1,
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12, Summary",
+            "note": "quote withheld: sha256:5371c77c227c73e62086a7f199b478200be40d5f7b3ab5e22c50b284644fd43f chars:143",
+            "passage": "10.1021-ja01339a003/p12/3",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1021-ja01339a003/reaction/formaldehyde-synthesis",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/link/3",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "status": "asserted",
+        "coefficient": 1,
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12, Summary",
+            "note": "quote withheld: sha256:5371c77c227c73e62086a7f199b478200be40d5f7b3ab5e22c50b284644fd43f chars:143",
+            "passage": "10.1021-ja01339a003/p12/3",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          }
+        ],
+        "role": "product"
+      },
+      "source": "ex:msyn/10.1021-ja01339a003/reaction/formaldehyde-synthesis",
+      "target": "ex:msyn/species/hcho"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/link/314",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:be87c69ba30167d986415a6caf2b61edcc433ee6ecd552ad6cec904857a99b13 chars:113",
+            "passage": "10.1021-ja01339a003/p12/1",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          }
+        ],
+        "role": "combined constant compared with the methanol synthesis equilibrium"
+      },
+      "source": "ex:msyn/10.1021-ja01339a003/analysis/kp1-kp2-product-250",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/link/363",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:be87c69ba30167d986415a6caf2b61edcc433ee6ecd552ad6cec904857a99b13 chars:113",
+            "passage": "10.1021-ja01339a003/p12/1",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01339a003/analysis/kp1-kp2-product-250",
+      "target": "ex:msyn/10.1021-ja01339a003/claim/product-matches-methanol-equilibrium"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/link/392",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:be87c69ba30167d986415a6caf2b61edcc433ee6ecd552ad6cec904857a99b13 chars:113",
+            "passage": "10.1021-ja01339a003/p12/1",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01339a003/claim/product-matches-methanol-equilibrium",
+      "target": "ex:msyn/10.1021-ja01339a003/reaction/formaldehyde-synthesis"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/link/393",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:be87c69ba30167d986415a6caf2b61edcc433ee6ecd552ad6cec904857a99b13 chars:113",
+            "passage": "10.1021-ja01339a003/p12/1",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01339a003/claim/product-matches-methanol-equilibrium",
+      "target": "ex:msyn/10.1021-ja01339a003/reaction/formaldehyde-hydrogenation"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/link/394",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:be87c69ba30167d986415a6caf2b61edcc433ee6ecd552ad6cec904857a99b13 chars:113",
+            "passage": "10.1021-ja01339a003/p12/1",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01339a003/claim/product-matches-methanol-equilibrium",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/link/4",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "status": "asserted",
+        "coefficient": 1,
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12, Summary",
+            "note": "quote withheld: sha256:5371c77c227c73e62086a7f199b478200be40d5f7b3ab5e22c50b284644fd43f chars:143",
+            "passage": "10.1021-ja01339a003/p12/3",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1021-ja01339a003/reaction/formaldehyde-hydrogenation",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/link/401",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:bf838870419e354ad9da5f41aa70c8ebf342629bfa8465a9fe2fcd16fae73ae4 chars:110",
+            "passage": "10.1021-ja01339a003/p5/4",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01339a003/claim/no-methylal-interference",
+      "target": "ex:msyn/species/hcho"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/link/402",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:bf838870419e354ad9da5f41aa70c8ebf342629bfa8465a9fe2fcd16fae73ae4 chars:110",
+            "passage": "10.1021-ja01339a003/p5/4",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01339a003/claim/no-methylal-interference",
+      "target": "ex:msyn/species/ch3oh"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/link/5",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "status": "asserted",
+        "coefficient": 1,
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12, Summary",
+            "note": "quote withheld: sha256:5371c77c227c73e62086a7f199b478200be40d5f7b3ab5e22c50b284644fd43f chars:143",
+            "passage": "10.1021-ja01339a003/p12/3",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1021-ja01339a003/reaction/formaldehyde-hydrogenation",
+      "target": "ex:msyn/species/hcho"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/link/6",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "status": "asserted",
+        "coefficient": 1,
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12, Summary",
+            "note": "quote withheld: sha256:5371c77c227c73e62086a7f199b478200be40d5f7b3ab5e22c50b284644fd43f chars:143",
+            "passage": "10.1021-ja01339a003/p12/3",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          }
+        ],
+        "role": "product"
+      },
+      "source": "ex:msyn/10.1021-ja01339a003/reaction/formaldehyde-hydrogenation",
+      "target": "ex:msyn/species/ch3oh"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/link/78",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6, Table II",
+            "note": "quote withheld: sha256:76b162ced565f2d7d1ecb86fbae18b40dd33403dc56077293632a7736f017079 chars:18",
+            "passage": "10.1021-ja01339a003/p6/2",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6, Table II footnote a",
+            "note": "quote withheld: sha256:1bc0f4e2ddb18507c318bae9b78fab5a73cd502136720c1f22c44112aef20d3d chars:37",
+            "passage": "10.1021-ja01339a003/p6/2",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          }
+        ],
+        "fraction_basis": "mole",
+        "role": "not_stated",
+        "role_detail": "metal of the molal composition Os"
+      },
+      "source": "ex:msyn/10.1021-ja01339a003/catalyst/no-9",
+      "target": "ex:msyn/species/osmium"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/link/79",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6, Table II",
+            "note": "quote withheld: sha256:76b162ced565f2d7d1ecb86fbae18b40dd33403dc56077293632a7736f017079 chars:18",
+            "passage": "10.1021-ja01339a003/p6/2",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01339a003/sample/no-9",
+      "target": "ex:msyn/10.1021-ja01339a003/catalyst/no-9"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/link/80",
+      "type": "PREPARED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6, Table II",
+            "note": "quote withheld: sha256:76b162ced565f2d7d1ecb86fbae18b40dd33403dc56077293632a7736f017079 chars:18",
+            "passage": "10.1021-ja01339a003/p6/2",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01339a003/sample/no-9",
+      "target": "ex:msyn/10.1021-ja01339a003/preparation/no-9"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/link/81",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6, Table II",
+            "note": "quote withheld: sha256:76b162ced565f2d7d1ecb86fbae18b40dd33403dc56077293632a7736f017079 chars:18",
+            "passage": "10.1021-ja01339a003/p6/2",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          }
+        ],
+        "role": "precipitant"
+      },
+      "source": "ex:msyn/10.1021-ja01339a003/sample/no-9",
+      "target": "ex:msyn/species/nh4oh"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/link/82",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6, Table II",
+            "note": "quote withheld: sha256:ae1f470ce820c67d6d85ff609337d14c4a4c20f15243ac8c2d367771beb03963 chars:24",
+            "passage": "10.1021-ja01339a003/p6/2",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6, Table II",
+            "note": "quote withheld: sha256:71c814a6152b50f1f7cf33d1e64d06a4d6bfcc2fc8f2bcea462117f79985613b chars:16",
+            "passage": "10.1021-ja01339a003/p6/2",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          }
+        ],
+        "role": "carrier, as printed across the Table II rows of Nos. 9 and 10"
+      },
+      "source": "ex:msyn/10.1021-ja01339a003/sample/no-9",
+      "target": "ex:msyn/10.1021-ja01339a003/material/acid-washed-pumice"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/link/83",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6, Table II",
+            "note": "quote withheld: sha256:1e70a124d61ae32e28c4e376c42f39f56a903657698d5d7c0d5907c1ad8853cb chars:24",
+            "passage": "10.1021-ja01339a003/p6/2",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6, Table II footnote a",
+            "note": "quote withheld: sha256:1bc0f4e2ddb18507c318bae9b78fab5a73cd502136720c1f22c44112aef20d3d chars:37",
+            "passage": "10.1021-ja01339a003/p6/2",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          }
+        ],
+        "fraction_basis": "mole",
+        "role": "not_stated",
+        "role_detail": "metal of the molal composition Pt"
+      },
+      "source": "ex:msyn/10.1021-ja01339a003/catalyst/no-10",
+      "target": "ex:msyn/species/platinum"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/link/84",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6, Table II",
+            "note": "quote withheld: sha256:1e70a124d61ae32e28c4e376c42f39f56a903657698d5d7c0d5907c1ad8853cb chars:24",
+            "passage": "10.1021-ja01339a003/p6/2",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01339a003/sample/no-10",
+      "target": "ex:msyn/10.1021-ja01339a003/catalyst/no-10"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/link/85",
+      "type": "PREPARED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6, Table II",
+            "note": "quote withheld: sha256:1e70a124d61ae32e28c4e376c42f39f56a903657698d5d7c0d5907c1ad8853cb chars:24",
+            "passage": "10.1021-ja01339a003/p6/2",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01339a003/sample/no-10",
+      "target": "ex:msyn/10.1021-ja01339a003/preparation/no-10"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/link/86",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6, Table II",
+            "note": "quote withheld: sha256:1e70a124d61ae32e28c4e376c42f39f56a903657698d5d7c0d5907c1ad8853cb chars:24",
+            "passage": "10.1021-ja01339a003/p6/2",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          }
+        ],
+        "role": "precipitant"
+      },
+      "source": "ex:msyn/10.1021-ja01339a003/sample/no-10",
+      "target": "ex:msyn/10.1021-ja01339a003/species/alkaline-formalin"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/link/87",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6, Table II",
+            "note": "quote withheld: sha256:ae1f470ce820c67d6d85ff609337d14c4a4c20f15243ac8c2d367771beb03963 chars:24",
+            "passage": "10.1021-ja01339a003/p6/2",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6, Table II",
+            "note": "quote withheld: sha256:71c814a6152b50f1f7cf33d1e64d06a4d6bfcc2fc8f2bcea462117f79985613b chars:16",
+            "passage": "10.1021-ja01339a003/p6/2",
+            "source": "ex:msyn/source/10.1021-ja01339a003"
+          }
+        ],
+        "role": "carrier, as printed across the Table II rows of Nos. 9 and 10"
+      },
+      "source": "ex:msyn/10.1021-ja01339a003/sample/no-10",
+      "target": "ex:msyn/10.1021-ja01339a003/material/acid-washed-pumice"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/material/acid-washed-pumice/reported-in/10.1021-ja01339a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6, Table II"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01339a003/material/acid-washed-pumice",
+      "target": "ex:msyn/source/10.1021-ja01339a003"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/preparation/no-10/reported-in/10.1021-ja01339a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5",
+          "p. 6, Table II"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01339a003/preparation/no-10",
+      "target": "ex:msyn/source/10.1021-ja01339a003"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/preparation/no-9/reported-in/10.1021-ja01339a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5",
+          "p. 6, Table II"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01339a003/preparation/no-9",
+      "target": "ex:msyn/source/10.1021-ja01339a003"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/reaction/formaldehyde-hydrogenation/reported-in/10.1021-ja01339a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 12, Summary",
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01339a003/reaction/formaldehyde-hydrogenation",
+      "target": "ex:msyn/source/10.1021-ja01339a003"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/reaction/formaldehyde-synthesis/reported-in/10.1021-ja01339a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 12, Summary"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01339a003/reaction/formaldehyde-synthesis",
+      "target": "ex:msyn/source/10.1021-ja01339a003"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/sample/no-10/reported-in/10.1021-ja01339a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6, Table II"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01339a003/sample/no-10",
+      "target": "ex:msyn/source/10.1021-ja01339a003"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/sample/no-9/reported-in/10.1021-ja01339a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6, Table II"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01339a003/sample/no-9",
+      "target": "ex:msyn/source/10.1021-ja01339a003"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/species/alkaline-formalin/reported-in/10.1021-ja01339a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6, Table II"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01339a003/species/alkaline-formalin",
+      "target": "ex:msyn/source/10.1021-ja01339a003"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01339a003/treatment/reduction-h2/reported-in/10.1021-ja01339a003",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01339a003/treatment/reduction-h2",
+      "target": "ex:msyn/source/10.1021-ja01339a003"
+    },
+    {
+      "id": "ex:msyn/source/10.1021-ja01339a003/authored-by/1",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 1,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/10.1021-ja01339a003",
+      "target": "ex:msyn/person/r-newton"
+    },
+    {
+      "id": "ex:msyn/source/10.1021-ja01339a003/authored-by/2",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 2,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/10.1021-ja01339a003",
+      "target": "ex:msyn/person/barnett-f-dodge"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/10.1021-ja01339a003"
+}

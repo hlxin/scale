@@ -31,6 +31,9 @@ scale-catal@0.2.0 …` a pinned one. In a checkout of this repository run `uv ru
 - **Rights.** Record each source's rights in the folder's `rights.yaml` and keep quoted text within the
   copyright cap (`scale evidence report`; docs/curation.md); write claims in your own words. Commit only
   public documents (`access: public`); project data not cleared for publication stays outside the repository.
+  The graphs in `graphs/` (each kept as parts, one file per source) quote no text of a source in copyright
+  (`limits` 0 in their `rights.yaml`) and commit no source text; `scale graph bundle` merges them
+  ([graphs/README.md](graphs/README.md)).
 - **Answer questions** by writing a graph query plan (the catalysis competency questions, from
   `domains`, are examples) and running `query` (or `scale graph query`). Base every factual sentence
   on returned rows and cite their evidence. Quote values as reported, keep incompatible units and

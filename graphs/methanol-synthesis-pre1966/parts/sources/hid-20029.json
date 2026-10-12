@@ -1,0 +1,719 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/hid-20029/claim/co-h2-most-economical",
+      "label": "Claim",
+      "props": {
+        "name": "methanol most economically made from CO + H2",
+        "claim_kind": "other",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "OCR: '~' = H2; quote withheld: sha256:7ddd1d0478c621e6a3adf8a3f58557925df0f6f1e3b65efea300c1bad24d78cd chars:48",
+            "passage": "hid-20029/p2/2",
+            "source": "ex:msyn/source/hid-20029"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "statement": "The most economical preparation of methanol is that from CO + H2."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20029/claim/combustion-gas-right-ratio",
+      "label": "Claim",
+      "props": {
+        "name": "combustion gas has CO and H2 in the right ratio for methanol",
+        "claim_kind": "other",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "OCR: 'He' = H2, '(L ! 2)' read as the ratio 1 : 2; quote withheld: sha256:dd4749d996ed00514ccf56205e4bb8a56fc5a96c562a25ca6af536ddc8504b48 chars:160",
+            "passage": "hid-20029/p6/2",
+            "source": "ex:msyn/source/hid-20029"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:e5dca4fb2956173dfdd4982c6b6b6f4c8a4cefbd9f7c29671ca2bbcc107986c8 chars:94",
+            "passage": "hid-20029/p6/2",
+            "source": "ex:msyn/source/hid-20029"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "statement": "In the combustion gas of the partial oxidation, CO and H2 are present in the right ratio (1 : 2) for making methanol, in a fairly large quantity and without many troublesome by-products."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20029/claim/coupling-with-ammonia-synthesis",
+      "label": "Claim",
+      "props": {
+        "name": "coupling the methanol plant to an ammonia synthesis",
+        "claim_kind": "other",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:2f7cd8514d3b43ba83ac8a3b2daff7e043722d61d4241268b4390c11932de295 chars:149",
+            "passage": "hid-20029/p2/3",
+            "source": "ex:msyn/source/hid-20029"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:f54c213a0ddf4707283749efe9afc0cde08e7de8e7dfaae2d6871df9eba084a6 chars:206",
+            "passage": "hid-20029/p2/4",
+            "source": "ex:msyn/source/hid-20029"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "statement": "Using the CH4 fraction from coke-oven gas separation allows the methanol plant to be coupled to an ammonia synthesis: the CO + H2 mixture from the coke-oven gas can be sent to the CH3OH synthesis together with the acetylene residual synthesis gas; washing out CO with liquid nitrogen can be dropped, the gas separation is simplified, total refrigeration use is lower, and the CO from the coke-oven gas is converted into CH3OH."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20029/claim/ep258887-co-conversion-economical",
+      "label": "Claim",
+      "props": {
+        "name": "converting 2% CO in hydrogen to methanol is economical (E.P. 258887)",
+        "claim_kind": "other",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:0f51f2544a070fcc61d7ef3764933c086691721c45e918d166c85ec53f56e5ae chars:155",
+            "passage": "hid-20029/p2/4",
+            "source": "ex:msyn/source/hid-20029"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "cited from E.P. 258887",
+        "statement": "According to E.P. 258887, converting the CO of the hydrogen fraction into methanol is more economical than removing this CO in another way, even at 2% CO."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20029/claim/methanol-product-for-methyl-acetate",
+      "label": "Claim",
+      "props": {
+        "name": "part of the 95-99% methanol product esterified to methyl acetate",
+        "claim_kind": "other",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:50bdc76cf213881d23746561ecfc575d9d34b704cd1ec674dc899d4d84689065 chars:174",
+            "passage": "hid-20029/p1/4",
+            "source": "ex:msyn/source/hid-20029"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:fc542886ed9d42508e02cf5b106efc2aa2fccb1057f97e083ab76d0c278338ab chars:121",
+            "passage": "hid-20029/p2/1",
+            "source": "ex:msyn/source/hid-20029"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "statement": "Methyl acetate is made by esterifying part of the acetic acid production (98-99% acid) with part of the methanol synthesis production (95-99% alcohol); the methanol synthesis is designed for a larger production than methyl acetate requires."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20029/claim/partial-oxidation-chosen-for-synthesis-gas",
+      "label": "Claim",
+      "props": {
+        "name": "partial oxidation of CH4 chosen because it yields methanol synthesis gas",
+        "claim_kind": "other",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:88130ec1d9b3c3f5bd6e52d05158f909deaf1a86f597e98149dea9361375b4b9 chars:198",
+            "passage": "hid-20029/p2/2",
+            "source": "ex:msyn/source/hid-20029"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:fa8f034acc1d9a05bded56740187c2a6a2004769225dafcada3b99bcd0d81ef9 chars:96",
+            "passage": "hid-20029/p6/3",
+            "source": "ex:msyn/source/hid-20029"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "statement": "Partial oxidation of hydrocarbons (methane) was chosen for acetylene production because it also gives a residual gas that, after a simple treatment, is suitable as synthesis gas for methanol production."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20029/claim/partial-oxidation-gas-cheaper-than-water-gas",
+      "label": "Claim",
+      "props": {
+        "name": "synthesis gas from partial-oxidation residue probably cheaper than from water gas",
+        "claim_kind": "other",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:1fea21b8bf127d5a0865a8b30334b00aa902b9ff185a3b66c2b6916372b6109e chars:216",
+            "passage": "hid-20029/p2/2",
+            "source": "ex:msyn/source/hid-20029"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "limitations": "stated as probable ('waarschijnlijk'); no cost figures given",
+        "statement": "Preparing the required CO + H2 mixture from the residual gas of the partial oxidation of CH4 is probably more economical than preparing it from water gas; therefore acetylene by partial oxidation of CH4 was preferred over cracking of CH4."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20029/claim/plant-flow-to-methanol-reactor",
+      "label": "Claim",
+      "props": {
+        "name": "flow of synthesis gas to the methanol reactor",
+        "claim_kind": "other",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:003bca9e1a0a7fca91c0e76da986c9afb8cfd3d7423ef07ef53d89bc3c39808f chars:67",
+            "passage": "hid-20029/p3/1",
+            "source": "ex:msyn/source/hid-20029"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "OCR: 'lig' is read as H2; the minor component 'C~' is illegible (CO2 or CH4); quote withheld: sha256:f6e8666d54d7ab477712a7ac1562786b21ea8cd6ddd6dec1a8c26b4724af662c chars:85",
+            "passage": "hid-20029/p3/1",
+            "source": "ex:msyn/source/hid-20029"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "OCR: 'methan~lreaetor' = methanolreactor, 'water- stot' = waterstof; quote withheld: sha256:23621b3a7dab944ff3d1f9a2ee412a5833bd145048af2740313876cc3cc8c8f2 chars:108",
+            "passage": "hid-20029/p3/1",
+            "source": "ex:msyn/source/hid-20029"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "statement": "The residual gas from the acetylene washing (H2 + CO, CH4 and some other gases) is partially burned in burner 6; the remaining mixture of H2, CO and a little of a third gas is fed to methanol reactor 5 and converted into methanol; the remaining hydrogen goes to the NH3 synthesis."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20029/claim/residual-hydrogen-for-ammonia",
+      "label": "Claim",
+      "props": {
+        "name": "hydrogen left after methanol synthesis serves the ammonia synthesis",
+        "claim_kind": "other",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:4d6bc33bcf6583e5809c3378569fe5467e32ac0fa958d622048de9bd37f3a7ae chars:109",
+            "passage": "hid-20029/p2/4",
+            "source": "ex:msyn/source/hid-20029"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:3a4d6ae156c0b265b0181db106c7d4f84363576376e09c3ba86a3c5590bea93a chars:91",
+            "passage": "hid-20029/p2/4",
+            "source": "ex:msyn/source/hid-20029"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "statement": "After the methanol synthesis, hydrogen remains, contaminated with a small percentage of CO that can be washed out, after which practically the same amount of H2 is left for NH3 production as with ordinary gas separation."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20029/claim/same-pressure-as-ammonia",
+      "label": "Claim",
+      "props": {
+        "name": "methanol and NH3 synthesis use practically the same apparatus and pressure",
+        "claim_kind": "other",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:c29e3a4c02afe50854c59f0c82ff208a1e075c26b88dc1802ae28c4f4b5bee3e chars:58",
+            "passage": "hid-20029/p2/5",
+            "source": "ex:msyn/source/hid-20029"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "statement": "The apparatus and the working pressure of the methanol and the NH3 synthesis are practically the same."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20029/feed/synthesis-gas-from-partial-oxidation",
+      "label": "Feed",
+      "props": {
+        "name": "CO + H2 synthesis gas from the partial-oxidation residual gas",
+        "description": "Residual gas of the acetylene washing, partially burned in burner 6, leaving a mixture of H2, CO and a little of a third gas (illegible in the text layer), fed to methanol reactor 5. Together with the CO + H2 mixture from the coke-oven gas.",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "OCR: 'lig' is read as H2; the minor component 'C~' is illegible (CO2 or CH4); quote withheld: sha256:f6e8666d54d7ab477712a7ac1562786b21ea8cd6ddd6dec1a8c26b4724af662c chars:85",
+            "passage": "hid-20029/p3/1",
+            "source": "ex:msyn/source/hid-20029"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "OCR: 'He' = H2, '(L ! 2)' read as the ratio 1 : 2; quote withheld: sha256:dd4749d996ed00514ccf56205e4bb8a56fc5a96c562a25ca6af536ddc8504b48 chars:160",
+            "passage": "hid-20029/p6/2",
+            "source": "ex:msyn/source/hid-20029"
+          }
+        ],
+        "ratios": {
+          "co_h2_ratio": {
+            "status": "present",
+            "as_reported": "(L ! 2)",
+            "note": "OCR of the printed ratio of CO to H2; read as 1 : 2",
+            "text_value": "1 : 2"
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20029/reactor/methanol-reactor-5",
+      "label": "Reactor",
+      "props": {
+        "name": "methanol reactor 5 of the plant scheme",
+        "description": "The methanol reactor (item 5) of the overall plant scheme; the report defers its detailed design to the separate reports.",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "OCR: 'methan~lreaetor' = methanolreactor, 'water- stot' = waterstof; quote withheld: sha256:23621b3a7dab944ff3d1f9a2ee412a5833bd145048af2740313876cc3cc8c8f2 chars:108",
+            "passage": "hid-20029/p3/1",
+            "source": "ex:msyn/source/hid-20029"
+          }
+        ],
+        "reactor_kind": "not_reported"
+      }
+    },
+    {
+      "id": "ex:msyn/source/hid-20029",
+      "label": "Source",
+      "props": {
+        "name": "Fabrieksschema voor de synthese van methanol en azijnzuur en de bereiding van methylalcohol uit deze gronstoffen",
+        "kind": "thesis",
+        "description": "Published 1949 (publication year (bibliography)); in scope: before the 1966-01-01 cutoff. Text: 21 pages text_layer. Text not redistributed.",
+        "licence": "no verified publisher licence; short excerpts quoted as evidence under fair use",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "Fabrieksschema voor de synthese van methanol en azijnzuur en de bereiding van methylalcohol uit deze gronstoffen",
+        "venue": "Data Archiving and Networked Services (DANS)",
+        "year": 1949
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/hid-20029/claim/co-h2-most-economical/reported-in/hid-20029",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20029/claim/co-h2-most-economical",
+      "target": "ex:msyn/source/hid-20029"
+    },
+    {
+      "id": "ex:msyn/hid-20029/claim/combustion-gas-right-ratio/reported-in/hid-20029",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20029/claim/combustion-gas-right-ratio",
+      "target": "ex:msyn/source/hid-20029"
+    },
+    {
+      "id": "ex:msyn/hid-20029/claim/coupling-with-ammonia-synthesis/reported-in/hid-20029",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20029/claim/coupling-with-ammonia-synthesis",
+      "target": "ex:msyn/source/hid-20029"
+    },
+    {
+      "id": "ex:msyn/hid-20029/claim/ep258887-co-conversion-economical/reported-in/hid-20029",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20029/claim/ep258887-co-conversion-economical",
+      "target": "ex:msyn/source/hid-20029"
+    },
+    {
+      "id": "ex:msyn/hid-20029/claim/methanol-product-for-methyl-acetate/reported-in/hid-20029",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20029/claim/methanol-product-for-methyl-acetate",
+      "target": "ex:msyn/source/hid-20029"
+    },
+    {
+      "id": "ex:msyn/hid-20029/claim/partial-oxidation-chosen-for-synthesis-gas/reported-in/hid-20029",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20029/claim/partial-oxidation-chosen-for-synthesis-gas",
+      "target": "ex:msyn/source/hid-20029"
+    },
+    {
+      "id": "ex:msyn/hid-20029/claim/partial-oxidation-gas-cheaper-than-water-gas/reported-in/hid-20029",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20029/claim/partial-oxidation-gas-cheaper-than-water-gas",
+      "target": "ex:msyn/source/hid-20029"
+    },
+    {
+      "id": "ex:msyn/hid-20029/claim/plant-flow-to-methanol-reactor/reported-in/hid-20029",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20029/claim/plant-flow-to-methanol-reactor",
+      "target": "ex:msyn/source/hid-20029"
+    },
+    {
+      "id": "ex:msyn/hid-20029/claim/residual-hydrogen-for-ammonia/reported-in/hid-20029",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20029/claim/residual-hydrogen-for-ammonia",
+      "target": "ex:msyn/source/hid-20029"
+    },
+    {
+      "id": "ex:msyn/hid-20029/claim/same-pressure-as-ammonia/reported-in/hid-20029",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20029/claim/same-pressure-as-ammonia",
+      "target": "ex:msyn/source/hid-20029"
+    },
+    {
+      "id": "ex:msyn/hid-20029/feed/synthesis-gas-from-partial-oxidation/reported-in/hid-20029",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3",
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20029/feed/synthesis-gas-from-partial-oxidation",
+      "target": "ex:msyn/source/hid-20029"
+    },
+    {
+      "id": "ex:msyn/hid-20029/link/1",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "OCR: 'lig' is read as H2; the minor component 'C~' is illegible (CO2 or CH4); quote withheld: sha256:f6e8666d54d7ab477712a7ac1562786b21ea8cd6ddd6dec1a8c26b4724af662c chars:85",
+            "passage": "hid-20029/p3/1",
+            "source": "ex:msyn/source/hid-20029"
+          }
+        ],
+        "fraction": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source"
+        },
+        "role": "reactant"
+      },
+      "source": "ex:msyn/hid-20029/feed/synthesis-gas-from-partial-oxidation",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/hid-20029/link/10",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:c29e3a4c02afe50854c59f0c82ff208a1e075c26b88dc1802ae28c4f4b5bee3e chars:58",
+            "passage": "hid-20029/p2/5",
+            "source": "ex:msyn/source/hid-20029"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20029/claim/same-pressure-as-ammonia",
+      "target": "ex:msyn/hid-20029/reactor/methanol-reactor-5"
+    },
+    {
+      "id": "ex:msyn/hid-20029/link/11",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:a82d4ba7560da845133a37876955a5831eb161e5b381372826b6d9cd6aef9aa4 chars:61",
+            "passage": "hid-20029/p1/4",
+            "source": "ex:msyn/source/hid-20029"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20029/claim/methanol-product-for-methyl-acetate",
+      "target": "ex:msyn/species/ch3oh"
+    },
+    {
+      "id": "ex:msyn/hid-20029/link/12",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "OCR: 'methan~lreaetor' = methanolreactor, 'water- stot' = waterstof; quote withheld: sha256:23621b3a7dab944ff3d1f9a2ee412a5833bd145048af2740313876cc3cc8c8f2 chars:108",
+            "passage": "hid-20029/p3/1",
+            "source": "ex:msyn/source/hid-20029"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20029/claim/plant-flow-to-methanol-reactor",
+      "target": "ex:msyn/hid-20029/reactor/methanol-reactor-5"
+    },
+    {
+      "id": "ex:msyn/hid-20029/link/13",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "OCR: 'lig' is read as H2; the minor component 'C~' is illegible (CO2 or CH4); quote withheld: sha256:f6e8666d54d7ab477712a7ac1562786b21ea8cd6ddd6dec1a8c26b4724af662c chars:85",
+            "passage": "hid-20029/p3/1",
+            "source": "ex:msyn/source/hid-20029"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20029/claim/plant-flow-to-methanol-reactor",
+      "target": "ex:msyn/hid-20029/feed/synthesis-gas-from-partial-oxidation"
+    },
+    {
+      "id": "ex:msyn/hid-20029/link/2",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "OCR: 'lig' is read as H2; the minor component 'C~' is illegible (CO2 or CH4); quote withheld: sha256:f6e8666d54d7ab477712a7ac1562786b21ea8cd6ddd6dec1a8c26b4724af662c chars:85",
+            "passage": "hid-20029/p3/1",
+            "source": "ex:msyn/source/hid-20029"
+          }
+        ],
+        "fraction": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source"
+        },
+        "note": "'lig' in the text layer read as H2",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/hid-20029/feed/synthesis-gas-from-partial-oxidation",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/hid-20029/link/3",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:7ddd1d0478c621e6a3adf8a3f58557925df0f6f1e3b65efea300c1bad24d78cd chars:48",
+            "passage": "hid-20029/p2/2",
+            "source": "ex:msyn/source/hid-20029"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20029/claim/co-h2-most-economical",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/hid-20029/link/4",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:b643c8c7289f99119b6901c47765f0fdc3653412a167656df69826afd31beea5 chars:84",
+            "passage": "hid-20029/p2/2",
+            "source": "ex:msyn/source/hid-20029"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20029/claim/partial-oxidation-chosen-for-synthesis-gas",
+      "target": "ex:msyn/hid-20029/feed/synthesis-gas-from-partial-oxidation"
+    },
+    {
+      "id": "ex:msyn/hid-20029/link/5",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:24227a426169e1255673a48ec9f9a14f6a9ef659c601f4af3b0e6d299e9c455f chars:135",
+            "passage": "hid-20029/p2/2",
+            "source": "ex:msyn/source/hid-20029"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20029/claim/partial-oxidation-gas-cheaper-than-water-gas",
+      "target": "ex:msyn/hid-20029/feed/synthesis-gas-from-partial-oxidation"
+    },
+    {
+      "id": "ex:msyn/hid-20029/link/6",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "OCR: 'He' = H2, '(L ! 2)' read as the ratio 1 : 2; quote withheld: sha256:dd4749d996ed00514ccf56205e4bb8a56fc5a96c562a25ca6af536ddc8504b48 chars:160",
+            "passage": "hid-20029/p6/2",
+            "source": "ex:msyn/source/hid-20029"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20029/claim/combustion-gas-right-ratio",
+      "target": "ex:msyn/hid-20029/feed/synthesis-gas-from-partial-oxidation"
+    },
+    {
+      "id": "ex:msyn/hid-20029/link/7",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:cc7ae74b4a1f98d490af97debfa749ada9e0423d0aa6ab97cdf5023dbee07c08 chars:49",
+            "passage": "hid-20029/p2/4",
+            "source": "ex:msyn/source/hid-20029"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20029/claim/coupling-with-ammonia-synthesis",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/hid-20029/link/8",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:d0eacce48491198b1fc29690f5bb045d3fde67da50e9a8415d80565cca7093c5 chars:112",
+            "passage": "hid-20029/p2/4",
+            "source": "ex:msyn/source/hid-20029"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20029/claim/ep258887-co-conversion-economical",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/hid-20029/link/9",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:83b22dc1d1bf528c576438def6a8ddd93faa210887ee0a8bcda9ab09c3d9b7d5 chars:47",
+            "passage": "hid-20029/p2/4",
+            "source": "ex:msyn/source/hid-20029"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20029/claim/residual-hydrogen-for-ammonia",
+      "target": "ex:msyn/species/nh3"
+    },
+    {
+      "id": "ex:msyn/hid-20029/reactor/methanol-reactor-5/reported-in/hid-20029",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20029/reactor/methanol-reactor-5",
+      "target": "ex:msyn/source/hid-20029"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/hid-20029"
+}

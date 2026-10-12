@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+- **`graphs/`: the graphs SCALE curates and shares, and bundles.** A new top-level folder for graphs that grow, apart
+  from the worked examples. Every graph is kept as parts with its `rights.yaml`, `stewardship.yaml` and corpus, and
+  quotes each source only as far as its rights allow: `limits: {quote_chars: 0, source_chars: 0}` withholds every
+  quote of a source in copyright (sha256 and length kept, `scale evidence rehydrate` restores it), and no source text
+  is committed. `graphs/catalysis-commons/` is SCALE's evolving catalysis graph (empty: its steward and project);
+  `graphs/methanol-synthesis-pre1966/` is the full methanol graph back in the repository (105 sources: the 55
+  public-domain ones quoted in full, the 50 in copyright with no quoted text); the public example is checked again to
+  be exactly its public-domain part. `scale graph bundle graphs/bundles/<name>.yaml` merges graphs into one
+  (`graphparts.merge`; `graphs/bundles/catalysis.yaml` merges the two). A rights file's `limits`, and a source's own
+  `quote_chars` and `source_chars`, lower the copyright cap (0: no verbatim text). The skills for finding,
+  downloading and curating sources for the commons come later.
 - **The full methanol example leaves the repository; the public one stays.** `examples/methanol-synthesis-pre1966/`
   (105 sources, most in copyright: the graph with capped quotes, its corpus list, rights and the bundle zip) is removed
   and kept outside the repository, until a legal way to curate community graphs is settled. The public-domain example,

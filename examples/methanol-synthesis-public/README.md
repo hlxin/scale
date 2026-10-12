@@ -1,7 +1,8 @@
 # Example — methanol synthesis, public-domain sources
 
-The public-domain part of the methanol-synthesis graph (the full curation, 105 sources, most in copyright, is kept
-outside this repository):
+The public-domain part of the methanol-synthesis graph
+([`graphs/methanol-synthesis-pre1966/`](../../graphs/methanol-synthesis-pre1966/README.md), 105 sources, which quotes no
+text of its sources in copyright):
 55 sources on CO and CO2 hydrogenation to methanol, **with their PDFs and page texts** and every quote in full. Anyone can
 reproduce the curation from this folder alone, and every quote is checked against its source's text
 (`tools/tests/test_example_methanol_public.py`).
@@ -39,8 +40,8 @@ scale graph search $G "sulphur poisons the copper catalyst" --format markdown
 ```
 
 A source's records are those of the full graph, unchanged; shared records keep only the evidence of these 55
-sources. `scale graph split <the full graph> --out . --sources @LIST` makes the parts again, and a test checks that
-this folder is exactly that where a restricted copy holds the full graph ([docs/commands.md](../../docs/commands.md)).
+sources. `scale graph split graphs/methanol-synthesis-pre1966 --out . --sources @LIST` makes the parts again, and a
+test checks that this folder is exactly that.
 
 ## In the installed package
 

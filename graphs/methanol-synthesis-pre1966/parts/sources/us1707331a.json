@@ -1,0 +1,4805 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/source/us1707331a",
+      "label": "Source",
+      "props": {
+        "name": "Process and catalyst for the synthesis of methanol",
+        "kind": "patent",
+        "description": "Published 1929-04-02 (grant date printed on the patent (agrees with the USPTO issue-year table)); in scope: before the 1966-01-01 cutoff. Text: 4 pages ocr (tesseract 5.5.3 (eng, 300 dpi, 2 columns)). Text not redistributed.",
+        "identifiers": {
+          "patent": "US1707331A"
+        },
+        "licence": "US patent; not subject to copyright",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "Process and catalyst for the synthesis of methanol",
+        "url": "https://patents.google.com/patent/US1707331A",
+        "year": 1929
+      }
+    },
+    {
+      "id": "ex:msyn/us1707331a/catalyst/copper-rare-earth-fluoride",
+      "label": "Catalyst",
+      "props": {
+        "name": "copper with fluorides of the cerium-family rare earths",
+        "catalyst_family": "other",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1707331a/p1/1",
+            "quote": "the preparation and use of a catalyst com- prising copper and fluorides of the rare 5 earths for the synthesis of methanol from a mixture of hydrogen and carbon- monoxide.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1707331a/p1/2",
+            "quote": "copper and fluorides of the cerium family of - the rare earths",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/8",
+            "quote": "valuable with proportions of yy)0 copper running up to 50% by weight of the finely reduced catalyst mass.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "generality": "kind",
+        "properties": {
+          "metallic_copper_preferred_lower": {
+            "status": "present",
+            "as_reported": "preferably over 10%",
+            "basis": "mass of the catalyst",
+            "bound": "lower",
+            "unit": "%",
+            "value": 10
+          },
+          "metallic_copper_upper": {
+            "status": "present",
+            "as_reported": "up to 50% by weight of the finely reduced catalyst mass",
+            "basis": "mass of the reduced catalyst",
+            "bound": "upper",
+            "unit": "%",
+            "value": 50
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us1707331a/catalyst/example-1",
+      "label": "Catalyst",
+      "props": {
+        "name": "Example I: Cu + CeF3 (27% Cu, 73% CeF3 after reduction)",
+        "catalyst_family": "other",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example I",
+            "note": "'Cut+CeF,' = Cu + CeF3; cerium nitrate formula OCR of Ce(NO3)3·6H2O; heading OCR 'xample f,'",
+            "passage": "us1707331a/p1/4",
+            "quote": "Cut+CeF,; 435 parts by weight of cerium: nitrate [Ce(NO, ) -6IL,0] and 280 parts of",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Example I",
+            "note": "'75.' is a line number; CeF, = CeF3",
+            "passage": "us1707331a/p1/5",
+            "quote": "the composition of the. catalyst is substantially 27% metallic 75. copper and 73% cerium fluoride (CeF,).",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 1, Example I",
+            "note": "page image prints 32%; OCR text reads '02%'",
+            "reading": "vision_ocr",
+            "region": [
+              0.47,
+              0.42,
+              0.85,
+              0.445
+            ],
+            "second_reading": "consists of a mixture of cerium fluoride and copper oxide in the proportions of approximately 68% cerium fluoride (CeF3) and 32% cupric oxide (CuO). [margin line no. 70] The dried precipitate was granulated to 10-30 mesh and subjected to the reaction of",
+            "source": "ex:msyn/source/us1707331a",
+            "transcription": "mately 68% cerium fluoride (CeF₃) and 32% cupric oxide (CuO)."
+          }
+        ],
+        "generality": "particular",
+        "properties": {
+          "cerium_fluoride_dried_before_reduction": {
+            "status": "present",
+            "as_reported": "approxi- _ Mately 68% cerium fluoride (CeF,)",
+            "qualifier": "approximate",
+            "unit": "%",
+            "value": 68
+          },
+          "cupric_oxide_dried_before_reduction": {
+            "status": "present",
+            "as_reported": "approximately 68% cerium fluoride (CeF3) and 32% cupric oxide (CuO)",
+            "note": "read from the page image (re-curation 2026-09-29); OCR text '02%'",
+            "qualifier": "approximate",
+            "unit": "%",
+            "value": 32
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us1707331a/catalyst/example-2",
+      "label": "Catalyst",
+      "props": {
+        "name": "Example II: Cu + ThF4 on asbestos (41.4% Cu, 19.5% ThF4, 39.4% asbestos)",
+        "catalyst_family": "other",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example II",
+            "note": "'Cut ThE,' = Cu + ThF4; heading OCR 'Example IT,'",
+            "passage": "us1707331a/p1/7",
+            "quote": "Cut ThE, ; 160 parts by weight of copper",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Example II",
+            "note": "ThF, = ThF4",
+            "passage": "us1707331a/p2/2",
+            "quote": "composition of the catalyst was essentially 41.4% metallic copper, 19.5% thorium flouride (ThF,), 39.4% asbestos.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "generality": "particular"
+      }
+    },
+    {
+      "id": "ex:msyn/us1707331a/catalyst/example-3",
+      "label": "Catalyst",
+      "props": {
+        "name": "Example III: Cu + NdF3 (25% Cu, 75% NdF3 after reduction)",
+        "catalyst_family": "other",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example III",
+            "note": "heading OCR 'Example 1.'; 'CutNaF,' = Cu + NdF3",
+            "passage": "us1707331a/p2/2",
+            "quote": "‘CutNaF, 200 parts by weight of hy- drated neodymium oxide and 240 parts of cupric nitrate were mixed with 2000 parts of: 30 water;",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Example III",
+            "note": "'NdI*,' = NdF3; '45' is a line number",
+            "passage": "us1707331a/p2/3",
+            "quote": "composition of this catalyst was about 75% neodymium fluoride (NdI*,) and 45 25% metallic copper.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "generality": "particular"
+      }
+    },
+    {
+      "id": "ex:msyn/us1707331a/claim/copper-below-50",
+      "label": "Claim",
+      "props": {
+        "name": "Copper up to 50% by weight of the reduced catalyst is valuable; above this the catalysts s",
+        "claim_kind": "generalization",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/8",
+            "quote": "valuable with proportions of yy)0 copper running up to 50% by weight of the finely reduced catalyst mass.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/8",
+            "quote": "If the per- cent of metallic reduced copper is above this amount, I have found that the catalysts sinter very easily and lose their effectiveness 115 as menthanol catalysts.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/8",
+            "quote": "Ii the percentage of copper is less than 5 or 10% by aveight of the catalyst mass, I have found that the jop rate of conversion is not satisfactory.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/8",
+            "quote": "prefer to have at least 5% and preferably over 10% of the catalyst mass as metallic copper.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Copper up to 50% by weight of the reduced catalyst is valuable; above this the catalysts sinter easily and lose effectiveness; below 5 or 10% the conversion rate is unsatisfactory; at least 5%, preferably over 10%, metallic copper is preferred."
+      }
+    },
+    {
+      "id": "ex:msyn/us1707331a/claim/copper-best-range",
+      "label": "Claim",
+      "props": {
+        "name": "Approximately 25–30% by weight of metallic copper gives the best results.",
+        "claim_kind": "generalization",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "OCR '25-80%' is 25–30% on the page image",
+            "passage": "us1707331a/p2/8",
+            "quote": "I have found that in gen- eral approximately 25-80% by weight of me- 195 tallic copper gives the best results.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2",
+            "note": "page image prints 25–30%; OCR text reads '25-80%'",
+            "reading": "vision_ocr",
+            "region": [
+              0.47,
+              0.85,
+              0.9,
+              0.875
+            ],
+            "second_reading": "preferably over 10% of the catalyst mass as metallic copper. I have found that in general approximately 25-30% by weight of metallic copper gives the best results. [margin line no. 125]",
+            "source": "ex:msyn/source/us1707331a",
+            "transcription": "eral approximately 25–30% by weight of me- tallic copper gives the best results."
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "range read from the page image (re-curation 2026-09-29); the OCR text reads '25-80%'",
+        "statement": "Approximately 25–30% by weight of metallic copper gives the best results."
+      }
+    },
+    {
+      "id": "ex:msyn/us1707331a/claim/h2-co-ratio",
+      "label": "Claim",
+      "props": {
+        "name": "Any hydrogen to carbon monoxide ratio forms methanol, but below one by volume the S.T.Y. i",
+        "claim_kind": "generalization",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "'6. TL. Y.' = S. T. Y.",
+            "passage": "us1707331a/p3/1",
+            "quote": "My catalysts will form methanol from a gas mixture having any ‘atio of hydrogen to carbon monoxide, but if the ratio 1s below one by volume the 6. TL. Y. will be considerably lower than that obtained with hydrogen in excess by volume.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1707331a/p3/2",
+            "quote": "In general I prefer not to use less hydrogen. than that required theoretically by the equation",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1707331a/p3/2",
+            "quote": "I have found that a gas containing about four volumes of hydrogen to each volume of carbon monoxide gives the best results, and that with about -6 volumes of hydrogen the S. T. Y. is somewhat lower.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Any hydrogen to carbon monoxide ratio forms methanol, but below one by volume the S.T.Y. is considerably lower; not less hydrogen than theoretically required is preferred; about 4 volumes hydrogen per volume CO gives the best results and about 6 volumes a somewhat lower S.T.Y."
+      }
+    },
+    {
+      "id": "ex:msyn/us1707331a/claim/low-temp-pressure-active",
+      "label": "Claim",
+      "props": {
+        "name": "Catalysts of copper and cerium-family rare earth fluorides are active at low temperatures ",
+        "claim_kind": "generalization",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1707331a/p1/3",
+            "quote": "bination of copper and these rare earth fluorides are active under conditions of low temperatures and pressures.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1707331a/p1/3",
+            "quote": "catalysts are obtained in hard masses which. - can easily be granulated and screened to definite size, the granules of which will re- tain their structure in a suitable manner during use.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1707331a/p1/3",
+            "quote": "these pills retain their form , satisfactorily throughout the reduction to : the active stage and during use.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Catalysts of copper and cerium-family rare earth fluorides are active at low temperatures and pressures; they form hard masses that granulate and keep their structure in use, and pills keep their form through reduction and use."
+      }
+    },
+    {
+      "id": "ex:msyn/us1707331a/claim/patent-claim-1",
+      "label": "Claim",
+      "props": {
+        "name": "A catalyst for the production of methanol from hydrogen and carbon monoxide which comprise (claim 1)",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 1",
+            "passage": "us1707331a/p3/4",
+            "quote": "1. A catalyst for the production of methanol from hydrogen and carbon monox- ide which comprises copper and a rare earth metal fluoride.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "claim 1 of the patent; statement condensed and transcribed with OCR errors corrected",
+        "statement": "A catalyst for the production of methanol from hydrogen and carbon monoxide which comprises copper and a rare earth metal fluoride."
+      }
+    },
+    {
+      "id": "ex:msyn/us1707331a/claim/patent-claim-10",
+      "label": "Claim",
+      "props": {
+        "name": "Process with a gas containing an excess of hydrogen, at between 5 and 300 atmospheres, ove (claim 10)",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 10",
+            "note": "OCR '20%' is 50% on the page image",
+            "passage": "us1707331a/p3/7",
+            "quote": "with a hot catalyst mass comprising up to 115 20% reduced copper and the balance a flu- oride of a metal of the cerium family.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 3, claim 10",
+            "note": "page image prints 50% ('115' is a line number); OCR text reads '20%'",
+            "reading": "vision_ocr",
+            "region": [
+              0.45,
+              0.735,
+              0.85,
+              0.768
+            ],
+            "second_reading": "ing an excess of hydrogen, at a pressure of between 5 and 300 atmospheres in contact with a hot catalyst mass comprising up to [margin line no. 115] 50% reduced copper and the balance a fluoride of a metal of the cerium family. 11. Process for the production of meth-",
+            "source": "ex:msyn/source/us1707331a",
+            "transcription": "with a hot catalyst mass comprising up to 115 50% reduced copper and the balance a flu-"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "claim 10 of the patent; statement condensed; 50% read from the page image (re-curation 2026-09-29)",
+        "statement": "Process with a gas containing an excess of hydrogen, at between 5 and 300 atmospheres, over a hot catalyst mass comprising up to 50% reduced copper and the balance a fluoride of a metal of the cerium family."
+      }
+    },
+    {
+      "id": "ex:msyn/us1707331a/claim/patent-claim-11",
+      "label": "Claim",
+      "props": {
+        "name": "Process with a gas containing an excess of hydrogen, at a pressure above atmospheric, over",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 11",
+            "passage": "us1707331a/p3/7",
+            "quote": "taining an excess of hydrogen, at a pressure above atmospheric in contact with a catalyst mass comprising copper and a fluoride of a metal of the cerium family, said catalyst. ‘being maintained at a temperature of be- 125 tween 150° C. and 450° C.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "claim 11 of the patent; statement condensed and transcribed with OCR errors corrected",
+        "statement": "Process with a gas containing an excess of hydrogen, at a pressure above atmospheric, over a catalyst of copper and a fluoride of a metal of the cerium family maintained between 150° C. and 450° C."
+      }
+    },
+    {
+      "id": "ex:msyn/us1707331a/claim/patent-claim-12",
+      "label": "Claim",
+      "props": {
+        "name": "Process with a gas containing an excess of hydrogen, at between 5 and 300 atmospheres, ove (claim 12)",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 12",
+            "passage": "us1707331a/p3/8",
+            "quote": "12. Process for the production of methanol which comprises passing a gaseous mixture",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4, claim 12",
+            "passage": "us1707331a/p4/1",
+            "quote": "between 5 and 300 atmospher es in contact wilh a catalyst mass comprising copper and a fluoride of a metal of the cerium family,",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "claim 12 of the patent; statement condensed and transcribed with OCR errors corrected",
+        "statement": "Process with a gas containing an excess of hydrogen, at between 5 and 300 atmospheres, over a catalyst of copper and a fluoride of a metal of the cerium family maintained between 150° C. and 450° C."
+      }
+    },
+    {
+      "id": "ex:msyn/us1707331a/claim/patent-claim-13",
+      "label": "Claim",
+      "props": {
+        "name": "Process with a gas containing an excess of hydrogen, at between 5 and 300 atmospheres, ove",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, claim 13",
+            "note": "OCR '3800' is 300 on the page image",
+            "passage": "us1707331a/p4/1",
+            "quote": "1) betwe een 5 and 3800 atmospheres in contact with a catalyst mass comprising copper and a fluoride of a metal of the cerium family, cald catalyst being maintained at a temper- ature of between 300 and 400° C.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 4, claim 13",
+            "note": "page image prints 300 atmospheres; OCR text reads '3800'",
+            "reading": "vision_ocr",
+            "region": [
+              0.15,
+              0.225,
+              0.53,
+              0.295
+            ],
+            "second_reading": "of hydrogen and carbon monoxide, containing an excess of hydrogen, at a pressure of [margin line no. 10] between 5 and 300 atmospheres in contact with a catalyst mass comprising copper and a fluoride of a metal of the cerium family, said catalyst being maintained at a temperature of between 300 and 400° C.",
+            "source": "ex:msyn/source/us1707331a",
+            "transcription": "between 5 and 300 atmospheres in contact with a catalyst mass comprising copper and a fluoride of a metal of the cerium family, said catalyst being maintained at a temper- ature of between 300 and 400° C."
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "claim 13 of the patent; statement condensed; 300 atmospheres read from the page image (re-curation 2026-09-29)",
+        "statement": "Process with a gas containing an excess of hydrogen, at between 5 and 300 atmospheres, over a catalyst of copper and a fluoride of a metal of the cerium family maintained between 300 and 400° C."
+      }
+    },
+    {
+      "id": "ex:msyn/us1707331a/claim/patent-claim-14",
+      "label": "Claim",
+      "props": {
+        "name": "Process with essentially four volumes of hydrogen and one volume of carbon monoxide, at be",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, claim 14",
+            "note": "OCR '3800' is 300 on the page image; claim 14 prints 'the balance a metal of the cerium family'",
+            "passage": "us1707331a/p4/2",
+            "quote": "which coniprises passing a gaseous mixture of essentially four volumes of hydrogen and one volume of carbon monoxide, at a pres- sure of between 5 and 3800 atmospheres, in contact with a catalyst mass comprising up 20 to 50% reduced copper and the balance a metal of the cerium family,",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 4, claim 14",
+            "note": "page image prints 300 atmospheres; OCR text reads '3800'",
+            "reading": "vision_ocr",
+            "region": [
+              0.52,
+              0.165,
+              0.9,
+              0.185
+            ],
+            "second_reading": "of essentially four volumes of hydrogen and one volume of carbon monoxide, at a pressure of between 5 and 300 atmospheres, in contact with a catalyst mass comprising up [margin line no. 20] to 50% reduced copper and the balance a",
+            "source": "ex:msyn/source/us1707331a",
+            "transcription": "sure of between 5 and 300 atmospheres, in"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "claim 14 of the patent; statement condensed; 300 atmospheres read from the page image (re-curation 2026-09-29)",
+        "statement": "Process with essentially four volumes of hydrogen and one volume of carbon monoxide, at between 5 and 300 atmospheres, over a catalyst of up to 50% reduced copper and the balance a metal of the cerium family, maintained between 300 and 400° C."
+      }
+    },
+    {
+      "id": "ex:msyn/us1707331a/claim/patent-claim-2",
+      "label": "Claim",
+      "props": {
+        "name": "A catalyst for the production of methanol from hydrogen and carbon monoxide which comprise (claim 2)",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 2",
+            "passage": "us1707331a/p3/4",
+            "quote": "which comprises copper and a fluoride of a metal of the cerium family.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "claim 2 of the patent; statement condensed and transcribed with OCR errors corrected",
+        "statement": "A catalyst for the production of methanol from hydrogen and carbon monoxide which comprises copper and a fluoride of a metal of the cerium family."
+      }
+    },
+    {
+      "id": "ex:msyn/us1707331a/claim/patent-claim-3",
+      "label": "Claim",
+      "props": {
+        "name": "A catalyst for the production of methanol from hydrogen and carbon monoxide which comprise (claim 3)",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 3",
+            "passage": "us1707331a/p3/4",
+            "quote": "which comprises up to 50% by weight of re- ~duced copper and the balance a fluoride of a metal of the cerlum family,",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "claim 3 of the patent; statement condensed and transcribed with OCR errors corrected",
+        "statement": "A catalyst for the production of methanol from hydrogen and carbon monoxide which comprises up to 50% by weight of reduced copper and the balance a fluoride of a metal of the cerium family."
+      }
+    },
+    {
+      "id": "ex:msyn/us1707331a/claim/patent-claim-4",
+      "label": "Claim",
+      "props": {
+        "name": "A catalyst for the production of methanol from hydrogen and carbon monoxide which comprise (claim 4)",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 4",
+            "passage": "us1707331a/p3/4",
+            "quote": "-which comprises copper and cerium fluoride.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "claim 4 of the patent; statement condensed and transcribed with OCR errors corrected",
+        "statement": "A catalyst for the production of methanol from hydrogen and carbon monoxide which comprises copper and cerium fluoride."
+      }
+    },
+    {
+      "id": "ex:msyn/us1707331a/claim/patent-claim-5",
+      "label": "Claim",
+      "props": {
+        "name": "A catalyst for the production of methanol from hydrogen and carbon monoxide which comprise (claim 5)",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 5",
+            "passage": "us1707331a/p3/5",
+            "quote": "which comprises up to 50% by weight of re- 80 duced copper and the balance cerium fluoride,",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "claim 5 of the patent; statement condensed and transcribed with OCR errors corrected",
+        "statement": "A catalyst for the production of methanol from hydrogen and carbon monoxide which comprises up to 50% by weight of reduced copper and the balance cerium fluoride."
+      }
+    },
+    {
+      "id": "ex:msyn/us1707331a/claim/patent-claim-6",
+      "label": "Claim",
+      "props": {
+        "name": "Process for the production of methanol which comprises passing a gaseous mixture of hydrog (claim 6)",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 6",
+            "passage": "us1707331a/p3/5",
+            "quote": "6. Process for the production of methanol which comprises passing a gaseous mixture of hydrogen and carbon monoxide in con- 85 tact with a hot catalyst mass comprising | copper and a rare earth metal fluoride.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "claim 6 of the patent; statement condensed and transcribed with OCR errors corrected",
+        "statement": "Process for the production of methanol which comprises passing a gaseous mixture of hydrogen and carbon monoxide in contact with a hot catalyst mass comprising copper and a rare earth metal fluoride."
+      }
+    },
+    {
+      "id": "ex:msyn/us1707331a/claim/patent-claim-7",
+      "label": "Claim",
+      "props": {
+        "name": "Process for the production of methanol which comprises passing a gaseous mixture of hydrog (claim 7)",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 7",
+            "passage": "us1707331a/p3/6",
+            "quote": "with a hot catalyst mass comprising cop-_ per and a fluoride of a metal of the cerium",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "claim 7 of the patent; statement condensed and transcribed with OCR errors corrected",
+        "statement": "Process for the production of methanol which comprises passing a gaseous mixture of hydrogen and carbon monoxide in contact with a hot catalyst mass comprising copper and a fluoride of a metal of the cerium family."
+      }
+    },
+    {
+      "id": "ex:msyn/us1707331a/claim/patent-claim-8",
+      "label": "Claim",
+      "props": {
+        "name": "Process as claim 7 with a gas containing an excess of hydrogen and a catalyst mass compris",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 8",
+            "passage": "us1707331a/p3/6",
+            "quote": "of hydrogen and carbon monoxide contain- ing an excess of hydrogen in contact with a hot catalyst mass comprising up to 50% by weight of reduced copper and the bal- ance a- fluoride of a metal of the cerium 10",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "claim 8 of the patent; statement condensed and transcribed with OCR errors corrected",
+        "statement": "Process as claim 7 with a gas containing an excess of hydrogen and a catalyst mass comprising up to 50% by weight of reduced copper and the balance a fluoride of a metal of the cerium family."
+      }
+    },
+    {
+      "id": "ex:msyn/us1707331a/claim/patent-claim-9",
+      "label": "Claim",
+      "props": {
+        "name": "Process as claim 7 with a gas containing an excess of hydrogen, at a pressure of between 5",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 9",
+            "passage": "us1707331a/p3/6",
+            "quote": "ing an excess of hydrogen, at a pressure of 105 between 5 and 300 atmospheres in contact with a hot catalyst mass comprising copper and a fluoride of a metal of the cerium fam-",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "claim 9 of the patent; statement condensed and transcribed with OCR errors corrected",
+        "statement": "Process as claim 7 with a gas containing an excess of hydrogen, at a pressure of between 5 and 300 atmospheres."
+      }
+    },
+    {
+      "id": "ex:msyn/us1707331a/claim/pills-higher-yield",
+      "label": "Claim",
+      "props": {
+        "name": "The dried material may be pulverized before reduction and compressed into pills (about one",
+        "claim_kind": "generalization",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/6",
+            "quote": "For this purpose I prefer to pulverize the 90 dried material before reduction and then compress this powder into small compact masses of desired form, such as, for exam- ple, pills.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/6",
+            "quote": "I have obtained excellent re- sults with pills about one-fourth inch in 95 diameter and about one-eighth inch thick.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/6",
+            "quote": "The pill form of the catalysts gives some- what higher yields than that obtained with 100 the granular material.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The dried material may be pulverized before reduction and compressed into pills (about one-fourth inch diameter, one-eighth inch thick); the pill form gives somewhat higher yields than the granular material."
+      }
+    },
+    {
+      "id": "ex:msyn/us1707331a/claim/poison-free-gas",
+      "label": "Claim",
+      "props": {
+        "name": "Gases should be substantially free of the common catalyst poisons, such as arsenic, sulphu",
+        "claim_kind": "generalization",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/3",
+            "quote": "it is desirable to uses gases substan- tially free from the common catalyst poi- 50 sons \"which may be present in the raw ma- _ terials, such as, for example, arsenic, sul- phur, phosphorous, volatile iron compounds,",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Gases should be substantially free of the common catalyst poisons, such as arsenic, sulphur, phosphorus, volatile iron compounds or other deleterious constituents from gas production."
+      }
+    },
+    {
+      "id": "ex:msyn/us1707331a/claim/pressure-range",
+      "label": "Claim",
+      "props": {
+        "name": "Methanol forms in substantial amounts at 5 atmospheres and upwards, depending on temperatu",
+        "claim_kind": "generalization",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1707331a/p3/3",
+            "quote": "methanol will be formed in substantial amounts by these catalysts at pressures of 5 atmospheres and upwards, de- pendent on the temperature used.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1707331a/p3/3",
+            "quote": "Substan- tial yields of methanol may even. be obtained at. pressures lower than this; for example, at one atmosphere.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1707331a/p3/3",
+            "quote": "In general, I have found that the best results ave secured at between 200 and 300 atmospheres,",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1707331a/p3/4",
+            "quote": "I prefer space velocities of 2,000 to 20,000, calculated at N. T. P.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1707331a/p3/1",
+            "quote": "I have used these catalysts under many conditions and find that wide limits of pressure and temperature are permissible,",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Methanol forms in substantial amounts at 5 atmospheres and upwards, depending on temperature, and even at one atmosphere, though uneconomically; the best results are between 200 and 300 atmospheres; space velocities of 2,000 to 20,000 (N.T.P.) are preferred."
+      }
+    },
+    {
+      "id": "ex:msyn/us1707331a/claim/quantities-may-vary",
+      "label": "Claim",
+      "props": {
+        "name": "The quantities and proportions of the preparation examples may be varied and the catalysts",
+        "claim_kind": "generalization",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/7",
+            "quote": "the exact quantities, proportions, etc. given in the pre- ferred examples of catalyst manufacture 103 may be varied, and my catalysts can still be obtained,",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The quantities and proportions of the preparation examples may be varied and the catalysts still obtained."
+      }
+    },
+    {
+      "id": "ex:msyn/us1707331a/claim/temperature-range",
+      "label": "Claim",
+      "props": {
+        "name": "The catalysts are suited to temperatures between 150° C. and 450° C., the best results bei",
+        "claim_kind": "generalization",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "OCR '800° C.' is 300° C. on the page image",
+            "passage": "us1707331a/p3/3",
+            "quote": "These catalysts are suited for the above syntheses at temperatures ranging between 150° C. and 450° C, although [ have found {he best results are secured between 800° C. and 400° C.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 3",
+            "note": "page image prints 300° C.; OCR text reads '800° C.'",
+            "reading": "vision_ocr",
+            "region": [
+              0.08,
+              0.605,
+              0.45,
+              0.645
+            ],
+            "second_reading": "These catalysts are suited for the above syntheses at temperatures ranging between [margin line no. 40] 150° C. and 450° C. although I have found the best results are secured between 300° C. and 400° C. Within the temperature limits given above, methanol will be formed in",
+            "source": "ex:msyn/source/us1707331a",
+            "transcription": "150° C. and 450° C. although I have found the best results are secured between 300° C. and 400° C. Within the temperature limits"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The catalysts are suited to temperatures between 150° C. and 450° C., the best results being between 300° C. and 400° C."
+      }
+    },
+    {
+      "id": "ex:msyn/us1707331a/feed/h2-co-4-1",
+      "label": "Feed",
+      "props": {
+        "name": "4 volumes hydrogen : 1 volume carbon monoxide, essentially free of catalyst poisons",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/4",
+            "quote": "A gas mix- ture, comprising essentially 4 volumes hy- _ drogen and one volume carbon monoxide, and. essentially free of catalyst poisons was now passed through the heated catalyst un-",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "ratios": {
+          "h2_co_ratio": {
+            "status": "present",
+            "as_reported": "4 volumes hy- _ drogen and one volume carbon monoxide",
+            "basis": "by volume",
+            "unit": "1",
+            "value": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us1707331a/material/acid-washed-asbestos",
+      "label": "Material",
+      "props": {
+        "name": "medium fibred acid-washed asbestos",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example II",
+            "passage": "us1707331a/p2/1",
+            "quote": "were dissolved in 1000 parts by weight of water. 40 parts of medium fibred acid- “washed asbestos was mixed with this solution after which 25 parts of concentrated hydro- fluoric acid was added.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1707331a/preparation/example-1",
+      "label": "Preparation",
+      "props": {
+        "name": "Example I: co-precipitation of cerium fluoride and hydrated copper oxide",
+        "conditions": {
+          "drying_temperature": {
+            "status": "present",
+            "as_reported": "dried at 150-200° C.",
+            "lower": 150,
+            "unit": "°C",
+            "upper": 200
+          },
+          "granule_size": {
+            "status": "present",
+            "as_reported": "10-30 mesh",
+            "text_value": "10-30 mesh"
+          }
+        },
+        "duration": {
+          "status": "present",
+          "as_reported": "boiled for about 3 60 hours",
+          "note": "boiling time",
+          "qualifier": "approximate",
+          "unit": "h",
+          "value": 3
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example I",
+            "note": "'Cut+CeF,' = Cu + CeF3; cerium nitrate formula OCR of Ce(NO3)3·6H2O; heading OCR 'xample f,'",
+            "passage": "us1707331a/p1/4",
+            "quote": "Cut+CeF,; 435 parts by weight of cerium: nitrate [Ce(NO, ) -6IL,0] and 280 parts of",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Example I",
+            "note": "formula OCR of Cu(NO3)2·3H2O",
+            "passage": "us1707331a/p1/4",
+            "quote": "copper nitrate [Cu(NO,),.3H,O] were dis- 55 solved in 2000 parts of water.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Example I",
+            "passage": "us1707331a/p1/4",
+            "quote": "174 parts of potassium flouride and 179 parts of potas- sium hydroxide were then dissolved in 2000 parts of water and added to the first solu- tion.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Example I",
+            "passage": "us1707331a/p1/4",
+            "quote": "This mixture was boiled for about 3 60 hours after which the precipitate was filtered _ out of the hot solution.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Example I",
+            "passage": "us1707331a/p1/4",
+            "quote": "washed until free from nitrates and subse- quently dried at 150-200° C.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Example I",
+            "passage": "us1707331a/p1/5",
+            "quote": "The dried precipitate was granulated to 10-30 mesh and subjected to the reaction of - reducing gases as described below.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 1, Example I",
+            "note": "page image prints 32%; OCR text reads '02%'",
+            "reading": "vision_ocr",
+            "region": [
+              0.47,
+              0.42,
+              0.85,
+              0.445
+            ],
+            "second_reading": "consists of a mixture of cerium fluoride and copper oxide in the proportions of approximately 68% cerium fluoride (CeF3) and 32% cupric oxide (CuO). [margin line no. 70] The dried precipitate was granulated to 10-30 mesh and subjected to the reaction of",
+            "source": "ex:msyn/source/us1707331a",
+            "transcription": "mately 68% cerium fluoride (CeF₃) and 32% cupric oxide (CuO)."
+          }
+        ],
+        "method": "precipitation from cerium and copper nitrate solution with potassium fluoride and potassium hydroxide, boiling, hot filtration, washing, drying, granulation",
+        "procedure_status": "completed",
+        "steps": [
+          "435 parts by weight of cerium nitrate and 280 parts of copper nitrate dissolved in 2000 parts of water",
+          "174 parts of potassium fluoride and 179 parts of potassium hydroxide dissolved in 2000 parts of water and added to the first solution",
+          "boiled for about 3 hours; precipitate filtered out of the hot solution",
+          "filter cake washed until free from nitrates and dried at 150-200° C.",
+          "granulated to 10-30 mesh"
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1707331a/preparation/example-2",
+      "label": "Preparation",
+      "props": {
+        "name": "Example II: thorium fluoride and copper precipitated on asbestos",
+        "conditions": {
+          "drying_temperature": {
+            "status": "present",
+            "as_reported": "dried at 150--200° C.",
+            "lower": 150,
+            "unit": "°C",
+            "upper": 200
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example II",
+            "note": "'Cut ThE,' = Cu + ThF4; heading OCR 'Example IT,'",
+            "passage": "us1707331a/p1/7",
+            "quote": "Cut ThE, ; 160 parts by weight of copper",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Example II",
+            "note": "thorium nitrate formula OCR of Th(NO3)4·12H2O; the copper nitrate reads [Cu(NO3)2.3H2O] on the page image",
+            "passage": "us1707331a/p2/1",
+            "quote": "nitrate [Cu(NO,). oH. oO} and 45 parts by weight of thor ium, Mitr ate - [Th(NO,) ..12H,0]",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Example II",
+            "passage": "us1707331a/p2/1",
+            "quote": "were dissolved in 1000 parts by weight of water. 40 parts of medium fibred acid- “washed asbestos was mixed with this solution after which 25 parts of concentrated hydro- fluoric acid was added.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Example II",
+            "note": "'40' is a line number",
+            "passage": "us1707331a/p2/1",
+            "quote": "Sufficient aqueous 40 ammonia was now added to form copper am- - monium nitrate in the solution and to make the solution alkaline.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Example II",
+            "passage": "us1707331a/p2/1",
+            "quote": "60 parts of sodium hydroxide in 100 parts of water were now added. and the mixture boiled until free of 15 ammonia.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Example II",
+            "passage": "us1707331a/p2/2",
+            "quote": "The precipitate was then filtered from the hot solution, the filter cake washed until free from nitrates, and then dried at 150--200° C.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Example II",
+            "passage": "us1707331a/p2/2",
+            "quote": "granulated and subjected to the action of 20 reducing gases as in ixxample I to form the ) catalyst.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, Example II",
+            "note": "page image prints the copper nitrate as Cu(NO3)2.3H2O; OCR text reads '[Cu(NO,). oH. oO}'",
+            "reading": "vision_ocr",
+            "region": [
+              0.15,
+              0.12,
+              0.52,
+              0.14
+            ],
+            "source": "ex:msyn/source/us1707331a",
+            "transcription": "nitrate [Cu(NO₃)₂.3H₂O] and 45 parts by"
+          }
+        ],
+        "method": "hydrofluoric acid added to copper and thorium nitrate solution with asbestos, ammonia then sodium hydroxide, boiling until free of ammonia, hot filtration, washing, drying, granulation",
+        "procedure_status": "completed",
+        "steps": [
+          "160 parts by weight of copper nitrate and 45 parts of thorium nitrate dissolved in 1000 parts of water",
+          "40 parts of medium fibred acid-washed asbestos mixed in; 25 parts of concentrated hydrofluoric acid added",
+          "sufficient aqueous ammonia added to form copper ammonium nitrate and make the solution alkaline",
+          "60 parts of sodium hydroxide in 100 parts of water added; boiled until free of ammonia",
+          "filtered from the hot solution, washed free of nitrates, dried at 150-200° C., granulated"
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1707331a/preparation/example-3",
+      "label": "Preparation",
+      "props": {
+        "name": "Example III: co-precipitation of neodymium fluoride and copper",
+        "conditions": {
+          "drying_temperature": {
+            "status": "present",
+            "as_reported": "dried at 150-200° C.",
+            "lower": 150,
+            "unit": "°C",
+            "upper": 200
+          }
+        },
+        "duration": {
+          "status": "present",
+          "as_reported": "about 1 hour",
+          "note": "boiling time",
+          "qualifier": "approximate",
+          "unit": "h",
+          "value": 1
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example III",
+            "note": "heading OCR 'Example 1.'; 'CutNaF,' = Cu + NdF3",
+            "passage": "us1707331a/p2/2",
+            "quote": "‘CutNaF, 200 parts by weight of hy- drated neodymium oxide and 240 parts of cupric nitrate were mixed with 2000 parts of: 30 water;",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Example III",
+            "passage": "us1707331a/p2/2",
+            "quote": "sufficient nitric acid was now added to dissolve the rare earth oxide.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Example III",
+            "passage": "us1707331a/p2/2",
+            "quote": "a second solution consisting of 232 parts of potassium fluoride and 112 parts of potassium hydroxide in 1500 parts 35 of water.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Example III",
+            "passage": "us1707331a/p2/3",
+            "quote": "The mixture was boiled for about 1 hour, filtered on the suction filter; the filter cake was washed free of nitrates and subsequently dried at 150-200° C.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Example III",
+            "passage": "us1707331a/p2/3",
+            "quote": "jected to the action of reducing gases as above to form the menthanol catalyst.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "method": "hydrated neodymium oxide and cupric nitrate dissolved with nitric acid, precipitated with potassium fluoride and potassium hydroxide, boiling, filtration, washing, drying, granulation",
+        "procedure_status": "completed",
+        "steps": [
+          "200 parts by weight of hydrated neodymium oxide and 240 parts of cupric nitrate mixed with 2000 parts of water; nitric acid added to dissolve the rare earth oxide",
+          "second solution of 232 parts of potassium fluoride and 112 parts of potassium hydroxide in 1500 parts of water added",
+          "boiled for about 1 hour, filtered on the suction filter, washed free of nitrates, dried at 150-200° C., granulated"
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1707331a/reactor/copper-lined-bomb",
+      "label": "Reactor",
+      "props": {
+        "name": "copper lined high pressure steel bomb",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/4",
+            "quote": "The granular, re- duced catalyst material was packed 3 in a cop- _ per lined high pressure steel bomb and the 60 whole heated to about 300° C.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "note": "granular catalyst packed in the bomb, gas passed through it",
+        "reactor_kind": "fixed_bed"
+      }
+    },
+    {
+      "id": "ex:msyn/us1707331a/sample/example-1",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Example I catalyst granules, reduced",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example I",
+            "passage": "us1707331a/p1/5",
+            "quote": "The dried precipitate was granulated to 10-30 mesh and subjected to the reaction of - reducing gases as described below.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Example I",
+            "note": "'75.' is a line number; CeF, = CeF3",
+            "passage": "us1707331a/p1/5",
+            "quote": "the composition of the. catalyst is substantially 27% metallic 75. copper and 73% cerium fluoride (CeF,).",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "preparation_status": "prepared",
+        "sample_kind": "granules"
+      }
+    },
+    {
+      "id": "ex:msyn/us1707331a/sample/example-2",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Example II catalyst granules, reduced",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example II",
+            "passage": "us1707331a/p2/2",
+            "quote": "granulated and subjected to the action of 20 reducing gases as in ixxample I to form the ) catalyst.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Example II",
+            "note": "ThF, = ThF4",
+            "passage": "us1707331a/p2/2",
+            "quote": "composition of the catalyst was essentially 41.4% metallic copper, 19.5% thorium flouride (ThF,), 39.4% asbestos.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "preparation_status": "prepared",
+        "sample_kind": "granules"
+      }
+    },
+    {
+      "id": "ex:msyn/us1707331a/sample/example-3",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Example III catalyst granules, reduced",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example III",
+            "passage": "us1707331a/p2/3",
+            "quote": "jected to the action of reducing gases as above to form the menthanol catalyst.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Example III",
+            "note": "'NdI*,' = NdF3; '45' is a line number",
+            "passage": "us1707331a/p2/3",
+            "quote": "composition of this catalyst was about 75% neodymium fluoride (NdI*,) and 45 25% metallic copper.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "preparation_status": "prepared",
+        "sample_kind": "granules"
+      }
+    },
+    {
+      "id": "ex:msyn/us1707331a/species/cerium-family-fluoride",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "fluoride of a metal of the cerium family of the rare earths (thorium, scandium, lanthanum, cerium, praseodymium, neodymium, samarium)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1707331a/p1/2",
+            "quote": "copper and fluorides of the cerium family of - the rare earths",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1707331a/p1/2",
+            "quote": "cerium family comprises thorium, scandium, lanthanum, cerium, praseodymium, neo- — dymium and samarium.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1707331a/p1/2",
+            "quote": "In mentioning any 25 one single element of this group, I intend of course to cover the closely associated mix- tures of these elements,",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "note": "the patent intends a named element to cover the closely associated mixtures in which it is the major constituent"
+      }
+    },
+    {
+      "id": "ex:msyn/us1707331a/species/hydrated-neodymium-oxide",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "hydrated neodymium oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example III",
+            "note": "heading OCR 'Example 1.'; 'CutNaF,' = Cu + NdF3",
+            "passage": "us1707331a/p2/2",
+            "quote": "‘CutNaF, 200 parts by weight of hy- drated neodymium oxide and 240 parts of cupric nitrate were mixed with 2000 parts of: 30 water;",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1707331a/species/volatile-iron-compounds",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "volatile iron compounds",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/3",
+            "quote": "it is desirable to uses gases substan- tially free from the common catalyst poi- 50 sons \"which may be present in the raw ma- _ terials, such as, for example, arsenic, sul- phur, phosphorous, volatile iron compounds,",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1707331a/test/example-1",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Example I catalyst: ~350 °C, ~200 atm, S.V.H. 19,000, S.T.Y. 2700",
+        "conditions": {
+          "bomb_heated_to": {
+            "status": "present",
+            "as_reported": "heated to about 300° C.",
+            "qualifier": "approximate",
+            "unit": "°C",
+            "value": 300
+          }
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'Example Tis' = 'Example I is'",
+            "passage": "us1707331a/p2/4",
+            "quote": "the following data obtained with the catalyst of Example Tis given.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/4",
+            "quote": "The granular, re- duced catalyst material was packed 3 in a cop- _ per lined high pressure steel bomb and the 60 whole heated to about 300° C.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/4",
+            "quote": "A gas mix- ture, comprising essentially 4 volumes hy- _ drogen and one volume carbon monoxide, and. essentially free of catalyst poisons was now passed through the heated catalyst un-",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/4",
+            "quote": "der a pressure of about 200 atmospheres and",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/5",
+            "quote": "at a space velocity per hour (S. V. H.) equivalent to about 19,000 cubic feet of gas per cubic foot of catalyst per hour, calcu- lated at normal temperature and pressure.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/5",
+            "quote": "Dur- 70 ing this reaction the temperature of the cat- alyst mass was about 350° C.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/5",
+            "quote": "A sustained yield of methanol was obtained equivalent to a space time yield (S. T. Y.) of 2700 pounds of methanol per cubic foot of cat- 75 alyst per 24 hours:",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/5",
+            "quote": "The products formed were recovered from the off-cases by cooling while still under pressure. The product was 96-98% methanol.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "note": "The catalyst retained its granular form after use for extended periods.",
+        "pressure": {
+          "status": "present",
+          "as_reported": "about 200 atmospheres",
+          "qualifier": "approximate",
+          "unit": "atm",
+          "value": 200
+        },
+        "results": {
+          "methanol_in_product": {
+            "status": "present",
+            "as_reported": "96-98% methanol",
+            "lower": 96,
+            "unit": "%",
+            "upper": 98
+          }
+        },
+        "space_time_yield": {
+          "status": "present",
+          "as_reported": "2700 pounds of methanol per cubic foot of cat- alyst per 24 hours",
+          "note": "sustained yield",
+          "unit": "lb/(ft3·24 h)",
+          "value": 2700
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "about 19,000 cubic feet of gas per cubic foot of catalyst per hour",
+          "basis": "calculated at N.T.P. (0° C. and 1 atmosphere)",
+          "qualifier": "approximate",
+          "unit": "ft3/(ft3·h)",
+          "value": 19000
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "about 350° C.",
+          "note": "temperature of the catalyst mass during reaction",
+          "qualifier": "approximate",
+          "unit": "°C",
+          "value": 350
+        },
+        "temperature_measured_at": "catalyst_bed",
+        "test_kind": "activity",
+        "test_label": "use of the catalyst of Example I"
+      }
+    },
+    {
+      "id": "ex:msyn/us1707331a/test/example-2",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Example II catalyst: 330 °C, S.V.H. 15,000, S.T.Y. 1000",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'8. V. H.' / '8S. T. Y.' = S. V. H. / S. T. Y.",
+            "passage": "us1707331a/p2/6",
+            "quote": "Under similar conditions with a catalyst temperature of 330° C. and an 8. V. H. of 15,000 an 8S. T. Y. of 1000 was obtained with the catalyst of Example II.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "pressure": {
+          "status": "present",
+          "as_reported": "Under similar conditions",
+          "note": "no number printed; the Example I run was at about 200 atmospheres",
+          "text_value": "similar to the Example I run"
+        },
+        "space_time_yield": {
+          "status": "present",
+          "as_reported": "8S. T. Y. of 1000",
+          "note": "unit not repeated; S. T. Y. defined for the Example I run",
+          "unit": "lb/(ft3·24 h)",
+          "value": 1000
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "8. V. H. of 15,000",
+          "note": "unit not repeated; S. V. H. defined for the Example I run",
+          "unit": "ft3/(ft3·h)",
+          "value": 15000
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "catalyst temperature of 330° C.",
+          "unit": "°C",
+          "value": 330
+        },
+        "temperature_measured_at": "catalyst_bed",
+        "test_kind": "activity",
+        "test_label": "use of the catalyst of Example II"
+      }
+    },
+    {
+      "id": "ex:msyn/us1707331a/test/example-3",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Example III catalyst: 320 °C, S.V.H. 6500, S.T.Y. 700",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, Example III run",
+            "note": "page image prints 320° C.; OCR text reads '820° C.'",
+            "reading": "vision_ocr",
+            "region": [
+              0.47,
+              0.36,
+              0.9,
+              0.41
+            ],
+            "source": "ex:msyn/source/us1707331a",
+            "transcription": "the catalyst of Example II. At 320° C. and an S. V. H. of 6500, an S. T. Y. of 700 was obtained with the catalyst of Example III."
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "OCR '820° C.' is 320° C. on the page image; '$5' is a line number",
+            "passage": "us1707331a/p2/6",
+            "quote": "At 820° C. and $5 an S. V. H. of 6500, an 8. T. Y. of 700 was obtained with the catalyst of Example III.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'8. V. H.' / '8S. T. Y.' = S. V. H. / S. T. Y.",
+            "passage": "us1707331a/p2/6",
+            "quote": "Under similar conditions with a catalyst temperature of 330° C. and an 8. V. H. of 15,000 an 8S. T. Y. of 1000 was obtained with the catalyst of Example II.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "pressure": {
+          "status": "present",
+          "as_reported": "Under similar conditions",
+          "note": "the sentence follows the Example II statement 'Under similar conditions'",
+          "text_value": "similar to the Example I run"
+        },
+        "space_time_yield": {
+          "status": "present",
+          "as_reported": "8. T. Y. of 700",
+          "note": "unit not repeated",
+          "unit": "lb/(ft3·24 h)",
+          "value": 700
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "S. V. H. of 6500",
+          "note": "unit not repeated",
+          "unit": "ft3/(ft3·h)",
+          "value": 6500
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "At 320° C.",
+          "note": "catalyst temperature; read from the page image (re-curation 2026-09-29); was not_reported because the OCR text reads '820° C.'",
+          "unit": "°C",
+          "value": 320
+        },
+        "temperature_measured_at": "catalyst_bed",
+        "test_kind": "activity",
+        "test_label": "use of the catalyst of Example III"
+      }
+    },
+    {
+      "id": "ex:msyn/us1707331a/treatment/reduction",
+      "label": "Treatment",
+      "props": {
+        "name": "reduction in dilute hydrogen–methanol vapour at atmospheric pressure",
+        "atmosphere": "preferably hydrogen saturated at room temperature with methanol, diluted with nitrogen; e.g. 3 volumes hydrogen, 2 volumes methanol vapor, 95 volumes nitrogen",
+        "conditions": {
+          "h2_volumes": {
+            "status": "present",
+            "as_reported": "3 volumes. hydrogen",
+            "unit": "vol",
+            "value": 3
+          },
+          "max_temperature": {
+            "status": "present",
+            "as_reported": "not over 350° C.",
+            "bound": "upper",
+            "unit": "°C",
+            "value": 350
+          },
+          "methanol_vapor_volumes": {
+            "status": "present",
+            "as_reported": "2 volumes methanol. vapor",
+            "unit": "vol",
+            "value": 2
+          },
+          "n2_volumes": {
+            "status": "present",
+            "as_reported": "95 volumes nitrogen",
+            "unit": "vol",
+            "value": 95
+          }
+        },
+        "duration": {
+          "status": "present",
+          "as_reported": "about an hour",
+          "note": "further period after the maximum catalyst temperature has passed",
+          "qualifier": "approximate",
+          "unit": "h",
+          "value": 1
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example I",
+            "passage": "us1707331a/p1/5",
+            "quote": "Phe reduction can be carried out by pass- ing hydrogen, or mixtures of hydrogen with . carbon: monoxide or methanol or both over the heated mass.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Example I",
+            "passage": "us1707331a/p1/5",
+            "quote": "I prefer to reduce with 86 hydrogen saturated at room temperature with methanol.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Example I",
+            "quote": "it is usually desirable to dilute the reducing gas with nitrogen or other inert 99 gas.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Example I",
+            "passage": "us1707331a/p1/6",
+            "quote": "a satisfactory mixture - would be 3 volumes. hydrogen, 2 volumes methanol. vapor and 95 volumes nitrogen.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Example I",
+            "passage": "us1707331a/p1/6",
+            "quote": "This reducing mixture is passed at atmos- pheric pressure over the dried precipitate 9x preferably contained in a copper lined ves- — _ sel, heated to not over 350° C., preferably to about 150-200° C.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Example I",
+            "passage": "us1707331a/p1/6",
+            "quote": "The reduction is com- plete when no further condensation of water is observed upon cooling the off-gases.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Example I",
+            "note": "'jos' is a line number; continues 'suffices to complete the reduction'",
+            "passage": "us1707331a/p1/6",
+            "quote": "After the max- imum temperature has been passed a further reduction period of about an hour generally jos",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "method": "passing a reducing gas (hydrogen, or hydrogen with carbon monoxide and/or methanol, diluted with nitrogen or another inert gas) over the heated dried precipitate",
+        "note": "End point: no further condensation of water upon cooling the off-gases. Examples II and III are reduced 'as in Example I'/'as above'.",
+        "pressure": {
+          "status": "present",
+          "as_reported": "atmos- pheric pressure",
+          "note": "printed as atmospheric pressure; recorded as 1 atm",
+          "qualifier": "approximate",
+          "unit": "atm",
+          "value": 1
+        },
+        "procedure_status": "completed",
+        "temperature": {
+          "status": "present",
+          "as_reported": "heated to not over 350° C., preferably to about 150-200° C.",
+          "lower": 150,
+          "note": "not over 350° C.",
+          "qualifier": "approximate",
+          "unit": "°C",
+          "upper": 200
+        },
+        "treatment_kind": "reduction"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/reaction/co-hydrogenation-to-methanol/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/source/us1707331a/assignee",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "role": "assignee"
+      },
+      "source": "ex:msyn/source/us1707331a",
+      "target": "ex:msyn/institution/roessler-hasslacher-chemical"
+    },
+    {
+      "id": "ex:msyn/species/arsenic/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/arsenic",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/species/cef3/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, Example I"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/cef3",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/species/ceno336h2o/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, Example I"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/ceno336h2o",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/species/cuno323h2o/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, Example I"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/cuno323h2o",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/species/hf/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, Example II"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/hf",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/species/hno3/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, Example III"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/hno3",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/species/kf/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, Example I"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/kf",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/species/koh/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, Example I"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/koh",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/species/naoh/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, Example II"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/naoh",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/species/ndf3/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, Example III"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/ndf3",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/species/phosphorus/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/phosphorus",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/species/thf4/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, Example II"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/thf4",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/species/thno3412h2o/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, Example II"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/thno3412h2o",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/us1707331a/catalyst/copper-rare-earth-fluoride/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1707331a/catalyst/copper-rare-earth-fluoride",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/us1707331a/catalyst/example-1/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, Example I"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1707331a/catalyst/example-1",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/us1707331a/catalyst/example-2/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, Example II",
+          "p. 2, Example II"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1707331a/catalyst/example-2",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/us1707331a/catalyst/example-3/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, Example III"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1707331a/catalyst/example-3",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/us1707331a/claim/copper-below-50/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1707331a/claim/copper-below-50",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/us1707331a/claim/copper-best-range/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1707331a/claim/copper-best-range",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/us1707331a/claim/h2-co-ratio/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1707331a/claim/h2-co-ratio",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/us1707331a/claim/low-temp-pressure-active/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1707331a/claim/low-temp-pressure-active",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/us1707331a/claim/patent-claim-1/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1707331a/claim/patent-claim-1",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/us1707331a/claim/patent-claim-10/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 10"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1707331a/claim/patent-claim-10",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/us1707331a/claim/patent-claim-11/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 11"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1707331a/claim/patent-claim-11",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/us1707331a/claim/patent-claim-12/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 12",
+          "p. 4, claim 12"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1707331a/claim/patent-claim-12",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/us1707331a/claim/patent-claim-13/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4, claim 13"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1707331a/claim/patent-claim-13",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/us1707331a/claim/patent-claim-14/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4, claim 14"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1707331a/claim/patent-claim-14",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/us1707331a/claim/patent-claim-2/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1707331a/claim/patent-claim-2",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/us1707331a/claim/patent-claim-3/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1707331a/claim/patent-claim-3",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/us1707331a/claim/patent-claim-4/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1707331a/claim/patent-claim-4",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/us1707331a/claim/patent-claim-5/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1707331a/claim/patent-claim-5",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/us1707331a/claim/patent-claim-6/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1707331a/claim/patent-claim-6",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/us1707331a/claim/patent-claim-7/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1707331a/claim/patent-claim-7",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/us1707331a/claim/patent-claim-8/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 8"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1707331a/claim/patent-claim-8",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/us1707331a/claim/patent-claim-9/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 9"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1707331a/claim/patent-claim-9",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/us1707331a/claim/pills-higher-yield/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1707331a/claim/pills-higher-yield",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/us1707331a/claim/poison-free-gas/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1707331a/claim/poison-free-gas",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/us1707331a/claim/pressure-range/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1707331a/claim/pressure-range",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/us1707331a/claim/quantities-may-vary/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1707331a/claim/quantities-may-vary",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/us1707331a/claim/temperature-range/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1707331a/claim/temperature-range",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/us1707331a/feed/h2-co-4-1/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1707331a/feed/h2-co-4-1",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/1",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1707331a/p1/1",
+            "quote": "the preparation and use of a catalyst com- prising copper and fluorides of the rare 5 earths for the synthesis of methanol from a mixture of hydrogen and carbon- monoxide.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/8",
+            "quote": "valuable with proportions of yy)0 copper running up to 50% by weight of the finely reduced catalyst mass.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "up to 50% by weight",
+          "bound": "upper",
+          "unit": "%",
+          "value": 50
+        },
+        "fraction_basis": "mass",
+        "role": "not_stated",
+        "role_detail": "metallic copper after reduction"
+      },
+      "source": "ex:msyn/us1707331a/catalyst/copper-rare-earth-fluoride",
+      "target": "ex:msyn/species/copper"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/10",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example III",
+            "note": "'NdI*,' = NdF3; '45' is a line number",
+            "passage": "us1707331a/p2/3",
+            "quote": "composition of this catalyst was about 75% neodymium fluoride (NdI*,) and 45 25% metallic copper.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "25% metallic copper",
+          "unit": "%",
+          "value": 25
+        },
+        "fraction_basis": "mass",
+        "role": "not_stated",
+        "role_detail": "composition after the reduction treatment"
+      },
+      "source": "ex:msyn/us1707331a/catalyst/example-3",
+      "target": "ex:msyn/species/copper"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/100",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, claim 13",
+            "note": "'3800' is garbled for 300 (claims 9, 10, 12 give 5 and 300 atmospheres)",
+            "passage": "us1707331a/p4/1",
+            "quote": "1) betwe een 5 and 3800 atmospheres in contact with a catalyst mass comprising copper and a fluoride of a metal of the cerium family, cald catalyst being maintained at a temper- ature of between 300 and 400° C.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/claim/patent-claim-13",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/101",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, claim 14",
+            "note": "'3800' garbled for 300; claim 14 prints 'the balance a metal of the cerium family'",
+            "passage": "us1707331a/p4/2",
+            "quote": "which coniprises passing a gaseous mixture of essentially four volumes of hydrogen and one volume of carbon monoxide, at a pres- sure of between 5 and 3800 atmospheres, in contact with a catalyst mass comprising up 20 to 50% reduced copper and the balance a metal of the cerium family,",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/claim/patent-claim-14",
+      "target": "ex:msyn/us1707331a/catalyst/copper-rare-earth-fluoride"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/102",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, claim 14",
+            "note": "'3800' garbled for 300; claim 14 prints 'the balance a metal of the cerium family'",
+            "passage": "us1707331a/p4/2",
+            "quote": "which coniprises passing a gaseous mixture of essentially four volumes of hydrogen and one volume of carbon monoxide, at a pres- sure of between 5 and 3800 atmospheres, in contact with a catalyst mass comprising up 20 to 50% reduced copper and the balance a metal of the cerium family,",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/claim/patent-claim-14",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/11",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example III",
+            "note": "'NdI*,' = NdF3; '45' is a line number",
+            "passage": "us1707331a/p2/3",
+            "quote": "composition of this catalyst was about 75% neodymium fluoride (NdI*,) and 45 25% metallic copper.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "about 75% neodymium fluoride",
+          "qualifier": "approximate",
+          "unit": "%",
+          "value": 75
+        },
+        "fraction_basis": "mass",
+        "role": "not_stated",
+        "role_detail": "composition after the reduction treatment"
+      },
+      "source": "ex:msyn/us1707331a/catalyst/example-3",
+      "target": "ex:msyn/species/ndf3"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/12",
+      "type": "HAS_PART",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example III",
+            "note": "heading OCR 'Example 1.'; 'CutNaF,' = Cu + NdF3",
+            "passage": "us1707331a/p2/2",
+            "quote": "‘CutNaF, 200 parts by weight of hy- drated neodymium oxide and 240 parts of cupric nitrate were mixed with 2000 parts of: 30 water;",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Example III",
+            "note": "'NdI*,' = NdF3; '45' is a line number",
+            "passage": "us1707331a/p2/3",
+            "quote": "composition of this catalyst was about 75% neodymium fluoride (NdI*,) and 45 25% metallic copper.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "role": "example"
+      },
+      "source": "ex:msyn/us1707331a/catalyst/copper-rare-earth-fluoride",
+      "target": "ex:msyn/us1707331a/catalyst/example-3"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/13",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example I",
+            "passage": "us1707331a/p1/5",
+            "quote": "The dried precipitate was granulated to 10-30 mesh and subjected to the reaction of - reducing gases as described below.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Example I",
+            "note": "'75.' is a line number; CeF, = CeF3",
+            "passage": "us1707331a/p1/5",
+            "quote": "the composition of the. catalyst is substantially 27% metallic 75. copper and 73% cerium fluoride (CeF,).",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/sample/example-1",
+      "target": "ex:msyn/us1707331a/catalyst/example-1"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/14",
+      "type": "PREPARED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example I",
+            "passage": "us1707331a/p1/5",
+            "quote": "The dried precipitate was granulated to 10-30 mesh and subjected to the reaction of - reducing gases as described below.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Example I",
+            "note": "'75.' is a line number; CeF, = CeF3",
+            "passage": "us1707331a/p1/5",
+            "quote": "the composition of the. catalyst is substantially 27% metallic 75. copper and 73% cerium fluoride (CeF,).",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/sample/example-1",
+      "target": "ex:msyn/us1707331a/preparation/example-1"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/15",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "435 parts by weight",
+          "unit": "parts by weight",
+          "value": 435
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example I",
+            "note": "'Cut+CeF,' = Cu + CeF3; cerium nitrate formula OCR of Ce(NO3)3·6H2O; heading OCR 'xample f,'",
+            "passage": "us1707331a/p1/4",
+            "quote": "Cut+CeF,; 435 parts by weight of cerium: nitrate [Ce(NO, ) -6IL,0] and 280 parts of",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1707331a/sample/example-1",
+      "target": "ex:msyn/species/ceno336h2o"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/16",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "280 parts",
+          "unit": "parts by weight",
+          "value": 280
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example I",
+            "note": "'Cut+CeF,' = Cu + CeF3; cerium nitrate formula OCR of Ce(NO3)3·6H2O; heading OCR 'xample f,'",
+            "passage": "us1707331a/p1/4",
+            "quote": "Cut+CeF,; 435 parts by weight of cerium: nitrate [Ce(NO, ) -6IL,0] and 280 parts of",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Example I",
+            "note": "formula OCR of Cu(NO3)2·3H2O",
+            "passage": "us1707331a/p1/4",
+            "quote": "copper nitrate [Cu(NO,),.3H,O] were dis- 55 solved in 2000 parts of water.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1707331a/sample/example-1",
+      "target": "ex:msyn/species/cuno323h2o"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/17",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "174 parts",
+          "unit": "parts by weight",
+          "value": 174
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example I",
+            "passage": "us1707331a/p1/4",
+            "quote": "174 parts of potassium flouride and 179 parts of potas- sium hydroxide were then dissolved in 2000 parts of water and added to the first solu- tion.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1707331a/sample/example-1",
+      "target": "ex:msyn/species/kf"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/18",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "179 parts",
+          "unit": "parts by weight",
+          "value": 179
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example I",
+            "passage": "us1707331a/p1/4",
+            "quote": "174 parts of potassium flouride and 179 parts of potas- sium hydroxide were then dissolved in 2000 parts of water and added to the first solu- tion.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1707331a/sample/example-1",
+      "target": "ex:msyn/species/koh"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/19",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example II",
+            "passage": "us1707331a/p2/2",
+            "quote": "granulated and subjected to the action of 20 reducing gases as in ixxample I to form the ) catalyst.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Example II",
+            "note": "ThF, = ThF4",
+            "passage": "us1707331a/p2/2",
+            "quote": "composition of the catalyst was essentially 41.4% metallic copper, 19.5% thorium flouride (ThF,), 39.4% asbestos.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/sample/example-2",
+      "target": "ex:msyn/us1707331a/catalyst/example-2"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/2",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1707331a/p1/1",
+            "quote": "the preparation and use of a catalyst com- prising copper and fluorides of the rare 5 earths for the synthesis of methanol from a mixture of hydrogen and carbon- monoxide.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1707331a/p1/2",
+            "quote": "copper and fluorides of the cerium family of - the rare earths",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1707331a/catalyst/copper-rare-earth-fluoride",
+      "target": "ex:msyn/us1707331a/species/cerium-family-fluoride"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/20",
+      "type": "PREPARED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example II",
+            "passage": "us1707331a/p2/2",
+            "quote": "granulated and subjected to the action of 20 reducing gases as in ixxample I to form the ) catalyst.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Example II",
+            "note": "ThF, = ThF4",
+            "passage": "us1707331a/p2/2",
+            "quote": "composition of the catalyst was essentially 41.4% metallic copper, 19.5% thorium flouride (ThF,), 39.4% asbestos.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/sample/example-2",
+      "target": "ex:msyn/us1707331a/preparation/example-2"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/21",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "160 parts by weight",
+          "unit": "parts by weight",
+          "value": 160
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example II",
+            "note": "'Cut ThE,' = Cu + ThF4; heading OCR 'Example IT,'",
+            "passage": "us1707331a/p1/7",
+            "quote": "Cut ThE, ; 160 parts by weight of copper",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Example II",
+            "note": "thorium nitrate formula OCR of Th(NO3)4·12H2O; the copper nitrate hydrate is garbled",
+            "passage": "us1707331a/p2/1",
+            "quote": "nitrate [Cu(NO,). oH. oO} and 45 parts by weight of thor ium, Mitr ate - [Th(NO,) ..12H,0]",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, Example II",
+            "note": "page image prints the copper nitrate as Cu(NO3)2.3H2O; OCR text reads '[Cu(NO,). oH. oO}'",
+            "reading": "vision_ocr",
+            "region": [
+              0.15,
+              0.12,
+              0.52,
+              0.14
+            ],
+            "source": "ex:msyn/source/us1707331a",
+            "transcription": "nitrate [Cu(NO₃)₂.3H₂O] and 45 parts by"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1707331a/sample/example-2",
+      "target": "ex:msyn/species/cuno32"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/22",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "45 parts by weight",
+          "unit": "parts by weight",
+          "value": 45
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example II",
+            "note": "thorium nitrate formula OCR of Th(NO3)4·12H2O; the copper nitrate hydrate is garbled",
+            "passage": "us1707331a/p2/1",
+            "quote": "nitrate [Cu(NO,). oH. oO} and 45 parts by weight of thor ium, Mitr ate - [Th(NO,) ..12H,0]",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1707331a/sample/example-2",
+      "target": "ex:msyn/species/thno3412h2o"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/23",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "40 parts",
+          "unit": "parts by weight",
+          "value": 40
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example II",
+            "passage": "us1707331a/p2/1",
+            "quote": "were dissolved in 1000 parts by weight of water. 40 parts of medium fibred acid- “washed asbestos was mixed with this solution after which 25 parts of concentrated hydro- fluoric acid was added.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1707331a/sample/example-2",
+      "target": "ex:msyn/us1707331a/material/acid-washed-asbestos"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/24",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "25 parts of concentrated hydro- fluoric acid",
+          "unit": "parts by weight",
+          "value": 25
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example II",
+            "passage": "us1707331a/p2/1",
+            "quote": "were dissolved in 1000 parts by weight of water. 40 parts of medium fibred acid- “washed asbestos was mixed with this solution after which 25 parts of concentrated hydro- fluoric acid was added.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1707331a/sample/example-2",
+      "target": "ex:msyn/species/hf"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/25",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "Sufficient aqueous 40 ammonia",
+          "text_value": "sufficient"
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example II",
+            "note": "'40' is a line number",
+            "passage": "us1707331a/p2/1",
+            "quote": "Sufficient aqueous 40 ammonia was now added to form copper am- - monium nitrate in the solution and to make the solution alkaline.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1707331a/sample/example-2",
+      "target": "ex:msyn/species/nh3"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/26",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "60 parts",
+          "unit": "parts by weight",
+          "value": 60
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example II",
+            "passage": "us1707331a/p2/1",
+            "quote": "60 parts of sodium hydroxide in 100 parts of water were now added. and the mixture boiled until free of 15 ammonia.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1707331a/sample/example-2",
+      "target": "ex:msyn/species/naoh"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/27",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example III",
+            "passage": "us1707331a/p2/3",
+            "quote": "jected to the action of reducing gases as above to form the menthanol catalyst.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Example III",
+            "note": "'NdI*,' = NdF3; '45' is a line number",
+            "passage": "us1707331a/p2/3",
+            "quote": "composition of this catalyst was about 75% neodymium fluoride (NdI*,) and 45 25% metallic copper.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/sample/example-3",
+      "target": "ex:msyn/us1707331a/catalyst/example-3"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/28",
+      "type": "PREPARED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example III",
+            "passage": "us1707331a/p2/3",
+            "quote": "jected to the action of reducing gases as above to form the menthanol catalyst.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Example III",
+            "note": "'NdI*,' = NdF3; '45' is a line number",
+            "passage": "us1707331a/p2/3",
+            "quote": "composition of this catalyst was about 75% neodymium fluoride (NdI*,) and 45 25% metallic copper.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/sample/example-3",
+      "target": "ex:msyn/us1707331a/preparation/example-3"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/29",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "200 parts by weight",
+          "unit": "parts by weight",
+          "value": 200
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example III",
+            "note": "heading OCR 'Example 1.'; 'CutNaF,' = Cu + NdF3",
+            "passage": "us1707331a/p2/2",
+            "quote": "‘CutNaF, 200 parts by weight of hy- drated neodymium oxide and 240 parts of cupric nitrate were mixed with 2000 parts of: 30 water;",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1707331a/sample/example-3",
+      "target": "ex:msyn/us1707331a/species/hydrated-neodymium-oxide"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/3",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example I",
+            "note": "'75.' is a line number; CeF, = CeF3",
+            "passage": "us1707331a/p1/5",
+            "quote": "the composition of the. catalyst is substantially 27% metallic 75. copper and 73% cerium fluoride (CeF,).",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "substantially 27% metallic 75. copper",
+          "unit": "%",
+          "value": 27
+        },
+        "fraction_basis": "mass",
+        "role": "not_stated",
+        "role_detail": "composition after the reduction treatment"
+      },
+      "source": "ex:msyn/us1707331a/catalyst/example-1",
+      "target": "ex:msyn/species/copper"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/30",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "240 parts of cupric nitrate",
+          "unit": "parts by weight",
+          "value": 240
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example III",
+            "note": "heading OCR 'Example 1.'; 'CutNaF,' = Cu + NdF3",
+            "passage": "us1707331a/p2/2",
+            "quote": "‘CutNaF, 200 parts by weight of hy- drated neodymium oxide and 240 parts of cupric nitrate were mixed with 2000 parts of: 30 water;",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1707331a/sample/example-3",
+      "target": "ex:msyn/species/cuno32"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/31",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "sufficient nitric acid",
+          "text_value": "sufficient"
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example III",
+            "passage": "us1707331a/p2/2",
+            "quote": "sufficient nitric acid was now added to dissolve the rare earth oxide.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1707331a/sample/example-3",
+      "target": "ex:msyn/species/hno3"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/32",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "232 parts",
+          "unit": "parts by weight",
+          "value": 232
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example III",
+            "passage": "us1707331a/p2/2",
+            "quote": "a second solution consisting of 232 parts of potassium fluoride and 112 parts of potassium hydroxide in 1500 parts 35 of water.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1707331a/sample/example-3",
+      "target": "ex:msyn/species/kf"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/33",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "112 parts",
+          "unit": "parts by weight",
+          "value": 112
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example III",
+            "passage": "us1707331a/p2/2",
+            "quote": "a second solution consisting of 232 parts of potassium fluoride and 112 parts of potassium hydroxide in 1500 parts 35 of water.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1707331a/sample/example-3",
+      "target": "ex:msyn/species/koh"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/34",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example I",
+            "passage": "us1707331a/p1/5",
+            "quote": "The dried precipitate was granulated to 10-30 mesh and subjected to the reaction of - reducing gases as described below.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Example I",
+            "passage": "us1707331a/p1/6",
+            "quote": "This reducing mixture is passed at atmos- pheric pressure over the dried precipitate 9x preferably contained in a copper lined ves- — _ sel, heated to not over 350° C., preferably to about 150-200° C.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "order": 1
+      },
+      "source": "ex:msyn/us1707331a/sample/example-1",
+      "target": "ex:msyn/us1707331a/treatment/reduction"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/35",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example II",
+            "passage": "us1707331a/p2/2",
+            "quote": "granulated and subjected to the action of 20 reducing gases as in ixxample I to form the ) catalyst.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "order": 1
+      },
+      "source": "ex:msyn/us1707331a/sample/example-2",
+      "target": "ex:msyn/us1707331a/treatment/reduction"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/36",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example III",
+            "passage": "us1707331a/p2/3",
+            "quote": "jected to the action of reducing gases as above to form the menthanol catalyst.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "order": 1
+      },
+      "source": "ex:msyn/us1707331a/sample/example-3",
+      "target": "ex:msyn/us1707331a/treatment/reduction"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/37",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1707331a/p1/1",
+            "quote": "the preparation and use of a catalyst com- prising copper and fluorides of the rare 5 earths for the synthesis of methanol from a mixture of hydrogen and carbon- monoxide.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/catalyst/copper-rare-earth-fluoride",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/38",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/4",
+            "quote": "A gas mix- ture, comprising essentially 4 volumes hy- _ drogen and one volume carbon monoxide, and. essentially free of catalyst poisons was now passed through the heated catalyst un-",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "essentially 4 volumes",
+          "note": "volumes per volume of carbon monoxide",
+          "unit": "vol",
+          "value": 4
+        },
+        "fraction_basis": "volume",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1707331a/feed/h2-co-4-1",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/39",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/4",
+            "quote": "A gas mix- ture, comprising essentially 4 volumes hy- _ drogen and one volume carbon monoxide, and. essentially free of catalyst poisons was now passed through the heated catalyst un-",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "one volume",
+          "unit": "vol",
+          "value": 1
+        },
+        "fraction_basis": "volume",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1707331a/feed/h2-co-4-1",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/4",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example I",
+            "note": "'75.' is a line number; CeF, = CeF3",
+            "passage": "us1707331a/p1/5",
+            "quote": "the composition of the. catalyst is substantially 27% metallic 75. copper and 73% cerium fluoride (CeF,).",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "73% cerium fluoride",
+          "unit": "%",
+          "value": 73
+        },
+        "fraction_basis": "mass",
+        "role": "not_stated",
+        "role_detail": "composition after the reduction treatment"
+      },
+      "source": "ex:msyn/us1707331a/catalyst/example-1",
+      "target": "ex:msyn/species/cef3"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/40",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'Example Tis' = 'Example I is'",
+            "passage": "us1707331a/p2/4",
+            "quote": "the following data obtained with the catalyst of Example Tis given.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/4",
+            "quote": "The granular, re- duced catalyst material was packed 3 in a cop- _ per lined high pressure steel bomb and the 60 whole heated to about 300° C.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "state": "reduced"
+      },
+      "source": "ex:msyn/us1707331a/test/example-1",
+      "target": "ex:msyn/us1707331a/sample/example-1"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/41",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/4",
+            "quote": "A gas mix- ture, comprising essentially 4 volumes hy- _ drogen and one volume carbon monoxide, and. essentially free of catalyst poisons was now passed through the heated catalyst un-",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/test/example-1",
+      "target": "ex:msyn/us1707331a/feed/h2-co-4-1"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/42",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/4",
+            "quote": "The granular, re- duced catalyst material was packed 3 in a cop- _ per lined high pressure steel bomb and the 60 whole heated to about 300° C.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/test/example-1",
+      "target": "ex:msyn/us1707331a/reactor/copper-lined-bomb"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/43",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'Example Tis' = 'Example I is'",
+            "passage": "us1707331a/p2/4",
+            "quote": "the following data obtained with the catalyst of Example Tis given.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/4",
+            "quote": "The granular, re- duced catalyst material was packed 3 in a cop- _ per lined high pressure steel bomb and the 60 whole heated to about 300° C.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/test/example-1",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/44",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'8. V. H.' / '8S. T. Y.' = S. V. H. / S. T. Y.",
+            "passage": "us1707331a/p2/6",
+            "quote": "Under similar conditions with a catalyst temperature of 330° C. and an 8. V. H. of 15,000 an 8S. T. Y. of 1000 was obtained with the catalyst of Example II.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "state": "reduced"
+      },
+      "source": "ex:msyn/us1707331a/test/example-2",
+      "target": "ex:msyn/us1707331a/sample/example-2"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/45",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/4",
+            "quote": "A gas mix- ture, comprising essentially 4 volumes hy- _ drogen and one volume carbon monoxide, and. essentially free of catalyst poisons was now passed through the heated catalyst un-",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'8. V. H.' / '8S. T. Y.' = S. V. H. / S. T. Y.",
+            "passage": "us1707331a/p2/6",
+            "quote": "Under similar conditions with a catalyst temperature of 330° C. and an 8. V. H. of 15,000 an 8S. T. Y. of 1000 was obtained with the catalyst of Example II.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "note": "'similar conditions' to the Example I run"
+      },
+      "source": "ex:msyn/us1707331a/test/example-2",
+      "target": "ex:msyn/us1707331a/feed/h2-co-4-1"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/46",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/4",
+            "quote": "The granular, re- duced catalyst material was packed 3 in a cop- _ per lined high pressure steel bomb and the 60 whole heated to about 300° C.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'8. V. H.' / '8S. T. Y.' = S. V. H. / S. T. Y.",
+            "passage": "us1707331a/p2/6",
+            "quote": "Under similar conditions with a catalyst temperature of 330° C. and an 8. V. H. of 15,000 an 8S. T. Y. of 1000 was obtained with the catalyst of Example II.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/test/example-2",
+      "target": "ex:msyn/us1707331a/reactor/copper-lined-bomb"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/47",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'8. V. H.' / '8S. T. Y.' = S. V. H. / S. T. Y.",
+            "passage": "us1707331a/p2/6",
+            "quote": "Under similar conditions with a catalyst temperature of 330° C. and an 8. V. H. of 15,000 an 8S. T. Y. of 1000 was obtained with the catalyst of Example II.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/test/example-2",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/48",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "the temperature is printed '820° C.' (garbled; '$5' is a line number)",
+            "passage": "us1707331a/p2/6",
+            "quote": "At 820° C. and $5 an S. V. H. of 6500, an 8. T. Y. of 700 was obtained with the catalyst of Example III.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "state": "reduced"
+      },
+      "source": "ex:msyn/us1707331a/test/example-3",
+      "target": "ex:msyn/us1707331a/sample/example-3"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/49",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/4",
+            "quote": "A gas mix- ture, comprising essentially 4 volumes hy- _ drogen and one volume carbon monoxide, and. essentially free of catalyst poisons was now passed through the heated catalyst un-",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'8. V. H.' / '8S. T. Y.' = S. V. H. / S. T. Y.",
+            "passage": "us1707331a/p2/6",
+            "quote": "Under similar conditions with a catalyst temperature of 330° C. and an 8. V. H. of 15,000 an 8S. T. Y. of 1000 was obtained with the catalyst of Example II.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "note": "'similar conditions' to the Example I run"
+      },
+      "source": "ex:msyn/us1707331a/test/example-3",
+      "target": "ex:msyn/us1707331a/feed/h2-co-4-1"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/5",
+      "type": "HAS_PART",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example I",
+            "note": "'Cut+CeF,' = Cu + CeF3; cerium nitrate formula OCR of Ce(NO3)3·6H2O; heading OCR 'xample f,'",
+            "passage": "us1707331a/p1/4",
+            "quote": "Cut+CeF,; 435 parts by weight of cerium: nitrate [Ce(NO, ) -6IL,0] and 280 parts of",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, Example I",
+            "note": "'75.' is a line number; CeF, = CeF3",
+            "passage": "us1707331a/p1/5",
+            "quote": "the composition of the. catalyst is substantially 27% metallic 75. copper and 73% cerium fluoride (CeF,).",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "role": "example"
+      },
+      "source": "ex:msyn/us1707331a/catalyst/copper-rare-earth-fluoride",
+      "target": "ex:msyn/us1707331a/catalyst/example-1"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/50",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/4",
+            "quote": "The granular, re- duced catalyst material was packed 3 in a cop- _ per lined high pressure steel bomb and the 60 whole heated to about 300° C.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'8. V. H.' / '8S. T. Y.' = S. V. H. / S. T. Y.",
+            "passage": "us1707331a/p2/6",
+            "quote": "Under similar conditions with a catalyst temperature of 330° C. and an 8. V. H. of 15,000 an 8S. T. Y. of 1000 was obtained with the catalyst of Example II.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/test/example-3",
+      "target": "ex:msyn/us1707331a/reactor/copper-lined-bomb"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/51",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "the temperature is printed '820° C.' (garbled; '$5' is a line number)",
+            "passage": "us1707331a/p2/6",
+            "quote": "At 820° C. and $5 an S. V. H. of 6500, an 8. T. Y. of 700 was obtained with the catalyst of Example III.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/test/example-3",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/52",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/3",
+            "quote": "it is desirable to uses gases substan- tially free from the common catalyst poi- 50 sons \"which may be present in the raw ma- _ terials, such as, for example, arsenic, sul- phur, phosphorous, volatile iron compounds,",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "inhibition_kind": "poison"
+      },
+      "source": "ex:msyn/us1707331a/catalyst/copper-rare-earth-fluoride",
+      "target": "ex:msyn/species/arsenic"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/53",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/3",
+            "quote": "it is desirable to uses gases substan- tially free from the common catalyst poi- 50 sons \"which may be present in the raw ma- _ terials, such as, for example, arsenic, sul- phur, phosphorous, volatile iron compounds,",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "inhibition_kind": "poison"
+      },
+      "source": "ex:msyn/us1707331a/catalyst/copper-rare-earth-fluoride",
+      "target": "ex:msyn/species/sulfur"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/54",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/3",
+            "quote": "it is desirable to uses gases substan- tially free from the common catalyst poi- 50 sons \"which may be present in the raw ma- _ terials, such as, for example, arsenic, sul- phur, phosphorous, volatile iron compounds,",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "inhibition_kind": "poison"
+      },
+      "source": "ex:msyn/us1707331a/catalyst/copper-rare-earth-fluoride",
+      "target": "ex:msyn/species/phosphorus"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/55",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/3",
+            "quote": "it is desirable to uses gases substan- tially free from the common catalyst poi- 50 sons \"which may be present in the raw ma- _ terials, such as, for example, arsenic, sul- phur, phosphorous, volatile iron compounds,",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "inhibition_kind": "poison"
+      },
+      "source": "ex:msyn/us1707331a/catalyst/copper-rare-earth-fluoride",
+      "target": "ex:msyn/us1707331a/species/volatile-iron-compounds"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/56",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1707331a/p1/3",
+            "quote": "bination of copper and these rare earth fluorides are active under conditions of low temperatures and pressures.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1707331a/p1/3",
+            "quote": "catalysts are obtained in hard masses which. - can easily be granulated and screened to definite size, the granules of which will re- tain their structure in a suitable manner during use.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1707331a/p1/3",
+            "quote": "these pills retain their form , satisfactorily throughout the reduction to : the active stage and during use.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/claim/low-temp-pressure-active",
+      "target": "ex:msyn/us1707331a/catalyst/copper-rare-earth-fluoride"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/57",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/3",
+            "quote": "it is desirable to uses gases substan- tially free from the common catalyst poi- 50 sons \"which may be present in the raw ma- _ terials, such as, for example, arsenic, sul- phur, phosphorous, volatile iron compounds,",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/claim/poison-free-gas",
+      "target": "ex:msyn/us1707331a/catalyst/copper-rare-earth-fluoride"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/58",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/3",
+            "quote": "it is desirable to uses gases substan- tially free from the common catalyst poi- 50 sons \"which may be present in the raw ma- _ terials, such as, for example, arsenic, sul- phur, phosphorous, volatile iron compounds,",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/claim/poison-free-gas",
+      "target": "ex:msyn/species/arsenic"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/59",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/3",
+            "quote": "it is desirable to uses gases substan- tially free from the common catalyst poi- 50 sons \"which may be present in the raw ma- _ terials, such as, for example, arsenic, sul- phur, phosphorous, volatile iron compounds,",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/claim/poison-free-gas",
+      "target": "ex:msyn/species/sulfur"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/6",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example II",
+            "note": "ThF, = ThF4",
+            "passage": "us1707331a/p2/2",
+            "quote": "composition of the catalyst was essentially 41.4% metallic copper, 19.5% thorium flouride (ThF,), 39.4% asbestos.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "41.4% metallic copper",
+          "unit": "%",
+          "value": 41.4
+        },
+        "fraction_basis": "mass",
+        "role": "not_stated",
+        "role_detail": "composition after the reduction treatment"
+      },
+      "source": "ex:msyn/us1707331a/catalyst/example-2",
+      "target": "ex:msyn/species/copper"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/60",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/3",
+            "quote": "it is desirable to uses gases substan- tially free from the common catalyst poi- 50 sons \"which may be present in the raw ma- _ terials, such as, for example, arsenic, sul- phur, phosphorous, volatile iron compounds,",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/claim/poison-free-gas",
+      "target": "ex:msyn/species/phosphorus"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/61",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/3",
+            "quote": "it is desirable to uses gases substan- tially free from the common catalyst poi- 50 sons \"which may be present in the raw ma- _ terials, such as, for example, arsenic, sul- phur, phosphorous, volatile iron compounds,",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/claim/poison-free-gas",
+      "target": "ex:msyn/us1707331a/species/volatile-iron-compounds"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/62",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/6",
+            "quote": "For this purpose I prefer to pulverize the 90 dried material before reduction and then compress this powder into small compact masses of desired form, such as, for exam- ple, pills.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/6",
+            "quote": "I have obtained excellent re- sults with pills about one-fourth inch in 95 diameter and about one-eighth inch thick.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/6",
+            "quote": "The pill form of the catalysts gives some- what higher yields than that obtained with 100 the granular material.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/claim/pills-higher-yield",
+      "target": "ex:msyn/us1707331a/catalyst/copper-rare-earth-fluoride"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/63",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/7",
+            "quote": "the exact quantities, proportions, etc. given in the pre- ferred examples of catalyst manufacture 103 may be varied, and my catalysts can still be obtained,",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/claim/quantities-may-vary",
+      "target": "ex:msyn/us1707331a/catalyst/copper-rare-earth-fluoride"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/64",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/7",
+            "quote": "the exact quantities, proportions, etc. given in the pre- ferred examples of catalyst manufacture 103 may be varied, and my catalysts can still be obtained,",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/claim/quantities-may-vary",
+      "target": "ex:msyn/us1707331a/preparation/example-1"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/65",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/7",
+            "quote": "the exact quantities, proportions, etc. given in the pre- ferred examples of catalyst manufacture 103 may be varied, and my catalysts can still be obtained,",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/claim/quantities-may-vary",
+      "target": "ex:msyn/us1707331a/preparation/example-2"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/66",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/7",
+            "quote": "the exact quantities, proportions, etc. given in the pre- ferred examples of catalyst manufacture 103 may be varied, and my catalysts can still be obtained,",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/claim/quantities-may-vary",
+      "target": "ex:msyn/us1707331a/preparation/example-3"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/67",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/8",
+            "quote": "valuable with proportions of yy)0 copper running up to 50% by weight of the finely reduced catalyst mass.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/8",
+            "quote": "If the per- cent of metallic reduced copper is above this amount, I have found that the catalysts sinter very easily and lose their effectiveness 115 as menthanol catalysts.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/8",
+            "quote": "Ii the percentage of copper is less than 5 or 10% by aveight of the catalyst mass, I have found that the jop rate of conversion is not satisfactory.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/8",
+            "quote": "prefer to have at least 5% and preferably over 10% of the catalyst mass as metallic copper.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/claim/copper-below-50",
+      "target": "ex:msyn/us1707331a/catalyst/copper-rare-earth-fluoride"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/68",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/8",
+            "quote": "valuable with proportions of yy)0 copper running up to 50% by weight of the finely reduced catalyst mass.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/8",
+            "quote": "If the per- cent of metallic reduced copper is above this amount, I have found that the catalysts sinter very easily and lose their effectiveness 115 as menthanol catalysts.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/8",
+            "quote": "Ii the percentage of copper is less than 5 or 10% by aveight of the catalyst mass, I have found that the jop rate of conversion is not satisfactory.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/8",
+            "quote": "prefer to have at least 5% and preferably over 10% of the catalyst mass as metallic copper.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/claim/copper-below-50",
+      "target": "ex:msyn/species/copper"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/69",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'25-80%' conflicts with the stated preference for copper below 50%; garbled OCR",
+            "passage": "us1707331a/p2/8",
+            "quote": "I have found that in gen- eral approximately 25-80% by weight of me- 195 tallic copper gives the best results.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/claim/copper-best-range",
+      "target": "ex:msyn/us1707331a/catalyst/copper-rare-earth-fluoride"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/7",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example II",
+            "note": "ThF, = ThF4",
+            "passage": "us1707331a/p2/2",
+            "quote": "composition of the catalyst was essentially 41.4% metallic copper, 19.5% thorium flouride (ThF,), 39.4% asbestos.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "19.5% thorium flouride",
+          "unit": "%",
+          "value": 19.5
+        },
+        "fraction_basis": "mass",
+        "role": "not_stated",
+        "role_detail": "composition after the reduction treatment"
+      },
+      "source": "ex:msyn/us1707331a/catalyst/example-2",
+      "target": "ex:msyn/species/thf4"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/70",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'25-80%' conflicts with the stated preference for copper below 50%; garbled OCR",
+            "passage": "us1707331a/p2/8",
+            "quote": "I have found that in gen- eral approximately 25-80% by weight of me- 195 tallic copper gives the best results.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/claim/copper-best-range",
+      "target": "ex:msyn/species/copper"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/71",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "'6. TL. Y.' = S. T. Y.",
+            "passage": "us1707331a/p3/1",
+            "quote": "My catalysts will form methanol from a gas mixture having any ‘atio of hydrogen to carbon monoxide, but if the ratio 1s below one by volume the 6. TL. Y. will be considerably lower than that obtained with hydrogen in excess by volume.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1707331a/p3/2",
+            "quote": "In general I prefer not to use less hydrogen. than that required theoretically by the equation",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1707331a/p3/2",
+            "quote": "I have found that a gas containing about four volumes of hydrogen to each volume of carbon monoxide gives the best results, and that with about -6 volumes of hydrogen the S. T. Y. is somewhat lower.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/claim/h2-co-ratio",
+      "target": "ex:msyn/us1707331a/catalyst/copper-rare-earth-fluoride"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/72",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "'6. TL. Y.' = S. T. Y.",
+            "passage": "us1707331a/p3/1",
+            "quote": "My catalysts will form methanol from a gas mixture having any ‘atio of hydrogen to carbon monoxide, but if the ratio 1s below one by volume the 6. TL. Y. will be considerably lower than that obtained with hydrogen in excess by volume.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1707331a/p3/2",
+            "quote": "In general I prefer not to use less hydrogen. than that required theoretically by the equation",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1707331a/p3/2",
+            "quote": "I have found that a gas containing about four volumes of hydrogen to each volume of carbon monoxide gives the best results, and that with about -6 volumes of hydrogen the S. T. Y. is somewhat lower.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/claim/h2-co-ratio",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/73",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "'800° C.' is garbled (claims 13 and 14 give 300 and 400° C.)",
+            "passage": "us1707331a/p3/3",
+            "quote": "These catalysts are suited for the above syntheses at temperatures ranging between 150° C. and 450° C, although [ have found {he best results are secured between 800° C. and 400° C.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/claim/temperature-range",
+      "target": "ex:msyn/us1707331a/catalyst/copper-rare-earth-fluoride"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/74",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "'800° C.' is garbled (claims 13 and 14 give 300 and 400° C.)",
+            "passage": "us1707331a/p3/3",
+            "quote": "These catalysts are suited for the above syntheses at temperatures ranging between 150° C. and 450° C, although [ have found {he best results are secured between 800° C. and 400° C.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/claim/temperature-range",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/75",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1707331a/p3/3",
+            "quote": "methanol will be formed in substantial amounts by these catalysts at pressures of 5 atmospheres and upwards, de- pendent on the temperature used.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1707331a/p3/3",
+            "quote": "Substan- tial yields of methanol may even. be obtained at. pressures lower than this; for example, at one atmosphere.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1707331a/p3/3",
+            "quote": "In general, I have found that the best results ave secured at between 200 and 300 atmospheres,",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1707331a/p3/4",
+            "quote": "I prefer space velocities of 2,000 to 20,000, calculated at N. T. P.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1707331a/p3/1",
+            "quote": "I have used these catalysts under many conditions and find that wide limits of pressure and temperature are permissible,",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/claim/pressure-range",
+      "target": "ex:msyn/us1707331a/catalyst/copper-rare-earth-fluoride"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/76",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1707331a/p3/3",
+            "quote": "methanol will be formed in substantial amounts by these catalysts at pressures of 5 atmospheres and upwards, de- pendent on the temperature used.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1707331a/p3/3",
+            "quote": "Substan- tial yields of methanol may even. be obtained at. pressures lower than this; for example, at one atmosphere.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1707331a/p3/3",
+            "quote": "In general, I have found that the best results ave secured at between 200 and 300 atmospheres,",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1707331a/p3/4",
+            "quote": "I prefer space velocities of 2,000 to 20,000, calculated at N. T. P.",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1707331a/p3/1",
+            "quote": "I have used these catalysts under many conditions and find that wide limits of pressure and temperature are permissible,",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/claim/pressure-range",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/77",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/5",
+            "quote": "A sustained yield of methanol was obtained equivalent to a space time yield (S. T. Y.) of 2700 pounds of methanol per cubic foot of cat- 75 alyst per 24 hours:",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1707331a/p2/5",
+            "quote": "The catalyst retained it graular form after use in the above man- $0 ner for extended periods of time.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/test/example-1",
+      "target": "ex:msyn/us1707331a/claim/low-temp-pressure-active"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/78",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 1",
+            "passage": "us1707331a/p3/4",
+            "quote": "1. A catalyst for the production of methanol from hydrogen and carbon monox- ide which comprises copper and a rare earth metal fluoride.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/claim/patent-claim-1",
+      "target": "ex:msyn/us1707331a/catalyst/copper-rare-earth-fluoride"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/79",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 2",
+            "passage": "us1707331a/p3/4",
+            "quote": "which comprises copper and a fluoride of a metal of the cerium family.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/claim/patent-claim-2",
+      "target": "ex:msyn/us1707331a/catalyst/copper-rare-earth-fluoride"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/8",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, Example II",
+            "note": "ThF, = ThF4",
+            "passage": "us1707331a/p2/2",
+            "quote": "composition of the catalyst was essentially 41.4% metallic copper, 19.5% thorium flouride (ThF,), 39.4% asbestos.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "39.4% asbestos",
+          "unit": "%",
+          "value": 39.4
+        },
+        "fraction_basis": "mass",
+        "role": "not_stated",
+        "role_detail": "composition after the reduction treatment"
+      },
+      "source": "ex:msyn/us1707331a/catalyst/example-2",
+      "target": "ex:msyn/us1707331a/material/acid-washed-asbestos"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/80",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 3",
+            "passage": "us1707331a/p3/4",
+            "quote": "which comprises up to 50% by weight of re- ~duced copper and the balance a fluoride of a metal of the cerlum family,",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/claim/patent-claim-3",
+      "target": "ex:msyn/us1707331a/catalyst/copper-rare-earth-fluoride"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/81",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 4",
+            "passage": "us1707331a/p3/4",
+            "quote": "-which comprises copper and cerium fluoride.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/claim/patent-claim-4",
+      "target": "ex:msyn/us1707331a/catalyst/copper-rare-earth-fluoride"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/82",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 4",
+            "passage": "us1707331a/p3/4",
+            "quote": "-which comprises copper and cerium fluoride.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/claim/patent-claim-4",
+      "target": "ex:msyn/species/cef3"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/83",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 5",
+            "passage": "us1707331a/p3/5",
+            "quote": "which comprises up to 50% by weight of re- 80 duced copper and the balance cerium fluoride,",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/claim/patent-claim-5",
+      "target": "ex:msyn/us1707331a/catalyst/copper-rare-earth-fluoride"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/84",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 5",
+            "passage": "us1707331a/p3/5",
+            "quote": "which comprises up to 50% by weight of re- 80 duced copper and the balance cerium fluoride,",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/claim/patent-claim-5",
+      "target": "ex:msyn/species/cef3"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/85",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 6",
+            "passage": "us1707331a/p3/5",
+            "quote": "6. Process for the production of methanol which comprises passing a gaseous mixture of hydrogen and carbon monoxide in con- 85 tact with a hot catalyst mass comprising | copper and a rare earth metal fluoride.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/claim/patent-claim-6",
+      "target": "ex:msyn/us1707331a/catalyst/copper-rare-earth-fluoride"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/86",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 6",
+            "passage": "us1707331a/p3/5",
+            "quote": "6. Process for the production of methanol which comprises passing a gaseous mixture of hydrogen and carbon monoxide in con- 85 tact with a hot catalyst mass comprising | copper and a rare earth metal fluoride.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/claim/patent-claim-6",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/87",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 7",
+            "passage": "us1707331a/p3/6",
+            "quote": "with a hot catalyst mass comprising cop-_ per and a fluoride of a metal of the cerium",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/claim/patent-claim-7",
+      "target": "ex:msyn/us1707331a/catalyst/copper-rare-earth-fluoride"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/88",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 7",
+            "passage": "us1707331a/p3/6",
+            "quote": "with a hot catalyst mass comprising cop-_ per and a fluoride of a metal of the cerium",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/claim/patent-claim-7",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/89",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 8",
+            "passage": "us1707331a/p3/6",
+            "quote": "of hydrogen and carbon monoxide contain- ing an excess of hydrogen in contact with a hot catalyst mass comprising up to 50% by weight of reduced copper and the bal- ance a- fluoride of a metal of the cerium 10",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/claim/patent-claim-8",
+      "target": "ex:msyn/us1707331a/catalyst/copper-rare-earth-fluoride"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/9",
+      "type": "HAS_PART",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, Example II",
+            "note": "'Cut ThE,' = Cu + ThF4; heading OCR 'Example IT,'",
+            "passage": "us1707331a/p1/7",
+            "quote": "Cut ThE, ; 160 parts by weight of copper",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, Example II",
+            "note": "ThF, = ThF4",
+            "passage": "us1707331a/p2/2",
+            "quote": "composition of the catalyst was essentially 41.4% metallic copper, 19.5% thorium flouride (ThF,), 39.4% asbestos.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ],
+        "role": "example"
+      },
+      "source": "ex:msyn/us1707331a/catalyst/copper-rare-earth-fluoride",
+      "target": "ex:msyn/us1707331a/catalyst/example-2"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/90",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 8",
+            "passage": "us1707331a/p3/6",
+            "quote": "of hydrogen and carbon monoxide contain- ing an excess of hydrogen in contact with a hot catalyst mass comprising up to 50% by weight of reduced copper and the bal- ance a- fluoride of a metal of the cerium 10",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/claim/patent-claim-8",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/91",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 9",
+            "passage": "us1707331a/p3/6",
+            "quote": "ing an excess of hydrogen, at a pressure of 105 between 5 and 300 atmospheres in contact with a hot catalyst mass comprising copper and a fluoride of a metal of the cerium fam-",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/claim/patent-claim-9",
+      "target": "ex:msyn/us1707331a/catalyst/copper-rare-earth-fluoride"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/92",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 9",
+            "passage": "us1707331a/p3/6",
+            "quote": "ing an excess of hydrogen, at a pressure of 105 between 5 and 300 atmospheres in contact with a hot catalyst mass comprising copper and a fluoride of a metal of the cerium fam-",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/claim/patent-claim-9",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/93",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 10",
+            "note": "printed '20%' where claims 3, 5, 8 and 14 give 50%",
+            "passage": "us1707331a/p3/7",
+            "quote": "with a hot catalyst mass comprising up to 115 20% reduced copper and the balance a flu- oride of a metal of the cerium family.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/claim/patent-claim-10",
+      "target": "ex:msyn/us1707331a/catalyst/copper-rare-earth-fluoride"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/94",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 10",
+            "note": "printed '20%' where claims 3, 5, 8 and 14 give 50%",
+            "passage": "us1707331a/p3/7",
+            "quote": "with a hot catalyst mass comprising up to 115 20% reduced copper and the balance a flu- oride of a metal of the cerium family.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/claim/patent-claim-10",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/95",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 11",
+            "passage": "us1707331a/p3/7",
+            "quote": "taining an excess of hydrogen, at a pressure above atmospheric in contact with a catalyst mass comprising copper and a fluoride of a metal of the cerium family, said catalyst. ‘being maintained at a temperature of be- 125 tween 150° C. and 450° C.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/claim/patent-claim-11",
+      "target": "ex:msyn/us1707331a/catalyst/copper-rare-earth-fluoride"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/96",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 11",
+            "passage": "us1707331a/p3/7",
+            "quote": "taining an excess of hydrogen, at a pressure above atmospheric in contact with a catalyst mass comprising copper and a fluoride of a metal of the cerium family, said catalyst. ‘being maintained at a temperature of be- 125 tween 150° C. and 450° C.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/claim/patent-claim-11",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/97",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 12",
+            "passage": "us1707331a/p3/8",
+            "quote": "12. Process for the production of methanol which comprises passing a gaseous mixture",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4, claim 12",
+            "passage": "us1707331a/p4/1",
+            "quote": "between 5 and 300 atmospher es in contact wilh a catalyst mass comprising copper and a fluoride of a metal of the cerium family,",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/claim/patent-claim-12",
+      "target": "ex:msyn/us1707331a/catalyst/copper-rare-earth-fluoride"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/98",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 12",
+            "passage": "us1707331a/p3/8",
+            "quote": "12. Process for the production of methanol which comprises passing a gaseous mixture",
+            "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4, claim 12",
+            "passage": "us1707331a/p4/1",
+            "quote": "between 5 and 300 atmospher es in contact wilh a catalyst mass comprising copper and a fluoride of a metal of the cerium family,",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/claim/patent-claim-12",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1707331a/link/99",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, claim 13",
+            "note": "'3800' is garbled for 300 (claims 9, 10, 12 give 5 and 300 atmospheres)",
+            "passage": "us1707331a/p4/1",
+            "quote": "1) betwe een 5 and 3800 atmospheres in contact with a catalyst mass comprising copper and a fluoride of a metal of the cerium family, cald catalyst being maintained at a temper- ature of between 300 and 400° C.",
+            "source": "ex:msyn/source/us1707331a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1707331a/claim/patent-claim-13",
+      "target": "ex:msyn/us1707331a/catalyst/copper-rare-earth-fluoride"
+    },
+    {
+      "id": "ex:msyn/us1707331a/material/acid-washed-asbestos/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, Example II"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1707331a/material/acid-washed-asbestos",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/us1707331a/preparation/example-1/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, Example I"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1707331a/preparation/example-1",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/us1707331a/preparation/example-2/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, Example II",
+          "p. 2, Example II"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1707331a/preparation/example-2",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/us1707331a/preparation/example-3/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, Example III"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1707331a/preparation/example-3",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/us1707331a/reactor/copper-lined-bomb/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1707331a/reactor/copper-lined-bomb",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/us1707331a/sample/example-1/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, Example I"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1707331a/sample/example-1",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/us1707331a/sample/example-2/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, Example II"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1707331a/sample/example-2",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/us1707331a/sample/example-3/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, Example III"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1707331a/sample/example-3",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/us1707331a/species/cerium-family-fluoride/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1707331a/species/cerium-family-fluoride",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/us1707331a/species/hydrated-neodymium-oxide/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, Example III"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1707331a/species/hydrated-neodymium-oxide",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/us1707331a/species/volatile-iron-compounds/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1707331a/species/volatile-iron-compounds",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/us1707331a/test/example-1/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1707331a/test/example-1",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/us1707331a/test/example-2/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1707331a/test/example-2",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/us1707331a/test/example-3/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 2, Example III run"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1707331a/test/example-3",
+      "target": "ex:msyn/source/us1707331a"
+    },
+    {
+      "id": "ex:msyn/us1707331a/treatment/reduction/reported-in/us1707331a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, Example I"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1707331a/treatment/reduction",
+      "target": "ex:msyn/source/us1707331a"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/us1707331a"
+}

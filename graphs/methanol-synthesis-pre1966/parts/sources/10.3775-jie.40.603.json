@@ -1,0 +1,3156 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/catalyst/zn-cr-binary",
+      "label": "Catalyst",
+      "props": {
+        "name": "zinc-chromium binary methanol synthesis catalyst (Fauser converter)",
+        "catalyst_family": "not_reported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:a76a2bb27e216932ede7ed804c5d3382f1933701f91e27e278755ae53d2517dc chars:45",
+            "passage": "10.3775-jie.40.603/p3/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:9fdd7edc0cf47e2fb0878a474d54411e6a1ce6d50a16985c83cfb22f1b44e580 chars:18",
+            "passage": "10.3775-jie.40.603/p5/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "note": "composition, chemical form and supplier not stated"
+      }
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/claim/co2-kept-in-feed",
+      "label": "Claim",
+      "props": {
+        "name": "feed CO2 converted to methanol under the same conditions",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:176a291488fa171607498fd2d32da6883bd4b4cbc1905a652ae0bbdc36115087 chars:55",
+            "passage": "10.3775-jie.40.603/p6/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:c6f70144b8981cde4abb33273220e96917aceddd80fa6407a06bc031517d9917 chars:102",
+            "passage": "10.3775-jie.40.603/p6/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "statement": "The 4-5% CO2 in the synthesis feed is not removed: CO2 + 3H2 = CH3OH + H2O forms methanol under almost the same conditions as CO, only consuming 1 mol more H2 and slightly increasing the water in crude methanol; synthesizing with this much CO2 was judged economical."
+      }
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/claim/concentrate-o2-harmless",
+      "label": "Claim",
+      "props": {
+        "name": "CO2 and O2 in concentrate harmless",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:dd40fc0ddf78e1317a44e79ddd21531a9ee6ed2536818c9ccf2b895a7db760e5 chars:97",
+            "passage": "10.3775-jie.40.603/p4/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "statement": "The CO2 in the concentrated gas saves CO2 make-up in reforming and its O2 amounts to a slight partial oxidation that reduces reformer fuel, so neither causes trouble."
+      }
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/claim/crude-methanol-composition",
+      "label": "Claim",
+      "props": {
+        "name": "crude methanol composition",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:42be90709492d28ba8a5a2aa1bf3e0e017b2ebb9acd133291176835aedb8f33c chars:83",
+            "passage": "10.3775-jie.40.603/p6/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "inference_type": "observational",
+        "statement": "Crude methanol from the converter contains about 12% water, 1.8% light ends (mainly dimethyl ether) and about 0.8% heavy ends (mainly isobutanol), the rest methanol."
+      }
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/claim/fauser-features",
+      "label": "Claim",
+      "props": {
+        "name": "Fauser converter cooling by water coils",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:17df783dc953abaf21b593de0629a36d30937c66b93c8098394ced003ca48fdf chars:74",
+            "passage": "10.3775-jie.40.603/p5/2",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:af9559be65488775508b96d43acb1930f21e7711963e4791da73ec487ed60a26 chars:41",
+            "passage": "10.3775-jie.40.603/p5/2",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "note": "the coil water pressure is 50 kg/cm2 in this plant versus 300 kg/cm2 in the former Fauser type; the purpose is the author's surmise ('思われる')",
+        "statement": "The Fauser process removes reaction heat by natural circulation of water in cooling coils separate from the gas circuit and recovers it as steam, whereas other processes control temperature by the recycle gas rate or cold-gas injection between beds; in this plant the coil water is at 50 kg/cm2 instead of the 300 kg/cm2 of the former Fauser type, which seems to aim at a larger cooling capacity and easier circulation, with a simpler coil system."
+      }
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/claim/no-explosion-hazard",
+      "label": "Claim",
+      "props": {
+        "name": "cryogenic unit free of explosion hazard",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:42f4a31ec5f8599c5a0b8f11f50f92fdb900b5769896cb46fa95e9690626b34a chars:21",
+            "passage": "10.3775-jie.40.603/p3/2",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:9f7467e84b29e6cc01b0b423a95e7d8b067f649fd62ea3a83ce302e70689992c chars:120",
+            "passage": "10.3775-jie.40.603/p3/2",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "statement": "Compression to about 5 atm and 150 °C (all-low-pressure cycle), leaving 30% methane in the waste gas, and removing CO2 in large regenerators were confirmed to exclude any explosion hazard in the methane concentration unit."
+      }
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/claim/over-400c-methanation",
+      "label": "Claim",
+      "props": {
+        "name": "methane formation above 400 °C causes runaway",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:83a03cff356ac2ccf28cac2b4f7d80c724ed99564ea90bf723f9535860276d53 chars:23",
+            "passage": "10.3775-jie.40.603/p5/2",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:7d82ae2594e278d4e54b866796de41f5dfcc1eed47bb843486f2c0fdcc855da2 chars:67",
+            "passage": "10.3775-jie.40.603/p6/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "statement": "Temperature control of the methanol catalyst bed is much more difficult than for ammonia: above 400 °C the methane-forming reaction starts abruptly and its large heat of reaction makes the temperature rise suddenly, so particular care is needed."
+      }
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/claim/plant-capacity",
+      "label": "Claim",
+      "props": {
+        "name": "plant capacity 50 t/day",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:9b07f411efc1a3c3df326a72c2418658e3e1b06526643946e3cebb22d01395ab chars:64",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:c309b001828d57f64be85cd5bfc6838305465563a8181a311fc7cb7f2e040dab chars:54",
+            "passage": "10.3775-jie.40.603/p6/2",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:a6d2dccde7abfa32c19744745de6309c0ddada7a5a51238351e95ad69c77b0d1 chars:39",
+            "passage": "10.3775-jie.40.603/p6/2",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "inference_type": "observational",
+        "note": "'50t/目' and '330目' are OCR readings of '50t/日' and '330日'",
+        "statement": "Each section of the plant has a capacity of 50 t/day of refined methanol, 16,500 t/year at 330 operating days; coal-mine gas use including fuel is 1,500 m3 and power 1,400 kWh per t of methanol; construction began in spring Showa 33, was completed in October of the next year, and operation began that December."
+      }
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/claim/reformer-quench",
+      "label": "Claim",
+      "props": {
+        "name": "reformed gas quenched to 300 °C",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:57fc8a7c74e190c7041254f038c03d876dc5c951fdd4af4ccde0e4b5df5351a4 chars:59",
+            "passage": "10.3775-jie.40.603/p4/2",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "statement": "The reformed gas is quenched to 300 °C on leaving the tubes to prevent the reverse reaction and the separation of carbon by CO decomposition."
+      }
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/claim/steam-reforming-chosen",
+      "label": "Claim",
+      "props": {
+        "name": "steam reforming chosen; sulfur compounds almost absent",
+        "claim_kind": "conclusion",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:4ddd24b80e0893bbbc65e5f5b1fefb65e2b57cb83bb2ca9bf555002eac1b701a chars:56",
+            "passage": "10.3775-jie.40.603/p2/2",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "statement": "Steam reforming was chosen over partial oxidation after weighing plant cost, power, fuel gas and steam prices, process-gas consumption and the use of nitrogen from an oxygen plant; the near absence of sulfur compounds also favoured it."
+      }
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/feed/coal-mine-gas",
+      "label": "Feed",
+      "props": {
+        "name": "Oyubari coal-mine gas (Table 1 example: CH4 60.3%, N2 29.2%, O2 6.8%, CO2 3.5%, CO 0.2%)",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 3, Table 1",
+            "note": "quote withheld: sha256:d25ddf44431a658b01d61f9a3e7d4727c16437de61292adbacbe26a34a30fbad chars:14",
+            "passage": "10.3775-jie.40.603/p3/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:de141c00e22945db462e92471446c28e7e3956cb19c909424ec6dc769b882634 chars:78",
+            "passage": "10.3775-jie.40.603/p3/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table 1",
+            "note": "second_reading withheld: sha256:f986bbe923b0eb5a54c57233dc4da5c48b8f82f99266ccba81b1565132ee7299 chars:64; transcription withheld: sha256:4553dcb3864d360f6e6d33090245d44fa96b823ea12e49adbbbaabadd125348f chars:35",
+            "reading": "vision_ocr",
+            "region": [
+              0.12,
+              0.86,
+              0.51,
+              0.9
+            ],
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/feed/concentrated-methane",
+      "label": "Feed",
+      "props": {
+        "name": "concentrated methane gas (CO2 3.4, O2 3.0, CH4 90.1, N2 3.5)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:62c7890c8504eb24ea84c6f02bef15927220198d72cfacee1aa9ed1ff796a9c7 chars:27",
+            "passage": "10.3775-jie.40.603/p4/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/feed/reformed-gas",
+      "label": "Feed",
+      "props": {
+        "name": "reformed gas (make-up synthesis gas): H2 69.5, CO 23.5, CO2 4.5, CH4 1.0, N2 1.5",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:1af9081338b64b11dc6f6780aee948a6cd98f34f2821f1783cb8fd15d32f303d chars:47",
+            "passage": "10.3775-jie.40.603/p5/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/material/activated-carbon",
+      "label": "Material",
+      "props": {
+        "name": "activated carbon (活性炭) of the carbonyl separator",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:b1a7d606d7ea28657efeb3675c3389b237def12173690c9cf428981f2cc30bd5 chars:31",
+            "passage": "10.3775-jie.40.603/p5/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "material_family": "carbon"
+      }
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/procedure/cryogenic-concentration",
+      "label": "Procedure",
+      "props": {
+        "name": "cryogenic concentration of 50-60% mine gas to 90% methane (process gas) and 30% methane (fuel/waste gas)",
+        "conditions": {
+          "concentrate_flow": {
+            "status": "present",
+            "as_reported": "1.685 〃",
+            "note": "printed '1.685'; capacity balance of section VI ('処理能力その他', 'for 60% mine gas'); a plant capacity figure, not a measured run",
+            "unit": "m3/hr",
+            "value": 1685
+          },
+          "mine_gas_flow": {
+            "status": "present",
+            "as_reported": "坑 内 ガ ス 3,600m3/hr",
+            "note": "for 60% mine gas; capacity balance of section VI ('処理能力その他', 'for 60% mine gas'); a plant capacity figure, not a measured run",
+            "unit": "m3/hr",
+            "value": 3600
+          },
+          "waste_gas_ch4": {
+            "status": "present",
+            "as_reported": "30.3",
+            "note": "waste gas of the concentration unit; unit not printed; basis not stated (was one text entry)",
+            "unit": "%",
+            "value": 30.3
+          },
+          "waste_gas_co2": {
+            "status": "present",
+            "as_reported": "3.6",
+            "note": "waste gas of the concentration unit; unit not printed; basis not stated (was one text entry)",
+            "unit": "%",
+            "value": 3.6
+          },
+          "waste_gas_flow": {
+            "status": "present",
+            "as_reported": "1.682〃",
+            "note": "printed '1.682'; capacity balance of section VI ('処理能力その他', 'for 60% mine gas'); a plant capacity figure, not a measured run",
+            "unit": "m3/hr",
+            "value": 1682
+          },
+          "waste_gas_n2": {
+            "status": "present",
+            "as_reported": "54.1",
+            "note": "waste gas of the concentration unit; unit not printed; basis not stated (was one text entry)",
+            "unit": "%",
+            "value": 54.1
+          },
+          "waste_gas_o2": {
+            "status": "present",
+            "as_reported": "12.0",
+            "note": "waste gas of the concentration unit; unit not printed; basis not stated (was one text entry)",
+            "unit": "%",
+            "value": 12.0
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:b0ee520a7c0d9991f5911720d1b55d15d278e29100c248b628329c92358d305f chars:48",
+            "passage": "10.3775-jie.40.603/p3/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:b23967e6c6d260ac00ed4f514d437f63840d864f160be71dbb1e454b9cebf80a chars:18",
+            "passage": "10.3775-jie.40.603/p4/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:b546ad27b10346c07e9631450d8ede8adfce9e345d0c6e4d0b2a780562f61f9d chars:23",
+            "passage": "10.3775-jie.40.603/p6/2",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "method": "compression to 4.6 kg/cm2, oil separation and filtration, regenerators packed with silica stone (water and CO2 frozen out) to -149 °C, liquefier, rectifying column (-151 °C inlet), condenser at the methane boiling point -161 °C; waste gas held at 30% methane and expanded in a turbine to -165 °C; all-low-pressure cycle",
+        "procedure_status": "completed"
+      }
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/reaction/ch4-co2-reforming",
+      "label": "Reaction",
+      "props": {
+        "name": "methane CO2 reforming, equation (2): CH4 + CO2 = 2CO + 2H2",
+        "equation": "CH4 + CO2 -> 2 CO + 2 H2",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2, equations (1), (2)",
+            "note": "transcription withheld: sha256:9ee612f77f2a791c8ad8eecdf7503ed8b1b14a0d4fe5564059789e2155033fe9 chars:66; second_reading withheld: sha256:3c7674f4f0338c514c29271e9d315d5bb638e79baa6ba02fe67a60121ec1ddc9 chars:69",
+            "reading": "vision_ocr",
+            "region": [
+              0.5,
+              0.24,
+              0.92,
+              0.315
+            ],
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "note": "printed with equilibrium arrows (⇄); equations (1), (2) of section III, read from the page image (re-curation 2026-09-29)"
+      }
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/reaction/ch4-partial-oxidation",
+      "label": "Reaction",
+      "props": {
+        "name": "methane partial oxidation, equation (1): 2CH4 + O2 = 2CO + 4H2",
+        "equation": "2 CH4 + O2 -> 2 CO + 4 H2",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2, equations (1), (2)",
+            "note": "transcription withheld: sha256:9ee612f77f2a791c8ad8eecdf7503ed8b1b14a0d4fe5564059789e2155033fe9 chars:66; second_reading withheld: sha256:3c7674f4f0338c514c29271e9d315d5bb638e79baa6ba02fe67a60121ec1ddc9 chars:69",
+            "reading": "vision_ocr",
+            "region": [
+              0.5,
+              0.24,
+              0.92,
+              0.315
+            ],
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "note": "printed with equilibrium arrows (⇄); equations (1), (2) of section III, read from the page image (re-curation 2026-09-29)"
+      }
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/reaction/ch4-steam-co2-reforming",
+      "label": "Reaction",
+      "props": {
+        "name": "methane reforming with steam and CO2: 3CH4 + 2H2O + CO2 = 4CO + 8H2",
+        "equation": "3 CH4 + 2 H2O + CO2 -> 4 CO + 8 H2",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "the text layer prints 'H20' for H2O; quote withheld: sha256:cd035c85600d606900def8845378531f3a13fd4b79086c8891ee75daa1019764 chars:21",
+            "passage": "10.3775-jie.40.603/p4/2",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/reaction/ch4-steam-reforming-to-co",
+      "label": "Reaction",
+      "props": {
+        "name": "methane steam reforming, equation (2): CH4 + H2O = CO + 3H2",
+        "equation": "CH4 + H2O -> CO + 3 H2",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2, equations (1), (2)",
+            "note": "transcription withheld: sha256:9ee612f77f2a791c8ad8eecdf7503ed8b1b14a0d4fe5564059789e2155033fe9 chars:66; second_reading withheld: sha256:3c7674f4f0338c514c29271e9d315d5bb638e79baa6ba02fe67a60121ec1ddc9 chars:69",
+            "reading": "vision_ocr",
+            "region": [
+              0.5,
+              0.24,
+              0.92,
+              0.315
+            ],
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "note": "printed with equilibrium arrows (⇄); equations (1), (2) of section III, read from the page image (re-curation 2026-09-29)"
+      }
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/reaction/ch4-steam-reforming-to-co2",
+      "label": "Reaction",
+      "props": {
+        "name": "methane steam reforming, equation (2): CH4 + 2H2O = CO2 + 4H2",
+        "equation": "CH4 + 2 H2O -> CO2 + 4 H2",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2, equations (1), (2)",
+            "note": "transcription withheld: sha256:9ee612f77f2a791c8ad8eecdf7503ed8b1b14a0d4fe5564059789e2155033fe9 chars:66; second_reading withheld: sha256:3c7674f4f0338c514c29271e9d315d5bb638e79baa6ba02fe67a60121ec1ddc9 chars:69",
+            "reading": "vision_ocr",
+            "region": [
+              0.5,
+              0.24,
+              0.92,
+              0.315
+            ],
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "note": "printed with equilibrium arrows (⇄); equations (1), (2) of section III, read from the page image (re-curation 2026-09-29)"
+      }
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/reaction/methane-formation-over-400c",
+      "label": "Reaction",
+      "props": {
+        "name": "methane formation in the methanol converter above 400 °C (メタン生成の反応)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:7d82ae2594e278d4e54b866796de41f5dfcc1eed47bb843486f2c0fdcc855da2 chars:67",
+            "passage": "10.3775-jie.40.603/p6/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "note": "no equation is printed"
+      }
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/reactor/fauser-converter",
+      "label": "Reactor",
+      "props": {
+        "name": "Montecatini new Fauser methanol converter, Oyubari plant",
+        "description": "Electric heater at the top (start-up only); four catalyst baskets with a cooling coil at the outlet of each; below them one multitubular catalyst bed and at the bottom a multitubular heat exchanger. Feed enters at the bottom exchanger, is preheated, cools the multitubular bed through the tube walls, rises along the converter wall and enters the first bed from the top. Reaction heat is removed by natural circulation of water in the coils (50 kg/cm2 instead of 300 kg/cm2 in the former Fauser type); the steam heats a recovery boiler (10 kg/cm2) at the top; each coil has a control valve for the bed temperature.",
+        "design_status": "built",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:ef4e3bb461e8120535d3eb5251f66682cd8a6e91e9c1eba50c8aec21d38c2b48 chars:40",
+            "passage": "10.3775-jie.40.603/p5/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:c35c67bd843a2cc1b9cca1c5256720dad783e58f52a5c053d1e5d637f869e606 chars:39",
+            "passage": "10.3775-jie.40.603/p5/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:3c68108dc97a6a2856ae2f8f7cd2849ae6f747d7490b174be1270629d8ff0a9b chars:59",
+            "passage": "10.3775-jie.40.603/p5/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:770fdae921155958d5ba66d0e41e3c62ba6d164d6f49be9ab68c50f46762784f chars:52",
+            "passage": "10.3775-jie.40.603/p5/2",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "reactor_kind": "fixed_bed",
+        "specifications": {
+          "catalyst_volume": {
+            "status": "present",
+            "as_reported": "約2m3",
+            "qualifier": "approximate",
+            "unit": "m3",
+            "value": 2
+          },
+          "coil_water_pressure": {
+            "status": "present",
+            "as_reported": "50kg/cm2",
+            "unit": "kg/cm2",
+            "value": 50
+          },
+          "recovery_boiler_pressure": {
+            "status": "present",
+            "as_reported": "圧力10kg/cm2",
+            "unit": "kg/cm2",
+            "value": 10
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/reactor/reformer-furnaces",
+      "label": "Reactor",
+      "props": {
+        "name": "methane reformer: 4 furnaces, 16 nickel-catalyst tubes (7 in. i.d., 11 m), externally heated",
+        "design_status": "built",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:50ae94edd2dbfd9c87f5b506aba628974bb5989a726c7dd2c57a5eef5c2b085f chars:33",
+            "passage": "10.3775-jie.40.603/p4/2",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:02725301c81dfd79efdbf4e57e4b531bed51fb0cd993c9798469b7e73e75c9b2 chars:35",
+            "passage": "10.3775-jie.40.603/p4/2",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:6d2a5515fbd32e3c83c36d8006b3f9e1627ec856ad87ab6ac7f776377e17d3a2 chars:17",
+            "passage": "10.3775-jie.40.603/p4/2",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 4",
+            "note": "second_reading withheld: sha256:33791f5bd97d3d09a7abbec9caaa36d057a9a699a79e67e8a999448418e60e78 chars:77; transcription withheld: sha256:25c36c1f2d76ef75e379c496d60096b2f672391de7434b88987b2c56e4b16b41 chars:27",
+            "reading": "vision_ocr",
+            "region": [
+              0.53,
+              0.725,
+              0.92,
+              0.738
+            ],
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "note": "designed and built by Nippon Gasoline (日本揮発油); process established with Nippon Gas Chemical at Niigata",
+        "reactor_kind": "fixed_bed",
+        "specifications": {
+          "tube_inner_diameter": {
+            "status": "present",
+            "as_reported": "内径7″",
+            "note": "printed 7″ (inches); the text layer reads '7//'; corrected from the page image",
+            "unit": "in",
+            "value": 7
+          },
+          "tube_length": {
+            "status": "present",
+            "as_reported": "長さ11m",
+            "unit": "m",
+            "value": 11
+          },
+          "tubes": {
+            "status": "present",
+            "as_reported": "反応管は高ニッケル高クローム 鋼で内径7//長さ11m合 計16本である。",
+            "text_value": "4 furnaces x 4 tubes, 16 in total; high-nickel high-chromium steel"
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/sample/converter-charge",
+      "label": "CatalystSample",
+      "props": {
+        "name": "catalyst charge of the Oyubari Fauser converter (about 2 m3)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:39d1c6d9ebebacc0e3ba6c50a2be724fb1ca616cd5531d7c62fa775ed2ce82ba chars:36",
+            "passage": "10.3775-jie.40.603/p6/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "sample_kind": "reactor_charge"
+      }
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/test/fauser-synthesis-operation",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "methanol synthesis in the Fauser converter, Oyubari plant (operating conditions)",
+        "conditions": {
+          "co2_in_feed": {
+            "status": "present",
+            "as_reported": "4～5%のCO2",
+            "lower": 4,
+            "unit": "%",
+            "upper": 5
+          },
+          "coil_water_pressure": {
+            "status": "present",
+            "as_reported": "50kg/cm2",
+            "unit": "kg/cm2",
+            "value": 50
+          },
+          "design_methanol_output": {
+            "status": "present",
+            "as_reported": "メタノール(精 製メタノール換算) 2.08t/hr",
+            "note": "refined-methanol basis; capacity balance of section VI ('処理能力その他', 'for 60% mine gas'); a plant capacity figure, not a measured run",
+            "unit": "t/hr",
+            "value": 2.08
+          },
+          "design_reformed_gas_feed": {
+            "status": "present",
+            "as_reported": "変 成 ガ ス 5,500m3/hr",
+            "note": "reformed gas to the synthesis unit; capacity balance of section VI ('処理能力その他', 'for 60% mine gas'); a plant capacity figure, not a measured run",
+            "unit": "m3/hr",
+            "value": 5500
+          }
+        },
+        "description": "Industrial operation (plant started December of the year after construction began in spring Showa 33); most of the exit gas is recycled and part purged as fuel to limit inerts (N2, CH4).",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:a76a2bb27e216932ede7ed804c5d3382f1933701f91e27e278755ae53d2517dc chars:45",
+            "passage": "10.3775-jie.40.603/p3/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:eae368c7737e38afc3bf4c8f4b182ce5892004e2c15e7a405ca1990400539787 chars:45",
+            "passage": "10.3775-jie.40.603/p3/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:39d1c6d9ebebacc0e3ba6c50a2be724fb1ca616cd5531d7c62fa775ed2ce82ba chars:36",
+            "passage": "10.3775-jie.40.603/p6/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:9d29df442eb2f8ceeca5437e05958a502fb5b1fe1d4b7fafc09921ff9c9c46d4 chars:63",
+            "passage": "10.3775-jie.40.603/p5/2",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:77b8a02b321f2e685787856a6fba46acab7e4e567a78bec8a28cd401738fe23b chars:36",
+            "passage": "10.3775-jie.40.603/p5/2",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:42be90709492d28ba8a5a2aa1bf3e0e017b2ebb9acd133291176835aedb8f33c chars:83",
+            "passage": "10.3775-jie.40.603/p6/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:c9ada5167ddcf1a4ac1185d7c088e2439ccbdea0c8f51cd5e0986d42364a2c3d chars:55",
+            "passage": "10.3775-jie.40.603/p6/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:ee0f777fde0ce74657d4f7e04e410e1ddf3b8a999ac7956596691de48070b2cf chars:38",
+            "passage": "10.3775-jie.40.603/p6/2",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:b8d024d300eaae3377ef87de3700c5ba46689624a7a356c95cf8f8c16b7e073f chars:17",
+            "passage": "10.3775-jie.40.603/p5/2",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 5, synthesis equation",
+            "note": "transcription withheld: sha256:065a2e09b6add80cdb23b3863b394686ade23379bc0b876e75325a073754f924 chars:23; second_reading withheld: sha256:7c758f295a497ebfba6ef9239398e4092c72745bb323404ab190dda67bfa1227 chars:40",
+            "reading": "vision_ocr",
+            "region": [
+              0.57,
+              0.71,
+              0.86,
+              0.735
+            ],
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 6, purge-gas composition",
+            "note": "second_reading withheld: sha256:20405205a33eb0ea31bf63b836b4ef54e55bd04af9fb491859dae0dd2707a27e chars:47; transcription withheld: sha256:244d937e07b385bf1faa06212234773704f8d05917a0e8372154dd3c3a1ac257 chars:31",
+            "reading": "vision_ocr",
+            "region": [
+              0.1,
+              0.4,
+              0.49,
+              0.44
+            ],
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:7db972d3154962b35d66bcd4c3ab3bbc55963224a514ae0495d83c2c74a52aa6 chars:23",
+            "passage": "10.3775-jie.40.603/p6/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:770fdae921155958d5ba66d0e41e3c62ba6d164d6f49be9ab68c50f46762784f chars:52",
+            "passage": "10.3775-jie.40.603/p5/2",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "experiment_kind": "physical",
+        "manipulation": "observational",
+        "pressure": {
+          "status": "present",
+          "as_reported": "圧力300kg/cm2",
+          "unit": "kg/cm2",
+          "value": 300
+        },
+        "results": {
+          "bed_peak_temperature": {
+            "status": "present",
+            "as_reported": "約400℃",
+            "note": "the first bed; cooled 30-40 °C at its outlet by the coil",
+            "qualifier": "approximate",
+            "unit": "°C",
+            "value": 400
+          },
+          "coil_cooling_at_bed_outlet": {
+            "status": "present",
+            "as_reported": "30～40℃ 冷却",
+            "lower": 30,
+            "unit": "°C",
+            "upper": 40
+          },
+          "crude_methanol_heavy_ends": {
+            "status": "present",
+            "as_reported": "高 沸点留分(主 としてイソブタノール)0.8%位",
+            "note": "mainly isobutanol",
+            "qualifier": "approximate",
+            "unit": "%",
+            "value": 0.8
+          },
+          "crude_methanol_light_ends": {
+            "status": "present",
+            "as_reported": "軽沸点留分(主 としてジメチルエーテル)1.8%",
+            "note": "mainly dimethyl ether",
+            "unit": "%",
+            "value": 1.8
+          },
+          "crude_methanol_water": {
+            "status": "present",
+            "as_reported": "水分が約12%",
+            "qualifier": "approximate",
+            "unit": "%",
+            "value": 12
+          },
+          "heat_of_reaction": {
+            "status": "present",
+            "as_reported": "CO+2H2=CH3OH+24,750kcal",
+            "note": "printed as the heat term of CO + 2H2 = CH3OH; the molar basis is not printed; re-curation 2026-09-29 records the number (was text) from the page image",
+            "unit": "kcal",
+            "value": 24750
+          },
+          "methanol_in_converter_exit_gas": {
+            "status": "present",
+            "as_reported": "3 %位",
+            "qualifier": "approximate",
+            "unit": "%",
+            "value": 3
+          },
+          "purge_gas_ch4": {
+            "status": "present",
+            "as_reported": "14.0",
+            "note": "synthesis purge gas, one example; unit not printed (the target CH4+N2 is given in %); basis not stated; read from the page image (was one text entry)",
+            "unit": "%",
+            "value": 14.0
+          },
+          "purge_gas_co": {
+            "status": "present",
+            "as_reported": "10.5",
+            "note": "synthesis purge gas, one example; unit not printed (the target CH4+N2 is given in %); basis not stated; read from the page image (was one text entry)",
+            "unit": "%",
+            "value": 10.5
+          },
+          "purge_gas_co2": {
+            "status": "present",
+            "as_reported": "0.5",
+            "note": "synthesis purge gas, one example; unit not printed (the target CH4+N2 is given in %); basis not stated; read from the page image (was one text entry)",
+            "unit": "%",
+            "value": 0.5
+          },
+          "purge_gas_h2": {
+            "status": "present",
+            "as_reported": "61.5",
+            "note": "synthesis purge gas, one example; unit not printed (the target CH4+N2 is given in %); basis not stated; read from the page image (was one text entry)",
+            "unit": "%",
+            "value": 61.5
+          },
+          "purge_gas_n2": {
+            "status": "present",
+            "as_reported": "13.5",
+            "note": "synthesis purge gas, one example; unit not printed (the target CH4+N2 is given in %); basis not stated; read from the page image (was one text entry)",
+            "unit": "%",
+            "value": 13.5
+          },
+          "steam_recovered": {
+            "status": "present",
+            "as_reported": "メタノール当り500kg",
+            "unit": "kg per methanol (unit amount not printed)",
+            "value": 500
+          }
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "空間速度は20,000～ 25,000程 度",
+          "lower": 20000,
+          "qualifier": "approximate",
+          "unit": "not stated",
+          "upper": 25000
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "反応温度350～ 400℃",
+          "lower": 350,
+          "unit": "°C",
+          "upper": 400
+        },
+        "test_kind": "activity"
+      }
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/treatment/carbonyl-separation",
+      "label": "Treatment",
+      "props": {
+        "name": "passage through the activated-carbon carbonyl separator",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:c2343bd6dea51bcf1b3e3f69113980b95644f1ac485774a6c459f99cb0932eba chars:21",
+            "passage": "10.3775-jie.40.603/p5/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "procedure_status": "completed",
+        "treatment_kind": "purification"
+      }
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/unit/carbonyl-separator",
+      "label": "ProcessUnit",
+      "props": {
+        "name": "carbonyl separator packed with activated carbon (カーボニル分離器)",
+        "design_status": "built",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:b1a7d606d7ea28657efeb3675c3389b237def12173690c9cf428981f2cc30bd5 chars:31",
+            "passage": "10.3775-jie.40.603/p5/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "unit_kind": "guard_bed"
+      }
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/unit/circulator",
+      "label": "ProcessUnit",
+      "props": {
+        "name": "circulation pump for unreacted gas at 300 kg/cm2",
+        "design_status": "built",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:f51dac8b61db60f81b37adee9cb866ddb70d6251edb7262dcb094532d2efaf17 chars:73",
+            "passage": "10.3775-jie.40.603/p5/2",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "unit_kind": "circulator"
+      }
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/unit/co2-recovery",
+      "label": "ProcessUnit",
+      "props": {
+        "name": "CO2 recovery unit (20% MEA absorber and regenerator) on reformer and boiler flue gas",
+        "design_status": "built",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:d0ddc3400726ec7ec881e50383b91e1b7a7ec3f9b930a57742cd09530cb11aa0 chars:37",
+            "passage": "10.3775-jie.40.603/p5/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "specifications": {
+          "mea_concentration": {
+            "status": "present",
+            "as_reported": "20%濃度のMEA",
+            "unit": "%",
+            "value": 20
+          }
+        },
+        "unit_kind": "absorber"
+      }
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/unit/cryogenic-separation",
+      "label": "ProcessUnit",
+      "props": {
+        "name": "methane concentration unit (cryogenic separation, all-low-pressure type; Nippon Rika Kogyo)",
+        "design_status": "built",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:b0ee520a7c0d9991f5911720d1b55d15d278e29100c248b628329c92358d305f chars:48",
+            "passage": "10.3775-jie.40.603/p3/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:4031d29ec9ecfe8daade0cc0ed328725c5828aa2f5b89b8edfd30cde013c931a chars:47",
+            "passage": "10.3775-jie.40.603/p4/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:97a3febb8d2b3ca76da87797ac54a8ce8a10f6884bf8db027f4e7bf9454d2b55 chars:24",
+            "passage": "10.3775-jie.40.603/p4/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:20732f9d937dc0d81db5b68812b1d7640fe24bee1d9906b4254cb0b3a7a1967d chars:23",
+            "passage": "10.3775-jie.40.603/p4/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:8a027383fc5a0a5c75f3b9ff664bbe184e3dc6cc8bd2a1ea3c36bc937a4fe164 chars:22",
+            "passage": "10.3775-jie.40.603/p4/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "specifications": {
+          "column_inlet_temperature": {
+            "status": "present",
+            "as_reported": "-151℃",
+            "unit": "°C",
+            "value": -151
+          },
+          "compression_pressure": {
+            "status": "present",
+            "as_reported": "4.6kg/cm2に 圧縮",
+            "unit": "kg/cm2",
+            "value": 4.6
+          },
+          "expansion_turbine_outlet": {
+            "status": "present",
+            "as_reported": "-165℃",
+            "unit": "°C",
+            "value": -165
+          },
+          "regenerator_outlet_temperature": {
+            "status": "present",
+            "as_reported": "-149℃",
+            "unit": "°C",
+            "value": -149
+          }
+        },
+        "unit_kind": "separator"
+      }
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/unit/distillation",
+      "label": "ProcessUnit",
+      "props": {
+        "name": "distillation: topping, rectifying and after-run (tailing) columns",
+        "design_status": "built",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:da0b7074c3fb5c3aea8fae999e8cc1b91c5ae5a395f87c8d556e35395b3e8ce0 chars:71",
+            "passage": "10.3775-jie.40.603/p3/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "unit_kind": "separator"
+      }
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/unit/hp-compressor",
+      "label": "ProcessUnit",
+      "props": {
+        "name": "high-pressure compressor to 300 kg/cm2",
+        "design_status": "built",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:83e6991340afa8e4066eeee042a2e328802a4fd5a336793856a278ec52019187 chars:27",
+            "passage": "10.3775-jie.40.603/p5/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "specifications": {
+          "discharge_pressure": {
+            "status": "present",
+            "as_reported": "300kg/cm2",
+            "unit": "kg/cm2",
+            "value": 300
+          }
+        },
+        "unit_kind": "compressor"
+      }
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/unit/methanol-separator",
+      "label": "ProcessUnit",
+      "props": {
+        "name": "methanol separator (let-down to 10 kg/cm2 by automatic drain)",
+        "design_status": "built",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:de4812ed1ff2e61c606b8a43f094ff23c76903240257f01e6a4146d991773cc2 chars:48",
+            "passage": "10.3775-jie.40.603/p5/2",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "unit_kind": "separator"
+      }
+    },
+    {
+      "id": "ex:msyn/source/10.3775-jie.40.603",
+      "label": "Source",
+      "props": {
+        "name": "Methanol from Coal Mine Gas",
+        "kind": "article",
+        "description": "Published 1961 (publication year (bibliography)); in scope: before the 1966-01-01 cutoff. Text: 7 pages text_layer. Text not redistributed.",
+        "doi": "10.3775/jie.40.603",
+        "licence": "no verified publisher licence; short excerpts quoted as evidence under fair use",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "Methanol from Coal Mine Gas",
+        "url": "https://doi.org/10.3775/jie.40.603",
+        "venue": "Journal of the Fuel Society of Japan",
+        "year": 1961
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/catalyst/zn-cr-binary/reported-in/10.3775-jie.40.603",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3",
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/catalyst/zn-cr-binary",
+      "target": "ex:msyn/source/10.3775-jie.40.603"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/claim/co2-kept-in-feed/reported-in/10.3775-jie.40.603",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/claim/co2-kept-in-feed",
+      "target": "ex:msyn/source/10.3775-jie.40.603"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/claim/concentrate-o2-harmless/reported-in/10.3775-jie.40.603",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/claim/concentrate-o2-harmless",
+      "target": "ex:msyn/source/10.3775-jie.40.603"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/claim/crude-methanol-composition/reported-in/10.3775-jie.40.603",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/claim/crude-methanol-composition",
+      "target": "ex:msyn/source/10.3775-jie.40.603"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/claim/fauser-features/reported-in/10.3775-jie.40.603",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/claim/fauser-features",
+      "target": "ex:msyn/source/10.3775-jie.40.603"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/claim/no-explosion-hazard/reported-in/10.3775-jie.40.603",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/claim/no-explosion-hazard",
+      "target": "ex:msyn/source/10.3775-jie.40.603"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/claim/over-400c-methanation/reported-in/10.3775-jie.40.603",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5",
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/claim/over-400c-methanation",
+      "target": "ex:msyn/source/10.3775-jie.40.603"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/claim/plant-capacity/reported-in/10.3775-jie.40.603",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/claim/plant-capacity",
+      "target": "ex:msyn/source/10.3775-jie.40.603"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/claim/reformer-quench/reported-in/10.3775-jie.40.603",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/claim/reformer-quench",
+      "target": "ex:msyn/source/10.3775-jie.40.603"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/claim/steam-reforming-chosen/reported-in/10.3775-jie.40.603",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/claim/steam-reforming-chosen",
+      "target": "ex:msyn/source/10.3775-jie.40.603"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/feed/coal-mine-gas/reported-in/10.3775-jie.40.603",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3",
+          "p. 3, Table 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/feed/coal-mine-gas",
+      "target": "ex:msyn/source/10.3775-jie.40.603"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/feed/concentrated-methane/reported-in/10.3775-jie.40.603",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/feed/concentrated-methane",
+      "target": "ex:msyn/source/10.3775-jie.40.603"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/feed/reformed-gas/reported-in/10.3775-jie.40.603",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/feed/reformed-gas",
+      "target": "ex:msyn/source/10.3775-jie.40.603"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/1",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "status": "asserted",
+        "coefficient": 3,
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:cd035c85600d606900def8845378531f3a13fd4b79086c8891ee75daa1019764 chars:21",
+            "passage": "10.3775-jie.40.603/p4/2",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/reaction/ch4-steam-co2-reforming",
+      "target": "ex:msyn/species/ch4"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/13",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:efd8d1523236492cc73c847b6f1b3b325e792bea2a5dff9ff98d64c12116a52e chars:16",
+            "passage": "10.3775-jie.40.603/p5/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "role": "other",
+        "role_detail": "packing"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/unit/carbonyl-separator",
+      "target": "ex:msyn/10.3775-jie.40.603/material/activated-carbon"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/14",
+      "type": "FEEDS_INTO",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:26eda503a08e7cc630e6fb0181e99c36f0b8b973c7d89247e13cd2c27f0ac454 chars:54",
+            "passage": "10.3775-jie.40.603/p2/3",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "order": 1,
+        "stream": "concentrated methane (90%)"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/unit/cryogenic-separation",
+      "target": "ex:msyn/10.3775-jie.40.603/reactor/reformer-furnaces"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/15",
+      "type": "FEEDS_INTO",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:96166e75742d43eed3f60d8219a0921b189d090f1ca6da87d6fa6fda4073267b chars:20",
+            "passage": "10.3775-jie.40.603/p2/3",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "order": 1,
+        "stream": "recovered CO2"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/unit/co2-recovery",
+      "target": "ex:msyn/10.3775-jie.40.603/reactor/reformer-furnaces"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/16",
+      "type": "FEEDS_INTO",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:67a853f585a14abf589cf0dbd3228306f4f27c981bd851837ee9e1a743501078 chars:38",
+            "passage": "10.3775-jie.40.603/p3/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "order": 2,
+        "stream": "reformed gas"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/reactor/reformer-furnaces",
+      "target": "ex:msyn/10.3775-jie.40.603/unit/hp-compressor"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/17",
+      "type": "FEEDS_INTO",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:99107f23f39db84f350cb5a900c9c8f88daf6fe4e8191c834b0651d5ca3a4cab chars:48",
+            "passage": "10.3775-jie.40.603/p5/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "order": 3
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/unit/hp-compressor",
+      "target": "ex:msyn/10.3775-jie.40.603/unit/carbonyl-separator"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/18",
+      "type": "FEEDS_INTO",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:c083a4bb684aa1676764b9d6b2ef46a56bcea9a237dfddbda7a1e4a869e14ff1 chars:51",
+            "passage": "10.3775-jie.40.603/p5/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "order": 4
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/unit/carbonyl-separator",
+      "target": "ex:msyn/10.3775-jie.40.603/reactor/fauser-converter"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/19",
+      "type": "FEEDS_INTO",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:2ceb11cca80b5d8795b65c01b93b9087b02980ddad2886bd2faca6abb294e849 chars:41",
+            "passage": "10.3775-jie.40.603/p5/2",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "order": 5
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/reactor/fauser-converter",
+      "target": "ex:msyn/10.3775-jie.40.603/unit/methanol-separator"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/2",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "status": "asserted",
+        "coefficient": 2,
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:cd035c85600d606900def8845378531f3a13fd4b79086c8891ee75daa1019764 chars:21",
+            "passage": "10.3775-jie.40.603/p4/2",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/reaction/ch4-steam-co2-reforming",
+      "target": "ex:msyn/species/h2o"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/20",
+      "type": "FEEDS_INTO",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:229ef64db295b2b6c63e6755a454e06dc6d1498c83830d6954857b377288cead chars:40",
+            "passage": "10.3775-jie.40.603/p5/2",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "order": 6,
+        "stream": "unreacted gas"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/unit/methanol-separator",
+      "target": "ex:msyn/10.3775-jie.40.603/unit/circulator"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/21",
+      "type": "FEEDS_INTO",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:fb35da1db38b45db4a230d35c4d38f21043d4b1699fa8f533e256586f888fc4e chars:25",
+            "passage": "10.3775-jie.40.603/p5/2",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "order": 7,
+        "stream": "recycle gas"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/unit/circulator",
+      "target": "ex:msyn/10.3775-jie.40.603/reactor/fauser-converter"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/22",
+      "type": "FEEDS_INTO",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:1f83ba1e7127546a64c6edf1c5b3ba760c688116a9ca85a4903b0ce35e524fc0 chars:38",
+            "passage": "10.3775-jie.40.603/p3/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "order": 6,
+        "stream": "crude methanol"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/unit/methanol-separator",
+      "target": "ex:msyn/10.3775-jie.40.603/unit/distillation"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/23",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 3, Table 1",
+            "note": "quote withheld: sha256:d25ddf44431a658b01d61f9a3e7d4727c16437de61292adbacbe26a34a30fbad chars:14",
+            "passage": "10.3775-jie.40.603/p3/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table 1",
+            "note": "second_reading withheld: sha256:f986bbe923b0eb5a54c57233dc4da5c48b8f82f99266ccba81b1565132ee7299 chars:64; transcription withheld: sha256:4553dcb3864d360f6e6d33090245d44fa96b823ea12e49adbbbaabadd125348f chars:35",
+            "reading": "vision_ocr",
+            "region": [
+              0.12,
+              0.86,
+              0.51,
+              0.9
+            ],
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "60.3",
+          "note": "basis not stated",
+          "unit": "%",
+          "value": 60.3
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/feed/coal-mine-gas",
+      "target": "ex:msyn/species/ch4"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/24",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 3, Table 1",
+            "note": "quote withheld: sha256:d25ddf44431a658b01d61f9a3e7d4727c16437de61292adbacbe26a34a30fbad chars:14",
+            "passage": "10.3775-jie.40.603/p3/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table 1",
+            "note": "second_reading withheld: sha256:f986bbe923b0eb5a54c57233dc4da5c48b8f82f99266ccba81b1565132ee7299 chars:64; transcription withheld: sha256:4553dcb3864d360f6e6d33090245d44fa96b823ea12e49adbbbaabadd125348f chars:35",
+            "reading": "vision_ocr",
+            "region": [
+              0.12,
+              0.86,
+              0.51,
+              0.9
+            ],
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "29.2",
+          "note": "basis not stated",
+          "unit": "%",
+          "value": 29.2
+        },
+        "fraction_basis": "not_reported",
+        "role": "other"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/feed/coal-mine-gas",
+      "target": "ex:msyn/species/n2"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/25",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 3, Table 1",
+            "note": "quote withheld: sha256:d25ddf44431a658b01d61f9a3e7d4727c16437de61292adbacbe26a34a30fbad chars:14",
+            "passage": "10.3775-jie.40.603/p3/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table 1",
+            "note": "second_reading withheld: sha256:f986bbe923b0eb5a54c57233dc4da5c48b8f82f99266ccba81b1565132ee7299 chars:64; transcription withheld: sha256:4553dcb3864d360f6e6d33090245d44fa96b823ea12e49adbbbaabadd125348f chars:35",
+            "reading": "vision_ocr",
+            "region": [
+              0.12,
+              0.86,
+              0.51,
+              0.9
+            ],
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "6.8",
+          "note": "basis not stated",
+          "unit": "%",
+          "value": 6.8
+        },
+        "fraction_basis": "not_reported",
+        "role": "other"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/feed/coal-mine-gas",
+      "target": "ex:msyn/species/o2"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/26",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 3, Table 1",
+            "note": "quote withheld: sha256:d25ddf44431a658b01d61f9a3e7d4727c16437de61292adbacbe26a34a30fbad chars:14",
+            "passage": "10.3775-jie.40.603/p3/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table 1",
+            "note": "second_reading withheld: sha256:f986bbe923b0eb5a54c57233dc4da5c48b8f82f99266ccba81b1565132ee7299 chars:64; transcription withheld: sha256:4553dcb3864d360f6e6d33090245d44fa96b823ea12e49adbbbaabadd125348f chars:35",
+            "reading": "vision_ocr",
+            "region": [
+              0.12,
+              0.86,
+              0.51,
+              0.9
+            ],
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "3.5",
+          "note": "basis not stated",
+          "unit": "%",
+          "value": 3.5
+        },
+        "fraction_basis": "not_reported",
+        "role": "other"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/feed/coal-mine-gas",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/27",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 3, Table 1",
+            "note": "quote withheld: sha256:d25ddf44431a658b01d61f9a3e7d4727c16437de61292adbacbe26a34a30fbad chars:14",
+            "passage": "10.3775-jie.40.603/p3/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 3, Table 1",
+            "note": "second_reading withheld: sha256:f986bbe923b0eb5a54c57233dc4da5c48b8f82f99266ccba81b1565132ee7299 chars:64; transcription withheld: sha256:4553dcb3864d360f6e6d33090245d44fa96b823ea12e49adbbbaabadd125348f chars:35",
+            "reading": "vision_ocr",
+            "region": [
+              0.12,
+              0.86,
+              0.51,
+              0.9
+            ],
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "0.2",
+          "note": "basis not stated",
+          "unit": "%",
+          "value": 0.2
+        },
+        "fraction_basis": "not_reported",
+        "role": "other"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/feed/coal-mine-gas",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/28",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:62c7890c8504eb24ea84c6f02bef15927220198d72cfacee1aa9ed1ff796a9c7 chars:27",
+            "passage": "10.3775-jie.40.603/p4/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "3.4",
+          "note": "unit not printed; basis not stated",
+          "unit": "%",
+          "value": 3.4
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/feed/concentrated-methane",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/29",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:62c7890c8504eb24ea84c6f02bef15927220198d72cfacee1aa9ed1ff796a9c7 chars:27",
+            "passage": "10.3775-jie.40.603/p4/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "3.0",
+          "note": "unit not printed; basis not stated",
+          "unit": "%",
+          "value": 3.0
+        },
+        "fraction_basis": "not_reported",
+        "role": "other"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/feed/concentrated-methane",
+      "target": "ex:msyn/species/o2"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/3",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "status": "asserted",
+        "coefficient": 1,
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:cd035c85600d606900def8845378531f3a13fd4b79086c8891ee75daa1019764 chars:21",
+            "passage": "10.3775-jie.40.603/p4/2",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/reaction/ch4-steam-co2-reforming",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/30",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:62c7890c8504eb24ea84c6f02bef15927220198d72cfacee1aa9ed1ff796a9c7 chars:27",
+            "passage": "10.3775-jie.40.603/p4/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "90.1",
+          "note": "unit not printed; basis not stated",
+          "unit": "%",
+          "value": 90.1
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/feed/concentrated-methane",
+      "target": "ex:msyn/species/ch4"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/31",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:62c7890c8504eb24ea84c6f02bef15927220198d72cfacee1aa9ed1ff796a9c7 chars:27",
+            "passage": "10.3775-jie.40.603/p4/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "3.5",
+          "note": "unit not printed; basis not stated",
+          "unit": "%",
+          "value": 3.5
+        },
+        "fraction_basis": "not_reported",
+        "role": "other"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/feed/concentrated-methane",
+      "target": "ex:msyn/species/n2"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/32",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:4b1741196c815f0a1804a41a4463047f9b04b8f3fc07a344c929870f6280334b chars:29",
+            "passage": "10.3775-jie.40.603/p5/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "69.5",
+          "note": "unit not printed; basis not stated",
+          "unit": "%",
+          "value": 69.5
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/feed/reformed-gas",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/33",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:4b1741196c815f0a1804a41a4463047f9b04b8f3fc07a344c929870f6280334b chars:29",
+            "passage": "10.3775-jie.40.603/p5/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "23.5",
+          "note": "unit not printed; basis not stated",
+          "unit": "%",
+          "value": 23.5
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/feed/reformed-gas",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/34",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:4b1741196c815f0a1804a41a4463047f9b04b8f3fc07a344c929870f6280334b chars:29",
+            "passage": "10.3775-jie.40.603/p5/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "4.5",
+          "note": "unit not printed; basis not stated",
+          "unit": "%",
+          "value": 4.5
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/feed/reformed-gas",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/35",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:4b1741196c815f0a1804a41a4463047f9b04b8f3fc07a344c929870f6280334b chars:29",
+            "passage": "10.3775-jie.40.603/p5/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "1.0",
+          "note": "unit not printed; basis not stated",
+          "unit": "%",
+          "value": 1.0
+        },
+        "fraction_basis": "not_reported",
+        "role": "inert"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/feed/reformed-gas",
+      "target": "ex:msyn/species/ch4"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/36",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:4b1741196c815f0a1804a41a4463047f9b04b8f3fc07a344c929870f6280334b chars:29",
+            "passage": "10.3775-jie.40.603/p5/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "1.5",
+          "note": "unit not printed; basis not stated",
+          "unit": "%",
+          "value": 1.5
+        },
+        "fraction_basis": "not_reported",
+        "role": "inert"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/feed/reformed-gas",
+      "target": "ex:msyn/species/n2"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/37",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:c2343bd6dea51bcf1b3e3f69113980b95644f1ac485774a6c459f99cb0932eba chars:21",
+            "passage": "10.3775-jie.40.603/p5/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "order": 1
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/feed/reformed-gas",
+      "target": "ex:msyn/10.3775-jie.40.603/treatment/carbonyl-separation"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/38",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:a76a2bb27e216932ede7ed804c5d3382f1933701f91e27e278755ae53d2517dc chars:45",
+            "passage": "10.3775-jie.40.603/p3/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "state": "operating"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/test/fauser-synthesis-operation",
+      "target": "ex:msyn/10.3775-jie.40.603/sample/converter-charge"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/39",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:67a853f585a14abf589cf0dbd3228306f4f27c981bd851837ee9e1a743501078 chars:38",
+            "passage": "10.3775-jie.40.603/p3/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/test/fauser-synthesis-operation",
+      "target": "ex:msyn/10.3775-jie.40.603/feed/reformed-gas"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/4",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "status": "asserted",
+        "coefficient": 4,
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:cd035c85600d606900def8845378531f3a13fd4b79086c8891ee75daa1019764 chars:21",
+            "passage": "10.3775-jie.40.603/p4/2",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "role": "product"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/reaction/ch4-steam-co2-reforming",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/40",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:74e026bd61d0e885e94b44ebb67bea6ce3a0efa20c8ba12997c4534a1d380124 chars:19",
+            "passage": "10.3775-jie.40.603/p3/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/test/fauser-synthesis-operation",
+      "target": "ex:msyn/10.3775-jie.40.603/reactor/fauser-converter"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/41",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:74e026bd61d0e885e94b44ebb67bea6ce3a0efa20c8ba12997c4534a1d380124 chars:19",
+            "passage": "10.3775-jie.40.603/p3/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/test/fauser-synthesis-operation",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/42",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:81df883bc26fe9efb75ee3b033f6b72bc41114eab41cd837dbd202a760d76908 chars:58",
+            "passage": "10.3775-jie.40.603/p6/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/test/fauser-synthesis-operation",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/43",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "p. 5, Fig. 6",
+            "note": "quote withheld: sha256:d64f210aa6f30eab614160888e32f64f028914ebd4bd44288b28dede3d78fe45 chars:13",
+            "passage": "10.3775-jie.40.603/p5/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/test/fauser-synthesis-operation",
+      "target": "ex:msyn/10.3775-jie.40.603/unit/hp-compressor"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/44",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "p. 5, Fig. 6",
+            "note": "quote withheld: sha256:d64f210aa6f30eab614160888e32f64f028914ebd4bd44288b28dede3d78fe45 chars:13",
+            "passage": "10.3775-jie.40.603/p5/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/test/fauser-synthesis-operation",
+      "target": "ex:msyn/10.3775-jie.40.603/unit/carbonyl-separator"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/45",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "p. 5, Fig. 6",
+            "note": "quote withheld: sha256:d64f210aa6f30eab614160888e32f64f028914ebd4bd44288b28dede3d78fe45 chars:13",
+            "passage": "10.3775-jie.40.603/p5/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/test/fauser-synthesis-operation",
+      "target": "ex:msyn/10.3775-jie.40.603/unit/methanol-separator"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/46",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "p. 5, Fig. 6",
+            "note": "quote withheld: sha256:d64f210aa6f30eab614160888e32f64f028914ebd4bd44288b28dede3d78fe45 chars:13",
+            "passage": "10.3775-jie.40.603/p5/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/test/fauser-synthesis-operation",
+      "target": "ex:msyn/10.3775-jie.40.603/unit/circulator"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/5",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "status": "asserted",
+        "coefficient": 8,
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:cd035c85600d606900def8845378531f3a13fd4b79086c8891ee75daa1019764 chars:21",
+            "passage": "10.3775-jie.40.603/p4/2",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "role": "product"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/reaction/ch4-steam-co2-reforming",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/52",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:b0ee520a7c0d9991f5911720d1b55d15d278e29100c248b628329c92358d305f chars:48",
+            "passage": "10.3775-jie.40.603/p3/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "role": "material"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/procedure/cryogenic-concentration",
+      "target": "ex:msyn/10.3775-jie.40.603/feed/coal-mine-gas"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/53",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:efbd3672270493cea37fab0635e63c5fb8b3b9723537a4b59007e19e431ad4ec chars:32",
+            "passage": "10.3775-jie.40.603/p4/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/procedure/cryogenic-concentration",
+      "target": "ex:msyn/10.3775-jie.40.603/feed/concentrated-methane"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/54",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "p. 4, Fig. 4",
+            "note": "quote withheld: sha256:5c19413705acfa57f208ae930e867d3c8f82045d2219adf1e08ba854f64ceffc chars:13",
+            "passage": "10.3775-jie.40.603/p4/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/procedure/cryogenic-concentration",
+      "target": "ex:msyn/10.3775-jie.40.603/unit/cryogenic-separation"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/55",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:f49c9d4a1b49d42a5c30b6461baa12796a607e8f01b55d48594c60ea44f6e7f9 chars:35",
+            "passage": "10.3775-jie.40.603/p6/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/claim/over-400c-methanation",
+      "target": "ex:msyn/10.3775-jie.40.603/catalyst/zn-cr-binary"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/56",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:8eefeaa7400979efe1a3922f10a0a95af9e62bbe4f9d9438e2ce84fd6240f846 chars:15",
+            "passage": "10.3775-jie.40.603/p6/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/claim/over-400c-methanation",
+      "target": "ex:msyn/10.3775-jie.40.603/reaction/methane-formation-over-400c"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/57",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:021cc8fae2d9fe0c92dfb6ed3ecd989f965152513d51ff80e0b2b4d88fb82479 chars:39",
+            "passage": "10.3775-jie.40.603/p6/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/test/fauser-synthesis-operation",
+      "target": "ex:msyn/10.3775-jie.40.603/claim/co2-kept-in-feed"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/58",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:262640fdc8cdca8bd16a9c47f7bd3a1c53259003257e5ae5dc1614690c35936b chars:34",
+            "passage": "10.3775-jie.40.603/p6/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/claim/co2-kept-in-feed",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/59",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "context": [
+          "ex:msyn/10.3775-jie.40.603/test/fauser-synthesis-operation"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:a76a2bb27e216932ede7ed804c5d3382f1933701f91e27e278755ae53d2517dc chars:45",
+            "passage": "10.3775-jie.40.603/p3/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/catalyst/zn-cr-binary",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/6",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:8eefeaa7400979efe1a3922f10a0a95af9e62bbe4f9d9438e2ce84fd6240f846 chars:15",
+            "passage": "10.3775-jie.40.603/p6/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "role": "product"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/reaction/methane-formation-over-400c",
+      "target": "ex:msyn/species/ch4"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/60",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "context": [
+          "ex:msyn/10.3775-jie.40.603/test/fauser-synthesis-operation"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:81df883bc26fe9efb75ee3b033f6b72bc41114eab41cd837dbd202a760d76908 chars:58",
+            "passage": "10.3775-jie.40.603/p6/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/catalyst/zn-cr-binary",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/61",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:c35c67bd843a2cc1b9cca1c5256720dad783e58f52a5c053d1e5d637f869e606 chars:39",
+            "passage": "10.3775-jie.40.603/p5/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/claim/fauser-features",
+      "target": "ex:msyn/10.3775-jie.40.603/reactor/fauser-converter"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/62",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:41075ec9a3ff0cab3dda43514a95d289025e8414d9308dc6e26edf8482fb4f28 chars:26",
+            "passage": "10.3775-jie.40.603/p4/2",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/claim/reformer-quench",
+      "target": "ex:msyn/10.3775-jie.40.603/reactor/reformer-furnaces"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/63",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:783127c7aba2cad63e5d26b4f4b36510d5355f0cdc4d5b6dad427100ec4896d5 chars:26",
+            "passage": "10.3775-jie.40.603/p2/2",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/claim/steam-reforming-chosen",
+      "target": "ex:msyn/10.3775-jie.40.603/reaction/ch4-steam-co2-reforming"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/64",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:fc29ad6df52c577a2c09a7a606e2d8af5481fb5095fd2d0ceda439b574821d2b chars:30",
+            "passage": "10.3775-jie.40.603/p2/2",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/claim/steam-reforming-chosen",
+      "target": "ex:msyn/10.3775-jie.40.603/feed/coal-mine-gas"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/65",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:356d2e6181dbb2c52e0f209d802e2f3b92a0dcdc008512a15cf451e0084d7ac1 chars:21",
+            "passage": "10.3775-jie.40.603/p3/2",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/claim/no-explosion-hazard",
+      "target": "ex:msyn/10.3775-jie.40.603/unit/cryogenic-separation"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/66",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:6d9fdfe416231fd664a1a2d1f4551ebdac9737fbe2f680935860018c28fd6839 chars:35",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/test/fauser-synthesis-operation",
+      "target": "ex:msyn/10.3775-jie.40.603/claim/plant-capacity"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/67",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:6d9fdfe416231fd664a1a2d1f4551ebdac9737fbe2f680935860018c28fd6839 chars:35",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/claim/plant-capacity",
+      "target": "ex:msyn/10.3775-jie.40.603/reactor/fauser-converter"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/68",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:15613e59936fd1d5971ea4ad2e520927919d61d46bff63f40e3ec48d8a2d04b9 chars:38",
+            "passage": "10.3775-jie.40.603/p4/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/claim/concentrate-o2-harmless",
+      "target": "ex:msyn/10.3775-jie.40.603/feed/concentrated-methane"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/69",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:d0ddc3400726ec7ec881e50383b91e1b7a7ec3f9b930a57742cd09530cb11aa0 chars:37",
+            "passage": "10.3775-jie.40.603/p5/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "20%濃度",
+          "unit": "%",
+          "value": 20
+        },
+        "fraction_basis": "not_reported",
+        "role": "other",
+        "role_detail": "absorbent solution"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/unit/co2-recovery",
+      "target": "ex:msyn/species/hoch2ch2nh2"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/7",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:a76a2bb27e216932ede7ed804c5d3382f1933701f91e27e278755ae53d2517dc chars:45",
+            "passage": "10.3775-jie.40.603/p3/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/catalyst/zn-cr-binary",
+      "target": "ex:msyn/species/zinc"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/70",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:86fe3cff87dc9b6860b1340d39746f042c106b971b300cc4e00d03fdda16b4f9 chars:23",
+            "passage": "10.3775-jie.40.603/p6/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/test/fauser-synthesis-operation",
+      "target": "ex:msyn/10.3775-jie.40.603/claim/crude-methanol-composition"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/71",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:42be90709492d28ba8a5a2aa1bf3e0e017b2ebb9acd133291176835aedb8f33c chars:83",
+            "passage": "10.3775-jie.40.603/p6/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/claim/crude-methanol-composition",
+      "target": "ex:msyn/species/h2o"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/72",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:42be90709492d28ba8a5a2aa1bf3e0e017b2ebb9acd133291176835aedb8f33c chars:83",
+            "passage": "10.3775-jie.40.603/p6/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/claim/crude-methanol-composition",
+      "target": "ex:msyn/species/ch3och3"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/73",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:42be90709492d28ba8a5a2aa1bf3e0e017b2ebb9acd133291176835aedb8f33c chars:83",
+            "passage": "10.3775-jie.40.603/p6/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/claim/crude-methanol-composition",
+      "target": "ex:msyn/species/ch32chch2oh"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/74",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2, equations (1), (2)",
+            "note": "transcription withheld: sha256:9ee612f77f2a791c8ad8eecdf7503ed8b1b14a0d4fe5564059789e2155033fe9 chars:66; second_reading withheld: sha256:3c7674f4f0338c514c29271e9d315d5bb638e79baa6ba02fe67a60121ec1ddc9 chars:69",
+            "reading": "vision_ocr",
+            "region": [
+              0.5,
+              0.24,
+              0.92,
+              0.315
+            ],
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/claim/steam-reforming-chosen",
+      "target": "ex:msyn/10.3775-jie.40.603/reaction/ch4-partial-oxidation"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/75",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2, equations (1), (2)",
+            "note": "transcription withheld: sha256:9ee612f77f2a791c8ad8eecdf7503ed8b1b14a0d4fe5564059789e2155033fe9 chars:66; second_reading withheld: sha256:3c7674f4f0338c514c29271e9d315d5bb638e79baa6ba02fe67a60121ec1ddc9 chars:69",
+            "reading": "vision_ocr",
+            "region": [
+              0.5,
+              0.24,
+              0.92,
+              0.315
+            ],
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/claim/steam-reforming-chosen",
+      "target": "ex:msyn/10.3775-jie.40.603/reaction/ch4-steam-reforming-to-co"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/76",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2, equations (1), (2)",
+            "note": "transcription withheld: sha256:9ee612f77f2a791c8ad8eecdf7503ed8b1b14a0d4fe5564059789e2155033fe9 chars:66; second_reading withheld: sha256:3c7674f4f0338c514c29271e9d315d5bb638e79baa6ba02fe67a60121ec1ddc9 chars:69",
+            "reading": "vision_ocr",
+            "region": [
+              0.5,
+              0.24,
+              0.92,
+              0.315
+            ],
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/claim/steam-reforming-chosen",
+      "target": "ex:msyn/10.3775-jie.40.603/reaction/ch4-steam-reforming-to-co2"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/77",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 2, equations (1), (2)",
+            "note": "transcription withheld: sha256:9ee612f77f2a791c8ad8eecdf7503ed8b1b14a0d4fe5564059789e2155033fe9 chars:66; second_reading withheld: sha256:3c7674f4f0338c514c29271e9d315d5bb638e79baa6ba02fe67a60121ec1ddc9 chars:69",
+            "reading": "vision_ocr",
+            "region": [
+              0.5,
+              0.24,
+              0.92,
+              0.315
+            ],
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/claim/steam-reforming-chosen",
+      "target": "ex:msyn/10.3775-jie.40.603/reaction/ch4-co2-reforming"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/8",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:a76a2bb27e216932ede7ed804c5d3382f1933701f91e27e278755ae53d2517dc chars:45",
+            "passage": "10.3775-jie.40.603/p3/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/catalyst/zn-cr-binary",
+      "target": "ex:msyn/species/chromium"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/link/9",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:a76a2bb27e216932ede7ed804c5d3382f1933701f91e27e278755ae53d2517dc chars:45",
+            "passage": "10.3775-jie.40.603/p3/1",
+            "source": "ex:msyn/source/10.3775-jie.40.603"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/sample/converter-charge",
+      "target": "ex:msyn/10.3775-jie.40.603/catalyst/zn-cr-binary"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/material/activated-carbon/reported-in/10.3775-jie.40.603",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/material/activated-carbon",
+      "target": "ex:msyn/source/10.3775-jie.40.603"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/procedure/cryogenic-concentration/reported-in/10.3775-jie.40.603",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3",
+          "p. 4",
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/procedure/cryogenic-concentration",
+      "target": "ex:msyn/source/10.3775-jie.40.603"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/reaction/ch4-co2-reforming/reported-in/10.3775-jie.40.603",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, equations (1), (2)"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/reaction/ch4-co2-reforming",
+      "target": "ex:msyn/source/10.3775-jie.40.603"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/reaction/ch4-partial-oxidation/reported-in/10.3775-jie.40.603",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, equations (1), (2)"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/reaction/ch4-partial-oxidation",
+      "target": "ex:msyn/source/10.3775-jie.40.603"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/reaction/ch4-steam-co2-reforming/reported-in/10.3775-jie.40.603",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/reaction/ch4-steam-co2-reforming",
+      "target": "ex:msyn/source/10.3775-jie.40.603"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/reaction/ch4-steam-reforming-to-co/reported-in/10.3775-jie.40.603",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, equations (1), (2)"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/reaction/ch4-steam-reforming-to-co",
+      "target": "ex:msyn/source/10.3775-jie.40.603"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/reaction/ch4-steam-reforming-to-co2/reported-in/10.3775-jie.40.603",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, equations (1), (2)"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/reaction/ch4-steam-reforming-to-co2",
+      "target": "ex:msyn/source/10.3775-jie.40.603"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/reaction/methane-formation-over-400c/reported-in/10.3775-jie.40.603",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/reaction/methane-formation-over-400c",
+      "target": "ex:msyn/source/10.3775-jie.40.603"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/reactor/fauser-converter/reported-in/10.3775-jie.40.603",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/reactor/fauser-converter",
+      "target": "ex:msyn/source/10.3775-jie.40.603"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/reactor/reformer-furnaces/reported-in/10.3775-jie.40.603",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/reactor/reformer-furnaces",
+      "target": "ex:msyn/source/10.3775-jie.40.603"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/sample/converter-charge/reported-in/10.3775-jie.40.603",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/sample/converter-charge",
+      "target": "ex:msyn/source/10.3775-jie.40.603"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/test/fauser-synthesis-operation/reported-in/10.3775-jie.40.603",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3",
+          "p. 5",
+          "p. 5, synthesis equation",
+          "p. 6",
+          "p. 6, purge-gas composition"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/test/fauser-synthesis-operation",
+      "target": "ex:msyn/source/10.3775-jie.40.603"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/treatment/carbonyl-separation/reported-in/10.3775-jie.40.603",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/treatment/carbonyl-separation",
+      "target": "ex:msyn/source/10.3775-jie.40.603"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/unit/carbonyl-separator/reported-in/10.3775-jie.40.603",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/unit/carbonyl-separator",
+      "target": "ex:msyn/source/10.3775-jie.40.603"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/unit/circulator/reported-in/10.3775-jie.40.603",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/unit/circulator",
+      "target": "ex:msyn/source/10.3775-jie.40.603"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/unit/co2-recovery/reported-in/10.3775-jie.40.603",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/unit/co2-recovery",
+      "target": "ex:msyn/source/10.3775-jie.40.603"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/unit/cryogenic-separation/reported-in/10.3775-jie.40.603",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3",
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/unit/cryogenic-separation",
+      "target": "ex:msyn/source/10.3775-jie.40.603"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/unit/distillation/reported-in/10.3775-jie.40.603",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/unit/distillation",
+      "target": "ex:msyn/source/10.3775-jie.40.603"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/unit/hp-compressor/reported-in/10.3775-jie.40.603",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/unit/hp-compressor",
+      "target": "ex:msyn/source/10.3775-jie.40.603"
+    },
+    {
+      "id": "ex:msyn/10.3775-jie.40.603/unit/methanol-separator/reported-in/10.3775-jie.40.603",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.3775-jie.40.603/unit/methanol-separator",
+      "target": "ex:msyn/source/10.3775-jie.40.603"
+    },
+    {
+      "id": "ex:msyn/source/10.3775-jie.40.603/authored-by/1",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 1,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/10.3775-jie.40.603",
+      "target": "ex:msyn/person/kiyoshi-hayashi"
+    },
+    {
+      "id": "ex:msyn/species/ch32chch2oh/reported-in/10.3775-jie.40.603",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/ch32chch2oh",
+      "target": "ex:msyn/source/10.3775-jie.40.603"
+    },
+    {
+      "id": "ex:msyn/species/hoch2ch2nh2/reported-in/10.3775-jie.40.603",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/hoch2ch2nh2",
+      "target": "ex:msyn/source/10.3775-jie.40.603"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/10.3775-jie.40.603"
+}
