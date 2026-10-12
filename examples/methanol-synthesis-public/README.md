@@ -44,8 +44,8 @@ this folder is exactly that where a restricted copy holds the full graph ([docs/
 
 ## In the installed package
 
-The package (`pip install scale-catal`, or `uvx scale-catal`) carries this example: its parts, page texts and query
-plans, without the PDFs (they stay here and in the source archive). From an installed package:
+The package (`pip install scale-catal`, or `uvx scale-catal`) carries this whole example: its parts, PDFs, page texts
+and query plans, every source public domain and shared as it is. From an installed package:
 
 ```bash
 EX=$(python -c "import scale, pathlib; print(pathlib.Path(scale.__file__).parent / '_data/examples/methanol-synthesis-public')")
