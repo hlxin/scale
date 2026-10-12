@@ -47,8 +47,7 @@ Then `scale call status` to start, or `claude mcp add scale -- scale mcp` to giv
   tests run on it.
 - **Graphs** ([`graphs/`](graphs/README.md)): the graphs SCALE curates and shares, each source quoted only as far as
   its rights allow: the catalysis commons, an evolving graph grown one source at a time, and the methanol-synthesis
-  graph (105 sources before 1966, no quoted text of a source in copyright); bundle definitions merge them into one
-  graph (`scale graph bundle`).
+  graph (105 sources before 1966, no quoted text of a source in copyright).
 - **Tools** ([`tools/`](tools/README.md)): the `scale` Python package and command, the agent skills and their
   tests.
 - **Governance** ([`governance/`](governance/GOVERNANCE.md)): who reviews, how changes are approved, versions and

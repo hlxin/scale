@@ -66,4 +66,4 @@ a bundle over the native document.
 
 | bundle | version | graph | edges | notes |
 |---|---|---|---:|---|
-| — | — | — | — | None is kept in the repository. The bundles of the full methanol graph (1.0.0 to 3.0.0) are in the git history; that graph is now `graphs/methanol-synthesis-pre1966/`, with no quoted text of a source in copyright. `scale graph export graphs/methanol-synthesis-pre1966 --to kg-bundle` makes one of it, and `scale graph bundle` merges graphs before an export. |
+| — | — | — | — | None is kept in the repository. The bundles of the full methanol graph (1.0.0 to 3.0.0) are in the git history; that graph is now `graphs/methanol-synthesis-pre1966/`, with no quoted text of a source in copyright. `scale graph export graphs/methanol-synthesis-pre1966 --to kg-bundle` makes one of it. |
