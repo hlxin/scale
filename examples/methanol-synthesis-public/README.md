@@ -42,6 +42,17 @@ A source's records are those of the full graph, unchanged; shared records keep o
 sources. `scale graph split <the full graph> --out . --sources @LIST` makes the parts again, and a test checks that
 this folder is exactly that where a restricted copy holds the full graph ([docs/commands.md](../../docs/commands.md)).
 
+## In the installed package
+
+The package (`pip install scale-catal`, or `uvx scale-catal`) carries this example: its parts, page texts and query
+plans, without the PDFs (they stay here and in the source archive). From an installed package:
+
+```bash
+EX=$(python -c "import scale, pathlib; print(pathlib.Path(scale.__file__).parent / '_data/examples/methanol-synthesis-public')")
+scale graph validate $EX
+scale graph query $EX $EX/queries/q6-cu-zn-al-formulations.yaml --format markdown
+```
+
 ## Checking a quote against its source
 
 ```python

@@ -9,6 +9,10 @@
   manuscript's seven query plans (`queries/`), and its tests check their answers. The test that it is exactly the
   public-domain part of the full graph runs where a restricted copy holds that graph (docs/commands.md); the
   parts round-trip test uses the public example. The earlier versions remain in the git history.
+- **The package carries the public example.** `examples/` is bundled into the wheel (`scale/_data/examples/`): the
+  public-domain methanol example's parts, page texts and query plans, without its PDFs (22 MB; they stay in the
+  repository and the source archive). The wheel grows from about 0.8 MB to 2 MB; an installed package validates and
+  queries the example on its own.
 - **Only a collaborator's event starts @scale-agents**, now that the repository is public: a run spends the owner's
   Claude usage. Anyone's issue or comment is welcome; a collaborator's comment on it starts the team, which reads the
   whole thread as data.

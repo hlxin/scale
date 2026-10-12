@@ -62,8 +62,9 @@ def test_the_bundle_drops_local_working_files(tmp_path):
 
 
 def test_the_wheel_bundles_only_public_documents(tmp_path):
-    """What setup.py copies into scale/_data (every BUNDLE item, through bundle_ignore) holds only public synthetic
-    documents: no project data, no source texts."""
+    """What setup.py copies into scale/_data (every BUNDLE item, through bundle_ignore) holds only public documents:
+    the synthetic examples and the public-domain methanol example (its parts, page texts and query plans, no PDF),
+    no project data."""
     from scale import rights
     out = tmp_path / "_data"
     for item in layout.BUNDLE:
@@ -76,6 +77,11 @@ def test_the_wheel_bundles_only_public_documents(tmp_path):
     files = {p.relative_to(out).as_posix() for p in out.rglob("*") if p.is_file()}
     assert len(files) > 50 and "domain/examples/scale-catal/example.json" in files
     assert sorted({f.split("/")[2] for f in files if f.startswith("domain/examples/") and f.count("/") > 2}) == ["scale-catal"]
+    assert sorted({f.split("/")[1] for f in files if f.startswith("examples/") and f.count("/") > 1}) == ["methanol-synthesis-public"]
+    ex = "examples/methanol-synthesis-public"
+    assert {f"{ex}/parts/header.json", f"{ex}/queries/q1-copper-lower-temperature.yaml", f"{ex}/sources.json",
+            f"{ex}/rights.yaml"} <= files and any(f.startswith(f"{ex}/texts/") for f in files)
+    assert not [f for f in files if f.endswith(".pdf")]                       # page texts ship; PDFs stay in the repository
     docs = rights.committed_documents(out)
     assert len(docs) > 20 and rights.access_problems(out, docs) == []
 

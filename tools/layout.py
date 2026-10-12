@@ -59,6 +59,7 @@ RESTRICTED_ENV = "SCALE_RESTRICTED_DATA"
 # `scale domains check` requires these names, because the tools look nowhere else
 DOMAIN_COMPETENCY = "competency"
 DOMAIN_EXAMPLES = "examples"
+EXAMPLES = "examples"                             # the repository's real, public examples (examples/methanol-synthesis-public)
 SCHEMA_NAME = "scale-catal"                      # the name documents pin (graph.schema) from 0.2.0 on
 LEGACY_SCHEMA_NAME = "scale-graph"               # the name of the same schema in 0.1.0 (frozen copies and documents keep it)
 DOMAIN_GRAPH_MANIFEST = "graph/scale-catal.yaml"  # a domain's schema manifest (DOMAIN.yaml graph.manifest)
@@ -75,8 +76,10 @@ RUNTIME_ANCHORS = (RELEASE_MANIFEST, RELEASES, CORE, CORE_MANIFEST, KERNEL, KERN
 
 # ---------------------------------------------------------------- packaging (setup.py, MANIFEST.in)
 BUNDLE = [RELEASE_MANIFEST, RELEASES, CORE, DOMAIN, SKILLS, REVIEW_POLICY,
-          REGISTRY, IMPLEMENTATION_STATUS, "AGENTS.md"]
-BUNDLE_IGNORE = ("__pycache__", "*.pyc", ".DS_Store", "test_*.py", "conftest.py")
+          REGISTRY, IMPLEMENTATION_STATUS, "AGENTS.md", EXAMPLES]
+# the wheel carries no PDF: the public example's page texts hold their text (quotes are checked against them), and its
+# PDFs (22 MB) stay in the repository and the source archive
+BUNDLE_IGNORE = ("__pycache__", "*.pyc", ".DS_Store", "test_*.py", "conftest.py", "*.pdf")
 LOCAL_DIRS = ("work", "scratchpad")              # git-ignored local material (source texts, caches); never bundled
 BUILD_DIRS = ("build", "dist", ".venv", "venv", "env")   # git-ignored build output and environments at the root
 
