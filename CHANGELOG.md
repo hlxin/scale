@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- **One publication into a graph, in the browser: `service/` and `site/`.** A page (linked from the README) takes a
+  PDF, a DOI or a link. A small service curates it with a model through the scale-catal tools: the curate-source
+  skill, `scale source start`, and `scale source check` until it passes. The graph comes back with every quote capped
+  by the source's rights, and the service keeps nothing. The page shows the graph with each record's values and
+  evidence, and answers questions by the query-graph skill over the same `query` and `search` code as the CLI.
+  Curating and asking need GitHub sign-in with an allowlisted account and are limited by daily budgets. Viewing,
+  querying and searching a graph do not. Deploying it (the host, the OAuth app, the API key, GitHub Pages) is a
+  person's to do (service/README.md).
 - **One publication into a graph: `scale source start | check | finish`.** For a subgraph that studies one paper, patent or
   report. `start` takes a DOI, a PDF or both (or the text): it resolves the DOI's metadata (Crossref), and with a contact
   address (`--email` or `SCALE_CONTACT_EMAIL`, never assumed) downloads an open-access PDF (Unpaywall) only when it

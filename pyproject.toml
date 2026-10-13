@@ -41,4 +41,4 @@ include-package-data = false
 [tool.pytest.ini_options]
 # the same list as scale.layout.TEST_DIRS; the domain template test fixture is not collected (conftest.py
 # collect_ignore_glob)
-testpaths = ["tools/tests", "core/tests", "domain/tests"]
+testpaths = ["tools/tests", "core/tests", "service/tests", "domain/tests"]

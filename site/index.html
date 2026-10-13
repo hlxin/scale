@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SCALE One Publication</title>
+  <meta name="description" content="Curate one catalysis publication into an evidence-backed SCALE graph, see it and ask it questions.">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.28.1/cytoscape.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js"></script>
+  <script src="config.js"></script>
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>SCALE <span class="muted">· one publication, one graph</span></h1>
+    <p class="muted small">A paper, patent or report curated into a <a href="https://github.com/hlxin/scale">scale-catal</a>
+      graph by the catalysis schema and the curate-source skill, every statement with its verbatim evidence.</p>
+  </div>
+  <div id="account" class="account"></div>
+</header>
+
+<main class="layout">
+  <section class="panel" id="input">
+    <h2>1 · The publication</h2>
+    <div class="tabs" role="tablist">
+      <button class="tab active" data-tab="pdf" role="tab">Upload a PDF</button>
+      <button class="tab" data-tab="doi" role="tab">DOI</button>
+      <button class="tab" data-tab="url" role="tab">Link</button>
+    </div>
+    <div class="tabpane" data-pane="pdf">
+      <input type="file" id="pdf" accept="application/pdf">
+      <input type="text" id="pdf-doi" placeholder="its DOI (optional: the record's metadata and licence)">
+    </div>
+    <div class="tabpane hidden" data-pane="doi">
+      <input type="text" id="doi" placeholder="10.1021/ie50220a011">
+      <p class="muted small">An open-access copy is fetched only when it carries an open licence; otherwise upload the PDF.</p>
+    </div>
+    <div class="tabpane hidden" data-pane="url">
+      <input type="url" id="url" placeholder="https://arxiv.org/abs/… or a link to a PDF">
+      <p class="muted small">Many publishers refuse downloads: if the link fails, upload the PDF.</p>
+    </div>
+    <button id="start" class="primary">Curate</button>
+    <p class="muted small">The page text is sent to the service's model to curate. Nothing is kept on the service: you
+      get the graph back, its quotes capped by the source's rights, and download it.</p>
+    <div id="job" class="job hidden"></div>
+    <hr>
+    <h2>Or open a graph</h2>
+    <div class="row">
+      <label class="button">A graph file<input type="file" id="graph-file" accept=".json,application/json" hidden></label>
+      <button id="example">The public methanol example</button>
+    </div>
+  </section>
+
+  <section class="panel wide" id="view">
+    <div class="view-head">
+      <h2>2 · The graph <span id="graph-title" class="muted"></span></h2>
+      <div class="row">
+        <select id="label-filter" aria-label="show label"><option value="">every label</option></select>
+        <button id="fit">Fit</button>
+        <button id="download" disabled>Download</button>
+      </div>
+    </div>
+    <div id="cy" class="cy"><p class="empty muted">No graph yet: curate a publication or open a graph.</p></div>
+    <div id="legend" class="legend"></div>
+    <div id="details" class="details muted">Click a record to see its values and evidence.</div>
+  </section>
+
+  <section class="panel" id="ask">
+    <h2>3 · Ask it</h2>
+    <textarea id="question" rows="3" placeholder="Which catalysts were tested, and at what temperatures?"></textarea>
+    <button id="ask-btn" class="primary">Ask</button>
+    <p class="muted small">Answered by the query-graph skill: query plans and evidence search run by the same code as
+      <code>scale graph query</code> and <code>scale graph search</code>; every sentence cites the rows returned.</p>
+    <div id="answer" class="answer"></div>
+    <hr>
+    <h3>Search the evidence</h3>
+    <div class="row"><input type="text" id="search" placeholder="sulfur poisoning"><button id="search-btn">Search</button></div>
+    <div id="hits" class="hits"></div>
+  </section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
