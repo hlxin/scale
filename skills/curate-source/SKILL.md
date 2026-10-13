@@ -7,6 +7,7 @@ inputs:
   - A declared source set (identifiers and, where licensing permits, local text for verbatim checks)
   - The checklist the document follows (catalysis: the catalysis schema and its one checklist)
 allowed-tools:
+  - "scale source start --doi <doi> | --pdf <file> | --text <file> | check <dir> [--derive-links] | finish <dir>"   # one publication: its working folder, the check, what can be shared
   - "scale graph describe [labels] --domain <domain>"   # the labels and edges you may use, with the checklist and its cases
   - "scale graph validate <doc> --source-text <id>=<file>"
   - "scale graph index | search"            # vectors and term statistics for the evidence quotes
@@ -66,7 +67,11 @@ impurities, driving forces outside the list, characterization results, digitizin
    science kernel plus the catalysis file (`catalysis.yaml`) with its one checklist). What a catalytic test must
    and should report depends on the driving forces it lists (`driving_forces`: the checklist's `when`
    cases), so record the forces the source describes; never add a force to satisfy a checklist.
-4. **Start from a template:** `scale call template '{"domain": "catalysis"}'` returns a minimal valid
+4. **Start from a template:** for one publication, `scale source start --doi <doi>` (or `--pdf <file>`, or both)
+   writes a working folder: the graph to fill, already pinned to the schema with its Source, steward and project,
+   the page texts (`work/texts/`), the source's rights and a `BRIEF.md`; check it with `scale source check <dir>
+   --derive-links` and finish with `scale source finish <dir>` (`--public` for a copy to share, `--bundle` for a
+   kg-bundle). Otherwise `scale call template '{"domain": "catalysis"}'` returns a minimal valid
    document. The header pins `schema_version`, names a `graph_id` and a `title` that states the scope
    as a short name, at most 40 characters, since a platform shows it as the graph's name (e.g. "Nitrate
    to Ammonia on Cu"); the scope's details go in `description` (e.g. "SI and Source Data not examined"), sets `data_status` (`research_data` for

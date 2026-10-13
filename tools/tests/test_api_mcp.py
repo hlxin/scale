@@ -15,7 +15,8 @@ from scale.mcp_server import MCPServer
 from scale.util import load_doc, load_yaml, write_canonical
 
 TOOL_NAMES = {"scale_status", "scale_domains", "scale_describe", "scale_template", "scale_validate", "scale_query",
-              "scale_search", "scale_migrate", "scale_example", "scale_skills"}
+              "scale_search", "scale_migrate", "scale_example", "scale_skills", "scale_source_start", "scale_source_check",
+              "scale_source_finish"}
 SKILLS = {"curate-source", "query-graph", "evolve-schema", "triage-feedback", "scan-conflicts", "map-coverage",
           "curate-dataset", "export-graph"}                  # the head's skills (scale-release.yaml)
 
