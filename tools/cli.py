@@ -268,6 +268,32 @@ def cmd_corpus_check(args):
         raise SystemExit(1)
 
 
+def cmd_source_start(args):
+    from . import curate
+    from .api import default_workspace
+    first = args.pdf or args.text
+    folder = Path(args.folder) if args.folder else default_workspace() / curate.slug_of(
+        curate.normalize_doi(args.doi) if args.doi else None, Path(first) if first else None)
+    res = curate.start(folder, doi=args.doi, pdf=Path(args.pdf) if args.pdf else None,
+                       text=Path(args.text) if args.text else None, domain=args.domain or None, version=args.version,
+                       email=args.email, contributor=args.contributor, project=args.project, repo=_repo(args))
+    print(to_json(res))
+
+
+def cmd_source_check(args):
+    from . import curate
+    res = curate.check(Path(args.folder), _repo(args), derive_links=args.derive_links)
+    print(to_json(res))
+    if not res["ok"]:
+        raise SystemExit(1)
+
+
+def cmd_source_finish(args):
+    from . import curate
+    print(to_json(curate.finish(Path(args.folder), public=args.public, bundle=args.bundle, title=args.title,
+                                repo=_repo(args))))
+
+
 def cmd_pages_render(args):
     from . import pagereading
     only = [int(x) for x in args.only.split(",")] if args.only else None
@@ -1125,6 +1151,29 @@ def build_parser() -> argparse.ArgumentParser:
     sp = add("access", cmd_evidence_access, "every committed scale-catal document (or the given ones) states access public: graph and records (a missing access is not public)", ev)
     sp.add_argument("files", nargs="*")
 
+    cu = sub.add_parser("source", help="one publication (a DOI or a PDF) into a scale-catal document: start a working "
+                        "folder, check the graph an agent fills, finish what can be shared").add_subparsers(dest="sub", required=True)
+    sp = add("start", cmd_source_start, "resolve a DOI (Crossref; an open-access PDF via Unpaywall with --email), read the "
+             "PDF's page texts, and write the folder: the graph to fill (pinned schema, Source record), rights, BRIEF.md", cu)
+    sp.add_argument("--doi", help="the source's DOI (a DOI, doi: CURIE or doi.org link)")
+    sp.add_argument("--pdf", help="the source's PDF (when there is no open-access copy, or no DOI)")
+    sp.add_argument("--text", help="the source's text instead of a PDF (pages headed [page N], or separated by form feeds)")
+    sp.add_argument("--out", dest="folder", help="the working folder (default: <working directory>/<the source's slug>; the "
+                    "working directory is $SCALE_WORKSPACE, by default ~/.scale/workspace)")
+    sp.add_argument("--domain", default="catalysis", help="the checklist the graph follows (default catalysis; '' for none)")
+    sp.add_argument("--version", help="the schema version to pin (default: the head)")
+    sp.add_argument("--email", help="a contact address for Unpaywall (or SCALE_CONTACT_EMAIL); without one no "
+                    "open-access copy is looked for")
+    sp.add_argument("--contributor", default="scale:org/scale-researchers", help="who curates (a stewardship registry id)")
+    sp.add_argument("--project", help="the project the graph belongs to (default: ex:pub/project/<slug>, a study of this source)")
+    sp = add("check", cmd_source_check, "validate the folder's graph, every quote against the page texts; conformance, "
+             "gaps and the copyright cap (exit 1 on any error)", cu)
+    sp.add_argument("folder")
+    sp.add_argument("--derive-links", action="store_true", help="first write the REPORTED_IN links the evidence implies")
+    sp = add("finish", cmd_source_finish, "build the evidence index; --public: a copy with quoted text capped; --bundle: a "
+             "kg-bundle under bundle/", cu)
+    sp.add_argument("folder"); sp.add_argument("--public", action="store_true")
+    sp.add_argument("--bundle", action="store_true"); sp.add_argument("--title", help="the bundle's title (at most 40 characters)")
     cp = sub.add_parser("corpus", help="a frozen corpus manifest").add_subparsers(dest="sub", required=True)
     sp = add("check", cmd_corpus_check, "every candidate source has a status (included, or the reason it was left out) and the "
              "counts add up; prints the bundle corpus block", cp)

@@ -98,6 +98,48 @@ TOOLS: list[dict] = [
                              "description": "Map source id -> full source text, to check quotes verbatim."}}},
     },
     {
+        "name": "scale_source_start",
+        "description": "Start curating one publication into a scale-catal document (a subgraph to study one paper, "
+                       "patent or report). Resolves a DOI's metadata (Crossref) and, with a contact email, downloads an "
+                       "open-access PDF only when it carries an open licence; reads a PDF's page texts (or takes the text); "
+                       "writes a working folder with the graph to fill (pinned schema, Source record, stewardship), the "
+                       "source's rights, the page texts and BRIEF.md (what to curate and how). Then fill the graph "
+                       "following the curate-source skill, check it with scale_source_check, and finish with "
+                       "scale_source_finish.",
+        "input_schema": {"type": "object", "properties": {
+            "doi": {"type": "string", "description": "The source's DOI (a DOI, a doi: CURIE or a doi.org link)."},
+            "pdf": {"type": "string", "description": "The source's PDF file (when there is no open-access copy, or no DOI)."},
+            "text": {"type": "string", "description": "Or a text file of the source (pages headed [page N], or separated "
+                                                      "by form feeds)."},
+            "folder": {"type": "string", "description": "The working folder, relative to the working directory or absolute "
+                                                        "(default: the source's slug)."},
+            "version": {"type": "string", "description": "The schema version to pin (default: the head)."},
+            "email": {"type": "string", "description": "A contact address for Unpaywall's open-access lookup; without one "
+                                                       "no open-access copy is looked for."},
+            **_DOMAIN}},
+    },
+    {
+        "name": "scale_source_check",
+        "description": "Check a curation folder's graph: valid under the schema it pins, every quote found verbatim in the "
+                       "source's page texts, checklist conformance, gaps and the copyright cap. ok is false while any "
+                       "error remains. Writes nothing, unless derive_links.",
+        "input_schema": {"type": "object", "required": ["folder"], "properties": {
+            "folder": {"type": "string", "description": "The curation folder (as scale_source_start returned it)."},
+            "derive_links": {"type": "boolean", "description": "First write the REPORTED_IN links the graph's evidence "
+                                                               "implies (one per record and cited source)."}}},
+    },
+    {
+        "name": "scale_source_finish",
+        "description": "Finish a curation folder whose graph checks without error: build its evidence index; with public, "
+                       "write a copy to share with quoted text capped (only an in-copyright source's text is withheld, as "
+                       "sha256 and length); with bundle, export it as a kg-bundle under bundle/ with a short title.",
+        "input_schema": {"type": "object", "required": ["folder"], "properties": {
+            "folder": {"type": "string", "description": "The curation folder."},
+            "public": {"type": "boolean", "description": "Also write <slug>.public.graph.json, capped."},
+            "bundle": {"type": "boolean", "description": "Also export a kg-bundle (of the public copy with public)."},
+            "title": {"type": "string", "description": "The bundle's title, at most 40 characters (default: the graph's)."}}},
+    },
+    {
         "name": "scale_query",
         "description": "Run a scale-catal query plan (match, steps, where, return, evidence, order_by, limit) over a "
                        "document. Returns rows with the values as reported and their evidence (each item with its "
@@ -438,6 +480,23 @@ class ScaleToolkit:
         spec = self._doc_spec(doc, domain)
         rep = pgraph.validate(doc, spec, source_texts).as_dict()
         return {"schema_version": spec["version"], **rep}
+
+    def _scale_source_start(self, doi: str | None = None, pdf: str | None = None, text: str | None = None,
+                            folder: str | None = None, version: str | None = None, email: str | None = None,
+                            domain: str | None = "catalysis") -> dict:
+        from . import curate
+        slug = curate.slug_of(curate.normalize_doi(doi) if doi else None, Path(pdf or text) if (pdf or text) else None)
+        return curate.start(self._path(folder or slug), doi=doi, pdf=self._path(pdf) if pdf else None,
+                            text=self._path(text) if text else None, domain=None if domain == "core" else domain,
+                            version=version, email=email, repo=self.repo)
+
+    def _scale_source_check(self, folder: str, derive_links: bool = False) -> dict:
+        from . import curate
+        return curate.check(self._path(folder), self.repo, derive_links=derive_links)
+
+    def _scale_source_finish(self, folder: str, public: bool = False, bundle: bool = False, title: str | None = None) -> dict:
+        from . import curate
+        return curate.finish(self._path(folder), public=public, bundle=bundle, title=title, repo=self.repo)
 
     def _scale_query(self, plan: dict, document: dict | None = None, path: str | None = None, domain: str | None = None,
                      format: str = "json") -> dict:

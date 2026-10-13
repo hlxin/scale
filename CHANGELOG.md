@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+- **One publication into a graph: `scale source start | check | finish`.** For a subgraph that studies one paper, patent or
+  report. `start` takes a DOI, a PDF or both (or the text): it resolves the DOI's metadata (Crossref), and with a contact
+  address (`--email` or `SCALE_CONTACT_EMAIL`, never assumed) downloads an open-access PDF (Unpaywall) only when it
+  carries an open licence; reads the PDF's page texts (OCR where a page has none); and writes a working folder, by
+  default in the SCALE working directory: the graph to fill, pinned to the chosen schema version (`--version`,
+  `--domain`) with its Source, steward and project, the source's rights (`rights.yaml`), the page texts and `BRIEF.md`.
+  The agent fills the graph following the curate-source skill; `check` validates it with every quote checked against
+  the page texts (`--derive-links` writes the REPORTED_IN links the evidence implies), and `finish` builds the evidence
+  index, a copy with quoted text capped (`--public`) and a kg-bundle with a short title (`--bundle`). The same three
+  steps are agent tools (`scale_source_start | check | finish`).
 - **`graphs/`: the graphs SCALE curates and shares.** A new top-level folder for graphs that grow, apart
   from the worked examples. Every graph is kept as parts with its `rights.yaml`, `stewardship.yaml` and corpus, and
   quotes each source only as far as its rights allow: `limits: {quote_chars: 0, source_chars: 0}` withholds every
