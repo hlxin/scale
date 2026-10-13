@@ -1,0 +1,3792 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/analysis/external-mass-transfer",
+      "label": "Analysis",
+      "props": {
+        "name": "external diffusion at the solid-gas interface (criterion εd)",
+        "analysis_kind": "transport_check",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:03434c17a8ff6e1a182188fd960d579cd91ac21c9305f2b5dc075f921058e231 chars:7",
+            "passage": "10.1016-0021-9517(62)90123-9/p4/4",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "'cd' = εd; quote withheld: sha256:5d3c78b190b0cd86aee04e905417f508cd0f5c5879241bcf5bd37a07f50d2a8e chars:34",
+            "passage": "10.1016-0021-9517(62)90123-9/p4/4",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "method": "first-order criterion, Eq. (7)",
+        "results": {
+          "error_external_diffusion": {
+            "status": "present",
+            "as_reported": "never exceeds about 2%",
+            "bound": "upper",
+            "qualifier": "approximate",
+            "unit": "%",
+            "value": 2
+          }
+        },
+        "verdict": "εd never exceeds about 2% for the industrial conditions and is of the same order for the laboratory reactor: negligible"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/analysis/industrial-reactor-effectiveness",
+      "label": "Analysis",
+      "props": {
+        "name": "average effectiveness from industrial reactor data (370-410 °C): η = 0.67",
+        "analysis_kind": "kinetic_fit",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:6448166235a148d55b2172f2d73d9ef6f2c617367cf6cb13d40e891fa84d9878 chars:35",
+            "passage": "10.1016-0021-9517(62)90123-9/p6/5",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:a29caf4710da75161b6c167354426d5a2e289639afcea04eca39e7adb12cad36 chars:31",
+            "passage": "10.1016-0021-9517(62)90123-9/p6/5",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:e44176e9ecb2f1b1286fc296a4ad928d20f2df130ac472709c080a66f3305145 chars:10",
+            "passage": "10.1016-0021-9517(62)90123-9/p7/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "'7' = η; quote withheld: sha256:2fb6521dcabb17da3c4ef96ddca6b47f43fe3528e754fcd4994a209cd2251e88 chars:20",
+            "passage": "10.1016-0021-9517(62)90123-9/p7/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:061efdd37df0bb52935a71410b9c3d2a53aa3ea3f81103af46d619b47e8da232 chars:32",
+            "passage": "10.1016-0021-9517(62)90123-9/p7/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "method": "temperature curve along the reactor and over-all conversion calculated from the laboratory kinetics and compared with measured values",
+        "results": {
+          "effectiveness_average": {
+            "status": "present",
+            "as_reported": "0.67",
+            "unit": "1",
+            "value": 0.67
+          }
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "between 370 and 410°",
+          "lower": 370,
+          "unit": "°C",
+          "upper": 410
+        },
+        "verdict": "calculated temperature curve and over-all conversion agree well with the experimental data if η = 0.67"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/analysis/interface-heat-transfer",
+      "label": "Analysis",
+      "props": {
+        "name": "heat transfer at the solid-gas interface (criterion εΔT)",
+        "analysis_kind": "transport_check",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:72cc7bd9cbc202aad2ef8a5a97f854c509d537e06ebfd9f2facbcd034e84f6a2 chars:34",
+            "passage": "10.1016-0021-9517(62)90123-9/p3/4",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "'/CATI' = |εΔT|; quote withheld: sha256:74262e25d5904208f3bef2726b16012c833d4ba87e7067db23f69ae9dfdaeac4 chars:35",
+            "passage": "10.1016-0021-9517(62)90123-9/p3/4",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:74c93393bb6ef87884637f10ee6004437bbf752ffb3192ffdea19ede5cac3377 chars:37",
+            "passage": "10.1016-0021-9517(62)90123-9/p3/4",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "method": "first-order criterion, Eq. (4)",
+        "results": {
+          "error_heat_transfer": {
+            "status": "present",
+            "as_reported": "does not exceed 2- 3%",
+            "lower": 2,
+            "note": "an upper limit ('does not exceed')",
+            "unit": "%",
+            "upper": 3
+          }
+        },
+        "verdict": "|εΔT| does not exceed 2-3% for the industrial conditions and is of the same order for laboratory conditions: negligible"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/analysis/intraparticle-temperature",
+      "label": "Analysis",
+      "props": {
+        "name": "temperature gradient inside the catalyst granules",
+        "analysis_kind": "transport_check",
+        "conditions": {
+          "assumed_thermal_conductivity": {
+            "status": "present",
+            "as_reported": "8 X 10-4 cal/cm sec*",
+            "note": "an assumed value, not a property of this catalyst: the footnote gives it as the value assumed for insulating catalysts (SiO2-Al2O3); the authors state the conductivity of their catalyst is higher. Read from the page image (text layer '8 X 1W Cal/cm set*').",
+            "unit": "cal/(cm s)",
+            "value": 0.0008
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:f6eeace5149f7b24a7c2cb30bcb9a270d4cd55875156c220a05a8a80be60c8e9 chars:33",
+            "passage": "10.1016-0021-9517(62)90123-9/p4/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:6f3718a4568cff05636a7916f94a4206b90c77048cf941ce3122593aa541f85e chars:38",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:986db88c6b64d4d47acf63661ebad2d4698f93fbb26e868a96fb7b15b78eb9e2 chars:37",
+            "passage": "10.1016-0021-9517(62)90123-9/p4/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4, footnote",
+            "note": "quote withheld: sha256:74b08adc5ca8ceb68c07bd73c79b2031488b5ca085fd0c6ebfd249bddb189fb4 chars:100",
+            "passage": "10.1016-0021-9517(62)90123-9/p4/3",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 4",
+            "note": "transcription withheld: sha256:d008a957088a775741fce495079cb87eddbb5e1733321e9dab5e3be51ed2e669 chars:310; second_reading withheld: sha256:1520dbf48ea285a9659a905e34663147ac28ae2b60a933b1f62fae9a7588f8c0 chars:411",
+            "reading": "vision_ocr",
+            "region": [
+              0.1,
+              0.228,
+              0.5,
+              0.365
+            ],
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "method": "Tinkler and Metzner diagrams",
+        "results": {
+          "epsilon_parameter": {
+            "status": "present",
+            "as_reported": "-0.25",
+            "note": "the parameter ε of Tinkler and Metzner, for k_act = 8 × 10^-4 cal/cm sec",
+            "unit": "1",
+            "value": -0.25
+          },
+          "eta_isothermal": {
+            "status": "present",
+            "as_reported": "0.60",
+            "unit": "1",
+            "value": 0.6
+          },
+          "eta_nonisothermal": {
+            "status": "present",
+            "as_reported": "0.64",
+            "unit": "1",
+            "value": 0.64
+          }
+        },
+        "verdict": "the non-isothermicity raises the average η from 0.60 to 0.64, an overestimate that can be neglected; granules treated as practically isothermal"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/analysis/longitudinal-diffusion",
+      "label": "Analysis",
+      "props": {
+        "name": "longitudinal diffusion (criterion Eq. 8; appendix X0 - X)",
+        "analysis_kind": "transport_check",
+        "conditions": {
+          "co_diffusivity_gas": {
+            "status": "present",
+            "as_reported": "DCO,g = 0.5-0.6 X 10-2 cm2/sec",
+            "lower": 0.005,
+            "note": "for the laboratory reactor at its lowest feeding rates; the authors used values four times higher for DCO,m; read from the page image (text layer '1O-2 cm2/sec')",
+            "unit": "cm2/s",
+            "upper": 0.006
+          },
+          "linear_rate": {
+            "status": "present",
+            "as_reported": "linear rate v ≃ 0.2 cm/sec",
+            "note": "lowest feeding rate of the laboratory reactor, the most unfavourable case considered; read from the page image (text layer '0.2 cm/set')",
+            "qualifier": "approximate",
+            "unit": "cm/s",
+            "value": 0.2
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:98a8dbaacf5c1a24d6bac4ee74305f732e2981ceb3d21a813931b4250cbfd605 chars:36",
+            "passage": "10.1016-0021-9517(62)90123-9/p5/3",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "'2-30/o' = 2-3%; quote withheld: sha256:3396e60ab33aa1dad3be619d1f7d5854ca9e27493c0cf4d5ee92430f6396e023 chars:33",
+            "passage": "10.1016-0021-9517(62)90123-9/p5/3",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:6c1721a285eb6d6960da741747f5d7ad8dfa0a49ea0252ab422ba72c1ff98e4b chars:35",
+            "passage": "10.1016-0021-9517(62)90123-9/p5/3",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 12, Appendix",
+            "note": "'2-370' = 2-3%; quote withheld: sha256:5e9307b65a8abd46c747874091f98ab542a12a49a2aa0f1d2e77bb4bc23ee5f1 chars:30",
+            "passage": "10.1016-0021-9517(62)90123-9/p12/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 12, Appendix",
+            "note": "transcription withheld: sha256:b88633f2e1929efe9766f5c3a3aef586475eb096f25cc01c34feaf1883c3fab8 chars:206",
+            "reading": "vision_ocr",
+            "region": [
+              0.1,
+              0.1,
+              0.5,
+              0.205
+            ],
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 11, Appendix",
+            "note": "transcription withheld: sha256:ffc353e125c51f3167bdcfe2763a7d5a0107b50055a61cacf482d1fd3e02e236 chars:69",
+            "reading": "vision_ocr",
+            "region": [
+              0.5,
+              0.888,
+              0.92,
+              0.927
+            ],
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "method": "first-order perturbation solution with Danckwerts-type boundary conditions (Appendix)",
+        "results": {
+          "error_longitudinal_diffusion_lab": {
+            "status": "present",
+            "as_reported": "lower than 2-3%",
+            "lower": 2,
+            "note": "an upper limit ('lower than'); text layer '2-30/o', page image 2-3%",
+            "unit": "%",
+            "upper": 3
+          }
+        },
+        "verdict": "criterion below 2-3% for the laboratory reactor and even lower for the industrial reactor (higher specific flow): negligible"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/catalyst/zno-cr2o3-industrial",
+      "label": "Catalyst",
+      "props": {
+        "name": "ZnO-Cr2O3 catalyst in small cylinders (industrial, 5.5 mm x 16 mm)",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'ZnO-Cr,O,' = ZnO-Cr2O3; quote withheld: sha256:3db4e88399d5148578a0b6bc1f43116e8ad217fe7181797578455df1ad7477ed chars:35",
+            "passage": "10.1016-0021-9517(62)90123-9/p2/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:c0dc89b32b30cdeda9afd8d95e29a2a9ee878f0d1da73e02c5acacacbde650da chars:37",
+            "passage": "10.1016-0021-9517(62)90123-9/p2/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:12e88366149f4cd3696e5c5dcc2b01f00c8f21b9afd24eeeb725c79000cfb969 chars:33",
+            "passage": "10.1016-0021-9517(62)90123-9/p2/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:b959874dfdf98f79a589aa6566c1b61a421e8241e63debb59a17ca8f4de32e98 chars:35",
+            "passage": "10.1016-0021-9517(62)90123-9/p2/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 2, operative parameters table",
+            "note": "transcription withheld: sha256:6d3423d1e7efa4f32609f9802e09e3949cb2472c33678bf12e15fbaf38ca9056 chars:374; second_reading withheld: sha256:33516efc87f69cf02e1d459def3f4600efede410ab62ce83ab089a58b477d5ba chars:393",
+            "reading": "vision_ocr",
+            "region": [
+              0.1,
+              0.335,
+              0.5,
+              0.575
+            ],
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "generality": "kind",
+        "properties": {
+          "chemical_density": {
+            "status": "present",
+            "as_reported": "5400 kg/m3",
+            "note": "chemical density of the catalyst (ρt); text layer '5400 kg/m8'",
+            "unit": "kg/m3",
+            "value": 5400
+          },
+          "granule_density": {
+            "status": "present",
+            "as_reported": "1730 kg/m3",
+            "note": "density of catalyst granule (ρA)",
+            "unit": "kg/m3",
+            "value": 1730
+          },
+          "granule_diameter": {
+            "status": "present",
+            "as_reported": "φ 5.5 mm",
+            "note": "printed φ 5.5 mm (text layer '+ 5.5 mm'); read from the page image",
+            "unit": "mm",
+            "value": 5.5
+          },
+          "granule_length": {
+            "status": "present",
+            "as_reported": "l 16 mm",
+            "note": "printed l 16 mm (text layer 'I 16 mm'); read from the page image",
+            "unit": "mm",
+            "value": 16
+          },
+          "granule_void_fraction": {
+            "status": "present",
+            "as_reported": "0.68",
+            "note": "void fraction within a single porous granule (θ)",
+            "unit": "1",
+            "value": 0.68
+          },
+          "packed_density": {
+            "status": "present",
+            "as_reported": "830 kg/m3",
+            "note": "density of packed catalyst in reactor (ρB); text layer '830 kg/ma'",
+            "unit": "kg/m3",
+            "value": 830
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/catalyst/zno-cr2o3-laboratory",
+      "label": "Catalyst",
+      "props": {
+        "name": "ZnO-Cr2O3 catalyst of the laboratory kinetic study (granules 0.6-0.9 mm)",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:d86359516ffe01e2c63e423d159b2ab1df0aa02978a94debd7fe50ddc9d883f2 chars:31",
+            "passage": "10.1016-0021-9517(62)90123-9/p1/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:76baf41e48a291aed254b3f73a53bfcc2ee49991ab3823adc902d569528ec338 chars:35",
+            "passage": "10.1016-0021-9517(62)90123-9/p1/3",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:6564bb5231cf14c1957595ba902f4d1eff13ac5f9fb7099bd182e57647fa43b7 chars:32",
+            "passage": "10.1016-0021-9517(62)90123-9/p1/3",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "generality": "kind",
+        "note": "the catalyst of the earlier kinetic work (refs. 1-4); its results are cited, not reported here",
+        "properties": {
+          "granule_size": {
+            "status": "present",
+            "as_reported": "0.6 to 0.9 mm",
+            "lower": 0.6,
+            "unit": "mm",
+            "upper": 0.9
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/co-8-12-percent",
+      "label": "Claim",
+      "props": {
+        "name": "rate of the entering gas depends little on CO between 8 and 12%; higher CO lowers the rate; 12% CO chosen",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:b6f2bb10375f60a444b8c5bf4575b05b370dd1040a33835adec8ab652bed3f1c chars:32",
+            "passage": "10.1016-0021-9517(62)90123-9/p8/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:b5531c00820174b1b87e309315d95970a8f04f3e13505605691a2bc4f758f9cf chars:33",
+            "passage": "10.1016-0021-9517(62)90123-9/p8/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "inference_type": "computational",
+        "statement": "The reaction rate of entering gases containing 8 to 12% CO depends little on their composition; for higher CO content the rate decreases. 12% CO, 80% H2, 8% inert was chosen, corresponding to industrial practice."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/conversion-per-pass",
+      "label": "Claim",
+      "props": {
+        "name": "at most 25-30% of the entering CO reacts per pass; at 300 atm hardly more than 25%",
+        "claim_kind": "generalization",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:92603c30f0ff0460c8cc23f27caf30d60d0a13b0b2088c2c4f28bf76690e0b55 chars:32",
+            "passage": "10.1016-0021-9517(62)90123-9/p7/5",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:5b98b827dda385986a8e203a835ed734a186171670c583fbed4a7d0d1059ec00 chars:33",
+            "passage": "10.1016-0021-9517(62)90123-9/p7/5",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "inference_type": "observational",
+        "statement": "At most only 25-30% of the CO entering the reactor reacts per pass; operating at 300 atm this percentage hardly exceeds 25%."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/effectiveness-0.5-0.7",
+      "label": "Claim",
+      "props": {
+        "name": "pore diffusion lowers effectiveness of the ZnO-Cr2O3 catalyst to about 0.5-0.7 at industrial conditions, in agreement with experiment",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:eb8f2811c595d729cdd2053b81b2641e3798a6bef81c82fda768e00c17828d31 chars:56",
+            "passage": "10.1016-0021-9517(62)90123-9/p1/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:b3fee2588aab66bd32bfff7771302df9fc4bfdceba9ae151ace7828bb15cf08e chars:29",
+            "passage": "10.1016-0021-9517(62)90123-9/p1/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 1, abstract",
+            "note": "transcription withheld: sha256:4d51f68b59119e9d258d5e3d791ce463046a6975b472f78bdb75387dcbfb95fc chars:64",
+            "reading": "vision_ocr",
+            "region": [
+              0.18,
+              0.34,
+              0.83,
+              0.362
+            ],
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "inference_type": "computational",
+        "statement": "Concentration gradients in the pores of the catalyst granules lower the effectiveness of the ZnO-Cr2O3 catalyst in industrial methanol reactors; for industrial operating conditions the effectiveness is calculated to be about 0.5-0.7, in agreement with experimental data."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/effectiveness-trends",
+      "label": "Claim",
+      "props": {
+        "name": "effectiveness increases markedly with decreasing temperature, less with increasing conversion, and tends to one near equilibrium",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:b381c5fd957e45d80b8d6d4a201f596fc30524564ac4a4e98d777e073a005534 chars:31",
+            "passage": "10.1016-0021-9517(62)90123-9/p6/5",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:f4097b4e5c166a21f266ff8c132ec4bc68c314928c84b484c4993e9ed523e7cf chars:34",
+            "passage": "10.1016-0021-9517(62)90123-9/p6/5",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:5f9565ed939781a996cdd84ddb6a622a7b1d5abed7db3171571d91cba452df2f chars:37",
+            "passage": "10.1016-0021-9517(62)90123-9/p6/5",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "inference_type": "computational",
+        "statement": "The effectiveness markedly increases with decreasing temperature and, to a lesser extent, with increasing conversion; approaching equilibrium (reaction rates tending to zero) it tends to one independently of temperature."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/h2-rich-gas",
+      "label": "Claim",
+      "props": {
+        "name": "the highest rate is obtained at H2/CO above the stoichiometric 2",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:8eaf61fd3dfbb0e47a07c72478730093b8be9da524e909d4fbc5049ea7cf39ef chars:37",
+            "passage": "10.1016-0021-9517(62)90123-9/p7/5",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:ba75a70144f2d17c449536af5578e62bb2df1a38a0f55384b5140e2d82772c13 chars:27",
+            "passage": "10.1016-0021-9517(62)90123-9/p7/5",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:47fbc893d03988476f8fa2fb909c253d3716c95e9a92e045a5bb7b7f6804c718 chars:24",
+            "passage": "10.1016-0021-9517(62)90123-9/p7/5",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "with refs. 1, 2",
+        "statement": "The highest reaction rate is not obtained at the stoichiometric H2 to CO ratio of 2 but at a higher ratio, so the CO content of the feed gases is rather low."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/heat-mass-compensate",
+      "label": "Claim",
+      "props": {
+        "name": "interface heat and mass transfer effects are of opposite sign and tend to compensate",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:a6d70c122e69c6f2f7c30d73f131cc73801bc90bc200c3aa6c18055d897aa236 chars:28",
+            "passage": "10.1016-0021-9517(62)90123-9/p4/5",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:51b760faa27fe7cecff768893b7e886b373d5eeb5a3b32f1f0be2ff337f694f2 chars:36",
+            "passage": "10.1016-0021-9517(62)90123-9/p4/5",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "inference_type": "theoretical",
+        "statement": "The two mechanisms of heat and mass transfer in the interface area give effects which tend to compensate each other, because they are of opposite sign."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/hulbert-condition",
+      "label": "Claim",
+      "props": {
+        "name": "Hulbert's boundary condition y(0)=1 is inconsistent; its criterion overestimates",
+        "claim_kind": "other",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 10, Appendix",
+            "note": "quote withheld: sha256:13cca29dc539899b9023c21d975ab7a2287989a786a7df56182396706131060f chars:32",
+            "passage": "10.1016-0021-9517(62)90123-9/p10/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 10, Appendix",
+            "note": "quote withheld: sha256:ba6499f639530d07c70e62af0610a150445dc45eed28000d9239b4dc7c64bcf3 chars:35",
+            "passage": "10.1016-0021-9517(62)90123-9/p10/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "inference_type": "theoretical",
+        "statement": "The limiting condition used by Hulbert, y(z=0) = 1, is not consistent with the problem because it neglects the back-diffusion exerted by the reaction on molecules in the entry region; the criterion obtained by Hulbert therefore yields values that are too high."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/lab-kinetics-applicable",
+      "label": "Claim",
+      "props": {
+        "name": "laboratory kinetics (granules 0.6-0.9 mm, effectiveness 1) apply directly to industrial reactors",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:1d12514e4bcb4acc143380fa93016c5e69dff8ecab7dee038a60f6550d79d605 chars:11",
+            "passage": "10.1016-0021-9517(62)90123-9/p1/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:abcb34a8c30ecf8b19adafb850d7f088ad0940a24ce6bea6653c228053438d49 chars:32",
+            "passage": "10.1016-0021-9517(62)90123-9/p1/4",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:5d40de7618b1d29f935496bf6a7e63712bb8f61dbef5c614b346f5396422438e chars:29",
+            "passage": "10.1016-0021-9517(62)90123-9/p1/4",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "the kinetic results are cited from refs. 1-4 (Natta, Pino, Mazzanti, Pasquon)",
+        "statement": "The laboratory kinetic data, obtained with 0.6-0.9 mm granules practically free of heat- and mass-transfer effects (effectiveness factor 1), can be directly applied to calculating industrial reactors."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/methanol-vs-ammonia",
+      "label": "Claim",
+      "props": {
+        "name": "unlike ammonia synthesis, methanol reactor design must account for secondary reactions",
+        "claim_kind": "comparison",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 9",
+            "note": "quote withheld: sha256:dcaeea123df5b19bb465b49ad0f19fd18d7c3fc4ee9aa42c256deb4a2aa80c4c chars:33",
+            "passage": "10.1016-0021-9517(62)90123-9/p9/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 9",
+            "note": "quote withheld: sha256:3c596c58c2e9d15adbb8e2b65ab151727ed079d95aa673d0c2da8b34ad1021d9 chars:35",
+            "passage": "10.1016-0021-9517(62)90123-9/p9/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Methanol and ammonia synthesis show remarkable physico-chemical analogies, but the absence of secondary reactions in ammonia synthesis allows its reactors to be calculated mainly from kinetic parameters, which is not so for methanol."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/optimum-isothermal-390-400",
+      "label": "Claim",
+      "props": {
+        "name": "optimum: approximately isothermal 390-400 °C below 20% CO conversion, then decreasing to 390-395 °C; close to Italian reactors",
+        "claim_kind": "conclusion",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:fb0554bb732acfc5aea166fe929527d4016edcf8f5358278c75976fd0b87ffc4 chars:69",
+            "passage": "10.1016-0021-9517(62)90123-9/p1/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:dba1915ef32d8b3e3c6063817dbb356c0994587fa48bc97aef2453080879f08c chars:12",
+            "passage": "10.1016-0021-9517(62)90123-9/p8/4",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:b9ef875f351e934c628eaceb25e51fc10cf8887f5c87a439de20cc0e581b6132 chars:17",
+            "passage": "10.1016-0021-9517(62)90123-9/p8/4",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 9",
+            "note": "quote withheld: sha256:2822f390e0824a0ed2035a25b6bc595c89c48d5b81965819a48a1da1d0844d41 chars:38",
+            "passage": "10.1016-0021-9517(62)90123-9/p9/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "inference_type": "computational",
+        "statement": "For a reactor at about 300 atm, taking kinetics and secondary reactions into account, the optimum is approximately isothermal (about 395 °C) over most of the bed: for conversions below 20% of the entering CO an isothermal curve between 390 and 400 °C, and only above about 20% a progressive decrease to 390-395 °C; some Italian industrial reactors operate under very similar conditions."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/ordinary-diffusion",
+      "label": "Claim",
+      "props": {
+        "name": "Knudsen and Poiseuille diffusion excluded at 300 atm with excess H2; ordinary diffusion occurs",
+        "claim_kind": "mechanism",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:17da2befefc6a7d2377bd9cdc78c83dce46d3738c9a68694119d382c1c95368b chars:32",
+            "passage": "10.1016-0021-9517(62)90123-9/p5/5",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:31085d1dced4e1f03cbc54bea74868b629825951d52cf57da79cf70ff213bef0 chars:35",
+            "passage": "10.1016-0021-9517(62)90123-9/p5/5",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:34468215e09383ae3f88e9626277ff3dc19ad36fb675bb37fb4230d95968511a chars:28",
+            "passage": "10.1016-0021-9517(62)90123-9/p5/5",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "inference_type": "theoretical",
+        "statement": "In the pores, Knudsen diffusion is excluded because the high pressure (300 atm) lowers the mean free path, Poiseuille diffusion is excluded by the high excess of hydrogen, and ordinary diffusion is the mechanism that occurs."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/pore-diffusion-dominant",
+      "label": "Claim",
+      "props": {
+        "name": "among the physical phenomena, pore diffusion most influences the reaction rate; other heat and mass transfer can be neglected",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:0accf3da934a079fc62510b97526c6d02e6b7f1601a2df2d2af23b5e8212f309 chars:36",
+            "passage": "10.1016-0021-9517(62)90123-9/p2/4",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:49ff2f35a3ee3693a767b119d0aa4373e924a4633e87f5ead8aa5c9b0afdc436 chars:35",
+            "passage": "10.1016-0021-9517(62)90123-9/p2/4",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:025727e555c4ded0508017eddaada523c53e609825fdc87e8e648c1c1876f3c6 chars:67",
+            "passage": "10.1016-0021-9517(62)90123-9/p1/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "inference_type": "computational",
+        "statement": "Among all the physical phenomena, diffusion of the reactants in the pores of the catalyst granules most influences the reaction rate and decreases the effectiveness; the other mass- and heat-transfer phenomena in the bed can be neglected."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/rate-equation",
+      "label": "Claim",
+      "props": {
+        "name": "rate equation (1) of the earlier integral-reactor study on ZnO-Cr2O3 and ZnO-CuO-Cr2O3 catalysts (cited)",
+        "claim_kind": "law",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:477f56944ce562e7cbc4e4df6157f29192bd4146146955c77bb8e722134cbf2b chars:31",
+            "passage": "10.1016-0021-9517(62)90123-9/p1/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:d86359516ffe01e2c63e423d159b2ab1df0aa02978a94debd7fe50ddc9d883f2 chars:31",
+            "passage": "10.1016-0021-9517(62)90123-9/p1/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:6045836165f9cee918fef3955a9534abb686fd43a96127862ca47513cede8057 chars:32",
+            "passage": "10.1016-0021-9517(62)90123-9/p1/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "cited from refs. 1-4; equation read from the rendered page; A, B, C, D and K are given in the earlier papers",
+        "statement": "The methanol synthesis rate from CO and H2 can be expressed by r = (f_CO p_CO f_H2^2 p_H2^2 - f_CH3OH p_CH3OH / K) / (A + B f_CO p_CO + C f_H2 p_H2 + D f_CH3OH p_CH3OH)^3, deduced from earlier studies in a practically isothermal integral reactor with catalysts based on ZnO-Cr2O3 and ZnO-CuO-Cr2O3."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/temperature-limits",
+      "label": "Claim",
+      "props": {
+        "name": "reaction temperature kept below 410-420 °C: methanol purity decreases, and above 390-400 °C methane formation rises rapidly; catalyst aging also limits temperature",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:8cc77e6f8ac4ae4ae4c68d2f4531194efdf50b8e7c119ab3a477d2e2db8d68cd chars:33",
+            "passage": "10.1016-0021-9517(62)90123-9/p7/4",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:50eafa0dae151b4f58a21dde9c04556946f4ca12fbf2e5d58dac0355d6c01bdc chars:9",
+            "passage": "10.1016-0021-9517(62)90123-9/p7/4",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "'390400' = 390-400; quote withheld: sha256:3b62f5838c5c87b6901e9a5b15fa91f17364ee4d0b2e39c9715c512f88c04ece chars:35",
+            "passage": "10.1016-0021-9517(62)90123-9/p7/4",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:f53eb6c26e2840a67e8395188f1856eedda5b434f10db79af2a8c75e9e0b9c55 chars:37",
+            "passage": "10.1016-0021-9517(62)90123-9/p7/3",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "partly cited from ref. 2 (Natta)",
+        "statement": "The reaction temperature is kept below 410-420 °C because at the highest temperatures the purity of the methanol decreases, and temperatures above 390-400 °C cause a rapid increase of methane production from CO and H2, a reaction thermodynamically more favoured than methanol formation and highly exothermic, which can cause undesired temperature rises and methane excess in the recycle gas; lessening catalyst aging is another reason."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/computation/laboratory-effectiveness",
+      "label": "Computation",
+      "props": {
+        "name": "effectiveness of the laboratory catalyst",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:0e236d39492f5a32f9cdcd725ffd34a32503181cb59be5a4b0a2f763c9fdec96 chars:34",
+            "passage": "10.1016-0021-9517(62)90123-9/p6/4",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:5ff0571d06509f6804dc1fa32f29501baa6b81eb951d10a9afe50daff5fff9b9 chars:36",
+            "passage": "10.1016-0021-9517(62)90123-9/p6/4",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "results": {
+          "effectiveness_laboratory": {
+            "status": "present",
+            "as_reported": "higher than 0.97-0.98",
+            "lower": 0.97,
+            "note": "stated as 'in any case higher than 0.97-0.98, that is practically unity' (a lower bound)",
+            "unit": "1",
+            "upper": 0.98
+          }
+        },
+        "task": "effectiveness factor under laboratory conditions"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/computation/optimum-temperature-conversion",
+      "label": "Computation",
+      "props": {
+        "name": "optimum temperature-conversion correspondence and rate-temperature diagram (Fig. 1)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:e586aefb5fe7ba42c7c73f1342759ed3cad0ae70648f08a5ab901d78eb173d14 chars:21",
+            "passage": "10.1016-0021-9517(62)90123-9/p8/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:14654bf2b7733e0f1c97b830b8578149bd979256f40de2cecfc68ccf26748553 chars:14",
+            "passage": "10.1016-0021-9517(62)90123-9/p8/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:b7c7470e59e2a2df1bfd0a4705488ee6fe0c5c125de15cccdfab0e00d6c03dc0 chars:3",
+            "passage": "10.1016-0021-9517(62)90123-9/p8/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:1d2028ddcd746a7ee87dd0739d7435602b77d4908f96e27ebdad57b09aa27b69 chars:3",
+            "passage": "10.1016-0021-9517(62)90123-9/p8/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "figure",
+            "locator": "p. 9, Fig. 1",
+            "note": "caption: rate-temperature diagram of methanol synthesis from CO and H2 for different conversions; P = 280 atm; feed 12% CO, 80% H2, 8% inert; catalyst Cr2O3-ZnO; quote withheld: sha256:6848a6368d96a84f5f03d1febf905d4bba01303257203a942c49ed0c80dc5af9 chars:21",
+            "passage": "10.1016-0021-9517(62)90123-9/p9/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:debdeafe1417aeb97d83f260a77146906e0a0c45b2b3388334c61f8257adf80b chars:35",
+            "passage": "10.1016-0021-9517(62)90123-9/p8/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "goal": "compute",
+        "pressure": {
+          "status": "present",
+          "as_reported": "280 atm",
+          "unit": "atm",
+          "value": 280
+        },
+        "results": {
+          "t_opt_x10": {
+            "status": "present",
+            "as_reported": "402",
+            "basis": "temperature at 10% CO conversion of the temperature-conversion correspondence (approx.)",
+            "qualifier": "approximate",
+            "unit": "°C",
+            "value": 402
+          },
+          "t_opt_x20": {
+            "status": "present",
+            "as_reported": "397",
+            "basis": "at 20% CO conversion",
+            "qualifier": "approximate",
+            "unit": "°C",
+            "value": 397
+          },
+          "t_opt_x30": {
+            "status": "present",
+            "as_reported": "390",
+            "basis": "at 30% CO conversion",
+            "qualifier": "approximate",
+            "unit": "°C",
+            "value": 390
+          }
+        },
+        "task": "rate-temperature diagram with and without pore diffusion; optimum kinetic curve",
+        "temperature": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source",
+          "note": "temperature is the output; see results"
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/computation/table1-effectiveness",
+      "label": "Computation",
+      "props": {
+        "name": "effectiveness factor η of the ZnO-Cr2O3 catalyst in industrial reactors (Table 1)",
+        "conditions": {
+          "feed_rate": {
+            "status": "present",
+            "as_reported": "28,000 Nm3/hr",
+            "note": "design feed rate of the reactor considered; text layer 'Nmv/hr'",
+            "unit": "Nm3/h",
+            "value": 28000
+          }
+        },
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 7, Table 1",
+            "note": "quote withheld: sha256:fa16254291dee18a47d66f94d83a83010417e92b02612e7b8597ee9db8db4392 chars:33",
+            "passage": "10.1016-0021-9517(62)90123-9/p7/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 7, Table 1",
+            "note": "quote withheld: sha256:5910e490881cf776a2b879975dfbe288a04769cb66191e136bfa5cab02149328 chars:34",
+            "passage": "10.1016-0021-9517(62)90123-9/p7/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 7, Table 1",
+            "note": "footnote: π = 280 atm; reactor 700 mm; feeding 12% CO, 80% H2, 8% inert; catalyst φ 5.5 mm, l 16 mm, θ 0.68, ρA 1.73 g/cm3, ρB 0.83 g/cm3; quote withheld: sha256:bd9a772cd22ce858808fd628aa133ccb1bbdca88de5636aeb7f01c49548ed3b4 chars:10",
+            "passage": "10.1016-0021-9517(62)90123-9/p7/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:340ea6e11b71ce52b0d213f61f173d73599e49321ed17d41f2ae9dd1adda6bc3 chars:34",
+            "passage": "10.1016-0021-9517(62)90123-9/p6/4",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "rendered: 'Feed rate 28,000 Nm3/hr'; quote withheld: sha256:4cce37a8f351ac036344dafffcaa0c2d11cf662bfe1117ef9a3ee1f9af774cef chars:20",
+            "passage": "10.1016-0021-9517(62)90123-9/p2/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 7, Table 1",
+            "note": "Table 1 row (x = % CO conv.; columns 330°, 350°, 370°, 390°, 410°); quote withheld: sha256:e433d3cee7b8746065bc44195ba2fbe283a0e9b676f582a3c8eb9e097645beb3 chars:20",
+            "passage": "10.1016-0021-9517(62)90123-9/p7/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 7, Table 1",
+            "note": "Table 1 row (x = % CO conv.; columns 330°, 350°, 370°, 390°, 410°); quote withheld: sha256:fb910a8b7e5fdf5f4ac429044df93298667b124877d213b631a5031df42b4104 chars:21",
+            "passage": "10.1016-0021-9517(62)90123-9/p7/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 7, Table 1",
+            "note": "Table 1 row (x = % CO conv.; columns 330°, 350°, 370°, 390°, 410°); quote withheld: sha256:96507e4fafe090169a5f13415523e9dbfdb3b345024400be623f68a9b4a1c0a5 chars:22",
+            "passage": "10.1016-0021-9517(62)90123-9/p7/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 7, Table 1",
+            "note": "Table 1 row (x = % CO conv.; columns 330°, 350°, 370°, 390°, 410°); quote withheld: sha256:d31a55433f297765fff67252b1956a2eac95d94650bbaf37fb99d394f8a62634 chars:22",
+            "passage": "10.1016-0021-9517(62)90123-9/p7/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 7, Table 1",
+            "note": "Table 1 row (x = % CO conv.; columns 330°, 350°, 370°, 390°, 410°); quote withheld: sha256:3807854529e8f5ba4b1214406ebe8f7485a020dd0d67da7bec49ba4b8707e9ca chars:22",
+            "passage": "10.1016-0021-9517(62)90123-9/p7/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 2, operative parameters table",
+            "note": "transcription withheld: sha256:6d3423d1e7efa4f32609f9802e09e3949cb2472c33678bf12e15fbaf38ca9056 chars:374; second_reading withheld: sha256:33516efc87f69cf02e1d459def3f4600efede410ab62ce83ab089a58b477d5ba chars:393",
+            "reading": "vision_ocr",
+            "region": [
+              0.1,
+              0.335,
+              0.5,
+              0.575
+            ],
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "goal": "compute",
+        "method": "effectiveness-factor relations for first-order reactions applied to the linearized rate equation (Eq. 10-11); effective diffusivity assumed Deff = θ D_m √2",
+        "pressure": {
+          "status": "present",
+          "as_reported": "280 atm",
+          "unit": "atm",
+          "value": 280
+        },
+        "results": {
+          "effectiveness_330c_x0": {
+            "status": "present",
+            "as_reported": "0.91",
+            "basis": "effectiveness factor η at 330 °C and 0% CO conversion",
+            "note": "read from Table 1; table layout checked on the rendered page",
+            "unit": "1",
+            "value": 0.91
+          },
+          "effectiveness_330c_x10": {
+            "status": "present",
+            "as_reported": "0.93",
+            "basis": "effectiveness factor η at 330 °C and 10% CO conversion",
+            "note": "read from Table 1; table layout checked on the rendered page",
+            "unit": "1",
+            "value": 0.93
+          },
+          "effectiveness_330c_x20": {
+            "status": "present",
+            "as_reported": "0.94",
+            "basis": "effectiveness factor η at 330 °C and 20% CO conversion",
+            "note": "read from Table 1; table layout checked on the rendered page",
+            "unit": "1",
+            "value": 0.94
+          },
+          "effectiveness_330c_x30": {
+            "status": "present",
+            "as_reported": "0.95",
+            "basis": "effectiveness factor η at 330 °C and 30% CO conversion",
+            "note": "read from Table 1; table layout checked on the rendered page",
+            "unit": "1",
+            "value": 0.95
+          },
+          "effectiveness_350c_x0": {
+            "status": "present",
+            "as_reported": "0.83",
+            "basis": "effectiveness factor η at 350 °C and 0% CO conversion",
+            "note": "read from Table 1; table layout checked on the rendered page",
+            "unit": "1",
+            "value": 0.83
+          },
+          "effectiveness_350c_x10": {
+            "status": "present",
+            "as_reported": "0.86",
+            "basis": "effectiveness factor η at 350 °C and 10% CO conversion",
+            "note": "read from Table 1; table layout checked on the rendered page",
+            "unit": "1",
+            "value": 0.86
+          },
+          "effectiveness_350c_x20": {
+            "status": "present",
+            "as_reported": "0.88",
+            "basis": "effectiveness factor η at 350 °C and 20% CO conversion",
+            "note": "read from Table 1; table layout checked on the rendered page",
+            "unit": "1",
+            "value": 0.88
+          },
+          "effectiveness_350c_x30": {
+            "status": "present",
+            "as_reported": "0.90",
+            "basis": "effectiveness factor η at 350 °C and 30% CO conversion",
+            "note": "read from Table 1; table layout checked on the rendered page",
+            "unit": "1",
+            "value": 0.9
+          },
+          "effectiveness_370c_x0": {
+            "status": "present",
+            "as_reported": "0.69",
+            "basis": "effectiveness factor η at 370 °C and 0% CO conversion",
+            "note": "read from Table 1; table layout checked on the rendered page",
+            "unit": "1",
+            "value": 0.69
+          },
+          "effectiveness_370c_x10": {
+            "status": "present",
+            "as_reported": "0.71",
+            "basis": "effectiveness factor η at 370 °C and 10% CO conversion",
+            "note": "read from Table 1; table layout checked on the rendered page",
+            "unit": "1",
+            "value": 0.71
+          },
+          "effectiveness_370c_x20": {
+            "status": "present",
+            "as_reported": "0.73",
+            "basis": "effectiveness factor η at 370 °C and 20% CO conversion",
+            "note": "read from Table 1; table layout checked on the rendered page",
+            "unit": "1",
+            "value": 0.73
+          },
+          "effectiveness_370c_x30": {
+            "status": "present",
+            "as_reported": "0.75",
+            "basis": "effectiveness factor η at 370 °C and 30% CO conversion",
+            "note": "read from Table 1; table layout checked on the rendered page",
+            "unit": "1",
+            "value": 0.75
+          },
+          "effectiveness_390c_x0": {
+            "status": "present",
+            "as_reported": "0.58",
+            "basis": "effectiveness factor η at 390 °C and 0% CO conversion",
+            "note": "read from Table 1; table layout checked on the rendered page",
+            "unit": "1",
+            "value": 0.58
+          },
+          "effectiveness_390c_x10": {
+            "status": "present",
+            "as_reported": "0.60",
+            "basis": "effectiveness factor η at 390 °C and 10% CO conversion",
+            "note": "read from Table 1; table layout checked on the rendered page",
+            "unit": "1",
+            "value": 0.6
+          },
+          "effectiveness_390c_x20": {
+            "status": "present",
+            "as_reported": "0.61",
+            "basis": "effectiveness factor η at 390 °C and 20% CO conversion",
+            "note": "read from Table 1; table layout checked on the rendered page",
+            "unit": "1",
+            "value": 0.61
+          },
+          "effectiveness_390c_x30": {
+            "status": "present",
+            "as_reported": "0.63",
+            "basis": "effectiveness factor η at 390 °C and 30% CO conversion",
+            "note": "read from Table 1; table layout checked on the rendered page",
+            "unit": "1",
+            "value": 0.63
+          },
+          "effectiveness_410c_x0": {
+            "status": "present",
+            "as_reported": "0.52",
+            "basis": "effectiveness factor η at 410 °C and 0% CO conversion",
+            "note": "read from Table 1; table layout checked on the rendered page",
+            "unit": "1",
+            "value": 0.52
+          },
+          "effectiveness_410c_x10": {
+            "status": "present",
+            "as_reported": "0.52",
+            "basis": "effectiveness factor η at 410 °C and 10% CO conversion",
+            "note": "read from Table 1; table layout checked on the rendered page",
+            "unit": "1",
+            "value": 0.52
+          },
+          "effectiveness_410c_x20": {
+            "status": "present",
+            "as_reported": "0.53",
+            "basis": "effectiveness factor η at 410 °C and 20% CO conversion",
+            "note": "read from Table 1; table layout checked on the rendered page",
+            "unit": "1",
+            "value": 0.53
+          },
+          "effectiveness_410c_x30": {
+            "status": "present",
+            "as_reported": "0.54",
+            "basis": "effectiveness factor η at 410 °C and 30% CO conversion",
+            "note": "read from Table 1; table layout checked on the rendered page",
+            "unit": "1",
+            "value": 0.54
+          }
+        },
+        "task": "effectiveness factor for internal pore diffusion at industrial conditions",
+        "temperature": {
+          "status": "present",
+          "as_reported": "330°-410°",
+          "lower": 330,
+          "unit": "°C",
+          "upper": 410
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/computation/table3-rates",
+      "label": "Computation",
+      "props": {
+        "name": "reaction rates at 280 atm, 390 °C, 8% inert for 8-14% CO and 0-30% CO conversion (Table 3)",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 8, Table 3",
+            "note": "Table 3 Reaction rates; footnotes π = 280 atm, T = 390 °C, 8% inert; Kmole CH3OH/hr kg catalyst; quote withheld: sha256:823d45bc15de4b1b33b66356b0657eeca7744c11a7956982de9acd5825bd2491 chars:13",
+            "passage": "10.1016-0021-9517(62)90123-9/p8/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 8, Table 3",
+            "note": "quote withheld: sha256:d4fc72ad96d585e1b40f4eaa7a230df13c3d48ca62f0533d60931b0fc33dea43 chars:27",
+            "passage": "10.1016-0021-9517(62)90123-9/p8/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 8, Table 3",
+            "note": "quote withheld: sha256:fc24336f729b693dd5a520d7f37e58e26184d66ef1889e36fa6d87e21cff52d9 chars:6",
+            "passage": "10.1016-0021-9517(62)90123-9/p8/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:be5435f6bde386e9cb293b25667deacc62bb6b110e44ae9ddb23ee1427fcda42 chars:25",
+            "passage": "10.1016-0021-9517(62)90123-9/p8/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:a9a35ef1452184d5fe00b75ed491653ff87092505b645a82fe09bce8722b6b24 chars:12",
+            "passage": "10.1016-0021-9517(62)90123-9/p8/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 8, Table 3",
+            "note": "second_reading withheld: sha256:e51a18cb016060be160b26cccac30df35ed5105c0d81d8f69bcb4cc5839ddbe6 chars:265; transcription withheld: sha256:4a065db70f7102e6ae098789a5b4c9e2add5a639833c0dc30fb0629276e89d4a chars:200",
+            "reading": "vision_ocr",
+            "region": [
+              0.1,
+              0.28,
+              0.91,
+              0.428
+            ],
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "goal": "compute",
+        "pressure": {
+          "status": "present",
+          "as_reported": "280 atm",
+          "unit": "atm",
+          "value": 280
+        },
+        "results": {
+          "rate_co10_x0": {
+            "status": "present",
+            "as_reported": "13.7 × 10-2",
+            "basis": "reaction rate at 10% CO in the entering gas and 0% CO conversion",
+            "note": "read from Table 3 on the page image (text layer garbled)",
+            "unit": "kmol CH3OH/(h kg catalyst)",
+            "value": 0.137
+          },
+          "rate_co10_x10": {
+            "status": "present",
+            "as_reported": "11.1 × 10-2",
+            "basis": "reaction rate at 10% CO in the entering gas and 10% CO conversion",
+            "note": "read from Table 3 on the page image (text layer garbled)",
+            "unit": "kmol CH3OH/(h kg catalyst)",
+            "value": 0.111
+          },
+          "rate_co10_x20": {
+            "status": "present",
+            "as_reported": "8.6 × 10-2",
+            "basis": "reaction rate at 10% CO in the entering gas and 20% CO conversion",
+            "note": "read from Table 3 on the page image (text layer garbled)",
+            "unit": "kmol CH3OH/(h kg catalyst)",
+            "value": 0.086
+          },
+          "rate_co10_x30": {
+            "status": "present",
+            "as_reported": "6.3 × 10-2",
+            "basis": "reaction rate at 10% CO in the entering gas and 30% CO conversion",
+            "note": "read from Table 3 on the page image (text layer garbled)",
+            "unit": "kmol CH3OH/(h kg catalyst)",
+            "value": 0.063
+          },
+          "rate_co12_x0": {
+            "status": "present",
+            "as_reported": "14.4 × 10-2",
+            "basis": "reaction rate at 12% CO in the entering gas and 0% CO conversion",
+            "note": "read from Table 3 on the page image (text layer garbled)",
+            "unit": "kmol CH3OH/(h kg catalyst)",
+            "value": 0.144
+          },
+          "rate_co12_x10": {
+            "status": "present",
+            "as_reported": "11.6 × 10-2",
+            "basis": "reaction rate at 12% CO in the entering gas and 10% CO conversion",
+            "note": "read from Table 3 on the page image (text layer garbled)",
+            "unit": "kmol CH3OH/(h kg catalyst)",
+            "value": 0.116
+          },
+          "rate_co12_x20": {
+            "status": "present",
+            "as_reported": "9.0 × 10-2",
+            "basis": "reaction rate at 12% CO in the entering gas and 20% CO conversion",
+            "note": "read from Table 3 on the page image (text layer garbled)",
+            "unit": "kmol CH3OH/(h kg catalyst)",
+            "value": 0.09
+          },
+          "rate_co12_x30": {
+            "status": "present",
+            "as_reported": "6.5 × 10-2",
+            "basis": "reaction rate at 12% CO in the entering gas and 30% CO conversion",
+            "note": "read from Table 3 on the page image (text layer garbled)",
+            "unit": "kmol CH3OH/(h kg catalyst)",
+            "value": 0.065
+          },
+          "rate_co14_x0": {
+            "status": "present",
+            "as_reported": "14.5 × 10-2",
+            "basis": "reaction rate at 14% CO in the entering gas and 0% CO conversion",
+            "note": "read from Table 3 on the page image (text layer garbled)",
+            "unit": "kmol CH3OH/(h kg catalyst)",
+            "value": 0.145
+          },
+          "rate_co14_x10": {
+            "status": "present",
+            "as_reported": "10.9 × 10-2",
+            "basis": "reaction rate at 14% CO in the entering gas and 10% CO conversion",
+            "note": "read from Table 3 on the page image (text layer garbled)",
+            "unit": "kmol CH3OH/(h kg catalyst)",
+            "value": 0.109
+          },
+          "rate_co14_x20": {
+            "status": "present",
+            "as_reported": "8.3 × 10-2",
+            "basis": "reaction rate at 14% CO in the entering gas and 20% CO conversion",
+            "note": "read from Table 3 on the page image (text layer garbled)",
+            "unit": "kmol CH3OH/(h kg catalyst)",
+            "value": 0.083
+          },
+          "rate_co14_x30": {
+            "status": "present",
+            "as_reported": "5.6 × 10-2",
+            "basis": "reaction rate at 14% CO in the entering gas and 30% CO conversion",
+            "note": "read from Table 3 on the page image (text layer garbled)",
+            "unit": "kmol CH3OH/(h kg catalyst)",
+            "value": 0.056
+          },
+          "rate_co8_x0": {
+            "status": "present",
+            "as_reported": "12.7 × 10-2",
+            "basis": "reaction rate at 8% CO in the entering gas and 0% CO conversion",
+            "note": "read from Table 3 on the page image (text layer garbled)",
+            "unit": "kmol CH3OH/(h kg catalyst)",
+            "value": 0.127
+          },
+          "rate_co8_x10": {
+            "status": "present",
+            "as_reported": "10.6 × 10-2",
+            "basis": "reaction rate at 8% CO in the entering gas and 10% CO conversion",
+            "note": "read from Table 3 on the page image (text layer garbled)",
+            "unit": "kmol CH3OH/(h kg catalyst)",
+            "value": 0.106
+          },
+          "rate_co8_x20": {
+            "status": "present",
+            "as_reported": "8.3 × 10-2",
+            "basis": "reaction rate at 8% CO in the entering gas and 20% CO conversion",
+            "note": "read from Table 3 on the page image (text layer garbled)",
+            "unit": "kmol CH3OH/(h kg catalyst)",
+            "value": 0.083
+          },
+          "rate_co8_x30": {
+            "status": "present",
+            "as_reported": "6.1 × 10-2",
+            "basis": "reaction rate at 8% CO in the entering gas and 30% CO conversion",
+            "note": "read from Table 3 on the page image (text layer garbled)",
+            "unit": "kmol CH3OH/(h kg catalyst)",
+            "value": 0.061
+          }
+        },
+        "task": "composition of the entering gases giving the highest reaction rate",
+        "temperature": {
+          "status": "present",
+          "as_reported": "39O”C",
+          "unit": "°C",
+          "value": 390
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/feed/calc-12co-80h2-8inert",
+      "label": "Feed",
+      "props": {
+        "name": "calculation feed: 12% CO, 80% H2, 8% inert gases, 28,000 Nm3/hr",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:272d75ddd012fa596ff5d38a0b1eb27534d6945f067ddd09b83ed359f5d29aad chars:21",
+            "passage": "10.1016-0021-9517(62)90123-9/p2/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:adb40788fff4f1190c03f90c0fe1124cea387a96159402d33f896892de782840 chars:12",
+            "passage": "10.1016-0021-9517(62)90123-9/p2/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:8bbc65df33f6ff317b5d2fe3f70eb31388a9f49cc4b7a15806a128835d5b653e chars:12",
+            "passage": "10.1016-0021-9517(62)90123-9/p2/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:2e381a8c5a2559d38bbe38d7b9ab06c6ca632fa70b53239d8d0827c2b3aaa75f chars:29",
+            "passage": "10.1016-0021-9517(62)90123-9/p8/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 2, operative parameters table",
+            "note": "transcription withheld: sha256:6d3423d1e7efa4f32609f9802e09e3949cb2472c33678bf12e15fbaf38ca9056 chars:374; second_reading withheld: sha256:33516efc87f69cf02e1d459def3f4600efede410ab62ce83ab089a58b477d5ba chars:393",
+            "reading": "vision_ocr",
+            "region": [
+              0.1,
+              0.335,
+              0.5,
+              0.575
+            ],
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "generality": "particular"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/feed/table2-industrial",
+      "label": "Feed",
+      "props": {
+        "name": "gases entering Italian industrial reactors (Table 2): CO 8-15%, H2 60-80%, inert + CO2 8-30%",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 7, Table 2",
+            "note": "quote withheld: sha256:6b214e51bb14f873ceea507034a8441f88f14282370cd907dc515cefe48a1168 chars:25",
+            "passage": "10.1016-0021-9517(62)90123-9/p7/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 7, Table 2",
+            "note": "transcription withheld: sha256:6779613882dc3788499b614da221769c4b2f0a05bcfa781f8452569dd5cb6ec8 chars:224; second_reading withheld: sha256:e2258808a4043c6947ae60917d04d18e71024605b67b13268ddc7130c9b54ca3 chars:237",
+            "reading": "vision_ocr",
+            "region": [
+              0.51,
+              0.155,
+              0.91,
+              0.335
+            ],
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "generality": "kind"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/hypothesis/co-more-adsorbable",
+      "label": "Hypothesis",
+      "props": {
+        "name": "hydrogen-rich gas is needed because CO is more adsorbable than hydrogen",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:417dea7de3296004044453f64bed6b59b9c0d9f5aaed2e1cf36edb5c8ed753bb chars:31",
+            "passage": "10.1016-0021-9517(62)90123-9/p7/5",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:7e5d830f14fb7e480784503caeeea6e9c74132d55782782cee88f2bfe6afa241 chars:33",
+            "passage": "10.1016-0021-9517(62)90123-9/p7/5",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:ffbe51819cb95a796618349ad82118b82467ff9639d8450aef2114c9b43fd388 chars:20",
+            "passage": "10.1016-0021-9517(62)90123-9/p7/5",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "hypothesis_kind": "explanatory",
+        "hypothesis_status": "proposed",
+        "note": "with refs. 1, 2",
+        "statement": "The highest rate at H2/CO above 2 can be attributed to carbon monoxide being more adsorbable than hydrogen, so that gases rich in hydrogen are needed to obtain the maximum rate on the catalyst surface."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/hypothesis/deff-assumption",
+      "label": "Hypothesis",
+      "props": {
+        "name": "assumed effective diffusivity Deff = θ D_m √2 and first-order linearization of the rate in the pores",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:551850c1464429e11fc1b379004f0c30aad1f1ffdb575ca4711122e98af5a9a6 chars:30",
+            "passage": "10.1016-0021-9517(62)90123-9/p6/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:d6b22d15a72070be6be42318011e70b70146fb559ab997b7119417b00b86985b chars:32",
+            "passage": "10.1016-0021-9517(62)90123-9/p6/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:7dbd27cecb28384b825f9a204831287219cfaebf442d4d20eabbad89d6fb83fe chars:33",
+            "passage": "10.1016-0021-9517(62)90123-9/p6/4",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:6c4aed1a717b690fcb7fe483053cd5bf15ec9439a20f660fc7c3574e18407f57 chars:35",
+            "passage": "10.1016-0021-9517(62)90123-9/p6/4",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "hypothesis_kind": "auxiliary",
+        "hypothesis_status": "proposed",
+        "note": "relation read from the rendered page; the text layer is garbled",
+        "statement": "For the effectiveness calculation the effective diffusivity in the pores is taken as Deff = θ D_m √2 (θ = 0.68), catalyst particles are isothermal with the same porous structure at all sizes and constant diffusivity, and the rate is linearized in CO because hydrogen is in large excess and the diffusion constants of CO and CH3OH are almost equal."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/reactor/fauser-montecatini",
+      "label": "Reactor",
+      "props": {
+        "name": "Fauser-Montecatini-type reactor with almost adiabatic layers and intermediate cooling (bed diameter 700 mm)",
+        "design_status": "planned",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:460bf36477f8fb15dac3cf49dad9e3c916c9fb3cebad896f164fc175d6d07c71 chars:33",
+            "passage": "10.1016-0021-9517(62)90123-9/p2/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:7c46b12a740e4e2b4dca31470654db8edbce7bd9796b89329a31330ab6c9bff2 chars:21",
+            "passage": "10.1016-0021-9517(62)90123-9/p2/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:8cc06d554df7b74b0f5f7e4f8caa091ce5de454f4ad205d097421adffd0758fa chars:37",
+            "passage": "10.1016-0021-9517(62)90123-9/p2/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:2bf2d71ae45b07710c1fef1d1692435112ca710037c6b60bd7e002fa1375fccb chars:25",
+            "passage": "10.1016-0021-9517(62)90123-9/p2/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:7b079babb7b810253f6a685d7252aa9e7901c150a498c427afc824abefdb1afe chars:5",
+            "passage": "10.1016-0021-9517(62)90123-9/p2/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 2, operative parameters table",
+            "note": "transcription withheld: sha256:6d3423d1e7efa4f32609f9802e09e3949cb2472c33678bf12e15fbaf38ca9056 chars:374; second_reading withheld: sha256:33516efc87f69cf02e1d459def3f4600efede410ab62ce83ab089a58b477d5ba chars:393",
+            "reading": "vision_ocr",
+            "region": [
+              0.1,
+              0.335,
+              0.5,
+              0.575
+            ],
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "reactor_kind": "fixed_bed",
+        "specifications": {
+          "bed_diameter": {
+            "status": "present",
+            "as_reported": "700 mm",
+            "unit": "mm",
+            "value": 700
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/sample/industrial-charge",
+      "label": "CatalystSample",
+      "props": {
+        "name": "ZnO-Cr2O3 charge of the industrial reactor considered",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:6448166235a148d55b2172f2d73d9ef6f2c617367cf6cb13d40e891fa84d9878 chars:35",
+            "passage": "10.1016-0021-9517(62)90123-9/p6/5",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "preparation_status": "not_reported",
+        "sample_kind": "reactor_charge"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/species/inert-gases",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "inert gases (N2 and CH4)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:c9083291206eb236ec000cfa22778131ad19383fee3995b72516218122ff8952 chars:32",
+            "passage": "10.1016-0021-9517(62)90123-9/p8/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "generality": "kind",
+        "note": "'the inert gases (N2 and CH4) are such in all respects'",
+        "species_kind": "other"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/test/table2-italian-industrial-reactors",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "operating conditions of industrial methanol reactors built in Italy (Table 2)",
+        "conversion": {
+          "status": "present",
+          "as_reported": "15-30% of the entering CO",
+          "basis": "conversion by passage, of the entering CO",
+          "lower": 15,
+          "unit": "%",
+          "upper": 30
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 7, Table 2",
+            "note": "quote withheld: sha256:21ed0f99315c866eaad8b88a19f1ca3843dcbee1952fb4a1ac53cb0a23bc7876 chars:34",
+            "passage": "10.1016-0021-9517(62)90123-9/p7/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:cc29dea97cbcb2009a858178b4d9a200fc405472fc6be91a87f10233e0aa1c00 chars:7",
+            "passage": "10.1016-0021-9517(62)90123-9/p1/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:4ba418c299f7a01e22273d0000737dd179fbe799ccc707ef70a555d0712df0ee chars:17",
+            "passage": "10.1016-0021-9517(62)90123-9/p7/4",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 7, Table 2",
+            "note": "quote withheld: sha256:e71e1416e2a8c37343c4c0033f0914a9db490c6315e42e8f18381441e6c044ff chars:9",
+            "passage": "10.1016-0021-9517(62)90123-9/p7/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 7, Table 2",
+            "note": "quote withheld: sha256:857552ba29aed1b142c7d4bcbe9d0708424a7e7e2d94c4b1663bf00693e892eb chars:10",
+            "passage": "10.1016-0021-9517(62)90123-9/p7/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 7, Table 2",
+            "note": "quote withheld: sha256:f8d7319203a206c32850da68ea2f00fbd1a63d02a8c14b4e13d13351f6cbb213 chars:9",
+            "passage": "10.1016-0021-9517(62)90123-9/p7/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 7, Table 2",
+            "note": "transcription withheld: sha256:6779613882dc3788499b614da221769c4b2f0a05bcfa781f8452569dd5cb6ec8 chars:224; second_reading withheld: sha256:e2258808a4043c6947ae60917d04d18e71024605b67b13268ddc7130c9b54ca3 chars:237",
+            "reading": "vision_ocr",
+            "region": [
+              0.51,
+              0.155,
+              0.91,
+              0.335
+            ],
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 7",
+            "note": "transcription withheld: sha256:e5307af637b8f4f2a99c557f855c47a3d7e5183b051bc03dda77b4cd71f500f0 chars:13",
+            "reading": "vision_ocr",
+            "region": [
+              0.51,
+              0.445,
+              0.91,
+              0.465
+            ],
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "manipulation": "observational",
+        "note": "ranges over several industrial reactors; the catalyst of these reactors is not stated in Table 2",
+        "pressure": {
+          "status": "present",
+          "as_reported": "250-450 atm",
+          "lower": 250,
+          "unit": "atm",
+          "upper": 450
+        },
+        "results": {
+          "highest_temperature": {
+            "status": "present",
+            "as_reported": "410-420°",
+            "lower": 410,
+            "unit": "°C",
+            "upper": 420
+          },
+          "lowest_temperature": {
+            "status": "present",
+            "as_reported": "320-370°",
+            "lower": 320,
+            "unit": "°C",
+            "upper": 370
+          },
+          "methane_in_circulating_gas": {
+            "status": "present",
+            "as_reported": "reaches 25-30%",
+            "lower": 25,
+            "note": "in some industrial plants, even with a fairly high purge; text layer '25-30s'",
+            "unit": "%",
+            "upper": 30
+          }
+        },
+        "space_velocity": {
+          "status": "present",
+          "as_reported": "5000-15000 Nm3/m3 catalyst",
+          "lower": 5000,
+          "note": "printed without a time unit",
+          "unit": "Nm3/m3 catalyst",
+          "upper": 15000
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "Highest temperature 410-420°; Lowest temperature 320-370°",
+          "lower": 320,
+          "note": "lowest temperature 320-370°, highest 410-420°, depending on the reactor; unit printed as degrees",
+          "unit": "°C",
+          "upper": 420
+        },
+        "test_kind": "other",
+        "test_label": "Table 2"
+      }
+    },
+    {
+      "id": "ex:msyn/source/10.1016-0021-9517(62)90123-9",
+      "label": "Source",
+      "props": {
+        "name": "Heat and mass transfer in methanol synthesis?Optimum operating conditions of the reactors",
+        "kind": "article",
+        "description": "Published 1962 (publication year (bibliography)); in scope: before the 1966-01-01 cutoff. Text: 13 pages text_layer. Text not redistributed.",
+        "doi": "10.1016/0021-9517(62)90123-9",
+        "licence": "no verified publisher licence; short excerpts quoted as evidence under fair use",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "Heat and mass transfer in methanol synthesis?Optimum operating conditions of the reactors",
+        "url": "https://doi.org/10.1016/0021-9517(62)90123-9",
+        "venue": "Journal of Catalysis",
+        "year": 1962
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/analysis/external-mass-transfer/reported-in/10.1016-0021-9517(62)90123-9",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/analysis/external-mass-transfer",
+      "target": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/analysis/industrial-reactor-effectiveness/reported-in/10.1016-0021-9517(62)90123-9",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6",
+          "p. 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/analysis/industrial-reactor-effectiveness",
+      "target": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/analysis/interface-heat-transfer/reported-in/10.1016-0021-9517(62)90123-9",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/analysis/interface-heat-transfer",
+      "target": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/analysis/intraparticle-temperature/reported-in/10.1016-0021-9517(62)90123-9",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4",
+          "p. 4, footnote"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/analysis/intraparticle-temperature",
+      "target": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/analysis/longitudinal-diffusion/reported-in/10.1016-0021-9517(62)90123-9",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 11, Appendix",
+          "p. 12, Appendix",
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/analysis/longitudinal-diffusion",
+      "target": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/catalyst/zno-cr2o3-industrial/reported-in/10.1016-0021-9517(62)90123-9",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 2, operative parameters table"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/catalyst/zno-cr2o3-industrial",
+      "target": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/catalyst/zno-cr2o3-laboratory/reported-in/10.1016-0021-9517(62)90123-9",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/catalyst/zno-cr2o3-laboratory",
+      "target": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/co-8-12-percent/reported-in/10.1016-0021-9517(62)90123-9",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 8"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/co-8-12-percent",
+      "target": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/conversion-per-pass/reported-in/10.1016-0021-9517(62)90123-9",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/conversion-per-pass",
+      "target": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/effectiveness-0.5-0.7/reported-in/10.1016-0021-9517(62)90123-9",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 1, abstract"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/effectiveness-0.5-0.7",
+      "target": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/effectiveness-trends/reported-in/10.1016-0021-9517(62)90123-9",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/effectiveness-trends",
+      "target": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/h2-rich-gas/reported-in/10.1016-0021-9517(62)90123-9",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/h2-rich-gas",
+      "target": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/heat-mass-compensate/reported-in/10.1016-0021-9517(62)90123-9",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/heat-mass-compensate",
+      "target": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/hulbert-condition/reported-in/10.1016-0021-9517(62)90123-9",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 10, Appendix"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/hulbert-condition",
+      "target": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/lab-kinetics-applicable/reported-in/10.1016-0021-9517(62)90123-9",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/lab-kinetics-applicable",
+      "target": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/methanol-vs-ammonia/reported-in/10.1016-0021-9517(62)90123-9",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 9"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/methanol-vs-ammonia",
+      "target": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/optimum-isothermal-390-400/reported-in/10.1016-0021-9517(62)90123-9",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 8",
+          "p. 9"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/optimum-isothermal-390-400",
+      "target": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/ordinary-diffusion/reported-in/10.1016-0021-9517(62)90123-9",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/ordinary-diffusion",
+      "target": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/pore-diffusion-dominant/reported-in/10.1016-0021-9517(62)90123-9",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/pore-diffusion-dominant",
+      "target": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/rate-equation/reported-in/10.1016-0021-9517(62)90123-9",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/rate-equation",
+      "target": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/temperature-limits/reported-in/10.1016-0021-9517(62)90123-9",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/temperature-limits",
+      "target": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/computation/laboratory-effectiveness/reported-in/10.1016-0021-9517(62)90123-9",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/computation/laboratory-effectiveness",
+      "target": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/computation/optimum-temperature-conversion/reported-in/10.1016-0021-9517(62)90123-9",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 8",
+          "p. 9, Fig. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/computation/optimum-temperature-conversion",
+      "target": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/computation/table1-effectiveness/reported-in/10.1016-0021-9517(62)90123-9",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 2, operative parameters table",
+          "p. 6",
+          "p. 7, Table 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/computation/table1-effectiveness",
+      "target": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/computation/table3-rates/reported-in/10.1016-0021-9517(62)90123-9",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 8",
+          "p. 8, Table 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/computation/table3-rates",
+      "target": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/feed/calc-12co-80h2-8inert/reported-in/10.1016-0021-9517(62)90123-9",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 2, operative parameters table",
+          "p. 8"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/feed/calc-12co-80h2-8inert",
+      "target": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/feed/table2-industrial/reported-in/10.1016-0021-9517(62)90123-9",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 7, Table 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/feed/table2-industrial",
+      "target": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/hypothesis/co-more-adsorbable/reported-in/10.1016-0021-9517(62)90123-9",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/hypothesis/co-more-adsorbable",
+      "target": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/hypothesis/deff-assumption/reported-in/10.1016-0021-9517(62)90123-9",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/hypothesis/deff-assumption",
+      "target": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/1",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:3db4e88399d5148578a0b6bc1f43116e8ad217fe7181797578455df1ad7477ed chars:35",
+            "passage": "10.1016-0021-9517(62)90123-9/p2/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/catalyst/zno-cr2o3-industrial",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/10",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:adb40788fff4f1190c03f90c0fe1124cea387a96159402d33f896892de782840 chars:12",
+            "passage": "10.1016-0021-9517(62)90123-9/p2/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:8bbc65df33f6ff317b5d2fe3f70eb31388a9f49cc4b7a15806a128835d5b653e chars:12",
+            "passage": "10.1016-0021-9517(62)90123-9/p2/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 2, operative parameters table",
+            "note": "transcription withheld: sha256:6d3423d1e7efa4f32609f9802e09e3949cb2472c33678bf12e15fbaf38ca9056 chars:374; second_reading withheld: sha256:33516efc87f69cf02e1d459def3f4600efede410ab62ce83ab089a58b477d5ba chars:393",
+            "reading": "vision_ocr",
+            "region": [
+              0.1,
+              0.335,
+              0.5,
+              0.575
+            ],
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "8%",
+          "unit": "%",
+          "value": 8
+        },
+        "fraction_basis": "not_reported",
+        "role": "diluent"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/feed/calc-12co-80h2-8inert",
+      "target": "ex:msyn/10.1016-0021-9517(62)90123-9/species/inert-gases"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/11",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 7, Table 1",
+            "note": "quote withheld: sha256:fa16254291dee18a47d66f94d83a83010417e92b02612e7b8597ee9db8db4392 chars:33",
+            "passage": "10.1016-0021-9517(62)90123-9/p7/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/computation/table1-effectiveness",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/12",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 8, Table 3",
+            "note": "Table 3 Reaction rates; footnotes π = 280 atm, T = 390 °C, 8% inert; Kmole CH3OH/hr kg catalyst; quote withheld: sha256:823d45bc15de4b1b33b66356b0657eeca7744c11a7956982de9acd5825bd2491 chars:13",
+            "passage": "10.1016-0021-9517(62)90123-9/p8/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/computation/table3-rates",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/13",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:e586aefb5fe7ba42c7c73f1342759ed3cad0ae70648f08a5ab901d78eb173d14 chars:21",
+            "passage": "10.1016-0021-9517(62)90123-9/p8/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/computation/optimum-temperature-conversion",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/14",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:0e236d39492f5a32f9cdcd725ffd34a32503181cb59be5a4b0a2f763c9fdec96 chars:34",
+            "passage": "10.1016-0021-9517(62)90123-9/p6/4",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/computation/laboratory-effectiveness",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/15",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:adb40788fff4f1190c03f90c0fe1124cea387a96159402d33f896892de782840 chars:12",
+            "passage": "10.1016-0021-9517(62)90123-9/p2/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "role": "parameter"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/computation/table1-effectiveness",
+      "target": "ex:msyn/10.1016-0021-9517(62)90123-9/feed/calc-12co-80h2-8inert"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/16",
+      "type": "EXAMINES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:3db4e88399d5148578a0b6bc1f43116e8ad217fe7181797578455df1ad7477ed chars:35",
+            "passage": "10.1016-0021-9517(62)90123-9/p2/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/computation/table1-effectiveness",
+      "target": "ex:msyn/10.1016-0021-9517(62)90123-9/catalyst/zno-cr2o3-industrial"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/17",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:adb40788fff4f1190c03f90c0fe1124cea387a96159402d33f896892de782840 chars:12",
+            "passage": "10.1016-0021-9517(62)90123-9/p2/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "role": "parameter"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/computation/table3-rates",
+      "target": "ex:msyn/10.1016-0021-9517(62)90123-9/feed/calc-12co-80h2-8inert"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/18",
+      "type": "EXAMINES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:3db4e88399d5148578a0b6bc1f43116e8ad217fe7181797578455df1ad7477ed chars:35",
+            "passage": "10.1016-0021-9517(62)90123-9/p2/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/computation/table3-rates",
+      "target": "ex:msyn/10.1016-0021-9517(62)90123-9/catalyst/zno-cr2o3-industrial"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/19",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:adb40788fff4f1190c03f90c0fe1124cea387a96159402d33f896892de782840 chars:12",
+            "passage": "10.1016-0021-9517(62)90123-9/p2/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "role": "parameter"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/computation/optimum-temperature-conversion",
+      "target": "ex:msyn/10.1016-0021-9517(62)90123-9/feed/calc-12co-80h2-8inert"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/2",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:3db4e88399d5148578a0b6bc1f43116e8ad217fe7181797578455df1ad7477ed chars:35",
+            "passage": "10.1016-0021-9517(62)90123-9/p2/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/catalyst/zno-cr2o3-industrial",
+      "target": "ex:msyn/species/cr2o3"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/20",
+      "type": "EXAMINES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:3db4e88399d5148578a0b6bc1f43116e8ad217fe7181797578455df1ad7477ed chars:35",
+            "passage": "10.1016-0021-9517(62)90123-9/p2/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/computation/optimum-temperature-conversion",
+      "target": "ex:msyn/10.1016-0021-9517(62)90123-9/catalyst/zno-cr2o3-industrial"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/21",
+      "type": "EXAMINES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:8db0d7e2c393ff3727f594a397977b39ba35634a23abe679c1c1adbad2d0cdca chars:35",
+            "passage": "10.1016-0021-9517(62)90123-9/p6/4",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/computation/laboratory-effectiveness",
+      "target": "ex:msyn/10.1016-0021-9517(62)90123-9/catalyst/zno-cr2o3-laboratory"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/22",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:72cc7bd9cbc202aad2ef8a5a97f854c509d537e06ebfd9f2facbcd034e84f6a2 chars:34",
+            "passage": "10.1016-0021-9517(62)90123-9/p3/4",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/analysis/interface-heat-transfer",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/23",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:f6eeace5149f7b24a7c2cb30bcb9a270d4cd55875156c220a05a8a80be60c8e9 chars:33",
+            "passage": "10.1016-0021-9517(62)90123-9/p4/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/analysis/intraparticle-temperature",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/24",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:03434c17a8ff6e1a182188fd960d579cd91ac21c9305f2b5dc075f921058e231 chars:7",
+            "passage": "10.1016-0021-9517(62)90123-9/p4/4",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/analysis/external-mass-transfer",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/25",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:98a8dbaacf5c1a24d6bac4ee74305f732e2981ceb3d21a813931b4250cbfd605 chars:36",
+            "passage": "10.1016-0021-9517(62)90123-9/p5/3",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/analysis/longitudinal-diffusion",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/26",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:6448166235a148d55b2172f2d73d9ef6f2c617367cf6cb13d40e891fa84d9878 chars:35",
+            "passage": "10.1016-0021-9517(62)90123-9/p6/5",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/analysis/industrial-reactor-effectiveness",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/27",
+      "type": "EXAMINES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:6448166235a148d55b2172f2d73d9ef6f2c617367cf6cb13d40e891fa84d9878 chars:35",
+            "passage": "10.1016-0021-9517(62)90123-9/p6/5",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/analysis/industrial-reactor-effectiveness",
+      "target": "ex:msyn/10.1016-0021-9517(62)90123-9/sample/industrial-charge"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/28",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 7, Table 2",
+            "note": "transcription withheld: sha256:6779613882dc3788499b614da221769c4b2f0a05bcfa781f8452569dd5cb6ec8 chars:224; second_reading withheld: sha256:e2258808a4043c6947ae60917d04d18e71024605b67b13268ddc7130c9b54ca3 chars:237",
+            "reading": "vision_ocr",
+            "region": [
+              0.51,
+              0.155,
+              0.91,
+              0.335
+            ],
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "CO: 8-15%",
+          "lower": 8,
+          "note": "text layer 'CO: 8-150j0'",
+          "unit": "%",
+          "upper": 15
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/feed/table2-industrial",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/29",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 7, Table 2",
+            "note": "transcription withheld: sha256:6779613882dc3788499b614da221769c4b2f0a05bcfa781f8452569dd5cb6ec8 chars:224; second_reading withheld: sha256:e2258808a4043c6947ae60917d04d18e71024605b67b13268ddc7130c9b54ca3 chars:237",
+            "reading": "vision_ocr",
+            "region": [
+              0.51,
+              0.155,
+              0.91,
+              0.335
+            ],
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "H2: 60-80%",
+          "lower": 60,
+          "note": "text layer 'Hz: SO-SO%'; read from the page image",
+          "unit": "%",
+          "upper": 80
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/feed/table2-industrial",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/3",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:6448166235a148d55b2172f2d73d9ef6f2c617367cf6cb13d40e891fa84d9878 chars:35",
+            "passage": "10.1016-0021-9517(62)90123-9/p6/5",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/catalyst/zno-cr2o3-industrial",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/30",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 7, Table 2",
+            "note": "transcription withheld: sha256:6779613882dc3788499b614da221769c4b2f0a05bcfa781f8452569dd5cb6ec8 chars:224; second_reading withheld: sha256:e2258808a4043c6947ae60917d04d18e71024605b67b13268ddc7130c9b54ca3 chars:237",
+            "reading": "vision_ocr",
+            "region": [
+              0.51,
+              0.155,
+              0.91,
+              0.335
+            ],
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "note": "inert + CO2 together 8-30% (page image; text layer '830%'); no separate CO2 fraction is printed",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/feed/table2-industrial",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/31",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 7, Table 2",
+            "note": "quote withheld: sha256:6b214e51bb14f873ceea507034a8441f88f14282370cd907dc515cefe48a1168 chars:25",
+            "passage": "10.1016-0021-9517(62)90123-9/p7/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/test/table2-italian-industrial-reactors",
+      "target": "ex:msyn/10.1016-0021-9517(62)90123-9/feed/table2-industrial"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/32",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 7, Table 2",
+            "note": "quote withheld: sha256:21ed0f99315c866eaad8b88a19f1ca3843dcbee1952fb4a1ac53cb0a23bc7876 chars:34",
+            "passage": "10.1016-0021-9517(62)90123-9/p7/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/test/table2-italian-industrial-reactors",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/33",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:eb8f2811c595d729cdd2053b81b2641e3798a6bef81c82fda768e00c17828d31 chars:56",
+            "passage": "10.1016-0021-9517(62)90123-9/p1/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/effectiveness-0.5-0.7",
+      "target": "ex:msyn/10.1016-0021-9517(62)90123-9/catalyst/zno-cr2o3-industrial"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/34",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:0accf3da934a079fc62510b97526c6d02e6b7f1601a2df2d2af23b5e8212f309 chars:36",
+            "passage": "10.1016-0021-9517(62)90123-9/p2/4",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/pore-diffusion-dominant",
+      "target": "ex:msyn/10.1016-0021-9517(62)90123-9/catalyst/zno-cr2o3-industrial"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/35",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:0accf3da934a079fc62510b97526c6d02e6b7f1601a2df2d2af23b5e8212f309 chars:36",
+            "passage": "10.1016-0021-9517(62)90123-9/p2/4",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/pore-diffusion-dominant",
+      "target": "ex:msyn/10.1016-0021-9517(62)90123-9/reactor/fauser-montecatini"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/36",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:b381c5fd957e45d80b8d6d4a201f596fc30524564ac4a4e98d777e073a005534 chars:31",
+            "passage": "10.1016-0021-9517(62)90123-9/p6/5",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/effectiveness-trends",
+      "target": "ex:msyn/10.1016-0021-9517(62)90123-9/catalyst/zno-cr2o3-industrial"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/37",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:fb0554bb732acfc5aea166fe929527d4016edcf8f5358278c75976fd0b87ffc4 chars:69",
+            "passage": "10.1016-0021-9517(62)90123-9/p1/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/optimum-isothermal-390-400",
+      "target": "ex:msyn/10.1016-0021-9517(62)90123-9/reactor/fauser-montecatini"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/38",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:fb0554bb732acfc5aea166fe929527d4016edcf8f5358278c75976fd0b87ffc4 chars:69",
+            "passage": "10.1016-0021-9517(62)90123-9/p1/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/optimum-isothermal-390-400",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/39",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:8cc77e6f8ac4ae4ae4c68d2f4531194efdf50b8e7c119ab3a477d2e2db8d68cd chars:33",
+            "passage": "10.1016-0021-9517(62)90123-9/p7/4",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/temperature-limits",
+      "target": "ex:msyn/reaction/co-methanation"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/4",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:d86359516ffe01e2c63e423d159b2ab1df0aa02978a94debd7fe50ddc9d883f2 chars:31",
+            "passage": "10.1016-0021-9517(62)90123-9/p1/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/catalyst/zno-cr2o3-laboratory",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/40",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:8cc77e6f8ac4ae4ae4c68d2f4531194efdf50b8e7c119ab3a477d2e2db8d68cd chars:33",
+            "passage": "10.1016-0021-9517(62)90123-9/p7/4",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/temperature-limits",
+      "target": "ex:msyn/10.1016-0021-9517(62)90123-9/catalyst/zno-cr2o3-industrial"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/41",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:8cc77e6f8ac4ae4ae4c68d2f4531194efdf50b8e7c119ab3a477d2e2db8d68cd chars:33",
+            "passage": "10.1016-0021-9517(62)90123-9/p7/4",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/temperature-limits",
+      "target": "ex:msyn/species/ch4"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/42",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:b6f2bb10375f60a444b8c5bf4575b05b370dd1040a33835adec8ab652bed3f1c chars:32",
+            "passage": "10.1016-0021-9517(62)90123-9/p8/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/co-8-12-percent",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/43",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:b6f2bb10375f60a444b8c5bf4575b05b370dd1040a33835adec8ab652bed3f1c chars:32",
+            "passage": "10.1016-0021-9517(62)90123-9/p8/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/co-8-12-percent",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/44",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:92603c30f0ff0460c8cc23f27caf30d60d0a13b0b2088c2c4f28bf76690e0b55 chars:32",
+            "passage": "10.1016-0021-9517(62)90123-9/p7/5",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/conversion-per-pass",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/45",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:1d12514e4bcb4acc143380fa93016c5e69dff8ecab7dee038a60f6550d79d605 chars:11",
+            "passage": "10.1016-0021-9517(62)90123-9/p1/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/lab-kinetics-applicable",
+      "target": "ex:msyn/10.1016-0021-9517(62)90123-9/catalyst/zno-cr2o3-laboratory"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/46",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:1d12514e4bcb4acc143380fa93016c5e69dff8ecab7dee038a60f6550d79d605 chars:11",
+            "passage": "10.1016-0021-9517(62)90123-9/p1/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/lab-kinetics-applicable",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/47",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:477f56944ce562e7cbc4e4df6157f29192bd4146146955c77bb8e722134cbf2b chars:31",
+            "passage": "10.1016-0021-9517(62)90123-9/p1/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/rate-equation",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/48",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:477f56944ce562e7cbc4e4df6157f29192bd4146146955c77bb8e722134cbf2b chars:31",
+            "passage": "10.1016-0021-9517(62)90123-9/p1/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/rate-equation",
+      "target": "ex:msyn/species/cuo"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/49",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:a6d70c122e69c6f2f7c30d73f131cc73801bc90bc200c3aa6c18055d897aa236 chars:28",
+            "passage": "10.1016-0021-9517(62)90123-9/p4/5",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/heat-mass-compensate",
+      "target": "ex:msyn/10.1016-0021-9517(62)90123-9/catalyst/zno-cr2o3-industrial"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/5",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:7378d34213b74f36dc39085537b47d7f256ed405c5a303540b417b3221a82b21 chars:35",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/catalyst/zno-cr2o3-laboratory",
+      "target": "ex:msyn/species/cr2o3"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/50",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:17da2befefc6a7d2377bd9cdc78c83dce46d3738c9a68694119d382c1c95368b chars:32",
+            "passage": "10.1016-0021-9517(62)90123-9/p5/5",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/ordinary-diffusion",
+      "target": "ex:msyn/10.1016-0021-9517(62)90123-9/catalyst/zno-cr2o3-industrial"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/51",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:8eaf61fd3dfbb0e47a07c72478730093b8be9da524e909d4fbc5049ea7cf39ef chars:37",
+            "passage": "10.1016-0021-9517(62)90123-9/p7/5",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/h2-rich-gas",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/52",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:8eaf61fd3dfbb0e47a07c72478730093b8be9da524e909d4fbc5049ea7cf39ef chars:37",
+            "passage": "10.1016-0021-9517(62)90123-9/p7/5",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/h2-rich-gas",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/53",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 9",
+            "note": "quote withheld: sha256:dcaeea123df5b19bb465b49ad0f19fd18d7c3fc4ee9aa42c256deb4a2aa80c4c chars:33",
+            "passage": "10.1016-0021-9517(62)90123-9/p9/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/methanol-vs-ammonia",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/54",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:340ea6e11b71ce52b0d213f61f173d73599e49321ed17d41f2ae9dd1adda6bc3 chars:34",
+            "passage": "10.1016-0021-9517(62)90123-9/p6/4",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/computation/table1-effectiveness",
+      "target": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/effectiveness-0.5-0.7"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/55",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:ffc104e0e4102c9e0372b310f0bc7c32124d86014d09fc791e96e7a3fa2fbf70 chars:33",
+            "passage": "10.1016-0021-9517(62)90123-9/p6/5",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:e14e6c10ec1904bc3a61d32a36c87735ae736526e8b6cc03c60f28fea7d706af chars:34",
+            "passage": "10.1016-0021-9517(62)90123-9/p6/5",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "warrant": "the industrial data give η = 0.67, within the calculated range"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/analysis/industrial-reactor-effectiveness",
+      "target": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/effectiveness-0.5-0.7"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/56",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:f4097b4e5c166a21f266ff8c132ec4bc68c314928c84b484c4993e9ed523e7cf chars:34",
+            "passage": "10.1016-0021-9517(62)90123-9/p6/5",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/computation/table1-effectiveness",
+      "target": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/effectiveness-trends"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/57",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:72cc7bd9cbc202aad2ef8a5a97f854c509d537e06ebfd9f2facbcd034e84f6a2 chars:34",
+            "passage": "10.1016-0021-9517(62)90123-9/p3/4",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/analysis/interface-heat-transfer",
+      "target": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/pore-diffusion-dominant"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/58",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:03434c17a8ff6e1a182188fd960d579cd91ac21c9305f2b5dc075f921058e231 chars:7",
+            "passage": "10.1016-0021-9517(62)90123-9/p4/4",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/analysis/external-mass-transfer",
+      "target": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/pore-diffusion-dominant"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/59",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:98a8dbaacf5c1a24d6bac4ee74305f732e2981ceb3d21a813931b4250cbfd605 chars:36",
+            "passage": "10.1016-0021-9517(62)90123-9/p5/3",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/analysis/longitudinal-diffusion",
+      "target": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/pore-diffusion-dominant"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/6",
+      "type": "COMPARED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:c0dc89b32b30cdeda9afd8d95e29a2a9ee878f0d1da73e02c5acacacbde650da chars:37",
+            "passage": "10.1016-0021-9517(62)90123-9/p2/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:12e88366149f4cd3696e5c5dcc2b01f00c8f21b9afd24eeeb725c79000cfb969 chars:33",
+            "passage": "10.1016-0021-9517(62)90123-9/p2/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "note": "identical except for granule size"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/catalyst/zno-cr2o3-industrial",
+      "target": "ex:msyn/10.1016-0021-9517(62)90123-9/catalyst/zno-cr2o3-laboratory"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/60",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:f6eeace5149f7b24a7c2cb30bcb9a270d4cd55875156c220a05a8a80be60c8e9 chars:33",
+            "passage": "10.1016-0021-9517(62)90123-9/p4/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/analysis/intraparticle-temperature",
+      "target": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/pore-diffusion-dominant"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/61",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:b9ef875f351e934c628eaceb25e51fc10cf8887f5c87a439de20cc0e581b6132 chars:17",
+            "passage": "10.1016-0021-9517(62)90123-9/p8/4",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/computation/optimum-temperature-conversion",
+      "target": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/optimum-isothermal-390-400"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/62",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:b6f2bb10375f60a444b8c5bf4575b05b370dd1040a33835adec8ab652bed3f1c chars:32",
+            "passage": "10.1016-0021-9517(62)90123-9/p8/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/computation/table3-rates",
+      "target": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/co-8-12-percent"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/63",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 7, Table 2",
+            "note": "quote withheld: sha256:857552ba29aed1b142c7d4bcbe9d0708424a7e7e2d94c4b1663bf00693e892eb chars:10",
+            "passage": "10.1016-0021-9517(62)90123-9/p7/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/test/table2-italian-industrial-reactors",
+      "target": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/conversion-per-pass"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/64",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 9",
+            "note": "quote withheld: sha256:2822f390e0824a0ed2035a25b6bc595c89c48d5b81965819a48a1da1d0844d41 chars:38",
+            "passage": "10.1016-0021-9517(62)90123-9/p9/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "warrant": "Italian industrial reactors operate close to the calculated optimum"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/test/table2-italian-industrial-reactors",
+      "target": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/optimum-isothermal-390-400"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/65",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:5ff0571d06509f6804dc1fa32f29501baa6b81eb951d10a9afe50daff5fff9b9 chars:36",
+            "passage": "10.1016-0021-9517(62)90123-9/p6/4",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/computation/laboratory-effectiveness",
+      "target": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/lab-kinetics-applicable"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/66",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:7e5d830f14fb7e480784503caeeea6e9c74132d55782782cee88f2bfe6afa241 chars:33",
+            "passage": "10.1016-0021-9517(62)90123-9/p7/5",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/hypothesis/co-more-adsorbable",
+      "target": "ex:msyn/10.1016-0021-9517(62)90123-9/claim/h2-rich-gas"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/67",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:ffbe51819cb95a796618349ad82118b82467ff9639d8450aef2114c9b43fd388 chars:20",
+            "passage": "10.1016-0021-9517(62)90123-9/p7/5",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/hypothesis/co-more-adsorbable",
+      "target": "ex:msyn/10.1016-0021-9517(62)90123-9/catalyst/zno-cr2o3-industrial"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/68",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:551850c1464429e11fc1b379004f0c30aad1f1ffdb575ca4711122e98af5a9a6 chars:30",
+            "passage": "10.1016-0021-9517(62)90123-9/p6/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "role": "parameter"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/computation/table1-effectiveness",
+      "target": "ex:msyn/10.1016-0021-9517(62)90123-9/hypothesis/deff-assumption"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/7",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:4c3ee774b260327502c3e99ce0eca69490216fbd267e8ed7c800d1451e60427b chars:36",
+            "passage": "10.1016-0021-9517(62)90123-9/p6/5",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/sample/industrial-charge",
+      "target": "ex:msyn/10.1016-0021-9517(62)90123-9/catalyst/zno-cr2o3-industrial"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/8",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:adb40788fff4f1190c03f90c0fe1124cea387a96159402d33f896892de782840 chars:12",
+            "passage": "10.1016-0021-9517(62)90123-9/p2/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:8bbc65df33f6ff317b5d2fe3f70eb31388a9f49cc4b7a15806a128835d5b653e chars:12",
+            "passage": "10.1016-0021-9517(62)90123-9/p2/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 2, operative parameters table",
+            "note": "transcription withheld: sha256:6d3423d1e7efa4f32609f9802e09e3949cb2472c33678bf12e15fbaf38ca9056 chars:374; second_reading withheld: sha256:33516efc87f69cf02e1d459def3f4600efede410ab62ce83ab089a58b477d5ba chars:393",
+            "reading": "vision_ocr",
+            "region": [
+              0.1,
+              0.335,
+              0.5,
+              0.575
+            ],
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "12%",
+          "unit": "%",
+          "value": 12
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/feed/calc-12co-80h2-8inert",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/link/9",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:adb40788fff4f1190c03f90c0fe1124cea387a96159402d33f896892de782840 chars:12",
+            "passage": "10.1016-0021-9517(62)90123-9/p2/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:8bbc65df33f6ff317b5d2fe3f70eb31388a9f49cc4b7a15806a128835d5b653e chars:12",
+            "passage": "10.1016-0021-9517(62)90123-9/p2/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          },
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 2, operative parameters table",
+            "note": "transcription withheld: sha256:6d3423d1e7efa4f32609f9802e09e3949cb2472c33678bf12e15fbaf38ca9056 chars:374; second_reading withheld: sha256:33516efc87f69cf02e1d459def3f4600efede410ab62ce83ab089a58b477d5ba chars:393",
+            "reading": "vision_ocr",
+            "region": [
+              0.1,
+              0.335,
+              0.5,
+              0.575
+            ],
+            "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "80%",
+          "unit": "%",
+          "value": 80
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/feed/calc-12co-80h2-8inert",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/reactor/fauser-montecatini/reported-in/10.1016-0021-9517(62)90123-9",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 2, operative parameters table"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/reactor/fauser-montecatini",
+      "target": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/sample/industrial-charge/reported-in/10.1016-0021-9517(62)90123-9",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/sample/industrial-charge",
+      "target": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/species/inert-gases/reported-in/10.1016-0021-9517(62)90123-9",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 8"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/species/inert-gases",
+      "target": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(62)90123-9/test/table2-italian-industrial-reactors/reported-in/10.1016-0021-9517(62)90123-9",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 7",
+          "p. 7, Table 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(62)90123-9/test/table2-italian-industrial-reactors",
+      "target": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+    },
+    {
+      "id": "ex:msyn/reaction/co-hydrogenation-to-methanol/reported-in/10.1016-0021-9517(62)90123-9",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+    },
+    {
+      "id": "ex:msyn/reaction/co-methanation/reported-in/10.1016-0021-9517(62)90123-9",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/reaction/co-methanation",
+      "target": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+    },
+    {
+      "id": "ex:msyn/source/10.1016-0021-9517(62)90123-9/authored-by/1",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 1,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9",
+      "target": "ex:msyn/person/i-pasquon"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/10.1016-0021-9517(62)90123-9"
+}

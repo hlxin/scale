@@ -12,13 +12,17 @@ Two rules, both run by ``scale check``:
   its sources only as far as their rights allow. Each folder with such documents has a ``rights.yaml`` (the
   nearest one in the document's folder or above, within the repository)::
 
+      limits: {quote_chars: <int>, source_chars: <int>}     # optional: lower caps for this folder
       sources:
         <source id>: {class: public_domain | open | restricted | in_copyright | synthetic,
-                      licence: <SPDX id or text>, basis: <why>, text_chars: <int, optional>}
+                      licence: <SPDX id or text>, basis: <why>, text_chars: <int, optional>,
+                      quote_chars: <int, optional>, source_chars: <int, optional>}
 
   A source without an entry counts as ``in_copyright``. For ``restricted`` and ``in_copyright`` sources each
   quoted text (``quote``, ``transcription``, ``second_reading``) is at most 300 characters, and the distinct
   quoted characters of one source are at most 4,000 and at most 10 % of ``text_chars`` when it is known.
+  ``limits`` (for every capped source of the file) and a source's own ``quote_chars`` and ``source_chars`` only
+  lower these caps; 0 keeps no verbatim text of the source at all (graphs/ sets it for every source in copyright).
   Public-domain, open and synthetic sources have no cap (their quotes are still only text found verbatim).
 
 A text beyond the cap is **withheld**: the evidence item keeps its source, locator, kind (and passage, region);
@@ -59,13 +63,19 @@ WITHHELD = re.compile(r"\b(quote|transcription|second_reading) withheld: sha256:
 def load_rights(path: str | Path) -> dict[str, dict]:
     """The ``sources`` of a rights file, checked: every entry names a known class, a licence and a basis."""
     data = load_yaml(Path(path)) or {}
-    if not isinstance(data, dict) or set(data) - {"sources"} or not isinstance(data.get("sources"), dict):
-        raise ScaleError(f"{path}: a rights file holds one key, sources: {{<source id>: {{class, licence, basis}}}}")
+    if not isinstance(data, dict) or set(data) - {"sources", "limits"} or not isinstance(data.get("sources"), dict):
+        raise ScaleError(f"{path}: a rights file holds sources: {{<source id>: {{class, licence, basis}}}} "
+                         "and, optionally, limits: {quote_chars, source_chars}")
+    limits = data.get("limits") or {}
+    if not isinstance(limits, dict) or set(limits) - set(LIMIT_KEYS):
+        raise ScaleError(f"{path}: limits holds quote_chars and source_chars")
+    _check_limits(limits, f"{path}: limits")
     out = {}
     for sid, e in data["sources"].items():
         where = f"{path}: sources.{sid}"
-        if not isinstance(e, dict) or set(e) - {"class", "licence", "basis", "text_chars"}:
-            raise ScaleError(f"{where}: keys are class, licence, basis and (optional) text_chars")
+        if not isinstance(e, dict) or set(e) - {"class", "licence", "basis", "text_chars", *LIMIT_KEYS}:
+            raise ScaleError(f"{where}: keys are class, licence, basis and (optional) text_chars, quote_chars, source_chars")
+        _check_limits(e, where)
         if e.get("class") not in CLASSES:
             raise ScaleError(f"{where}: class must be one of {', '.join(CLASSES)}")
         for k in ("licence", "basis"):
@@ -73,8 +83,17 @@ def load_rights(path: str | Path) -> dict[str, dict]:
                 raise ScaleError(f"{where}: {k} is required (an SPDX id or a text for the licence; why for the basis)")
         if "text_chars" in e and (not isinstance(e["text_chars"], int) or isinstance(e["text_chars"], bool) or e["text_chars"] <= 0):
             raise ScaleError(f"{where}: text_chars is a positive integer (the characters of the source's text)")
-        out[str(sid)] = dict(e)
+        out[str(sid)] = {**{k: v for k, v in limits.items() if k not in e}, **e}
     return out
+
+
+LIMIT_KEYS = ("quote_chars", "source_chars")
+
+
+def _check_limits(e: dict, where: str) -> None:
+    for k in LIMIT_KEYS:
+        if k in e and (not isinstance(e[k], int) or isinstance(e[k], bool) or e[k] < 0):
+            raise ScaleError(f"{where}: {k} is an integer, 0 or more (it only lowers the cap)")
 
 
 def rights_file(doc_path: str | Path, repo: str | Path | None = None) -> Path | None:
@@ -99,7 +118,13 @@ def limit(entry: dict) -> int | None:
     """The distinct-character cap of a source (None: no cap)."""
     if entry["class"] not in CAPPED:
         return None
-    return min(SOURCE_MAX, int(SHARE_MAX * entry["text_chars"])) if entry.get("text_chars") else SOURCE_MAX
+    top = min(SOURCE_MAX, entry.get("source_chars", SOURCE_MAX))
+    return min(top, int(SHARE_MAX * entry["text_chars"])) if entry.get("text_chars") else top
+
+
+def item_limit(entry: dict) -> int | None:
+    """The cap of one quoted text of a source (None: no cap)."""
+    return min(ITEM_MAX, entry.get("quote_chars", ITEM_MAX)) if entry["class"] in CAPPED else None
 
 
 # ---------------------------------------------------------------- quoted text
@@ -187,9 +212,10 @@ def report(doc: dict, rights: dict[str, dict]) -> dict:
                "distinct_chars": distinct_chars(texts), "longest": longest.get(sid, 0), "cap": cap,
                **({"text_chars": e["text_chars"]} if e.get("text_chars") else {}), "violations": []}
         if cap is not None:
-            over = [t for t in texts if len(t) > ITEM_MAX]
+            most = item_limit(e)
+            over = [t for t in texts if len(t) > most]
             if over:
-                row["violations"].append(f"{len(over)} quoted texts longer than {ITEM_MAX} characters (longest {max(map(len, over))})")
+                row["violations"].append(f"{len(over)} quoted texts longer than {most} characters (longest {max(map(len, over))})")
             if row["distinct_chars"] > cap:
                 row["violations"].append(f"{row['distinct_chars']} distinct quoted characters; the cap is {cap}")
         problems += [f"{sid}: {v}" for v in row["violations"]]
@@ -223,14 +249,14 @@ def cap(doc: dict, rights: dict[str, dict], texts: dict[str, str] | None = None)
         e = dict(source_rights(rights, sid))
         if not e.get("text_chars") and sid in texts:
             e["text_chars"] = len(texts[sid])
-        cap_chars = limit(e)
+        cap_chars, most = limit(e), item_limit(e)
         rows = sorted(cands[sid], key=lambda c: c[:5])
         before = distinct_chars([ev[f] for *_, ev, f in rows])
         kept: list[str] = []
         n_kept = n_held = 0
         for *_, ev, f in rows:
             t = ev[f]
-            if cap_chars is None or (len(t) <= ITEM_MAX and distinct_chars(kept + [t]) <= cap_chars):
+            if cap_chars is None or (len(t) <= most and distinct_chars(kept + [t]) <= cap_chars):
                 kept.append(t)
                 n_kept += 1
             else:
@@ -466,12 +492,15 @@ def gap_report(data: dict, rights: dict[str, dict]) -> dict:
             if len(ins["locator"]) > 200:
                 problems.append(f"{w}: the locator has {len(ins['locator'])} characters; at most 200")
             q = ins.get("quote") or ""
-            if len(q) > ITEM_MAX:
-                problems.append(f"{w}: the quote has {len(q)} characters; at most {ITEM_MAX}")
+            most = item_limit(source_rights(rights, sid))
+            most = ITEM_MAX if most is None else most
+            if len(q) > most:
+                problems.append(f"{w}: the quote has {len(q)} characters; at most {most}")
             if q:
                 quotes.setdefault(sid, []).append(q)
     for sid, texts in sorted(quotes.items()):
-        cap = limit(source_rights(rights, sid)) or SOURCE_MAX
+        cap = limit(source_rights(rights, sid))
+        cap = SOURCE_MAX if cap is None else cap
         n = distinct_chars(texts)
         if n > cap:
             problems.append(f"source {sid}: {n} distinct quoted characters; the cap is {cap}")

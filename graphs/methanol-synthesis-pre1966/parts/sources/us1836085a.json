@@ -1,0 +1,4552 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/source/us1836085a",
+      "label": "Source",
+      "props": {
+        "name": "Method for the simultaneous production of methyl alcohol and liquid &hellip;",
+        "kind": "patent",
+        "description": "Published 1931-12-15 (grant date printed on the patent (agrees with the USPTO issue-year table)); in scope: before the 1966-01-01 cutoff. Text: 3 pages ocr (tesseract 5.5.3 (eng, 300 dpi, 2 columns)). Text not redistributed.",
+        "identifiers": {
+          "patent": "US1836085A"
+        },
+        "licence": "US patent; not subject to copyright",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "Method for the simultaneous production of methyl alcohol and liquid &hellip;",
+        "url": "https://patents.google.com/patent/US1836085A",
+        "year": 1931
+      }
+    },
+    {
+      "id": "ex:msyn/us1836085a/catalyst/example-1",
+      "label": "Catalyst",
+      "props": {
+        "name": "Example 1: zinc oxide + chromium oxide from reduced agglomerated basic zinc chromate",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, 1st example",
+            "passage": "us1836085a/p1/5",
+            "quote": "mixture of zinc oxide and chromium oxide obtained by reducing agglomerated basic chromate of zinc, and which is maintained at 300 degrees C.;",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "generality": "particular"
+      }
+    },
+    {
+      "id": "ex:msyn/us1836085a/catalyst/example-2",
+      "label": "Catalyst",
+      "props": {
+        "name": "Example 2: basic zinc chromate grains, reduced in the reaction chamber",
+        "catalyst_family": "not_reported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "note": "'zine' = zinc",
+            "passage": "us1836085a/p2/2",
+            "quote": "The said mixture is circulated, in a closed circuit, and under a pressure of 150-200 atmospheres, upon a catalytic mass consisting of a basic chromate of zine which is formed into grains by agglomeration",
+            "source": "ex:msyn/source/us1836085a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "passage": "us1836085a/p2/2",
+            "quote": "is preliminarily reduced in the reaction cham- ber itself by a current of pure hydrogen or by the gas mixture which is to be treated.",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "generality": "particular"
+      }
+    },
+    {
+      "id": "ex:msyn/us1836085a/catalyst/methanol-forming-catalyzer",
+      "label": "Catalyst",
+      "props": {
+        "name": "methanol-forming catalyzer (generic)",
+        "catalyst_family": "not_reported",
+        "description": "the catalyzers most suitable for synthesizing oxygen-containing organic compounds from hydrogen and carbon monoxide, which also polymerize and hydrogenate the aromatic and nonsaturated hydrocarbons",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "continues 'taining oxygen, are at the same time those by means of which the aromatic hydrocarbons and the nonsaturated hydrocarbons can be polymerized (or condensed) and combined with hydrogen'",
+            "passage": "us1836085a/p1/2",
+            "quote": "This is a most surprising fact that the catalyzers which are the most suitable for the synthetic combination of hydrogen with car- bon monoxide into organic compounds con-",
+            "source": "ex:msyn/source/us1836085a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "quote": "means of which the aromatic hydrocarbons and the nonsaturated hydrocarbons can be polymerized (or condensed) and combined with hydrogen in the most practical manner.",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "generality": "kind"
+      }
+    },
+    {
+      "id": "ex:msyn/us1836085a/claim/coal-gas-use",
+      "label": "Claim",
+      "props": {
+        "name": "coal distillation gas can be used directly as additional hydrogen source",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'120' is a line number",
+            "passage": "us1836085a/p2/8",
+            "quote": "The invention thus permits of directly 120 using coal distillation gas, after only tars and ammonia have been eliminated there- from, as an additional source of the hydro- gen to be added to water gas,",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The invention permits directly using coal distillation gas, after only tars and ammonia have been eliminated, as an additional source of hydrogen to be added to water gas for methanol synthesis gas mixtures."
+      }
+    },
+    {
+      "id": "ex:msyn/us1836085a/claim/hydrocarbon-fuel",
+      "label": "Claim",
+      "props": {
+        "name": "the hydrocarbon layer is an excellent engine fuel",
+        "claim_kind": "finding",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "passage": "us1836085a/p2/3",
+            "quote": "This product when simply filtered, constitutes an excellent fuel for internal combustion engines",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The hydrocarbon upper layer of the 2nd example, simply filtered, constitutes an excellent fuel for internal combustion engines such as aeroplane or motor vehicle engines."
+      }
+    },
+    {
+      "id": "ex:msyn/us1836085a/claim/hydrocarbons-not-prejudicial",
+      "label": "Claim",
+      "props": {
+        "name": "unsaturated and aromatic hydrocarbons do not harm and seem to further methanol synthesis",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'20' is a line number",
+            "passage": "us1836085a/p1/2",
+            "quote": "cial for the direct catalytic combination of carbon monoxide and hydrogen into meth- anol, but even seems to further the said com- bination.",
+            "source": "ex:msyn/source/us1836085a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "continues 'cial for the direct catalytic combination of carbon monoxide and hydrogen into methanol'",
+            "passage": "us1836085a/p1/2",
+            "quote": "mixed therewith, will not only not be prejudi-",
+            "source": "ex:msyn/source/us1836085a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'armatic' = aromatic",
+            "passage": "us1836085a/p1/1",
+            "quote": "the armatic hydrocarbons which can be found in industrial gas mixtures such as coal distillation gas, or which are purposely",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Nonsaturated or aromatic hydrocarbons present in industrial gas mixtures such as coal distillation gas, or purposely added, are not prejudicial to the direct catalytic combination of carbon monoxide and hydrogen into methanol, and even seem to further it."
+      }
+    },
+    {
+      "id": "ex:msyn/us1836085a/claim/invention",
+      "label": "Claim",
+      "props": {
+        "name": "invention: methanol synthesis from a gas containing unsaturated or aromatic hydrocarbons",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'&' is the line number 55",
+            "passage": "us1836085a/p1/4",
+            "quote": "This invention thus consists in using for synthesizing methyl alcohol by a catalytic & action under pressure upon a mixture of car- bon oxides and hydrogen, a gas mixture con- taining the latter components together with nonsaturated hydrocarbons",
+            "source": "ex:msyn/source/us1836085a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'60' is a line number",
+            "passage": "us1836085a/p1/4",
+            "quote": "(ethylene, acety- len or homologous compounds) or aromatic 60 hydrocarbons (benzene, toluene . . .)",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The invention consists in using, for synthesizing methyl alcohol by catalytic action under pressure on carbon oxides and hydrogen, a gas mixture that also contains nonsaturated hydrocarbons (ethylene, acetylene or homologues) or aromatic hydrocarbons (benzene, toluene), coming from the source of the gas or purposely added."
+      }
+    },
+    {
+      "id": "ex:msyn/us1836085a/claim/liquid-product-use",
+      "label": "Claim",
+      "props": {
+        "name": "the condensed product is slightly hydrated methanol with hydrocarbons in solution",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1836085a/p2/8",
+            "quote": "it consists of slightly hydrated me- thanol having hydrocarbons in solution; it may be employed without further treatment for heating purposes or for carburetion;",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The liquid condensed under pressure consists of slightly hydrated methanol with hydrocarbons in solution; it may be used without further treatment for heating or carburetion, or the hydrocarbons are separated by decantation after adding water and the methanol distilled."
+      }
+    },
+    {
+      "id": "ex:msyn/us1836085a/claim/low-h2-operation",
+      "label": "Claim",
+      "props": {
+        "name": "operation continues until hydrogen is reduced to 4-5%",
+        "claim_kind": "conclusion",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, 1st example",
+            "note": "'1s' = is",
+            "passage": "us1836085a/p2/1",
+            "quote": "the production of metha- nol is scarcely reduced, whilst the partial pressure of hydrogen in the gas mixture sub- jected to catalysis 1s hardly over 34 atm.",
+            "source": "ex:msyn/source/us1836085a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, 1st example",
+            "note": "line numbers '15' and '20' removed",
+            "passage": "us1836085a/p2/1",
+            "quote": "when operating at a total pressure of 800-1000 atm. the operation can be continued with a satisfactory output until the percent- age of hydrogen in the mixture is reduced to 4 or 5 per cent.",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "inference_type": "observational",
+        "statement": "Toward the end of the 1st example the methanol production is scarcely reduced while the hydrogen partial pressure is hardly over 34 atm, so at a total pressure of 800-1000 atm the operation can be continued with satisfactory output until the hydrogen in the mixture is reduced to 4 or 5 per cent."
+      }
+    },
+    {
+      "id": "ex:msyn/us1836085a/claim/methane-consumed",
+      "label": "Claim",
+      "props": {
+        "name": "more than 25% of the methane enters the reaction",
+        "claim_kind": "conclusion",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, 1st example",
+            "passage": "us1836085a/p1/6",
+            "quote": "it will result that more than 25 per cent of the ~ methane enters into the reaction",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "inference_type": "observational",
+        "statement": "From the relative changes of methane and nitrogen (the latter inert) in the 1st example, more than 25 per cent of the methane enters into the reaction to furnish part of the liquid products, so methane can be utilized for liquid carbon compounds."
+      }
+    },
+    {
+      "id": "ex:msyn/us1836085a/claim/methane-recycle",
+      "label": "Claim",
+      "props": {
+        "name": "methane from the residual gas is liquefied, partially burned with oxygen and recycled",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'85' is a line number",
+            "passage": "us1836085a/p2/6",
+            "quote": "The methane is separately collected and is 85 partially burned with practically pure oxy- gen",
+            "source": "ex:msyn/source/us1836085a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'20' is an OCR reading of the line number 90",
+            "passage": "us1836085a/p2/6",
+            "quote": "which produces a mixture contain- 20 ing substantially 3 volumes of hydrogen for 2 volumes of carbon monoxide, this mixture being added to the original gas mixture",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "partial combustion as stated in the copending application Serial No. 84,772",
+        "scope": "the first example",
+        "statement": "After the synthesis the residual gas is expanded to liquefy its methane, which is partially burned with practically pure oxygen to give a mixture of substantially 3 volumes of hydrogen to 2 volumes of carbon monoxide that is added to the original gas mixture; hydrogen separated from the rest is also added."
+      }
+    },
+    {
+      "id": "ex:msyn/us1836085a/claim/no-carbon-deposit",
+      "label": "Claim",
+      "props": {
+        "name": "no carbon deposit after several days on ethylene-rich gas",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "passage": "us1836085a/p2/4",
+            "quote": "Even after a continuous operation for sev- eral days, no carbon deposit is formed upon",
+            "source": "ex:msyn/source/us1836085a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "passage": "us1836085a/p2/4",
+            "quote": "the catalyzer nor in the reaction chamber.",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "inference_type": "observational",
+        "statement": "Even after continuous operation for several days on the ethylene-rich gas of the 2nd example, no carbon deposit forms on the catalyzer or in the reaction chamber."
+      }
+    },
+    {
+      "id": "ex:msyn/us1836085a/claim/patent-claim-1",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 1",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 1",
+            "passage": "us1836085a/p3/1",
+            "quote": "1. In a method for the simultaneous pro- duction of methanol and liquid hydrocar- bons, the step which comprises subjecting a gas mixture containing hydrogen, carbonic",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Claim 1: in a method for the simultaneous production of methanol and liquid hydrocarbons, subjecting a gas mixture containing hydrogen, carbon oxides and unsaturated hydrocarbons to a methanol-forming catalyzer under pressure and temperature known to be suitable for methanol synthesis."
+      }
+    },
+    {
+      "id": "ex:msyn/us1836085a/claim/patent-claim-2",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 2",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 2",
+            "passage": "us1836085a/p3/2",
+            "quote": "the step which comprises subjecting a vas mixture containing hydrogen, carbonic oxides and aromatic hydrocarbons to the ac-",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Claim 2: in a method for the simultaneous production of methanol and liquid hydrocarbons, subjecting a gas mixture containing hydrogen, carbon oxides and aromatic hydrocarbons to a methanol-forming catalyzer under pressure and temperature known to be suitable for methanol synthesis."
+      }
+    },
+    {
+      "id": "ex:msyn/us1836085a/claim/patent-claim-3",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 3",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 3",
+            "passage": "us1836085a/p3/2",
+            "quote": "mixture containing hydrogen, carbonic ox- ides, unsaturated hydrocarbons and aromatic hydrocarbons to the action of a methanol-",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Claim 3: in a method for the simultaneous production of methanol and liquid hydrocarbons, subjecting a gas mixture containing hydrogen, carbon oxides, unsaturated and aromatic hydrocarbons to a methanol-forming catalyzer under pressure and temperature known to be suitable for methanol synthesis."
+      }
+    },
+    {
+      "id": "ex:msyn/us1836085a/claim/patent-claim-4",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 4",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 4",
+            "passage": "us1836085a/p3/3",
+            "quote": "the steps which comprise mixing @ gas mixture containing hydrogen and carbonic oxides with a gas mixture contaiming gase- ous unsaturated hydrocarbons,",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Claim 4: in a method for the simultaneous production of methanol and liquid hydrocarbons, mixing a gas containing hydrogen and carbon oxides with a gas containing gaseous unsaturated hydrocarbons, then subjecting the mixture to a methanol-forming catalyst under suitable pressure and temperature."
+      }
+    },
+    {
+      "id": "ex:msyn/us1836085a/claim/patent-claim-5",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 5",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 5",
+            "passage": "us1836085a/p3/4",
+            "quote": "oxides with an industrial coal distillation gas",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Claim 5: in a method for the simultaneous production of methanol and liquid hydrocarbons, mixing a gas containing hydrogen and carbon oxides with an industrial coal distillation gas still containing its unsaturated and aromatic hydrocarbons, then subjecting the mixture to a methanol-forming catalyst under suitable pressure and temperature."
+      }
+    },
+    {
+      "id": "ex:msyn/us1836085a/claim/patent-claim-6",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 6",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 6",
+            "passage": "us1836085a/p3/4",
+            "quote": "the step which comprises subjecting a mix- ture of water gas and unsaturated hydrocar- bons to the action of a methanol-forming catalyst",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Claim 6: in a method for the simultaneous production of methanol and liquid hydrocarbons, subjecting a mixture of water gas and unsaturated hydrocarbons to a methanol-forming catalyst under suitable pressure and temperature."
+      }
+    },
+    {
+      "id": "ex:msyn/us1836085a/claim/patent-claim-7",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 7",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 7",
+            "passage": "us1836085a/p3/5",
+            "quote": "gas mixture formed of equal parts by vol- ume of water gas and coke oven gas, both gases having their normal industrially com- position,",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Claim 7: in a method for the simultaneous production of methanol and liquid hydrocarbons, subjecting a gas mixture of equal parts by volume of water gas and coke oven gas of normal industrial composition to a methanol-forming catalyst under suitable pressure and temperature."
+      }
+    },
+    {
+      "id": "ex:msyn/us1836085a/claim/patent-claim-8",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 8",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 8",
+            "passage": "us1836085a/p3/6",
+            "quote": "condensing the methane 90 contained in the residual gas, effecting an incomplete combustion of said methane so as to obtain a mixture of carbon monoxide and hydrogen,",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Claim 8: in a method for the simultaneous production of methanol and liquid hydrocarbons, mixing an initial hydrogen/carbon oxides gas with a gas containing unsaturated hydrocarbons, passing it several times over a methanol-forming catalyst, condensing the methane of the residual gas, partially burning it to carbon monoxide and hydrogen, and substituting these and the gas remaining after methane condensation for the initial gas mixture."
+      }
+    },
+    {
+      "id": "ex:msyn/us1836085a/claim/prior-art-remove-hydrocarbons",
+      "label": "Claim",
+      "props": {
+        "name": "prior view: unsaturated and aromatic hydrocarbons had to be removed",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "continues after the line number '10': 'hydrocarbons should be eliminated from the gaseous mixture'",
+            "passage": "us1836085a/p1/1",
+            "quote": "it has been thought heretofore that the non- saturated hydrocarbons and the aromatic",
+            "source": "ex:msyn/source/us1836085a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1836085a/p1/1",
+            "quote": "hydrocarbons should be elim inated from the gaseous mixture to be treated before sub- mitting said mixture to the action of the catalyzer.",
+            "source": "ex:msyn/source/us1836085a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "passage": "us1836085a/p1/1",
+            "quote": "It has been already observed that small amounts of saturated hydrocarbons such as methane may be admitted in the composition of the gaseous mixtures",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "prior view the patent argues against; not a finding of this patent",
+        "statement": "It has been thought heretofore that the nonsaturated and the aromatic hydrocarbons should be eliminated from the gaseous mixture before submitting it to the catalyzer, while small amounts of saturated hydrocarbons such as methane may be admitted."
+      }
+    },
+    {
+      "id": "ex:msyn/us1836085a/claim/same-catalysts",
+      "label": "Claim",
+      "props": {
+        "name": "the best methanol catalysts also polymerize and hydrogenate the hydrocarbons",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "continues 'taining oxygen, are at the same time those by means of which the aromatic hydrocarbons and the nonsaturated hydrocarbons can be polymerized (or condensed) and combined with hydrogen'",
+            "passage": "us1836085a/p1/2",
+            "quote": "This is a most surprising fact that the catalyzers which are the most suitable for the synthetic combination of hydrogen with car- bon monoxide into organic compounds con-",
+            "source": "ex:msyn/source/us1836085a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "quote": "means of which the aromatic hydrocarbons and the nonsaturated hydrocarbons can be polymerized (or condensed) and combined with hydrogen in the most practical manner.",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The catalyzers most suitable for the synthetic combination of hydrogen with carbon monoxide into oxygen-containing organic compounds are at the same time those by which the aromatic and nonsaturated hydrocarbons can be polymerized (or condensed) and combined with hydrogen in the most practical manner."
+      }
+    },
+    {
+      "id": "ex:msyn/us1836085a/claim/simultaneous-output",
+      "label": "Claim",
+      "props": {
+        "name": "simultaneous reactions give output equal or superior to separate operation",
+        "claim_kind": "comparison",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "continues on the next column: 'reactions of one class separately and independently'",
+            "passage": "us1836085a/p1/3",
+            "quote": "since the output of the reactions of each of these two classes taking place simultaneously as above said, is equal, and even superior, to what could be obtained by carrying out the",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The two classes of reactions take place simultaneously and independently without being detrimental to each other; the output of each is equal, and even superior, to what could be obtained by carrying out the reactions of one class separately in the most favorable conditions for each."
+      }
+    },
+    {
+      "id": "ex:msyn/us1836085a/feed/example-1",
+      "label": "Feed",
+      "props": {
+        "name": "Example 1 gas: equal parts Paris city gas and industrial water gas",
+        "description": "equal parts of Paris city gas as commonly used and industrial water gas; the reacted part is periodically replaced by initial gas mixture",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, 1st example",
+            "note": "'65' is a line number; 'obtamed' = obtained",
+            "passage": "us1836085a/p1/5",
+            "quote": "1st example-——By mixing equal parts of 65 Paris city gas as commonly used, and of in- dustrial water gas, there is obtamed a gas mixture having the following composition:",
+            "source": "ex:msyn/source/us1836085a"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 1, 1st example, initial gas composition",
+            "reading": "vision_ocr",
+            "region": [
+              0.41,
+              0.522,
+              0.8,
+              0.57
+            ],
+            "source": "ex:msyn/source/us1836085a",
+            "transcription": "mixture having the following composition: CO₂, 3 per cent; O₂, 0.6 per cent; C₂H₄, 1.4 per cent; CO, 26 per cent; H₂, 54 per cent; CH₄, 8.9 per cent; N₂, 6 per cent."
+          }
+        ],
+        "generality": "particular",
+        "scope": "composition in per cent; basis not stated"
+      }
+    },
+    {
+      "id": "ex:msyn/us1836085a/feed/example-2",
+      "label": "Feed",
+      "props": {
+        "name": "Example 2 gas: water gas with added ethylene and hydrogen",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, 2nd example, gas composition",
+            "reading": "vision_ocr",
+            "region": [
+              0.2,
+              0.378,
+              0.575,
+              0.435
+            ],
+            "source": "ex:msyn/source/us1836085a",
+            "transcription": "ture containing, by volume 23 per cent of ethylene, 22 per cent of carbon monoxide, 49.3 per cent of hydrogen, 1.2 per cent of car- bon dioxide, 0.5 of oxygen and 4 per cent of"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "passage": "us1836085a/p2/2",
+            "quote": "ethylene, 22 per cent of carbon monoxide, 49.3 per cent of hydrogen, 1.2 per cent of car- bon dioxide, 0.5 of oxygen and 4 per cent of nitrogen.",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "generality": "particular",
+        "scope": "composition by volume"
+      }
+    },
+    {
+      "id": "ex:msyn/us1836085a/hypothesis/methane-use-pressure",
+      "label": "Hypothesis",
+      "props": {
+        "name": "methane utilization likely increased at higher total pressure",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, 1st example",
+            "note": "'5' is a line number",
+            "passage": "us1836085a/p2/1",
+            "quote": "so that methane can thus be utilized (and this use could likely be increased by continuing the operation 5 under an increased total pressure)",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "hypothesis_kind": "causal",
+        "hypothesis_status": "proposed",
+        "statement": "The utilization of methane could likely be increased by continuing the operation under an increased total pressure."
+      }
+    },
+    {
+      "id": "ex:msyn/us1836085a/preparation/example-1",
+      "label": "Preparation",
+      "props": {
+        "name": "agglomeration of basic chromate of zinc",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, 1st example",
+            "passage": "us1836085a/p1/5",
+            "quote": "mixture of zinc oxide and chromium oxide obtained by reducing agglomerated basic chromate of zinc, and which is maintained at 300 degrees C.;",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "method": "agglomeration of basic chromate of zinc",
+        "steps": [
+          "agglomerated basic chromate of zinc"
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1836085a/preparation/example-2",
+      "label": "Preparation",
+      "props": {
+        "name": "agglomeration of basic zinc chromate into grains",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "note": "'zine' = zinc",
+            "passage": "us1836085a/p2/2",
+            "quote": "The said mixture is circulated, in a closed circuit, and under a pressure of 150-200 atmospheres, upon a catalytic mass consisting of a basic chromate of zine which is formed into grains by agglomeration",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "method": "basic chromate of zinc formed into grains by agglomeration"
+      }
+    },
+    {
+      "id": "ex:msyn/us1836085a/reaction/unsaturated-hydrocarbon-polymerization-hydrogenation",
+      "label": "Reaction",
+      "props": {
+        "name": "polymerization (condensation) and hydrogenation of nonsaturated hydrocarbons to liquid hydrocarbons",
+        "description": "the nonsaturated hydrocarbons are polymerized (or condensed) while partially combining with hydrogen and transformed into nearly saturated liquid hydrocarbons",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "continues 'drocarbons which are nearly entirely saturated'",
+            "passage": "us1836085a/p1/2",
+            "quote": "the nonsaturated hydrocarbons are polymerized (or con- densed) while partially combining with hy- drogen and are transformed into liquid hy-",
+            "source": "ex:msyn/source/us1836085a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "quote": "means of which the aromatic hydrocarbons and the nonsaturated hydrocarbons can be polymerized (or condensed) and combined with hydrogen in the most practical manner.",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "generality": "kind"
+      }
+    },
+    {
+      "id": "ex:msyn/us1836085a/reactor/closed-circuit",
+      "label": "Reactor",
+      "props": {
+        "name": "closed-circuit reaction chamber with condensation under pressure",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 1, 1st example",
+            "reading": "vision_ocr",
+            "region": [
+              0.41,
+              0.585,
+              0.8,
+              0.62
+            ],
+            "second_reading": "This gas mixture is treated as follows: The said mixture is circulated for eight hours in a closed circuit, and at a pressure of 150–250 atm., upon a catalyzer consisting of a mixture of zinc oxide and chromium oxide",
+            "source": "ex:msyn/source/us1836085a",
+            "transcription": "The said mixture is circulated for eight hours in a closed circuit, and at a pressure of 150–250 atm., upon a catalyzer consisting of a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, 1st example",
+            "passage": "us1836085a/p1/5",
+            "quote": "upon a catalyzer consisting of a 75 mixture of zinc oxide and chromium oxide",
+            "source": "ex:msyn/source/us1836085a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "note": "'zine' = zinc",
+            "passage": "us1836085a/p2/2",
+            "quote": "The said mixture is circulated, in a closed circuit, and under a pressure of 150-200 atmospheres, upon a catalytic mass consisting of a basic chromate of zine which is formed into grains by agglomeration",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "reactor_kind": "circulating"
+      }
+    },
+    {
+      "id": "ex:msyn/us1836085a/sample/example-1",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Example 1 catalyzer charge",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, 1st example",
+            "passage": "us1836085a/p1/5",
+            "quote": "mixture of zinc oxide and chromium oxide obtained by reducing agglomerated basic chromate of zinc, and which is maintained at 300 degrees C.;",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "preparation_status": "prepared",
+        "sample_kind": "batch"
+      }
+    },
+    {
+      "id": "ex:msyn/us1836085a/sample/example-2",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Example 2 catalytic mass (agglomerated grains)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "note": "'zine' = zinc",
+            "passage": "us1836085a/p2/2",
+            "quote": "The said mixture is circulated, in a closed circuit, and under a pressure of 150-200 atmospheres, upon a catalytic mass consisting of a basic chromate of zine which is formed into grains by agglomeration",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "preparation_status": "prepared",
+        "sample_kind": "granules"
+      }
+    },
+    {
+      "id": "ex:msyn/us1836085a/species/aldehydes-higher-alcohols",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "aldehydes or higher alcohols",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "passage": "us1836085a/p2/4",
+            "quote": "which holds in solution only traces of hydrocarbons and very small quantities of aldehydes or higher alcohols",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "generality": "kind",
+        "species_kind": "other"
+      }
+    },
+    {
+      "id": "ex:msyn/us1836085a/species/aromatic-hydrocarbons",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "aromatic hydrocarbons (benzene, toluene ...)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'60' is a line number",
+            "passage": "us1836085a/p1/4",
+            "quote": "(ethylene, acety- len or homologous compounds) or aromatic 60 hydrocarbons (benzene, toluene . . .)",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "generality": "kind",
+        "species_kind": "other"
+      }
+    },
+    {
+      "id": "ex:msyn/us1836085a/species/basic-zinc-chromate",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "basic chromate of zinc",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, 1st example",
+            "passage": "us1836085a/p1/5",
+            "quote": "mixture of zinc oxide and chromium oxide obtained by reducing agglomerated basic chromate of zinc, and which is maintained at 300 degrees C.;",
+            "source": "ex:msyn/source/us1836085a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "note": "'zine' = zinc",
+            "passage": "us1836085a/p2/2",
+            "quote": "The said mixture is circulated, in a closed circuit, and under a pressure of 150-200 atmospheres, upon a catalytic mass consisting of a basic chromate of zine which is formed into grains by agglomeration",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "note": "composition not stated"
+      }
+    },
+    {
+      "id": "ex:msyn/us1836085a/species/chromium-oxide",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "chromium oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, 1st example",
+            "passage": "us1836085a/p1/5",
+            "quote": "mixture of zinc oxide and chromium oxide obtained by reducing agglomerated basic chromate of zinc, and which is maintained at 300 degrees C.;",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "note": "oxidation state not stated"
+      }
+    },
+    {
+      "id": "ex:msyn/us1836085a/species/liquid-hydrocarbons",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "liquid hydrocarbons (nearly entirely saturated)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "continues 'drocarbons which are nearly entirely saturated'",
+            "passage": "us1836085a/p1/2",
+            "quote": "the nonsaturated hydrocarbons are polymerized (or con- densed) while partially combining with hy- drogen and are transformed into liquid hy-",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "generality": "kind",
+        "species_kind": "other"
+      }
+    },
+    {
+      "id": "ex:msyn/us1836085a/species/nonsaturated-hydrocarbons",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "nonsaturated hydrocarbons (ethylene, acetylene or homologous compounds)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'60' is a line number",
+            "passage": "us1836085a/p1/4",
+            "quote": "(ethylene, acety- len or homologous compounds) or aromatic 60 hydrocarbons (benzene, toluene . . .)",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "generality": "kind",
+        "species_kind": "other"
+      }
+    },
+    {
+      "id": "ex:msyn/us1836085a/test/example-1",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "1st example: city gas + water gas over reduced basic zinc chromate, 300 °C, closed circuit 8 h",
+        "conditions": {
+          "operation": {
+            "status": "present",
+            "text_value": "closed circuit; reacted gas periodically replaced by initial gas; liquid condensed while maintaining the pressure"
+          }
+        },
+        "description": "the condensate is a homogeneous liquid that separates on dilution with water into a hydrocarbon upper layer and practically pure methanol diluted with water",
+        "driving_forces": [
+          "thermo"
+        ],
+        "duration": {
+          "status": "present",
+          "as_reported": "eight hours",
+          "unit": "h",
+          "value": 8
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 1, 1st example",
+            "reading": "vision_ocr",
+            "region": [
+              0.41,
+              0.585,
+              0.8,
+              0.62
+            ],
+            "second_reading": "This gas mixture is treated as follows: The said mixture is circulated for eight hours in a closed circuit, and at a pressure of 150–250 atm., upon a catalyzer consisting of a mixture of zinc oxide and chromium oxide",
+            "source": "ex:msyn/source/us1836085a",
+            "transcription": "The said mixture is circulated for eight hours in a closed circuit, and at a pressure of 150–250 atm., upon a catalyzer consisting of a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, 1st example",
+            "passage": "us1836085a/p1/5",
+            "quote": "upon a catalyzer consisting of a 75 mixture of zinc oxide and chromium oxide",
+            "source": "ex:msyn/source/us1836085a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, 1st example",
+            "passage": "us1836085a/p1/5",
+            "quote": "mixture of zinc oxide and chromium oxide obtained by reducing agglomerated basic chromate of zinc, and which is maintained at 300 degrees C.;",
+            "source": "ex:msyn/source/us1836085a"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 1, 1st example",
+            "reading": "vision_ocr",
+            "region": [
+              0.41,
+              0.757,
+              0.8,
+              0.785
+            ],
+            "source": "ex:msyn/source/us1836085a",
+            "transcription": "consisting of hydrocarbons, represents some 2.5 per cent of the total amount; the lower"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, 1st example",
+            "passage": "us1836085a/p1/6",
+            "quote": "the lower layer consists of methanol in the prac- tically pure state, diluted with water.",
+            "source": "ex:msyn/source/us1836085a"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 1, 1st example, final gas composition",
+            "reading": "vision_ocr",
+            "region": [
+              0.41,
+              0.822,
+              0.8,
+              0.87
+            ],
+            "source": "ex:msyn/source/us1836085a",
+            "transcription": "the circulated gas is as follows: CO₂, 1.2 per cent; O₂, 0 per cent; C₂H₄, 2.2 per cent; CO, 27.2 per cent; H₂, 16.7 per cent; CH₄, 27.3 per cent; N₂, 25.4 per cent."
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, 1st example",
+            "passage": "us1836085a/p2/1",
+            "quote": "whilst the partial pressure of hydrogen in the gas mixture sub- jected to catalysis 1s hardly over 34 atm.",
+            "source": "ex:msyn/source/us1836085a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, 1st example",
+            "passage": "us1836085a/p1/6",
+            "quote": "will result that more than 25 per cent of the ~ methane enters into the reaction",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "pressure": {
+          "status": "present",
+          "as_reported": "150–250 atm.",
+          "lower": 150,
+          "note": "corrected 2026-09-29 from 150-950: the page image prints 150–250 (OCR text '150- 950')",
+          "unit": "atm",
+          "upper": 250
+        },
+        "results": {
+          "final_gas_c2_hydrocarbon": {
+            "status": "present",
+            "as_reported": "C₂H₄, 2.2 per cent",
+            "note": "the page image prints C₂H₄ (ethylene); OCR text 'C2Hy'",
+            "unit": "%",
+            "value": 2.2
+          },
+          "final_gas_ch4": {
+            "status": "present",
+            "as_reported": "CH,, 27.3 per cent",
+            "unit": "%",
+            "value": 27.3
+          },
+          "final_gas_co": {
+            "status": "present",
+            "as_reported": "CO, 27.2 per cent",
+            "unit": "%",
+            "value": 27.2
+          },
+          "final_gas_co2": {
+            "status": "present",
+            "as_reported": "CO., 1.2 per cent",
+            "unit": "%",
+            "value": 1.2
+          },
+          "final_gas_h2": {
+            "status": "present",
+            "as_reported": "Hz, 16.7 per cent",
+            "unit": "%",
+            "value": 16.7
+          },
+          "final_gas_n2": {
+            "status": "present",
+            "as_reported": "N., 25.4 per cent",
+            "unit": "%",
+            "value": 25.4
+          },
+          "final_gas_o2": {
+            "status": "present",
+            "as_reported": "Oz, 0 per cent",
+            "unit": "%",
+            "value": 0
+          },
+          "h2_partial_pressure_last_hour": {
+            "status": "present",
+            "as_reported": "hardly over 34 atm",
+            "bound": "upper",
+            "note": "during the last hour of operation, while methanol production is scarcely reduced",
+            "unit": "atm",
+            "value": 34
+          },
+          "hydrocarbon_layer_fraction_of_liquid": {
+            "status": "present",
+            "as_reported": "some 2.5 per cent of the total amount",
+            "note": "upper layer of the condensate after dilution with water; corrected 2026-09-29 from 9.5: the page image prints 2.5 (OCR text '9.5')",
+            "qualifier": "approximate",
+            "unit": "%",
+            "value": 2.5
+          },
+          "methane_reacted": {
+            "status": "present",
+            "as_reported": "more than 25 per cent of the ~ methane enters into the reaction",
+            "bound": "lower",
+            "note": "deduced by the patentee from the methane and nitrogen changes",
+            "unit": "%",
+            "value": 25
+          }
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "300 degrees C.",
+          "unit": "°C",
+          "value": 300
+        },
+        "temperature_measured_at": "not_reported",
+        "test_kind": "activity",
+        "test_label": "1st example"
+      }
+    },
+    {
+      "id": "ex:msyn/us1836085a/test/example-2",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "2nd example: ethylene-enriched water gas over reduced basic zinc chromate, about 300 °C, 150-200 atm",
+        "description": "liquid separates into an upper layer solely of hydrocarbons (fluorescent, a motor fuel when filtered) and a lower layer of practically pure methyl alcohol with traces of hydrocarbons and very small quantities of aldehydes or higher alcohols; gas composition in ethylene, hydrogen and CO does not change appreciably with make-up; very small quantities of saturated gaseous hydrocarbons, chiefly ethane",
+        "driving_forces": [
+          "thermo"
+        ],
+        "duration": {
+          "status": "present",
+          "as_reported": "continuous operation for sev- eral days",
+          "text_value": "several days",
+          "unit": "d"
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "note": "'zine' = zinc",
+            "passage": "us1836085a/p2/2",
+            "quote": "The said mixture is circulated, in a closed circuit, and under a pressure of 150-200 atmospheres, upon a catalytic mass consisting of a basic chromate of zine which is formed into grains by agglomeration",
+            "source": "ex:msyn/source/us1836085a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "passage": "us1836085a/p2/2",
+            "quote": "The temperature of the reaction chamber is main- tained at about 300 degrees C.",
+            "source": "ex:msyn/source/us1836085a"
+          },
+          {
+            "kind": "text",
+            "agreement": "no_ocr",
+            "locator": "p. 2, 2nd example",
+            "reading": "vision_ocr",
+            "region": [
+              0.2,
+              0.59,
+              0.58,
+              0.615
+            ],
+            "second_reading": "The upper layer—which represents about ¼ of the total amount of the liquid—consists solely of a mixture of hydrocarbons showing",
+            "source": "ex:msyn/source/us1836085a",
+            "transcription": "The upper layer—which represents about ¼"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "passage": "us1836085a/p2/3",
+            "quote": "of the total amount of the liquid—consists solely of a mixture of hydrocarbons",
+            "source": "ex:msyn/source/us1836085a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "passage": "us1836085a/p2/3",
+            "quote": "The lower layer, whose specific gravity is 0.805 at 15 degrees C., is almost entirely dis- tilled over between 66 and 68 degrees C. and consists of methyl alcohol in a practically pure state,",
+            "source": "ex:msyn/source/us1836085a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "passage": "us1836085a/p2/4",
+            "quote": "Even after a continuous operation for sev- eral days, no carbon deposit is formed upon",
+            "source": "ex:msyn/source/us1836085a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "passage": "us1836085a/p2/3",
+            "quote": "its specific gravity is 0.735 at 15 degrees C.",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "pressure": {
+          "status": "present",
+          "as_reported": "150-200 atmospheres",
+          "lower": 150,
+          "unit": "atm",
+          "upper": 200
+        },
+        "results": {
+          "carbon_deposit": {
+            "status": "present",
+            "as_reported": "no carbon deposit is formed upon the catalyzer nor in the reaction chamber",
+            "boolean_value": false
+          },
+          "hydrocarbon_layer_fraction_of_liquid": {
+            "status": "present",
+            "as_reported": "about ¼ of the total amount of the liquid",
+            "note": "added 2026-09-29: the page image prints the fraction ¼ (OCR text '14'); upper hydrocarbon layer of the condensed liquid",
+            "qualifier": "approximate",
+            "unit": "1",
+            "value": 0.25
+          },
+          "hydrocarbon_layer_specific_gravity": {
+            "status": "present",
+            "as_reported": "0.735 at 15 degrees C.",
+            "note": "at 15 °C",
+            "unit": "1",
+            "value": 0.735
+          },
+          "methanol_layer_distillation_range": {
+            "status": "present",
+            "as_reported": "between 66 and 68 degrees C.",
+            "lower": 66,
+            "note": "almost entirely distilled over",
+            "qualifier": "approximate",
+            "unit": "°C",
+            "upper": 68
+          },
+          "methanol_layer_specific_gravity": {
+            "status": "present",
+            "as_reported": "0.805 at 15 degrees C.",
+            "note": "at 15 °C",
+            "unit": "1",
+            "value": 0.805
+          }
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "about 300 degrees C.",
+          "note": "temperature of the reaction chamber",
+          "qualifier": "approximate",
+          "unit": "°C",
+          "value": 300
+        },
+        "temperature_measured_at": "not_reported",
+        "test_kind": "activity",
+        "test_label": "2nd example"
+      }
+    },
+    {
+      "id": "ex:msyn/us1836085a/treatment/example-1-reduction",
+      "label": "Treatment",
+      "props": {
+        "name": "reduction of agglomerated basic zinc chromate",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, 1st example",
+            "passage": "us1836085a/p1/5",
+            "quote": "mixture of zinc oxide and chromium oxide obtained by reducing agglomerated basic chromate of zinc, and which is maintained at 300 degrees C.;",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "note": "reducing agent, temperature and place not stated in the 1st example",
+        "treatment_kind": "reduction"
+      }
+    },
+    {
+      "id": "ex:msyn/us1836085a/treatment/example-2-reduction",
+      "label": "Treatment",
+      "props": {
+        "name": "preliminary reduction in the reaction chamber",
+        "atmosphere": "a current of pure hydrogen or the gas mixture to be treated",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "passage": "us1836085a/p2/2",
+            "quote": "is preliminarily reduced in the reaction cham- ber itself by a current of pure hydrogen or by the gas mixture which is to be treated.",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "treatment_kind": "reduction"
+      }
+    },
+    {
+      "id": "ex:msyn/us1836085a/unit/hydrogen-separation",
+      "label": "ProcessUnit",
+      "props": {
+        "name": "separation of hydrogen from the non-liquefied residual gas (hydrogen, nitrogen, carbon monoxide)",
+        "design_status": "not_reported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'100' is a line number",
+            "passage": "us1836085a/p2/7",
+            "quote": "As to the part of the residual gas mixture which has not been liquefied, and which con- sists almost exclusively of hydrogen, nitro- gen and carbon monoxide, the hydrogen can be separated therefrom by means known per 100 se,",
+            "source": "ex:msyn/source/us1836085a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1836085a/p2/7",
+            "quote": "and this hydrogen is also added to the gas mixture concerned in the reaction.",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "note": "the patent describes this step as the continuation of the first example, 'by any known process' or 'by means known per se', without a design and without saying it was carried out",
+        "unit_kind": "separator"
+      }
+    },
+    {
+      "id": "ex:msyn/us1836085a/unit/methane-liquefaction",
+      "label": "ProcessUnit",
+      "props": {
+        "name": "liquefaction of the methane of the residual gas by expansion with production of cold",
+        "design_status": "not_reported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'©' is OCR noise",
+            "passage": "us1836085a/p2/5",
+            "quote": "The residual gas is now allowed to expand, with production of cold, by any © known process, so as to liquefy the methane contained in the residual gas, whilst the other components of this gas remain in the gaseous State.",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "note": "the patent describes this step as the continuation of the first example, 'by any known process' or 'by means known per se', without a design and without saying it was carried out",
+        "unit_kind": "separator"
+      }
+    },
+    {
+      "id": "ex:msyn/us1836085a/unit/methane-partial-combustion",
+      "label": "ProcessUnit",
+      "props": {
+        "name": "partial combustion of the separated methane with practically pure oxygen",
+        "design_status": "not_reported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'85' is a line number",
+            "passage": "us1836085a/p2/6",
+            "quote": "The methane is separately collected and is 85 partially burned with practically pure oxy- gen",
+            "source": "ex:msyn/source/us1836085a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'20' is an OCR reading of the line number 90",
+            "passage": "us1836085a/p2/6",
+            "quote": "which produces a mixture contain- 20 ing substantially 3 volumes of hydrogen for 2 volumes of carbon monoxide, this mixture being added to the original gas mixture in",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "note": "the patent describes this step as the continuation of the first example, 'by any known process' or 'by means known per se', without a design and without saying it was carried out; the partial combustion is as stated in the copending application Serial No. 84,772",
+        "specifications": {
+          "product_composition": {
+            "status": "present",
+            "as_reported": "substantially 3 volumes of hydrogen for 2 volumes of carbon monoxide",
+            "basis": "volumes in the product mixture",
+            "qualifier": "approximate",
+            "text_value": "3 volumes of hydrogen for 2 volumes of carbon monoxide"
+          }
+        },
+        "unit_kind": "other"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/reaction/co-hydrogenation-to-methanol/reported-in/us1836085a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/source/us1836085a"
+    },
+    {
+      "id": "ex:msyn/source/us1836085a/assignee",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "role": "assignee"
+      },
+      "source": "ex:msyn/source/us1836085a",
+      "target": "ex:msyn/institution/patart-georges"
+    },
+    {
+      "id": "ex:msyn/us1836085a/catalyst/example-1/reported-in/us1836085a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, 1st example"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1836085a/catalyst/example-1",
+      "target": "ex:msyn/source/us1836085a"
+    },
+    {
+      "id": "ex:msyn/us1836085a/catalyst/example-2/reported-in/us1836085a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, 2nd example"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1836085a/catalyst/example-2",
+      "target": "ex:msyn/source/us1836085a"
+    },
+    {
+      "id": "ex:msyn/us1836085a/catalyst/methanol-forming-catalyzer/reported-in/us1836085a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1836085a/catalyst/methanol-forming-catalyzer",
+      "target": "ex:msyn/source/us1836085a"
+    },
+    {
+      "id": "ex:msyn/us1836085a/claim/coal-gas-use/reported-in/us1836085a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1836085a/claim/coal-gas-use",
+      "target": "ex:msyn/source/us1836085a"
+    },
+    {
+      "id": "ex:msyn/us1836085a/claim/hydrocarbon-fuel/reported-in/us1836085a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, 2nd example"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1836085a/claim/hydrocarbon-fuel",
+      "target": "ex:msyn/source/us1836085a"
+    },
+    {
+      "id": "ex:msyn/us1836085a/claim/hydrocarbons-not-prejudicial/reported-in/us1836085a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1836085a/claim/hydrocarbons-not-prejudicial",
+      "target": "ex:msyn/source/us1836085a"
+    },
+    {
+      "id": "ex:msyn/us1836085a/claim/invention/reported-in/us1836085a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1836085a/claim/invention",
+      "target": "ex:msyn/source/us1836085a"
+    },
+    {
+      "id": "ex:msyn/us1836085a/claim/liquid-product-use/reported-in/us1836085a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1836085a/claim/liquid-product-use",
+      "target": "ex:msyn/source/us1836085a"
+    },
+    {
+      "id": "ex:msyn/us1836085a/claim/low-h2-operation/reported-in/us1836085a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, 1st example"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1836085a/claim/low-h2-operation",
+      "target": "ex:msyn/source/us1836085a"
+    },
+    {
+      "id": "ex:msyn/us1836085a/claim/methane-consumed/reported-in/us1836085a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, 1st example"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1836085a/claim/methane-consumed",
+      "target": "ex:msyn/source/us1836085a"
+    },
+    {
+      "id": "ex:msyn/us1836085a/claim/methane-recycle/reported-in/us1836085a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1836085a/claim/methane-recycle",
+      "target": "ex:msyn/source/us1836085a"
+    },
+    {
+      "id": "ex:msyn/us1836085a/claim/no-carbon-deposit/reported-in/us1836085a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, 2nd example"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1836085a/claim/no-carbon-deposit",
+      "target": "ex:msyn/source/us1836085a"
+    },
+    {
+      "id": "ex:msyn/us1836085a/claim/patent-claim-1/reported-in/us1836085a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1836085a/claim/patent-claim-1",
+      "target": "ex:msyn/source/us1836085a"
+    },
+    {
+      "id": "ex:msyn/us1836085a/claim/patent-claim-2/reported-in/us1836085a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1836085a/claim/patent-claim-2",
+      "target": "ex:msyn/source/us1836085a"
+    },
+    {
+      "id": "ex:msyn/us1836085a/claim/patent-claim-3/reported-in/us1836085a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1836085a/claim/patent-claim-3",
+      "target": "ex:msyn/source/us1836085a"
+    },
+    {
+      "id": "ex:msyn/us1836085a/claim/patent-claim-4/reported-in/us1836085a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1836085a/claim/patent-claim-4",
+      "target": "ex:msyn/source/us1836085a"
+    },
+    {
+      "id": "ex:msyn/us1836085a/claim/patent-claim-5/reported-in/us1836085a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1836085a/claim/patent-claim-5",
+      "target": "ex:msyn/source/us1836085a"
+    },
+    {
+      "id": "ex:msyn/us1836085a/claim/patent-claim-6/reported-in/us1836085a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1836085a/claim/patent-claim-6",
+      "target": "ex:msyn/source/us1836085a"
+    },
+    {
+      "id": "ex:msyn/us1836085a/claim/patent-claim-7/reported-in/us1836085a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1836085a/claim/patent-claim-7",
+      "target": "ex:msyn/source/us1836085a"
+    },
+    {
+      "id": "ex:msyn/us1836085a/claim/patent-claim-8/reported-in/us1836085a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, claim 8"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1836085a/claim/patent-claim-8",
+      "target": "ex:msyn/source/us1836085a"
+    },
+    {
+      "id": "ex:msyn/us1836085a/claim/prior-art-remove-hydrocarbons/reported-in/us1836085a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1836085a/claim/prior-art-remove-hydrocarbons",
+      "target": "ex:msyn/source/us1836085a"
+    },
+    {
+      "id": "ex:msyn/us1836085a/claim/same-catalysts/reported-in/us1836085a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1836085a/claim/same-catalysts",
+      "target": "ex:msyn/source/us1836085a"
+    },
+    {
+      "id": "ex:msyn/us1836085a/claim/simultaneous-output/reported-in/us1836085a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1836085a/claim/simultaneous-output",
+      "target": "ex:msyn/source/us1836085a"
+    },
+    {
+      "id": "ex:msyn/us1836085a/feed/example-1/reported-in/us1836085a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, 1st example",
+          "p. 1, 1st example, initial gas composition"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1836085a/feed/example-1",
+      "target": "ex:msyn/source/us1836085a"
+    },
+    {
+      "id": "ex:msyn/us1836085a/feed/example-2/reported-in/us1836085a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, 2nd example",
+          "p. 2, 2nd example, gas composition"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1836085a/feed/example-2",
+      "target": "ex:msyn/source/us1836085a"
+    },
+    {
+      "id": "ex:msyn/us1836085a/hypothesis/methane-use-pressure/reported-in/us1836085a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, 1st example"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1836085a/hypothesis/methane-use-pressure",
+      "target": "ex:msyn/source/us1836085a"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/1",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "continues 'taining oxygen, are at the same time those by means of which the aromatic hydrocarbons and the nonsaturated hydrocarbons can be polymerized (or condensed) and combined with hydrogen'",
+            "passage": "us1836085a/p1/2",
+            "quote": "This is a most surprising fact that the catalyzers which are the most suitable for the synthetic combination of hydrogen with car- bon monoxide into organic compounds con-",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/catalyst/methanol-forming-catalyzer",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/10",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'20' is a line number",
+            "passage": "us1836085a/p1/2",
+            "quote": "cial for the direct catalytic combination of carbon monoxide and hydrogen into meth- anol, but even seems to further the said com- bination.",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/hydrocarbons-not-prejudicial",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/100",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "note": "'zine' = zinc",
+            "passage": "us1836085a/p2/2",
+            "quote": "The said mixture is circulated, in a closed circuit, and under a pressure of 150-200 atmospheres, upon a catalytic mass consisting of a basic chromate of zine which is formed into grains by agglomeration",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/test/example-2",
+      "target": "ex:msyn/us1836085a/feed/example-2"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/101",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "passage": "us1836085a/p2/3",
+            "quote": "The lower layer, whose specific gravity is 0.805 at 15 degrees C., is almost entirely dis- tilled over between 66 and 68 degrees C. and consists of methyl alcohol in a practically pure state,",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/test/example-2",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/102",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "no_ocr",
+            "locator": "p. 2, 2nd example",
+            "reading": "vision_ocr",
+            "region": [
+              0.2,
+              0.59,
+              0.58,
+              0.615
+            ],
+            "second_reading": "The upper layer—which represents about ¼ of the total amount of the liquid—consists solely of a mixture of hydrocarbons showing",
+            "source": "ex:msyn/source/us1836085a",
+            "transcription": "The upper layer—which represents about ¼"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "passage": "us1836085a/p2/3",
+            "quote": "of the total amount of the liquid—consists solely of a mixture of hydrocarbons",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/test/example-2",
+      "target": "ex:msyn/us1836085a/reaction/unsaturated-hydrocarbon-polymerization-hydrogenation"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/103",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "note": "'zine' = zinc",
+            "passage": "us1836085a/p2/2",
+            "quote": "The said mixture is circulated, in a closed circuit, and under a pressure of 150-200 atmospheres, upon a catalytic mass consisting of a basic chromate of zine which is formed into grains by agglomeration",
+            "source": "ex:msyn/source/us1836085a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "passage": "us1836085a/p2/2",
+            "quote": "is preliminarily reduced in the reaction cham- ber itself by a current of pure hydrogen or by the gas mixture which is to be treated.",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/test/example-2",
+      "target": "ex:msyn/us1836085a/reactor/closed-circuit"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/104",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "context": [
+          "ex:msyn/us1836085a/test/example-2"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "passage": "us1836085a/p2/3",
+            "quote": "The lower layer, whose specific gravity is 0.805 at 15 degrees C., is almost entirely dis- tilled over between 66 and 68 degrees C. and consists of methyl alcohol in a practically pure state,",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/catalyst/example-2",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/105",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "context": [
+          "ex:msyn/us1836085a/test/example-2"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "no_ocr",
+            "locator": "p. 2, 2nd example",
+            "reading": "vision_ocr",
+            "region": [
+              0.2,
+              0.59,
+              0.58,
+              0.615
+            ],
+            "second_reading": "The upper layer—which represents about ¼ of the total amount of the liquid—consists solely of a mixture of hydrocarbons showing",
+            "source": "ex:msyn/source/us1836085a",
+            "transcription": "The upper layer—which represents about ¼"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "passage": "us1836085a/p2/3",
+            "quote": "of the total amount of the liquid—consists solely of a mixture of hydrocarbons",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/catalyst/example-2",
+      "target": "ex:msyn/us1836085a/reaction/unsaturated-hydrocarbon-polymerization-hydrogenation"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/106",
+      "type": "PRODUCES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "passage": "us1836085a/p2/5",
+            "quote": "Only very small quantities of saturated gas- eous hydrocarbons will be produced, these consisting chiefly of ethane,",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/catalyst/example-2",
+      "target": "ex:msyn/species/c2h6"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/107",
+      "type": "PRODUCES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "passage": "us1836085a/p2/4",
+            "quote": "which holds in solution only traces of hydrocarbons and very small quantities of aldehydes or higher alcohols",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/catalyst/example-2",
+      "target": "ex:msyn/us1836085a/species/aldehydes-higher-alcohols"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/108",
+      "type": "PRODUCES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "no_ocr",
+            "locator": "p. 2, 2nd example",
+            "reading": "vision_ocr",
+            "region": [
+              0.2,
+              0.59,
+              0.58,
+              0.615
+            ],
+            "second_reading": "The upper layer—which represents about ¼ of the total amount of the liquid—consists solely of a mixture of hydrocarbons showing",
+            "source": "ex:msyn/source/us1836085a",
+            "transcription": "The upper layer—which represents about ¼"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "passage": "us1836085a/p2/3",
+            "quote": "of the total amount of the liquid—consists solely of a mixture of hydrocarbons",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/catalyst/example-2",
+      "target": "ex:msyn/us1836085a/species/liquid-hydrocarbons"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/109",
+      "type": "PRODUCES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "passage": "us1836085a/p2/3",
+            "quote": "The lower layer, whose specific gravity is 0.805 at 15 degrees C., is almost entirely dis- tilled over between 66 and 68 degrees C. and consists of methyl alcohol in a practically pure state,",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/catalyst/example-2",
+      "target": "ex:msyn/species/ch3oh"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/110",
+      "type": "PRODUCES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 1, 1st example",
+            "reading": "vision_ocr",
+            "region": [
+              0.41,
+              0.757,
+              0.8,
+              0.785
+            ],
+            "source": "ex:msyn/source/us1836085a",
+            "transcription": "consisting of hydrocarbons, represents some 2.5 per cent of the total amount; the lower"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, 1st example",
+            "passage": "us1836085a/p1/6",
+            "quote": "the lower layer consists of methanol in the prac- tically pure state, diluted with water.",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/catalyst/example-1",
+      "target": "ex:msyn/species/ch3oh"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/111",
+      "type": "PRODUCES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 1, 1st example",
+            "reading": "vision_ocr",
+            "region": [
+              0.41,
+              0.757,
+              0.8,
+              0.785
+            ],
+            "source": "ex:msyn/source/us1836085a",
+            "transcription": "consisting of hydrocarbons, represents some 2.5 per cent of the total amount; the lower"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, 1st example",
+            "passage": "us1836085a/p1/6",
+            "quote": "the lower layer consists of methanol in the prac- tically pure state, diluted with water.",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/catalyst/example-1",
+      "target": "ex:msyn/us1836085a/species/liquid-hydrocarbons"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/112",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "passage": "us1836085a/p2/4",
+            "quote": "Even after a continuous operation for sev- eral days, no carbon deposit is formed upon",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/no-carbon-deposit",
+      "target": "ex:msyn/us1836085a/catalyst/example-2"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/113",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "passage": "us1836085a/p2/4",
+            "quote": "Even after a continuous operation for sev- eral days, no carbon deposit is formed upon",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/no-carbon-deposit",
+      "target": "ex:msyn/species/carbon"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/114",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "passage": "us1836085a/p2/4",
+            "quote": "Even after a continuous operation for sev- eral days, no carbon deposit is formed upon",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/no-carbon-deposit",
+      "target": "ex:msyn/us1836085a/test/example-2"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/115",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "passage": "us1836085a/p2/4",
+            "quote": "Even after a continuous operation for sev- eral days, no carbon deposit is formed upon",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/test/example-2",
+      "target": "ex:msyn/us1836085a/claim/no-carbon-deposit"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/116",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "passage": "us1836085a/p2/3",
+            "quote": "This product when simply filtered, constitutes an excellent fuel for internal combustion engines",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/hydrocarbon-fuel",
+      "target": "ex:msyn/us1836085a/species/liquid-hydrocarbons"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/117",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "passage": "us1836085a/p2/3",
+            "quote": "This product when simply filtered, constitutes an excellent fuel for internal combustion engines",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/hydrocarbon-fuel",
+      "target": "ex:msyn/us1836085a/test/example-2"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/118",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "passage": "us1836085a/p2/3",
+            "quote": "The lower layer, whose specific gravity is 0.805 at 15 degrees C., is almost entirely dis- tilled over between 66 and 68 degrees C. and consists of methyl alcohol in a practically pure state,",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "note": "methanol formed practically pure from a gas containing ethylene"
+      },
+      "source": "ex:msyn/us1836085a/test/example-2",
+      "target": "ex:msyn/us1836085a/claim/hydrocarbons-not-prejudicial"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/119",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 1, 1st example",
+            "reading": "vision_ocr",
+            "region": [
+              0.41,
+              0.757,
+              0.8,
+              0.785
+            ],
+            "source": "ex:msyn/source/us1836085a",
+            "transcription": "consisting of hydrocarbons, represents some 2.5 per cent of the total amount; the lower"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, 1st example",
+            "passage": "us1836085a/p1/6",
+            "quote": "the lower layer consists of methanol in the prac- tically pure state, diluted with water.",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/test/example-1",
+      "target": "ex:msyn/us1836085a/claim/hydrocarbons-not-prejudicial"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/15",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "continues 'taining oxygen, are at the same time those by means of which the aromatic hydrocarbons and the nonsaturated hydrocarbons can be polymerized (or condensed) and combined with hydrogen'",
+            "passage": "us1836085a/p1/2",
+            "quote": "This is a most surprising fact that the catalyzers which are the most suitable for the synthetic combination of hydrogen with car- bon monoxide into organic compounds con-",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/same-catalysts",
+      "target": "ex:msyn/us1836085a/catalyst/methanol-forming-catalyzer"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/16",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "continues 'taining oxygen, are at the same time those by means of which the aromatic hydrocarbons and the nonsaturated hydrocarbons can be polymerized (or condensed) and combined with hydrogen'",
+            "passage": "us1836085a/p1/2",
+            "quote": "This is a most surprising fact that the catalyzers which are the most suitable for the synthetic combination of hydrogen with car- bon monoxide into organic compounds con-",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/same-catalysts",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/17",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "continues 'taining oxygen, are at the same time those by means of which the aromatic hydrocarbons and the nonsaturated hydrocarbons can be polymerized (or condensed) and combined with hydrogen'",
+            "passage": "us1836085a/p1/2",
+            "quote": "This is a most surprising fact that the catalyzers which are the most suitable for the synthetic combination of hydrogen with car- bon monoxide into organic compounds con-",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/same-catalysts",
+      "target": "ex:msyn/us1836085a/reaction/unsaturated-hydrocarbon-polymerization-hydrogenation"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/18",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "continues on the next column: 'reactions of one class separately and independently'",
+            "passage": "us1836085a/p1/3",
+            "quote": "since the output of the reactions of each of these two classes taking place simultaneously as above said, is equal, and even superior, to what could be obtained by carrying out the",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/simultaneous-output",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/19",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "continues on the next column: 'reactions of one class separately and independently'",
+            "passage": "us1836085a/p1/3",
+            "quote": "since the output of the reactions of each of these two classes taking place simultaneously as above said, is equal, and even superior, to what could be obtained by carrying out the",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/simultaneous-output",
+      "target": "ex:msyn/us1836085a/reaction/unsaturated-hydrocarbon-polymerization-hydrogenation"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/2",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "quote": "means of which the aromatic hydrocarbons and the nonsaturated hydrocarbons can be polymerized (or condensed) and combined with hydrogen in the most practical manner.",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/catalyst/methanol-forming-catalyzer",
+      "target": "ex:msyn/us1836085a/reaction/unsaturated-hydrocarbon-polymerization-hydrogenation"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/20",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'&' is the line number 55",
+            "passage": "us1836085a/p1/4",
+            "quote": "This invention thus consists in using for synthesizing methyl alcohol by a catalytic & action under pressure upon a mixture of car- bon oxides and hydrogen, a gas mixture con- taining the latter components together with nonsaturated hydrocarbons",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/invention",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/21",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'&' is the line number 55",
+            "passage": "us1836085a/p1/4",
+            "quote": "This invention thus consists in using for synthesizing methyl alcohol by a catalytic & action under pressure upon a mixture of car- bon oxides and hydrogen, a gas mixture con- taining the latter components together with nonsaturated hydrocarbons",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/invention",
+      "target": "ex:msyn/us1836085a/species/nonsaturated-hydrocarbons"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/22",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'&' is the line number 55",
+            "passage": "us1836085a/p1/4",
+            "quote": "This invention thus consists in using for synthesizing methyl alcohol by a catalytic & action under pressure upon a mixture of car- bon oxides and hydrogen, a gas mixture con- taining the latter components together with nonsaturated hydrocarbons",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/invention",
+      "target": "ex:msyn/us1836085a/species/aromatic-hydrocarbons"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/23",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'85' is a line number",
+            "passage": "us1836085a/p2/6",
+            "quote": "The methane is separately collected and is 85 partially burned with practically pure oxy- gen",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/methane-recycle",
+      "target": "ex:msyn/species/ch4"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/24",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'120' is a line number",
+            "passage": "us1836085a/p2/8",
+            "quote": "The invention thus permits of directly 120 using coal distillation gas, after only tars and ammonia have been eliminated there- from, as an additional source of the hydro- gen to be added to water gas,",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/coal-gas-use",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/25",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1836085a/p2/8",
+            "quote": "it consists of slightly hydrated me- thanol having hydrocarbons in solution; it may be employed without further treatment for heating purposes or for carburetion;",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/liquid-product-use",
+      "target": "ex:msyn/species/ch3oh"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/26",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1836085a/p2/8",
+            "quote": "it consists of slightly hydrated me- thanol having hydrocarbons in solution; it may be employed without further treatment for heating purposes or for carburetion;",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/liquid-product-use",
+      "target": "ex:msyn/us1836085a/species/liquid-hydrocarbons"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/27",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 1",
+            "passage": "us1836085a/p3/1",
+            "quote": "1. In a method for the simultaneous pro- duction of methanol and liquid hydrocar- bons, the step which comprises subjecting a gas mixture containing hydrogen, carbonic",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/patent-claim-1",
+      "target": "ex:msyn/us1836085a/catalyst/methanol-forming-catalyzer"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/28",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 1",
+            "passage": "us1836085a/p3/1",
+            "quote": "1. In a method for the simultaneous pro- duction of methanol and liquid hydrocar- bons, the step which comprises subjecting a gas mixture containing hydrogen, carbonic",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/patent-claim-1",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/29",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 1",
+            "passage": "us1836085a/p3/1",
+            "quote": "1. In a method for the simultaneous pro- duction of methanol and liquid hydrocar- bons, the step which comprises subjecting a gas mixture containing hydrogen, carbonic",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/patent-claim-1",
+      "target": "ex:msyn/us1836085a/reaction/unsaturated-hydrocarbon-polymerization-hydrogenation"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/3",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'20' is a line number",
+            "passage": "us1836085a/p1/2",
+            "quote": "cial for the direct catalytic combination of carbon monoxide and hydrogen into meth- anol, but even seems to further the said com- bination.",
+            "source": "ex:msyn/source/us1836085a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "continues 'cial for the direct catalytic combination of carbon monoxide and hydrogen into methanol'",
+            "passage": "us1836085a/p1/2",
+            "quote": "mixed therewith, will not only not be prejudi-",
+            "source": "ex:msyn/source/us1836085a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'armatic' = aromatic",
+            "passage": "us1836085a/p1/1",
+            "quote": "the armatic hydrocarbons which can be found in industrial gas mixtures such as coal distillation gas, or which are purposely",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "inhibition_kind": "not_stated",
+        "negated": true
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/us1836085a/species/nonsaturated-hydrocarbons"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/30",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 1",
+            "passage": "us1836085a/p3/1",
+            "quote": "1. In a method for the simultaneous pro- duction of methanol and liquid hydrocar- bons, the step which comprises subjecting a gas mixture containing hydrogen, carbonic",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/patent-claim-1",
+      "target": "ex:msyn/us1836085a/species/nonsaturated-hydrocarbons"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/31",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 2",
+            "passage": "us1836085a/p3/2",
+            "quote": "the step which comprises subjecting a vas mixture containing hydrogen, carbonic oxides and aromatic hydrocarbons to the ac-",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/patent-claim-2",
+      "target": "ex:msyn/us1836085a/catalyst/methanol-forming-catalyzer"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/32",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 2",
+            "passage": "us1836085a/p3/2",
+            "quote": "the step which comprises subjecting a vas mixture containing hydrogen, carbonic oxides and aromatic hydrocarbons to the ac-",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/patent-claim-2",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/33",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 2",
+            "passage": "us1836085a/p3/2",
+            "quote": "the step which comprises subjecting a vas mixture containing hydrogen, carbonic oxides and aromatic hydrocarbons to the ac-",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/patent-claim-2",
+      "target": "ex:msyn/us1836085a/reaction/unsaturated-hydrocarbon-polymerization-hydrogenation"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/34",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 2",
+            "passage": "us1836085a/p3/2",
+            "quote": "the step which comprises subjecting a vas mixture containing hydrogen, carbonic oxides and aromatic hydrocarbons to the ac-",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/patent-claim-2",
+      "target": "ex:msyn/us1836085a/species/aromatic-hydrocarbons"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/35",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 3",
+            "passage": "us1836085a/p3/2",
+            "quote": "mixture containing hydrogen, carbonic ox- ides, unsaturated hydrocarbons and aromatic hydrocarbons to the action of a methanol-",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/patent-claim-3",
+      "target": "ex:msyn/us1836085a/catalyst/methanol-forming-catalyzer"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/36",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 3",
+            "passage": "us1836085a/p3/2",
+            "quote": "mixture containing hydrogen, carbonic ox- ides, unsaturated hydrocarbons and aromatic hydrocarbons to the action of a methanol-",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/patent-claim-3",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/37",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 3",
+            "passage": "us1836085a/p3/2",
+            "quote": "mixture containing hydrogen, carbonic ox- ides, unsaturated hydrocarbons and aromatic hydrocarbons to the action of a methanol-",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/patent-claim-3",
+      "target": "ex:msyn/us1836085a/reaction/unsaturated-hydrocarbon-polymerization-hydrogenation"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/38",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 3",
+            "passage": "us1836085a/p3/2",
+            "quote": "mixture containing hydrogen, carbonic ox- ides, unsaturated hydrocarbons and aromatic hydrocarbons to the action of a methanol-",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/patent-claim-3",
+      "target": "ex:msyn/us1836085a/species/nonsaturated-hydrocarbons"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/39",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 3",
+            "passage": "us1836085a/p3/2",
+            "quote": "mixture containing hydrogen, carbonic ox- ides, unsaturated hydrocarbons and aromatic hydrocarbons to the action of a methanol-",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/patent-claim-3",
+      "target": "ex:msyn/us1836085a/species/aromatic-hydrocarbons"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/4",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'20' is a line number",
+            "passage": "us1836085a/p1/2",
+            "quote": "cial for the direct catalytic combination of carbon monoxide and hydrogen into meth- anol, but even seems to further the said com- bination.",
+            "source": "ex:msyn/source/us1836085a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "continues 'cial for the direct catalytic combination of carbon monoxide and hydrogen into methanol'",
+            "passage": "us1836085a/p1/2",
+            "quote": "mixed therewith, will not only not be prejudi-",
+            "source": "ex:msyn/source/us1836085a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'armatic' = aromatic",
+            "passage": "us1836085a/p1/1",
+            "quote": "the armatic hydrocarbons which can be found in industrial gas mixtures such as coal distillation gas, or which are purposely",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "inhibition_kind": "not_stated",
+        "negated": true
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/us1836085a/species/aromatic-hydrocarbons"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/40",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 4",
+            "passage": "us1836085a/p3/3",
+            "quote": "the steps which comprise mixing @ gas mixture containing hydrogen and carbonic oxides with a gas mixture contaiming gase- ous unsaturated hydrocarbons,",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/patent-claim-4",
+      "target": "ex:msyn/us1836085a/catalyst/methanol-forming-catalyzer"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/41",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 4",
+            "passage": "us1836085a/p3/3",
+            "quote": "the steps which comprise mixing @ gas mixture containing hydrogen and carbonic oxides with a gas mixture contaiming gase- ous unsaturated hydrocarbons,",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/patent-claim-4",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/42",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 4",
+            "passage": "us1836085a/p3/3",
+            "quote": "the steps which comprise mixing @ gas mixture containing hydrogen and carbonic oxides with a gas mixture contaiming gase- ous unsaturated hydrocarbons,",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/patent-claim-4",
+      "target": "ex:msyn/us1836085a/reaction/unsaturated-hydrocarbon-polymerization-hydrogenation"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/43",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 4",
+            "passage": "us1836085a/p3/3",
+            "quote": "the steps which comprise mixing @ gas mixture containing hydrogen and carbonic oxides with a gas mixture contaiming gase- ous unsaturated hydrocarbons,",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/patent-claim-4",
+      "target": "ex:msyn/us1836085a/species/nonsaturated-hydrocarbons"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/44",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 5",
+            "passage": "us1836085a/p3/4",
+            "quote": "oxides with an industrial coal distillation gas",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/patent-claim-5",
+      "target": "ex:msyn/us1836085a/catalyst/methanol-forming-catalyzer"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/45",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 5",
+            "passage": "us1836085a/p3/4",
+            "quote": "oxides with an industrial coal distillation gas",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/patent-claim-5",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/46",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 5",
+            "passage": "us1836085a/p3/4",
+            "quote": "oxides with an industrial coal distillation gas",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/patent-claim-5",
+      "target": "ex:msyn/us1836085a/reaction/unsaturated-hydrocarbon-polymerization-hydrogenation"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/47",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 5",
+            "passage": "us1836085a/p3/4",
+            "quote": "oxides with an industrial coal distillation gas",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/patent-claim-5",
+      "target": "ex:msyn/us1836085a/species/nonsaturated-hydrocarbons"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/48",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 5",
+            "passage": "us1836085a/p3/4",
+            "quote": "oxides with an industrial coal distillation gas",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/patent-claim-5",
+      "target": "ex:msyn/us1836085a/species/aromatic-hydrocarbons"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/49",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 6",
+            "passage": "us1836085a/p3/4",
+            "quote": "the step which comprises subjecting a mix- ture of water gas and unsaturated hydrocar- bons to the action of a methanol-forming catalyst",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/patent-claim-6",
+      "target": "ex:msyn/us1836085a/catalyst/methanol-forming-catalyzer"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/5",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "continues after the line number '10': 'hydrocarbons should be eliminated from the gaseous mixture'",
+            "passage": "us1836085a/p1/1",
+            "quote": "it has been thought heretofore that the non- saturated hydrocarbons and the aromatic",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/prior-art-remove-hydrocarbons",
+      "target": "ex:msyn/us1836085a/species/nonsaturated-hydrocarbons"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/50",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 6",
+            "passage": "us1836085a/p3/4",
+            "quote": "the step which comprises subjecting a mix- ture of water gas and unsaturated hydrocar- bons to the action of a methanol-forming catalyst",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/patent-claim-6",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/51",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 6",
+            "passage": "us1836085a/p3/4",
+            "quote": "the step which comprises subjecting a mix- ture of water gas and unsaturated hydrocar- bons to the action of a methanol-forming catalyst",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/patent-claim-6",
+      "target": "ex:msyn/us1836085a/reaction/unsaturated-hydrocarbon-polymerization-hydrogenation"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/52",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 6",
+            "passage": "us1836085a/p3/4",
+            "quote": "the step which comprises subjecting a mix- ture of water gas and unsaturated hydrocar- bons to the action of a methanol-forming catalyst",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/patent-claim-6",
+      "target": "ex:msyn/us1836085a/species/nonsaturated-hydrocarbons"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/53",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 7",
+            "passage": "us1836085a/p3/5",
+            "quote": "gas mixture formed of equal parts by vol- ume of water gas and coke oven gas, both gases having their normal industrially com- position,",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/patent-claim-7",
+      "target": "ex:msyn/us1836085a/catalyst/methanol-forming-catalyzer"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/54",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 7",
+            "passage": "us1836085a/p3/5",
+            "quote": "gas mixture formed of equal parts by vol- ume of water gas and coke oven gas, both gases having their normal industrially com- position,",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/patent-claim-7",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/55",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 7",
+            "passage": "us1836085a/p3/5",
+            "quote": "gas mixture formed of equal parts by vol- ume of water gas and coke oven gas, both gases having their normal industrially com- position,",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/patent-claim-7",
+      "target": "ex:msyn/us1836085a/reaction/unsaturated-hydrocarbon-polymerization-hydrogenation"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/56",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 8",
+            "passage": "us1836085a/p3/6",
+            "quote": "condensing the methane 90 contained in the residual gas, effecting an incomplete combustion of said methane so as to obtain a mixture of carbon monoxide and hydrogen,",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/patent-claim-8",
+      "target": "ex:msyn/us1836085a/catalyst/methanol-forming-catalyzer"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/57",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 8",
+            "passage": "us1836085a/p3/6",
+            "quote": "condensing the methane 90 contained in the residual gas, effecting an incomplete combustion of said methane so as to obtain a mixture of carbon monoxide and hydrogen,",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/patent-claim-8",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/58",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 8",
+            "passage": "us1836085a/p3/6",
+            "quote": "condensing the methane 90 contained in the residual gas, effecting an incomplete combustion of said methane so as to obtain a mixture of carbon monoxide and hydrogen,",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/patent-claim-8",
+      "target": "ex:msyn/us1836085a/reaction/unsaturated-hydrocarbon-polymerization-hydrogenation"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/59",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 8",
+            "passage": "us1836085a/p3/6",
+            "quote": "condensing the methane 90 contained in the residual gas, effecting an incomplete combustion of said methane so as to obtain a mixture of carbon monoxide and hydrogen,",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/patent-claim-8",
+      "target": "ex:msyn/us1836085a/species/nonsaturated-hydrocarbons"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/6",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "continues after the line number '10': 'hydrocarbons should be eliminated from the gaseous mixture'",
+            "passage": "us1836085a/p1/1",
+            "quote": "it has been thought heretofore that the non- saturated hydrocarbons and the aromatic",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/prior-art-remove-hydrocarbons",
+      "target": "ex:msyn/us1836085a/species/aromatic-hydrocarbons"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/60",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3, claim 8",
+            "passage": "us1836085a/p3/6",
+            "quote": "condensing the methane 90 contained in the residual gas, effecting an incomplete combustion of said methane so as to obtain a mixture of carbon monoxide and hydrogen,",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/patent-claim-8",
+      "target": "ex:msyn/species/ch4"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/61",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, 1st example",
+            "passage": "us1836085a/p1/5",
+            "quote": "mixture of zinc oxide and chromium oxide obtained by reducing agglomerated basic chromate of zinc, and which is maintained at 300 degrees C.;",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1836085a/catalyst/example-1",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/62",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, 1st example",
+            "passage": "us1836085a/p1/5",
+            "quote": "mixture of zinc oxide and chromium oxide obtained by reducing agglomerated basic chromate of zinc, and which is maintained at 300 degrees C.;",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1836085a/catalyst/example-1",
+      "target": "ex:msyn/us1836085a/species/chromium-oxide"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/63",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, 1st example",
+            "passage": "us1836085a/p1/5",
+            "quote": "mixture of zinc oxide and chromium oxide obtained by reducing agglomerated basic chromate of zinc, and which is maintained at 300 degrees C.;",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/sample/example-1",
+      "target": "ex:msyn/us1836085a/catalyst/example-1"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/64",
+      "type": "PREPARED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, 1st example",
+            "passage": "us1836085a/p1/5",
+            "quote": "mixture of zinc oxide and chromium oxide obtained by reducing agglomerated basic chromate of zinc, and which is maintained at 300 degrees C.;",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/sample/example-1",
+      "target": "ex:msyn/us1836085a/preparation/example-1"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/65",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, 1st example",
+            "passage": "us1836085a/p1/5",
+            "quote": "mixture of zinc oxide and chromium oxide obtained by reducing agglomerated basic chromate of zinc, and which is maintained at 300 degrees C.;",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1836085a/sample/example-1",
+      "target": "ex:msyn/us1836085a/species/basic-zinc-chromate"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/66",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, 1st example",
+            "passage": "us1836085a/p1/5",
+            "quote": "mixture of zinc oxide and chromium oxide obtained by reducing agglomerated basic chromate of zinc, and which is maintained at 300 degrees C.;",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "order": 1
+      },
+      "source": "ex:msyn/us1836085a/sample/example-1",
+      "target": "ex:msyn/us1836085a/treatment/example-1-reduction"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/67",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 1, 1st example, initial gas composition",
+            "reading": "vision_ocr",
+            "region": [
+              0.41,
+              0.522,
+              0.8,
+              0.57
+            ],
+            "source": "ex:msyn/source/us1836085a",
+            "transcription": "mixture having the following composition: CO₂, 3 per cent; O₂, 0.6 per cent; C₂H₄, 1.4 per cent; CO, 26 per cent; H₂, 54 per cent; CH₄, 8.9 per cent; N₂, 6 per cent."
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "3 per cent",
+          "unit": "%",
+          "value": 3
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1836085a/feed/example-1",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/68",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 1, 1st example, initial gas composition",
+            "reading": "vision_ocr",
+            "region": [
+              0.41,
+              0.522,
+              0.8,
+              0.57
+            ],
+            "source": "ex:msyn/source/us1836085a",
+            "transcription": "mixture having the following composition: CO₂, 3 per cent; O₂, 0.6 per cent; C₂H₄, 1.4 per cent; CO, 26 per cent; H₂, 54 per cent; CH₄, 8.9 per cent; N₂, 6 per cent."
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "0.6 per cent",
+          "unit": "%",
+          "value": 0.6
+        },
+        "fraction_basis": "not_reported",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1836085a/feed/example-1",
+      "target": "ex:msyn/species/o2"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/69",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 1, 1st example, initial gas composition",
+            "reading": "vision_ocr",
+            "region": [
+              0.41,
+              0.522,
+              0.8,
+              0.57
+            ],
+            "source": "ex:msyn/source/us1836085a",
+            "transcription": "mixture having the following composition: CO₂, 3 per cent; O₂, 0.6 per cent; C₂H₄, 1.4 per cent; CO, 26 per cent; H₂, 54 per cent; CH₄, 8.9 per cent; N₂, 6 per cent."
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "26 per cent",
+          "unit": "%",
+          "value": 26
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1836085a/feed/example-1",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/7",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "continues after the line number '10': 'hydrocarbons should be eliminated from the gaseous mixture'",
+            "passage": "us1836085a/p1/1",
+            "quote": "it has been thought heretofore that the non- saturated hydrocarbons and the aromatic",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/prior-art-remove-hydrocarbons",
+      "target": "ex:msyn/species/ch4"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/70",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 1, 1st example, initial gas composition",
+            "reading": "vision_ocr",
+            "region": [
+              0.41,
+              0.522,
+              0.8,
+              0.57
+            ],
+            "source": "ex:msyn/source/us1836085a",
+            "transcription": "mixture having the following composition: CO₂, 3 per cent; O₂, 0.6 per cent; C₂H₄, 1.4 per cent; CO, 26 per cent; H₂, 54 per cent; CH₄, 8.9 per cent; N₂, 6 per cent."
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "54 per cent",
+          "unit": "%",
+          "value": 54
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1836085a/feed/example-1",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/71",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 1, 1st example, initial gas composition",
+            "reading": "vision_ocr",
+            "region": [
+              0.41,
+              0.522,
+              0.8,
+              0.57
+            ],
+            "source": "ex:msyn/source/us1836085a",
+            "transcription": "mixture having the following composition: CO₂, 3 per cent; O₂, 0.6 per cent; C₂H₄, 1.4 per cent; CO, 26 per cent; H₂, 54 per cent; CH₄, 8.9 per cent; N₂, 6 per cent."
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "8.9 per cent",
+          "unit": "%",
+          "value": 8.9
+        },
+        "fraction_basis": "not_reported",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1836085a/feed/example-1",
+      "target": "ex:msyn/species/ch4"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/72",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 1, 1st example, initial gas composition",
+            "reading": "vision_ocr",
+            "region": [
+              0.41,
+              0.522,
+              0.8,
+              0.57
+            ],
+            "source": "ex:msyn/source/us1836085a",
+            "transcription": "mixture having the following composition: CO₂, 3 per cent; O₂, 0.6 per cent; C₂H₄, 1.4 per cent; CO, 26 per cent; H₂, 54 per cent; CH₄, 8.9 per cent; N₂, 6 per cent."
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "6 per cent",
+          "unit": "%",
+          "value": 6
+        },
+        "fraction_basis": "not_reported",
+        "role": "diluent"
+      },
+      "source": "ex:msyn/us1836085a/feed/example-1",
+      "target": "ex:msyn/species/n2"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/73",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 1, 1st example, initial gas composition",
+            "reading": "vision_ocr",
+            "region": [
+              0.41,
+              0.522,
+              0.8,
+              0.57
+            ],
+            "source": "ex:msyn/source/us1836085a",
+            "transcription": "mixture having the following composition: CO₂, 3 per cent; O₂, 0.6 per cent; C₂H₄, 1.4 per cent; CO, 26 per cent; H₂, 54 per cent; CH₄, 8.9 per cent; N₂, 6 per cent."
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "C₂H₄, 1.4 per cent",
+          "note": "added 2026-09-29: read from the page image (OCR text '14 |'); formula printed C₂H₄",
+          "unit": "%",
+          "value": 1.4
+        },
+        "note": "the page image prints 'C₂H₄, 1.4 per cent' (re-curation 2026-09-29; target changed from the source-scoped placeholder to the shared species ethylene)",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1836085a/feed/example-1",
+      "target": "ex:msyn/species/c2h4"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/74",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, 1st example",
+            "passage": "us1836085a/p1/5",
+            "quote": "mixture of zinc oxide and chromium oxide obtained by reducing agglomerated basic chromate of zinc, and which is maintained at 300 degrees C.;",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "state": "reduced"
+      },
+      "source": "ex:msyn/us1836085a/test/example-1",
+      "target": "ex:msyn/us1836085a/sample/example-1"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/75",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 1, 1st example",
+            "reading": "vision_ocr",
+            "region": [
+              0.41,
+              0.585,
+              0.8,
+              0.62
+            ],
+            "second_reading": "This gas mixture is treated as follows: The said mixture is circulated for eight hours in a closed circuit, and at a pressure of 150–250 atm., upon a catalyzer consisting of a mixture of zinc oxide and chromium oxide",
+            "source": "ex:msyn/source/us1836085a",
+            "transcription": "The said mixture is circulated for eight hours in a closed circuit, and at a pressure of 150–250 atm., upon a catalyzer consisting of a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, 1st example",
+            "passage": "us1836085a/p1/5",
+            "quote": "upon a catalyzer consisting of a 75 mixture of zinc oxide and chromium oxide",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/test/example-1",
+      "target": "ex:msyn/us1836085a/feed/example-1"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/76",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 1, 1st example",
+            "reading": "vision_ocr",
+            "region": [
+              0.41,
+              0.757,
+              0.8,
+              0.785
+            ],
+            "source": "ex:msyn/source/us1836085a",
+            "transcription": "consisting of hydrocarbons, represents some 2.5 per cent of the total amount; the lower"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, 1st example",
+            "passage": "us1836085a/p1/6",
+            "quote": "the lower layer consists of methanol in the prac- tically pure state, diluted with water.",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/test/example-1",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/77",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 1, 1st example",
+            "reading": "vision_ocr",
+            "region": [
+              0.41,
+              0.757,
+              0.8,
+              0.785
+            ],
+            "source": "ex:msyn/source/us1836085a",
+            "transcription": "consisting of hydrocarbons, represents some 2.5 per cent of the total amount; the lower"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, 1st example",
+            "passage": "us1836085a/p1/6",
+            "quote": "the lower layer consists of methanol in the prac- tically pure state, diluted with water.",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/test/example-1",
+      "target": "ex:msyn/us1836085a/reaction/unsaturated-hydrocarbon-polymerization-hydrogenation"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/78",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 1, 1st example",
+            "reading": "vision_ocr",
+            "region": [
+              0.41,
+              0.585,
+              0.8,
+              0.62
+            ],
+            "second_reading": "This gas mixture is treated as follows: The said mixture is circulated for eight hours in a closed circuit, and at a pressure of 150–250 atm., upon a catalyzer consisting of a mixture of zinc oxide and chromium oxide",
+            "source": "ex:msyn/source/us1836085a",
+            "transcription": "The said mixture is circulated for eight hours in a closed circuit, and at a pressure of 150–250 atm., upon a catalyzer consisting of a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, 1st example",
+            "passage": "us1836085a/p1/5",
+            "quote": "upon a catalyzer consisting of a 75 mixture of zinc oxide and chromium oxide",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/test/example-1",
+      "target": "ex:msyn/us1836085a/reactor/closed-circuit"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/79",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "context": [
+          "ex:msyn/us1836085a/test/example-1"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 1, 1st example",
+            "reading": "vision_ocr",
+            "region": [
+              0.41,
+              0.757,
+              0.8,
+              0.785
+            ],
+            "source": "ex:msyn/source/us1836085a",
+            "transcription": "consisting of hydrocarbons, represents some 2.5 per cent of the total amount; the lower"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, 1st example",
+            "passage": "us1836085a/p1/6",
+            "quote": "the lower layer consists of methanol in the prac- tically pure state, diluted with water.",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/catalyst/example-1",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/8",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'20' is a line number",
+            "passage": "us1836085a/p1/2",
+            "quote": "cial for the direct catalytic combination of carbon monoxide and hydrogen into meth- anol, but even seems to further the said com- bination.",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/hydrocarbons-not-prejudicial",
+      "target": "ex:msyn/us1836085a/species/nonsaturated-hydrocarbons"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/80",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "context": [
+          "ex:msyn/us1836085a/test/example-1"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 1, 1st example",
+            "reading": "vision_ocr",
+            "region": [
+              0.41,
+              0.757,
+              0.8,
+              0.785
+            ],
+            "source": "ex:msyn/source/us1836085a",
+            "transcription": "consisting of hydrocarbons, represents some 2.5 per cent of the total amount; the lower"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1, 1st example",
+            "passage": "us1836085a/p1/6",
+            "quote": "the lower layer consists of methanol in the prac- tically pure state, diluted with water.",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/catalyst/example-1",
+      "target": "ex:msyn/us1836085a/reaction/unsaturated-hydrocarbon-polymerization-hydrogenation"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/81",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, 1st example",
+            "passage": "us1836085a/p1/6",
+            "quote": "it will result that more than 25 per cent of the ~ methane enters into the reaction",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/methane-consumed",
+      "target": "ex:msyn/species/ch4"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/82",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, 1st example",
+            "passage": "us1836085a/p1/6",
+            "quote": "it will result that more than 25 per cent of the ~ methane enters into the reaction",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/methane-consumed",
+      "target": "ex:msyn/us1836085a/test/example-1"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/83",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1, 1st example",
+            "passage": "us1836085a/p1/6",
+            "quote": "it will result that more than 25 per cent of the ~ methane enters into the reaction",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/test/example-1",
+      "target": "ex:msyn/us1836085a/claim/methane-consumed"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/84",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, 1st example",
+            "note": "'5' is a line number",
+            "passage": "us1836085a/p2/1",
+            "quote": "so that methane can thus be utilized (and this use could likely be increased by continuing the operation 5 under an increased total pressure)",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/hypothesis/methane-use-pressure",
+      "target": "ex:msyn/species/ch4"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/85",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, 1st example",
+            "note": "'1s' = is",
+            "passage": "us1836085a/p2/1",
+            "quote": "the production of metha- nol is scarcely reduced, whilst the partial pressure of hydrogen in the gas mixture sub- jected to catalysis 1s hardly over 34 atm.",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/low-h2-operation",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/86",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, 1st example",
+            "note": "'1s' = is",
+            "passage": "us1836085a/p2/1",
+            "quote": "the production of metha- nol is scarcely reduced, whilst the partial pressure of hydrogen in the gas mixture sub- jected to catalysis 1s hardly over 34 atm.",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/low-h2-operation",
+      "target": "ex:msyn/us1836085a/test/example-1"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/87",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, 1st example",
+            "note": "'1s' = is",
+            "passage": "us1836085a/p2/1",
+            "quote": "the production of metha- nol is scarcely reduced, whilst the partial pressure of hydrogen in the gas mixture sub- jected to catalysis 1s hardly over 34 atm.",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/test/example-1",
+      "target": "ex:msyn/us1836085a/claim/low-h2-operation"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/88",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "note": "'zine' = zinc",
+            "passage": "us1836085a/p2/2",
+            "quote": "The said mixture is circulated, in a closed circuit, and under a pressure of 150-200 atmospheres, upon a catalytic mass consisting of a basic chromate of zine which is formed into grains by agglomeration",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1836085a/catalyst/example-2",
+      "target": "ex:msyn/us1836085a/species/basic-zinc-chromate"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/89",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "note": "'zine' = zinc",
+            "passage": "us1836085a/p2/2",
+            "quote": "The said mixture is circulated, in a closed circuit, and under a pressure of 150-200 atmospheres, upon a catalytic mass consisting of a basic chromate of zine which is formed into grains by agglomeration",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/sample/example-2",
+      "target": "ex:msyn/us1836085a/catalyst/example-2"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/9",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "'20' is a line number",
+            "passage": "us1836085a/p1/2",
+            "quote": "cial for the direct catalytic combination of carbon monoxide and hydrogen into meth- anol, but even seems to further the said com- bination.",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/claim/hydrocarbons-not-prejudicial",
+      "target": "ex:msyn/us1836085a/species/aromatic-hydrocarbons"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/90",
+      "type": "PREPARED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "note": "'zine' = zinc",
+            "passage": "us1836085a/p2/2",
+            "quote": "The said mixture is circulated, in a closed circuit, and under a pressure of 150-200 atmospheres, upon a catalytic mass consisting of a basic chromate of zine which is formed into grains by agglomeration",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1836085a/sample/example-2",
+      "target": "ex:msyn/us1836085a/preparation/example-2"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/91",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "note": "'zine' = zinc",
+            "passage": "us1836085a/p2/2",
+            "quote": "The said mixture is circulated, in a closed circuit, and under a pressure of 150-200 atmospheres, upon a catalytic mass consisting of a basic chromate of zine which is formed into grains by agglomeration",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/us1836085a/sample/example-2",
+      "target": "ex:msyn/us1836085a/species/basic-zinc-chromate"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/92",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "passage": "us1836085a/p2/2",
+            "quote": "is preliminarily reduced in the reaction cham- ber itself by a current of pure hydrogen or by the gas mixture which is to be treated.",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "order": 1
+      },
+      "source": "ex:msyn/us1836085a/sample/example-2",
+      "target": "ex:msyn/us1836085a/treatment/example-2-reduction"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/93",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 2, 2nd example, gas composition",
+            "reading": "vision_ocr",
+            "region": [
+              0.2,
+              0.378,
+              0.575,
+              0.435
+            ],
+            "source": "ex:msyn/source/us1836085a",
+            "transcription": "ture containing, by volume 23 per cent of ethylene, 22 per cent of carbon monoxide, 49.3 per cent of hydrogen, 1.2 per cent of car- bon dioxide, 0.5 of oxygen and 4 per cent of"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "passage": "us1836085a/p2/2",
+            "quote": "ethylene, 22 per cent of carbon monoxide, 49.3 per cent of hydrogen, 1.2 per cent of car- bon dioxide, 0.5 of oxygen and 4 per cent of nitrogen.",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "by volume 23 per cent of ethylene",
+          "note": "added 2026-09-29: read from the page image (OCR text '238')",
+          "unit": "%",
+          "value": 23
+        },
+        "fraction_basis": "volume",
+        "note": "the page image prints '23 per cent of ethylene' (re-curation 2026-09-29)",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1836085a/feed/example-2",
+      "target": "ex:msyn/species/c2h4"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/94",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "passage": "us1836085a/p2/2",
+            "quote": "ethylene, 22 per cent of carbon monoxide, 49.3 per cent of hydrogen, 1.2 per cent of car- bon dioxide, 0.5 of oxygen and 4 per cent of nitrogen.",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "22 per cent",
+          "unit": "%",
+          "value": 22
+        },
+        "fraction_basis": "volume",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1836085a/feed/example-2",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/95",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "passage": "us1836085a/p2/2",
+            "quote": "ethylene, 22 per cent of carbon monoxide, 49.3 per cent of hydrogen, 1.2 per cent of car- bon dioxide, 0.5 of oxygen and 4 per cent of nitrogen.",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "49.3 per cent",
+          "unit": "%",
+          "value": 49.3
+        },
+        "fraction_basis": "volume",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1836085a/feed/example-2",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/96",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "passage": "us1836085a/p2/2",
+            "quote": "ethylene, 22 per cent of carbon monoxide, 49.3 per cent of hydrogen, 1.2 per cent of car- bon dioxide, 0.5 of oxygen and 4 per cent of nitrogen.",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "1.2 per cent",
+          "unit": "%",
+          "value": 1.2
+        },
+        "fraction_basis": "volume",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1836085a/feed/example-2",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/97",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "passage": "us1836085a/p2/2",
+            "quote": "ethylene, 22 per cent of carbon monoxide, 49.3 per cent of hydrogen, 1.2 per cent of car- bon dioxide, 0.5 of oxygen and 4 per cent of nitrogen.",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "0.5 of oxygen",
+          "unit": "%",
+          "value": 0.5
+        },
+        "fraction_basis": "volume",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us1836085a/feed/example-2",
+      "target": "ex:msyn/species/o2"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/98",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "passage": "us1836085a/p2/2",
+            "quote": "ethylene, 22 per cent of carbon monoxide, 49.3 per cent of hydrogen, 1.2 per cent of car- bon dioxide, 0.5 of oxygen and 4 per cent of nitrogen.",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "4 per cent",
+          "unit": "%",
+          "value": 4
+        },
+        "fraction_basis": "volume",
+        "role": "diluent"
+      },
+      "source": "ex:msyn/us1836085a/feed/example-2",
+      "target": "ex:msyn/species/n2"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/99",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2, 2nd example",
+            "passage": "us1836085a/p2/2",
+            "quote": "is preliminarily reduced in the reaction cham- ber itself by a current of pure hydrogen or by the gas mixture which is to be treated.",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "state": "reduced"
+      },
+      "source": "ex:msyn/us1836085a/test/example-2",
+      "target": "ex:msyn/us1836085a/sample/example-2"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/cs5-1",
+      "type": "FEEDS_INTO",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'43' is a line number",
+            "passage": "us1836085a/p2/5",
+            "quote": "In the above described first example the synthesis 1s continued by successive circula- 43 tions upon the catalyzer and subsequent con- densations,",
+            "source": "ex:msyn/source/us1836085a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'©' is OCR noise",
+            "passage": "us1836085a/p2/5",
+            "quote": "The residual gas is now allowed to expand, with production of cold, by any © known process, so as to liquefy the methane contained in the residual gas, whilst the other components of this gas remain in the gaseous State.",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "order": 1,
+        "stream": "residual gas"
+      },
+      "source": "ex:msyn/us1836085a/reactor/closed-circuit",
+      "target": "ex:msyn/us1836085a/unit/methane-liquefaction"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/cs5-2",
+      "type": "FEEDS_INTO",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'85' is a line number",
+            "passage": "us1836085a/p2/6",
+            "quote": "The methane is separately collected and is 85 partially burned with practically pure oxy- gen",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "order": 2,
+        "stream": "the methane, separately collected (liquefied)"
+      },
+      "source": "ex:msyn/us1836085a/unit/methane-liquefaction",
+      "target": "ex:msyn/us1836085a/unit/methane-partial-combustion"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/cs5-3",
+      "type": "FEEDS_INTO",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'20' is an OCR reading of the line number 90",
+            "passage": "us1836085a/p2/6",
+            "quote": "which produces a mixture contain- 20 ing substantially 3 volumes of hydrogen for 2 volumes of carbon monoxide, this mixture being added to the original gas mixture in",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "order": 3,
+        "stream": "mixture of substantially 3 volumes of hydrogen for 2 volumes of carbon monoxide, added to the original gas mixture"
+      },
+      "source": "ex:msyn/us1836085a/unit/methane-partial-combustion",
+      "target": "ex:msyn/us1836085a/reactor/closed-circuit"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/cs5-4",
+      "type": "FEEDS_INTO",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'100' is a line number",
+            "passage": "us1836085a/p2/7",
+            "quote": "As to the part of the residual gas mixture which has not been liquefied, and which con- sists almost exclusively of hydrogen, nitro- gen and carbon monoxide, the hydrogen can be separated therefrom by means known per 100 se,",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "order": 2,
+        "stream": "the part of the residual gas mixture which has not been liquefied"
+      },
+      "source": "ex:msyn/us1836085a/unit/methane-liquefaction",
+      "target": "ex:msyn/us1836085a/unit/hydrogen-separation"
+    },
+    {
+      "id": "ex:msyn/us1836085a/link/cs5-5",
+      "type": "FEEDS_INTO",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1836085a/p2/7",
+            "quote": "and this hydrogen is also added to the gas mixture concerned in the reaction.",
+            "source": "ex:msyn/source/us1836085a"
+          }
+        ],
+        "order": 3,
+        "stream": "hydrogen, added to the gas mixture concerned in the reaction"
+      },
+      "source": "ex:msyn/us1836085a/unit/hydrogen-separation",
+      "target": "ex:msyn/us1836085a/reactor/closed-circuit"
+    },
+    {
+      "id": "ex:msyn/us1836085a/preparation/example-1/reported-in/us1836085a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, 1st example"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1836085a/preparation/example-1",
+      "target": "ex:msyn/source/us1836085a"
+    },
+    {
+      "id": "ex:msyn/us1836085a/preparation/example-2/reported-in/us1836085a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, 2nd example"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1836085a/preparation/example-2",
+      "target": "ex:msyn/source/us1836085a"
+    },
+    {
+      "id": "ex:msyn/us1836085a/reaction/unsaturated-hydrocarbon-polymerization-hydrogenation/reported-in/us1836085a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1836085a/reaction/unsaturated-hydrocarbon-polymerization-hydrogenation",
+      "target": "ex:msyn/source/us1836085a"
+    },
+    {
+      "id": "ex:msyn/us1836085a/reactor/closed-circuit/reported-in/us1836085a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, 1st example",
+          "p. 2, 2nd example"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1836085a/reactor/closed-circuit",
+      "target": "ex:msyn/source/us1836085a"
+    },
+    {
+      "id": "ex:msyn/us1836085a/sample/example-1/reported-in/us1836085a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, 1st example"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1836085a/sample/example-1",
+      "target": "ex:msyn/source/us1836085a"
+    },
+    {
+      "id": "ex:msyn/us1836085a/sample/example-2/reported-in/us1836085a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, 2nd example"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1836085a/sample/example-2",
+      "target": "ex:msyn/source/us1836085a"
+    },
+    {
+      "id": "ex:msyn/us1836085a/species/aldehydes-higher-alcohols/reported-in/us1836085a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, 2nd example"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1836085a/species/aldehydes-higher-alcohols",
+      "target": "ex:msyn/source/us1836085a"
+    },
+    {
+      "id": "ex:msyn/us1836085a/species/aromatic-hydrocarbons/reported-in/us1836085a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1836085a/species/aromatic-hydrocarbons",
+      "target": "ex:msyn/source/us1836085a"
+    },
+    {
+      "id": "ex:msyn/us1836085a/species/basic-zinc-chromate/reported-in/us1836085a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, 1st example",
+          "p. 2, 2nd example"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1836085a/species/basic-zinc-chromate",
+      "target": "ex:msyn/source/us1836085a"
+    },
+    {
+      "id": "ex:msyn/us1836085a/species/chromium-oxide/reported-in/us1836085a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, 1st example"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1836085a/species/chromium-oxide",
+      "target": "ex:msyn/source/us1836085a"
+    },
+    {
+      "id": "ex:msyn/us1836085a/species/liquid-hydrocarbons/reported-in/us1836085a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1836085a/species/liquid-hydrocarbons",
+      "target": "ex:msyn/source/us1836085a"
+    },
+    {
+      "id": "ex:msyn/us1836085a/species/nonsaturated-hydrocarbons/reported-in/us1836085a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1836085a/species/nonsaturated-hydrocarbons",
+      "target": "ex:msyn/source/us1836085a"
+    },
+    {
+      "id": "ex:msyn/us1836085a/test/example-1/reported-in/us1836085a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, 1st example",
+          "p. 1, 1st example, final gas composition",
+          "p. 2, 1st example"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1836085a/test/example-1",
+      "target": "ex:msyn/source/us1836085a"
+    },
+    {
+      "id": "ex:msyn/us1836085a/test/example-2/reported-in/us1836085a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, 2nd example"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1836085a/test/example-2",
+      "target": "ex:msyn/source/us1836085a"
+    },
+    {
+      "id": "ex:msyn/us1836085a/treatment/example-1-reduction/reported-in/us1836085a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1, 1st example"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1836085a/treatment/example-1-reduction",
+      "target": "ex:msyn/source/us1836085a"
+    },
+    {
+      "id": "ex:msyn/us1836085a/treatment/example-2-reduction/reported-in/us1836085a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, 2nd example"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1836085a/treatment/example-2-reduction",
+      "target": "ex:msyn/source/us1836085a"
+    },
+    {
+      "id": "ex:msyn/us1836085a/unit/hydrogen-separation/reported-in/us1836085a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1836085a/unit/hydrogen-separation",
+      "target": "ex:msyn/source/us1836085a"
+    },
+    {
+      "id": "ex:msyn/us1836085a/unit/methane-liquefaction/reported-in/us1836085a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1836085a/unit/methane-liquefaction",
+      "target": "ex:msyn/source/us1836085a"
+    },
+    {
+      "id": "ex:msyn/us1836085a/unit/methane-partial-combustion/reported-in/us1836085a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1836085a/unit/methane-partial-combustion",
+      "target": "ex:msyn/source/us1836085a"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/us1836085a"
+}

@@ -1,0 +1,2577 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/catalyst/zn-cr-cu-1-0.49-0.16",
+      "label": "Catalyst",
+      "props": {
+        "name": "three-component methanol synthesis catalyst Zn:Cr:Cu = 1:0.49:0.16",
+        "catalyst_family": "not_reported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:166ca0bfe172b8db4b120a6e30bd0bda93b9eeb76fe269e6b8cfcf0aae08639a chars:63",
+            "passage": "10.1016-0021-9517(65)90002-3/p2/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:c86b1fc0a4a21a4b09e7f3d49f686f092eb3589385f2e82d58f08b4d4f8e0c5d chars:58",
+            "passage": "10.1016-0021-9517(65)90002-3/p6/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "generality": "kind",
+        "note": "basis of the ratio not stated; supplied by Dr. Y. Ogino (Governmental Chemical Industrial Research Institute, Tokyo); preparation not described"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/adsorption-during-decomposition",
+      "label": "Characterization",
+      "props": {
+        "name": "adsorption of H2 and CO during and after methanol decomposition (Figs. 7, 8)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:b99784b4b96b7a8bf1cd3f47d6f7cd8e93919f8f685e6fa41a2693925831dbaf chars:152",
+            "passage": "10.1016-0021-9517(65)90002-3/p5/3",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:e6c2ba6f5fa89a6005bf9ca6fa8412f3e9df1f32eeb558aa626287c51f93f2fa chars:104",
+            "passage": "10.1016-0021-9517(65)90002-3/p6/3",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          },
+          {
+            "kind": "figure",
+            "locator": "p. 6, Fig. 8",
+            "note": "quote withheld: sha256:48ab4dafa2c66ddf8dd47591f30dc18da3ba1389339c20d1909b98ab6f32848d chars:53",
+            "passage": "10.1016-0021-9517(65)90002-3/p6/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "experiment_status": "completed",
+        "technique": "volumetric chemisorption (simultaneous adsorption, Tamaru's method)",
+        "temperature": {
+          "status": "present",
+          "as_reported": "250°C",
+          "note": "Fig. 8 is at 250 °C; Fig. 7 (after decomposition) is at 300 °C",
+          "unit": "°C",
+          "value": 250
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/bet-surface-area",
+      "label": "Characterization",
+      "props": {
+        "name": "BET surface area with nitrogen at -196 °C",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "rendered: 7.0 × 10^6 cm2; quote withheld: sha256:b1bc389a77934e7e8596921b55e47a8736e95833d68d5adaa0ebab36c8054551 chars:94",
+            "passage": "10.1016-0021-9517(65)90002-3/p5/4",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:86e99d127366304df646a5d3f99a63f232ee6bac32bd529f91b8a89908a0f782 chars:28",
+            "passage": "10.1016-0021-9517(65)90002-3/p6/4",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:b12f0190f19d869f75962ae634917e3c16b55c98fb1b5f5287359f336de9e358 chars:30",
+            "passage": "10.1016-0021-9517(65)90002-3/p5/4",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "rendered: -196°C; quote withheld: sha256:f8cf37017b0f192f97ef4ca781a815e270e7c17d249330acbb5e7c36d2847de6 chars:4",
+            "passage": "10.1016-0021-9517(65)90002-3/p5/4",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "experiment_status": "completed",
+        "results": {
+          "bet_vm": {
+            "status": "present",
+            "as_reported": "1.52 ml",
+            "unit": "ml",
+            "value": 1.52
+          },
+          "surface_area": {
+            "status": "present",
+            "as_reported": "7.0 X lo6 cm*",
+            "note": "for the catalyst sample; rendered 7.0 × 10^6 cm2",
+            "unit": "cm2",
+            "value": 7000000.0
+          }
+        },
+        "technique": "BET nitrogen adsorption",
+        "temperature": {
+          "status": "present",
+          "as_reported": "-196%",
+          "note": "rendered: -196°C",
+          "unit": "°C",
+          "value": -196
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/fig2-h2-then-co-250",
+      "label": "Characterization",
+      "props": {
+        "name": "H2 chemisorption with CO added, 250 °C (Fig. 2)",
+        "conditions": {
+          "co_added": {
+            "status": "present",
+            "as_reported": "+CO 27.3ml",
+            "note": "read from the label in Fig. 2",
+            "unit": "ml STP",
+            "value": 27.3
+          },
+          "h2_introduced": {
+            "status": "present",
+            "as_reported": "148 ml, STP",
+            "unit": "ml STP",
+            "value": 148
+          }
+        },
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "p. 3, Fig. 2",
+            "note": "the figure labels the CO addition '+CO 27.3 ml'; quote withheld: sha256:86545010e92c9877b3c6975859b60a2e582e9d3d1a2ce4512da10e6b99b02089 chars:67",
+            "passage": "10.1016-0021-9517(65)90002-3/p3/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'arcelerat,ion' = acceleration; quote withheld: sha256:9318949332e28ab38a45739d8aac3e1c7a964fe50ae0dab1dc9a9342ce15cb10 chars:93",
+            "passage": "10.1016-0021-9517(65)90002-3/p2/3",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:e7cfd6be56574838a9bd0472d14e144f584c7a634be058a699e487f63c5f9f3d chars:34",
+            "passage": "10.1016-0021-9517(65)90002-3/p3/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "experiment_status": "completed",
+        "results": {
+          "h2_chemisorption_on_co_addition": {
+            "status": "present",
+            "as_reported": "A marked acceleration of hydrogen chemisorption at the addition of carbon monoxide was thus observed",
+            "text_value": "marked acceleration of hydrogen chemisorption"
+          }
+        },
+        "technique": "volumetric chemisorption (simultaneous adsorption, Tamaru's method)",
+        "temperature": {
+          "status": "present",
+          "as_reported": "250°C",
+          "unit": "°C",
+          "value": 250
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/fig3-co-then-h2-250",
+      "label": "Characterization",
+      "props": {
+        "name": "CO chemisorption with H2 added, 250 °C (Fig. 3)",
+        "conditions": {
+          "co_introduced": {
+            "status": "present",
+            "as_reported": "160 ml, STP",
+            "unit": "ml STP",
+            "value": 160
+          },
+          "h2_added": {
+            "status": "present",
+            "as_reported": "+H2 80.1ml",
+            "note": "read from the label in Fig. 3",
+            "unit": "ml STP",
+            "value": 80.1
+          }
+        },
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "p. 3, Fig. 3",
+            "note": "the figure labels the H2 addition '+H2 80.1 ml'; quote withheld: sha256:38216fbe806a62aca8396be44379083b2c58ae5f9ec9d50e6fe4a2f10bf5d919 chars:69",
+            "passage": "10.1016-0021-9517(65)90002-3/p3/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:875a57c61610537aa97e536ee342d851bd7a6a3b6ebcf25125a5f53b3d73bb8c chars:34",
+            "passage": "10.1016-0021-9517(65)90002-3/p3/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:0c2b88f197e10553ce778e04ae681f793143bc9346a6b163bb4790e09c609ce5 chars:35",
+            "passage": "10.1016-0021-9517(65)90002-3/p3/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "quote withheld: sha256:67c6e617379cc267db7de865641611d3acc292a2b8c4238e0891efc137da863f chars:29",
+            "passage": "10.1016-0021-9517(65)90002-3/p3/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "continuation across the column break: (less than 0.1% of the total gases); quote withheld: sha256:a052d01dd061b3fadd5ad664b71b71ade267d02d04122254ffb0cc722952f84f chars:33",
+            "passage": "10.1016-0021-9517(65)90002-3/p3/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "experiment_status": "completed",
+        "results": {
+          "co_adsorption_on_h2_addition": {
+            "status": "present",
+            "as_reported": "An enhanced adsorption of carbon monoxide by the presence of hydrogen was also observed",
+            "text_value": "enhanced adsorption of carbon monoxide"
+          },
+          "methanol_formed": {
+            "status": "present",
+            "as_reported": "less than 0.1% of the total gases",
+            "basis": "methanol in the gas, neglected",
+            "bound": "upper",
+            "unit": "%",
+            "value": 0.1
+          }
+        },
+        "technique": "volumetric chemisorption (simultaneous adsorption, Tamaru's method)",
+        "temperature": {
+          "status": "present",
+          "as_reported": "250°C",
+          "unit": "°C",
+          "value": 250
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/fig4-6-equilibria-250",
+      "label": "Characterization",
+      "props": {
+        "name": "adsorption equilibria of H2 and CO with the other gas added, 250 °C (Figs. 4-6)",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "p. 4, Fig. 4",
+            "note": "quote withheld: sha256:7506b3548373801793ae965472544dde6f50bde3044f6814866025d9a36bc5a5 chars:135",
+            "passage": "10.1016-0021-9517(65)90002-3/p4/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:240361873f09978be541a2d6a61a679de6d4fea1414aed36b8075cf4d2bbaa06 chars:77",
+            "passage": "10.1016-0021-9517(65)90002-3/p4/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:98dc2637ca4356ad2e6e0334ffaa7bbfa8f14ddc5bd3666767339e6b4a9dcb7a chars:70",
+            "passage": "10.1016-0021-9517(65)90002-3/p4/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:06da40b8cab3e86c6cf92118a67ba2b91d07db6309998498d7f366abc62dd2de chars:70",
+            "passage": "10.1016-0021-9517(65)90002-3/p6/5",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:261b7edf1392bf440dd1f15443a33cab6041190ca6481d748ffd3c5163ef833c chars:43",
+            "passage": "10.1016-0021-9517(65)90002-3/p4/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:cb57ebb86d74792d9dd1a165f60bf619f426445143cd2192362f9648aa060550 chars:32",
+            "passage": "10.1016-0021-9517(65)90002-3/p4/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:7c9bb6c24f393b85481824be690abc38f8a0f3cd0668b7a2ceaa68bdc7e32dab chars:23",
+            "passage": "10.1016-0021-9517(65)90002-3/p4/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "experiment_status": "completed",
+        "results": {
+          "adsorbed_h2_co_ratio": {
+            "status": "present",
+            "as_reported": "nearly 1.5",
+            "basis": "adsorbed H2 to CO when both fall on curves (h) and (c)",
+            "qualifier": "approximate",
+            "unit": "1",
+            "value": 1.5
+          },
+          "equilibration_time_added_gas": {
+            "status": "present",
+            "as_reported": "in 2 hr or so",
+            "basis": "apparent adsorption equilibrium of the added gas",
+            "qualifier": "approximate",
+            "unit": "h",
+            "value": 2
+          },
+          "h2_co_intro_ratio_co_excess": {
+            "status": "present",
+            "as_reported": "less than about 1",
+            "basis": "ratio of H2 to CO introduced below which CO is in excess",
+            "qualifier": "approximate",
+            "unit": "1",
+            "value": 1
+          },
+          "h2_co_intro_ratio_h2_excess": {
+            "status": "present",
+            "as_reported": "more than about 2",
+            "basis": "ratio of H2 to CO introduced above which H2 is in excess",
+            "qualifier": "approximate",
+            "unit": "1",
+            "value": 2
+          }
+        },
+        "technique": "volumetric chemisorption (simultaneous adsorption, Tamaru's method)",
+        "temperature": {
+          "status": "present",
+          "as_reported": "250°C",
+          "unit": "°C",
+          "value": 250
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/fig7-mixed-300",
+      "label": "Characterization",
+      "props": {
+        "name": "mixed adsorption of H2 and CO at 300 °C (Fig. 7)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:9a3fb0114301ba7aac78db1a86721c396952b694d8efd297857a008fc506d592 chars:71",
+            "passage": "10.1016-0021-9517(65)90002-3/p5/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:af1f267c2767439996744136e6b8c16b93e5ca87868da27734d46741feb1cdf8 chars:57",
+            "passage": "10.1016-0021-9517(65)90002-3/p5/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "experiment_status": "completed",
+        "technique": "volumetric chemisorption (simultaneous adsorption, Tamaru's method)",
+        "temperature": {
+          "status": "present",
+          "as_reported": "3OO”C",
+          "unit": "°C",
+          "value": 300
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/premixed-1co-2h2-250",
+      "label": "Characterization",
+      "props": {
+        "name": "simultaneous adsorption of premixed 1 CO : 2 H2, 250 °C (points x, Figs. 5 and 6)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:ab33bb507d9be573b33a897d4520f241986ab54771529b206fb33aa8f1841dcb chars:114",
+            "passage": "10.1016-0021-9517(65)90002-3/p5/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          },
+          {
+            "kind": "figure",
+            "locator": "p. 4, Fig. 6",
+            "note": "quote withheld: sha256:56aba4e0ae4955416e5fd0780e8c56e4a48088b5e4ea19a64a71bb60e73bf32a chars:31",
+            "passage": "10.1016-0021-9517(65)90002-3/p4/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "experiment_status": "completed",
+        "technique": "volumetric chemisorption (simultaneous adsorption, Tamaru's method)",
+        "temperature": {
+          "status": "present",
+          "as_reported": "250°C",
+          "note": "the temperature of Figs. 5 and 6",
+          "unit": "°C",
+          "value": 250
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/claim/250-greater-than-300",
+      "label": "Claim",
+      "props": {
+        "name": "adsorbed amounts at 250 °C greater than at 300 °C",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:af1f267c2767439996744136e6b8c16b93e5ca87868da27734d46741feb1cdf8 chars:57",
+            "passage": "10.1016-0021-9517(65)90002-3/p5/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "inference_type": "interventional",
+        "statement": "The amounts of mixed adsorption at 250 °C were greater than those at 300 °C."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/claim/adsorbed-ratio-1.5",
+      "label": "Claim",
+      "props": {
+        "name": "adsorbed H2 to CO ratio nearly 1.5, as observed earlier during reaction",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:06da40b8cab3e86c6cf92118a67ba2b91d07db6309998498d7f366abc62dd2de chars:70",
+            "passage": "10.1016-0021-9517(65)90002-3/p6/5",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "inference_type": "interventional",
+        "statement": "When both gases fall on curves (h) and (c), the ratio of adsorbed hydrogen to carbon monoxide is nearly 1.5, agreeing with that observed during the reaction in the earlier paper."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/claim/coverage-85",
+      "label": "Claim",
+      "props": {
+        "name": "about 85% of the catalyst surface is covered by the adsorbed species (cross-section 25 Å2)",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:0ed6173f507fe320abf87bf619540f7cc8d88ee3398eea438ee3a0dc7ebf6af3 chars:104",
+            "passage": "10.1016-0021-9517(65)90002-3/p7/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "rendered: 25 Å2; quote withheld: sha256:8228c24736f57d51c9c1348e68a32aec52a302084eda89fdf90f8a099ce7e817 chars:33",
+            "passage": "10.1016-0021-9517(65)90002-3/p7/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:bb5532482ae541315e6bb1d46c717e69d6153b26cd6f5a0fb4d3421a9baff31c chars:68",
+            "passage": "10.1016-0021-9517(65)90002-3/p6/4",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "inference_type": "observational",
+        "statement": "About 85% of the catalyst surface is covered by the adsorbed species during the experiments, taking a cross-sectional area of 25 Å2 for the species (presumably CH3O); in some cases the sum of adsorbed H2 and CO exceeded the BET v_m of 1.52 ml, which does not contradict complex formation."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/claim/decomposition-matches-mixed",
+      "label": "Claim",
+      "props": {
+        "name": "adsorption during methanol decomposition exceeds equilibria; after decomposition it matches mixed adsorption",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:28d0e07d9a8548ab4a42e5d5bfce175eddcac72467ff871f3110820c96069776 chars:120",
+            "passage": "10.1016-0021-9517(65)90002-3/p5/3",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:e6c2ba6f5fa89a6005bf9ca6fa8412f3e9df1f32eeb558aa626287c51f93f2fa chars:104",
+            "passage": "10.1016-0021-9517(65)90002-3/p6/3",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "inference_type": "interventional",
+        "statement": "Hydrogen and carbon monoxide adsorbed during methanol decomposition exceed their separate adsorption equilibria, and the adsorption after the decomposition agrees with the mixed adsorption curves."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/claim/literature-mechanisms",
+      "label": "Claim",
+      "props": {
+        "name": "earlier proposed mechanisms (cited): termolecular (Natta et al.), bimolecular via formaldehyde, methanol desorption, Knudsen diffusion",
+        "claim_kind": "other",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:7aeb608cb1cb11f8d234c4a3cb5d02af76962f7172db0f22f40509ebed53255e chars:70",
+            "passage": "10.1016-0021-9517(65)90002-3/p1/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "cited from refs. 1-6",
+        "statement": "Mechanisms proposed earlier include a termolecular surface reaction of two adsorbed hydrogen molecules and adsorbed CO (Natta, Mazzanti and Pasquon), a bimolecular scheme via formaldehyde with either step rate-determining (Natta and Pastonesi; Ozaki and Saita; Pasquon), rate-determining desorption of methanol (Uchida and Ogino), and Knudsen diffusion of methanol in the pores (Cherednichenko and Temkin)."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/claim/mutual-enhancement",
+      "label": "Claim",
+      "props": {
+        "name": "rate and equilibrium amounts of H2 and CO chemisorption are mutually enhanced by the other gas",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:8b7ac35963d0a9799d3a3365accafa3d3f98e3c2a7d1d445a61069234390990a chars:132",
+            "passage": "10.1016-0021-9517(65)90002-3/p1/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:cf26018f1586a04f0f974dd066ad845792ac1a3aa0ddf9d1b8cbdbafed4de2ca chars:97",
+            "passage": "10.1016-0021-9517(65)90002-3/p6/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "inference_type": "interventional",
+        "statement": "The rate as well as the equilibrium amounts of chemisorption of hydrogen and of carbon monoxide on the three-component methanol synthesis catalyst are mutually enhanced by the presence of the other gas; mixed adsorption exceeds separate adsorption."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/claim/previous-rate-equation",
+      "label": "Claim",
+      "props": {
+        "name": "earlier paper (cited): r = k P_H2 A_CO; adsorbed species CH3O not CH2O; Eley-Rideal reaction of H2 gas with adsorbed CH3O rate-determining",
+        "claim_kind": "mechanism",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:a5410d60fc4f1e39986effa662816e08c4ac3e9158c0ca28c67c6a01ccfbf6da chars:72",
+            "passage": "10.1016-0021-9517(65)90002-3/p1/4",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "rendered: 'is CH3O and not CH2O'; quote withheld: sha256:2a6eb73f119c17d07c254cac8beae04caef47ce7c3d7950454d8c759c6a1c167 chars:80",
+            "passage": "10.1016-0021-9517(65)90002-3/p2/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:a7835b73fc49ca9325cdde9ae1b7571ca44be06b0bfdbef3b55b3f98e2d8b72c chars:75",
+            "passage": "10.1016-0021-9517(65)90002-3/p2/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "cited from Tsuchiya and Shiba, Shokubai 4, 27 (1962); not this paper's measurement",
+        "statement": "In the authors' earlier paper (ref. 10), by Tamaru's method, the methanol synthesis rate was r = k P_H2 A_CO (A_CO: CO adsorbed in any surface complex), or Uchida-Ogino's equation with α nearly 0.7; the adsorbed species had the stoichiometric formula CH3O, not CH2O; the reaction between hydrogen gas and adsorbed CH3O (Eley-Rideal type) was concluded to be rate-determining."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/claim/saturation",
+      "label": "Claim",
+      "props": {
+        "name": "the mutual enhancement of adsorption has a certain saturation",
+        "claim_kind": "finding",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:240361873f09978be541a2d6a61a679de6d4fea1414aed36b8075cf4d2bbaa06 chars:77",
+            "passage": "10.1016-0021-9517(65)90002-3/p4/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:d121af5e412d46cd13cf1a8c2f02f6c81343f2603e348eda9365200ad60a4367 chars:37",
+            "passage": "10.1016-0021-9517(65)90002-3/p7/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "inference_type": "interventional",
+        "statement": "The mutual enhancement of adsorption has a certain saturation (knick points in Fig. 4), suggesting some excess adsorption of either gas that does not form a complex, though small."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/hypothesis/additional-sites",
+      "label": "Hypothesis",
+      "props": {
+        "name": "alternatively: creation of additional sites (Zn-H) by H2 chemisorption (Nagarjunan, Sastri and Kuriacose)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:0b910c4783f7559231e23405877328bf8c9bd151fa01e6ce1e9a4054069b7bbd chars:114",
+            "passage": "10.1016-0021-9517(65)90002-3/p6/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "hypothesis_kind": "competing",
+        "hypothesis_status": "proposed",
+        "statement": "The enhancement might be due to the creation of additional sites: hydrogen chemisorption creates additional donor levels, reduces the surface charge barrier and forms e.g. Zn-H bonds favourable for CO adsorption, while CO facilitates Zn-H formation."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/hypothesis/complex-formation",
+      "label": "Hypothesis",
+      "props": {
+        "name": "mutual enhancement explained by surface-complex formation",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:24a678b838d185be7fb653f48920337ede3df69a3ca5f989c2ff537aadb9ca7e chars:77",
+            "passage": "10.1016-0021-9517(65)90002-3/p1/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:2b4ea8eaf33ff9c138f8e36b01c8bd090bf2f8c86dfd2ba0b6644c5f67dfdcfe chars:45",
+            "passage": "10.1016-0021-9517(65)90002-3/p6/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "hypothesis_kind": "explanatory",
+        "hypothesis_status": "proposed",
+        "statement": "The mutual enhancement of H2 and CO adsorption is explained by the formation of a surface complex; on this typical three-component catalyst and at these temperatures complex formation is highly probable."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/hypothesis/complex-is-intermediate",
+      "label": "Hypothesis",
+      "props": {
+        "name": "the surface complex (at least its major part) is the intermediate of methanol synthesis",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:4aad93cf0961cc73117264150646ea482f3b51ea1aeb69f0f5cd8a08732f58a6 chars:85",
+            "passage": "10.1016-0021-9517(65)90002-3/p1/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:0576bbd7e78855003015f6f3d3b16f9594deb2266950d93c43dd351804ae6986 chars:93",
+            "passage": "10.1016-0021-9517(65)90002-3/p7/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:8da56e76f3090821ae4859a780af7e73b6ecde89fb183f68a2b3cbb402f9c390 chars:86",
+            "passage": "10.1016-0021-9517(65)90002-3/p7/3",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "hypothesis_kind": "mechanistic",
+        "hypothesis_status": "proposed",
+        "statement": "The surface complex formed is the intermediate of the methanol synthesis reaction; at least a major part of the adsorbed species is the reaction intermediate."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/hypothesis/curves-are-equilibria",
+      "label": "Hypothesis",
+      "props": {
+        "name": "curves after decomposition represent equilibria between H2, CO and methanol",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:ea2062bd0bfc930dd067237bcdc5e2256ace53b47ca01d410e3f4b4e954e9bc6 chars:108",
+            "passage": "10.1016-0021-9517(65)90002-3/p6/3",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "hypothesis_kind": "descriptive",
+        "hypothesis_status": "proposed",
+        "statement": "Since adsorption after methanol decomposition agrees with mixed adsorption and only very little methanol (less than 0.2%) is in the gas at equilibrium, these curves conceivably represent equilibrium states between hydrogen, carbon monoxide and methanol."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/hypothesis/rds-h2-with-complex",
+      "label": "Hypothesis",
+      "props": {
+        "name": "rate-determining step: molecular hydrogen reacting with the surface complex",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:fe12e78e7806b178c1e016bfb4ed73e73a396fe12495734a33f1cfde3e6819b1 chars:101",
+            "passage": "10.1016-0021-9517(65)90002-3/p1/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:5c37b50fd461f94df56163f54eae6c85a5c584f3c7d7e4f7284b1d09c195863d chars:33",
+            "passage": "10.1016-0021-9517(65)90002-3/p7/4",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:9208b4e7169bf32109b3edf537a63b29fee5c2a79848541cbcb85a4f41abc9e8 chars:119",
+            "passage": "10.1016-0021-9517(65)90002-3/p7/5",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "hypothesis_kind": "mechanistic",
+        "hypothesis_status": "proposed",
+        "statement": "The rate-determining step of the overall methanol synthesis is the reaction between hydrogen gas (molecules) and the adsorbed surface complex, since the exponent of P_H2 in Eq. (1) is unity (it would be 0.5 if hydrogen atoms reacted)."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/hypothesis/species-ch3o",
+      "label": "Hypothesis",
+      "props": {
+        "name": "the covering species is presumably CH3O",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "rendered: 'presumably CH3O'; quote withheld: sha256:8586407020ce8dc6a15e2e76dd28a5fb6730dfed36493a1409ac1e9ea7a5d3e2 chars:30",
+            "passage": "10.1016-0021-9517(65)90002-3/p7/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "hypothesis_kind": "descriptive",
+        "hypothesis_status": "proposed",
+        "statement": "The adsorbed species covering about 85% of the surface is presumably CH3O."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/reactor/closed-circulating-system",
+      "label": "Reactor",
+      "props": {
+        "name": "closed circulating system (Fig. 1) with reaction vessel, electric heater, thermocouple, liquid-nitrogen trap, circulation pump and gas chromatograph",
+        "design_status": "built",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:e33473a91c0ff35b7796566e59c092fe689763562a9c0f02106606b3a3691752 chars:82",
+            "passage": "10.1016-0021-9517(65)90002-3/p2/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          },
+          {
+            "kind": "figure",
+            "locator": "p. 2, Fig. 1",
+            "note": "quote withheld: sha256:54a5c89f47c806d5f3b9afb8f287f6ea147b1f27b63c0b218a38382bf2c46821 chars:77",
+            "passage": "10.1016-0021-9517(65)90002-3/p2/3",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "reactor_kind": "circulating"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/sample/catalyst-19.7g",
+      "label": "CatalystSample",
+      "props": {
+        "name": "catalyst sample, 19.7 g (supplied by Dr. Y. Ogino)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'rr-' = re-; quote withheld: sha256:1169b23fe497b51fb1601ecb2aec41f10f63470fe22241375359abfee215b92e chars:29",
+            "passage": "10.1016-0021-9517(65)90002-3/p2/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7, Acknowledgment",
+            "note": "quote withheld: sha256:7b4302caf2ec6fd1f35dfbe29d4ab7646acc9e62dc6420c3610d63f05a305d40 chars:38",
+            "passage": "10.1016-0021-9517(65)90002-3/p7/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "note": "provided by Dr. Y. Ogino of the Governmental Chemical Industrial Research Institute, Tokyo",
+        "preparation_status": "not_reported",
+        "sample_kind": "batch"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/species/surface-complex",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "adsorbed H2-CO surface complex (stoichiometric formula CH3O per the earlier paper)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:362f9e8886caf52d512d61cb776e72bf253a5c6ea2f08b03a3e2ec8c02b76445 chars:37",
+            "passage": "10.1016-0021-9517(65)90002-3/p2/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:0133dc1f61b18c2aeb6efaab318cd25d935ba9f704027b8bf81c2d1316f2ed63 chars:37",
+            "passage": "10.1016-0021-9517(65)90002-3/p7/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "rendered: 'presumably CH3O'; quote withheld: sha256:8586407020ce8dc6a15e2e76dd28a5fb6730dfed36493a1409ac1e9ea7a5d3e2 chars:30",
+            "passage": "10.1016-0021-9517(65)90002-3/p7/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "generality": "kind",
+        "note": "the formula CH3O (not CH2O) is from the authors' earlier paper (ref. 10)",
+        "species_kind": "other"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/treatment/evacuation-400c-3h",
+      "label": "Treatment",
+      "props": {
+        "name": "evacuation for 3 hr at 400 °C before each experiment",
+        "duration": {
+          "status": "present",
+          "as_reported": "3 hr",
+          "unit": "h",
+          "value": 3
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:e822415f05156185658f5cd00d77080460c26d46c4fc5ecbd0236ec8f3a5eca8 chars:57",
+            "passage": "10.1016-0021-9517(65)90002-3/p2/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "method": "evacuation",
+        "note": "with this treatment the results were reproducible",
+        "procedure_status": "completed",
+        "temperature": {
+          "status": "present",
+          "as_reported": "400°C",
+          "unit": "°C",
+          "value": 400
+        },
+        "treatment_kind": "other"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/treatment/reduction-280c-280h",
+      "label": "Treatment",
+      "props": {
+        "name": "reduction at 280 °C for 280 hr in hydrogen saturated with methanol vapour, atmospheric pressure",
+        "atmosphere": "hydrogen stream saturated with methanol vapor at room temperature",
+        "duration": {
+          "status": "present",
+          "as_reported": "280 hr",
+          "unit": "h",
+          "value": 280
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:f0641cb8b2ecc6c694711617fe8849a1f673b4e3c8977cd6730f0f26a21722e8 chars:131",
+            "passage": "10.1016-0021-9517(65)90002-3/p2/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "pressure": {
+          "status": "present",
+          "as_reported": "atmospheric pressure",
+          "qualifier": "approximate",
+          "unit": "atm",
+          "value": 1
+        },
+        "procedure_status": "completed",
+        "temperature": {
+          "status": "present",
+          "as_reported": "280°C",
+          "unit": "°C",
+          "value": 280
+        },
+        "treatment_kind": "reduction"
+      }
+    },
+    {
+      "id": "ex:msyn/source/10.1016-0021-9517(65)90002-3",
+      "label": "Source",
+      "props": {
+        "name": "Mutual influence of adsorption of hydrogen and carbon monoxide on a methanol synthesis catalyst*1",
+        "kind": "article",
+        "description": "Published 1965 (publication year (bibliography)); in scope: before the 1966-01-01 cutoff. Text: 7 pages text_layer. Text not redistributed.",
+        "doi": "10.1016/0021-9517(65)90002-3",
+        "licence": "no verified publisher licence; short excerpts quoted as evidence under fair use",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "Mutual influence of adsorption of hydrogen and carbon monoxide on a methanol synthesis catalyst*1",
+        "url": "https://doi.org/10.1016/0021-9517(65)90002-3",
+        "venue": "Journal of Catalysis",
+        "year": 1965
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/catalyst/zn-cr-cu-1-0.49-0.16/reported-in/10.1016-0021-9517(65)90002-3",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/catalyst/zn-cr-cu-1-0.49-0.16",
+      "target": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/adsorption-during-decomposition/reported-in/10.1016-0021-9517(65)90002-3",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5",
+          "p. 6",
+          "p. 6, Fig. 8"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/adsorption-during-decomposition",
+      "target": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/bet-surface-area/reported-in/10.1016-0021-9517(65)90002-3",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5",
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/bet-surface-area",
+      "target": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/fig2-h2-then-co-250/reported-in/10.1016-0021-9517(65)90002-3",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 3",
+          "p. 3, Fig. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/fig2-h2-then-co-250",
+      "target": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/fig3-co-then-h2-250/reported-in/10.1016-0021-9517(65)90002-3",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3",
+          "p. 3, Fig. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/fig3-co-then-h2-250",
+      "target": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/fig4-6-equilibria-250/reported-in/10.1016-0021-9517(65)90002-3",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4",
+          "p. 4, Fig. 4",
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/fig4-6-equilibria-250",
+      "target": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/fig7-mixed-300/reported-in/10.1016-0021-9517(65)90002-3",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/fig7-mixed-300",
+      "target": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/premixed-1co-2h2-250/reported-in/10.1016-0021-9517(65)90002-3",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4, Fig. 6",
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/premixed-1co-2h2-250",
+      "target": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/claim/250-greater-than-300/reported-in/10.1016-0021-9517(65)90002-3",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/claim/250-greater-than-300",
+      "target": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/claim/adsorbed-ratio-1.5/reported-in/10.1016-0021-9517(65)90002-3",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/claim/adsorbed-ratio-1.5",
+      "target": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/claim/coverage-85/reported-in/10.1016-0021-9517(65)90002-3",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6",
+          "p. 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/claim/coverage-85",
+      "target": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/claim/decomposition-matches-mixed/reported-in/10.1016-0021-9517(65)90002-3",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5",
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/claim/decomposition-matches-mixed",
+      "target": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/claim/literature-mechanisms/reported-in/10.1016-0021-9517(65)90002-3",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/claim/literature-mechanisms",
+      "target": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/claim/mutual-enhancement/reported-in/10.1016-0021-9517(65)90002-3",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/claim/mutual-enhancement",
+      "target": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/claim/previous-rate-equation/reported-in/10.1016-0021-9517(65)90002-3",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/claim/previous-rate-equation",
+      "target": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/claim/saturation/reported-in/10.1016-0021-9517(65)90002-3",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4",
+          "p. 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/claim/saturation",
+      "target": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/hypothesis/additional-sites/reported-in/10.1016-0021-9517(65)90002-3",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/hypothesis/additional-sites",
+      "target": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/hypothesis/complex-formation/reported-in/10.1016-0021-9517(65)90002-3",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/hypothesis/complex-formation",
+      "target": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/hypothesis/complex-is-intermediate/reported-in/10.1016-0021-9517(65)90002-3",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/hypothesis/complex-is-intermediate",
+      "target": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/hypothesis/curves-are-equilibria/reported-in/10.1016-0021-9517(65)90002-3",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/hypothesis/curves-are-equilibria",
+      "target": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/hypothesis/rds-h2-with-complex/reported-in/10.1016-0021-9517(65)90002-3",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1",
+          "p. 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/hypothesis/rds-h2-with-complex",
+      "target": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/hypothesis/species-ch3o/reported-in/10.1016-0021-9517(65)90002-3",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/hypothesis/species-ch3o",
+      "target": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/1",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:166ca0bfe172b8db4b120a6e30bd0bda93b9eeb76fe269e6b8cfcf0aae08639a chars:63",
+            "passage": "10.1016-0021-9517(65)90002-3/p2/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "1",
+          "unit": "1",
+          "value": 1
+        },
+        "fraction_basis": "not_reported",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/catalyst/zn-cr-cu-1-0.49-0.16",
+      "target": "ex:msyn/species/zinc"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/10",
+      "type": "CHARACTERIZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:e822415f05156185658f5cd00d77080460c26d46c4fc5ecbd0236ec8f3a5eca8 chars:57",
+            "passage": "10.1016-0021-9517(65)90002-3/p2/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "state": "reduced"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/fig3-co-then-h2-250",
+      "target": "ex:msyn/10.1016-0021-9517(65)90002-3/sample/catalyst-19.7g"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/11",
+      "type": "CHARACTERIZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:e822415f05156185658f5cd00d77080460c26d46c4fc5ecbd0236ec8f3a5eca8 chars:57",
+            "passage": "10.1016-0021-9517(65)90002-3/p2/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "state": "reduced"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/fig4-6-equilibria-250",
+      "target": "ex:msyn/10.1016-0021-9517(65)90002-3/sample/catalyst-19.7g"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/12",
+      "type": "CHARACTERIZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:e822415f05156185658f5cd00d77080460c26d46c4fc5ecbd0236ec8f3a5eca8 chars:57",
+            "passage": "10.1016-0021-9517(65)90002-3/p2/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "state": "reduced"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/premixed-1co-2h2-250",
+      "target": "ex:msyn/10.1016-0021-9517(65)90002-3/sample/catalyst-19.7g"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/13",
+      "type": "CHARACTERIZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:e822415f05156185658f5cd00d77080460c26d46c4fc5ecbd0236ec8f3a5eca8 chars:57",
+            "passage": "10.1016-0021-9517(65)90002-3/p2/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "state": "reduced"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/fig7-mixed-300",
+      "target": "ex:msyn/10.1016-0021-9517(65)90002-3/sample/catalyst-19.7g"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/14",
+      "type": "CHARACTERIZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:e822415f05156185658f5cd00d77080460c26d46c4fc5ecbd0236ec8f3a5eca8 chars:57",
+            "passage": "10.1016-0021-9517(65)90002-3/p2/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "state": "reduced"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/bet-surface-area",
+      "target": "ex:msyn/10.1016-0021-9517(65)90002-3/sample/catalyst-19.7g"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/15",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:e33473a91c0ff35b7796566e59c092fe689763562a9c0f02106606b3a3691752 chars:82",
+            "passage": "10.1016-0021-9517(65)90002-3/p2/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "role": "measurement"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/fig2-h2-then-co-250",
+      "target": "ex:msyn/10.1016-0021-9517(65)90002-3/reactor/closed-circulating-system"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/16",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:e33473a91c0ff35b7796566e59c092fe689763562a9c0f02106606b3a3691752 chars:82",
+            "passage": "10.1016-0021-9517(65)90002-3/p2/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "role": "measurement"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/fig3-co-then-h2-250",
+      "target": "ex:msyn/10.1016-0021-9517(65)90002-3/reactor/closed-circulating-system"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/17",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:e33473a91c0ff35b7796566e59c092fe689763562a9c0f02106606b3a3691752 chars:82",
+            "passage": "10.1016-0021-9517(65)90002-3/p2/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "role": "measurement"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/fig4-6-equilibria-250",
+      "target": "ex:msyn/10.1016-0021-9517(65)90002-3/reactor/closed-circulating-system"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/18",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:e33473a91c0ff35b7796566e59c092fe689763562a9c0f02106606b3a3691752 chars:82",
+            "passage": "10.1016-0021-9517(65)90002-3/p2/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "role": "measurement"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/premixed-1co-2h2-250",
+      "target": "ex:msyn/10.1016-0021-9517(65)90002-3/reactor/closed-circulating-system"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/19",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:e33473a91c0ff35b7796566e59c092fe689763562a9c0f02106606b3a3691752 chars:82",
+            "passage": "10.1016-0021-9517(65)90002-3/p2/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "role": "measurement"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/fig7-mixed-300",
+      "target": "ex:msyn/10.1016-0021-9517(65)90002-3/reactor/closed-circulating-system"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/2",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:166ca0bfe172b8db4b120a6e30bd0bda93b9eeb76fe269e6b8cfcf0aae08639a chars:63",
+            "passage": "10.1016-0021-9517(65)90002-3/p2/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "0.49",
+          "unit": "1",
+          "value": 0.49
+        },
+        "fraction_basis": "relative_to_component",
+        "relative_to": "ex:msyn/species/zinc",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/catalyst/zn-cr-cu-1-0.49-0.16",
+      "target": "ex:msyn/species/chromium"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/20",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "p. 3, Fig. 2",
+            "note": "the figure labels the CO addition '+CO 27.3 ml'; quote withheld: sha256:86545010e92c9877b3c6975859b60a2e582e9d3d1a2ce4512da10e6b99b02089 chars:67",
+            "passage": "10.1016-0021-9517(65)90002-3/p3/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "role": "reagent"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/fig2-h2-then-co-250",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/21",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "p. 3, Fig. 2",
+            "note": "the figure labels the CO addition '+CO 27.3 ml'; quote withheld: sha256:86545010e92c9877b3c6975859b60a2e582e9d3d1a2ce4512da10e6b99b02089 chars:67",
+            "passage": "10.1016-0021-9517(65)90002-3/p3/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "role": "reagent"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/fig2-h2-then-co-250",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/22",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "p. 3, Fig. 3",
+            "note": "the figure labels the H2 addition '+H2 80.1 ml'; quote withheld: sha256:38216fbe806a62aca8396be44379083b2c58ae5f9ec9d50e6fe4a2f10bf5d919 chars:69",
+            "passage": "10.1016-0021-9517(65)90002-3/p3/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "role": "reagent"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/fig3-co-then-h2-250",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/23",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "p. 3, Fig. 3",
+            "note": "the figure labels the H2 addition '+H2 80.1 ml'; quote withheld: sha256:38216fbe806a62aca8396be44379083b2c58ae5f9ec9d50e6fe4a2f10bf5d919 chars:69",
+            "passage": "10.1016-0021-9517(65)90002-3/p3/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "role": "reagent"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/fig3-co-then-h2-250",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/24",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "p. 4, Fig. 4",
+            "note": "quote withheld: sha256:7506b3548373801793ae965472544dde6f50bde3044f6814866025d9a36bc5a5 chars:135",
+            "passage": "10.1016-0021-9517(65)90002-3/p4/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "role": "reagent"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/fig4-6-equilibria-250",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/25",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "p. 4, Fig. 4",
+            "note": "quote withheld: sha256:7506b3548373801793ae965472544dde6f50bde3044f6814866025d9a36bc5a5 chars:135",
+            "passage": "10.1016-0021-9517(65)90002-3/p4/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "role": "reagent"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/fig4-6-equilibria-250",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/26",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:ab33bb507d9be573b33a897d4520f241986ab54771529b206fb33aa8f1841dcb chars:114",
+            "passage": "10.1016-0021-9517(65)90002-3/p5/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "role": "reagent"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/premixed-1co-2h2-250",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/27",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:ab33bb507d9be573b33a897d4520f241986ab54771529b206fb33aa8f1841dcb chars:114",
+            "passage": "10.1016-0021-9517(65)90002-3/p5/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "role": "reagent"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/premixed-1co-2h2-250",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/28",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:9a3fb0114301ba7aac78db1a86721c396952b694d8efd297857a008fc506d592 chars:71",
+            "passage": "10.1016-0021-9517(65)90002-3/p5/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "role": "reagent"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/fig7-mixed-300",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/29",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:9a3fb0114301ba7aac78db1a86721c396952b694d8efd297857a008fc506d592 chars:71",
+            "passage": "10.1016-0021-9517(65)90002-3/p5/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "role": "reagent"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/fig7-mixed-300",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/3",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:166ca0bfe172b8db4b120a6e30bd0bda93b9eeb76fe269e6b8cfcf0aae08639a chars:63",
+            "passage": "10.1016-0021-9517(65)90002-3/p2/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "0.16",
+          "unit": "1",
+          "value": 0.16
+        },
+        "fraction_basis": "relative_to_component",
+        "relative_to": "ex:msyn/species/zinc",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/catalyst/zn-cr-cu-1-0.49-0.16",
+      "target": "ex:msyn/species/copper"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/30",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "rendered: 7.0 × 10^6 cm2; quote withheld: sha256:b1bc389a77934e7e8596921b55e47a8736e95833d68d5adaa0ebab36c8054551 chars:94",
+            "passage": "10.1016-0021-9517(65)90002-3/p5/4",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "role": "reagent"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/bet-surface-area",
+      "target": "ex:msyn/species/n2"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/36",
+      "type": "CHARACTERIZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:e822415f05156185658f5cd00d77080460c26d46c4fc5ecbd0236ec8f3a5eca8 chars:57",
+            "passage": "10.1016-0021-9517(65)90002-3/p2/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "state": "reduced"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/adsorption-during-decomposition",
+      "target": "ex:msyn/10.1016-0021-9517(65)90002-3/sample/catalyst-19.7g"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/4",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:c86b1fc0a4a21a4b09e7f3d49f686f092eb3589385f2e82d58f08b4d4f8e0c5d chars:58",
+            "passage": "10.1016-0021-9517(65)90002-3/p6/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/catalyst/zn-cr-cu-1-0.49-0.16",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/44",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:8b7ac35963d0a9799d3a3365accafa3d3f98e3c2a7d1d445a61069234390990a chars:132",
+            "passage": "10.1016-0021-9517(65)90002-3/p1/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/claim/mutual-enhancement",
+      "target": "ex:msyn/10.1016-0021-9517(65)90002-3/catalyst/zn-cr-cu-1-0.49-0.16"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/45",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:8b7ac35963d0a9799d3a3365accafa3d3f98e3c2a7d1d445a61069234390990a chars:132",
+            "passage": "10.1016-0021-9517(65)90002-3/p1/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/claim/mutual-enhancement",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/46",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:8b7ac35963d0a9799d3a3365accafa3d3f98e3c2a7d1d445a61069234390990a chars:132",
+            "passage": "10.1016-0021-9517(65)90002-3/p1/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/claim/mutual-enhancement",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/47",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "p. 3, Fig. 2",
+            "note": "the figure labels the CO addition '+CO 27.3 ml'; quote withheld: sha256:86545010e92c9877b3c6975859b60a2e582e9d3d1a2ce4512da10e6b99b02089 chars:67",
+            "passage": "10.1016-0021-9517(65)90002-3/p3/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/fig2-h2-then-co-250",
+      "target": "ex:msyn/10.1016-0021-9517(65)90002-3/claim/mutual-enhancement"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/48",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "p. 3, Fig. 3",
+            "note": "the figure labels the H2 addition '+H2 80.1 ml'; quote withheld: sha256:38216fbe806a62aca8396be44379083b2c58ae5f9ec9d50e6fe4a2f10bf5d919 chars:69",
+            "passage": "10.1016-0021-9517(65)90002-3/p3/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/fig3-co-then-h2-250",
+      "target": "ex:msyn/10.1016-0021-9517(65)90002-3/claim/mutual-enhancement"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/49",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "p. 4, Fig. 4",
+            "note": "quote withheld: sha256:7506b3548373801793ae965472544dde6f50bde3044f6814866025d9a36bc5a5 chars:135",
+            "passage": "10.1016-0021-9517(65)90002-3/p4/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/fig4-6-equilibria-250",
+      "target": "ex:msyn/10.1016-0021-9517(65)90002-3/claim/mutual-enhancement"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/5",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:26aacb79b201f1551e524459d28b320bbf95f48333701b70e19246a3dd13dcb2 chars:33",
+            "passage": "10.1016-0021-9517(65)90002-3/p5/3",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/catalyst/zn-cr-cu-1-0.49-0.16",
+      "target": "ex:msyn/reaction/methanol-decomposition"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/50",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:9a3fb0114301ba7aac78db1a86721c396952b694d8efd297857a008fc506d592 chars:71",
+            "passage": "10.1016-0021-9517(65)90002-3/p5/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/fig7-mixed-300",
+      "target": "ex:msyn/10.1016-0021-9517(65)90002-3/claim/mutual-enhancement"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/51",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:240361873f09978be541a2d6a61a679de6d4fea1414aed36b8075cf4d2bbaa06 chars:77",
+            "passage": "10.1016-0021-9517(65)90002-3/p4/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/claim/saturation",
+      "target": "ex:msyn/10.1016-0021-9517(65)90002-3/catalyst/zn-cr-cu-1-0.49-0.16"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/52",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:240361873f09978be541a2d6a61a679de6d4fea1414aed36b8075cf4d2bbaa06 chars:77",
+            "passage": "10.1016-0021-9517(65)90002-3/p4/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/fig4-6-equilibria-250",
+      "target": "ex:msyn/10.1016-0021-9517(65)90002-3/claim/saturation"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/53",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:06da40b8cab3e86c6cf92118a67ba2b91d07db6309998498d7f366abc62dd2de chars:70",
+            "passage": "10.1016-0021-9517(65)90002-3/p6/5",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/claim/adsorbed-ratio-1.5",
+      "target": "ex:msyn/10.1016-0021-9517(65)90002-3/species/surface-complex"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/54",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:06da40b8cab3e86c6cf92118a67ba2b91d07db6309998498d7f366abc62dd2de chars:70",
+            "passage": "10.1016-0021-9517(65)90002-3/p6/5",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/fig4-6-equilibria-250",
+      "target": "ex:msyn/10.1016-0021-9517(65)90002-3/claim/adsorbed-ratio-1.5"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/55",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:af1f267c2767439996744136e6b8c16b93e5ca87868da27734d46741feb1cdf8 chars:57",
+            "passage": "10.1016-0021-9517(65)90002-3/p5/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/claim/250-greater-than-300",
+      "target": "ex:msyn/10.1016-0021-9517(65)90002-3/catalyst/zn-cr-cu-1-0.49-0.16"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/56",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:af1f267c2767439996744136e6b8c16b93e5ca87868da27734d46741feb1cdf8 chars:57",
+            "passage": "10.1016-0021-9517(65)90002-3/p5/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/fig7-mixed-300",
+      "target": "ex:msyn/10.1016-0021-9517(65)90002-3/claim/250-greater-than-300"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/57",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:28d0e07d9a8548ab4a42e5d5bfce175eddcac72467ff871f3110820c96069776 chars:120",
+            "passage": "10.1016-0021-9517(65)90002-3/p5/3",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/claim/decomposition-matches-mixed",
+      "target": "ex:msyn/10.1016-0021-9517(65)90002-3/catalyst/zn-cr-cu-1-0.49-0.16"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/59",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:e6c2ba6f5fa89a6005bf9ca6fa8412f3e9df1f32eeb558aa626287c51f93f2fa chars:104",
+            "passage": "10.1016-0021-9517(65)90002-3/p6/3",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/adsorption-during-decomposition",
+      "target": "ex:msyn/10.1016-0021-9517(65)90002-3/claim/decomposition-matches-mixed"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/6",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:166ca0bfe172b8db4b120a6e30bd0bda93b9eeb76fe269e6b8cfcf0aae08639a chars:63",
+            "passage": "10.1016-0021-9517(65)90002-3/p2/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/sample/catalyst-19.7g",
+      "target": "ex:msyn/10.1016-0021-9517(65)90002-3/catalyst/zn-cr-cu-1-0.49-0.16"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/60",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:0ed6173f507fe320abf87bf619540f7cc8d88ee3398eea438ee3a0dc7ebf6af3 chars:104",
+            "passage": "10.1016-0021-9517(65)90002-3/p7/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/claim/coverage-85",
+      "target": "ex:msyn/10.1016-0021-9517(65)90002-3/catalyst/zn-cr-cu-1-0.49-0.16"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/61",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:0ed6173f507fe320abf87bf619540f7cc8d88ee3398eea438ee3a0dc7ebf6af3 chars:104",
+            "passage": "10.1016-0021-9517(65)90002-3/p7/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/claim/coverage-85",
+      "target": "ex:msyn/10.1016-0021-9517(65)90002-3/species/surface-complex"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/62",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:86e99d127366304df646a5d3f99a63f232ee6bac32bd529f91b8a89908a0f782 chars:28",
+            "passage": "10.1016-0021-9517(65)90002-3/p6/4",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/bet-surface-area",
+      "target": "ex:msyn/10.1016-0021-9517(65)90002-3/claim/coverage-85"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/63",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:a5410d60fc4f1e39986effa662816e08c4ac3e9158c0ca28c67c6a01ccfbf6da chars:72",
+            "passage": "10.1016-0021-9517(65)90002-3/p1/4",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/claim/previous-rate-equation",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/64",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:a5410d60fc4f1e39986effa662816e08c4ac3e9158c0ca28c67c6a01ccfbf6da chars:72",
+            "passage": "10.1016-0021-9517(65)90002-3/p1/4",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/claim/previous-rate-equation",
+      "target": "ex:msyn/10.1016-0021-9517(65)90002-3/species/surface-complex"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/65",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:7aeb608cb1cb11f8d234c4a3cb5d02af76962f7172db0f22f40509ebed53255e chars:70",
+            "passage": "10.1016-0021-9517(65)90002-3/p1/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/claim/literature-mechanisms",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/66",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:24a678b838d185be7fb653f48920337ede3df69a3ca5f989c2ff537aadb9ca7e chars:77",
+            "passage": "10.1016-0021-9517(65)90002-3/p1/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/hypothesis/complex-formation",
+      "target": "ex:msyn/10.1016-0021-9517(65)90002-3/catalyst/zn-cr-cu-1-0.49-0.16"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/67",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:24a678b838d185be7fb653f48920337ede3df69a3ca5f989c2ff537aadb9ca7e chars:77",
+            "passage": "10.1016-0021-9517(65)90002-3/p1/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/hypothesis/complex-formation",
+      "target": "ex:msyn/10.1016-0021-9517(65)90002-3/species/surface-complex"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/68",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:0b910c4783f7559231e23405877328bf8c9bd151fa01e6ce1e9a4054069b7bbd chars:114",
+            "passage": "10.1016-0021-9517(65)90002-3/p6/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/hypothesis/additional-sites",
+      "target": "ex:msyn/10.1016-0021-9517(65)90002-3/catalyst/zn-cr-cu-1-0.49-0.16"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/69",
+      "type": "COMPETES_WITH",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:36da88b855fbf590ce76306580141d38d06db2576195abead7f679c24cf16989 chars:92",
+            "passage": "10.1016-0021-9517(65)90002-3/p6/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "note": "the authors favour complex formation because their catalyst and temperature differ from those of Nagarjunan et al."
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/hypothesis/complex-formation",
+      "target": "ex:msyn/10.1016-0021-9517(65)90002-3/hypothesis/additional-sites"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/7",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:5987f329c4a405fb66778eb28ff916908bb6ac2df945aa1d883553bd1277fd26 chars:44",
+            "passage": "10.1016-0021-9517(65)90002-3/p2/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "order": 1
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/sample/catalyst-19.7g",
+      "target": "ex:msyn/10.1016-0021-9517(65)90002-3/treatment/reduction-280c-280h"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/70",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:4aad93cf0961cc73117264150646ea482f3b51ea1aeb69f0f5cd8a08732f58a6 chars:85",
+            "passage": "10.1016-0021-9517(65)90002-3/p1/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/hypothesis/complex-is-intermediate",
+      "target": "ex:msyn/10.1016-0021-9517(65)90002-3/species/surface-complex"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/71",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:4aad93cf0961cc73117264150646ea482f3b51ea1aeb69f0f5cd8a08732f58a6 chars:85",
+            "passage": "10.1016-0021-9517(65)90002-3/p1/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/hypothesis/complex-is-intermediate",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/72",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:fe12e78e7806b178c1e016bfb4ed73e73a396fe12495734a33f1cfde3e6819b1 chars:101",
+            "passage": "10.1016-0021-9517(65)90002-3/p1/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/hypothesis/rds-h2-with-complex",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/73",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:fe12e78e7806b178c1e016bfb4ed73e73a396fe12495734a33f1cfde3e6819b1 chars:101",
+            "passage": "10.1016-0021-9517(65)90002-3/p1/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/hypothesis/rds-h2-with-complex",
+      "target": "ex:msyn/10.1016-0021-9517(65)90002-3/species/surface-complex"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/74",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "quote withheld: sha256:fe12e78e7806b178c1e016bfb4ed73e73a396fe12495734a33f1cfde3e6819b1 chars:101",
+            "passage": "10.1016-0021-9517(65)90002-3/p1/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/hypothesis/rds-h2-with-complex",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/75",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:ea2062bd0bfc930dd067237bcdc5e2256ace53b47ca01d410e3f4b4e954e9bc6 chars:108",
+            "passage": "10.1016-0021-9517(65)90002-3/p6/3",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/hypothesis/curves-are-equilibria",
+      "target": "ex:msyn/reaction/methanol-decomposition"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/76",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "rendered: 'presumably CH3O'; quote withheld: sha256:8586407020ce8dc6a15e2e76dd28a5fb6730dfed36493a1409ac1e9ea7a5d3e2 chars:30",
+            "passage": "10.1016-0021-9517(65)90002-3/p7/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/hypothesis/species-ch3o",
+      "target": "ex:msyn/10.1016-0021-9517(65)90002-3/species/surface-complex"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/78",
+      "type": "TESTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:ee18d2d2ca8b0eb813b0c55a2f8438fa8c4f2013eb63bf10cbf0fcb58f4ea0c0 chars:76",
+            "passage": "10.1016-0021-9517(65)90002-3/p6/1",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "outcome": "supports"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/fig2-h2-then-co-250",
+      "target": "ex:msyn/10.1016-0021-9517(65)90002-3/hypothesis/complex-formation"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/79",
+      "type": "TESTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "quote withheld: sha256:e6c2ba6f5fa89a6005bf9ca6fa8412f3e9df1f32eeb558aa626287c51f93f2fa chars:104",
+            "passage": "10.1016-0021-9517(65)90002-3/p6/3",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "outcome": "supports"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/adsorption-during-decomposition",
+      "target": "ex:msyn/10.1016-0021-9517(65)90002-3/hypothesis/curves-are-equilibria"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/8",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:e822415f05156185658f5cd00d77080460c26d46c4fc5ecbd0236ec8f3a5eca8 chars:57",
+            "passage": "10.1016-0021-9517(65)90002-3/p2/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "order": 2
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/sample/catalyst-19.7g",
+      "target": "ex:msyn/10.1016-0021-9517(65)90002-3/treatment/evacuation-400c-3h"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/link/9",
+      "type": "CHARACTERIZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:e822415f05156185658f5cd00d77080460c26d46c4fc5ecbd0236ec8f3a5eca8 chars:57",
+            "passage": "10.1016-0021-9517(65)90002-3/p2/2",
+            "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+          }
+        ],
+        "state": "reduced"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/characterization/fig2-h2-then-co-250",
+      "target": "ex:msyn/10.1016-0021-9517(65)90002-3/sample/catalyst-19.7g"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/reactor/closed-circulating-system/reported-in/10.1016-0021-9517(65)90002-3",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 2, Fig. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/reactor/closed-circulating-system",
+      "target": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/sample/catalyst-19.7g/reported-in/10.1016-0021-9517(65)90002-3",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 7, Acknowledgment"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/sample/catalyst-19.7g",
+      "target": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/species/surface-complex/reported-in/10.1016-0021-9517(65)90002-3",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/species/surface-complex",
+      "target": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/treatment/evacuation-400c-3h/reported-in/10.1016-0021-9517(65)90002-3",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/treatment/evacuation-400c-3h",
+      "target": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+    },
+    {
+      "id": "ex:msyn/10.1016-0021-9517(65)90002-3/treatment/reduction-280c-280h/reported-in/10.1016-0021-9517(65)90002-3",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1016-0021-9517(65)90002-3/treatment/reduction-280c-280h",
+      "target": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+    },
+    {
+      "id": "ex:msyn/reaction/co-hydrogenation-to-methanol/reported-in/10.1016-0021-9517(65)90002-3",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+    },
+    {
+      "id": "ex:msyn/reaction/methanol-decomposition/reported-in/10.1016-0021-9517(65)90002-3",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/reaction/methanol-decomposition",
+      "target": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+    },
+    {
+      "id": "ex:msyn/source/10.1016-0021-9517(65)90002-3/authored-by/1",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 1,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3",
+      "target": "ex:msyn/person/susumu-tsuchiya"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/10.1016-0021-9517(65)90002-3"
+}

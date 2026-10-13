@@ -1,0 +1,130 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/10.1246-bcsj.33.358/hypothesis/frequency-factor-rise-low-cu",
+      "label": "Hypothesis",
+      "props": {
+        "name": "steep rise of frequency factor at very low Cu/Zn; alike active centres",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:9a756117544ac899e0244026c5abdc804edc976bc914c49146887dc95ba235cb chars:207",
+            "source": "ex:msyn/source/10.1246-bcsj.33.358"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "the page image prints '0.5⁻²' (a raised '-2'), which the text layer renders '0.5-2'; whether a range 0.5-2 or 0.5 × 10⁻² is meant is ambiguous; quote withheld: sha256:c75ee681b63c19717f7447652e2e24b228c9dc229be38940f8c29435b6fec6b4 chars:303",
+            "passage": "10.1246-bcsj.33.358/p5/4",
+            "source": "ex:msyn/source/10.1246-bcsj.33.358"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:242490c1da74794b5c76ec9af7cc0f49f4618274669aeb61f288f4019cea3cb3 chars:72",
+            "passage": "10.1246-bcsj.33.358/p5/4",
+            "source": "ex:msyn/source/10.1246-bcsj.33.358"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:99445c9d786c4f8d6e9f6df9a1be6ad92248b83f5ce3c1697c46b2a01327c432 chars:136",
+            "passage": "10.1246-bcsj.33.358/p5/5",
+            "source": "ex:msyn/source/10.1246-bcsj.33.358"
+          }
+        ],
+        "hypothesis_kind": "explanatory",
+        "hypothesis_status": "proposed",
+        "statement": "Since the activation energy is constant with Cu/Zn, a premise is possible that all active centres are alike and appear more frequently on the surface with increasing copper content; the authors expect a steep rise of the frequency factor per unit area with decreasing Cu/Zn at extremely low ratios (toward the higher values of zinc oxide-chromium oxide catalysts), for which no data are yet available."
+      }
+    },
+    {
+      "id": "ex:msyn/source/10.1246-bcsj.33.358",
+      "label": "Source",
+      "props": {
+        "name": "Catalytic Activity for Methanol Synthesis of Zinc Oxide-Chromium Oxide-Copper Oxide Catalysts and its Structural Dependency",
+        "kind": "article",
+        "description": "Published 1960 (publication year (bibliography)); in scope: before the 1966-01-01 cutoff. Text: 6 pages text_layer. Text not redistributed.",
+        "doi": "10.1246/bcsj.33.358",
+        "licence": "no verified publisher licence; short excerpts quoted as evidence under fair use",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "Catalytic Activity for Methanol Synthesis of Zinc Oxide-Chromium Oxide-Copper Oxide Catalysts and its Structural Dependency",
+        "url": "https://doi.org/10.1246/bcsj.33.358",
+        "venue": "Bulletin of the Chemical Society of Japan",
+        "year": 1960
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/10.1246-bcsj.33.358/hypothesis/frequency-factor-rise-low-cu/reported-in/10.1246-bcsj.33.358",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-bcsj.33.358/hypothesis/frequency-factor-rise-low-cu",
+      "target": "ex:msyn/source/10.1246-bcsj.33.358"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.33.358/link/247",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:99445c9d786c4f8d6e9f6df9a1be6ad92248b83f5ce3c1697c46b2a01327c432 chars:136",
+            "passage": "10.1246-bcsj.33.358/p5/5",
+            "source": "ex:msyn/source/10.1246-bcsj.33.358"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-bcsj.33.358/hypothesis/frequency-factor-rise-low-cu",
+      "target": "ex:msyn/species/cuo"
+    },
+    {
+      "id": "ex:msyn/source/10.1246-bcsj.33.358/authored-by/1",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 1,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/10.1246-bcsj.33.358",
+      "target": "ex:msyn/person/yoshisada-ogino"
+    },
+    {
+      "id": "ex:msyn/source/10.1246-bcsj.33.358/authored-by/2",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 2,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/10.1246-bcsj.33.358",
+      "target": "ex:msyn/person/masaaki-oba"
+    },
+    {
+      "id": "ex:msyn/source/10.1246-bcsj.33.358/authored-by/3",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 3,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/10.1246-bcsj.33.358",
+      "target": "ex:msyn/person/hiroshi-uchida"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/10.1246-bcsj.33.358"
+}

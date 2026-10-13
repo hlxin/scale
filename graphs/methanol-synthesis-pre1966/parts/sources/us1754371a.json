@@ -1,0 +1,2415 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/source/us1754371a",
+      "label": "Source",
+      "props": {
+        "name": "Synthetic-methanol process",
+        "kind": "patent",
+        "description": "Published 1930-04-15 (grant date printed on the patent (agrees with the USPTO issue-year table)); in scope: before the 1966-01-01 cutoff. Text: 4 pages ocr (tesseract 5.5.3 (eng, 300 dpi, 2 columns)). Text not redistributed.",
+        "identifiers": {
+          "patent": "US1754371A"
+        },
+        "licence": "US patent; not subject to copyright",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "Synthetic-methanol process",
+        "url": "https://patents.google.com/patent/US1754371A",
+        "year": 1930
+      }
+    },
+    {
+      "id": "ex:msyn/us1754371a/catalyst/any-methanol-catalyst",
+      "label": "Catalyst",
+      "props": {
+        "name": "any catalyst suitable for synthetic methanol production (mixtures of metallic oxides)",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1754371a/p3/7",
+            "quote": "In general, any 105 catalyst suitable for synthetic methanol pro- ) duction may be employed in the process, these catalysts ordinarily consisting of mixtures of metallic oxides",
+            "source": "ex:msyn/source/us1754371a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1754371a/p3/7",
+            "quote": "My process is in no way dependent on the use of a specific catalyst.",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "generality": "kind",
+        "note": "the patent refers for examples to United States Patents 1,558,559 and 1,608,643 and English Patents 229,714 and 229,715; their contents are not given"
+      }
+    },
+    {
+      "id": "ex:msyn/us1754371a/claim/claim-1",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 1",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, claim 1",
+            "passage": "us1754371a/p4/2",
+            "quote": "the step of removing said impurities from the gases by scrubbing them with liquid meth-",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "In methanol manufacture from hydrogen and carbon oxides containing traces of impurities, over a catalyst at elevated pressure and temperature, the step of removing the impurities by scrubbing the gases with liquid methanol."
+      }
+    },
+    {
+      "id": "ex:msyn/us1754371a/claim/claim-2",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 2",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, claim 2",
+            "passage": "us1754371a/p4/2",
+            "quote": "the step of combining the gases remaining unreacted, after a passage thereof in contact with the catalyst, with fresh gas, and removing impurities from the mixed gases by scrubbing them with liquid meth-",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "In methanol manufacture, the step of combining unreacted gases after passage over the catalyst with fresh gas, and removing impurities from the mixed gases by scrubbing with liquid methanol."
+      }
+    },
+    {
+      "id": "ex:msyn/us1754371a/claim/claim-3",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 3",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, claim 3",
+            "passage": "us1754371a/p4/3",
+            "quote": "scrubbing said incoming gases with the formed methanol during its removal from the process.",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "In methanol manufacture from impure hydrogen and carbon oxides, removing the impurities by scrubbing the incoming gases with the formed methanol during its removal from the process."
+      }
+    },
+    {
+      "id": "ex:msyn/us1754371a/claim/claim-4",
+      "label": "Claim",
+      "props": {
+        "name": "patent claim 4",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, claim 4",
+            "passage": "us1754371a/p4/3",
+            "quote": "the steps which comprise passing the gases in contact with liquid methanol under pressure,",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "In synthetic methanol production at elevated pressure, passing the gases through liquid methanol under pressure, heating them by thermal contact with the hot reaction gases, contacting them with heated catalyst, cooling the reacted gases and removing the methanol, combining the residual gas with fresh gas and repeating the cycle."
+      }
+    },
+    {
+      "id": "ex:msyn/us1754371a/claim/impurities",
+      "label": "Claim",
+      "props": {
+        "name": "impurities poison catalysts or cause side reactions",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/4",
+            "quote": "While various imert gases such as methane and nitrogen are ordinarily regarded as non- - injurious, and hence tolerable by the reaction,",
+            "source": "ex:msyn/source/us1754371a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/4",
+            "quote": "it is well known that very small amounts of certain other substances are poisonous to the catalysts employed, or may catalyze various. undesirable side reactions.",
+            "source": "ex:msyn/source/us1754371a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/4",
+            "quote": "Among these undesirable impurities are in- cluded the, following :—volatile carbonyls of nickel and iron which may be formed by the ‘interaction of the hot carbon oxides with the apparatus;",
+            "source": "ex:msyn/source/us1754371a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/5",
+            "quote": "gaseous mixture; and volatile sulfur and ar- senic compounds.",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "While inert gases such as methane and nitrogen are ordinarily regarded as non-injurious, very small amounts of certain other substances poison the catalysts or catalyze undesirable side reactions: volatile carbonyls of nickel and iron formed from hot carbon oxides and the apparatus, oil vapors from the compressors, water vapor in the recirculated gas, amino compounds, and volatile sulfur and arsenic compounds."
+      }
+    },
+    {
+      "id": "ex:msyn/us1754371a/claim/impurity-origins",
+      "label": "Claim",
+      "props": {
+        "name": "origins of impurities and build-up on recirculation",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/4",
+            "quote": "They may be present in the - gaseous mixture entering the reaction; they . may be formed by the reaction; or they may be formed by the gradual decomposition. of the apparatusemployed.",
+            "source": "ex:msyn/source/us1754371a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/5",
+            "quote": "Even if a.gas mixture of extremely high purity is initially supplied to the process, im- | purities are built up in the manner described,",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Impurities may be present in the entering gas, formed by the reaction, or formed by gradual decomposition of the apparatus; even with a gas of extremely high initial purity, impurities build up during recirculation of the gases."
+      }
+    },
+    {
+      "id": "ex:msyn/us1754371a/claim/known-conditions",
+      "label": "Claim",
+      "props": {
+        "name": "methanol from H2 and carbon oxides above 50 atm and 280 °C",
+        "claim_kind": "other",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'15' is a margin line number",
+            "passage": "us1754371a/p2/2",
+            "quote": "are passed over heated catalytic agents .at. -. pressures in excess of 50 atmospheres and at 15 temperatures in excess 280° C., the gases react",
+            "source": "ex:msyn/source/us1754371a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/2",
+            "quote": "the hydrogen preferably being present -° in volumetric excess over the carbon oxides",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "stated by the patent as well known",
+        "statement": "Mixtures of hydrogen and carbon oxides (carbon monoxide, carbon dioxide or mixtures), hydrogen preferably in volumetric excess, react to form methanol when passed over heated catalysts at pressures in excess of 50 atmospheres and temperatures in excess of 280 °C."
+      }
+    },
+    {
+      "id": "ex:msyn/us1754371a/claim/methanol-scrubbing",
+      "label": "Claim",
+      "props": {
+        "name": "scrubbing with liquid methanol removes poisons",
+        "claim_kind": "causal",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/6",
+            "quote": "I have now discovered that the injurious substances present or formed in the gas mix- | ture employed for the methanol synthesis may 6¢ be removed in a simple fashion by merely “scrubbing” the gases with liquid methanol.",
+            "source": "ex:msyn/source/us1754371a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/7",
+            "quote": "simply bubbled through or “scrubbed” with liquid methanol under elevated pressure, the undesirable substances constituting catalyst. poisons, etc., are dissolved in the methanol.",
+            "source": "ex:msyn/source/us1754371a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/6",
+            "quote": "This method of purification is extremely ad- vantageous since it does not require the use of extra chemicals or of heat,",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Injurious substances present or formed in the synthesis gas may be removed by scrubbing the gases with liquid methanol under elevated pressure; the catalyst poisons dissolve in the methanol. No extra chemicals or heat are needed, it runs at the synthesis pressure, and since only the product methanol is used the gas cannot be contaminated with foreign substances."
+      }
+    },
+    {
+      "id": "ex:msyn/us1754371a/claim/operation-modes",
+      "label": "Claim",
+      "props": {
+        "name": "intermittent or continuous scrubber operation",
+        "claim_kind": "other",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1754371a/p3/4",
+            "quote": "the liquid circulat- ing pump may be operated either intermit- x» tently or continuously.",
+            "source": "ex:msyn/source/us1754371a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1754371a/p3/6",
+            "quote": "The scrubber may then be filled with Raschig rings or similar tower packing material,",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The liquid circulating pump may be run intermittently (scrubber filled with methanol, product drained from the receiver, scrubber methanol periodically replaced) or continuously (all product methanol passes through the scrubber and leaves by its drain); in continuous operation the methanol level may be lowered and the scrubber filled with Raschig rings or similar packing over which the methanol is sprayed."
+      }
+    },
+    {
+      "id": "ex:msyn/us1754371a/claim/purifier-mass",
+      "label": "Claim",
+      "props": {
+        "name": "purifier mass filters gas and decomposes carbonyls",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1754371a/p3/7",
+            "quote": "consist of copper turnings or asbestos fiber, or, indeed, of some of the catalyst employed in the reaction.",
+            "source": "ex:msyn/source/us1754371a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1754371a/p3/7",
+            "quote": "Its function 1s to act as a sort of gas filter and to decompose any traces of metallic carbonyls which might otherwise ,,,",
+            "source": "ex:msyn/source/us1754371a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1754371a/p3/8",
+            "quote": "the use of a purifier mass is no longer absolutely necessary.",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The purifier mass may consist of copper turnings, asbestos fiber or some of the catalyst; it acts as a gas filter and decomposes traces of metallic carbonyls that might otherwise reach the catalyst. With methanol scrubbing it is no longer absolutely necessary, but it is preferably kept as an additional safeguard."
+      }
+    },
+    {
+      "id": "ex:msyn/us1754371a/claim/scrubbing-methanol-marketable",
+      "label": "Claim",
+      "props": {
+        "name": "scrubbing methanol stays marketable",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/8",
+            "quote": "the use — of some of the methanol formed in the process © as the purification medium does not render it “impure” under ordinary industrial stand-",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Because the impurities are small in amount, the product methanol used for scrubbing is not rendered impure under ordinary industrial standards and may be marketed without treatment to remove the dissolved impurities."
+      }
+    },
+    {
+      "id": "ex:msyn/us1754371a/claim/separate-scrubber",
+      "label": "Claim",
+      "props": {
+        "name": "scrubbing may be separate from the synthesis loop",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1754371a/p4/1",
+            "quote": "it?s obvious that the purification of the - gases might be accomplished by contacting them with liquid methanol in a scrubbing system entirely separate from the catalytic",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The gases might also be purified by contact with liquid methanol in a scrubbing system entirely separate from the catalytic process."
+      }
+    },
+    {
+      "id": "ex:msyn/us1754371a/feed/make-up-gas",
+      "label": "Feed",
+      "props": {
+        "name": "make-up gas (hydrogen and carbon oxides) combined with recirculated residual gas",
+        "description": "Fresh make-up gas of hydrogen and carbon oxides, combined just before the scrubber with residual gas already circulated over the catalyst; no composition is given.",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "'the make-up gas. which' reads 'the make-up gas which'",
+            "passage": "us1754371a/p3/1",
+            "quote": "the make-up gas. which consists of the mixture of hydrogen and carbon: oxides supplied to the process,",
+            "source": "ex:msyn/source/us1754371a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1754371a/p3/1",
+            "quote": "into the methanol scrubber the fresh or make- up gas is combined with residual gas which - has already been circulated over the catalyst,",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1754371a/hypothesis/co2-two-steps",
+      "label": "Hypothesis",
+      "props": {
+        "name": "CO2 reacts via CO in two steps",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/3",
+            "quote": "When carbon dioxide is employed the reac- tion presumably occurs in two steps, thus :-—",
+            "source": "ex:msyn/source/us1754371a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/3",
+            "quote": "CO:+ Hz@CO0+ H,0",
+            "source": "ex:msyn/source/us1754371a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "OCR of CO + 2H2 = CH3OH",
+            "passage": "us1754371a/p2/3",
+            "quote": "CO+ 2H;—CH,08",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "hypothesis_kind": "mechanistic",
+        "hypothesis_status": "proposed",
+        "statement": "When carbon dioxide is employed, the reaction presumably occurs in two steps: CO2 + H2 = CO + H2O, then CO + 2H2 = CH3OH."
+      }
+    },
+    {
+      "id": "ex:msyn/us1754371a/material/asbestos-fiber",
+      "label": "Material",
+      "props": {
+        "name": "asbestos fiber",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1754371a/p3/7",
+            "quote": "consist of copper turnings or asbestos fiber, or, indeed, of some of the catalyst employed in the reaction.",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1754371a/material/copper-turnings",
+      "label": "Material",
+      "props": {
+        "name": "copper turnings",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1754371a/p3/7",
+            "quote": "consist of copper turnings or asbestos fiber, or, indeed, of some of the catalyst employed in the reaction.",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1754371a/reactor/converter-loop",
+      "label": "Reactor",
+      "props": {
+        "name": "converter with catalyst chamber (Fig. 1)",
+        "description": "Converter in which the gas passes down the annular space between the converter wall and the catalyst-chamber wall, up through a purifier mass and over the catalyst; heat from the reaction and electrical heating elements. The scrubber, heat exchanger, purifier mass, condenser, receiver and pumps of the loop are ProcessUnits linked by FEEDS_INTO.",
+        "design_status": "not_reported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1754371a/p3/2",
+            "quote": "From the heat exchanger the gases pass downward to the converter, first mov- ing through the annular space between the converter wall. and the. catalyst chamber wall, then upward through a purifier mass",
+            "source": "ex:msyn/source/us1754371a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1754371a/p3/3",
+            "quote": "The required degree of heat in the con- verter and catalyst 1s maintained, partly by the heat of reaction, and partly by the elec- trical heating elements shown in the draw-",
+            "source": "ex:msyn/source/us1754371a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/9",
+            "quote": "The drawing discloses 1n cross-sec- tion a typical apparatus for the production of synthetic methanol, together with means for performing. my purification process.",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "note": "illustrative apparatus of the patent (Fig. 1); the patent does not say it was built",
+        "reactor_kind": "circulating"
+      }
+    },
+    {
+      "id": "ex:msyn/us1754371a/species/amino-compounds",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "amino compounds",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/5",
+            "quote": "amino compounds which _ may’be initially present in the gases, or may be formed by the catalytic interaction of hy-",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1754371a/species/oil-vapors",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "oil vapors from the compressing apparatus",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/4",
+            "quote": "oil vapors from the compressing",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1754371a/species/volatile-arsenic-compounds",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "volatile arsenic compounds",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/5",
+            "quote": "gaseous mixture; and volatile sulfur and ar- senic compounds.",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1754371a/species/volatile-iron-carbonyls",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "volatile carbonyls of iron",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/4",
+            "quote": "Among these undesirable impurities are in- cluded the, following :—volatile carbonyls of nickel and iron which may be formed by the ‘interaction of the hot carbon oxides with the apparatus;",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1754371a/species/volatile-nickel-carbonyls",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "volatile carbonyls of nickel",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/4",
+            "quote": "Among these undesirable impurities are in- cluded the, following :—volatile carbonyls of nickel and iron which may be formed by the ‘interaction of the hot carbon oxides with the apparatus;",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1754371a/species/volatile-sulfur-compounds",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "volatile sulfur compounds",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/5",
+            "quote": "gaseous mixture; and volatile sulfur and ar- senic compounds.",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us1754371a/treatment/methanol-scrubbing",
+      "label": "Treatment",
+      "props": {
+        "name": "purification by scrubbing with liquid methanol under pressure",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/7",
+            "quote": "simply bubbled through or “scrubbed” with liquid methanol under elevated pressure, the undesirable substances constituting catalyst. poisons, etc., are dissolved in the methanol.",
+            "source": "ex:msyn/source/us1754371a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/6",
+            "quote": "be operated under the same pressure used. | for the methanol reaction, as a simple added .",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "method": "gas bubbled through (or sprayed over packing with) liquid methanol under the synthesis pressure; catalyst poisons dissolve in the methanol",
+        "treatment_kind": "purification"
+      }
+    },
+    {
+      "id": "ex:msyn/us1754371a/unit/circulating-pump",
+      "label": "ProcessUnit",
+      "props": {
+        "name": "circulating pump (Fig. 1)",
+        "description": "Returns the residual gas from the receiver into the main gas flow ahead of the scrubber, overcoming the pressure drop of the loop.",
+        "design_status": "not_reported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1754371a/p3/2",
+            "quote": "said residual gas being forced into the main as flow by means of the circulating pump.",
+            "source": "ex:msyn/source/us1754371a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/9",
+            "quote": "The drawing discloses 1n cross-sec- tion a typical apparatus for the production of synthetic methanol, together with means for performing. my purification process.",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "note": "illustrative apparatus of the patent (Fig. 1); the patent does not say it was built",
+        "unit_kind": "circulator"
+      }
+    },
+    {
+      "id": "ex:msyn/us1754371a/unit/condenser",
+      "label": "ProcessUnit",
+      "props": {
+        "name": "condenser (Fig. 1)",
+        "description": "Liquefies the methanol contained in the gases leaving the heat exchanger.",
+        "design_status": "not_reported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1754371a/p3/3",
+            "quote": "The gases then pass downward through a condenser which serves to liquefy the con- tained methanol,",
+            "source": "ex:msyn/source/us1754371a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/9",
+            "quote": "The drawing discloses 1n cross-sec- tion a typical apparatus for the production of synthetic methanol, together with means for performing. my purification process.",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "note": "illustrative apparatus of the patent (Fig. 1); the patent does not say it was built",
+        "unit_kind": "condenser"
+      }
+    },
+    {
+      "id": "ex:msyn/us1754371a/unit/heat-exchanger",
+      "label": "ProcessUnit",
+      "props": {
+        "name": "heat exchanger (Fig. 1)",
+        "description": "The incoming gas is heated in the central passage by thermal contact through the wall with the hot gases discharged from the converter, which pass through the outside section.",
+        "design_status": "not_reported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1754371a/p3/2",
+            "quote": "In passing through the central passage of the heat exchanger the gas is heated,.by ther- mal contact through the exchanger wall, with the hot gases discharged from the con- verter.",
+            "source": "ex:msyn/source/us1754371a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/9",
+            "quote": "The drawing discloses 1n cross-sec- tion a typical apparatus for the production of synthetic methanol, together with means for performing. my purification process.",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "note": "illustrative apparatus of the patent (Fig. 1); the patent does not say it was built",
+        "unit_kind": "heat_exchanger"
+      }
+    },
+    {
+      "id": "ex:msyn/us1754371a/unit/liquid-circulating-pump",
+      "label": "ProcessUnit",
+      "props": {
+        "name": "liquid circulating pump (Fig. 1)",
+        "description": "Transfers liquid methanol from the methanol receiver to the methanol scrubber; operated intermittently or continuously.",
+        "design_status": "not_reported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1754371a/p3/4",
+            "quote": "to transfer liquid methanol from the former to the latter.",
+            "source": "ex:msyn/source/us1754371a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/9",
+            "quote": "The drawing discloses 1n cross-sec- tion a typical apparatus for the production of synthetic methanol, together with means for performing. my purification process.",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "note": "illustrative apparatus of the patent (Fig. 1); the patent does not say it was built",
+        "unit_kind": "circulator"
+      }
+    },
+    {
+      "id": "ex:msyn/us1754371a/unit/methanol-receiver",
+      "label": "ProcessUnit",
+      "props": {
+        "name": "methanol receiver (Fig. 1)",
+        "description": "Liquid methanol separates from the residual gas and remains in the receiver; it may be fitted with a boiling plate with caps to prevent liquid entrainment; product methanol is drained from it.",
+        "design_status": "not_reported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1754371a/p3/3",
+            "quote": "the liquid separates from the residual gas and remains in the re- celver.",
+            "source": "ex:msyn/source/us1754371a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1754371a/p3/3",
+            "quote": "The receiver may be fitted with a boiling plate with caps, as shown, to prevent liquid entrainment.",
+            "source": "ex:msyn/source/us1754371a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/9",
+            "quote": "The drawing discloses 1n cross-sec- tion a typical apparatus for the production of synthetic methanol, together with means for performing. my purification process.",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "note": "illustrative apparatus of the patent (Fig. 1); the patent does not say it was built",
+        "unit_kind": "separator"
+      }
+    },
+    {
+      "id": "ex:msyn/us1754371a/unit/methanol-scrubber",
+      "label": "ProcessUnit",
+      "props": {
+        "name": "methanol scrubber (Fig. 1)",
+        "description": "Vessel holding liquid methanol, with boiling plates and caps that break the gas into small streams of bubbles; in continuous operation the level may be lowered and the scrubber filled with Raschig rings or similar packing over which methanol is sprayed.",
+        "design_status": "not_reported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1754371a/p3/2",
+            "quote": "the gas is broken up into small streams of bubbles by means of the boiling plates and caps shown in the scrubber. During its passage through the scrubber the gas is freed from impurities.",
+            "source": "ex:msyn/source/us1754371a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1754371a/p3/6",
+            "quote": "The scrubber may then be filled with Raschig rings or similar tower packing material,",
+            "source": "ex:msyn/source/us1754371a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/9",
+            "quote": "The drawing discloses 1n cross-sec- tion a typical apparatus for the production of synthetic methanol, together with means for performing. my purification process.",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "note": "illustrative apparatus of the patent (Fig. 1); the patent does not say it was built",
+        "unit_kind": "scrubber"
+      }
+    },
+    {
+      "id": "ex:msyn/us1754371a/unit/purifier-mass",
+      "label": "ProcessUnit",
+      "props": {
+        "name": "purifier mass in the converter (Fig. 1)",
+        "description": "A mass ahead of the catalyst inside the converter acting as a gas filter and decomposing traces of metallic carbonyls; it may consist of copper turnings, asbestos fiber or some of the catalyst; with methanol scrubbing it is no longer absolutely necessary but is preferably kept.",
+        "design_status": "not_reported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1754371a/p3/3",
+            "quote": "then upward through a purifier mass and finally in contact with the catalyst, where the reaction occurs.",
+            "source": "ex:msyn/source/us1754371a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1754371a/p3/7",
+            "quote": "Its function 1s to act as a sort of gas filter and to decompose any traces of metallic carbonyls which might otherwise ,,,",
+            "source": "ex:msyn/source/us1754371a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/9",
+            "quote": "The drawing discloses 1n cross-sec- tion a typical apparatus for the production of synthetic methanol, together with means for performing. my purification process.",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "note": "illustrative apparatus of the patent (Fig. 1); the patent does not say it was built",
+        "unit_kind": "guard_bed"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/reaction/co-hydrogenation-to-methanol/reported-in/us1754371a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/source/us1754371a"
+    },
+    {
+      "id": "ex:msyn/reaction/co2-hydrogenation-to-methanol/reported-in/us1754371a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/reaction/co2-hydrogenation-to-methanol",
+      "target": "ex:msyn/source/us1754371a"
+    },
+    {
+      "id": "ex:msyn/reaction/reverse-water-gas-shift/reported-in/us1754371a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/reaction/reverse-water-gas-shift",
+      "target": "ex:msyn/source/us1754371a"
+    },
+    {
+      "id": "ex:msyn/source/us1754371a/assignee",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "role": "assignee"
+      },
+      "source": "ex:msyn/source/us1754371a",
+      "target": "ex:msyn/institution/commercial-solvents-corp"
+    },
+    {
+      "id": "ex:msyn/us1754371a/catalyst/any-methanol-catalyst/reported-in/us1754371a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1754371a/catalyst/any-methanol-catalyst",
+      "target": "ex:msyn/source/us1754371a"
+    },
+    {
+      "id": "ex:msyn/us1754371a/claim/claim-1/reported-in/us1754371a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4, claim 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1754371a/claim/claim-1",
+      "target": "ex:msyn/source/us1754371a"
+    },
+    {
+      "id": "ex:msyn/us1754371a/claim/claim-2/reported-in/us1754371a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4, claim 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1754371a/claim/claim-2",
+      "target": "ex:msyn/source/us1754371a"
+    },
+    {
+      "id": "ex:msyn/us1754371a/claim/claim-3/reported-in/us1754371a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4, claim 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1754371a/claim/claim-3",
+      "target": "ex:msyn/source/us1754371a"
+    },
+    {
+      "id": "ex:msyn/us1754371a/claim/claim-4/reported-in/us1754371a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4, claim 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1754371a/claim/claim-4",
+      "target": "ex:msyn/source/us1754371a"
+    },
+    {
+      "id": "ex:msyn/us1754371a/claim/impurities/reported-in/us1754371a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1754371a/claim/impurities",
+      "target": "ex:msyn/source/us1754371a"
+    },
+    {
+      "id": "ex:msyn/us1754371a/claim/impurity-origins/reported-in/us1754371a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1754371a/claim/impurity-origins",
+      "target": "ex:msyn/source/us1754371a"
+    },
+    {
+      "id": "ex:msyn/us1754371a/claim/known-conditions/reported-in/us1754371a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1754371a/claim/known-conditions",
+      "target": "ex:msyn/source/us1754371a"
+    },
+    {
+      "id": "ex:msyn/us1754371a/claim/methanol-scrubbing/reported-in/us1754371a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1754371a/claim/methanol-scrubbing",
+      "target": "ex:msyn/source/us1754371a"
+    },
+    {
+      "id": "ex:msyn/us1754371a/claim/operation-modes/reported-in/us1754371a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1754371a/claim/operation-modes",
+      "target": "ex:msyn/source/us1754371a"
+    },
+    {
+      "id": "ex:msyn/us1754371a/claim/purifier-mass/reported-in/us1754371a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1754371a/claim/purifier-mass",
+      "target": "ex:msyn/source/us1754371a"
+    },
+    {
+      "id": "ex:msyn/us1754371a/claim/scrubbing-methanol-marketable/reported-in/us1754371a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1754371a/claim/scrubbing-methanol-marketable",
+      "target": "ex:msyn/source/us1754371a"
+    },
+    {
+      "id": "ex:msyn/us1754371a/claim/separate-scrubber/reported-in/us1754371a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1754371a/claim/separate-scrubber",
+      "target": "ex:msyn/source/us1754371a"
+    },
+    {
+      "id": "ex:msyn/us1754371a/feed/make-up-gas/reported-in/us1754371a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1754371a/feed/make-up-gas",
+      "target": "ex:msyn/source/us1754371a"
+    },
+    {
+      "id": "ex:msyn/us1754371a/hypothesis/co2-two-steps/reported-in/us1754371a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1754371a/hypothesis/co2-two-steps",
+      "target": "ex:msyn/source/us1754371a"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/1",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/3",
+            "quote": "When carbon dioxide is employed the reac- tion presumably occurs in two steps, thus :-—",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1754371a/hypothesis/co2-two-steps",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/10",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/4",
+            "quote": "it is well known that very small amounts of certain other substances are poisonous to the catalysts employed, or may catalyze various. undesirable side reactions.",
+            "source": "ex:msyn/source/us1754371a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/4",
+            "quote": "oil vapors from the compressing",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "inhibition_kind": "not_stated",
+        "note": "listed among the undesirable impurities, which are poisonous to the catalysts or may catalyze undesirable side reactions"
+      },
+      "source": "ex:msyn/us1754371a/catalyst/any-methanol-catalyst",
+      "target": "ex:msyn/us1754371a/species/oil-vapors"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/101",
+      "type": "FEEDS_INTO",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1754371a/p3/2",
+            "quote": "The gas collecting in the top of the scrubber passes to the heat exchanger as shown in the drawing.",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "order": 1,
+        "stream": "gas collecting in the top of the scrubber"
+      },
+      "source": "ex:msyn/us1754371a/unit/methanol-scrubber",
+      "target": "ex:msyn/us1754371a/unit/heat-exchanger"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/102",
+      "type": "FEEDS_INTO",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1754371a/p3/2",
+            "quote": "From the heat exchanger the gases pass downward to the converter, first mov- ing through the annular space between the converter wall. and the. catalyst chamber wall, then upward through a purifier mass",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "order": 2,
+        "stream": "gas heated in the central passage of the heat exchanger, down the annular space of the converter"
+      },
+      "source": "ex:msyn/us1754371a/unit/heat-exchanger",
+      "target": "ex:msyn/us1754371a/unit/purifier-mass"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/103",
+      "type": "FEEDS_INTO",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1754371a/p3/3",
+            "quote": "then upward through a purifier mass and finally in contact with the catalyst, where the reaction occurs.",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "order": 3,
+        "stream": "gas from the purifier mass to the catalyst"
+      },
+      "source": "ex:msyn/us1754371a/unit/purifier-mass",
+      "target": "ex:msyn/us1754371a/reactor/converter-loop"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/104",
+      "type": "FEEDS_INTO",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1754371a/p3/3",
+            "quote": "From the catalyst chamber the hot, meth- anol-containing gases rise upward and pass through the outside section of the heat ex- changer where most of the heat is removed.",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "order": 4,
+        "stream": "hot, methanol-containing gases from the catalyst chamber (outside section of the heat exchanger)"
+      },
+      "source": "ex:msyn/us1754371a/reactor/converter-loop",
+      "target": "ex:msyn/us1754371a/unit/heat-exchanger"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/105",
+      "type": "FEEDS_INTO",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1754371a/p3/3",
+            "quote": "The gases then pass downward through a condenser which serves to liquefy the con- tained methanol,",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "order": 5,
+        "stream": "cooled reacted gases"
+      },
+      "source": "ex:msyn/us1754371a/unit/heat-exchanger",
+      "target": "ex:msyn/us1754371a/unit/condenser"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/106",
+      "type": "FEEDS_INTO",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1754371a/p3/3",
+            "quote": "the liquid separates from the residual gas and remains in the re- celver.",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "order": 6,
+        "stream": "condensed methanol and residual gas"
+      },
+      "source": "ex:msyn/us1754371a/unit/condenser",
+      "target": "ex:msyn/us1754371a/unit/methanol-receiver"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/107",
+      "type": "FEEDS_INTO",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1754371a/p3/3",
+            "quote": "e residual gas passes upward out of the receiver. and back to the circulating pump, thus completing the cir-",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "order": 7,
+        "stream": "residual gas"
+      },
+      "source": "ex:msyn/us1754371a/unit/methanol-receiver",
+      "target": "ex:msyn/us1754371a/unit/circulating-pump"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/108",
+      "type": "FEEDS_INTO",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1754371a/p3/2",
+            "quote": "said residual gas being forced into the main as flow by means of the circulating pump.",
+            "source": "ex:msyn/source/us1754371a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1754371a/p3/2",
+            "quote": "he combined gases pass through a pipe downward to the bottom of the scrubber",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "order": 8,
+        "stream": "residual gas combined with make-up gas"
+      },
+      "source": "ex:msyn/us1754371a/unit/circulating-pump",
+      "target": "ex:msyn/us1754371a/unit/methanol-scrubber"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/109",
+      "type": "FEEDS_INTO",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1754371a/p3/4",
+            "quote": "The liquid circulating pump, shown on the drawing as interposed between the methanol receiver and the methanol scrubber,",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "order": 9,
+        "stream": "liquid methanol"
+      },
+      "source": "ex:msyn/us1754371a/unit/methanol-receiver",
+      "target": "ex:msyn/us1754371a/unit/liquid-circulating-pump"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/11",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/4",
+            "quote": "it is well known that very small amounts of certain other substances are poisonous to the catalysts employed, or may catalyze various. undesirable side reactions.",
+            "source": "ex:msyn/source/us1754371a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "quote": "water. vapor remaining in the re- - circulated gas after the condensation of the - methanol formed;",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "inhibition_kind": "not_stated",
+        "note": "listed among the undesirable impurities, which are poisonous to the catalysts or may catalyze undesirable side reactions"
+      },
+      "source": "ex:msyn/us1754371a/catalyst/any-methanol-catalyst",
+      "target": "ex:msyn/species/h2o"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/110",
+      "type": "FEEDS_INTO",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1754371a/p3/4",
+            "quote": "to transfer liquid methanol from the former to the latter.",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "order": 10,
+        "stream": "liquid methanol"
+      },
+      "source": "ex:msyn/us1754371a/unit/liquid-circulating-pump",
+      "target": "ex:msyn/us1754371a/unit/methanol-scrubber"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/111",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1754371a/p3/2",
+            "quote": "then rise upward through the hquid meth- anol shown therein.",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "role": "other",
+        "role_detail": "scrubbing liquid (liquid methanol)"
+      },
+      "source": "ex:msyn/us1754371a/unit/methanol-scrubber",
+      "target": "ex:msyn/species/ch3oh"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/112",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1754371a/p3/7",
+            "quote": "consist of copper turnings or asbestos fiber, or, indeed, of some of the catalyst employed in the reaction.",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "role": "other",
+        "role_detail": "purifier material; one of the alternatives stated (copper turnings, asbestos fiber, or some of the catalyst)"
+      },
+      "source": "ex:msyn/us1754371a/unit/purifier-mass",
+      "target": "ex:msyn/us1754371a/material/copper-turnings"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/113",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1754371a/p3/7",
+            "quote": "consist of copper turnings or asbestos fiber, or, indeed, of some of the catalyst employed in the reaction.",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "role": "other",
+        "role_detail": "purifier material; one of the alternatives stated (copper turnings, asbestos fiber, or some of the catalyst)"
+      },
+      "source": "ex:msyn/us1754371a/unit/purifier-mass",
+      "target": "ex:msyn/us1754371a/material/asbestos-fiber"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/114",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "'the make-up gas. which' reads 'the make-up gas which'",
+            "passage": "us1754371a/p3/1",
+            "quote": "the make-up gas. which consists of the mixture of hydrogen and carbon: oxides supplied to the process,",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1754371a/feed/make-up-gas",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/115",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "'the make-up gas. which' reads 'the make-up gas which'",
+            "passage": "us1754371a/p3/1",
+            "quote": "the make-up gas. which consists of the mixture of hydrogen and carbon: oxides supplied to the process,",
+            "source": "ex:msyn/source/us1754371a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'10' is a margin line number",
+            "passage": "us1754371a/p2/2",
+            "quote": "of hydrogen and carbon oxides (carbon 10 monoxide, carbon dioxide, or mixtures there-",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "note": "'carbon oxides': carbon monoxide, carbon dioxide or mixtures",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1754371a/feed/make-up-gas",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/116",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "'the make-up gas. which' reads 'the make-up gas which'",
+            "passage": "us1754371a/p3/1",
+            "quote": "the make-up gas. which consists of the mixture of hydrogen and carbon: oxides supplied to the process,",
+            "source": "ex:msyn/source/us1754371a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'10' is a margin line number",
+            "passage": "us1754371a/p2/2",
+            "quote": "of hydrogen and carbon oxides (carbon 10 monoxide, carbon dioxide, or mixtures there-",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "note": "'carbon oxides': carbon monoxide, carbon dioxide or mixtures",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us1754371a/feed/make-up-gas",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/117",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1754371a/p3/2",
+            "quote": "During its passage through the scrubber the gas is freed from impurities.",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "order": 1
+      },
+      "source": "ex:msyn/us1754371a/feed/make-up-gas",
+      "target": "ex:msyn/us1754371a/treatment/methanol-scrubbing"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/118",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1754371a/p3/2",
+            "quote": "During its passage through the scrubber the gas is freed from impurities.",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1754371a/treatment/methanol-scrubbing",
+      "target": "ex:msyn/us1754371a/unit/methanol-scrubber"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/12",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/4",
+            "quote": "it is well known that very small amounts of certain other substances are poisonous to the catalysts employed, or may catalyze various. undesirable side reactions.",
+            "source": "ex:msyn/source/us1754371a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/5",
+            "quote": "amino compounds which _ may’be initially present in the gases, or may be formed by the catalytic interaction of hy-",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "inhibition_kind": "not_stated",
+        "note": "listed among the undesirable impurities, which are poisonous to the catalysts or may catalyze undesirable side reactions"
+      },
+      "source": "ex:msyn/us1754371a/catalyst/any-methanol-catalyst",
+      "target": "ex:msyn/us1754371a/species/amino-compounds"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/13",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/4",
+            "quote": "it is well known that very small amounts of certain other substances are poisonous to the catalysts employed, or may catalyze various. undesirable side reactions.",
+            "source": "ex:msyn/source/us1754371a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/5",
+            "quote": "gaseous mixture; and volatile sulfur and ar- senic compounds.",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "inhibition_kind": "not_stated",
+        "note": "listed among the undesirable impurities, which are poisonous to the catalysts or may catalyze undesirable side reactions"
+      },
+      "source": "ex:msyn/us1754371a/catalyst/any-methanol-catalyst",
+      "target": "ex:msyn/us1754371a/species/volatile-sulfur-compounds"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/14",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/4",
+            "quote": "it is well known that very small amounts of certain other substances are poisonous to the catalysts employed, or may catalyze various. undesirable side reactions.",
+            "source": "ex:msyn/source/us1754371a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/5",
+            "quote": "gaseous mixture; and volatile sulfur and ar- senic compounds.",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "inhibition_kind": "not_stated",
+        "note": "listed among the undesirable impurities, which are poisonous to the catalysts or may catalyze undesirable side reactions"
+      },
+      "source": "ex:msyn/us1754371a/catalyst/any-methanol-catalyst",
+      "target": "ex:msyn/us1754371a/species/volatile-arsenic-compounds"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/15",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/4",
+            "quote": "While various imert gases such as methane and nitrogen are ordinarily regarded as non- - injurious, and hence tolerable by the reaction,",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "inhibition_kind": "not_stated",
+        "negated": true,
+        "note": "inert gases ordinarily regarded as non-injurious and tolerable by the reaction"
+      },
+      "source": "ex:msyn/us1754371a/catalyst/any-methanol-catalyst",
+      "target": "ex:msyn/species/ch4"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/16",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/4",
+            "quote": "While various imert gases such as methane and nitrogen are ordinarily regarded as non- - injurious, and hence tolerable by the reaction,",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "inhibition_kind": "not_stated",
+        "negated": true,
+        "note": "inert gases ordinarily regarded as non-injurious and tolerable by the reaction"
+      },
+      "source": "ex:msyn/us1754371a/catalyst/any-methanol-catalyst",
+      "target": "ex:msyn/species/n2"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/17",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/4",
+            "quote": "While various imert gases such as methane and nitrogen are ordinarily regarded as non- - injurious, and hence tolerable by the reaction,",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1754371a/claim/impurities",
+      "target": "ex:msyn/us1754371a/catalyst/any-methanol-catalyst"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/18",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/4",
+            "quote": "While various imert gases such as methane and nitrogen are ordinarily regarded as non- - injurious, and hence tolerable by the reaction,",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1754371a/claim/impurities",
+      "target": "ex:msyn/us1754371a/species/volatile-nickel-carbonyls"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/19",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/4",
+            "quote": "While various imert gases such as methane and nitrogen are ordinarily regarded as non- - injurious, and hence tolerable by the reaction,",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1754371a/claim/impurities",
+      "target": "ex:msyn/us1754371a/species/volatile-iron-carbonyls"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/20",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/4",
+            "quote": "While various imert gases such as methane and nitrogen are ordinarily regarded as non- - injurious, and hence tolerable by the reaction,",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1754371a/claim/impurities",
+      "target": "ex:msyn/us1754371a/species/oil-vapors"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/21",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/4",
+            "quote": "While various imert gases such as methane and nitrogen are ordinarily regarded as non- - injurious, and hence tolerable by the reaction,",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1754371a/claim/impurities",
+      "target": "ex:msyn/species/h2o"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/22",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/4",
+            "quote": "While various imert gases such as methane and nitrogen are ordinarily regarded as non- - injurious, and hence tolerable by the reaction,",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1754371a/claim/impurities",
+      "target": "ex:msyn/us1754371a/species/amino-compounds"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/23",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/4",
+            "quote": "While various imert gases such as methane and nitrogen are ordinarily regarded as non- - injurious, and hence tolerable by the reaction,",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1754371a/claim/impurities",
+      "target": "ex:msyn/us1754371a/species/volatile-sulfur-compounds"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/24",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/4",
+            "quote": "While various imert gases such as methane and nitrogen are ordinarily regarded as non- - injurious, and hence tolerable by the reaction,",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1754371a/claim/impurities",
+      "target": "ex:msyn/us1754371a/species/volatile-arsenic-compounds"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/25",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/4",
+            "quote": "They may be present in the - gaseous mixture entering the reaction; they . may be formed by the reaction; or they may be formed by the gradual decomposition. of the apparatusemployed.",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1754371a/claim/impurity-origins",
+      "target": "ex:msyn/us1754371a/catalyst/any-methanol-catalyst"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/26",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/6",
+            "quote": "I have now discovered that the injurious substances present or formed in the gas mix- | ture employed for the methanol synthesis may 6¢ be removed in a simple fashion by merely “scrubbing” the gases with liquid methanol.",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1754371a/claim/methanol-scrubbing",
+      "target": "ex:msyn/us1754371a/catalyst/any-methanol-catalyst"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/27",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/6",
+            "quote": "I have now discovered that the injurious substances present or formed in the gas mix- | ture employed for the methanol synthesis may 6¢ be removed in a simple fashion by merely “scrubbing” the gases with liquid methanol.",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1754371a/claim/methanol-scrubbing",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/28",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/6",
+            "quote": "I have now discovered that the injurious substances present or formed in the gas mix- | ture employed for the methanol synthesis may 6¢ be removed in a simple fashion by merely “scrubbing” the gases with liquid methanol.",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1754371a/claim/methanol-scrubbing",
+      "target": "ex:msyn/species/ch3oh"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/29",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/8",
+            "quote": "the use — of some of the methanol formed in the process © as the purification medium does not render it “impure” under ordinary industrial stand-",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1754371a/claim/scrubbing-methanol-marketable",
+      "target": "ex:msyn/species/ch3oh"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/30",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1754371a/p3/7",
+            "quote": "consist of copper turnings or asbestos fiber, or, indeed, of some of the catalyst employed in the reaction.",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1754371a/claim/purifier-mass",
+      "target": "ex:msyn/us1754371a/reactor/converter-loop"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/31",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1754371a/p3/7",
+            "quote": "consist of copper turnings or asbestos fiber, or, indeed, of some of the catalyst employed in the reaction.",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1754371a/claim/purifier-mass",
+      "target": "ex:msyn/us1754371a/species/volatile-nickel-carbonyls"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/32",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1754371a/p3/7",
+            "quote": "consist of copper turnings or asbestos fiber, or, indeed, of some of the catalyst employed in the reaction.",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1754371a/claim/purifier-mass",
+      "target": "ex:msyn/us1754371a/species/volatile-iron-carbonyls"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/33",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1754371a/p3/4",
+            "quote": "the liquid circulat- ing pump may be operated either intermit- x» tently or continuously.",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1754371a/claim/operation-modes",
+      "target": "ex:msyn/us1754371a/reactor/converter-loop"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/34",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us1754371a/p4/1",
+            "quote": "it?s obvious that the purification of the - gases might be accomplished by contacting them with liquid methanol in a scrubbing system entirely separate from the catalytic",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1754371a/claim/separate-scrubber",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/35",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, claim 1",
+            "passage": "us1754371a/p4/2",
+            "quote": "the step of removing said impurities from the gases by scrubbing them with liquid meth-",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1754371a/claim/claim-1",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/36",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, claim 1",
+            "passage": "us1754371a/p4/2",
+            "quote": "the step of removing said impurities from the gases by scrubbing them with liquid meth-",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1754371a/claim/claim-1",
+      "target": "ex:msyn/us1754371a/reactor/converter-loop"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/37",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, claim 2",
+            "passage": "us1754371a/p4/2",
+            "quote": "the step of combining the gases remaining unreacted, after a passage thereof in contact with the catalyst, with fresh gas, and removing impurities from the mixed gases by scrubbing them with liquid meth-",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1754371a/claim/claim-2",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/38",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, claim 2",
+            "passage": "us1754371a/p4/2",
+            "quote": "the step of combining the gases remaining unreacted, after a passage thereof in contact with the catalyst, with fresh gas, and removing impurities from the mixed gases by scrubbing them with liquid meth-",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1754371a/claim/claim-2",
+      "target": "ex:msyn/us1754371a/reactor/converter-loop"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/39",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, claim 3",
+            "passage": "us1754371a/p4/3",
+            "quote": "scrubbing said incoming gases with the formed methanol during its removal from the process.",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1754371a/claim/claim-3",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/40",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, claim 3",
+            "passage": "us1754371a/p4/3",
+            "quote": "scrubbing said incoming gases with the formed methanol during its removal from the process.",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1754371a/claim/claim-3",
+      "target": "ex:msyn/us1754371a/reactor/converter-loop"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/41",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, claim 4",
+            "passage": "us1754371a/p4/3",
+            "quote": "the steps which comprise passing the gases in contact with liquid methanol under pressure,",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1754371a/claim/claim-4",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/42",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, claim 4",
+            "passage": "us1754371a/p4/3",
+            "quote": "the steps which comprise passing the gases in contact with liquid methanol under pressure,",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1754371a/claim/claim-4",
+      "target": "ex:msyn/us1754371a/reactor/converter-loop"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/5",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'15' is a margin line number",
+            "passage": "us1754371a/p2/2",
+            "quote": "are passed over heated catalytic agents .at. -. pressures in excess of 50 atmospheres and at 15 temperatures in excess 280° C., the gases react",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1754371a/claim/known-conditions",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/6",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "'15' is a margin line number",
+            "passage": "us1754371a/p2/2",
+            "quote": "are passed over heated catalytic agents .at. -. pressures in excess of 50 atmospheres and at 15 temperatures in excess 280° C., the gases react",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1754371a/claim/known-conditions",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/7",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us1754371a/p3/7",
+            "quote": "In general, any 105 catalyst suitable for synthetic methanol pro- ) duction may be employed in the process",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us1754371a/catalyst/any-methanol-catalyst",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/8",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/4",
+            "quote": "it is well known that very small amounts of certain other substances are poisonous to the catalysts employed, or may catalyze various. undesirable side reactions.",
+            "source": "ex:msyn/source/us1754371a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/4",
+            "quote": "Among these undesirable impurities are in- cluded the, following :—volatile carbonyls of nickel and iron which may be formed by the ‘interaction of the hot carbon oxides with the apparatus;",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "inhibition_kind": "not_stated",
+        "note": "listed among the undesirable impurities, which are poisonous to the catalysts or may catalyze undesirable side reactions"
+      },
+      "source": "ex:msyn/us1754371a/catalyst/any-methanol-catalyst",
+      "target": "ex:msyn/us1754371a/species/volatile-nickel-carbonyls"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/9",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/4",
+            "quote": "it is well known that very small amounts of certain other substances are poisonous to the catalysts employed, or may catalyze various. undesirable side reactions.",
+            "source": "ex:msyn/source/us1754371a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us1754371a/p2/4",
+            "quote": "Among these undesirable impurities are in- cluded the, following :—volatile carbonyls of nickel and iron which may be formed by the ‘interaction of the hot carbon oxides with the apparatus;",
+            "source": "ex:msyn/source/us1754371a"
+          }
+        ],
+        "inhibition_kind": "not_stated",
+        "note": "listed among the undesirable impurities, which are poisonous to the catalysts or may catalyze undesirable side reactions"
+      },
+      "source": "ex:msyn/us1754371a/catalyst/any-methanol-catalyst",
+      "target": "ex:msyn/us1754371a/species/volatile-iron-carbonyls"
+    },
+    {
+      "id": "ex:msyn/us1754371a/material/asbestos-fiber/reported-in/us1754371a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1754371a/material/asbestos-fiber",
+      "target": "ex:msyn/source/us1754371a"
+    },
+    {
+      "id": "ex:msyn/us1754371a/material/copper-turnings/reported-in/us1754371a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1754371a/material/copper-turnings",
+      "target": "ex:msyn/source/us1754371a"
+    },
+    {
+      "id": "ex:msyn/us1754371a/reactor/converter-loop/reported-in/us1754371a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1754371a/reactor/converter-loop",
+      "target": "ex:msyn/source/us1754371a"
+    },
+    {
+      "id": "ex:msyn/us1754371a/species/amino-compounds/reported-in/us1754371a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1754371a/species/amino-compounds",
+      "target": "ex:msyn/source/us1754371a"
+    },
+    {
+      "id": "ex:msyn/us1754371a/species/oil-vapors/reported-in/us1754371a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1754371a/species/oil-vapors",
+      "target": "ex:msyn/source/us1754371a"
+    },
+    {
+      "id": "ex:msyn/us1754371a/species/volatile-arsenic-compounds/reported-in/us1754371a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1754371a/species/volatile-arsenic-compounds",
+      "target": "ex:msyn/source/us1754371a"
+    },
+    {
+      "id": "ex:msyn/us1754371a/species/volatile-iron-carbonyls/reported-in/us1754371a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1754371a/species/volatile-iron-carbonyls",
+      "target": "ex:msyn/source/us1754371a"
+    },
+    {
+      "id": "ex:msyn/us1754371a/species/volatile-nickel-carbonyls/reported-in/us1754371a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1754371a/species/volatile-nickel-carbonyls",
+      "target": "ex:msyn/source/us1754371a"
+    },
+    {
+      "id": "ex:msyn/us1754371a/species/volatile-sulfur-compounds/reported-in/us1754371a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1754371a/species/volatile-sulfur-compounds",
+      "target": "ex:msyn/source/us1754371a"
+    },
+    {
+      "id": "ex:msyn/us1754371a/treatment/methanol-scrubbing/reported-in/us1754371a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1754371a/treatment/methanol-scrubbing",
+      "target": "ex:msyn/source/us1754371a"
+    },
+    {
+      "id": "ex:msyn/us1754371a/unit/circulating-pump/reported-in/us1754371a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1754371a/unit/circulating-pump",
+      "target": "ex:msyn/source/us1754371a"
+    },
+    {
+      "id": "ex:msyn/us1754371a/unit/condenser/reported-in/us1754371a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1754371a/unit/condenser",
+      "target": "ex:msyn/source/us1754371a"
+    },
+    {
+      "id": "ex:msyn/us1754371a/unit/heat-exchanger/reported-in/us1754371a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1754371a/unit/heat-exchanger",
+      "target": "ex:msyn/source/us1754371a"
+    },
+    {
+      "id": "ex:msyn/us1754371a/unit/liquid-circulating-pump/reported-in/us1754371a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1754371a/unit/liquid-circulating-pump",
+      "target": "ex:msyn/source/us1754371a"
+    },
+    {
+      "id": "ex:msyn/us1754371a/unit/methanol-receiver/reported-in/us1754371a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1754371a/unit/methanol-receiver",
+      "target": "ex:msyn/source/us1754371a"
+    },
+    {
+      "id": "ex:msyn/us1754371a/unit/methanol-scrubber/reported-in/us1754371a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1754371a/unit/methanol-scrubber",
+      "target": "ex:msyn/source/us1754371a"
+    },
+    {
+      "id": "ex:msyn/us1754371a/unit/purifier-mass/reported-in/us1754371a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us1754371a/unit/purifier-mass",
+      "target": "ex:msyn/source/us1754371a"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/us1754371a"
+}

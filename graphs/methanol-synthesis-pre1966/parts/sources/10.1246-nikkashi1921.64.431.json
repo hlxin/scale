@@ -1,0 +1,295 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/10.1246-nikkashi1921.64.431/hypothesis/boiling-to-basic-carbonate",
+      "label": "Hypothesis",
+      "props": {
+        "name": "bicarbonate and carbonate catalysts alike because normal carbonate turns into basic carbonate on boiling",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:e49b9937a168cb82779414e5f110e46a46108d35f94a87bfc5372be193e90a5e chars:123",
+            "passage": "10.1246-nikkashi1921.64.431/p5/1",
+            "source": "ex:msyn/source/10.1246-nikkashi1921.64.431"
+          }
+        ],
+        "hypothesis_kind": "explanatory",
+        "hypothesis_status": "proposed",
+        "note": "that the normal carbonate readily turns into basic carbonate on boiling is cited from the literature (ref. 11); the precipitate compositions are given with literature references (refs. 9, 10)",
+        "statement": "The near-equal activity of catalysts precipitated with alkali bicarbonates and carbonates can be interpreted as due to the normal carbonate being converted to basic carbonate by the boiling after precipitation, so that both have the same catalyst precursor form."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1246-nikkashi1921.64.431/hypothesis/no-ammine-complex",
+      "label": "Hypothesis",
+      "props": {
+        "name": "basic zinc carbonate does not form the ammine complex",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:408ae045204cfdbf488570673a68a916afbbf1342c91cfdd710254c2e0ba75ec chars:75",
+            "passage": "10.1246-nikkashi1921.64.431/p7/1",
+            "source": "ex:msyn/source/10.1246-nikkashi1921.64.431"
+          }
+        ],
+        "hypothesis_kind": "explanatory",
+        "hypothesis_status": "proposed",
+        "note": "the author states there is not yet experimental ground to confirm it",
+        "statement": "Probably, unlike zinc hydroxide, basic zinc carbonate does not form a complex ion such as [Zn(NH3)4]++ when dissolved in concentrated ammonia solution."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1246-nikkashi1921.64.431/species/basic-zinc-carbonate",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "basic zinc carbonate (鹽基性炭酸鹽)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:1b70e4f39d44d1a2b5c3f7084aed58a838b57a40945413c599cd37463cbfcfe2 chars:50",
+            "passage": "10.1246-nikkashi1921.64.431/p5/1",
+            "source": "ex:msyn/source/10.1246-nikkashi1921.64.431"
+          }
+        ],
+        "formula": "ZnCO3.Zn(OH)2",
+        "note": "the source gives the form ZnCO3.Zn(OH)2 and notes (footnote 10) that many basic carbonates are known"
+      }
+    },
+    {
+      "id": "ex:msyn/source/10.1246-nikkashi1921.64.431",
+      "label": "Source",
+      "props": {
+        "name": "Studies on the Zinc Catalyst. II",
+        "kind": "article",
+        "description": "Published 1943 (publication year (bibliography)); in scope: before the 1966-01-01 cutoff. Text: 7 pages text_layer. Text not redistributed.",
+        "doi": "10.1246/nikkashi1921.64.431",
+        "licence": "no verified publisher licence; short excerpts quoted as evidence under fair use",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "Studies on the Zinc Catalyst. II",
+        "url": "https://doi.org/10.1246/nikkashi1921.64.431",
+        "venue": "NIPPON KAGAKU KAISHI",
+        "year": 1943
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/10.1246-nikkashi1921.64.431/hypothesis/boiling-to-basic-carbonate/reported-in/10.1246-nikkashi1921.64.431",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-nikkashi1921.64.431/hypothesis/boiling-to-basic-carbonate",
+      "target": "ex:msyn/source/10.1246-nikkashi1921.64.431"
+    },
+    {
+      "id": "ex:msyn/10.1246-nikkashi1921.64.431/hypothesis/no-ammine-complex/reported-in/10.1246-nikkashi1921.64.431",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-nikkashi1921.64.431/hypothesis/no-ammine-complex",
+      "target": "ex:msyn/source/10.1246-nikkashi1921.64.431"
+    },
+    {
+      "id": "ex:msyn/10.1246-nikkashi1921.64.431/link/298",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:1b70e4f39d44d1a2b5c3f7084aed58a838b57a40945413c599cd37463cbfcfe2 chars:50",
+            "passage": "10.1246-nikkashi1921.64.431/p5/1",
+            "source": "ex:msyn/source/10.1246-nikkashi1921.64.431"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-nikkashi1921.64.431/hypothesis/boiling-to-basic-carbonate",
+      "target": "ex:msyn/10.1246-nikkashi1921.64.431/species/basic-zinc-carbonate"
+    },
+    {
+      "id": "ex:msyn/10.1246-nikkashi1921.64.431/link/312",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:0e4b31b79cab2ee1d195dd0da1fd49e861fc21fd6b72ea4146d77366f6162751 chars:21",
+            "passage": "10.1246-nikkashi1921.64.431/p7/1",
+            "source": "ex:msyn/source/10.1246-nikkashi1921.64.431"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-nikkashi1921.64.431/hypothesis/no-ammine-complex",
+      "target": "ex:msyn/10.1246-nikkashi1921.64.431/species/basic-zinc-carbonate"
+    },
+    {
+      "id": "ex:msyn/10.1246-nikkashi1921.64.431/link/416",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:6336f91885db30c7e9ef07a38690a6698bf2766c5e9e78fca803bc9194e1542c chars:40",
+            "passage": "10.1246-nikkashi1921.64.431/p5/1",
+            "source": "ex:msyn/source/10.1246-nikkashi1921.64.431"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-nikkashi1921.64.431/hypothesis/boiling-to-basic-carbonate",
+      "target": "ex:msyn/species/znco3"
+    },
+    {
+      "id": "ex:msyn/10.1246-nikkashi1921.64.431/species/basic-zinc-carbonate/reported-in/10.1246-nikkashi1921.64.431",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-nikkashi1921.64.431/species/basic-zinc-carbonate",
+      "target": "ex:msyn/source/10.1246-nikkashi1921.64.431"
+    },
+    {
+      "id": "ex:msyn/source/10.1246-nikkashi1921.64.431/authored-by/1",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 1,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/10.1246-nikkashi1921.64.431",
+      "target": "ex:msyn/person/akira-tomita"
+    },
+    {
+      "id": "ex:msyn/species/k2co3/reported-in/10.1246-nikkashi1921.64.431",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/k2co3",
+      "target": "ex:msyn/source/10.1246-nikkashi1921.64.431"
+    },
+    {
+      "id": "ex:msyn/species/koh/reported-in/10.1246-nikkashi1921.64.431",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/koh",
+      "target": "ex:msyn/source/10.1246-nikkashi1921.64.431"
+    },
+    {
+      "id": "ex:msyn/species/na2co3/reported-in/10.1246-nikkashi1921.64.431",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/na2co3",
+      "target": "ex:msyn/source/10.1246-nikkashi1921.64.431"
+    },
+    {
+      "id": "ex:msyn/species/naoh/reported-in/10.1246-nikkashi1921.64.431",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/naoh",
+      "target": "ex:msyn/source/10.1246-nikkashi1921.64.431"
+    },
+    {
+      "id": "ex:msyn/species/nh42co3/reported-in/10.1246-nikkashi1921.64.431",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/nh42co3",
+      "target": "ex:msyn/source/10.1246-nikkashi1921.64.431"
+    },
+    {
+      "id": "ex:msyn/species/zncl2/reported-in/10.1246-nikkashi1921.64.431",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/zncl2",
+      "target": "ex:msyn/source/10.1246-nikkashi1921.64.431"
+    },
+    {
+      "id": "ex:msyn/species/znco3/reported-in/10.1246-nikkashi1921.64.431",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/znco3",
+      "target": "ex:msyn/source/10.1246-nikkashi1921.64.431"
+    },
+    {
+      "id": "ex:msyn/species/znoh2/reported-in/10.1246-nikkashi1921.64.431",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/znoh2",
+      "target": "ex:msyn/source/10.1246-nikkashi1921.64.431"
+    },
+    {
+      "id": "ex:msyn/species/znso4/reported-in/10.1246-nikkashi1921.64.431",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/znso4",
+      "target": "ex:msyn/source/10.1246-nikkashi1921.64.431"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/10.1246-nikkashi1921.64.431"
+}

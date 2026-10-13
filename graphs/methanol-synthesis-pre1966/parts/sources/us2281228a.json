@@ -1,0 +1,2909 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/source/us2281228a",
+      "label": "Source",
+      "props": {
+        "name": "Process for synthesizing methanol",
+        "kind": "patent",
+        "description": "Published 1942-04-28 (grant date printed on the patent (agrees with the USPTO issue-year table)); in scope: before the 1966-01-01 cutoff. Text: 6 pages text_layer. Text not redistributed.",
+        "identifiers": {
+          "patent": "US2281228A"
+        },
+        "licence": "US patent; not subject to copyright",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "Process for synthesizing methanol",
+        "url": "https://patents.google.com/patent/US2281228A",
+        "year": 1942
+      }
+    },
+    {
+      "id": "ex:msyn/us2281228a/catalyst/alkali-free-methanol-catalyst",
+      "label": "Catalyst",
+      "props": {
+        "name": "methanol synthesis catalyst free from alkali and alkaline earth oxides and salts",
+        "catalyst_family": "not_reported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us2281228a/p4/1",
+            "quote": "the catalyst in converter is any contact ma terial which is active for the Synthesis of methanol from carbon monoxide and hydrogen, especially one free from oxides and salts of the alkali and alkaline earth metals.",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "generality": "kind"
+      }
+    },
+    {
+      "id": "ex:msyn/us2281228a/catalyst/catalysts-in-the-art",
+      "label": "Catalyst",
+      "props": {
+        "name": "methanol/methyl ether synthesis catalysts (prior art, general)",
+        "catalyst_family": "not_reported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2281228a/p2/2",
+            "quote": "it has been repeatedly stated in the art metal carbonyls should be ex cluded from the gases in order to prevent poison ing the catalysts.",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "generality": "kind",
+        "note": "as stated in the art"
+      }
+    },
+    {
+      "id": "ex:msyn/us2281228a/catalyst/zno-promoted-cr-oxide",
+      "label": "Catalyst",
+      "props": {
+        "name": "zinc oxide promoted with one or more other oxides, such as an oxide of chromium",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us2281228a/p4/3",
+            "quote": "methanol synthesis catalysts which are composed of zinc oxide promoted with one or more other oxides, such as an oxide of chromium,",
+            "source": "ex:msyn/source/us2281228a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5, claim 4",
+            "passage": "us2281228a/p5/6",
+            "quote": "said gas with a methanol synthesis catalyst COm prising zinc oxide and an oxide of chromium",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "generality": "kind"
+      }
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/art-carbonyls",
+      "label": "Claim",
+      "props": {
+        "name": "the art: metal carbonyls must be excluded to prevent catalyst poisoning",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2281228a/p2/2",
+            "quote": "it has been repeatedly stated in the art metal carbonyls should be ex cluded from the gases in order to prevent poison ing the catalysts.",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "cited from the art",
+        "statement": "It has been repeatedly stated in the art that metal carbonyls should be excluded from the gases to prevent poisoning the catalysts."
+      }
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/art-co2-equivalent",
+      "label": "Claim",
+      "props": {
+        "name": "prior view: CO2 equivalent to CO as raw material",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2281228a/p2/3",
+            "quote": "it has been generally recognized, carbon dioxide is the sub stantial equivalent of carbon monoxide as a raw material from which methanol may be syn",
+            "source": "ex:msyn/source/us2281228a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2281228a/p2/3",
+            "quote": "it has customarily : been proposed to use for the synthesis of meth",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "prior view reported by the patent, which disputes it",
+        "statement": "It has generally been considered that carbon dioxide is substantially equivalent to carbon monoxide as a raw material for methanol (except for more hydrogen reacting), so gases containing both oxides have customarily been proposed."
+      }
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/art-co2-higher-alcohols",
+      "label": "Claim",
+      "props": {
+        "name": "prior: CO2 kept at 2-3% for higher alcohol synthesis",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2281228a/p2/4",
+            "quote": "presence of carbon dioxide decreases the amount of these higher oxygenated organic compounds formed by the Synthesis reaction and hence it has been proposed in such processes to keep the carbon dioxide content of the gases at not above 2% to 3%",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "stated as recognized in the art",
+        "statement": "In processes aimed at higher oxygenated compounds than methanol, CO2 is recognized to decrease their amount, and it has been proposed to keep CO2 in the gases at not above 2% to 3%."
+      }
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/art-high-pressure-products",
+      "label": "Claim",
+      "props": {
+        "name": "above 50 atm, products principally methanol and methyl ether (known)",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2281228a/p2/2",
+            "quote": "At high pressures, particularly pressures above 50 atmospheres, it is known that by employing certain catalysts at appropriate Operating temperatures and gas compositions the oxygenated Organic compounds produced will principally consist of methanol",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "note": "stated as known in the art",
+        "statement": "It is known that at high pressures, particularly above 50 atmospheres, with certain catalysts, temperatures and gas compositions the oxygenated organic compounds produced consist principally of methanol and its equivalent methyl ether, which hydrolyses readily to methyl alcohol."
+      }
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/co2-builds-up",
+      "label": "Claim",
+      "props": {
+        "name": "CO2 forms and builds up to an equilibrium level, up to 15% or more",
+        "claim_kind": "finding",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2281228a/p2/6",
+            "quote": "though the gas initially contains only carbon monoxide and hydrogen, carbon dioxide is formed in contacting it with the catalyst used for the Synthesis of the oxygenated organic compounds",
+            "source": "ex:msyn/source/us2281228a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2281228a/p2/7",
+            "quote": "there will be in the gas circulating in the system a substan tial concentration of carbon dioxide, which may amount to as much as 15% CO2 or more.",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Even when the gas initially contains only CO and H2, CO2 is formed over the catalyst and builds up in the circulating gas to a substantially constant 'equilibrium' proportion depending on temperature, bleed rate, make-up supply and CO2 dissolved in the product, which may amount to 15% CO2 or more."
+      }
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/co2-deleterious",
+      "label": "Claim",
+      "props": {
+        "name": "CO2 markedly reduces catalyst activity; more methanol without CO2",
+        "claim_kind": "finding",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2281228a/p2/8",
+            "quote": "I have discovered, however, that in Synthesizing methanol carbon dioxide",
+            "source": "ex:msyn/source/us2281228a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us2281228a/p3/1",
+            "quote": "activity of the catalyst to synthesize methanol from carbon monoxide and hydrogen. I have found more methanol is obtained from a carbon monoxide gas free from carbon dioxide than when carbon dioxide is present.",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "In synthesizing methanol, carbon dioxide exercises a marked deleterious influence on the activity of the catalyst to synthesize methanol from CO and H2; more methanol is obtained from a CO gas free from CO2 than when CO2 is present."
+      }
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/cyclic-system",
+      "label": "Claim",
+      "props": {
+        "name": "cyclic synthesis with product condensation, bleed gas and make-up gas",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2281228a/p2/5",
+            "quote": "It has usually been proposed, therefore, to employ for the synthesis of these products a cyclic syn thesis system in which the gases are continuously circulated in contact with the catalyst",
+            "source": "ex:msyn/source/us2281228a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2281228a/p2/5",
+            "quote": "A portion of the gases circulating in such a system is continuously withdrawn therefrom as \"bleed gas' in order to prevent the accumulation to an undesired degree of inert gases",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Synthesis is usually carried out in a cyclic system: gases circulate over the catalyst, product is condensed out by cooling, unreacted gas is recirculated, a bleed gas is withdrawn to limit inerts, and fresh make-up gas is added."
+      }
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/invention-exclude-co2",
+      "label": "Claim",
+      "props": {
+        "name": "keep CO2 in gas to the catalyst below equilibrium, preferably not more than about 1%",
+        "claim_kind": "causal",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us2281228a/p3/4",
+            "quote": "dioxide content of the gas introduced into con tact with the catalyst is maintained below the equilibrium CO2 concentration of the gas cir culating in the system, preferably at not more than about 1%, thereby increasing the activity",
+            "source": "ex:msyn/source/us2281228a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us2281228a/p3/4",
+            "quote": "of the catalyst for the synthesis of methanol as conpared with the prior processes in which the gas introduced into contact with the catalyst contains higher proportions of carbon dioxide.",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The invention removes CO2 from the circulating gas (and from make-up gas containing it) before contact with the catalyst, keeping the CO2 content of the gas entering the catalyst below the equilibrium concentration, preferably at not more than about 1%, which increases catalyst activity compared with prior processes."
+      }
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/methanol-scrubbing",
+      "label": "Claim",
+      "props": {
+        "name": "CO2 scrubbed with product methanol, stripped with air and recycled",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us2281228a/p3/8",
+            "quote": "the carbon dioxide absorbent is the liquefied meth anol recovered from the circulating gases in liqueflier 2 after this methanol has been treated in a carbon dioxide desorber 7, preferably at about atmospheric pressure,",
+            "source": "ex:msyn/source/us2281228a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us2281228a/p4/2",
+            "quote": "is maintained much be low the equilibrium CO2 pressure for the methanol synthesis system, thereby preventing the decrease in activity of the catalyst",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "CO2 is removed in a scrubber 6 by the liquefied product methanol, which is stripped of CO2 in a desorber 7 with air (preferably at about atmospheric pressure) and pumped back to the scrubber; the gas returned to the converter then holds CO2 much below the equilibrium value, preventing loss of catalyst activity."
+      }
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/modifications",
+      "label": "Claim",
+      "props": {
+        "name": "variants: skip scrubbing CO2-free make-up gas; remove CO2 in the liquefier with refrigerated condensate to below 1%",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us2281228a/p4/5",
+            "quote": "if the fresh make-up gas introduced into the methanol synthesis sys tem is free from carbon dioxide it is unnecessary to pass this make-up gas through the carbon dioxide scrubber",
+            "source": "ex:msyn/source/us2281228a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us2281228a/p4/6",
+            "quote": "Only a minor proportion of that which would be left in the gas merely by cooling it to Condense the methanol, e. g. is below 1%.",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "If the make-up gas is CO2-free it need not pass the scrubber; CO2 may be removed in the liquefier with cooled methanol, or by the condensate itself in countercurrent flow refrigerated so that residual CO2 is e.g. below 1%; make-up gas usually containing CO2 should then be scrubbed before entering the system."
+      }
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/operating-conditions",
+      "label": "Claim",
+      "props": {
+        "name": "catalyst active for methanol, free of alkali; 50 atm or higher; liquefier ~25 C",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us2281228a/p4/1",
+            "quote": "especially one free from oxides and salts of the alkali and alkaline earth metals. The gas is circulated in contact with the catalyst at space velocities and temperatures at which the catalyst is active for methanol synthesis and under pres sures of, for example, 50 atmospheres or higher.",
+            "source": "ex:msyn/source/us2281228a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us2281228a/p4/1",
+            "quote": "whereby the gas may be cooled to about 25 C. and the oxygenated organic compounds in the gas are",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "scope": "pressures of, for example, 50 atmospheres or higher",
+        "statement": "Any catalyst active for methanol synthesis from CO and H2 may be used, especially one free from alkali and alkaline earth oxides and salts; the gas is circulated at space velocities and temperatures at which the catalyst is active and pressures of, for example, 50 atmospheres or higher; the liquefier cools the gas to about 25 C."
+      }
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/other-absorbents",
+      "label": "Claim",
+      "props": {
+        "name": "other CO2 absorbents by product use",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us2281228a/p4/7",
+            "quote": "For example, if pure methanol is to be produced, one may employ a solution of sodium hydroxide or sodium car bonate.",
+            "source": "ex:msyn/source/us2281228a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us2281228a/p4/7",
+            "quote": "Methyl ether, recovered from the crude Inethanol product of the synthesis process, may be employed as the carbon dioxide absorbent",
+            "source": "ex:msyn/source/us2281228a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us2281228a/p4/8",
+            "quote": "a solvent such as isopropyl alcohol, isopropyl ether or mixed alkyl or aryl ethers,",
+            "source": "ex:msyn/source/us2281228a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us2281228a/p4/8",
+            "quote": "High boiling hydrocarbons and polyoxygenated compounds such as petroleum oil fractions or ethylene glycol are suitable,",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Other absorbents may be used: for pure methanol, sodium hydroxide or sodium carbonate solution; methyl ether at low temperature; for anti-freeze methanol, isopropyl alcohol, isopropyl ether or mixed alkyl or aryl ethers; high-boiling hydrocarbons and polyoxygenated compounds such as petroleum oil fractions or ethylene glycol where small impurities are acceptable."
+      }
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/other-solvent-preferred",
+      "label": "Claim",
+      "props": {
+        "name": "a non-methanol solvent preferred when an outside solvent is used",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us2281228a/p3/10",
+            "quote": "it is preferred to use a solvent other than methanol because of the relatively low solubility of carbon dioxide in methanol.",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "When a solvent other than the product methanol is used, a solvent other than methanol is preferred because of the relatively low solubility of CO2 in methanol."
+      }
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/patent-claim-1",
+      "label": "Claim",
+      "props": {
+        "name": "claim 1: cyclic process, alkali-free catalyst, 300-340 C, SV 10,000-20,000, CO2 removed below equilibrium",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, claim 1",
+            "passage": "us2281228a/p4/9",
+            "quote": "tacting said gas containing hydrogen and carbon monoxide with a methanol synthesis catalyst which is free from oxides and salts of the alkali",
+            "source": "ex:msyn/source/us2281228a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5, claim 1",
+            "passage": "us2281228a/p5/1",
+            "quote": "and alkaline earth metals at a temperature of 300° C. to 340° C. and at a space velocity of 10,000 to 20,000",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "scope": "300 C to 340 C; space velocity 10,000 to 20,000",
+        "statement": "In a cyclic methanol process at high pressure with CO2 at equilibrium in the gas to the catalyst: contact with a methanol catalyst free from alkali and alkaline earth oxides and salts at 300 C to 340 C and space velocity 10,000 to 20,000, removing CO2 so the gas holds materially less than the equilibrium concentration, preventing the substantial decrease in catalytic activity."
+      }
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/patent-claim-10",
+      "label": "Claim",
+      "props": {
+        "name": "claim 10: scrub residual gas with liquid methanol below equilibrium CO2",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6, claim 10",
+            "note": "'Juid' reads 'liquid'",
+            "quote": "ment which comprises scrubbing said residual gas containing carbon dioxide with liquid meth anol under conditions at which the 'Juid meth anol absorbs carbon dioxide",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "In a cyclic process with equilibrium CO2, the residual gas is scrubbed with liquid methanol under conditions at which it absorbs CO2, reducing the CO2 content below the equilibrium concentration."
+      }
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/patent-claim-2",
+      "label": "Claim",
+      "props": {
+        "name": "claim 2: as claim 1, scrubbing the residual gas with a liquid absorbing CO2",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5, claim 2",
+            "passage": "us2281228a/p5/3",
+            "quote": "scrubbing said residual gas with a liquid which absorbs and removes therefrom the carbon dioxide left in the residual gas after condensation of methanol",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "scope": "300 C to 340 C; space velocity 10,000 to 20,000",
+        "statement": "As in claim 1, but prior to recirculation the residual gas is scrubbed with a liquid absorbing CO2, substantially completely removing it, so the gas to the catalyst holds materially less than the equilibrium CO2 concentration."
+      }
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/patent-claim-3",
+      "label": "Claim",
+      "props": {
+        "name": "claim 3: alkali-free catalyst, 300-340 C, SV 10,000-20,000, CO2 not above substantially 1%",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5, claim 3",
+            "passage": "us2281228a/p4/9",
+            "quote": "with a methanol synthesis catalyst which is free from oxides and salts of the alkali and alkaline earth metals at a temperature at 300° C. to 340 C. and at a space velocity of 10,000 to 20,000",
+            "source": "ex:msyn/source/us2281228a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5, claim 3",
+            "passage": "us2281228a/p5/5",
+            "quote": "with said catalyst contains not above substan tially 1% carbon dioxide,",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "scope": "300 C to 340 C; space velocity 10,000 to 20,000",
+        "statement": "In a methanol process whose circulated gas contains substantially more than 1% CO2: contact with an alkali- and alkaline-earth-free catalyst at 300 C to 340 C and space velocity 10,000 to 20,000, removing CO2 so the gas to the catalyst contains not above substantially 1% CO2."
+      }
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/patent-claim-4",
+      "label": "Claim",
+      "props": {
+        "name": "claim 4: ZnO + chromium oxide catalyst, 300-340 C, SV 10,000-20,000, CO2 not above ~1%",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5, claim 4",
+            "passage": "us2281228a/p5/6",
+            "quote": "said gas with a methanol synthesis catalyst COm prising zinc oxide and an oxide of chromium at a temperature of 300° C. to 340 C. and at a space velocity of 10,000 to 20,000",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "scope": "300 C to 340 C; space velocity 10,000 to 20,000",
+        "statement": "As claim 3 but with a methanol synthesis catalyst comprising zinc oxide and an oxide of chromium, at 300 C to 340 C and space velocity 10,000 to 20,000, with the gas to the catalyst containing not above substantially 1% CO2."
+      }
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/patent-claim-5",
+      "label": "Claim",
+      "props": {
+        "name": "claim 5: remove CO2 to not above substantially 1% (methanol + methyl ether > 50%)",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5, claim 5",
+            "passage": "us2281228a/p5/5",
+            "quote": "oxide in amount such that the gas passing into contact with said catalyst contains not above substantially 1% carbon dioxide, thereby pre venting the substantial decrease in catalytic ac tivity",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "In a methanol process where over 50% of the oxygenated products are methanol and methyl ether and the circulated gas contains substantially more than 1% CO2, CO2 is removed so the gas to the catalyst contains not above substantially 1% CO2."
+      }
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/patent-claim-6",
+      "label": "Claim",
+      "props": {
+        "name": "claim 6: remove CO2 from the cyclic gas below equilibrium",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5, claim 6",
+            "passage": "us2281228a/p5/11",
+            "quote": "that improvement which comprises re moving from the gas circulated into contact with the catalyst in Said cyclic System carbon dioxide",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "In a cyclic methanol process (methanol and methyl ether over 50% of products) with equilibrium CO2 in the gas to the catalyst, CO2 is removed so the gas holds materially less than the equilibrium concentration."
+      }
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/patent-claim-7",
+      "label": "Claim",
+      "props": {
+        "name": "claim 7: scrub residual and make-up gas with a liquid to not above ~1% CO2",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6, claim 7",
+            "passage": "us2281228a/p6/2",
+            "quote": "residual gas and make-up gas being scrubbed with said liquid until they contain not above sub stantially 1% carbon dioxide,",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The residual gas and the make-up gas are scrubbed with a liquid absorbing CO2 until they contain not above substantially 1% CO2, preventing the decrease in catalytic activity."
+      }
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/patent-claim-8",
+      "label": "Claim",
+      "props": {
+        "name": "claim 8: CO2 stripped from condensed methanol, which scrubs residual gas to not above ~1% CO2",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6, claim 8",
+            "passage": "us2281228a/p6/4",
+            "quote": "removing dissolved carbon dioxide from the thus separated methanol, returning methanol thus treated to remove carbon dioxide from it into",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "The condensed methanol is separated, freed of dissolved CO2 and returned to the residual gas in amounts sufficient to reduce its CO2 to not above substantially 1%; residual gas and make-up gas with not above substantially 1% CO2 are returned to the catalyst."
+      }
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/patent-claim-9",
+      "label": "Claim",
+      "props": {
+        "name": "claim 9: stripped methanol scrubs residual gas below equilibrium CO2",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6, claim 9",
+            "passage": "us2281228a/p6/5",
+            "quote": "scrubbing the residual gas with this meth anol in amount sufficient to reduce the carbon di oxide content of the residual gas to materially less than the aforesaid equilibrium concentration",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "In a cyclic process with equilibrium CO2, dissolved CO2 is removed from the product methanol, which then scrubs the residual gas to materially less than the equilibrium CO2 concentration before return with make-up gas to the catalyst."
+      }
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/preferred-conditions",
+      "label": "Claim",
+      "props": {
+        "name": "preferred: about 300-340 C, 100-200 atm, SV about 10,000-20,000",
+        "claim_kind": "generalization",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "'8.' reads 'a'",
+            "passage": "us2281228a/p4/3",
+            "quote": "It is preferred to operate this and other catalysts at temperatures of about 300 to 340 C., under pressures of about 100 to 200 atmospheres with the gas being passed through the catalyst at 8. space velocity of about 10,000 to 20,000",
+            "source": "ex:msyn/source/us2281228a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us2281228a/p4/4",
+            "quote": "(based on the volume, at standard temperature and pressure, of non-condensable gas leaving the catalyst per hour per volume of catalyst).",
+            "source": "ex:msyn/source/us2281228a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us2281228a/p4/4",
+            "quote": "presence of more carbon dioxide in the gases contacted with the catalyst particularly reduces the activity of the catalyst for synthesizing methanol",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "scope": "about 300 to 340 C; about 100 to 200 atmospheres; space velocity about 10,000 to 20,000",
+        "statement": "It is preferred to operate this and other catalysts at about 300 to 340 C, about 100 to 200 atmospheres and a space velocity of about 10,000 to 20,000 (volume at standard temperature and pressure of non-condensable gas leaving the catalyst per hour per volume of catalyst); under these conditions more CO2 particularly reduces activity, so CO2 exclusion is especially advantageous."
+      }
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/zno-cr-subject-to-co2",
+      "label": "Claim",
+      "props": {
+        "name": "ZnO catalysts promoted with e.g. chromium oxide particularly subject to CO2 poisoning",
+        "claim_kind": "finding",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us2281228a/p4/3",
+            "quote": "I have found that methanol synthesis catalysts which are composed of zinc oxide promoted with one or more other oxides, such as an oxide of chromium, are particularly subject to poisoning by carbon dioxide in the gases contacted with the catalyst.",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "inference_type": "not_stated",
+        "statement": "Methanol synthesis catalysts composed of zinc oxide promoted with one or more other oxides, such as an oxide of chromium, are particularly subject to poisoning by carbon dioxide; the process is particularly applicable to them."
+      }
+    },
+    {
+      "id": "ex:msyn/us2281228a/feed/circulating-gas",
+      "label": "Feed",
+      "props": {
+        "name": "gas introduced to the catalyst in the circulatory system",
+        "description": "without CO2 removal the circulating gas may hold 15% CO2 or more; the invention keeps the CO2 of the gas entering the catalyst preferably at not more than about 1%",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2281228a/p2/7",
+            "quote": "there will be in the gas circulating in the system a substan tial concentration of carbon dioxide, which may amount to as much as 15% CO2 or more.",
+            "source": "ex:msyn/source/us2281228a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us2281228a/p3/4",
+            "quote": "dioxide content of the gas introduced into con tact with the catalyst is maintained below the equilibrium CO2 concentration of the gas cir culating in the system, preferably at not more than about 1%,",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "generality": "kind"
+      }
+    },
+    {
+      "id": "ex:msyn/us2281228a/feed/make-up-gas",
+      "label": "Feed",
+      "props": {
+        "name": "fresh make-up gas containing hydrogen and carbon monoxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us2281228a/p3/4",
+            "quote": "In Such a process fresh make-up gas containing hydrogen and carbon monoxide is introduced into the circulatory Syn thesis system",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "generality": "kind"
+      }
+    },
+    {
+      "id": "ex:msyn/us2281228a/hypothesis/co2-diluent-side-reactions-poison",
+      "label": "Hypothesis",
+      "props": {
+        "name": "CO2 acts as diluent, causes side reactions and poisons the catalyst",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us2281228a/p3/1",
+            "quote": "It would appear the carbon dioxide not only acts as a diluent upon the carbon monoxide and hydrogen gases and in troduces the complications of side reactions",
+            "source": "ex:msyn/source/us2281228a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us2281228a/p3/1",
+            "quote": "but further, carbon dioxide appears to exercise an actual poisoning effect upon the cata lyst and thereby decreases its catalytic activity for the methanol synthesis.",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "hypothesis_kind": "explanatory",
+        "hypothesis_status": "proposed",
+        "statement": "Carbon dioxide appears not only to dilute the CO and H2 and introduce side reactions absent in CO2-free gas, but also to exert an actual poisoning effect on the catalyst, decreasing its activity for methanol synthesis."
+      }
+    },
+    {
+      "id": "ex:msyn/us2281228a/reactor/gas-circulatory-system",
+      "label": "Reactor",
+      "props": {
+        "name": "preheater and converter 1 in a gas circulatory methanol synthesis system",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us2281228a/p3/6",
+            "quote": "In the drawing there is illustrated a conventional gas circulatory system for methanol synthesis which comprises a gas preheater and converter containing a methanol synthesis cata lyst and a liquefier 2",
+            "source": "ex:msyn/source/us2281228a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us2281228a/p3/6",
+            "quote": "A circulator or pump 3 is provided for continu ously circulating the carbor monoxide and hydro gen gas through the preheater and converter and the liquefier.",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "note": "drawn and described generically; no dimensions given",
+        "reactor_kind": "circulating",
+        "specifications": {
+          "co2_scrubber": {
+            "status": "present",
+            "as_reported": "a carbon dioxide scrubber 6",
+            "text_value": "gas-liquid contact tower between circulator 3 and the make-up gas inlet"
+          },
+          "liquefier_gas_temperature": {
+            "status": "present",
+            "as_reported": "about 25 C.",
+            "note": "gas cooled in liquefier 2 by water at ordinary temperatures",
+            "qualifier": "approximate",
+            "unit": "C",
+            "value": 25
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/us2281228a/species/alkali-alkaline-earth-oxides-salts",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "oxides and salts of the alkali and alkaline earth metals (class)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us2281228a/p4/1",
+            "quote": "especially one free from oxides and salts of the alkali and alkaline earth metals.",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us2281228a/species/chromium-oxide",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "an oxide of chromium",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us2281228a/p4/3",
+            "quote": "promoted with one or more other oxides, such as an oxide of chromium,",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "note": "formula not stated"
+      }
+    },
+    {
+      "id": "ex:msyn/us2281228a/species/ethylene-glycol",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "ethylene glycol",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us2281228a/p4/8",
+            "quote": "such as petroleum oil fractions or ethylene glycol are suitable,",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us2281228a/species/isopropyl-alcohol",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "isopropyl alcohol",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us2281228a/p4/8",
+            "quote": "a solvent such as isopropyl alcohol, isopropyl ether or mixed alkyl or aryl ethers,",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us2281228a/species/isopropyl-ether",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "isopropyl ether",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us2281228a/p4/8",
+            "quote": "a solvent such as isopropyl alcohol, isopropyl ether or mixed alkyl or aryl ethers,",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us2281228a/species/metal-carbonyls",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "metal carbonyls (class)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2281228a/p2/2",
+            "quote": "it has been repeatedly stated in the art metal carbonyls should be ex cluded from the gases in order to prevent poison ing the catalysts.",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/us2281228a/species/petroleum-oil-fractions",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "petroleum oil fractions",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us2281228a/p4/8",
+            "quote": "High boiling hydrocarbons and polyoxygenated compounds such as petroleum oil fractions or ethylene glycol",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/reaction/co-hydrogenation-to-methanol/reported-in/us2281228a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/source/us2281228a"
+    },
+    {
+      "id": "ex:msyn/reaction/co2-hydrogenation-to-methanol/reported-in/us2281228a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/reaction/co2-hydrogenation-to-methanol",
+      "target": "ex:msyn/source/us2281228a"
+    },
+    {
+      "id": "ex:msyn/source/us2281228a/assignee",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "role": "assignee"
+      },
+      "source": "ex:msyn/source/us2281228a",
+      "target": "ex:msyn/institution/solvay-process-co"
+    },
+    {
+      "id": "ex:msyn/species/ch3och3/reported-in/us2281228a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/ch3och3",
+      "target": "ex:msyn/source/us2281228a"
+    },
+    {
+      "id": "ex:msyn/species/co2/reported-in/us2281228a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/co2",
+      "target": "ex:msyn/source/us2281228a"
+    },
+    {
+      "id": "ex:msyn/species/na2co3/reported-in/us2281228a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/na2co3",
+      "target": "ex:msyn/source/us2281228a"
+    },
+    {
+      "id": "ex:msyn/species/naoh/reported-in/us2281228a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/naoh",
+      "target": "ex:msyn/source/us2281228a"
+    },
+    {
+      "id": "ex:msyn/species/zno/reported-in/us2281228a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/zno",
+      "target": "ex:msyn/source/us2281228a"
+    },
+    {
+      "id": "ex:msyn/us2281228a/catalyst/alkali-free-methanol-catalyst/reported-in/us2281228a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2281228a/catalyst/alkali-free-methanol-catalyst",
+      "target": "ex:msyn/source/us2281228a"
+    },
+    {
+      "id": "ex:msyn/us2281228a/catalyst/catalysts-in-the-art/reported-in/us2281228a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2281228a/catalyst/catalysts-in-the-art",
+      "target": "ex:msyn/source/us2281228a"
+    },
+    {
+      "id": "ex:msyn/us2281228a/catalyst/zno-promoted-cr-oxide/reported-in/us2281228a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4",
+          "p. 5, claim 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2281228a/catalyst/zno-promoted-cr-oxide",
+      "target": "ex:msyn/source/us2281228a"
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/art-carbonyls/reported-in/us2281228a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2281228a/claim/art-carbonyls",
+      "target": "ex:msyn/source/us2281228a"
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/art-co2-equivalent/reported-in/us2281228a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2281228a/claim/art-co2-equivalent",
+      "target": "ex:msyn/source/us2281228a"
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/art-co2-higher-alcohols/reported-in/us2281228a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2281228a/claim/art-co2-higher-alcohols",
+      "target": "ex:msyn/source/us2281228a"
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/art-high-pressure-products/reported-in/us2281228a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2281228a/claim/art-high-pressure-products",
+      "target": "ex:msyn/source/us2281228a"
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/co2-builds-up/reported-in/us2281228a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2281228a/claim/co2-builds-up",
+      "target": "ex:msyn/source/us2281228a"
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/co2-deleterious/reported-in/us2281228a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2281228a/claim/co2-deleterious",
+      "target": "ex:msyn/source/us2281228a"
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/cyclic-system/reported-in/us2281228a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2281228a/claim/cyclic-system",
+      "target": "ex:msyn/source/us2281228a"
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/invention-exclude-co2/reported-in/us2281228a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2281228a/claim/invention-exclude-co2",
+      "target": "ex:msyn/source/us2281228a"
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/methanol-scrubbing/reported-in/us2281228a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3",
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2281228a/claim/methanol-scrubbing",
+      "target": "ex:msyn/source/us2281228a"
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/modifications/reported-in/us2281228a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2281228a/claim/modifications",
+      "target": "ex:msyn/source/us2281228a"
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/operating-conditions/reported-in/us2281228a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2281228a/claim/operating-conditions",
+      "target": "ex:msyn/source/us2281228a"
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/other-absorbents/reported-in/us2281228a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2281228a/claim/other-absorbents",
+      "target": "ex:msyn/source/us2281228a"
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/other-solvent-preferred/reported-in/us2281228a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2281228a/claim/other-solvent-preferred",
+      "target": "ex:msyn/source/us2281228a"
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/patent-claim-1/reported-in/us2281228a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4, claim 1",
+          "p. 5, claim 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2281228a/claim/patent-claim-1",
+      "target": "ex:msyn/source/us2281228a"
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/patent-claim-10/reported-in/us2281228a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6, claim 10"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2281228a/claim/patent-claim-10",
+      "target": "ex:msyn/source/us2281228a"
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/patent-claim-2/reported-in/us2281228a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5, claim 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2281228a/claim/patent-claim-2",
+      "target": "ex:msyn/source/us2281228a"
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/patent-claim-3/reported-in/us2281228a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5, claim 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2281228a/claim/patent-claim-3",
+      "target": "ex:msyn/source/us2281228a"
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/patent-claim-4/reported-in/us2281228a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5, claim 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2281228a/claim/patent-claim-4",
+      "target": "ex:msyn/source/us2281228a"
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/patent-claim-5/reported-in/us2281228a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5, claim 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2281228a/claim/patent-claim-5",
+      "target": "ex:msyn/source/us2281228a"
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/patent-claim-6/reported-in/us2281228a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5, claim 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2281228a/claim/patent-claim-6",
+      "target": "ex:msyn/source/us2281228a"
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/patent-claim-7/reported-in/us2281228a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6, claim 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2281228a/claim/patent-claim-7",
+      "target": "ex:msyn/source/us2281228a"
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/patent-claim-8/reported-in/us2281228a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6, claim 8"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2281228a/claim/patent-claim-8",
+      "target": "ex:msyn/source/us2281228a"
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/patent-claim-9/reported-in/us2281228a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6, claim 9"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2281228a/claim/patent-claim-9",
+      "target": "ex:msyn/source/us2281228a"
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/preferred-conditions/reported-in/us2281228a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2281228a/claim/preferred-conditions",
+      "target": "ex:msyn/source/us2281228a"
+    },
+    {
+      "id": "ex:msyn/us2281228a/claim/zno-cr-subject-to-co2/reported-in/us2281228a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2281228a/claim/zno-cr-subject-to-co2",
+      "target": "ex:msyn/source/us2281228a"
+    },
+    {
+      "id": "ex:msyn/us2281228a/feed/circulating-gas/reported-in/us2281228a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2281228a/feed/circulating-gas",
+      "target": "ex:msyn/source/us2281228a"
+    },
+    {
+      "id": "ex:msyn/us2281228a/feed/make-up-gas/reported-in/us2281228a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2281228a/feed/make-up-gas",
+      "target": "ex:msyn/source/us2281228a"
+    },
+    {
+      "id": "ex:msyn/us2281228a/hypothesis/co2-diluent-side-reactions-poison/reported-in/us2281228a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2281228a/hypothesis/co2-diluent-side-reactions-poison",
+      "target": "ex:msyn/source/us2281228a"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/1",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us2281228a/p4/1",
+            "quote": "especially one free from oxides and salts of the alkali and alkaline earth metals.",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "free from",
+          "note": "stated absent",
+          "unit": "1",
+          "value": 0
+        },
+        "note": "the catalyst is to be free of these",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us2281228a/catalyst/alkali-free-methanol-catalyst",
+      "target": "ex:msyn/us2281228a/species/alkali-alkaline-earth-oxides-salts"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/10",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us2281228a/p3/4",
+            "quote": "fresh make-up gas containing hydrogen and carbon monoxide",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "fraction": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source"
+        },
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us2281228a/feed/make-up-gas",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/11",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us2281228a/p3/4",
+            "quote": "fresh make-up gas containing hydrogen and carbon monoxide",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "fraction": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source"
+        },
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us2281228a/feed/make-up-gas",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/12",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us2281228a/p3/3",
+            "quote": "a gas containing hydrogen and carbon monoxide is passed in contact with the catalyst",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "fraction": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source"
+        },
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us2281228a/feed/circulating-gas",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/13",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us2281228a/p3/3",
+            "quote": "a gas containing hydrogen and carbon monoxide is passed in contact with the catalyst",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "fraction": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source"
+        },
+        "role": "reactant"
+      },
+      "source": "ex:msyn/us2281228a/feed/circulating-gas",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/14",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us2281228a/p3/4",
+            "quote": "maintained below the equilibrium CO2 concentration of the gas cir culating in the system, preferably at not more than about 1%,",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "not more than about 1%",
+          "bound": "upper",
+          "note": "preferred, with CO2 removal; basis not printed",
+          "qualifier": "approximate",
+          "unit": "%",
+          "value": 1
+        },
+        "fraction_basis": "not_reported",
+        "note": "without removal up to 'as much as 15% CO2 or more'",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us2281228a/feed/circulating-gas",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/15",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2281228a/p2/2",
+            "quote": "principally consist of methanol and its equiva lent, methyl ether,",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/art-high-pressure-products",
+      "target": "ex:msyn/species/ch3och3"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/16",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2281228a/p2/2",
+            "quote": "metal carbonyls should be ex cluded from the gases",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/art-carbonyls",
+      "target": "ex:msyn/us2281228a/species/metal-carbonyls"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/17",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2281228a/p2/3",
+            "quote": "carbon dioxide is the sub stantial equivalent of carbon monoxide as a raw material from which methanol may be syn",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/art-co2-equivalent",
+      "target": "ex:msyn/reaction/co2-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/18",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2281228a/p2/4",
+            "quote": "it has been proposed in such processes to keep the carbon dioxide content of the gases at not above 2% to 3%",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/art-co2-higher-alcohols",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/19",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2281228a/p2/5",
+            "quote": "a cyclic syn thesis system in which the gases are continuously circulated in contact with the catalyst",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/cyclic-system",
+      "target": "ex:msyn/us2281228a/reactor/gas-circulatory-system"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/2",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us2281228a/p4/1",
+            "quote": "any contact ma terial which is active for the Synthesis of methanol from carbon monoxide and hydrogen,",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/catalyst/alkali-free-methanol-catalyst",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/20",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2281228a/p2/6",
+            "quote": "carbon dioxide is formed in contacting it with the catalyst",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/co2-builds-up",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/21",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2281228a/p2/7",
+            "quote": "there will be in the gas circulating in the system a substan tial concentration of carbon dioxide,",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/co2-builds-up",
+      "target": "ex:msyn/us2281228a/feed/circulating-gas"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/22",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us2281228a/p3/1",
+            "quote": "I have found more methanol is obtained from a carbon monoxide gas free from carbon dioxide than when carbon dioxide is present.",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/co2-deleterious",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/23",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us2281228a/p3/1",
+            "quote": "activity of the catalyst to synthesize methanol from carbon monoxide and hydrogen.",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/co2-deleterious",
+      "target": "ex:msyn/us2281228a/catalyst/alkali-free-methanol-catalyst"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/24",
+      "type": "ABOUT",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us2281228a/p3/1",
+            "quote": "carbon dioxide appears to exercise an actual poisoning effect upon the cata lyst",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/hypothesis/co2-diluent-side-reactions-poison",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/25",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us2281228a/p3/1",
+            "quote": "I have found more methanol is obtained from a carbon monoxide gas free from carbon dioxide than when carbon dioxide is present. It would appear the",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/co2-deleterious",
+      "target": "ex:msyn/us2281228a/hypothesis/co2-diluent-side-reactions-poison"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/26",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us2281228a/p3/4",
+            "quote": "dioxide content of the gas introduced into con tact with the catalyst is maintained below the equilibrium CO2 concentration",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/invention-exclude-co2",
+      "target": "ex:msyn/us2281228a/feed/circulating-gas"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/27",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us2281228a/p3/4",
+            "quote": "preferably at not more than about 1%, thereby increasing the activity",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/invention-exclude-co2",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/28",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us2281228a/p3/4",
+            "quote": "thereby increasing the activity of the catalyst for the synthesis of methanol",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/invention-exclude-co2",
+      "target": "ex:msyn/us2281228a/catalyst/alkali-free-methanol-catalyst"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/29",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us2281228a/p3/7",
+            "quote": "this conventional methanol synthesis System is modified to insert a carbon dioxide scrubber 6",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/methanol-scrubbing",
+      "target": "ex:msyn/us2281228a/reactor/gas-circulatory-system"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/3",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2281228a/p2/8",
+            "quote": "I have discovered, however, that in Synthesizing methanol carbon dioxide",
+            "source": "ex:msyn/source/us2281228a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2281228a/p2/8",
+            "quote": "exercises a marked deleterious influence upon the",
+            "source": "ex:msyn/source/us2281228a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us2281228a/p3/1",
+            "quote": "activity of the catalyst to synthesize methanol from carbon monoxide and hydrogen.",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "inhibition_kind": "poison",
+        "note": "'carbon dioxide appears to exercise an actual poisoning effect'"
+      },
+      "source": "ex:msyn/us2281228a/catalyst/alkali-free-methanol-catalyst",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/30",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us2281228a/p3/8",
+            "quote": "the carbon dioxide absorbent is the liquefied meth anol",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/methanol-scrubbing",
+      "target": "ex:msyn/species/ch3oh"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/31",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "us2281228a/p3/10",
+            "quote": "because of the relatively low solubility of carbon dioxide in methanol.",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/other-solvent-preferred",
+      "target": "ex:msyn/species/ch3oh"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/32",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us2281228a/p4/1",
+            "quote": "especially one free from oxides and salts of the alkali and alkaline earth metals.",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/operating-conditions",
+      "target": "ex:msyn/us2281228a/catalyst/alkali-free-methanol-catalyst"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/33",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us2281228a/p4/1",
+            "quote": "especially one free from oxides and salts of the alkali and alkaline earth metals.",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/operating-conditions",
+      "target": "ex:msyn/us2281228a/species/alkali-alkaline-earth-oxides-salts"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/34",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us2281228a/p4/3",
+            "quote": "methanol synthesis catalysts which are composed of zinc oxide promoted with one or more other oxides,",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/zno-cr-subject-to-co2",
+      "target": "ex:msyn/us2281228a/catalyst/zno-promoted-cr-oxide"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/35",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us2281228a/p4/3",
+            "quote": "are particularly subject to poisoning by carbon dioxide",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/zno-cr-subject-to-co2",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/36",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us2281228a/p4/3",
+            "quote": "It is preferred to operate this and other catalysts at temperatures of about 300 to 340 C.,",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/preferred-conditions",
+      "target": "ex:msyn/us2281228a/catalyst/zno-promoted-cr-oxide"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/37",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us2281228a/p4/4",
+            "quote": "particularly reduces the activity of the catalyst for synthesizing methanol from the carbon monoxide and hydro gen",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/preferred-conditions",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/38",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us2281228a/p4/5",
+            "quote": "if the fresh make-up gas introduced into the methanol synthesis sys tem is free from carbon dioxide",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/modifications",
+      "target": "ex:msyn/us2281228a/feed/make-up-gas"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/39",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us2281228a/p4/7",
+            "quote": "one may employ a solution of sodium hydroxide or sodium car bonate.",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "role": "carbon dioxide absorbent"
+      },
+      "source": "ex:msyn/us2281228a/claim/other-absorbents",
+      "target": "ex:msyn/species/naoh"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/4",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us2281228a/p4/3",
+            "quote": "catalysts which are composed of zinc oxide promoted with one or more other oxides,",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/us2281228a/catalyst/zno-promoted-cr-oxide",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/40",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us2281228a/p4/7",
+            "quote": "one may employ a solution of sodium hydroxide or sodium car bonate.",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "role": "carbon dioxide absorbent"
+      },
+      "source": "ex:msyn/us2281228a/claim/other-absorbents",
+      "target": "ex:msyn/species/na2co3"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/41",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us2281228a/p4/7",
+            "quote": "Methyl ether, recovered from the crude Inethanol product of the synthesis process, may be employed as the carbon dioxide absorbent",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "role": "carbon dioxide absorbent"
+      },
+      "source": "ex:msyn/us2281228a/claim/other-absorbents",
+      "target": "ex:msyn/species/ch3och3"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/42",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us2281228a/p4/8",
+            "quote": "a solvent such as isopropyl alcohol, isopropyl ether",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "role": "carbon dioxide absorbent"
+      },
+      "source": "ex:msyn/us2281228a/claim/other-absorbents",
+      "target": "ex:msyn/us2281228a/species/isopropyl-alcohol"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/43",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us2281228a/p4/8",
+            "quote": "a solvent such as isopropyl alcohol, isopropyl ether",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "role": "carbon dioxide absorbent"
+      },
+      "source": "ex:msyn/us2281228a/claim/other-absorbents",
+      "target": "ex:msyn/us2281228a/species/isopropyl-ether"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/44",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us2281228a/p4/8",
+            "quote": "such as petroleum oil fractions or ethylene glycol",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "role": "carbon dioxide absorbent"
+      },
+      "source": "ex:msyn/us2281228a/claim/other-absorbents",
+      "target": "ex:msyn/us2281228a/species/petroleum-oil-fractions"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/45",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us2281228a/p4/8",
+            "quote": "such as petroleum oil fractions or ethylene glycol",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "role": "carbon dioxide absorbent"
+      },
+      "source": "ex:msyn/us2281228a/claim/other-absorbents",
+      "target": "ex:msyn/us2281228a/species/ethylene-glycol"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/46",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4, claim 1",
+            "passage": "us2281228a/p4/9",
+            "quote": "tacting said gas containing hydrogen and carbon monoxide with a methanol synthesis catalyst which is free from oxides and salts of the alkali",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/patent-claim-1",
+      "target": "ex:msyn/us2281228a/catalyst/alkali-free-methanol-catalyst"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/47",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5, claim 1",
+            "passage": "us2281228a/p5/1",
+            "quote": "and alkaline earth metals at a temperature of 300° C. to 340° C. and at a space velocity of 10,000 to 20,000",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/patent-claim-1",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/48",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4-5, claim 1",
+            "note": "'i.' is the text layer of '1.'",
+            "quote": "i. In a process for the synthesis of methanol",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/patent-claim-1",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/49",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5, claim 2",
+            "passage": "us2281228a/p5/3",
+            "quote": "scrubbing said residual gas with a liquid which absorbs and removes therefrom the carbon dioxide left in the residual gas after condensation of methanol",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/patent-claim-2",
+      "target": "ex:msyn/us2281228a/catalyst/alkali-free-methanol-catalyst"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/5",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us2281228a/p4/3",
+            "quote": "promoted with one or more other oxides, such as an oxide of chromium,",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "role": "promoter"
+      },
+      "source": "ex:msyn/us2281228a/catalyst/zno-promoted-cr-oxide",
+      "target": "ex:msyn/us2281228a/species/chromium-oxide"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/50",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5, claim 2",
+            "passage": "us2281228a/p5/3",
+            "quote": "scrubbing said residual gas with a liquid which absorbs and removes therefrom the carbon dioxide left in the residual gas after condensation of methanol",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/patent-claim-2",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/51",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5, claim 2",
+            "quote": "2. In a process for the synthesis of methanol",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/patent-claim-2",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/52",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5, claim 3",
+            "passage": "us2281228a/p4/9",
+            "quote": "with a methanol synthesis catalyst which is free from oxides and salts of the alkali and alkaline earth metals at a temperature at 300° C. to 340 C. and at a space velocity of 10,000 to 20,000",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/patent-claim-3",
+      "target": "ex:msyn/us2281228a/catalyst/alkali-free-methanol-catalyst"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/53",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5, claim 3",
+            "passage": "us2281228a/p5/5",
+            "quote": "with said catalyst contains not above substan tially 1% carbon dioxide,",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/patent-claim-3",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/54",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5, claim 3",
+            "quote": "3. In a process for the synthesis of methanol",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/patent-claim-3",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/55",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5, claim 4",
+            "passage": "us2281228a/p5/6",
+            "quote": "said gas with a methanol synthesis catalyst COm prising zinc oxide and an oxide of chromium at a temperature of 300° C. to 340 C. and at a space velocity of 10,000 to 20,000",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/patent-claim-4",
+      "target": "ex:msyn/us2281228a/catalyst/zno-promoted-cr-oxide"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/56",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5, claim 4",
+            "passage": "us2281228a/p5/6",
+            "quote": "said gas with a methanol synthesis catalyst COm prising zinc oxide and an oxide of chromium at a temperature of 300° C. to 340 C. and at a space velocity of 10,000 to 20,000",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/patent-claim-4",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/57",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5, claim 4",
+            "quote": "4. In a process for the synthesis of methanol",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/patent-claim-4",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/58",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5, claim 5",
+            "passage": "us2281228a/p5/5",
+            "quote": "oxide in amount such that the gas passing into contact with said catalyst contains not above substantially 1% carbon dioxide, thereby pre venting the substantial decrease in catalytic ac tivity",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/patent-claim-5",
+      "target": "ex:msyn/us2281228a/catalyst/alkali-free-methanol-catalyst"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/59",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5, claim 5",
+            "passage": "us2281228a/p5/5",
+            "quote": "oxide in amount such that the gas passing into contact with said catalyst contains not above substantially 1% carbon dioxide, thereby pre venting the substantial decrease in catalytic ac tivity",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/patent-claim-5",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/6",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us2281228a/p4/3",
+            "quote": "are particularly subject to poisoning by carbon dioxide in the gases contacted with the catalyst.",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "inhibition_kind": "poison"
+      },
+      "source": "ex:msyn/us2281228a/catalyst/zno-promoted-cr-oxide",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/60",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5, claim 5",
+            "quote": "5. In a process for the synthesis of methanol",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/patent-claim-5",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/61",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5, claim 6",
+            "passage": "us2281228a/p5/11",
+            "quote": "that improvement which comprises re moving from the gas circulated into contact with the catalyst in Said cyclic System carbon dioxide",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/patent-claim-6",
+      "target": "ex:msyn/us2281228a/catalyst/alkali-free-methanol-catalyst"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/62",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5, claim 6",
+            "passage": "us2281228a/p5/11",
+            "quote": "that improvement which comprises re moving from the gas circulated into contact with the catalyst in Said cyclic System carbon dioxide",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/patent-claim-6",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/63",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5-6, claim 6",
+            "quote": "6. In a process for the synthesis of methanol",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/patent-claim-6",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/64",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6, claim 7",
+            "passage": "us2281228a/p6/2",
+            "quote": "residual gas and make-up gas being scrubbed with said liquid until they contain not above sub stantially 1% carbon dioxide,",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/patent-claim-7",
+      "target": "ex:msyn/us2281228a/catalyst/alkali-free-methanol-catalyst"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/65",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6, claim 7",
+            "passage": "us2281228a/p6/2",
+            "quote": "residual gas and make-up gas being scrubbed with said liquid until they contain not above sub stantially 1% carbon dioxide,",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/patent-claim-7",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/66",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6, claim 7",
+            "passage": "us2281228a/p6/1",
+            "quote": "7. In a process for the Synthesis of methanol",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/patent-claim-7",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/67",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6, claim 8",
+            "passage": "us2281228a/p6/4",
+            "quote": "removing dissolved carbon dioxide from the thus separated methanol, returning methanol thus treated to remove carbon dioxide from it into",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/patent-claim-8",
+      "target": "ex:msyn/us2281228a/catalyst/alkali-free-methanol-catalyst"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/68",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6, claim 8",
+            "passage": "us2281228a/p6/4",
+            "quote": "removing dissolved carbon dioxide from the thus separated methanol, returning methanol thus treated to remove carbon dioxide from it into",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/patent-claim-8",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/69",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6, claim 8",
+            "note": "'methano' reads 'methanol'",
+            "quote": "8. In a process for the synthesis of methano",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/patent-claim-8",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/7",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us2281228a/p4/3",
+            "quote": "methanol synthesis catalysts which are composed of zinc oxide promoted",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/catalyst/zno-promoted-cr-oxide",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/70",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6, claim 9",
+            "passage": "us2281228a/p6/5",
+            "quote": "scrubbing the residual gas with this meth anol in amount sufficient to reduce the carbon di oxide content of the residual gas to materially less than the aforesaid equilibrium concentration",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/patent-claim-9",
+      "target": "ex:msyn/us2281228a/catalyst/alkali-free-methanol-catalyst"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/71",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6, claim 9",
+            "passage": "us2281228a/p6/5",
+            "quote": "scrubbing the residual gas with this meth anol in amount sufficient to reduce the carbon di oxide content of the residual gas to materially less than the aforesaid equilibrium concentration",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/patent-claim-9",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/72",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6, claim 9",
+            "quote": "9. In a process for the synthesis of methanol",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/patent-claim-9",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/73",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6, claim 10",
+            "note": "'Juid' reads 'liquid'",
+            "quote": "ment which comprises scrubbing said residual gas containing carbon dioxide with liquid meth anol under conditions at which the 'Juid meth anol absorbs carbon dioxide",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/patent-claim-10",
+      "target": "ex:msyn/us2281228a/catalyst/alkali-free-methanol-catalyst"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/74",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6, claim 10",
+            "note": "'Juid' reads 'liquid'",
+            "quote": "ment which comprises scrubbing said residual gas containing carbon dioxide with liquid meth anol under conditions at which the 'Juid meth anol absorbs carbon dioxide",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/patent-claim-10",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/75",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6, claim 10",
+            "passage": "us2281228a/p6/6",
+            "quote": "10. In a process for the Synthesis of methanol",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ]
+      },
+      "source": "ex:msyn/us2281228a/claim/patent-claim-10",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/8",
+      "type": "COMPARED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "us2281228a/p4/3",
+            "quote": "I have found that methanol synthesis catalysts which are composed of zinc oxide promoted with one or more other oxides, such as an oxide of chromium, are particularly subject to poisoning by carbon dioxide",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "note": "more subject to CO2 poisoning than methanol catalysts in general"
+      },
+      "source": "ex:msyn/us2281228a/catalyst/zno-promoted-cr-oxide",
+      "target": "ex:msyn/us2281228a/catalyst/alkali-free-methanol-catalyst"
+    },
+    {
+      "id": "ex:msyn/us2281228a/link/9",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "us2281228a/p2/2",
+            "quote": "it has been repeatedly stated in the art metal carbonyls should be ex cluded from the gases in order to prevent poison ing the catalysts.",
+            "source": "ex:msyn/source/us2281228a"
+          }
+        ],
+        "inhibition_kind": "poison",
+        "note": "cited from the art, not this patent's finding"
+      },
+      "source": "ex:msyn/us2281228a/catalyst/catalysts-in-the-art",
+      "target": "ex:msyn/us2281228a/species/metal-carbonyls"
+    },
+    {
+      "id": "ex:msyn/us2281228a/reactor/gas-circulatory-system/reported-in/us2281228a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2281228a/reactor/gas-circulatory-system",
+      "target": "ex:msyn/source/us2281228a"
+    },
+    {
+      "id": "ex:msyn/us2281228a/species/alkali-alkaline-earth-oxides-salts/reported-in/us2281228a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2281228a/species/alkali-alkaline-earth-oxides-salts",
+      "target": "ex:msyn/source/us2281228a"
+    },
+    {
+      "id": "ex:msyn/us2281228a/species/chromium-oxide/reported-in/us2281228a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2281228a/species/chromium-oxide",
+      "target": "ex:msyn/source/us2281228a"
+    },
+    {
+      "id": "ex:msyn/us2281228a/species/ethylene-glycol/reported-in/us2281228a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2281228a/species/ethylene-glycol",
+      "target": "ex:msyn/source/us2281228a"
+    },
+    {
+      "id": "ex:msyn/us2281228a/species/isopropyl-alcohol/reported-in/us2281228a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2281228a/species/isopropyl-alcohol",
+      "target": "ex:msyn/source/us2281228a"
+    },
+    {
+      "id": "ex:msyn/us2281228a/species/isopropyl-ether/reported-in/us2281228a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2281228a/species/isopropyl-ether",
+      "target": "ex:msyn/source/us2281228a"
+    },
+    {
+      "id": "ex:msyn/us2281228a/species/metal-carbonyls/reported-in/us2281228a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2281228a/species/metal-carbonyls",
+      "target": "ex:msyn/source/us2281228a"
+    },
+    {
+      "id": "ex:msyn/us2281228a/species/petroleum-oil-fractions/reported-in/us2281228a",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/us2281228a/species/petroleum-oil-fractions",
+      "target": "ex:msyn/source/us2281228a"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/us2281228a"
+}

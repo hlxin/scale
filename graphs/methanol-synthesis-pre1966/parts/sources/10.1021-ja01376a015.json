@@ -1,0 +1,4693 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/analysis/free-energy-equation",
+      "label": "Analysis",
+      "props": {
+        "name": "standard free-energy equation of the methanol reaction from the equilibrium measurements",
+        "analysis_kind": "thermodynamic",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01376a015/p7/3",
+            "quote": "The values, in the last column of Table I, of the integration constant, I, of the free energy equation were obtained through use of the best avail- able heat data as given by Smith.16",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01376a015/p7/3",
+            "quote": "The equation expressing the free energy change in the reaction CO + 2H3 = CHsOH is, then, AF = —20,857 + 41.17 log T —0.01423 2 — 54.42 .",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 7",
+            "reading": "vision_ocr",
+            "region": [
+              0.12,
+              0.69,
+              0.88,
+              0.725
+            ],
+            "source": "ex:msyn/source/10.1021-ja01376a015",
+            "transcription": "energy change in the reaction CO + 2H2 = CH3OH is, then, ΔF = -20,857 + 41.17T log T -0.01423T^2 -54.42T."
+          },
+          {
+            "kind": "text",
+            "locator": "p. 11",
+            "passage": "10.1021-ja01376a015/p11/1",
+            "quote": "The equation for the standard free-energy change in the methanol reaction, derived from our equilibrium measurements and the best avail- able heat data, is AF = -20,857 + 41.17T log T -0.01423 2 -54.42 .",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 11, Summary 3",
+            "reading": "vision_ocr",
+            "region": [
+              0.12,
+              0.215,
+              0.88,
+              0.24
+            ],
+            "second_reading": "able heat data, is ΔF = −20,857 + 41.17T log T −0.01423T² −54.42T.",
+            "source": "ex:msyn/source/10.1021-ja01376a015",
+            "transcription": "able heat data, is ΔF = -20,857 + 41.17T log T -0.01423T^2 -54.42T."
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01376a015/p7/3",
+            "quote": "This equation gives the standard free-energy change for this reaction as 16,070 cal. at 700° K., which may be compared with the value 8930 cal. used by Lewis and Frolich17",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01376a015/p7/4",
+            "quote": "Our data give K = 6.51 X 10-4 at 300°; the equation given by Audibert and Raineau gives K = 11.3 X 10_4; Christiansen’s data give 4.27 X 10-4; and Kelley’s data give 8.2 X 10-2.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 10",
+            "passage": "10.1021-ja01376a015/p10/1",
+            "quote": "A further comparison may be made between our K = 2.07 X 10-6 and the estimation of K = 1.1 X 10\"5 at 400° made by Brown and Galloway23",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "agreement": "agree",
+            "locator": "p. 7",
+            "reading": "vision_ocr",
+            "region": [
+              0.12,
+              0.8,
+              0.88,
+              0.82
+            ],
+            "source": "ex:msyn/source/10.1021-ja01376a015",
+            "transcription": "process. Our data give K = 6.51 × 10⁻⁴ at 300°; the equation given"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 10",
+            "reading": "vision_ocr",
+            "region": [
+              0.12,
+              0.272,
+              0.88,
+              0.295
+            ],
+            "second_reading": "A further comparison may be made between our K = 2.07 × 10⁻⁵ and the estimation of K = 1.1 × 10⁻⁵ at 400° made by Brown and Galloway²³ from their work on the produc-",
+            "source": "ex:msyn/source/10.1021-ja01376a015",
+            "transcription": "made between our K = 2.07 × 10⁻⁵ and the estimation of K = 1.1 × 10⁻⁵"
+          }
+        ],
+        "method": "integration constant I of the free-energy equation obtained from the Table I equilibrium constants and the best available heat data (Smith, cited)",
+        "results": {
+          "free_energy_equation": {
+            "status": "present",
+            "as_reported": "ΔF = −20,857 + 41.17T log T −0.01423T² −54.42T",
+            "note": "read from the page image (pp. 7 and 11); the text layer drops the T factors of the last two terms ('-0.01423 2 -54.42 .')",
+            "text_value": "ΔF = -20,857 + 41.17T log T - 0.01423T^2 - 54.42T"
+          },
+          "integration_constant_i": {
+            "status": "present",
+            "as_reported": "54.42",
+            "unit": "not stated",
+            "value": -54.42
+          },
+          "k_300c": {
+            "status": "present",
+            "as_reported": "K = 6.51 × 10⁻⁴ at 300°",
+            "unit": "atm^-2",
+            "value": 0.000651
+          },
+          "k_400c": {
+            "status": "present",
+            "as_reported": "K = 2.07 × 10⁻⁵",
+            "note": "'our K' compared with Brown and Galloway's estimate at 400°; corrected from 2.07 × 10⁻⁶ (the text layer prints '10-6'; the page image shows 10⁻⁵)",
+            "unit": "atm^-2",
+            "value": 2.07e-05
+          },
+          "standard_free_energy_change_700k": {
+            "status": "present",
+            "as_reported": "16,070 cal. at 700° K.",
+            "unit": "cal",
+            "value": 16070
+          }
+        },
+        "verdict": "best value K = 5.57 X 10^-4 at 303.8° from experiments 6 and 6a"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/analysis/high-pressure-conversion-comparison",
+      "label": "Analysis",
+      "props": {
+        "name": "predicted maximum conversions at 204 atm compared with practical conversions (Fig. 3)",
+        "analysis_kind": "equilibrium",
+        "conditions": {
+          "co_fraction": {
+            "status": "present",
+            "as_reported": "26% of CO",
+            "unit": "%",
+            "value": 26
+          },
+          "h2_fraction": {
+            "status": "present",
+            "as_reported": "70% of Ha",
+            "unit": "%",
+            "value": 70
+          }
+        },
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "p. 9, Fig. 3",
+            "passage": "10.1021-ja01376a015/p9/1",
+            "quote": "Fig. 3.—Comparison of conversions of CO to CH3OH as calculated from thermodynamic data and as obtained practically, at several temperatures and at a total pressure of 204 atm. with a gas contain- ing 26% of CO and 70% of Ha.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 10",
+            "passage": "10.1021-ja01376a015/p10/1",
+            "quote": "It is seen from the figure that the practical conver- sions are definitely lower than those predicted from our data, irrespective of any reasonable assumptions as to the fugacities of the gases under these conditions.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "note": "practical conversions taken from Lewis and Frolich (cited); the curves of Fig. 3 were not read for values",
+        "pressure": {
+          "status": "present",
+          "as_reported": "a total pressure of 204 atm.",
+          "unit": "atm",
+          "value": 204
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "300 325 350 375 400",
+          "lower": 300,
+          "note": "abscissa of Fig. 3",
+          "unit": "°C",
+          "upper": 400
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/catalyst/zinc-oxide",
+      "label": "Catalyst",
+      "props": {
+        "name": "zinc oxide (from freshly precipitated carbonate)",
+        "catalyst_family": "oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01376a015/p3/2",
+            "quote": "One catalyst used was zinc oxide made from pure, freshly precipitated carbonate.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "generality": "particular"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/catalyst/zno-chromic-acid-4zn-1cr",
+      "label": "Catalyst",
+      "props": {
+        "name": "zinc oxide promoted with chromic acid, 4Zn:1Cr",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "quote": "Another catalyst was made by adding chromic acid to purified zinc oxide, in the atomic proportions 4Zn:lCr.n",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01376a015/p7/2",
+            "quote": "The promoted catalyst did not seem to be as much affected by adsorbed carbon dioxide and water as did the pure zinc oxide catalyst.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "generality": "particular",
+        "nominal_formula": "4Zn:1Cr (atomic)",
+        "note": "called 'the promoted catalyst' in the text; preparation method given in Smith and Hawk (cited)",
+        "properties": {
+          "zn_cr_atomic_ratio": {
+            "status": "present",
+            "as_reported": "in the atomic proportions 4Zn:lCr",
+            "note": "text layer prints '4Zn:lCr'",
+            "text_value": "4:1"
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/claim/best-k-303-8",
+      "label": "Claim",
+      "props": {
+        "name": "equilibrium constant 5.57 X 10^-4 at 303.8 °C",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 10",
+            "passage": "10.1021-ja01376a015/p10/3",
+            "quote": "The equilibrium between methanol, carbon monoxide and hydro- gen has been experimentally determined at 304° and a total pressure of 1 atmosphere, by a direct method.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 10",
+            "passage": "10.1021-ja01376a015/p10/3",
+            "quote": "The equilibrium constant, K = CH3OH/(CO) (H¡)2, is 5.57 X 10 at 303.8°, with a probable error of ± 5%.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "agreement": "partial",
+            "locator": "p. 10, Summary 2",
+            "reading": "vision_ocr",
+            "region": [
+              0.12,
+              0.805,
+              0.88,
+              0.83
+            ],
+            "second_reading": "2. The equilibrium constant, K = CH₃OH/(CO)(H₂)², is 5.57 × 10⁻⁴",
+            "source": "ex:msyn/source/10.1021-ja01376a015",
+            "transcription": "2. The equilibrium constant, K = CH3OH/(CO)(H2)^2, is 5.57 × 10⁻⁴"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01376a015/p7/2",
+            "quote": "The last two pairs of experiments (Nos. 5 and 5a, 6 and 6a) were performed most\" carefully and obviously came closest to equilibrium.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "quote": "As the best value of K we take that from Expts. Nos. 6 and 6a—namely, 5.57 X 10~4 at 303.8°.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 10",
+            "passage": "10.1021-ja01376a015/p10/2",
+            "quote": "The value of K we obtained at 304° would seem to have a maximum uncertainty of about 10%; the probable error is not more than about 5%.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "inference_type": "interventional",
+        "statement": "The equilibrium between methanol, carbon monoxide and hydrogen was determined directly at 304 °C and 1 atmosphere; the best value of K = CH3OH/(CO)(H2)^2, from experiments 6 and 6a which were performed most carefully and came closest to equilibrium, is 5.57 X 10^-4 at 303.8 °C, with a probable error of about 5 per cent and a maximum uncertainty of about 10 per cent."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/claim/bracketing-method",
+      "label": "Claim",
+      "props": {
+        "name": "equilibrium bracketed from decomposition and synthesis sides",
+        "claim_kind": "other",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01376a015/p3/2",
+            "quote": "Our method was first to pass pure methanol vapor over an active catalyst at a rate slow enough to give substantially equilibrium conditions.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01376a015/p3/2",
+            "quote": "This set a maximum value on the constant of the reaction.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01376a015/p3/2",
+            "quote": "Second, a mixture of carbon monoxide and hydrogen was passed over the catalysts at a rate slow enough to give the maximum yield of methanol.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01376a015/p3/2",
+            "quote": "The latter experi- ment set a minimum limit on the value of the constant.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01376a015/p4/1",
+            "quote": "The vapor pressure of methanol at this tempera- ture was still over 40 times the equilibrium pressure, so that the experi- ments were thus started definitely on the methanol side of equilibrium.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "inference_type": "interventional",
+        "statement": "Passing methanol-containing gas over the catalyst sets a maximum value of the constant and passing the CO-H2 mixture sets a minimum value; the experiments were started definitely on the methanol side of equilibrium, at nearly equal distance from equilibrium in decomposition and synthesis."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/claim/comparison-with-other-constants",
+      "label": "Claim",
+      "props": {
+        "name": "comparison with other equilibrium constants",
+        "claim_kind": "comparison",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01376a015/p7/4",
+            "quote": "Our data give K = 6.51 X 10-4 at 300°; the equation given by Audibert and Raineau gives K = 11.3 X 10_4; Christiansen’s data give 4.27 X 10-4; and Kelley’s data give 8.2 X 10-2.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "passage": "10.1021-ja01376a015/p8/1",
+            "quote": "Christiansen’s data are fairly close to ours.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "passage": "10.1021-ja01376a015/p8/1",
+            "quote": "However, the difference between our data and the values calcu- lated from Kelley’s data is unaccountably large.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "passage": "10.1021-ja01376a015/p8/1",
+            "quote": "Various possible expla- nations for this discrepancy have been considered, but so far no satis- factory explanation can be given.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 11",
+            "passage": "10.1021-ja01376a015/p11/1",
+            "quote": "give a constant more than 100 times this value.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 11",
+            "passage": "10.1021-ja01376a015/p11/1",
+            "quote": "Christiansen’s indirect equilibrium measurements give a constant about 34% smaller than our value.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "inference_type": "computational",
+        "note": "the constants of Audibert and Raineau, Christiansen and Kelley are values from cited work",
+        "statement": "The data give K = 6.51 X 10^-4 at 300 °C, against 11.3 X 10^-4 from Audibert and Raineau's equation, 4.27 X 10^-4 from Christiansen's data and 8.2 X 10^-2 from Kelley's data; Christiansen's indirect measurements give a constant about 34 per cent smaller and are fairly close, while Kelley's data give a constant more than 100 times larger, an unaccountably large difference for which no satisfactory explanation can yet be given."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/claim/decomposition-exceeds-kelley",
+      "label": "Claim",
+      "props": {
+        "name": "decomposition at 304.4 °C far exceeds Kelley's 96.4 per cent",
+        "claim_kind": "comparison",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01376a015/p6/1",
+            "quote": "Since it soon became evident that the equilibrium decomposition of methanol at 304.4° was relatively far more than the expected 96.4%, it was necessary when working at atmospheric pressure to deal with rather small quantities of methanol.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01376a015/p3/1",
+            "quote": "At 300° and a total pressure of 1 atmosphere, Kelley’s data would give the limiting (equilibrium) decomposition of methanol to CO and 2H2 as about 96.4%.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "inference_type": "interventional",
+        "statement": "The equilibrium decomposition of methanol at 304.4 °C and atmospheric pressure is relatively far more than the 96.4 per cent expected from Kelley's data."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/claim/error-sources",
+      "label": "Claim",
+      "props": {
+        "name": "error sources of the equilibrium constant",
+        "claim_kind": "data_quality",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01376a015/p6/4",
+            "quote": "The best results obtainable with this gas, using any standard method of gas analysis, may be uncertain to about 1% of the amount of carbon monoxide and about 0.5% of the amount of hydrogen.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01376a015/p7/1",
+            "quote": "there may be introduced in this way an error of about 2%.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01376a015/p7/1",
+            "quote": "an error of 2% or so may also be introduced on account of change in the vapor pressure of the water and change in level of the water in the meter with variations in the room temperature during the course of an experiment—about one week.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01376a015/p7/1",
+            "quote": "However, this error is doubtless inconsiderable.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01376a015/p7/3",
+            "quote": "the linear rate of gas flow through the small diameter tubing connecting the various units in the apparatus was great enough to avoid possible complications due to self-diffusion of the gases.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "statement": "Gas analysis may be uncertain to about 1 per cent of the CO and 0.5 per cent of the H2, introducing about 2 per cent error in the constant; the wet-test meter may introduce 2 per cent or so over an experiment of about one week; the perfect-gas assumption error is doubtless inconsiderable; self-diffusion complications were avoided by the linear gas rate in the connecting tubing."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/claim/evacuation-improves-activity",
+      "label": "Claim",
+      "props": {
+        "name": "evacuation between experiments improves activity",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01376a015/p7/2",
+            "quote": "It was found that evacuation of the catalysts, between experiments, considerably improved their activity, probably on account of the removal of the small amounts of carbon dioxide and water adsorbed during the reaction.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01376a015/p7/2",
+            "quote": "The promoted catalyst did not seem to be as much affected by adsorbed carbon dioxide and water as did the pure zinc oxide catalyst.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "inference_type": "interventional",
+        "statement": "Evacuation of the catalysts between experiments considerably improved their activity; the promoted catalyst seemed less affected by adsorbed carbon dioxide and water than the pure zinc oxide catalyst."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/claim/expt-5a-constant-high",
+      "label": "Claim",
+      "props": {
+        "name": "constant of experiment 5a somewhat high",
+        "claim_kind": "data_quality",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01376a015/p7/2",
+            "quote": "It is thought that since the catalyst used in experiment 5a was pure zinc oxide that had not recently been evacuated, the constant from this ex- periment is somewhat high.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "statement": "Since the catalyst of experiment 5a was pure zinc oxide that had not recently been evacuated, the constant from this experiment is thought to be somewhat high."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/claim/fugacity-effect-on-yields",
+      "label": "Claim",
+      "props": {
+        "name": "fugacities give larger practical yields than pressures predict",
+        "claim_kind": "other",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 9",
+            "passage": "10.1021-ja01376a015/p9/1",
+            "quote": "The fugacities of hydrogen and of carbon monoxide are in general somewhat higher than the pressures",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 9",
+            "passage": "10.1021-ja01376a015/p9/2",
+            "quote": "whereas the fugacities of the methanol are considerably lower than the pressures, as would be expected.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 9",
+            "passage": "10.1021-ja01376a015/p9/2",
+            "quote": "This, in each case, results in larger prac- tical yields of methanol than would be predicted from the pressures.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "inference_type": "computational",
+        "statement": "The fugacities of hydrogen and carbon monoxide are in general somewhat higher than the pressures, whereas that of methanol is considerably lower, which results in larger practical yields of methanol than would be predicted from the pressures."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/claim/heat-data-not-seriously-in-error",
+      "label": "Claim",
+      "props": {
+        "name": "heat data not seriously in error",
+        "claim_kind": "data_quality",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 10",
+            "passage": "10.1021-ja01376a015/p10/2",
+            "quote": "it would seem that the heat data we have used in the equa- tion giving the temperature function of the free energy are not seriously in error, since the theoretical and experimental curves parallel each other between 300 and 400°.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "inference_type": "computational",
+        "statement": "If the high-pressure results can be relied upon, the heat data used in the free-energy equation are not seriously in error, since the theoretical and experimental curves parallel each other between 300 and 400 °C."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/claim/high-pressure-measurement-unsatisfactory",
+      "label": "Claim",
+      "props": {
+        "name": "high-pressure equilibrium measurement unsatisfactory",
+        "claim_kind": "data_quality",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ja01376a015/p2/3",
+            "quote": "a rela- tively small error in determination of the conversion of carbon monoxide to methanol would, at very high pressures, introduce a disproportionately large error into the value of the equilibrium constant so derived.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01376a015/p3/1",
+            "quote": "Also, when a considerable amount of reaction is taking place on the catalyst, the temperature con- trol is likely to be poor.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "inference_type": "theoretical",
+        "statement": "Measuring this equilibrium at high pressure is unsatisfactory: a small error in the conversion introduces a disproportionately large error into the constant, standard free energies cannot be obtained without equations of state of the gas mixtures, and temperature control is likely to be poor when much reaction takes place."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/claim/methanol-analysis-reliable",
+      "label": "Claim",
+      "props": {
+        "name": "colorimetric methanol determination reliable",
+        "claim_kind": "data_quality",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "10.1021-ja01376a015/p5/1",
+            "quote": "The methanol yields were determined colorimetrically, according to a method which suggested itself to us from the work of Wright.14",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "10.1021-ja01376a015/p5/1",
+            "quote": "It was determined that no detectable amounts of formaldehyde were formed directly by the catalyst, and that other alcohols and dimethyl ether15 do not interfere with the test in this case.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "10.1021-ja01376a015/p5/2",
+            "quote": "by the colorimetric method the concentration of methanol in aqueous solutions as dilute as 1 part in 10,000 could be determined with an accuracy of 1% or better.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01376a015/p6/1",
+            "quote": "no methanol escaped even at much higher rates of gas flow than we had ever used in equi- librium measurements.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "10.1021-ja01376a015/p5/5",
+            "quote": "At any rate, we showed by actual tests that dimethyl ether does not enter into the reaction we used to determine methanol.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "inference_type": "observational",
+        "statement": "The colorimetric methanol determination (oxidation to formaldehyde with permanganate, Schiff's reagent) determines methanol in solutions as dilute as 1 part in 10,000 with 1 per cent accuracy or better; no detectable formaldehyde was formed directly by the catalyst, other alcohols and dimethyl ether do not interfere, and no methanol escaped the liquid-air receivers."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/claim/practical-below-predicted",
+      "label": "Claim",
+      "props": {
+        "name": "practical conversions below those predicted",
+        "claim_kind": "comparison",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 10",
+            "passage": "10.1021-ja01376a015/p10/1",
+            "quote": "It is seen from the figure that the practical conver- sions are definitely lower than those predicted from our data, irrespective of any reasonable assumptions as to the fugacities of the gases under these conditions.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 10",
+            "passage": "10.1021-ja01376a015/p10/1",
+            "quote": "the com- parisons between the predictions from our data and the yields obtained at high pressures are as one would expect.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 11",
+            "passage": "10.1021-ja01376a015/p11/1",
+            "quote": "The yields of methanol at high pressures, as obtained practically and as predicted by our thermodynamic data, compare favorably.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "inference_type": "computational",
+        "limitations": "the practical conversions are the maxima obtained in particular tests and not necessarily the maximum possible",
+        "statement": "At 204 atm the practical conversions of CO to methanol (from Lewis and Frolich) are definitely lower than those predicted from these data, irrespective of reasonable fugacity assumptions, as one would expect; the high-pressure yields obtained practically and predicted compare favorably."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/claim/sufficient-for-practice",
+      "label": "Claim",
+      "props": {
+        "name": "data with estimated fugacities sufficient for practical purposes",
+        "claim_kind": "conclusion",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 10",
+            "passage": "10.1021-ja01376a015/p10/3",
+            "quote": "the thermodynamic data here presented, together with estimated fugacities, will probably give results which, at present, are sufficient for all practical purposes.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "statement": "The thermodynamic data presented, together with estimated fugacities, will probably give results sufficient at present for all practical purposes, although accurate application to high pressures requires the equations of state of the gas mixtures."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/computation/fugacity-estimates",
+      "label": "Computation",
+      "props": {
+        "name": "estimated fugacities of H2, CO and CH3OH (Fig. 2)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "passage": "10.1021-ja01376a015/p8/2",
+            "quote": "In order to do this it is necessary first to esti- mate the fugacities of the three gases involved.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "passage": "10.1021-ja01376a015/p8/2",
+            "quote": "The data for carbon monoxide were cal- culated from van der Waals’ equation, with a = 1.487 X 106 and b = 39.87, derived from compressibility data of Amagat18 which are given up to 400 atm. at 20°.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 9",
+            "passage": "10.1021-ja01376a015/p9/1",
+            "quote": "The data for meth- anol were calculated from van der Waals’ equation, with a = 9.534 X 106 and b = 76.06, derived from compressibility data of Ramsay and Young21 which are given up to 78 atm, at 240°.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "passage": "10.1021-ja01376a015/p8/2",
+            "quote": "The data for hydrogen were derived, using the rule",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "figure",
+            "locator": "p. 8, Fig. 2",
+            "quote": "Fig. 2.—Fugacities of H2, CO and CHsOH.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "method": "van der Waals' equation for CO and CH3OH; Lewis and Randall rule for H2 from Bartlett's compressibility data",
+        "note": "compressibility data cited from Amagat, Bartlett, and Ramsay and Young; the fugacity curves of Fig. 2 were not read",
+        "results": {
+          "ch3oh_van_der_waals_a": {
+            "status": "present",
+            "as_reported": "a = 9.534 X 106",
+            "unit": "not stated",
+            "value": 9534000.0
+          },
+          "ch3oh_van_der_waals_b": {
+            "status": "present",
+            "as_reported": "b = 76.06",
+            "unit": "not stated",
+            "value": 76.06
+          },
+          "co_van_der_waals_a": {
+            "status": "present",
+            "as_reported": "a = 1.487 X 106",
+            "unit": "not stated",
+            "value": 1487000.0
+          },
+          "co_van_der_waals_b": {
+            "status": "present",
+            "as_reported": "b = 39.87",
+            "unit": "not stated",
+            "value": 39.87
+          }
+        },
+        "task": "estimate fugacities of hydrogen, carbon monoxide and methanol up to 400 atm"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/feed/co-h2-gas-table2",
+      "label": "Feed",
+      "props": {
+        "name": "CO-H2 mixture (water gas plus electrolytic hydrogen), average analysis Table II",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 6, Table II",
+            "passage": "10.1021-ja01376a015/p6/3",
+            "quote": "Constituent Volume, % Table II Average Analysis of Gas h2 CO co2 ch4 n2 56.7 29.4 0.6 1.9 11.4",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01376a015/p3/3",
+            "quote": "The CO-H2 mixture was made by adding electrolytic hydrogen from a cylinder to water gas generated by a small generator avail- able at this Laboratory.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01376a015/p3/3",
+            "quote": "through a liquid-air cooled trap to remove sulfur compounds and all heavy gases, over heated copper to remove oxygen and into a high-pressure cylinder.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01376a015/p6/4",
+            "quote": "We have thus preferred to use an average gas com- position throughout.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "note": "purified by a liquid-air trap (sulfur compounds and heavy gases) and heated copper (oxygen), and in the apparatus by heated platinized asbestos and a liquid-air trap"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/feed/co-h2-saturated-methanol",
+      "label": "Feed",
+      "props": {
+        "name": "CO-H2 mixture saturated with methanol at -38 °C",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01376a015/p4/1",
+            "quote": "We therefore introduced methanol vapor into the CO-H2 mixture by passing the latter through a saturator containing purified methanol at the temperature of a liquid ammonia bath (—38°).",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01376a015/p4/1",
+            "quote": "The vapor pressure of methanol at this tempera- ture was still over 40 times the equilibrium pressure, so that the experi- ments were thus started definitely on the methanol side of equilibrium.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "note": "the Table II gas passed through a saturator of purified methanol in a liquid-ammonia bath at -38 °C; methanol vapor pressure over 40 times the equilibrium pressure"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/hypothesis/adsorbed-co2-water-removed",
+      "label": "Hypothesis",
+      "props": {
+        "name": "evacuation removes adsorbed CO2 and water",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01376a015/p7/2",
+            "quote": "It was found that evacuation of the catalysts, between experiments, considerably improved their activity, probably on account of the removal of the small amounts of carbon dioxide and water adsorbed during the reaction.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "hypothesis_kind": "causal",
+        "hypothesis_status": "proposed",
+        "statement": "Evacuation improves activity probably on account of the removal of the small amounts of carbon dioxide and water adsorbed during the reaction."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/hypothesis/audibert-raineau-too-high",
+      "label": "Hypothesis",
+      "props": {
+        "name": "Audibert and Raineau constants too high without fugacities",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01376a015/p7/4",
+            "quote": "If Audibert and Raineau’s equation was derived from their work at high pressures and the",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "passage": "10.1021-ja01376a015/p8/1",
+            "quote": "equilibrium constants calculated without the use of fugacities, their con- stants would come out too high.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "hypothesis_kind": "explanatory",
+        "hypothesis_status": "proposed",
+        "statement": "If Audibert and Raineau's equation was derived from high-pressure work with equilibrium constants calculated without fugacities, their constants would come out too high."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/hypothesis/ether-formation-negligible",
+      "label": "Hypothesis",
+      "props": {
+        "name": "dimethyl ether formation negligible at low methanol pressure",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "10.1021-ja01376a015/p5/5",
+            "quote": "If, as would be supposed in the absence of complete experimental information, the formation of the ether from methanol is a higher order reaction than is the forma- tion of CO and Hi from methanol, the rate of formation of ether from methanol at very low pressures would be negligible compared to the rate of formation of CO and Ha.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "10.1021-ja01376a015/p5/5",
+            "quote": "Probably zinc oxide-chromium oxide catalysts which contain excess of zinc oxide would be relatively inactive also.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "10.1021-ja01376a015/p5/5",
+            "quote": "Furthermore, dimethyl ether if it had been present would doubtless have disappeared during the removal of COa from our condensed product as described below.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "hypothesis_kind": "auxiliary",
+        "hypothesis_status": "proposed",
+        "note": "footnote 15; cites McKee and Burke, Smith and Hawk, and Adkins and Perkins on ether formation",
+        "statement": "If ether formation from methanol is a higher-order reaction than its decomposition to CO and H2, its rate at very low pressures would be negligible; zinc oxide-chromium oxide catalysts with excess zinc oxide would probably be relatively inactive for ether formation, and any ether would have disappeared during removal of CO2 from the condensed product."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/hypothesis/side-reactions-lower-reactants",
+      "label": "Hypothesis",
+      "props": {
+        "name": "side reactions lower reactant concentrations in practical operation",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 10",
+            "passage": "10.1021-ja01376a015/p10/2",
+            "quote": "If this were taken into account, the practical yields would be somewhat closer to the theoretical.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "hypothesis_kind": "explanatory",
+        "hypothesis_status": "proposed",
+        "statement": "If the 26 per cent CO and 70 per cent H2 composition refers to the original gas, side reactions would lower the reactant concentrations during reaction, and taking this into account would bring the practical yields somewhat closer to the theoretical."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/preparation/chromic-acid-addition",
+      "label": "Preparation",
+      "props": {
+        "name": "addition of chromic acid to purified zinc oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "quote": "Another catalyst was made by adding chromic acid to purified zinc oxide, in the atomic proportions 4Zn:lCr.n",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "method": "adding chromic acid to purified zinc oxide in the atomic proportions 4Zn:1Cr (method of Smith and Hawk, cited)",
+        "procedure_status": "completed"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/preparation/zno-from-carbonate",
+      "label": "Preparation",
+      "props": {
+        "name": "zinc oxide from pure, freshly precipitated carbonate",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01376a015/p3/2",
+            "quote": "One catalyst used was zinc oxide made from pure, freshly precipitated carbonate.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "method": "made from pure, freshly precipitated carbonate",
+        "note": "conditions of decomposition of the carbonate not stated",
+        "procedure_status": "completed"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/reactor/two-tube-equilibrium-apparatus",
+      "label": "Reactor",
+      "props": {
+        "name": "equilibrium apparatus with two catalyst tubes in boiling benzophenone vapor (Fig. 1)",
+        "description": "Purified gas passes over heated platinized asbestos (oxygen removal), a liquid-air trap, the methanol saturator in liquid ammonia, the first catalyst tube (f), a liquid-air trap (g) condensing the remaining methanol, a second catalyst tube (h) and a liquid-air trap (i) catching the methanol yield, then a flow meter and a calibrated wet-test meter. Catalyst tubes held at constant temperature in boiling benzophenone vapor, shielded with thin sheet-iron tubes and umbrellas; temperature checked with a calibrated resistance thermometer.",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "p. 4, Fig. 1",
+            "quote": "Fig. 1.—Apparatus for measuring equilibrium in the methanol reaction.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01376a015/p4/2",
+            "quote": "The gas then passes through heated platinized asbestos in c to remove oxy- gen, then through a liquid-air trap, d, to remove all heavy gases, through the methanol saturator, e, surrounded by a bath of liquid ammonia, through the first catalyst tube,",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01376a015/p4/3",
+            "quote": "The gas then passes through a second catalyst tube, h, and the yield of methanol is caught in a second liquid-air trap, i.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01376a015/p4/3",
+            "quote": "The catalyst was maintained at a constant temperature by surrounding it with the vapor of boiling benzophenone.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01376a015/p4/3",
+            "quote": "The gas emerging from the apparatus is passed through a flow meter, j, and a carefully calibrated meter,18 k, in order to determine its volume.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "reactor_kind": "flow",
+        "specifications": {
+          "catalyst_charge": {
+            "status": "present",
+            "as_reported": "About 600 cc. of 8-mesh per inch catalyst",
+            "qualifier": "approximate",
+            "unit": "cc",
+            "value": 600
+          },
+          "catalyst_mesh": {
+            "status": "present",
+            "as_reported": "8-mesh per inch",
+            "unit": "mesh per inch",
+            "value": 8
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/sample/promoted-charge",
+      "label": "CatalystSample",
+      "props": {
+        "name": "zinc oxide-chromic acid (4Zn:1Cr) catalyst charge (about 600 cc, 8-mesh)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "quote": "Another catalyst was made by adding chromic acid to purified zinc oxide, in the atomic proportions 4Zn:lCr.n",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01376a015/p3/3",
+            "quote": "About 600 cc. of 8-mesh per inch catalyst was used in each experiment.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "preparation_status": "prepared",
+        "sample_kind": "reactor_charge"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/sample/zinc-oxide-charge",
+      "label": "CatalystSample",
+      "props": {
+        "name": "zinc oxide catalyst charge (about 600 cc, 8-mesh)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01376a015/p3/2",
+            "quote": "One catalyst used was zinc oxide made from pure, freshly precipitated carbonate.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01376a015/p3/3",
+            "quote": "About 600 cc. of 8-mesh per inch catalyst was used in each experiment.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "preparation_status": "prepared",
+        "sample_kind": "reactor_charge"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/species/chromic-acid",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "chromic acid",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "quote": "Another catalyst was made by adding chromic acid to purified zinc oxide, in the atomic proportions 4Zn:lCr.n",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/species/freshly-precipitated-carbonate",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "pure, freshly precipitated carbonate (for zinc oxide)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01376a015/p3/2",
+            "quote": "One catalyst used was zinc oxide made from pure, freshly precipitated carbonate.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "note": "the source says only 'carbonate'"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/test/table1-expt-1",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "equilibrium measurement, expt. 1 (synthesis side), 303.9 °C",
+        "conditions": {
+          "experiment_duration": {
+            "status": "present",
+            "as_reported": "during the course of an experiment—about one week",
+            "qualifier": "approximate",
+            "text_value": "about one week"
+          },
+          "total_gas_volume_per_experiment": {
+            "status": "present",
+            "as_reported": "from 17 to 30 liters",
+            "lower": 17,
+            "unit": "L",
+            "upper": 30
+          }
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 6, Table I, expt. 1",
+            "passage": "10.1021-ja01376a015/p6/3",
+            "quote": "1 S 0.967 303.9 9.0 0.0456 3.73 X 10~4 -53.62",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 6, Table I, expt. 1",
+            "reading": "vision_ocr",
+            "region": [
+              0.1,
+              0.456,
+              0.86,
+              0.472
+            ],
+            "source": "ex:msyn/source/10.1021-ja01376a015",
+            "transcription": "1 s 0.967 303.9 9.0 0.0456 3.73 × 10⁻⁴ -53.62"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 6, Table I",
+            "passage": "10.1021-ja01376a015/p6/2",
+            "quote": "Table I Results of Equilibrium Measurements",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01376a015/p6/3",
+            "quote": "The methanol yields in Table I have been corrected, on the basis of the gas composition as given in Table II, for the volume of car- bon dioxide caught in the liquid-air condensers.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01376a015/p6/2",
+            "quote": "In a single experiment a total gas volume of from 17 to 30 liters was passed over the",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "flow_rate": {
+          "status": "present",
+          "as_reported": "9.0",
+          "unit": "cc/min",
+          "value": 9.0
+        },
+        "goal": "investigate",
+        "heating_mode": "fluid_bath",
+        "manipulation": "interventional",
+        "pressure": {
+          "status": "present",
+          "as_reported": "0.967",
+          "note": "'Av. barom., atm.' column of Table I",
+          "unit": "atm",
+          "value": 0.967
+        },
+        "results": {
+          "equilibrium_constant": {
+            "status": "present",
+            "as_reported": "3.73 × 10⁻⁴",
+            "note": "K = CH3OH/(CO)(H2)^2 with partial pressures in atmospheres; printed '3.73 × 10⁻⁴' (power of ten confirmed on the page image)",
+            "unit": "atm^-2",
+            "value": 0.000373
+          },
+          "free_energy_integration_constant_i": {
+            "status": "present",
+            "as_reported": "-53.62",
+            "note": "integration constant I of the free-energy equation, obtained with the best available heat data (Smith, cited)",
+            "unit": "not stated",
+            "value": -53.62
+          },
+          "methanol_per_cubic_meter_gas": {
+            "status": "present",
+            "as_reported": "0.0456",
+            "note": "corrected for CO2 caught in the condensers; yield from 1 cubic meter of gas of the Table II composition",
+            "unit": "g/cu. m. of gas at STP",
+            "value": 0.0456
+          }
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "303.9",
+          "note": "temperature of catalyst",
+          "unit": "°C",
+          "value": 303.9
+        },
+        "temperature_measured_at": "not_reported",
+        "test_kind": "equilibrium_estimate",
+        "test_label": "Table I, expt. 1 (synthesis)"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/test/table1-expt-2",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "equilibrium measurement, expt. 2 (synthesis side), 303.8 °C",
+        "conditions": {
+          "experiment_duration": {
+            "status": "present",
+            "as_reported": "during the course of an experiment—about one week",
+            "qualifier": "approximate",
+            "text_value": "about one week"
+          },
+          "total_gas_volume_per_experiment": {
+            "status": "present",
+            "as_reported": "from 17 to 30 liters",
+            "lower": 17,
+            "unit": "L",
+            "upper": 30
+          }
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 6, Table I, expt. 2",
+            "note": "the page prints the pressure and yield of this row without the leading zero (e.g. '.963', '.0505'), as in the column below the first row's 0.967 and 0.0456; the zero is written in the transcription because the number check reads '.963' as 963",
+            "reading": "vision_ocr",
+            "region": [
+              0.1,
+              0.472,
+              0.86,
+              0.488
+            ],
+            "source": "ex:msyn/source/10.1021-ja01376a015",
+            "transcription": "2 s 0.963 303.8 4.0 0.0505 4.19 × 10⁻⁴ -53.85"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 6, Table I",
+            "passage": "10.1021-ja01376a015/p6/2",
+            "quote": "Table I Results of Equilibrium Measurements",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01376a015/p6/3",
+            "quote": "The methanol yields in Table I have been corrected, on the basis of the gas composition as given in Table II, for the volume of car- bon dioxide caught in the liquid-air condensers.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01376a015/p6/2",
+            "quote": "In a single experiment a total gas volume of from 17 to 30 liters was passed over the",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "flow_rate": {
+          "status": "present",
+          "as_reported": "4.0",
+          "unit": "cc/min",
+          "value": 4.0
+        },
+        "goal": "investigate",
+        "heating_mode": "fluid_bath",
+        "manipulation": "interventional",
+        "pressure": {
+          "status": "present",
+          "as_reported": ".963",
+          "note": "'Av. barom., atm.' column of Table I",
+          "unit": "atm",
+          "value": 0.963
+        },
+        "results": {
+          "equilibrium_constant": {
+            "status": "present",
+            "as_reported": "4.19 × 10⁻⁴",
+            "note": "K = CH3OH/(CO)(H2)^2 with partial pressures in atmospheres; printed '4.19 × 10⁻⁴' (power of ten confirmed on the page image)",
+            "unit": "atm^-2",
+            "value": 0.000419
+          },
+          "free_energy_integration_constant_i": {
+            "status": "present",
+            "as_reported": "-53.85",
+            "note": "integration constant I of the free-energy equation, obtained with the best available heat data (Smith, cited)",
+            "unit": "not stated",
+            "value": -53.85
+          },
+          "methanol_per_cubic_meter_gas": {
+            "status": "present",
+            "as_reported": ".0505",
+            "note": "corrected for CO2 caught in the condensers; yield from 1 cubic meter of gas of the Table II composition",
+            "unit": "g/cu. m. of gas at STP",
+            "value": 0.0505
+          }
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "303.8",
+          "note": "temperature of catalyst",
+          "unit": "°C",
+          "value": 303.8
+        },
+        "temperature_measured_at": "not_reported",
+        "test_kind": "equilibrium_estimate",
+        "test_label": "Table I, expt. 2 (synthesis)"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/test/table1-expt-3",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "equilibrium measurement, expt. 3 (synthesis side), 304.3 °C",
+        "conditions": {
+          "experiment_duration": {
+            "status": "present",
+            "as_reported": "during the course of an experiment—about one week",
+            "qualifier": "approximate",
+            "text_value": "about one week"
+          },
+          "total_gas_volume_per_experiment": {
+            "status": "present",
+            "as_reported": "from 17 to 30 liters",
+            "lower": 17,
+            "unit": "L",
+            "upper": 30
+          }
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 6, Table I, expt. 3",
+            "note": "the page prints the pressure and yield of this row without the leading zero (e.g. '.963', '.0505'), as in the column below the first row's 0.967 and 0.0456; the zero is written in the transcription because the number check reads '.963' as 963",
+            "reading": "vision_ocr",
+            "region": [
+              0.1,
+              0.488,
+              0.86,
+              0.503
+            ],
+            "second_reading": "3 | s | .974 | 304.3 | 1.8 | .0562 | 4.27 × 10⁻⁴ | −53.92",
+            "source": "ex:msyn/source/10.1021-ja01376a015",
+            "transcription": "3 s 0.974 304.3 1.8 0.0562 4.27 × 10⁻⁴ -53.92"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 6, Table I",
+            "passage": "10.1021-ja01376a015/p6/2",
+            "quote": "Table I Results of Equilibrium Measurements",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01376a015/p6/3",
+            "quote": "The methanol yields in Table I have been corrected, on the basis of the gas composition as given in Table II, for the volume of car- bon dioxide caught in the liquid-air condensers.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01376a015/p6/2",
+            "quote": "In a single experiment a total gas volume of from 17 to 30 liters was passed over the",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "flow_rate": {
+          "status": "present",
+          "as_reported": "1.8",
+          "unit": "cc/min",
+          "value": 1.8
+        },
+        "goal": "investigate",
+        "heating_mode": "fluid_bath",
+        "manipulation": "interventional",
+        "pressure": {
+          "status": "present",
+          "as_reported": ".974",
+          "note": "'Av. barom., atm.' column of Table I",
+          "unit": "atm",
+          "value": 0.974
+        },
+        "results": {
+          "equilibrium_constant": {
+            "status": "present",
+            "as_reported": "4.27 × 10⁻⁴",
+            "note": "K = CH3OH/(CO)(H2)^2 with partial pressures in atmospheres; printed '4.27 × 10⁻⁴' (power of ten confirmed on the page image)",
+            "unit": "atm^-2",
+            "value": 0.000427
+          },
+          "free_energy_integration_constant_i": {
+            "status": "present",
+            "as_reported": "-53.92",
+            "note": "integration constant I of the free-energy equation, obtained with the best available heat data (Smith, cited)",
+            "unit": "not stated",
+            "value": -53.92
+          },
+          "methanol_per_cubic_meter_gas": {
+            "status": "present",
+            "as_reported": ".0562",
+            "note": "corrected for CO2 caught in the condensers; yield from 1 cubic meter of gas of the Table II composition",
+            "unit": "g/cu. m. of gas at STP",
+            "value": 0.0562
+          }
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "304.3",
+          "note": "temperature of catalyst",
+          "unit": "°C",
+          "value": 304.3
+        },
+        "temperature_measured_at": "not_reported",
+        "test_kind": "equilibrium_estimate",
+        "test_label": "Table I, expt. 3 (synthesis)"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/test/table1-expt-4",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "equilibrium measurement, expt. 4 (synthesis side), 303.9 °C",
+        "conditions": {
+          "experiment_duration": {
+            "status": "present",
+            "as_reported": "during the course of an experiment—about one week",
+            "qualifier": "approximate",
+            "text_value": "about one week"
+          },
+          "total_gas_volume_per_experiment": {
+            "status": "present",
+            "as_reported": "from 17 to 30 liters",
+            "lower": 17,
+            "unit": "L",
+            "upper": 30
+          }
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 6, Table I, expt. 4",
+            "note": "the page prints the pressure and yield of this row without the leading zero (e.g. '.963', '.0505'), as in the column below the first row's 0.967 and 0.0456; the zero is written in the transcription because the number check reads '.963' as 963",
+            "reading": "vision_ocr",
+            "region": [
+              0.1,
+              0.504,
+              0.86,
+              0.519
+            ],
+            "second_reading": "4 | s | .966 | 303.9 | 1.6 | .0520 | 4.27 × 10⁻⁴ | −53.89",
+            "source": "ex:msyn/source/10.1021-ja01376a015",
+            "transcription": "4 s 0.966 303.9 1.6 0.0520 4.27 × 10⁻⁴ -53.89"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 6, Table I",
+            "passage": "10.1021-ja01376a015/p6/2",
+            "quote": "Table I Results of Equilibrium Measurements",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01376a015/p6/3",
+            "quote": "The methanol yields in Table I have been corrected, on the basis of the gas composition as given in Table II, for the volume of car- bon dioxide caught in the liquid-air condensers.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01376a015/p6/2",
+            "quote": "In a single experiment a total gas volume of from 17 to 30 liters was passed over the",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "flow_rate": {
+          "status": "present",
+          "as_reported": "1.6",
+          "unit": "cc/min",
+          "value": 1.6
+        },
+        "goal": "investigate",
+        "heating_mode": "fluid_bath",
+        "manipulation": "interventional",
+        "pressure": {
+          "status": "present",
+          "as_reported": ".966",
+          "note": "'Av. barom., atm.' column of Table I",
+          "unit": "atm",
+          "value": 0.966
+        },
+        "results": {
+          "equilibrium_constant": {
+            "status": "present",
+            "as_reported": "4.27 × 10⁻⁴",
+            "note": "K = CH3OH/(CO)(H2)^2 with partial pressures in atmospheres; printed '4.27 × 10⁻⁴' (power of ten confirmed on the page image)",
+            "unit": "atm^-2",
+            "value": 0.000427
+          },
+          "free_energy_integration_constant_i": {
+            "status": "present",
+            "as_reported": "-53.89",
+            "note": "integration constant I of the free-energy equation, obtained with the best available heat data (Smith, cited)",
+            "unit": "not stated",
+            "value": -53.89
+          },
+          "methanol_per_cubic_meter_gas": {
+            "status": "present",
+            "as_reported": ".0520",
+            "note": "corrected for CO2 caught in the condensers; yield from 1 cubic meter of gas of the Table II composition",
+            "unit": "g/cu. m. of gas at STP",
+            "value": 0.052
+          }
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "303.9",
+          "note": "temperature of catalyst",
+          "unit": "°C",
+          "value": 303.9
+        },
+        "temperature_measured_at": "not_reported",
+        "test_kind": "equilibrium_estimate",
+        "test_label": "Table I, expt. 4 (synthesis)"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/test/table1-expt-4a",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "equilibrium measurement, expt. 4a (decomposition side), 303.9 °C",
+        "conditions": {
+          "experiment_duration": {
+            "status": "present",
+            "as_reported": "during the course of an experiment—about one week",
+            "qualifier": "approximate",
+            "text_value": "about one week"
+          },
+          "total_gas_volume_per_experiment": {
+            "status": "present",
+            "as_reported": "from 17 to 30 liters",
+            "lower": 17,
+            "unit": "L",
+            "upper": 30
+          }
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 6, Table I, expt. 4a",
+            "note": "the page prints the pressure and yield of this row without the leading zero (e.g. '.963', '.0505'), as in the column below the first row's 0.967 and 0.0456; the zero is written in the transcription because the number check reads '.963' as 963",
+            "reading": "vision_ocr",
+            "region": [
+              0.1,
+              0.519,
+              0.86,
+              0.535
+            ],
+            "source": "ex:msyn/source/10.1021-ja01376a015",
+            "transcription": "4a d 0.966 303.9 1.6 0.0767 6.30 × 10⁻⁴ -54.66"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 6, Table I",
+            "passage": "10.1021-ja01376a015/p6/2",
+            "quote": "Table I Results of Equilibrium Measurements",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01376a015/p6/3",
+            "quote": "The methanol yields in Table I have been corrected, on the basis of the gas composition as given in Table II, for the volume of car- bon dioxide caught in the liquid-air condensers.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01376a015/p6/2",
+            "quote": "In a single experiment a total gas volume of from 17 to 30 liters was passed over the",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "flow_rate": {
+          "status": "present",
+          "as_reported": "1.6",
+          "unit": "cc/min",
+          "value": 1.6
+        },
+        "goal": "investigate",
+        "heating_mode": "fluid_bath",
+        "manipulation": "interventional",
+        "pressure": {
+          "status": "present",
+          "as_reported": ".966",
+          "note": "'Av. barom., atm.' column of Table I",
+          "unit": "atm",
+          "value": 0.966
+        },
+        "results": {
+          "equilibrium_constant": {
+            "status": "present",
+            "as_reported": "6.30 × 10⁻⁴",
+            "note": "K = CH3OH/(CO)(H2)^2 with partial pressures in atmospheres; printed '6.30 × 10⁻⁴' (power of ten confirmed on the page image)",
+            "unit": "atm^-2",
+            "value": 0.00063
+          },
+          "free_energy_integration_constant_i": {
+            "status": "present",
+            "as_reported": "-54.66",
+            "note": "integration constant I of the free-energy equation, obtained with the best available heat data (Smith, cited)",
+            "unit": "not stated",
+            "value": -54.66
+          },
+          "methanol_per_cubic_meter_gas": {
+            "status": "present",
+            "as_reported": ".0767",
+            "note": "corrected for CO2 caught in the condensers; yield from 1 cubic meter of gas of the Table II composition",
+            "unit": "g/cu. m. of gas at STP",
+            "value": 0.0767
+          }
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "303.9",
+          "note": "temperature of catalyst",
+          "unit": "°C",
+          "value": 303.9
+        },
+        "temperature_measured_at": "not_reported",
+        "test_kind": "equilibrium_estimate",
+        "test_label": "Table I, expt. 4a (decomposition)"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/test/table1-expt-5",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "equilibrium measurement, expt. 5 (synthesis side), 304.0 °C",
+        "conditions": {
+          "experiment_duration": {
+            "status": "present",
+            "as_reported": "during the course of an experiment—about one week",
+            "qualifier": "approximate",
+            "text_value": "about one week"
+          },
+          "total_gas_volume_per_experiment": {
+            "status": "present",
+            "as_reported": "from 17 to 30 liters",
+            "lower": 17,
+            "unit": "L",
+            "upper": 30
+          }
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 6, Table I, expt. 5",
+            "passage": "10.1021-ja01376a015/p6/3",
+            "quote": "5 s .968 304.0 1.7 .0681 5.56 X 10-4 -54.42",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 6, Table I, expt. 5",
+            "note": "the page prints the pressure and yield of this row without the leading zero (e.g. '.963', '.0505'), as in the column below the first row's 0.967 and 0.0456; the zero is written in the transcription because the number check reads '.963' as 963",
+            "reading": "vision_ocr",
+            "region": [
+              0.1,
+              0.535,
+              0.86,
+              0.551
+            ],
+            "source": "ex:msyn/source/10.1021-ja01376a015",
+            "transcription": "5 s 0.968 304.0 1.7 0.0681 5.56 × 10⁻⁴ -54.42"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 6, Table I",
+            "passage": "10.1021-ja01376a015/p6/2",
+            "quote": "Table I Results of Equilibrium Measurements",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01376a015/p6/3",
+            "quote": "The methanol yields in Table I have been corrected, on the basis of the gas composition as given in Table II, for the volume of car- bon dioxide caught in the liquid-air condensers.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01376a015/p6/2",
+            "quote": "In a single experiment a total gas volume of from 17 to 30 liters was passed over the",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "flow_rate": {
+          "status": "present",
+          "as_reported": "1.7",
+          "unit": "cc/min",
+          "value": 1.7
+        },
+        "goal": "investigate",
+        "heating_mode": "fluid_bath",
+        "manipulation": "interventional",
+        "pressure": {
+          "status": "present",
+          "as_reported": ".968",
+          "note": "'Av. barom., atm.' column of Table I",
+          "unit": "atm",
+          "value": 0.968
+        },
+        "results": {
+          "equilibrium_constant": {
+            "status": "present",
+            "as_reported": "5.56 × 10⁻⁴",
+            "note": "K = CH3OH/(CO)(H2)^2 with partial pressures in atmospheres; printed '5.56 × 10⁻⁴' (power of ten confirmed on the page image)",
+            "unit": "atm^-2",
+            "value": 0.000556
+          },
+          "free_energy_integration_constant_i": {
+            "status": "present",
+            "as_reported": "-54.42",
+            "note": "integration constant I of the free-energy equation, obtained with the best available heat data (Smith, cited)",
+            "unit": "not stated",
+            "value": -54.42
+          },
+          "methanol_per_cubic_meter_gas": {
+            "status": "present",
+            "as_reported": ".0681",
+            "note": "corrected for CO2 caught in the condensers; yield from 1 cubic meter of gas of the Table II composition",
+            "unit": "g/cu. m. of gas at STP",
+            "value": 0.0681
+          }
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "304.0",
+          "note": "temperature of catalyst",
+          "unit": "°C",
+          "value": 304.0
+        },
+        "temperature_measured_at": "not_reported",
+        "test_kind": "equilibrium_estimate",
+        "test_label": "Table I, expt. 5 (synthesis)"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/test/table1-expt-5a",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "equilibrium measurement, expt. 5a (decomposition side), 304.0 °C",
+        "conditions": {
+          "experiment_duration": {
+            "status": "present",
+            "as_reported": "during the course of an experiment—about one week",
+            "qualifier": "approximate",
+            "text_value": "about one week"
+          },
+          "total_gas_volume_per_experiment": {
+            "status": "present",
+            "as_reported": "from 17 to 30 liters",
+            "lower": 17,
+            "unit": "L",
+            "upper": 30
+          }
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 6, Table I, expt. 5a",
+            "note": "the page prints the pressure and yield of this row without the leading zero (e.g. '.963', '.0505'), as in the column below the first row's 0.967 and 0.0456; the zero is written in the transcription because the number check reads '.963' as 963",
+            "reading": "vision_ocr",
+            "region": [
+              0.1,
+              0.551,
+              0.86,
+              0.567
+            ],
+            "second_reading": "5a | d | .968 | 304.0 | 1.7 | .0695 | 5.67 × 10⁻⁴ | −54.46",
+            "source": "ex:msyn/source/10.1021-ja01376a015",
+            "transcription": "5a d 0.968 304.0 1.7 0.0695 5.67 × 10⁻⁴ -54.46"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 6, Table I",
+            "passage": "10.1021-ja01376a015/p6/2",
+            "quote": "Table I Results of Equilibrium Measurements",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01376a015/p6/3",
+            "quote": "The methanol yields in Table I have been corrected, on the basis of the gas composition as given in Table II, for the volume of car- bon dioxide caught in the liquid-air condensers.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01376a015/p6/2",
+            "quote": "In a single experiment a total gas volume of from 17 to 30 liters was passed over the",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "flow_rate": {
+          "status": "present",
+          "as_reported": "1.7",
+          "unit": "cc/min",
+          "value": 1.7
+        },
+        "goal": "investigate",
+        "heating_mode": "fluid_bath",
+        "manipulation": "interventional",
+        "pressure": {
+          "status": "present",
+          "as_reported": ".968",
+          "note": "'Av. barom., atm.' column of Table I",
+          "unit": "atm",
+          "value": 0.968
+        },
+        "results": {
+          "equilibrium_constant": {
+            "status": "present",
+            "as_reported": "5.67 × 10⁻⁴",
+            "note": "K = CH3OH/(CO)(H2)^2 with partial pressures in atmospheres; printed '5.67 × 10⁻⁴' (power of ten confirmed on the page image)",
+            "unit": "atm^-2",
+            "value": 0.000567
+          },
+          "free_energy_integration_constant_i": {
+            "status": "present",
+            "as_reported": "-54.46",
+            "note": "integration constant I of the free-energy equation, obtained with the best available heat data (Smith, cited)",
+            "unit": "not stated",
+            "value": -54.46
+          },
+          "methanol_per_cubic_meter_gas": {
+            "status": "present",
+            "as_reported": ".0695",
+            "note": "corrected for CO2 caught in the condensers; yield from 1 cubic meter of gas of the Table II composition",
+            "unit": "g/cu. m. of gas at STP",
+            "value": 0.0695
+          }
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "304.0",
+          "note": "temperature of catalyst",
+          "unit": "°C",
+          "value": 304.0
+        },
+        "temperature_measured_at": "not_reported",
+        "test_kind": "equilibrium_estimate",
+        "test_label": "Table I, expt. 5a (decomposition)"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/test/table1-expt-6",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "equilibrium measurement, expt. 6 (synthesis side), 303.8 °C",
+        "conditions": {
+          "experiment_duration": {
+            "status": "present",
+            "as_reported": "during the course of an experiment—about one week",
+            "qualifier": "approximate",
+            "text_value": "about one week"
+          },
+          "total_gas_volume_per_experiment": {
+            "status": "present",
+            "as_reported": "from 17 to 30 liters",
+            "lower": 17,
+            "unit": "L",
+            "upper": 30
+          }
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "agree",
+            "locator": "p. 6, Table I, expt. 6",
+            "note": "the page prints the pressure and yield of this row without the leading zero (e.g. '.963', '.0505'), as in the column below the first row's 0.967 and 0.0456; the zero is written in the transcription because the number check reads '.963' as 963",
+            "reading": "vision_ocr",
+            "region": [
+              0.1,
+              0.567,
+              0.86,
+              0.582
+            ],
+            "source": "ex:msyn/source/10.1021-ja01376a015",
+            "transcription": "6 s 0.963 303.8 1.7 0.0672 5.57 × 10⁻⁴ -54.41"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 6, Table I",
+            "passage": "10.1021-ja01376a015/p6/2",
+            "quote": "Table I Results of Equilibrium Measurements",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01376a015/p6/3",
+            "quote": "The methanol yields in Table I have been corrected, on the basis of the gas composition as given in Table II, for the volume of car- bon dioxide caught in the liquid-air condensers.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01376a015/p6/2",
+            "quote": "In a single experiment a total gas volume of from 17 to 30 liters was passed over the",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "flow_rate": {
+          "status": "present",
+          "as_reported": "1.7",
+          "unit": "cc/min",
+          "value": 1.7
+        },
+        "goal": "investigate",
+        "heating_mode": "fluid_bath",
+        "manipulation": "interventional",
+        "pressure": {
+          "status": "present",
+          "as_reported": ".963",
+          "note": "'Av. barom., atm.' column of Table I",
+          "unit": "atm",
+          "value": 0.963
+        },
+        "results": {
+          "equilibrium_constant": {
+            "status": "present",
+            "as_reported": "5.57 × 10⁻⁴",
+            "note": "K = CH3OH/(CO)(H2)^2 with partial pressures in atmospheres; printed '5.57 × 10⁻⁴' (power of ten confirmed on the page image)",
+            "unit": "atm^-2",
+            "value": 0.000557
+          },
+          "free_energy_integration_constant_i": {
+            "status": "present",
+            "as_reported": "-54.41",
+            "note": "integration constant I of the free-energy equation, obtained with the best available heat data (Smith, cited)",
+            "unit": "not stated",
+            "value": -54.41
+          },
+          "methanol_per_cubic_meter_gas": {
+            "status": "present",
+            "as_reported": ".0672",
+            "note": "corrected for CO2 caught in the condensers; yield from 1 cubic meter of gas of the Table II composition",
+            "unit": "g/cu. m. of gas at STP",
+            "value": 0.0672
+          }
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "303.8",
+          "note": "temperature of catalyst",
+          "unit": "°C",
+          "value": 303.8
+        },
+        "temperature_measured_at": "not_reported",
+        "test_kind": "equilibrium_estimate",
+        "test_label": "Table I, expt. 6 (synthesis)"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/test/table1-expt-6a",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "equilibrium measurement, expt. 6a (decomposition side), 303.8 °C",
+        "conditions": {
+          "experiment_duration": {
+            "status": "present",
+            "as_reported": "during the course of an experiment—about one week",
+            "qualifier": "approximate",
+            "text_value": "about one week"
+          },
+          "total_gas_volume_per_experiment": {
+            "status": "present",
+            "as_reported": "from 17 to 30 liters",
+            "lower": 17,
+            "unit": "L",
+            "upper": 30
+          }
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "agreement": "partial",
+            "locator": "p. 6, Table I, expt. 6a",
+            "note": "the page prints the pressure and yield of this row without the leading zero (e.g. '.963', '.0505'), as in the column below the first row's 0.967 and 0.0456; the zero is written in the transcription because the number check reads '.963' as 963",
+            "reading": "vision_ocr",
+            "region": [
+              0.1,
+              0.583,
+              0.86,
+              0.598
+            ],
+            "second_reading": "6a | d | .963 | 303.8 | 1.7 | .0672 | 5.57 × 10⁻⁴ | −54.41",
+            "source": "ex:msyn/source/10.1021-ja01376a015",
+            "transcription": "6a d 0.963 303.8 1.7 0.0672 5.57 × 10⁻⁴ -54.41"
+          },
+          {
+            "kind": "table",
+            "locator": "p. 6, Table I",
+            "passage": "10.1021-ja01376a015/p6/2",
+            "quote": "Table I Results of Equilibrium Measurements",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01376a015/p6/3",
+            "quote": "The methanol yields in Table I have been corrected, on the basis of the gas composition as given in Table II, for the volume of car- bon dioxide caught in the liquid-air condensers.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01376a015/p6/2",
+            "quote": "In a single experiment a total gas volume of from 17 to 30 liters was passed over the",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "flow_rate": {
+          "status": "present",
+          "as_reported": "1.7",
+          "unit": "cc/min",
+          "value": 1.7
+        },
+        "goal": "investigate",
+        "heating_mode": "fluid_bath",
+        "manipulation": "interventional",
+        "pressure": {
+          "status": "present",
+          "as_reported": ".963",
+          "note": "'Av. barom., atm.' column of Table I",
+          "unit": "atm",
+          "value": 0.963
+        },
+        "results": {
+          "equilibrium_constant": {
+            "status": "present",
+            "as_reported": "5.57 × 10⁻⁴",
+            "note": "K = CH3OH/(CO)(H2)^2 with partial pressures in atmospheres; printed '5.57 × 10⁻⁴' (power of ten confirmed on the page image)",
+            "unit": "atm^-2",
+            "value": 0.000557
+          },
+          "free_energy_integration_constant_i": {
+            "status": "present",
+            "as_reported": "-54.41",
+            "note": "integration constant I of the free-energy equation, obtained with the best available heat data (Smith, cited)",
+            "unit": "not stated",
+            "value": -54.41
+          },
+          "methanol_per_cubic_meter_gas": {
+            "status": "present",
+            "as_reported": ".0672",
+            "note": "corrected for CO2 caught in the condensers; yield from 1 cubic meter of gas of the Table II composition",
+            "unit": "g/cu. m. of gas at STP",
+            "value": 0.0672
+          }
+        },
+        "temperature": {
+          "status": "present",
+          "as_reported": "303.8",
+          "note": "temperature of catalyst",
+          "unit": "°C",
+          "value": 303.8
+        },
+        "temperature_measured_at": "not_reported",
+        "test_kind": "equilibrium_estimate",
+        "test_label": "Table I, expt. 6a (decomposition)"
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/treatment/evacuation",
+      "label": "Treatment",
+      "props": {
+        "name": "evacuation of the catalysts between experiments",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01376a015/p7/2",
+            "quote": "It was found that evacuation of the catalysts, between experiments, considerably improved their activity, probably on account of the removal of the small amounts of carbon dioxide and water adsorbed during the reaction.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "method": "evacuation between experiments",
+        "procedure_status": "completed",
+        "treatment_kind": "regeneration"
+      }
+    },
+    {
+      "id": "ex:msyn/source/10.1021-ja01376a015",
+      "label": "Source",
+      "props": {
+        "name": "THE EQUILIBRIUM BETWEEN METHANOL, CARBON MONOXIDE AND HYDROGEN. PRELIMINARY PAPER",
+        "kind": "article",
+        "description": "Published 1929 (publication year (bibliography)); in scope: before the 1966-01-01 cutoff. Text: 11 pages text_layer. Text not redistributed.",
+        "doi": "10.1021/ja01376a015",
+        "licence": "no verified publisher licence; short excerpts quoted as evidence under fair use",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "THE EQUILIBRIUM BETWEEN METHANOL, CARBON MONOXIDE AND HYDROGEN. PRELIMINARY PAPER",
+        "url": "https://doi.org/10.1021/ja01376a015",
+        "venue": "Journal of the American Chemical Society",
+        "year": 1929
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/analysis/free-energy-equation/reported-in/10.1021-ja01376a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 10",
+          "p. 11",
+          "p. 11, Summary 3",
+          "p. 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/analysis/free-energy-equation",
+      "target": "ex:msyn/source/10.1021-ja01376a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/analysis/high-pressure-conversion-comparison/reported-in/10.1021-ja01376a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 10",
+          "p. 9, Fig. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/analysis/high-pressure-conversion-comparison",
+      "target": "ex:msyn/source/10.1021-ja01376a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/catalyst/zinc-oxide/reported-in/10.1021-ja01376a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/catalyst/zinc-oxide",
+      "target": "ex:msyn/source/10.1021-ja01376a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/catalyst/zno-chromic-acid-4zn-1cr/reported-in/10.1021-ja01376a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3",
+          "p. 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/catalyst/zno-chromic-acid-4zn-1cr",
+      "target": "ex:msyn/source/10.1021-ja01376a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/claim/best-k-303-8/reported-in/10.1021-ja01376a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 10",
+          "p. 10, Summary 2",
+          "p. 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/claim/best-k-303-8",
+      "target": "ex:msyn/source/10.1021-ja01376a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/claim/bracketing-method/reported-in/10.1021-ja01376a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3",
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/claim/bracketing-method",
+      "target": "ex:msyn/source/10.1021-ja01376a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/claim/comparison-with-other-constants/reported-in/10.1021-ja01376a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 11",
+          "p. 7",
+          "p. 8"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/claim/comparison-with-other-constants",
+      "target": "ex:msyn/source/10.1021-ja01376a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/claim/decomposition-exceeds-kelley/reported-in/10.1021-ja01376a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3",
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/claim/decomposition-exceeds-kelley",
+      "target": "ex:msyn/source/10.1021-ja01376a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/claim/error-sources/reported-in/10.1021-ja01376a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6",
+          "p. 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/claim/error-sources",
+      "target": "ex:msyn/source/10.1021-ja01376a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/claim/evacuation-improves-activity/reported-in/10.1021-ja01376a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/claim/evacuation-improves-activity",
+      "target": "ex:msyn/source/10.1021-ja01376a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/claim/expt-5a-constant-high/reported-in/10.1021-ja01376a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/claim/expt-5a-constant-high",
+      "target": "ex:msyn/source/10.1021-ja01376a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/claim/fugacity-effect-on-yields/reported-in/10.1021-ja01376a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 9"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/claim/fugacity-effect-on-yields",
+      "target": "ex:msyn/source/10.1021-ja01376a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/claim/heat-data-not-seriously-in-error/reported-in/10.1021-ja01376a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 10"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/claim/heat-data-not-seriously-in-error",
+      "target": "ex:msyn/source/10.1021-ja01376a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/claim/high-pressure-measurement-unsatisfactory/reported-in/10.1021-ja01376a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2",
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/claim/high-pressure-measurement-unsatisfactory",
+      "target": "ex:msyn/source/10.1021-ja01376a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/claim/methanol-analysis-reliable/reported-in/10.1021-ja01376a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5",
+          "p. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/claim/methanol-analysis-reliable",
+      "target": "ex:msyn/source/10.1021-ja01376a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/claim/practical-below-predicted/reported-in/10.1021-ja01376a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 10",
+          "p. 11"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/claim/practical-below-predicted",
+      "target": "ex:msyn/source/10.1021-ja01376a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/claim/sufficient-for-practice/reported-in/10.1021-ja01376a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 10"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/claim/sufficient-for-practice",
+      "target": "ex:msyn/source/10.1021-ja01376a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/computation/fugacity-estimates/reported-in/10.1021-ja01376a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 8",
+          "p. 8, Fig. 2",
+          "p. 9"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/computation/fugacity-estimates",
+      "target": "ex:msyn/source/10.1021-ja01376a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/feed/co-h2-gas-table2/reported-in/10.1021-ja01376a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3",
+          "p. 6",
+          "p. 6, Table II"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/feed/co-h2-gas-table2",
+      "target": "ex:msyn/source/10.1021-ja01376a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/feed/co-h2-saturated-methanol/reported-in/10.1021-ja01376a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/feed/co-h2-saturated-methanol",
+      "target": "ex:msyn/source/10.1021-ja01376a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/hypothesis/adsorbed-co2-water-removed/reported-in/10.1021-ja01376a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/hypothesis/adsorbed-co2-water-removed",
+      "target": "ex:msyn/source/10.1021-ja01376a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/hypothesis/audibert-raineau-too-high/reported-in/10.1021-ja01376a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 7",
+          "p. 8"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/hypothesis/audibert-raineau-too-high",
+      "target": "ex:msyn/source/10.1021-ja01376a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/hypothesis/ether-formation-negligible/reported-in/10.1021-ja01376a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/hypothesis/ether-formation-negligible",
+      "target": "ex:msyn/source/10.1021-ja01376a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/hypothesis/side-reactions-lower-reactants/reported-in/10.1021-ja01376a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 10"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/hypothesis/side-reactions-lower-reactants",
+      "target": "ex:msyn/source/10.1021-ja01376a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/1",
+      "type": "IDENTIFIED_AS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01376a015/p3/2",
+            "quote": "One catalyst used was zinc oxide made from pure, freshly precipitated carbonate.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/catalyst/zinc-oxide",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/10",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "quote": "Another catalyst was made by adding chromic acid to purified zinc oxide, in the atomic proportions 4Zn:lCr.n",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "role": "precursor"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/sample/promoted-charge",
+      "target": "ex:msyn/10.1021-ja01376a015/species/chromic-acid"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/100",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01376a015/p7/2",
+            "quote": "It was found that evacuation of the catalysts, between experiments, considerably improved their activity, probably on account of the removal of the small amounts of carbon dioxide and water adsorbed during the reaction.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/claim/evacuation-improves-activity",
+      "target": "ex:msyn/10.1021-ja01376a015/treatment/evacuation"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/101",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01376a015/p7/2",
+            "quote": "The promoted catalyst did not seem to be as much affected by adsorbed carbon dioxide and water as did the pure zinc oxide catalyst.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/claim/evacuation-improves-activity",
+      "target": "ex:msyn/10.1021-ja01376a015/catalyst/zno-chromic-acid-4zn-1cr"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/102",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01376a015/p7/2",
+            "quote": "The promoted catalyst did not seem to be as much affected by adsorbed carbon dioxide and water as did the pure zinc oxide catalyst.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/claim/evacuation-improves-activity",
+      "target": "ex:msyn/10.1021-ja01376a015/catalyst/zinc-oxide"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/103",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01376a015/p7/2",
+            "quote": "It was found that evacuation of the catalysts, between experiments, considerably improved their activity, probably on account of the removal of the small amounts of carbon dioxide and water adsorbed during the reaction.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/hypothesis/adsorbed-co2-water-removed",
+      "target": "ex:msyn/10.1021-ja01376a015/treatment/evacuation"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/104",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01376a015/p7/2",
+            "quote": "It was found that evacuation of the catalysts, between experiments, considerably improved their activity, probably on account of the removal of the small amounts of carbon dioxide and water adsorbed during the reaction.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/hypothesis/adsorbed-co2-water-removed",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/105",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01376a015/p7/2",
+            "quote": "It was found that evacuation of the catalysts, between experiments, considerably improved their activity, probably on account of the removal of the small amounts of carbon dioxide and water adsorbed during the reaction.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/hypothesis/adsorbed-co2-water-removed",
+      "target": "ex:msyn/species/h2o"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/106",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01376a015/p7/2",
+            "quote": "It is thought that since the catalyst used in experiment 5a was pure zinc oxide that had not recently been evacuated, the constant from this ex- periment is somewhat high.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/claim/expt-5a-constant-high",
+      "target": "ex:msyn/10.1021-ja01376a015/test/table1-expt-5a"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/107",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01376a015/p7/1",
+            "quote": "there may be introduced in this way an error of about 2%.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/claim/error-sources",
+      "target": "ex:msyn/10.1021-ja01376a015/claim/best-k-303-8"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/108",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "10.1021-ja01376a015/p5/2",
+            "quote": "by the colorimetric method the concentration of methanol in aqueous solutions as dilute as 1 part in 10,000 could be determined with an accuracy of 1% or better.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/claim/methanol-analysis-reliable",
+      "target": "ex:msyn/species/ch3oh"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/109",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "passage": "10.1021-ja01376a015/p2/3",
+            "quote": "a rela- tively small error in determination of the conversion of carbon monoxide to methanol would, at very high pressures, introduce a disproportionately large error into the value of the equilibrium constant so derived.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/claim/high-pressure-measurement-unsatisfactory",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/11",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "quote": "Another catalyst was made by adding chromic acid to purified zinc oxide, in the atomic proportions 4Zn:lCr.n",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "grade": "purified",
+        "role": "precursor"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/sample/promoted-charge",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/110",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "10.1021-ja01376a015/p5/5",
+            "quote": "If, as would be supposed in the absence of complete experimental information, the formation of the ether from methanol is a higher order reaction than is the forma- tion of CO and Hi from methanol, the rate of formation of ether from methanol at very low pressures would be negligible compared to the rate of formation of CO and Ha.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/hypothesis/ether-formation-negligible",
+      "target": "ex:msyn/species/ch3och3"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/111",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "passage": "10.1021-ja01376a015/p5/5",
+            "quote": "Probably zinc oxide-chromium oxide catalysts which contain excess of zinc oxide would be relatively inactive also.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/hypothesis/ether-formation-negligible",
+      "target": "ex:msyn/10.1021-ja01376a015/catalyst/zno-chromic-acid-4zn-1cr"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/12",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01376a015/p7/2",
+            "quote": "It was found that evacuation of the catalysts, between experiments, considerably improved their activity, probably on account of the removal of the small amounts of carbon dioxide and water adsorbed during the reaction.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "note": "order relative to individual experiments not stated; experiment 5a used pure zinc oxide that had not recently been evacuated"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/sample/zinc-oxide-charge",
+      "target": "ex:msyn/10.1021-ja01376a015/treatment/evacuation"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/13",
+      "type": "TREATED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01376a015/p7/2",
+            "quote": "It was found that evacuation of the catalysts, between experiments, considerably improved their activity, probably on account of the removal of the small amounts of carbon dioxide and water adsorbed during the reaction.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "note": "order relative to individual experiments not stated; experiment 5a used pure zinc oxide that had not recently been evacuated"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/sample/promoted-charge",
+      "target": "ex:msyn/10.1021-ja01376a015/treatment/evacuation"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/14",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 6, Table II",
+            "passage": "10.1021-ja01376a015/p6/3",
+            "quote": "Constituent Volume, % Table II Average Analysis of Gas h2 CO co2 ch4 n2 56.7 29.4 0.6 1.9 11.4",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "56.7",
+          "unit": "vol %",
+          "value": 56.7
+        },
+        "fraction_basis": "volume",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/feed/co-h2-gas-table2",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/15",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 6, Table II",
+            "passage": "10.1021-ja01376a015/p6/3",
+            "quote": "Constituent Volume, % Table II Average Analysis of Gas h2 CO co2 ch4 n2 56.7 29.4 0.6 1.9 11.4",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "29.4",
+          "unit": "vol %",
+          "value": 29.4
+        },
+        "fraction_basis": "volume",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/feed/co-h2-gas-table2",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/16",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 6, Table II",
+            "passage": "10.1021-ja01376a015/p6/3",
+            "quote": "Constituent Volume, % Table II Average Analysis of Gas h2 CO co2 ch4 n2 56.7 29.4 0.6 1.9 11.4",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "0.6",
+          "unit": "vol %",
+          "value": 0.6
+        },
+        "fraction_basis": "volume",
+        "note": "the source does not give a role for carbon dioxide",
+        "role": "diluent"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/feed/co-h2-gas-table2",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/17",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 6, Table II",
+            "passage": "10.1021-ja01376a015/p6/3",
+            "quote": "Constituent Volume, % Table II Average Analysis of Gas h2 CO co2 ch4 n2 56.7 29.4 0.6 1.9 11.4",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "1.9",
+          "unit": "vol %",
+          "value": 1.9
+        },
+        "fraction_basis": "volume",
+        "role": "diluent"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/feed/co-h2-gas-table2",
+      "target": "ex:msyn/species/ch4"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/18",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 6, Table II",
+            "passage": "10.1021-ja01376a015/p6/3",
+            "quote": "Constituent Volume, % Table II Average Analysis of Gas h2 CO co2 ch4 n2 56.7 29.4 0.6 1.9 11.4",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "11.4",
+          "unit": "vol %",
+          "value": 11.4
+        },
+        "fraction_basis": "volume",
+        "role": "diluent"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/feed/co-h2-gas-table2",
+      "target": "ex:msyn/species/n2"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/19",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 6, Table II",
+            "passage": "10.1021-ja01376a015/p6/3",
+            "quote": "Constituent Volume, % Table II Average Analysis of Gas h2 CO co2 ch4 n2 56.7 29.4 0.6 1.9 11.4",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "56.7",
+          "note": "of the carrier gas before saturation with methanol",
+          "unit": "vol %",
+          "value": 56.7
+        },
+        "fraction_basis": "volume",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/feed/co-h2-saturated-methanol",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/2",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "quote": "Another catalyst was made by adding chromic acid to purified zinc oxide, in the atomic proportions 4Zn:lCr.n",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "4Zn",
+          "text_value": "4 (Zn)"
+        },
+        "fraction_basis": "atom",
+        "role": "not_stated"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/catalyst/zno-chromic-acid-4zn-1cr",
+      "target": "ex:msyn/species/zno"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/20",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 6, Table II",
+            "passage": "10.1021-ja01376a015/p6/3",
+            "quote": "Constituent Volume, % Table II Average Analysis of Gas h2 CO co2 ch4 n2 56.7 29.4 0.6 1.9 11.4",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "29.4",
+          "note": "of the carrier gas before saturation with methanol",
+          "unit": "vol %",
+          "value": 29.4
+        },
+        "fraction_basis": "volume",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/feed/co-h2-saturated-methanol",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/21",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 6, Table II",
+            "passage": "10.1021-ja01376a015/p6/3",
+            "quote": "Constituent Volume, % Table II Average Analysis of Gas h2 CO co2 ch4 n2 56.7 29.4 0.6 1.9 11.4",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "0.6",
+          "note": "of the carrier gas before saturation with methanol",
+          "unit": "vol %",
+          "value": 0.6
+        },
+        "fraction_basis": "volume",
+        "role": "diluent"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/feed/co-h2-saturated-methanol",
+      "target": "ex:msyn/species/co2"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/22",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 6, Table II",
+            "passage": "10.1021-ja01376a015/p6/3",
+            "quote": "Constituent Volume, % Table II Average Analysis of Gas h2 CO co2 ch4 n2 56.7 29.4 0.6 1.9 11.4",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "1.9",
+          "note": "of the carrier gas before saturation with methanol",
+          "unit": "vol %",
+          "value": 1.9
+        },
+        "fraction_basis": "volume",
+        "role": "diluent"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/feed/co-h2-saturated-methanol",
+      "target": "ex:msyn/species/ch4"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/23",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 6, Table II",
+            "passage": "10.1021-ja01376a015/p6/3",
+            "quote": "Constituent Volume, % Table II Average Analysis of Gas h2 CO co2 ch4 n2 56.7 29.4 0.6 1.9 11.4",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "11.4",
+          "note": "of the carrier gas before saturation with methanol",
+          "unit": "vol %",
+          "value": 11.4
+        },
+        "fraction_basis": "volume",
+        "role": "diluent"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/feed/co-h2-saturated-methanol",
+      "target": "ex:msyn/species/n2"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/24",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01376a015/p4/1",
+            "quote": "We therefore introduced methanol vapor into the CO-H2 mixture by passing the latter through a saturator containing purified methanol at the temperature of a liquid ammonia bath (—38°).",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "fraction": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source"
+        },
+        "note": "vapor pressure of methanol at -38 °C, over 40 times the equilibrium pressure",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/feed/co-h2-saturated-methanol",
+      "target": "ex:msyn/species/ch3oh"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/29",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 6, Table II",
+            "passage": "10.1021-ja01376a015/p6/3",
+            "quote": "Constituent Volume, % Table II Average Analysis of Gas h2 CO co2 ch4 n2 56.7 29.4 0.6 1.9 11.4",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-1",
+      "target": "ex:msyn/10.1021-ja01376a015/feed/co-h2-gas-table2"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/3",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "quote": "Another catalyst was made by adding chromic acid to purified zinc oxide, in the atomic proportions 4Zn:lCr.n",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01376a015/p7/2",
+            "quote": "The promoted catalyst did not seem to be as much affected by adsorbed carbon dioxide and water as did the pure zinc oxide catalyst.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "as_reported": "lCr",
+          "note": "text layer prints 'lCr' for 1Cr",
+          "text_value": "1 (Cr)"
+        },
+        "fraction_basis": "atom",
+        "role": "promoter",
+        "role_detail": "chromic acid added to purified zinc oxide; the resulting catalyst is called 'the promoted catalyst'"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/catalyst/zno-chromic-acid-4zn-1cr",
+      "target": "ex:msyn/10.1021-ja01376a015/species/chromic-acid"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/30",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01376a015/p3/2",
+            "quote": "Second, a mixture of carbon monoxide and hydrogen was passed over the catalysts at a rate slow enough to give the maximum yield of methanol.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "role": "equilibrium measured"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-1",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/31",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01376a015/p4/3",
+            "quote": "The gas then passes through a second catalyst tube, h, and the yield of methanol is caught in a second liquid-air trap, i.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-1",
+      "target": "ex:msyn/10.1021-ja01376a015/reactor/two-tube-equilibrium-apparatus"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/32",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 6, Table II",
+            "passage": "10.1021-ja01376a015/p6/3",
+            "quote": "Constituent Volume, % Table II Average Analysis of Gas h2 CO co2 ch4 n2 56.7 29.4 0.6 1.9 11.4",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-2",
+      "target": "ex:msyn/10.1021-ja01376a015/feed/co-h2-gas-table2"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/33",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01376a015/p3/2",
+            "quote": "Second, a mixture of carbon monoxide and hydrogen was passed over the catalysts at a rate slow enough to give the maximum yield of methanol.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "role": "equilibrium measured"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-2",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/34",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01376a015/p4/3",
+            "quote": "The gas then passes through a second catalyst tube, h, and the yield of methanol is caught in a second liquid-air trap, i.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-2",
+      "target": "ex:msyn/10.1021-ja01376a015/reactor/two-tube-equilibrium-apparatus"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/35",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 6, Table II",
+            "passage": "10.1021-ja01376a015/p6/3",
+            "quote": "Constituent Volume, % Table II Average Analysis of Gas h2 CO co2 ch4 n2 56.7 29.4 0.6 1.9 11.4",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-3",
+      "target": "ex:msyn/10.1021-ja01376a015/feed/co-h2-gas-table2"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/36",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01376a015/p3/2",
+            "quote": "Second, a mixture of carbon monoxide and hydrogen was passed over the catalysts at a rate slow enough to give the maximum yield of methanol.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "role": "equilibrium measured"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-3",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/37",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01376a015/p4/3",
+            "quote": "The gas then passes through a second catalyst tube, h, and the yield of methanol is caught in a second liquid-air trap, i.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-3",
+      "target": "ex:msyn/10.1021-ja01376a015/reactor/two-tube-equilibrium-apparatus"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/38",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 6, Table II",
+            "passage": "10.1021-ja01376a015/p6/3",
+            "quote": "Constituent Volume, % Table II Average Analysis of Gas h2 CO co2 ch4 n2 56.7 29.4 0.6 1.9 11.4",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-4",
+      "target": "ex:msyn/10.1021-ja01376a015/feed/co-h2-gas-table2"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/39",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01376a015/p3/2",
+            "quote": "Second, a mixture of carbon monoxide and hydrogen was passed over the catalysts at a rate slow enough to give the maximum yield of methanol.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "role": "equilibrium measured"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-4",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/4",
+      "type": "COMPARED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01376a015/p7/2",
+            "quote": "The promoted catalyst did not seem to be as much affected by adsorbed carbon dioxide and water as did the pure zinc oxide catalyst.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "note": "the promoted catalyst seemed less affected by adsorbed carbon dioxide and water than pure zinc oxide"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/catalyst/zno-chromic-acid-4zn-1cr",
+      "target": "ex:msyn/10.1021-ja01376a015/catalyst/zinc-oxide"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/40",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01376a015/p4/3",
+            "quote": "The gas then passes through a second catalyst tube, h, and the yield of methanol is caught in a second liquid-air trap, i.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-4",
+      "target": "ex:msyn/10.1021-ja01376a015/reactor/two-tube-equilibrium-apparatus"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/41",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01376a015/p4/1",
+            "quote": "We therefore introduced methanol vapor into the CO-H2 mixture by passing the latter through a saturator containing purified methanol at the temperature of a liquid ammonia bath (—38°).",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-4a",
+      "target": "ex:msyn/10.1021-ja01376a015/feed/co-h2-saturated-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/42",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01376a015/p3/2",
+            "quote": "Our method was first to pass pure methanol vapor over an active catalyst at a rate slow enough to give substantially equilibrium conditions.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "role": "equilibrium measured"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-4a",
+      "target": "ex:msyn/reaction/methanol-decomposition"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/43",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 6, Table I",
+            "passage": "10.1021-ja01376a015/p6/2",
+            "quote": "Table I Results of Equilibrium Measurements",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "role": "equilibrium constant of CO + 2H2 = CH3OH"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-4a",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/44",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01376a015/p4/2",
+            "quote": "The gas then passes through heated platinized asbestos in c to remove oxy- gen, then through a liquid-air trap, d, to remove all heavy gases, through the methanol saturator, e, surrounded by a bath of liquid ammonia, through the first catalyst tube,",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-4a",
+      "target": "ex:msyn/10.1021-ja01376a015/reactor/two-tube-equilibrium-apparatus"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/45",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 6, Table II",
+            "passage": "10.1021-ja01376a015/p6/3",
+            "quote": "Constituent Volume, % Table II Average Analysis of Gas h2 CO co2 ch4 n2 56.7 29.4 0.6 1.9 11.4",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-5",
+      "target": "ex:msyn/10.1021-ja01376a015/feed/co-h2-gas-table2"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/46",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01376a015/p3/2",
+            "quote": "Second, a mixture of carbon monoxide and hydrogen was passed over the catalysts at a rate slow enough to give the maximum yield of methanol.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "role": "equilibrium measured"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-5",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/47",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01376a015/p4/3",
+            "quote": "The gas then passes through a second catalyst tube, h, and the yield of methanol is caught in a second liquid-air trap, i.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-5",
+      "target": "ex:msyn/10.1021-ja01376a015/reactor/two-tube-equilibrium-apparatus"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/48",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01376a015/p4/1",
+            "quote": "We therefore introduced methanol vapor into the CO-H2 mixture by passing the latter through a saturator containing purified methanol at the temperature of a liquid ammonia bath (—38°).",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-5a",
+      "target": "ex:msyn/10.1021-ja01376a015/feed/co-h2-saturated-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/49",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01376a015/p3/2",
+            "quote": "Our method was first to pass pure methanol vapor over an active catalyst at a rate slow enough to give substantially equilibrium conditions.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "role": "equilibrium measured"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-5a",
+      "target": "ex:msyn/reaction/methanol-decomposition"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/5",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01376a015/p3/2",
+            "quote": "One catalyst used was zinc oxide made from pure, freshly precipitated carbonate.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/sample/zinc-oxide-charge",
+      "target": "ex:msyn/10.1021-ja01376a015/catalyst/zinc-oxide"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/50",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 6, Table I",
+            "passage": "10.1021-ja01376a015/p6/2",
+            "quote": "Table I Results of Equilibrium Measurements",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "role": "equilibrium constant of CO + 2H2 = CH3OH"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-5a",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/51",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01376a015/p4/2",
+            "quote": "The gas then passes through heated platinized asbestos in c to remove oxy- gen, then through a liquid-air trap, d, to remove all heavy gases, through the methanol saturator, e, surrounded by a bath of liquid ammonia, through the first catalyst tube,",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-5a",
+      "target": "ex:msyn/10.1021-ja01376a015/reactor/two-tube-equilibrium-apparatus"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/52",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 6, Table II",
+            "passage": "10.1021-ja01376a015/p6/3",
+            "quote": "Constituent Volume, % Table II Average Analysis of Gas h2 CO co2 ch4 n2 56.7 29.4 0.6 1.9 11.4",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-6",
+      "target": "ex:msyn/10.1021-ja01376a015/feed/co-h2-gas-table2"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/53",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01376a015/p3/2",
+            "quote": "Second, a mixture of carbon monoxide and hydrogen was passed over the catalysts at a rate slow enough to give the maximum yield of methanol.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "role": "equilibrium measured"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-6",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/54",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01376a015/p4/3",
+            "quote": "The gas then passes through a second catalyst tube, h, and the yield of methanol is caught in a second liquid-air trap, i.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-6",
+      "target": "ex:msyn/10.1021-ja01376a015/reactor/two-tube-equilibrium-apparatus"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/55",
+      "type": "FED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01376a015/p4/1",
+            "quote": "We therefore introduced methanol vapor into the CO-H2 mixture by passing the latter through a saturator containing purified methanol at the temperature of a liquid ammonia bath (—38°).",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-6a",
+      "target": "ex:msyn/10.1021-ja01376a015/feed/co-h2-saturated-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/56",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01376a015/p3/2",
+            "quote": "Our method was first to pass pure methanol vapor over an active catalyst at a rate slow enough to give substantially equilibrium conditions.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "role": "equilibrium measured"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-6a",
+      "target": "ex:msyn/reaction/methanol-decomposition"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/57",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "p. 6, Table I",
+            "passage": "10.1021-ja01376a015/p6/2",
+            "quote": "Table I Results of Equilibrium Measurements",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "role": "equilibrium constant of CO + 2H2 = CH3OH"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-6a",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/58",
+      "type": "IN_REACTOR",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01376a015/p4/2",
+            "quote": "The gas then passes through heated platinized asbestos in c to remove oxy- gen, then through a liquid-air trap, d, to remove all heavy gases, through the methanol saturator, e, surrounded by a bath of liquid ammonia, through the first catalyst tube,",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-6a",
+      "target": "ex:msyn/10.1021-ja01376a015/reactor/two-tube-equilibrium-apparatus"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/59",
+      "type": "USES_CATALYST",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01376a015/p7/2",
+            "quote": "It is thought that since the catalyst used in experiment 5a was pure zinc oxide that had not recently been evacuated, the constant from this ex- periment is somewhat high.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "note": "pure zinc oxide that had not recently been evacuated",
+        "state": "other"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-5a",
+      "target": "ex:msyn/10.1021-ja01376a015/sample/zinc-oxide-charge"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/6",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "quote": "Another catalyst was made by adding chromic acid to purified zinc oxide, in the atomic proportions 4Zn:lCr.n",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/sample/promoted-charge",
+      "target": "ex:msyn/10.1021-ja01376a015/catalyst/zno-chromic-acid-4zn-1cr"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/60",
+      "type": "PRECEDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01376a015/p4/2",
+            "quote": "The gas then passes through heated platinized asbestos in c to remove oxy- gen, then through a liquid-air trap, d, to remove all heavy gases, through the methanol saturator, e, surrounded by a bath of liquid ammonia, through the first catalyst tube,",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01376a015/p4/3",
+            "quote": "The gas then passes through a second catalyst tube, h, and the yield of methanol is caught in a second liquid-air trap, i.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "note": "in one experiment the gas passes the first (decomposition-side) catalyst tube before the second (synthesis-side) tube; the pairing of numbered experiments is the curator's reading of 'pairs of experiments (Nos. 5 and 5a, 6 and 6a)'"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-4a",
+      "target": "ex:msyn/10.1021-ja01376a015/test/table1-expt-4"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/61",
+      "type": "PRECEDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01376a015/p4/2",
+            "quote": "The gas then passes through heated platinized asbestos in c to remove oxy- gen, then through a liquid-air trap, d, to remove all heavy gases, through the methanol saturator, e, surrounded by a bath of liquid ammonia, through the first catalyst tube,",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01376a015/p4/3",
+            "quote": "The gas then passes through a second catalyst tube, h, and the yield of methanol is caught in a second liquid-air trap, i.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "note": "in one experiment the gas passes the first (decomposition-side) catalyst tube before the second (synthesis-side) tube; the pairing of numbered experiments is the curator's reading of 'pairs of experiments (Nos. 5 and 5a, 6 and 6a)'"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-5a",
+      "target": "ex:msyn/10.1021-ja01376a015/test/table1-expt-5"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/62",
+      "type": "PRECEDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01376a015/p4/2",
+            "quote": "The gas then passes through heated platinized asbestos in c to remove oxy- gen, then through a liquid-air trap, d, to remove all heavy gases, through the methanol saturator, e, surrounded by a bath of liquid ammonia, through the first catalyst tube,",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01376a015/p4/3",
+            "quote": "The gas then passes through a second catalyst tube, h, and the yield of methanol is caught in a second liquid-air trap, i.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "note": "in one experiment the gas passes the first (decomposition-side) catalyst tube before the second (synthesis-side) tube; the pairing of numbered experiments is the curator's reading of 'pairs of experiments (Nos. 5 and 5a, 6 and 6a)'"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-6a",
+      "target": "ex:msyn/10.1021-ja01376a015/test/table1-expt-6"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/64",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01376a015/p7/3",
+            "quote": "The equation expressing the free energy change in the reaction CO + 2H3 = CHsOH is, then, AF = —20,857 + 41.17 log T —0.01423 2 — 54.42 .",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "role": "free energy computed"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/analysis/free-energy-equation",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/65",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01376a015/p7/3",
+            "quote": "The values, in the last column of Table I, of the integration constant, I, of the free energy equation were obtained through use of the best avail- able heat data as given by Smith.16",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/analysis/free-energy-equation",
+      "target": "ex:msyn/10.1021-ja01376a015/test/table1-expt-5"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/66",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01376a015/p7/3",
+            "quote": "The values, in the last column of Table I, of the integration constant, I, of the free energy equation were obtained through use of the best avail- able heat data as given by Smith.16",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/analysis/free-energy-equation",
+      "target": "ex:msyn/10.1021-ja01376a015/test/table1-expt-5a"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/67",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01376a015/p7/3",
+            "quote": "The values, in the last column of Table I, of the integration constant, I, of the free energy equation were obtained through use of the best avail- able heat data as given by Smith.16",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/analysis/free-energy-equation",
+      "target": "ex:msyn/10.1021-ja01376a015/test/table1-expt-6"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/68",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01376a015/p7/3",
+            "quote": "The values, in the last column of Table I, of the integration constant, I, of the free energy equation were obtained through use of the best avail- able heat data as given by Smith.16",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/analysis/free-energy-equation",
+      "target": "ex:msyn/10.1021-ja01376a015/test/table1-expt-6a"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/69",
+      "type": "OF_REACTION",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "p. 9, Fig. 3",
+            "passage": "10.1021-ja01376a015/p9/1",
+            "quote": "Fig. 3.—Comparison of conversions of CO to CH3OH as calculated from thermodynamic data and as obtained practically, at several temperatures and at a total pressure of 204 atm. with a gas contain- ing 26% of CO and 70% of Ha.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "role": "equilibrium conversion computed"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/analysis/high-pressure-conversion-comparison",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/7",
+      "type": "PREPARED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01376a015/p3/2",
+            "quote": "One catalyst used was zinc oxide made from pure, freshly precipitated carbonate.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/sample/zinc-oxide-charge",
+      "target": "ex:msyn/10.1021-ja01376a015/preparation/zno-from-carbonate"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/70",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 10",
+            "passage": "10.1021-ja01376a015/p10/1",
+            "quote": "It is seen from the figure that the practical conver- sions are definitely lower than those predicted from our data, irrespective of any reasonable assumptions as to the fugacities of the gases under these conditions.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/analysis/high-pressure-conversion-comparison",
+      "target": "ex:msyn/10.1021-ja01376a015/analysis/free-energy-equation"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/71",
+      "type": "HAS_INPUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "passage": "10.1021-ja01376a015/p8/2",
+            "quote": "In order to do this it is necessary first to esti- mate the fugacities of the three gases involved.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/analysis/high-pressure-conversion-comparison",
+      "target": "ex:msyn/10.1021-ja01376a015/computation/fugacity-estimates"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/72",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01376a015/p7/2",
+            "quote": "The last two pairs of experiments (Nos. 5 and 5a, 6 and 6a) were performed most\" carefully and obviously came closest to equilibrium.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-5",
+      "target": "ex:msyn/10.1021-ja01376a015/claim/best-k-303-8"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/73",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01376a015/p7/2",
+            "quote": "The last two pairs of experiments (Nos. 5 and 5a, 6 and 6a) were performed most\" carefully and obviously came closest to equilibrium.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-5a",
+      "target": "ex:msyn/10.1021-ja01376a015/claim/best-k-303-8"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/74",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01376a015/p7/2",
+            "quote": "The last two pairs of experiments (Nos. 5 and 5a, 6 and 6a) were performed most\" carefully and obviously came closest to equilibrium.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-6",
+      "target": "ex:msyn/10.1021-ja01376a015/claim/best-k-303-8"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/75",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01376a015/p7/2",
+            "quote": "The last two pairs of experiments (Nos. 5 and 5a, 6 and 6a) were performed most\" carefully and obviously came closest to equilibrium.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-6a",
+      "target": "ex:msyn/10.1021-ja01376a015/claim/best-k-303-8"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/76",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "quote": "As the best value of K we take that from Expts. Nos. 6 and 6a—namely, 5.57 X 10~4 at 303.8°.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-6",
+      "target": "ex:msyn/10.1021-ja01376a015/claim/best-k-303-8"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/77",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "quote": "As the best value of K we take that from Expts. Nos. 6 and 6a—namely, 5.57 X 10~4 at 303.8°.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-6a",
+      "target": "ex:msyn/10.1021-ja01376a015/claim/best-k-303-8"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/78",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 10",
+            "passage": "10.1021-ja01376a015/p10/3",
+            "quote": "The equilibrium between methanol, carbon monoxide and hydro- gen has been experimentally determined at 304° and a total pressure of 1 atmosphere, by a direct method.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/claim/best-k-303-8",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/79",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "passage": "10.1021-ja01376a015/p4/1",
+            "quote": "The vapor pressure of methanol at this tempera- ture was still over 40 times the equilibrium pressure, so that the experi- ments were thus started definitely on the methanol side of equilibrium.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/claim/bracketing-method",
+      "target": "ex:msyn/10.1021-ja01376a015/reactor/two-tube-equilibrium-apparatus"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/8",
+      "type": "PREPARED_BY",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "quote": "Another catalyst was made by adding chromic acid to purified zinc oxide, in the atomic proportions 4Zn:lCr.n",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/sample/promoted-charge",
+      "target": "ex:msyn/10.1021-ja01376a015/preparation/chromic-acid-addition"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/87",
+      "type": "SUPPORTS",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "passage": "10.1021-ja01376a015/p6/1",
+            "quote": "Since it soon became evident that the equilibrium decomposition of methanol at 304.4° was relatively far more than the expected 96.4%, it was necessary when working at atmospheric pressure to deal with rather small quantities of methanol.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-6a",
+      "target": "ex:msyn/10.1021-ja01376a015/claim/decomposition-exceeds-kelley"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/89",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01376a015/p7/4",
+            "quote": "Our data give K = 6.51 X 10-4 at 300°; the equation given by Audibert and Raineau gives K = 11.3 X 10_4; Christiansen’s data give 4.27 X 10-4; and Kelley’s data give 8.2 X 10-2.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/analysis/free-energy-equation",
+      "target": "ex:msyn/10.1021-ja01376a015/claim/comparison-with-other-constants"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/9",
+      "type": "PREPARED_FROM",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "passage": "10.1021-ja01376a015/p3/2",
+            "quote": "One catalyst used was zinc oxide made from pure, freshly precipitated carbonate.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ],
+        "grade": "pure, freshly precipitated",
+        "role": "precursor"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/sample/zinc-oxide-charge",
+      "target": "ex:msyn/10.1021-ja01376a015/species/freshly-precipitated-carbonate"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/90",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "passage": "10.1021-ja01376a015/p7/4",
+            "quote": "Our data give K = 6.51 X 10-4 at 300°; the equation given by Audibert and Raineau gives K = 11.3 X 10_4; Christiansen’s data give 4.27 X 10-4; and Kelley’s data give 8.2 X 10-2.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/claim/comparison-with-other-constants",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/91",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "passage": "10.1021-ja01376a015/p8/1",
+            "quote": "equilibrium constants calculated without the use of fugacities, their con- stants would come out too high.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/hypothesis/audibert-raineau-too-high",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/92",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 9",
+            "passage": "10.1021-ja01376a015/p9/2",
+            "quote": "This, in each case, results in larger prac- tical yields of methanol than would be predicted from the pressures.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/computation/fugacity-estimates",
+      "target": "ex:msyn/10.1021-ja01376a015/claim/fugacity-effect-on-yields"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/93",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 9",
+            "passage": "10.1021-ja01376a015/p9/2",
+            "quote": "This, in each case, results in larger prac- tical yields of methanol than would be predicted from the pressures.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/claim/fugacity-effect-on-yields",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/94",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 10",
+            "passage": "10.1021-ja01376a015/p10/1",
+            "quote": "It is seen from the figure that the practical conver- sions are definitely lower than those predicted from our data, irrespective of any reasonable assumptions as to the fugacities of the gases under these conditions.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/analysis/high-pressure-conversion-comparison",
+      "target": "ex:msyn/10.1021-ja01376a015/claim/practical-below-predicted"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/95",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 10",
+            "passage": "10.1021-ja01376a015/p10/1",
+            "quote": "It is seen from the figure that the practical conver- sions are definitely lower than those predicted from our data, irrespective of any reasonable assumptions as to the fugacities of the gases under these conditions.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/claim/practical-below-predicted",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/96",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 10",
+            "passage": "10.1021-ja01376a015/p10/2",
+            "quote": "If this were taken into account, the practical yields would be somewhat closer to the theoretical.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/hypothesis/side-reactions-lower-reactants",
+      "target": "ex:msyn/10.1021-ja01376a015/analysis/high-pressure-conversion-comparison"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/97",
+      "type": "CONCLUDES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 10",
+            "passage": "10.1021-ja01376a015/p10/2",
+            "quote": "it would seem that the heat data we have used in the equa- tion giving the temperature function of the free energy are not seriously in error, since the theoretical and experimental curves parallel each other between 300 and 400°.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/analysis/high-pressure-conversion-comparison",
+      "target": "ex:msyn/10.1021-ja01376a015/claim/heat-data-not-seriously-in-error"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/98",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 10",
+            "passage": "10.1021-ja01376a015/p10/2",
+            "quote": "it would seem that the heat data we have used in the equa- tion giving the temperature function of the free energy are not seriously in error, since the theoretical and experimental curves parallel each other between 300 and 400°.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/claim/heat-data-not-seriously-in-error",
+      "target": "ex:msyn/10.1021-ja01376a015/analysis/free-energy-equation"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/link/99",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 10",
+            "passage": "10.1021-ja01376a015/p10/3",
+            "quote": "the thermodynamic data here presented, together with estimated fugacities, will probably give results which, at present, are sufficient for all practical purposes.",
+            "source": "ex:msyn/source/10.1021-ja01376a015"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/claim/sufficient-for-practice",
+      "target": "ex:msyn/10.1021-ja01376a015/analysis/free-energy-equation"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/preparation/chromic-acid-addition/reported-in/10.1021-ja01376a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/preparation/chromic-acid-addition",
+      "target": "ex:msyn/source/10.1021-ja01376a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/preparation/zno-from-carbonate/reported-in/10.1021-ja01376a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/preparation/zno-from-carbonate",
+      "target": "ex:msyn/source/10.1021-ja01376a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/reactor/two-tube-equilibrium-apparatus/reported-in/10.1021-ja01376a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4",
+          "p. 4, Fig. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/reactor/two-tube-equilibrium-apparatus",
+      "target": "ex:msyn/source/10.1021-ja01376a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/sample/promoted-charge/reported-in/10.1021-ja01376a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/sample/promoted-charge",
+      "target": "ex:msyn/source/10.1021-ja01376a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/sample/zinc-oxide-charge/reported-in/10.1021-ja01376a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/sample/zinc-oxide-charge",
+      "target": "ex:msyn/source/10.1021-ja01376a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/species/chromic-acid/reported-in/10.1021-ja01376a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/species/chromic-acid",
+      "target": "ex:msyn/source/10.1021-ja01376a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/species/freshly-precipitated-carbonate/reported-in/10.1021-ja01376a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/species/freshly-precipitated-carbonate",
+      "target": "ex:msyn/source/10.1021-ja01376a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/test/table1-expt-1/reported-in/10.1021-ja01376a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6",
+          "p. 6, Table I",
+          "p. 6, Table I, expt. 1"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-1",
+      "target": "ex:msyn/source/10.1021-ja01376a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/test/table1-expt-2/reported-in/10.1021-ja01376a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6",
+          "p. 6, Table I",
+          "p. 6, Table I, expt. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-2",
+      "target": "ex:msyn/source/10.1021-ja01376a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/test/table1-expt-3/reported-in/10.1021-ja01376a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6",
+          "p. 6, Table I",
+          "p. 6, Table I, expt. 3"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-3",
+      "target": "ex:msyn/source/10.1021-ja01376a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/test/table1-expt-4/reported-in/10.1021-ja01376a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6",
+          "p. 6, Table I",
+          "p. 6, Table I, expt. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-4",
+      "target": "ex:msyn/source/10.1021-ja01376a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/test/table1-expt-4a/reported-in/10.1021-ja01376a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6",
+          "p. 6, Table I",
+          "p. 6, Table I, expt. 4a"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-4a",
+      "target": "ex:msyn/source/10.1021-ja01376a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/test/table1-expt-5/reported-in/10.1021-ja01376a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6",
+          "p. 6, Table I",
+          "p. 6, Table I, expt. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-5",
+      "target": "ex:msyn/source/10.1021-ja01376a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/test/table1-expt-5a/reported-in/10.1021-ja01376a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6",
+          "p. 6, Table I",
+          "p. 6, Table I, expt. 5a"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-5a",
+      "target": "ex:msyn/source/10.1021-ja01376a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/test/table1-expt-6/reported-in/10.1021-ja01376a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6",
+          "p. 6, Table I",
+          "p. 6, Table I, expt. 6"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-6",
+      "target": "ex:msyn/source/10.1021-ja01376a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/test/table1-expt-6a/reported-in/10.1021-ja01376a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 6",
+          "p. 6, Table I",
+          "p. 6, Table I, expt. 6a"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/test/table1-expt-6a",
+      "target": "ex:msyn/source/10.1021-ja01376a015"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01376a015/treatment/evacuation/reported-in/10.1021-ja01376a015",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 7"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01376a015/treatment/evacuation",
+      "target": "ex:msyn/source/10.1021-ja01376a015"
+    },
+    {
+      "id": "ex:msyn/source/10.1021-ja01376a015/authored-by/1",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 1,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/10.1021-ja01376a015",
+      "target": "ex:msyn/person/david-f-smith"
+    },
+    {
+      "id": "ex:msyn/source/10.1021-ja01376a015/authored-by/2",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 2,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/10.1021-ja01376a015",
+      "target": "ex:msyn/person/briant-f-branting"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/10.1021-ja01376a015"
+}

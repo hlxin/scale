@@ -61,7 +61,9 @@ Curated records cite their sources with short verbatim excerpts. The policy, as 
 - **The cap.** For `restricted` and `in_copyright` sources each quoted text (`quote`, `transcription`,
   `second_reading`) is at most 300 characters, and the distinct quoted characters of one source are at most
   4,000 and at most 10 % of `text_chars` when it is known. Public-domain, open and synthetic sources have
-  no cap; their quotes are still only text found verbatim.
+  no cap; their quotes are still only text found verbatim. A rights file's `limits: {quote_chars, source_chars}`
+  and a source's own `quote_chars` and `source_chars` only lower the cap; every graph in `graphs/` sets both to 0, so
+  it quotes no text of a source in copyright.
 - **Free text.** Claim statements, names and notes are the curator's own words and do not copy an
   in-copyright source beyond a short phrase (a curation rule, not machine-checked without the text).
 - **Withheld text.** Text beyond the cap is withheld: the evidence item keeps its source, locator and

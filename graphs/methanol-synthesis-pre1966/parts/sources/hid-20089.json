@@ -1,0 +1,862 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/hid-20089/catalyst/cobalt-ft-reference",
+      "label": "Catalyst",
+      "props": {
+        "name": "cobalt catalyst (referred to for comparison)",
+        "catalyst_family": "metal",
+        "description": "Mentioned only as the comparison; composition not given.",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:12c3f5a912ae6fc040088e32b2bd7c94f575233ec654748b5e590be2c6a0abef chars:98",
+            "passage": "hid-20089/p4/1",
+            "source": "ex:msyn/source/hid-20089"
+          }
+        ],
+        "generality": "kind"
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20089/catalyst/iron-ft-general",
+      "label": "Catalyst",
+      "props": {
+        "name": "iron catalyst (Dr. Michael's methods, general)",
+        "catalyst_family": "metal",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:12c3f5a912ae6fc040088e32b2bd7c94f575233ec654748b5e590be2c6a0abef chars:98",
+            "passage": "hid-20089/p4/1",
+            "source": "ex:msyn/source/hid-20089"
+          }
+        ],
+        "generality": "kind"
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20089/claim/iron-runaway-carbon",
+      "label": "Claim",
+      "props": {
+        "name": "The iron catalyst, more than the cobalt catalyst, is subject to run-away reaction and to t",
+        "claim_kind": "comparison",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:7a300128f8760296b2ae6bcd820a230a0fa19c0c9883c4b448494dd29bb5ab80 chars:147",
+            "passage": "hid-20089/p4/1",
+            "source": "ex:msyn/source/hid-20089"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "statement": "The iron catalyst, more than the cobalt catalyst, is subject to run-away reaction and to the formation of carbon on the catalyst, so special precautions are required."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20089/claim/iron-vs-cobalt-advantages",
+      "label": "Claim",
+      "props": {
+        "name": "The iron catalyst was stated to have these advantages over the cobalt catalyst: the gasoli",
+        "claim_kind": "comparison",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:12c3f5a912ae6fc040088e32b2bd7c94f575233ec654748b5e590be2c6a0abef chars:98",
+            "passage": "hid-20089/p4/1",
+            "source": "ex:msyn/source/hid-20089"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:922e1ad4565911a1e09df318c62301f9b454e15bf5985f2a85414a1e2c844df7 chars:84",
+            "passage": "hid-20089/p4/1",
+            "source": "ex:msyn/source/hid-20089"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "statement": "The iron catalyst was stated to have these advantages over the cobalt catalyst: the gasoline is better, a higher concentration of olefins is formed, and the process is cheaper."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20089/claim/mo-for-methanol-synthesis",
+      "label": "Claim",
+      "props": {
+        "name": "The conversion of methane with oxygen has been carried out during the last several years f",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 18",
+            "note": "quote withheld: sha256:32b2564a5242d44d17a22cb50aab4e252b486a27aec83d32935e1b295713b511 chars:55",
+            "passage": "hid-20089/p18/1",
+            "source": "ex:msyn/source/hid-20089"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 18",
+            "note": "quote withheld: sha256:bc284bb39ef966b6668375d208b0a73d62adb1030ee82b07ea0cd54443b464fc chars:44",
+            "passage": "hid-20089/p18/2",
+            "source": "ex:msyn/source/hid-20089"
+          }
+        ],
+        "inference_type": "observational",
+        "statement": "The conversion of methane with oxygen has been carried out during the last several years for the production of hydrogen for the ammonia and methanol synthesis."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20089/claim/mo-methanol-feed-low-n2",
+      "label": "Claim",
+      "props": {
+        "name": "When gas is manufactured for the methanol synthesis, only oxygen is used and the feed gas ",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 23",
+            "note": "quote withheld: sha256:f6d9eecf15ac616826dfec2c1085876d6a824161e17c3e1bb42f9654ff2851cf chars:94",
+            "passage": "hid-20089/p23/1",
+            "source": "ex:msyn/source/hid-20089"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "statement": "When gas is manufactured for the methanol synthesis, only oxygen is used and the feed gas must be low in nitrogen."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20089/claim/nickel-nitrate-less-carbon",
+      "label": "Claim",
+      "props": {
+        "name": "A small quantity of nickel nitrate solution is injected into the combustion space to decre",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 22",
+            "note": "quote withheld: sha256:e29f978762220529e087291267c066206683ce97e5a75433006a99d5e3fa18b0 chars:142",
+            "passage": "hid-20089/p22/2",
+            "source": "ex:msyn/source/hid-20089"
+          }
+        ],
+        "inference_type": "expert_opinion",
+        "statement": "A small quantity of nickel nitrate solution is injected into the combustion space to decrease the carbon formation."
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20089/reaction/fischer-tropsch-iron",
+      "label": "Reaction",
+      "props": {
+        "name": "Fischer-Tropsch synthesis over iron catalysts (hydrocarbons and oxygenates from CO and H2)",
+        "balance_status": "not_reported",
+        "description": "Source-specific: the synthesis gives hydrocarbons (gas, gasoline, gas oil, paraffin) and oxygenates, among them alcohols including methanol; no equation is given.",
+        "direction": "forward",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "OCR 'Trepsch' = Tropsch; quote withheld: sha256:d8cd7cdf829d81890afb100bf7a099602f123db147d10a2bf58aaea3c3aed894 chars:71",
+            "passage": "hid-20089/p12/1",
+            "source": "ex:msyn/source/hid-20089"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 13",
+            "note": "quote withheld: sha256:f8212137cfbdecee0682210e0707318dd4924d3e2b29646287bc268eea8c7228 chars:38",
+            "passage": "hid-20089/p13/3",
+            "source": "ex:msyn/source/hid-20089"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20089/reaction/methane-oxygen-conversion",
+      "label": "Reaction",
+      "props": {
+        "name": "conversion of methane with oxygen to CO and H2 (first, non-catalytic stage)",
+        "balance_status": "not_reported",
+        "description": "Source-specific. The printed equation is garbled in the OCR text and is not transcribed as an equation here.",
+        "direction": "forward",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 18",
+            "note": "quote withheld: sha256:32b2564a5242d44d17a22cb50aab4e252b486a27aec83d32935e1b295713b511 chars:55",
+            "passage": "hid-20089/p18/1",
+            "source": "ex:msyn/source/hid-20089"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 18",
+            "note": "OCR of the printed equation; probably CH4 + 1/2 O2 = CO + 2 H2 + 8 kcal, but the oxygen coefficient is illegible; quote withheld: sha256:5cf36580dfc67784160e0f3a2036d9c5c95c07e7780afd4980fe954108009d33 chars:22",
+            "passage": "hid-20089/p18/2",
+            "source": "ex:msyn/source/hid-20089"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20089/reactor/cylindrical-unit-proposed",
+      "label": "Reactor",
+      "props": {
+        "name": "proposed large-scale unit of cylindrical construction, alternating catalyst and condenser sections in one container (not built)",
+        "description": "cylindrical construction; alternating sections of catalyst and condensers in one container; proposed but not built, due to the war",
+        "design_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "quote withheld: sha256:c7f30552e3b4589776a26fd9792dfcc125b3e92fd447f01bc5c0a0a972187640 chars:110",
+            "passage": "hid-20089/p5/3",
+            "source": "ex:msyn/source/hid-20089"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "'mit' = unit; OCR 'Fig. 5' probably Fig. 3; quote withheld: sha256:a2e954756b6332b034bca56df579cbfa4f9645677029b606526a92692a89dc17 chars:89",
+            "passage": "hid-20089/p5/3",
+            "source": "ex:msyn/source/hid-20089"
+          }
+        ],
+        "reactor_kind": "not_reported"
+      }
+    },
+    {
+      "id": "ex:msyn/hid-20089/unit/cylindrical-unit-condensers",
+      "label": "ProcessUnit",
+      "props": {
+        "name": "condenser sections of the proposed cylindrical unit (not built)",
+        "design_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "'mit' = unit; OCR 'Fig. 5' probably Fig. 3; quote withheld: sha256:a2e954756b6332b034bca56df579cbfa4f9645677029b606526a92692a89dc17 chars:89",
+            "passage": "hid-20089/p5/3",
+            "source": "ex:msyn/source/hid-20089"
+          }
+        ],
+        "unit_kind": "condenser"
+      }
+    },
+    {
+      "id": "ex:msyn/source/hid-20089",
+      "label": "Source",
+      "props": {
+        "name": "FIAT Final Report No. 426: Interrogation of Dr. Pier and Staff, I.G. Farbenindustrie A.G., Ludwigshafen-Oppau",
+        "kind": "article",
+        "description": "Published 1945 (publication year (bibliography)); in scope: before the 1966-01-01 cutoff. Text: 42 pages ocr (tesseract 5.5.3 (eng, 300 dpi, 1 column)). Text not redistributed.",
+        "licence": "no verified publisher licence; short excerpts quoted as evidence under fair use",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "FIAT Final Report No. 426: Interrogation of Dr. Pier and Staff, I.G. Farbenindustrie A.G., Ludwigshafen-Oppau",
+        "venue": "FIAT Final Report 426 (fischer-tropsch.org)",
+        "year": 1945
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/hid-20089/catalyst/cobalt-ft-reference/reported-in/hid-20089",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20089/catalyst/cobalt-ft-reference",
+      "target": "ex:msyn/source/hid-20089"
+    },
+    {
+      "id": "ex:msyn/hid-20089/catalyst/iron-ft-general/reported-in/hid-20089",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20089/catalyst/iron-ft-general",
+      "target": "ex:msyn/source/hid-20089"
+    },
+    {
+      "id": "ex:msyn/hid-20089/claim/iron-runaway-carbon/reported-in/hid-20089",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20089/claim/iron-runaway-carbon",
+      "target": "ex:msyn/source/hid-20089"
+    },
+    {
+      "id": "ex:msyn/hid-20089/claim/iron-vs-cobalt-advantages/reported-in/hid-20089",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 4"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20089/claim/iron-vs-cobalt-advantages",
+      "target": "ex:msyn/source/hid-20089"
+    },
+    {
+      "id": "ex:msyn/hid-20089/claim/mo-for-methanol-synthesis/reported-in/hid-20089",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 18"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20089/claim/mo-for-methanol-synthesis",
+      "target": "ex:msyn/source/hid-20089"
+    },
+    {
+      "id": "ex:msyn/hid-20089/claim/mo-methanol-feed-low-n2/reported-in/hid-20089",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 23"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20089/claim/mo-methanol-feed-low-n2",
+      "target": "ex:msyn/source/hid-20089"
+    },
+    {
+      "id": "ex:msyn/hid-20089/claim/nickel-nitrate-less-carbon/reported-in/hid-20089",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 22"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20089/claim/nickel-nitrate-less-carbon",
+      "target": "ex:msyn/source/hid-20089"
+    },
+    {
+      "id": "ex:msyn/hid-20089/link/1",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5, Reaction Data",
+            "note": "OCR 'Ho' = H2; '435' = 4:5; quote withheld: sha256:fb2a1ad4172e6c9226245626ac657afcc8bc059716560bf49ef63e3bc1fb623f chars:21",
+            "passage": "hid-20089/p5/3",
+            "source": "ex:msyn/source/hid-20089"
+          }
+        ],
+        "phase": "gas",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/hid-20089/reaction/fischer-tropsch-iron",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/hid-20089/link/10",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:4b4c7d1b6218f152bde5d754147416cb1ea571c466d8fcef234136a344525c24 chars:44",
+            "passage": "hid-20089/p4/1",
+            "source": "ex:msyn/source/hid-20089"
+          }
+        ],
+        "role": "active_component"
+      },
+      "source": "ex:msyn/hid-20089/catalyst/cobalt-ft-reference",
+      "target": "ex:msyn/species/cobalt"
+    },
+    {
+      "id": "ex:msyn/hid-20089/link/11",
+      "type": "COMPARED_WITH",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:12c3f5a912ae6fc040088e32b2bd7c94f575233ec654748b5e590be2c6a0abef chars:98",
+            "passage": "hid-20089/p4/1",
+            "source": "ex:msyn/source/hid-20089"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:922e1ad4565911a1e09df318c62301f9b454e15bf5985f2a85414a1e2c844df7 chars:84",
+            "passage": "hid-20089/p4/1",
+            "source": "ex:msyn/source/hid-20089"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20089/catalyst/iron-ft-general",
+      "target": "ex:msyn/hid-20089/catalyst/cobalt-ft-reference"
+    },
+    {
+      "id": "ex:msyn/hid-20089/link/12",
+      "type": "CATALYZES",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 12",
+            "note": "quote withheld: sha256:d8cd7cdf829d81890afb100bf7a099602f123db147d10a2bf58aaea3c3aed894 chars:71",
+            "passage": "hid-20089/p12/1",
+            "source": "ex:msyn/source/hid-20089"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20089/catalyst/iron-ft-general",
+      "target": "ex:msyn/hid-20089/reaction/fischer-tropsch-iron"
+    },
+    {
+      "id": "ex:msyn/hid-20089/link/13",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:12c3f5a912ae6fc040088e32b2bd7c94f575233ec654748b5e590be2c6a0abef chars:98",
+            "passage": "hid-20089/p4/1",
+            "source": "ex:msyn/source/hid-20089"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:922e1ad4565911a1e09df318c62301f9b454e15bf5985f2a85414a1e2c844df7 chars:84",
+            "passage": "hid-20089/p4/1",
+            "source": "ex:msyn/source/hid-20089"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20089/claim/iron-vs-cobalt-advantages",
+      "target": "ex:msyn/hid-20089/catalyst/iron-ft-general"
+    },
+    {
+      "id": "ex:msyn/hid-20089/link/130",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 18",
+            "note": "quote withheld: sha256:32b2564a5242d44d17a22cb50aab4e252b486a27aec83d32935e1b295713b511 chars:55",
+            "passage": "hid-20089/p18/1",
+            "source": "ex:msyn/source/hid-20089"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 18",
+            "note": "quote withheld: sha256:bc284bb39ef966b6668375d208b0a73d62adb1030ee82b07ea0cd54443b464fc chars:44",
+            "passage": "hid-20089/p18/2",
+            "source": "ex:msyn/source/hid-20089"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20089/claim/mo-for-methanol-synthesis",
+      "target": "ex:msyn/hid-20089/reaction/methane-oxygen-conversion"
+    },
+    {
+      "id": "ex:msyn/hid-20089/link/131",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 18",
+            "note": "quote withheld: sha256:32b2564a5242d44d17a22cb50aab4e252b486a27aec83d32935e1b295713b511 chars:55",
+            "passage": "hid-20089/p18/1",
+            "source": "ex:msyn/source/hid-20089"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 18",
+            "note": "quote withheld: sha256:bc284bb39ef966b6668375d208b0a73d62adb1030ee82b07ea0cd54443b464fc chars:44",
+            "passage": "hid-20089/p18/2",
+            "source": "ex:msyn/source/hid-20089"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20089/claim/mo-for-methanol-synthesis",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/hid-20089/link/132",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 23",
+            "note": "quote withheld: sha256:f6d9eecf15ac616826dfec2c1085876d6a824161e17c3e1bb42f9654ff2851cf chars:94",
+            "passage": "hid-20089/p23/1",
+            "source": "ex:msyn/source/hid-20089"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20089/claim/mo-methanol-feed-low-n2",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/hid-20089/link/133",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 23",
+            "note": "quote withheld: sha256:f6d9eecf15ac616826dfec2c1085876d6a824161e17c3e1bb42f9654ff2851cf chars:94",
+            "passage": "hid-20089/p23/1",
+            "source": "ex:msyn/source/hid-20089"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20089/claim/mo-methanol-feed-low-n2",
+      "target": "ex:msyn/species/n2"
+    },
+    {
+      "id": "ex:msyn/hid-20089/link/134",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 23",
+            "note": "quote withheld: sha256:f6d9eecf15ac616826dfec2c1085876d6a824161e17c3e1bb42f9654ff2851cf chars:94",
+            "passage": "hid-20089/p23/1",
+            "source": "ex:msyn/source/hid-20089"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20089/claim/mo-methanol-feed-low-n2",
+      "target": "ex:msyn/hid-20089/reaction/methane-oxygen-conversion"
+    },
+    {
+      "id": "ex:msyn/hid-20089/link/14",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:12c3f5a912ae6fc040088e32b2bd7c94f575233ec654748b5e590be2c6a0abef chars:98",
+            "passage": "hid-20089/p4/1",
+            "source": "ex:msyn/source/hid-20089"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:922e1ad4565911a1e09df318c62301f9b454e15bf5985f2a85414a1e2c844df7 chars:84",
+            "passage": "hid-20089/p4/1",
+            "source": "ex:msyn/source/hid-20089"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20089/claim/iron-vs-cobalt-advantages",
+      "target": "ex:msyn/hid-20089/catalyst/cobalt-ft-reference"
+    },
+    {
+      "id": "ex:msyn/hid-20089/link/146",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 22",
+            "note": "quote withheld: sha256:e29f978762220529e087291267c066206683ce97e5a75433006a99d5e3fa18b0 chars:142",
+            "passage": "hid-20089/p22/2",
+            "source": "ex:msyn/source/hid-20089"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20089/claim/nickel-nitrate-less-carbon",
+      "target": "ex:msyn/species/nino32"
+    },
+    {
+      "id": "ex:msyn/hid-20089/link/147",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 22",
+            "note": "quote withheld: sha256:e29f978762220529e087291267c066206683ce97e5a75433006a99d5e3fa18b0 chars:142",
+            "passage": "hid-20089/p22/2",
+            "source": "ex:msyn/source/hid-20089"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20089/claim/nickel-nitrate-less-carbon",
+      "target": "ex:msyn/species/carbon"
+    },
+    {
+      "id": "ex:msyn/hid-20089/link/15",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:7a300128f8760296b2ae6bcd820a230a0fa19c0c9883c4b448494dd29bb5ab80 chars:147",
+            "passage": "hid-20089/p4/1",
+            "source": "ex:msyn/source/hid-20089"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20089/claim/iron-runaway-carbon",
+      "target": "ex:msyn/hid-20089/catalyst/iron-ft-general"
+    },
+    {
+      "id": "ex:msyn/hid-20089/link/16",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:7a300128f8760296b2ae6bcd820a230a0fa19c0c9883c4b448494dd29bb5ab80 chars:147",
+            "passage": "hid-20089/p4/1",
+            "source": "ex:msyn/source/hid-20089"
+          }
+        ]
+      },
+      "source": "ex:msyn/hid-20089/claim/iron-runaway-carbon",
+      "target": "ex:msyn/species/carbon"
+    },
+    {
+      "id": "ex:msyn/hid-20089/link/183",
+      "type": "FEEDS_INTO",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "'mit' = unit; OCR 'Fig. 5' probably Fig. 3; quote withheld: sha256:a2e954756b6332b034bca56df579cbfa4f9645677029b606526a92692a89dc17 chars:89",
+            "passage": "hid-20089/p5/3",
+            "source": "ex:msyn/source/hid-20089"
+          }
+        ],
+        "order": 1,
+        "stream": "gas from a catalyst section to the next condenser section (alternating sections in one container)"
+      },
+      "source": "ex:msyn/hid-20089/reactor/cylindrical-unit-proposed",
+      "target": "ex:msyn/hid-20089/unit/cylindrical-unit-condensers"
+    },
+    {
+      "id": "ex:msyn/hid-20089/link/2",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 5, Reaction Data",
+            "note": "OCR 'Ho' = H2; quote withheld: sha256:fb2a1ad4172e6c9226245626ac657afcc8bc059716560bf49ef63e3bc1fb623f chars:21",
+            "passage": "hid-20089/p5/3",
+            "source": "ex:msyn/source/hid-20089"
+          }
+        ],
+        "phase": "gas",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/hid-20089/reaction/fischer-tropsch-iron",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/hid-20089/link/3",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 13",
+            "note": "quote withheld: sha256:f8212137cfbdecee0682210e0707318dd4924d3e2b29646287bc268eea8c7228 chars:38",
+            "passage": "hid-20089/p13/3",
+            "source": "ex:msyn/source/hid-20089"
+          }
+        ],
+        "role": "product"
+      },
+      "source": "ex:msyn/hid-20089/reaction/fischer-tropsch-iron",
+      "target": "ex:msyn/species/ch3oh"
+    },
+    {
+      "id": "ex:msyn/hid-20089/link/4",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 7",
+            "note": "quote withheld: sha256:776fbc04987279daa9f225e224fe78b30c5d6395c3403392c1b627acc1144d56 chars:69",
+            "passage": "hid-20089/p7/1",
+            "source": "ex:msyn/source/hid-20089"
+          }
+        ],
+        "role": "product"
+      },
+      "source": "ex:msyn/hid-20089/reaction/fischer-tropsch-iron",
+      "target": "ex:msyn/species/ch4"
+    },
+    {
+      "id": "ex:msyn/hid-20089/link/5",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 18",
+            "note": "quote withheld: sha256:32b2564a5242d44d17a22cb50aab4e252b486a27aec83d32935e1b295713b511 chars:55",
+            "passage": "hid-20089/p18/1",
+            "source": "ex:msyn/source/hid-20089"
+          }
+        ],
+        "phase": "gas",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/hid-20089/reaction/methane-oxygen-conversion",
+      "target": "ex:msyn/species/ch4"
+    },
+    {
+      "id": "ex:msyn/hid-20089/link/6",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 18",
+            "note": "quote withheld: sha256:32b2564a5242d44d17a22cb50aab4e252b486a27aec83d32935e1b295713b511 chars:55",
+            "passage": "hid-20089/p18/1",
+            "source": "ex:msyn/source/hid-20089"
+          }
+        ],
+        "phase": "gas",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/hid-20089/reaction/methane-oxygen-conversion",
+      "target": "ex:msyn/species/o2"
+    },
+    {
+      "id": "ex:msyn/hid-20089/link/9",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "quote withheld: sha256:b35a25918c2651b2a0202bd61213a22a9218ece74c4f647730e02f1debca82ed chars:34",
+            "passage": "hid-20089/p4/1",
+            "source": "ex:msyn/source/hid-20089"
+          }
+        ],
+        "role": "active_component"
+      },
+      "source": "ex:msyn/hid-20089/catalyst/iron-ft-general",
+      "target": "ex:msyn/species/iron"
+    },
+    {
+      "id": "ex:msyn/hid-20089/reaction/fischer-tropsch-iron/reported-in/hid-20089",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 12",
+          "p. 13"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20089/reaction/fischer-tropsch-iron",
+      "target": "ex:msyn/source/hid-20089"
+    },
+    {
+      "id": "ex:msyn/hid-20089/reaction/methane-oxygen-conversion/reported-in/hid-20089",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 18"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20089/reaction/methane-oxygen-conversion",
+      "target": "ex:msyn/source/hid-20089"
+    },
+    {
+      "id": "ex:msyn/hid-20089/reactor/cylindrical-unit-proposed/reported-in/hid-20089",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20089/reactor/cylindrical-unit-proposed",
+      "target": "ex:msyn/source/hid-20089"
+    },
+    {
+      "id": "ex:msyn/hid-20089/unit/cylindrical-unit-condensers/reported-in/hid-20089",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 5"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/hid-20089/unit/cylindrical-unit-condensers",
+      "target": "ex:msyn/source/hid-20089"
+    },
+    {
+      "id": "ex:msyn/source/hid-20089/authored-by/1",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 1,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/hid-20089",
+      "target": "ex:msyn/institution/fiat-field-information-agency-technical"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/hid-20089"
+}

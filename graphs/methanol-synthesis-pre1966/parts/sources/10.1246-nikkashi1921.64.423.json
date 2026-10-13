@@ -1,0 +1,123 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/source/10.1246-nikkashi1921.64.423",
+      "label": "Source",
+      "props": {
+        "name": "Studies on the Zinc Catalyst. I",
+        "kind": "article",
+        "description": "Published 1943 (publication year (bibliography)); in scope: before the 1966-01-01 cutoff. Text: 8 pages text_layer. Text not redistributed.",
+        "doi": "10.1246/nikkashi1921.64.423",
+        "licence": "no verified publisher licence; short excerpts quoted as evidence under fair use",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "Studies on the Zinc Catalyst. I",
+        "url": "https://doi.org/10.1246/nikkashi1921.64.423",
+        "venue": "NIPPON KAGAKU KAISHI",
+        "year": 1943
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/reaction/co-methanation/reported-in/10.1246-nikkashi1921.64.423",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, equation (5)"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/reaction/co-methanation",
+      "target": "ex:msyn/source/10.1246-nikkashi1921.64.423"
+    },
+    {
+      "id": "ex:msyn/reaction/dimethyl-ether-formation/reported-in/10.1246-nikkashi1921.64.423",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, equation (4)"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/reaction/dimethyl-ether-formation",
+      "target": "ex:msyn/source/10.1246-nikkashi1921.64.423"
+    },
+    {
+      "id": "ex:msyn/reaction/methanol-decomposition/reported-in/10.1246-nikkashi1921.64.423",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, equation (1)"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/reaction/methanol-decomposition",
+      "target": "ex:msyn/source/10.1246-nikkashi1921.64.423"
+    },
+    {
+      "id": "ex:msyn/reaction/methanol-dehydrogenation-to-formaldehyde/reported-in/10.1246-nikkashi1921.64.423",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, equation (3)"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/reaction/methanol-dehydrogenation-to-formaldehyde",
+      "target": "ex:msyn/source/10.1246-nikkashi1921.64.423"
+    },
+    {
+      "id": "ex:msyn/reaction/water-gas-shift/reported-in/10.1246-nikkashi1921.64.423",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, equation (6)"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/reaction/water-gas-shift",
+      "target": "ex:msyn/source/10.1246-nikkashi1921.64.423"
+    },
+    {
+      "id": "ex:msyn/source/10.1246-nikkashi1921.64.423/authored-by/1",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 1,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/10.1246-nikkashi1921.64.423",
+      "target": "ex:msyn/person/akira-tomita"
+    },
+    {
+      "id": "ex:msyn/species/koh/reported-in/10.1246-nikkashi1921.64.423",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 3, 觸媒製法"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/koh",
+      "target": "ex:msyn/source/10.1246-nikkashi1921.64.423"
+    },
+    {
+      "id": "ex:msyn/species/znoh2/reported-in/10.1246-nikkashi1921.64.423",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2, 觸媒製法"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/znoh2",
+      "target": "ex:msyn/source/10.1246-nikkashi1921.64.423"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/10.1246-nikkashi1921.64.423"
+}

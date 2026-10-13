@@ -1,0 +1,120 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/10.1246-nikkashi1921.65.478/hypothesis/adsorbed-water-remains",
+      "label": "Hypothesis",
+      "props": {
+        "name": "adsorbed water molecules remain on the ZnO surface at reaction temperature",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:6379d65137424fef2345bb770cda5a979c9c6d01562201cdd3e0ed687fc58bf5 chars:73",
+            "passage": "10.1246-nikkashi1921.65.478/p8/2",
+            "source": "ex:msyn/source/10.1246-nikkashi1921.65.478"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:18dcf2ee87c0151ab2ca4d6627155837367bb79d11bcdd77345d80f94773ca75 chars:37",
+            "passage": "10.1246-nikkashi1921.65.478/p8/2",
+            "source": "ex:msyn/source/10.1246-nikkashi1921.65.478"
+          }
+        ],
+        "hypothesis_kind": "auxiliary",
+        "hypothesis_status": "proposed",
+        "note": "inferred from the activated adsorption of H2O on ZnO near 270 °C reported by Taylor and Sickman (cited)",
+        "statement": "Although the hydrated water is lost macroscopically at the methanol decomposition temperatures, adsorbed water molecules probably still exist on the ZnO surface and must also be considered."
+      }
+    },
+    {
+      "id": "ex:msyn/source/10.1246-nikkashi1921.65.478",
+      "label": "Source",
+      "props": {
+        "name": "Studies on the Zinc Catalyst. III",
+        "kind": "article",
+        "description": "Published 1944 (publication year (bibliography)); in scope: before the 1966-01-01 cutoff. Text: 9 pages text_layer. Text not redistributed.",
+        "doi": "10.1246/nikkashi1921.65.478",
+        "licence": "no verified publisher licence; short excerpts quoted as evidence under fair use",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "Studies on the Zinc Catalyst. III",
+        "url": "https://doi.org/10.1246/nikkashi1921.65.478",
+        "venue": "NIPPON KAGAKU KAISHI",
+        "year": 1944
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/10.1246-nikkashi1921.65.478/hypothesis/adsorbed-water-remains/reported-in/10.1246-nikkashi1921.65.478",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 8"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1246-nikkashi1921.65.478/hypothesis/adsorbed-water-remains",
+      "target": "ex:msyn/source/10.1246-nikkashi1921.65.478"
+    },
+    {
+      "id": "ex:msyn/10.1246-nikkashi1921.65.478/link/209",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 8",
+            "note": "quote withheld: sha256:482ce8c5c09ae4aeadccc5449da79fc5841418f632935f71b87204473eb03a4a chars:27",
+            "passage": "10.1246-nikkashi1921.65.478/p8/2",
+            "source": "ex:msyn/source/10.1246-nikkashi1921.65.478"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1246-nikkashi1921.65.478/hypothesis/adsorbed-water-remains",
+      "target": "ex:msyn/species/h2o"
+    },
+    {
+      "id": "ex:msyn/source/10.1246-nikkashi1921.65.478/authored-by/1",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 1,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/10.1246-nikkashi1921.65.478",
+      "target": "ex:msyn/person/akira-tomita"
+    },
+    {
+      "id": "ex:msyn/species/k2co3/reported-in/10.1246-nikkashi1921.65.478",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/k2co3",
+      "target": "ex:msyn/source/10.1246-nikkashi1921.65.478"
+    },
+    {
+      "id": "ex:msyn/species/koh/reported-in/10.1246-nikkashi1921.65.478",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/koh",
+      "target": "ex:msyn/source/10.1246-nikkashi1921.65.478"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/10.1246-nikkashi1921.65.478"
+}

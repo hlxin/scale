@@ -1,0 +1,194 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/10.1021-ja01629a058/claim/copper-gasket-dissolved",
+      "label": "Claim",
+      "props": {
+        "name": "0.1 to 0.2 g of the copper gasket dissolved and deposited as metallic copper",
+        "claim_kind": "finding",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:bff961297f21ba711e9ecc0d7e045fb99191e8418e4ac140c47a06f331a7b76f chars:105",
+            "source": "ex:msyn/source/10.1021-ja01629a058"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:907e16f8284cf47ae9684ad4992e051755689640a885c18826d7dd8d09efc096 chars:105",
+            "passage": "10.1021-ja01629a058/p2/1",
+            "source": "ex:msyn/source/10.1021-ja01629a058"
+          }
+        ],
+        "inference_type": "observational",
+        "statement": "In each oxo reaction 0.1 to 0.2 g of the copper gasket dissolved and deposited as metallic copper in the top of the autoclave; some of the oxo reactions went more slowly."
+      }
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01629a058/claim/possible-acetic-acid-artifact",
+      "label": "Claim",
+      "props": {
+        "name": "oxidation of the n-propyl alcohol may have yielded some acetic acid",
+        "claim_kind": "data_quality",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:b6a28d29b04038b499315f884c8729e19778306c546c81c93b5e9f63e1772b2d chars:99",
+            "passage": "10.1021-ja01629a058/p2/4",
+            "source": "ex:msyn/source/10.1021-ja01629a058"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:57a9b94004b6eb4fe92c8cbdb556ecbd4bbd9cc3337c853312bb4b9eb7a4e6eb chars:96",
+            "passage": "10.1021-ja01629a058/p2/4",
+            "source": "ex:msyn/source/10.1021-ja01629a058"
+          }
+        ],
+        "inference_type": "theoretical",
+        "statement": "The oxidation of the n-propyl alcohol may have yielded some acetic acid as well as propionic acid; if not removed in recrystallization, activity of its acid carbon would appear as activity of the 1-carbon of the propyl alcohol, while its methyl carbon would be discarded and not affect the results."
+      }
+    },
+    {
+      "id": "ex:msyn/source/10.1021-ja01629a058",
+      "label": "Source",
+      "props": {
+        "name": "The Reaction of Labeled Methanol with Carbon Monoxide and Hydrogen",
+        "kind": "article",
+        "description": "Published 1955 (publication year (bibliography)); in scope: before the 1966-01-01 cutoff. Text: 2 pages text_layer. Text not redistributed.",
+        "doi": "10.1021/ja01629a058",
+        "licence": "no verified publisher licence; short excerpts quoted as evidence under fair use",
+        "origin": "curated",
+        "stewardship": {
+          "access": "public",
+          "note": "bibliographic record"
+        },
+        "title": "The Reaction of Labeled Methanol with Carbon Monoxide and Hydrogen",
+        "url": "https://doi.org/10.1021/ja01629a058",
+        "venue": "Journal of the American Chemical Society",
+        "year": 1955
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/10.1021-ja01629a058/claim/copper-gasket-dissolved/reported-in/10.1021-ja01629a058",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01629a058/claim/copper-gasket-dissolved",
+      "target": "ex:msyn/source/10.1021-ja01629a058"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01629a058/claim/possible-acetic-acid-artifact/reported-in/10.1021-ja01629a058",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/10.1021-ja01629a058/claim/possible-acetic-acid-artifact",
+      "target": "ex:msyn/source/10.1021-ja01629a058"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01629a058/link/50",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:b6a28d29b04038b499315f884c8729e19778306c546c81c93b5e9f63e1772b2d chars:99",
+            "passage": "10.1021-ja01629a058/p2/4",
+            "source": "ex:msyn/source/10.1021-ja01629a058"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:57a9b94004b6eb4fe92c8cbdb556ecbd4bbd9cc3337c853312bb4b9eb7a4e6eb chars:96",
+            "passage": "10.1021-ja01629a058/p2/4",
+            "source": "ex:msyn/source/10.1021-ja01629a058"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01629a058/claim/possible-acetic-acid-artifact",
+      "target": "ex:msyn/species/c3h7oh"
+    },
+    {
+      "id": "ex:msyn/10.1021-ja01629a058/link/51",
+      "type": "ABOUT",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "quote withheld: sha256:bff961297f21ba711e9ecc0d7e045fb99191e8418e4ac140c47a06f331a7b76f chars:105",
+            "source": "ex:msyn/source/10.1021-ja01629a058"
+          }
+        ]
+      },
+      "source": "ex:msyn/10.1021-ja01629a058/claim/copper-gasket-dissolved",
+      "target": "ex:msyn/species/copper"
+    },
+    {
+      "id": "ex:msyn/source/10.1021-ja01629a058/authored-by/1",
+      "type": "AUTHORED_BY",
+      "props": {
+        "origin": "curated",
+        "position": 1,
+        "role": "author"
+      },
+      "source": "ex:msyn/source/10.1021-ja01629a058",
+      "target": "ex:msyn/person/g-r-burns"
+    },
+    {
+      "id": "ex:msyn/species/c2h4/reported-in/10.1021-ja01629a058",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/c2h4",
+      "target": "ex:msyn/source/10.1021-ja01629a058"
+    },
+    {
+      "id": "ex:msyn/species/c3h7oh/reported-in/10.1021-ja01629a058",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/c3h7oh",
+      "target": "ex:msyn/source/10.1021-ja01629a058"
+    },
+    {
+      "id": "ex:msyn/species/ch3cooh/reported-in/10.1021-ja01629a058",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "p. 2"
+        ],
+        "origin": "curated"
+      },
+      "source": "ex:msyn/species/ch3cooh",
+      "target": "ex:msyn/source/10.1021-ja01629a058"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source": "ex:msyn/source/10.1021-ja01629a058"
+}
