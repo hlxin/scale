@@ -99,7 +99,7 @@ TOOLS: list[dict] = [
     },
     {
         "name": "scale_source_start",
-        "description": "Start curating one publication into a scale-graph document (a subgraph to study one paper, "
+        "description": "Start curating one publication into a scale-catal document (a subgraph to study one paper, "
                        "patent or report). Resolves a DOI's metadata (Crossref) and, with a contact email, downloads an "
                        "open-access PDF only when it carries an open licence; reads a PDF's page texts (or takes the text); "
                        "writes a working folder with the graph to fill (pinned schema, Source record, stewardship), the "

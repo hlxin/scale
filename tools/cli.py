@@ -1151,7 +1151,7 @@ def build_parser() -> argparse.ArgumentParser:
     sp = add("access", cmd_evidence_access, "every committed scale-catal document (or the given ones) states access public: graph and records (a missing access is not public)", ev)
     sp.add_argument("files", nargs="*")
 
-    cu = sub.add_parser("source", help="one publication (a DOI or a PDF) into a scale-graph document: start a working "
+    cu = sub.add_parser("source", help="one publication (a DOI or a PDF) into a scale-catal document: start a working "
                         "folder, check the graph an agent fills, finish what can be shared").add_subparsers(dest="sub", required=True)
     sp = add("start", cmd_source_start, "resolve a DOI (Crossref; an open-access PDF via Unpaywall with --email), read the "
              "PDF's page texts, and write the folder: the graph to fill (pinned schema, Source record), rights, BRIEF.md", cu)
