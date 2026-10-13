@@ -7,6 +7,21 @@ with spare compute; the skills and the workflow for that come later.
 
 ## Adding a source
 
+From the web page ([`service/`](../../service/README.md)): curate the publication, then **Contribute to the commons**.
+The service checks that the source is not here already, on main or in an open contribution, then opens a pull request
+that adds it. The pull request is the bot's, and it credits the contributor. From the command line:
+
+```bash
+scale source start --doi DOI --out W        # then curate W/<slug>.graph.json and scale source check W
+scale graph contribute W/<slug>.graph.json --to graphs/catal-commons            # already here? what it would add
+scale graph contribute W/<slug>.graph.json --to graphs/catal-commons --write    # write the files, then a pull request
+```
+
+`scale graph contribute` refuses a source already here: the same DOI, identifier, text digest, or title and year.
+It moves the ids into `scale:commons`, leaves out the one-source graph's steward and project, adds the source's
+rights entry, caps its quotes under the limits here, and merges its evidence into the shared records it reaches. It
+writes only when the commons builds and validates with the source. By hand, the steps are:
+
 1. Curate the source with the `curate-source` skill into a scale-catal document (`ns` `scale:commons`: the source is
    `scale:commons/source/<slug>`, its records `scale:commons/<slug>/...`), reusing the ids of the shared records
    already here (`parts/shared.json`).

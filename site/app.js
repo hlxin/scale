@@ -10,6 +10,7 @@ const store = {
 };
 let token = store.get("scale-token");
 let graph = null;
+let receipt = null;   // the service's receipt for a graph it just curated for this user: only such a graph is contributed
 let cy = null;
 
 const PALETTE = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22",
@@ -97,7 +98,7 @@ async function follow(id) {
     if (j.state === "done") {
       job.innerHTML += `<div class="small">${esc(j.summary || "")}</div>` +
         (j.withheld ? `<div class="small muted">${j.withheld} quotes withheld for the source's rights (sha256 kept).</div>` : "");
-      show(j.graph);
+      show(j.graph, j.receipt);
       break;
     }
     if (j.state === "failed") {
@@ -120,9 +121,12 @@ $("example").onclick = async () => {
 };
 
 // ------------------------------------------------------------------------------------------- the graph
-function show(doc) {
+function show(doc, signed = null) {
   if (!doc || !Array.isArray(doc.nodes) || !Array.isArray(doc.links)) { alert("not a scale-catal document"); return; }
   graph = doc;
+  receipt = signed;
+  $("contribute").classList.toggle("hidden", !receipt);
+  $("contribution").classList.add("hidden");
   $("graph-title").textContent = `· ${doc.graph?.title || ""} (${doc.nodes.length} records, ${doc.links.length} links)`;
   $("download").disabled = false;
   const labels = [...new Set(doc.nodes.map((n) => n.label))].sort();
@@ -192,6 +196,48 @@ $("download").onclick = () => {
   const id = (graph.graph?.graph_id || "graph").split("/").pop();
   a.download = `${id}.graph.json`;
   a.click();
+};
+
+// ------------------------------------------------------------------------------------------- contributing
+$("contribute").onclick = async () => {
+  const box = $("contribution");
+  box.classList.remove("hidden");
+  box.innerHTML = `<span class="muted">Checking catal-commons on main and the open contributions…</span>`;
+  try {
+    const r = await call("POST", "/contribute/check", { graph, receipt });
+    if (r.already) {
+      box.innerHTML = `This source is already in catal-commons: ` + r.already.map((h) =>
+        `<a href="${esc(h.url)}" target="_blank" rel="noopener">${esc(h.source)}</a> (the same ${esc(h.by.join(", "))})`).join("; ") + ".";
+      return;
+    }
+    if (r.proposed) {
+      box.innerHTML = `This source is already proposed: <a href="${esc(r.proposed.url)}" target="_blank" rel="noopener">#${esc(r.proposed.number)} ${esc(r.proposed.title)}</a>.`;
+      return;
+    }
+    const p = r.new;
+    box.innerHTML = `<div class="state">Not in the commons yet</div>
+      <div class="small">It would add <code>${esc(p.source)}</code>: ${esc(p.records.nodes)} records and ${esc(p.records.links)} links,
+      ${esc(p.shared_added.length)} new shared records and new evidence on ${esc(p.shared_with_new_evidence.length)} shared ones.
+      Rights: ${esc(p.class)}; quotes kept ${esc(p.quotes.kept)}, withheld ${esc(p.quotes.withheld)}
+      (the commons quotes no text of a source in copyright).</div>
+      <div class="small muted">Files: ${p.files.map(esc).join(", ")}</div>
+      <p class="small">A pull request is opened by the SCALE bot and credits you; a reviewer checks it against the source
+      before it is merged.</p>
+      <button id="contribute-go" class="primary">Open the pull request</button>`;
+    $("contribute-go").onclick = async () => {
+      $("contribute-go").disabled = true;
+      try {
+        const o = await call("POST", "/contribute", { graph, receipt });
+        box.innerHTML = `Opened <a href="${esc(o.pull_request.url)}" target="_blank" rel="noopener">pull request #${esc(o.pull_request.number)}</a>. Thank you.`;
+        receipt = null;
+        $("contribute").classList.add("hidden");
+      } catch (e) {
+        box.innerHTML += `<div class="err">${esc(e.message)}</div>`;
+      }
+    };
+  } catch (e) {
+    box.innerHTML = `<span class="err">${esc(e.message)}</span>`;
+  }
 };
 
 function focus(id) {

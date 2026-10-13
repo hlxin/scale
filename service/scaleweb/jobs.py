@@ -16,10 +16,10 @@ import uuid
 from pathlib import Path
 from typing import Callable
 
-from scale import curate
+from scale import curate, rights
 from scale.util import ScaleError, load_doc
 
-from . import agent
+from . import agent, auth
 from .auth import Budget
 from .config import Config
 
@@ -56,6 +56,11 @@ class Jobs:
             threading.Thread(target=self._run, args=(job, doi, pdf_path), daemon=True).start()
         return jid
 
+    def version(self) -> str | None:
+        """The schema version of catal-commons, so that every graph curated here can be contributed to it."""
+        header = self.repo / self.cfg.commons / "parts" / "header.json"
+        return load_doc(header)["graph"].get("schema_version") if header.is_file() else None
+
     def _log(self, job: dict, line: str) -> None:
         job["log"].append({"t": round(time.time() - job["created"], 1), "msg": line})
         del job["log"][:-200]
@@ -68,7 +73,7 @@ class Jobs:
                 self._log(job, "resolving the DOI and reading the PDF" if doi and pdf_path else
                           "resolving the DOI" if doi else "reading the PDF")
                 started = curate.start(work, doi=doi, pdf=pdf_path, email=self.cfg.contact_email or None,
-                                       repo=self.repo)
+                                       repo=self.repo, version=self.version())
                 job["source"] = {k: started.get(k) for k in ("source_id", "rights_class", "pages", "schema_version", "notes")}
                 if not started.get("pages"):
                     raise ScaleError("no text could be read: give the PDF (an open-access copy was not found or not "
@@ -86,6 +91,8 @@ class Jobs:
                 fin = curate.finish(work, public=True, repo=self.repo)
                 job["graph"] = load_doc(work / fin["public"]["graph"])
                 job["withheld"] = fin["public"]["withheld"]
+                job["rights"] = rights.load_rights(work / "rights.yaml")[started["source_id"]]
+                job["receipt"] = auth.receipt(self.cfg, job["owner"], job["graph"], job["rights"])
                 job["state"] = "done"
                 self._log(job, "done")
             except Exception as e:                       # the job reports its failure; the service goes on

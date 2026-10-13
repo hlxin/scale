@@ -10,6 +10,14 @@
   Curating and asking need GitHub sign-in with an allowlisted account and are limited by daily budgets. Viewing,
   querying and searching a graph do not. Deploying it (the host, the OAuth app, the API key, GitHub Pages) is a
   person's to do (service/README.md).
+- **Contribute a graph to catal-commons: `scale graph contribute`, and a button on the page.** The command adds a
+  one-source graph to a graph kept as parts. It refuses a source already there: the same DOI, identifier, text
+  digest, or title and year. Otherwise it moves the ids into the folder's namespace, adds the source's rights entry,
+  caps the quotes under the folder's limits (none of a source in copyright in graphs/) and merges the evidence into
+  the shared records it reaches. It writes only when the folder builds and validates. On the page, **Contribute to
+  the commons** checks catal-commons on main and the open contributions, then has the service's bot open a pull
+  request that credits the contributor. Only the graph the service curated and signed for that user can be
+  contributed, and a person approves and merges.
 - **One publication into a graph: `scale source start | check | finish`.** For a subgraph that studies one paper, patent or
   report. `start` takes a DOI, a PDF or both (or the text): it resolves the DOI's metadata (Crossref), and with a contact
   address (`--email` or `SCALE_CONTACT_EMAIL`, never assumed) downloads an open-access PDF (Unpaywall) only when it

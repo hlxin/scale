@@ -184,6 +184,29 @@ def cmd_graph_build(args):
     return 0
 
 
+def cmd_graph_contribute(args):
+    from . import commons
+    from .util import load_doc, load_yaml
+    doc = load_doc(args.file)
+    rpath = Path(args.rights) if args.rights else Path(args.file).parent / "rights.yaml"
+    sid = next((n["id"] for n in commons.sources_of(doc)), None)
+    entry = ((load_yaml(rpath) or {}).get("sources") or {}).get(sid) if rpath.is_file() else None
+    res = commons.contribute(doc, args.to, entry or {}, _repo(args))
+    if res.get("already"):
+        for h in res["already"]:
+            print(f"already in {args.to}: {h['source']} ({h['file']}), the same {', '.join(h['by'])}")
+        return 1
+    print(f"{res['source']}: {res['records']['nodes']} records, {res['records']['links']} links; "
+          f"{len(res['shared_added'])} new shared records, {len(res['shared_with_new_evidence'])} with new evidence; "
+          f"quotes kept {res['quotes']['kept']}, withheld {res['quotes']['withheld']} ({res['class']})")
+    if args.write:
+        for rel in commons.write(res, args.to):
+            print(f"wrote {Path(args.to) / rel}")
+    else:
+        print("dry run: --write writes " + ", ".join(sorted(res["files"])))
+    return 0
+
+
 def cmd_graph_export(args):
     from . import pgraph
     if args.to == "kg-bundle":
@@ -1067,6 +1090,12 @@ def build_parser() -> argparse.ArgumentParser:
     sp.add_argument("file"); sp.add_argument("--out", required=True, help="the graph's folder (parts/ is written in it)")
     sp.add_argument("--sources", help="keep only these sources: slugs separated by commas, or @FILE (one per line); the "
                     "shared records they reach stay, with only their evidence")
+    sp = add("contribute", cmd_graph_contribute, "add a one-source graph to a graph kept as parts (catal-commons): "
+             "refused when its source is there already; its ids moved to the folder's namespace, its quotes capped "
+             "under the folder's rights", gr)
+    sp.add_argument("file"); sp.add_argument("--to", default="graphs/catal-commons", help="the parts folder")
+    sp.add_argument("--rights", help="the source's rights file (default: rights.yaml beside the graph)")
+    sp.add_argument("--write", action="store_true", help="write the files (default: report what would change)")
     sp = add("build", cmd_graph_build, "build a graph kept as parts (FOLDER/parts/) into one document, sorted by id", gr)
     sp.add_argument("folder"); sp.add_argument("--out", help="the built graph (default: the folder's one *.graph.json, else <folder>.graph.json)")
     sp.add_argument("--check", action="store_true", help="write nothing; exit 1 unless the parts build and a built copy, "
