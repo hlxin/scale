@@ -1,6 +1,6 @@
 """The one shared pytest conftest: repository root, import path, fixtures and path constants.
 
-Test modules in tools/tests, core/tests and domain/tests import from it (``from conftest import
+Test modules in tools/tests, core/tests, service/tests and domain/tests import from it (``from conftest import
 REPO``); pytest puts the rootdir on sys.path, so no other conftest.py exists.
 """
 

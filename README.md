@@ -28,6 +28,12 @@ pip install git+https://github.com/hlxin/scale
 Then `scale call status` to start, or `claude mcp add scale -- scale mcp` to give an AI agent the tools
 ([docs/integrate.md](docs/integrate.md), [AGENTS.md](AGENTS.md)).
 
+**Or in the browser: [curate one publication](https://hlxin.github.io/scale/).** Upload a PDF or give a DOI or a link.
+The page curates it into a graph with the catalysis schema and the curate-source skill, shows the graph with each
+record's evidence, and answers questions with the same query and search code as `scale graph query`. Sign-in uses
+GitHub, curation is open to allowlisted accounts, and nothing is kept on the service. The page goes live once the
+service is deployed ([`service/`](service/README.md), [`site/`](site/)).
+
 ## What's inside
 
 - **The science kernel** ([`core/`](core/README.md)): the base layer shared by all sciences, with the value
@@ -50,6 +56,8 @@ Then `scale call status` to start, or `claude mcp add scale -- scale mcp` to giv
   graph (105 sources before 1966, no quoted text of a source in copyright).
 - **Tools** ([`tools/`](tools/README.md)): the `scale` Python package and command, the agent skills and their
   tests.
+- **The web service and page** ([`service/`](service/README.md), [`site/`](site/)): one publication into a graph from
+  a browser, with the tools above and a model behind them.
 - **Governance** ([`governance/`](governance/GOVERNANCE.md)): who reviews, how changes are approved, versions and
   releases.
 - **Releases** ([`releases/`](releases/README.md)): fixed, digested releases built by a person; the first

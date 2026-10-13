@@ -68,7 +68,7 @@ GRAPH_FROZEN = "frozen"                          # beside a domain's manifest: s
 FROZEN_SUMS = "SHA256SUMS"                       # in every frozen directory: the digests of its files (append-only)
 
 # pytest collects these (pyproject testpaths must say the same)
-TEST_DIRS = ("tools/tests", "core/tests", "domain/tests")
+TEST_DIRS = ("tools/tests", "core/tests", "service/tests", "domain/tests")
 
 # what runtime code reads; every anchor must lie under a BUNDLE root (tools/tests checks it)
 RUNTIME_ANCHORS = (RELEASE_MANIFEST, RELEASES, CORE, CORE_MANIFEST, KERNEL, KERNEL_FROZEN, KERNEL_ONLY_MANIFEST, DOMAIN,
