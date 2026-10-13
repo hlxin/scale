@@ -93,25 +93,26 @@ def github_login(cfg: Config, code: str, opener=urllib.request.urlopen) -> str:
 
 
 class Budget:
-    """Jobs and questions per user and tokens over everyone, counted per UTC day, in memory (one instance)."""
+    """Jobs, questions and contributions per user and tokens over everyone, counted per UTC day, in memory (one instance)."""
 
     def __init__(self, cfg: Config):
         self.cfg, self.lock = cfg, threading.Lock()
-        self.day, self.jobs, self.questions, self.tokens = "", {}, {}, 0
+        self.day, self.jobs, self.questions, self.contributions, self.tokens = "", {}, {}, {}, 0
 
     def _today(self) -> None:
         d = _dt.datetime.now(_dt.timezone.utc).date().isoformat()
         if d != self.day:
-            self.day, self.jobs, self.questions, self.tokens = d, {}, {}, 0
+            self.day, self.jobs, self.questions, self.contributions, self.tokens = d, {}, {}, {}, 0
 
     def take(self, kind: str, login: str) -> str | None:
-        """Count one job or question for the user; the reason it is refused, or None."""
+        """Count one job, question or contribution for the user; the reason it is refused, or None."""
         with self.lock:
             self._today()
             if self.tokens >= self.cfg.tokens_per_day:
                 return "the service has spent today's model budget; try again tomorrow (UTC)"
-            counts, limit = ((self.jobs, self.cfg.jobs_per_user_per_day) if kind == "job"
-                             else (self.questions, self.cfg.questions_per_user_per_day))
+            counts, limit = {"job": (self.jobs, self.cfg.jobs_per_user_per_day),
+                             "question": (self.questions, self.cfg.questions_per_user_per_day),
+                             "contribution": (self.contributions, self.cfg.contributions_per_user_per_day)}[kind]
             if counts.get(login, 0) >= limit:
                 return f"you have used today's {limit} {kind}s; try again tomorrow (UTC)"
             counts[login] = counts.get(login, 0) + 1
@@ -126,3 +127,31 @@ class Budget:
         with self.lock:
             self._today()
             return max(0, self.cfg.tokens_per_day - self.tokens)
+
+
+def _plain(obj):
+    """A graph as JSON gives it back after a round trip through the page (a whole float reads as an integer)."""
+    if isinstance(obj, float) and obj.is_integer():
+        return int(obj)
+    if isinstance(obj, list):
+        return [_plain(x) for x in obj]
+    if isinstance(obj, dict):
+        return {k: _plain(v) for k, v in obj.items()}
+    return obj
+
+
+def graph_digest(graph: dict) -> str:
+    return hashlib.sha256(json.dumps(_plain(graph), sort_keys=True, ensure_ascii=False).encode()).hexdigest()
+
+
+def receipt(cfg: Config, owner: str, graph: dict, entry: dict) -> str:
+    """What the service signs for a graph it curated: whose it is, its digest and its source's rights, a week long."""
+    return sign(cfg, {"sub": owner, "g": graph_digest(graph), "r": entry, "exp": int(time.time()) + 7 * 86400})
+
+
+def check_receipt(cfg: Config, token: str, owner: str, graph: dict) -> dict | None:
+    """The rights entry a receipt signs, when it is the owner's and for this very graph; else None."""
+    p = unsign(cfg, token or "")
+    if not p or p.get("sub") != owner or p.get("g") != graph_digest(graph):
+        return None
+    return p.get("r")

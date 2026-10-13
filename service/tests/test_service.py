@@ -192,3 +192,109 @@ def test_the_page_names_the_service_and_the_readme_links_the_page():
     assert "config.js" in html and "app.js" in html
     assert "SCALE_SERVICE_URL" in (site / "config.js").read_text(encoding="utf-8")
     assert "hlxin.github.io/scale" in (REPO / "README.md").read_text(encoding="utf-8")
+
+
+class FakeGitHub:
+    """main holds graphs/catal-commons as this checkout has it; pull requests and branches are kept in memory."""
+
+    def __init__(self):
+        root = REPO / "graphs" / "catal-commons"
+        self.files = {f"graphs/catal-commons/{p.relative_to(root)}": p.read_text(encoding="utf-8")
+                      for p in root.rglob("*") if p.is_file()}
+        self.pulls, self.trees, self.refs, self.calls = [], {}, {}, []
+
+    def __call__(self, method, url, token, body=None, raw=False):
+        assert token == "bot-token"
+        self.calls.append((method, url))
+        if url.startswith("https://raw.githubusercontent.com/"):
+            sha, path = url.split("/", 6)[5], url.split("/", 6)[6]
+            files = self.files if sha == "main-sha" else self.trees[sha]
+            return files[path]
+        path = url.split("/repos/hlxin/scale", 1)[1]
+        if path == "/git/ref/heads/main":
+            return {"object": {"sha": "main-sha"}}
+        if path.startswith("/git/trees/main-sha"):
+            return {"tree": [{"path": p, "type": "blob"} for p in self.files]}
+        if path == "/git/commits/main-sha":
+            return {"tree": {"sha": "main-tree"}}
+        if path == "/git/trees" and method == "POST":
+            self.trees["new-tree"] = {**self.files, **{t["path"]: t["content"] for t in body["tree"]}}
+            self.tree_body = body
+            return {"sha": "new-tree"}
+        if path == "/git/commits" and method == "POST":
+            self.trees["new-commit"] = self.trees[body["tree"]]
+            self.commit = body
+            return {"sha": "new-commit"}
+        if path == "/git/refs":
+            self.refs[body["ref"]] = body["sha"]
+            return {}
+        if path == "/pulls" and method == "POST":
+            n = 100 + len(self.pulls)
+            self.pulls.append({"number": n, "html_url": f"https://github.com/hlxin/scale/pull/{n}", "title": body["title"],
+                               "body": body["body"], "head": {"ref": body["head"], "sha": "new-commit"}})
+            return {"number": n, "html_url": f"https://github.com/hlxin/scale/pull/{n}"}
+        if path.startswith("/pulls?state=open"):
+            return self.pulls
+        if path.startswith("/pulls/") and path.endswith("/files?per_page=100"):
+            changed = self.tree_body["tree"]
+            return [{"filename": t["path"], "status": "added"} for t in changed]
+        if path.endswith("/requested_reviewers"):
+            self.reviewers = body["reviewers"]
+            return {}
+        raise AssertionError(f"unexpected {method} {path}")
+
+
+def finished_job(tmp_path, monkeypatch, gh):
+    c = cfg(tmp_path, github_token="bot-token", reviewers=["mutianyou2013", "diazr04"])
+    svc = Service(c, repo=REPO, run_inline=True, github_request=gh)
+    real = curate.start
+
+    meta = {"message": {"title": ["Copper catalysts for methanol synthesis"], "issued": {"date-parts": [[2026]]},
+                        "type": "journal-article"}}
+
+    def start(out, doi=None, pdf=None, **kw):
+        (tmp_path / "paper.txt").write_text(TEXT, encoding="utf-8")
+        return real(out, text=tmp_path / "paper.txt", doi=doi, get=lambda url, h: json.dumps(meta).encode(), **kw)
+    monkeypatch.setattr(curate, "start", start)
+    svc.client_factory = lambda: Model(curation_turns("ex:pub/source/10.9999-paper.1", "ex:pub/10.9999-paper.1"))
+    h = {"authorization": f"Bearer {auth.session_for(svc.cfg, 'ada')}", "content-type": "application/pdf"}
+    jid = svc.route("POST", "/jobs", {"filename": "paper.pdf", "doi": "10.9999/paper.1"}, h, b"%PDF-1.7 a file")[1]["job"]
+    job = svc.route("GET", f"/jobs/{jid}", {}, h, b"")[1]
+    assert job["state"] == "done" and job["rights"]["class"] == "in_copyright" and job["receipt"]
+    return svc, h, json.loads(json.dumps(job))              # the page's copy, after a round trip through JSON
+
+
+def test_a_curated_graph_is_contributed_by_a_pull_request_once(tmp_path, monkeypatch):
+    gh = FakeGitHub()
+    svc, h, job = finished_job(tmp_path, monkeypatch, gh)
+    req = lambda path, **kw: svc.route("POST", path, {}, h, json.dumps({"graph": job["graph"], "receipt": job["receipt"], **kw}).encode())
+    st, body, _ = req("/contribute/check")
+    assert st == 200 and body["new"]["source"] == "scale:commons/source/10.9999-paper.1" and body["new"]["quotes"]["kept"] == 0
+    assert not any(m == "POST" for m, _ in gh.calls)                          # a check writes nothing
+    st, body, _ = req("/contribute")
+    assert st == 201 and body["pull_request"]["url"] == "https://github.com/hlxin/scale/pull/100"
+    assert gh.refs == {"refs/heads/contrib/10.9999-paper.1": "new-commit"} and gh.reviewers == ["mutianyou2013", "diazr04"]
+    assert {t["path"] for t in gh.tree_body["tree"]} == {"graphs/catal-commons/parts/sources/10.9999-paper.1.json",
+                                                        "graphs/catal-commons/parts/shared.json",
+                                                        "graphs/catal-commons/rights.yaml"}
+    pr = gh.pulls[0]
+    assert pr["title"].startswith("catal-commons: add ") and "Contributed by @ada" in pr["body"]
+    assert "in_copyright" in pr["body"] and "quotes withheld" in pr["body"]
+    st, body, _ = req("/contribute/check")                                    # now it is proposed in an open pull request
+    assert st == 200 and body["proposed"]["number"] == 100 and body["proposed"]["by"] == ["doi", "title_year"]
+    gh.files, gh.pulls = gh.trees["new-commit"], []                           # merged: now it is on main
+    st, body, _ = req("/contribute/check")
+    assert st == 200 and body["already"][0]["source"] == "scale:commons/source/10.9999-paper.1"
+
+
+def test_only_the_graph_the_service_curated_for_the_user_can_be_contributed(tmp_path, monkeypatch):
+    gh = FakeGitHub()
+    svc, h, job = finished_job(tmp_path, monkeypatch, gh)
+    changed = json.loads(json.dumps(job["graph"]))
+    changed["nodes"][0]["props"]["name"] = "something else"
+    for graph, receipt, headers in ((changed, job["receipt"], h), (job["graph"], "forged.mac", h),
+                                    (job["graph"], job["receipt"], {**h, "authorization": f"Bearer {auth.session_for(svc.cfg, 'bob')}"})):
+        svc.cfg.allowlist = ["ada", "bob"]
+        st, body, _ = svc.route("POST", "/contribute", {}, headers, json.dumps({"graph": graph, "receipt": receipt}).encode())
+        assert st == 403, body
+    assert not gh.calls

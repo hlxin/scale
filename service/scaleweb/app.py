@@ -11,6 +11,9 @@
 * ``POST /query``                  ``{"graph": doc, "plan": plan}``: ``scale query``, no model, no sign-in
 * ``POST /search``                 ``{"graph": doc, "query": text, "k": n}``: ``scale search``, no sign-in
 * ``POST /ask``                    ``{"graph": doc, "question": text}``: the question loop; signed in
+* ``POST /contribute/check``       ``{"graph": doc, "receipt": r}``: is its source in catal-commons on main, or in an
+                                   open contribution, and what adding it would change; signed in
+* ``POST /contribute``             the same, then a pull request (the bot's, crediting the user) that adds it
 
 Run it with ``python -m scaleweb`` (service/README.md). Cross-origin calls are allowed from the site origins only.
 """
@@ -25,11 +28,11 @@ import urllib.parse
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
-from scale import __version__, pgraph
+from scale import __version__, commons, pgraph
 from scale.api import ScaleToolkit
-from scale.util import find_repo_root, load_doc, write_canonical
+from scale.util import ScaleError, find_repo_root, load_doc, write_canonical
 
-from . import agent, auth, fetch
+from . import agent, auth, fetch, github
 from .config import Config
 from .jobs import Jobs
 
@@ -42,8 +45,9 @@ def anthropic_client():
 
 
 class Service:
-    def __init__(self, cfg: Config, client_factory=anthropic_client, repo: Path | None = None, run_inline: bool = False):
-        self.cfg, self.client_factory = cfg, client_factory
+    def __init__(self, cfg: Config, client_factory=anthropic_client, repo: Path | None = None, run_inline: bool = False,
+                 github_request=github.http):
+        self.cfg, self.client_factory, self.github_request = cfg, client_factory, github_request
         self.repo = Path(repo) if repo else find_repo_root()
         self.budget = auth.Budget(cfg)
         self.jobs = Jobs(cfg, self.budget, lambda: self.client_factory(), self.repo, run_inline=run_inline)
@@ -78,7 +82,7 @@ class Service:
                 return 401, {"error": "sign in"}, {}
             view = self.jobs.view(path.removeprefix("/jobs/"), user)
             return (200, view, {}) if view else (404, {"error": "no such job (a finished job is read once)"}, {})
-        if method == "POST" and path in ("/query", "/search", "/ask"):
+        if method == "POST" and path in ("/query", "/search", "/ask", "/contribute/check", "/contribute"):
             if len(body) > GRAPH_MAX:
                 return 413, {"error": "the graph is too large for the service"}, {}
             try:
@@ -92,6 +96,10 @@ class Service:
             if path == "/search":
                 return self._with_file(req["graph"], lambda p, kit: (200, kit.call("search", {
                     "path": p.name, "query": str(req.get("query") or ""), "k": int(req.get("k") or 10)}), {}))
+            if path.startswith("/contribute"):
+                if not user:
+                    return 401, {"error": "sign in to contribute"}, {}
+                return self._contribute(user, req, open_pr=path == "/contribute")
             if not user:
                 return 401, {"error": "sign in to ask a question (it uses the service's model)"}, {}
             refused = self.budget.take("question", user)
@@ -142,6 +150,78 @@ class Service:
         if refused:
             return 429, {"error": refused}, {}
         return 202, {"job": self.jobs.submit(user, doi=doi, pdf=pdf, filename=name)}, {}
+
+    def _contribute(self, user: str, req: dict, open_pr: bool):
+        """Is the graph's source in the commons (on main, or in an open contribution)? If not, what adding it changes,
+        and with ``open_pr`` the pull request that adds it."""
+        graph = req["graph"]
+        entry = auth.check_receipt(self.cfg, str(req.get("receipt") or ""), user, graph)
+        if entry is None:
+            return 403, {"error": "only a graph this service curated for you, unchanged, can be contributed"}, {}
+        if not self.cfg.github_token:
+            return 503, {"error": "contributions are not set up on this service (SCALE_WEB_GITHUB_TOKEN)"}, {}
+        repo = github.Repo(self.cfg.repo, self.cfg.github_token, self.cfg.commons, request=self.github_request)
+        d = Path(tempfile.mkdtemp(prefix="scale-web-c-"))
+        try:
+            sha = repo.fetch_folder(d)
+            try:
+                res = commons.contribute(graph, d, entry, self.repo)
+            except ScaleError as e:
+                return 422, {"error": str(e)}, {}
+            if res.get("already"):
+                return 200, {"already": [{**h, "url": f"https://github.com/{self.cfg.repo}/blob/main/{self.cfg.commons}/{h['file']}"}
+                                         for h in res["already"]]}, {}
+            for pr in repo.open_contributions():
+                hits = commons.find(graph, {"sources": pr["sources"]})
+                if hits:
+                    return 200, {"proposed": {"number": pr["number"], "url": pr["url"], "title": pr["title"],
+                                              "by": hits[0]["by"]}}, {}
+            preview = {k: res[k] for k in ("source", "slug", "class", "records", "shared_added",
+                                           "shared_with_new_evidence", "quotes")}
+            preview["files"] = sorted(f"{self.cfg.commons}/{f}" for f in res["files"])
+            if not open_pr:
+                return 200, {"new": preview}, {}
+            refused = self.budget.take("contribution", user)
+            if refused:
+                return 429, {"error": refused}, {}
+            title, body = self._pr_text(user, graph, entry, preview)
+            try:
+                pr = repo.open_pull_request(sha, f"{github.BRANCH_PREFIX}{res['slug']}", res["files"], title, body,
+                                            f"{title}\n\nContributed by @{user} through the SCALE web service.",
+                                            self.cfg.reviewers)
+            except FileExistsError as e:
+                return 409, {"error": str(e)}, {}
+            return 201, {"new": preview, "pull_request": pr}, {}
+        finally:
+            shutil.rmtree(d, ignore_errors=True)
+
+    def _pr_text(self, user: str, graph: dict, entry: dict, p: dict) -> tuple[str, str]:
+        src = next(n for n in graph["nodes"] if n.get("label") == "Source")["props"]
+        name = src.get("title") or src.get("name") or p["slug"]
+        ref = f"doi:{src['doi']}" if src.get("doi") else p["slug"]
+        title = f"catal-commons: add {name[:70]}{'…' if len(name) > 70 else ''} ({ref})"
+        withheld = (f"{p['quotes']['withheld']} quotes withheld as sha256 and length (the source is {p['class']}: the "
+                    "commons quotes no text of a source in copyright)" if p["quotes"]["withheld"]
+                    else f"every quote kept ({p['class']})")
+        body = "\n".join([
+            f"**What it adds.** `{p['source']}`, {name}" + (f" ({src['year']})" if src.get("year") else "")
+            + (f", {ref}" if src.get("doi") else "") + f", to `{self.cfg.commons}`: {p['records']['nodes']} records and "
+            f"{p['records']['links']} links in `parts/sources/{p['slug']}.json`, "
+            f"{len(p['shared_added'])} new shared records and {len(p['shared_with_new_evidence'])} shared records "
+            "with new evidence in `parts/shared.json`, and the source's entry in `rights.yaml`.",
+            "",
+            f"**Who.** Contributed by @{user} through the SCALE web service. The model ({self.cfg.model}) curated it "
+            "by the curate-source skill until `scale source check` passed, every quote found in the source's text.",
+            "",
+            f"**Rights.** {entry.get('class')}: {entry.get('licence')} ({entry.get('basis')}); {withheld}.",
+            "",
+            "**Checked.** The source is not in the commons on main (by DOI, identifier, text digest or title and "
+            "year) nor in an open contribution; the commons builds and validates with it (`scale graph contribute`).",
+            "",
+            "**For the reviewer.** Check the records against the source; the shared records it adds may duplicate "
+            "ones under another id. A person approves and merges; the service never does.",
+        ])
+        return title, body
 
     def _with_file(self, graph: dict, fn):
         d = Path(tempfile.mkdtemp(prefix="scale-web-q-"))

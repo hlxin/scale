@@ -35,6 +35,11 @@ class Config:
     job_ttl_s: int = 3600
     session_ttl_s: int = 8 * 3600
     workdir: str = ""                        # where job folders live while they run (a temporary directory)
+    github_token: str = ""                   # the bot's token that opens contribution pull requests
+    repo: str = "hlxin/scale"
+    commons: str = "graphs/catal-commons"
+    reviewers: list[str] = field(default_factory=list)      # asked to review each contribution
+    contributions_per_user_per_day: int = 5
 
     @classmethod
     def from_env(cls) -> Config:
@@ -58,4 +63,9 @@ class Config:
             concurrent_jobs=_int("SCALE_WEB_CONCURRENT_JOBS", 2),
             max_upload_mb=_int("SCALE_WEB_MAX_UPLOAD_MB", 40),
             workdir=os.environ.get("SCALE_WEB_WORKDIR", ""),
+            github_token=os.environ.get("SCALE_WEB_GITHUB_TOKEN", ""),
+            repo=os.environ.get("SCALE_WEB_REPO", "hlxin/scale"),
+            commons=os.environ.get("SCALE_WEB_COMMONS", "graphs/catal-commons"),
+            reviewers=_list("SCALE_WEB_REVIEWERS"),
+            contributions_per_user_per_day=_int("SCALE_WEB_CONTRIBUTIONS_PER_USER", 5),
         )
