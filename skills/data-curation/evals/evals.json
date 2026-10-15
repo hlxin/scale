@@ -1,0 +1,55 @@
+{
+  "skill_name": "data-curation",
+  "evals": [
+    {
+      "id": 1,
+      "name": "build-kg-given-schema",
+      "prompt": "Build the knowledge graph for the mxene-no3 papers with my schema at schemas/mxene_no3rr.json. Only papers 41 and 55 for now, with the reviewer. Don't wait for my approval after the pilot.",
+      "expected_output": "prepare_run with the given schema (frozen unchanged), extraction + review per paper, review_status --apply, merge enriched from papers.db, validation, tables, views, release README, extraction_status hand-off.",
+      "files": [
+        "fixtures/v3-mxene-project"
+      ],
+      "expectations": [
+        "Deliverable schema.json is identical to the user's schema (nothing invented)",
+        "Fragments for papers 41 and 55 exist and pass validate_kg.py",
+        "A review file exists for each extracted paper",
+        "extraction_status.jsonl records both papers",
+        "graph.json exists and its Publication nodes carry access and record_type from papers.db",
+        "At least 90% of domain edges carry _evidence and _citation",
+        "tables/ holds edges.csv, a node-type CSV and records.csv",
+        "views/overview.html exists",
+        "Deliverable README.md written",
+        "Nothing written outside publications/ and .scripts/"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "no-schema-given",
+      "prompt": "Make a knowledge graph of the mxene-no3 papers.",
+      "expected_output": "Asks the user for their schema (pointing to the format/example) and does not draft or invent one; nothing extracted.",
+      "files": [
+        "fixtures/v3-mxene-project"
+      ],
+      "expectations": [
+        "Asks the user for a schema",
+        "No schema written by the agent (no schema_draft.json or new schema.json)",
+        "No fragments extracted"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "ask-built-graph",
+      "prompt": "In my mxene-no3rr knowledge graph, which catalysts reach the highest Faradaic efficiency for nitrate-to-ammonia? Cite the papers.",
+      "expected_output": "Ask mode: kg_search index/query with expanded terms, answer written as a standalone scientific brief with author-year citations and an APA reference list, HTML twin in answers/.",
+      "files": [
+        "fixtures/v3-mxene-kg-project"
+      ],
+      "expectations": [
+        "kg_search.py query output saved under answers/",
+        "Answer cites papers author-year and ends with a References list",
+        "Answer never mentions the graph, nodes, edges or retrieval",
+        "An HTML twin of the answer exists in answers/"
+      ]
+    }
+  ]
+}

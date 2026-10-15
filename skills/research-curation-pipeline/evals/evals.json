@@ -1,0 +1,52 @@
+{
+  "skill_name": "research-curation-pipeline",
+  "evals": [
+    {
+      "id": 1,
+      "name": "combined-kg-request",
+      "prompt": "Build a knowledge graph of Faradaic efficiencies for copper catalysts in CO2 electroreduction from the literature. Fields: catalyst, applied potential (V vs RHE), product, Faradaic efficiency. Only open-access papers, and use Claude to screen relevance.",
+      "expected_output": "Banner; converts the user's four fields faithfully into .scripts/<slug>/kg/schema_draft.json (nothing added); no redundant questions; one consolidated plan; hand-offs: paper-acquisition mode=index then mode=download (access OA,OA+ND, screening claude, wrapper_confirmed=true), then data-curation with the schema path.",
+      "files": [],
+      "expectations": [
+        "Small banner (<= 4 lines, no block-letter art)",
+        "Never names internal skills to the user",
+        "The user's fields saved as a schema draft under .scripts/<slug>/kg/ that passes check_schema.py",
+        "The draft adds nothing beyond the four fields (at most 8 properties)",
+        "No redundant questions (access and screening were given)",
+        "Collection hand-off with mode=index, access OA,OA+ND, screening=claude, wrapper_confirmed=true",
+        "Graph hand-off to data-curation with the schema path"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "update-existing-topic",
+      "prompt": "update the mxene-no3 papers with anything new",
+      "expected_output": "Detects the existing topic; update only; hands off paper-acquisition mode=update for mxene-no3; at most one question; no schema drafted.",
+      "files": [
+        "fixtures/v3-mxene-project"
+      ],
+      "expectations": [
+        "Small banner (<= 4 lines, no block-letter art)",
+        "Never names internal skills to the user",
+        "Hands off the collection stage with mode=update for mxene-no3",
+        "No graph hand-off",
+        "No schema drafted",
+        "At most one question"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "topic-only-no-schema",
+      "prompt": "perovskite solar cell stability papers",
+      "expected_output": "Index only: asks how to decide relevance (access types are asked at download time), one consolidated plan, hands off paper-acquisition mode=index; never drafts a schema; never names internal skills.",
+      "files": [],
+      "expectations": [
+        "Small banner (<= 4 lines, no block-letter art)",
+        "Never names internal skills to the user",
+        "Asks how to decide relevance (the access-type question may wait until download for an index-only request)",
+        "At most 3 questions before the confirmation",
+        "Hands off the collection stage with mode=index (no graph hand-off, no schema drafted)"
+      ]
+    }
+  ]
+}

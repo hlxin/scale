@@ -1,0 +1,94 @@
+{
+  "name": "co2rr-catalysts",
+  "version": "1.0",
+  "topic": "Electrochemical CO2 reduction (CO2RR) catalysts and their measured performance",
+  "scope": "Primary experimental or computational studies of CO2RR catalysts that report at least one performance value (Faradaic efficiency, current density, stability) or a computed reaction energetics. Reviews contribute no extracted values.",
+  "node_types": {
+    "Catalyst": {
+      "description": "A catalyst material tested in the study, as the authors name it.",
+      "properties": {
+        "name": "string (required)",
+        "composition": "string",
+        "catalyst_class": {"type": "string", "enum": ["metal", "alloy", "oxide", "oxide-derived", "single-atom", "molecular", "framework", "carbon-based", "chalcogenide", "other"]},
+        "morphology": "string",
+        "active_site": "string",
+        "support": "string",
+        "loading_mg_cm2": {"type": "number", "min": 0, "max": 100, "unit": "mg cm-2"},
+        "synthesis_method": "string"
+      }
+    },
+    "Electrolyte": {
+      "description": "The electrolyte (catholyte) used for the reported measurement.",
+      "properties": {
+        "name": "string (required)",
+        "concentration_M": {"type": "number", "min": 0, "max": 20, "unit": "mol L-1"},
+        "pH": {"type": "number", "min": -2, "max": 16}
+      }
+    },
+    "ReactorSetup": {
+      "description": "The cell in which performance was measured.",
+      "properties": {
+        "cell_type": {"type": "string", "required": true, "enum": ["H-cell", "flow cell", "MEA", "other"]},
+        "membrane": "string",
+        "electrode_area_cm2": {"type": "number", "min": 0, "max": 10000}
+      }
+    },
+    "OperatingCondition": {
+      "description": "Conditions of one reported measurement.",
+      "properties": {
+        "potential_V": {"type": "number", "min": -5, "max": 5, "unit": "V"},
+        "reference_electrode": {"type": "string", "enum": ["RHE", "SHE", "Ag/AgCl", "SCE", "Hg/HgO", "other"]},
+        "current_density_mA_cm2": {"type": "number", "min": 0, "max": 5000, "unit": "mA cm-2"},
+        "temperature_C": {"type": "number", "min": -20, "max": 1000},
+        "pressure_bar": {"type": "number", "min": 0, "max": 200}
+      }
+    },
+    "Product": {
+      "description": "A reduction product as reported (CO, formate, C2H4, ethanol, CH4, H2 ...).",
+      "properties": {"name": "string (required)", "carbon_number": {"type": "integer", "min": 0, "max": 10}}
+    },
+    "PerformanceMetric": {
+      "description": "One measured or computed performance value.",
+      "properties": {
+        "metric": {"type": "string", "required": true, "enum": ["faradaic_efficiency", "partial_current_density", "total_current_density", "selectivity", "stability_hours", "energy_efficiency", "onset_potential", "tafel_slope", "yield_rate", "limiting_potential"]},
+        "value": "number (required)",
+        "unit": "string (required)"
+      }
+    },
+    "CharacterizationMethod": {
+      "description": "A technique used to characterize the catalyst or the reaction (operando XAS, Raman, XPS, DFT ...).",
+      "properties": {"name": "string (required)", "operando": "boolean"}
+    },
+    "Intermediate": {
+      "description": "A reaction intermediate the authors identify (*CO, *COOH, *OCHO ...).",
+      "properties": {"name": "string (required)", "evidence_kind": {"type": "string", "enum": ["spectroscopic", "computational", "kinetic", "isotopic"]}}
+    }
+  },
+  "edge_types": {
+    "ACHIEVES": {"from": "Catalyst", "to": "PerformanceMetric", "description": "The catalyst attains this value."},
+    "FOR_PRODUCT": {"from": "PerformanceMetric", "to": "Product", "description": "The value refers to this product."},
+    "MEASURED_UNDER": {"from": "PerformanceMetric", "to": "OperatingCondition", "description": "The value was measured under these conditions."},
+    "TESTED_IN": {"from": "Catalyst", "to": "Electrolyte", "description": "The catalyst was tested in this electrolyte."},
+    "OPERATED_IN": {"from": "Catalyst", "to": "ReactorSetup", "description": "The catalyst was tested in this cell."},
+    "CHARACTERIZED_BY": {"from": "Catalyst", "to": "CharacterizationMethod", "description": "The catalyst was studied with this method."},
+    "INVOLVES_INTERMEDIATE": {"from": "Catalyst", "to": "Intermediate", "description": "The authors identify this intermediate on the catalyst."}
+  },
+  "record_view": {
+    "label": "PerformanceMetric",
+    "join": [
+      {"edge": "ACHIEVES", "direction": "in", "prefix": "catalyst_"},
+      {"edge": "FOR_PRODUCT", "direction": "out", "prefix": "product_"},
+      {"edge": "MEASURED_UNDER", "direction": "out", "prefix": "condition_"}
+    ]
+  },
+  "never_merge": [
+    "the same element in different forms (Cu foil, Cu nanocubes, oxide-derived Cu, Cu(100)) are distinct catalysts",
+    "formate and formic acid stay as each paper reports them",
+    "a catalyst before and after activation or reconstruction is reported as the authors name it"
+  ],
+  "faithfulness_rules": [
+    "Faradaic efficiency, potential and current density of one PerformanceMetric come from the same experiment",
+    "potentials are stored against the reference electrode the paper states; never convert between references",
+    "values read from a figure (not stated in text or table) carry '(read from Fig. N)' in _citation"
+  ]
+}
