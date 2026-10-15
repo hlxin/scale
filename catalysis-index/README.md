@@ -7,7 +7,7 @@ downloaded.
 
 | File | Size | Use |
 |---|---|---|
-| `co2-reduction-electricity.db.gz` | 34 MB | `gunzip -k co2-reduction-electricity.db.gz` gives `co2-reduction-electricity.db` (107 MB, SQLite) |
+| `co2-reduction-electricity.db.gz` | 35 MB | `gunzip -k co2-reduction-electricity.db.gz` gives `co2-reduction-electricity.db` (110 MB, SQLite) |
 
 ## What is in it
 
@@ -33,6 +33,13 @@ electrochemical records: OA 5,006 · OA+ND 1,106 · Free-to-read 3,397 · Paywal
 **Abstracts** are included only where the paper's licence allows redistribution (Access type OA or OA+ND: 6,534
 papers). The `License` and `License URL` columns give each paper's licence.
 
+**Supporting information** was looked up for every paper before anything is downloaded (`find_si.py`): **12,432 SI
+files and deposits for 8,176 papers** (OA 2,364 · OA+ND 620 · Free-to-read 1,005 · Paywalled 4,187), listed in table
+`supplements` (DOI or file URL, title, and the route that found it: Elsevier SI CDN 3,416 · ACS/PLOS `.s001`
+components 3,323 · PubMed Central 2,953 · data deposits such as CCDC structures and Dryad 1,451 · publisher pages
+992 · MDPI CDN 140 · Figshare/DataCite/other 157) and in the `si` column ("Available (n deposits)"). SI that only sits
+on walled publisher sites (Wiley, RSC, ACS and IOP pages) is not listed; it is found when a paper is downloaded.
+
 ## Tables
 
 Same layout as the paper-acquisition `papers.db` (column definitions in the `about` table and in
@@ -46,7 +53,7 @@ Same layout as the paper-acquisition `papers.db` (column definitions in the `abo
 | `identifiers` | every identifier of a paper (DOI aliases, PMID, PMCID, arXiv, OSTI, patent numbers) |
 | `paper_subjects`, `subjects` | Topic A/B/C and related topics from a 125-term catalysis vocabulary |
 | `paper_sources`, `sources` | which databases found each paper |
-| `supplements` | supporting-information deposits linked to their paper |
+| `supplements` | each paper's supporting information, found before download (DOI or file URL, title, route) |
 | `papers_fts` | full-text index on title, abstract and keywords |
 
 ```sql

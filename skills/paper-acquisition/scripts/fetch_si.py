@@ -1,7 +1,8 @@
 """Step 8 — supplementary information (SI) for downloaded papers of a topic.
 
 Routes, by DOI (independent of where the main PDF came from):
-  1 PMC open-data mirror media files     2 SI deposits the search already linked to the paper (Figshare / Zenodo DOIs)
+  1 PMC open-data mirror media files     2 SI listed in the index (si_links: the search and find_si.py): its files
+                                           (PMC, Elsevier/MDPI CDNs, publisher pages), Figshare / Zenodo deposits, PLOS
   3 publisher landing page on hosts that serve scripted clients     4 ACS SI mirrored on Figshare
   5 MDPI CDN (-s001...)      6 Elsevier SI CDN (mmcN by PII)
   7 Crossref has-supplementary-material / Zenodo / Figshare / Dryad (title-affinity checked)
@@ -184,13 +185,25 @@ def route_acs_figshare(doi):
     return out
 
 
+PLOS_JOURNAL = {"pone": "plosone", "pbio": "plosbiology", "pcbi": "ploscompbiol", "pgen": "plosgenetics",
+                "ppat": "plospathogens", "pmed": "plosmedicine", "pntd": "plosntds", "pclm": "climate", "pwat": "water"}
+
+
 def route_known(links):
-    """SI deposits linked to the paper at index time (si_links): their files, straight from Figshare or Zenodo."""
+    """SI listed in the index (si_links, from the search and find_si.py): files straight from their URL, Figshare and
+    Zenodo deposits, PLOS components."""
     out = []
     for l in links:
         d = (l.get("si_doi") or "").lower()
+        u = l.get("url") or ""
         try:
-            if d.startswith(("10.6084/", "10.25384/")):
+            m = re.match(r"^10\.1371/journal\.([a-z]+)\.\d+\.s\d{3}$", d)
+            if d.startswith("http") and (EXT.search(urllib.parse.unquote(u.split("?")[0])) or "/esm/" in u):
+                out.append(("known_file", u))
+            elif m and m.group(1) in PLOS_JOURNAL:
+                out.append(("known_deposit", f"https://journals.plos.org/{PLOS_JOURNAL[m.group(1)]}/article/file"
+                                             f"?type=supplementary&id={l['si_doi']}"))
+            elif d.startswith(("10.6084/", "10.25384/")):
                 for it in http_get("https://api.figshare.com/v2/articles/search", method="POST",
                                    json_body={"doi": l["si_doi"], "page_size": 3}, tries=3).json() or []:
                     if (it.get("doi") or "").lower() == d:
@@ -257,7 +270,8 @@ def route_mdpi(proj, p, cr):
 def route_repos(p, cr):
     doi, title = p["doi"], p.get("title") or ""
     out = []
-    for x in ((cr or {}).get("relation") or {}).get("has-supplementary-material") or []:
+    rel = (cr or {}).get("relation") or {}
+    for x in (rel.get("is-supplemented-by") or []) + (rel.get("has-supplementary-material") or []):
         if x.get("id-type") == "doi":
             out.append(("crossref_relation", f"https://doi.org/{x.get('id')}"))
         elif x.get("id-type") == "uri":

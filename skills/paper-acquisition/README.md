@@ -9,7 +9,7 @@ patents and datasets — into a filterable database, and downloads the papers yo
 
 | Mode | What happens | Downloads? |
 |---|---|---|
-| **Index** | searches every source, deduplicates, classifies access and license, screens relevance, assigns Topic A/B/C | no |
+| **Index** | searches every source, deduplicates, classifies access and license, screens relevance, lists every paper's SI, assigns Topic A/B/C | no |
 | **Download** | downloads the selected access types (open routes; paywalled only through the library EZproxy) + SI | yes |
 | **Update** | exhaustive refresh: every source and query since the last run, citation chasing, re-check of access, retractions and preprints | optional |
 
@@ -24,8 +24,10 @@ request, no mode:
   repository copy ↔ journal article, same paper without/with DOI, byte-identical PDFs, one patented invention filed
   in several offices). Claude asks only about uncertain pairs (the same title under two DOIs); a pair you keep
   separate is never asked again.
-- **SI**: deposits the search finds (Figshare, ACS `.s001`, DataCite) are linked to their paper (index SI column
-  "Available (n deposits)"); the rest of the SI comes from the publisher when the paper is downloaded.
+- **SI**: every in-scope paper's supplementary information is listed in the index before anything is downloaded
+  (`find_si.py`: ACS/PLOS `.s001` components, DataCite deposits, Crossref relations, PubMed Central files, and for
+  topics up to 50,000 papers the Elsevier/MDPI CDNs and open publisher pages; index SI column "Available (n
+  deposits)"). Download mode fetches the listed files first; SI on walled sites comes when the paper is downloaded.
 - **Very large topics** (a whole field): index once as a catalog; access type, license and screening run on the whole
   catalog in hours (blocks of 20,000 papers, every source at its allowed pace — about 2 million papers in 2-3 h);
   downloads go per subtopic.

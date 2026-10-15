@@ -85,7 +85,7 @@ One `AskUserQuestion` with the plan in its description and options **Proceed · 
 Topic: <topic>  →  publications/<slug>/  (index + papers; index only: publications/<slug>/index/) and publications/papers.db
 Now:   <existing topic: N papers, M in scope, K downloaded, last update <date>>          (existing topics only)
 Index: every paper, preprint, patent and dataset from the automated sources; dedup; access + exact license;
-       relevance + Topic A/B/C with <method>
+       relevance + Topic A/B/C with <method>; every paper's SI listed before any download
   or Update: everything new since <last run − 30 days> on every source + citation chasing; re-check access,
        retractions and preprints of the older papers
 Download: <access types> — you see the numbers before anything is downloaded   (or: no download now)

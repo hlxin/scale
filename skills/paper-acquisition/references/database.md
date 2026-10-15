@@ -56,7 +56,7 @@ They are views: edits made in them are overwritten — change data through the s
 | Citations | citation count (OpenAlex, else Semantic Scholar / Crossref) |
 | Downloaded | `Yes` / `No` / `n/a` (datasets and software are indexed, never downloaded) |
 | Path | `publications/<topic>/papers/<access>/<ID>.pdf` |
-| SI | before download: `Available (n deposits)` when the search found SI deposits for the paper (Figshare, DataCite, ACS `.s001` DOIs), else empty; after download: `Yes` / `No` / `Queued` |
+| SI | before download: `Available (n deposits)` when SI is listed for the paper (`find_si.py` at index time, and SI deposits the search found), else empty; after download: `Yes` / `No` / `Queued` |
 | Extracted | `No`, or `Yes — <knowledge graph> (<date>)`, `Rejected — ...` from data-curation |
 | Notes | why: out of scope, not downloaded (reason), copy is the accepted manuscript, no abstract in the metadata, RETRACTED ... |
 | Date added | date the paper entered this topic (update runs: the run's date) |
@@ -72,7 +72,8 @@ column descriptions and example queries. Tables: `papers` (one row per paper; `t
 counts and last index/update dates) + `paper_collections` (relevance, scope, PDF path per topic), `subjects` (the
 vocabulary) + `paper_subjects` (kind `main` rank 1-3 = Topic A/B/C, or `related`), `sources` + `paper_sources`,
 `identifiers` (every DOI alias, PMCID, arXiv, every patent number of one invention ...), `files` (PDF/SI per topic),
-`supplements` (SI deposits the search found for a paper: doi, url, title, source), `extractions` (data-curation
+`supplements` (the SI listed for a paper before download: doi or file URL, url, title, source — the route that
+found it), `extractions` (data-curation
 status), `papers_fts` (full-text index on title, abstract, keywords). Views: `v_papers`, `v_collection_papers`.
 Built in chunks of 20,000 papers, so millions of rows are fine.
 
@@ -141,11 +142,16 @@ embargoes end, open copies appear, retractions are flagged, preprints get their 
   `build_list.py`; family members filed in other offices (WO, EP, US, CN …) and HAL / OSTI copies are merged by
   `dedup.py` when the title and the inventors match. The row keeps every number (`identifiers` scheme `patent`, index
   Notes "Same invention also published as …"; the representative is the WO, else EP, else US number).
-- SI deposits (ACS `<DOI>.s001`, publisher SI on Figshare, DataCite records that declare IsSupplementTo a paper) are
-  not papers: `si_links` in the ledger, `supplements` in papers.db, "Available (n deposits)" in the index SI column.
-  Real datasets (Dryad, Zenodo data …) stay rows of type dataset, linked by `identifiers` scheme `supplement_to`.
-  Most SI has no DOI of its own (Elsevier, Wiley, Springer, Nature): `fetch_si.py` takes it from the publisher at
-  download time.
+- SI is listed before anything is downloaded and is never a paper of its own: `si_links` in the ledger, `supplements`
+  in papers.db, "Available (n deposits)" in the index SI column. `find_si.py` (Index step 7) finds it by route
+  (`supplements.source`): `crossref_component` (ACS, PLOS `<DOI>.s001` …), `datacite` (publisher SI on Figshare,
+  Zenodo …) and `datacite_data` (data deposits such as Dryad, CCDC structures, repository data that declare
+  IsSupplementTo the paper), `crossref_relation` (is-supplemented-by), `pmc_oa` (PubMed Central open-access files),
+  and for topics up to 50,000 papers `elsevier_cdn` (mmcN files), `mdpi_cdn` (-s001 files) and `landing` (publisher
+  pages: Nature, Springer, BMC, Frontiers). A file found by two routes is listed once. `build_list.py` adds the SI
+  deposits the search itself returned. Datasets found by the search also stay rows of type dataset, linked by
+  `identifiers` scheme `supplement_to`. SI that only sits on walled publisher sites (Wiley, RSC, ACS and IOP pages)
+  is found by `fetch_si.py` when the paper is downloaded; `fetch_si.py` downloads the listed SI first.
 - Abstracts are cleaned on the way in: a leading "Abstract"/"Summary" heading (also glued to the text), ACS
   graphical-abstract debris, the trailing copyright line and placeholders are removed (`normalize_abstract`).
 - Non-papers (errata, corrections, retraction notices such as "Retraction of …" / "Notice of retraction", withdrawn

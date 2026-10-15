@@ -1,6 +1,6 @@
 ---
 name: paper-acquisition
-description: Builds and maintains a per-topic paper index and corpus. Index mode finds every matching paper, preprint, patent and dataset in 34 automated sources (OpenAlex, Crossref, Europe PMC, arXiv, OSTI, Zenodo; Scopus, Web of Science, Lens, EPO with keys) and writes publications/papers.db plus per-topic index CSVs split by access type (OA, OA+ND, Free-to-read, Paywalled) with abstract, exact license, Topic A/B/C and related topics. Download mode fetches PDFs and SI, paywalled papers only through the library EZproxy at safe rates. Update mode exhaustively adds newer papers (all sources, citation chasing, access and retraction recheck). Duplicates merge automatically. Also imports Web of Science, Scopus or Zotero exports with their abstracts, answers questions about the indexed papers and writes filtered lists (CSV, BibTeX, RIS). Use whenever the user wants to find, index, import, list or download papers on a topic, refresh a literature corpus, or query the paper database. Knowledge graphs belong to data-curation.
+description: Builds and maintains a per-topic paper index and corpus. Index mode finds every matching paper, preprint, patent and dataset in 34 automated sources (OpenAlex, Crossref, Europe PMC, arXiv, OSTI, Zenodo; Scopus, Web of Science, Lens, EPO with keys) and writes publications/papers.db plus per-topic index CSVs split by access type (OA, OA+ND, Free-to-read, Paywalled) with abstract, exact license, supplementary information (SI) links, Topic A/B/C and related topics. Download mode fetches PDFs and SI, paywalled papers only through the library EZproxy at safe rates. Update mode exhaustively adds newer papers (all sources, citation chasing, access and retraction recheck). Duplicates merge automatically. Also imports Web of Science, Scopus or Zotero exports with their abstracts, answers questions about the indexed papers and writes filtered lists (CSV, BibTeX, RIS). Use whenever the user wants to find, index, import, list or download papers on a topic, refresh a literature corpus, or query the paper database. Knowledge graphs belong to data-curation.
 allowed-tools:
   - Bash(python3 -I ${CLAUDE_SKILL_DIR}/scripts/*)
   - Bash(nohup python3 -I ${CLAUDE_SKILL_DIR}/scripts/*)
@@ -16,7 +16,12 @@ vocabulary is tuned for catalysis and extensible.
 
 - **English only** with the user, in every message.
 - **Index first, download second.** Index mode never downloads. Download only after the topic is indexed,
-  deduplicated, classified and screened, and the user approved the download plan (Download mode gate).
+  deduplicated, classified and screened, its SI is listed, and the user approved the download plan (Download mode
+  gate).
+- **SI is in the index before anything is downloaded.** Every in-scope paper's supplementary information is looked up
+  at index time (`find_si.py`, Index step 7) and listed in the index (SI column "Available (n deposits)", table
+  `supplements` in papers.db). Download mode fetches the files listed there first. Never start a download while a
+  topic's SI step is missing or incomplete.
 - **Scripts do the exact work; you do the judgment.** Searching, deduplication, license decisions, downloads, folder
   routing, the index CSVs and `papers.db` are produced by the scripts below. Never write index files or move PDFs by
   hand, never write replacement code — if a script fails, read its error, fix the input (config, queries) and re-run.
@@ -119,8 +124,9 @@ scope lists or keyword groups, sources waiting for keys) and ask: Approve and st
 - [ ] 4 citation chasing           search.py --citing  ->  build_list.py --run citing
 - [ ] 5 access + license + abstracts   classify_access.py
 - [ ] 6 screen relevance + topics  screen.py (claude / api / keywords / none)
-- [ ] 7 duplicates (automatic)     dedup.py --apply ; ask only about its to_review pairs
-- [ ] 8 report                     status.py ; topics.py summary ; offer Download
+- [ ] 7 supplementary information  find_si.py   (every in-scope paper's SI, listed before any download)
+- [ ] 8 duplicates (automatic)     dedup.py --apply ; ask only about its to_review pairs
+- [ ] 9 report                     status.py ; topics.py summary ; offer Download
 ```
 
 **1 · Estimate.** `search.py --topic <slug> --count-only` → on-topic estimate per source (before deduplication;
@@ -168,7 +174,20 @@ missing abstracts without classifying.
   <slug> merge`. Its `proposed_new_topics` are labels outside the vocabulary — if one recurs, offer to add it
   ([references/topics.md](references/topics.md)).
 
-**7 · Duplicates (automatic, no question).** `dedup.py --apply` merges the safe cases: preprint ↔ published version,
+**7 · SI.** `find_si.py --topic <slug>` lists every in-scope paper's supplementary information in the index before
+anything is downloaded; nothing is fetched. For every paper, batched or read from the answers `classify_access.py`
+cached: Crossref components (`<DOI>.s001`, `.s002` …: ACS, PLOS), DataCite deposits that declare IsSupplementTo the
+paper (publisher SI on Figshare, Zenodo, Dryad, CCDC structures, repositories), Crossref `is-supplemented-by`
+relations, and the PubMed Central open-access file lists. For topics up to 50,000 papers (or with `--deep`), also
+the routes that cost a request per paper, at each host's polite pace: Elsevier's SI CDN (mmcN files), MDPI's CDN
+(-s001 files) and the pages of publishers that serve scripted clients (Nature, Springer, BMC, Frontiers). SI that only
+sits on walled sites (Wiley, RSC, ACS and IOP pages) without a deposit of its own is found by `fetch_si.py` when the
+paper is downloaded. Answers are cached (`.scripts/enrich/si_*.sqlite`), so re-runs and updates only ask about new
+papers. The JSON gives `papers_with_si` and `by_route`; the index SI column says "Available (n deposits)". A catalog
+over 50,000 papers gets the batched routes; give a subset the per-paper ones with `find_si.py --topic <catalog> --ids
+<file of paper IDs>` (or index the subset as its own topic).
+
+**8 · Duplicates (automatic, no question).** `dedup.py --apply` merges the safe cases: preprint ↔ published version,
 repository copy ↔ journal article, same paper without/with DOI, Angewandte twins, byte-identical PDFs, one patented
 invention filed in several offices (WO, EP, US … and its HAL/OSTI copy: same title and inventors; one row keeps every
 number), and SI deposits indexed as papers (they become SI links of their paper). A dataset is never merged into its
@@ -179,9 +198,9 @@ show them side by side (title, DOI, venue, year; all of them in `.scripts/dedup_
 separate (Recommended) · Merge them all · Decide pair by pair. Then `dedup.py --keep-separate all` or
 `dedup.py --merge <a>:<b>,...` (a pair kept separate is never listed again). `to_review` is 0 → no question.
 
-**8 · Report.** `status.py --topic <slug>` and `topics.py summary --topic <slug>`. Tell the user in a few lines: papers
-indexed (by access type and document type), in scope, duplicates merged, the main Topic A values, papers without
-abstracts, sources skipped for want of a key, and where things are: `publications/<slug>/index/merged.csv` (plus one
+**9 · Report.** `status.py --topic <slug>` and `topics.py summary --topic <slug>`. Tell the user in a few lines: papers
+indexed (by access type and document type), in scope, papers with SI listed (find_si `papers_with_si`), duplicates
+merged, the main Topic A values, papers without abstracts, sources skipped for want of a key, and where things are: `publications/<slug>/index/merged.csv` (plus one
 CSV per access type and `excluded.csv`) and `publications/papers.db`. Over 1,048,576 rows the CSVs no longer open in
 Excel: say so and point to papers.db (DB Browser for SQLite) or a filtered export. Nothing was downloaded; offer
 Download mode.
@@ -192,9 +211,9 @@ Download mode.
 - [ ] GATE: status.py --topic <slug>; ask what to download
 - [ ] open routes                  download_open.py [--max N]
 - [ ] paywalled (if selected)      check_paywalled_access.py -> run_paywalled.sh
-- [ ] supplementary information    fetch_si.py
+- [ ] supplementary information    fetch_si.py   (the SI the index lists, then the paper page's)
 - [ ] abstracts from PDFs (if chosen)   fill_abstracts.py
-- [ ] duplicates (automatic)       dedup.py --apply (byte-identical PDFs) ; ask only about to_review, as Index step 7
+- [ ] duplicates (automatic)       dedup.py --apply (byte-identical PDFs) ; ask only about to_review, as Index step 8
 - [ ] report                       status.py
 ```
 
@@ -222,7 +241,8 @@ nohup zsh ${CLAUDE_SKILL_DIR}/scripts/run_paywalled.sh "$PWD" > /dev/null 2>&1 &
 
 `"access": false` → tell the user the `reason` and `next` from the JSON and follow it. The runner works for days.
 
-**SI.** `fetch_si.py --topic <slug>` after the open downloads. **Abstracts.** `fill_abstracts.py --topic <slug>` (only
+**SI.** `fetch_si.py --topic <slug>` after the open downloads: it downloads the SI the index lists (Index step 7)
+first, then looks for more on the paper's own page. **Abstracts.** `fill_abstracts.py --topic <slug>` (only
 if the user said yes; it reads the "Abstract" section of each PDF; `--heuristic` is unreliable — do not use it
 without showing the user a dry-run sample). **Report.** `status.py`: downloaded per access type, queued for EZproxy
 (days), where the PDFs are (`publications/<slug>/papers/<access>/<ID>.pdf`); the index `Notes` column says why a
@@ -243,7 +263,8 @@ move to `.scripts/<slug>/out_of_scope/`.
 - [ ] classify_access.py --topic <slug> --recheck-older-than 30   (new papers + re-check older ones; 0 = re-check
         every paper with fresh lookups — use 0 when the user asks to re-check everything)
 - [ ] screen.py (only unscreened papers are screened; keywords re-scores all)
-- [ ] dedup.py --apply (automatic) ; ask only about its to_review pairs (Index step 7)
+- [ ] find_si.py --topic <slug>    (SI of the new papers; papers asked before are skipped)
+- [ ] dedup.py --apply (automatic) ; ask only about its to_review pairs (Index step 8)
 - [ ] status.py ; ask to download the new papers -> download_open.py --added-since <run_started of the first
         build_list.py of this update> (+ paywalled, fetch_si)
 - [ ] report: NEW papers (build_list `new_ids`), access changes (classify_access `access_changes`: newly open /
@@ -263,13 +284,14 @@ of rows takes ~10 min) in the background, and refresh the index and papers.db on
 
 ```bash
 S=${CLAUDE_SKILL_DIR}/scripts; nohup sh -c "python3 -I $S/classify_access.py --topic <slug> --no-export && \
-  python3 -I $S/screen.py --topic <slug> keywords --no-export && python3 -I $S/dedup.py --apply --no-export && \
-  python3 -I $S/export.py --topic <slug>" > .scripts/<slug>/pipeline.log 2>&1 &
+  python3 -I $S/screen.py --topic <slug> keywords --no-export && python3 -I $S/find_si.py --topic <slug> --no-export && \
+  python3 -I $S/dedup.py --apply --no-export && python3 -I $S/export.py --topic <slug>" > .scripts/<slug>/pipeline.log 2>&1 &
 ```
 
 (`keywords` only when that is the method the user chose — ask, step 2.) Progress: the log, and
-`classify_access_progress` in `.scripts/<slug>/state.json`. Then answer questions from papers.db, and download per
-subtopic: a subtopic is a new topic (`init_topic.py`, its own intake questions) whose list comes from the catalog —
+`classify_access_progress` / `find_si_progress` in `.scripts/<slug>/state.json`. The catalog gets the batched SI
+routes; every subtopic gets the per-paper ones when its own `find_si.py` runs (up to 50,000 papers). Then answer
+questions from papers.db, and download per subtopic: a subtopic is a new topic (`init_topic.py`, its own intake questions) whose list comes from the catalog —
 `export.py --name <sub> --topic <catalog> --subject ... --format csv`, then `import_list.py --topic <sub> --file
 publications/exports/<sub>.csv` and the import steps. A paper shared by both topics stays one row, with its access
 type and license already known.
@@ -280,7 +302,8 @@ Once, when nothing else is running on the project: `repair.py` (cleans stored ab
 recognize, recomputes the vocabulary topics of changed papers), `dedup.py --apply` (patent families, SI deposits that
 older versions merged into papers or kept as papers), `build_list.py --topic <slug> --si-links-only` (SI deposits
 older versions dropped), `topics.py assign --topic <slug>` (Topic A/B/C from the current vocabulary; Claude, API and
-manual topics are kept). Each prints what it changed; tell the user the numbers.
+manual topics are kept), `find_si.py --topic <slug>` (the SI of every in-scope paper, for an index built before
+find_si existed). Each prints what it changed; tell the user the numbers.
 
 ## Mode: New index (topic exists, search again)
 
@@ -293,8 +316,8 @@ A Web of Science export (Plain text, Tab-delimited, BibTeX or RIS), a Scopus exp
 EndNote / Mendeley file, a list of DOIs or a web page of DOIs: `import_list.py --topic <slug> --file <path>` (or
 `--url`). It keeps the file's abstracts and author keywords and adds Web of Science / Scopus to the Database column;
 Excel files are refused (ask for Plain text or Tab-delimited instead). Then the Index steps from 3 on, for the
-imported run only: `build_list.py --topic <slug> --run manual` → `classify_access.py` → `screen.py` → `dedup.py
---apply` → report (papers added, abstracts kept from the file, duplicates merged, imported papers the screening put
+imported run only: `build_list.py --topic <slug> --run manual` → `classify_access.py` → `screen.py` → `find_si.py`
+→ `dedup.py --apply` → report (papers added, abstracts kept from the file, duplicates merged, imported papers the screening put
 out of scope). A new topic gets `init_topic.py` first.
 
 ## Questions and lists (no mode)
@@ -317,7 +340,7 @@ python3 -I ${CLAUDE_SKILL_DIR}/scripts/export.py --name <name> --topic <slug> [-
 
   `--subject` matches Topic A/B/C and related topics; add `--main-only` when the user means papers mainly about it.
   Errata and retracted papers are never exported.
-- "Check for duplicates" → `dedup.py --apply`, then as Index step 7.
+- "Check for duplicates" → `dedup.py --apply`, then as Index step 8.
 
 ## Utility scripts (`${CLAUDE_SKILL_DIR}/scripts/`, run with `python3 -I`; `--help` for details)
 
@@ -330,11 +353,12 @@ python3 -I ${CLAUDE_SKILL_DIR}/scripts/export.py --name <name> --topic <slug> [-
 | `build_list.py` | gate, dedup, doc types, SI links, merge into the ledger, vocabulary topics, refresh index; `--batches N`, `--no-export`, `--si-links-only` |
 | `classify_access.py` | access type, exact license, abstracts/keywords (any size, blocks; OpenAlex first, Unpaywall capped); `--recheck-older-than DAYS`, `--abstracts-only`, `--no-export` |
 | `screen.py` | relevance 0-5 + Topic A/B/C; `prep/next/merge`, `api`, `keywords`, `none`, `status`; `--no-export` |
+| `find_si.py` | every in-scope paper's SI listed in the index before any download (Crossref components, DataCite, Crossref relations, PMC; Elsevier/MDPI CDNs and publisher pages up to 50,000 papers); `--deep`, `--no-deep`, `--ids`, `--no-export` |
 | `topics.py` | `vocab`, `summary`, `assign` (`--no-export`), `proposed`, `set` (manual correction) |
 | `status.py` | progress table + download estimate (Download gate, reports, "how far along") |
 | `download_open.py` | open-route downloads, PDF license check, folder routing; `--added-since`, `--retry-failed` |
 | `check_paywalled_access.py` / `run_paywalled.sh` | EZproxy check / the single rate-limited runner (all topics) |
-| `fetch_si.py` | supplementary files into `papers/SI/<access>/` |
+| `fetch_si.py` | downloads the SI the index lists (then the paper page's) into `papers/SI/<access>/` |
 | `fill_abstracts.py` | abstracts from downloaded PDFs (Download / curation option) |
 | `dedup.py` | `--apply` merges the safe duplicates incl. patent families and SI deposits (automatic); `--merge` / `--keep-separate` for the uncertain pairs; `--no-export` |
 | `repair.py` | once after a skill upgrade: re-apply the current abstract and non-paper rules to stored papers |
