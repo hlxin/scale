@@ -83,10 +83,10 @@ def crossref_components(dois, cache):
             try:
                 items = get_json("https://api.crossref.org/works", params=params, tries=5, timeout=(20, 120))["message"]["items"]
             except HTTPFail as e:
-                if str(getattr(e, "status", "")) in ("400", "414") and len(part) > 1:   # a DOI Crossref cannot parse
+                if str(getattr(e, "status", "")) in ("400", "414", "431") and len(part) > 1:   # a DOI Crossref cannot parse, or a request line too long
                     halves = [ask(part[:len(part) // 2]), ask(part[len(part) // 2:])]
                     return None if None in halves else halves[0] + halves[1]
-                if str(getattr(e, "status", "")) in ("400", "414"):
+                if str(getattr(e, "status", "")) in ("400", "414", "431"):
                     return []
                 log(f"find_si: crossref components batch failed ({e}); retried on the next run")
                 return None
@@ -146,9 +146,9 @@ def datacite_deposits(dois, cache):
                                                               title, rtype])
                 url, params = (d.get("links") or {}).get("next"), None
         except HTTPFail as e:
-            if str(getattr(e, "status", "")) in ("400", "414") and len(part) > 1:
+            if str(getattr(e, "status", "")) in ("400", "414", "431") and len(part) > 1:
                 return ask(part[:len(part) // 2]) + ask(part[len(part) // 2:])
-            if str(getattr(e, "status", "")) in ("400", "414"):
+            if str(getattr(e, "status", "")) in ("400", "414", "431"):
                 return [{"doi": part[0], "deposits": []}]
             log(f"find_si: datacite batch failed ({e}); retried on the next run")
             return []
