@@ -6,10 +6,11 @@ reviews, preprints, conference papers, theses, reports, patents and datasets) fo
 into one row per work, with title, abstract, authors (ORCID, institutions), venue, year, DOI and other identifiers,
 citations and topics. Nothing in it is downloaded. Everything lives in one SQLite file, `papers.db` (10.9 GB).
 
-> **In the hlxin/scale repository** this folder holds the index as gzipped CSV parts (`index/`, described in
-> [README.md](README.md)) plus this guide and `consult.py`. `papers.db` itself is **not** in the repository (too
-> large for GitHub): pass `--db /path/to/papers.db`, set `CATALYSIS_PAPERS_DB`, or put the file next to
-> `consult.py`. The database holds every abstract; the CSV parts keep abstracts only for OA and OA+ND papers.
+> **In the hlxin/scale repository** this folder holds `co2-reduction-electricity.db.gz`, a subset of `papers.db`
+> with the 23,641 papers on CO2 reduction driven by electricity ([README.md](README.md)). Unpack it
+> (`gunzip -k co2-reduction-electricity.db.gz`) and `consult.py` uses it by default. The counts quoted in this
+> guide refer to the full catalog (2.3 million records, not in the repository; pass `--db /path/to/papers.db`);
+> on the subset, questions outside CO2 reduction return only the papers that overlap with it.
 
 You can ask it questions in two ways:
 

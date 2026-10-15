@@ -1,79 +1,77 @@
-# Catalysis literature index
+# CO2 reduction driven by electricity: paper database
 
-An index of the catalysis literature, the whole field (heterogeneous, homogeneous, electro-, photo-, bio-/enzymatic,
-organo- and plasma catalysis), built on 2026-10-13/14 with the `paper-acquisition` skill (v3.3, in
+A SQLite database of **23,641 papers on CO2 reduction driven by electricity**, taken from a whole-field catalysis
+index (2,313,014 records) built on 2026-10-13/14 with the `paper-acquisition` skill (v3.3, in
 [`skills/paper-acquisition/`](../skills/paper-acquisition/)). It is an index of records, not a corpus: no PDF was
 downloaded.
 
-| | |
-|---|---|
-| Searched | 24 open databases (OpenAlex, Crossref, Semantic Scholar, Europe PMC, OpenAIRE papers and datasets, PubMed Central, arXiv, OSTI, DOAJ, HAL, Zenodo, DataCite, J-STAGE, CiNii, PLOS, NASA NTRS, Figshare, OSF, Dataverse, Dryad, Materials Cloud, Crossref preprint servers, Europe PMC patents) |
-| Raw hits | 11,369,538, kept when the title or abstract carries "cataly…" |
-| Records | **2,313,014** after deduplication (same DOI, preprint ↔ published version, patent families, repository copies) |
-| In scope | **2,186,836** after keyword screening (Relevance 5 = "cataly…" in the title, 4 = only in the abstract) |
-| Access type and license | every record, from OpenAlex, Crossref, Unpaywall, Europe PMC and PubMed Central |
-
-## Files
-
-The index is split by access type into gzipped CSV parts of at most 45 MB (GitHub's file limit). Every part has the
-header row, so each one can be read on its own.
-
-| Files | Rows | What |
+| File | Size | Use |
 |---|---|---|
-| `index/OA-01…07.csv.gz` | 380,167 | open access with a licence allowing derivatives (CC BY, BY-SA, BY-NC, BY-NC-SA, CC0, public domain) |
-| `index/OA+ND-01…02.csv.gz` | 74,198 | open access, no derivatives (CC BY-ND, BY-NC-ND) |
-| `index/Free-to-read-01…02.csv.gz` | 366,090 | an open copy exists but carries no reuse licence (bronze, publisher terms); patents |
-| `index/Paywalled-01…06.csv.gz` | 1,366,381 | no open copy found |
-| `index/excluded-01.csv.gz` | 126,178 | out of scope after screening, non-papers (errata, corrections, ChemInform abstract digests, cover pages) and retracted papers, with the reason in `Notes` |
+| `co2-reduction-electricity.db.gz` | 34 MB | `gunzip -k co2-reduction-electricity.db.gz` gives `co2-reduction-electricity.db` (107 MB, SQLite) |
 
-The four access files together are the in-scope index (the skill's `merged.csv`). Document types in scope: 1,899,305
-articles, 120,252 reviews, 58,310 patents (one row per invention), 32,618 conference papers, 31,982 preprints,
-16,099 reports, 14,269 datasets, 6,479 theses and 7,522 others.
+## What is in it
 
-**Abstracts** are included only where the paper's licence allows redistribution: rows whose `Access type` is OA or
-OA+ND (their licence and its URL are in `License` and `License URL`). In Free-to-read and Paywalled rows the
-`Abstract` column is left empty. The full database (`papers.db`) keeps every abstract; it is not in this repository
-(10.9 GB).
+Papers on the reduction of CO2 (electrochemical, plasma, electrified heating) found in 24 open databases (OpenAlex,
+Crossref, Semantic Scholar, Europe PMC, OpenAIRE, PubMed Central, arXiv, OSTI, DOAJ, HAL, Zenodo, DataCite, J-STAGE,
+CiNii and others), deduplicated (same DOI, preprint ↔ published version, patent families). Errata, notices and
+retracted papers are left out.
 
-## Columns (32)
+| Driver of the CO2 reduction | Strict | Broad only | Total |
+|---|---|---|---|
+| Electrochemical (electrocatalysis, electrolysis, metal-CO2 batteries, bioelectrocatalysis) | 17,537 | 4,392 | **21,929** |
+| Non-thermal plasma (electric discharge) | 1,636 | 129 | 1,765 |
+| Electrified heating (Joule, induction, microwave) | 73 | 82 | 155 |
 
-`ID` (stable record number) · `Title` · `Authors` (first 10) · `Year` · `Venue` · `Publisher` · `Doc type` · `DOI/ID`
-· `URL` · `Abstract` · `Keywords` · `Topic A`, `Topic B`, `Topic C` (main topics from a 125-term catalysis
-vocabulary, `skills/paper-acquisition/vocab/catalysis.json`) · `Related topics` · `Relevance` (0-5) ·
-`Relevance note` · `Access type` · `License` (exact, with version) · `License URL` · `License source` · `Version` ·
-`Database` (every source that found the record) · `Index` · `Citations` · `Downloaded` · `Path` · `SI` · `Extracted` ·
-`Notes` · `Date added` · `Last checked`. Full definitions: `skills/paper-acquisition/references/database.md`.
+*Strict:* CO2 reduction and the driver appear in the title or among the paper's main topics (Topic A/B/C). *Broad
+only:* they appear only in the abstract or keywords. A paper can have two drivers. Table `co2_selection`
+(`paper_id`, `driver`, `level`) records each match, so any of these sets can be selected.
 
-## Reading it
+Electrochemical, strict: 17,379 papers (15,058 articles, 1,507 reviews, 452 preprints, 251 conference papers; plus
+146 datasets and a few patents). 14,043 papers have CO2RR as Topic A, B or C. Access type of the 21,929
+electrochemical records: OA 5,006 · OA+ND 1,106 · Free-to-read 3,397 · Paywalled 12,420.
 
-```python
-import glob
-import pandas as pd
+**Abstracts** are included only where the paper's licence allows redistribution (Access type OA or OA+ND: 6,534
+papers). The `License` and `License URL` columns give each paper's licence.
 
-oa = pd.concat(pd.read_csv(f, dtype=str) for f in sorted(glob.glob("catalysis-index/index/OA-*.csv.gz")))
-in_scope = pd.concat(pd.read_csv(f, dtype=str) for f in sorted(glob.glob("catalysis-index/index/*.csv.gz"))
-                     if "excluded" not in f)
+## Tables
+
+Same layout as the paper-acquisition `papers.db` (column definitions in the `about` table and in
+`skills/paper-acquisition/references/database.md`):
+
+| Table | Contents |
+|---|---|
+| `papers` | one row per paper: DOI, title, authors, year, venue, publisher, doc type, abstract, keywords, Topic A/B/C, access type, exact licence, citations, notes |
+| `co2_selection` | why the paper is in this database: driver and level |
+| `authors`, `paper_authors` | authors in order, with ORCID, institutions and countries |
+| `identifiers` | every identifier of a paper (DOI aliases, PMID, PMCID, arXiv, OSTI, patent numbers) |
+| `paper_subjects`, `subjects` | Topic A/B/C and related topics from a 125-term catalysis vocabulary |
+| `paper_sources`, `sources` | which databases found each paper |
+| `supplements` | supporting-information deposits linked to their paper |
+| `papers_fts` | full-text index on title, abstract and keywords |
+
+```sql
+-- electrochemical CO2 reduction, strict, newest first
+SELECT p.year, p.title, p.doi, p.venue FROM co2_selection s JOIN papers p ON p.id = s.paper_id
+WHERE s.driver = 'electro' AND s.level = 'strict' ORDER BY p.year DESC, p.citations DESC;
+-- open-access copper papers among them
+SELECT p.title, p.doi, p.license FROM papers_fts f JOIN papers p ON p.id = f.rowid
+JOIN co2_selection s ON s.paper_id = p.id AND s.driver = 'electro'
+WHERE papers_fts MATCH 'copper' AND p.access_type IN ('OA', 'OA+ND');
 ```
 
-One CSV from the parts, in a shell (the header is a single line; abstracts may contain line breaks):
-
-```bash
-{ gzip -dc catalysis-index/index/OA-01.csv.gz | head -1; for f in catalysis-index/index/OA-*.csv.gz; do gzip -dc "$f" | tail -n +2; done; } > OA.csv
-```
-
-[`CONSULT.md`](CONSULT.md) and [`consult.py`](consult.py) answer questions such as "how many papers are about CO2
-reduction with electricity as the main driver?" from `papers.db` (pass `--db /path/to/papers.db`). The
-paper-acquisition skill can also import these CSVs into a new project (`import_list.py` reads its own index files).
+[`consult.py`](consult.py) answers questions in one command once the file is unpacked here, for example
+`python3 -I consult.py count --concept co2-reduction --driver electro` ([`CONSULT.md`](CONSULT.md) explains the
+concepts and drivers). The membership of this database is `co2_selection`, decided on the full database with every
+abstract; consult.py's text matching on this copy sees abstracts only for OA papers, so it finds slightly fewer
+(17,365 strict and 21,041 broad electrochemical records).
 
 ## Limits
 
+- The full catalysis database (2,313,014 records, 10.9 GB) is not in this repository.
 - Keyed databases were not searched (Scopus, Web of Science, CORE, Lens, EPO, Springer Nature, IEEE Xplore, NASA
-  ADS), so some journal-only records and many patents are missing.
-- Relevance comes from a deterministic keyword rule; Topic A/B/C from a vocabulary match (83.7 % of in-scope records
-  have a Topic A).
-- 27,899 pairs with the same or nearly the same title (conference abstract and article, dataset and paper,
-  corrections, Part I/II) were reviewed as a group and kept as separate records.
-- 419,256 in-scope records have no abstract in any source the skill reads.
+  ADS).
+- The selection uses deterministic text and vocabulary rules: the strict level is precise, the broad level adds
+  related work (e.g. reviews of electrocatalysis that cover CO2 reduction).
 - Access types are the metadata verdict; a downloaded PDF's printed licence can still change one.
-- The bibliographic metadata comes from the open databases above. An abstract stays under its paper's licence
-  (`License` column); this folder's licence entry in `REUSE.toml` is for the maintainers to set.
+- An abstract stays under its paper's licence (`License` column); this folder's licence entry in `REUSE.toml` is for
+  the maintainers to set.

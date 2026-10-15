@@ -39,7 +39,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 # papers.db is not in the repository (10.9 GB): --db, $CATALYSIS_PAPERS_DB, next to this file, or a project layout
 DB_CANDIDATES = ([Path(os.environ["CATALYSIS_PAPERS_DB"])] if os.environ.get("CATALYSIS_PAPERS_DB") else []) + [
-    ROOT / "papers.db", ROOT / "publications" / "papers.db", ROOT.parent / "publications" / "papers.db"]
+    ROOT / "co2-reduction-electricity.db", ROOT / "papers.db", ROOT / "publications" / "papers.db", ROOT.parent / "publications" / "papers.db"]
 DEFAULT_DB = next((p for p in DB_CANDIDATES if p.exists()), ROOT / "papers.db")
 VOCAB_FILES = [ROOT.parent / "skills" / "paper-acquisition" / "vocab" / "catalysis.json",  # hlxin/scale layout
                ROOT / ".claude" / "skills" / "paper-acquisition" / "vocab" / "catalysis.json",  # a project folder
@@ -266,8 +266,8 @@ class Catalog:
     def __init__(self, db):
         if not Path(db).exists():
             sys.exit(f"no database at {db}. papers.db is not in the repository (10.9 GB): pass --db /path/to/papers.db "
-                     f"or set CATALYSIS_PAPERS_DB. The CSV parts in index/ answer many questions without it "
-                     f"(README.md).")
+                     f"or set CATALYSIS_PAPERS_DB. In this folder: gunzip -k co2-reduction-electricity.db.gz "
+                     f"(the CO2 subset, README.md).")
         self.db = Path(db)
         self.c = sqlite3.connect(f"file:{db}?mode=ro", uri=True)
         self.c.execute("PRAGMA query_only=1")
