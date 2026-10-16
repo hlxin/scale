@@ -1,13 +1,13 @@
 # CO2 reduction driven by electricity: paper database
 
-A SQLite database of **23,641 papers on CO2 reduction driven by electricity**, taken from a whole-field catalysis
+A SQLite database of **23,630 papers on CO2 reduction driven by electricity**, taken from a whole-field catalysis
 index (2,313,014 records) built on 2026-10-13/14 with the `paper-acquisition` skill (v3.3, in
 [`skills/paper-acquisition/`](../skills/paper-acquisition/)). It is an index of records, not a corpus: no PDF was
 downloaded.
 
 | File | Size | Use |
 |---|---|---|
-| `co2-reduction-electricity.db.gz` | 35 MB | `gunzip -k co2-reduction-electricity.db.gz` gives `co2-reduction-electricity.db` (110 MB, SQLite) |
+| `co2-reduction-electricity.db.gz` | 37 MB | `gunzip -k co2-reduction-electricity.db.gz` gives `co2-reduction-electricity.db` (122 MB, SQLite) |
 
 ## What is in it
 
@@ -18,7 +18,7 @@ retracted papers are left out.
 
 | Driver of the CO2 reduction | Strict | Broad only | Total |
 |---|---|---|---|
-| Electrochemical (electrocatalysis, electrolysis, metal-CO2 batteries, bioelectrocatalysis) | 17,537 | 4,392 | **21,929** |
+| Electrochemical (electrocatalysis, electrolysis, metal-CO2 batteries, bioelectrocatalysis) | 17,526 | 4,392 | **21,918** |
 | Non-thermal plasma (electric discharge) | 1,636 | 129 | 1,765 |
 | Electrified heating (Joule, induction, microwave) | 73 | 82 | 155 |
 
@@ -26,18 +26,18 @@ retracted papers are left out.
 only:* they appear only in the abstract or keywords. A paper can have two drivers. Table `co2_selection`
 (`paper_id`, `driver`, `level`) records each match, so any of these sets can be selected.
 
-Electrochemical, strict: 17,379 papers (15,058 articles, 1,507 reviews, 452 preprints, 251 conference papers; plus
-146 datasets and a few patents). 14,043 papers have CO2RR as Topic A, B or C. Access type of the 21,929
-electrochemical records: OA 5,006 · OA+ND 1,106 · Free-to-read 3,397 · Paywalled 12,420.
+Electrochemical, strict: 17,368 papers (14,800 articles, 1,507 reviews, 463 preprints, 275 conference papers, 130
+theses, 113 book chapters …; plus 146 datasets). 14,035 papers have CO2RR as Topic A, B or C. Access type of the
+21,918 electrochemical records: OA 4,750 · OA+ND 1,281 · Free-to-read 3,475 · Paywalled 12,412.
 
-**Abstracts** are included only where the paper's licence allows redistribution (Access type OA or OA+ND: 6,534
+**Abstracts** are included only where the paper's licence allows redistribution (Access type OA or OA+ND: 6,444
 papers). The `License` and `License URL` columns give each paper's licence.
 
-**Supporting information** was looked up for every paper before anything is downloaded (`find_si.py`): **12,432 SI
-files and deposits for 8,176 papers** (OA 2,364 · OA+ND 620 · Free-to-read 1,005 · Paywalled 4,187), listed in table
-`supplements` (DOI or file URL, title, and the route that found it: Elsevier SI CDN 3,416 · ACS/PLOS `.s001`
-components 3,323 · PubMed Central 2,953 · data deposits such as CCDC structures and Dryad 1,451 · publisher pages
-992 · MDPI CDN 140 · Figshare/DataCite/other 157) and in the `si` column ("Available (n deposits)"). SI that only sits
+**Supporting information** was looked up for every paper before anything is downloaded (`find_si.py`): **12,440 SI
+files and deposits for 8,182 papers** (OA 2,185 · OA+ND 753 · Free-to-read 1,056 · Paywalled 4,188), listed in table
+`supplements` (DOI or file URL, title, and the route that found it: Elsevier SI CDN 3,418 · ACS/PLOS `.s001`
+components 3,326 · PubMed Central 2,955 · data deposits such as CCDC structures and Dryad 1,451 · publisher pages
+993 · MDPI CDN 140 · Figshare/DataCite/other 157) and in the `si` column ("Available (n deposits)"). SI that only sits
 on walled publisher sites (Wiley, RSC, ACS and IOP pages) is not listed; it is found when a paper is downloaded.
 
 ## Tables
@@ -70,7 +70,11 @@ WHERE papers_fts MATCH 'copper' AND p.access_type IN ('OA', 'OA+ND');
 `python3 -I consult.py count --concept co2-reduction --driver electro` ([`CONSULT.md`](CONSULT.md) explains the
 concepts and drivers). The membership of this database is `co2_selection`, decided on the full database with every
 abstract; consult.py's text matching on this copy sees abstracts only for OA papers, so it finds slightly fewer
-(17,365 strict and 21,041 broad electrochemical records).
+(17,355 strict and 21,026 broad electrochemical records).
+
+**Downloaded** (`papers.downloaded`, `files`): 4,856 records have their PDF, and their SI where it was found, in the
+group's local corpus (open access only so far; paywalled papers come later through the library proxy). The PDFs are
+not in this repository.
 
 ## Limits
 
