@@ -200,7 +200,7 @@ nodes:
         type: list
         items:
           type: text
-        description: The steps as the source words them; structured steps are ProcedureStep nodes (HAS_PROCEDURE_STEP).
+        description: The steps as the source words them; structured steps are ProcedureStep nodes linked PART_OF the preparation, with order.
       temperature:
         type: value
       pressure:

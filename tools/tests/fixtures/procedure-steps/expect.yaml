@@ -1,0 +1,9 @@
+# Procedure-step fixtures (README.md). The pass document is valid; the fail document is rejected with exactly one
+# error, whose message contains `error`; `reason` says why the schema must reject it. test_procedure_steps.py reads this index.
+pass:
+  - file: pass-steps-part-of.json
+    covers: a multi-step preparation whose ProcedureStep nodes are linked PART_OF the Preparation, each with its order
+fail:
+  - file: fail-has-procedure-step.json
+    error: unknown edge type 'HAS_PROCEDURE_STEP'
+    reason: No such edge is declared; a step is linked to its preparation by the kernel's PART_OF (Procedure to Procedure, with order).
