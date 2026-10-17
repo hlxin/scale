@@ -1,0 +1,83 @@
+{
+  "nodes": [
+    {
+      "id": "ex:exmpl/steps/prep",
+      "label": "Preparation",
+      "props": {
+        "name": "synthetic multi-step support preparation",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:exmpl/steps/step/1",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "step 1: desilicate",
+        "action": "other",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:exmpl/steps/step/2",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "step 2: wash",
+        "action": "wash",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:exmpl/steps/step/3",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "step 3: calcine",
+        "action": "calcine",
+        "origin": "synthetic"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:exmpl/steps/link/1",
+      "type": "PART_OF",
+      "props": {
+        "order": 1,
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/steps/step/1",
+      "target": "ex:exmpl/steps/prep"
+    },
+    {
+      "id": "ex:exmpl/steps/link/2",
+      "type": "PART_OF",
+      "props": {
+        "order": 2,
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/steps/step/2",
+      "target": "ex:exmpl/steps/prep"
+    },
+    {
+      "id": "ex:exmpl/steps/link/3",
+      "type": "PART_OF",
+      "props": {
+        "order": 3,
+        "origin": "synthetic"
+      },
+      "source": "ex:exmpl/steps/step/3",
+      "target": "ex:exmpl/steps/prep"
+    }
+  ],
+  "directed": true,
+  "graph": {
+    "data_status": "synthetic_example",
+    "graph_id": "ex:exmpl/steps/pass",
+    "schema": "scale-catal",
+    "schema_version": "0.2.1",
+    "stewardship": {
+      "access": "public"
+    },
+    "title": "Multi-step preparation: ProcedureStep PART_OF Preparation with order (synthetic)"
+  },
+  "multigraph": true
+}

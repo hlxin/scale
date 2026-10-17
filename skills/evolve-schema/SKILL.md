@@ -55,8 +55,10 @@ other: it edits the schema files directly, and CI checks that it carries what it
    needs: a breaking change (something removed, changed or narrowed) raises the second number (0.1.0 -> 0.2.0),
    an additive change the third (0.1.0 -> 0.1.1). `scale schema bump --base origin/main [--note "…"]` freezes the
    base version (the manifest and the catalysis file into `domain/graph/frozen/`, the kernel into
-   `core/graph/frozen/`), raises the version in every file that states it and registers the migration step in
-   `tools/pgraph_migrate.py`. Run it once, after the edit. A breaking change also needs its rewrite rule
+   `core/graph/frozen/`), raises the version in every file that states it, registers the migration step in
+   `tools/pgraph_migrate.py` (pass `--note` to say what changed), records the new version's spec digest in
+   README.md's table (the base marked frozen) and pins the fixture documents the branch adds to the new version.
+   Run it once, after the edit. A breaking change also needs its rewrite rule
    (`STEP_RULES[<base version>]`), so that `scale kg update` can move documents.
 6. **Check.** Add a line under `## Unreleased` in `CHANGELOG.md`, then run `scale schema check --base origin/main`
    and `scale check --fast` until both pass.

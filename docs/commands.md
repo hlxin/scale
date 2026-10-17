@@ -129,14 +129,17 @@ narrowed) raises the second number (0.1.0 -> 0.2.0), any other change the third 
 `bump` freezes the base version (its kernel as `core/graph/frozen/kernel-<v>.yaml`, the catalysis manifest as
 `domain/graph/frozen/scale-catal-<v>.yaml` with its parts in `v<v>/`, digests appended to each `SHA256SUMS`),
 raises the version in the manifest, `CORE.yaml`, `DOMAIN.yaml`, `scale-release.yaml`, the kernel-only example
-manifest and the sentences of the documentation that name it, and registers `STEPS[<base>] = (<new>, <note>)` in
-`tools/pgraph_migrate.py`. It refuses an unchanged schema, a version raised already and a version frozen
+manifest and the sentences of the documentation that name it, registers `STEPS[<base>] = (<new>, <note>)` in
+`tools/pgraph_migrate.py` (the note defaults to the kind of change), adds the new version's row to README.md's table
+of spec digests (the base's row marked frozen) and pins the fixture and example documents the branch adds (under
+`tools/tests/fixtures`, `domain/examples`, ...) to the new version; documents committed before keep theirs. It refuses an unchanged schema, a version raised already and a version frozen
 before, and writes into a repository checkout only.
 
 `check` asks for: the version raised by the rule; the base frozen, its copy's spec digest equal to the base's;
 every file stating the new version; the migration step, and for a breaking change its rule (`STEP_RULES[<base>]`);
-every label and edge type the change adds used in a valid fixture or example document; and a changed
-`CHANGELOG.md`. It reads the steps from the repository's own `pgraph_migrate.py`. `--comment FILE` writes the
+every label and edge type the change adds used in a valid fixture or example document; the new version's spec
+digest in README.md's table and the base marked frozen there; no document the branch adds pinning the base; and a
+changed `CHANGELOG.md`. It reads the steps from the repository's own `pgraph_migrate.py`. `--comment FILE` writes the
 reviewer's summary (Markdown); `--json` prints the whole result. `scale ci spec-changes` runs it when the
 specification changes.
 
