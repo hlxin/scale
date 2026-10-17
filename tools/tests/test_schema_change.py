@@ -137,3 +137,51 @@ def test_a_bundle_at_another_schema_version_is_a_follow_up_not_a_problem(repo):
     assert res["ok"] and res["follow_ups"] == [{"bundle": "examples/demo/demo_v1.0.0.zip", "schema_version": HEAD_VERSION,
                                                 "version": "1.0.0"}]
     assert "re-export these bundles" in summary(res) and "`examples/demo/demo_v1.0.0.zip`" in summary(res)
+
+
+def test_bump_records_the_digest_repins_the_new_documents_and_names_the_kind(repo):
+    """`bump` marks the base version frozen in README.md's table of spec digests and records the new version's digest,
+    pins the fixture documents the branch adds to the new version (documents already committed keep theirs), and a
+    change of no meaning gets a step note that reads as such. `check` asks for each of these."""
+    import json
+    from scale import pgraph
+    head_digest = pgraph.spec_sha256(pgraph.load_spec(repo / "domain/graph/scale-catal.yaml"))
+    (repo / "README.md").write_text(f"| version | spec digest |\n|---|---|\n| scale-catal {HEAD_VERSION} | `{head_digest}` |\n")
+    old_doc = repo / "tools/tests/fixtures/demo/old.json"
+    old_doc.parent.mkdir(parents=True)
+    old_doc.write_text(json.dumps({"graph": {"schema_version": HEAD_VERSION}}))
+    git(repo, "add", "-A")
+    git(repo, "commit", "-q", "-m", "a README and a committed fixture")
+    git(repo, "branch", "-f", "main")
+    _edit(repo / "domain/graph/catalysis.yaml",
+          lambda m: m["nodes"]["Preparation"]["properties"]["steps"].__setitem__("description", "Reworded (test)."))
+    new_doc = old_doc.with_name("new.json")
+    new_doc.write_text(json.dumps({"graph": {"schema_version": HEAD_VERSION}}))
+    assert any("pins" in p and "new.json" in p for p in check(repo, "main")["problems"])
+    out = bump(repo, "main")
+    to = out["version"]
+    assert out["kind"] == "no change in meaning" and to == next_version(HEAD_VERSION, 0)
+    assert repo_steps(repo)[0][HEAD_VERSION] == (to, "no change in meaning")
+    assert out["repinned"] == ["tools/tests/fixtures/demo/new.json"]
+    assert json.loads(new_doc.read_text())["graph"]["schema_version"] == to
+    assert json.loads(old_doc.read_text())["graph"]["schema_version"] == HEAD_VERSION
+    text = (repo / "README.md").read_text()
+    new_digest = pgraph.spec_sha256(pgraph.load_spec(repo / "domain/graph/scale-catal.yaml"))
+    assert f"| scale-catal {HEAD_VERSION} (frozen) | `{head_digest}` |\n| scale-catal {to} | `{new_digest}` |" in text
+    changelog = repo / "CHANGELOG.md"
+    changelog.write_text(changelog.read_text().replace("## Unreleased\n", "## Unreleased\n\n- A note (test).\n", 1))
+    assert check(repo, "main")["ok"], check(repo, "main")["problems"]
+    (repo / "README.md").write_text(text.replace(f"| scale-catal {to} | `{new_digest}` |\n", ""))
+    assert any("does not record the spec digest" in p for p in check(repo, "main")["problems"])
+
+
+def test_bump_refuses_before_writing_when_the_digest_table_lacks_the_base(repo):
+    (repo / "README.md").write_text("# no table\n")
+    git(repo, "add", "-A")
+    git(repo, "commit", "-q", "-m", "a README without the table")
+    git(repo, "branch", "-f", "main")
+    _edit(repo / "domain/graph/catalysis.yaml",
+          lambda m: m["nodes"]["Preparation"]["properties"]["steps"].__setitem__("description", "Reworded (test)."))
+    with pytest.raises(ScaleError, match="no row"):
+        bump(repo, "main")
+    assert not (repo / f"domain/graph/frozen/scale-catal-{HEAD_VERSION}.yaml").exists()

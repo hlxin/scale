@@ -17,9 +17,14 @@ is checked here, against the base the pull request merges into (``origin/main`` 
   breaking change also registers its rule (``STEP_RULES[<base>]``), which rewrites what it must;
 * **provisional.** Every label, edge type and property the change adds is ``maturity: provisional``;
 * **tests.** Every label and edge type the change adds appears in a valid fixture or example document;
+* **the recorded digest.** README.md's table of spec digests marks the base version frozen and records the new
+  version's digest;
+* **documents written for the change pin it.** A fixture or example document the branch adds pins the new version,
+  not the base;
 * **a CHANGELOG line.**
 
-``scale schema bump`` writes the frozen copy, the versions and the step; the rest is the change itself.
+``scale schema bump`` writes the frozen copy, the versions, the step, the digest row and the new documents' pins; the
+rest is the change itself.
 """
 
 from __future__ import annotations
@@ -324,6 +329,54 @@ def _register_step(repo: Path, frm: str, to: str, note: str) -> None:
     f.write_text(text[:j] + f'\n    "{frm}": ("{to}", {note!r}),' + text[j:])
 
 
+DIGEST_TABLE = "README.md"
+
+
+def _digest_row(version: str, digest: str) -> str:
+    return f"| scale-catal {version} | `{digest}` |"
+
+
+def _record_digest(repo: Path, ver: str, new: str, digest: str) -> None:
+    """In README.md's table of spec digests, mark the row of ``ver`` frozen and add the row of ``new`` after it."""
+    f = Path(repo) / DIGEST_TABLE
+    if not f.is_file():
+        return
+    text = f.read_text(encoding="utf-8")
+    m = re.search(rf"^\| scale-catal {re.escape(ver)} \|.*$", text, re.M)           # bump checked it is there
+    row = m.group(0).replace(f"scale-catal {ver} |", f"scale-catal {ver} (frozen) |", 1)
+    f.write_text(text[:m.start()] + row + "\n" + _digest_row(new, digest) + text[m.end():], encoding="utf-8")
+
+
+PIN = re.compile(r'"schema_version":\s*"(?P<v>\d+\.\d+\.\d+)"')
+
+
+def added_documents(repo: Path, merge_base_ref: str) -> list[str]:
+    """The fixture and example documents (``FIXTURE_ROOTS``, JSON) the branch adds: committed, staged or untracked."""
+    roots = [r for r in FIXTURE_ROOTS if (Path(repo) / r).is_dir()]
+    if not roots:
+        return []
+    added = _git(repo, "diff", "--name-only", "--diff-filter=A", merge_base_ref, "--", *roots).decode().split()
+    added += _git(repo, "ls-files", "--others", "--exclude-standard", "--", *roots).decode().split()
+    return sorted({p for p in added if p.endswith(".json") and (Path(repo) / p).is_file()})
+
+
+def _documents_pinning(repo: Path, rels: list[str], version: str) -> list[str]:
+    return [rel for rel in rels
+            if any(m["v"] == version for m in PIN.finditer((Path(repo) / rel).read_text(encoding="utf-8")))]
+
+
+def _repin(repo: Path, rels: list[str], ver: str, new: str) -> list[str]:
+    """Pin the documents the branch adds (``rels``) to ``new`` where they pin ``ver``; the paths changed."""
+    out = []
+    for rel in _documents_pinning(repo, rels, ver):
+        f = Path(repo) / rel
+        text = f.read_text(encoding="utf-8")
+        f.write_text(PIN.sub(lambda m: m.group(0).replace(ver, new) if m["v"] == ver else m.group(0), text),
+                     encoding="utf-8")
+        out.append(rel)
+    return out
+
+
 def _rewrite_prose(repo: Path, new: str) -> None:
     """Set the version in the sentences that name it (devcheck.VERSION_TEXTS)."""
     import re
@@ -359,6 +412,9 @@ def bump(repo: Path, base: str = DEFAULT_BASE, note: str | None = None) -> dict:
     for p in (frozen_dir, frozen_man, frozen_kernel):
         if p.exists():
             raise ScaleError(f"{p.relative_to(repo)} exists already: version {ver} was frozen before")
+    readme = repo / DIGEST_TABLE
+    if readme.is_file() and not re.search(rf"^\| scale-catal {re.escape(ver)} \|", readme.read_text(encoding="utf-8"), re.M):
+        raise ScaleError(f"{DIGEST_TABLE} has no row `| scale-catal {ver} | ... |` in its table of spec digests")
     with tempfile.TemporaryDirectory() as tmp:
         root = base_tree(repo, c["merge_base"], Path(tmp))
         bman = _manifest(root)
@@ -384,11 +440,13 @@ def bump(repo: Path, base: str = DEFAULT_BASE, note: str | None = None) -> dict:
     for rel, key in VERSION_FILES:
         if (repo / rel).is_file():
             set_version(repo / rel, key, new)
-    _register_step(repo, ver, new, note or f"{c['kind']} change")
+    _register_step(repo, ver, new, note or (f"{c['kind']} change" if c["tier"] >= 2 else c["kind"]))
     _rewrite_prose(repo, new)
+    _record_digest(repo, ver, new, pgraph.spec_sha256(pgraph.load_spec(man)))
+    repinned = _repin(repo, added_documents(repo, c["merge_base"]), ver, new)
     return {**{k: c[k] for k in ("base_version", "kind", "tier", "diff")}, "version": new,
             "frozen": [p.relative_to(repo).as_posix() for p in (frozen_kernel, frozen_man, frozen_dir)],
-            "step": f"{ver} -> {new}",
+            "step": f"{ver} -> {new}", "repinned": repinned,
             "next": ("register the rewrite rule in tools/pgraph_migrate.py STEP_RULES (a breaking change), "
                      if c["tier"] == 3 else "") + "add tests for what was added, and a CHANGELOG line"}
 
@@ -474,6 +532,16 @@ def check(repo: Path, base: str = DEFAULT_BASE) -> dict:
     for kind, name in _added_types(c["diff"]):
         if not _used_in_fixtures(repo, kind, name):
             problems.append(f"{kind[:-1]} {name} is added but used in no valid fixture or example document (add a test)")
+    readme = repo / DIGEST_TABLE
+    if readme.is_file() and c["head_version"] == new:
+        if _digest_row(new, c["head_sha256"]) not in readme.read_text(encoding="utf-8"):
+            problems.append(f"{DIGEST_TABLE} does not record the spec digest of {new} (`{c['head_sha256']}`) in its "
+                            "table (run `scale schema bump`)")
+        if f"| scale-catal {ver} (frozen) |" not in readme.read_text(encoding="utf-8"):
+            problems.append(f"{DIGEST_TABLE} does not mark {ver} frozen in its table of spec digests")
+    for rel in _documents_pinning(repo, added_documents(repo, c["merge_base"]), ver):
+        problems.append(f"{rel} is added by this change but pins {ver}; documents written for it pin "
+                        f"{c['head_version']}")
     if (repo / "CHANGELOG.md").read_bytes() == _git(repo, "show", f"{c['merge_base']}:CHANGELOG.md"):
         problems.append("the schema changes but CHANGELOG.md does not (add a line under Unreleased)")
     return {**c, "problems": problems, "follow_ups": stale_bundles(repo, c["head_version"]), "ok": not problems}

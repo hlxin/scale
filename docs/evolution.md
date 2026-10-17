@@ -47,8 +47,9 @@ a comment, a corpus run)     their own) or anyone   scale schema bump · check  
    [--note …]` then freezes the base version, so documents that pin it keep validating (the catalysis manifest
    into `domain/graph/frozen/scale-catal-<version>.yaml` with its parts in `domain/graph/frozen/v<version>/`, the
    kernel of that version into `core/graph/frozen/kernel-<version>.yaml`, digests appended to each `SHA256SUMS`),
-   raises the version in every file and sentence that states it, and registers the migration step in
-   `tools/pgraph_migrate.py`. A breaking change also adds its rewrite rule (`STEP_RULES[<base version>]`).
+   raises the version in every file and sentence that states it, registers the migration step in
+   `tools/pgraph_migrate.py`, records the new version's spec digest in README.md's table (the base marked frozen)
+   and pins the fixture and example documents the branch adds to the new version. A breaking change also adds its rewrite rule (`STEP_RULES[<base version>]`).
 4. **Check.** `scale schema check --base origin/main` asks for all of it: the version raised by the rule, the
    frozen copy equal to the base (by spec digest), every file stating the new version, the migration step (and
    rule, if breaking), a valid fixture or example that uses what is added, and a CHANGELOG line. CI's

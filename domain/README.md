@@ -14,7 +14,7 @@ stewards are named in [`DOMAIN.yaml`](DOMAIN.yaml). A second domain would revisi
 | | |
 |---|---|
 | status | `stable`, `founding: true` (its stewardship targets are warnings) |
-| schema version | 0.2.0 (kernel and catalysis together) |
+| schema version | 0.2.1 (kernel and catalysis together) |
 | maintainers | `@hlxin` (the owner) and the reviewers of the review policy, open to more as they join |
 | stewards | Hongliang Xin (`hlxin`), since 2026-09-26 |
 | review areas | `catalysis`, `thermo`, `electrothermo`, `electro`, `photo`, `plasma` |

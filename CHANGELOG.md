@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- **Schema 0.2.1 (no change in meaning): `Preparation.steps` wording.** The description says steps link `PART_OF` with `order`; `HAS_PROCEDURE_STEP` is declared nowhere. Synthetic fixtures and a counterexample (`tools/tests/fixtures/procedure-steps`) cover it. Frozen v0.1.0 text is left unchanged. Answers #34.
+- **`scale schema bump` carries the whole version change.** Besides freezing the base, raising the version and
+  registering the step, it now records the new version's spec digest in README.md's table (the base marked frozen),
+  pins the fixture and example documents the branch adds to the new version, and writes a step note that reads as the
+  kind of change; it checks the table before writing anything. `scale schema check` asks for the digest row and for
+  no added document pinning the base, and a test keeps README.md recording every version held.
 - **One publication into a graph, in the browser: `service/` and `site/`.** A page (linked from the README) takes a
   PDF, a DOI or a link. A small service curates it with a model through the scale-catal tools: the curate-source
   skill, `scale source start`, and `scale source check` until it passes. The graph comes back with every quote capped
