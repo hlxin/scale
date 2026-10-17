@@ -22,6 +22,7 @@ STEPS: dict[str, tuple[str, str]] = {
     # "<from version>": ("<to version>", "<note>"), one line per change that raises the version, oldest first
     # (none before the first change: the schema starts at 0.1.0)
     "0.1.0": ("0.2.0", 'the schema is renamed scale-graph -> scale-catal (kernel scale-graph-kernel -> scale-kernel); documents pin the new name'),
+    "0.2.0": ("0.2.1", 'no change in meaning change'),
 }
 
 
