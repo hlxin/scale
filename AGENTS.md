@@ -80,8 +80,8 @@ scale-catal@0.2.0 …` a pinned one. In a checkout of this repository run `uv ru
 - **A schema change** follows `skills/evolve-schema/SKILL.md`: edit `core/graph/kernel.yaml` or
   `domain/graph/catalysis.yaml` directly (additive operations, deprecation instead of deletion,
   `maturity: provisional` for new concepts), add a fixture that uses what is added and a counterexample, run
-  `uv run scale schema bump --base origin/main` once (it freezes the base version, raises the one version and
-  registers the migration step: a breaking change raises the second number, 0.1.0 -> 0.2.0, an additive change
+  `uv run scale schema bump --base origin/main` once (it freezes the base version, raises the one version,
+  registers the migration step, records the spec digest in README.md and pins the documents the branch adds: a breaking change raises the second number, 0.1.0 -> 0.2.0, an additive change
   the third, 0.1.0 -> 0.1.1), add the migration rule for a breaking change (`STEP_RULES` in
   `tools/pgraph_migrate.py`), update the competency questions whose answers change, add a CHANGELOG line,
   and run `uv run scale schema check --base origin/main` until it passes. The kernel and the catalysis file never

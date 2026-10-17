@@ -77,6 +77,16 @@ def test_the_documented_spec_digests_are_the_ones_held(head):
     assert RECORDED_DIGEST.findall("scale-catal 0.1.0 (spec digest `" + "a" * 64 + "`)") == [("0.1.0", "a" * 64)]
 
 
+def test_the_readme_records_every_version_held_and_marks_the_frozen_ones(head):
+    """README.md's table of spec digests has a row for every version held, the frozen ones marked so (`scale schema
+    bump` writes the rows)."""
+    rows = {v: line for line in (REPO / "README.md").read_text().splitlines()
+            for v in [m.group(1) for m in [RECORDED_DIGEST.search(line)] if m and line.startswith("| scale-")]}
+    for v, _ in pgraph.spec_versions(GRAPH_MANIFEST):
+        assert v in rows, f"README.md records no spec digest of {v}"
+        assert ("(frozen)" in rows[v]) == (v != HEAD_VERSION), rows[v]
+
+
 def test_every_version_is_listed_oldest_first_with_the_head_last():
     versions = pgraph.spec_versions(GRAPH_MANIFEST)
     frozen = sorted((p.stem.removeprefix("scale-catal-"), p) for p in GRAPH_FROZEN.glob("scale-catal-*.yaml"))
