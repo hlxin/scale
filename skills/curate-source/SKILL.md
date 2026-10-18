@@ -91,6 +91,9 @@ impurities, driving forces outside the list, characterization results, digitizin
    `as_reported`, and the note says the source states no unit (until the units change gives values
    a unit status). `not stated` is no unit: a query leaves such values out as `unit_unstated`, `scale
    graph stats` counts them under `(no unit)`, and no plan filters in it. Record uncertainty only as the source states it (below, **Uncertainty**).
+   A bound property holds one kind of quantity (`scale graph describe` prints its contract; scale-catal 0.3.0 on): its
+   unit must be of that kind's dimensions (a temperature is never in kg), and `scale graph validate` rejects another. A
+   component's concentration (mol/L) is `HAS_COMPONENT.concentration`, never a `fraction`; an absolute amount is `amount`.
 7. **Evidence on every stating record and every link:** `{source, locator, kind, quote}` with a
    short verbatim quote, within the source's rights (step 8). Derive the REPORTED_IN
    links from the evidence. `scale graph index` then gives each quote a vector (deterministic
@@ -186,6 +189,13 @@ Never record `± 0`: keep the printed text in `as_reported` and leave `uncertain
   (`scale graph describe`; planned: domain/ROADMAP.md), set it on interpretive links (HAS_SITE, INHIBITED_BY,
   IDENTIFIED_AS, and CATALYZES when the source infers it) and mark links taken as given as
   `assumption`; never before the schema has it.
+- **Comparison context.** Record the context a comparison needs where the source states it, and never assume it: a
+  potential's scale (`reference_scale`, or the unit `V vs RHE`), a current density's normalization
+  (`current_normalization`, or `basis`), a pressure's gauge or absolute convention (`barg`, `basis: gauge`), the
+  conditions a gas volume is counted at (`sccm`, `basis: STP`), the product of a selectivity or efficiency (`target`).
+  A value whose statements disagree with its record's is reported. A value you convert (a potential to RHE) is
+  `origin: derived` with `produced_by` the Analysis that converts it and the printed number in `as_reported`. Name the
+  denominator a normalized value is divided by, when the source identifies it, with `normalized_by` (`{record, path}`).
 - **Keys and qualifiers.** Use one key per quantity and put what the value is about in its fields:
   the species or product in `target`, the basis in `basis`, the measurand in `variable` (a Variable)
   and how it was defined or measured in `definition`. When a source gives several values of one

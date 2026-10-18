@@ -121,6 +121,59 @@ is converted:
   `limitations` says so. `eq` and `in` never hold for a bound alone. `order_by` sorts a bound by its
   number, as reported.
 
+## Scientific comparison
+
+A plan compares values as reported unless it says otherwise: a number in the filter's unit and on its basis (above). With
+`comparison: scientific` (scale-catal 0.3.0 on), every numeric filter and every `order_by` also reads each value under
+its **quantity contract** (core/graph/README.md, "Quantity contracts"): the kind its property is bound to (`quantity:` in
+the schema; `scale graph describe` shows it), or the `quantity_kind` of the Variable it names.
+
+- **Dimension.** The value's unit must read as one of its kind's dimensions (`kg` is no temperature, `mol/L` no
+  fraction): otherwise it is left out as `incompatible_unit`, and so is a unit the vocabulary cannot read (`L/h per 3 cc
+  catalyst`), whose dimension is unknown. A filter in a unit of another dimension on a bound property is a plan error.
+- **Context.** A kind lists the contexts two of its values must share (`compare_by`): an electrode potential its
+  `potential_reference` (the scale: RHE, SHE, Ag/AgCl …), a current density its `current_normalization` (geometric area,
+  ECSA, catalyst mass), a pressure its `pressure_convention` (absolute or gauge), a volumetric flow and a gas space
+  velocity their `flow_reference` (STP, NTP, normal, standard, operating conditions), a space velocity its
+  `space_velocity_basis` (GHSV, LHSV, WHSV, per catalyst mass), a composition fraction its `fraction_basis`, and a
+  selectivity, yield, conversion, Faradaic efficiency, quantum or photonic yield, energy yield or partial current
+  density the `species` its target names. A context is read from what the value states (its unit: `V vs RHE`, `barg`,
+  `sccm`; its `basis` and `definition`; its `target`; the property its `normalized_by` names) and from the sibling
+  property its binding names (`reference_scale`, `current_normalization`, `fraction_basis`). The statements must agree.
+- **Check or group.** A filter or a ranking that states a context, `context: {potential_reference: rhe}`, checks it: a
+  value on another one is left out as `incompatible_context`. One that states none groups: every row carries
+  `comparison_group` and `compared` (the unit and contexts of each value it was compared on, an evidenced conversion,
+  the denominator it is divided by), `comparison.groups` lists the groups, and a ranking orders rows within a group
+  only. There is no ranking across groups. An `order_by` may also state its `unit`, then ranking only values in it.
+- **Never assumed.** A value whose context nothing states, or states as `other` or `not_reported`, is left out as
+  `missing_context` (a current density with no stated normalization is not taken as geometric). One whose statements
+  disagree (its basis says ECSA, its record `geometric_area`) is left out as `incompatible_context` and the validator
+  reports it. The exception is an **evidenced conversion**: a value derived or computed (`origin`) by the experiment
+  its `produced_by` names, on another context than its record's (a potential converted from Ag/AgCl to RHE by a stated
+  Analysis), keeps its own context and may enter that context's ranking; nothing is converted by the query.
+- **Denominators.** A value whose `normalized_by` names a value that is not reported, or that the view withholds, is
+  left out as `missing_context`; a row compared on a denominator whose own `origin` is `assumed` is named in
+  `limitations`.
+- **Basis.** On a kind whose contexts read the value's `basis`, a scientific filter states `context`, not `basis`
+  (a plan error otherwise), and a value's basis is read through the contexts. On any other kind the basis is compared
+  as text, as in an ordinary plan.
+
+```yaml
+question: Which current densities have compatible area bases and potential references?
+comparison: scientific
+match: {label: CatalyticTest, as: test, where: [{prop: current_density, op: exists}]}
+return: [test.name, test.electrode_potential, test.reference_scale, test.current_density, test.current_normalization]
+order_by:
+  - {var: test, prop: electrode_potential}                  # grouped by unit and reference scale
+  - {var: test, prop: current_density, context: {current_normalization: geometric_area}}   # checked: geometric only
+```
+
+The answer's status follows the usual rule: rows left out only for their context make it `missing_context`. `coverage`
+gains `comparison` (the mode, the number of groups, the values left out for their context by reason) and `limitations`
+say how many groups there are and why values were left out. An ordinary plan is unchanged; when its numeric filters or
+ranking compared values on several contexts (or on none stated), a limitation names them and points here. Competency
+question CQ-06 (`domain/competency/cq-06-comparable-current-densities.yaml`) runs this on the public comparison example.
+
 ## Paths into maps and lists
 
 A filter's `prop` and a `return` field may address an entry of a map or a list of values:

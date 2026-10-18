@@ -2,6 +2,29 @@
 
 ## Unreleased
 
+- **Schema 0.3.0 (breaking): quantity contracts, and a scientific comparison mode in queries.** The kernel's new
+  `quantities:` block says, for the quantities most often compared (temperature, pressure, electrode potential, current
+  and current density, fractions, concentrations, flow and space velocity, product yields and efficiencies), the
+  dimensions a value may be in, what a normalized quantity is divided by and the context without which two values are
+  not comparable (a potential's reference scale, a current density's normalization, a pressure's convention, a volumetric
+  flow's reference conditions, a space velocity's basis, a share's species); 47 catalysis properties bind one
+  (`quantity:`, and `context:` for the sibling that states a context, such as `reference_scale` or
+  `current_normalization`), and a Variable's `quantity_kind` brings its kind's to its values. The validator now rejects a
+  unit of another dimension (a temperature in kg; mol/L under `HAS_COMPONENT.fraction`), reports a unit it cannot read,
+  a basis that contradicts its record (except an evidenced conversion: derived or computed, with `produced_by`) and a
+  reported percentage of a share above 100 %. `HAS_COMPONENT.concentration` is new, and the electrolyte examples record
+  their salts' concentrations there instead of as fractions. The value field `normalized_by` (a record_ref) names the
+  record and value a quantity is divided by (an electrode's ECSA); it is validated (record, path, dimension), and the
+  viewer filter and the kg-bundle export withhold a value with what it names. `scale graph query` with `comparison:
+  scientific` compares and ranks a value only within one unit and one context (stated with `context` to check it, or
+  grouped), leaving out a value whose context is not stated (`missing_context`) or contradictory
+  (`incompatible_context`); an ordinary plan is unchanged and names the contexts it compared across. Competency question
+  CQ-06 asks which current densities have compatible area bases and potential references, on a new public example
+  (`domain/examples/scale-catal/comparison-examples/`). Nothing is converted. Migration: documents pinning 0.2.x stay
+  valid under their frozen version; `scale graph migrate` (and `scale kg update`) moves a `HAS_COMPONENT` fraction in an
+  amount unit (g, mol) to `amount` and one in a concentration unit (mol/L, g/m3) to `concentration`, and stops on a value
+  of another dimension it cannot map. The schema diff now classifies a change to a contract (a kind's dimensions, a
+  context it is compared by, what a unit or a term reads as, a property's binding).
 - **Schema 0.2.1 (no change in meaning): `Preparation.steps` wording.** The description says steps link `PART_OF` with `order`; `HAS_PROCEDURE_STEP` is declared nowhere. Synthetic fixtures and a counterexample (`tools/tests/fixtures/procedure-steps`) cover it. Frozen v0.1.0 text is left unchanged. Answers #34.
 - **`scale schema bump` carries the whole version change.** Besides freezing the base, raising the version and
   registering the step, it now records the new version's spec digest in README.md's table (the base marked frozen),
