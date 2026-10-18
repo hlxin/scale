@@ -116,6 +116,9 @@ jobs:
             Comment id: ${{ github.event.comment.id }}. Review id: ${{ github.event.review.id }}.
             Manual request (empty unless a person ran the workflow by hand): ${{ inputs.prompt }}
           branch_prefix: agent/
+          # GitHub credits a commit by the id in its noreply email: the action's default (41898282) is github-actions[bot],
+          # 209825114 is claude[bot], the Claude GitHub App that opens the agents' pull requests
+          bot_id: "209825114"
           # the agents need the shell to do real work (move, search, edit files; run the tools and tests); what they may
           # never do is denied below (merge, approve, push to main, tags, releases, secrets, workflows, raw API calls,
           # downloads). The main ruleset still requires a person's approval for every merge.

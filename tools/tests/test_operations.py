@@ -105,6 +105,8 @@ def test_who_may_start_the_agents_and_what_workflows_may_write():
     assert job["permissions"]["contents"] == "read"
     action = next(s for s in job["steps"] if str(s.get("uses", "")).startswith("anthropics/claude-code-action"))
     assert "trigger_phrase" not in action["with"] and "label_trigger" not in action["with"]
+    # the agents' commits are credited to claude[bot]; the action's default id (41898282) is github-actions[bot]'s
+    assert action["with"]["bot_id"] == "209825114"
     args = action["with"]["claude_args"]
     assert "Agent," in args and ",Bash\"" in args
     for denied in ("git push origin main", "gh pr merge", "gh pr review", "gh api", "gh secret", "gh workflow", "git tag"):
