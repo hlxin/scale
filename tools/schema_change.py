@@ -43,7 +43,7 @@ from pathlib import Path
 
 import yaml
 
-from . import layout, pgraph
+from . import layout, pgraph, quantities
 from .util import ScaleError, dump_yaml, load_yaml
 
 DEFAULT_BASE = "origin/main"
@@ -87,9 +87,10 @@ def diff_specs(a: dict, b: dict) -> dict:
             cmp_def(f"{where}[items]", ia, ib)
         elif ia != ib:
             out["changed"].append(f"{where}: items {ia!r} -> {ib!r}")
-        for key in sorted((set(da) | set(db)) - DESCRIPTIVE_KEYS - {"type", "values", "targets", "items"}):
+        for key in sorted((set(da) | set(db)) - DESCRIPTIVE_KEYS - {"type", "values", "targets", "items", "quantity", "context"}):
             if da.get(key) != db.get(key):
                 out["changed"].append(f"{where}: {key} {da.get(key)!r} -> {db.get(key)!r}")
+        quantities.diff_binding(where, da, db, out)       # a quantity contract bound, dropped or changed
 
     def cmp_props(where: str, pa: dict, pb: dict) -> None:
         for k in sorted(set(pa) | set(pb)):
@@ -115,6 +116,8 @@ def diff_specs(a: dict, b: dict) -> dict:
                           ("common.node", _props((a.get("common") or {}).get("node") or {}), _props((b.get("common") or {}).get("node") or {})),
                           ("common.link", _props((a.get("common") or {}).get("link") or {}), _props((b.get("common") or {}).get("link") or {}))):
         cmp_props(where, fa, fb)
+    # the quantity contracts: a kind's dimensions, a context it is compared by, a unit's or a term's meaning
+    quantities.diff(a.get("quantities"), b.get("quantities"), out)
     for where in ("evidence", "value", "record_ref"):
         ra, rb = set((a.get(where) or {}).get("required") or []), set((b.get(where) or {}).get("required") or [])
         out["narrowed"] += [f"{where} requires {x}" for x in sorted(rb - ra)]
@@ -463,8 +466,20 @@ def _not_provisional(repo: Path, d: dict) -> list[str]:
     files = [Path(repo) / layout.KERNEL, *sorted((Path(repo) / layout.DOMAIN / "graph").glob("*.yaml"))]
     docs = [load_yaml(f) or {} for f in files if f.is_file()]
     out = []
+    kernel = docs[0] if docs else {}
     for path in d["added"]:
         parts = path.split(".")
+        if parts[0] == "quantities" and len(parts) == 3:          # a kind, a context or a dimension of the contracts
+            block = kernel.get("quantities") or {}
+            entry = (block.get(parts[1]) or {}).get(parts[2])
+            if "provisional" not in (block.get("maturity"), (entry or {}).get("maturity") if isinstance(entry, dict) else None):
+                out.append(path)
+            continue
+        if parts[0] == "value" and len(parts) == 2:               # a field of the kernel's value object
+            field = ((kernel.get("value") or {}).get("fields") or {}).get(parts[1]) or {}
+            if "provisional" not in (field.get("maturity"), kernel.get("maturity")):
+                out.append(path)
+            continue
         if parts[0] not in ("nodes", "edges") or len(parts) not in (2, 3):
             continue
         for doc in docs:

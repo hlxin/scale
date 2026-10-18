@@ -23,6 +23,7 @@ STEPS: dict[str, tuple[str, str]] = {
     # (none before the first change: the schema starts at 0.1.0)
     "0.1.0": ("0.2.0", 'the schema is renamed scale-graph -> scale-catal (kernel scale-graph-kernel -> scale-kernel); documents pin the new name'),
     "0.2.0": ("0.2.1", 'no change in meaning: the description of Preparation.steps names PART_OF with order (#34)'),
+    "0.2.1": ("0.3.0", "breaking: quantity contracts (a value's unit by its kind's dimension; the contexts a comparison needs; normalized_by; HAS_COMPONENT.concentration)"),
 }
 
 
@@ -36,8 +37,22 @@ def _rename_schema(doc: dict, spec: dict | None) -> list:
     return []                                   # already names the new schema: nothing to rewrite
 
 
+def _quantity_contracts(doc: dict, spec: dict | None) -> list:
+    """0.2.1 -> 0.3.0: the quantity contracts. A HAS_COMPONENT ``fraction`` whose unit is an amount (g, mol, L) moves to
+    ``amount`` and one whose unit is a concentration (mol/L, g/m3) to the new ``concentration``, the value object whole
+    (number, unit, uncertainty, evidence_ids, as_reported), with its ``fraction_basis`` dropped (the unit says what it
+    counts); every other value whose unit is of another dimension than its
+    property's quantity stops the step, which cannot map it (``quantities.move_component_quantities``). ``spec`` is the
+    target schema, whose contracts read the units."""
+    from .quantities import move_component_quantities
+    return move_component_quantities(doc, spec)
+
+
 STEP_RULES: dict[str, tuple[str, Callable[[dict, dict | None], list]]] = {
     "0.1.0": ("graph.schema renamed scale-graph -> scale-catal; every record, id and value kept", _rename_schema),
+    "0.2.1": ("quantity contracts: a HAS_COMPONENT fraction in an amount unit moves to amount, one in a concentration unit "
+              "to concentration (the value object whole, its fraction_basis dropped); a value of another dimension than its "
+              "quantity stops the step; every record, id and other value kept", _quantity_contracts),
 }
 
 

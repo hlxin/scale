@@ -98,7 +98,8 @@ What the kg-bundle format cannot carry, and stays only in the scale-catal docume
 
 * intervals (``interval_lower``/``interval_upper``, ``coverage_factor``, ``confidence_level``), ``replicates``,
   a value's ``origin``, ``target``, ``variable``, ``definition``, ``produced_by``,
-  ``calibration``, ``evidence_ids`` and ``note``: only the reported text survives;
+  ``calibration``, ``normalized_by``, ``evidence_ids`` and ``note``: only the reported text survives (a value
+  whose ``normalized_by`` names a record the bundle withholds is withheld whole, as one naming it by ``target``);
 * the source lifecycle beyond derived statuses (notices with their scope and dates), ``status_check``, evidence
   passages, regions, transcriptions' agreement and second readings.
 
@@ -144,7 +145,7 @@ Identity and access, which the kg-bundle format has no field for:
   graph filter`` for every such viewer, ``pgraph.audience``), and counted in the export report;
   ``keep_less_open`` exports it instead. A reference a kept record makes to a record left out (a ref property, a
   map entry keyed by it) is removed with it and counted (``references``); a value that names one (its
-  ``ref_value``, ``target``, ``variable``, ``produced_by`` or ``calibration``) is withheld whole in its place (a
+  ``ref_value``, ``target``, ``variable``, ``produced_by``, ``calibration`` or ``normalized_by``) is withheld whole in its place (a
   property, a list entry keeping its position, a map entry its key) as not reported with missing_reason
   ``withheld``, so no withheld id stays in the bundle; a record_ref into a kept record follows what was removed
   from it (a list position moves up behind an entry removed; one to a part removed or withheld goes, counted), and

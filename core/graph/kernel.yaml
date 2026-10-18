@@ -206,6 +206,14 @@ value:
       targets:
       - Experiment
       description: The calibration the value depends on (metrological traceability).
+    normalized_by:
+      type: record_ref
+      maturity: provisional
+      description: The record, and with path the value, that a normalized quantity is divided by, where the denominator
+        must be identified (the electrode area of a current density, the catalyst mass or bed volume of a space
+        velocity, the site inventory of a turnover frequency). Only on a value whose quantity contract declares a
+        denominator. The value it names keeps its own origin, so whether the denominator was measured, derived,
+        computed or assumed stays what that value says.
     evidence_ids:
       type: list
       items:
@@ -227,6 +235,9 @@ value:
     0 < confidence_level < 1; replicates ≥ 1.
   - origin derived, computed or fitted names produced_by; evidence_ids name evidence items of the owning
     record.
+  - A value of a property bound to a quantity contract (quantities) is in a unit of one of its kind's dimensions;
+    normalized_by goes only on a value whose kind declares a denominator, resolves (with its path) to a value object,
+    and names a value of the denominator's dimensions.
 evidence:
   description: Where an assertion comes from. Embedded on nodes and links; quotes are checked verbatim
     when the source text is supplied.
@@ -761,6 +772,7 @@ nodes:
         type: value
       duty_cycle:
         type: value
+        quantity: fraction
       cycles:
         type: integer
       total_duration:
@@ -848,7 +860,9 @@ nodes:
         - boolean
       quantity_kind:
         type: string
-        description: A kind from the quantity-kind registry; required for quantitative variables.
+        description: The kind of quantity, required for quantitative variables. A kind the kernel declares (quantities,
+          kinds) brings its contract to the variable's unit and to every value that names the variable; any other kind
+          is recorded as stated and not checked.
       unit:
         type: string
       categories:
@@ -2014,6 +2028,10 @@ rules:
 - A Prediction has a statement or an expected value; its variable and expected.variable agree.
 - A quantitative Variable has a quantity_kind; a value of a nominal or ordinal variable is a text_value,
   one of its categories.
+- A value bound to a quantity contract (its property's quantity, or its Variable's quantity_kind) is in a unit of
+  its kind's dimensions (an error otherwise; a unit the vocabulary cannot read is reported, not checked); the
+  contexts it is compared by, read from the value and its record, agree unless the value is an evidenced conversion
+  (advisory); a share above 100 % or below zero is flagged (advisory). Nothing is converted.
 - CONTROL_FOR names at least one variable in differs_in (advisory). No confounding verdict is drawn from
   the count.
 - REPLICATES with level reproduce lists what changed (advisory).
@@ -2068,3 +2086,497 @@ status_check:
   rules:
   - status_check is recorded only for a check that was made; its absence means never checked.
   - It never sets a publication status; the status follows from the notice links.
+quantities:
+  maturity: provisional
+  description: |
+    Quantity contracts: the kind of quantity a value property holds, the units that can state it, what a
+    normalized quantity is divided by (its denominator) and the context without which two of its values are not
+    comparable. A property names its contract with `quantity:` and, with `context:`, the sibling property of its
+    record that states a context; a value names one through its Variable's quantity_kind. Quantities of one kind
+    share a dimension, but one dimension does not make one kind (VIM 1.2, 1.7): an electrode potential and a cell
+    voltage are both in volts, a GHSV and a WHSV both in reciprocal hours, so a kind also says which context
+    (`compare_by`) two values must share. The validator reads a value's unit for its dimension and never converts
+    it: a unit of another dimension is an error, a unit it cannot read is reported and not checked. A context is
+    read from what the value states (its unit, basis, definition, target or normalized_by) and from the sibling
+    property; disagreeing statements are reported, except that a value derived from the record's own (origin
+    derived or computed, with produced_by: an evidenced conversion) keeps its own. `scale graph query` with
+    `comparison: scientific` compares and ranks values of a kind only in one unit and one context
+    (docs/querying.md); without it, values are compared as reported, as before.
+  basis:
+  - JCGM 200:2012, International vocabulary of metrology (VIM), doi:10.59161/JCGM200-2012 (kind of quantity, quantity dimension, measurement unit, measurand).
+  - JCGM 100:2008, Guide to the expression of uncertainty in measurement (GUM), doi:10.59161/JCGM100-2008E (an uncertainty is kept as reported; none is propagated).
+  - IUPAC Gold Book, mean current density, doi:10.1351/goldbook.M03776 (a current divided by the area of the electrode it flows through).
+  - IUPAC Gold Book, quantum yield, doi:10.1351/goldbook.Q04991 (events per photon absorbed).
+  - IUPAC Gold Book, photonic yield, doi:10.1351/goldbook.14058 (events per photon incident).
+  - IUPAC Gold Book, space velocity, doi:10.1351/goldbook.S05779 (the feed's volumetric flow at stated conditions divided by the catalyst volume).
+  dimensions:
+    dimensionless: '1'
+    length: L
+    area: L2
+    volume: L3
+    mass: M
+    time: T
+    frequency: T-1
+    amount: 'N'
+    temperature: Θ
+    electric_current: I
+    electric_potential: M L2 T-3 I-1
+    pressure: M L-1 T-2
+    force: M L T-2
+    energy: M L2 T-2
+    power: M L2 T-3
+    current_density: I L-2
+    specific_current: I M-1
+    amount_concentration: N L-3
+    mass_concentration: M L-3
+    amount_per_mass: N M-1
+    mass_per_area: M L-2
+    amount_per_area: N L-2
+    volumetric_flow: L3 T-1
+    molar_flow: N T-1
+    mass_flow: M T-1
+    volume_per_mass_time: L3 M-1 T-1
+    amount_per_energy: N M-1 L-2 T2
+    mass_per_energy: L-2 T2
+  units:
+    description: |
+      The symbols a unit is read from. A unit is read as the source prints it: SI prefixes before the prefixed
+      symbols (mA, kPa, µmol, mL), products (space, *, ·), quotients (/ and per, left to right: mol/g/h is
+      mol/(g h)), exponents (cm2, cm-2, cm^2, cm²) and parentheses. A spelling is a whole unit read as written
+      (kg/cm2 is a pressure in kilograms-force, not a mass per area). A word the vocabulary does not hold (catalyst,
+      exit gas) leaves the unit unread: its dimension is then not checked, and a comparison leaves it out.
+    prefixes: [p, 'n', μ, u, m, c, d, h, k, M, G]
+    prefixed:
+      m: length
+      g: mass
+      s: time
+      A: electric_current
+      K: temperature
+      mol: amount
+      L: volume
+      l: volume
+      Pa: pressure
+      bar: pressure
+      Torr: pressure
+      torr: pressure
+      V: electric_potential
+      W: power
+      J: energy
+      eV: energy
+      Wh: energy
+      cal: energy
+      Hz: frequency
+      M: amount_concentration
+    unprefixed:
+      °C: temperature
+      °F: temperature
+      °R: temperature
+      °K: temperature
+      degC: temperature
+      degF: temperature
+      min: time
+      minute: time
+      minutes: time
+      h: time
+      hr: time
+      hrs: time
+      hour: time
+      hours: time
+      sec: time
+      d: time
+      day: time
+      days: time
+      week: time
+      weeks: time
+      yr: time
+      year: time
+      in: length
+      inch: length
+      ft: length
+      foot: length
+      feet: length
+      Å: length
+      cc: volume
+      gal: volume
+      lb: mass
+      lbs: mass
+      ton: mass
+      tonne: mass
+      lbmol: amount
+      kgf: force
+      lbf: force
+      atm: pressure
+      at: pressure
+      psi: pressure
+      mmHg: pressure
+      cmHg: pressure
+      inHg: pressure
+      Btu: energy
+      BTU: energy
+      '%': dimensionless
+      ‰: dimensionless
+      ppm: dimensionless
+      ppmv: dimensionless
+      ppb: dimensionless
+      ppbv: dimensionless
+      atom: dimensionless
+      atoms: dimensionless
+      molecule: dimensionless
+      molecules: dimensionless
+      site: dimensionless
+      sites: dimensionless
+      ion: dimensionless
+      ions: dimensionless
+      photon: dimensionless
+      photons: dimensionless
+      electron: dimensionless
+      electrons: dimensionless
+    spellings:
+      temperature:
+      - C
+      - F
+      - degrees C
+      - degrees F
+      pressure:
+      - kg/cm2
+      - kg cm-2
+      - kg/cm^2
+      - lb/in2
+      - lbs/in2
+      - lb in-2
+      - pounds per square inch
+      dimensionless:
+      - '1'
+      - M%
+      - C%
+      - parts
+      - part
+    stating:
+      barg:
+        dimension: pressure
+        pressure_convention: gauge
+      psig:
+        dimension: pressure
+        pressure_convention: gauge
+      atü:
+        dimension: pressure
+        pressure_convention: gauge
+      atu:
+        dimension: pressure
+        pressure_convention: gauge
+      kg/cm2g:
+        dimension: pressure
+        pressure_convention: gauge
+      bara:
+        dimension: pressure
+        pressure_convention: absolute
+      psia:
+        dimension: pressure
+        pressure_convention: absolute
+      ata:
+        dimension: pressure
+        pressure_convention: absolute
+      sccm:
+        dimension: volumetric_flow
+        flow_reference: standard
+      slm:
+        dimension: volumetric_flow
+        flow_reference: standard
+      slpm:
+        dimension: volumetric_flow
+        flow_reference: standard
+      SLPM:
+        dimension: volumetric_flow
+        flow_reference: standard
+      scfh:
+        dimension: volumetric_flow
+        flow_reference: standard
+      SCFH:
+        dimension: volumetric_flow
+        flow_reference: standard
+      scfm:
+        dimension: volumetric_flow
+        flow_reference: standard
+      scf:
+        dimension: volume
+        flow_reference: standard
+      Nm3:
+        dimension: volume
+        flow_reference: normal
+      NL:
+        dimension: volume
+        flow_reference: normal
+      Nl:
+        dimension: volume
+        flow_reference: normal
+      NmL:
+        dimension: volume
+        flow_reference: normal
+      Nml:
+        dimension: volume
+        flow_reference: normal
+      wt%:
+        dimension: dimensionless
+        fraction_basis: mass
+      mass%:
+        dimension: dimensionless
+        fraction_basis: mass
+      mol%:
+        dimension: dimensionless
+        fraction_basis: mole
+      vol%:
+        dimension: dimensionless
+        fraction_basis: volume
+      at%:
+        dimension: dimensionless
+        fraction_basis: atom
+      parts by weight:
+        dimension: dimensionless
+        fraction_basis: mass
+      part by weight:
+        dimension: dimensionless
+        fraction_basis: mass
+      parts by volume:
+        dimension: dimensionless
+        fraction_basis: volume
+      volumes:
+        dimension: dimensionless
+        fraction_basis: volume
+      vol:
+        dimension: dimensionless
+        fraction_basis: volume
+      v/v/h:
+        dimension: frequency
+      vol gas/vol catalyst/h:
+        dimension: frequency
+        space_velocity_basis: ghsv
+      vol/(h·vol catalyst):
+        dimension: frequency
+        space_velocity_basis: ghsv
+      ft3 gas/(ft3 catalyst h):
+        dimension: frequency
+        space_velocity_basis: ghsv
+      ft3 gas/(ft3 catalyst·h):
+        dimension: frequency
+        space_velocity_basis: ghsv
+  contexts:
+    potential_reference:
+      description: The scale an electrode potential is stated on, named by its reference electrode. Potentials on two
+        scales differ by an offset that depends on the electrolyte's pH, the reference's filling and the temperature;
+        a comparison never assumes one.
+      read_from: [unit, basis, definition, sibling]
+      values:
+        rhe:
+          terms: [RHE, reversible hydrogen electrode]
+        she:
+          terms: [SHE, standard hydrogen electrode]
+        nhe:
+          terms: [NHE, normal hydrogen electrode]
+        ag_agcl:
+          terms: [Ag/AgCl, Ag|AgCl, silver chloride electrode]
+        sce:
+          terms: [SCE, saturated calomel electrode, calomel electrode]
+        hg_hgo:
+          terms: [Hg/HgO, Hg|HgO, mercury oxide electrode]
+        ferrocene:
+          terms: [Fc/Fc+, Fc+/Fc, ferrocene, ferrocenium]
+      unspecified: [other, not_reported]
+    current_normalization:
+      description: What an electric current is divided by. A current per geometric (projected) electrode area, per
+        electrochemically active surface area (ECSA) and per catalyst mass are three quantities; their numbers are
+        never compared with one another.
+      read_from: [unit, basis, definition, normalized_by, sibling]
+      values:
+        geometric_area:
+          terms: [geometric, geometric area, geometric surface area, projected area, geo, geometric_area]
+          dimensions: [current_density]
+        ecsa:
+          terms: [ECSA, electrochemically active surface area, electrochemically active area, electrochemical surface area, electrochemically_active_area]
+          dimensions: [current_density]
+        mass:
+          terms: [catalyst mass, per gram of catalyst, mass activity, mass-normalized, mass normalized]
+          dimensions: [specific_current]
+        none:
+          terms: [not normalized, unnormalized]
+          dimensions: []
+      unspecified: [other, not_reported]
+    pressure_convention:
+      description: Whether a pressure is absolute or gauge (above the ambient pressure). The two differ by the ambient
+        pressure, about 0.1 MPa, which matters most at low pressure; a unit that does not say (atm, bar, MPa) states
+        neither.
+      read_from: [unit, basis, definition]
+      values:
+        absolute:
+          terms: [absolute, abs, (a)]
+        gauge:
+          terms: [gauge, gage, (g)]
+    flow_reference:
+      description: The conditions a gas volume, and so a volumetric flow or a gas space velocity, is counted at.
+        Volumes at standard, normal and operating conditions differ by the ratio of temperatures and pressures; the
+        conditions must be stated for two such numbers to be compared.
+      read_from: [unit, basis, definition]
+      values:
+        stp:
+          terms: [STP, S.T.P., standard temperature and pressure]
+        ntp:
+          terms: [NTP, N.T.P., normal temperature and pressure]
+        satp:
+          terms: [SATP]
+        normal:
+          terms: [normal conditions, normal state]
+        standard:
+          terms: [standard conditions, std. cond., standard volume]
+        actual:
+          terms: [actual conditions, operating conditions, reaction conditions, reactor conditions]
+    fraction_basis:
+      description: What a fraction or a loading counts, by mass, by amount of substance, by atoms or by volume, or
+        relative to another component rather than to the whole (then refined by the component it is relative to).
+      read_from: [unit, basis, definition, sibling]
+      values:
+        mass:
+          terms: [mass fraction, by mass, by weight, w/w, mass basis, weight basis]
+        mole:
+          terms: [mole fraction, mol fraction, molar fraction, by mole, molar basis, amount fraction]
+        atom:
+          terms: [atom fraction, atomic fraction, atomic basis, atomic ratio]
+        volume:
+          terms: [volume fraction, by volume, v/v, volume basis]
+        relative_to_component:
+          terms: [relative to component]
+      unspecified: [not_reported]
+      refine:
+        relative_to_component: relative_to
+    space_velocity_basis:
+      description: What a space velocity divides by what. A gas (GHSV) or liquid (LHSV) volumetric flow per catalyst
+        volume and a mass flow per catalyst mass (WHSV) are all in reciprocal time; a volumetric flow per catalyst
+        mass is a quantity of its own dimension.
+      read_from: [unit, basis, definition]
+      values:
+        ghsv:
+          terms: [GHSV, gas hourly space velocity]
+          dimensions: [frequency]
+        lhsv:
+          terms: [LHSV, liquid hourly space velocity]
+          dimensions: [frequency]
+        whsv:
+          terms: [WHSV, weight hourly space velocity, mass hourly space velocity]
+          dimensions: [frequency]
+        volume_per_catalyst_mass:
+          terms: [GHSV, per catalyst mass, per gram of catalyst]
+          dimensions: [volume_per_mass_time]
+    species:
+      description: The species a value is counted for, named by its target, the product of a selectivity, a yield, a
+        Faradaic efficiency, a quantum yield or a partial current density, the reactant of a conversion. Shares to two
+        species are two quantities.
+      read_from: [target]
+      open: true
+  kinds:
+    temperature:
+      description: A thermodynamic temperature, or a difference of temperatures, as reported.
+      dimensions: [temperature]
+    pressure:
+      description: A pressure, absolute or gauge as stated.
+      dimensions: [pressure]
+      compare_by: [pressure_convention]
+    electrode_potential:
+      description: The potential of an electrode measured against a reference electrode; it is comparable only on one
+        reference scale, stated or converted with evidence.
+      dimensions: [electric_potential]
+      compare_by: [potential_reference]
+    electric_potential:
+      description: An electric potential difference between two stated points (a cell voltage, an applied or a heating
+        voltage, a photovoltage), with no reference scale.
+      dimensions: [electric_potential]
+    electric_current:
+      description: An electric current.
+      dimensions: [electric_current]
+    current_density:
+      description: An electric current divided by an electrode area or a catalyst mass (IUPAC mean current density); the
+        denominator decides the quantity.
+      dimensions: [current_density, specific_current]
+      compare_by: [current_normalization]
+      denominator:
+        description: The electrode area (geometric or electrochemically active) or the catalyst mass the current is divided by.
+        dimensions: [area, mass]
+    partial_current_density:
+      description: The part of a current density that forms one product (its target), divided as the current density is.
+      dimensions: [current_density, specific_current]
+      compare_by: [current_normalization, species]
+      denominator:
+        description: The electrode area (geometric or electrochemically active) or the catalyst mass the current is divided by.
+        dimensions: [area, mass]
+    fraction:
+      description: A part of a whole (a duty cycle), dimensionless; a basis the value states is compared as text.
+      dimensions: [dimensionless]
+      share: true
+    species_fraction:
+      description: A share counted for one species, its target (the conversion of a reactant, the selectivity or yield
+        to a product), dimensionless; a basis (carbon, molar) the value states is compared as text.
+      dimensions: [dimensionless]
+      compare_by: [species]
+      share: true
+    composition_fraction:
+      description: The share of a component in a sample, a catalyst, a mixture or a phase (mass, mole, atom or volume
+        fraction), dimensionless; an amount, a concentration or a loading is a quantity of its own.
+      dimensions: [dimensionless]
+      compare_by: [fraction_basis]
+      share: true
+    loading:
+      description: The amount of an active component on its support or electrode, as a share (wt%), per mass of
+        support (mmol/g) or per area (mg/cm2).
+      dimensions: [dimensionless, amount_per_mass, mass_per_area, amount_per_area]
+      compare_by:
+      - context: fraction_basis
+        when_dimension: [dimensionless]
+    concentration:
+      description: The amount (mol/L) or mass (g/L) of a component per volume of its mixture, or its amount per mass of
+        solvent (molality, mol/kg), kept apart by its unit.
+      dimensions: [amount_concentration, mass_concentration, amount_per_mass]
+    flow_rate:
+      description: A volumetric, molar or mass flow rate; a volumetric flow is comparable only at one stated reference
+        condition.
+      dimensions: [volumetric_flow, molar_flow, mass_flow]
+      compare_by:
+      - context: flow_reference
+        when_dimension: [volumetric_flow]
+    space_velocity:
+      description: A feed flow divided by the amount of catalyst (IUPAC space velocity); what is divided by what, and
+        at which conditions a gas volume is counted, decide the quantity.
+      dimensions: [frequency, volume_per_mass_time]
+      compare_by:
+      - space_velocity_basis
+      - context: flow_reference
+        when:
+          space_velocity_basis: [ghsv, volume_per_catalyst_mass]
+      denominator:
+        description: The catalyst bed volume or catalyst mass the flow is divided by.
+        dimensions: [volume, mass]
+    faradaic_efficiency:
+      description: The share of the charge passed that forms one product (its target), dimensionless.
+      dimensions: [dimensionless]
+      compare_by: [species]
+      share: true
+    quantum_yield:
+      description: Events (product formed, reactant consumed) per photon absorbed, for one product (IUPAC quantum yield);
+        it can exceed one in a chain reaction.
+      dimensions: [dimensionless]
+      compare_by: [species]
+    photonic_yield:
+      description: Events per photon incident on the system, for one product (IUPAC photonic yield; what many sources
+        call an apparent quantum yield); a lower bound of the quantum yield.
+      dimensions: [dimensionless]
+      compare_by: [species]
+    energy_yield:
+      description: Amount or mass of one product per energy supplied (g/kWh, mol/kJ).
+      dimensions: [amount_per_energy, mass_per_energy]
+      compare_by: [species]
+    efficiency:
+      description: A dimensionless efficiency of energy or charge conversion (IPCE, ABPE, plasma energy efficiency).
+      dimensions: [dimensionless]
+      share: true
+    turnover_frequency:
+      description: Events per site per time; its denominator is a site inventory (a count of sites by a stated method).
+      dimensions: [frequency]
+      denominator:
+        description: The site inventory the rate is divided by (sites counted by chemisorption, titration or a model).
+        dimensions: [dimensionless, amount]

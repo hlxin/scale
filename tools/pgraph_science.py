@@ -3,7 +3,7 @@
 Rules about the method of science that a type check cannot express: tests that assert an outcome
 cite what it rests on; predictions made after the result are flagged; a fit does not confirm its
 own data; a hypothesis's status agrees with the evidence recorded for it; references and evidence
-ids resolve; plans and orderings are acyclic; inputs used at an old version are flagged; records that rest on retracted sources are flagged (source lifecycle, ``lifecycle``).
+ids resolve (and so do the record_refs a value holds, its normalized_by); plans and orderings are acyclic; inputs used at an old version are flagged; records that rest on retracted sources are flagged (source lifecycle, ``lifecycle``).
 
 The checks report; they never grade science. Severity, independence and confounding are recorded
 as the source or an assessor states them and are not computed.
@@ -132,6 +132,21 @@ def science_checks(doc: dict, spec: dict, rep) -> None:
             have = props[target].get("record_version")
             if want is not None and have is not None and want != have:
                 warn(e["id"], f"{k}: refers to {target} version {want}; the graph holds version {have}")
+    # record_refs inside value objects (a value's normalized_by), at any depth, resolve as a link's do
+    value_refs = [k for k, d in ((spec.get("value") or {}).get("fields") or {}).items() if d.get("type") == "record_ref"]
+    for rid, p in props.items():
+        for path, v in _values(p) if value_refs else ():
+            for k in value_refs:
+                r = v.get(k)
+                if not isinstance(r, dict) or r.get("record") not in records:
+                    continue                  # not a record_ref, or one that does not resolve: the type check reports it
+                if isinstance(r.get("path"), str):
+                    ok, _ = _pointer(props[r["record"]], r["path"])
+                    if not ok:
+                        err(rid, f"{path[1:]}.{k}: {r['record']}{r['path']} does not resolve to a property")
+                want, have = r.get("record_version"), props[r["record"]].get("record_version")
+                if want is not None and have is not None and want != have:
+                    warn(rid, f"{path[1:]}.{k}: refers to {r['record']} version {want}; the graph holds version {have}")
     for rid, p in props.items():
         ev_ids = [ev.get("id") for ev in p.get("evidence") or [] if isinstance(ev, dict) and ev.get("id")]
         if len(ev_ids) != len(set(ev_ids)):

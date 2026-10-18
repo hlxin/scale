@@ -534,6 +534,9 @@ class Validator:
                 rep.add("error", rid, "synthetic-example documents label every origin synthetic")
         self.check_reported_in(doc, rep)
         plausibility(doc, rep)
+        if isinstance(self.spec.get("quantities"), dict):      # quantity contracts (0.3.0 on): units, contexts, denominators
+            from .quantities import check_document
+            check_document(doc, self.spec, rep)
         if "Hypothesis" in self.nodes and "TESTS" in self.edges:
             from .pgraph_science import science_checks
             science_checks(doc, self.spec, rep)
@@ -806,8 +809,10 @@ _GONE, _EMPTIED, _WITHHELD = object(), object(), object()   # a reference to a r
 _HELD = "held"      # tags the pointer of a value withheld in its place (a record_ref to it goes; nothing after it moves)
 VALUE_STATUSES = ("present", "not_reported", "not_measured", "not_applicable", "below_detection_limit",
                   "below_quantification_limit")
-# the references a value object makes (kernel `value`)
+# the references a value object makes (kernel `value`): ids, and record_refs (normalized_by: the record, and with its path
+# the value, a normalized quantity is divided by)
 VALUE_REFS = ("ref_value", "target", "variable", "produced_by", "calibration")
+VALUE_RECORD_REFS = ("normalized_by",)
 # what a value naming a withheld record becomes: the kernel's own missing reason, "known but not shared"
 WITHHELD_VALUE = {"status": "not_reported", "missing_reason": "withheld"}
 
@@ -829,8 +834,9 @@ def _drop_refs(v: Any, gone: set, n: list[int], at: str = "", dropped: set | Non
                kept_evidence: set | frozenset = frozenset()) -> Any:
     """``v`` without its references to the records left out (``gone``): a string that is such an id (a ref, an entry
     of a ref list), a record_ref whose ``record`` is one, a map entry keyed by one. A value object is one unit: when
-    any of its references (``ref_value``, ``target``, ``variable``, ``produced_by``, ``calibration``) names such a
-    record, it is returned as ``_WITHHELD`` and stays in its place as the withheld marker (:func:`_held`:
+    any of its references (``ref_value``, ``target``, ``variable``, ``produced_by``, ``calibration``, and the record_ref
+    ``normalized_by``, whose path into a kept record follows what was removed from it or names a part removed or
+    withheld) names such a record, it is returned as ``_WITHHELD`` and stays in its place as the withheld marker (:func:`_held`:
     :data:`WITHHELD_VALUE`, with the target and variable it names that are kept): an entry of a list keeps its
     position, an entry of a map its key (the curator's words on the kept record, as its name and note are; only a key
     that is itself a withheld id goes), and a property becomes the marker (:func:`_strip`). So a query reads it as
@@ -883,6 +889,18 @@ def _drop_refs(v: Any, gone: set, n: list[int], at: str = "", dropped: set | Non
         if v.get("status") in VALUE_STATUSES:          # a value object: its other fields hold no record id
             if any(isinstance(v.get(k), str) and v[k] in gone for k in VALUE_REFS):
                 return _WITHHELD
+            for k in VALUE_RECORD_REFS:                 # a value goes with what it is divided by: the record left out, or
+                ref = v.get(k)                          # the value its path names removed or withheld, withholds it
+                if not (isinstance(ref, dict) and isinstance(ref.get("record"), str)):
+                    continue
+                if ref["record"] in gone:
+                    return _WITHHELD
+                if moved is not None and isinstance(ref.get("path"), str):
+                    path = moved(ref["record"], ref["path"])
+                    if path is None:
+                        return _WITHHELD
+                    if path != ref["path"]:
+                        v = {**v, k: {**ref, "path": path}}
             ids = v.get("evidence_ids")
             if isinstance(ids, list) and ids:           # traced: the evidence items that state it
                 if not any(isinstance(x, str) and x in kept_evidence for x in ids):
@@ -1357,8 +1375,9 @@ def _flatten(props: dict) -> dict:
 
     def put(prefix: str, v: Any) -> None:
         if isinstance(v, dict) and "status" in v:
-            for k, x in v.items():
-                out[f"{prefix}_{k}"] = x
+            for k, x in v.items():              # a record_ref in a value (normalized_by) is not a primitive: JSON text
+                nested = isinstance(x, dict) or (isinstance(x, list) and any(isinstance(y, (dict, list)) for y in x))
+                out[f"{prefix}_{k}"] = json.dumps(x, ensure_ascii=False, sort_keys=True) if nested else x
         elif isinstance(v, dict):
             for k, x in v.items():
                 put(f"{prefix}_{k}", x)
@@ -1444,20 +1463,27 @@ def _describe(spec: dict, names: list[str] | None = None, profile: str | None = 
     def keep(d: dict) -> bool:
         return exts is None or not d.get("added_by") or d["added_by"] in exts
 
+    from .quantities import contracts, describe_binding
+    qc = contracts(spec)
+
+    def text(v: dict) -> str:
+        """A property as a curator reads it: its type, its quantity contract (0.3.0 on) and its description."""
+        bound = describe_binding(qc, v) if qc is not None else None
+        return (_ptype(v, spec) + (f" [{bound}]" if bound else "")
+                + (f" — {v['description']}" if v.get("description") else ""))
+
     def lab(n: str) -> dict:
         d = spec["nodes"][n]
         return {"is_a": d.get("ancestors") or [], owner: d.get("module"), "description": d.get("description"),
                 **({"maps_to": list(d["maps_to"])} if d.get("maps_to") else {}),
                 "required": d.get("required") or [], "fixed": d.get("fixed") or {},
-                "properties": {k: _ptype(v, spec) + (f" — {v['description']}" if v.get("description") else "")
-                               for k, v in (d.get("properties") or {}).items() if keep(v)}}
+                "properties": {k: text(v) for k, v in (d.get("properties") or {}).items() if keep(v)}}
 
     def edge(n: str) -> dict:
         d = spec["edges"][n]
         return {"from": d.get("from"), "to": d.get("to"), "description": d.get("description"), "specializes": d.get("specializes"),
                 **({"maps_to": list(d["maps_to"])} if d.get("maps_to") else {}),
-                "properties": {k: _ptype(v, spec) + (f" — {v['description']}" if v.get("description") else "")
-                               for k, v in (d.get("properties") or {}).items()}}
+                "properties": {k: text(v) for k, v in (d.get("properties") or {}).items()}}
 
     wanted = names or sorted(spec["nodes"]) + sorted(spec["edges"])
     unknown = [n for n in wanted if n not in spec["nodes"] and n not in spec["edges"]]
@@ -1481,4 +1507,11 @@ def _describe(spec: dict, names: list[str] | None = None, profile: str | None = 
         for t in STRUCTURES:                   # a kernel structure that properties use as their type (status_check)
             if isinstance(spec.get(t), dict) and spec[t].get("fields"):
                 out[f"{t}_fields"] = sorted(spec[t]["fields"])
+        if qc is not None:                     # the kinds a property or a Variable can hold (quantities.kinds)
+            from .quantities import formula
+            name = lambda x: qc.names.get(x) or formula(x)  # noqa: E731
+            out["quantity_kinds"] = {k: {"dimensions": [name(x) for x in d["dimensions"]],
+                                         "compared_by": [x["context"] for x in d["compare_by"]],
+                                         **({"denominator": [name(x) for x in d["denominator"]]} if d["denominator"] else {})}
+                                     for k, d in sorted(qc.kinds.items())}
     return out
