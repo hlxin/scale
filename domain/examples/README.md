@@ -5,7 +5,7 @@ The examples of the catalysis domain. The science kernel's own examples are in
 
 | directory | kind | use |
 |---|---|---|
-| `scale-catal/` | worked examples of the catalysis **scale-catal** schema (`domain/graph/scale-catal.yaml`), all **synthetic** (invented values and sources) and public, all following the one catalysis checklist: `example.json` (a thermocatalytic test with its catalyst sample, feed, reaction and evidence), one document per driving force and combination of forces (`driving-force-examples/`), on which the domain's competency questions run, and a source's lifecycle (`source-lifecycle/`) | `scale graph validate`; `scale domains cq catalysis`; `tools/tests/test_pgraph.py`, `domain/tests/test_driving_force_domains.py`, `domain/tests/test_graph_layers.py` |
+| `scale-catal/` | worked examples of the catalysis **scale-catal** schema (`domain/graph/scale-catal.yaml`), all **synthetic** (invented values and sources) and public, all following the one catalysis checklist: `example.json` (a thermocatalytic test with its catalyst sample, feed, reaction and evidence), one document per driving force and combination of forces (`driving-force-examples/`), on which the domain's competency questions run, a source's lifecycle (`source-lifecycle/`), and current densities that a scientific comparison keeps apart (`comparison-examples/`, competency question CQ-06) | `scale graph validate`; `scale domains cq catalysis`; `tools/tests/test_pgraph.py`, `domain/tests/test_driving_force_domains.py`, `domain/tests/test_graph_layers.py` |
 
 Source-grounded records and synthetic test cases are kept apart on purpose. `data_status:
 synthetic_example` requires every record's origin to be `synthetic`, and SCALE rejects a synthetic

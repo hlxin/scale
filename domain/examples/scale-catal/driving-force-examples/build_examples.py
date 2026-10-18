@@ -4,7 +4,8 @@ items for a catalytic test apply by the driving forces the test lists.
 
     python build_examples.py
 
-  electro.json             nitrate reduction on a Cu electrode: electrodes in their roles, reference scale, electrolyte, FE
+  electro.json             nitrate reduction on a Cu electrode: electrodes in their roles, reference scale, electrolyte
+                           (its components' concentrations, mol/L), FE
   electro-dynamic.json     the same reaction under square potential pulses (a dynamic Operation), with its static control
   electrothermo.json       ammonia decomposition on a Joule-heated Ru/carbon felt, with a furnace-heated control
   photo.json               CO2 photoreduction on TiO2 with its dark control
@@ -110,8 +111,8 @@ def electrocatalysis() -> None:
     counter = d.node("electrode/pt", "Electrode", "Pt foil counter electrode", substrate="Pt foil")
     k2so4 = d.species("k2so4", "K2SO4", {"K": 2, "S": 1, "O": 4})
     el = d.node("electrolyte/k2so4-kno3", "Electrolyte", "0.5 M K2SO4 + 0.1 M KNO3", pH=V(7.0, "1"), evidence=d.ev("Methods", "text"))
-    d.link("HAS_COMPONENT", el, k2so4, role="inert", fraction=V(0.5, "mol/L"), fraction_basis="not_reported")
-    d.link("HAS_COMPONENT", el, no3, role="reactant", fraction=V(0.1, "mol/L"), fraction_basis="not_reported")
+    d.link("HAS_COMPONENT", el, k2so4, role="inert", concentration=V(0.5, "mol/L"))
+    d.link("HAS_COMPONENT", el, no3, role="reactant", concentration=V(0.1, "mol/L"))
     cell = d.node("instrument/h-cell", "ElectrochemicalCell", "H-cell", cell_kind="h_cell", separator="Nafion 117", compartments=2)
     t = d.node("test/m03", "CatalyticTest", "Electrolysis at -0.3 V vs RHE", test_kind="activity", driving_forces=["electro"],
                experiment_kind="physical", control_mode="potentiostatic",
@@ -208,7 +209,7 @@ def photoelectrocatalysis() -> None:
     ref = d.node("instrument/ref", "ReferenceElectrode", "Ag/AgCl reference", reference_type="ag_agcl", filling="3 M KCl")
     el = d.node("electrolyte/kpi", "Electrolyte", "0.5 M potassium phosphate", pH=V(7.0, "1"))
     kpi = d.species("phosphate", "KH2PO4", {"K": 1, "H": 2, "P": 1, "O": 4})
-    d.link("HAS_COMPONENT", el, kpi, role="inert", fraction=V(0.5, "mol/L"), fraction_basis="not_reported")
+    d.link("HAS_COMPONENT", el, kpi, role="inert", concentration=V(0.5, "mol/L"))
     lamp = d.node("instrument/sim", "LightSource", "Solar simulator", source_kind="solar_simulator", spectrum="AM1.5G")
     villum = d.node("variable/illumination", "Variable", "Illumination", scale="nominal", categories=["light", "dark"])
     vpot = d.node("variable/potential", "Variable", "Electrode potential", scale="quantitative", quantity_kind="electric_potential", unit="V")
@@ -305,7 +306,7 @@ def dynamic_electrocatalysis() -> None:
     d.link("HAS_PART", electrode, sample, role="catalyst layer")
     ref = d.node("instrument/ref", "ReferenceElectrode", "Ag/AgCl reference", reference_type="ag_agcl", filling="saturated KCl")
     el = d.node("electrolyte/k2so4-kno3", "Electrolyte", "0.5 M K2SO4 + 0.01 M KNO3", pH=V(7.0, "1"))
-    d.link("HAS_COMPONENT", el, no3, role="reactant", fraction=V(0.01, "mol/L"), fraction_basis="not_reported")
+    d.link("HAS_COMPONENT", el, no3, role="reactant", concentration=V(0.01, "mol/L"))
     pulsed_op = d.node("operation/square-pulse", "Operation", "Square potential pulses", operation_mode="dynamic", time_pattern="periodic",
                        varied_quantities=["electrode_potential"], total_duration=V(1, "h"),
                        segments=[{"electrode_potential": V(0.2, "V"), "duration": V(2, "s")},
@@ -342,7 +343,7 @@ def electrophotocatalysis() -> None:
     ref = d.node("instrument/ref", "ReferenceElectrode", "Ag/AgNO3 reference", reference_type="pseudo_reference")
     el = d.node("electrolyte/mecn", "Electrolyte", "0.1 M Et4NBF4 in MeCN")
     salt = d.species("et4nbf4", "C8H20NBF4", {"C": 8, "H": 20, "N": 1, "B": 1, "F": 4})
-    d.link("HAS_COMPONENT", el, salt, role="inert", fraction=V(0.1, "mol/L"), fraction_basis="not_reported")
+    d.link("HAS_COMPONENT", el, salt, role="inert", concentration=V(0.1, "mol/L"))
     lamp = d.node("instrument/cfl", "LightSource", "Compact fluorescent lamp", source_kind="other", spectrum="white light")
     villum = d.node("variable/illumination", "Variable", "Illumination", scale="nominal", categories=["light", "dark"])
     common = dict(experiment_kind="physical", test_kind="activity", driving_forces=["electro", "photo"],

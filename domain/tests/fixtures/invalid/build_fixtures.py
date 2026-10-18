@@ -39,6 +39,15 @@ def test_node(doc: dict) -> dict:
     return next(n for n in doc["nodes"] if n["label"] == "CatalyticTest")
 
 
+def node(doc: dict, local: str) -> dict:
+    return next(n for n in doc["nodes"] if n["id"].endswith("/" + local))
+
+
+def component(doc: dict, local: str) -> dict:
+    """The electrolyte's HAS_COMPONENT link to the species ``local``."""
+    return next(e for e in doc["links"] if e["type"] == "HAS_COMPONENT" and e["target"].endswith("/" + local))
+
+
 def defect(name: str, title: str, change, base: dict | None = None) -> None:
     doc = copy.deepcopy(base or load_doc(BASE))
     doc["graph"]["graph_id"] = f"ex:invalid/{name}"
@@ -65,6 +74,21 @@ def main() -> None:
            lambda d: test_node(d)["props"]["evidence"][0].pop("locator"))
     defect("reported-in-without-evidence", "a REPORTED_IN link that no evidence of its record backs",
            lambda d: test_node(d)["props"].pop("evidence"))
+    # quantity contracts (0.3.0): a unit of another dimension than the property's kind, a concentration stored as a
+    # fraction, and a normalization reference that names no denominator, a value of another dimension or no property
+    defect("temperature-in-kg", "a temperature in a unit of mass",
+           lambda d: test_node(d)["props"].__setitem__("temperature", {"status": "present", "value": 298, "unit": "kg"}))
+    defect("fraction-in-mol-per-litre", "an electrolyte's concentration stored as a dimensionless fraction",
+           lambda d: component(d, "nitrate")["props"].__setitem__("fraction", component(d, "nitrate")["props"].pop("concentration")))
+    defect("normalized-by-without-denominator", "a temperature that names what it is divided by",
+           lambda d: test_node(d)["props"]["temperature"].__setitem__(
+               "normalized_by", {"record": node(d, "electrode/cu-on-cp")["id"], "path": "/geometric_area"}))
+    defect("normalized-by-wrong-dimension", "a current density divided by a catalyst loading (a mass per area)",
+           lambda d: test_node(d)["props"]["current_density"].__setitem__(
+               "normalized_by", {"record": node(d, "electrode/cu-on-cp")["id"], "path": "/catalyst_loading"}))
+    defect("normalized-by-unresolved-path", "a current density divided by an electrode area the electrode does not hold",
+           lambda d: test_node(d)["props"]["current_density"].__setitem__(
+               "normalized_by", {"record": node(d, "electrode/cu-on-cp")["id"], "path": "/electrochemically_active_area"}))
     # it states its access (public, like every committed document) but not who contributed it or its project
     defect("research-data-without-stewardship", "research data that does not say who contributed it or which project it belongs to",
            lambda d: d["graph"].__setitem__("stewardship", {"access": "public"}), base=template("catalysis", VERSION))
