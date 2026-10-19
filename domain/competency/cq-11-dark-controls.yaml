@@ -1,0 +1,70 @@
+# A competency question of the catalysis domain (tools/competency.py; `scale domains cq catalysis`).
+# It runs on public synthetic examples, so anyone can rerun it and see the same answer.
+id: CQ-11
+question: Which light-driven claims rest on a dark control, matched where and over which time, and differing in what?
+description: |
+  A reading that separates light from heat (interpretations photothermal_effect or nonthermal_light_effect) rests on a
+  dark control at matched temperature: a DARK_CONTROL_FOR link, which is a CONTROL_FOR, so a step on CONTROL_FOR follows
+  it and its control_kind and differs_in (issue #41) are returned. The variant on DARK_CONTROL_FOR itself returns where
+  the temperatures were matched and over which time: the illuminated surface in steady state for one non-thermal claim,
+  the bed temperature only for the other (a bulk match, which the checklist says does not show a non-thermal effect).
+  The photothermal claim rests on an analysis of the dependence on irradiance instead and has no dark control.
+documents:
+  - examples/scale-catal/evidence-examples/kinetic-evidence.json
+plan:
+  question: Which dark controls back the light-driven claims, and in what do they differ?
+  match:
+    label: CatalyticTest
+    as: test
+    where:
+      - prop: interpretations
+        op: matches
+        value: photothermal_effect|nonthermal_light_effect
+  steps:
+    - from: test
+      edge: CONTROL_FOR
+      direction: in
+      to: Experiment
+      as: control
+      edge_as: control_link
+  return:
+    - test.name
+    - test.interpretations
+    - control.name
+    - control_link.control_kind
+    - control_link.differs_in
+  evidence: true
+expect:
+  status: answered
+  min_rows: 2
+  max_rows: 2
+  values:
+    control_link.control_kind:
+      - negative
+variants:
+  - description: On DARK_CONTROL_FOR itself, where and over which time the temperatures were matched, the surface for one
+      claim and the bed for the other.
+    plan:
+      steps:
+        - from: test
+          edge: DARK_CONTROL_FOR
+          direction: in
+          to: Experiment
+          as: control
+          edge_as: control_link
+      return:
+        - test.name
+        - control.name
+        - control_link.temperature_matched_at
+        - control_link.temperature_matched_over
+        - control_link.temperature_matched_by
+    expect:
+      status: answered
+      min_rows: 2
+      max_rows: 2
+      values:
+        control_link.temperature_matched_at:
+          - illuminated_surface
+          - catalyst_bed
+        control_link.temperature_matched_over:
+          - steady_state

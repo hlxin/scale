@@ -469,7 +469,8 @@ def test_describe_shows_what_a_domain_uses(spec):
     d = pgraph.describe(spec, ["CatalyticTest", "HAS_COMPONENT"], profile="catalysis")
     props = d["labels"]["CatalyticTest"]["properties"]
     assert {"heating_mode", "electrode_potential", "irradiance", "discharge_power", "temperature"} <= set(props)
-    assert len(d["checklist"]["labels"]["CatalyticTest"]["when"]) == 7
+    when = d["checklist"]["labels"]["CatalyticTest"]["when"]   # the driving-force cases and the readings' (0.5.0 on)
+    assert sum("driving_forces" in w for w in when) == 8 and sum("interpretations" in w for w in when) == 7
     assert "role" in d["edges"]["HAS_COMPONENT"]["properties"]
     assert d["labels"]["CatalyticTest"]["defined_in"] == "catalysis" and "module" not in d["labels"]["CatalyticTest"]
     assert pgraph.describe(spec, ["Operation"])["labels"]["Operation"]["defined_in"] == "kernel"

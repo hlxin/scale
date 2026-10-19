@@ -65,3 +65,9 @@ fixtures:
   - file: result-ref-by-position.json
     error: "names a result by its position; name it by its id"
     reason: A position in result_values names another result once the list is reordered, appended to or filtered; an id does not.
+  - file: interpretation-not-in-vocabulary.json
+    error: "interpretations[0]: 'catalytic_synergy' is not one of"
+    reason: What a test is read as showing comes from a closed list, so that the checklist knows which evidence the reading needs; a reading the vocabulary does not name asks for nothing and would pass unchecked.
+  - file: transport-basis-not-in-vocabulary.json
+    error: "evaluation_basis: 'estimated' is not one of"
+    reason: A transport check is asserted, numerical or experimental (or not reported); an unlisted basis would hide whether the verdict rests on a calculation, a test or neither.

@@ -1,0 +1,1669 @@
+{
+  "nodes": [
+    {
+      "id": "ex:ds/source/paper",
+      "label": "Source",
+      "props": {
+        "name": "Invented paper",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "Electrified reforming and O2 evolution over time (invented)",
+        "year": 2026
+      }
+    },
+    {
+      "id": "ex:ds/species/ch4",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "CH4",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 1,
+          "H": 4
+        },
+        "formula": "CH4",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ds/species/h2o",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "H2O",
+        "charge": 0,
+        "elemental_composition": {
+          "H": 2,
+          "O": 1
+        },
+        "formula": "H2O",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ds/species/co",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "CO",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 1,
+          "O": 1
+        },
+        "formula": "CO",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ds/species/h2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "H2",
+        "charge": 0,
+        "elemental_composition": {
+          "H": 2
+        },
+        "formula": "H2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ds/species/o2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "O2",
+        "charge": 0,
+        "elemental_composition": {
+          "O": 2
+        },
+        "formula": "O2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ds/species/hydroxide",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "hydroxide",
+        "charge": 0,
+        "elemental_composition": {
+          "H": 1,
+          "O": 1
+        },
+        "formula": "OH-",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ds/species/koh",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "KOH",
+        "charge": 0,
+        "elemental_composition": {
+          "H": 1,
+          "K": 1,
+          "O": 1
+        },
+        "formula": "KOH",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ds/reaction/smr",
+      "label": "Reaction",
+      "props": {
+        "name": "CH4 + H2O -> CO + 3 H2",
+        "balance_status": "balanced",
+        "direction": "forward",
+        "equation": "CH4 + H2O -> CO + 3 H2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ds/catalyst/ni-washcoat",
+      "label": "Catalyst",
+      "props": {
+        "name": "Ni/ZrO2 washcoat",
+        "catalyst_family": "metal",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:ds/source/paper"
+          }
+        ],
+        "nominal_formula": "Ni/ZrO2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ds/sample/ni-washcoat-tube",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Ni/ZrO2 washcoat on a FeCrAl tube",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:ds/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "sample_kind": "film"
+      }
+    },
+    {
+      "id": "ex:ds/feed/ch4-h2o",
+      "label": "Feed",
+      "props": {
+        "name": "CH4/H2O = 1/2",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:ds/source/paper"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ds/instrument/heated-tube",
+      "label": "Reactor",
+      "props": {
+        "name": "Resistively heated FeCrAl tube reactor",
+        "origin": "synthetic",
+        "reactor_kind": "flow"
+      }
+    },
+    {
+      "id": "ex:ds/operation/ramp-and-hold",
+      "label": "Operation",
+      "props": {
+        "name": "Ramp from 300 to 800 °C at 10 K/s, then held for 30 min",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Figure 2",
+            "source": "ex:ds/source/paper"
+          }
+        ],
+        "operation_mode": "dynamic",
+        "origin": "synthetic",
+        "segments": [
+          {
+            "duration": {
+              "status": "present",
+              "unit": "s",
+              "value": 60
+            },
+            "temperature": {
+              "status": "present",
+              "unit": "°C",
+              "value": 300
+            }
+          },
+          {
+            "duration": {
+              "status": "present",
+              "unit": "s",
+              "value": 50
+            },
+            "heating_rate": {
+              "status": "present",
+              "unit": "K/s",
+              "value": 10
+            }
+          },
+          {
+            "duration": {
+              "status": "present",
+              "unit": "min",
+              "value": 30
+            },
+            "temperature": {
+              "status": "present",
+              "unit": "°C",
+              "value": 800
+            }
+          }
+        ],
+        "time_pattern": "ramp",
+        "total_duration": {
+          "status": "present",
+          "unit": "min",
+          "value": 31
+        },
+        "varied_quantities": [
+          "temperature",
+          "heating_power"
+        ]
+      }
+    },
+    {
+      "id": "ex:ds/dataset/catalyst-temperature",
+      "label": "TimeSeries",
+      "props": {
+        "name": "Catalyst temperature, thermocouple in the washcoat",
+        "availability": "not_reported",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Figure 2",
+            "source": "ex:ds/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "sampling_interval": {
+          "status": "present",
+          "unit": "s",
+          "value": 1
+        },
+        "series_kind": "instantaneous",
+        "unit": "°C",
+        "variable": "catalyst temperature"
+      }
+    },
+    {
+      "id": "ex:ds/dataset/conversion",
+      "label": "TimeSeries",
+      "props": {
+        "name": "CH4 conversion by online MS",
+        "availability": "not_reported",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Figure 2",
+            "source": "ex:ds/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "sampling_interval": {
+          "status": "present",
+          "unit": "s",
+          "value": 2
+        },
+        "series_kind": "instantaneous",
+        "unit": "%",
+        "variable": "CH4 conversion"
+      }
+    },
+    {
+      "id": "ex:ds/test/ramped-reforming",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Steam reforming during a 300-800 °C ramp and a 30 min hold",
+        "conversion": {
+          "status": "present",
+          "definition": "at the end of the hold",
+          "target": "ex:ds/species/ch4",
+          "unit": "%",
+          "value": 92
+        },
+        "driving_forces": [
+          "electrothermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Figure 2",
+            "source": "ex:ds/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "heated_element": "the FeCrAl tube",
+        "heating_mode": "resistive",
+        "heating_power": {
+          "status": "present",
+          "definition": "during the hold",
+          "unit": "W",
+          "value": 450
+        },
+        "heating_rate": {
+          "status": "present",
+          "unit": "K/s",
+          "value": 10
+        },
+        "interpretations": [
+          "system_performance"
+        ],
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "basis": "absolute",
+          "unit": "bar",
+          "value": 1
+        },
+        "temperature": {
+          "status": "present",
+          "lower": 300,
+          "unit": "°C",
+          "upper": 800
+        },
+        "temperature_measured_at": "catalyst_bed",
+        "test_kind": "activity",
+        "time_on_stream": {
+          "status": "present",
+          "unit": "min",
+          "value": 31
+        }
+      }
+    },
+    {
+      "id": "ex:ds/reaction/oer",
+      "label": "Reaction",
+      "props": {
+        "name": "4 OH- -> O2 + 2 H2O + 4 e-",
+        "balance_status": "balanced",
+        "direction": "forward",
+        "equation": "4 OH- -> O2 + 2 H2O + 4 e-",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ds/catalyst/nife-oxide",
+      "label": "Catalyst",
+      "props": {
+        "name": "NiFe oxide (Ni:Fe 3:1)",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:ds/source/paper"
+          }
+        ],
+        "nominal_formula": "Ni0.75Fe0.25Ox",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ds/electrolyte/koh",
+      "label": "Electrolyte",
+      "props": {
+        "name": "1 M KOH",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:ds/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "pH": {
+          "status": "present",
+          "unit": "1",
+          "value": 14
+        }
+      }
+    },
+    {
+      "id": "ex:ds/instrument/h-cell",
+      "label": "ElectrochemicalCell",
+      "props": {
+        "name": "Three-electrode PTFE cell",
+        "cell_kind": "single_compartment",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ds/design/replicate-electrodes",
+      "label": "Design",
+      "props": {
+        "name": "Three electrodes from one batch, 24 h at 10 mA/cm2",
+        "design_kind": "other",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:ds/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "planned_replicates": 3,
+        "strategy": "three independently prepared electrodes"
+      }
+    },
+    {
+      "id": "ex:ds/sample/nife-1",
+      "label": "CatalystSample",
+      "props": {
+        "name": "NiFe oxide on Ni foam, electrode 1",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:ds/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "sample_kind": "electrode"
+      }
+    },
+    {
+      "id": "ex:ds/test/oer-electrode-1",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "electrode 1",
+        "control_mode": "galvanostatic",
+        "current_density": {
+          "status": "present",
+          "unit": "mA/cm2",
+          "value": 10
+        },
+        "current_normalization": "geometric_area",
+        "driving_forces": [
+          "electro"
+        ],
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 24
+        },
+        "electrode_potential": {
+          "status": "present",
+          "unit": "V",
+          "value": 1.53
+        },
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Figure 5",
+            "source": "ex:ds/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "interpretations": [
+          "performance_stability",
+          "material_stability"
+        ],
+        "ir_compensation": "partial",
+        "origin": "synthetic",
+        "reference_scale": "rhe",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 298
+        },
+        "test_kind": "stability"
+      }
+    },
+    {
+      "id": "ex:ds/dataset/potential-oer-electrode-1",
+      "label": "TimeSeries",
+      "props": {
+        "name": "Potential over 24 h, electrode 1",
+        "availability": "not_reported",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Figure 5",
+            "source": "ex:ds/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "sampling_interval": {
+          "status": "present",
+          "unit": "s",
+          "value": 10
+        },
+        "series_kind": "instantaneous",
+        "unit": "V",
+        "variable": "electrode potential"
+      }
+    },
+    {
+      "id": "ex:ds/sample/nife-2",
+      "label": "CatalystSample",
+      "props": {
+        "name": "NiFe oxide on Ni foam, electrode 2",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:ds/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "sample_kind": "electrode"
+      }
+    },
+    {
+      "id": "ex:ds/test/oer-electrode-2",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "electrode 2",
+        "control_mode": "galvanostatic",
+        "current_density": {
+          "status": "present",
+          "unit": "mA/cm2",
+          "value": 10
+        },
+        "current_normalization": "geometric_area",
+        "driving_forces": [
+          "electro"
+        ],
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 24
+        },
+        "electrode_potential": {
+          "status": "present",
+          "unit": "V",
+          "value": 1.54
+        },
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Figure 5",
+            "source": "ex:ds/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "interpretations": [
+          "performance_stability"
+        ],
+        "ir_compensation": "partial",
+        "origin": "synthetic",
+        "reference_scale": "rhe",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 298
+        },
+        "test_kind": "stability"
+      }
+    },
+    {
+      "id": "ex:ds/dataset/potential-oer-electrode-2",
+      "label": "TimeSeries",
+      "props": {
+        "name": "Potential over 24 h, electrode 2",
+        "availability": "not_reported",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Figure 5",
+            "source": "ex:ds/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "sampling_interval": {
+          "status": "present",
+          "unit": "s",
+          "value": 10
+        },
+        "series_kind": "instantaneous",
+        "unit": "V",
+        "variable": "electrode potential"
+      }
+    },
+    {
+      "id": "ex:ds/sample/nife-3",
+      "label": "CatalystSample",
+      "props": {
+        "name": "NiFe oxide on Ni foam, electrode 3",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:ds/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "sample_kind": "electrode"
+      }
+    },
+    {
+      "id": "ex:ds/test/oer-electrode-3",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "electrode 3",
+        "control_mode": "galvanostatic",
+        "current_density": {
+          "status": "present",
+          "unit": "mA/cm2",
+          "value": 10
+        },
+        "current_normalization": "geometric_area",
+        "driving_forces": [
+          "electro"
+        ],
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 24
+        },
+        "electrode_potential": {
+          "status": "present",
+          "unit": "V",
+          "value": 1.53
+        },
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Figure 5",
+            "source": "ex:ds/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "interpretations": [
+          "performance_stability"
+        ],
+        "ir_compensation": "partial",
+        "origin": "synthetic",
+        "reference_scale": "rhe",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 298
+        },
+        "test_kind": "stability"
+      }
+    },
+    {
+      "id": "ex:ds/dataset/potential-oer-electrode-3",
+      "label": "TimeSeries",
+      "props": {
+        "name": "Potential over 24 h, electrode 3",
+        "availability": "not_reported",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Figure 5",
+            "source": "ex:ds/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "sampling_interval": {
+          "status": "present",
+          "unit": "s",
+          "value": 10
+        },
+        "series_kind": "instantaneous",
+        "unit": "V",
+        "variable": "electrode potential"
+      }
+    },
+    {
+      "id": "ex:ds/state/nife-after-24h",
+      "label": "CatalystState",
+      "props": {
+        "name": "Electrode 1 after 24 h",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Figure 6",
+            "source": "ex:ds/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "regime": "steady",
+        "state_kind": "post_reaction"
+      }
+    },
+    {
+      "id": "ex:ds/characterization/icp-ms",
+      "label": "Characterization",
+      "props": {
+        "name": "ICP-MS of electrolyte aliquots over 24 h",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Figure 6",
+            "source": "ex:ds/source/paper"
+          }
+        ],
+        "observation_mode": "ex_situ",
+        "origin": "synthetic",
+        "results": {
+          "dissolved_fe": {
+            "status": "present",
+            "definition": "Fe in the electrolyte after 24 h",
+            "unit": "ug",
+            "value": 0.4
+          },
+          "dissolved_ni": {
+            "status": "present",
+            "definition": "Ni in the electrolyte after 24 h",
+            "unit": "ug",
+            "value": 0.1
+          }
+        },
+        "technique": "inductively coupled plasma mass spectrometry"
+      }
+    },
+    {
+      "id": "ex:ds/characterization/xps-after",
+      "label": "Characterization",
+      "props": {
+        "name": "XPS of electrode 1 after 24 h",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Figure 6",
+            "source": "ex:ds/source/paper"
+          }
+        ],
+        "observation_mode": "ex_situ",
+        "origin": "synthetic",
+        "technique": "X-ray photoelectron spectroscopy"
+      }
+    },
+    {
+      "id": "ex:ds/sample/nife-4",
+      "label": "CatalystSample",
+      "props": {
+        "name": "NiFe oxide on Ni foam, electrode 4",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:ds/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "sample_kind": "electrode"
+      }
+    },
+    {
+      "id": "ex:ds/test/oer-trace-only",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "electrode read as stable from its potential trace",
+        "control_mode": "galvanostatic",
+        "current_density": {
+          "status": "present",
+          "unit": "mA/cm2",
+          "value": 10
+        },
+        "current_normalization": "geometric_area",
+        "driving_forces": [
+          "electro"
+        ],
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 24
+        },
+        "electrode_potential": {
+          "status": "present",
+          "unit": "V",
+          "value": 1.53
+        },
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Figure 5",
+            "source": "ex:ds/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "interpretations": [
+          "material_stability"
+        ],
+        "ir_compensation": "partial",
+        "origin": "synthetic",
+        "reference_scale": "rhe",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 298
+        },
+        "test_kind": "stability"
+      }
+    },
+    {
+      "id": "ex:ds/dataset/potential-oer-trace-only",
+      "label": "TimeSeries",
+      "props": {
+        "name": "Potential over 24 h, electrode read as stable from its potential trace",
+        "availability": "not_reported",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Figure 5",
+            "source": "ex:ds/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "sampling_interval": {
+          "status": "present",
+          "unit": "s",
+          "value": 10
+        },
+        "series_kind": "instantaneous",
+        "unit": "V",
+        "variable": "electrode potential"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:ds/link/1",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:ds/reaction/smr",
+      "target": "ex:ds/species/ch4"
+    },
+    {
+      "id": "ex:ds/link/2",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:ds/reaction/smr",
+      "target": "ex:ds/species/h2o"
+    },
+    {
+      "id": "ex:ds/link/3",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "role": "product"
+      },
+      "source": "ex:ds/reaction/smr",
+      "target": "ex:ds/species/co"
+    },
+    {
+      "id": "ex:ds/link/4",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 3,
+        "origin": "synthetic",
+        "role": "product"
+      },
+      "source": "ex:ds/reaction/smr",
+      "target": "ex:ds/species/h2"
+    },
+    {
+      "id": "ex:ds/link/5",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/sample/ni-washcoat-tube",
+      "target": "ex:ds/catalyst/ni-washcoat"
+    },
+    {
+      "id": "ex:ds/link/6",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:ds/feed/ch4-h2o",
+      "target": "ex:ds/species/ch4"
+    },
+    {
+      "id": "ex:ds/link/7",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:ds/feed/ch4-h2o",
+      "target": "ex:ds/species/h2o"
+    },
+    {
+      "id": "ex:ds/link/8",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "reduced"
+      },
+      "source": "ex:ds/test/ramped-reforming",
+      "target": "ex:ds/sample/ni-washcoat-tube"
+    },
+    {
+      "id": "ex:ds/link/9",
+      "type": "FED_WITH",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/test/ramped-reforming",
+      "target": "ex:ds/feed/ch4-h2o"
+    },
+    {
+      "id": "ex:ds/link/10",
+      "type": "IN_REACTOR",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/test/ramped-reforming",
+      "target": "ex:ds/instrument/heated-tube"
+    },
+    {
+      "id": "ex:ds/link/11",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/test/ramped-reforming",
+      "target": "ex:ds/reaction/smr"
+    },
+    {
+      "id": "ex:ds/link/12",
+      "type": "HAS_OPERATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/test/ramped-reforming",
+      "target": "ex:ds/operation/ramp-and-hold"
+    },
+    {
+      "id": "ex:ds/link/13",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/test/ramped-reforming",
+      "target": "ex:ds/dataset/catalyst-temperature"
+    },
+    {
+      "id": "ex:ds/link/14",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/test/ramped-reforming",
+      "target": "ex:ds/dataset/conversion"
+    },
+    {
+      "id": "ex:ds/link/15",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 4,
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:ds/reaction/oer",
+      "target": "ex:ds/species/hydroxide"
+    },
+    {
+      "id": "ex:ds/link/16",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "role": "product"
+      },
+      "source": "ex:ds/reaction/oer",
+      "target": "ex:ds/species/o2"
+    },
+    {
+      "id": "ex:ds/link/17",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 2,
+        "origin": "synthetic",
+        "role": "product"
+      },
+      "source": "ex:ds/reaction/oer",
+      "target": "ex:ds/species/h2o"
+    },
+    {
+      "id": "ex:ds/link/18",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "concentration": {
+          "status": "present",
+          "unit": "mol/L",
+          "value": 1
+        },
+        "origin": "synthetic",
+        "role": "inert"
+      },
+      "source": "ex:ds/electrolyte/koh",
+      "target": "ex:ds/species/koh"
+    },
+    {
+      "id": "ex:ds/link/19",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/sample/nife-1",
+      "target": "ex:ds/catalyst/nife-oxide"
+    },
+    {
+      "id": "ex:ds/link/20",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "as_prepared"
+      },
+      "source": "ex:ds/test/oer-electrode-1",
+      "target": "ex:ds/sample/nife-1"
+    },
+    {
+      "id": "ex:ds/link/21",
+      "type": "IN_ELECTROLYTE",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/test/oer-electrode-1",
+      "target": "ex:ds/electrolyte/koh"
+    },
+    {
+      "id": "ex:ds/link/22",
+      "type": "IN_CELL",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/test/oer-electrode-1",
+      "target": "ex:ds/instrument/h-cell"
+    },
+    {
+      "id": "ex:ds/link/23",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/test/oer-electrode-1",
+      "target": "ex:ds/reaction/oer"
+    },
+    {
+      "id": "ex:ds/link/24",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/test/oer-electrode-1",
+      "target": "ex:ds/dataset/potential-oer-electrode-1"
+    },
+    {
+      "id": "ex:ds/link/25",
+      "type": "PART_OF_DESIGN",
+      "props": {
+        "origin": "synthetic",
+        "replicate_group": "24 h at 10 mA/cm2",
+        "run_order": 1
+      },
+      "source": "ex:ds/test/oer-electrode-1",
+      "target": "ex:ds/design/replicate-electrodes"
+    },
+    {
+      "id": "ex:ds/link/26",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/sample/nife-2",
+      "target": "ex:ds/catalyst/nife-oxide"
+    },
+    {
+      "id": "ex:ds/link/27",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "as_prepared"
+      },
+      "source": "ex:ds/test/oer-electrode-2",
+      "target": "ex:ds/sample/nife-2"
+    },
+    {
+      "id": "ex:ds/link/28",
+      "type": "IN_ELECTROLYTE",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/test/oer-electrode-2",
+      "target": "ex:ds/electrolyte/koh"
+    },
+    {
+      "id": "ex:ds/link/29",
+      "type": "IN_CELL",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/test/oer-electrode-2",
+      "target": "ex:ds/instrument/h-cell"
+    },
+    {
+      "id": "ex:ds/link/30",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/test/oer-electrode-2",
+      "target": "ex:ds/reaction/oer"
+    },
+    {
+      "id": "ex:ds/link/31",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/test/oer-electrode-2",
+      "target": "ex:ds/dataset/potential-oer-electrode-2"
+    },
+    {
+      "id": "ex:ds/link/32",
+      "type": "PART_OF_DESIGN",
+      "props": {
+        "origin": "synthetic",
+        "replicate_group": "24 h at 10 mA/cm2",
+        "run_order": 2
+      },
+      "source": "ex:ds/test/oer-electrode-2",
+      "target": "ex:ds/design/replicate-electrodes"
+    },
+    {
+      "id": "ex:ds/link/33",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/sample/nife-3",
+      "target": "ex:ds/catalyst/nife-oxide"
+    },
+    {
+      "id": "ex:ds/link/34",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "as_prepared"
+      },
+      "source": "ex:ds/test/oer-electrode-3",
+      "target": "ex:ds/sample/nife-3"
+    },
+    {
+      "id": "ex:ds/link/35",
+      "type": "IN_ELECTROLYTE",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/test/oer-electrode-3",
+      "target": "ex:ds/electrolyte/koh"
+    },
+    {
+      "id": "ex:ds/link/36",
+      "type": "IN_CELL",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/test/oer-electrode-3",
+      "target": "ex:ds/instrument/h-cell"
+    },
+    {
+      "id": "ex:ds/link/37",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/test/oer-electrode-3",
+      "target": "ex:ds/reaction/oer"
+    },
+    {
+      "id": "ex:ds/link/38",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/test/oer-electrode-3",
+      "target": "ex:ds/dataset/potential-oer-electrode-3"
+    },
+    {
+      "id": "ex:ds/link/39",
+      "type": "PART_OF_DESIGN",
+      "props": {
+        "origin": "synthetic",
+        "replicate_group": "24 h at 10 mA/cm2",
+        "run_order": 3
+      },
+      "source": "ex:ds/test/oer-electrode-3",
+      "target": "ex:ds/design/replicate-electrodes"
+    },
+    {
+      "id": "ex:ds/link/40",
+      "type": "REPLICATES",
+      "props": {
+        "agreement": "agrees",
+        "changed": [
+          "sample"
+        ],
+        "criterion": "potentials within 10 mV over 24 h",
+        "level": "replicate",
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/test/oer-electrode-2",
+      "target": "ex:ds/test/oer-electrode-1"
+    },
+    {
+      "id": "ex:ds/link/41",
+      "type": "REPLICATES",
+      "props": {
+        "agreement": "agrees",
+        "changed": [
+          "sample"
+        ],
+        "criterion": "potentials within 10 mV over 24 h",
+        "level": "replicate",
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/test/oer-electrode-3",
+      "target": "ex:ds/test/oer-electrode-1"
+    },
+    {
+      "id": "ex:ds/link/42",
+      "type": "REACHED_BY",
+      "props": {
+        "elapsed": {
+          "status": "present",
+          "unit": "h",
+          "value": 24
+        },
+        "origin": "synthetic",
+        "timing": "after"
+      },
+      "source": "ex:ds/state/nife-after-24h",
+      "target": "ex:ds/test/oer-electrode-1"
+    },
+    {
+      "id": "ex:ds/link/43",
+      "type": "STATE_OF",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/state/nife-after-24h",
+      "target": "ex:ds/sample/nife-1"
+    },
+    {
+      "id": "ex:ds/link/44",
+      "type": "DETERMINED_BY",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/state/nife-after-24h",
+      "target": "ex:ds/characterization/icp-ms"
+    },
+    {
+      "id": "ex:ds/link/45",
+      "type": "DETERMINED_BY",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/state/nife-after-24h",
+      "target": "ex:ds/characterization/xps-after"
+    },
+    {
+      "id": "ex:ds/link/46",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/sample/nife-4",
+      "target": "ex:ds/catalyst/nife-oxide"
+    },
+    {
+      "id": "ex:ds/link/47",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "as_prepared"
+      },
+      "source": "ex:ds/test/oer-trace-only",
+      "target": "ex:ds/sample/nife-4"
+    },
+    {
+      "id": "ex:ds/link/48",
+      "type": "IN_ELECTROLYTE",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/test/oer-trace-only",
+      "target": "ex:ds/electrolyte/koh"
+    },
+    {
+      "id": "ex:ds/link/49",
+      "type": "IN_CELL",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/test/oer-trace-only",
+      "target": "ex:ds/instrument/h-cell"
+    },
+    {
+      "id": "ex:ds/link/50",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/test/oer-trace-only",
+      "target": "ex:ds/reaction/oer"
+    },
+    {
+      "id": "ex:ds/link/51",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/test/oer-trace-only",
+      "target": "ex:ds/dataset/potential-oer-trace-only"
+    },
+    {
+      "id": "ex:ds/catalyst/ni-washcoat/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/catalyst/ni-washcoat",
+      "target": "ex:ds/source/paper"
+    },
+    {
+      "id": "ex:ds/catalyst/nife-oxide/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/catalyst/nife-oxide",
+      "target": "ex:ds/source/paper"
+    },
+    {
+      "id": "ex:ds/characterization/icp-ms/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 6"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/characterization/icp-ms",
+      "target": "ex:ds/source/paper"
+    },
+    {
+      "id": "ex:ds/characterization/xps-after/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 6"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/characterization/xps-after",
+      "target": "ex:ds/source/paper"
+    },
+    {
+      "id": "ex:ds/dataset/catalyst-temperature/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/dataset/catalyst-temperature",
+      "target": "ex:ds/source/paper"
+    },
+    {
+      "id": "ex:ds/dataset/conversion/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/dataset/conversion",
+      "target": "ex:ds/source/paper"
+    },
+    {
+      "id": "ex:ds/dataset/potential-oer-electrode-1/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 5"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/dataset/potential-oer-electrode-1",
+      "target": "ex:ds/source/paper"
+    },
+    {
+      "id": "ex:ds/dataset/potential-oer-electrode-2/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 5"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/dataset/potential-oer-electrode-2",
+      "target": "ex:ds/source/paper"
+    },
+    {
+      "id": "ex:ds/dataset/potential-oer-electrode-3/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 5"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/dataset/potential-oer-electrode-3",
+      "target": "ex:ds/source/paper"
+    },
+    {
+      "id": "ex:ds/dataset/potential-oer-trace-only/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 5"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/dataset/potential-oer-trace-only",
+      "target": "ex:ds/source/paper"
+    },
+    {
+      "id": "ex:ds/design/replicate-electrodes/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/design/replicate-electrodes",
+      "target": "ex:ds/source/paper"
+    },
+    {
+      "id": "ex:ds/electrolyte/koh/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/electrolyte/koh",
+      "target": "ex:ds/source/paper"
+    },
+    {
+      "id": "ex:ds/feed/ch4-h2o/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/feed/ch4-h2o",
+      "target": "ex:ds/source/paper"
+    },
+    {
+      "id": "ex:ds/operation/ramp-and-hold/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/operation/ramp-and-hold",
+      "target": "ex:ds/source/paper"
+    },
+    {
+      "id": "ex:ds/sample/ni-washcoat-tube/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/sample/ni-washcoat-tube",
+      "target": "ex:ds/source/paper"
+    },
+    {
+      "id": "ex:ds/sample/nife-1/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/sample/nife-1",
+      "target": "ex:ds/source/paper"
+    },
+    {
+      "id": "ex:ds/sample/nife-2/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/sample/nife-2",
+      "target": "ex:ds/source/paper"
+    },
+    {
+      "id": "ex:ds/sample/nife-3/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/sample/nife-3",
+      "target": "ex:ds/source/paper"
+    },
+    {
+      "id": "ex:ds/sample/nife-4/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/sample/nife-4",
+      "target": "ex:ds/source/paper"
+    },
+    {
+      "id": "ex:ds/state/nife-after-24h/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 6"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/state/nife-after-24h",
+      "target": "ex:ds/source/paper"
+    },
+    {
+      "id": "ex:ds/test/oer-electrode-1/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 5"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/test/oer-electrode-1",
+      "target": "ex:ds/source/paper"
+    },
+    {
+      "id": "ex:ds/test/oer-electrode-2/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 5"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/test/oer-electrode-2",
+      "target": "ex:ds/source/paper"
+    },
+    {
+      "id": "ex:ds/test/oer-electrode-3/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 5"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/test/oer-electrode-3",
+      "target": "ex:ds/source/paper"
+    },
+    {
+      "id": "ex:ds/test/oer-trace-only/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 5"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/test/oer-trace-only",
+      "target": "ex:ds/source/paper"
+    },
+    {
+      "id": "ex:ds/test/ramped-reforming/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ds/test/ramped-reforming",
+      "target": "ex:ds/source/paper"
+    }
+  ],
+  "directed": true,
+  "graph": {
+    "data_status": "synthetic_example",
+    "follows_domains": [
+      "catalysis"
+    ],
+    "graph_id": "ex:ds/graph",
+    "schema": "scale-catal",
+    "schema_version": "0.5.0",
+    "stewardship": {
+      "access": "public"
+    },
+    "title": "Dynamic operation and stability: a heating ramp, replicate electrodes and the material after a test"
+  },
+  "multigraph": true
+}
