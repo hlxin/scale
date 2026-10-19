@@ -131,7 +131,8 @@ is converted:
   unit and basis checks: `le 5 %` passes a value below a 2 % limit, `ge 5 %` fails it, `le 1 %` leaves it out as
   `one_sided_bound` (named "below the detection limit 2 %; le 1 cannot be decided"), and `eq` and `in` never hold.
   Without a number it stays absent (reason: its status). A scientific `order_by` does not rank it (`one_sided_bound`);
-  `exists` still counts it as present.
+  `exists` still counts it as present. The limit itself counts as possible, so a strict `lt`, `gt` or `ge` at exactly
+  the limit is left out as `one_sided_bound` rather than decided.
 
 ## Scientific comparison
 
