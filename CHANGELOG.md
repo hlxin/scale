@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- **Query fix (#38): a value below its detection or quantification limit is read as an upper bound at its limit.** A
+  numeric filter (`graph query`) left such a value out with the reason `below_detection_limit`; it now passes `le`/`lt`
+  and fails `ge`/`gt` when every number below the limit decides, is left out as `one_sided_bound` when the limit
+  straddles the filter, and never holds for `eq`/`in`. No schema change.
 - **Schema 0.5.0 (breaking): the checklist says when a test's reporting cannot be judged, and checks the evidence a
   reading needs.** Requested by @hlxin ("Check reporting applicability and connected kinetic evidence"). Before, a test
   that listed no driving force matched none of the checklist's driving-force cases, so a test stripped of every
