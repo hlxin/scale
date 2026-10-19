@@ -1,0 +1,124 @@
+# A competency question of the catalysis domain (tools/competency.py; `scale domains cq catalysis`).
+# It runs on public synthetic examples, so anyone can rerun it and see the same answer.
+id: CQ-12
+question: Which tests reached a C5+ selectivity of at least 60 % (on a carbon basis), across papers that each define
+  their own C5+ lump?
+description: |
+  A Fischer-Tropsch paper reports selectivities on product lumps (C2-C4, C5+, C5-C11), not on species. Each document
+  mints its own ProductLump nodes, so no id is shared; the shared convention is the lump's defining properties. "C5+" is
+  a hydrocarbon lump with carbon_min 5 and open_ended true, whatever its id, so a step that follows a result's target to
+  a ProductLump and filters on those properties selects the C5+ selectivity of both documents, and leaves out the C5-C11
+  lump (carbon_max 11, not open ended) of the first one. No id is guessed and no curator's key is read. The two
+  documents are independent: the first (Cheng-like, six lumps with C5-C11, C10-C20 and C21+ declared SUBSET_OF C5+) gives
+  80 %, the second (two lumps, its own ids) gives 65 % and 55 %. The threshold of 60 % keeps 80 % and 65 %; the 55 % test
+  is left out, and a threshold of 70 % keeps only the first document's. The values are as reported: the comparison is
+  scientific, which keeps the carbon basis and the unit apart. The answer rests on invented values.
+documents:
+  - examples/scale-catal/product-measurement-examples/product-lumps-cheng-like.json
+  - examples/scale-catal/product-measurement-examples/product-lumps-second-paper.json
+plan:
+  question: Which tests reached a C5+ selectivity of at least 60 %, whichever document defines the C5+ lump?
+  comparison: scientific
+  match:
+    label: CatalyticTest
+    as: test
+  steps:
+    - from: test
+      entries:
+        - results
+      kind: selectivity
+      as: result
+    - from: result
+      field: target
+      to: ProductLump
+      as: lump
+      where:
+        - prop: carbon_min
+          op: eq
+          value: 5
+        - prop: open_ended
+          op: eq
+          value: true
+        - prop: compound_class
+          op: eq
+          value: hydrocarbon
+  where:
+    - var: result
+      prop: value
+      op: ge
+      value: 60
+      unit: '%'
+      basis: carbon
+  return:
+    - test.name
+    - result
+    - lump.name
+    - lump.carbon_min
+  evidence: true
+expect:
+  status: answered
+  min_rows: 2
+  max_rows: 2
+  values:
+    lump.name:
+      - C5+
+variants:
+  - description: At least 70 % leaves only the first document's 80 %; the second paper's 65 % and 55 % are below it.
+    plan:
+      where:
+        - var: result
+          prop: value
+          op: ge
+          value: 70
+          unit: '%'
+          basis: carbon
+    expect:
+      status: answered
+      min_rows: 1
+      max_rows: 1
+  - description: At least 90 % is reached by no C5+ selectivity; the C5-C11 lump is not C5+ (it has a greatest carbon
+      number), and no lump of another window stands in for it.
+    plan:
+      where:
+        - var: result
+          prop: value
+          op: ge
+          value: 90
+          unit: '%'
+          basis: carbon
+    expect:
+      status: no_matching_record
+  - description: The C5-C11 lump (carbon_min 5, carbon_max 11) is a different selection, a selectivity of 40 % in the first
+      document; it never answers the C5+ question and the C5+ question never returns it.
+    plan:
+      steps:
+        - from: test
+          entries:
+            - results
+          kind: selectivity
+          as: result
+        - from: result
+          field: target
+          to: ProductLump
+          as: lump
+          where:
+            - prop: carbon_min
+              op: eq
+              value: 5
+            - prop: carbon_max
+              op: eq
+              value: 11
+      where:
+        - var: result
+          prop: value
+          op: ge
+          value: 30
+          unit: '%'
+          basis: carbon
+    expect:
+      status: answered
+      min_rows: 1
+      max_rows: 1
+      values:
+        lump.name:
+          - C5-C11

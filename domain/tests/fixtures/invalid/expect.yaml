@@ -71,3 +71,18 @@ fixtures:
   - file: transport-basis-not-in-vocabulary.json
     error: "evaluation_basis: 'estimated' is not one of"
     reason: A transport check is asserted, numerical or experimental (or not reported); an unlisted basis would hide whether the verdict rests on a calculation, a test or neither.
+  - file: lump-subset-of-cycle.json
+    error: "SUBSET_OF forms a cycle"
+    reason: Containment is a strict order; two lumps each inside the other have no outer one, and no selectivity of either could be left out of a sum as the one that contains the other.
+  - file: lump-subset-of-self.json
+    error: "a SUBSET_OF link joins a lump to itself"
+    reason: A lump is not a proper part of itself; the link would hide the lump from every sum that leaves out a lump that contains another.
+  - file: lump-subset-of-species.json
+    error: "SUBSET_OF target must be ['ProductLump']"
+    reason: Containment joins two lumps; a chemical species is an identity, not a class of products, so a lump is never declared inside one.
+  - file: lump-carbon-window-inverted.json
+    error: "carbon_min 11 is above carbon_max 5"
+    reason: A carbon window runs from its least to its greatest carbon number; an inverted one holds no product and would never overlap anything.
+  - file: lump-open-ended-with-maximum.json
+    error: "an open-ended product lump has no carbon_max"
+    reason: C5+ has no upper carbon number; a lump that is open ended and also gives one states two windows at once.

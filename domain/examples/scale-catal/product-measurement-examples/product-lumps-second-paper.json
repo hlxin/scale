@@ -1,0 +1,581 @@
+{
+  "nodes": [
+    {
+      "id": "ex:lumps-b/source/paper",
+      "label": "Source",
+      "props": {
+        "name": "Invented Fischer-Tropsch paper",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "Syngas conversion with selectivities on product lumps (invented)",
+        "year": 2026
+      }
+    },
+    {
+      "id": "ex:lumps-b/species/co",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "CO",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 1,
+          "O": 1
+        },
+        "formula": "CO",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:lumps-b/species/h2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "H2",
+        "charge": 0,
+        "elemental_composition": {
+          "H": 2
+        },
+        "formula": "H2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:lumps-b/species/ch4",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "CH4",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 1,
+          "H": 4
+        },
+        "formula": "CH4",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:lumps-b/variable/conversion",
+      "label": "Variable",
+      "props": {
+        "name": "CO conversion",
+        "origin": "synthetic",
+        "quantity_kind": "conversion",
+        "scale": "quantitative",
+        "unit": "%"
+      }
+    },
+    {
+      "id": "ex:lumps-b/variable/selectivity",
+      "label": "Variable",
+      "props": {
+        "name": "product selectivity",
+        "origin": "synthetic",
+        "quantity_kind": "selectivity",
+        "scale": "quantitative",
+        "unit": "%"
+      }
+    },
+    {
+      "id": "ex:lumps-b/reaction/fts",
+      "label": "Reaction",
+      "props": {
+        "name": "n CO + 2n H2 -> (CH2)n + n H2O",
+        "balance_status": "not_checked",
+        "direction": "forward",
+        "equation": "n CO + 2n H2 -> (CH2)n + n H2O",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:lumps-b/catalyst/co-mn",
+      "label": "Catalyst",
+      "props": {
+        "name": "Co/Mn oxide",
+        "catalyst_family": "metal",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:lumps-b/source/paper"
+          }
+        ],
+        "nominal_formula": "CoMnOx",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:lumps-b/sample/co-mn",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Co/Mn oxide, batch 1",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:lumps-b/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "sample_kind": "powder"
+      }
+    },
+    {
+      "id": "ex:lumps-b/feed/syngas",
+      "label": "Feed",
+      "props": {
+        "name": "H2/CO = 2",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:lumps-b/source/paper"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:lumps-b/instrument/reactor",
+      "label": "Reactor",
+      "props": {
+        "name": "Fixed-bed flow reactor",
+        "origin": "synthetic",
+        "reactor_kind": "flow"
+      }
+    },
+    {
+      "id": "ex:lumps-b/lump/light",
+      "label": "ProductLump",
+      "props": {
+        "name": "C2-C4",
+        "carbon_max": 4,
+        "carbon_min": 2,
+        "compound_class": "hydrocarbon",
+        "definition": "C2-C4 hydrocarbons",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:lumps-b/source/paper"
+          }
+        ],
+        "open_ended": false,
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:lumps-b/lump/heavy",
+      "label": "ProductLump",
+      "props": {
+        "name": "C5+",
+        "carbon_min": 5,
+        "compound_class": "hydrocarbon",
+        "definition": "hydrocarbons with five carbon atoms or more",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:lumps-b/source/paper"
+          }
+        ],
+        "open_ended": true,
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:lumps-b/test/fe-k",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Syngas conversion over Fe/K at 300 °C",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "id": "conv",
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:lumps-b/source/paper"
+          },
+          {
+            "id": "fe_k_c2_c4",
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:lumps-b/source/paper"
+          },
+          {
+            "id": "fe_k_c5_plus",
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:lumps-b/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "basis": "absolute",
+          "unit": "MPa",
+          "value": 2
+        },
+        "results": {
+          "conversion": {
+            "status": "present",
+            "basis": "carbon",
+            "evidence_ids": [
+              "conv"
+            ],
+            "target": "ex:lumps-b/species/co",
+            "unit": "%",
+            "value": 45.0,
+            "variable": "ex:lumps-b/variable/conversion"
+          },
+          "selectivity_c2_c4": {
+            "status": "present",
+            "basis": "carbon",
+            "evidence_ids": [
+              "fe_k_c2_c4"
+            ],
+            "target": "ex:lumps-b/lump/light",
+            "unit": "%",
+            "value": 15.0,
+            "variable": "ex:lumps-b/variable/selectivity"
+          },
+          "selectivity_c5_plus": {
+            "status": "present",
+            "basis": "carbon",
+            "evidence_ids": [
+              "fe_k_c5_plus"
+            ],
+            "target": "ex:lumps-b/lump/heavy",
+            "unit": "%",
+            "value": 65.0,
+            "variable": "ex:lumps-b/variable/selectivity"
+          }
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 300
+        },
+        "temperature_measured_at": "catalyst_bed",
+        "test_kind": "activity",
+        "time_on_stream": {
+          "status": "present",
+          "unit": "h",
+          "value": 12
+        }
+      }
+    },
+    {
+      "id": "ex:lumps-b/test/fe-k-low",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Syngas conversion over Fe/K at 340 °C",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "id": "conv",
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:lumps-b/source/paper"
+          },
+          {
+            "id": "fe_k_low_c2_c4",
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:lumps-b/source/paper"
+          },
+          {
+            "id": "fe_k_low_c5_plus",
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:lumps-b/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "basis": "absolute",
+          "unit": "MPa",
+          "value": 2
+        },
+        "results": {
+          "conversion": {
+            "status": "present",
+            "basis": "carbon",
+            "evidence_ids": [
+              "conv"
+            ],
+            "target": "ex:lumps-b/species/co",
+            "unit": "%",
+            "value": 60.0,
+            "variable": "ex:lumps-b/variable/conversion"
+          },
+          "selectivity_c2_c4": {
+            "status": "present",
+            "basis": "carbon",
+            "evidence_ids": [
+              "fe_k_low_c2_c4"
+            ],
+            "target": "ex:lumps-b/lump/light",
+            "unit": "%",
+            "value": 25.0,
+            "variable": "ex:lumps-b/variable/selectivity"
+          },
+          "selectivity_c5_plus": {
+            "status": "present",
+            "basis": "carbon",
+            "evidence_ids": [
+              "fe_k_low_c5_plus"
+            ],
+            "target": "ex:lumps-b/lump/heavy",
+            "unit": "%",
+            "value": 55.0,
+            "variable": "ex:lumps-b/variable/selectivity"
+          }
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 340
+        },
+        "temperature_measured_at": "catalyst_bed",
+        "test_kind": "activity",
+        "time_on_stream": {
+          "status": "present",
+          "unit": "h",
+          "value": 12
+        }
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:lumps-b/link/1",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:lumps-b/reaction/fts",
+      "target": "ex:lumps-b/species/co"
+    },
+    {
+      "id": "ex:lumps-b/link/2",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 2,
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:lumps-b/reaction/fts",
+      "target": "ex:lumps-b/species/h2"
+    },
+    {
+      "id": "ex:lumps-b/link/3",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:lumps-b/sample/co-mn",
+      "target": "ex:lumps-b/catalyst/co-mn"
+    },
+    {
+      "id": "ex:lumps-b/link/4",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:lumps-b/feed/syngas",
+      "target": "ex:lumps-b/species/co"
+    },
+    {
+      "id": "ex:lumps-b/link/5",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:lumps-b/feed/syngas",
+      "target": "ex:lumps-b/species/h2"
+    },
+    {
+      "id": "ex:lumps-b/link/6",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "reduced"
+      },
+      "source": "ex:lumps-b/test/fe-k-low",
+      "target": "ex:lumps-b/sample/co-mn"
+    },
+    {
+      "id": "ex:lumps-b/link/7",
+      "type": "FED_WITH",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:lumps-b/test/fe-k-low",
+      "target": "ex:lumps-b/feed/syngas"
+    },
+    {
+      "id": "ex:lumps-b/link/8",
+      "type": "IN_REACTOR",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:lumps-b/test/fe-k-low",
+      "target": "ex:lumps-b/instrument/reactor"
+    },
+    {
+      "id": "ex:lumps-b/link/9",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:lumps-b/test/fe-k-low",
+      "target": "ex:lumps-b/reaction/fts"
+    },
+    {
+      "id": "ex:lumps-b/link/10",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "reduced"
+      },
+      "source": "ex:lumps-b/test/fe-k",
+      "target": "ex:lumps-b/sample/co-mn"
+    },
+    {
+      "id": "ex:lumps-b/link/11",
+      "type": "FED_WITH",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:lumps-b/test/fe-k",
+      "target": "ex:lumps-b/feed/syngas"
+    },
+    {
+      "id": "ex:lumps-b/link/12",
+      "type": "IN_REACTOR",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:lumps-b/test/fe-k",
+      "target": "ex:lumps-b/instrument/reactor"
+    },
+    {
+      "id": "ex:lumps-b/link/13",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:lumps-b/test/fe-k",
+      "target": "ex:lumps-b/reaction/fts"
+    },
+    {
+      "id": "ex:lumps-b/catalyst/co-mn/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:lumps-b/catalyst/co-mn",
+      "target": "ex:lumps-b/source/paper"
+    },
+    {
+      "id": "ex:lumps-b/feed/syngas/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:lumps-b/feed/syngas",
+      "target": "ex:lumps-b/source/paper"
+    },
+    {
+      "id": "ex:lumps-b/lump/heavy/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:lumps-b/lump/heavy",
+      "target": "ex:lumps-b/source/paper"
+    },
+    {
+      "id": "ex:lumps-b/lump/light/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:lumps-b/lump/light",
+      "target": "ex:lumps-b/source/paper"
+    },
+    {
+      "id": "ex:lumps-b/sample/co-mn/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:lumps-b/sample/co-mn",
+      "target": "ex:lumps-b/source/paper"
+    },
+    {
+      "id": "ex:lumps-b/test/fe-k/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:lumps-b/test/fe-k",
+      "target": "ex:lumps-b/source/paper"
+    },
+    {
+      "id": "ex:lumps-b/test/fe-k-low/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:lumps-b/test/fe-k-low",
+      "target": "ex:lumps-b/source/paper"
+    }
+  ],
+  "directed": true,
+  "graph": {
+    "data_status": "synthetic_example",
+    "follows_domains": [
+      "catalysis"
+    ],
+    "graph_id": "ex:lumps-b/graph",
+    "schema": "scale-catal",
+    "schema_version": "0.5.0",
+    "stewardship": {
+      "access": "public"
+    },
+    "title": "Product lumps: a second paper that mints its own C2-C4 and C5+"
+  },
+  "multigraph": true
+}
