@@ -13,6 +13,18 @@ description: |
   80 %, the second (two lumps, its own ids) gives 65 % and 55 %. The threshold of 60 % keeps 80 % and 65 %; the 55 % test
   is left out, and a threshold of 70 % keeps only the first document's. The values are as reported: the comparison is
   scientific, which keeps the carbon basis and the unit apart. The answer rests on invented values.
+
+  Rights: only two short column headers of CC BY 4.0 sources (Cheng et al. 2018, Lyu et al. 2020) are stored, as
+  evidence quotes in the gap register; the example documents are synthetic.
+
+  Limit of the convention: the comparison across documents works only when curators fill carbon_min, open_ended and
+  compound_class; a lump with unstated properties is missed, and no shared lump ids are provided.
+
+  Not modelled (unreported gaps): a species inside a lump (CH4 in C1, ethene in C2-C4 olefins) cannot be declared,
+  because SUBSET_OF is lump-to-lump only, so selectivities on a species and on its lump could be summed together;
+  Lyu's O/P ratio (C2-C4), the selectivity basis and denominator (to be reported separately) and boiling-range lumps
+  are not modelled; the sum check drops any container from the sum, so an undeclared overlap beneath a declared
+  container goes unseen.
 documents:
   - examples/scale-catal/product-measurement-examples/product-lumps-cheng-like.json
   - examples/scale-catal/product-measurement-examples/product-lumps-second-paper.json

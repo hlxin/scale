@@ -167,6 +167,37 @@ def test_declared_containment_silences_the_overlap_and_the_sum():
     assert _sel_warnings(doc) == ([], [])
 
 
+def _class_pair(declared: bool):
+    """Two lumps of one carbon window, C5-C11: olefin (60 %) and hydrocarbon (70 %), with SUBSET_OF olefin -> hydrocarbon or not."""
+    doc = _drop_subset(_only(_doc(), "c5-c11", "c10-c20"))
+    for key, cls, val in (("c5-c11", "olefin", 60.0), ("c10-c20", "hydrocarbon", 70.0)):
+        p = _lump(doc, key)
+        p.update(carbon_min=5, carbon_max=11, compound_class=cls, open_ended=False)
+        _results(doc)[f"selectivity_{key.replace('-', '_')}"]["value"] = val
+    if declared:
+        _link_subset(doc, "c5-c11", "c10-c20", "olefin-in-hc")
+    return doc
+
+
+def test_a_declared_subclass_in_the_same_window_is_left_out_of_the_sum():
+    """Expected: valid, no sum warning, no overlap warning. Olefin C5-C11 (60) is declared inside hydrocarbon C5-C11 (70):
+    only the innermost lump (olefin) is summed, 60 %, never 130 %."""
+    doc = _class_pair(declared=True)
+    assert _errors(doc) == []
+    assert _sel_warnings(doc) == ([], [])
+
+
+def test_an_undeclared_subclass_in_the_same_window_is_summed_but_is_no_overlap():
+    """Expected: sum warning, no overlap warning. Without SUBSET_OF the two selectivities are one partition (60 + 70 = 130 %
+    > 100); the windows are equal but the classes differ (olefin, hydrocarbon), and two stated classes are compared as
+    stated, so no overlap is reported: the containment is never inferred from the class."""
+    doc = _class_pair(declared=False)
+    assert _errors(doc) == []
+    sums, overlaps = _sel_warnings(doc)
+    assert len(sums) == 1 and "sum to 130" in sums[0], sums
+    assert overlaps == []
+
+
 def test_a_lump_without_a_window_is_never_judged_by_it():
     """Expected: no overlap warning. A lump the source defines by a boiling range alone (no carbon_min) has no window to
     compare, so nothing is inferred about its overlap with a lump that has one."""

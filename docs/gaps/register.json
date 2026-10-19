@@ -26,7 +26,16 @@
         "value qualifiers (target, basis)": "carry which lump a value is for, but need a node to point at with a range and a class",
         "Material": "describes solids, not product classes",
         "ChEBI classes": "give a compound class but no carbon window; may fill compound_class later, no identifiers invented here"
-      }
+      },
+      "rights": "Only the two short quoted column headers above are stored, as evidence quotes; both sources are CC BY 4.0. No source text beyond them is committed.",
+      "convention_limit": "Comparison across documents relies on curators filling carbon_min, open_ended and compound_class on each ProductLump; a lump whose properties are unstated is missed by such a plan. No shared lump ids are provided: each document mints its own.",
+      "unreported_gaps": [
+        "A species inside a lump (CH4 in C1, ethene in C2-C4 olefins) cannot be declared, because SUBSET_OF links a lump to a lump only; selectivities on a species and on its lump can therefore be summed together.",
+        "Lyu's O/P ratio (C2-C4) is not modelled.",
+        "The selectivity basis and denominator are to be reported separately and are not modelled here.",
+        "Boiling-range lumps (for example by distillation cut) are not modelled.",
+        "The sum check drops any container lump from the sum, so an undeclared overlap beneath a declared container goes unseen."
+      ]
     }
   ]
 }
