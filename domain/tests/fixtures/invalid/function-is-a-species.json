@@ -1,0 +1,367 @@
+{
+  "nodes": [
+    {
+      "id": "ex:bifunctional/source/paper",
+      "label": "Source",
+      "props": {
+        "name": "Invented paper",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "Oxide-zeolite syngas conversion, granule mixture (invented)",
+        "year": 2026
+      }
+    },
+    {
+      "id": "ex:bifunctional/species/co",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "CO",
+        "formula": "CO",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:bifunctional/species/h2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "H2",
+        "formula": "H2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:bifunctional/species/olefin",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "light olefins",
+        "formula": "CnH2n",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:bifunctional/species/ketene",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "ketene intermediate",
+        "formula": "C2H2O",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:bifunctional/material/oxide",
+      "label": "Material",
+      "props": {
+        "name": "mixed metal oxide",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:bifunctional/material/zeolite",
+      "label": "Material",
+      "props": {
+        "name": "small-pore zeolite",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:bifunctional/reaction/total",
+      "label": "Reaction",
+      "props": {
+        "name": "CO + H2 -> light olefins",
+        "balance_status": "not_checked",
+        "direction": "forward",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:bifunctional/reaction/step1",
+      "label": "Reaction",
+      "props": {
+        "name": "CO + H2 -> ketene intermediate",
+        "balance_status": "not_checked",
+        "direction": "forward",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:bifunctional/reaction/step2",
+      "label": "Reaction",
+      "props": {
+        "name": "ketene intermediate -> light olefins",
+        "balance_status": "not_checked",
+        "direction": "forward",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:bifunctional/catalyst/tandem",
+      "label": "Catalyst",
+      "props": {
+        "name": "oxide/zeolite granule mixture (1:1 by mass)",
+        "catalyst_family": "other",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:bifunctional/source/paper"
+          }
+        ],
+        "integration_mode": "granule_mixture",
+        "integration_scale": {
+          "status": "present",
+          "basis": "granule diameter",
+          "definition": "diameter of the sieved granules of each component",
+          "note": "invented",
+          "unit": "mm",
+          "value": 0.5
+        },
+        "origin": "synthetic",
+        "site_proximity": {
+          "status": "present",
+          "basis": "authors' description of the integration mode; not measured",
+          "definition": "between oxide sites and zeolite acid sites",
+          "text_value": "granule-scale"
+        }
+      }
+    },
+    {
+      "id": "ex:bifunctional/material/shell",
+      "label": "Material",
+      "props": {
+        "name": "zeolite shell",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:bifunctional/material/core",
+      "label": "Material",
+      "props": {
+        "name": "oxide core",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:bifunctional/catalyst/coreshell",
+      "label": "Catalyst",
+      "props": {
+        "name": "oxide@zeolite core-shell",
+        "catalyst_family": "other",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:bifunctional/source/paper"
+          }
+        ],
+        "integration_mode": "core_shell",
+        "integration_scale": {
+          "status": "present",
+          "basis": "shell thickness",
+          "definition": "thickness of the zeolite shell",
+          "note": "invented",
+          "unit": "um",
+          "value": 2
+        },
+        "origin": "synthetic",
+        "site_proximity": {
+          "status": "present",
+          "basis": "measured by electron microscopy (invented)",
+          "definition": "between oxide sites and zeolite acid sites",
+          "unit": "nm",
+          "value": 50
+        }
+      }
+    },
+    {
+      "id": "ex:bifunctional/catalyst/plain",
+      "label": "Catalyst",
+      "props": {
+        "name": "single-component oxide",
+        "catalyst_family": "other",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:bifunctional/source/paper"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:bifunctional/link/1",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:bifunctional/source/paper"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "unit": "%",
+          "value": 50
+        },
+        "fraction_basis": "mass",
+        "function": [
+          "ex:bifunctional/species/co"
+        ],
+        "origin": "synthetic",
+        "role": "active_component",
+        "role_detail": "CO activation on the oxide"
+      },
+      "source": "ex:bifunctional/catalyst/tandem",
+      "target": "ex:bifunctional/material/oxide"
+    },
+    {
+      "id": "ex:bifunctional/link/2",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:bifunctional/source/paper"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "unit": "%",
+          "value": 50
+        },
+        "fraction_basis": "mass",
+        "function": [
+          "ex:bifunctional/reaction/step2"
+        ],
+        "origin": "synthetic",
+        "role": "active_component",
+        "role_detail": "C-C coupling on acid sites"
+      },
+      "source": "ex:bifunctional/catalyst/tandem",
+      "target": "ex:bifunctional/material/zeolite"
+    },
+    {
+      "id": "ex:bifunctional/link/3",
+      "type": "HAS_PART",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:bifunctional/reaction/total",
+      "target": "ex:bifunctional/reaction/step1"
+    },
+    {
+      "id": "ex:bifunctional/link/4",
+      "type": "HAS_PART",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:bifunctional/reaction/total",
+      "target": "ex:bifunctional/reaction/step2"
+    },
+    {
+      "id": "ex:bifunctional/link/5",
+      "type": "REPORTED_IN",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:bifunctional/catalyst/tandem",
+      "target": "ex:bifunctional/source/paper"
+    },
+    {
+      "id": "ex:bifunctional/link/6",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:bifunctional/source/paper"
+          }
+        ],
+        "function": [
+          "ex:bifunctional/reaction/step1"
+        ],
+        "origin": "synthetic",
+        "role": "active_component",
+        "role_detail": "CO activation in the core"
+      },
+      "source": "ex:bifunctional/catalyst/coreshell",
+      "target": "ex:bifunctional/material/core"
+    },
+    {
+      "id": "ex:bifunctional/link/7",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:bifunctional/source/paper"
+          }
+        ],
+        "function": [
+          "ex:bifunctional/reaction/step2"
+        ],
+        "origin": "synthetic",
+        "role": "active_component",
+        "role_detail": "C-C coupling in the shell"
+      },
+      "source": "ex:bifunctional/catalyst/coreshell",
+      "target": "ex:bifunctional/material/shell"
+    },
+    {
+      "id": "ex:bifunctional/link/8",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:bifunctional/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "active_component"
+      },
+      "source": "ex:bifunctional/catalyst/plain",
+      "target": "ex:bifunctional/material/oxide"
+    },
+    {
+      "id": "ex:bifunctional/link/9",
+      "type": "REPORTED_IN",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:bifunctional/catalyst/coreshell",
+      "target": "ex:bifunctional/source/paper"
+    },
+    {
+      "id": "ex:bifunctional/link/10",
+      "type": "REPORTED_IN",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:bifunctional/catalyst/plain",
+      "target": "ex:bifunctional/source/paper"
+    }
+  ],
+  "directed": true,
+  "graph": {
+    "data_status": "synthetic_example",
+    "follows_domains": [
+      "catalysis"
+    ],
+    "graph_id": "ex:invalid/function-is-a-species",
+    "schema": "scale-catal",
+    "schema_version": "0.5.0",
+    "stewardship": {
+      "access": "public"
+    },
+    "title": "INVALID FIXTURE (function-is-a-species): a component whose function is a chemical species, not a reaction"
+  },
+  "multigraph": true
+}

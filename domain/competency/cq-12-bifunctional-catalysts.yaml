@@ -1,0 +1,72 @@
+# A competency question of the catalysis domain (tools/competency.py; `scale domains cq catalysis`).
+# It runs on public synthetic examples, so anyone can rerun it and see the same answer.
+id: CQ-12
+question: Which catalysts are multifunctional, how are their components assembled, and how close are the sites of the
+  different functions, as stated?
+description: |
+  A catalyst that states how its components are integrated (integration_mode, with integration_scale) is a
+  multifunctional one; each HAS_COMPONENT link says what the component does (function, a sub-reaction of the test's
+  reaction). A single-component catalyst states none and is not returned. The site proximity is returned as stated: a
+  distance in nm for the core-shell catalyst (measured by electron microscopy), an ordinal text_value ("granule-scale") for the granule mixture
+  (the authors' description). The two are never one scale, nor are two bases (measured, the authors' description): a variant that asks for a site proximity of at most 100 nm
+  matches only the numeric one, and the ordinal level does not stand in for a distance (nor a distance for a level).
+  Synthetic example (not evidence about the world).
+documents:
+  - examples/scale-catal/bifunctional-examples/tandem-granule-mixture.json
+plan:
+  question: Which catalysts state an integration mode, with which components and functions?
+  match:
+    label: Catalyst
+    as: catalyst
+    where:
+      - prop: integration_mode
+        op: exists
+  steps:
+    - from: catalyst
+      edge: HAS_COMPONENT
+      to: Material
+      as: component
+      edge_as: part
+  return:
+    - catalyst.name
+    - catalyst.integration_mode
+    - catalyst.integration_scale
+    - catalyst.site_proximity
+    - component.name
+    - part.function
+    - part.role_detail
+  evidence: true
+expect:
+  status: answered
+  min_rows: 4
+  max_rows: 4
+  values:
+    catalyst.integration_mode:
+      - granule_mixture
+      - core_shell
+variants:
+  - description: A site proximity of at most 100 nm is met by the measured core-shell distance only; the ordinal
+      "granule-scale" level of the granule mixture is not a distance and is not matched.
+    plan:
+      comparison: ordinary
+      match:
+        label: Catalyst
+        as: catalyst
+        where:
+          - prop: site_proximity
+            op: le
+            value: 100
+            unit: nm
+            basis: measured by electron microscopy (invented)
+      steps: []
+      return:
+        - catalyst.name
+        - catalyst.integration_mode
+        - catalyst.site_proximity
+    expect:
+      status: answered
+      min_rows: 1
+      max_rows: 1
+      values:
+        catalyst.integration_mode:
+          - core_shell

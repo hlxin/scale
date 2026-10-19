@@ -81,7 +81,7 @@ domain/
 | `graph/scale-catal.yaml` | the catalysis graph schema manifest: the schema's one version, the science kernel (`../../core/graph/kernel.yaml`) and the catalysis file |
 | `graph/catalysis.yaml` | the catalysis file (`domain: catalysis`): the vocabulary and the checklist |
 | `graph/frozen/` | the frozen schema versions (`scale-catal-<version>.yaml`, `v<version>/`, `SHA256SUMS`), written when a schema change moves the schema on (`scale schema bump`); none yet |
-| `competency/` | competency questions CQ-01 … CQ-11: graph query plans over the public examples, with their expected answers |
+| `competency/` | competency questions CQ-01 … CQ-12: graph query plans over the public examples, with their expected answers |
 | `examples/` | the public synthetic examples ([overview](./examples/README.md)) |
 | `docs/` | [catalyst-state reporting](docs/reporting/catalyst-state-reporting.md) and the [supporting-information index](docs/supporting-information.md) |
 | `tests/` | the catalysis tests and the invalid scale-catal fixtures (`fixtures/invalid/`, each rejected for the reason `expect.yaml` states) |
