@@ -130,7 +130,9 @@ expires.
 The agent works on an `agent/…` branch and opens a pull request, ready for review, with the App's token, so the
 pull request's author is the App and any reviewer, the person who asked included, can approve it; asked on its
 own pull request, it pushes fixes to the same branch. It never approves or merges. The App's token cannot change
-workflow files, so the agent cannot edit `.github/workflows/`.
+workflow files, so the agent cannot edit `.github/workflows/`. Its commits are credited to `claude[bot]`: the
+workflow sets `bot_id: "209825114"`, because GitHub credits a commit by the id in its noreply email and the action's
+default id (41898282) is `github-actions[bot]`'s.
 
 An agent working elsewhere (for example on a person's computer) opens pull requests under a **bot account** of its
 own, never under the person's account: GitHub does not let an author approve their own pull request. To set one

@@ -25,6 +25,10 @@
   amount unit (g, mol) to `amount` and one in a concentration unit (mol/L, g/m3) to `concentration`, and stops on a value
   of another dimension it cannot map. The schema diff now classifies a change to a contract (a kind's dimensions, a
   context it is compared by, what a unit or a term reads as, a property's binding).
+- **The agents' commits are credited to `claude[bot]`.** `anthropics/claude-code-action` writes the commit email
+  with its default bot id, 41898282, which is `github-actions[bot]`'s, so GitHub credited the agents' commits (#20,
+  #35) to `github-actions[bot]`. The workflow now sets `bot_id: "209825114"` (`claude[bot]`, the Claude GitHub App
+  that opens their pull requests). Earlier commits keep their author.
 - **Schema 0.2.1 (no change in meaning): `Preparation.steps` wording.** The description says steps link `PART_OF` with `order`; `HAS_PROCEDURE_STEP` is declared nowhere. Synthetic fixtures and a counterexample (`tools/tests/fixtures/procedure-steps`) cover it. Frozen v0.1.0 text is left unchanged. Answers #34.
 - **`scale schema bump` carries the whole version change.** Besides freezing the base, raising the version and
   registering the step, it now records the new version's spec digest in README.md's table (the base marked frozen),
