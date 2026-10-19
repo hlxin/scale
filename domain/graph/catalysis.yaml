@@ -388,7 +388,22 @@ nodes:
         - balance
         description: balance = a carbon, charge or mass balance of an experiment's results (provisional), over the assays
           it HAS_INPUT (the streams and phases they measured) and its interval; its result is a balance value in the
-          experiment's result_values, produced_by the analysis.
+          experiment's result_values, produced_by the analysis. transport_check = whether heat and mass transport
+          affect the rates of the experiment it HAS_INPUT, at the temperature and conditions it states (its
+          evaluation_basis says how it was checked).
+      evaluation_basis:
+        type: enum
+        maturity: provisional
+        values:
+        - asserted
+        - numerical
+        - experimental
+        - not_reported
+        description: How the analysis reaches its verdict. asserted = the source states it without the calculation or
+          test behind it; numerical = a criterion computed from reported data (Weisz-Prater, Mears, Carberry), its
+          values in results; experimental = runs that vary what the verdict is about (particle size, flow rate at
+          constant contact time, stirring or mixing, active-site dilution), each an experiment the analysis
+          HAS_INPUT. The basis is recorded, never judged; no value of a criterion is a threshold of the schema.
       method:
         type: text
       verdict:
@@ -566,8 +581,31 @@ nodes:
         description: 'The driving force or forces of the test. The domain''s checklist applies its items
           by them: thermo and electrothermo the thermal items, electrothermo also the electrical heating,
           electro, photo and plasma their own, and photo with thermo or electro with photo the items where
-          those forces meet. Whether the test is operated statically or dynamically is its Operation (kernel),
-          not a driving force.'
+          those forces meet. A test that lists none has unknown applicability: its driving-force items are neither
+          checked nor met, and its checklist is never complete. Whether the test is operated statically or
+          dynamically is its Operation (kernel), not a driving force.'
+      interpretations:
+        type: list
+        maturity: provisional
+        items:
+          type: enum
+          values:
+          - system_performance
+          - intrinsic_kinetics
+          - photothermal_effect
+          - nonthermal_light_effect
+          - plasma_catalyst_synergy
+          - performance_stability
+          - material_stability
+        description: 'What the source reads the test as showing, so that the checklist asks for the evidence that
+          reading needs and no other. system_performance = the performance of the system as tested (reactor,
+          conditions), not a property of the catalyst alone; intrinsic_kinetics = rates, orders, activation energies
+          or turnover rates of the catalyst itself, free of heat and mass transport effects; photothermal_effect =
+          light acts by heating the catalyst; nonthermal_light_effect = light acts beyond heating it;
+          plasma_catalyst_synergy = plasma and catalyst together give more than each alone; performance_stability
+          = the performance stays constant over the test; material_stability = the catalyst material stays
+          unchanged. Record what the source claims, never a reading of your own; a claim without its evidence is
+          reported, not removed.'
       temperature:
         type: value
         quantity: temperature
@@ -2021,12 +2059,59 @@ edges:
   DARK_CONTROL_FOR:
     specializes: CONTROL_FOR
     description: A dark experiment heated to the temperature the illuminated experiment reached; the pair
-      separates photothermal from non-thermal light effects.
+      separates photothermal from non-thermal light effects. It is a CONTROL_FOR, and states what CONTROL_FOR
+      states (control_kind, differs_in) besides how, where and over which time the temperature was matched. A match of
+      the bulk temperature (bed, wall or gas) alone does not show a non-thermal effect, since the illuminated surface
+      can be hotter.
     from:
     - Experiment
     to:
     - Experiment
     properties:
+      control_kind:
+        type: enum
+        values:
+        - negative
+        - positive
+        - blank
+        - baseline
+        - reference
+        - sham
+        description: As on CONTROL_FOR (provisional here).
+        maturity: provisional
+      differs_in:
+        type: list
+        items:
+          type: ref
+          targets:
+          - Variable
+        description: The variables in which the two differ, as on CONTROL_FOR (illumination only, for a dark control).
+        maturity: provisional
+      temperature_matched_at:
+        type: enum
+        maturity: provisional
+        values:
+        - illuminated_surface
+        - catalyst_bed
+        - reactor_wall
+        - gas
+        - other
+        - not_reported
+        description: Where the matched temperature was measured, in both experiments. illuminated_surface = at the
+          catalyst where the light falls (thermal imaging, a thermocouple at the surface); catalyst_bed, reactor_wall
+          and gas are bulk temperatures.
+      temperature_matched_over:
+        type: enum
+        maturity: provisional
+        values:
+        - steady_state
+        - time_resolved
+        - time_averaged
+        - other
+        - not_reported
+        description: Over which time the temperatures correspond. steady_state = both held at a steady temperature
+          while measured; time_resolved = the temperature history matched through the run (ramps, transients);
+          time_averaged = equal averages only.
       temperature_matched_by:
         type: enum
         values:
@@ -2255,11 +2340,15 @@ adds_properties:
       description: dark marks the dark control of an illuminated experiment.
     irradiance:
       type: value
+      description: The irradiance at the specimen, as stated (after the optical path); where and how it was measured
+        goes in irradiance_measured_by or the value's definition. A lamp's rated output is not an irradiance.
     wavelength:
       type: value
       description: A monochromatic wavelength, or a band as lower and upper.
     photon_flux:
       type: value
+      description: Photons reaching the specimen per time (or per time and area), as stated; the basis of a photon-based
+        yield (incident, as for an apparent quantum yield, or absorbed, as for a quantum yield).
     illuminated_area:
       type: value
     optical_path:
@@ -2284,8 +2373,17 @@ adds_properties:
       description: Amount of photocatalyst per volume of reaction medium or per illuminated area, as stated.
     discharge_power:
       type: value
+      description: The power deposited in the plasma, as the source determines it (from current and voltage profiles
+        or a Lissajous figure; the value's definition says which). The power the supply draws is power_supply_input.
+    power_supply_input:
+      type: value
+      maturity: provisional
+      description: The electrical power the plasma power supply draws (its input, or the wall-plug power), as stated.
+        It is not the plasma power (discharge_power) and is never compared with it.
     specific_energy_input:
       type: value
+      description: Energy per amount of gas fed (e.g. kJ/L, eV/molecule); its definition or basis says which power it
+        is computed from (the plasma power or the supply's input).
     applied_voltage:
       type: value
       quantity: electric_potential
@@ -2363,7 +2461,12 @@ checklist:
     and light, the light absorber (a photoelectrode, or an electrochemically generated or regenerated
     molecular photocatalyst or photosensitizer) with the photocurrent and photovoltage or the excited
     species. A computed or measured equilibrium (test_kind equilibrium_estimate, equilibrium_measurement)
-    needs no catalyst or feed and is exempt.'
+    needs no catalyst or feed and is exempt. A test that lists no driving force has unknown applicability:
+    its driving-force items are neither checked nor met, and it is never complete. What a test is read as
+    showing (interpretations) adds the evidence that reading needs, looked for in the records connected to the
+    test: intrinsic kinetics, a transport assessment; separating light from heat, a dark control at matched
+    temperature or a separation analysis; plasma-catalyst synergy, plasma-alone and catalyst-alone controls;
+    material stability, the catalyst characterized during or after the test. These cases are provisional.'
   basis:
   - Bligaard et al., Toward benchmarking in catalysis science, ACS Catal. 2016, doi:10.1021/acscatal.6b00183.
   - The thermal profile of the adopted catalysis schema 0.1.0 (temperature and pressure, feed composition,
@@ -2380,14 +2483,36 @@ checklist:
   - Combination of the photocatalysis and thermocatalysis checklists; to be checked by domain reviewers.
   - Combination of the photocatalysis and electrocatalysis checklists; to be checked by domain reviewers.
   - Combination of the electrocatalysis and photocatalysis checklists; to be checked by domain reviewers.
+  - Schweitzer, Gounder and Rioux (eds.), Addressing Rigor and Reproducibility in Thermal, Heterogeneous Catalysis,
+    v1.00, 2023, doi:10.5281/zenodo.8029159, section 5, catalyst testing (performance and intrinsic kinetics as
+    separate aims; transport criteria and tests reported with their methods, conditions and results; no conversion
+    level that by itself shows differential operation; the catalyst-bed temperature; rates over time on stream).
+  - Flaherty and Bhan, Improving the rigor and reproducibility of catalyst testing and evaluation in the
+    laboratory, J. Catal. 2024, 431, 115408, doi:10.1016/j.jcat.2024.115408.
+  - Bonchio et al., Best practices for experiments and reporting in photocatalytic CO2 reduction, Nat. Catal.
+    2023, 6, 657, doi:10.1038/s41929-023-00992-7 (control experiments; detection limits; repeats).
+  - Edgington and Seitz, Advancing the Rigor and Reproducibility of Electrocatalyst Stability Benchmarking and
+    Intrinsic Material Degradation Analysis for Water Oxidation, ACS Catal. 2023, 13, 3379,
+    doi:10.1021/acscatal.2c06282 (material degradation measured as such, e.g. dissolution, apart from performance).
+  - Van Turnhout, Rouwenhorst, Lefferts and Bogaerts, Plasma catalysis, what is needed to create synergy?, EES
+    Catal. 2025, 3, 669, doi:10.1039/D5EY00027K (synergy against plasma alone and thermal catalysis at the same
+    temperature; the plasma power, not the supply's input; the catalyst characterized after the experiment).
+  - Wismann et al., Electrified methane reforming, elucidating transient phenomena, Chem. Eng. J. 2021, 425,
+    131509, doi:10.1016/j.cej.2021.131509 (the transient behaviour of an electrically heated reactor).
   guidance: |
-    Heat: transport diagnostics (Weisz-Prater, Mears) are an Analysis with analysis_kind transport_check that HAS_INPUT the test. A checklist checks outgoing edges only, so this is guidance, not a rule. Directly heated catalysts (electrothermo) can be much hotter than the gas or the wall; report the temperature at the catalyst (temperature_measured_at catalyst_bed) and compare with a conventionally heated control at the same catalyst temperature (CONTROL_FOR, differing in heating_mode).
-    Potential: a potential is comparable across papers only on a stated scale; converting to RHE needs the reference electrode's filling, the pH and the temperature, none of which may be assumed.
-    Light: a light-driven result needs its dark control: a test with illumination dark that is CONTROL_FOR the illuminated test and differs in illumination only. Record the temperature, since light also heats. A photothermal effect is claimed only against a dark control at the same catalyst temperature (CONTROL_FOR, differing in illumination only).
-    Plasma: plasma-catalytic synergy needs two controls: plasma without catalyst and catalyst without plasma, each CONTROL_FOR the combined test.
+    Applicability: list every driving force of a test. A test that lists none has unknown applicability: its driving-force items are neither checked nor met, so it is never complete; an equilibrium (test_kind equilibrium_estimate, equilibrium_measurement) is exempt. Completeness is not validity, and neither makes a value comparable (comparison scientific decides that).
+    Interpretations: record what the source reads the test as showing (interpretations), never your own reading. Each reading adds the evidence it needs, looked for in the records connected to the test; a reading without it is reported, and the test stays as it is. No conversion level, criterion value or control is required of every test.
+    Heat: a transport check (Weisz-Prater, Mears, Carberry; a Madon-Boudart or Koros-Nowak test; particle size, flow rate at constant contact time or stirring varied) is an Analysis with analysis_kind transport_check that HAS_INPUT the test, with its evaluation_basis (asserted, numerical with its criterion values in results, experimental with the runs it compares as further inputs), method, verdict and the temperature it applies to. A test read as intrinsic_kinetics is checked for one, and for one that is more than asserted; system_performance is not. Directly heated catalysts (electrothermo) can be much hotter than the gas or the wall; report the temperature at the catalyst (temperature_measured_at catalyst_bed), how heating was operated in time (HAS_OPERATION: held, ramped or pulsed), and compare with a conventionally heated control at the same catalyst temperature (CONTROL_FOR, differing in heating_mode).
+    Potential: a potential is comparable across papers only on a stated scale; converting to RHE needs the reference electrode's filling, the pH and the temperature, none of which may be assumed. State the iR treatment (ir_compensation) and what currents are divided by (current_normalization); a reference electrode calibrated against a reversible hydrogen electrode names that calibration (the value's calibration, an Experiment).
+    Light: record the temperature, since light also heats. A reading that separates light from heat (photothermal_effect, nonthermal_light_effect) rests on a dark control at matched catalyst temperature (DARK_CONTROL_FOR, differing in illumination only, with where and over which time the temperature was matched) or on a ThermalContributionAnalysis that HAS_INPUT the test (its partition_method: wavelength, intensity or temperature dependence, isotope labelling). A match of the bulk temperature alone does not show a non-thermal effect.
+    Plasma: plasma-catalyst synergy (plasma_catalyst_synergy) rests on two controls, each CONTROL_FOR the combined test: the plasma without the catalyst (an empty reactor, or the packing without its active phase) and the catalyst without plasma at the same catalyst temperature. Report the plasma power (discharge_power, from current and voltage profiles or a Lissajous figure), apart from what the supply draws (power_supply_input).
     Potential and light: separate the contributions with controls: the same test in the dark (differs in illumination) and at open circuit or without applied potential (differs in electrode potential), each CONTROL_FOR the combined test.
+    Stability: a constant trace of performance (a TimeSeries the test HAS_OUTPUT) shows performance_stability, not material_stability; the material is shown unchanged by characterizing it during or after the test (a CatalystState the test reaches, REACHED_BY timing during or after, DETERMINED_BY a characterization: structure after the test, dissolution into the electrolyte). Repeats are REPLICATES links, and a planned set of repeats a Design (planned_replicates).
+    Time: a test operated dynamically (pulses, ramps, switching) HAS_OPERATION an Operation with its time_pattern, the quantities it varies and its segments, so its results keep their time-dependent context.
   labels:
     CatalyticTest:
+      applies_by:
+      - driving_forces
       edges:
         must:
         - USES_CATALYST
@@ -2509,6 +2634,278 @@ checklist:
           - photoelectrode
           - molecular_photocatalyst
           - photosensitizer
+      - driving_forces:
+          any_of:
+          - electrothermo
+        maturity: provisional
+        basis:
+        - Wismann et al. 2021, doi:10.1016/j.cej.2021.131509 (an electrically heated reactor's transients)
+        - Schweitzer, Gounder and Rioux 2023, doi:10.5281/zenodo.8029159, section 5 (transients before steady state are
+          reported)
+        edges:
+          should:
+          - HAS_OPERATION
+      - interpretations:
+          any_of:
+          - intrinsic_kinetics
+        maturity: provisional
+        basis:
+        - Schweitzer, Gounder and Rioux 2023, doi:10.5281/zenodo.8029159, section 5 (functional tests or criteria
+          affirm that gradients of temperature and concentration are absent; their methods, conditions and results
+          are reported)
+        - Flaherty and Bhan 2024, doi:10.1016/j.jcat.2024.115408
+        evidence:
+          should:
+          - name: transport_assessment
+            description: an assessment of heat and mass transport for this test, an Analysis with analysis_kind
+              transport_check that HAS_INPUT it
+            report: evaluation_basis
+            path:
+            - edge: HAS_INPUT
+              direction: in
+              label: Analysis
+              where:
+                analysis_kind:
+                  any_of:
+                  - transport_check
+          - name: transport_evidence
+            description: a transport check that is more than asserted, made by calculation (evaluation_basis numerical)
+              or by experiment (experimental)
+            report: evaluation_basis
+            path:
+            - edge: HAS_INPUT
+              direction: in
+              label: Analysis
+              where:
+                analysis_kind:
+                  any_of:
+                  - transport_check
+                evaluation_basis:
+                  any_of:
+                  - numerical
+                  - experimental
+      - interpretations:
+          any_of:
+          - system_performance
+        maturity: provisional
+        basis:
+        - Schweitzer, Gounder and Rioux 2023, doi:10.5281/zenodo.8029159, section 5 (catalyst performance and intrinsic
+          kinetics are separate aims of catalyst testing)
+        evidence:
+          should:
+          - name: reactor_or_cell
+            description: the reactor or cell the performance belongs to (IN_REACTOR or IN_CELL); a performance needs no
+              transport assessment
+            any_of:
+            - path:
+              - edge: IN_REACTOR
+            - path:
+              - edge: IN_CELL
+      - interpretations:
+          any_of:
+          - photothermal_effect
+          - nonthermal_light_effect
+        maturity: provisional
+        basis:
+        - Bonchio et al. 2023, doi:10.1038/s41929-023-00992-7 (controls without a component of the system)
+        - Schweitzer, Gounder and Rioux 2023, doi:10.5281/zenodo.8029159, section 5 (the catalyst-bed temperature, not
+          the wall's)
+        should:
+        - temperature_measured_at
+        - light_induced_temperature_rise
+        evidence:
+          should:
+          - name: light_heat_separation
+            description: a dark control at matched temperature that states where and over which time the temperatures
+              correspond (DARK_CONTROL_FOR this test, with temperature_matched_at and temperature_matched_over), or a
+              ThermalContributionAnalysis that HAS_INPUT this test
+            any_of:
+            - path:
+              - edge: DARK_CONTROL_FOR
+                direction: in
+                edge_where:
+                  temperature_matched_at:
+                    present: true
+                  temperature_matched_over:
+                    present: true
+            - path:
+              - edge: HAS_INPUT
+                direction: in
+                label: ThermalContributionAnalysis
+      - interpretations:
+          any_of:
+          - nonthermal_light_effect
+        maturity: provisional
+        basis:
+        - Van Turnhout et al. 2025, doi:10.1039/D5EY00027K (a surface hotter than the measured average cannot be ruled out
+          from bulk measurements; argued there for plasma, the same holds for light)
+        evidence:
+          should:
+          - name: local_temperature_match
+            description: a dark control matched at the illuminated surface over a stated time (temperature_matched_at
+              illuminated_surface, temperature_matched_over), or a ThermalContributionAnalysis that does not rest on a dark
+              control (partition_method wavelength, intensity or temperature dependence, isotope labelling); a match of
+              the bulk temperature alone does not show a non-thermal effect
+            any_of:
+            - path:
+              - edge: DARK_CONTROL_FOR
+                direction: in
+                edge_where:
+                  temperature_matched_at:
+                    any_of:
+                    - illuminated_surface
+                  temperature_matched_over:
+                    present: true
+            - path:
+              - edge: HAS_INPUT
+                direction: in
+                label: ThermalContributionAnalysis
+                where:
+                  partition_method:
+                    none_of:
+                    - dark_control_at_matched_temperature
+                    - not_reported
+      - interpretations:
+          any_of:
+          - plasma_catalyst_synergy
+        maturity: provisional
+        basis:
+        - Van Turnhout et al. 2025, doi:10.1039/D5EY00027K (synergy is more than plasma alone and thermal catalysis at the
+          same temperature; report the plasma power)
+        should:
+        - discharge_power
+        - temperature
+        evidence:
+          should:
+          - name: plasma_alone_control
+            description: the plasma without the catalyst (an empty reactor, or the packing without its active phase), an
+              experiment that is CONTROL_FOR this one and USES_PLASMA
+            path:
+            - edge: CONTROL_FOR
+              direction: in
+            - edge: USES_PLASMA
+              label: PlasmaSource
+          - name: catalyst_alone_control
+            description: the catalyst without plasma at the same catalyst temperature, a test without plasma that is
+              CONTROL_FOR this one
+            path:
+            - edge: CONTROL_FOR
+              direction: in
+              label: CatalyticTest
+              where:
+                driving_forces:
+                  none_of:
+                  - plasma
+      - interpretations:
+          any_of:
+          - performance_stability
+        maturity: provisional
+        basis:
+        - Schweitzer, Gounder and Rioux 2023, doi:10.5281/zenodo.8029159, section 5 (rates reported over time on stream)
+        evidence:
+          should:
+          - name: performance_over_time
+            description: the performance over time, a TimeSeries the test HAS_OUTPUT
+            path:
+            - edge: HAS_OUTPUT
+              label: TimeSeries
+      - interpretations:
+          any_of:
+          - material_stability
+        maturity: provisional
+        basis:
+        - Edgington and Seitz 2023, doi:10.1021/acscatal.2c06282 (degradation of the material, such as dissolution,
+          measured apart from performance)
+        - Van Turnhout et al. 2025, doi:10.1039/D5EY00027K (the catalyst characterized after the experiment)
+        evidence:
+          should:
+          - name: material_after_test
+            description: the catalyst characterized during or after the test, a CatalystState the test reaches (REACHED_BY,
+              timing during or after) DETERMINED_BY a characterization or an analysis; a constant performance trace
+              shows the performance, not the material
+            any_of:
+            - path:
+              - edge: REACHED_BY
+                direction: in
+                label: CatalystState
+                edge_where:
+                  timing:
+                    any_of:
+                    - during
+                    - after
+              - edge: DETERMINED_BY
+                label: Characterization
+            - path:
+              - edge: REACHED_BY
+                direction: in
+                label: CatalystState
+                edge_where:
+                  timing:
+                    any_of:
+                    - during
+                    - after
+              - edge: DETERMINED_BY
+                label: Analysis
+    Analysis:
+      when:
+      - analysis_kind:
+          any_of:
+          - transport_check
+        maturity: provisional
+        basis:
+        - Schweitzer, Gounder and Rioux 2023, doi:10.5281/zenodo.8029159, section 5 (the methods, conditions and results of
+          the transport criteria are reported; gradients may appear at some conditions and not at others)
+        should:
+        - evaluation_basis
+        - method
+        - verdict
+        - temperature
+        evidence:
+          should:
+          - name: assessed_experiment
+            description: the experiment whose rates the check assesses (HAS_INPUT)
+            path:
+            - edge: HAS_INPUT
+              label: Experiment
+      - analysis_kind:
+          any_of:
+          - transport_check
+        evaluation_basis:
+          any_of:
+          - numerical
+        maturity: provisional
+        should:
+        - results
+      - analysis_kind:
+          any_of:
+          - transport_check
+        evaluation_basis:
+          any_of:
+          - experimental
+        maturity: provisional
+        evidence:
+          should:
+          - name: compared_runs
+            description: the runs the check compares, at least two experiments it HAS_INPUT (the test and a run that varies
+              particle size, flow rate at constant contact time or stirring)
+            min: 2
+            path:
+            - edge: HAS_INPUT
+              label: Experiment
+    Operation:
+      when:
+      - operation_mode:
+          any_of:
+          - dynamic
+        maturity: provisional
+        basis:
+        - Schweitzer, Gounder and Rioux 2023, doi:10.5281/zenodo.8029159, section 5 (the time sequence of conditions, the
+          rates at which they were ramped and the durations they were held)
+        - Wismann et al. 2021, doi:10.1016/j.cej.2021.131509
+        should:
+        - time_pattern
+        - varied_quantities
+        - segments
     Feed:
       edges:
         must:
@@ -2546,3 +2943,14 @@ checklist:
     USES_ELECTRODE:
       must:
       - role
+    ILLUMINATED_BY:
+      when:
+      - driving_forces:
+          any_of:
+          - photo
+        maturity: provisional
+        basis:
+        - Bonchio et al. 2023, doi:10.1038/s41929-023-00992-7 (the exposed area of the photocatalyst is stated, and
+          illumination may come from the top, the side or inside the vessel)
+        should:
+        - geometry

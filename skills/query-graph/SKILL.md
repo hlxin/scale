@@ -60,7 +60,9 @@ A generated explanation is a presentation of the retrieved evidence, not a repla
    product, where: [{prop: formula, op: eq, value: NH3}]}`): every filter, returned value and evidence item on `fe` is
    then that one result's, never another assay's, and `kind` keeps a yield from standing in for a selectivity.
    Worked plans: the catalysis competency questions (`domain/competency/*.yaml`, also returned by
-   `scale call domains`; CQ-06 compares current densities, CQ-01, CQ-07 and CQ-08 bind results).
+   `scale call domains`; CQ-06 compares current densities, CQ-01, CQ-07 and CQ-08 bind results, CQ-09 follows the
+   transport check into a test, CQ-10 a test's dynamic operation and CQ-11 its dark controls). A step on an edge
+   type follows its specializations too (`CONTROL_FOR` finds `DARK_CONTROL_FOR` links), as `to` finds subtypes.
 4. **Run it:** `scale graph query <graph> plan.yaml --format markdown` (or `scale call query`).
 5. **Read the kind of answer and the coverage:** `answered`; `no_matching_record` (none in this
    graph, which says nothing about the literature); `missing_context` (records match but a value

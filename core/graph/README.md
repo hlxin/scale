@@ -91,6 +91,34 @@ that list photo and thermo, or electro and photo. Items of a case that does not 
 checked nor counted. A document names the checklist it follows in `follows_domains` (the graph's
 list, or a node's own); `scale graph describe --domain catalysis` prints the cases.
 
+**Applicability** (scale-catal 0.5.0 on). A label says which properties its cases apply by (`applies_by`; a catalytic
+test applies by `driving_forces`). A record that states no value of one, whether absent, null or an empty list, has
+**unknown** applicability. Its cases keyed on that property are neither checked nor met. It is counted as unknown, and
+its checklist is never `complete`. Before 0.5.0, such a test matched no case and so looked complete over the items left.
+A record an `unless` exempts (an equilibrium estimate) is **exempt**; every other record's applicability is **known**.
+A document that pins an earlier version keeps that version's reading.
+
+**Connected evidence.** A label's block or a case can look for evidence in the records connected to a record
+(`evidence`, `must` or `should`). A pattern names what it looks for and follows at most two links, incoming or
+outgoing, with conditions on each link and on the record it reaches. An edge type counts its specializations, and a
+label its subtypes. The catalysis checklist asks each reading of a test (`interpretations`) for the evidence that
+reading needs:
+
+- intrinsic kinetics: a transport check that `HAS_INPUT` the test, and one that is more than asserted;
+- system performance: its reactor or cell;
+- light and heat separated: a dark control matched at a stated place and over a stated time, or a
+  `ThermalContributionAnalysis`; a non-thermal effect needs the match at the illuminated surface;
+- plasma-catalyst synergy: a plasma-alone control and a catalyst-alone control;
+- performance stability: a time series;
+- material stability: the catalyst characterized during or after the test.
+
+These cases are provisional and should items, each with the basis it rests on. A record that lacks the evidence is
+reported, never removed.
+
+The report keeps three answers apart. **Validity** (does the document follow the schema), **completeness** (does it
+report what its checklist asks, `complete` and the counts) and **comparability** (may two values be compared, a query's
+`comparison: scientific`) never stand in for one another.
+
 Validity and conformance are reported separately: a document that is valid (kernel and domain
 vocabulary) can fail a checklist, and that is an answer about what its sources report — historical
 sources stay usable.

@@ -2,6 +2,39 @@
 
 ## Unreleased
 
+- **Schema 0.5.0 (breaking): the checklist says when a test's reporting cannot be judged, and checks the evidence a
+  reading needs.** Requested by @hlxin ("Check reporting applicability and connected kinetic evidence"). Before, a test
+  that listed no driving force matched none of the checklist's driving-force cases, so a test stripped of every
+  electrochemical item looked complete. The checklist could also read only a test's own fields and outgoing links, never
+  a transport check or a control pointing at it.
+  - **Applicability.** The catalysis checklist applies a test's cases by its `driving_forces` (`applies_by`). A test that
+    lists none has unknown applicability: its driving-force items are neither checked nor met, and the report is never
+    complete. An equilibrium estimate stays exempt. Documents pinned to an earlier version keep that version's reading.
+  - **Connected evidence.** A checklist item can look for records linked to a test, up to two links away, in either
+    direction. A test records what the source reads it as showing (`CatalyticTest.interpretations`, provisional), and
+    each reading asks for its own evidence, as should items:
+    - intrinsic kinetics: a transport check (an Analysis with `analysis_kind: transport_check`) whose new
+      `evaluation_basis` says it was asserted, computed or tested; one that is more than asserted;
+    - system performance: its reactor or cell, and no transport check;
+    - light and heat separated: a dark control matched at a stated place and time, or a `ThermalContributionAnalysis`.
+      A non-thermal effect needs the match at the illuminated surface, since a bulk match alone does not show it;
+    - plasma-catalyst synergy: the plasma alone and the catalyst alone at the same temperature;
+    - performance stability: a time series. Material stability needs the catalyst characterized during or after the
+      test, because a constant performance trace alone does not show it.
+
+    No conversion level, criterion value or control is required of every test. These follow the catalyst-testing
+    chapter of the community report on rigor and reproducibility (Schweitzer, Gounder and Rioux 2023,
+    doi:10.5281/zenodo.8029159) and Van Turnhout et al. 2025 (doi:10.1039/D5EY00027K), and the cases cite their
+    sources.
+  - **Controls and power.** `DARK_CONTROL_FOR` now states `control_kind` and `differs_in`, as `CONTROL_FOR` does (#41),
+    and where and over which time the temperature was matched. `power_supply_input` keeps what the plasma supply draws
+    apart from the plasma power (`discharge_power`).
+  - **Queries.** A step on an edge type also follows the edge types that specialize it: a `CONTROL_FOR` step finds dark
+    controls.
+  - **Examples and questions.** New public examples (`domain/examples/scale-catal/evidence-examples/`) show transport
+    checks by basis, dark controls, plasma controls, a heating ramp and the stability of replicate electrodes. CQ-09,
+    CQ-10 and CQ-11 are new. The reporting guidance no longer calls transport checks unmodeled.
+  - **Migration.** `scale graph migrate` changes no values and stops on nothing. Only what the checklist reports changes.
 - **Schema 0.4.0 (breaking): each result recorded on its own, and queries that keep one result together.** Requested
   by @hlxin ("Make product measurements and their analytical context queryable"). Before, a query checked each
   condition on a test's results separately. Two analyses that reported a methanol yield of 40 % and of 80 % together

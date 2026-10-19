@@ -1,0 +1,1850 @@
+{
+  "nodes": [
+    {
+      "id": "ex:re/source/paper",
+      "label": "Source",
+      "props": {
+        "name": "Invented paper",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "Evidence fixtures (invented)",
+        "year": 2026
+      }
+    },
+    {
+      "id": "ex:re/species/co",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "CO",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 1,
+          "O": 1
+        },
+        "formula": "CO",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:re/species/o2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "O2",
+        "charge": 0,
+        "elemental_composition": {
+          "O": 2
+        },
+        "formula": "O2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:re/species/co2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "CO2",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 1,
+          "O": 2
+        },
+        "formula": "CO2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:re/reaction/co-oxidation",
+      "label": "Reaction",
+      "props": {
+        "name": "2 CO + O2 -> 2 CO2",
+        "balance_status": "balanced",
+        "direction": "forward",
+        "equation": "2 CO + O2 -> 2 CO2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:re/catalyst/pt",
+      "label": "Catalyst",
+      "props": {
+        "name": "Pt/Al2O3",
+        "catalyst_family": "metal",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:re/source/paper"
+          }
+        ],
+        "nominal_formula": "Pt/Al2O3",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:re/sample/pt",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Pt/Al2O3 granules",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:re/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "sample_kind": "granules"
+      }
+    },
+    {
+      "id": "ex:re/feed/co-o2",
+      "label": "Feed",
+      "props": {
+        "name": "CO/O2 in He",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:re/source/paper"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:re/instrument/reactor",
+      "label": "Reactor",
+      "props": {
+        "name": "Fixed-bed reactor",
+        "origin": "synthetic",
+        "reactor_kind": "fixed_bed"
+      }
+    },
+    {
+      "id": "ex:re/instrument/lamp",
+      "label": "LightSource",
+      "props": {
+        "name": "Xe lamp",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:re/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "source_kind": "xenon_lamp",
+        "spectrum": "full arc"
+      }
+    },
+    {
+      "id": "ex:re/instrument/dbd",
+      "label": "PlasmaSource",
+      "props": {
+        "name": "Packed-bed DBD",
+        "configuration": "in_plasma",
+        "discharge_kind": "dielectric_barrier",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:re/source/paper"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:re/variable/illumination",
+      "label": "Variable",
+      "props": {
+        "name": "illumination",
+        "categories": [
+          "light",
+          "dark"
+        ],
+        "origin": "synthetic",
+        "scale": "nominal"
+      }
+    },
+    {
+      "id": "ex:re/variable/plasma",
+      "label": "Variable",
+      "props": {
+        "name": "plasma",
+        "categories": [
+          "on",
+          "off"
+        ],
+        "origin": "synthetic",
+        "scale": "nominal"
+      }
+    },
+    {
+      "id": "ex:re/variable/particle-size",
+      "label": "Variable",
+      "props": {
+        "name": "particle size",
+        "categories": [
+          "coarse",
+          "fine"
+        ],
+        "origin": "synthetic",
+        "scale": "nominal"
+      }
+    },
+    {
+      "id": "ex:re/test/intrinsic-numerical",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "intrinsic numerical",
+        "conversion": {
+          "status": "present",
+          "target": "ex:re/species/co",
+          "unit": "%",
+          "value": 5
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:re/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "interpretations": [
+          "intrinsic_kinetics"
+        ],
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "basis": "absolute",
+          "unit": "bar",
+          "value": 1
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 180
+        },
+        "temperature_measured_at": "catalyst_bed",
+        "test_kind": "kinetics"
+      }
+    },
+    {
+      "id": "ex:re/analysis/weisz-prater",
+      "label": "Analysis",
+      "props": {
+        "name": "weisz prater",
+        "analysis_kind": "transport_check",
+        "evaluation_basis": "numerical",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Section S3",
+            "source": "ex:re/source/paper"
+          }
+        ],
+        "method": "Weisz-Prater criterion",
+        "origin": "synthetic",
+        "results": {
+          "weisz_prater_number": {
+            "status": "present",
+            "unit": "1",
+            "value": 0.1
+          }
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 180
+        },
+        "verdict": "no transport limitation"
+      }
+    },
+    {
+      "id": "ex:re/test/intrinsic-experimental",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "intrinsic experimental",
+        "conversion": {
+          "status": "present",
+          "target": "ex:re/species/co",
+          "unit": "%",
+          "value": 5
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:re/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "interpretations": [
+          "intrinsic_kinetics"
+        ],
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "basis": "absolute",
+          "unit": "bar",
+          "value": 1
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 180
+        },
+        "temperature_measured_at": "catalyst_bed",
+        "test_kind": "kinetics"
+      }
+    },
+    {
+      "id": "ex:re/test/intrinsic-experimental-fine",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "intrinsic experimental fine",
+        "conversion": {
+          "status": "present",
+          "target": "ex:re/species/co",
+          "unit": "%",
+          "value": 5
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:re/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "basis": "absolute",
+          "unit": "bar",
+          "value": 1
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 180
+        },
+        "temperature_measured_at": "catalyst_bed",
+        "test_kind": "kinetics"
+      }
+    },
+    {
+      "id": "ex:re/analysis/particle-size",
+      "label": "Analysis",
+      "props": {
+        "name": "particle size",
+        "analysis_kind": "transport_check",
+        "evaluation_basis": "experimental",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Section S3",
+            "source": "ex:re/source/paper"
+          }
+        ],
+        "method": "rates at two particle sizes",
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 180
+        },
+        "verdict": "no transport limitation"
+      }
+    },
+    {
+      "id": "ex:re/test/intrinsic-high-conversion",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "intrinsic high conversion",
+        "conversion": {
+          "status": "present",
+          "target": "ex:re/species/co",
+          "unit": "%",
+          "value": 60
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:re/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "interpretations": [
+          "intrinsic_kinetics"
+        ],
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "basis": "absolute",
+          "unit": "bar",
+          "value": 1
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 180
+        },
+        "temperature_measured_at": "catalyst_bed",
+        "test_kind": "kinetics"
+      }
+    },
+    {
+      "id": "ex:re/analysis/weisz-prater-high-conversion",
+      "label": "Analysis",
+      "props": {
+        "name": "weisz prater high conversion",
+        "analysis_kind": "transport_check",
+        "evaluation_basis": "numerical",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Section S3",
+            "source": "ex:re/source/paper"
+          }
+        ],
+        "method": "as stated",
+        "origin": "synthetic",
+        "results": {
+          "weisz_prater_number": {
+            "status": "present",
+            "unit": "1",
+            "value": 4.0
+          }
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 180
+        },
+        "verdict": "no transport limitation"
+      }
+    },
+    {
+      "id": "ex:re/test/system-performance",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "system performance",
+        "conversion": {
+          "status": "present",
+          "target": "ex:re/species/co",
+          "unit": "%",
+          "value": 95
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:re/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "interpretations": [
+          "system_performance"
+        ],
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "basis": "absolute",
+          "unit": "bar",
+          "value": 1
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 180
+        },
+        "temperature_measured_at": "catalyst_bed",
+        "test_kind": "activity"
+      }
+    },
+    {
+      "id": "ex:re/test/photothermal",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "photothermal",
+        "driving_forces": [
+          "photo",
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:re/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "heat_source": "light_and_external",
+        "illumination": "light",
+        "interpretations": [
+          "photothermal_effect"
+        ],
+        "light_induced_temperature_rise": {
+          "status": "present",
+          "unit": "K",
+          "value": 30
+        },
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "basis": "absolute",
+          "unit": "bar",
+          "value": 1
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 180
+        },
+        "temperature_measured_at": "catalyst_bed",
+        "test_kind": "activity"
+      }
+    },
+    {
+      "id": "ex:re/analysis/thermal-contribution",
+      "label": "ThermalContributionAnalysis",
+      "props": {
+        "name": "rate against irradiance",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Figure 5",
+            "source": "ex:re/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "partition_method": "intensity_dependence"
+      }
+    },
+    {
+      "id": "ex:re/test/nonthermal",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "nonthermal",
+        "driving_forces": [
+          "photo",
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:re/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "heat_source": "light_and_external",
+        "illumination": "light",
+        "interpretations": [
+          "nonthermal_light_effect"
+        ],
+        "light_induced_temperature_rise": {
+          "status": "present",
+          "unit": "K",
+          "value": 30
+        },
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "basis": "absolute",
+          "unit": "bar",
+          "value": 1
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 180
+        },
+        "temperature_measured_at": "catalyst_bed",
+        "test_kind": "activity"
+      }
+    },
+    {
+      "id": "ex:re/test/nonthermal-dark",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "nonthermal dark",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:re/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "illumination": "dark",
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "basis": "absolute",
+          "unit": "bar",
+          "value": 1
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 180
+        },
+        "temperature_measured_at": "catalyst_bed",
+        "test_kind": "control"
+      }
+    },
+    {
+      "id": "ex:re/test/synergy",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "synergy",
+        "discharge_power": {
+          "status": "present",
+          "unit": "W",
+          "value": 15
+        },
+        "driving_forces": [
+          "plasma"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:re/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "interpretations": [
+          "plasma_catalyst_synergy"
+        ],
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 180
+        },
+        "test_kind": "activity"
+      }
+    },
+    {
+      "id": "ex:re/experiment/plasma-bare",
+      "label": "Experiment",
+      "props": {
+        "name": "plasma over the bare support",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 3",
+            "source": "ex:re/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:re/test/synergy-thermal-alone",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "synergy thermal alone",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:re/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "basis": "absolute",
+          "unit": "bar",
+          "value": 1
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 180
+        },
+        "temperature_measured_at": "catalyst_bed",
+        "test_kind": "control"
+      }
+    },
+    {
+      "id": "ex:re/test/performance-stability",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "performance stability",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:re/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "interpretations": [
+          "performance_stability"
+        ],
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "basis": "absolute",
+          "unit": "bar",
+          "value": 1
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 180
+        },
+        "temperature_measured_at": "catalyst_bed",
+        "test_kind": "stability",
+        "time_on_stream": {
+          "status": "present",
+          "unit": "h",
+          "value": 100
+        }
+      }
+    },
+    {
+      "id": "ex:re/dataset/performance",
+      "label": "TimeSeries",
+      "props": {
+        "name": "rate over time, performance",
+        "availability": "not_reported",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Figure 3",
+            "source": "ex:re/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "series_kind": "instantaneous",
+        "unit": "umol/(g*s)",
+        "variable": "CO2 formation rate"
+      }
+    },
+    {
+      "id": "ex:re/test/material-stability",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "material stability",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:re/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "interpretations": [
+          "material_stability"
+        ],
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "basis": "absolute",
+          "unit": "bar",
+          "value": 1
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 180
+        },
+        "temperature_measured_at": "catalyst_bed",
+        "test_kind": "stability",
+        "time_on_stream": {
+          "status": "present",
+          "unit": "h",
+          "value": 100
+        }
+      }
+    },
+    {
+      "id": "ex:re/dataset/material",
+      "label": "TimeSeries",
+      "props": {
+        "name": "rate over time, material",
+        "availability": "not_reported",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Figure 3",
+            "source": "ex:re/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "series_kind": "instantaneous",
+        "unit": "umol/(g*s)",
+        "variable": "CO2 formation rate"
+      }
+    },
+    {
+      "id": "ex:re/state/material",
+      "label": "CatalystState",
+      "props": {
+        "name": "catalyst after material",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Figure 4",
+            "source": "ex:re/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "regime": "steady",
+        "state_kind": "post_reaction"
+      }
+    },
+    {
+      "id": "ex:re/characterization/material",
+      "label": "Characterization",
+      "props": {
+        "name": "TEM after material",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Figure 4",
+            "source": "ex:re/source/paper"
+          }
+        ],
+        "observation_mode": "ex_situ",
+        "origin": "synthetic",
+        "technique": "transmission electron microscopy"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:re/link/1",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 2,
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:re/reaction/co-oxidation",
+      "target": "ex:re/species/co"
+    },
+    {
+      "id": "ex:re/link/2",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:re/reaction/co-oxidation",
+      "target": "ex:re/species/o2"
+    },
+    {
+      "id": "ex:re/link/3",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 2,
+        "origin": "synthetic",
+        "role": "product"
+      },
+      "source": "ex:re/reaction/co-oxidation",
+      "target": "ex:re/species/co2"
+    },
+    {
+      "id": "ex:re/link/4",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:re/sample/pt",
+      "target": "ex:re/catalyst/pt"
+    },
+    {
+      "id": "ex:re/link/5",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:re/feed/co-o2",
+      "target": "ex:re/species/co"
+    },
+    {
+      "id": "ex:re/link/6",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:re/feed/co-o2",
+      "target": "ex:re/species/o2"
+    },
+    {
+      "id": "ex:re/link/7",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "reduced"
+      },
+      "source": "ex:re/test/intrinsic-numerical",
+      "target": "ex:re/sample/pt"
+    },
+    {
+      "id": "ex:re/link/8",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/intrinsic-numerical",
+      "target": "ex:re/reaction/co-oxidation"
+    },
+    {
+      "id": "ex:re/link/9",
+      "type": "FED_WITH",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/intrinsic-numerical",
+      "target": "ex:re/feed/co-o2"
+    },
+    {
+      "id": "ex:re/link/10",
+      "type": "IN_REACTOR",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/intrinsic-numerical",
+      "target": "ex:re/instrument/reactor"
+    },
+    {
+      "id": "ex:re/link/11",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:re/analysis/weisz-prater",
+      "target": "ex:re/test/intrinsic-numerical"
+    },
+    {
+      "id": "ex:re/link/12",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "reduced"
+      },
+      "source": "ex:re/test/intrinsic-experimental",
+      "target": "ex:re/sample/pt"
+    },
+    {
+      "id": "ex:re/link/13",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/intrinsic-experimental",
+      "target": "ex:re/reaction/co-oxidation"
+    },
+    {
+      "id": "ex:re/link/14",
+      "type": "FED_WITH",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/intrinsic-experimental",
+      "target": "ex:re/feed/co-o2"
+    },
+    {
+      "id": "ex:re/link/15",
+      "type": "IN_REACTOR",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/intrinsic-experimental",
+      "target": "ex:re/instrument/reactor"
+    },
+    {
+      "id": "ex:re/link/16",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "reduced"
+      },
+      "source": "ex:re/test/intrinsic-experimental-fine",
+      "target": "ex:re/sample/pt"
+    },
+    {
+      "id": "ex:re/link/17",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/intrinsic-experimental-fine",
+      "target": "ex:re/reaction/co-oxidation"
+    },
+    {
+      "id": "ex:re/link/18",
+      "type": "FED_WITH",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/intrinsic-experimental-fine",
+      "target": "ex:re/feed/co-o2"
+    },
+    {
+      "id": "ex:re/link/19",
+      "type": "IN_REACTOR",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/intrinsic-experimental-fine",
+      "target": "ex:re/instrument/reactor"
+    },
+    {
+      "id": "ex:re/link/20",
+      "type": "CONTROL_FOR",
+      "props": {
+        "control_kind": "reference",
+        "differs_in": [
+          "ex:re/variable/particle-size"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/intrinsic-experimental-fine",
+      "target": "ex:re/test/intrinsic-experimental"
+    },
+    {
+      "id": "ex:re/link/21",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:re/analysis/particle-size",
+      "target": "ex:re/test/intrinsic-experimental"
+    },
+    {
+      "id": "ex:re/link/22",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:re/analysis/particle-size",
+      "target": "ex:re/test/intrinsic-experimental-fine"
+    },
+    {
+      "id": "ex:re/link/23",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "reduced"
+      },
+      "source": "ex:re/test/intrinsic-high-conversion",
+      "target": "ex:re/sample/pt"
+    },
+    {
+      "id": "ex:re/link/24",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/intrinsic-high-conversion",
+      "target": "ex:re/reaction/co-oxidation"
+    },
+    {
+      "id": "ex:re/link/25",
+      "type": "FED_WITH",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/intrinsic-high-conversion",
+      "target": "ex:re/feed/co-o2"
+    },
+    {
+      "id": "ex:re/link/26",
+      "type": "IN_REACTOR",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/intrinsic-high-conversion",
+      "target": "ex:re/instrument/reactor"
+    },
+    {
+      "id": "ex:re/link/27",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:re/analysis/weisz-prater-high-conversion",
+      "target": "ex:re/test/intrinsic-high-conversion"
+    },
+    {
+      "id": "ex:re/link/28",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "reduced"
+      },
+      "source": "ex:re/test/system-performance",
+      "target": "ex:re/sample/pt"
+    },
+    {
+      "id": "ex:re/link/29",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/system-performance",
+      "target": "ex:re/reaction/co-oxidation"
+    },
+    {
+      "id": "ex:re/link/30",
+      "type": "FED_WITH",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/system-performance",
+      "target": "ex:re/feed/co-o2"
+    },
+    {
+      "id": "ex:re/link/31",
+      "type": "IN_REACTOR",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/system-performance",
+      "target": "ex:re/instrument/reactor"
+    },
+    {
+      "id": "ex:re/link/32",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "reduced"
+      },
+      "source": "ex:re/test/photothermal",
+      "target": "ex:re/sample/pt"
+    },
+    {
+      "id": "ex:re/link/33",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/photothermal",
+      "target": "ex:re/reaction/co-oxidation"
+    },
+    {
+      "id": "ex:re/link/34",
+      "type": "FED_WITH",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/photothermal",
+      "target": "ex:re/feed/co-o2"
+    },
+    {
+      "id": "ex:re/link/35",
+      "type": "IN_REACTOR",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/photothermal",
+      "target": "ex:re/instrument/reactor"
+    },
+    {
+      "id": "ex:re/link/36",
+      "type": "ILLUMINATED_BY",
+      "props": {
+        "geometry": "front",
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/photothermal",
+      "target": "ex:re/instrument/lamp"
+    },
+    {
+      "id": "ex:re/link/37",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:re/analysis/thermal-contribution",
+      "target": "ex:re/test/photothermal"
+    },
+    {
+      "id": "ex:re/link/38",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "reduced"
+      },
+      "source": "ex:re/test/nonthermal",
+      "target": "ex:re/sample/pt"
+    },
+    {
+      "id": "ex:re/link/39",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/nonthermal",
+      "target": "ex:re/reaction/co-oxidation"
+    },
+    {
+      "id": "ex:re/link/40",
+      "type": "FED_WITH",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/nonthermal",
+      "target": "ex:re/feed/co-o2"
+    },
+    {
+      "id": "ex:re/link/41",
+      "type": "IN_REACTOR",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/nonthermal",
+      "target": "ex:re/instrument/reactor"
+    },
+    {
+      "id": "ex:re/link/42",
+      "type": "ILLUMINATED_BY",
+      "props": {
+        "geometry": "front",
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/nonthermal",
+      "target": "ex:re/instrument/lamp"
+    },
+    {
+      "id": "ex:re/link/43",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "reduced"
+      },
+      "source": "ex:re/test/nonthermal-dark",
+      "target": "ex:re/sample/pt"
+    },
+    {
+      "id": "ex:re/link/44",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/nonthermal-dark",
+      "target": "ex:re/reaction/co-oxidation"
+    },
+    {
+      "id": "ex:re/link/45",
+      "type": "FED_WITH",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/nonthermal-dark",
+      "target": "ex:re/feed/co-o2"
+    },
+    {
+      "id": "ex:re/link/46",
+      "type": "IN_REACTOR",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/nonthermal-dark",
+      "target": "ex:re/instrument/reactor"
+    },
+    {
+      "id": "ex:re/link/47",
+      "type": "DARK_CONTROL_FOR",
+      "props": {
+        "control_kind": "negative",
+        "differs_in": [
+          "ex:re/variable/illumination"
+        ],
+        "origin": "synthetic",
+        "temperature_matched_at": "illuminated_surface",
+        "temperature_matched_by": "external_heating",
+        "temperature_matched_over": "steady_state"
+      },
+      "source": "ex:re/test/nonthermal-dark",
+      "target": "ex:re/test/nonthermal"
+    },
+    {
+      "id": "ex:re/link/48",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "reduced"
+      },
+      "source": "ex:re/test/synergy",
+      "target": "ex:re/sample/pt"
+    },
+    {
+      "id": "ex:re/link/49",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/synergy",
+      "target": "ex:re/reaction/co-oxidation"
+    },
+    {
+      "id": "ex:re/link/50",
+      "type": "USES_PLASMA",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/synergy",
+      "target": "ex:re/instrument/dbd"
+    },
+    {
+      "id": "ex:re/link/51",
+      "type": "USES_PLASMA",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:re/experiment/plasma-bare",
+      "target": "ex:re/instrument/dbd"
+    },
+    {
+      "id": "ex:re/link/52",
+      "type": "CONTROL_FOR",
+      "props": {
+        "control_kind": "negative",
+        "differs_in": [
+          "ex:re/variable/plasma"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:re/experiment/plasma-bare",
+      "target": "ex:re/test/synergy"
+    },
+    {
+      "id": "ex:re/link/53",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "reduced"
+      },
+      "source": "ex:re/test/synergy-thermal-alone",
+      "target": "ex:re/sample/pt"
+    },
+    {
+      "id": "ex:re/link/54",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/synergy-thermal-alone",
+      "target": "ex:re/reaction/co-oxidation"
+    },
+    {
+      "id": "ex:re/link/55",
+      "type": "FED_WITH",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/synergy-thermal-alone",
+      "target": "ex:re/feed/co-o2"
+    },
+    {
+      "id": "ex:re/link/56",
+      "type": "IN_REACTOR",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/synergy-thermal-alone",
+      "target": "ex:re/instrument/reactor"
+    },
+    {
+      "id": "ex:re/link/57",
+      "type": "CONTROL_FOR",
+      "props": {
+        "control_kind": "negative",
+        "differs_in": [
+          "ex:re/variable/plasma"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/synergy-thermal-alone",
+      "target": "ex:re/test/synergy"
+    },
+    {
+      "id": "ex:re/link/58",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "reduced"
+      },
+      "source": "ex:re/test/performance-stability",
+      "target": "ex:re/sample/pt"
+    },
+    {
+      "id": "ex:re/link/59",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/performance-stability",
+      "target": "ex:re/reaction/co-oxidation"
+    },
+    {
+      "id": "ex:re/link/60",
+      "type": "FED_WITH",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/performance-stability",
+      "target": "ex:re/feed/co-o2"
+    },
+    {
+      "id": "ex:re/link/61",
+      "type": "IN_REACTOR",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/performance-stability",
+      "target": "ex:re/instrument/reactor"
+    },
+    {
+      "id": "ex:re/link/62",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/performance-stability",
+      "target": "ex:re/dataset/performance"
+    },
+    {
+      "id": "ex:re/link/63",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "reduced"
+      },
+      "source": "ex:re/test/material-stability",
+      "target": "ex:re/sample/pt"
+    },
+    {
+      "id": "ex:re/link/64",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/material-stability",
+      "target": "ex:re/reaction/co-oxidation"
+    },
+    {
+      "id": "ex:re/link/65",
+      "type": "FED_WITH",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/material-stability",
+      "target": "ex:re/feed/co-o2"
+    },
+    {
+      "id": "ex:re/link/66",
+      "type": "IN_REACTOR",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/material-stability",
+      "target": "ex:re/instrument/reactor"
+    },
+    {
+      "id": "ex:re/link/67",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/material-stability",
+      "target": "ex:re/dataset/material"
+    },
+    {
+      "id": "ex:re/link/68",
+      "type": "REACHED_BY",
+      "props": {
+        "origin": "synthetic",
+        "timing": "after"
+      },
+      "source": "ex:re/state/material",
+      "target": "ex:re/test/material-stability"
+    },
+    {
+      "id": "ex:re/link/69",
+      "type": "DETERMINED_BY",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:re/state/material",
+      "target": "ex:re/characterization/material"
+    },
+    {
+      "id": "ex:re/analysis/particle-size/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Section S3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:re/analysis/particle-size",
+      "target": "ex:re/source/paper"
+    },
+    {
+      "id": "ex:re/analysis/thermal-contribution/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 5"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:re/analysis/thermal-contribution",
+      "target": "ex:re/source/paper"
+    },
+    {
+      "id": "ex:re/analysis/weisz-prater/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Section S3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:re/analysis/weisz-prater",
+      "target": "ex:re/source/paper"
+    },
+    {
+      "id": "ex:re/analysis/weisz-prater-high-conversion/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Section S3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:re/analysis/weisz-prater-high-conversion",
+      "target": "ex:re/source/paper"
+    },
+    {
+      "id": "ex:re/catalyst/pt/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:re/catalyst/pt",
+      "target": "ex:re/source/paper"
+    },
+    {
+      "id": "ex:re/characterization/material/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 4"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:re/characterization/material",
+      "target": "ex:re/source/paper"
+    },
+    {
+      "id": "ex:re/dataset/material/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:re/dataset/material",
+      "target": "ex:re/source/paper"
+    },
+    {
+      "id": "ex:re/dataset/performance/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:re/dataset/performance",
+      "target": "ex:re/source/paper"
+    },
+    {
+      "id": "ex:re/experiment/plasma-bare/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:re/experiment/plasma-bare",
+      "target": "ex:re/source/paper"
+    },
+    {
+      "id": "ex:re/feed/co-o2/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:re/feed/co-o2",
+      "target": "ex:re/source/paper"
+    },
+    {
+      "id": "ex:re/instrument/dbd/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:re/instrument/dbd",
+      "target": "ex:re/source/paper"
+    },
+    {
+      "id": "ex:re/instrument/lamp/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:re/instrument/lamp",
+      "target": "ex:re/source/paper"
+    },
+    {
+      "id": "ex:re/sample/pt/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:re/sample/pt",
+      "target": "ex:re/source/paper"
+    },
+    {
+      "id": "ex:re/state/material/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 4"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:re/state/material",
+      "target": "ex:re/source/paper"
+    },
+    {
+      "id": "ex:re/test/intrinsic-experimental/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/intrinsic-experimental",
+      "target": "ex:re/source/paper"
+    },
+    {
+      "id": "ex:re/test/intrinsic-experimental-fine/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/intrinsic-experimental-fine",
+      "target": "ex:re/source/paper"
+    },
+    {
+      "id": "ex:re/test/intrinsic-high-conversion/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/intrinsic-high-conversion",
+      "target": "ex:re/source/paper"
+    },
+    {
+      "id": "ex:re/test/intrinsic-numerical/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/intrinsic-numerical",
+      "target": "ex:re/source/paper"
+    },
+    {
+      "id": "ex:re/test/material-stability/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/material-stability",
+      "target": "ex:re/source/paper"
+    },
+    {
+      "id": "ex:re/test/nonthermal/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/nonthermal",
+      "target": "ex:re/source/paper"
+    },
+    {
+      "id": "ex:re/test/nonthermal-dark/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/nonthermal-dark",
+      "target": "ex:re/source/paper"
+    },
+    {
+      "id": "ex:re/test/performance-stability/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/performance-stability",
+      "target": "ex:re/source/paper"
+    },
+    {
+      "id": "ex:re/test/photothermal/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/photothermal",
+      "target": "ex:re/source/paper"
+    },
+    {
+      "id": "ex:re/test/synergy/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/synergy",
+      "target": "ex:re/source/paper"
+    },
+    {
+      "id": "ex:re/test/synergy-thermal-alone/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/synergy-thermal-alone",
+      "target": "ex:re/source/paper"
+    },
+    {
+      "id": "ex:re/test/system-performance/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:re/test/system-performance",
+      "target": "ex:re/source/paper"
+    }
+  ],
+  "directed": true,
+  "graph": {
+    "data_status": "synthetic_example",
+    "follows_domains": [
+      "catalysis"
+    ],
+    "graph_id": "ex:re/graph",
+    "schema": "scale-catal",
+    "schema_version": "0.5.0",
+    "stewardship": {
+      "access": "public"
+    },
+    "title": "Connected evidence found"
+  },
+  "multigraph": true
+}

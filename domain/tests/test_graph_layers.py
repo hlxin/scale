@@ -95,7 +95,8 @@ def test_the_checklist_is_named_after_the_domain_and_narrows_by_case(spec):
     assert set(ep["values"]["light_absorber"]) == {"photoelectrode", "molecular_photocatalyst", "photosensitizer"}
     assert set(et["values"]["heating_mode"]) == {"resistive", "inductive", "microwave"}
     assert cases[(("driving_forces", "any_of", ("thermo", "electrothermo")),)]["required"] == ["temperature", "pressure"]
-    assert len(cases) == 7
+    keyed = [k[0][0] for k in cases]               # the driving-force cases, and the readings' (0.5.0 on, provisional)
+    assert keyed.count("driving_forces") == 8 and keyed.count("interpretations") == 7 and len(cases) == 15
 
 
 def test_domain_edges_specialize_kernel_edges(spec):

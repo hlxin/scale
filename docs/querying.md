@@ -28,6 +28,12 @@ limit: 50
 
 (Competency questions are written in block-style YAML; the flow style here is for brevity.)
 
+A step's `to` binds the label and every label that is_a it, and its `edge` follows the edge type and every edge type
+that specializes it: a step on `CONTROL_FOR` also follows `DARK_CONTROL_FOR` (a dark control is a control), on
+`HAS_INPUT` also `FED_WITH`, `IN_ELECTROLYTE` and `USES_ELECTRODE`, on `USES_INSTRUMENT` also `IN_REACTOR`, `IN_CELL`,
+`ILLUMINATED_BY`, `USES_PLASMA`, `HEATED_BY` and `TEMPERATURE_MEASURED_BY`. Name the specialized type to follow it
+alone. CQ-11 binds dark controls both ways.
+
 ```bash
 scale graph query domain/examples/scale-catal/driving-force-examples/electro.json plan.yaml --format markdown
 ```

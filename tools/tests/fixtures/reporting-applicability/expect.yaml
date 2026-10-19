@@ -1,0 +1,60 @@
+# Reporting-applicability fixtures (README.md), built by build_fixtures.py. Each document is valid; its catalysis
+# checklist outcome is what this index states, and tools/tests/test_reporting_applicability.py checks it:
+# `applicability` counts the records whose cases are known, unknown or exempt, `unknown` and `exempt` name them,
+# `missing_evidence` counts the should evidence patterns not found (nothing else is missing when it is empty), and
+# `complete` is false whenever a record's applicability is unknown.
+pass:
+  - file: pass-applicability-known.json
+    covers: a test that lists its driving force, one that lists "other" (known, no driving-force case applies) and an
+      equilibrium estimate (exempt)
+    applicability:
+      unknown: 0
+      exempt: 1
+    exempt:
+      - test/equilibrium
+    missing_evidence: {}
+  - file: pass-evidence-found.json
+    covers: one test per reading, each with the evidence it needs connected (numerical, experimental and, at 60 %
+      conversion with a Weisz-Prater number of 4, numerical again, since no value is a threshold; the reactor of a system
+      performance; a ThermalContributionAnalysis; a dark control matched at the illuminated surface; plasma-alone and
+      catalyst-alone controls; a trace; the catalyst characterized after the test)
+    applicability:
+      unknown: 0
+      exempt: 0
+    missing_evidence: {}
+fail:
+  - file: fail-applicability-unknown.json
+    covers: a test without driving_forces and one with an empty list, next to an equilibrium estimate
+    applicability:
+      unknown: 2
+      exempt: 1
+    unknown:
+      - test/forces-absent
+      - test/forces-empty
+    exempt:
+      - test/equilibrium
+    complete: false
+    reason: A test that lists no driving force has unknown applicability; its driving-force items are neither checked nor
+      met, so its checklist is never complete. An equilibrium estimate stays exempt.
+  - file: fail-evidence-missing.json
+    covers: the same readings with the evidence missing or short of what the reading needs
+    applicability:
+      unknown: 0
+      exempt: 0
+    missing_evidence:
+      transport_assessment: 1
+      transport_evidence: 2
+      compared_runs: 1
+      reactor_or_cell: 1
+      light_heat_separation: 1
+      local_temperature_match: 1
+      plasma_alone_control: 1
+      catalyst_alone_control: 1
+      performance_over_time: 1
+      material_after_test: 1
+    complete: false
+    reason: Intrinsic kinetics without a transport check, and with one that is only asserted (transport_evidence twice); an
+      experimental check that names no varied run (compared_runs); a system performance without its reactor; a
+      photothermal reading with no dark control or analysis; a non-thermal reading against a bed-matched control only;
+      a synergy without its controls; a performance stability without a trace; and a material stability with a constant
+      trace alone. Each record stays valid and is reported, never removed.

@@ -141,6 +141,19 @@ def main() -> None:
                                      "result_refs": [{"record": t["id"], "path": "/result_values/0"}]}})
     defect("result-ref-by-position", "a test outcome that names the result it rests on by its position in result_values",
            by_position)
+    defect("interpretation-not-in-vocabulary", "a test read as something its vocabulary does not name",
+           lambda d: test_node(d)["props"].__setitem__("interpretations", ["catalytic_synergy"]))
+
+    def transport_check(doc):
+        t = test_node(doc)
+        doc["nodes"].append({"id": "ex:df-electro/analysis/transport", "label": "Analysis",
+                             "props": {"name": "Mass transport check", "analysis_kind": "transport_check",
+                                       "evaluation_basis": "estimated", "origin": "synthetic"}})
+        doc["links"].append({"id": "ex:df-electro/analysis/transport/has-input/1", "type": "HAS_INPUT",
+                             "source": "ex:df-electro/analysis/transport", "target": t["id"],
+                             "props": {"role": "data", "origin": "synthetic"}})
+    defect("transport-basis-not-in-vocabulary", "a transport check whose basis is neither asserted, numerical nor experimental",
+           transport_check)
     # it states its access (public, like every committed document) but not who contributed it or its project
     defect("research-data-without-stewardship", "research data that does not say who contributed it or which project it belongs to",
            lambda d: d["graph"].__setitem__("stewardship", {"access": "public"}), base=template("catalysis", VERSION))

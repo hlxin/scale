@@ -1,0 +1,45 @@
+# A competency question of the catalysis domain (tools/competency.py; `scale domains cq catalysis`).
+# It runs on public synthetic examples, so anyone can rerun it and see the same answer.
+id: CQ-10
+question: Which catalytic tests were operated dynamically, with which time pattern, varying what, in which segments?
+description: |
+  A test operated dynamically (pulses, chopped light, a heating ramp) keeps its time-dependent context in its Operation
+  (HAS_OPERATION, kernel): the time pattern, the quantities varied and the program in segments, each with the values held
+  and its duration. Pulsed electrolysis (square potential pulses), chopped illumination and an electrically heated
+  reactor ramped from 300 to 800 °C at 10 K/s and held are three; a test held at constant conditions is not among the
+  rows. The catalysis checklist asks a dynamic Operation for its time_pattern, varied_quantities and segments.
+documents:
+  - examples/scale-catal/driving-force-examples/electro-dynamic.json
+  - examples/scale-catal/driving-force-examples/photothermo-dynamic.json
+  - examples/scale-catal/evidence-examples/dynamic-and-stability.json
+plan:
+  question: Which tests were operated dynamically, and how?
+  match:
+    label: CatalyticTest
+    as: test
+  steps:
+    - from: test
+      edge: HAS_OPERATION
+      to: Operation
+      as: operation
+      where:
+        - prop: operation_mode
+          op: eq
+          value: dynamic
+  return:
+    - test.name
+    - test.driving_forces
+    - operation.time_pattern
+    - operation.varied_quantities
+    - operation.segments
+    - operation.period
+    - operation.duty_cycle
+  evidence: true
+expect:
+  status: answered
+  min_rows: 3
+  max_rows: 3
+  values:
+    operation.time_pattern:
+      - periodic
+      - ramp

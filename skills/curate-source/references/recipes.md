@@ -53,8 +53,11 @@ A value the experimenter set or the author specified is not a measurement.
 - Reaction orders: `HAS_REACTION_ORDER` from that Analysis to each species, with its `order` (a value).
 - A differential or integral regime, an internal or external diffusion check: the conversion's
   `basis` or `note` ("differential, conversion below 5 %") and an Analysis
-  (`analysis_kind: transport_check`) with its `verdict`. Never infer a regime the source does not
-  state.
+  (`analysis_kind: transport_check`) that `HAS_INPUT` the test, with its `verdict`, the `temperature`
+  it applies to and its `evaluation_basis` (scale-catal 0.5.0 on): `asserted` when the source only
+  states it, `numerical` when it computes a criterion (its values in `results`), `experimental` when it
+  varies particle size, flow at constant contact time or stirring (each run an input of the check).
+  Never infer a regime the source does not state, and never judge a criterion value.
 
 ## Reaction thermochemistry
 

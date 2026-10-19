@@ -1,0 +1,79 @@
+# A competency question of the catalysis domain (tools/competency.py; `scale domains cq catalysis`).
+# It runs on public synthetic examples, so anyone can rerun it and see the same answer.
+id: CQ-09
+question: Which tests read as intrinsic kinetics rest on a transport assessment, on which basis and at which temperature,
+  and which rest on an assertion only?
+description: |
+  A rate read as intrinsic to the catalyst (interpretations intrinsic_kinetics) needs heat and mass transport ruled out.
+  The assessment is an Analysis with analysis_kind transport_check that HAS_INPUT the test: a link into the test, which
+  the catalysis checklist follows (evidence transport_assessment and transport_evidence). Its evaluation_basis says how
+  it was made: numerical (Weisz-Prater and Mears criteria, their values in results), experimental (runs with finer
+  particles and twice the flow at the same contact time, each an input of the check and CONTROL_FOR the test) or
+  asserted (stated, not shown). The basis is returned as recorded and never judged: no criterion value and no
+  conversion level is a threshold (one test is at 35 % conversion, analysed as integral). A test read as system
+  performance is not asked for an assessment and is not among the rows.
+documents:
+  - examples/scale-catal/evidence-examples/kinetic-evidence.json
+plan:
+  question: Which transport assessments do the tests read as intrinsic kinetics rest on?
+  match:
+    label: CatalyticTest
+    as: test
+    where:
+      - prop: interpretations
+        op: contains
+        value: intrinsic_kinetics
+  steps:
+    - from: test
+      edge: HAS_INPUT
+      direction: in
+      to: Analysis
+      as: check
+      where:
+        - prop: analysis_kind
+          op: eq
+          value: transport_check
+  return:
+    - test.name
+    - test.conversion
+    - check.evaluation_basis
+    - check.method
+    - check.temperature
+    - check.verdict
+  evidence: true
+expect:
+  status: answered
+  min_rows: 4
+  max_rows: 4
+  values:
+    check.evaluation_basis:
+      - numerical
+      - experimental
+      - asserted
+variants:
+  - description: The assessments that are more than asserted (numerical or experimental) back three tests; the test whose
+      transport effects are only stated to be negligible is left out.
+    plan:
+      steps:
+        - from: test
+          edge: HAS_INPUT
+          direction: in
+          to: Analysis
+          as: check
+          where:
+            - prop: analysis_kind
+              op: eq
+              value: transport_check
+            - prop: evaluation_basis
+              op: in
+              value:
+                - numerical
+                - experimental
+    expect:
+      status: answered
+      min_rows: 3
+      max_rows: 3
+      values:
+        check.evaluation_basis:
+          - numerical
+          - experimental
