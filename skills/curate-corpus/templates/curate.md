@@ -29,6 +29,8 @@ ${si_left}
    result the source cites from another work as its own run.
 5. **Check until it passes:** `${scale} source check ${folder} --derive-links` (exit 0: zero errors, every quote found,
    the cap respected).
+   Gap reports you write by hand (curate-source, step 12) go in `${folder}/work/gaps/`, one `GAP-*.json` each in
+   SCALE's gap format, with their `access`.
 6. **Write `${folder}/work/curation.json`:**
    `{"result": "curated" | "no_data", "records": {"nodes": <nodes you added>, "links": <links you added>}, "gaps": <n>,
    "not_curated": "<what you did not look at, e.g. SI tables S4-S6, Source Data>", "note": "<one line>"}`.

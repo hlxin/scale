@@ -9,6 +9,7 @@
 | `sources/<id>/work/si.json` | prepare | the SI files whose text was appended to the page texts (pages `[page S1]` …), and those left out, with why |
 | `sources/<id>/work/curation.json` | the curator subagent | `result` (`curated` or `no_data`), `records`, `gaps`, `not_curated`, `note`, `attempt` |
 | `sources/<id>/work/review.json` | the second-reading subagent | `verdict` (`pass`, `needs_fix`, `reject`), `issues`, `coverage`, `note` |
+| `sources/<id>/work/gaps/GAP-*.json` | the curator | the gap reports it wrote (SCALE's gap format); `status` counts them by kind and lists the `missing_concept` ones |
 | `sources/<id>/work/check.json` | status | the last `scale source check`, kept while the graph and `rights.yaml` are unchanged |
 | `prompts/<role>/<id>.md` | next | the prompts handed out |
 | `handouts.jsonl` | next | one line per prompt handed out (source, role, time) |
