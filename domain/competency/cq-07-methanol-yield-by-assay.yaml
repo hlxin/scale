@@ -1,0 +1,125 @@
+# A competency question of the catalysis domain (tools/competency.py; `scale domains cq catalysis`).
+# It runs on public synthetic examples, so anyone can rerun it and see the same answer.
+id: CQ-07
+question: Which methanol yields were measured, by which assay and in which phase, and did any test reach a methanol
+  yield of at least 50 % — without a selectivity or a conversion standing in for a yield?
+description: |
+  A yield, a selectivity and a conversion are three kinds of share (product_yield, selectivity, conversion), never one
+  another: with a CO2 conversion of 50 %, a methanol yield of 40 % and a methanol selectivity of 80 %, a yield of at
+  least 50 % is not reached and a selectivity of at least 50 % is. Each row binds one result (an entries step over
+  result_values and the scalar yield, of kind product_yield), so its value, its product, its assay (produced_by, with
+  the time on stream of the assay), its phase and its evidence are that result's. Two assays of one product (GC of the
+  outlet gas and NMR of the condensate) are two results, and two conditions on one bound result are never met by two
+  assays apart.
+documents:
+  - examples/scale-catal/product-measurement-examples/product-measurements.json
+plan:
+  question: Which methanol yields were measured, by which assay and in which phase?
+  match:
+    label: CatalyticTest
+    as: test
+  steps:
+    - from: test
+      entries:
+        - result_values
+        - yield
+      kind: product_yield
+      as: result
+    - from: result
+      field: target
+      to: ChemicalSpecies
+      as: product
+      where:
+        - prop: formula
+          op: eq
+          value: CH3OH
+    - from: result
+      field: produced_by
+      to: Experiment
+      as: assay
+      optional: true
+  return:
+    - test.name
+    - result
+    - result.phase
+    - result.stream
+    - assay.name
+    - product.name
+  evidence: true
+expect:
+  status: answered
+  min_rows: 2
+  max_rows: 2
+  values:
+    result.phase:
+      - gas
+      - liquid
+    product.name:
+      - methanol
+variants:
+  - description: A methanol yield of at least 50 % is not reached (40 % by GC, 38 % by NMR); the selectivity of 80 % and the
+      conversion of 50 % never stand in for a yield.
+    plan:
+      where:
+        - var: result
+          prop: value
+          op: ge
+          value: 50
+          unit: '%'
+          basis: carbon
+    expect:
+      status: no_matching_record
+  - description: A methanol selectivity of at least 50 % is the 80 % selectivity, bound with its own assay and evidence.
+    plan:
+      steps:
+        - from: test
+          entries:
+            - result_values
+            - selectivity
+          kind: selectivity
+          as: result
+        - from: result
+          field: target
+          to: ChemicalSpecies
+          as: product
+          where:
+            - prop: formula
+              op: eq
+              value: CH3OH
+        - from: result
+          field: produced_by
+          to: Experiment
+          as: assay
+          optional: true
+      where:
+        - var: result
+          prop: value
+          op: ge
+          value: 50
+          unit: '%'
+          basis: carbon
+    expect:
+      status: answered
+      min_rows: 1
+      max_rows: 1
+      values:
+        result.phase:
+          - gas
+  - description: A yield of at least 39 % and at most 38.5 % is met by no one result, though the GC yield meets the first
+      condition and the NMR yield the second; conditions on one bound result are never met by two assays apart.
+    plan:
+      where:
+        - var: result
+          prop: value
+          op: ge
+          value: 39
+          unit: '%'
+          basis: carbon
+        - var: result
+          prop: value
+          op: le
+          value: 38.5
+          unit: '%'
+          basis: carbon
+    expect:
+      status: no_matching_record

@@ -4,10 +4,13 @@ id: CQ-01
 question: Which ammonia Faradaic efficiencies were measured in nitrate electroreduction, under which control mode
   and electrode potential, on which catalyst, and where in the source is each stated?
 description: |
-  An electrocatalytic result is read with its operating context: the efficiency, the target species, how
-  the potential or current was controlled (potentiostatic or pulsed) and the catalyst, each with the
-  passage that states it. A pulsed test has no single electrode potential; the answer says so instead of
-  filling one in.
+  An electrocatalytic result is read with its operating context: the efficiency, the product it is counted for,
+  how the potential or current was controlled (potentiostatic or pulsed) and the catalyst, each with the passage
+  that states it. The plan binds one Faradaic efficiency per row (an entries step over the per-product list and
+  result_values) and selects ammonia by its product's formula, so a test whose only efficiency is hydrogen's (the
+  nitrate-free blank of electro-dynamic.json) is not an answer, and each row returns the efficiency that matched, not every
+  efficiency of its test. A pulsed test has no single electrode potential; the answer says so instead of filling
+  one in.
 documents:
   - examples/scale-catal/driving-force-examples/electro.json
   - examples/scale-catal/driving-force-examples/electro-dynamic.json
@@ -16,10 +19,21 @@ plan:
   match:
     label: CatalyticTest
     as: test
-    where:
-      - prop: faradaic_efficiency
-        op: exists
   steps:
+    - from: test
+      entries:
+        - faradaic_efficiency
+        - result_values
+      kind: faradaic_efficiency
+      as: fe
+    - from: fe
+      field: target
+      to: ChemicalSpecies
+      as: product
+      where:
+        - prop: formula
+          op: eq
+          value: NH3
     - from: test
       edge: OF_REACTION
       to: Reaction
@@ -35,7 +49,8 @@ plan:
   return:
     - test.name
     - test.control_mode
-    - test.faradaic_efficiency
+    - fe
+    - product.formula
     - test.electrode_potential
     - reaction.equation
     - catalyst.name
@@ -43,7 +58,10 @@ plan:
 expect:
   status: answered
   min_rows: 3
+  max_rows: 3
   values:
     test.control_mode:
       - potentiostatic
       - pulsed
+    product.formula:
+      - NH3

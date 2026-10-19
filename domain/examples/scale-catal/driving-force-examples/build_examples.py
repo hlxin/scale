@@ -7,6 +7,7 @@ items for a catalytic test apply by the driving forces the test lists.
   electro.json             nitrate reduction on a Cu electrode: electrodes in their roles, reference scale, electrolyte
                            (its components' concentrations, mol/L), FE
   electro-dynamic.json     the same reaction under square potential pulses (a dynamic Operation), with its static control
+                           and a nitrate-free blank whose only FE is hydrogen's
   electrothermo.json       ammonia decomposition on a Joule-heated Ru/carbon felt, with a furnace-heated control
   photo.json               CO2 photoreduction on TiO2 with its dark control
   plasma.json              DBD ammonia synthesis over Ni/Al2O3 with plasma-only and catalyst-only controls
@@ -330,6 +331,19 @@ def dynamic_electrocatalysis() -> None:
     d.link("HAS_OPERATION", pulsed, pulsed_op)
     d.link("HAS_OPERATION", steady, steady_op)
     d.link("CONTROL_FOR", steady, pulsed, control_kind="baseline", differs_in=[vmode])
+    # a nitrate-free blank: hydrogen evolution only, so its one Faradaic efficiency is hydrogen's, never ammonia's
+    h2 = d.species("hydrogen", "H2", {"H": 2})
+    her = d.reaction("her", "2 H2O + 2 e- -> H2 + 2 OH-", [(h2o, -2), (e, -2), (h2, 1), (oh, 2)])
+    blank_el = d.node("electrolyte/k2so4", "Electrolyte", "0.5 M K2SO4 (no nitrate)", pH=V(7.0, "1"))
+    blank = d.node("test/blank", "CatalyticTest", "Nitrate-free blank, -1.4 V vs Ag/AgCl (hydrogen evolution only)",
+                   test_kind="control", control_mode="potentiostatic", electrode_potential=V(-1.4, "V"),
+                   faradaic_efficiency=[V(96, "%", target=h2)], **common)
+    d.link("USES_CATALYST", blank, sample, state="as_prepared")
+    d.link("USES_ELECTRODE", blank, electrode, role="working")
+    d.link("USES_ELECTRODE", blank, ref, role="reference")
+    d.link("IN_ELECTROLYTE", blank, blank_el)
+    d.link("OF_REACTION", blank, her)
+    d.link("HAS_OPERATION", blank, steady_op)
     d.write("electro-dynamic.json")
 
 

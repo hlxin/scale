@@ -1,0 +1,73 @@
+# A competency question of the catalysis domain (tools/competency.py; `scale domains cq catalysis`).
+# It runs on public synthetic examples, so anyone can rerun it and see the same answer.
+id: CQ-08
+question: Which Faradaic efficiencies of CO2 electroreduction products were measured, in which phase and by which assay,
+  and which results name no one product or cannot be told apart from another?
+description: |
+  Each row binds one Faradaic efficiency in result_values with its product (target), phase, stream and assay (whose
+  time on stream is the result's interval): CO by GC at 30 and at 60 min are two results, and ethanol in the catholyte
+  and in the headspace gas are two results. A product below the GC's detection limit stays below_detection_limit with
+  the limit, and the charge no quantified product accounts for stays an unresolved_target, never one species. In a
+  scientific comparison the two CO efficiencies of the repeated electrolysis, which nothing tells apart (no assay,
+  phase or stream of their own), are left out as an ambiguous repetition, never averaged; an ordinary listing returns
+  them, flagged.
+documents:
+  - examples/scale-catal/product-measurement-examples/product-measurements.json
+plan:
+  question: Which Faradaic efficiencies were measured, in which phase and by which assay?
+  comparison: scientific
+  match:
+    label: CatalyticTest
+    as: test
+  steps:
+    - from: test
+      entries: result_values
+      kind: faradaic_efficiency
+      as: fe
+    - from: fe
+      field: target
+      to: ChemicalSpecies
+      as: product
+      optional: true
+    - from: fe
+      field: produced_by
+      to: Experiment
+      as: assay
+      optional: true
+  return:
+    - test.name
+    - fe
+    - fe.status
+    - fe.phase
+    - fe.unresolved_target
+    - product.formula
+    - assay.name
+  evidence: true
+expect:
+  status: answered
+  min_rows: 8
+  max_rows: 8
+  values:
+    fe.phase:
+      - gas
+      - liquid
+    fe.status:
+      - present
+      - below_detection_limit
+    fe.unresolved_target:
+      - charge no quantified product accounts for
+    product.formula:
+      - CO
+      - H2
+      - CH4
+      - C2H5OH
+      - HCOO-
+variants:
+  - description: An ordinary listing returns the two CO efficiencies of the repeated electrolysis as well, each flagged as an
+      ambiguous repetition.
+    plan:
+      comparison: ordinary
+    expect:
+      status: answered
+      min_rows: 10
+      max_rows: 10
