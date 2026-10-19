@@ -195,6 +195,16 @@ class Run:
         write_json(cache, c)
         return c
 
+    def gap_files(self, i):
+        """The gap reports a curator wrote for this source (work/gaps/GAP-*.json, SCALE's gap format; a subfolder
+        such as superseded/ is not counted)."""
+        out = []
+        for g in sorted((self.folder(i) / "work" / "gaps").glob("GAP-*.json")):
+            d = read_json(g) or {}
+            if d.get("kind"):
+                out.append({"id": d.get("id") or g.stem, "kind": d["kind"], "about": (d.get("about") or "")[:200]})
+        return out
+
     def handouts(self):
         out = {}
         for h in jsonl(self.d / "handouts.jsonl"):
@@ -379,14 +389,18 @@ def cmd_next(a):
 def cmd_status(a):
     run = Run(a.run)
     hand = run.handouts()
-    states, by_state, gaps, nodes = {}, {}, 0, 0
+    states, by_state, gaps, nodes, kinds, concepts = {}, {}, 0, 0, Counter(), []
     for i in run.ids():
         st, detail = run.state(i, hand)
         states[i] = (st, detail)
         by_state.setdefault(st, []).append(i)
         chk = read_json(run.folder(i) / "work" / "check.json") or {}
-        gaps += chk.get("gaps") or 0
+        gaps += chk.get("gaps") or 0                      # gaps recorded on the document's records
         nodes += max(0, ((chk.get("records") or {}).get("nodes") or 3) - 3)
+        for g in run.gap_files(i):                        # gap reports written as files
+            kinds[g["kind"]] += 1
+            if g["kind"] == "missing_concept":
+                concepts.append({"source": i, "gap": g["id"], "about": g["about"]})
     applied = 0
     if a.apply:
         last = {r["id"]: r for r in jsonl(run.d / "state.jsonl")}
@@ -417,7 +431,9 @@ def cmd_status(a):
     todo = [f"next --role {r} ({sum(counts[s] for s in ss)})" for r, ss in ROLE_STATES.items()
             if sum(counts[s] for s in ss)]
     print(json.dumps({"run": str(run.d), "sources": len(states), "states": dict(sorted(counts.items())),
-                      "settled": sum(counts[s] for s in SETTLED), "nodes_added": nodes, "gaps": gaps,
+                      "settled": sum(counts[s] for s in SETTLED), "nodes_added": nodes,
+                      "gaps": {"on_records": gaps, "reports": dict(sorted(kinds.items())),
+                               "missing_concept": concepts[:20]},
                       "lists": {k: v[:50] for k, v in sorted(by_state.items()) if k != "passed"},
                       "applied": applied if a.apply else None,
                       "next": todo or (["finish"] if counts["passed"] else ["nothing left to do"])}))

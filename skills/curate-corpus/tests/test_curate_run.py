@@ -125,3 +125,16 @@ def test_a_corpus_that_fails_the_check_is_refused(corpus, tmp_path):
     m["counts"] = {"in_scope": 5}
     corpus.write_text(json.dumps(m))
     run("prepare", "--corpus", corpus, "--run", tmp_path / "run", "--scale", SCALE, ok=False)
+
+
+def test_gap_reports_are_counted_by_kind(corpus, tmp_path):
+    r = tmp_path / "run"
+    run("prepare", "--corpus", corpus, "--run", r, "--scale", SCALE)
+    gaps = r / "sources" / "7" / "work" / "gaps"
+    (gaps / "superseded").mkdir(parents=True)
+    for gid, kind in (("GAP-1", "missing_concept"), ("GAP-2", "ambiguous_source_information")):
+        (gaps / f"{gid}.json").write_text(json.dumps({"id": gid, "kind": kind, "about": f"about {gid}"}))
+    (gaps / "superseded" / "GAP-3.json").write_text(json.dumps({"id": "GAP-3", "kind": "missing_concept"}))
+    g = run("status", "--run", r)["gaps"]
+    assert g["reports"] == {"ambiguous_source_information": 1, "missing_concept": 1}     # superseded/ not counted
+    assert g["missing_concept"] == [{"source": "7", "gap": "GAP-1", "about": "about GAP-1"}]

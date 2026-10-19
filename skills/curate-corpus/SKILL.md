@@ -109,8 +109,9 @@ hands out the work and records what came back.
 6. **Finish:** `curate_run.py finish --run <dir> [--public] [--bundle]`. It runs `scale source finish` on every passed
    document that holds records: the evidence index, and with `--public` the copy with quoted text capped, the one to
    share.
-7. **Gaps and questions.** `status` counts the gaps the documents record. Route a `missing_concept` gap with `scale
-   gap issue <gap.json>` (a dry run) to the evolve-schema skill; a person decides. To query the documents together,
+7. **Gaps and questions.** `status` counts the gaps by kind: those on the documents' records and the gap reports
+   in each folder's `work/gaps/`. It lists the `missing_concept` ones. Route each with `scale gap issue <gap.json>`
+   (a dry run) to the evolve-schema skill; a person decides. To query the documents together,
    run `curate_run.py assemble --run <dir>`. It adds every passed document, with `scale graph contribute --write`, to
    a local graph kept as parts in `<run>/graph/` (never the repository), and builds it with `scale graph build`. Then
    follow query-graph for questions, map-coverage for a coverage map, scan-conflicts for sources that disagree, and
