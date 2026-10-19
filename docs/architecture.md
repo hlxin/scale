@@ -91,7 +91,7 @@ their repositories and are referenced by `Dataset` records (`uri`, `sha256`).
 
 ## Versions and releases
 
-The schema has one version for the kernel and the catalysis domain together. The schema is at 0.3.0, kernel and
+The schema has one version for the kernel and the catalysis domain together. The schema is at 0.4.0, kernel and
 catalysis together; this repository started its numbering there on 2026-10-08 (the work it continues was numbered
 elsewhere, and those numbers name other schemas). A document pins its schema version; the catalysis domain keeps
 every earlier version frozen beside its manifest once a schema change has moved the schema on, so a document is read
@@ -121,7 +121,8 @@ All modules are in `tools/`.
 | `pgraph_profiles.py` | Checklists (must, should, `unless` and `when` cases) of the catalysis file, and conformance (there are no profile files). |
 | `pgraph_science.py` | Checks specific to the science kernel. |
 | `quantities.py` | Quantity contracts (the kernel's `quantities:`): reading a unit as printed into a dimension and the contexts it states, never converting it; the contexts of a value (its unit, basis, definition, target, normalized_by and its record's sibling property) and evidenced conversions; the validator's contract diagnostics; the loader's checks of the block and of every binding; their part of the schema diff; the 0.2.1 -> 0.3.0 migration rule. |
-| `pgraph_query.py`, `passages.py`, `sourcetext.py` | Queries over scale-catal documents with typed absences (and, with `comparison: scientific`, values compared only within one unit and context of their contract); the evidence index and search; source texts for verbatim quote checks. |
+| `results.py` | Result entries (`Experiment.result_values`): a pointer step that names a list item by its id, the entries of a property and the pointer a reference names each by, what tells two results of a record apart (an ambiguous repetition), and the validator's result-entry diagnostics. |
+| `pgraph_query.py`, `passages.py`, `sourcetext.py` | Queries over scale-catal documents with typed absences (and, with `comparison: scientific`, values compared only within one unit and context of their contract; an `entries` step binds one result per row, a `field` step follows its product or assay, and filters on one path are held by one entry); the evidence index and search; source texts for verbatim quote checks. |
 | `pagereading.py` | `scale pages`: readings of scanned pages by two readers, page images and positioned OCR words in a local pages folder, the tool's agreement of each reading with OCR in its region, independent second readings, and the check that every value read from an image is in a transcription or quote. |
 | `pgraph_migrate.py` | Move scale-catal documents along the version steps of the catalysis schema. |
 | `schema_change.py` | A schema change on a branch (`scale schema diff | bump | check`): the base rebuilt from git at the merge base, the semantic diff and its kind, the version the rule asks (breaking: the second number; additive: the third); `bump` freezes the base version (its kernel into `core/graph/frozen/kernel-<v>.yaml` and the catalysis manifest and file into `domain/graph/frozen/`, appending digests to each `SHA256SUMS`, which `scale graph verify` checks), raises the one version in every file and sentence that states it and registers the migration step; `check` asks for all of that, a migration rule for a breaking change, a test for what is added and a CHANGELOG line, and writes the reviewer's summary. |
@@ -145,6 +146,9 @@ All modules are in `tools/`.
   quantity's kind (a temperature is never in kg); a scientific comparison compares values only within one unit and one
   context (a potential's scale, a current density's normalization, a pressure's convention, a flow's reference
   conditions), never an assumed one, and an evidenced conversion is the only way across.
+- **One result is one result throughout.** A query that binds a result reads its value, its product, its assay and its
+  evidence from that one entry; two assays never jointly satisfy conditions meant for one result, a reference names a
+  result by its id, never its position, and two results nothing tells apart are reported, never averaged.
 - **Missingness has a reason.** `not_reported` ≠ `not_measured` ≠ `not_applicable` ≠
   `below_detection_limit` ≠ a measured zero; a `not_reported` value says whether the source is
   silent, ambiguous, or the curator did not look.

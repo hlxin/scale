@@ -174,6 +174,51 @@ say how many groups there are and why values were left out. An ordinary plan is 
 ranking compared values on several contexts (or on none stated), a limitation names them and points here. Competency
 question CQ-06 (`domain/competency/cq-06-comparable-current-densities.yaml`) runs this on the public comparison example.
 
+## Results
+
+A result is identified by more than its record: its metric, its product, the assay that measured it, its phase and
+its interval (core/graph/README.md, "Result entries"). A plan binds **one result per row** with an `entries` step,
+and every filter, returned value, ranking and evidence item on that variable is then that result's:
+
+```yaml
+question: Which methanol yields were measured, by which assay and in which phase?
+match: {label: CatalyticTest, as: test}
+steps:
+  - {from: test, entries: [result_values, yield], kind: product_yield, as: result}   # one row per yield
+  - {from: result, field: target, to: ChemicalSpecies, as: product,
+     where: [{prop: formula, op: eq, value: CH3OH}]}
+  - {from: result, field: produced_by, to: Experiment, as: assay, optional: true}
+where:
+  - {var: result, prop: value, op: ge, value: 30, unit: "%", basis: carbon}
+return: [test.name, result, result.phase, assay.name, product.name]
+evidence: true
+```
+
+- **`entries`** names a value property of a node variable (`result_values`, a per-product list such as
+  `faradaic_efficiency`, a map such as `results`, a scalar such as `yield`), or a list of them; `kind` keeps the
+  entries of those quantity kinds (the property's binding, else the entry's Variable's `quantity_kind`), so
+  `kind: product_yield` never binds a selectivity or a conversion. A filter on the bound variable reads `value` (the
+  value object itself, compared in its unit as any value is), `kind`, or a field of the value (`phase`, `stream`,
+  `basis`, `status`, `unresolved_target`, `id`, …). The row's `bound` names the entry as a record_ref (`record`,
+  `path`: `/result_values/<id>`) with its `kind`.
+- **`field`** follows a field of a bound entry that names a record (`target`, `variable`, `produced_by`, `calibration`,
+  `ref_value`, `normalized_by`) and binds it, of the label `to` names only: a Source never binds as a `ChemicalSpecies`.
+  An entry whose product the source does not identify (`unresolved_target`) is left out of a step that follows its
+  target, counted as `unresolved_target`, never taken for one species.
+- **Evidence.** A row cites the evidence items its bound entry names (`evidence_ids`), labelled with the entry's
+  variable and `entry` path, and never an item of its record that only other results cite; an item no value cites
+  stays the record's. The assay's evidence comes with it when a field step binds it.
+- **Repetition.** Two results of one record that nothing tells apart (one variable, target, producer, phase, stream,
+  basis, definition and normalization) are an ambiguous repetition: an ordinary answer returns both, each row flagged
+  (`ambiguous_repetition`), and a scientific comparison leaves them out (counted in `coverage.comparison.left_out`).
+  They are never averaged. Results told apart by their assay, interval or phase are distinct rows.
+- **Scientific comparison.** A bound entry is read under its contract like any value (its property's, else its
+  Variable's), with its record's siblings; a filter in a unit of another dimension than the entry's kind leaves that
+  entry out as `incompatible_unit` (entries of several kinds may be bound) rather than stopping the plan.
+
+Competency questions CQ-01 (ammonia's Faradaic efficiency, never hydrogen's), CQ-07 (a methanol yield, never a
+selectivity) and CQ-08 (Faradaic efficiencies by product, phase and assay) bind results this way.
+
 ## Paths into maps and lists
 
 A filter's `prop` and a `return` field may address an entry of a map or a list of values:
@@ -185,9 +230,14 @@ A filter's `prop` and a `return` field may address an entry of a map or a list o
 | `results.*` | every entry |
 | `results.*[target=ex:t/species/co]` | the entries whose value refers to that record (`value.target`) |
 | `levels.*[variable=ex:t/variable/p]` | the entries whose value names that variable (`value.variable`) |
+| `result_values.meoh_yield_gc` | the list entry with that `id` (a result entry is named so) |
+| `result_values.*[variable=…][target=…][produced_by=…]` | the entries with every one of these fields (also `calibration`, `phase`, `stream`, `id`) |
 | `selectivity[target=…]` | a single value, if it refers to that record |
 
-A filter on several entries holds when one of them passes and fails only when every one of them fails.
+Filters on one path that selects entries are held by **one entry together**: `results.*[target=…] ge 70` and
+`results.*[target=…] le 50` hold only for a record with one entry meeting both, never for two assays meeting one each,
+and returning that path gives the entries that held them (and the row cites their evidence, below, "Results"). A
+filter on several entries holds when one of them passes and fails only when every one of them fails.
 When none passes and one cannot be compared (not reported, withheld, in another unit, a one-sided bound),
 the record is left out with that entry's reason (`missing_context`), never taken as failing: an entry that
 fails never hides one that might pass. A record with the map but no entry that the path selects is left out

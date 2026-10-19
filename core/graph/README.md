@@ -107,7 +107,7 @@ quantities most often compared, what each kind is, and the schema loader compile
 | `dimensions` | named products of the base dimensions L, M, T, I, Θ, N (`pressure: M L-1 T-2`; `dimensionless: '1'`) |
 | `units` | the symbols a unit is read from: SI prefixes, `prefixed` and `unprefixed` symbols, whole `spellings` (`kg/cm2` is a pressure in kilograms-force) and units that also state a context (`stating`: `barg` gauge, `sccm` standard conditions, `wt%` by mass) |
 | `contexts` | what two values of a kind must share to be compared: `potential_reference`, `current_normalization`, `pressure_convention`, `flow_reference`, `fraction_basis`, `space_velocity_basis`, `species`; each with its values, the terms that name them and where it is read from (`read_from`: unit, basis, definition, target, normalized_by, sibling) |
-| `kinds` | temperature, pressure, electrode and electric potential, current, current density and partial current density, fraction, species and composition fractions, loading, concentration, flow rate, space velocity, Faradaic efficiency, quantum and photonic yield, energy yield, efficiency, turnover frequency: each with its `dimensions`, the contexts it is compared by (`compare_by`, optionally `when_dimension` or `when`), its `denominator` when it is divided by one, and `share` when it is a part of a whole |
+| `kinds` | temperature, pressure, electrode and electric potential, current, current density and partial current density, fraction, species and composition fractions, conversion, product yield, selectivity, production rate, product amount, balance, loading, concentration, flow rate, space velocity, Faradaic efficiency, quantum and photonic yield, energy yield, efficiency, turnover frequency: each with its `dimensions`, the contexts it is compared by (`compare_by`, optionally `when_dimension` or `when`), its `denominator` when it is divided by one, `share` when it is a part of a whole, and `closure` when it is found over put in (a balance) |
 
 A property binds a contract with `quantity: <kind>` and names the sibling property of its record that states a context
 with `context: {<context>: <property>}` (`electrode_potential` is compared by `potential_reference`, also read from
@@ -128,6 +128,36 @@ values only within one unit and one context ([docs/querying.md](../../docs/query
 dimensions, a context it is compared by, what a unit or a term reads as, a property's binding) is part of the schema
 diff and raises the version by the usual rule.
 
+A domain says which records a context read from a value's target may name (`context_targets`, scale-catal 0.4.0 on):
+in catalysis the `species` a conversion, a yield, a selectivity, a rate, an amount or an efficiency is counted for is a
+`ChemicalSpecies`, so a target naming a source, a dataset or a material is an error. A balance (`closure`) above 100 % is
+kept as reported and flagged, with whether 100 % lies within its stated uncertainty; it is never capped.
+
+## Result entries
+
+An experiment's results identified one by one (scale-catal 0.4.0 on) go in `Experiment.result_values`, one value object
+per result. What identifies a result among its record's is:
+
+| what | field |
+|---|---|
+| the metric (what was measured or derived) | `variable` (required): a Variable whose `quantity_kind` gives the contract (`product_yield`, `selectivity`, `conversion`, `faradaic_efficiency`, `production_rate`, `product_amount`, `balance`, …) |
+| the product (or reactant) | `target`: a ChemicalSpecies in catalysis; `unresolved_target` with the source's words when it does not identify one (`"C2+ products"`, the unaccounted remainder) |
+| the assay | `produced_by`: the Characterization or Analysis that measured or derived it, with `calibration` (the calibration it depends on); the assay's reference standards are its `HAS_INPUT` (role `reference_standard`), its raw data the Dataset it `HAS_OUTPUT` |
+| the interval | the producer's timing (`conditions.time_on_stream`, `started_at`, `finished_at`), else the experiment's own (`time_on_stream`, `duration`) |
+| where it was measured | `phase` (gas, liquid, solid, …) and `stream` (the outlet gas, the catholyte, as the source names it) |
+| its basis and normalization | `basis`, `definition`, `normalized_by` |
+| its identity and evidence | `id` (snake_case; a record_ref names the entry `/result_values/<id>`, never by its position) and `evidence_ids` (required when it states a value) |
+
+The experiment holding an entry is its one owner: a result is recorded once. Two results of one variable and target are
+distinct when their producer, phase, stream, basis or normalization differ (a methanol yield by GC of the outlet gas and
+one by NMR of the condensate); two that nothing tells apart are reported as an ambiguous repetition (an advisory), never
+averaged. A product below the detection limit keeps its status `below_detection_limit` and the limit as its value. A
+balance is a result too: a `balance` value (`basis` carbon or charge) `produced_by` an Analysis (`analysis_kind:
+balance`) that `HAS_INPUT` the assays it adds up, so the streams, phases and interval it includes are those of its
+inputs; what it leaves unmeasured is a result of its own with an `unresolved_target`, never computed. The scalar results
+(`conversion`, `yield`, `selectivity`), the `results` map and the per-product lists (`faradaic_efficiency`, …) stay
+valid; a query binds an entry of any of them the same way (docs/querying.md, "Results").
+
 ## Mechanisms the loader enforces
 
 - **Inheritance:** `is_a`; a label may `fix` an inherited value (a Reaction is an ObjectOfStudy with
@@ -142,7 +172,8 @@ diff and raises the version by the usual rule.
   domain file; a second declaration fails to load.
 - **Quantity contracts:** the kernel's `quantities:` block compiles (dimensions, units, contexts and kinds that name
   only what it declares); every `quantity:` names a declared kind on a value property, and every `context:` a sibling
-  enum whose values the context reads; a domain file declares no contracts of its own.
+  enum whose values the context reads; a domain file declares no contracts of its own, and its `context_targets` name a
+  kernel context read from a target and labels it can see.
 - **Extension keys:** properties outside the schema are `_<prefix>_<name>`, with the prefix
   registered in [`governance/registry/extension-prefixes.yaml`](../../governance/registry/extension-prefixes.yaml). They are kept, not checked, and never change
   the meaning of a declared property; a new driving force starts there and enters the catalysis

@@ -2,6 +2,31 @@
 
 ## Unreleased
 
+- **Schema 0.4.0 (breaking): each result recorded on its own, and queries that keep one result together.** Requested
+  by @hlxin ("Make product measurements and their analytical context queryable"). Before, a query checked each
+  condition on a test's results separately. Two analyses that reported a methanol yield of 40 % and of 80 % together
+  passed "yield ≥ 70 % and ≤ 50 %", and a condition on a yield could pass on a selectivity.
+  - **A list of results** (`Experiment.result_values`, provisional). Each result says what was measured (a Variable),
+    for which product, by which analysis (`produced_by`) and calibration, in which phase and stream, on which basis,
+    and which evidence states it. Its time comes from the analysis or the test. Each result has an `id`, and a
+    reference names it by that id, never by its place in the list. These fields follow the Open Reaction Database's
+    product measurements (Kearnes et al. 2021, doi:10.1021/jacs.1c09820). Single values, `results` maps and
+    per-product lists stay as they are.
+  - **Separate kinds** for conversion, yield, selectivity, production rate, product amount and balance, so a yield
+    never stands in for a selectivity. A balance above 100 % is kept as reported. A warning says whether 100 % lies
+    within its uncertainty.
+  - **A product is a chemical species** in catalysis, so a source can never be a product. A product the source does
+    not identify is kept in the source's words (`unresolved_target`). A product below the detection limit keeps its
+    limit.
+  - **Queries** (`scale graph query`). An `entries` step takes one result per row, and a `field` step follows its
+    product or analysis. Two conditions on one list must be met by the same result, and the answer cites only that
+    result's evidence. Two results that nothing tells apart are flagged, never averaged.
+  - **Exports.** The kg-bundle and Neo4j exports now say that they carry results as plain text.
+  - **Examples and questions.** CQ-01 now asks for ammonia by name, and a hydrogen-only blank in the pulsed
+    electrochemistry example checks it. CQ-07 and CQ-08 are new, on a new public example
+    (`domain/examples/scale-catal/product-measurement-examples/`). Eight invalid examples cover the new rules.
+  - **Migration.** Documents pinned to 0.3.0 stay valid. `scale graph migrate` changes no values, and it stops only
+    on a product that is not a chemical species.
 - **Schema 0.3.0 (breaking): quantity contracts, and a scientific comparison mode in queries.** The kernel's new
   `quantities:` block says, for the quantities most often compared (temperature, pressure, electrode potential, current
   and current density, fractions, concentrations, flow and space velocity, product yields and efficiencies), the

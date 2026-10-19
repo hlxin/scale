@@ -38,8 +38,10 @@ scale-catal@0.2.0 …` a pinned one. In a checkout of this repository run `uv ru
   on returned rows and cite their evidence. Quote values as reported, keep incompatible units and
   bases apart (a plan that compares or ranks values takes `comparison: scientific`, which keeps a
   potential's reference scale, a current density's normalization, a pressure's convention and a flow's
-  reference conditions apart too), label author interpretations as the authors', and put your own
-  extrapolations in a separate, labelled paragraph.
+  reference conditions apart too; a question about one result binds it with an `entries` step, so that
+  its value, product, assay and evidence are that result's and a yield never stands in for a
+  selectivity), label author interpretations as the authors', and put your own extrapolations in a
+  separate, labelled paragraph.
 - **Report absences as answers.** `schema_gap`, `no_matching_record` and `missing_context` are
   results. Never fill a gap with a typical value.
 - Synthetic examples (`data_status: synthetic_example`) are not evidence about the world; say so if
