@@ -539,7 +539,11 @@ def vocabulary(spec: dict) -> tuple[dict, dict]:
     def ends(labels: list) -> list[str] | None:
         """The labels an endpoint stands for, sorted; ``[]`` (unconstrained) for an endpoint declared ``ANY``, which the
         resolved spec carries as every concrete label (so that its digest is unchanged), and ``None`` for one that
-        names no label of the bundle."""
+        names no label of the bundle.
+
+        The marker is inferred: the loader expands ``ANY`` to every concrete label before the spec is digested (and the
+        frozen versions hold it so), so a list that covers every concrete kind is read as ``ANY``. ``any_except`` leaves
+        a kind out and an explicit list names a few, so neither reaches it."""
         if labels and every <= {x for x in labels if isinstance(x, str)}:
             return []
         out = set()
@@ -562,7 +566,7 @@ def vocabulary(spec: dict) -> tuple[dict, dict]:
                           **({"iri": iri_of(d)} if iri_of(d) else {}),
                           "properties": _type_props({**common_l, **(d.get("properties") or {})}, True, status_def)}
     edge_types["REPORTED_IN"] = {"description": "An entity -> the source that reports it.",
-                                 "from": sorted(x for x in node_types if x != "Publication"), "to": ["Publication"],
+                                 "from": [], "to": ["Publication"],     # any entity reports: unconstrained
                                  "properties": {}}
     return node_types, edge_types
 

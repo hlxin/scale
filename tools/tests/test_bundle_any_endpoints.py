@@ -22,12 +22,19 @@ def test_an_endpoint_declared_any_is_an_empty_list(vocab):
         assert edges[et]["to"] == [] and edges[et]["from"] != []
 
 
+def test_exactly_these_sides_are_unconstrained(vocab):
+    _, edges = vocab
+    empty = {(et, side) for et, t in edges.items() for side in ("from", "to") if not t[side]}
+    assert empty == {("REVISES", "from"), ("REVISES", "to"), ("HAS_INPUT", "to"), ("HAS_OUTPUT", "to"),
+                     ("ABOUT", "to"), ("INCLUDES", "to"), ("REPORTED_IN", "from")}
+
+
 def test_the_declared_kind_pairs_are_far_below_every_kind_to_every_kind(vocab):
     nodes, edges = vocab
     declared = sum(len(t["from"]) * len(t["to"]) for t in edges.values() if t["from"] and t["to"])
-    assert declared < len(nodes) ** 2 // 2
+    assert declared == 1395 and declared < 6014      # the schema's typed pairs, REPORTED_IN's 54 no longer among them
     assert all(len(t["from"]) < len(nodes) and len(t["to"]) < len(nodes) for t in edges.values())
-    assert edges["REPORTED_IN"]["to"] == ["Publication"] and len(edges["REPORTED_IN"]["from"]) == len(nodes) - 1
+    assert edges["REPORTED_IN"]["to"] == ["Publication"]
 
 
 def test_an_edge_between_arbitrary_kinds_conforms_where_an_end_is_unconstrained(vocab):
