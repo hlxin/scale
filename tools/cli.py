@@ -91,11 +91,21 @@ def cmd_graph_validate(args):
             for ref, c in ((r.get("conformance") or {}).get("profiles") or {}).items():
                 rec = c["recommended"]
                 frac = "n/a" if rec["fraction"] is None else f"{rec['fraction']:.0%}"
+                ev, ap = c.get("evidence") or {}, c.get("applicability") or {}
                 print(f"  {what} {ref}: {'CONFORMANT' if c['conformant'] else 'NOT CONFORMANT'}, "
                       f"{c['nodes_checked']} nodes checked, {len(c['violations'])} violations, "
-                      f"{'should' if what == 'domain' else 'recommended'} filled {rec['filled']}/{rec['expected']} ({frac})")
+                      f"{'should' if what == 'domain' else 'recommended'} filled {rec['filled']}/{rec['expected']} ({frac})"
+                      + (f", evidence found {ev['found']}/{ev['expected']}" if ev.get("expected") else "")
+                      + (f"; {'complete' if c.get('complete') else 'not complete'}" if "complete" in c else ""))
+                if ap.get("unknown") or ap.get("exempt"):
+                    print(f"    applicability: {ap.get('known', 0)} known, {ap.get('unknown', 0)} unknown, "
+                          f"{ap.get('exempt', 0)} exempt")
+                for u in (c.get("unknown") or [])[:20 if args.verbose else 5]:
+                    print(f"    {u['record']}: applicability unknown (states no {', '.join(u['properties'])})")
                 for v in c["violations"][:20 if args.verbose else 5]:
                     print(f"    {v['record']}: {v['message']}")
+                for name, k in sorted((c.get("missing_evidence") or {}).items()):
+                    print(f"    evidence {name} missing for {k} record{'s' if k != 1 else ''}")
     if not all(r["valid"] for r in reports.values()):
         raise SystemExit(1)
 

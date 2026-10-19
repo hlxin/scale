@@ -25,6 +25,7 @@ STEPS: dict[str, tuple[str, str]] = {
     "0.2.0": ("0.2.1", 'no change in meaning: the description of Preparation.steps names PART_OF with order (#34)'),
     "0.2.1": ("0.3.0", "breaking: quantity contracts (a value's unit by its kind's dimension; the contexts a comparison needs; normalized_by; HAS_COMPONENT.concentration)"),
     "0.3.0": ("0.4.0", 'breaking: result entries (Experiment.result_values with value ids, phase, stream, unresolved_target); conversion, product_yield, selectivity, production_rate, product_amount and balance kinds; in catalysis a species is a ChemicalSpecies (context_targets)'),
+    "0.4.0": ("0.5.0", "breaking: the catalysis checklist applies a test's cases by its driving_forces (a test that lists none has unknown applicability, never a complete checklist) and looks for connected evidence; CatalyticTest.interpretations, Analysis.evaluation_basis, power_supply_input and the dark control's control_kind, differs_in, temperature_matched_at and temperature_matched_over are new (provisional)"),
 }
 
 
@@ -66,6 +67,16 @@ def _result_entries(doc: dict, spec: dict | None) -> list:
     return []
 
 
+def _reporting_applicability(doc: dict, spec: dict | None) -> list:
+    """0.4.0 -> 0.5.0: reporting applicability and connected evidence. Nothing a 0.4.0 document holds is rewritten, and
+    nothing stops the step: every record stays valid, and only what its checklist reports changes. A test that lists
+    no driving force is no longer read as meeting every driving-force item: its applicability is unknown and its
+    checklist is not complete (record its driving forces to make it so). No interpretation is inferred (a kinetics or
+    stability test is not thereby read as intrinsic kinetics or material stability), and a CONTROL_FOR is not turned
+    into a DARK_CONTROL_FOR. ``spec`` is the target schema."""
+    return []
+
+
 STEP_RULES: dict[str, tuple[str, Callable[[dict, dict | None], list]]] = {
     "0.1.0": ("graph.schema renamed scale-graph -> scale-catal; every record, id and value kept", _rename_schema),
     "0.2.1": ("quantity contracts: a HAS_COMPONENT fraction in an amount unit moves to amount, one in a concentration unit "
@@ -74,6 +85,9 @@ STEP_RULES: dict[str, tuple[str, Callable[[dict, dict | None], list]]] = {
     "0.3.0": ("result entries: nothing is rewritten (no value moves into result_values; the scalar results, the results map "
               "and the per-product lists keep their meaning); a value counted for a species whose target is not a "
               "ChemicalSpecies stops the step; every record, id and value kept", _result_entries),
+    "0.4.0": ("reporting applicability and connected evidence: nothing is rewritten and nothing stops the step (a test "
+              "that lists no driving force has unknown applicability; no interpretation is inferred); every record, id "
+              "and value kept", _reporting_applicability),
 }
 
 

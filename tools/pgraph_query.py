@@ -238,6 +238,21 @@ class Graph:
         n = self.nodes.get(nid)
         return bool(n) and (n["label"] == label or label in (self.spec["nodes"].get(n["label"], {}).get("ancestors") or []))
 
+    def edge_types(self, edge: str) -> set:
+        """An edge type and every edge type that specializes it, at any depth: a step on CONTROL_FOR follows
+        DARK_CONTROL_FOR links too, as ``to: Experiment`` binds a CatalyticTest."""
+        cache = self.__dict__.setdefault("_edge_types", {})
+        if edge not in cache:
+            out, grew = {edge}, True
+            while grew:
+                grew = False
+                for name, d in (self.spec.get("edges") or {}).items():
+                    if name not in out and d.get("specializes") in out:
+                        out.add(name)
+                        grew = True
+            cache[edge] = out
+        return cache[edge]
+
 
 def _year(p: dict) -> int | None:
     """A Source's year (or, without one, the year of its published_on); a Dataset's year of issue."""
@@ -1294,8 +1309,9 @@ def _run(doc: dict, spec: dict, plan: dict, evidence_index=None, graph: Graph | 
             missed[0] = False
             if here is not None and kind == "edge":
                 edges = g.out.get(here, []) if direction == "out" else g.inc.get(here, [])
+                types = g.edge_types(st["edge"])
                 for e in sorted(edges, key=lambda e: e["id"]):
-                    if e["type"] != st["edge"]:
+                    if e["type"] not in types:
                         continue
                     other = e["target"] if direction == "out" else e["source"]
                     if st.get("to") and not g.is_a(other, st["to"]):

@@ -1456,14 +1456,18 @@ def _ptype(d: dict, spec: dict | None = None) -> str:
 
 
 def _items(c: dict, edge: bool = False, case: bool = False) -> dict:
-    """A checklist block as a curator reads it: must, should, edges (labels) and its cases (``when``),
-    each with the condition that selects it and the values it narrows."""
+    """A checklist block as a curator reads it: must, should, edges (labels), the evidence patterns it looks for
+    and its cases (``when``), each with the condition that selects it, the values it narrows, its maturity and
+    the basis it rests on."""
     out = {"must": c.get("required") or [], "should": c.get("recommended") or []}
     if not edge:
         ed = c.get("edges") or {}
         if not case or ed.get("required") or ed.get("recommended"):
             out["edges"] = {"must": ed.get("required") or [], "should": ed.get("recommended") or []}
-    for k in ("values", "units") if case else ():      # a label's own narrowings are not listed
+    ev = c.get("evidence") or {}
+    if ev.get("required") or ev.get("recommended"):
+        out["evidence"] = {"must": ev.get("required") or [], "should": ev.get("recommended") or []}
+    for k in ("values", "units", "maturity", "basis") if case else ():      # a label's own narrowings are not listed
         if c.get(k):
             out[k] = c[k]
     if c.get("when"):
@@ -1517,7 +1521,8 @@ def _describe(spec: dict, names: list[str] | None = None, profile: str | None = 
     if profile and (spec["profiles"][profile.split("@")[0]] or {}).get("domain"):
         eff = spec["profiles"][profile.split("@")[0]]["effective"]
         out = {"schema_version": spec["version"], "domain": profile, "labels": {}, "edges": {},
-               "checklist": {"labels": {lab: {**_items(c), **({"unless": c["unless"]} if c.get("unless") else {})}
+               "checklist": {"labels": {lab: {**_items(c), **({"unless": c["unless"]} if c.get("unless") else {}),
+                                              **({"applies_by": c["applies_by"]} if c.get("applies_by") else {})}
                                         for lab, c in eff["constraints"].items()},
                              "edges": {e: _items(c, edge=True) for e, c in eff["edge_constraints"].items()}}}
     for n in wanted:

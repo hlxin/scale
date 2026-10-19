@@ -157,8 +157,15 @@ def diff_specs(a: dict, b: dict) -> dict:
                 sa, sb = set(xa.get(lvl) or []), set(xb.get(lvl) or [])
                 sa |= {f"-{e}->" for e in (xa.get("edges") or {}).get(lvl) or []}
                 sb |= {f"-{e}->" for e in (xb.get("edges") or {}).get(lvl) or []}
+                sa |= {f"evidence {p['name']}" for p in (xa.get("evidence") or {}).get(lvl) or []}
+                sb |= {f"evidence {p['name']}" for p in (xb.get("evidence") or {}).get(lvl) or []}
                 out["narrowed"] += [f"profiles.{pr} {lab} requires {x}" for x in sorted(sb - sa)]
                 out["loosened"] += [f"profiles.{pr} {lab} no longer requires {x}" for x in sorted(sa - sb)]
+            # applies_by: a record that states no value of such a property has unknown applicability, never a met case
+            ba, bb = set(xa.get("applies_by") or []), set(xb.get("applies_by") or [])
+            out["narrowed"] += [f"profiles.{pr} {lab} applies its cases by {x} (a record that states none is unknown)"
+                                for x in sorted(bb - ba)]
+            out["loosened"] += [f"profiles.{pr} {lab} no longer applies its cases by {x}" for x in sorted(ba - bb)]
             ua, ub = xa.get("unless") or {}, xb.get("unless") or {}
             for k in sorted(set(ua) | set(ub)):
                 more, less = set(ub.get(k) or []) - set(ua.get(k) or []), set(ua.get(k) or []) - set(ub.get(k) or [])
@@ -189,6 +196,7 @@ def _cases(c: dict) -> dict[str, tuple[set, dict]]:
         cond = "; ".join(f"{k} {op} [{', '.join(vals)}]" for k, m in sorted(x["if"].items()) for op, vals in m.items())
         req, vals = out.setdefault(cond, (set(), {}))
         req |= set(x.get("required") or []) | {f"-{e}->" for e in (x.get("edges") or {}).get("required") or []}
+        req |= {f"evidence {p['name']}" for p in (x.get("evidence") or {}).get("required") or []}
         vals.update(x.get("values") or {})
     return out
 
