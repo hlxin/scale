@@ -1,0 +1,3633 @@
+{
+ "name": "catalysis",
+ "version": "2026-10-14",
+ "description": "Catalysis topic vocabulary for Topic A/B/C and Related topics. Facets: reaction (what is catalyzed), material (catalyst class), method (characterization/computation/analysis), system (device, reactor, application). Synonyms: acronyms (all caps/digits, <= 7 chars) match case-sensitively with an optional plural s; phrases match case-insensitively, spaces and hyphens interchangeable; 're:' marks a regular expression. weight < 1 marks broad terms so they rank below specific ones.",
+ "facets": {
+  "reaction": "what is catalyzed",
+  "material": "catalyst class",
+  "method": "how it is studied",
+  "system": "device, reactor or application"
+ },
+ "terms": [
+  {
+   "id": "co2rr",
+   "label": "CO2RR",
+   "name": "CO2 electroreduction",
+   "facet": "reaction",
+   "synonyms": [
+    "CO2RR",
+    "eCO2RR",
+    "CO2ERR",
+    "CO2 reduction reaction",
+    "electrochemical CO2 reduction",
+    "electrocatalytic CO2 reduction",
+    "CO2 electroreduction",
+    "electroreduction of CO2",
+    "electrochemical reduction of CO2",
+    "electrocatalytic reduction of CO2",
+    "electrochemical reduction of carbon dioxide",
+    "carbon dioxide electroreduction",
+    "electroreduction of carbon dioxide",
+    "CO2 electrolysis",
+    "electrochemical CO2 conversion",
+    "CO2 electrocatalysis",
+    "CO2-to-CO electrolysis",
+    "re:\\bCO2[\\s-]*to[\\s-]*(?i:C2\\+|multicarbon|multi-carbon|ethylene|formate|C1|C2)(?![A-Za-z0-9])"
+   ],
+   "related": [
+    "corr",
+    "her",
+    "cn-coupling",
+    "photo-co2rr",
+    "ccu",
+    "electrolyzer",
+    "copper"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "corr",
+   "label": "CORR",
+   "name": "CO electroreduction",
+   "facet": "reaction",
+   "synonyms": [
+    "CORR",
+    "CO reduction reaction",
+    "CO electroreduction",
+    "electroreduction of CO",
+    "electrochemical CO reduction",
+    "electrochemical reduction of CO",
+    "carbon monoxide electroreduction",
+    "electroreduction of carbon monoxide",
+    "CO electrolysis"
+   ],
+   "related": [
+    "co2rr",
+    "her",
+    "copper"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "her",
+   "label": "HER",
+   "name": "Hydrogen evolution reaction",
+   "facet": "reaction",
+   "synonyms": [
+    "HER",
+    "hydrogen evolution reaction",
+    "hydrogen evolution",
+    "electrocatalytic hydrogen production",
+    "electrochemical hydrogen production",
+    "H2 evolution reaction",
+    "electrocatalytic H2 evolution"
+   ],
+   "related": [
+    "hor",
+    "oer",
+    "water-electrolysis",
+    "photo-h2"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "hor",
+   "label": "HOR",
+   "name": "Hydrogen oxidation reaction",
+   "facet": "reaction",
+   "synonyms": [
+    "HOR",
+    "hydrogen oxidation reaction",
+    "hydrogen oxidation",
+    "H2 oxidation reaction"
+   ],
+   "related": [
+    "her",
+    "fuel-cell"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "oer",
+   "label": "OER",
+   "name": "Oxygen evolution reaction",
+   "facet": "reaction",
+   "synonyms": [
+    "OER",
+    "oxygen evolution reaction",
+    "oxygen evolution",
+    "electrocatalytic water oxidation",
+    "electrochemical water oxidation",
+    "water oxidation catalyst",
+    "anodic water oxidation"
+   ],
+   "related": [
+    "orr",
+    "her",
+    "water-electrolysis",
+    "ldh",
+    "seawater"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "orr",
+   "label": "ORR",
+   "name": "Oxygen reduction reaction",
+   "facet": "reaction",
+   "synonyms": [
+    "ORR",
+    "oxygen reduction reaction",
+    "oxygen reduction",
+    "electrocatalytic O2 reduction",
+    "O2 reduction reaction",
+    "four-electron oxygen reduction"
+   ],
+   "related": [
+    "oer",
+    "fuel-cell",
+    "h2o2-electro",
+    "metal-air"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "h2o2-electro",
+   "label": "H2O2 electrosynthesis",
+   "name": "Two-electron ORR / H2O2 electrosynthesis",
+   "facet": "reaction",
+   "synonyms": [
+    "H2O2 electrosynthesis",
+    "electrosynthesis of H2O2",
+    "electrochemical H2O2 production",
+    "electrochemical H2O2 synthesis",
+    "electrosynthesis of hydrogen peroxide",
+    "hydrogen peroxide electrosynthesis",
+    "electrochemical hydrogen peroxide production",
+    "two-electron oxygen reduction",
+    "two-electron ORR",
+    "2e- ORR",
+    "2e ORR",
+    "re:\\b2\\s*e[\\-−]?\\s*ORR\\b",
+    "two-electron water oxidation"
+   ],
+   "related": [
+    "orr",
+    "photo-h2o2",
+    "oer"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "nrr",
+   "label": "NRR",
+   "name": "N2 electroreduction",
+   "facet": "reaction",
+   "synonyms": [
+    "NRR",
+    "eNRR",
+    "nitrogen reduction reaction",
+    "N2 reduction reaction",
+    "electrochemical nitrogen reduction",
+    "electrocatalytic nitrogen reduction",
+    "electrochemical N2 reduction",
+    "electrocatalytic N2 reduction",
+    "N2 electroreduction",
+    "nitrogen electroreduction",
+    "electrochemical ammonia synthesis",
+    "electrocatalytic ammonia synthesis",
+    "electrosynthesis of ammonia",
+    "ammonia electrosynthesis",
+    "electrochemical nitrogen fixation"
+   ],
+   "related": [
+    "li-nrr",
+    "no3rr",
+    "norr",
+    "nh3-synthesis",
+    "photo-n2",
+    "isotope",
+    "n-oxidation"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "li-nrr",
+   "label": "Li-mediated NRR",
+   "name": "Lithium-mediated nitrogen reduction",
+   "facet": "reaction",
+   "synonyms": [
+    "lithium-mediated nitrogen reduction",
+    "lithium-mediated ammonia synthesis",
+    "lithium-mediated ammonia",
+    "Li-mediated nitrogen reduction",
+    "Li-mediated ammonia synthesis",
+    "Li-NRR",
+    "lithium-mediated N2 reduction"
+   ],
+   "related": [
+    "nrr"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "no3rr",
+   "label": "NO3RR",
+   "name": "Nitrate electroreduction",
+   "facet": "reaction",
+   "synonyms": [
+    "NO3RR",
+    "NO3-RR",
+    "NO3−RR",
+    "NitRR",
+    "nitrate reduction reaction",
+    "electrochemical nitrate reduction",
+    "electrocatalytic nitrate reduction",
+    "nitrate electroreduction",
+    "electroreduction of nitrate",
+    "electrochemical reduction of nitrate",
+    "electrocatalytic reduction of nitrate",
+    "nitrate-to-ammonia",
+    "nitrate to ammonia",
+    "nitrate reduction",
+    "reduction of nitrate",
+    "nitrate conversion",
+    "conversion of nitrate",
+    "nitrate electrolysis",
+    "nitrate-to-NH3",
+    "nitrate to NH3",
+    "NO3 to NH3",
+    "NO3-to-NH3"
+   ],
+   "related": [
+    "no2rr",
+    "norr",
+    "nrr",
+    "cn-coupling",
+    "remediation"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "no2rr",
+   "label": "NO2RR",
+   "name": "Nitrite electroreduction",
+   "facet": "reaction",
+   "synonyms": [
+    "NO2RR",
+    "NO2-RR",
+    "NO2−RR",
+    "nitrite reduction reaction",
+    "electrochemical nitrite reduction",
+    "electrocatalytic nitrite reduction",
+    "nitrite electroreduction",
+    "electroreduction of nitrite",
+    "nitrite reduction",
+    "reduction of nitrite"
+   ],
+   "related": [
+    "no3rr",
+    "norr"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "norr",
+   "label": "NORR",
+   "name": "NO electroreduction",
+   "facet": "reaction",
+   "synonyms": [
+    "NORR",
+    "NO reduction reaction",
+    "nitric oxide electroreduction",
+    "electrochemical NO reduction",
+    "electrocatalytic NO reduction",
+    "electroreduction of nitric oxide",
+    "NO electroreduction"
+   ],
+   "related": [
+    "no3rr",
+    "nrr",
+    "emission-control"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "n-oxidation",
+   "label": "N2 oxidation",
+   "name": "Electrochemical nitrogen oxidation",
+   "facet": "reaction",
+   "synonyms": [
+    "nitrogen oxidation reaction",
+    "electrochemical nitrogen oxidation",
+    "electrocatalytic nitrogen oxidation",
+    "N2 oxidation reaction",
+    "N2 electrooxidation",
+    "nitrogen electrooxidation"
+   ],
+   "related": [
+    "nrr",
+    "plasma"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "cn-coupling",
+   "label": "C-N coupling",
+   "name": "Electrocatalytic C-N coupling (urea, amides, amines)",
+   "facet": "reaction",
+   "synonyms": [
+    "C-N coupling",
+    "C–N coupling",
+    "C-N bond formation",
+    "urea electrosynthesis",
+    "electrosynthesis of urea",
+    "electrochemical urea synthesis",
+    "electrocatalytic urea synthesis",
+    "electrocatalytic urea production",
+    "co-reduction of CO2 and nitrate",
+    "coreduction of CO2 and nitrate",
+    "co-electrolysis of CO2 and nitrate",
+    "electrocatalytic C-N coupling",
+    "electrochemical C-N coupling",
+    "amide electrosynthesis",
+    "electrosynthesis of amides"
+   ],
+   "related": [
+    "co2rr",
+    "no3rr",
+    "nrr",
+    "no2rr"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "aor",
+   "label": "Ammonia oxidation",
+   "name": "Ammonia electro-oxidation",
+   "facet": "reaction",
+   "synonyms": [
+    "ammonia oxidation reaction",
+    "electrochemical ammonia oxidation",
+    "electrocatalytic ammonia oxidation",
+    "ammonia electrooxidation",
+    "ammonia electro-oxidation",
+    "electro-oxidation of ammonia"
+   ],
+   "related": [
+    "nrr",
+    "fuel-cell",
+    "nh3-decomp"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "uor",
+   "label": "UOR",
+   "name": "Urea oxidation reaction",
+   "facet": "reaction",
+   "synonyms": [
+    "UOR",
+    "urea oxidation reaction",
+    "urea electrooxidation",
+    "urea electro-oxidation",
+    "electrochemical urea oxidation",
+    "electrocatalytic urea oxidation"
+   ],
+   "related": [
+    "oer",
+    "her",
+    "biomass-electro"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "mor",
+   "label": "Methanol oxidation",
+   "name": "Methanol electro-oxidation",
+   "facet": "reaction",
+   "synonyms": [
+    "methanol oxidation reaction",
+    "methanol electrooxidation",
+    "methanol electro-oxidation",
+    "electrocatalytic methanol oxidation",
+    "electrochemical methanol oxidation",
+    "electrooxidation of methanol"
+   ],
+   "related": [
+    "fuel-cell",
+    "eor",
+    "faor"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "eor",
+   "label": "Ethanol oxidation",
+   "name": "Ethanol electro-oxidation",
+   "facet": "reaction",
+   "synonyms": [
+    "ethanol oxidation reaction",
+    "ethanol electrooxidation",
+    "ethanol electro-oxidation",
+    "electrocatalytic ethanol oxidation",
+    "electrooxidation of ethanol"
+   ],
+   "related": [
+    "mor",
+    "fuel-cell"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "faor",
+   "label": "FAOR",
+   "name": "Formic acid / formate electro-oxidation",
+   "facet": "reaction",
+   "synonyms": [
+    "FAOR",
+    "formic acid oxidation reaction",
+    "formic acid electrooxidation",
+    "formic acid electro-oxidation",
+    "electrooxidation of formic acid",
+    "formate oxidation reaction",
+    "formate electrooxidation"
+   ],
+   "related": [
+    "mor",
+    "fuel-cell",
+    "h2-carriers"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "biomass-electro",
+   "label": "Biomass electro-oxidation",
+   "name": "Electro-oxidation of biomass platform molecules (HMF, glycerol, glucose)",
+   "facet": "reaction",
+   "synonyms": [
+    "HMF oxidation",
+    "HMFOR",
+    "5-hydroxymethylfurfural oxidation",
+    "electrooxidation of 5-hydroxymethylfurfural",
+    "electrochemical oxidation of 5-hydroxymethylfurfural",
+    "glycerol oxidation reaction",
+    "glycerol electrooxidation",
+    "glycerol electro-oxidation",
+    "electrocatalytic glycerol oxidation",
+    "glucose electrooxidation",
+    "electrocatalytic biomass valorization",
+    "electrochemical biomass valorization",
+    "electrocatalytic oxidation of biomass",
+    "hybrid water electrolysis",
+    "alcohol electrooxidation",
+    "electrocatalytic alcohol oxidation"
+   ],
+   "related": [
+    "oer",
+    "her",
+    "uor",
+    "biomass",
+    "electrosynthesis"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "ech",
+   "label": "Electrocatalytic hydrogenation",
+   "name": "Electrocatalytic / electrochemical hydrogenation",
+   "facet": "reaction",
+   "synonyms": [
+    "electrocatalytic hydrogenation",
+    "electrochemical hydrogenation",
+    "electrohydrogenation",
+    "electrocatalytic semihydrogenation",
+    "electrochemical semihydrogenation",
+    "electroreduction of nitroarenes",
+    "electrocatalytic reduction of furfural"
+   ],
+   "related": [
+    "electrosynthesis",
+    "biomass",
+    "hydrogenation"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "electrosynthesis",
+   "label": "Organic electrosynthesis",
+   "name": "Organic electrosynthesis and paired electrolysis",
+   "facet": "reaction",
+   "synonyms": [
+    "organic electrosynthesis",
+    "electroorganic synthesis",
+    "electro-organic synthesis",
+    "electrochemical organic synthesis",
+    "paired electrolysis",
+    "paired electrosynthesis",
+    "electrochemical oxidation of alcohols",
+    "electrochemical epoxidation"
+   ],
+   "related": [
+    "biomass-electro",
+    "ech",
+    "cross-coupling"
+   ],
+   "weight": 0.8
+  },
+  {
+   "id": "cer",
+   "label": "CER",
+   "name": "Chlorine evolution reaction",
+   "facet": "reaction",
+   "synonyms": [
+    "CER",
+    "chlorine evolution reaction",
+    "chlorine evolution",
+    "chlor-alkali",
+    "chloralkali"
+   ],
+   "related": [
+    "oer",
+    "seawater"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "seawater",
+   "label": "Seawater electrolysis",
+   "name": "Seawater / saline water electrolysis",
+   "facet": "reaction",
+   "synonyms": [
+    "seawater electrolysis",
+    "seawater splitting",
+    "direct seawater electrolysis",
+    "saline water electrolysis",
+    "seawater oxidation",
+    "alkaline seawater",
+    "natural seawater"
+   ],
+   "related": [
+    "oer",
+    "her",
+    "cer",
+    "water-electrolysis"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "water-electrolysis",
+   "label": "Water electrolysis",
+   "name": "Water electrolysis / overall water splitting",
+   "facet": "reaction",
+   "synonyms": [
+    "water electrolysis",
+    "overall water splitting",
+    "electrochemical water splitting",
+    "electrocatalytic water splitting",
+    "water electrolyzer",
+    "water electrolyser",
+    "PEM water electrolysis",
+    "AEM water electrolysis",
+    "alkaline water electrolysis",
+    "anion exchange membrane water electrolysis",
+    "proton exchange membrane water electrolysis",
+    "PEMWE",
+    "AEMWE",
+    "green hydrogen production"
+   ],
+   "related": [
+    "her",
+    "oer",
+    "electrolyzer",
+    "seawater",
+    "h2-production"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "methane-electro",
+   "label": "Electrochemical methane conversion",
+   "name": "Electrochemical methane oxidation / activation",
+   "facet": "reaction",
+   "synonyms": [
+    "electrochemical methane oxidation",
+    "electrocatalytic methane oxidation",
+    "methane electrooxidation",
+    "methane electro-oxidation",
+    "electrochemical methane activation",
+    "electrochemical methane conversion",
+    "electrocatalytic methane conversion"
+   ],
+   "related": [
+    "methane-oxidation",
+    "sofc-soec"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "metal-air",
+   "label": "Metal-air & metal-CO2 batteries",
+   "name": "Metal-air and metal-CO2 battery electrocatalysis",
+   "facet": "system",
+   "synonyms": [
+    "zinc-air battery",
+    "zinc-air batteries",
+    "Zn-air battery",
+    "Zn-air batteries",
+    "rechargeable zinc-air",
+    "Li-O2 battery",
+    "Li-O2 batteries",
+    "lithium-oxygen battery",
+    "lithium-air battery",
+    "metal-air battery",
+    "metal-air batteries",
+    "Li-CO2 battery",
+    "Li-CO2 batteries",
+    "lithium-carbon dioxide battery",
+    "Zn-CO2 battery",
+    "Zn-CO2 batteries",
+    "Na-CO2 battery",
+    "metal-CO2 battery",
+    "bifunctional oxygen electrocatalyst"
+   ],
+   "related": [
+    "orr",
+    "oer",
+    "co2rr"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "li-s",
+   "label": "Li-S electrocatalysis",
+   "name": "Sulfur redox electrocatalysis in metal-sulfur batteries",
+   "facet": "system",
+   "synonyms": [
+    "lithium-sulfur battery",
+    "lithium-sulfur batteries",
+    "Li-S battery",
+    "Li-S batteries",
+    "sulfur reduction reaction",
+    "polysulfide conversion",
+    "polysulfide redox",
+    "sulfur redox kinetics",
+    "sodium-sulfur battery"
+   ],
+   "related": [
+    "metal-air"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "fuel-cell",
+   "label": "Fuel cells",
+   "name": "Low-temperature fuel cells (PEMFC, AEMFC, DMFC)",
+   "facet": "system",
+   "synonyms": [
+    "fuel cell",
+    "fuel cells",
+    "PEMFC",
+    "PEMFCs",
+    "AEMFC",
+    "AEMFCs",
+    "DMFC",
+    "proton exchange membrane fuel cell",
+    "polymer electrolyte membrane fuel cell",
+    "anion exchange membrane fuel cell",
+    "direct methanol fuel cell",
+    "direct formic acid fuel cell",
+    "direct ammonia fuel cell"
+   ],
+   "related": [
+    "orr",
+    "hor",
+    "mor",
+    "sofc-soec"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "sofc-soec",
+   "label": "SOEC/SOFC",
+   "name": "Solid-oxide electrolysis and fuel cells",
+   "facet": "system",
+   "synonyms": [
+    "solid oxide electrolysis cell",
+    "solid oxide electrolysis cells",
+    "solid oxide electrolyzer",
+    "SOEC",
+    "SOECs",
+    "solid oxide fuel cell",
+    "solid oxide fuel cells",
+    "SOFC",
+    "SOFCs",
+    "protonic ceramic",
+    "proton-conducting ceramic",
+    "high-temperature electrolysis",
+    "high-temperature co-electrolysis",
+    "co-electrolysis of CO2 and H2O",
+    "co-electrolysis of H2O and CO2",
+    "solid oxide cell"
+   ],
+   "related": [
+    "co2rr",
+    "perovskite",
+    "water-electrolysis",
+    "methane-electro"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "electrolyzer",
+   "label": "Electrolyzer engineering",
+   "name": "Electrolyzers, gas-diffusion electrodes and membranes",
+   "facet": "system",
+   "synonyms": [
+    "gas diffusion electrode",
+    "gas-diffusion electrode",
+    "GDE",
+    "GDEs",
+    "membrane electrode assembly",
+    "membrane-electrode assembly",
+    "flow cell",
+    "flow electrolyzer",
+    "zero-gap",
+    "bipolar membrane",
+    "anion exchange membrane",
+    "electrolyzer stack",
+    "electrolyser",
+    "electrolyzer",
+    "carbonate formation",
+    "carbonate crossover",
+    "flooding",
+    "industrial current density",
+    "ampere-level"
+   ],
+   "related": [
+    "co2rr",
+    "water-electrolysis",
+    "reactor-process",
+    "microenvironment"
+   ],
+   "weight": 0.8
+  },
+  {
+   "id": "pulsed",
+   "label": "Pulsed electrolysis",
+   "name": "Pulsed and dynamic electrochemical operation",
+   "facet": "system",
+   "synonyms": [
+    "pulsed electrolysis",
+    "pulsed electroreduction",
+    "pulsed potential",
+    "pulse electrolysis",
+    "potential pulses",
+    "dynamic operation",
+    "pulsed CO2 electrolysis",
+    "alternating potential"
+   ],
+   "related": [
+    "co2rr",
+    "stability"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "co2-conversion",
+   "label": "CO2 conversion",
+   "name": "CO2 reduction / conversion (route not stated)",
+   "facet": "reaction",
+   "synonyms": [
+    "CO2 reduction",
+    "carbon dioxide reduction",
+    "reduction of CO2",
+    "reduction of carbon dioxide",
+    "CO2 conversion",
+    "conversion of CO2",
+    "carbon dioxide conversion",
+    "conversion of carbon dioxide",
+    "CO2 transformation",
+    "CO2 activation",
+    "CO2 fixation",
+    "CO2 upcycling",
+    "CO2 recycling"
+   ],
+   "related": [
+    "co2rr",
+    "photo-co2rr",
+    "co2-hydrogenation",
+    "ccu"
+   ],
+   "weight": 0.5
+  },
+  {
+   "id": "photo-co2rr",
+   "label": "Photocatalytic CO2 reduction",
+   "name": "Photocatalytic CO2 reduction",
+   "facet": "reaction",
+   "synonyms": [
+    "photocatalytic CO2 reduction",
+    "photocatalytic reduction of CO2",
+    "CO2 photoreduction",
+    "photoreduction of CO2",
+    "photocatalytic CO2 conversion",
+    "photocatalytic conversion of CO2",
+    "CO2 photocatalysis",
+    "photo-driven CO2 reduction",
+    "light-driven CO2 reduction",
+    "visible-light-driven CO2 reduction",
+    "photocatalytic reduction of carbon dioxide",
+    "photoreduction of carbon dioxide",
+    "carbon dioxide photoreduction",
+    "photocatalytic carbon dioxide reduction",
+    "CO2 photoconversion",
+    "photocatalytic CO2RR",
+    "artificial photosynthesis",
+    "solar fuels",
+    "solar fuel"
+   ],
+   "related": [
+    "co2rr",
+    "pec",
+    "photothermal",
+    "g-c3n4"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "photo-h2",
+   "label": "Photocatalytic H2 / water splitting",
+   "name": "Photocatalytic water splitting and H2 evolution",
+   "facet": "reaction",
+   "synonyms": [
+    "photocatalytic hydrogen evolution",
+    "photocatalytic H2 evolution",
+    "photocatalytic hydrogen production",
+    "photocatalytic H2 production",
+    "photocatalytic water splitting",
+    "photocatalytic overall water splitting",
+    "solar hydrogen",
+    "solar-to-hydrogen",
+    "light-driven hydrogen evolution",
+    "visible-light-driven hydrogen",
+    "photocatalytic H2 generation",
+    "visible-light-driven water splitting",
+    "light-driven water splitting",
+    "solar water splitting",
+    "photocatalytic water reduction"
+   ],
+   "related": [
+    "her",
+    "pec",
+    "g-c3n4",
+    "water-electrolysis"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "pec",
+   "label": "PEC",
+   "name": "Photoelectrochemical cells and photoelectrodes",
+   "facet": "system",
+   "synonyms": [
+    "photoelectrochemical",
+    "PEC water splitting",
+    "PEC cell",
+    "photoelectrode",
+    "photoelectrodes",
+    "photoanode",
+    "photoanodes",
+    "photocathode",
+    "photocathodes",
+    "photoelectrocatalysis",
+    "photoelectrocatalytic",
+    "photoelectrochemical CO2 reduction",
+    "photoelectrochemical water splitting"
+   ],
+   "related": [
+    "photo-h2",
+    "photo-co2rr",
+    "oer",
+    "her"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "photo-n2",
+   "label": "Photocatalytic N2 fixation",
+   "name": "Photocatalytic nitrogen fixation",
+   "facet": "reaction",
+   "synonyms": [
+    "photocatalytic nitrogen fixation",
+    "photocatalytic N2 fixation",
+    "photocatalytic nitrogen reduction",
+    "photocatalytic N2 reduction",
+    "photocatalytic ammonia synthesis",
+    "photocatalytic ammonia production",
+    "photo-driven nitrogen fixation",
+    "light-driven nitrogen fixation",
+    "photocatalytic NH3"
+   ],
+   "related": [
+    "nrr",
+    "nh3-synthesis"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "photo-h2o2",
+   "label": "Photocatalytic H2O2",
+   "name": "Photocatalytic hydrogen peroxide production",
+   "facet": "reaction",
+   "synonyms": [
+    "photocatalytic H2O2 production",
+    "photocatalytic H2O2 generation",
+    "photocatalytic hydrogen peroxide",
+    "H2O2 photosynthesis",
+    "photosynthesis of H2O2",
+    "photocatalytic production of H2O2",
+    "solar H2O2"
+   ],
+   "related": [
+    "h2o2-electro",
+    "g-c3n4"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "photoredox",
+   "label": "Photoredox catalysis",
+   "name": "Photoredox and photocatalytic organic synthesis",
+   "facet": "reaction",
+   "synonyms": [
+    "photoredox catalysis",
+    "photoredox catalyst",
+    "photoredox-catalyzed",
+    "visible-light photocatalysis",
+    "visible light photoredox",
+    "photocatalytic organic synthesis",
+    "photocatalytic organic transformation",
+    "metallaphotoredox",
+    "photocatalytic C-H"
+   ],
+   "related": [
+    "homogeneous",
+    "cross-coupling",
+    "molecular"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "photothermal",
+   "label": "Photothermal & plasmonic catalysis",
+   "name": "Photothermal and plasmon-driven catalysis",
+   "facet": "reaction",
+   "synonyms": [
+    "photothermal catalysis",
+    "photothermal catalytic",
+    "photo-thermal catalysis",
+    "photothermocatalytic",
+    "plasmonic catalysis",
+    "plasmon-enhanced catalysis",
+    "plasmon-driven",
+    "plasmonic photocatalysis",
+    "hot-electron",
+    "hot electrons",
+    "localized surface plasmon resonance"
+   ],
+   "related": [
+    "photo-co2rr",
+    "co2-hydrogenation"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "aop",
+   "label": "AOPs & degradation",
+   "name": "Advanced oxidation processes and catalytic degradation of pollutants",
+   "facet": "reaction",
+   "synonyms": [
+    "advanced oxidation process",
+    "advanced oxidation processes",
+    "AOP",
+    "AOPs",
+    "photocatalytic degradation",
+    "photodegradation",
+    "catalytic degradation",
+    "Fenton-like",
+    "photo-Fenton",
+    "electro-Fenton",
+    "persulfate activation",
+    "peroxymonosulfate activation",
+    "peroxydisulfate activation",
+    "catalytic ozonation",
+    "pollutant degradation",
+    "antibiotic degradation",
+    "dye degradation"
+   ],
+   "related": [
+    "remediation",
+    "photo-h2o2"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "co2-hydrogenation",
+   "label": "CO2 hydrogenation",
+   "name": "Thermocatalytic CO2 hydrogenation",
+   "facet": "reaction",
+   "synonyms": [
+    "CO2 hydrogenation",
+    "hydrogenation of CO2",
+    "carbon dioxide hydrogenation",
+    "hydrogenation of carbon dioxide",
+    "thermocatalytic CO2 conversion",
+    "thermocatalytic CO2 reduction",
+    "CO2 hydrogenation to hydrocarbons",
+    "CO2 to light olefins",
+    "CO2 hydrogenation to olefins",
+    "CO2 to aromatics",
+    "CO2-FT",
+    "CO2-Fischer-Tropsch",
+    "CO2 hydrogenation to formic acid",
+    "CO2 hydrogenation to formate",
+    "CO2 hydrogenation to ethanol"
+   ],
+   "related": [
+    "co2-methanol",
+    "rwgs",
+    "methanation",
+    "fts",
+    "ccu",
+    "photothermal"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "co2-methanol",
+   "label": "Methanol synthesis",
+   "name": "Methanol synthesis (from CO2 or syngas)",
+   "facet": "reaction",
+   "synonyms": [
+    "methanol synthesis",
+    "CO2 hydrogenation to methanol",
+    "hydrogenation of CO2 to methanol",
+    "CO2-to-methanol",
+    "CO2 to methanol",
+    "methanol synthesis from CO2",
+    "Cu/ZnO/Al2O3",
+    "In2O3 catalyst"
+   ],
+   "related": [
+    "co2-hydrogenation",
+    "rwgs",
+    "mth"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "rwgs",
+   "label": "RWGS",
+   "name": "Reverse water-gas shift",
+   "facet": "reaction",
+   "synonyms": [
+    "reverse water-gas shift",
+    "reverse water gas shift",
+    "RWGS"
+   ],
+   "related": [
+    "wgs",
+    "co2-hydrogenation",
+    "co2-methanol"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "wgs",
+   "label": "WGS",
+   "name": "Water-gas shift",
+   "facet": "reaction",
+   "synonyms": [
+    "water-gas shift",
+    "water gas shift",
+    "WGS",
+    "WGSR",
+    "low-temperature water-gas shift"
+   ],
+   "related": [
+    "rwgs",
+    "reforming",
+    "co-oxidation"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "methanation",
+   "label": "Methanation",
+   "name": "CO and CO2 methanation (Sabatier)",
+   "facet": "reaction",
+   "synonyms": [
+    "methanation",
+    "Sabatier reaction",
+    "Sabatier process",
+    "CO2 methanation",
+    "CO methanation",
+    "methanation of CO2",
+    "power-to-gas",
+    "power-to-methane"
+   ],
+   "related": [
+    "co2-hydrogenation",
+    "rwgs",
+    "plasma"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "fts",
+   "label": "Fischer-Tropsch",
+   "name": "Fischer-Tropsch and syngas conversion",
+   "facet": "reaction",
+   "synonyms": [
+    "Fischer-Tropsch",
+    "Fischer–Tropsch",
+    "FTS",
+    "syngas conversion",
+    "syngas to olefins",
+    "syngas-to-olefins",
+    "OX-ZEO",
+    "Fischer-Tropsch to olefins",
+    "higher alcohol synthesis",
+    "syngas to ethanol"
+   ],
+   "related": [
+    "co2-hydrogenation",
+    "co2-methanol",
+    "wgs"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "nh3-synthesis",
+   "label": "Ammonia synthesis",
+   "name": "Thermocatalytic ammonia synthesis (Haber-Bosch)",
+   "facet": "reaction",
+   "synonyms": [
+    "ammonia synthesis",
+    "Haber-Bosch",
+    "Haber–Bosch",
+    "thermocatalytic ammonia synthesis",
+    "NH3 synthesis",
+    "ammonia synthesis catalyst",
+    "chemical looping ammonia"
+   ],
+   "related": [
+    "nrr",
+    "nh3-decomp",
+    "photo-n2",
+    "plasma"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "nh3-decomp",
+   "label": "Ammonia decomposition",
+   "name": "Ammonia decomposition / cracking for H2",
+   "facet": "reaction",
+   "synonyms": [
+    "ammonia decomposition",
+    "ammonia cracking",
+    "NH3 decomposition",
+    "NH3 cracking",
+    "decomposition of ammonia"
+   ],
+   "related": [
+    "nh3-synthesis",
+    "h2-carriers",
+    "aor"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "reforming",
+   "label": "Methane reforming",
+   "name": "Methane dry/steam reforming",
+   "facet": "reaction",
+   "synonyms": [
+    "dry reforming of methane",
+    "methane dry reforming",
+    "dry reforming",
+    "DRM",
+    "CO2 reforming of methane",
+    "steam methane reforming",
+    "steam reforming of methane",
+    "methane steam reforming",
+    "methane reforming",
+    "bi-reforming",
+    "tri-reforming",
+    "autothermal reforming",
+    "partial oxidation reforming"
+   ],
+   "related": [
+    "wgs",
+    "oxygenate-reforming",
+    "plasma",
+    "h2-production"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "oxygenate-reforming",
+   "label": "Oxygenate reforming",
+   "name": "Steam / aqueous-phase reforming of alcohols and oxygenates",
+   "facet": "reaction",
+   "synonyms": [
+    "methanol steam reforming",
+    "steam reforming of methanol",
+    "ethanol steam reforming",
+    "steam reforming of ethanol",
+    "glycerol reforming",
+    "glycerol steam reforming",
+    "aqueous phase reforming",
+    "aqueous-phase reforming",
+    "steam reforming of bio-oil",
+    "acetic acid steam reforming"
+   ],
+   "related": [
+    "reforming",
+    "h2-production",
+    "biomass"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "methane-oxidation",
+   "label": "Methane partial oxidation",
+   "name": "Direct methane conversion and partial oxidation",
+   "facet": "reaction",
+   "synonyms": [
+    "partial oxidation of methane",
+    "methane partial oxidation",
+    "methane to methanol",
+    "methane-to-methanol",
+    "direct methane conversion",
+    "direct conversion of methane",
+    "selective oxidation of methane",
+    "methane activation",
+    "C-H activation of methane",
+    "methane oxidation to methanol"
+   ],
+   "related": [
+    "ocm",
+    "methane-electro",
+    "zeolite"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "ocm",
+   "label": "Methane coupling",
+   "name": "Oxidative and non-oxidative methane coupling / dehydroaromatization",
+   "facet": "reaction",
+   "synonyms": [
+    "oxidative coupling of methane",
+    "OCM",
+    "non-oxidative coupling of methane",
+    "non-oxidative methane conversion",
+    "methane dehydroaromatization",
+    "methane dehydro-aromatization",
+    "methane aromatization"
+   ],
+   "related": [
+    "methane-oxidation",
+    "zeolite"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "dehydrogenation",
+   "label": "Alkane dehydrogenation",
+   "name": "Alkane (oxidative) dehydrogenation",
+   "facet": "reaction",
+   "synonyms": [
+    "propane dehydrogenation",
+    "PDH",
+    "alkane dehydrogenation",
+    "ethane dehydrogenation",
+    "isobutane dehydrogenation",
+    "dehydrogenation of propane",
+    "oxidative dehydrogenation",
+    "ODH",
+    "CO2-assisted dehydrogenation",
+    "CO2-oxidative dehydrogenation",
+    "light alkane dehydrogenation"
+   ],
+   "related": [
+    "selective-oxidation",
+    "alloy"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "hydrogenation",
+   "label": "Selective hydrogenation",
+   "name": "Selective / chemoselective hydrogenation",
+   "facet": "reaction",
+   "synonyms": [
+    "selective hydrogenation",
+    "semihydrogenation",
+    "semi-hydrogenation",
+    "chemoselective hydrogenation",
+    "acetylene hydrogenation",
+    "hydrogenation of acetylene",
+    "alkyne hydrogenation",
+    "hydrogenation of alkynes",
+    "nitroarene hydrogenation",
+    "hydrogenation of nitroarenes",
+    "hydrogenation of nitrobenzene",
+    "hydrogenation of aldehydes",
+    "transfer hydrogenation",
+    "hydrogenation catalyst"
+   ],
+   "related": [
+    "ech",
+    "biomass",
+    "sac",
+    "alloy"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "selective-oxidation",
+   "label": "Selective oxidation",
+   "name": "Selective (aerobic) oxidation and epoxidation",
+   "facet": "reaction",
+   "synonyms": [
+    "selective oxidation",
+    "aerobic oxidation",
+    "catalytic oxidation of alcohols",
+    "alcohol oxidation",
+    "benzyl alcohol oxidation",
+    "oxidation of benzyl alcohol",
+    "epoxidation",
+    "propylene epoxidation",
+    "ethylene epoxidation",
+    "propene epoxidation",
+    "partial oxidation",
+    "oxidative esterification",
+    "direct synthesis of H2O2",
+    "direct H2O2 synthesis",
+    "catalytic oxidation",
+    "oxidation catalyst",
+    "oxidation catalysts",
+    "C-H oxidation",
+    "hydroxylation",
+    "Wacker oxidation",
+    "Baeyer-Villiger",
+    "sulfoxidation"
+   ],
+   "related": [
+    "dehydrogenation",
+    "co-oxidation",
+    "biomass"
+   ],
+   "weight": 0.8
+  },
+  {
+   "id": "co-oxidation",
+   "label": "CO oxidation",
+   "name": "CO oxidation and PROX",
+   "facet": "reaction",
+   "synonyms": [
+    "CO oxidation",
+    "carbon monoxide oxidation",
+    "oxidation of CO",
+    "PROX",
+    "preferential oxidation of CO",
+    "preferential CO oxidation"
+   ],
+   "related": [
+    "emission-control",
+    "wgs",
+    "sac"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "emission-control",
+   "label": "Emission control",
+   "name": "Emission control and catalytic combustion",
+   "facet": "reaction",
+   "synonyms": [
+    "three-way catalyst",
+    "three-way catalysts",
+    "TWC",
+    "selective catalytic reduction",
+    "NH3-SCR",
+    "SCR of NOx",
+    "deNOx",
+    "NOx reduction",
+    "NOx storage",
+    "lean NOx trap",
+    "diesel oxidation catalyst",
+    "soot oxidation",
+    "soot combustion",
+    "VOC oxidation",
+    "VOCs oxidation",
+    "catalytic combustion",
+    "methane combustion",
+    "catalytic oxidation of methane",
+    "N2O decomposition",
+    "automotive catalyst",
+    "exhaust aftertreatment"
+   ],
+   "related": [
+    "co-oxidation",
+    "norr",
+    "remediation"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "biomass",
+   "label": "Biomass conversion",
+   "name": "Catalytic biomass conversion and upgrading",
+   "facet": "reaction",
+   "synonyms": [
+    "biomass conversion",
+    "biomass valorization",
+    "biomass upgrading",
+    "hydrodeoxygenation",
+    "HDO",
+    "lignin depolymerization",
+    "lignin valorization",
+    "lignin conversion",
+    "cellulose conversion",
+    "cellulose hydrolysis",
+    "furfural hydrogenation",
+    "furfural conversion",
+    "levulinic acid",
+    "gamma-valerolactone",
+    "bio-oil upgrading",
+    "catalytic fast pyrolysis",
+    "biorefinery",
+    "lignocellulose",
+    "platform chemicals",
+    "furfural",
+    "biofuel",
+    "biofuels",
+    "bio-oil",
+    "glycerol conversion",
+    "sugar conversion"
+   ],
+   "related": [
+    "biomass-electro",
+    "hydrogenation",
+    "oxygenate-reforming",
+    "ech"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "plastics",
+   "label": "Plastic upcycling",
+   "name": "Catalytic plastic upcycling and chemical recycling",
+   "facet": "reaction",
+   "synonyms": [
+    "plastic upcycling",
+    "plastics upcycling",
+    "upcycling of plastic",
+    "plastic waste",
+    "chemical recycling",
+    "polyolefin hydrogenolysis",
+    "hydrogenolysis of polyethylene",
+    "polyethylene hydrogenolysis",
+    "hydrocracking of polyethylene",
+    "plastic depolymerization",
+    "PET depolymerization",
+    "PET glycolysis",
+    "polymer upcycling",
+    "waste plastics",
+    "polystyrene depolymerization",
+    "photoreforming of plastics",
+    "plastic photoreforming"
+   ],
+   "related": [
+    "refining",
+    "biomass-electro"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "refining",
+   "label": "Refining & hydroprocessing",
+   "name": "Petroleum refining, cracking and hydroprocessing",
+   "facet": "reaction",
+   "synonyms": [
+    "hydrodesulfurization",
+    "HDS",
+    "hydrodenitrogenation",
+    "HDN",
+    "hydrotreating",
+    "hydrocracking",
+    "fluid catalytic cracking",
+    "catalytic cracking",
+    "naphtha reforming",
+    "catalytic reforming",
+    "alkane isomerization",
+    "hydroisomerization",
+    "alkylation",
+    "heavy oil upgrading",
+    "hydroprocessing"
+   ],
+   "related": [
+    "zeolite",
+    "plastics",
+    "biomass"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "mth",
+   "label": "Methanol-to-hydrocarbons",
+   "name": "Methanol/DME to olefins, gasoline and aromatics",
+   "facet": "reaction",
+   "synonyms": [
+    "methanol-to-olefins",
+    "methanol to olefins",
+    "methanol-to-hydrocarbons",
+    "methanol to hydrocarbons",
+    "methanol-to-gasoline",
+    "methanol to gasoline",
+    "methanol-to-aromatics",
+    "methanol to aromatics",
+    "dimethyl ether to olefins",
+    "DME carbonylation",
+    "hydrocarbon pool"
+   ],
+   "related": [
+    "zeolite",
+    "co2-methanol"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "hydroformylation",
+   "label": "Hydroformylation & carbonylation",
+   "name": "Hydroformylation and carbonylation",
+   "facet": "reaction",
+   "synonyms": [
+    "hydroformylation",
+    "carbonylation",
+    "oxo synthesis",
+    "methanol carbonylation",
+    "alkoxycarbonylation",
+    "hydroaminomethylation"
+   ],
+   "related": [
+    "homogeneous",
+    "sac"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "polymerization",
+   "label": "Polymerization & metathesis",
+   "name": "Olefin polymerization, oligomerization and metathesis",
+   "facet": "reaction",
+   "synonyms": [
+    "olefin metathesis",
+    "alkene metathesis",
+    "metathesis catalyst",
+    "olefin polymerization",
+    "Ziegler-Natta",
+    "Ziegler–Natta",
+    "metallocene catalyst",
+    "ethylene oligomerization",
+    "ethylene polymerization",
+    "ring-opening polymerization",
+    "polymerization catalyst",
+    "polymerization",
+    "polymerisation",
+    "copolymerization",
+    "ring-opening metathesis polymerization",
+    "ROMP",
+    "atom transfer radical polymerization",
+    "ATRP",
+    "controlled radical polymerization",
+    "living polymerization",
+    "polycondensation",
+    "curing catalyst",
+    "polymer synthesis"
+   ],
+   "related": [
+    "homogeneous"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "cross-coupling",
+   "label": "Cross-coupling & C-H activation",
+   "name": "Cross-coupling and C-H functionalization",
+   "facet": "reaction",
+   "synonyms": [
+    "cross-coupling",
+    "cross coupling",
+    "Suzuki coupling",
+    "Suzuki-Miyaura",
+    "Suzuki–Miyaura",
+    "Heck reaction",
+    "Sonogashira",
+    "Buchwald-Hartwig",
+    "Buchwald–Hartwig",
+    "C-H activation",
+    "C–H activation",
+    "C-H functionalization",
+    "C–H functionalization",
+    "C-H bond activation",
+    "coupling reaction",
+    "coupling reactions",
+    "Negishi",
+    "Stille coupling",
+    "Kumada",
+    "Hiyama",
+    "Ullmann",
+    "Chan-Lam",
+    "C-C coupling",
+    "C-C bond formation",
+    "carbon-carbon bond formation",
+    "borylation",
+    "C-H amidation",
+    "C-H amination",
+    "C-H arylation",
+    "C-H alkylation",
+    "C-H borylation"
+   ],
+   "related": [
+    "homogeneous",
+    "photoredox",
+    "sac"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "asymmetric",
+   "label": "Asymmetric catalysis",
+   "name": "Asymmetric / enantioselective catalysis",
+   "facet": "reaction",
+   "synonyms": [
+    "asymmetric catalysis",
+    "enantioselective",
+    "asymmetric hydrogenation",
+    "chiral catalyst",
+    "asymmetric synthesis",
+    "stereoselective catalysis"
+   ],
+   "related": [
+    "homogeneous",
+    "organocatalysis",
+    "biocatalysis"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "organocatalysis",
+   "label": "Organocatalysis",
+   "name": "Organocatalysis",
+   "facet": "reaction",
+   "synonyms": [
+    "organocatalysis",
+    "organocatalyst",
+    "organocatalytic",
+    "N-heterocyclic carbene catalysis",
+    "frustrated Lewis pair"
+   ],
+   "related": [
+    "asymmetric",
+    "homogeneous"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "biocatalysis",
+   "label": "Biocatalysis",
+   "name": "Enzymatic and whole-cell biocatalysis",
+   "facet": "reaction",
+   "synonyms": [
+    "biocatalysis",
+    "biocatalyst",
+    "biocatalytic",
+    "enzyme catalysis",
+    "enzymatic catalysis",
+    "enzymatic conversion",
+    "enzyme engineering",
+    "directed evolution",
+    "whole-cell catalysis",
+    "enzymatic synthesis",
+    "enzymatic hydrolysis",
+    "enzymatic reaction",
+    "enzymatic reactions",
+    "enzyme-catalyzed",
+    "lipase-catalyzed",
+    "immobilized enzyme",
+    "immobilized enzymes",
+    "enzyme immobilization",
+    "immobilized lipase",
+    "whole-cell biocatalyst",
+    "biotransformation",
+    "biotransformations",
+    "chemoenzymatic",
+    "transaminase",
+    "ketoreductase"
+   ],
+   "related": [
+    "bioelectro",
+    "asymmetric"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "bioelectro",
+   "label": "Bioelectrocatalysis",
+   "name": "Bioelectrocatalysis and microbial electrosynthesis",
+   "facet": "reaction",
+   "synonyms": [
+    "bioelectrocatalysis",
+    "bioelectrochemical",
+    "microbial electrosynthesis",
+    "enzymatic electrocatalysis",
+    "enzymatic electrosynthesis",
+    "microbial fuel cell",
+    "microbial fuel cells",
+    "electromicrobial",
+    "biohybrid",
+    "semi-artificial photosynthesis"
+   ],
+   "related": [
+    "biocatalysis",
+    "co2rr",
+    "fuel-cell"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "h2-carriers",
+   "label": "Hydrogen carriers",
+   "name": "Hydrogen storage and liquid organic hydrogen carriers",
+   "facet": "reaction",
+   "synonyms": [
+    "liquid organic hydrogen carrier",
+    "liquid organic hydrogen carriers",
+    "LOHC",
+    "LOHCs",
+    "formic acid dehydrogenation",
+    "dehydrogenation of formic acid",
+    "formic acid decomposition",
+    "hydrogen storage",
+    "ammonia borane",
+    "hydrogen release",
+    "chemical hydrogen storage",
+    "methylcyclohexane dehydrogenation"
+   ],
+   "related": [
+    "nh3-decomp",
+    "faor",
+    "h2-production"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "ccu",
+   "label": "CO2 capture & utilization",
+   "name": "CO2 capture, integrated capture-conversion and utilization",
+   "facet": "reaction",
+   "synonyms": [
+    "CO2 capture and utilization",
+    "CO2 capture and conversion",
+    "CO2 capture",
+    "carbon capture",
+    "integrated CO2 capture and conversion",
+    "integrated carbon capture and conversion",
+    "reactive capture",
+    "reactive CO2 capture",
+    "dual-function materials",
+    "dual function materials",
+    "carbon capture and utilization",
+    "CCU",
+    "CCUS",
+    "CO2 utilization",
+    "CO2 valorization",
+    "direct air capture",
+    "captured CO2",
+    "amine-captured CO2",
+    "bicarbonate electrolysis",
+    "carbonate electrolysis"
+   ],
+   "related": [
+    "co2rr",
+    "co2-hydrogenation",
+    "methanation"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "plasma",
+   "label": "Plasma catalysis",
+   "name": "Plasma-assisted catalysis",
+   "facet": "reaction",
+   "synonyms": [
+    "plasma catalysis",
+    "plasma-catalysis",
+    "plasma-catalytic",
+    "plasma-assisted catalysis",
+    "plasma-assisted",
+    "non-thermal plasma",
+    "nonthermal plasma",
+    "dielectric barrier discharge",
+    "DBD plasma",
+    "plasma-driven",
+    "gliding arc"
+   ],
+   "related": [
+    "nh3-synthesis",
+    "n-oxidation",
+    "reforming",
+    "methanation"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "electrified-thermal",
+   "label": "Electrified thermocatalysis",
+   "name": "Electrified heating, induction and Joule-heated catalysis",
+   "facet": "reaction",
+   "synonyms": [
+    "Joule heating",
+    "Joule-heated",
+    "induction heating",
+    "inductive heating",
+    "electrified reactor",
+    "electrified heating",
+    "electrothermal catalysis",
+    "resistive heating",
+    "microwave catalysis",
+    "microwave-assisted catalysis",
+    "electric field catalysis",
+    "electric-field-assisted"
+   ],
+   "related": [
+    "reactor-process",
+    "reforming"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "tandem",
+   "label": "Tandem catalysis",
+   "name": "Tandem, cascade and relay catalysis",
+   "facet": "reaction",
+   "synonyms": [
+    "tandem catalysis",
+    "tandem catalyst",
+    "cascade catalysis",
+    "cascade reaction",
+    "tandem electrocatalysis",
+    "tandem electrocatalyst",
+    "relay catalysis",
+    "sequential catalysis"
+   ],
+   "related": [
+    "co2rr",
+    "co2-hydrogenation"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "mechanocatalysis",
+   "label": "Mechanocatalysis",
+   "name": "Mechanochemical catalysis",
+   "facet": "reaction",
+   "synonyms": [
+    "mechanocatalysis",
+    "mechanocatalytic",
+    "mechanochemical catalysis",
+    "mechanochemistry",
+    "ball-milling catalysis"
+   ],
+   "related": [],
+   "weight": 1.0
+  },
+  {
+   "id": "sac",
+   "label": "Single-atom catalysts",
+   "name": "Single-atom and dual-atom catalysts (incl. M-N-C)",
+   "facet": "material",
+   "synonyms": [
+    "single-atom catalyst",
+    "single atom catalyst",
+    "single-atom catalysts",
+    "SAC",
+    "SACs",
+    "single-atom",
+    "single atom",
+    "single metal atom",
+    "single-metal-atom",
+    "atomically dispersed",
+    "atomically-dispersed",
+    "single-site catalyst",
+    "isolated single atoms",
+    "M-N-C",
+    "M–N–C",
+    "metal-nitrogen-carbon",
+    "Fe-N-C",
+    "Fe–N–C",
+    "Co-N-C",
+    "Ni-N-C",
+    "M-N4",
+    "Fe-N4",
+    "Ni-N4",
+    "dual-atom catalyst",
+    "dual-atom catalysts",
+    "diatomic catalyst",
+    "diatomic catalysts",
+    "atom pair",
+    "single-atom alloy",
+    "single atom alloy",
+    "SAA",
+    "re:\\b(?:Fe|Co|Ni|Cu|Mn|Zn|Mo|Ru|Pt|Pd|Ir|Sn|Bi|In|Cr|V|Ti|W|Sb|Ga|Ag|Au)-?N[34](?![A-Za-z0-9])"
+   ],
+   "related": [
+    "carbon",
+    "molecular",
+    "alloy"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "mof",
+   "label": "MOFs",
+   "name": "Metal-organic frameworks",
+   "facet": "material",
+   "synonyms": [
+    "metal-organic framework",
+    "metal-organic frameworks",
+    "metal organic framework",
+    "MOF",
+    "MOFs",
+    "zeolitic imidazolate framework",
+    "ZIF-8",
+    "ZIF-67",
+    "UiO-66",
+    "MIL-101",
+    "MIL-125",
+    "HKUST-1",
+    "coordination polymer",
+    "MOF-derived"
+   ],
+   "related": [
+    "cof",
+    "sac",
+    "carbon"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "cof",
+   "label": "COFs",
+   "name": "Covalent organic frameworks",
+   "facet": "material",
+   "synonyms": [
+    "covalent organic framework",
+    "covalent organic frameworks",
+    "COF",
+    "COFs",
+    "conjugated microporous polymer",
+    "porous organic polymer",
+    "porous organic polymers",
+    "covalent triazine framework"
+   ],
+   "related": [
+    "mof",
+    "molecular",
+    "g-c3n4"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "zeolite",
+   "label": "Zeolites",
+   "name": "Zeolites and zeotypes",
+   "facet": "material",
+   "synonyms": [
+    "zeolite",
+    "zeolites",
+    "ZSM-5",
+    "H-ZSM-5",
+    "SAPO-34",
+    "SSZ-13",
+    "Cu-SSZ-13",
+    "chabazite",
+    "mordenite",
+    "beta zeolite",
+    "zeolite beta",
+    "zeotype",
+    "molecular sieve",
+    "silicoaluminophosphate",
+    "aluminosilicate",
+    "metallosilicate",
+    "zeolite-confined"
+   ],
+   "related": [
+    "mth",
+    "refining",
+    "methane-oxidation",
+    "ocm"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "mxene",
+   "label": "MXenes",
+   "name": "MXenes",
+   "facet": "material",
+   "synonyms": [
+    "MXene",
+    "MXenes",
+    "Ti3C2",
+    "MXene-based",
+    "re:\\b(?:[A-Z][a-z]?\\d?){1,3}[CN]\\d?T[xz]\\b"
+   ],
+   "related": [
+    "2d",
+    "carbide-nitride"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "perovskite",
+   "label": "Perovskites",
+   "name": "Perovskite oxides and related structures",
+   "facet": "material",
+   "synonyms": [
+    "perovskite oxide",
+    "perovskite oxides",
+    "perovskite catalyst",
+    "perovskite-type",
+    "double perovskite",
+    "Ruddlesden-Popper",
+    "Ruddlesden–Popper",
+    "perovskite",
+    "perovskites",
+    "SrTiO3",
+    "LaCoO3",
+    "LaNiO3",
+    "BaCoO3",
+    "brownmillerite",
+    "exsolution",
+    "exsolved nanoparticles"
+   ],
+   "related": [
+    "oer",
+    "sofc-soec",
+    "oxide"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "hea",
+   "label": "High-entropy materials",
+   "name": "High-entropy alloys and oxides",
+   "facet": "material",
+   "synonyms": [
+    "high-entropy alloy",
+    "high entropy alloy",
+    "high-entropy alloys",
+    "HEA",
+    "HEAs",
+    "high-entropy oxide",
+    "high-entropy oxides",
+    "high-entropy",
+    "multi-principal element",
+    "multi-element alloy",
+    "compositionally complex"
+   ],
+   "related": [
+    "alloy",
+    "oxide"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "alloy",
+   "label": "Alloys & intermetallics",
+   "name": "Alloys, intermetallics, bimetallic and core-shell catalysts",
+   "facet": "material",
+   "synonyms": [
+    "intermetallic",
+    "intermetallics",
+    "ordered intermetallic",
+    "bimetallic",
+    "bimetallic catalyst",
+    "alloy catalyst",
+    "alloy catalysts",
+    "alloy nanoparticles",
+    "alloying",
+    "core-shell",
+    "core–shell",
+    "dilute alloy",
+    "trimetallic",
+    "Pt3Ni",
+    "PtCo alloy",
+    "PtNi",
+    "PdCu",
+    "CuAg",
+    "AuCu"
+   ],
+   "related": [
+    "hea",
+    "nanoparticles",
+    "sac",
+    "pgm"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "nanoparticles",
+   "label": "Supported nanoparticles & clusters",
+   "name": "Supported metal nanoparticles, clusters and metal-support interaction",
+   "facet": "material",
+   "synonyms": [
+    "supported metal catalyst",
+    "supported metal catalysts",
+    "metal nanoparticles",
+    "supported nanoparticles",
+    "nanoclusters",
+    "metal clusters",
+    "subnanometer clusters",
+    "sub-nanometer clusters",
+    "cluster catalyst",
+    "metal-support interaction",
+    "metal–support interaction",
+    "strong metal-support interaction",
+    "SMSI",
+    "electronic metal-support interaction",
+    "EMSI",
+    "particle size effect",
+    "size-dependent"
+   ],
+   "related": [
+    "alloy",
+    "oxide",
+    "sac"
+   ],
+   "weight": 0.8
+  },
+  {
+   "id": "oxide",
+   "label": "Metal oxides",
+   "name": "Metal oxide catalysts and supports",
+   "facet": "material",
+   "synonyms": [
+    "metal oxide",
+    "metal oxides",
+    "oxide catalyst",
+    "oxide catalysts",
+    "transition metal oxide",
+    "CeO2",
+    "ceria",
+    "TiO2",
+    "titania",
+    "ZnO",
+    "ZrO2",
+    "zirconia",
+    "In2O3",
+    "Co3O4",
+    "NiO",
+    "MnO2",
+    "MnOx",
+    "IrO2",
+    "RuO2",
+    "Fe2O3",
+    "WO3",
+    "BiVO4",
+    "Ga2O3",
+    "spinel",
+    "spinel oxide",
+    "oxygen vacancies",
+    "oxygen vacancy"
+   ],
+   "related": [
+    "perovskite",
+    "ldh",
+    "nanoparticles",
+    "pgm"
+   ],
+   "weight": 0.7
+  },
+  {
+   "id": "ldh",
+   "label": "Hydroxides & LDH",
+   "name": "Layered double hydroxides, hydroxides and oxyhydroxides",
+   "facet": "material",
+   "synonyms": [
+    "layered double hydroxide",
+    "layered double hydroxides",
+    "LDH",
+    "LDHs",
+    "NiFe LDH",
+    "NiFe-LDH",
+    "NiFe layered double hydroxide",
+    "oxyhydroxide",
+    "oxyhydroxides",
+    "NiOOH",
+    "NiFeOOH",
+    "CoOOH",
+    "FeOOH",
+    "metal hydroxide",
+    "Ni(OH)2"
+   ],
+   "related": [
+    "oer",
+    "oxide",
+    "uor"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "chalcogenide",
+   "label": "Metal chalcogenides",
+   "name": "Metal sulfides, selenides and dichalcogenides",
+   "facet": "material",
+   "synonyms": [
+    "MoS2",
+    "WS2",
+    "MoSe2",
+    "WSe2",
+    "transition metal dichalcogenide",
+    "transition metal dichalcogenides",
+    "TMD",
+    "TMDs",
+    "metal sulfide",
+    "metal sulfides",
+    "metal selenide",
+    "metal selenides",
+    "CoS2",
+    "NiS2",
+    "Ni3S2",
+    "CoSe2",
+    "NiSe2",
+    "Cu2S",
+    "In2S3",
+    "CdS",
+    "ZnIn2S4",
+    "sulfide catalyst",
+    "telluride"
+   ],
+   "related": [
+    "her",
+    "2d",
+    "photo-h2"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "carbide-nitride",
+   "label": "Phosphides, nitrides, carbides & borides",
+   "name": "Metal phosphides, nitrides, carbides and borides",
+   "facet": "material",
+   "synonyms": [
+    "metal phosphide",
+    "metal phosphides",
+    "transition metal phosphide",
+    "transition metal phosphides",
+    "Ni2P",
+    "Ni5P4",
+    "CoP",
+    "MoP",
+    "FeP",
+    "Cu3P",
+    "metal nitride",
+    "metal nitrides",
+    "transition metal nitride",
+    "Mo2N",
+    "Ni3N",
+    "Co4N",
+    "metal carbide",
+    "metal carbides",
+    "transition metal carbide",
+    "Mo2C",
+    "WC catalyst",
+    "tungsten carbide",
+    "metal boride",
+    "metal borides",
+    "Ni2B",
+    "CoB"
+   ],
+   "related": [
+    "her",
+    "oer",
+    "mxene"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "carbon",
+   "label": "Carbon-based & metal-free",
+   "name": "Carbon-based and metal-free catalysts",
+   "facet": "material",
+   "synonyms": [
+    "metal-free catalyst",
+    "metal-free electrocatalyst",
+    "metal-free",
+    "carbon-based catalyst",
+    "carbon-based electrocatalyst",
+    "N-doped carbon",
+    "nitrogen-doped carbon",
+    "heteroatom-doped carbon",
+    "doped carbon",
+    "N-doped graphene",
+    "nitrogen-doped graphene",
+    "graphene",
+    "carbon nanotubes",
+    "carbon nanotube",
+    "CNT",
+    "CNTs",
+    "porous carbon",
+    "biochar",
+    "carbon dots",
+    "defective carbon"
+   ],
+   "related": [
+    "sac",
+    "g-c3n4",
+    "2d"
+   ],
+   "weight": 0.7
+  },
+  {
+   "id": "g-c3n4",
+   "label": "Carbon nitride",
+   "name": "Graphitic carbon nitride",
+   "facet": "material",
+   "synonyms": [
+    "graphitic carbon nitride",
+    "g-C3N4",
+    "carbon nitride",
+    "C3N4",
+    "polymeric carbon nitride",
+    "poly(heptazine imide)",
+    "crystalline carbon nitride"
+   ],
+   "related": [
+    "photo-h2",
+    "photo-co2rr",
+    "carbon"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "molecular",
+   "label": "Molecular catalysts",
+   "name": "Molecular and heterogenized molecular catalysts",
+   "facet": "material",
+   "synonyms": [
+    "molecular catalyst",
+    "molecular catalysts",
+    "molecular electrocatalyst",
+    "molecular electrocatalysts",
+    "metal complex",
+    "metal complexes",
+    "porphyrin",
+    "porphyrins",
+    "phthalocyanine",
+    "phthalocyanines",
+    "CoPc",
+    "cobalt phthalocyanine",
+    "iron porphyrin",
+    "cobalt porphyrin",
+    "Re(bpy)",
+    "rhenium bipyridine",
+    "Mn(bpy)",
+    "macrocycle",
+    "macrocyclic complex",
+    "heterogenized molecular",
+    "immobilized molecular catalyst",
+    "molecular-defined",
+    "molecular cobalt"
+   ],
+   "related": [
+    "homogeneous",
+    "sac",
+    "cof"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "homogeneous",
+   "label": "Homogeneous catalysis",
+   "name": "Homogeneous and organometallic catalysis",
+   "facet": "material",
+   "synonyms": [
+    "homogeneous catalysis",
+    "homogeneous catalyst",
+    "homogeneous catalysts",
+    "organometallic catalysis",
+    "organometallic catalyst",
+    "pincer complex",
+    "pincer complexes",
+    "pincer catalyst",
+    "transition-metal-catalyzed",
+    "transition metal catalyzed",
+    "palladium-catalyzed",
+    "nickel-catalyzed",
+    "rhodium-catalyzed",
+    "iridium-catalyzed",
+    "ruthenium-catalyzed",
+    "copper-catalyzed",
+    "cobalt-catalyzed",
+    "iron-catalyzed",
+    "organometallic",
+    "organometallic complex",
+    "organometallic complexes",
+    "transition-metal complex",
+    "transition-metal complexes",
+    "metal complex catalyst",
+    "metal complex catalysts",
+    "coordination complex",
+    "coordination complexes",
+    "phosphine ligand",
+    "phosphine ligands",
+    "gold-catalyzed",
+    "silver-catalyzed",
+    "zinc-catalyzed",
+    "manganese-catalyzed",
+    "titanium-catalyzed",
+    "zirconium-catalyzed",
+    "lanthanide-catalyzed",
+    "rare-earth-catalyzed",
+    "platinum-catalyzed"
+   ],
+   "related": [
+    "molecular",
+    "cross-coupling",
+    "hydroformylation",
+    "asymmetric"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "copper",
+   "label": "Copper catalysts",
+   "name": "Copper-based catalysts",
+   "facet": "material",
+   "synonyms": [
+    "copper catalyst",
+    "copper catalysts",
+    "copper-based",
+    "Cu-based",
+    "Cu catalyst",
+    "Cu catalysts",
+    "copper electrode",
+    "Cu electrode",
+    "oxide-derived copper",
+    "oxide-derived Cu",
+    "OD-Cu",
+    "Cu2O",
+    "CuO",
+    "Cu nanoparticles",
+    "copper nanoparticles",
+    "Cu foil",
+    "copper foil",
+    "polycrystalline copper",
+    "polycrystalline Cu",
+    "Cu(100)",
+    "Cu(111)",
+    "Cu(I)",
+    "copper oxide"
+   ],
+   "related": [
+    "co2rr",
+    "corr",
+    "no3rr"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "agau",
+   "label": "Silver & gold catalysts",
+   "name": "Silver- and gold-based catalysts",
+   "facet": "material",
+   "synonyms": [
+    "silver catalyst",
+    "silver-based",
+    "Ag-based",
+    "Ag catalyst",
+    "Ag catalysts",
+    "silver electrode",
+    "Ag nanoparticles",
+    "silver nanoparticles",
+    "gold catalyst",
+    "gold catalysts",
+    "Au-based",
+    "Au catalyst",
+    "Au nanoparticles",
+    "gold nanoparticles",
+    "Au electrode"
+   ],
+   "related": [
+    "co2rr",
+    "co-oxidation"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "snbi",
+   "label": "Tin, bismuth & indium catalysts",
+   "name": "p-block metal catalysts (Sn, Bi, In, Pb)",
+   "facet": "material",
+   "synonyms": [
+    "tin catalyst",
+    "tin-based",
+    "Sn-based",
+    "SnO2",
+    "SnOx",
+    "bismuth catalyst",
+    "bismuth-based",
+    "Bi-based",
+    "Bi2O3",
+    "bismuthene",
+    "BiOCl",
+    "indium catalyst",
+    "indium-based",
+    "In-based",
+    "p-block metal",
+    "p-block element",
+    "lead electrode",
+    "Pb electrode",
+    "Sb-based"
+   ],
+   "related": [
+    "co2rr"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "pgm",
+   "label": "Platinum-group metals",
+   "name": "Platinum-group metal catalysts (Pt, Pd, Ir, Ru, Rh, Os)",
+   "facet": "material",
+   "synonyms": [
+    "platinum catalyst",
+    "platinum catalysts",
+    "Pt-based",
+    "Pt catalyst",
+    "Pt catalysts",
+    "Pt/C",
+    "Pt nanoparticles",
+    "platinum nanoparticles",
+    "palladium catalyst",
+    "Pd-based",
+    "Pd catalyst",
+    "Pd nanoparticles",
+    "iridium oxide",
+    "iridium-based",
+    "Ir-based",
+    "ruthenium-based",
+    "Ru-based",
+    "Ru catalyst",
+    "rhodium catalyst",
+    "Rh-based",
+    "platinum-group metal",
+    "platinum group metal",
+    "PGM",
+    "PGM-free",
+    "noble metal catalyst",
+    "noble-metal catalyst",
+    "noble metal catalysts",
+    "precious metal"
+   ],
+   "related": [
+    "orr",
+    "her",
+    "oer",
+    "alloy",
+    "nanoparticles"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "earth-abundant",
+   "label": "Earth-abundant metals",
+   "name": "Earth-abundant transition-metal catalysts (Ni, Fe, Co, Mn, Mo)",
+   "facet": "material",
+   "synonyms": [
+    "earth-abundant",
+    "earth abundant",
+    "non-precious metal",
+    "non-noble metal",
+    "noble-metal-free",
+    "precious-metal-free",
+    "Ni-based",
+    "nickel-based",
+    "Fe-based",
+    "iron-based",
+    "Co-based",
+    "cobalt-based",
+    "Mn-based",
+    "manganese-based",
+    "Mo-based",
+    "molybdenum-based",
+    "transition metal catalyst",
+    "transition-metal catalyst",
+    "transition metal-based"
+   ],
+   "related": [
+    "oer",
+    "her",
+    "ldh",
+    "carbide-nitride"
+   ],
+   "weight": 0.6
+  },
+  {
+   "id": "2d",
+   "label": "2D materials",
+   "name": "Two-dimensional materials and nanosheets",
+   "facet": "material",
+   "synonyms": [
+    "2D materials",
+    "2D material",
+    "two-dimensional materials",
+    "two-dimensional material",
+    "two-dimensional",
+    "nanosheets",
+    "nanosheet",
+    "atomically thin",
+    "black phosphorus",
+    "phosphorene",
+    "hexagonal boron nitride",
+    "h-BN",
+    "metallene",
+    "metallenes",
+    "bismuthene"
+   ],
+   "related": [
+    "mxene",
+    "chalcogenide",
+    "carbon"
+   ],
+   "weight": 0.6
+  },
+  {
+   "id": "microenvironment",
+   "label": "Electrolyte & microenvironment",
+   "name": "Electrolyte effects, interfacial microenvironment and double layer",
+   "facet": "method",
+   "synonyms": [
+    "electrolyte effect",
+    "electrolyte effects",
+    "electrolyte engineering",
+    "cation effect",
+    "cation effects",
+    "alkali cation",
+    "alkali metal cation",
+    "local pH",
+    "local environment",
+    "microenvironment",
+    "micro-environment",
+    "electric double layer",
+    "electrical double layer",
+    "double-layer",
+    "interfacial water",
+    "interfacial electric field",
+    "ionomer",
+    "ionomers",
+    "Nafion coating",
+    "molecular additive",
+    "surface modification",
+    "ionic liquid",
+    "ionic liquids",
+    "deep eutectic solvent",
+    "acidic CO2 reduction",
+    "acidic electrolyte"
+   ],
+   "related": [
+    "co2rr",
+    "electrolyzer",
+    "md"
+   ],
+   "weight": 0.8
+  },
+  {
+   "id": "dft",
+   "label": "DFT",
+   "name": "Density functional theory and electronic-structure calculations",
+   "facet": "method",
+   "synonyms": [
+    "density functional theory",
+    "DFT",
+    "first-principles",
+    "first principles",
+    "ab initio",
+    "computational hydrogen electrode",
+    "scaling relation",
+    "scaling relations",
+    "d-band center",
+    "d-band centre",
+    "volcano plot",
+    "volcano relationship",
+    "free energy diagram",
+    "Gibbs free energy",
+    "grand canonical",
+    "constant-potential",
+    "constant potential",
+    "theoretical calculations",
+    "computational screening",
+    "descriptor"
+   ],
+   "related": [
+    "md",
+    "microkinetic",
+    "ml"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "microkinetic",
+   "label": "Microkinetic modeling",
+   "name": "Microkinetic, kinetic Monte Carlo and continuum modeling",
+   "facet": "method",
+   "synonyms": [
+    "microkinetic",
+    "micro-kinetic",
+    "microkinetic model",
+    "microkinetic modeling",
+    "microkinetic modelling",
+    "kinetic Monte Carlo",
+    "kMC",
+    "mean-field kinetic",
+    "kinetic modeling",
+    "kinetic modelling",
+    "multiscale model",
+    "multiscale modeling",
+    "continuum model",
+    "continuum modeling",
+    "transport model",
+    "reaction kinetics model",
+    "kinetic isotope effect"
+   ],
+   "related": [
+    "dft",
+    "reactor-process"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "md",
+   "label": "Molecular dynamics",
+   "name": "Molecular dynamics, AIMD and QM/MM",
+   "facet": "method",
+   "synonyms": [
+    "molecular dynamics",
+    "ab initio molecular dynamics",
+    "AIMD",
+    "reactive force field",
+    "ReaxFF",
+    "metadynamics",
+    "QM/MM",
+    "explicit solvent",
+    "explicit solvation",
+    "machine-learning molecular dynamics",
+    "enhanced sampling",
+    "free energy sampling"
+   ],
+   "related": [
+    "dft",
+    "ml",
+    "microenvironment"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "ml",
+   "label": "Machine learning",
+   "name": "Machine learning and data-driven discovery",
+   "facet": "method",
+   "synonyms": [
+    "machine learning",
+    "machine-learning",
+    "deep learning",
+    "neural network",
+    "neural networks",
+    "graph neural network",
+    "GNN",
+    "GNNs",
+    "active learning",
+    "Bayesian optimization",
+    "data-driven",
+    "machine-learned potential",
+    "machine learning potential",
+    "machine-learning interatomic potential",
+    "interatomic potential",
+    "high-throughput screening",
+    "high-throughput computational",
+    "large language model",
+    "large language models",
+    "LLM",
+    "LLMs",
+    "Open Catalyst",
+    "OC20",
+    "OC22",
+    "catalyst informatics",
+    "materials informatics",
+    "generative model",
+    "symbolic regression",
+    "random forest",
+    "gradient boosting",
+    "artificial intelligence"
+   ],
+   "related": [
+    "dft",
+    "hte",
+    "md"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "hte",
+   "label": "High-throughput experimentation",
+   "name": "High-throughput, combinatorial and autonomous experimentation",
+   "facet": "method",
+   "synonyms": [
+    "high-throughput experimentation",
+    "high-throughput experiment",
+    "high-throughput synthesis",
+    "high-throughput testing",
+    "combinatorial",
+    "autonomous laboratory",
+    "autonomous experimentation",
+    "self-driving lab",
+    "self-driving laboratory",
+    "self-driving laboratories",
+    "robotic platform",
+    "robotic",
+    "automated experimentation",
+    "closed-loop"
+   ],
+   "related": [
+    "ml"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "operando",
+   "label": "Operando characterization",
+   "name": "In situ / operando characterization",
+   "facet": "method",
+   "synonyms": [
+    "operando",
+    "in situ Raman",
+    "operando Raman",
+    "in situ infrared",
+    "in situ FTIR",
+    "ATR-SEIRAS",
+    "SEIRAS",
+    "ATR-FTIR",
+    "in situ XRD",
+    "operando XRD",
+    "in situ TEM",
+    "liquid-cell TEM",
+    "liquid cell TEM",
+    "electrochemical TEM",
+    "ambient pressure XPS",
+    "AP-XPS",
+    "NAP-XPS",
+    "near-ambient pressure XPS",
+    "SERS",
+    "surface-enhanced Raman",
+    "DRIFTS",
+    "in situ characterization",
+    "in situ spectroscopy",
+    "in situ XAS",
+    "in situ IR",
+    "in situ ATR",
+    "in situ electrochemical",
+    "in situ/operando"
+   ],
+   "related": [
+    "xas",
+    "microscopy",
+    "isotope",
+    "stability"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "xas",
+   "label": "X-ray absorption",
+   "name": "X-ray absorption and synchrotron spectroscopy",
+   "facet": "method",
+   "synonyms": [
+    "X-ray absorption spectroscopy",
+    "X-ray absorption",
+    "XAS",
+    "XANES",
+    "EXAFS",
+    "X-ray absorption near-edge",
+    "extended X-ray absorption fine structure",
+    "XAFS",
+    "synchrotron",
+    "HERFD",
+    "X-ray emission spectroscopy",
+    "XES",
+    "resonant inelastic X-ray scattering",
+    "RIXS",
+    "soft X-ray"
+   ],
+   "related": [
+    "operando",
+    "sac"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "microscopy",
+   "label": "Electron microscopy",
+   "name": "Electron microscopy and atomic-scale imaging",
+   "facet": "method",
+   "synonyms": [
+    "electron microscopy",
+    "transmission electron microscopy",
+    "scanning transmission electron microscopy",
+    "STEM",
+    "HAADF-STEM",
+    "HAADF",
+    "aberration-corrected",
+    "atomic-resolution",
+    "atom probe tomography",
+    "electron energy loss spectroscopy",
+    "EELS",
+    "4D-STEM",
+    "cryo-EM",
+    "identical location TEM",
+    "IL-TEM",
+    "electron tomography"
+   ],
+   "related": [
+    "operando",
+    "sac",
+    "nanoparticles"
+   ],
+   "weight": 0.7
+  },
+  {
+   "id": "isotope",
+   "label": "Isotope labeling & quantification",
+   "name": "Isotope labeling, product quantification and control experiments",
+   "facet": "method",
+   "synonyms": [
+    "isotope labeling",
+    "isotope labelling",
+    "isotopic labeling",
+    "isotopic labelling",
+    "isotope-labeled",
+    "13C labeling",
+    "13C-labeled",
+    "15N labeling",
+    "15N2",
+    "15N isotope",
+    "15NO3",
+    "isotope tracing",
+    "DEMS",
+    "differential electrochemical mass spectrometry",
+    "online mass spectrometry",
+    "on-line mass spectrometry",
+    "product quantification",
+    "false positive",
+    "false positives",
+    "indophenol",
+    "NMR quantification",
+    "rigorous protocol"
+   ],
+   "related": [
+    "nrr",
+    "no3rr",
+    "benchmarking"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "surface-science",
+   "label": "Surface science & model catalysts",
+   "name": "Surface science, single crystals and model catalysts",
+   "facet": "method",
+   "synonyms": [
+    "single crystal",
+    "single-crystal",
+    "single crystals",
+    "single-crystal electrode",
+    "model catalyst",
+    "model catalysts",
+    "surface science",
+    "ultrahigh vacuum",
+    "ultra-high vacuum",
+    "UHV",
+    "scanning tunneling microscopy",
+    "STM",
+    "Pt(111)",
+    "Cu(100)",
+    "Au(111)",
+    "well-defined surfaces",
+    "low-index facets",
+    "facet-dependent",
+    "facet effect",
+    "stepped surface"
+   ],
+   "related": [
+    "dft",
+    "operando"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "tea-lca",
+   "label": "Techno-economic & LCA",
+   "name": "Techno-economic analysis and life-cycle assessment",
+   "facet": "method",
+   "synonyms": [
+    "techno-economic",
+    "technoeconomic",
+    "techno economic",
+    "life cycle assessment",
+    "life-cycle assessment",
+    "life cycle analysis",
+    "LCA",
+    "economic analysis",
+    "economic feasibility",
+    "cost analysis",
+    "levelized cost",
+    "carbon footprint",
+    "net present value",
+    "process economics",
+    "market analysis",
+    "environmental impact assessment"
+   ],
+   "related": [
+    "reactor-process",
+    "electrolyzer",
+    "ccu"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "reactor-process",
+   "label": "Reactor & process engineering",
+   "name": "Reactor design, process simulation and scale-up",
+   "facet": "system",
+   "synonyms": [
+    "reactor design",
+    "reactor engineering",
+    "scale-up",
+    "scale up",
+    "scaling up",
+    "process design",
+    "process simulation",
+    "process intensification",
+    "Aspen Plus",
+    "pilot plant",
+    "pilot-scale",
+    "industrial scale",
+    "continuous flow",
+    "flow reactor",
+    "packed bed",
+    "packed-bed",
+    "fixed-bed reactor",
+    "fixed bed reactor",
+    "fluidized bed",
+    "membrane reactor",
+    "microreactor",
+    "monolith reactor",
+    "system integration"
+   ],
+   "related": [
+    "electrolyzer",
+    "tea-lca",
+    "microkinetic",
+    "electrified-thermal"
+   ],
+   "weight": 0.8
+  },
+  {
+   "id": "stability",
+   "label": "Stability & reconstruction",
+   "name": "Stability, deactivation, degradation and surface reconstruction",
+   "facet": "method",
+   "synonyms": [
+    "long-term stability",
+    "durability",
+    "degradation mechanism",
+    "degradation mechanisms",
+    "catalyst degradation",
+    "deactivation",
+    "catalyst deactivation",
+    "deactivation mechanism",
+    "coking",
+    "coke formation",
+    "catalyst poisoning",
+    "poisoning",
+    "dissolution",
+    "leaching",
+    "surface reconstruction",
+    "dynamic reconstruction",
+    "structural reconstruction",
+    "restructuring",
+    "self-reconstruction",
+    "accelerated stress test",
+    "anti-sintering",
+    "sintering resistance"
+   ],
+   "related": [
+    "operando",
+    "pulsed",
+    "microscopy"
+   ],
+   "weight": 0.7
+  },
+  {
+   "id": "synthesis",
+   "label": "Catalyst synthesis",
+   "name": "Catalyst synthesis and preparation methods",
+   "facet": "method",
+   "synonyms": [
+    "atomic layer deposition",
+    "ALD",
+    "electrodeposition",
+    "pulsed electrodeposition",
+    "colloidal synthesis",
+    "flame spray pyrolysis",
+    "laser ablation",
+    "wet impregnation",
+    "incipient wetness",
+    "strong electrostatic adsorption",
+    "sol-gel",
+    "co-precipitation",
+    "coprecipitation",
+    "solvothermal synthesis",
+    "hydrothermal synthesis",
+    "galvanic replacement",
+    "dealloying",
+    "electrospinning",
+    "3D printing",
+    "shape-controlled synthesis",
+    "defect engineering",
+    "strain engineering",
+    "doping strategy"
+   ],
+   "related": [
+    "nanoparticles",
+    "sac"
+   ],
+   "weight": 0.5
+  },
+  {
+   "id": "benchmarking",
+   "label": "Benchmarking & best practices",
+   "name": "Benchmarking, standard protocols and reproducibility",
+   "facet": "method",
+   "synonyms": [
+    "benchmarking",
+    "standardized protocol",
+    "standard protocol",
+    "best practices",
+    "best practice",
+    "reporting standards",
+    "reproducibility",
+    "round-robin",
+    "inter-laboratory",
+    "interlaboratory",
+    "pitfalls"
+   ],
+   "related": [
+    "isotope",
+    "stability"
+   ],
+   "weight": 0.6
+  },
+  {
+   "id": "remediation",
+   "label": "Environmental remediation",
+   "name": "Environmental remediation and water treatment",
+   "facet": "system",
+   "synonyms": [
+    "wastewater",
+    "waste water",
+    "water treatment",
+    "water purification",
+    "denitrification",
+    "nitrate removal",
+    "pollutant removal",
+    "remediation",
+    "groundwater",
+    "industrial effluent",
+    "heavy metal removal"
+   ],
+   "related": [
+    "aop",
+    "no3rr",
+    "emission-control"
+   ],
+   "weight": 0.7
+  },
+  {
+   "id": "h2-production",
+   "label": "Hydrogen production",
+   "name": "Hydrogen production (general)",
+   "facet": "system",
+   "synonyms": [
+    "hydrogen production",
+    "H2 production",
+    "hydrogen generation",
+    "green hydrogen",
+    "clean hydrogen",
+    "renewable hydrogen",
+    "low-carbon hydrogen",
+    "blue hydrogen",
+    "turquoise hydrogen",
+    "methane pyrolysis"
+   ],
+   "related": [
+    "water-electrolysis",
+    "her",
+    "reforming",
+    "photo-h2",
+    "h2-carriers"
+   ],
+   "weight": 0.5
+  },
+  {
+   "id": "enzymes",
+   "label": "Enzymes & metalloenzymes",
+   "name": "Enzymes, metalloenzymes and enzyme mechanisms",
+   "facet": "material",
+   "synonyms": [
+    "enzyme",
+    "enzymes",
+    "metalloenzyme",
+    "metalloenzymes",
+    "kinase",
+    "kinases",
+    "protein kinase",
+    "phosphatase",
+    "phosphatases",
+    "protease",
+    "proteases",
+    "hydrolase",
+    "hydrolases",
+    "oxidoreductase",
+    "oxidoreductases",
+    "transferase",
+    "transferases",
+    "dehydrogenase",
+    "dehydrogenases",
+    "reductase",
+    "reductases",
+    "peroxidase",
+    "peroxidases",
+    "catalase",
+    "laccase",
+    "laccases",
+    "lipase",
+    "lipases",
+    "esterase",
+    "esterases",
+    "cellulase",
+    "cellulases",
+    "amylase",
+    "polymerase",
+    "polymerases",
+    "DNA polymerase",
+    "RNA polymerase",
+    "cytochrome P450",
+    "P450",
+    "monooxygenase",
+    "monooxygenases",
+    "dioxygenase",
+    "dioxygenases",
+    "hydrogenase",
+    "hydrogenases",
+    "nitrogenase",
+    "carbonic anhydrase",
+    "ribozyme",
+    "ribozymes",
+    "catalytic antibody",
+    "catalytic antibodies",
+    "active-site residue",
+    "active-site residues",
+    "catalytic domain",
+    "catalytic subunit",
+    "catalytic triad",
+    "site-directed mutagenesis",
+    "substrate specificity",
+    "enzyme kinetics",
+    "Michaelis-Menten",
+    "enzyme activity",
+    "enzymatic activity",
+    "enzyme mechanism",
+    "enzyme inhibitor",
+    "enzyme inhibitors",
+    "enzyme inhibition",
+    "ATPase",
+    "GTPase",
+    "topoisomerase",
+    "synthase",
+    "synthetase"
+   ],
+   "related": [
+    "biocatalysis",
+    "bioelectro"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "nanozymes",
+   "label": "Nanozymes & catalytic nanomedicine",
+   "name": "Nanozymes, enzyme mimics and catalytic nanomedicine",
+   "facet": "material",
+   "synonyms": [
+    "nanozyme",
+    "nanozymes",
+    "artificial enzyme",
+    "artificial enzymes",
+    "peroxidase-like",
+    "oxidase-like",
+    "catalase-like",
+    "enzyme-like activity",
+    "enzyme mimic",
+    "enzyme mimics",
+    "enzyme-mimicking",
+    "chemodynamic therapy",
+    "catalytic therapy",
+    "catalytic nanomedicine",
+    "nanocatalytic medicine"
+   ],
+   "related": [
+    "enzymes",
+    "biocatalysis"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "solid-acids",
+   "label": "Solid acids, bases & ionic liquids",
+   "name": "Solid acid/base catalysts, ionic liquids and acid-base catalysis",
+   "facet": "material",
+   "synonyms": [
+    "solid acid",
+    "solid acids",
+    "solid acid catalyst",
+    "solid acid catalysts",
+    "solid base",
+    "solid bases",
+    "solid base catalyst",
+    "sulfonic acid",
+    "sulfonated",
+    "sulfated zirconia",
+    "heteropolyacid",
+    "heteropolyacids",
+    "heteropoly acid",
+    "polyoxometalate",
+    "polyoxometalates",
+    "Amberlyst",
+    "ion-exchange resin",
+    "ion-exchange resins",
+    "acidic ionic liquid",
+    "acidic ionic liquids",
+    "ionic liquid",
+    "ionic liquids",
+    "deep eutectic solvent",
+    "deep eutectic solvents",
+    "Bronsted acid",
+    "Brønsted acid",
+    "Lewis acid",
+    "Lewis acids",
+    "acid catalyst",
+    "acid catalysts",
+    "base catalyst",
+    "base catalysts",
+    "acid-catalyzed",
+    "base-catalyzed",
+    "superacid",
+    "montmorillonite",
+    "clay catalyst",
+    "clay catalysts"
+   ],
+   "related": [
+    "esterification",
+    "organic-synthesis",
+    "zeolite"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "organic-synthesis",
+   "label": "Catalytic organic synthesis",
+   "name": "Catalytic organic synthesis and methodology",
+   "facet": "reaction",
+   "synonyms": [
+    "one-pot synthesis",
+    "one-pot",
+    "multicomponent reaction",
+    "multicomponent reactions",
+    "multi-component reaction",
+    "three-component reaction",
+    "domino reaction",
+    "cyclization",
+    "cycloaddition",
+    "annulation",
+    "Diels-Alder",
+    "Friedel-Crafts",
+    "aldol reaction",
+    "aldol condensation",
+    "Michael addition",
+    "Mannich reaction",
+    "Knoevenagel condensation",
+    "hydroamination",
+    "hydrosilylation",
+    "hydroboration",
+    "hydroarylation",
+    "amination",
+    "amidation",
+    "etherification",
+    "acetalization",
+    "click chemistry",
+    "CuAAC",
+    "azide-alkyne cycloaddition",
+    "heterocycles",
+    "heterocyclic compounds",
+    "N-heterocycles",
+    "total synthesis",
+    "synthetic methodology",
+    "organic transformation",
+    "organic transformations",
+    "organic reactions"
+   ],
+   "related": [
+    "cross-coupling",
+    "asymmetric",
+    "homogeneous",
+    "organocatalysis",
+    "photoredox"
+   ],
+   "weight": 0.6
+  },
+  {
+   "id": "esterification",
+   "label": "Esterification, transesterification & biodiesel",
+   "name": "Esterification, transesterification and biodiesel",
+   "facet": "reaction",
+   "synonyms": [
+    "esterification",
+    "transesterification",
+    "biodiesel",
+    "biodiesel production",
+    "fatty acid methyl ester",
+    "fatty acid methyl esters",
+    "FAME",
+    "triglyceride",
+    "triglycerides",
+    "interesterification",
+    "glycerolysis",
+    "ester hydrolysis",
+    "alcoholysis"
+   ],
+   "related": [
+    "biomass",
+    "solid-acids",
+    "biocatalysis"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "coal",
+   "label": "Coal & heavy-feedstock conversion",
+   "name": "Coal liquefaction/gasification and heavy-feedstock upgrading",
+   "facet": "reaction",
+   "synonyms": [
+    "coal liquefaction",
+    "direct coal liquefaction",
+    "indirect coal liquefaction",
+    "coal gasification",
+    "catalytic gasification",
+    "gasification",
+    "coal conversion",
+    "coal-derived liquids",
+    "coal tar",
+    "oil shale",
+    "bitumen",
+    "heavy crude",
+    "residue upgrading",
+    "catalytic pyrolysis",
+    "tar reforming",
+    "syngas production"
+   ],
+   "related": [
+    "refining",
+    "fts",
+    "biomass"
+   ],
+   "weight": 1.0
+  },
+  {
+   "id": "photocatalysis",
+   "label": "Photocatalysis (general)",
+   "name": "Photocatalysis not covered by a specific photocatalytic reaction",
+   "facet": "reaction",
+   "synonyms": [
+    "photocatalysis",
+    "photocatalyst",
+    "photocatalysts",
+    "photocatalytic",
+    "photocatalytic activity",
+    "photocatalytic performance",
+    "visible-light-driven",
+    "heterogeneous photocatalysis",
+    "semiconductor photocatalyst",
+    "semiconductor photocatalysts"
+   ],
+   "related": [
+    "photoredox",
+    "aop",
+    "photo-h2",
+    "photo-co2rr"
+   ],
+   "weight": 0.6
+  },
+  {
+   "id": "crystallography",
+   "label": "Crystal structures & crystallography",
+   "name": "Crystal structures, X-ray crystallography and structure determination",
+   "facet": "method",
+   "synonyms": [
+    "crystal structure",
+    "crystal structures",
+    "X-ray crystal structure",
+    "X-ray crystallography",
+    "single-crystal X-ray diffraction",
+    "single crystal X-ray diffraction",
+    "single-crystal X-ray",
+    "crystallography",
+    "crystallographic",
+    "space group",
+    "unit cell",
+    "cell parameters",
+    "CCDC",
+    "Cambridge Structural Database",
+    "experimental crystal structure determination",
+    "crystal packing",
+    "protein crystallography",
+    "structure determination"
+   ],
+   "related": [
+    "enzymes",
+    "molecular"
+   ],
+   "weight": 0.8
+  },
+  {
+   "id": "kinetics",
+   "label": "Reaction kinetics & mechanism",
+   "name": "Reaction kinetics and mechanistic studies",
+   "facet": "method",
+   "synonyms": [
+    "reaction kinetics",
+    "kinetic study",
+    "kinetic studies",
+    "kinetic analysis",
+    "kinetic model",
+    "kinetic isotope effect",
+    "KIE",
+    "rate constant",
+    "rate constants",
+    "rate law",
+    "rate-determining step",
+    "activation energy",
+    "activation energies",
+    "apparent activation energy",
+    "reaction mechanism",
+    "reaction mechanisms",
+    "mechanistic study",
+    "mechanistic studies",
+    "mechanistic insight",
+    "mechanistic insights",
+    "Hammett",
+    "Eyring"
+   ],
+   "related": [
+    "microkinetic",
+    "dft"
+   ],
+   "weight": 0.7
+  }
+ ]
+}
