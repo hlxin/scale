@@ -7,7 +7,9 @@ domain-neutral labels and edges of the method of science. A domain's manifest (t
 domain file names itself with ``domain:`` and builds on the kernel, which it sees without importing
 it: it declares new labels (a label that refines a kernel label says ``is_a``), new edge types (one
 that narrows a kernel edge says ``specializes``), *extends* an edge type's endpoints, adds properties
-to a label it can see (``adds_properties``) and may carry the domain's ``checklist:`` (``must`` and
+to a label it can see (``adds_properties``), binds a value property to one of the kernel's quantity contracts
+(``quantity:``, with ``context:`` naming the sibling property that states a context; ``quantities``) and may carry
+the domain's ``checklist:`` (``must`` and
 ``should`` fields, ``unless`` and ``when`` cases), which becomes a conformance contract named after the
 domain file (``pgraph_profiles.domain_contract``) that documents follow by that name. Checklists only
 constrain (see ``pgraph_profiles``).
@@ -40,7 +42,7 @@ from . import layout
 from .util import ScaleError, load_yaml
 
 KERNEL_KEYS = ("format", "property_types", "value", "evidence", "record_ref", "stewardship", "status_check", "common",
-               "extensions", "rules")
+               "extensions", "rules", "quantities")
 PREFIX_REGISTRY = Path(layout.PREFIX_REGISTRY)
 
 
@@ -102,6 +104,9 @@ def assemble_manifest(man: dict, base: Path) -> dict:
         if k in kernel:
             spec[k] = copy.deepcopy(kernel[k])
     spec["kernel"] = {"name": kernel.get("kernel"), "version": version}
+    if "quantities" in spec:                     # the quantity contracts: compiled here, so a malformed one never loads
+        from .quantities import check_block
+        check_block(spec["quantities"])
 
     mods: dict[str, dict] = {}
     # the science kernel declares labels and edges; every part sees them without importing
@@ -125,6 +130,9 @@ def assemble_manifest(man: dict, base: Path) -> dict:
             m["version"] = version
             if name in mods:
                 raise ScaleError(f"{kind} {name!r} is listed twice (or collides with the kernel or another file)")
+            if "quantities" in m:
+                raise ScaleError(f"{rel}: a {kind} file declares no quantity contracts (quantities:); they are the "
+                                 "kernel's, and a property binds one with quantity:")
             if kind != "domain" and "checklist" in m:
                 raise ScaleError(f"{rel}: a {kind} file carries no checklist; a checklist belongs to a domain file "
                                  "(domain:, listed under domains)")
@@ -320,6 +328,8 @@ def assemble_manifest(man: dict, base: Path) -> dict:
                            "path": m["_path"], "imports": [i["module"] for i in m.get("imports") or []]}
                        for n, m in mods.items()}
     spec["extension_prefixes"] = _registry(base)
+    from .quantities import check_bindings
+    check_bindings(spec)                          # every quantity: and context: of a property names what exists
     from .pgraph_profiles import domain_contract, load_profiles
     spec["profiles"] = load_profiles([domain_contract(d, rel) for rel, d in domain_files], spec)   # the checklists
     spec["domains"] = {d["domain"]: {"version": d["version"], "title": d.get("title"), "driving_forces": d.get("driving_forces") or [],

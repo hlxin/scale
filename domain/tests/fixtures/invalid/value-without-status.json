@@ -350,12 +350,11 @@
       "id": "ex:df-electro/link/8",
       "type": "HAS_COMPONENT",
       "props": {
-        "fraction": {
+        "concentration": {
           "status": "present",
           "unit": "mol/L",
           "value": 0.5
         },
-        "fraction_basis": "not_reported",
         "origin": "synthetic",
         "role": "inert"
       },
@@ -366,12 +365,11 @@
       "id": "ex:df-electro/link/9",
       "type": "HAS_COMPONENT",
       "props": {
-        "fraction": {
+        "concentration": {
           "status": "present",
           "unit": "mol/L",
           "value": 0.1
         },
-        "fraction_basis": "not_reported",
         "origin": "synthetic",
         "role": "reactant"
       },
@@ -514,7 +512,7 @@
     ],
     "graph_id": "ex:invalid/value-without-status",
     "schema": "scale-catal",
-    "schema_version": "0.2.0",
+    "schema_version": "0.3.0",
     "stewardship": {
       "access": "public"
     },

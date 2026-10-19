@@ -105,6 +105,15 @@ are a listing) and, for a document ``scale graph filter`` made, its ``filtered_f
 removed (a ref, a ref-list entry, a map entry keyed by a withheld id) reads there as not curated, which a
 limitation says.
 
+``comparison: scientific`` (scale-catal 0.3.0 on; :class:`Comparison`, docs/querying.md) also reads each value a numeric
+filter or an ``order_by`` compares under its quantity contract: it is compared only in a unit of its kind's dimensions and
+within one context of every context its kind is compared by (a potential's reference scale, a current density's
+normalization, a pressure's convention, a volumetric flow's reference conditions, a share's species). A filter or a
+ranking that states a context (``context: {potential_reference: rhe}``) checks it; one that states none groups the rows
+(``comparison_group``, ``compared``, ``comparison.groups``), and a ranking orders rows within a group only. A value whose
+context is not stated is left out as ``missing_context``, one whose statements disagree as ``incompatible_context``:
+never assumed, never converted.
+
 A filter on an optional variable that stayed unbound (``optional: true`` found nothing) holds for
 ``missing`` (the record is not there, so neither is its property) and fails for every other op: a
 plan can ask for "tests with no retraction notice" by binding the notice optionally and filtering
@@ -124,7 +133,7 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
-from . import lifecycle, passages, pgraph
+from . import lifecycle, passages, pgraph, quantities
 from .util import ScaleError, load_doc
 
 SHARED_KINDS = {"ChemicalSpecies", "Reaction", "Material", "Person", "Institution", "Source", "Dataset"}
@@ -196,6 +205,13 @@ class Graph:
             self._held = {(it["record"], it["evidence"], it["text"]) for it in passages.evidence_items(self.doc)}
         return self._held
 
+    @property
+    def records(self) -> dict:
+        """Every node and link by id (what a value's normalized_by names)."""
+        if getattr(self, "_records", None) is None:
+            self._records = {**{e["id"]: e for e in self.doc["links"] if isinstance(e.get("id"), str)}, **self.nodes}
+        return self._records
+
     def is_a(self, nid: str, label: str) -> bool:
         n = self.nodes.get(nid)
         return bool(n) and (n["label"] == label or label in (self.spec["nodes"].get(n["label"], {}).get("ancestors") or []))
@@ -255,7 +271,7 @@ NOT_STATED_REFUSED = ("{what} is in the unit 'not stated', the placeholder a cur
                       "be in any unit; their values are left out as unit_unstated)")
 
 
-def comparable(v: dict, unit: Any, basis: Any = None) -> str | None:
+def comparable(v: dict, unit: Any, basis: Any = None, read_basis: bool = False) -> str | None:
     """Why a value object cannot be compared with a numeric filter in ``unit`` (and on ``basis``), or None when it
     can. The one rule: the filter states its unit; the value holds a number (``value``, or ``lower``/``upper``), its
     unit is text spelled as the filter's, case included, whitespace runs aside (:func:`unit_key`), and its basis is
@@ -264,7 +280,8 @@ def comparable(v: dict, unit: Any, basis: Any = None) -> str | None:
     ``other_basis`` (another basis, or a basis on one side only). Nothing else is read: no conversion, and no basis
     from the unit, the reported text or the note. A value whose unit is the placeholder ``not stated`` (any case and
     spacing, :func:`pgraph.states_no_unit`) states none. A filter unit or basis that is not text, and a filter unit
-    ``not stated``, are plan errors."""
+    ``not stated``, are plan errors. ``read_basis`` (a scientific comparison of a kind whose contexts read the value's
+    basis): a filter that states no basis compares the value whatever its basis says, which its contexts have read."""
     if not _stated(unit):
         return "unit_unstated (the filter states no unit: a numeric filter compares in the unit it states)"
     if not isinstance(unit, str) or not (basis is None or isinstance(basis, str)):
@@ -282,6 +299,8 @@ def comparable(v: dict, unit: Any, basis: Any = None) -> str | None:
         return f"incompatible_unit ({vu!r}, filter in {unit!r})"
     vb = v.get("basis")
     if not _stated(vb) and not _stated(basis):
+        return None
+    if read_basis and not _stated(basis):
         return None
     if not isinstance(vb, str) and _stated(vb):
         return f"other_basis (the value's basis is not text: {type(vb).__name__})"
@@ -432,13 +451,13 @@ def _as_number(x: Any) -> float:
     raise ScaleError(f"a numeric filter compares with a number, not {x!r}")
 
 
-def _numeric(v: Any, f: dict, op: str) -> tuple[bool | None, str | None]:
+def _numeric(v: Any, f: dict, op: str, read_basis: bool = False) -> tuple[bool | None, str | None]:
     """A numeric filter on a value object (:func:`comparable`) or a plain number: (result, None) or (None, reason)."""
     want = f.get("value")
     xs = [_as_number(x) for x in (want if op == "in" else [want])]
     unit = f.get("unit")
     if isinstance(v, dict):
-        why = comparable(v, unit, f.get("basis"))
+        why = comparable(v, unit, f.get("basis"), read_basis)
         if why:
             return None, why
         side = v.get("bound")
@@ -528,6 +547,189 @@ def test(rec: dict, f: dict) -> tuple[bool | None, str | None]:
     return check(rec, f)
 
 
+# ------------------------------------------------------------------------------------------ scientific comparison
+COMPARISONS = ("ordinary", "scientific")
+CONTEXT_REASONS = ("missing_context", "incompatible_context")
+
+
+class Comparison:
+    """How a plan's numeric filters and ranking compare values (``comparison``).
+
+    ``ordinary`` (the default) compares a value as reported: a number in the filter's unit and on its basis, as
+    :func:`comparable` says. ``scientific`` also reads each value under its quantity contract (``quantities``): a value
+    is compared only when its unit is read as one of its kind's dimensions, and only within one context of every
+    context its kind is compared by (a potential's reference scale, a current density's normalization, a pressure's
+    convention, a volumetric flow's reference conditions, an efficiency's product). A filter or a ranking that states
+    a context (``context: {potential_reference: rhe}``) checks it: a value on another one is left out as
+    ``incompatible_context``. One that states none groups: each row carries the unit and contexts of the values it was
+    compared on (``comparison_group``), and a ranking orders rows within a group only. A value whose context is not
+    stated, or is stated as other or not reported, is left out as ``missing_context``: never assumed; one whose
+    statements disagree (its basis and its record's sibling) as ``incompatible_context``, unless it is an evidenced
+    conversion (derived or computed, with produced_by). A value whose ``normalized_by`` names a value that is not
+    reported, or that the view withholds, is left out as ``missing_context``. Nothing is converted."""
+
+    def __init__(self, plan: dict, spec: dict, g: Graph):
+        mode = plan.get("comparison", "ordinary")
+        if mode not in COMPARISONS:
+            raise ScaleError(f"comparison is one of {list(COMPARISONS)}, not {mode!r}")
+        self.scientific = mode == "scientific"
+        self.c = quantities.contracts(spec)
+        if self.scientific and self.c is None:
+            raise ScaleError(f"comparison: scientific reads values under their quantity contracts, which this schema "
+                             f"(scale-catal {spec.get('version')}) does not have; migrate the document (scale graph migrate)")
+        self.spec, self.g = spec, g
+        self.variables = quantities.variable_kinds(g.doc) if self.c is not None else {}
+        self.across: dict[str, Counter] = {}       # ordinary mode: path -> the contexts its compared values were on
+
+    def read(self, rec: dict, path: str, x: Any) -> quantities.Read | None:
+        if self.c is None or not isinstance(x, dict):
+            return None
+        return quantities.read_value(self.c, self.spec, rec, parse_path(path)[0], x, self.g.records, self.variables)
+
+    def reads_basis(self, kind: str) -> bool:
+        return any("basis" in self.c.contexts[e["context"]]["read_from"] for e in self.c.kinds[kind]["compare_by"])
+
+    def _context(self, path: str, got: quantities.Read, want: dict, wanted_unit: Any = None) -> str | None:
+        """Why a value read under its contract cannot be compared on ``want`` (and in ``wanted_unit``), or None."""
+        kind, r = got.kind, got.reading
+        if r is not None and not r.read:
+            return (f"incompatible_unit ({r.text!r} is not a unit the quantity contracts read ({' '.join(r.unread)}), so "
+                    f"its dimension as a {kind} is unknown)")
+        if r is not None and r.vector not in self.c.kinds[kind]["dimensions"]:
+            return f"incompatible_unit ({r.text!r} is {self.c.dimension_name(r.vector)}, not a dimension of {kind})"
+        for name, ctx in got.contexts.items():
+            if ctx.contradiction:
+                return f"incompatible_context ({path} {name}: contradictory: {ctx.contradiction})"
+            if ctx.missing:
+                return f"missing_context ({path} {name}: {ctx.missing})"
+            if name in want and ctx.value not in (want[name],) and ctx.value.split(":")[0] != want[name]:
+                return f"incompatible_context ({path} {name} {ctx.value}; compared on {want[name]})"
+        for name in want:
+            if name not in got.contexts:
+                return f"incompatible_context ({path}: a {kind} here is not compared by {name})"
+        den = got.denominator
+        if den is not None and den["path"] is not None:
+            dv = den["value"]
+            if not den["found"] or dv is None:
+                return f"missing_context ({path}: its normalized_by {den['record']}{den['path']} names no value here)"
+            why = absent_reason(dv)
+            if why or not quantities.numbered(dv):
+                return f"missing_context ({path}: its normalized_by {den['record']}{den['path']} is {why or 'not a number'})"
+        elif den is not None and not den["found"]:
+            return f"missing_context ({path}: its normalized_by {den['record']} is not in this graph (withheld or never curated))"
+        if wanted_unit is not None and _stated(wanted_unit) and r is not None and unit_key(r.text) != unit_key(str(wanted_unit)):
+            return f"incompatible_unit ({r.text!r}; the ranking is in {wanted_unit!r})"
+        return None
+
+    def tag(self, got: quantities.Read | None, x: dict) -> dict:
+        """The unit and contexts a value was compared on (and its denominator, with what the named value says of its
+        origin; whether it is an evidenced conversion)."""
+        out = {"unit": unit_key(x["unit"]) if isinstance(x.get("unit"), str) else None}
+        if got is not None:
+            out["kind"] = got.kind
+            if got.contexts:
+                out["context"] = {n: ctx.value for n, ctx in sorted(got.contexts.items())}
+            conv = sorted(n for n, ctx in got.contexts.items() if ctx.converted)
+            if conv:
+                out["converted"] = conv
+            den = got.denominator
+            if den is not None:
+                dv = den["value"] or {}
+                out["denominator"] = {"record": den["record"], **({"path": den["path"]} if den["path"] else {}),
+                                      **({"origin": dv["origin"]} if isinstance(dv.get("origin"), str) else {})}
+        return out
+
+    def check(self, rec: dict, f: dict) -> tuple[bool | None, str | None, dict | None]:
+        """A numeric filter in scientific mode: (result, None, the tag of the value it passed on) or (None, reason,
+        None). A path selecting several entries holds when one passes, as :func:`check` says."""
+        op = f.get("op", "eq")
+        want = f.get("context") or {}
+        v, items = lookup(rec, f.get("prop"))
+        vals = [v] if items is None else [x for _, x in items]
+        if items is not None and not vals:
+            return None, ("not_curated" if v is None else f"no_matching_entry ({f.get('prop')})"), None
+        first = None
+        for x in vals:
+            why = absent_reason(x)
+            if why:
+                first = first or why
+                continue
+            got = self.read(rec, f["prop"], x)
+            if got is None:
+                if want:
+                    why = (f"missing_context ({f['prop']}: no quantity contract says which "
+                           f"{', '.join(sorted(want))} it is on)")
+                    first = first or why
+                    continue
+                r, why = _numeric(x, f, op) if isinstance(x, dict) or _is_number(x) else (None, "not_a_number")
+            else:
+                fr = self.c.read_unit(f.get("unit"))
+                if fr.read and fr.vector not in self.c.kinds[got.kind]["dimensions"]:
+                    raise ScaleError(f"the filter {f.get('prop')} {op} {f.get('value')} {f.get('unit')} compares a "
+                                     f"{got.kind} in {self.c.dimension_name(fr.vector)}, not one of its dimensions "
+                                     f"({', '.join(self.c.dimension_name(d) for d in self.c.kinds[got.kind]['dimensions'])})")
+                why = self._context(f["prop"], got, want)
+                r = None
+                if why is None:
+                    r, why = _numeric(x, f, op, read_basis=self.reads_basis(got.kind))
+            if r:
+                return True, None, self.tag(got, x)
+            if r is None:
+                first = first or why
+        return (False, None, None) if first is None else (None, first, None)
+
+    def rank(self, rec: dict, ob: dict) -> tuple[dict | None, str | None]:
+        """A ranking value in scientific mode: (its tag, None) or (None, why it cannot be ranked)."""
+        prop = ob.get("prop")
+        v = returned(rec, prop) if rec is not None else None
+        if isinstance(v, list) and len(v) == 1:                 # a path selecting one entry ranks it
+            v = v[0]
+        if isinstance(v, list):
+            return None, f"missing_context ({prop} selects {len(v)} values; a ranking names one: an entry or [target=...])"
+        why = absent_reason(v)
+        if why:
+            return None, why
+        if not isinstance(v, dict) or number(v) == (None, None):
+            return None, f"not_a_number ({prop} holds no number to rank)"
+        if v.get("bound") in ("upper", "lower"):
+            return None, f"one_sided_bound ({prop} is {'at most' if v['bound'] == 'upper' else 'at least'} its number; a bound is not ranked)"
+        if pgraph.states_no_unit(v.get("unit")):
+            return None, f"unit_unstated ({prop} states no unit)"
+        got = self.read(rec, prop, v)
+        if got is None:
+            if ob.get("context"):
+                return None, f"missing_context ({prop}: no quantity contract says which {', '.join(sorted(ob['context']))} it is on)"
+            if _stated(ob.get("unit")) and unit_key(str(v.get("unit"))) != unit_key(str(ob["unit"])):
+                return None, f"incompatible_unit ({v.get('unit')!r}; the ranking is in {ob['unit']!r})"
+            return self.tag(None, v), None
+        why = self._context(prop, got, ob.get("context") or {}, ob.get("unit"))
+        return (None, why) if why else (self.tag(got, v), None)
+
+    def observe(self, rec: dict, path: str) -> None:
+        """Ordinary mode: the contexts of the values a numeric filter or a ranking compared, for the advisory that
+        names comparisons made across contexts (:meth:`limitations`)."""
+        if self.c is None or self.scientific:
+            return
+        v, items = lookup(rec, path)
+        for x in ([v] if items is None else [x for _, x in items]):
+            got = self.read(rec, path, x)
+            if got is None or not got.contexts:
+                continue
+            sig = "; ".join(f"{n} {ctx.value or ('contradictory' if ctx.contradiction else 'not stated')}"
+                            for n, ctx in sorted(got.contexts.items()))
+            self.across.setdefault(path, Counter())[sig] += 1
+
+    def limitations(self) -> list[str]:
+        out = []
+        for path, sigs in sorted(self.across.items()):
+            if len(sigs) > 1 or any("not stated" in k or "contradictory" in k for k in sigs):
+                out.append(f"{path} was compared across contexts its quantity contract keeps apart ("
+                           + ", ".join(f"{k}: {n}" for k, n in sorted(sigs.items()))
+                           + "); `comparison: scientific` compares and ranks values only within one context, and leaves "
+                             "out those whose context is not stated (docs/querying.md).")
+        return out
+
+
 # ------------------------------------------------------------------------------------------ plan checks
 def _prop_def(spec: dict, label: str | None, prop: str, edge: bool = False) -> dict | None:
     if prop in ("id", "label", "type"):
@@ -579,11 +781,19 @@ def check_plan(plan: dict, spec: dict) -> None:
     (:data:`CONVERT_REFUSED`: nothing is converted)."""
     if plan.get("convert") not in (None, False):
         raise ScaleError(CONVERT_REFUSED)
+    mode = plan.get("comparison", "ordinary")
+    if mode not in COMPARISONS:
+        raise ScaleError(f"comparison is one of {list(COMPARISONS)}, not {mode!r}")
+    qc = quantities.contracts(spec)
     labels, edge_vars = _variables(plan)
     for f, label, edge in _filters(plan):
         what = f"the filter {f.get('prop')} {f.get('op')} {f.get('value')}"
         if f.get("convert") not in (None, False):
             raise ScaleError(f"{what}: {CONVERT_REFUSED}")
+        if "context" in f:
+            if mode != "scientific":
+                raise ScaleError(f"{what} states a context, which only `comparison: scientific` reads")
+            _check_context(f["context"], qc, what)
         unit = f.get("unit")
         if unit is not None and not (isinstance(unit, str) and unit.strip()):
             raise ScaleError(f"{what} states its unit as {unit!r}: a unit is text (MPa, °C, %), compared as it is spelled")
@@ -612,6 +822,9 @@ def check_plan(plan: dict, spec: dict) -> None:
         if numeric_filter(f) and valued and not f.get("unit"):
             raise ScaleError(f"the filter {f.get('prop')} {f.get('op')} {f.get('value')} on {label} states no unit: a "
                              f"numeric filter on a value object compares only values in the unit it states (add unit)")
+        kind = d.get("quantity") if mode == "scientific" and qc is not None else None   # a value, or a list of values
+        if kind in (qc.kinds if qc else {}) and numeric_filter(f):
+            _check_compared(f, kind, qc, f"{what} on {label}.{prop}")
     for r in plan.get("return") or []:
         var, _, path = r.partition(".")
         if path:
@@ -622,6 +835,45 @@ def check_plan(plan: dict, spec: dict) -> None:
                 raise ScaleError(f"{prop} is not a map or list, so the return {r!r} names no entry")
     for ob in plan.get("order_by") or []:
         parse_path(ob.get("prop"))
+        if ("context" in ob or "unit" in ob) and mode != "scientific":
+            raise ScaleError(f"order_by {ob.get('prop')} states a context or a unit, which only `comparison: scientific` reads "
+                             "(an ordinary ranking orders the numbers as reported)")
+        if "context" in ob:
+            _check_context(ob["context"], qc, f"order_by {ob.get('prop')}")
+        if "unit" in ob and (not isinstance(ob["unit"], str) or pgraph.states_no_unit(ob["unit"])):
+            raise ScaleError(f"order_by {ob.get('prop')} ranks in the unit {ob.get('unit')!r}: a unit is text, never 'not stated'")
+
+
+def _check_context(ctx: Any, qc: quantities.Contracts | None, what: str) -> None:
+    """A stated context: a mapping of declared contexts to one of their values (any record id for an open one)."""
+    if qc is None:
+        raise ScaleError(f"{what} states a context, but this schema declares no quantity contracts (scale-catal 0.3.0 on)")
+    if not isinstance(ctx, dict) or not ctx:
+        raise ScaleError(f"{what}: context is a mapping of contexts to values, e.g. {{potential_reference: rhe}}")
+    for name, val in ctx.items():
+        c = qc.contexts.get(name)
+        if c is None:
+            raise ScaleError(f"{what}: {name!r} is not a context the quantity contracts declare ({sorted(qc.contexts)})")
+        if not isinstance(val, str) or not val.strip() or (not c["open"] and val.split(":")[0] not in c["values"]):
+            raise ScaleError(f"{what}: {name} {val!r} is not one of its values ({sorted(c['values']) or 'a record id'})")
+
+
+def _check_compared(f: dict, kind: str, qc: quantities.Contracts, what: str) -> None:
+    """A scientific filter on a bound property: its unit of one of the kind's dimensions, its contexts the kind's, and
+    no basis where the kind's contexts read the basis (state the context instead)."""
+    r = qc.read_unit(f.get("unit"))
+    dims = qc.kinds[kind]["dimensions"]
+    if r.read and r.vector not in dims:
+        raise ScaleError(f"{what} compares a {kind} in {f.get('unit')!r}, which is {qc.dimension_name(r.vector)}, not one of "
+                         f"its dimensions ({', '.join(qc.dimension_name(x) for x in dims)})")
+    named = [e["context"] for e in qc.kinds[kind]["compare_by"]]
+    extra = sorted(set(f.get("context") or {}) - set(named))
+    if extra:
+        raise ScaleError(f"{what} states the context {', '.join(extra)}, which a {kind} is not compared by "
+                         f"({', '.join(named) or 'none'})")
+    if "basis" in f and any("basis" in qc.contexts[n]["read_from"] for n in named):
+        raise ScaleError(f"{what} states a basis; in a scientific comparison a {kind}'s basis is read as its context "
+                         f"({', '.join(named)}): state context instead")
 
 
 def schema_gaps(plan: dict, spec: dict) -> list[str]:
@@ -716,6 +968,7 @@ def _run(doc: dict, spec: dict, plan: dict, evidence_index=None, graph: Graph | 
             raise ScaleError(f"where names the variable {f.get('var')!r}, which neither match nor a step declares "
                              f"(declared: {', '.join(sorted(str(v) for v in declared))})")
     check_plan(plan, spec)
+    cmp = Comparison(plan, spec, g)
     base = {"question": plan.get("question"), "plan": plan, "graph_id": doc["graph"].get("graph_id"),
             "schema_version": doc["graph"].get("schema_version"), "graph_sha256": g.digest}
     link_types = list(dict.fromkeys(st["edge"] for st in steps))
@@ -749,10 +1002,18 @@ def _run(doc: dict, spec: dict, plan: dict, evidence_index=None, graph: Graph | 
             if entry.get(k):
                 have[k] = sorted(set(have.get(k) or []) | set(entry[k]))
 
-    def apply(rec: dict, filters: list[dict] | None, rid: str, sink) -> bool:
-        """Whether a record passes every filter; a filter that cannot be evaluated goes to sink(filter, reason)."""
+    def apply(rec: dict, filters: list[dict] | None, rid: str, sink, tags: dict | None = None, var: str = "") -> bool:
+        """Whether a record passes every filter; a filter that cannot be evaluated goes to sink(filter, reason). In a
+        scientific comparison a numeric filter reads the value under its quantity contract (:class:`Comparison`) and
+        ``tags`` gets the unit and contexts of the value each filter passed on, keyed ``<variable>.<path>``."""
         for f in filters or []:
-            r, why = check(rec, f)
+            tag = None
+            if cmp.scientific and numeric_filter(f):
+                r, why, tag = cmp.check(rec, f)
+            else:
+                r, why = check(rec, f)
+                if r is not None and numeric_filter(f) and _stated(f.get("unit")):
+                    cmp.observe(rec, f.get("prop"))
             if r is None:
                 sink(f, why)
                 return False
@@ -760,14 +1021,17 @@ def _run(doc: dict, spec: dict, plan: dict, evidence_index=None, graph: Graph | 
                 compared.add((rid, f.get("prop")))
             if not r:
                 return False
+            if tag is not None and tags is not None:
+                tags[f"{var}.{f.get('prop')}"] = tag
         return True
 
     cands = ([m["id"]] if m["id"] in g.nodes else []) if m.get("id") else sorted(g.by_label.get(m["label"], []))
     rows = []
     for nid in cands:
+        tags: dict = {}
         if apply(g.nodes[nid], m.get("where"), nid,
-                 lambda f, why, nid=nid: exclude({"record": nid, "filter": f, "reason": why})):
-            rows.append({root: nid, "_links": [], "_edges": {}})
+                 lambda f, why, nid=nid: exclude({"record": nid, "filter": f, "reason": why}), tags, root):
+            rows.append({root: nid, "_links": [], "_edges": {}, "_cmp": tags})
     stages.append({"kind": "match", **({"label": m["label"]} if m.get("label") else {"id": m["id"]}),
                    "rows_in": len(cands), "rows_out": len(rows)})
 
@@ -798,11 +1062,16 @@ def _run(doc: dict, spec: dict, plan: dict, evidence_index=None, graph: Graph | 
                     other = e["target"] if direction == "out" else e["source"]
                     if st.get("to") and not g.is_a(other, st["to"]):
                         continue
-                    if not apply(e, st.get("edge_where"), e["id"], lambda f, why, rid=e["id"]: step_sink(f, why, rid)):
+                    etags: dict = {}
+                    ntags: dict = {}
+                    if not apply(e, st.get("edge_where"), e["id"], lambda f, why, rid=e["id"]: step_sink(f, why, rid),
+                                 etags, st.get("edge_as") or st["edge"]):
                         continue
-                    if apply(g.nodes[other], st.get("where"), other, lambda f, why, rid=other: step_sink(f, why, rid)):
+                    if apply(g.nodes[other], st.get("where"), other, lambda f, why, rid=other: step_sink(f, why, rid),
+                             ntags, st["as"]):
                         edges_bound = {**row["_edges"], st["edge_as"]: e["id"]} if st.get("edge_as") else row["_edges"]
-                        nxt.append({**row, st["as"]: other, "_links": row["_links"] + [e["id"]], "_edges": edges_bound})
+                        nxt.append({**row, st["as"]: other, "_links": row["_links"] + [e["id"]], "_edges": edges_bound,
+                                    "_cmp": {**row["_cmp"], **etags, **ntags}})
                         found = True
             if not found and st.get("optional"):
                 nxt.append({**row, st["as"]: None})
@@ -826,6 +1095,7 @@ def _run(doc: dict, spec: dict, plan: dict, evidence_index=None, graph: Graph | 
         kept = []
         for row in rows:
             ok = True
+            row["_cmp"] = dict(row["_cmp"])          # rows of one parent share none of their tags
             for f in plan.get("where") or []:
                 var = f.get("var", root)
                 nid = row["_edges"].get(var) if var in edge_vars else row.get(var)   # a link bound by edge_as, or a node
@@ -835,7 +1105,7 @@ def _run(doc: dict, spec: dict, plan: dict, evidence_index=None, graph: Graph | 
                     ok = False
                     break
                 ok = apply(link_by_id[nid] if var in edge_vars else g.nodes[nid], [f], nid,
-                           lambda f, why, nid=nid: exclude({"record": nid, "filter": f, "reason": why}))
+                           lambda f, why, nid=nid: exclude({"record": nid, "filter": f, "reason": why}), row["_cmp"], var)
                 if not ok:
                     break
             if ok:
@@ -1008,7 +1278,8 @@ def _run(doc: dict, spec: dict, plan: dict, evidence_index=None, graph: Graph | 
                 missing_at.add(at)
                 missing_ctx.append({"record": nid, "field": r, "reason": why})
         srcs = second_hand(row)
-        item = {"bound": {k: v for k, v in row.items() if not k.startswith("_")}, "links": row["_links"], "values": vals}
+        item = {"bound": {k: v for k, v in row.items() if not k.startswith("_")}, "links": row["_links"], "values": vals,
+                "_cmp": dict(row.get("_cmp") or {})}
         if srcs:
             second_hand_rows += 1
             item["second_hand"] = {"cited_by": srcs, "note": f"second-hand (cited by {'; '.join(name_of(s) for s in srcs)})"}
@@ -1022,12 +1293,39 @@ def _run(doc: dict, spec: dict, plan: dict, evidence_index=None, graph: Graph | 
         out_rows.append(item)
 
     mixed_order: list[str] = []
+    if cmp.scientific and plan.get("order_by"):
+        # a ranking compares like with like: each row's value under its contract, in one unit and context; a row whose
+        # value cannot be ranked so is left out with its reason (the ordinary ranking orders bare numbers)
+        ranked = []
+        for it in out_rows:
+            ok = True
+            for ob in plan["order_by"]:
+                var = ob.get("var", root)
+                nid = it["bound"].get(var)
+                tag, why = cmp.rank(g.nodes.get(nid) if nid else None, ob)
+                if why:
+                    exclude({"record": nid or it["bound"].get(root), "order_by": ob, "reason": why})
+                    ok = False
+                    break
+                it["_cmp"][f"{var}.{ob['prop']}"] = tag
+            if ok:
+                ranked.append(it)
+        stages.append({"kind": "comparison", "rows_in": len(out_rows), "rows_out": len(ranked)})
+        out_rows = ranked
+    elif plan.get("order_by"):
+        for it in out_rows:
+            for ob in plan["order_by"]:
+                nid = it["bound"].get(ob.get("var", root))
+                if nid:
+                    cmp.observe(g.nodes[nid], ob["prop"])
     for ob in reversed(plan.get("order_by") or []):
         seen_units: set[str] = set()
 
         def key(it, ob=ob, seen_units=seen_units):
             nid = it["bound"].get(ob.get("var", root))
             v = returned(g.nodes[nid], ob["prop"]) if nid else None
+            if cmp.scientific and isinstance(v, list) and len(v) == 1:     # the one entry a ranked path selects
+                v = v[0]
             if isinstance(v, dict) and v.get("unit") and number(v) != (None, None):
                 u = v["unit"]
                 seen_units.add(u if isinstance(u, str) else f"(a unit that is not text: {type(u).__name__})")
@@ -1035,8 +1333,24 @@ def _run(doc: dict, spec: dict, plan: dict, evidence_index=None, graph: Graph | 
             x = lo if lo is not None else hi
             return (x is None, x if x is not None else 0.0)
         out_rows.sort(key=key, reverse=bool(ob.get("desc")))
-        if len(seen_units) > 1:
+        if len(seen_units) > 1 and not cmp.scientific:
             mixed_order.append(f"{ob.get('var', root)}.{ob['prop']} ({', '.join(sorted(seen_units))})")
+    groups: list[dict] = []
+    if cmp.scientific:                      # rows grouped by the unit and context of every value compared, ranked within
+        keyed = {}                          # a group; what else a value says (a conversion, its denominator) is the row's
+        for it in out_rows:
+            on = {k: {"unit": t.get("unit"), **({"context": t["context"]} if t.get("context") else {})}
+                  for k, t in sorted(it["_cmp"].items())}
+            k = json.dumps(on, sort_keys=True, ensure_ascii=False)
+            if k not in keyed:
+                keyed[k] = len(keyed)
+                groups.append({"group": keyed[k], "compared_on": on, "rows": 0})
+            groups[keyed[k]]["rows"] += 1
+            it["comparison_group"] = keyed[k]
+            it["compared"] = it["_cmp"]
+        out_rows.sort(key=lambda it: it["comparison_group"])      # stable: a group's ranking is kept
+    for it in out_rows:
+        it.pop("_cmp", None)
     total = len(out_rows)
     out_rows = out_rows[: plan.get("limit", 200)]
     stages.append({"kind": "limit", "rows_in": total, "rows_out": len(out_rows)})
@@ -1064,6 +1378,9 @@ def _run(doc: dict, spec: dict, plan: dict, evidence_index=None, graph: Graph | 
                                            "rows": step_rows},
                 "unfiltered": unfiltered(plan),
                 **({"filtered_for": doc["graph"]["filtered_for"]} if doc["graph"].get("filtered_for") else {})}
+    if cmp.scientific:
+        coverage["comparison"] = {"mode": "scientific", "groups": len(groups),
+                                  "left_out": {r: reasons[r] + in_steps[r] for r in CONTEXT_REASONS if reasons[r] + in_steps[r]}}
 
     lim = ["An absence is an absence in this graph, not in the literature."]
     value_left = lacking - sum(reasons[r] for r in DATE_REASONS)
@@ -1124,9 +1441,44 @@ def _run(doc: dict, spec: dict, plan: dict, evidence_index=None, graph: Graph | 
                    "is not an answer to a question that asks for a condition.")
     for o in mixed_order:
         lim.append(f"order_by {o} sorted values in several units as bare numbers; read each with its unit.")
+    lim += cmp.limitations()
+    out = {}
+    if cmp.scientific:
+        lim += _comparison_limitations(groups, total, reasons, in_steps, out_rows)
+        out["comparison"] = {"mode": "scientific", "groups": groups}
     lim += _access_limitation(access, doc, as_of)
     return {**base, "status": status, "row_count": total, "rows": out_rows, "access": access, "excluded": excluded[:LISTED],
-            "missing_context": missing_ctx[:LISTED], "coverage": coverage, "limitations": lim}
+            "missing_context": missing_ctx[:LISTED], "coverage": coverage, **out, "limitations": lim}
+
+
+def _comparison_limitations(groups: list[dict], total: int, reasons: Counter, in_steps: Counter, rows: list[dict]) -> list[str]:
+    """What a scientific comparison's answer says of its groups and of the values it left out for their context."""
+    out = []
+    if len(groups) > 1:
+        out.append(f"The {total} rows fall into {len(groups)} comparison groups, each one unit and one context of every value "
+                   "compared (comparison.groups; each row's comparison_group): values are compared, and rows ranked, within "
+                   "a group only; there is no ranking across groups.")
+    ctx = {r: reasons[r] + in_steps[r] for r in CONTEXT_REASONS if reasons[r] + in_steps[r]}
+    if ctx:
+        n = sum(ctx.values())
+        out.append(f"{n} value{'s were' if n != 1 else ' was'} left out for {'their' if n != 1 else 'its'} context "
+                   f"({', '.join(f'{k} {x}' for k, x in ctx.items())}):"
+                   " a scientific comparison compares a value only on a context the value or its record states (a potential's "
+                   "reference scale, a current density's normalization, a pressure's convention, a volumetric flow's reference "
+                   "conditions, the species a share or an efficiency is counted for), never an assumed one, and not where its "
+                   "statements disagree; read "
+                   "each value's as_reported and note, and curate the context where the source states it.")
+    conv = sum(1 for it in rows if any(t.get("converted") for t in (it.get("compared") or {}).values()))
+    if conv:
+        out.append(f"{conv} row{'s were' if conv != 1 else ' was'} compared on an evidenced conversion (a value derived or "
+                   "computed by the experiment its produced_by names, on another context than its record's; the row's "
+                   "compared says which): name the conversion when stating it.")
+    assumed = sum(1 for it in rows if any((t.get("denominator") or {}).get("origin") == "assumed"
+                                          for t in (it.get("compared") or {}).values()))
+    if assumed:
+        out.append(f"{assumed} row{'s were' if assumed != 1 else ' was'} compared on a value divided by an assumed denominator "
+                   "(its normalized_by names a value of origin assumed): say so when stating it.")
+    return out
 
 
 def document_access(doc: dict, as_of: str) -> dict:

@@ -11,7 +11,9 @@ from scale import pgraph, pgraph_migrate, schema_change
 from scale.kg import update
 from scale.util import load_doc, load_yaml, write_canonical
 
-EXAMPLE = REPO / "domain/examples/scale-catal/driving-force-examples/electro.json"
+# an example written only in vocabulary 0.1.0 already had (the electrolyte example records its salts' concentrations,
+# new in 0.3.0), so that a 0.1.0 copy of it validates and its migration rewrites the pin and nothing else
+EXAMPLE = REPO / "domain/examples/scale-catal/driving-force-examples/plasma.json"
 
 
 def _old(doc):

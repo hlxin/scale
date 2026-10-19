@@ -1,0 +1,81 @@
+# A competency question of the catalysis domain (tools/competency.py; `scale domains cq catalysis`).
+# It runs on a public synthetic example, so anyone can rerun it and see the same answer.
+id: CQ-06
+question: Which current densities have compatible area bases and potential references, and which cannot be compared
+  with them for lack of either?
+description: |
+  A current density is comparable with another only per the same area (geometric or electrochemically active) and at
+  potentials on the same reference scale. A scientific comparison (comparison: scientific) ranks the tests' potentials
+  and current densities within groups of one unit and one context each; the same numbers on the SHE scale, an
+  ECSA-normalized density without a value-level basis, and a potential converted to RHE with evidence each land where
+  they belong. A density whose basis contradicts its record, and one whose normalization or reference scale is not
+  reported, are left out with their reason: never assumed.
+documents:
+  - examples/scale-catal/comparison-examples/current-density-comparison.json
+plan:
+  question: Which current densities have compatible area bases and potential references?
+  comparison: scientific
+  match:
+    label: CatalyticTest
+    as: test
+    where:
+      - prop: current_density
+        op: exists
+  return:
+    - test.name
+    - test.electrode_potential
+    - test.reference_scale
+    - test.current_density
+    - test.current_normalization
+  order_by:
+    - var: test
+      prop: electrode_potential
+    - var: test
+      prop: current_density
+  evidence: true
+expect:
+  status: answered
+  min_rows: 5
+  max_rows: 5
+  values:
+    test.reference_scale:
+      - rhe
+      - she
+      - ag_agcl
+    test.current_normalization:
+      - geometric_area
+      - ecsa
+  excluded:
+    incompatible_context: 1
+    missing_context: 2
+variants:
+  - description: On one stated context, RHE and the geometric area, only the three tests that share both are ranked; the
+      SHE test and the ECSA-normalized one are left out as incompatible, beside the three left out before.
+    plan:
+      order_by:
+        - var: test
+          prop: electrode_potential
+          context:
+            potential_reference: rhe
+        - var: test
+          prop: current_density
+          context:
+            current_normalization: geometric_area
+    expect:
+      status: answered
+      min_rows: 3
+      max_rows: 3
+      values:
+        test.current_normalization:
+          - geometric_area
+      excluded:
+        incompatible_context: 3
+        missing_context: 2
+  - description: The ordinary comparison ranks every current density as a number, as reported, and its limitations name
+      the contexts it was compared across.
+    plan:
+      comparison: ordinary
+    expect:
+      status: answered
+      min_rows: 8
+      max_rows: 8

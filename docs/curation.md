@@ -101,6 +101,24 @@ source must be within its cap.
   used, with the printed text in `as_reported` when it differs (`"approximately 16.9 kWh"`, `"> 85"`).
 - **Basis** of normalized quantities (geometric area, catalyst mass, ECSA). If the basis is
   inferred from a unit, say so.
+- **The quantity a property holds** (scale-catal 0.3.0 on: `scale graph describe` prints each property's contract). A
+  value's unit is one of its kind's dimensions, or the validator rejects it: a temperature is never in kg. A
+  component's share of the whole is `fraction` (dimensionless, with `fraction_basis`); its concentration (mol/L, g/L) is
+  `concentration`; an absolute amount (g, mol) is `amount`; a loading on a support is `loading`; a share relative to
+  another component is a `fraction` with `fraction_basis: relative_to_component` and `relative_to`. Write units as
+  printed: one the vocabulary cannot read (`L/h per 3 cc catalyst`) is reported, not rejected, and a scientific
+  comparison leaves it out.
+- **The context a comparison needs**, where the source states it, never assumed: a potential's scale
+  (`reference_scale`, or in the unit, `V vs RHE`), a current density's normalization (`current_normalization`, or the
+  value's `basis`), a pressure's convention (`barg`, `psig`, or `basis: gauge`), the conditions a gas volume is counted
+  at (`sccm`, `mL(STP)/min`, or `basis: STP`), what a space velocity divides by what (`basis: GHSV`), the product of a
+  selectivity, yield or efficiency (`target`). The value's statements and its record's must agree; a contradiction is
+  reported. A value the curator converts to another context (a potential to RHE) is an **evidenced conversion**:
+  `origin: derived`, `produced_by` naming the Analysis that converts it (with what it rests on: the pH, the filling, the
+  temperature), the printed number kept in `as_reported`.
+- **What a normalized quantity is divided by**, when it must be identified: the value's `normalized_by` names the
+  record, and with `path` the value (`{record: <electrode>, path: /electrochemically_active_area}`); that value's own
+  `origin` says whether the denominator was measured, derived, computed or assumed.
 - **Missingness with a reason.** A value the source does not state is `not_reported` with a
   `missing_reason`: `not_stated_in_source`, `not_curated` (you did not look, e.g. SI or source-data
   files not examined), `ambiguous_in_source` (keep every variant), `withheld` or `not_extractable`.

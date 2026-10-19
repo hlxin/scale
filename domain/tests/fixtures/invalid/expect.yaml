@@ -26,3 +26,18 @@ fixtures:
   - file: research-data-without-stewardship.json
     error: a research_data graph declares stewardship
     reason: Research data says who contributed it, which project it belongs to and who may see it.
+  - file: temperature-in-kg.json
+    error: "unit 'kg' is mass (M), not a dimension of temperature"
+    reason: A value is in a unit of its property's kind (the quantity contract); a temperature in kilograms is no temperature, whatever its number.
+  - file: fraction-in-mol-per-litre.json
+    error: "unit 'mol/L' is amount_concentration (L-3 N), not a dimension of composition_fraction"
+    reason: A fraction is a dimensionless share of the whole; a concentration in mol/L is HAS_COMPONENT.concentration, so the two are never compared as one quantity.
+  - file: normalized-by-without-denominator.json
+    error: "normalized_by names a denominator, but temperature is not divided by one"
+    reason: A normalization reference names what a normalized quantity is divided by; a temperature is divided by nothing, so the reference would assert a meaning it cannot have.
+  - file: normalized-by-wrong-dimension.json
+    error: "is mass_per_area (M L-2) (mg/cm2), not a denominator of current_density (area (L2), mass (M))"
+    reason: A current density is divided by an electrode area or a catalyst mass; a reference to a mass per area names no such denominator.
+  - file: normalized-by-unresolved-path.json
+    error: "does not resolve to a property"
+    reason: A normalization reference names a value the graph holds; a path to a property the record does not have cites a denominator that is not there.

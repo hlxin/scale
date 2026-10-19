@@ -48,8 +48,14 @@ A generated explanation is a presentation of the retrieved evidence, not a repla
    one; nothing is converted, so one plan per unit and basis), paths into maps and lists
    (`results.*[target=<species id>]`), optional `text` search over the evidence, `published_before`
    for a dated question, `own_work_only` to leave out second-hand rows, `return` fields,
-   `evidence: true`, `order_by`, `limit`. Worked plans: the catalysis competency questions
-   (`domain/competency/*.yaml`, also returned by `scale call domains`).
+   `evidence: true`, `order_by`, `limit`. A question that compares or ranks values ("which rates are
+   comparable?", "the highest current density") takes `comparison: scientific` (scale-catal 0.3.0 on): each
+   value is then compared only within one unit and one context its quantity contract names (a potential's
+   reference scale, a current density's normalization, a pressure's convention, a flow's reference
+   conditions, a share's species), stated with `context: {potential_reference: rhe}` to check one, or left
+   unstated to group the rows; a value whose context is not stated is left out as `missing_context`, never
+   assumed. Worked plans: the catalysis competency questions (`domain/competency/*.yaml`, also returned by
+   `scale call domains`; CQ-06 compares current densities).
 4. **Run it:** `scale graph query <graph> plan.yaml --format markdown` (or `scale call query`).
 5. **Read the kind of answer and the coverage:** `answered`; `no_matching_record` (none in this
    graph, which says nothing about the literature); `missing_context` (records match but a value
@@ -63,7 +69,9 @@ A generated explanation is a presentation of the retrieved evidence, not a repla
    year and locator. Keep incompatible units and bases apart. Label interpretations as the source
    authors'. Put any extrapolation in a separate, labelled paragraph. End with a **Limits** line
    from the coverage block: candidates, rows, what was left out and why, and that the values were
-   compared by number, unit and stated basis alone.
+   compared by number, unit and stated basis alone (in a scientific comparison: and within one context,
+   group by group, with the values left out for their context, `missing_context` and
+   `incompatible_context`, named as such: there is no ranking across groups).
 7. **Route failures.** `scale gap from-query result.json --out-dir gaps/` turns a schema gap into a
    missing-concept gap, values the source does not report into source-review gaps
    (`absent_source_information`) and values the source reports ambiguously (`ambiguous_in_source`)

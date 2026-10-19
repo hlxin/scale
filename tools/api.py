@@ -149,8 +149,11 @@ TOOLS: list[dict] = [
                        "no_matching_record, missing_context or schema_gap. A numeric filter (eq, ne and in with numbers too) "
                        "states its unit and compares only values in that unit (spelled the same, case included: mPa is "
                        "not MPa) and on the basis it states; nothing is converted. 'not stated' is no unit (the "
-                       "placeholder for a number printed without one): never filter in it. Absences are answers; never "
-                       "fill them with typical values.",
+                       "placeholder for a number printed without one): never filter in it. With comparison: scientific, "
+                       "values are also compared and ranked only within one context of their quantity contract (a "
+                       "potential's reference scale, a current density's normalization, a pressure's convention, a flow's "
+                       "reference conditions), stated with context to check one or grouped; a value whose context is not "
+                       "stated is left out as missing_context. Absences are answers; never fill them with typical values.",
         "input_schema": {"type": "object", "required": ["plan"], "properties": {
             "plan": {"type": "object", "description": "Query plan; see the query-graph skill and example_plans in scale_domains."},
             **_DOC, **_DOMAIN,

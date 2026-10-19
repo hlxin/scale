@@ -203,8 +203,10 @@ nodes:
         description: The steps as the source words them; structured steps are ProcedureStep nodes linked PART_OF the preparation, with order.
       temperature:
         type: value
+        quantity: temperature
       pressure:
         type: value
+        quantity: pressure
       duration:
         type: value
       atmosphere:
@@ -232,8 +234,10 @@ nodes:
         - exposure
       temperature:
         type: value
+        quantity: temperature
       pressure:
         type: value
+        quantity: pressure
       duration:
         type: value
       atmosphere:
@@ -271,8 +275,10 @@ nodes:
         - other
       temperature:
         type: value
+        quantity: temperature
       pressure:
         type: value
+        quantity: pressure
       duration:
         type: value
       ramp_rate:
@@ -299,8 +305,10 @@ nodes:
         description: An identifier for the technique when known, e.g. a CHMO term.
       temperature:
         type: value
+        quantity: temperature
       pressure:
         type: value
+        quantity: pressure
       atmosphere:
         type: text
       observation_mode:
@@ -355,8 +363,10 @@ nodes:
         type: text
       temperature:
         type: value
+        quantity: temperature
       pressure:
         type: value
+        quantity: pressure
   Analysis:
     is_a: Experiment
     fixed:
@@ -382,8 +392,10 @@ nodes:
         description: The conclusion of a check, e.g. "no internal diffusion limitation".
       temperature:
         type: value
+        quantity: temperature
       pressure:
         type: value
+        quantity: pressure
   StructureModel:
     is_a: Model
     description: An atomistic model used in a computation (periodic slab, cluster, bulk cell, molecule);
@@ -553,25 +565,32 @@ nodes:
           not a driving force.'
       temperature:
         type: value
+        quantity: temperature
       pressure:
         type: value
+        quantity: pressure
       duration:
         type: value
       time_on_stream:
         type: value
       space_velocity:
         type: value
+        quantity: space_velocity
       flow_rate:
         type: value
+        quantity: flow_rate
       feed_ratio:
         type: value
         description: The stated feed ratio; its note or basis says which (H2/CO, H2/COx).
       conversion:
         type: value
+        quantity: species_fraction
       yield:
         type: value
+        quantity: species_fraction
       selectivity:
         type: value
+        quantity: species_fraction
       space_time_yield:
         type: value
       production_rate:
@@ -850,6 +869,7 @@ nodes:
         - not_reported
       maximum_temperature:
         type: value
+        quantity: temperature
       temperature_control:
         type: text
         description: The controller and its control point as stated (e.g. PID on the furnace thermocouple).
@@ -924,6 +944,7 @@ nodes:
         - not_reported
       catalyst_loading:
         type: value
+        quantity: loading
   ReferenceElectrode:
     is_a: Instrument
     fixed:
@@ -948,6 +969,7 @@ nodes:
         description: The filling solution as stated (e.g. saturated KCl, 3 M KCl); decides its potential.
       potential_vs_she:
         type: value
+        quantity: electric_potential
     description: The electrode against which potentials are measured; its type and filling decide the
       conversion to another scale (reference_scale on the experiment).
   Electrolyte:
@@ -1109,7 +1131,11 @@ edges:
       or material in a stated role. The role replaces role labels; adsorbate denotes a component adsorbed
       on a surface. A surface complex may instead be active_component when the source assigns that role.
       bound_to specifies its host, role_detail the binding geometry, and coverage its occupancy. Existing
-      fractions and loadings retain their bases.
+      fractions and loadings retain their bases. Four quantities stay apart, each in its own property, by
+      their contracts' dimensions; a fraction is a dimensionless share of the whole (fraction_basis says of
+      what); a share relative to another component is a fraction with fraction_basis relative_to_component
+      and relative_to; a concentration (mol/L, g/L) is concentration; a loading on a support is loading;
+      and an absolute amount is amount.
     from:
     - Sample
     - Catalyst
@@ -1143,6 +1169,12 @@ edges:
         description: e.g. structural or electronic promoter, as stated.
       fraction:
         type: value
+        quantity: composition_fraction
+        context:
+          fraction_basis: fraction_basis
+        description: The component's share of the whole, dimensionless (%, 1, wt%, mol%), as fraction_basis
+          says (by mass, mole, atom or volume, or relative to another component); never a concentration or an
+          amount.
       fraction_basis:
         type: enum
         values:
@@ -1152,8 +1184,17 @@ edges:
         - volume
         - not_reported
         - relative_to_component
+      concentration:
+        type: value
+        quantity: concentration
+        maturity: provisional
+        description: The component's amount (mol/L) or mass (g/L, mg/m3) per volume of its mixture (the salt of an
+          electrolyte, an impurity in a feed gas), or its molality (mol/kg), as stated; not a fraction.
       loading:
         type: value
+        quantity: loading
+        context:
+          fraction_basis: loading_basis
         description: 'For a support: the loading of the active phase on it, as stated.'
       loading_basis:
         type: enum
@@ -1253,6 +1294,7 @@ edges:
     properties:
       fraction:
         type: value
+        quantity: composition_fraction
       crystallite_size:
         type: value
       negated:
@@ -1423,6 +1465,9 @@ edges:
     properties:
       fraction:
         type: value
+        quantity: composition_fraction
+        context:
+          fraction_basis: fraction_basis
       fraction_basis:
         type: enum
         values:
@@ -1986,6 +2031,7 @@ edges:
         - not_reported
       temperature_difference:
         type: value
+        quantity: temperature
         description: Remaining difference between the dark and illuminated catalyst temperatures, when
           stated.
   ILLUMINATES:
@@ -2077,6 +2123,7 @@ adds_properties:
       type: value
     hot_spot:
       type: value
+      quantity: temperature
       description: The largest excess of the bed temperature over the set point, when stated.
     heated_element:
       type: text
@@ -2087,10 +2134,12 @@ adds_properties:
       description: Electrical power converted to heat in the heated element. Interface term.
     heating_current:
       type: value
+      quantity: electric_current
       description: Current through the heated element (not an electrochemical current; electrocatalysis's
         current is the current of an electrochemical cell). Interface term.
     heating_voltage:
       type: value
+      quantity: electric_potential
       description: Voltage across the heated element (not a cell voltage). Interface term.
     field_frequency:
       type: value
@@ -2107,9 +2156,17 @@ adds_properties:
       - not_reported
     electrode_potential:
       type: value
-      description: The working-electrode potential, on the scale given in reference_scale.
+      quantity: electrode_potential
+      context:
+        potential_reference: reference_scale
+      description: The working-electrode potential, on the scale its unit or basis names (V vs RHE) or else the
+        experiment's reference_scale. A potential converted to another scale than the experiment's is an evidenced
+        conversion (origin derived or computed, with produced_by naming the conversion); one that names another scale
+        without it is contradictory.
     reference_scale:
       type: enum
+      description: The scale the experiment's potentials are stated on (which, when the source converts, need not be
+        its reference electrode's); the potential_reference of electrode_potential and onset_potential.
       values:
       - rhe
       - she
@@ -2131,13 +2188,20 @@ adds_properties:
       type: number
     cell_voltage:
       type: value
+      quantity: electric_potential
       description: Voltage between the working and counter electrodes of the electrochemical cell.
     current:
       type: value
+      quantity: electric_current
       description: Current through the electrochemical cell (working electrode).
     current_density:
       type: value
-      description: Its basis (geometric, ECSA) is the value's basis and current_normalization.
+      quantity: current_density
+      context:
+        current_normalization: current_normalization
+      description: The current divided by what current_normalization names (the geometric or the electrochemically
+        active electrode area, or the catalyst mass); the value's own basis, unit or normalized_by may name it too and
+        must agree. A geometric-area and an ECSA-normalized current density are two quantities.
     current_normalization:
       type: enum
       description: What currents are divided by; geometric and ECSA-normalized current densities are not
@@ -2153,11 +2217,15 @@ adds_properties:
       type: value
     faradaic_efficiency:
       type: list
+      quantity: faradaic_efficiency
       items:
         type: value
       description: One value per product, each naming its product species in target.
     partial_current_density:
       type: list
+      quantity: partial_current_density
+      context:
+        current_normalization: current_normalization
       items:
         type: value
     light_absorber:
@@ -2197,11 +2265,13 @@ adds_properties:
       type: text
     apparent_quantum_yield:
       type: list
+      quantity: photonic_yield
       items:
         type: value
       description: One value per product (target), at the wavelength and irradiance stated.
     quantum_yield:
       type: list
+      quantity: quantum_yield
       items:
         type: value
     photocatalyst_loading:
@@ -2213,17 +2283,21 @@ adds_properties:
       type: value
     applied_voltage:
       type: value
+      quantity: electric_potential
     excitation_frequency:
       type: value
     energy_yield:
       type: list
+      quantity: energy_yield
       items:
         type: value
       description: Product per energy (e.g. g/kWh), one value per product (target).
     plasma_energy_efficiency:
       type: value
+      quantity: efficiency
     light_induced_temperature_rise:
       type: value
+      quantity: temperature
       description: Catalyst temperature rise caused by illumination, as measured.
     heat_source:
       type: enum
@@ -2234,17 +2308,26 @@ adds_properties:
       - not_reported
     photocurrent_density:
       type: value
+      quantity: current_density
+      context:
+        current_normalization: current_normalization
     photovoltage:
       type: value
+      quantity: electric_potential
     onset_potential:
       type: value
+      quantity: electrode_potential
+      context:
+        potential_reference: reference_scale
     ipce:
       type: list
+      quantity: efficiency
       items:
         type: value
       description: Incident photon-to-current efficiency, one value per wavelength (variable or note).
     abpe:
       type: value
+      quantity: efficiency
       description: Applied bias photon-to-current efficiency.
     excited_species:
       type: text
