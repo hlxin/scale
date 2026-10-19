@@ -459,8 +459,9 @@ def main():
         totals.update(st)
         created_all += created_ids
         del hints
-    n_csv = None if a.no_export else led.export(topics=[a.topic])
-    stats = {**dict(totals), "batches": len(groups), "index_rows": n_csv, "new_ids": created_all[:50],
+    if not a.no_export:
+        led.export(topics=[a.topic])
+    stats = {**dict(totals), "batches": len(groups), "database": None if a.no_export else led.last_publish, "new_ids": created_all[:50],
              "run_started": run_started, "built_at": now_iso()}
     if a.no_export:
         stats["next"] = "export.py --topic " + a.topic + " (index CSVs and papers.db were not refreshed)"

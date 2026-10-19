@@ -121,7 +121,8 @@ def probe(proj, slug):
     out = {"slug": slug, "exists": True, "topic": cfg.get("topic"), "created_at": cfg.get("created_at"),
            "last_full_index": li, "last_update": lu, "screening": (cfg.get("screening") or {}).get("method"),
            "download_access_types": (cfg.get("download") or {}).get("access_types"),
-           "index_folder": proj.rel(proj.index_dir(slug)), "papers_folder": proj.rel(proj.pub / slug / "papers")}
+           "database": proj.rel(proj.db), "papers_folder": proj.rel(proj.pub / slug / "papers"),
+           "index_csv": proj.rel(proj.index_dir(slug)) if (proj.index_dir(slug) / "merged.csv").exists() else None}
     if proj.ledger_db.exists():
         import sqlite3
         con = sqlite3.connect(f"file:{proj.ledger_db}?mode=ro", uri=True)

@@ -36,10 +36,10 @@ request, no mode:
 
 ```
 publications/
-  papers.db                         SQLite database of every topic (open with DB Browser for SQLite, pandas, R)
-  <topic>/index/merged.csv          the topic's index (in scope or not screened)
-  <topic>/index/OA.csv, OA+ND.csv, Free-to-read.csv, Paywalled.csv   the same, split by access type
-  <topic>/index/excluded.csv        screened out / not research articles / retracted, with the reason
+  papers.db                         SQLite database of every topic, updated in place by every step, with its history
+                                    (open with DB Browser for SQLite, pandas, R)
+  <topic>/index/*.csv               on request: merged.csv (in scope or not screened), one CSV per access type,
+                                    excluded.csv (screened out / not research articles / retracted, with the reason)
   <topic>/papers/<access>/<ID>.pdf  downloaded papers; SI in <topic>/papers/SI/<access>/
   <topic>/corpora/<name>/sources.json   a frozen corpus for curation: every paper with its status (freeze_corpus.py)
   exports/                          filtered lists you asked for
@@ -116,7 +116,11 @@ SELECT p.title FROM papers p JOIN paper_subjects s ON s.paper_id = p.id WHERE s.
 SELECT p.title FROM papers_fts JOIN papers p ON p.id = papers_fts.rowid WHERE papers_fts MATCH 'copper AND ethylene';
 ```
 
-`papers.db` is rebuilt by every step; edits made in it are overwritten (ask Claude to change data through the skill).
+`papers.db` evolves: every step updates, in place, only the papers it changed, and records the run (`runs`) and the
+changes (`changes`: added, merged, access, licence, retraction, download, SI ...). It also carries the topics' queries
+and settings, so whoever receives the file can keep updating it. A sync rewrites the rows of the papers it touches, so
+change data through the skill rather than by editing the file. Saved filters (`filters.py`) keep a selection, such
+as all CO2-reduction papers, up to date in the same file.
 
 ## Requirements
 

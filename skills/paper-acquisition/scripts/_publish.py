@@ -1,12 +1,19 @@
-"""Build publications/papers.db — the project's paper database (library module — not run directly).
+"""publications/papers.db — the project's paper database, kept up to date in place (library module — not run directly).
 
-A fresh, normalized SQLite snapshot of the working ledger, rebuilt atomically (tmp file -> rename) by every export, so
-anyone can open it with any SQLite tool (DB Browser for SQLite, `sqlite3`, pandas, R) while scripts keep working.
-Edits made to this file are overwritten by the next export: change data through the skill's scripts instead.
+The database evolves; it is not rebuilt. The working ledger (.scripts/ledger.sqlite) marks every paper a step touches
+(triggers fill its publish_queue), and sync_published_db() rewrites only those papers' rows here — the paper, its
+authors, topics, identifiers, files, SI and curation results, and its full-text entry — records what changed
+(`changes`) and the step that changed it (`runs`), and keeps the working state the ledger needs (`_paper_state`, and
+the topics' settings, queries and decisions in `project_files`). So the ledger can be rebuilt from this file alone
+(adopt_ledger: anyone with the skill and papers.db can carry on), and saved filters (`filters`, `filter_members`;
+_filters.py) are refreshed when papers' text, topics or retractions change. Open it with any SQLite tool (DB Browser
+for SQLite, `sqlite3`, pandas, R) while scripts keep working; change data through the skill's scripts, since a sync
+rewrites the rows of the papers it touches. A full rebuild (export.py --rebuild) is only a fallback, and it keeps the
+history.
 
 Tables
   papers             one row per paper: bibliographic data, abstract, Topic A/B/C, access, license, download state
-  authors            one row per author (merged by ORCID / OpenAlex id, else by name)
+  authors            one row per author (merged by ORCID / OpenAlex id, else by name; ids stay the same across updates)
   paper_authors      author order, institutions and countries per paper
   collections        the indexed topics (publications/<topic>/) with counts and dates
   paper_collections  paper <-> topic: relevance 0-5, scope decision, PDF path in that topic
@@ -18,17 +25,28 @@ Tables
   supplements        SI deposits the search found for a paper (Figshare, DataCite, ACS '.s001' DOIs ...), before or
                      without a download
   extractions        curation status per paper, topic and graph
-  about              build time, counts, column descriptions and example queries
+  about              creation and update times, counts, column descriptions and example queries
   papers_fts         full-text index over title, abstract and keywords (when the SQLite build has FTS5)
+  runs               every step that changed the database: when, which step and topics, papers added/updated/removed
+  changes            what changed per paper and run: added, removed (merged into / SI of), access, license, version,
+                     retraction, download, SI, Topic A, DOI, a topic's scope
+  filters            saved filters (a definition in JSON) and filter_members, their papers with a label and level
+  _paper_state, project_files, author_keys, _si_links_unattached   the working state behind the tables above
+                     (see adopt_ledger)
 Views: v_papers (papers + collections + authors as text), v_collection_papers (one row per paper and topic).
 """
+import hashlib
 import json
 import os
 import re
 import sqlite3
+import sys
+import zlib
+from pathlib import Path
 
-from _common import SOURCE_LABEL, export_abstract, json_read, log, now_iso
+from _common import SOURCE_LABEL, export_abstract, file_lock, json_read, log, now_iso
 
+FORMAT = "evolving-1"
 DDL = """
 CREATE TABLE papers (
   id INTEGER PRIMARY KEY, doi TEXT, identifier TEXT, title TEXT, authors TEXT, year INTEGER, venue TEXT,
@@ -82,6 +100,40 @@ CREATE VIEW v_collection_papers AS
   SELECT c.collection, c.relevance, c.relevance_note, c.in_scope, c.pdf_path, c.date_added AS added_to_collection, p.*
   FROM paper_collections c JOIN papers p ON p.id = c.paper_id;
 """
+# history, working state and saved filters (added in place to an older database)
+STATE_DDL = """
+CREATE TABLE IF NOT EXISTS runs (id INTEGER PRIMARY KEY, at TEXT, step TEXT, topics TEXT, added INTEGER,
+  updated INTEGER, removed INTEGER, papers INTEGER, note TEXT);
+CREATE TABLE IF NOT EXISTS changes (run_id INTEGER, paper_id INTEGER, change TEXT, field TEXT, old TEXT, new TEXT);
+CREATE TABLE IF NOT EXISTS author_keys (kind TEXT, value TEXT, author_id INTEGER, PRIMARY KEY (kind, value));
+CREATE TABLE IF NOT EXISTS _paper_state (paper_id INTEGER PRIMARY KEY, state BLOB NOT NULL);
+CREATE TABLE IF NOT EXISTS project_files (path TEXT PRIMARY KEY, content TEXT, sha256 TEXT, updated_at TEXT);
+CREATE TABLE IF NOT EXISTS _si_links_unattached (parent_doi TEXT, si_doi TEXT, url TEXT, title TEXT, source TEXT,
+  date_added TEXT, PRIMARY KEY (parent_doi, si_doi));
+CREATE TABLE IF NOT EXISTS filters (name TEXT PRIMARY KEY, description TEXT, definition TEXT NOT NULL,
+  created_at TEXT, updated_at TEXT, refreshed_at TEXT, members INTEGER);
+CREATE TABLE IF NOT EXISTS filter_members (filter TEXT, paper_id INTEGER, label TEXT, level TEXT,
+  PRIMARY KEY (filter, paper_id, label));
+"""
+STATE_INDEXES = """
+CREATE INDEX IF NOT EXISTS ix_fm_paper ON filter_members(paper_id);
+CREATE INDEX IF NOT EXISTS ix_id_paper ON identifiers(paper_id);
+CREATE INDEX IF NOT EXISTS ix_files_paper ON files(paper_id);
+CREATE INDEX IF NOT EXISTS ix_ext_paper ON extractions(paper_id);
+CREATE INDEX IF NOT EXISTS ix_changes_paper ON changes(paper_id);
+CREATE INDEX IF NOT EXISTS ix_changes_run ON changes(run_id);
+"""
+FTS_TRIGGERS = """
+CREATE TRIGGER IF NOT EXISTS papers_fts_ai AFTER INSERT ON papers BEGIN
+  INSERT INTO papers_fts(rowid, title, abstract, keywords) VALUES (new.id, new.title, new.abstract, new.keywords); END;
+CREATE TRIGGER IF NOT EXISTS papers_fts_ad AFTER DELETE ON papers BEGIN
+  INSERT INTO papers_fts(papers_fts, rowid, title, abstract, keywords)
+  VALUES ('delete', old.id, old.title, old.abstract, old.keywords); END;
+CREATE TRIGGER IF NOT EXISTS papers_fts_au AFTER UPDATE ON papers BEGIN
+  INSERT INTO papers_fts(papers_fts, rowid, title, abstract, keywords)
+  VALUES ('delete', old.id, old.title, old.abstract, old.keywords);
+  INSERT INTO papers_fts(rowid, title, abstract, keywords) VALUES (new.id, new.title, new.abstract, new.keywords); END;
+"""
 COLUMN_HELP = {
     "papers.identifier": "DOI, else the best other identifier (patent number, arXiv:..., OSTI:...)",
     "papers.topic_a": "the paper's main topic (Topic A); topic_b / topic_c are the next two — labels from `subjects`",
@@ -99,6 +151,9 @@ COLUMN_HELP = {
                           "WO, EP, US ... merged into one row), pmid, pmcid, arxiv, osti, supplement_to ...",
     "supplements": "SI deposits found by the search for a paper (doi, url, title, source); files holds the SI actually "
                    "downloaded",
+    "runs": "one row per step that changed the database (at, step, topics, papers added / updated / removed)",
+    "changes": "per paper and run: change = added | removed | changed | collection; field, old and new value",
+    "filters": "saved filters: name, definition (JSON), last refresh, members; filter_members lists their papers",
 }
 EXAMPLES = [
     "-- papers of a topic, newest first\nSELECT id, title, year, venue FROM v_collection_papers WHERE collection = 'co2rr' "
@@ -116,7 +171,28 @@ EXAMPLES = [
     "ON p.id = s.paper_id WHERE p.downloaded = 'No';",
     "-- every number of one patented invention\nSELECT p.title, i.value FROM identifiers i JOIN papers p ON p.id = i.paper_id "
     "WHERE i.scheme = 'patent' AND p.title LIKE '%co-catalyzed%';",
+    "-- what is new since a date\nSELECT p.title, r.at, r.step FROM changes c JOIN runs r ON r.id = c.run_id JOIN papers p "
+    "ON p.id = c.paper_id WHERE c.change = 'added' AND r.at >= '2026-06-01';",
+    "-- papers that became open access\nSELECT p.title, c.old, c.new, r.at FROM changes c JOIN runs r ON r.id = c.run_id "
+    "JOIN papers p ON p.id = c.paper_id WHERE c.field = 'access_type' AND c.new IN ('OA', 'OA+ND');",
+    "-- a saved filter's papers\nSELECT p.title, m.label, m.level FROM filter_members m JOIN papers p ON p.id = m.paper_id "
+    "WHERE m.filter = 'co2-reduction-electricity';",
 ]
+# the papers table's columns, as the ledger's papers columns they copy unchanged (the rest is in _paper_state)
+COPIED = {"id": "id", "doi": "doi", "title": "title", "year": "year", "venue": "journal", "publisher": "publisher",
+          "doc_type": "doc_type", "abstract_source": "abstract_source", "access_type": "access_type",
+          "oa_status": "oa_status", "citations": "cited_by", "citation_percentile": "percentile",
+          "is_preprint": "is_preprint", "is_retracted": "retracted", "is_non_paper": "is_erratum",
+          "download_source": "download_source", "download_url": "download_url", "download_date": "download_date",
+          "pages": "page_count", "sha1": "sha1", "date_added": "date_added", "last_checked": "last_checked"}
+STATE_SKIP = set(COPIED.values()) | {"abstract"}
+TRACKED = ("doi", "access_type", "license", "version", "is_preprint", "is_retracted", "downloaded", "si", "topic_a")
+TEXTUAL = ("title", "abstract", "keywords", "topic_a", "topic_b", "topic_c", "related_topics", "is_retracted",
+           "is_non_paper")
+BY_PAPER = ("paper_authors", "paper_collections", "paper_subjects", "paper_sources", "identifiers", "files",
+            "supplements", "extractions", "_paper_state")
+PROJECT_FILES = ("config.json", "queries.json", "state.json", "criteria.md", "keywords.json")
+CHUNK = 20000
 
 
 def _fts_ok(con):
@@ -140,7 +216,370 @@ def _norm_name(n):
     return re.sub(r"[^a-z]", "", (n or "").lower())
 
 
-def build_published_db(led, vocab):
+def pack_state(state):
+    """A paper's working state as stored: compact JSON, compressed (empty fields left out: the ledger's defaults)."""
+    keep = {k: v for k, v in state.items() if v is not None and v != [] and v != {}}
+    return zlib.compress(json.dumps(keep, ensure_ascii=False, separators=(",", ":"), default=str).encode("utf-8"), 6)
+
+
+def unpack_state(blob):
+    if isinstance(blob, (bytes, memoryview)):
+        return json.loads(zlib.decompress(bytes(blob)).decode("utf-8"))
+    return json.loads(blob)
+
+
+def _tables(con):
+    return {r[0] for r in con.execute("SELECT name FROM sqlite_master WHERE type IN ('table', 'view')")}
+
+
+def has_state(path):
+    """True when the database at `path` is an evolving one (it carries its history and working state)."""
+    if not Path(path).is_file():
+        return False
+    try:
+        con = sqlite3.connect(f"file:{path}?mode=ro", uri=True)
+        try:
+            return {"runs", "_paper_state", "project_files"} <= _tables(con)
+        finally:
+            con.close()
+    except sqlite3.Error:
+        return False
+
+
+def _step_name(topics=None):
+    step = Path(sys.argv[0]).stem if sys.argv and sys.argv[0] else "python"
+    return step, ", ".join(topics or [])
+
+
+# ------------------------------------------------------------------ rows of one paper
+def _side(led, where, args):
+    """Everything a paper's rows need besides its ledger row, for the papers `where` selects (BETWEEN or IN)."""
+    subj, meta, topics, alias, sup, links, ext = {}, {}, {}, {}, {}, {}, {}
+    for r in led.q(f"SELECT paper_id, term, kind, rank, method, score FROM paper_subjects WHERE paper_id {where} "
+                   "ORDER BY paper_id, kind DESC, rank", args):
+        d = subj.setdefault(r[0], {"main": [], "related": []})
+        d["main" if r[2] == "main" else "related"].append(r[1])
+        meta[(r[0], r[1])] = (r[4], r[5])
+    for r in led.q(f"SELECT * FROM paper_topics WHERE paper_id {where} ORDER BY topic", args):
+        topics.setdefault(r["paper_id"], []).append(dict(r))
+    for r in led.q(f"SELECT doi, paper_id FROM dois WHERE paper_id {where}", args):
+        alias.setdefault(r[1], []).append(r[0])
+    for r in led.q("SELECT d.paper_id, l.parent_doi, l.si_doi, l.url, l.title, l.source, l.date_added FROM si_links l "
+                   f"JOIN dois d ON d.doi = l.parent_doi WHERE d.paper_id {where}", args):
+        sup.setdefault(r[0], {})[r[2]] = (r[0], r[2], r[3], r[4], r[5])
+        links.setdefault(r[0], []).append({"parent_doi": r[1], "si_doi": r[2], "url": r[3], "title": r[4],
+                                           "source": r[5], "date_added": r[6]})
+    for r in led.q(f"SELECT * FROM extractions WHERE paper_id {where}", args):
+        ext.setdefault(r["paper_id"], []).append(dict(r))
+    return {"subj": subj, "meta": meta, "topics": topics, "alias": alias, "sup": sup, "links": links, "ext": ext}
+
+
+class _Authors:
+    """Author ids that stay the same across updates: one id per ORCID, else OpenAlex id, else normalized name."""
+
+    def __init__(self, con, cache=True):
+        self.con, self.cache = con, {} if cache else None
+        self.next = (con.execute("SELECT MAX(id) FROM authors").fetchone()[0] or 0) + 1
+
+    def id_for(self, a, name):
+        k = ("orcid", a["orcid"]) if a.get("orcid") else (("oa", a["openalex"]) if a.get("openalex") else
+                                                          ("name", _norm_name(name)))
+        if self.cache is not None and k in self.cache:
+            return self.cache[k]
+        r = self.con.execute("SELECT author_id FROM author_keys WHERE kind=? AND value=?", k).fetchone()
+        if r:
+            aid = r[0]
+        else:
+            aid, self.next = self.next, self.next + 1
+            self.con.execute("INSERT INTO authors VALUES (?,?,?,?)", (aid, name, a.get("orcid"), a.get("openalex")))
+            self.con.execute("INSERT INTO author_keys VALUES (?,?,?)", (*k, aid))
+        if self.cache is not None:
+            self.cache[k] = aid
+        return aid
+
+
+def _rows(p, side, vocab, authors, L):
+    """The rows of one paper in every table, or None when the paper is in no topic (it is not published)."""
+    pid = p["id"]
+    ts = side["topics"].get(pid)
+    if not ts:
+        return None
+    al = side["alias"].get(pid, [])
+    sup = side["sup"].get(pid, {})
+    fam = sorted(a[len("patent:"):] for a in al if a.startswith("patent:") and len(a) > len("patent:"))
+    p["_si_links"], p["_family"] = len(sup), fam
+    s = side["subj"].get(pid) or {"main": [], "related": []}
+    main = [vocab.label(t) for t in s["main"]] + [None, None, None]
+    lic, lic_url, lic_src = L.license_cells(p)
+    ver = p.get("version") if p.get("downloaded") else next(
+        (v.get("version") for v in p.get("versions") or [] if v.get("access") == p.get("access_type") and v.get("version")),
+        None)
+    abstract = export_abstract(p.get("abstract") or "") or None
+    out = {t: [] for t in ("papers",) + BY_PAPER}
+    out["papers"].append((pid, p.get("doi"), L.identifier(p), p.get("title"), L.fmt_authors(p.get("authors"), cap=0),
+                          p.get("year"), p.get("journal"), p.get("publisher"), p.get("doc_type"), L.url_of(p),
+                          abstract, p.get("abstract_source"), "; ".join(p.get("keywords") or []),
+                          main[0], main[1], main[2], "; ".join(vocab.label(t) for t in s["related"]),
+                          p.get("access_type"), lic or None, lic_url or None, lic_src or None, p.get("oa_status"),
+                          L.VERSION_LABEL.get(ver or "", ver), p.get("cited_by"), p.get("percentile"),
+                          p.get("is_preprint"), p.get("retracted"), p.get("is_erratum"),
+                          "; ".join(SOURCE_LABEL.get(d, d) for d in p.get("databases") or []), L.downloaded_cell(p),
+                          p.get("download_source"), p.get("download_url"), p.get("download_date"), p.get("page_count"),
+                          p.get("sha1"), L.si_cell(p) or None, L.notes_for(p) or None, p.get("date_added"),
+                          p.get("last_checked")))
+    detail = p.get("authors_detail") or [{"name": n} for n in p.get("authors") or []]
+    for pos, a in enumerate(detail, 1):
+        name = (a.get("name") or "").strip()
+        if not name:
+            continue
+        out["paper_authors"].append((pid, authors.id_for(a, name), pos, "; ".join(a.get("institutions") or []) or None,
+                                     "; ".join(a.get("countries") or []) or None))
+    for t in ts:
+        out["paper_collections"].append((pid, t["topic"], t.get("relevance"), t.get("relevance_note"),
+                                         t.get("relevance_method"), t.get("in_scope"), t.get("path"), t.get("si_paths"),
+                                         t.get("date_added")))
+        if t.get("path"):
+            out["files"].append((pid, t["topic"], "pdf", t["path"]))
+        for sp in json.loads(t.get("si_paths") or "[]"):
+            out["files"].append((pid, t["topic"], "si", sp))
+    for kind in ("main", "related"):
+        for i, term in enumerate(s[kind], 1):
+            m = side["meta"].get((pid, term)) or (None, None)
+            out["paper_subjects"].append((pid, term, vocab.label(term), kind, i, m[0], m[1]))
+    for d in dict.fromkeys(p.get("databases") or []):
+        out["paper_sources"].append((pid, d))
+    for d in sorted(set([a for a in al if not a.startswith(("patent:", "nodoi:"))] + ([p["doi"]] if p.get("doi") else []))):
+        out["identifiers"].append((pid, "doi", d))
+    for num in fam:
+        out["identifiers"].append((pid, "patent", num))
+    for k, v in (p.get("external_ids") or {}).items():
+        if v and not isinstance(v, (dict, list)):
+            out["identifiers"].append((pid, k, str(v)))
+    for e in side["ext"].get(pid, []):
+        out["extractions"].append((pid, e["topic"], e["kg"], e["status"], e.get("schema_version"), e.get("nodes"),
+                                   e.get("edges"), e.get("date"), e.get("note")))
+    out["supplements"] += list(sup.values())
+    state = {k: v for k, v in p.items() if k not in STATE_SKIP and not k.startswith(("_", "t_"))}
+    if (p.get("abstract") or None) != abstract:
+        state["abstract"] = p.get("abstract")
+    state["_aliases"] = sorted(al)
+    if side["links"].get(pid):
+        state["_si_links"] = side["links"][pid]
+    out["_paper_state"].append((pid, pack_state(state)))
+    return out
+
+
+INSERT = {"papers": f"INSERT INTO papers VALUES ({','.join('?' * 39)})",
+          "paper_authors": "INSERT OR IGNORE INTO paper_authors VALUES (?,?,?,?,?)",
+          "paper_collections": "INSERT INTO paper_collections VALUES (?,?,?,?,?,?,?,?,?)",
+          "paper_subjects": "INSERT OR IGNORE INTO paper_subjects VALUES (?,?,?,?,?,?,?)",
+          "paper_sources": "INSERT OR IGNORE INTO paper_sources VALUES (?,?)",
+          "identifiers": "INSERT INTO identifiers VALUES (?,?,?)",
+          "files": "INSERT INTO files VALUES (?,?,?,?)",
+          "supplements": "INSERT INTO supplements VALUES (?,?,?,?,?)",
+          "extractions": "INSERT INTO extractions VALUES (?,?,?,?,?,?,?,?,?)",
+          "_paper_state": "INSERT INTO _paper_state VALUES (?,?)"}
+
+
+def _insert(con, rows):
+    for t, sql in INSERT.items():
+        if rows.get(t):
+            con.executemany(sql, rows[t])
+
+
+# ------------------------------------------------------------------ the small tables, the project files
+def _refresh_small(con, led, vocab, created_at=None):
+    proj = led.proj
+    sources = {r[0] for r in con.execute("SELECT DISTINCT source FROM paper_sources")}
+    con.execute("DELETE FROM sources")
+    con.executemany("INSERT INTO sources VALUES (?,?)", [(k, SOURCE_LABEL.get(k, k)) for k in sorted(sources)])
+    con.execute("DELETE FROM subjects")
+    con.executemany("INSERT INTO subjects VALUES (?,?,?,?,?)",
+                    [(t, vocab.terms[t]["label"], vocab.terms[t].get("name"), vocab.terms[t].get("facet"),
+                      "; ".join(vocab.label(x) for x in vocab.terms[t].get("related") or [])) for t in vocab.order])
+    con.execute("DELETE FROM collections")
+    for (slug,) in con.execute("SELECT DISTINCT collection FROM paper_collections ORDER BY collection").fetchall():
+        cfg = json_read(proj.topic_dir(slug) / "config.json", {}) or {}
+        st = json_read(proj.topic_dir(slug) / "state.json", {}) or {}
+        c = con.execute("SELECT COUNT(*), SUM(CASE WHEN c.in_scope=1 AND COALESCE(p.is_non_paper,0)=0 AND "
+                        "COALESCE(p.is_retracted,0)=0 THEN 1 ELSE 0 END), SUM(CASE WHEN c.in_scope=0 AND "
+                        "COALESCE(p.is_non_paper,0)=0 THEN 1 ELSE 0 END), SUM(CASE WHEN c.pdf_path IS NOT NULL THEN 1 "
+                        "ELSE 0 END) FROM paper_collections c JOIN papers p ON p.id = c.paper_id WHERE c.collection=?",
+                        (slug,)).fetchone()
+        li, lu = run_dates(st)
+        con.execute("INSERT INTO collections VALUES (?,?,?,?,?,?,?,?,?,?)",
+                    (slug, cfg.get("topic"), cfg.get("created_at"), li, lu, c[0], c[1] or 0, c[2] or 0, c[3] or 0,
+                     proj.rel(proj.pub / slug)))
+    _capture_project_files(con, proj, [r[0] for r in con.execute("SELECT slug FROM collections")])
+    # SI links whose parent DOI is no indexed paper (an issue DOI ...): kept so the ledger can be rebuilt whole
+    con.execute("DELETE FROM _si_links_unattached")
+    con.executemany("INSERT OR IGNORE INTO _si_links_unattached VALUES (?,?,?,?,?,?)", [tuple(r) for r in led.q(
+        "SELECT * FROM si_links l WHERE NOT EXISTS (SELECT 1 FROM dois d WHERE d.doi = l.parent_doi)")])
+    n_papers = con.execute("SELECT COUNT(*) FROM papers").fetchone()[0]
+    old = dict(con.execute("SELECT name, value FROM about").fetchall())
+    now = now_iso()
+    about = {"format": FORMAT, "created_at": created_at or old.get("created_at") or now, "updated_at": now,
+             "built_at": now, "papers": str(n_papers),
+             "authors": str(con.execute("SELECT COUNT(*) FROM authors").fetchone()[0]),
+             "source_of_truth": "this file: it evolves in place (runs, changes), and the skill's working ledger "
+                                "(.scripts/ledger.sqlite) is rebuilt from it when missing",
+             "vocabulary": vocab.name, "examples": "\n\n".join(EXAMPLES)}
+    about.update({f"column:{k}": v for k, v in COLUMN_HELP.items()})
+    con.execute("DELETE FROM about")
+    con.executemany("INSERT INTO about VALUES (?,?)", sorted(about.items()))
+    return n_papers
+
+
+def _capture_project_files(con, proj, slugs):
+    """The small files that say what a topic searches and where its last run stopped, and the project's decisions:
+    kept in the database so the working folder can be rebuilt from it."""
+    paths = [f"{slug}/{n}" for slug in slugs for n in PROJECT_FILES] + ["dedup_decisions.jsonl", "vocab_custom.json"]
+    have = dict(con.execute("SELECT path, sha256 FROM project_files").fetchall())
+    for rel in paths:
+        f = proj.scr / rel
+        if not f.is_file():
+            continue
+        text = f.read_text(encoding="utf-8", errors="replace")
+        h = hashlib.sha256(text.encode("utf-8")).hexdigest()
+        if have.get(rel) != h:
+            con.execute("INSERT OR REPLACE INTO project_files VALUES (?,?,?,?)", (rel, text, h, now_iso()))
+
+
+# ------------------------------------------------------------------ in-place sync
+def _snapshot(con, ids):
+    """The current published state of these papers, for the change log: tracked fields, text and topic scope."""
+    marks = ",".join("?" * len(ids))
+    cols = sorted(set(TRACKED) | set(TEXTUAL))
+    out = {r[0]: dict(zip(["id"] + cols, r)) for r in
+           con.execute(f"SELECT id, {', '.join(cols)} FROM papers WHERE id IN ({marks})", ids)}
+    for pid, coll, scope in con.execute(f"SELECT paper_id, collection, in_scope FROM paper_collections "
+                                        f"WHERE paper_id IN ({marks})", ids):
+        if pid in out:
+            out[pid].setdefault("_collections", {})[coll] = scope
+    return out
+
+
+def _why_removed(led, old):
+    doi = old.get("doi")
+    if doi:
+        r = led.q("SELECT paper_id FROM dois WHERE doi=?", (doi,))
+        if r:
+            return f"merged into {r[0][0]}"
+        r = led.q("SELECT d.paper_id FROM si_links l JOIN dois d ON d.doi = l.parent_doi WHERE l.si_doi=? LIMIT 1", (doi,))
+        if r:
+            return f"supporting information of {r[0][0]}"
+    return "removed from every topic"
+
+
+def _changes(run_id, pid, old, new, led):
+    """Change-log rows for one paper, and whether its text, topics or exclusion changed (saved filters re-run)."""
+    rows = []
+    if old is None and new is None:
+        return rows, False
+    if old is None:
+        return [(run_id, pid, "added", None, None, ", ".join(sorted(new.get("_collections") or {})))], True
+    if new is None:
+        return [(run_id, pid, "removed", None, old.get("doi"), _why_removed(led, old))], True
+    for f in TRACKED:
+        if str(old.get(f)) != str(new.get(f)):
+            rows.append((run_id, pid, "changed", f, None if old.get(f) is None else str(old[f]),
+                         None if new.get(f) is None else str(new[f])))
+    oc, nc = old.get("_collections") or {}, new.get("_collections") or {}
+    for c in sorted(set(oc) | set(nc)):
+        if oc.get(c, "-") != nc.get(c, "-"):
+            rows.append((run_id, pid, "collection", c, None if c not in oc else str(oc[c]),
+                         None if c not in nc else str(nc[c])))
+    textual = any(str(old.get(f)) != str(new.get(f)) for f in TEXTUAL)
+    return rows, textual
+
+
+def sync_published_db(led, vocab, topics=None, note=None):
+    """Publish the papers the ledger marked since the last sync, in place; record the run and what changed."""
+    import _ledger as L
+    proj = led.proj
+    with file_lock(proj.scr / "publish"):
+        if not has_state(proj.db):
+            return build_published_db(led, vocab, note=note or "the first evolving build of this database")
+        max_seq = led.q("SELECT MAX(seq) FROM publish_queue")[0][0] or 0
+        ids = [r[0] for r in led.q("SELECT DISTINCT paper_id FROM publish_queue WHERE seq <= ? ORDER BY paper_id",
+                                   (max_seq,))]
+        con = sqlite3.connect(str(proj.db), timeout=300)
+        con.execute("PRAGMA busy_timeout=300000")
+        con.executescript(STATE_DDL + STATE_INDEXES)
+        cols = [d[0] for d in con.execute("SELECT * FROM papers LIMIT 0").description]
+        step, tnames = _step_name(topics)
+        counts = {"added": 0, "updated": 0, "removed": 0}
+        refilter = False
+        with con:
+            run_id = con.execute("INSERT INTO runs(at, step, topics, note) VALUES (?,?,?,?)",
+                                 (now_iso(), step, tnames, note)).lastrowid
+        authors = _Authors(con, cache=False)
+        for i in range(0, len(ids), 5000):
+            part = ids[i:i + 5000]
+            marks = ",".join("?" * len(part))
+            ledger_rows = {r["id"]: led.row(r) for r in led.q(f"SELECT * FROM papers WHERE id IN ({marks})", part)}
+            side = _side(led, f"IN ({marks})", part)
+            old = _snapshot(con, part)
+            old_full = {r[0]: r for r in con.execute(f"SELECT * FROM papers WHERE id IN ({marks})", part)}
+            old_authors = {r[0] for r in con.execute(f"SELECT author_id FROM paper_authors WHERE paper_id IN ({marks})",
+                                                     part)}
+            with con:
+                con.execute(f"DELETE FROM papers WHERE id IN ({marks})", part)
+                for t in BY_PAPER:
+                    con.execute(f"DELETE FROM {t} WHERE paper_id IN ({marks})", part)
+                change_rows = []
+                for pid in part:
+                    rows = _rows(ledger_rows[pid], side, vocab, authors, L) if pid in ledger_rows else None
+                    new = None
+                    if rows:
+                        _insert(con, rows)
+                        r = rows["papers"][0]
+                        new = dict(zip(cols, r))
+                        new["_collections"] = {c[1]: c[5] for c in rows["paper_collections"]}
+                        if pid in old_full and tuple(old_full[pid]) != tuple(r):
+                            counts["updated"] += 1
+                    o = old.get(pid)
+                    if o is not None and new is None:
+                        counts["removed"] += 1
+                    elif o is None and new is not None:
+                        counts["added"] += 1
+                    cr, textual = _changes(run_id, pid, o, new, led)
+                    change_rows += cr
+                    refilter = refilter or textual
+                con.executemany("INSERT INTO changes VALUES (?,?,?,?,?,?)", change_rows)
+                if old_authors:                       # authors left with no paper (their papers merged away)
+                    con.execute("CREATE TEMP TABLE IF NOT EXISTS _old_authors (id INTEGER PRIMARY KEY)")
+                    con.execute("DELETE FROM _old_authors")
+                    con.executemany("INSERT OR IGNORE INTO _old_authors VALUES (?)", [(x,) for x in old_authors])
+                    con.execute("DELETE FROM author_keys WHERE author_id IN (SELECT o.id FROM _old_authors o WHERE NOT "
+                                "EXISTS (SELECT 1 FROM paper_authors pa WHERE pa.author_id = o.id))")
+                    con.execute("DELETE FROM authors WHERE id IN (SELECT o.id FROM _old_authors o WHERE NOT EXISTS "
+                                "(SELECT 1 FROM paper_authors pa WHERE pa.author_id = o.id))")
+        with con:
+            n_papers = _refresh_small(con, led, vocab)
+            con.execute("UPDATE runs SET added=?, updated=?, removed=?, papers=? WHERE id=?",
+                        (counts["added"], counts["updated"], counts["removed"], n_papers, run_id))
+            if not ids and not note:
+                con.execute("DELETE FROM runs WHERE id=?", (run_id,))     # a sync that changed nothing is no run
+        led.x("DELETE FROM publish_queue WHERE seq <= ?", (max_seq,))
+        refreshed = {}
+        if refilter:
+            from _filters import refresh
+            refreshed = refresh(con)
+        con.close()
+        res = {**counts, "papers": n_papers, "synced": len(ids)}
+        if refreshed:
+            res["filters"] = refreshed
+        if ids:
+            log(f"papers.db: {counts['added']} added, {counts['updated']} updated, {counts['removed']} removed "
+                f"({len(ids)} papers synced; {n_papers} in the database)")
+        return res
+
+
+# ------------------------------------------------------------------ a full build (the first one, or the fallback)
+def build_published_db(led, vocab, note=None):
+    """Build papers.db from the ledger in one pass: the first build of an evolving database, or the fallback
+    (export.py --rebuild). The history, saved filters and project files of an existing database are carried over."""
     import _ledger as L
     proj = led.proj
     path = proj.db
@@ -148,141 +587,110 @@ def build_published_db(led, vocab):
     for f in (tmp, proj.tmp / "papers.db.tmp-journal"):
         if f.exists():
             f.unlink()
+    max_seq = led.q("SELECT MAX(seq) FROM publish_queue")[0][0] or 0
     con = sqlite3.connect(str(tmp))
-    con.executescript("PRAGMA journal_mode=OFF; PRAGMA synchronous=OFF;" + DDL)
-    ext = led._extraction_map()
-    full_ext = {(r["paper_id"], r["topic"], r["kg"]): dict(r) for r in led.q("SELECT * FROM extractions")}
-    authors_ids, next_author = {}, 1
-    n_papers, sources_seen, slugs, last_id = 0, set(), set(), 0
-    # papers stream in id order, CHUNK at a time, with their subjects/topics/aliases/SI deposits read for the same id
-    # range — a ledger of millions of papers never sits in memory
-    CHUNK = 20000
+    con.executescript("PRAGMA journal_mode=OFF; PRAGMA synchronous=OFF;" + DDL + STATE_DDL)
+    created = None
+    if has_state(path):          # carry over the history and the saved filters
+        con.execute("ATTACH DATABASE ? AS old", (str(path),))       # only read
+        for t in ("runs", "changes", "filters", "project_files", "authors", "author_keys"):
+            con.execute(f"INSERT INTO main.{t} SELECT * FROM old.{t}")
+        created = (con.execute("SELECT value FROM old.about WHERE name='created_at'").fetchone() or [None])[0]
+        con.commit()
+        con.execute("DETACH DATABASE old")
+    elif path.exists():           # an older snapshot: the earlier exports were not recorded
+        note = note or "rebuilt from the ledger"
+    step, tnames = _step_name()
+    run_id = con.execute("INSERT INTO runs(at, step, topics, note) VALUES (?,?,?,?)",
+                         (now_iso(), step, tnames, note or "full rebuild from the ledger")).lastrowid
+    authors = _Authors(con, cache=True)
+    n_papers, last_id = 0, 0
     while True:
         chunk = [led.row(r) for r in led.q("SELECT * FROM papers WHERE id > ? ORDER BY id LIMIT ?", (last_id, CHUNK))]
         if not chunk:
             break
         lo, hi = chunk[0]["id"], chunk[-1]["id"]
         last_id = hi
-        subj, meta, topics, alias, si_n, sup = {}, {}, {}, {}, {}, {}
-        for r in led.q("SELECT paper_id, term, kind, rank, method, score FROM paper_subjects WHERE paper_id BETWEEN ? AND ? "
-                       "ORDER BY paper_id, kind DESC, rank", (lo, hi)):
-            d = subj.setdefault(r[0], {"main": [], "related": []})
-            d["main" if r[2] == "main" else "related"].append(r[1])
-            meta[(r[0], r[1])] = (r[4], r[5])
-        for r in led.q("SELECT * FROM paper_topics WHERE paper_id BETWEEN ? AND ? ORDER BY topic", (lo, hi)):
-            topics.setdefault(r["paper_id"], []).append(dict(r))
-        for r in led.q("SELECT doi, paper_id FROM dois WHERE paper_id BETWEEN ? AND ?", (lo, hi)):
-            alias.setdefault(r[1], []).append(r[0])
-        for r in led.q("SELECT d.paper_id, l.si_doi, l.url, l.title, l.source FROM si_links l JOIN dois d "
-                       "ON d.doi = l.parent_doi WHERE d.paper_id BETWEEN ? AND ?", (lo, hi)):
-            sup.setdefault(r[0], {})[r[1]] = (r[0], r[1], r[2], r[3], r[4])
-        p_rows, pa_rows, pc_rows, ps_rows, src_rows, id_rows, file_rows, ex_rows, sup_rows = [], [], [], [], [], [], [], [], []
+        side = _side(led, "BETWEEN ? AND ?", (lo, hi))
         for p in chunk:
-            ts = topics.get(p["id"])
-            if not ts:
-                continue
-            n_papers += 1
-            al = alias.get(p["id"], [])
-            fam = sorted(a[len("patent:"):] for a in al if a.startswith("patent:") and len(a) > len("patent:"))
-            p["_si_links"], p["_family"] = len(sup.get(p["id"], {})), fam
-            s = subj.get(p["id"]) or {"main": [], "related": []}
-            main = [vocab.label(t) for t in s["main"]] + [None, None, None]
-            lic, lic_url, lic_src = L.license_cells(p)
-            ver = p.get("version") if p.get("downloaded") else next(
-                (v.get("version") for v in p.get("versions") or [] if v.get("access") == p.get("access_type") and v.get("version")), None)
-            p_rows.append((p["id"], p.get("doi"), L.identifier(p), p.get("title"), L.fmt_authors(p.get("authors"), cap=0),
-                           p.get("year"), p.get("journal"), p.get("publisher"), p.get("doc_type"), L.url_of(p),
-                           export_abstract(p.get("abstract") or "") or None, p.get("abstract_source"),
-                           "; ".join(p.get("keywords") or []),
-                           main[0], main[1], main[2], "; ".join(vocab.label(t) for t in s["related"]),
-                           p.get("access_type"), lic or None, lic_url or None, lic_src or None, p.get("oa_status"),
-                           L.VERSION_LABEL.get(ver or "", ver), p.get("cited_by"), p.get("percentile"),
-                           p.get("is_preprint"), p.get("retracted"), p.get("is_erratum"),
-                           "; ".join(SOURCE_LABEL.get(d, d) for d in p.get("databases") or []), L.downloaded_cell(p),
-                           p.get("download_source"), p.get("download_url"), p.get("download_date"), p.get("page_count"),
-                           p.get("sha1"), L.si_cell(p) or None, L.notes_for(p) or None, p.get("date_added"),
-                           p.get("last_checked")))
-            # authors
-            detail = p.get("authors_detail") or []
-            names = p.get("authors") or []
-            if not detail:
-                detail = [{"name": n} for n in names]
-            for pos, a in enumerate(detail, 1):
-                name = (a.get("name") or "").strip()
-                if not name:
-                    continue
-                k = ("orcid", a["orcid"]) if a.get("orcid") else (("oa", a["openalex"]) if a.get("openalex") else ("name", _norm_name(name)))
-                aid = authors_ids.get(k)
-                if aid is None:
-                    aid = authors_ids[k] = next_author
-                    next_author += 1
-                    con.execute("INSERT INTO authors VALUES (?,?,?,?)", (aid, name, a.get("orcid"), a.get("openalex")))
-                pa_rows.append((p["id"], aid, pos, "; ".join(a.get("institutions") or []) or None,
-                                "; ".join(a.get("countries") or []) or None))
-            for t in ts:
-                slugs.add(t["topic"])
-                pc_rows.append((p["id"], t["topic"], t.get("relevance"), t.get("relevance_note"), t.get("relevance_method"),
-                                t.get("in_scope"), t.get("path"), t.get("si_paths"), t.get("date_added")))
-                if t.get("path"):
-                    file_rows.append((p["id"], t["topic"], "pdf", t["path"]))
-                for sp in json.loads(t.get("si_paths") or "[]"):
-                    file_rows.append((p["id"], t["topic"], "si", sp))
-            for kind in ("main", "related"):
-                for i, term in enumerate(s[kind], 1):
-                    m = meta.get((p["id"], term)) or (None, None)
-                    ps_rows.append((p["id"], term, vocab.label(term), kind, i, m[0], m[1]))
-            for d in p.get("databases") or []:
-                src_rows.append((p["id"], d))
-                sources_seen.add(d)
-            for d in sorted(set([a for a in al if not a.startswith(("patent:", "nodoi:"))] + ([p["doi"]] if p.get("doi") else []))):
-                id_rows.append((p["id"], "doi", d))
-            for num in fam:
-                id_rows.append((p["id"], "patent", num))
-            for k, v in (p.get("external_ids") or {}).items():
-                if v and not isinstance(v, (dict, list)):
-                    id_rows.append((p["id"], k, str(v)))
-            for e in ext.get(p["id"], []):
-                f_ = full_ext.get((p["id"], e["topic"], e["kg"])) or {}
-                ex_rows.append((p["id"], e["topic"], e["kg"], e["status"], f_.get("schema_version"), f_.get("nodes"),
-                                f_.get("edges"), e.get("date"), e.get("note")))
-            sup_rows += list(sup.get(p["id"], {}).values())
-        con.executemany(f"INSERT INTO papers VALUES ({','.join('?' * 39)})", p_rows)
-        con.executemany("INSERT OR IGNORE INTO paper_authors VALUES (?,?,?,?,?)", pa_rows)
-        con.executemany("INSERT INTO paper_collections VALUES (?,?,?,?,?,?,?,?,?)", pc_rows)
-        con.executemany("INSERT OR IGNORE INTO paper_subjects VALUES (?,?,?,?,?,?,?)", ps_rows)
-        con.executemany("INSERT OR IGNORE INTO paper_sources VALUES (?,?)", src_rows)
-        con.executemany("INSERT INTO identifiers VALUES (?,?,?)", id_rows)
-        con.executemany("INSERT INTO files VALUES (?,?,?,?)", file_rows)
-        con.executemany("INSERT INTO extractions VALUES (?,?,?,?,?,?,?,?,?)", ex_rows)
-        con.executemany("INSERT INTO supplements VALUES (?,?,?,?,?)", sup_rows)
-    con.executemany("INSERT INTO sources VALUES (?,?)", [(k, SOURCE_LABEL.get(k, k)) for k in sorted(sources_seen)])
-    con.executemany("INSERT INTO subjects VALUES (?,?,?,?,?)",
-                    [(t, vocab.terms[t]["label"], vocab.terms[t].get("name"), vocab.terms[t].get("facet"),
-                      "; ".join(vocab.label(x) for x in vocab.terms[t].get("related") or [])) for t in vocab.order])
-    # collections
-    for slug in sorted(slugs):
-        cfg = json_read(proj.topic_dir(slug) / "config.json", {}) or {}
-        st = json_read(proj.topic_dir(slug) / "state.json", {}) or {}
-        c = led.q("SELECT COUNT(*), SUM(CASE WHEN t.in_scope=1 AND p.is_erratum=0 AND COALESCE(p.retracted,0)=0 THEN 1 ELSE 0 END), "
-                  "SUM(CASE WHEN t.in_scope=0 AND p.is_erratum=0 THEN 1 ELSE 0 END), "
-                  "SUM(CASE WHEN t.path IS NOT NULL THEN 1 ELSE 0 END) FROM paper_topics t JOIN papers p ON p.id=t.paper_id "
-                  "WHERE t.topic=?", (slug,))[0]
-        li, lu = run_dates(st)
-        con.execute("INSERT INTO collections VALUES (?,?,?,?,?,?,?,?,?,?)",
-                    (slug, cfg.get("topic"), cfg.get("created_at"), li, lu, c[0], c[1] or 0, c[2] or 0, c[3] or 0,
-                     proj.rel(proj.pub / slug)))
-    con.executescript(POST)
+            rows = _rows(p, side, vocab, authors, L)
+            if rows:
+                _insert(con, rows)
+                n_papers += 1
+        con.commit()
+    con.executescript(POST + STATE_INDEXES)
+    con.execute("DELETE FROM authors WHERE id NOT IN (SELECT DISTINCT author_id FROM paper_authors)")
+    con.execute("DELETE FROM author_keys WHERE author_id NOT IN (SELECT id FROM authors)")
     if _fts_ok(con):
         con.executescript("CREATE VIRTUAL TABLE papers_fts USING fts5(title, abstract, keywords, content='papers', "
                           "content_rowid='id'); INSERT INTO papers_fts(rowid, title, abstract, keywords) "
-                          "SELECT id, title, abstract, keywords FROM papers;")
-    about = {"built_at": now_iso(), "papers": str(n_papers), "authors": str(next_author - 1),
-             "source_of_truth": ".scripts/ledger.sqlite (this file is a snapshot; edits here are overwritten)",
-             "vocabulary": vocab.name, "examples": "\n\n".join(EXAMPLES)}
-    about.update({f"column:{k}": v for k, v in COLUMN_HELP.items()})
-    con.executemany("INSERT INTO about VALUES (?,?)", sorted(about.items()))
+                          "SELECT id, title, abstract, keywords FROM papers;" + FTS_TRIGGERS)
+    n_papers = _refresh_small(con, led, vocab, created_at=created)
+    con.execute("UPDATE runs SET papers=? WHERE id=?", (n_papers, run_id))
     con.commit()
-    con.execute("VACUUM")
-    con.close()
+    from _filters import refresh
+    refresh(con)
+    con.commit()
+    con.close()                   # written once, in id order: nothing to compact
     os.replace(tmp, path)
-    return n_papers
+    led.x("DELETE FROM publish_queue WHERE seq <= ?", (max_seq,))
+    log(f"papers.db built: {n_papers} papers")
+    return {"added": 0, "updated": 0, "removed": 0, "papers": n_papers, "synced": n_papers, "rebuilt": True}
+
+
+# ------------------------------------------------------------------ the ledger from the database
+def adopt_ledger(led):
+    """Rebuild an empty working ledger (and the topics' working files) from publications/papers.db, so that a
+    project received as papers.db alone can be updated. Returns the number of papers adopted."""
+    import _ledger as L
+    proj = led.proj
+    pub = sqlite3.connect(f"file:{proj.db}?mode=ro", uri=True)
+    pub.row_factory = sqlite3.Row
+    cols = [r[1] for r in led.q("PRAGMA table_info(papers)")]
+    n, last = 0, 0
+    while True:
+        rows = pub.execute("SELECT p.*, s.state FROM papers p JOIN _paper_state s ON s.paper_id = p.id WHERE p.id > ? "
+                           "ORDER BY p.id LIMIT ?", (last, CHUNK)).fetchall()
+        if not rows:
+            break
+        last = rows[-1]["id"]
+        with led.tx():
+            for r in rows:
+                st = unpack_state(r["state"])
+                row = {k: v for k, v in st.items() if k in cols}
+                for pub_col, led_col in COPIED.items():
+                    row[led_col] = r[pub_col]
+                row["abstract"] = st["abstract"] if "abstract" in st else r["abstract"]
+                for k in L.JSON_COLS:
+                    if k in row and not isinstance(row[k], str):
+                        row[k] = json.dumps(row[k], ensure_ascii=False)
+                keys = [k for k in cols if k in row]
+                led.db.execute(f"INSERT OR REPLACE INTO papers ({', '.join(keys)}) VALUES ({','.join('?' * len(keys))})",
+                               [row[k] for k in keys])
+                led.db.executemany("INSERT OR IGNORE INTO dois VALUES (?,?)", [(a, r["id"]) for a in st.get("_aliases") or []])
+                led.db.executemany("INSERT OR IGNORE INTO si_links VALUES (?,?,?,?,?,?)",
+                                   [(s["parent_doi"], s["si_doi"], s.get("url"), s.get("title"), s.get("source"),
+                                     s.get("date_added")) for s in st.get("_si_links") or []])
+                n += 1
+            ids = [r["id"] for r in rows]
+            marks = ",".join("?" * len(ids))
+            led.db.executemany("INSERT OR REPLACE INTO paper_topics VALUES (?,?,?,?,?,?,?,?,?)", [tuple(x) for x in pub.execute(
+                "SELECT paper_id, collection, relevance, relevance_note, relevance_method, in_scope, pdf_path, "
+                f"COALESCE(si_paths, '[]'), date_added FROM paper_collections WHERE paper_id IN ({marks})", ids)])
+            led.db.executemany("INSERT OR REPLACE INTO paper_subjects VALUES (?,?,?,?,?,?)", [tuple(x) for x in pub.execute(
+                f"SELECT paper_id, term, kind, rank, method, score FROM paper_subjects WHERE paper_id IN ({marks})", ids)])
+            led.db.executemany("INSERT OR REPLACE INTO extractions VALUES (?,?,?,?,?,?,?,?,?)", [tuple(x) for x in pub.execute(
+                "SELECT paper_id, collection, kg, status, schema_version, nodes, edges, date, note FROM extractions "
+                f"WHERE paper_id IN ({marks})", ids)])
+    if "_si_links_unattached" in _tables(pub):
+        with led.tx():
+            led.db.executemany("INSERT OR IGNORE INTO si_links VALUES (?,?,?,?,?,?)",
+                               [tuple(x) for x in pub.execute("SELECT * FROM _si_links_unattached")])
+    for rel, content in pub.execute("SELECT path, content FROM project_files"):
+        f = proj.scr / rel
+        if not f.exists():
+            f.parent.mkdir(parents=True, exist_ok=True)
+            f.write_text(content, encoding="utf-8")
+    pub.close()
+    led.x("DELETE FROM publish_queue")          # the ledger now mirrors the database
+    return n

@@ -14,7 +14,7 @@
 ```
 publications/
   papers.db                                   the paper database: every topic, normalized, with full-text search
-  <topic>/index/OA.csv  OA+ND.csv  Free-to-read.csv  Paywalled.csv
+  <topic>/index/OA.csv  OA+ND.csv  Free-to-read.csv  Paywalled.csv   (on request: export.py --topic <slug> --csv)
   <topic>/index/merged.csv                    every paper of the topic that is in scope (or not screened)
   <topic>/index/excluded.csv                  screened out, not research articles, retracted — with the reason
   <topic>/papers/OA/  OA+ND/  Free-to-read/  Paywalled/          <ID>.pdf
@@ -24,9 +24,10 @@ publications/
 .scripts/                                     everything the agent generates (never needed to read the corpus)
 ```
 
-Every step rewrites the index CSVs and `papers.db` atomically from the working ledger (`.scripts/ledger.sqlite`).
-They are views: edits made in them are overwritten — change data through the scripts (`topics.py set`,
-`export.py --set-extracted`, a dedup) instead. CSVs are UTF-8 with BOM so Excel shows accents.
+Every step publishes the papers it changed into `papers.db`, in place: the working ledger (`.scripts/ledger.sqlite`)
+marks each paper a write touches (`publish_queue`), and the step's export rewrites just those papers' rows. The index
+CSVs are written only on request (`export.py --topic <slug> --csv`). A sync rewrites the rows of the papers it
+touches, so change data through the scripts (`topics.py set`, `export.py --set-extracted`, a dedup), not in the files. CSVs are UTF-8 with BOM so Excel shows accents.
 
 ## Index CSV columns (32)
 
@@ -75,8 +76,33 @@ vocabulary) + `paper_subjects` (kind `main` rank 1-3 = Topic A/B/C, or `related`
 `identifiers` (every DOI alias, PMCID, arXiv, every patent number of one invention ...), `files` (PDF/SI per topic),
 `supplements` (the SI listed for a paper before download: doi or file URL, url, title, source — the route that
 found it), `extractions` (curation
-status), `papers_fts` (full-text index on title, abstract, keywords). Views: `v_papers`, `v_collection_papers`.
-Built in chunks of 20,000 papers, so millions of rows are fine.
+status), `papers_fts` (full-text index on title, abstract, keywords; kept in step by triggers). Views: `v_papers`,
+`v_collection_papers`.
+
+History and state, in the same file:
+
+| Table | Contents |
+|---|---|
+| `runs` | one row per publish that changed something: `at`, `step` (the script), `topics`, `added`, `updated`, `removed`, `papers` (in the database after it), `note` |
+| `changes` | per paper and run: `change` = `added` (field: none; new: its topics) · `removed` (old: its DOI; new: `merged into <id>`, `supporting information of <id>`, `removed from every topic`) · `changed` (`field` = doi, access_type, license, version, is_preprint, is_retracted, downloaded, si, topic_a; `old`, `new`) · `collection` (field: the topic; old/new: in_scope, empty when it joined or left) |
+| `filters`, `filter_members` | saved filters (`filters.py`): name, definition (JSON), last refresh, members; their papers with a `label` and `level` (strict / broad) |
+| `_paper_state` | the ledger fields the tables above do not show (JSON per paper: key, author details, known copies, external ids, download state ...) |
+| `project_files` | the topics' `config.json`, `queries.json`, `state.json`, `criteria.md`, `keywords.json`, and the project's `dedup_decisions.jsonl` and `vocab_custom.json` |
+| `author_keys` | which ORCID, OpenAlex id or name each author id stands for, so ids stay the same across updates |
+| `_si_links_unattached` | SI links whose parent DOI is no indexed paper (an issue DOI ...), kept so the ledger can be rebuilt whole |
+
+With these, the file is self-contained: when `.scripts/ledger.sqlite` is missing, the first script that opens the
+project rebuilds it (and the topic files) from papers.db, and every step carries on from there. `export.py --rebuild`
+rebuilds papers.db from the ledger (a fallback; it keeps `runs`, `changes`, the filters and the author ids).
+
+```sql
+-- papers added since June, by run
+SELECT r.at, r.step, p.title FROM changes c JOIN runs r ON r.id = c.run_id JOIN papers p ON p.id = c.paper_id
+WHERE c.change = 'added' AND r.at >= '2026-06-01' ORDER BY r.at;
+-- papers that became open access
+SELECT p.title, c.old, c.new, r.at FROM changes c JOIN runs r ON r.id = c.run_id JOIN papers p ON p.id = c.paper_id
+WHERE c.field = 'access_type' AND c.new IN ('OA', 'OA+ND');
+```
 
 ```sql
 SELECT id, title, year, venue FROM v_collection_papers WHERE collection = 'co2rr' AND in_scope = 1 ORDER BY year DESC;
@@ -176,7 +202,8 @@ curator copied from the PDF.
 
 ## Internal files (`.scripts/`)
 
-`ledger.sqlite` (source of truth; also `si_links`, and aliases such as `patent:WO2008004088` in `dois`), `enrich/`
+`ledger.sqlite` (the working ledger: also `si_links`, aliases such as `patent:WO2008004088` in `dois`, and
+`publish_queue`, the papers changed since the last publish; rebuilt from papers.db when missing), `enrich/`
 (`<api>.sqlite`: API answers shared by topics, each dated; an older `<api>.jsonl` is imported once and kept),
 `dedup_decisions.jsonl`, `dedup_review.csv`, `logs/` (`download_attempts.jsonl`, `paywalled.log`, `dedup_log.jsonl`,
 `repair_log.jsonl`, `ezproxy_evidence/`), `rejected/wrong_paper/`,

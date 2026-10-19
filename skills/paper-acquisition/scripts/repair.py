@@ -82,7 +82,8 @@ def main():
     if not a.dry_run:
         jsonl_append(proj.logs / "repair_log.jsonl", res)
         if not a.no_export:
-            res["index_rows"] = led.export()
+            led.export()
+            res["database"] = led.last_publish
     print(json.dumps(res))
 
 

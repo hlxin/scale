@@ -17,6 +17,23 @@ no-derivatives (CC BY-NC-ND), which a licence rule in `REUSE.toml` cannot state 
 
 Put the unpacked file in this folder (or name it in `CATALYSIS_PAPERS_DB`) and [`consult.py`](consult.py) finds it.
 
+## Keeping it current
+
+The CO2 database is a saved filter of the catalysis database (`papers.db`), which evolves: every paper-acquisition
+step updates it in place and records what changed. The filter's definition is
+[`co2-reduction-electricity.filter.json`](co2-reduction-electricity.filter.json): concept CO2 reduction × driver
+(electrochemical, plasma, electrified heating), strict and broad, with errata, notices and retracted papers left
+out. Stored in `papers.db`, it re-runs after every update, and the CO2 file is exported from it:
+
+```bash
+S=skills/paper-acquisition/scripts
+python3 -I $S/filters.py define --name co2-reduction-electricity --file catalysis-index/co2-reduction-electricity.filter.json
+python3 -I $S/filters.py export --name co2-reduction-electricity --out co2-reduction-electricity.db --public
+```
+
+`define` is needed once per database; `export --public` keeps abstracts only for OA and OA+ND papers, as in the shared
+file.
+
 ## What is in it
 
 Papers on the reduction of CO2 (electrochemical, plasma, electrified heating) found in 24 open databases (OpenAlex,

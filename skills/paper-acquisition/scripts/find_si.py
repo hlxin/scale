@@ -378,10 +378,11 @@ def main():
             f"({el / 60:.1f} min, ~{el / max(done, 1) * max(total - done, 0) / 60:.0f} min left)")
         update_state(proj, a.topic, lambda st: st.__setitem__("find_si_progress", {
             "papers_done": done, "papers_total": total, "minutes": round(el / 60, 1), "updated_at": now_iso()}))
-    n_csv = None if a.no_export else led.export(topics=[a.topic])
+    if not a.no_export:
+        led.export(topics=[a.topic])
     res = {"papers": done, "papers_with_si": papers_with, "si_links_found": sum(by_route.values()),
            "si_links_added": cnt["links_added"], "by_route": dict(by_route), "deep_routes": deep,
-           "index_rows": n_csv, "complete": True, "finished_at": now_iso()}
+           "database": None if a.no_export else led.last_publish, "complete": True, "finished_at": now_iso()}
     if a.no_export:
         res["next"] = f"export.py --topic {a.topic} (index CSVs and papers.db were not refreshed)"
     update_state(proj, a.topic, lambda st: st.__setitem__("find_si", res))
