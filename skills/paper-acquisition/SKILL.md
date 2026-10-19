@@ -1,19 +1,19 @@
 ---
 name: paper-acquisition
-description: Builds and maintains a per-topic paper index and corpus. Index mode finds every matching paper, preprint, patent and dataset in 34 automated sources (OpenAlex, Crossref, Europe PMC, arXiv, OSTI, Zenodo; Scopus, Web of Science, Lens, EPO with keys) and writes publications/papers.db plus per-topic index CSVs split by access type (OA, OA+ND, Free-to-read, Paywalled) with abstract, exact license, supplementary information (SI) links, Topic A/B/C and related topics. Download mode fetches PDFs and SI, paywalled papers only through the library EZproxy at safe rates. Update mode exhaustively adds newer papers (all sources, citation chasing, access and retraction recheck). Duplicates merge automatically. Also imports Web of Science, Scopus or Zotero exports with their abstracts, answers questions about the indexed papers and writes filtered lists (CSV, BibTeX, RIS). Use whenever the user wants to find, index, import, list or download papers on a topic, refresh a literature corpus, or query the paper database. Curating the papers into scale-catal documents belongs to curate-corpus (a corpus) and curate-source (one source).
+description: Builds and maintains a per-topic paper index and corpus. Index mode finds every matching paper, preprint, patent and dataset in 34 automated sources (OpenAlex, Crossref, Europe PMC, arXiv, OSTI, Zenodo; Scopus, Web of Science, Lens, EPO with keys) and keeps publications/papers.db up to date in place, holding every paper with abstract, exact license, supplementary information (SI) links, Topic A/B/C and related topics, and the history of every run and change (index CSVs per access type — OA, OA+ND, Free-to-read, Paywalled — on request). Download mode fetches PDFs and SI, paywalled papers only through the library EZproxy at safe rates. Update mode exhaustively adds newer papers (all sources, citation chasing, access and retraction recheck). Duplicates merge automatically. Also imports Web of Science, Scopus or Zotero exports with their abstracts, answers questions about the indexed papers and writes filtered lists (CSV, BibTeX, RIS). Use whenever the user wants to find, index, import, list or download papers on a topic, refresh a literature corpus, or query the paper database. Curating the papers into scale-catal documents belongs to curate-corpus (a corpus) and curate-source (one source).
 allowed-tools:
   - Bash(python3 -I ${CLAUDE_SKILL_DIR}/scripts/*)
   - Bash(nohup python3 -I ${CLAUDE_SKILL_DIR}/scripts/*)
   - Bash(nohup zsh ${CLAUDE_SKILL_DIR}/scripts/run_paywalled.sh *)
   - "scale corpus check <manifest>"     # SCALE checks a frozen corpus (freeze_corpus.py)
-version: 3.3.1
+version: 3.4.0
 scale_release: ">=v0.2.0"
 inputs:
   - A topic in the user's words, or a Web of Science, Scopus or Zotero export, a list of DOIs or a web page of them
   - The access types to download (OA, OA+ND, Free-to-read, Paywalled) and how relevance is screened (Claude, an API, keywords or none)
   - Optional API keys in ~/.paper-acquisition/keys.txt (never through the chat), a polite-pool contact address, and the library's EZproxy host for paywalled papers
 outputs:
-  - publications/papers.db and the topic's index (OA, OA+ND, Free-to-read, Paywalled, merged and excluded CSVs), every paper, preprint, patent and dataset found, deduplicated, with its access type, exact licence, SI and Topic A/B/C
+  - publications/papers.db, updated in place by every step (runs and changes record how it evolved; it carries its working state, so whoever receives it can update it), with every paper, preprint, patent and dataset found, deduplicated, with its access type, exact licence, SI and Topic A/B/C; the topic's index CSVs on request
   - The downloaded PDFs and SI, filed by access type
   - For curation, a frozen corpus manifest (publications/<slug>/corpora/<name>/sources.json) that `scale corpus check` accepts
 validation:
@@ -59,7 +59,7 @@ turns into scale-catal documents with [curate-source](../curate-source/SKILL.md)
   user — the institution's rate limits must never be exceeded.
 - **Nothing is deleted.** Out-of-scope, wrong or duplicate files move under `.scripts/`. Every file the agent creates
   (logs, caches, batches, configs) lives in `.scripts/`; `publications/` holds only `papers.db`, the topic folders
-  (`index/`, `papers/`) and `exports/`.
+  (`papers/`, `corpora/`, and `index/` when CSVs were asked for) and `exports/`.
 - Run every command from the **project root** (the folder that holds or will hold `publications/` and `.scripts/`).
   A bare script name (`status.py ...`) means `python3 -I ${CLAUDE_SKILL_DIR}/scripts/status.py ...`. Scripts print
   one JSON line on stdout and progress on stderr; all of them resume where they stopped when re-run.
@@ -221,9 +221,9 @@ separate (Recommended) · Merge them all · Decide pair by pair. Then `dedup.py 
 
 **9 · Report.** `status.py --topic <slug>` and `topics.py summary --topic <slug>`. Tell the user in a few lines: papers
 indexed (by access type and document type), in scope, papers with SI listed (find_si `papers_with_si`), duplicates
-merged, the main Topic A values, papers without abstracts, sources skipped for want of a key, and where things are: `publications/<slug>/index/merged.csv` (plus one
-CSV per access type and `excluded.csv`) and `publications/papers.db`. Over 1,048,576 rows the CSVs no longer open in
-Excel: say so and point to papers.db (DB Browser for SQLite) or a filtered export. Nothing was downloaded; offer
+merged, the main Topic A values, papers without abstracts, sources skipped for want of a key, and where things are: `publications/papers.db` (the topic is the collection `<slug>`;
+every later step updates it in place). The index CSVs are written only on request (`export.py --topic <slug> --csv`);
+over 1,048,576 rows they no longer open in Excel, so point to papers.db (DB Browser for SQLite) or a filtered export. Nothing was downloaded; offer
 Download mode.
 
 ## Mode: Download
@@ -314,8 +314,8 @@ citation chasing, and a re-check of access and retractions. The 30-day overlap c
 ## Very large topics (a whole field, millions of papers)
 
 Index it once as a catalog (`--batches` in step 3), then classify and screen the WHOLE catalog before any download —
-every step works in blocks, so size only changes the time. Chain the steps with `--no-export` (one export of millions
-of rows takes ~10 min) in the background, and refresh the index and papers.db once at the end:
+every step works in blocks, so size only changes the time. Chain the steps with `--no-export` in the background (each step
+queues the papers it changed) and publish them all into papers.db once at the end:
 
 ```bash
 S=${CLAUDE_SKILL_DIR}/scripts; nohup sh -c "python3 -I $S/classify_access.py --topic <slug> --no-export && \
@@ -397,16 +397,32 @@ python3 -I ${CLAUDE_SKILL_DIR}/scripts/export.py --name <name> --topic <slug> [-
 | `fill_abstracts.py` | abstracts from downloaded PDFs (Download / curation option) |
 | `dedup.py` | `--apply` merges the safe duplicates incl. patent families and SI deposits (automatic); `--merge` / `--keep-separate` for the uncertain pairs; `--no-export` |
 | `repair.py` | once after a skill upgrade: re-apply the current abstract and non-paper rules to stored papers |
-| `export.py` | refresh index + papers.db; a filtered list as a file; `--set-extracted` |
+| `export.py` | publish pending changes into papers.db (in place); `--topic <slug> --csv` writes the topic's index CSVs; `--rebuild` (fallback; the history is kept); a filtered list as a file; `--set-extracted` |
+| `filters.py` | saved filters kept in papers.db and re-run as it evolves: `define`, `list`, `show`, `refresh`, `export` (a filter's papers as their own database; `--public`: abstracts only for OA and OA+ND) |
 | `freeze_corpus.py` | a frozen corpus manifest for curation (SCALE's format: every candidate with its status; `scale corpus check`) |
 | `_ezlimit.py status` | EZproxy counters, cooldowns, hard stop (`clear-hard-stop` only after the user's review) |
 
 Requires Python 3.10+ with `requests`, `pymupdf`, `pypdf` (`pip install requests pymupdf pypdf`).
 
+## The database evolves
+
+`publications/papers.db` is never rebuilt: the working ledger marks every paper a step changes, and the step ends by
+publishing just those papers into papers.db, in place. Each publish adds a row to `runs` (when, which step, papers
+added / updated / removed) and the papers' changes to `changes`: added; removed (merged into, or SI of, another
+paper); access type, licence, version, retraction, download, SI, Topic A, DOI; a topic's scope. "What is new since
+June" or "what became open access" is one query ([references/database.md](references/database.md)). The file also
+holds the working state (`_paper_state`; the topics' config, queries and run state; the merge decisions): a project
+received as papers.db alone is rebuilt from it by the first script that runs, and Update continues where the
+database stopped (the receiver adds their own keys and contact address). Saved filters (`filters.py`) live in it
+and re-run whenever papers are added or removed, or their text, topics or retraction change. `export.py --rebuild`
+rebuilds the file from the ledger only as a fallback, keeping the history.
+
 ## Where things are
 
-- `publications/papers.db` — the paper database (all topics). `publications/<slug>/index/{OA,OA+ND,Free-to-read,
-  Paywalled,merged,excluded}.csv` — the topic index (32 columns). Columns, tables, access and license rules, the
+- `publications/papers.db` — the paper database (all topics), updated in place by every step, with its history
+  (`runs`, `changes`), saved filters and working state ("The database evolves" below).
+  `publications/<slug>/index/{OA,OA+ND,Free-to-read,Paywalled,merged,excluded}.csv` — the topic index (32 columns),
+  written on request (`export.py --csv`). Columns, tables, access and license rules, the
   Extracted column: [references/database.md](references/database.md).
 - `publications/<slug>/corpora/<corpus>/sources.json` — a frozen corpus (freeze_corpus.py).
 - `publications/<slug>/papers/<access>/<ID>.pdf`, SI in `papers/SI/<access>/`. A paper in two topics has one row and a

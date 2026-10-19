@@ -1,0 +1,146 @@
+{
+  "description": "CO2 reduction driven by electricity: concept co2-reduction x driver electro | plasma | electrified-heat, strict and broad (strict = title or Topic A/B/C; broad = also abstract or keywords); errata, notices and retracted papers left out",
+  "exclude": {
+    "non_papers": true,
+    "retracted": true
+  },
+  "groups": {
+    "electro": [
+      {
+        "topics": [
+          "co2rr",
+          "photo-co2rr",
+          "co2-hydrogenation",
+          "co2-conversion",
+          "rwgs"
+        ],
+        "fts": "(co2rr OR eco2rr OR co2err OR co2er OR \"co2 reduc\" * OR \"co2 electroreduc\" * OR \"co2 photoreduc\" * OR \"co2 hydrogenat\" * OR \"co2 methanat\" * OR \"co2 electrolys\" * OR \"co2 electrolyz\" * OR \"co₂ reduc\" * OR \"co₂ electroreduc\" * OR \"co₂ photoreduc\" * OR \"co₂ hydrogenat\" * OR \"co₂ methanat\" * OR \"co₂ electrolys\" * OR \"co₂ electrolyz\" * OR \"co 2 reduc\" * OR \"co 2 electroreduc\" * OR \"co 2 photoreduc\" * OR \"co 2 hydrogenat\" * OR \"co 2 methanat\" * OR \"co 2 electrolys\" * OR \"co 2 electrolyz\" * OR \"carbon dioxide reduc\" * OR \"carbon dioxide electroreduc\" * OR \"carbon dioxide photoreduc\" * OR \"carbon dioxide hydrogenat\" * OR \"carbon dioxide methanat\" * OR \"carbon dioxide electrolys\" * OR \"carbon dioxide electrolyz\" * OR \"reduction of co2\" OR \"electroreduction of co2\" OR \"photoreduction of co2\" OR \"hydrogenation of co2\" OR \"methanation of co2\" OR \"electrolysis of co2\" OR \"reduction of co₂\" OR \"electroreduction of co₂\" OR \"photoreduction of co₂\" OR \"hydrogenation of co₂\" OR \"methanation of co₂\" OR \"electrolysis of co₂\" OR \"reduction of co 2\" OR \"electroreduction of co 2\" OR \"photoreduction of co 2\" OR \"hydrogenation of co 2\" OR \"methanation of co 2\" OR \"electrolysis of co 2\" OR \"reduction of carbon dioxide\" OR \"electroreduction of carbon dioxide\" OR \"photoreduction of carbon dioxide\" OR \"hydrogenation of carbon dioxide\" OR \"methanation of carbon dioxide\" OR \"electrolysis of carbon dioxide\" OR \"co2 to co\" OR \"co2 to formate\" OR \"co2 to formic acid\" OR \"co2 to methanol\" OR \"co2 to methane\" OR \"co2 to ethylene\" OR \"co2 to ethanol\" OR \"co2 to multicarbon\" OR \"co2 to c2\" OR \"co2 to c2+\" OR \"co2 to fuels\" OR \"co2 to hydrocarbons\" OR \"co2 to syngas\" OR \"co2 to oxalate\" OR \"co2 to acetate\" OR \"co₂ to co\" OR \"co₂ to formate\" OR \"co₂ to formic acid\" OR \"co₂ to methanol\" OR \"co₂ to methane\" OR \"co₂ to ethylene\" OR \"co₂ to ethanol\" OR \"co₂ to multicarbon\" OR \"co₂ to c2\" OR \"co₂ to c2+\" OR \"co₂ to fuels\" OR \"co₂ to hydrocarbons\" OR \"co₂ to syngas\" OR \"co₂ to oxalate\" OR \"co₂ to acetate\")",
+        "topics_if": [
+          "methanation",
+          "co2-methanol",
+          "metal-air",
+          "plasma",
+          "bioelectro"
+        ],
+        "if_fts": "(co2 OR co₂ OR \"co 2\" OR \"carbon dioxide\")"
+      },
+      {
+        "topics": [
+          "co2rr",
+          "corr",
+          "her",
+          "hor",
+          "oer",
+          "orr",
+          "h2o2-electro",
+          "nrr",
+          "li-nrr",
+          "no3rr",
+          "no2rr",
+          "norr",
+          "n-oxidation",
+          "cn-coupling",
+          "aor",
+          "uor",
+          "mor",
+          "eor",
+          "faor",
+          "biomass-electro",
+          "ech",
+          "electrosynthesis",
+          "cer",
+          "seawater",
+          "water-electrolysis",
+          "methane-electro",
+          "metal-air",
+          "li-s",
+          "fuel-cell",
+          "sofc-soec",
+          "electrolyzer",
+          "pulsed",
+          "microenvironment",
+          "bioelectro"
+        ],
+        "fts": "(electroreduc* OR electrocatal* OR electrolys* OR electrolyz* OR electrolyser* OR electrosynth* OR electrooxid* OR \"electro oxidation\" OR \"electro reduction\" OR faradaic* OR overpotential* OR \"membrane electrode\" OR \"gas diffusion electrode\" OR \"zero gap\" OR \"flow cell\" OR \"h cell\" OR potentiostatic* OR chronoamperometr* OR \"electrochemical reduction\" OR \"electrochemical conversion\" OR \"electrochemical synthesis\" OR \"electrochemical oxidation\" OR \"electrochemical production\" OR \"electrochemical hydrogenation\" OR \"electrochemical co2\" OR \"electrochemical nitrogen\" OR \"electrochemical nitrate\" OR \"electrochemical ammonia\" OR \"electrochemical water\" OR \"electrochemical hydrogen\" OR \"electrochemical oxygen\" OR \"fuel cell\" OR \"fuel cells\" OR \"zinc air\" OR \"metal air\" OR co2rr OR eco2rr)",
+        "competitors": [
+          {
+            "topics": [
+              "photo-co2rr",
+              "photo-h2",
+              "photo-n2",
+              "photo-h2o2",
+              "photoredox",
+              "photocatalysis",
+              "photothermal"
+            ],
+            "fts": "(photocatal* OR photoreduc* OR photochem* OR photoinduc* OR photoexcit* OR photogenerat* OR photoactiv* OR photoredox OR photosensitiz* OR photothermal* OR plasmon* OR \"visible light\" OR \"light driven\" OR \"light irradiation\" OR \"uv light\" OR \"solar light\" OR sunlight OR \"artificial photosynthesis\")"
+          },
+          {
+            "topics": [
+              "pec"
+            ],
+            "fts": "(photoelectro* OR photoelectrode* OR photocathod* OR photoanod* OR \"photo electrochemical\" OR \"photo electrocatalytic\" OR \"photo assisted electro\")"
+          }
+        ]
+      }
+    ],
+    "plasma": [
+      {
+        "topics": [
+          "co2rr",
+          "photo-co2rr",
+          "co2-hydrogenation",
+          "co2-conversion",
+          "rwgs"
+        ],
+        "fts": "(co2rr OR eco2rr OR co2err OR co2er OR \"co2 reduc\" * OR \"co2 electroreduc\" * OR \"co2 photoreduc\" * OR \"co2 hydrogenat\" * OR \"co2 methanat\" * OR \"co2 electrolys\" * OR \"co2 electrolyz\" * OR \"co₂ reduc\" * OR \"co₂ electroreduc\" * OR \"co₂ photoreduc\" * OR \"co₂ hydrogenat\" * OR \"co₂ methanat\" * OR \"co₂ electrolys\" * OR \"co₂ electrolyz\" * OR \"co 2 reduc\" * OR \"co 2 electroreduc\" * OR \"co 2 photoreduc\" * OR \"co 2 hydrogenat\" * OR \"co 2 methanat\" * OR \"co 2 electrolys\" * OR \"co 2 electrolyz\" * OR \"carbon dioxide reduc\" * OR \"carbon dioxide electroreduc\" * OR \"carbon dioxide photoreduc\" * OR \"carbon dioxide hydrogenat\" * OR \"carbon dioxide methanat\" * OR \"carbon dioxide electrolys\" * OR \"carbon dioxide electrolyz\" * OR \"reduction of co2\" OR \"electroreduction of co2\" OR \"photoreduction of co2\" OR \"hydrogenation of co2\" OR \"methanation of co2\" OR \"electrolysis of co2\" OR \"reduction of co₂\" OR \"electroreduction of co₂\" OR \"photoreduction of co₂\" OR \"hydrogenation of co₂\" OR \"methanation of co₂\" OR \"electrolysis of co₂\" OR \"reduction of co 2\" OR \"electroreduction of co 2\" OR \"photoreduction of co 2\" OR \"hydrogenation of co 2\" OR \"methanation of co 2\" OR \"electrolysis of co 2\" OR \"reduction of carbon dioxide\" OR \"electroreduction of carbon dioxide\" OR \"photoreduction of carbon dioxide\" OR \"hydrogenation of carbon dioxide\" OR \"methanation of carbon dioxide\" OR \"electrolysis of carbon dioxide\" OR \"co2 to co\" OR \"co2 to formate\" OR \"co2 to formic acid\" OR \"co2 to methanol\" OR \"co2 to methane\" OR \"co2 to ethylene\" OR \"co2 to ethanol\" OR \"co2 to multicarbon\" OR \"co2 to c2\" OR \"co2 to c2+\" OR \"co2 to fuels\" OR \"co2 to hydrocarbons\" OR \"co2 to syngas\" OR \"co2 to oxalate\" OR \"co2 to acetate\" OR \"co₂ to co\" OR \"co₂ to formate\" OR \"co₂ to formic acid\" OR \"co₂ to methanol\" OR \"co₂ to methane\" OR \"co₂ to ethylene\" OR \"co₂ to ethanol\" OR \"co₂ to multicarbon\" OR \"co₂ to c2\" OR \"co₂ to c2+\" OR \"co₂ to fuels\" OR \"co₂ to hydrocarbons\" OR \"co₂ to syngas\" OR \"co₂ to oxalate\" OR \"co₂ to acetate\")",
+        "topics_if": [
+          "methanation",
+          "co2-methanol",
+          "metal-air",
+          "plasma",
+          "bioelectro"
+        ],
+        "if_fts": "(co2 OR co₂ OR \"co 2\" OR \"carbon dioxide\")"
+      },
+      {
+        "topics": [
+          "plasma"
+        ],
+        "fts": "(\"plasma catalysis\" OR \"plasma catalytic\" OR \"plasma assisted\" OR \"plasma driven\" OR \"non thermal plasma\" OR \"nonthermal plasma\" OR \"dielectric barrier discharge\" OR dbd OR \"gliding arc\" OR \"glow discharge\" OR \"microwave plasma\" OR \"plasma reactor\")",
+        "competitors": []
+      }
+    ],
+    "electrified-heat": [
+      {
+        "topics": [
+          "co2rr",
+          "photo-co2rr",
+          "co2-hydrogenation",
+          "co2-conversion",
+          "rwgs"
+        ],
+        "fts": "(co2rr OR eco2rr OR co2err OR co2er OR \"co2 reduc\" * OR \"co2 electroreduc\" * OR \"co2 photoreduc\" * OR \"co2 hydrogenat\" * OR \"co2 methanat\" * OR \"co2 electrolys\" * OR \"co2 electrolyz\" * OR \"co₂ reduc\" * OR \"co₂ electroreduc\" * OR \"co₂ photoreduc\" * OR \"co₂ hydrogenat\" * OR \"co₂ methanat\" * OR \"co₂ electrolys\" * OR \"co₂ electrolyz\" * OR \"co 2 reduc\" * OR \"co 2 electroreduc\" * OR \"co 2 photoreduc\" * OR \"co 2 hydrogenat\" * OR \"co 2 methanat\" * OR \"co 2 electrolys\" * OR \"co 2 electrolyz\" * OR \"carbon dioxide reduc\" * OR \"carbon dioxide electroreduc\" * OR \"carbon dioxide photoreduc\" * OR \"carbon dioxide hydrogenat\" * OR \"carbon dioxide methanat\" * OR \"carbon dioxide electrolys\" * OR \"carbon dioxide electrolyz\" * OR \"reduction of co2\" OR \"electroreduction of co2\" OR \"photoreduction of co2\" OR \"hydrogenation of co2\" OR \"methanation of co2\" OR \"electrolysis of co2\" OR \"reduction of co₂\" OR \"electroreduction of co₂\" OR \"photoreduction of co₂\" OR \"hydrogenation of co₂\" OR \"methanation of co₂\" OR \"electrolysis of co₂\" OR \"reduction of co 2\" OR \"electroreduction of co 2\" OR \"photoreduction of co 2\" OR \"hydrogenation of co 2\" OR \"methanation of co 2\" OR \"electrolysis of co 2\" OR \"reduction of carbon dioxide\" OR \"electroreduction of carbon dioxide\" OR \"photoreduction of carbon dioxide\" OR \"hydrogenation of carbon dioxide\" OR \"methanation of carbon dioxide\" OR \"electrolysis of carbon dioxide\" OR \"co2 to co\" OR \"co2 to formate\" OR \"co2 to formic acid\" OR \"co2 to methanol\" OR \"co2 to methane\" OR \"co2 to ethylene\" OR \"co2 to ethanol\" OR \"co2 to multicarbon\" OR \"co2 to c2\" OR \"co2 to c2+\" OR \"co2 to fuels\" OR \"co2 to hydrocarbons\" OR \"co2 to syngas\" OR \"co2 to oxalate\" OR \"co2 to acetate\" OR \"co₂ to co\" OR \"co₂ to formate\" OR \"co₂ to formic acid\" OR \"co₂ to methanol\" OR \"co₂ to methane\" OR \"co₂ to ethylene\" OR \"co₂ to ethanol\" OR \"co₂ to multicarbon\" OR \"co₂ to c2\" OR \"co₂ to c2+\" OR \"co₂ to fuels\" OR \"co₂ to hydrocarbons\" OR \"co₂ to syngas\" OR \"co₂ to oxalate\" OR \"co₂ to acetate\")",
+        "topics_if": [
+          "methanation",
+          "co2-methanol",
+          "metal-air",
+          "plasma",
+          "bioelectro"
+        ],
+        "if_fts": "(co2 OR co₂ OR \"co 2\" OR \"carbon dioxide\")"
+      },
+      {
+        "topics": [
+          "electrified-thermal"
+        ],
+        "fts": "(\"joule heating\" OR \"induction heating\" OR \"electrified heating\" OR \"resistive heating\" OR \"electrically heated\" OR electrothermal OR \"microwave heating\" OR \"electrified reactor\")",
+        "competitors": []
+      }
+    ]
+  },
+  "export": {
+    "table": "co2_selection",
+    "label_column": "driver"
+  }
+}

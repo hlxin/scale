@@ -9,9 +9,13 @@ per paper across ALL topics:
                   .scripts/<topic>/kg/<name>/extraction_status.jsonl
   dois            every DOI known for a paper (canonical + preprint/version aliases) -> paper id
 
-Exports (every step refreshes them; export.py does it on demand):
-  publications/<topic>/index/{OA,OA+ND,Free-to-read,Paywalled,merged,excluded}.csv
-  publications/papers.db   normalized SQLite snapshot for filtering (topic, venue, year, access, author, subject ...)
+  publish_queue   every paper a write touched since the last publish (filled by triggers on the tables above)
+
+Publishing (every step does it at the end; _publish.py):
+  publications/papers.db   the paper database: each step updates, in place, only the papers it changed, and records
+                           the run and what changed; it also holds what this ledger needs, so a missing ledger is
+                           rebuilt from it (adopt_ledger)
+  publications/<topic>/index/{OA,OA+ND,Free-to-read,Paywalled,merged,excluded}.csv   only on request (export.py --csv)
 """
 import csv
 import json
@@ -70,6 +74,43 @@ CREATE INDEX IF NOT EXISTS ix_pt_topic ON paper_topics(topic);
 CREATE INDEX IF NOT EXISTS ix_papers_sha1 ON papers(sha1);
 CREATE INDEX IF NOT EXISTS ix_ps_paper ON paper_subjects(paper_id);
 CREATE INDEX IF NOT EXISTS ix_dois_paper ON dois(paper_id);
+CREATE TABLE IF NOT EXISTS publish_queue (seq INTEGER PRIMARY KEY, paper_id INTEGER NOT NULL);
+CREATE TRIGGER IF NOT EXISTS pq_papers_i AFTER INSERT ON papers BEGIN
+  INSERT INTO publish_queue(paper_id) VALUES (NEW.id); END;
+CREATE TRIGGER IF NOT EXISTS pq_papers_u AFTER UPDATE ON papers BEGIN
+  INSERT INTO publish_queue(paper_id) VALUES (NEW.id); END;
+CREATE TRIGGER IF NOT EXISTS pq_papers_d AFTER DELETE ON papers BEGIN
+  INSERT INTO publish_queue(paper_id) VALUES (OLD.id); END;
+CREATE TRIGGER IF NOT EXISTS pq_topics_i AFTER INSERT ON paper_topics BEGIN
+  INSERT INTO publish_queue(paper_id) VALUES (NEW.paper_id); END;
+CREATE TRIGGER IF NOT EXISTS pq_topics_u AFTER UPDATE ON paper_topics BEGIN
+  INSERT INTO publish_queue(paper_id) VALUES (OLD.paper_id); INSERT INTO publish_queue(paper_id) VALUES (NEW.paper_id); END;
+CREATE TRIGGER IF NOT EXISTS pq_topics_d AFTER DELETE ON paper_topics BEGIN
+  INSERT INTO publish_queue(paper_id) VALUES (OLD.paper_id); END;
+CREATE TRIGGER IF NOT EXISTS pq_subjects_i AFTER INSERT ON paper_subjects BEGIN
+  INSERT INTO publish_queue(paper_id) VALUES (NEW.paper_id); END;
+CREATE TRIGGER IF NOT EXISTS pq_subjects_u AFTER UPDATE ON paper_subjects BEGIN
+  INSERT INTO publish_queue(paper_id) VALUES (OLD.paper_id); INSERT INTO publish_queue(paper_id) VALUES (NEW.paper_id); END;
+CREATE TRIGGER IF NOT EXISTS pq_subjects_d AFTER DELETE ON paper_subjects BEGIN
+  INSERT INTO publish_queue(paper_id) VALUES (OLD.paper_id); END;
+CREATE TRIGGER IF NOT EXISTS pq_ext_i AFTER INSERT ON extractions BEGIN
+  INSERT INTO publish_queue(paper_id) VALUES (NEW.paper_id); END;
+CREATE TRIGGER IF NOT EXISTS pq_ext_u AFTER UPDATE ON extractions BEGIN
+  INSERT INTO publish_queue(paper_id) VALUES (OLD.paper_id); INSERT INTO publish_queue(paper_id) VALUES (NEW.paper_id); END;
+CREATE TRIGGER IF NOT EXISTS pq_ext_d AFTER DELETE ON extractions BEGIN
+  INSERT INTO publish_queue(paper_id) VALUES (OLD.paper_id); END;
+CREATE TRIGGER IF NOT EXISTS pq_dois_i AFTER INSERT ON dois BEGIN
+  INSERT INTO publish_queue(paper_id) VALUES (NEW.paper_id); END;
+CREATE TRIGGER IF NOT EXISTS pq_dois_u AFTER UPDATE ON dois BEGIN
+  INSERT INTO publish_queue(paper_id) VALUES (OLD.paper_id); INSERT INTO publish_queue(paper_id) VALUES (NEW.paper_id); END;
+CREATE TRIGGER IF NOT EXISTS pq_dois_d AFTER DELETE ON dois BEGIN
+  INSERT INTO publish_queue(paper_id) VALUES (OLD.paper_id); END;
+CREATE TRIGGER IF NOT EXISTS pq_si_i AFTER INSERT ON si_links BEGIN
+  INSERT INTO publish_queue(paper_id) SELECT paper_id FROM dois WHERE doi = NEW.parent_doi; END;
+CREATE TRIGGER IF NOT EXISTS pq_si_u AFTER UPDATE ON si_links BEGIN
+  INSERT INTO publish_queue(paper_id) SELECT paper_id FROM dois WHERE doi IN (OLD.parent_doi, NEW.parent_doi); END;
+CREATE TRIGGER IF NOT EXISTS pq_si_d AFTER DELETE ON si_links BEGIN
+  INSERT INTO publish_queue(paper_id) SELECT paper_id FROM dois WHERE doi = OLD.parent_doi; END;
 """
 # columns added after v2 — added in place to an older ledger (never dropped or renamed)
 V3_COLUMNS = {"authors_detail": "TEXT NOT NULL DEFAULT '[]'", "doc_type": "TEXT", "abstract_source": "TEXT",
@@ -130,7 +171,7 @@ def _keywords(v):
 
 
 class Ledger:
-    def __init__(self, proj):
+    def __init__(self, proj, adopt=True):
         self.proj = proj
         self.path = proj.ledger_db
         self.lock = threading.RLock()
@@ -143,6 +184,22 @@ class Ledger:
         for col, decl in V3_COLUMNS.items():
             if col not in have:
                 self.db.execute(f"ALTER TABLE papers ADD COLUMN {col} {decl}")
+        self.last_publish = None
+        if adopt and not self.q("SELECT 1 FROM papers LIMIT 1"):
+            self._adopt()
+
+    def _adopt(self):
+        """A project received as publications/papers.db alone: rebuild this ledger and the topics' working files from
+        it, so every step (Update included) carries on where the database stopped."""
+        from _publish import adopt_ledger, has_state
+        if not has_state(self.proj.db):
+            return
+        with file_lock(self.proj.scr / "publish"):
+            if self.q("SELECT 1 FROM papers LIMIT 1"):
+                return
+            log(f"no working ledger: rebuilding {self.proj.rel(self.path)} from {self.proj.rel(self.proj.db)} ...")
+            n = adopt_ledger(self)
+            log(f"ledger rebuilt from the database: {n} papers")
 
     # ------------------------------------------------------------ low level
     def q(self, sql, args=()):
@@ -420,9 +477,10 @@ class Ledger:
         return n
 
     # ------------------------------------------------------------ exports
-    def export_progress(self, topics=None, db=False):
+    def export_progress(self, topics=None, db=True):
         """A progress refresh during a long run (downloads): skipped until at least a minute — and 20 times what the
-        last refresh took — has passed, so a topic of millions is not rewritten every few papers."""
+        last refresh took — has passed. It publishes the papers changed since the last one, so the database keeps up
+        with a run that lasts hours."""
         import time
         now = time.time()
         if now - getattr(self, "_progress_at", 0) < max(60, 20 * getattr(self, "_progress_took", 0)):
@@ -431,8 +489,10 @@ class Ledger:
         self._progress_at, self._progress_took = time.time(), time.time() - now
         return n
 
-    def export(self, topics=None, db=True):
-        """Refresh the topic index CSVs (all topics, or the given ones) and, with db=True, publications/papers.db."""
+    def export(self, topics=None, db=True, csv=False, rebuild=False):
+        """Publish the changed papers into publications/papers.db (db=True; rebuild=True rebuilds it, keeping its
+        history) and, only with csv=True, write the topic index CSVs (the given topics, else all). Returns the
+        number of papers synced into the database, or of index rows when CSVs were written."""
         try:
             self.sync_curation()
         except Exception as e:  # a malformed status file must never block an export
@@ -440,10 +500,13 @@ class Ledger:
         from _topics import Vocab
         vocab = Vocab(self.proj)
         n = 0
-        for t in (topics or self.all_topics()):
-            n += self.write_index(t, vocab)
         if db:
-            self.publish_db(vocab)
+            self.last_publish = self.publish_db(vocab, topics=topics, rebuild=rebuild)
+            n = (self.last_publish or {}).get("synced", 0)
+        if csv:
+            n = 0
+            for t in (topics or self.all_topics()):
+                n += self.write_index(t, vocab)
         return n
 
     def export_csv(self, *_a, **_k):  # v2 name kept for callers
@@ -515,9 +578,13 @@ class Ledger:
                 os.replace(tmps[n], d / f"{n}.csv")
         return n_keep
 
-    def publish_db(self, vocab):
-        from _publish import build_published_db
-        build_published_db(self, vocab)
+    def publish_db(self, vocab, topics=None, rebuild=False):
+        from _publish import build_published_db, sync_published_db
+        from _common import file_lock
+        if rebuild:
+            with file_lock(self.proj.scr / "publish"):
+                return build_published_db(self, vocab, note="full rebuild on request (export.py --rebuild)")
+        return sync_published_db(self, vocab, topics=topics)
 
 
 class _Tx:

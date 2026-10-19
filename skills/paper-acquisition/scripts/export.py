@@ -1,10 +1,11 @@
-"""Refresh the index files and the paper database, or export a filtered subset.
+"""Bring the paper database up to date, write a topic's index files, or export a filtered subset.
 
-Every step already refreshes publications/<topic>/index/*.csv and publications/papers.db; run this after manual changes
-or to export a subset someone asked for.
+Every step already publishes the papers it changed into publications/papers.db, in place (_publish.py); run this
+after manual changes, to write a topic's index CSVs (only on request), or to export a subset someone asked for.
 
-  python3 -I export.py                                  # refresh every topic's index + publications/papers.db
-  python3 -I export.py --topic co2rr                    # refresh one topic's index (and the database)
+  python3 -I export.py                                  # publish any pending change into publications/papers.db
+  python3 -I export.py --topic co2rr --csv              # also write publications/co2rr/index/*.csv
+  python3 -I export.py --rebuild                        # fallback: rebuild papers.db from the ledger (history kept)
   python3 -I export.py --name cu-2020s --topic co2rr --subject "Copper catalysts" --year 2020-2026 \\
           --access OA,OA+ND --format csv                # -> publications/exports/cu-2020s.csv
   python3 -I export.py --set-extracted 12,57 --topic co2rr --kg co2rr-kg --value extracted [--note "..."]
@@ -148,6 +149,8 @@ def main():
     ap.add_argument("--kg", help="knowledge-graph / schema name for --set-extracted")
     ap.add_argument("--value", help="extracted | rejected | failed | no_data | none (removes the record)")
     ap.add_argument("--note")
+    ap.add_argument("--csv", action="store_true", help="write the index CSVs of --topic (or of every topic)")
+    ap.add_argument("--rebuild", action="store_true", help="rebuild papers.db from the ledger, keeping its history")
     a = ap.parse_args()
     proj = Project(a.project)
     led = Ledger(proj)
@@ -166,9 +169,13 @@ def main():
         print(json.dumps({"extracted_set": len(ids), "topic": a.topic, "kg": a.kg, "value": a.value}))
         return
     if not a.name:
-        n = led.export(topics=[a.topic] if a.topic else None)
-        print(json.dumps({"index_rows": n, "topics": [a.topic] if a.topic else led.all_topics(),
-                          "database": proj.rel(proj.db)}))
+        topics = [a.topic] if a.topic else None
+        led.export(topics=topics, rebuild=a.rebuild)
+        out = {"database": proj.rel(proj.db), **(led.last_publish or {})}
+        if a.csv:
+            out["index_rows"] = led.export(topics=topics, db=False, csv=True)
+            out["index"] = [proj.rel(proj.index_dir(t)) for t in (topics or led.all_topics())]
+        print(json.dumps(out))
         return
     if not proj.db.exists():
         led.export()
