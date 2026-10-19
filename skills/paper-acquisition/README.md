@@ -41,6 +41,7 @@ publications/
   <topic>/index/OA.csv, OA+ND.csv, Free-to-read.csv, Paywalled.csv   the same, split by access type
   <topic>/index/excluded.csv        screened out / not research articles / retracted, with the reason
   <topic>/papers/<access>/<ID>.pdf  downloaded papers; SI in <topic>/papers/SI/<access>/
+  <topic>/corpora/<name>/sources.json   a frozen corpus for curation: every paper with its status (freeze_corpus.py)
   exports/                          filtered lists you asked for
 ```
 

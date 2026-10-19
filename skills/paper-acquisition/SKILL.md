@@ -1,17 +1,37 @@
 ---
 name: paper-acquisition
-description: Builds and maintains a per-topic paper index and corpus. Index mode finds every matching paper, preprint, patent and dataset in 34 automated sources (OpenAlex, Crossref, Europe PMC, arXiv, OSTI, Zenodo; Scopus, Web of Science, Lens, EPO with keys) and writes publications/papers.db plus per-topic index CSVs split by access type (OA, OA+ND, Free-to-read, Paywalled) with abstract, exact license, supplementary information (SI) links, Topic A/B/C and related topics. Download mode fetches PDFs and SI, paywalled papers only through the library EZproxy at safe rates. Update mode exhaustively adds newer papers (all sources, citation chasing, access and retraction recheck). Duplicates merge automatically. Also imports Web of Science, Scopus or Zotero exports with their abstracts, answers questions about the indexed papers and writes filtered lists (CSV, BibTeX, RIS). Use whenever the user wants to find, index, import, list or download papers on a topic, refresh a literature corpus, or query the paper database. Curating the papers into scale-catal documents belongs to curate-source.
+description: Builds and maintains a per-topic paper index and corpus. Index mode finds every matching paper, preprint, patent and dataset in 34 automated sources (OpenAlex, Crossref, Europe PMC, arXiv, OSTI, Zenodo; Scopus, Web of Science, Lens, EPO with keys) and writes publications/papers.db plus per-topic index CSVs split by access type (OA, OA+ND, Free-to-read, Paywalled) with abstract, exact license, supplementary information (SI) links, Topic A/B/C and related topics. Download mode fetches PDFs and SI, paywalled papers only through the library EZproxy at safe rates. Update mode exhaustively adds newer papers (all sources, citation chasing, access and retraction recheck). Duplicates merge automatically. Also imports Web of Science, Scopus or Zotero exports with their abstracts, answers questions about the indexed papers and writes filtered lists (CSV, BibTeX, RIS). Use whenever the user wants to find, index, import, list or download papers on a topic, refresh a literature corpus, or query the paper database. Curating the papers into scale-catal documents belongs to curate-corpus (a corpus) and curate-source (one source).
 allowed-tools:
   - Bash(python3 -I ${CLAUDE_SKILL_DIR}/scripts/*)
   - Bash(nohup python3 -I ${CLAUDE_SKILL_DIR}/scripts/*)
   - Bash(nohup zsh ${CLAUDE_SKILL_DIR}/scripts/run_paywalled.sh *)
+  - "scale corpus check <manifest>"     # SCALE checks a frozen corpus (freeze_corpus.py)
+version: 3.3.1
+scale_release: ">=v0.2.0"
+inputs:
+  - A topic in the user's words, or a Web of Science, Scopus or Zotero export, a list of DOIs or a web page of them
+  - The access types to download (OA, OA+ND, Free-to-read, Paywalled) and how relevance is screened (Claude, an API, keywords or none)
+  - Optional API keys in ~/.paper-acquisition/keys.txt (never through the chat), a polite-pool contact address, and the library's EZproxy host for paywalled papers
+outputs:
+  - publications/papers.db and the topic's index (OA, OA+ND, Free-to-read, Paywalled, merged and excluded CSVs), every paper, preprint, patent and dataset found, deduplicated, with its access type, exact licence, SI and Topic A/B/C
+  - The downloaded PDFs and SI, filed by access type
+  - For curation, a frozen corpus manifest (publications/<slug>/corpora/<name>/sources.json) that `scale corpus check` accepts
+validation:
+  - "`status.py --topic <slug>` accounts for every paper: downloaded, queued, or the reason it was not (Notes)"
+  - Every downloaded PDF passed the same-paper title check and carries its licence decision
+  - "`scale corpus check <manifest>` reports ok for every frozen corpus"
+  - No paywalled paper was fetched except through the library EZproxy within the limiter's caps; no login, CAPTCHA or pirate site was used
+human-review:
+  - Before anything is downloaded (the numbers per access type), and before paywalled downloads start
+  - Whenever the EZproxy limiter records a hard stop (a person clears it after looking)
+  - Before a corpus is frozen for curation (which papers are included, and why the others are left out)
 ---
 
 # Paper Acquisition
 
 Topic-agnostic: the research domain always comes from the user; the topic vocabulary is tuned for catalysis and
-extensible. The papers it downloads are the sources that [curate-source](../curate-source/SKILL.md) turns into
-scale-catal documents.
+extensible. The papers it downloads, frozen as a corpus, are the sources that [curate-corpus](../curate-corpus/SKILL.md)
+turns into scale-catal documents with [curate-source](../curate-source/SKILL.md), one source at a time.
 
 ## Standing rules (apply for the whole task)
 
@@ -255,6 +275,18 @@ Optional **full-text check** (Claude/API): `screen.py --topic <slug> prep --stag
 fulltext` + subagents (or `api --stage fulltext`) → `merge --stage fulltext`; papers that fall below the threshold
 move to `.scripts/<slug>/out_of_scope/`.
 
+## Freeze a corpus for curation
+
+Before papers are curated, freeze the corpus: `freeze_corpus.py --topic <slug> --name <corpus> [--min-relevance 4]
+[--subject "<Topic A/B/C labels>"] [--doc-types article,review] [--years 2015-2026] [--access OA,OA+ND] [--ids FILE]`.
+It writes `publications/<slug>/corpora/<corpus>/sources.json`, a corpus manifest in SCALE's format (SCALE's
+curate-source skill asks for one before the first source, and its curate-corpus skill curates the included sources).
+Every paper of the topic gets a status: `in_scope` (downloaded, in scope and kept by the rule: the sources to curate)
+or the reason it is left out (`not_retrieved` with why, `off_scope`, `not_screened`, `retracted`, `excluded` with a
+`status_reason`), and the counts add up. `scale corpus check <manifest>` checks it. Each entry carries the paper ID,
+DOI, title, year, access type, licence, the version of the copy, and the paths of its PDF and SI. A corpus is frozen
+once: a new rule gets a new name. Show the counts and the rule; the user confirms.
+
 ## Mode: Update — exhaustive, newer papers only
 
 ```
@@ -366,6 +398,7 @@ python3 -I ${CLAUDE_SKILL_DIR}/scripts/export.py --name <name> --topic <slug> [-
 | `dedup.py` | `--apply` merges the safe duplicates incl. patent families and SI deposits (automatic); `--merge` / `--keep-separate` for the uncertain pairs; `--no-export` |
 | `repair.py` | once after a skill upgrade: re-apply the current abstract and non-paper rules to stored papers |
 | `export.py` | refresh index + papers.db; a filtered list as a file; `--set-extracted` |
+| `freeze_corpus.py` | a frozen corpus manifest for curation (SCALE's format: every candidate with its status; `scale corpus check`) |
 | `_ezlimit.py status` | EZproxy counters, cooldowns, hard stop (`clear-hard-stop` only after the user's review) |
 
 Requires Python 3.10+ with `requests`, `pymupdf`, `pypdf` (`pip install requests pymupdf pypdf`).
@@ -375,6 +408,7 @@ Requires Python 3.10+ with `requests`, `pymupdf`, `pypdf` (`pip install requests
 - `publications/papers.db` — the paper database (all topics). `publications/<slug>/index/{OA,OA+ND,Free-to-read,
   Paywalled,merged,excluded}.csv` — the topic index (32 columns). Columns, tables, access and license rules, the
   Extracted column: [references/database.md](references/database.md).
+- `publications/<slug>/corpora/<corpus>/sources.json` — a frozen corpus (freeze_corpus.py).
 - `publications/<slug>/papers/<access>/<ID>.pdf`, SI in `papers/SI/<access>/`. A paper in two topics has one row and a
   copy (APFS clone, no extra disk) in each topic folder.
 - Topic vocabulary and Topic A/B/C rules: [references/topics.md](references/topics.md). Sources, keys, what is skipped:
