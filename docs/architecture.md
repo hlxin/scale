@@ -91,7 +91,7 @@ their repositories and are referenced by `Dataset` records (`uri`, `sha256`).
 
 ## Versions and releases
 
-The schema has one version for the kernel and the catalysis domain together. The schema is at 0.4.0, kernel and
+The schema has one version for the kernel and the catalysis domain together. The schema is at 0.5.0, kernel and
 catalysis together; this repository started its numbering there on 2026-10-08 (the work it continues was numbered
 elsewhere, and those numbers name other schemas). A document pins its schema version; the catalysis domain keeps
 every earlier version frozen beside its manifest once a schema change has moved the schema on, so a document is read
@@ -118,7 +118,7 @@ All modules are in `tools/`.
 | `layout.py` | Every repository-relative path in one place: anchors, the catalysis domain's folder `domain/` (its name read from `DOMAIN.yaml`), graph manifests and their frozen directories, competency questions, example roots, what the wheel bundles, the kernel a manifest names (`kernel_path`), and the optional restricted copy (`restricted_path`, `locate`). |
 | `pgraph_schema.py` | Assemble one scale-catal schema from the kernel and the files the catalysis manifest lists under `domains:` (and, generically, `modules` and `extensions`; profile files are retired by design and refused), with the manifest's one version for every part (a part that states its own is refused); the catalysis file's checklist is a contract named after it; reject duplicate identifiers; extension prefixes from `governance/registry/`. |
 | `pgraph.py` | scale-catal documents: choosing the schema manifest (the catalysis manifest, or `--spec`) and its head or frozen version (`graph/frozen/`) by the document's `schema_version`, validation, `describe`, viewer filters, exports; spec documents, their digests and `identify` (is a pinned version and digest this repository's?); the kernel alone at a version (`kernel_only_spec`). |
-| `pgraph_profiles.py` | Checklists (must, should, `unless` and `when` cases) of the catalysis file, and conformance (there are no profile files). |
+| `pgraph_profiles.py` | Checklists (must, should, `unless` and `when` cases, `applies_by`, evidence patterns of at most two links) of the catalysis file, and conformance: each record's applicability (known, unknown, exempt), the evidence found in its connected records, and whether the checklist is complete (there are no profile files). |
 | `pgraph_science.py` | Checks specific to the science kernel. |
 | `quantities.py` | Quantity contracts (the kernel's `quantities:`): reading a unit as printed into a dimension and the contexts it states, never converting it; the contexts of a value (its unit, basis, definition, target, normalized_by and its record's sibling property) and evidenced conversions; the validator's contract diagnostics; the loader's checks of the block and of every binding; their part of the schema diff; the 0.2.1 -> 0.3.0 migration rule. |
 | `results.py` | Result entries (`Experiment.result_values`): a pointer step that names a list item by its id, the entries of a property and the pointer a reference names each by, what tells two results of a record apart (an ambiguous repetition), and the validator's result-entry diagnostics. |
@@ -149,6 +149,7 @@ All modules are in `tools/`.
 - **One result is one result throughout.** A query that binds a result reads its value, its product, its assay and its
   evidence from that one entry; two assays never jointly satisfy conditions meant for one result, a reference names a
   result by its id, never its position, and two results nothing tells apart are reported, never averaged.
+- **Applicability is stated, never assumed.** A test that lists no driving force is never read as meeting its driving-force items, and a reading of a test (intrinsic kinetics, a non-thermal effect, synergy, material stability) is checked for its evidence where the graph connects it, never inferred; validity, completeness and comparability are three answers.
 - **Missingness has a reason.** `not_reported` ≠ `not_measured` ≠ `not_applicable` ≠
   `below_detection_limit` ≠ a measured zero; a `not_reported` value says whether the source is
   silent, ambiguous, or the curator did not look.

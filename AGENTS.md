@@ -25,7 +25,9 @@ scale-catal@0.2.0 …` a pinned one. In a checkout of this repository run `uv ru
   locator (section, figure, table) and the source. Give every unknown value a status:
   `not_reported` with `missing_reason` (`not_stated_in_source` if the source is silent,
   `not_curated` if you did not look, `ambiguous_in_source` if the source conflicts). Put anything the
-  schema cannot express in the record's `unmodeled` list; never invent properties. Check with
+  schema cannot express in the record's `unmodeled` list; never invent properties. List every driving force of a
+  test (a test that lists none is never complete) and record what the source reads it as showing
+  (`interpretations`), never your own reading. Check with
   `validate` (or `scale graph validate`) and fix the errors it reports; the graph follows
   `follows_domains: ["catalysis"]`.
 - **Rights.** Record each source's rights in the folder's `rights.yaml` and keep quoted text within the

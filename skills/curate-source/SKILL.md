@@ -206,6 +206,23 @@ Never record `± 0`: keep the printed text in `as_reported` and leave `uncertain
   identify is an `unresolved_target` in its words; one below the detection limit is `below_detection_limit` with the
   limit; a carbon or charge balance is a `balance` result `produced_by` an Analysis (`analysis_kind: balance`), kept as
   reported, never computed or capped. A reference names a result by its id (`/result_values/<id>`), never by position.
+- **Driving forces and readings** (scale-catal 0.5.0 on). List every driving force of a test; one that lists none has
+  unknown applicability and is never complete. Record what the source reads a test as showing in `interpretations`
+  (`intrinsic_kinetics`, `system_performance`, `photothermal_effect`, `nonthermal_light_effect`,
+  `plasma_catalyst_synergy`, `performance_stability`, `material_stability`), never your own reading. Then link the
+  evidence the source gives, so the checklist finds it:
+  - a transport check: an Analysis (`transport_check`) that `HAS_INPUT` the test, with `evaluation_basis` asserted,
+    numerical or experimental;
+  - a dark control: `DARK_CONTROL_FOR`, with `differs_in`, `temperature_matched_at` and `temperature_matched_over`;
+    or a `ThermalContributionAnalysis` instead;
+  - plasma synergy: a plasma-alone control and a catalyst-alone control, each `CONTROL_FOR` the test; the plasma
+    power (`discharge_power`) apart from what the supply draws (`power_supply_input`);
+  - stability: a `TimeSeries` for performance; for the material, a `CatalystState` `REACHED_BY` the test and
+    `DETERMINED_BY` a characterization;
+  - dynamic operation: an `Operation` with `time_pattern`, `varied_quantities` and `segments`.
+
+  docs/curation.md has the details. Never add a criterion value, a conversion level or a control the source does not
+  report.
 - **Keys and qualifiers.** Use one key per quantity and put what the value is about in its fields:
   the species or product in `target`, the basis in `basis`, the measurand in `variable` (a Variable)
   and how it was defined or measured in `definition`. When a source gives several values of one

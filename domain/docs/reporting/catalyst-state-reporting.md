@@ -40,7 +40,7 @@ that change, and until then such an item is recorded in the record's `note` or `
 | B1 | Temperature and where it was measured | R | `CatalyticTest.temperature`, `temperature_measured_at` (catalysis checklist, thermal case) |
 | B2 | Total pressure and the partial pressure (or fraction) of every reactant and product present | R | `CatalystState.conditions`, `Feed` |
 | B3 | Electrode potential with its reference scale and iR compensation; irradiance and wavelength; plasma power | R when applicable | properties the catalysis domain adds to `Experiment` (so a `CatalyticTest` has them): `electrode_potential`, `reference_scale`, `ir_compensation`; `irradiance`, `wavelength`; `discharge_power` (required by the checklist's electro, photo and plasma cases) |
-| B4 | Evidence that rates are free of heat and mass transport limits | E | not yet modelled (record in the test's `note`) |
+| B4 | Evidence that rates are free of heat and mass transport limits, and how it was obtained (stated, calculated, or tested by varying particle size, flow or stirring) | E | an `Analysis` with `analysis_kind: transport_check` that `HAS_INPUT` the test, with `evaluation_basis` (`asserted`, `numerical`, `experimental`), `method`, `verdict` and the `temperature` it applies to; a test read as `intrinsic_kinetics` is checked for one (scale-catal 0.5.0) |
 
 ## C. The catalyst state
 
@@ -66,7 +66,7 @@ that change, and until then such an item is recorded in the record's `note` or `
 | # | Item | | SCALE |
 |---|---|---|---|
 | E1 | Which state the measurement was made in | R | `IN_STATE` |
-| E2 | Every product detected, with its selectivity or rate and the basis (carbon, molar, Faradaic), and the balance closure | R | *(planned)* `CatalyticTest.product_distribution` |
+| E2 | Every product detected, with its selectivity or rate and the basis (carbon, molar, Faradaic), and the balance closure | R | `result_values`, one entry per product, analysis, phase and time, with its `basis`, and a `balance` result produced by an `Analysis` (`analysis_kind: balance`) over the analyses it adds up (scale-catal 0.4.0); *(planned)* `CatalyticTest.product_distribution` as a whole |
 | E3 | Conversion, and whether it was kept low enough for kinetic analysis | R | `conversion` |
 | E4 | Rates normalized as reported (per mass, area or site); for a turnover frequency, how the sites were counted | E | `production_rate`; *(planned)* `ACTIVE_FOR.turnover_frequency` |
 | E5 | Change of activity or selectivity with time on stream | E | `time_on_stream`, `deactivation_rate` |
@@ -103,8 +103,10 @@ Abundance is not activity: a majority phase is not reported as active unless the
 - **Strength of evidence.** The F3 list names the kinds of evidence; it does not rank them. Should a
   recommended minimum (for example operando presence plus one kinetic criterion) be stated for the
   word "active" in a title or abstract?
-- **Transport limits (B4)** and **balance closure (E2)** have no typed field yet; they would be a
-  later schema change.
+- **Transport limits (B4)** and **balance closure (E2)** have typed fields now (a transport check with its
+  `evaluation_basis`, scale-catal 0.5.0; result entries and balances, 0.4.0). Whether a minimum basis (a calculation
+  or a test, not a statement) should be required for the word "intrinsic" is open; the checklist asks for it
+  provisionally, as a should item, and sets no criterion value.
 - **Definitions** should cite the IUPAC Gold Book (active site, turnover frequency, selectivity) and
   representative literature. The references are to be pinned from primary sources before the draft
   circulates, not written from memory.

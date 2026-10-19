@@ -135,6 +135,33 @@ source must be within its cap.
   balance is a `balance` result `produced_by` an Analysis (`analysis_kind: balance`) that `HAS_INPUT` the assays it adds
   up, kept as reported (103 ± 4 % stays 103 ± 4 %); never compute a remainder or a closure the source does not state.
   A reference to a result (`TESTS.result_refs`) names it by its id: `{record: <test>, path: /result_values/<id>}`.
+- **Driving forces and what a test is read as showing** (scale-catal 0.5.0 on). List every driving force of a test
+  (`driving_forces`). A test that lists none has unknown applicability, and its checklist is never complete. Record
+  what the source reads the test as showing in `interpretations`, never a reading of your own. The values are
+  `intrinsic_kinetics`, `system_performance`, `photothermal_effect`, `nonthermal_light_effect`,
+  `plasma_catalyst_synergy`, `performance_stability` and `material_stability`. The checklist then looks for the
+  evidence each reading needs in the records connected to the test, so link that evidence as it is reported:
+  - **Transport check.** A transport check is an `Analysis` with `analysis_kind: transport_check` that `HAS_INPUT` the
+    test. Give it its `evaluation_basis`: `asserted` (stated, not shown), `numerical` (a criterion such as Weisz-Prater
+    or Mears, its values in `results`) or `experimental` (runs that vary particle size, flow at constant contact time
+    or stirring, each an input of the check and `CONTROL_FOR` the test). Also give its `method`, its `verdict` and the
+    `temperature` it applies to.
+  - **Dark control.** A dark control is `DARK_CONTROL_FOR` the illuminated test. It states `control_kind`,
+    `differs_in` (illumination), how the temperature was matched, where (`temperature_matched_at`: the illuminated
+    surface, or a bulk temperature) and over which time (`temperature_matched_over`). Another way of separating light
+    from heat is a `ThermalContributionAnalysis` with its `partition_method`.
+  - **Plasma synergy.** Record the plasma alone (an Experiment that `USES_PLASMA` with the bare packing) and the
+    catalyst alone at the same temperature, each `CONTROL_FOR` the combined test. Record the plasma power
+    (`discharge_power`, with how it was determined) apart from what the supply draws (`power_supply_input`).
+  - **Stability.** A trace of performance over time is a `TimeSeries` the test `HAS_OUTPUT`. The material after the
+    test is a `CatalystState` `REACHED_BY` the test (`timing: after`) and `DETERMINED_BY` its characterization
+    (structure after the test, dissolution into the electrolyte). Repeats are `REPLICATES` links, and a planned set of
+    repeats is a `Design` (`planned_replicates`, `PART_OF_DESIGN`).
+  - **Dynamic operation.** A test operated dynamically `HAS_OPERATION` an `Operation` with its `time_pattern`, its
+    `varied_quantities` and its `segments` (each the values held and its duration).
+
+  Never record a criterion value, a conversion level or a control the source does not report, and never infer a
+  reading from `test_kind`.
 - **Missingness with a reason.** A value the source does not state is `not_reported` with a
   `missing_reason`: `not_stated_in_source`, `not_curated` (you did not look, e.g. SI or source-data
   files not examined), `ambiguous_in_source` (keep every variant), `withheld` or `not_extractable`.
