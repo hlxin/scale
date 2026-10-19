@@ -19,6 +19,7 @@ publications/
   <topic>/index/excluded.csv                  screened out, not research articles, retracted — with the reason
   <topic>/papers/OA/  OA+ND/  Free-to-read/  Paywalled/          <ID>.pdf
   <topic>/papers/SI/<access>/                 <ID>_SI.<ext>  or  <ID>_SI_1.<ext>, <ID>_SI_2.<ext> ...
+  <topic>/corpora/<corpus>/sources.json      a frozen corpus for curation (freeze_corpus.py; scale corpus check)
   exports/                                    filtered subsets made on request (export.py --name ...)
 .scripts/                                     everything the agent generates (never needed to read the corpus)
 ```
@@ -161,10 +162,12 @@ embargoes end, open copies appear, retractions are flagged, preprints get their 
 
 ## The Extracted column (papers curated into a graph)
 
-A downloaded paper becomes a scale-catal document with [curate-source](../../curate-source/SKILL.md)
+A downloaded paper becomes a scale-catal document with [curate-source](../../curate-source/SKILL.md), a frozen
+corpus of them with [curate-corpus](../../curate-corpus/SKILL.md)
 (`scale source start --pdf publications/<slug>/papers/<access>/<ID>.pdf`). Record the result in the index by hand:
 `export.py --set-extracted 12,57 --topic co2rr --kg <graph name> --value extracted` (or `rejected`, `failed`,
-`no_data`; `none` removes the record). A curation tool can also report results itself, one JSON object per paper in
+`no_data`; `none` removes the record). curate-corpus reports its results itself (`curate_run.py status --apply`), one
+JSON object per paper in
 `.scripts/<topic>/kg/<graph name>/extraction_status.jsonl`:
 `{"paper_id": 12, "topic": "co2rr", "kg": "co2rr-catalysts", "status": "extracted|rejected|failed|no_data",
 "schema_version": "0.5.0", "nodes": 18, "edges": 25, "date": "2026-10-12", "note": "...", "abstract": "..."}`.
