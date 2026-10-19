@@ -59,7 +59,9 @@ The mapping, and what it cannot carry:
     high); the property's schema entry says so and the export report counts them
     (``ranges_as_midpoint``). An uncertainty is converted with the value (for temperature, without
     the offset).
-* Maps and lists of value objects become JSON text.
+* Maps and lists of value objects become JSON text. The entries of ``result_values`` are counted in the export report
+  (``result_entries_as_text``, by label) with ``result_entries_note``: what identifies each result (its variable,
+  product, assay, calibration, phase, stream, normalization and evidence) names scale-catal records, not bundle edges.
 * ``_statement`` is the link's ``statement_kind`` (observation, conclusion, hypothesis, assumption) when the document
   records one (a planned kernel property). Otherwise it is inferred, and the export report counts
   the inferences (``statement_inferred``): a hypothesized, disputed or refuted link is a hypothesis (contested or
@@ -97,8 +99,9 @@ Provenance and value detail the kg-bundle format has a place for:
 What the kg-bundle format cannot carry, and stays only in the scale-catal document:
 
 * intervals (``interval_lower``/``interval_upper``, ``coverage_factor``, ``confidence_level``), ``replicates``,
-  a value's ``origin``, ``target``, ``variable``, ``definition``, ``produced_by``,
-  ``calibration``, ``normalized_by``, ``evidence_ids`` and ``note``: only the reported text survives (a value
+  a value's ``origin``, ``target``, ``unresolved_target``, ``variable``, ``definition``, ``produced_by``,
+  ``calibration``, ``normalized_by``, ``id``, ``phase``, ``stream``, ``evidence_ids`` and ``note``: only the reported
+  text survives (a value
   whose ``normalized_by`` names a record the bundle withholds is withheld whole, as one naming it by ``target``);
 * the source lifecycle beyond derived statuses (notices with their scope and dates), ``status_check``, evidence
   passages, regions, transcriptions' agreement and second readings.
@@ -209,6 +212,12 @@ SYNTHETIC_TEXT = {
                                                "examples; records whose origin is synthetic are invented, not evidence about "
                                                "the world."),
 }
+# what an export of result entries as JSON text cannot keep (export_report.result_entries_note)
+RESULT_ENTRIES_LOST = ("result_values are carried as JSON text: each entry's variable, product (target), assay "
+                       "(produced_by), calibration, phase, stream, normalization and evidence_ids name scale-catal records and "
+                       "evidence items, not bundle nodes or edges, so the bundle cannot bind a result to its product, assay "
+                       "and evidence, and a record_ref to an entry (/result_values/<id>) does not resolve in it; read the "
+                       "scale-catal document natively for that context")
 # The bundle's title (bundle.json ``topic``): a host shows it as the graph's name on import,
 # so it is a short name. A graph's own title states its scope in full and may run long; the bundle takes it when it is
 # short and its leading words otherwise (``concise_title``), unless the export names one (``title``).
@@ -931,6 +940,9 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
                 continue
             if isinstance(v, dict) and "status" in v and pdef.get("type") != "map":
                 continue
+            if k == "result_values" and isinstance(v, list):     # what identifies each result does not survive: say so
+                for _ in v:
+                    tally(owner, "result_entries_as_text", label_or_type)
             gt = _ptype(pdef) if k not in ("name",) else {"type": "string"}
             fits = {"string": True, "string[]": isinstance(v, list) and all(isinstance(x, str) for x in v),
                     "enum": v in gt.get("values", ()), "integer": isinstance(v, int) and not isinstance(v, bool),
@@ -1151,6 +1163,8 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
     for k in ("ranges_as_midpoint", "kept_apart_by_basis"):   # reported only when something was done
         if not report[k]:
             del report[k]
+    if report.get("result_entries_as_text"):
+        report["result_entries_note"] = RESULT_ENTRIES_LOST
     if replaced:                                   # what the merge map did: retired ids listed on their survivors
         applied = sum(1 for o, nw in replaced.items() if o in frozen and nw in gid and o not in gid)
         report["replaced"] = {"listed": len(replaced), "applied": applied}

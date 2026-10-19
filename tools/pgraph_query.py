@@ -25,12 +25,31 @@ A query plan (YAML or JSON)::
     limit: 50
 
 A property may be a path into a map or a list of values: ``results.methanol_yield`` (a map entry by key),
-``levels.0`` (a list entry by position), ``results.*`` (every entry), each optionally narrowed to the entries
-whose value refers to a record, ``[target=<id>]``, or names a variable, ``[variable=<id>]``
-(``results.*[target=ex:t/species/co]``; ``selectivity[target=…]`` on a single value). A filter on several
-entries holds when one of them passes and fails when every one fails; when none passes and one cannot be
-compared (missing, withheld, in another unit, a bound), the record is left out with that entry's reason, never
-taken as failing. A returned path gives the entry, or the selected entries by key or in order.
+``levels.0`` (a list entry by position), ``result_values.meoh_yield_gc`` (a list entry by its id), ``results.*``
+(every entry), each optionally narrowed to the entries whose value has every one of the fields it qualifies
+(:data:`QUALIFIERS`: ``[target=<id>]``, ``[variable=<id>]``, ``[produced_by=<id>]``, ``[phase=gas]``, …;
+``results.*[target=ex:t/species/co]``; ``selectivity[target=…]`` on a single value). A filter on several entries
+holds when one of them passes and fails when every one fails; when none passes and one cannot be compared
+(missing, withheld, in another unit, a bound), the record is left out with that entry's reason, never taken as
+failing. The filters of one variable on one such path are held by one entry together (:func:`group`: two assays
+never meet two conditions apart), and a returned path gives the entries that held them, else the entry, or the
+selected entries by key or in order.
+
+A step may bind one value entry instead of following an edge (docs/querying.md, "Results")::
+
+    steps:
+      - {from: test, entries: [result_values, yield], kind: product_yield, as: result}    # one row per entry
+      - {from: result, field: target, to: ChemicalSpecies, as: product}                 # the record a field names
+      - {from: result, field: produced_by, to: Experiment, as: assay, optional: true}
+
+An ``entries`` step binds, per row, one entry of a value property of a node variable (of the quantity kinds
+``kind`` names, its property's or its Variable's); a filter, a return and a ranking on it read ``value`` (the value
+object itself), ``kind`` or a field of it, the row's ``bound`` names it as a record_ref (``record``, ``path``) and
+the row cites the evidence it names (``evidence_ids``), never items of its record that only other entries cite. A
+``field`` step follows one of its fields that names a record (``target``, ``variable``, ``produced_by``,
+``calibration``, ``ref_value``, ``normalized_by``) to a record of the label ``to`` names; an ``unresolved_target``
+is left out as such. Two entries of one record that nothing tells apart (:func:`results.repeated`) are flagged in
+an ordinary answer (``ambiguous_repetition``) and left out of a scientific comparison, never averaged.
 
 Numeric filters (``lt``, ``le``, ``gt``, ``ge``, and ``eq``, ``ne`` with a number or ``in`` with numbers:
 :func:`numeric_filter`) follow one rule on value objects (:func:`comparable`). The filter states its ``unit``, and
@@ -133,7 +152,7 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
-from . import lifecycle, passages, pgraph, quantities
+from . import lifecycle, passages, pgraph, quantities, results
 from .util import ScaleError, load_doc
 
 SHARED_KINDS = {"ChemicalSpecies", "Reaction", "Material", "Person", "Institution", "Source", "Dataset"}
@@ -149,7 +168,10 @@ CONVERT_REFUSED = ("convert is not available: a numeric filter compares only val
                    "same, case included (only runs of whitespace count as one space), and on the basis it states; "
                    "nothing is converted (unit conversion is planned with the units proposal). Run one plan per unit "
                    "and basis, and report each apart.")
-_PATH = re.compile(r"^(?P<prop>[^.\[\]\s]+)(?:\.(?P<entry>[^.\[\]\s]+))?(?:\[(?P<qual>target|variable)=(?P<id>[^\]\s]+)\])?$")
+_PATH = re.compile(r"^(?P<prop>[^.\[\]\s]+)(?:\.(?P<entry>[^.\[\]\s]+))?(?P<quals>(?:\[[a-z_]+=[^\]]+\])*)$")
+_QUAL = re.compile(r"\[(?P<field>[a-z_]+)=(?P<value>[^\]]+)\]")
+# the fields of a value object a path's qualifier selects entries by (all of them at once: one result's)
+QUALIFIERS = ("target", "variable", "produced_by", "calibration", "phase", "stream", "id")
 
 
 class Graph:
@@ -353,21 +375,34 @@ def reason_code(reason: str | None) -> str:
 
 
 # ------------------------------------------------------------------------------------------ property paths
-def parse_path(path: Any) -> tuple[str, str | None, str | None, str | None]:
-    """(property, entry, qualifier, record id) of a property path: ``temperature``, ``results.methanol_yield``,
-    ``levels.0``, ``results.*``, ``results.*[target=ex:t/species/co]``, ``selectivity[variable=ex:t/var/x]``."""
+def parse_path(path: Any) -> tuple[str, str | None, tuple[tuple[str, str], ...]]:
+    """(property, entry, qualifiers) of a property path: ``temperature``, ``results.methanol_yield``, ``levels.0``,
+    ``results.*``, ``results.*[target=ex:t/species/co]``, ``selectivity[variable=ex:t/var/x]``,
+    ``result_values.*[variable=ex:t/var/yield][target=ex:t/species/methanol][produced_by=ex:t/assay/gc]``: each
+    qualifier a field of the value object (:data:`QUALIFIERS`), and an entry selected only when it has every one."""
     m = _PATH.match(str(path or ""))
     if not m:
         raise ScaleError(f"cannot read the property path {path!r}: a property, optionally .<key>, .<position> or .* "
-                         "for an entry of a map or list, then optionally [target=<id>] or [variable=<id>]")
-    return m["prop"], m["entry"], m["qual"], m["id"]
+                         "for an entry of a map or list, then optionally qualifiers [<field>=<value>] "
+                         f"({', '.join(QUALIFIERS)})")
+    quals = tuple((q["field"], q["value"]) for q in _QUAL.finditer(m["quals"] or ""))
+    bad = [f for f, _ in quals if f not in QUALIFIERS]
+    if bad:
+        raise ScaleError(f"the property path {path!r} qualifies entries by {bad}: a qualifier is one of {list(QUALIFIERS)}")
+    return m["prop"], m["entry"], quals
+
+
+def selects_entries(path: Any) -> bool:
+    """Whether a path selects entries of a map or list (or qualifies a value), rather than naming a property."""
+    _, entry, quals = parse_path(path)
+    return entry is not None or bool(quals)
 
 
 def lookup(rec: dict, path: str) -> tuple[Any, list[tuple[Any, Any]] | None]:
     """(the property's value, the entries the path selects); the entries are None for a plain property."""
-    prop, entry, qual, qid = parse_path(path)
+    prop, entry, quals = parse_path(path)
     v = rec.get(prop) if prop in ("id", "label", "type") else (rec.get("props") or {}).get(prop)
-    if entry is None and qual is None:
+    if entry is None and not quals:
         return v, None
     items: list[tuple[Any, Any]]
     if isinstance(v, dict) and "status" not in v:                  # a map
@@ -379,23 +414,27 @@ def lookup(rec: dict, path: str) -> tuple[Any, list[tuple[Any, Any]] | None]:
         if entry in (None, "*"):
             items = list(enumerate(v))
         else:
-            items = [(int(entry), v[int(entry)])] if entry.isdigit() and int(entry) < len(v) else []
+            i = results.item(v, entry)                                   # a position, or the id of one item
+            items = [(i, v[i])] if i is not None else []
     elif isinstance(v, dict) and entry is None:                     # a qualifier on a single value
         items = [(None, v)]
     else:
         items = []
-    if qual:
-        items = [(k, x) for k, x in items if isinstance(x, dict) and x.get(qual) == qid]
+    for field, want in quals:
+        items = [(k, x) for k, x in items if isinstance(x, dict) and x.get(field) == want]
     return v, items
 
 
-def returned(rec: dict, path: str) -> Any:
+def returned(rec: dict, path: str, keys: list | None = None) -> Any:
     """The value a returned path gives: the property, the one entry it names, or the entries it selects (by key
-    for a map, in order for a list); None when nothing is selected."""
+    for a map, in order for a list); None when nothing is selected. ``keys``: the entries the row's filters bound
+    on this path (one result passing them all), which are then the only ones it gives."""
     v, items = lookup(rec, path)
     if items is None:
         return v
-    _, entry, _, _ = parse_path(path)
+    _, entry, _ = parse_path(path)
+    if keys is not None:
+        items = [(k, x) for k, x in items if k in keys]
     if not items:
         return None
     if entry not in (None, "*") or all(k is None for k, _ in items):
@@ -582,9 +621,23 @@ class Comparison:
         self.across: dict[str, Counter] = {}       # ordinary mode: path -> the contexts its compared values were on
 
     def read(self, rec: dict, path: str, x: Any) -> quantities.Read | None:
+        """A value read under its contract: a property's (its binding, else its Variable's quantity_kind), or, for a
+        bound entry (:data:`ENTRY`), the contract of the property it is an entry of, with that record's siblings."""
         if self.c is None or not isinstance(x, dict):
             return None
+        e = rec.get("_entry")
+        if e is not None:
+            return quantities.read_value(self.c, self.spec, e["owner"], e["prop"], x, self.g.records, self.variables)
         return quantities.read_value(self.c, self.spec, rec, parse_path(path)[0], x, self.g.records, self.variables)
+
+    def kind(self, owner: dict, prop: str, x: dict) -> str | None:
+        """The quantity kind of an entry of ``owner``'s ``prop``: the property's binding, else its Variable's."""
+        if self.c is None:
+            return None
+        k = quantities.binding(self.spec, owner, prop)[0]
+        if k is None and isinstance(x.get("variable"), str):
+            k = self.variables.get(x["variable"])
+        return k if k in self.c.kinds else None
 
     def reads_basis(self, kind: str) -> bool:
         return any("basis" in self.c.contexts[e["context"]]["read_from"] for e in self.c.kinds[kind]["compare_by"])
@@ -642,46 +695,55 @@ class Comparison:
     def check(self, rec: dict, f: dict) -> tuple[bool | None, str | None, dict | None]:
         """A numeric filter in scientific mode: (result, None, the tag of the value it passed on) or (None, reason,
         None). A path selecting several entries holds when one passes, as :func:`check` says."""
-        op = f.get("op", "eq")
-        want = f.get("context") or {}
         v, items = lookup(rec, f.get("prop"))
         vals = [v] if items is None else [x for _, x in items]
         if items is not None and not vals:
             return None, ("not_curated" if v is None else f"no_matching_entry ({f.get('prop')})"), None
         first = None
         for x in vals:
-            why = absent_reason(x)
-            if why:
-                first = first or why
-                continue
-            got = self.read(rec, f["prop"], x)
-            if got is None:
-                if want:
-                    why = (f"missing_context ({f['prop']}: no quantity contract says which "
-                           f"{', '.join(sorted(want))} it is on)")
-                    first = first or why
-                    continue
-                r, why = _numeric(x, f, op) if isinstance(x, dict) or _is_number(x) else (None, "not_a_number")
-            else:
-                fr = self.c.read_unit(f.get("unit"))
-                if fr.read and fr.vector not in self.c.kinds[got.kind]["dimensions"]:
-                    raise ScaleError(f"the filter {f.get('prop')} {op} {f.get('value')} {f.get('unit')} compares a "
-                                     f"{got.kind} in {self.c.dimension_name(fr.vector)}, not one of its dimensions "
-                                     f"({', '.join(self.c.dimension_name(d) for d in self.c.kinds[got.kind]['dimensions'])})")
-                why = self._context(f["prop"], got, want)
-                r = None
-                if why is None:
-                    r, why = _numeric(x, f, op, read_basis=self.reads_basis(got.kind))
+            r, why, tag = self.check_one(rec, f, x)
             if r:
-                return True, None, self.tag(got, x)
+                return True, None, tag
             if r is None:
                 first = first or why
         return (False, None, None) if first is None else (None, first, None)
 
-    def rank(self, rec: dict, ob: dict) -> tuple[dict | None, str | None]:
-        """A ranking value in scientific mode: (its tag, None) or (None, why it cannot be ranked)."""
+    def check_one(self, rec: dict, f: dict, x: Any) -> tuple[bool | None, str | None, dict | None]:
+        """One value (a property, or one entry the path selects) against a numeric filter in scientific mode. On a
+        bound entry (:data:`ENTRY`) a filter in a unit of another dimension than the entry's kind leaves the entry out
+        (incompatible_unit: entries of several kinds may be bound); on a property it is a plan error."""
+        op = f.get("op", "eq")
+        want = f.get("context") or {}
+        why = absent_reason(x)
+        if why:
+            return None, why, None
+        got = self.read(rec, f["prop"], x)
+        if got is None:
+            if want:
+                return None, (f"missing_context ({f['prop']}: no quantity contract says which "
+                              f"{', '.join(sorted(want))} it is on)"), None
+            r, why = _numeric(x, f, op) if isinstance(x, dict) or _is_number(x) else (None, "not_a_number")
+            return r, why, (self.tag(None, x) if r and isinstance(x, dict) else None)
+        fr = self.c.read_unit(f.get("unit"))
+        dims = self.c.kinds[got.kind]["dimensions"]
+        if fr.read and fr.vector not in dims:
+            said = (f"the filter {f.get('prop')} {op} {f.get('value')} {f.get('unit')} compares a {got.kind} in "
+                    f"{self.c.dimension_name(fr.vector)}, not one of its dimensions "
+                    f"({', '.join(self.c.dimension_name(d) for d in dims)})")
+            if rec.get("_entry") is not None:
+                return None, f"incompatible_unit ({said})", None
+            raise ScaleError(said)
+        why = self._context(f["prop"], got, want)
+        if why is not None:
+            return None, why, None
+        r, why = _numeric(x, f, op, read_basis=self.reads_basis(got.kind))
+        return r, why, (self.tag(got, x) if r else None)
+
+    def rank(self, rec: dict, ob: dict, keys: list | None = None) -> tuple[dict | None, str | None]:
+        """A ranking value in scientific mode: (its tag, None) or (None, why it cannot be ranked). ``keys``: the entries
+        the row's filters bound on the ranked path."""
         prop = ob.get("prop")
-        v = returned(rec, prop) if rec is not None else None
+        v = returned(rec, prop, keys) if rec is not None else None
         if isinstance(v, list) and len(v) == 1:                 # a path selecting one entry ranks it
             v = v[0]
         if isinstance(v, list):
@@ -731,7 +793,33 @@ class Comparison:
 
 
 # ------------------------------------------------------------------------------------------ plan checks
+ENTRY = "(a value entry)"           # the label of a variable an entries step binds: one value object, not a record
+ENTRY_PROPS = ("value", "kind")     # what a filter, a return or a ranking reads of an entry besides its value's fields
+
+
+def step_kind(st: dict) -> str:
+    """``edge`` (follow links), ``entries`` (bind one value entry of a record's property) or ``field`` (follow a field
+    of a bound entry to the record it names)."""
+    kinds = [k for k in ("edge", "entries", "field") if k in st]
+    if len(kinds) != 1:
+        raise ScaleError(f"a step follows an edge, binds entries or follows a field (one of edge, entries, field), not "
+                         f"{kinds or 'none'}: {st}")
+    return kinds[0]
+
+
+def _entry_def(spec: dict, prop: str) -> dict | None:
+    """What a filter or a return reads of a bound entry: ``value`` (the value object itself), ``kind`` (its quantity
+    kind) or one of its fields."""
+    if prop == "value":
+        return {"type": "value"}
+    if prop == "kind":
+        return {"type": "string"}
+    return ((spec.get("value") or {}).get("fields") or {}).get(prop)
+
+
 def _prop_def(spec: dict, label: str | None, prop: str, edge: bool = False) -> dict | None:
+    if label == ENTRY:
+        return _entry_def(spec, prop)
     if prop in ("id", "label", "type"):
         return {"type": "string"}
     c = spec["common"]["link" if edge else "node"]
@@ -745,14 +833,20 @@ def _prop_def(spec: dict, label: str | None, prop: str, edge: bool = False) -> d
 
 
 def _variables(plan: dict) -> tuple[dict[str, str | None], dict[str, str]]:
-    """(node variable -> label, link variable -> edge type) as the plan declares them."""
+    """(node variable -> label, link variable -> edge type) as the plan declares them; a variable an entries step binds
+    has the label :data:`ENTRY`."""
     labels = {plan["match"]["as"] if "as" in plan["match"] else "self": plan["match"].get("label")}
     edge_vars: dict[str, str] = {}
     for st in plan.get("steps") or []:
-        labels[st["as"]] = st.get("to")
-        if st.get("edge_as"):
+        labels[st["as"]] = ENTRY if step_kind(st) == "entries" else st.get("to")
+        if st.get("edge_as") and step_kind(st) == "edge":
             edge_vars[st["edge_as"]] = st["edge"]
     return labels, edge_vars
+
+
+def entry_vars(plan: dict) -> dict[str, dict]:
+    """The variables entries steps bind, with their steps."""
+    return {st["as"]: st for st in plan.get("steps") or [] if step_kind(st) == "entries"}
 
 
 def _filters(plan: dict) -> list[tuple[dict, str | None, bool]]:
@@ -761,8 +855,8 @@ def _filters(plan: dict) -> list[tuple[dict, str | None, bool]]:
     root = plan["match"].get("as", "self")
     out = [(f, plan["match"].get("label"), False) for f in plan["match"].get("where") or []]
     for st in plan.get("steps") or []:
-        out += [(f, st.get("to"), False) for f in st.get("where") or []]
-        out += [(f, st["edge"], True) for f in st.get("edge_where") or []]
+        out += [(f, labels[st["as"]], False) for f in st.get("where") or []]
+        out += [(f, st["edge"], True) for f in st.get("edge_where") or []] if step_kind(st) == "edge" else []
     for f in plan.get("where") or []:
         var = f.get("var", root)
         if var in edge_vars and var not in labels:
@@ -772,19 +866,68 @@ def _filters(plan: dict) -> list[tuple[dict, str | None, bool]]:
     return out
 
 
+def _value_prop(spec: dict, label: str | None, prop: str, edge: bool = False) -> bool | None:
+    """Whether a property holds values (one value, a list or a map of them); None when the schema does not say."""
+    d = _prop_def(spec, label, prop, edge)
+    if d is None:
+        return None
+    return d.get("type") == "value" or (d.get("type") in ("list", "map") and (d.get("items") or {}).get("type") == "value")
+
+
+def _check_steps(plan: dict, spec: dict, qc: quantities.Contracts | None) -> None:
+    """An entries step binds a value property's entries of a node variable (optionally of quantity kinds the contracts
+    declare); a field step follows a field that names a record (:data:`results.REF_FIELDS`) from a variable an entries
+    step binds; an edge step never starts from an entry."""
+    labels, edge_vars = _variables(plan)
+    entries = entry_vars(plan)
+    for st in plan.get("steps") or []:
+        kind, src = step_kind(st), st.get("from", plan["match"].get("as", "self"))
+        if kind == "edge" and src in entries:
+            raise ScaleError(f"the step {st['edge']} from {src}: {src} is a value entry, which has no links; follow one of "
+                             f"its fields with a field step ({', '.join(results.REF_FIELDS)})")
+        if kind == "entries":
+            stray = sorted(set(st) & {"to", "edge_where", "edge_as", "direction"})
+            if stray or src in entries or (src in edge_vars and src not in labels):
+                raise ScaleError(f"the entries step {st['as']} binds one value entry of a property of a node variable "
+                                 f"(from {src}){'; it takes no ' + ', '.join(stray) if stray else ''}")
+            props = st["entries"] if isinstance(st["entries"], list) else [st["entries"]]
+            if not props or not all(isinstance(x, str) and x for x in props):
+                raise ScaleError(f"the entries step {st['as']}: entries names a value property (or a list of them)")
+            for prop in props:
+                if _value_prop(spec, labels.get(src), prop) is False:
+                    raise ScaleError(f"the entries step {st['as']}: {prop} holds no values (an entries step binds the "
+                                     "value, the items of a list of values or the entries of a map of values)")
+            for k in ([st["kind"]] if isinstance(st.get("kind"), str) else st.get("kind") or []):
+                if qc is None or k not in qc.kinds:
+                    raise ScaleError(f"the entries step {st['as']}: kind {k!r} is not a quantity kind this schema declares"
+                                     + (f" ({', '.join(sorted(qc.kinds))})" if qc else " (quantity contracts: 0.3.0 on)"))
+        if kind == "field":
+            if src not in entries:
+                raise ScaleError(f"the field step {st['as']} follows a field of a value entry: from names a variable an "
+                                 f"entries step binds, not {src!r}")
+            if st["field"] not in results.REF_FIELDS:
+                raise ScaleError(f"the field step {st['as']} follows {st['field']!r}; a field that names a record is one of "
+                                 f"{list(results.REF_FIELDS)}")
+            stray = sorted(set(st) & {"edge_where", "edge_as", "direction"})
+            if stray:
+                raise ScaleError(f"the field step {st['as']} takes no {', '.join(stray)}")
+
+
 def check_plan(plan: dict, spec: dict) -> None:
     """Errors in a plan, raised: a property path that cannot be read, an entry of a property that is no map or
     list, a numeric filter (:func:`numeric_filter`: lt, le, gt, ge, and eq, ne or in with numbers) without a unit on
     a property the schema declares as a value, ``lt``, ``le``, ``gt`` or ``ge`` with a value that is not a number, a
     unit that is not non-empty text or is the placeholder ``not stated`` (:data:`NOT_STATED_REFUSED`), a ``basis``
-    that is not non-empty text or on a filter that compares no number in a unit, and ``convert``
-    (:data:`CONVERT_REFUSED`: nothing is converted)."""
+    that is not non-empty text or on a filter that compares no number in a unit, ``convert``
+    (:data:`CONVERT_REFUSED`: nothing is converted), and a step that is not an edge, entries or field step as
+    :func:`_check_steps` says."""
     if plan.get("convert") not in (None, False):
         raise ScaleError(CONVERT_REFUSED)
     mode = plan.get("comparison", "ordinary")
     if mode not in COMPARISONS:
         raise ScaleError(f"comparison is one of {list(COMPARISONS)}, not {mode!r}")
     qc = quantities.contracts(spec)
+    _check_steps(plan, spec, qc)
     labels, edge_vars = _variables(plan)
     for f, label, edge in _filters(plan):
         what = f"the filter {f.get('prop')} {f.get('op')} {f.get('value')}"
@@ -805,20 +948,20 @@ def check_plan(plan: dict, spec: dict) -> None:
                              f"its unit; it is compared with the value's basis as it is spelled (carbon, molar)")
         if f.get("op", "eq") in NUMERIC_OPS:
             _as_number(f.get("value"))
-        prop, entry, qual, _ = parse_path(f.get("prop"))
+        prop, entry, quals = parse_path(f.get("prop"))
         d = _prop_def(spec, label, prop, edge)
         if d is None:
             continue
         t = d.get("type")
         if entry is not None and t not in ("map", "list"):
             raise ScaleError(f"{label}.{prop} is not a map or list, so {f.get('prop')!r} names no entry")
-        valued = t == "value" or (t in ("map", "list") and (entry is not None or qual)
+        valued = t == "value" or (t in ("map", "list") and (entry is not None or quals)
                                   and (d.get("items") or {}).get("type") == "value")
-        if numeric_filter(f) and t in ("map", "list") and entry is None and not qual \
+        if numeric_filter(f) and t in ("map", "list") and entry is None and not quals \
                 and (d.get("items") or {}).get("type") == "value":
             raise ScaleError(f"the filter {f.get('prop')} {f.get('op')} {f.get('value')} on {label} compares a whole "
                              f"{t} with a number: name its entries ({f.get('prop')}.* for every entry, .<key> or .<position> "
-                             f"for one, optionally [target=<id>])")
+                             f"for one, optionally [target=<id>]), or bind one entry with an entries step")
         if numeric_filter(f) and valued and not f.get("unit"):
             raise ScaleError(f"the filter {f.get('prop')} {f.get('op')} {f.get('value')} on {label} states no unit: a "
                              f"numeric filter on a value object compares only values in the unit it states (add unit)")
@@ -828,7 +971,7 @@ def check_plan(plan: dict, spec: dict) -> None:
     for r in plan.get("return") or []:
         var, _, path = r.partition(".")
         if path:
-            prop, entry, _, _ = parse_path(path)
+            prop, entry, _ = parse_path(path)
             edge = var in edge_vars and var not in labels
             d = _prop_def(spec, edge_vars[var] if edge else labels.get(var), prop, edge)
             if d is not None and entry is not None and d.get("type") not in ("map", "list"):
@@ -883,6 +1026,8 @@ def schema_gaps(plan: dict, spec: dict) -> list[str]:
 
     def has_prop(label: str | None, prop: str, edge: bool = False) -> bool:
         prop = parse_path(prop)[0]
+        if label == ENTRY:
+            return _entry_def(spec, prop) is not None
         if prop in ("id", "label", "type"):
             return True
         c = spec["common"]["link" if edge else "node"]
@@ -894,20 +1039,30 @@ def schema_gaps(plan: dict, spec: dict) -> list[str]:
         d = spec["edges" if edge else "nodes"].get(label) or {}
         return prop in (d.get("properties") or {})
 
+    def where_of(label: str | None, prop: str) -> str:
+        return f"{'a value entry' if label == ENTRY else label}.{parse_path(prop)[0]}"
+
     ml = plan["match"].get("label")
     if ml and ml not in spec["nodes"]:
         gaps.append(f"label {ml} is not declared")
     for st in plan.get("steps") or []:
-        if st["edge"] not in spec["edges"]:
+        kind = step_kind(st)
+        if kind == "edge" and st["edge"] not in spec["edges"]:
             gaps.append(f"edge type {st['edge']} is not declared")
-        if st.get("to") and st["to"] not in spec["nodes"]:
+        if kind != "entries" and st.get("to") and st["to"] not in spec["nodes"]:
             gaps.append(f"label {st['to']} is not declared")
-        labels[st["as"]] = st.get("to")
-        if st.get("edge_as"):
+        if kind == "entries":
+            src = st.get("from", plan["match"].get("as", "self"))
+            edge = src in edge_vars and src not in labels
+            for prop in st["entries"] if isinstance(st["entries"], list) else [st["entries"]]:
+                if not has_prop(edge_vars[src] if edge else labels.get(src), prop, edge):
+                    gaps.append(f"{edge_vars[src] if edge else labels.get(src)}.{prop} is not declared")
+        labels[st["as"]] = ENTRY if kind == "entries" else st.get("to")
+        if st.get("edge_as") and kind == "edge":
             edge_vars[st["edge_as"]] = st["edge"]
         for f in st.get("where") or []:
-            if not has_prop(st.get("to"), f["prop"]):
-                gaps.append(f"{st.get('to')}.{parse_path(f['prop'])[0]} is not declared")
+            if not has_prop(labels[st["as"]], f["prop"]):
+                gaps.append(f"{where_of(labels[st['as']], f['prop'])} is not declared")
         for f in st.get("edge_where") or []:
             if not has_prop(st["edge"], f["prop"], edge=True):
                 gaps.append(f"{st['edge']}.{parse_path(f['prop'])[0]} is not declared")
@@ -917,14 +1072,14 @@ def schema_gaps(plan: dict, spec: dict) -> list[str]:
             if not has_prop(edge_vars[var], f["prop"], edge=True):
                 gaps.append(f"{edge_vars[var]}.{parse_path(f['prop'])[0]} is not declared")
         elif not has_prop(labels.get(var), f["prop"]):
-            gaps.append(f"{labels.get(var)}.{parse_path(f['prop'])[0]} is not declared")
+            gaps.append(f"{where_of(labels.get(var), f['prop'])} is not declared")
     for r in plan.get("return") or []:
         var, _, prop = r.partition(".")
         if var in edge_vars:
             if prop and not has_prop(edge_vars[var], prop, edge=True):
                 gaps.append(f"{edge_vars[var]}.{parse_path(prop)[0]} is not declared")
         elif prop and not has_prop(labels.get(var), prop):
-            gaps.append(f"{labels.get(var)}.{parse_path(prop)[0]} is not declared")
+            gaps.append(f"{where_of(labels.get(var), prop)} is not declared")
     return sorted(set(gaps))
 
 
@@ -971,7 +1126,7 @@ def _run(doc: dict, spec: dict, plan: dict, evidence_index=None, graph: Graph | 
     cmp = Comparison(plan, spec, g)
     base = {"question": plan.get("question"), "plan": plan, "graph_id": doc["graph"].get("graph_id"),
             "schema_version": doc["graph"].get("schema_version"), "graph_sha256": g.digest}
-    link_types = list(dict.fromkeys(st["edge"] for st in steps))
+    link_types = list(dict.fromkeys(st["edge"] for st in steps if "edge" in st))
     as_of = embargo_day(plan.get("as_of"), pgraph.embargo_today())    # the day an embargo is read on (one clock)
     access = g.access(as_of)                        # the whole document's: no part of an answer is more open
     gaps = schema_gaps(plan, spec)
@@ -1002,11 +1157,81 @@ def _run(doc: dict, spec: dict, plan: dict, evidence_index=None, graph: Graph | 
             if entry.get(k):
                 have[k] = sorted(set(have.get(k) or []) | set(entry[k]))
 
-    def apply(rec: dict, filters: list[dict] | None, rid: str, sink, tags: dict | None = None, var: str = "") -> bool:
-        """Whether a record passes every filter; a filter that cannot be evaluated goes to sink(filter, reason). In a
-        scientific comparison a numeric filter reads the value under its quantity contract (:class:`Comparison`) and
-        ``tags`` gets the unit and contexts of the value each filter passed on, keyed ``<variable>.<path>``."""
+    def one(rec: dict, f: dict, x: Any) -> tuple[bool | None, str | None, dict | None]:
+        """One value (or one entry a path selects) against one filter."""
+        if cmp.scientific and numeric_filter(f):
+            return cmp.check_one(rec, f, x)
+        r, why = _one(x, f, f.get("op", "eq"))
+        return r, why, None
+
+    def group(rec: dict, fs: list[dict]) -> tuple[bool | None, str | None, dict | None, dict | None, list]:
+        """Filters on one path that selects entries, held by one entry together: (result, reason, the filter whose
+        reason it is, the tag of the first entry that passed, the keys of every entry that passed). An entry passes
+        when every filter holds for it, and fails when one fails; a record passes when an entry does, and is
+        undecided (the first undecided entry's reason) when none passes and one could not be compared, never taken as
+        failing. So two filters are never held by two entries: an assay at 40 % and one at 80 % never pass >= 70 and
+        <= 50 together."""
+        path = fs[0].get("prop")
+        v, items = lookup(rec, path)
+        if not items:
+            if any(f.get("op", "eq") == "exists" for f in fs):     # no entry is there: exists fails, as it always did
+                return False, None, None, None, []
+            return None, ("not_curated" if v is None else f"no_matching_entry ({path})"), fs[0], None, []
+        passed, tag, first = [], None, None
+        for key, x in items:
+            held, und, t = True, None, None
+            for f in fs:
+                r, why, tg = one(rec, f, x)
+                if r is False:
+                    held, und = False, None
+                    break
+                if r is None:
+                    held, und = False, und or (f, why)
+                elif tg is not None and t is None:
+                    t = tg
+            if held:
+                passed.append(key)
+                tag = tag if tag is not None else t
+            elif und is not None and first is None:
+                first = und
+        if passed:
+            return True, None, None, tag, passed
+        if first is not None:
+            return None, first[1], first[0], None, []
+        return False, None, None, None, []
+
+    def apply(rec: dict, filters: list[dict] | None, rid: str, sink, tags: dict | None = None, var: str = "",
+              bound: dict | None = None) -> bool:
+        """Whether a record passes every filter; a filter that cannot be evaluated goes to sink(filter, reason). The
+        filters on one path that selects entries (``results.*[target=…]``, ``faradaic_efficiency.*``) are held by one
+        entry together (:func:`group`), and ``bound`` gets the keys of the entries that held them, keyed
+        ``(<variable>, <path>)``: what a return of that path gives, and whose evidence the row cites. In a scientific
+        comparison a numeric filter reads the value under its quantity contract (:class:`Comparison`) and ``tags`` gets
+        the unit and contexts of the value each filter passed on, keyed ``<variable>.<path>``."""
+        done: set = set()
         for f in filters or []:
+            path = f.get("prop")
+            if f.get("op", "eq") != "missing" and selects_entries(path):
+                if path in done:
+                    continue
+                done.add(path)
+                fs = [h for h in filters if h.get("prop") == path and h.get("op", "eq") != "missing"]
+                r, why, at, tag, keys = group(rec, fs)
+                if r is None:
+                    sink(at, why)
+                    return False
+                for h in fs:
+                    if numeric_filter(h) and _stated(h.get("unit")):
+                        compared.add((rid, path))
+                        if not cmp.scientific:
+                            cmp.observe(rec, path)
+                if not r:
+                    return False
+                if bound is not None:
+                    bound[(var, path)] = keys
+                if tag is not None and tags is not None:
+                    tags[f"{var}.{path}"] = tag
+                continue
             tag = None
             if cmp.scientific and numeric_filter(f):
                 r, why, tag = cmp.check(rec, f)
@@ -1025,13 +1250,23 @@ def _run(doc: dict, spec: dict, plan: dict, evidence_index=None, graph: Graph | 
                 tags[f"{var}.{f.get('prop')}"] = tag
         return True
 
+    def entry_record(owner: dict, prop: str, key: Any, x: dict) -> dict:
+        """A value entry as a filter, a return and a ranking read it (:data:`ENTRY`): its fields, ``value`` the value
+        object itself and ``kind`` its quantity kind; ``_entry`` says whose and where (a record_ref: record, path)."""
+        kind = cmp.kind(owner, prop, x)
+        ptr = results.pointer(prop, key, x)
+        return {"id": x["id"] if isinstance(x.get("id"), str) else ptr, "label": ENTRY,
+                "props": {**x, "value": x, "kind": kind},
+                "_entry": {"record": owner["id"], "path": ptr, "prop": prop, "key": key, "kind": kind, "owner": owner}}
+
     cands = ([m["id"]] if m["id"] in g.nodes else []) if m.get("id") else sorted(g.by_label.get(m["label"], []))
     rows = []
     for nid in cands:
         tags: dict = {}
+        mbound: dict = {}
         if apply(g.nodes[nid], m.get("where"), nid,
-                 lambda f, why, nid=nid: exclude({"record": nid, "filter": f, "reason": why}), tags, root):
-            rows.append({root: nid, "_links": [], "_edges": {}, "_cmp": tags})
+                 lambda f, why, nid=nid: exclude({"record": nid, "filter": f, "reason": why}), tags, root, mbound):
+            rows.append({root: nid, "_links": [], "_edges": {}, "_cmp": tags, "_bound": mbound, "_entries": {}})
     stages.append({"kind": "match", **({"label": m["label"]} if m.get("label") else {"id": m["id"]}),
                    "rows_in": len(cands), "rows_out": len(rows)})
 
@@ -1050,11 +1285,14 @@ def _run(doc: dict, spec: dict, plan: dict, evidence_index=None, graph: Graph | 
                 left[reason_code(why)] += 1
         unbound = 0
         unevaluated = 0                     # rows this step left out though a comparison on their links could not be made
+        kind = step_kind(st)
+        props_ = (st["entries"] if isinstance(st["entries"], list) else [st["entries"]]) if kind == "entries" else []
+        kinds = set([st["kind"]] if isinstance(st.get("kind"), str) else st.get("kind") or [])
         for row in rows:
             here = row.get(src)
             found = False
             missed[0] = False
-            if here is not None:
+            if here is not None and kind == "edge":
                 edges = g.out.get(here, []) if direction == "out" else g.inc.get(here, [])
                 for e in sorted(edges, key=lambda e: e["id"]):
                     if e["type"] != st["edge"]:
@@ -1064,22 +1302,71 @@ def _run(doc: dict, spec: dict, plan: dict, evidence_index=None, graph: Graph | 
                         continue
                     etags: dict = {}
                     ntags: dict = {}
+                    ebound: dict = {}
                     if not apply(e, st.get("edge_where"), e["id"], lambda f, why, rid=e["id"]: step_sink(f, why, rid),
-                                 etags, st.get("edge_as") or st["edge"]):
+                                 etags, st.get("edge_as") or st["edge"], ebound):
                         continue
                     if apply(g.nodes[other], st.get("where"), other, lambda f, why, rid=other: step_sink(f, why, rid),
-                             ntags, st["as"]):
+                             ntags, st["as"], ebound):
                         edges_bound = {**row["_edges"], st["edge_as"]: e["id"]} if st.get("edge_as") else row["_edges"]
                         nxt.append({**row, st["as"]: other, "_links": row["_links"] + [e["id"]], "_edges": edges_bound,
-                                    "_cmp": {**row["_cmp"], **etags, **ntags}})
+                                    "_cmp": {**row["_cmp"], **etags, **ntags}, "_bound": {**row["_bound"], **ebound}})
+                        found = True
+            elif here is not None and kind == "entries":     # one row per value entry: every filter on it is its own
+                owner = g.nodes[here]
+                for prop in props_:
+                    items = list(results.entries((owner.get("props") or {}).get(prop)))
+                    by_key = dict(items)
+                    twins = {k: keys for keys in results.repeated(items) for k in keys}
+                    for key, x in items:
+                        erec = entry_record(owner, prop, key, x)
+                        if kinds and erec["_entry"]["kind"] not in kinds:
+                            continue
+                        handle = f"{here}#{erec['_entry']['path']}"
+                        others = [results.pointer(prop, k, by_key[k]) for k in twins.get(key, []) if k != key]
+                        if others and cmp.scientific:            # two results nothing tells apart: never compared
+                            step_sink(None, f"ambiguous_repetition ({erec['_entry']['path']} and {', '.join(others)}: one "
+                                            "variable, target, producer, phase, stream, basis and normalization)", handle)
+                            continue
+                        ntags = {}
+                        nbound: dict = {}
+                        if apply(erec, st.get("where"), handle, lambda f, why, rid=handle: step_sink(f, why, rid), ntags,
+                                 st["as"], nbound):
+                            nxt.append({**row, st["as"]: handle, "_cmp": {**row["_cmp"], **ntags},
+                                        "_bound": {**row["_bound"], **nbound},
+                                        "_entries": {**row["_entries"], st["as"]: {**erec["_entry"], "from": src, "value": x,
+                                                                                    "rec": erec, "twins": others}}})
+                            found = True
+            elif here is not None and kind == "field":       # the record a bound entry's field names
+                e = row["_entries"].get(src)
+                x = e["value"] if e else {}
+                ref = x.get(st["field"])
+                if st["field"] == "normalized_by":
+                    ref = ref.get("record") if isinstance(ref, dict) else None
+                if not isinstance(ref, str) or ref not in g.nodes:
+                    if st["field"] == "target" and isinstance(x.get("unresolved_target"), str):
+                        step_sink(None, f"unresolved_target ({x['unresolved_target']}: the source does not identify the "
+                                        "product, which is never taken for one species)", here)
+                    elif results.withheld(x):
+                        step_sink(None, "withheld", here)
+                    else:
+                        step_sink(None, f"not_curated ({e['path'] if e else src} names no {st['field']} in this graph)", here)
+                elif not st.get("to") or g.is_a(ref, st["to"]):
+                    ntags = {}
+                    nbound = {}
+                    if apply(g.nodes[ref], st.get("where"), ref, lambda f, why, rid=ref: step_sink(f, why, rid), ntags,
+                             st["as"], nbound):
+                        nxt.append({**row, st["as"]: ref, "_cmp": {**row["_cmp"], **ntags}, "_bound": {**row["_bound"], **nbound}})
                         found = True
             if not found and st.get("optional"):
                 nxt.append({**row, st["as"]: None})
                 unbound += 1
             elif not found and missed[0]:                   # no link passed, and one could not be compared
                 unevaluated += 1
-        stage = {"kind": "step", "edge": st["edge"], "direction": direction, "from": src, "to": st.get("to"), "as": st["as"],
-                 "rows_in": len(rows), "rows_out": len(nxt)}
+        stage = {"kind": "step", **({"edge": st["edge"], "direction": direction} if kind == "edge" else
+                                    {"entries": props_, **({"of_kind": sorted(kinds)} if kinds else {})} if kind == "entries"
+                                    else {"field": st["field"]}),
+                 "from": src, "to": st.get("to"), "as": st["as"], "rows_in": len(rows), "rows_out": len(nxt)}
         if st.get("optional"):
             stage.update(optional=True, unbound=unbound)
         if left:
@@ -1093,19 +1380,29 @@ def _run(doc: dict, spec: dict, plan: dict, evidence_index=None, graph: Graph | 
 
     if plan.get("where"):
         kept = []
+        by_var: dict[str, list[dict]] = {}          # one variable's filters together: those on one path bind one entry
+        for f in plan.get("where") or []:
+            by_var.setdefault(f.get("var", root), []).append(f)
         for row in rows:
             ok = True
             row["_cmp"] = dict(row["_cmp"])          # rows of one parent share none of their tags
-            for f in plan.get("where") or []:
-                var = f.get("var", root)
+            row["_bound"] = dict(row["_bound"])
+            for var, fs in by_var.items():
                 nid = row["_edges"].get(var) if var in edge_vars else row.get(var)   # a link bound by edge_as, or a node
                 if nid is None:                 # an optional variable left unbound: its record, so its property, is missing
-                    if f.get("op") == "missing" and var in optional:
+                    if var in optional and all(f.get("op") == "missing" for f in fs):
                         continue
                     ok = False
                     break
-                ok = apply(link_by_id[nid] if var in edge_vars else g.nodes[nid], [f], nid,
-                           lambda f, why, nid=nid: exclude({"record": nid, "filter": f, "reason": why}), row["_cmp"], var)
+                e = row["_entries"].get(var)
+                if e is not None:               # a bound entry: left out as its record's, at its path
+                    ok = apply(e["rec"], fs, nid, lambda f, why, e=e: exclude({"record": e["record"], "entry": e["path"],
+                                                                               "filter": f, "reason": why}),
+                               row["_cmp"], var, row["_bound"])
+                else:
+                    ok = apply(link_by_id[nid] if var in edge_vars else g.nodes[nid], fs, nid,
+                               lambda f, why, nid=nid: exclude({"record": nid, "filter": f, "reason": why}), row["_cmp"], var,
+                               row["_bound"])
                 if not ok:
                     break
             if ok:
@@ -1115,19 +1412,73 @@ def _run(doc: dict, spec: dict, plan: dict, evidence_index=None, graph: Graph | 
 
     ev_vars = plan.get("evidence_vars")
 
+    def scope(row: dict, var: str, rec: dict) -> tuple[set[int], dict[int, str]]:
+        """What of a record's evidence a row cites when it binds entries of the record's properties (an entries step,
+        or filters on a path that selects entries): (the items that only entries the row does not bind cite, which it
+        leaves out; the items an entry it binds with an entries step cites, by that step's variable). An item no value
+        cites, or one another value of the record cites too, stays the record's."""
+        chosen: dict[str, set] = {}
+        by_var: dict[tuple[str, Any], str] = {}
+        for (v, path), keys in (row.get("_bound") or {}).items():
+            if v == var:
+                chosen.setdefault(parse_path(path)[0], set()).update(keys)
+        for ev_var, e in (row.get("_entries") or {}).items():
+            if e.get("from") == var and row.get(ev_var) is not None:
+                chosen.setdefault(e["prop"], set()).add(e["key"])
+                by_var[(e["prop"], e["key"])] = ev_var
+        if not chosen:
+            return set(), {}
+        props = rec.get("props") or {}
+        citing: dict[str, set] = {}
+        for prop, v in props.items():
+            if prop in ("evidence", "stewardship"):
+                continue
+            pairs = [((prop, key), x) for key, x in results.entries(v)] if prop in chosen \
+                else [("other", x) for _, x in results.values_in({prop: v})]
+            for who, x in pairs:
+                for eid in x.get("evidence_ids") or []:
+                    if isinstance(eid, str):
+                        citing.setdefault(eid, set()).add(who)
+        omit: set[int] = set()
+        attributed: dict[int, str] = {}
+        for i, ev in enumerate(props.get("evidence") or []):
+            who = citing.get(ev.get("id")) if isinstance(ev, dict) and isinstance(ev.get("id"), str) else None
+            if not who:
+                continue
+            if all(w != "other" and w[1] not in chosen[w[0]] for w in who):
+                omit.add(i)
+                continue
+            mine = sorted(by_var[w] for w in who if w != "other" and w in by_var)
+            if mine:
+                attributed[i] = mine[0]
+        return omit, attributed
+
     def cited(row: dict) -> list[dict]:
         """Evidence of the row's own records; shared kinds (species, reactions, materials, people) cite
-        every source that mentions them, so they do not date a row unless evidence_vars names them."""
+        every source that mentions them, so they do not date a row unless evidence_vars names them. A row that binds an
+        entry cites the evidence that entry cites (its evidence_ids) as the entry's, never the items only other
+        entries cite (:func:`scope`)."""
         out = []
+        bound_entries = row.get("_entries") or {}
         for var, nid in row.items():
-            if var.startswith("_") or nid is None:
+            if var.startswith("_") or nid is None or var in bound_entries:
                 continue
-            if ev_vars is not None and var not in ev_vars:
+            node = g.nodes[nid]
+            mine = (var in ev_vars) if ev_vars is not None else node["label"] not in SHARED_KINDS
+            theirs = {v for v, e in bound_entries.items() if e.get("from") == var and row.get(v) is not None
+                      and (ev_vars is None or v in ev_vars)}
+            if not mine and not theirs:
                 continue
-            if ev_vars is None and g.nodes[nid]["label"] in SHARED_KINDS:
-                continue
-            for i, ev in enumerate(g.nodes[nid]["props"].get("evidence") or []):
-                out.append({"var": var, "record": nid, "evidence": i, **ev, "source_year": g.year.get(ev.get("source"))})
+            omit, attributed = scope(row, var, node)
+            for i, ev in enumerate(node["props"].get("evidence") or []):
+                if i in omit:
+                    continue
+                who = attributed.get(i)
+                if who in theirs:
+                    out.append({"var": who, "record": nid, "entry": bound_entries[who]["path"], "evidence": i, **ev,
+                                "source_year": g.year.get(ev.get("source"))})
+                elif mine:
+                    out.append({"var": var, "record": nid, "evidence": i, **ev, "source_year": g.year.get(ev.get("source"))})
         return out
 
     life, inclusion = g.life, g.inclusion
@@ -1226,7 +1577,10 @@ def _run(doc: dict, spec: dict, plan: dict, evidence_index=None, graph: Graph | 
         # only the evidence of the records the rows still hold competes for the hits: ranked among themselves (an
         # rrf fusion, a k), the quotes of rows a filter (published_before, retractions, a where) left out never
         # crowd out those of the rows it kept
-        eligible = {row[v] for row in rows for v in vars_ if row.get(v)} | {lid for row in rows for lid in row["_links"]}
+        def record_of(row: dict, v: str) -> str | None:     # a bound entry's evidence is its record's
+            e = row["_entries"].get(v)
+            return e["record"] if e is not None and row.get(v) is not None else row.get(v)
+        eligible = {record_of(row, v) for row in rows for v in vars_ if row.get(v)} | {lid for row in rows for lid in row["_links"]}
         hits = evidence_index.search(tq["query"], k=tq.get("k", 500), mode=tq.get("mode", "hybrid"),
                                      where=lambda it: it.get("record") in eligible
                                      and (it.get("record"), it.get("evidence"), it.get("text")) in held)
@@ -1236,7 +1590,7 @@ def _run(doc: dict, spec: dict, plan: dict, evidence_index=None, graph: Graph | 
                 score[h["record"]] = max(score.get(h["record"], 0.0), h["score"])
         scored = []
         for row in rows:
-            ids = [row[v] for v in vars_ if row.get(v)] + [lid for lid in row["_links"]]
+            ids = [record_of(row, v) for v in vars_ if row.get(v)] + [lid for lid in row["_links"]]
             s = max((score.get(i, 0.0) for i in ids), default=0.0)
             if s > 0:
                 scored.append((s, row))
@@ -1259,6 +1613,7 @@ def _run(doc: dict, spec: dict, plan: dict, evidence_index=None, graph: Graph | 
     missing_at: set = set()
     out_rows = []
     second_hand_rows = 0
+    ambiguous_rows = 0
     for row in rows:
         vals = {}
         for r in plan.get("return") or []:
@@ -1267,19 +1622,38 @@ def _run(doc: dict, spec: dict, plan: dict, evidence_index=None, graph: Graph | 
             if nid is None:
                 vals[r] = None
                 continue
-            rec = link_by_id[nid] if var in row["_edges"] else g.nodes[nid]
-            v = returned(rec, prop) if prop else nid
+            e = row["_entries"].get(var)
+            if e is not None:                # a bound entry: the value itself, or one of its fields
+                rec = e["rec"]
+                v = returned(rec, prop) if prop else e["value"]
+                why = absent_reason(v) if prop in ("", "value") else None
+                at = ("entry", nid, prop)
+            else:
+                rec = link_by_id[nid] if var in row["_edges"] else g.nodes[nid]
+                v = returned(rec, prop, row["_bound"].get((var, prop))) if prop else nid
+                why = absent_reason(v) if prop else None
+                if why == "not_curated" and v is None and lookup(rec, prop)[1] is not None and lookup(rec, prop)[0] is not None:
+                    why = f"no_matching_entry ({prop})"      # the map or list is there; no entry is the one asked for
+                at = ("link" if var in row["_edges"] else "node", nid, prop)
             vals[r] = v
-            why = absent_reason(v) if prop else None
-            if why == "not_curated" and v is None and lookup(rec, prop)[1] is not None and lookup(rec, prop)[0] is not None:
-                why = f"no_matching_entry ({prop})"      # the map or list is there; no entry is the one asked for
-            at = ("link" if var in row["_edges"] else "node", nid, prop)
             if why and at not in missing_at:
                 missing_at.add(at)
-                missing_ctx.append({"record": nid, "field": r, "reason": why})
+                missing_ctx.append({"record": e["record"] if e is not None else nid, "field": r, "reason": why,
+                                    **({"entry": e["path"]} if e is not None else {})})
         srcs = second_hand(row)
-        item = {"bound": {k: v for k, v in row.items() if not k.startswith("_")}, "links": row["_links"], "values": vals,
-                "_cmp": dict(row.get("_cmp") or {})}
+        bound = {}
+        for k, v in row.items():
+            if k.startswith("_"):
+                continue
+            e = row["_entries"].get(k)
+            bound[k] = {"record": e["record"], "path": e["path"], **({"kind": e["kind"]} if e.get("kind") else {})} \
+                if e is not None and v is not None else v
+        item = {"bound": bound, "links": row["_links"], "values": vals, "_cmp": dict(row.get("_cmp") or {}),
+                "_row": row}
+        twins = {k: e["twins"] for k, e in row["_entries"].items() if e.get("twins") and row.get(k) is not None}
+        if twins:                            # ordinary mode: a result that nothing tells apart from another, flagged
+            ambiguous_rows += 1
+            item["ambiguous_repetition"] = twins
         if srcs:
             second_hand_rows += 1
             item["second_hand"] = {"cited_by": srcs, "note": f"second-hand (cited by {'; '.join(name_of(s) for s in srcs)})"}
@@ -1292,6 +1666,18 @@ def _run(doc: dict, spec: dict, plan: dict, evidence_index=None, graph: Graph | 
             item["earliest_source_year"] = min(yrs) if yrs else None
         out_rows.append(item)
 
+    def ranked_on(it: dict, var: str, prop: str) -> tuple[dict | None, list | None]:
+        """The record a ranking reads for a row's variable (a bound entry as :data:`ENTRY`), and the keys of the
+        entries the row's filters bound on that path."""
+        row = it["_row"]
+        if row.get(var) is None:
+            return None, None
+        e = row["_entries"].get(var)
+        if e is not None:
+            return e["rec"], None
+        nid = row["_edges"].get(var) if var in row["_edges"] else row.get(var)
+        return (link_by_id[nid] if var in row["_edges"] else g.nodes[nid]), row["_bound"].get((var, prop))
+
     mixed_order: list[str] = []
     if cmp.scientific and plan.get("order_by"):
         # a ranking compares like with like: each row's value under its contract, in one unit and context; a row whose
@@ -1301,10 +1687,12 @@ def _run(doc: dict, spec: dict, plan: dict, evidence_index=None, graph: Graph | 
             ok = True
             for ob in plan["order_by"]:
                 var = ob.get("var", root)
-                nid = it["bound"].get(var)
-                tag, why = cmp.rank(g.nodes.get(nid) if nid else None, ob)
+                rec, keys = ranked_on(it, var, ob["prop"])
+                tag, why = cmp.rank(rec, ob, keys)
                 if why:
-                    exclude({"record": nid or it["bound"].get(root), "order_by": ob, "reason": why})
+                    e = it["_row"]["_entries"].get(var)
+                    exclude({"record": e["record"] if e and it["_row"].get(var) else (it["bound"].get(var) or it["bound"].get(root)),
+                             **({"entry": e["path"]} if e and it["_row"].get(var) else {}), "order_by": ob, "reason": why})
                     ok = False
                     break
                 it["_cmp"][f"{var}.{ob['prop']}"] = tag
@@ -1315,15 +1703,15 @@ def _run(doc: dict, spec: dict, plan: dict, evidence_index=None, graph: Graph | 
     elif plan.get("order_by"):
         for it in out_rows:
             for ob in plan["order_by"]:
-                nid = it["bound"].get(ob.get("var", root))
-                if nid:
-                    cmp.observe(g.nodes[nid], ob["prop"])
+                rec, _ = ranked_on(it, ob.get("var", root), ob["prop"])
+                if rec is not None:
+                    cmp.observe(rec, ob["prop"])
     for ob in reversed(plan.get("order_by") or []):
         seen_units: set[str] = set()
 
         def key(it, ob=ob, seen_units=seen_units):
-            nid = it["bound"].get(ob.get("var", root))
-            v = returned(g.nodes[nid], ob["prop"]) if nid else None
+            rec, keys = ranked_on(it, ob.get("var", root), ob["prop"])
+            v = returned(rec, ob["prop"], keys) if rec is not None else None
             if cmp.scientific and isinstance(v, list) and len(v) == 1:     # the one entry a ranked path selects
                 v = v[0]
             if isinstance(v, dict) and v.get("unit") and number(v) != (None, None):
@@ -1351,6 +1739,7 @@ def _run(doc: dict, spec: dict, plan: dict, evidence_index=None, graph: Graph | 
         out_rows.sort(key=lambda it: it["comparison_group"])      # stable: a group's ranking is kept
     for it in out_rows:
         it.pop("_cmp", None)
+        it.pop("_row", None)
     total = len(out_rows)
     out_rows = out_rows[: plan.get("limit", 200)]
     stages.append({"kind": "limit", "rows_in": total, "rows_out": len(out_rows)})
@@ -1380,7 +1769,8 @@ def _run(doc: dict, spec: dict, plan: dict, evidence_index=None, graph: Graph | 
                 **({"filtered_for": doc["graph"]["filtered_for"]} if doc["graph"].get("filtered_for") else {})}
     if cmp.scientific:
         coverage["comparison"] = {"mode": "scientific", "groups": len(groups),
-                                  "left_out": {r: reasons[r] + in_steps[r] for r in CONTEXT_REASONS if reasons[r] + in_steps[r]}}
+                                  "left_out": {r: reasons[r] + in_steps[r] for r in CONTEXT_REASONS + ("ambiguous_repetition",)
+                                               if reasons[r] + in_steps[r]}}
 
     lim = ["An absence is an absence in this graph, not in the literature."]
     value_left = lacking - sum(reasons[r] for r in DATE_REASONS)
@@ -1441,6 +1831,19 @@ def _run(doc: dict, spec: dict, plan: dict, evidence_index=None, graph: Graph | 
                    "is not an answer to a question that asks for a condition.")
     for o in mixed_order:
         lim.append(f"order_by {o} sorted values in several units as bare numbers; read each with its unit.")
+    if ambiguous_rows:
+        lim.append(f"{ambiguous_rows} row{'s bind' if ambiguous_rows != 1 else ' binds'} a result that nothing tells apart from "
+                   "another of its record (ambiguous_repetition: one variable, target, producer, phase, stream, basis and "
+                   "normalization): two results, never averaged; say so when stating either, and a scientific comparison "
+                   "leaves them out until each names its assay (produced_by).")
+    twins_out = reasons["ambiguous_repetition"] + in_steps["ambiguous_repetition"]
+    if twins_out:
+        lim.append(f"{twins_out} result{'s were' if twins_out != 1 else ' was'} left out of the comparison as an ambiguous "
+                   "repetition (another result of its record that nothing tells apart): never averaged, never compared.")
+    unresolved = reasons["unresolved_target"] + in_steps["unresolved_target"]
+    if unresolved:
+        lim.append(f"{unresolved} result{'s name' if unresolved != 1 else ' names'} no product species (unresolved_target: "
+                   "the source does not identify it): kept as reported, never taken for one species.")
     lim += cmp.limitations()
     out = {}
     if cmp.scientific:
@@ -1567,6 +1970,13 @@ def _render_coverage(cov: dict) -> list[str]:
     for s in cov.get("steps") or []:
         if s["kind"] == "match":
             what = f"match {s.get('label') or s.get('id')}"
+        elif s["kind"] == "step" and "entries" in s:
+            kinds = f" of kind {', '.join(s['of_kind'])}" if s.get("of_kind") else ""
+            what = (f"step {s['from']} entries of {', '.join(s['entries'])}{kinds} "
+                    f"({s['as']}{', optional' if s.get('optional') else ''})")
+        elif s["kind"] == "step" and "field" in s:
+            what = (f"step {s['from']}.{s['field']} → {s.get('to') or 'any'} "
+                    f"({s['as']}{', optional' if s.get('optional') else ''})")
         elif s["kind"] == "step":
             arrow = "←" if s.get("direction") == "in" else "→"
             what = f"step {s['from']} {arrow}{s['edge']}{arrow} {s.get('to') or 'any'} ({s['as']}{', optional' if s.get('optional') else ''})"
@@ -1606,6 +2016,8 @@ def render_markdown(res: dict) -> str:
             lines.append(f"- {k}: {_render_value(v)}")
         if r.get("second_hand"):
             lines.append(f"- **{r['second_hand']['note']}**")
+        for var, twins in (r.get("ambiguous_repetition") or {}).items():
+            lines.append(f"- **{var}: an ambiguous repetition of {', '.join(twins)}** (nothing tells them apart; never averaged)")
         for ev in (r.get("evidence") or [])[:6]:
             q = f" — “{ev['quote']}”" if ev.get("quote") else ""
             tags = [str(ev.get("source_year"))]

@@ -153,7 +153,10 @@ TOOLS: list[dict] = [
                        "values are also compared and ranked only within one context of their quantity contract (a "
                        "potential's reference scale, a current density's normalization, a pressure's convention, a flow's "
                        "reference conditions), stated with context to check one or grouped; a value whose context is not "
-                       "stated is left out as missing_context. Absences are answers; never fill them with typical values.",
+                       "stated is left out as missing_context. A step {from, entries, kind, as} binds one value entry "
+                       "per row (result_values, a per-product list, a map or a scalar) and {from, field, to, as} follows "
+                       "its target, variable or produced_by: every filter, returned value and evidence item on it is "
+                       "that one result's. Absences are answers; never fill them with typical values.",
         "input_schema": {"type": "object", "required": ["plan"], "properties": {
             "plan": {"type": "object", "description": "Query plan; see the query-graph skill and example_plans in scale_domains."},
             **_DOC, **_DOMAIN,

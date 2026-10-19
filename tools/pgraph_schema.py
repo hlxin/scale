@@ -320,6 +320,28 @@ def assemble_manifest(man: dict, base: Path) -> dict:
         if k in spec:
             expand_defs(spec[k])
 
+    # ---- the records a context read from a value's target names, as a domain narrows them (context_targets)
+    narrowed: dict[str, dict] = {}
+    for name, m in mods.items():
+        for ctx, d in (m.get("context_targets") or {}).items():
+            where = f"{m.get('_path', name)}: context_targets.{ctx}"
+            if m.get("_kind") != "domain":
+                raise ScaleError(f"{where}: only a domain file narrows the targets of a context")
+            contexts = (spec.get("quantities") or {}).get("contexts") or {}
+            if ctx not in contexts or "target" not in (contexts[ctx].get("read_from") or []):
+                raise ScaleError(f"{where}: names no context of the kernel's quantity contracts read from a target")
+            if ctx in narrowed:
+                raise ScaleError(f"{where}: the context is narrowed by {narrowed[ctx]['module']} already")
+            if not isinstance(d, dict) or set(d) - {"description", "maturity", "targets"} or not d.get("targets"):
+                raise ScaleError(f"{where}: a mapping of description, maturity and targets (the labels its records have)")
+            bad = [x for x in d["targets"] if x not in visible[name]]
+            if bad:
+                raise ScaleError(f"{where}: names {bad}, which are not declared by the file, the kernel or its imports")
+            narrowed[ctx] = {"targets": expand(d["targets"]), "description": d.get("description"),
+                             "maturity": d.get("maturity"), "module": name}
+    if narrowed:
+        spec["context_targets"] = narrowed
+
     spec["nodes"] = {lab: resolved[lab] for lab in concrete}
     spec["abstract"] = {lab: r for lab, r in resolved.items() if r.get("abstract")}
     spec["edges"] = edges

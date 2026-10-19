@@ -118,6 +118,7 @@ def diff_specs(a: dict, b: dict) -> dict:
         cmp_props(where, fa, fb)
     # the quantity contracts: a kind's dimensions, a context it is compared by, a unit's or a term's meaning
     quantities.diff(a.get("quantities"), b.get("quantities"), out)
+    quantities.diff_context_targets(a.get("context_targets"), b.get("context_targets"), out)
     for where in ("evidence", "value", "record_ref"):
         ra, rb = set((a.get(where) or {}).get("required") or []), set((b.get(where) or {}).get("required") or [])
         out["narrowed"] += [f"{where} requires {x}" for x in sorted(rb - ra)]

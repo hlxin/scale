@@ -537,6 +537,8 @@ class Validator:
         if isinstance(self.spec.get("quantities"), dict):      # quantity contracts (0.3.0 on): units, contexts, denominators
             from .quantities import check_document
             check_document(doc, self.spec, rep)
+        from .results import check_document as check_results   # result entries (0.4.0 on): ids, variables, repetitions
+        check_results(doc, self.spec, rep)
         if "Hypothesis" in self.nodes and "TESTS" in self.edges:
             from .pgraph_science import science_checks
             science_checks(doc, self.spec, rep)
@@ -820,8 +822,10 @@ WITHHELD_VALUE = {"status": "not_reported", "missing_reason": "withheld"}
 def _held(v: dict, gone: set) -> dict:
     """What a withheld value leaves in its place: :data:`WITHHELD_VALUE`, with the ``target`` and ``variable`` it
     names when those records are kept (what it was a value of, so that a query's ``[target=…]`` still selects it and
-    reads it as withheld)."""
-    return {**WITHHELD_VALUE, **{k: v[k] for k in ("target", "variable") if isinstance(v.get(k), str) and v[k] not in gone}}
+    reads it as withheld) and its ``id`` (a result entry keeps its identity in its place, so no other result takes
+    it)."""
+    return {**WITHHELD_VALUE, **{k: v[k] for k in ("target", "variable") if isinstance(v.get(k), str) and v[k] not in gone},
+            **({"id": v["id"]} if isinstance(v, dict) and isinstance(v.get("id"), str) else {})}
 
 
 def _esc(key: str) -> str:
@@ -936,11 +940,12 @@ def _drop_refs(v: Any, gone: set, n: list[int], at: str = "", dropped: set | Non
 def _moved(props: dict, path: str, dropped: set) -> str | None:
     """A JSON pointer into a record's props (``path``) in the record as filtered, given the pointers of the parts
     removed from it (``dropped``; a value withheld in its place as ``(_HELD, pointer)``): a list position after a
-    removed entry moves up (not after a value withheld in its place), and a pointer to a part removed or withheld, or
-    into one, is None. A pointer that does not resolve in the record is returned as it is (the validator reports
-    it)."""
+    removed entry moves up (not after a value withheld in its place), a list item named by its id keeps its id (its
+    identity does not move), and a pointer to a part removed or withheld, or into one, is None. A pointer that does not
+    resolve in the record is returned as it is (the validator reports it)."""
     if not dropped:
         return path
+    from .results import item
     cur: Any = props
     at, out = "", []
     for part in path.split("/")[1:]:
@@ -948,6 +953,10 @@ def _moved(props: dict, path: str, dropped: set) -> str | None:
         if isinstance(cur, list) and part.isdigit() and int(part) < len(cur):
             i = int(part)
             out.append(str(i - sum(1 for j in range(i) if f"{at}/{j}" in dropped)))
+            at, cur = f"{at}/{i}", cur[i]
+        elif isinstance(cur, list) and item(cur, key) is not None:       # an item named by its id
+            i = item(cur, key)
+            out.append(part)
             at, cur = f"{at}/{i}", cur[i]
         elif isinstance(cur, dict) and key in cur:
             out.append(part)
@@ -1390,8 +1399,23 @@ def _flatten(props: dict) -> dict:
     return out
 
 
+def neo4j_losses(doc: dict) -> list[str]:
+    """What the flat Neo4j export (:func:`to_neo4j_jsonl`) cannot keep of a document, said in words: the result entries
+    it carries as JSON text (their product, assay and evidence are not relationships, and a record_ref to an entry does
+    not resolve in the store)."""
+    n = sum(len(x) for r in doc.get("nodes") or [] for x in [((r.get("props") or {}).get("result_values"))]
+            if isinstance(x, list))
+    if not n:
+        return []
+    return [f"{n} result entr{'ies' if n != 1 else 'y'} (result_values) are carried as JSON text: each entry's variable, "
+            "product (target), assay (produced_by), calibration, phase, stream and evidence_ids are not relationships or "
+            "properties of their own, and a record_ref to an entry (/result_values/<id>) does not resolve in the store; "
+            "query the scale-catal document (scale graph query) to keep each result's context"]
+
+
 def to_neo4j_jsonl(doc: dict) -> str:
-    """Neo4j/APOC-style JSON lines: one node or relationship per line, primitive properties only."""
+    """Neo4j/APOC-style JSON lines: one node or relationship per line, primitive properties only (what that loses:
+    :func:`neo4j_losses`)."""
     lines = []
     for n in doc["nodes"]:
         lines.append({"type": "node", "id": n["id"], "labels": [n["label"]], "properties": _flatten(n.get("props", {}))})

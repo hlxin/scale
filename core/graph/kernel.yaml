@@ -172,7 +172,40 @@ value:
       type: ref
       targets: ANY
       description: The entity the value refers to (the product species of a yield). Profiles may narrow
-        it.
+        it, and a domain narrows the targets a context reads (context_targets).
+    unresolved_target:
+      type: text
+      maturity: provisional
+      description: What the value refers to, as the source names it, when that is not one record (a group or a class of
+        products, a product the source does not identify, the remainder a balance leaves, such as "C2+ products",
+        "unidentified oxygenates" or "unaccounted"). It goes without target, so that a value whose product is unknown
+        stays explicit;
+        it is never read as any one species, and a comparison of species leaves it out.
+    id:
+      type: string
+      maturity: provisional
+      description: The value's identifier in its record (snake_case, never only digits), unique among the record's
+        values. A result entry (Experiment.result_values) has one, and a record_ref names a list entry by it
+        (/result_values/<id>), so the entry keeps its identity when its list is appended to, reordered, migrated or
+        filtered.
+    phase:
+      type: enum
+      maturity: provisional
+      values:
+      - gas
+      - liquid
+      - solid
+      - supercritical
+      - adsorbed
+      - mixed
+      description: The phase the value was measured in or refers to (the gas a chromatograph samples, the liquid
+        electrolyte an NMR spectrum is taken of). One product's results in two phases are two results.
+    stream:
+      type: text
+      maturity: provisional
+      description: The stream or part of the system the value was measured in, as the source names it (the outlet gas,
+        the catholyte, the condensate, the headspace), as FEEDS_INTO names one. With phase, it says what a result
+        covers and what a balance includes.
     as_reported:
       type: text
       description: The source's own wording when it differs from the structured value.
@@ -238,6 +271,9 @@ value:
   - A value of a property bound to a quantity contract (quantities) is in a unit of one of its kind's dimensions;
     normalized_by goes only on a value whose kind declares a denominator, resolves (with its path) to a value object,
     and names a value of the denominator's dimensions.
+  - target and unresolved_target do not go together; a target a domain narrows for a context (context_targets) names
+    a record of one of its labels.
+  - id is snake_case and not only digits, and no two values of a record share one.
 evidence:
   description: Where an assertion comes from. Embedded on nodes and links; quotes are checked verbatim
     when the source text is supplied.
@@ -332,7 +368,10 @@ record_ref:
       description: The id of a node or link.
     path:
       type: string
-      description: JSON pointer into the record's props, e.g. /results/space_time_yield or /evidence/2.
+      description: JSON pointer into the record's props, e.g. /results/space_time_yield or /evidence/2. A step into a
+        list may name an item by its id instead of its position (/result_values/meoh_yield_gc, /evidence/e3); an entry
+        of result_values is named so, never by its position, so that no reordering, appending or filtering of the list
+        makes the reference name another result.
     record_version:
       type: integer
       description: The record_version referred to, when the record may be revised.
@@ -662,6 +701,25 @@ nodes:
         type: map
         items:
           type: value
+      result_values:
+        type: list
+        maturity: provisional
+        items:
+          type: value
+        description: |
+          The experiment's results, one value object per result, each identified by what it is, of what, how, where and
+          when: its variable (required: a Variable, whose quantity_kind gives its contract, such as product_yield,
+          selectivity or faradaic_efficiency), its target (the product species; unresolved_target when the source does
+          not identify one), its producer (produced_by: the assay, a Characterization or an Analysis, with its
+          calibration, the reference standards it HAS_INPUT and the raw Dataset it HAS_OUTPUT), its phase and stream,
+          its basis and normalization (basis, normalized_by), and its interval (the producer's timing, else this
+          experiment's own: time on stream, duration, started_at). Each entry has an id (a record_ref names it
+          /result_values/<id>) and, when it states a number or a text, the evidence_ids of the items that state it. The
+          experiment holding an entry is its one owner: a result is recorded once, never also on another record. Two
+          results of one variable and target are distinct when their producer, phase, stream, basis or normalization
+          differ; entries that nothing tells apart are reported, never averaged. The scalar results (yield,
+          selectivity, conversion), the results map and the per-product lists (faradaic_efficiency, …) stay as they
+          are.
       configuration:
         type: ref
         targets:
@@ -2040,7 +2098,14 @@ rules:
 - PART_OF, PRECEDES, HAS_PART and REVISES are acyclic; no kernel edge joins a record to itself; REVISES
   joins records of the same label.
 - A record_ref resolves to a node or link, and its path to a property of it; evidence_ids name evidence
-  of the owning record.
+  of the owning record. A record_ref into result_values names the entry by its id, never by its position.
+- An entry of result_values names its variable and has an id; one that states a number or a text names the evidence
+  that states it (evidence_ids); one of a kind counted for a species names its target or says the product is not
+  identified (unresolved_target). Two entries of one record that nothing tells apart (one variable, target, producer,
+  phase, stream, basis, definition and normalization) are flagged as an ambiguous repetition (advisory), never
+  averaged.
+- A balance (a quantity kind that closes, quantities.kinds closure) above 100 % is kept as reported and flagged
+  (advisory), saying whether 100 % lies within its stated uncertainty.
 - An experiment that used an input at input_version lower than the input's current record_version is flagged
   inputs_revised (advisory).
 - A RETRACTS link from a notice Source is authoritative. A source's publication status is derived from
@@ -2101,7 +2166,9 @@ quantities:
     property; disagreeing statements are reported, except that a value derived from the record's own (origin
     derived or computed, with produced_by: an evidenced conversion) keeps its own. `scale graph query` with
     `comparison: scientific` compares and ranks values of a kind only in one unit and one context
-    (docs/querying.md); without it, values are compared as reported, as before.
+    (docs/querying.md); without it, values are compared as reported, as before. A domain says which records a context
+    read from a target may name (context_targets: in catalysis, a species is a ChemicalSpecies). A kind that closes
+    (closure: a balance) is kept as reported above 100 % and flagged with what its uncertainty says.
   basis:
   - JCGM 200:2012, International vocabulary of metrology (VIM), doi:10.59161/JCGM200-2012 (kind of quantity, quantity dimension, measurement unit, measurand).
   - JCGM 100:2008, Guide to the expression of uncertainty in measurement (GUM), doi:10.59161/JCGM100-2008E (an uncertainty is kept as reported; none is propagated).
@@ -2109,6 +2176,9 @@ quantities:
   - IUPAC Gold Book, quantum yield, doi:10.1351/goldbook.Q04991 (events per photon absorbed).
   - IUPAC Gold Book, photonic yield, doi:10.1351/goldbook.14058 (events per photon incident).
   - IUPAC Gold Book, space velocity, doi:10.1351/goldbook.S05779 (the feed's volumetric flow at stated conditions divided by the catalyst volume).
+  - Clark et al., Standards and protocols for data acquisition and reporting for studies of the electrochemical reduction of carbon dioxide, ACS Catal. 2018, 8, 6560, doi:10.1021/acscatal.8b01340 (Faradaic efficiency, the share of the charge that makes a given product; it and that product's rate, its partial current density, say different things; rates normalized by the geometric and by the electrochemically active area).
+  - Kearnes et al., The Open Reaction Database, J. Am. Chem. Soc. 2021, 143, 18820, doi:10.1021/jacs.1c09820 (each measurement of a product names its type (identity, yield, selectivity, amount), the analysis it comes from and any standard used; the conversion and the reaction time belong to the outcome).
+  - Bonchio et al., Best practices for experiments and reporting in photocatalytic CO2 reduction, Nat. Catal. 2023, 6, 657, doi:10.1038/s41929-023-00992-7 (gas and liquid products identified and quantified by their own analyses, each calibrated; control experiments; detection limits; selectivity as one product's amount over all products'; uncertainties from repeated measurements).
   dimensions:
     dimensionless: '1'
     length: L
@@ -2138,6 +2208,10 @@ quantities:
     volume_per_mass_time: L3 M-1 T-1
     amount_per_energy: N M-1 L-2 T2
     mass_per_energy: L-2 T2
+    amount_per_mass_time: N M-1 T-1
+    amount_per_volume_time: N L-3 T-1
+    amount_per_area_time: N L-2 T-1
+    mass_per_volume_time: M L-3 T-1
   units:
     description: |
       The symbols a unit is read from. A unit is read as the source prints it: SI prefixes before the prefixed
@@ -2466,10 +2540,28 @@ quantities:
           dimensions: [volume_per_mass_time]
     species:
       description: The species a value is counted for, named by its target, the product of a selectivity, a yield, a
-        Faradaic efficiency, a quantum yield or a partial current density, the reactant of a conversion. Shares to two
-        species are two quantities.
+        rate, an amount, a Faradaic efficiency, a quantum yield or a partial current density, the reactant of a
+        conversion. Shares to two species are two quantities. A product the source does not identify (unresolved_target)
+        names no species; a domain says which records a species is (context_targets).
       read_from: [target]
       open: true
+    balance_basis:
+      description: What a balance counts, carbon atoms, charge (electrons), another element or the mass. A carbon and a
+        charge balance of one experiment are two quantities, never compared with one another.
+      read_from: [basis, definition]
+      values:
+        carbon:
+          terms: [carbon balance, carbon basis, C balance, carbon atoms, carbon]
+        charge:
+          terms: [charge balance, Faradaic balance, electron balance, total Faradaic efficiency, sum of Faradaic efficiencies, charge]
+        hydrogen:
+          terms: [hydrogen balance, H balance]
+        oxygen:
+          terms: [oxygen balance, O balance]
+        nitrogen:
+          terms: [nitrogen balance, N balance]
+        mass:
+          terms: [mass balance, total mass]
   kinds:
     temperature:
       description: A thermodynamic temperature, or a difference of temperatures, as reported.
@@ -2510,11 +2602,74 @@ quantities:
       dimensions: [dimensionless]
       share: true
     species_fraction:
-      description: A share counted for one species, its target (the conversion of a reactant, the selectivity or yield
-        to a product), dimensionless; a basis (carbon, molar) the value states is compared as text.
+      description: A share counted for one species, its target, that is not one of the shares below (a conversion, a
+        yield or a selectivity is its own kind), dimensionless; a basis (carbon, molar) the value states is compared as
+        text.
       dimensions: [dimensionless]
       compare_by: [species]
       share: true
+    conversion:
+      description: The share of a reactant (its target) that was converted, on the basis the value states (per pass or
+        overall; carbon or molar), dimensionless. A conversion is of a reactant, a yield and a selectivity are of a
+        product; the three are never compared with one another.
+      dimensions: [dimensionless]
+      compare_by: [species]
+      share: true
+      maturity: provisional
+    product_yield:
+      description: The amount of one product (its target) formed relative to the amount of a reactant fed, on the basis
+        the value states (carbon, molar, mass), dimensionless. A yield counts what was fed; it is a conversion times a
+        selectivity, never a selectivity.
+      dimensions: [dimensionless]
+      compare_by: [species]
+      share: true
+      maturity: provisional
+    selectivity:
+      description: The share of the reactant converted, or of the products formed, that is one product (its target), on
+        the basis the value states (carbon, molar, mass), dimensionless. A selectivity counts what was converted, not
+        what was fed.
+      dimensions: [dimensionless]
+      compare_by: [species]
+      share: true
+      maturity: provisional
+    production_rate:
+      description: The amount, mass or gas volume of one species (its target) formed per time, or consumed for a reactant
+        (its definition says so), alone or divided by the amount of catalyst, a volume or an electrode or illuminated
+        area (a space-time yield, a mass-normalized rate); the unit's dimension and the denominator decide the quantity,
+        and a volumetric rate is comparable only at one stated reference condition.
+      dimensions: [molar_flow, mass_flow, volumetric_flow, frequency, amount_per_mass_time, amount_per_volume_time, amount_per_area_time, mass_per_volume_time]
+      compare_by:
+      - species
+      - context: flow_reference
+        when_dimension: [volumetric_flow]
+      denominator:
+        description: The catalyst mass, the catalyst or reactor volume, or the electrode or illuminated area the rate is
+          divided by.
+        dimensions: [mass, volume, area]
+      maturity: provisional
+    product_amount:
+      description: The amount, mass or gas volume of one species (its target) formed, or consumed, over the interval of its
+        producer or experiment, alone or per catalyst mass or area (µmol, µmol/g). An amount is not a rate, and amounts
+        over two intervals are two results.
+      dimensions: [amount, mass, volume, amount_per_mass, amount_per_area]
+      compare_by:
+      - species
+      - context: flow_reference
+        when_dimension: [volume]
+      denominator:
+        description: The catalyst mass or the electrode or illuminated area the amount is divided by.
+        dimensions: [mass, area]
+      maturity: provisional
+    balance:
+      description: A closure, what a balance finds of an element or of charge in what it counts (the products, and the
+        unconverted reactant when it is included) divided by what went in (fed, converted or passed), over the
+        streams, phases and interval its producer includes; dimensionless. It is kept as reported, above 100 % too, as
+        a measured closure whose uncertainty may include 100 %, never capped or forced to close. What a balance leaves
+        unmeasured is recorded as such (unresolved_target), never computed.
+      dimensions: [dimensionless]
+      compare_by: [balance_basis]
+      closure: true
+      maturity: provisional
     composition_fraction:
       description: The share of a component in a sample, a catalyst, a mixture or a phase (mass, mole, atom or volume
         fraction), dimensionless; an amount, a concentration or a loading is a quantity of its own.

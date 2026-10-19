@@ -24,6 +24,7 @@ STEPS: dict[str, tuple[str, str]] = {
     "0.1.0": ("0.2.0", 'the schema is renamed scale-graph -> scale-catal (kernel scale-graph-kernel -> scale-kernel); documents pin the new name'),
     "0.2.0": ("0.2.1", 'no change in meaning: the description of Preparation.steps names PART_OF with order (#34)'),
     "0.2.1": ("0.3.0", "breaking: quantity contracts (a value's unit by its kind's dimension; the contexts a comparison needs; normalized_by; HAS_COMPONENT.concentration)"),
+    "0.3.0": ("0.4.0", 'breaking: result entries (Experiment.result_values with value ids, phase, stream, unresolved_target); conversion, product_yield, selectivity, production_rate, product_amount and balance kinds; in catalysis a species is a ChemicalSpecies (context_targets)'),
 }
 
 
@@ -48,11 +49,31 @@ def _quantity_contracts(doc: dict, spec: dict | None) -> list:
     return move_component_quantities(doc, spec)
 
 
+def _result_entries(doc: dict, spec: dict | None) -> list:
+    """0.3.0 -> 0.4.0: result entries and the kinds of share. Nothing a 0.3.0 document holds is rewritten: the scalar
+    results (conversion, yield, selectivity, now of their own kinds), the results map and the per-product lists keep
+    their meaning where they are, and no value moves into result_values (a move would need an id and a variable the
+    document does not state, and would make a positional reference name another value). What the step cannot map stops
+    it: a value of a kind counted for a species whose target is not a ChemicalSpecies (in catalysis a species is one,
+    context_targets), which names no species at all; curate it by hand (its species as target, or the source's words as
+    unresolved_target), then migrate. ``spec`` is the target schema."""
+    from .quantities import narrowed_targets
+    bad = narrowed_targets(doc, spec)
+    if bad:
+        raise ScaleError("the step to the result entries cannot map values whose product or reactant is not a chemical "
+                         f"species (curate them by hand, then migrate): {'; '.join(bad[:20])}"
+                         + (f" (and {len(bad) - 20} more)" if len(bad) > 20 else ""))
+    return []
+
+
 STEP_RULES: dict[str, tuple[str, Callable[[dict, dict | None], list]]] = {
     "0.1.0": ("graph.schema renamed scale-graph -> scale-catal; every record, id and value kept", _rename_schema),
     "0.2.1": ("quantity contracts: a HAS_COMPONENT fraction in an amount unit moves to amount, one in a concentration unit "
               "to concentration (the value object whole, its fraction_basis dropped); a value of another dimension than its "
               "quantity stops the step; every record, id and other value kept", _quantity_contracts),
+    "0.3.0": ("result entries: nothing is rewritten (no value moves into result_values; the scalar results, the results map "
+              "and the per-product lists keep their meaning); a value counted for a species whose target is not a "
+              "ChemicalSpecies stops the step; every record, id and value kept", _result_entries),
 }
 
 

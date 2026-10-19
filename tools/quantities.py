@@ -32,6 +32,7 @@ import unicodedata
 from dataclasses import dataclass, field
 from typing import Any, Iterator
 
+from . import results
 from .util import ScaleError
 
 BASES = ("L", "M", "T", "I", "Θ", "N")
@@ -45,7 +46,7 @@ VALUE_STATUS = {"present", "not_reported", "not_measured", "not_applicable", "be
 BLOCK_KEYS = {"maturity", "description", "basis", "dimensions", "units", "contexts", "kinds"}
 UNIT_KEYS = {"description", "prefixes", "prefixed", "unprefixed", "spellings", "stating"}
 CONTEXT_KEYS = {"description", "read_from", "values", "unspecified", "refine", "open"}
-KIND_KEYS = {"description", "dimensions", "compare_by", "denominator", "share", "maturity"}
+KIND_KEYS = {"description", "dimensions", "compare_by", "denominator", "share", "closure", "maturity"}
 _EXP = re.compile(r"^(?P<base>.*?)(?:\^|\*\*)?(?P<exp>[-+]?\d+)$")
 _NUMBER = re.compile(r"^\d+(?:\.\d+)?$")
 _FORMULA = re.compile(r"^(?:[A-Z][a-z]?\d*)+[+-]?$")          # a species after a counted entity (atom per atom Cu)
@@ -252,7 +253,10 @@ class Contracts:
             den = k.get("denominator")
             if den is not None and (not isinstance(den, dict) or not den.get("dimensions")):
                 raise ScaleError(f"quantities.kinds.{name}.denominator: names its dimensions")
+            if k.get("share") and k.get("closure"):
+                raise ScaleError(f"quantities.kinds.{name}: a share (part of a whole) is not a closure (found over put in)")
             self.kinds[name] = {"dimensions": dims, "compare_by": compare, "share": bool(k.get("share")),
+                                "closure": bool(k.get("closure")),
                                 "denominator": [self.dim(x, f"kinds.{name}.denominator") for x in den["dimensions"]]
                                 if den else None}
 
@@ -390,6 +394,8 @@ class Contracts:
                     st.append(Statement(src, CONFLICT, f"{v.get(src)}, which names {' and '.join(hits)}"))
             elif src == "target" and isinstance(v.get("target"), str) and v["target"]:
                 st.append(Statement("target", v["target"], v["target"]))
+            elif src == "target" and isinstance(v.get("unresolved_target"), str) and v["unresolved_target"].strip():
+                st.append(Statement("unresolved_target", UNSPECIFIED, v["unresolved_target"]))   # a product not identified
             elif src == "normalized_by" and den:
                 hits = self.statements_in_text(name, den.replace("_", " "), None)
                 if len(hits) == 1:
@@ -691,15 +697,10 @@ def denominator(v: dict, records: dict) -> dict | None:
     out = {"record": ref["record"], "path": path, "name": None, "value": None, "found": rec is not None and path is None}
     if rec is None or path is None:
         return out
-    parts = [p.replace("~1", "/").replace("~0", "~") for p in path.split("/")[1:]]
-    cur: Any = rec.get("props") or {}
-    for p in parts:
-        if isinstance(cur, dict) and p in cur:
-            cur = cur[p]
-        elif isinstance(cur, list) and p.isdigit() and int(p) < len(cur):
-            cur = cur[int(p)]
-        else:
-            return out
+    parts = results.steps(path)
+    ok, cur = results.resolve(rec.get("props") or {}, path)
+    if not ok:
+        return out
     names = [p for p in parts if not p.isdigit()]
     out.update(found=True, name=names[-1] if names else None,
                value=cur if isinstance(cur, dict) and cur.get("status") in VALUE_STATUS else None)
@@ -754,8 +755,9 @@ def check_document(doc: dict, spec: dict, rep) -> None:
                     rep.add("error", rid, f"{path[1:]}: normalized_by names a denominator, but no quantity contract applies "
                                           "to this value (bind its property, or name a Variable whose quantity_kind has one)")
                 continue
-            where = path[1:].replace("/", ".")
+            where = results.name(path, v)
             _check_value(c, rep, rid, where, got, v, records, unread, (owner(r), where.split(".")[0]))
+            _check_target(c, spec, rep, rid, where, got, v, records)
     for n in nodes:
         p = n.get("props") if isinstance(n.get("props"), dict) else {}
         if n.get("label") == "Variable" and p.get("quantity_kind") in c.kinds and not states_no_unit(p.get("unit")):
@@ -768,6 +770,27 @@ def check_document(doc: dict, spec: dict, rep) -> None:
         rep.add("warning", "<graph>", f"{own}.{prop}: the unit {unit!r} ({k} value{'s' if k != 1 else ''}) is not one the "
                                       "quantity contracts can read, so its dimension is not checked and a scientific "
                                       "comparison leaves it out; write it in the units the vocabulary holds (core/graph/kernel.yaml, quantities.units)")
+
+
+def _check_target(c: Contracts, spec: dict, rep, rid: str, where: str, got: Read, v: dict, records: dict) -> None:
+    """A value read from its target for a context a domain narrows (context_targets: in catalysis, a species is a
+    ChemicalSpecies) names a record of one of its labels: a source, a dataset or a material is never a product."""
+    narrowed = spec.get("context_targets") or {}
+    t = v.get("target")
+    if not isinstance(t, str) or t not in records:
+        return                                          # no target, or one that does not resolve (the type check says)
+    for e in c.kinds[got.kind]["compare_by"]:
+        nt = narrowed.get(e["context"])
+        if nt is None:
+            continue
+        rec = records[t]
+        lab = None if "source" in rec and "type" in rec else rec.get("label")
+        if lab not in nt["targets"]:
+            rep.add("error", rid, f"{where}: its target {t} is {'a ' + lab if lab else 'a link'}, "
+                                  f"but the {e['context']} a {got.kind} is counted for is a {' or '.join(nt['targets'])} "
+                                  f"(context_targets of {nt['module']}); a product the source does not identify is an "
+                                  "unresolved_target")
+        return
 
 
 def _dims(c: Contracts, kind: str) -> str:
@@ -804,6 +827,8 @@ def _check_value(c: Contracts, rep, rid: str, where: str, got: Read, v: dict, re
                                           f"{kind} ({', '.join(c.dimension_name(x) for x in allowed)})")
     if c.kinds[kind]["share"] and numbered(v) and reading is not None and reading.read and not reading.unread:
         _share_advisory(rep, rid, where, kind, v, at[1])
+    if c.kinds[kind].get("closure") and numbered(v) and reading is not None and reading.read and not reading.unread:
+        _closure_advisory(rep, rid, where, kind, v)
 
 
 SHARE_NAMES = re.compile(r"(?:^|_)(?:selectivity|selectivities|conversion|yield|balance)(?:_|$)")   # pgraph.plausibility
@@ -828,6 +853,36 @@ def _share_advisory(rep, rid: str, where: str, kind: str, v: dict, prop: str) ->
     elif most is not None and most < 0:
         rep.add("warning", rid, f"{where}: {most} {unit} is below zero for a {kind}; check the reading — it stays as "
                                 "reported")
+
+
+def _closure_advisory(rep, rid: str, where: str, kind: str, v: dict) -> None:
+    """A reported percentage of a closure (a balance) above 100 %: a warning that says whether 100 % lies within the
+    value's stated uncertainty (a symmetric uncertainty, or an interval), or that it states none. The value stays as
+    reported: never capped, never forced to close."""
+    unit = " ".join(str(v.get("unit")).split())
+    if not unit.endswith("%"):
+        return
+    nums = [v[k] for k in ("value", "lower", "upper") if isinstance(v.get(k), (int, float)) and not isinstance(v.get(k), bool)]
+    least = None if v.get("bound") == "upper" or not nums else min(nums)
+    if least is None or least <= 100:
+        return
+    u = v.get("uncertainty")
+    lo = v.get("interval_lower")
+    if isinstance(u, (int, float)) and not isinstance(u, bool) and isinstance(v.get("value"), (int, float)):
+        low, said = v["value"] - u, f"± {u} {unit} ({v.get('uncertainty_kind', 'uncertainty')})"
+    elif isinstance(lo, (int, float)) and not isinstance(lo, bool):
+        low, said = lo, f"interval {lo} to {v.get('interval_upper')} {unit}"
+    else:
+        rep.add("warning", rid, f"{where}: a {kind} of {least} {unit} is above 100 % and states no uncertainty; record the "
+                                "source's uncertainty if it gives one — it stays as reported, never capped")
+        return
+    if low <= 100:
+        rep.add("warning", rid, f"{where}: a {kind} of {least} {unit} is above 100 %; 100 % lies within its stated "
+                                f"uncertainty ({said}) — it stays as reported, never capped")
+    else:
+        rep.add("warning", rid, f"{where}: a {kind} of {least} {unit} is above 100 % beyond its stated uncertainty ({said}); "
+                                "check what it counts (a product counted twice, a calibration, the streams included) — it "
+                                "stays as reported, never capped")
 
 
 # ------------------------------------------------------------------------------------------ the loader's checks
@@ -953,6 +1008,26 @@ def diff(a: dict | None, b: dict | None, out: dict) -> None:
                                   f"{(xb.get('denominator') or {}).get('dimensions')}")
         if bool(xa.get("share")) != bool(xb.get("share")):
             out["changed"].append(f"quantities.kinds.{k}: share {bool(xa.get('share'))} -> {bool(xb.get('share'))}")
+        if bool(xa.get("closure")) != bool(xb.get("closure")):
+            out["changed"].append(f"quantities.kinds.{k}: closure {bool(xa.get('closure'))} -> {bool(xb.get('closure'))}")
+
+
+def diff_context_targets(a: dict | None, b: dict | None, out: dict) -> None:
+    """What a change of the records a context read from a target may name does (a domain's ``context_targets``): a
+    context narrowed for the first time, or a label taken from its targets, narrows what is valid (a breaking change);
+    a label added, or a narrowing dropped, loosens it."""
+    a, b = a or {}, b or {}
+    for ctx in sorted(set(a) | set(b)):
+        la = set((a.get(ctx) or {}).get("targets") or [])
+        lb = set((b.get(ctx) or {}).get("targets") or [])
+        if ctx not in a:
+            out["narrowed"].append(f"context_targets.{ctx}: a value's target read as its {ctx} names a "
+                                   f"{' or '.join(sorted(lb))}")
+        elif ctx not in b:
+            out["loosened"].append(f"context_targets.{ctx}: a value's target read as its {ctx} may name any record again")
+        else:
+            out["narrowed"] += [f"context_targets.{ctx} - {x}" for x in sorted(la - lb)]
+            out["loosened"] += [f"context_targets.{ctx} + {x}" for x in sorted(lb - la)]
 
 
 def _cmp_key(x: Any) -> str:
@@ -1043,6 +1118,37 @@ def move_component_quantities(doc: dict, spec: dict | None) -> list[str]:
                          f"their property's quantity (curate them by hand, then migrate): {'; '.join(bad[:20])}"
                          + (f" (and {len(bad) - 20} more)" if len(bad) > 20 else ""))
     return changes
+
+
+def narrowed_targets(doc: dict, spec: dict | None) -> list[str]:
+    """The values of a document whose target, read for a context a domain narrows (``context_targets``: in catalysis a
+    species is a ChemicalSpecies), names a record of another label: what the step to 0.4.0 cannot map (a source or a
+    material named as a product says nothing about which species it is). Each as ``record.path: target (label)``."""
+    c = contracts(spec or {})
+    narrowed = (spec or {}).get("context_targets") or {}
+    if c is None or not narrowed:
+        return []
+    variables = variable_kinds(doc)
+    records = {r["id"]: r for r in (doc.get("nodes") or []) + (doc.get("links") or []) if isinstance(r, dict)
+               and isinstance(r.get("id"), str)}
+    bad = []
+    for r in records.values():
+        props = r.get("props") if isinstance(r.get("props"), dict) else {}
+        for path, v in _values_anywhere(props):
+            t = v.get("target")
+            if not isinstance(t, str) or t not in records:
+                continue
+            top = path.split("/")[1]
+            kind = binding(spec, r, top)[0] or (variables.get(v.get("variable")) if isinstance(v.get("variable"), str) else None)
+            if kind not in c.kinds:
+                continue
+            for e in c.kinds[kind]["compare_by"]:
+                nt = narrowed.get(e["context"])
+                lab = records[t].get("label") if "label" in records[t] else None
+                if nt is not None and lab not in nt["targets"]:
+                    bad.append(f"{r['id']}{path}: target {t} ({lab or 'a link'}), not a {' or '.join(nt['targets'])}")
+                    break
+    return bad
 
 
 def describe_binding(c: Contracts, d: dict) -> str | None:

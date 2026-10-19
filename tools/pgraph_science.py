@@ -14,6 +14,8 @@ from __future__ import annotations
 from collections import defaultdict
 from typing import Any, Iterator
 
+from . import results
+
 VALUE_STATUS = {"present", "not_reported", "not_measured", "not_applicable", "below_detection_limit",
                 "below_quantification_limit"}
 POLAR = {"supports", "disputes", "refutes"}
@@ -33,15 +35,8 @@ def _values(obj: Any, path: str = "") -> Iterator[tuple[str, dict]]:
 
 
 def _pointer(props: dict, path: str) -> tuple[bool, Any]:
-    cur: Any = props
-    for part in [p.replace("~1", "/").replace("~0", "~") for p in path.split("/")[1:]]:
-        if isinstance(cur, dict) and part in cur:
-            cur = cur[part]
-        elif isinstance(cur, list) and part.isdigit() and int(part) < len(cur):
-            cur = cur[int(part)]
-        else:
-            return False, None
-    return True, cur
+    """What a record_ref's path names: a key of a map, or a list item by its position or its id (results.resolve)."""
+    return results.resolve(props, path)
 
 
 def _when(p: dict) -> str | None:
@@ -123,6 +118,10 @@ def science_checks(doc: dict, spec: dict, rep) -> None:
             if target not in records:
                 continue                      # unresolved ids are reported by the type check
             if "path" in r:
+                if results.by_position(r["path"]):
+                    err(e["id"], f"{k}: {target}{r['path']} names a result by its position; name it by its id "
+                                 f"(/{results.RESULTS}/<id>), which no reordering or filtering changes")
+                    continue
                 ok, val = _pointer(props[target], r["path"])
                 if not ok:
                     err(e["id"], f"{k}: {target}{r['path']} does not resolve to a property")
@@ -142,7 +141,10 @@ def science_checks(doc: dict, spec: dict, rep) -> None:
                     continue                  # not a record_ref, or one that does not resolve: the type check reports it
                 if isinstance(r.get("path"), str):
                     ok, _ = _pointer(props[r["record"]], r["path"])
-                    if not ok:
+                    if results.by_position(r["path"]):
+                        err(rid, f"{path[1:]}.{k}: {r['record']}{r['path']} names a result by its position; name it by "
+                                 f"its id (/{results.RESULTS}/<id>)")
+                    elif not ok:
                         err(rid, f"{path[1:]}.{k}: {r['record']}{r['path']} does not resolve to a property")
                 want, have = r.get("record_version"), props[r["record"]].get("record_version")
                 if want is not None and have is not None and want != have:

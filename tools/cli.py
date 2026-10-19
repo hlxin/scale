@@ -246,6 +246,8 @@ def cmd_graph_export(args):
     args.format = "json"
     doc = _viewer_doc(args)
     _emit(pgraph.to_neo4j_jsonl(doc), args)
+    for lost in pgraph.neo4j_losses(doc):         # what the flat export cannot keep, said where it is made
+        print(f"scale: note: {lost}", file=sys.stderr)
 
 
 def _bundle_lineage(args) -> dict:

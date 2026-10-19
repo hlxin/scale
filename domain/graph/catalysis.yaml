@@ -385,6 +385,10 @@ nodes:
         - transport_check
         - statistical
         - other
+        - balance
+        description: balance = a carbon, charge or mass balance of an experiment's results (provisional), over the assays
+          it HAS_INPUT (the streams and phases they measured) and its interval; its result is a balance value in the
+          experiment's result_values, produced_by the analysis.
       method:
         type: text
       verdict:
@@ -527,7 +531,8 @@ nodes:
     description: 'One reported catalytic test: a catalyst sample (USES_CATALYST), a feed (FED_WITH), a
       reactor (IN_REACTOR) and a reaction (OF_REACTION), driven by one or more driving forces, with the
       conditions and results the source gives. Declared conditions and results are properties; others
-      go in the inherited conditions and results maps. Driving-force properties (potential, irradiance,
+      go in the inherited conditions and results maps, and a result identified by its product, assay, phase or
+      interval goes in result_values (kernel). Driving-force properties (potential, irradiance,
       discharge power) come from the vocabulary of their driving force. A reported equilibrium estimate
       is a CatalyticTest with test_kind equilibrium_estimate and experiment_kind computational.'
     required:
@@ -584,13 +589,13 @@ nodes:
         description: The stated feed ratio; its note or basis says which (H2/CO, H2/COx).
       conversion:
         type: value
-        quantity: species_fraction
+        quantity: conversion
       yield:
         type: value
-        quantity: species_fraction
+        quantity: product_yield
       selectivity:
         type: value
-        quantity: species_fraction
+        quantity: selectivity
       space_time_yield:
         type: value
       production_rate:
@@ -2334,6 +2339,15 @@ adds_properties:
       description: The species that absorbs the light (e.g. the electrogenerated radical cation of the
         photocatalyst). Interface term, since it exists because the electrode generates or regenerates
         the light absorber.
+context_targets:
+  species:
+    maturity: provisional
+    description: In catalysis, the species a value is counted for (the reactant of a conversion; the product of a yield, a
+      selectivity, a rate, an amount, a Faradaic efficiency, a quantum or photonic yield, an energy yield or a partial
+      current density) is a chemical species. A source, a dataset, a material or a catalyst never is; a product the
+      source does not identify is an unresolved_target.
+    targets:
+    - ChemicalSpecies
 checklist:
   description: 'What a catalytic test reports, by the driving forces it lists (CatalyticTest.driving_forces).
     Every test: the catalyst sample it uses and the reaction it concerns. A thermally driven test (thermo,
