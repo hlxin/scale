@@ -41,3 +41,27 @@ fixtures:
   - file: normalized-by-unresolved-path.json
     error: "does not resolve to a property"
     reason: A normalization reference names a value the graph holds; a path to a property the record does not have cites a denominator that is not there.
+  - file: product-target-is-a-source.json
+    error: "its target ex:df-electro/source/paper is a Source, but the species a faradaic_efficiency is counted for is a ChemicalSpecies"
+    reason: In catalysis the species an efficiency, a yield or a selectivity is counted for is a chemical species (context_targets); a source document can never qualify as a product.
+  - file: result-without-variable.json
+    error: "a result entry names its variable"
+    reason: A result says what it is a value of (a Variable, whose quantity_kind gives its contract), so that a yield is never read as a selectivity.
+  - file: result-without-id.json
+    error: "a result entry has an id"
+    reason: A reference names a result by its id, so that appending to the list, reordering or filtering it never redirects the reference to another assay.
+  - file: result-ids-repeat.json
+    error: "an id names one value"
+    reason: An id that two results share names neither; a reference to it could reach either assay.
+  - file: result-without-evidence-ids.json
+    error: "names the evidence items that state it (evidence_ids)"
+    reason: An answer cites the evidence of the result that satisfied it, never the passages of the other results of its record.
+  - file: product-result-without-identity.json
+    error: "a faradaic_efficiency is counted for a species: name it (target) or say the source does not identify it (unresolved_target)"
+    reason: A product's identity is stated, either as the species or as unidentified; a result whose product is silently missing could be read as any product.
+  - file: target-and-unresolved-target.json
+    error: "target and unresolved_target do not go together"
+    reason: A result refers to one species or to what the source names without identifying it, never both.
+  - file: result-ref-by-position.json
+    error: "names a result by its position; name it by its id"
+    reason: A position in result_values names another result once the list is reordered, appended to or filtered; an id does not.

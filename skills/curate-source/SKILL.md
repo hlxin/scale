@@ -196,6 +196,16 @@ Never record `± 0`: keep the printed text in `as_reported` and leave `uncertain
   A value whose statements disagree with its record's is reported. A value you convert (a potential to RHE) is
   `origin: derived` with `produced_by` the Analysis that converts it and the printed number in `as_reported`. Name the
   denominator a normalized value is divided by, when the source identifies it, with `normalized_by` (`{record, path}`).
+- **Product measurements** (scale-catal 0.4.0 on). A result the source identifies by its product, assay, phase or
+  interval goes in the test's `result_values`: one value object per result with an `id`, its `variable` (a Variable
+  whose `quantity_kind` says what it is: `product_yield`, `selectivity`, `conversion`, `faradaic_efficiency`, …; a
+  yield is never a selectivity), the `evidence_ids` of the item that states it, its product in `target` (a
+  ChemicalSpecies), and where the source says so its assay in `produced_by` (a Characterization, with its time on
+  stream in `conditions` and its standards as `HAS_INPUT` role `reference_standard`), `calibration`, `phase`, `stream`
+  and `basis`. One product by two assays, at two times or in two phases is two results. A product the source does not
+  identify is an `unresolved_target` in its words; one below the detection limit is `below_detection_limit` with the
+  limit; a carbon or charge balance is a `balance` result `produced_by` an Analysis (`analysis_kind: balance`), kept as
+  reported, never computed or capped. A reference names a result by its id (`/result_values/<id>`), never by position.
 - **Keys and qualifiers.** Use one key per quantity and put what the value is about in its fields:
   the species or product in `target`, the basis in `basis`, the measurand in `variable` (a Variable)
   and how it was defined or measured in `definition`. When a source gives several values of one

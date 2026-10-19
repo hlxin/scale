@@ -54,8 +54,13 @@ A generated explanation is a presentation of the retrieved evidence, not a repla
    reference scale, a current density's normalization, a pressure's convention, a flow's reference
    conditions, a share's species), stated with `context: {potential_reference: rhe}` to check one, or left
    unstated to group the rows; a value whose context is not stated is left out as `missing_context`, never
-   assumed. Worked plans: the catalysis competency questions (`domain/competency/*.yaml`, also returned by
-   `scale call domains`; CQ-06 compares current densities).
+   assumed. A question about one result (a yield, a selectivity, a Faradaic efficiency of one product) binds it
+   with an `entries` step (`{from: test, entries: [result_values, faradaic_efficiency], kind: faradaic_efficiency, as:
+   fe}`) and follows its product or assay with a `field` step (`{from: fe, field: target, to: ChemicalSpecies, as:
+   product, where: [{prop: formula, op: eq, value: NH3}]}`): every filter, returned value and evidence item on `fe` is
+   then that one result's, never another assay's, and `kind` keeps a yield from standing in for a selectivity.
+   Worked plans: the catalysis competency questions (`domain/competency/*.yaml`, also returned by
+   `scale call domains`; CQ-06 compares current densities, CQ-01, CQ-07 and CQ-08 bind results).
 4. **Run it:** `scale graph query <graph> plan.yaml --format markdown` (or `scale call query`).
 5. **Read the kind of answer and the coverage:** `answered`; `no_matching_record` (none in this
    graph, which says nothing about the literature); `missing_context` (records match but a value
@@ -93,7 +98,7 @@ A generated explanation is a presentation of the retrieved evidence, not a repla
 - `answered` means only that rows came back: check that they answer the question; a listing (`coverage.unfiltered`) is not an answer.
 - Before reporting "none", state the number of candidates and run at least one other plan (other vocabulary, label or link direction, or a lower `min_score`).
 - A `not_reported` value with `missing_reason: not_curated` was not looked for (curation backlog); `withheld` (the reason a filtered document or an export gives a value it does not share) means the source reports it but this view does not show it; `not_extractable` means it is there but could not be extracted. None of these is the same as the source not stating it, and none is a source gap. `ambiguous_in_source` means the source is contradictory: not silence either, but a gap of its own (`ambiguous_source_information`: review the source or ask the authors, and report every variant). `not_measured` and `not_applicable` are what the source says (it was not measured; the property does not apply): report them as such, never as silence, and they are no gap.
-- A filter on several entries (`results.*[target=…]`) holds when one passes; when none passes and one could not be compared, the record is left out with that reason (`missing_context`), never counted as failing. A value withheld from the view is neither there nor missing (`exists` and `missing` leave it out as `withheld`). In a document `scale graph filter` made (`coverage.filtered_for`), a reference the filter removed reads as `not_curated` or `no_matching_entry`: say that such absences may be withheld, and never count them as curation backlog.
+- A filter on several entries (`results.*[target=…]`) holds when one passes; when none passes and one could not be compared, the record is left out with that reason (`missing_context`), never counted as failing. Filters on one such path are held by one entry together, and returning the path gives the entries that held them. A row flagged `ambiguous_repetition` binds a result that nothing tells apart from another of its record: report both, never their average. An `unresolved_target` is a product the source does not identify: report it in the source's words, never as a species. A value withheld from the view is neither there nor missing (`exists` and `missing` leave it out as `withheld`). In a document `scale graph filter` made (`coverage.filtered_for`), a reference the filter removed reads as `not_curated` or `no_matching_entry`: say that such absences may be withheld, and never count them as curation backlog.
 - A value with a `bound` is a one-sided bound ("did not exceed 1 %": at most 1 %): report it as the bound, never as the number. A filter the bound cannot decide leaves it out (`one_sided_bound`, counted), and `eq` or `in` never holds for a bound alone.
 - Name the kind of a preprint, patent, thesis or report, and of a source recorded `peer_reviewed: false` (`source_kind`, `source_peer_reviewed` on each evidence item).
 - Name second-hand evidence (`second_hand`: ECO:0000033, a source reporting another work's result) and cite the primary work where the graph holds it; `own_work_only: true` leaves it out.

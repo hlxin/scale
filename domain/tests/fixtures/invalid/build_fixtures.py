@@ -48,6 +48,27 @@ def component(doc: dict, local: str) -> dict:
     return next(e for e in doc["links"] if e["type"] == "HAS_COMPONENT" and e["target"].endswith("/" + local))
 
 
+def result(doc: dict, **entry) -> dict:
+    """The test with one Faradaic efficiency in result_values (a Variable of kind faradaic_efficiency, the evidence item
+    that states it); ``entry`` changes or (None) drops its fields. Returns the test."""
+    t = test_node(doc)
+    var = {"id": "ex:df-electro/variable/fe", "label": "Variable",
+           "props": {"name": "Faradaic efficiency", "scale": "quantitative", "quantity_kind": "faradaic_efficiency",
+                     "unit": "%", "origin": "synthetic"}}
+    doc["nodes"].append(var)
+    t["props"]["evidence"].append({"id": "fe_table", "source": "ex:df-electro/source/paper", "locator": "Table 1",
+                                   "kind": "table"})
+    x = {"id": "nh3_fe", "status": "present", "value": 92, "unit": "%", "variable": var["id"],
+         "target": node(doc, "species/ammonia")["id"], "evidence_ids": ["fe_table"]}
+    for k, v in entry.items():
+        if v is None:
+            x.pop(k, None)
+        else:
+            x[k] = v
+    t["props"]["result_values"] = [x]
+    return t
+
+
 def defect(name: str, title: str, change, base: dict | None = None) -> None:
     doc = copy.deepcopy(base or load_doc(BASE))
     doc["graph"]["graph_id"] = f"ex:invalid/{name}"
@@ -89,6 +110,37 @@ def main() -> None:
     defect("normalized-by-unresolved-path", "a current density divided by an electrode area the electrode does not hold",
            lambda d: test_node(d)["props"]["current_density"].__setitem__(
                "normalized_by", {"record": node(d, "electrode/cu-on-cp")["id"], "path": "/electrochemically_active_area"}))
+    # result entries (0.4.0): a product that is no chemical species, an entry without its variable, id or evidence, an
+    # id named twice, a product neither named nor said to be unidentified, both at once, and a reference by position
+    defect("product-target-is-a-source", "a Faradaic efficiency whose product is the source document",
+           lambda d: result(d, target="ex:df-electro/source/paper"))
+    defect("result-without-variable", "a result entry that does not say what it is a value of",
+           lambda d: result(d, variable=None))
+    defect("result-without-id", "a result entry without the id a reference names it by",
+           lambda d: result(d, id=None))
+    def repeat_id(d: dict) -> None:
+        entries = result(d)["props"]["result_values"]
+        entries.append(dict(entries[0], value=88, phase="liquid"))          # told apart by its phase; only its id repeats
+    defect("result-ids-repeat", "two result entries with one id", repeat_id)
+    defect("result-without-evidence-ids", "a result entry that states a value but not the evidence that states it",
+           lambda d: result(d, evidence_ids=None))
+    defect("product-result-without-identity", "a Faradaic efficiency that neither names its product nor says it is unidentified",
+           lambda d: result(d, target=None))
+    defect("target-and-unresolved-target", "a result that names its product and says the product is unidentified",
+           lambda d: result(d, unresolved_target="unidentified nitrogen products"))
+
+    def by_position(d: dict) -> None:
+        t = result(d)
+        d["nodes"].append({"id": "ex:df-electro/hypothesis/selective", "label": "Hypothesis",
+                           "props": {"name": "Cu reduces nitrate to ammonia selectively", "hypothesis_kind": "descriptive",
+                                     "statement": "Cu reduces nitrate to ammonia with a Faradaic efficiency above 90 %.",
+                                     "origin": "synthetic"}})
+        d["links"].append({"id": "ex:invalid/tests-by-position", "type": "TESTS", "source": t["id"],
+                           "target": "ex:df-electro/hypothesis/selective",
+                           "props": {"outcome": "supports", "origin": "synthetic",
+                                     "result_refs": [{"record": t["id"], "path": "/result_values/0"}]}})
+    defect("result-ref-by-position", "a test outcome that names the result it rests on by its position in result_values",
+           by_position)
     # it states its access (public, like every committed document) but not who contributed it or its project
     defect("research-data-without-stewardship", "research data that does not say who contributed it or which project it belongs to",
            lambda d: d["graph"].__setitem__("stewardship", {"access": "public"}), base=template("catalysis", VERSION))

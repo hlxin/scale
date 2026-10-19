@@ -1,0 +1,1677 @@
+{
+  "nodes": [
+    {
+      "id": "ex:pm/source/paper",
+      "label": "Source",
+      "props": {
+        "name": "Invented paper",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "Product measurements of CO2 hydrogenation and CO2 electroreduction (invented)",
+        "year": 2026
+      }
+    },
+    {
+      "id": "ex:pm/species/co2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "CO2",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 1,
+          "O": 2
+        },
+        "formula": "CO2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pm/species/h2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "H2",
+        "charge": 0,
+        "elemental_composition": {
+          "H": 2
+        },
+        "formula": "H2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pm/species/methanol",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "methanol",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 1,
+          "H": 4,
+          "O": 1
+        },
+        "formula": "CH3OH",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pm/species/co",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "CO",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 1,
+          "O": 1
+        },
+        "formula": "CO",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pm/species/ch4",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "CH4",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 1,
+          "H": 4
+        },
+        "formula": "CH4",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pm/species/water",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "H2O",
+        "charge": 0,
+        "elemental_composition": {
+          "H": 2,
+          "O": 1
+        },
+        "formula": "H2O",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pm/species/formate",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "formate",
+        "charge": -1,
+        "elemental_composition": {
+          "C": 1,
+          "H": 1,
+          "O": 2
+        },
+        "formula": "HCOO-",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pm/species/ethanol",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "ethanol",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 2,
+          "H": 6,
+          "O": 1
+        },
+        "formula": "C2H5OH",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pm/species/proton",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "H+",
+        "charge": 1,
+        "elemental_composition": {
+          "H": 1
+        },
+        "formula": "H+",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pm/species/electron",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "e-",
+        "charge": -1,
+        "elemental_composition": {},
+        "formula": "e-",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pm/species/dmso",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "DMSO",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 2,
+          "H": 6,
+          "O": 1,
+          "S": 1
+        },
+        "formula": "C2H6OS",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pm/species/khco3",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "KHCO3",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 1,
+          "H": 1,
+          "K": 1,
+          "O": 3
+        },
+        "formula": "KHCO3",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pm/variable/conversion",
+      "label": "Variable",
+      "props": {
+        "name": "CO2 conversion",
+        "origin": "synthetic",
+        "quantity_kind": "conversion",
+        "scale": "quantitative",
+        "unit": "%"
+      }
+    },
+    {
+      "id": "ex:pm/variable/yield",
+      "label": "Variable",
+      "props": {
+        "name": "product yield",
+        "origin": "synthetic",
+        "quantity_kind": "product_yield",
+        "scale": "quantitative",
+        "unit": "%"
+      }
+    },
+    {
+      "id": "ex:pm/variable/selectivity",
+      "label": "Variable",
+      "props": {
+        "name": "product selectivity",
+        "origin": "synthetic",
+        "quantity_kind": "selectivity",
+        "scale": "quantitative",
+        "unit": "%"
+      }
+    },
+    {
+      "id": "ex:pm/variable/faradaic-efficiency",
+      "label": "Variable",
+      "props": {
+        "name": "Faradaic efficiency",
+        "origin": "synthetic",
+        "quantity_kind": "faradaic_efficiency",
+        "scale": "quantitative",
+        "unit": "%"
+      }
+    },
+    {
+      "id": "ex:pm/variable/carbon-balance",
+      "label": "Variable",
+      "props": {
+        "name": "carbon balance",
+        "origin": "synthetic",
+        "quantity_kind": "balance",
+        "scale": "quantitative",
+        "unit": "%"
+      }
+    },
+    {
+      "id": "ex:pm/variable/charge-balance",
+      "label": "Variable",
+      "props": {
+        "name": "charge balance",
+        "origin": "synthetic",
+        "quantity_kind": "balance",
+        "scale": "quantitative",
+        "unit": "%"
+      }
+    },
+    {
+      "id": "ex:pm/reaction/co2-meoh",
+      "label": "Reaction",
+      "props": {
+        "name": "CO2 + 3 H2 -> CH3OH + H2O",
+        "balance_status": "balanced",
+        "direction": "reversible",
+        "equation": "CO2 + 3 H2 -> CH3OH + H2O",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pm/catalyst/cu-zno",
+      "label": "Catalyst",
+      "props": {
+        "name": "Cu/ZnO/Al2O3",
+        "catalyst_family": "metal",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:pm/source/paper"
+          }
+        ],
+        "nominal_formula": "Cu/ZnO/Al2O3",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pm/sample/cu-zno",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Cu/ZnO/Al2O3, batch 1",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:pm/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "sample_kind": "pellet"
+      }
+    },
+    {
+      "id": "ex:pm/feed/co2-h2",
+      "label": "Feed",
+      "props": {
+        "name": "CO2/H2 = 1/3",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pm/source/paper"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pm/instrument/reactor",
+      "label": "Reactor",
+      "props": {
+        "name": "Fixed-bed flow reactor",
+        "origin": "synthetic",
+        "reactor_kind": "flow"
+      }
+    },
+    {
+      "id": "ex:pm/experiment/gc-calibration",
+      "label": "Characterization",
+      "props": {
+        "name": "GC calibration with a certified gas mixture",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pm/source/paper"
+          }
+        ],
+        "goal": "calibrate",
+        "origin": "synthetic",
+        "technique": "gas chromatography"
+      }
+    },
+    {
+      "id": "ex:pm/material/calibration-gas",
+      "label": "Material",
+      "props": {
+        "name": "Certified gas mixture: CO2, CO, CH4 and H2 in Ar",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pm/source/paper"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pm/assay/gc-outlet",
+      "label": "Characterization",
+      "props": {
+        "name": "Online GC of the outlet gas, 5 h on stream",
+        "conditions": {
+          "time_on_stream": {
+            "status": "present",
+            "unit": "h",
+            "value": 5
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pm/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "technique": "gas chromatography (TCD and FID)"
+      }
+    },
+    {
+      "id": "ex:pm/assay/nmr-condensate",
+      "label": "Characterization",
+      "props": {
+        "name": "1H NMR of the condensate collected over 4-5 h on stream",
+        "conditions": {
+          "time_on_stream": {
+            "status": "present",
+            "unit": "h",
+            "value": 5
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pm/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "technique": "1H NMR, DMSO internal standard"
+      }
+    },
+    {
+      "id": "ex:pm/dataset/chromatograms",
+      "label": "Dataset",
+      "props": {
+        "name": "Chromatograms of the outlet gas",
+        "availability": "not_reported",
+        "data_kind": "raw",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pm/dataset/nmr-spectra",
+      "label": "Dataset",
+      "props": {
+        "name": "NMR spectra of the condensate",
+        "availability": "not_reported",
+        "data_kind": "spectrum",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pm/analysis/carbon-balance",
+      "label": "Analysis",
+      "props": {
+        "name": "Carbon balance over the outlet gas and the condensate",
+        "analysis_kind": "balance",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:pm/source/paper"
+          }
+        ],
+        "method": "carbon in the outlet gas (GC) and in the condensate (NMR), 4-5 h on stream, over the carbon fed",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pm/test/co2-hydrogenation",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "CO2 hydrogenation at 250 °C and 3 MPa, 5 h on stream",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "id": "t2_conversion",
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:pm/source/paper"
+          },
+          {
+            "id": "t2_yield_gc",
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:pm/source/paper"
+          },
+          {
+            "id": "t2_yield_nmr",
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:pm/source/paper"
+          },
+          {
+            "id": "t2_selectivity",
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:pm/source/paper"
+          },
+          {
+            "id": "t2_detection_limit",
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:pm/source/paper"
+          },
+          {
+            "id": "t2_unidentified",
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:pm/source/paper"
+          },
+          {
+            "id": "t2_balance",
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:pm/source/paper"
+          },
+          {
+            "id": "methods",
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pm/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "basis": "absolute",
+          "unit": "MPa",
+          "value": 3
+        },
+        "result_values": [
+          {
+            "id": "co2_conversion",
+            "status": "present",
+            "basis": "carbon",
+            "calibration": "ex:pm/experiment/gc-calibration",
+            "evidence_ids": [
+              "t2_conversion"
+            ],
+            "phase": "gas",
+            "produced_by": "ex:pm/assay/gc-outlet",
+            "stream": "outlet gas",
+            "target": "ex:pm/species/co2",
+            "unit": "%",
+            "value": 50,
+            "variable": "ex:pm/variable/conversion"
+          },
+          {
+            "id": "methanol_yield_gc",
+            "status": "present",
+            "basis": "carbon",
+            "calibration": "ex:pm/experiment/gc-calibration",
+            "evidence_ids": [
+              "t2_yield_gc"
+            ],
+            "phase": "gas",
+            "produced_by": "ex:pm/assay/gc-outlet",
+            "stream": "outlet gas",
+            "target": "ex:pm/species/methanol",
+            "unit": "%",
+            "value": 40,
+            "variable": "ex:pm/variable/yield"
+          },
+          {
+            "id": "methanol_yield_nmr",
+            "status": "present",
+            "basis": "carbon",
+            "evidence_ids": [
+              "t2_yield_nmr"
+            ],
+            "phase": "liquid",
+            "produced_by": "ex:pm/assay/nmr-condensate",
+            "stream": "condensate",
+            "target": "ex:pm/species/methanol",
+            "unit": "%",
+            "value": 38,
+            "variable": "ex:pm/variable/yield"
+          },
+          {
+            "id": "methanol_selectivity",
+            "status": "present",
+            "basis": "carbon",
+            "calibration": "ex:pm/experiment/gc-calibration",
+            "evidence_ids": [
+              "t2_selectivity"
+            ],
+            "phase": "gas",
+            "produced_by": "ex:pm/assay/gc-outlet",
+            "stream": "outlet gas",
+            "target": "ex:pm/species/methanol",
+            "unit": "%",
+            "value": 80,
+            "variable": "ex:pm/variable/selectivity"
+          },
+          {
+            "id": "co_selectivity",
+            "status": "present",
+            "basis": "carbon",
+            "calibration": "ex:pm/experiment/gc-calibration",
+            "evidence_ids": [
+              "t2_selectivity"
+            ],
+            "phase": "gas",
+            "produced_by": "ex:pm/assay/gc-outlet",
+            "stream": "outlet gas",
+            "target": "ex:pm/species/co",
+            "unit": "%",
+            "value": 18,
+            "variable": "ex:pm/variable/selectivity"
+          },
+          {
+            "id": "ch4_selectivity",
+            "status": "below_detection_limit",
+            "basis": "carbon",
+            "calibration": "ex:pm/experiment/gc-calibration",
+            "evidence_ids": [
+              "t2_detection_limit"
+            ],
+            "phase": "gas",
+            "produced_by": "ex:pm/assay/gc-outlet",
+            "stream": "outlet gas",
+            "target": "ex:pm/species/ch4",
+            "unit": "%",
+            "value": 0.1,
+            "variable": "ex:pm/variable/selectivity"
+          },
+          {
+            "id": "unidentified_selectivity",
+            "status": "present",
+            "basis": "carbon",
+            "evidence_ids": [
+              "t2_unidentified"
+            ],
+            "phase": "liquid",
+            "produced_by": "ex:pm/assay/nmr-condensate",
+            "stream": "condensate",
+            "unit": "%",
+            "unresolved_target": "unidentified oxygenates",
+            "value": 2,
+            "variable": "ex:pm/variable/selectivity"
+          },
+          {
+            "id": "carbon_balance",
+            "status": "present",
+            "basis": "carbon",
+            "definition": "carbon in the outlet gas and the condensate over the carbon fed, 4-5 h on stream",
+            "evidence_ids": [
+              "t2_balance"
+            ],
+            "produced_by": "ex:pm/analysis/carbon-balance",
+            "replicates": 3,
+            "uncertainty": 4,
+            "uncertainty_kind": "standard_deviation",
+            "unit": "%",
+            "value": 103,
+            "variable": "ex:pm/variable/carbon-balance"
+          }
+        ],
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 250
+        },
+        "temperature_measured_at": "catalyst_bed",
+        "test_kind": "activity",
+        "time_on_stream": {
+          "status": "present",
+          "unit": "h",
+          "value": 5
+        }
+      }
+    },
+    {
+      "id": "ex:pm/hypothesis/selective-methanol",
+      "label": "Hypothesis",
+      "props": {
+        "name": "Cu/ZnO/Al2O3 forms methanol selectively at 250 °C",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Introduction",
+            "source": "ex:pm/source/paper"
+          }
+        ],
+        "hypothesis_kind": "descriptive",
+        "origin": "synthetic",
+        "statement": "Cu/ZnO/Al2O3 forms methanol from CO2 with a carbon selectivity above 75 % at 250 °C and 3 MPa."
+      }
+    },
+    {
+      "id": "ex:pm/reaction/co2rr",
+      "label": "Reaction",
+      "props": {
+        "name": "CO2 electroreduction to C1 and C2 products",
+        "balance_status": "not_checked",
+        "direction": "forward",
+        "equation": "CO2 + n H+ + n e- -> CO, HCOO-, CH4, C2H5OH",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pm/catalyst/cu",
+      "label": "Catalyst",
+      "props": {
+        "name": "Polycrystalline Cu",
+        "catalyst_family": "metal",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pm/source/paper"
+          }
+        ],
+        "nominal_formula": "Cu",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pm/sample/cu-foil",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Cu foil",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pm/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "sample_kind": "film"
+      }
+    },
+    {
+      "id": "ex:pm/electrolyte/khco3",
+      "label": "Electrolyte",
+      "props": {
+        "name": "0.1 M KHCO3",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pm/source/paper"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pm/assay/gc-30min",
+      "label": "Characterization",
+      "props": {
+        "name": "GC of the headspace gas at 30 min",
+        "conditions": {
+          "time_on_stream": {
+            "status": "present",
+            "unit": "min",
+            "value": 30
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pm/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "technique": "gas chromatography"
+      }
+    },
+    {
+      "id": "ex:pm/assay/gc-60min",
+      "label": "Characterization",
+      "props": {
+        "name": "GC of the headspace gas at 60 min",
+        "conditions": {
+          "time_on_stream": {
+            "status": "present",
+            "unit": "min",
+            "value": 60
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pm/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "technique": "gas chromatography"
+      }
+    },
+    {
+      "id": "ex:pm/assay/nmr-catholyte",
+      "label": "Characterization",
+      "props": {
+        "name": "1H NMR of the catholyte after 60 min",
+        "conditions": {
+          "time_on_stream": {
+            "status": "present",
+            "unit": "min",
+            "value": 60
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pm/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "technique": "1H NMR, DMSO internal standard"
+      }
+    },
+    {
+      "id": "ex:pm/analysis/charge-balance",
+      "label": "Analysis",
+      "props": {
+        "name": "Charge balance over the headspace gas and the catholyte",
+        "analysis_kind": "balance",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 3",
+            "source": "ex:pm/source/paper"
+          }
+        ],
+        "method": "the sum of the Faradaic efficiencies of the products quantified in the headspace gas (GC at 60 min) and the catholyte (NMR), 0-60 min",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pm/test/co2rr",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "CO2 electroreduction on Cu at -1.0 V vs RHE, 60 min",
+        "control_mode": "potentiostatic",
+        "current_density": {
+          "status": "present",
+          "unit": "mA/cm2",
+          "value": -20
+        },
+        "current_normalization": "geometric_area",
+        "driving_forces": [
+          "electro"
+        ],
+        "duration": {
+          "status": "present",
+          "unit": "min",
+          "value": 60
+        },
+        "electrode_potential": {
+          "status": "present",
+          "unit": "V",
+          "value": -1.0
+        },
+        "evidence": [
+          {
+            "id": "t3_co",
+            "kind": "table",
+            "locator": "Table 3",
+            "source": "ex:pm/source/paper"
+          },
+          {
+            "id": "t3_h2",
+            "kind": "table",
+            "locator": "Table 3",
+            "source": "ex:pm/source/paper"
+          },
+          {
+            "id": "t3_gas",
+            "kind": "table",
+            "locator": "Table 3",
+            "source": "ex:pm/source/paper"
+          },
+          {
+            "id": "t3_liquid",
+            "kind": "table",
+            "locator": "Table 3",
+            "source": "ex:pm/source/paper"
+          },
+          {
+            "id": "t3_rest",
+            "kind": "table",
+            "locator": "Table 3",
+            "source": "ex:pm/source/paper"
+          },
+          {
+            "id": "t3_balance",
+            "kind": "table",
+            "locator": "Table 3",
+            "source": "ex:pm/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "ir_compensation": "applied",
+        "origin": "synthetic",
+        "reference_scale": "rhe",
+        "result_values": [
+          {
+            "id": "co_fe_30min",
+            "status": "present",
+            "evidence_ids": [
+              "t3_co"
+            ],
+            "phase": "gas",
+            "produced_by": "ex:pm/assay/gc-30min",
+            "stream": "headspace",
+            "target": "ex:pm/species/co",
+            "unit": "%",
+            "value": 26,
+            "variable": "ex:pm/variable/faradaic-efficiency"
+          },
+          {
+            "id": "co_fe_60min",
+            "status": "present",
+            "evidence_ids": [
+              "t3_co"
+            ],
+            "phase": "gas",
+            "produced_by": "ex:pm/assay/gc-60min",
+            "stream": "headspace",
+            "target": "ex:pm/species/co",
+            "unit": "%",
+            "value": 24,
+            "variable": "ex:pm/variable/faradaic-efficiency"
+          },
+          {
+            "id": "h2_fe",
+            "status": "present",
+            "evidence_ids": [
+              "t3_h2"
+            ],
+            "phase": "gas",
+            "produced_by": "ex:pm/assay/gc-60min",
+            "stream": "headspace",
+            "target": "ex:pm/species/h2",
+            "unit": "%",
+            "value": 30,
+            "variable": "ex:pm/variable/faradaic-efficiency"
+          },
+          {
+            "id": "ch4_fe",
+            "status": "below_detection_limit",
+            "evidence_ids": [
+              "t3_gas"
+            ],
+            "phase": "gas",
+            "produced_by": "ex:pm/assay/gc-60min",
+            "stream": "headspace",
+            "target": "ex:pm/species/ch4",
+            "unit": "%",
+            "value": 0.5,
+            "variable": "ex:pm/variable/faradaic-efficiency"
+          },
+          {
+            "id": "ethanol_fe_gas",
+            "status": "present",
+            "evidence_ids": [
+              "t3_gas"
+            ],
+            "phase": "gas",
+            "produced_by": "ex:pm/assay/gc-60min",
+            "stream": "headspace",
+            "target": "ex:pm/species/ethanol",
+            "unit": "%",
+            "value": 2,
+            "variable": "ex:pm/variable/faradaic-efficiency"
+          },
+          {
+            "id": "formate_fe",
+            "status": "present",
+            "evidence_ids": [
+              "t3_liquid"
+            ],
+            "phase": "liquid",
+            "produced_by": "ex:pm/assay/nmr-catholyte",
+            "stream": "catholyte",
+            "target": "ex:pm/species/formate",
+            "unit": "%",
+            "value": 15,
+            "variable": "ex:pm/variable/faradaic-efficiency"
+          },
+          {
+            "id": "ethanol_fe_liquid",
+            "status": "present",
+            "evidence_ids": [
+              "t3_liquid"
+            ],
+            "phase": "liquid",
+            "produced_by": "ex:pm/assay/nmr-catholyte",
+            "stream": "catholyte",
+            "target": "ex:pm/species/ethanol",
+            "unit": "%",
+            "value": 20,
+            "variable": "ex:pm/variable/faradaic-efficiency"
+          },
+          {
+            "id": "unassigned_fe",
+            "status": "present",
+            "evidence_ids": [
+              "t3_rest"
+            ],
+            "produced_by": "ex:pm/analysis/charge-balance",
+            "unit": "%",
+            "unresolved_target": "charge no quantified product accounts for",
+            "value": 5,
+            "variable": "ex:pm/variable/faradaic-efficiency"
+          },
+          {
+            "id": "charge_balance",
+            "status": "present",
+            "basis": "charge",
+            "definition": "the sum of the Faradaic efficiencies of the products quantified, 0-60 min",
+            "evidence_ids": [
+              "t3_balance"
+            ],
+            "produced_by": "ex:pm/analysis/charge-balance",
+            "unit": "%",
+            "value": 97,
+            "variable": "ex:pm/variable/charge-balance"
+          }
+        ],
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 298
+        },
+        "test_kind": "activity"
+      }
+    },
+    {
+      "id": "ex:pm/test/co2rr-repeat",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "CO2 electroreduction on Cu at -1.0 V vs RHE, repeated",
+        "control_mode": "potentiostatic",
+        "current_normalization": "geometric_area",
+        "driving_forces": [
+          "electro"
+        ],
+        "electrode_potential": {
+          "status": "present",
+          "unit": "V",
+          "value": -1.0
+        },
+        "evidence": [
+          {
+            "id": "s4_first",
+            "kind": "table",
+            "locator": "Table S4",
+            "source": "ex:pm/source/paper"
+          },
+          {
+            "id": "s4_second",
+            "kind": "table",
+            "locator": "Table S4",
+            "source": "ex:pm/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "origin": "synthetic",
+        "reference_scale": "rhe",
+        "result_values": [
+          {
+            "id": "co_fe_a",
+            "status": "present",
+            "evidence_ids": [
+              "s4_first"
+            ],
+            "phase": "gas",
+            "stream": "headspace",
+            "target": "ex:pm/species/co",
+            "unit": "%",
+            "value": 27,
+            "variable": "ex:pm/variable/faradaic-efficiency"
+          },
+          {
+            "id": "co_fe_b",
+            "status": "present",
+            "evidence_ids": [
+              "s4_second"
+            ],
+            "phase": "gas",
+            "stream": "headspace",
+            "target": "ex:pm/species/co",
+            "unit": "%",
+            "value": 19,
+            "variable": "ex:pm/variable/faradaic-efficiency"
+          }
+        ],
+        "test_kind": "activity"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:pm/link/1",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:pm/reaction/co2-meoh",
+      "target": "ex:pm/species/co2"
+    },
+    {
+      "id": "ex:pm/link/2",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 3,
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:pm/reaction/co2-meoh",
+      "target": "ex:pm/species/h2"
+    },
+    {
+      "id": "ex:pm/link/3",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "role": "product"
+      },
+      "source": "ex:pm/reaction/co2-meoh",
+      "target": "ex:pm/species/methanol"
+    },
+    {
+      "id": "ex:pm/link/4",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "role": "product"
+      },
+      "source": "ex:pm/reaction/co2-meoh",
+      "target": "ex:pm/species/water"
+    },
+    {
+      "id": "ex:pm/link/5",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pm/sample/cu-zno",
+      "target": "ex:pm/catalyst/cu-zno"
+    },
+    {
+      "id": "ex:pm/link/6",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:pm/feed/co2-h2",
+      "target": "ex:pm/species/co2"
+    },
+    {
+      "id": "ex:pm/link/7",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:pm/feed/co2-h2",
+      "target": "ex:pm/species/h2"
+    },
+    {
+      "id": "ex:pm/link/8",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reference_standard"
+      },
+      "source": "ex:pm/experiment/gc-calibration",
+      "target": "ex:pm/material/calibration-gas"
+    },
+    {
+      "id": "ex:pm/link/9",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reference_standard"
+      },
+      "source": "ex:pm/assay/nmr-condensate",
+      "target": "ex:pm/species/dmso"
+    },
+    {
+      "id": "ex:pm/link/10",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pm/assay/gc-outlet",
+      "target": "ex:pm/dataset/chromatograms"
+    },
+    {
+      "id": "ex:pm/link/11",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pm/assay/nmr-condensate",
+      "target": "ex:pm/dataset/nmr-spectra"
+    },
+    {
+      "id": "ex:pm/link/12",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:pm/analysis/carbon-balance",
+      "target": "ex:pm/assay/gc-outlet"
+    },
+    {
+      "id": "ex:pm/link/13",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:pm/analysis/carbon-balance",
+      "target": "ex:pm/assay/nmr-condensate"
+    },
+    {
+      "id": "ex:pm/link/14",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "reduced"
+      },
+      "source": "ex:pm/test/co2-hydrogenation",
+      "target": "ex:pm/sample/cu-zno"
+    },
+    {
+      "id": "ex:pm/link/15",
+      "type": "FED_WITH",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pm/test/co2-hydrogenation",
+      "target": "ex:pm/feed/co2-h2"
+    },
+    {
+      "id": "ex:pm/link/16",
+      "type": "IN_REACTOR",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pm/test/co2-hydrogenation",
+      "target": "ex:pm/instrument/reactor"
+    },
+    {
+      "id": "ex:pm/link/17",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pm/test/co2-hydrogenation",
+      "target": "ex:pm/reaction/co2-meoh"
+    },
+    {
+      "id": "ex:pm/link/18",
+      "type": "TESTS",
+      "props": {
+        "origin": "synthetic",
+        "outcome": "supports",
+        "result_refs": [
+          {
+            "path": "/result_values/methanol_selectivity",
+            "record": "ex:pm/test/co2-hydrogenation"
+          }
+        ]
+      },
+      "source": "ex:pm/test/co2-hydrogenation",
+      "target": "ex:pm/hypothesis/selective-methanol"
+    },
+    {
+      "id": "ex:pm/link/19",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:pm/reaction/co2rr",
+      "target": "ex:pm/species/co2"
+    },
+    {
+      "id": "ex:pm/link/20",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:pm/reaction/co2rr",
+      "target": "ex:pm/species/proton"
+    },
+    {
+      "id": "ex:pm/link/21",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:pm/reaction/co2rr",
+      "target": "ex:pm/species/electron"
+    },
+    {
+      "id": "ex:pm/link/22",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "origin": "synthetic",
+        "role": "product"
+      },
+      "source": "ex:pm/reaction/co2rr",
+      "target": "ex:pm/species/co"
+    },
+    {
+      "id": "ex:pm/link/23",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "origin": "synthetic",
+        "role": "product"
+      },
+      "source": "ex:pm/reaction/co2rr",
+      "target": "ex:pm/species/formate"
+    },
+    {
+      "id": "ex:pm/link/24",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "origin": "synthetic",
+        "role": "product"
+      },
+      "source": "ex:pm/reaction/co2rr",
+      "target": "ex:pm/species/ch4"
+    },
+    {
+      "id": "ex:pm/link/25",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "origin": "synthetic",
+        "role": "product"
+      },
+      "source": "ex:pm/reaction/co2rr",
+      "target": "ex:pm/species/ethanol"
+    },
+    {
+      "id": "ex:pm/link/26",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pm/sample/cu-foil",
+      "target": "ex:pm/catalyst/cu"
+    },
+    {
+      "id": "ex:pm/link/27",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "concentration": {
+          "status": "present",
+          "unit": "mol/L",
+          "value": 0.1
+        },
+        "origin": "synthetic",
+        "role": "inert"
+      },
+      "source": "ex:pm/electrolyte/khco3",
+      "target": "ex:pm/species/khco3"
+    },
+    {
+      "id": "ex:pm/link/28",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reference_standard"
+      },
+      "source": "ex:pm/assay/nmr-catholyte",
+      "target": "ex:pm/species/dmso"
+    },
+    {
+      "id": "ex:pm/link/29",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:pm/analysis/charge-balance",
+      "target": "ex:pm/assay/gc-60min"
+    },
+    {
+      "id": "ex:pm/link/30",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:pm/analysis/charge-balance",
+      "target": "ex:pm/assay/nmr-catholyte"
+    },
+    {
+      "id": "ex:pm/link/31",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "as_prepared"
+      },
+      "source": "ex:pm/test/co2rr",
+      "target": "ex:pm/sample/cu-foil"
+    },
+    {
+      "id": "ex:pm/link/32",
+      "type": "IN_ELECTROLYTE",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pm/test/co2rr",
+      "target": "ex:pm/electrolyte/khco3"
+    },
+    {
+      "id": "ex:pm/link/33",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pm/test/co2rr",
+      "target": "ex:pm/reaction/co2rr"
+    },
+    {
+      "id": "ex:pm/link/34",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "as_prepared"
+      },
+      "source": "ex:pm/test/co2rr-repeat",
+      "target": "ex:pm/sample/cu-foil"
+    },
+    {
+      "id": "ex:pm/link/35",
+      "type": "IN_ELECTROLYTE",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pm/test/co2rr-repeat",
+      "target": "ex:pm/electrolyte/khco3"
+    },
+    {
+      "id": "ex:pm/link/36",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pm/test/co2rr-repeat",
+      "target": "ex:pm/reaction/co2rr"
+    },
+    {
+      "id": "ex:pm/analysis/carbon-balance/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pm/analysis/carbon-balance",
+      "target": "ex:pm/source/paper"
+    },
+    {
+      "id": "ex:pm/analysis/charge-balance/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pm/analysis/charge-balance",
+      "target": "ex:pm/source/paper"
+    },
+    {
+      "id": "ex:pm/assay/gc-30min/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pm/assay/gc-30min",
+      "target": "ex:pm/source/paper"
+    },
+    {
+      "id": "ex:pm/assay/gc-60min/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pm/assay/gc-60min",
+      "target": "ex:pm/source/paper"
+    },
+    {
+      "id": "ex:pm/assay/gc-outlet/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pm/assay/gc-outlet",
+      "target": "ex:pm/source/paper"
+    },
+    {
+      "id": "ex:pm/assay/nmr-catholyte/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pm/assay/nmr-catholyte",
+      "target": "ex:pm/source/paper"
+    },
+    {
+      "id": "ex:pm/assay/nmr-condensate/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pm/assay/nmr-condensate",
+      "target": "ex:pm/source/paper"
+    },
+    {
+      "id": "ex:pm/catalyst/cu/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pm/catalyst/cu",
+      "target": "ex:pm/source/paper"
+    },
+    {
+      "id": "ex:pm/catalyst/cu-zno/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pm/catalyst/cu-zno",
+      "target": "ex:pm/source/paper"
+    },
+    {
+      "id": "ex:pm/electrolyte/khco3/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pm/electrolyte/khco3",
+      "target": "ex:pm/source/paper"
+    },
+    {
+      "id": "ex:pm/experiment/gc-calibration/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pm/experiment/gc-calibration",
+      "target": "ex:pm/source/paper"
+    },
+    {
+      "id": "ex:pm/feed/co2-h2/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pm/feed/co2-h2",
+      "target": "ex:pm/source/paper"
+    },
+    {
+      "id": "ex:pm/hypothesis/selective-methanol/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Introduction"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pm/hypothesis/selective-methanol",
+      "target": "ex:pm/source/paper"
+    },
+    {
+      "id": "ex:pm/material/calibration-gas/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pm/material/calibration-gas",
+      "target": "ex:pm/source/paper"
+    },
+    {
+      "id": "ex:pm/sample/cu-foil/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pm/sample/cu-foil",
+      "target": "ex:pm/source/paper"
+    },
+    {
+      "id": "ex:pm/sample/cu-zno/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pm/sample/cu-zno",
+      "target": "ex:pm/source/paper"
+    },
+    {
+      "id": "ex:pm/test/co2-hydrogenation/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods",
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pm/test/co2-hydrogenation",
+      "target": "ex:pm/source/paper"
+    },
+    {
+      "id": "ex:pm/test/co2rr/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pm/test/co2rr",
+      "target": "ex:pm/source/paper"
+    },
+    {
+      "id": "ex:pm/test/co2rr-repeat/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table S4"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pm/test/co2rr-repeat",
+      "target": "ex:pm/source/paper"
+    }
+  ],
+  "directed": true,
+  "graph": {
+    "data_status": "synthetic_example",
+    "follows_domains": [
+      "catalysis"
+    ],
+    "graph_id": "ex:pm/graph",
+    "schema": "scale-catal",
+    "schema_version": "0.4.0",
+    "stewardship": {
+      "access": "public"
+    },
+    "title": "Product measurements: results identified by metric, product, assay, phase and interval"
+  },
+  "multigraph": true
+}

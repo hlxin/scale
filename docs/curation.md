@@ -119,6 +119,22 @@ source must be within its cap.
 - **What a normalized quantity is divided by**, when it must be identified: the value's `normalized_by` names the
   record, and with `path` the value (`{record: <electrode>, path: /electrochemically_active_area}`); that value's own
   `origin` says whether the denominator was measured, derived, computed or assumed.
+- **Product measurements, one result at a time** (scale-catal 0.4.0 on). A result the source identifies by its product,
+  assay, phase or interval goes in the experiment's `result_values`: one value object per result with an `id`, its
+  `variable` (a Variable whose `quantity_kind` says what it is: `product_yield`, `selectivity`, `conversion`,
+  `faradaic_efficiency`, `production_rate`, `product_amount`, `balance`), the `evidence_ids` of the evidence item that
+  states it, its product in `target` (a ChemicalSpecies), and, where the source says so, the assay that measured it in
+  `produced_by` (a Characterization: GC of the outlet gas, NMR of the catholyte, with its time on stream in its
+  `conditions`, its reference standards as `HAS_INPUT` role `reference_standard` and its raw data a Dataset it
+  `HAS_OUTPUT`; or the Analysis that derived it), the calibration it rests on (`calibration`), the `phase` and `stream`
+  it was measured in, and its `basis`. A yield is never a selectivity: record each with its own variable. The same
+  product by two assays, at two times or in two phases is two results, each with what tells it apart; a reported mean
+  of replicates is one result with `replicates` and its uncertainty. A product the source does not identify ("C2+",
+  "unidentified oxygenates", the charge no product accounts for) is an `unresolved_target` in the source's words, never
+  a guessed species; a product below the detection limit is `below_detection_limit` with the limit. A carbon or charge
+  balance is a `balance` result `produced_by` an Analysis (`analysis_kind: balance`) that `HAS_INPUT` the assays it adds
+  up, kept as reported (103 ± 4 % stays 103 ± 4 %); never compute a remainder or a closure the source does not state.
+  A reference to a result (`TESTS.result_refs`) names it by its id: `{record: <test>, path: /result_values/<id>}`.
 - **Missingness with a reason.** A value the source does not state is `not_reported` with a
   `missing_reason`: `not_stated_in_source`, `not_curated` (you did not look, e.g. SI or source-data
   files not examined), `ambiguous_in_source` (keep every variant), `withheld` or `not_extractable`.
