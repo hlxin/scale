@@ -624,7 +624,8 @@ def test_the_bundle_export_of_every_pass_fixture_is_a_valid_bundle(tmp_path, fix
     d = load_doc(P9 / fixture)
     m = kgbundle.export(d, spec_of(d), tmp_path / "b", "fx", created="2026-10-06T00:00:00Z")
     schema = json.loads((tmp_path / "b/kg/schema.json").read_text())
-    assert all(t["from"] and t["to"] for t in schema["edge_types"].values())
+    assert all(isinstance(t["from"], list) and isinstance(t["to"], list) for t in schema["edge_types"].values())
+    assert schema["edge_types"]["REPORTED_IN"]["from"] and schema["edge_types"]["REPORTED_IN"]["to"]   # an ANY end is []
     g = json.loads((tmp_path / "b/kg/graph.json").read_text())
     if all(n["label"] == "Source" for n in d["nodes"]):
         assert not [e for e in g["links"] if e["type"] == "REPORTED_IN"]

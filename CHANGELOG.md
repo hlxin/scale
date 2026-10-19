@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- **Bundle schema: an endpoint declared `ANY` is exported unconstrained (tooling; no schema version raised).** Requested
+  in #44. `REVISES` (both ends), and the targets of `HAS_INPUT`, `HAS_OUTPUT`, `ABOUT` and `INCLUDES`, were written as
+  all 55 kinds in the bundle's `edge_types`; they are now `[]`, which the conformance check reads as unconstrained, so
+  a bundle declares 1,449 kind pairs instead of 6,014. The spec, its digest and the frozen versions are untouched.
+  `REPORTED_IN` still lists its 54 kinds.
 - **Schema 0.5.0 (breaking): the checklist says when a test's reporting cannot be judged, and checks the evidence a
   reading needs.** Requested by @hlxin ("Check reporting applicability and connected kinetic evidence"). Before, a test
   that listed no driving force matched none of the checklist's driving-force cases, so a test stripped of every
