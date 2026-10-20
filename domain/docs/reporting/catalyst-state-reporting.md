@@ -101,9 +101,11 @@ counted in one state is not carried to another: sites change with the conditions
 
 | # | Item | | SCALE |
 |---|---|---|---|
-| G1 | The structural model of the state and the conditions it represents (temperature, chemical potentials or pressures, potential) | R | `CatalystState` with `origin: computed`, `STATE_OF` a `StructureModel` |
-| G2 | Method and level of theory | R | `Computation` |
+| G1 | The structural model of the state and the conditions it represents (temperature, chemical potentials or pressures, potential), with no specimen of its own | R | `CatalystState` with `origin: computed`, `STATE_OF` a `StructureModel` (its coordinates in a Dataset it is `stored_in`), its adsorbates and coverage on `HAS_COMPONENT` (role `adsorbate`, `coverage`, `bound_to`); the conditions on the `Computation` that is `IN_STATE` it |
+| G2 | Method and level of theory: the functional, the dispersion correction and +U, spin, solvation, constant charge or constant potential, the numerical settings and the code | R | `Computation` `level_of_theory`, `dispersion`, `hubbard_u`, `spin_treatment`, `solvation`, `charge_treatment` (with `electrode_potential` and `reference_scale` at constant potential), `settings`, `configuration` and `execution_environment` (Datasets), `USES_SOFTWARE {version}` (scale-catal 0.7.0) |
 | G3 | Which observed state or rate the computation is compared with, and whether it agrees | E | `PREDICTS {agreement, compared_with}` |
+| G4 | Which specimen or state the model stands for, and what that assumes (a facet for the particles, a clean surface, no support) | R | `REPRESENTS {aspect, assumptions}` from the `StructureModel` (scale-catal 0.7.0) |
+| G5 | Each computed energy as a value of its kind, with the reaction it is the energy change of (the reference states) | E | `result_values` with a Variable of kind `reaction_energy`, `reaction_free_energy`, `activation_energy` …, `target` the `Reaction` or `ElementaryStep` (scale-catal 0.7.0) |
 
 ## H. Data
 

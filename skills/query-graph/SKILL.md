@@ -52,7 +52,8 @@ A generated explanation is a presentation of the retrieved evidence, not a repla
    comparable?", "the highest current density") takes `comparison: scientific` (scale-catal 0.3.0 on): each
    value is then compared only within one unit and one context its quantity contract names (a potential's
    reference scale, a current density's normalization, a pressure's convention, a flow's reference
-   conditions, a share's species), stated with `context: {potential_reference: rhe}` to check one, or left
+   conditions, a share's species; a computed energy's kind, reaction, level of theory and charge treatment,
+   scale-catal 0.7.0 on), stated with `context: {potential_reference: rhe}` to check one, or left
    unstated to group the rows; a value whose context is not stated is left out as `missing_context`, never
    assumed. A question about one result (a yield, a selectivity, a Faradaic efficiency of one product) binds it
    with an `entries` step (`{from: test, entries: [result_values, faradaic_efficiency], kind: faradaic_efficiency, as:

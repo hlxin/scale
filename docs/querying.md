@@ -147,11 +147,16 @@ the schema; `scale graph describe` shows it), or the `quantity_kind` of the Vari
   the value states (its unit: `V vs RHE`, `barg`,
   `sccm`; its `basis` and `definition`; its `target`; the property its `normalized_by` names) and from the sibling
   property its binding names (`reference_scale`, `current_normalization`, `fraction_basis`). The statements must agree.
+- **Kind.** Values of two kinds are never compared, even in one unit (scale-catal 0.7.0 on: the group is the kind
+  too): an electronic adsorption energy and an adsorption free energy are both in eV, a fraction and an efficiency
+  both in %, and each stays in its own group. An entries step's `kind` selects the kinds a plan compares.
 - **Check or group.** A filter or a ranking that states a context, `context: {potential_reference: rhe}`, checks it: a
   value on another one is left out as `incompatible_context`. One that states none groups: every row carries
-  `comparison_group` and `compared` (the unit and contexts of each value it was compared on, an evidenced conversion,
-  the denominator it is divided by), `comparison.groups` lists the groups, and a ranking orders rows within a group
-  only. There is no ranking across groups. An `order_by` may also state its `unit`, then ranking only values in it.
+  `comparison_group` and `compared` (the unit, kind and contexts of each value it was compared on, an evidenced
+  conversion, the denominator it is divided by, and what its producer states of the properties its kind shows),
+  `comparison.groups` lists the groups, and a ranking orders rows within a group only. There is no ranking across
+  groups. An `order_by` may also state its `unit`, then ranking only values in it. A value bound by an `edge_as` link
+  (a degree of rate control on its `RATE_CONTROL` link) is ranked like a node's.
 - **Never assumed.** A value whose context nothing states, or states as `other` or `not_reported`, is left out as
   `missing_context` (a current density with no stated normalization is not taken as geometric). One whose statements
   disagree (its basis says ECSA, its record `geometric_area`) is left out as `incompatible_context` and the validator
@@ -168,6 +173,22 @@ the schema; `scale graph describe` shows it), or the `quantity_kind` of the Vari
   product per exposed atom, per site of a kind and per atom are compared with one another, each row showing its basis
   and denominator, so a reader sees how each was calculated; none is left out for its count. The validator warns about
   one that does not say how it was calculated. CQ-15 shows five rates of one methanol rate side by side.
+- **Computed energies** (scale-catal 0.7.0) are compared by kind (a total electronic energy, a reaction or adsorption
+  energy, an enthalpy, a free energy, an elementary activation energy or activation free energy), by the reaction or
+  step they are the energy change of (`process`: the record its target names, or the step that holds it, whose
+  participants are the reference states), by the computation's `level_of_theory` and by its `charge_treatment`
+  (constant charge or constant potential). The last two are read from the value's **producer**: the experiment its
+  `produced_by` names, then the experiment that holds it. A value whose producer has no level of theory (a measurement,
+  a fit) is compared apart from computed ones, never left out; a computed value whose producer does not state its
+  level of theory is left out as `missing_context`, and says so (`its producer … states its level_of_theory as not
+  reported`), and so is one that names no reaction (`its unresolved_target … names no process`). A value whose
+  producer states no charge treatment is compared with the values that state none (`charge_treatment: not stated`), a
+  group of its own. A constant-charge value converted to constant potential by a stated Analysis (an evidenced
+  conversion) is compared with constant-potential ones. What the producer states of its dispersion, `hubbard_u`, spin,
+  solvation, temperature, pressure and potential is shown (`compared` … `shows`), never grouped by; a group whose
+  values state one differently is named in `limitations`. An apparent activation energy is compared by its product;
+  a degree of rate control by its product, showing the temperature and pressure of its run. CQ-23 to CQ-26 run on the
+  computation example.
 - **Basis.** On a kind whose contexts read the value's `basis`, a scientific filter states `context`, not `basis`
   (a plan error otherwise), and a value's basis is read through the contexts. A turnover frequency's basis says how it
   was calculated and is read, never compared as text. On any other kind the basis is compared as text, as in an

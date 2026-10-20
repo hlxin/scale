@@ -57,9 +57,16 @@ A value the experimenter set or the author specified is not a measurement.
   in `results` (`turnover_number`) with its `definition`.
 - A light-off temperature: `results.light_off_temperature` with `definition` ("temperature at 50 %
   CO conversion") and the species in `target`.
-- An activation energy: in the `results` of the Analysis that fits it (`analysis_kind: kinetic_fit`,
-  `USES_MODEL` the rate law as a Model with `equations` and `parameters`). Say apparent or intrinsic
-  in `definition` only as the source says it; when it does not, leave it unsaid.
+- An activation energy from the temperature dependence of measured rates (an Arrhenius plot) is the
+  apparent activation energy of that rate: a `result_values` entry of the Analysis that fits it
+  (`analysis_kind: kinetic_fit`, `USES_MODEL` the rate law as a Model with `equations` and `parameters`,
+  `HAS_INPUT` the tests whose rates it fits), its Variable of kind `apparent_activation_energy` (scale-catal
+  0.7.0), its product or reactant in `target`, and the Analysis's `temperature` the range of the fit
+  (`lower`, `upper`). It is never an elementary step's activation energy. When the source attributes a
+  fitted activation energy to one step of a model (the rate-determining step, after correcting for the
+  adsorption enthalpies), it is that step's `activation_energy`, `origin: fitted`, `produced_by` the fit,
+  with what the correction assumes in the rate law's Model. Say apparent or intrinsic in `definition` as
+  the source says it; when it does not, leave it unsaid. A source that gives Ea/R in K: keep it in K.
 - Reaction orders: `HAS_REACTION_ORDER` from that Analysis to each species, with its `order` (a value).
 - A differential or integral regime, an internal or external diffusion check: the conversion's
   `basis` or `note` ("differential, conversion below 5 %") and an Analysis
@@ -82,21 +89,90 @@ A value the experimenter set or the author specified is not a measurement.
 
 ## Computational details
 
-- A calculation is a Computation (catalysis). The level of theory (functional, basis set, dispersion
-  correction) goes in its `method` as the source names it; `method_id` takes an ontology term when
-  one exists. The code is `USES_SOFTWARE` (`version`) to a Software record.
-- An Experiment with `experiment_kind: computational` (a schema without Computation) has no `method`:
-  the level of theory goes in the `parameters` of the Model it uses (`USES_MODEL`; a functional's name
-  as `text_value`), or in `unmodeled` when there is no model to hold it.
-- A model (a microkinetic model, a force field, a rate law) is `USES_MODEL` to a Model with
-  `model_kind`, `parameters` (a map of value objects; a functional's name as `text_value`),
-  `assumptions` and `validity_domain`.
-- Input and output files are `HAS_INPUT` and `HAS_OUTPUT` to Datasets with `sha256`; the settings
-  file is `configuration`, the container or environment lock `execution_environment`.
-- One `random_seed`: several seeds go in the configuration Dataset or the note.
-- A standard state or reference energy goes in the value's `basis` or `definition`.
-- The structured computation fields some platforms use stay with a deferred catalysis schema change;
-  until then, these slots are enough.
+The fields below are scale-catal 0.7.0; a document pinning an earlier version keeps the method in
+`method` and the settings in a Model's `parameters`, as before.
+
+- **One calculation, one Computation.** Give it its `computation_kind` (`electronic_structure`,
+  `machine_learned`, `force_field`, `microkinetic`, `kinetic_monte_carlo`, `thermodynamic`). Keep the
+  method in the source's words in `method`. The code is `USES_SOFTWARE` (`version`) to a Software record.
+  A study that computes several surfaces is one Computation per surface (or per condition set), `PART_OF`
+  the study, so that each result names the structure it is of. Results of one variable and one reaction
+  in one record that nothing tells apart are an ambiguous repetition.
+- **What a comparison reads.** `level_of_theory`: the functional as the source names it, as a text value
+  (`RPBE`, `PBE`, `BEEF-vdW`, `HSE06`); another method by its name (`CCSD(T)/def2-TZVP`); for a
+  machine-learned model, the model and its checkpoint. When the source does not say, record it as
+  `not_reported` with `missing_reason: not_stated_in_source`; a scientific comparison then leaves the value
+  out and says why. `charge_treatment`: `constant_charge` for an ordinary calculation (a fixed number of
+  electrons, a computational hydrogen electrode included), `constant_potential` for one the source runs at
+  a held electrode potential (grand canonical), with its `electrode_potential` (the scale in the unit:
+  `V vs SHE`) and `reference_scale`. A value whose computation states no charge treatment is compared only
+  with values that state none either.
+- **What a comparison shows.** `dispersion` (a text value: `D3`, `D3(BJ)`, `none`), `hubbard_u` (the U of
+  each element, only when applied), `spin_treatment`, `solvation` (and its model in `settings`), the
+  computation's `temperature`, `pressure` and `electrode_potential`. They are shown with each compared
+  value, and a group whose values state them differently is named; they are never assumed.
+- **Numerical settings:** `settings`, a map of values by key: `cutoff_energy`, `kpoints` (a text value,
+  "4×4×1"), `smearing` (its method in `definition`), `scf_convergence`, `force_convergence`,
+  `pseudopotentials`, `basis_set`, `dipole_correction`, `transition_state_method` (`CI-NEB`, `dimer`),
+  `initial_magnetic_moments`, `solvation_model`, `thermochemistry` (how free energies were obtained:
+  harmonic adsorbate, ideal gas), `potential_method`. Only what the source states.
+- **Files:** the input files are the `configuration` Dataset and the container or environment lock the
+  `execution_environment` Dataset, each with `version` and `sha256`; outputs are `HAS_OUTPUT` Datasets.
+  One `random_seed`; several go in the configuration Dataset or the note.
+- **Structures:** each structure is a StructureModel the Computation `USES_MODEL`: its `representation`
+  (`periodic_slab`, `bulk`, `cluster`, `molecule`), `composition`, `facet`, and in `parameters` the
+  `supercell` (a text value, "p(2×2)"), `layers`, `fixed_layers`, `vacuum`, `lattice_constant` (and how it
+  was obtained, in `definition`), `boundary_conditions` and `relaxation`. Its coordinates are the Dataset
+  it is `stored_in` (`version`, `sha256`). A transition state is a StructureModel the step names with
+  `TRANSITION_STATE`.
+- **Coverage and the state a model stands for.** What adsorbs on the model, and how much, is a computed
+  CatalystState that is `STATE_OF` the model and `DETERMINED_BY` the computation, with `HAS_COMPONENT`
+  (role `adsorbate`, `coverage`, `bound_to` the site); the computation is `IN_STATE` it. Add no specimen
+  for it. When the source says which sample or state the model stands for, the model `REPRESENTS` it,
+  with what of it (`aspect`: "the (111) terraces of its Pt particles") and what that assumes
+  (`assumptions`: a clean surface, no support, a coverage).
+- **Computed energies.** Each energy is a `result_values` entry of the computation, or a value of the
+  step that holds it (`produced_by` the computation), of its kind: `electronic_energy` (a total energy;
+  its `target` the StructureModel), `reaction_energy` (an electronic energy change; an adsorption energy
+  is one), `reaction_enthalpy`, `reaction_free_energy`, `activation_energy` (an elementary step's
+  barrier), `activation_free_energy`. A reaction or adsorption energy names, as its `target`, the Reaction
+  it is the energy change of, whose participants (`HAS_PARTICIPANT` with `coefficient` and `phase`) are
+  its reference states: "H2O(g) − H2(g) + * → O*" and "1/2 O2(g) + * → O*" are two reactions, never one
+  energy. When the source does not say what an energy is relative to, write its words in
+  `unresolved_target`. A value the source reports with the opposite sign (a binding energy that is
+  positive for stronger binding) is the energy of the reverse reaction: name that reaction, keep the
+  number as printed, and never flip a sign. A zero-point-corrected energy says so in `definition`. A free
+  energy or an enthalpy is evaluated at its computation's `temperature` (and `pressure`,
+  `electrode_potential`): the validator warns about one that states none.
+- **A value converted from one treatment to another** (a constant-charge energy converted to constant
+  potential, a potential converted to another scale) stays on the record of the calculation it was
+  converted from, `origin: derived`, `produced_by` the Analysis that converted it (with what it used:
+  its own `temperature` and `electrode_potential`), and says in `definition` what it now is ("converted
+  to constant potential by charge extrapolation, at 0.9 V vs SHE"). Only so is it compared with values of
+  the treatment it was converted to.
+- **Kinetic parameters.** An elementary step's Arrhenius parameters (`pre_exponential_factor`,
+  `temperature_exponent`, `activation_energy`, `sticking_coefficient`, `coverage_dependence`) are the
+  step's, with their origin and `produced_by`; a mechanism file is a Mechanism with `uri` and `sha256`.
+  The sensitivity of a rate to one step (the degree of rate control) is `RATE_CONTROL` from the
+  microkinetic Computation to the step, `degree_of_rate_control` with its product in `target`; a
+  sensitivity at other conditions is another Computation (`PART_OF` the model), each with its
+  `temperature`, `pressure`, `conditions` (partial pressures, conversion) and the state it is `IN_STATE`.
+- **Machine-learned predictions.** The computation (`computation_kind: machine_learned`) `USES_MODEL` the
+  trained Model, with its `version` (the checkpoint) and the Dataset its weights are `stored_in`. The data
+  it was fitted to is what an Experiment that `EVALUATES` it with `evaluation_kind: calibration` takes as
+  `HAS_INPUT {role: training_data}`; each validation is an Experiment that `EVALUATES` it with
+  `evaluation_kind: validation` (its criterion and outcome, and its errors in `result_values`) on the data
+  it `HAS_INPUT` as `validation_data` or `test_data`. The validator reports a validation on data the model
+  was fitted to: a fit to its own data is a calibration, not independent validation. A predicted value
+  is `origin: predicted`; one that sits on another record names the computation in `produced_by`.
+- **Balances.** List every participant of a reaction or step with its `role` and `coefficient`, and give
+  each species its `elemental_composition` (or a formula that can be read) and its `charge`. The
+  validator then reports whether the participants balance in atoms and in charge, each on its own; a
+  species whose charge is not stated leaves the charge balance not checkable, and is never taken as
+  neutral. `balance_status` is what the source says; never change it to match the check.
+- An Experiment with `experiment_kind: computational` that is not a Computation (a fit, a validation)
+  keeps the level of theory in the `parameters` of the Model it uses (`USES_MODEL`; a functional's name as
+  `text_value`), or in `unmodeled` when there is no model to hold it.
 
 ## Reactor, bed and catalyst-body keys
 

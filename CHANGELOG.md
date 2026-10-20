@@ -2,6 +2,49 @@
 
 ## Unreleased
 
+- **Schema 0.7.0 (breaking): computed energies and kinetic parameters are compared under explicit definitions.**
+  Requested by @hlxin ("Define computational energy and mechanism comparison requirements"). Before, a computed
+  adsorption energy was a number in eV like any other: a scientific comparison could rank an electronic adsorption
+  energy with an adsorption free energy, energies relative to different reference molecules, constant-charge and
+  constant-potential results, or values whose method was never stated.
+  - **Kinds of energy.** The kernel names eight kinds (provisional): total electronic energy, reaction energy (an
+    adsorption energy is one), reaction enthalpy, reaction free energy, an elementary step's activation energy and
+    activation free energy, the apparent activation energy of an overall rate, and the degree of rate control. An
+    energy is in eV, kJ/mol, Ha or Ry; an activation energy also in K (Ea/R, as Cantera allows). A comparison never
+    puts two kinds in one group, even in one unit (this also keeps a fraction and an efficiency apart).
+  - **What makes two energies comparable.** A reaction, adsorption or activation energy names the reaction or step it
+    is the energy change of; that reaction's reactants and products, with their coefficients, are its reference states
+    (O relative to H2O and H2 is another energy than O relative to O2). The computation that produced it states its
+    level of theory (the functional) and whether it held the charge or the potential constant. A value that states no
+    reaction, or whose computation states no level of theory, is left out of a comparison with that reason; one whose
+    charge treatment is not stated is compared only with others that do not state it. A constant-charge result that an
+    analysis converted to constant potential is compared with constant-potential ones. Basis: Catalysis-Hub (Winther et
+    al. 2019, doi:10.1038/s41597-019-0081-y: energies from different codes and functionals are not necessarily directly
+    comparable); constant inner potential DFT (Melander et al. 2024, doi:10.1038/s41524-023-01184-4).
+  - **Shown, not grouped.** The dispersion correction, +U, spin treatment, solvation, temperature, pressure and
+    electrode potential of the computation are shown with each compared value, and a group that mixes them is named; the
+    validator warns when a free energy or an enthalpy states no temperature. Basis: AQCat25 (Allam et al. 2026,
+    doi:10.1038/s41524-026-02099-6: spin treatment can change an adsorption energy by about 1 eV on magnetic surfaces).
+  - **Computations.** A Computation states its kind (electronic structure, machine-learned, microkinetic, …), its level
+    of theory, dispersion, +U, spin, solvation, charge treatment and numerical settings; input files, environment and
+    structures stay in versioned, checksummed Datasets (a model's new `stored_in`). A state computed on a structure model
+    has no specimen of its own; the model says which specimen or state it stands for, and what that assumes
+    (`REPRESENTS` with `aspect` and `assumptions`). A machine-learned prediction names its model, checkpoint, training
+    data and validations; the validator reports a validation made on the data the model was fitted to.
+  - **Kinetic parameters.** An elementary step's activation and reaction energies, and a degree of rate control, are bound
+    to their kinds (the breaking part: their units are now checked). An apparent activation energy from an Arrhenius fit
+    is its own kind, never returned as a step's barrier; a degree of rate control is shown with the temperature and
+    pressure of the run that found it.
+  - **Balances.** The validator reports whether a reaction's or a step's recorded participants balance in atoms and in
+    charge, each check on its own, naming what it lacks (a species whose charge is not stated is never taken as
+    neutral). An imbalance is a warning; the source's `balance_status` is kept as it is. Basis: Cantera's element
+    balance check.
+  - **Examples and questions:** a synthetic computation example (domain/examples/scale-catal/computation-examples/) and
+    CQ-23 to CQ-26; three counterexamples; recipes in skills/curate-source/references/recipes.md (Computational details).
+  - **Migration:** the 0.6.0 -> 0.7.0 rule rewrites nothing; it stops on a value it cannot map (an activation energy in
+    volts, an adsorption energy whose target is the adsorbate). Every example document moved to 0.7.0 unchanged.
+  - **Also:** an `order_by` can rank a property of a link bound with `edge_as` (it returned nothing before).
+
 - **Recording recipes for preparations and characterizations, with examples and competency questions (no schema
   change; scale-catal 0.6.0).** Requested by @hlxin ("Add reproducible synthesis and characterization recipes").
   - **Recipes** (skills/curate-source/references/recipes.md): the batch, its purchased lots and its steps; supported-
