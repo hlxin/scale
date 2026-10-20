@@ -128,6 +128,7 @@ Applied by `build_list.py` to title + abstract; papers that fail never enter the
 - **Citation chasing** (`search.py --topic <slug> --citing [--since DATE]`): OpenAlex lists every work that cites the
   topic's core papers (relevance >= 4, or all in-scope papers when unscreened). Results land in `raw/citing*/` and go
   through the same gate (`build_list.py --run citing`). It finds papers that describe the topic in other words.
-- **Lists from the user** (Web of Science / Scopus / Zotero exports, DOIs, a web page with DOIs): `import_list.py
+- **Lists from the user** (Web of Science / Scopus / Zotero exports, Google Patents CSV, SCALE corpus lists, DOIs,
+  patent numbers, a web page with DOIs): `import_list.py
   --topic <slug> --file savedrecs.txt` (or `--url ...`), then `build_list.py --topic <slug> --run manual`. Imported
   papers skip the gate; the file's abstracts and author keywords are kept.

@@ -141,7 +141,7 @@ def merge(group):
          "landing_urls": [], "locations": [], "licenses_seen": [], "crossref_licenses": [], "relation": None,
          "alternative_id": None, "epmc_fulltext": [], "update_to": None, "link": None, "relevance_score": None,
          "keywords": [], "authors_detail": [], "doc_types": [], "key": None, "abstract_source": None,
-         "supplement_to": None}
+         "supplement_to": None, "decision": None}
     seen = set()
     for r in group:
         src = r.get("source")
@@ -169,6 +169,8 @@ def merge(group):
             m["key"] = r["key"]
         if r.get("supplement_to") and not m["supplement_to"]:
             m["supplement_to"] = r["supplement_to"]
+        if r.get("decision"):
+            m["decision"] = r["decision"]     # an imported list's scope decision (the latest import wins)
         for k in ("year", "journal", "publisher", "type", "oa_status"):
             if m[k] in (None, "") and r.get(k) not in (None, ""):
                 m[k] = r[k]
@@ -371,11 +373,16 @@ def build_batch(proj, led, topic, gate, year_from, files, vocab):
     del si_recs, title_parent
     cands, dstats = dedup(recs)
     del recs
-    created = existing = errata = 0
+    created = existing = errata = decided = 0
     hints, created_ids, ids = [], [], []
     with led.tx():
         for m in cands:
             pid, new = led.upsert(m, topic)
+            d = m.get("decision")
+            if d:                  # import_list.py --scope file / in: a manual decision the screening keeps
+                led.set_topic(pid, topic, relevance=d.get("relevance"), relevance_note=(d.get("note") or None),
+                              relevance_method="manual", in_scope=int(bool(d.get("in_scope"))))
+                decided += 1
             ids.append(pid)
             created += new
             if new:
@@ -407,6 +414,7 @@ def build_batch(proj, led, topic, gate, year_from, files, vocab):
     stats = {"raw_records": n_raw, "si_deposits_set_aside": n_si, "si_links_added": n_links,
              "off_topic_dropped_by_gate": n_off, "older_than_year_from": n_old, "unique_papers": len(cands),
              "new_in_ledger": created, "already_in_ledger": existing, "errata_or_corrections": errata,
+             "manual_decisions": decided,
              "topics_assigned": n_topics, **dstats}
     return stats, hints, created_ids
 

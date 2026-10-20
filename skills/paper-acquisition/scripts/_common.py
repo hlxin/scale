@@ -56,7 +56,8 @@ SOURCE_LABEL = {"openalex": "OpenAlex", "crossref": "Crossref", "crossref_prepri
                 "mcloud": "Materials Cloud Archive", "eric": "ERIC", "core": "CORE", "scopus": "Scopus",
                 "springer": "Springer Nature", "wos": "Web of Science", "lens": "Lens.org",
                 "lens_patents": "Lens.org (patents)", "ieee": "IEEE Xplore", "ads": "NASA ADS", "epo": "EPO (patents)",
-                "citations": "Citation chasing (OpenAlex)", "manual": "Imported list", "legacy": "Previous run"}
+                "citations": "Citation chasing (OpenAlex)", "manual": "Imported list", "legacy": "Previous run",
+                "scale": "SCALE corpus list"}
 
 # Document types (papers.doc_type). Datasets and software are indexed but never downloaded.
 DOC_TYPES = ["article", "review", "preprint", "conference-paper", "book-chapter", "book", "thesis", "report", "patent",

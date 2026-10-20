@@ -6,7 +6,7 @@ allowed-tools:
   - Bash(nohup python3 -I ${CLAUDE_SKILL_DIR}/scripts/*)
   - Bash(nohup zsh ${CLAUDE_SKILL_DIR}/scripts/run_paywalled.sh *)
   - "scale corpus check <manifest>"     # SCALE checks a frozen corpus (freeze_corpus.py)
-version: 3.5.0
+version: 3.6.0
 scale_release: ">=v0.2.0"
 inputs:
   - A topic in the user's words, or a Web of Science, Scopus or Zotero export, a list of DOIs or a web page of them
@@ -212,7 +212,7 @@ over 50,000 papers gets the batched routes; give a subset the per-paper ones wit
 repository copy ↔ journal article, same paper without/with DOI, Angewandte twins, byte-identical PDFs, one patented
 invention filed in several offices (WO, EP, US … and its HAL/OSTI copy: same title and inventors; one row keeps every
 number), and SI deposits indexed as papers (they become SI links of their paper). A dataset is never merged into its
-paper. Each merge is logged with the full merged row. Only its `to_review` pairs go to the user — the same title
+paper, and two numbers of one office's series (US1625924 and US1625925, same title, same day) never into one row. Each merge is logged with the full merged row. Only its `to_review` pairs go to the user — the same title
 under two DOIs, nearly the same title by the same first author, or two patents with the same title whose inventors
 are unknown:
 show them side by side (title, DOI, venue, year; all of them in `.scripts/dedup_review.csv`) and ask: Keep them
@@ -348,12 +348,19 @@ merge into the same ledger rows (same IDs, nothing lost). Use `search.py` withou
 ## Adding a list or an export
 
 A Web of Science export (Plain text, Tab-delimited, BibTeX or RIS), a Scopus export (CSV, BibTeX, RIS), a Zotero /
-EndNote / Mendeley file, a list of DOIs or a web page of DOIs: `import_list.py --topic <slug> --file <path>` (or
-`--url`). It keeps the file's abstracts and author keywords and adds Web of Science / Scopus to the Database column;
-Excel files are refused (ask for Plain text or Tab-delimited instead). Then the Index steps from 3 on, for the
-imported run only: `build_list.py --topic <slug> --run manual` → `classify_access.py` → `screen.py` → `find_si.py`
-→ `dedup.py --apply` → report (papers added, abstracts kept from the file, duplicates merged, imported papers the screening put
-out of scope). A new topic gets `init_topic.py` first.
+EndNote / Mendeley file, a Google Patents CSV, a SCALE corpus list (a graph's `sources.json`), a list of DOIs or
+patent numbers, or a web page of DOIs: `import_list.py --topic <slug> --file <path>` (or `--url`). It keeps the
+file's abstracts and author keywords and adds Web of Science / Scopus to the Database column; a patent number
+(US1558559A, US-1558559-A, US 1,558,559) becomes a patent row keyed by office and number, the row a patent search
+finds. Excel files are refused (ask for Plain text or Tab-delimited instead). Who decides the scope: the screening
+(default); `--scope file` the file's own decisions (a SCALE list's statuses: in_scope, not_retrieved,
+held_out_target, after_cutoff in; off_scope, excluded, retracted out, with the reason); `--scope in` every paper in
+(a list someone chose by hand). Those two are manual decisions: later screening keeps them. Then the Index steps
+from 3 on, for the imported run only: `build_list.py --topic <slug> --run manual` → `classify_access.py` →
+`screen.py` → `find_si.py` → `dedup.py --apply` → report (papers added, abstracts kept from the file, duplicates
+merged, imported papers the screening put out of scope). A new topic gets `init_topic.py` first; papers the whole
+catalog should hold too go into it the same way (`--scope in`), and `topics.py set --ids ... --main <term> --add`
+gives a list's papers the vocabulary term they are about, in front of their own Topic A/B/C.
 
 ## Questions and lists (no mode)
 
@@ -384,12 +391,12 @@ python3 -I ${CLAUDE_SKILL_DIR}/scripts/export.py --name <name> --topic <slug> [-
 | `init_topic.py` | `--list` / `--probe` topics; create/update a topic; `--check` validates the plan |
 | `keys.py` | which sources are ready, which keys are missing; `--init` key file, `--test` keys |
 | `search.py` | every query on every source; `--count-only`, `--since`, `--citing` |
-| `import_list.py` | add a WoS / Scopus / Zotero export (abstracts kept), DOIs or a web page of DOIs to a topic |
+| `import_list.py` | add a WoS / Scopus / Zotero export (abstracts kept), a Google Patents CSV, a SCALE corpus list, DOIs, patent numbers or a web page of DOIs to a topic; `--scope screen\|file\|in` |
 | `build_list.py` | gate, dedup, doc types, SI links, merge into the ledger, vocabulary topics, refresh index; `--batches N`, `--no-export`, `--si-links-only` |
 | `classify_access.py` | access type, exact license, abstracts/keywords (any size, blocks; OpenAlex first, Unpaywall capped); `--recheck-older-than DAYS`, `--abstracts-only`, `--no-export` |
 | `screen.py` | relevance 0-5 + Topic A/B/C; `prep/next/merge`, `api`, `keywords`, `none`, `status`; `--no-export` |
 | `find_si.py` | every in-scope paper's SI listed in the index before any download (Crossref components, DataCite, Crossref relations, PMC; Elsevier/MDPI CDNs and publisher pages up to 50,000 papers); `--deep`, `--no-deep`, `--ids`, `--no-export` |
-| `topics.py` | `vocab`, `summary`, `assign` (`--no-export`), `proposed`, `set` (manual correction) |
+| `topics.py` | `vocab`, `summary`, `assign` (`--no-export`), `proposed`, `set` (manual correction; `--add` keeps the paper's own topics after it) |
 | `status.py` | progress table + download estimate (Download gate, reports, "how far along") |
 | `download_open.py` | open-route downloads, PDF license check, folder routing; `--added-since`, `--retry-failed` |
 | `check_paywalled_access.py` / `run_paywalled.sh` | EZproxy check / the single rate-limited runner (all topics) |

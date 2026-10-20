@@ -15,7 +15,8 @@ Screening runs on the index BEFORE downloading, so nothing is fetched (or spent 
 outside the topic. Every method writes, per topic, `Relevance` 0-5, a short note, and in/out of scope: in scope when
 Relevance ≥ threshold (default 3, `config.screening.threshold`). Out-of-scope papers move to the topic's
 `index/excluded.csv` with `Notes: Out of scope: <reason>` and are never downloaded. Errata/correction notices are
-skipped. Claude and API screening also choose each paper's Topic A/B/C in the same pass ([topics.md](topics.md));
+skipped, and so are manual decisions (method `manual`: an imported list's, `import_list.py --scope file` or `in`) —
+no method re-scores them. Claude and API screening also choose each paper's Topic A/B/C in the same pass ([topics.md](topics.md));
 keyword screening and no screening use the deterministic vocabulary match.
 
 Scale (shared by all methods): 5 core topic with substantive results or a review of it · 4 main theme · 3 one of

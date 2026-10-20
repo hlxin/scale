@@ -1,7 +1,8 @@
 # CO2 reduction driven by electricity: paper database
 
-A SQLite database of **23,630 papers on CO2 reduction driven by electricity**, taken from a whole-field catalysis
-index (2,313,014 records) built on 2026-10-13/14 with the [`paper-acquisition`](../skills/paper-acquisition/) skill.
+A SQLite database of **23,631 papers on CO2 reduction driven by electricity**, taken from a whole-field catalysis
+index (2,313,134 records on 2026-10-20) built on 2026-10-13/14 with the [`paper-acquisition`](../skills/paper-acquisition/)
+skill and updated in place since.
 It is an index of records, not a corpus. This folder holds its documentation and a query tool; the database itself
 is shared outside git.
 
@@ -13,7 +14,7 @@ no-derivatives (CC BY-NC-ND), which a licence rule in `REUSE.toml` cannot state 
 
 | File | Size | Use |
 |---|---|---|
-| `co2-reduction-electricity.db.gz` | 37 MB | shared outside git; `gunzip -k co2-reduction-electricity.db.gz` gives `co2-reduction-electricity.db` (122 MB, SQLite), the version described here (built 2026-10-16) |
+| `co2-reduction-electricity.db.gz` | 37 MB | shared outside git; `gunzip -k co2-reduction-electricity.db.gz` gives `co2-reduction-electricity.db` (123 MB, SQLite), the version described here (built 2026-10-20) |
 
 Put the unpacked file in this folder (or name it in `CATALYSIS_PAPERS_DB`) and [`consult.py`](consult.py) finds it.
 
@@ -44,7 +45,7 @@ retracted papers are left out.
 | Driver of the CO2 reduction | Strict | Broad only | Total |
 |---|---|---|---|
 | Electrochemical (electrocatalysis, electrolysis, metal-CO2 batteries, bioelectrocatalysis) | 17,526 | 4,392 | **21,918** |
-| Non-thermal plasma (electric discharge) | 1,636 | 129 | 1,765 |
+| Non-thermal plasma (electric discharge) | 1,636 | 130 | 1,766 |
 | Electrified heating (Joule, induction, microwave) | 73 | 82 | 155 |
 
 *Strict:* CO2 reduction and the driver appear in the title or among the paper's main topics (Topic A/B/C). *Broad
@@ -53,13 +54,13 @@ only:* they appear only in the abstract or keywords. A paper can have two driver
 
 Electrochemical, strict: 17,368 papers (14,800 articles, 1,507 reviews, 463 preprints, 275 conference papers, 130
 theses, 113 book chapters …; plus 146 datasets). 14,035 papers have CO2RR as Topic A, B or C. Access type of the
-21,918 electrochemical records: OA 4,750 · OA+ND 1,281 · Free-to-read 3,475 · Paywalled 12,412.
+21,918 electrochemical records: OA 4,737 · OA+ND 1,286 · Free-to-read 3,483 · Paywalled 12,412.
 
-**Abstracts** are included only where the paper's licence allows redistribution (Access type OA or OA+ND: 6,444
+**Abstracts** are included only where the paper's licence allows redistribution (Access type OA or OA+ND: 6,436
 papers). The `License` and `License URL` columns give each paper's licence, and an abstract stays under it.
 
 **Supporting information** was looked up for every paper before anything is downloaded (`find_si.py`): **12,440 SI
-files and deposits for 8,182 papers** (OA 2,185 · OA+ND 753 · Free-to-read 1,056 · Paywalled 4,188), listed in table
+files and deposits for 8,182 papers** (OA 2,178 · OA+ND 758 · Free-to-read 1,058 · Paywalled 4,188), listed in table
 `supplements` (DOI or file URL, title, and the route that found it: Elsevier SI CDN 3,418 · ACS/PLOS `.s001`
 components 3,326 · PubMed Central 2,955 · data deposits such as CCDC structures and Dryad 1,451 · publisher pages
 993 · MDPI CDN 140 · Figshare/DataCite/other 157) and in the `si` column ("Available (n deposits)"). SI that only sits
@@ -95,14 +96,14 @@ WHERE papers_fts MATCH 'copper' AND p.access_type IN ('OA', 'OA+ND');
 `python3 -I consult.py count --concept co2-reduction --driver electro` ([`CONSULT.md`](CONSULT.md) explains the
 concepts and drivers). The membership of this database is `co2_selection`, decided on the full database with every
 abstract; consult.py's text matching on this copy sees abstracts only for OA papers, so it finds slightly fewer
-(17,355 strict and 21,026 broad electrochemical records).
+(17,355 strict and 21,025 broad electrochemical records).
 
 `papers.downloaded` and `files` record which papers had their PDF (and their SI, where found) in the local corpus
 when the file was built. The PDFs are not shared.
 
 ## Limits
 
-- The full catalysis database (2,313,014 records, 10.9 GB) is not shared here either.
+- The full catalysis database (2,313,134 records, 12.9 GB) is not shared here either.
 - Keyed databases were not searched (Scopus, Web of Science, CORE, Lens, EPO, Springer Nature, IEEE Xplore, NASA
   ADS).
 - The selection uses deterministic text and vocabulary rules: the strict level is precise, the broad level adds
