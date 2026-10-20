@@ -47,6 +47,7 @@ BLOCK_KEYS = {"maturity", "description", "basis", "dimensions", "units", "contex
 UNIT_KEYS = {"description", "prefixes", "prefixed", "unprefixed", "spellings", "stating"}
 CONTEXT_KEYS = {"description", "read_from", "values", "unspecified", "refine", "open"}
 KIND_KEYS = {"description", "dimensions", "compare_by", "denominator", "share", "closure", "maturity"}
+UNSTATED = ("warning",)     # what the validator does with a value that does not say how it was calculated
 _EXP = re.compile(r"^(?P<base>.*?)(?:\^|\*\*)?(?P<exp>[-+]?\d+)$")
 _NUMBER = re.compile(r"^\d+(?:\.\d+)?$")
 _FORMULA = re.compile(r"^(?:[A-Z][a-z]?\d*)+[+-]?$")          # a species after a counted entity (atom per atom Cu)
@@ -252,17 +253,19 @@ class Contracts:
                 compare.append(c)
             den = k.get("denominator")
             if den is not None and (not isinstance(den, dict) or not den.get("dimensions")
-                                    or set(den) - {"description", "dimensions", "kinds"}
-                                    or not isinstance(den.get("kinds", []), list)):
+                                    or set(den) - {"description", "dimensions", "kinds", "unstated"}
+                                    or not isinstance(den.get("kinds", []), list)
+                                    or den.get("unstated", "warning") not in UNSTATED):
                 raise ScaleError(f"quantities.kinds.{name}.denominator: names its dimensions (and, optionally, the kinds "
-                                 "of value it may name)")
+                                 f"of value it may name, and unstated: {' or '.join(UNSTATED)})")
             if k.get("share") and k.get("closure"):
                 raise ScaleError(f"quantities.kinds.{name}: a share (part of a whole) is not a closure (found over put in)")
             self.kinds[name] = {"dimensions": dims, "compare_by": compare, "share": bool(k.get("share")),
                                 "closure": bool(k.get("closure")),
                                 "denominator": [self.dim(x, f"kinds.{name}.denominator") for x in den["dimensions"]]
                                 if den else None,
-                                "denominator_kinds": [str(x) for x in den.get("kinds") or []] if den else []}
+                                "denominator_kinds": [str(x) for x in den.get("kinds") or []] if den else [],
+                                "denominator_unstated": den.get("unstated") if den else None}
         for name, k in self.kinds.items():
             bad = [x for x in k["denominator_kinds"] if x not in self.kinds or self.kinds[x]["share"]]
             if bad:
@@ -724,6 +727,13 @@ def denominator(v: dict, records: dict, spec: dict | None = None, variables: dic
     return out
 
 
+def unstated_ok(v: dict) -> bool:
+    """Whether a value says how it was calculated: it names what it is divided by (``normalized_by``) or states it in
+    its ``basis`` or ``definition``."""
+    return isinstance(v.get("normalized_by"), dict) or any(isinstance(v.get(k), str) and v[k].strip()
+                                                           for k in ("basis", "definition"))
+
+
 def bound_quotient(v: dict, den: dict | None) -> str | None:
     """Why a value divided by a one-sided bound does not say what it is, or None: a quantity divided by at most N is at
     least the quotient (and by at least N, at most), so the value states that bound (``bound``); one that states none,
@@ -865,7 +875,12 @@ def _check_value(c: Contracts, rep, rid: str, where: str, got: Read, v: dict, re
                                           f"denominator of {kind} (a {' or a '.join(wanted)})")
                 why = bound_quotient(v, den["value"])
                 if why:
-                    rep.add("warning", rid, f"{where}: {why}; a scientific comparison leaves it out until it does")
+                    rep.add("warning", rid, f"{where}: {why}; it stays as reported, and a scientific comparison shows the "
+                                            "bound of what it is divided by")
+    elif c.kinds[kind].get("denominator_unstated") and numbered(v) and not unstated_ok(v):
+        rep.add("warning", rid, f"{where}: this {kind} does not say how it was calculated; name the count it is divided "
+                                "by (normalized_by), or say in its basis or definition what was counted as sites and how "
+                                "(or that the source does not say); it stays as reported")
     if c.kinds[kind]["share"] and numbered(v) and reading is not None and reading.read and not reading.unread:
         _share_advisory(rep, rid, where, kind, v, at[1])
     if c.kinds[kind].get("closure") and numbered(v) and reading is not None and reading.read and not reading.unread:
@@ -1056,6 +1071,12 @@ def diff(a: dict | None, b: dict | None, out: dict) -> None:
         else:
             out["narrowed"] += [f"quantities.kinds.{k}: its denominator no longer names a {x}" for x in sorted(na - nb)]
             out["loosened"] += [f"quantities.kinds.{k}: its denominator may name a {x}" for x in sorted(nb - na)]
+        ua, ub = (xa.get("denominator") or {}).get("unstated"), (xb.get("denominator") or {}).get("unstated")
+        if ub and not ua:
+            out["added"].append(f"quantities.kinds.{k}: a value that does not say how it was calculated is reported ({ub})")
+        elif ua and not ub:
+            out["loosened"].append(f"quantities.kinds.{k}: a value that does not say how it was calculated is no longer "
+                                   "reported")
         if bool(xa.get("share")) != bool(xb.get("share")):
             out["changed"].append(f"quantities.kinds.{k}: share {bool(xa.get('share'))} -> {bool(xb.get('share'))}")
         if bool(xa.get("closure")) != bool(xb.get("closure")):
@@ -1239,4 +1260,6 @@ def describe_binding(c: Contracts, d: dict) -> str | None:
     return (f"quantity {k} [{', '.join(c.names.get(x, formula(x)) for x in c.kinds[k]['dimensions'])}]"
             + (f"; compared by {by}" if by else "")
             + (f"; divided by {' or '.join(c.names.get(x, formula(x)) for x in den)}"
-               + (f", a {' or a '.join(dk)}" if dk else "") + " (normalized_by)" if den else ""))
+               + (f", a {' or a '.join(dk)}" if dk else "") + " (normalized_by)"
+               + ("; says how it was calculated (normalized_by, basis or definition)"
+                  if c.kinds[k].get("denominator_unstated") else "") if den else ""))

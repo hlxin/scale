@@ -620,8 +620,10 @@ class Comparison:
     stated, or is stated as other or not reported, is left out as ``missing_context``: never assumed; one whose
     statements disagree (its basis and its record's sibling) as ``incompatible_context``, unless it is an evidenced
     conversion (derived or computed, with produced_by). A value whose ``normalized_by`` names a value that is not
-    reported, or that the view withholds, is left out as ``missing_context``, and so is one divided by a one-sided bound
-    that does not state the bound it is itself (a rate divided by at most N sites is at least the quotient). Nothing is
+    reported, or that the view withholds, is left out as ``missing_context``; one divided by a one-sided bound is
+    compared as reported, its row's denominator showing the bound (a rate divided by at most N sites is at least the
+    quotient). A value whose kind says how it was calculated (a turnover frequency) is compared as reported whatever its
+    basis says (per exposed atom, per site of a kind), its basis and denominator kept in its row. Nothing is
     converted."""
 
     def __init__(self, plan: dict, spec: dict, g: Graph):
@@ -657,12 +659,13 @@ class Comparison:
         return k if k in self.c.kinds else None
 
     def reads_basis(self, kind: str) -> bool:
-        return any("basis" in self.c.contexts[e["context"]]["read_from"] for e in self.c.kinds[kind]["compare_by"])
+        """Whether a value's basis is read, not compared as text: its kind's contexts read it, or it says how the value
+        was calculated (a kind whose denominator is marked unstated: a turnover frequency's per exposed atom)."""
+        return bool(self.c.kinds[kind].get("denominator_unstated")) or \
+            any("basis" in self.c.contexts[e["context"]]["read_from"] for e in self.c.kinds[kind]["compare_by"])
 
-    def _context(self, path: str, got: quantities.Read, want: dict, wanted_unit: Any = None,
-                 x: dict | None = None) -> str | None:
-        """Why a value read under its contract (``x``, the value) cannot be compared on ``want`` (and in
-        ``wanted_unit``), or None."""
+    def _context(self, path: str, got: quantities.Read, want: dict, wanted_unit: Any = None) -> str | None:
+        """Why a value read under its contract cannot be compared on ``want`` (and in ``wanted_unit``), or None."""
         kind, r = got.kind, got.reading
         if r is not None and not r.read:
             return (f"incompatible_unit ({r.text!r} is not a unit the quantity contracts read ({' '.join(r.unread)}), so "
@@ -687,9 +690,6 @@ class Comparison:
             why = absent_reason(dv)
             if why or not quantities.numbered(dv):
                 return f"missing_context ({path}: its normalized_by {den['record']}{den['path']} is {why or 'not a number'})"
-            bq = quantities.bound_quotient(x or {}, dv)
-            if bq:
-                return f"missing_context ({path}: {bq})"
         elif den is not None and not den["found"]:
             return f"missing_context ({path}: its normalized_by {den['record']} is not in this graph (withheld or never curated))"
         if wanted_unit is not None and _stated(wanted_unit) and r is not None and unit_key(r.text) != unit_key(str(wanted_unit)):
@@ -756,7 +756,7 @@ class Comparison:
             if rec.get("_entry") is not None:
                 return None, f"incompatible_unit ({said})", None
             raise ScaleError(said)
-        why = self._context(f["prop"], got, want, x=x)
+        why = self._context(f["prop"], got, want)
         if why is not None:
             return None, why, None
         r, why = _numeric(x, f, op, read_basis=self.reads_basis(got.kind))
@@ -787,7 +787,7 @@ class Comparison:
             if _stated(ob.get("unit")) and unit_key(str(v.get("unit"))) != unit_key(str(ob["unit"])):
                 return None, f"incompatible_unit ({v.get('unit')!r}; the ranking is in {ob['unit']!r})"
             return self.tag(None, v), None
-        why = self._context(prop, got, ob.get("context") or {}, ob.get("unit"), x=v)
+        why = self._context(prop, got, ob.get("context") or {}, ob.get("unit"))
         return (None, why) if why else (self.tag(got, v), None)
 
     def observe(self, rec: dict, path: str) -> None:

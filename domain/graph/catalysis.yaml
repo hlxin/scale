@@ -319,12 +319,12 @@ nodes:
         - quasi_in_situ
         - ex_situ
         - not_reported
-        description: The mode as the source reports it. operando = under reaction conditions while activity is measured
-          or runs; in_situ = in a controlled environment; quasi_in_situ = after the action without exposure to air;
-          ex_situ = after transfer through air or other environments. The mode is the source's label, kept as
-          reported; whether an operando observation is paired with the performance it is read with (the same specimen,
-          a stated synchronization, the performance measured quantitatively and compared with a conventional reactor or
-          cell) is evaluated from its DURING link (the checklist's operando case), never read from the label.
+        description: The mode as the source reports it. operando = characterized while the kinetics (activity or
+          selectivity) are measured, under reaction conditions; in_situ = in a controlled environment; quasi_in_situ =
+          after the action without exposure to air; ex_situ = after transfer through air or other environments. The mode
+          is the source's label, kept as reported; whether an observation the source calls operando was made while the
+          kinetics were measured (on the same specimen, at the same time) is evaluated from its DURING link (the
+          checklist's operando case), never read from the label.
         maturity: provisional
       information_depth:
         type: enum
@@ -1699,11 +1699,11 @@ edges:
       An in-situ or operando characterization carried out during a catalytic test or procedure, including a
       treatment or procedure step. This asserts temporal overlap, not that the characterization itself measures
       catalytic activity, and not that what it observes corresponds to the performance the test reports. That
-      pairing rests on what the source states besides the overlap: which specimen was observed (specimen), how the
-      observation and the performance measurement were synchronized (timing), whether the performance was measured
-      quantitatively during the observation and compared with a conventional reactor or cell (performance,
-      benchmark). Neither the overlap nor a change in time that tracks the activity makes an observed species or
-      phase active; an assignment is a Claim with its own evidence.
+      pairing rests on what the source states besides the overlap: which specimen was observed (specimen), whether
+      the kinetics were measured while the observation was made (timing), and what of the kinetics was measured, and
+      whether it matched a conventional reactor or cell (kinetics, benchmark). Neither the overlap nor a change in
+      time that tracks the activity makes an observed species or phase active; an assignment is a Claim with its own
+      evidence.
     from:
     - Characterization
     to:
@@ -1726,33 +1726,33 @@ edges:
         maturity: provisional
         values:
         - simultaneous
-        - alternating
         - sequential
         - not_reported
-        description: How the observation and the performance measurement were synchronized, as the source states it (its
-          protocol in note and evidence). simultaneous = recorded at the same time; alternating = taken in turn within
-          the test; sequential = one before or after the other.
-      performance:
+        description: Whether the kinetics were measured while the observation was made, as the source states it (its
+          protocol in note and evidence). simultaneous = during the observation, in the same run (continuously, or by
+          analysing the products at intervals while it ran); sequential = before or after the observation, not during
+          it.
+      kinetics:
         type: enum
         maturity: provisional
         values:
+        - measured
         - matched_to_benchmark
-        - measured_in_cell
         - products_detected
         - not_measured
         - not_reported
-        description: What was measured of the catalytic performance while the observation was made. measured_in_cell =
-          activity or selectivity measured quantitatively in the cell of the observation; matched_to_benchmark = measured
-          so and compared with that of a conventional reactor or cell, with which it agreed (the comparison in the
-          evidence, its test in benchmark); products_detected = products seen, not quantified; not_measured = the
-          reaction ran, but its performance was not measured during the observation.
+        description: What of the kinetics was measured in the cell of the observation. measured = activity or
+          selectivity measured quantitatively (rates, conversion, selectivity); matched_to_benchmark = measured so, and
+          compared with that of a conventional reactor or cell, with which it agreed (the comparison in the evidence, its
+          test in benchmark); products_detected = products seen, not quantified; not_measured = the reaction ran, but
+          its kinetics were not measured.
       benchmark:
         type: ref
         maturity: provisional
         targets:
         - CatalyticTest
-        description: The test in a conventional reactor or cell whose performance the cell's was compared with
-          (performance matched_to_benchmark).
+        description: The test in a conventional reactor or cell whose kinetics the cell's were compared with (kinetics
+          matched_to_benchmark).
   IN_REACTOR:
     from:
     - CatalyticTest
@@ -2641,9 +2641,9 @@ checklist:
     Potential and light: separate the contributions with controls: the same test in the dark (differs in illumination) and at open circuit or without applied potential (differs in electrode potential), each CONTROL_FOR the combined test.
     Stability: a constant trace of performance (a TimeSeries the test HAS_OUTPUT) shows performance_stability, not material_stability; the material is shown unchanged by characterizing it during or after the test (a CatalystState the test reaches, REACHED_BY timing during or after, DETERMINED_BY a characterization: structure after the test, dissolution into the electrolyte). Repeats are REPLICATES links, and a planned set of repeats a Design (planned_replicates).
     Time: a test operated dynamically (pulses, ramps, switching) HAS_OPERATION an Operation with its time_pattern, the quantities it varies and its segments, so its results keep their time-dependent context.
-    Sites: record a site population on the HAS_SITE from the state it was counted or observed in (as prepared, pretreated, working, after the test); sites can change with the conditions, so a count made in one state is never carried to another. A share (population_fraction), a density (site_density), the exposed atoms counted (exposed_metal_count) and the sites a rate is divided by (site_inventory) are four values, each with its origin, uncertainty or bound, and what produced it: the counting measurement, or an Analysis that converts an uptake into sites and USES_MODEL a Model stating what it assumes (the adsorbate's stoichiometry, the particle shape). A turnover frequency names the count it is divided by (normalized_by), and what it counts decides the quantity: a rate per exposed atom is an average over sites that may differ, not a rate per active site. A computed population sits on the computed state, STATE_OF the model; one the source gives only for the formulation on the Catalyst, with no specimen added.
-    Assignments: that a phase, site or species is active, co-active, a spectator, a precursor or an inhibitor for a reaction in a state is a Claim, ABOUT the component (role active, co_active, spectator, precursor or inhibitor), the state (role state), the reaction or product (role reaction, product), the test it concerns (role test) and any elementary step or mechanism (role step, mechanism); SUPPORTS and CONTRADICTS from the tests, characterizations, analyses and claims it rests on name the results with premise_refs. Competing assignments are claims of their own, never merged. Abundance is not activity: a majority phase is assigned nothing unless the source argues it, and a minority one can carry an assignment with its evidence.
-    Operando: an observation the source calls operando is kept as such (observation_mode); the checklist looks, on its DURING link, for a catalytic test under working conditions and a performance measured quantitatively on the same specimen at a stated synchronization (specimen, timing, performance), and for that performance compared with a conventional reactor or cell (performance matched_to_benchmark, benchmark). An overlap in time is not a pairing, and a change that tracks the activity in time does not show that what changed is active.
+    Sites: record a site population on the HAS_SITE from the state it was counted or observed in (as prepared, pretreated, working, after the test); sites can change with the conditions, so a count made in one state is never carried to another. A share (population_fraction), a density (site_density), the exposed atoms counted (exposed_metal_count) and the sites a rate is divided by (site_inventory) are four values, each with its origin, uncertainty or bound, and what produced it: the counting measurement, or an Analysis that converts an uptake into sites and USES_MODEL a Model stating what it assumes (the adsorbate's stoichiometry, the particle shape). A turnover frequency is kept as reported, with how it was calculated: the count it is divided by (normalized_by) and, in its basis or definition, what was counted as sites and how. A rate per exposed atom is an average over sites that may differ, not a rate per active site; a comparison shows each rate with its count. A computed population sits on the computed state, STATE_OF the model; one the source gives only for the formulation on the Catalyst, with no specimen added.
+    Assignments: that a phase, site or species is active, a spectator, a precursor or an inhibitor for a reaction in a state is a Claim, ABOUT the component (role active, spectator, precursor or inhibitor), the state (role state), the reaction or product (role reaction, product), the test it concerns (role test) and any elementary step or mechanism (role step, mechanism); SUPPORTS and CONTRADICTS from the tests, characterizations, analyses and claims it rests on name the results with premise_refs. Competing assignments are claims of their own, never merged. Abundance is not activity: a majority phase is assigned nothing unless the source argues it, and a minority one can carry an assignment with its evidence.
+    Operando: an observation made while the kinetics are measured. One the source calls operando is kept as such (observation_mode); the checklist looks, on its DURING link, for a catalytic test under working conditions whose kinetics were measured on the same specimen while the observation was made (specimen same_specimen, timing simultaneous, kinetics measured or matched_to_benchmark). A conventional reactor or cell the kinetics were compared with is recorded when the source gives one (kinetics matched_to_benchmark, benchmark). An overlap in time is not a pairing, and a change that tracks the activity in time does not show that what changed is active.
     Spectra and fits: a measured spectrum is a Dataset the characterization HAS_OUTPUT; a fit to it is an Analysis (analysis_kind spectral_fit) with its method, its fitted parameters in results (origin fitted, with their uncertainties), the references it HAS_INPUT and its limitations; an alternative model is another Analysis; a site assignment drawn from it is a Claim that cites the fitted parameters (premise_refs). Whether an ensemble signal tells phases apart depends on the technique, the data, the references and the model.
   labels:
     CatalyticTest:
@@ -3005,10 +3005,10 @@ checklist:
             path:
             - edge: DURING
               label: CatalyticTest
-          - name: paired_performance
-            description: the performance measured quantitatively on the same specimen, at a stated synchronization, while it
-              was made (DURING a CatalyticTest with specimen same_specimen, timing simultaneous or alternating and
-              performance measured_in_cell or matched_to_benchmark); an overlap in time alone is not a pairing
+          - name: kinetics_while_characterizing
+            description: the kinetics measured on the same specimen while it was made (DURING a CatalyticTest with
+              specimen same_specimen, timing simultaneous and kinetics measured or matched_to_benchmark); an overlap in
+              time alone is not a pairing
             path:
             - edge: DURING
               label: CatalyticTest
@@ -3019,20 +3019,9 @@ checklist:
                 timing:
                   any_of:
                   - simultaneous
-                  - alternating
-                performance:
+                kinetics:
                   any_of:
-                  - measured_in_cell
-                  - matched_to_benchmark
-          - name: benchmarked_performance
-            description: the performance in the cell of the observation compared with that of a conventional reactor or
-              cell, with which it agreed (DURING a CatalyticTest with performance matched_to_benchmark)
-            path:
-            - edge: DURING
-              label: CatalyticTest
-              edge_where:
-                performance:
-                  any_of:
+                  - measured
                   - matched_to_benchmark
     Analysis:
       when:

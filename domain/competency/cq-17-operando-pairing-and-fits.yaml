@@ -1,21 +1,22 @@
 # A competency question of the catalysis domain (tools/competency.py; `scale domains cq catalysis`).
 # It runs on public synthetic examples, so anyone can rerun it and see the same answer.
 id: CQ-17
-question: Which observations the source calls operando are paired with the performance they are read with, and what
-  does an assignment drawn from one rest on (the measured spectrum, the fit, its limitations)?
+question: Which observations the source calls operando were made while the kinetics were measured, and what does an
+  assignment drawn from one rest on (the measured spectrum, the fit, its limitations)?
 description: |
-  observation_mode is the source's label, kept as reported. DURING says only that a characterization overlapped a run;
-  a pairing of what it observes with the performance rests on what the source states besides (DURING's specimen,
-  timing, performance and benchmark, scale-catal 0.6.0): the same specimen, a stated synchronization, the performance
-  measured quantitatively in the cell and compared with a conventional reactor or cell. The Cu K-edge XAS and the
-  modulation-excitation infrared spectra state it; the DRIFTS observation only overlaps a run, so it is left out of the
-  pairing, and the catalysis checklist reports it missing (paired_performance, benchmarked_performance). A measured
+  Operando means characterized while the kinetics are measured. observation_mode is the source's label, kept as
+  reported. DURING says only that a characterization overlapped a run; that the kinetics were measured while it was
+  made rests on what the source states besides (DURING's specimen, timing, kinetics and benchmark, scale-catal 0.6.0):
+  the same specimen, the kinetics measured in the cell at the same time, and, when the source gives one, a conventional
+  reactor or cell they matched. The Cu K-edge XAS and the modulation-excitation infrared spectra state it; the DRIFTS
+  observation only overlaps a run, so it is left out, and the catalysis checklist reports it missing
+  (kinetics_while_characterizing). A measured
   spectrum (a Dataset), a fit to it (an Analysis, spectral_fit, its parameters fitted, with its limitations) and the
   assignment that cites the fit (a Claim) are three records: the assignment is not the spectrum.
 documents:
   - examples/scale-catal/state-site-examples/sites-and-assignments.json
 plan:
-  question: Which operando observations are paired with a measured, benchmarked performance?
+  question: Which operando observations were made while the kinetics were measured on the same specimen?
   match:
     label: Characterization
     as: observation
@@ -34,21 +35,19 @@ plan:
           op: eq
           value: same_specimen
         - prop: timing
+          op: eq
+          value: simultaneous
+        - prop: kinetics
           op: in
           value:
-            - simultaneous
-            - alternating
-        - prop: performance
-          op: in
-          value:
-            - measured_in_cell
+            - measured
             - matched_to_benchmark
   return:
     - observation.name
     - test.name
     - overlap.specimen
     - overlap.timing
-    - overlap.performance
+    - overlap.kinetics
     - overlap.benchmark
   evidence: true
 expect:
@@ -58,11 +57,11 @@ expect:
   values:
     observation.name:
       - Cu K-edge XAS under reaction
-    overlap.performance:
+    overlap.kinetics:
       - matched_to_benchmark
 variants:
-  - description: Without the pairing conditions, every operando observation that overlaps a run is listed, the DRIFTS one
-      too, with nothing stated of its specimen, timing or performance.
+  - description: Without those conditions, every operando observation that overlaps a run is listed, the DRIFTS one
+      too, with nothing stated of its specimen, timing or kinetics.
     plan:
       steps:
         - from: observation

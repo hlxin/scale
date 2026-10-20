@@ -2,11 +2,12 @@
 
 ## Unreleased
 
-- **Schema 0.6.0 (breaking): site populations belong to a catalyst state, a turnover frequency says what it is divided
-  by, and an operando label is not a pairing.** Requested by @hlxin ("Scope site populations and activity assignments
-  to catalyst states"). Before, a site could be attached only to a catalyst or a sample, so a population counted after
-  reduction read as the population under reaction too. A turnover frequency per exposed atom and one per active site
-  were compared as one quantity, and the schema had no place for the count either was divided by.
+- **Schema 0.6.0 (breaking): site populations belong to a catalyst state, a turnover frequency says how it was
+  calculated, and operando means characterized while the kinetics are measured.** Requested by @hlxin ("Scope site
+  populations and activity assignments to catalyst states"); the turnover-frequency, operando, role and bound rules
+  follow @hlxin's review. Before, a site could be attached only to a catalyst or a sample, so a population counted
+  after reduction read as the population under reaction too, and the schema had no place for the count a turnover
+  frequency was divided by.
   - **Sites in a state.** `HAS_SITE` can start from a `CatalystState` and holds for that state only, so nothing is
     carried to another state or from a sample to its states. It takes four values (provisional): `population_fraction`
     (a share of a stated whole), `site_density`, `exposed_metal_count` (the exposed atoms counted) and `site_inventory`
@@ -15,20 +16,27 @@
     computed population sits on a state of the model, and a count for the formulation on a state of the Catalyst, with
     no specimen added. The kernel gains the kinds `site_fraction`, `site_density` and `site_count` and the count-per-area
     and count-per-mass dimensions.
-  - **Turnover frequencies (the breaking part).** A turnover frequency is now compared only with one for the same
-    product that counts the same kind of site (`site_count_basis`: the exposed atoms, the sites of one kind, or every
-    atom). One that states neither is left out of a scientific comparison as missing context. Its denominator must be
-    a site count or a site density, and may be per gram. A value divided by a one-sided bound must state its own bound,
-    or it is reported and left out of comparisons.
-  - **Assignments.** Which phase, site or species is active, co-active, a spectator, a precursor or an inhibitor is a
-    `Claim` with named `ABOUT` roles, supported or contradicted by the records it rests on (`premise_refs`). This
+  - **Turnover frequencies (the breaking part).** A turnover frequency is used as reported and says how it was
+    calculated: the count it is divided by (`normalized_by`) and, in its `basis` or `definition`, what was counted as
+    sites and how. One that says none of it is a warning, never an error (the denominator's `unstated: warning`).
+    Rates of one product on different counts (per exposed atom, per site of a kind, per atom) are compared as
+    reported, each row showing its basis and count; a rate is compared only with rates of the same product, as
+    selectivities and yields are, so one that names no product is left out of a scientific comparison as missing
+    context. Its denominator must be a site count or a site density, and may be per gram. A value divided by a
+    one-sided bound that does not state its own bound is a warning; it stays in comparisons, its row showing the
+    bound.
+  - **Assignments.** Which phase, site or species is active, a spectator, a precursor or an inhibitor is a `Claim`
+    with named `ABOUT` roles, supported or contradicted by the records it rests on (`premise_refs`). Co-active is left
+    out, an open point of the reporting draft. This
     replaces the `ACTIVE_FOR` link the reporting draft had planned. No new label: the example shows the existing
     records express and query it.
-  - **Operando.** `DURING` states which specimen was observed, how observation and performance were synchronized, and
-    whether the performance was measured in the cell and compared with a conventional reactor or cell (`specimen`,
-    `timing`, `performance`, `benchmark`; provisional). A new checklist case asks an observation the source calls
-    operando for these, as should items. `observation_mode` keeps its meaning and stays the source's label; only the
-    checklist report changes.
+  - **Operando.** Operando now means characterized while the kinetics are measured (before: "under reaction
+    conditions while activity is measured or runs"). `observation_mode` stays the source's label, kept as reported.
+    `DURING` states which specimen was observed, whether the kinetics were measured while the observation was made
+    (`timing`: simultaneous or sequential) and what of them (`kinetics`: measured, matched to a conventional reactor or
+    cell with its test as `benchmark`, products only detected, not measured); all provisional. A new checklist case
+    asks an observation the source calls operando for the kinetics measured on the same specimen at the same time
+    (`kinetics_while_characterizing`, a should item): a missing one lowers completeness, never validity.
   - **Spectra and fits.** `Analysis.analysis_kind: spectral_fit` and `Analysis.limitations` keep a fit, its
     alternatives and what it cannot tell apart, separate from the spectrum and from the claim drawn from it. The
     description of ensemble sampling no longer says categorically that an ensemble signal cannot tell phases apart:
@@ -39,9 +47,9 @@
     CQ-17 (CQ-12 and CQ-13 are left to open pull requests). Six invalid examples cover the new rules. The 0.5.0
     examples and invalid examples are re-pinned to 0.6.0. The reporting draft (0.2) and the roadmap say what is done.
   - **Migration.** `scale graph migrate` rewrites nothing. It stops on a turnover frequency whose product is not a
-    chemical species, or whose denominator is not a site count or density. A turnover frequency that states neither
-    its product nor its denominator stays valid, but is no longer compared scientifically. The kernel's
-    meta-analysis example is one: it pins 0.2.0 and is left as it is.
+    chemical species, or whose denominator is not a site count or density. A turnover frequency that names no product
+    stays valid, but is no longer compared scientifically, and one that does not say how it was calculated is warned
+    about. The kernel's meta-analysis example has four such rates: it pins 0.2.0 and is left as it is.
   - **Sources.** Wrasman et al. 2024 (doi:10.1016/j.jcat.2024.115451) on site counting, Meyer et al. 2024
     (doi:10.1016/j.jcat.2024.115369) on XAS, and Tackett et al. 2026 (doi:10.1021/acscatal.6c01946) on operando
     studies; the checklist cases cite them.

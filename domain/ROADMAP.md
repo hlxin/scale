@@ -11,9 +11,9 @@ pull request that makes it is. Each item is a suggestion @scale-agents can take 
   sits on in a given state (`LOCATED_ON {in_state}`). The draft reporting checklist for authors,
   [docs/reporting/catalyst-state-reporting.md](docs/reporting/catalyst-state-reporting.md), names them *(planned)*.
   Done in scale-catal 0.6.0: the site populations of a catalyst state (`HAS_SITE` from the `CatalystState`, with a
-  share, a density, the exposed atoms counted and the sites a rate is divided by), turnover frequencies compared by
-  what they count as sites, activity assignments as claims with named `ABOUT` roles, and operando pairings
-  (`DURING`'s specimen, timing, performance and benchmark). Still open there: whether the `ABOUT` roles of an
+  share, a density, the exposed atoms counted and the sites a rate is divided by), turnover frequencies kept as
+  reported with how they were calculated, activity assignments as claims with named `ABOUT` roles, and operando
+  observations made while the kinetics are measured (`DURING`'s specimen, timing, kinetics and benchmark). Still open there: whether the `ABOUT` roles of an
   assignment become a closed list, and whether a `SUPPORTS` link names the kind of evidence it is (the reporting
   draft's open points).
 - **Stability maps and the order of phenomena** (kernel): which species or phase is most stable over a region of

@@ -1,6 +1,6 @@
 """Build the synthetic state-and-site example of the catalysis domain (all values invented): site populations recorded for
 the catalyst state they were counted or observed in, the site counts a turnover frequency is divided by, activity
-assignments as claims with their evidence, operando observations with and without a stated pairing to the performance,
+assignments as claims with their evidence, operando observations with and without the kinetics measured while they ran,
 and a measured spectrum, two fits to it and the assignment drawn from one of them.
 
     python build_examples.py
@@ -16,7 +16,8 @@ and a measured spectrum, two fits to it and the assignment drawn from one of the
     five turnover frequencies         of one methanol rate (4.1 mmol/(g h)): per exposed Cu atom (the count after
                                       reduction), per Zn-decorated step site (28 µmol/g, derived from the 9 %), at least
                                       0.038 s-1 per titrated site (the titration gives at most 30 µmol/g), per Cu atom
-                                      (every Cu atom taken as a site) and one whose source states no denominator
+                                      (every Cu atom taken as a site) and one whose source does not say how it was
+                                      calculated (kept as reported; the validator warns)
     a computed state                  a Cu(211) slab with Zn at the step (STATE_OF the model, no specimen), 50 % of its
                                       step-edge Cu atoms Zn-decorated, by DFT and ab initio thermodynamics
     a formulation-level count         the reply's "about 300 µmol/g" of exposed Cu for the formulation after reduction,
@@ -26,9 +27,9 @@ and a measured spectrum, two fits to it and the assignment drawn from one of the
                                       temperatures and by the EXAFS fit); the reply's competing claim that Cu steps
                                       without Zn are the active sites (CONTRADICTS the first); bulk ZnO, the majority
                                       phase, a spectator
-    operando observations             Cu K-edge XAS on the same specimen, recorded with the products and matched to the
-                                      laboratory reactor (a stated pairing); DRIFTS in another cell, only overlapping a
-                                      run (the checklist reports the pairing missing)
+    operando observations             Cu K-edge XAS on the same specimen, with the kinetics measured while it ran and
+                                      matched to the laboratory reactor; DRIFTS in another cell, only overlapping a run
+                                      (the checklist reports the kinetics while characterizing missing)
     spectrum, fits and claim          the measured spectra (a Dataset), a linear combination fit and an EXAFS fit to
                                       them (two Analyses, spectral_fit, with fitted values and limitations) and the
                                       assignment that cites the EXAFS fit
@@ -295,11 +296,11 @@ def sites_and_assignments() -> dict:
     link("REACHED_BY", after, t_cell, timing="after")
     link("PRECEDES", reduce, t_cell)
     for x in (me_ir, titration):
-        link("DURING", x, t_cell, specimen="same_specimen", timing="alternating", performance="matched_to_benchmark",
+        link("DURING", x, t_cell, specimen="same_specimen", timing="simultaneous", kinetics="matched_to_benchmark",
              benchmark=t_lab, evidence=[ev("Methods", "text")])
 
-    # ---- operando XAS paired with the performance; DRIFTS that only overlaps a run
-    link("DURING", xas, t_cell, specimen="same_specimen", timing="simultaneous", performance="matched_to_benchmark",
+    # ---- operando XAS with the kinetics measured while it ran; DRIFTS that only overlaps a run
+    link("DURING", xas, t_cell, specimen="same_specimen", timing="simultaneous", kinetics="matched_to_benchmark",
          benchmark=t_lab, evidence=[ev("Methods", "text", note="spectra and online GC on one time base; the methanol rate in "
                                                                 "the cell within 5 % of the laboratory reactor's")])
     link("DURING", drifts, t_drifts, evidence=[ev("Supporting information, Figure S4", "figure")])

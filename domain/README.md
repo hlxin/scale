@@ -95,7 +95,7 @@ source's lifecycle (`source-lifecycle/`), current densities a scientific compari
 (`product-measurement-examples/`), what a test is read as showing with the evidence connected to it, a
 heating ramp and the stability of electrodes (`evidence-examples/`), and the site populations of a catalyst's states,
 the site counts its turnover frequencies are divided by, activity assignments with their evidence and operando
-observations with and without a stated pairing (`state-site-examples/`), all public.
+observations with and without the kinetics measured while they ran (`state-site-examples/`), all public.
 
 ## Versions
 

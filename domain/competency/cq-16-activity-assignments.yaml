@@ -4,7 +4,7 @@ id: CQ-16
 question: Which phases and sites are assigned activity for methanol formation in the working state, on what evidence,
   and which assignments compete with them or call a component a spectator?
 description: |
-  An assignment is a Claim with named ABOUT roles: the component it assigns (active, co_active, spectator, precursor,
+  An assignment is a Claim with named ABOUT roles: the component it assigns (active, spectator, precursor or
   inhibitor), the state (state), the reaction and product (reaction, product) and the test it concerns (test); the
   tests, analyses and claims it rests on reach it by SUPPORTS and CONTRADICTS with premise_refs to the results. The
   ZnOx overlayer, a minority phase of the working state, and the Zn-decorated Cu steps it makes are assigned activity,
@@ -25,10 +25,8 @@ plan:
       edge_as: assigned
       edge_where:
         - prop: role
-          op: in
-          value:
-            - active
-            - co_active
+          op: eq
+          value: active
     - from: claim
       edge: ABOUT
       to: CatalystState
@@ -76,10 +74,8 @@ variants:
           edge_as: assigned
           edge_where:
             - prop: role
-              op: in
-              value:
-                - active
-                - co_active
+              op: eq
+              value: active
         - from: component
           edge: HAS_PHASE
           direction: in
@@ -109,10 +105,8 @@ variants:
           edge_as: assigned
           edge_where:
             - prop: role
-              op: in
-              value:
-                - active
-                - co_active
+              op: eq
+              value: active
         - from: component
           edge: HAS_PHASE
           direction: in

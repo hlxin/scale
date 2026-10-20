@@ -272,8 +272,12 @@ value:
     normalized_by goes only on a value whose kind declares a denominator, resolves (with its path) to a value object,
     and names a value of the denominator's dimensions (and, where the denominator names kinds, a value of one of them).
   - A value divided by a one-sided bound (its normalized_by names a value with bound) is a bound the other way (a rate
-    divided by at most N sites is at least the quotient) and states it (bound); one that does not is reported, and a
-    scientific comparison leaves it out.
+    divided by at most N sites is at least the quotient) and states it (bound); one that does not is reported (a
+    warning) and kept as reported, and a scientific comparison shows the bound of what it is divided by.
+  - A value of a kind whose denominator is marked unstated (a turnover frequency) says how it was calculated (its
+    normalized_by names what it is divided by, or its basis or definition says it); one that says neither is reported
+    (a warning) and kept as reported. Its basis says how it was calculated, so a scientific comparison reads it, and
+    compares the value whatever it says.
   - target and unresolved_target do not go together; a target a domain narrows for a context (context_targets) names
     a record of one of its labels.
   - id is snake_case and not only digits, and no two values of a record share one.
@@ -2567,22 +2571,6 @@ quantities:
           terms: [nitrogen balance, N balance]
         mass:
           terms: [mass balance, total mass]
-    site_count_basis:
-      description: What a site-normalized rate counts as its sites. Every exposed atom of an element taken as a site (counted
-        by chemisorption, titration, microscopy or a particle model), the sites of one kind counted, estimated or assumed
-        as such, and every atom of the element, exposed or not, are three denominators; a rate per exposed atom, one per
-        site of a kind and one per atom are three quantities, never compared with one another. Read from the value's
-        basis and definition and from the property its normalized_by names (exposed_metal_count, site_inventory).
-      read_from: [basis, definition, normalized_by]
-      values:
-        exposed_atoms:
-          terms: [exposed metal count, exposed metal, exposed atom, exposed atoms, surface atom, surface atoms,
-            surface metal, per surface, per exposed, dispersion]
-        specific_sites:
-          terms: [site inventory, specific sites, counted sites, titrated sites, per active site, active site count]
-        all_atoms:
-          terms: [per metal atom, all metal atoms, total metal, per atom of metal]
-      unspecified: [other, not_reported]
   kinds:
     temperature:
       description: A thermodynamic temperature, or a difference of temperatures, as reported.
@@ -2768,15 +2756,17 @@ quantities:
       dimensions: [amount, dimensionless, amount_per_mass, number_per_mass]
       maturity: provisional
     turnover_frequency:
-      description: Events (one product formed or one reactant converted, its target) per site per time. Its denominator is
-        a count of sites by a stated method, and what it counts as the sites decides the quantity (site_count_basis),
-        so rates per exposed atom, per site of a kind and per atom, or for two species, are never compared with one
-        another.
+      description: Events (one product formed or one reactant converted, its target) per site per time, as reported. How
+        it was calculated is recorded with it, never inferred, in the count of sites it is divided by (normalized_by, a
+        value that keeps its own method, origin and assumptions) and, in its basis or definition, in what was counted as
+        sites (the exposed atoms, the sites of one kind, every atom) and how. Rates of two species are never compared with one
+        another; rates calculated on different counts are compared as reported, each with its denominator.
       dimensions: [frequency]
-      compare_by: [species, site_count_basis]
+      compare_by: [species]
       denominator:
         description: The count of sites the rate is divided by (sites counted by chemisorption, titration or a model),
           absolute or per catalyst mass, or a density of sites per area for a rate per area; a site count or a site
           density, never a share.
         dimensions: [dimensionless, amount, amount_per_mass, number_per_mass, amount_per_area, number_per_area]
         kinds: [site_count, site_density]
+        unstated: warning

@@ -1,10 +1,11 @@
-"""Site populations of a catalyst state, site-normalized rates, activity assignments and operando pairings
+"""Site populations of a catalyst state, site-normalized rates, activity assignments and operando observations
 (scale-catal 0.6.0 on). A site population is on the HAS_SITE from the state it was counted or observed in, and holds for
-that state only; a turnover frequency names the site count it is divided by, and what that count counts decides which
-rates compare; an assignment of activity is a Claim with named ABOUT roles and its own evidence; an observation the
-source calls operando is kept as such, and its pairing with the performance is evaluated from what its DURING link
-states. Exercised on the state-and-site example (domain/examples/scale-catal/state-site-examples/) and on variants of
-it written in memory."""
+that state only; a turnover frequency is kept as reported and says how it was calculated (the site count it is divided
+by, or its basis or definition), and one that does not is warned about, never refused; an assignment of activity is a
+Claim with named ABOUT roles and its own evidence; operando means characterized while the kinetics are measured, so an
+observation the source calls operando is kept as such, and whether the kinetics were measured while it was made is
+evaluated from what its DURING link states. Exercised on the state-and-site example
+(domain/examples/scale-catal/state-site-examples/) and on variants of it written in memory."""
 
 import copy
 import shutil
@@ -66,11 +67,13 @@ def test_the_example_is_built_reproducibly(tmp_path):
     assert (work / DOC.name).read_bytes() == (tmp_path / DOC.name).read_bytes()
 
 
-def test_the_example_is_valid_and_lacks_only_the_pairing_it_was_built_to_lack(doc):
+def test_the_example_is_valid_and_lacks_only_what_it_was_built_to_lack(doc):
     rep = pgraph.validate(doc, spec_of(doc))
-    assert rep.errors == [] and rep.warnings == [], (rep.errors, rep.warnings)
+    assert rep.errors == [], rep.errors
+    assert [w["message"].split(":")[0] for w in rep.warnings] == ["result_values.tof_unstated"], rep.warnings
+    assert "does not say how it was calculated" in rep.warnings[0]["message"]
     c = conformance(doc, spec_of(doc), by_record=True)["profiles"]["catalysis"]
-    assert c["conformant"] and c["missing_evidence"] == {"paired_performance": 1, "benchmarked_performance": 1}
+    assert c["conformant"] and c["missing_evidence"] == {"kinetics_while_characterizing": 1}
     missing = {r for r, x in c["records"].items() if any(not e["found"] for e in (x.get("evidence") or {}).values())}
     assert missing == {f"{P}/characterization/drifts"}
 
@@ -168,15 +171,28 @@ def test_a_site_normalized_rate_names_its_denominator_state_origin_and_evidence(
     assert left == {"not_curated": 2}
 
 
-def test_rates_per_exposed_atom_per_site_and_per_atom_are_never_compared(doc, spec):
-    res = _q(doc, spec, {"comparison": "scientific", "match": {"label": "CatalyticTest", "as": "test"},
-                         "steps": [{"from": "test", "entries": "result_values", "kind": "turnover_frequency", "as": "tof"}],
-                         "where": [{"var": "tof", "prop": "value", "op": "gt", "value": 0, "unit": "s-1"}],
-                         "return": ["tof"]})
-    groups = {g["compared_on"]["tof.value"]["context"]["site_count_basis"]: g["rows"] for g in res["comparison"]["groups"]}
-    assert groups == {"exposed_atoms": 1, "specific_sites": 2, "all_atoms": 1}
+def test_rates_on_different_site_counts_are_compared_as_reported_each_with_its_count(doc, spec):
+    plan = {"comparison": "scientific", "match": {"label": "CatalyticTest", "as": "test"},
+            "steps": [{"from": "test", "entries": "result_values", "kind": "turnover_frequency", "as": "tof"}],
+            "where": [{"var": "tof", "prop": "value", "op": "gt", "value": 0, "unit": "s-1"}], "return": ["tof"]}
+    res = _q(doc, spec, plan)
+    assert [g["rows"] for g in res["comparison"]["groups"]] == [5] and not res["excluded"]
+    assert res["comparison"]["groups"][0]["compared_on"]["tof.value"]["context"] == {"species": f"{P}/species/methanol"}
+    # each row shows what its rate is divided by: the count, its origin and any bound; the rate per Cu atom says it in
+    # its basis, and the one that says nothing shows nothing
+    den = {r["values"]["tof"]["id"]: r["compared"]["tof.value"].get("denominator") for r in res["rows"]}
+    assert den["tof_per_exposed_cu"] == {"record": _link(doc, "HAS_SITE", "state/reduced", "site/exposed-cu")["id"],
+                                         "path": "/exposed_metal_count", "origin": "derived"}
+    assert den["tof_per_titrated_site"]["bound"] == "upper" and den["tof_per_step_site"]["path"] == "/site_inventory"
+    assert den["tof_per_cu_atom"] is None and den["tof_unstated"] is None
+    assert _entry(doc, "test/xas-cell", "tof_per_cu_atom")["basis"] == "per metal atom, every Cu atom taken as a site"
+    # a rate that names no product is not compared with them: the product is what a turnover frequency counts
+    d = copy.deepcopy(doc)
+    _entry(d, "test/xas-cell", "tof_unstated").pop("target")
+    res = _q(d, spec, plan)
+    assert [g["rows"] for g in res["comparison"]["groups"]] == [4]
     assert [(e["record"], e["reason"].split(" ")[0]) for e in res["excluded"]] == [(f"{P}/test/xas-cell", "missing_context")]
-    assert "site_count_basis" in res["excluded"][0]["reason"]
+    assert "species" in res["excluded"][0]["reason"]
     # a bound is never ranked as its number: the rate per titrated site is at least 0.038 s-1
     ranked = _q(doc, spec, {"comparison": "scientific", "match": {"label": "CatalyticTest", "as": "test"},
                             "steps": [{"from": "test", "entries": "result_values", "kind": "turnover_frequency", "as": "tof"}],
@@ -196,15 +212,16 @@ def test_estimated_and_bounded_inventories_are_recorded_and_missing_context_stop
     plan = {"comparison": "scientific", "match": {"label": "CatalyticTest", "as": "test"},
             "steps": [{"from": "test", "entries": "result_values", "kind": "turnover_frequency", "as": "tof"}],
             "where": [{"var": "tof", "prop": "value", "op": "gt", "value": 0, "unit": "s-1"}], "return": ["tof"]}
-    # a rate divided by at most 30 sites that does not say it is at least its quotient: reported, and left out
+    # a rate divided by at most 30 sites that does not say it is at least its quotient: warned about, never refused, and
+    # compared as reported, its row showing that its count is a bound
     d = copy.deepcopy(doc)
     _entry(d, "test/xas-cell", "tof_per_titrated_site").pop("bound")
     rep = pgraph.validate(d, spec_of(d))
     assert rep.errors == [] and any("divided by a one-sided bound (at most 30 µmol/g)" in w["message"] and "lower bound" in
-                                    w["message"] for w in rep.warnings), rep.warnings
+                                    w["message"] and "stays as reported" in w["message"] for w in rep.warnings), rep.warnings
     res = _q(d, spec, plan)
-    assert any("one-sided bound" in e["reason"] for e in res["excluded"])
-    assert "tof_per_titrated_site" not in [r["values"]["tof"]["id"] for r in res["rows"]]
+    row = next(r for r in res["rows"] if r["values"]["tof"]["id"] == "tof_per_titrated_site")
+    assert row["compared"]["tof.value"]["denominator"]["bound"] == "upper" and not res["excluded"]
     # a count not reported leaves the rate divided by it out, never compared on an assumed number
     d = copy.deepcopy(doc)
     _link(d, "HAS_SITE", "state/working", "site/zn-decorated-step")["props"]["site_inventory"] = {
@@ -224,7 +241,31 @@ def test_a_rate_per_site_is_divided_by_a_count_never_by_a_share(doc):
     c = quantities.contracts(spec_of(doc))
     assert c.dimension_name(c.read_unit("sites/nm2").vector) == "number_per_area (L-2)"
     assert c.kinds["turnover_frequency"]["denominator_kinds"] == ["site_count", "site_density"]
-    assert [x["context"] for x in c.kinds["turnover_frequency"]["compare_by"]] == ["species", "site_count_basis"]
+    assert [x["context"] for x in c.kinds["turnover_frequency"]["compare_by"]] == ["species"]
+    assert c.kinds["turnover_frequency"]["denominator_unstated"] == "warning"
+
+
+def test_a_rate_that_does_not_say_how_it_was_calculated_is_kept_and_warned_about(doc):
+    """A turnover frequency is used as reported, and says how it was calculated: one that does not is a warning, never
+    an error, and what clears it is what documents the calculation."""
+    def warned(d: dict) -> list:
+        rep = pgraph.validate(d, spec_of(d))
+        assert rep.errors == [], rep.errors
+        return [w["message"] for w in rep.warnings if "does not say how it was calculated" in w["message"]]
+    assert len(warned(doc)) == 1 and "tof_unstated" in warned(doc)[0]
+    for props in ({"basis": "per exposed Cu atom"}, {"definition": "the source does not say what it was divided by"},
+                  {"normalized_by": {"record": _link(doc, "HAS_SITE", "state/reduced", "site/exposed-cu")["id"],
+                                     "path": "/exposed_metal_count"}}):
+        d = copy.deepcopy(doc)
+        _entry(d, "test/xas-cell", "tof_unstated").update(props)
+        assert warned(d) == [], props
+    # a rate the source does not report is asked for nothing
+    d = copy.deepcopy(doc)
+    entry = _entry(d, "test/xas-cell", "tof_unstated")
+    for k in ("value", "unit"):
+        entry.pop(k)
+    entry.update(status="not_reported", missing_reason="not_stated_in_source")
+    assert warned(d) == []
 
 
 # ---------------------------------------------------------------- identity: specimens, models, formulations
@@ -258,7 +299,7 @@ def test_a_formulation_level_count_adds_no_specimen(doc):
 # ---------------------------------------------------------------- assignments are claims
 ASSIGNED = {"match": {"label": "Claim", "as": "claim"},
             "steps": [{"from": "claim", "edge": "ABOUT", "as": "component", "edge_as": "assigned",
-                       "edge_where": [{"prop": "role", "op": "in", "value": ["active", "co_active"]}]}],
+                       "edge_where": [{"prop": "role", "op": "eq", "value": "active"}]}],
             "return": ["claim.name", "component.name", "assigned.role"]}
 
 
@@ -283,7 +324,7 @@ def test_a_minority_phase_carries_an_assignment_and_abundance_brings_none(doc, s
     # bulk ZnO and Cu are the majority phases, and no claim calls them active
     majority = {e["target"] for e in doc["links"] if e["type"] == "HAS_PHASE" and e["source"] == f"{P}/state/working"
                 and e["props"]["dominance"] == "majority"}
-    active = {e["target"] for e in doc["links"] if e["type"] == "ABOUT" and e["props"]["role"] in ("active", "co_active")}
+    active = {e["target"] for e in doc["links"] if e["type"] == "ABOUT" and e["props"]["role"] == "active"}
     assert majority == {f"{P}/material/cu", f"{P}/material/zno"} and not majority & active
 
 
@@ -313,21 +354,26 @@ def test_competing_assignments_and_a_spectator_stay_apart_citable_and_queryable(
     assert roles == {"active", "spectator", "state", "reaction", "product", "test"}
 
 
-# ---------------------------------------------------------------- operando: an overlap is not a pairing
-def test_an_overlap_alone_is_not_a_verified_pairing(doc):
+# ---------------------------------------------------------------- operando: kinetics measured while characterizing
+def _xas_with(doc: dict, **props) -> dict:
+    d = copy.deepcopy(doc)
+    _link(d, "DURING", "characterization/cu-k-xas", "test/xas-cell")["props"].update(props)
+    return conformance(d, spec_of(d), by_record=True)["profiles"]["catalysis"]["records"][f"{P}/characterization/cu-k-xas"]
+
+
+def test_an_overlap_alone_is_not_kinetics_while_characterizing(doc):
     c = conformance(doc, spec_of(doc), by_record=True)["profiles"]["catalysis"]["records"]
     drifts, xas = c[f"{P}/characterization/drifts"], c[f"{P}/characterization/cu-k-xas"]
     assert drifts["evidence"]["working_test"]["found"]                          # it did overlap a run
-    assert not drifts["evidence"]["paired_performance"]["found"] and not drifts["evidence"]["benchmarked_performance"]["found"]
-    assert xas["evidence"]["paired_performance"]["found"] and xas["evidence"]["benchmarked_performance"]["found"]
+    assert not drifts["evidence"]["kinetics_while_characterizing"]["found"]
+    assert xas["evidence"]["kinetics_while_characterizing"]["found"]
     # the label stays as reported, whatever the checklist finds
     assert _node(doc, "characterization/drifts")["props"]["observation_mode"] == "operando"
-    # a pairing stated in part (another specimen, or no measured performance) is no pairing
-    for k, v in (("specimen", "same_batch"), ("timing", "sequential"), ("performance", "products_detected")):
-        d = copy.deepcopy(doc)
-        _link(d, "DURING", "characterization/cu-k-xas", "test/xas-cell")["props"][k] = v
-        rec = conformance(d, spec_of(d), by_record=True)["profiles"]["catalysis"]["records"][f"{P}/characterization/cu-k-xas"]
-        assert not rec["evidence"]["paired_performance"]["found"], k
+    # another specimen, kinetics before or after, or products only seen: not the kinetics while characterizing
+    for k, v in (("specimen", "same_batch"), ("timing", "sequential"), ("kinetics", "products_detected")):
+        assert not _xas_with(doc, **{k: v})["evidence"]["kinetics_while_characterizing"]["found"], k
+    # kinetics measured, with no conventional reactor to match: enough
+    assert _xas_with(doc, kinetics="measured")["evidence"]["kinetics_while_characterizing"]["found"]
     # a characterization during a treatment is not under working catalytic conditions
     d = copy.deepcopy(doc)
     _link(d, "DURING", "characterization/drifts", "test/drifts-cell")["target"] = f"{P}/treatment/reduction"
@@ -368,18 +414,23 @@ def test_a_measured_spectrum_a_fitted_parameter_and_an_inferred_claim_stay_three
 def test_the_change_to_the_turnover_frequency_contract_is_breaking():
     old, new = spec_at("0.5.0"), pgraph.load_spec(GRAPH_MANIFEST)
     d = diff_specs(old, new)
-    assert {"quantities.kinds.turnover_frequency is compared by site_count_basis",
-            "quantities.kinds.turnover_frequency is compared by species",
+    assert {"quantities.kinds.turnover_frequency is compared by species",
             "quantities.kinds.turnover_frequency: its denominator names a site_count or a site_density only"} <= set(d["narrowed"])
+    assert not [x for x in d["narrowed"] + d["added"] if "site_count_basis" in x]
     assert "edges.HAS_SITE.from + CatalystState" in d["loosened"]
-    assert {"edges.HAS_SITE.population_fraction", "edges.HAS_SITE.site_inventory", "edges.DURING.performance",
-            "quantities.kinds.site_count", "quantities.contexts.site_count_basis"} <= set(d["added"])
+    assert {"edges.HAS_SITE.population_fraction", "edges.HAS_SITE.site_inventory", "edges.DURING.kinetics",
+            "quantities.kinds.site_count",
+            "quantities.kinds.turnover_frequency: a value that does not say how it was calculated is reported (warning)"
+            } <= set(d["added"])
     # a denominator's kinds: a first list narrows, dropping it loosens, a kind more loosens and a kind less narrows
     out = {"added": [], "removed": [], "changed": [], "narrowed": [], "loosened": []}
     a, b = copy.deepcopy(new["quantities"]), copy.deepcopy(new["quantities"])
     b["kinds"]["turnover_frequency"]["denominator"]["kinds"] = ["site_count"]
+    b["kinds"]["turnover_frequency"]["denominator"].pop("unstated")
     quantities.diff(a, b, out)
     assert out["narrowed"] == ["quantities.kinds.turnover_frequency: its denominator no longer names a site_density"]
+    assert out["loosened"] == ["quantities.kinds.turnover_frequency: a value that does not say how it was calculated is no "
+                               "longer reported"]
 
 
 def test_a_malformed_denominator_kind_never_loads():
@@ -389,6 +440,9 @@ def test_a_malformed_denominator_kind_never_loads():
         quantities.Contracts(block)
     block["kinds"]["turnover_frequency"]["denominator"]["kinds"] = ["sites"]
     with pytest.raises(ScaleError, match="is not a declared kind"):
+        quantities.Contracts(block)
+    block["kinds"]["turnover_frequency"]["denominator"].update(kinds=["site_count"], unstated="error")
+    with pytest.raises(ScaleError, match="unstated: warning"):
         quantities.Contracts(block)
 
 
@@ -417,12 +471,14 @@ def test_the_step_to_site_populations_rewrites_nothing_and_stops_on_what_it_cann
 
 def test_turnover_frequencies_that_state_no_product_or_denominator_are_no_longer_compared_after_migration():
     """The one committed document with turnover frequencies (the kernel's meta-analysis example, pinned 0.2.0) stays
-    valid when moved to 0.6.0, and its pooled rates, which state no product and no denominator, leave a scientific
-    comparison as missing_context, where under 0.5.0 they were compared; an ordinary comparison is unchanged."""
+    valid when moved to 0.6.0: its four rates, which say neither how they were calculated nor for which product, are
+    warned about (never refused), and they leave a scientific comparison as missing_context (no product), where under
+    0.5.0 they were compared; an ordinary comparison is unchanged."""
     meta = load_doc(REPO / "core/examples/science-examples/d-meta-analysis.json")
     new = pgraph_migrate.raise_version(meta, "0.6.0", spec_at("0.6.0"))[0]
     rep = pgraph.validate(new, spec_of(new))
-    assert rep.errors == [] and rep.warnings == []
+    assert rep.errors == [] and len(rep.warnings) == 4
+    assert all("does not say how it was calculated" in w["message"] for w in rep.warnings)
     old = copy.deepcopy(new)
     old["graph"]["schema_version"] = "0.5.0"
     plan = {"comparison": "scientific", "match": {"label": "Experiment", "as": "e"},
@@ -474,6 +530,7 @@ def test_a_field_step_follows_a_denominator_into_its_link_and_says_why_it_cannot
 def test_describe_prints_a_denominators_kinds():
     out = pgraph.describe(pgraph.load_spec(GRAPH_MANIFEST), [], "catalysis")
     tof = out["quantity_kinds"]["turnover_frequency"]
-    assert tof["denominator_kinds"] == ["site_count", "site_density"] and tof["compared_by"] == ["species", "site_count_basis"]
+    assert tof["denominator_kinds"] == ["site_count", "site_density"] and tof["compared_by"] == ["species"]
+    assert tof["denominator_unstated"] == "warning"
     has_site = pgraph.describe(pgraph.load_spec(GRAPH_MANIFEST), ["HAS_SITE"], "catalysis")
     assert "CatalystState" in str(has_site)

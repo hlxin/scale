@@ -143,8 +143,8 @@ the schema; `scale graph describe` shows it), or the `quantity_kind` of the Vari
   velocity their `flow_reference` (STP, NTP, normal, standard, operating conditions), a space velocity its
   `space_velocity_basis` (GHSV, LHSV, WHSV, per catalyst mass), a composition fraction its `fraction_basis`, and a
   selectivity, yield, conversion, Faradaic efficiency, quantum or photonic yield, energy yield or partial current
-  density the `species` its target names, and a turnover frequency its `species` and its `site_count_basis` (what it
-  counts as sites: the exposed atoms, the sites of a kind, every atom; scale-catal 0.6.0). A context is read from what the value states (its unit: `V vs RHE`, `barg`,
+  density, and a turnover frequency (scale-catal 0.6.0), the `species` its target names. A context is read from what
+  the value states (its unit: `V vs RHE`, `barg`,
   `sccm`; its `basis` and `definition`; its `target`; the property its `normalized_by` names) and from the sibling
   property its binding names (`reference_scale`, `current_normalization`, `fraction_basis`). The statements must agree.
 - **Check or group.** A filter or a ranking that states a context, `context: {potential_reference: rhe}`, checks it: a
@@ -159,14 +159,19 @@ the schema; `scale graph describe` shows it), or the `quantity_kind` of the Vari
   its `produced_by` names, on another context than its record's (a potential converted from Ag/AgCl to RHE by a stated
   Analysis), keeps its own context and may enter that context's ranking; nothing is converted by the query.
 - **Denominators.** A value whose `normalized_by` names a value that is not reported, or that the view withholds, is
-  left out as `missing_context`, and so is one divided by a one-sided bound that does not state the bound it is itself
-  (a rate divided by at most 30 µmol/g of sites is at least the quotient: `bound: lower`); a row compared on a
-  denominator whose own `origin` is `assumed` is named in `limitations`, and the row's `compared` gives the
-  denominator's record, path, origin and bound. CQ-15 compares turnover frequencies per exposed atom, per site of a
-  kind and per atom in three groups, and leaves out one that states no denominator.
+  left out as `missing_context`. One divided by a one-sided bound is compared as reported (a rate divided by at most
+  30 µmol/g of sites is at least the quotient, `bound: lower`; the validator warns when it does not say so). A row
+  compared on a denominator whose own `origin` is `assumed` is named in `limitations`, and the row's `compared` gives
+  the denominator's record, path, origin and bound.
+- **Turnover frequencies** (scale-catal 0.6.0) are used as reported, with how they were calculated: what each is
+  divided by (`normalized_by`) and, in its `basis` or `definition`, what was counted as sites and how. Rates of one
+  product per exposed atom, per site of a kind and per atom are compared with one another, each row showing its basis
+  and denominator, so a reader sees how each was calculated; none is left out for its count. The validator warns about
+  one that does not say how it was calculated. CQ-15 shows five rates of one methanol rate side by side.
 - **Basis.** On a kind whose contexts read the value's `basis`, a scientific filter states `context`, not `basis`
-  (a plan error otherwise), and a value's basis is read through the contexts. On any other kind the basis is compared
-  as text, as in an ordinary plan.
+  (a plan error otherwise), and a value's basis is read through the contexts. A turnover frequency's basis says how it
+  was calculated and is read, never compared as text. On any other kind the basis is compared as text, as in an
+  ordinary plan.
 
 ```yaml
 question: Which current densities have compatible area bases and potential references?

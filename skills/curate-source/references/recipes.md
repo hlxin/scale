@@ -42,15 +42,17 @@ A value the experimenter set or the author specified is not a measurement.
 ## Rates and kinetics
 
 - A turnover frequency goes in the test's `result_values` as printed (a Variable of kind
-  `turnover_frequency`, its product in `target`). When the source gives the site count it divides by, the
-  value names it with `normalized_by`: the `exposed_metal_count` (exposed atoms, each taken as a site) or
-  the `site_inventory` (the sites of a kind the source divides by) of the `HAS_SITE` from the state the
-  sites were counted in (below, "Sites in a catalyst state"; scale-catal 0.6.0). Say in `basis` what the
-  sites are, in the source's words ("per exposed Cu atom", "per Zn-decorated step site", "per metal atom,
-  every Cu atom taken as a site"): what a rate counts as sites decides which rates compare
-  (`site_count_basis`, core/graph/kernel.yaml), and a rate that says nothing of it is not compared. A rate
-  divided by a count that is only an upper bound is itself a lower bound (`bound: lower`). A turnover
-  number goes in `results` (`turnover_number`) with its `definition`.
+  `turnover_frequency`, its product in `target`), and says how it was calculated (scale-catal 0.6.0). When
+  the source gives the site count it divides by, the value names it with `normalized_by`: the
+  `exposed_metal_count` (exposed atoms, each taken as a site) or the `site_inventory` (the sites of a kind
+  the source divides by) of the `HAS_SITE` from the state the sites were counted in (below, "Sites in a
+  catalyst state"). Say in `basis` what the sites are, in the source's words ("per exposed Cu atom", "per
+  Zn-decorated step site", "per metal atom, every Cu atom taken as a site"), and in `definition` how they
+  were counted when the source says it. When the source does not say, write that in `definition`; never
+  supply a method. The validator warns about a rate that says none of it, and a comparison shows each rate
+  with its count: rates on different counts are compared as reported, never recalculated. A rate divided
+  by a count that is only an upper bound is itself a lower bound (`bound: lower`). A turnover number goes
+  in `results` (`turnover_number`) with its `definition`.
 - A light-off temperature: `results.light_off_temperature` with `definition` ("temperature at 50 %
   CO conversion") and the species in `target`.
 - An activation energy: in the `results` of the Analysis that fits it (`analysis_kind: kinetic_fit`,
@@ -196,17 +198,19 @@ characterization or the Analysis that turns its uptake into sites.
 
 - **An assignment** (this phase, site or species is active for this reaction in this state) is a Claim
   (`claim_kind: structure_property`; `mechanism` for a route) `ABOUT` the component in its role (`active`,
-  `co_active`, `spectator`, `precursor`, `inhibitor`), the state (role `state`), the reaction and product
+  `spectator`, `precursor`, `inhibitor`), the state (role `state`), the reaction and product
   (`reaction`, `product`), the test it concerns (`test`) and any elementary step or mechanism (`step`,
   `mechanism`). What it rests on `SUPPORTS` or `CONTRADICTS` it, with `premise_refs` to the results
   (`/result_values/<id>`, `/results/<key>`) and a `warrant`. One claim per assignment: a competing or a spectator
   interpretation is a claim of its own, with its own evidence (`CONTRADICTS` when the source sets them against each
   other). Never assign activity to a phase because it is the majority one.
-- **An operando observation**: `observation_mode` as the source says. `DURING` the test it overlapped, with what
-  the source states of the pairing: `specimen` (the same specimen, another of its batch, another), `timing`
-  (simultaneous, alternating, sequential; the protocol in the evidence) and `performance` (measured in the cell,
-  matched to a conventional reactor or cell with that test as `benchmark`, products only detected, not measured).
-  Leave out what the source does not state: never infer that an observation was simultaneous or on the same specimen.
+- **An operando observation** (operando: characterized while the kinetics are measured): `observation_mode` as
+  the source says. `DURING` the test it overlapped, with what the source states: `specimen` (the same specimen,
+  another of its batch, another), `timing` (`simultaneous`: the kinetics measured while it ran, continuously or by
+  product analysis at intervals; `sequential`: before or after it; the protocol in the evidence) and `kinetics`
+  (`measured` in the cell; `matched_to_benchmark`, with the conventional reactor's or cell's test as `benchmark`;
+  products only detected; not measured). Leave out what the source does not state: never infer that the kinetics
+  were measured at the same time or on the same specimen.
 - **A spectrum and its fits**: the measured spectra are a Dataset (`data_kind: spectrum`) the characterization
   `HAS_OUTPUT`; a fit is an Analysis (`analysis_kind: spectral_fit`) that `HAS_INPUT` the Dataset (role `data`) and
   its references (role `reference_standard`), with its `method`, its fitted parameters in `results` (`origin:

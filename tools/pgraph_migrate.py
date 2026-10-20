@@ -26,7 +26,7 @@ STEPS: dict[str, tuple[str, str]] = {
     "0.2.1": ("0.3.0", "breaking: quantity contracts (a value's unit by its kind's dimension; the contexts a comparison needs; normalized_by; HAS_COMPONENT.concentration)"),
     "0.3.0": ("0.4.0", 'breaking: result entries (Experiment.result_values with value ids, phase, stream, unresolved_target); conversion, product_yield, selectivity, production_rate, product_amount and balance kinds; in catalysis a species is a ChemicalSpecies (context_targets)'),
     "0.4.0": ("0.5.0", "breaking: the catalysis checklist applies a test's cases by its driving_forces (a test that lists none has unknown applicability, never a complete checklist) and looks for connected evidence; CatalyticTest.interpretations, Analysis.evaluation_basis, power_supply_input and the dark control's control_kind, differs_in, temperature_matched_at and temperature_matched_over are new (provisional)"),
-    "0.5.0": ("0.6.0", "breaking: site populations of a catalyst state (HAS_SITE from CatalystState with population_fraction, site_density, exposed_metal_count and site_inventory); the site_fraction, site_density and site_count kinds; a turnover frequency compared by its species and by what it counts as sites (site_count_basis), divided by a site count or a site density; DURING's specimen, timing, performance and benchmark; Analysis spectral_fit and limitations; the checklist's operando and spectral-fit cases (provisional)"),
+    "0.5.0": ("0.6.0", "breaking: site populations of a catalyst state (HAS_SITE from CatalystState with population_fraction, site_density, exposed_metal_count and site_inventory); the site_fraction, site_density and site_count kinds; a turnover frequency compared by its species, divided by a site count or a site density, and saying how it was calculated (a warning when it does not); operando defined as characterized while the kinetics are measured; DURING's specimen, timing, kinetics and benchmark; Analysis spectral_fit and limitations; the checklist's operando and spectral-fit cases (provisional)"),
 }
 
 
@@ -81,13 +81,13 @@ def _reporting_applicability(doc: dict, spec: dict | None) -> list:
 def _site_populations(doc: dict, spec: dict | None) -> list:
     """0.5.0 -> 0.6.0: site populations of a catalyst state and site-normalized rates. Nothing a 0.5.0 document holds is
     rewritten: no population moves onto a state (a count recorded elsewhere stays there, and none is carried from a
-    sample to its states), no operando label is changed, and no DURING link is given a specimen, a timing or a
-    performance it does not state. A turnover frequency is now compared by its species and by what it counts as sites
-    (site_count_basis), so one that states neither is left out of a scientific comparison as missing_context; that is
-    a change of what the comparison reports, not of the document. What the step cannot map stops it: a turnover
-    frequency whose target is not a chemical species, or one divided by a value of another kind than a site count or a
-    site density (a share, a composition fraction), which would be invalid under 0.6.0; curate it by hand, then migrate.
-    ``spec`` is the target schema."""
+    sample to its states), no operando label is changed, and no DURING link is given a specimen, a timing or kinetics
+    it does not state. A turnover frequency is now compared by its species, so one that names none is left out of a
+    scientific comparison as missing_context, and one that does not say how it was calculated is reported (a warning);
+    those change what the validator and the comparison report, not the document. What the step cannot map stops it:
+    a turnover frequency whose target is not a chemical species, or one divided by a value of another kind than a site
+    count or a site density (a share, a composition fraction), which would be invalid under 0.6.0; curate it by hand,
+    then migrate. ``spec`` is the target schema."""
     from .quantities import misnamed_denominators, narrowed_targets
     bad = narrowed_targets(doc, spec) + misnamed_denominators(doc, spec)
     if bad:
