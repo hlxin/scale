@@ -301,10 +301,10 @@ def impregnation() -> dict:
                               "exposed Pt atoms as a share of all Pt atoms")
     v_dsize = d.variable("dispersion-size", "Pt particle size from the dispersion", "dispersion_equivalent_size", "nm",
                          "the diameter of hemispherical particles that would give the dispersion measured")
-    v_tem_mean = d.variable("stem-mean-diameter", "mean Pt particle diameter (HAADF-STEM)", "particle_size", "nm",
+    v_tem_mean = d.variable("stem-mean-diameter", "mean Pt particle diameter (HAADF-STEM)", "microscopy_particle_size", "nm",
                             "number-weighted mean of the projected-area-equivalent diameters of the particles counted")
     v_tem_sd = d.variable("stem-diameter-sd", "standard deviation of the Pt particle diameters (HAADF-STEM)",
-                          "particle_size_spread", "nm",
+                          "microscopy_particle_size_spread", "nm",
                           "standard deviation of the number distribution of the diameters counted: the width of the "
                           "distribution, not an uncertainty of its mean")
     v_counted = d.variable("particles-counted", "particles counted", "count", "1",
@@ -746,10 +746,10 @@ def high_entropy_alloy() -> dict:
                        "from the cumulant fit of the autocorrelation")
     v_pdi = d.variable("dls-pdi", "polydispersity index (DLS)", "polydispersity_index", "1",
                        "the second cumulant over the first squared")
-    v_tem_mean = d.variable("stem-mean-diameter", "mean particle diameter (HAADF-STEM)", "particle_size", "nm",
+    v_tem_mean = d.variable("stem-mean-diameter", "mean particle diameter (HAADF-STEM)", "microscopy_particle_size", "nm",
                             "number-weighted mean of the projected-area-equivalent diameters of the metal cores counted")
     v_tem_sd = d.variable("stem-diameter-sd", "standard deviation of the particle diameters (HAADF-STEM)",
-                          "particle_size_spread", "nm", "standard deviation of the number distribution of the diameters")
+                          "microscopy_particle_size_spread", "nm", "standard deviation of the number distribution of the diameters")
     v_counted = d.variable("particles-counted", "particles counted", "count", "1",
                            "number of particles whose diameters make the distribution")
     v_xrd = d.variable("xrd-crystallite-size", "crystallite size (XRD)", "crystallite_size", "nm",

@@ -7,7 +7,7 @@ description: |
   A size from microscopy (the projected diameters of the particles counted), from diffraction (the coherent-domain
   size from the width of a reflection) and from light scattering (the hydrodynamic diameter of a particle with its
   shell in a liquid) are three quantities, all in nm. Each is a result entry with its own Variable, whose quantity_kind
-  (particle_size, crystallite_size, hydrodynamic_size) and definition say what was measured; a plan that asks for one
+  (microscopy_particle_size, crystallite_size, hydrodynamic_size) and definition say what was measured; a plan that asks for one
   follows the entry to its Variable (a field step) and gets that one only. So a microscopy average never answers for a
   crystallite size: batch 1 of the Pt catalyst has a HAADF-STEM mean of 2.1 nm, and its XRD shows no Pt reflection,
   which the paper reads as crystallites below about 3 nm (a value below the detection limit, its limit 3 nm); the
@@ -104,8 +104,8 @@ variants:
             - prop: quantity_kind
               op: in
               value:
-                - particle_size
-                - particle_size_spread
+                - microscopy_particle_size
+                - microscopy_particle_size_spread
                 - count
       return:
         - sample.name
@@ -134,7 +134,7 @@ variants:
             - prop: quantity_kind
               op: in
               value:
-                - particle_size
+                - microscopy_particle_size
                 - crystallite_size
                 - hydrodynamic_size
             - prop: id

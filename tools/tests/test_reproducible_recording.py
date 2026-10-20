@@ -248,7 +248,7 @@ def test_a_microscopy_average_never_answers_for_an_xrd_crystallite_size(pi, spec
         return [(r["values"]["m.technique"], r["values"]["x"]["status"], r["values"]["x"].get("value"))
                 for r in _q(pi, spec, plan)["rows"]]
     assert sizes("ex:pi/sample/batch-1", "crystallite_size") == [("powder X-ray diffraction", "below_detection_limit", 3)]
-    assert sizes("ex:pi/sample/batch-1", "particle_size") == [("HAADF-STEM", "present", 2.1)]
+    assert sizes("ex:pi/sample/batch-1", "microscopy_particle_size") == [("HAADF-STEM", "present", 2.1)]
     assert sizes("ex:pi/sample/batch-2", "crystallite_size") == [("powder X-ray diffraction", "present", 6.5)]
     # without its XRD result, batch 1 has no crystallite size at all, whatever microscopy gives
     d = copy.deepcopy(pi)
@@ -266,13 +266,13 @@ def test_a_microscopy_average_never_answers_for_an_xrd_crystallite_size(pi, spec
 
 def test_three_sizes_are_three_variables_and_a_distribution_keeps_its_statistics(pi, hea):
     kinds = {n["props"].get("quantity_kind") for n in hea["nodes"] if n["label"] == "Variable"}
-    assert {"particle_size", "crystallite_size", "hydrodynamic_size"} <= kinds
+    assert {"microscopy_particle_size", "crystallite_size", "hydrodynamic_size"} <= kinds
     stem = {x["id"]: x for x in _node(pi, "ex:pi/characterization/stem-batch-1")["props"]["result_values"]}
     assert (stem["mean_diameter"]["value"], stem["diameter_sd"]["value"], stem["particles_counted"]["value"]) == (2.1, 0.5, 312)
     # the width of the distribution is its own entry, never the uncertainty of the mean
     assert "uncertainty" not in stem["mean_diameter"]
     sd_var = _node(pi, stem["diameter_sd"]["variable"])["props"]
-    assert sd_var["quantity_kind"] == "particle_size_spread" and "not an uncertainty" in sd_var["definition"]
+    assert sd_var["quantity_kind"] == "microscopy_particle_size_spread" and "not an uncertainty" in sd_var["definition"]
     # the hydrodynamic size is of the colloid, before deposition, not of the supported catalyst
     dls = _links(hea, "CHARACTERIZES", "ex:hea/characterization/dls")
     assert [e["target"] for e in dls] == ["ex:hea/sample/colloid"]

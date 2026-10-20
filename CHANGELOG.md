@@ -19,7 +19,7 @@
     what a source leaves unstated).
   - **Reporting:** a companion checklist, domain/docs/reporting/catalyst-preparation-reporting.md (draft 0.1).
   - **Conventions, not schema:** characterization measurands are named in their Variable's `quantity_kind`
-    (`particle_size`, `crystallite_size`, `hydrodynamic_size`, `count`, …), recorded as stated and not unit-checked
+    (`microscopy_particle_size`, `crystallite_size`, `hydrodynamic_size`, `count`, …), recorded as stated and not unit-checked
     until the kernel declares them; a distribution's statistics are separate results.
 
 - **Schema 0.6.0 (breaking): site populations belong to a catalyst state, a turnover frequency says how it was

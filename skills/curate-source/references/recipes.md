@@ -175,7 +175,7 @@ these keys; both read the same way.
 | `site_fraction` (declared) | % | a dispersion: exposed atoms as a share of all atoms of the metal |
 | `gas_uptake` | µmol/g | H2 chemisorption at 308 K (`target`: the gas) |
 | `crystallite_size` | nm | Scherrer, (111) reflection (`target`: the phase) |
-| `particle_size`, `particle_size_spread`, `count` | nm, nm, 1 | a microscopy distribution's mean (or median), its standard deviation, the particles counted |
+| `microscopy_particle_size`, `microscopy_particle_size_spread`, `count` | nm, nm, 1 | a microscopy distribution's mean (or median), its standard deviation, the particles counted |
 | `hydrodynamic_size`, `polydispersity_index` | nm, 1 | DLS Z-average and PDI of a colloid |
 | `dispersion_equivalent_size` | nm | the size a dispersion gives for an assumed particle shape |
 | `coordination_number` | 1 | a fitted EXAFS coordination number (an Analysis result) |
@@ -382,9 +382,9 @@ queries). A value is in the unit printed; a fitted or derived value names its pr
   smallest size the mode resolves (`lower_size_limit`), the electron dose and dose rate, and for STEM the probe current
   and angles; the microscope and its detectors an Instrument; how the specimen was prepared and loaded on the grid in
   `transfer`; the images a Dataset; a gas cell's conditions as for a reactor.
-- The distribution as reported: one entry per statistic, each with its own Variable (`particle_size` for the mean or
+- The distribution as reported: one entry per statistic, each with its own Variable (`microscopy_particle_size` for the mean or
   the median, its `definition` saying which and of what: "number-weighted mean of the projected-area-equivalent
-  diameters"; `particle_size_spread` for the standard deviation; `count` for the particles counted). The standard
+  diameters"; `microscopy_particle_size_spread` for the standard deviation; `count` for the particles counted). The standard
   deviation of a distribution is its width, never the `uncertainty` of its mean.
 - A histogram or the list of diameters is a Dataset (`data_kind: table`) when the source deposits it; a skew, or
   how the mean was computed (arithmetic, surface-weighted), is one more entry or the mean's `definition`; the image
@@ -417,11 +417,12 @@ queries). A value is in the unit printed; a fitted or derived value names its pr
 
 ### Sizes from different techniques
 
-- A microscopy size (`particle_size`: the projected size of the particles counted), a diffraction size
+- A microscopy size (`microscopy_particle_size`: the projected size of the particles counted), a diffraction size
   (`crystallite_size`: the coherent-domain size from a reflection's width), a hydrodynamic size (`hydrodynamic_size`:
   a particle with its shell, diffusing in a liquid) and a size from a dispersion (`dispersion_equivalent_size`) are
   four measurands. Each is a result with its own Variable; a plan that asks for one follows the entry to its Variable
-  and gets that one only (CQ-20).
+  and gets that one only (CQ-20). A microscopy size is not the `particle_size` key of a catalyst body (the size of the
+  grains in a bed, above, "Reactor, bed and catalyst-body keys").
 - XRD gives an average crystallite size, not a distribution, and small domains may give no reflection: then a value
   `below_detection_limit` with the limit the source gives, or `not_reported` with a `note` when it gives none. Never
   put a microscopy size in its place.
