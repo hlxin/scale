@@ -1,0 +1,181 @@
+# A competency question of the catalysis domain (tools/competency.py; `scale domains cq catalysis`).
+# It runs on public synthetic examples, so anyone can rerun it and see the same answer.
+id: CQ-18
+question: Which batches of one nominal catalyst were made, and in what do their preparations differ (the precursor lot,
+  the order in which the solutions were combined, the reduction)?
+description: |
+  Two batches of one nominal formula are two CatalystSamples (HAS_FORMULATION the same Catalyst), each with its own
+  batch_identifier and its own Preparation (HAS_OUTPUT the batch). The steps of a preparation are ProcedureSteps
+  PART_OF it, in order, each with what it takes in (HAS_INPUT, with its role and amount) and gives out (HAS_OUTPUT). A
+  purchased lot of a precursor is a Sample with the lot's batch_identifier, so the lot a batch was made from is a
+  record, not a word in a note. The 5 wt% Pt/gamma-Al2O3 of the impregnation example was made twice: batch 1 from lot
+  A-1172, reduced at 573 K, and batch 2 from lot B-2090, reduced at 773 K and impregnated in two portions, a deviation
+  its protocol link states (FOLLOWS_PROTOCOL.deviations). The treatments a batch went through are TREATED_BY, in order.
+  Nothing makes two batches one: what they share is their formulation.
+documents:
+  - examples/scale-catal/preparation-examples/impregnation.json
+  - examples/scale-catal/preparation-examples/coprecipitation.json
+plan:
+  question: Which batches of the 5 wt% Pt/gamma-Al2O3 were made, from which precursor lot, and how were they reduced?
+  match:
+    label: CatalystSample
+    as: batch
+  steps:
+    - from: batch
+      edge: HAS_FORMULATION
+      to: Catalyst
+      as: formulation
+      where:
+        - prop: id
+          op: eq
+          value: ex:pi/catalyst/pt-alumina
+    - from: batch
+      edge: HAS_OUTPUT
+      direction: in
+      to: Preparation
+      as: preparation
+    - from: preparation
+      edge: PART_OF
+      direction: in
+      to: ProcedureStep
+      as: dissolution
+      where:
+        - prop: action
+          op: eq
+          value: dissolve
+    - from: dissolution
+      edge: HAS_INPUT
+      to: Sample
+      as: lot
+      edge_as: used
+      edge_where:
+        - prop: role
+          op: eq
+          value: reagent
+    - from: batch
+      edge: TREATED_BY
+      to: Treatment
+      as: reduction
+      edge_as: order
+      where:
+        - prop: treatment_kind
+          op: eq
+          value: reduction
+      edge_where:
+        - prop: order
+          op: eq
+          value: 1
+    - from: preparation
+      edge: FOLLOWS_PROTOCOL
+      to: Protocol
+      as: protocol
+      edge_as: follows
+  return:
+    - batch.name
+    - batch.batch_identifier
+    - lot.batch_identifier
+    - used.amount
+    - reduction.temperature
+    - reduction.atmosphere
+    - follows.deviations
+  evidence: true
+expect:
+  status: answered
+  min_rows: 2
+  max_rows: 2
+  values:
+    lot.batch_identifier:
+      - A-1172
+      - B-2090
+variants:
+  - description: The coprecipitation example's two batches of one nominal Cu/ZnO/Al2O3 differ only in which solution was
+      added to which. The precipitation step takes in two solutions, the one added (role reagent) and the one it was
+      added to (role material), each a Sample with its concentrations, so the order of addition is two links, and the
+      final pH and the addition rate are the step's conditions (batch R's addition rate is not stated).
+    plan:
+      match:
+        label: CatalystSample
+        as: batch
+      steps:
+        - from: batch
+          edge: HAS_OUTPUT
+          direction: in
+          to: Preparation
+          as: preparation
+        - from: preparation
+          edge: PART_OF
+          direction: in
+          to: ProcedureStep
+          as: precipitation
+          where:
+            - prop: action
+              op: eq
+              value: precipitate
+        - from: precipitation
+          edge: HAS_INPUT
+          to: Sample
+          as: added
+          edge_where:
+            - prop: role
+              op: eq
+              value: reagent
+        - from: precipitation
+          edge: HAS_INPUT
+          to: Sample
+          as: receiving
+          edge_where:
+            - prop: role
+              op: eq
+              value: material
+      return:
+        - batch.batch_identifier
+        - added.name
+        - receiving.name
+        - precipitation.conditions.final_ph
+        - precipitation.conditions.addition_rate
+    expect:
+      status: answered
+      min_rows: 2
+      max_rows: 2
+      values:
+        added.name:
+          - sodium carbonate solution, batch-n
+          - mixed nitrate solution, batch-r
+  - description: Two purchased lots of one commercial product share their formulation, not a batch. Lot 0417 states its
+      lot number; the second lot states none, and nothing assumes it is lot 0417. Each lot has its own dispersion, from
+      its own chemisorption, so their surfaces are two observations.
+    plan:
+      match:
+        label: CatalystSample
+        as: lot
+        where:
+          - prop: preparation_status
+            op: eq
+            value: purchased
+      steps:
+        - from: lot
+          edge: CHARACTERIZES
+          direction: in
+          to: Characterization
+          as: chemisorption
+          where:
+            - prop: technique
+              op: contains
+              value: H2 chemisorption
+        - from: chemisorption
+          edge: HAS_INPUT
+          direction: in
+          to: Analysis
+          as: analysis
+        - from: analysis
+          entries: result_values
+          kind: site_fraction
+          as: dispersion
+      return:
+        - lot.name
+        - lot.batch_identifier
+        - dispersion
+    expect:
+      status: answered
+      min_rows: 2
+      max_rows: 2

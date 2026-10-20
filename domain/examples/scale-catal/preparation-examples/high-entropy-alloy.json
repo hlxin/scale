@@ -1,0 +1,1754 @@
+{
+  "nodes": [
+    {
+      "id": "ex:hea/source/paper",
+      "label": "Source",
+      "props": {
+        "name": "Invented paper",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "What is at the surface of a five-metal alloy catalyst under CO oxidation (invented)",
+        "year": 2026
+      }
+    },
+    {
+      "id": "ex:hea/species/pt",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "platinum",
+        "elemental_composition": {
+          "Pt": 1
+        },
+        "formula": "Pt",
+        "origin": "synthetic",
+        "species_kind": "element"
+      }
+    },
+    {
+      "id": "ex:hea/species/pd",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "palladium",
+        "elemental_composition": {
+          "Pd": 1
+        },
+        "formula": "Pd",
+        "origin": "synthetic",
+        "species_kind": "element"
+      }
+    },
+    {
+      "id": "ex:hea/species/rh",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "rhodium",
+        "elemental_composition": {
+          "Rh": 1
+        },
+        "formula": "Rh",
+        "origin": "synthetic",
+        "species_kind": "element"
+      }
+    },
+    {
+      "id": "ex:hea/species/ru",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "ruthenium",
+        "elemental_composition": {
+          "Ru": 1
+        },
+        "formula": "Ru",
+        "origin": "synthetic",
+        "species_kind": "element"
+      }
+    },
+    {
+      "id": "ex:hea/species/ir",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "iridium",
+        "elemental_composition": {
+          "Ir": 1
+        },
+        "formula": "Ir",
+        "origin": "synthetic",
+        "species_kind": "element"
+      }
+    },
+    {
+      "id": "ex:hea/material/carbon-black",
+      "label": "Material",
+      "props": {
+        "name": "carbon black support",
+        "crystallinity": "amorphous",
+        "formula": "C",
+        "material_family": "carbon",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:hea/material/ptpdrhruir",
+      "label": "Material",
+      "props": {
+        "name": "PtPdRhRuIr alloy, nominally equimolar",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:hea/source/paper"
+          }
+        ],
+        "material_family": "alloy",
+        "nominal_formula": "Pt0.2Pd0.2Rh0.2Ru0.2Ir0.2",
+        "origin": "synthetic",
+        "structure_type": "fcc"
+      }
+    },
+    {
+      "id": "ex:hea/material/ruox",
+      "label": "Material",
+      "props": {
+        "name": "RuOx at the surface",
+        "crystallinity": "not_reported",
+        "formula": "RuOx",
+        "material_family": "oxide",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:hea/catalyst/hea-carbon",
+      "label": "Catalyst",
+      "props": {
+        "name": "PtPdRhRuIr/C, 20 wt% metal (nominal)",
+        "catalyst_family": "alloy",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:hea/source/paper"
+          }
+        ],
+        "nominal_formula": "PtPdRhRuIr/C",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:hea/sample/hea-c",
+      "label": "CatalystSample",
+      "props": {
+        "name": "PtPdRhRuIr/C",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:hea/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "preparation_status": "prepared",
+        "sample_kind": "powder"
+      }
+    },
+    {
+      "id": "ex:hea/sample/colloid",
+      "label": "Sample",
+      "props": {
+        "name": "PtPdRhRuIr colloid in ethylene glycol, before deposition",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:hea/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "preparation_status": "prepared",
+        "sample_kind": "other"
+      }
+    },
+    {
+      "id": "ex:hea/species/h2ptcl6",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "hexachloroplatinic acid hexahydrate",
+        "elemental_composition": {
+          "Cl": 6,
+          "H": 14,
+          "O": 6,
+          "Pt": 1
+        },
+        "formula": "H2PtCl6·6H2O",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:hea/species/na2pdcl4",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "sodium tetrachloropalladate",
+        "elemental_composition": {
+          "Cl": 4,
+          "Na": 2,
+          "Pd": 1
+        },
+        "formula": "Na2PdCl4",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:hea/species/rhcl3",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "rhodium chloride hydrate",
+        "elemental_composition": {
+          "Cl": 3,
+          "Rh": 1
+        },
+        "formula": "RhCl3·xH2O",
+        "note": "the paper gives the salt as a hydrate without its water content",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:hea/species/rucl3",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "ruthenium chloride hydrate",
+        "elemental_composition": {
+          "Cl": 3,
+          "Ru": 1
+        },
+        "formula": "RuCl3·xH2O",
+        "note": "the paper gives the salt as a hydrate without its water content",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:hea/species/h2ircl6",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "hexachloroiridic acid hydrate",
+        "elemental_composition": {
+          "Cl": 6,
+          "H": 2,
+          "Ir": 1
+        },
+        "formula": "H2IrCl6·xH2O",
+        "note": "the paper gives the salt as a hydrate without its water content",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:hea/preparation/polyol",
+      "label": "Preparation",
+      "props": {
+        "name": "Polyol synthesis of the colloid and deposition on carbon",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:hea/source/paper"
+          }
+        ],
+        "method": "polyol reduction in ethylene glycol with PVP, then deposition on carbon",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:hea/step/dissolve",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Dissolve the five salts in ethylene glycol with PVP",
+        "action": "dissolve",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:hea/source/paper"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:hea/step/reduce",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Heat to reduce the metals",
+        "action": "heat",
+        "atmosphere": "N2",
+        "conditions": {
+          "stirring_rate": {
+            "status": "present",
+            "unit": "rpm",
+            "value": 400
+          }
+        },
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 2
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:hea/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "ramp_rate": {
+          "status": "present",
+          "unit": "K/min",
+          "value": 10
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 473
+        }
+      }
+    },
+    {
+      "id": "ex:hea/step/deposit",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Deposit the colloid on the carbon",
+        "action": "mix",
+        "conditions": {
+          "stirring_rate": {
+            "status": "present",
+            "unit": "rpm",
+            "value": 400
+          }
+        },
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 12
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:hea/source/paper"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:hea/step/wash",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Wash with ethanol",
+        "action": "wash",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:hea/source/paper"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:hea/step/dry",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Dry under vacuum",
+        "action": "dry",
+        "atmosphere": "vacuum",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 12
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:hea/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 333
+        }
+      }
+    },
+    {
+      "id": "ex:hea/variable/icp-metal-fraction",
+      "label": "Variable",
+      "props": {
+        "name": "metal fraction in the bulk (ICP-OES)",
+        "definition": "atom fraction of the metal among the five, by ICP-OES after digestion",
+        "origin": "synthetic",
+        "quantity_kind": "composition_fraction",
+        "scale": "quantitative",
+        "unit": "at%"
+      }
+    },
+    {
+      "id": "ex:hea/variable/xps-metal-fraction",
+      "label": "Variable",
+      "props": {
+        "name": "metal fraction at the surface (XPS)",
+        "definition": "atom fraction of the metal among the five, from the XPS peak areas",
+        "origin": "synthetic",
+        "quantity_kind": "composition_fraction",
+        "scale": "quantitative",
+        "unit": "at%"
+      }
+    },
+    {
+      "id": "ex:hea/variable/metal-loading-icp",
+      "label": "Variable",
+      "props": {
+        "name": "metal loading (ICP-OES)",
+        "definition": "mass of the five metals per mass of catalyst, by ICP-OES",
+        "origin": "synthetic",
+        "quantity_kind": "loading",
+        "scale": "quantitative",
+        "unit": "wt%"
+      }
+    },
+    {
+      "id": "ex:hea/variable/dls-hydrodynamic-size",
+      "label": "Variable",
+      "props": {
+        "name": "hydrodynamic diameter of the colloid (DLS, Z-average)",
+        "definition": "intensity-weighted harmonic mean diameter of the particles with their PVP shell in the liquid, from the cumulant fit of the autocorrelation",
+        "origin": "synthetic",
+        "quantity_kind": "hydrodynamic_size",
+        "scale": "quantitative",
+        "unit": "nm"
+      }
+    },
+    {
+      "id": "ex:hea/variable/dls-pdi",
+      "label": "Variable",
+      "props": {
+        "name": "polydispersity index (DLS)",
+        "definition": "the second cumulant over the first squared",
+        "origin": "synthetic",
+        "quantity_kind": "polydispersity_index",
+        "scale": "quantitative",
+        "unit": "1"
+      }
+    },
+    {
+      "id": "ex:hea/variable/stem-mean-diameter",
+      "label": "Variable",
+      "props": {
+        "name": "mean particle diameter (HAADF-STEM)",
+        "definition": "number-weighted mean of the projected-area-equivalent diameters of the metal cores counted",
+        "origin": "synthetic",
+        "quantity_kind": "particle_size",
+        "scale": "quantitative",
+        "unit": "nm"
+      }
+    },
+    {
+      "id": "ex:hea/variable/stem-diameter-sd",
+      "label": "Variable",
+      "props": {
+        "name": "standard deviation of the particle diameters (HAADF-STEM)",
+        "definition": "standard deviation of the number distribution of the diameters",
+        "origin": "synthetic",
+        "quantity_kind": "particle_size_spread",
+        "scale": "quantitative",
+        "unit": "nm"
+      }
+    },
+    {
+      "id": "ex:hea/variable/particles-counted",
+      "label": "Variable",
+      "props": {
+        "name": "particles counted",
+        "definition": "number of particles whose diameters make the distribution",
+        "origin": "synthetic",
+        "quantity_kind": "count",
+        "scale": "quantitative",
+        "unit": "1"
+      }
+    },
+    {
+      "id": "ex:hea/variable/xrd-crystallite-size",
+      "label": "Variable",
+      "props": {
+        "name": "crystallite size (XRD)",
+        "definition": "coherent-domain size from the fcc (111) reflection, Scherrer equation with K = 0.9",
+        "origin": "synthetic",
+        "quantity_kind": "crystallite_size",
+        "scale": "quantitative",
+        "unit": "nm"
+      }
+    },
+    {
+      "id": "ex:hea/characterization/icp",
+      "label": "Characterization",
+      "props": {
+        "name": "ICP-OES of the catalyst",
+        "evidence": [
+          {
+            "id": "t1_icp",
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:hea/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "information_depth": "bulk",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "pt_fraction",
+            "status": "present",
+            "basis": "metals only",
+            "evidence_ids": [
+              "t1_icp"
+            ],
+            "target": "ex:hea/species/pt",
+            "unit": "at%",
+            "value": 22.4,
+            "variable": "ex:hea/variable/icp-metal-fraction"
+          },
+          {
+            "id": "pd_fraction",
+            "status": "present",
+            "basis": "metals only",
+            "evidence_ids": [
+              "t1_icp"
+            ],
+            "target": "ex:hea/species/pd",
+            "unit": "at%",
+            "value": 24.1,
+            "variable": "ex:hea/variable/icp-metal-fraction"
+          },
+          {
+            "id": "rh_fraction",
+            "status": "present",
+            "basis": "metals only",
+            "evidence_ids": [
+              "t1_icp"
+            ],
+            "target": "ex:hea/species/rh",
+            "unit": "at%",
+            "value": 18.3,
+            "variable": "ex:hea/variable/icp-metal-fraction"
+          },
+          {
+            "id": "ru_fraction",
+            "status": "present",
+            "basis": "metals only",
+            "evidence_ids": [
+              "t1_icp"
+            ],
+            "target": "ex:hea/species/ru",
+            "unit": "at%",
+            "value": 15.8,
+            "variable": "ex:hea/variable/icp-metal-fraction"
+          },
+          {
+            "id": "ir_fraction",
+            "status": "present",
+            "basis": "metals only",
+            "evidence_ids": [
+              "t1_icp"
+            ],
+            "target": "ex:hea/species/ir",
+            "unit": "at%",
+            "value": 19.4,
+            "variable": "ex:hea/variable/icp-metal-fraction"
+          },
+          {
+            "id": "metal_loading",
+            "status": "present",
+            "evidence_ids": [
+              "t1_icp"
+            ],
+            "target": "ex:hea/material/ptpdrhruir",
+            "unit": "wt%",
+            "value": 17.6,
+            "variable": "ex:hea/variable/metal-loading-icp"
+          }
+        ],
+        "sampling": "ensemble",
+        "technique": "ICP-OES after acid digestion"
+      }
+    },
+    {
+      "id": "ex:hea/characterization/xps",
+      "label": "Characterization",
+      "props": {
+        "name": "XPS of the catalyst as prepared",
+        "evidence": [
+          {
+            "id": "t1_xps",
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:hea/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "information_depth": "surface",
+        "observation_mode": "ex_situ",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "pt_fraction",
+            "status": "present",
+            "basis": "metals only",
+            "evidence_ids": [
+              "t1_xps"
+            ],
+            "target": "ex:hea/species/pt",
+            "unit": "at%",
+            "value": 18.9,
+            "variable": "ex:hea/variable/xps-metal-fraction"
+          },
+          {
+            "id": "pd_fraction",
+            "status": "present",
+            "basis": "metals only",
+            "evidence_ids": [
+              "t1_xps"
+            ],
+            "target": "ex:hea/species/pd",
+            "unit": "at%",
+            "value": 33.6,
+            "variable": "ex:hea/variable/xps-metal-fraction"
+          },
+          {
+            "id": "rh_fraction",
+            "status": "present",
+            "basis": "metals only",
+            "evidence_ids": [
+              "t1_xps"
+            ],
+            "target": "ex:hea/species/rh",
+            "unit": "at%",
+            "value": 16.2,
+            "variable": "ex:hea/variable/xps-metal-fraction"
+          },
+          {
+            "id": "ru_fraction",
+            "status": "present",
+            "basis": "metals only",
+            "evidence_ids": [
+              "t1_xps"
+            ],
+            "target": "ex:hea/species/ru",
+            "unit": "at%",
+            "value": 14.1,
+            "variable": "ex:hea/variable/xps-metal-fraction"
+          },
+          {
+            "id": "ir_fraction",
+            "status": "present",
+            "basis": "metals only",
+            "evidence_ids": [
+              "t1_xps"
+            ],
+            "target": "ex:hea/species/ir",
+            "unit": "at%",
+            "value": 17.2,
+            "variable": "ex:hea/variable/xps-metal-fraction"
+          }
+        ],
+        "sampling": "ensemble",
+        "technique": "X-ray photoelectron spectroscopy",
+        "transfer": "transferred in air"
+      }
+    },
+    {
+      "id": "ex:hea/state/under-co-oxidation",
+      "label": "CatalystState",
+      "props": {
+        "name": "the catalyst under CO oxidation conditions, 473 K",
+        "conditions": {
+          "co_to_o2": {
+            "status": "present",
+            "basis": "molar ratio",
+            "unit": "1",
+            "value": 1
+          },
+          "temperature": {
+            "status": "present",
+            "unit": "K",
+            "value": 473
+          },
+          "total_pressure": {
+            "status": "present",
+            "unit": "mbar",
+            "value": 1
+          }
+        },
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 5",
+            "source": "ex:hea/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "state_kind": "working"
+      }
+    },
+    {
+      "id": "ex:hea/characterization/nap-xps",
+      "label": "Characterization",
+      "props": {
+        "name": "Near-ambient-pressure XPS in 1 mbar CO + O2 at 473 K",
+        "atmosphere": "1 mbar CO + O2 (1:1)",
+        "evidence": [
+          {
+            "id": "t1_nap",
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:hea/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "information_depth": "surface",
+        "note": "the products were not measured during the spectra, so the paper calls it in situ",
+        "observation_mode": "in_situ",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "pt_fraction",
+            "status": "present",
+            "basis": "metals only",
+            "evidence_ids": [
+              "t1_nap"
+            ],
+            "target": "ex:hea/species/pt",
+            "unit": "at%",
+            "value": 15.2,
+            "variable": "ex:hea/variable/xps-metal-fraction"
+          },
+          {
+            "id": "pd_fraction",
+            "status": "present",
+            "basis": "metals only",
+            "evidence_ids": [
+              "t1_nap"
+            ],
+            "target": "ex:hea/species/pd",
+            "unit": "at%",
+            "value": 27.0,
+            "variable": "ex:hea/variable/xps-metal-fraction"
+          },
+          {
+            "id": "rh_fraction",
+            "status": "present",
+            "basis": "metals only",
+            "evidence_ids": [
+              "t1_nap"
+            ],
+            "target": "ex:hea/species/rh",
+            "unit": "at%",
+            "value": 13.3,
+            "variable": "ex:hea/variable/xps-metal-fraction"
+          },
+          {
+            "id": "ru_fraction",
+            "status": "present",
+            "basis": "metals only",
+            "evidence_ids": [
+              "t1_nap"
+            ],
+            "target": "ex:hea/species/ru",
+            "unit": "at%",
+            "value": 31.5,
+            "variable": "ex:hea/variable/xps-metal-fraction"
+          },
+          {
+            "id": "ir_fraction",
+            "status": "present",
+            "basis": "metals only",
+            "evidence_ids": [
+              "t1_nap"
+            ],
+            "target": "ex:hea/species/ir",
+            "unit": "at%",
+            "value": 13.0,
+            "variable": "ex:hea/variable/xps-metal-fraction"
+          }
+        ],
+        "sampling": "ensemble",
+        "technique": "near-ambient-pressure XPS",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 473
+        }
+      }
+    },
+    {
+      "id": "ex:hea/characterization/dls",
+      "label": "Characterization",
+      "props": {
+        "name": "DLS of the colloid",
+        "conditions": {
+          "dispersant": {
+            "status": "present",
+            "text_value": "ethanol, after a 100-fold dilution"
+          }
+        },
+        "evidence": [
+          {
+            "id": "t2_dls",
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:hea/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "hydrodynamic_diameter",
+            "status": "present",
+            "evidence_ids": [
+              "t2_dls"
+            ],
+            "target": "ex:hea/material/ptpdrhruir",
+            "unit": "nm",
+            "value": 9.4,
+            "variable": "ex:hea/variable/dls-hydrodynamic-size"
+          },
+          {
+            "id": "polydispersity_index",
+            "status": "present",
+            "evidence_ids": [
+              "t2_dls"
+            ],
+            "target": "ex:hea/material/ptpdrhruir",
+            "unit": "1",
+            "value": 0.18,
+            "variable": "ex:hea/variable/dls-pdi"
+          }
+        ],
+        "technique": "dynamic light scattering",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 298
+        }
+      }
+    },
+    {
+      "id": "ex:hea/characterization/stem",
+      "label": "Characterization",
+      "props": {
+        "name": "HAADF-STEM of the catalyst",
+        "evidence": [
+          {
+            "id": "t2_stem",
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:hea/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "information_depth": "projection",
+        "observation_mode": "ex_situ",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "mean_diameter",
+            "status": "present",
+            "evidence_ids": [
+              "t2_stem"
+            ],
+            "target": "ex:hea/material/ptpdrhruir",
+            "unit": "nm",
+            "value": 3.1,
+            "variable": "ex:hea/variable/stem-mean-diameter"
+          },
+          {
+            "id": "diameter_sd",
+            "status": "present",
+            "evidence_ids": [
+              "t2_stem"
+            ],
+            "target": "ex:hea/material/ptpdrhruir",
+            "unit": "nm",
+            "value": 0.6,
+            "variable": "ex:hea/variable/stem-diameter-sd"
+          },
+          {
+            "id": "particles_counted",
+            "status": "present",
+            "evidence_ids": [
+              "t2_stem"
+            ],
+            "target": "ex:hea/material/ptpdrhruir",
+            "unit": "1",
+            "value": 350,
+            "variable": "ex:hea/variable/particles-counted"
+          }
+        ],
+        "sampling": "single_particle",
+        "technique": "HAADF-STEM"
+      }
+    },
+    {
+      "id": "ex:hea/characterization/xrd",
+      "label": "Characterization",
+      "props": {
+        "name": "XRD of the catalyst",
+        "evidence": [
+          {
+            "id": "t2_xrd",
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:hea/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "information_depth": "bulk",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "crystallite_size",
+            "status": "present",
+            "evidence_ids": [
+              "t2_xrd"
+            ],
+            "target": "ex:hea/material/ptpdrhruir",
+            "unit": "nm",
+            "value": 2.6,
+            "variable": "ex:hea/variable/xrd-crystallite-size"
+          }
+        ],
+        "sampling": "ensemble",
+        "technique": "powder X-ray diffraction"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:hea/link/1",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "evidence": [
+          {
+            "id": "m_nominal",
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:hea/source/paper"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "basis": "metals only",
+          "definition": "nominal: equal amounts of the five salts",
+          "evidence_ids": [
+            "m_nominal"
+          ],
+          "origin": "assumed",
+          "unit": "at%",
+          "value": 20
+        },
+        "fraction_basis": "atom",
+        "origin": "synthetic",
+        "role": "active_component"
+      },
+      "source": "ex:hea/material/ptpdrhruir",
+      "target": "ex:hea/species/pt"
+    },
+    {
+      "id": "ex:hea/link/2",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "evidence": [
+          {
+            "id": "m_nominal",
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:hea/source/paper"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "basis": "metals only",
+          "definition": "nominal: equal amounts of the five salts",
+          "evidence_ids": [
+            "m_nominal"
+          ],
+          "origin": "assumed",
+          "unit": "at%",
+          "value": 20
+        },
+        "fraction_basis": "atom",
+        "origin": "synthetic",
+        "role": "active_component"
+      },
+      "source": "ex:hea/material/ptpdrhruir",
+      "target": "ex:hea/species/pd"
+    },
+    {
+      "id": "ex:hea/link/3",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "evidence": [
+          {
+            "id": "m_nominal",
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:hea/source/paper"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "basis": "metals only",
+          "definition": "nominal: equal amounts of the five salts",
+          "evidence_ids": [
+            "m_nominal"
+          ],
+          "origin": "assumed",
+          "unit": "at%",
+          "value": 20
+        },
+        "fraction_basis": "atom",
+        "origin": "synthetic",
+        "role": "active_component"
+      },
+      "source": "ex:hea/material/ptpdrhruir",
+      "target": "ex:hea/species/rh"
+    },
+    {
+      "id": "ex:hea/link/4",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "evidence": [
+          {
+            "id": "m_nominal",
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:hea/source/paper"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "basis": "metals only",
+          "definition": "nominal: equal amounts of the five salts",
+          "evidence_ids": [
+            "m_nominal"
+          ],
+          "origin": "assumed",
+          "unit": "at%",
+          "value": 20
+        },
+        "fraction_basis": "atom",
+        "origin": "synthetic",
+        "role": "active_component"
+      },
+      "source": "ex:hea/material/ptpdrhruir",
+      "target": "ex:hea/species/ru"
+    },
+    {
+      "id": "ex:hea/link/5",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "evidence": [
+          {
+            "id": "m_nominal",
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:hea/source/paper"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "basis": "metals only",
+          "definition": "nominal: equal amounts of the five salts",
+          "evidence_ids": [
+            "m_nominal"
+          ],
+          "origin": "assumed",
+          "unit": "at%",
+          "value": 20
+        },
+        "fraction_basis": "atom",
+        "origin": "synthetic",
+        "role": "active_component"
+      },
+      "source": "ex:hea/material/ptpdrhruir",
+      "target": "ex:hea/species/ir"
+    },
+    {
+      "id": "ex:hea/link/6",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "evidence": [
+          {
+            "id": "m_nominal",
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:hea/source/paper"
+          }
+        ],
+        "loading": {
+          "status": "present",
+          "definition": "nominal metal loading",
+          "evidence_ids": [
+            "m_nominal"
+          ],
+          "origin": "assumed",
+          "unit": "wt%",
+          "value": 20
+        },
+        "loading_basis": "mass",
+        "origin": "synthetic",
+        "role": "active_phase"
+      },
+      "source": "ex:hea/catalyst/hea-carbon",
+      "target": "ex:hea/material/ptpdrhruir"
+    },
+    {
+      "id": "ex:hea/link/7",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:hea/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "support"
+      },
+      "source": "ex:hea/catalyst/hea-carbon",
+      "target": "ex:hea/material/carbon-black"
+    },
+    {
+      "id": "ex:hea/link/8",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:hea/sample/hea-c",
+      "target": "ex:hea/catalyst/hea-carbon"
+    },
+    {
+      "id": "ex:hea/link/9",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:hea/preparation/polyol",
+      "target": "ex:hea/sample/hea-c"
+    },
+    {
+      "id": "ex:hea/link/10",
+      "type": "PREPARED_FROM",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mmol",
+          "value": 0.1
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:hea/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "metal precursor"
+      },
+      "source": "ex:hea/sample/hea-c",
+      "target": "ex:hea/species/h2ptcl6"
+    },
+    {
+      "id": "ex:hea/link/11",
+      "type": "PREPARED_FROM",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mmol",
+          "value": 0.1
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:hea/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "metal precursor"
+      },
+      "source": "ex:hea/sample/hea-c",
+      "target": "ex:hea/species/na2pdcl4"
+    },
+    {
+      "id": "ex:hea/link/12",
+      "type": "PREPARED_FROM",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mmol",
+          "value": 0.1
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:hea/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "metal precursor"
+      },
+      "source": "ex:hea/sample/hea-c",
+      "target": "ex:hea/species/rhcl3"
+    },
+    {
+      "id": "ex:hea/link/13",
+      "type": "PREPARED_FROM",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mmol",
+          "value": 0.1
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:hea/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "metal precursor"
+      },
+      "source": "ex:hea/sample/hea-c",
+      "target": "ex:hea/species/rucl3"
+    },
+    {
+      "id": "ex:hea/link/14",
+      "type": "PREPARED_FROM",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mmol",
+          "value": 0.1
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:hea/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "metal precursor"
+      },
+      "source": "ex:hea/sample/hea-c",
+      "target": "ex:hea/species/h2ircl6"
+    },
+    {
+      "id": "ex:hea/link/15",
+      "type": "PART_OF",
+      "props": {
+        "order": 1,
+        "origin": "synthetic"
+      },
+      "source": "ex:hea/step/dissolve",
+      "target": "ex:hea/preparation/polyol"
+    },
+    {
+      "id": "ex:hea/link/16",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mmol",
+          "value": 0.1
+        },
+        "origin": "synthetic",
+        "role": "reagent"
+      },
+      "source": "ex:hea/step/dissolve",
+      "target": "ex:hea/species/h2ptcl6"
+    },
+    {
+      "id": "ex:hea/link/17",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mmol",
+          "value": 0.1
+        },
+        "origin": "synthetic",
+        "role": "reagent"
+      },
+      "source": "ex:hea/step/dissolve",
+      "target": "ex:hea/species/na2pdcl4"
+    },
+    {
+      "id": "ex:hea/link/18",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mmol",
+          "value": 0.1
+        },
+        "origin": "synthetic",
+        "role": "reagent"
+      },
+      "source": "ex:hea/step/dissolve",
+      "target": "ex:hea/species/rhcl3"
+    },
+    {
+      "id": "ex:hea/link/19",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mmol",
+          "value": 0.1
+        },
+        "origin": "synthetic",
+        "role": "reagent"
+      },
+      "source": "ex:hea/step/dissolve",
+      "target": "ex:hea/species/rucl3"
+    },
+    {
+      "id": "ex:hea/link/20",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mmol",
+          "value": 0.1
+        },
+        "origin": "synthetic",
+        "role": "reagent"
+      },
+      "source": "ex:hea/step/dissolve",
+      "target": "ex:hea/species/h2ircl6"
+    },
+    {
+      "id": "ex:hea/link/21",
+      "type": "PART_OF",
+      "props": {
+        "order": 2,
+        "origin": "synthetic"
+      },
+      "source": "ex:hea/step/reduce",
+      "target": "ex:hea/preparation/polyol"
+    },
+    {
+      "id": "ex:hea/link/22",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:hea/step/reduce",
+      "target": "ex:hea/sample/colloid"
+    },
+    {
+      "id": "ex:hea/link/23",
+      "type": "PART_OF",
+      "props": {
+        "order": 3,
+        "origin": "synthetic"
+      },
+      "source": "ex:hea/step/deposit",
+      "target": "ex:hea/preparation/polyol"
+    },
+    {
+      "id": "ex:hea/link/24",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "material"
+      },
+      "source": "ex:hea/step/deposit",
+      "target": "ex:hea/sample/colloid"
+    },
+    {
+      "id": "ex:hea/link/25",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 0.4
+        },
+        "origin": "synthetic",
+        "role": "material"
+      },
+      "source": "ex:hea/step/deposit",
+      "target": "ex:hea/material/carbon-black"
+    },
+    {
+      "id": "ex:hea/link/26",
+      "type": "PART_OF",
+      "props": {
+        "order": 4,
+        "origin": "synthetic"
+      },
+      "source": "ex:hea/step/wash",
+      "target": "ex:hea/preparation/polyol"
+    },
+    {
+      "id": "ex:hea/link/27",
+      "type": "PART_OF",
+      "props": {
+        "order": 5,
+        "origin": "synthetic"
+      },
+      "source": "ex:hea/step/dry",
+      "target": "ex:hea/preparation/polyol"
+    },
+    {
+      "id": "ex:hea/link/28",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "as_prepared"
+      },
+      "source": "ex:hea/characterization/icp",
+      "target": "ex:hea/sample/hea-c"
+    },
+    {
+      "id": "ex:hea/link/29",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "as_prepared"
+      },
+      "source": "ex:hea/characterization/xps",
+      "target": "ex:hea/sample/hea-c"
+    },
+    {
+      "id": "ex:hea/link/30",
+      "type": "STATE_OF",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:hea/state/under-co-oxidation",
+      "target": "ex:hea/sample/hea-c"
+    },
+    {
+      "id": "ex:hea/link/31",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "operating"
+      },
+      "source": "ex:hea/characterization/nap-xps",
+      "target": "ex:hea/sample/hea-c"
+    },
+    {
+      "id": "ex:hea/link/32",
+      "type": "DETERMINED_BY",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:hea/state/under-co-oxidation",
+      "target": "ex:hea/characterization/nap-xps"
+    },
+    {
+      "id": "ex:hea/link/33",
+      "type": "HAS_PHASE",
+      "props": {
+        "dominance": "minority",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 5",
+            "source": "ex:hea/source/paper"
+          }
+        ],
+        "location": "surface",
+        "origin": "synthetic"
+      },
+      "source": "ex:hea/state/under-co-oxidation",
+      "target": "ex:hea/material/ruox"
+    },
+    {
+      "id": "ex:hea/link/34",
+      "type": "HAS_PHASE",
+      "props": {
+        "dominance": "majority",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 5",
+            "source": "ex:hea/source/paper"
+          }
+        ],
+        "location": "bulk",
+        "origin": "synthetic"
+      },
+      "source": "ex:hea/state/under-co-oxidation",
+      "target": "ex:hea/material/ptpdrhruir"
+    },
+    {
+      "id": "ex:hea/link/35",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "as_prepared"
+      },
+      "source": "ex:hea/characterization/dls",
+      "target": "ex:hea/sample/colloid"
+    },
+    {
+      "id": "ex:hea/link/36",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "as_prepared"
+      },
+      "source": "ex:hea/characterization/stem",
+      "target": "ex:hea/sample/hea-c"
+    },
+    {
+      "id": "ex:hea/link/37",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "as_prepared"
+      },
+      "source": "ex:hea/characterization/xrd",
+      "target": "ex:hea/sample/hea-c"
+    },
+    {
+      "id": "ex:hea/catalyst/hea-carbon/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:hea/catalyst/hea-carbon",
+      "target": "ex:hea/source/paper"
+    },
+    {
+      "id": "ex:hea/characterization/dls/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:hea/characterization/dls",
+      "target": "ex:hea/source/paper"
+    },
+    {
+      "id": "ex:hea/characterization/icp/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:hea/characterization/icp",
+      "target": "ex:hea/source/paper"
+    },
+    {
+      "id": "ex:hea/characterization/nap-xps/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:hea/characterization/nap-xps",
+      "target": "ex:hea/source/paper"
+    },
+    {
+      "id": "ex:hea/characterization/stem/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:hea/characterization/stem",
+      "target": "ex:hea/source/paper"
+    },
+    {
+      "id": "ex:hea/characterization/xps/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:hea/characterization/xps",
+      "target": "ex:hea/source/paper"
+    },
+    {
+      "id": "ex:hea/characterization/xrd/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:hea/characterization/xrd",
+      "target": "ex:hea/source/paper"
+    },
+    {
+      "id": "ex:hea/material/ptpdrhruir/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:hea/material/ptpdrhruir",
+      "target": "ex:hea/source/paper"
+    },
+    {
+      "id": "ex:hea/preparation/polyol/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:hea/preparation/polyol",
+      "target": "ex:hea/source/paper"
+    },
+    {
+      "id": "ex:hea/sample/colloid/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:hea/sample/colloid",
+      "target": "ex:hea/source/paper"
+    },
+    {
+      "id": "ex:hea/sample/hea-c/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:hea/sample/hea-c",
+      "target": "ex:hea/source/paper"
+    },
+    {
+      "id": "ex:hea/state/under-co-oxidation/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 5"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:hea/state/under-co-oxidation",
+      "target": "ex:hea/source/paper"
+    },
+    {
+      "id": "ex:hea/step/deposit/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:hea/step/deposit",
+      "target": "ex:hea/source/paper"
+    },
+    {
+      "id": "ex:hea/step/dissolve/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:hea/step/dissolve",
+      "target": "ex:hea/source/paper"
+    },
+    {
+      "id": "ex:hea/step/dry/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:hea/step/dry",
+      "target": "ex:hea/source/paper"
+    },
+    {
+      "id": "ex:hea/step/reduce/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:hea/step/reduce",
+      "target": "ex:hea/source/paper"
+    },
+    {
+      "id": "ex:hea/step/wash/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:hea/step/wash",
+      "target": "ex:hea/source/paper"
+    }
+  ],
+  "directed": true,
+  "graph": {
+    "data_status": "synthetic_example",
+    "follows_domains": [
+      "catalysis"
+    ],
+    "graph_id": "ex:hea/graph",
+    "schema": "scale-catal",
+    "schema_version": "0.6.0",
+    "stewardship": {
+      "access": "public"
+    },
+    "title": "PtPdRhRuIr high-entropy-alloy nanoparticles on carbon: nominal, bulk, surface and working-state compositions, and three sizes (synthetic)"
+  },
+  "multigraph": true
+}

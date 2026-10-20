@@ -1,0 +1,3119 @@
+{
+  "nodes": [
+    {
+      "id": "ex:cp/source/paper",
+      "label": "Source",
+      "props": {
+        "name": "Invented paper",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "Normal and reverse coprecipitation of a Cu/ZnO/Al2O3 catalyst (invented)",
+        "year": 2026
+      }
+    },
+    {
+      "id": "ex:cp/species/cu-nitrate",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "copper nitrate trihydrate",
+        "elemental_composition": {
+          "Cu": 1,
+          "H": 6,
+          "N": 2,
+          "O": 9
+        },
+        "formula": "Cu(NO3)2·3H2O",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:cp/species/zn-nitrate",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "zinc nitrate hexahydrate",
+        "elemental_composition": {
+          "H": 12,
+          "N": 2,
+          "O": 12,
+          "Zn": 1
+        },
+        "formula": "Zn(NO3)2·6H2O",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:cp/species/al-nitrate",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "aluminium nitrate nonahydrate",
+        "elemental_composition": {
+          "Al": 1,
+          "H": 18,
+          "N": 3,
+          "O": 18
+        },
+        "formula": "Al(NO3)3·9H2O",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:cp/species/sodium-carbonate",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "sodium carbonate",
+        "elemental_composition": {
+          "C": 1,
+          "Na": 2,
+          "O": 3
+        },
+        "formula": "Na2CO3",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:cp/species/water",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "water",
+        "elemental_composition": {
+          "H": 2,
+          "O": 1
+        },
+        "formula": "H2O",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:cp/species/cu",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "copper",
+        "elemental_composition": {
+          "Cu": 1
+        },
+        "formula": "Cu",
+        "origin": "synthetic",
+        "species_kind": "element"
+      }
+    },
+    {
+      "id": "ex:cp/species/zn",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "zinc",
+        "elemental_composition": {
+          "Zn": 1
+        },
+        "formula": "Zn",
+        "origin": "synthetic",
+        "species_kind": "element"
+      }
+    },
+    {
+      "id": "ex:cp/species/al",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "aluminium",
+        "elemental_composition": {
+          "Al": 1
+        },
+        "formula": "Al",
+        "origin": "synthetic",
+        "species_kind": "element"
+      }
+    },
+    {
+      "id": "ex:cp/material/cu-fcc",
+      "label": "Material",
+      "props": {
+        "name": "fcc Cu",
+        "formula": "Cu",
+        "material_family": "metal",
+        "origin": "synthetic",
+        "structure_type": "fcc"
+      }
+    },
+    {
+      "id": "ex:cp/catalyst/cu-zno-alumina",
+      "label": "Catalyst",
+      "props": {
+        "name": "Cu/ZnO/Al2O3, Cu:Zn:Al = 60:30:10 (atomic, nominal)",
+        "catalyst_family": "metal",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "nominal_formula": "Cu/ZnO/Al2O3",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:cp/variable/xrf-metal-fraction",
+      "label": "Variable",
+      "props": {
+        "name": "metal fraction in the bulk (XRF)",
+        "definition": "atom fraction of the metal among Cu, Zn and Al, by X-ray fluorescence of the calcined powder",
+        "origin": "synthetic",
+        "quantity_kind": "composition_fraction",
+        "scale": "quantitative",
+        "unit": "at%"
+      }
+    },
+    {
+      "id": "ex:cp/variable/xps-metal-fraction",
+      "label": "Variable",
+      "props": {
+        "name": "metal fraction at the surface (XPS)",
+        "definition": "atom fraction of the metal among Cu, Zn and Al, from the Cu 2p, Zn 2p and Al 2p peak areas with the instrument's sensitivity factors",
+        "origin": "synthetic",
+        "quantity_kind": "composition_fraction",
+        "scale": "quantitative",
+        "unit": "at%"
+      }
+    },
+    {
+      "id": "ex:cp/variable/bet-area",
+      "label": "Variable",
+      "props": {
+        "name": "specific surface area (BET, N2)",
+        "definition": "BET area from N2 adsorption at 77 K",
+        "origin": "synthetic",
+        "quantity_kind": "specific_surface_area",
+        "scale": "quantitative",
+        "unit": "m2/g"
+      }
+    },
+    {
+      "id": "ex:cp/variable/cu-surface-area",
+      "label": "Variable",
+      "props": {
+        "name": "Cu surface area (N2O)",
+        "definition": "from the N2O consumed by reactive frontal chromatography at 333 K",
+        "origin": "synthetic",
+        "quantity_kind": "metal_surface_area",
+        "scale": "quantitative",
+        "unit": "m2/g"
+      }
+    },
+    {
+      "id": "ex:cp/variable/xrd-crystallite-size",
+      "label": "Variable",
+      "props": {
+        "name": "Cu crystallite size (XRD)",
+        "definition": "coherent-domain size from the Cu(111) reflection, Scherrer equation with K = 0.9",
+        "origin": "synthetic",
+        "quantity_kind": "crystallite_size",
+        "scale": "quantitative",
+        "unit": "nm"
+      }
+    },
+    {
+      "id": "ex:cp/model/two-cu-per-o",
+      "label": "Model",
+      "props": {
+        "name": "Two surface Cu atoms per O atom from N2O",
+        "assumptions": [
+          "N2O oxidizes surface Cu only, one O atom per two Cu atoms",
+          "1.47e19 Cu atoms per m2 of Cu surface"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "model_kind": "adsorption stoichiometry",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:cp/sample/batch-n",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Cu/ZnO/Al2O3, batch N (carbonate added to the nitrates)",
+        "batch_identifier": "N",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "preparation_status": "prepared",
+        "sample_kind": "batch"
+      }
+    },
+    {
+      "id": "ex:cp/preparation/batch-n",
+      "label": "Preparation",
+      "props": {
+        "name": "Coprecipitation, carbonate added to the nitrates",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "method": "coprecipitation, carbonate added to the nitrates",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:cp/solution/batch-n-nitrates",
+      "label": "Sample",
+      "props": {
+        "name": "mixed nitrate solution, batch-n",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "preparation_status": "prepared",
+        "sample_kind": "other"
+      }
+    },
+    {
+      "id": "ex:cp/solution/batch-n-carbonate",
+      "label": "Sample",
+      "props": {
+        "name": "sodium carbonate solution, batch-n",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "preparation_status": "prepared",
+        "sample_kind": "other"
+      }
+    },
+    {
+      "id": "ex:cp/step/batch-n-dissolve-nitrates",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Dissolve the nitrates",
+        "action": "dissolve",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:cp/step/batch-n-dissolve-carbonate",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Dissolve the carbonate",
+        "action": "dissolve",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:cp/step/batch-n-precipitate",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Add one solution to the other",
+        "action": "precipitate",
+        "conditions": {
+          "addition_rate": {
+            "status": "present",
+            "definition": "the rate the added solution was fed at",
+            "evidence_ids": [
+              "m_ph"
+            ],
+            "unit": "mL/min",
+            "value": 3
+          },
+          "final_ph": {
+            "status": "present",
+            "definition": "the pH of the slurry when the addition ended",
+            "evidence_ids": [
+              "m_ph"
+            ],
+            "unit": "1",
+            "value": 7.0
+          },
+          "stirring_rate": {
+            "status": "not_reported",
+            "definition": "the stirring rate of the receiving solution",
+            "missing_reason": "not_stated_in_source"
+          }
+        },
+        "evidence": [
+          {
+            "id": "m_ph",
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "method": "the carbonate solution added dropwise to the stirred nitrate solution",
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 338
+        }
+      }
+    },
+    {
+      "id": "ex:cp/step/batch-n-age",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Age in the mother liquor",
+        "action": "age",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 1
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 338
+        }
+      }
+    },
+    {
+      "id": "ex:cp/step/batch-n-filter",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Filter",
+        "action": "filter",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:cp/step/batch-n-wash",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Wash",
+        "action": "wash",
+        "conditions": {
+          "filtrate_conductivity": {
+            "status": "present",
+            "bound": "upper",
+            "definition": "washed until the filtrate conductivity was below this",
+            "evidence_ids": [
+              "m_wash"
+            ],
+            "unit": "mS/cm",
+            "value": 0.1
+          }
+        },
+        "evidence": [
+          {
+            "id": "m_wash",
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:cp/step/batch-n-dry",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Dry",
+        "action": "dry",
+        "atmosphere": "air",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 12
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 383
+        }
+      }
+    },
+    {
+      "id": "ex:cp/step/batch-n-calcine",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Calcine",
+        "action": "calcine",
+        "atmosphere": "static air",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 3
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "ramp_rate": {
+          "status": "present",
+          "unit": "K/min",
+          "value": 2
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 623
+        }
+      }
+    },
+    {
+      "id": "ex:cp/treatment/batch-n-storage",
+      "label": "Treatment",
+      "props": {
+        "name": "Storage of batch-n, 21 days",
+        "atmosphere": "dry air, in a desiccator over silica gel",
+        "duration": {
+          "status": "present",
+          "unit": "d",
+          "value": 21
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "method": "storage of the calcined powder",
+        "origin": "synthetic",
+        "treatment_kind": "exposure"
+      }
+    },
+    {
+      "id": "ex:cp/treatment/batch-n-reduction",
+      "label": "Treatment",
+      "props": {
+        "name": "Reduction of batch-n in the N2O unit, 513 K",
+        "atmosphere": "5 % H2 in Ar",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 2
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 513
+        },
+        "treatment_kind": "reduction"
+      }
+    },
+    {
+      "id": "ex:cp/characterization/batch-n-xrf",
+      "label": "Characterization",
+      "props": {
+        "name": "XRF of batch-n, calcined",
+        "evidence": [
+          {
+            "id": "t1_xrf_batch-n",
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "information_depth": "bulk",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "cu_fraction",
+            "status": "present",
+            "basis": "metals only: Cu + Zn + Al",
+            "evidence_ids": [
+              "t1_xrf_batch-n"
+            ],
+            "target": "ex:cp/species/cu",
+            "unit": "at%",
+            "value": 58.6,
+            "variable": "ex:cp/variable/xrf-metal-fraction"
+          },
+          {
+            "id": "zn_fraction",
+            "status": "present",
+            "basis": "metals only: Cu + Zn + Al",
+            "evidence_ids": [
+              "t1_xrf_batch-n"
+            ],
+            "target": "ex:cp/species/zn",
+            "unit": "at%",
+            "value": 31.0,
+            "variable": "ex:cp/variable/xrf-metal-fraction"
+          },
+          {
+            "id": "al_fraction",
+            "status": "present",
+            "basis": "metals only: Cu + Zn + Al",
+            "evidence_ids": [
+              "t1_xrf_batch-n"
+            ],
+            "target": "ex:cp/species/al",
+            "unit": "at%",
+            "value": 10.4,
+            "variable": "ex:cp/variable/xrf-metal-fraction"
+          }
+        ],
+        "sampling": "ensemble",
+        "technique": "X-ray fluorescence"
+      }
+    },
+    {
+      "id": "ex:cp/characterization/batch-n-xps",
+      "label": "Characterization",
+      "props": {
+        "name": "XPS of batch-n, calcined",
+        "evidence": [
+          {
+            "id": "t1_xps_batch-n",
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "information_depth": "surface",
+        "observation_mode": "ex_situ",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "cu_fraction",
+            "status": "present",
+            "basis": "metals only: Cu + Zn + Al",
+            "evidence_ids": [
+              "t1_xps_batch-n"
+            ],
+            "target": "ex:cp/species/cu",
+            "unit": "at%",
+            "value": 44.1,
+            "variable": "ex:cp/variable/xps-metal-fraction"
+          },
+          {
+            "id": "zn_fraction",
+            "status": "present",
+            "basis": "metals only: Cu + Zn + Al",
+            "evidence_ids": [
+              "t1_xps_batch-n"
+            ],
+            "target": "ex:cp/species/zn",
+            "unit": "at%",
+            "value": 45.2,
+            "variable": "ex:cp/variable/xps-metal-fraction"
+          },
+          {
+            "id": "al_fraction",
+            "status": "present",
+            "basis": "metals only: Cu + Zn + Al",
+            "evidence_ids": [
+              "t1_xps_batch-n"
+            ],
+            "target": "ex:cp/species/al",
+            "unit": "at%",
+            "value": 10.7,
+            "variable": "ex:cp/variable/xps-metal-fraction"
+          }
+        ],
+        "sampling": "ensemble",
+        "technique": "X-ray photoelectron spectroscopy",
+        "transfer": "transferred in air"
+      }
+    },
+    {
+      "id": "ex:cp/dataset/batch-n-xps",
+      "label": "Dataset",
+      "props": {
+        "name": "XPS spectra of batch-n",
+        "availability": "not_reported",
+        "data_kind": "spectrum",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:cp/characterization/batch-n-bet",
+      "label": "Characterization",
+      "props": {
+        "name": "N2 physisorption of batch-n, calcined",
+        "conditions": {
+          "degassing_temperature": {
+            "status": "present",
+            "unit": "K",
+            "value": 423
+          },
+          "degassing_time": {
+            "status": "present",
+            "unit": "h",
+            "value": 4
+          }
+        },
+        "evidence": [
+          {
+            "id": "t1_bet_batch-n",
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "bet_area",
+            "status": "present",
+            "definition": "BET, p/p0 0.05-0.30",
+            "evidence_ids": [
+              "t1_bet_batch-n"
+            ],
+            "unit": "m2/g",
+            "value": 98,
+            "variable": "ex:cp/variable/bet-area"
+          }
+        ],
+        "technique": "N2 physisorption at 77 K",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 77
+        }
+      }
+    },
+    {
+      "id": "ex:cp/characterization/batch-n-n2o",
+      "label": "Characterization",
+      "props": {
+        "name": "N2O frontal chromatography of batch-n, reduced",
+        "evidence": [
+          {
+            "id": "t1_n2o_batch-n",
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "observation_mode": "in_situ",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "cu_surface_area",
+            "status": "present",
+            "evidence_ids": [
+              "t1_n2o_batch-n"
+            ],
+            "target": "ex:cp/material/cu-fcc",
+            "unit": "m2/g",
+            "value": 22,
+            "variable": "ex:cp/variable/cu-surface-area"
+          }
+        ],
+        "technique": "N2O reactive frontal chromatography",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 333
+        }
+      }
+    },
+    {
+      "id": "ex:cp/analysis/batch-n-cu-area",
+      "label": "Analysis",
+      "props": {
+        "name": "Cu surface area of batch-n from the N2O consumed",
+        "analysis_kind": "other",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "experiment_kind": "computational",
+        "method": "two surface Cu atoms per O atom",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:cp/characterization/batch-n-xrd",
+      "label": "Characterization",
+      "props": {
+        "name": "XRD of batch-n, reduced and passivated",
+        "evidence": [
+          {
+            "id": "t1_xrd_batch-n",
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "information_depth": "bulk",
+        "note": "reduced at 513 K, passivated in 1 % O2/N2 and measured in air",
+        "observation_mode": "ex_situ",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "cu_crystallite_size",
+            "status": "present",
+            "evidence_ids": [
+              "t1_xrd_batch-n"
+            ],
+            "target": "ex:cp/material/cu-fcc",
+            "unit": "nm",
+            "value": 7.2,
+            "variable": "ex:cp/variable/xrd-crystallite-size"
+          }
+        ],
+        "sampling": "ensemble",
+        "technique": "powder X-ray diffraction"
+      }
+    },
+    {
+      "id": "ex:cp/sample/batch-r",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Cu/ZnO/Al2O3, batch R (nitrates added to the carbonate)",
+        "batch_identifier": "R",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "preparation_status": "prepared",
+        "sample_kind": "batch"
+      }
+    },
+    {
+      "id": "ex:cp/preparation/batch-r",
+      "label": "Preparation",
+      "props": {
+        "name": "Coprecipitation, nitrates added to the carbonate",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "method": "coprecipitation, nitrates added to the carbonate",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:cp/solution/batch-r-nitrates",
+      "label": "Sample",
+      "props": {
+        "name": "mixed nitrate solution, batch-r",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "preparation_status": "prepared",
+        "sample_kind": "other"
+      }
+    },
+    {
+      "id": "ex:cp/solution/batch-r-carbonate",
+      "label": "Sample",
+      "props": {
+        "name": "sodium carbonate solution, batch-r",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "preparation_status": "prepared",
+        "sample_kind": "other"
+      }
+    },
+    {
+      "id": "ex:cp/step/batch-r-dissolve-nitrates",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Dissolve the nitrates",
+        "action": "dissolve",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:cp/step/batch-r-dissolve-carbonate",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Dissolve the carbonate",
+        "action": "dissolve",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:cp/step/batch-r-precipitate",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Add one solution to the other",
+        "action": "precipitate",
+        "conditions": {
+          "addition_rate": {
+            "status": "not_reported",
+            "definition": "the rate the added solution was fed at",
+            "missing_reason": "not_stated_in_source"
+          },
+          "final_ph": {
+            "status": "present",
+            "definition": "the pH of the slurry when the addition ended",
+            "evidence_ids": [
+              "m_ph"
+            ],
+            "unit": "1",
+            "value": 8.1
+          },
+          "stirring_rate": {
+            "status": "not_reported",
+            "definition": "the stirring rate of the receiving solution",
+            "missing_reason": "not_stated_in_source"
+          }
+        },
+        "evidence": [
+          {
+            "id": "m_ph",
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "method": "the nitrate solution added to the stirred carbonate solution",
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 338
+        }
+      }
+    },
+    {
+      "id": "ex:cp/step/batch-r-age",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Age in the mother liquor",
+        "action": "age",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 1
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 338
+        }
+      }
+    },
+    {
+      "id": "ex:cp/step/batch-r-filter",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Filter",
+        "action": "filter",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:cp/step/batch-r-wash",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Wash",
+        "action": "wash",
+        "conditions": {
+          "filtrate_conductivity": {
+            "status": "present",
+            "bound": "upper",
+            "definition": "washed until the filtrate conductivity was below this",
+            "evidence_ids": [
+              "m_wash"
+            ],
+            "unit": "mS/cm",
+            "value": 0.1
+          }
+        },
+        "evidence": [
+          {
+            "id": "m_wash",
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:cp/step/batch-r-dry",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Dry",
+        "action": "dry",
+        "atmosphere": "air",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 12
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 383
+        }
+      }
+    },
+    {
+      "id": "ex:cp/step/batch-r-calcine",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Calcine",
+        "action": "calcine",
+        "atmosphere": "static air",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 3
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "ramp_rate": {
+          "status": "present",
+          "unit": "K/min",
+          "value": 2
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 623
+        }
+      }
+    },
+    {
+      "id": "ex:cp/treatment/batch-r-storage",
+      "label": "Treatment",
+      "props": {
+        "name": "Storage of batch-r, 30 days",
+        "atmosphere": "not stated",
+        "duration": {
+          "status": "present",
+          "unit": "d",
+          "value": 30
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "method": "storage of the calcined powder",
+        "origin": "synthetic",
+        "treatment_kind": "exposure"
+      }
+    },
+    {
+      "id": "ex:cp/treatment/batch-r-reduction",
+      "label": "Treatment",
+      "props": {
+        "name": "Reduction of batch-r in the N2O unit, 513 K",
+        "atmosphere": "5 % H2 in Ar",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 2
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 513
+        },
+        "treatment_kind": "reduction"
+      }
+    },
+    {
+      "id": "ex:cp/characterization/batch-r-xrf",
+      "label": "Characterization",
+      "props": {
+        "name": "XRF of batch-r, calcined",
+        "evidence": [
+          {
+            "id": "t1_xrf_batch-r",
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "information_depth": "bulk",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "cu_fraction",
+            "status": "present",
+            "basis": "metals only: Cu + Zn + Al",
+            "evidence_ids": [
+              "t1_xrf_batch-r"
+            ],
+            "target": "ex:cp/species/cu",
+            "unit": "at%",
+            "value": 61.9,
+            "variable": "ex:cp/variable/xrf-metal-fraction"
+          },
+          {
+            "id": "zn_fraction",
+            "status": "present",
+            "basis": "metals only: Cu + Zn + Al",
+            "evidence_ids": [
+              "t1_xrf_batch-r"
+            ],
+            "target": "ex:cp/species/zn",
+            "unit": "at%",
+            "value": 28.4,
+            "variable": "ex:cp/variable/xrf-metal-fraction"
+          },
+          {
+            "id": "al_fraction",
+            "status": "present",
+            "basis": "metals only: Cu + Zn + Al",
+            "evidence_ids": [
+              "t1_xrf_batch-r"
+            ],
+            "target": "ex:cp/species/al",
+            "unit": "at%",
+            "value": 9.7,
+            "variable": "ex:cp/variable/xrf-metal-fraction"
+          }
+        ],
+        "sampling": "ensemble",
+        "technique": "X-ray fluorescence"
+      }
+    },
+    {
+      "id": "ex:cp/characterization/batch-r-xps",
+      "label": "Characterization",
+      "props": {
+        "name": "XPS of batch-r, calcined",
+        "evidence": [
+          {
+            "id": "t1_xps_batch-r",
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "information_depth": "surface",
+        "observation_mode": "ex_situ",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "cu_fraction",
+            "status": "present",
+            "basis": "metals only: Cu + Zn + Al",
+            "evidence_ids": [
+              "t1_xps_batch-r"
+            ],
+            "target": "ex:cp/species/cu",
+            "unit": "at%",
+            "value": 52.3,
+            "variable": "ex:cp/variable/xps-metal-fraction"
+          },
+          {
+            "id": "zn_fraction",
+            "status": "present",
+            "basis": "metals only: Cu + Zn + Al",
+            "evidence_ids": [
+              "t1_xps_batch-r"
+            ],
+            "target": "ex:cp/species/zn",
+            "unit": "at%",
+            "value": 37.5,
+            "variable": "ex:cp/variable/xps-metal-fraction"
+          },
+          {
+            "id": "al_fraction",
+            "status": "present",
+            "basis": "metals only: Cu + Zn + Al",
+            "evidence_ids": [
+              "t1_xps_batch-r"
+            ],
+            "target": "ex:cp/species/al",
+            "unit": "at%",
+            "value": 10.2,
+            "variable": "ex:cp/variable/xps-metal-fraction"
+          }
+        ],
+        "sampling": "ensemble",
+        "technique": "X-ray photoelectron spectroscopy",
+        "transfer": "transferred in air"
+      }
+    },
+    {
+      "id": "ex:cp/dataset/batch-r-xps",
+      "label": "Dataset",
+      "props": {
+        "name": "XPS spectra of batch-r",
+        "availability": "not_reported",
+        "data_kind": "spectrum",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:cp/characterization/batch-r-bet",
+      "label": "Characterization",
+      "props": {
+        "name": "N2 physisorption of batch-r, calcined",
+        "conditions": {
+          "degassing_temperature": {
+            "status": "present",
+            "unit": "K",
+            "value": 423
+          },
+          "degassing_time": {
+            "status": "present",
+            "unit": "h",
+            "value": 4
+          }
+        },
+        "evidence": [
+          {
+            "id": "t1_bet_batch-r",
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "bet_area",
+            "status": "present",
+            "definition": "BET, p/p0 0.05-0.30",
+            "evidence_ids": [
+              "t1_bet_batch-r"
+            ],
+            "unit": "m2/g",
+            "value": 76,
+            "variable": "ex:cp/variable/bet-area"
+          }
+        ],
+        "technique": "N2 physisorption at 77 K",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 77
+        }
+      }
+    },
+    {
+      "id": "ex:cp/characterization/batch-r-n2o",
+      "label": "Characterization",
+      "props": {
+        "name": "N2O frontal chromatography of batch-r, reduced",
+        "evidence": [
+          {
+            "id": "t1_n2o_batch-r",
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "observation_mode": "in_situ",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "cu_surface_area",
+            "status": "present",
+            "evidence_ids": [
+              "t1_n2o_batch-r"
+            ],
+            "target": "ex:cp/material/cu-fcc",
+            "unit": "m2/g",
+            "value": 14,
+            "variable": "ex:cp/variable/cu-surface-area"
+          }
+        ],
+        "technique": "N2O reactive frontal chromatography",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 333
+        }
+      }
+    },
+    {
+      "id": "ex:cp/analysis/batch-r-cu-area",
+      "label": "Analysis",
+      "props": {
+        "name": "Cu surface area of batch-r from the N2O consumed",
+        "analysis_kind": "other",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "experiment_kind": "computational",
+        "method": "two surface Cu atoms per O atom",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:cp/characterization/batch-r-xrd",
+      "label": "Characterization",
+      "props": {
+        "name": "XRD of batch-r, reduced and passivated",
+        "evidence": [
+          {
+            "id": "t1_xrd_batch-r",
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "information_depth": "bulk",
+        "note": "reduced at 513 K, passivated in 1 % O2/N2 and measured in air",
+        "observation_mode": "ex_situ",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "cu_crystallite_size",
+            "status": "present",
+            "evidence_ids": [
+              "t1_xrd_batch-r"
+            ],
+            "target": "ex:cp/material/cu-fcc",
+            "unit": "nm",
+            "value": 9.8,
+            "variable": "ex:cp/variable/xrd-crystallite-size"
+          }
+        ],
+        "sampling": "ensemble",
+        "technique": "powder X-ray diffraction"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:cp/link/1",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "evidence": [
+          {
+            "id": "m_nominal",
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "basis": "metals only: Cu + Zn + Al",
+          "definition": "nominal, from the salts weighed",
+          "evidence_ids": [
+            "m_nominal"
+          ],
+          "origin": "assumed",
+          "unit": "at%",
+          "value": 60
+        },
+        "fraction_basis": "atom",
+        "origin": "synthetic",
+        "role": "active_component"
+      },
+      "source": "ex:cp/catalyst/cu-zno-alumina",
+      "target": "ex:cp/species/cu"
+    },
+    {
+      "id": "ex:cp/link/2",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "evidence": [
+          {
+            "id": "m_nominal",
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "basis": "metals only: Cu + Zn + Al",
+          "definition": "nominal, from the salts weighed",
+          "evidence_ids": [
+            "m_nominal"
+          ],
+          "origin": "assumed",
+          "unit": "at%",
+          "value": 30
+        },
+        "fraction_basis": "atom",
+        "origin": "synthetic",
+        "role": "promoter"
+      },
+      "source": "ex:cp/catalyst/cu-zno-alumina",
+      "target": "ex:cp/species/zn"
+    },
+    {
+      "id": "ex:cp/link/3",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "evidence": [
+          {
+            "id": "m_nominal",
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "basis": "metals only: Cu + Zn + Al",
+          "definition": "nominal, from the salts weighed",
+          "evidence_ids": [
+            "m_nominal"
+          ],
+          "origin": "assumed",
+          "unit": "at%",
+          "value": 10
+        },
+        "fraction_basis": "atom",
+        "origin": "synthetic",
+        "role": "promoter"
+      },
+      "source": "ex:cp/catalyst/cu-zno-alumina",
+      "target": "ex:cp/species/al"
+    },
+    {
+      "id": "ex:cp/link/4",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/sample/batch-n",
+      "target": "ex:cp/catalyst/cu-zno-alumina"
+    },
+    {
+      "id": "ex:cp/link/5",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/preparation/batch-n",
+      "target": "ex:cp/sample/batch-n"
+    },
+    {
+      "id": "ex:cp/link/6",
+      "type": "PREPARED_FROM",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 28.99
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "precursor"
+      },
+      "source": "ex:cp/sample/batch-n",
+      "target": "ex:cp/species/cu-nitrate"
+    },
+    {
+      "id": "ex:cp/link/7",
+      "type": "PREPARED_FROM",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 17.85
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "precursor"
+      },
+      "source": "ex:cp/sample/batch-n",
+      "target": "ex:cp/species/zn-nitrate"
+    },
+    {
+      "id": "ex:cp/link/8",
+      "type": "PREPARED_FROM",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 7.5
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "precursor"
+      },
+      "source": "ex:cp/sample/batch-n",
+      "target": "ex:cp/species/al-nitrate"
+    },
+    {
+      "id": "ex:cp/link/9",
+      "type": "PREPARED_FROM",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 31.8
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "precipitating agent"
+      },
+      "source": "ex:cp/sample/batch-n",
+      "target": "ex:cp/species/sodium-carbonate"
+    },
+    {
+      "id": "ex:cp/link/10",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "concentration": {
+          "status": "present",
+          "evidence_ids": [
+            "m_sol"
+          ],
+          "unit": "mol/L",
+          "value": 0.6
+        },
+        "evidence": [
+          {
+            "id": "m_sol",
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "precursor"
+      },
+      "source": "ex:cp/solution/batch-n-nitrates",
+      "target": "ex:cp/species/cu-nitrate"
+    },
+    {
+      "id": "ex:cp/link/11",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "concentration": {
+          "status": "present",
+          "evidence_ids": [
+            "m_sol"
+          ],
+          "unit": "mol/L",
+          "value": 0.3
+        },
+        "evidence": [
+          {
+            "id": "m_sol",
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "precursor"
+      },
+      "source": "ex:cp/solution/batch-n-nitrates",
+      "target": "ex:cp/species/zn-nitrate"
+    },
+    {
+      "id": "ex:cp/link/12",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "concentration": {
+          "status": "present",
+          "evidence_ids": [
+            "m_sol"
+          ],
+          "unit": "mol/L",
+          "value": 0.1
+        },
+        "evidence": [
+          {
+            "id": "m_sol",
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "precursor"
+      },
+      "source": "ex:cp/solution/batch-n-nitrates",
+      "target": "ex:cp/species/al-nitrate"
+    },
+    {
+      "id": "ex:cp/link/13",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "concentration": {
+          "status": "present",
+          "evidence_ids": [
+            "m_sol"
+          ],
+          "unit": "mol/L",
+          "value": 1.2
+        },
+        "evidence": [
+          {
+            "id": "m_sol",
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "other",
+        "role_detail": "precipitating agent"
+      },
+      "source": "ex:cp/solution/batch-n-carbonate",
+      "target": "ex:cp/species/sodium-carbonate"
+    },
+    {
+      "id": "ex:cp/link/14",
+      "type": "PART_OF",
+      "props": {
+        "order": 1,
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/step/batch-n-dissolve-nitrates",
+      "target": "ex:cp/preparation/batch-n"
+    },
+    {
+      "id": "ex:cp/link/15",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 28.99
+        },
+        "origin": "synthetic",
+        "role": "reagent"
+      },
+      "source": "ex:cp/step/batch-n-dissolve-nitrates",
+      "target": "ex:cp/species/cu-nitrate"
+    },
+    {
+      "id": "ex:cp/link/16",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 17.85
+        },
+        "origin": "synthetic",
+        "role": "reagent"
+      },
+      "source": "ex:cp/step/batch-n-dissolve-nitrates",
+      "target": "ex:cp/species/zn-nitrate"
+    },
+    {
+      "id": "ex:cp/link/17",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 7.5
+        },
+        "origin": "synthetic",
+        "role": "reagent"
+      },
+      "source": "ex:cp/step/batch-n-dissolve-nitrates",
+      "target": "ex:cp/species/al-nitrate"
+    },
+    {
+      "id": "ex:cp/link/18",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mL",
+          "value": 200
+        },
+        "origin": "synthetic",
+        "role": "reagent"
+      },
+      "source": "ex:cp/step/batch-n-dissolve-nitrates",
+      "target": "ex:cp/species/water"
+    },
+    {
+      "id": "ex:cp/link/19",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/step/batch-n-dissolve-nitrates",
+      "target": "ex:cp/solution/batch-n-nitrates"
+    },
+    {
+      "id": "ex:cp/link/20",
+      "type": "PART_OF",
+      "props": {
+        "order": 2,
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/step/batch-n-dissolve-carbonate",
+      "target": "ex:cp/preparation/batch-n"
+    },
+    {
+      "id": "ex:cp/link/21",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 31.8
+        },
+        "origin": "synthetic",
+        "role": "reagent"
+      },
+      "source": "ex:cp/step/batch-n-dissolve-carbonate",
+      "target": "ex:cp/species/sodium-carbonate"
+    },
+    {
+      "id": "ex:cp/link/22",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mL",
+          "value": 250
+        },
+        "origin": "synthetic",
+        "role": "reagent"
+      },
+      "source": "ex:cp/step/batch-n-dissolve-carbonate",
+      "target": "ex:cp/species/water"
+    },
+    {
+      "id": "ex:cp/link/23",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/step/batch-n-dissolve-carbonate",
+      "target": "ex:cp/solution/batch-n-carbonate"
+    },
+    {
+      "id": "ex:cp/link/24",
+      "type": "PART_OF",
+      "props": {
+        "order": 3,
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/step/batch-n-precipitate",
+      "target": "ex:cp/preparation/batch-n"
+    },
+    {
+      "id": "ex:cp/link/25",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reagent"
+      },
+      "source": "ex:cp/step/batch-n-precipitate",
+      "target": "ex:cp/solution/batch-n-carbonate"
+    },
+    {
+      "id": "ex:cp/link/26",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "material"
+      },
+      "source": "ex:cp/step/batch-n-precipitate",
+      "target": "ex:cp/solution/batch-n-nitrates"
+    },
+    {
+      "id": "ex:cp/link/27",
+      "type": "PART_OF",
+      "props": {
+        "order": 4,
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/step/batch-n-age",
+      "target": "ex:cp/preparation/batch-n"
+    },
+    {
+      "id": "ex:cp/link/28",
+      "type": "PART_OF",
+      "props": {
+        "order": 5,
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/step/batch-n-filter",
+      "target": "ex:cp/preparation/batch-n"
+    },
+    {
+      "id": "ex:cp/link/29",
+      "type": "PART_OF",
+      "props": {
+        "order": 6,
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/step/batch-n-wash",
+      "target": "ex:cp/preparation/batch-n"
+    },
+    {
+      "id": "ex:cp/link/30",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reagent"
+      },
+      "source": "ex:cp/step/batch-n-wash",
+      "target": "ex:cp/species/water"
+    },
+    {
+      "id": "ex:cp/link/31",
+      "type": "PART_OF",
+      "props": {
+        "order": 7,
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/step/batch-n-dry",
+      "target": "ex:cp/preparation/batch-n"
+    },
+    {
+      "id": "ex:cp/link/32",
+      "type": "PART_OF",
+      "props": {
+        "order": 8,
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/step/batch-n-calcine",
+      "target": "ex:cp/preparation/batch-n"
+    },
+    {
+      "id": "ex:cp/link/33",
+      "type": "TREATED_BY",
+      "props": {
+        "order": 1,
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/sample/batch-n",
+      "target": "ex:cp/treatment/batch-n-storage"
+    },
+    {
+      "id": "ex:cp/link/34",
+      "type": "PRECEDES",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/preparation/batch-n",
+      "target": "ex:cp/treatment/batch-n-storage"
+    },
+    {
+      "id": "ex:cp/link/35",
+      "type": "TREATED_BY",
+      "props": {
+        "order": 2,
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/sample/batch-n",
+      "target": "ex:cp/treatment/batch-n-reduction"
+    },
+    {
+      "id": "ex:cp/link/36",
+      "type": "PRECEDES",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/treatment/batch-n-storage",
+      "target": "ex:cp/treatment/batch-n-reduction"
+    },
+    {
+      "id": "ex:cp/link/37",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "calcined"
+      },
+      "source": "ex:cp/characterization/batch-n-xrf",
+      "target": "ex:cp/sample/batch-n"
+    },
+    {
+      "id": "ex:cp/link/38",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "calcined"
+      },
+      "source": "ex:cp/characterization/batch-n-xps",
+      "target": "ex:cp/sample/batch-n"
+    },
+    {
+      "id": "ex:cp/link/39",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/characterization/batch-n-xps",
+      "target": "ex:cp/dataset/batch-n-xps"
+    },
+    {
+      "id": "ex:cp/link/40",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "calcined"
+      },
+      "source": "ex:cp/characterization/batch-n-bet",
+      "target": "ex:cp/sample/batch-n"
+    },
+    {
+      "id": "ex:cp/link/41",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "reduced"
+      },
+      "source": "ex:cp/characterization/batch-n-n2o",
+      "target": "ex:cp/sample/batch-n"
+    },
+    {
+      "id": "ex:cp/link/42",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:cp/analysis/batch-n-cu-area",
+      "target": "ex:cp/characterization/batch-n-n2o"
+    },
+    {
+      "id": "ex:cp/link/43",
+      "type": "USES_MODEL",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/analysis/batch-n-cu-area",
+      "target": "ex:cp/model/two-cu-per-o"
+    },
+    {
+      "id": "ex:cp/link/44",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "other"
+      },
+      "source": "ex:cp/characterization/batch-n-xrd",
+      "target": "ex:cp/sample/batch-n"
+    },
+    {
+      "id": "ex:cp/link/45",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/sample/batch-r",
+      "target": "ex:cp/catalyst/cu-zno-alumina"
+    },
+    {
+      "id": "ex:cp/link/46",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/preparation/batch-r",
+      "target": "ex:cp/sample/batch-r"
+    },
+    {
+      "id": "ex:cp/link/47",
+      "type": "PREPARED_FROM",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 28.99
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "precursor"
+      },
+      "source": "ex:cp/sample/batch-r",
+      "target": "ex:cp/species/cu-nitrate"
+    },
+    {
+      "id": "ex:cp/link/48",
+      "type": "PREPARED_FROM",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 17.85
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "precursor"
+      },
+      "source": "ex:cp/sample/batch-r",
+      "target": "ex:cp/species/zn-nitrate"
+    },
+    {
+      "id": "ex:cp/link/49",
+      "type": "PREPARED_FROM",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 7.5
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "precursor"
+      },
+      "source": "ex:cp/sample/batch-r",
+      "target": "ex:cp/species/al-nitrate"
+    },
+    {
+      "id": "ex:cp/link/50",
+      "type": "PREPARED_FROM",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 31.8
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "precipitating agent"
+      },
+      "source": "ex:cp/sample/batch-r",
+      "target": "ex:cp/species/sodium-carbonate"
+    },
+    {
+      "id": "ex:cp/link/51",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "concentration": {
+          "status": "present",
+          "evidence_ids": [
+            "m_sol"
+          ],
+          "unit": "mol/L",
+          "value": 0.6
+        },
+        "evidence": [
+          {
+            "id": "m_sol",
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "precursor"
+      },
+      "source": "ex:cp/solution/batch-r-nitrates",
+      "target": "ex:cp/species/cu-nitrate"
+    },
+    {
+      "id": "ex:cp/link/52",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "concentration": {
+          "status": "present",
+          "evidence_ids": [
+            "m_sol"
+          ],
+          "unit": "mol/L",
+          "value": 0.3
+        },
+        "evidence": [
+          {
+            "id": "m_sol",
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "precursor"
+      },
+      "source": "ex:cp/solution/batch-r-nitrates",
+      "target": "ex:cp/species/zn-nitrate"
+    },
+    {
+      "id": "ex:cp/link/53",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "concentration": {
+          "status": "present",
+          "evidence_ids": [
+            "m_sol"
+          ],
+          "unit": "mol/L",
+          "value": 0.1
+        },
+        "evidence": [
+          {
+            "id": "m_sol",
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "precursor"
+      },
+      "source": "ex:cp/solution/batch-r-nitrates",
+      "target": "ex:cp/species/al-nitrate"
+    },
+    {
+      "id": "ex:cp/link/54",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "concentration": {
+          "status": "present",
+          "evidence_ids": [
+            "m_sol"
+          ],
+          "unit": "mol/L",
+          "value": 1.2
+        },
+        "evidence": [
+          {
+            "id": "m_sol",
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:cp/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "other",
+        "role_detail": "precipitating agent"
+      },
+      "source": "ex:cp/solution/batch-r-carbonate",
+      "target": "ex:cp/species/sodium-carbonate"
+    },
+    {
+      "id": "ex:cp/link/55",
+      "type": "PART_OF",
+      "props": {
+        "order": 1,
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/step/batch-r-dissolve-nitrates",
+      "target": "ex:cp/preparation/batch-r"
+    },
+    {
+      "id": "ex:cp/link/56",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 28.99
+        },
+        "origin": "synthetic",
+        "role": "reagent"
+      },
+      "source": "ex:cp/step/batch-r-dissolve-nitrates",
+      "target": "ex:cp/species/cu-nitrate"
+    },
+    {
+      "id": "ex:cp/link/57",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 17.85
+        },
+        "origin": "synthetic",
+        "role": "reagent"
+      },
+      "source": "ex:cp/step/batch-r-dissolve-nitrates",
+      "target": "ex:cp/species/zn-nitrate"
+    },
+    {
+      "id": "ex:cp/link/58",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 7.5
+        },
+        "origin": "synthetic",
+        "role": "reagent"
+      },
+      "source": "ex:cp/step/batch-r-dissolve-nitrates",
+      "target": "ex:cp/species/al-nitrate"
+    },
+    {
+      "id": "ex:cp/link/59",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mL",
+          "value": 200
+        },
+        "origin": "synthetic",
+        "role": "reagent"
+      },
+      "source": "ex:cp/step/batch-r-dissolve-nitrates",
+      "target": "ex:cp/species/water"
+    },
+    {
+      "id": "ex:cp/link/60",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/step/batch-r-dissolve-nitrates",
+      "target": "ex:cp/solution/batch-r-nitrates"
+    },
+    {
+      "id": "ex:cp/link/61",
+      "type": "PART_OF",
+      "props": {
+        "order": 2,
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/step/batch-r-dissolve-carbonate",
+      "target": "ex:cp/preparation/batch-r"
+    },
+    {
+      "id": "ex:cp/link/62",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 31.8
+        },
+        "origin": "synthetic",
+        "role": "reagent"
+      },
+      "source": "ex:cp/step/batch-r-dissolve-carbonate",
+      "target": "ex:cp/species/sodium-carbonate"
+    },
+    {
+      "id": "ex:cp/link/63",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mL",
+          "value": 250
+        },
+        "origin": "synthetic",
+        "role": "reagent"
+      },
+      "source": "ex:cp/step/batch-r-dissolve-carbonate",
+      "target": "ex:cp/species/water"
+    },
+    {
+      "id": "ex:cp/link/64",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/step/batch-r-dissolve-carbonate",
+      "target": "ex:cp/solution/batch-r-carbonate"
+    },
+    {
+      "id": "ex:cp/link/65",
+      "type": "PART_OF",
+      "props": {
+        "order": 3,
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/step/batch-r-precipitate",
+      "target": "ex:cp/preparation/batch-r"
+    },
+    {
+      "id": "ex:cp/link/66",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reagent"
+      },
+      "source": "ex:cp/step/batch-r-precipitate",
+      "target": "ex:cp/solution/batch-r-nitrates"
+    },
+    {
+      "id": "ex:cp/link/67",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "material"
+      },
+      "source": "ex:cp/step/batch-r-precipitate",
+      "target": "ex:cp/solution/batch-r-carbonate"
+    },
+    {
+      "id": "ex:cp/link/68",
+      "type": "PART_OF",
+      "props": {
+        "order": 4,
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/step/batch-r-age",
+      "target": "ex:cp/preparation/batch-r"
+    },
+    {
+      "id": "ex:cp/link/69",
+      "type": "PART_OF",
+      "props": {
+        "order": 5,
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/step/batch-r-filter",
+      "target": "ex:cp/preparation/batch-r"
+    },
+    {
+      "id": "ex:cp/link/70",
+      "type": "PART_OF",
+      "props": {
+        "order": 6,
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/step/batch-r-wash",
+      "target": "ex:cp/preparation/batch-r"
+    },
+    {
+      "id": "ex:cp/link/71",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reagent"
+      },
+      "source": "ex:cp/step/batch-r-wash",
+      "target": "ex:cp/species/water"
+    },
+    {
+      "id": "ex:cp/link/72",
+      "type": "PART_OF",
+      "props": {
+        "order": 7,
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/step/batch-r-dry",
+      "target": "ex:cp/preparation/batch-r"
+    },
+    {
+      "id": "ex:cp/link/73",
+      "type": "PART_OF",
+      "props": {
+        "order": 8,
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/step/batch-r-calcine",
+      "target": "ex:cp/preparation/batch-r"
+    },
+    {
+      "id": "ex:cp/link/74",
+      "type": "TREATED_BY",
+      "props": {
+        "order": 1,
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/sample/batch-r",
+      "target": "ex:cp/treatment/batch-r-storage"
+    },
+    {
+      "id": "ex:cp/link/75",
+      "type": "PRECEDES",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/preparation/batch-r",
+      "target": "ex:cp/treatment/batch-r-storage"
+    },
+    {
+      "id": "ex:cp/link/76",
+      "type": "TREATED_BY",
+      "props": {
+        "order": 2,
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/sample/batch-r",
+      "target": "ex:cp/treatment/batch-r-reduction"
+    },
+    {
+      "id": "ex:cp/link/77",
+      "type": "PRECEDES",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/treatment/batch-r-storage",
+      "target": "ex:cp/treatment/batch-r-reduction"
+    },
+    {
+      "id": "ex:cp/link/78",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "calcined"
+      },
+      "source": "ex:cp/characterization/batch-r-xrf",
+      "target": "ex:cp/sample/batch-r"
+    },
+    {
+      "id": "ex:cp/link/79",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "calcined"
+      },
+      "source": "ex:cp/characterization/batch-r-xps",
+      "target": "ex:cp/sample/batch-r"
+    },
+    {
+      "id": "ex:cp/link/80",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/characterization/batch-r-xps",
+      "target": "ex:cp/dataset/batch-r-xps"
+    },
+    {
+      "id": "ex:cp/link/81",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "calcined"
+      },
+      "source": "ex:cp/characterization/batch-r-bet",
+      "target": "ex:cp/sample/batch-r"
+    },
+    {
+      "id": "ex:cp/link/82",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "reduced"
+      },
+      "source": "ex:cp/characterization/batch-r-n2o",
+      "target": "ex:cp/sample/batch-r"
+    },
+    {
+      "id": "ex:cp/link/83",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:cp/analysis/batch-r-cu-area",
+      "target": "ex:cp/characterization/batch-r-n2o"
+    },
+    {
+      "id": "ex:cp/link/84",
+      "type": "USES_MODEL",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/analysis/batch-r-cu-area",
+      "target": "ex:cp/model/two-cu-per-o"
+    },
+    {
+      "id": "ex:cp/link/85",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "other"
+      },
+      "source": "ex:cp/characterization/batch-r-xrd",
+      "target": "ex:cp/sample/batch-r"
+    },
+    {
+      "id": "ex:cp/analysis/batch-n-cu-area/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/analysis/batch-n-cu-area",
+      "target": "ex:cp/source/paper"
+    },
+    {
+      "id": "ex:cp/analysis/batch-r-cu-area/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/analysis/batch-r-cu-area",
+      "target": "ex:cp/source/paper"
+    },
+    {
+      "id": "ex:cp/catalyst/cu-zno-alumina/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/catalyst/cu-zno-alumina",
+      "target": "ex:cp/source/paper"
+    },
+    {
+      "id": "ex:cp/characterization/batch-n-bet/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/characterization/batch-n-bet",
+      "target": "ex:cp/source/paper"
+    },
+    {
+      "id": "ex:cp/characterization/batch-n-n2o/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/characterization/batch-n-n2o",
+      "target": "ex:cp/source/paper"
+    },
+    {
+      "id": "ex:cp/characterization/batch-n-xps/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/characterization/batch-n-xps",
+      "target": "ex:cp/source/paper"
+    },
+    {
+      "id": "ex:cp/characterization/batch-n-xrd/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/characterization/batch-n-xrd",
+      "target": "ex:cp/source/paper"
+    },
+    {
+      "id": "ex:cp/characterization/batch-n-xrf/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/characterization/batch-n-xrf",
+      "target": "ex:cp/source/paper"
+    },
+    {
+      "id": "ex:cp/characterization/batch-r-bet/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/characterization/batch-r-bet",
+      "target": "ex:cp/source/paper"
+    },
+    {
+      "id": "ex:cp/characterization/batch-r-n2o/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/characterization/batch-r-n2o",
+      "target": "ex:cp/source/paper"
+    },
+    {
+      "id": "ex:cp/characterization/batch-r-xps/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/characterization/batch-r-xps",
+      "target": "ex:cp/source/paper"
+    },
+    {
+      "id": "ex:cp/characterization/batch-r-xrd/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/characterization/batch-r-xrd",
+      "target": "ex:cp/source/paper"
+    },
+    {
+      "id": "ex:cp/characterization/batch-r-xrf/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/characterization/batch-r-xrf",
+      "target": "ex:cp/source/paper"
+    },
+    {
+      "id": "ex:cp/model/two-cu-per-o/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/model/two-cu-per-o",
+      "target": "ex:cp/source/paper"
+    },
+    {
+      "id": "ex:cp/preparation/batch-n/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/preparation/batch-n",
+      "target": "ex:cp/source/paper"
+    },
+    {
+      "id": "ex:cp/preparation/batch-r/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/preparation/batch-r",
+      "target": "ex:cp/source/paper"
+    },
+    {
+      "id": "ex:cp/sample/batch-n/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/sample/batch-n",
+      "target": "ex:cp/source/paper"
+    },
+    {
+      "id": "ex:cp/sample/batch-r/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/sample/batch-r",
+      "target": "ex:cp/source/paper"
+    },
+    {
+      "id": "ex:cp/solution/batch-n-carbonate/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/solution/batch-n-carbonate",
+      "target": "ex:cp/source/paper"
+    },
+    {
+      "id": "ex:cp/solution/batch-n-nitrates/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/solution/batch-n-nitrates",
+      "target": "ex:cp/source/paper"
+    },
+    {
+      "id": "ex:cp/solution/batch-r-carbonate/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/solution/batch-r-carbonate",
+      "target": "ex:cp/source/paper"
+    },
+    {
+      "id": "ex:cp/solution/batch-r-nitrates/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/solution/batch-r-nitrates",
+      "target": "ex:cp/source/paper"
+    },
+    {
+      "id": "ex:cp/step/batch-n-age/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/step/batch-n-age",
+      "target": "ex:cp/source/paper"
+    },
+    {
+      "id": "ex:cp/step/batch-n-calcine/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/step/batch-n-calcine",
+      "target": "ex:cp/source/paper"
+    },
+    {
+      "id": "ex:cp/step/batch-n-dissolve-carbonate/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/step/batch-n-dissolve-carbonate",
+      "target": "ex:cp/source/paper"
+    },
+    {
+      "id": "ex:cp/step/batch-n-dissolve-nitrates/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/step/batch-n-dissolve-nitrates",
+      "target": "ex:cp/source/paper"
+    },
+    {
+      "id": "ex:cp/step/batch-n-dry/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/step/batch-n-dry",
+      "target": "ex:cp/source/paper"
+    },
+    {
+      "id": "ex:cp/step/batch-n-filter/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/step/batch-n-filter",
+      "target": "ex:cp/source/paper"
+    },
+    {
+      "id": "ex:cp/step/batch-n-precipitate/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/step/batch-n-precipitate",
+      "target": "ex:cp/source/paper"
+    },
+    {
+      "id": "ex:cp/step/batch-n-wash/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/step/batch-n-wash",
+      "target": "ex:cp/source/paper"
+    },
+    {
+      "id": "ex:cp/step/batch-r-age/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/step/batch-r-age",
+      "target": "ex:cp/source/paper"
+    },
+    {
+      "id": "ex:cp/step/batch-r-calcine/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/step/batch-r-calcine",
+      "target": "ex:cp/source/paper"
+    },
+    {
+      "id": "ex:cp/step/batch-r-dissolve-carbonate/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/step/batch-r-dissolve-carbonate",
+      "target": "ex:cp/source/paper"
+    },
+    {
+      "id": "ex:cp/step/batch-r-dissolve-nitrates/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/step/batch-r-dissolve-nitrates",
+      "target": "ex:cp/source/paper"
+    },
+    {
+      "id": "ex:cp/step/batch-r-dry/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/step/batch-r-dry",
+      "target": "ex:cp/source/paper"
+    },
+    {
+      "id": "ex:cp/step/batch-r-filter/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/step/batch-r-filter",
+      "target": "ex:cp/source/paper"
+    },
+    {
+      "id": "ex:cp/step/batch-r-precipitate/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/step/batch-r-precipitate",
+      "target": "ex:cp/source/paper"
+    },
+    {
+      "id": "ex:cp/step/batch-r-wash/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/step/batch-r-wash",
+      "target": "ex:cp/source/paper"
+    },
+    {
+      "id": "ex:cp/treatment/batch-n-reduction/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/treatment/batch-n-reduction",
+      "target": "ex:cp/source/paper"
+    },
+    {
+      "id": "ex:cp/treatment/batch-n-storage/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/treatment/batch-n-storage",
+      "target": "ex:cp/source/paper"
+    },
+    {
+      "id": "ex:cp/treatment/batch-r-reduction/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/treatment/batch-r-reduction",
+      "target": "ex:cp/source/paper"
+    },
+    {
+      "id": "ex:cp/treatment/batch-r-storage/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cp/treatment/batch-r-storage",
+      "target": "ex:cp/source/paper"
+    }
+  ],
+  "directed": true,
+  "graph": {
+    "data_status": "synthetic_example",
+    "follows_domains": [
+      "catalysis"
+    ],
+    "graph_id": "ex:cp/graph",
+    "schema": "scale-catal",
+    "schema_version": "0.6.0",
+    "stewardship": {
+      "access": "public"
+    },
+    "title": "Cu/ZnO/Al2O3 by coprecipitation in two orders of addition, with its bulk and surface composition and what the paper leaves unstated (synthetic)"
+  },
+  "multigraph": true
+}
