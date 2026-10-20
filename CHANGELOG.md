@@ -39,7 +39,9 @@
     CQ-17 (CQ-12 and CQ-13 are left to open pull requests). Six invalid examples cover the new rules. The 0.5.0
     examples and invalid examples are re-pinned to 0.6.0. The reporting draft (0.2) and the roadmap say what is done.
   - **Migration.** `scale graph migrate` rewrites nothing. It stops on a turnover frequency whose product is not a
-    chemical species, or whose denominator is not a site count or density.
+    chemical species, or whose denominator is not a site count or density. A turnover frequency that states neither
+    its product nor its denominator stays valid, but is no longer compared scientifically. The kernel's
+    meta-analysis example is one: it pins 0.2.0 and is left as it is.
   - **Sources.** Wrasman et al. 2024 (doi:10.1016/j.jcat.2024.115451) on site counting, Meyer et al. 2024
     (doi:10.1016/j.jcat.2024.115369) on XAS, and Tackett et al. 2026 (doi:10.1021/acscatal.6c01946) on operando
     studies; the checklist cases cite them.

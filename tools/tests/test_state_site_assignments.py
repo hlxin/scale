@@ -415,6 +415,27 @@ def test_the_step_to_site_populations_rewrites_nothing_and_stops_on_what_it_cann
         pgraph_migrate.raise_version(bad, "0.6.0", spec_at("0.6.0"))
 
 
+def test_turnover_frequencies_that_state_no_product_or_denominator_are_no_longer_compared_after_migration():
+    """The one committed document with turnover frequencies (the kernel's meta-analysis example, pinned 0.2.0) stays
+    valid when moved to 0.6.0, and its pooled rates, which state no product and no denominator, leave a scientific
+    comparison as missing_context, where under 0.5.0 they were compared; an ordinary comparison is unchanged."""
+    meta = load_doc(REPO / "core/examples/science-examples/d-meta-analysis.json")
+    new = pgraph_migrate.raise_version(meta, "0.6.0", spec_at("0.6.0"))[0]
+    rep = pgraph.validate(new, spec_of(new))
+    assert rep.errors == [] and rep.warnings == []
+    old = copy.deepcopy(new)
+    old["graph"]["schema_version"] = "0.5.0"
+    plan = {"comparison": "scientific", "match": {"label": "Experiment", "as": "e"},
+            "where": [{"var": "e", "prop": "results.*[variable=ex:sk-d/variable/tof]", "op": "gt", "value": 0,
+                       "unit": "1/s"}], "return": ["e.name"]}
+    before, after = pgraph_query.run(old, spec_of(old), plan), pgraph_query.run(new, spec_of(new), plan)
+    assert (before["status"], len(before["rows"])) == ("answered", 4)
+    assert (after["status"], len(after["rows"])) == ("missing_context", 0)
+    assert all("species" in e["reason"] for e in after["excluded"])
+    plan.pop("comparison")
+    assert len(pgraph_query.run(new, spec_of(new), plan)["rows"]) == 4
+
+
 # ---------------------------------------------------------------- a field step into a link
 def test_a_field_step_follows_a_denominator_into_its_link_and_says_why_it_cannot(doc, spec):
     base = {"match": {"label": "CatalyticTest", "as": "test"},
