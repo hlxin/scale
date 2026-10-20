@@ -82,6 +82,14 @@ def cmd_graph_validate(args):
                   f"{ {k: r['summary'][k] for k in ('error', 'warning')} } {r['counts']}")
             for i in r["errors"][:50] + (r["warnings"][:20] if args.verbose else []):
                 print(f"  {i['record']}: {i['message']}")
+            bal = r.get("balance")
+            if bal:                                 # atom and charge balance of reactions and steps (advisory, never rewritten)
+                print(f"  balance: {bal['checked']} reactions and steps with participants; atoms {bal['atoms']}, "
+                      f"charge {bal['charge']}")
+                for b in bal["records"] if args.verbose else []:
+                    for check in ("atoms", "charge"):
+                        if b[check]["status"] == "not_checkable":
+                            print(f"    {b['record']}: {check} not checkable: {'; '.join(b[check]['missing'])}")
             lc = r["summary"].get("source_lifecycle")
             if lc:                                  # notices recorded: what rests on retracted sources (flagged, not rewritten)
                 print(f"  source lifecycle: sources {lc['sources_by_status'] or 'with no notice'}, {lc['sources_checked']} checked; "

@@ -243,6 +243,7 @@ class Report:
     counts: dict = field(default_factory=dict)
     conformance: dict | None = None
     lifecycle: dict | None = None          # source lifecycle counts (lifecycle.summary); None: no notice, no check
+    balance: dict | None = None            # atom and charge balance of reactions and steps (stoichiometry); None: none
 
     def add(self, severity: str, record: str, message: str) -> None:
         (self.errors if severity == "error" else self.warnings).append({"record": record, "message": message})
@@ -257,7 +258,8 @@ class Report:
             summary["source_lifecycle"] = self.lifecycle
         return {"valid": self.ok, "summary": summary,
                 "counts": self.counts, "errors": self.errors, "warnings": self.warnings,
-                **({"conformance": self.conformance} if self.conformance is not None else {})}
+                **({"conformance": self.conformance} if self.conformance is not None else {}),
+                **({"balance": self.balance} if self.balance is not None else {})}
 
 
 class Validator:
@@ -542,6 +544,9 @@ class Validator:
         if "Hypothesis" in self.nodes and "TESTS" in self.edges:
             from .pgraph_science import science_checks
             science_checks(doc, self.spec, rep)
+        if "HAS_PARTICIPANT" in self.edges and "ChemicalSpecies" in self.nodes:   # atom and charge balance (advisory)
+            from .stoichiometry import check_document as check_balance
+            check_balance(doc, rep)
         for nid, inputs in outdated(doc).items():
             rep.add("warning", nid, f"outdated: inputs {inputs} were recorded after it finished")
         if source_texts:

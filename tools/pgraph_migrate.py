@@ -27,6 +27,7 @@ STEPS: dict[str, tuple[str, str]] = {
     "0.3.0": ("0.4.0", 'breaking: result entries (Experiment.result_values with value ids, phase, stream, unresolved_target); conversion, product_yield, selectivity, production_rate, product_amount and balance kinds; in catalysis a species is a ChemicalSpecies (context_targets)'),
     "0.4.0": ("0.5.0", "breaking: the catalysis checklist applies a test's cases by its driving_forces (a test that lists none has unknown applicability, never a complete checklist) and looks for connected evidence; CatalyticTest.interpretations, Analysis.evaluation_basis, power_supply_input and the dark control's control_kind, differs_in, temperature_matched_at and temperature_matched_over are new (provisional)"),
     "0.5.0": ("0.6.0", "breaking: site populations of a catalyst state (HAS_SITE from CatalystState with population_fraction, site_density, exposed_metal_count and site_inventory); the site_fraction, site_density and site_count kinds; a turnover frequency compared by its species, divided by a site count or a site density, and saying how it was calculated (a warning when it does not); operando defined as characterized while the kinetics are measured; DURING's specimen, timing, kinetics and benchmark; Analysis spectral_fit and limitations; the checklist's operando and spectral-fit cases (provisional)"),
+    "0.6.0": ("0.7.0", "breaking: computed energies and kinetic parameters compared under explicit definitions (the kinds electronic_energy, reaction_energy, reaction_enthalpy, reaction_free_energy, activation_energy, activation_free_energy, apparent_activation_energy and degree_of_rate_control; the contexts process, structure, level_of_theory and charge_treatment, the last two read from the value's producer; what a kind shows); ElementaryStep energies and RATE_CONTROL's degree of rate control bound to their kinds; Computation's method fields, Model.stored_in and REPRESENTS aspect and assumptions (provisional)"),
 }
 
 
@@ -96,6 +97,25 @@ def _site_populations(doc: dict, spec: dict | None) -> list:
     return []
 
 
+def _computed_energies(doc: dict, spec: dict | None) -> list:
+    """0.6.0 -> 0.7.0: computed energies and kinetic parameters compared under explicit definitions. Nothing a 0.6.0
+    document holds is rewritten: no method text is read into a level of theory, no energy is given a reaction it does
+    not name, no charge treatment, spin or dispersion is filled in, and a reaction's balance_status stays what it says.
+    An elementary step's activation and reaction energies and a degree of rate control are now bound to their kinds,
+    and a Variable may name one of the new kinds; the validator checks their units and reports balances, validations on
+    the data a model was fitted to and predicted values that name no producer, and a scientific comparison groups by
+    kind: that changes what is reported, not the document. What the step cannot map stops it: a value whose unit is of
+    another dimension than its kind's (an activation energy in volts), or whose target is not a record its kind's
+    context names (an adsorption energy whose target is the adsorbate, not the reaction); curate it by hand, then
+    migrate. ``spec`` is the target schema."""
+    from .quantities import misread_units, narrowed_targets
+    bad = misread_units(doc, spec) + narrowed_targets(doc, spec)
+    if bad:
+        raise ScaleError("the step to computed-energy contracts cannot map these values (curate them by hand, then "
+                         f"migrate): {'; '.join(bad[:20])}" + (f" (and {len(bad) - 20} more)" if len(bad) > 20 else ""))
+    return []
+
+
 STEP_RULES: dict[str, tuple[str, Callable[[dict, dict | None], list]]] = {
     "0.1.0": ("graph.schema renamed scale-graph -> scale-catal; every record, id and value kept", _rename_schema),
     "0.2.1": ("quantity contracts: a HAS_COMPONENT fraction in an amount unit moves to amount, one in a concentration unit "
@@ -111,6 +131,10 @@ STEP_RULES: dict[str, tuple[str, Callable[[dict, dict | None], list]]] = {
               "operando label or DURING link changes); a turnover frequency whose target is no chemical species, or "
               "whose denominator is not a site count or a site density, stops the step; every record, id and value "
               "kept", _site_populations),
+    "0.6.0": ("computed energies and kinetic parameters: nothing is rewritten (no method text read into a level of theory, "
+              "no reaction, charge treatment or setting filled in, balance_status kept); a value whose unit is of another "
+              "dimension than its kind's, or whose target is not a record its kind's context names, stops the step; every "
+              "record, id and value kept", _computed_energies),
 }
 
 
