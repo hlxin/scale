@@ -120,7 +120,8 @@ SELECT p.title FROM papers_fts JOIN papers p ON p.id = papers_fts.rowid WHERE pa
 changes (`changes`: added, merged, access, licence, retraction, download, SI ...). It also carries the topics' queries
 and settings, so whoever receives the file can keep updating it. A sync rewrites the rows of the papers it touches, so
 change data through the skill rather than by editing the file. Saved filters (`filters.py`) keep a selection, such
-as all CO2-reduction papers, up to date in the same file.
+as all CO2-reduction papers, up to date in the same file. Two people who updated separate copies bring them back
+together with `merge_db.py` (nothing either found is lost; the same paper found by both is kept once).
 
 ## Requirements
 

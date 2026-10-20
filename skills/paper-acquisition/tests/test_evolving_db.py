@@ -57,6 +57,20 @@ def project(tmp_path):
     return proj, led
 
 
+def counts_match(proj):
+    """The topics' counts kept by deltas equal a full recount."""
+    con = sqlite3.connect(str(proj.db))
+    for slug, papers, ins, outs, dl in con.execute("SELECT slug, papers, in_scope, out_of_scope, downloaded FROM collections"):
+        full = con.execute("SELECT COUNT(*), SUM(CASE WHEN c.in_scope=1 AND COALESCE(p.is_non_paper,0)=0 AND "
+                           "COALESCE(p.is_retracted,0)=0 THEN 1 ELSE 0 END), SUM(CASE WHEN c.in_scope=0 AND "
+                           "COALESCE(p.is_non_paper,0)=0 THEN 1 ELSE 0 END), SUM(CASE WHEN c.pdf_path IS NOT NULL "
+                           "THEN 1 ELSE 0 END) FROM paper_collections c JOIN papers p ON p.id = c.paper_id "
+                           "WHERE c.collection=?", (slug,)).fetchone()
+        assert (papers, ins, outs, dl) == tuple(x or 0 for x in full), slug
+    con.close()
+    return True
+
+
 def db(proj):
     con = sqlite3.connect(str(proj.db))
     con.row_factory = sqlite3.Row
@@ -78,6 +92,7 @@ def test_the_database_evolves_in_place_and_records_what_changed(project):
     paper(led, 4, "Ruthenium single atoms for ammonia", [{"name": "Grace Hopper"}], doi="10.1/d")   # a new paper
     led.export(topics=["t"])
     assert proj.db.stat().st_ino == ino                            # the same file, updated in place: no rebuild
+    assert counts_match(proj)
     con = db(proj)
     run = con.execute("SELECT * FROM runs ORDER BY id DESC LIMIT 1").fetchone()
     assert (run["added"], run["updated"], run["removed"], run["papers"]) == (1, 1, 0, 4)
@@ -101,6 +116,7 @@ def test_a_merge_is_recorded_and_the_merged_paper_leaves(project):
     led.export()
     con = db(proj)
     assert con.execute("SELECT COUNT(*) FROM papers WHERE id=3").fetchone()[0] == 0
+    assert counts_match(proj)
     gone = con.execute("SELECT change, old, new FROM changes WHERE paper_id=3").fetchone()
     assert tuple(gone) == ("removed", "10.1/a-preprint", "merged into 1")
     assert {r[0] for r in con.execute("SELECT value FROM identifiers WHERE paper_id=1 AND scheme='doi'")} == \

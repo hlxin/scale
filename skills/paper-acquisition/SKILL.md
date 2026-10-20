@@ -1,12 +1,12 @@
 ---
 name: paper-acquisition
-description: Builds and maintains a per-topic paper index and corpus. Index mode finds every matching paper, preprint, patent and dataset in 34 automated sources (OpenAlex, Crossref, Europe PMC, arXiv, OSTI, Zenodo; Scopus, Web of Science, Lens, EPO with keys) and keeps publications/papers.db up to date in place, holding every paper with abstract, exact license, supplementary information (SI) links, Topic A/B/C and related topics, and the history of every run and change (index CSVs per access type — OA, OA+ND, Free-to-read, Paywalled — on request). Download mode fetches PDFs and SI, paywalled papers only through the library EZproxy at safe rates. Update mode exhaustively adds newer papers (all sources, citation chasing, access and retraction recheck). Duplicates merge automatically. Also imports Web of Science, Scopus or Zotero exports with their abstracts, answers questions about the indexed papers and writes filtered lists (CSV, BibTeX, RIS). Use whenever the user wants to find, index, import, list or download papers on a topic, refresh a literature corpus, or query the paper database. Curating the papers into scale-catal documents belongs to curate-corpus (a corpus) and curate-source (one source).
+description: Builds and maintains a per-topic paper index and corpus. Index mode finds every matching paper, preprint, patent and dataset in 34 automated sources (OpenAlex, Crossref, Europe PMC, arXiv, OSTI, Zenodo; Scopus, Web of Science, Lens, EPO with keys) and keeps publications/papers.db up to date in place, holding every paper with abstract, exact license, supplementary information (SI) links, Topic A/B/C and related topics, and the history of every run and change (index CSVs per access type — OA, OA+ND, Free-to-read, Paywalled — on request); copies of the database updated apart merge back into one (merge_db.py). Download mode fetches PDFs and SI, paywalled papers only through the library EZproxy at safe rates. Update mode exhaustively adds newer papers (all sources, citation chasing, access and retraction recheck). Duplicates merge automatically. Also imports Web of Science, Scopus or Zotero exports with their abstracts, answers questions about the indexed papers and writes filtered lists (CSV, BibTeX, RIS). Use whenever the user wants to find, index, import, list or download papers on a topic, refresh a literature corpus, or query the paper database. Curating the papers into scale-catal documents belongs to curate-corpus (a corpus) and curate-source (one source).
 allowed-tools:
   - Bash(python3 -I ${CLAUDE_SKILL_DIR}/scripts/*)
   - Bash(nohup python3 -I ${CLAUDE_SKILL_DIR}/scripts/*)
   - Bash(nohup zsh ${CLAUDE_SKILL_DIR}/scripts/run_paywalled.sh *)
   - "scale corpus check <manifest>"     # SCALE checks a frozen corpus (freeze_corpus.py)
-version: 3.4.0
+version: 3.5.0
 scale_release: ">=v0.2.0"
 inputs:
   - A topic in the user's words, or a Web of Science, Scopus or Zotero export, a list of DOIs or a web page of them
@@ -398,6 +398,7 @@ python3 -I ${CLAUDE_SKILL_DIR}/scripts/export.py --name <name> --topic <slug> [-
 | `dedup.py` | `--apply` merges the safe duplicates incl. patent families and SI deposits (automatic); `--merge` / `--keep-separate` for the uncertain pairs; `--no-export` |
 | `repair.py` | once after a skill upgrade: re-apply the current abstract and non-paper rules to stored papers |
 | `export.py` | publish pending changes into papers.db (in place); `--topic <slug> --csv` writes the topic's index CSVs; `--rebuild` (fallback; the history is kept); a filtered list as a file; `--set-extracted` |
+| `merge_db.py` | merge another copy of papers.db into this one (`--from`; `--files` copies in its PDFs and SI; `--dry-run`); then `dedup.py --apply` |
 | `filters.py` | saved filters kept in papers.db and re-run as it evolves: `define`, `list`, `show`, `refresh`, `export` (a filter's papers as their own database; `--public`: abstracts only for OA and OA+ND) |
 | `freeze_corpus.py` | a frozen corpus manifest for curation (SCALE's format: every candidate with its status; `scale corpus check`) |
 | `_ezlimit.py status` | EZproxy counters, cooldowns, hard stop (`clear-hard-stop` only after the user's review) |
@@ -416,6 +417,13 @@ received as papers.db alone is rebuilt from it by the first script that runs, an
 database stopped (the receiver adds their own keys and contact address). Saved filters (`filters.py`) live in it
 and re-run whenever papers are added or removed, or their text, topics or retraction change. `export.py --rebuild`
 rebuilds the file from the ledger only as a fallback, keeping the history.
+
+**Two copies.** When two people update separate copies of papers.db, one of them runs `merge_db.py --from <their
+papers.db>` (`--files <their project folder>` also copies in their PDFs and SI; `--dry-run` only says what would
+change), then `dedup.py --apply`, and shares the merged file: the copies converge. Papers are matched by identity
+(DOI, patent number, title key, aliases), never by ID; nothing either copy found, checked, downloaded, screened or
+curated is lost, and duplicates one copy merged are merged in the other. The rules per field are in merge_db.py's
+docstring and [references/database.md](references/database.md). A merge that finds nothing new changes nothing.
 
 ## Where things are
 
