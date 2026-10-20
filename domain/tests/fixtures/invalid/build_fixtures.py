@@ -223,6 +223,38 @@ def main() -> None:
                            "props": {"specimen": "same_reactor", "origin": "synthetic"}})
     defect("operando-specimen-not-in-vocabulary", "an operando observation whose specimen is stated in other words",
            operando_words)
+    # computed energies and kinetic parameters (0.7.0): an adsorption energy whose process is a species, an elementary
+    # activation energy in volts, and a charge treatment stated in words the vocabulary does not hold
+    def computation(d: dict, **props) -> dict:
+        c = {"id": "ex:df-electro/computation/dft", "label": "Computation",
+             "props": {"name": "DFT of nitrate on Cu(111)", "computation_kind": "electronic_structure",
+                       "level_of_theory": {"status": "present", "text_value": "RPBE"}, "origin": "synthetic",
+                       "evidence": [{"id": "dft_table", "source": "ex:df-electro/source/paper", "locator": "Table 3",
+                                     "kind": "table"}], **props}}
+        d["nodes"].append(c)
+        d["links"].append({"id": "ex:df-electro/computation/dft/reported-in", "type": "REPORTED_IN", "source": c["id"],
+                           "target": "ex:df-electro/source/paper", "props": {"origin": "synthetic"}})
+        return c
+
+    def energy_of_a_species(d: dict) -> None:
+        d["nodes"].append({"id": "ex:df-electro/variable/adsorption-energy", "label": "Variable",
+                           "props": {"name": "nitrate adsorption energy", "scale": "quantitative",
+                                     "quantity_kind": "reaction_energy", "unit": "eV", "origin": "synthetic"}})
+        computation(d, result_values=[{"id": "nitrate_adsorption", "status": "present", "value": -1.2, "unit": "eV",
+                                       "variable": "ex:df-electro/variable/adsorption-energy",
+                                       "target": node(d, "species/nitrate")["id"], "evidence_ids": ["dft_table"]}])
+    defect("adsorption-energy-of-a-species", "an adsorption energy whose target is the adsorbate, not the reaction that "
+           "defines it", energy_of_a_species)
+
+    def barrier_in_volts(d: dict) -> None:
+        c = computation(d)
+        d["nodes"].append({"id": "ex:df-electro/step/no3-dissociation", "label": "ElementaryStep",
+                           "props": {"name": "NO3* -> NO2* + O*", "origin": "synthetic",
+                                     "activation_energy": {"status": "present", "value": 0.7, "unit": "V",
+                                                           "origin": "computed", "produced_by": c["id"]}}})
+    defect("activation-energy-in-volts", "an elementary step's activation energy in volts", barrier_in_volts)
+    defect("charge-treatment-not-in-vocabulary", "a computation whose charge treatment is stated in other words",
+           lambda d: computation(d, charge_treatment="grand_canonical"))
     # it states its access (public, like every committed document) but not who contributed it or its project
     defect("research-data-without-stewardship", "research data that does not say who contributed it or which project it belongs to",
            lambda d: d["graph"].__setitem__("stewardship", {"access": "public"}), base=template("catalysis", VERSION))
