@@ -1,0 +1,128 @@
+# A competency question of the catalysis domain (tools/competency.py; `scale domains cq catalysis`).
+# It runs on public synthetic examples, so anyone can rerun it and see the same answer.
+id: CQ-14
+question: Which site populations does each state of one specimen have, by which measurement and on which evidence, and
+  does a population recorded for one state hold for another?
+description: |
+  A site population belongs to the catalyst state it was counted or observed in: it is on the HAS_SITE from that
+  CatalystState (scale-catal 0.6.0), never on the sample as a whole, since sites change with the conditions. The
+  specimen in the XAS cell has three states. After reduction, 2 % of its exposed Cu atoms are Zn-decorated step sites
+  (CO infrared spectra) and 310 µmol/g of Cu atoms are exposed (N2O frontal chromatography, through an Analysis that
+  uses the counting model); in the working state the share is 9 % (modulation-excitation infrared spectra), with a
+  derived inventory of 28 µmol/g and a titration that bounds it at 30 µmol/g; after the test, 240 µmol/g of Cu atoms
+  are exposed. Each population is a value with its origin, uncertainty or bound and the evidence that states it. The
+  state after the test records no step sites, so a question about them there finds none: nothing is carried over from
+  the working state. A computed population sits on a state of the model, and a count the source gives only for the
+  formulation on a state of the Catalyst, with no specimen.
+documents:
+  - examples/scale-catal/state-site-examples/sites-and-assignments.json
+plan:
+  question: Which site populations does each state of the specimen in the XAS cell have?
+  match:
+    label: CatalystState
+    as: state
+  steps:
+    - from: state
+      edge: STATE_OF
+      to: CatalystSample
+      as: specimen
+      where:
+        - prop: id
+          op: eq
+          value: ex:ss/sample/batch-a-xas-cell
+    - from: state
+      edge: HAS_SITE
+      to: ActiveSite
+      as: site
+      edge_as: population
+  return:
+    - state.name
+    - state.state_kind
+    - site.name
+    - population.population_fraction
+    - population.exposed_metal_count
+    - population.site_inventory
+    - population.status
+  evidence: true
+expect:
+  status: answered
+  min_rows: 5
+  max_rows: 5
+  values:
+    state.state_kind:
+      - pretreated
+      - working
+      - post_reaction
+    site.name:
+      - exposed Cu atoms
+      - Zn-decorated Cu step site
+variants:
+  - description: The state after the test records no Zn-decorated step sites, and none is inherited from the working
+      state or from the specimen.
+    plan:
+      match:
+        id: ex:ss/state/after-test
+        as: state
+      steps:
+        - from: state
+          edge: HAS_SITE
+          to: ActiveSite
+          as: site
+          edge_as: population
+          where:
+            - prop: id
+              op: eq
+              value: ex:ss/site/zn-decorated-step
+    expect:
+      status: no_matching_record
+  - description: A computed population (50 % of the step-edge Cu atoms of a Cu(211) slab, 3.1 sites/nm2) is on a state of
+      the structure model, with no specimen, and keeps the computation that produced it.
+    plan:
+      steps:
+        - from: state
+          edge: STATE_OF
+          to: Model
+          as: model
+        - from: state
+          edge: HAS_SITE
+          to: ActiveSite
+          as: site
+          edge_as: population
+      return:
+        - state.name
+        - model.name
+        - site.name
+        - population.population_fraction
+        - population.site_density
+    expect:
+      status: answered
+      min_rows: 1
+      max_rows: 1
+      values:
+        model.name:
+          - Cu(211) slab with Zn at the step edge
+  - description: A count the reply gives only for the formulation (about 300 µmol/g, from an assumed dispersion) is on a
+      state of the Catalyst; no specimen is added for it.
+    plan:
+      steps:
+        - from: state
+          edge: STATE_OF
+          to: Catalyst
+          as: formulation
+        - from: state
+          edge: HAS_SITE
+          to: ActiveSite
+          as: site
+          edge_as: population
+      return:
+        - state.name
+        - formulation.name
+        - site.name
+        - population.exposed_metal_count
+    expect:
+      status: answered
+      min_rows: 1
+      max_rows: 1
+      values:
+        formulation.name:
+          - Cu/ZnO, 40 wt% Cu

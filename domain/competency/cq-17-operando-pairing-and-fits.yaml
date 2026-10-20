@@ -1,0 +1,147 @@
+# A competency question of the catalysis domain (tools/competency.py; `scale domains cq catalysis`).
+# It runs on public synthetic examples, so anyone can rerun it and see the same answer.
+id: CQ-17
+question: Which observations the source calls operando are paired with the performance they are read with, and what
+  does an assignment drawn from one rest on (the measured spectrum, the fit, its limitations)?
+description: |
+  observation_mode is the source's label, kept as reported. DURING says only that a characterization overlapped a run;
+  a pairing of what it observes with the performance rests on what the source states besides (DURING's specimen,
+  timing, performance and benchmark, scale-catal 0.6.0): the same specimen, a stated synchronization, the performance
+  measured quantitatively in the cell and compared with a conventional reactor or cell. The Cu K-edge XAS and the
+  modulation-excitation infrared spectra state it; the DRIFTS observation only overlaps a run, so it is left out of the
+  pairing, and the catalysis checklist reports it missing (paired_performance, benchmarked_performance). A measured
+  spectrum (a Dataset), a fit to it (an Analysis, spectral_fit, its parameters fitted, with its limitations) and the
+  assignment that cites the fit (a Claim) are three records: the assignment is not the spectrum.
+documents:
+  - examples/scale-catal/state-site-examples/sites-and-assignments.json
+plan:
+  question: Which operando observations are paired with a measured, benchmarked performance?
+  match:
+    label: Characterization
+    as: observation
+    where:
+      - prop: observation_mode
+        op: eq
+        value: operando
+  steps:
+    - from: observation
+      edge: DURING
+      to: CatalyticTest
+      as: test
+      edge_as: overlap
+      edge_where:
+        - prop: specimen
+          op: eq
+          value: same_specimen
+        - prop: timing
+          op: in
+          value:
+            - simultaneous
+            - alternating
+        - prop: performance
+          op: in
+          value:
+            - measured_in_cell
+            - matched_to_benchmark
+  return:
+    - observation.name
+    - test.name
+    - overlap.specimen
+    - overlap.timing
+    - overlap.performance
+    - overlap.benchmark
+  evidence: true
+expect:
+  status: answered
+  min_rows: 2
+  max_rows: 2
+  values:
+    observation.name:
+      - Cu K-edge XAS under reaction
+    overlap.performance:
+      - matched_to_benchmark
+variants:
+  - description: Without the pairing conditions, every operando observation that overlaps a run is listed, the DRIFTS one
+      too, with nothing stated of its specimen, timing or performance.
+    plan:
+      steps:
+        - from: observation
+          edge: DURING
+          to: CatalyticTest
+          as: test
+          edge_as: overlap
+    expect:
+      status: answered
+      min_rows: 3
+      max_rows: 3
+      values:
+        observation.name:
+          - DRIFTS under reaction
+  - description: From the assignment to the fit it cites, the spectrum fitted and the measurement that recorded it.
+    plan:
+      match:
+        label: Claim
+        as: claim
+      steps:
+        - from: claim
+          edge: SUPPORTS
+          direction: in
+          to: Analysis
+          as: fit
+          where:
+            - prop: analysis_kind
+              op: eq
+              value: spectral_fit
+        - from: fit
+          edge: HAS_INPUT
+          to: Dataset
+          as: spectrum
+          edge_where:
+            - prop: role
+              op: eq
+              value: data
+        - from: spectrum
+          edge: HAS_OUTPUT
+          direction: in
+          to: Characterization
+          as: measurement
+      return:
+        - claim.name
+        - claim.claim_status
+        - fit.name
+        - fit.results.cn_cu_zn
+        - fit.limitations
+        - spectrum.name
+        - spectrum.data_kind
+        - measurement.name
+    expect:
+      status: answered
+      min_rows: 1
+      max_rows: 1
+      values:
+        spectrum.data_kind:
+          - spectrum
+        fit.name:
+          - First-shell EXAFS fit of the Cu K edge
+  - description: The same spectrum has two fits, each an Analysis of its own with its limitations.
+    plan:
+      match:
+        id: ex:ss/dataset/cu-k-spectra
+        as: spectrum
+      steps:
+        - from: spectrum
+          edge: HAS_INPUT
+          direction: in
+          to: Analysis
+          as: fit
+      return:
+        - fit.name
+        - fit.analysis_kind
+        - fit.limitations
+    expect:
+      status: answered
+      min_rows: 2
+      max_rows: 2
+      values:
+        fit.analysis_kind:
+          - spectral_fit

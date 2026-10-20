@@ -1,0 +1,170 @@
+# A competency question of the catalysis domain (tools/competency.py; `scale domains cq catalysis`).
+# It runs on public synthetic examples, so anyone can rerun it and see the same answer.
+id: CQ-16
+question: Which phases and sites are assigned activity for methanol formation in the working state, on what evidence,
+  and which assignments compete with them or call a component a spectator?
+description: |
+  An assignment is a Claim with named ABOUT roles: the component it assigns (active, co_active, spectator, precursor,
+  inhibitor), the state (state), the reaction and product (reaction, product) and the test it concerns (test); the
+  tests, analyses and claims it rests on reach it by SUPPORTS and CONTRADICTS with premise_refs to the results. The
+  ZnOx overlayer, a minority phase of the working state, and the Zn-decorated Cu steps it makes are assigned activity,
+  supported by the rate across five reduction temperatures and by an EXAFS fit; the reply's claim that Cu steps without
+  Zn are the active sites contradicts it and is its own row. Abundance is not activity: bulk ZnO and Cu, the majority
+  phases, carry no activity assignment, and ZnO is called a spectator by a claim of its own.
+documents:
+  - examples/scale-catal/state-site-examples/sites-and-assignments.json
+plan:
+  question: Which components are assigned activity for methanol formation in the working state?
+  match:
+    label: Claim
+    as: claim
+  steps:
+    - from: claim
+      edge: ABOUT
+      as: component
+      edge_as: assigned
+      edge_where:
+        - prop: role
+          op: in
+          value:
+            - active
+            - co_active
+    - from: claim
+      edge: ABOUT
+      to: CatalystState
+      as: state
+      edge_where:
+        - prop: role
+          op: eq
+          value: state
+      where:
+        - prop: id
+          op: eq
+          value: ex:ss/state/working
+    - from: claim
+      edge: CONTRADICTS
+      direction: in
+      to: Claim
+      as: challenged_by
+      optional: true
+  return:
+    - claim.name
+    - claim.claim_status
+    - component.name
+    - component.label
+    - assigned.role
+    - challenged_by.name
+  evidence: true
+expect:
+  status: answered
+  min_rows: 3
+  max_rows: 3
+  values:
+    component.name:
+      - ZnOx overlayer on Cu
+      - Zn-decorated Cu step site
+      - Cu step site without Zn
+    challenged_by.name:
+      - Cu steps without Zn active for methanol (the reply)
+variants:
+  - description: No majority phase of the working state is assigned activity.
+    plan:
+      steps:
+        - from: claim
+          edge: ABOUT
+          as: component
+          edge_as: assigned
+          edge_where:
+            - prop: role
+              op: in
+              value:
+                - active
+                - co_active
+        - from: component
+          edge: HAS_PHASE
+          direction: in
+          to: CatalystState
+          as: host
+          edge_as: phase
+          where:
+            - prop: id
+              op: eq
+              value: ex:ss/state/working
+          edge_where:
+            - prop: dominance
+              op: eq
+              value: majority
+      return:
+        - claim.name
+        - component.name
+        - phase.dominance
+    expect:
+      status: no_matching_record
+  - description: The minority phase carries the assignment, with its evidence.
+    plan:
+      steps:
+        - from: claim
+          edge: ABOUT
+          as: component
+          edge_as: assigned
+          edge_where:
+            - prop: role
+              op: in
+              value:
+                - active
+                - co_active
+        - from: component
+          edge: HAS_PHASE
+          direction: in
+          to: CatalystState
+          as: host
+          edge_as: phase
+          where:
+            - prop: id
+              op: eq
+              value: ex:ss/state/working
+          edge_where:
+            - prop: dominance
+              op: eq
+              value: minority
+        - from: claim
+          edge: SUPPORTS
+          direction: in
+          as: support
+      return:
+        - claim.name
+        - component.name
+        - phase.dominance
+        - support.name
+    expect:
+      status: answered
+      min_rows: 2
+      max_rows: 2
+      values:
+        component.name:
+          - ZnOx overlayer on Cu
+        support.name:
+          - Methanol rate against the share of Zn-decorated step sites over five reduction temperatures
+          - First-shell EXAFS fit of the Cu K edge
+  - description: A spectator interpretation is a claim of its own, found by its role.
+    plan:
+      steps:
+        - from: claim
+          edge: ABOUT
+          as: component
+          edge_as: assigned
+          edge_where:
+            - prop: role
+              op: eq
+              value: spectator
+      return:
+        - claim.name
+        - component.name
+        - assigned.role
+    expect:
+      status: answered
+      min_rows: 1
+      max_rows: 1
+      values:
+        component.name:
+          - wurtzite ZnO

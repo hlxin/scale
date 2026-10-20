@@ -71,3 +71,21 @@ fixtures:
   - file: transport-basis-not-in-vocabulary.json
     error: "evaluation_basis: 'estimated' is not one of"
     reason: A transport check is asserted, numerical or experimental (or not reported); an unlisted basis would hide whether the verdict rests on a calculation, a test or neither.
+  - file: has-site-from-a-test.json
+    error: "HAS_SITE source must be ['Catalyst', 'CatalystSample', 'CatalystState'], got CatalyticTest"
+    reason: A site population belongs to a catalyst, a sample or the catalyst state it was counted in; a test is measured in a state (IN_STATE) and has no sites of its own, so a population on a test could not say which state it holds for.
+  - file: site-fraction-in-umol-per-gram.json
+    error: "population_fraction: unit 'µmol/g' is amount_per_mass (M-1 N), not a dimension of site_fraction"
+    reason: A population fraction is a dimensionless share of a stated whole; a number of sites per gram is a count (site_inventory or exposed_metal_count), and the two are never one quantity.
+  - file: site-inventory-as-surface-area.json
+    error: "site_inventory: unit 'm2/g' is M-1 L2, not a dimension of site_count"
+    reason: A metal surface area is not a count of sites; turning one into the other needs a stated number of atoms per area, which is a derived value with what produced it, never an unstated assumption.
+  - file: computed-site-count-without-producer.json
+    error: "site_inventory: a computed value names the experiment that produced it (produced_by)"
+    reason: A computed site count keeps the computation, and through it the model, that produced it, so that a count from a model is never read as one counted on a specimen.
+  - file: tof-divided-by-a-share.json
+    error: "is a site_fraction, not a denominator of turnover_frequency (a site_count or a site_density)"
+    reason: A turnover frequency is divided by a number of sites (a count or a density); a share of sites is dimensionless like a count but is not one, so a rate divided by it is not per site.
+  - file: operando-specimen-not-in-vocabulary.json
+    error: "specimen: 'same_reactor' is not one of"
+    reason: Which specimen an operando observation saw comes from a closed list, so that the checklist can tell an observation paired with the performance of the same specimen from one that only overlapped a run.

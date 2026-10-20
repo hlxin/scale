@@ -1,0 +1,2865 @@
+{
+  "nodes": [
+    {
+      "id": "ex:ss/source/paper",
+      "label": "Source",
+      "props": {
+        "name": "Invented paper",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "Sites of a Cu/ZnO catalyst before, during and after CO2 hydrogenation (invented)",
+        "year": 2026
+      }
+    },
+    {
+      "id": "ex:ss/source/reply",
+      "label": "Source",
+      "props": {
+        "name": "Invented reply",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "Which Cu sites make methanol? A reply (invented)",
+        "year": 2026
+      }
+    },
+    {
+      "id": "ex:ss/species/co2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "CO2",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 1,
+          "O": 2
+        },
+        "formula": "CO2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ss/species/h2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "H2",
+        "charge": 0,
+        "elemental_composition": {
+          "H": 2
+        },
+        "formula": "H2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ss/species/methanol",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "methanol",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 1,
+          "H": 4,
+          "O": 1
+        },
+        "formula": "CH3OH",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ss/species/water",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "H2O",
+        "charge": 0,
+        "elemental_composition": {
+          "H": 2,
+          "O": 1
+        },
+        "formula": "H2O",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ss/reaction/co2-meoh",
+      "label": "Reaction",
+      "props": {
+        "name": "CO2 + 3 H2 -> CH3OH + H2O",
+        "balance_status": "balanced",
+        "direction": "reversible",
+        "equation": "CO2 + 3 H2 -> CH3OH + H2O",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ss/feed/co2-h2",
+      "label": "Feed",
+      "props": {
+        "name": "CO2/H2 = 1/3",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ss/catalyst/cu-zno",
+      "label": "Catalyst",
+      "props": {
+        "name": "Cu/ZnO, 40 wt% Cu",
+        "catalyst_family": "metal",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "nominal_formula": "Cu/ZnO",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ss/material/cu",
+      "label": "Material",
+      "props": {
+        "name": "fcc Cu",
+        "formula": "Cu",
+        "material_family": "metal",
+        "origin": "synthetic",
+        "structure_type": "fcc"
+      }
+    },
+    {
+      "id": "ex:ss/material/zno",
+      "label": "Material",
+      "props": {
+        "name": "wurtzite ZnO",
+        "formula": "ZnO",
+        "material_family": "oxide",
+        "origin": "synthetic",
+        "polymorph": "wurtzite"
+      }
+    },
+    {
+      "id": "ex:ss/material/znox-overlayer",
+      "label": "Material",
+      "props": {
+        "name": "ZnOx overlayer on Cu",
+        "crystallinity": "not_reported",
+        "formula": "ZnOx",
+        "material_family": "oxide",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ss/site/exposed-cu",
+      "label": "ActiveSite",
+      "props": {
+        "name": "exposed Cu atoms",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "site_kind": "metal_site"
+      }
+    },
+    {
+      "id": "ex:ss/site/zn-decorated-step",
+      "label": "ActiveSite",
+      "props": {
+        "name": "Zn-decorated Cu step site",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 5",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "proposed_composition": "a Cu step edge with a Zn atom from the ZnOx overlayer",
+        "site_kind": "step_edge"
+      }
+    },
+    {
+      "id": "ex:ss/site/cu-step",
+      "label": "ActiveSite",
+      "props": {
+        "name": "Cu step site without Zn",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Discussion",
+            "source": "ex:ss/source/reply"
+          }
+        ],
+        "origin": "synthetic",
+        "site_kind": "step_edge"
+      }
+    },
+    {
+      "id": "ex:ss/sample/batch-a-xas-cell",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Cu/ZnO batch A, 5 mg in the XAS flow cell",
+        "batch_identifier": "A",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "sample_kind": "granules"
+      }
+    },
+    {
+      "id": "ex:ss/sample/batch-a-reactor",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Cu/ZnO batch A, 200 mg in the laboratory reactor",
+        "batch_identifier": "A",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "sample_kind": "granules"
+      }
+    },
+    {
+      "id": "ex:ss/sample/batch-a-drifts",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Cu/ZnO batch A, in the DRIFTS cell",
+        "batch_identifier": "A",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "sample_kind": "granules"
+      }
+    },
+    {
+      "id": "ex:ss/instrument/xas-cell",
+      "label": "Reactor",
+      "props": {
+        "name": "Capillary flow cell at the beamline",
+        "origin": "synthetic",
+        "reactor_kind": "flow"
+      }
+    },
+    {
+      "id": "ex:ss/instrument/lab-reactor",
+      "label": "Reactor",
+      "props": {
+        "name": "Laboratory fixed-bed reactor",
+        "origin": "synthetic",
+        "reactor_kind": "fixed_bed"
+      }
+    },
+    {
+      "id": "ex:ss/instrument/drifts-cell",
+      "label": "Reactor",
+      "props": {
+        "name": "DRIFTS reaction cell",
+        "origin": "synthetic",
+        "reactor_kind": "flow"
+      }
+    },
+    {
+      "id": "ex:ss/treatment/reduction",
+      "label": "Treatment",
+      "props": {
+        "name": "Reduction in 5 % H2 at 250 °C, 2 h",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 250
+        },
+        "treatment_kind": "reduction"
+      }
+    },
+    {
+      "id": "ex:ss/variable/methanol-rate",
+      "label": "Variable",
+      "props": {
+        "name": "methanol formation rate per catalyst mass",
+        "origin": "synthetic",
+        "quantity_kind": "production_rate",
+        "scale": "quantitative",
+        "unit": "mmol/(g h)"
+      }
+    },
+    {
+      "id": "ex:ss/variable/tof",
+      "label": "Variable",
+      "props": {
+        "name": "methanol turnover frequency",
+        "origin": "synthetic",
+        "quantity_kind": "turnover_frequency",
+        "scale": "quantitative",
+        "unit": "s-1"
+      }
+    },
+    {
+      "id": "ex:ss/test/laboratory-reactor",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "CO2 hydrogenation in the laboratory reactor, 220 °C, 30 bar",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "id": "t3_rate",
+            "kind": "table",
+            "locator": "Table 3",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "basis": "absolute",
+          "unit": "bar",
+          "value": 30
+        },
+        "result_values": [
+          {
+            "id": "methanol_rate",
+            "status": "present",
+            "evidence_ids": [
+              "t3_rate"
+            ],
+            "target": "ex:ss/species/methanol",
+            "unit": "mmol/(g h)",
+            "value": 4.3,
+            "variable": "ex:ss/variable/methanol-rate"
+          }
+        ],
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 220
+        },
+        "temperature_measured_at": "catalyst_bed",
+        "test_kind": "activity",
+        "time_on_stream": {
+          "status": "present",
+          "unit": "h",
+          "value": 10
+        }
+      }
+    },
+    {
+      "id": "ex:ss/test/drifts-cell",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "CO2 hydrogenation in the DRIFTS cell, 220 °C, 1 bar",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "id": "s4_rate",
+            "kind": "figure",
+            "locator": "Supporting information, Figure S4",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "basis": "absolute",
+          "unit": "bar",
+          "value": 1
+        },
+        "result_values": [
+          {
+            "id": "methanol_rate",
+            "status": "present",
+            "evidence_ids": [
+              "s4_rate"
+            ],
+            "target": "ex:ss/species/methanol",
+            "unit": "mmol/(g h)",
+            "value": 0.2,
+            "variable": "ex:ss/variable/methanol-rate"
+          }
+        ],
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 220
+        },
+        "temperature_measured_at": "catalyst_bed",
+        "test_kind": "activity",
+        "time_on_stream": {
+          "status": "present",
+          "unit": "h",
+          "value": 10
+        }
+      }
+    },
+    {
+      "id": "ex:ss/state/reduced",
+      "label": "CatalystState",
+      "props": {
+        "name": "reduced, before the reaction",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "regime": "steady",
+        "state_kind": "pretreated"
+      }
+    },
+    {
+      "id": "ex:ss/state/working",
+      "label": "CatalystState",
+      "props": {
+        "name": "working, 220 °C and 30 bar CO2/H2",
+        "conditions": {
+          "temperature": {
+            "status": "present",
+            "unit": "°C",
+            "value": 220
+          },
+          "total_pressure": {
+            "status": "present",
+            "unit": "bar",
+            "value": 30
+          }
+        },
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 5",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "regime": "steady",
+        "state_kind": "working"
+      }
+    },
+    {
+      "id": "ex:ss/state/after-test",
+      "label": "CatalystState",
+      "props": {
+        "name": "after the test, cooled in H2",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "state_kind": "post_reaction"
+      }
+    },
+    {
+      "id": "ex:ss/model/n2o-counting",
+      "label": "Model",
+      "props": {
+        "name": "Exposed Cu from N2O uptake",
+        "assumptions": [
+          "N2O oxidizes the exposed Cu atoms only, leaving one O atom per two of them",
+          "every exposed Cu atom counts once, whatever its site"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "model_kind": "adsorption stoichiometry",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ss/characterization/rfc-reduced",
+      "label": "Characterization",
+      "props": {
+        "name": "N2O frontal chromatography after reduction",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "observation_mode": "in_situ",
+        "origin": "synthetic",
+        "technique": "N2O reactive frontal chromatography",
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 40
+        }
+      }
+    },
+    {
+      "id": "ex:ss/analysis/rfc-reduced-count",
+      "label": "Analysis",
+      "props": {
+        "name": "N2O frontal chromatography after reduction: exposed Cu atoms from the N2O uptake",
+        "analysis_kind": "other",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "method": "two exposed Cu atoms per O atom left by N2O",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ss/characterization/rfc-after-test",
+      "label": "Characterization",
+      "props": {
+        "name": "N2O frontal chromatography after the test",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "observation_mode": "in_situ",
+        "origin": "synthetic",
+        "technique": "N2O reactive frontal chromatography",
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 40
+        }
+      }
+    },
+    {
+      "id": "ex:ss/analysis/rfc-after-test-count",
+      "label": "Analysis",
+      "props": {
+        "name": "N2O frontal chromatography after the test: exposed Cu atoms from the N2O uptake",
+        "analysis_kind": "other",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "method": "two exposed Cu atoms per O atom left by N2O",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ss/characterization/co-ir-reduced",
+      "label": "Characterization",
+      "props": {
+        "name": "CO infrared spectra after reduction, at 25 °C",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "information_depth": "surface",
+        "observation_mode": "quasi_in_situ",
+        "origin": "synthetic",
+        "sampling": "ensemble",
+        "technique": "infrared spectroscopy of adsorbed CO"
+      }
+    },
+    {
+      "id": "ex:ss/characterization/me-ir-working",
+      "label": "Characterization",
+      "props": {
+        "name": "Modulation-excitation infrared spectra under reaction, CO2 partial pressure pulsed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "information_depth": "surface",
+        "observation_mode": "operando",
+        "origin": "synthetic",
+        "sampling": "ensemble",
+        "technique": "modulation-excitation infrared spectroscopy"
+      }
+    },
+    {
+      "id": "ex:ss/characterization/co2-titration",
+      "label": "Characterization",
+      "props": {
+        "name": "CO2 pulse titration in the reaction feed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "observation_mode": "in_situ",
+        "origin": "synthetic",
+        "technique": "CO2 pulse titration"
+      }
+    },
+    {
+      "id": "ex:ss/characterization/cu-k-xas",
+      "label": "Characterization",
+      "props": {
+        "name": "Cu K-edge XAS under reaction",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "information_depth": "bulk",
+        "observation_mode": "operando",
+        "origin": "synthetic",
+        "sampling": "ensemble",
+        "technique": "X-ray absorption spectroscopy (Cu K edge)"
+      }
+    },
+    {
+      "id": "ex:ss/characterization/drifts",
+      "label": "Characterization",
+      "props": {
+        "name": "DRIFTS under reaction",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Supporting information, Figure S4",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "information_depth": "surface",
+        "observation_mode": "operando",
+        "origin": "synthetic",
+        "sampling": "ensemble",
+        "technique": "DRIFTS"
+      }
+    },
+    {
+      "id": "ex:ss/analysis/step-site-inventory",
+      "label": "Analysis",
+      "props": {
+        "name": "Zn-decorated step sites per gram from their share",
+        "analysis_kind": "other",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "method": "the share of Zn-decorated step sites times the exposed Cu atoms counted after reduction",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ss/test/xas-cell",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "CO2 hydrogenation in the XAS cell, 220 °C, 30 bar",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "id": "t3_rate",
+            "kind": "table",
+            "locator": "Table 3",
+            "source": "ex:ss/source/paper"
+          },
+          {
+            "id": "t3_tof_exposed",
+            "kind": "table",
+            "locator": "Table 3",
+            "source": "ex:ss/source/paper"
+          },
+          {
+            "id": "t3_tof_step",
+            "kind": "table",
+            "locator": "Table 3",
+            "source": "ex:ss/source/paper"
+          },
+          {
+            "id": "t3_tof_titrated",
+            "kind": "table",
+            "locator": "Table 3",
+            "source": "ex:ss/source/paper"
+          },
+          {
+            "id": "t3_tof_atom",
+            "kind": "table",
+            "locator": "Table 3",
+            "source": "ex:ss/source/paper"
+          },
+          {
+            "id": "s2_tof",
+            "kind": "table",
+            "locator": "Supporting information, Table S2",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "basis": "absolute",
+          "unit": "bar",
+          "value": 30
+        },
+        "result_values": [
+          {
+            "id": "methanol_rate",
+            "status": "present",
+            "evidence_ids": [
+              "t3_rate"
+            ],
+            "target": "ex:ss/species/methanol",
+            "unit": "mmol/(g h)",
+            "value": 4.1,
+            "variable": "ex:ss/variable/methanol-rate"
+          },
+          {
+            "id": "tof_per_exposed_cu",
+            "status": "present",
+            "basis": "per exposed Cu atom, counted after reduction",
+            "evidence_ids": [
+              "t3_tof_exposed"
+            ],
+            "normalized_by": {
+              "path": "/exposed_metal_count",
+              "record": "ex:ss/link/48"
+            },
+            "target": "ex:ss/species/methanol",
+            "unit": "s-1",
+            "value": 0.0037,
+            "variable": "ex:ss/variable/tof"
+          },
+          {
+            "id": "tof_per_step_site",
+            "status": "present",
+            "basis": "per Zn-decorated step site",
+            "evidence_ids": [
+              "t3_tof_step"
+            ],
+            "normalized_by": {
+              "path": "/site_inventory",
+              "record": "ex:ss/link/50"
+            },
+            "target": "ex:ss/species/methanol",
+            "unit": "s-1",
+            "value": 0.041,
+            "variable": "ex:ss/variable/tof"
+          },
+          {
+            "id": "tof_per_titrated_site",
+            "status": "present",
+            "bound": "lower",
+            "evidence_ids": [
+              "t3_tof_titrated"
+            ],
+            "normalized_by": {
+              "path": "/site_inventory",
+              "record": "ex:ss/link/51"
+            },
+            "target": "ex:ss/species/methanol",
+            "unit": "s-1",
+            "value": 0.038,
+            "variable": "ex:ss/variable/tof"
+          },
+          {
+            "id": "tof_per_cu_atom",
+            "status": "present",
+            "basis": "per metal atom, every Cu atom taken as a site",
+            "evidence_ids": [
+              "t3_tof_atom"
+            ],
+            "target": "ex:ss/species/methanol",
+            "unit": "s-1",
+            "value": 0.00018,
+            "variable": "ex:ss/variable/tof"
+          },
+          {
+            "id": "tof_unstated",
+            "status": "present",
+            "evidence_ids": [
+              "s2_tof"
+            ],
+            "target": "ex:ss/species/methanol",
+            "unit": "s-1",
+            "value": 0.02,
+            "variable": "ex:ss/variable/tof"
+          }
+        ],
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 220
+        },
+        "temperature_measured_at": "catalyst_bed",
+        "test_kind": "activity",
+        "time_on_stream": {
+          "status": "present",
+          "unit": "h",
+          "value": 10
+        }
+      }
+    },
+    {
+      "id": "ex:ss/dataset/cu-k-spectra",
+      "label": "Dataset",
+      "props": {
+        "name": "Cu K-edge XANES and EXAFS spectra under reaction",
+        "availability": "available",
+        "data_kind": "spectrum",
+        "origin": "synthetic",
+        "uri": "https://example.org/invented/cu-k-spectra"
+      }
+    },
+    {
+      "id": "ex:ss/dataset/cu-references",
+      "label": "Dataset",
+      "props": {
+        "name": "Reference spectra of Cu foil, Cu2O and CuO",
+        "availability": "available",
+        "data_kind": "spectrum",
+        "origin": "synthetic",
+        "uri": "https://example.org/invented/cu-references"
+      }
+    },
+    {
+      "id": "ex:ss/analysis/xanes-lcf",
+      "label": "Analysis",
+      "props": {
+        "name": "Linear combination fit of the Cu K-edge XANES",
+        "analysis_kind": "spectral_fit",
+        "evidence": [
+          {
+            "id": "t4_lcf",
+            "kind": "table",
+            "locator": "Table 4",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "limitations": "Cu+ in Cu2O and Cu+ at the interface with ZnOx are not told apart by these references; a species below about a tenth of the Cu atoms is not resolved",
+        "method": "linear combination of the Cu foil, Cu2O and CuO references, -20 to +30 eV",
+        "origin": "synthetic",
+        "results": {
+          "cu0_share": {
+            "status": "present",
+            "evidence_ids": [
+              "t4_lcf"
+            ],
+            "origin": "fitted",
+            "produced_by": "ex:ss/analysis/xanes-lcf",
+            "uncertainty": 3,
+            "uncertainty_kind": "standard_error",
+            "unit": "%",
+            "value": 92
+          },
+          "cu1_share": {
+            "status": "present",
+            "evidence_ids": [
+              "t4_lcf"
+            ],
+            "origin": "fitted",
+            "produced_by": "ex:ss/analysis/xanes-lcf",
+            "uncertainty": 3,
+            "uncertainty_kind": "standard_error",
+            "unit": "%",
+            "value": 8
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:ss/analysis/exafs-first-shell",
+      "label": "Analysis",
+      "props": {
+        "name": "First-shell EXAFS fit of the Cu K edge",
+        "analysis_kind": "spectral_fit",
+        "evidence": [
+          {
+            "id": "t4_exafs",
+            "kind": "table",
+            "locator": "Table 4",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "limitations": "Cu-Zn and Cu-Cu scatter at similar distances; the coordination numbers correlate with the Debye-Waller factors; a fit with Cu-Cu only is worse but not excluded",
+        "method": "Cu-Cu and Cu-Zn paths, k 3-11 1/Å, S0^2 held at 0.85 from the Cu foil",
+        "origin": "synthetic",
+        "results": {
+          "cn_cu_cu": {
+            "status": "present",
+            "evidence_ids": [
+              "t4_exafs"
+            ],
+            "origin": "fitted",
+            "produced_by": "ex:ss/analysis/exafs-first-shell",
+            "uncertainty": 0.5,
+            "uncertainty_kind": "standard_error",
+            "unit": "1",
+            "value": 10.1
+          },
+          "cn_cu_zn": {
+            "status": "present",
+            "evidence_ids": [
+              "t4_exafs"
+            ],
+            "origin": "fitted",
+            "produced_by": "ex:ss/analysis/exafs-first-shell",
+            "uncertainty": 0.4,
+            "uncertainty_kind": "standard_error",
+            "unit": "1",
+            "value": 0.6
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:ss/analysis/rate-against-share",
+      "label": "Analysis",
+      "props": {
+        "name": "Methanol rate against the share of Zn-decorated step sites over five reduction temperatures",
+        "analysis_kind": "statistical",
+        "evidence": [
+          {
+            "id": "f6_fit",
+            "kind": "figure",
+            "locator": "Figure 6",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "method": "linear regression of the methanol rate on the share",
+        "origin": "synthetic",
+        "results": {
+          "points": {
+            "status": "present",
+            "evidence_ids": [
+              "f6_fit"
+            ],
+            "unit": "1",
+            "value": 5
+          },
+          "r_squared": {
+            "status": "present",
+            "evidence_ids": [
+              "f6_fit"
+            ],
+            "unit": "1",
+            "value": 0.97
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:ss/claim/znox-steps-active",
+      "label": "Claim",
+      "props": {
+        "name": "ZnOx overlayer and its Zn-decorated Cu steps active for methanol",
+        "claim_kind": "structure_property",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Discussion",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "inference_type": "observational",
+        "limitations": "rests on the share of Zn-decorated steps from infrared spectra and on a correlation over five reduction temperatures",
+        "origin": "synthetic",
+        "scope": "Cu/ZnO batch A at 220 °C and 30 bar CO2/H2",
+        "statement": "In the working state, the ZnOx overlayer, a minority phase, and the Cu steps it decorates are the sites active for methanol formation."
+      }
+    },
+    {
+      "id": "ex:ss/claim/cu-steps-active",
+      "label": "Claim",
+      "props": {
+        "name": "Cu steps without Zn active for methanol (the reply)",
+        "claim_kind": "structure_property",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Discussion",
+            "source": "ex:ss/source/reply"
+          }
+        ],
+        "inference_type": "observational",
+        "origin": "synthetic",
+        "statement": "Cu step sites without Zn are the sites active for methanol formation; Zn only adds to their number."
+      }
+    },
+    {
+      "id": "ex:ss/claim/zno-spectator",
+      "label": "Claim",
+      "props": {
+        "name": "Bulk ZnO a spectator for methanol",
+        "claim_kind": "structure_property",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Discussion",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "inference_type": "observational",
+        "origin": "synthetic",
+        "statement": "Bulk ZnO, the majority phase, is a spectator for methanol formation in the working state."
+      }
+    },
+    {
+      "id": "ex:ss/model/cu211-zn",
+      "label": "StructureModel",
+      "props": {
+        "name": "Cu(211) slab with Zn at the step edge",
+        "composition": "Cu with Zn at the step",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Computational methods",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "facet": "211",
+        "origin": "synthetic",
+        "representation": "periodic_slab"
+      }
+    },
+    {
+      "id": "ex:ss/computation/zn-at-steps",
+      "label": "Computation",
+      "props": {
+        "name": "DFT and ab initio thermodynamics of Zn at Cu steps",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Computational methods",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "method": "DFT (RPBE), ab initio thermodynamics",
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "unit": "bar",
+          "value": 30
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 220
+        }
+      }
+    },
+    {
+      "id": "ex:ss/state/computed-zn-step",
+      "label": "CatalystState",
+      "props": {
+        "name": "computed: Zn at the Cu(211) step under 220 °C and 30 bar CO2/H2",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 7",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "state_kind": "working"
+      }
+    },
+    {
+      "id": "ex:ss/state/formulation-reduced",
+      "label": "CatalystState",
+      "props": {
+        "name": "the formulation after reduction, as the reply gives it",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Introduction",
+            "source": "ex:ss/source/reply"
+          }
+        ],
+        "origin": "synthetic",
+        "state_kind": "pretreated"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:ss/link/1",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:ss/reaction/co2-meoh",
+      "target": "ex:ss/species/co2"
+    },
+    {
+      "id": "ex:ss/link/2",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 3,
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:ss/reaction/co2-meoh",
+      "target": "ex:ss/species/h2"
+    },
+    {
+      "id": "ex:ss/link/3",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "role": "product"
+      },
+      "source": "ex:ss/reaction/co2-meoh",
+      "target": "ex:ss/species/methanol"
+    },
+    {
+      "id": "ex:ss/link/4",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "role": "product"
+      },
+      "source": "ex:ss/reaction/co2-meoh",
+      "target": "ex:ss/species/water"
+    },
+    {
+      "id": "ex:ss/link/5",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:ss/feed/co2-h2",
+      "target": "ex:ss/species/co2"
+    },
+    {
+      "id": "ex:ss/link/6",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:ss/feed/co2-h2",
+      "target": "ex:ss/species/h2"
+    },
+    {
+      "id": "ex:ss/link/7",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "unit": "wt%",
+          "value": 40
+        },
+        "origin": "synthetic",
+        "role": "active_phase"
+      },
+      "source": "ex:ss/catalyst/cu-zno",
+      "target": "ex:ss/material/cu"
+    },
+    {
+      "id": "ex:ss/link/8",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "promoter"
+      },
+      "source": "ex:ss/catalyst/cu-zno",
+      "target": "ex:ss/material/zno"
+    },
+    {
+      "id": "ex:ss/link/9",
+      "type": "LOCATED_ON",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/site/exposed-cu",
+      "target": "ex:ss/material/cu"
+    },
+    {
+      "id": "ex:ss/link/10",
+      "type": "LOCATED_ON",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/site/zn-decorated-step",
+      "target": "ex:ss/material/cu"
+    },
+    {
+      "id": "ex:ss/link/11",
+      "type": "LOCATED_ON",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/site/zn-decorated-step",
+      "target": "ex:ss/material/znox-overlayer"
+    },
+    {
+      "id": "ex:ss/link/12",
+      "type": "LOCATED_ON",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/site/cu-step",
+      "target": "ex:ss/material/cu"
+    },
+    {
+      "id": "ex:ss/link/13",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/sample/batch-a-xas-cell",
+      "target": "ex:ss/catalyst/cu-zno"
+    },
+    {
+      "id": "ex:ss/link/14",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/sample/batch-a-reactor",
+      "target": "ex:ss/catalyst/cu-zno"
+    },
+    {
+      "id": "ex:ss/link/15",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/sample/batch-a-drifts",
+      "target": "ex:ss/catalyst/cu-zno"
+    },
+    {
+      "id": "ex:ss/link/16",
+      "type": "TREATED_BY",
+      "props": {
+        "order": 1,
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/sample/batch-a-xas-cell",
+      "target": "ex:ss/treatment/reduction"
+    },
+    {
+      "id": "ex:ss/link/17",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "reduced"
+      },
+      "source": "ex:ss/test/laboratory-reactor",
+      "target": "ex:ss/sample/batch-a-reactor"
+    },
+    {
+      "id": "ex:ss/link/18",
+      "type": "FED_WITH",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/test/laboratory-reactor",
+      "target": "ex:ss/feed/co2-h2"
+    },
+    {
+      "id": "ex:ss/link/19",
+      "type": "IN_REACTOR",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/test/laboratory-reactor",
+      "target": "ex:ss/instrument/lab-reactor"
+    },
+    {
+      "id": "ex:ss/link/20",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/test/laboratory-reactor",
+      "target": "ex:ss/reaction/co2-meoh"
+    },
+    {
+      "id": "ex:ss/link/21",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "reduced"
+      },
+      "source": "ex:ss/test/drifts-cell",
+      "target": "ex:ss/sample/batch-a-drifts"
+    },
+    {
+      "id": "ex:ss/link/22",
+      "type": "FED_WITH",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/test/drifts-cell",
+      "target": "ex:ss/feed/co2-h2"
+    },
+    {
+      "id": "ex:ss/link/23",
+      "type": "IN_REACTOR",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/test/drifts-cell",
+      "target": "ex:ss/instrument/drifts-cell"
+    },
+    {
+      "id": "ex:ss/link/24",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/test/drifts-cell",
+      "target": "ex:ss/reaction/co2-meoh"
+    },
+    {
+      "id": "ex:ss/link/25",
+      "type": "STATE_OF",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/state/reduced",
+      "target": "ex:ss/sample/batch-a-xas-cell"
+    },
+    {
+      "id": "ex:ss/link/26",
+      "type": "STATE_OF",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/state/working",
+      "target": "ex:ss/sample/batch-a-xas-cell"
+    },
+    {
+      "id": "ex:ss/link/27",
+      "type": "STATE_OF",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/state/after-test",
+      "target": "ex:ss/sample/batch-a-xas-cell"
+    },
+    {
+      "id": "ex:ss/link/28",
+      "type": "REACHED_BY",
+      "props": {
+        "origin": "synthetic",
+        "timing": "after"
+      },
+      "source": "ex:ss/state/reduced",
+      "target": "ex:ss/treatment/reduction"
+    },
+    {
+      "id": "ex:ss/link/29",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "reduced"
+      },
+      "source": "ex:ss/characterization/rfc-reduced",
+      "target": "ex:ss/sample/batch-a-xas-cell"
+    },
+    {
+      "id": "ex:ss/link/30",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:ss/analysis/rfc-reduced-count",
+      "target": "ex:ss/characterization/rfc-reduced"
+    },
+    {
+      "id": "ex:ss/link/31",
+      "type": "USES_MODEL",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/analysis/rfc-reduced-count",
+      "target": "ex:ss/model/n2o-counting"
+    },
+    {
+      "id": "ex:ss/link/32",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "spent"
+      },
+      "source": "ex:ss/characterization/rfc-after-test",
+      "target": "ex:ss/sample/batch-a-xas-cell"
+    },
+    {
+      "id": "ex:ss/link/33",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:ss/analysis/rfc-after-test-count",
+      "target": "ex:ss/characterization/rfc-after-test"
+    },
+    {
+      "id": "ex:ss/link/34",
+      "type": "USES_MODEL",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/analysis/rfc-after-test-count",
+      "target": "ex:ss/model/n2o-counting"
+    },
+    {
+      "id": "ex:ss/link/35",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "reduced"
+      },
+      "source": "ex:ss/characterization/co-ir-reduced",
+      "target": "ex:ss/sample/batch-a-xas-cell"
+    },
+    {
+      "id": "ex:ss/link/36",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "operating"
+      },
+      "source": "ex:ss/characterization/me-ir-working",
+      "target": "ex:ss/sample/batch-a-xas-cell"
+    },
+    {
+      "id": "ex:ss/link/37",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "operating"
+      },
+      "source": "ex:ss/characterization/co2-titration",
+      "target": "ex:ss/sample/batch-a-xas-cell"
+    },
+    {
+      "id": "ex:ss/link/38",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "operating"
+      },
+      "source": "ex:ss/characterization/cu-k-xas",
+      "target": "ex:ss/sample/batch-a-xas-cell"
+    },
+    {
+      "id": "ex:ss/link/39",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "operating"
+      },
+      "source": "ex:ss/characterization/drifts",
+      "target": "ex:ss/sample/batch-a-drifts"
+    },
+    {
+      "id": "ex:ss/link/40",
+      "type": "DETERMINED_BY",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/state/reduced",
+      "target": "ex:ss/characterization/rfc-reduced"
+    },
+    {
+      "id": "ex:ss/link/41",
+      "type": "DETERMINED_BY",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/state/reduced",
+      "target": "ex:ss/characterization/co-ir-reduced"
+    },
+    {
+      "id": "ex:ss/link/42",
+      "type": "DETERMINED_BY",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/state/working",
+      "target": "ex:ss/characterization/me-ir-working"
+    },
+    {
+      "id": "ex:ss/link/43",
+      "type": "DETERMINED_BY",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/state/working",
+      "target": "ex:ss/characterization/cu-k-xas"
+    },
+    {
+      "id": "ex:ss/link/44",
+      "type": "DETERMINED_BY",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/state/working",
+      "target": "ex:ss/characterization/co2-titration"
+    },
+    {
+      "id": "ex:ss/link/45",
+      "type": "DETERMINED_BY",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/state/after-test",
+      "target": "ex:ss/characterization/rfc-after-test"
+    },
+    {
+      "id": "ex:ss/link/46",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:ss/analysis/step-site-inventory",
+      "target": "ex:ss/characterization/me-ir-working"
+    },
+    {
+      "id": "ex:ss/link/47",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:ss/analysis/step-site-inventory",
+      "target": "ex:ss/analysis/rfc-reduced-count"
+    },
+    {
+      "id": "ex:ss/link/48",
+      "type": "HAS_SITE",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "id": "t2_exposed_reduced",
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "exposed_metal_count": {
+          "status": "present",
+          "definition": "exposed Cu atoms from the N2O uptake at 40 °C, two per O atom",
+          "evidence_ids": [
+            "t2_exposed_reduced"
+          ],
+          "origin": "derived",
+          "produced_by": "ex:ss/analysis/rfc-reduced-count",
+          "replicates": 3,
+          "uncertainty": 15,
+          "uncertainty_kind": "standard_deviation",
+          "unit": "µmol/g",
+          "value": 310
+        },
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/state/reduced",
+      "target": "ex:ss/site/exposed-cu"
+    },
+    {
+      "id": "ex:ss/link/49",
+      "type": "HAS_SITE",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "id": "t2_share_reduced",
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "population_fraction": {
+          "status": "present",
+          "basis": "of the exposed Cu atoms",
+          "evidence_ids": [
+            "t2_share_reduced"
+          ],
+          "produced_by": "ex:ss/characterization/co-ir-reduced",
+          "unit": "%",
+          "value": 2
+        }
+      },
+      "source": "ex:ss/state/reduced",
+      "target": "ex:ss/site/zn-decorated-step"
+    },
+    {
+      "id": "ex:ss/link/50",
+      "type": "HAS_SITE",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "id": "f5_share",
+            "kind": "figure",
+            "locator": "Figure 5",
+            "source": "ex:ss/source/paper"
+          },
+          {
+            "id": "t2_inventory",
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "population_fraction": {
+          "status": "present",
+          "basis": "of the exposed Cu atoms",
+          "evidence_ids": [
+            "f5_share"
+          ],
+          "produced_by": "ex:ss/characterization/me-ir-working",
+          "uncertainty": 2,
+          "uncertainty_kind": "plus_minus_unspecified",
+          "unit": "%",
+          "value": 9
+        },
+        "site_inventory": {
+          "status": "present",
+          "definition": "9 % of the 310 µmol/g of exposed Cu counted after reduction",
+          "evidence_ids": [
+            "t2_inventory"
+          ],
+          "origin": "derived",
+          "produced_by": "ex:ss/analysis/step-site-inventory",
+          "unit": "µmol/g",
+          "value": 28
+        }
+      },
+      "source": "ex:ss/state/working",
+      "target": "ex:ss/site/zn-decorated-step"
+    },
+    {
+      "id": "ex:ss/link/51",
+      "type": "HAS_SITE",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "id": "t2_titration",
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "site_inventory": {
+          "status": "present",
+          "bound": "upper",
+          "definition": "CO2 held in the reaction feed; CO2 may also bind sites that are not Zn-decorated, so the count is at most this",
+          "evidence_ids": [
+            "t2_titration"
+          ],
+          "produced_by": "ex:ss/characterization/co2-titration",
+          "unit": "µmol/g",
+          "value": 30
+        }
+      },
+      "source": "ex:ss/state/working",
+      "target": "ex:ss/site/zn-decorated-step"
+    },
+    {
+      "id": "ex:ss/link/52",
+      "type": "HAS_SITE",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "id": "t2_exposed_after",
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "exposed_metal_count": {
+          "status": "present",
+          "definition": "exposed Cu atoms from the N2O uptake at 40 °C, two per O atom",
+          "evidence_ids": [
+            "t2_exposed_after"
+          ],
+          "origin": "derived",
+          "produced_by": "ex:ss/analysis/rfc-after-test-count",
+          "replicates": 3,
+          "uncertainty": 15,
+          "uncertainty_kind": "standard_deviation",
+          "unit": "µmol/g",
+          "value": 240
+        },
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/state/after-test",
+      "target": "ex:ss/site/exposed-cu"
+    },
+    {
+      "id": "ex:ss/link/53",
+      "type": "HAS_PHASE",
+      "props": {
+        "dominance": "majority",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 4",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "location": "whole_particle",
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/state/working",
+      "target": "ex:ss/material/cu"
+    },
+    {
+      "id": "ex:ss/link/54",
+      "type": "HAS_PHASE",
+      "props": {
+        "dominance": "majority",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 4",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "location": "separate_domain",
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/state/working",
+      "target": "ex:ss/material/zno"
+    },
+    {
+      "id": "ex:ss/link/55",
+      "type": "HAS_PHASE",
+      "props": {
+        "dominance": "minority",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 5",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "location": "overlayer",
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/state/working",
+      "target": "ex:ss/material/znox-overlayer"
+    },
+    {
+      "id": "ex:ss/link/56",
+      "type": "HAS_PHASE",
+      "props": {
+        "dominance": "majority",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 4",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "location": "whole_particle",
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/state/reduced",
+      "target": "ex:ss/material/cu"
+    },
+    {
+      "id": "ex:ss/link/57",
+      "type": "HAS_PHASE",
+      "props": {
+        "dominance": "majority",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 4",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "location": "separate_domain",
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/state/reduced",
+      "target": "ex:ss/material/zno"
+    },
+    {
+      "id": "ex:ss/link/58",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "reduced"
+      },
+      "source": "ex:ss/test/xas-cell",
+      "target": "ex:ss/sample/batch-a-xas-cell"
+    },
+    {
+      "id": "ex:ss/link/59",
+      "type": "FED_WITH",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/test/xas-cell",
+      "target": "ex:ss/feed/co2-h2"
+    },
+    {
+      "id": "ex:ss/link/60",
+      "type": "IN_REACTOR",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/test/xas-cell",
+      "target": "ex:ss/instrument/xas-cell"
+    },
+    {
+      "id": "ex:ss/link/61",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/test/xas-cell",
+      "target": "ex:ss/reaction/co2-meoh"
+    },
+    {
+      "id": "ex:ss/link/62",
+      "type": "IN_STATE",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/test/xas-cell",
+      "target": "ex:ss/state/working"
+    },
+    {
+      "id": "ex:ss/link/63",
+      "type": "REACHED_BY",
+      "props": {
+        "elapsed": {
+          "status": "present",
+          "unit": "h",
+          "value": 10
+        },
+        "origin": "synthetic",
+        "timing": "during"
+      },
+      "source": "ex:ss/state/working",
+      "target": "ex:ss/test/xas-cell"
+    },
+    {
+      "id": "ex:ss/link/64",
+      "type": "REACHED_BY",
+      "props": {
+        "origin": "synthetic",
+        "timing": "after"
+      },
+      "source": "ex:ss/state/after-test",
+      "target": "ex:ss/test/xas-cell"
+    },
+    {
+      "id": "ex:ss/link/65",
+      "type": "PRECEDES",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/treatment/reduction",
+      "target": "ex:ss/test/xas-cell"
+    },
+    {
+      "id": "ex:ss/link/66",
+      "type": "DURING",
+      "props": {
+        "benchmark": "ex:ss/test/laboratory-reactor",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "performance": "matched_to_benchmark",
+        "specimen": "same_specimen",
+        "timing": "alternating"
+      },
+      "source": "ex:ss/characterization/me-ir-working",
+      "target": "ex:ss/test/xas-cell"
+    },
+    {
+      "id": "ex:ss/link/67",
+      "type": "DURING",
+      "props": {
+        "benchmark": "ex:ss/test/laboratory-reactor",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "performance": "matched_to_benchmark",
+        "specimen": "same_specimen",
+        "timing": "alternating"
+      },
+      "source": "ex:ss/characterization/co2-titration",
+      "target": "ex:ss/test/xas-cell"
+    },
+    {
+      "id": "ex:ss/link/68",
+      "type": "DURING",
+      "props": {
+        "benchmark": "ex:ss/test/laboratory-reactor",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "note": "spectra and online GC on one time base; the methanol rate in the cell within 5 % of the laboratory reactor's",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "performance": "matched_to_benchmark",
+        "specimen": "same_specimen",
+        "timing": "simultaneous"
+      },
+      "source": "ex:ss/characterization/cu-k-xas",
+      "target": "ex:ss/test/xas-cell"
+    },
+    {
+      "id": "ex:ss/link/69",
+      "type": "DURING",
+      "props": {
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Supporting information, Figure S4",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/characterization/drifts",
+      "target": "ex:ss/test/drifts-cell"
+    },
+    {
+      "id": "ex:ss/link/70",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/characterization/cu-k-xas",
+      "target": "ex:ss/dataset/cu-k-spectra"
+    },
+    {
+      "id": "ex:ss/link/71",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:ss/analysis/xanes-lcf",
+      "target": "ex:ss/dataset/cu-k-spectra"
+    },
+    {
+      "id": "ex:ss/link/72",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reference_standard"
+      },
+      "source": "ex:ss/analysis/xanes-lcf",
+      "target": "ex:ss/dataset/cu-references"
+    },
+    {
+      "id": "ex:ss/link/73",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:ss/analysis/exafs-first-shell",
+      "target": "ex:ss/dataset/cu-k-spectra"
+    },
+    {
+      "id": "ex:ss/link/74",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:ss/analysis/rate-against-share",
+      "target": "ex:ss/test/xas-cell"
+    },
+    {
+      "id": "ex:ss/link/75",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:ss/analysis/rate-against-share",
+      "target": "ex:ss/characterization/me-ir-working"
+    },
+    {
+      "id": "ex:ss/link/76",
+      "type": "ABOUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "active"
+      },
+      "source": "ex:ss/claim/znox-steps-active",
+      "target": "ex:ss/material/znox-overlayer"
+    },
+    {
+      "id": "ex:ss/link/77",
+      "type": "ABOUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "active"
+      },
+      "source": "ex:ss/claim/znox-steps-active",
+      "target": "ex:ss/site/zn-decorated-step"
+    },
+    {
+      "id": "ex:ss/link/78",
+      "type": "ABOUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "state"
+      },
+      "source": "ex:ss/claim/znox-steps-active",
+      "target": "ex:ss/state/working"
+    },
+    {
+      "id": "ex:ss/link/79",
+      "type": "ABOUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reaction"
+      },
+      "source": "ex:ss/claim/znox-steps-active",
+      "target": "ex:ss/reaction/co2-meoh"
+    },
+    {
+      "id": "ex:ss/link/80",
+      "type": "ABOUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "product"
+      },
+      "source": "ex:ss/claim/znox-steps-active",
+      "target": "ex:ss/species/methanol"
+    },
+    {
+      "id": "ex:ss/link/81",
+      "type": "ABOUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "test"
+      },
+      "source": "ex:ss/claim/znox-steps-active",
+      "target": "ex:ss/test/xas-cell"
+    },
+    {
+      "id": "ex:ss/link/82",
+      "type": "SUPPORTS",
+      "props": {
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 6",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "premise_refs": [
+          {
+            "path": "/results/r_squared",
+            "record": "ex:ss/analysis/rate-against-share"
+          },
+          {
+            "path": "/result_values/tof_per_step_site",
+            "record": "ex:ss/test/xas-cell"
+          }
+        ],
+        "warrant": "the rate scales with the share of Zn-decorated steps when the share is varied on purpose, and the rate per such site stays the same"
+      },
+      "source": "ex:ss/analysis/rate-against-share",
+      "target": "ex:ss/claim/znox-steps-active"
+    },
+    {
+      "id": "ex:ss/link/83",
+      "type": "SUPPORTS",
+      "props": {
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 4",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "premise_refs": [
+          {
+            "path": "/results/cn_cu_zn",
+            "record": "ex:ss/analysis/exafs-first-shell"
+          }
+        ],
+        "warrant": "Cu-Zn neighbours appear under reaction"
+      },
+      "source": "ex:ss/analysis/exafs-first-shell",
+      "target": "ex:ss/claim/znox-steps-active"
+    },
+    {
+      "id": "ex:ss/link/84",
+      "type": "ABOUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "active"
+      },
+      "source": "ex:ss/claim/cu-steps-active",
+      "target": "ex:ss/site/cu-step"
+    },
+    {
+      "id": "ex:ss/link/85",
+      "type": "ABOUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "state"
+      },
+      "source": "ex:ss/claim/cu-steps-active",
+      "target": "ex:ss/state/working"
+    },
+    {
+      "id": "ex:ss/link/86",
+      "type": "ABOUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reaction"
+      },
+      "source": "ex:ss/claim/cu-steps-active",
+      "target": "ex:ss/reaction/co2-meoh"
+    },
+    {
+      "id": "ex:ss/link/87",
+      "type": "ABOUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "product"
+      },
+      "source": "ex:ss/claim/cu-steps-active",
+      "target": "ex:ss/species/methanol"
+    },
+    {
+      "id": "ex:ss/link/88",
+      "type": "CONTRADICTS",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Discussion",
+            "source": "ex:ss/source/reply"
+          }
+        ],
+        "origin": "synthetic",
+        "warrant": "the reply reads the rise in rate as more Cu steps, not as Zn at them"
+      },
+      "source": "ex:ss/claim/cu-steps-active",
+      "target": "ex:ss/claim/znox-steps-active"
+    },
+    {
+      "id": "ex:ss/link/89",
+      "type": "SUPPORTS",
+      "props": {
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 2",
+            "source": "ex:ss/source/reply"
+          }
+        ],
+        "origin": "synthetic",
+        "warrant": "rates of Zn-free Cu catalysts per step site, in the reply's Figure 2"
+      },
+      "source": "ex:ss/source/reply",
+      "target": "ex:ss/claim/cu-steps-active"
+    },
+    {
+      "id": "ex:ss/link/90",
+      "type": "ABOUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "spectator"
+      },
+      "source": "ex:ss/claim/zno-spectator",
+      "target": "ex:ss/material/zno"
+    },
+    {
+      "id": "ex:ss/link/91",
+      "type": "ABOUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "state"
+      },
+      "source": "ex:ss/claim/zno-spectator",
+      "target": "ex:ss/state/working"
+    },
+    {
+      "id": "ex:ss/link/92",
+      "type": "ABOUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reaction"
+      },
+      "source": "ex:ss/claim/zno-spectator",
+      "target": "ex:ss/reaction/co2-meoh"
+    },
+    {
+      "id": "ex:ss/link/93",
+      "type": "USES_MODEL",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/computation/zn-at-steps",
+      "target": "ex:ss/model/cu211-zn"
+    },
+    {
+      "id": "ex:ss/link/94",
+      "type": "STATE_OF",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/state/computed-zn-step",
+      "target": "ex:ss/model/cu211-zn"
+    },
+    {
+      "id": "ex:ss/link/95",
+      "type": "DETERMINED_BY",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/state/computed-zn-step",
+      "target": "ex:ss/computation/zn-at-steps"
+    },
+    {
+      "id": "ex:ss/link/96",
+      "type": "PREDICTS",
+      "props": {
+        "agreement": "partly_agrees",
+        "compared_with": "ex:ss/state/working",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 7",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/computation/zn-at-steps",
+      "target": "ex:ss/state/computed-zn-step"
+    },
+    {
+      "id": "ex:ss/link/97",
+      "type": "HAS_SITE",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "id": "f7_share",
+            "kind": "figure",
+            "locator": "Figure 7",
+            "source": "ex:ss/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "population_fraction": {
+          "status": "present",
+          "basis": "of the step-edge Cu atoms",
+          "evidence_ids": [
+            "f7_share"
+          ],
+          "origin": "computed",
+          "produced_by": "ex:ss/computation/zn-at-steps",
+          "unit": "%",
+          "value": 50
+        },
+        "site_density": {
+          "status": "present",
+          "definition": "per nm2 of the (211) surface",
+          "evidence_ids": [
+            "f7_share"
+          ],
+          "origin": "computed",
+          "produced_by": "ex:ss/computation/zn-at-steps",
+          "unit": "sites/nm2",
+          "value": 3.1
+        }
+      },
+      "source": "ex:ss/state/computed-zn-step",
+      "target": "ex:ss/site/zn-decorated-step"
+    },
+    {
+      "id": "ex:ss/link/98",
+      "type": "STATE_OF",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/state/formulation-reduced",
+      "target": "ex:ss/catalyst/cu-zno"
+    },
+    {
+      "id": "ex:ss/link/99",
+      "type": "HAS_SITE",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "id": "r_count",
+            "kind": "text",
+            "locator": "Introduction",
+            "source": "ex:ss/source/reply"
+          }
+        ],
+        "exposed_metal_count": {
+          "status": "present",
+          "definition": "from a Cu dispersion of 5 % assumed, not measured",
+          "evidence_ids": [
+            "r_count"
+          ],
+          "origin": "assumed",
+          "qualifier": "approximate",
+          "unit": "µmol/g",
+          "value": 300
+        },
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/state/formulation-reduced",
+      "target": "ex:ss/site/exposed-cu"
+    },
+    {
+      "id": "ex:ss/analysis/exafs-first-shell/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 4"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/analysis/exafs-first-shell",
+      "target": "ex:ss/source/paper"
+    },
+    {
+      "id": "ex:ss/analysis/rate-against-share/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 6"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/analysis/rate-against-share",
+      "target": "ex:ss/source/paper"
+    },
+    {
+      "id": "ex:ss/analysis/rfc-after-test-count/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/analysis/rfc-after-test-count",
+      "target": "ex:ss/source/paper"
+    },
+    {
+      "id": "ex:ss/analysis/rfc-reduced-count/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/analysis/rfc-reduced-count",
+      "target": "ex:ss/source/paper"
+    },
+    {
+      "id": "ex:ss/analysis/step-site-inventory/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/analysis/step-site-inventory",
+      "target": "ex:ss/source/paper"
+    },
+    {
+      "id": "ex:ss/analysis/xanes-lcf/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 4"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/analysis/xanes-lcf",
+      "target": "ex:ss/source/paper"
+    },
+    {
+      "id": "ex:ss/catalyst/cu-zno/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/catalyst/cu-zno",
+      "target": "ex:ss/source/paper"
+    },
+    {
+      "id": "ex:ss/characterization/co-ir-reduced/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/characterization/co-ir-reduced",
+      "target": "ex:ss/source/paper"
+    },
+    {
+      "id": "ex:ss/characterization/co2-titration/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/characterization/co2-titration",
+      "target": "ex:ss/source/paper"
+    },
+    {
+      "id": "ex:ss/characterization/cu-k-xas/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/characterization/cu-k-xas",
+      "target": "ex:ss/source/paper"
+    },
+    {
+      "id": "ex:ss/characterization/drifts/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Supporting information, Figure S4"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/characterization/drifts",
+      "target": "ex:ss/source/paper"
+    },
+    {
+      "id": "ex:ss/characterization/me-ir-working/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/characterization/me-ir-working",
+      "target": "ex:ss/source/paper"
+    },
+    {
+      "id": "ex:ss/characterization/rfc-after-test/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/characterization/rfc-after-test",
+      "target": "ex:ss/source/paper"
+    },
+    {
+      "id": "ex:ss/characterization/rfc-reduced/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/characterization/rfc-reduced",
+      "target": "ex:ss/source/paper"
+    },
+    {
+      "id": "ex:ss/claim/cu-steps-active/reported-in/reply",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Discussion"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/claim/cu-steps-active",
+      "target": "ex:ss/source/reply"
+    },
+    {
+      "id": "ex:ss/claim/zno-spectator/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Discussion"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/claim/zno-spectator",
+      "target": "ex:ss/source/paper"
+    },
+    {
+      "id": "ex:ss/claim/znox-steps-active/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Discussion"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/claim/znox-steps-active",
+      "target": "ex:ss/source/paper"
+    },
+    {
+      "id": "ex:ss/computation/zn-at-steps/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Computational methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/computation/zn-at-steps",
+      "target": "ex:ss/source/paper"
+    },
+    {
+      "id": "ex:ss/feed/co2-h2/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/feed/co2-h2",
+      "target": "ex:ss/source/paper"
+    },
+    {
+      "id": "ex:ss/model/cu211-zn/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Computational methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/model/cu211-zn",
+      "target": "ex:ss/source/paper"
+    },
+    {
+      "id": "ex:ss/model/n2o-counting/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/model/n2o-counting",
+      "target": "ex:ss/source/paper"
+    },
+    {
+      "id": "ex:ss/sample/batch-a-drifts/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/sample/batch-a-drifts",
+      "target": "ex:ss/source/paper"
+    },
+    {
+      "id": "ex:ss/sample/batch-a-reactor/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/sample/batch-a-reactor",
+      "target": "ex:ss/source/paper"
+    },
+    {
+      "id": "ex:ss/sample/batch-a-xas-cell/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/sample/batch-a-xas-cell",
+      "target": "ex:ss/source/paper"
+    },
+    {
+      "id": "ex:ss/site/cu-step/reported-in/reply",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Discussion"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/site/cu-step",
+      "target": "ex:ss/source/reply"
+    },
+    {
+      "id": "ex:ss/site/exposed-cu/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/site/exposed-cu",
+      "target": "ex:ss/source/paper"
+    },
+    {
+      "id": "ex:ss/site/zn-decorated-step/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 5"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/site/zn-decorated-step",
+      "target": "ex:ss/source/paper"
+    },
+    {
+      "id": "ex:ss/state/after-test/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/state/after-test",
+      "target": "ex:ss/source/paper"
+    },
+    {
+      "id": "ex:ss/state/computed-zn-step/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 7"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/state/computed-zn-step",
+      "target": "ex:ss/source/paper"
+    },
+    {
+      "id": "ex:ss/state/formulation-reduced/reported-in/reply",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Introduction"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/state/formulation-reduced",
+      "target": "ex:ss/source/reply"
+    },
+    {
+      "id": "ex:ss/state/reduced/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/state/reduced",
+      "target": "ex:ss/source/paper"
+    },
+    {
+      "id": "ex:ss/state/working/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 5"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/state/working",
+      "target": "ex:ss/source/paper"
+    },
+    {
+      "id": "ex:ss/test/drifts-cell/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Supporting information, Figure S4"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/test/drifts-cell",
+      "target": "ex:ss/source/paper"
+    },
+    {
+      "id": "ex:ss/test/laboratory-reactor/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/test/laboratory-reactor",
+      "target": "ex:ss/source/paper"
+    },
+    {
+      "id": "ex:ss/test/xas-cell/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Supporting information, Table S2",
+          "Table 3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/test/xas-cell",
+      "target": "ex:ss/source/paper"
+    },
+    {
+      "id": "ex:ss/treatment/reduction/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ss/treatment/reduction",
+      "target": "ex:ss/source/paper"
+    }
+  ],
+  "directed": true,
+  "graph": {
+    "data_status": "synthetic_example",
+    "follows_domains": [
+      "catalysis"
+    ],
+    "graph_id": "ex:ss/graph",
+    "schema": "scale-catal",
+    "schema_version": "0.6.0",
+    "stewardship": {
+      "access": "public"
+    },
+    "title": "Site populations by catalyst state, site-normalized rates, activity assignments and operando pairings (synthetic)"
+  },
+  "multigraph": true
+}
