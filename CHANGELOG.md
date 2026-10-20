@@ -2,6 +2,26 @@
 
 ## Unreleased
 
+- **Recording recipes for preparations and characterizations, with examples and competency questions (no schema
+  change; scale-catal 0.6.0).** Requested by @hlxin ("Add reproducible synthesis and characterization recipes").
+  - **Recipes** (skills/curate-source/references/recipes.md): the batch, its purchased lots and its steps; supported-
+    metal impregnation; precipitation and coprecipitation; activation, storage, transfer and reaction history; what
+    every characterization keeps (specimen and state, settings, standards and calibration, raw data, processing and
+    fitting); XAS; electron-microscopy size distributions; chemisorption and site titration; physisorption; sizes from
+    different techniques; nominal, bulk and surface composition. Each uses fields the schema has, and a test checks
+    that every label, link and property the recipes name is declared.
+  - **Examples** (domain/examples/scale-catal/preparation-examples/, synthetic): two impregnated batches of one
+    nominal formula with their lots, histories and characterizations, and two purchased lots of a commercial catalyst;
+    two coprecipitations in opposite orders of addition, with what the paper leaves unstated; a high-entropy alloy's
+    nominal, bulk, surface and working-state compositions and three sizes.
+  - **Questions:** CQ-18 to CQ-22 (how batches of one nominal catalyst differ; nominal and measured compositions, with
+    a supported comparison and a missing-context one; sizes by technique; what a fitted coordination number rests on;
+    what a source leaves unstated).
+  - **Reporting:** a companion checklist, domain/docs/reporting/catalyst-preparation-reporting.md (draft 0.1).
+  - **Conventions, not schema:** characterization measurands are named in their Variable's `quantity_kind`
+    (`particle_size`, `crystallite_size`, `hydrodynamic_size`, `count`, …), recorded as stated and not unit-checked
+    until the kernel declares them; a distribution's statistics are separate results.
+
 - **Schema 0.6.0 (breaking): site populations belong to a catalyst state, a turnover frequency says how it was
   calculated, and operando means characterized while the kinetics are measured.** Requested by @hlxin ("Scope site
   populations and activity assignments to catalyst states"); the turnover-frequency, operando, role and bound rules
