@@ -21,7 +21,9 @@ Safe cases (merged by --apply):
                          has-preprint), whatever the titles — the publisher's own link
   patent_family          the same invention filed in several offices (WO, EP, US, CN ...) or copied to HAL / OSTI:
                          same title, overlapping inventors, years within 6. One row keeps every number as an alias
-                         (identifiers scheme 'patent'; index Notes "Same invention also published as ...")
+                         (identifiers scheme 'patent'; index Notes "Same invention also published as ...").
+                         Two numbers of one office in the same series (same length: two grants, two applications)
+                         are two patents — a series filed together, a continuation, a divisional — never one row.
   si_deposit             a publisher's SI deposit (Figshare ...) indexed as a paper although it declares IsSupplementTo
                          another paper: it becomes an SI link of that paper (si_links), not a row
 Also, every --apply turns SI deposits that an older version merged INTO their own paper (Figshare DOIs kept as
@@ -66,12 +68,25 @@ def name_tokens(names):
 def same_invention(x, y):
     """Patents x and y name the same inventors ("TAILLEFER MARC; XIA NING" = "Marc Taillefer; Ning Xia")."""
     ax, ay = x.get("authors") or [], y.get("authors") or []
-    if not ax or not ay:
+    if not ax or not ay or distinct_patents(x, y):
         return False
     if x.get("year") and y.get("year") and abs(int(x["year"]) - int(y["year"])) > 6:
         return False
     tx, ty = name_tokens(ax), name_tokens(ay)
     return name_tokens(ax[:1]) == name_tokens(ay[:1]) or len(tx & ty) / max(1, len(tx | ty)) >= 0.5
+
+
+def office_number(p):
+    m = re.match(r"^patent:([A-Z]{2})(\d+)$", p.get("key") or "")
+    return (m.group(1), m.group(2)) if m else None
+
+
+def distinct_patents(x, y):
+    """Two numbers of one office in the same series (same length) are two different patents, whatever their titles
+    and inventors (US1625924 and US1625925, granted the same day); an application and its grant (US2011144382 and
+    US8123456, JP2005123456 and JP4567890) differ in length and can still be one invention."""
+    a, b = office_number(x), office_number(y)
+    return bool(a and b and a[0] == b[0] and a[1] != b[1] and len(a[1]) == len(b[1]))
 
 
 def patent_order(p):
@@ -223,6 +238,7 @@ def find(led, separate=frozenset()):
         if len(ps) < 2:
             continue
         root = {p["id"]: p["id"] for p in ps}
+        members = {p["id"]: [p] for p in ps}
 
         def rt(x):
             while root[x] != x:
@@ -231,8 +247,11 @@ def find(led, separate=frozenset()):
             return x
         for i, x in enumerate(ps):
             for y in ps[i + 1:]:
-                if same_invention(x, y):
-                    root[rt(y["id"])] = rt(x["id"])
+                rx, ry = rt(x["id"]), rt(y["id"])
+                if rx != ry and same_invention(x, y) and not any(
+                        distinct_patents(u, v) for u in members[rx] for v in members[ry]):
+                    root[ry] = rx            # never joins two patents of one series through a third
+                    members[rx] += members.pop(ry)
         comps = defaultdict(list)
         for p in ps:
             comps[rt(p["id"])].append(p)
@@ -245,7 +264,7 @@ def find(led, separate=frozenset()):
             for i, x in enumerate(reps):
                 for y in reps[i + 1:]:
                     close = not (x.get("year") and y.get("year")) or abs(int(x["year"]) - int(y["year"])) <= 4
-                    if close and (not x.get("authors") or not y.get("authors")):
+                    if close and (not x.get("authors") or not y.get("authors")) and not distinct_patents(x, y):
                         groups.append(("patent_same_title", *sorted([x, y], key=patent_order)))
     # a publisher's SI deposit indexed as a paper: it declares IsSupplementTo another indexed paper
     for p in everything:

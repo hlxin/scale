@@ -4,10 +4,10 @@ This folder holds an index of the catalysis literature: **about 2.3 million reco
 reviews, preprints, conference papers, theses, reports, patents and datasets) found in 24 open databases
 (OpenAlex, Crossref, Semantic Scholar, Europe PMC, OpenAIRE, arXiv, OSTI, DOAJ, HAL, Zenodo, DataCite ...), merged
 into one row per work, with title, abstract, authors (ORCID, institutions), venue, year, DOI and other identifiers,
-citations and topics. Nothing in it is downloaded. Everything lives in one SQLite file, `papers.db` (10.9 GB).
+citations and topics. Nothing in it is downloaded. Everything lives in one SQLite file, `papers.db` (12.9 GB).
 
 > **In the hlxin/scale repository** this folder holds this guide and `consult.py`, not the data. The CO2 subset of
-> `papers.db`, `co2-reduction-electricity.db` (23,630 papers on CO2 reduction driven by electricity,
+> `papers.db`, `co2-reduction-electricity.db` (23,631 papers on CO2 reduction driven by electricity,
 > [README.md](README.md)), is shared outside git: put it in this folder (or name it in `CATALYSIS_PAPERS_DB`) and
 > `consult.py` uses it by default. The counts quoted in this guide refer to the full catalog (2.3 million records,
 > also outside the repository; pass `--db /path/to/papers.db`); on the subset, questions outside CO2 reduction
@@ -273,6 +273,12 @@ related), so count with `kind = 'main'` unless you want that looser set.
   on topics alone.
 - **Abstracts:** 419,256 in-scope records (19 %) still have no abstract (113,558 were filled on 2026-10-14);
   they can only match on title and keywords.
+- **Historical methanol synthesis (added 2026-10-20):** SCALE's pre-1966 methanol-synthesis corpus
+  (`graphs/methanol-synthesis-pre1966/sources.json`) is the collection `methanol-synthesis-pre1966`: 178 records, of
+  which 128 were new to the catalog, among them 79 patents from 1923–1968 (42 from the 1920s) that the open patent
+  sources do not reach. SCALE's statuses are its scope decisions (174 in scope, 4 off scope, with the reason in
+  `relevance_note`); every in-scope record has Methanol synthesis among its Topic A/B/C, so `--concept co2-methanol
+  --year 1920-1965` now finds 184 records (75 patents) at the strict level.
 - The numbers change when the pipeline updates the index. Every answer carries `db_built_at`.
 
 To extend `consult.py`, add an entry to `CONCEPTS` (topics + FTS phrases) or `DRIVERS` at the top of the file;

@@ -5,6 +5,7 @@
   python3 -I topics.py assign --topic <slug>                  # deterministic match for papers without Claude/API topics
   python3 -I topics.py proposed [--topic <slug>]              # labels Claude/API used that are not in the vocabulary
   python3 -I topics.py set --ids 12,57 --main "CO2RR,Copper catalysts" [--related "CORR"]   # correct by hand
+  python3 -I topics.py set --ids 12,57 --main "Methanol synthesis" --add    # in front of each paper's own topics
 To extend the vocabulary, add terms to .scripts/vocab_custom.json (format in references/topics.md) and run `assign`.
 """
 import argparse
@@ -26,6 +27,8 @@ def main():
     ap.add_argument("--ids")
     ap.add_argument("--main")
     ap.add_argument("--related", default="")
+    ap.add_argument("--add", action="store_true",
+                    help="set: put --main in front of each paper's own Topic A/B/C (three in all) instead of replacing them")
     ap.add_argument("--no-export", action="store_true", help="assign: do not refresh the index CSVs and papers.db")
     a = ap.parse_args()
     proj = Project(a.project)
@@ -57,7 +60,13 @@ def main():
         ids = [int(x) for x in a.ids.split(",") if x.strip().isdigit()]
         with led.tx():
             for i in ids:
-                led.set_subjects(i, main_ids, vocab.related_for(main_ids, [r for r in rel if r]), "manual", force=True)
+                mains, extra = main_ids, [r for r in rel if r]
+                if a.add:                   # the paper's own topics follow; the ones pushed out become related
+                    own = led.subjects_of(i)
+                    own_main = [x["term"] for x in sorted(own, key=lambda x: x["rank"]) if x["kind"] == "main"]
+                    mains = list(dict.fromkeys(main_ids + own_main))[:3]
+                    extra += [t for t in own_main if t not in mains] + [x["term"] for x in own if x["kind"] == "related"]
+                led.set_subjects(i, mains, vocab.related_for(mains, extra), "manual", force=True)
         led.export(topics=[a.topic] if a.topic else None)
         print(json.dumps({"set": len(ids), "main": [vocab.label(t) for t in main_ids]}))
         return

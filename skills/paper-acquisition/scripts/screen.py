@@ -6,7 +6,8 @@ Methods (config['screening']['method']):
   keywords  deterministic include/exclude term list (.scripts/<topic>/keywords.json): keywords
   none      no screening; every paper that passed the topic gate stays in scope: none
 Every method writes Relevance (0-5, blank for none), a short note, and the in/out decision (score >= threshold,
-default 3) into the ledger. claude / api also choose each paper's three main topics from the topic vocabulary
+default 3) into the ledger; a manual decision (an imported list's, import_list.py --scope file / in) is never
+re-scored. claude / api also choose each paper's three main topics from the topic vocabulary
 (vocab/catalysis.json + .scripts/vocab_custom.json); keywords / none keep the deterministic vocabulary topics that
 build_list / classify_access assigned (papers without topics get them; topics.py assign redoes them all after a
 vocabulary change). keywords and none work block by block (20,000 papers), so a topic of millions takes minutes.
@@ -47,6 +48,7 @@ from _topics import Vocab, apply_vocab
 SKILL = Path(__file__).resolve().parents[1]
 DEFAULT_SIZE = {"claude": 100, "api": 25}
 BLOCK = 20000           # papers per transaction in keywords / none (a topic may hold millions)
+NOT_MANUAL = "COALESCE(t.relevance_method, '') != 'manual'"     # a person's decision: never re-scored
 
 
 def qdir(proj, slug, stage):
@@ -118,6 +120,7 @@ def prep_rows(led, slug, stage):
         ids = [r[0] for r in led.q("SELECT t.paper_id FROM paper_topics t JOIN papers p ON p.id = t.paper_id "
                                    "WHERE t.topic = ? AND p.downloaded = 1 AND t.path IS NOT NULL AND "
                                    "(t.relevance_method IS NULL OR t.relevance_method NOT LIKE '%fulltext%') "
+                                   f"AND {NOT_MANUAL} "
                                    "ORDER BY t.rowid", (slug,))]
         cond = ""
     for i in range(0, len(ids), 900):
@@ -448,8 +451,8 @@ def run_keywords(proj, slug, cfg, led, export=True):
     if not sc.groups:
         die("keywords.json needs at least one include group")
     cnt, changed, vocab, done, t0 = Counter(), 0, Vocab(proj), 0, time.time()
-    total = topic_count(led, slug, "AND p.is_erratum = 0")
-    for rows in led.iter_topic(slug, "AND p.is_erratum = 0", chunk=BLOCK):   # non-papers are never scored (as in prep)
+    total = topic_count(led, slug, f"AND p.is_erratum = 0 AND {NOT_MANUAL}")
+    for rows in led.iter_topic(slug, f"AND p.is_erratum = 0 AND {NOT_MANUAL}", chunk=BLOCK):   # non-papers: never scored
         with led.tx():
             for r in rows:
                 s, note = sc.score(r.get("title"), r.get("abstract"))
@@ -470,8 +473,8 @@ def run_keywords(proj, slug, cfg, led, export=True):
 
 def run_none(proj, slug, led, export=True):
     n, vocab, t0 = 0, Vocab(proj), time.time()
-    total = topic_count(led, slug, "AND t.relevance IS NULL AND p.is_erratum = 0")
-    for rows in led.iter_topic(slug, "AND t.relevance IS NULL AND p.is_erratum = 0", chunk=BLOCK):
+    total = topic_count(led, slug, f"AND t.relevance IS NULL AND p.is_erratum = 0 AND {NOT_MANUAL}")
+    for rows in led.iter_topic(slug, f"AND t.relevance IS NULL AND p.is_erratum = 0 AND {NOT_MANUAL}", chunk=BLOCK):
         with led.tx():
             for r in rows:
                 led.set_topic(r["id"], slug, relevance=None, relevance_note=None, relevance_method="none", in_scope=1)

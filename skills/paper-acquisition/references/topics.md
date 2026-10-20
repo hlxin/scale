@@ -62,4 +62,6 @@ expression. Avoid words that are common outside the topic ("benchmark", "in situ
 ## Correcting topics by hand
 
 `topics.py set --ids 12,57 --main "CO2RR,Copper catalysts,Operando characterization" [--related CORR]` — stored as
-method `manual`, never overwritten by later runs.
+method `manual`, never overwritten by later runs. With `--add`, the terms go in front of each paper's own Topic A/B/C
+(three in all; the ones pushed out become related topics): `topics.py set --ids <a list's papers> --main
+"Methanol synthesis" --add` marks what an imported list is about without losing what each paper was given.
