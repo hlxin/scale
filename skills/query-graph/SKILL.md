@@ -64,7 +64,9 @@ A generated explanation is a presentation of the retrieved evidence, not a repla
    transport check into a test, CQ-10 a test's dynamic operation and CQ-11 its dark controls; CQ-14 the site
    populations of a specimen's states, CQ-15 a turnover frequency into the site count it is divided by, CQ-16
    activity assignments and CQ-17 operando observations made while the kinetics were measured, and the fits an
-   assignment rests on). A step on an edge
+   assignment rests on; CQ-18 how batches of one nominal catalyst differ, CQ-19 nominal and measured compositions,
+   CQ-20 sizes by technique, CQ-21 what a fitted coordination number rests on and CQ-22 what a source leaves
+   unstated). A step on an edge
    type follows its specializations too (`CONTROL_FOR` finds `DARK_CONTROL_FOR` links), as `to` finds subtypes.
 4. **Run it:** `scale graph query <graph> plan.yaml --format markdown` (or `scale call query`).
 5. **Read the kind of answer and the coverage:** `answered`; `no_matching_record` (none in this
@@ -115,6 +117,11 @@ A generated explanation is a presentation of the retrieved evidence, not a repla
   Report each turnover frequency as reported, with how it was calculated (its basis and the site count it is divided
   by, from the row's `compared`), and say when it does not say. When its site count was made in another state than
   the rate (CQ-15), say so. Never recalculate a rate on another count.
+- A size, a composition or any other characterization result is the measurand its Variable names: ask for one by its
+  Variable (a field step to `variable`, filtered on its `quantity_kind`, CQ-20), and report a microscopy size, a
+  crystallite size and a hydrodynamic size apart. Report a nominal value as nominal and a measured one with its
+  technique, information depth and state (CQ-19); two batches or two purchased lots of one formulation are two
+  records, never one batch.
 - An assignment of activity is a claim (`ABOUT` roles active, spectator, precursor, inhibitor): report it as the
   authors', with what supports and contradicts it, never a phase as active because it is abundant. Operando means
   characterized while the kinetics are measured: an observation labelled operando was made so only where its `DURING`

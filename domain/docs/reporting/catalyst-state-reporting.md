@@ -37,6 +37,9 @@ a later change, and until then such an item is recorded in the record's `note` o
 | A2 | Every action from the as-prepared state to the observation, in order (pretreatment, gas switches, pressure, temperature or potential steps), with its conditions and duration | R | `Treatment` / `CatalyticTest` / `Operation`, `PRECEDES`, `REACHED_BY {timing, elapsed}` |
 | A3 | Whether the sample was exposed to air or transferred between actions | E | `Characterization.transfer` |
 
+How the catalyst was made, activated, stored and moved before its as-prepared state, and how each characterization
+was done, are the items of the companion [preparation and characterization checklist](catalyst-preparation-reporting.md).
+
 ## B. Conditions at the observation
 
 | # | Item | | SCALE |
