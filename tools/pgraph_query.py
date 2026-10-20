@@ -620,7 +620,9 @@ class Comparison:
     stated, or is stated as other or not reported, is left out as ``missing_context``: never assumed; one whose
     statements disagree (its basis and its record's sibling) as ``incompatible_context``, unless it is an evidenced
     conversion (derived or computed, with produced_by). A value whose ``normalized_by`` names a value that is not
-    reported, or that the view withholds, is left out as ``missing_context``. Nothing is converted."""
+    reported, or that the view withholds, is left out as ``missing_context``, and so is one divided by a one-sided bound
+    that does not state the bound it is itself (a rate divided by at most N sites is at least the quotient). Nothing is
+    converted."""
 
     def __init__(self, plan: dict, spec: dict, g: Graph):
         mode = plan.get("comparison", "ordinary")
@@ -657,8 +659,10 @@ class Comparison:
     def reads_basis(self, kind: str) -> bool:
         return any("basis" in self.c.contexts[e["context"]]["read_from"] for e in self.c.kinds[kind]["compare_by"])
 
-    def _context(self, path: str, got: quantities.Read, want: dict, wanted_unit: Any = None) -> str | None:
-        """Why a value read under its contract cannot be compared on ``want`` (and in ``wanted_unit``), or None."""
+    def _context(self, path: str, got: quantities.Read, want: dict, wanted_unit: Any = None,
+                 x: dict | None = None) -> str | None:
+        """Why a value read under its contract (``x``, the value) cannot be compared on ``want`` (and in
+        ``wanted_unit``), or None."""
         kind, r = got.kind, got.reading
         if r is not None and not r.read:
             return (f"incompatible_unit ({r.text!r} is not a unit the quantity contracts read ({' '.join(r.unread)}), so "
@@ -683,6 +687,9 @@ class Comparison:
             why = absent_reason(dv)
             if why or not quantities.numbered(dv):
                 return f"missing_context ({path}: its normalized_by {den['record']}{den['path']} is {why or 'not a number'})"
+            bq = quantities.bound_quotient(x or {}, dv)
+            if bq:
+                return f"missing_context ({path}: {bq})"
         elif den is not None and not den["found"]:
             return f"missing_context ({path}: its normalized_by {den['record']} is not in this graph (withheld or never curated))"
         if wanted_unit is not None and _stated(wanted_unit) and r is not None and unit_key(r.text) != unit_key(str(wanted_unit)):
@@ -704,7 +711,8 @@ class Comparison:
             if den is not None:
                 dv = den["value"] or {}
                 out["denominator"] = {"record": den["record"], **({"path": den["path"]} if den["path"] else {}),
-                                      **({"origin": dv["origin"]} if isinstance(dv.get("origin"), str) else {})}
+                                      **({"origin": dv["origin"]} if isinstance(dv.get("origin"), str) else {}),
+                                      **({"bound": dv["bound"]} if dv.get("bound") in ("upper", "lower") else {})}
         return out
 
     def check(self, rec: dict, f: dict) -> tuple[bool | None, str | None, dict | None]:
@@ -748,7 +756,7 @@ class Comparison:
             if rec.get("_entry") is not None:
                 return None, f"incompatible_unit ({said})", None
             raise ScaleError(said)
-        why = self._context(f["prop"], got, want)
+        why = self._context(f["prop"], got, want, x=x)
         if why is not None:
             return None, why, None
         r, why = _numeric(x, f, op, read_basis=self.reads_basis(got.kind))
@@ -779,7 +787,7 @@ class Comparison:
             if _stated(ob.get("unit")) and unit_key(str(v.get("unit"))) != unit_key(str(ob["unit"])):
                 return None, f"incompatible_unit ({v.get('unit')!r}; the ranking is in {ob['unit']!r})"
             return self.tag(None, v), None
-        why = self._context(prop, got, ob.get("context") or {}, ob.get("unit"))
+        why = self._context(prop, got, ob.get("context") or {}, ob.get("unit"), x=v)
         return (None, why) if why else (self.tag(got, v), None)
 
     def observe(self, rec: dict, path: str) -> None:
@@ -809,6 +817,7 @@ class Comparison:
 
 # ------------------------------------------------------------------------------------------ plan checks
 ENTRY = "(a value entry)"           # the label of a variable an entries step binds: one value object, not a record
+LINK_ENDS = ("source", "target")    # the end of a link a field step that follows one binds
 ENTRY_PROPS = ("value", "kind")     # what a filter, a return or a ranking reads of an entry besides its value's fields
 
 
@@ -856,6 +865,8 @@ def _variables(plan: dict) -> tuple[dict[str, str | None], dict[str, str]]:
         labels[st["as"]] = ENTRY if step_kind(st) == "entries" else st.get("to")
         if st.get("edge_as") and step_kind(st) == "edge":
             edge_vars[st["edge_as"]] = st["edge"]
+        elif st.get("edge_as") and step_kind(st) == "field" and st.get("link"):
+            edge_vars[st["edge_as"]] = st["link"]
     return labels, edge_vars
 
 
@@ -872,6 +883,8 @@ def _filters(plan: dict) -> list[tuple[dict, str | None, bool]]:
     for st in plan.get("steps") or []:
         out += [(f, labels[st["as"]], False) for f in st.get("where") or []]
         out += [(f, st["edge"], True) for f in st.get("edge_where") or []] if step_kind(st) == "edge" else []
+        out += [(f, st["link"], True) for f in st.get("edge_where") or []] \
+            if step_kind(st) == "field" and st.get("link") else []
     for f in plan.get("where") or []:
         var = f.get("var", root)
         if var in edge_vars and var not in labels:
@@ -923,9 +936,17 @@ def _check_steps(plan: dict, spec: dict, qc: quantities.Contracts | None) -> Non
             if st["field"] not in results.REF_FIELDS:
                 raise ScaleError(f"the field step {st['as']} follows {st['field']!r}; a field that names a record is one of "
                                  f"{list(results.REF_FIELDS)}")
-            stray = sorted(set(st) & {"edge_where", "edge_as", "direction"})
+            stray = sorted(set(st) & ({"direction"} if st.get("link") else {"edge_where", "edge_as", "direction", "end"}))
             if stray:
-                raise ScaleError(f"the field step {st['as']} takes no {', '.join(stray)}")
+                raise ScaleError(f"the field step {st['as']} takes no {', '.join(stray)}"
+                                 + ("" if st.get("link") else " (edge_as, edge_where and end follow a link: name its type "
+                                                                "with link)"))
+            if st.get("link") and st.get("end") not in LINK_ENDS:
+                raise ScaleError(f"the field step {st['as']} follows a {st['link']} link: end says which of its ends it "
+                                 f"binds ({' or '.join(LINK_ENDS)})")
+            if st.get("link") and st["field"] != "normalized_by":
+                raise ScaleError(f"the field step {st['as']}: only normalized_by names a link (a record_ref); "
+                                 f"{st['field']} names a node")
 
 
 def check_plan(plan: dict, spec: dict) -> None:
@@ -1072,15 +1093,20 @@ def schema_gaps(plan: dict, spec: dict) -> list[str]:
             for prop in st["entries"] if isinstance(st["entries"], list) else [st["entries"]]:
                 if not has_prop(edge_vars[src] if edge else labels.get(src), prop, edge):
                     gaps.append(f"{edge_vars[src] if edge else labels.get(src)}.{prop} is not declared")
+        if kind == "field" and st.get("link") and st["link"] not in spec["edges"]:
+            gaps.append(f"edge type {st['link']} is not declared")
         labels[st["as"]] = ENTRY if kind == "entries" else st.get("to")
         if st.get("edge_as") and kind == "edge":
             edge_vars[st["edge_as"]] = st["edge"]
+        elif st.get("edge_as") and kind == "field" and st.get("link"):
+            edge_vars[st["edge_as"]] = st["link"]
         for f in st.get("where") or []:
             if not has_prop(labels[st["as"]], f["prop"]):
                 gaps.append(f"{where_of(labels[st['as']], f['prop'])} is not declared")
+        link = st.get("edge") if kind == "edge" else st.get("link")
         for f in st.get("edge_where") or []:
-            if not has_prop(st["edge"], f["prop"], edge=True):
-                gaps.append(f"{st['edge']}.{parse_path(f['prop'])[0]} is not declared")
+            if link in spec["edges"] and not has_prop(link, f["prop"], edge=True):
+                gaps.append(f"{link}.{parse_path(f['prop'])[0]} is not declared")
     for f in (plan.get("where") or []) + (plan["match"].get("where") or []):
         var = f.get("var", plan["match"].get("as", "self"))
         if var in edge_vars and var not in labels:          # a filter on a link bound by edge_as
@@ -1141,7 +1167,8 @@ def _run(doc: dict, spec: dict, plan: dict, evidence_index=None, graph: Graph | 
     cmp = Comparison(plan, spec, g)
     base = {"question": plan.get("question"), "plan": plan, "graph_id": doc["graph"].get("graph_id"),
             "schema_version": doc["graph"].get("schema_version"), "graph_sha256": g.digest}
-    link_types = list(dict.fromkeys(st["edge"] for st in steps if "edge" in st))
+    link_types = list(dict.fromkeys(st["edge"] if "edge" in st else st["link"] for st in steps
+                                    if "edge" in st or ("field" in st and st.get("link"))))
     as_of = embargo_day(plan.get("as_of"), pgraph.embargo_today())    # the day an embargo is read on (one clock)
     access = g.access(as_of)                        # the whole document's: no part of an answer is more open
     gaps = schema_gaps(plan, spec)
@@ -1274,6 +1301,7 @@ def _run(doc: dict, spec: dict, plan: dict, evidence_index=None, graph: Graph | 
                 "props": {**x, "value": x, "kind": kind},
                 "_entry": {"record": owner["id"], "path": ptr, "prop": prop, "key": key, "kind": kind, "owner": owner}}
 
+    link_by_id = {e["id"]: e for e in doc["links"]}
     cands = ([m["id"]] if m["id"] in g.nodes else []) if m.get("id") else sorted(g.by_label.get(m["label"], []))
     rows = []
     for nid in cands:
@@ -1353,13 +1381,49 @@ def _run(doc: dict, spec: dict, plan: dict, evidence_index=None, graph: Graph | 
                                         "_entries": {**row["_entries"], st["as"]: {**erec["_entry"], "from": src, "value": x,
                                                                                     "rec": erec, "twins": others}}})
                             found = True
+            elif here is not None and kind == "field" and st.get("link"):    # a link a bound entry's field names
+                e = row["_entries"].get(src)
+                x = e["value"] if e else {}
+                ref = x.get(st["field"])
+                ref = ref.get("record") if isinstance(ref, dict) else None
+                lk = link_by_id.get(ref) if isinstance(ref, str) else None
+                at = e["path"] if e else src
+                if lk is None:
+                    if isinstance(ref, str) and ref in g.nodes:
+                        step_sink(None, f"names_a_node ({at}: its {st['field']} names {ref}, a record, not a "
+                                        f"{st['link']} link)", here)
+                    elif results.withheld(x):
+                        step_sink(None, "withheld", here)
+                    else:
+                        step_sink(None, f"not_curated ({at} names no {st['field']} in this graph)", here)
+                elif lk["type"] not in g.edge_types(st["link"]):
+                    step_sink(None, f"names_another_link ({at}: its {st['field']} names a {lk['type']} link, not a "
+                                    f"{st['link']})", here)
+                else:
+                    other = lk["source"] if st["end"] == "source" else lk["target"]
+                    if not st.get("to") or g.is_a(other, st["to"]):
+                        etags: dict = {}
+                        ntags: dict = {}
+                        ebound: dict = {}
+                        if apply(lk, st.get("edge_where"), lk["id"], lambda f, why, rid=lk["id"]: step_sink(f, why, rid),
+                                 etags, st.get("edge_as") or st["link"], ebound) \
+                                and apply(g.nodes[other], st.get("where"), other,
+                                          lambda f, why, rid=other: step_sink(f, why, rid), ntags, st["as"], ebound):
+                            edges_bound = {**row["_edges"], st["edge_as"]: lk["id"]} if st.get("edge_as") else row["_edges"]
+                            nxt.append({**row, st["as"]: other, "_links": row["_links"] + [lk["id"]],
+                                        "_edges": edges_bound, "_cmp": {**row["_cmp"], **etags, **ntags},
+                                        "_bound": {**row["_bound"], **ebound}})
+                            found = True
             elif here is not None and kind == "field":       # the record a bound entry's field names
                 e = row["_entries"].get(src)
                 x = e["value"] if e else {}
                 ref = x.get(st["field"])
                 if st["field"] == "normalized_by":
                     ref = ref.get("record") if isinstance(ref, dict) else None
-                if not isinstance(ref, str) or ref not in g.nodes:
+                if isinstance(ref, str) and ref in link_by_id:
+                    step_sink(None, f"names_a_link ({e['path'] if e else src}: its {st['field']} names a "
+                                    f"{link_by_id[ref]['type']} link, {ref}; follow it with link and end)", here)
+                elif not isinstance(ref, str) or ref not in g.nodes:
                     if st["field"] == "target" and isinstance(x.get("unresolved_target"), str):
                         step_sink(None, f"unresolved_target ({x['unresolved_target']}: the source does not identify the "
                                         "product, which is never taken for one species)", here)
@@ -1381,7 +1445,8 @@ def _run(doc: dict, spec: dict, plan: dict, evidence_index=None, graph: Graph | 
                 unevaluated += 1
         stage = {"kind": "step", **({"edge": st["edge"], "direction": direction} if kind == "edge" else
                                     {"entries": props_, **({"of_kind": sorted(kinds)} if kinds else {})} if kind == "entries"
-                                    else {"field": st["field"]}),
+                                    else {"field": st["field"], **({"link": st["link"], "end": st["end"]}
+                                                                    if st.get("link") else {})}),
                  "from": src, "to": st.get("to"), "as": st["as"], "rows_in": len(rows), "rows_out": len(nxt)}
         if st.get("optional"):
             stage.update(optional=True, unbound=unbound)
@@ -1391,8 +1456,6 @@ def _run(doc: dict, spec: dict, plan: dict, evidence_index=None, graph: Graph | 
             stage["rows_not_evaluated"] = unevaluated
         stages.append(stage)
         rows = nxt
-
-    link_by_id = {e["id"]: e for e in doc["links"]}
 
     if plan.get("where"):
         kept = []

@@ -319,9 +319,12 @@ nodes:
         - quasi_in_situ
         - ex_situ
         - not_reported
-        description: operando = under reaction conditions while activity is measured or runs; in_situ
-          = in a controlled environment; quasi_in_situ = after the action without exposure to air; ex_situ
-          = after transfer through air or other environments.
+        description: The mode as the source reports it. operando = under reaction conditions while activity is measured
+          or runs; in_situ = in a controlled environment; quasi_in_situ = after the action without exposure to air;
+          ex_situ = after transfer through air or other environments. The mode is the source's label, kept as
+          reported; whether an operando observation is paired with the performance it is read with (the same specimen,
+          a stated synchronization, the performance measured quantitatively and compared with a conventional reactor or
+          cell) is evaluated from its DURING link (the checklist's operando case), never read from the label.
         maturity: provisional
       information_depth:
         type: enum
@@ -341,8 +344,11 @@ nodes:
         - local_region
         - ensemble
         - not_reported
-        description: Whether the measurement follows single particles, a local region or averages over
-          the sample (an ensemble signal cannot tell coexisting phases apart from mixed ones).
+        description: Whether the measurement follows single particles, a local region or averages over the sample. An
+          ensemble signal (XAS, XRD, IR of a powder) averages over everything it samples, so whether it tells coexisting
+          phases apart from one mixed phase, or sees a minority species at all, depends on the technique, the data, the
+          reference spectra and the analysis model; a fit, with its alternatives and limitations, is an Analysis
+          (analysis_kind spectral_fit).
         maturity: provisional
       transfer:
         type: text
@@ -386,11 +392,18 @@ nodes:
         - statistical
         - other
         - balance
+        - spectral_fit
         description: balance = a carbon, charge or mass balance of an experiment's results (provisional), over the assays
           it HAS_INPUT (the streams and phases they measured) and its interval; its result is a balance value in the
           experiment's result_values, produced_by the analysis. transport_check = whether heat and mass transport
           affect the rates of the experiment it HAS_INPUT, at the temperature and conditions it states (its
-          evaluation_basis says how it was checked).
+          evaluation_basis says how it was checked). spectral_fit = a fit of measured spectra or patterns (linear
+          combination fitting, EXAFS shell fitting, principal component analysis; provisional). The data it fits (a
+          Dataset, or the Characterization) and the references it uses are what it HAS_INPUT, its fitted parameters
+          (shares of references, coordination numbers, distances) are its results, origin fitted, with their
+          uncertainties, and what it cannot tell apart is its limitations. An alternative model of the same data is an
+          analysis of its own. A fitted parameter is neither the spectrum nor the site assignment a Claim draws from
+          it.
       evaluation_basis:
         type: enum
         maturity: provisional
@@ -409,6 +422,12 @@ nodes:
       verdict:
         type: text
         description: The conclusion of a check, e.g. "no internal diffusion limitation".
+      limitations:
+        type: text
+        maturity: provisional
+        description: What the analysis cannot tell apart or rests on, as the source states it (references that fit
+          equally well, a species too dilute to fit, parameters held fixed, a fit range), so that a claim drawn from it
+          carries them.
       temperature:
         type: value
         quantity: temperature
@@ -501,7 +520,9 @@ nodes:
     description: |
       A site or site ensemble held responsible for catalysis (metal step, oxide vacancy, metal-oxide
       interface, acid site, single atom). Its identity is usually an interpretation: HAS_SITE carries
-      the epistemic status.
+      the epistemic status, and the population in a given state (a share, a density, a count) is on the
+      HAS_SITE from that CatalystState. Whether it is active, a spectator or a precursor for a reaction is
+      a Claim about it.
     properties:
       site_kind:
         type: enum
@@ -523,7 +544,8 @@ nodes:
         type: map
         items:
           type: value
-        description: Site density, coordination and similar stated values.
+        description: Site density, coordination and similar stated values. A share, density or count of the site in a
+          stated catalyst state goes on the HAS_SITE from that state.
   Feed:
     is_a: ObjectOfStudy
     fixed:
@@ -779,9 +801,10 @@ nodes:
       after a gas switch. It is the answer to "which phase is in effect": its phases are HAS_PHASE
       edges to Materials (with location and dominance), what it is a state of is STATE_OF, the action
       it is reached by is REACHED_BY (with the timing), and the characterizations or computations that
-      establish it are DETERMINED_BY. A test measured in the state is IN_STATE. A state predicted by a
-      simulation has origin computed. The state is a record of what the source reports, not an
-      equilibrium assignment.
+      establish it are DETERMINED_BY. A test measured in the state is IN_STATE. Its sites and their
+      populations are HAS_SITE edges from it, which hold for this state only. A state predicted by a
+      simulation has origin computed and is STATE_OF the model, with no specimen of its own. The state
+      is a record of what the source reports, not an equilibrium assignment.
     properties:
       state_kind:
         type: enum
@@ -1561,11 +1584,23 @@ edges:
     to:
     - Catalyst
   HAS_SITE:
-    description: A catalyst or sample has an active site; the status says whether the source asserts or
-      hypothesizes it.
+    description: |-
+      A catalyst, a sample or a catalyst state has a site or site ensemble; the status says whether the source
+      asserts or hypothesizes it. From a CatalystState, the site and the population values on the link are that
+      state's (as prepared, pretreated, working, after the test): another state of the same sample has its own
+      HAS_SITE, or none, and nothing is carried from one state to another or from a sample to its states. A
+      population is four quantities, never one another: population_fraction (a share of a stated whole),
+      site_density (per area or per mass), exposed_metal_count (the exposed atoms counted) and site_inventory (the
+      sites a site-normalized rate is divided by, which the rate names with normalized_by). Each value keeps its
+      origin (measured, derived, computed, assumed), its uncertainty or bound, what produced it (produced_by: the
+      counting measurement, the analysis that converts an uptake into sites, the computation) and the evidence that
+      states it (evidence_ids). A measured population sits on the state of the specimen it was measured on when the
+      source says which; a computed one on the computed state (STATE_OF the model); one the source gives only for
+      the formulation on the Catalyst, with no specimen added.
     from:
     - Catalyst
     - CatalystSample
+    - CatalystState
     to:
     - ActiveSite
     properties:
@@ -1577,6 +1612,34 @@ edges:
           - CatalyticTest
           - Characterization
           - Computation
+      population_fraction:
+        type: value
+        quantity: site_fraction
+        maturity: provisional
+        description: The share of a stated whole that this site population makes up (of the exposed atoms of an element,
+          of all its atoms, of the sites of a kind), dimensionless; basis names the whole ("of exposed Cu atoms"). A
+          share the source gives only in words goes in text_value ("a minority"). A share is never a denominator.
+      site_density:
+        type: value
+        quantity: site_density
+        maturity: provisional
+        description: The sites of this population per surface area or per mass of the catalyst or material
+          (µmol/m2, sites/nm2, µmol/g), as stated.
+      exposed_metal_count:
+        type: value
+        quantity: site_count
+        maturity: provisional
+        description: The exposed (surface) atoms of the metal counted for this population, by chemisorption, titration,
+          microscopy or a particle model (µmol/g, µmol), with how they were counted and what the count assumes (the
+          adsorbate and its stoichiometry, the atoms per area) in definition, or in an Analysis that produced it.
+          Exposed atoms are not active sites; a rate divided by them is per exposed atom.
+      site_inventory:
+        type: value
+        quantity: site_count
+        maturity: provisional
+        description: The number of sites a site-normalized rate (a turnover frequency) is divided by, as the source
+          counts, estimates or assumes it (µmol/g, µmol, a number of sites); the rate names it with normalized_by.
+          When the source divides by the exposed atoms, the rate names exposed_metal_count instead.
   PREPARED_FROM:
     description: A sample was prepared from a starting chemical or material (the precursor role is the
       edge).
@@ -1632,14 +1695,64 @@ edges:
     to:
     - Material
   DURING:
-    description: An in-situ or operando characterization carried out during a catalytic test or procedure,
-      including a treatment or procedure step. This asserts temporal overlap, not that the characterization
-      itself measures catalytic activity.
+    description: |-
+      An in-situ or operando characterization carried out during a catalytic test or procedure, including a
+      treatment or procedure step. This asserts temporal overlap, not that the characterization itself measures
+      catalytic activity, and not that what it observes corresponds to the performance the test reports. That
+      pairing rests on what the source states besides the overlap: which specimen was observed (specimen), how the
+      observation and the performance measurement were synchronized (timing), whether the performance was measured
+      quantitatively during the observation and compared with a conventional reactor or cell (performance,
+      benchmark). Neither the overlap nor a change in time that tracks the activity makes an observed species or
+      phase active; an assignment is a Claim with its own evidence.
     from:
     - Characterization
     to:
     - CatalyticTest
     - Procedure
+    properties:
+      specimen:
+        type: enum
+        maturity: provisional
+        values:
+        - same_specimen
+        - same_batch
+        - different_specimen
+        - not_reported
+        description: Which specimen the characterization observed, as the source states it. same_specimen = the one whose
+          performance the test measures, in the same cell or reactor; same_batch = another specimen of the batch the test
+          uses (in a separate cell); different_specimen = another specimen, not said to be of the same batch.
+      timing:
+        type: enum
+        maturity: provisional
+        values:
+        - simultaneous
+        - alternating
+        - sequential
+        - not_reported
+        description: How the observation and the performance measurement were synchronized, as the source states it (its
+          protocol in note and evidence). simultaneous = recorded at the same time; alternating = taken in turn within
+          the test; sequential = one before or after the other.
+      performance:
+        type: enum
+        maturity: provisional
+        values:
+        - matched_to_benchmark
+        - measured_in_cell
+        - products_detected
+        - not_measured
+        - not_reported
+        description: What was measured of the catalytic performance while the observation was made. measured_in_cell =
+          activity or selectivity measured quantitatively in the cell of the observation; matched_to_benchmark = measured
+          so and compared with that of a conventional reactor or cell, with which it agreed (the comparison in the
+          evidence, its test in benchmark); products_detected = products seen, not quantified; not_measured = the
+          reaction ran, but its performance was not measured during the observation.
+      benchmark:
+        type: ref
+        maturity: provisional
+        targets:
+        - CatalyticTest
+        description: The test in a conventional reactor or cell whose performance the cell's was compared with
+          (performance matched_to_benchmark).
   IN_REACTOR:
     from:
     - CatalyticTest
@@ -1653,7 +1766,9 @@ edges:
     - Feed
     specializes: HAS_INPUT
   CATALYZES:
-    description: A source states that a catalyst or an active site catalyzes a reaction.
+    description: A source states that a catalyst or an active site catalyzes a reaction. That a site, phase or species
+      is active (or a spectator) for a reaction in a stated catalyst state, on stated evidence, is a Claim ABOUT them
+      (the checklist guidance, Assignments), which SUPPORTS and CONTRADICTS can reach.
     from:
     - Catalyst
     - ActiveSite
@@ -2466,7 +2581,10 @@ checklist:
     showing (interpretations) adds the evidence that reading needs, looked for in the records connected to the
     test: intrinsic kinetics, a transport assessment; separating light from heat, a dark control at matched
     temperature or a separation analysis; plasma-catalyst synergy, plasma-alone and catalyst-alone controls;
-    material stability, the catalyst characterized during or after the test. These cases are provisional.'
+    material stability, the catalyst characterized during or after the test. A characterization the source calls
+    operando adds a test under working conditions and a performance measured on the same specimen at a stated
+    synchronization and benchmarked; a spectral fit adds its method, results, limitations and the data it fits. These
+    cases are provisional.'
   basis:
   - Bligaard et al., Toward benchmarking in catalysis science, ACS Catal. 2016, doi:10.1021/acscatal.6b00183.
   - The thermal profile of the adopted catalysis schema 0.1.0 (temperature and pressure, feed composition,
@@ -2499,6 +2617,20 @@ checklist:
     temperature; the plasma power, not the supply's input; the catalyst characterized after the experiment).
   - Wismann et al., Electrified methane reforming, elucidating transient phenomena, Chem. Eng. J. 2021, 425,
     131509, doi:10.1016/j.cej.2021.131509 (the transient behaviour of an electrically heated reactor).
+  - Wrasman et al., Recommendations for improving rigor and reproducibility in site specific characterization, J.
+    Catal. 2024, 433, 115451, doi:10.1016/j.jcat.2024.115451 (sites counted with an assumed or determined adsorption
+    stoichiometry, every assumption reported; site quantification under conditions relevant to the reaction, since
+    the number and nature of sites change with them; the activity often dominated by a small fraction of the
+    accessible sites; probe molecules may bind sites that are not active).
+  - Meyer et al., Recommendations to standardize reporting, execution, and interpretation of X-ray Absorption
+    Spectroscopy measurements, J. Catal. 2024, 432, 115369, doi:10.1016/j.jcat.2024.115369 (a bulk-averaging technique
+    in which minority species may escape detection; fits reported with their parameters, constraints, uncertainties
+    and the poorer models they were preferred to; in situ unless the kinetics at the beamline match the laboratory
+    reactor's).
+  - Tackett et al., Rigor and Reproducibility in Electrocatalysis, Best Practices for Operando Studies, ACS Catal. 2026,
+    16, 13861, doi:10.1021/acscatal.6c01946 (operando as working conditions with quantitative activity or selectivity;
+    the synchronization protocol reported; performance benchmarked against conventional cells; spectators may mask
+    transient species).
   guidance: |
     Applicability: list every driving force of a test. A test that lists none has unknown applicability: its driving-force items are neither checked nor met, so it is never complete; an equilibrium (test_kind equilibrium_estimate, equilibrium_measurement) is exempt. Completeness is not validity, and neither makes a value comparable (comparison scientific decides that).
     Interpretations: record what the source reads the test as showing (interpretations), never your own reading. Each reading adds the evidence it needs, looked for in the records connected to the test; a reading without it is reported, and the test stays as it is. No conversion level, criterion value or control is required of every test.
@@ -2509,6 +2641,10 @@ checklist:
     Potential and light: separate the contributions with controls: the same test in the dark (differs in illumination) and at open circuit or without applied potential (differs in electrode potential), each CONTROL_FOR the combined test.
     Stability: a constant trace of performance (a TimeSeries the test HAS_OUTPUT) shows performance_stability, not material_stability; the material is shown unchanged by characterizing it during or after the test (a CatalystState the test reaches, REACHED_BY timing during or after, DETERMINED_BY a characterization: structure after the test, dissolution into the electrolyte). Repeats are REPLICATES links, and a planned set of repeats a Design (planned_replicates).
     Time: a test operated dynamically (pulses, ramps, switching) HAS_OPERATION an Operation with its time_pattern, the quantities it varies and its segments, so its results keep their time-dependent context.
+    Sites: record a site population on the HAS_SITE from the state it was counted or observed in (as prepared, pretreated, working, after the test); sites can change with the conditions, so a count made in one state is never carried to another. A share (population_fraction), a density (site_density), the exposed atoms counted (exposed_metal_count) and the sites a rate is divided by (site_inventory) are four values, each with its origin, uncertainty or bound, and what produced it: the counting measurement, or an Analysis that converts an uptake into sites and USES_MODEL a Model stating what it assumes (the adsorbate's stoichiometry, the particle shape). A turnover frequency names the count it is divided by (normalized_by), and what it counts decides the quantity: a rate per exposed atom is an average over sites that may differ, not a rate per active site. A computed population sits on the computed state, STATE_OF the model; one the source gives only for the formulation on the Catalyst, with no specimen added.
+    Assignments: that a phase, site or species is active, co-active, a spectator, a precursor or an inhibitor for a reaction in a state is a Claim, ABOUT the component (role active, co_active, spectator, precursor or inhibitor), the state (role state), the reaction or product (role reaction, product), the test it concerns (role test) and any elementary step or mechanism (role step, mechanism); SUPPORTS and CONTRADICTS from the tests, characterizations, analyses and claims it rests on name the results with premise_refs. Competing assignments are claims of their own, never merged. Abundance is not activity: a majority phase is assigned nothing unless the source argues it, and a minority one can carry an assignment with its evidence.
+    Operando: an observation the source calls operando is kept as such (observation_mode); the checklist looks, on its DURING link, for a catalytic test under working conditions and a performance measured quantitatively on the same specimen at a stated synchronization (specimen, timing, performance), and for that performance compared with a conventional reactor or cell (performance matched_to_benchmark, benchmark). An overlap in time is not a pairing, and a change that tracks the activity in time does not show that what changed is active.
+    Spectra and fits: a measured spectrum is a Dataset the characterization HAS_OUTPUT; a fit to it is an Analysis (analysis_kind spectral_fit) with its method, its fitted parameters in results (origin fitted, with their uncertainties), the references it HAS_INPUT and its limitations; an alternative model is another Analysis; a site assignment drawn from it is a Claim that cites the fitted parameters (premise_refs). Whether an ensemble signal tells phases apart depends on the technique, the data, the references and the model.
   labels:
     CatalyticTest:
       applies_by:
@@ -2846,8 +2982,84 @@ checklist:
                     - after
               - edge: DETERMINED_BY
                 label: Analysis
+    Characterization:
+      when:
+      - observation_mode:
+          any_of:
+          - operando
+        maturity: provisional
+        basis:
+        - Tackett et al., Rigor and Reproducibility in Electrocatalysis, Best Practices for Operando Studies, ACS Catal.
+          2026, 16, 13861, doi:10.1021/acscatal.6c01946 (operando measurements are made under working catalytic conditions
+          while correlating what is observed with quantitative measures of activity or selectivity; the synchronization
+          protocol is reported; the performance in the spectroscopic cell is benchmarked against a conventional cell)
+        - Meyer et al., Recommendations to standardize reporting, execution, and interpretation of X-ray Absorption
+          Spectroscopy measurements, J. Catal. 2024, 432, 115369, doi:10.1016/j.jcat.2024.115369 (without kinetics
+          measured at the beamline that match those of a laboratory reactor, the experiment counts as in situ; for an
+          operando experiment, conversion and selectivity are reported)
+        evidence:
+          should:
+          - name: working_test
+            description: the catalytic test under whose working conditions it was made (DURING a CatalyticTest; a treatment
+              or procedure step is not working catalytic conditions)
+            path:
+            - edge: DURING
+              label: CatalyticTest
+          - name: paired_performance
+            description: the performance measured quantitatively on the same specimen, at a stated synchronization, while it
+              was made (DURING a CatalyticTest with specimen same_specimen, timing simultaneous or alternating and
+              performance measured_in_cell or matched_to_benchmark); an overlap in time alone is not a pairing
+            path:
+            - edge: DURING
+              label: CatalyticTest
+              edge_where:
+                specimen:
+                  any_of:
+                  - same_specimen
+                timing:
+                  any_of:
+                  - simultaneous
+                  - alternating
+                performance:
+                  any_of:
+                  - measured_in_cell
+                  - matched_to_benchmark
+          - name: benchmarked_performance
+            description: the performance in the cell of the observation compared with that of a conventional reactor or
+              cell, with which it agreed (DURING a CatalyticTest with performance matched_to_benchmark)
+            path:
+            - edge: DURING
+              label: CatalyticTest
+              edge_where:
+                performance:
+                  any_of:
+                  - matched_to_benchmark
     Analysis:
       when:
+      - analysis_kind:
+          any_of:
+          - spectral_fit
+        maturity: provisional
+        basis:
+        - Meyer et al. 2024, doi:10.1016/j.jcat.2024.115369 (XAS averages over every environment of the absorbing atoms;
+          linear combination fitting depends on the references assumed; the fitted parameters, the variables held fixed
+          or constrained and their uncertainties are reported; the best model is contrasted with poorer ones)
+        should:
+        - method
+        - results
+        - limitations
+        evidence:
+          should:
+          - name: fitted_data
+            description: the data the fit is made to, a Dataset (the measured spectra) or the Characterization that it
+              HAS_INPUT
+            any_of:
+            - path:
+              - edge: HAS_INPUT
+                label: Dataset
+            - path:
+              - edge: HAS_INPUT
+                label: Characterization
       - analysis_kind:
           any_of:
           - transport_check

@@ -251,14 +251,23 @@ class Contracts:
                                          "compare_by and values of it")
                 compare.append(c)
             den = k.get("denominator")
-            if den is not None and (not isinstance(den, dict) or not den.get("dimensions")):
-                raise ScaleError(f"quantities.kinds.{name}.denominator: names its dimensions")
+            if den is not None and (not isinstance(den, dict) or not den.get("dimensions")
+                                    or set(den) - {"description", "dimensions", "kinds"}
+                                    or not isinstance(den.get("kinds", []), list)):
+                raise ScaleError(f"quantities.kinds.{name}.denominator: names its dimensions (and, optionally, the kinds "
+                                 "of value it may name)")
             if k.get("share") and k.get("closure"):
                 raise ScaleError(f"quantities.kinds.{name}: a share (part of a whole) is not a closure (found over put in)")
             self.kinds[name] = {"dimensions": dims, "compare_by": compare, "share": bool(k.get("share")),
                                 "closure": bool(k.get("closure")),
                                 "denominator": [self.dim(x, f"kinds.{name}.denominator") for x in den["dimensions"]]
-                                if den else None}
+                                if den else None,
+                                "denominator_kinds": [str(x) for x in den.get("kinds") or []] if den else []}
+        for name, k in self.kinds.items():
+            bad = [x for x in k["denominator_kinds"] if x not in self.kinds or self.kinds[x]["share"]]
+            if bad:
+                raise ScaleError(f"quantities.kinds.{name}.denominator.kinds: {bad[0]!r} is not a declared kind that "
+                                 "counts (a share is never a denominator)")
 
     # ---- units
     def read_unit(self, text: Any, contexts: tuple = ()) -> Reading:
@@ -681,20 +690,22 @@ def read_value(c: Contracts, spec: dict, record: dict, prop: str, v: dict, recor
             return None
     names = tuple(x["context"] for x in c.kinds[kind]["compare_by"])
     reading = None if states_no_unit(v.get("unit")) else c.read_unit(v.get("unit"), names)
-    den = denominator(v, records)
+    den = denominator(v, records, spec, variables)
     sib = siblings(c, kind, record, ctx_map)
     return Read(kind, reading, c.resolve(kind, v, reading, sib, den["name"] if den else None), den)
 
 
-def denominator(v: dict, records: dict) -> dict | None:
+def denominator(v: dict, records: dict, spec: dict | None = None, variables: dict | None = None) -> dict | None:
     """The record and value a value's ``normalized_by`` names: {record, path, name (the property it names), value (the
-    value object, or None), found (whether the path resolves)}; None without one."""
+    value object, or None), found (whether the path resolves), kind (the quantity kind of the value it names: its
+    property's binding, else its Variable's; None when neither says)}; None without one."""
     ref = v.get("normalized_by")
     if not isinstance(ref, dict) or not isinstance(ref.get("record"), str):
         return None
     rec = records.get(ref["record"])
     path = ref.get("path") if isinstance(ref.get("path"), str) else None
-    out = {"record": ref["record"], "path": path, "name": None, "value": None, "found": rec is not None and path is None}
+    out = {"record": ref["record"], "path": path, "name": None, "value": None, "found": rec is not None and path is None,
+           "kind": None}
     if rec is None or path is None:
         return out
     parts = results.steps(path)
@@ -702,9 +713,30 @@ def denominator(v: dict, records: dict) -> dict | None:
     if not ok:
         return out
     names = [p for p in parts if not p.isdigit()]
-    out.update(found=True, name=names[-1] if names else None,
-               value=cur if isinstance(cur, dict) and cur.get("status") in VALUE_STATUS else None)
+    value = cur if isinstance(cur, dict) and cur.get("status") in VALUE_STATUS else None
+    kind = None
+    if value is not None and spec is not None:
+        top = parts[0] if parts else None
+        kind = binding(spec, rec, top)[0] if top is not None and len(parts) <= 2 else None   # the property, or its item
+        if kind is None and isinstance(value.get("variable"), str):
+            kind = (variables or {}).get(value["variable"])
+    out.update(found=True, name=names[-1] if names else None, value=value, kind=kind)
     return out
+
+
+def bound_quotient(v: dict, den: dict | None) -> str | None:
+    """Why a value divided by a one-sided bound does not say what it is, or None: a quantity divided by at most N is at
+    least the quotient (and by at least N, at most), so the value states that bound (``bound``); one that states none,
+    or the same direction, does not say it."""
+    if not isinstance(den, dict) or den.get("bound") not in ("upper", "lower") or not numbered(den):
+        return None
+    want = "lower" if den["bound"] == "upper" else "upper"
+    if v.get("bound") == want:
+        return None
+    limit = f"{'at most' if den['bound'] == 'upper' else 'at least'} {den.get('value')} {den.get('unit') or ''}".rstrip()
+    said = f"states bound {v['bound']}" if v.get("bound") in ("upper", "lower") else "states no bound"
+    return (f"it is divided by a one-sided bound ({limit}), so it is {'an upper' if want == 'upper' else 'a lower'} "
+            f"bound, but it {said}")
 
 
 def variable_kinds(doc: dict) -> dict:
@@ -819,12 +851,21 @@ def _check_value(c: Contracts, rep, rid: str, where: str, got: Read, v: dict, re
         elif den is not None and den["record"] in records and den["path"] is not None and den["found"]:
             if den["value"] is None:          # a path that does not resolve is reported by the record-path check
                 rep.add("error", rid, f"{where}: normalized_by {den['record']}{den['path']} is not a value object")
-            elif numbered(den["value"]) and not states_no_unit(den["value"].get("unit")):
-                r2 = c.read_unit(den["value"]["unit"])
-                if r2.read and r2.vector not in allowed:
-                    rep.add("error", rid, f"{where}: normalized_by {den['record']}{den['path']} is "
-                                          f"{c.dimension_name(r2.vector)} ({den['value']['unit']}), not a denominator of "
-                                          f"{kind} ({', '.join(c.dimension_name(x) for x in allowed)})")
+            else:
+                if numbered(den["value"]) and not states_no_unit(den["value"].get("unit")):
+                    r2 = c.read_unit(den["value"]["unit"])
+                    if r2.read and r2.vector not in allowed:
+                        rep.add("error", rid, f"{where}: normalized_by {den['record']}{den['path']} is "
+                                              f"{c.dimension_name(r2.vector)} ({den['value']['unit']}), not a denominator "
+                                              f"of {kind} ({', '.join(c.dimension_name(x) for x in allowed)})")
+                wanted = c.kinds[kind]["denominator_kinds"]
+                dk = den.get("kind")
+                if wanted and dk is not None and dk not in wanted:
+                    rep.add("error", rid, f"{where}: normalized_by {den['record']}{den['path']} is a {dk}, not a "
+                                          f"denominator of {kind} (a {' or a '.join(wanted)})")
+                why = bound_quotient(v, den["value"])
+                if why:
+                    rep.add("warning", rid, f"{where}: {why}; a scientific comparison leaves it out until it does")
     if c.kinds[kind]["share"] and numbered(v) and reading is not None and reading.read and not reading.unread:
         _share_advisory(rep, rid, where, kind, v, at[1])
     if c.kinds[kind].get("closure") and numbered(v) and reading is not None and reading.read and not reading.unread:
@@ -1006,6 +1047,15 @@ def diff(a: dict | None, b: dict | None, out: dict) -> None:
         if (xa.get("denominator") or {}).get("dimensions") != (xb.get("denominator") or {}).get("dimensions"):
             out["changed"].append(f"quantities.kinds.{k}: denominator {(xa.get('denominator') or {}).get('dimensions')} -> "
                                   f"{(xb.get('denominator') or {}).get('dimensions')}")
+        # the kinds of value a denominator may name: none listed is any kind, so a first list narrows it
+        na, nb = set((xa.get("denominator") or {}).get("kinds") or []), set((xb.get("denominator") or {}).get("kinds") or [])
+        if nb and not na:
+            out["narrowed"].append(f"quantities.kinds.{k}: its denominator names a {' or a '.join(sorted(nb))} only")
+        elif na and not nb:
+            out["loosened"].append(f"quantities.kinds.{k}: its denominator may name a value of any kind")
+        else:
+            out["narrowed"] += [f"quantities.kinds.{k}: its denominator no longer names a {x}" for x in sorted(na - nb)]
+            out["loosened"] += [f"quantities.kinds.{k}: its denominator may name a {x}" for x in sorted(nb - na)]
         if bool(xa.get("share")) != bool(xb.get("share")):
             out["changed"].append(f"quantities.kinds.{k}: share {bool(xa.get('share'))} -> {bool(xb.get('share'))}")
         if bool(xa.get("closure")) != bool(xb.get("closure")):
@@ -1151,6 +1201,31 @@ def narrowed_targets(doc: dict, spec: dict | None) -> list[str]:
     return bad
 
 
+def misnamed_denominators(doc: dict, spec: dict | None) -> list[str]:
+    """The values of a document divided by a value of another kind than their contract's denominator names (a turnover
+    frequency divided by a share): what the step to 0.6.0 cannot map. Each as ``record.path: normalized_by names a
+    <kind>``; a denominator whose kind nothing states is not listed (its dimension is checked as before)."""
+    c = contracts(spec or {})
+    if c is None:
+        return []
+    variables = variable_kinds(doc)
+    records = {r["id"]: r for r in (doc.get("nodes") or []) + (doc.get("links") or []) if isinstance(r, dict)
+               and isinstance(r.get("id"), str)}
+    bad = []
+    for r in records.values():
+        props = r.get("props") if isinstance(r.get("props"), dict) else {}
+        for path, v in _values_anywhere(props):
+            if not isinstance(v.get("normalized_by"), dict):
+                continue
+            top = path.split("/")[1]
+            kind = binding(spec, r, top)[0] or (variables.get(v.get("variable")) if isinstance(v.get("variable"), str) else None)
+            wanted = c.kinds[kind]["denominator_kinds"] if kind in c.kinds else []
+            den = denominator(v, records, spec, variables)
+            if wanted and den is not None and den.get("kind") is not None and den["kind"] not in wanted:
+                bad.append(f"{r['id']}{path}: normalized_by names a {den['kind']}, not a {' or a '.join(wanted)}")
+    return bad
+
+
 def describe_binding(c: Contracts, d: dict) -> str | None:
     """A property's contract as ``describe`` prints it: ``quantity <kind> [<dimensions>]; compared by <contexts>``."""
     k = d.get("quantity") if isinstance(d, dict) else None
@@ -1160,6 +1235,8 @@ def describe_binding(c: Contracts, d: dict) -> str | None:
     sib = d.get("context") or {}
     by = ", ".join(f"{x} (also from {sib[x]})" if x in sib else x for x in ctx)
     den = c.kinds[k]["denominator"]
+    dk = c.kinds[k]["denominator_kinds"]
     return (f"quantity {k} [{', '.join(c.names.get(x, formula(x)) for x in c.kinds[k]['dimensions'])}]"
             + (f"; compared by {by}" if by else "")
-            + (f"; divided by {' or '.join(c.names.get(x, formula(x)) for x in den)} (normalized_by)" if den else ""))
+            + (f"; divided by {' or '.join(c.names.get(x, formula(x)) for x in den)}"
+               + (f", a {' or a '.join(dk)}" if dk else "") + " (normalized_by)" if den else ""))
