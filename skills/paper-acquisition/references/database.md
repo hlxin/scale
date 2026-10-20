@@ -95,6 +95,17 @@ With these, the file is self-contained: when `.scripts/ledger.sqlite` is missing
 project rebuilds it (and the topic files) from papers.db, and every step carries on from there. `export.py --rebuild`
 rebuilds papers.db from the ledger (a fallback; it keeps `runs`, `changes`, the filters and the author ids).
 
+**Merging two copies** (`merge_db.py --from <their papers.db>`). Papers match by identity (key, DOI, any alias),
+never by ID; a paper only the other copy has gets a new ID here; when one paper there matches two here, the other
+copy merged them and they are merged here too. Bibliographic fields are kept and only filled where empty here;
+citations take the larger count; a retraction or erratum flag from either copy holds; access and licence take a
+verdict read from a PDF over metadata, else the more recently checked one; known copies, sources, identifiers,
+aliases and SI links are united; downloads stay each copy's own (the other copy's download URL joins the known
+copies, and `--files` copies the PDF and SI in under this copy's ID); topics are united, and in a topic both hold the
+better screening method decides; Topic A/B/C come from the better method; curation results are united; the topics'
+search runs, queries, merge decisions and project terms are united; the other copy's runs since the copies parted
+(each run has a `uid`) are added with their changes, and the merge is a run of its own.
+
 ```sql
 -- papers added since June, by run
 SELECT r.at, r.step, p.title FROM changes c JOIN runs r ON r.id = c.run_id JOIN papers p ON p.id = c.paper_id

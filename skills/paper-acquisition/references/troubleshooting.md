@@ -31,6 +31,7 @@
 | a value typed into papers.db or an index CSV disappeared | a sync rewrites the rows of the papers it touches, and CSVs are written from the ledger | record it through a script: `export.py --set-extracted ...`, `topics.py set ...` |
 | papers.db looks out of date | a step ran with `--no-export` | `export.py` publishes what is pending |
 | papers.db is damaged or out of step with the ledger | an interrupted copy, or a file edited by hand | `export.py --rebuild` (the history, filters and author ids are kept) |
+| two people updated separate copies of papers.db | each copy has papers, checks or downloads the other lacks | one runs `merge_db.py --from <the other's papers.db>` (add `--files <their project folder>` for their PDFs), then `dedup.py --apply`, and shares the merged file |
 | "no working ledger: rebuilding … from publications/papers.db" | the project came as papers.db alone (or `.scripts/` was removed) | expected: the ledger and the topics' files are rebuilt once; add your own keys (`keys.py --init`) and contact address, then Update carries on |
 | many in-scope papers without an abstract | the sources had none (often Elsevier, older papers) | after download offer `fill_abstracts.py` |
 | Titles from old runs show `CO 2`, `Fe 2 O 3` | subscripts flattened to spaces upstream | the cleaner rejoins formulas on import; re-run `build_list.py` |

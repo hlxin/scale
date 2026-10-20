@@ -25,8 +25,13 @@ from _common import log, now_iso
 
 
 class _Index:
-    def __init__(self, con):
-        self.con, self.cache = con, {}
+    """The papers a rule's parts match: over the whole database, or (scope=True) over the papers in temp.fdelta_ids,
+    whose text is then in the small full-text table temp.fdelta (same tokenizer, so the same matches)."""
+
+    def __init__(self, con, scope=False):
+        self.con, self.cache, self.scope = con, {}, scope
+        self.fts_table = "fdelta" if scope else "papers_fts"
+        self.only = " AND paper_id IN (SELECT id FROM temp.fdelta_ids)" if scope else ""
 
     def fts(self, expr, title_only=False):
         if not expr:
@@ -34,7 +39,8 @@ class _Index:
         key = ("fts", expr, title_only)
         if key not in self.cache:
             e = f"{{title}} : ({expr})" if title_only else expr
-            self.cache[key] = {r[0] for r in self.con.execute("SELECT rowid FROM papers_fts WHERE papers_fts MATCH ?", (e,))}
+            self.cache[key] = {r[0] for r in self.con.execute(
+                f"SELECT rowid FROM {self.fts_table} WHERE {self.fts_table} MATCH ?", (e,))}
         return self.cache[key]
 
     def topic(self, terms):
@@ -43,8 +49,8 @@ class _Index:
         key = ("topic", tuple(sorted(terms)))
         if key not in self.cache:
             self.cache[key] = {r[0] for r in self.con.execute(
-                f"SELECT paper_id FROM paper_subjects WHERE kind='main' AND term IN ({','.join('?' * len(terms))})",
-                list(terms))}
+                f"SELECT paper_id FROM paper_subjects WHERE kind='main' AND term IN ({','.join('?' * len(terms))})"
+                + self.only, list(terms))}
         return self.cache[key]
 
     def rule(self, r, level):
@@ -58,13 +64,14 @@ class _Index:
         return ids
 
 
-def evaluate(con, definition):
-    """[(paper_id, label, level)] for a definition, over the papers now in the database."""
-    idx = _Index(con)
+def evaluate(con, definition, idx=None):
+    """[(paper_id, label, level)] for a definition, over the papers now in the database (or idx's scope)."""
+    idx = idx or _Index(con)
     ex = definition.get("exclude") or {}
     where = [w for w, on in (("COALESCE(is_non_paper,0)=1", ex.get("non_papers")),
                              ("COALESCE(is_retracted,0)=1", ex.get("retracted"))) if on]
-    excluded = {r[0] for r in con.execute(f"SELECT id FROM papers WHERE {' OR '.join(where)}")} if where else set()
+    only = " AND id IN (SELECT id FROM temp.fdelta_ids)" if idx.scope else ""
+    excluded = {r[0] for r in con.execute(f"SELECT id FROM papers WHERE ({' OR '.join(where)}){only}")} if where else set()
     out = []
     for label, rules in (definition.get("groups") or {}).items():
         strict = set.intersection(*[idx.rule(r, "strict") for r in rules]) - excluded if rules else set()
@@ -80,6 +87,39 @@ def define(con, name, definition, description=None):
                 "ON CONFLICT(name) DO UPDATE SET description=excluded.description, definition=excluded.definition, "
                 "updated_at=excluded.updated_at",
                 (name, description or definition.get("description"), json.dumps(definition, ensure_ascii=False), now, now))
+
+
+def refresh_papers(con, ids):
+    """Re-run every saved filter for these papers only (a filter decides each paper on its own text, topics and
+    flags, so the other papers' membership cannot change); {name: papers}."""
+    try:
+        rows = con.execute("SELECT name, definition FROM filters").fetchall()
+    except sqlite3.OperationalError:
+        return {}
+    if not rows or not ids:
+        return {}
+    con.execute("CREATE TEMP TABLE IF NOT EXISTS fdelta_ids (id INTEGER PRIMARY KEY)")
+    con.execute("CREATE VIRTUAL TABLE IF NOT EXISTS temp.fdelta USING fts5(title, abstract, keywords)")
+    con.execute("DELETE FROM temp.fdelta_ids")
+    con.execute("DELETE FROM temp.fdelta")
+    con.executemany("INSERT OR IGNORE INTO temp.fdelta_ids VALUES (?)", [(i,) for i in ids])
+    con.execute("INSERT INTO temp.fdelta(rowid, title, abstract, keywords) SELECT id, title, abstract, keywords "
+                "FROM papers WHERE id IN (SELECT id FROM temp.fdelta_ids)")
+    out = {}
+    for name, definition in rows:
+        try:
+            members = evaluate(con, json.loads(definition), _Index(con, scope=True))
+        except sqlite3.OperationalError as e:
+            log(f"filter {name}: not refreshed ({e})")
+            continue
+        with con:
+            con.execute("DELETE FROM filter_members WHERE filter=? AND paper_id IN (SELECT id FROM temp.fdelta_ids)",
+                        (name,))
+            con.executemany("INSERT INTO filter_members VALUES (?,?,?,?)", [(name, *m) for m in members])
+            n = con.execute("SELECT COUNT(DISTINCT paper_id) FROM filter_members WHERE filter=?", (name,)).fetchone()[0]
+            con.execute("UPDATE filters SET refreshed_at=?, members=? WHERE name=?", (now_iso(), n, name))
+        out[name] = n
+    return out
 
 
 def refresh(con, names=None):

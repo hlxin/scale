@@ -41,6 +41,7 @@ import os
 import re
 import sqlite3
 import sys
+import uuid
 import zlib
 from pathlib import Path
 
@@ -103,7 +104,7 @@ CREATE VIEW v_collection_papers AS
 # history, working state and saved filters (added in place to an older database)
 STATE_DDL = """
 CREATE TABLE IF NOT EXISTS runs (id INTEGER PRIMARY KEY, at TEXT, step TEXT, topics TEXT, added INTEGER,
-  updated INTEGER, removed INTEGER, papers INTEGER, note TEXT);
+  updated INTEGER, removed INTEGER, papers INTEGER, note TEXT, uid TEXT);
 CREATE TABLE IF NOT EXISTS changes (run_id INTEGER, paper_id INTEGER, change TEXT, field TEXT, old TEXT, new TEXT);
 CREATE TABLE IF NOT EXISTS author_keys (kind TEXT, value TEXT, author_id INTEGER, PRIMARY KEY (kind, value));
 CREATE TABLE IF NOT EXISTS _paper_state (paper_id INTEGER PRIMARY KEY, state BLOB NOT NULL);
@@ -244,6 +245,19 @@ def has_state(path):
             con.close()
     except sqlite3.Error:
         return False
+
+
+def ensure_state(con):
+    """The history and state tables, added in place to an older evolving database (columns are only ever added)."""
+    con.executescript(STATE_DDL)
+    if "uid" not in {r[1] for r in con.execute("PRAGMA table_info(runs)")}:
+        con.execute("ALTER TABLE runs ADD COLUMN uid TEXT")      # a run's identity across copies (merge_db.py)
+    con.executescript(STATE_INDEXES)
+
+
+def new_run(con, step, topics, note):
+    return con.execute("INSERT INTO runs(at, step, topics, note, uid) VALUES (?,?,?,?,?)",
+                       (now_iso(), step, topics, note, uuid.uuid4().hex)).lastrowid
 
 
 def _step_name(topics=None):
@@ -388,7 +402,47 @@ def _insert(con, rows):
 
 
 # ------------------------------------------------------------------ the small tables, the project files
-def _refresh_small(con, led, vocab, created_at=None):
+def _contrib(state):
+    """What one paper adds to each of its topics' counts in `collections`: (papers, in scope, out of scope, PDFs)."""
+    if not state:
+        return {}
+    np_, rt = bool(state.get("is_non_paper")), bool(state.get("is_retracted"))
+    pdf = state.get("_pdf") or {}
+    return {c: (1, int(s == 1 and not np_ and not rt), int(s == 0 and not np_), int(bool(pdf.get(c))))
+            for c, s in (state.get("_collections") or {}).items()}
+
+
+def _collections_full(con):
+    rows = {}
+    for (slug,) in con.execute("SELECT DISTINCT collection FROM paper_collections ORDER BY collection").fetchall():
+        c = con.execute("SELECT COUNT(*), SUM(CASE WHEN c.in_scope=1 AND COALESCE(p.is_non_paper,0)=0 AND "
+                        "COALESCE(p.is_retracted,0)=0 THEN 1 ELSE 0 END), SUM(CASE WHEN c.in_scope=0 AND "
+                        "COALESCE(p.is_non_paper,0)=0 THEN 1 ELSE 0 END), SUM(CASE WHEN c.pdf_path IS NOT NULL THEN 1 "
+                        "ELSE 0 END) FROM paper_collections c JOIN papers p ON p.id = c.paper_id WHERE c.collection=?",
+                        (slug,)).fetchone()
+        rows[slug] = tuple(x or 0 for x in c)
+    con.execute("DELETE FROM collections")
+    con.executemany("INSERT INTO collections (slug, papers, in_scope, out_of_scope, downloaded) VALUES (?,?,?,?,?)",
+                    [(s, *v) for s, v in rows.items()])
+
+
+def _collections_delta(con, deltas):
+    """Apply what the synced papers changed to the topics' counts (exact, and independent of the catalogue's size)."""
+    for slug, d in deltas.items():
+        if not any(d):
+            continue
+        if con.execute("SELECT 1 FROM collections WHERE slug=?", (slug,)).fetchone():
+            con.execute("UPDATE collections SET papers=papers+?, in_scope=in_scope+?, out_of_scope=out_of_scope+?, "
+                        "downloaded=downloaded+? WHERE slug=?", (*d, slug))
+        else:
+            con.execute("INSERT INTO collections (slug, papers, in_scope, out_of_scope, downloaded) VALUES (?,?,?,?,?)",
+                        (slug, *d))
+    con.execute("DELETE FROM collections WHERE papers <= 0")
+
+
+def _refresh_small(con, led, vocab, created_at=None, deltas=None):
+    """The tables that describe the whole database: sources, subjects, the topics (counts in full on a build, by the
+    synced papers' deltas on a sync), the project files, the unattached SI links and `about`."""
     proj = led.proj
     sources = {r[0] for r in con.execute("SELECT DISTINCT source FROM paper_sources")}
     con.execute("DELETE FROM sources")
@@ -397,30 +451,31 @@ def _refresh_small(con, led, vocab, created_at=None):
     con.executemany("INSERT INTO subjects VALUES (?,?,?,?,?)",
                     [(t, vocab.terms[t]["label"], vocab.terms[t].get("name"), vocab.terms[t].get("facet"),
                       "; ".join(vocab.label(x) for x in vocab.terms[t].get("related") or [])) for t in vocab.order])
-    con.execute("DELETE FROM collections")
-    for (slug,) in con.execute("SELECT DISTINCT collection FROM paper_collections ORDER BY collection").fetchall():
+    if deltas is None:
+        _collections_full(con)
+    else:
+        _collections_delta(con, deltas)
+    for (slug,) in con.execute("SELECT slug FROM collections").fetchall():
         cfg = json_read(proj.topic_dir(slug) / "config.json", {}) or {}
         st = json_read(proj.topic_dir(slug) / "state.json", {}) or {}
-        c = con.execute("SELECT COUNT(*), SUM(CASE WHEN c.in_scope=1 AND COALESCE(p.is_non_paper,0)=0 AND "
-                        "COALESCE(p.is_retracted,0)=0 THEN 1 ELSE 0 END), SUM(CASE WHEN c.in_scope=0 AND "
-                        "COALESCE(p.is_non_paper,0)=0 THEN 1 ELSE 0 END), SUM(CASE WHEN c.pdf_path IS NOT NULL THEN 1 "
-                        "ELSE 0 END) FROM paper_collections c JOIN papers p ON p.id = c.paper_id WHERE c.collection=?",
-                        (slug,)).fetchone()
         li, lu = run_dates(st)
-        con.execute("INSERT INTO collections VALUES (?,?,?,?,?,?,?,?,?,?)",
-                    (slug, cfg.get("topic"), cfg.get("created_at"), li, lu, c[0], c[1] or 0, c[2] or 0, c[3] or 0,
-                     proj.rel(proj.pub / slug)))
+        con.execute("UPDATE collections SET topic=?, created_at=?, last_index=?, last_update=?, folder=? WHERE slug=?",
+                    (cfg.get("topic"), cfg.get("created_at"), li, lu, proj.rel(proj.pub / slug), slug))
     _capture_project_files(con, proj, [r[0] for r in con.execute("SELECT slug FROM collections")])
-    # SI links whose parent DOI is no indexed paper (an issue DOI ...): kept so the ledger can be rebuilt whole
-    con.execute("DELETE FROM _si_links_unattached")
-    con.executemany("INSERT OR IGNORE INTO _si_links_unattached VALUES (?,?,?,?,?,?)", [tuple(r) for r in led.q(
-        "SELECT * FROM si_links l WHERE NOT EXISTS (SELECT 1 FROM dois d WHERE d.doi = l.parent_doi)")])
-    n_papers = con.execute("SELECT COUNT(*) FROM papers").fetchone()[0]
     old = dict(con.execute("SELECT name, value FROM about").fetchall())
+    # SI links whose parent DOI is no indexed paper (an issue DOI ...): kept so the ledger can be rebuilt whole;
+    # looked for again only when the ledger's SI links or DOIs changed
+    fp = json.dumps([tuple(r) for r in led.q("SELECT COUNT(*), MAX(rowid) FROM si_links")] +
+                    [tuple(r) for r in led.q("SELECT COUNT(*), MAX(rowid) FROM dois")])
+    if deltas is None or old.get("_si_links_seen") != fp:
+        con.execute("DELETE FROM _si_links_unattached")
+        con.executemany("INSERT OR IGNORE INTO _si_links_unattached VALUES (?,?,?,?,?,?)", [tuple(r) for r in led.q(
+            "SELECT * FROM si_links l WHERE NOT EXISTS (SELECT 1 FROM dois d WHERE d.doi = l.parent_doi)")])
+    n_papers = con.execute("SELECT COUNT(*) FROM papers").fetchone()[0]
     now = now_iso()
     about = {"format": FORMAT, "created_at": created_at or old.get("created_at") or now, "updated_at": now,
              "built_at": now, "papers": str(n_papers),
-             "authors": str(con.execute("SELECT COUNT(*) FROM authors").fetchone()[0]),
+             "authors": str(con.execute("SELECT COUNT(*) FROM authors").fetchone()[0]), "_si_links_seen": fp,
              "source_of_truth": "this file: it evolves in place (runs, changes), and the skill's working ledger "
                                 "(.scripts/ledger.sqlite) is rebuilt from it when missing",
              "vocabulary": vocab.name, "examples": "\n\n".join(EXAMPLES)}
@@ -452,10 +507,11 @@ def _snapshot(con, ids):
     cols = sorted(set(TRACKED) | set(TEXTUAL))
     out = {r[0]: dict(zip(["id"] + cols, r)) for r in
            con.execute(f"SELECT id, {', '.join(cols)} FROM papers WHERE id IN ({marks})", ids)}
-    for pid, coll, scope in con.execute(f"SELECT paper_id, collection, in_scope FROM paper_collections "
-                                        f"WHERE paper_id IN ({marks})", ids):
+    for pid, coll, scope, pdf in con.execute(f"SELECT paper_id, collection, in_scope, pdf_path FROM paper_collections "
+                                             f"WHERE paper_id IN ({marks})", ids):
         if pid in out:
             out[pid].setdefault("_collections", {})[coll] = scope
+            out[pid].setdefault("_pdf", {})[coll] = pdf
     return out
 
 
@@ -505,14 +561,13 @@ def sync_published_db(led, vocab, topics=None, note=None):
                                    (max_seq,))]
         con = sqlite3.connect(str(proj.db), timeout=300)
         con.execute("PRAGMA busy_timeout=300000")
-        con.executescript(STATE_DDL + STATE_INDEXES)
+        ensure_state(con)
         cols = [d[0] for d in con.execute("SELECT * FROM papers LIMIT 0").description]
         step, tnames = _step_name(topics)
         counts = {"added": 0, "updated": 0, "removed": 0}
-        refilter = False
+        refilter, deltas = set(), {}
         with con:
-            run_id = con.execute("INSERT INTO runs(at, step, topics, note) VALUES (?,?,?,?)",
-                                 (now_iso(), step, tnames, note)).lastrowid
+            run_id = new_run(con, step, tnames, note)
         authors = _Authors(con, cache=False)
         for i in range(0, len(ids), 5000):
             part = ids[i:i + 5000]
@@ -536,6 +591,7 @@ def sync_published_db(led, vocab, topics=None, note=None):
                         r = rows["papers"][0]
                         new = dict(zip(cols, r))
                         new["_collections"] = {c[1]: c[5] for c in rows["paper_collections"]}
+                        new["_pdf"] = {c[1]: c[6] for c in rows["paper_collections"]}
                         if pid in old_full and tuple(old_full[pid]) != tuple(r):
                             counts["updated"] += 1
                     o = old.get(pid)
@@ -543,9 +599,14 @@ def sync_published_db(led, vocab, topics=None, note=None):
                         counts["removed"] += 1
                     elif o is None and new is not None:
                         counts["added"] += 1
+                    for c, v in _contrib(new).items():
+                        deltas[c] = [a + b for a, b in zip(deltas.get(c, (0, 0, 0, 0)), v)]
+                    for c, v in _contrib(o).items():
+                        deltas[c] = [a - b for a, b in zip(deltas.get(c, (0, 0, 0, 0)), v)]
                     cr, textual = _changes(run_id, pid, o, new, led)
                     change_rows += cr
-                    refilter = refilter or textual
+                    if textual:
+                        refilter.add(pid)
                 con.executemany("INSERT INTO changes VALUES (?,?,?,?,?,?)", change_rows)
                 if old_authors:                       # authors left with no paper (their papers merged away)
                     con.execute("CREATE TEMP TABLE IF NOT EXISTS _old_authors (id INTEGER PRIMARY KEY)")
@@ -556,16 +617,16 @@ def sync_published_db(led, vocab, topics=None, note=None):
                     con.execute("DELETE FROM authors WHERE id IN (SELECT o.id FROM _old_authors o WHERE NOT EXISTS "
                                 "(SELECT 1 FROM paper_authors pa WHERE pa.author_id = o.id))")
         with con:
-            n_papers = _refresh_small(con, led, vocab)
+            n_papers = _refresh_small(con, led, vocab, deltas=deltas)
             con.execute("UPDATE runs SET added=?, updated=?, removed=?, papers=? WHERE id=?",
                         (counts["added"], counts["updated"], counts["removed"], n_papers, run_id))
             if not ids and not note:
                 con.execute("DELETE FROM runs WHERE id=?", (run_id,))     # a sync that changed nothing is no run
         led.x("DELETE FROM publish_queue WHERE seq <= ?", (max_seq,))
         refreshed = {}
-        if refilter:
-            from _filters import refresh
-            refreshed = refresh(con)
+        if refilter:                          # the saved filters, for the papers whose text, topics or flags changed
+            from _filters import refresh_papers
+            refreshed = refresh_papers(con, sorted(refilter))
         con.close()
         res = {**counts, "papers": n_papers, "synced": len(ids)}
         if refreshed:
@@ -594,15 +655,17 @@ def build_published_db(led, vocab, note=None):
     if has_state(path):          # carry over the history and the saved filters
         con.execute("ATTACH DATABASE ? AS old", (str(path),))       # only read
         for t in ("runs", "changes", "filters", "project_files", "authors", "author_keys"):
-            con.execute(f"INSERT INTO main.{t} SELECT * FROM old.{t}")
+            mine = [r[1] for r in con.execute(f"PRAGMA main.table_info({t})")]
+            theirs = {r[1] for r in con.execute(f"PRAGMA old.table_info({t})")}
+            cols = ", ".join(c for c in mine if c in theirs)
+            con.execute(f"INSERT INTO main.{t} ({cols}) SELECT {cols} FROM old.{t}")
         created = (con.execute("SELECT value FROM old.about WHERE name='created_at'").fetchone() or [None])[0]
         con.commit()
         con.execute("DETACH DATABASE old")
     elif path.exists():           # an older snapshot: the earlier exports were not recorded
         note = note or "rebuilt from the ledger"
     step, tnames = _step_name()
-    run_id = con.execute("INSERT INTO runs(at, step, topics, note) VALUES (?,?,?,?)",
-                         (now_iso(), step, tnames, note or "full rebuild from the ledger")).lastrowid
+    run_id = new_run(con, step, tnames, note or "full rebuild from the ledger")
     authors = _Authors(con, cache=True)
     n_papers, last_id = 0, 0
     while True:
