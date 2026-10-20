@@ -41,10 +41,16 @@ A value the experimenter set or the author specified is not a measurement.
 
 ## Rates and kinetics
 
-- A turnover frequency or number goes in `results` (`turnover_frequency`, `turnover_number`) as
-  printed, with the site count it is normalized to in `basis` ("per surface Cu atom, N2O
-  chemisorption") and its definition in `definition`. The site count, when the source measures it,
-  is a Characterization result of its own.
+- A turnover frequency goes in the test's `result_values` as printed (a Variable of kind
+  `turnover_frequency`, its product in `target`). When the source gives the site count it divides by, the
+  value names it with `normalized_by`: the `exposed_metal_count` (exposed atoms, each taken as a site) or
+  the `site_inventory` (the sites of a kind the source divides by) of the `HAS_SITE` from the state the
+  sites were counted in (below, "Sites in a catalyst state"; scale-catal 0.6.0). Say in `basis` what the
+  sites are, in the source's words ("per exposed Cu atom", "per Zn-decorated step site", "per metal atom,
+  every Cu atom taken as a site"): what a rate counts as sites decides which rates compare
+  (`site_count_basis`, core/graph/kernel.yaml), and a rate that says nothing of it is not compared. A rate
+  divided by a count that is only an upper bound is itself a lower bound (`bound: lower`). A turnover
+  number goes in `results` (`turnover_number`) with its `definition`.
 - A light-off temperature: `results.light_off_temperature` with `definition` ("temperature at 50 %
   CO conversion") and the species in `target`.
 - An activation energy: in the `results` of the Analysis that fits it (`analysis_kind: kinetic_fit`,
@@ -164,7 +170,49 @@ range) and, where it is about one phase, species or element, its `target`:
 
 Several values of one quantity (two phases, three peaks) get a short suffix each
 (`crystallite_size_cu`, `reduction_peak_temperature_1`), and every one keeps its `target`. Name the
-technique as the source does in `technique`, and the specimen's state on `CHARACTERIZES {state}`.
+technique as the source does in `technique`, and the specimen's state on `CHARACTERIZES {state}`. A count of
+sites or of exposed atoms for a state also goes on the `HAS_SITE` from that state (below), `produced_by` the
+characterization or the Analysis that turns its uptake into sites.
+
+## Sites in a catalyst state
+
+- Record a site population on the `HAS_SITE` from the `CatalystState` it was counted or observed in (scale-catal
+  0.6.0): after reduction, under reaction, after the test. The state is `STATE_OF` the specimen when the source says
+  which; one the source gives only for the formulation is `STATE_OF` the Catalyst (never add a specimen for it); a
+  computed one is `STATE_OF` the model (a StructureModel), with the Computation that `DETERMINED_BY` names.
+- Four values, each its own property: `population_fraction` (a share; `basis` names the whole, "of the exposed Cu
+  atoms"; a share in words is `text_value`), `site_density` (per area or mass), `exposed_metal_count` (exposed atoms
+  counted) and `site_inventory` (the sites a rate is divided by). Give each its `origin` (measured, derived, computed,
+  assumed), its `uncertainty` or `bound` ("at most 30 µmol/g"), its `produced_by` and its `evidence_ids`.
+- How it was counted: `produced_by` the Characterization (chemisorption, titration, spectroscopy) or an Analysis that
+  `HAS_INPUT` it and `USES_MODEL` a Model whose `assumptions` say what the count assumes (the adsorbate's
+  stoichiometry, which atoms count as sites, the particle shape); or a short `definition` when the source says no
+  more. A metal surface area (m2/g) is not a count of sites: it stays a characterization result, and a count derived
+  from it with the source's atoms per area is a derived value with its producer.
+- Never carry a count from one state to another. When the source divides a rate measured under reaction by a count
+  made after reduction, the rate names that count, in the state it was made in.
+
+## Assignments, operando observations and fits
+
+- **An assignment** (this phase, site or species is active for this reaction in this state) is a Claim
+  (`claim_kind: structure_property`; `mechanism` for a route) `ABOUT` the component in its role (`active`,
+  `co_active`, `spectator`, `precursor`, `inhibitor`), the state (role `state`), the reaction and product
+  (`reaction`, `product`), the test it concerns (`test`) and any elementary step or mechanism (`step`,
+  `mechanism`). What it rests on `SUPPORTS` or `CONTRADICTS` it, with `premise_refs` to the results
+  (`/result_values/<id>`, `/results/<key>`) and a `warrant`. One claim per assignment: a competing or a spectator
+  interpretation is a claim of its own, with its own evidence (`CONTRADICTS` when the source sets them against each
+  other). Never assign activity to a phase because it is the majority one.
+- **An operando observation**: `observation_mode` as the source says. `DURING` the test it overlapped, with what
+  the source states of the pairing: `specimen` (the same specimen, another of its batch, another), `timing`
+  (simultaneous, alternating, sequential; the protocol in the evidence) and `performance` (measured in the cell,
+  matched to a conventional reactor or cell with that test as `benchmark`, products only detected, not measured).
+  Leave out what the source does not state: never infer that an observation was simultaneous or on the same specimen.
+- **A spectrum and its fits**: the measured spectra are a Dataset (`data_kind: spectrum`) the characterization
+  `HAS_OUTPUT`; a fit is an Analysis (`analysis_kind: spectral_fit`) that `HAS_INPUT` the Dataset (role `data`) and
+  its references (role `reference_standard`), with its `method`, its fitted parameters in `results` (`origin:
+  fitted`, `produced_by` the analysis, with their uncertainties) and its `limitations` (what it cannot tell apart,
+  what was held fixed). An alternative model of the same data is another Analysis. A site assignment drawn from it is
+  a Claim that cites the parameter with `premise_refs`.
 
 ## Digitizing a figure
 

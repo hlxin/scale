@@ -2,6 +2,48 @@
 
 ## Unreleased
 
+- **Schema 0.6.0 (breaking): site populations belong to a catalyst state, a turnover frequency says what it is divided
+  by, and an operando label is not a pairing.** Requested by @hlxin ("Scope site populations and activity assignments
+  to catalyst states"). Before, a site could be attached only to a catalyst or a sample, so a population counted after
+  reduction read as the population under reaction too. A turnover frequency per exposed atom and one per active site
+  were compared as one quantity, and the schema had no place for the count either was divided by.
+  - **Sites in a state.** `HAS_SITE` can start from a `CatalystState` and holds for that state only, so nothing is
+    carried to another state or from a sample to its states. It takes four values (provisional): `population_fraction`
+    (a share of a stated whole), `site_density`, `exposed_metal_count` (the exposed atoms counted) and `site_inventory`
+    (the sites a rate is divided by). Each keeps its origin (measured, derived, computed, assumed), its uncertainty or
+    bound, what produced it and its evidence. What a count assumes goes in the counting Model's `assumptions`. A
+    computed population sits on a state of the model, and a count for the formulation on a state of the Catalyst, with
+    no specimen added. The kernel gains the kinds `site_fraction`, `site_density` and `site_count` and the count-per-area
+    and count-per-mass dimensions.
+  - **Turnover frequencies (the breaking part).** A turnover frequency is now compared only with one for the same
+    product that counts the same kind of site (`site_count_basis`: the exposed atoms, the sites of one kind, or every
+    atom). One that states neither is left out of a scientific comparison as missing context. Its denominator must be
+    a site count or a site density, and may be per gram. A value divided by a one-sided bound must state its own bound,
+    or it is reported and left out of comparisons.
+  - **Assignments.** Which phase, site or species is active, co-active, a spectator, a precursor or an inhibitor is a
+    `Claim` with named `ABOUT` roles, supported or contradicted by the records it rests on (`premise_refs`). This
+    replaces the `ACTIVE_FOR` link the reporting draft had planned. No new label: the example shows the existing
+    records express and query it.
+  - **Operando.** `DURING` states which specimen was observed, how observation and performance were synchronized, and
+    whether the performance was measured in the cell and compared with a conventional reactor or cell (`specimen`,
+    `timing`, `performance`, `benchmark`; provisional). A new checklist case asks an observation the source calls
+    operando for these, as should items. `observation_mode` keeps its meaning and stays the source's label; only the
+    checklist report changes.
+  - **Spectra and fits.** `Analysis.analysis_kind: spectral_fit` and `Analysis.limitations` keep a fit, its
+    alternatives and what it cannot tell apart, separate from the spectrum and from the claim drawn from it. The
+    description of ensemble sampling no longer says categorically that an ensemble signal cannot tell phases apart:
+    that depends on the technique, the data, the references and the model.
+  - **Queries.** A `field` step can follow `normalized_by` into a link (`link`, `end`, `edge_as`), so a rate reaches
+    the state and the site of its denominator.
+  - **Examples and questions.** A new public example (`domain/examples/scale-catal/state-site-examples/`) and CQ-14 to
+    CQ-17 (CQ-12 and CQ-13 are left to open pull requests). Six invalid examples cover the new rules. The 0.5.0
+    examples and invalid examples are re-pinned to 0.6.0. The reporting draft (0.2) and the roadmap say what is done.
+  - **Migration.** `scale graph migrate` rewrites nothing. It stops on a turnover frequency whose product is not a
+    chemical species, or whose denominator is not a site count or density.
+  - **Sources.** Wrasman et al. 2024 (doi:10.1016/j.jcat.2024.115451) on site counting, Meyer et al. 2024
+    (doi:10.1016/j.jcat.2024.115369) on XAS, and Tackett et al. 2026 (doi:10.1021/acscatal.6c01946) on operando
+    studies; the checklist cases cite them.
+
 - **Schema 0.5.0 (breaking): the checklist says when a test's reporting cannot be judged, and checks the evidence a
   reading needs.** Requested by @hlxin ("Check reporting applicability and connected kinetic evidence"). Before, a test
   that listed no driving force matched none of the checklist's driving-force cases, so a test stripped of every

@@ -143,7 +143,8 @@ the schema; `scale graph describe` shows it), or the `quantity_kind` of the Vari
   velocity their `flow_reference` (STP, NTP, normal, standard, operating conditions), a space velocity its
   `space_velocity_basis` (GHSV, LHSV, WHSV, per catalyst mass), a composition fraction its `fraction_basis`, and a
   selectivity, yield, conversion, Faradaic efficiency, quantum or photonic yield, energy yield or partial current
-  density the `species` its target names. A context is read from what the value states (its unit: `V vs RHE`, `barg`,
+  density the `species` its target names, and a turnover frequency its `species` and its `site_count_basis` (what it
+  counts as sites: the exposed atoms, the sites of a kind, every atom; scale-catal 0.6.0). A context is read from what the value states (its unit: `V vs RHE`, `barg`,
   `sccm`; its `basis` and `definition`; its `target`; the property its `normalized_by` names) and from the sibling
   property its binding names (`reference_scale`, `current_normalization`, `fraction_basis`). The statements must agree.
 - **Check or group.** A filter or a ranking that states a context, `context: {potential_reference: rhe}`, checks it: a
@@ -158,8 +159,11 @@ the schema; `scale graph describe` shows it), or the `quantity_kind` of the Vari
   its `produced_by` names, on another context than its record's (a potential converted from Ag/AgCl to RHE by a stated
   Analysis), keeps its own context and may enter that context's ranking; nothing is converted by the query.
 - **Denominators.** A value whose `normalized_by` names a value that is not reported, or that the view withholds, is
-  left out as `missing_context`; a row compared on a denominator whose own `origin` is `assumed` is named in
-  `limitations`.
+  left out as `missing_context`, and so is one divided by a one-sided bound that does not state the bound it is itself
+  (a rate divided by at most 30 µmol/g of sites is at least the quotient: `bound: lower`); a row compared on a
+  denominator whose own `origin` is `assumed` is named in `limitations`, and the row's `compared` gives the
+  denominator's record, path, origin and bound. CQ-15 compares turnover frequencies per exposed atom, per site of a
+  kind and per atom in three groups, and leaves out one that states no denominator.
 - **Basis.** On a kind whose contexts read the value's `basis`, a scientific filter states `context`, not `basis`
   (a plan error otherwise), and a value's basis is read through the contexts. On any other kind the basis is compared
   as text, as in an ordinary plan.
@@ -224,6 +228,26 @@ evidence: true
 
 Competency questions CQ-01 (ammonia's Faradaic efficiency, never hydrogen's), CQ-07 (a methanol yield, never a
 selectivity) and CQ-08 (Faradaic efficiencies by product, phase and assay) bind results this way.
+
+A value's `normalized_by` may name a link: a turnover frequency's site count is a value on the `HAS_SITE` from the
+state the sites were counted in. A field step follows it into that link when it names the link's type and which end
+it binds (scale-catal 0.6.0):
+
+```yaml
+steps:
+  - {from: test, entries: result_values, kind: turnover_frequency, as: tof}
+  - {from: tof, field: normalized_by, link: HAS_SITE, end: source, to: CatalystState, as: counted_in, edge_as: count}
+  - {from: tof, field: normalized_by, link: HAS_SITE, end: target, to: ActiveSite, as: site}
+  - {from: test, edge: IN_STATE, to: CatalystState, as: measured_in}
+return: [tof, measured_in.name, counted_in.name, site.name, count.site_inventory, count.exposed_metal_count]
+```
+
+`link` names the edge type (its specializations count), `end` the end `as` binds (`source` or `target`), `edge_as`
+binds the link for filters and returns, and `edge_where` filters it; the row cites the link's evidence. An entry whose
+`normalized_by` names a node, a link of another type or nothing is left out of the step with its reason
+(`names_a_node`, `names_another_link`, `not_curated`), and a field step without `link` that meets a link is left out
+as `names_a_link`. CQ-15 follows rates to their site counts and shows when a count was made in another state than the
+rate.
 
 ## Paths into maps and lists
 

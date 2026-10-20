@@ -45,7 +45,8 @@ Worked examples of what it produces are the synthetic documents in `domain/examp
 (one per driving force and combination). Short recording recipes for
 situations the schema covers less obviously (set and nominal values, conflicts, kinetics,
 thermochemistry, computations, reactor and bed keys, ratios, commercial catalysts, balances and
-impurities, driving forces outside the list, characterization results, digitizing a figure) are in `references/recipes.md` beside this file (through the agent tools:
+impurities, driving forces outside the list, characterization results, sites in a catalyst state, assignments,
+operando observations and fits, digitizing a figure) are in `references/recipes.md` beside this file (through the agent tools:
 `scale call skills '{"name": "curate-source", "reference": "references/recipes.md"}'`).
 
 ## Procedure

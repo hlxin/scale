@@ -298,7 +298,23 @@ infers it and counts the inferences.
 to record, with what the schema already has: set, nominal and specified values; conflicts between sources; rates and
 kinetics; reaction thermochemistry; computational details; reactor, bed and catalyst-body keys; pairwise and
 metals-only ratios; commercial catalysts; balances, impurities and data quality; driving forces outside the list;
-characterization results; digitizing a figure.
+characterization results; sites in a catalyst state; assignments, operando observations and fits; digitizing a figure.
+
+## Sites, assignments and operando observations
+
+Since scale-catal 0.6.0, a site population is recorded on the `HAS_SITE` from the `CatalystState` it was counted or
+observed in, and holds for that state only: sites change with the conditions, so a count made after reduction is not
+the count under reaction (Wrasman et al. 2024, doi:10.1016/j.jcat.2024.115451). Its share, density, exposed atoms
+counted and the sites a rate is divided by are four values, each with its origin, uncertainty or bound, the
+measurement or analysis that produced it and what the count assumes (a Model's `assumptions`). A turnover frequency
+names the count it is divided by (`normalized_by`), and a rate per exposed atom, per site of a kind and per atom are
+three quantities a scientific comparison keeps apart. Which component is active, a spectator or a precursor is a Claim
+with named `ABOUT` roles and its own evidence; abundance is not activity. An observation the source calls operando is
+kept so; its pairing with the performance (the same specimen, a stated synchronization, the performance measured in the
+cell and compared with a conventional reactor or cell; Tackett et al. 2026, doi:10.1021/acscatal.6c01946; Meyer et al.
+2024, doi:10.1016/j.jcat.2024.115369) is what its `DURING` link states, never read from the label or from an overlap
+in time. A fit to an ensemble measurement is an Analysis (`spectral_fit`) with its fitted values and limitations, apart
+from the spectrum it fits and from the claim drawn from it. The recipes say how to record each.
 
 ## Retractions, corrections and other notices
 
