@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- **Schema 0.5.1 (additive): a product reported as a lump.** Answers #39. `ProductLump` (provisional) records a
+  product the source reports as a fraction, a class or a carbon-number window rather than a species (C5-C11, gasoline
+  range, "C2+"), with `SUBSET_OF` for a lump inside a wider one; `HAS_OUTPUT.to` and `PRODUCES.to` accept it (17 targets
+  loosened). Existing records move unchanged (no migration rule). The selectivity sum check warns when selectivities of
+  one record to a lump and to a lump or species it overlaps exceed 100 %; it drops containers (a lump that contains
+  others) from the sum, reads no `result_values`, and cannot declare a species inside a lump. Fixtures, five
+  counterexamples and competency question CQ-12 are added.
 - **Schema 0.5.0 (breaking): the checklist says when a test's reporting cannot be judged, and checks the evidence a
   reading needs.** Requested by @hlxin ("Check reporting applicability and connected kinetic evidence"). Before, a test
   that listed no driving force matched none of the checklist's driving-force cases, so a test stripped of every

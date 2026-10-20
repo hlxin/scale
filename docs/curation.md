@@ -119,6 +119,12 @@ source must be within its cap.
 - **What a normalized quantity is divided by**, when it must be identified: the value's `normalized_by` names the
   record, and with `path` the value (`{record: <electrode>, path: /electrochemically_active_area}`); that value's own
   `origin` says whether the denominator was measured, derived, computed or assumed.
+- **A product reported as a lump** (scale-catal 0.5.1 on). When the source reports a product as a fraction, a class or a
+  carbon-number window (C5-C11, "gasoline range", "C2+") and does not identify one species, record a `ProductLump`, not
+  a ChemicalSpecies, and link it as the experiment's product (`PRODUCES`, `HAS_OUTPUT`). Say that one lump lies inside
+  another with `SUBSET_OF`, so that the selectivity sum check does not add them twice. A species the source names stays a
+  ChemicalSpecies. The check cannot tell which species a lump holds, and the lump's basis and boiling range are not
+  modelled; put them in `note` or `unmodeled`.
 - **Product measurements, one result at a time** (scale-catal 0.4.0 on). A result the source identifies by its product,
   assay, phase or interval goes in the experiment's `result_values`: one value object per result with an `id`, its
   `variable` (a Variable whose `quantity_kind` says what it is: `product_yield`, `selectivity`, `conversion`,

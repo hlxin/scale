@@ -28,5 +28,6 @@ def test_the_index_names_every_fixture_and_scale_check_uses_it():
     assert sorted(p.name for p in (FIXTURES / "invalid").glob("*.json")) == sorted(e["file"] for e in INDEX)
     base = load_doc(REPO / "domain/examples/scale-catal/driving-force-examples/electro.json")
     pins = {load_doc(FIXTURES / "invalid" / e["file"])["graph"]["schema_version"] for e in INDEX}
-    assert pins == {base["graph"]["schema_version"]}, pins                   # one version: the base example's (build_fixtures)
+    lumps = {load_doc(FIXTURES / "invalid" / e["file"])["graph"]["schema_version"] for e in INDEX if e["file"].startswith("lump-")}
+    assert pins - lumps == {base["graph"]["schema_version"]}, pins           # the base example's version (build_fixtures); the lump fixtures pin the version that adds ProductLump
     assert pinned_schema(base)                                                # the head or a frozen version
