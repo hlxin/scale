@@ -261,8 +261,8 @@ def test_the_new_terms_are_mapped_and_the_transport_kinds_have_no_ontology_term(
     # QUDT's specific energy is any energy per mass, its catalytic activity that of any catalyst
     assert [m["match"] for m in idx["kind:energy_consumption"]] == ["related"]
     assert not any(f"kind:{k}" in idx for k in ("transport_criterion", "effectiveness_factor", "thiele_modulus"))
-    areas = {a["area"]: a for a in mappings.areas(REPO)}
-    assert areas["biocatalysis"]["scale"] and "Catalyst" in areas["biocatalysis"]["scale"]
+    subdomains = {a["subdomain"]: a for a in mappings.subdomains(REPO)}
+    assert subdomains["biocatalysis"]["scale"] and "Catalyst" in subdomains["biocatalysis"]["scale"]
 
 
 def test_the_photoelectrode_names_a_role_the_vocabulary_holds():

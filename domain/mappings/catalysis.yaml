@@ -1,18 +1,23 @@
 # The catalysis vocabulary's labels, edge types and values mapped to terms of other ontologies
-# (core/mappings/ontologies.yaml lists them), and the areas of catalysis research the vocabulary covers.
+# (core/mappings/ontologies.yaml lists them), and the subdomains of catalysis research the vocabulary covers.
 # A mapping says how a SCALE term relates to a term someone else defines; it changes nothing that SCALE
 # validates or queries. The entries follow core/mappings/kernel.yaml, which explains `match`: exact, close,
 # broad (the other term is broader), narrow (it is narrower) or related. Every term was looked up in the
 # release its ontology's entry names, and none is obsolete.
 #
-# `areas` are the fourteen areas of catalysis research by which Ontologies4Cat classifies ontologies (Behr,
-# Borgelt and Kockmann, J. Cheminform. 2024, 16, 16, doi:10.1186/s13321-024-00807-2; their metadata collection,
-# github.com/nfdi4cat/Ontology-Overview-of-NFDI4Cat at 399b788, CC BY 4.0). For each area, `scale` lists the
-# SCALE labels and edge types that record it, `gap` what SCALE lacks for it (both SCALE's own reading), and
-# `ontologies4cat` the ontologies that collection classifies as containing the area or as related to it
-# (broader or narrower), by its own acronyms.
+# `subdomains` are the fourteen subdomains of catalysis research by which Ontologies4Cat classifies ontologies
+# (Behr, Borgelt and Kockmann, J. Cheminform. 2024, 16, 16, doi:10.1186/s13321-024-00807-2). For each, `scale`
+# lists the SCALE labels and edge types that record it and `gap` what SCALE lacks for it (both SCALE's own
+# reading). `ontologies4cat` is how the authors' metadata collection rates the ontologies it holds for the
+# subdomain, by its own acronyms: contained, related_narrower or related_broader (its "related: narrower" and
+# "related: broader"; an ontology it rates missing is not listed). Source of these ratings:
+# github.com/nfdi4cat/Ontology-Overview-of-NFDI4Cat at commit 399b788 (json/), CC BY 4.0, which rates 27
+# ontologies (the paper describes 23). They are copied as the collection gives them, read by its own rule: a
+# rating that says contained counts as contained, as SBO's "contained: broader" and "contained: narrower" do.
+# Its entry for eNanoMapper repeats its entry for RO (the same name, OBO Relations Ontology, and the same
+# ratings); both are listed as given.
 #
-# Checked by `scale domains check`; listed by `scale schema mappings` (`--areas` for the areas). See
+# Checked by `scale domains check`; listed by `scale schema mappings` (`--subdomains` for the subdomains). See
 # docs/mappings.md.
 mapping_set: catalysis-mappings
 title: The catalysis vocabulary mapped to ontology terms
@@ -384,7 +389,7 @@ mappings:
   - match: broad
     term: af-e:AFE_0000097
     label: electromagnetic radiation source
-areas:
+subdomains:
   biocatalysis:
     title: Biocatalysis
     scale:
@@ -396,13 +401,15 @@ areas:
     ontologies4cat:
       contained:
       - SBO
-      related:
+      related_narrower:
       - BAO
+      - EDAM
+      - OBI
+      related_broader:
       - ChEBI
       - CHEMINF
-      - EDAM
+      - eNanoMapper
       - MS
-      - OBI
       - RO
   heterogeneous_catalysis:
     title: Heterogeneous catalysis
@@ -416,13 +423,14 @@ areas:
     - Feed
     ontologies4cat:
       contained: []
-      related:
-      - AFO
-      - ChEBI
-      - CHEMINF
+      related_narrower:
       - MOP
       - REX
       - RXNO
+      related_broader:
+      - AFO
+      - ChEBI
+      - CHEMINF
   homogeneous_catalysis:
     title: Homogeneous catalysis
     scale:
@@ -432,13 +440,14 @@ areas:
       quantity kind checks.
     ontologies4cat:
       contained: []
-      related:
-      - AFO
-      - ChEBI
-      - CHEMINF
+      related_narrower:
       - MOP
       - REX
       - RXNO
+      related_broader:
+      - AFO
+      - ChEBI
+      - CHEMINF
   photocatalysis:
     title: Photocatalysis
     scale:
@@ -449,12 +458,13 @@ areas:
     - ThermalContributionAnalysis
     ontologies4cat:
       contained: []
-      related:
+      related_narrower:
       - AFO
-      - BAO
       - CHMO
-      - OBI
       - REX
+      related_broader:
+      - BAO
+      - OBI
       - RXNO
       - SBO
   electrocatalysis:
@@ -467,11 +477,12 @@ areas:
     - USES_ELECTRODE
     ontologies4cat:
       contained: []
-      related:
-      - AFO
+      related_narrower:
       - CHMO
-      - MOP
       - REX
+      related_broader:
+      - AFO
+      - MOP
       - RXNO
   chemical_substance_modelling:
     title: Chemical substance modelling
@@ -485,18 +496,20 @@ areas:
       - MOP
       - OntoCAPE
       - RXNO
-      related:
+      - SBO
+      related_narrower:
       - AFO
       - BAO
       - CAO
+      - ENMO
+      - OBI
+      related_broader:
       - CHEMINF
       - CHMO
       - CIF
       - EDAM
       - EMMO
-      - ENMO
       - ENVO
-      - OBI
       - OSMO
       - REX
       - VIMMP
@@ -511,11 +524,13 @@ areas:
       - AFO
       - EMMO
       - OSMO
-      related:
-      - BAO
-      - CAO
+      - SBO
+      related_narrower:
       - ChEBI
       - CHEMINF
+      related_broader:
+      - BAO
+      - CAO
       - CIF
       - ENVO
       - OBI
@@ -536,19 +551,21 @@ areas:
       - metadata4ing
       - OntoCAPE
       - OSMO
+      - SBO
       - VIMMP
-      related:
+      related_narrower:
       - AFO
       - BAO
-      - CAO
-      - CHEMINF
-      - CHMO
       - EMMO
-      - M3
       - MOP
       - OBI
       - OEO
       - RXNO
+      related_broader:
+      - CAO
+      - CHEMINF
+      - CHMO
+      - M3
   synthesis_data:
     title: Synthesis data
     scale:
@@ -560,7 +577,8 @@ areas:
     - PREPARED_FROM
     ontologies4cat:
       contained: []
-      related:
+      related_narrower: []
+      related_broader:
       - AFO
       - BAO
       - CAO
@@ -580,7 +598,8 @@ areas:
     ontologies4cat:
       contained:
       - OSMO
-      related:
+      related_narrower: []
+      related_broader:
       - CHMO
       - MS
   performance_data:
@@ -591,14 +610,15 @@ areas:
     ontologies4cat:
       contained:
       - OSMO
-      related:
-      - AFO
-      - CHEMINF
+      related_narrower:
       - CHMO
       - EDAM
+      - SBO
+      related_broader:
+      - AFO
+      - CHEMINF
       - MS
       - OntoCAPE
-      - SBO
   characterisation_data:
     title: Characterisation data
     scale:
@@ -614,7 +634,8 @@ areas:
       - CHMO
       - EDAM
       - MS
-      related:
+      related_narrower: []
+      related_broader:
       - CAO
       - CIF
       - OBI
@@ -630,11 +651,12 @@ areas:
     gap: No quantity kind for a heat-transfer coefficient or an adiabatic temperature rise.
     ontologies4cat:
       contained: []
-      related:
+      related_narrower:
+      - OntoCAPE
+      related_broader:
       - CAO
       - CHEMINF
       - MS
-      - OntoCAPE
       - OSMO
       - VIMMP
   process_design_energy_and_cost_data:
@@ -646,7 +668,8 @@ areas:
       contained:
       - OEO
       - OntoCAPE
-      related:
+      related_narrower: []
+      related_broader:
       - M3
       - metadata4ing
       - OSMO

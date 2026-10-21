@@ -427,8 +427,8 @@ def cmd_schema_mappings(args):
                      else f"{len(res['errors'])} error(s)"))
         return 0 if res["ok"] else 1
     layer = None if args.layer == "all" else args.layer
-    if args.areas:
-        _emit(mappings.areas(repo) if args.format == "json" else mappings.areas_text(repo), args)
+    if args.subdomains:
+        _emit(mappings.subdomains(repo) if args.format == "json" else mappings.subdomains_text(repo), args)
         return 0
     if args.format == "sssom":
         if layer is None:
@@ -1349,10 +1349,10 @@ def build_parser() -> argparse.ArgumentParser:
             sp.add_argument("--comment", help="also write the reviewer's summary (Markdown) here")
 
     sp = add("mappings", cmd_schema_mappings, "SCALE's terms mapped to ontology terms (core/mappings/, domain/mappings/): "
-             "list them, check them, export a layer's set as SSSOM, or show the areas of catalysis research", sc)
+             "list them, check them, export a layer's set as SSSOM, or show the subdomains of catalysis research", sc)
     sp.add_argument("--layer", choices=["all", "kernel", "catalysis"], default="all", help="whose set (default: both)")
-    sp.add_argument("--areas", action="store_true", help="the areas of catalysis research (Ontologies4Cat): what "
-                    "SCALE records for each and the ontologies classified under it")
+    sp.add_argument("--subdomains", action="store_true", help="the subdomains of catalysis research (Ontologies4Cat): "
+                    "what SCALE records for each and how the ontologies are rated for it")
     sp.add_argument("--check", action="store_true", help="check the registry and the sets against the head schema "
                     "(exit 1 on an error; scale domains check runs it too)")
     sp.add_argument("--json", action="store_true", help="--check: machine-readable result")
