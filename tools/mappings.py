@@ -251,9 +251,9 @@ def check(repo: Path, spec: dict | None = None) -> dict:
         for k, req in SET_KEYS.items():
             if req and k not in doc:
                 err(rel, f"{k} is required")
-        for k in ("mappings", "areas"):
+        for k, by in (("mappings", "subject"), ("kinds", "kind"), ("units", "unit"), ("areas", "area")):
             if doc.get(k) is not None and not isinstance(doc[k], dict):
-                err(rel, f"{k} is a mapping keyed by {'subject' if k == 'mappings' else 'area'}")
+                err(rel, f"{k} is a mapping keyed by {by}")
         if doc.get("areas") and layer != "catalysis":
             err(rel, "areas are areas of catalysis research; they belong to the catalysis set")
         n = 0
@@ -397,7 +397,7 @@ def sssom(repo: Path, layer: str, version: str | None = None) -> str:
     w = csv.writer(buf, delimiter="\t", lineterminator="\n")     # quotes a cell holding a double quote
     w.writerow(cols)
     for section, name, _, ms in entries(doc):
-        local = _local(name) if section == "mappings" else f"{section[:-1]}/{name}"      # kind/…, unit/…
+        local = _local(name) if section == "mappings" else f"{section[:-1]}/{_local(name)}"   # kind/…, unit/…
         for m in _listed(ms):
             w.writerow([f"{prefix}:{local}", clean(name), MATCHES.get(m.get("match"), ""), clean(m.get("term")),
                         clean(m.get("label")), "semapv:ManualMappingCuration", clean(m.get("note"))])

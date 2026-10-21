@@ -70,14 +70,21 @@ kinds:
 - **Units** are exact matches where both mean the same unit: °C, kPa, mL/min, h-1, kJ/mol, m2/g and some 100
   more. SCALE reads a unit by its dimension only, so a gallon, a ton, a calorie or a Btu is whichever one the source
   printed; each of QUDT's definitions (US or UK gallon, thermochemical or international calorie) is narrower.
-  Normal and standard volumes (Nm3, scf) are close: SCALE does not fix their reference temperature and pressure.
+  Normal and standard volumes (Nm3, scf) are close: SCALE does not fix their reference temperature and pressure,
+  and QUDT counts them as amounts of substance (it gives the normal cubic metre no conversion factor), so QUDT's
+  conversion factors do not apply to SCALE's volumes.
   A percent or ppm is the unit only; what the share is of (mass, mole, volume) stays a context of the value.
-- **Kinds** are close where QUDT has the same quantity (temperature, pressure, electric current), narrow where
-  SCALE's kind is wider (a flow rate may be volumetric, molar or by mass; a concentration may be a molality), and
-  broad where QUDT names only the general quantity (a conversion, a selectivity or a yield is a dimensionless ratio;
-  a reaction enthalpy is an enthalpy). An enzyme's turnover frequency at saturation is SBO's catalytic rate constant
-  (kcat), narrower than SCALE's turnover frequency. QUDT has no term for an activation energy, a space velocity, a
-  site density or most catalysis-specific shares, so they stay unmapped.
+- **Kinds** are close where QUDT has the same quantity (temperature, pressure, electric current); narrow where
+  QUDT's kind is one form SCALE's takes (a volumetric, molar or mass flow rate; an amount or mass concentration or a
+  molality; QUDT's efficiency, a ratio of powers, where SCALE's may also be of charge or photons); broad where QUDT
+  names only the general quantity, in every dimension SCALE reads the kind in (a conversion, a selectivity, a yield
+  or a faradaic efficiency is a dimensionless ratio); and related where neither holds: a reaction energy or enthalpy
+  is read in eV or in kJ/mol, so it is neither always QUDT's energy nor always its molar energy; QUDT's current
+  density is the local current density, a vector, where SCALE's is a reported current divided by an electrode area
+  or a catalyst mass; QUDT's amount of substance or count is any amount or count, where SCALE's product amount or
+  site count is of one product or of sites. An enzyme's turnover frequency at saturation is SBO's catalytic rate
+  constant (kcat), narrower than SCALE's turnover frequency. QUDT has no term for an activation energy, a space
+  velocity, a site density or most catalysis-specific shares, so they stay unmapped.
 
 ## How they are checked
 

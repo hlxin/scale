@@ -7,8 +7,10 @@
   system's or converted by a units service. Now 106 units are mapped to QUDT 3.5.3 (°C is unit:DEG_C, mL/min is
   unit:MilliL-PER-MIN, mostly exact) and 28 quantity kinds to QUDT quantity kinds (temperature, pressure, current
   density, …). Where SCALE leaves a unit open, the mapping says so: a gallon, a ton, a calorie or a Btu maps to each of
-  QUDT's definitions as narrower, a normal or standard volume as close. An enzyme's turnover frequency at saturation is
-  SBO's catalytic rate constant (kcat). Every term was looked up in the QUDT release files and EBI OLS; none is
+  QUDT's definitions as narrower, a normal or standard volume as close (QUDT counts it as an amount of substance, so
+  its conversion factors do not apply). A kind is broader only where QUDT's kind holds in every unit SCALE reads it
+  in; a reaction energy (eV or kJ/mol), a current density (QUDT's is a local vector) and a product amount are
+  related. An enzyme's turnover frequency at saturation is SBO's catalytic rate constant (kcat). Every term was looked up in the QUDT release files and EBI OLS; none is
   deprecated. See docs/mappings.md.
 
 - **SCALE's terms mapped to ontology terms (no schema change).** Requested by @hlxin: use what the ontologies for
