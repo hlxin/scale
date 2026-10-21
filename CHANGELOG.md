@@ -2,6 +2,35 @@
 
 ## Unreleased
 
+- **Schema 0.7.3 (additive): tests driven by a program, the analyses of their responses, and fitted kinetic
+  constants.** Requested by @hlxin (grow toward transient kinetics). SCALE could say that a test was operated
+  dynamically (an Operation's pattern, period and segments), but not the levels it switched between, a pulse, a
+  pseudo-random sequence, what t = 0 was or whether the program could be rebuilt; nor what an isotope switch or a
+  modulation measured, nor how a fit treated its reactor. All new terms are provisional.
+  - **The program.** An Operation states its waveform (square, sinusoidal, triangular, pulse_train,
+    pseudo_random_binary), its levels (numbers, or text values such as 12CO and 13CO), amplitude, a pulse's amount and
+    width, a sequence's length and bit duration, a segment's label (the half-cycles of a chemical loop), what t = 0 is
+    (time_origin) and how much of it the source gives (program_detail: exact, parametric, descriptive). A time series
+    states its time resolution, its delay and whether it was corrected for it; a DURING link how the observation and the
+    kinetics were synchronized.
+  - **What the responses give.** An Analysis may be an isotopic_transient, pulse_response, modulation_excitation,
+    step_response or frequency_response, with new kinds of result: surface_residence_time and
+    surface_intermediate_amount (an isotope switch at steady state; Shannon and Goodwin, Chem. Rev. 1995), phase_delay
+    (phase-sensitive detection; Urakawa, Burgi and Baiker, Chem. Eng. Sci. 2008) and response_time_constant, each
+    compared by the species it is of. That a species is an intermediate or a spectator stays a Claim the analysis
+    supports.
+  - **Fitted constants.** A kinetic fit states its reactor_model (differential, stirred_tank, plug_flow,
+    axial_dispersion, batch, knudsen_pulse), rate_basis, concentration_measure (and standard_pressure) and
+    thermodynamic_consistency (Mhadeshwar, Wang and Vlachos, J. Phys. Chem. B 2003); a value states how its interval was
+    obtained (interval_method: curvature, profile_likelihood, bootstrap, bayesian_posterior, …) and, when fitted,
+    whether the data determine it (identifiability; Raue et al., Bioinformatics 2009). A comparison of a step's
+    activation energy shows each value's reactor treatment and names a group that mixes treatments.
+  - **Fixed:** a value whose producer states no charge treatment was left out of a scientific comparison as
+    missing_context; it is now compared with the others that state none ("not stated"), as the contract says.
+  - An example (transient-examples), CQ-31 to CQ-33, five counterexamples, the checklist's cases for pseudo-random,
+    periodic and pulsed programs, transient analyses and kinetic fits. Existing documents keep 0.7.2; the migration
+    step rewrites nothing.
+
 - **Schema 0.7.2 (additive): what TRACE-AI asks of agentic catalysis, and who checked the records an agent
   extracted.** Requested by @hlxin. TRACE-AI (Xin et al., Chem Catal. 2026, doi:10.1016/j.checat.2026.101755) is the
   reporting checklist for catalysis enabled by AI: data, models, workflow and executable artifacts (items A1-D3). SCALE

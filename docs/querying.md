@@ -183,7 +183,7 @@ the schema; `scale graph describe` shows it), or the `quantity_kind` of the Vari
   level of theory is left out as `missing_context`, and says so (`its producer … states its level_of_theory as not
   reported`), and so is one that names no reaction (`its unresolved_target … names no process`). A value whose
   producer states no charge treatment is compared with the values that state none (`charge_treatment: not stated`), a
-  group of its own. A constant-charge value converted to constant potential by a stated Analysis (an evidenced
+  group of its own (scale-catal 0.7.3 on; before, such a value was left out as `missing_context`). A constant-charge value converted to constant potential by a stated Analysis (an evidenced
   conversion) is compared with constant-potential ones. What the producer states of its dispersion, `hubbard_u`, spin,
   solvation, temperature, pressure and potential is shown (`compared` … `shows`), never grouped by; a group whose
   values state one differently is named in `limitations`. An apparent activation energy is compared by its product;
@@ -198,6 +198,15 @@ the schema; `scale graph describe` shows it), or the `quantity_kind` of the Vari
   like an energy consumption per amount (kJ/mol) and per mass (kWh/kg), are kept apart by their units; a turnover
   number is never compared with a turnover frequency. Each is compared by the species it counts. CQ-27 and CQ-28 run
   on the area example.
+- **Transients and fitted constants** (scale-catal 0.7.3): a surface residence time, an amount of surface
+  intermediates, a phase delay and a response time constant are compared by the species they are of (their target).
+  An elementary step's activation energy also shows how the fit that produced it treated the reactor (`reactor_model`,
+  read from the producer, as dispersion is shown for a computed one): constants fitted to one data set as plug flow and
+  as a differential reactor stay in one group, each row showing its treatment, and the limitations name the group as
+  mixing treatments, so that a reader compares them knowingly. A fitted value states how its
+  interval was obtained (`interval_method`) and whether the data determined it (`identifiability`), so that a plan can
+  keep only the identifiable ones (`where: [{var: …, prop: identifiability, op: eq, value: identifiable}]`). CQ-31 to
+  CQ-33 run on the transient example.
 - **Basis.** On a kind whose contexts read the value's `basis`, a scientific filter states `context`, not `basis`
   (a plan error otherwise), and a value's basis is read through the contexts. A turnover frequency's basis says how it
   was calculated and is read, never compared as text. On any other kind the basis is compared as text, as in an
