@@ -1059,7 +1059,11 @@ def _check_compared(f: dict, kind: str, qc: quantities.Contracts, what: str) -> 
                          f"({', '.join(named)}): state context instead")
 
 
-def schema_gaps(plan: dict, spec: dict) -> list[str]:
+def schema_gaps(plan: dict, spec: dict, values: bool = False) -> list[str]:
+    """What a plan names that the schema does not declare: a label, an edge type, a property. With ``values``, also a
+    filter that asks a property of a vocabulary (an enum, or a list of one) only for values the vocabulary does not hold
+    (eq, in or contains; compared as eq compares, ignoring case): a document of that schema cannot state it, so the
+    plan's answer would be a schema gap, not an absence (``scale trace-ai`` reads its plans so)."""
     gaps = []
     labels = {plan["match"]["as"] if "as" in plan["match"] else "self": plan["match"].get("label")}
     edge_vars: dict[str, str] = {}
@@ -1081,6 +1085,29 @@ def schema_gaps(plan: dict, spec: dict) -> list[str]:
 
     def where_of(label: str | None, prop: str) -> str:
         return f"{'a value entry' if label == ENTRY else label}.{parse_path(prop)[0]}"
+
+    def value_gap(label: str | None, f: dict, edge: bool = False) -> None:
+        """Record a gap when ``f`` asks a vocabulary only for values it does not hold (with ``values``)."""
+        op = f.get("op", "eq")
+        if not values or label in (None, ENTRY) or op not in ("eq", "in", "contains"):
+            return
+        prop, entry, quals = parse_path(f["prop"])
+        if entry is not None or quals:
+            return                                          # an entry of a map or a list: not the property's vocabulary
+        c = spec["common"]["link" if edge else "node"]
+        d = (c.get("properties", c)).get(prop) or ((spec["edges" if edge else "nodes"].get(label) or {})
+                                                    .get("properties") or {}).get(prop)
+        if not isinstance(d, dict):
+            return
+        enum = d if d.get("type") == "enum" else (d.get("items") if d.get("type") == "list" else None)
+        if not isinstance(enum, dict) or enum.get("type") != "enum" or not isinstance(enum.get("values"), list):
+            return
+        if op == "contains" and enum is d:
+            return                                          # a substring of one value, not a value
+        held = {str(x).lower() for x in enum["values"]}
+        want = f.get("value") if op == "in" else [f.get("value")]
+        if isinstance(want, list) and want and not any(str(w).lower() in held for w in want):
+            gaps.append(f"{label}.{prop} has no value {', '.join(map(str, want))}")
 
     ml = plan["match"].get("label")
     if ml and ml not in spec["nodes"]:
@@ -1107,17 +1134,25 @@ def schema_gaps(plan: dict, spec: dict) -> list[str]:
         for f in st.get("where") or []:
             if not has_prop(labels[st["as"]], f["prop"]):
                 gaps.append(f"{where_of(labels[st['as']], f['prop'])} is not declared")
+            else:
+                value_gap(labels[st["as"]], f)
         link = st.get("edge") if kind == "edge" else st.get("link")
         for f in st.get("edge_where") or []:
             if link in spec["edges"] and not has_prop(link, f["prop"], edge=True):
                 gaps.append(f"{link}.{parse_path(f['prop'])[0]} is not declared")
+            elif link in spec["edges"]:
+                value_gap(link, f, edge=True)
     for f in (plan.get("where") or []) + (plan["match"].get("where") or []):
         var = f.get("var", plan["match"].get("as", "self"))
         if var in edge_vars and var not in labels:          # a filter on a link bound by edge_as
             if not has_prop(edge_vars[var], f["prop"], edge=True):
                 gaps.append(f"{edge_vars[var]}.{parse_path(f['prop'])[0]} is not declared")
+            else:
+                value_gap(edge_vars[var], f, edge=True)
         elif not has_prop(labels.get(var), f["prop"]):
             gaps.append(f"{where_of(labels.get(var), f['prop'])} is not declared")
+        else:
+            value_gap(labels.get(var), f)
     for r in plan.get("return") or []:
         var, _, prop = r.partition(".")
         if var in edge_vars:

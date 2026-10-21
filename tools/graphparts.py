@@ -185,7 +185,7 @@ def subset(parts: dict, slugs: list[str], header: dict | None = None) -> dict:
     organisation and project), and in shared records only the evidence of those sources. The graph's checks
     (``record_check``) keep the records the subset holds, with their checkers; a check with none of them goes.
     ``header`` replaces keys of the graph's own object (a new id, title, description)."""
-    from .recordchecks import checks_of, prune
+    from .recordchecks import checks_of, prune, records_of
     missing = sorted(set(slugs) - set(parts["sources"]))
     if missing:
         raise ScaleError(f"no such sources: {', '.join(missing)}")
@@ -204,11 +204,20 @@ def subset(parts: dict, slugs: list[str], header: dict | None = None) -> dict:
             if not more:
                 break
             reach.update(more)
-    expand()
-    # a check that keeps a record keeps the person who made it
-    checkers = {c.get("checked_by") for c in checks_of(graph) if set(c.get("records") or []) & (own | reach)}
-    reach |= {x for x in checkers if x in shared_ids}
-    expand()
+
+    def shared_links() -> set:
+        return {lk["id"] for lk in parts["shared"]["links"] if lk["source"] in reach and lk["target"] in reach}
+    # a check that keeps a record (a node, or a shared link between kept nodes) keeps the person who made it, who may
+    # bring more shared records in turn: repeat until nothing new is reached
+    while True:
+        expand()
+        held = own | reach | shared_links()
+        checkers = {c.get("checked_by") for c in checks_of(graph) if set(records_of(c)) & held}
+        more = {x for x in checkers if x in shared_ids} - reach
+        if not more:
+            break
+        reach |= more
+
     def only_kept(rec: dict) -> dict:
         ev = (rec.get("props") or {}).get("evidence")
         if not ev:
@@ -220,7 +229,10 @@ def subset(parts: dict, slugs: list[str], header: dict | None = None) -> dict:
     links = [only_kept(lk) for lk in parts["shared"]["links"] if lk["source"] in reach and lk["target"] in reach]
     head = dict(parts["header"])
     if checks_of(graph):
-        head["graph"], _ = prune(dict(graph), own | {r["id"] for r in nodes + links})
+        every = {r["id"] for p in [parts["shared"], *parts["sources"].values()]
+                 for r in [*p.get("nodes", []), *p.get("links", [])]}
+        present = own | {r["id"] for r in nodes + links}
+        head["graph"], _ = prune(dict(graph), present, every - present)
     if header:
         head["graph"] = {**head.get("graph", {}), **header}
     return {"header": head, "shared": {**parts["shared"], "nodes": nodes, "links": links}, "sources": chosen}

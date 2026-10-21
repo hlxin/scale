@@ -1138,7 +1138,9 @@ def filter_for(doc: dict, viewer: list[str], today: str) -> dict:
     agents, projects = memberships(doc, viewer)
     nodes, links, refs, cut = _subset(doc, lambda r: visible(effective_stewardship(doc, r), agents, projects, today))
     from .recordchecks import prune            # a person's check keeps only the records the view holds
-    graph, pruned = prune(dict(doc.get("graph") or {}), {r["id"] for r in nodes + links if isinstance(r.get("id"), str)})
+    held = {r["id"] for r in nodes + links if isinstance(r.get("id"), str)}
+    every = {r.get("id") for r in doc["nodes"] + doc["links"] if isinstance(r.get("id"), str)}
+    graph, pruned = prune(dict(doc.get("graph") or {}), held, every - held)
     refs += pruned
     note = (f"viewer {', '.join(sorted(viewer)) or 'public'} on {today}: "
             f"{len(doc['nodes']) - len(nodes)} nodes and {len(doc['links']) - len(links)} links withheld"
@@ -1225,7 +1227,9 @@ def restrict_to(doc: dict, declared: dict, today: str) -> tuple[dict, dict]:
         return access_key(st, today) == own or not less_open(st, viewers, today)
     nodes, links, refs, cut = _subset(doc, keep)
     from .recordchecks import prune            # a person's check keeps only the records the bundle holds
-    graph, pruned = prune(dict(doc.get("graph") or {}), {r["id"] for r in nodes + links if isinstance(r.get("id"), str)})
+    held = {r["id"] for r in nodes + links if isinstance(r.get("id"), str)}
+    every = {r.get("id") for r in doc["nodes"] + doc["links"] if isinstance(r.get("id"), str)}
+    graph, pruned = prune(dict(doc.get("graph") or {}), held, every - held)
     refs += pruned
     withheld = {"nodes": len(doc["nodes"]) - len(nodes), "links": len(doc["links"]) - len(links),
                 **({"references": refs} if refs else {}), **({"evidence_cut": cut} if cut else {})}

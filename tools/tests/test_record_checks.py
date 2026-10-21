@@ -75,6 +75,29 @@ def test_precision_and_recall_come_from_the_counts():
     assert quality({"fields_checked": 10}) == {"precision": None, "recall": None}
     assert quality({"fields_checked": 10, "fields_wrong": 0}) == {"precision": 1.0, "recall": None}
     assert quality({"fields_checked": 3, "fields_wrong": 5}) == {"precision": None, "recall": None}   # reported apart
+    # each from its own counts: nothing extracted and two fields missed is a recall of 0, with no precision
+    assert quality({"fields_checked": 0, "fields_wrong": 0, "fields_missed": 2}) == {"precision": None, "recall": 0.0}
+
+
+def test_an_acknowledgement_that_several_warnings_match_acknowledges_none():
+    """An acknowledgement names one warning: a text two warnings share is reported and closes neither, whatever the
+    order of the acknowledgements."""
+    doc = campaign()
+    design = next(n for n in doc["nodes"] if n["id"] == DESIGN)
+    design["props"]["unmodeled"].append("the order in which the robot dispensed the nitrates (Methods)")
+    assert sum(w["record"] == DESIGN for w in report(doc)["warnings"]) == 1       # the first one stays acknowledged
+    doc["graph"]["checks"][0]["acknowledged"][0]["warning"] = "unmodeled context:"
+    rep = report(doc)
+    assert "acknowledged" not in rep and sum(w["record"] == DESIGN for w in rep["warnings"]) == 2
+    assert any("2 warnings on ex:sdl/design/campaign contain 'unmodeled context:'" in w["message"]
+               for w in rep["warnings"])
+
+
+def test_a_malformed_check_is_reported_never_a_crash():
+    doc = campaign()
+    doc["graph"]["checks"][0].update(records=1, acknowledged="all of them", fields_checked="many")
+    rep = report(doc)
+    assert not rep["valid"] and rep["errors"] and "acknowledged" not in rep
 
 
 def test_prune_keeps_a_check_to_the_records_held():
@@ -85,6 +108,38 @@ def test_prune_keeps_a_check_to_the_records_held():
     gone, removed = prune(g, {"ex:sdl/test/round-1"})       # its checker left out: the check goes
     assert "checks" not in gone and removed == 6
     assert g["checks"][0]["records"][0] == DESIGN          # the graph given is not changed
+
+
+def test_no_id_of_a_record_left_out_stays_in_the_checks():
+    """What a view or a bundle leaves out leaves no id behind: an acknowledgement whose warning names such a record goes,
+    and so does a check whose own text names one. A check that loses records loses its counts and its sample, which
+    were over all of them."""
+    g = campaign()["graph"]
+    g["checks"][0]["acknowledged"].append({"record": "ex:sdl/test/round-1", "reason": "as the source states it",
+                                           "warning": "inputs revised: ex:sdl/dataset/container"})
+    present = set(g["checks"][0]["records"]) | {"ex:sdl/person/checker"}
+    kept, _ = prune(g, present, {"ex:sdl/dataset/container"})
+    assert [a["record"] for a in kept["checks"][0]["acknowledged"]] == [DESIGN]
+    assert kept["checks"][0]["fields_checked"] == 46                   # every record it checked is held: counts stay
+    named = copy.deepcopy(g)
+    named["checks"][0]["note"] += " The container (ex:sdl/dataset/container) was not checked."
+    assert "checks" not in prune(named, present, {"ex:sdl/dataset/container"})[0]
+    fewer, _ = prune(g, present - {"ex:sdl/test/round-2"}, {"ex:sdl/test/round-2"})
+    c = fewer["checks"][0]
+    assert not {"fields_checked", "fields_wrong", "fields_missed", "fraction", "seed", "selection"} & set(c)
+    assert "keeps 5 of the 6 records" in c["note"] and quality(c) == {"precision": None, "recall": None}
+    # through a filtered view and a bundle
+    doc = campaign()
+    doc["graph"]["checks"][0]["acknowledged"].append({"record": "ex:sdl/test/round-1", "reason": "as stated",
+                                                      "warning": "inputs revised: ex:sdl/dataset/container"})
+    container = next(n for n in doc["nodes"] if n["id"] == "ex:sdl/dataset/container")
+    container["props"]["stewardship"] = {"access": "institution", "contributed_by": []}
+    view = pgraph.filter_for(doc, [], "2026-10-21")
+    bundle, _ = pgraph.restrict_to(doc, {"access": "public"}, "2026-10-21")
+    for d in (view, bundle):
+        assert "ex:sdl/dataset/container" not in {n["id"] for n in d["nodes"]}
+        assert "ex:sdl/dataset/container" not in json.dumps(d["graph"])
+        assert d["graph"]["checks"][0]["fields_checked"] == 46        # the records it checked are all there
 
 
 def test_a_filtered_view_keeps_only_the_checks_of_its_records():
@@ -118,6 +173,27 @@ def test_a_subset_of_sources_keeps_its_checks():
     sub2 = graphparts.subset(parts, ["s2"])
     assert [c["records"] for c in sub2["header"]["graph"]["checks"]] == [["ex:a/s2/y"], ["ex:a/s2/y"]]
     assert sorted(n["id"] for n in sub2["shared"]["nodes"]) == ["ex:a/person/p", "ex:a/person/q"]
+
+
+def test_a_check_of_a_shared_link_keeps_its_checker_in_a_subset():
+    """A check that covers only a link between shared records (reached by the sources kept) keeps its checker, who is
+    brought into the subset with it."""
+    def rec(rid, label="Experiment"):
+        return {"id": rid, "label": label, "props": {"name": rid, "origin": "synthetic"}}
+    link = {"id": "ex:a/link/shared", "type": "INCLUDES", "source": "ex:a/data/d1", "target": "ex:a/data/d2",
+            "props": {"origin": "synthetic"}}
+    checks = [{"checked_by": "ex:a/person/q", "checked_on": "2026-10-22", "records": [link["id"]],
+               "scope": "the inclusion against the source", "outcome": "passed"}]
+    parts = {"header": {"directed": True, "multigraph": True, "graph": {"graph_id": "ex:a/graph", "checks": checks}},
+             "shared": {"nodes": [rec("ex:a/data/d1", "Dataset"), rec("ex:a/data/d2", "Dataset"),
+                                  rec("ex:a/person/q", "Person")], "links": [link]},
+             "sources": {"s1": {"source": "ex:a/source/s1", "nodes": [rec("ex:a/source/s1", "Source"), rec("ex:a/s1/x")],
+                                "links": [{"id": "ex:a/s1/link/1", "type": "HAS_INPUT", "source": "ex:a/s1/x",
+                                           "target": "ex:a/data/d1", "props": {"origin": "synthetic"}}]}}}
+    sub = graphparts.subset(parts, ["s1"])
+    assert [c["records"] for c in sub["header"]["graph"]["checks"]] == [[link["id"]]]
+    assert {n["id"] for n in sub["shared"]["nodes"]} == {"ex:a/data/d1", "ex:a/data/d2", "ex:a/person/q"}
+    assert [lk["id"] for lk in sub["shared"]["links"]] == [link["id"]]
 
 
 def test_review_sample_returns_the_check_to_fill_in(capsys):

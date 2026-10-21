@@ -272,6 +272,7 @@ def science_checks(doc: dict, spec: dict, rep) -> None:
 
 
 FIT_ROLES = ("training_data", "calibration_data")          # the inputs a calibration fits a model to
+SPLITS_OF_ONE_TABLE = ("random", "grouped", "time_based", "out_of_distribution", "other")   # held out within the data
 CALIBRATES = ("calibration",)
 VALIDATES = ("validation", "benchmark")
 
@@ -282,35 +283,42 @@ def validation_checks(links: list[dict], label: dict, resolved_refs: dict, rep) 
     training_data or calibration_data, with the records a dataset among them INCLUDES. A validation or benchmark
     (EVALUATES) of the model whose experiment HAS_INPUT any of that data, or that rests on a fitted value (result_refs),
     is reported (a warning): a fit to its own data is a calibration, never independent predictive validation. A
-    validation that states how it held its data out (split_strategy, 0.7.2 on: folds of one table in a cross-validation,
-    a held-out part of it) shares that table with the fit by design, so the shared table alone is not reported; whether
-    the split keeps them apart is what split_strategy says (a random split is flagged by `scale trace-ai`). Nothing is
-    rewritten."""
+    validation that states it split one table (split_strategy random, grouped, time_based, out_of_distribution or
+    other, 0.7.2 on: the folds of a cross-validation, a held-out part) shares that very table with the fit by design, so
+    the table it shares, with what the table includes, is not reported; anything else they share is (a record both
+    include through other datasets), and so is any overlap of a validation that claims independent data (external,
+    prospective). Whether the split keeps the folds apart is what split_strategy says (a random split is flagged by
+    `scale trace-ai`). Nothing is rewritten."""
     out = defaultdict(list)
     for e in links:
         out[e.get("source")].append(e)
 
+    def direct(exp: str, roles: tuple | None) -> set:
+        return {e.get("target") for e in out.get(exp, []) if e.get("type") == "HAS_INPUT"
+                and (roles is None or (e.get("props") or {}).get("role") in roles)}
+
     def inputs(exp: str, roles: tuple | None) -> set:
-        got = {e.get("target") for e in out.get(exp, []) if e.get("type") == "HAS_INPUT"
-               and (roles is None or (e.get("props") or {}).get("role") in roles)}
-        return _included(got, out)
+        return _included(direct(exp, roles), out)
 
     fitted: dict[str, set] = defaultdict(set)
+    fitted_tables: dict[str, set] = defaultdict(set)       # what a fit takes directly (not through INCLUDES)
     for e in links:
         p = e.get("props") or {}
-        if e.get("type") == "EVALUATES" and p.get("evaluation_kind") in CALIBRATES:
+        if (e.get("type") == "EVALUATES" and p.get("evaluation_kind") in CALIBRATES) or \
+                (e.get("type") == "HAS_OUTPUT" and label.get(e.get("target")) is not None):
             fitted[e.get("target")] |= inputs(e.get("source"), FIT_ROLES)
-        elif e.get("type") == "HAS_OUTPUT" and label.get(e.get("target")) is not None:
-            fitted[e.get("target")] |= inputs(e.get("source"), FIT_ROLES)
+            fitted_tables[e.get("target")] |= direct(e.get("source"), FIT_ROLES)
     for e in links:
         p = e.get("props") or {}
         if e.get("type") != "EVALUATES" or p.get("evaluation_kind") not in VALIDATES:
             continue
         model, exp = e.get("target"), e.get("source")
         used = inputs(exp, None) - {model}
-        overlap = sorted(str(x) for x in used & fitted.get(model, set()))
-        split = p.get("split_strategy") not in (None, "not_reported")     # held out within the shared data, as stated
-        if overlap and not split:
+        shared = used & fitted.get(model, set())
+        if p.get("split_strategy") in SPLITS_OF_ONE_TABLE:     # its folds are parts of a table the fit takes as well
+            shared -= _included(direct(exp, None) & fitted_tables.get(model, set()), out)
+        overlap = sorted(str(x) for x in shared)
+        if overlap:
             rep.add("warning", e.get("id"), f"a {p['evaluation_kind']} of {model} on data it was fitted to "
                                             f"({', '.join(overlap)}): a fit to its own data is a calibration, not "
                                             "independent predictive validation; it stays as recorded")

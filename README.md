@@ -89,7 +89,7 @@ named `scale-graph` until 0.1.0 and is `scale-catal` from 0.2.0 on (a breaking c
 | scale-catal 0.6.0 (frozen) | `2d8661735ef4db7e207610396e4e1007c0a18961f26ed2715ed340eb5b7d08e5` |
 | scale-catal 0.7.0 (frozen) | `f50bd1a29a2a9a0de186b0b1f04322ee4618f463408fd1766edcbb953c24255e` |
 | scale-catal 0.7.1 (frozen) | `acfae806d732a4b306b84bc3ecb1cb212cf0001e7d2cdc86d3546c13e7a93633` |
-| scale-catal 0.7.2 | `ee01f98bda618db0edac8380c92f8dbfe89b5bf0011f27e51b463fec5895fcb8` |
+| scale-catal 0.7.2 | `da1973ca18fc5d8602cdf15f200588a4e2b86dbe7340a8bfca7459da366589da` |
 
 A version number only means something within this repository, so identify a schema by its digest
 (`scale graph spec` prints it).

@@ -433,7 +433,9 @@ stewardship:
         and a person chose among them; A2 = an agent extracted the records and a person approved each one; A3 = an
         agent extracted the records and people checked them by exception (a sample and the flagged records,
         governance/review-policy.yaml); A4 = an agent extracted the records and no person checked them; A5 = agents
-        at several sites curated them together, exchanging records. The checks people made are the graph's checks.
+        at several sites curated them together, exchanging records, and that coupling materially shapes what is
+        recorded, its provenance, its governance or its security (records handed from one site to the next in turn are
+        A4 or lower, with the other site named). The checks people made are the graph's checks.
     project:
       type: ref
       targets:
@@ -962,7 +964,9 @@ nodes:
           experiments and a person approves each execution); A3 conditional autonomy (an AI executes within bounds
           approved beforehand, and people review by exception); A4 continuous autonomy (an AI executes without routine
           approval; only safety interlocks and audit logs remain); A5 distributed autonomy (agents or laboratories at
-          several sites coordinate, exchanging data or tasks). The level is the source's: a source that describes its
+          several sites coordinate, exchanging data or tasks, and that coupling materially affects the decisions, the
+          provenance, the governance or the security; work handed from one site to the next in turn is A4 or lower, with
+          the external dependency reported). The level is the source's: a source that describes its
           oversight without naming a level is not_reported here, with its description in human_oversight.
       human_oversight:
         type: text

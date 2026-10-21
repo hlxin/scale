@@ -5,9 +5,13 @@
 # when one of its query plans returns a row, docs/querying.md, or when the named check of the report finds it) and,
 # where the records cannot show it, what a person checks in the source (by_hand). An item is supported when every need
 # is found (any one, with mode: any), partial when some are, a gap when none is, not applicable only when its condition
-# finds no record (with that condition as the reason), and by hand when it has no need. Flags point at records worth a
-# second look (a random split, a metric stated without its uncertainty); context lists records a person reads for an
-# item checked by hand. Nothing here decides that a source satisfies TRACE-AI: the records show what was curated.
+# finds no record (with that condition as the reason), and by hand when it has no need. A supplementary need never
+# makes an item supported: found alone, it makes it partial. An item with a subject (a variable its condition and the
+# plans of its needs all bind: model, design, data) is read record by record: supported only when every record its
+# condition finds has every need, so that one model's uncertainty method never stands in for another's calibration.
+# Flags point at records worth a second look (a random split, a metric stated without its uncertainty); context lists
+# records a person reads for an item checked by hand. Nothing here decides that a source satisfies TRACE-AI: the
+# records show what was curated.
 #
 # TRACE-AI: Xin et al., Transparent reporting for agentic catalysis enabled by artificial intelligence, community
 # guidelines and a publication checklist, Chem Catal. 2026, doi:10.1016/j.checat.2026.101755; the checklist, version
@@ -89,8 +93,9 @@ conditions:
         return:
           - design.name
   physical_campaign:
-    description: a physical experiment of an adaptive or autonomous campaign (a catalytic test or a characterization
-      PART_OF_DESIGN of one)
+    description: an adaptive or autonomous campaign with a physical run (an experiment PART_OF_DESIGN of it that states
+      experiment_kind physical, a characterization, or a catalytic test that is not an equilibrium estimate and does
+      not state experiment_kind computational)
     plans:
       - match:
           label: Design
@@ -103,8 +108,12 @@ conditions:
           - from: design
             edge: PART_OF_DESIGN
             direction: in
-            to: CatalyticTest
+            to: Experiment
             as: run
+            where:
+              - prop: experiment_kind
+                op: eq
+                value: physical
         return:
           - design.name
           - run.name
@@ -121,6 +130,83 @@ conditions:
             direction: in
             to: Characterization
             as: run
+        return:
+          - design.name
+          - run.name
+      - match:
+          label: Design
+          as: design
+          where:
+            - prop: design_kind
+              op: eq
+              value: adaptive
+        steps:
+          - from: design
+            edge: PART_OF_DESIGN
+            direction: in
+            to: CatalyticTest
+            as: run
+            where:
+              - prop: experiment_kind
+                op: missing
+              - prop: test_kind
+                op: ne
+                value: equilibrium_estimate
+        return:
+          - design.name
+          - run.name
+      - match:
+          label: Design
+          as: design
+          where:
+            - prop: autonomy_level
+              op: exists
+        steps:
+          - from: design
+            edge: PART_OF_DESIGN
+            direction: in
+            to: Experiment
+            as: run
+            where:
+              - prop: experiment_kind
+                op: eq
+                value: physical
+        return:
+          - design.name
+          - run.name
+      - match:
+          label: Design
+          as: design
+          where:
+            - prop: autonomy_level
+              op: exists
+        steps:
+          - from: design
+            edge: PART_OF_DESIGN
+            direction: in
+            to: Characterization
+            as: run
+        return:
+          - design.name
+          - run.name
+      - match:
+          label: Design
+          as: design
+          where:
+            - prop: autonomy_level
+              op: exists
+        steps:
+          - from: design
+            edge: PART_OF_DESIGN
+            direction: in
+            to: CatalyticTest
+            as: run
+            where:
+              - prop: experiment_kind
+                op: missing
+              - prop: test_kind
+                op: ne
+                value: equilibrium_estimate
         return:
           - design.name
           - run.name
@@ -142,6 +228,7 @@ items:
     section: Data management
     title: Code that regenerates the model-ready dataset, and how its equivalence is checked
     applies: ml_model
+    subject: model
     needs:
       - name: training_data_located
         description: the data the model was fitted to, with where it is (uri)
@@ -260,6 +347,7 @@ items:
     section: Data management
     title: Dataset identifiers, access and the metadata needed to reuse them
     applies: datasets
+    subject: data
     needs:
       - name: located
         description: a dataset with where it is (uri) or an identifier
@@ -310,7 +398,6 @@ items:
     section: Data management
     title: The policy on negative, failed or suboptimal experiments, and those included
     applies: experiments
-    mode: any
     needs:
       - name: policy_stated
         description: a design that states what was done with failed, negative or suboptimal experiments
@@ -325,7 +412,8 @@ items:
               - design.name
               - design.negative_results_policy
       - name: failed_runs_recorded
-        description: experiments recorded as failed or aborted
+        description: experiments recorded as failed or aborted (what a policy covers, not the policy)
+        supplementary: true
         plans:
           - match:
               label: Experiment
@@ -340,7 +428,8 @@ items:
               - run.name
               - run.experiment_status
       - name: exclusions_stated
-        description: a design that states which runs were left out, or how many
+        description: a design that states which runs were left out, or how many (what a policy covers, not the policy)
+        supplementary: true
         plans:
           - match:
               label: Design
@@ -366,25 +455,17 @@ items:
     section: Model development
     title: The full model specification (architecture, hyperparameters, objective, versions)
     applies: ml_model
+    subject: model
     needs:
       - name: version
         description: the model's version or checkpoint
         plans:
           - match:
-              label: Computation
-              as: prediction
+              label: Model
+              as: model
               where:
-                - prop: computation_kind
-                  op: eq
-                  value: machine_learned
-            steps:
-              - from: prediction
-                edge: USES_MODEL
-                to: Model
-                as: model
-                where:
-                  - prop: version
-                    op: exists
+                - prop: version
+                  op: exists
             return:
               - model.name
               - model.version
@@ -427,6 +508,7 @@ items:
     section: Model development
     title: How the data were split to prevent information leakage
     applies: ml_model
+    subject: model
     needs:
       - name: split_stated
         description: a validation or benchmark of the model that states how its data were kept apart (split_strategy)
@@ -517,6 +599,7 @@ items:
     section: Model development
     title: How uncertainty was quantified, calibrated and used
     applies: ml_model
+    subject: model
     needs:
       - name: method
         description: the model's uncertainty method
@@ -582,6 +665,7 @@ items:
     section: Workflow integration
     title: The agent's policy, constraints and acquisition or reward function, with its configuration
     applies: campaign
+    subject: design
     needs:
       - name: policy
         description: the rule that chooses the next experiments
@@ -637,6 +721,7 @@ items:
     section: Workflow integration
     title: The level of autonomy, human oversight, and the interventions made
     applies: campaign
+    subject: design
     needs:
       - name: autonomy_level
         description: the level of autonomy the source declares
@@ -690,9 +775,14 @@ items:
               - design.name
               - design.intervention_count
           - match:
-              label: Experiment
-              as: run
+              label: Design
+              as: design
             steps:
+              - from: design
+                edge: PART_OF_DESIGN
+                direction: in
+                to: Experiment
+                as: run
               - from: run
                 edge: PROPOSED_BY
                 to: Software
@@ -707,12 +797,14 @@ items:
                       - rejected
                       - not_required
             return:
+              - design.name
               - run.name
               - proposed.human_decision
   - id: C3
     section: Workflow integration
     title: Stopping criteria, how failures were handled, and the runs aborted, excluded or corrected afterwards
     applies: campaign
+    subject: design
     needs:
       - name: stopping_criterion
         description: the rule planned for stopping
@@ -789,6 +881,7 @@ items:
     section: Workflow integration
     title: Safety bounds, interlocks and shutdown, and how unsafe actions are prevented
     applies: physical_campaign
+    subject: design
     needs:
       - name: bounds
         description: the limits the agent had to stay within
@@ -817,6 +910,7 @@ items:
     section: Workflow integration
     title: A traceable record of the campaign's trajectory
     applies: campaign
+    subject: design
     needs:
       - name: order_of_runs
         description: the campaign's runs with their round or order (PART_OF_DESIGN iteration or run_order)
