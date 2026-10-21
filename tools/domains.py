@@ -432,6 +432,9 @@ def check(repo: Path, only: list[str] | None = None, examples: bool = True) -> d
             pb.error(e["where"], e["message"])
         for w in res["warnings"]:
             pb.warn(w["where"], w["message"])
+        from .identifiers import check_registry
+        for e in check_registry(repo):
+            pb.error(e["where"], e["message"])
     return {"ok": not pb.errors, "core": {"name": core.get("core"), "version": kver,
                                           "team": (core.get("maintainers") or {}).get("team")},
             "domains": [{"domain": n, "status": m.get("status"), "version": m.get("version")} for n, m in domains.items()

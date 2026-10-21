@@ -79,6 +79,24 @@ kinds:
   (kcat), narrower than SCALE's turnover frequency. QUDT has no term for an activation energy, a space velocity, a
   site density or most catalysis-specific shares, so they stay unmapped.
 
+## Identifiers on records
+
+A mapping relates SCALE's terms to an ontology's. A record connects to the outside world through its own identifiers:
+every node may carry `identifiers`, a map from a scheme to an identifier, and a technique or a method may name its
+ontology term.
+
+- [core/mappings/identifiers.yaml](../core/mappings/identifiers.yaml) lists the schemes SCALE checks, each with its
+  pattern and where an identifier resolves: DOI, ORCID, ROR, InChIKey, PubChem, ChEBI, CAS Registry Number, EC
+  number, UniProt, COD, ICSD, Materials Project, arXiv, PubMed, PubMed Central, Wikidata and patent numbers. When a
+  document is validated, an identifier of a listed scheme that does not match its pattern, or a CAS Registry Number or
+  ORCID iD whose check digit is wrong, is a warning; the record stays as written. A scheme the list does not hold is
+  kept, unchecked.
+- `technique_id` (a characterization's technique) and `method_id` (an experiment's method) name an ontology term: a
+  CURIE of an ontology of the registry (CHMO:0000156 for X-ray diffraction) or an IRI. Anything else (`XRD`) is a
+  warning. The curation recipes list the Chemical Methods Ontology terms of the common techniques.
+- Before this check, the real graphs used only patent numbers (78, all in form), and no record stated a technique's
+  term; validating them gives no new warning.
+
 ## How they are checked
 
 `scale domains check` (part of `scale check`) and `scale schema mappings --check` check that:
@@ -146,6 +164,5 @@ terms for the four areas SCALE had lacked (biocatalysis, homogeneous catalysis, 
 
 ## Not done yet
 
-- Checked external identifiers on records, such as a characterization's technique identifier.
 - The kernel's `maps_to` still names vocabulary terms in words; the mapping set gives their identifiers.
 - Exports do not yet take a type's IRI from an exact mapping.

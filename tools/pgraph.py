@@ -547,6 +547,8 @@ class Validator:
         if "HAS_PARTICIPANT" in self.edges and "ChemicalSpecies" in self.nodes:   # atom and charge balance (advisory)
             from .stoichiometry import check_document as check_balance
             check_balance(doc, rep)
+        from .identifiers import check_document as check_identifiers   # identifiers and ontology terms (warnings)
+        check_identifiers(doc, rep)
         for nid, inputs in outdated(doc).items():
             rep.add("warning", nid, f"outdated: inputs {inputs} were recorded after it finished")
         if source_texts:
