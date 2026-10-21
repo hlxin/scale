@@ -72,7 +72,7 @@ domain/
 ├── graph/              # scale-catal.yaml (the graph schema manifest), catalysis.yaml (with the checklist)
 ├── competency/         # competency questions: cq-NN-*.yaml (graph query plans with expected answers)
 ├── examples/           # public synthetic example documents
-├── mappings/           # catalysis.yaml: the catalysis terms mapped to ontology terms, and the areas of catalysis research
+├── mappings/           # catalysis.yaml: the catalysis terms mapped to ontology terms, and the subdomains of catalysis research
 ├── docs/               # catalysis documentation (reporting guidance)
 └── tests/              # test_*.py, collected by pytest; fixtures
 ```
@@ -84,7 +84,7 @@ domain/
 | `graph/frozen/` | the frozen schema versions (`scale-catal-<version>.yaml`, `v<version>/`, `SHA256SUMS`), written when a schema change moves the schema on (`scale schema bump`); none yet |
 | `competency/` | competency questions CQ-01 … CQ-11 and CQ-14 … CQ-22: graph query plans over the public examples, with their expected answers |
 | `examples/` | the public synthetic examples ([overview](./examples/README.md)) |
-| `mappings/catalysis.yaml` | the catalysis labels, edge types and values mapped to ontology terms (ChEBI, the Chemical Methods Ontology, REX, MOP, Allotrope, OBI and others), and the fourteen areas of catalysis research of Ontologies4Cat with the SCALE terms that record each ([mappings](../docs/mappings.md)) |
+| `mappings/catalysis.yaml` | the catalysis labels, edge types and values mapped to ontology terms (ChEBI, the Chemical Methods Ontology, REX, MOP, Allotrope, OBI and others), and the fourteen subdomains of catalysis research of Ontologies4Cat with the SCALE terms that record each ([mappings](../docs/mappings.md)) |
 | `docs/` | [catalyst-state reporting](docs/reporting/catalyst-state-reporting.md), [catalyst-preparation reporting](docs/reporting/catalyst-preparation-reporting.md) and the [supporting-information index](docs/supporting-information.md) |
 | `tests/` | the catalysis tests and the invalid scale-catal fixtures (`fixtures/invalid/`, each rejected for the reason `expect.yaml` states) |
 

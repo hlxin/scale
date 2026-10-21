@@ -12,7 +12,7 @@ exchanged across both. It changes nothing that SCALE validates or queries.
 |---|---|
 | [core/mappings/ontologies.yaml](../core/mappings/ontologies.yaml) | The ontologies and vocabularies that mappings cite: name, what a prefix stands for (`iri`), what a term looks like (`pattern`), homepage, the licence the ontology states for itself, and the release its terms were looked up in (`checked`) |
 | [core/mappings/kernel.yaml](../core/mappings/kernel.yaml) | The science kernel's labels and edge types mapped (OBI, IAO, COB, SIO, STATO, SEPIO, BFO, RO, PROV, DCAT, Dublin Core, FOAF, Schema.org, SOSA) |
-| [domain/mappings/catalysis.yaml](../domain/mappings/catalysis.yaml) | The catalysis labels, edge types and values mapped (ChEBI, the Chemical Methods Ontology, REX, MOP, the Allotrope Foundation Ontology, OBI, CHEMINF, EDAM, ENVO, RO), and the areas of catalysis research (below) |
+| [domain/mappings/catalysis.yaml](../domain/mappings/catalysis.yaml) | The catalysis labels, edge types and values mapped (ChEBI, the Chemical Methods Ontology, REX, MOP, the Allotrope Foundation Ontology, OBI, CHEMINF, EDAM, ENVO, RO), and the subdomains of catalysis research (below) |
 
 The files sit beside the schema, not in it: a mapping can be added or corrected without a new schema version, and a
 schema change never waits for one. `core/CORE.yaml` and `domain/DOMAIN.yaml` declare them (`mappings`).
@@ -92,20 +92,26 @@ ones; only a completed one (`Experiment.experiment_status=completed`) is a compl
   the metadata is written by a YAML writer, and a cell holding a double quote is quoted. Both sets pass the SSSOM
   validator of sssom-py 0.4.21 (`sssom validate`).
 
-## Areas of catalysis research
+## Subdomains of catalysis research
 
-Ontologies4Cat classifies ontologies by fourteen areas of catalysis research (A. S. Behr, H. Borgelt and N.
-Kockmann, J. Cheminform. 2024, 16, 16, [doi:10.1186/s13321-024-00807-2](https://doi.org/10.1186/s13321-024-00807-2);
-its metadata collection is [github.com/nfdi4cat/Ontology-Overview-of-NFDI4Cat](https://github.com/nfdi4cat/Ontology-Overview-of-NFDI4Cat),
-CC BY 4.0). The paper found that no ontology contains heterogeneous, homogeneous, photo- or electrocatalysis,
-synthesis data, or heat, transport and kinetic data, and that one each contains biocatalysis, operando data,
-performance data, and process design, energy and cost data (the collection, at the commit below, lists two for the
-last: OEO and OntoCAPE).
-The catalysis set records, for each area, the SCALE terms that record it, what SCALE lacks for it (SCALE's own
-reading), and the ontologies the collection classifies under it, as of its commit 399b788.
-`scale schema mappings --areas` shows them, with the ontologies SCALE's mappings already cite.
+Ontologies4Cat (A. S. Behr, H. Borgelt and N. Kockmann, J. Cheminform. 2024, 16, 16,
+[doi:10.1186/s13321-024-00807-2](https://doi.org/10.1186/s13321-024-00807-2)) classifies ontologies by fourteen
+subdomains of catalysis research, grouped in three areas: the fields of catalysis, modelling, and general catalytic
+data. Of the 23 ontologies the paper describes, it found that none contains heterogeneous, homogeneous, photo- or
+electrocatalysis, synthesis data, or heat, transport and kinetic data, and that one each contains biocatalysis,
+operando data, performance data, and process design, energy and cost data.
 
-| Area | What SCALE records it with | What SCALE lacks |
+The catalysis set records, for each subdomain, the SCALE terms that record it and what SCALE lacks for it (SCALE's
+own reading), and how the authors' metadata collection rates the ontologies it holds: contained, related: narrower
+or related: broader, as the collection gives them. Its source is
+[github.com/nfdi4cat/Ontology-Overview-of-NFDI4Cat](https://github.com/nfdi4cat/Ontology-Overview-of-NFDI4Cat) at
+commit 399b788 (CC BY 4.0), which rates 27 ontologies, the paper's 23 and four added since (ENMO, eNanoMapper, OEO,
+RO); it lists two ontologies for process design, energy and cost data, OntoCAPE and OEO. The ratings are read by the
+collection's own rule, so SBO's "contained: broader" and "contained: narrower" count as contained, and they are kept
+as given: the collection's entry for eNanoMapper repeats its entry for RO (the same name and ratings), and both are
+listed. `scale schema mappings --subdomains` shows them, with the ontologies SCALE's mappings already cite.
+
+| Subdomain | What SCALE records it with | What SCALE lacks |
 |---|---|---|
 | Biocatalysis | nothing yet | an enzyme or whole-cell catalyst; enzyme activity |
 | Heterogeneous catalysis | Catalyst, CatalystSample, ActiveSite, CatalystState, CatalyticTest, Reactor, Feed | |

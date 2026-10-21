@@ -8,15 +8,15 @@ domain), with the registry of the ontologies they cite (``core/mappings/ontologi
 nothing that SCALE validates or queries, so it is corrected without a new schema version; :func:`check` keeps
 every mapping on a term the head schema declares and on a term of a registered ontology.
 
-    scale schema mappings [--layer kernel|catalysis] [--format text|json|sssom] [--areas] [--check]
+    scale schema mappings [--layer kernel|catalysis] [--format text|json|sssom] [--subdomains] [--check]
 
 A mapping's subject is written as a SCALE term: a label (``Catalyst``) or an edge type (``HAS_INPUT``), a
 property (``Label.property``) or a value of one (``Label.property=value``). Its ``term`` is a CURIE of a registered
 ontology.
 
-The catalysis set also carries ``areas``: the areas of catalysis research by which Ontologies4Cat classifies
-ontologies (Behr, Borgelt and Kockmann 2024), with the SCALE labels and edge types that record each area and the
-ontologies the collection classifies under it (:func:`areas`).
+The catalysis set also carries ``subdomains``: the subdomains of catalysis research by which Ontologies4Cat
+classifies ontologies (Behr, Borgelt and Kockmann 2024), with the SCALE labels and edge types that record each and
+how the authors' collection rates the ontologies it holds for it (:func:`subdomains`).
 """
 
 from __future__ import annotations
@@ -37,15 +37,19 @@ MATCHES = {"exact": "skos:exactMatch", "close": "skos:closeMatch", "broad": "sko
            "narrow": "skos:narrowMatch", "related": "skos:relatedMatch"}
 REGISTRY_KEYS = {"name": True, "iri": True, "pattern": True, "homepage": False, "licence": False, "checked": True,
                  "ontologies4cat": False}
-SET_KEYS = {"mapping_set": True, "title": True, "maps": True, "checked": True, "mappings": True, "areas": False}
+SET_KEYS = {"mapping_set": True, "title": True, "maps": True, "checked": True, "mappings": True,
+            "subdomains": False}
 MAPPING_KEYS = {"match": True, "term": True, "label": True, "note": False}
-AREA_KEYS = {"title": True, "scale": True, "gap": False, "ontologies4cat": True}
-# the areas of catalysis research of Ontologies4Cat (Behr, Borgelt and Kockmann, J. Cheminform. 2024, 16, 16),
-# in the order of its classification scheme
-AREAS = ("biocatalysis", "heterogeneous_catalysis", "homogeneous_catalysis", "photocatalysis", "electrocatalysis",
-         "chemical_substance_modelling", "material_modelling", "process_modelling", "synthesis_data",
-         "operando_data", "performance_data", "characterisation_data", "heat_transport_and_kinetic_data",
-         "process_design_energy_and_cost_data")
+SUBDOMAIN_KEYS = {"title": True, "scale": True, "gap": False, "ontologies4cat": True}
+# how the Ontologies4Cat collection rates an ontology for a subdomain ("related: narrower" and "related: broader"
+# in its words); an ontology it rates missing is not listed
+RATINGS = ("contained", "related_narrower", "related_broader")
+# the subdomains of catalysis research of Ontologies4Cat (Behr, Borgelt and Kockmann, J. Cheminform. 2024, 16,
+# 16), in the order of its classification scheme
+SUBDOMAINS = ("biocatalysis", "heterogeneous_catalysis", "homogeneous_catalysis", "photocatalysis",
+              "electrocatalysis", "chemical_substance_modelling", "material_modelling", "process_modelling",
+              "synthesis_data", "operando_data", "performance_data", "characterisation_data",
+              "heat_transport_and_kinetic_data", "process_design_energy_and_cost_data")
 CURIE = re.compile(r"^(?P<prefix>[A-Za-z][A-Za-z0-9_-]*):(?P<local>\S+)$")
 # the layers, the file of each set, the module a label or edge type of it is declared by, and the SSSOM prefix
 # of its terms (expanded to the schema file that declares them)
@@ -90,7 +94,7 @@ def _load(repo: Path, rel: str):
 
 
 def _section(doc: dict, key: str = "mappings") -> dict:
-    """A section of a set keyed by subject (or area); empty when missing or malformed, which :func:`check`
+    """A section of a set keyed by subject (or subdomain); empty when missing or malformed, which :func:`check`
     reports."""
     s = doc.get(key)
     return s if isinstance(s, dict) else {}
@@ -178,8 +182,8 @@ def subject_problem(spec: dict, subject: str, layer: str | None = None) -> str |
 def check(repo: Path, spec: dict | None = None) -> dict:
     """The registry and each layer's set: every key known, every subject a term of the head schema (for a layer's
     labels and edge types, one that layer declares), every term a CURIE of a registered ontology in its pattern,
-    every match a known word, no term twice for one subject; the areas known and naming existing labels and edge
-    types. Errors fail ``scale domains check``; warnings inform."""
+    every match a known word, no term twice for one subject; the subdomains known, naming existing labels and edge
+    types, and rating each ontology once. Errors fail ``scale domains check``; warnings inform."""
     repo = Path(repo)
     errors: list[dict] = []
     warnings: list[dict] = []
@@ -228,11 +232,11 @@ def check(repo: Path, spec: dict | None = None) -> dict:
         for k, req in SET_KEYS.items():
             if req and k not in doc:
                 err(rel, f"{k} is required")
-        for k in ("mappings", "areas"):
+        for k in ("mappings", "subdomains"):
             if doc.get(k) is not None and not isinstance(doc[k], dict):
-                err(rel, f"{k} is a mapping keyed by {'subject' if k == 'mappings' else 'area'}")
-        if doc.get("areas") and layer != "catalysis":
-            err(rel, "areas are areas of catalysis research; they belong to the catalysis set")
+                err(rel, f"{k} is a mapping keyed by {'subject' if k == 'mappings' else 'subdomain'}")
+        if doc.get("subdomains") and layer != "catalysis":
+            err(rel, "subdomains are subdomains of catalysis research; they belong to the catalysis set")
         n = 0
         for subject, ms in _section(doc).items():
             why = subject_problem(spec, str(subject), layer)
@@ -273,29 +277,40 @@ def check(repo: Path, spec: dict | None = None) -> dict:
                                   "an exact match is the one term of that ontology meaning the same")
                     exact[c["prefix"]] = term
         counts[layer] = n
-        areas_ = _section(doc, "areas")
-        for a in sorted(set(areas_) - set(AREAS)):
-            err(rel, f"areas: unknown area {a!r} (the areas of Ontologies4Cat: {', '.join(AREAS)})")
-        for a, d in areas_.items():
+        subdomains_ = _section(doc, "subdomains")
+        for a in sorted(set(subdomains_) - set(SUBDOMAINS)):
+            err(rel, f"subdomains: unknown subdomain {a!r} (the subdomains of Ontologies4Cat: {', '.join(SUBDOMAINS)})")
+        for a, d in subdomains_.items():
+            where = f"subdomains.{a}"
             if not isinstance(d, dict):
-                err(rel, f"areas.{a}: an area is a mapping of title, scale, gap and ontologies4cat")
+                err(rel, f"{where}: a subdomain is a mapping of title, scale, gap and ontologies4cat")
                 continue
-            for k in sorted(set(d) - set(AREA_KEYS)):
-                err(rel, f"areas.{a}: unknown key {k!r} ({', '.join(AREA_KEYS)})")
-            for k, req in AREA_KEYS.items():
+            for k in sorted(set(d) - set(SUBDOMAIN_KEYS)):
+                err(rel, f"{where}: unknown key {k!r} ({', '.join(SUBDOMAIN_KEYS)})")
+            for k, req in SUBDOMAIN_KEYS.items():
                 if req and k not in d:
-                    err(rel, f"areas.{a}: {k} is required")
+                    err(rel, f"{where}: {k} is required")
             if not isinstance(d.get("scale") or [], list):
-                err(rel, f"areas.{a}: scale is a list of labels and edge types")
+                err(rel, f"{where}: scale is a list of labels and edge types")
             for t in d.get("scale") if isinstance(d.get("scale"), list) else []:
                 if t not in spec["nodes"] and t not in spec["edges"]:
-                    err(rel, f"areas.{a}: {t} is no label or edge type of the schema")
+                    err(rel, f"{where}: {t} is no label or edge type of the schema")
             o4c = d.get("ontologies4cat") or {}
             if not isinstance(o4c, dict):
-                err(rel, f"areas.{a}.ontologies4cat: a mapping of contained and related")
+                err(rel, f"{where}.ontologies4cat: a mapping of {', '.join(RATINGS)}")
                 o4c = {}
-            for k in sorted(set(o4c) - {"contained", "related"}):
-                err(rel, f"areas.{a}.ontologies4cat: unknown key {k!r} (contained, related)")
+            for k in sorted(set(o4c) - set(RATINGS)):
+                err(rel, f"{where}.ontologies4cat: unknown key {k!r} ({', '.join(RATINGS)})")
+            rated: dict[str, str] = {}
+            for k in RATINGS:
+                names = o4c.get(k) or []
+                if not isinstance(names, list):
+                    err(rel, f"{where}.ontologies4cat.{k}: a list of ontology acronyms")
+                    continue
+                for o in names:
+                    if o in rated:
+                        err(rel, f"{where}.ontologies4cat: {o} is rated twice ({rated[o]} and {k})")
+                    rated[o] = k
     return {"ok": not errors, "errors": errors, "warnings": warnings, "counts": counts}
 
 
@@ -376,35 +391,37 @@ def sssom(repo: Path, layer: str, version: str | None = None) -> str:
     return "".join(f"# {h}\n" for h in head) + buf.getvalue()
 
 
-def areas(repo: Path) -> list[dict]:
-    """The areas of catalysis research: for each, the SCALE labels and edge types that record it, what SCALE
-    lacks for it, the ontologies Ontologies4Cat classifies under it, and those of them SCALE's mappings cite."""
+def subdomains(repo: Path) -> list[dict]:
+    """The subdomains of catalysis research: for each, the SCALE labels and edge types that record it, what SCALE
+    lacks for it, how the Ontologies4Cat collection rates the ontologies it holds for it, and those of them SCALE's
+    mappings cite."""
     reg = registry(repo)
     cited = {CURIE.match(str(r["term"]))["prefix"] for r in rows(repo) if CURIE.match(str(r["term"] or ""))}
     cited_o4c = {reg[p].get("ontologies4cat") for p in cited if isinstance(reg.get(p), dict)
                  and reg[p].get("ontologies4cat")}
     doc = load_set(repo, "catalysis") or {}
     out = []
-    for a in AREAS:
-        d = _section(doc, "areas").get(a)
+    for a in SUBDOMAINS:
+        d = _section(doc, "subdomains").get(a)
         if not isinstance(d, dict):
             continue
         o4c = d.get("ontologies4cat") if isinstance(d.get("ontologies4cat"), dict) else {}
-        named = [*(o4c.get("contained") or []), *(o4c.get("related") or [])]
-        out.append({"area": a, "title": d.get("title"), "scale": list(d.get("scale") or []), "gap": d.get("gap"),
-                    "contained": list(o4c.get("contained") or []), "related": list(o4c.get("related") or []),
-                    "mapped": [o for o in named if o in cited_o4c]})
+        rated = {k: [str(o) for o in o4c.get(k)] if isinstance(o4c.get(k), list) else [] for k in RATINGS}
+        out.append({"subdomain": a, "title": d.get("title"), "scale": list(d.get("scale") or []),
+                    "gap": d.get("gap"), **rated,
+                    "mapped": [o for k in RATINGS for o in rated[k] if o in cited_o4c]})
     return out
 
 
-def areas_text(repo: Path) -> str:
+def subdomains_text(repo: Path) -> str:
     lines = []
-    for r in areas(repo):
+    for r in subdomains(repo):
         lines.append(f"{r['title']}")
-        lines.append(f"  SCALE:       {', '.join(r['scale']) or 'nothing yet'}")
+        lines.append(f"  SCALE:             {', '.join(r['scale']) or 'nothing yet'}")
         if r["gap"]:
-            lines.append(f"  gap:         {' '.join(str(r['gap']).split())}")
-        lines.append(f"  contains it: {', '.join(r['contained']) or 'no ontology (Ontologies4Cat)'}")
-        lines.append(f"  related:     {', '.join(r['related']) or 'none'}")
-        lines.append(f"  SCALE maps to: {', '.join(r['mapped']) or 'none of them'}")
+            lines.append(f"  gap:               {' '.join(str(r['gap']).split())}")
+        lines.append(f"  contains it:       {', '.join(r['contained']) or 'no ontology (Ontologies4Cat)'}")
+        lines.append(f"  related, narrower: {', '.join(r['related_narrower']) or 'none'}")
+        lines.append(f"  related, broader:  {', '.join(r['related_broader']) or 'none'}")
+        lines.append(f"  SCALE maps to:     {', '.join(r['mapped']) or 'none of them'}")
     return "\n".join(lines)

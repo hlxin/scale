@@ -15,7 +15,7 @@
   them and exports a layer's set as SSSOM. Every term was looked up in the ontology's current release: two that the
   kernel names in words are obsolete in OBI (planned process, device), and their mappings name COB terms instead (an
   experiment or a procedure is COB's planned process; only a completed one is its completely executed planned
-  process, since SCALE also records proposed, running and failed ones). The catalysis set also records the fourteen areas of catalysis research by which Ontologies4Cat
+  process, since SCALE also records proposed, running and failed ones). The catalysis set also records the fourteen subdomains of catalysis research by which Ontologies4Cat
   classifies ontologies (Behr, Borgelt and Kockmann, J. Cheminform. 2024, 16, 16, doi:10.1186/s13321-024-00807-2),
   with the SCALE terms that record each and what SCALE lacks (biocatalysis; a ligand role and a turnover number; transport
   criteria; energy use beyond plasma and cost). See docs/mappings.md.

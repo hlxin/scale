@@ -6,9 +6,10 @@
 # `iri` followed by the local id, and `pattern` is what a term of the vocabulary looks like. `checked` names the
 # release the mapped terms were looked up in (each term's identifier and label, and that it is not obsolete).
 # `licence` is the licence the vocabulary states for itself, left out where its files state none; mappings cite
-# identifiers and labels only, never definitions. `ontologies4cat` names the ontology in the Ontologies4Cat
-# collection (Behr, Borgelt and Kockmann, J. Cheminform. 2024, 16, 16, doi:10.1186/s13321-024-00807-2), whose
-# classification by area of catalysis research is in domain/mappings/catalysis.yaml (areas).
+# identifiers and labels only, never definitions. `ontologies4cat` names the ontology by its acronym in the
+# metadata collection of Ontologies4Cat (Behr, Borgelt and Kockmann, J. Cheminform. 2024, 16, 16,
+# doi:10.1186/s13321-024-00807-2), whose ratings by subdomain of catalysis research are in
+# domain/mappings/catalysis.yaml (subdomains), with their source.
 #
 # Checked by `scale domains check`; listed by `scale schema mappings`. See docs/mappings.md.
 ontologies:
