@@ -352,6 +352,28 @@ kinds:
   - match: broad
     term: quantitykind:DimensionlessRatio
     label: Dimensionless Ratio
+  enzyme_activity:
+  - match: narrow
+    term: SBO:0000559
+    label: enzyme activity
+    note: SBO's enzyme activity is per time; SCALE's is per time or per mass of the preparation.
+  - match: narrow
+    term: SBO:0000558
+    label: specific activity
+    note: SBO's specific activity is per mass of enzyme; SCALE's is per time or per mass.
+  - match: narrow
+    term: quantitykind:CatalyticActivity
+    label: Catalytic Activity
+    note: QUDT's catalytic activity is per time (katal); SCALE's is per time or per mass.
+  michaelis_constant:
+  - match: close
+    term: SBO:0000027
+    label: Michaelis constant
+  energy_consumption:
+  - match: narrow
+    term: quantitykind:SpecificEnergy
+    label: Specific Energy
+    note: QUDT's specific energy is per mass; SCALE's energy consumption is per mass or per amount of product.
 units:
   "°C":
   - match: exact
@@ -693,6 +715,15 @@ units:
   - match: exact
     term: unit:PPB
     label: Parts per Billion
+  U:
+  - match: exact
+    term: unit:ENZ
+    label: Enzyme Unit
+    note: SCALE reads U as the enzyme unit, one micromole per minute; QUDT's unit:U is the unified atomic mass unit.
+  kat:
+  - match: exact
+    term: unit:KAT
+    label: Katal
     note: "The share's basis (mass, mole, volume) is a separate context in SCALE."
   mol/L:
   - match: exact

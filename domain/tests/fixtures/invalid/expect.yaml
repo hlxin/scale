@@ -98,3 +98,12 @@ fixtures:
   - file: charge-treatment-not-in-vocabulary.json
     error: "charge_treatment: 'grand_canonical' is not one of"
     reason: Whether a calculation holds its charge or its potential constant comes from a closed list (constant_charge, constant_potential), so that a comparison can keep the two apart.
+  - file: turnover-number-per-second.json
+    error: "unit 's-1' is frequency (T-1), not a dimension of turnover_number"
+    reason: A turnover number counts events per site or per molecule of catalyst over a run, dimensionless; per second it is a turnover frequency, another kind.
+  - file: enzyme-activity-in-kilojoules.json
+    error: "unit 'kJ' is energy (M L2 T-2), not a dimension of enzyme_activity"
+    reason: An enzyme activity is an amount converted per time (U, a micromole per minute, or kat), or per mass of the preparation (U/mg); an energy is none of these.
+  - file: catalysis-mode-not-in-vocabulary.json
+    error: "catalysis_mode: 'slurry' is not one of"
+    reason: How a source describes its catalysis comes from a closed list (heterogeneous, homogeneous, biocatalytic, other, not_reported); a slurry reactor is how the test is run, not what kind of catalysis it is.

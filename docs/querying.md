@@ -189,6 +189,11 @@ the schema; `scale graph describe` shows it), or the `quantity_kind` of the Vari
   values state one differently is named in `limitations`. An apparent activation energy is compared by its product;
   a degree of rate control by its product, showing the temperature and pressure of its run. CQ-23 to CQ-26 run on the
   computation example.
+- **Catalysis areas** (scale-catal 0.7.1): a transport criterion is compared by the criterion its `basis` or
+  `definition` names (`transport_criterion`: Weisz-Prater, Mears, Carberry, Anderson; one that names none is left out
+  as `missing_context`); an enzyme activity per time (U, kat) and one per mass (U/mg), like an energy consumption per
+  amount (kJ/mol) and per mass (kWh/kg), are kept apart by their units; a turnover number is never compared with a
+  turnover frequency. Each is compared by the species it counts. CQ-27 and CQ-28 run on the area example.
 - **Basis.** On a kind whose contexts read the value's `basis`, a scientific filter states `context`, not `basis`
   (a plan error otherwise), and a value's basis is read through the contexts. A turnover frequency's basis says how it
   was calculated and is read, never compared as text. On any other kind the basis is compared as text, as in an

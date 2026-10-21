@@ -2,6 +2,28 @@
 
 ## Unreleased
 
+- **Schema 0.7.1 (additive): terms for the areas of catalysis research SCALE lacked.** Requested by @hlxin (use what
+  the ontologies for catalysis know to develop the catalysis schema). Mapping SCALE onto the fourteen areas of
+  Ontologies4Cat (Behr, Borgelt and Kockmann 2024, doi:10.1186/s13321-024-00807-2) showed four that SCALE did not
+  cover; the survey found that no ontology covers three of them either. All new terms are provisional.
+  - **Biocatalysis.** A catalyst of family enzyme or whole_cell; the enzyme a macromolecule, named with its EC number;
+    the roles cofactor and solvent; the kinds enzyme_activity (per time in the enzyme unit, U, or the katal, or per mass,
+    U/mg) and michaelis_constant. Basis: the Systems Biology Ontology's enzyme activity, specific activity and
+    Michaelis constant.
+  - **Homogeneous catalysis.** The roles ligand and cocatalyst (the photoelectrode's description already named a
+    cocatalyst role that did not exist); the kind turnover_number (dimensionless), never compared with a turnover
+    frequency.
+  - **Heat, transport and kinetic data.** The kinds transport_criterion, compared by the criterion its definition
+    names (Weisz-Prater, Mears, Carberry, Anderson), effectiveness_factor and thiele_modulus. A transport check kept
+    its criterion values as untyped results before.
+  - **Energy.** The kind energy_consumption (energy per amount or per mass of product; a new dimension, specific
+    energy).
+  - **How the source describes the catalysis.** A test's catalysis_mode (heterogeneous, homogeneous, biocatalytic),
+    as the source says it, never inferred.
+  - Mapped where an ontology defines them (REX's homogeneous and heterogeneous catalysis, SBO's enzyme, ChEBI's ligand,
+    solvent and cofactor, QUDT's enzyme unit and katal). An example (area-examples), CQ-27 and CQ-28, three
+    counterexamples. The examples move to 0.7.1 (their version line only); the migration step rewrites nothing.
+
 - **Units and quantity kinds mapped to QUDT (no schema change).** Requested by @hlxin (stronger connections to
   ontologies). SCALE's units and kinds of quantity named no external term, so a unit could not be matched with another
   system's or converted by a units service. Now 106 units are mapped to QUDT 3.5.3 (°C is unit:DEG_C, mL/min is

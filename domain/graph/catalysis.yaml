@@ -40,6 +40,10 @@ nodes:
         - element
         - radical
         - other
+        - macromolecule
+        description: What kind of entity the species is; a macromolecule is a protein (an enzyme), a polymer or
+          another molecule of high molar mass, named by its source and identifiers (an enzyme's EC number), not by a
+          formula.
       properties:
         type: map
         items:
@@ -582,7 +586,8 @@ nodes:
       Its make-up is HAS_COMPONENT edges to species and materials, each with its role (active phase, support,
       promoter, binder, dopant) and fraction; its phases are HAS_PHASE; physical specimens are CatalystSamples
       (HAS_FORMULATION). There are no role labels: a support is a Material, a promoter a ChemicalSpecies,
-      and the role is on the edge.'
+      and the role is on the edge. An enzyme catalyst (catalyst_family enzyme) has the enzyme, a macromolecule, as
+      its active component, and its support when immobilized; a molecular complex has its ligands (role ligand).'
     properties:
       catalyst_family:
         type: enum
@@ -600,6 +605,8 @@ nodes:
         - organic
         - other
         - not_reported
+        - enzyme
+        - whole_cell
       nominal_formula:
         type: string
       properties:
@@ -700,6 +707,19 @@ nodes:
           those forces meet. A test that lists none has unknown applicability: its driving-force items are neither
           checked nor met, and its checklist is never complete. Whether the test is operated statically or
           dynamically is its Operation (kernel), not a driving force.'
+      catalysis_mode:
+        type: enum
+        maturity: provisional
+        values:
+        - heterogeneous
+        - homogeneous
+        - biocatalytic
+        - other
+        - not_reported
+        description: How the source describes the catalysis of the test, as it states it, never inferred from the
+          catalyst - heterogeneous (at an interface between phases, a solid catalyst with fluid reactants),
+          homogeneous (the catalyst in the same phase as the reactants, a dissolved complex) or biocatalytic (an enzyme
+          or whole cells). An immobilized complex or enzyme is what the source calls it.
       interpretations:
         type: list
         maturity: provisional
@@ -1342,6 +1362,14 @@ edges:
         - not_stated
         - other
         - adsorbate
+        - ligand
+        - solvent
+        - cocatalyst
+        - cofactor
+        description: The component's role. A ligand binds the metal of a molecular complex; a solvent is the liquid a
+          reaction mixture or an electrolyte is in; a cocatalyst is a second component that the catalyst needs to work
+          (an activator, a photocatalyst's co-catalyst); a cofactor is the molecule or ion an enzyme needs (NAD+, a
+          metal ion). As the source states it.
       role_detail:
         type: text
         description: e.g. structural or electronic promoter, as stated.

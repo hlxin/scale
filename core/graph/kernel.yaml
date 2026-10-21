@@ -2232,6 +2232,8 @@ quantities:
   - Melander, Wu, Weckman and Honkala, Constant inner potential DFT for modelling electrochemical systems under constant potential and bias, npj Comput. Mater. 2024, 10, 5, doi:10.1038/s41524-023-01184-4 (constant-charge, canonical, and constant-potential, grand-canonical, calculations; grand free energies are a Legendre transform of canonical ones, and the two ensembles are equivalent only under stated conditions; at least four definitions of a single electrode potential, with different scales and references).
   - Allam et al., AQCat25, unlocking spin-aware, high-fidelity machine learning potentials for heterogeneous catalysis, npj Comput. Mater. 2026, 12, 226, doi:10.1038/s41524-026-02099-6 (spin-polarized and unpolarized calculations, and calculations of different fidelity, give different energies, by up to about 1 eV for an adsorbate on a magnetic surface; adsorbate references CO, H2, H2O and N2; models evaluated on validation and test splits not seen in training).
   - Cantera 3.2 documentation, Reactions and General Structure (Units), cantera.org/stable/yaml (a reaction equation names each participant with its stoichiometric coefficient; Ea is a parameter of a rate expression, given in an energy, an energy per quantity or K; a reaction is checked to balance in elements, and on surfaces in sites).
+  - Behr, Borgelt and Kockmann, Ontologies4Cat, investigating the landscape of ontologies for catalysis research data management, J. Cheminform. 2024, 16, 16, doi:10.1186/s13321-024-00807-2 (no ontology of their collection contains heterogeneous or homogeneous catalysis, synthesis data, or heat, transport and kinetic data; one contains biocatalysis, one process design, energy and cost data).
+  - Systems Biology Ontology, enzyme activity (SBO:0000559, an amount converted per time under specified conditions, often micromoles per minute, the enzyme unit), specific activity (SBO:0000558, per mass of enzyme), Michaelis constant (SBO:0000027) and catalytic rate constant (SBO:0000025, kcat).
   dimensions:
     dimensionless: '1'
     length: L
@@ -2268,6 +2270,7 @@ quantities:
     amount_per_volume_time: N L-3 T-1
     amount_per_area_time: N L-2 T-1
     mass_per_volume_time: M L-3 T-1
+    specific_energy: L2 T-2
   units:
     description: |
       The symbols a unit is read from. A unit is read as the source prints it: SI prefixes before the prefixed
@@ -2297,6 +2300,7 @@ quantities:
       cal: energy
       Hz: frequency
       M: amount_concentration
+      kat: molar_flow
     unprefixed:
       °C: temperature
       °F: temperature
@@ -2364,6 +2368,7 @@ quantities:
       photons: dimensionless
       electron: dimensionless
       electrons: dimensionless
+      U: molar_flow
     spellings:
       temperature:
       - C
@@ -2621,6 +2626,21 @@ quantities:
           terms: [nitrogen balance, N balance]
         mass:
           terms: [mass balance, total mass]
+    transport_criterion:
+      description: Which criterion a transport check computed. The Weisz-Prater criterion judges diffusion in the pores,
+        the Mears and Carberry criteria mass transfer to the particle, the Anderson criterion heat; values of two criteria
+        are two quantities, never compared with one another. Read from the value's basis or definition.
+      read_from: [basis, definition]
+      values:
+        weisz_prater:
+          terms: [Weisz-Prater, Weisz–Prater, Weisz Prater, Weisz-Prater criterion, Weisz-Prater modulus, Weisz-Prater parameter]
+        mears:
+          terms: [Mears, Mears criterion]
+        carberry:
+          terms: [Carberry, Carberry number]
+        anderson:
+          terms: [Anderson, Anderson criterion]
+      unspecified: [other, not_reported]
     process:
       description: What an energy change is of, the reaction or elementary step its target names (or that holds it). Its
         reactants and products, with their coefficients and phases, define the energy, the reference species included,
@@ -2959,4 +2979,59 @@ quantities:
       dimensions: [dimensionless]
       compare_by: [species]
       shows: [temperature, pressure]
+      maturity: provisional
+    enzyme_activity:
+      description: The catalytic activity of an enzyme or a whole-cell preparation, its target the substrate converted or
+        the product formed, under the assay conditions its producer states. Per time it is an amount of substance per time
+        (the enzyme unit, U, one micromole per minute, or the katal, one mole per second); per mass of the preparation it
+        is a specific activity (U/mg), kept apart by its unit. Activities toward two substrates are never compared with one
+        another.
+      dimensions: [molar_flow, amount_per_mass_time]
+      compare_by: [species]
+      shows:
+      - property: temperature
+        warn: true
+      maturity: provisional
+    michaelis_constant:
+      description: The substrate concentration at which an enzyme-catalysed rate is half its limiting rate (Km), for one
+        substrate, its target, as reported from a fit of rates against concentration; its producer states the
+        conditions. The limiting rate per active site (kcat) is a turnover frequency.
+      dimensions: [amount_concentration]
+      compare_by: [species]
+      maturity: provisional
+    turnover_number:
+      description: Events (one product formed or one reactant converted, its target) per site or per molecule of
+        catalyst over a stated run, dimensionless (TON), as reported; how the catalyst or its sites were counted is
+        recorded with it (its definition or basis), never inferred. Distinct from a turnover frequency, which is per
+        time.
+      dimensions: [dimensionless]
+      compare_by: [species]
+      maturity: provisional
+    transport_criterion:
+      description: A dimensionless criterion computed from reported data to judge whether transport limits a measured
+        rate, as a transport check reports it - Weisz-Prater for diffusion in the pores, Mears or Carberry for mass
+        transfer to the particle, Anderson for heat. Its basis or definition names the criterion; values of two
+        criteria are never compared with one another. What threshold the source applies stays with the check's verdict.
+      dimensions: [dimensionless]
+      compare_by: [transport_criterion]
+      maturity: provisional
+    effectiveness_factor:
+      description: The ratio of a rate observed in a catalyst particle to the rate it would have without diffusion
+        limitation, dimensionless, as reported or computed by a transport check (its producer).
+      dimensions: [dimensionless]
+      compare_by: []
+      maturity: provisional
+    thiele_modulus:
+      description: The Thiele modulus of a catalyst particle (the ratio of a reaction rate to a diffusion rate),
+        dimensionless, as reported or computed by a transport check; its definition says which form (first order,
+        generalized).
+      dimensions: [dimensionless]
+      compare_by: []
+      maturity: provisional
+    energy_consumption:
+      description: Energy supplied per amount (kJ/mol) or per mass (kWh/kg) of one product, its target, the inverse of an
+        energy yield; its definition says which energy (the electrical input to a cell or a power supply, the plasma
+        power, heat) and over which boundary. Values per amount and per mass are kept apart by their unit.
+      dimensions: [molar_energy, specific_energy]
+      compare_by: [species]
       maturity: provisional

@@ -42,8 +42,8 @@ scale-catal@0.2.0 …` a pinned one. In a checkout of this repository run `uv ru
   on returned rows and cite their evidence. Quote values as reported, keep incompatible units and
   bases apart (a plan that compares or ranks values takes `comparison: scientific`, which keeps a
   potential's reference scale, a current density's normalization, a pressure's convention and a flow's
-  reference conditions apart too, and a computed energy's kind, reaction, level of theory and charge
-  treatment; a question about one result binds it with an `entries` step, so that
+  reference conditions apart too, a computed energy's kind, reaction, level of theory and charge
+  treatment, and a transport check's criterion; a question about one result binds it with an `entries` step, so that
   its value, product, assay and evidence are that result's and a yield never stands in for a
   selectivity), label author interpretations as the authors', and put your own extrapolations in a
   separate, labelled paragraph.

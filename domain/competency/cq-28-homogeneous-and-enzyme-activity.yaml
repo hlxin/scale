@@ -1,0 +1,70 @@
+# A competency question of the catalysis domain (tools/competency.py; `scale domains cq catalysis`).
+# It runs on public synthetic examples, so anyone can rerun it and see the same answer.
+id: CQ-28
+question: Which tests does their source describe as homogeneous or enzyme catalysis, and what turnover numbers and
+  enzyme activities do they report?
+description: |
+  A test states how its source describes the catalysis (catalysis_mode: heterogeneous, homogeneous, biocatalytic), as the
+  source says it, never inferred from the catalyst. A homogeneous test reports a turnover number (events per molecule of
+  catalyst over the run, dimensionless), which is never a turnover frequency (per time). An enzyme test reports the
+  enzyme's activity, per time (the enzyme unit, U, a micromole per minute) or per mass of the preparation (a specific
+  activity, U/mg). Asked for these, the rhodium complex's test returns its turnover number (950) and the enzyme assay its
+  two activities. Compared scientifically, the three are three groups: a turnover number is another kind than an
+  activity, and an activity per time and one per mass are kept apart by their units.
+documents:
+  - examples/scale-catal/area-examples/catalysis-areas.json
+plan:
+  question: Which homogeneous or enzyme tests report a turnover number or an enzyme activity?
+  match:
+    label: CatalyticTest
+    as: test
+    where:
+      - prop: catalysis_mode
+        op: in
+        value:
+          - homogeneous
+          - biocatalytic
+  steps:
+    - from: test
+      entries: result_values
+      kind:
+        - turnover_number
+        - enzyme_activity
+      as: result
+  return:
+    - test.name
+    - test.catalysis_mode
+    - result
+  evidence: true
+expect:
+  status: answered
+  min_rows: 3
+  max_rows: 3
+  values:
+    test.catalysis_mode:
+      - homogeneous
+      - biocatalytic
+variants:
+  - description: Compared scientifically, the turnover number, the activity per time and the specific activity fall
+      into three groups.
+    plan:
+      comparison: scientific
+      order_by:
+        - var: result
+          prop: value
+    expect:
+      status: answered
+      min_rows: 3
+      max_rows: 3
+  - description: Only the tests whose source calls them heterogeneous report neither a turnover number nor an enzyme
+      activity.
+    plan:
+      match:
+        label: CatalyticTest
+        as: test
+        where:
+          - prop: catalysis_mode
+            op: eq
+            value: heterogeneous
+    expect:
+      status: no_matching_record

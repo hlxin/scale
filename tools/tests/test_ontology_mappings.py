@@ -111,7 +111,7 @@ def test_the_areas_are_the_fourteen_of_ontologies4cat_and_name_terms_of_the_sche
     rows = mappings.areas(REPO)
     assert [r["area"] for r in rows] == list(mappings.AREAS)
     bio = rows[0]
-    assert bio["scale"] == [] and "enzyme" in bio["gap"] and bio["contained"] == ["SBO"]
+    assert "Catalyst" in bio["scale"] and bio["contained"] == ["SBO"]       # scale-catal 0.7.1 records enzymes
     het = next(r for r in rows if r["area"] == "heterogeneous_catalysis")
     assert "Catalyst" in het["scale"] and het["contained"] == [] and "ChEBI" in het["mapped"]
     char = next(r for r in rows if r["area"] == "characterisation_data")
@@ -181,7 +181,7 @@ def test_the_command_checks_lists_and_exports_the_mappings():
     r = run("--format", "sssom")
     assert r.returncode != 0 and "--layer kernel or --layer catalysis" in r.stderr
     r = run("--areas")
-    assert r.returncode == 0 and "Biocatalysis" in r.stdout and "nothing yet" in r.stdout
+    assert r.returncode == 0 and "Biocatalysis" in r.stdout and "contains it: SBO" in r.stdout
 
 
 # ---- quantity kinds and units (the kernel's set): QUDT, and SBO for an enzyme's turnover frequency

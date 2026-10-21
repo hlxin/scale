@@ -53,8 +53,10 @@ A value the experimenter set or the author specified is not a measurement.
   were counted when the source says it. When the source does not say, write that in `definition`; never
   supply a method. The validator warns about a rate that says none of it, and a comparison shows each rate
   with its count: rates on different counts are compared as reported, never recalculated. A rate divided
-  by a count that is only an upper bound is itself a lower bound (`bound: lower`). A turnover number goes
-  in `results` (`turnover_number`) with its `definition`.
+  by a count that is only an upper bound is itself a lower bound (`bound: lower`). A turnover number (events
+  per site or per molecule of catalyst over the run, dimensionless) goes in `result_values` with a Variable of
+  kind `turnover_number` (scale-catal 0.7.1), its product in `target` and in `definition` what it counts per
+  what ("mol octane per mol Rh charged, after 2 h"); it is never a turnover frequency, which is per time.
 - A light-off temperature: `results.light_off_temperature` with `definition` ("temperature at 50 %
   CO conversion") and the species in `target`.
 - An activation energy from the temperature dependence of measured rates (an Arrhenius plot) is the
@@ -72,9 +74,22 @@ A value the experimenter set or the author specified is not a measurement.
   `basis` or `note` ("differential, conversion below 5 %") and an Analysis
   (`analysis_kind: transport_check`) that `HAS_INPUT` the test, with its `verdict`, the `temperature`
   it applies to and its `evaluation_basis` (scale-catal 0.5.0 on): `asserted` when the source only
-  states it, `numerical` when it computes a criterion (its values in `results`), `experimental` when it
-  varies particle size, flow at constant contact time or stirring (each run an input of the check).
-  Never infer a regime the source does not state, and never judge a criterion value.
+  states it, `numerical` when it computes a criterion, `experimental` when it varies particle size, flow at
+  constant contact time or stirring (each run an input of the check). A computed criterion goes in the
+  check's `result_values` with a Variable of kind `transport_criterion` (scale-catal 0.7.1), naming the
+  criterion in `definition` ("Weisz-Prater criterion", "Mears criterion", "Carberry number"); values of two
+  criteria are never compared, and one whose criterion is not named is left out of a comparison. An
+  effectiveness factor and a Thiele modulus are results of their own kinds (`effectiveness_factor`,
+  `thiele_modulus`), the form of the modulus in `definition`. Never infer a regime the source does not state,
+  and never judge a criterion value: what the source concludes is the check's `verdict`.
+- An enzyme's activity (scale-catal 0.7.1) goes in the assay's `result_values` with a Variable of kind
+  `enzyme_activity`, as printed: per time in enzyme units (`U`, a micromole per minute) or katal (`kat`,
+  `nkat`), or per mass of the preparation (`U/mg`, a specific activity), the substrate or product it counts in
+  `target` and what was counted in `definition`. The assay's temperature is the test's; its pH, buffer and
+  substrate concentration are condition entries (`conditions`), each with its `definition`. A Michaelis
+  constant is a result of the Analysis that fits the rates (`analysis_kind: kinetic_fit`, `USES_MODEL` the
+  Michaelis-Menten rate law), of kind `michaelis_constant`, its substrate in `target`; kcat is a turnover
+  frequency, divided by the amount of enzyme it counts (`normalized_by`).
 
 ## Reaction thermochemistry
 
@@ -214,6 +229,30 @@ Map keys, so a value can be found under one name. Most follow quantity names alr
 - Two purchases of one product are two CatalystSamples that share their formulation (`HAS_FORMULATION`), never a
   batch: give each the lot number the source states, none when it states none, and its own characterizations. Nothing
   measured on one lot (a dispersion, a surface composition) is recorded for the other.
+
+## Catalysis mode, enzymes and molecular catalysts
+
+- A test's `catalysis_mode` (scale-catal 0.7.1) is how its source describes the catalysis: `heterogeneous`,
+  `homogeneous` or `biocatalytic`. Record it only when the source says it; never infer it from the catalyst. An
+  immobilized complex or enzyme is what the source calls it.
+- An enzyme or whole-cell catalyst is a Catalyst of `catalyst_family` `enzyme` or `whole_cell`. The enzyme
+  is a ChemicalSpecies of `species_kind` `macromolecule`, named as the source names it, with its EC number
+  (and a UniProt accession when given) in `identifiers` and no formula; when it is immobilized, the carrier is
+  its `support` (HAS_COMPONENT). The reaction mixture is a Feed: the substrate a `reactant`, the cofactor (NAD+,
+  a metal ion) a `cofactor`, the liquid a `solvent` (a buffer named in `role_detail`).
+- A molecular catalyst is a Catalyst of `catalyst_family` `molecular_complex`: the complex its
+  `active_component`, a ligand added beyond the complex a `ligand` (its ratio to the complex a `fraction`
+  with `fraction_basis: relative_to_component` and `relative_to`), an activator a `cocatalyst`. The solvent is
+  a component of the Feed. A catalyst loading relative to the substrate (mol%) is the test's `USES_CATALYST`
+  `amount` as printed.
+
+## Energy use
+
+- The energy a process takes per product (scale-catal 0.7.1) goes in `result_values` with a Variable of kind
+  `energy_consumption`, as printed: per amount (kJ/mol) or per mass (kWh/kg) of the product in `target`, which
+  are kept apart. Say in `definition` which energy (the electrical input to a cell or a power supply, the
+  plasma power, heat) and over which boundary. An energy efficiency (dimensionless) is of kind `efficiency`;
+  a plasma test's `energy_yield` and `specific_energy_input` stay where they are.
 
 ## Balances, impurities and data quality
 

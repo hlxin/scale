@@ -123,14 +123,15 @@ its metadata collection is [github.com/nfdi4cat/Ontology-Overview-of-NFDI4Cat](h
 CC BY 4.0). It found that no ontology contains heterogeneous, homogeneous, photo- or electrocatalysis, synthesis
 data, or heat, transport and kinetic data, and only one contains biocatalysis, operando data or performance data.
 The catalysis set records, for each area, the SCALE terms that record it, what SCALE lacks for it (SCALE's own
-reading), and the ontologies the collection classifies under it, as of its commit 399b788.
+reading), and the ontologies the collection classifies under it, as of its commit 399b788. Scale-catal 0.7.1 added
+terms for the four areas SCALE had lacked (biocatalysis, homogeneous catalysis, heat and transport data, energy use).
 `scale schema mappings --areas` shows them, with the ontologies SCALE's mappings already cite.
 
 | Area | What SCALE records it with | What SCALE lacks |
 |---|---|---|
-| Biocatalysis | nothing yet | an enzyme or whole-cell catalyst; enzyme activity |
+| Biocatalysis | Catalyst (family enzyme or whole_cell), CatalyticTest (enzyme activity, Michaelis constant), HAS_COMPONENT (cofactor, solvent) | an EC number is kept in `identifiers`, unchecked; an assay's pH is a condition entry |
 | Heterogeneous catalysis | Catalyst, CatalystSample, ActiveSite, CatalystState, CatalyticTest, Reactor, Feed | |
-| Homogeneous catalysis | Catalyst (family molecular_complex), CatalyticTest | a ligand or solvent role; a turnover number |
+| Homogeneous catalysis | Catalyst (family molecular_complex; roles ligand and cocatalyst), CatalyticTest (turnover number) | a catalyst loading relative to the substrate is an unchecked amount |
 | Photocatalysis | LightSource, ILLUMINATED_BY, IlluminatedCell, Photoelectrode, ThermalContributionAnalysis | |
 | Electrocatalysis | Electrode, ReferenceElectrode, Electrolyte, ElectrochemicalCell, USES_ELECTRODE | |
 | Chemical substance modelling | ChemicalSpecies, Reaction, HAS_PARTICIPANT | |
@@ -140,8 +141,8 @@ reading), and the ontologies the collection classifies under it, as of its commi
 | Operando data | Characterization, DURING, TimeSeries, CatalystState | |
 | Performance data | CatalyticTest, Analysis | |
 | Characterisation data | Characterization, CHARACTERIZES, DETECTS, TimeSeries | |
-| Heat, transport and kinetic data | Analysis, Mechanism, ElementaryStep, Heater, TemperatureProbe | a quantity kind for a transport criterion, a Thiele modulus or an effectiveness factor |
-| Process design, energy and cost data | ProcessUnit | energy consumption beyond plasma tests; cost |
+| Heat, transport and kinetic data | Analysis (transport criteria, effectiveness factor, Thiele modulus), Mechanism, ElementaryStep, Heater, TemperatureProbe | a heat-transfer coefficient or an adiabatic temperature rise |
+| Process design, energy and cost data | ProcessUnit, CatalyticTest (energy consumption) | cost |
 
 ## Not done yet
 
