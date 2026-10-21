@@ -29,14 +29,16 @@
   system's or converted by a units service. Now 106 units are mapped to QUDT 3.5.3 (°C is unit:DEG_C, mL/min is
   unit:MilliL-PER-MIN, mostly exact) and 28 quantity kinds to QUDT quantity kinds (temperature, pressure, current
   density, …). Where SCALE leaves a unit open, the mapping says so: a gallon, a ton, a calorie or a Btu maps to each of
-  QUDT's definitions as narrower, a normal or standard volume as close. An enzyme's turnover frequency at saturation is
-  SBO's catalytic rate constant (kcat). Every term was looked up in the QUDT release files and EBI OLS; none is
+  QUDT's definitions as narrower, a normal or standard volume as close (QUDT counts it as an amount of substance, so
+  its conversion factors do not apply). A kind is broader only where QUDT's kind holds in every unit SCALE reads it
+  in; a reaction energy (eV or kJ/mol), a current density (QUDT's is a local vector) and a product amount are
+  related. An enzyme's turnover frequency at saturation is SBO's catalytic rate constant (kcat). Every term was looked up in the QUDT release files and EBI OLS; none is
   deprecated. See docs/mappings.md.
 
 - **SCALE's terms mapped to ontology terms (no schema change).** Requested by @hlxin: use what the ontologies for
   catalysis know, and make SCALE's connection to them stronger, without SCALE taking its meaning from an ontology.
   Before, the kernel named related vocabulary terms in words only (`maps_to: OBI planned process`), and no catalysis
-  term was mapped. Now 133 mappings give each term's identifier and say how close it is (exact, close, broader,
+  term was mapped. Now 135 mappings give each term's identifier and say how close it is (exact, close, broader,
   narrower or related): the kernel's labels and edge types to OBI, IAO, COB, SIO, STATO, SEPIO, BFO, RO, PROV, DCAT,
   Dublin Core, FOAF, Schema.org and SOSA; the catalysis labels and values to ChEBI, the Chemical Methods Ontology, REX,
   MOP, the Allotrope Foundation Ontology, OBI, CHEMINF, EDAM and ENVO (calcination is CHMO:0001467; a reference
@@ -44,8 +46,9 @@
   the ontologies they cite, so a mapping is corrected without a new schema version. `scale domains check` keeps every
   mapping on a term of the schema and of a registered ontology; `describe` shows them; `scale schema mappings` lists
   them and exports a layer's set as SSSOM. Every term was looked up in the ontology's current release: two that the
-  kernel names in words are obsolete in OBI (planned process, device), and their mappings name the COB terms that
-  replaced them. The catalysis set also records the fourteen areas of catalysis research by which Ontologies4Cat
+  kernel names in words are obsolete in OBI (planned process, device), and their mappings name COB terms instead (an
+  experiment or a procedure is COB's planned process; only a completed one is its completely executed planned
+  process, since SCALE also records proposed, running and failed ones). The catalysis set also records the fourteen areas of catalysis research by which Ontologies4Cat
   classifies ontologies (Behr, Borgelt and Kockmann, J. Cheminform. 2024, 16, 16, doi:10.1186/s13321-024-00807-2),
   with the SCALE terms that record each and what SCALE lacks (biocatalysis; a ligand role and a turnover number; transport
   criteria; energy use beyond plasma and cost). See docs/mappings.md.

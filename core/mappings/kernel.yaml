@@ -17,7 +17,10 @@
 # `kinds` maps the quantity kinds of the kernel's quantity contracts, by name, and `units` the units its unit
 # vocabulary reads, spelled as SCALE reads them, to QUDT (and a kind to SBO). SCALE reads a unit by its dimension only:
 # a gallon, a ton, a calorie or a Btu is whichever one the source printed, so each of QUDT's definitions of it is
-# narrower (narrow); normal and standard volumes do not fix their reference conditions (close).
+# narrower (narrow); normal and standard volumes do not fix their reference conditions, and QUDT counts them as
+# amounts of substance (close). A kind is broad only where every dimension SCALE reads it in is the QUDT kind's
+# (a conversion is a dimensionless ratio), narrow where QUDT's kind is one form SCALE's takes (a molar flow rate),
+# and related where neither holds (a reaction energy in eV or kJ/mol; QUDT's local current density, a vector).
 #
 # The kernel's own `maps_to` (in core/graph/kernel.yaml) names related vocabulary terms in words; this set gives
 # their identifiers where an ontology defines one. Checked by `scale domains check`; listed by
@@ -47,9 +50,11 @@ mappings:
     note: OBI's prediction is the process of predicting; a SCALE Prediction is what it expects.
   Experiment:
   - match: broad
-    term: COB:0000035
-    label: completely executed planned process
-    note: OBI's planned process (OBI:0000011), which the kernel's maps_to names, is obsolete and replaced by this term.
+    term: COB:0000082
+    label: planned process
+    note: "COB's planned process is one an agent has started, completed or not; a SCALE experiment may also be only
+      proposed or planned (experiment_status). OBI's planned process (OBI:0000011), which the kernel's maps_to
+      names, is obsolete."
   - match: narrow
     term: OBI:0000070
     label: assay
@@ -61,13 +66,26 @@ mappings:
   - match: broad
     term: prov:Activity
     label: Activity
+    note: A PROV activity is one that occurred or is occurring; a SCALE experiment may also be only proposed or planned.
+  Experiment.experiment_status=completed:
+  - match: broad
+    term: COB:0000035
+    label: completely executed planned process
+    note: The term OBI's obsolete planned process (OBI:0000011) points to; a SCALE experiment is one once completed.
   Procedure:
-  - match: close
-    term: COB:0000110
-    label: material processing
+  - match: broad
+    term: COB:0000082
+    label: planned process
+    note: A SCALE procedure may also be only proposed or planned (procedure_status).
   - match: broad
     term: prov:Activity
     label: Activity
+    note: A PROV activity is one that occurred or is occurring; a SCALE procedure may also be only proposed or planned.
+  Procedure.procedure_status=completed:
+  - match: close
+    term: COB:0000110
+    label: material processing
+    note: COB's material processing is completely executed and makes material entities from others.
   Protocol:
   - match: close
     term: OBI:0000272
@@ -238,15 +256,24 @@ kinds:
     term: quantitykind:ElectricCurrent
     label: Electric Current
   current_density:
-  - match: narrow
+  - match: related
     term: quantitykind:ElectricCurrentDensity
     label: Electric Current Density
-    note: "SCALE's current density may also be divided by a catalyst mass."
+    note: "QUDT's is the local current density, a vector; SCALE's is a reported current divided by an electrode area
+      or a catalyst mass."
   concentration:
   - match: narrow
-    term: quantitykind:Concentration
-    label: Concentration
-    note: "SCALE's concentration also covers molality, an amount per mass of solvent."
+    term: quantitykind:AmountOfSubstanceConcentration
+    label: Amount of Substance of Concentration
+    note: "SCALE's concentration may also be a mass concentration or a molality."
+  - match: narrow
+    term: quantitykind:MassConcentration
+    label: Mass Concentration
+    note: "SCALE's concentration may also be an amount concentration or a molality."
+  - match: narrow
+    term: quantitykind:MolalityOfSolute
+    label: Molality of Solute
+    note: "SCALE's concentration may also be an amount or a mass per volume of the mixture."
   composition_fraction:
   - match: narrow
     term: quantitykind:AmountOfSubstanceFraction
@@ -270,23 +297,26 @@ kinds:
     label: Mass Flow Rate
     note: "SCALE's flow rate may also be volumetric or molar."
   product_amount:
-  - match: narrow
+  - match: related
     term: quantitykind:AmountOfSubstance
     label: Amount of Substance
-    note: "SCALE's product amount may also be a mass or a gas volume."
+    note: "QUDT's is any amount of substance; SCALE's is the amount of one product formed, and may also be a mass or a
+      gas volume."
   site_count:
-  - match: narrow
+  - match: related
     term: quantitykind:Count
     label: Count
-    note: "SCALE's site count may also be an amount (µmol) or per catalyst mass."
+    note: "QUDT's is any count of items; SCALE's counts sites, and may also be an amount (µmol) or per catalyst mass."
   efficiency:
-  - match: close
+  - match: narrow
     term: quantitykind:Efficiency
     label: Efficiency
+    note: "QUDT's efficiency is a ratio of output to input power; SCALE's may also be of charge or photons (IPCE)."
   faradaic_efficiency:
   - match: broad
-    term: quantitykind:Efficiency
-    label: Efficiency
+    term: quantitykind:DimensionlessRatio
+    label: Dimensionless Ratio
+    note: "A share of the charge passed, not QUDT's efficiency, which is a ratio of powers."
   turnover_frequency:
   - match: broad
     term: quantitykind:InverseTime
@@ -300,18 +330,28 @@ kinds:
     term: quantitykind:Energy
     label: Energy
   reaction_energy:
-  - match: broad
+  - match: related
     term: quantitykind:Energy
     label: Energy
+    note: "A change of energy, which SCALE also reads per mole (kJ/mol), QUDT's molar energy."
+  - match: related
+    term: quantitykind:MolarEnergy
+    label: Molar Energy
+    note: "A reaction energy per mole of reaction; SCALE also reads one per structure (eV)."
   reaction_enthalpy:
-  - match: broad
+  - match: related
     term: quantitykind:Enthalpy
     label: Enthalpy
+    note: "A change of enthalpy, which SCALE also reads per mole (kJ/mol), QUDT's molar energy."
+  - match: related
+    term: quantitykind:MolarEnergy
+    label: Molar Energy
+    note: "A reaction enthalpy per mole of reaction; SCALE also reads one per structure (eV)."
   reaction_free_energy:
   - match: related
     term: quantitykind:GibbsEnergy
     label: Gibbs Energy
-    note: "SCALE's free energy may also be grand-canonical, at constant potential."
+    note: "SCALE's free energy may also be grand-canonical, at constant potential, and per mole (kJ/mol)."
   conversion:
   - match: broad
     term: quantitykind:DimensionlessRatio
@@ -778,12 +818,14 @@ units:
   - match: close
     term: unit:NCM
     label: Normal Cubic Metre
-    note: SCALE reads normal conditions without fixing their temperature and pressure.
+    note: "SCALE reads a volume at normal conditions without fixing their temperature and pressure. QUDT counts it as
+      an amount of substance and gives it no conversion factor, so QUDT's factors do not convert SCALE's volumes."
   scf:
   - match: close
     term: unit:SCF
     label: Standard Cubic Foot
-    note: SCALE reads standard conditions without fixing their temperature and pressure.
+    note: "SCALE reads a volume at standard conditions without fixing their temperature and pressure. QUDT counts it
+      as an amount of substance (1.1981 mol), so QUDT's factors do not convert SCALE's volumes."
   h-1:
   - match: exact
     term: unit:PER-HR
