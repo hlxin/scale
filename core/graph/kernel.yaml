@@ -2658,7 +2658,10 @@ quantities:
     derived or computed, with produced_by: an evidenced conversion) keeps its own. A context may also be read from the
     record that holds the value (an elementary step's activation energy is of that step) or from the experiment that
     produced it (a computed energy's level of theory and charge treatment); a context that compares the values that do
-    not state it apart from the others (`unstated: group`) never leaves one out. A kind may show what the value's
+    not state it apart from the others (`unstated: group`) never leaves one out. A producer whose label has no such
+    property (a measurement has no level of theory) has its values compared apart, unless the context reads it as
+    stating none (`without_property: unstated`: a phase delay recorded on a test, which cannot say what it was measured
+    against). An open context compares a number exactly, as stated with its unit. A kind may show what the value's
     producer states of other properties (`shows`: a free energy's temperature, a calculation's dispersion correction),
     which a comparison shows in each row and never groups by. `scale graph query` with `comparison: scientific` compares
     and ranks values of a kind only with values of that kind, in one unit and one context (docs/querying.md); without
@@ -3214,10 +3217,12 @@ quantities:
       description: What a phase delay is measured against, as the analysis that produced it states it
         (phase_reference) - the stimulus (the imposed modulation, the reference of phase-sensitive detection) or the
         response of another species (phase_reference_species). A lag behind the stimulus and a lag behind another
-        response are two quantities, never compared with one another; a delay whose analysis states neither is left
-        out of a comparison.
+        response are two quantities, never compared with one another; a delay whose analysis states neither, or whose
+        producer cannot state it (a delay recorded on the test itself, not produced by an analysis), is left out of a
+        comparison.
       read_from: [producer]
       property: phase_reference
+      without_property: unstated
       values:
         stimulus:
           terms: [stimulus]
@@ -3230,13 +3235,16 @@ quantities:
         analysis names no species is left out of a comparison.
       read_from: [producer]
       property: phase_reference_species
+      without_property: unstated
       open: true
     modulation_period:
       description: The period of the modulation a phase delay was read at, as its analysis states it
         (modulation_period). A response's phase, and so its delay, depends on the frequency of the stimulus; delays read
-        at two periods are two quantities. A delay whose analysis states no period is left out of a comparison.
+        at two periods are two quantities, compared by the period's exact number and unit. A delay whose analysis states
+        no period, or states it as not measured, is left out of a comparison.
       read_from: [producer]
       property: modulation_period
+      without_property: unstated
       open: true
     demodulation_harmonic:
       description: The harmonic of the modulation frequency at which phase-sensitive detection read a phase
@@ -3244,6 +3252,7 @@ quantities:
         analysis states no harmonic is compared only with the others that state none.
       read_from: [producer]
       property: demodulation_harmonic
+      without_property: unstated
       open: true
       unstated: group
   kinds:

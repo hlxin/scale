@@ -205,9 +205,10 @@ the schema; `scale graph describe` shows it), or the `quantity_kind` of the Vari
   A phase delay is also compared by what its analysis measured it against (`phase_reference`: the stimulus, or the
   response of another species, then also by `phase_reference_species`), the period it was read at
   (`modulation_period`) and the harmonic (`demodulation_harmonic`, those that state none together): a lag behind the
-  stimulus and a lag behind another response, or lags at two periods, are never compared, and a delay whose analysis
-  states no reference, no period, or no species for the response it is measured against is left out as
-  `missing_context`.
+  stimulus and a lag behind another response, or lags at two periods, are never compared (a period by its exact
+  number and unit), and a delay whose analysis states no reference, no period (or one not measured), or no species
+  for the response it is measured against is left out as `missing_context`, as is a delay recorded on the test
+  itself, with no analysis to say what it was measured against (`without_property: unstated`).
   An elementary step's activation energy also shows how the fit that produced it treated the reactor (`reactor_model`,
   read from the producer, as dispersion is shown for a computed one): constants fitted to one data set as plug flow and
   as a differential reactor stay in one group, each row showing its treatment, and the limitations name the group as

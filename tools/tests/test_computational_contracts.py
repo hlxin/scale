@@ -564,6 +564,14 @@ def test_a_malformed_producer_context_or_shown_property_never_loads():
     bad["contexts"]["process"]["read_from"] = ["basis"]
     with pytest.raises(ScaleError, match="an open context reads target, record, producer only"):
         quantities.Contracts(bad)
+    bad = copy.deepcopy(block)
+    bad["contexts"]["phase_reference"]["without_property"] = "ignore"
+    with pytest.raises(ScaleError, match="without_property is apart or unstated"):
+        quantities.Contracts(bad)
+    bad = copy.deepcopy(block)
+    bad["contexts"]["potential_reference"]["without_property"] = "unstated"      # read from no producer
+    with pytest.raises(ScaleError, match="for a context read from the producer"):
+        quantities.Contracts(bad)
 
 
 def test_an_enum_a_context_is_read_from_names_its_values(spec):

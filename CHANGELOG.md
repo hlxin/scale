@@ -19,8 +19,10 @@
     (phase-sensitive detection; Urakawa, Burgi and Baiker, Chem. Eng. Sci. 2008) and response_time_constant, each
     compared by the species it is of. A modulation analysis states what its delays are measured against
     (phase_reference: the stimulus or another species' response, phase_reference_species), the modulation_period and
-    the demodulation_harmonic, and a phase delay is compared only within one reference, period and harmonic. That a
-    species is an intermediate or a spectator stays a Claim the analysis supports.
+    the demodulation_harmonic, and a phase delay is compared only within one reference, period (its exact number) and
+    harmonic; a delay without a reference or a period, or recorded on a test with no analysis, is left out (a context
+    may read a producer whose label lacks its property as stating none: without_property). That a species is an
+    intermediate or a spectator stays a Claim the analysis supports.
   - **Fitted constants.** A kinetic fit states its reactor_model (differential, stirred_tank, plug_flow,
     axial_dispersion, batch, knudsen_pulse), rate_basis, concentration_measure (and standard_pressure) and
     thermodynamic_consistency (Mhadeshwar, Wang and Vlachos, J. Phys. Chem. B 2003); a value states how its interval was

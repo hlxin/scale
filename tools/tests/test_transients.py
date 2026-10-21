@@ -150,3 +150,42 @@ def test_cq32_answers_with_the_timing_that_rebuilds_each_program(doc):
     loop = next(v for v in rows.values() if v.get("program.segments"))
     assert [(s["label"]["text_value"], s["duration"]["value"]) for s in loop["program.segments"]] == [
         ("reduction (5 % CH4 in Ar)", 60), ("purge (Ar)", 30), ("reoxidation (air)", 45), ("purge (Ar)", 30)]
+
+
+def test_a_phase_delay_is_compared_by_its_exact_period_and_harmonic_and_never_without_an_analysis(doc):
+    """Two harmonics, or two periods that differ past six digits, are two groups; a harmonic not stated is compared only
+    with others not stated; a period not measured, or a delay recorded on the test with no analysis that says what it
+    was measured against, is left out."""
+    mes = node(doc, "analysis/phase-sensitive-detection")
+
+    def clone(key: str, **props) -> dict:
+        n = copy.deepcopy(mes)
+        n["id"] = f"{P}/analysis/{key}"
+        n["props"].update(props)
+        n["props"]["result_values"] = [entry(doc, "analysis/phase-sensitive-detection", "delay_carbonate")]
+        doc["nodes"].append(n)
+        return n
+    clone("psd-second-harmonic", demodulation_harmonic=2)
+    no_k = clone("psd-no-harmonic")
+    del no_k["props"]["demodulation_harmonic"]
+    clone("psd-period-a", modulation_period={"status": "present", "value": 60.00001, "unit": "s"})
+    clone("psd-period-b", modulation_period={"status": "present", "value": 60.00002, "unit": "s"})
+    unmeasured = clone("psd-period-unmeasured", modulation_period={"status": "not_measured"})
+    plan = {"match": {"label": "Analysis", "as": "a", "where": [{"prop": "analysis_kind", "op": "eq",
+                                                                  "value": "modulation_excitation"}]},
+            "steps": [{"from": "a", "entries": "result_values", "kind": "phase_delay", "as": "delay"}],
+            "return": ["a.name", "delay"], "order_by": [{"var": "delay", "prop": "value"}], "comparison": "scientific"}
+    res = pgraph_query.run(doc, spec_of(doc), plan)
+    carbonate = sorted((c.get("modulation_period"), c.get("demodulation_harmonic"))
+                       for c in (g["compared_on"]["delay.value"]["context"] for g in res["comparison"]["groups"])
+                       if c["species"] == f"{P}/species/carbonate-ceria")
+    assert carbonate == [("60 s", "1"), ("60 s", "2"), ("60 s", "not stated"), ("60.00001 s", "1"), ("60.00002 s", "1")]
+    left_out = {x["record"]: x["reason"] for x in res["excluded"]}
+    assert "modulation_period as not measured" in left_out[unmeasured["id"]]
+    # a delay recorded on the test itself: no analysis says what it was measured against
+    test = node(doc, "test/modulation-250c")
+    test["props"]["result_values"] = [entry(doc, "analysis/phase-sensitive-detection", "delay_co2")]
+    on_test = pgraph_query.run(doc, spec_of(doc), {**plan, "match": {"label": "CatalyticTest", "as": "a"}})
+    reasons = [x["reason"] for x in on_test["excluded"]]
+    assert on_test["comparison"]["groups"] == [] and reasons
+    assert all("a CatalyticTest, has no phase_reference" in r for r in reasons), reasons
