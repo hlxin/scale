@@ -156,8 +156,9 @@ mappings:
     note: MOP's oxidation is the chemical change; the treatment is what is done to a sample to bring it about.
   ProcedureStep:
   - match: broad
-    term: COB:0000035
-    label: completely executed planned process
+    term: COB:0000082
+    label: planned process
+    note: A SCALE procedure step may also be only proposed or planned (procedure_status).
   ProcedureStep.action=add:
   - match: close
     term: af-p:AFP_0003743
@@ -234,10 +235,10 @@ mappings:
     term: CHEMINF:000123
     label: chemical descriptor
   Catalyst:
-  - match: close
+  - match: related
     term: CHEBI:35223
     label: catalyst
-    note: ChEBI files catalyst under roles; a SCALE Catalyst is the formulation that plays the role.
+    note: ChEBI's catalyst is a role; a SCALE Catalyst is the formulation that plays it.
   - match: related
     term: af-rl:AFRL_0000217
     label: catalyst role

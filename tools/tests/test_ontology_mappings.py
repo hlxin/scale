@@ -9,6 +9,7 @@ set exports as SSSOM; the catalysis set records the fourteen areas of catalysis 
 Borgelt and Kockmann 2024) with the SCALE terms that record each."""
 
 import copy
+import csv
 import subprocess
 import sys
 
@@ -137,10 +138,13 @@ def test_describe_shows_a_terms_mappings_and_those_of_its_values(spec):
     calc = d["labels"]["Treatment"]["property_mappings"]["treatment_kind=calcination"]
     assert calc[0]["term"] == "CHMO:0001467" and calc[0]["match"] == "close"
     assert {m["term"] for m in d["edges"]["HAS_INPUT"]["mappings"]} == {"OBI:0000293", "prov:used"}
-    # the kernel's maps_to names an obsolete OBI term in words; its mapping is the term that replaced it
+    # the kernel's maps_to names an obsolete OBI term in words; an experiment is COB's planned process, and only a
+    # completed one is the completely executed planned process OBI points to
     exp = d["labels"]["Experiment"]
     assert "OBI planned process" in exp["maps_to"]
-    assert any(m["term"] == "COB:0000035" and m["match"] == "broad" for m in exp["mappings"])
+    assert any(m["term"] == "COB:0000082" and m["match"] == "broad" for m in exp["mappings"])
+    assert not any(m["term"] == "COB:0000035" for m in exp["mappings"])
+    assert exp["property_mappings"]["experiment_status=completed"][0]["term"] == "COB:0000035"
     # without mappings, describe is as it was
     plain = pgraph.describe(spec, ["Treatment"], None)
     assert "mappings" not in plain["labels"]["Treatment"] and "property_mappings" not in plain["labels"]["Treatment"]
@@ -151,24 +155,50 @@ def test_no_mapping_cites_an_obi_term_obi_made_obsolete():
     assert not terms & {"OBI:0000011", "OBI:0000968", "OBI:0000094"}
 
 
+def _read_sssom(text):
+    """An SSSOM TSV text as its metadata and its rows, read as the format says: the commented YAML block, then the
+    table, cells unquoted."""
+    lines = text.splitlines()
+    meta = yaml.safe_load("\n".join(x[1:] for x in lines if x.startswith("#")))
+    table = list(csv.reader([x for x in lines if not x.startswith("#")], delimiter="\t"))
+    return meta, table[0], [dict(zip(table[0], r)) for r in table[1:]], table[1:]
+
+
 def test_the_sssom_export_lists_every_mapping_with_its_skos_relation():
-    out = mappings.sssom(REPO, "catalysis", "0.7.0")
-    lines = out.splitlines()
-    meta = yaml.safe_load("\n".join(x[2:] for x in lines if x.startswith("# ")))
+    meta, head, body, raw = _read_sssom(mappings.sssom(REPO, "catalysis", "0.7.0"))
     assert meta["mapping_set_id"].endswith("/domain/mappings/catalysis.yaml")
     assert meta["license"] == "https://creativecommons.org/licenses/by/4.0/"
     assert meta["subject_source_version"] == "0.7.0"
-    table = [x.split("\t") for x in lines if not x.startswith("#")]
-    head, body = table[0], table[1:]
     assert head == ["subject_id", "subject_label", "predicate_id", "object_id", "object_label", "mapping_justification",
                     "comment"]
     assert len(body) == mappings.check(REPO)["counts"]["catalysis"]
-    row = {(r[0], r[3]): r for r in body}
-    assert row[("scalecatal:ReferenceElectrode", "CHMO:0002345")][2] == "skos:exactMatch"
-    assert row[("scalecatal:Treatment.treatment_kind=calcination", "CHMO:0001467")][2] == "skos:closeMatch"
-    assert all(r[5] == "semapv:ManualMappingCuration" for r in body)
-    assert {r[3].split(":", 1)[0] for r in body} | {"scalecatal"} <= set(meta["curie_map"])
-    assert all(len(r) == len(head) for r in body)
+    row = {(r["subject_id"], r["object_id"]): r for r in body}
+    assert row[("scalecatal:ReferenceElectrode", "CHMO:0002345")]["predicate_id"] == "skos:exactMatch"
+    assert row[("scalecatal:Treatment.treatment_kind=calcination", "CHMO:0001467")]["predicate_id"] == "skos:closeMatch"
+    assert all(r["mapping_justification"] == "semapv:ManualMappingCuration" for r in body)
+    assert all(len(r) == len(head) for r in raw)
+    # every identifier (an entity reference, in SSSOM's words) is a CURIE of a prefix the curie_map declares,
+    # the subject source included; an IRI there would make SSSOM readers reject the file
+    refs = [meta["subject_source"], *(r[k] for r in body for k in ("subject_id", "predicate_id", "object_id",
+                                                                  "mapping_justification"))]
+    for ref in refs:
+        assert not ref.startswith(("http://", "https://")) and ref.split(":", 1)[0] in meta["curie_map"], ref
+    assert meta["subject_source"] == "scale:domain/graph/catalysis.yaml"
+    assert meta["curie_map"]["scale"] + "domain/graph/catalysis.yaml" == meta["mapping_set_id"].replace(
+        "domain/mappings/catalysis.yaml", "domain/graph/catalysis.yaml")
+
+
+def test_the_sssom_export_quotes_what_a_reader_would_misread(tmp_path, spec):
+    """A title with a colon stays one YAML value; a note with double quotes, a tab or a line break stays one cell."""
+    cat = load_yaml(REPO / layout.DOMAIN_MAPPINGS)
+    cat["title"] = 'SCALE: catalysis "terms"'
+    cat["mappings"]["ReferenceElectrode"][0]["note"] = 'Said "the same"\tin\nCHMO.'
+    tree = _tree(tmp_path, catalysis=cat)
+    meta, head, body, raw = _read_sssom(mappings.sssom(tree, "catalysis"))
+    assert meta["mapping_set_title"] == 'SCALE: catalysis "terms"'
+    ref = next(r for r in body if r["subject_id"] == "scalecatal:ReferenceElectrode")
+    assert ref["comment"] == 'Said "the same" in CHMO.'
+    assert all(len(r) == len(head) for r in raw)
 
 
 def test_the_command_checks_lists_and_exports_the_mappings():
@@ -182,3 +212,69 @@ def test_the_command_checks_lists_and_exports_the_mappings():
     assert r.returncode != 0 and "--layer kernel or --layer catalysis" in r.stderr
     r = run("--areas")
     assert r.returncode == 0 and "Biocatalysis" in r.stdout and "nothing yet" in r.stdout
+
+
+def test_a_catalyst_is_related_to_chebis_catalyst_role_and_only_completed_work_is_completely_executed():
+    """A thing and the role it plays are related, never close (ChEBI's catalyst is a role); COB's completely executed
+    terms name only a completed experiment or procedure, since SCALE records proposed, running and failed ones."""
+    rows = mappings.rows(REPO)
+    cat = next(r for r in rows if r["subject"] == "Catalyst" and r["term"] == "CHEBI:35223")
+    assert cat["match"] == "related"
+    done = {r["subject"] for r in rows if r["term"] in ("COB:0000035", "COB:0000110")}
+    assert done == {"Experiment.experiment_status=completed", "Procedure.procedure_status=completed"}
+
+
+def test_a_malformed_set_is_reported_and_leaves_the_rest_readable(tmp_path, spec):
+    """A subject whose mappings are not a list, or a section that is not keyed by subject, is an error of the check;
+    reading the mappings for describe skips it rather than failing every description."""
+    cat = load_yaml(REPO / layout.DOMAIN_MAPPINGS)
+    cat["mappings"]["Treatment"] = {"match": "close", "term": "CHMO:0001467", "label": "calcination"}
+    cat["mappings"]["Reactor"] = ["CHMO:0000136"]
+    tree = _tree(tmp_path, catalysis=cat)
+    msgs = _messages(mappings.check(tree, spec))
+    assert any("Treatment: a subject lists its mappings" in x for x in msgs), msgs
+    assert any("Reactor[0]: a mapping is a mapping of match, term, label" in x for x in msgs), msgs
+    idx = mappings.index(tree)
+    assert "Treatment" not in idx and "Reactor" not in idx and idx["ReferenceElectrode"]
+    d = pgraph.describe(spec, ["Catalyst"], None, idx)
+    assert d["labels"]["Catalyst"]["mappings"]
+    kern = load_yaml(REPO / layout.KERNEL_MAPPINGS)
+    kern["mappings"] = [kern["mappings"]["Experiment"]]
+    tree = _tree(tmp_path, kernel=kern)
+    assert any("mappings is a mapping keyed by subject" in x for x in _messages(mappings.check(tree, spec)))
+    assert "Experiment" not in mappings.index(tree)
+
+
+def test_a_key_given_twice_is_an_error_not_a_silent_loss(tmp_path, spec):
+    """YAML keeps the second of two equal keys and drops the first; a mapping file refuses it."""
+    tree = _tree(tmp_path)
+    p = tree / layout.DOMAIN_MAPPINGS
+    p.write_text(p.read_text().replace("\nmappings:\n", "\nmappings:\n  Catalyst:\n  - match: close\n"
+                                       "    term: CHEBI:35223\n    label: catalyst\n", 1))
+    msgs = _messages(mappings.check(tree, spec))
+    assert any(f"{layout.DOMAIN_MAPPINGS}: line" in x and "'Catalyst' is given twice" in x for x in msgs), msgs
+    with pytest.raises(mappings.ScaleError, match="is given twice"):
+        mappings.index(tree)
+    r = tree / layout.ONTOLOGY_REGISTRY
+    r.write_text(r.read_text().replace("ontologies:\n", "ontologies:\n  CHMO:\n    name: x\n", 1))
+    assert any("'CHMO' is given twice" in x for x in _messages(mappings.check(tree, spec)))
+
+
+def test_a_declared_set_or_the_registry_missing_is_an_error(tmp_path, spec):
+    """CORE.yaml and DOMAIN.yaml declare the sets; one declared but missing, or the registry missing, fails the check
+    instead of checking nothing."""
+    tree = _tree(tmp_path)
+    for rel in (layout.CORE_MANIFEST, layout.DOMAIN_DECLARATION):
+        (tree / rel).write_text(yaml.safe_dump({"mappings": "mappings/x.yaml"}))
+    assert mappings.declared(tree) == {"kernel": layout.CORE_MANIFEST, "catalysis": layout.DOMAIN_DECLARATION}
+    assert mappings.check(tree, spec)["ok"]
+    (tree / layout.KERNEL_MAPPINGS).unlink()
+    msgs = _messages(mappings.check(tree, spec))
+    assert any(f"is missing; {layout.CORE_MANIFEST} declares it" in x for x in msgs), msgs
+    (tree / layout.ONTOLOGY_REGISTRY).unlink()
+    msgs = _messages(mappings.check(tree, spec))
+    assert any(f"{layout.ONTOLOGY_REGISTRY} is missing" in x for x in msgs), msgs
+    # a repository that declares no set needs none
+    (tree / layout.CORE_MANIFEST).write_text(yaml.safe_dump({"core": "x"}))
+    (tree / layout.DOMAIN_DECLARATION).write_text(yaml.safe_dump({"domain": "x"}))
+    assert mappings.declared(tree) == {}
