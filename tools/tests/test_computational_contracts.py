@@ -278,6 +278,18 @@ def test_a_degree_of_rate_control_belongs_to_the_conditions_of_its_run(doc, spec
 
 
 # ---------------------------------------------------------------- fitted, predicted, validated
+def test_a_stated_split_is_not_reported_as_validation_on_training_data():
+    """A cross-validation holds its folds out of the table the model was fitted to: with its split stated
+    (split_strategy, 0.7.2 on) the shared table is not reported; without it, it is."""
+    d = copy.deepcopy(load_doc(EXAMPLES / "scale-catal/agentic-examples/self-driving-campaign.json"))
+    assert not [w for w in pgraph.validate(d, spec_of(d)).warnings if "on data it was fitted to" in w["message"]]
+    for e in d["links"]:
+        if e["type"] == "EVALUATES" and e["props"].get("split_strategy") == "grouped":
+            e["props"]["split_strategy"] = "not_reported"
+    flagged = [w["record"] for w in pgraph.validate(d, spec_of(d)).warnings if "on data it was fitted to" in w["message"]]
+    assert len(flagged) == 1
+
+
 def test_fitting_data_are_never_counted_as_independent_validation(doc):
     rep = pgraph.validate(doc, spec_of(doc))
     flagged = {w["record"] for w in rep.warnings if "on data it was fitted to" in w["message"]}

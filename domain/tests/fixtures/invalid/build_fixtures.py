@@ -32,7 +32,9 @@ from scale.api import template  # noqa: E402
 from scale.util import load_doc, write_canonical  # noqa: E402
 
 BASE = REPO / "domain/examples/scale-catal/driving-force-examples/electro.json"
-VERSION = load_doc(BASE)["graph"]["schema_version"]      # the one version every fixture pins: the base example's
+VERSION = load_doc(BASE)["graph"]["schema_version"]      # the version a fixture pins: its base example's
+# what a later schema version added is shown wrong on an example of that version (expect.yaml names it as base)
+AGENTIC = REPO / "domain/examples/scale-catal/agentic-examples/self-driving-campaign.json"
 
 
 def test_node(doc: dict) -> dict:
@@ -272,6 +274,22 @@ def main() -> None:
            lambda d: result_of_kind(d, "enzyme_activity", "kJ", 12))
     defect("catalysis-mode-not-in-vocabulary", "a test whose catalysis mode is stated in other words",
            lambda d: test_node(d)["props"].__setitem__("catalysis_mode", "slurry"))
+    # a person's checks of the records (graph.checks) and what TRACE-AI asks of an agentic campaign, 0.7.2 on
+    agentic = load_doc(AGENTIC)
+
+    def check(d: dict) -> dict:
+        return d["graph"]["checks"][0]
+    defect("check-names-unknown-record", "a person's check that names a record the graph does not hold",
+           lambda d: check(d)["records"].append("ex:sdl/test/round-9"), base=agentic)
+    defect("check-counts-more-wrong-than-checked", "a check that counts more fields wrong than it checked",
+           lambda d: check(d).__setitem__("fields_wrong", 50), base=agentic)
+    defect("acknowledgement-on-an-unchecked-record", "a warning acknowledged on a record the check does not cover",
+           lambda d: check(d)["records"].remove("ex:sdl/design/campaign"), base=agentic)
+    defect("autonomy-level-not-in-vocabulary", "a campaign whose level of autonomy is not on the TRACE-AI scale",
+           lambda d: node(d, "design/campaign")["props"].__setitem__("autonomy_level", "A6"), base=agentic)
+    defect("split-strategy-not-in-vocabulary", "a validation whose split is stated in other words",
+           lambda d: next(e for e in d["links"] if (e["props"] or {}).get("split_strategy") == "random")["props"]
+           .__setitem__("split_strategy", "shuffled"), base=agentic)
     # it states its access (public, like every committed document) but not who contributed it or its project
     defect("research-data-without-stewardship", "research data that does not say who contributed it or which project it belongs to",
            lambda d: d["graph"].__setitem__("stewardship", {"access": "public"}), base=template("catalysis", VERSION))

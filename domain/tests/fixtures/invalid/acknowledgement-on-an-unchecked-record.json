@@ -1,0 +1,1608 @@
+{
+  "nodes": [
+    {
+      "id": "ex:sdl/source/paper",
+      "label": "Source",
+      "props": {
+        "name": "Invented paper",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "Closed-loop optimization of Cu-Zn-Al catalysts for CO2 hydrogenation to methanol (invented)",
+        "year": 2026
+      }
+    },
+    {
+      "id": "ex:sdl/species/co2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "CO2",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 1,
+          "O": 2
+        },
+        "formula": "CO2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:sdl/species/h2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "H2",
+        "charge": 0,
+        "elemental_composition": {
+          "H": 2
+        },
+        "formula": "H2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:sdl/species/methanol",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "CH3OH",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 1,
+          "H": 4,
+          "O": 1
+        },
+        "formula": "CH3OH",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:sdl/species/h2o",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "H2O",
+        "charge": 0,
+        "elemental_composition": {
+          "H": 2,
+          "O": 1
+        },
+        "formula": "H2O",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:sdl/reaction/co2-to-methanol",
+      "label": "Reaction",
+      "props": {
+        "name": "CO2 + 3 H2 -> CH3OH + H2O",
+        "balance_status": "balanced",
+        "direction": "forward",
+        "equation": "CO2 + 3 H2 -> CH3OH + H2O",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:sdl/feed/h2-co2",
+      "label": "Feed",
+      "props": {
+        "name": "H2/CO2 = 3",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods, catalytic testing",
+            "source": "ex:sdl/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "ratios": {
+          "h2_to_co2": {
+            "status": "present",
+            "basis": "molar",
+            "unit": "1",
+            "value": 3
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:sdl/instrument/parallel-reactor",
+      "label": "Reactor",
+      "props": {
+        "name": "Parallel fixed-bed reactor, 16 channels",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods, catalytic testing",
+            "source": "ex:sdl/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "reactor_kind": "fixed_bed"
+      }
+    },
+    {
+      "id": "ex:sdl/software/bo-agent",
+      "label": "Software",
+      "props": {
+        "name": "the campaign's optimization agent",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods, agent",
+            "source": "ex:sdl/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "repository": "https://example.org/invented/bo-agent",
+        "software_kind": "agent",
+        "version": "2.1.0"
+      }
+    },
+    {
+      "id": "ex:sdl/variable/reactor-temperature",
+      "label": "Variable",
+      "props": {
+        "name": "reactor temperature",
+        "origin": "synthetic",
+        "quantity_kind": "temperature",
+        "scale": "quantitative",
+        "unit": "°C"
+      }
+    },
+    {
+      "id": "ex:sdl/variable/reactor-pressure",
+      "label": "Variable",
+      "props": {
+        "name": "reactor pressure",
+        "origin": "synthetic",
+        "quantity_kind": "pressure",
+        "scale": "quantitative",
+        "unit": "bar"
+      }
+    },
+    {
+      "id": "ex:sdl/variable/sty-mae",
+      "label": "Variable",
+      "props": {
+        "name": "mean absolute error of the predicted space-time yield",
+        "origin": "synthetic",
+        "quantity_kind": "mean_absolute_error",
+        "scale": "quantitative",
+        "unit": "g/(g h)"
+      }
+    },
+    {
+      "id": "ex:sdl/design/campaign",
+      "label": "Design",
+      "props": {
+        "name": "Bayesian optimization of Cu-Zn-Al composition and temperature, four rounds",
+        "agent_policy": "Bayesian optimization with a Gaussian-process surrogate and expected improvement, two runs per round, the first round chosen by Latin hypercube sampling with seed 5.",
+        "assignment_method": "adaptive",
+        "autonomy_level": "A2",
+        "design_kind": "adaptive",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods, agent",
+            "source": "ex:sdl/source/paper"
+          },
+          {
+            "kind": "figure",
+            "locator": "Figure 2",
+            "source": "ex:sdl/source/paper"
+          }
+        ],
+        "excluded_count": {
+          "status": "present",
+          "unit": "1",
+          "value": 1
+        },
+        "exclusion_criteria": "Runs aborted by an alarm.",
+        "human_oversight": "An operator approved, changed or rejected every proposed run before the robot made and tested it, and could stop the campaign at any round.",
+        "intervention_count": {
+          "status": "present",
+          "unit": "1",
+          "value": 3
+        },
+        "interventions": [
+          "Round 2: the operator lowered a proposed 290 °C to 270 °C, the upper end of the furnace's calibrated range; the agent was told the run's actual temperature.",
+          "Round 3: the operator rejected a proposal of 85 % Cu, outside the compositions the robot can coprecipitate.",
+          "Round 3: a pressure alarm aborted one run; the operator kept it out of the fit."
+        ],
+        "negative_results_policy": "Every run is reported, the aborted one included, with its reason; aborted runs are left out of the surrogate's training data.",
+        "objectives": "Maximize the methanol space-time yield at 30 bar; one objective.",
+        "origin": "synthetic",
+        "post_hoc_changes": "None reported.",
+        "safety_bounds": [
+          {
+            "status": "present",
+            "bound": "upper",
+            "unit": "°C",
+            "value": 300,
+            "variable": "ex:sdl/variable/reactor-temperature"
+          },
+          {
+            "status": "present",
+            "basis": "absolute",
+            "bound": "upper",
+            "unit": "bar",
+            "value": 50,
+            "variable": "ex:sdl/variable/reactor-pressure"
+          }
+        ],
+        "safety_measures": "The robot refuses set points beyond the bounds; a pressure or temperature alarm, a gas leak or a lost connection to the agent shuts the reactor down and stops the round.",
+        "stop_reason": "The four rounds the budget allowed were run.",
+        "stopping_criterion": "Four rounds, or an expected improvement below 0.01 g/(g h) for two rounds.",
+        "unmodeled": [
+          "the robot's liquid-handling tolerance before each round (2 %, Methods)"
+        ]
+      }
+    },
+    {
+      "id": "ex:sdl/catalyst/cu60zn30",
+      "label": "Catalyst",
+      "props": {
+        "name": "Cu60Zn30Al10 (molar, metals basis)",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:sdl/source/paper"
+          }
+        ],
+        "nominal_formula": "Cu60Zn30Al10Ox",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:sdl/sample/cu60zn30",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Cu60Zn30Al10, coprecipitated by the robot",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:sdl/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "sample_kind": "powder"
+      }
+    },
+    {
+      "id": "ex:sdl/catalyst/cu70zn20",
+      "label": "Catalyst",
+      "props": {
+        "name": "Cu70Zn20Al10 (molar, metals basis)",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:sdl/source/paper"
+          }
+        ],
+        "nominal_formula": "Cu70Zn20Al10Ox",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:sdl/sample/cu70zn20",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Cu70Zn20Al10, coprecipitated by the robot",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:sdl/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "sample_kind": "powder"
+      }
+    },
+    {
+      "id": "ex:sdl/catalyst/cu50zn40",
+      "label": "Catalyst",
+      "props": {
+        "name": "Cu50Zn40Al10 (molar, metals basis)",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:sdl/source/paper"
+          }
+        ],
+        "nominal_formula": "Cu50Zn40Al10Ox",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:sdl/sample/cu50zn40",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Cu50Zn40Al10, coprecipitated by the robot",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:sdl/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "sample_kind": "powder"
+      }
+    },
+    {
+      "id": "ex:sdl/test/round-1",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Cu60Zn30Al10, 250 °C (round 1)",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:sdl/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "basis": "absolute",
+          "unit": "bar",
+          "value": 30
+        },
+        "space_time_yield": {
+          "status": "present",
+          "target": "ex:sdl/species/methanol",
+          "unit": "g/(g h)",
+          "value": 0.42
+        },
+        "space_velocity": {
+          "status": "present",
+          "unit": "mL/(g h)",
+          "value": 12000
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 250
+        },
+        "temperature_measured_at": "catalyst_bed",
+        "test_kind": "activity"
+      }
+    },
+    {
+      "id": "ex:sdl/test/round-2",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Cu70Zn20Al10, 270 °C (round 2; proposed at 290 °C)",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:sdl/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "completed",
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "basis": "absolute",
+          "unit": "bar",
+          "value": 30
+        },
+        "space_time_yield": {
+          "status": "present",
+          "target": "ex:sdl/species/methanol",
+          "unit": "g/(g h)",
+          "value": 0.55
+        },
+        "space_velocity": {
+          "status": "present",
+          "unit": "mL/(g h)",
+          "value": 12000
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 270
+        },
+        "temperature_measured_at": "catalyst_bed",
+        "test_kind": "activity"
+      }
+    },
+    {
+      "id": "ex:sdl/test/round-3",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Cu50Zn40Al10, 260 °C (round 3; aborted)",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:sdl/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "aborted",
+        "note": "A pressure alarm stopped the run after 20 min.",
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "basis": "absolute",
+          "unit": "bar",
+          "value": 30
+        },
+        "space_velocity": {
+          "status": "present",
+          "unit": "mL/(g h)",
+          "value": 12000
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 260
+        },
+        "temperature_measured_at": "catalyst_bed",
+        "test_kind": "activity"
+      }
+    },
+    {
+      "id": "ex:sdl/experiment/round-3-rejected",
+      "label": "Experiment",
+      "props": {
+        "name": "Cu85Zn5Al10, 280 °C (round 3; rejected, never run)",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Supplementary Table 3",
+            "source": "ex:sdl/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "experiment_status": "proposed",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:sdl/dataset/campaign-runs",
+      "label": "Dataset",
+      "props": {
+        "name": "the campaign's runs, one row each",
+        "availability": "available",
+        "data_kind": "table",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Data availability",
+            "source": "ex:sdl/source/paper"
+          }
+        ],
+        "licence": "CC-BY-4.0 (invented)",
+        "origin": "synthetic",
+        "sha256": "d04594aae7413bf95acb5e25315cb1aa01f497ee28815606a4edf292e0746fc9",
+        "uri": "https://example.org/invented/campaign-runs.csv",
+        "version": "1"
+      }
+    },
+    {
+      "id": "ex:sdl/software/assembly-script",
+      "label": "Software",
+      "props": {
+        "name": "the script that assembles the runs into one table",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Code availability",
+            "source": "ex:sdl/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "repository": "https://example.org/invented/campaign-tools",
+        "software_kind": "application",
+        "version": "1.0.3"
+      }
+    },
+    {
+      "id": "ex:sdl/dataset/container",
+      "label": "Dataset",
+      "props": {
+        "name": "container image the fit and the notebook run in",
+        "availability": "available",
+        "data_kind": "environment",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Code availability",
+            "source": "ex:sdl/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "sha256": "9c8bc4b804c433bb9fe2b1679ba20f04539060a9de4a92fb30eb0aecd760c6cc",
+        "uri": "https://example.org/invented/container",
+        "version": "2026.03"
+      }
+    },
+    {
+      "id": "ex:sdl/dataset/notebook",
+      "label": "Dataset",
+      "props": {
+        "name": "notebook that refits the surrogate and redraws Figure 3",
+        "availability": "available",
+        "data_kind": "notebook",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Code availability",
+            "source": "ex:sdl/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "sha256": "2c367d0940d387945c41cd7dd6872b329d780ab26b0e75c5e1e2645ef53da8a2",
+        "uri": "https://example.org/invented/refit.ipynb",
+        "version": "1.2"
+      }
+    },
+    {
+      "id": "ex:sdl/experiment/assembly",
+      "label": "Experiment",
+      "props": {
+        "name": "assembling the campaign's runs into one table",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods, data",
+            "source": "ex:sdl/source/paper"
+          }
+        ],
+        "execution_environment": "ex:sdl/dataset/container",
+        "experiment_kind": "computational",
+        "goal": "compute",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:sdl/descriptor/cu-fraction",
+      "label": "Descriptor",
+      "props": {
+        "name": "molar Cu fraction (metals basis)",
+        "definition": "Cu over Cu + Zn + Al, molar",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods, surrogate",
+            "source": "ex:sdl/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "quantity_kind": "composition_fraction"
+      }
+    },
+    {
+      "id": "ex:sdl/model/gp-surrogate",
+      "label": "Model",
+      "props": {
+        "name": "Gaussian-process surrogate of the space-time yield",
+        "architecture": "A Gaussian process with a Matern 5/2 kernel on the Cu and Zn fractions and the temperature, scaled to 0-1, and a white-noise term.",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods, surrogate",
+            "source": "ex:sdl/source/paper"
+          }
+        ],
+        "hyperparameters": {
+          "length_scale": {
+            "status": "present",
+            "definition": "the kernel's, on the scaled inputs",
+            "unit": "1",
+            "value": 0.15
+          },
+          "noise_level": {
+            "status": "present",
+            "definition": "as a share of the yield's range",
+            "unit": "1",
+            "value": 0.02
+          }
+        },
+        "model_kind": "Gaussian-process regression",
+        "origin": "synthetic",
+        "training_objective": "Maximum marginal likelihood of the campaign's completed runs.",
+        "uncertainty_calibration": "91 % of held-out yields fell inside the 95 % predictive interval in the grouped cross-validation.",
+        "uncertainty_components": "both_separately",
+        "uncertainty_method": "gaussian_process",
+        "uncertainty_use": "Expected improvement chose each round's runs; a proposal whose predictive standard deviation exceeded 0.2 g/(g h) was flagged for the operator.",
+        "validity_domain": "Cu 40-80 %, Zn 10-50 %, Al 10 % (molar, metals basis), 230-300 °C, 30 bar, H2/CO2 = 3.",
+        "version": "round-3"
+      }
+    },
+    {
+      "id": "ex:sdl/experiment/gp-fit",
+      "label": "Experiment",
+      "props": {
+        "name": "fitting the surrogate to the completed runs of rounds 1-3",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods, surrogate",
+            "source": "ex:sdl/source/paper"
+          }
+        ],
+        "execution_environment": "ex:sdl/dataset/container",
+        "experiment_kind": "computational",
+        "goal": "calibrate",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:sdl/experiment/gp-grouped-cv",
+      "label": "Experiment",
+      "props": {
+        "name": "five-fold cross-validation, one composition family per fold",
+        "evidence": [
+          {
+            "id": "mae_gp-grouped-cv",
+            "kind": "table",
+            "locator": "Table 3",
+            "source": "ex:sdl/source/paper"
+          }
+        ],
+        "execution_environment": "ex:sdl/dataset/container",
+        "experiment_kind": "computational",
+        "goal": "validate",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "mae",
+            "status": "present",
+            "evidence_ids": [
+              "mae_gp-grouped-cv"
+            ],
+            "uncertainty": 0.05,
+            "uncertainty_kind": "standard_deviation",
+            "unit": "g/(g h)",
+            "value": 0.21,
+            "variable": "ex:sdl/variable/sty-mae"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:sdl/experiment/gp-random-cv",
+      "label": "Experiment",
+      "props": {
+        "name": "five-fold cross-validation with random folds",
+        "evidence": [
+          {
+            "id": "mae_gp-random-cv",
+            "kind": "table",
+            "locator": "Table 3",
+            "source": "ex:sdl/source/paper"
+          }
+        ],
+        "execution_environment": "ex:sdl/dataset/container",
+        "experiment_kind": "computational",
+        "goal": "validate",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "mae",
+            "status": "present",
+            "evidence_ids": [
+              "mae_gp-random-cv"
+            ],
+            "unit": "g/(g h)",
+            "value": 0.12,
+            "variable": "ex:sdl/variable/sty-mae"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:sdl/computation/round-4-predictions",
+      "label": "Computation",
+      "props": {
+        "name": "the surrogate's predictions for round 4",
+        "computation_kind": "machine_learned",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 3",
+            "source": "ex:sdl/source/paper"
+          }
+        ],
+        "execution_environment": "ex:sdl/dataset/container",
+        "origin": "synthetic",
+        "task": "predicting the space-time yield of untested compositions"
+      }
+    },
+    {
+      "id": "ex:sdl/software/extraction-agent",
+      "label": "Software",
+      "props": {
+        "name": "the agent that extracted these records",
+        "origin": "synthetic",
+        "software_kind": "agent",
+        "version": "0.4.0"
+      }
+    },
+    {
+      "id": "ex:sdl/person/checker",
+      "label": "Person",
+      "props": {
+        "name": "Invented checker",
+        "origin": "synthetic"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:sdl/link/1",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:sdl/reaction/co2-to-methanol",
+      "target": "ex:sdl/species/co2"
+    },
+    {
+      "id": "ex:sdl/link/2",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 3,
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:sdl/reaction/co2-to-methanol",
+      "target": "ex:sdl/species/h2"
+    },
+    {
+      "id": "ex:sdl/link/3",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "role": "product"
+      },
+      "source": "ex:sdl/reaction/co2-to-methanol",
+      "target": "ex:sdl/species/methanol"
+    },
+    {
+      "id": "ex:sdl/link/4",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "role": "product"
+      },
+      "source": "ex:sdl/reaction/co2-to-methanol",
+      "target": "ex:sdl/species/h2o"
+    },
+    {
+      "id": "ex:sdl/link/5",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:sdl/feed/h2-co2",
+      "target": "ex:sdl/species/co2"
+    },
+    {
+      "id": "ex:sdl/link/6",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:sdl/feed/h2-co2",
+      "target": "ex:sdl/species/h2"
+    },
+    {
+      "id": "ex:sdl/link/7",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sdl/sample/cu60zn30",
+      "target": "ex:sdl/catalyst/cu60zn30"
+    },
+    {
+      "id": "ex:sdl/link/8",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sdl/sample/cu70zn20",
+      "target": "ex:sdl/catalyst/cu70zn20"
+    },
+    {
+      "id": "ex:sdl/link/9",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sdl/sample/cu50zn40",
+      "target": "ex:sdl/catalyst/cu50zn40"
+    },
+    {
+      "id": "ex:sdl/link/10",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "reduced"
+      },
+      "source": "ex:sdl/test/round-1",
+      "target": "ex:sdl/sample/cu60zn30"
+    },
+    {
+      "id": "ex:sdl/link/11",
+      "type": "FED_WITH",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sdl/test/round-1",
+      "target": "ex:sdl/feed/h2-co2"
+    },
+    {
+      "id": "ex:sdl/link/12",
+      "type": "IN_REACTOR",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sdl/test/round-1",
+      "target": "ex:sdl/instrument/parallel-reactor"
+    },
+    {
+      "id": "ex:sdl/link/13",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sdl/test/round-1",
+      "target": "ex:sdl/reaction/co2-to-methanol"
+    },
+    {
+      "id": "ex:sdl/link/14",
+      "type": "PART_OF_DESIGN",
+      "props": {
+        "iteration": 1,
+        "origin": "synthetic",
+        "run_order": 1
+      },
+      "source": "ex:sdl/test/round-1",
+      "target": "ex:sdl/design/campaign"
+    },
+    {
+      "id": "ex:sdl/link/15",
+      "type": "PROPOSED_BY",
+      "props": {
+        "acquisition_value": 0.4,
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Supplementary Table 3",
+            "source": "ex:sdl/source/paper"
+          }
+        ],
+        "human_decision": "approved",
+        "origin": "synthetic",
+        "proposed_at": "2026-03-02T09:00:00Z"
+      },
+      "source": "ex:sdl/test/round-1",
+      "target": "ex:sdl/software/bo-agent"
+    },
+    {
+      "id": "ex:sdl/link/16",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "reduced"
+      },
+      "source": "ex:sdl/test/round-2",
+      "target": "ex:sdl/sample/cu70zn20"
+    },
+    {
+      "id": "ex:sdl/link/17",
+      "type": "FED_WITH",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sdl/test/round-2",
+      "target": "ex:sdl/feed/h2-co2"
+    },
+    {
+      "id": "ex:sdl/link/18",
+      "type": "IN_REACTOR",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sdl/test/round-2",
+      "target": "ex:sdl/instrument/parallel-reactor"
+    },
+    {
+      "id": "ex:sdl/link/19",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sdl/test/round-2",
+      "target": "ex:sdl/reaction/co2-to-methanol"
+    },
+    {
+      "id": "ex:sdl/link/20",
+      "type": "PART_OF_DESIGN",
+      "props": {
+        "iteration": 2,
+        "origin": "synthetic",
+        "run_order": 2
+      },
+      "source": "ex:sdl/test/round-2",
+      "target": "ex:sdl/design/campaign"
+    },
+    {
+      "id": "ex:sdl/link/21",
+      "type": "PROPOSED_BY",
+      "props": {
+        "acquisition_value": 0.2,
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Supplementary Table 3",
+            "source": "ex:sdl/source/paper"
+          }
+        ],
+        "human_decision": "modified",
+        "origin": "synthetic",
+        "proposed_at": "2026-03-03T09:00:00Z"
+      },
+      "source": "ex:sdl/test/round-2",
+      "target": "ex:sdl/software/bo-agent"
+    },
+    {
+      "id": "ex:sdl/link/22",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "reduced"
+      },
+      "source": "ex:sdl/test/round-3",
+      "target": "ex:sdl/sample/cu50zn40"
+    },
+    {
+      "id": "ex:sdl/link/23",
+      "type": "FED_WITH",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sdl/test/round-3",
+      "target": "ex:sdl/feed/h2-co2"
+    },
+    {
+      "id": "ex:sdl/link/24",
+      "type": "IN_REACTOR",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sdl/test/round-3",
+      "target": "ex:sdl/instrument/parallel-reactor"
+    },
+    {
+      "id": "ex:sdl/link/25",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sdl/test/round-3",
+      "target": "ex:sdl/reaction/co2-to-methanol"
+    },
+    {
+      "id": "ex:sdl/link/26",
+      "type": "PART_OF_DESIGN",
+      "props": {
+        "iteration": 3,
+        "origin": "synthetic",
+        "run_order": 3
+      },
+      "source": "ex:sdl/test/round-3",
+      "target": "ex:sdl/design/campaign"
+    },
+    {
+      "id": "ex:sdl/link/27",
+      "type": "PROPOSED_BY",
+      "props": {
+        "acquisition_value": 0.133,
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Supplementary Table 3",
+            "source": "ex:sdl/source/paper"
+          }
+        ],
+        "human_decision": "approved",
+        "origin": "synthetic",
+        "proposed_at": "2026-03-04T09:00:00Z"
+      },
+      "source": "ex:sdl/test/round-3",
+      "target": "ex:sdl/software/bo-agent"
+    },
+    {
+      "id": "ex:sdl/link/28",
+      "type": "PART_OF_DESIGN",
+      "props": {
+        "iteration": 3,
+        "origin": "synthetic",
+        "run_order": 4
+      },
+      "source": "ex:sdl/experiment/round-3-rejected",
+      "target": "ex:sdl/design/campaign"
+    },
+    {
+      "id": "ex:sdl/link/29",
+      "type": "PROPOSED_BY",
+      "props": {
+        "acquisition_value": 0.31,
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Supplementary Table 3",
+            "source": "ex:sdl/source/paper"
+          }
+        ],
+        "human_decision": "rejected",
+        "origin": "synthetic",
+        "proposed_at": "2026-03-04T09:00:00Z",
+        "rationale": "outside the compositions the robot can coprecipitate"
+      },
+      "source": "ex:sdl/experiment/round-3-rejected",
+      "target": "ex:sdl/software/bo-agent"
+    },
+    {
+      "id": "ex:sdl/link/30",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:sdl/experiment/assembly",
+      "target": "ex:sdl/test/round-1"
+    },
+    {
+      "id": "ex:sdl/link/31",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:sdl/experiment/assembly",
+      "target": "ex:sdl/test/round-2"
+    },
+    {
+      "id": "ex:sdl/link/32",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:sdl/experiment/assembly",
+      "target": "ex:sdl/test/round-3"
+    },
+    {
+      "id": "ex:sdl/link/33",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sdl/experiment/assembly",
+      "target": "ex:sdl/dataset/campaign-runs"
+    },
+    {
+      "id": "ex:sdl/link/34",
+      "type": "USES_SOFTWARE",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sdl/experiment/assembly",
+      "target": "ex:sdl/software/assembly-script"
+    },
+    {
+      "id": "ex:sdl/link/35",
+      "type": "USES_DESCRIPTOR",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sdl/model/gp-surrogate",
+      "target": "ex:sdl/descriptor/cu-fraction"
+    },
+    {
+      "id": "ex:sdl/link/36",
+      "type": "EVALUATES",
+      "props": {
+        "evaluation_kind": "calibration",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods, surrogate",
+            "source": "ex:sdl/source/paper"
+          }
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:sdl/experiment/gp-fit",
+      "target": "ex:sdl/model/gp-surrogate"
+    },
+    {
+      "id": "ex:sdl/link/37",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "training_data"
+      },
+      "source": "ex:sdl/experiment/gp-fit",
+      "target": "ex:sdl/dataset/campaign-runs"
+    },
+    {
+      "id": "ex:sdl/link/38",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "validation_data"
+      },
+      "source": "ex:sdl/experiment/gp-grouped-cv",
+      "target": "ex:sdl/dataset/campaign-runs"
+    },
+    {
+      "id": "ex:sdl/link/39",
+      "type": "EVALUATES",
+      "props": {
+        "criterion": "MAE below 0.25 g/(g h)",
+        "evaluation_kind": "validation",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 3",
+            "source": "ex:sdl/source/paper"
+          }
+        ],
+        "folds": 5,
+        "generalization": "local_extrapolation",
+        "grouped_by": "composition family (the Cu:Zn ratio)",
+        "origin": "synthetic",
+        "outcome": "passes",
+        "preprocessing_within_split": true,
+        "result_refs": [
+          {
+            "path": "/result_values/mae",
+            "record": "ex:sdl/experiment/gp-grouped-cv"
+          }
+        ],
+        "split_seed": 11,
+        "split_strategy": "grouped"
+      },
+      "source": "ex:sdl/experiment/gp-grouped-cv",
+      "target": "ex:sdl/model/gp-surrogate"
+    },
+    {
+      "id": "ex:sdl/link/40",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "validation_data"
+      },
+      "source": "ex:sdl/experiment/gp-random-cv",
+      "target": "ex:sdl/dataset/campaign-runs"
+    },
+    {
+      "id": "ex:sdl/link/41",
+      "type": "EVALUATES",
+      "props": {
+        "criterion": "MAE below 0.25 g/(g h)",
+        "evaluation_kind": "validation",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 3",
+            "source": "ex:sdl/source/paper"
+          }
+        ],
+        "folds": 5,
+        "origin": "synthetic",
+        "outcome": "passes",
+        "result_refs": [
+          {
+            "path": "/result_values/mae",
+            "record": "ex:sdl/experiment/gp-random-cv"
+          }
+        ],
+        "split_seed": 11,
+        "split_strategy": "random"
+      },
+      "source": "ex:sdl/experiment/gp-random-cv",
+      "target": "ex:sdl/model/gp-surrogate"
+    },
+    {
+      "id": "ex:sdl/link/42",
+      "type": "USES_MODEL",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sdl/computation/round-4-predictions",
+      "target": "ex:sdl/model/gp-surrogate"
+    },
+    {
+      "id": "ex:sdl/link/43",
+      "type": "USES_SOFTWARE",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:sdl/computation/round-4-predictions",
+      "target": "ex:sdl/software/bo-agent"
+    },
+    {
+      "id": "ex:sdl/catalyst/cu50zn40/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:sdl/catalyst/cu50zn40",
+      "target": "ex:sdl/source/paper"
+    },
+    {
+      "id": "ex:sdl/catalyst/cu60zn30/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:sdl/catalyst/cu60zn30",
+      "target": "ex:sdl/source/paper"
+    },
+    {
+      "id": "ex:sdl/catalyst/cu70zn20/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:sdl/catalyst/cu70zn20",
+      "target": "ex:sdl/source/paper"
+    },
+    {
+      "id": "ex:sdl/computation/round-4-predictions/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:sdl/computation/round-4-predictions",
+      "target": "ex:sdl/source/paper"
+    },
+    {
+      "id": "ex:sdl/dataset/campaign-runs/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Data availability"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:sdl/dataset/campaign-runs",
+      "target": "ex:sdl/source/paper"
+    },
+    {
+      "id": "ex:sdl/dataset/container/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Code availability"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:sdl/dataset/container",
+      "target": "ex:sdl/source/paper"
+    },
+    {
+      "id": "ex:sdl/dataset/notebook/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Code availability"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:sdl/dataset/notebook",
+      "target": "ex:sdl/source/paper"
+    },
+    {
+      "id": "ex:sdl/descriptor/cu-fraction/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods, surrogate"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:sdl/descriptor/cu-fraction",
+      "target": "ex:sdl/source/paper"
+    },
+    {
+      "id": "ex:sdl/design/campaign/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 2",
+          "Methods, agent"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:sdl/design/campaign",
+      "target": "ex:sdl/source/paper"
+    },
+    {
+      "id": "ex:sdl/experiment/assembly/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods, data"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:sdl/experiment/assembly",
+      "target": "ex:sdl/source/paper"
+    },
+    {
+      "id": "ex:sdl/experiment/gp-fit/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods, surrogate"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:sdl/experiment/gp-fit",
+      "target": "ex:sdl/source/paper"
+    },
+    {
+      "id": "ex:sdl/experiment/gp-grouped-cv/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:sdl/experiment/gp-grouped-cv",
+      "target": "ex:sdl/source/paper"
+    },
+    {
+      "id": "ex:sdl/experiment/gp-random-cv/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:sdl/experiment/gp-random-cv",
+      "target": "ex:sdl/source/paper"
+    },
+    {
+      "id": "ex:sdl/experiment/round-3-rejected/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Supplementary Table 3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:sdl/experiment/round-3-rejected",
+      "target": "ex:sdl/source/paper"
+    },
+    {
+      "id": "ex:sdl/feed/h2-co2/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods, catalytic testing"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:sdl/feed/h2-co2",
+      "target": "ex:sdl/source/paper"
+    },
+    {
+      "id": "ex:sdl/instrument/parallel-reactor/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods, catalytic testing"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:sdl/instrument/parallel-reactor",
+      "target": "ex:sdl/source/paper"
+    },
+    {
+      "id": "ex:sdl/model/gp-surrogate/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods, surrogate"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:sdl/model/gp-surrogate",
+      "target": "ex:sdl/source/paper"
+    },
+    {
+      "id": "ex:sdl/sample/cu50zn40/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:sdl/sample/cu50zn40",
+      "target": "ex:sdl/source/paper"
+    },
+    {
+      "id": "ex:sdl/sample/cu60zn30/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:sdl/sample/cu60zn30",
+      "target": "ex:sdl/source/paper"
+    },
+    {
+      "id": "ex:sdl/sample/cu70zn20/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:sdl/sample/cu70zn20",
+      "target": "ex:sdl/source/paper"
+    },
+    {
+      "id": "ex:sdl/software/assembly-script/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Code availability"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:sdl/software/assembly-script",
+      "target": "ex:sdl/source/paper"
+    },
+    {
+      "id": "ex:sdl/software/bo-agent/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods, agent"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:sdl/software/bo-agent",
+      "target": "ex:sdl/source/paper"
+    },
+    {
+      "id": "ex:sdl/test/round-1/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:sdl/test/round-1",
+      "target": "ex:sdl/source/paper"
+    },
+    {
+      "id": "ex:sdl/test/round-2/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:sdl/test/round-2",
+      "target": "ex:sdl/source/paper"
+    },
+    {
+      "id": "ex:sdl/test/round-3/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:sdl/test/round-3",
+      "target": "ex:sdl/source/paper"
+    }
+  ],
+  "directed": true,
+  "graph": {
+    "checks": [
+      {
+        "acknowledged": [
+          {
+            "reason": "the source states it, and the schema has no place for a dispensing tolerance yet; kept in unmodeled and raised as a gap",
+            "record": "ex:sdl/design/campaign",
+            "warning": "unmodeled context: the robot's liquid-handling tolerance"
+          }
+        ],
+        "checked_by": "ex:sdl/person/checker",
+        "checked_on": "2026-10-21",
+        "fields_checked": 46,
+        "fields_missed": 2,
+        "fields_wrong": 1,
+        "fraction": 0.3,
+        "note": "Round 2's pressure had been read as gauge; the paper gives absolute pressures, and it was corrected. Two space velocities were missing and were added.",
+        "outcome": "corrected",
+        "records": [
+          "ex:sdl/test/round-1",
+          "ex:sdl/test/round-2",
+          "ex:sdl/test/round-3",
+          "ex:sdl/model/gp-surrogate",
+          "ex:sdl/experiment/gp-grouped-cv"
+        ],
+        "scope": "each value, unit, locator and quote of the records against the invented paper (Methods, Tables 1-3, Supplementary Table 3)",
+        "seed": 3,
+        "selection": "sample_and_flagged",
+        "tolerance": "the digits printed"
+      }
+    ],
+    "data_status": "synthetic_example",
+    "follows_domains": [
+      "catalysis"
+    ],
+    "graph_id": "ex:invalid/acknowledgement-on-an-unchecked-record",
+    "schema": "scale-catal",
+    "schema_version": "0.7.2",
+    "stewardship": {
+      "access": "public",
+      "autonomy_level": "A3",
+      "curated_by": [
+        "ex:sdl/software/extraction-agent"
+      ]
+    },
+    "title": "INVALID FIXTURE (acknowledgement-on-an-unchecked-record): a warning acknowledged on a record the check does not cover"
+  },
+  "multigraph": true
+}
