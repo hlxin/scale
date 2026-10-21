@@ -182,3 +182,61 @@ def test_the_command_checks_lists_and_exports_the_mappings():
     assert r.returncode != 0 and "--layer kernel or --layer catalysis" in r.stderr
     r = run("--areas")
     assert r.returncode == 0 and "Biocatalysis" in r.stdout and "nothing yet" in r.stdout
+
+
+# ---- quantity kinds and units (the kernel's set): QUDT, and SBO for an enzyme's turnover frequency
+
+def test_quantity_kinds_and_units_map_to_qudt_and_keep_what_scale_leaves_open(spec):
+    idx = mappings.index(REPO)
+    assert idx["kind:temperature"][0]["term"] == "quantitykind:Temperature"
+    assert {m["term"]: m["match"] for m in idx["kind:flow_rate"]} == {
+        "quantitykind:VolumeFlowRate": "narrow", "quantitykind:MolarFlowRate": "narrow",
+        "quantitykind:MassFlowRate": "narrow"}
+    assert any(m["term"] == "SBO:0000025" and m["match"] == "narrow" for m in idx["kind:turnover_frequency"])
+    assert idx["unit:°C"] == [{"match": "exact", "term": "unit:DEG_C", "label": "Degree Celsius",
+                               "iri": "http://qudt.org/vocab/unit/DEG_C"}]
+    assert idx["unit:mL/min"][0]["term"] == "unit:MilliL-PER-MIN"
+    # a gallon or a calorie is whichever the source printed: each of QUDT's definitions is narrower
+    assert {m["term"]: m["match"] for m in idx["unit:gal"]} == {"unit:GAL_US": "narrow", "unit:GAL_UK": "narrow"}
+    assert {m["match"] for m in idx["unit:cal"]} == {"narrow"}
+    # the reference conditions of a normal volume are not fixed by SCALE
+    assert idx["unit:Nm3"][0]["match"] == "close"
+    # every unit mapped is one SCALE reads, and every kind one its contracts declare
+    from scale.quantities import contracts
+    qc = contracts(spec)
+    for subject in idx:
+        if subject.startswith("unit:"):
+            r = qc.read_unit(subject[5:])
+            assert r.read and not r.unread, subject
+        elif subject.startswith("kind:"):
+            assert subject[5:] in qc.kinds, subject
+
+
+def test_a_unit_scale_does_not_read_or_an_unknown_kind_is_an_error(tmp_path, spec):
+    kern = load_yaml(REPO / layout.KERNEL_MAPPINGS)
+    kern["units"]["furlong"] = [{"match": "exact", "term": "unit:FUR", "label": "Furlong"}]
+    kern["kinds"]["turnover_rate"] = [{"match": "close", "term": "quantitykind:Frequency", "label": "Frequency"}]
+    cat = load_yaml(REPO / layout.DOMAIN_MAPPINGS)
+    cat["units"] = {"kPa": [{"match": "exact", "term": "unit:KiloPA", "label": "Kilopascal"}]}
+    msgs = _messages(mappings.check(_tree(tmp_path, kernel=kern, catalysis=cat), spec))
+    assert any("unit:furlong: the unit vocabulary does not read 'furlong'" in x for x in msgs), msgs
+    assert any("kind:turnover_rate: no quantity kind 'turnover_rate'" in x for x in msgs), msgs
+    assert any("unit:kPa: quantity kinds and units are the kernel's" in x for x in msgs), msgs
+
+
+def test_describe_shows_a_quantity_kinds_mappings(spec):
+    d = pgraph.describe(spec, None, None, mappings.index(REPO))
+    temp = d["quantity_kinds"]["temperature"]["mappings"]
+    assert temp[0]["term"] == "quantitykind:Temperature" and temp[0]["iri"] == "http://qudt.org/vocab/quantitykind/Temperature"
+    assert "mappings" not in d["quantity_kinds"]["activation_energy"]      # QUDT has no activation energy
+
+
+def test_the_kernels_sssom_export_names_kinds_and_units_by_their_section():
+    lines = mappings.sssom(REPO, "kernel", "0.7.0").splitlines()
+    meta = yaml.safe_load("\n".join(x[2:] for x in lines if x.startswith("# ")))
+    assert {"unit", "quantitykind", "SBO", "scalekernel"} <= set(meta["curie_map"])
+    body = [x.split("\t") for x in lines if not x.startswith("#")][1:]
+    row = {(r[0], r[3]): r for r in body}
+    assert row[("scalekernel:unit/°C", "unit:DEG_C")][2] == "skos:exactMatch"
+    assert row[("scalekernel:kind/temperature", "quantitykind:Temperature")][1] == "temperature"
+    assert len(body) == mappings.check(REPO)["counts"]["kernel"]

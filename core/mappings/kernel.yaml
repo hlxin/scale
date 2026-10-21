@@ -14,6 +14,11 @@
 # identifier shows; `note` says why, where the match is not obvious. Every term was looked up in the release
 # its ontology's entry names (checked), and none is obsolete.
 #
+# `kinds` maps the quantity kinds of the kernel's quantity contracts, by name, and `units` the units its unit
+# vocabulary reads, spelled as SCALE reads them, to QUDT (and a kind to SBO). SCALE reads a unit by its dimension only:
+# a gallon, a ton, a calorie or a Btu is whichever one the source printed, so each of QUDT's definitions of it is
+# narrower (narrow); normal and standard volumes do not fix their reference conditions (close).
+#
 # The kernel's own `maps_to` (in core/graph/kernel.yaml) names related vocabulary terms in words; this set gives
 # their identifiers where an ontology defines one. Checked by `scale domains check`; listed by
 # `scale schema mappings`. See docs/mappings.md.
@@ -209,3 +214,602 @@ mappings:
   - match: close
     term: schema:funder
     label: funder
+kinds:
+  temperature:
+  - match: close
+    term: quantitykind:Temperature
+    label: Temperature
+  pressure:
+  - match: close
+    term: quantitykind:Pressure
+    label: Pressure
+    note: SCALE keeps absolute and gauge pressures apart by their convention.
+  electrode_potential:
+  - match: broad
+    term: quantitykind:ElectricPotential
+    label: Electric Potential
+    note: "An electrode potential is measured against a reference electrode, on a stated scale."
+  electric_potential:
+  - match: close
+    term: quantitykind:ElectricPotentialDifference
+    label: Electric Potential Difference
+  electric_current:
+  - match: close
+    term: quantitykind:ElectricCurrent
+    label: Electric Current
+  current_density:
+  - match: narrow
+    term: quantitykind:ElectricCurrentDensity
+    label: Electric Current Density
+    note: "SCALE's current density may also be divided by a catalyst mass."
+  concentration:
+  - match: narrow
+    term: quantitykind:Concentration
+    label: Concentration
+    note: "SCALE's concentration also covers molality, an amount per mass of solvent."
+  composition_fraction:
+  - match: narrow
+    term: quantitykind:AmountOfSubstanceFraction
+    label: Fractional Amount of Substance
+    note: "SCALE's share may also be by mass, atoms or volume."
+  - match: narrow
+    term: quantitykind:VolumeFraction
+    label: Volume Fraction
+    note: "SCALE's share may also be by mass, mole or atoms."
+  flow_rate:
+  - match: narrow
+    term: quantitykind:VolumeFlowRate
+    label: Volume Flow Rate
+    note: "SCALE's flow rate may also be molar or by mass."
+  - match: narrow
+    term: quantitykind:MolarFlowRate
+    label: Molar Flow Rate
+    note: "SCALE's flow rate may also be volumetric or by mass."
+  - match: narrow
+    term: quantitykind:MassFlowRate
+    label: Mass Flow Rate
+    note: "SCALE's flow rate may also be volumetric or molar."
+  product_amount:
+  - match: narrow
+    term: quantitykind:AmountOfSubstance
+    label: Amount of Substance
+    note: "SCALE's product amount may also be a mass or a gas volume."
+  site_count:
+  - match: narrow
+    term: quantitykind:Count
+    label: Count
+    note: "SCALE's site count may also be an amount (µmol) or per catalyst mass."
+  efficiency:
+  - match: close
+    term: quantitykind:Efficiency
+    label: Efficiency
+  faradaic_efficiency:
+  - match: broad
+    term: quantitykind:Efficiency
+    label: Efficiency
+  turnover_frequency:
+  - match: broad
+    term: quantitykind:InverseTime
+    label: Inverse Time
+  - match: narrow
+    term: SBO:0000025
+    label: catalytic rate constant
+    note: SBO's catalytic rate constant (kcat) is an enzyme's turnover frequency at substrate saturation.
+  electronic_energy:
+  - match: broad
+    term: quantitykind:Energy
+    label: Energy
+  reaction_energy:
+  - match: broad
+    term: quantitykind:Energy
+    label: Energy
+  reaction_enthalpy:
+  - match: broad
+    term: quantitykind:Enthalpy
+    label: Enthalpy
+  reaction_free_energy:
+  - match: related
+    term: quantitykind:GibbsEnergy
+    label: Gibbs Energy
+    note: "SCALE's free energy may also be grand-canonical, at constant potential."
+  conversion:
+  - match: broad
+    term: quantitykind:DimensionlessRatio
+    label: Dimensionless Ratio
+  selectivity:
+  - match: broad
+    term: quantitykind:DimensionlessRatio
+    label: Dimensionless Ratio
+  product_yield:
+  - match: broad
+    term: quantitykind:DimensionlessRatio
+    label: Dimensionless Ratio
+  fraction:
+  - match: broad
+    term: quantitykind:DimensionlessRatio
+    label: Dimensionless Ratio
+  species_fraction:
+  - match: broad
+    term: quantitykind:DimensionlessRatio
+    label: Dimensionless Ratio
+  balance:
+  - match: broad
+    term: quantitykind:DimensionlessRatio
+    label: Dimensionless Ratio
+  site_fraction:
+  - match: broad
+    term: quantitykind:DimensionlessRatio
+    label: Dimensionless Ratio
+  quantum_yield:
+  - match: broad
+    term: quantitykind:DimensionlessRatio
+    label: Dimensionless Ratio
+  photonic_yield:
+  - match: broad
+    term: quantitykind:DimensionlessRatio
+    label: Dimensionless Ratio
+  degree_of_rate_control:
+  - match: broad
+    term: quantitykind:DimensionlessRatio
+    label: Dimensionless Ratio
+units:
+  "°C":
+  - match: exact
+    term: unit:DEG_C
+    label: Degree Celsius
+  K:
+  - match: exact
+    term: unit:K
+    label: Kelvin
+  "°F":
+  - match: exact
+    term: unit:DEG_F
+    label: Degree Fahrenheit
+  "°R":
+  - match: exact
+    term: unit:DEG_R
+    label: Degree Rankine
+  s:
+  - match: exact
+    term: unit:SEC
+    label: Second
+  min:
+  - match: exact
+    term: unit:MIN
+    label: Minute
+  h:
+  - match: exact
+    term: unit:HR
+    label: Hour
+  d:
+  - match: exact
+    term: unit:DAY
+    label: Day
+  week:
+  - match: exact
+    term: unit:WK
+    label: Week
+  yr:
+  - match: close
+    term: unit:YR
+    label: Year
+    note: SCALE does not say which year it means.
+  m:
+  - match: exact
+    term: unit:M
+    label: Metre
+  cm:
+  - match: exact
+    term: unit:CentiM
+    label: Centimetre
+  mm:
+  - match: exact
+    term: unit:MilliM
+    label: Millimetre
+  "μm":
+  - match: exact
+    term: unit:MicroM
+    label: Micrometre
+  nm:
+  - match: exact
+    term: unit:NanoM
+    label: Nanometre
+  "Å":
+  - match: exact
+    term: unit:ANGSTROM
+    label: Angstrom
+  in:
+  - match: exact
+    term: unit:IN
+    label: Inch
+  ft:
+  - match: exact
+    term: unit:FT
+    label: Foot
+  m2:
+  - match: exact
+    term: unit:M2
+    label: Square Metre
+  cm2:
+  - match: exact
+    term: unit:CentiM2
+    label: Square Centimetre
+  L:
+  - match: exact
+    term: unit:L
+    label: Litre
+  mL:
+  - match: exact
+    term: unit:MilliL
+    label: Millilitre
+  "μL":
+  - match: exact
+    term: unit:MicroL
+    label: Microlitre
+  cc:
+  - match: exact
+    term: unit:CentiM3
+    label: Cubic Centimetre
+  m3:
+  - match: exact
+    term: unit:M3
+    label: Cubic Metre
+  gal:
+  - match: narrow
+    term: unit:GAL_US
+    label: Us Gallon
+    note: "SCALE reads a gallon as printed, without saying US or UK."
+  - match: narrow
+    term: unit:GAL_UK
+    label: Gallon (UK)
+    note: "SCALE reads a gallon as printed, without saying US or UK."
+  g:
+  - match: exact
+    term: unit:GM
+    label: Gram
+  mg:
+  - match: exact
+    term: unit:MilliGM
+    label: Milligram
+  kg:
+  - match: exact
+    term: unit:KiloGM
+    label: Kilogram
+  lb:
+  - match: exact
+    term: unit:LB
+    label: Pound Mass
+  tonne:
+  - match: exact
+    term: unit:TONNE
+    label: Tonne
+  ton:
+  - match: narrow
+    term: unit:TON_Metric
+    label: Metric Ton
+    note: "SCALE reads a ton as printed, without saying metric, short or long."
+  - match: narrow
+    term: unit:TON_SHORT
+    label: Short Ton
+    note: "SCALE reads a ton as printed, without saying metric, short or long."
+  - match: narrow
+    term: unit:TON_LONG
+    label: Long Ton
+    note: "SCALE reads a ton as printed, without saying metric, short or long."
+  mol:
+  - match: exact
+    term: unit:MOL
+    label: Mole
+  mmol:
+  - match: exact
+    term: unit:MilliMOL
+    label: Millimole
+  "μmol":
+  - match: exact
+    term: unit:MicroMOL
+    label: Micromole
+  lbmol:
+  - match: exact
+    term: unit:MOL_LB
+    label: Pound Mole
+  A:
+  - match: exact
+    term: unit:A
+    label: Ampere
+  mA:
+  - match: exact
+    term: unit:MilliA
+    label: Milliampere
+  V:
+  - match: exact
+    term: unit:V
+    label: Volt
+  mV:
+  - match: exact
+    term: unit:MilliV
+    label: Millivolt
+  kV:
+  - match: exact
+    term: unit:KiloV
+    label: Kilovolt
+  W:
+  - match: exact
+    term: unit:W
+    label: Watt
+  mW:
+  - match: exact
+    term: unit:MilliW
+    label: Milliwatt
+  kW:
+  - match: exact
+    term: unit:KiloW
+    label: Kilowatt
+  J:
+  - match: exact
+    term: unit:J
+    label: Joule
+  kJ:
+  - match: exact
+    term: unit:KiloJ
+    label: Kilojoule
+  MJ:
+  - match: exact
+    term: unit:MegaJ
+    label: Megajoule
+  eV:
+  - match: exact
+    term: unit:EV
+    label: Electron Volt
+  Wh:
+  - match: exact
+    term: unit:W-HR
+    label: Watt Hour
+  kWh:
+  - match: exact
+    term: unit:KiloW-HR
+    label: Kilowatt Hour
+  cal:
+  - match: narrow
+    term: unit:CAL_TH
+    label: Thermochemical Calorie
+    note: "SCALE reads a calorie as printed, without saying thermochemical or international."
+  - match: narrow
+    term: unit:CAL_IT
+    label: International Table Calorie
+    note: "SCALE reads a calorie as printed, without saying thermochemical or international."
+  kcal:
+  - match: narrow
+    term: unit:KiloCAL_TH
+    label: Kilo Thermochemical Calorie
+    note: "SCALE reads a calorie as printed, without saying thermochemical or international."
+  - match: narrow
+    term: unit:KiloCAL_IT
+    label: Kilo International Table Calorie
+    note: "SCALE reads a calorie as printed, without saying thermochemical or international."
+  Btu:
+  - match: narrow
+    term: unit:BTU_IT
+    label: British Thermal Unit (international Definition)
+    note: "SCALE reads a Btu as printed, without saying which definition."
+  - match: narrow
+    term: unit:BTU_TH
+    label: British Thermal Unit (thermochemical Definition)
+    note: "SCALE reads a Btu as printed, without saying which definition."
+  Ha:
+  - match: exact
+    term: unit:E_h
+    label: Hartree
+  Hz:
+  - match: exact
+    term: unit:HZ
+    label: Hertz
+  kHz:
+  - match: exact
+    term: unit:KiloHZ
+    label: Kilohertz
+  MHz:
+  - match: exact
+    term: unit:MegaHZ
+    label: Megahertz
+  GHz:
+  - match: exact
+    term: unit:GigaHZ
+    label: Gigahertz
+  Pa:
+  - match: exact
+    term: unit:PA
+    label: Pascal
+  kPa:
+  - match: exact
+    term: unit:KiloPA
+    label: Kilopascal
+  MPa:
+  - match: exact
+    term: unit:MegaPA
+    label: Megapascal
+  bar:
+  - match: exact
+    term: unit:BAR
+    label: Bar
+  mbar:
+  - match: exact
+    term: unit:MilliBAR
+    label: Millibar
+  bara:
+  - match: exact
+    term: unit:BAR_A
+    label: Bar Absolute
+  Torr:
+  - match: exact
+    term: unit:TORR
+    label: Torr
+  atm:
+  - match: exact
+    term: unit:ATM
+    label: Standard Atmosphere
+  at:
+  - match: exact
+    term: unit:ATM_T
+    label: Technical Atmosphere
+  psi:
+  - match: exact
+    term: unit:PSI
+    label: Psi
+  mmHg:
+  - match: exact
+    term: unit:MilliM_HG
+    label: Millimetre of Mercury
+  cmHg:
+  - match: exact
+    term: unit:CentiM_HG
+    label: Centimetre of Mercury
+  inHg:
+  - match: exact
+    term: unit:IN_HG
+    label: Inch of Mercury
+  kgf:
+  - match: exact
+    term: unit:KiloGM_F
+    label: Kilo Gram Force
+  lbf:
+  - match: exact
+    term: unit:LB_F
+    label: Pound Force
+  "%":
+  - match: exact
+    term: unit:PERCENT
+    label: Percent
+    note: "The share's basis (mass, mole, volume) is a separate context in SCALE."
+  "‰":
+  - match: exact
+    term: unit:PERMILLE
+    label: Permille
+  ppm:
+  - match: exact
+    term: unit:PPM
+    label: Parts per Million
+    note: "The share's basis (mass, mole, volume) is a separate context in SCALE."
+  ppb:
+  - match: exact
+    term: unit:PPB
+    label: Parts per Billion
+    note: "The share's basis (mass, mole, volume) is a separate context in SCALE."
+  mol/L:
+  - match: exact
+    term: unit:MOL-PER-L
+    label: Mole per Litre
+  M:
+  - match: exact
+    term: unit:MOL-PER-DeciM3
+    label: Mole per Cubic Decimetre
+    note: "SCALE's molar, one mole per litre."
+  mmol/L:
+  - match: exact
+    term: unit:MilliMOL-PER-L
+    label: Millimole per Litre
+  "μmol/L":
+  - match: exact
+    term: unit:MicroMOL-PER-L
+    label: Micromole per Litre
+  mol/m3:
+  - match: exact
+    term: unit:MOL-PER-M3
+    label: Mole per Cubic Metre
+  mol/kg:
+  - match: exact
+    term: unit:MOL-PER-KiloGM
+    label: Mole per Kilogram
+  mL/min:
+  - match: exact
+    term: unit:MilliL-PER-MIN
+    label: Millilitre per Minute
+  L/min:
+  - match: exact
+    term: unit:L-PER-MIN
+    label: Litre per Minute
+  L/h:
+  - match: exact
+    term: unit:L-PER-HR
+    label: Litre per Hour
+  m3/h:
+  - match: exact
+    term: unit:M3-PER-HR
+    label: Cubic Metre per Hour
+  mol/s:
+  - match: exact
+    term: unit:MOL-PER-SEC
+    label: Mole per Second
+  kg/h:
+  - match: exact
+    term: unit:KiloGM-PER-HR
+    label: Kilogram per Hour
+  Nm3:
+  - match: close
+    term: unit:NCM
+    label: Normal Cubic Metre
+    note: SCALE reads normal conditions without fixing their temperature and pressure.
+  scf:
+  - match: close
+    term: unit:SCF
+    label: Standard Cubic Foot
+    note: SCALE reads standard conditions without fixing their temperature and pressure.
+  h-1:
+  - match: exact
+    term: unit:PER-HR
+    label: Reciprocal Hour
+  min-1:
+  - match: exact
+    term: unit:PER-MIN
+    label: Reciprocal Minute
+  s-1:
+  - match: exact
+    term: unit:PER-SEC
+    label: Reciprocal Second
+  m2/g:
+  - match: exact
+    term: unit:M2-PER-GM
+    label: Square Metre per Gram
+  mmol/g:
+  - match: exact
+    term: unit:MilliMOL-PER-GM
+    label: Millimole per Gram
+  "μmol/g":
+  - match: exact
+    term: unit:MicroMOL-PER-GM
+    label: Micromole per Gram
+  kJ/mol:
+  - match: exact
+    term: unit:KiloJ-PER-MOL
+    label: Kilojoule per Mole
+  J/mol:
+  - match: exact
+    term: unit:J-PER-MOL
+    label: Joule per Mole
+  J/(mol·K):
+  - match: exact
+    term: unit:J-PER-MOL-K
+    label: Joule per Mole Kelvin
+  A/cm2:
+  - match: exact
+    term: unit:A-PER-CentiM2
+    label: Ampere per Square Centimetre
+  W/cm2:
+  - match: exact
+    term: unit:W-PER-CentiM2
+    label: Watt per Square Centimetre
+  W/m2:
+  - match: exact
+    term: unit:W-PER-M2
+    label: Watt per Square Metre
+  mol/(g·h):
+  - match: exact
+    term: unit:MOL-PER-GM-HR
+    label: Mole per Gram Hour
+  "μmol/(g·h)":
+  - match: exact
+    term: unit:MicroMOL-PER-GM-HR
+    label: Micromole per Gram Hour
+  g/kWh:
+  - match: exact
+    term: unit:GM-PER-KiloW-HR
+    label: Gram per Kilowatt Hour

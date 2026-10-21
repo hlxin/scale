@@ -1565,6 +1565,8 @@ def _describe(spec: dict, names: list[str] | None = None, profile: str | None = 
                                          **({"denominator": [name(x) for x in d["denominator"]]} if d["denominator"] else {}),
                                          **({"denominator_kinds": d["denominator_kinds"]} if d["denominator_kinds"] else {}),
                                          **({"denominator_unstated": d["denominator_unstated"]}
-                                            if d.get("denominator_unstated") else {})}
+                                            if d.get("denominator_unstated") else {}),
+                                         **({"mappings": mappings[f"kind:{k}"]}
+                                            if mappings and mappings.get(f"kind:{k}") else {})}
                                      for k, d in sorted(qc.kinds.items())}
     return out

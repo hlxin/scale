@@ -11,7 +11,7 @@ exchanged across both. It changes nothing that SCALE validates or queries.
 | File | What it holds |
 |---|---|
 | [core/mappings/ontologies.yaml](../core/mappings/ontologies.yaml) | The ontologies and vocabularies that mappings cite: name, what a prefix stands for (`iri`), what a term looks like (`pattern`), homepage, the licence the ontology states for itself, and the release its terms were looked up in (`checked`) |
-| [core/mappings/kernel.yaml](../core/mappings/kernel.yaml) | The science kernel's labels and edge types mapped (OBI, IAO, COB, SIO, STATO, SEPIO, BFO, RO, PROV, DCAT, Dublin Core, FOAF, Schema.org, SOSA) |
+| [core/mappings/kernel.yaml](../core/mappings/kernel.yaml) | The science kernel's labels and edge types mapped (OBI, IAO, COB, SIO, STATO, SEPIO, BFO, RO, PROV, DCAT, Dublin Core, FOAF, Schema.org, SOSA), and its quantity kinds and units mapped to QUDT (below) |
 | [domain/mappings/catalysis.yaml](../domain/mappings/catalysis.yaml) | The catalysis labels, edge types and values mapped (ChEBI, the Chemical Methods Ontology, REX, MOP, the Allotrope Foundation Ontology, OBI, CHEMINF, EDAM, ENVO, RO), and the areas of catalysis research (below) |
 
 The files sit beside the schema, not in it: a mapping can be added or corrected without a new schema version, and a
@@ -48,11 +48,43 @@ Treatment.treatment_kind=calcination:
 
 Mappings cite identifiers and labels only, never an ontology's definitions.
 
+## Quantity kinds and units
+
+The kernel's set maps the kinds of quantity SCALE compares (`kinds`, by name) and the units its unit vocabulary reads
+(`units`, spelled as SCALE reads them) to [QUDT](https://qudt.org/), the units and quantities vocabulary many data
+standards use, release 3.5.3:
+
+```yaml
+units:
+  "°C":
+  - match: exact
+    term: unit:DEG_C
+    label: Degree Celsius
+kinds:
+  flow_rate:
+  - match: narrow
+    term: quantitykind:VolumeFlowRate
+    label: Volume Flow Rate
+```
+
+- **Units** are exact matches where both mean the same unit: °C, kPa, mL/min, h-1, kJ/mol, m2/g and some 100
+  more. SCALE reads a unit by its dimension only, so a gallon, a ton, a calorie or a Btu is whichever one the source
+  printed; each of QUDT's definitions (US or UK gallon, thermochemical or international calorie) is narrower.
+  Normal and standard volumes (Nm3, scf) are close: SCALE does not fix their reference temperature and pressure.
+  A percent or ppm is the unit only; what the share is of (mass, mole, volume) stays a context of the value.
+- **Kinds** are close where QUDT has the same quantity (temperature, pressure, electric current), narrow where
+  SCALE's kind is wider (a flow rate may be volumetric, molar or by mass; a concentration may be a molality), and
+  broad where QUDT names only the general quantity (a conversion, a selectivity or a yield is a dimensionless ratio;
+  a reaction enthalpy is an enthalpy). An enzyme's turnover frequency at saturation is SBO's catalytic rate constant
+  (kcat), narrower than SCALE's turnover frequency. QUDT has no term for an activation energy, a space velocity, a
+  site density or most catalysis-specific shares, so they stay unmapped.
+
 ## How they are checked
 
 `scale domains check` (part of `scale check`) and `scale schema mappings --check` check that:
 
-- every SCALE term is one the head schema declares, and a layer's labels and edge types are its own;
+- every SCALE term is one the head schema declares, and a layer's labels and edge types are its own; every
+  quantity kind is one the kernel's contracts declare, and every unit one its unit vocabulary reads;
 - every term is a CURIE of a registered ontology and looks like a term of it;
 - every match is one of the five words;
 - no term is mapped twice for one SCALE term, and an exact match is the only exact one in that ontology (a
@@ -113,7 +145,6 @@ reading), and the ontologies the collection classifies under it, as of its commi
 
 ## Not done yet
 
-- Quantity kinds and units mapped to QUDT.
 - Checked external identifiers on records, such as a characterization's technique identifier.
 - The kernel's `maps_to` still names vocabulary terms in words; the mapping set gives their identifiers.
 - Exports do not yet take a type's IRI from an exact mapping.

@@ -139,6 +139,13 @@ ontologies:
     pattern: ^prov:[A-Za-z]+$
     homepage: https://www.w3.org/TR/prov-o/
     checked: PROV-O (EBI OLS, 2026-10-20)
+  quantitykind:
+    name: QUDT quantity kinds
+    iri: http://qudt.org/vocab/quantitykind/
+    pattern: ^quantitykind:[A-Za-z][A-Za-z0-9_-]*$
+    homepage: https://qudt.org/
+    licence: CC BY 4.0
+    checked: QUDT 3.5.3 (github.com/qudt/qudt-public-repo, 2026-10-20)
   REX:
     name: Physico-chemical process ontology
     iri: http://purl.obolibrary.org/obo/REX_
@@ -155,6 +162,14 @@ ontologies:
     licence: CC0 1.0
     checked: RO 2026-09-04 (EBI OLS, 2026-10-20)
     ontologies4cat: RO
+  SBO:
+    name: Systems Biology Ontology
+    iri: http://biomodels.net/SBO/SBO_
+    pattern: ^SBO:\d{7}$
+    homepage: https://www.ebi.ac.uk/sbo/
+    licence: Artistic License 2.0
+    checked: SBO (EBI OLS, 2026-10-20)
+    ontologies4cat: SBO
   schema:
     name: Schema.org
     iri: https://schema.org/
@@ -189,3 +204,10 @@ ontologies:
     homepage: http://stato-ontology.org/
     licence: CC BY 3.0
     checked: STATO 2026-04-20 (EBI OLS, 2026-10-20)
+  unit:
+    name: QUDT units
+    iri: http://qudt.org/vocab/unit/
+    pattern: ^unit:[A-Za-z][A-Za-z0-9_-]*$
+    homepage: https://qudt.org/
+    licence: CC BY 4.0
+    checked: QUDT 3.5.3 (github.com/qudt/qudt-public-repo, 2026-10-20)

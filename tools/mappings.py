@@ -11,8 +11,9 @@ every mapping on a term the head schema declares and on a term of a registered o
     scale schema mappings [--layer kernel|catalysis] [--format text|json|sssom] [--areas] [--check]
 
 A mapping's subject is written as a SCALE term: a label (``Catalyst``) or an edge type (``HAS_INPUT``), a
-property (``Label.property``) or a value of one (``Label.property=value``). Its ``term`` is a CURIE of a registered
-ontology.
+property (``Label.property``) or a value of one (``Label.property=value``). The kernel's set also maps the quantity
+kinds (``kinds``, by name) and the units its unit vocabulary reads (``units``, spelled as SCALE reads them). A
+mapping's ``term`` is a CURIE of a registered ontology.
 
 The catalysis set also carries ``areas``: the areas of catalysis research by which Ontologies4Cat classifies
 ontologies (Behr, Borgelt and Kockmann 2024), with the SCALE labels and edge types that record each area and the
@@ -32,7 +33,10 @@ MATCHES = {"exact": "skos:exactMatch", "close": "skos:closeMatch", "broad": "sko
            "narrow": "skos:narrowMatch", "related": "skos:relatedMatch"}
 REGISTRY_KEYS = {"name": True, "iri": True, "pattern": True, "homepage": False, "licence": False, "checked": True,
                  "ontologies4cat": False}
-SET_KEYS = {"mapping_set": True, "title": True, "maps": True, "checked": True, "mappings": True, "areas": False}
+SET_KEYS = {"mapping_set": True, "title": True, "maps": True, "checked": True, "mappings": True, "kinds": False,
+            "units": False, "areas": False}
+# a set's sections of mappings and how rows show their subjects: terms as written, quantity kinds and units tagged
+SECTIONS = (("mappings", ""), ("kinds", "kind:"), ("units", "unit:"))
 MAPPING_KEYS = {"match": True, "term": True, "label": True, "note": False}
 AREA_KEYS = {"title": True, "scale": True, "gap": False, "ontologies4cat": True}
 # the areas of catalysis research of Ontologies4Cat (Behr, Borgelt and Kockmann, J. Cheminform. 2024, 16, 16),
@@ -68,6 +72,24 @@ def iri(term: str, reg: dict) -> str | None:
     if not m or m["prefix"] not in reg:
         return None
     return f"{reg[m['prefix']]['iri']}{m['local']}"
+
+
+def entries(doc: dict) -> list[tuple[str, str, str, object]]:
+    """A set's subjects in file order: (section, the subject as listed, the subject as rows show it, its mappings)."""
+    return [(section, str(subject), f"{tag}{subject}", ms)
+            for section, tag in SECTIONS for subject, ms in (doc.get(section) or {}).items()]
+
+
+def quantity_problem(spec: dict, section: str, name: str) -> str | None:
+    """Why ``name`` is no quantity kind (``kinds``) or no unit the unit vocabulary reads (``units``); None when it is."""
+    from .quantities import contracts
+    qc = contracts(spec)
+    if qc is None:
+        return "the schema has no quantity contracts"
+    if section == "kinds":
+        return None if name in qc.kinds else f"no quantity kind {name!r}"
+    reading = qc.read_unit(name)
+    return None if reading.read and not reading.unread else f"the unit vocabulary does not read {name!r}"
 
 
 def head_spec(repo: Path) -> dict:
@@ -150,8 +172,13 @@ def check(repo: Path, spec: dict | None = None) -> dict:
         if doc.get("areas") and layer != "catalysis":
             err(rel, "areas are areas of catalysis research; they belong to the catalysis set")
         n = 0
-        for subject, ms in (doc.get("mappings") or {}).items():
-            why = subject_problem(spec, str(subject), layer)
+        for section, name, subject, ms in entries(doc):
+            if section == "mappings":
+                why = subject_problem(spec, name, layer)
+            elif layer != "kernel":
+                why = f"quantity kinds and units are the kernel's; map them in {layout.KERNEL_MAPPINGS}"
+            else:
+                why = quantity_problem(spec, section, name)
             if why:
                 err(rel, f"{subject}: {why}")
             if not isinstance(ms, list) or not ms:
@@ -216,9 +243,9 @@ def index(repo: Path, layers: tuple[str, ...] = ("kernel", "catalysis")) -> dict
     out: dict[str, list[dict]] = {}
     for layer in layers:
         doc = load_set(repo, layer) or {}
-        for subject, ms in (doc.get("mappings") or {}).items():
+        for _, _, subject, ms in entries(doc):
             for m in ms or []:
-                out.setdefault(str(subject), []).append(
+                out.setdefault(subject, []).append(
                     {"match": m.get("match"), "term": m.get("term"), "label": m.get("label"),
                      "iri": iri(str(m.get("term") or ""), reg), **({"note": m["note"]} if m.get("note") else {})})
     return out
@@ -230,9 +257,9 @@ def rows(repo: Path, layer: str | None = None) -> list[dict]:
     out = []
     for lay in ([layer] if layer else list(LAYERS)):
         doc = load_set(repo, lay) or {}
-        for subject, ms in (doc.get("mappings") or {}).items():
+        for _, _, subject, ms in entries(doc):
             for m in ms or []:
-                out.append({"layer": lay, "subject": str(subject), "match": m.get("match"), "term": m.get("term"),
+                out.append({"layer": lay, "subject": subject, "match": m.get("match"), "term": m.get("term"),
                             "label": m.get("label"), "iri": iri(str(m.get("term") or ""), reg),
                             "note": m.get("note")})
     return out
@@ -255,7 +282,7 @@ def sssom(repo: Path, layer: str, version: str | None = None) -> str:
     doc = load_set(repo, layer)
     if doc is None:
         raise ScaleError(f"the {layer} layer has no mapping set ({rel})")
-    used = sorted({CURIE.match(str(m.get("term")))["prefix"] for ms in (doc.get("mappings") or {}).values()
+    used = sorted({CURIE.match(str(m.get("term")))["prefix"] for _, _, _, ms in entries(doc)
                    for m in ms or [] if CURIE.match(str(m.get("term") or ""))})
     base = f"{layout.REPOSITORY_URL}/blob/main"
     curie_map = {prefix: f"{base}/{schema_file}#", "semapv": "https://w3id.org/semapv/vocab/",
@@ -268,9 +295,10 @@ def sssom(repo: Path, layer: str, version: str | None = None) -> str:
             "comment")
     clean = lambda s: " ".join(str(s or "").split())     # noqa: E731  (no tab or line break inside a cell)
     out = [f"# {h}" for h in head] + ["\t".join(cols)]
-    for subject, ms in (doc.get("mappings") or {}).items():
+    for section, name, _, ms in entries(doc):
+        local = name if section == "mappings" else f"{section[:-1]}/{name}"      # kind/temperature, unit/kPa
         for m in ms or []:
-            out.append("\t".join([f"{prefix}:{subject}", clean(subject), MATCHES.get(m.get("match"), ""),
+            out.append("\t".join([f"{prefix}:{local}", clean(name), MATCHES.get(m.get("match"), ""),
                                   clean(m.get("term")), clean(m.get("label")), "semapv:ManualMappingCuration",
                                   clean(m.get("note"))]))
     return "\n".join(out) + "\n"
