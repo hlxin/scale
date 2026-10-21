@@ -32,7 +32,10 @@ def test_exactly_these_sides_are_unconstrained(vocab):
 def test_the_declared_kind_pairs_are_far_below_every_kind_to_every_kind(vocab):
     nodes, edges = vocab
     declared = sum(len(t["from"]) * len(t["to"]) for t in edges.values() if t["from"] and t["to"])
-    assert declared == 1395 and declared < 6014      # the schema's typed pairs, REPORTED_IN's 54 no longer among them
+    every = sum((len(t["from"]) or len(nodes)) * (len(t["to"]) or len(nodes)) for t in edges.values())
+    # the schema's typed pairs, an unconstrained end adding none (1,395 of 6,015 at 0.5.0); counted, not written in,
+    # so that a schema change that adds a kind (test_version_bump's BumpProbe) does not break it
+    assert declared < every / 3
     assert all(len(t["from"]) < len(nodes) and len(t["to"]) < len(nodes) for t in edges.values())
     assert edges["REPORTED_IN"]["to"] == ["Publication"]
 
