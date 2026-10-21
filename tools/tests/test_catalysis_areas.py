@@ -1,12 +1,12 @@
-"""Terms for the areas of catalysis research that SCALE lacked (scale-catal 0.7.1 on).
+"""Terms for the subdomains of catalysis research that SCALE lacked (scale-catal 0.7.1 on).
 
-Ontologies4Cat (Behr, Borgelt and Kockmann 2024) classifies ontologies by fourteen areas of catalysis research; mapping
-SCALE onto those areas (docs/mappings.md) showed four it did not cover: biocatalysis, the ligand and the turnover number
-of homogeneous catalysis, the criteria of a transport check, and the energy a process takes. 0.7.1 adds them as
-provisional terms: an enzyme or whole-cell catalyst, a macromolecule, the roles ligand, solvent, cocatalyst and
-cofactor, a test's catalysis mode as its source describes it, and the kinds enzyme_activity (with the enzyme unit, U,
-and the katal), michaelis_constant, turnover_number, transport_criterion (compared by the criterion its definition
-names), effectiveness_factor, thiele_modulus and energy_consumption. Exercised on the area example
+Ontologies4Cat (Behr, Borgelt and Kockmann 2024) classifies ontologies by fourteen subdomains of catalysis research;
+mapping SCALE onto those subdomains (docs/mappings.md) showed four it did not cover: biocatalysis, the ligand and the
+turnover number of homogeneous catalysis, the criteria of a transport check, and the energy a process takes. 0.7.1
+adds them as provisional terms: an enzyme or whole-cell catalyst, a macromolecule, the roles ligand, solvent,
+cocatalyst and cofactor, a test's catalysis mode as its source describes it, and the kinds enzyme_activity (with the
+enzyme unit, U, and the katal), michaelis_constant, turnover_number, transport_criterion (compared by the criterion
+its definition names), effectiveness_factor, thiele_modulus and energy_consumption. Exercised on the area example
 (domain/examples/scale-catal/area-examples/) and variants written in memory."""
 
 import copy

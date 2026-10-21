@@ -2,8 +2,8 @@
 
 ## Unreleased
 
-- **Schema 0.7.1 (additive): terms for the areas of catalysis research SCALE lacked.** Requested by @hlxin (use what
-  the ontologies for catalysis know to develop the catalysis schema). Mapping SCALE onto the fourteen areas of
+- **Schema 0.7.1 (additive): terms for the subdomains of catalysis research SCALE lacked.** Requested by @hlxin (use
+  what the ontologies for catalysis know to develop the catalysis schema). Mapping SCALE onto the fourteen subdomains of
   Ontologies4Cat (Behr, Borgelt and Kockmann 2024, doi:10.1186/s13321-024-00807-2) showed four that SCALE did not
   cover; the survey found no ontology that contains two of them (homogeneous catalysis; heat, transport and kinetic
   data) and one each for the other two. All new terms are provisional.
