@@ -1480,15 +1480,20 @@ def _items(c: dict, edge: bool = False, case: bool = False) -> dict:
     return out
 
 
-def describe(spec: dict, names: list[str] | None = None, profile: str | None = None) -> dict:
+def describe(spec: dict, names: list[str] | None = None, profile: str | None = None,
+             mappings: dict[str, list[dict]] | None = None) -> dict:
     """Labels and edge types with their properties, as an agent or a person reads them before curating.
 
-    With a profile, properties added by extensions of other driving forces are left out. The result shares no
-    object with ``spec``: a caller may change it without changing the schema a later validation reads."""
-    return copy.deepcopy(_describe(spec, names, profile))
+    With a profile, properties added by extensions of other driving forces are left out. ``mappings`` (by subject,
+    :func:`scale.mappings.index`) adds each term's mappings to ontology terms: a label's or edge type's own under
+    ``mappings``, its properties' and values' under ``property_mappings`` (``property`` or ``property=value``).
+    The result shares no object with ``spec``: a caller may change it without changing the schema a later
+    validation reads."""
+    return copy.deepcopy(_describe(spec, names, profile, mappings))
 
 
-def _describe(spec: dict, names: list[str] | None = None, profile: str | None = None) -> dict:
+def _describe(spec: dict, names: list[str] | None = None, profile: str | None = None,
+              mappings: dict[str, list[dict]] | None = None) -> dict:
     exts = _extensions_for(spec, profile)
     # the file that declares a label ("kernel" or the domain's name); a manifest that lists modules keeps their key
     owner = "module" if any(m.get("kind") == "module" for m in spec.get("modules", {}).values()) else "defined_in"
@@ -1505,17 +1510,28 @@ def _describe(spec: dict, names: list[str] | None = None, profile: str | None = 
         return (_ptype(v, spec) + (f" [{bound}]" if bound else "")
                 + (f" — {v['description']}" if v.get("description") else ""))
 
+    def mapped(n: str, props: dict) -> dict:
+        """A term's mappings to ontology terms (core/mappings/, domain/mappings/): its own, and those of its
+        properties and their values."""
+        if not mappings:
+            return {}
+        own = mappings.get(n) or []
+        by_prop = {s.split(".", 1)[1]: ms for s, ms in sorted(mappings.items())
+                   if s.startswith(f"{n}.") and s.split(".", 1)[1].split("=")[0] in props}
+        return {**({"mappings": own} if own else {}), **({"property_mappings": by_prop} if by_prop else {})}
+
     def lab(n: str) -> dict:
         d = spec["nodes"][n]
+        props = {k: v for k, v in (d.get("properties") or {}).items() if keep(v)}
         return {"is_a": d.get("ancestors") or [], owner: d.get("module"), "description": d.get("description"),
-                **({"maps_to": list(d["maps_to"])} if d.get("maps_to") else {}),
+                **({"maps_to": list(d["maps_to"])} if d.get("maps_to") else {}), **mapped(n, props),
                 "required": d.get("required") or [], "fixed": d.get("fixed") or {},
-                "properties": {k: text(v) for k, v in (d.get("properties") or {}).items() if keep(v)}}
+                "properties": {k: text(v) for k, v in props.items()}}
 
     def edge(n: str) -> dict:
         d = spec["edges"][n]
         return {"from": d.get("from"), "to": d.get("to"), "description": d.get("description"), "specializes": d.get("specializes"),
-                **({"maps_to": list(d["maps_to"])} if d.get("maps_to") else {}),
+                **({"maps_to": list(d["maps_to"])} if d.get("maps_to") else {}), **mapped(n, d.get("properties") or {}),
                 "properties": {k: text(v) for k, v in (d.get("properties") or {}).items()}}
 
     wanted = names or sorted(spec["nodes"]) + sorted(spec["edges"])

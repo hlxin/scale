@@ -1,0 +1,211 @@
+# The science kernel's labels and edge types mapped to terms of other ontologies (core/mappings/ontologies.yaml
+# lists them). A mapping says how a SCALE term relates to a term someone else defines; it changes nothing that
+# SCALE validates or queries.
+#
+# Each entry is keyed by a SCALE term: a label (Experiment), an edge type (HAS_INPUT), a property
+# (Label.property) or a value of one (Label.property=value). `match` says how the two relate, as SKOS mapping
+# relations do:
+#   exact     the two mean the same and can be used one for the other
+#   close     they mean nearly the same; fine for search, not for automatic reasoning
+#   broad     the other term is broader: every SCALE one is one of them, not the other way round
+#   narrow    the other term is narrower: every one of them is a SCALE one, not the other way round
+#   related   they are associated (a thing and the role it plays, a process and its record), neither is the other
+# `label` is the other term's label as its ontology gives it, so that a reader sees what it is and a misspelt
+# identifier shows; `note` says why, where the match is not obvious. Every term was looked up in the release
+# its ontology's entry names (checked), and none is obsolete.
+#
+# The kernel's own `maps_to` (in core/graph/kernel.yaml) names related vocabulary terms in words; this set gives
+# their identifiers where an ontology defines one. Checked by `scale domains check`; listed by
+# `scale schema mappings`. See docs/mappings.md.
+mapping_set: kernel-mappings
+title: The science kernel's terms mapped to ontology terms
+maps: core/graph/kernel.yaml
+checked: '2026-10-20'
+mappings:
+  Question:
+  - match: related
+    term: SIO:000085
+    label: question
+    note: SIO's question is any request for information; a SCALE Question is a research question or problem.
+  Hypothesis:
+  - match: close
+    term: SIO:000284
+    label: hypothesis
+  Prediction:
+  - match: narrow
+    term: OBI:0001934
+    label: predicted value
+    note: OBI's predicted value is an estimate of a value; a SCALE Prediction can also be a qualitative expectation.
+  - match: related
+    term: OBI:0302910
+    label: prediction
+    note: OBI's prediction is the process of predicting; a SCALE Prediction is what it expects.
+  Experiment:
+  - match: broad
+    term: COB:0000035
+    label: completely executed planned process
+    note: OBI's planned process (OBI:0000011), which the kernel's maps_to names, is obsolete and replaced by this term.
+  - match: narrow
+    term: OBI:0000070
+    label: assay
+    note: An assay examines a material entity; a SCALE Experiment can also be a computation.
+  - match: narrow
+    term: SIO:000994
+    label: experiment
+    note: SIO's experiment tests a hypothesis; a SCALE Experiment need not.
+  - match: broad
+    term: prov:Activity
+    label: Activity
+  Procedure:
+  - match: close
+    term: COB:0000110
+    label: material processing
+  - match: broad
+    term: prov:Activity
+    label: Activity
+  Protocol:
+  - match: close
+    term: OBI:0000272
+    label: protocol
+  - match: broad
+    term: IAO:0000104
+    label: plan specification
+  Design:
+  - match: close
+    term: OBI:0500000
+    label: study design
+  Variable:
+  - match: close
+    term: STATO:0000258
+    label: variable
+  Claim:
+  - match: close
+    term: SEPIO:0000001
+    label: assertion
+  - match: narrow
+    term: IAO:0000144
+    label: conclusion textual entity
+  ObjectOfStudy:
+  - match: close
+    term: sosa:FeatureOfInterest
+    label: Feature Of Interest
+  - match: related
+    term: OBI:0000067
+    label: evaluant role
+    note: The role an object of study plays in an assay.
+  Instrument:
+  - match: broad
+    term: COB:0001300
+    label: device
+    note: OBI's device (OBI:0000968) is obsolete and replaced by this term.
+  Model:
+  - match: close
+    term: SIO:000510
+    label: model
+  Source:
+  - match: close
+    term: IAO:0000310
+    label: document
+  - match: close
+    term: dcterms:BibliographicResource
+    label: Bibliographic Resource
+  Dataset:
+  - match: close
+    term: dcat:Dataset
+    label: Dataset
+  Person:
+  - match: close
+    term: foaf:Person
+    label: Person
+  - match: close
+    term: prov:Person
+    label: Person
+  Institution:
+  - match: close
+    term: OBI:0000245
+    label: organization
+  - match: close
+    term: schema:Organization
+    label: Organization
+  - match: close
+    term: prov:Organization
+    label: Organization
+  Project:
+  - match: close
+    term: schema:ResearchProject
+    label: ResearchProject
+  Software:
+  - match: close
+    term: IAO:0000010
+    label: software
+  - match: close
+    term: schema:SoftwareApplication
+    label: SoftwareApplication
+  - match: related
+    term: prov:SoftwareAgent
+    label: SoftwareAgent
+    note: PROV's software agent is software acting as an agent in an activity.
+  HAS_PART:
+  - match: close
+    term: BFO:0000051
+    label: has part
+  PART_OF:
+  - match: close
+    term: BFO:0000050
+    label: part of
+  PRECEDES:
+  - match: close
+    term: BFO:0000063
+    label: precedes
+  HAS_INPUT:
+  - match: close
+    term: OBI:0000293
+    label: has specified input
+  - match: close
+    term: prov:used
+    label: used
+  HAS_OUTPUT:
+  - match: close
+    term: OBI:0000299
+    label: has specified output
+  - match: close
+    term: prov:generated
+    label: generated
+  PERFORMED_BY:
+  - match: close
+    term: OBI:0001950
+    label: has performer
+  - match: close
+    term: prov:wasAssociatedWith
+    label: wasAssociatedWith
+  SUPPORTS:
+  - match: close
+    term: RO:0002472
+    label: is evidence for
+  EXAMINES:
+  - match: close
+    term: sosa:hasFeatureOfInterest
+    label: has feature of interest
+  REVISES:
+  - match: close
+    term: prov:wasRevisionOf
+    label: wasRevisionOf
+  AUTHORED_BY:
+  - match: close
+    term: dcterms:creator
+    label: Creator
+  - match: broad
+    term: prov:wasAttributedTo
+    label: wasAttributedTo
+  SUPERSEDES:
+  - match: close
+    term: dcterms:replaces
+    label: Replaces
+  MEMBER_OF:
+  - match: close
+    term: schema:memberOf
+    label: memberOf
+  FUNDED_BY:
+  - match: close
+    term: schema:funder
+    label: funder

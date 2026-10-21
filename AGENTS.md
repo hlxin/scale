@@ -18,7 +18,9 @@ scale-catal@0.2.0 …` a pinned one. In a checkout of this repository run `uv ru
   whose graph schema manifest (`domain/graph/scale-catal.yaml`) assembles the kernel with one catalysis file
   (`catalysis.yaml`) holding one vocabulary and one checklist; the checklist's items for a catalytic test apply
   by the driving forces it lists. The schema has **one version** for the kernel and the catalysis domain
-  together (the manifest's). Read it with `describe` (or `scale graph describe <Label> --domain catalysis`).
+  together (the manifest's). Read it with `describe` (or `scale graph describe <Label> --domain catalysis`), which
+  also shows how each term maps to ontology terms (ChEBI, the Chemical Methods Ontology, OBI and others): mappings
+  for finding and exchanging data, never SCALE's definitions ([docs/mappings.md](docs/mappings.md)).
 - **Curate** by following the `curate-source` skill, from a `template`. Record each value as a value
   object (`status`, `value`, `unit`, with the reported text in `as_reported` or `note` if it
   differs). Cite evidence on every node and edge that states something: a short verbatim quote, a

@@ -397,7 +397,47 @@ def cmd_graph_describe(args):
     from . import pgraph
     hint = {"graph": {"follows_domains": [args.profile]}} if args.profile else None   # picks the domain that has it
     spec = pgraph.load_spec(pgraph.spec_path(_repo(args), args.spec, hint))
-    _emit(pgraph.describe(spec, args.names or None, args.profile), args)
+    _emit(pgraph.describe(spec, args.names or None, args.profile, _mapping_index(_repo(args))), args)
+
+
+def _mapping_index(repo):
+    """SCALE's terms mapped to ontology terms, by subject (none in a repository without the registry)."""
+    from . import layout, mappings
+    try:
+        return mappings.index(repo) if (Path(repo) / layout.ONTOLOGY_REGISTRY).is_file() else None
+    except ScaleError:
+        return None
+
+
+def cmd_schema_mappings(args):
+    from . import mappings
+    repo = _repo(args)
+    if args.check:
+        res = mappings.check(repo)
+        if args.json:
+            print(to_json(res))
+        else:
+            for e in res["errors"]:
+                print(f"error   {e['where']}: {e['message']}")
+            for w in res["warnings"]:
+                print(f"warning {w['where']}: {w['message']}")
+            n = sum(res["counts"].values())
+            print(f"{n} mappings ({', '.join(f'{k} {v}' for k, v in res['counts'].items())}): "
+                  + ("every one on a term of the schema and of a registered ontology" if res["ok"]
+                     else f"{len(res['errors'])} error(s)"))
+        return 0 if res["ok"] else 1
+    layer = None if args.layer == "all" else args.layer
+    if args.areas:
+        _emit(mappings.areas(repo) if args.format == "json" else mappings.areas_text(repo), args)
+        return 0
+    if args.format == "sssom":
+        if layer is None:
+            raise ScaleError("--format sssom writes one layer's set: name it with --layer kernel or --layer catalysis")
+        from .domains import schema_version
+        _emit(mappings.sssom(repo, layer, schema_version(repo)), args)
+        return 0
+    _emit(mappings.rows(repo, layer) if args.format == "json" else mappings.text(repo, layer), args)
+    return 0
 
 
 def cmd_graph_verify(args):
@@ -1307,6 +1347,18 @@ def build_parser() -> argparse.ArgumentParser:
             sp.add_argument("--json", action="store_true", help="machine-readable result")
         if name == "check":
             sp.add_argument("--comment", help="also write the reviewer's summary (Markdown) here")
+
+    sp = add("mappings", cmd_schema_mappings, "SCALE's terms mapped to ontology terms (core/mappings/, domain/mappings/): "
+             "list them, check them, export a layer's set as SSSOM, or show the areas of catalysis research", sc)
+    sp.add_argument("--layer", choices=["all", "kernel", "catalysis"], default="all", help="whose set (default: both)")
+    sp.add_argument("--areas", action="store_true", help="the areas of catalysis research (Ontologies4Cat): what "
+                    "SCALE records for each and the ontologies classified under it")
+    sp.add_argument("--check", action="store_true", help="check the registry and the sets against the head schema "
+                    "(exit 1 on an error; scale domains check runs it too)")
+    sp.add_argument("--json", action="store_true", help="--check: machine-readable result")
+    sp.add_argument("--out", help="write output to a file")
+    sp.add_argument("--format", choices=["text", "json", "sssom"], default="text",
+                    help="text (default), json, or sssom (SSSOM TSV, one layer)")
 
     sp = add("check", cmd_check, "run every check of CI's test jobs (tests, release digests, schemas, domains, "
              "competency questions, style, links, invalid fixtures)")

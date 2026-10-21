@@ -2,6 +2,23 @@
 
 ## Unreleased
 
+- **SCALE's terms mapped to ontology terms (no schema change).** Requested by @hlxin: use what the ontologies for
+  catalysis know, and make SCALE's connection to them stronger, without SCALE taking its meaning from an ontology.
+  Before, the kernel named related vocabulary terms in words only (`maps_to: OBI planned process`), and no catalysis
+  term was mapped. Now 133 mappings give each term's identifier and say how close it is (exact, close, broader,
+  narrower or related): the kernel's labels and edge types to OBI, IAO, COB, SIO, STATO, SEPIO, BFO, RO, PROV, DCAT,
+  Dublin Core, FOAF, Schema.org and SOSA; the catalysis labels and values to ChEBI, the Chemical Methods Ontology, REX,
+  MOP, the Allotrope Foundation Ontology, OBI, CHEMINF, EDAM and ENVO (calcination is CHMO:0001467; a reference
+  electrode is exactly CHMO:0002345). They sit beside the schema (core/mappings/, domain/mappings/), with a registry of
+  the ontologies they cite, so a mapping is corrected without a new schema version. `scale domains check` keeps every
+  mapping on a term of the schema and of a registered ontology; `describe` shows them; `scale schema mappings` lists
+  them and exports a layer's set as SSSOM. Every term was looked up in the ontology's current release: two that the
+  kernel names in words are obsolete in OBI (planned process, device), and their mappings name the COB terms that
+  replaced them. The catalysis set also records the fourteen areas of catalysis research by which Ontologies4Cat
+  classifies ontologies (Behr, Borgelt and Kockmann, J. Cheminform. 2024, 16, 16, doi:10.1186/s13321-024-00807-2),
+  with the SCALE terms that record each and what SCALE lacks (biocatalysis; a ligand role and a turnover number; transport
+  criteria; energy use beyond plasma and cost). See docs/mappings.md.
+
 - **Schema 0.7.0 (breaking): computed energies and kinetic parameters are compared under explicit definitions.**
   Requested by @hlxin ("Define computational energy and mechanism comparison requirements"). Before, a computed
   adsorption energy was a number in eV like any other: a scientific comparison could rank an electronic adsorption

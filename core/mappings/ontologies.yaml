@@ -1,0 +1,191 @@
+# The ontologies and vocabularies that SCALE's terms are mapped to (core/mappings/kernel.yaml and
+# domain/mappings/catalysis.yaml). SCALE does not take its meaning from them; a mapping only says how a SCALE
+# term relates to a term someone else defines, so that data can be found and exchanged across both.
+#
+# A term is written as a CURIE, `<prefix>:<local id>`; `iri` is what the prefix stands for, so the term's IRI is
+# `iri` followed by the local id, and `pattern` is what a term of the vocabulary looks like. `checked` names the
+# release the mapped terms were looked up in (each term's identifier and label, and that it is not obsolete).
+# `licence` is the licence the vocabulary states for itself, left out where its files state none; mappings cite
+# identifiers and labels only, never definitions. `ontologies4cat` names the ontology in the Ontologies4Cat
+# collection (Behr, Borgelt and Kockmann, J. Cheminform. 2024, 16, 16, doi:10.1186/s13321-024-00807-2), whose
+# classification by area of catalysis research is in domain/mappings/catalysis.yaml (areas).
+#
+# Checked by `scale domains check`; listed by `scale schema mappings`. See docs/mappings.md.
+ontologies:
+  af-e:
+    name: Allotrope Foundation Ontology, equipment
+    iri: http://purl.allotrope.org/ontologies/equipment#
+    pattern: ^af-e:AFE_\d{7}$
+    homepage: https://www.allotrope.org/ontologies
+    licence: Creative Commons Attribution (the ontology's dct:license)
+    checked: AFO merged REC/2026/09 (EBI OLS, 2026-10-20)
+    ontologies4cat: AFO
+  af-p:
+    name: Allotrope Foundation Ontology, process
+    iri: http://purl.allotrope.org/ontologies/process#
+    pattern: ^af-p:AFP_\d{7}$
+    homepage: https://www.allotrope.org/ontologies
+    licence: Creative Commons Attribution (the ontology's dct:license)
+    checked: AFO merged REC/2026/09 (EBI OLS, 2026-10-20)
+    ontologies4cat: AFO
+  af-rl:
+    name: Allotrope Foundation Ontology, role
+    iri: http://purl.allotrope.org/ontologies/role#
+    pattern: ^af-rl:AFRL_\d{7}$
+    homepage: https://www.allotrope.org/ontologies
+    licence: Creative Commons Attribution (the ontology's dct:license)
+    checked: AFO merged REC/2026/09 (EBI OLS, 2026-10-20)
+    ontologies4cat: AFO
+  BFO:
+    name: Basic Formal Ontology
+    iri: http://purl.obolibrary.org/obo/BFO_
+    pattern: ^BFO:\d{7}$
+    homepage: https://basic-formal-ontology.org/
+    licence: CC BY 4.0
+    checked: BFO 2019-08-26 (EBI OLS, 2026-10-20)
+    ontologies4cat: BFO
+  CHEBI:
+    name: Chemical Entities of Biological Interest
+    iri: http://purl.obolibrary.org/obo/CHEBI_
+    pattern: ^CHEBI:\d+$
+    homepage: https://www.ebi.ac.uk/chebi/
+    licence: CC BY 4.0
+    checked: ChEBI release 256 (EBI OLS, 2026-10-20)
+    ontologies4cat: ChEBI
+  CHEMINF:
+    name: Chemical Information Ontology
+    iri: http://semanticscience.org/resource/CHEMINF_
+    pattern: ^CHEMINF:\d{6}$
+    homepage: https://github.com/semanticchemistry/semanticchemistry
+    licence: CC0 1.0
+    checked: CHEMINF 2.1.0 (EBI OLS, 2026-10-20)
+    ontologies4cat: CHEMINF
+  CHMO:
+    name: Chemical Methods Ontology
+    iri: http://purl.obolibrary.org/obo/CHMO_
+    pattern: ^CHMO:\d{7}$
+    homepage: https://github.com/rsc-ontologies/rsc-cmo
+    licence: CC BY 4.0
+    checked: CHMO 2026-05-28 (EBI OLS, 2026-10-20)
+    ontologies4cat: CHMO
+  COB:
+    name: Core Ontology for Biology and Biomedicine
+    iri: http://purl.obolibrary.org/obo/COB_
+    pattern: ^COB:\d{7}$
+    homepage: https://obofoundry.org/COB/
+    licence: CC0 1.0
+    checked: COB 2025-12-15 (EBI OLS, 2026-10-20)
+  dcat:
+    name: Data Catalog Vocabulary (W3C)
+    iri: http://www.w3.org/ns/dcat#
+    pattern: ^dcat:[A-Za-z]+$
+    homepage: https://www.w3.org/TR/vocab-dcat-3/
+    licence: CC BY 4.0
+    checked: https://www.w3.org/ns/dcat.ttl (2026-10-20)
+  dcterms:
+    name: DCMI Metadata Terms
+    iri: http://purl.org/dc/terms/
+    pattern: ^dcterms:[A-Za-z]+$
+    homepage: https://www.dublincore.org/specifications/dublin-core/dcmi-terms/
+    checked: dublin_core_terms.ttl (2026-10-20)
+  EDAM:
+    name: EDAM, the ontology of data analysis and management
+    iri: http://edamontology.org/
+    pattern: ^EDAM:(data|format|operation|topic)_\d{4}$
+    homepage: https://edamontology.org/
+    licence: CC BY-SA 4.0
+    checked: EDAM 1.25-20260626 (EBI OLS, 2026-10-20)
+    ontologies4cat: EDAM
+  ENVO:
+    name: Environment Ontology
+    iri: http://purl.obolibrary.org/obo/ENVO_
+    pattern: ^ENVO:\d{8}$
+    homepage: http://environmentontology.org/
+    licence: CC0 1.0
+    checked: ENVO 2026-06-26 (EBI OLS, 2026-10-20)
+    ontologies4cat: ENVO
+  foaf:
+    name: Friend of a Friend vocabulary
+    iri: http://xmlns.com/foaf/0.1/
+    pattern: ^foaf:[A-Za-z]+$
+    homepage: http://xmlns.com/foaf/spec/
+    checked: http://xmlns.com/foaf/spec/index.rdf (2026-10-20)
+  IAO:
+    name: Information Artifact Ontology
+    iri: http://purl.obolibrary.org/obo/IAO_
+    pattern: ^IAO:\d{7}$
+    homepage: https://github.com/information-artifact-ontology/IAO/
+    licence: CC BY 4.0
+    checked: IAO 2026-03-30 (EBI OLS, 2026-10-20)
+  MOP:
+    name: Molecular Process Ontology
+    iri: http://purl.obolibrary.org/obo/MOP_
+    pattern: ^MOP:\d{7}$
+    homepage: https://github.com/rsc-ontologies/rxno
+    licence: CC BY 4.0
+    checked: MOP 2022-05-11 (EBI OLS, 2026-10-20)
+    ontologies4cat: MOP
+  OBI:
+    name: Ontology for Biomedical Investigations
+    iri: http://purl.obolibrary.org/obo/OBI_
+    pattern: ^OBI:\d{7}$
+    homepage: https://obi-ontology.org/
+    licence: CC BY 4.0
+    checked: OBI 2026-07-27 (EBI OLS, 2026-10-20)
+    ontologies4cat: OBI
+  prov:
+    name: PROV Ontology (W3C)
+    iri: http://www.w3.org/ns/prov#
+    pattern: ^prov:[A-Za-z]+$
+    homepage: https://www.w3.org/TR/prov-o/
+    checked: PROV-O (EBI OLS, 2026-10-20)
+  REX:
+    name: Physico-chemical process ontology
+    iri: http://purl.obolibrary.org/obo/REX_
+    pattern: ^REX:\d{7}$
+    homepage: http://purl.obolibrary.org/obo/rex.owl
+    licence: CC BY 4.0
+    checked: REX 2026-03-31 (EBI OLS, 2026-10-20; orphaned in the OBO Foundry)
+    ontologies4cat: REX
+  RO:
+    name: OBO Relations Ontology
+    iri: http://purl.obolibrary.org/obo/RO_
+    pattern: ^RO:\d{7}$
+    homepage: https://oborel.github.io/
+    licence: CC0 1.0
+    checked: RO 2026-09-04 (EBI OLS, 2026-10-20)
+    ontologies4cat: RO
+  schema:
+    name: Schema.org
+    iri: https://schema.org/
+    pattern: ^schema:[A-Za-z]+$
+    homepage: https://schema.org/
+    checked: schemaorg-current-https.jsonld (2026-10-20)
+  SEPIO:
+    name: Scientific Evidence and Provenance Information Ontology
+    iri: http://purl.obolibrary.org/obo/SEPIO_
+    pattern: ^SEPIO:\d{7}$
+    homepage: https://github.com/monarch-initiative/SEPIO-ontology
+    licence: CC BY 3.0
+    checked: SEPIO 2023-06-13 (EBI OLS, 2026-10-20)
+  SIO:
+    name: Semanticscience Integrated Ontology
+    iri: http://semanticscience.org/resource/SIO_
+    pattern: ^SIO:\d{6}$
+    homepage: https://github.com/MaastrichtU-IDS/semanticscience
+    licence: CC BY 4.0
+    checked: SIO 1.62 (EBI OLS, 2026-10-20)
+  sosa:
+    name: Sensor, Observation, Sample, and Actuator ontology (W3C and OGC)
+    iri: http://www.w3.org/ns/sosa/
+    pattern: ^sosa:[A-Za-z]+$
+    homepage: https://www.w3.org/TR/vocab-ssn/
+    licence: W3C Software and Document License
+    checked: https://www.w3.org/ns/sosa/ (2026-10-20)
+  STATO:
+    name: The Statistical Methods Ontology
+    iri: http://purl.obolibrary.org/obo/STATO_
+    pattern: ^STATO:\d{7}$
+    homepage: http://stato-ontology.org/
+    licence: CC BY 3.0
+    checked: STATO 2026-04-20 (EBI OLS, 2026-10-20)

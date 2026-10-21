@@ -52,6 +52,9 @@ example_documents:
     - examples/science-examples/*.json
 tests: tests
 docs: graph/README.md
+# the kernel's terms mapped to ontology terms; the ontologies they cite are in mappings/ontologies.yaml
+# (docs/mappings.md)
+mappings: mappings/kernel.yaml
 contributors:
   - name: Hongliang Xin
     github: hlxin
