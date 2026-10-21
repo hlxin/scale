@@ -38,8 +38,8 @@ IDENTIFIER_REGISTRY = "core/mappings/identifiers.yaml"   # the identifier scheme
 DOMAIN = "domain"                                # the catalysis domain, the one folder beside core/
 DOMAIN_MANIFEST = "DOMAIN.yaml"                  # domain/DOMAIN.yaml: the domain's declaration (its `domain:` names it)
 DOMAIN_DECLARATION = f"{DOMAIN}/{DOMAIN_MANIFEST}"
-DOMAIN_MAPPINGS = f"{DOMAIN}/mappings/catalysis.yaml"   # the catalysis terms mapped to ontology terms, and the areas of
-                                                 # catalysis research (DOMAIN.yaml mappings)
+DOMAIN_MAPPINGS = f"{DOMAIN}/mappings/catalysis.yaml"   # the catalysis terms mapped to ontology terms, and the
+                                                 # subdomains of catalysis research (DOMAIN.yaml mappings)
 DOMAIN_TEMPLATE = "tools/tests/fixtures/domain-template"   # what the tests' new_domain() copies (a test fixture)
 CODEOWNERS = ".github/CODEOWNERS"
 REPOSITORY_URL = "https://github.com/hlxin/scale"   # recorded as `source` in release manifests

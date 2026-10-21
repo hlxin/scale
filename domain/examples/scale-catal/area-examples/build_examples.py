@@ -1,6 +1,6 @@
-"""Build the synthetic examples of four areas of catalysis research (all values invented): an enzyme test, a homogeneous
-test, two transport checks and two electrolysis tests, each recording what the areas need that the catalysis vocabulary
-lacked before 0.7.1 (Ontologies4Cat's areas; docs/mappings.md).
+"""Build the synthetic examples of four subdomains of catalysis research (all values invented): an enzyme test, a
+homogeneous test, two transport checks and two electrolysis tests, each recording what the subdomains need that the
+catalysis vocabulary lacked before 0.7.1 (Ontologies4Cat's subdomains; docs/mappings.md).
 
     python build_examples.py
 

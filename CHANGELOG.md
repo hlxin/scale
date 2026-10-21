@@ -11,8 +11,8 @@
   Methods Ontology terms of 32 common characterization techniques (XRD is CHMO:0000156). The real graphs gain no
   warning. See docs/mappings.md.
 
-- **Schema 0.7.1 (additive): terms for the areas of catalysis research SCALE lacked.** Requested by @hlxin (use what
-  the ontologies for catalysis know to develop the catalysis schema). Mapping SCALE onto the fourteen areas of
+- **Schema 0.7.1 (additive): terms for the subdomains of catalysis research SCALE lacked.** Requested by @hlxin (use
+  what the ontologies for catalysis know to develop the catalysis schema). Mapping SCALE onto the fourteen subdomains of
   Ontologies4Cat (Behr, Borgelt and Kockmann 2024, doi:10.1186/s13321-024-00807-2) showed four that SCALE did not
   cover; the survey found no ontology that contains two of them (homogeneous catalysis; heat, transport and kinetic
   data) and one each for the other two. All new terms are provisional.
@@ -63,7 +63,7 @@
   them and exports a layer's set as SSSOM. Every term was looked up in the ontology's current release: two that the
   kernel names in words are obsolete in OBI (planned process, device), and their mappings name COB terms instead (an
   experiment or a procedure is COB's planned process; only a completed one is its completely executed planned
-  process, since SCALE also records proposed, running and failed ones). The catalysis set also records the fourteen areas of catalysis research by which Ontologies4Cat
+  process, since SCALE also records proposed, running and failed ones). The catalysis set also records the fourteen subdomains of catalysis research by which Ontologies4Cat
   classifies ontologies (Behr, Borgelt and Kockmann, J. Cheminform. 2024, 16, 16, doi:10.1186/s13321-024-00807-2),
   with the SCALE terms that record each and what SCALE lacks (biocatalysis; a ligand role and a turnover number; transport
   criteria; energy use beyond plasma and cost). See docs/mappings.md.

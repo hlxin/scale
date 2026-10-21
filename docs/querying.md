@@ -189,7 +189,7 @@ the schema; `scale graph describe` shows it), or the `quantity_kind` of the Vari
   values state one differently is named in `limitations`. An apparent activation energy is compared by its product;
   a degree of rate control by its product, showing the temperature and pressure of its run. CQ-23 to CQ-26 run on the
   computation example.
-- **Catalysis areas** (scale-catal 0.7.1): a transport criterion is compared by the criterion its `basis` or
+- **Catalysis subdomains** (scale-catal 0.7.1): a transport criterion is compared by the criterion its `basis` or
   `definition` names (`transport_criterion`: Weisz-Prater, Mears, Carberry, Anderson; one that names none is left out
   as `missing_context`), and a Mears criterion also by the transport it judges (`transport_mode`: external or internal
   mass transfer, heat transfer to, in or across the particles); an effectiveness factor by whether it is internal or
