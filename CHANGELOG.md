@@ -17,16 +17,18 @@
     (uncertainty_calibration) and used (uncertainty_use). A validation's EVALUATES states how it split the data
     (split_strategy: random, grouped, time_based, out_of_distribution, prospective, external; grouped_by, folds,
     split_seed, preprocessing_within_split) and what its results reflect (generalization). A validation that states
-    it split one table (random, grouped, time-based, out of distribution) is no longer flagged for sharing that table
-    with the fit (the folds of a cross-validation); any other overlap is still flagged, and so is a validation called
-    external or prospective on the training data. A Dataset may be a notebook.
+    it split one table (random, grouped, time-based, out of distribution) is no longer flagged for sharing that dataset
+    with the fit (the folds of a cross-validation), nor for what both reach only through it; an observation both take
+    directly, or a record reached through another dataset, is still flagged, and so is a validation called external or
+    prospective on the training data. A Dataset may be a notebook.
   - **How the records were curated, and who checked them.** A stewardship's autonomy_level says how much of the
     curation an agent did (TRACE-AI's scale read for extraction). graph.checks records each check a person made of
     records against their source (record_check): who, when, which records, what against what, the fields checked,
     wrong and missed (the extraction's precision and recall), the outcome, and warnings acknowledged with a reason,
     which validation lists apart from the open ones (an acknowledgement matches exactly one warning). A filtered view,
     a bundle or a graph of some sources keeps the checks of the records it holds, leaves no id of a record it leaves
-    out, and drops the counts of a check it keeps only in part. `scale review sample` returns the check to fill in.
+    out, and drops the counts of a check it keeps only in part (a record left out, or one with a value or an evidence
+    item cut). `scale review sample` returns the check to fill in.
   - **`scale trace-ai G [--source ID]`** (agent tool `scale_trace_ai`) reads the checklist on a graph's records
     (domain/reporting/trace-ai.yaml: query plans per item): what they support, partly or not at all, what does not
     apply and why, and what a person checks in the source; it flags a random split and a metric stated without its

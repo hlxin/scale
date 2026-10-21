@@ -128,7 +128,8 @@ def _binds(conds: dict, name: str, var: str, seen: tuple = ()) -> bool:
 
 def _of_source(rec: dict, source: str) -> dict:
     """A record as one source states it: only the evidence of that source, and none of the values whose evidence_ids
-    all name evidence of other sources (a value that names none, or names evidence of this source, stays)."""
+    all name evidence of other sources (a value that names none, or names evidence of this source, stays); a map or a
+    list left empty by that goes too, so that a property only other sources state is absent, not an empty one."""
     props = rec.get("props")
     ev = props.get("evidence") if isinstance(props, dict) else None
     if not isinstance(ev, list):
@@ -147,9 +148,11 @@ def _of_source(rec: dict, source: str) -> dict:
                 ids = [i for i in x.get("evidence_ids") or [] if isinstance(i, str)]
                 return drop if ids and all(i in others for i in ids) else x
             kept = {k: walk(v) for k, v in x.items()}
-            return {k: v for k, v in kept.items() if v is not drop}
+            kept = {k: v for k, v in kept.items() if v is not drop}
+            return drop if x and not kept else kept
         if isinstance(x, list):
-            return [w for w in (walk(v) for v in x) if w is not drop]
+            kept_items = [w for w in (walk(v) for v in x) if w is not drop]
+            return drop if x and not kept_items else kept_items
         return x
     new = {k: (v if k == "stewardship" else walk(v)) for k, v in props.items() if k != "evidence"}
     new = {k: v for k, v in new.items() if v is not drop}
@@ -162,8 +165,8 @@ def restrict(doc: dict, source: str) -> dict:
     source (curator records, shared people and organisations; other sources are left out), and the links between them
     whose evidence cites the source or that carry none. Each keeps only that source's evidence, and loses the values
     only other sources state (:func:`_of_source`); the graph's checks keep only the records the view holds, and their
-    counts only when they keep all of them (:func:`recordchecks.prune`)."""
-    from .recordchecks import checks_of, prune
+    counts only when they keep all of them, each whole (:func:`recordchecks.prune`)."""
+    from .recordchecks import checks_of, cut_records, prune
     nodes = {n["id"]: n for n in doc.get("nodes") or [] if isinstance(n, dict)}
     if nodes.get(source, {}).get("label") != "Source":
         raise ScaleError(f"{source} is not a Source of this graph")
@@ -183,7 +186,10 @@ def restrict(doc: dict, source: str) -> dict:
     if checks_of(doc.get("graph")):
         held = {r["id"] for r in kept + links if isinstance(r.get("id"), str)}
         every = {r.get("id") for r in [*nodes.values(), *(doc.get("links") or [])] if isinstance(r, dict)}
-        out["graph"], _ = prune(dict(doc["graph"]), held, {x for x in every if isinstance(x, str)} - held)
+        before = {r["id"]: r.get("props") or {} for r in [*nodes.values(), *(doc.get("links") or [])]
+                  if isinstance(r, dict) and isinstance(r.get("id"), str)}
+        out["graph"], _ = prune(dict(doc["graph"]), held, {x for x in every if isinstance(x, str)} - held,
+                                cut_records(before, kept + links))
     return out
 
 
@@ -290,7 +296,7 @@ class _Runner:
             if gaps:
                 self.cache[key] = {"status": "schema_gap", "schema_gaps": gaps, "rows": []}
                 return self.cache[key]
-            res = self.q.run(self.doc, self.spec, {**plan, "evidence": True}, None, self.g)
+            res = self.q.run(self.doc, self.spec, {**plan, "evidence": True, "limit": None}, None, self.g)   # every row
             self.cache[key] = {
                 "status": res.get("status"),
                 "schema_gaps": res.get("schema_gaps") or [],

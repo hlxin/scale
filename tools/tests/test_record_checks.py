@@ -93,6 +93,35 @@ def test_an_acknowledgement_that_several_warnings_match_acknowledges_none():
                for w in rep["warnings"])
 
 
+def test_an_exact_acknowledgement_beside_an_ambiguous_one_in_either_order():
+    """Each acknowledgement is matched against every warning, so their order changes nothing: the exact one closes its
+    warning, the ambiguous one closes none (it would close the other if read against what the first left)."""
+    for order in (0, 1):
+        doc = campaign()
+        design = next(n for n in doc["nodes"] if n["id"] == DESIGN)
+        design["props"]["unmodeled"].append("the order in which the robot dispensed the nitrates (Methods)")
+        exact = doc["graph"]["checks"][0]["acknowledged"][0]
+        vague = dict(exact, warning="unmodeled context:")
+        doc["graph"]["checks"][0]["acknowledged"] = [exact, vague] if order == 0 else [vague, exact]
+        rep = report(doc)
+        assert [a["message"] for a in rep["acknowledged"]] == [next(w for w in report(campaign())["acknowledged"])["message"]]
+        open_ = [w["message"] for w in rep["warnings"] if w["record"] == DESIGN]
+        assert len(open_) == 1 and "dispensed the nitrates" in open_[0]
+        assert any("2 warnings on ex:sdl/design/campaign contain 'unmodeled context:'" in w["message"] for w in rep["warnings"])
+
+
+def test_a_withheld_id_is_matched_as_an_id_not_as_a_prefix():
+    """Withholding round-1 keeps an acknowledgement of round-10 and a note that names round-10; a path into round-1 is
+    round-1."""
+    g = {"checks": [{"checked_by": "p", "checked_on": "2026-10-21", "records": ["ex:a/round-10"], "scope": "s",
+                     "outcome": "passed", "note": "ex:a/round-10 was read twice.",
+                     "acknowledged": [{"record": "ex:a/round-10", "warning": "w", "reason": "as stated"}]}]}
+    kept, _ = prune(g, {"ex:a/round-10", "p"}, {"ex:a/round-1"})
+    assert kept["checks"][0]["acknowledged"] and kept["checks"][0]["note"] == "ex:a/round-10 was read twice."
+    g["checks"][0]["note"] = "compared with ex:a/round-1/result_values/x."
+    assert "checks" not in prune(g, {"ex:a/round-10", "p"}, {"ex:a/round-1"})[0]
+
+
 def test_a_malformed_check_is_reported_never_a_crash():
     doc = campaign()
     doc["graph"]["checks"][0].update(records=1, acknowledged="all of them", fields_checked="many")
@@ -139,7 +168,10 @@ def test_no_id_of_a_record_left_out_stays_in_the_checks():
     for d in (view, bundle):
         assert "ex:sdl/dataset/container" not in {n["id"] for n in d["nodes"]}
         assert "ex:sdl/dataset/container" not in json.dumps(d["graph"])
-        assert d["graph"]["checks"][0]["fields_checked"] == 46        # the records it checked are all there
+        c = d["graph"]["checks"][0]
+        # every record it checked is there, but the cross-validation without its execution environment (the container):
+        # the counts were over what the view no longer shows
+        assert len(c["records"]) == 6 and "fields_checked" not in c and "1 of them only in part" in c["note"]
 
 
 def test_a_filtered_view_keeps_only_the_checks_of_its_records():

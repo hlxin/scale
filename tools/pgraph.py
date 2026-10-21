@@ -1137,10 +1137,11 @@ def filter_for(doc: dict, viewer: list[str], today: str) -> dict:
     graph answers publicly). Otherwise (the viewer may see the header, or is a person or a mix) the header stays."""
     agents, projects = memberships(doc, viewer)
     nodes, links, refs, cut = _subset(doc, lambda r: visible(effective_stewardship(doc, r), agents, projects, today))
-    from .recordchecks import prune            # a person's check keeps only the records the view holds
+    from .recordchecks import cut_records, prune   # a person's check keeps only the records the view holds
     held = {r["id"] for r in nodes + links if isinstance(r.get("id"), str)}
     every = {r.get("id") for r in doc["nodes"] + doc["links"] if isinstance(r.get("id"), str)}
-    graph, pruned = prune(dict(doc.get("graph") or {}), held, every - held)
+    before = {r["id"]: r.get("props") or {} for r in doc["nodes"] + doc["links"] if isinstance(r.get("id"), str)}
+    graph, pruned = prune(dict(doc.get("graph") or {}), held, every - held, cut_records(before, nodes + links))
     refs += pruned
     note = (f"viewer {', '.join(sorted(viewer)) or 'public'} on {today}: "
             f"{len(doc['nodes']) - len(nodes)} nodes and {len(doc['links']) - len(links)} links withheld"
@@ -1226,10 +1227,11 @@ def restrict_to(doc: dict, declared: dict, today: str) -> tuple[dict, dict]:
         st = effective_stewardship(doc, r)
         return access_key(st, today) == own or not less_open(st, viewers, today)
     nodes, links, refs, cut = _subset(doc, keep)
-    from .recordchecks import prune            # a person's check keeps only the records the bundle holds
+    from .recordchecks import cut_records, prune   # a person's check keeps only the records the bundle holds
     held = {r["id"] for r in nodes + links if isinstance(r.get("id"), str)}
     every = {r.get("id") for r in doc["nodes"] + doc["links"] if isinstance(r.get("id"), str)}
-    graph, pruned = prune(dict(doc.get("graph") or {}), held, every - held)
+    before = {r["id"]: r.get("props") or {} for r in doc["nodes"] + doc["links"] if isinstance(r.get("id"), str)}
+    graph, pruned = prune(dict(doc.get("graph") or {}), held, every - held, cut_records(before, nodes + links))
     refs += pruned
     withheld = {"nodes": len(doc["nodes"]) - len(nodes), "links": len(doc["links"]) - len(links),
                 **({"references": refs} if refs else {}), **({"evidence_cut": cut} if cut else {})}

@@ -231,7 +231,8 @@ def science_checks(doc: dict, spec: dict, rep) -> None:
             err(nid, f"a static operation has time_pattern constant, not {p['time_pattern']}")
 
     # ---- a model validated on the data it was fitted to: not independent predictive validation
-    validation_checks(links, label, resolved_refs, rep)
+    tables = {nid for nid, lab in label.items() if lab == "Dataset" or "Dataset" in _ancestors(spec, lab)}
+    validation_checks(links, label, resolved_refs, rep, tables)
     for rid, p in props.items():
         holder_is_experiment = rid in nodes and "Experiment" in [label.get(rid)] + _ancestors(spec, label.get(rid))
         for path, v in _values(p):
@@ -277,18 +278,18 @@ CALIBRATES = ("calibration",)
 VALIDATES = ("validation", "benchmark")
 
 
-def validation_checks(links: list[dict], label: dict, resolved_refs: dict, rep) -> None:
+def validation_checks(links: list[dict], label: dict, resolved_refs: dict, rep, tables: set | None = None) -> None:
     """A validation is independent only of data its model was not fitted to. The data a model was fitted to is what an
     experiment that calibrates it (EVALUATES with evaluation_kind calibration, or HAS_OUTPUT the model) HAS_INPUT as
     training_data or calibration_data, with the records a dataset among them INCLUDES. A validation or benchmark
     (EVALUATES) of the model whose experiment HAS_INPUT any of that data, or that rests on a fitted value (result_refs),
     is reported (a warning): a fit to its own data is a calibration, never independent predictive validation. A
     validation that states it split one table (split_strategy random, grouped, time_based, out_of_distribution or
-    other, 0.7.2 on: the folds of a cross-validation, a held-out part) shares that very table with the fit by design, so
-    the table it shares, with what the table includes, is not reported; anything else they share is (a record both
-    include through other datasets), and so is any overlap of a validation that claims independent data (external,
-    prospective). Whether the split keeps the folds apart is what split_strategy says (a random split is flagged by
-    `scale trace-ai`). Nothing is rewritten."""
+    other, 0.7.2 on: the folds of a cross-validation, a held-out part) shares that very table with the fit by design: a
+    dataset (``tables``) both take directly is not reported, nor what both reach only through it. What either reaches
+    some other way is (an observation both take directly, a record another dataset includes), and so is any overlap of a
+    validation that claims independent data (external, prospective). Whether the split keeps the folds apart is what
+    split_strategy says (a random split is flagged by `scale trace-ai`). Nothing is rewritten."""
     out = defaultdict(list)
     for e in links:
         out[e.get("source")].append(e)
@@ -300,23 +301,30 @@ def validation_checks(links: list[dict], label: dict, resolved_refs: dict, rep) 
     def inputs(exp: str, roles: tuple | None) -> set:
         return _included(direct(exp, roles), out)
 
+    tables = tables or set()
     fitted: dict[str, set] = defaultdict(set)
-    fitted_tables: dict[str, set] = defaultdict(set)       # what a fit takes directly (not through INCLUDES)
+    fitted_direct: dict[str, set] = defaultdict(set)       # what a fit takes directly (not through INCLUDES)
     for e in links:
         p = e.get("props") or {}
         if (e.get("type") == "EVALUATES" and p.get("evaluation_kind") in CALIBRATES) or \
                 (e.get("type") == "HAS_OUTPUT" and label.get(e.get("target")) is not None):
             fitted[e.get("target")] |= inputs(e.get("source"), FIT_ROLES)
-            fitted_tables[e.get("target")] |= direct(e.get("source"), FIT_ROLES)
+            fitted_direct[e.get("target")] |= direct(e.get("source"), FIT_ROLES)
     for e in links:
         p = e.get("props") or {}
         if e.get("type") != "EVALUATES" or p.get("evaluation_kind") not in VALIDATES:
             continue
         model, exp = e.get("target"), e.get("source")
         used = inputs(exp, None) - {model}
-        shared = used & fitted.get(model, set())
-        if p.get("split_strategy") in SPLITS_OF_ONE_TABLE:     # its folds are parts of a table the fit takes as well
-            shared -= _included(direct(exp, None) & fitted_tables.get(model, set()), out)
+        fit_all, fit_direct = fitted.get(model, set()), fitted_direct.get(model, set())
+        shared = used & fit_all
+        split = {x for x in direct(exp, None) & fit_direct if x in tables}
+        if p.get("split_strategy") in SPLITS_OF_ONE_TABLE and split:
+            # its folds are parts of a dataset the fit takes as well: what both reach only through it is held out by
+            # the split, as stated; what either reaches another way is not
+            fit_other = _included(fit_direct - split, out)
+            val_other = _included(direct(exp, None) - split - {model}, out)
+            shared = (used & fit_other) | (fit_all & val_other)
         overlap = sorted(str(x) for x in shared)
         if overlap:
             rep.add("warning", e.get("id"), f"a {p['evaluation_kind']} of {model} on data it was fitted to "

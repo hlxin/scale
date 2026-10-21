@@ -183,9 +183,10 @@ def subset(parts: dict, slugs: list[str], header: dict | None = None) -> dict:
     """The parts of a graph of some of the sources: those sources, the shared records they reach (through their own
     links, then through links between shared records) and those the graph's own object names (its stewardship's
     organisation and project), and in shared records only the evidence of those sources. The graph's checks
-    (``record_check``) keep the records the subset holds, with their checkers; a check with none of them goes.
+    (``record_check``) keep the records the subset holds, with their checkers; a check with none of them goes, and one
+    whose shared records lost evidence keeps no counts (:func:`recordchecks.prune`).
     ``header`` replaces keys of the graph's own object (a new id, title, description)."""
-    from .recordchecks import checks_of, prune, records_of
+    from .recordchecks import checks_of, cut_records, prune, records_of
     missing = sorted(set(slugs) - set(parts["sources"]))
     if missing:
         raise ScaleError(f"no such sources: {', '.join(missing)}")
@@ -232,7 +233,8 @@ def subset(parts: dict, slugs: list[str], header: dict | None = None) -> dict:
         every = {r["id"] for p in [parts["shared"], *parts["sources"].values()]
                  for r in [*p.get("nodes", []), *p.get("links", [])]}
         present = own | {r["id"] for r in nodes + links}
-        head["graph"], _ = prune(dict(graph), present, every - present)
+        before = {r["id"]: r.get("props") or {} for r in [*parts["shared"]["nodes"], *parts["shared"]["links"]]}
+        head["graph"], _ = prune(dict(graph), present, every - present, cut_records(before, nodes + links))
     if header:
         head["graph"] = {**head.get("graph", {}), **header}
     return {"header": head, "shared": {**parts["shared"], "nodes": nodes, "links": links}, "sources": chosen}

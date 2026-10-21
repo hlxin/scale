@@ -220,11 +220,16 @@ def test_one_sources_records_are_read_as_that_source_states_them(cw):
     assert {e["source"] for e in kept["props"]["evidence"]} == {"ex:sdl/source/paper"}
     assert other["id"] not in {n["id"] for n in view["nodes"]} and len(view["graph"]["checks"]) == 1
     rep = assess(doc, spec_of(doc), cw, "ex:sdl/source/paper")
-    assert len(rep["curation"]["checks"]) == 1 and rep["curation"]["checks"][0]["precision"] == round(45 / 46, 4)
+    assert len(rep["curation"]["checks"]) == 1          # the second source's check is of a record this view leaves out
+    # the cross-validation lost the second source's value: the check's precision was over both sources' fields
+    assert rep["curation"]["checks"][0]["precision"] is None and "only in part" in view["graph"]["checks"][0]["note"]
     second = restrict(doc, "ex:sdl/source/second")
     assert [v["id"] for v in node(second, cv["id"])["props"]["result_values"]] == ["rmse"]
     first, own = second["graph"]["checks"]                 # the record both report keeps its check, not its counts
     assert first["records"] == [cv["id"]] and "fields_checked" not in first and own["records"] == [other["id"]]
+    del cv["props"]["result_values"][-1], cv["props"]["evidence"][-1]
+    rep = assess(doc, spec_of(doc), cw, "ex:sdl/source/paper")        # nothing of the record cut: the counts stay
+    assert rep["curation"]["checks"][0]["precision"] == round(45 / 46, 4)
 
 
 def test_one_sources_records(cw):
@@ -245,3 +250,67 @@ def test_the_command_and_the_agent_tool_give_the_report(capsys):
     res = ScaleToolkit(repo=REPO).call("trace_ai", {"path": str(CAMPAIGN), "format": "markdown"})
     assert "error" not in res and res["summary"]["supported"] == 14 and res["markdown"].startswith("# TRACE-AI")
     assert json.dumps(res)                                                   # JSON all the way down
+
+
+def test_record_by_record_reads_every_record_past_the_query_limit(cw):
+    """Coverage counts every record a condition finds, not the first 200 rows of a query."""
+    doc = campaign()
+    base = node(doc, "ex:sdl/dataset/notebook")
+    for i in range(201):
+        d = copy.deepcopy(base)
+        d["id"] = f"ex:sdl/dataset/run-{i:03d}"
+        if i == 200:
+            for k in ("uri", "identifiers"):
+                d["props"].pop(k, None)                       # the last one says nowhere where it is
+        doc["nodes"].append(d)
+    a4 = item(assess(doc, spec_of(doc), cw), "A4")
+    assert a4["status"] == "partial" and a4["coverage"]["records"] == 204 and a4["coverage"]["complete"] == 203
+    assert a4["coverage"]["incomplete"] == [{"record": "ex:sdl/dataset/run-200", "lacks": ["located"]}]
+
+
+def test_a_structure_a_learned_model_computes_is_no_learned_model(cw):
+    """A machine-learned calculation USES_MODEL its potential and the slab it computes; only the potential is held to
+    what TRACE-AI asks of a model."""
+    rep = run(ENERGIES, cw)
+    covered = {x["record"] for i in rep["items"] if i.get("coverage") and i["coverage"]["subject"] == "model"
+               for x in i["coverage"]["incomplete"]}
+    assert covered == {"ex:ce/model/example-mlip"} and item(rep, "B1")["coverage"]["records"] == 1
+
+
+def test_a_property_only_another_source_states_is_absent_from_a_source_view():
+    """A map or a list whose every entry another source states goes with them: an empty one would read as stated."""
+    doc = campaign()
+    doc["nodes"].append({"id": "ex:sdl/source/second", "label": "Source",
+                         "props": {"name": "a second invented paper", "origin": "synthetic", "source_kind": "article"}})
+    model = node(doc, "ex:sdl/model/gp-surrogate")
+    model["props"]["evidence"].append({"id": "second", "kind": "text", "locator": "p. 2", "source": "ex:sdl/source/second"})
+    for v in model["props"]["hyperparameters"].values():
+        v["evidence_ids"] = ["second"]
+    doc["links"].append({"id": "ex:sdl/link/second-0", "type": "REPORTED_IN", "source": model["id"],
+                         "target": "ex:sdl/source/second", "props": {"origin": "synthetic"}})
+    kept = node(restrict(doc, "ex:sdl/source/paper"), model["id"])
+    assert "hyperparameters" not in kept["props"] and kept["props"]["architecture"]
+    first = next(iter(model["props"]["hyperparameters"].values()))
+    model["props"]["evidence"][0]["id"] = "paper"
+    first["evidence_ids"] = ["paper"]                                      # one entry the paper states: it stays
+    kept = node(restrict(doc, "ex:sdl/source/paper"), model["id"])
+    assert list(kept["props"]["hyperparameters"].values()) == [first]
+
+
+def test_a_vocabulary_gap_follows_how_each_filter_compares():
+    """eq ignores case for a value and compares a list item by item as written; in compares as written; contains a part
+    of a value; an entry of a list of a vocabulary is one of its values. Without values=True nothing changes."""
+    spec = spec_of(load_doc(CAMPAIGN))
+
+    def gaps(label, f):
+        return schema_gaps({"match": {"label": label, "as": "x", "where": [f]}, "return": ["x.name"]}, spec, values=True)
+    assert gaps("CatalyticTest", {"prop": "driving_forces", "op": "eq", "value": ["thermo"]}) == []
+    assert gaps("CatalyticTest", {"prop": "driving_forces", "op": "contains", "value": "ther"}) == []
+    assert gaps("CatalyticTest", {"prop": "driving_forces.*", "op": "eq", "value": "Photo"}) == []
+    assert gaps("CatalyticTest", {"prop": "driving_forces.*", "op": "eq", "value": "sonic"}) == [
+        "CatalyticTest.driving_forces has no value sonic"]
+    assert gaps("Dataset", {"prop": "data_kind", "op": "eq", "value": "Notebook"}) == []
+    assert gaps("Dataset", {"prop": "data_kind", "op": "in", "value": ["Notebook"]}) == [
+        "Dataset.data_kind has no value Notebook"]
+    assert gaps("Dataset", {"prop": "data_kind", "op": "contains", "value": "xyz"}) == [
+        "Dataset.data_kind has no value containing xyz"]

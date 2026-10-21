@@ -39,8 +39,8 @@ conditions:
         return:
           - data.name
   ml_model:
-    description: a machine-learned model (a calculation of kind machine_learned that USES_MODEL a model, or a model that
-      states its architecture or uncertainty method)
+    description: a machine-learned model (a Model, not a structure, that a calculation of kind machine_learned
+      USES_MODEL, or that states its architecture or uncertainty method)
     plans:
       - match:
           label: Computation
@@ -54,12 +54,19 @@ conditions:
             edge: USES_MODEL
             to: Model
             as: model
+            where:
+              - prop: label
+                op: eq
+                value: Model
         return:
           - model.name
       - match:
           label: Model
           as: model
           where:
+            - prop: label
+              op: eq
+              value: Model
             - prop: architecture
               op: exists
         return:
@@ -68,6 +75,9 @@ conditions:
           label: Model
           as: model
           where:
+            - prop: label
+              op: eq
+              value: Model
             - prop: uncertainty_method
               op: exists
         return:

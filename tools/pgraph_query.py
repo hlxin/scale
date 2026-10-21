@@ -1087,27 +1087,43 @@ def schema_gaps(plan: dict, spec: dict, values: bool = False) -> list[str]:
         return f"{'a value entry' if label == ENTRY else label}.{parse_path(prop)[0]}"
 
     def value_gap(label: str | None, f: dict, edge: bool = False) -> None:
-        """Record a gap when ``f`` asks a vocabulary only for values it does not hold (with ``values``)."""
+        """Record a gap when ``f`` asks a vocabulary only for what it does not hold, as the filter compares (with
+        ``values``): eq a value ignoring case, or a list item by item as written; in one of its values as written;
+        contains a part of a value, ignoring case. An entry of a list of a vocabulary is one of its values."""
         op = f.get("op", "eq")
         if not values or label in (None, ENTRY) or op not in ("eq", "in", "contains"):
             return
         prop, entry, quals = parse_path(f["prop"])
-        if entry is not None or quals:
-            return                                          # an entry of a map or a list: not the property's vocabulary
+        if quals:
+            return
         c = spec["common"]["link" if edge else "node"]
         d = (c.get("properties", c)).get(prop) or ((spec["edges" if edge else "nodes"].get(label) or {})
                                                     .get("properties") or {}).get(prop)
         if not isinstance(d, dict):
             return
-        enum = d if d.get("type") == "enum" else (d.get("items") if d.get("type") == "list" else None)
-        if not isinstance(enum, dict) or enum.get("type") != "enum" or not isinstance(enum.get("values"), list):
+        if d.get("type") == "enum" and entry is None:
+            members, many = d.get("values"), False
+        elif d.get("type") == "list" and isinstance(d.get("items"), dict) and d["items"].get("type") == "enum":
+            members, many = d["items"].get("values"), entry is None        # the list itself, or one entry of it
+        else:
             return
-        if op == "contains" and enum is d:
-            return                                          # a substring of one value, not a value
-        held = {str(x).lower() for x in enum["values"]}
-        want = f.get("value") if op == "in" else [f.get("value")]
-        if isinstance(want, list) and want and not any(str(w).lower() in held for w in want):
-            gaps.append(f"{label}.{prop} has no value {', '.join(map(str, want))}")
+        if not isinstance(members, list) or not members:
+            return
+        want, low = f.get("value"), [str(m).lower() for m in members]
+        if op == "eq" and many:                 # the list equals a list, item by item, as written
+            ok = not isinstance(want, list) or all(w in members for w in want)
+            asked = want if isinstance(want, list) else []
+        elif op == "eq":                        # a value, ignoring case
+            ok = not isinstance(want, str) or want.lower() in low
+            asked = [want]
+        elif op == "in":                        # one of the values, as written
+            ok = many or not isinstance(want, list) or any(w in members for w in want)
+            asked = want if isinstance(want, list) else []
+        else:                                   # contains: a part of a value (of an item of a list), ignoring case
+            ok = not isinstance(want, str) or any(want.lower() in m for m in low)
+            asked = [f"containing {want}"]
+        if not ok:
+            gaps.append(f"{label}.{prop} has no value {', '.join(map(str, asked))}")
 
     ml = plan["match"].get("label")
     if ml and ml not in spec["nodes"]:

@@ -315,6 +315,21 @@ def test_a_stated_split_exempts_only_the_table_it_splits():
     inp = next(e for e in d["links"] if e["type"] == "HAS_INPUT" and e["source"] == grouped)
     inp["target"] = "ex:sdl/dataset/holdout"
     assert len(leaks(d)) == 1 and "(ex:sdl/test/round-1)" in leaks(d)[0]
+    inp["target"] = runs
+    # an observation the fit and the validation both take directly, beside the table: no split holds it out
+    for exp, role in (("ex:sdl/experiment/gp-fit", "training_data"), (grouped, "validation_data")):
+        d["links"].append({"id": f"ex:sdl/link/direct-{role}", "type": "HAS_INPUT", "source": exp,
+                           "target": "ex:sdl/test/round-2", "props": {"origin": "synthetic", "role": role}})
+    assert len(leaks(d)) == 2 and all("(ex:sdl/test/round-2)" in w for w in leaks(d))    # the random folds too
+    d["links"] = [e for e in d["links"] if not e["id"].startswith("ex:sdl/link/direct-")]
+    # a run the fit also takes through another dataset: the split of the shared table does not hold it out
+    d["nodes"].append({"id": "ex:sdl/dataset/extra", "label": "Dataset",
+                       "props": {"name": "an earlier table", "data_kind": "table", "origin": "synthetic"}})
+    d["links"] += [{"id": "ex:sdl/link/extra-1", "type": "INCLUDES", "source": "ex:sdl/dataset/extra",
+                    "target": "ex:sdl/test/round-3", "props": {"origin": "synthetic"}},
+                   {"id": "ex:sdl/link/extra-fit", "type": "HAS_INPUT", "source": "ex:sdl/experiment/gp-fit",
+                    "target": "ex:sdl/dataset/extra", "props": {"origin": "synthetic", "role": "training_data"}}]
+    assert len(leaks(d)) == 2 and all("(ex:sdl/test/round-3)" in w for w in leaks(d))
 
 
 def test_fitting_data_are_never_counted_as_independent_validation(doc):

@@ -13,18 +13,32 @@ person's review of the pull request does that.
   acknowledgement that matches no warning is reported, so that one never outlives the warning it was written for.
 - :func:`prune` keeps a check to the records a view or a subset holds (``scale graph filter``, a graph of some
   sources): no id of a record left out stays in the header (an acknowledgement or a check whose text names one goes),
-  a check with no record left, or whose checker is left out, goes, and a check that loses records loses its counts,
-  which were over all of them.
+  a check with no record left, or whose checker is left out, goes, and a check that loses records, or keeps one only
+  in part (a value or an evidence item cut), loses its counts, which were over all of what it checked.
 - :func:`quality` gives a check's precision and recall from its counts.
 """
 
 from __future__ import annotations
 
+import re
 from typing import Any
 
 ACK_KEYS = ("record", "warning", "reason")
 COUNTS = ("fields_checked", "fields_wrong", "fields_missed")
 TEXTS = ("scope", "note", "tolerance")          # a check's free text, which may name a record
+ID_LIKE = re.compile(r"[A-Za-z0-9_.:/-]+")        # a run of the characters a record id is written with
+
+
+def names_any(text: Any, ids: set) -> bool:
+    """Whether a text names one of ``ids``: a run of id characters that is one of them, or a path into one
+    (``<id>/result_values/x``); a longer id that only begins with one (``round-10`` for ``round-1``) is not it."""
+    if not isinstance(text, str) or not ids:
+        return False
+    for run in ID_LIKE.findall(text):
+        steps = run.rstrip(".:").split("/")
+        if any("/".join(steps[:i]) in ids for i in range(len(steps), 0, -1)):
+            return True
+    return False
 
 
 def checks_of(graph: Any) -> list[dict]:
@@ -161,19 +175,17 @@ def acknowledge(doc: dict, rep) -> None:
                                      "checked_on": c.get("checked_on"), "check": i})
 
 
-def prune(graph: dict, present: set[str], withheld: set[str] | None = None) -> tuple[dict, int]:
+def prune(graph: dict, present: set[str], withheld: set[str] | None = None,
+          partial: set[str] | None = None) -> tuple[dict, int]:
     """``graph`` with its checks kept to the records in ``present``; a check with no record left, or whose checker is not
     in ``present``, goes. Nothing of ``withheld`` (the ids of the records left out) stays: an acknowledgement whose
     record is left out or whose text names one goes, and so does a check whose own text (scope, note, tolerance) names
-    one. A check that loses records loses its counts, sample fraction and seed (they were over every record it
-    checked), and its note says how many it kept. Returns the graph and the number of references removed."""
+    one (:func:`names_any`). A check that loses records, or covers one of ``partial`` (a record the view keeps only in
+    part: a value or an evidence item cut), loses its counts, sample fraction and seed (they were over all of what it
+    checked), and its note says so. Returns the graph and the number of references removed."""
     if not checks_of(graph):
         return graph, 0
-    withheld = withheld or set()
-
-    def names_withheld(text: Any) -> bool:
-        return isinstance(text, str) and any(x in text for x in withheld)
-
+    withheld, partial = withheld or set(), partial or set()
     out, removed = [], 0
     for c in graph["checks"]:
         if not isinstance(c, dict):
@@ -181,24 +193,26 @@ def prune(graph: dict, present: set[str], withheld: set[str] | None = None) -> t
             continue
         recs = records_of(c)
         kept_recs = [r for r in recs if r in present]
-        if not kept_recs or c.get("checked_by") not in present or any(names_withheld(c.get(k)) for k in TEXTS):
+        if not kept_recs or c.get("checked_by") not in present or any(names_any(c.get(k), withheld) for k in TEXTS):
             removed += max(len(recs), 1)
             continue
         kept = dict(c, records=kept_recs)
-        acks = [a for a in acknowledgements_of(c)
-                if a.get("record") in kept_recs and not any(names_withheld(a.get(k)) for k in ACK_KEYS)]
+        acks = [a for a in acknowledgements_of(c) if a.get("record") in kept_recs
+                and not any(names_any(a.get(k), withheld) for k in ("warning", "reason"))]
         removed += len(_list(c.get("acknowledged"))) - len(acks)
         if acks:
             kept["acknowledged"] = acks
         else:
             kept.pop("acknowledged", None)
-        lost = len(recs) - len(kept_recs)
-        if lost:
+        lost, cut = len(recs) - len(kept_recs), [r for r in kept_recs if r in partial]
+        if lost or cut:
             removed += lost
             for k in (*COUNTS, "fraction", "seed", "selection"):
                 kept.pop(k, None)
-            said = (f"this view keeps {len(kept_recs)} of the {len(recs)} records the check covered; its counts, which "
-                    "were over all of them, are left out")
+            said = (f"this view keeps {len(kept_recs)} of the {len(recs)} records the check covered" if lost else
+                    "this view keeps the records the check covered")
+            said += (f", {len(cut)} of them only in part" if cut else "") + ("; its counts, which were over all of what "
+                                                                            "it checked, are left out")
             kept["note"] = f"{kept['note']} ({said})" if kept.get("note") else said
         out.append(kept)
     graph = dict(graph)
@@ -209,4 +223,14 @@ def prune(graph: dict, present: set[str], withheld: set[str] | None = None) -> t
     return graph, removed
 
 
-__all__ = ["ACK_KEYS", "COUNTS", "checks_of", "records_of", "quality", "check_document", "acknowledge", "prune"]
+def cut_records(before: dict, after: list[dict]) -> set[str]:
+    """The records of ``after`` whose content differs from what ``before`` (id -> props) held, their stewardship
+    aside: what a view or a subset keeps only in part."""
+    def content(props: Any) -> Any:
+        return {k: v for k, v in props.items() if k != "stewardship"} if isinstance(props, dict) else props
+    return {r["id"] for r in after if isinstance(r.get("id"), str) and r["id"] in before
+            and content(r.get("props") or {}) != content(before[r["id"]])}
+
+
+__all__ = ["ACK_KEYS", "COUNTS", "checks_of", "records_of", "names_any", "quality", "check_document", "acknowledge",
+           "prune", "cut_records"]

@@ -64,12 +64,14 @@ satisfies TRACE-AI: its authors fill the checklist, and a reviewer reads it.
 | D2 | notebooks linked to sections and items | by hand (the notebooks are listed to read) |
 | D3 | the execution environment | an experiment's execution_environment, or a Dataset of data_kind environment |
 
-B items apply when a machine-learned model is recorded; C items when an adaptive or autonomous campaign is (a Design of
-kind adaptive, or one that states an autonomy_level); D items when either is.
+B items apply when a machine-learned model is recorded (a Model, not a structure the calculation also uses); C items
+when an adaptive or autonomous campaign is (a Design of kind adaptive, or one that states an autonomy_level); D items
+when either is.
 
 `--source` reads one source's records as that source states them: a record several sources report keeps only that
-source's evidence and the values it states (a value whose evidence_ids name only another source's evidence goes), and
-the checks keep only the records the source holds.
+source's evidence and the values it states (a value whose evidence_ids name only another source's evidence goes, and a
+map or a list left empty goes with it), and the checks keep only the records the source holds, without their counts
+when a record is kept only in part.
 
 ## Recording an agentic campaign
 
@@ -107,8 +109,9 @@ the extraction's quality was measured. SCALE asks the same of its own graphs:
   apart from the open ones, and reports an acknowledgement that matches no warning or several (it then acknowledges
   none), and a check of a record that a newer record revises.
 - A filtered view, a bundle or a graph of some sources keeps a check to the records it holds. It leaves no id of a
-  record it leaves out: an acknowledgement or a check whose text names one goes. A check that keeps only some of its
-  records loses its counts and its sample's fraction and seed, which were over all of them, and says so in its note.
+  record it leaves out: an acknowledgement or a check whose text names one (the id itself, or a path into it) goes. A
+  check that keeps only some of its records, or keeps one only in part (a value or an evidence item cut), loses its
+  counts and its sample's fraction and seed, which were over all of what it checked, and says so in its note.
 
 ```bash
 scale review sample G.json --include-flagged     # the records to check, and the check to fill in afterwards
