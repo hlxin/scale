@@ -3210,6 +3210,42 @@ quantities:
           terms: []
       unspecified: [not_reported]
       unstated: group
+    phase_reference:
+      description: What a phase delay is measured against, as the analysis that produced it states it
+        (phase_reference) - the stimulus (the imposed modulation, the reference of phase-sensitive detection) or the
+        response of another species (phase_reference_species). A lag behind the stimulus and a lag behind another
+        response are two quantities, never compared with one another; a delay whose analysis states neither is left
+        out of a comparison.
+      read_from: [producer]
+      property: phase_reference
+      values:
+        stimulus:
+          terms: [stimulus]
+        species_response:
+          terms: [species response]
+      unspecified: [other, not_reported]
+    phase_reference_species:
+      description: The species whose response a phase delay is measured against, when its analysis measures against
+        another response (phase_reference_species). Lags behind two species' responses are two quantities; one whose
+        analysis names no species is left out of a comparison.
+      read_from: [producer]
+      property: phase_reference_species
+      open: true
+    modulation_period:
+      description: The period of the modulation a phase delay was read at, as its analysis states it
+        (modulation_period). A response's phase, and so its delay, depends on the frequency of the stimulus; delays read
+        at two periods are two quantities. A delay whose analysis states no period is left out of a comparison.
+      read_from: [producer]
+      property: modulation_period
+      open: true
+    demodulation_harmonic:
+      description: The harmonic of the modulation frequency at which phase-sensitive detection read a phase
+        (demodulation_harmonic, 1 for the fundamental). Phases at two harmonics are two quantities; a delay whose
+        analysis states no harmonic is compared only with the others that state none.
+      read_from: [producer]
+      property: demodulation_harmonic
+      open: true
+      unstated: group
   kinds:
     temperature:
       description: A thermodynamic temperature, or a difference of temperatures, as reported.
@@ -3528,13 +3564,21 @@ quantities:
         warn: true
       maturity: provisional
     phase_delay:
-      description: How long a response lags the stimulus in a periodic experiment (or the response its definition names),
-        from its phase angle at the modulation frequency (phase-sensitive detection; Urakawa, Burgi and Baiker, Chem. Eng.
-        Sci. 2008, 63, 4902, doi:10.1016/j.ces.2007.06.009), its target the species or band that responds. A species that
-        responds no later than the product may be its intermediate; one that lags it may be a spectator; neither delay
-        alone shows which.
+      description: How long a response lags the stimulus in a periodic experiment (or the response of another species, as
+        its analysis states), from its phase angle at the modulation frequency (phase-sensitive detection; Urakawa, Burgi
+        and Baiker, Chem. Eng. Sci. 2008, 63, 4902, doi:10.1016/j.ces.2007.06.009), its target the species or band that
+        responds. A species that responds no later than the product may be its intermediate; one that lags it may be a
+        spectator; neither delay alone shows which. Delays are compared only for one species, one reference, one period
+        and one harmonic, as the analysis that produced them states them.
       dimensions: [time]
-      compare_by: [species]
+      compare_by:
+      - species
+      - phase_reference
+      - context: phase_reference_species
+        when:
+          phase_reference: [species_response]
+      - modulation_period
+      - demodulation_harmonic
       maturity: provisional
     response_time_constant:
       description: The time constant of a response to a step, a pulse or a switch (an exponential fitted to it, or as its

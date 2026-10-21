@@ -307,6 +307,9 @@ def main() -> None:
     defect("interval-method-not-in-vocabulary", "an interval whose method is stated in other words",
            lambda d: entry(d, "analysis/fit-differential", "ea_co2_dissociation").__setitem__("interval_method", "hessian"),
            base=transient)
+    defect("phase-reference-not-in-vocabulary", "phase delays whose reference is stated in other words",
+           lambda d: node(d, "analysis/phase-sensitive-detection")["props"].__setitem__("phase_reference", "input"),
+           base=transient)
     # it states its access (public, like every committed document) but not who contributed it or its project
     defect("research-data-without-stewardship", "research data that does not say who contributed it or which project it belongs to",
            lambda d: d["graph"].__setitem__("stewardship", {"access": "public"}), base=template("catalysis", VERSION))

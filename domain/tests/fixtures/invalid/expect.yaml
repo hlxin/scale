@@ -155,3 +155,8 @@ fixtures:
     error: "is not one of"
     reason: How an interval was obtained is one of the listed methods, so that an asymptotic interval is never read as a
       profile or a posterior.
+  - file: phase-reference-not-in-vocabulary.json
+    base: domain/examples/scale-catal/transient-examples/transient-kinetics.json
+    error: "is not one of"
+    reason: What a phase delay is measured against is the stimulus or another species' response, so that delays against
+      two references are never compared.

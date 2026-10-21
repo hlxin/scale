@@ -183,7 +183,9 @@ the schema; `scale graph describe` shows it), or the `quantity_kind` of the Vari
   level of theory is left out as `missing_context`, and says so (`its producer … states its level_of_theory as not
   reported`), and so is one that names no reaction (`its unresolved_target … names no process`). A value whose
   producer states no charge treatment is compared with the values that state none (`charge_treatment: not stated`), a
-  group of its own (scale-catal 0.7.3 on; before, such a value was left out as `missing_context`). A constant-charge value converted to constant potential by a stated Analysis (an evidenced
+  group of its own, as the contract has said since it was added (`unstated: group`, scale-catal 0.7.0); the tools
+  left such a value out as `missing_context` until they were fixed, whatever version a document pins, and now group it
+  under every version that has the contract. A constant-charge value converted to constant potential by a stated Analysis (an evidenced
   conversion) is compared with constant-potential ones. What the producer states of its dispersion, `hubbard_u`, spin,
   solvation, temperature, pressure and potential is shown (`compared` … `shows`), never grouped by; a group whose
   values state one differently is named in `limitations`. An apparent activation energy is compared by its product;
@@ -200,6 +202,12 @@ the schema; `scale graph describe` shows it), or the `quantity_kind` of the Vari
   on the area example.
 - **Transients and fitted constants** (scale-catal 0.7.3): a surface residence time, an amount of surface
   intermediates, a phase delay and a response time constant are compared by the species they are of (their target).
+  A phase delay is also compared by what its analysis measured it against (`phase_reference`: the stimulus, or the
+  response of another species, then also by `phase_reference_species`), the period it was read at
+  (`modulation_period`) and the harmonic (`demodulation_harmonic`, those that state none together): a lag behind the
+  stimulus and a lag behind another response, or lags at two periods, are never compared, and a delay whose analysis
+  states no reference, no period, or no species for the response it is measured against is left out as
+  `missing_context`.
   An elementary step's activation energy also shows how the fit that produced it treated the reactor (`reactor_model`,
   read from the producer, as dispersion is shown for a computed one): constants fitted to one data set as plug flow and
   as a differential reactor stay in one group, each row showing its treatment, and the limitations name the group as

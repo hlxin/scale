@@ -17,18 +17,22 @@
     step_response or frequency_response, with new kinds of result: surface_residence_time and
     surface_intermediate_amount (an isotope switch at steady state; Shannon and Goodwin, Chem. Rev. 1995), phase_delay
     (phase-sensitive detection; Urakawa, Burgi and Baiker, Chem. Eng. Sci. 2008) and response_time_constant, each
-    compared by the species it is of. That a species is an intermediate or a spectator stays a Claim the analysis
-    supports.
+    compared by the species it is of. A modulation analysis states what its delays are measured against
+    (phase_reference: the stimulus or another species' response, phase_reference_species), the modulation_period and
+    the demodulation_harmonic, and a phase delay is compared only within one reference, period and harmonic. That a
+    species is an intermediate or a spectator stays a Claim the analysis supports.
   - **Fitted constants.** A kinetic fit states its reactor_model (differential, stirred_tank, plug_flow,
     axial_dispersion, batch, knudsen_pulse), rate_basis, concentration_measure (and standard_pressure) and
     thermodynamic_consistency (Mhadeshwar, Wang and Vlachos, J. Phys. Chem. B 2003); a value states how its interval was
     obtained (interval_method: curvature, profile_likelihood, bootstrap, bayesian_posterior, …) and, when fitted,
     whether the data determine it (identifiability; Raue et al., Bioinformatics 2009). A comparison of a step's
     activation energy shows each value's reactor treatment and names a group that mixes treatments.
-  - **Fixed:** a value whose producer states no charge treatment was left out of a scientific comparison as
-    missing_context; it is now compared with the others that state none ("not stated"), as the contract says.
-  - An example (transient-examples), CQ-31 to CQ-33, five counterexamples, the checklist's cases for pseudo-random,
-    periodic and pulsed programs, transient analyses and kinetic fits. Existing documents keep 0.7.2; the migration
+  - **Fixed (the tools, every schema version with the contract, 0.7.0 on):** a value whose producer states no charge
+    treatment was left out of a scientific comparison as missing_context; it is now compared with the others that
+    state none ("not stated"), as the contract has said since 0.7.0.
+  - An example (transient-examples), CQ-31 to CQ-33, six counterexamples, the checklist's cases for pseudo-random,
+    periodic and pulsed programs, transient analyses (a modulation analysis's reference, period and harmonic) and
+    kinetic fits. Existing documents keep 0.7.2; the migration
     step rewrites nothing.
 
 - **Schema 0.7.2 (additive): what TRACE-AI asks of agentic catalysis, and who checked the records an agent

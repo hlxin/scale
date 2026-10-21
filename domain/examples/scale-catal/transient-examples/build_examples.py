@@ -216,7 +216,9 @@ def transient_kinetics() -> dict:
                  "Phase-sensitive detection of the spectra and the outlet CO2 at the modulation frequency",
                  analysis_kind="modulation_excitation", temperature=V(150, "°C"),
                  method="demodulation at the fundamental (k = 1); phase angles converted to delays at 1/60 Hz",
-                 limitations="delays are behind the CO stimulus; a band that overlaps another shares its phase",
+                 phase_reference="stimulus", modulation_period=V(60, "s"), demodulation_harmonic=1,
+                 limitations="delays are behind the CO stimulus; where two bands overlap, the measured phase is a mix of "
+                             "theirs, so it is assigned to one species only tentatively",
                  evidence=[ev("Figure 5", "figure", id="f5")],
                  result_values=[
                      {"id": "delay_co_linear", "status": "present", "value": 2.0, "unit": "s", "variable": v_delay,
@@ -257,12 +259,14 @@ def transient_kinetics() -> dict:
 
     # ---- 3. a pseudo-random binary sequence and a kinetic model fitted to it twice
     prbs_test = test("methanation-prbs-320c", "CO2 methanation at 320 °C, CO2 inlet in a pseudo-random binary sequence",
-                     ni, micro, methanation, feed("h2-co2", "H2/CO2 = 4 in Ar", [co2, h2, ar]), 320, locator="Figure 6")
+                     ni, micro, methanation, feed("h2-co2", "40 % H2 in Ar, CO2 switched between 4 and 8 %",
+                                                  [co2, h2, ar]), 320, locator="Figure 6")
     prbs = node("operation/co2-sequence", "Operation", "CO2 inlet between 4 and 8 % in a 63-bit sequence of 5 s bits",
                 operation_mode="dynamic", time_pattern="programmed", waveform="pseudo_random_binary",
                 varied_quantities=["CO2 mole fraction in the feed"], levels=[V(4, "%"), V(8, "%")], sequence_length=63,
                 bit_duration=V(5, "s"), cycles=3, program_detail="exact", time_origin="the first bit of the sequence",
-                note="the sequence's generator and seed are given in the Supporting Information",
+                note="the sequence's generator and seed are given in the Supporting Information; H2 is held at 40 % "
+                     "throughout (Ar balances the CO2 switch), so H2/CO2 is 10 at the low level and 5 at the high one",
                 evidence=[ev("Methods, transients"), ev("Supporting Information, Table S1", "table")])
     link("HAS_OPERATION", prbs_test, prbs)
     s_ch4 = series("ch4-outlet", "outlet CH4 (m/z 15)", "CH4 signal", "A", sampling_interval=V(0.25, "s"),

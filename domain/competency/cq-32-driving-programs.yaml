@@ -5,7 +5,8 @@ question: Which tests were driven by a program - an isotope switch, a modulation
   loop - with which levels and timing, and does the source give enough to rebuild the program?
 description: |
   A test operated dynamically HAS_OPERATION an Operation that states its waveform, the levels it switches between, its
-  period or its sequence (sequence_length and bit_duration) or its segments, what t = 0 is (time_origin), and how much
+  period and duty cycle, or its sequence (sequence_length and bit_duration), or its segments with their durations,
+  what t = 0 is (time_origin), and how much
   of the program the source gives (program_detail - exact, every switch or a rule that regenerates them; parametric,
   only the pattern's parameters; descriptive). The example's four tests are an isotope switch, a square-wave
   modulation (parametric), a 63-bit pseudo-random sequence of 5 s bits (exact, its generator in the Supporting
@@ -33,8 +34,10 @@ plan:
     - program.waveform
     - program.levels
     - program.period
+    - program.duty_cycle
     - program.sequence_length
     - program.bit_duration
+    - program.segments
     - program.cycles
     - program.program_detail
     - program.time_origin
@@ -50,6 +53,14 @@ expect:
     program.waveform:
       - square
       - pseudo_random_binary
+    program.period:
+      - 60
+    program.duty_cycle:
+      - 50
+    program.sequence_length:
+      - 63
+    program.bit_duration:
+      - 5
 variants:
   - description: The programs the source gives exactly, every switch or a rule that regenerates them.
     plan:

@@ -505,9 +505,10 @@ nodes:
           product's surface_residence_time and surface_intermediate_amount; pulse_response = the responses to pulses
           (a pulse reactor, a transient pulse in the Knudsen regime), giving conversions, residence times or fitted
           constants; modulation_excitation = a periodic stimulus read by phase-sensitive detection, giving each band's
-          or species' phase_delay; step_response = the response to a step or a switch (response_time_constant);
-          frequency_response = responses at several modulation frequencies. A fit of a kinetic model to such responses
-          is a kinetic_fit that names its reactor_model.
+          or species' phase_delay, against the reference and at the period and harmonic it states; step_response = the
+          response to a step or a switch (response_time_constant); frequency_response = responses at several modulation
+          frequencies, an analysis for each period it reads. A fit of a kinetic model to such responses is a kinetic_fit
+          that names its reactor_model.
       evaluation_basis:
         type: enum
         maturity: provisional
@@ -596,6 +597,35 @@ nodes:
         description: Whether the fit held the forward and reverse constants of its steps to the thermochemistry of the
           overall reaction (the equilibrium constant), as the source says (Mhadeshwar, Wang and Vlachos, J. Phys. Chem. B
           2003, 107, 12721, doi:10.1021/jp034954y).
+      phase_reference:
+        type: enum
+        maturity: provisional
+        values:
+        - stimulus
+        - species_response
+        - other
+        - not_reported
+        description: For a modulation_excitation or frequency_response analysis, what its phases and delays are measured
+          against - stimulus = the imposed modulation (the reference of phase-sensitive detection); species_response =
+          the response of another species, named in phase_reference_species. A source that gives delays against two
+          references is recorded as an analysis for each.
+      phase_reference_species:
+        type: ref
+        maturity: provisional
+        targets:
+        - ChemicalSpecies
+        description: The species whose response the analysis measures its delays against (phase_reference
+          species_response).
+      modulation_period:
+        type: value
+        maturity: provisional
+        description: The period of the modulation whose phases the analysis read. An analysis reads one period; a
+          frequency response read at several is recorded as an analysis for each.
+      demodulation_harmonic:
+        type: integer
+        maturity: provisional
+        description: The harmonic of the modulation frequency at which phase-sensitive detection read the phases (1 = the
+          fundamental).
   StructureModel:
     is_a: Model
     description: 'An atomistic model used in a computation (periodic slab, cluster, bulk cell, molecule); not the
@@ -2906,7 +2936,7 @@ checklist:
     Operando: an observation made while the kinetics are measured. One the source calls operando is kept as such (observation_mode); the checklist looks, on its DURING link, for a catalytic test under working conditions whose kinetics were measured on the same specimen while the observation was made (specimen same_specimen, timing simultaneous, kinetics measured or matched_to_benchmark). A conventional reactor or cell the kinetics were compared with is recorded when the source gives one (kinetics matched_to_benchmark, benchmark). An overlap in time is not a pairing, and a change that tracks the activity in time does not show that what changed is active.
     Computations: a computed energy is a value of its kind (a total electronic energy, a reaction or adsorption energy, an enthalpy or a free energy, an elementary activation energy or activation free energy, an apparent activation energy, a degree of rate control), never a bare number in eV. A reaction, adsorption or activation energy names the Reaction or ElementaryStep it is the energy change of (its target, or the step that holds it), whose participants and coefficients are its reference states. The Computation that produced it states its level_of_theory and charge_treatment, which a comparison reads, and its dispersion, hubbard_u, spin_treatment, solvation, temperature, pressure and electrode potential, which it shows; its input files, environment and structures stay in versioned, checksummed Datasets (configuration, execution_environment, a model's stored_in). A state computed on a structure model is STATE_OF the model, with no specimen; the model REPRESENTS the specimen or state it stands for, with what that assumes. A machine-learned prediction names its model (USES_MODEL, with its version and stored_in), the data it was fitted to (an experiment that EVALUATES it with evaluation_kind calibration and HAS_INPUT that data as training_data) and its validation (one that EVALUATES it with evaluation_kind validation on validation_data or test_data); a validation on the data the model was fitted to is reported, never counted as independent, unless it states how it held its data out of that table (split_strategy, the folds of a cross-validation). An apparent activation energy from a fit of rates, an elementary step's activation energy and a degree of rate control at stated conditions are three quantities.
     Campaigns: an adaptive or autonomous campaign, in which an agent chooses the next experiments, is a Design of kind adaptive that states what TRACE-AI asks of its workflow: its autonomy_level as the source declares it (A0-A5), its human_oversight and interventions, the agent_policy and objectives, the safety_bounds and safety_measures, its stopping_criterion and stop_reason, and what it did with failed or excluded runs (negative_results_policy, exclusion_criteria, excluded_count). Each run is PART_OF_DESIGN with its round (iteration) and PROPOSED_BY the agent (a Software of kind agent, with its version), with what a person decided about the proposal (human_decision); a rejected proposal is a record too. A machine-learned model states its architecture, hyperparameters, training objective and uncertainty method; a validation states how it split the data (split_strategy, grouped_by) and its metrics with their uncertainty. `scale trace-ai` reads the TRACE-AI checklist on these records.
-    Transients: a test driven by a program (an isotope switch, a concentration step, a square-wave or sinusoidal modulation, pulses, a pseudo-random binary sequence, the half-cycles of a chemical loop) HAS_OPERATION an Operation that states its waveform, the levels it switches between, its period, pulses or sequence (sequence_length, bit_duration), how much of the program the source gives (program_detail) and what t = 0 is (time_origin); a time series it HAS_OUTPUT states its delay and whether it was corrected for it. An Analysis that reads the responses (isotopic_transient, pulse_response, modulation_excitation, step_response, frequency_response) HAS_INPUT the test and the series, and its results are values of their kinds (surface_residence_time, surface_intermediate_amount, phase_delay, response_time_constant) for the species they are of. That a surface species is an intermediate or a spectator stays a Claim the analysis SUPPORTS or CONTRADICTS, never a property of the delay. A kinetic model fitted to the responses is a kinetic_fit that states its reactor_model, rate_basis, concentration_measure and thermodynamic_consistency, and each fitted constant its origin fitted, its interval_method and, where the source says, its identifiability; a comparison of constants shows each one's reactor treatment and names a group that mixes treatments.
+    Transients: a test driven by a program (an isotope switch, a concentration step, a square-wave or sinusoidal modulation, pulses, a pseudo-random binary sequence, the half-cycles of a chemical loop) HAS_OPERATION an Operation that states its waveform, the levels it switches between, its period, pulses or sequence (sequence_length, bit_duration), how much of the program the source gives (program_detail) and what t = 0 is (time_origin); a time series it HAS_OUTPUT states its delay and whether it was corrected for it. An Analysis that reads the responses (isotopic_transient, pulse_response, modulation_excitation, step_response, frequency_response) HAS_INPUT the test and the series, and its results are values of their kinds (surface_residence_time, surface_intermediate_amount, phase_delay, response_time_constant) for the species they are of; a modulation analysis states what its delays are measured against (phase_reference, phase_reference_species), the modulation_period and the demodulation_harmonic. That a surface species is an intermediate or a spectator stays a Claim the analysis SUPPORTS or CONTRADICTS, never a property of the delay. A kinetic model fitted to the responses is a kinetic_fit that states its reactor_model, rate_basis, concentration_measure and thermodynamic_consistency, and each fitted constant its origin fitted, its interval_method and, where the source says, its identifiability; a comparison of constants shows each one's reactor treatment and names a group that mixes treatments.
     Spectra and fits: a measured spectrum is a Dataset the characterization HAS_OUTPUT; a fit to it is an Analysis (analysis_kind spectral_fit) with its method, its fitted parameters in results (origin fitted, with their uncertainties), the references it HAS_INPUT and its limitations; an alternative model is another Analysis; a site assignment drawn from it is a Claim that cites the fitted parameters (premise_refs). Whether an ensemble signal tells phases apart depends on the technique, the data, the references and the model.
   labels:
     CatalyticTest:
@@ -3402,6 +3432,25 @@ checklist:
         - reactor_model
         - rate_basis
         - concentration_measure
+      - analysis_kind:
+          any_of:
+          - modulation_excitation
+          - frequency_response
+        maturity: provisional
+        basis:
+        - Urakawa, Burgi and Baiker, Chem. Eng. Sci. 2008, 63, 4902, doi:10.1016/j.ces.2007.06.009 (a phase is read at a
+          harmonic of the modulation frequency against a reference, the stimulus or another response, and changes with
+          the frequency)
+        should:
+        - phase_reference
+        - modulation_period
+        - demodulation_harmonic
+      - phase_reference:
+          any_of:
+          - species_response
+        maturity: provisional
+        should:
+        - phase_reference_species
     Computation:
       when:
       - computation_kind:

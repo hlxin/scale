@@ -763,6 +763,7 @@
       "props": {
         "name": "Phase-sensitive detection of the spectra and the outlet CO2 at the modulation frequency",
         "analysis_kind": "modulation_excitation",
+        "demodulation_harmonic": 1,
         "evidence": [
           {
             "id": "f5",
@@ -771,9 +772,15 @@
             "source": "ex:tk/source/paper"
           }
         ],
-        "limitations": "delays are behind the CO stimulus; a band that overlaps another shares its phase",
+        "limitations": "delays are behind the CO stimulus; where two bands overlap, the measured phase is a mix of theirs, so it is assigned to one species only tentatively",
         "method": "demodulation at the fundamental (k = 1); phase angles converted to delays at 1/60 Hz",
+        "modulation_period": {
+          "status": "present",
+          "unit": "s",
+          "value": 60
+        },
         "origin": "synthetic",
+        "phase_reference": "stimulus",
         "result_values": [
           {
             "id": "delay_co_linear",
@@ -864,7 +871,7 @@
       "id": "ex:tk/feed/h2-co2",
       "label": "Feed",
       "props": {
-        "name": "H2/CO2 = 4 in Ar",
+        "name": "40 % H2 in Ar, CO2 switched between 4 and 8 %",
         "evidence": [
           {
             "kind": "text",
@@ -942,7 +949,7 @@
             "value": 8
           }
         ],
-        "note": "the sequence's generator and seed are given in the Supporting Information",
+        "note": "the sequence's generator and seed are given in the Supporting Information; H2 is held at 40 % throughout (Ar balances the CO2 switch), so H2/CO2 is 10 at the low level and 5 at the high one",
         "operation_mode": "dynamic",
         "origin": "synthetic",
         "program_detail": "complete",

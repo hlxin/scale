@@ -220,16 +220,19 @@ def test_a_free_energy_that_states_no_temperature_is_warned_about_and_kept(doc):
                     "none; it stays as reported, and a scientific comparison shows it as not stated"]
 
 
-def test_a_value_whose_producer_states_no_charge_treatment_is_grouped_not_left_out(doc, spec):
+@pytest.mark.parametrize("version", ["0.7.0", "0.7.1", "head"])
+def test_a_value_whose_producer_states_no_charge_treatment_is_grouped_not_left_out(doc, spec, version):
     """A context read with unstated: group compares the values that state none with one another (charge_treatment:
     not stated), as its description says; a value left out would vanish from the answer without a reason a reader
-    can act on."""
+    can act on. A fix of the tools, not of the schema: it holds under every frozen version with that contract."""
     d = copy.deepcopy(doc)
     del _node(d, "computation/pt-111")["props"]["charge_treatment"]
-    res = pgraph_query.run(d, spec, {"comparison": "scientific", "match": {"label": "Computation", "as": "comp"},
-                                     "steps": [{"from": "comp", "entries": "result_values", "kind": "reaction_energy",
-                                                "as": "e"}],
-                                     "return": ["comp.name"], "order_by": [{"var": "e", "prop": "value"}]})
+    s = spec if version == "head" else pgraph.load_spec(REPO / f"domain/graph/frozen/scale-catal-{version}.yaml")
+    assert s["quantities"]["contexts"]["charge_treatment"].get("unstated") == "group"
+    res = pgraph_query.run(d, s, {"comparison": "scientific", "match": {"label": "Computation", "as": "comp"},
+                                  "steps": [{"from": "comp", "entries": "result_values", "kind": "reaction_energy",
+                                             "as": "e"}],
+                                  "return": ["comp.name"], "order_by": [{"var": "e", "prop": "value"}]})
     unstated = [g for g in res["comparison"]["groups"]
                 if g["compared_on"]["e.value"]["context"]["charge_treatment"] == "not stated"]
     assert unstated and not [x for x in res["excluded"] if "charge_treatment" in x["reason"]]

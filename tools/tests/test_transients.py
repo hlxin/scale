@@ -100,3 +100,53 @@ def test_residence_times_and_delays_are_compared_by_their_species(doc):
     res = pgraph_query.run(doc, spec_of(doc), plan)
     species = {g["compared_on"]["delay.value"]["context"]["species"] for g in res["comparison"]["groups"]}
     assert species == {f"{P}/species/co-linear-pt", f"{P}/species/co2", f"{P}/species/carbonate-ceria"}
+
+
+def test_phase_delays_are_compared_only_at_one_reference_period_and_harmonic(doc):
+    """A lag behind the stimulus and a lag behind another species' response, or lags read at two modulation periods,
+    are never one group; a delay whose analysis states no reference, or names no species for a response it is measured
+    against, is left out, with the reason."""
+    mes = node(doc, "analysis/phase-sensitive-detection")
+
+    def clone(key: str, **props) -> dict:
+        n = copy.deepcopy(mes)
+        n["id"] = f"{P}/analysis/{key}"
+        n["props"].update(props)
+        doc["nodes"].append(n)
+        return n
+    clone("psd-30s", modulation_period={"status": "present", "value": 30, "unit": "s"})
+    behind_co2 = clone("psd-behind-co2", phase_reference="species_response", phase_reference_species=f"{P}/species/co2")
+    behind_co2["props"]["result_values"] = [dict(entry(doc, "analysis/phase-sensitive-detection", "delay_carbonate"),
+                                                 value=12.1, definition="lag of the 1550 cm-1 band behind gas-phase CO2")]
+    unstated = clone("psd-unstated")
+    del unstated["props"]["phase_reference"]
+    nameless = clone("psd-behind-nothing-named", phase_reference="species_response")      # names no species
+    plan = {"match": {"label": "Analysis", "as": "a", "where": [{"prop": "analysis_kind", "op": "eq",
+                                                                  "value": "modulation_excitation"}]},
+            "steps": [{"from": "a", "entries": "result_values", "kind": "phase_delay", "as": "delay"}],
+            "return": ["a.name", "delay"], "order_by": [{"var": "delay", "prop": "value"}], "comparison": "scientific"}
+    res = pgraph_query.run(doc, spec_of(doc), plan)
+    keys = ("phase_reference", "phase_reference_species", "modulation_period", "demodulation_harmonic")
+    carbonate = sorted(tuple(g["compared_on"]["delay.value"]["context"].get(k) for k in keys)
+                       for g in res["comparison"]["groups"]
+                       if g["compared_on"]["delay.value"]["context"]["species"] == f"{P}/species/carbonate-ceria")
+    assert carbonate == [("species_response", f"{P}/species/co2", "60 s", "1"),
+                         ("stimulus", None, "30 s", "1"), ("stimulus", None, "60 s", "1")]
+    assert sum(g["rows"] for g in res["comparison"]["groups"]) == 7       # 3 + 3 at 30 s + 1 behind CO2; not the 3 unstated
+    left_out = {x["record"]: x["reason"] for x in res["excluded"]}
+    assert "states no phase_reference" in left_out[unstated["id"]]
+    assert "phase_reference_species" in left_out[nameless["id"]]
+
+
+def test_cq32_answers_with_the_timing_that_rebuilds_each_program(doc):
+    """CQ-32 asks whether a program can be rebuilt: its answer keeps the timing of each, the square wave's period and
+    duty cycle, the sequence's bits and the loop's labelled segments with their durations."""
+    from conftest import REPO
+    from scale.util import load_yaml
+    cq = load_yaml(REPO / "domain/competency/cq-32-driving-programs.yaml")
+    rows = {r["values"]["test.name"]: r["values"] for r in pgraph_query.run(doc, spec_of(doc), cq["plan"])["rows"]}
+    square = next(v for v in rows.values() if v["program.waveform"] == "square")
+    assert square["program.period"]["value"] == 60 and square["program.duty_cycle"]["value"] == 50
+    loop = next(v for v in rows.values() if v.get("program.segments"))
+    assert [(s["label"]["text_value"], s["duration"]["value"]) for s in loop["program.segments"]] == [
+        ("reduction (5 % CH4 in Ar)", 60), ("purge (Ar)", 30), ("reoxidation (air)", 45), ("purge (Ar)", 30)]

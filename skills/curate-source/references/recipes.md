@@ -114,8 +114,10 @@ A value the experimenter set or the author specified is not a measurement.
 - **What the responses give** is an Analysis that `HAS_INPUT` the test and the series: `isotopic_transient` for an
   isotope switch at steady state (its products' `surface_residence_time` and `surface_intermediate_amount` in
   `result_values`, each with its product in `target`; Shannon and Goodwin, Chem. Rev. 1995, doi:10.1021/cr00035a011),
-  `modulation_excitation` for phase-sensitive detection (each band's or species' `phase_delay`, its `definition` saying
-  behind what; Urakawa, Burgi and Baiker, Chem. Eng. Sci. 2008, doi:10.1016/j.ces.2007.06.009), `pulse_response`,
+  `modulation_excitation` for phase-sensitive detection (each band's or species' `phase_delay`; the analysis states
+  what the delays are measured against, `phase_reference` stimulus or species_response with `phase_reference_species`,
+  the `modulation_period` it read and the `demodulation_harmonic`, and delays against two references, or at two periods,
+  are two analyses; Urakawa, Burgi and Baiker, Chem. Eng. Sci. 2008, doi:10.1016/j.ces.2007.06.009), `pulse_response`,
   `step_response` (`response_time_constant`) or `frequency_response`. The surface species are ChemicalSpecies records
   named as the source names them, with their band ("CO adsorbed linearly on Pt (2070 cm-1)"). That a species is an
   intermediate or a spectator is a Claim the analysis SUPPORTS (premise_refs: the delays it rests on), never read off a
