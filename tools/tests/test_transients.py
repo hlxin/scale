@@ -1,0 +1,102 @@
+"""Tests driven by a program, the analyses of their responses, and kinetic constants fitted to them (scale-catal 0.7.3):
+what a program states, the advisories on a dynamic operation and on a fitted value's interval and identifiability, and
+the comparison that keeps constants fitted under two reactor treatments apart."""
+
+import copy
+
+import pytest
+
+from conftest import EXAMPLES, spec_of
+from scale import pgraph, pgraph_query
+from scale.pgraph_profiles import conformance
+from scale.util import load_doc
+
+TRANSIENT = EXAMPLES / "scale-catal/transient-examples/transient-kinetics.json"
+P = "ex:tk"
+
+
+@pytest.fixture()
+def doc():
+    return copy.deepcopy(load_doc(TRANSIENT))
+
+
+def node(d: dict, local: str) -> dict:
+    return next(n for n in d["nodes"] if n["id"] == f"{P}/{local}")
+
+
+def entry(d: dict, local: str, key: str) -> dict:
+    return next(v for v in node(d, local)["props"]["result_values"] if v["id"] == key)
+
+
+def warnings(d: dict) -> list[str]:
+    return [w["message"] for w in pgraph.validate(d, spec_of(d)).warnings]
+
+
+FITTED = {"match": {"label": "Analysis", "as": "fit",
+                    "where": [{"prop": "analysis_kind", "op": "eq", "value": "kinetic_fit"}]},
+          "steps": [{"from": "fit", "entries": "result_values", "kind": "activation_energy", "as": "ea"},
+                    {"from": "ea", "field": "target", "to": "ElementaryStep", "as": "step"}],
+          "return": ["fit.reactor_model", "step.name", "ea"], "order_by": [{"var": "ea", "prop": "value"}],
+          "comparison": "scientific"}
+
+
+def test_the_example_is_valid_with_no_warning(doc):
+    rep = pgraph.validate(doc, spec_of(doc))
+    assert rep.ok and rep.warnings == [], rep.warnings
+    seq = node(doc, "operation/co2-sequence")["props"]
+    assert seq["waveform"] == "pseudo_random_binary" and seq["sequence_length"] == 63 and seq["program_detail"] == "exact"
+    assert [x["value"] for x in seq["levels"]] == [4, 8]
+
+
+def test_a_dynamic_operation_says_how_it_varies(doc):
+    seq = node(doc, "operation/co2-sequence")["props"]
+    del seq["bit_duration"]
+    assert any("a dynamic operation says how it varies" in w for w in warnings(doc))
+    d = load_doc(TRANSIENT)
+    del node(d, "operation/isotope-switch")["props"]["levels"]             # a step without its levels says nothing
+    assert any("a step's levels" in w for w in warnings(d))
+
+
+def test_the_checklist_asks_a_pseudo_random_program_for_its_sequence(doc):
+    del node(doc, "operation/co2-sequence")["props"]["sequence_length"]
+    missing = conformance(doc, spec_of(doc))["profiles"]["catalysis"]["missing_recommended"]
+    assert missing.get("Operation.sequence_length") == 1
+
+
+def test_an_interval_method_goes_with_an_interval_and_identifiability_with_a_fit(doc):
+    v = entry(doc, "analysis/fit-differential", "ea_co2_dissociation")
+    v.pop("uncertainty"), v.pop("uncertainty_kind")
+    assert any("interval_method says how an uncertainty or an interval was obtained" in w for w in warnings(doc))
+    d = load_doc(TRANSIENT)
+    tau = entry(d, "analysis/ssitka-co2", "tau_co2")
+    tau["identifiability"] = "identifiable"                                   # a measured residence time is not fitted
+    assert any("identifiability is said of a fitted value" in w for w in warnings(d))
+
+
+def test_a_comparison_shows_each_fitted_constants_reactor_treatment(doc):
+    res = pgraph_query.run(doc, spec_of(doc), FITTED)
+    groups = {g["compared_on"]["ea.value"]["context"]["process"]: g["rows"] for g in res["comparison"]["groups"]}
+    assert groups == {f"{P}/step/co2-dissociation": 2, f"{P}/step/co-hydrogenation": 1}
+    shown = {r["values"]["ea"]["value"]: r["compared"]["ea.value"]["shows"]["reactor_model"] for r in res["rows"]}
+    assert shown == {92: "plug_flow", 78: "differential", 68: "plug_flow"}
+    assert any("reactor_model: differential, plug_flow" in x for x in res["limitations"])
+    # one treatment for both fits: nothing to name
+    node(doc, "analysis/fit-differential")["props"]["reactor_model"] = "plug_flow"
+    res = pgraph_query.run(doc, spec_of(doc), FITTED)
+    assert not [x for x in res["limitations"] if "reactor_model" in x]
+
+
+def test_a_query_keeps_only_the_constants_the_data_determine(doc):
+    plan = {**FITTED, "where": [{"var": "ea", "prop": "identifiability", "op": "eq", "value": "identifiable"}]}
+    res = pgraph_query.run(doc, spec_of(doc), plan)
+    assert {r["values"]["step.name"] for r in res["rows"]} == {"CO2* + * -> CO* + O*"} and res["row_count"] == 2
+
+
+def test_residence_times_and_delays_are_compared_by_their_species(doc):
+    plan = {"match": {"label": "Analysis", "as": "a", "where": [{"prop": "analysis_kind", "op": "eq",
+                                                                  "value": "modulation_excitation"}]},
+            "steps": [{"from": "a", "entries": "result_values", "kind": "phase_delay", "as": "delay"}],
+            "return": ["delay"], "order_by": [{"var": "delay", "prop": "value"}], "comparison": "scientific"}
+    res = pgraph_query.run(doc, spec_of(doc), plan)
+    species = {g["compared_on"]["delay.value"]["context"]["species"] for g in res["comparison"]["groups"]}
+    assert species == {f"{P}/species/co-linear-pt", f"{P}/species/co2", f"{P}/species/carbonate-ceria"}

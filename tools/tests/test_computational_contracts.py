@@ -220,6 +220,21 @@ def test_a_free_energy_that_states_no_temperature_is_warned_about_and_kept(doc):
                     "none; it stays as reported, and a scientific comparison shows it as not stated"]
 
 
+def test_a_value_whose_producer_states_no_charge_treatment_is_grouped_not_left_out(doc, spec):
+    """A context read with unstated: group compares the values that state none with one another (charge_treatment:
+    not stated), as its description says; a value left out would vanish from the answer without a reason a reader
+    can act on."""
+    d = copy.deepcopy(doc)
+    del _node(d, "computation/pt-111")["props"]["charge_treatment"]
+    res = pgraph_query.run(d, spec, {"comparison": "scientific", "match": {"label": "Computation", "as": "comp"},
+                                     "steps": [{"from": "comp", "entries": "result_values", "kind": "reaction_energy",
+                                                "as": "e"}],
+                                     "return": ["comp.name"], "order_by": [{"var": "e", "prop": "value"}]})
+    unstated = [g for g in res["comparison"]["groups"]
+                if g["compared_on"]["e.value"]["context"]["charge_treatment"] == "not stated"]
+    assert unstated and not [x for x in res["excluded"] if "charge_treatment" in x["reason"]]
+
+
 def test_an_activation_energy_in_kelvin_is_kept_and_compared_only_in_kelvin(doc, spec):
     d = copy.deepcopy(doc)
     ea = _node(d, "step/co-plus-o")["props"]["activation_energy"]
