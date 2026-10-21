@@ -5,10 +5,12 @@ question: Which transport checks found their rates free of transport limitation,
 description: |
   A transport check (an Analysis with analysis_kind transport_check) records the criterion values it computed as results
   of the kind transport_criterion, each naming its criterion in its definition: the Weisz-Prater criterion judges
-  diffusion in the pores, the Mears criterion mass transfer to the particle. Values of two criteria are never compared
-  with one another. Ranked scientifically, the two Weisz-Prater values (0.04 for the fine particles, 2.6 for the coarse
-  ones) are one group and the two Mears values another; a criterion whose definition names none is left out as
-  missing_context. The check's verdict is the source's own reading of its criteria.
+  diffusion in the pores, Mears' criterion for external diffusion mass transfer to the particle (Mears also gave one
+  for heat transfer, a different formula, so a Mears value is compared only with one judging the same transport, as
+  its definition names it). Values of two criteria are never compared with one another. Ranked scientifically, the two
+  Weisz-Prater values (0.04 for the fine particles, 2.6 for the coarse ones) are one group and the two Mears values for
+  external diffusion another; a criterion whose definition names none is left out as missing_context. The check's
+  verdict is the source's own reading of its criteria.
 documents:
   - examples/scale-catal/area-examples/catalysis-areas.json
 plan:

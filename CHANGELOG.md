@@ -14,38 +14,46 @@
 - **Schema 0.7.1 (additive): terms for the areas of catalysis research SCALE lacked.** Requested by @hlxin (use what
   the ontologies for catalysis know to develop the catalysis schema). Mapping SCALE onto the fourteen areas of
   Ontologies4Cat (Behr, Borgelt and Kockmann 2024, doi:10.1186/s13321-024-00807-2) showed four that SCALE did not
-  cover; the survey found that no ontology covers three of them either. All new terms are provisional.
+  cover; the survey found no ontology that contains two of them (homogeneous catalysis; heat, transport and kinetic
+  data) and one each for the other two. All new terms are provisional.
   - **Biocatalysis.** A catalyst of family enzyme or whole_cell; the enzyme a macromolecule, named with its EC number;
-    the roles cofactor and solvent; the kinds enzyme_activity (per time in the enzyme unit, U, or the katal, or per mass,
-    U/mg) and michaelis_constant. Basis: the Systems Biology Ontology's enzyme activity, specific activity and
-    Michaelis constant.
+    the roles cofactor and solvent; the kinds enzyme_activity (per time in the enzyme unit, U, or the katal, with their
+    prefixes; per mass, U/mg; per volume, U/mL; what it is divided by named or stated) and michaelis_constant. Basis:
+    the Systems Biology Ontology's enzyme activity, specific activity and Michaelis constant.
   - **Homogeneous catalysis.** The roles ligand and cocatalyst (the photoelectrode's description already named a
-    cocatalyst role that did not exist); the kind turnover_number (dimensionless), never compared with a turnover
-    frequency.
+    cocatalyst role that did not exist); the kind turnover_number (dimensionless, the amount of catalyst or the count of
+    sites it is divided by named or stated), never compared with a turnover frequency.
   - **Heat, transport and kinetic data.** The kinds transport_criterion, compared by the criterion its definition
-    names (Weisz-Prater, Mears, Carberry, Anderson), effectiveness_factor and thiele_modulus. A transport check kept
-    its criterion values as untyped results before.
+    names (Weisz-Prater, Mears, Carberry, Anderson) and, for a Mears criterion, by the transport it judges (mass or
+    heat transfer, to, in or across the particles), since Mears gave several; effectiveness_factor, internal or
+    overall; thiele_modulus, by its length (the particle radius, or its volume over its external surface) and its
+    form (first order or generalized). A value that does not say is left out of a comparison, never guessed. A
+    transport check kept its criterion values as untyped results before. Basis: Fogler's chapter on diffusion and
+    reaction; Mears (1971); Aris (1957); Bischoff (1965).
   - **Energy.** The kind energy_consumption (energy per amount or per mass of product; a new dimension, specific
-    energy).
+    energy), compared by the energy it counts (electrical, heat, every input) and its boundary (the device, or the
+    process with its separation).
   - **How the source describes the catalysis.** A test's catalysis_mode (heterogeneous, homogeneous, biocatalytic),
     as the source says it, never inferred.
   - Mapped where an ontology defines them (REX's homogeneous and heterogeneous catalysis, SBO's enzyme, ChEBI's ligand,
-    solvent and cofactor, QUDT's enzyme unit and katal). An example (area-examples), CQ-27 and CQ-28, three
-    counterexamples. The examples move to 0.7.1 (their version line only); the migration step rewrites nothing.
+    solvent and cofactor, QUDT's enzyme unit and katal; QUDT's catalytic activity and specific energy as related). An
+    example (area-examples), CQ-27 and CQ-28, three counterexamples. The examples move to 0.7.1 (their version line only); the migration step rewrites nothing.
 
 - **Units and quantity kinds mapped to QUDT (no schema change).** Requested by @hlxin (stronger connections to
   ontologies). SCALE's units and kinds of quantity named no external term, so a unit could not be matched with another
   system's or converted by a units service. Now 106 units are mapped to QUDT 3.5.3 (°C is unit:DEG_C, mL/min is
   unit:MilliL-PER-MIN, mostly exact) and 28 quantity kinds to QUDT quantity kinds (temperature, pressure, current
   density, …). Where SCALE leaves a unit open, the mapping says so: a gallon, a ton, a calorie or a Btu maps to each of
-  QUDT's definitions as narrower, a normal or standard volume as close. An enzyme's turnover frequency at saturation is
-  SBO's catalytic rate constant (kcat). Every term was looked up in the QUDT release files and EBI OLS; none is
+  QUDT's definitions as narrower, a normal or standard volume as close (QUDT counts it as an amount of substance, so
+  its conversion factors do not apply). A kind is broader only where QUDT's kind holds in every unit SCALE reads it
+  in; a reaction energy (eV or kJ/mol), a current density (QUDT's is a local vector) and a product amount are
+  related. An enzyme's turnover frequency at saturation is SBO's catalytic rate constant (kcat). Every term was looked up in the QUDT release files and EBI OLS; none is
   deprecated. See docs/mappings.md.
 
 - **SCALE's terms mapped to ontology terms (no schema change).** Requested by @hlxin: use what the ontologies for
   catalysis know, and make SCALE's connection to them stronger, without SCALE taking its meaning from an ontology.
   Before, the kernel named related vocabulary terms in words only (`maps_to: OBI planned process`), and no catalysis
-  term was mapped. Now 133 mappings give each term's identifier and say how close it is (exact, close, broader,
+  term was mapped. Now 135 mappings give each term's identifier and say how close it is (exact, close, broader,
   narrower or related): the kernel's labels and edge types to OBI, IAO, COB, SIO, STATO, SEPIO, BFO, RO, PROV, DCAT,
   Dublin Core, FOAF, Schema.org and SOSA; the catalysis labels and values to ChEBI, the Chemical Methods Ontology, REX,
   MOP, the Allotrope Foundation Ontology, OBI, CHEMINF, EDAM and ENVO (calcination is CHMO:0001467; a reference
@@ -53,8 +61,9 @@
   the ontologies they cite, so a mapping is corrected without a new schema version. `scale domains check` keeps every
   mapping on a term of the schema and of a registered ontology; `describe` shows them; `scale schema mappings` lists
   them and exports a layer's set as SSSOM. Every term was looked up in the ontology's current release: two that the
-  kernel names in words are obsolete in OBI (planned process, device), and their mappings name the COB terms that
-  replaced them. The catalysis set also records the fourteen areas of catalysis research by which Ontologies4Cat
+  kernel names in words are obsolete in OBI (planned process, device), and their mappings name COB terms instead (an
+  experiment or a procedure is COB's planned process; only a completed one is its completely executed planned
+  process, since SCALE also records proposed, running and failed ones). The catalysis set also records the fourteen areas of catalysis research by which Ontologies4Cat
   classifies ontologies (Behr, Borgelt and Kockmann, J. Cheminform. 2024, 16, 16, doi:10.1186/s13321-024-00807-2),
   with the SCALE terms that record each and what SCALE lacks (biocatalysis; a ligand role and a turnover number; transport
   criteria; energy use beyond plasma and cost). See docs/mappings.md.

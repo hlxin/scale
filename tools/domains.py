@@ -422,8 +422,8 @@ def check(repo: Path, only: list[str] | None = None, examples: bool = True) -> d
     # read them, and every mapping on a term of the head schema and of a registered ontology (docs/mappings.md)
     if core.get("mappings") is not None and core["mappings"] != CORE_MAPPINGS:
         pb.error(cw, f"mappings must be {CORE_MAPPINGS!r}: the tools read {layout.KERNEL_MAPPINGS}")
-    if (repo / layout.ONTOLOGY_REGISTRY).is_file() and layout.graph_manifests(repo):
-        from . import mappings
+    from . import mappings
+    if (mappings.declared(repo) or (repo / layout.ONTOLOGY_REGISTRY).is_file()) and layout.graph_manifests(repo):
         try:
             res = mappings.check(repo)
         except ScaleError as exc:
