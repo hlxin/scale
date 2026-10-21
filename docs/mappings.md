@@ -176,7 +176,7 @@ ontologies SCALE's mappings already cite.
 
 | Subdomain | What SCALE records it with | What SCALE lacks |
 |---|---|---|
-| Biocatalysis | Catalyst (family enzyme or whole_cell), CatalyticTest (enzyme activity, Michaelis constant), HAS_COMPONENT (cofactor, solvent) | an EC number is kept in `identifiers`, unchecked; an assay's pH is a condition entry |
+| Biocatalysis | Catalyst (family enzyme or whole_cell), CatalyticTest (enzyme activity, Michaelis constant), HAS_COMPONENT (cofactor, solvent) | an EC number is kept in `identifiers`, its form checked but not that it names the enzyme used; an assay's pH is a condition entry |
 | Heterogeneous catalysis | Catalyst, CatalystSample, ActiveSite, CatalystState, CatalyticTest, Reactor, Feed | |
 | Homogeneous catalysis | Catalyst (family molecular_complex; roles ligand and cocatalyst), CatalyticTest (turnover number) | a catalyst loading relative to the substrate is an unchecked amount |
 | Photocatalysis | LightSource, ILLUMINATED_BY, IlluminatedCell, Photoelectrode, ThermalContributionAnalysis | |
