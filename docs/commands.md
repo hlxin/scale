@@ -23,7 +23,8 @@ Every command below runs the same way with `uvx scale-catal …` (no install) or
 | list / build / verify releases | `scale release list\|build\|verify` (none is built yet; a build: `scale release build vX.Y.Z [--date YYYY-MM-DD]`, below) |
 | the science kernel and the catalysis domain | `scale domains list [--format json]`, `scale domains check [NAMES] [--json] [--no-examples]`, `scale domains cq [NAMES] [--json]` (the competency questions; below) |
 | what a pull request may change, what a schema change must carry, who reviews it | `scale ci spec-changes --base REF [--head REF] [--json]` (below) |
-| human checks of curated records (approving is a GitHub review of the pull request; nothing here approves) | `scale review sample G [--fraction F] [--include-flagged]` (a reproducible sample of evidenced records for a person to check against the sources) |
+| human checks of curated records (approving is a GitHub review of the pull request; nothing here approves) | `scale review sample G [--fraction F] [--include-flagged]` (it also returns the check to record in `graph.checks` once a person has made it; a reproducible sample of evidenced records for a person to check against the sources) |
+| TRACE-AI read on a graph's records: what they support, the gaps, what a person checks in the source, and how the records were curated ([trace-ai.md](trace-ai.md)) | `scale trace-ai G [--source ID] [--format markdown\|json] [--out FILE]` |
 | a knowledge-graph data repository: update every document to a new schema version | `scale kg update [--data DIR] [--domain D] [--to V] [--dry-run] [--no-index] [--out FILE]` (below) |
 | every check of CI's `test` jobs, before a pull request | `scale check [--fast]` |
 | formats and names, documentation links | `scale fmt [--check]`, `scale lint`, `scale links` |

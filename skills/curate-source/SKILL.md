@@ -236,6 +236,20 @@ Never record `± 0`: keep the printed text in `as_reported` and leave `uncertain
   checksummed Datasets. For a machine-learned prediction, name the model, its checkpoint and the data it was fitted to.
   Never flip a sign, fill in a method or read a method text into these fields; the recipes (Computational details)
   say where each goes.
+- **Agentic campaigns and their models** (scale-catal 0.7.2 on). A campaign in which an agent chooses the next
+  experiments is a Design of kind `adaptive`: record, as the source states them, its `autonomy_level` (TRACE-AI's
+  A0-A5; `not_reported` when the source names none, never read off the workflow), `human_oversight`, `interventions`,
+  `agent_policy`, `objectives`, safety bounds and measures, the stopping criterion and why it stopped, and what it did
+  with failed or excluded runs. Each run is `PART_OF_DESIGN` with its `iteration` and `PROPOSED_BY` the agent (a
+  Software of kind `agent`, with its version), with the `human_decision`; a rejected proposal is a record too. A
+  machine-learned model states its architecture, hyperparameters, training objective and uncertainty method; each
+  validation its `split_strategy`. `scale trace-ai <doc>` shows what TRACE-AI asks that the records do not hold
+  (docs/trace-ai.md).
+- **Say how you curated.** An agent names itself in the graph's stewardship (`curated_by`: a Software of kind `agent`,
+  with its version) and states the `autonomy_level` of the curation: A2 when a person approves each record, A3 when
+  people check a sample and the flagged records (governance/review-policy.yaml), A4 when nobody checks them. A person's
+  check is written into `graph.checks` after it was made, with what it found, never before (`scale review sample`
+  returns what to fill in).
 - **Keys and qualifiers.** Use one key per quantity and put what the value is about in its fields:
   the species or product in `target`, the basis in `basis`, the measurand in `variable` (a Variable)
   and how it was defined or measured in `definition`. When a source gives several values of one

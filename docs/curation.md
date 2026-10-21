@@ -11,7 +11,7 @@ table or a lab file is curated with [`curate-dataset`](../skills/curate-dataset/
 | read the source; identify the records (samples, tests, conditions, results, claims); attach evidence | person or language-model agent following the skill | a **scale-catal document** that pins the catalysis schema version and follows its checklist |
 | check the document: validity, checklist conformance, quotes verbatim in the source text, REPORTED_IN backed by evidence | `scale graph validate` (deterministic) | validation report |
 | build the evidence index | `scale graph index` (deterministic) | a vector and term statistics per quote, for `scale graph search` and text queries |
-| review | catalysis reviewer (`scale review sample` draws a reproducible sample for a Tier 1 check) | the document's review status |
+| review | catalysis reviewer (`scale review sample` draws a reproducible sample for a Tier 1 check) | the check, recorded in the graph (`graph.checks`: who, when, which records, the fields checked, wrong and missed, the outcome; [trace-ai.md](trace-ai.md#how-the-records-were-curated)) |
 
 The extraction model is not the authority that defines the target concepts. The catalysis schema
 defines what a completed record means, and the source determines which parts can be populated.
