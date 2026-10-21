@@ -5,11 +5,11 @@ treatments of the reactor.
     python build_examples.py
 
   transient-kinetics.json
-    an isotope switch        CO oxidation over Pt/CeO2 at 200 °C, 12CO switched to 13CO at steady state with Kr in the
+    an isotope switch        the water-gas shift over Pt/CeO2 at 200 °C, 12CO switched to 13CO at steady state with Kr in the
                              new feed (an Operation of time_pattern step, its levels and what t = 0 is); the outlet 13CO2
                              and Kr series with their delay, corrected; an isotopic_transient analysis giving the surface
                              residence time and the amount of the intermediates of CO2
-    a concentration          CO oxidation over Pt/CeO2 at 150 °C in a DRIFTS cell, CO switched between 0 and 1 % as a
+    a concentration          the water-gas shift over Pt/CeO2 at 250 °C in a DRIFTS cell, CO switched between 0 and 1 % as a
       modulation             square wave (60 s, 10 periods), the infrared spectra taken during it (operando, one trigger
                              for the valve and the spectrometer); a modulation_excitation analysis giving the phase delays
                              of linear CO on Pt, of gas-phase CO2 and of carbonate on ceria; two claims it supports,
@@ -108,7 +108,8 @@ def transient_kinetics() -> dict:
             link("HAS_PARTICIPANT", rid, sp, role=role, coefficient=coef)
         return rid
 
-    co_ox = reaction("co-oxidation", "CO + 1/2 O2 -> CO2", [(co, "reactant", 1), (o2, "reactant", 0.5), (co2, "product", 1)])
+    wgs = reaction("water-gas-shift", "CO + H2O -> CO2 + H2", [(co, "reactant", 1), (h2o, "reactant", 1),
+                                                                (co2, "product", 1), (h2, "product", 1)])
     methanation = reaction("co2-methanation", "CO2 + 4 H2 -> CH4 + 2 H2O", [(co2, "reactant", 1), (h2, "reactant", 4),
                                                                             (ch4, "product", 1), (h2o, "product", 2)])
     pox = reaction("ch4-partial-oxidation", "CH4 + 1/2 O2 -> CO + 2 H2", [(ch4, "reactant", 1), (o2, "reactant", 0.5),
@@ -160,8 +161,8 @@ def transient_kinetics() -> dict:
     v_ea = variable("activation-energy", "activation energy of a step", "activation_energy", "kJ/mol")
 
     # ---- 1. an isotope switch at steady state
-    ssitka = test("ssitka-200c", "CO oxidation at 200 °C, 12CO switched to 13CO at steady state", pt, micro, co_ox,
-                  feed("co-o2-ar", "1 % CO and 2 % O2 in Ar (0.5 % Kr in the 13CO feed)", [co, co13, o2, ar, kr]), 200,
+    ssitka = test("ssitka-200c", "Water-gas shift at 200 °C, 12CO switched to 13CO at steady state", pt, micro, wgs,
+                  feed("co-h2o-ar", "2 % CO and 10 % H2O in Ar (0.5 % Kr in the 13CO feed)", [co, co13, h2o, ar, kr]), 200,
                   flow_rate=V(50, "mL/min"), conversion=V(6, "%", target=co))
     switch = node("operation/isotope-switch", "Operation", "Switch from 12CO to 13CO at steady state",
                   operation_mode="dynamic", time_pattern="step", varied_quantities=["isotopic label of the CO fed"],
@@ -191,8 +192,8 @@ def transient_kinetics() -> dict:
         link("HAS_INPUT", a_ssitka, x, role="data")
 
     # ---- 2. a concentration modulation with the spectra taken during it
-    mes = test("modulation-150c", "CO oxidation at 150 °C in the DRIFTS cell, CO modulated", pt, cell, co_ox,
-               feed("co-modulated", "CO modulated in 2 % O2 in Ar", [co, o2, ar]), 150, locator="Figure 4")
+    mes = test("modulation-250c", "Water-gas shift at 250 °C in the DRIFTS cell, CO modulated", pt, cell, wgs,
+               feed("co-modulated", "CO modulated in 10 % H2O in Ar", [co, h2o, ar]), 250, locator="Figure 4")
     square = node("operation/co-square-wave", "Operation", "CO switched between 0 and 1 % as a square wave, 60 s, 10 periods",
                   operation_mode="dynamic", time_pattern="periodic", waveform="square",
                   varied_quantities=["CO mole fraction in the feed"], levels=[V(0, "%"), V(1, "%")], period=V(60, "s"),
@@ -214,7 +215,7 @@ def transient_kinetics() -> dict:
     link("HAS_OUTPUT", mes, s_co2)
     a_mes = node("analysis/phase-sensitive-detection", "Analysis",
                  "Phase-sensitive detection of the spectra and the outlet CO2 at the modulation frequency",
-                 analysis_kind="modulation_excitation", temperature=V(150, "°C"),
+                 analysis_kind="modulation_excitation", temperature=V(250, "°C"),
                  method="demodulation at the fundamental (k = 1); phase angles converted to delays at 1/60 Hz",
                  phase_reference="stimulus", modulation_period=V(60, "s"), demodulation_harmonic=1,
                  limitations="delays are behind the CO stimulus; where two bands overlap, the measured phase is a mix of "
@@ -238,19 +239,19 @@ def transient_kinetics() -> dict:
                     inference_type="interventional", evidence=[ev("Discussion")], **props)
 
     intermediate = claim("linear-co-intermediate", "Linearly adsorbed CO on Pt an intermediate of CO2 formation",
-                         "Linearly adsorbed CO on Pt is an intermediate of CO2 formation at 150 °C.",
-                         scope="Pt/CeO2 at 150 °C, 1 % CO modulated in 2 % O2",
+                         "Linearly adsorbed CO on Pt is an intermediate of CO2 formation at 250 °C.",
+                         scope="Pt/CeO2 at 250 °C, 1 % CO modulated in 10 % H2O",
                          limitations="rests on phase delays at one modulation frequency")
-    for target, role in ((co_lin, "active"), (co_ox, "reaction"), (co2, "product"), (mes, "test")):
+    for target, role in ((co_lin, "active"), (wgs, "reaction"), (co2, "product"), (mes, "test")):
         link("ABOUT", intermediate, target, role=role)
     link("SUPPORTS", a_mes, intermediate,
          premise_refs=[{"record": a_mes, "path": "/result_values/delay_co_linear"},
                        {"record": a_mes, "path": "/result_values/delay_co2"}],
          warrant="the band responds before the product and follows the stimulus", evidence=[ev("Figure 5", "figure")])
     spectator = claim("carbonate-spectator", "Carbonate on ceria a spectator of CO2 formation",
-                      "Carbonate on ceria is a spectator of CO2 formation at 150 °C.",
-                      scope="Pt/CeO2 at 150 °C, 1 % CO modulated in 2 % O2")
-    for target, role in ((carbonate, "spectator"), (co_ox, "reaction"), (co2, "product"), (mes, "test")):
+                      "Carbonate on ceria is a spectator of CO2 formation at 250 °C.",
+                      scope="Pt/CeO2 at 250 °C, 1 % CO modulated in 10 % H2O")
+    for target, role in ((carbonate, "spectator"), (wgs, "reaction"), (co2, "product"), (mes, "test")):
         link("ABOUT", spectator, target, role=role)
     link("SUPPORTS", a_mes, spectator,
          premise_refs=[{"record": a_mes, "path": "/result_values/delay_carbonate"},
