@@ -182,8 +182,10 @@ def _strings(v) -> set[str]:
 def subset(parts: dict, slugs: list[str], header: dict | None = None) -> dict:
     """The parts of a graph of some of the sources: those sources, the shared records they reach (through their own
     links, then through links between shared records) and those the graph's own object names (its stewardship's
-    organisation and project), and in shared records only the evidence of those sources.
+    organisation and project), and in shared records only the evidence of those sources. The graph's checks
+    (``record_check``) keep the records the subset holds, with their checkers; a check with none of them goes.
     ``header`` replaces keys of the graph's own object (a new id, title, description)."""
+    from .recordchecks import checks_of, prune
     missing = sorted(set(slugs) - set(parts["sources"]))
     if missing:
         raise ScaleError(f"no such sources: {', '.join(missing)}")
@@ -191,12 +193,22 @@ def subset(parts: dict, slugs: list[str], header: dict | None = None) -> dict:
     keep_sources = {p["source"] for p in chosen.values()}
     shared_ids = {n["id"] for n in parts["shared"]["nodes"]}
     reach = {e for p in chosen.values() for lk in p["links"] for e in (lk["source"], lk["target"]) if e in shared_ids}
-    reach |= {s for s in _strings(parts["header"]) if s in shared_ids}    # what the graph's own object names
-    while True:
-        more = {e for lk in parts["shared"]["links"] if lk["source"] in reach for e in (lk["target"],)} - reach
-        if not more:
-            break
-        reach |= more
+    graph = parts["header"].get("graph") or {}
+    named = {**parts["header"], "graph": {k: v for k, v in graph.items() if k != "checks"}}
+    reach |= {s for s in _strings(named) if s in shared_ids}    # what the graph's own object names, its checks apart
+    own = {r["id"] for p in chosen.values() for r in [*p.get("nodes", []), *p.get("links", [])]}
+
+    def expand() -> None:
+        while True:
+            more = {e for lk in parts["shared"]["links"] if lk["source"] in reach for e in (lk["target"],)} - reach
+            if not more:
+                break
+            reach.update(more)
+    expand()
+    # a check that keeps a record keeps the person who made it
+    checkers = {c.get("checked_by") for c in checks_of(graph) if set(c.get("records") or []) & (own | reach)}
+    reach |= {x for x in checkers if x in shared_ids}
+    expand()
     def only_kept(rec: dict) -> dict:
         ev = (rec.get("props") or {}).get("evidence")
         if not ev:
@@ -207,6 +219,8 @@ def subset(parts: dict, slugs: list[str], header: dict | None = None) -> dict:
     nodes = [only_kept(n) for n in parts["shared"]["nodes"] if n["id"] in reach]
     links = [only_kept(lk) for lk in parts["shared"]["links"] if lk["source"] in reach and lk["target"] in reach]
     head = dict(parts["header"])
+    if checks_of(graph):
+        head["graph"], _ = prune(dict(graph), own | {r["id"] for r in nodes + links})
     if header:
         head["graph"] = {**head.get("graph", {}), **header}
     return {"header": head, "shared": {**parts["shared"], "nodes": nodes, "links": links}, "sources": chosen}

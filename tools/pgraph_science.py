@@ -281,8 +281,11 @@ def validation_checks(links: list[dict], label: dict, resolved_refs: dict, rep) 
     experiment that calibrates it (EVALUATES with evaluation_kind calibration, or HAS_OUTPUT the model) HAS_INPUT as
     training_data or calibration_data, with the records a dataset among them INCLUDES. A validation or benchmark
     (EVALUATES) of the model whose experiment HAS_INPUT any of that data, or that rests on a fitted value (result_refs),
-    is reported (a warning): a fit to its own data is a calibration, never independent predictive validation. Nothing
-    is rewritten."""
+    is reported (a warning): a fit to its own data is a calibration, never independent predictive validation. A
+    validation that states how it held its data out (split_strategy, 0.7.2 on: folds of one table in a cross-validation,
+    a held-out part of it) shares that table with the fit by design, so the shared table alone is not reported; whether
+    the split keeps them apart is what split_strategy says (a random split is flagged by `scale trace-ai`). Nothing is
+    rewritten."""
     out = defaultdict(list)
     for e in links:
         out[e.get("source")].append(e)
@@ -306,7 +309,8 @@ def validation_checks(links: list[dict], label: dict, resolved_refs: dict, rep) 
         model, exp = e.get("target"), e.get("source")
         used = inputs(exp, None) - {model}
         overlap = sorted(str(x) for x in used & fitted.get(model, set()))
-        if overlap:
+        split = p.get("split_strategy") not in (None, "not_reported")     # held out within the shared data, as stated
+        if overlap and not split:
             rep.add("warning", e.get("id"), f"a {p['evaluation_kind']} of {model} on data it was fitted to "
                                             f"({', '.join(overlap)}): a fit to its own data is a calibration, not "
                                             "independent predictive validation; it stays as recorded")

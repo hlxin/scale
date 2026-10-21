@@ -1,0 +1,944 @@
+# TRACE-AI read on scale-catal records: for each item of the TRACE-AI publication checklist, when it applies and which
+# records support it. `scale trace-ai G [--source ID]` runs this file (tools/traceai.py; docs/trace-ai.md).
+#
+# Each item names its condition (applies: one of the conditions below; none = always), what it needs (each need found
+# when one of its query plans returns a row, docs/querying.md, or when the named check of the report finds it) and,
+# where the records cannot show it, what a person checks in the source (by_hand). An item is supported when every need
+# is found (any one, with mode: any), partial when some are, a gap when none is, not applicable only when its condition
+# finds no record (with that condition as the reason), and by hand when it has no need. Flags point at records worth a
+# second look (a random split, a metric stated without its uncertainty); context lists records a person reads for an
+# item checked by hand. Nothing here decides that a source satisfies TRACE-AI: the records show what was curated.
+#
+# TRACE-AI: Xin et al., Transparent reporting for agentic catalysis enabled by artificial intelligence, community
+# guidelines and a publication checklist, Chem Catal. 2026, doi:10.1016/j.checat.2026.101755; the checklist, version
+# 2.2.0, at https://github.com/trace-ai-org/trace-ai-checklist (CC-BY-4.0). The titles below are short readings in
+# SCALE's words, not the checklist's text: read each item in the checklist.
+guideline: TRACE-AI
+checklist_version: 2.2.0
+reference: Xin et al., Chem Catal. 2026, doi:10.1016/j.checat.2026.101755
+url: https://github.com/trace-ai-org/trace-ai-checklist
+conditions:
+  experiments:
+    description: an experiment or a calculation
+    plans:
+      - match:
+          label: Experiment
+          as: experiment
+        return:
+          - experiment.name
+  datasets:
+    description: a dataset
+    plans:
+      - match:
+          label: Dataset
+          as: data
+        return:
+          - data.name
+  ml_model:
+    description: a machine-learned model (a calculation of kind machine_learned that USES_MODEL a model, or a model that
+      states its architecture or uncertainty method)
+    plans:
+      - match:
+          label: Computation
+          as: prediction
+          where:
+            - prop: computation_kind
+              op: eq
+              value: machine_learned
+        steps:
+          - from: prediction
+            edge: USES_MODEL
+            to: Model
+            as: model
+        return:
+          - model.name
+      - match:
+          label: Model
+          as: model
+          where:
+            - prop: architecture
+              op: exists
+        return:
+          - model.name
+      - match:
+          label: Model
+          as: model
+          where:
+            - prop: uncertainty_method
+              op: exists
+        return:
+          - model.name
+  campaign:
+    description: an adaptive or autonomous campaign (a Design of kind adaptive, or one that states an autonomy_level)
+    plans:
+      - match:
+          label: Design
+          as: design
+          where:
+            - prop: design_kind
+              op: eq
+              value: adaptive
+        return:
+          - design.name
+      - match:
+          label: Design
+          as: design
+          where:
+            - prop: autonomy_level
+              op: exists
+        return:
+          - design.name
+  physical_campaign:
+    description: a physical experiment of an adaptive or autonomous campaign (a catalytic test or a characterization
+      PART_OF_DESIGN of one)
+    plans:
+      - match:
+          label: Design
+          as: design
+          where:
+            - prop: design_kind
+              op: eq
+              value: adaptive
+        steps:
+          - from: design
+            edge: PART_OF_DESIGN
+            direction: in
+            to: CatalyticTest
+            as: run
+        return:
+          - design.name
+          - run.name
+      - match:
+          label: Design
+          as: design
+          where:
+            - prop: design_kind
+              op: eq
+              value: adaptive
+        steps:
+          - from: design
+            edge: PART_OF_DESIGN
+            direction: in
+            to: Characterization
+            as: run
+        return:
+          - design.name
+          - run.name
+  ai_work:
+    description: a machine-learned model or an adaptive or autonomous campaign
+    any_of:
+      - ml_model
+      - campaign
+items:
+  # ---------------------------------------------------------------- A. Data management
+  - id: A1
+    section: Data management
+    title: How data of several origins and kinds were harmonized, and what stayed unresolved
+    applies: ml_model
+    by_hand: How the source harmonized data from several origins (files, spreadsheets, the literature) before modelling,
+      and what it left unresolved. SCALE keeps every value as its source reports it, with its unit, basis and the
+      contexts it is compared by, and converts nothing, so the harmonization is the source's to state.
+  - id: A2
+    section: Data management
+    title: Code that regenerates the model-ready dataset, and how its equivalence is checked
+    applies: ml_model
+    needs:
+      - name: training_data_located
+        description: the data the model was fitted to, with where it is (uri)
+        plans:
+          - match:
+              label: Model
+              as: model
+            steps:
+              - from: model
+                edge: EVALUATES
+                direction: in
+                to: Experiment
+                as: fit
+                edge_where:
+                  - prop: evaluation_kind
+                    op: eq
+                    value: calibration
+              - from: fit
+                edge: HAS_INPUT
+                to: Dataset
+                as: data
+                edge_where:
+                  - prop: role
+                    op: in
+                    value:
+                      - training_data
+                      - calibration_data
+                where:
+                  - prop: uri
+                    op: exists
+            return:
+              - model.name
+              - data.name
+              - data.uri
+      - name: processing_code
+        description: the software that produced a dataset the model was fitted to (an experiment that HAS_OUTPUT it and
+          USES_SOFTWARE)
+        plans:
+          - match:
+              label: Model
+              as: model
+            steps:
+              - from: model
+                edge: EVALUATES
+                direction: in
+                to: Experiment
+                as: fit
+                edge_where:
+                  - prop: evaluation_kind
+                    op: eq
+                    value: calibration
+              - from: fit
+                edge: HAS_INPUT
+                to: Dataset
+                as: data
+                edge_where:
+                  - prop: role
+                    op: in
+                    value:
+                      - training_data
+                      - calibration_data
+              - from: data
+                edge: HAS_OUTPUT
+                direction: in
+                to: Experiment
+                as: processing
+              - from: processing
+                edge: USES_SOFTWARE
+                to: Software
+                as: code
+            return:
+              - data.name
+              - processing.name
+              - code.name
+              - code.repository
+    by_hand: How the source checks that the regenerated dataset equals the one used (record counts, identifiers).
+  - id: A3
+    section: Data management
+    title: The input features or descriptors, and how they were generated
+    applies: ml_model
+    needs:
+      - name: descriptors_defined
+        description: a descriptor the model or its calculation uses, with its definition
+        plans:
+          - match:
+              label: Model
+              as: model
+            steps:
+              - from: model
+                edge: USES_DESCRIPTOR
+                to: Descriptor
+                as: descriptor
+                where:
+                  - prop: definition
+                    op: exists
+            return:
+              - model.name
+              - descriptor.name
+              - descriptor.definition
+          - match:
+              label: Computation
+              as: prediction
+            steps:
+              - from: prediction
+                edge: USES_DESCRIPTOR
+                to: Descriptor
+                as: descriptor
+                where:
+                  - prop: definition
+                    op: exists
+            return:
+              - prediction.name
+              - descriptor.name
+              - descriptor.definition
+  - id: A4
+    section: Data management
+    title: Dataset identifiers, access and the metadata needed to reuse them
+    applies: datasets
+    needs:
+      - name: located
+        description: a dataset with where it is (uri) or an identifier
+        plans:
+          - match:
+              label: Dataset
+              as: data
+              where:
+                - prop: uri
+                  op: exists
+            return:
+              - data.name
+              - data.uri
+          - match:
+              label: Dataset
+              as: data
+              where:
+                - prop: identifiers
+                  op: exists
+            return:
+              - data.name
+              - data.identifiers
+      - name: terms_of_use
+        description: a dataset with its licence, or one stated available or restricted
+        plans:
+          - match:
+              label: Dataset
+              as: data
+              where:
+                - prop: licence
+                  op: exists
+            return:
+              - data.name
+              - data.licence
+          - match:
+              label: Dataset
+              as: data
+              where:
+                - prop: availability
+                  op: in
+                  value:
+                    - available
+                    - restricted
+            return:
+              - data.name
+              - data.availability
+  - id: A5
+    section: Data management
+    title: The policy on negative, failed or suboptimal experiments, and those included
+    applies: experiments
+    mode: any
+    needs:
+      - name: policy_stated
+        description: a design that states what was done with failed, negative or suboptimal experiments
+        plans:
+          - match:
+              label: Design
+              as: design
+              where:
+                - prop: negative_results_policy
+                  op: exists
+            return:
+              - design.name
+              - design.negative_results_policy
+      - name: failed_runs_recorded
+        description: experiments recorded as failed or aborted
+        plans:
+          - match:
+              label: Experiment
+              as: run
+              where:
+                - prop: experiment_status
+                  op: in
+                  value:
+                    - failed
+                    - aborted
+            return:
+              - run.name
+              - run.experiment_status
+      - name: exclusions_stated
+        description: a design that states which runs were left out, or how many
+        plans:
+          - match:
+              label: Design
+              as: design
+              where:
+                - prop: exclusion_criteria
+                  op: exists
+            return:
+              - design.name
+              - design.exclusion_criteria
+          - match:
+              label: Design
+              as: design
+              where:
+                - prop: excluded_count
+                  op: exists
+            return:
+              - design.name
+              - design.excluded_count
+    by_hand: Whether the informative failed runs are included in what the source reports.
+  # ---------------------------------------------------------------- B. Model development
+  - id: B1
+    section: Model development
+    title: The full model specification (architecture, hyperparameters, objective, versions)
+    applies: ml_model
+    needs:
+      - name: version
+        description: the model's version or checkpoint
+        plans:
+          - match:
+              label: Computation
+              as: prediction
+              where:
+                - prop: computation_kind
+                  op: eq
+                  value: machine_learned
+            steps:
+              - from: prediction
+                edge: USES_MODEL
+                to: Model
+                as: model
+                where:
+                  - prop: version
+                    op: exists
+            return:
+              - model.name
+              - model.version
+      - name: architecture
+        description: the model's architecture
+        plans:
+          - match:
+              label: Model
+              as: model
+              where:
+                - prop: architecture
+                  op: exists
+            return:
+              - model.name
+              - model.architecture
+      - name: hyperparameters
+        description: the model's hyperparameters
+        plans:
+          - match:
+              label: Model
+              as: model
+              where:
+                - prop: hyperparameters
+                  op: exists
+            return:
+              - model.name
+      - name: training_objective
+        description: what training minimized or maximized
+        plans:
+          - match:
+              label: Model
+              as: model
+              where:
+                - prop: training_objective
+                  op: exists
+            return:
+              - model.name
+              - model.training_objective
+  - id: B2
+    section: Model development
+    title: How the data were split to prevent information leakage
+    applies: ml_model
+    needs:
+      - name: split_stated
+        description: a validation or benchmark of the model that states how its data were kept apart (split_strategy)
+        plans:
+          - match:
+              label: Model
+              as: model
+            steps:
+              - from: model
+                edge: EVALUATES
+                direction: in
+                to: Experiment
+                as: validation
+                edge_as: evaluates
+                edge_where:
+                  - prop: evaluation_kind
+                    op: in
+                    value:
+                      - validation
+                      - benchmark
+                  - prop: split_strategy
+                    op: in
+                    value:
+                      - random
+                      - grouped
+                      - time_based
+                      - out_of_distribution
+                      - prospective
+                      - external
+                      - other
+            return:
+              - model.name
+              - validation.name
+              - evaluates.split_strategy
+              - evaluates.grouped_by
+    flags:
+      - name: random_split
+        message: a random split; repeated conditions, shared catalyst lineages or near-duplicate compositions can leak
+          across it, so read how the source rules that out
+        plans:
+          - match:
+              label: Model
+              as: model
+            steps:
+              - from: model
+                edge: EVALUATES
+                direction: in
+                to: Experiment
+                as: validation
+                edge_as: evaluates
+                edge_where:
+                  - prop: split_strategy
+                    op: eq
+                    value: random
+            return:
+              - model.name
+              - validation.name
+    by_hand: That the split code, grouping rules and seeds are given, and that scaling, imputation and feature selection
+      used only each split's training data (preprocessing_within_split, when the source says).
+  - id: B3
+    section: Model development
+    title: Performance metrics with their uncertainty, so that the best run is not all that is reported
+    applies: ml_model
+    needs:
+      - name: metrics_with_uncertainty
+        description: every metric a validation or benchmark of the model states carries its uncertainty or interval
+        check: metric_uncertainty
+  - id: B4
+    section: Model development
+    title: Why these metrics, and how the trade-offs of several objectives were examined
+    applies: ml_model
+    context:
+      - name: objectives
+        description: what the campaigns optimize and how their trade-offs are handled
+        plans:
+          - match:
+              label: Design
+              as: design
+              where:
+                - prop: objectives
+                  op: exists
+            return:
+              - design.name
+              - design.objectives
+    by_hand: Why the source chose its metrics and how it examined trade-offs between objectives (a Pareto front,
+      weights) - an argument to read in the source.
+  - id: B5
+    section: Model development
+    title: How uncertainty was quantified, calibrated and used
+    applies: ml_model
+    needs:
+      - name: method
+        description: the model's uncertainty method
+        plans:
+          - match:
+              label: Model
+              as: model
+              where:
+                - prop: uncertainty_method
+                  op: in
+                  value:
+                    - gaussian_process
+                    - bayesian_neural_network
+                    - ensemble
+                    - bootstrap
+                    - dropout
+                    - conformal
+                    - quantile_regression
+                    - other
+            return:
+              - model.name
+              - model.uncertainty_method
+              - model.uncertainty_components
+      - name: calibration
+        description: how the uncertainty was checked against outcomes
+        plans:
+          - match:
+              label: Model
+              as: model
+              where:
+                - prop: uncertainty_calibration
+                  op: exists
+            return:
+              - model.name
+              - model.uncertainty_calibration
+      - name: use
+        description: how the uncertainty informed decisions
+        plans:
+          - match:
+              label: Model
+              as: model
+              where:
+                - prop: uncertainty_use
+                  op: exists
+            return:
+              - model.name
+              - model.uncertainty_use
+    flags:
+      - name: point_predictions_only
+        message: the source says the model gives point predictions only
+        plans:
+          - match:
+              label: Model
+              as: model
+              where:
+                - prop: uncertainty_method
+                  op: eq
+                  value: none
+            return:
+              - model.name
+  # ---------------------------------------------------------------- C. Workflow integration
+  - id: C1
+    section: Workflow integration
+    title: The agent's policy, constraints and acquisition or reward function, with its configuration
+    applies: campaign
+    needs:
+      - name: policy
+        description: the rule that chooses the next experiments
+        plans:
+          - match:
+              label: Design
+              as: design
+              where:
+                - prop: agent_policy
+                  op: exists
+            return:
+              - design.name
+              - design.agent_policy
+      - name: objectives
+        description: what the campaign optimizes, and the trade-offs
+        plans:
+          - match:
+              label: Design
+              as: design
+              where:
+                - prop: objectives
+                  op: exists
+            return:
+              - design.name
+              - design.objectives
+      - name: agent_identified
+        description: the agent that proposed the experiments, with its version (an experiment of the campaign
+          PROPOSED_BY Software)
+        plans:
+          - match:
+              label: Design
+              as: design
+            steps:
+              - from: design
+                edge: PART_OF_DESIGN
+                direction: in
+                to: Experiment
+                as: run
+              - from: run
+                edge: PROPOSED_BY
+                to: Software
+                as: agent
+                where:
+                  - prop: version
+                    op: exists
+            return:
+              - design.name
+              - agent.name
+              - agent.version
+    by_hand: The configuration or pseudocode, its sources of randomness and the parameters held fixed across runs, with
+      their versions (an agent card).
+  - id: C2
+    section: Workflow integration
+    title: The level of autonomy, human oversight, and the interventions made
+    applies: campaign
+    needs:
+      - name: autonomy_level
+        description: the level of autonomy the source declares
+        plans:
+          - match:
+              label: Design
+              as: design
+              where:
+                - prop: autonomy_level
+                  op: in
+                  value:
+                    - A0
+                    - A1
+                    - A2
+                    - A3
+                    - A4
+                    - A5
+            return:
+              - design.name
+              - design.autonomy_level
+      - name: human_oversight
+        description: where people approve, review or override
+        plans:
+          - match:
+              label: Design
+              as: design
+              where:
+                - prop: human_oversight
+                  op: exists
+            return:
+              - design.name
+              - design.human_oversight
+      - name: interventions
+        description: the interventions or overrides made, or what a person decided about each proposal
+        plans:
+          - match:
+              label: Design
+              as: design
+              where:
+                - prop: interventions
+                  op: exists
+            return:
+              - design.name
+          - match:
+              label: Design
+              as: design
+              where:
+                - prop: intervention_count
+                  op: exists
+            return:
+              - design.name
+              - design.intervention_count
+          - match:
+              label: Experiment
+              as: run
+            steps:
+              - from: run
+                edge: PROPOSED_BY
+                to: Software
+                as: agent
+                edge_as: proposed
+                edge_where:
+                  - prop: human_decision
+                    op: in
+                    value:
+                      - approved
+                      - modified
+                      - rejected
+                      - not_required
+            return:
+              - run.name
+              - proposed.human_decision
+  - id: C3
+    section: Workflow integration
+    title: Stopping criteria, how failures were handled, and the runs aborted, excluded or corrected afterwards
+    applies: campaign
+    needs:
+      - name: stopping_criterion
+        description: the rule planned for stopping
+        plans:
+          - match:
+              label: Design
+              as: design
+              where:
+                - prop: stopping_criterion
+                  op: exists
+            return:
+              - design.name
+              - design.stopping_criterion
+      - name: stop_reason
+        description: why the campaign actually stopped
+        plans:
+          - match:
+              label: Design
+              as: design
+              where:
+                - prop: stop_reason
+                  op: exists
+            return:
+              - design.name
+              - design.stop_reason
+      - name: runs_left_out_or_corrected
+        description: the runs aborted, failed or excluded, or the changes made afterwards
+        plans:
+          - match:
+              label: Design
+              as: design
+              where:
+                - prop: exclusion_criteria
+                  op: exists
+            return:
+              - design.name
+          - match:
+              label: Design
+              as: design
+              where:
+                - prop: excluded_count
+                  op: exists
+            return:
+              - design.name
+              - design.excluded_count
+          - match:
+              label: Design
+              as: design
+              where:
+                - prop: post_hoc_changes
+                  op: exists
+            return:
+              - design.name
+          - match:
+              label: Design
+              as: design
+            steps:
+              - from: design
+                edge: PART_OF_DESIGN
+                direction: in
+                to: Experiment
+                as: run
+                where:
+                  - prop: experiment_status
+                    op: in
+                    value:
+                      - failed
+                      - aborted
+            return:
+              - design.name
+              - run.name
+              - run.experiment_status
+  - id: C4
+    section: Workflow integration
+    title: Safety bounds, interlocks and shutdown, and how unsafe actions are prevented
+    applies: physical_campaign
+    needs:
+      - name: bounds
+        description: the limits the agent had to stay within
+        plans:
+          - match:
+              label: Design
+              as: design
+              where:
+                - prop: safety_bounds
+                  op: exists
+            return:
+              - design.name
+      - name: measures
+        description: the interlocks, shutdown triggers and monitoring
+        plans:
+          - match:
+              label: Design
+              as: design
+              where:
+                - prop: safety_measures
+                  op: exists
+            return:
+              - design.name
+              - design.safety_measures
+  - id: C5
+    section: Workflow integration
+    title: A traceable record of the campaign's trajectory
+    applies: campaign
+    needs:
+      - name: order_of_runs
+        description: the campaign's runs with their round or order (PART_OF_DESIGN iteration or run_order)
+        plans:
+          - match:
+              label: Design
+              as: design
+            steps:
+              - from: design
+                edge: PART_OF_DESIGN
+                direction: in
+                to: Experiment
+                as: run
+                edge_as: part
+                edge_where:
+                  - prop: iteration
+                    op: exists
+            return:
+              - design.name
+              - run.name
+              - part.iteration
+          - match:
+              label: Design
+              as: design
+            steps:
+              - from: design
+                edge: PART_OF_DESIGN
+                direction: in
+                to: Experiment
+                as: run
+                edge_as: part
+                edge_where:
+                  - prop: run_order
+                    op: exists
+            return:
+              - design.name
+              - run.name
+              - part.run_order
+      - name: proposals
+        description: who or what proposed each run (PROPOSED_BY)
+        plans:
+          - match:
+              label: Design
+              as: design
+            steps:
+              - from: design
+                edge: PART_OF_DESIGN
+                direction: in
+                to: Experiment
+                as: run
+              - from: run
+                edge: PROPOSED_BY
+                to: Software
+                as: agent
+            return:
+              - design.name
+              - run.name
+              - agent.name
+    by_hand: The run logs (decisions, tool calls, human interventions) are available, in full or as representative
+      segments, enough to reproduce the agent's behaviour statistically.
+  # ---------------------------------------------------------------- D. Executable artifacts
+  - id: D1
+    section: Tutorials, notebooks and executable artifacts
+    title: Executable tutorials or notebooks for the data, the models and the workflow
+    applies: ai_work
+    needs:
+      - name: notebook
+        description: an executable notebook or tutorial (a Dataset of data_kind notebook)
+        plans:
+          - match:
+              label: Dataset
+              as: notebook
+              where:
+                - prop: data_kind
+                  op: eq
+                  value: notebook
+            return:
+              - notebook.name
+              - notebook.uri
+  - id: D2
+    section: Tutorials, notebooks and executable artifacts
+    title: Each notebook linked to the manuscript's sections and the checklist's items, with versions
+    applies: ai_work
+    context:
+      - name: notebooks
+        description: the notebooks recorded
+        plans:
+          - match:
+              label: Dataset
+              as: notebook
+              where:
+                - prop: data_kind
+                  op: eq
+                  value: notebook
+            return:
+              - notebook.name
+              - notebook.version
+    by_hand: That each notebook names the sections and checklist items it illustrates, with its version.
+  - id: D3
+    section: Tutorials, notebooks and executable artifacts
+    title: The execution environment the notebooks and calculations need (a container image, a lock file)
+    applies: ai_work
+    needs:
+      - name: environment
+        description: a recorded execution environment (an experiment's execution_environment, or a Dataset of data_kind
+          environment)
+        plans:
+          - match:
+              label: Experiment
+              as: run
+              where:
+                - prop: execution_environment
+                  op: exists
+            return:
+              - run.name
+          - match:
+              label: Dataset
+              as: environment
+              where:
+                - prop: data_kind
+                  op: eq
+                  value: environment
+            return:
+              - environment.name
+              - environment.uri

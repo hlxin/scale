@@ -57,7 +57,7 @@ DAY = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 AUDIENCE_KEYS = ("access", "project", "contributed_by", "embargo_until", "access_after_embargo")
 # kernel structures (beyond the value object, evidence, record reference and stewardship) that a property may
 # name as its type: a top-level block with fields and required
-STRUCTURES = ("status_check",)
+STRUCTURES = ("status_check", "record_check")
 
 
 def follows(doc: dict | None) -> set[str]:
@@ -244,6 +244,7 @@ class Report:
     conformance: dict | None = None
     lifecycle: dict | None = None          # source lifecycle counts (lifecycle.summary); None: no notice, no check
     balance: dict | None = None            # atom and charge balance of reactions and steps (stoichiometry); None: none
+    acknowledged: list[dict] = field(default_factory=list)   # warnings a person's check acknowledged (recordchecks)
 
     def add(self, severity: str, record: str, message: str) -> None:
         (self.errors if severity == "error" else self.warnings).append({"record": record, "message": message})
@@ -254,10 +255,13 @@ class Report:
 
     def as_dict(self) -> dict:
         summary = {"error": len(self.errors), "warning": len(self.warnings)}
+        if self.acknowledged:
+            summary["acknowledged"] = len(self.acknowledged)
         if self.lifecycle:
             summary["source_lifecycle"] = self.lifecycle
         return {"valid": self.ok, "summary": summary,
                 "counts": self.counts, "errors": self.errors, "warnings": self.warnings,
+                **({"acknowledged": self.acknowledged} if self.acknowledged else {}),
                 **({"conformance": self.conformance} if self.conformance is not None else {}),
                 **({"balance": self.balance} if self.balance is not None else {})}
 
@@ -549,10 +553,13 @@ class Validator:
             check_balance(doc, rep)
         from .identifiers import check_document as check_identifiers   # identifiers and ontology terms (warnings)
         check_identifiers(doc, rep)
+        from .recordchecks import acknowledge, check_document as check_checks   # people's checks (0.7.2 on)
+        check_checks(doc, self.spec, rep)
         for nid, inputs in outdated(doc).items():
             rep.add("warning", nid, f"outdated: inputs {inputs} were recorded after it finished")
         if source_texts:
             self.check_quotes(doc, source_texts, rep)
+        acknowledge(doc, rep)                  # last: a warning a person's check acknowledged is listed apart
         rep.counts = {"nodes": len(doc["nodes"]), "links": len(doc["links"])}
         declared = any(g.get(k) or any((n.get("props") or {}).get(k) for n in doc["nodes"]) for k in ("follows_domains",))
         if declared and self.spec.get("profiles") is not None:
@@ -1130,7 +1137,9 @@ def filter_for(doc: dict, viewer: list[str], today: str) -> dict:
     graph answers publicly). Otherwise (the viewer may see the header, or is a person or a mix) the header stays."""
     agents, projects = memberships(doc, viewer)
     nodes, links, refs, cut = _subset(doc, lambda r: visible(effective_stewardship(doc, r), agents, projects, today))
-    graph = dict(doc.get("graph") or {})
+    from .recordchecks import prune            # a person's check keeps only the records the view holds
+    graph, pruned = prune(dict(doc.get("graph") or {}), {r["id"] for r in nodes + links if isinstance(r.get("id"), str)})
+    refs += pruned
     note = (f"viewer {', '.join(sorted(viewer)) or 'public'} on {today}: "
             f"{len(doc['nodes']) - len(nodes)} nodes and {len(doc['links']) - len(links)} links withheld"
             + (f", and {refs} references to them removed" if refs else "")
@@ -1215,9 +1224,12 @@ def restrict_to(doc: dict, declared: dict, today: str) -> tuple[dict, dict]:
         st = effective_stewardship(doc, r)
         return access_key(st, today) == own or not less_open(st, viewers, today)
     nodes, links, refs, cut = _subset(doc, keep)
+    from .recordchecks import prune            # a person's check keeps only the records the bundle holds
+    graph, pruned = prune(dict(doc.get("graph") or {}), {r["id"] for r in nodes + links if isinstance(r.get("id"), str)})
+    refs += pruned
     withheld = {"nodes": len(doc["nodes"]) - len(nodes), "links": len(doc["links"]) - len(links),
                 **({"references": refs} if refs else {}), **({"evidence_cut": cut} if cut else {})}
-    return {**doc, "nodes": nodes, "links": links}, withheld
+    return {**doc, "graph": graph, "nodes": nodes, "links": links}, withheld
 
 
 def registry_records(registry: dict, used: set[str]) -> tuple[list[dict], list[dict]]:
