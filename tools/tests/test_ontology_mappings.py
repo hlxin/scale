@@ -5,8 +5,9 @@ broader), narrow or related. The mappings are kept beside the schema, one set pe
 domain/mappings/catalysis.yaml), with the registry of the ontologies they cite (core/mappings/ontologies.yaml); they
 change nothing SCALE validates or queries. Every mapping names a term of the head schema (a layer's labels and edge
 types are its own) and a CURIE of a registered ontology in its pattern; ``describe`` shows a term's mappings; a layer's
-set exports as SSSOM; the catalysis set records the fourteen areas of catalysis research of Ontologies4Cat (Behr,
-Borgelt and Kockmann 2024) with the SCALE terms that record each."""
+set exports as SSSOM; the catalysis set records the fourteen subdomains of catalysis research of Ontologies4Cat
+(Behr, Borgelt and Kockmann 2024) with the SCALE terms that record each and how the authors' collection rates the
+ontologies it holds for each, as it gives them."""
 
 import copy
 import csv
@@ -109,25 +110,48 @@ def test_a_registry_entry_without_its_iri_or_with_a_loose_pattern_is_an_error(tm
     assert any("OBI: unknown key 'url'" in x for x in msgs)
 
 
-def test_the_areas_are_the_fourteen_of_ontologies4cat_and_name_terms_of_the_schema(tmp_path, spec):
-    rows = mappings.areas(REPO)
-    assert [r["area"] for r in rows] == list(mappings.AREAS)
+def test_the_subdomains_are_the_fourteen_of_ontologies4cat_and_name_terms_of_the_schema(tmp_path, spec):
+    rows = mappings.subdomains(REPO)
+    assert [r["subdomain"] for r in rows] == list(mappings.SUBDOMAINS)
     bio = rows[0]
     assert bio["scale"] == [] and "enzyme" in bio["gap"] and bio["contained"] == ["SBO"]
-    het = next(r for r in rows if r["area"] == "heterogeneous_catalysis")
+    het = next(r for r in rows if r["subdomain"] == "heterogeneous_catalysis")
     assert "Catalyst" in het["scale"] and het["contained"] == [] and "ChEBI" in het["mapped"]
-    char = next(r for r in rows if r["area"] == "characterisation_data")
+    char = next(r for r in rows if r["subdomain"] == "characterisation_data")
     assert "CHMO" in char["contained"] and "CHMO" in char["mapped"]
     cat = load_yaml(REPO / layout.DOMAIN_MAPPINGS)
-    cat["areas"]["biocatalysis"]["scale"] = ["Enzyme"]
-    cat["areas"]["catalyst_design"] = copy.deepcopy(cat["areas"]["biocatalysis"])
+    cat["subdomains"]["biocatalysis"]["scale"] = ["Enzyme"]
+    cat["subdomains"]["catalyst_design"] = copy.deepcopy(cat["subdomains"]["biocatalysis"])
+    cat["subdomains"]["photocatalysis"]["ontologies4cat"]["contained"] = ["AFO"]       # AFO is rated related too
+    cat["subdomains"]["electrocatalysis"]["ontologies4cat"]["related"] = ["AFO"]       # the merged rating of before
     msgs = _messages(mappings.check(_tree(tmp_path, catalysis=cat), spec))
-    assert any("areas.biocatalysis: Enzyme is no label or edge type of the schema" in x for x in msgs)
-    assert any("areas: unknown area 'catalyst_design'" in x for x in msgs)
+    assert any("subdomains.biocatalysis: Enzyme is no label or edge type of the schema" in x for x in msgs)
+    assert any("subdomains: unknown subdomain 'catalyst_design'" in x for x in msgs)
+    assert any("subdomains.photocatalysis.ontologies4cat: AFO is rated twice (contained and related_" in x for x in msgs)
+    assert any("subdomains.electrocatalysis.ontologies4cat: unknown key 'related'" in x for x in msgs)
     kern = load_yaml(REPO / layout.KERNEL_MAPPINGS)
-    kern["areas"] = {"biocatalysis": load_yaml(REPO / layout.DOMAIN_MAPPINGS)["areas"]["biocatalysis"]}
+    kern["subdomains"] = {"biocatalysis": load_yaml(REPO / layout.DOMAIN_MAPPINGS)["subdomains"]["biocatalysis"]}
     msgs = _messages(mappings.check(_tree(tmp_path, kernel=kern), spec))
-    assert any("areas are areas of catalysis research; they belong to the catalysis set" in x for x in msgs)
+    assert any("subdomains are subdomains of catalysis research; they belong to the catalysis set" in x for x in msgs)
+
+
+def test_the_ratings_are_the_collections_as_it_gives_them():
+    """The collection rates each ontology contained, related: narrower, related: broader or missing, and its own
+    tables count a rating that says contained as contained (SBO's "contained: broader" for material modelling).
+    Its eNanoMapper entry repeats its RO entry; both are listed as given."""
+    rows = {r["subdomain"]: r for r in mappings.subdomains(REPO)}
+    for s in ("chemical_substance_modelling", "material_modelling", "process_modelling"):
+        assert "SBO" in rows[s]["contained"], s
+    bio = rows["biocatalysis"]
+    assert bio["contained"] == ["SBO"] and bio["related_narrower"] == ["BAO", "EDAM", "OBI"]
+    assert bio["related_broader"] == ["ChEBI", "CHEMINF", "eNanoMapper", "MS", "RO"]
+    heat = rows["heat_transport_and_kinetic_data"]
+    assert heat["contained"] == [] and heat["related_narrower"] == ["OntoCAPE"]
+    energy = rows["process_design_energy_and_cost_data"]
+    assert energy["contained"] == ["OEO", "OntoCAPE"]              # the paper (23 ontologies) found one; OEO came later
+    for r in rows.values():
+        named = [o for k in mappings.RATINGS for o in r[k]]
+        assert len(named) == len(set(named)), r["subdomain"]
 
 
 def test_describe_shows_a_terms_mappings_and_those_of_its_values(spec):
@@ -211,8 +235,9 @@ def test_the_command_checks_lists_and_exports_the_mappings():
     assert r.returncode == 0 and "COB:0000035" in r.stdout and "CHMO:" not in r.stdout
     r = run("--format", "sssom")
     assert r.returncode != 0 and "--layer kernel or --layer catalysis" in r.stderr
-    r = run("--areas")
+    r = run("--subdomains")
     assert r.returncode == 0 and "Biocatalysis" in r.stdout and "nothing yet" in r.stdout
+    assert "related, narrower: BAO, EDAM, OBI" in r.stdout
 
 
 # ---- quantity kinds and units (the kernel's set): QUDT, and SBO for an enzyme's turnover frequency
