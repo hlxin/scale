@@ -22,8 +22,13 @@ ontologies the collection classifies under it (:func:`areas`).
 
 from __future__ import annotations
 
+import csv
+import io
 import re
 from pathlib import Path
+from urllib.parse import quote
+
+import yaml
 
 from . import layout
 from .util import ScaleError, load_yaml
@@ -50,6 +55,54 @@ CURIE = re.compile(r"^(?P<prefix>[A-Za-z][A-Za-z0-9_-]*):(?P<local>\S+)$")
 # of its terms (expanded to the schema file that declares them)
 LAYERS = {"kernel": (layout.KERNEL_MAPPINGS, "kernel", "scalekernel", layout.KERNEL),
           "catalysis": (layout.DOMAIN_MAPPINGS, "catalysis", "scalecatal", "domain/graph/catalysis.yaml")}
+# the file that declares each layer's set (`mappings:`); a declared set must exist
+DECLARED_BY = {"kernel": layout.CORE_MANIFEST, "catalysis": layout.DOMAIN_DECLARATION}
+
+
+class _UniqueKeys(yaml.SafeLoader):
+    """A safe loader that refuses a key given twice in one mapping: ``yaml.safe_load`` keeps the second and drops
+    the first silently, which would lose a subject's mappings or a registry entry."""
+
+
+def _unique_mapping(loader: yaml.SafeLoader, node: yaml.MappingNode) -> dict:
+    loader.flatten_mapping(node)
+    seen = set()
+    for k, _ in node.value:
+        key = loader.construct_object(k, deep=True)
+        try:
+            if key in seen:
+                raise ScaleError(f"line {k.start_mark.line + 1}: {key!r} is given twice; the second would hide "
+                                 "the first")
+            seen.add(key)
+        except TypeError:          # an unhashable key: construct_mapping says why
+            pass
+    return loader.construct_mapping(node, deep=True)
+
+
+_UniqueKeys.add_constructor(yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG, _unique_mapping)
+
+
+def _load(repo: Path, rel: str):
+    """A mapping file (YAML), refusing a key given twice."""
+    try:
+        with open(Path(repo) / rel, encoding="utf-8") as fh:
+            return yaml.load(fh, Loader=_UniqueKeys)      # a safe loader
+    except ScaleError as exc:
+        raise ScaleError(f"{rel}: {exc}") from None
+    except yaml.YAMLError as exc:
+        raise ScaleError(f"{rel}: not valid YAML ({' '.join(str(exc).split())})") from None
+
+
+def _section(doc: dict, key: str = "mappings") -> dict:
+    """A section of a set keyed by subject (or area); empty when missing or malformed, which :func:`check`
+    reports."""
+    s = doc.get(key)
+    return s if isinstance(s, dict) else {}
+
+
+def _listed(ms) -> list[dict]:
+    """The well-formed mappings of one subject; :func:`check` reports the others."""
+    return [m for m in ms if isinstance(m, dict)] if isinstance(ms, list) else []
 
 
 def registry(repo: Path) -> dict:
@@ -57,27 +110,49 @@ def registry(repo: Path) -> dict:
     p = Path(repo) / layout.ONTOLOGY_REGISTRY
     if not p.is_file():
         raise ScaleError(f"{layout.ONTOLOGY_REGISTRY} is missing: the registry of the ontologies mappings cite")
-    return (load_yaml(p) or {}).get("ontologies") or {}
+    doc = _load(repo, layout.ONTOLOGY_REGISTRY)
+    reg = doc.get("ontologies") if isinstance(doc, dict) else None
+    if not isinstance(reg, dict):
+        raise ScaleError(f"{layout.ONTOLOGY_REGISTRY}: `ontologies` is a mapping of prefixes to their entries")
+    return reg
 
 
 def load_set(repo: Path, layer: str) -> dict | None:
     """A layer's mapping set (None when the layer has none)."""
-    p = Path(repo) / LAYERS[layer][0]
-    return (load_yaml(p) or {}) if p.is_file() else None
+    rel = LAYERS[layer][0]
+    if not (Path(repo) / rel).is_file():
+        return None
+    doc = _load(repo, rel)
+    if not isinstance(doc, dict):
+        raise ScaleError(f"{rel}: a mapping set is a mapping of {', '.join(SET_KEYS)}")
+    return doc
+
+
+def declared(repo: Path) -> dict[str, str]:
+    """The layers whose declaration (core/CORE.yaml, domain/DOMAIN.yaml) names a mapping set, with that file."""
+    out = {}
+    for layer, rel in DECLARED_BY.items():
+        p = Path(repo) / rel
+        doc = load_yaml(p) if p.is_file() else None
+        if isinstance(doc, dict) and doc.get("mappings"):
+            out[layer] = rel
+    return out
 
 
 def iri(term: str, reg: dict) -> str | None:
     """The IRI a CURIE of a registered ontology stands for (None for an unregistered prefix)."""
     m = CURIE.match(term or "")
-    if not m or m["prefix"] not in reg:
+    e = reg.get(m["prefix"]) if m else None
+    if not isinstance(e, dict) or not e.get("iri"):
         return None
-    return f"{reg[m['prefix']]['iri']}{m['local']}"
+    return f"{e['iri']}{m['local']}"
 
 
 def entries(doc: dict) -> list[tuple[str, str, str, object]]:
-    """A set's subjects in file order: (section, the subject as listed, the subject as rows show it, its mappings)."""
+    """A set's subjects in file order: (section, the subject as listed, the subject as rows show it, its mappings);
+    a section that is not keyed by subject is left out, and :func:`check` reports it."""
     return [(section, str(subject), f"{tag}{subject}", ms)
-            for section, tag in SECTIONS for subject, ms in (doc.get(section) or {}).items()]
+            for section, tag in SECTIONS for subject, ms in _section(doc, section).items()]
 
 
 def quantity_problem(spec: dict, section: str, name: str) -> str | None:
@@ -160,15 +235,25 @@ def check(repo: Path, spec: dict | None = None) -> dict:
             err(rw, f"{prefix}: pattern does not compile ({x})")
     spec = spec if spec is not None else head_spec(repo)
     counts = {}
+    must = declared(repo)
     for layer, (rel, _, _, _) in LAYERS.items():
-        doc = load_set(repo, layer)
+        try:
+            doc = load_set(repo, layer)
+        except ScaleError as exc:
+            err(rel, str(exc))
+            continue
         if doc is None:
+            if layer in must:
+                err(rel, f"is missing; {must[layer]} declares it (mappings)")
             continue
         for k in sorted(set(doc) - set(SET_KEYS)):
             err(rel, f"unknown key {k!r} ({', '.join(SET_KEYS)})")
         for k, req in SET_KEYS.items():
             if req and k not in doc:
                 err(rel, f"{k} is required")
+        for k in ("mappings", "areas"):
+            if doc.get(k) is not None and not isinstance(doc[k], dict):
+                err(rel, f"{k} is a mapping keyed by {'subject' if k == 'mappings' else 'area'}")
         if doc.get("areas") and layer != "catalysis":
             err(rel, "areas are areas of catalysis research; they belong to the catalysis set")
         n = 0
@@ -216,7 +301,7 @@ def check(repo: Path, spec: dict | None = None) -> dict:
                                   "an exact match is the one term of that ontology meaning the same")
                     exact[c["prefix"]] = term
         counts[layer] = n
-        areas_ = doc.get("areas") or {}
+        areas_ = _section(doc, "areas")
         for a in sorted(set(areas_) - set(AREAS)):
             err(rel, f"areas: unknown area {a!r} (the areas of Ontologies4Cat: {', '.join(AREAS)})")
         for a, d in areas_.items():
@@ -228,10 +313,15 @@ def check(repo: Path, spec: dict | None = None) -> dict:
             for k, req in AREA_KEYS.items():
                 if req and k not in d:
                     err(rel, f"areas.{a}: {k} is required")
-            for t in d.get("scale") or []:
+            if not isinstance(d.get("scale") or [], list):
+                err(rel, f"areas.{a}: scale is a list of labels and edge types")
+            for t in d.get("scale") if isinstance(d.get("scale"), list) else []:
                 if t not in spec["nodes"] and t not in spec["edges"]:
                     err(rel, f"areas.{a}: {t} is no label or edge type of the schema")
             o4c = d.get("ontologies4cat") or {}
+            if not isinstance(o4c, dict):
+                err(rel, f"areas.{a}.ontologies4cat: a mapping of contained and related")
+                o4c = {}
             for k in sorted(set(o4c) - {"contained", "related"}):
                 err(rel, f"areas.{a}.ontologies4cat: unknown key {k!r} (contained, related)")
     return {"ok": not errors, "errors": errors, "warnings": warnings, "counts": counts}
@@ -244,7 +334,7 @@ def index(repo: Path, layers: tuple[str, ...] = ("kernel", "catalysis")) -> dict
     for layer in layers:
         doc = load_set(repo, layer) or {}
         for _, _, subject, ms in entries(doc):
-            for m in ms or []:
+            for m in _listed(ms):
                 out.setdefault(subject, []).append(
                     {"match": m.get("match"), "term": m.get("term"), "label": m.get("label"),
                      "iri": iri(str(m.get("term") or ""), reg), **({"note": m["note"]} if m.get("note") else {})})
@@ -258,7 +348,7 @@ def rows(repo: Path, layer: str | None = None) -> list[dict]:
     for lay in ([layer] if layer else list(LAYERS)):
         doc = load_set(repo, lay) or {}
         for _, _, subject, ms in entries(doc):
-            for m in ms or []:
+            for m in _listed(ms):
                 out.append({"layer": lay, "subject": subject, "match": m.get("match"), "term": m.get("term"),
                             "label": m.get("label"), "iri": iri(str(m.get("term") or ""), reg),
                             "note": m.get("note")})
@@ -273,35 +363,45 @@ def text(repo: Path, layer: str | None = None) -> str:
     return "\n".join(lines)
 
 
+def _local(subject: str) -> str:
+    """A SCALE term as the local part of a CURIE: what an IRI does not allow (a space, %, a non-ASCII letter) is
+    percent-encoded; the term itself is the row's label."""
+    return quote(subject, safe="/=()")
+
+
 def sssom(repo: Path, layer: str, version: str | None = None) -> str:
     """A layer's set in the SSSOM TSV form (Simple Standard for Sharing Ontological Mappings): its metadata as
-    commented YAML, then one row per mapping. A SCALE term's identifier is the schema file that declares it
-    followed by the term (``scalecatal:Treatment.treatment_kind=calcination``)."""
+    commented YAML, then one row per mapping, cells quoted where a value holds a double quote. A SCALE term's
+    identifier is the schema file that declares it followed by the term
+    (``scalecatal:Treatment.treatment_kind=calcination``); every identifier is a CURIE of the ``curie_map``."""
     reg = registry(repo)
     rel, _, prefix, schema_file = LAYERS[layer]
     doc = load_set(repo, layer)
     if doc is None:
         raise ScaleError(f"the {layer} layer has no mapping set ({rel})")
     used = sorted({CURIE.match(str(m.get("term")))["prefix"] for _, _, _, ms in entries(doc)
-                   for m in ms or [] if CURIE.match(str(m.get("term") or ""))})
+                   for m in _listed(ms) if CURIE.match(str(m.get("term") or ""))})
     base = f"{layout.REPOSITORY_URL}/blob/main"
-    curie_map = {prefix: f"{base}/{schema_file}#", "semapv": "https://w3id.org/semapv/vocab/",
-                 "skos": "http://www.w3.org/2004/02/skos/core#", **{p: reg[p]["iri"] for p in used if p in reg}}
-    head = [f"mapping_set_id: {base}/{rel}", f"mapping_set_title: {doc.get('title')}",
-            "license: https://creativecommons.org/licenses/by/4.0/", f"mapping_date: '{doc.get('checked')}'",
-            f"subject_source: {base}/{schema_file}", *([f"subject_source_version: {version}"] if version else []),
-            "curie_map:", *[f"  {k}: {v}" for k, v in curie_map.items()]]
+    curie_map = {prefix: f"{base}/{schema_file}#", "scale": f"{base}/", "semapv": "https://w3id.org/semapv/vocab/",
+                 "skos": "http://www.w3.org/2004/02/skos/core#",
+                 **{p: reg[p]["iri"] for p in used if isinstance(reg.get(p), dict) and reg[p].get("iri")}}
+    meta = {"mapping_set_id": f"{base}/{rel}", "mapping_set_title": str(doc.get("title") or ""),
+            "license": "https://creativecommons.org/licenses/by/4.0/", "mapping_date": str(doc.get("checked")),
+            "subject_source": f"scale:{schema_file}",
+            **({"subject_source_version": str(version)} if version else {}), "curie_map": curie_map}
+    head = yaml.safe_dump(meta, sort_keys=False, allow_unicode=True, width=10_000).splitlines()
     cols = ("subject_id", "subject_label", "predicate_id", "object_id", "object_label", "mapping_justification",
             "comment")
     clean = lambda s: " ".join(str(s or "").split())     # noqa: E731  (no tab or line break inside a cell)
-    out = [f"# {h}" for h in head] + ["\t".join(cols)]
+    buf = io.StringIO()
+    w = csv.writer(buf, delimiter="\t", lineterminator="\n")     # quotes a cell holding a double quote
+    w.writerow(cols)
     for section, name, _, ms in entries(doc):
-        local = name if section == "mappings" else f"{section[:-1]}/{name}"      # kind/temperature, unit/kPa
-        for m in ms or []:
-            out.append("\t".join([f"{prefix}:{local}", clean(name), MATCHES.get(m.get("match"), ""),
-                                  clean(m.get("term")), clean(m.get("label")), "semapv:ManualMappingCuration",
-                                  clean(m.get("note"))]))
-    return "\n".join(out) + "\n"
+        local = _local(name) if section == "mappings" else f"{section[:-1]}/{name}"      # kind/…, unit/…
+        for m in _listed(ms):
+            w.writerow([f"{prefix}:{local}", clean(name), MATCHES.get(m.get("match"), ""), clean(m.get("term")),
+                        clean(m.get("label")), "semapv:ManualMappingCuration", clean(m.get("note"))])
+    return "".join(f"# {h}\n" for h in head) + buf.getvalue()
 
 
 def areas(repo: Path) -> list[dict]:
@@ -309,14 +409,15 @@ def areas(repo: Path) -> list[dict]:
     lacks for it, the ontologies Ontologies4Cat classifies under it, and those of them SCALE's mappings cite."""
     reg = registry(repo)
     cited = {CURIE.match(str(r["term"]))["prefix"] for r in rows(repo) if CURIE.match(str(r["term"] or ""))}
-    cited_o4c = {reg[p].get("ontologies4cat") for p in cited if p in reg and reg[p].get("ontologies4cat")}
+    cited_o4c = {reg[p].get("ontologies4cat") for p in cited if isinstance(reg.get(p), dict)
+                 and reg[p].get("ontologies4cat")}
     doc = load_set(repo, "catalysis") or {}
     out = []
     for a in AREAS:
-        d = (doc.get("areas") or {}).get(a)
-        if d is None:
+        d = _section(doc, "areas").get(a)
+        if not isinstance(d, dict):
             continue
-        o4c = d.get("ontologies4cat") or {}
+        o4c = d.get("ontologies4cat") if isinstance(d.get("ontologies4cat"), dict) else {}
         named = [*(o4c.get("contained") or []), *(o4c.get("related") or [])]
         out.append({"area": a, "title": d.get("title"), "scale": list(d.get("scale") or []), "gap": d.get("gap"),
                     "contained": list(o4c.get("contained") or []), "related": list(o4c.get("related") or []),

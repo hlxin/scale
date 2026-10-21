@@ -47,9 +47,11 @@ mappings:
     note: OBI's prediction is the process of predicting; a SCALE Prediction is what it expects.
   Experiment:
   - match: broad
-    term: COB:0000035
-    label: completely executed planned process
-    note: OBI's planned process (OBI:0000011), which the kernel's maps_to names, is obsolete and replaced by this term.
+    term: COB:0000082
+    label: planned process
+    note: "COB's planned process is one an agent has started, completed or not; a SCALE experiment may also be only
+      proposed or planned (experiment_status). OBI's planned process (OBI:0000011), which the kernel's maps_to
+      names, is obsolete."
   - match: narrow
     term: OBI:0000070
     label: assay
@@ -61,13 +63,26 @@ mappings:
   - match: broad
     term: prov:Activity
     label: Activity
+    note: A PROV activity is one that occurred or is occurring; a SCALE experiment may also be only proposed or planned.
+  Experiment.experiment_status=completed:
+  - match: broad
+    term: COB:0000035
+    label: completely executed planned process
+    note: The term OBI's obsolete planned process (OBI:0000011) points to; a SCALE experiment is one once completed.
   Procedure:
-  - match: close
-    term: COB:0000110
-    label: material processing
+  - match: broad
+    term: COB:0000082
+    label: planned process
+    note: A SCALE procedure may also be only proposed or planned (procedure_status).
   - match: broad
     term: prov:Activity
     label: Activity
+    note: A PROV activity is one that occurred or is occurring; a SCALE procedure may also be only proposed or planned.
+  Procedure.procedure_status=completed:
+  - match: close
+    term: COB:0000110
+    label: material processing
+    note: COB's material processing is completely executed and makes material entities from others.
   Protocol:
   - match: close
     term: OBI:0000272
