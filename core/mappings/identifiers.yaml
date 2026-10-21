@@ -25,9 +25,9 @@ schemes:
     pattern: ^0[a-hj-km-np-tv-z0-9]{6}\d{2}$
     resolves: https://ror.org/{id}
     example: 03yrm5c26
-  inchikey:
-    name: Standard InChIKey
-    pattern: ^[A-Z]{14}-[A-Z]{10}-[A-Z]$
+  inchikey:            # its flag is S for a standard key, N for a non-standard one; its version A, InChI version 1
+    name: InChIKey
+    pattern: ^[A-Z]{14}-[A-Z]{8}[SN]A-[A-Z]$
     example: XLYOFNOQVPJJNP-UHFFFAOYSA-N
   pubchem_cid:
     name: PubChem compound identifier
@@ -70,7 +70,7 @@ schemes:
     example: mp-149
   arxiv:
     name: arXiv identifier
-    pattern: ^(\d{4}\.\d{4,5}|[a-z-]+(\.[A-Z]{2})?/\d{7})(v\d+)?$
+    pattern: ^(\d{2}(0[1-9]|1[0-2])\.\d{4,5}|[a-z-]+(\.[A-Z]{2})?/\d{2}(0[1-9]|1[0-2])\d{3})(v[1-9]\d*)?$
     resolves: https://arxiv.org/abs/{id}
     example: '2301.00001'
   pmid:
@@ -89,7 +89,7 @@ schemes:
     resolves: https://www.wikidata.org/wiki/{id}
     example: Q283
   patent:
-    name: Patent publication number (country code, number and kind code)
-    pattern: ^[A-Z]{2}[A-Z0-9]{3,}$
+    name: Patent publication number (country code, number with its separators, kind code)
+    pattern: ^[A-Z]{2} ?[A-Z]{0,2}[0-9]([0-9 ,./-]*[0-9])?( ?[A-Z][0-9]?)?$
     resolves: https://worldwide.espacenet.com/patent/search?q=pn%3D{id}
     example: US1625924A

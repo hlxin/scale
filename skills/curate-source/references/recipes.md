@@ -477,6 +477,7 @@ queries). A value is in the unit printed; a fitted or derived value names its pr
   | scanning electron microscopy (SEM) | CHMO:0000073 |
   | scanning transmission electron microscopy (STEM); HAADF-STEM | CHMO:0000086; CHMO:0000730 |
   | energy-dispersive X-ray spectroscopy (EDX, EDS) | CHMO:0000309 |
+  | X-ray fluorescence (XRF) | CHMO:0000307 (X-ray emission spectroscopy, XRF its exact synonym) |
   | X-ray absorption spectroscopy (XAS); EXAFS; XANES (NEXAFS) | CHMO:0000298; CHMO:0000300; CHMO:0000305 |
   | Raman spectroscopy | CHMO:0000656 |
   | Fourier-transform infrared spectroscopy (FTIR); DRIFTS | CHMO:0000636; CHMO:0000645 |
@@ -491,8 +492,8 @@ queries). A value is in the unit printed; a fitted or derived value names its pr
   | cyclic voltammetry; electrochemical impedance spectroscopy | CHMO:0000025; CHMO:0000423 |
   | atomic force microscopy (AFM) | CHMO:0000113 |
 
-  CHMO has no term for a chemisorption or an XRF measurement as such; leave `technique_id` unset rather than use a
-  broader one. Other ontology terms (an OBI assay, an IRI) are accepted too.
+  CHMO has no term for a chemisorption measurement as such; leave `technique_id` unset rather than use a broader
+  one. Other ontology terms (an OBI assay, an IRI) are accepted too.
 - **Acquisition settings:** `Characterization.conditions` (edge, detection mode, accelerating voltage, scans, regions
   imaged), the Instrument it `USES_INSTRUMENT` with its `settings`.
 - **Standards and calibration:** a reference measured with the specimen is `HAS_INPUT {role: reference_standard}`; a

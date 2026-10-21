@@ -95,14 +95,18 @@ ontology term.
 - [core/mappings/identifiers.yaml](../core/mappings/identifiers.yaml) lists the schemes SCALE checks, each with its
   pattern and where an identifier resolves: DOI, ORCID, ROR, InChIKey, PubChem, ChEBI, CAS Registry Number, EC
   number, UniProt, COD, ICSD, Materials Project, arXiv, PubMed, PubMed Central, Wikidata and patent numbers. When a
-  document is validated, an identifier of a listed scheme that does not match its pattern, or a CAS Registry Number or
-  ORCID iD whose check digit is wrong, is a warning; the record stays as written. A scheme the list does not hold is
-  kept, unchecked.
+  document is validated, an identifier of a listed scheme that does not match its pattern as a whole (a trailing
+  line break included), or a CAS Registry Number or ORCID iD whose check digit is wrong, is a warning; the record
+  stays as written. A scheme the list does not hold is kept, unchecked. A patent number may keep its separators and
+  kind code as printed (WO 2008/004088 A1, US 1,625,924); an InChIKey's flag is S (standard) or N, its version A.
 - `technique_id` (a characterization's technique) and `method_id` (an experiment's method) name an ontology term: a
-  CURIE of an ontology of the registry (CHMO:0000156 for X-ray diffraction) or an IRI. Anything else (`XRD`) is a
-  warning. The curation recipes list the Chemical Methods Ontology terms of the common techniques.
-- Before this check, the real graphs used only patent numbers (78, all in form), and no record stated a technique's
-  term; validating them gives no new warning.
+  CURIE of an ontology of the registry (CHMO:0000156 for X-ray diffraction) or an http(s) IRI with a host. Anything
+  else (`XRD`) is a warning. The curation recipes list the Chemical Methods Ontology terms of the common techniques.
+- The registries checked are the tools' own (the checkout they run from, or the installed package's data), never the
+  repository `SCALE_REPO` names, and are read again when their file changes, so a document is checked alike wherever
+  it is validated.
+- Before this check, the real graphs used only patent numbers (on the 39 patent sources of the pre-1966 methanol
+  graph, all in form), and no record stated a technique's term; validating them gives no new warning.
 
 ## How they are checked
 
