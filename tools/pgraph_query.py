@@ -675,7 +675,7 @@ class Comparison:
         for name, ctx in got.contexts.items():
             if ctx.contradiction:
                 return f"incompatible_context ({path} {name}: contradictory: {ctx.contradiction})"
-            if ctx.missing:
+            if ctx.missing and not ctx.unstated:      # unstated: group compares it with the others that state none
                 return f"missing_context ({path} {name}: {ctx.missing})"
             if name in want and ctx.value not in (want[name],) and ctx.value.split(":")[0] != want[name]:
                 return f"incompatible_context ({path} {name} {ctx.value}; compared on {want[name]})"

@@ -225,8 +225,10 @@ def science_checks(doc: dict, spec: dict, rep) -> None:
         if p.get("operation_mode") == "dynamic":
             if not p.get("varied_quantities"):
                 err(nid, "a dynamic operation names its varied_quantities")
-            if not (p.get("segments") or p.get("period") or p.get("frequency") or p.get("description")):
-                warn(nid, "a dynamic operation says how it varies (segments, period, frequency or description)")
+            said = any(p.get(k) for k in ("segments", "period", "frequency", "bit_duration", "pulse_width", "description"))
+            if not said and not (p.get("time_pattern") == "step" and p.get("levels")):     # a step: its levels say it
+                warn(nid, "a dynamic operation says how it varies (segments, period, frequency, a sequence's bit_duration, "
+                          "pulse_width, a step's levels or description)")
         elif p.get("operation_mode") == "static" and p.get("time_pattern") not in (None, "constant", "not_reported"):
             err(nid, f"a static operation has time_pattern constant, not {p['time_pattern']}")
 
