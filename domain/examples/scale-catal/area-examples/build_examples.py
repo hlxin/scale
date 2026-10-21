@@ -7,16 +7,19 @@ lacked before 0.7.1 (Ontologies4Cat's areas; docs/mappings.md).
   catalysis-areas.json
     biocatalysis          an alcohol dehydrogenase (EC 1.1.1.1) immobilized on silica: a Catalyst of family enzyme, the
                           enzyme a macromolecule; the reaction mixture with its substrate, its cofactor (NAD+) and its
-                          solvent (a phosphate buffer in water), at a stated pH; the specific activity (U/mg) and the
-                          activity of the whole charge (U), and a Michaelis constant for ethanol from a fit of rates
+                          solvent (a phosphate buffer in water), at a stated pH; the specific activity (U/mg of the
+                          enzyme), the activity of the 1 mg charge (U; 48 µg of enzyme at 48 mg/g, times 12.5 U/mg) and
+                          per millilitre of the assay mixture (mU/mL), and a Michaelis constant for ethanol from a fit
     homogeneous           1-octene hydrogenation by a rhodium phosphine complex in toluene, with added triphenylphosphine
                           (ligand): a turnover number, apart from a turnover frequency
-    transport checks      ethylene hydrogenation over Pd/Al2O3, two checks: a Weisz-Prater and a Mears criterion, an
-                          effectiveness factor and a Thiele modulus (one check finds no limitation, the other a
-                          limitation in larger particles); a criterion whose definition names none (left out of a
-                          comparison as missing_context)
-    energy                CO2 electrolysis to CO in a flow cell: the electrical energy per mole of CO and per kilogram of
-                          CO (two quantities, kept apart by their units), and the cell's energy efficiency
+    transport checks      ethylene hydrogenation over Pd/Al2O3, two checks: a Weisz-Prater criterion and a Mears
+                          criterion for external diffusion, an internal effectiveness factor and a generalized Thiele
+                          modulus with its length (one check finds no limitation, the other a limitation in larger
+                          particles); a criterion whose definition names none (left out of a comparison as
+                          missing_context)
+    energy                CO2 electrolysis to CO in a flow cell: the electrical energy into the cell per mole of CO and
+                          per kilogram of CO (two quantities, kept apart by their units), and the cell's energy
+                          efficiency
     how the source says it   every test states catalysis_mode as its source describes it
 """
 
@@ -132,6 +135,7 @@ def catalysis_areas() -> dict:
     stirred = node("reactor/stirred-vial", "Reactor", "stirred glass vial", reactor_kind="batch", volume=V(5, "mL"))
     v_sa = variable("specific-activity", "specific activity of the immobilized ADH", "enzyme_activity", "U/mg")
     v_ua = variable("activity", "activity of the immobilized ADH in the assay", "enzyme_activity", "U")
+    v_va = variable("volumetric-activity", "activity per volume of the assay mixture", "enzyme_activity", "mU/mL")
     v_km = variable("km-ethanol", "Michaelis constant for ethanol", "michaelis_constant", "mmol/L")
     assay = node("test/adh-assay", "CatalyticTest", "ADH/SiO2 activity assay at 30 °C", test_kind="activity",
                  catalysis_mode="biocatalytic", driving_forces=["thermo"], experiment_kind="physical",
@@ -139,11 +143,16 @@ def catalysis_areas() -> dict:
                  conditions={"pH": V(7.5, "1", definition="pH of the assay mixture (phosphate buffer)",
                                      evidence_ids=["s23"])},
                  result_values=[V(12.5, "U/mg", id="specific_activity", variable=v_sa, target=ethanol,
-                                  definition="micromoles of ethanol oxidized per minute per milligram of immobilized enzyme",
+                                  definition="micromoles of ethanol oxidized per minute per milligram of ADH (the enzyme, "
+                                             "not the silica)", evidence_ids=["t1_activity"]),
+                                V(0.6, "U", id="activity", variable=v_ua, target=ethanol,
+                                  definition="activity of the 1 mg charge, which holds 48 µg of ADH",
                                   evidence_ids=["t1_activity"]),
-                                V(0.6, "U", id="activity", variable=v_ua, target=ethanol, evidence_ids=["t1_activity"])],
+                                V(120, "mU/mL", id="volumetric_activity", variable=v_va, target=ethanol,
+                                  definition="activity of the charge per millilitre of the 5 mL assay mixture",
+                                  evidence_ids=["t1_activity"])],
                  evidence=[ev(bio, "Section 2.3", "text", id="s23"), ev(bio, "Table 1", id="t1_activity")])
-    link("USES_CATALYST", assay, adh_sample, amount=V(48, "µg"))
+    link("USES_CATALYST", assay, adh_sample, amount=V(1, "mg"))
     link("FED_WITH", assay, mixture)
     link("IN_REACTOR", assay, stirred)
     link("OF_REACTION", assay, ox)
@@ -227,15 +236,18 @@ def catalysis_areas() -> dict:
         link("FED_WITH", t, eh_feed)
         link("OF_REACTION", t, eh)
         check = node(f"analysis/transport-{key}", "Analysis", f"transport check, {size}", analysis_kind="transport_check",
-                     evaluation_basis="numerical", method="Weisz-Prater and Mears criteria from the rate at 350 K",
+                     evaluation_basis="numerical",
+                     method="Weisz-Prater criterion and Mears criterion for external diffusion, from the rate at 350 K",
                      verdict=verdict, temperature=V(350, "K"),
                      result_values=[V(wp, "1", id="weisz_prater", variable=v_crit, definition="Weisz-Prater criterion",
                                       evidence_ids=[f"s4_{key}"]),
-                                    V(mears, "1", id="mears", variable=v_crit, definition="Mears criterion",
-                                      evidence_ids=[f"s4_{key}"]),
-                                    V(eta, "1", id="effectiveness_factor", variable=v_eta, evidence_ids=[f"s4_{key}"]),
+                                    V(mears, "1", id="mears", variable=v_crit,
+                                      definition="Mears criterion for external diffusion", evidence_ids=[f"s4_{key}"]),
+                                    V(eta, "1", id="effectiveness_factor", variable=v_eta,
+                                      definition="internal effectiveness factor", evidence_ids=[f"s4_{key}"]),
                                     V(phi, "1", id="thiele_modulus", variable=v_phi,
-                                      definition="generalized Thiele modulus", evidence_ids=[f"s4_{key}"])],
+                                      definition="generalized Thiele modulus (Bischoff), with the length Vp/Sp",
+                                      evidence_ids=[f"s4_{key}"])],
                      evidence=[ev(transport, "Supporting information, Section S4", "text", id=f"s4_{key}")])
         link("HAS_INPUT", check, t, role="data")
         checks.append(check)

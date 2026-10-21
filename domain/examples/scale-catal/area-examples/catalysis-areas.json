@@ -257,6 +257,17 @@
       }
     },
     {
+      "id": "ex:ca/variable/volumetric-activity",
+      "label": "Variable",
+      "props": {
+        "name": "activity per volume of the assay mixture",
+        "origin": "synthetic",
+        "quantity_kind": "enzyme_activity",
+        "scale": "quantitative",
+        "unit": "mU/mL"
+      }
+    },
+    {
       "id": "ex:ca/variable/km-ethanol",
       "label": "Variable",
       "props": {
@@ -318,7 +329,7 @@
           {
             "id": "specific_activity",
             "status": "present",
-            "definition": "micromoles of ethanol oxidized per minute per milligram of immobilized enzyme",
+            "definition": "micromoles of ethanol oxidized per minute per milligram of ADH (the enzyme, not the silica)",
             "evidence_ids": [
               "t1_activity"
             ],
@@ -330,6 +341,7 @@
           {
             "id": "activity",
             "status": "present",
+            "definition": "activity of the 1 mg charge, which holds 48 µg of ADH",
             "evidence_ids": [
               "t1_activity"
             ],
@@ -337,6 +349,18 @@
             "unit": "U",
             "value": 0.6,
             "variable": "ex:ca/variable/activity"
+          },
+          {
+            "id": "volumetric_activity",
+            "status": "present",
+            "definition": "activity of the charge per millilitre of the 5 mL assay mixture",
+            "evidence_ids": [
+              "t1_activity"
+            ],
+            "target": "ex:ca/species/ethanol",
+            "unit": "mU/mL",
+            "value": 120,
+            "variable": "ex:ca/variable/volumetric-activity"
           }
         ],
         "temperature": {
@@ -829,7 +853,7 @@
             "source": "ex:ca/source/transport"
           }
         ],
-        "method": "Weisz-Prater and Mears criteria from the rate at 350 K",
+        "method": "Weisz-Prater criterion and Mears criterion for external diffusion, from the rate at 350 K",
         "origin": "synthetic",
         "result_values": [
           {
@@ -846,7 +870,7 @@
           {
             "id": "mears",
             "status": "present",
-            "definition": "Mears criterion",
+            "definition": "Mears criterion for external diffusion",
             "evidence_ids": [
               "s4_fine"
             ],
@@ -857,6 +881,7 @@
           {
             "id": "effectiveness_factor",
             "status": "present",
+            "definition": "internal effectiveness factor",
             "evidence_ids": [
               "s4_fine"
             ],
@@ -867,7 +892,7 @@
           {
             "id": "thiele_modulus",
             "status": "present",
-            "definition": "generalized Thiele modulus",
+            "definition": "generalized Thiele modulus (Bischoff), with the length Vp/Sp",
             "evidence_ids": [
               "s4_fine"
             ],
@@ -954,7 +979,7 @@
             "source": "ex:ca/source/transport"
           }
         ],
-        "method": "Weisz-Prater and Mears criteria from the rate at 350 K",
+        "method": "Weisz-Prater criterion and Mears criterion for external diffusion, from the rate at 350 K",
         "origin": "synthetic",
         "result_values": [
           {
@@ -971,7 +996,7 @@
           {
             "id": "mears",
             "status": "present",
-            "definition": "Mears criterion",
+            "definition": "Mears criterion for external diffusion",
             "evidence_ids": [
               "s4_coarse"
             ],
@@ -982,6 +1007,7 @@
           {
             "id": "effectiveness_factor",
             "status": "present",
+            "definition": "internal effectiveness factor",
             "evidence_ids": [
               "s4_coarse"
             ],
@@ -992,7 +1018,7 @@
           {
             "id": "thiele_modulus",
             "status": "present",
-            "definition": "generalized Thiele modulus",
+            "definition": "generalized Thiele modulus (Bischoff), with the length Vp/Sp",
             "evidence_ids": [
               "s4_coarse"
             ],
@@ -1463,8 +1489,8 @@
       "props": {
         "amount": {
           "status": "present",
-          "unit": "µg",
-          "value": 48
+          "unit": "mg",
+          "value": 1
         },
         "origin": "synthetic"
       },

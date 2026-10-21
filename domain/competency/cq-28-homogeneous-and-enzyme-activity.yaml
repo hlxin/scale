@@ -7,10 +7,12 @@ description: |
   A test states how its source describes the catalysis (catalysis_mode: heterogeneous, homogeneous, biocatalytic), as the
   source says it, never inferred from the catalyst. A homogeneous test reports a turnover number (events per molecule of
   catalyst over the run, dimensionless), which is never a turnover frequency (per time). An enzyme test reports the
-  enzyme's activity, per time (the enzyme unit, U, a micromole per minute) or per mass of the preparation (a specific
-  activity, U/mg). Asked for these, the rhodium complex's test returns its turnover number (950) and the enzyme assay its
-  two activities. Compared scientifically, the three are three groups: a turnover number is another kind than an
-  activity, and an activity per time and one per mass are kept apart by their units.
+  enzyme's activity, per time (the enzyme unit, U, a micromole per minute), per mass of the enzyme (a specific
+  activity, U/mg) or per volume of the assay mixture (mU/mL). Asked for these, the rhodium complex's test returns its
+  turnover number (950) and the enzyme assay its three activities (0.6 U for its 1 mg charge, which holds 48 µg of the
+  enzyme at 12.5 U/mg; 120 mU/mL in 5 mL). Compared scientifically, the four are four groups: a turnover number is
+  another kind than an activity, and activities per time, per mass and per volume are kept apart by their units
+  (tools/tests/test_catalysis_areas.py checks the groups).
 documents:
   - examples/scale-catal/area-examples/catalysis-areas.json
 plan:
@@ -38,15 +40,15 @@ plan:
   evidence: true
 expect:
   status: answered
-  min_rows: 3
-  max_rows: 3
+  min_rows: 4
+  max_rows: 4
   values:
     test.catalysis_mode:
       - homogeneous
       - biocatalytic
 variants:
-  - description: Compared scientifically, the turnover number, the activity per time and the specific activity fall
-      into three groups.
+  - description: Compared scientifically, the turnover number and the activities per time, per mass and per volume fall
+      into four groups.
     plan:
       comparison: scientific
       order_by:
@@ -54,8 +56,8 @@ variants:
           prop: value
     expect:
       status: answered
-      min_rows: 3
-      max_rows: 3
+      min_rows: 4
+      max_rows: 4
   - description: Only the tests whose source calls them heterogeneous report neither a turnover number nor an enzyme
       activity.
     plan:

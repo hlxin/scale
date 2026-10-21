@@ -2234,6 +2234,9 @@ quantities:
   - Cantera 3.2 documentation, Reactions and General Structure (Units), cantera.org/stable/yaml (a reaction equation names each participant with its stoichiometric coefficient; Ea is a parameter of a rate expression, given in an energy, an energy per quantity or K; a reaction is checked to balance in elements, and on surfaces in sites).
   - Behr, Borgelt and Kockmann, Ontologies4Cat, investigating the landscape of ontologies for catalysis research data management, J. Cheminform. 2024, 16, 16, doi:10.1186/s13321-024-00807-2 (no ontology of their collection contains heterogeneous or homogeneous catalysis, synthesis data, or heat, transport and kinetic data; one contains biocatalysis, one process design, energy and cost data).
   - Systems Biology Ontology, enzyme activity (SBO:0000559, an amount converted per time under specified conditions, often micromoles per minute, the enzyme unit), specific activity (SBO:0000558, per mass of enzyme), Michaelis constant (SBO:0000027) and catalytic rate constant (SBO:0000025, kcat).
+  - Fogler, Elements of Chemical Reaction Engineering, 4th ed., Pearson, 2006, chapter 12 (the square of the Thiele modulus, with the particle radius, a measure of the ratio of a surface reaction rate to a rate of diffusion in the pellet; the internal and the overall effectiveness factor; Mears' criterion for external diffusion and his criterion for heat transfer between the fluid and the pellet, two formulas, each below 0.15; the Weisz-Prater criterion for internal diffusion).
+  - Mears, Tests for transport limitations in experimental catalytic reactors, Ind. Eng. Chem. Process Des. Dev. 1971, 10, 541, doi:10.1021/i260040a020, and Diagnostic criteria for heat transport limitations in fixed bed reactors, J. Catal. 1971, 20, 127, doi:10.1016/0021-9517(71)90073-X (criteria for mass and for heat transport, the second for heat in a fixed bed).
+  - Aris, On shape factors for irregular particles - I, Chem. Eng. Sci. 1957, 6, 262, doi:10.1016/0009-2509(57)85028-3, and Bischoff, Effectiveness factors for general reaction rate forms, AIChE J. 1965, 11, 351, doi:10.1002/aic.690110229 (a Thiele modulus with the particle volume over its external surface as length, and one generalized to any rate form).
   dimensions:
     dimensionless: '1'
     length: L
@@ -2281,6 +2284,7 @@ quantities:
     prefixes: [p, 'n', μ, u, m, c, d, h, k, M, G]
     prefixed:
       m: length
+      U: molar_flow
       g: mass
       s: time
       A: electric_current
@@ -2368,7 +2372,6 @@ quantities:
       photons: dimensionless
       electron: dimensionless
       electrons: dimensionless
-      U: molar_flow
     spellings:
       temperature:
       - C
@@ -2628,8 +2631,9 @@ quantities:
           terms: [mass balance, total mass]
     transport_criterion:
       description: Which criterion a transport check computed. The Weisz-Prater criterion judges diffusion in the pores,
-        the Mears and Carberry criteria mass transfer to the particle, the Anderson criterion heat; values of two criteria
-        are two quantities, never compared with one another. Read from the value's basis or definition.
+        the Carberry number mass transfer to the particle, the Anderson criterion heat in the particle, and Mears gave
+        criteria for both mass and heat transfer (transport_mode says which); values of two criteria are two
+        quantities, never compared with one another. Read from the value's basis or definition.
       read_from: [basis, definition]
       values:
         weisz_prater:
@@ -2640,6 +2644,81 @@ quantities:
           terms: [Carberry, Carberry number]
         anderson:
           terms: [Anderson, Anderson criterion]
+      unspecified: [other, not_reported]
+    transport_mode:
+      description: What a Mears criterion judges. Mears gave criteria for mass transfer between the fluid and the
+        particle (external diffusion) and in it, and for heat transfer between the fluid and the particle, in it and
+        across a fixed bed, each its own formula; a Mears value is compared only with one of the same, as its basis or
+        definition names it. One that names only heat or mass transfer, or nothing (a Mears criterion), is left out of
+        a comparison, never guessed.
+      read_from: [basis, definition]
+      values:
+        external_mass_transfer:
+          terms: [external diffusion, external mass transfer, external mass-transfer, interphase mass transfer, interphase diffusion, film diffusion, mass transfer to the particle, mass transfer to the catalyst surface]
+        internal_mass_transfer:
+          terms: [internal diffusion, internal mass transfer, pore diffusion, intraparticle diffusion, intraparticle mass transfer]
+        external_heat_transfer:
+          terms: [external heat transfer, interphase heat transfer, interphase heat transport, film heat transfer, heat transfer to the particle, heat transfer between the fluid and the particle]
+        internal_heat_transfer:
+          terms: [internal heat transfer, intraparticle heat transfer, intraparticle heat transport]
+        bed_heat_transfer:
+          terms: [radial heat transfer, radial heat transport, bed heat transfer]
+      unspecified: [other, not_reported]
+    characteristic_length:
+      description: The length a Thiele modulus is computed with, the particle radius or the particle volume over its
+        external surface (Aris; a third of the radius for a sphere), as its basis or definition names it. Moduli with
+        two lengths are two quantities.
+      read_from: [basis, definition]
+      values:
+        particle_radius:
+          terms: [particle radius, pellet radius, radius of the particle, radius of the pellet, sphere radius]
+        volume_to_surface:
+          terms: [volume to surface, volume-to-surface, volume to external surface, Vp/Sp, V_p/S_p, Aris]
+      unspecified: [other, not_reported]
+    thiele_form:
+      description: Which Thiele modulus a value is, the one of a first-order reaction or one generalized to another rate
+        form (Bischoff), as its basis or definition names it; a generalized modulus is named as such, not by the order
+        of its reaction.
+      read_from: [basis, definition]
+      values:
+        first_order:
+          terms: [first order, first-order]
+        generalized:
+          terms: [generalized, generalised, Bischoff]
+      unspecified: [other, not_reported]
+    effectiveness_basis:
+      description: Which effectiveness factor a value is, the internal one (the rate in the particle over the rate at
+        its external surface conditions) or the overall one (over the rate at the bulk fluid conditions, external
+        transfer included), as its basis or definition names it.
+      read_from: [basis, definition]
+      values:
+        internal:
+          terms: [internal effectiveness factor, internal effectiveness, intraparticle effectiveness]
+        overall:
+          terms: [overall effectiveness factor, overall effectiveness]
+      unspecified: [other, not_reported]
+    energy_input:
+      description: Which energy an energy consumption counts, the electrical input (to a cell, a stack or a plasma),
+        the heat supplied, or every input (primary energy), as its basis or definition names it.
+      read_from: [basis, definition]
+      values:
+        electrical:
+          terms: [electrical energy, electric energy, electricity, electrical input, electrical power, electric power, power supply, plasma power, discharge power, wall-plug, wall plug]
+        heat:
+          terms: [heat input, heat supplied, heat duty, thermal energy, thermal input]
+        total:
+          terms: [primary energy, total energy input, all energy inputs, every energy input]
+      unspecified: [other, not_reported]
+    system_boundary:
+      description: What an energy consumption is counted over, the device (a cell, a stack, a reactor, a discharge) or
+        the process around it (a plant, with separation or compression), as its basis or definition names it. Values
+        over two boundaries are two quantities.
+      read_from: [basis, definition]
+      values:
+        device:
+          terms: [cell, stack, electrolyzer, electrolyser, reactor, discharge]
+        process:
+          terms: [plant, whole process, entire process, separation, compression, balance of plant, downstream processing]
       unspecified: [other, not_reported]
     process:
       description: What an energy change is of, the reaction or elementary step its target names (or that holds it). Its
@@ -2983,11 +3062,16 @@ quantities:
     enzyme_activity:
       description: The catalytic activity of an enzyme or a whole-cell preparation, its target the substrate converted or
         the product formed, under the assay conditions its producer states. Per time it is an amount of substance per time
-        (the enzyme unit, U, one micromole per minute, or the katal, one mole per second); per mass of the preparation it
-        is a specific activity (U/mg), kept apart by its unit. Activities toward two substrates are never compared with one
-        another.
-      dimensions: [molar_flow, amount_per_mass_time]
+        (the enzyme unit, U, one micromole per minute, or the katal, one mole per second, with their prefixes, as mU or nkat);
+        per mass of enzyme or of the preparation it is a specific activity (U/mg), per volume of a solution or a
+        suspension a volumetric activity (U/mL), each kept apart by its unit. What it is divided by is named (normalized_by)
+        or stated in its basis or definition. Activities toward two substrates are never compared with one another.
+      dimensions: [molar_flow, amount_per_mass_time, amount_per_volume_time]
       compare_by: [species]
+      denominator:
+        description: The mass of enzyme or of the preparation (a specific activity) or the volume of the solution or
+          suspension (a volumetric activity) the activity is divided by.
+        dimensions: [mass, volume]
       shows:
       - property: temperature
         warn: true
@@ -3006,32 +3090,47 @@ quantities:
         time.
       dimensions: [dimensionless]
       compare_by: [species]
+      denominator:
+        description: The amount of catalyst (the molecules of a molecular catalyst) or the count of sites the events are
+          divided by, a site count or an amount; never a share.
+        dimensions: [dimensionless, amount]
       maturity: provisional
     transport_criterion:
       description: A dimensionless criterion computed from reported data to judge whether transport limits a measured
-        rate, as a transport check reports it - Weisz-Prater for diffusion in the pores, Mears or Carberry for mass
-        transfer to the particle, Anderson for heat. Its basis or definition names the criterion; values of two
-        criteria are never compared with one another. What threshold the source applies stays with the check's verdict.
+        rate, as a transport check reports it - Weisz-Prater for diffusion in the pores, Carberry for mass transfer to
+        the particle, Anderson for heat in it, Mears for mass or heat transfer (which one, its transport_mode). Its basis
+        or definition names the criterion; values of two criteria, or of two Mears criteria, are never compared with one
+        another. What threshold the source applies stays with the check's verdict.
       dimensions: [dimensionless]
-      compare_by: [transport_criterion]
+      compare_by:
+      - transport_criterion
+      - context: transport_mode
+        when:
+          transport_criterion: [mears]
       maturity: provisional
     effectiveness_factor:
-      description: The ratio of a rate observed in a catalyst particle to the rate it would have without diffusion
-        limitation, dimensionless, as reported or computed by a transport check (its producer).
+      description: The ratio of the rate observed in a catalyst particle to the rate it would have without transport
+        limitation, dimensionless, as reported or computed by a transport check (its producer). The internal factor
+        compares with the rate at the particle's external surface conditions, the overall one with the rate at the bulk
+        fluid conditions (external transfer included); its basis or definition says which (effectiveness_basis).
       dimensions: [dimensionless]
-      compare_by: []
+      compare_by: [effectiveness_basis]
       maturity: provisional
     thiele_modulus:
-      description: The Thiele modulus of a catalyst particle (the ratio of a reaction rate to a diffusion rate),
-        dimensionless, as reported or computed by a transport check; its definition says which form (first order,
-        generalized).
+      description: The Thiele modulus of a catalyst particle, dimensionless, as reported or computed by a transport check.
+        Its square measures the ratio of a surface reaction rate to a rate of diffusion in the particle. Its value
+        depends on the length it is computed with (the particle radius, or the volume over the external surface, a
+        third of it for a sphere) and on its form (first order, or generalized to another rate form), which its basis
+        or definition states; moduli of two conventions are never compared with one another.
       dimensions: [dimensionless]
-      compare_by: []
+      compare_by: [characteristic_length, thiele_form]
       maturity: provisional
     energy_consumption:
       description: Energy supplied per amount (kJ/mol) or per mass (kWh/kg) of one product, its target, the inverse of an
-        energy yield; its definition says which energy (the electrical input to a cell or a power supply, the plasma
-        power, heat) and over which boundary. Values per amount and per mass are kept apart by their unit.
+        energy yield. Its basis or definition says which energy it counts (energy_input; the electrical input to a cell
+        or a plasma, the heat supplied, every input) and over which boundary (system_boundary; the device, or the
+        process with its separation); values of two energies or two boundaries are never compared with one another, and
+        values per amount and per mass are kept apart by their unit.
       dimensions: [molar_energy, specific_energy]
-      compare_by: [species]
+      compare_by: [species, energy_input, system_boundary]
       maturity: provisional

@@ -191,9 +191,13 @@ the schema; `scale graph describe` shows it), or the `quantity_kind` of the Vari
   computation example.
 - **Catalysis areas** (scale-catal 0.7.1): a transport criterion is compared by the criterion its `basis` or
   `definition` names (`transport_criterion`: Weisz-Prater, Mears, Carberry, Anderson; one that names none is left out
-  as `missing_context`); an enzyme activity per time (U, kat) and one per mass (U/mg), like an energy consumption per
-  amount (kJ/mol) and per mass (kWh/kg), are kept apart by their units; a turnover number is never compared with a
-  turnover frequency. Each is compared by the species it counts. CQ-27 and CQ-28 run on the area example.
+  as `missing_context`), and a Mears criterion also by the transport it judges (`transport_mode`: external or internal
+  mass transfer, heat transfer to, in or across the particles); an effectiveness factor by whether it is internal or
+  overall, a Thiele modulus by its length and form; an energy consumption by the energy it counts and its boundary
+  (`energy_input`, `system_boundary`). An enzyme activity per time (U, kat), per mass (U/mg) and per volume (U/mL),
+  like an energy consumption per amount (kJ/mol) and per mass (kWh/kg), are kept apart by their units; a turnover
+  number is never compared with a turnover frequency. Each is compared by the species it counts. CQ-27 and CQ-28 run
+  on the area example.
 - **Basis.** On a kind whose contexts read the value's `basis`, a scientific filter states `context`, not `basis`
   (a plan error otherwise), and a value's basis is read through the contexts. A turnover frequency's basis says how it
   was calculated and is read, never compared as text. On any other kind the basis is compared as text, as in an

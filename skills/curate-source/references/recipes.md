@@ -77,15 +77,21 @@ A value the experimenter set or the author specified is not a measurement.
   states it, `numerical` when it computes a criterion, `experimental` when it varies particle size, flow at
   constant contact time or stirring (each run an input of the check). A computed criterion goes in the
   check's `result_values` with a Variable of kind `transport_criterion` (scale-catal 0.7.1), naming the
-  criterion in `definition` ("Weisz-Prater criterion", "Mears criterion", "Carberry number"); values of two
-  criteria are never compared, and one whose criterion is not named is left out of a comparison. An
-  effectiveness factor and a Thiele modulus are results of their own kinds (`effectiveness_factor`,
-  `thiele_modulus`), the form of the modulus in `definition`. Never infer a regime the source does not state,
-  and never judge a criterion value: what the source concludes is the check's `verdict`.
+  criterion in `definition` ("Weisz-Prater criterion", "Mears criterion for external diffusion", "Carberry
+  number"); values of two criteria are never compared, and one whose criterion is not named is left out of a
+  comparison. Mears gave several criteria, so a Mears value names the transport it judges too (external or
+  internal diffusion; heat transfer between the fluid and the particle, intraparticle heat transfer, radial heat
+  transfer in the bed), as the source says it: one that says only "Mears criterion" is left out of a comparison.
+  An effectiveness factor and a Thiele modulus are results of their own kinds (`effectiveness_factor`,
+  `thiele_modulus`): say in `definition` whether the factor is the internal or the overall one, and with which
+  length (the particle radius, or Vp/Sp) and in which form (first order, or generalized) the modulus was
+  computed. Never infer a regime the source does not state, and never judge a criterion value: what the source
+  concludes is the check's `verdict`.
 - An enzyme's activity (scale-catal 0.7.1) goes in the assay's `result_values` with a Variable of kind
-  `enzyme_activity`, as printed: per time in enzyme units (`U`, a micromole per minute) or katal (`kat`,
-  `nkat`), or per mass of the preparation (`U/mg`, a specific activity), the substrate or product it counts in
-  `target` and what was counted in `definition`. The assay's temperature is the test's; its pH, buffer and
+  `enzyme_activity`, as printed: per time in enzyme units (`U`, `mU`, a micromole per minute) or katal (`kat`,
+  `nkat`), per mass of the enzyme or of the preparation (`U/mg`, a specific activity) or per volume of a solution
+  (`U/mL`), the substrate or product it counts in `target`, and in `definition` what was counted and what it is
+  divided by (or name that value, `normalized_by`). The assay's temperature is the test's; its pH, buffer and
   substrate concentration are condition entries (`conditions`), each with its `definition`. A Michaelis
   constant is a result of the Analysis that fits the rates (`analysis_kind: kinetic_fit`, `USES_MODEL` the
   Michaelis-Menten rate law), of kind `michaelis_constant`, its substrate in `target`; kcat is a turnover
@@ -250,8 +256,10 @@ Map keys, so a value can be found under one name. Most follow quantity names alr
 
 - The energy a process takes per product (scale-catal 0.7.1) goes in `result_values` with a Variable of kind
   `energy_consumption`, as printed: per amount (kJ/mol) or per mass (kWh/kg) of the product in `target`, which
-  are kept apart. Say in `definition` which energy (the electrical input to a cell or a power supply, the
-  plasma power, heat) and over which boundary. An energy efficiency (dimensionless) is of kind `efficiency`;
+  are kept apart. Say in `definition` which energy (the electrical energy, the heat supplied, every input) and
+  over which boundary (the cell, stack, reactor or discharge; or the plant, with its separation or compression):
+  values of two energies or two boundaries are never compared, and one that says neither is left out of a
+  comparison. An energy efficiency (dimensionless) is of kind `efficiency`;
   a plasma test's `energy_yield` and `specific_energy_input` stay where they are.
 
 ## Balances, impurities and data quality

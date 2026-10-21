@@ -5,24 +5,30 @@
 - **Schema 0.7.1 (additive): terms for the areas of catalysis research SCALE lacked.** Requested by @hlxin (use what
   the ontologies for catalysis know to develop the catalysis schema). Mapping SCALE onto the fourteen areas of
   Ontologies4Cat (Behr, Borgelt and Kockmann 2024, doi:10.1186/s13321-024-00807-2) showed four that SCALE did not
-  cover; the survey found that no ontology covers three of them either. All new terms are provisional.
+  cover; the survey found no ontology that contains two of them (homogeneous catalysis; heat, transport and kinetic
+  data) and one each for the other two. All new terms are provisional.
   - **Biocatalysis.** A catalyst of family enzyme or whole_cell; the enzyme a macromolecule, named with its EC number;
-    the roles cofactor and solvent; the kinds enzyme_activity (per time in the enzyme unit, U, or the katal, or per mass,
-    U/mg) and michaelis_constant. Basis: the Systems Biology Ontology's enzyme activity, specific activity and
-    Michaelis constant.
+    the roles cofactor and solvent; the kinds enzyme_activity (per time in the enzyme unit, U, or the katal, with their
+    prefixes; per mass, U/mg; per volume, U/mL; what it is divided by named or stated) and michaelis_constant. Basis:
+    the Systems Biology Ontology's enzyme activity, specific activity and Michaelis constant.
   - **Homogeneous catalysis.** The roles ligand and cocatalyst (the photoelectrode's description already named a
-    cocatalyst role that did not exist); the kind turnover_number (dimensionless), never compared with a turnover
-    frequency.
+    cocatalyst role that did not exist); the kind turnover_number (dimensionless, the amount of catalyst or the count of
+    sites it is divided by named or stated), never compared with a turnover frequency.
   - **Heat, transport and kinetic data.** The kinds transport_criterion, compared by the criterion its definition
-    names (Weisz-Prater, Mears, Carberry, Anderson), effectiveness_factor and thiele_modulus. A transport check kept
-    its criterion values as untyped results before.
+    names (Weisz-Prater, Mears, Carberry, Anderson) and, for a Mears criterion, by the transport it judges (mass or
+    heat transfer, to, in or across the particles), since Mears gave several; effectiveness_factor, internal or
+    overall; thiele_modulus, by its length (the particle radius, or its volume over its external surface) and its
+    form (first order or generalized). A value that does not say is left out of a comparison, never guessed. A
+    transport check kept its criterion values as untyped results before. Basis: Fogler's chapter on diffusion and
+    reaction; Mears (1971); Aris (1957); Bischoff (1965).
   - **Energy.** The kind energy_consumption (energy per amount or per mass of product; a new dimension, specific
-    energy).
+    energy), compared by the energy it counts (electrical, heat, every input) and its boundary (the device, or the
+    process with its separation).
   - **How the source describes the catalysis.** A test's catalysis_mode (heterogeneous, homogeneous, biocatalytic),
     as the source says it, never inferred.
   - Mapped where an ontology defines them (REX's homogeneous and heterogeneous catalysis, SBO's enzyme, ChEBI's ligand,
-    solvent and cofactor, QUDT's enzyme unit and katal). An example (area-examples), CQ-27 and CQ-28, three
-    counterexamples. The examples move to 0.7.1 (their version line only); the migration step rewrites nothing.
+    solvent and cofactor, QUDT's enzyme unit and katal; QUDT's catalytic activity and specific energy as related). An
+    example (area-examples), CQ-27 and CQ-28, three counterexamples. The examples move to 0.7.1 (their version line only); the migration step rewrites nothing.
 
 - **Units and quantity kinds mapped to QUDT (no schema change).** Requested by @hlxin (stronger connections to
   ontologies). SCALE's units and kinds of quantity named no external term, so a unit could not be matched with another

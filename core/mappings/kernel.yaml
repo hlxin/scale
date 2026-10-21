@@ -396,24 +396,25 @@ kinds:
   - match: narrow
     term: SBO:0000559
     label: enzyme activity
-    note: SBO's enzyme activity is per time; SCALE's is per time or per mass of the preparation.
+    note: SBO's enzyme activity is per time; SCALE's may also be per mass (U/mg) or per volume (U/mL).
   - match: narrow
     term: SBO:0000558
     label: specific activity
-    note: SBO's specific activity is per mass of enzyme; SCALE's is per time or per mass.
-  - match: narrow
+    note: SBO's specific activity is per mass of enzyme; SCALE's may also be per time or per volume.
+  - match: related
     term: quantitykind:CatalyticActivity
     label: Catalytic Activity
-    note: QUDT's catalytic activity is per time (katal); SCALE's is per time or per mass.
+    note: "QUDT's is the activity of any catalyst, per time (katal); SCALE's is an enzyme's or a whole-cell
+      preparation's, and may also be per mass or per volume."
   michaelis_constant:
   - match: close
     term: SBO:0000027
     label: Michaelis constant
   energy_consumption:
-  - match: narrow
+  - match: related
     term: quantitykind:SpecificEnergy
     label: Specific Energy
-    note: QUDT's specific energy is per mass; SCALE's energy consumption is per mass or per amount of product.
+    note: "QUDT's is any energy per mass; SCALE's is the energy supplied per mass or per amount of one product."
 units:
   "°C":
   - match: exact
