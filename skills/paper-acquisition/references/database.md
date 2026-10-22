@@ -235,7 +235,11 @@ records stay in papers.db, joined by paper ID. Local, like the PDFs: it holds th
 | `passages_fts` | the passages' words (FTS5, BM25) |
 | `about` | `embedders` (the ones kept up to date), `cutter`, `created_at`, `updated_at` |
 
-Which papers: downloaded, in scope in a topic, not a non-paper or retracted, PDF on disk. Passages are cut as SCALE's
+Which papers: downloaded, in scope in a topic, not a non-paper or retracted, PDF on disk. Vectors are kept in
+embedder order, so a search reads one embedder's in one pass (a store from the first version is reordered once).
+A search leaves out passages of reference lists (at least 4 citation marks — authors' initials, et al., years,
+volumes and pages, DOIs, journal abbreviations — and 2.5 per 100 characters) unless `--with-references`; the JSON
+says how many it left out. Passages are cut as SCALE's
 `tools/passages.py` cuts source pages (paragraphs joined up to 900 characters, a longer one cut at a sentence end;
 spans under 25 characters are not stored, their numbers kept). Search (`vectors.py search`): `hybrid` (the mean of
 BM25 scaled to its best and the cosine), `vector` or `keyword`, exact over every passage; `--topic`, `--year` and

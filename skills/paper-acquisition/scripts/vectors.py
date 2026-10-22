@@ -1,11 +1,12 @@
 """The vector store of the downloaded papers (publications/vectors.db): passages of their text with vectors, to search
 by meaning and by words. The paper index keeps the records; the store keeps the passages' text and vectors only, and
-every search joins its hits to the index by paper ID. Details: references/database.md ("The vector store").
+every search joins its hits to the index by paper ID; passages of reference lists (dense with citations) are left
+out unless --with-references. Details: references/database.md ("The vector store").
 
   python3 -I vectors.py init [--embedder sentence-transformers:BAAI/bge-small-en-v1.5]   # create; fetch a model once
   python3 -I vectors.py update [--embedder E] [--ids 12,57] [--limit N]   # new and changed papers only
   python3 -I vectors.py search "Cu/ZnO methanol synthesis deactivation" [--k 10] [--mode hybrid|vector|keyword]
-                               [--embedder E] [--topic <slug>] [--year 2020-2026] [--ids 12,57]
+                               [--embedder E] [--topic <slug>] [--year 2020-2026] [--ids 12,57] [--with-references]
   python3 -I vectors.py status
   python3 -I vectors.py drop --embedder E          # stop keeping an embedder; its vectors are removed
 
@@ -62,6 +63,7 @@ def main():
     ap.add_argument("--mode", choices=["hybrid", "vector", "keyword"], default="hybrid")
     ap.add_argument("--topic")
     ap.add_argument("--year")
+    ap.add_argument("--with-references", action="store_true", help="search: keep the passages of reference lists")
     a = ap.parse_args()
     proj = Project(a.project)
     if a.cmd == "init":
@@ -80,7 +82,8 @@ def main():
     elif a.cmd == "search":
         if not a.query:
             die("search needs a query")
-        res = V.search(proj, a.query, k=a.k, mode=a.mode, embedder=a.embedder, allowed=allowed_ids(proj, a))
+        res = V.search(proj, a.query, k=a.k, mode=a.mode, embedder=a.embedder, allowed=allowed_ids(proj, a),
+                       references=a.with_references)
     elif a.cmd == "status":
         res = V.status(proj, Ledger(proj))
     else:

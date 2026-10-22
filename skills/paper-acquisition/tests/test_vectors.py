@@ -233,3 +233,42 @@ def test_a_local_model_embeds_offline_and_finds_by_meaning(project):
     assert hit["paper_id"] == 3
     assert run(proj, "status")["texts_without_vector"] == {"scale-hash-v1": 0, name: 0}
     assert run(proj, "update")["embedded"] == {"scale-hash-v1": 0, name: 0}
+
+
+REFS = ("[1] A. B. Smith, C. D. Jones, J. Am. Chem. Soc. 2019, 141, 1234-1240. [2] E. F. Brown et al., Copper catalysts "
+        "for CO2 electroreduction to ethylene, Nat. Catal. 2020, 3, 98-106. [3] G. H. Lee, I. J. Kim, Ethylene from CO2 "
+        "on copper, ACS Catal. 2021, 11, 4456-4463. [4] K. L. Wang et al., Angew. Chem. Int. Ed. 2018, 57, 7724-7728.")
+
+
+def test_reference_lists_are_left_out_of_a_search_unless_asked(project):
+    import _vectors as V
+    from _ledger import Ledger
+    proj = project
+    led = Ledger(proj)
+    add_paper(proj, led, 9, "A review whose last page cites copper papers", "10.1/nine",
+              ["Electrocatalysts are reviewed here in general terms for many reactions.", REFS])
+    led.export()
+    assert V.is_reference_list(REFS) and not any(V.is_reference_list(t) for pages in TEXT.values() for t in pages)
+    run(proj, "update")
+    plain = run(proj, "search", "copper catalysts for CO2 electroreduction to ethylene", "--k", 10)
+    assert plain["reference_passages_left_out"] >= 1 and "9/p2/1" not in {h["passage"] for h in plain["hits"]}
+    full = run(proj, "search", "copper catalysts for CO2 electroreduction to ethylene", "--k", 10, "--with-references")
+    assert "9/p2/1" in {h["passage"] for h in full["hits"]} and full["reference_passages_left_out"] is None
+
+
+def test_a_store_of_the_first_layout_is_reordered_once(project):
+    import _vectors as V
+    proj = project
+    first = run(proj, "update")
+    con = sqlite3.connect(str(V.store_path(proj)))                  # the vectors table as the first version kept it
+    con.executescript("CREATE TABLE old (text_sha1 TEXT NOT NULL, embedder TEXT NOT NULL, vec BLOB NOT NULL, "
+                      "PRIMARY KEY (text_sha1, embedder)) WITHOUT ROWID; INSERT INTO old SELECT * FROM vectors; "
+                      "DROP TABLE vectors; ALTER TABLE old RENAME TO vectors;")
+    con.close()
+    hit = run(proj, "search", "methanol synthesis over zinc oxide and copper", "--mode", "vector")["hits"][0]
+    assert hit["paper_id"] == 3
+    con = sqlite3.connect(str(V.store_path(proj)))
+    assert {r[1]: r[5] for r in con.execute("PRAGMA table_info(vectors)")}["embedder"] == 1
+    assert con.execute("SELECT COUNT(*) FROM vectors").fetchone()[0] == first["vectors"]["scale-hash-v1"]
+    con.close()
+    assert run(proj, "update")["embedded"] == {"scale-hash-v1": 0}

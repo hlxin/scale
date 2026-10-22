@@ -392,7 +392,8 @@ python3 -I ${CLAUDE_SKILL_DIR}/scripts/export.py --name <name> --topic <slug> [-
 `vectors.py` keeps `publications/vectors.db`: every downloaded paper's text (and its SI PDFs', as pages S1, S2 …) cut
 into passages as SCALE cuts source pages, a vector per passage text and embedder, and a keyword index. The index
 (papers.db) keeps the records; the store keeps only each passage's text, page and position and its vectors, and
-`vectors.py search "<question>"` joins its hits to the index (title, year, DOI). Nothing is read or embedded twice: a
+`vectors.py search "<question>"` joins its hits to the index (title, year, DOI); passages of reference lists, which
+match almost any query on the titles they cite, are left out unless `--with-references`. Nothing is read or embedded twice: a
 vector belongs to a passage's text and embedder, a paper is read again only when its files change (then only new text
 is embedded), a merged paper's passages move to the ID it kept, and a paper no longer downloaded (out of scope,
 retracted) leaves. Every step that changes the downloads (download_open, download_paywalled, fetch_si, dedup,
