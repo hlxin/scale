@@ -43,6 +43,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from _common import Project, add_project_arg, die, json_write_atomic, log, now_iso  # noqa: E402
 from _ledger import JSON_COLS, Ledger  # noqa: E402
+from _vectors import after_step  # noqa: E402
 from _publish import COPIED, _tables, has_state, unpack_state  # noqa: E402
 from _topics import METHOD_RANK  # noqa: E402
 
@@ -489,6 +490,7 @@ def main():
         con.close()
         res["runs_from_other"] = m.history(tag)
         res["database"] = led.last_publish
+        res["vector_store"] = after_step(proj, led)     # downloads copied in (--files) are read and embedded
         res["next"] = "dedup.py --apply (it merges papers the two copies indexed under different keys)"
     print(json.dumps(res, default=str))
 

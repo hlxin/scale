@@ -20,7 +20,8 @@ next      writes the prompt of the next N sources for a role (from ../templates)
 status    runs `scale source check <folder>` on every folder (cached while the graph is unchanged), reads the
           curator's report (work/curation.json) and the second reading (work/review.json), and gives each source a
           state; --apply records the settled ones in state.jsonl and hands their result to the paper index
-          (<project>/.scripts/<topic>/kg/<run>/extraction_status.jsonl, which paper-acquisition's export reads).
+          (<project>/.scripts/<topic>/kg/<run>/extraction_status.jsonl), then runs paper-acquisition's export so
+          the index shows them at once (its Extracted column; papers.db table extractions).
 finish    `scale source finish <folder>` for every passed source (--public: the copy with quoted text capped).
 assemble  a local graph kept as parts (<run>/graph by default) with every passed document, added by `scale graph
           contribute --write` into that local folder, and built (`scale graph build`) into one document to query.
@@ -140,11 +141,26 @@ def contribute(cmd, graph, folder, write=False):
 
 
 def project_root(start):
-    """The paper-acquisition project that holds the manifest (the folder with .scripts/ledger.sqlite), if any."""
+    """The paper-acquisition project that holds the manifest (its working ledger, or its papers.db alone), if any."""
     for d in [Path(start).resolve(), *Path(start).resolve().parents]:
-        if (d / ".scripts" / "ledger.sqlite").is_file():
+        if (d / ".scripts" / "ledger.sqlite").is_file() or (d / "publications" / "papers.db").is_file():
             return d
     return None
+
+
+def index_export(root):
+    """paper-acquisition's export for the project, so the paper index shows the results now; what it said."""
+    for cand in (HERE.parents[1] / "paper-acquisition" / "scripts" / "export.py",
+                 root / ".claude" / "skills" / "paper-acquisition" / "scripts" / "export.py"):
+        if cand.is_file():
+            r = subprocess.run([sys.executable, "-I", str(cand), "--project", str(root)], capture_output=True, text=True)
+            if r.returncode:
+                return {"exported": False, "error": r.stderr.strip()[-300:]}
+            try:
+                return {"exported": True, "database": json.loads((r.stdout.strip().splitlines() or ["{}"])[-1])}
+            except ValueError:
+                return {"exported": True}
+    return {"exported": False, "error": "paper-acquisition not found: run its export.py --project <project>"}
 
 
 def folder_id(src):
@@ -427,6 +443,7 @@ def cmd_status(a):
                                        "edges": rec.get("links"), "date": now()[:10],
                                        "note": f"scale-catal document: {run.folder(i)}" if result == "extracted" else detail})
             applied += 1
+        index = index_export(root) if applied and handoff else None
     counts = Counter(st for st, _ in states.values())
     todo = [f"next --role {r} ({sum(counts[s] for s in ss)})" for r, ss in ROLE_STATES.items()
             if sum(counts[s] for s in ss)]
@@ -435,7 +452,7 @@ def cmd_status(a):
                       "gaps": {"on_records": gaps, "reports": dict(sorted(kinds.items())),
                                "missing_concept": concepts[:20]},
                       "lists": {k: v[:50] for k, v in sorted(by_state.items()) if k != "passed"},
-                      "applied": applied if a.apply else None,
+                      "applied": applied if a.apply else None, "index": index if a.apply else None,
                       "next": todo or (["finish"] if counts["passed"] else ["nothing left to do"])}))
 
 

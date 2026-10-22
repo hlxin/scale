@@ -27,6 +27,7 @@ import _ezproxy as EZ
 from _common import Project, add_project_arg, json_read, jsonl_append, jsonl_iter, log, now_iso, user_agent, set_contact
 from _download import clone_or_copy, ez_publisher
 from _ledger import Ledger
+from _vectors import after_step
 
 FINAL_FAIL = {"wrong_paper", "invalid_pdf", "no_pdf", "not_subscribed", "too_large", "no_pdf_link"}
 NOTE = {"not_subscribed": "EZproxy: not covered by the institution's subscription",
@@ -184,7 +185,8 @@ def main():
     except EZL.HardStop as e:
         log(f"EZproxy stopped: {e}")
     led.export()
-    print(json.dumps({"handled": handled, "hard_stop": lim.hard_stopped(), "finished_at": now_iso()}))
+    print(json.dumps({"handled": handled, "hard_stop": lim.hard_stopped(), "vector_store": after_step(proj, led),
+                      "finished_at": now_iso()}))
 
 
 if __name__ == "__main__":

@@ -6,7 +6,7 @@ allowed-tools:
   - Bash(nohup python3 -I ${CLAUDE_SKILL_DIR}/scripts/*)
   - Bash(nohup zsh ${CLAUDE_SKILL_DIR}/scripts/run_paywalled.sh *)
   - "scale corpus check <manifest>"     # SCALE checks a frozen corpus (freeze_corpus.py)
-version: 3.7.0
+version: 3.8.0
 scale_release: ">=v0.2.0"
 inputs:
   - A topic in the user's words, or a Web of Science, Scopus or Zotero export, a list of DOIs or a web page of them
@@ -15,6 +15,7 @@ inputs:
 outputs:
   - publications/papers.db, updated in place by every step (runs and changes record how it evolved; it carries its working state, so whoever receives it can update it), with every paper, preprint, patent and dataset found, deduplicated, with its access type, exact licence, SI and Topic A/B/C; the topic's index CSVs on request
   - The downloaded PDFs and SI, filed by access type
+  - publications/vectors.db (local, like the PDFs, since it holds their text) — every downloaded paper's passages with their vectors, kept in step after every download (vectors.py)
   - For curation, a frozen corpus manifest (publications/<slug>/corpora/<name>/sources.json) that `scale corpus check` accepts
 validation:
   - "`status.py --topic <slug>` accounts for every paper: downloaded, queued, or the reason it was not (Notes)"
@@ -386,6 +387,21 @@ python3 -I ${CLAUDE_SKILL_DIR}/scripts/export.py --name <name> --topic <slug> [-
   Errata and retracted papers are never exported.
 - "Check for duplicates" → `dedup.py --apply`, then as Index step 8.
 
+## The vector store (the downloaded papers' text)
+
+`vectors.py` keeps `publications/vectors.db`: every downloaded paper's text (and its SI PDFs', as pages S1, S2 …) cut
+into passages as SCALE cuts source pages, a vector per passage text and embedder, and a keyword index. The index
+(papers.db) keeps the records; the store keeps only each passage's text, page and position and its vectors, and
+`vectors.py search "<question>"` joins its hits to the index (title, year, DOI). Nothing is read or embedded twice: a
+vector belongs to a passage's text and embedder, a paper is read again only when its files change (then only new text
+is embedded), a merged paper's passages move to the ID it kept, and a paper no longer downloaded (out of scope,
+retracted) leaves. Every step that changes the downloads (download_open, download_paywalled, fetch_si, dedup,
+merge_db) updates the store when the project has one; `vectors.py update` does it by hand, `status` says what is
+left. Embedders: `scale-hash-v1` (SCALE's default: deterministic, lexical with chemistry aliases, no download),
+`sentence-transformers:<model>` (a local model; `vectors.py init --embedder sentence-transformers:BAAI/bge-small-en-v1.5`
+fetches it once, 133 MB — a download, so ask first), `fastembed:<model>`. A store keeps every embedder it was given;
+`drop --embedder` removes one. The store holds the papers' text: share it no more than the PDFs.
+
 ## Utility scripts (`${CLAUDE_SKILL_DIR}/scripts/`, run with `python3 -I`; `--help` for details)
 
 | Script | What it does |
@@ -408,6 +424,7 @@ python3 -I ${CLAUDE_SKILL_DIR}/scripts/export.py --name <name> --topic <slug> [-
 | `repair.py` | once after a skill upgrade: re-apply the current abstract, non-paper and retraction rules to stored papers; `--retractions-only` |
 | `export.py` | publish pending changes into papers.db (in place); `--topic <slug> --csv` writes the topic's index CSVs; `--rebuild` (fallback; the history is kept); a filtered list as a file; `--set-extracted` |
 | `merge_db.py` | merge another copy of papers.db into this one (`--from`; `--files` copies in its PDFs and SI; `--dry-run`); then `dedup.py --apply` |
+| `vectors.py` | the vector store of the downloaded papers (publications/vectors.db): `init [--embedder]`, `update` (new and changed papers only), `search "<question>"` (`--mode hybrid\|vector\|keyword`, `--topic`, `--year`), `status`, `drop --embedder` |
 | `filters.py` | saved filters kept in papers.db and re-run as it evolves: `define`, `list`, `show`, `refresh`, `export` (a filter's papers as their own database; `--public`: abstracts only for OA and OA+ND) |
 | `freeze_corpus.py` | a frozen corpus manifest for curation (SCALE's format: every candidate with its status; `scale corpus check`) |
 | `_ezlimit.py status` | EZproxy counters, cooldowns, hard stop (`clear-hard-stop` only after the user's review) |
@@ -442,6 +459,7 @@ docstring and [references/database.md](references/database.md). A merge that fin
   written on request (`export.py --csv`). Columns, tables, access and license rules, the
   Extracted column: [references/database.md](references/database.md).
 - `publications/<slug>/corpora/<corpus>/sources.json` — a frozen corpus (freeze_corpus.py).
+- `publications/vectors.db` — the vector store of the downloaded papers' text (vectors.py; local, never shared).
 - `publications/<slug>/papers/<access>/<ID>.pdf`, SI in `papers/SI/<access>/`. A paper in two topics has one row and a
   copy (APFS clone, no extra disk) in each topic folder.
 - Topic vocabulary and Topic A/B/C rules: [references/topics.md](references/topics.md). Sources, keys, what is skipped:
