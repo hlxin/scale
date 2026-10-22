@@ -43,7 +43,8 @@ three hours unless its report arrives first. A subagent that stopped without rep
   <prompt> and follow it exactly." A curator needs no other context: the prompt names the folder, the procedure
   (`scale call skills '{"name": "curate-source"}'`), the commands and the report to write.
 - Start at 5. Go up to 10–15 after clean batches, and back to 5 after failures, for long papers, or for papers with
-  much SI.
+  much SI. Never more than 15: Claude Code runs at most 20 subagents at once by default
+  (`CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS`), and a launch beyond that is refused, not queued.
 - The curator and the second reader of a source are different subagents. The second reader never edits the document.
   Its pass is a second reading by an agent, not a review.
 - Trust a subagent's reply only together with `status`: status runs `scale source check` itself and reads the reports

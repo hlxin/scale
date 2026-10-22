@@ -113,8 +113,9 @@ hands out the work and records what came back.
    - [ ] repeat; status lists what each state waits for
    ```
 
-   Batches: start at 5, go up to 10–15 after clean batches, and back to 5 after failures or for long papers (15
-   subagents in one message ran together on 2026-10-22). Each subagent starts with about 46,000 tokens of context
+   Batches: start at 5, go up to 10–15 after clean batches, and back to 5 after failures or for long papers. Claude
+   Code runs at most 20 subagents at once by default (`CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS`) and refuses more instead
+   of queueing them, so a batch stays at 15 or fewer (15 in one message ran together on 2026-10-22). Each subagent starts with about 46,000 tokens of context
    before it reads anything, so a source costs at least three of those (curate, read, often a fix). A curator gets
    one source and the curate-source skill, on the model the user chose. Batching
    details and the states: [references/batches.md](references/batches.md). If you cannot launch subagents, follow
