@@ -126,6 +126,16 @@ change data through the skill rather than by editing the file. Saved filters (`f
 as all CO2-reduction papers, up to date in the same file. Two people who updated separate copies bring them back
 together with `merge_db.py` (nothing either found is lost; the same paper found by both is kept once).
 
+## Vector store
+
+`vectors.py` keeps `publications/vectors.db`: the downloaded papers' text as passages (cut as SCALE cuts source
+pages), with a vector for each, for search by meaning and by words (`vectors.py search "Cu/ZnO deactivation by
+sintering"`). The index keeps the records; the store keeps only the passages and their vectors, and a search joins its
+hits to the index. Each paper is read once and each text embedded once; every download, SI fetch, merge and dedup
+updates the store. The embedder is SCALE's deterministic `scale-hash-v1` (no download) or a local model
+(`sentence-transformers:BAAI/bge-small-en-v1.5`, fetched once by `vectors.py init`). Like the PDFs, it stays local.
+
 ## Requirements
 
-Python 3.10+ with `requests`, `pymupdf` and `pypdf` (`pip install requests pymupdf pypdf`), macOS or Linux.
+Python 3.10+ with `requests`, `pymupdf` and `pypdf` (`pip install requests pymupdf pypdf`), macOS or Linux. The
+vector store also needs `numpy`, and a local neural embedder `sentence-transformers` (or `fastembed`).

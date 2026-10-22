@@ -104,8 +104,8 @@ hands out the work and records what came back.
    pass over a document you no longer remember writing.
 5. **Record** with `curate_run.py status --run <dir> --apply`. It appends the settled sources to `state.jsonl`. For a
    paper-acquisition topic, it also writes their results to
-   `.scripts/<topic>/kg/<run name>/extraction_status.jsonl`, which paper-acquisition's `export.py --topic <slug>`
-   shows in the index's Extracted column. Run that export.
+   `.scripts/<topic>/kg/<run name>/extraction_status.jsonl` and runs paper-acquisition's export, so the index shows
+   them at once (its Extracted column; `index` in the JSON says what the export did).
 6. **Finish:** `curate_run.py finish --run <dir> [--public] [--bundle]`. It runs `scale source finish` on every passed
    document that holds records: the evidence index, and with `--public` the copy with quoted text capped, the one to
    share.

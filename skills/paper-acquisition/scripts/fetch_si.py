@@ -30,6 +30,7 @@ from _common import (PACER, HTTPFail, Project, add_project_arg, get_json, host_o
                      load_config, log, norm_title, now_iso, session, update_state)
 from _download import attempt, clone_or_copy, ez_publisher, fetch, is_blocked, load_blocked
 from _ledger import Ledger
+from _vectors import after_step
 
 SI_URL = re.compile(r"(suppl|supplement|support[-_]?info|supporting|MediaObjects|MOESM|_ESM\b|/esm/|mmc\d|suppdata|"
                     r"additional[-_]?file|ancillary|Data[_-]?Sheet|DataSheet|Presentation[_-]\d|Video[_-]\d|"
@@ -424,7 +425,7 @@ def main():
     with ThreadPoolExecutor(a.workers) as ex:
         list(ex.map(one, papers))
     led.export()
-    res = {"papers": len(papers), "outcomes": dict(cnt), "finished_at": now_iso()}
+    res = {"papers": len(papers), "outcomes": dict(cnt), "vector_store": after_step(proj, led), "finished_at": now_iso()}
     update_state(proj, a.topic, lambda st: st.setdefault("fetch_si", {}).update(res))
     print(json.dumps(res))
 

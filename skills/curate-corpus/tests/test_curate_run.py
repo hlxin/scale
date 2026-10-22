@@ -138,3 +138,44 @@ def test_gap_reports_are_counted_by_kind(corpus, tmp_path):
     g = run("status", "--run", r)["gaps"]
     assert g["reports"] == {"ambiguous_source_information": 1, "missing_concept": 1}     # superseded/ not counted
     assert g["missing_concept"] == [{"source": "7", "gap": "GAP-1", "about": "about GAP-1"}]
+
+
+def test_a_passed_source_shows_in_the_paper_index_at_once(tmp_path):
+    """In a paper-acquisition project, recording a passed source updates papers.db (the index's Extracted column)."""
+    import sqlite3
+    sys.path.insert(0, str(REPO / "skills" / "paper-acquisition" / "scripts"))
+    from _common import Project
+    from _ledger import Ledger
+    proj = Project(tmp_path / "project")
+    (proj.scr / "t").mkdir(parents=True)
+    (proj.scr / "t" / "config.json").write_text(json.dumps({"topic": "Test topic", "slug": "t"}))
+    pdf = proj.root / "publications" / "t" / "papers" / "OA" / "7.pdf"
+    pdf.parent.mkdir(parents=True)
+    doc = fitz.open()
+    doc.new_page().insert_text((72, 72), "Cu foil reduces CO2 to formate at -0.9 V vs RHE.")
+    doc.save(str(pdf))
+    led = Ledger(proj)
+    led.x("INSERT INTO papers (id, key, doi, title, authors, year, journal, doc_type, access_type, downloaded) "
+          "VALUES (7, '10.1/seven', '10.1/seven', 'Formate on Cu', '[\"A. Author\"]', 2025, 'J. Test', 'article', 'OA', 1)")
+    led.set_topic(7, "t", in_scope=1, relevance=5, path="publications/t/papers/OA/7.pdf")
+    led.add_dois(7, ["10.1/seven"])
+    led.export()
+    manifest = proj.root / "publications" / "t" / "corpora" / "c" / "sources.json"
+    manifest.parent.mkdir(parents=True)
+    manifest.write_text(json.dumps({"corpus": "c", "topic": "t", "frozen_at": "2026-10-22", "counts": {"in_scope": 1},
+                                    "included_status": "in_scope",
+                                    "sources": [{"slug": "7", "status": "in_scope", "paper_id": 7, "title": "Formate on Cu",
+                                                 "year": 2025, "pdf": "../../papers/OA/7.pdf", "licence": "cc-by"}]}))
+    r = tmp_path / "run"
+    run("prepare", "--corpus", manifest, "--run", r, "--scale", SCALE)
+    f = r / "sources" / "7"
+    run("next", "--run", r, "--role", "curate")
+    write(f / "work" / "curation.json", {"result": "curated", "records": 1, "gaps": 0, "note": "test"})
+    assert run("status", "--run", r)["states"] == {"curated": 1}
+    run("next", "--run", r, "--role", "review")
+    write(f / "work" / "review.json", {"verdict": "pass", "issues": []})
+    st = run("status", "--run", r, "--apply")
+    assert st["applied"] == 1 and st["index"]["exported"] is True
+    con = sqlite3.connect(str(proj.db))
+    assert con.execute("SELECT status, kg FROM extractions WHERE paper_id = 7").fetchone() == ("extracted", "run")
+    con.close()

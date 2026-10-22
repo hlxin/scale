@@ -7,6 +7,7 @@
 - Access type and license evidence
 - IDs, several topics per paper, document types
 - The Extracted column (papers curated into a graph)
+- publications/vectors.db (the vector store)
 - Internal files
 
 ## Folder layout
@@ -14,6 +15,7 @@
 ```
 publications/
   papers.db                                   the paper database: every topic, normalized, with full-text search
+  vectors.db                                  the vector store: the downloaded papers' passages and vectors (local)
   <topic>/index/OA.csv  OA+ND.csv  Free-to-read.csv  Paywalled.csv   (on request: export.py --topic <slug> --csv)
   <topic>/index/merged.csv                    every paper of the topic that is in scope (or not screened)
   <topic>/index/excluded.csv                  screened out, not research articles, retracted — with the reason
@@ -219,6 +221,33 @@ JSON object per paper in
 "schema_version": "0.5.0", "nodes": 18, "edges": 25, "date": "2026-10-12", "note": "...", "abstract": "..."}`.
 Every export syncs these files into the ledger (`extractions` table) and fills a missing abstract with the one the
 curator copied from the PDF.
+
+## publications/vectors.db (the vector store)
+
+The downloaded papers' text for search by meaning and by words (`vectors.py`). It holds only what a search needs; the
+records stay in papers.db, joined by paper ID. Local, like the PDFs: it holds their text.
+
+| Table | Contents |
+|---|---|
+| `papers` | one row per paper in the store: `signature` (what its passages were read from: the cutter, the PDF's sha1, each SI PDF's name and size), `pdf`, `si_files`, `pages`, `pages_without_text` (no text layer: scanned), `passages`, `chars`, `read_at`, `note` (why unreadable) |
+| `passages` | `id` `<paper ID>/p<page>/<k>` (SI pages `S1`, `S2` … after the paper's), `paper_id`, `page`, `k`, `start` / `end` in the page's text, `text`, `text_sha1` |
+| `vectors` | one int8 vector (L2-normalized, as SCALE quantizes) per passage text and `embedder`; a text is embedded once per embedder, whatever paper or page holds it |
+| `passages_fts` | the passages' words (FTS5, BM25) |
+| `about` | `embedders` (the ones kept up to date), `cutter`, `created_at`, `updated_at` |
+
+Which papers: downloaded, in scope in a topic, not a non-paper or retracted, PDF on disk. Passages are cut as SCALE's
+`tools/passages.py` cuts source pages (paragraphs joined up to 900 characters, a longer one cut at a sentence end;
+spans under 25 characters are not stored, their numbers kept). Search (`vectors.py search`): `hybrid` (the mean of
+BM25 scaled to its best and the cosine), `vector` or `keyword`, exact over every passage; `--topic`, `--year` and
+`--ids` limit it by the index. Embedders keep SCALE's names (`scale-hash-v1`, `fastembed:<model>`) and add
+`sentence-transformers:<model>`; a neural model is fetched only by `vectors.py init`, so updates and searches run offline.
+
+```sql
+-- the passages of paper 12 with its record (sqlite3 publications/vectors.db)
+ATTACH 'publications/papers.db' AS idx;
+SELECT v.id, v.page, substr(v.text, 1, 120), p.title FROM passages v JOIN idx.papers p ON p.id = v.paper_id
+WHERE v.paper_id = 12 ORDER BY v.rowid;
+```
 
 ## Internal files (`.scripts/`)
 

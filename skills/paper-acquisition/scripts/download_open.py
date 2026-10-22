@@ -29,6 +29,7 @@ from _common import (ACCESS_TYPES, NOT_DOWNLOADED_TYPES, Project, access_rank, a
 from _download import (NOT_PROXYABLE, arxiv_pdf, attempt, ez_publisher, fetch, file_pdf, is_blocked, link_existing,
                        load_blocked, pdf_links_from_html, publisher_pdf_patterns)
 from _ledger import Ledger
+from _vectors import after_step
 
 
 def paywalled_ready(proj):
@@ -243,7 +244,7 @@ def main():
             list(ex.map(one, load(todo[i:i + 2000])))
     led.export()
     res = {"tried": len(todo), "outcomes": dict(cnt), "skipped": dict(skipped), "linked_from_other_topics": linked,
-           "finished_at": now_iso()}
+           "vector_store": after_step(proj, led), "finished_at": now_iso()}
     update_state(proj, a.topic, lambda st: st.setdefault("download_open", {}).update(res))
     print(json.dumps(res))
 

@@ -52,6 +52,7 @@ from _common import (Project, add_project_arg, die, jsonl_append, jsonl_iter, lo
 from _download import clone_or_copy
 from _cache import Cache
 from _ledger import Ledger
+from _vectors import after_step
 from build_list import edition_twin, is_preprint_doi, is_repository_doi
 
 UNCERTAIN = ("same_title_different_doi", "near_title_same_author", "patent_same_title")
@@ -547,9 +548,11 @@ def main():
             jsonl_append(decisions_file(proj), {"a": min(x, y), "b": max(x, y), "decision": "merged", "kept": keep["id"],
                                                 "at": now_iso()})
             merged.append({"kept": keep["id"], "merged": other["id"]})
+        vec = None
         if merged and not a.no_export:
             led.export()
-        print(json.dumps({"merged": merged, "refused": refused}))
+            vec = after_step(proj, led)            # a merged paper's passages move to the ID it kept
+        print(json.dumps({"merged": merged, "refused": refused, "vector_store": vec}))
         return
     report = {}
     if a.apply:
@@ -559,6 +562,7 @@ def main():
             by_kind["si_unmerged"] = n_si
         if by_kind and not a.no_export:
             led.export()
+            report["vector_store"] = after_step(proj, led)
         report["merged"] = sum(v for k, v in by_kind.items() if k != "si_unmerged")
         report["merged_by_kind"] = dict(by_kind)
         log(f"merged {report['merged']} duplicate rows")
