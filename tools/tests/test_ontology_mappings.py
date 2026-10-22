@@ -11,6 +11,7 @@ ontologies it holds for each, as it gives them."""
 
 import copy
 import csv
+import re
 import subprocess
 import sys
 
@@ -237,6 +238,102 @@ def test_the_command_checks_lists_and_exports_the_mappings():
     r = run("--subdomains")
     assert r.returncode == 0 and "Biocatalysis" in r.stdout and "nothing yet" in r.stdout
     assert "related, narrower: BAO, EDAM, OBI" in r.stdout
+
+
+# ---- quantity kinds and units (the kernel's set): QUDT, and SBO for an enzyme's turnover frequency
+
+def qc_dims(spec, kind):
+    """The dimensions a quantity kind is read in, by name (the kernel's quantity contracts)."""
+    return [str(d) for d in spec["quantities"]["kinds"][kind]["dimensions"]]
+
+
+def test_quantity_kinds_and_units_map_to_qudt_and_keep_what_scale_leaves_open(spec):
+    idx = mappings.index(REPO)
+    assert idx["kind:temperature"][0]["term"] == "quantitykind:Temperature"
+    assert {m["term"]: m["match"] for m in idx["kind:flow_rate"]} == {
+        "quantitykind:VolumeFlowRate": "narrow", "quantitykind:MolarFlowRate": "narrow",
+        "quantitykind:MassFlowRate": "narrow"}
+    assert any(m["term"] == "SBO:0000025" and m["match"] == "narrow" for m in idx["kind:turnover_frequency"])
+    assert idx["unit:°C"] == [{"match": "exact", "term": "unit:DEG_C", "label": "Degree Celsius",
+                               "iri": "http://qudt.org/vocab/unit/DEG_C"}]
+    assert idx["unit:mL/min"][0]["term"] == "unit:MilliL-PER-MIN"
+    # a gallon or a calorie is whichever the source printed: each of QUDT's definitions is narrower
+    assert {m["term"]: m["match"] for m in idx["unit:gal"]} == {"unit:GAL_US": "narrow", "unit:GAL_UK": "narrow"}
+    assert {m["match"] for m in idx["unit:cal"]} == {"narrow"}
+    # the reference conditions of a normal volume are not fixed by SCALE
+    assert idx["unit:Nm3"][0]["match"] == "close"
+    # broad only where every dimension SCALE reads a kind in is QUDT's; QUDT's efficiency is a ratio of powers, its
+    # concentration also a number or volume concentration, its current density a local vector
+    match = lambda kind: {m["term"]: m["match"] for m in idx[f"kind:{kind}"]}      # noqa: E731
+    assert match("faradaic_efficiency") == {"quantitykind:DimensionlessRatio": "broad"}
+    assert match("efficiency") == {"quantitykind:Efficiency": "narrow"}
+    assert match("concentration") == {"quantitykind:AmountOfSubstanceConcentration": "narrow",
+                                      "quantitykind:MassConcentration": "narrow",
+                                      "quantitykind:MolalityOfSolute": "narrow"}
+    assert match("reaction_energy") == {"quantitykind:Energy": "related", "quantitykind:MolarEnergy": "related"}
+    assert match("reaction_enthalpy") == {"quantitykind:Enthalpy": "related", "quantitykind:MolarEnergy": "related"}
+    for kind in ("current_density", "product_amount", "site_count"):
+        assert set(match(kind).values()) == {"related"}, kind
+    assert match("electronic_energy") == {"quantitykind:Energy": "broad"}      # read in energy units only
+    assert "molar_energy" in qc_dims(spec, "reaction_energy") and qc_dims(spec, "electronic_energy") == ["energy"]
+    # every unit mapped is one SCALE reads, and every kind one its contracts declare
+    from scale.quantities import contracts
+    qc = contracts(spec)
+    for subject in idx:
+        if subject.startswith("unit:"):
+            r = qc.read_unit(subject[5:])
+            assert r.read and not r.unread, subject
+        elif subject.startswith("kind:"):
+            assert subject[5:] in qc.kinds, subject
+
+
+def test_a_unit_scale_does_not_read_or_an_unknown_kind_is_an_error(tmp_path, spec):
+    kern = load_yaml(REPO / layout.KERNEL_MAPPINGS)
+    kern["units"]["furlong"] = [{"match": "exact", "term": "unit:FUR", "label": "Furlong"}]
+    kern["kinds"]["turnover_rate"] = [{"match": "close", "term": "quantitykind:Frequency", "label": "Frequency"}]
+    cat = load_yaml(REPO / layout.DOMAIN_MAPPINGS)
+    cat["units"] = {"kPa": [{"match": "exact", "term": "unit:KiloPA", "label": "Kilopascal"}]}
+    msgs = _messages(mappings.check(_tree(tmp_path, kernel=kern, catalysis=cat), spec))
+    assert any("unit:furlong: the unit vocabulary does not read 'furlong'" in x for x in msgs), msgs
+    assert any("kind:turnover_rate: no quantity kind 'turnover_rate'" in x for x in msgs), msgs
+    assert any("unit:kPa: quantity kinds and units are the kernel's" in x for x in msgs), msgs
+
+
+def test_a_kinds_or_units_section_of_the_wrong_shape_is_an_error_not_a_crash(tmp_path, spec):
+    """`units: [kPa]`, `units: false` or `units: kPa` is reported by the check; reading the mappings skips it."""
+    for bad in (["kPa"], False, "kPa"):
+        kern = load_yaml(REPO / layout.KERNEL_MAPPINGS)
+        kern["units"] = kern["kinds"] = bad
+        tree = _tree(tmp_path, kernel=kern)
+        msgs = _messages(mappings.check(tree, spec))
+        assert any("units is a mapping keyed by unit" in x for x in msgs), (bad, msgs)
+        assert any("kinds is a mapping keyed by kind" in x for x in msgs), (bad, msgs)
+        idx = mappings.index(tree)
+        assert not any(k.startswith(("unit:", "kind:")) for k in idx) and idx["Experiment"]
+
+
+def test_describe_shows_a_quantity_kinds_mappings(spec):
+    d = pgraph.describe(spec, None, None, mappings.index(REPO))
+    temp = d["quantity_kinds"]["temperature"]["mappings"]
+    assert temp[0]["term"] == "quantitykind:Temperature" and temp[0]["iri"] == "http://qudt.org/vocab/quantitykind/Temperature"
+    assert "mappings" not in d["quantity_kinds"]["activation_energy"]      # QUDT has no activation energy
+
+
+def test_the_kernels_sssom_export_names_kinds_and_units_by_their_section():
+    """A kind or a unit is identified by its section (kind/temperature, unit/…), with what an IRI does not allow
+    percent-encoded (°C, %, a space); the row's label is the unit as SCALE reads it."""
+    meta, head, body, raw = _read_sssom(mappings.sssom(REPO, "kernel", "0.7.0"))
+    assert {"unit", "quantitykind", "SBO", "scalekernel"} <= set(meta["curie_map"])
+    row = {(r["subject_id"], r["object_id"]): r for r in body}
+    assert row[("scalekernel:unit/%C2%B0C", "unit:DEG_C")]["predicate_id"] == "skos:exactMatch"
+    assert row[("scalekernel:unit/%C2%B0C", "unit:DEG_C")]["subject_label"] == "°C"
+    assert row[("scalekernel:unit/%25", "unit:PERCENT")]["subject_label"] == "%"
+    assert row[("scalekernel:kind/temperature", "quantitykind:Temperature")]["subject_label"] == "temperature"
+    assert len(body) == mappings.check(REPO)["counts"]["kernel"]
+    local = re.compile(r"^scalekernel:[A-Za-z0-9._~/=()%-]+$")       # IRI-safe; % only as an escape
+    for r in body:
+        assert local.match(r["subject_id"]) and not re.search(r"%(?![0-9A-F]{2})", r["subject_id"]), r["subject_id"]
+    assert mappings._local("mol/(g h)") == "mol/(g%20h)"
 
 
 def test_a_catalyst_is_related_to_chebis_catalyst_role_and_only_completed_work_is_completely_executed():

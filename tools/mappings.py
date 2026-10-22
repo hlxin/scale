@@ -11,8 +11,9 @@ every mapping on a term the head schema declares and on a term of a registered o
     scale schema mappings [--layer kernel|catalysis] [--format text|json|sssom] [--subdomains] [--check]
 
 A mapping's subject is written as a SCALE term: a label (``Catalyst``) or an edge type (``HAS_INPUT``), a
-property (``Label.property``) or a value of one (``Label.property=value``). Its ``term`` is a CURIE of a registered
-ontology.
+property (``Label.property``) or a value of one (``Label.property=value``). The kernel's set also maps the quantity
+kinds (``kinds``, by name) and the units its unit vocabulary reads (``units``, spelled as SCALE reads them). A
+mapping's ``term`` is a CURIE of a registered ontology.
 
 The catalysis set also carries ``subdomains``: the subdomains of catalysis research by which Ontologies4Cat
 classifies ontologies (Behr, Borgelt and Kockmann 2024), with the SCALE labels and edge types that record each and
@@ -37,8 +38,10 @@ MATCHES = {"exact": "skos:exactMatch", "close": "skos:closeMatch", "broad": "sko
            "narrow": "skos:narrowMatch", "related": "skos:relatedMatch"}
 REGISTRY_KEYS = {"name": True, "iri": True, "pattern": True, "homepage": False, "licence": False, "checked": True,
                  "ontologies4cat": False}
-SET_KEYS = {"mapping_set": True, "title": True, "maps": True, "checked": True, "mappings": True,
-            "subdomains": False}
+SET_KEYS = {"mapping_set": True, "title": True, "maps": True, "checked": True, "mappings": True, "kinds": False,
+            "units": False, "subdomains": False}
+# a set's sections of mappings and how rows show their subjects: terms as written, quantity kinds and units tagged
+SECTIONS = (("mappings", ""), ("kinds", "kind:"), ("units", "unit:"))
 MAPPING_KEYS = {"match": True, "term": True, "label": True, "note": False}
 SUBDOMAIN_KEYS = {"title": True, "scale": True, "gap": False, "ontologies4cat": True}
 # how the Ontologies4Cat collection rates an ontology for a subdomain ("related: narrower" and "related: broader"
@@ -148,6 +151,25 @@ def iri(term: str, reg: dict) -> str | None:
     return f"{e['iri']}{m['local']}"
 
 
+def entries(doc: dict) -> list[tuple[str, str, str, object]]:
+    """A set's subjects in file order: (section, the subject as listed, the subject as rows show it, its mappings);
+    a section that is not keyed by subject is left out, and :func:`check` reports it."""
+    return [(section, str(subject), f"{tag}{subject}", ms)
+            for section, tag in SECTIONS for subject, ms in _section(doc, section).items()]
+
+
+def quantity_problem(spec: dict, section: str, name: str) -> str | None:
+    """Why ``name`` is no quantity kind (``kinds``) or no unit the unit vocabulary reads (``units``); None when it is."""
+    from .quantities import contracts
+    qc = contracts(spec)
+    if qc is None:
+        return "the schema has no quantity contracts"
+    if section == "kinds":
+        return None if name in qc.kinds else f"no quantity kind {name!r}"
+    reading = qc.read_unit(name)
+    return None if reading.read and not reading.unread else f"the unit vocabulary does not read {name!r}"
+
+
 def head_spec(repo: Path) -> dict:
     from . import pgraph
     return pgraph.load_spec(Path(repo) / layout.DOMAIN / layout.DOMAIN_GRAPH_MANIFEST)
@@ -232,14 +254,19 @@ def check(repo: Path, spec: dict | None = None) -> dict:
         for k, req in SET_KEYS.items():
             if req and k not in doc:
                 err(rel, f"{k} is required")
-        for k in ("mappings", "subdomains"):
+        for k, by in (("mappings", "subject"), ("kinds", "kind"), ("units", "unit"), ("subdomains", "subdomain")):
             if doc.get(k) is not None and not isinstance(doc[k], dict):
-                err(rel, f"{k} is a mapping keyed by {'subject' if k == 'mappings' else 'subdomain'}")
+                err(rel, f"{k} is a mapping keyed by {by}")
         if doc.get("subdomains") and layer != "catalysis":
             err(rel, "subdomains are subdomains of catalysis research; they belong to the catalysis set")
         n = 0
-        for subject, ms in _section(doc).items():
-            why = subject_problem(spec, str(subject), layer)
+        for section, name, subject, ms in entries(doc):
+            if section == "mappings":
+                why = subject_problem(spec, name, layer)
+            elif layer != "kernel":
+                why = f"quantity kinds and units are the kernel's; map them in {layout.KERNEL_MAPPINGS}"
+            else:
+                why = quantity_problem(spec, section, name)
             if why:
                 err(rel, f"{subject}: {why}")
             if not isinstance(ms, list) or not ms:
@@ -320,9 +347,9 @@ def index(repo: Path, layers: tuple[str, ...] = ("kernel", "catalysis")) -> dict
     out: dict[str, list[dict]] = {}
     for layer in layers:
         doc = load_set(repo, layer) or {}
-        for subject, ms in _section(doc).items():
+        for _, _, subject, ms in entries(doc):
             for m in _listed(ms):
-                out.setdefault(str(subject), []).append(
+                out.setdefault(subject, []).append(
                     {"match": m.get("match"), "term": m.get("term"), "label": m.get("label"),
                      "iri": iri(str(m.get("term") or ""), reg), **({"note": m["note"]} if m.get("note") else {})})
     return out
@@ -334,9 +361,9 @@ def rows(repo: Path, layer: str | None = None) -> list[dict]:
     out = []
     for lay in ([layer] if layer else list(LAYERS)):
         doc = load_set(repo, lay) or {}
-        for subject, ms in _section(doc).items():
+        for _, _, subject, ms in entries(doc):
             for m in _listed(ms):
-                out.append({"layer": lay, "subject": str(subject), "match": m.get("match"), "term": m.get("term"),
+                out.append({"layer": lay, "subject": subject, "match": m.get("match"), "term": m.get("term"),
                             "label": m.get("label"), "iri": iri(str(m.get("term") or ""), reg),
                             "note": m.get("note")})
     return out
@@ -366,7 +393,7 @@ def sssom(repo: Path, layer: str, version: str | None = None) -> str:
     doc = load_set(repo, layer)
     if doc is None:
         raise ScaleError(f"the {layer} layer has no mapping set ({rel})")
-    used = sorted({CURIE.match(str(m.get("term")))["prefix"] for ms in _section(doc).values()
+    used = sorted({CURIE.match(str(m.get("term")))["prefix"] for _, _, _, ms in entries(doc)
                    for m in _listed(ms) if CURIE.match(str(m.get("term") or ""))})
     base = f"{layout.REPOSITORY_URL}/blob/main"
     curie_map = {prefix: f"{base}/{schema_file}#", "scale": f"{base}/", "semapv": "https://w3id.org/semapv/vocab/",
@@ -383,11 +410,11 @@ def sssom(repo: Path, layer: str, version: str | None = None) -> str:
     buf = io.StringIO()
     w = csv.writer(buf, delimiter="\t", lineterminator="\n")     # quotes a cell holding a double quote
     w.writerow(cols)
-    for subject, ms in _section(doc).items():
+    for section, name, _, ms in entries(doc):
+        local = _local(name) if section == "mappings" else f"{section[:-1]}/{_local(name)}"   # kind/…, unit/…
         for m in _listed(ms):
-            w.writerow([f"{prefix}:{_local(str(subject))}", clean(subject), MATCHES.get(m.get("match"), ""),
-                        clean(m.get("term")), clean(m.get("label")), "semapv:ManualMappingCuration",
-                        clean(m.get("note"))])
+            w.writerow([f"{prefix}:{local}", clean(name), MATCHES.get(m.get("match"), ""), clean(m.get("term")),
+                        clean(m.get("label")), "semapv:ManualMappingCuration", clean(m.get("note"))])
     return "".join(f"# {h}\n" for h in head) + buf.getvalue()
 
 
