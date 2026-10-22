@@ -36,7 +36,7 @@ from _common import log, now_iso
 CUTTER = "scale-split_page-900"        # how passages are cut (a change re-reads every paper)
 DEFAULT_EMBEDDER = "scale-hash-v1"
 MIN_PASSAGE = 25                          # characters: shorter spans (page numbers, running heads) are not stored
-BATCH = 256
+BATCH = 1024                              # passage texts per embedding call
 
 # ------------------------------------------------------------------ SCALE's passages and hash embedder
 # copied from SCALE's tools/passages.py (WORD ... split_page), so passages and scale-hash-v1 vectors are SCALE's own
@@ -197,7 +197,7 @@ class SentenceTransformersEmbedder:
 
     def encode(self, texts, query=False):
         pre = _prefix(QUERY_PREFIX if query else DOC_PREFIX, self.model)
-        t = self.m.encode([pre + x for x in texts], batch_size=64, convert_to_tensor=True, normalize_embeddings=True,
+        t = self.m.encode([pre + x for x in texts], batch_size=128, convert_to_tensor=True, normalize_embeddings=True,
                           show_progress_bar=False)
         return _np().array(t.cpu().tolist(), dtype=_np().float64)   # tolist: no numpy ABI needed between torch and numpy
 
@@ -215,6 +215,16 @@ class FastEmbedEmbedder:
 
     def encode(self, texts, query=False):
         return _np().array(list(self.m.embed(texts)), dtype=_np().float64)
+
+
+_EMBEDDERS = {}
+
+
+def _embedder(name):
+    """One loaded embedder per process (a neural model loads once for many searches)."""
+    if name not in _EMBEDDERS:
+        _EMBEDDERS[name] = get_embedder(name)
+    return _EMBEDDERS[name]
 
 
 def get_embedder(name, download=False):
@@ -339,20 +349,34 @@ def passages_of(pid, pages):
 
 
 def _embed_missing(con, emb, progress=None):
-    """Vectors for every passage text this embedder has none for; returns how many were made."""
-    n = 0
+    """Vectors for every passage text this embedder has none for, in one pass over the passages added since its last
+    pass (a passage is never changed in place: a paper read again gets new rows); returns how many were made."""
+    mark = f"checked:{emb.id}"
+    n, shown = 0, 0
+    last = int(about(con).get(mark) or 0)
     while True:
-        rows = con.execute("SELECT p.text_sha1, MIN(p.text) FROM passages p WHERE NOT EXISTS (SELECT 1 FROM vectors v "
-                           "WHERE v.text_sha1 = p.text_sha1 AND v.embedder = ?) GROUP BY p.text_sha1 LIMIT ?",
-                           (emb.id, BATCH)).fetchall()
+        rows = con.execute("SELECT rowid, text_sha1, text FROM passages WHERE rowid > ? ORDER BY rowid LIMIT ?",
+                           (last, BATCH * 4)).fetchall()
         if not rows:
+            set_about(con, **{mark: str(last)})
             return n
-        vec = quantize(encode(emb, [r[1] for r in rows]))
-        with con:
-            con.executemany("INSERT OR REPLACE INTO vectors VALUES (?,?,?)",
-                            [(r[0], emb.id, vec[i].tobytes()) for i, r in enumerate(rows)])
-        n += len(rows)
-        if progress and n % (BATCH * 40) < BATCH:
+        last = rows[-1][0]
+        need = {}
+        for _, sha, text in rows:
+            need.setdefault(sha, text)
+        have = {r[0] for r in con.execute(f"SELECT text_sha1 FROM vectors WHERE embedder = ? AND text_sha1 IN "
+                                          f"({','.join('?' * len(need))})", [emb.id, *need])}
+        todo = [(sha, text) for sha, text in need.items() if sha not in have]
+        for i in range(0, len(todo), BATCH):
+            part = todo[i:i + BATCH]
+            vec = quantize(encode(emb, [t for _, t in part]))
+            with con:
+                con.executemany("INSERT OR REPLACE INTO vectors VALUES (?,?,?)",
+                                [(sha, emb.id, vec[j].tobytes()) for j, (sha, _) in enumerate(part)])
+            n += len(part)
+        set_about(con, **{mark: str(last)})
+        if progress and n - shown >= 20000:
+            shown = n
             progress(f"vectors: {emb.id}: {n} passages embedded")
 
 
@@ -411,9 +435,11 @@ def update(proj, led, embedders=None, ids=None, limit=None, progress=log):
     for name in names:
         emb = get_embedder(name)
         embedded[name] = _embed_missing(con, emb, progress)
-    with con:
-        n_drop = con.execute("DELETE FROM vectors WHERE NOT EXISTS (SELECT 1 FROM passages p WHERE "
-                             "p.text_sha1 = vectors.text_sha1)").rowcount
+    n_drop = 0
+    if st["papers_removed"] or st["papers_read"]:              # only then can a text have lost its last passage
+        with con:
+            n_drop = con.execute("DELETE FROM vectors WHERE NOT EXISTS (SELECT 1 FROM passages p WHERE "
+                                 "p.text_sha1 = vectors.text_sha1)").rowcount
     set_about(con, updated_at=now_iso())
     keys = ("papers_read", "papers_unchanged", "papers_removed", "papers_unreadable", "passages_added",
             "passages_already_known")
@@ -463,6 +489,28 @@ def _fts_query(text):
     return " OR ".join('"' + w.replace('"', "") + '"' for w in dict.fromkeys(words))
 
 
+_MATRIX = {}         # (store, embedder) -> (when the store changed, rowids, paper ids, vectors as float32, norms)
+
+
+def _matrix(con, path, emb_id):
+    """Every passage's vector for this embedder, read once per process while the store does not change."""
+    np = _np()
+    stamp = about(con).get("updated_at")
+    cached = _MATRIX.get((str(path), emb_id))
+    if cached and cached[0] == stamp:
+        return cached[1:]
+    rows = con.execute("SELECT p.rowid, p.paper_id, v.vec FROM passages p JOIN vectors v ON v.text_sha1 = "
+                       "p.text_sha1 AND v.embedder = ? ORDER BY p.rowid", (emb_id,)).fetchall()
+    rowids = np.array([r[0] for r in rows], dtype=np.int64)
+    pids = np.array([r[1] for r in rows], dtype=np.int64)
+    m = np.frombuffer(b"".join(r[2] for r in rows), dtype=np.int8).reshape(len(rows), -1).astype(np.float32) \
+        if rows else np.zeros((0, 1), dtype=np.float32)
+    norms = np.linalg.norm(m, axis=1)
+    norms[norms == 0] = 1.0
+    _MATRIX[(str(path), emb_id)] = (stamp, rowids, pids, m, norms)
+    return rowids, pids, m, norms
+
+
 def search(proj, query, k=10, mode="hybrid", embedder=None, allowed=None, depth=1000):
     """The best `k` passages for `query` (hybrid: the mean of BM25 scaled to its best and the cosine; vector;
     keyword), among the papers in `allowed` (a set of IDs) when given, joined to their records in the index."""
@@ -471,19 +519,15 @@ def search(proj, query, k=10, mode="hybrid", embedder=None, allowed=None, depth=
     emb_id = embedder or embedders_of(con)[0]
     cos, kw = {}, {}
     if mode in ("hybrid", "vector"):
-        q = encode(get_embedder(emb_id), [query], query=True)[0].astype(np.float32)
+        q = encode(_embedder(emb_id), [query], query=True)[0].astype(np.float32)
         q /= (np.linalg.norm(q) or 1.0)
-        rows = con.execute("SELECT p.rowid, p.paper_id, v.vec FROM passages p JOIN vectors v ON v.text_sha1 = "
-                           "p.text_sha1 AND v.embedder = ?", (emb_id,)).fetchall()
-        if allowed is not None:
-            rows = [r for r in rows if r[1] in allowed]
-        if rows:
-            m = np.frombuffer(b"".join(r[2] for r in rows), dtype=np.int8).reshape(len(rows), -1).astype(np.float32)
-            norms = np.linalg.norm(m, axis=1)
-            norms[norms == 0] = 1.0
+        rowids, pids, m, norms = _matrix(con, store_path(proj), emb_id)
+        if len(rowids):
             s = (m @ q) / norms
-            top = np.argsort(-s)[:depth]
-            cos = {rows[i][0]: float(s[i]) for i in top}
+            if allowed is not None:
+                s = np.where(np.isin(pids, np.fromiter(allowed, dtype=np.int64)), s, -np.inf)
+            top = [i for i in np.argsort(-s)[:depth] if np.isfinite(s[i])]
+            cos = {int(rowids[i]): float(s[i]) for i in top}
     if mode in ("hybrid", "keyword"):
         fq = _fts_query(query)
         if fq:

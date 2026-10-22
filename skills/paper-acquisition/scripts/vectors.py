@@ -90,6 +90,7 @@ def main():
         keep = [e for e in V.embedders_of(con) if e != a.embedder]
         with con:
             n = con.execute("DELETE FROM vectors WHERE embedder = ?", (a.embedder,)).rowcount
+            con.execute("DELETE FROM about WHERE name = ?", (f"checked:{a.embedder}",))
         V.set_about(con, embedders=keep or [V.DEFAULT_EMBEDDER])
         con.close()
         res = {"dropped": a.embedder, "vectors_removed": n, "embedders": keep or [V.DEFAULT_EMBEDDER]}
