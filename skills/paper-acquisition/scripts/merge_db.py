@@ -117,14 +117,16 @@ class Other:
             out.setdefault(r[0], []).append(dict(r))
         return out
 
-    def fingerprints(self, ids):
+    def fingerprints(self, ids, cols=None):
         """What a paper is in this copy, to tell untouched papers from changed ones quickly."""
-        return _fingerprints(self.con, ids)
+        return _fingerprints(self.con, ids, cols)
 
 
-def _fingerprints(con, ids):
+def _fingerprints(con, ids, cols=None):
+    """cols: the papers columns both copies have (a copy of an older format lacks the newer ones)."""
     marks = ",".join("?" * len(ids))
-    fp = {r[0]: [tuple(r)] for r in con.execute(f"SELECT * FROM papers WHERE id IN ({marks})", ids)}
+    fp = {r[0]: [tuple(r)] for r in con.execute(f"SELECT {', '.join(cols) if cols else '*'} FROM papers "
+                                                f"WHERE id IN ({marks})", ids)}
     for sql in (f"SELECT paper_id, state FROM _paper_state WHERE paper_id IN ({marks})",
                 f"SELECT * FROM paper_collections WHERE paper_id IN ({marks}) ORDER BY paper_id, collection",
                 f"SELECT * FROM paper_subjects WHERE paper_id IN ({marks}) ORDER BY paper_id, term",
@@ -322,9 +324,13 @@ class Merge:
     # ---------------------------------------------------------------- the whole copy
     def run(self):
         local_db = sqlite3.connect(f"file:{self.proj.db}?mode=ro", uri=True) if has_state(self.proj.db) else None
+        cols = None
+        if local_db:
+            theirs = {r[1] for r in self.other.con.execute("PRAGMA table_info(papers)")}
+            cols = [r[1] for r in local_db.execute("PRAGMA table_info(papers)") if r[1] in theirs]
         for ids in self.other.ids():
-            ofp = self.other.fingerprints(ids)
-            lfp = _fingerprints(local_db, ids) if local_db else {}
+            ofp = self.other.fingerprints(ids, cols)
+            lfp = _fingerprints(local_db, ids, cols) if local_db else {}
             changed = [i for i in ids if ofp.get(i) != lfp.get(i)]
             for i in ids:
                 if i not in changed:

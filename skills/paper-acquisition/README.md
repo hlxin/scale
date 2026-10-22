@@ -20,7 +20,8 @@ request, no mode:
   copper") — answered from `publications/papers.db`; files go to `publications/exports/` (CSV, JSONL, BibTeX, RIS).
 - **Adding papers** from a Web of Science export (Plain text, Tab-delimited, BibTeX, RIS), a Scopus export (CSV,
   BibTeX, RIS), a Zotero / EndNote file or a list of DOIs — the file's abstracts and keywords are kept.
-- **Duplicates** are merged automatically after every index, update and download (preprint ↔ published version,
+- **Duplicates** are merged automatically after every index, update and download (preprint ↔ published version, whose
+  row keeps the preprint's link in the Preprint link column,
   repository copy ↔ journal article, same paper without/with DOI, byte-identical PDFs, one patented invention filed
   in several offices). Claude asks only about uncertain pairs (the same title under two DOIs); a pair you keep
   separate is never asked again.
@@ -45,9 +46,11 @@ publications/
   exports/                          filtered lists you asked for
 ```
 
-Index columns: ID, Title, Authors, Year, Venue, Publisher, Doc type, DOI/ID, URL, Abstract, Keywords, Topic A, Topic B,
-Topic C, Related topics, Relevance, Relevance note, Access type, License (exact, e.g. CC BY-NC 4.0), License URL,
-License source, Version, Database, Index, Citations, Downloaded, Path, SI, Extracted, Notes, Date added, Last checked.
+Index columns: ID, Title, Authors, Year, Venue, Publisher, Doc type, Retracted (Yes / Retraction notice / No), DOI/ID,
+URL (the journal version when there is one), Preprint link (the preprint of a journal article, merged into its row),
+Abstract, Keywords, Topic A, Topic B, Topic C, Related topics, Relevance, Relevance note, Access type, License (exact,
+e.g. CC BY-NC 4.0), License URL, License source, Version, Database, Index, Citations, Downloaded, Path, SI, Extracted,
+Notes, Date added, Last checked.
 Details: `references/database.md`. Agent working files live in `.scripts/` (never needed to use the results).
 
 ## API keys

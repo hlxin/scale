@@ -182,3 +182,15 @@ def test_a_dry_run_writes_nothing(two_copies):
     res = merge(pa, pb.db, "--dry-run")
     assert res["dry_run"] is True and res["added"] == 1
     assert pa.db.read_bytes() == before
+
+
+def test_a_copy_of_an_older_version_merges_too(two_copies):
+    pa, pb = two_copies
+    con = sqlite3.connect(str(pb.db))
+    con.execute("ALTER TABLE papers DROP COLUMN preprint_url")          # B's papers.db as paper-acquisition 3.6 left it
+    con.commit()
+    con.close()
+    res = merge(pa, pb.db)
+    assert res["added"] == 1 and res["merged_here"] == 1
+    again = merge(pa, pb.db)
+    assert again.get("added", 0) == 0 and again.get("updated", 0) == 0 and again.get("unchanged", 0) > 0

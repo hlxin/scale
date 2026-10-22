@@ -29,7 +29,7 @@ marks each paper a write touches (`publish_queue`), and the step's export rewrit
 CSVs are written only on request (`export.py --topic <slug> --csv`). A sync rewrites the rows of the papers it
 touches, so change data through the scripts (`topics.py set`, `export.py --set-extracted`, a dedup), not in the files. CSVs are UTF-8 with BOM so Excel shows accents.
 
-## Index CSV columns (32)
+## Index CSV columns (34)
 
 | Column | Content |
 |---|---|
@@ -40,8 +40,10 @@ touches, so change data through the scripts (`topics.py set`, `export.py --set-e
 | Venue | journal, conference, repository or patent office (`US patent`, `EP patent application`) |
 | Publisher | publisher; for patents the applicants |
 | Doc type | article, review, preprint, conference-paper, book-chapter, book, thesis, report, patent, dataset, software, editorial, letter, erratum, other |
+| Retracted | `Yes` (the paper is retracted: OpenAlex / Retraction Watch, Crossref) · `Retraction notice` (this record retracts another paper; Notes links it) · `No` |
 | DOI/ID | DOI, else patent number / `arXiv:` / `OSTI:` / other identifier |
-| URL | `https://doi.org/<doi>` or the landing page |
+| URL | the published (journal) version when there is one, `https://doi.org/<doi>`; else the preprint or landing page |
+| Preprint link | the paper's preprint versions (`; `-separated): the preprint DOIs merged into it — a preprint and its journal article are one row — (ChemRxiv, SSRN, Research Square, bioRxiv, arXiv …) and its arXiv record; when none is known, its copies on preprint servers; a preprint's own link. Empty: no preprint known |
 | Abstract | full abstract from metadata or an imported WoS / Scopus export; after download optionally from the PDF (`abstract_source` in papers.db) |
 | Keywords | author keywords / subjects from the sources |
 | Topic A, Topic B, Topic C | the paper's three main topics, most central first, from the topic vocabulary ([topics.md](topics.md)) |
@@ -60,7 +62,7 @@ touches, so change data through the scripts (`topics.py set`, `export.py --set-e
 | Path | `publications/<topic>/papers/<access>/<ID>.pdf` |
 | SI | before download: `Available (n deposits)` when SI is listed for the paper (`find_si.py` at index time, and SI deposits the search found), else empty; after download: `Yes` / `No` / `Queued` |
 | Extracted | `No`, or `Yes — <graph> (<date>)`, `Rejected — ...`, recorded when a paper is curated (below) |
-| Notes | why: out of scope, not downloaded (reason), copy is the accepted manuscript, no abstract in the metadata, RETRACTED ... |
+| Notes | why: out of scope, not downloaded (reason), copy is the accepted manuscript, no abstract in the metadata, `RETRACTED (notice: <link>)`, `Retraction notice of <link>` ... |
 | Date added | date the paper entered this topic (update runs: the run's date) |
 | Last checked | last time access / license / retraction were checked |
 
@@ -77,14 +79,18 @@ vocabulary) + `paper_subjects` (kind `main` rank 1-3 = Topic A/B/C, or `related`
 `supplements` (the SI listed for a paper before download: doi or file URL, url, title, source — the route that
 found it), `extractions` (curation
 status), `papers_fts` (full-text index on title, abstract, keywords; kept in step by triggers). Views: `v_papers`,
-`v_collection_papers`.
+`v_collection_papers`. In `papers`, `url` is the published version's link and `preprint_url` the preprint links (as
+the index columns URL and Preprint link); `is_retracted` = 1 for a retracted paper, whose notice is in `identifiers`
+(scheme `retraction_notice`); a retraction notice has `is_non_paper` = 1 and names the paper it retracts (scheme
+`retraction_of`). Columns are only ever added: a database from an older version gains them, filled, at its next
+update (a run of its own in `runs`).
 
 History and state, in the same file:
 
 | Table | Contents |
 |---|---|
 | `runs` | one row per publish that changed something: `at`, `step` (the script), `topics`, `added`, `updated`, `removed`, `papers` (in the database after it), `note` |
-| `changes` | per paper and run: `change` = `added` (field: none; new: its topics) · `removed` (old: its DOI; new: `merged into <id>`, `supporting information of <id>`, `removed from every topic`) · `changed` (`field` = doi, access_type, license, version, is_preprint, is_retracted, downloaded, si, topic_a; `old`, `new`) · `collection` (field: the topic; old/new: in_scope, empty when it joined or left) |
+| `changes` | per paper and run: `change` = `added` (field: none; new: its topics) · `removed` (old: its DOI; new: `merged into <id>`, `supporting information of <id>`, `removed from every topic`) · `changed` (`field` = doi, access_type, license, version, is_preprint, is_retracted, downloaded, si, topic_a, preprint_url; `old`, `new`) · `collection` (field: the topic; old/new: in_scope, empty when it joined or left) |
 | `filters`, `filter_members` | saved filters (`filters.py`): name, definition (JSON), last refresh, members; their papers with a `label` and `level` (strict / broad) |
 | `_paper_state` | the ledger fields the tables above do not show (JSON per paper: key, author details, known copies, external ids, download state ...) |
 | `project_files` | the topics' `config.json`, `queries.json`, `state.json`, `criteria.md`, `keywords.json`, and the project's `dedup_decisions.jsonl` and `vocab_custom.json` |
@@ -171,7 +177,8 @@ embargoes end, open copies appear, retractions are flagged, preprints get their 
 - One row per paper. A paper found under two topics lists both in `Index`; when downloaded, the PDF (and SI) exists
   in each topic's folder as an APFS clone (no extra disk on macOS; hard link or copy elsewhere).
 - Deduplication is automatic: `build_list.py` on every run, `dedup.py --apply` after every index, update and
-  download: same DOI; same patent number (application and grant fall together); preprint ↔ published version;
+  download: same DOI; same patent number (application and grant fall together); preprint ↔ published version (the
+  journal article's row keeps the preprint's DOI, shown in the Preprint link column);
   repository copy ↔ journal article; Angewandte `ange.`/`anie.` twins; DOI-less records matched by title;
   byte-identical PDFs. A dataset is never merged into its paper. Uncertain pairs (the same title under two DOIs) wait
   for the user (`.scripts/dedup_review.csv`; `dedup.py --merge` / `--keep-separate`, remembered in
@@ -194,7 +201,9 @@ embargoes end, open copies appear, retractions are flagged, preprints get their 
   graphical-abstract debris, the trailing copyright line and placeholders are removed (`normalize_abstract`).
 - Non-papers (errata, corrections, retraction notices such as "Retraction of …" / "Notice of retraction", withdrawn
   articles, expressions of concern, peer-review reports, cover art, ChemInform digests) and retracted papers go to
-  `excluded.csv` and are never downloaded. A record that only one source typed as an erratum, with nothing else
+  `excluded.csv` and are never downloaded. A retraction is read from OpenAlex (Retraction Watch) and Crossref: a
+  Crossref notice that names another DOI makes that paper retracted (Retracted `Yes`, Notes link the notice) and is
+  itself a non-paper (Retracted `Retraction notice`), never a retracted paper. A record that only one source typed as an erratum, with nothing else
   marking it as a notice, is kept as an article.
 
 ## The Extracted column (papers curated into a graph)

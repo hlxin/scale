@@ -24,9 +24,9 @@ import sqlite3
 import threading
 from pathlib import Path
 
-from _common import (ACCESS_TYPES, LICENSE_LABEL, NOT_DOWNLOADED_TYPES, SOURCE_LABEL, access_rank, clean_name,
-                     clean_title, file_lock, jsonl_iter, json_read, license_detail, log, norm_doc_type, norm_doi,
-                     export_abstract, normalize_abstract, now_iso, title_hash, today)
+from _common import (ACCESS_TYPES, LICENSE_LABEL, NOT_DOWNLOADED_TYPES, PREPRINT_PREFIXES, SOURCE_LABEL, access_rank,
+                     clean_name, clean_title, file_lock, jsonl_iter, json_read, license_detail, log, norm_doc_type,
+                     norm_doi, export_abstract, normalize_abstract, now_iso, preprint_links, title_hash, today)
 
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS papers (
@@ -119,10 +119,10 @@ V3_COLUMNS = {"authors_detail": "TEXT NOT NULL DEFAULT '[]'", "doc_type": "TEXT"
 
 JSON_COLS = {"authors", "authors_detail", "keywords", "databases", "external_ids", "versions", "si_files", "si_paths"}
 
-INDEX_COLUMNS = ["ID", "Title", "Authors", "Year", "Venue", "Publisher", "Doc type", "DOI/ID", "URL", "Abstract",
-                 "Keywords", "Topic A", "Topic B", "Topic C", "Related topics", "Relevance", "Relevance note",
-                 "Access type", "License", "License URL", "License source", "Version", "Database", "Index", "Citations",
-                 "Downloaded", "Path", "SI", "Extracted", "Notes", "Date added", "Last checked"]
+INDEX_COLUMNS = ["ID", "Title", "Authors", "Year", "Venue", "Publisher", "Doc type", "Retracted", "DOI/ID", "URL",
+                 "Preprint link", "Abstract", "Keywords", "Topic A", "Topic B", "Topic C", "Related topics", "Relevance",
+                 "Relevance note", "Access type", "License", "License URL", "License source", "Version", "Database",
+                 "Index", "Citations", "Downloaded", "Path", "SI", "Extracted", "Notes", "Date added", "Last checked"]
 INDEX_FILES = ACCESS_TYPES + ["merged", "excluded"]
 MAX_AUTHORS = 10
 VERSION_LABEL = {"publishedVersion": "Published version", "acceptedVersion": "Accepted manuscript",
@@ -292,12 +292,47 @@ class Ledger:
         return {r[0]: r[1] for r in self.q("SELECT d.paper_id, COUNT(DISTINCT l.si_doi) FROM si_links l "
                                            "JOIN dois d ON d.doi = l.parent_doi GROUP BY d.paper_id")}
 
+    def _preprint_alias_map(self):
+        """paper -> the preprint DOIs merged into it (one range scan per preprint server's DOI prefix)."""
+        out = {}
+        for pre in PREPRINT_PREFIXES:
+            for r in self.q("SELECT paper_id, doi FROM dois WHERE doi >= ? AND doi < ?", (pre, pre[:-1] + "0")):
+                out.setdefault(r[0], []).append(r[1])
+        return out
+
     def _family_map(self):
         """paper -> patent numbers of the same invention merged into it (aliases 'patent:...')."""
         out = {}
         for r in self.q("SELECT paper_id, doi FROM dois WHERE doi LIKE 'patent:_%'"):
             out.setdefault(r[0], []).append(r[1][len("patent:"):])
         return out
+
+    # ------------------------------------------------------------ retractions
+    def record_retraction(self, notice_id, targets):
+        """A retraction notice and the papers it retracts (DOIs): the notice is a non-paper that names them, and each
+        of them is retracted and names its notice (external ids retraction_of / retraction_notice). Returns how many
+        papers became retracted."""
+        notice = self.get(notice_id)
+        if not notice or not targets:
+            return 0
+        ext = dict(notice["external_ids"], retraction_of="; ".join(targets))
+        upd = {k: v for k, v in (("external_ids", ext), ("is_erratum", 1), ("retracted", 0))
+               if v != notice.get(k)}
+        if upd:
+            self.set(notice_id, **upd)
+        n = 0
+        for t in targets:
+            tid = self.find_id(doi=t)
+            if not tid or tid == notice_id:
+                continue
+            tr = self.get(tid)
+            have = [x for x in str(tr["external_ids"].get("retraction_notice") or "").split("; ") if x]
+            text = dict(tr["external_ids"], retraction_notice="; ".join(dict.fromkeys(have + [notice["doi"]])))
+            upd = {k: v for k, v in (("external_ids", text), ("retracted", 1)) if v != tr.get(k)}
+            if upd:
+                self.set(tid, **upd)
+            n += not tr.get("retracted")
+        return n
 
     # ------------------------------------------------------------ subjects (Topic A/B/C + related)
     def subjects_of(self, pid):
@@ -533,7 +568,7 @@ class Ledger:
         papers never sits in memory. Excel opens at most 1,048,576 rows: bigger files are for papers.db / pandas."""
         subj = self._subject_map()
         ext = self._extraction_map(topic)
-        si_n, fam = self._si_link_counts(), self._family_map()
+        si_n, fam, pre = self._si_link_counts(), self._family_map(), self._preprint_alias_map()
         topics_by_paper = {}
         for r in self.q("SELECT paper_id, topic FROM paper_topics ORDER BY topic"):
             topics_by_paper.setdefault(r[0], []).append(r[1])
@@ -559,6 +594,7 @@ class Ledger:
                     for raw in cur:
                         p = self.row(raw)
                         p["_si_links"], p["_family"] = si_n.get(p["id"], 0), fam.get(p["id"])
+                        p["_aliases"] = pre.get(p["id"], [])
                         line = render_row(p, topic, subj.get(p["id"]), ext.get(p["id"]),
                                           topics_by_paper.get(p["id"], []), vocab)
                         if p.get("t_in_scope") == 0 or p.get("is_erratum") or p.get("retracted"):
@@ -646,10 +682,21 @@ def license_cells(p):
     return label or "", url, src
 
 
+def retracted_cell(p):
+    """Yes (the paper is retracted) · Retraction notice (this record retracts another paper) · No."""
+    if p.get("retracted"):
+        return "Yes"
+    return "Retraction notice" if (p.get("external_ids") or {}).get("retraction_of") else "No"
+
+
 def notes_for(p, topic=None):
     notes = []
+    ext = p.get("external_ids") or {}
+    links = lambda v: ", ".join(f"https://doi.org/{x}" for x in str(v or "").split("; ") if x)
     if p.get("retracted"):
-        notes.append("RETRACTED")
+        notes.append("RETRACTED" + (f" (notice: {links(ext['retraction_notice'])})" if ext.get("retraction_notice") else ""))
+    elif ext.get("retraction_of"):
+        notes.append(f"Retraction notice of {links(ext['retraction_of'])}")
     if p.get("is_erratum"):
         notes.append("Not a research article (erratum, correction, peer-review report or cover art)")
     if p.get("t_in_scope") == 0:
@@ -714,8 +761,10 @@ def render_row(p, topic, subj, exts, topics, vocab):
         "Venue": p.get("journal") or "",
         "Publisher": p.get("publisher") or "",
         "Doc type": p.get("doc_type") or norm_doc_type(p.get("type"), p.get("is_preprint")),
+        "Retracted": retracted_cell(p),
         "DOI/ID": identifier(p),
         "URL": url_of(p),
+        "Preprint link": "; ".join(preprint_links(p, p.get("_aliases") or ())),
         "Abstract": export_abstract(p.get("abstract") or ""),   # clean even when stored by an older version
         "Keywords": "; ".join(p.get("keywords") or []),
         "Topic A": main[0], "Topic B": main[1], "Topic C": main[2],

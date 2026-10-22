@@ -25,8 +25,9 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from _common import (SOURCE_LABEL, Gate, Project, add_project_arg, is_erratum, jsonl_iter, json_write_atomic, load_config,
-                     log, norm_doc_type, norm_doi, norm_title, now_iso, title_hash, update_state)
+from _common import (PREPRINT_PREFIXES, SOURCE_LABEL, Gate, Project, add_project_arg, is_erratum,  # noqa: F401
+                     is_preprint_doi, jsonl_iter, json_write_atomic, load_config, log, norm_doc_type, norm_doi,
+                     norm_title, now_iso, title_hash, update_state)
 from _ledger import Ledger
 from _topics import Vocab, apply_vocab
 
@@ -36,8 +37,6 @@ SRC_RANK = ["crossref", "openalex", "scopus", "wos", "europepmc", "pmc", "spring
             "lens_patents", "epo", "europepmc_patents", "manual"]
 SI_TITLE_RX = re.compile(r"^\s*(supporting information|supplementary (information|material|data|file|figures?|tables?)s?|"
                          r"electronic supplementary|supplemental (information|material|data)|si for\b|additional file)", re.I)
-PREPRINT_PREFIXES = ("10.26434/", "10.21203/", "10.2139/", "10.31224/", "10.20944/", "10.36227/", "10.48550/",
-                     "10.1101/", "10.31219/", "10.22541/", "10.33774/", "10.31223/", "10.31235/", "10.31234/")
 
 
 # DOIs minted by repositories for copies of articles published elsewhere (Zenodo, Figshare, institutional archives)
@@ -49,10 +48,6 @@ REPOSITORY_NAME_RX = re.compile(r"(repositor|zenodo|figshare|kitopen|research co
                                 r"institutional|eprints|dspace|digital commons|open archive|archive ouverte|juser|"
                                 r"scholarship@|research portal|pure portal|\bepub\b|opus\b|edoc\b|refubium|"
                                 r"mediatum|tuprints|elib\b)", re.I)
-
-
-def is_preprint_doi(doi):
-    return bool(doi) and doi.startswith(PREPRINT_PREFIXES)
 
 
 def is_repository_doi(doi, journal=None):

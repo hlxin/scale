@@ -54,7 +54,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from _common import (ACCESS_TYPES, PACER, HTTPFail, ND_LICENSES, OPEN_LICENSES, SOURCE_LABEL, Project, access_rank,
                      add_project_arg, clean_text, file_lock, get_json, host_of, http_get, license_access,
                      license_detail, load_config, load_keys, log, norm_doi, norm_license, normalize_abstract, now_iso,
-                     polite_email, today, update_state)
+                     polite_email, retraction_of, today, update_state)
 from _cache import Cache
 from _ledger import Ledger
 from build_list import is_preprint_doi, is_repository_doi
@@ -864,7 +864,7 @@ class Classifier:
             if aid:
                 aids.add(re.sub(r"v\d+$", "", str(aid)))
         P, D = self.pmc.get_many(pmc_of.values()), self.dc.get_many(aids)
-        filled = []
+        filled, notices = [], []
         for r in rows:
             h = hints.get(r["id"], {"external_ids": r.get("external_ids") or {}})
             d = r.get("doi")
@@ -928,8 +928,10 @@ class Classifier:
                     kw.append(k)
             if kw != (r.get("keywords") or []):
                 upd["keywords"] = kw[:25]
-            if any((x.get("type") or "").lower() == "retraction" for x in (c or {}).get("update_to") or []) or \
-                    (o or {}).get("retracted"):
+            itself, retracts = retraction_of((c or {}).get("update_to"), d)
+            if retracts:                       # a retraction notice: the papers it names are the retracted ones
+                notices.append((r["id"], retracts))
+            elif itself or ((o or {}).get("retracted") and not (r.get("external_ids") or {}).get("retraction_of")):
                 upd["retracted"] = 1
                 self.n["retracted"] += not r.get("retracted")
             # a preprint that has since been published: record the published DOI (dedup.py merges both records)
@@ -943,6 +945,9 @@ class Classifier:
                         break
             led.set(r["id"], **upd)
             self.cnt[final or best] += 1
+        for nid, retracts in notices:          # after the slice: a retracted paper's own update above cannot undo it
+            self.n["retracted"] += led.record_retraction(nid, retracts)
+            self.n["notices"] += 1
         return filled
 
 
@@ -1069,7 +1074,8 @@ def main():
         led.export(topics=[a.topic])
     cnt, n, pending = cl.cnt, cl.n, cl.n["pending"]
     stats = {"classified": sum(cnt.values()), "by_access_type": {k: cnt.get(k, 0) for k in ACCESS_TYPES},
-             "abstracts_filled": n["filled"], "newly_retracted": n["retracted"], "preprints_now_published": n["upgraded"],
+             "abstracts_filled": n["filled"], "newly_retracted": n["retracted"], "retraction_notices": n["notices"],
+             "preprints_now_published": n["upgraded"],
              "access_changes": {"more_open": n["more_open"], "less_open": n["less_open"], "examples": cl.examples},
              "recheck_older_than_days": age, "pending": pending,
              "lookups_left": {"openalex": n["oa_left"], "unpaywall": n["up_left"]},
