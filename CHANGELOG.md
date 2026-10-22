@@ -2,13 +2,13 @@
 
 ## Unreleased
 
-- **Schema 0.5.1 (additive): a product reported as a lump.** Answers #39. `ProductLump` (provisional) records a
+- **Schema 0.5.2 (additive): a product reported as a lump.** Answers #39. `ProductLump` (provisional) records a
   product the source reports as a fraction, a class or a carbon-number window rather than a species (C5-C11, gasoline
   range, "C2+"), with `SUBSET_OF` for a lump inside a wider one; `HAS_OUTPUT.to` and `PRODUCES.to` accept it (17 targets
   loosened). Existing records move unchanged (no migration rule). The selectivity sum check warns when selectivities of
   one record to a lump and to a lump or species it overlaps exceed 100 %; it drops containers (a lump that contains
   others) from the sum, reads no `result_values`, and cannot declare a species inside a lump. Fixtures, five
-  counterexamples and competency question CQ-12 are added.
+  counterexamples and competency question CQ-13 are added.
 - **Query fix (#38): a value below its detection or quantification limit is read as an upper bound at its limit.** A
   numeric filter (`graph query`) left such a value out with the reason `below_detection_limit`; it now passes `le`/`lt`
   and fails `ge`/`gt` when every number below the limit decides, is left out as `one_sided_bound` when the limit

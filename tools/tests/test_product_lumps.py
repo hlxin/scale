@@ -3,7 +3,7 @@ that reads them. Every document is a public synthetic example, or one built in m
 
 Each case below states its outcome: nested lumps are not parts of one partition, overlapping carbon windows with no
 declared containment are reported, a lump is never judged by its window alone, an ill-formed lump or containment is an
-error, and the competency question CQ-12 selects "C5+" across two documents by the lump's properties, never by id."""
+error, and the competency question CQ-13 selects "C5+" across two documents by the lump's properties, never by id."""
 
 import copy
 
@@ -289,7 +289,7 @@ def test_a_lump_property_the_schema_does_not_declare_is_an_error():
 def test_cq_12_selects_c5_plus_across_two_documents_by_the_lumps_properties():
     """Expected: answered, two rows (80 % of the first document, 65 % of the second); the 55 % test and the C5-C11 lump
     are left out; the lumps have different ids in the two documents (nothing is shared but their properties)."""
-    q = REPO / "domain/competency/cq-12-product-lumps.yaml"
+    q = REPO / "domain/competency/cq-13-product-lumps.yaml"
     res = run_question(REPO, "catalysis", q)
     assert res["ok"] and not res["problems"], res
     assert res["answer"]["status"] == "answered" and res["answer"]["rows"] == 2

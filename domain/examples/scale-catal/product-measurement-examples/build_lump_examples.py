@@ -10,7 +10,7 @@
                                    reports that overlap (the one warning of this document, on purpose).
   product-lumps-second-paper.json  a second, independent document that mints its own C2-C4 and C5+ lumps with other ids and
                                    the same defining properties (carbon window, open end, compound class): two tests with C5+
-                                   selectivities of 65 and 55 %. Competency question CQ-12 selects "C5+" across both
+                                   selectivities of 65 and 55 %. Competency question CQ-13 selects "C5+" across both
                                    documents by those properties, never by id.
 """
 
