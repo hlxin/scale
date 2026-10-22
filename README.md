@@ -75,7 +75,7 @@ The kernel and the catalysis domain share **one version number**, set in `domain
 they agree. Every schema change raises it: the second number for a breaking change, the third for an additive
 one. The old version is frozen in `graph/frozen/`, so a document stays readable under the version it names.
 
-The schema is at **0.7.3**; 0.1.0 (2026-10-08) was the first version of this repository's numbering. The schema was
+The schema is at **0.7.4**; 0.1.0 (2026-10-08) was the first version of this repository's numbering. The schema was
 named `scale-graph` until 0.1.0 and is `scale-catal` from 0.2.0 on (a breaking change: documents pin the name):
 
 | version | spec digest (sha256 of the spec document) |
@@ -90,7 +90,8 @@ named `scale-graph` until 0.1.0 and is `scale-catal` from 0.2.0 on (a breaking c
 | scale-catal 0.7.0 (frozen) | `f50bd1a29a2a9a0de186b0b1f04322ee4618f463408fd1766edcbb953c24255e` |
 | scale-catal 0.7.1 (frozen) | `acfae806d732a4b306b84bc3ecb1cb212cf0001e7d2cdc86d3546c13e7a93633` |
 | scale-catal 0.7.2 (frozen) | `da1973ca18fc5d8602cdf15f200588a4e2b86dbe7340a8bfca7459da366589da` |
-| scale-catal 0.7.3 | `84624919f7739b06f07add324df7c23d10f040155cae82c4c0c0f611e8d12f98` |
+| scale-catal 0.7.3 (frozen) | `84624919f7739b06f07add324df7c23d10f040155cae82c4c0c0f611e8d12f98` |
+| scale-catal 0.7.4 | `9ef6b54496998cd6aa893089ce78f21bd29520f5048ca250efcf4a7f9cf7e05f` |
 
 A version number only means something within this repository, so identify a schema by its digest
 (`scale graph spec` prints it).
