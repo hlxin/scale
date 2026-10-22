@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- **Query fix (#38): a value below its detection or quantification limit is read as an upper bound at its limit.** A
+  numeric filter (`graph query`) left such a value out with the reason `below_detection_limit`; it now passes `le`/`lt`
+  and fails `ge`/`gt` when every number below the limit decides, is left out as `one_sided_bound` when the limit
+  straddles the filter, and never holds for `eq`/`in`. No schema change.
 - **Schema 0.5.1 (additive): bifunctional (tandem) catalysts.** Requested by @hlxin (#40). A catalyst of two or more
   components that perform different steps (an oxide that activates CO, a zeolite that couples or isomerizes) can now
   say what each component does and how they are combined. `HAS_COMPONENT.function` lists the Reaction records a

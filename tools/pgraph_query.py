@@ -471,6 +471,18 @@ def numeric_filter(f: dict) -> bool:
     return op == "in" and isinstance(want, list) and bool(want) and all(_is_number(x) for x in want)
 
 
+LIMIT_STATUSES = {"below_detection_limit": "detection", "below_quantification_limit": "quantification"}
+
+
+def limit_as_bound(v: Any) -> Any:
+    """A value below its detection or quantification limit (``value`` the limit) can only lie below it: read as an
+    upper bound at the limit (``bound: upper``, status ``present``), with ``_limit`` naming what it was. Anything else
+    is returned as it is, so a limit status without a number stays absent."""
+    if isinstance(v, dict) and v.get("status") in LIMIT_STATUSES and _is_number(v.get("value")) and not v.get("bound"):
+        return {**v, "status": "present", "bound": "upper", "_limit": LIMIT_STATUSES[v["status"]]}
+    return v
+
+
 def against_bound(side: str, b: float, op: str, want: Any) -> bool | None:
     """A numeric filter against a one-sided bound (the value object's ``bound``: the number is at most ``b``, side
     ``upper``, or at least ``b``, side ``lower``): True or False when every number the bound allows gives that
@@ -518,7 +530,9 @@ def _numeric(v: Any, f: dict, op: str, read_basis: bool = False) -> tuple[bool |
         if side in ("upper", "lower") and _is_number(v.get("value")):      # "did not exceed 1 %", "at least 2"
             r = against_bound(side, float(v["value"]), op, want)
             if r is None:
-                return None, (f"one_sided_bound (the value is {'at most' if side == 'upper' else 'at least'} "
+                what = (f"below the {v['_limit']} limit" if v.get("_limit")
+                        else f"the value is {'at most' if side == 'upper' else 'at least'}")
+                return None, (f"one_sided_bound ({what} "
                               f"{v['value']} {v['unit']}".rstrip() + f"; {op} {want} cannot be decided)")
             return r, None
     elif not _is_number(v):
@@ -544,6 +558,8 @@ def _one(v: Any, f: dict, op: str) -> tuple[bool | None, str | None]:
         if why == "withheld":              # known but not shared with this view: neither there nor missing
             return None, why
         return (why is None) == (op == "exists"), None
+    if numeric_filter(f):
+        v = limit_as_bound(v)           # below a limit: at most the limit
     why = absent_reason(v)
     if why:
         return None, why
@@ -729,6 +745,7 @@ class Comparison:
         (incompatible_unit: entries of several kinds may be bound); on a property it is a plan error."""
         op = f.get("op", "eq")
         want = f.get("context") or {}
+        x = limit_as_bound(x)
         why = absent_reason(x)
         if why:
             return None, why, None
@@ -763,13 +780,15 @@ class Comparison:
             v = v[0]
         if isinstance(v, list):
             return None, f"missing_context ({prop} selects {len(v)} values; a ranking names one: an entry or [target=...])"
+        v = limit_as_bound(v)
         why = absent_reason(v)
         if why:
             return None, why
         if not isinstance(v, dict) or number(v) == (None, None):
             return None, f"not_a_number ({prop} holds no number to rank)"
         if v.get("bound") in ("upper", "lower"):
-            return None, f"one_sided_bound ({prop} is {'at most' if v['bound'] == 'upper' else 'at least'} its number; a bound is not ranked)"
+            what = f"below its {v['_limit']} limit" if v.get("_limit") else f"{'at most' if v['bound'] == 'upper' else 'at least'} its number"
+            return None, f"one_sided_bound ({prop} is {what}; a bound is not ranked)"
         if pgraph.states_no_unit(v.get("unit")):
             return None, f"unit_unstated ({prop} states no unit)"
         got = self.read(rec, prop, v)
