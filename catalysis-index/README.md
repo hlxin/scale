@@ -14,7 +14,7 @@ no-derivatives (CC BY-NC-ND), which a licence rule in `REUSE.toml` cannot state 
 
 | File | Size | Use |
 |---|---|---|
-| `co2-reduction-electricity.db.gz` | 37 MB | shared outside git; `gunzip -k co2-reduction-electricity.db.gz` gives `co2-reduction-electricity.db` (123 MB, SQLite), the version described here (built 2026-10-20) |
+| `co2-reduction-electricity.db.gz` | 37 MB | shared outside git; `gunzip -k co2-reduction-electricity.db.gz` gives `co2-reduction-electricity.db` (123 MB, SQLite), the version described here (built 2026-10-22) |
 
 Put the unpacked file in this folder (or name it in `CATALYSIS_PAPERS_DB`) and [`consult.py`](consult.py) finds it.
 
@@ -59,6 +59,10 @@ theses, 113 book chapters …; plus 146 datasets). 14,035 papers have CO2RR as T
 **Abstracts** are included only where the paper's licence allows redistribution (Access type OA or OA+ND: 6,436
 papers). The `License` and `License URL` columns give each paper's licence, and an abstract stays under it.
 
+**Preprints:** a preprint and its journal article are one row, under the journal article (`url`); `preprint_url`
+keeps the preprint's link. 711 journal articles have one, and the 471 records that are preprints link themselves.
+Retracted papers are left out of this database (`is_retracted` marks them in the full one).
+
 **Supporting information** was looked up for every paper before anything is downloaded (`find_si.py`): **12,440 SI
 files and deposits for 8,182 papers** (OA 2,178 · OA+ND 758 · Free-to-read 1,058 · Paywalled 4,188), listed in table
 `supplements` (DOI or file URL, title, and the route that found it: Elsevier SI CDN 3,418 · ACS/PLOS `.s001`
@@ -73,10 +77,10 @@ Same layout as the paper-acquisition `papers.db` (column definitions in the `abo
 
 | Table | Contents |
 |---|---|
-| `papers` | one row per paper: DOI, title, authors, year, venue, publisher, doc type, abstract, keywords, Topic A/B/C, access type, exact licence, citations, notes |
+| `papers` | one row per paper: DOI, title, authors, year, venue, publisher, doc type, abstract, keywords, Topic A/B/C, access type, exact licence, citations, notes; `url` (the journal version) and `preprint_url` (its preprints, merged into its row), `is_retracted` |
 | `co2_selection` | why the paper is in this database: driver and level |
 | `authors`, `paper_authors` | authors in order, with ORCID, institutions and countries |
-| `identifiers` | every identifier of a paper (DOI aliases, PMID, PMCID, arXiv, OSTI, patent numbers) |
+| `identifiers` | every identifier of a paper (DOI aliases, PMID, PMCID, arXiv, OSTI, patent numbers; a retracted paper's notice, `retraction_notice`) |
 | `paper_subjects`, `subjects` | Topic A/B/C and related topics from a 125-term catalysis vocabulary |
 | `paper_sources`, `sources` | which databases found each paper |
 | `supplements` | each paper's supporting information, found before download (DOI or file URL, title, route) |

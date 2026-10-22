@@ -45,9 +45,10 @@ import uuid
 import zlib
 from pathlib import Path
 
-from _common import SOURCE_LABEL, export_abstract, file_lock, json_read, log, now_iso
+from _common import (PREPRINT_HOST_RX, SOURCE_LABEL, export_abstract, file_lock, json_read, log, now_iso,
+                     preprint_links)
 
-FORMAT = "evolving-1"
+FORMAT = "evolving-2"          # evolving-2: papers.preprint_url (columns are only ever added, in place)
 DDL = """
 CREATE TABLE papers (
   id INTEGER PRIMARY KEY, doi TEXT, identifier TEXT, title TEXT, authors TEXT, year INTEGER, venue TEXT,
@@ -56,7 +57,7 @@ CREATE TABLE papers (
   access_type TEXT, license TEXT, license_url TEXT, license_source TEXT, oa_status TEXT, version TEXT,
   citations INTEGER, citation_percentile REAL, is_preprint INTEGER, is_retracted INTEGER, is_non_paper INTEGER,
   databases TEXT, downloaded TEXT, download_source TEXT, download_url TEXT, download_date TEXT, pages INTEGER,
-  sha1 TEXT, si TEXT, notes TEXT, date_added TEXT, last_checked TEXT
+  sha1 TEXT, si TEXT, notes TEXT, date_added TEXT, last_checked TEXT, preprint_url TEXT
 );
 CREATE TABLE authors (id INTEGER PRIMARY KEY, name TEXT NOT NULL, orcid TEXT, openalex_id TEXT);
 CREATE TABLE paper_authors (paper_id INTEGER, author_id INTEGER, position INTEGER, institutions TEXT, countries TEXT,
@@ -144,12 +145,20 @@ COLUMN_HELP = {
     "papers.license": "exact license with version when stated (CC BY 4.0, CC BY-NC-ND 4.0, Elsevier user license ...)",
     "papers.license_source": "where the license came from (PDF printed statement wins over metadata)",
     "papers.version": "Published version / Accepted manuscript / Preprint (of the downloaded or best open copy)",
+    "papers.url": "the paper's link: its published (journal) version when there is one, else the preprint or landing page",
+    "papers.preprint_url": "links of the paper's preprint versions ('; '-separated): the preprint DOIs merged into it "
+                           "(ChemRxiv, SSRN, Research Square, bioRxiv ...) and its arXiv record, else copies on "
+                           "preprint servers; for a preprint, its own link",
+    "papers.is_retracted": "1 = the paper is retracted (OpenAlex / Retraction Watch, Crossref); a retraction notice "
+                           "is a non-paper (is_non_paper = 1) whose identifiers name the paper it retracts "
+                           "(scheme retraction_of); the retracted paper names its notice (scheme retraction_notice)",
     "papers.downloaded": "Yes / No / n/a (datasets and software are indexed, never downloaded)",
     "papers.abstract_source": "metadata source of the abstract, or 'pdf' when read from the downloaded paper",
     "paper_collections.relevance": "0-5 relevance to that collection's topic (blank = not screened); in_scope 1/0",
     "paper_subjects.kind": "'main' (rank 1-3 = Topic A/B/C) or 'related'",
     "identifiers.scheme": "doi (every DOI incl. preprint/version aliases), patent (every number of the same invention: "
-                          "WO, EP, US ... merged into one row), pmid, pmcid, arxiv, osti, supplement_to ...",
+                          "WO, EP, US ... merged into one row), pmid, pmcid, arxiv, osti, supplement_to, "
+                          "retraction_notice / retraction_of (a retracted paper and its notice) ...",
     "supplements": "SI deposits found by the search for a paper (doi, url, title, source); files holds the SI actually "
                    "downloaded",
     "runs": "one row per step that changed the database (at, step, topics, papers added / updated / removed)",
@@ -178,6 +187,12 @@ EXAMPLES = [
     "JOIN papers p ON p.id = c.paper_id WHERE c.field = 'access_type' AND c.new IN ('OA', 'OA+ND');",
     "-- a saved filter's papers\nSELECT p.title, m.label, m.level FROM filter_members m JOIN papers p ON p.id = m.paper_id "
     "WHERE m.filter = 'co2-reduction-electricity';",
+    "-- retracted papers, with their retraction notice\nSELECT p.title, p.doi, i.value AS notice FROM papers p LEFT JOIN "
+    "identifiers i ON i.paper_id = p.id AND i.scheme = 'retraction_notice' WHERE p.is_retracted = 1;",
+    "-- journal articles that also have a preprint\nSELECT title, url, preprint_url FROM papers WHERE preprint_url IS NOT "
+    "NULL AND is_preprint = 0;",
+    "-- a patent by its number\nSELECT p.title, p.year, p.url FROM identifiers i JOIN papers p ON p.id = i.paper_id "
+    "WHERE i.scheme = 'patent' AND i.value LIKE 'US-1681751%';",
 ]
 # the papers table's columns, as the ledger's papers columns they copy unchanged (the rest is in _paper_state)
 COPIED = {"id": "id", "doi": "doi", "title": "title", "year": "year", "venue": "journal", "publisher": "publisher",
@@ -187,7 +202,9 @@ COPIED = {"id": "id", "doi": "doi", "title": "title", "year": "year", "venue": "
           "download_source": "download_source", "download_url": "download_url", "download_date": "download_date",
           "pages": "page_count", "sha1": "sha1", "date_added": "date_added", "last_checked": "last_checked"}
 STATE_SKIP = set(COPIED.values()) | {"abstract"}
-TRACKED = ("doi", "access_type", "license", "version", "is_preprint", "is_retracted", "downloaded", "si", "topic_a")
+TRACKED = ("doi", "access_type", "license", "version", "is_preprint", "is_retracted", "downloaded", "si", "topic_a",
+           "preprint_url")
+ADDED_COLUMNS = {"preprint_url": "TEXT"}    # papers columns added after a database's first build (filled in place)
 TEXTUAL = ("title", "abstract", "keywords", "topic_a", "topic_b", "topic_c", "related_topics", "is_retracted",
            "is_non_paper")
 BY_PAPER = ("paper_authors", "paper_collections", "paper_subjects", "paper_sources", "identifiers", "files",
@@ -253,6 +270,40 @@ def ensure_state(con):
     if "uid" not in {r[1] for r in con.execute("PRAGMA table_info(runs)")}:
         con.execute("ALTER TABLE runs ADD COLUMN uid TEXT")      # a run's identity across copies (merge_db.py)
     con.executescript(STATE_INDEXES)
+
+
+def _add_columns(con, led):
+    """Columns the papers table gained after this database was first built: added in place (never dropped or
+    renamed) and filled from the ledger for every paper, as a run of its own."""
+    missing = [c for c in ADDED_COLUMNS if c not in {r[1] for r in con.execute("PRAGMA table_info(papers)")}]
+    if not missing:
+        return
+    with con:
+        for c in missing:
+            con.execute(f"ALTER TABLE papers ADD COLUMN {c} {ADDED_COLUMNS[c]}")
+    n, last, pre = 0, 0, led._preprint_alias_map()
+    hint = re.compile(r'"arxiv"|osf\.io|' + PREPRINT_HOST_RX.pattern.replace("^", ""), re.I)
+    while "preprint_url" in missing:
+        rows = led.q("SELECT id, doi, link, is_preprint, external_ids, versions FROM papers WHERE id > ? ORDER BY id "
+                     "LIMIT ?", (last, CHUNK))
+        if not rows:
+            break
+        last, ups = rows[-1][0], []
+        for pid, doi, link, isp, ext, ver in rows:
+            if not (isp or pid in pre or hint.search(ext or "") or hint.search(ver or "")):
+                continue                     # most papers: no preprint anywhere in their record
+            links = preprint_links({"doi": doi, "link": link, "is_preprint": isp, "external_ids": json.loads(ext or "{}"),
+                                    "versions": json.loads(ver or "[]")}, pre.get(pid, []))
+            if links:
+                ups.append(("; ".join(links), pid))
+        with con:
+            con.executemany("UPDATE papers SET preprint_url=? WHERE id=?", ups)
+        n += len(ups)
+    with con:
+        run = new_run(con, _step_name()[0], "", f"papers gained {', '.join(missing)}; {n} papers have a preprint link")
+        con.execute("UPDATE runs SET added=0, updated=?, removed=0, papers=(SELECT COUNT(*) FROM papers) WHERE id=?",
+                    (n, run))
+    log(f"papers.db: column {', '.join(missing)} added; {n} papers have a preprint link")
 
 
 def new_run(con, step, topics, note):
@@ -340,7 +391,7 @@ def _rows(p, side, vocab, authors, L):
                           "; ".join(SOURCE_LABEL.get(d, d) for d in p.get("databases") or []), L.downloaded_cell(p),
                           p.get("download_source"), p.get("download_url"), p.get("download_date"), p.get("page_count"),
                           p.get("sha1"), L.si_cell(p) or None, L.notes_for(p) or None, p.get("date_added"),
-                          p.get("last_checked")))
+                          p.get("last_checked"), "; ".join(preprint_links(p, al)) or None))
     detail = p.get("authors_detail") or [{"name": n} for n in p.get("authors") or []]
     for pos, a in enumerate(detail, 1):
         name = (a.get("name") or "").strip()
@@ -368,7 +419,8 @@ def _rows(p, side, vocab, authors, L):
         out["identifiers"].append((pid, "patent", num))
     for k, v in (p.get("external_ids") or {}).items():
         if v and not isinstance(v, (dict, list)):
-            out["identifiers"].append((pid, k, str(v)))
+            for x in (str(v).split("; ") if k in ("retraction_of", "retraction_notice") else [str(v)]):
+                out["identifiers"].append((pid, k, x))
     for e in side["ext"].get(pid, []):
         out["extractions"].append((pid, e["topic"], e["kg"], e["status"], e.get("schema_version"), e.get("nodes"),
                                    e.get("edges"), e.get("date"), e.get("note")))
@@ -383,7 +435,7 @@ def _rows(p, side, vocab, authors, L):
     return out
 
 
-INSERT = {"papers": f"INSERT INTO papers VALUES ({','.join('?' * 39)})",
+INSERT = {"papers": f"INSERT INTO papers VALUES ({','.join('?' * 40)})",
           "paper_authors": "INSERT OR IGNORE INTO paper_authors VALUES (?,?,?,?,?)",
           "paper_collections": "INSERT INTO paper_collections VALUES (?,?,?,?,?,?,?,?,?)",
           "paper_subjects": "INSERT OR IGNORE INTO paper_subjects VALUES (?,?,?,?,?,?,?)",
@@ -562,6 +614,7 @@ def sync_published_db(led, vocab, topics=None, note=None):
         con = sqlite3.connect(str(proj.db), timeout=300)
         con.execute("PRAGMA busy_timeout=300000")
         ensure_state(con)
+        _add_columns(con, led)
         cols = [d[0] for d in con.execute("SELECT * FROM papers LIMIT 0").description]
         step, tnames = _step_name(topics)
         counts = {"added": 0, "updated": 0, "removed": 0}

@@ -443,6 +443,63 @@ def norm_doi(doi):
     return d if d.startswith("10.") and "/" in d else None
 
 
+# preprint servers' DOI prefixes: ChemRxiv, Research Square, SSRN, engrXiv, Preprints.org, TechRxiv, arXiv, bioRxiv /
+# medRxiv, OSF, Authorea, Cambridge Open Engage, EarthArXiv, SocArXiv, PsyArXiv
+PREPRINT_PREFIXES = ("10.26434/", "10.21203/", "10.2139/", "10.31224/", "10.20944/", "10.36227/", "10.48550/",
+                     "10.1101/", "10.31219/", "10.22541/", "10.33774/", "10.31223/", "10.31235/", "10.31234/")
+PREPRINT_HOST_RX = re.compile(r"^https?://([a-z0-9-]+\.)*(arxiv\.org|biorxiv\.org|medrxiv\.org|chemrxiv\.org|"
+                              r"researchsquare\.com|ssrn\.com|preprints\.org|authorea\.com|engrxiv\.org|techrxiv\.org|"
+                              r"essoar\.org|eartharxiv\.org|ecsarxiv\.org|ecoevorxiv\.org|pharmrxiv\.de)/|"
+                              r"^https?://(www\.)?(cambridge\.org/engage/|osf\.io/preprints/)", re.I)
+ARXIV_ID_RX = re.compile(r"(?:arxiv\.org/(?:abs|pdf)/|^10\.48550/arxiv\.|^arxiv:|^)"
+                         r"((?:\d{4}\.\d{4,5})|(?:[a-z\-]+(?:\.[a-z]{2})?/\d{7}))(?:v\d+)?(?:\.pdf)?/?$", re.I)
+
+
+def is_preprint_doi(doi):
+    return bool(doi) and doi.startswith(PREPRINT_PREFIXES)
+
+
+def arxiv_link(x):
+    """'https://arxiv.org/abs/<id>' for an arXiv id, arXiv DOI or arXiv URL (any version), else None."""
+    m = ARXIV_ID_RX.search(str(x or "").strip())
+    return f"https://arxiv.org/abs/{m.group(1)}" if m else None
+
+
+def preprint_links(p, aliases=()):
+    """Links of a paper's preprint versions: its own link when it is a preprint, the preprint DOIs merged into it
+    (ChemRxiv, SSRN, Research Square, bioRxiv ... — a preprint and its journal article are one row) and its arXiv
+    record; when none is known, the copies on preprint servers among its known copies (`versions`)."""
+    out = []
+    if p.get("is_preprint"):
+        own = arxiv_link(p.get("doi")) or (f"https://doi.org/{p['doi']}" if p.get("doi") else
+                                           arxiv_link(p.get("link")) or p.get("link"))
+        if own:
+            out.append(own)
+    for d in sorted({a for a in [p.get("doi"), *aliases] if a and is_preprint_doi(a)}):
+        out.append(arxiv_link(d) or f"https://doi.org/{d}")
+    ax = arxiv_link((p.get("external_ids") or {}).get("arxiv"))
+    if ax:
+        out.append(ax)
+    if not out:
+        for v in p.get("versions") or []:
+            u = v.get("url") or v.get("pdf_url") or ""
+            if PREPRINT_HOST_RX.search(u) or (host_of(u) == "osf.io" and v.get("version") == "submittedVersion"):
+                out.append(arxiv_link(u) or u)
+    return list(dict.fromkeys(out))
+
+
+# what a Crossref record's update-to says about retraction (the notice carries it, pointing at the retracted paper;
+# a few publishers also mark the retracted paper itself)
+RETRACTION_TYPES = ("retraction", "withdrawal", "removal")
+
+
+def retraction_of(update_to, own_doi):
+    """(this record is retracted itself, [the other DOIs it retracts: it is their retraction notice])."""
+    hits = [norm_doi(x.get("DOI")) for x in update_to or [] if (x.get("type") or "").lower() in RETRACTION_TYPES]
+    own = norm_doi(own_doi)
+    return own in hits, sorted({d for d in hits if d and d != own})
+
+
 def norm_title(t):
     t = clean_text(t)
     t = t.replace("₂", "2").replace("₃", "3").replace("₄", "4")

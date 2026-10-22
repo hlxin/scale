@@ -8,12 +8,16 @@
                 becomes an article
   3 topics      vocabulary Topic A/B/C of the papers whose abstract changed are recomputed (Claude, API and manual
                 topics are kept)
+  4 retractions from the Crossref answers already cached (no request is made): a retraction notice is a non-paper
+                that names the paper it retracts, not a retracted paper itself; that paper is marked retracted and
+                names its notice (index columns Retracted and Notes; papers.db is_retracted and identifiers
+                retraction_of / retraction_notice). Older versions marked the notice as the retracted paper.
 Then the index CSVs and papers.db are refreshed (--no-export to skip). Works in chunks of 20,000 papers, so a
 ledger of millions of rows is fine. Never deletes a row; --dry-run only counts.
 SI deposits merged into papers by older versions and patent families are fixed by dedup.py --apply; SI links from
 raw hits indexed by older versions by build_list.py --si-links-only.
 
-  python3 -I repair.py [--dry-run] [--no-export]
+  python3 -I repair.py [--dry-run] [--no-export] [--retractions-only]
 """
 import argparse
 import json
@@ -21,20 +25,59 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from _common import Project, add_project_arg, is_erratum, jsonl_append, log, normalize_abstract, now_iso
+from _cache import Cache
+from _common import (Project, add_project_arg, is_erratum, jsonl_append, log, norm_doi, normalize_abstract, now_iso,
+                     retraction_of)
 from _ledger import Ledger
 from _topics import Vocab, apply_vocab
 
 CHUNK = 20000
 
 
+def repair_retractions(proj, led, dry=False):
+    """Step 4: every cached Crossref answer that records a retraction, applied as classify_access.py now does."""
+    n = {"notices": 0, "notices_were_marked_retracted": 0, "papers_newly_retracted": 0, "marked_itself": 0}
+    for rec in Cache(proj, "crossref").iter_all(like='%"update_to": [{%'):
+        doi = norm_doi(rec.get("doi"))
+        itself, retracts = retraction_of(rec.get("update_to"), doi)
+        pid = (itself or retracts) and led.find_id(doi=doi)
+        if not pid:
+            continue
+        row = led.get(pid)
+        if retracts:
+            n["notices"] += 1
+            n["notices_were_marked_retracted"] += bool(row.get("retracted"))
+            if dry:
+                tids = {led.find_id(doi=t) for t in retracts} - {None, pid}
+                n["papers_newly_retracted"] += sum(1 for t in tids if not led.get(t).get("retracted"))
+            else:
+                with led.tx():
+                    n["papers_newly_retracted"] += led.record_retraction(pid, retracts)
+        elif not row.get("retracted"):
+            n["marked_itself"] += 1
+            if not dry:
+                led.set(pid, retracted=1)
+    log(f"repair: retractions {n}")
+    return n
+
+
 def main():
     ap = add_project_arg(argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter))
     ap.add_argument("--dry-run", action="store_true", help="count what would change; write nothing")
     ap.add_argument("--no-export", action="store_true", help="do not refresh the index CSVs and papers.db")
+    ap.add_argument("--retractions-only", action="store_true", help="only step 4 (retraction notices and their papers)")
     a = ap.parse_args()
     proj = Project(a.project)
     led = Ledger(proj)
+    if a.retractions_only:
+        res = {"retractions": repair_retractions(proj, led, a.dry_run), "dry_run": a.dry_run, "finished_at": now_iso()}
+        if not a.dry_run:
+            jsonl_append(proj.logs / "repair_log.jsonl", res)
+            if not a.no_export:
+                led.export()
+                res["database"] = led.last_publish
+        print(json.dumps(res))
+        return
     last, n_rows, n_ab, n_emptied, n_flag, n_retype = 0, 0, 0, 0, 0, 0
     changed = []
     while True:
@@ -78,7 +121,7 @@ def main():
             n_topics += apply_vocab(led, vocab, rows)
     res = {"papers_checked": n_rows, "abstracts_cleaned": n_ab, "abstracts_emptied": n_emptied,
            "notices_flagged": n_flag, "erratum_rows_retyped_article": n_retype, "topics_recomputed": n_topics,
-           "dry_run": a.dry_run, "finished_at": now_iso()}
+           "retractions": repair_retractions(proj, led, a.dry_run), "dry_run": a.dry_run, "finished_at": now_iso()}
     if not a.dry_run:
         jsonl_append(proj.logs / "repair_log.jsonl", res)
         if not a.no_export:

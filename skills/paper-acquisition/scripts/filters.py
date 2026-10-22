@@ -57,7 +57,9 @@ def export_subset(proj, name, out, public=False):
     con.execute(f"CREATE TABLE {table} (paper_id INTEGER, {label_col} TEXT, level TEXT, PRIMARY KEY (paper_id, {label_col}))")
     con.execute(f"INSERT INTO {table} SELECT paper_id, label, level FROM src.filter_members WHERE filter=?", (name,))
     con.execute(f"CREATE TEMP TABLE ids AS SELECT DISTINCT paper_id AS id FROM {table}")
-    con.execute("INSERT INTO papers SELECT * FROM src.papers WHERE id IN (SELECT id FROM ids)")
+    have = {r[1] for r in con.execute("PRAGMA src.table_info(papers)")}
+    cols = ", ".join(r[1] for r in con.execute("PRAGMA main.table_info(papers)") if r[1] in have)
+    con.execute(f"INSERT INTO papers ({cols}) SELECT {cols} FROM src.papers WHERE id IN (SELECT id FROM ids)")
     for t in COPY:
         con.execute(f"INSERT INTO {t} SELECT * FROM src.{t} WHERE paper_id IN (SELECT id FROM ids)")
     con.execute("INSERT INTO authors SELECT * FROM src.authors WHERE id IN (SELECT DISTINCT author_id FROM paper_authors)")

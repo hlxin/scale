@@ -93,6 +93,7 @@ def write_subset(proj, led, ids, a, vocab):
         p = led.get(pid)
         if not p:
             continue
+        p["_aliases"] = led.aliases(pid)          # its preprint DOIs give the Preprint link column
         t = next((x for x in led.topics_of(pid) if x["topic"] == a.topic), None) if a.topic else None
         if t:
             p.update({"t_relevance": t.get("relevance"), "t_relevance_note": t.get("relevance_note"),

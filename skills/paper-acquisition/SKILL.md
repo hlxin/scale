@@ -6,7 +6,7 @@ allowed-tools:
   - Bash(nohup python3 -I ${CLAUDE_SKILL_DIR}/scripts/*)
   - Bash(nohup zsh ${CLAUDE_SKILL_DIR}/scripts/run_paywalled.sh *)
   - "scale corpus check <manifest>"     # SCALE checks a frozen corpus (freeze_corpus.py)
-version: 3.6.0
+version: 3.7.0
 scale_release: ">=v0.2.0"
 inputs:
   - A topic in the user's words, or a Web of Science, Scopus or Zotero export, a list of DOIs or a web page of them
@@ -208,7 +208,8 @@ papers. The JSON gives `papers_with_si` and `by_route`; the index SI column says
 over 50,000 papers gets the batched routes; give a subset the per-paper ones with `find_si.py --topic <catalog> --ids
 <file of paper IDs>` (or index the subset as its own topic).
 
-**8 · Duplicates (automatic, no question).** `dedup.py --apply` merges the safe cases: preprint ↔ published version,
+**8 · Duplicates (automatic, no question).** `dedup.py --apply` merges the safe cases: preprint ↔ published version
+(the journal article's row keeps the preprint's link: index column Preprint link, papers.db `preprint_url`),
 repository copy ↔ journal article, same paper without/with DOI, Angewandte twins, byte-identical PDFs, one patented
 invention filed in several offices (WO, EP, US … and its HAL/OSTI copy: same title and inventors; one row keeps every
 number), and SI deposits indexed as papers (they become SI links of their paper). A dataset is never merged into its
@@ -334,7 +335,8 @@ type and license already known.
 ## After a skill upgrade (an index built by an older version)
 
 Once, when nothing else is running on the project: `repair.py` (cleans stored abstracts, flags notices the new rules
-recognize, recomputes the vocabulary topics of changed papers), `dedup.py --apply` (patent families, SI deposits that
+recognize, recomputes the vocabulary topics of changed papers, tells retraction notices from the papers they retract
+using the cached Crossref answers; `--retractions-only` for that step alone), `dedup.py --apply` (patent families, SI deposits that
 older versions merged into papers or kept as papers), `build_list.py --topic <slug> --si-links-only` (SI deposits
 older versions dropped), `topics.py assign --topic <slug>` (Topic A/B/C from the current vocabulary; Claude, API and
 manual topics are kept), `find_si.py --topic <slug>` (the SI of every in-scope paper, for an index built before
@@ -403,7 +405,7 @@ python3 -I ${CLAUDE_SKILL_DIR}/scripts/export.py --name <name> --topic <slug> [-
 | `fetch_si.py` | downloads the SI the index lists (then the paper page's) into `papers/SI/<access>/` |
 | `fill_abstracts.py` | abstracts from downloaded PDFs (Download / curation option) |
 | `dedup.py` | `--apply` merges the safe duplicates incl. patent families and SI deposits (automatic); `--merge` / `--keep-separate` for the uncertain pairs; `--no-export` |
-| `repair.py` | once after a skill upgrade: re-apply the current abstract and non-paper rules to stored papers |
+| `repair.py` | once after a skill upgrade: re-apply the current abstract, non-paper and retraction rules to stored papers; `--retractions-only` |
 | `export.py` | publish pending changes into papers.db (in place); `--topic <slug> --csv` writes the topic's index CSVs; `--rebuild` (fallback; the history is kept); a filtered list as a file; `--set-extracted` |
 | `merge_db.py` | merge another copy of papers.db into this one (`--from`; `--files` copies in its PDFs and SI; `--dry-run`); then `dedup.py --apply` |
 | `filters.py` | saved filters kept in papers.db and re-run as it evolves: `define`, `list`, `show`, `refresh`, `export` (a filter's papers as their own database; `--public`: abstracts only for OA and OA+ND) |
@@ -436,7 +438,7 @@ docstring and [references/database.md](references/database.md). A merge that fin
 
 - `publications/papers.db` — the paper database (all topics), updated in place by every step, with its history
   (`runs`, `changes`), saved filters and working state ("The database evolves" below).
-  `publications/<slug>/index/{OA,OA+ND,Free-to-read,Paywalled,merged,excluded}.csv` — the topic index (32 columns),
+  `publications/<slug>/index/{OA,OA+ND,Free-to-read,Paywalled,merged,excluded}.csv` — the topic index (34 columns),
   written on request (`export.py --csv`). Columns, tables, access and license rules, the
   Extracted column: [references/database.md](references/database.md).
 - `publications/<slug>/corpora/<corpus>/sources.json` — a frozen corpus (freeze_corpus.py).
