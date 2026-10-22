@@ -8,7 +8,7 @@ Methods (config['screening']['method']):
 Every method writes Relevance (0-5, blank for none), a short note, and the in/out decision (score >= threshold,
 default 3) into the ledger; a manual decision (an imported list's, import_list.py --scope file / in) is never
 re-scored. claude / api also choose each paper's three main topics from the topic vocabulary
-(vocab/catalysis.json + .scripts/vocab_custom.json); keywords / none keep the deterministic vocabulary topics that
+(the topic vocabulary, _topics.vocab_path, + .scripts/vocab_custom.json); keywords / none keep the deterministic vocabulary topics that
 build_list / classify_access assigned (papers without topics get them; topics.py assign redoes them all after a
 vocabulary change). keywords and none work block by block (20,000 papers), so a topic of millions takes minutes.
 Then the topic's index CSVs and publications/papers.db are refreshed.

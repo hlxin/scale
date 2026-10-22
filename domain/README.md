@@ -213,7 +213,7 @@ It runs at the repository root only, as part of `scale check`.
 
 - **Comment** without Git: the [comment form](https://github.com/hlxin/scale/issues/new?template=comment.yml),
   or 💬 next to a record in a catalogue (`scale catalogue <document>`).
-- **Curate a source** into an example, following `skills/curate-source/SKILL.md` (public, open-access
+- **Curate a source** into an example, following `skills/curate-corpus/SKILL.md` (public, open-access
   sources and short, capped quotes only).
 - **Suggest a schema change** on an issue (@scale-agents take it up), or make it in a pull request that edits
   `graph/catalysis.yaml` and raises the one version (`scale schema bump`;

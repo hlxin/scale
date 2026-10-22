@@ -78,7 +78,7 @@ class Other:
 
     def __init__(self, path):
         if not has_state(path):
-            die(f"{path} is not an evolving papers.db (paper-acquisition 3.4 or later); nothing to merge from")
+            die(f"{path} is not an evolving papers.db (paper-acquisition 3.4 or later, now index-sources); nothing to merge from")
         self.path = Path(path).resolve()
         self.con = sqlite3.connect(f"file:{self.path}?mode=ro", uri=True)
         self.con.row_factory = sqlite3.Row

@@ -78,7 +78,7 @@ def test_every_state_from_prepared_to_passed(corpus, tmp_path):
     assert run("status", "--run", r)["states"] == {"prepared": 1}
     out = run("next", "--run", r, "--role", "curate", "--n", 5)
     assert out["id"] == "7" and Path(out["prompt"]).is_file()
-    assert "curate-source" in Path(out["prompt"]).read_text()
+    assert "curate-corpus" in Path(out["prompt"]).read_text()
     assert run("next", "--run", r, "--role", "curate")["handed_out"] == 0     # leased, not handed out twice
     graph = next(f.glob("*.graph.json"))
     good = graph.read_text()
@@ -142,9 +142,9 @@ def test_gap_reports_are_counted_by_kind(corpus, tmp_path):
 
 
 def test_a_passed_source_shows_in_the_paper_index_at_once(tmp_path):
-    """In a paper-acquisition project, recording a passed source updates papers.db (the index's Extracted column)."""
+    """In an index-sources project, recording a passed source updates papers.db (the index's Extracted column)."""
     import sqlite3
-    sys.path.insert(0, str(REPO / "skills" / "paper-acquisition" / "scripts"))
+    sys.path.insert(0, str(REPO / "skills" / "index-sources" / "scripts"))
     from _common import Project
     from _ledger import Ledger
     proj = Project(tmp_path / "project")

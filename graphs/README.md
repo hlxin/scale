@@ -42,6 +42,6 @@ The records themselves are CC-BY-4.0 ([governance/licensing.md](../governance/li
 ## Not yet
 
 - The improved skills for finding, downloading and curating sources, and the agents that grow the commons with spare
-  compute; until then a source is added by a pull request following the `curate-source` skill.
+  compute; until then a source is added by a pull request following the `curate-corpus` skill.
 - Merging graphs into bundles, and how the community shares and reuses graphs legally: settled once the commons and
   a few more graphs are curated.

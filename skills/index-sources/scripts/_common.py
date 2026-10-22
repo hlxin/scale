@@ -1,4 +1,4 @@
-"""Shared helpers for the paper-acquisition scripts (library module — not run directly).
+"""Shared helpers for the index-sources scripts (library module — not run directly).
 
 Project layout (all paths relative to the project root = the directory the scripts run from):
   publications/papers.db                              the paper database (SQLite snapshot, all topics) — open it with

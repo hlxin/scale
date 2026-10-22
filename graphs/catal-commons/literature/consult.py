@@ -41,8 +41,8 @@ ROOT = Path(__file__).resolve().parent
 DB_CANDIDATES = ([Path(os.environ["CATALYSIS_PAPERS_DB"])] if os.environ.get("CATALYSIS_PAPERS_DB") else []) + [
     ROOT / "co2-reduction-electricity.db", ROOT / "papers.db", ROOT / "publications" / "papers.db", ROOT.parent / "publications" / "papers.db"]
 DEFAULT_DB = next((p for p in DB_CANDIDATES if p.exists()), ROOT / "papers.db")
-VOCAB_FILES = [ROOT.parent / "skills" / "paper-acquisition" / "vocab" / "catalysis.json",  # hlxin/scale layout
-               ROOT / ".claude" / "skills" / "paper-acquisition" / "vocab" / "catalysis.json",  # a project folder
+VOCAB_FILES = [ROOT / "vocabulary.json",                                       # catal commons (hlxin/scale layout)
+               ROOT / ".scripts" / "vocab.json",                                 # a project folder
                ROOT / ".scripts" / "vocab_custom.json"]
 CHUNK = 30000
 

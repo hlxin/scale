@@ -1,10 +1,10 @@
 # Curate one source into a scale-catal document
 
-You curate ONE source. Follow SCALE's curate-source skill exactly; this note only says where things are and what to
+You curate ONE source. Follow SCALE's curate-corpus skill (its procedure for one source) exactly; this note only says where things are and what to
 report. Work only inside the folder below.
 
-1. **Read the procedure first:** `${scale} call skills '{"name": "curate-source"}'` (and, when a situation needs one,
-   its recipes: `${scale} call skills '{"name": "curate-source", "reference": "references/recipes.md"}'`). Read the
+1. **Read the procedure first:** `${scale} call skills '{"name": "curate-corpus"}'` (and, when a situation needs one,
+   its recipes: `${scale} call skills '{"name": "curate-corpus", "reference": "references/recipes.md"}'`). Read the
    schema with `${scale} graph describe <Label> --domain catalysis`, never from memory.
 2. **The working folder** (made by `scale source start`): `${folder}`
    - `BRIEF.md`: what to curate and how; read it next.
@@ -29,7 +29,7 @@ ${si_left}
    result the source cites from another work as its own run.
 5. **Check until it passes:** `${scale} source check ${folder} --derive-links` (exit 0: zero errors, every quote found,
    the cap respected).
-   Gap reports you write by hand (curate-source, step 12) go in `${folder}/work/gaps/`, one `GAP-*.json` each in
+   Gap reports you write by hand (the procedure, step 12) go in `${folder}/work/gaps/`, one `GAP-*.json` each in
    SCALE's gap format, with their `access`.
 6. **Write `${folder}/work/curation.json`:**
    `{"result": "curated" | "no_data", "records": {"nodes": <nodes you added>, "links": <links you added>}, "gaps": <n>,

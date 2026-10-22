@@ -1,12 +1,12 @@
 ---
-name: paper-acquisition
-description: Builds and maintains a per-topic paper index and corpus. Index mode finds every matching paper, preprint, patent and dataset in 34 automated sources (OpenAlex, Crossref, Europe PMC, arXiv, OSTI, Zenodo; Scopus, Web of Science, Lens, EPO with keys) and keeps publications/papers.db up to date in place, holding every paper with abstract, exact license, supplementary information (SI) links, Topic A/B/C and related topics, and the history of every run and change (index CSVs per access type — OA, OA+ND, Free-to-read, Paywalled — on request); copies of the database updated apart merge back into one (merge_db.py). Download mode fetches PDFs and SI, paywalled papers only through the library EZproxy at safe rates. Update mode exhaustively adds newer papers (all sources, citation chasing, access and retraction recheck). Duplicates merge automatically. Also imports Web of Science, Scopus or Zotero exports with their abstracts, answers questions about the indexed papers and writes filtered lists (CSV, BibTeX, RIS). Use whenever the user wants to find, index, import, list or download papers on a topic, refresh a literature corpus, or query the paper database. Curating the papers into scale-catal documents belongs to curate-corpus (a corpus) and curate-source (one source).
+name: index-sources
+description: Builds and maintains a per-topic index of sources - papers, preprints, patents, theses, reports and datasets - and the corpus frozen from it. Index mode finds every matching paper, preprint, patent and dataset in 34 automated sources (OpenAlex, Crossref, Europe PMC, arXiv, OSTI, Zenodo; Scopus, Web of Science, Lens, EPO with keys) and keeps publications/papers.db up to date in place, holding every paper with abstract, exact license, supplementary information (SI) links, Topic A/B/C and related topics, and the history of every run and change (index CSVs per access type — OA, OA+ND, Free-to-read, Paywalled — on request); copies of the database updated apart merge back into one (merge_db.py). Download mode fetches PDFs and SI, paywalled papers only through the library EZproxy at safe rates. Update mode exhaustively adds newer papers (all sources, citation chasing, access and retraction recheck). Duplicates merge automatically. Also imports Web of Science, Scopus or Zotero exports with their abstracts, answers questions about the indexed papers and writes filtered lists (CSV, BibTeX, RIS). Use whenever the user wants to find, index, import, list or download papers on a topic, refresh a literature corpus, or query the paper database. Curating the sources into scale-catal documents belongs to curate-corpus.
 allowed-tools:
   - Bash(python3 -I ${CLAUDE_SKILL_DIR}/scripts/*)
   - Bash(nohup python3 -I ${CLAUDE_SKILL_DIR}/scripts/*)
   - Bash(nohup zsh ${CLAUDE_SKILL_DIR}/scripts/run_paywalled.sh *)
   - "scale corpus check <manifest>"     # SCALE checks a frozen corpus (freeze_corpus.py)
-version: 3.8.0
+version: 4.0.0
 scale_release: ">=v0.2.0"
 inputs:
   - A topic in the user's words, or a Web of Science, Scopus or Zotero export, a list of DOIs or a web page of them
@@ -28,11 +28,13 @@ human-review:
   - Before a corpus is frozen for curation (which papers are included, and why the others are left out)
 ---
 
-# Paper Acquisition
+# Index sources
 
-Topic-agnostic: the research domain always comes from the user; the topic vocabulary is tuned for catalysis and
-extensible. The papers it downloads, frozen as a corpus, are the sources that [curate-corpus](../curate-corpus/SKILL.md)
-turns into scale-catal documents with [curate-source](../curate-source/SKILL.md), one source at a time.
+Topic-agnostic: the research domain always comes from the user, and so does the topic vocabulary (a domain's own file;
+SCALE's catalysis vocabulary is [graphs/catal-commons/literature/vocabulary.json](../../graphs/catal-commons/literature/vocabulary.json),
+[references/topics.md](references/topics.md)). A source here is anything the index holds: a paper, a preprint, a patent,
+a thesis, a report or a dataset. The sources it downloads, frozen as a corpus, are what
+[curate-corpus](../curate-corpus/SKILL.md) turns into scale-catal documents, one source at a time.
 
 ## Standing rules (apply for the whole task)
 
@@ -282,7 +284,7 @@ move to `.scripts/<slug>/out_of_scope/`.
 Before papers are curated, freeze the corpus: `freeze_corpus.py --topic <slug> --name <corpus> [--min-relevance 4]
 [--subject "<Topic A/B/C labels>"] [--doc-types article,review] [--years 2015-2026] [--access OA,OA+ND] [--ids FILE]`.
 It writes `publications/<slug>/corpora/<corpus>/sources.json`, a corpus manifest in SCALE's format (SCALE's
-curate-source skill asks for one before the first source, and its curate-corpus skill curates the included sources).
+curate-corpus skill asks for one before the first source and curates the included sources).
 Every paper of the topic gets a status: `in_scope` (downloaded, in scope and kept by the rule: the sources to curate)
 or the reason it is left out (`not_retrieved` with why, `off_scope`, `not_screened`, `retracted`, `excluded` with a
 `status_reason`), and the counts add up. `scale corpus check <manifest>` checks it. Each entry carries the paper ID,

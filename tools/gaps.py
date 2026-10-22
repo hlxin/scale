@@ -32,7 +32,7 @@ from .util import ScaleError, sha256_text, write_canonical
 
 ACTIONS = {
     "missing_concept": "Open a schema change request (skills/evolve-schema/SKILL.md). Do not extend the schema during curation.",
-    "extraction_error": "Re-extract and correct the record against its source (skills/curate-source/SKILL.md).",
+    "extraction_error": "Re-extract and correct the record against its source (skills/curate-corpus/SKILL.md).",
     "absent_source_information": "Review the source (SI, source-data files) or add sources. No schema change.",
     "ambiguous_source_information": "Review the source or query the authors. Keep every reported variant; do not reconcile silently.",
     "missing_source_coverage": "Curate additional sources into the declared collection.",

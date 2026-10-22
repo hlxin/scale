@@ -4,7 +4,7 @@ index has a status — included, or the reason it is left out — and the counts
   python3 -I freeze_corpus.py --topic <slug> [--name <corpus name>] [--min-relevance 4] [--subject "CO2RR,MOFs"]
          [--doc-types article,review,preprint] [--years 2015-2026] [--access OA,OA+ND] [--ids FILE] [--out FILE]
 
-The manifest is the one SCALE's curate-source skill asks for before the first source is curated (its step 1), and
+The manifest is the one SCALE's curate-corpus skill asks for before the first source is curated (its step 1), and
 `scale corpus check <manifest>` checks it; curate-corpus curates its included sources. The candidates are every paper
 of the topic (one row per work after deduplication). Statuses:
 
@@ -89,7 +89,7 @@ def status_of(p, a, wanted, proj, subjects):
     if p.get("t_in_scope") is None:
         return "not_screened", "never screened for relevance"
     if doc_type in ("dataset", "software"):
-        return "excluded", f"a {doc_type} record: indexed, never downloaded (a data file is curated with curate-dataset)"
+        return "excluded", f"a {doc_type} record: indexed, never downloaded (a data file is curated with curate-corpus, as a data file)"
     if not p.get("downloaded"):
         return "not_retrieved", NOT_RETRIEVED.get(p.get("dl_status") or "", "not downloaded yet")
     if not p.get("t_path") or not (proj.root / p["t_path"]).is_file():
@@ -183,13 +183,13 @@ def main():
     built = sorted((r or {}).get("built_at") or "" for r in (st.get("build_list_runs") or {}).values())
     indexed = last_update or last_index or (built[-1] if built and built[-1] else None)   # an imported list: its build
     manifest = {
-        "corpus": f"{cfg.get('topic') or slug} (paper-acquisition topic {slug}): every paper, preprint, patent and "
+        "corpus": f"{cfg.get('topic') or slug} (index-sources topic {slug}): every paper, preprint, patent and "
                   f"dataset of the topic's index, one entry per work after deduplication; {len(sources)} candidates.",
         "cutoff": {"date": (indexed or today())[:10],
-                   "rule": f"indexed by {(indexed or today())[:10]} from paper-acquisition's sources; included: "
+                   "rule": f"indexed by {(indexed or today())[:10]} from index-sources' sources; included: "
                            f"{rule_text(a)}"},
         "frozen_at": today(), "topic": slug, "included_status": INCLUDED,
-        "built_by": "paper-acquisition freeze_corpus.py", "counts": dict(sorted(counts.items())), "sources": sources}
+        "built_by": "index-sources freeze_corpus.py", "counts": dict(sorted(counts.items())), "sources": sources}
     problems = check(manifest)
     if problems:
         die("the manifest would not pass scale corpus check: " + "; ".join(problems[:5]))

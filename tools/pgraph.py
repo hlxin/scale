@@ -1365,7 +1365,7 @@ def validate(doc: dict, spec: dict, source_texts: dict[str, str] | None = None) 
 
 
 NO_UNIT = "(no unit)"
-#: The unit a curator writes for a number the source prints without one (curate-source, docs/curation.md): a
+#: The unit a curator writes for a number the source prints without one (curate-corpus, docs/curation.md): a
 #: placeholder that states no unit, read in any case and spacing (:func:`states_no_unit`). Never a unit to plan on.
 UNIT_NOT_STATED = "not stated"
 

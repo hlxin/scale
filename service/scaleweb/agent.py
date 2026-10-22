@@ -3,7 +3,7 @@
 Both run the model (the Claude Messages API, through a client the caller passes) over tools that call the scale-catal
 code itself: the curation loop reads the page texts, describes the schema, writes records into the working graph and
 runs ``scale source check`` until it passes; the question loop runs ``describe``, ``stats``, ``search`` and ``query``
-exactly as the CLI and the MCP server do. The skills (``skills/curate-source``, ``skills/query-graph``) are the system
+exactly as the CLI and the MCP server do. The skills (``skills/curate-corpus``, ``skills/query-graph``) are the system
 prompts, so the procedure is the one an agent follows anywhere else. Each loop stops at its turn limit or token budget.
 """
 
@@ -130,7 +130,7 @@ def _pages(folder: Path, first: int, last: int) -> str:
 
 def curate_folder(folder: Path, client, model: str, max_turns: int, max_tokens: int,
                   log: Callable[[str], None] = lambda s: None, repo: Path | None = None) -> dict:
-    """Fill the graph of a ``scale source start`` folder by the curate-source skill until ``scale source check``
+    """Fill the graph of a ``scale source start`` folder by the curate-corpus skill until ``scale source check``
     passes (or the loop runs out); returns the check, the model's summary and the tokens spent."""
     repo = Path(repo) if repo else find_repo_root()
     info = load_doc(folder / "source.json")
@@ -168,7 +168,7 @@ def curate_folder(folder: Path, client, model: str, max_turns: int, max_tokens: 
         "remove": lambda a: _remove(gpath, a["ids"], fixed),
         "check": lambda a: _short_check(curate.check(folder, repo, derive_links=True)),
     }
-    system = (_skill(repo, "curate-source") + "\n\n# Working here\n\nYou curate in a web service, through the tools "
+    system = (_skill(repo, "curate-corpus") + "\n\n# Working here\n\nYou curate in a web service, through the tools "
               "given (no shell; the scale commands named above are run for you: `check` is `scale source check "
               "--derive-links`). Read every page before you finish. Write records with `upsert`, run `check` and "
               "fix what it reports, then call `done`.")

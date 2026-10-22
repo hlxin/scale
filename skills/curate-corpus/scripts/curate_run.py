@@ -1,5 +1,5 @@
 """Curate a frozen corpus into scale-catal documents: one SCALE working folder per source, curated by a subagent that
-follows the curate-source skill, read a second time by another, and checked by SCALE's tools.
+follows the curate-corpus skill's procedure for one source, read a second time by another, and checked by SCALE's tools.
 
   python3 -I curate_run.py prepare --corpus <sources.json> --run <dir> --curator opus|sonnet|fable|haiku
                                    --reviewer opus|sonnet|fable|haiku|api:<model>|skip [--api-base-url <url>]
@@ -31,7 +31,7 @@ review-api  the second reading of the next N curated sources by the API model: t
 status    runs `scale source check <folder>` on every folder (cached while the graph is unchanged), reads the
           curator's report (work/curation.json) and the second reading (work/review.json), and gives each source a
           state; --apply records the settled ones in state.jsonl and hands their result to the paper index
-          (<project>/.scripts/<topic>/kg/<run>/extraction_status.jsonl), then runs paper-acquisition's export so
+          (<project>/.scripts/<topic>/kg/<run>/extraction_status.jsonl), then runs index-sources' export so
           the index shows them at once (its Extracted column; papers.db table extractions).
 finish    `scale source finish <folder>` for every passed source (--public: the copy with quoted text capped).
 assemble  a local graph kept as parts (<run>/graph by default) with every passed document, added by `scale graph
@@ -154,7 +154,7 @@ def contribute(cmd, graph, folder, write=False):
 
 
 def project_root(start):
-    """The paper-acquisition project that holds the manifest (its working ledger, or its papers.db alone), if any."""
+    """The index-sources project that holds the manifest (its working ledger, or its papers.db alone), if any."""
     for d in [Path(start).resolve(), *Path(start).resolve().parents]:
         if (d / ".scripts" / "ledger.sqlite").is_file() or (d / "publications" / "papers.db").is_file():
             return d
@@ -162,9 +162,10 @@ def project_root(start):
 
 
 def index_export(root):
-    """paper-acquisition's export for the project, so the paper index shows the results now; what it said."""
-    for cand in (HERE.parents[1] / "paper-acquisition" / "scripts" / "export.py",
-                 root / ".claude" / "skills" / "paper-acquisition" / "scripts" / "export.py"):
+    """index-sources' export for the project, so the paper index shows the results now; what it said."""
+    for cand in (HERE.parents[1] / "index-sources" / "scripts" / "export.py",
+                 root / ".claude" / "skills" / "index-sources" / "scripts" / "export.py",
+                 root / ".claude" / "skills" / "paper-acquisition" / "scripts" / "export.py"):   # its earlier name
         if cand.is_file():
             r = subprocess.run([sys.executable, "-I", str(cand), "--project", str(root)], capture_output=True, text=True)
             if r.returncode:
@@ -173,7 +174,7 @@ def index_export(root):
                 return {"exported": True, "database": json.loads((r.stdout.strip().splitlines() or ["{}"])[-1])}
             except ValueError:
                 return {"exported": True}
-    return {"exported": False, "error": "paper-acquisition not found: run its export.py --project <project>"}
+    return {"exported": False, "error": "index-sources not found: run its export.py --project <project>"}
 
 
 def folder_id(src):

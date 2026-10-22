@@ -11,7 +11,7 @@ questions from.
   from public addresses, every redirect checked again, up to the upload limit. Many publishers refuse such downloads,
   so uploading the PDF always works.
 - **Curate.** A model (the Claude Messages API, `SCALE_WEB_MODEL`) follows the
-  [curate-source skill](../skills/curate-source/SKILL.md), which is its system prompt, through tools that call the
+  [curate-corpus skill](../skills/curate-corpus/SKILL.md), which is its system prompt, through tools that call the
   scale-catal code:
   - `read_pages`: the page texts;
   - `describe`: the schema and the catalysis checklist;

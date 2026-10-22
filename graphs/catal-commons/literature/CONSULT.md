@@ -19,7 +19,7 @@ You can ask it questions in two ways:
    driver"), topics, years, document types and authors, and answers in JSON. Start here.
 2. **SQL** on `papers.db`, for anything else (schema and recipes below).
 
-Both are read-only. Never edit `papers.db` by hand: the paper-acquisition pipeline rebuilds it.
+Both are read-only. Never edit `papers.db` by hand: the index-sources pipeline rebuilds it.
 
 ---
 
@@ -34,7 +34,7 @@ python3 -I consult.py count --concept co2-reduction --driver electro      # add 
 **"How many papers are about CO2 reduction with electricity as the main driver?"** Answer as of 2026-10-14
 (`db_built_at` 2026-10-14T17:38Z: after deduplication and topic re-assignment):
 
-**a) Vocabulary first** (the paper-acquisition skill's recipe; `terms` command, section 3). Each term is counted
+**a) Vocabulary first** (the index-sources skill's recipe; `terms` command, section 3). Each term is counted
 as Topic A/B/C, and the neighbours are listed separately so the asker decides what to include:
 
 ```bash
@@ -252,7 +252,7 @@ related), so count with `kind = 'main'` unless you want that looser set.
 3. State the definitions you relied on (from `definitions` in the JSON) and the database date (`db_built_at`).
 4. For lists, use `list` (sorted by citations or year) and give titles, years and DOIs.
 5. Don't modify the database. To save a list, redirect `list --format csv` to a file, or use the
-   paper-acquisition skill's `export.py` in the project that holds the database.
+   index-sources skill's `export.py` in the project that holds the database.
 6. Mention the limits below when they affect the answer.
 
 ---

@@ -210,8 +210,8 @@ embargoes end, open copies appear, retractions are flagged, preprints get their 
 
 ## The Extracted column (papers curated into a graph)
 
-A downloaded paper becomes a scale-catal document with [curate-source](../../curate-source/SKILL.md), a frozen
-corpus of them with [curate-corpus](../../curate-corpus/SKILL.md)
+A downloaded paper, or a frozen
+corpus of them, becomes scale-catal documents with [curate-corpus](../../curate-corpus/SKILL.md)
 (`scale source start --pdf publications/<slug>/papers/<access>/<ID>.pdf`). Record the result in the index by hand:
 `export.py --set-extracted 12,57 --topic co2rr --kg <graph name> --value extracted` (or `rejected`, `failed`,
 `no_data`; `none` removes the record). curate-corpus reports its results itself (`curate_run.py status --apply`), one

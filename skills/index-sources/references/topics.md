@@ -20,7 +20,12 @@ Topics belong to the paper, not to the index topic: a paper in two indexes has o
 
 ## The vocabulary
 
-`vocab/catalysis.json` (125 terms in 4 facets: reaction 72, material 26, method 17, system 10) — electro-, photo-,
+The vocabulary belongs to the domain, not to this skill. The first of these is used: a path given to the script,
+`$INDEX_SOURCES_VOCAB`, the project's `.scripts/vocab.json`, or, when the skill runs from a checkout of hlxin/scale,
+SCALE's catalysis vocabulary, `graphs/catal-commons/literature/vocabulary.json` (copy it to `.scripts/vocab.json` in a
+project that installed the skill elsewhere).
+
+The catalysis vocabulary (125 terms in 4 facets: reaction 72, material 26, method 17, system 10) — electro-, photo-,
 thermo-, bio- and plasma catalysis, catalytic organic synthesis, esterification/biodiesel, coal conversion; catalyst
 classes incl. enzymes, nanozymes, solid acids and ionic liquids; characterization, crystallography, kinetics,
 computation, techno-economics; devices and reactors. (On the all-of-catalysis index this left 22% of papers without a
@@ -43,8 +48,9 @@ broad terms such as Metal oxides, Catalyst synthesis, Hydrogen production, so th
 
 ## Extending the vocabulary
 
-For a topic outside catalysis, or when `topics.py proposed` shows a recurring label, add terms to
-`.scripts/vocab_custom.json` (project-specific; overrides bundled terms with the same `id`), show the user the
+For a topic outside catalysis, write the domain's own vocabulary (same shape) to `.scripts/vocab.json`. When
+`topics.py proposed` shows a recurring label, add terms to `.scripts/vocab_custom.json` (project-specific; overrides
+the vocabulary's terms with the same `id`), show the user the
 additions, then `topics.py assign --topic <slug>`:
 
 ```json

@@ -19,7 +19,7 @@ scale-catal@0.2.0 …` a pinned one. In a checkout of this repository run `uv ru
   (`catalysis.yaml`) holding one vocabulary and one checklist; the checklist's items for a catalytic test apply
   by the driving forces it lists. The schema has **one version** for the kernel and the catalysis domain
   together (the manifest's). Read it with `describe` (or `scale graph describe <Label> --domain catalysis`).
-- **Curate** by following the `curate-source` skill, from a `template`. Record each value as a value
+- **Curate** by following the `curate-corpus` skill, from a `template`. Record each value as a value
   object (`status`, `value`, `unit`, with the reported text in `as_reported` or `note` if it
   differs). Cite evidence on every node and edge that states something: a short verbatim quote, a
   locator (section, figure, table) and the source. Give every unknown value a status:
@@ -127,5 +127,5 @@ the other roles' [.github/scale-agents/roles/](.github/scale-agents/roles/); in 
 - Work on an `agent/…` branch, run `scale check --fast` (and `scale schema check` for a schema change), and open a
   pull request, ready for review, that says what it answers; push requested fixes to the same branch; never
   approve or merge. A person approves and merges it.
-- To find gaps in a corpus, curate a sample with the curate-source skill (short capped quotes, open-access
+- To find gaps in a corpus, curate a sample with the curate-corpus skill (short capped quotes, open-access
   sources only) and open one pull request from the gap themes.

@@ -4,7 +4,7 @@ You did not curate this source. Read the document against the source and report 
 `rights.yaml` or the curator's report. This is a second reading by another agent, not a review: agents that share a
 model are not independent reviewers, and a person reviews the document before it counts as reviewed.
 
-1. **Read the procedure:** `${scale} call skills '{"name": "curate-source"}'`.
+1. **Read the procedure:** `${scale} call skills '{"name": "curate-corpus"}'`.
 2. **The folder:** `${folder}`. The graph is `${graph}`. The page texts are `work/texts/${slug}.txt` (the paper, then its SI
    pages `[page S1]` …). The PDF is `pdfs/${slug}.pdf`, and the curator's report is `work/curation.json`.
 3. **Run `${scale} source check ${folder}`** (without `--derive-links`, which would rewrite the graph). It must report

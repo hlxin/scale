@@ -11,7 +11,7 @@ import sys
 from typing import Any, TextIO
 
 from . import __version__
-from .api import TOOLS, ScaleToolkit
+from .api import SKILL_ALIASES, TOOLS, ScaleToolkit
 
 SUPPORTED_VERSIONS = ("2025-06-18", "2025-03-26", "2024-11-05")
 INSTRUCTIONS = (
@@ -75,6 +75,8 @@ class MCPServer:
         if method == "prompts/get":
             name = params.get("name")
             skills = self.toolkit._skills()
+            if name not in skills and SKILL_ALIASES.get(name) in skills:     # a skill merged into another
+                name = SKILL_ALIASES[name]
             if name not in skills:
                 raise _RPCError(-32602, f"unknown prompt {name!r}")
             return {"description": f"SCALE skill {name} {skills[name]['version']}",

@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- **Fewer skills, named for what they act on.** `curate-source` and `curate-dataset` are merged into **`curate-corpus`**
+  (version 0.3.0): one skill curates one publication, one data file (its section *A data file*) or a frozen corpus of
+  many sources (a run through subagents with a second reading, `references/runs.md` and `scripts/curate_run.py`).
+  `scale call skills` and the MCP prompts still find it by the old names (`renamed_from`). The literature skill
+  `paper-acquisition` becomes **`index-sources`** (version 4.0.0), listed in `scale-release.yaml`; `curate-topic` is
+  replaced by the request table in `skills/README.md`. What is catalysis's, not the skills' (the topic vocabulary,
+  the CO2 reduction paper index's filter and query tool) moves to `graphs/catal-commons/literature/`; index-sources
+  reads its vocabulary from a path, `$INDEX_SOURCES_VOCAB`, the project's `.scripts/vocab.json` or that file.
 - **Schema 0.5.2 (additive): a product reported as a lump.** Answers #39. `ProductLump` (provisional) records a
   product the source reports as a fraction, a class or a carbon-number window rather than a species (C5-C11, gasoline
   range, "C2+"), with `SUBSET_OF` for a lump inside a wider one; `HAS_OUTPUT.to` and `PRODUCES.to` accept it (17 targets

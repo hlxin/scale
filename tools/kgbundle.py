@@ -1288,7 +1288,7 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
     for n in kept_nodes:
         if n["label"] == "Publication":
             lic[n["props"].get("license", "not stated")] = lic.get(n["props"].get("license", "not stated"), 0) + 1
-    producer = {"agent": "SCALE curation agents (curate-source skill)", "models": [], "prompt_version": "curate-source"}
+    producer = {"agent": "SCALE curation agents (curate-corpus skill)", "models": [], "prompt_version": "curate-corpus"}
     if shipped:
         n_off = sum(1 for x in kept_nodes + list(links.values()) for ev in x["props"].get("_evidence") or []
                     if "char_start" in ev["locator"])

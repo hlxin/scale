@@ -104,7 +104,7 @@ TOOLS: list[dict] = [
                        "open-access PDF only when it carries an open licence; reads a PDF's page texts (or takes the text); "
                        "writes a working folder with the graph to fill (pinned schema, Source record, stewardship), the "
                        "source's rights, the page texts and BRIEF.md (what to curate and how). Then fill the graph "
-                       "following the curate-source skill, check it with scale_source_check, and finish with "
+                       "following the curate-corpus skill, check it with scale_source_check, and finish with "
                        "scale_source_finish.",
         "input_schema": {"type": "object", "properties": {
             "doi": {"type": "string", "description": "The source's DOI (a DOI, a doi: CURIE or a doi.org link)."},
@@ -190,16 +190,19 @@ TOOLS: list[dict] = [
     },
     {
         "name": "scale_skills",
-        "description": "List the SCALE skills (versioned procedures: curate-source, query-graph, evolve-schema, "
-                       "triage-feedback, scan-conflicts, map-coverage, curate-dataset, export-graph), or return one "
-                       "skill's text, or one of the reference files its text points to (e.g. curate-source's "
-                       "references/recipes.md).",
+        "description": "List the SCALE skills (versioned procedures: index-sources, curate-corpus, query-graph, "
+                       "map-coverage, scan-conflicts, export-graph, evolve-schema, triage-feedback), or return one "
+                       "skill's text, or one of the reference files its text points to (e.g. curate-corpus's "
+                       "references/recipes.md). curate-source and curate-dataset name curate-corpus.",
         "input_schema": {"type": "object", "properties": {
             "name": {"type": "string", "description": "A skill's name (default: list them)."},
             "reference": {"type": "string", "description": "A file of the skill's folder as the skill lists it in "
                                                            "`references` (e.g. references/recipes.md)."}}},
     },
 ]
+
+#: Skills merged into another one: the old name still finds the skill it went into (scale_skills, MCP prompts/get).
+SKILL_ALIASES = {"curate-source": "curate-corpus", "curate-dataset": "curate-corpus"}
 
 HUMAN_ONLY = {
     "approve a pull request (one human reviewer approves every change; governance/GOVERNANCE.md)":
@@ -413,7 +416,7 @@ class ScaleToolkit:
             "capabilities": inventory,
             "human_only_actions": HUMAN_ONLY,
             "updates": tool_status(self.workspace / ".cache" if self.workspace.is_dir() else None),
-            "next_steps": ["scale_skills curate-source (curating) or query-graph (asking)",
+            "next_steps": ["scale_skills curate-corpus (curating) or query-graph (asking)",
                            "scale_describe <Label> --domain before writing records or plans",
                            "scale_template for a valid starting document; scale_validate after every edit",
                            "scale_example to try scale_query on a public example"],
@@ -605,15 +608,17 @@ class ScaleToolkit:
         if not name:
             return {"skills": [{"name": n, "version": s["version"], "description": s["description"],
                                 "references": sorted(s["references"])} for n, s in skills.items()]}
+        renamed = {"renamed_from": name} if name not in skills and SKILL_ALIASES.get(name) in skills else {}
+        name = SKILL_ALIASES[name] if renamed else name
         if name not in skills:
             return {"error": f"no skill {name!r}", "available": sorted(skills)}
         s = skills[name]
         if reference is not None:              # only a file the skill's folder holds, named as listed
             if reference not in s["references"]:
                 return {"error": f"skill {name!r} has no reference {reference!r}", "available": sorted(s["references"])}
-            return {"name": name, "version": s["version"], "reference": reference,
+            return {"name": name, **renamed, "version": s["version"], "reference": reference,
                     "text": s["references"][reference].read_text(encoding="utf-8")}
-        return {"name": name, "version": s["version"], "text": s["text"], "references": sorted(s["references"])}
+        return {"name": name, **renamed, "version": s["version"], "text": s["text"], "references": sorted(s["references"])}
 
 
 def tools(**kwargs) -> ScaleToolkit:

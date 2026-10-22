@@ -41,7 +41,7 @@ three hours unless its report arrives first. A subagent that stopped without rep
 
 - One subagent per source and per role. Launch a batch's subagents in one message, each with the prompt "Read
   <prompt> and follow it exactly." A curator needs no other context: the prompt names the folder, the procedure
-  (`scale call skills '{"name": "curate-source"}'`), the commands and the report to write.
+  (`scale call skills '{"name": "curate-corpus"}'`), the commands and the report to write.
 - Start at 5. Go up to 10–15 after clean batches, and back to 5 after failures, for long papers, or for papers with
   much SI. Never more than 15: Claude Code runs at most 20 subagents at once by default
   (`CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS`), and a launch beyond that is refused, not queued.
@@ -58,7 +58,7 @@ three hours unless its report arrives first. A subagent that stopped without rep
 
 ## The hand-off to the paper index
 
-For a manifest frozen in a paper-acquisition project, `status --apply` appends one line per settled source to
+For a manifest frozen in an index-sources project, `status --apply` appends one line per settled source to
 `<project>/.scripts/<topic>/kg/<run name>/extraction_status.jsonl`:
 
 ```json
@@ -66,5 +66,5 @@ For a manifest frozen in a paper-acquisition project, `status --apply` appends o
  "nodes": 18, "edges": 25, "date": "2026-10-19", "note": "scale-catal document: <folder>"}
 ```
 
-`status` is `extracted`, `no_data`, `rejected` or `failed`. paper-acquisition's next export reads these lines into its
+`status` is `extracted`, `no_data`, `rejected` or `failed`. index-sources' next export reads these lines into its
 `extractions` table and the index's Extracted column.

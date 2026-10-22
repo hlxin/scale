@@ -1,4 +1,4 @@
-# paper-acquisition — README
+# index-sources — README
 
 A Claude Code skill that indexes the literature of a topic — papers, preprints,
 patents and datasets — into a filterable database, and downloads the papers you choose. Ask Claude in plain words

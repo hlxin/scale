@@ -6,7 +6,8 @@ versioned skill ([`skills/`](../skills)). Agents do the work; people decide.
 
 | work | done by | with | what the tools check |
 |---|---|---|---|
-| curate a source into a scale-catal document | a person or an agent | [curate-source](../skills/curate-source/SKILL.md); `scale_template`, `scale_describe`, `scale_validate` | validity, checklist conformance, verbatim quotes (`--source-text`), REPORTED_IN backed by evidence |
+| find and index the sources of a topic, and freeze a corpus | a person or an agent | [index-sources](../skills/index-sources/SKILL.md) (its scripts) | `scale corpus check` on the frozen corpus |
+| curate a source, a data file or a corpus into scale-catal documents | a person or an agent | [curate-corpus](../skills/curate-corpus/SKILL.md); `scale_template`, `scale_describe`, `scale_validate` | validity, checklist conformance, verbatim quotes (`--source-text`), REPORTED_IN backed by evidence |
 | answer a question | a person or an agent | [query-graph](../skills/query-graph/SKILL.md); `scale_query`, `scale_search` | the plan's labels and properties exist (else `schema_gap`); values are returned as reported; absences are typed |
 | make a schema change | an agent (or a person) | [evolve-schema](../skills/evolve-schema/SKILL.md); `scale schema diff \| bump \| check` | the semantic diff and its kind (breaking or additive), the version raised by the rule, the base version frozen, the migration step (and rule, if breaking), a test for what is added, a CHANGELOG line; the competency questions (`scale check`) |
 | triage community feedback | an agent (rules or any external system) | [triage-feedback](../skills/triage-feedback/SKILL.md); `scale triage` | proposals are validated; none may contain a decision |

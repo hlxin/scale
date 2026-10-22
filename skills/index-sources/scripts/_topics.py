@@ -1,7 +1,8 @@
 """Topic vocabulary: each paper's Topic A/B/C (its three main topics) and Related topics (library module).
 
-The vocabulary ships with the skill (vocab/catalysis.json). A project can add or override terms in
-.scripts/vocab_custom.json (same shape: {"terms": [{"id", "label", "name", "facet", "synonyms", "related", "weight"}]}).
+The vocabulary is the domain's, not the skill's (vocab_path: a path given, $INDEX_SOURCES_VOCAB, the project's
+.scripts/vocab.json, else SCALE's catalysis vocabulary in graphs/catal-commons/literature/vocabulary.json when the
+skill runs from a checkout of hlxin/scale). A project can add or override terms in .scripts/vocab_custom.json (same shape: {"terms": [{"id", "label", "name", "facet", "synonyms", "related", "weight"}]}).
 
 Deterministic assignment (no model): synonyms are matched on word tokens of the title (x3), keywords (x2) and abstract
 (x1); a longer synonym consumes its words so "electrochemical ammonia synthesis" counts for NRR, not for thermal
@@ -10,13 +11,14 @@ matches plus the vocabulary neighbours of A/B/C (CO2RR -> CORR, OER -> ORR ...).
 Claude / API screening assigns A/B/C itself from the same vocabulary; Related topics are completed the same way.
 """
 import json
+import os
 import re
 from pathlib import Path
 
 from _common import clean_text, json_read
 
 SKILL = Path(__file__).resolve().parents[1]
-BUNDLED = SKILL / "vocab" / "catalysis.json"
+COMMONS = SKILL.parents[1] / "graphs" / "catal-commons" / "literature" / "vocabulary.json"   # SCALE's catalysis one
 FIELD_W = {"title": 3.0, "keywords": 2.0, "abstract": 1.0}
 MIN_SCORE = 1.0
 MAX_RELATED = 6
@@ -54,9 +56,20 @@ def _tok_match(want, got, last):
     return last and len(w) >= 4 and g.startswith(w)                       # frameworks, zeolites, alloying
 
 
+def vocab_path(proj=None, path=None):
+    """The topic vocabulary to use: `path`, else $INDEX_SOURCES_VOCAB, else the project's .scripts/vocab.json, else the
+    catalysis vocabulary of the SCALE checkout the skill runs from."""
+    for cand in (path, os.environ.get("INDEX_SOURCES_VOCAB"), proj.scr / "vocab.json" if proj is not None else None,
+                 COMMONS):
+        if cand and Path(cand).is_file():
+            return Path(cand)
+    raise FileNotFoundError("no topic vocabulary: put one at .scripts/vocab.json or name it in INDEX_SOURCES_VOCAB "
+                            "(SCALE's catalysis vocabulary: graphs/catal-commons/literature/vocabulary.json)")
+
+
 class Vocab:
     def __init__(self, proj=None, path=None):
-        data = json.loads(Path(path or BUNDLED).read_text())
+        data = json.loads(vocab_path(proj, path).read_text())
         self.name = data.get("name", "vocabulary")
         terms = {t["id"]: dict(t) for t in data["terms"]}
         order = [t["id"] for t in data["terms"]]

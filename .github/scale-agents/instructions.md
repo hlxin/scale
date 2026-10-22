@@ -24,7 +24,7 @@ Each role has its own responsibility; together they produce one **change set**, 
 | role | responsibility | follows |
 |---|---|---|
 | **you, the discovery strategist** | frames the use case from the event, decides, plans and coordinates the revision, writes the reply or hands the change set to the systems engineer | this file, `AGENTS.md`, `skills/triage-feedback` |
-| `data-scientist` | assembles the relevant sources and proposes the corrections to corpus records or the changes to schema definitions; answers questions from the graph | `skills/curate-source`, `evolve-schema`, `query-graph` |
+| `data-scientist` | assembles the relevant sources and proposes the corrections to corpus records or the changes to schema definitions; answers questions from the graph | `skills/curate-corpus`, `evolve-schema`, `query-graph` |
 | `protocol-compiler` | translates the validation requirements into explicit procedures and tests, each with its expected outcome | `skills/evolve-schema`, `docs/querying.md` |
 | `evidence-verifier` | assesses the scientific support, examines the counterexamples, evaluates compatibility and the effects on existing records and queries; changes nothing | the sources, the checks, the request |
 | `systems-engineer` | packages the revision: the version raised, the migration step, the CHANGELOG, the checks, the pull request with the change set | `AGENTS.md`, `skills/evolve-schema` |

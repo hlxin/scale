@@ -1,12 +1,24 @@
-# CO2 reduction driven by electricity: paper database
+# Catal commons: the literature
+
+What catalysis brings to SCALE's general skills, kept with the commons rather than in the skills:
+
+| File | What it is |
+|---|---|
+| [`vocabulary.json`](vocabulary.json) | the catalysis topic vocabulary (125 terms in four facets) that [`index-sources`](../../../skills/index-sources/SKILL.md) assigns Topic A/B/C from, when it runs from this repository ([topics.md](../../../skills/index-sources/references/topics.md)) |
+| [`co2-reduction-electricity.filter.json`](co2-reduction-electricity.filter.json) | the saved filter that selects the CO2 reduction database below from the catalysis index |
+| [`consult.py`](consult.py), [`CONSULT.md`](CONSULT.md) | a read-only query tool for the catalysis index and its CO2 subset, and its guide |
+
+The databases themselves are never committed (`*.db` and `*.db.gz` here are git-ignored).
+
+## CO2 reduction driven by electricity: paper database
 
 A SQLite database of **23,631 papers on CO2 reduction driven by electricity**, taken from a whole-field catalysis
-index (2,313,134 records on 2026-10-20) built on 2026-10-13/14 with the [`paper-acquisition`](../skills/paper-acquisition/)
-skill and updated in place since.
+index (2,313,134 records on 2026-10-20) built on 2026-10-13/14 with the [`index-sources`](../../../skills/index-sources/)
+skill (then named paper-acquisition) and updated in place since.
 It is an index of records, not a corpus. This folder holds its documentation and a query tool; the database itself
 is shared outside git.
 
-## Where the database is
+### Where the database is
 
 The file is not in this repository, for two reasons. Every new version of it would stay in the history of every
 clone (about 37 MB each). And its abstracts keep their papers' own licences, some of them non-commercial or
@@ -18,24 +30,24 @@ no-derivatives (CC BY-NC-ND), which a licence rule in `REUSE.toml` cannot state 
 
 Put the unpacked file in this folder (or name it in `CATALYSIS_PAPERS_DB`) and [`consult.py`](consult.py) finds it.
 
-## Keeping it current
+### Keeping it current
 
-The CO2 database is a saved filter of the catalysis database (`papers.db`), which evolves: every paper-acquisition
+The CO2 database is a saved filter of the catalysis database (`papers.db`), which evolves: every index-sources
 step updates it in place and records what changed. The filter's definition is
 [`co2-reduction-electricity.filter.json`](co2-reduction-electricity.filter.json): concept CO2 reduction × driver
 (electrochemical, plasma, electrified heating), strict and broad, with errata, notices and retracted papers left
 out. Stored in `papers.db`, it re-runs after every update, and the CO2 file is exported from it:
 
 ```bash
-S=skills/paper-acquisition/scripts
-python3 -I $S/filters.py define --name co2-reduction-electricity --file catalysis-index/co2-reduction-electricity.filter.json
+S=skills/index-sources/scripts
+python3 -I $S/filters.py define --name co2-reduction-electricity --file graphs/catal-commons/literature/co2-reduction-electricity.filter.json
 python3 -I $S/filters.py export --name co2-reduction-electricity --out co2-reduction-electricity.db --public
 ```
 
 `define` is needed once per database; `export --public` keeps abstracts only for OA and OA+ND papers, as in the shared
 file.
 
-## What is in it
+### What is in it
 
 Papers on the reduction of CO2 (electrochemical, plasma, electrified heating) found in 24 open databases (OpenAlex,
 Crossref, Semantic Scholar, Europe PMC, OpenAIRE, PubMed Central, arXiv, OSTI, DOAJ, HAL, Zenodo, DataCite, J-STAGE,
@@ -70,10 +82,10 @@ components 3,326 · PubMed Central 2,955 · data deposits such as CCDC structure
 993 · MDPI CDN 140 · Figshare/DataCite/other 157) and in the `si` column ("Available (n deposits)"). SI that only sits
 on walled publisher sites (Wiley, RSC, ACS and IOP pages) is not listed; it is found when a paper is downloaded.
 
-## Tables
+### Tables
 
-Same layout as the paper-acquisition `papers.db` (column definitions in the `about` table and in
-[`references/database.md`](../skills/paper-acquisition/references/database.md)):
+Same layout as the index-sources `papers.db` (column definitions in the `about` table and in
+[`references/database.md`](../../../skills/index-sources/references/database.md)):
 
 | Table | Contents |
 |---|---|
@@ -105,7 +117,7 @@ abstract; consult.py's text matching on this copy sees abstracts only for OA pap
 `papers.downloaded` and `files` record which papers had their PDF (and their SI, where found) in the local corpus
 when the file was built. The PDFs are not shared.
 
-## Limits
+### Limits
 
 - The full catalysis database (2,313,134 records, 12.9 GB) is not shared here either.
 - Keyed databases were not searched (Scopus, Web of Science, CORE, Lens, EPO, Springer Nature, IEEE Xplore, NASA

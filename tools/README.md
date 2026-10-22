@@ -48,8 +48,8 @@ repository to a new schema version.
 
 ## Skills
 
-[`skills/`](../skills/), at the repository root, holds the procedures agents follow: `curate-source`, `query-graph`, `evolve-schema`,
-`triage-feedback`, `scan-conflicts`, `map-coverage`, `curate-dataset` and `export-graph`. Each `SKILL.md`
+[`skills/`](../skills/), at the repository root, holds the procedures agents follow: `index-sources`, `curate-corpus`, `query-graph`,
+`map-coverage`, `scan-conflicts`, `export-graph`, `evolve-schema` and `triage-feedback` ([skills/README.md](../skills/README.md)). Each `SKILL.md`
 carries a version. Releases list the skills in
 their manifest (`skills:`, `skills/…`); `scale skills install` installs a release's skills (the
 head's while no release is built) into an agent, and `scale call skills` (or MCP prompts) serves them.

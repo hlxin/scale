@@ -354,7 +354,7 @@ def rule_proposal(c: dict) -> dict:
               "No schema change; curation guidance updated."),
             O("C", "defer_discussion", "Move to a discussion to collect more use cases before modeling.", "No change now.")],
         "extraction_error": [
-            O("A", "re_extract", f"Re-check {recs} against the source and correct the record (skills/curate-source).",
+            O("A", "re_extract", f"Re-check {recs} against the source and correct the record (skills/curate-corpus).",
               "Record values change; the documents' tests updated in the same PR."),
             O("B", "not_an_error", "Explain why the recorded value matches the source (quote and locator).", "No change."),
             O("C", "source_ambiguity", "Record the ambiguity as ambiguous_in_source and keep both readings.", "Record gains explicit missingness (missing_reason ambiguous_in_source).")],

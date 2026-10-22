@@ -6,8 +6,8 @@
     scale source finish DIR [--public] [--bundle] [--title TITLE]
 
 ``start`` is deterministic and writes a working folder; the reading itself (what the source reports, as records and
-links with verbatim evidence) is done by the agent that runs it, following the curate-source skill
-(skills/curate-source/SKILL.md); ``check`` holds the agent's graph to the schema, the source text and the
+links with verbatim evidence) is done by the agent that runs it, following the curate-corpus skill
+(skills/curate-corpus/SKILL.md); ``check`` holds the agent's graph to the schema, the source text and the
 copyright cap; ``finish`` makes what can be shared.
 
 **start.** A DOI is resolved through Crossref (title, authors, year, venue, type, licence). With a contact address
@@ -169,8 +169,8 @@ The source: {meta.get('title') or '(title not resolved)'}{f" ({meta['year']})" i
 {f"DOI {meta['doi']}, " if meta.get('doi') else ''}{meta.get('venue') or ''}. Rights: **{meta['rights_class']}**
 ({'; '.join(meta.get('licences') or []) or 'no licence found: treated as in copyright'}).
 
-Fill `{graph}` under {spec["schema"]} {version}{f", following the {domain} checklist" if domain else ''}, as the curate-source
-skill says (skills/curate-source/SKILL.md). In short:
+Fill `{graph}` under {spec["schema"]} {version}{f", following the {domain} checklist" if domain else ''}, as the curate-corpus
+skill says (skills/curate-corpus/SKILL.md). In short:
 
 1. Read the page texts{f" (`{text_file}`, each page headed `[page N]`)" if text_file else " (none extracted: give --pdf or --text, or read the source yourself)"}
    and record what the source reports: one record per entity, one link per relationship, each with its evidence

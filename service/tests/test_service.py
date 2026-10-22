@@ -78,7 +78,7 @@ def test_the_model_curates_through_the_tools_until_the_check_passes(tmp_path):
     assert out["check"]["ok"] and out["summary"] == "One claim curated." and out["tokens"] == 500
     assert [line.split()[0] for line in log] == ["read_pages", "describe", "upsert", "check"]
     first = model.seen[0]
-    assert "curate-source" not in first["system"][0]["text"][:3] and "# Curate" in first["system"][0]["text"]
+    assert "curate-corpus" not in first["system"][0]["text"][:3] and "# Curate" in first["system"][0]["text"]
     assert "[page 2]" in model.seen[1]["messages"][2]["content"][0]["content"]       # the page texts reached the model
     doc = load_doc(w / res["graph"])
     assert any(e["type"] == "REPORTED_IN" and e["source"] == f"{prefix}/claim/1" for e in doc["links"])
