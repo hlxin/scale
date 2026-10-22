@@ -102,12 +102,16 @@ Read the user's words first. "Open access" means OA and OA+ND. "Free" or "anythi
    remembered preference is "(Recommended)"; otherwise recommend OA and OA+ND.
 2. **How to decide relevance and topics:** Claude reads every title and abstract (Recommended) · an
    OpenAI-compatible API you host (base URL and model) · a keyword list · no screening.
-3. **For curation, which papers and how:** every downloaded in-scope research paper (Recommended), or a rule
-   (relevance ≥ 4, some Topic A/B/C subjects, a year range, some document or access types). The pilot of 5 sources
-   always comes first.
+3. **For curation, which papers:** every downloaded in-scope research paper (Recommended), a rule (relevance ≥ 4,
+   some Topic A/B/C subjects, a year range, some document or access types), or the papers a question finds in the
+   downloaded papers' text (paper-acquisition's vector store). The pilot of 5 sources always comes first.
+4. **For curation, who curates and who reads each document a second time:** Opus curates, Sonnet reads
+   (Recommended) · Sonnet curates, Opus reads · Opus curates, a model behind an API you host reads (base URL and
+   model) · Opus curates, no second reading (not recommended). Other mixes (Fable, Haiku) through Other.
 
 Bad questions: batch sizes, parallelism, retries, file layout, which internal stage to use, and any schema question.
-If it is still unclear after 3 questions, state your best reading in one sentence and ask yes / no / different.
+If it is still unclear after these questions (at most 4), state your best reading in one sentence and ask yes / no /
+different.
 
 ## Step 5 — ONE consolidated confirmation
 
@@ -121,7 +125,8 @@ Index:    every paper, preprint, patent and dataset from the automated sources; 
   or Update: everything new since <last run − 30 days>, with citation chasing; access, retractions and preprints rechecked
 Download: <access types>; you see the numbers before anything is downloaded   (or: no download now)
 Corpus:   <rule>, frozen as publications/<slug>/corpora/<name>/sources.json (scale corpus check)
-Curate:   scale-catal documents under SCALE's catalysis schema, one per source, by curate-source; a pilot of 5 first
+Curate:   scale-catal documents under SCALE's catalysis schema, one per source, by curate-source; a pilot of 5 first;
+          curated by <model>, read a second time by <model | API model | no one (not recommended)>
           → publications/<slug>/curation/<run>/ (documents, reports, a local graph to query)
 Time:     index minutes to hours; open downloads hours; paywalled days; curation about 3-4 subagent calls per source
 ```
@@ -151,10 +156,13 @@ Time:     index minutes to hours; open downloads hours; paywalled days; curation
    ```
    Skill(skill="curate-corpus",
          args="corpus=publications/<slug>/corpora/<name>/sources.json run=publications/<slug>/curation/<run> \
+               curator=<opus|sonnet|fable|haiku> reviewer=<model|api:<model>|skip> [api_base_url=<url>] \
                wrapper_confirmed=true [ids=<paper ids>] [version=<schema version>]")
    ```
 
-   When it reports, run paper-acquisition's `export.py --topic <slug>` so the index's Extracted column shows the run.
+   Papers a question finds: `python3 -I ${CLAUDE_SKILL_DIR}/../paper-acquisition/scripts/vectors.py search
+   "<question>" --by-paper --k 50 --ids-out <file>`, then `ids=` from that file. Recording the run (`status --apply`)
+   updates the index's Extracted column itself.
 
 4. **Ask, map, compare, export.** Follow SCALE's procedure for the request: `scale call skills '{"name":
    "query-graph"}'` (or `map-coverage`, `scan-conflicts`, `export-graph`). Run it over the run's local graph, which

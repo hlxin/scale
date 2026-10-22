@@ -307,6 +307,15 @@ def embedders_of(con):
     return json.loads(about(con).get("embedders") or json.dumps([DEFAULT_EMBEDDER]))
 
 
+def default_embedder(con):
+    """The embedder a search uses when none is named: a neural one that has every passage (its last pass reached the
+    last passage), else the first one the store keeps."""
+    names, info = embedders_of(con), about(con)
+    last = con.execute("SELECT MAX(rowid) FROM passages").fetchone()[0] or 0
+    full = [e for e in names if e != DEFAULT_EMBEDDER and int(info.get(f"checked:{e}") or 0) >= last]
+    return (full or names)[0]
+
+
 def set_about(con, **kv):
     with con:
         con.executemany("INSERT OR REPLACE INTO about VALUES (?,?)",
@@ -562,7 +571,7 @@ def search(proj, query, k=10, mode="hybrid", embedder=None, allowed=None, depth=
     joined to their records in the index."""
     np = _np()
     con = open_store(proj)
-    emb_id = embedder or embedders_of(con)[0]
+    emb_id = embedder or default_embedder(con)
     cos, kw = {}, {}
     if mode in ("hybrid", "vector"):
         q = encode(_embedder(emb_id), [query], query=True)[0].astype(np.float32)
@@ -606,6 +615,51 @@ def search(proj, query, k=10, mode="hybrid", embedder=None, allowed=None, depth=
     _join_records(proj, out)
     return {"query": query, "mode": mode, "embedder": emb_id, "hits": out,
             "reference_passages_left_out": None if references else left_out}
+
+
+def by_paper(proj, query, k=10, mode="hybrid", embedder=None, allowed=None, per_paper=3, references=False):
+    """The `k` best papers for `query`: each paper scored by its best passage, with its best `per_paper` passages,
+    joined to its record — the papers to curate for a question."""
+    res = search(proj, query, k=max(200, k * 40), mode=mode, embedder=embedder, allowed=allowed,
+                 references=references)
+    papers = {}
+    for h in res["hits"]:
+        p = papers.setdefault(h["paper_id"], {"paper_id": h["paper_id"], "score": h["score"], "passages": [],
+                                              **{x: h.get(x) for x in ("title", "year", "venue", "doi", "url",
+                                                                       "access_type")}})
+        if len(p["passages"]) < per_paper:
+            p["passages"].append({x: h[x] for x in ("passage", "page", "score", "text")})
+    best = sorted(papers.values(), key=lambda p: (-p["score"], p["paper_id"]))[:k]
+    return {"query": query, "mode": mode, "embedder": res["embedder"], "papers": best}
+
+
+def paper_text(proj, ref):
+    """A paper as the store holds it, found by ID or DOI: its record, the files it was read from and its passages in
+    page order (the text to read for curation, page by page)."""
+    pid = int(ref) if str(ref).isdigit() else None
+    if pid is None and proj.db.exists():
+        con = sqlite3.connect(f"file:{proj.db}?mode=ro", uri=True)
+        r = con.execute("SELECT paper_id FROM identifiers WHERE scheme = 'doi' AND value = ? COLLATE NOCASE",
+                        (str(ref).strip().lower().removeprefix("https://doi.org/"),)).fetchone()
+        con.close()
+        pid = r[0] if r else None
+    if pid is None:
+        raise RuntimeError(f"no paper with ID or DOI {ref!r} in the index")
+    con = open_store(proj)
+    info = con.execute("SELECT pdf, si_files, pages, pages_without_text, passages, read_at, note FROM papers WHERE "
+                       "paper_id = ?", (pid,)).fetchone()
+    if not info:
+        con.close()
+        raise RuntimeError(f"paper {pid} is not in the vector store (not downloaded, out of scope, or not read yet: "
+                           f"vectors.py update)")
+    rows = con.execute("SELECT id, page, k, text FROM passages WHERE paper_id = ? ORDER BY rowid", (pid,)).fetchall()
+    con.close()
+    out = {"paper_id": pid, **dict(zip(("pdf", "si_files", "pages", "pages_without_text", "passages", "read_at", "note"),
+                                       info)),
+           "text": [{"passage": r[0], "page": r[1], "text": r[3], "reference_list": is_reference_list(r[3])}
+                    for r in rows]}
+    _join_records(proj, [out])
+    return out
 
 
 def _join_records(proj, hits):

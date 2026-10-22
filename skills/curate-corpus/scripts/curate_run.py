@@ -1,9 +1,12 @@
 """Curate a frozen corpus into scale-catal documents: one SCALE working folder per source, curated by a subagent that
 follows the curate-source skill, read a second time by another, and checked by SCALE's tools.
 
-  python3 -I curate_run.py prepare --corpus <sources.json> --run <dir> [--ids 12,57 | --ids-file F] [--max 50]
+  python3 -I curate_run.py prepare --corpus <sources.json> --run <dir> --curator opus|sonnet|fable|haiku
+                                   --reviewer opus|sonnet|fable|haiku|api:<model>|skip [--api-base-url <url>]
+                                   [--ids 12,57 | --ids-file F] [--max 50]
                                    [--contributor <id>] [--project <id>] [--version <v>] [--no-si] [--scale "<command>"]
   python3 -I curate_run.py next    --run <dir> --role curate|review|fix [--n 5]
+  python3 -I curate_run.py review-api --run <dir> [--n 5]      (the second reading by a model behind an API)
   python3 -I curate_run.py status  --run <dir> [--apply]
   python3 -I curate_run.py finish  --run <dir> [--public] [--bundle]
   python3 -I curate_run.py assemble --run <dir> [--out <folder>]        (a local graph of the run, to query)
@@ -15,8 +18,16 @@ prepare   checks the manifest with `scale corpus check`, picks its included sour
           text is appended to the page texts as pages [page S1], [page S2] …: supporting information belongs to its
           paper's Source. Re-running it skips folders that exist.
 next      writes the prompt of the next N sources for a role (from ../templates) and prints one JSON line per source:
-          {"id", "role", "prompt"}. Launch one subagent per line. A handed-out source is not handed out again for
-          3 hours unless its report arrives.
+          {"id", "role", "prompt", "model"}. Launch one subagent per line, with that model. A handed-out source is not
+          handed out again for 3 hours unless its report arrives.
+          Models (asked before prepare): --curator is the model that curates and fixes; --reviewer the one that reads
+          each document a second time — another Claude model (recommended: not the curator's), api:<model> (read by
+          review-api through an OpenAI-compatible endpoint, --api-base-url; key in ~/.paper-acquisition/keys.txt or
+          an environment variable), or skip (not recommended: a document then passes on SCALE's checks alone, and the
+          index says it was not read a second time).
+review-api  the second reading of the next N curated sources by the API model: the document, the curator's report
+          and the page texts go to the model with the reading's checklist; its verdict is written to
+          work/review.json as a subagent's would be.
 status    runs `scale source check <folder>` on every folder (cached while the graph is unchanged), reads the
           curator's report (work/curation.json) and the second reading (work/review.json), and gives each source a
           state; --apply records the settled ones in state.jsonl and hands their result to the paper index
@@ -55,6 +66,8 @@ LEASE_S = 3 * 3600
 MAX_FIXES = 3
 INCLUDED = ("in_scope", "included")
 SETTLED = {"passed", "rejected", "failed"}
+MODELS = ("opus", "sonnet", "fable", "haiku")        # Claude models a subagent can run on
+API_CHARS = 300000                                   # page-text characters sent to an API reader at most
 
 
 # ------------------------------------------------------------------ small helpers
@@ -177,6 +190,8 @@ class Run:
         if not self.cfg:
             die(f"{self.d}: no run.json (start the run with: curate_run.py prepare --corpus … --run {self.d})")
         self.cmd = self.cfg["scale"]
+        self.models = self.cfg.get("models") or {}
+        self.skip_review = self.models.get("reviewer") == "skip"
 
     def folder(self, i):
         return self.d / "sources" / i
@@ -252,6 +267,8 @@ class Run:
         if review_current and review.get("verdict") == "needs_fix":
             return ("failed", "issues remain after 3 fixes") if out_of_fixes else \
                 ("needs_fix", f"{len(review.get('issues') or [])} issues from the second reading")
+        if self.skip_review:               # chosen at prepare: the check alone settles it
+            return "passed", (read_json(cur) or {}).get("result") or "curated"
         return "curated", "waiting for the second reading"
 
 
@@ -282,6 +299,20 @@ def cmd_prepare(a):
         "si": not a.no_si, "sources": {}}
     if cfg["corpus"] != str(manifest_path):
         die(f"{run_dir} curates {cfg['corpus']}; give another --run for another corpus")
+    models = cfg.setdefault("models", {})
+    if a.curator:
+        models["curator"] = a.curator
+    if a.reviewer:
+        models["reviewer"] = a.reviewer
+    if a.api_base_url:
+        models["api"] = {"base_url": a.api_base_url, "key_name": a.api_key_name, "key_env": a.api_key_env}
+    if models.get("curator") not in MODELS or not (models.get("reviewer") in MODELS + ("skip",) or
+                                                   str(models.get("reviewer")).startswith("api:")):
+        die("ask first, then give both: --curator " + "|".join(MODELS) + " (the model that curates; opus is "
+            "recommended) and --reviewer " + "|".join(MODELS) + "|api:<model>|skip (who reads each document a second "
+            "time: recommended, a model other than the curator's; skip is not recommended)")
+    if str(models["reviewer"]).startswith("api:") and not (models.get("api") or {}).get("base_url"):
+        die("--reviewer api:<model> needs --api-base-url (an OpenAI-compatible endpoint)")
     root = project_root(manifest_path.parent)
     cfg["project_root"] = str(root) if root else None
     picked = []
@@ -348,6 +379,7 @@ def cmd_prepare(a):
     write_json(run_dir / "run.json", cfg)
     print(json.dumps({"run": str(run_dir), "picked": len(picked), "started": started, "already_there": skipped,
                       "notes": dict(notes), "schema_version": cfg.get("schema_version"),
+                      "models": {k: v for k, v in models.items() if k != "api"},
                       "next": f"curate_run.py next --run {run_dir} --role curate --n 5"}))
 
 
@@ -358,6 +390,12 @@ def bullet(items, empty):
 
 def cmd_next(a):
     run = Run(a.run)
+    if a.role == "review" and (run.skip_review or str(run.models.get("reviewer")).startswith("api:")):
+        print(json.dumps({"role": "review", "handed_out": 0, "reviewer": run.models.get("reviewer"),
+                          "next": "nothing: this run skips the second reading (not recommended)" if run.skip_review
+                          else f"curate_run.py review-api --run {run.d} --n {a.n}"}))
+        return
+    model = run.models.get("reviewer" if a.role == "review" else "curator")
     hand = run.handouts()
     t = time.time()
     tpl = Template((TEMPLATES / f"{a.role}.md").read_text(encoding="utf-8"))
@@ -394,11 +432,111 @@ def cmd_next(a):
         p.parent.mkdir(parents=True, exist_ok=True)
         p.write_text(text, encoding="utf-8")
         append_jsonl(run.d / "handouts.jsonl", {"id": i, "role": a.role, "t": t, "at": now()})
-        out.append({"id": i, "role": a.role, "prompt": str(p)})
+        out.append({"id": i, "role": a.role, "prompt": str(p), "model": model})
     for o in out:
         print(json.dumps(o))
     if not out:
         print(json.dumps({"role": a.role, "handed_out": 0, "next": "curate_run.py status --run " + str(run.d)}))
+
+
+# ------------------------------------------------------------------ review-api
+READER = """You read a curated scale-catal document a second time, against the text of its source. You did not curate
+it. Report what is wrong; never rewrite the document. SCALE's tools already checked that the document is valid and
+that every quote is verbatim in the text; check what they cannot:
+- every quote supports the record or value it is cited for;
+- values as printed, in the printed unit, with as_reported where the text differs; nothing converted in place;
+- conditions and results paired from the same run; a condition stated once is on every run it covers;
+- every driving force of each test is listed; interpretations are the source's readings, not the curator's;
+- unknowns typed (not_reported with missing_reason); no typical value filled in; no unreported product as 0;
+- results the source cites from other works are not recorded as its own runs;
+- values read off a figure carry an uncertainty;
+- coverage: the source's main results (its key tables and figures) are recorded, or declared not curated.
+Answer with one JSON object and nothing else:
+{"verdict": "pass" | "needs_fix" | "reject", "issues": [{"record": "<id>", "locator": "<where in the source>",
+"problem": "<what is wrong>", "fix": "<what to do>"}], "coverage": "<one line>", "note": "<one line>"}.
+Use reject only when the text is of another paper or cannot be read."""
+
+
+def _api_key(api):
+    """The reader's key: its environment variable, else its line in ~/.paper-acquisition/keys.txt (never printed)."""
+    if api.get("key_env") and os.environ.get(api["key_env"]):
+        return os.environ[api["key_env"]]
+    f = Path(os.environ.get("PAPER_ACQ_HOME") or Path.home() / ".paper-acquisition") / "keys.txt"
+    for line in (f.read_text().splitlines() if f.is_file() else []):
+        k, sep, v = line.partition(":") if ":" in line else line.partition("=")
+        if sep and k.strip() == api.get("key_name", "llm_api_key") and v.strip():
+            return v.strip()
+    return None
+
+
+def _chat(base, key, model, messages, tries=5):
+    """One answer from an OpenAI-compatible chat endpoint (standard library), retried on rate limits and 5xx."""
+    import urllib.error
+    import urllib.request
+    body = json.dumps({"model": model, "messages": messages, "temperature": 0}).encode("utf-8")
+    last = "no answer"
+    for attempt in range(tries):
+        req = urllib.request.Request(f"{base.rstrip('/')}/chat/completions", data=body, method="POST",
+                                     headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"})
+        try:
+            with urllib.request.urlopen(req, timeout=900) as r:
+                return json.loads(r.read().decode("utf-8"))["choices"][0]["message"]["content"] or ""
+        except urllib.error.HTTPError as e:
+            last = f"HTTP {e.code}"
+            if e.code in (400, 401, 403, 404):
+                break
+        except (urllib.error.URLError, OSError, ValueError, KeyError, IndexError) as e:
+            last = str(e)[:200]
+        time.sleep(min(60, 5 * 2 ** attempt))
+    raise RuntimeError(last)
+
+
+def _verdict(text):
+    m = re.search(r"\{.*\}", text or "", re.S)
+    v = json.loads(m.group(0)) if m else None
+    if not isinstance(v, dict) or v.get("verdict") not in ("pass", "needs_fix", "reject"):
+        raise ValueError("the answer holds no verdict")
+    return {"verdict": v["verdict"], "issues": [x for x in v.get("issues") or [] if isinstance(x, dict)],
+            "coverage": str(v.get("coverage") or ""), "note": str(v.get("note") or "")}
+
+
+def cmd_review_api(a):
+    run = Run(a.run)
+    reviewer = str(run.models.get("reviewer") or "")
+    if not reviewer.startswith("api:"):
+        die("this run's second reading is not by an API model (prepare --reviewer api:<model> --api-base-url <url>)")
+    api = run.models.get("api") or {}
+    key = _api_key(api)
+    if not key:
+        die(f"no key for the reader: add `{api.get('key_name', 'llm_api_key')}: <key>` to ~/.paper-acquisition/keys.txt"
+            + (f" or set {api['key_env']}" if api.get("key_env") else ""))
+    hand, done, failed = run.handouts(), [], []
+    for i in run.ids():
+        if len(done) + len(failed) >= a.n:
+            break
+        st, _ = run.state(i, hand)
+        if st != "curated":
+            continue
+        f = run.folder(i)
+        g, slug = run.graph(i)
+        texts = next((f / "work" / "texts").glob("*.txt"), None)
+        text = texts.read_text(encoding="utf-8", errors="replace") if texts else ""
+        cut = len(text) > a.max_chars
+        user = (f"THE DOCUMENT ({g.name}):\n{g.read_text(encoding='utf-8')}\n\nTHE CURATOR'S REPORT:\n"
+                f"{(f / 'work' / 'curation.json').read_text(encoding='utf-8')}\n\nTHE SOURCE'S PAGE TEXTS"
+                f"{' (the first ' + str(a.max_chars) + ' characters)' if cut else ''}:\n{text[:a.max_chars]}")
+        append_jsonl(run.d / "handouts.jsonl", {"id": i, "role": "review", "t": time.time(), "at": now(),
+                                                "reader": reviewer})
+        try:
+            v = _verdict(_chat(api["base_url"], key, reviewer[4:], [{"role": "system", "content": READER},
+                                                                     {"role": "user", "content": user}]))
+        except (RuntimeError, ValueError) as e:
+            failed.append({"id": i, "error": str(e)[:200]})
+            continue
+        write_json(f / "work" / "review.json", {**v, "reader": reviewer, "text_cut": cut, "at": now()})
+        done.append({"id": i, "verdict": v["verdict"], "issues": len(v["issues"])})
+    print(json.dumps({"read": done, "failed": failed, "reader": reviewer,
+                      "next": f"curate_run.py status --run {run.d}"}))
 
 
 # ------------------------------------------------------------------ status
@@ -434,14 +572,16 @@ def cmd_status(a):
             chk = read_json(run.folder(i) / "work" / "check.json") or {}
             rec = chk.get("records") or {}
             row = {"id": i, "state": st, "result": result, "detail": detail, "at": now(),
-                   "schema_version": run.cfg.get("schema_version"), "nodes": rec.get("nodes"), "links": rec.get("links")}
+                   "schema_version": run.cfg.get("schema_version"), "nodes": rec.get("nodes"), "links": rec.get("links"),
+                   "curator": run.models.get("curator"), "second_reading": run.models.get("reviewer")}
             append_jsonl(run.d / "state.jsonl", row)
             pid = run.source(i).get("paper_id")
             if handoff and pid is not None:
                 append_jsonl(handoff, {"paper_id": pid, "topic": topic, "kg": run.cfg["name"], "status": result,
                                        "schema_version": run.cfg.get("schema_version"), "nodes": rec.get("nodes"),
                                        "edges": rec.get("links"), "date": now()[:10],
-                                       "note": f"scale-catal document: {run.folder(i)}" if result == "extracted" else detail})
+                                       "note": (f"scale-catal document: {run.folder(i)}" + ("; not read a second time"
+                                                if run.skip_review else "")) if result == "extracted" else detail})
             applied += 1
         index = index_export(root) if applied and handoff else None
     counts = Counter(st for st, _ in states.values())
@@ -546,6 +686,16 @@ def main():
                                      "documents will be contributed to, e.g. graphs/catal-commons)")
     p.add_argument("--no-si", action="store_true", help="do not append the SI files' text to the page texts")
     p.add_argument("--scale", help='the scale command (default: $SCALE_CMD or "scale"; e.g. "uv run --project <checkout> scale")')
+    p.add_argument("--curator", choices=MODELS, help="the model that curates and fixes (asked first; opus recommended)")
+    p.add_argument("--reviewer", help="who reads each document a second time: " + "|".join(MODELS) +
+                   " (recommended: not the curator's), api:<model>, or skip (not recommended)")
+    p.add_argument("--api-base-url", help="for --reviewer api:<model>: an OpenAI-compatible endpoint (…/v1)")
+    p.add_argument("--api-key-name", default="llm_api_key", help="its key's name in ~/.paper-acquisition/keys.txt")
+    p.add_argument("--api-key-env", help="or the environment variable that holds its key")
+    p = sub.add_parser("review-api")
+    p.add_argument("--run", required=True)
+    p.add_argument("--n", type=int, default=5)
+    p.add_argument("--max-chars", type=int, default=API_CHARS, help="page-text characters sent at most")
     p = sub.add_parser("next")
     p.add_argument("--run", required=True)
     p.add_argument("--role", required=True, choices=sorted(ROLE_STATES))
@@ -565,8 +715,8 @@ def main():
     p.add_argument("--run", required=True)
     p.add_argument("--to", required=True, help="a graph kept as parts, e.g. <hlxin/scale checkout>/graphs/catal-commons")
     a = ap.parse_args()
-    {"prepare": cmd_prepare, "next": cmd_next, "status": cmd_status, "finish": cmd_finish, "assemble": cmd_assemble,
-     "contribute": cmd_contribute}[a.cmd](a)
+    {"prepare": cmd_prepare, "next": cmd_next, "review-api": cmd_review_api, "status": cmd_status, "finish": cmd_finish,
+     "assemble": cmd_assemble, "contribute": cmd_contribute}[a.cmd](a)
 
 
 if __name__ == "__main__":
