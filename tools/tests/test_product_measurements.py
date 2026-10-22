@@ -220,13 +220,21 @@ def test_a_detection_limit_stays_a_limit():
     d = load_doc(PM)
     x = _entry(d, HYDRO, "ch4_selectivity")
     assert x["status"] == "below_detection_limit" and x["value"] == 0.1
-    res = _run(d, {"match": {"label": "CatalyticTest", "as": "test"},
-                   "steps": [{"from": "test", "entries": "result_values", "kind": "selectivity", "as": "r"}],
-                   "where": [{"var": "r", "prop": "value", "op": "le", "value": 5, "unit": "%", "basis": "carbon"}],
-                   "return": ["r.id"]})
-    assert "ch4_selectivity" not in [r["values"]["r.id"] for r in res["rows"]]   # a limit is never read as the number
-    assert any(x.get("entry") == "/result_values/ch4_selectivity" and x["reason"] == "below_detection_limit"
-               for x in res["excluded"])
+
+    def run(op: str, value: float) -> dict:
+        return _run(d, {"match": {"label": "CatalyticTest", "as": "test"},
+                        "steps": [{"from": "test", "entries": "result_values", "kind": "selectivity", "as": "r"}],
+                        "where": [{"var": "r", "prop": "value", "op": op, "value": value, "unit": "%",
+                                   "basis": "carbon"}],
+                        "return": ["r.id", "r.value"]})
+    # below 0.1 % is at most 5 %: the limit decides the filter (issue #38), and the value comes back as reported
+    row = next(r for r in run("le", 5)["rows"] if r["values"]["r.id"] == "ch4_selectivity")
+    assert row["values"]["r.value"]["status"] == "below_detection_limit" and row["values"]["r.value"]["value"] == 0.1
+    for op, value in (("le", 0.05), ("eq", 0.1)):                                # a limit is never read as the number
+        res = run(op, value)
+        assert "ch4_selectivity" not in [r["values"]["r.id"] for r in res["rows"]]
+        assert [x["reason"] for x in res["excluded"] if x.get("entry") == "/result_values/ch4_selectivity"] == [
+            f"one_sided_bound (below the detection limit 0.1 %; {op} {value} cannot be decided)"]
 
 
 # ------------------------------------------------------------------------------------------ repetition

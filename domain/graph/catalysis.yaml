@@ -548,6 +548,38 @@ nodes:
         items:
           type: value
         description: Stated properties other than composition (component ratios, masses, loadings).
+      integration_mode:
+        type: enum
+        maturity: provisional
+        values:
+        - granule_mixture
+        - powder_mixture
+        - dual_bed
+        - core_shell
+        - supported_on
+        - other
+        - not_reported
+        description: 'How the functional components of a multifunctional (bifunctional, tandem) catalyst are
+          put together, as the source states it: granule_mixture (granules of each component mixed in one
+          bed), powder_mixture (powders ground or mixed before pelletizing), dual_bed (separate beds in
+          series; each bed is also a USES_CATALYST with bed_position), core_shell (one component as a shell
+          on the other), supported_on (one component dispersed on the other). Say what "other" is in
+          integration_scale.note or the evidence. The ratio of the components is HAS_COMPONENT.fraction.'
+      integration_scale:
+        type: value
+        maturity: provisional
+        description: The length scale at which the components are integrated, as stated (granule diameter,
+          mixing or grinding scale, shell thickness), in the reported unit; the definition or basis says
+          which length it is. Text_value carries a stated level (nanoscale, millimetre-scale) when no number
+          is given.
+      site_proximity:
+        type: value
+        maturity: provisional
+        description: 'How close the sites of the different functions are, as stated. A distance (nm, um, mm)
+          in value and unit, or an ordinal level in text_value ("close", "intimate", "remote"). Basis says how
+          it was obtained (measured by microscopy, estimated from the integration scale, the authors''
+          ranking) and definition names the two kinds of site it is between. Not an inferred value: an
+          author''s ranking stays the author''s.'
   ActiveSite:
     is_a: ObjectOfStudy
     fixed:
@@ -1264,6 +1296,18 @@ edges:
       role_detail:
         type: text
         description: e.g. structural or electronic promoter, as stated.
+      function:
+        type: list
+        maturity: provisional
+        items:
+          type: ref
+          targets:
+          - Reaction
+        description: The reactions or reaction steps this component performs in the containing catalyst, when the
+          source assigns them (CO activation and chain growth on the oxide, C-C coupling or isomerization on the
+          zeolite acid sites). Each is a Reaction record (a sub-reaction of the test's reaction, HAS_PART). It
+          is the scope of the component in this catalyst, so one material in two catalysts may have two
+          functions; role stays about composition.
       fraction:
         type: value
         quantity: composition_fraction
