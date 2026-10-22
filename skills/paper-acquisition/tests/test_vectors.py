@@ -211,3 +211,25 @@ def test_passages_and_hash_vectors_are_scales_own():
     assert np.array_equal(V.quantize(V.HashEmbedder().encode(texts)), S.quantize(S.HashEmbedder().encode(texts)))
     page = "One paragraph.\n\nAnother " + "sentence here. " * 90 + "\n\nLast."
     assert V.split_page(page) == S.split_page(page)
+
+
+MODEL = "BAAI/bge-small-en-v1.5"
+CACHED = (Path(os.environ.get("HF_HOME") or Path.home() / ".cache" / "huggingface") / "hub" /
+          f"models--{MODEL.replace('/', '--')}").is_dir()
+
+
+@pytest.mark.skipif(not CACHED, reason=f"the local model {MODEL} is not on this machine (vectors.py init fetches it)")
+def test_a_local_model_embeds_offline_and_finds_by_meaning(project):
+    pytest.importorskip("sentence_transformers")
+    proj = project
+    run(proj, "update")
+    name = f"sentence-transformers:{MODEL}"
+    out = run(proj, "update", "--embedder", name)                     # offline: from the local cache only
+    assert out["papers_read"] == 0 and out["embedded"][name] == out["passages"]
+    hit = run(proj, "search", "electrochemical conversion of carbon dioxide into C2 products", "--mode", "vector",
+              "--embedder", name)["hits"][0]
+    assert hit["paper_id"] == 1 and hit["title"]
+    hit = run(proj, "search", "making methanol from synthesis gas", "--mode", "vector", "--embedder", name)["hits"][0]
+    assert hit["paper_id"] == 3
+    assert run(proj, "status")["texts_without_vector"] == {"scale-hash-v1": 0, name: 0}
+    assert run(proj, "update")["embedded"] == {"scale-hash-v1": 0, name: 0}
