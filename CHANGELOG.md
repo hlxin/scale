@@ -9,6 +9,14 @@
   `integration_scale` and `site_proximity` (the authors' description). All are provisional. Competency question CQ-12
   and a fixture with five counterexamples cover them; CQ-01 to CQ-11 are unchanged. Records of earlier versions need
   no change.
+- **Bundle schema: an endpoint declared `ANY` is exported unconstrained (tooling; no schema version raised).** Requested
+  in #44. `REVISES` (both ends) and the targets of `HAS_INPUT`, `HAS_OUTPUT`, `ABOUT` and `INCLUDES`, which the
+  kernel declares `ANY`, were written as all 55 kinds in the bundle's `edge_types`; they are now `[]`, which the
+  conformance check reads as unconstrained, and so is `REPORTED_IN`'s source (any entity reports; its target stays
+  `Publication`). The declared kind pairs drop from 6,014 to 1,395, the pairs the schema types; the pairs that occur
+  are left to consumers to draw from the data. The other typed lists (`HAS_PART` 14 x 14, `PART_OF`, `PRECEDES` and
+  the like) stay as the schema declares them; narrowing them is a separate schema change. The spec, its digest and the
+  frozen versions are untouched.
 - **Schema 0.5.0 (breaking): the checklist says when a test's reporting cannot be judged, and checks the evidence a
   reading needs.** Requested by @hlxin ("Check reporting applicability and connected kinetic evidence"). Before, a test
   that listed no driving force matched none of the checklist's driving-force cases, so a test stripped of every
