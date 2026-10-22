@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- **Schema 0.5.1 (additive): bifunctional (tandem) catalysts.** Requested by @hlxin (#40). A catalyst of two or more
+  components that perform different steps (an oxide that activates CO, a zeolite that couples or isomerizes) can now
+  say what each component does and how they are combined. `HAS_COMPONENT.function` lists the Reaction records a
+  component performs; a Catalyst has `integration_mode` (granule mixture, core-shell, supported-on, dual bed),
+  `integration_scale` and `site_proximity` (the authors' description). All are provisional. Competency question CQ-12
+  and a fixture with five counterexamples cover them; CQ-01 to CQ-11 are unchanged. Records of earlier versions need
+  no change.
 - **Bundle schema: an endpoint declared `ANY` is exported unconstrained (tooling; no schema version raised).** Requested
   in #44. `REVISES` (both ends) and the targets of `HAS_INPUT`, `HAS_OUTPUT`, `ABOUT` and `INCLUDES`, which the
   kernel declares `ANY`, were written as all 55 kinds in the bundle's `edge_types`; they are now `[]`, which the

@@ -158,6 +158,25 @@ def main() -> None:
     defect("research-data-without-stewardship", "research data that does not say who contributed it or which project it belongs to",
            lambda d: d["graph"].__setitem__("stewardship", {"access": "public"}), base=template("catalysis", VERSION))
 
+    # multifunctional catalysts (#40): an integration mode outside its list, a function that is no reaction (a species, a
+    # record that does not exist), a function on a link that is no component, a proximity without its status
+    bi = REPO / "domain/examples/scale-catal/bifunctional-examples/tandem-granule-mixture.json"
+
+    def bifunctional(change):
+        return lambda d: change(d, next(n for n in d["nodes"] if n["id"] == "ex:bifunctional/catalyst/tandem"),
+                                next(e for e in d["links"] if e["id"] == "ex:bifunctional/link/1"))
+    defect("integration-mode-not-allowed", "an integration mode the list does not name",
+           bifunctional(lambda d, c, e: c["props"].__setitem__("integration_mode", "sandwich")), base=load_doc(bi))
+    defect("function-is-a-species", "a component whose function is a chemical species, not a reaction",
+           bifunctional(lambda d, c, e: e["props"].__setitem__("function", ["ex:bifunctional/species/co"])), base=load_doc(bi))
+    defect("function-is-no-record", "a component whose function is a reaction the document does not hold",
+           bifunctional(lambda d, c, e: e["props"].__setitem__("function", ["ex:bifunctional/reaction/missing"])), base=load_doc(bi))
+    defect("function-on-has-part", "a function stated on a HAS_PART link, which does not declare it",
+           bifunctional(lambda d, c, e: next(x for x in d["links"] if x["type"] == "HAS_PART")["props"].__setitem__(
+               "function", ["ex:bifunctional/reaction/step1"])), base=load_doc(bi))
+    defect("site-proximity-without-status", "a site proximity without its status",
+           bifunctional(lambda d, c, e: c["props"]["site_proximity"].pop("status")), base=load_doc(bi))
+
 
 if __name__ == "__main__":
     main()
