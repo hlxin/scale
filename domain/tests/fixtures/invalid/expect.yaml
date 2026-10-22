@@ -160,3 +160,8 @@ fixtures:
     error: "is not one of"
     reason: What a phase delay is measured against is the stimulus or another species' response, so that delays against
       two references are never compared.
+  - file: partition-method-not-in-vocabulary.json
+    base: domain/examples/scale-catal/thermal-examples/thermal-contribution.json
+    error: "is not one of"
+    reason: How an analysis separates heating from the other effects of a driving force is one of the listed methods, so
+      that a reading resting on a control at matched temperature is told apart from one resting on a dependence.

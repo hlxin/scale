@@ -37,7 +37,7 @@ def _question(tmp_path, **changes):
 
 def test_every_catalysis_question_answers_as_expected():
     res = run(REPO, ["catalysis"])
-    assert res["ok"] and res["answered_as_expected"] == 31 and res["stubs"] == 0
+    assert res["ok"] and res["answered_as_expected"] == 32 and res["stubs"] == 0
     by_id = {q["id"]: q for q in res["questions"]}
     assert by_id["CQ-01"]["answer"] == {"status": "answered", "rows": 3, "schema_gaps": []}
     assert by_id["CQ-02"]["answer"]["rows"] == 10                       # one row per control of a catalytic test
@@ -100,6 +100,6 @@ def test_meets_compares_status_rows_values_and_gaps():
 
 def test_cli_runs_named_domains(capsys):
     assert main(["--repo", str(REPO), "domains", "cq", "catalysis", "--json"]) == 0
-    assert json.loads(capsys.readouterr().out)["answered_as_expected"] == 31
+    assert json.loads(capsys.readouterr().out)["answered_as_expected"] == 32
     with pytest.raises(ScaleError, match="no domain astronomy"):
         run(REPO, ["astronomy"])

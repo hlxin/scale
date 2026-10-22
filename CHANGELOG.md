@@ -2,6 +2,19 @@
 
 ## Unreleased
 
+- **Schema 0.7.4 (additive): one analysis kind for how much of a rate is heating, for any driving force.** Requested by
+  @hlxin (ThermalContributionAnalysis was the one analysis that was a record type of its own, it covered light only,
+  and its results were fields of its own). An Analysis may now be of kind thermal_contribution: it separates the
+  heating a driving force causes from its other effects on a rate (light, a plasma, a field, a current), HAS_INPUT the
+  driven test and the controls it compares, states its partition_method (now the analysis's, with the general
+  control_at_matched_temperature beside dark_control_at_matched_temperature) and gives the shares as result entries.
+  ThermalContributionAnalysis is deprecated, the first record type to be: it stays valid, inherits partition_method
+  from Analysis, and a document of 0.7.4 or later that uses it is told what replaces it (a warning; `scale graph
+  describe` says it too). The light checklist accepts either form; a new case asks a thermal_contribution analysis for
+  its method, partition, results, limitations and the test it separates (one driven by something besides heat). A
+  synthetic example (`thermal-examples/thermal-contribution.json`, light and a plasma), CQ-34, a counterexample and
+  tests.
+
 - **Schema 0.7.3 (additive): tests driven by a program, the analyses of their responses, and fitted kinetic
   constants.** Requested by @hlxin (grow toward transient kinetics). SCALE could say that a test was operated
   dynamically (an Operation's pattern, period and segments), but not the levels it switched between, a pulse, a

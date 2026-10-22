@@ -36,6 +36,7 @@ VERSION = load_doc(BASE)["graph"]["schema_version"]      # the version a fixture
 # what a later schema version added is shown wrong on an example of that version (expect.yaml names it as base)
 AGENTIC = REPO / "domain/examples/scale-catal/agentic-examples/self-driving-campaign.json"
 TRANSIENT = REPO / "domain/examples/scale-catal/transient-examples/transient-kinetics.json"
+THERMAL = REPO / "domain/examples/scale-catal/thermal-examples/thermal-contribution.json"
 
 
 def test_node(doc: dict) -> dict:
@@ -310,6 +311,9 @@ def main() -> None:
     defect("phase-reference-not-in-vocabulary", "phase delays whose reference is stated in other words",
            lambda d: node(d, "analysis/phase-sensitive-detection")["props"].__setitem__("phase_reference", "input"),
            base=transient)
+    defect("partition-method-not-in-vocabulary", "an analysis of the thermal contribution whose method is stated in other words",
+           lambda d: node(d, "analysis/irradiance-dependence")["props"].__setitem__("partition_method", "dark_control"),
+           base=load_doc(THERMAL))
     # it states its access (public, like every committed document) but not who contributed it or its project
     defect("research-data-without-stewardship", "research data that does not say who contributed it or which project it belongs to",
            lambda d: d["graph"].__setitem__("stewardship", {"access": "public"}), base=template("catalysis", VERSION))

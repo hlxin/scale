@@ -1,0 +1,61 @@
+# A competency question of the catalysis domain (tools/competency.py; `scale domains cq catalysis`).
+# It runs on public synthetic examples, so anyone can rerun it and see the same answer.
+id: CQ-34
+question: Which tests separate the heating their driving force causes from its other effects on the rate, how, and what
+  share of the rate does each account for?
+description: |
+  An analysis of the thermal contribution is an Analysis with analysis_kind thermal_contribution that HAS_INPUT the
+  driven test and the controls it compares. Its partition_method says how it separates the two (a control without the
+  driving force at the matched temperature, or the rate's dependence on wavelength, intensity or temperature), and the
+  shares it attributes are result entries, each naming its variable and the product whose rate it divides. The
+  example has three: a photothermal reading under light (95 % heating, from the dependence on irradiance), a
+  non-thermal reading under light against a dark control matched at the illuminated surface (60 % heating), and a
+  plasma against the catalyst at the same bed temperature without it (25 % heating). The deprecated
+  ThermalContributionAnalysis of documents before 0.7.4 is an Analysis too, read by a plan on its own label.
+documents:
+  - examples/scale-catal/thermal-examples/thermal-contribution.json
+plan:
+  question: Which tests separate heating from the other effects of their driving force, and what share is heating?
+  match:
+    label: Analysis
+    as: separation
+    where:
+      - prop: analysis_kind
+        op: eq
+        value: thermal_contribution
+  steps:
+    - from: separation
+      edge: HAS_INPUT
+      to: CatalyticTest
+      as: test
+      where:
+        - prop: test_kind
+          op: ne
+          value: control
+    - from: separation
+      entries: result_values
+      kind: species_fraction
+      as: share
+    - from: share
+      field: variable
+      to: Variable
+      as: what
+  return:
+    - test.name
+    - test.driving_forces
+    - separation.partition_method
+    - what.name
+    - share
+  evidence: true
+expect:
+  status: answered
+  min_rows: 6
+  max_rows: 6
+  values:
+    separation.partition_method:
+      - intensity_dependence
+      - control_at_matched_temperature
+    share:
+      - 95
+      - 60
+      - 25

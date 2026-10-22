@@ -217,7 +217,8 @@ Never record `± 0`: keep the printed text in `as_reported` and leave `uncertain
   - a transport check: an Analysis (`transport_check`) that `HAS_INPUT` the test, with `evaluation_basis` asserted,
     numerical or experimental;
   - a dark control: `DARK_CONTROL_FOR`, with `differs_in`, `temperature_matched_at` and `temperature_matched_over`;
-    or a `ThermalContributionAnalysis` instead;
+    or an Analysis with `analysis_kind: thermal_contribution` instead (0.7.4 on; earlier versions, a
+    `ThermalContributionAnalysis`);
   - plasma synergy: a plasma-alone control and a catalyst-alone control, each `CONTROL_FOR` the test; the plasma
     power (`discharge_power`) apart from what the supply draws (`power_supply_input`);
   - stability: a `TimeSeries` for performance; for the material, a `CatalystState` `REACHED_BY` the test and
