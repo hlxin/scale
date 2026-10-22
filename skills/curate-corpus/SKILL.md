@@ -1,12 +1,13 @@
 ---
 name: curate-corpus
-version: 0.1.0
+version: 0.2.0
 description: Curate a frozen corpus of downloaded papers into scale-catal documents, one per source, by running the curate-source procedure on each (scale source start, check, finish) through subagents in small batches, with a second reading of every document, resumable state, and each source's result handed back to the paper index. Use when many papers (a topic's downloads from paper-acquisition, or any corpus manifest whose sources have PDFs) are to become scale-catal documents. It has no schema, format, validator or merge of its own.
 scale_release: ">v0.2.0"
 inputs:
   - A frozen corpus manifest that `scale corpus check` accepts, whose included sources have their PDF (and SI) on disk (paper-acquisition's freeze_corpus.py writes one per topic)
   - Which included sources to curate (all, a list, or the first N) and the schema version to pin (SCALE's head, or the version of the graph the documents will join)
   - Who curates (a stewardship registry id) and for which project
+  - Which model curates each source (Opus, Sonnet, Fable or Haiku), and who reads each document a second time — another Claude model (recommended, a different one from the curator), a model behind an OpenAI-compatible API, or no one (skip, always advised against): asked before the run
   - SCALE's tools (the `scale` command, from a version after v0.2.0 for `scale source`; in a checkout of hlxin/scale, `uv run scale`)
 allowed-tools:
   - Bash(python3 -I ${CLAUDE_SKILL_DIR}/scripts/*)
@@ -29,7 +30,7 @@ outputs:
 validation:
   - "`scale corpus check <manifest>` reports ok before the first source"
   - "`scale source check <dir>` reports ok (zero errors, every quote found verbatim in the page texts, the cap respected) for every document settled as passed"
-  - Every passed document had a second reading by another subagent after its last change, and that reading passed it
+  - Every passed document had a second reading after its last change (another subagent, or the API model), and that reading passed it — unless the run was prepared with --reviewer skip, which run.json, state.jsonl and the paper index record
   - "`curate_run.py status` accounts for every source picked: settled (passed, rejected, failed) or still in a state with a next step"
 human-review:
   - Before the run starts (the corpus, how many sources, the cost) and after the pilot (5 sources), on whether the checklist and the procedure fit the corpus
@@ -56,8 +57,10 @@ hands out the work and records what came back.
   source check` reports, and claims are in the curator's own words. Supporting information belongs to its paper's
   Source: `prepare` appends its text to the paper's page texts as pages `[page S1]`, `[page S2]` and so on.
   Documents stay in the run folder. Only what a person clears is shared (`finish --public`) or contributed.
-- **A second reading is not a review.** The reader subagent shares the curator's model, and agents that share a model
-  are not independent reviewers. A person reviews a document before it counts as reviewed.
+- **A second reading is not a review.** The reader is another agent. A model other than the curator's (or one behind
+  an API) reads more independently than the curator's own model, but no agent is an independent reviewer: a person
+  reviews a document before it counts as reviewed. Skipping the second reading is the user's choice, never yours, and
+  always advised against.
 - **Scripts keep the books; subagents read.** Never write a document, a curator's report, a second reading or a state
   line yourself, and never fix a subagent's document by hand. Hand it back with `next --role fix`.
 - **Nothing is deleted.** Every report and prompt stays in the run folder.
@@ -74,8 +77,19 @@ hands out the work and records what came back.
    `publications/<slug>/corpora/<corpus>/sources.json`. Every candidate of the topic
    gets a status there: `in_scope` for those to curate, or the reason it is left out. Any other manifest works too.
    `scale corpus check <manifest>` must report ok. Show the counts and the rule; a person confirms.
-2. **Prepare** the run: `curate_run.py prepare --corpus <manifest> --run <run folder> [--ids 12,57 | --max N]
-   [--version <v>] [--contributor <id>] [--project <id>]`. For a topic, the run folder is
+2. **Ask, then prepare.** One `AskUserQuestion` with two questions, before anything starts:
+   - *Which model curates?* Opus (Recommended: the procedure is demanding) · Sonnet · Fable · Haiku (cheapest; short
+     or simple papers).
+   - *Who reads each document a second time?* A different Claude model (Recommended: Sonnet when Opus curates, Opus
+     otherwise) · a model behind an OpenAI-compatible API (its base URL and model; the key goes in
+     `~/.paper-acquisition/keys.txt` as `llm_api_key: …`, never through the chat) · Skip (not recommended: documents
+     then pass on SCALE's checks alone, and the index says they were not read a second time).
+
+   Then `curate_run.py prepare --corpus <manifest> --run <run folder> --curator <model> --reviewer <model |
+   api:<model> | skip> [--api-base-url <url>] [--ids 12,57 | --ids-file F | --max N] [--version <v>] [--contributor
+   <id>] [--project <id>]`; prepare refuses to start without both. To curate the papers a question finds, take their
+   IDs from paper-acquisition's vector store: `vectors.py search "<question>" --by-paper --k 50 --ids-out ids.txt`,
+   then `--ids-file ids.txt`. For a topic, the run folder is
    `publications/<slug>/curation/<run name>`. Prepare starts one working folder per included source whose PDF is on
    disk, with `scale source start --doi --pdf`, and appends the SI pages. It paces Crossref at one lookup per second
    and starts a folder from the PDF alone when the DOI lookup fails; the curator then fills the Source's metadata. To
@@ -89,16 +103,20 @@ hands out the work and records what came back.
 
    ```
    - [ ] curate_run.py next --run <dir> --role curate --n <batch>
-           -> one subagent per printed line, all in ONE message: the prompt "Read <prompt> and follow it exactly."
+           -> one subagent per printed line, all in ONE message, with the line's `model`: the prompt "Read <prompt>
+              and follow it exactly."
    - [ ] curate_run.py status --run <dir>                 (runs scale source check on every folder that changed)
    - [ ] curate_run.py next --run <dir> --role review --n <batch>   -> second-reading subagents, same pattern
+           (an API reader: curate_run.py review-api --run <dir> --n <batch> instead; skip: no reading step)
    - [ ] curate_run.py status --run <dir>
    - [ ] curate_run.py next --run <dir> --role fix --n <batch>      -> fixing subagents (check errors, reading issues)
    - [ ] repeat; status lists what each state waits for
    ```
 
-   Batches: start at 5, go up to 10–15 after clean batches, and back to 5 after failures or for long papers. A curator
-   gets one source and the curate-source skill: use a capable model, since the procedure is demanding. Batching
+   Batches: start at 5, go up to 10–15 after clean batches, and back to 5 after failures or for long papers (15
+   subagents in one message ran together on 2026-10-22). Each subagent starts with about 46,000 tokens of context
+   before it reads anything, so a source costs at least three of those (curate, read, often a fix). A curator gets
+   one source and the curate-source skill, on the model the user chose. Batching
    details and the states: [references/batches.md](references/batches.md). If you cannot launch subagents, follow
    each prompt yourself, one source at a time. Curate first; do the second reading later as a separate, skeptical
    pass over a document you no longer remember writing.
@@ -125,7 +143,8 @@ hands out the work and records what came back.
 
 ## Orchestrated mode (invoked by another skill)
 
-Inline arguments, for example `corpus=<manifest> run=<dir> ids=12,57 version=0.5.0 wrapper_confirmed=true`. With
+Inline arguments, for example `corpus=<manifest> run=<dir> curator=opus reviewer=sonnet ids=12,57 version=0.5.0
+wrapper_confirmed=true` (`reviewer=api:<model> api_base_url=<url>`, or `reviewer=skip` when the user chose it). With
 `wrapper_confirmed=true` there is no intake question: prepare, run the pilot, and still show the pilot result (a new
-decision), then continue to step 6. Return a short summary: the sources settled per state, the gaps, the run folder,
+decision), then continue to step 6. Without `curator` and `reviewer`, ask them (step 2) even when confirmed. Return a short summary: the sources settled per state, the gaps, the run folder,
 and the sources without a PDF.

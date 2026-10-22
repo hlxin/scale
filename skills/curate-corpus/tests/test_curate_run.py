@@ -21,6 +21,7 @@ REPO = HERE.parents[2]
 SCALE = os.environ.get("SCALE_CMD") or f"{shlex.quote(sys.executable)} -m scale.cli --repo {shlex.quote(str(REPO))}"
 
 fitz = pytest.importorskip("fitz")
+MODELS = ("--curator", "opus", "--reviewer", "sonnet")                  # asked before every run
 
 
 def run(*args, ok=True):
@@ -58,7 +59,7 @@ def corpus(tmp_path):
 
 
 def test_prepare_starts_a_scale_folder_with_the_si_pages(corpus, tmp_path):
-    res = run("prepare", "--corpus", corpus, "--run", tmp_path / "run", "--scale", SCALE)
+    res = run("prepare", "--corpus", corpus, "--run", tmp_path / "run", "--scale", SCALE, *MODELS)
     assert res["picked"] == 1 and res["started"] == 1 and res["schema_version"]
     f = tmp_path / "run" / "sources" / "7"
     assert (f / "source.json").is_file() and (f / "rights.yaml").is_file() and (f / "BRIEF.md").is_file()
@@ -66,13 +67,13 @@ def test_prepare_starts_a_scale_folder_with_the_si_pages(corpus, tmp_path):
     assert si[0]["file"] == "7_SI.txt" and si[0]["pages"] == "S1"
     texts = next((f / "work" / "texts").glob("*.txt")).read_text()
     assert "[page 1]" in texts and "[page S1]" in texts and "Faradaic efficiency to CO: 12 %" in texts
-    again = run("prepare", "--corpus", corpus, "--run", tmp_path / "run", "--scale", SCALE)
+    again = run("prepare", "--corpus", corpus, "--run", tmp_path / "run", "--scale", SCALE, *MODELS)
     assert again["started"] == 0 and again["already_there"] == 1          # resumable
 
 
 def test_every_state_from_prepared_to_passed(corpus, tmp_path):
     r = tmp_path / "run"
-    run("prepare", "--corpus", corpus, "--run", r, "--scale", SCALE)
+    run("prepare", "--corpus", corpus, "--run", r, "--scale", SCALE, *MODELS)
     f = r / "sources" / "7"
     assert run("status", "--run", r)["states"] == {"prepared": 1}
     out = run("next", "--run", r, "--role", "curate", "--n", 5)
@@ -113,7 +114,7 @@ def test_every_state_from_prepared_to_passed(corpus, tmp_path):
 
 def test_a_rejected_source_is_settled(corpus, tmp_path):
     r = tmp_path / "run"
-    run("prepare", "--corpus", corpus, "--run", r, "--scale", SCALE)
+    run("prepare", "--corpus", corpus, "--run", r, "--scale", SCALE, *MODELS)
     f = r / "sources" / "7"
     write(f / "work" / "curation.json", {"result": "no_data", "records": 0, "gaps": 0, "note": "test"})
     write(f / "work" / "review.json", {"verdict": "reject", "issues": [], "note": "wrong paper"})
@@ -124,12 +125,12 @@ def test_a_corpus_that_fails_the_check_is_refused(corpus, tmp_path):
     m = json.loads(corpus.read_text())
     m["counts"] = {"in_scope": 5}
     corpus.write_text(json.dumps(m))
-    run("prepare", "--corpus", corpus, "--run", tmp_path / "run", "--scale", SCALE, ok=False)
+    run("prepare", "--corpus", corpus, "--run", tmp_path / "run", "--scale", SCALE, *MODELS, ok=False)
 
 
 def test_gap_reports_are_counted_by_kind(corpus, tmp_path):
     r = tmp_path / "run"
-    run("prepare", "--corpus", corpus, "--run", r, "--scale", SCALE)
+    run("prepare", "--corpus", corpus, "--run", r, "--scale", SCALE, *MODELS)
     gaps = r / "sources" / "7" / "work" / "gaps"
     (gaps / "superseded").mkdir(parents=True)
     for gid, kind in (("GAP-1", "missing_concept"), ("GAP-2", "ambiguous_source_information")):
@@ -167,7 +168,7 @@ def test_a_passed_source_shows_in_the_paper_index_at_once(tmp_path):
                                     "sources": [{"slug": "7", "status": "in_scope", "paper_id": 7, "title": "Formate on Cu",
                                                  "year": 2025, "pdf": "../../papers/OA/7.pdf", "licence": "cc-by"}]}))
     r = tmp_path / "run"
-    run("prepare", "--corpus", manifest, "--run", r, "--scale", SCALE)
+    run("prepare", "--corpus", manifest, "--run", r, "--scale", SCALE, *MODELS)
     f = r / "sources" / "7"
     run("next", "--run", r, "--role", "curate")
     write(f / "work" / "curation.json", {"result": "curated", "records": 1, "gaps": 0, "note": "test"})
@@ -179,3 +180,76 @@ def test_a_passed_source_shows_in_the_paper_index_at_once(tmp_path):
     con = sqlite3.connect(str(proj.db))
     assert con.execute("SELECT status, kg FROM extractions WHERE paper_id = 7").fetchone() == ("extracted", "run")
     con.close()
+
+
+
+def test_prepare_asks_for_the_models_first_and_each_line_names_its_model(corpus, tmp_path):
+    r = tmp_path / "run"
+    r_ = subprocess.run([sys.executable, "-I", str(SCRIPT), "prepare", "--corpus", str(corpus), "--run", str(r),
+                         "--scale", SCALE], capture_output=True, text=True)
+    assert r_.returncode != 0 and "--curator" in r_.stderr and "skip is not recommended" in r_.stderr
+    res = run("prepare", "--corpus", corpus, "--run", r, "--scale", SCALE, *MODELS)
+    assert res["models"] == {"curator": "opus", "reviewer": "sonnet"}
+    assert run("next", "--run", r, "--role", "curate")["model"] == "opus"
+    write(r / "sources" / "7" / "work" / "curation.json", {"result": "curated", "records": 1, "gaps": 0, "note": "t"})
+    assert run("next", "--run", r, "--role", "review")["model"] == "sonnet"
+
+
+def test_a_run_that_skips_the_second_reading_settles_on_the_check(corpus, tmp_path):
+    r = tmp_path / "run"
+    run("prepare", "--corpus", corpus, "--run", r, "--scale", SCALE, "--curator", "haiku", "--reviewer", "skip")
+    run("next", "--run", r, "--role", "curate")
+    write(r / "sources" / "7" / "work" / "curation.json", {"result": "curated", "records": 1, "gaps": 0, "note": "t"})
+    assert run("next", "--run", r, "--role", "review")["handed_out"] == 0
+    st = run("status", "--run", r, "--apply")
+    assert st["states"] == {"passed": 1} and st["applied"] == 1
+    line = json.loads((r / "state.jsonl").read_text().splitlines()[-1])
+    assert (line["curator"], line["second_reading"]) == ("haiku", "skip")
+
+
+def test_an_api_model_reads_a_second_time(corpus, tmp_path):
+    import http.server
+    import threading
+    seen, answers = [], [{"verdict": "needs_fix", "issues": [{"record": "ex:a", "locator": "p. 1", "problem": "unit",
+                                                              "fix": "V vs RHE"}], "coverage": "all", "note": "x"},
+                         {"verdict": "pass", "issues": [], "coverage": "all", "note": "fine"}]
+
+    class Reader(http.server.BaseHTTPRequestHandler):
+        def do_POST(self):
+            body = json.loads(self.rfile.read(int(self.headers["Content-Length"])))
+            seen.append({"path": self.path, "auth": self.headers.get("Authorization"), "body": body})
+            out = json.dumps({"choices": [{"message": {"content": "Here: " + json.dumps(answers[len(seen) - 1])}}]})
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.end_headers()
+            self.wfile.write(out.encode("utf-8"))
+
+        def log_message(self, *a):
+            pass
+
+    srv = http.server.ThreadingHTTPServer(("127.0.0.1", 0), Reader)
+    threading.Thread(target=srv.serve_forever, daemon=True).start()
+    os.environ["TEST_READER_KEY"] = "secret"
+    try:
+        r = tmp_path / "run"
+        run("prepare", "--corpus", corpus, "--run", r, "--scale", SCALE, "--curator", "sonnet", "--reviewer",
+            "api:test-reader", "--api-base-url", f"http://127.0.0.1:{srv.server_port}/v1", "--api-key-env",
+            "TEST_READER_KEY")
+        f = r / "sources" / "7"
+        run("next", "--run", r, "--role", "curate")
+        write(f / "work" / "curation.json", {"result": "curated", "records": 1, "gaps": 0, "note": "t"})
+        assert "review-api" in run("next", "--run", r, "--role", "review")["next"]
+        got = run("review-api", "--run", r)
+        assert got["read"] == [{"id": "7", "verdict": "needs_fix", "issues": 1}] and not got["failed"]
+        ask = seen[0]
+        assert ask["path"] == "/v1/chat/completions" and ask["auth"] == "Bearer secret"
+        assert ask["body"]["model"] == "test-reader" and "Faradaic efficiency" in ask["body"]["messages"][1]["content"]
+        assert run("status", "--run", r)["states"] == {"needs_fix": 1}
+        assert "V vs RHE" in Path(run("next", "--run", r, "--role", "fix")["prompt"]).read_text()
+        write(f / "work" / "curation.json", {"result": "curated", "records": 1, "gaps": 0, "note": "fixed", "attempt": 1})
+        assert run("review-api", "--run", r)["read"][0]["verdict"] == "pass"
+        assert run("status", "--run", r)["states"] == {"passed": 1}
+        assert json.loads((f / "work" / "review.json").read_text())["reader"] == "api:test-reader"
+    finally:
+        os.environ.pop("TEST_READER_KEY", None)
+        srv.shutdown()

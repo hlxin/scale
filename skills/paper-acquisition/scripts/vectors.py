@@ -7,6 +7,8 @@ out unless --with-references. Details: references/database.md ("The vector store
   python3 -I vectors.py update [--embedder E] [--ids 12,57] [--limit N]   # new and changed papers only
   python3 -I vectors.py search "Cu/ZnO methanol synthesis deactivation" [--k 10] [--mode hybrid|vector|keyword]
                                [--embedder E] [--topic <slug>] [--year 2020-2026] [--ids 12,57] [--with-references]
+  python3 -I vectors.py search "..." --by-paper [--k 20] [--ids-out ids.txt]   # the best papers, not passages
+  python3 -I vectors.py get <ID or DOI> [--text]     # one paper as the store holds it: its record and passages in order
   python3 -I vectors.py status
   python3 -I vectors.py drop --embedder E          # stop keeping an embedder; its vectors are removed
 
@@ -54,7 +56,7 @@ def allowed_ids(proj, a):
 
 def main():
     ap = add_project_arg(argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter))
-    ap.add_argument("cmd", choices=["init", "update", "search", "status", "drop"])
+    ap.add_argument("cmd", choices=["init", "update", "search", "get", "status", "drop"])
     ap.add_argument("query", nargs="?")
     ap.add_argument("--embedder")
     ap.add_argument("--ids")
@@ -64,7 +66,17 @@ def main():
     ap.add_argument("--topic")
     ap.add_argument("--year")
     ap.add_argument("--with-references", action="store_true", help="search: keep the passages of reference lists")
+    ap.add_argument("--by-paper", action="store_true", help="search: rank papers (by their best passage), not passages")
+    ap.add_argument("--ids-out", help="search --by-paper: write the papers' IDs, one per line (curate_run.py --ids-file)")
+    ap.add_argument("--text", action="store_true", help="get: print the paper's text page by page instead of JSON")
     a = ap.parse_args()
+    try:
+        run(a)
+    except RuntimeError as e:               # a missing store, paper or model: say what to do
+        die(str(e))
+
+
+def run(a):
     proj = Project(a.project)
     if a.cmd == "init":
         name = a.embedder or V.DEFAULT_EMBEDDER
@@ -82,8 +94,29 @@ def main():
     elif a.cmd == "search":
         if not a.query:
             die("search needs a query")
-        res = V.search(proj, a.query, k=a.k, mode=a.mode, embedder=a.embedder, allowed=allowed_ids(proj, a),
-                       references=a.with_references)
+        if a.by_paper:
+            res = V.by_paper(proj, a.query, k=a.k, mode=a.mode, embedder=a.embedder, allowed=allowed_ids(proj, a),
+                             references=a.with_references)
+            if a.ids_out:
+                Path(a.ids_out).write_text("".join(f"{p['paper_id']}\n" for p in res["papers"]))
+                res["ids_file"] = a.ids_out
+        else:
+            res = V.search(proj, a.query, k=a.k, mode=a.mode, embedder=a.embedder, allowed=allowed_ids(proj, a),
+                           references=a.with_references)
+    elif a.cmd == "get":
+        if not a.query:
+            die("get needs a paper ID or DOI")
+        res = V.paper_text(proj, a.query)
+        if a.text:
+            pages, cur = [], None
+            for t in res["text"]:
+                if t["page"] != cur:
+                    cur = t["page"]
+                    pages.append(f"\n[page {cur}]")
+                pages.append(t["text"])
+            print(f"{res.get('title') or ''} ({res.get('year') or ''}) {res.get('doi') or ''} — paper {res['paper_id']}")
+            print("\n".join(pages))
+            return
     elif a.cmd == "status":
         res = V.status(proj, Ledger(proj))
     else:

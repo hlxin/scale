@@ -195,6 +195,7 @@ def test_a_second_embedder_is_kept_apart_and_can_be_dropped(project, monkeypatch
     assert V.embedders_of(con) == ["scale-hash-v1", Stub.id]
     con.close()
     assert V.search(proj, "copper", embedder=Stub.id, mode="vector")["embedder"] == Stub.id
+    assert V.search(proj, "copper")["embedder"] == Stub.id          # a neural embedder with every passage: the default
     again = V.update(proj, led)
     assert again["embedded"] == {"scale-hash-v1": 0, Stub.id: 0}
     out = run(proj, "drop", "--embedder", Stub.id)
@@ -272,3 +273,24 @@ def test_a_store_of_the_first_layout_is_reordered_once(project):
     assert con.execute("SELECT COUNT(*) FROM vectors").fetchone()[0] == first["vectors"]["scale-hash-v1"]
     con.close()
     assert run(proj, "update")["embedded"] == {"scale-hash-v1": 0}
+
+
+def test_a_paper_is_loaded_by_id_or_doi_and_papers_are_ranked_for_a_question(project, tmp_path):
+    proj = project
+    run(proj, "update")
+    one = run(proj, "get", "10.1/one")                                      # by DOI, through the index
+    assert one["paper_id"] == 1 and one["title"] == "Copper nanocubes for CO2 to ethylene" and one["pages"] == 2
+    assert [t["page"] for t in one["text"]] == sorted((t["page"] for t in one["text"]), key=int)
+    assert "Isotope labelling" in " ".join(t["text"] for t in one["text"])
+    assert run(proj, "get", "1")["text"] == one["text"]
+    r = subprocess.run([sys.executable, "-I", str(SCRIPTS / "vectors.py"), "--project", str(proj.root), "get", "1",
+                        "--text"], capture_output=True, text=True, timeout=600)
+    assert "[page 1]" in r.stdout and "[page 2]" in r.stdout and "10.1/one" in r.stdout
+    ids = tmp_path / "ids.txt"
+    ranked = run(proj, "search", "copper catalysts", "--by-paper", "--k", 2, "--ids-out", ids)
+    got = [p["paper_id"] for p in ranked["papers"]]
+    assert got[0] == 1 and len(got) == 2 and ids.read_text().split() == [str(i) for i in got]
+    assert all(1 <= len(p["passages"]) <= 3 and p["title"] for p in ranked["papers"])
+    r = subprocess.run([sys.executable, "-I", str(SCRIPTS / "vectors.py"), "--project", str(proj.root), "get", "4"],
+                       capture_output=True, text=True, timeout=600)
+    assert r.returncode != 0 and "not in the vector store" in r.stderr and "Traceback" not in r.stderr

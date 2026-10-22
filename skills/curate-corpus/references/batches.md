@@ -4,11 +4,11 @@
 
 | path | written by | content |
 |---|---|---|
-| `run.json` | prepare | the corpus manifest, the scale command, the schema version pinned, and each source picked (DOI, title, year, the copy's version and licence as the paper index has them) |
+| `run.json` | prepare | the corpus manifest, the scale command, the schema version pinned, the models (`curator`, `reviewer`: a model, `api:<model>` with its endpoint, or `skip`), and each source picked (DOI, title, year, the copy's version and licence as the paper index has them) |
 | `sources/<id>/` | `scale source start` | SCALE's working folder: `<slug>.graph.json`, `source.json`, `rights.yaml`, `BRIEF.md`, `pdfs/` and `work/texts/` (local; git-ignored by its `.gitignore`) |
 | `sources/<id>/work/si.json` | prepare | the SI files whose text was appended to the page texts (pages `[page S1]` …), and those left out, with why |
 | `sources/<id>/work/curation.json` | the curator subagent | `result` (`curated` or `no_data`), `records`, `gaps`, `not_curated`, `note`, `attempt` |
-| `sources/<id>/work/review.json` | the second-reading subagent | `verdict` (`pass`, `needs_fix`, `reject`), `issues`, `coverage`, `note` |
+| `sources/<id>/work/review.json` | the second reader (a subagent, or `review-api`) | `verdict` (`pass`, `needs_fix`, `reject`), `issues`, `coverage`, `note`; `reader` when an API model read it |
 | `sources/<id>/work/gaps/GAP-*.json` | the curator | the gap reports it wrote (SCALE's gap format); `status` counts them by kind and lists the `missing_concept` ones |
 | `sources/<id>/work/check.json` | status | the last `scale source check`, kept while the graph and `rights.yaml` are unchanged |
 | `prompts/<role>/<id>.md` | next | the prompts handed out |
@@ -26,10 +26,10 @@
 |---|---|---|
 | `not_started` | prepare has not made the folder (or `scale source start` failed: `run.json` keeps the error) | re-run prepare |
 | `prepared` | the folder is ready, no curator's report yet | `next --role curate` |
-| `curated` | the curator reported, the check passes, no second reading after the last change | `next --role review` |
+| `curated` | the curator reported, the check passes, no second reading after the last change | `next --role review` (an API reader: `review-api`) |
 | `check_failed` | the curator reported but `scale source check` fails | `next --role fix` (the prompt lists the errors) |
 | `needs_fix` | the second reading asked for fixes | `next --role fix` (the prompt lists the issues) |
-| `passed` | the check passes and the second reading after the last change passed it (`curated` or `no_data`) | settled: `status --apply`, then finish |
+| `passed` | the check passes and the second reading after the last change passed it (`curated` or `no_data`); with `--reviewer skip`, the check alone | settled: `status --apply`, then finish |
 | `rejected` | the second reading found the wrong paper or an unreadable text | settled; a person looks |
 | `failed` | three fixes reported and the check or the reading still fails | settled; a person looks |
 
@@ -48,8 +48,12 @@ three hours unless its report arrives first. A subagent that stopped without rep
   Its pass is a second reading by an agent, not a review.
 - Trust a subagent's reply only together with `status`: status runs `scale source check` itself and reads the reports
   from the folder.
-- Each source costs about three to four subagent calls (curate, read, sometimes a fix and another reading). Say this
-  before a large run.
+- Each source costs about three to four subagent calls (curate, read, sometimes a fix and another reading), each
+  starting with about 46,000 tokens of context. Say this before a large run. Every line `next` prints names the
+  model to launch the subagent with (`--curator` for curate and fix, `--reviewer` for the reading).
+- An API reader (`--reviewer api:<model>`): `review-api` sends each curated document, the curator's report and the
+  page texts (the first 300,000 characters) to the endpoint with the reading's checklist, and writes the verdict to
+  `work/review.json`. A failed call leaves the source `curated`, to be read again.
 
 ## The hand-off to the paper index
 

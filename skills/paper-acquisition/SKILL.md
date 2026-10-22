@@ -393,7 +393,10 @@ python3 -I ${CLAUDE_SKILL_DIR}/scripts/export.py --name <name> --topic <slug> [-
 into passages as SCALE cuts source pages, a vector per passage text and embedder, and a keyword index. The index
 (papers.db) keeps the records; the store keeps only each passage's text, page and position and its vectors, and
 `vectors.py search "<question>"` joins its hits to the index (title, year, DOI); passages of reference lists, which
-match almost any query on the titles they cite, are left out unless `--with-references`. Nothing is read or embedded twice: a
+match almost any query on the titles they cite, are left out unless `--with-references`. `--ids` searches inside
+given papers; `--by-paper` ranks papers (by their best passages) and `--ids-out <file>` writes their IDs, the papers
+to curate for a question (curate-corpus `--ids-file`); `vectors.py get <ID or DOI> [--text]` loads one paper as the
+store holds it, its record and its text page by page. Nothing is read or embedded twice: a
 vector belongs to a passage's text and embedder, a paper is read again only when its files change (then only new text
 is embedded), a merged paper's passages move to the ID it kept, and a paper no longer downloaded (out of scope,
 retracted) leaves. Every step that changes the downloads (download_open, download_paywalled, fetch_si, dedup,
@@ -425,7 +428,7 @@ fetches it once, 133 MB — a download, so ask first), `fastembed:<model>`. A st
 | `repair.py` | once after a skill upgrade: re-apply the current abstract, non-paper and retraction rules to stored papers; `--retractions-only` |
 | `export.py` | publish pending changes into papers.db (in place); `--topic <slug> --csv` writes the topic's index CSVs; `--rebuild` (fallback; the history is kept); a filtered list as a file; `--set-extracted` |
 | `merge_db.py` | merge another copy of papers.db into this one (`--from`; `--files` copies in its PDFs and SI; `--dry-run`); then `dedup.py --apply` |
-| `vectors.py` | the vector store of the downloaded papers (publications/vectors.db): `init [--embedder]`, `update` (new and changed papers only), `search "<question>"` (`--mode hybrid\|vector\|keyword`, `--topic`, `--year`), `status`, `drop --embedder` |
+| `vectors.py` | the vector store of the downloaded papers (publications/vectors.db): `init [--embedder]`, `update` (new and changed papers only), `search "<question>"` (`--mode hybrid\|vector\|keyword`, `--topic`, `--year`, `--ids`, `--by-paper`, `--ids-out`), `get <ID or DOI>` (one paper's text), `status`, `drop --embedder` |
 | `filters.py` | saved filters kept in papers.db and re-run as it evolves: `define`, `list`, `show`, `refresh`, `export` (a filter's papers as their own database; `--public`: abstracts only for OA and OA+ND) |
 | `freeze_corpus.py` | a frozen corpus manifest for curation (SCALE's format: every candidate with its status; `scale corpus check`) |
 | `_ezlimit.py status` | EZproxy counters, cooldowns, hard stop (`clear-hard-stop` only after the user's review) |
