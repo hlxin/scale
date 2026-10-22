@@ -256,7 +256,7 @@ CREATE TABLE IF NOT EXISTS passages (id TEXT PRIMARY KEY, paper_id INTEGER NOT N
 CREATE INDEX IF NOT EXISTS ix_passages_paper ON passages(paper_id);
 CREATE INDEX IF NOT EXISTS ix_passages_sha ON passages(text_sha1);
 CREATE TABLE IF NOT EXISTS vectors (text_sha1 TEXT NOT NULL, embedder TEXT NOT NULL, vec BLOB NOT NULL,
-  PRIMARY KEY (text_sha1, embedder)) WITHOUT ROWID;
+  PRIMARY KEY (embedder, text_sha1)) WITHOUT ROWID;
 """
 FTS = """
 CREATE VIRTUAL TABLE IF NOT EXISTS passages_fts USING fts5(text, content='passages', content_rowid='rowid');
@@ -279,7 +279,24 @@ def open_store(proj, create=False):
     con = sqlite3.connect(str(path), timeout=300)
     con.execute("PRAGMA journal_mode=WAL")
     con.executescript(SCHEMA + FTS)
+    _key_by_embedder(con)
     return con
+
+
+def _key_by_embedder(con):
+    """A store built before 2026-10-22 kept vectors in text order, each embedder's scattered among the others': kept
+    in embedder order, a search reads one embedder's vectors in one pass. Rebuilt once, in place (then compacted)."""
+    if {r[1]: r[5] for r in con.execute("PRAGMA table_info(vectors)")}.get("embedder") == 1:
+        return
+    log("vectors: ordering the vectors by embedder (once) ...")
+    with con:
+        con.execute("CREATE TABLE vectors_by_embedder (text_sha1 TEXT NOT NULL, embedder TEXT NOT NULL, vec BLOB NOT "
+                    "NULL, PRIMARY KEY (embedder, text_sha1)) WITHOUT ROWID")
+        con.execute("INSERT INTO vectors_by_embedder SELECT text_sha1, embedder, vec FROM vectors ORDER BY embedder, "
+                    "text_sha1")
+        con.execute("DROP TABLE vectors")
+        con.execute("ALTER TABLE vectors_by_embedder RENAME TO vectors")
+    con.execute("VACUUM")
 
 
 def about(con):
@@ -301,9 +318,10 @@ def wanted(led):
     """{paper_id: (pdf sha1, pdf path, [SI PDF paths])}: the downloaded research papers, in scope in a topic, whose
     PDF is on disk (the topic folders hold the same PDF as clones; the first one is read)."""
     root, out = led.proj.root, {}
-    rows = led.q("SELECT p.id, p.sha1, t.path, t.si_paths FROM papers p JOIN paper_topics t ON t.paper_id = p.id "
-                 "WHERE p.downloaded = 1 AND p.is_erratum = 0 AND COALESCE(p.retracted, 0) = 0 AND t.path IS NOT NULL "
-                 "AND COALESCE(t.in_scope, 1) = 1 ORDER BY p.id, t.topic")
+    # the topic rows with a PDF first (a few thousand), then each one's paper: never a scan of every paper
+    rows = led.q("SELECT p.id, p.sha1, t.path, t.si_paths FROM paper_topics t CROSS JOIN papers p ON p.id = t.paper_id "
+                 "WHERE t.path IS NOT NULL AND COALESCE(t.in_scope, 1) = 1 AND p.downloaded = 1 AND p.is_erratum = 0 "
+                 "AND COALESCE(p.retracted, 0) = 0 ORDER BY p.id, t.topic")
     for pid, sha, path, si in rows:
         cur = out.get(pid)
         if cur is None and (root / path).is_file():
@@ -492,31 +510,56 @@ def _fts_query(text):
     return " OR ".join('"' + w.replace('"', "") + '"' for w in dict.fromkeys(words))
 
 
-_MATRIX = {}         # (store, embedder) -> (when the store changed, rowids, paper ids, vectors as float32, norms)
+# a reference list's passages match almost any query on the titles they cite: a search leaves them out unless asked
+_REF = [(re.compile(r"\bet al\b"), 2), (re.compile(r"(?<![\d.])(19[5-9]\d|20[0-4]\d)[a-z]?(?=[,;.)\s])"), 1),
+        (re.compile(r"\b\d{1,5}\s?[-–−]\s?\d{1,5}\b"), 1),
+        (re.compile(r"(^|\s)(\[\d{1,3}\]|\(\d{1,3}\)|\d{1,3}\.)\s+[A-Z][a-z]+,?\s"), 2), (re.compile(r"10\.\d{4,9}/"), 2),
+        (re.compile(r"\b[A-Z][a-zà-ÿ'-]+,?\s(?:[A-Z]\.\s?-?){1,3}[,;]"), 2),
+        (re.compile(r"\b(?:J\.|Chem\.|Phys\.|Soc\.|Catal\.|Mater\.|Lett\.|Rev\.|Nat\.|Angew\.|Commun\.|Sci\.|Eng\.|Int\.|"
+                    r"Appl\.|Energy|Environ\.)\s"), 1)]
+
+
+def is_reference_list(text):
+    """A passage of a reference list: dense with citations (authors' initials, et al., years, volumes and pages, DOIs,
+    journal abbreviations) — at least 4 such marks and 2.5 per 100 characters."""
+    hits = sum(w * len(rx.findall(text)) for rx, w in _REF)
+    return hits >= 4 and hits * 100 / max(1, len(text)) >= 2.5
+
+
+_MATRIX = {}         # (store, embedder) -> (when the store changed, rowids, paper ids, text rows, int8 vectors, norms)
+BLOCK = 65536        # vectors converted to float32 at a time for the cosine, bounding the working memory
 
 
 def _matrix(con, path, emb_id):
-    """Every passage's vector for this embedder, read once per process while the store does not change."""
+    """This embedder's vectors (one per passage text, read in one pass: the table is ordered by embedder) and, for
+    every passage, its row; read once per process while the store does not change."""
     np = _np()
     stamp = about(con).get("updated_at")
     cached = _MATRIX.get((str(path), emb_id))
     if cached and cached[0] == stamp:
         return cached[1:]
-    rows = con.execute("SELECT p.rowid, p.paper_id, v.vec FROM passages p JOIN vectors v ON v.text_sha1 = "
-                       "p.text_sha1 AND v.embedder = ? ORDER BY p.rowid", (emb_id,)).fetchall()
+    pos, blobs = {}, []
+    for sha, vec in con.execute("SELECT text_sha1, vec FROM vectors WHERE embedder = ?", (emb_id,)):
+        pos[sha] = len(blobs)
+        blobs.append(vec)
+    rows = [(r, pid, pos[sha]) for r, pid, sha in con.execute("SELECT rowid, paper_id, text_sha1 FROM passages ORDER BY "
+                                                              "rowid") if sha in pos]
     rowids = np.array([r[0] for r in rows], dtype=np.int64)
     pids = np.array([r[1] for r in rows], dtype=np.int64)
-    m = np.frombuffer(b"".join(r[2] for r in rows), dtype=np.int8).reshape(len(rows), -1).astype(np.float32) \
-        if rows else np.zeros((0, 1), dtype=np.float32)
-    norms = np.linalg.norm(m, axis=1)
+    which = np.array([r[2] for r in rows], dtype=np.int64)
+    m = np.frombuffer(b"".join(blobs), dtype=np.int8).reshape(len(blobs), -1) if blobs else np.zeros((0, 1), np.int8)
+    norms = np.ones(len(m), dtype=np.float32)
+    for lo in range(0, len(m), BLOCK):
+        norms[lo:lo + BLOCK] = np.linalg.norm(m[lo:lo + BLOCK].astype(np.float32), axis=1)
     norms[norms == 0] = 1.0
-    _MATRIX[(str(path), emb_id)] = (stamp, rowids, pids, m, norms)
-    return rowids, pids, m, norms
+    _MATRIX[(str(path), emb_id)] = (stamp, rowids, pids, which, m, norms)
+    return rowids, pids, which, m, norms
 
 
-def search(proj, query, k=10, mode="hybrid", embedder=None, allowed=None, depth=1000):
+def search(proj, query, k=10, mode="hybrid", embedder=None, allowed=None, depth=1000, references=False):
     """The best `k` passages for `query` (hybrid: the mean of BM25 scaled to its best and the cosine; vector;
-    keyword), among the papers in `allowed` (a set of IDs) when given, joined to their records in the index."""
+    keyword), among the papers in `allowed` (a set of IDs) when given, reference lists left out unless `references`,
+    joined to their records in the index."""
     np = _np()
     con = open_store(proj)
     emb_id = embedder or embedders_of(con)[0]
@@ -524,12 +567,15 @@ def search(proj, query, k=10, mode="hybrid", embedder=None, allowed=None, depth=
     if mode in ("hybrid", "vector"):
         q = encode(_embedder(emb_id), [query], query=True)[0].astype(np.float32)
         q /= (np.linalg.norm(q) or 1.0)
-        rowids, pids, m, norms = _matrix(con, store_path(proj), emb_id)
+        rowids, pids, which, m, norms = _matrix(con, store_path(proj), emb_id)
         if len(rowids):
-            s = (m @ q) / norms
+            per_text = np.empty(len(m), dtype=np.float32)
+            for lo in range(0, len(m), BLOCK):
+                per_text[lo:lo + BLOCK] = m[lo:lo + BLOCK].astype(np.float32) @ q
+            s = (per_text / norms)[which]
             if allowed is not None:
                 s = np.where(np.isin(pids, np.fromiter(allowed, dtype=np.int64)), s, -np.inf)
-            top = [i for i in np.argsort(-s)[:depth] if np.isfinite(s[i])]
+            top = [i for i in np.argpartition(-s, min(depth, len(s) - 1))[:depth] if np.isfinite(s[i])]
             cos = {int(rowids[i]): float(s[i]) for i in top}
     if mode in ("hybrid", "keyword"):
         fq = _fts_query(query)
@@ -546,15 +592,20 @@ def search(proj, query, k=10, mode="hybrid", embedder=None, allowed=None, depth=
         scored = {r: s / best for r, s in kw.items()}
     else:
         scored = {r: 0.5 * (kw.get(r, 0.0) / best) + 0.5 * max(cos.get(r, 0.0), 0.0) for r in set(cos) | set(kw)}
-    hits = sorted(scored.items(), key=lambda x: (-x[1], x[0]))[:k]
-    out = []
-    for rowid, score in hits:
+    out, left_out = [], 0
+    for rowid, score in sorted(scored.items(), key=lambda x: (-x[1], x[0])):
         pid_, pas, page, text = con.execute("SELECT paper_id, id, page, text FROM passages WHERE rowid = ?",
                                             (rowid,)).fetchone()
+        if not references and is_reference_list(text):
+            left_out += 1
+            continue
         out.append({"score": round(score, 4), "passage": pas, "paper_id": pid_, "page": page, "text": text})
+        if len(out) == k:
+            break
     con.close()
     _join_records(proj, out)
-    return {"query": query, "mode": mode, "embedder": emb_id, "hits": out}
+    return {"query": query, "mode": mode, "embedder": emb_id, "hits": out,
+            "reference_passages_left_out": None if references else left_out}
 
 
 def _join_records(proj, hits):
