@@ -27,6 +27,7 @@ STEPS: dict[str, tuple[str, str]] = {
     "0.3.0": ("0.4.0", 'breaking: result entries (Experiment.result_values with value ids, phase, stream, unresolved_target); conversion, product_yield, selectivity, production_rate, product_amount and balance kinds; in catalysis a species is a ChemicalSpecies (context_targets)'),
     "0.4.0": ("0.5.0", "breaking: the catalysis checklist applies a test's cases by its driving_forces (a test that lists none has unknown applicability, never a complete checklist) and looks for connected evidence; CatalyticTest.interpretations, Analysis.evaluation_basis, power_supply_input and the dark control's control_kind, differs_in, temperature_matched_at and temperature_matched_over are new (provisional)"),
     "0.5.0": ("0.5.1", 'Represent bifunctional (tandem) catalysts: component function, integration mode and scale, site proximity (provisional)'),
+    "0.5.1": ("0.5.2", "additive: ProductLump (a product reported as a lump or fraction) and SUBSET_OF; HAS_OUTPUT.to and PRODUCES.to accept a ProductLump; no record changes"),
 }
 
 

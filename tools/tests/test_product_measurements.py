@@ -429,7 +429,7 @@ def test_the_schema_diff_detects_a_narrowed_species_and_a_changed_kind(spec):
     a = copy.deepcopy(spec)
     a.pop("context_targets")
     d = schema_change.diff_specs(a, spec)
-    assert d["narrowed"] == ["context_targets.species: a value's target read as its species names a ChemicalSpecies"]
+    assert d["narrowed"] == ["context_targets.species: a value's target read as its species names a ChemicalSpecies or ProductLump"]
     assert schema_change.tier(d) == 3
     b = copy.deepcopy(spec)
     b["context_targets"]["species"]["targets"] = ["ChemicalSpecies", "Material"]
@@ -452,9 +452,9 @@ def test_the_loader_refuses_a_malformed_narrowing(tmp_path):
         shutil.copy(GRAPH_MANIFEST.parent / f, root / "domain/graph" / f)
     cat = root / "domain/graph/catalysis.yaml"
     text = cat.read_text()
-    for bad, error in (("    - ChemicalSpecies\nchecklist:", "names \\['Molecule'\\]"),
+    for bad, error in (("    - ChemicalSpecies\n    - ProductLump\nchecklist:", "names \\['Molecule'\\]"),
                        ("  species:\n    maturity", "names no context")):
-        broken = text.replace("    targets:\n    - ChemicalSpecies\nchecklist:", "    targets:\n    - Molecule\nchecklist:") \
+        broken = text.replace("    - ChemicalSpecies\n    - ProductLump\nchecklist:", "    - Molecule\nchecklist:") \
             if "ChemicalSpecies" in bad else text.replace("context_targets:\n  species:", "context_targets:\n  colour:")
         cat.write_text(broken)
         with pytest.raises(ScaleError, match=error):
