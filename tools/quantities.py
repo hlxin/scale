@@ -39,6 +39,8 @@ BASES = ("L", "M", "T", "I", "Θ", "N")
 READ_FROM = ("unit", "basis", "definition", "target", "normalized_by", "sibling", "record", "producer")
 OPEN_READ = ("target", "record", "producer")      # what an open context (no list of values) is read from
 UNSTATED_CONTEXT = ("exclude", "group")  # a value that does not state a context: left out (exclude), or compared apart
+# a producer whose label has no such property: its values compared apart (apart), or read as stating none (unstated)
+WITHOUT_PROPERTY = ("apart", "unstated")
 NOT_STATED = "not stated"               # the context value of the values that do not state one read with unstated: group
 UNSPECIFIED = "<unspecified>"           # a statement that names no value of the context (other, not_reported)
 CONFLICT = "<conflict>"                 # one source naming two values of a context
@@ -48,7 +50,8 @@ VALUE_STATUS = {"present", "not_reported", "not_measured", "not_applicable", "be
                 "below_quantification_limit"}
 BLOCK_KEYS = {"maturity", "description", "basis", "dimensions", "units", "contexts", "kinds"}
 UNIT_KEYS = {"description", "prefixes", "prefixed", "unprefixed", "spellings", "stating"}
-CONTEXT_KEYS = {"description", "read_from", "values", "unspecified", "refine", "open", "property", "unstated"}
+CONTEXT_KEYS = {"description", "read_from", "values", "unspecified", "refine", "open", "property", "unstated",
+                "without_property"}
 KIND_KEYS = {"description", "dimensions", "compare_by", "denominator", "share", "closure", "maturity", "shows"}
 UNSTATED = ("warning",)     # what the validator does with a value that does not say how it was calculated
 _EXP = re.compile(r"^(?P<base>.*?)(?:\^|\*\*)?(?P<exp>[-+]?\d+)$")
@@ -234,6 +237,11 @@ class Contracts:
             if c.get("unstated", "exclude") not in UNSTATED_CONTEXT:
                 raise ScaleError(f"quantities.contexts.{name}: unstated is {' or '.join(UNSTATED_CONTEXT)} (what a "
                                  "comparison does with a value that does not state the context)")
+            if c.get("without_property", "apart") not in WITHOUT_PROPERTY or ("without_property" in c
+                                                                              and "producer" not in read):
+                raise ScaleError(f"quantities.contexts.{name}: without_property is {' or '.join(WITHOUT_PROPERTY)}, for a "
+                                 "context read from the producer (what a comparison does with a value whose producer's "
+                                 "label has no such property)")
             vals = {}
             for v, d in values.items():
                 d = d or {}
@@ -248,7 +256,8 @@ class Contracts:
                     raise ScaleError(f"quantities.contexts.{name}.refine names {v!r}, not one of its values")
             self.contexts[name] = {"read_from": read, "values": vals, "unspecified": [str(x) for x in c.get("unspecified") or []],
                                    "refine": dict(refine), "open": bool(c.get("open")), "property": c.get("property"),
-                                   "unstated": c.get("unstated", "exclude"), "_terms": _term_patterns(vals)}
+                                   "unstated": c.get("unstated", "exclude"),
+                                   "without_property": c.get("without_property", "apart"), "_terms": _term_patterns(vals)}
         for sym, d in self._stating.items():
             d = dict(d or {})
             vec = self.dim(d.pop("dimension", None), f"units.stating.{sym}")
@@ -475,15 +484,17 @@ class Contracts:
                 if got.status == "stated":
                     ok, text = render(got.raw)
                     said = f"{got.producer} {prop} {text}"
-                    if not ok:
+                    if not ok or not states_something(got.raw):
                         why.append(f"its producer {got.producer} states its {prop} as {text}")
-                    elif c["open"]:
-                        st.append(Statement("producer", text, said))
+                    elif c["open"]:                  # compared by the exact value, shown as written
+                        st.append(Statement("producer", render(got.raw, exact=True)[1], said))
                     else:
                         mapped = self.sibling_value(name, got.raw) if isinstance(got.raw, str) else None
                         st.append(Statement("producer", mapped if mapped is not None else CONFLICT, said))
                 elif got.status == "unstated":
                     why.append(f"its producer {got.producer} states no {prop}")
+                elif got.status == "none" and c["without_property"] == "unstated":
+                    why.append(f"its producer {got.producer}, a {got.label}, has no {prop}")
                 elif got.status == "none":
                     st.append(Statement("producer", f"none ({got.label})", f"{got.producer}, a {got.label}, which has no "
                                                                          f"{prop}", none=True))
@@ -591,22 +602,34 @@ def produced(prop: str, v: dict, holder: Holder) -> Produced:
     return Produced("none", ps[0].get("id"), ps[0].get("label"))
 
 
-def _num(x: Any) -> str:
-    return f"{x:g}" if isinstance(x, float) else str(x)
+def _num(x: Any, exact: bool = False) -> str:
+    """A number as text: six significant digits to show it, or (``exact``) every digit it has, an integral float as an
+    integer, so that two numbers are one text only when they are one number."""
+    if isinstance(x, float):
+        if exact:
+            return str(int(x)) if x.is_integer() else repr(x)
+        return f"{x:g}"
+    return str(x)
 
 
-def render(x: Any) -> tuple[bool, str]:
+def states_something(x: Any) -> bool:
+    """Whether a property states a value: anything but a value object that is not measured or does not apply (one not
+    reported states nothing either, which :func:`render` says)."""
+    return not (isinstance(x, dict) and x.get("status") in ("not_measured", "not_applicable"))
+
+
+def render(x: Any, exact: bool = False) -> tuple[bool, str]:
     """A property as a context or a shown setting reads it: (whether it states something, its text). Text and enum values
     as written (runs of whitespace as one space); a value object by its number and unit (a range, a bound), its text, its
     truth or the record it names, and one that is not reported by its status and reason; a map entry by entry, by key;
-    a list item by item."""
+    a list item by item. ``exact`` writes numbers with every digit (what an open context compares by)."""
     if isinstance(x, str):
         s = " ".join(x.split())
         return bool(s), s
     if isinstance(x, bool):
         return True, "true" if x else "false"
     if isinstance(x, (int, float)):
-        return True, _num(x)
+        return True, _num(x, exact)
     if isinstance(x, dict) and x.get("status") in VALUE_STATUS:
         st, unit = x["status"], (" " + " ".join(str(x["unit"]).split())) if isinstance(x.get("unit"), str) else ""
         if st == "not_reported":
@@ -620,18 +643,18 @@ def render(x: Any) -> tuple[bool, str]:
         if "ref_value" in x:
             return True, str(x["ref_value"])
         if "lower" in x and "upper" in x:
-            return True, f"{_num(x['lower'])}–{_num(x['upper'])}{unit}"
+            return True, f"{_num(x['lower'], exact)}–{_num(x['upper'], exact)}{unit}"
         if "value" in x:
             lead = {"upper": "at most ", "lower": "at least "}.get(x.get("bound"), "")
             if st != "present":
                 lead = "below " + ("detection" if st == "below_detection_limit" else "quantification") + " limit "
-            return True, f"{lead}{_num(x['value'])}{unit}"
+            return True, f"{lead}{_num(x['value'], exact)}{unit}"
         return False, st.replace("_", " ")
     if isinstance(x, dict):
-        parts = [(k, render(x[k])) for k in sorted(x)]
+        parts = [(k, render(x[k], exact)) for k in sorted(x)]
         return any(ok for _, (ok, _) in parts), "; ".join(f"{k} {s}" for k, (_, s) in parts)
     if isinstance(x, list):
-        parts = [render(i) for i in x]
+        parts = [render(i, exact) for i in x]
         return any(ok for ok, _ in parts), ", ".join(s for _, s in parts)
     return False, ""
 

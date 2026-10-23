@@ -1,6 +1,7 @@
 """Invalid scale-catal documents, one defect each: every one is rejected, for the reason expect.yaml
 states, and nothing else is wrong with it (so the fixture tests the rule it names). Each is checked under the version
-it pins, as `scale graph validate` (and so `scale check`) checks it; they all pin their base example's version."""
+it pins, as `scale graph validate` (and so `scale check`) checks it; each pins its base example's version (the
+electro example's, or the example expect.yaml names as `base`)."""
 
 import pytest
 
@@ -26,17 +27,20 @@ def test_the_index_names_every_fixture_and_scale_check_uses_it():
     from conftest import REPO
     assert len(invalid_fixtures(REPO)) == len(INDEX) >= 8
     assert sorted(p.name for p in (FIXTURES / "invalid").glob("*.json")) == sorted(e["file"] for e in INDEX)
-    base = load_doc(REPO / "domain/examples/scale-catal/driving-force-examples/electro.json")
+    electro = load_doc(REPO / "domain/examples/scale-catal/driving-force-examples/electro.json")
     bi = load_doc(REPO / "domain/examples/scale-catal/bifunctional-examples/tandem-granule-mixture.json")
-    pins = {load_doc(FIXTURES / "invalid" / e["file"])["graph"]["schema_version"] for e in INDEX}
-    lumps = {load_doc(FIXTURES / "invalid" / e["file"])["graph"]["schema_version"] for e in INDEX if e["file"].startswith("lump-")}
-    assert pins - lumps == {base["graph"]["schema_version"], bi["graph"]["schema_version"]}, pins   # the base and the bifunctional example's versions (build_fixtures); the lump fixtures pin the version that adds ProductLump
-    for e in INDEX:                                                           # each pins its base example's version
+    lump = load_doc(REPO / "domain/examples/scale-catal/product-measurement-examples/product-lumps-cheng-like.json")
+    for e in INDEX:                                                          # each pins its base example's version
         doc = load_doc(FIXTURES / "invalid" / e["file"])
-        # build_fixtures builds the multifunctional ones (#40) on the bifunctional example, the version that adds
-        # component functions; every other one on the base example
-        on = bi if any(n["id"].startswith("ex:bifunctional/") for n in doc["nodes"]) else base
-        if e["file"].startswith("lump-"):                                     # built on the lump example, at the head version
-            on = load_doc(REPO / "domain/examples/scale-catal/product-measurement-examples/product-lumps-cheng-like.json")
-        assert doc["graph"]["schema_version"] == on["graph"]["schema_version"], e["file"]
-    assert pinned_schema(base)                                                # the head or a frozen version
+        # an entry may name its base; otherwise build_fixtures built the multifunctional ones (#40) on the bifunctional
+        # example, the lump ones on the lump example, and every other one on the base example
+        if "base" in e:
+            on = load_doc(REPO / e["base"])
+        elif e["file"].startswith("lump-"):
+            on = lump
+        elif any(n["id"].startswith("ex:bifunctional/") for n in doc["nodes"]):
+            on = bi
+        else:
+            on = electro
+        assert doc["graph"]["schema_version"] == on["graph"]["schema_version"], (e["file"], doc["graph"]["schema_version"])
+        assert pinned_schema(on)                                              # the head or a frozen version

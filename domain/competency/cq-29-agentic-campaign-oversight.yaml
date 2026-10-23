@@ -1,0 +1,88 @@
+# A competency question of the catalysis domain (tools/competency.py; `scale domains cq catalysis`).
+# It runs on public synthetic examples, so anyone can rerun it and see the same answer.
+id: CQ-29
+question: In a campaign run by an agent, what level of autonomy and human oversight does the source declare, and what did
+  a person decide about each run the agent proposed?
+description: |
+  An agentic campaign is a Design of kind adaptive that states what TRACE-AI asks of its workflow (Xin et al., Chem Catal.
+  2026): its autonomy_level, on TRACE-AI's scale A0-A5, and its human_oversight. Each run it proposed is PART_OF_DESIGN
+  with its round (iteration) and PROPOSED_BY the agent, with what the operator decided about the proposal before it
+  ran (human_decision). In the example the operator approved the first run, changed the temperature of the second,
+  approved the third (aborted by an alarm) and rejected a fourth proposal, which never ran: four rows, and the rejected
+  one is still a record. A variant leaves out what the operator approved as proposed: the interventions.
+documents:
+  - examples/scale-catal/agentic-examples/self-driving-campaign.json
+plan:
+  question: What did a person decide about each run the agent proposed, and at what level of autonomy?
+  match:
+    label: Design
+    as: campaign
+    where:
+      - prop: design_kind
+        op: eq
+        value: adaptive
+  steps:
+    - from: campaign
+      edge: PART_OF_DESIGN
+      direction: in
+      to: Experiment
+      as: run
+      edge_as: part
+    - from: run
+      edge: PROPOSED_BY
+      to: Software
+      as: agent
+      edge_as: proposed
+  return:
+    - campaign.autonomy_level
+    - campaign.human_oversight
+    - part.iteration
+    - run.name
+    - run.experiment_status
+    - proposed.human_decision
+    - agent.name
+  evidence: true
+expect:
+  status: answered
+  min_rows: 4
+  max_rows: 4
+  values:
+    campaign.autonomy_level:
+      - A2
+    proposed.human_decision:
+      - approved
+      - modified
+      - rejected
+    run.experiment_status:
+      - completed
+      - aborted
+      - proposed
+variants:
+  - description: The interventions only, what the operator changed or refused.
+    plan:
+      steps:
+        - from: campaign
+          edge: PART_OF_DESIGN
+          direction: in
+          to: Experiment
+          as: run
+          edge_as: part
+        - from: run
+          edge: PROPOSED_BY
+          to: Software
+          as: agent
+          edge_as: proposed
+          edge_where:
+            - prop: human_decision
+              op: in
+              value:
+                - modified
+                - rejected
+    expect:
+      status: answered
+      min_rows: 2
+      max_rows: 2
+      values:
+        proposed.human_decision:
+          - modified
+          - rejected

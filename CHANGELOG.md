@@ -23,6 +23,91 @@
   are missing. `freeze_corpus.py` now selects a corpus by its rule before anything is fetched, so a part of a large
   catalog is fetched without making a subtopic.
 
+- **Schema 0.7.4 (additive): one analysis kind for how much of a rate is heating, for any driving force.** Requested by
+  @hlxin (ThermalContributionAnalysis was the one analysis that was a record type of its own, it covered light only,
+  and its results were fields of its own). An Analysis may now be of kind thermal_contribution: it separates the
+  heating a driving force causes from its other effects on a rate (light, a plasma, a field, a current), HAS_INPUT the
+  driven test and the controls it compares, states its partition_method (now the analysis's, with the general
+  control_at_matched_temperature beside dark_control_at_matched_temperature) and gives the shares as result entries.
+  ThermalContributionAnalysis is deprecated, the first record type to be: it stays valid, inherits partition_method
+  from Analysis, and a document of 0.7.4 or later that uses it is told what replaces it (a warning; `scale graph
+  describe` says it too). The light checklist accepts either form; a new case asks a thermal_contribution analysis for
+  its method, partition, results, limitations and the test it separates (one driven by something besides heat). A
+  synthetic example (`thermal-examples/thermal-contribution.json`, light and a plasma), CQ-34, a counterexample and
+  tests.
+
+- **Schema 0.7.3 (additive): tests driven by a program, the analyses of their responses, and fitted kinetic
+  constants.** Requested by @hlxin (grow toward transient kinetics). SCALE could say that a test was operated
+  dynamically (an Operation's pattern, period and segments), but not the levels it switched between, a pulse, a
+  pseudo-random sequence, what t = 0 was or whether the program could be rebuilt; nor what an isotope switch or a
+  modulation measured, nor how a fit treated its reactor. All new terms are provisional.
+  - **The program.** An Operation states its waveform (square, sinusoidal, triangular, pulse_train,
+    pseudo_random_binary), its levels (numbers, or text values such as 12CO and 13CO), amplitude, a pulse's amount and
+    width, a sequence's length and bit duration, a segment's label (the half-cycles of a chemical loop), what t = 0 is
+    (time_origin) and how much of it the source gives (program_detail: exact, parametric, descriptive). A time series
+    states its time resolution, its delay and whether it was corrected for it; a DURING link how the observation and the
+    kinetics were synchronized.
+  - **What the responses give.** An Analysis may be an isotopic_transient, pulse_response, modulation_excitation,
+    step_response or frequency_response, with new kinds of result: surface_residence_time and
+    surface_intermediate_amount (an isotope switch at steady state; Shannon and Goodwin, Chem. Rev. 1995), phase_delay
+    (phase-sensitive detection; Urakawa, Burgi and Baiker, Chem. Eng. Sci. 2008) and response_time_constant, each
+    compared by the species it is of. A modulation analysis states what its delays are measured against
+    (phase_reference: the stimulus or another species' response, phase_reference_species), the modulation_period and
+    the demodulation_harmonic, and a phase delay is compared only within one reference, period (its exact number) and
+    harmonic; a delay without a reference or a period, or recorded on a test with no analysis, is left out (a context
+    may read a producer whose label lacks its property as stating none: without_property). That a species is an
+    intermediate or a spectator stays a Claim the analysis supports.
+  - **Fitted constants.** A kinetic fit states its reactor_model (differential, stirred_tank, plug_flow,
+    axial_dispersion, batch, knudsen_pulse), rate_basis, concentration_measure (and standard_pressure) and
+    thermodynamic_consistency (Mhadeshwar, Wang and Vlachos, J. Phys. Chem. B 2003); a value states how its interval was
+    obtained (interval_method: curvature, profile_likelihood, bootstrap, bayesian_posterior, …) and, when fitted,
+    whether the data determine it (identifiability; Raue et al., Bioinformatics 2009). A comparison of a step's
+    activation energy shows each value's reactor treatment and names a group that mixes treatments.
+  - **Fixed (the tools, every schema version with the contract, 0.7.0 on):** a value whose producer states no charge
+    treatment was left out of a scientific comparison as missing_context; it is now compared with the others that
+    state none ("not stated"), as the contract has said since 0.7.0.
+  - An example (transient-examples), CQ-31 to CQ-33, six counterexamples, the checklist's cases for pseudo-random,
+    periodic and pulsed programs, transient analyses (a modulation analysis's reference, period and harmonic) and
+    kinetic fits. Existing documents keep 0.7.2; the migration
+    step rewrites nothing.
+
+- **Schema 0.7.2 (additive): what TRACE-AI asks of agentic catalysis, and who checked the records an agent
+  extracted.** Requested by @hlxin. TRACE-AI (Xin et al., Chem Catal. 2026, doi:10.1016/j.checat.2026.101755) is the
+  reporting checklist for catalysis enabled by AI: data, models, workflow and executable artifacts (items A1-D3). SCALE
+  could record a model and its validations, but not most of what TRACE-AI asks, and it said nothing of how its own
+  records were curated. All new terms are provisional.
+  - **Agentic campaigns.** A Design states its autonomy_level as the source declares it (TRACE-AI's A0-A5), its
+    human_oversight, interventions and intervention_count, the agent_policy and objectives, safety_bounds and
+    safety_measures, why it stopped (stop_reason, beside stopping_criterion), what it did with failed or excluded runs
+    (negative_results_policy, excluded_count) and what changed unplanned (post_hoc_changes). A proposal's PROPOSED_BY
+    says what a person decided about it (human_decision). The catalysis checklist asks an adaptive design for them.
+  - **Models and their validations.** A Model states its architecture, hyperparameters, training_objective, pretraining
+    and uncertainty_method, with the uncertainty it reports (uncertainty_components), how that was checked
+    (uncertainty_calibration) and used (uncertainty_use). A validation's EVALUATES states how it split the data
+    (split_strategy: random, grouped, time_based, out_of_distribution, prospective, external; grouped_by, folds,
+    split_seed, preprocessing_within_split) and what its results reflect (generalization). A validation that states
+    it split one table (random, grouped, time-based, out of distribution) is no longer flagged for sharing that dataset
+    with the fit (the folds of a cross-validation), nor for what both reach only through it; an observation both take
+    directly, or a record reached through another dataset, is still flagged, and so is a validation called external or
+    prospective on the training data. A Dataset may be a notebook.
+  - **How the records were curated, and who checked them.** A stewardship's autonomy_level says how much of the
+    curation an agent did (TRACE-AI's scale read for extraction). graph.checks records each check a person made of
+    records against their source (record_check): who, when, which records, what against what, the fields checked,
+    wrong and missed (the extraction's precision and recall), the outcome, and warnings acknowledged with a reason,
+    which validation lists apart from the open ones (an acknowledgement matches exactly one warning). A filtered view,
+    a bundle or a graph of some sources keeps the checks of the records it holds, leaves no id of a record it leaves
+    out, and drops the counts of a check it keeps only in part (a record left out, or one with a value or an evidence
+    item cut). `scale review sample` returns the check to fill in.
+  - **`scale trace-ai G [--source ID]`** (agent tool `scale_trace_ai`) reads the checklist on a graph's records
+    (domain/reporting/trace-ai.yaml: query plans per item): what they support, partly or not at all, what does not
+    apply and why, and what a person checks in the source; it flags a random split and a metric stated without its
+    uncertainty, and says how the records were curated. Items about a model, a dataset or a campaign are read record
+    by record. A plan that asks for a value an older vocabulary lacks is reported as not assessed
+    (`schema_gaps(..., values=True)`); a query's own answers are unchanged. It decides nothing about a source. See
+    docs/trace-ai.md.
+  - An example (agentic-examples), CQ-29 and CQ-30, five counterexamples. Existing documents keep 0.7.1; the migration
+    step rewrites nothing.
+
 - **Identifiers on records checked by their scheme (no schema change).** Requested by @hlxin (stronger connections to
   outside resources). A record's `identifiers` (a DOI, an InChIKey, a CAS number, an EC number, …) and a technique's
   `technique_id` were free text that nothing checked, so a misspelt identifier or a technique written as "XRD"

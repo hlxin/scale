@@ -539,6 +539,12 @@ nodes:
         - other
         - balance
         - spectral_fit
+        - isotopic_transient
+        - pulse_response
+        - modulation_excitation
+        - step_response
+        - frequency_response
+        - thermal_contribution
         description: balance = a carbon, charge or mass balance of an experiment's results (provisional), over the assays
           it HAS_INPUT (the streams and phases they measured) and its interval; its result is a balance value in the
           experiment's result_values, produced_by the analysis. transport_check = whether heat and mass transport
@@ -549,7 +555,20 @@ nodes:
           (shares of references, coordination numbers, distances) are its results, origin fitted, with their
           uncertainties, and what it cannot tell apart is its limitations. An alternative model of the same data is an
           analysis of its own. A fitted parameter is neither the spectrum nor the site assignment a Claim draws from
-          it.
+          it. The transient kinds (provisional) read the responses of a test operated dynamically, which it HAS_INPUT
+          with the time series it reads. isotopic_transient = an isotope switch at steady state (SSITKA), giving each
+          product's surface_residence_time and surface_intermediate_amount; pulse_response = the responses to pulses
+          (a pulse reactor, a transient pulse in the Knudsen regime), giving conversions, residence times or fitted
+          constants; modulation_excitation = a periodic stimulus read by phase-sensitive detection, giving each band's
+          or species' phase_delay, against the reference and at the period and harmonic it states; step_response = the
+          response to a step or a switch (response_time_constant); frequency_response = responses at several modulation
+          frequencies, an analysis for each period it reads. A fit of a kinetic model to such responses is a kinetic_fit
+          that names its reactor_model. thermal_contribution (provisional) = an analysis that separates the heating a
+          driving force causes from its other, non-thermal effects on a rate - light (photothermal against photochemical
+          or hot-carrier effects), a plasma, an electromagnetic field (induction, microwave) or a current (Joule
+          heating). It HAS_INPUT the driven test and the controls it compares; its partition_method says how it
+          separates them, and the shares or rates it attributes to each are its result entries (a species_fraction or a
+          production_rate of the product, its target), as the source states them.
       evaluation_basis:
         type: enum
         maturity: provisional
@@ -574,12 +593,119 @@ nodes:
         description: What the analysis cannot tell apart or rests on, as the source states it (references that fit
           equally well, a species too dilute to fit, parameters held fixed, a fit range), so that a claim drawn from it
           carries them.
+      partition_method:
+        type: enum
+        maturity: provisional
+        values:
+        - control_at_matched_temperature
+        - dark_control_at_matched_temperature
+        - wavelength_dependence
+        - intensity_dependence
+        - temperature_dependence
+        - isotope_labelling
+        - other
+        - not_reported
+        description: For a thermal_contribution analysis, how it separates heating from the other effects of the driving
+          force, as the source states it - control_at_matched_temperature = a control without the driving force (in the
+          dark, with the plasma or the field off) heated to the temperature the driven test reached;
+          dark_control_at_matched_temperature = the same control for light, its name before 0.7.4, kept so that earlier
+          records stay valid; wavelength_dependence, intensity_dependence (the irradiance, the discharge power, the field
+          strength) or temperature_dependence = rates as the source varies them; isotope_labelling = labelled reactants
+          that tell the routes apart (Baffou, Bordacchini, Baldi and Quidant, Light Sci. Appl. 2020, 9, 108,
+          doi:10.1038/s41377-020-00345-0, on telling photothermal from hot-carrier effects).
       temperature:
         type: value
         quantity: temperature
       pressure:
         type: value
         quantity: pressure
+      reactor_model:
+        type: enum
+        maturity: provisional
+        values:
+        - differential
+        - stirred_tank
+        - plug_flow
+        - axial_dispersion
+        - batch
+        - knudsen_pulse
+        - other
+        - not_reported
+        description: |
+          For a kinetic fit, how it treated the reactor its rates come from: differential = one composition throughout
+          (low conversion); stirred_tank = well mixed, the outlet composition throughout; plug_flow = composition
+          changing along the bed without mixing; axial_dispersion = plug flow with mixing along the bed; batch = a closed
+          vessel over time; knudsen_pulse = a pulse diffusing through the bed in the Knudsen regime. Constants fitted to
+          one data set under two treatments differ: a scientific comparison of a step's activation energy shows each
+          value's treatment and names, in its limitations, a group whose values were fitted under different ones.
+      rate_basis:
+        type: enum
+        maturity: provisional
+        values:
+        - per_site
+        - per_catalyst_mass
+        - per_surface_area
+        - per_reactor_volume
+        - not_reported
+        description: What the fitted rates are divided by, and so what the units of its rate constants count (per site,
+          a turnover frequency; per mass of catalyst; per surface area; per volume of the reactor or bed).
+      concentration_measure:
+        type: enum
+        maturity: provisional
+        values:
+        - partial_pressure
+        - mole_fraction
+        - concentration
+        - activity
+        - not_reported
+        description: What the gas-phase terms of its rate expressions are (partial pressures, mole fractions,
+          concentrations, or activities relative to a standard pressure), which sets the units of its adsorption and
+          rate constants; a constant fitted with partial pressures in bar and one with mole fractions differ by the
+          pressure, so the measure is stated with the constants.
+      standard_pressure:
+        type: value
+        maturity: provisional
+        quantity: pressure
+        description: The standard pressure activities are taken against, when concentration_measure is activity.
+      thermodynamic_consistency:
+        type: enum
+        maturity: provisional
+        values:
+        - enforced
+        - not_enforced
+        - not_reported
+        description: Whether the fit held the forward and reverse constants of its steps to the thermochemistry of the
+          overall reaction (the equilibrium constant), as the source says (Mhadeshwar, Wang and Vlachos, J. Phys. Chem. B
+          2003, 107, 12721, doi:10.1021/jp034954y).
+      phase_reference:
+        type: enum
+        maturity: provisional
+        values:
+        - stimulus
+        - species_response
+        - other
+        - not_reported
+        description: For a modulation_excitation or frequency_response analysis, what its phases and delays are measured
+          against - stimulus = the imposed modulation (the reference of phase-sensitive detection); species_response =
+          the response of another species, named in phase_reference_species. A source that gives delays against two
+          references is recorded as an analysis for each.
+      phase_reference_species:
+        type: ref
+        maturity: provisional
+        targets:
+        - ChemicalSpecies
+        description: The species whose response the analysis measures its delays against (phase_reference
+          species_response).
+      modulation_period:
+        type: value
+        maturity: provisional
+        description: The period of the modulation whose phases the analysis read. An analysis reads one period; a
+          frequency response read at several is recorded as an analysis for each.
+      demodulation_harmonic:
+        type: integer
+        maturity: provisional
+        description: The harmonic of the modulation frequency at which phase-sensitive detection read the phases (1 = the
+          fundamental).
   StructureModel:
     is_a: Model
     description: 'An atomistic model used in a computation (periodic slab, cluster, bulk cell, molecule); not the
@@ -632,6 +758,26 @@ nodes:
         type: datetime
       finished_at:
         type: datetime
+      time_resolution:
+        type: value
+        maturity: provisional
+        description: The shortest change the series resolves (a spectrometer's scan time, a detector's response), as
+          stated; it can be longer than the sampling interval.
+      delay:
+        type: value
+        maturity: provisional
+        description: How long a change at the catalyst takes to reach the detector (the transport or dead time of the
+          lines and the cell), as the source measured or states it.
+      delay_corrected:
+        type: boolean
+        maturity: provisional
+        description: Whether the series as reported was shifted by that delay, so that its times are those at the
+          catalyst.
+      time_origin:
+        type: text
+        maturity: provisional
+        description: What t = 0 of the series is (the switch it responds to, the start of the run), as stated; a series
+          read against a program shares that program's origin.
   Catalyst:
     is_a: ObjectOfStudy
     fixed:
@@ -1345,20 +1491,14 @@ nodes:
       sits relative to it, the gap and the dielectric.'
   ThermalContributionAnalysis:
     is_a: Analysis
-    description: An analysis that separates the thermal effect of light (heating of the catalyst) from
-      its non-thermal effects (photochemical or hot-carrier) on a rate; it HAS_INPUT the illuminated experiment
-      and its dark controls.
+    maturity: deprecated
+    superseded_by: an Analysis with analysis_kind thermal_contribution (scale-catal 0.7.4), whose partition_method is the
+      analysis's own and whose shares are result entries
+    description: Deprecated in 0.7.4, kept so that the documents using it stay valid; record a new one as an Analysis with
+      analysis_kind thermal_contribution, which is not about light alone. An analysis that separates the thermal effect
+      of light (heating of the catalyst) from its non-thermal effects (photochemical or hot-carrier) on a rate; it
+      HAS_INPUT the illuminated experiment and its dark controls.
     properties:
-      partition_method:
-        type: enum
-        values:
-        - dark_control_at_matched_temperature
-        - wavelength_dependence
-        - intensity_dependence
-        - temperature_dependence
-        - isotope_labelling
-        - other
-        - not_reported
       thermal_contribution:
         type: value
         description: Share or rate attributed to heating, as the source defines it.
@@ -2002,6 +2142,12 @@ edges:
         - CatalyticTest
         description: The test in a conventional reactor or cell whose kinetics the cell's were compared with (kinetics
           matched_to_benchmark).
+      synchronization:
+        type: text
+        maturity: provisional
+        description: How the observation and the kinetics were put on one time axis, as the source states it (one
+          trigger for the valve and the spectrometer, timestamps on a shared clock, a delay measured with a tracer pulse
+          and removed). Without it, a response that seems to lead or lag another may be an artefact of the lines.
   IN_REACTOR:
     from:
     - CatalyticTest
@@ -2909,15 +3055,17 @@ checklist:
     Interpretations: record what the source reads the test as showing (interpretations), never your own reading. Each reading adds the evidence it needs, looked for in the records connected to the test; a reading without it is reported, and the test stays as it is. No conversion level, criterion value or control is required of every test.
     Heat: a transport check (Weisz-Prater, Mears, Carberry; a Madon-Boudart or Koros-Nowak test; particle size, flow rate at constant contact time or stirring varied) is an Analysis with analysis_kind transport_check that HAS_INPUT the test, with its evaluation_basis (asserted, numerical with its criterion values in results, experimental with the runs it compares as further inputs), method, verdict and the temperature it applies to. A test read as intrinsic_kinetics is checked for one, and for one that is more than asserted; system_performance is not. Directly heated catalysts (electrothermo) can be much hotter than the gas or the wall; report the temperature at the catalyst (temperature_measured_at catalyst_bed), how heating was operated in time (HAS_OPERATION: held, ramped or pulsed), and compare with a conventionally heated control at the same catalyst temperature (CONTROL_FOR, differing in heating_mode).
     Potential: a potential is comparable across papers only on a stated scale; converting to RHE needs the reference electrode's filling, the pH and the temperature, none of which may be assumed. State the iR treatment (ir_compensation) and what currents are divided by (current_normalization); a reference electrode calibrated against a reversible hydrogen electrode names that calibration (the value's calibration, an Experiment).
-    Light: record the temperature, since light also heats. A reading that separates light from heat (photothermal_effect, nonthermal_light_effect) rests on a dark control at matched catalyst temperature (DARK_CONTROL_FOR, differing in illumination only, with where and over which time the temperature was matched) or on a ThermalContributionAnalysis that HAS_INPUT the test (its partition_method: wavelength, intensity or temperature dependence, isotope labelling). A match of the bulk temperature alone does not show a non-thermal effect.
-    Plasma: plasma-catalyst synergy (plasma_catalyst_synergy) rests on two controls, each CONTROL_FOR the combined test: the plasma without the catalyst (an empty reactor, or the packing without its active phase) and the catalyst without plasma at the same catalyst temperature. Report the plasma power (discharge_power, from current and voltage profiles or a Lissajous figure), apart from what the supply draws (power_supply_input).
+    Light: record the temperature, since light also heats. A reading that separates light from heat (photothermal_effect, nonthermal_light_effect) rests on a dark control at matched catalyst temperature (DARK_CONTROL_FOR, differing in illumination only, with where and over which time the temperature was matched) or on an analysis of the thermal contribution that HAS_INPUT the test (an Analysis with analysis_kind thermal_contribution, its partition_method wavelength, intensity or temperature dependence or isotope labelling, and the shares it attributes as result entries; ThermalContributionAnalysis is its deprecated earlier form). A match of the bulk temperature alone does not show a non-thermal effect.
+    Plasma: plasma-catalyst synergy (plasma_catalyst_synergy) rests on two controls, each CONTROL_FOR the combined test: the plasma without the catalyst (an empty reactor, or the packing without its active phase) and the catalyst without plasma at the same catalyst temperature. Report the plasma power (discharge_power, from current and voltage profiles or a Lissajous figure), apart from what the supply draws (power_supply_input). The share of the rate the plasma's heating accounts for is an Analysis with analysis_kind thermal_contribution that HAS_INPUT the combined test and the catalyst-without-plasma control (partition_method control_at_matched_temperature), its shares as result entries.
     Potential and light: separate the contributions with controls: the same test in the dark (differs in illumination) and at open circuit or without applied potential (differs in electrode potential), each CONTROL_FOR the combined test.
     Stability: a constant trace of performance (a TimeSeries the test HAS_OUTPUT) shows performance_stability, not material_stability; the material is shown unchanged by characterizing it during or after the test (a CatalystState the test reaches, REACHED_BY timing during or after, DETERMINED_BY a characterization: structure after the test, dissolution into the electrolyte). Repeats are REPLICATES links, and a planned set of repeats a Design (planned_replicates).
     Time: a test operated dynamically (pulses, ramps, switching) HAS_OPERATION an Operation with its time_pattern, the quantities it varies and its segments, so its results keep their time-dependent context.
     Sites: record a site population on the HAS_SITE from the state it was counted or observed in (as prepared, pretreated, working, after the test); sites can change with the conditions, so a count made in one state is never carried to another. A share (population_fraction), a density (site_density), the exposed atoms counted (exposed_metal_count) and the sites a rate is divided by (site_inventory) are four values, each with its origin, uncertainty or bound, and what produced it: the counting measurement, or an Analysis that converts an uptake into sites and USES_MODEL a Model stating what it assumes (the adsorbate's stoichiometry, the particle shape). A turnover frequency is kept as reported, with how it was calculated: the count it is divided by (normalized_by) and, in its basis or definition, what was counted as sites and how. A rate per exposed atom is an average over sites that may differ, not a rate per active site; a comparison shows each rate with its count. A computed population sits on the computed state, STATE_OF the model; one the source gives only for the formulation on the Catalyst, with no specimen added.
     Assignments: that a phase, site or species is active, a spectator, a precursor or an inhibitor for a reaction in a state is a Claim, ABOUT the component (role active, spectator, precursor or inhibitor), the state (role state), the reaction or product (role reaction, product), the test it concerns (role test) and any elementary step or mechanism (role step, mechanism); SUPPORTS and CONTRADICTS from the tests, characterizations, analyses and claims it rests on name the results with premise_refs. Competing assignments are claims of their own, never merged. Abundance is not activity: a majority phase is assigned nothing unless the source argues it, and a minority one can carry an assignment with its evidence.
     Operando: an observation made while the kinetics are measured. One the source calls operando is kept as such (observation_mode); the checklist looks, on its DURING link, for a catalytic test under working conditions whose kinetics were measured on the same specimen while the observation was made (specimen same_specimen, timing simultaneous, kinetics measured or matched_to_benchmark). A conventional reactor or cell the kinetics were compared with is recorded when the source gives one (kinetics matched_to_benchmark, benchmark). An overlap in time is not a pairing, and a change that tracks the activity in time does not show that what changed is active.
-    Computations: a computed energy is a value of its kind (a total electronic energy, a reaction or adsorption energy, an enthalpy or a free energy, an elementary activation energy or activation free energy, an apparent activation energy, a degree of rate control), never a bare number in eV. A reaction, adsorption or activation energy names the Reaction or ElementaryStep it is the energy change of (its target, or the step that holds it), whose participants and coefficients are its reference states. The Computation that produced it states its level_of_theory and charge_treatment, which a comparison reads, and its dispersion, hubbard_u, spin_treatment, solvation, temperature, pressure and electrode potential, which it shows; its input files, environment and structures stay in versioned, checksummed Datasets (configuration, execution_environment, a model's stored_in). A state computed on a structure model is STATE_OF the model, with no specimen; the model REPRESENTS the specimen or state it stands for, with what that assumes. A machine-learned prediction names its model (USES_MODEL, with its version and stored_in), the data it was fitted to (an experiment that EVALUATES it with evaluation_kind calibration and HAS_INPUT that data as training_data) and its validation (one that EVALUATES it with evaluation_kind validation on validation_data or test_data); a validation on the data the model was fitted to is reported, never counted as independent. An apparent activation energy from a fit of rates, an elementary step's activation energy and a degree of rate control at stated conditions are three quantities.
+    Computations: a computed energy is a value of its kind (a total electronic energy, a reaction or adsorption energy, an enthalpy or a free energy, an elementary activation energy or activation free energy, an apparent activation energy, a degree of rate control), never a bare number in eV. A reaction, adsorption or activation energy names the Reaction or ElementaryStep it is the energy change of (its target, or the step that holds it), whose participants and coefficients are its reference states. The Computation that produced it states its level_of_theory and charge_treatment, which a comparison reads, and its dispersion, hubbard_u, spin_treatment, solvation, temperature, pressure and electrode potential, which it shows; its input files, environment and structures stay in versioned, checksummed Datasets (configuration, execution_environment, a model's stored_in). A state computed on a structure model is STATE_OF the model, with no specimen; the model REPRESENTS the specimen or state it stands for, with what that assumes. A machine-learned prediction names its model (USES_MODEL, with its version and stored_in), the data it was fitted to (an experiment that EVALUATES it with evaluation_kind calibration and HAS_INPUT that data as training_data) and its validation (one that EVALUATES it with evaluation_kind validation on validation_data or test_data); a validation on the data the model was fitted to is reported, never counted as independent, unless it states how it held its data out of that table (split_strategy, the folds of a cross-validation). An apparent activation energy from a fit of rates, an elementary step's activation energy and a degree of rate control at stated conditions are three quantities.
+    Campaigns: an adaptive or autonomous campaign, in which an agent chooses the next experiments, is a Design of kind adaptive that states what TRACE-AI asks of its workflow: its autonomy_level as the source declares it (A0-A5), its human_oversight and interventions, the agent_policy and objectives, the safety_bounds and safety_measures, its stopping_criterion and stop_reason, and what it did with failed or excluded runs (negative_results_policy, exclusion_criteria, excluded_count). Each run is PART_OF_DESIGN with its round (iteration) and PROPOSED_BY the agent (a Software of kind agent, with its version), with what a person decided about the proposal (human_decision); a rejected proposal is a record too. A machine-learned model states its architecture, hyperparameters, training objective and uncertainty method; a validation states how it split the data (split_strategy, grouped_by) and its metrics with their uncertainty. `scale trace-ai` reads the TRACE-AI checklist on these records.
+    Transients: a test driven by a program (an isotope switch, a concentration step, a square-wave or sinusoidal modulation, pulses, a pseudo-random binary sequence, the half-cycles of a chemical loop) HAS_OPERATION an Operation that states its waveform, the levels it switches between, its period, pulses or sequence (sequence_length, bit_duration), how much of the program the source gives (program_detail) and what t = 0 is (time_origin); a time series it HAS_OUTPUT states its delay and whether it was corrected for it. An Analysis that reads the responses (isotopic_transient, pulse_response, modulation_excitation, step_response, frequency_response) HAS_INPUT the test and the series, and its results are values of their kinds (surface_residence_time, surface_intermediate_amount, phase_delay, response_time_constant) for the species they are of; a modulation analysis states what its delays are measured against (phase_reference, phase_reference_species), the modulation_period and the demodulation_harmonic. That a surface species is an intermediate or a spectator stays a Claim the analysis SUPPORTS or CONTRADICTS, never a property of the delay. A kinetic model fitted to the responses is a kinetic_fit that states its reactor_model, rate_basis, concentration_measure and thermodynamic_consistency, and each fitted constant its origin fitted, its interval_method and, where the source says, its identifiability; a comparison of constants shows each one's reactor treatment and names a group that mixes treatments.
     Spectra and fits: a measured spectrum is a Dataset the characterization HAS_OUTPUT; a fit to it is an Analysis (analysis_kind spectral_fit) with its method, its fitted parameters in results (origin fitted, with their uncertainties), the references it HAS_INPUT and its limitations; an alternative model is another Analysis; a site assignment drawn from it is a Claim that cites the fitted parameters (premise_refs). Whether an ensemble signal tells phases apart depends on the technique, the data, the references and the model.
   labels:
     CatalyticTest:
@@ -3127,8 +3275,9 @@ checklist:
           should:
           - name: light_heat_separation
             description: a dark control at matched temperature that states where and over which time the temperatures
-              correspond (DARK_CONTROL_FOR this test, with temperature_matched_at and temperature_matched_over), or a
-              ThermalContributionAnalysis that HAS_INPUT this test
+              correspond (DARK_CONTROL_FOR this test, with temperature_matched_at and temperature_matched_over), or an
+              analysis of the thermal contribution that HAS_INPUT this test (an Analysis with analysis_kind
+              thermal_contribution, or the deprecated ThermalContributionAnalysis)
             any_of:
             - path:
               - edge: DARK_CONTROL_FOR
@@ -3142,6 +3291,14 @@ checklist:
               - edge: HAS_INPUT
                 direction: in
                 label: ThermalContributionAnalysis
+            - path:
+              - edge: HAS_INPUT
+                direction: in
+                label: Analysis
+                where:
+                  analysis_kind:
+                    any_of:
+                    - thermal_contribution
       - interpretations:
           any_of:
           - nonthermal_light_effect
@@ -3153,9 +3310,9 @@ checklist:
           should:
           - name: local_temperature_match
             description: a dark control matched at the illuminated surface over a stated time (temperature_matched_at
-              illuminated_surface, temperature_matched_over), or a ThermalContributionAnalysis that does not rest on a dark
-              control (partition_method wavelength, intensity or temperature dependence, isotope labelling); a match of
-              the bulk temperature alone does not show a non-thermal effect
+              illuminated_surface, temperature_matched_over), or an analysis of the thermal contribution that does not
+              rest on a control at matched temperature (partition_method wavelength, intensity or temperature dependence,
+              isotope labelling); a match of the bulk temperature alone does not show a non-thermal effect
             any_of:
             - path:
               - edge: DARK_CONTROL_FOR
@@ -3174,6 +3331,20 @@ checklist:
                   partition_method:
                     none_of:
                     - dark_control_at_matched_temperature
+                    - control_at_matched_temperature
+                    - not_reported
+            - path:
+              - edge: HAS_INPUT
+                direction: in
+                label: Analysis
+                where:
+                  analysis_kind:
+                    any_of:
+                    - thermal_contribution
+                  partition_method:
+                    none_of:
+                    - dark_control_at_matched_temperature
+                    - control_at_matched_temperature
                     - not_reported
       - interpretations:
           any_of:
@@ -3301,6 +3472,35 @@ checklist:
       when:
       - analysis_kind:
           any_of:
+          - thermal_contribution
+        maturity: provisional
+        basis:
+        - Baffou, Bordacchini, Baldi and Quidant, Simple experimental procedures to distinguish photothermal from
+          hot-carrier processes in plasmonics, Light Sci. Appl. 2020, 9, 108, doi:10.1038/s41377-020-00345-0
+        should:
+        - partition_method
+        - method
+        - result_values
+        - limitations
+        evidence:
+          should:
+          - name: separated_test
+            description: the driven test whose rate it separates, a catalytic test it HAS_INPUT that a driving force other
+              than heat drives (light, a plasma, electrically delivered heat, a potential); a control without that
+              force, which it compares, is not the test it separates
+            path:
+            - edge: HAS_INPUT
+              label: CatalyticTest
+              where:
+                driving_forces:
+                  any_of:
+                  - electrothermo
+                  - electro
+                  - photo
+                  - plasma
+                  - other
+      - analysis_kind:
+          any_of:
           - spectral_fit
         maturity: provisional
         basis:
@@ -3367,6 +3567,71 @@ checklist:
             path:
             - edge: HAS_INPUT
               label: Experiment
+      - analysis_kind:
+          any_of:
+          - isotopic_transient
+          - pulse_response
+          - modulation_excitation
+          - step_response
+          - frequency_response
+        maturity: provisional
+        basis:
+        - Shannon and Goodwin, Chem. Rev. 1995, 95, 677, doi:10.1021/cr00035a011 (isotopic transients at steady state, the
+          residence time and amount of the surface intermediates of each product, the inert tracer that corrects for the
+          gas holdup)
+        - Urakawa, Burgi and Baiker, Chem. Eng. Sci. 2008, 63, 4902, doi:10.1016/j.ces.2007.06.009 (a periodic stimulus,
+          phase-sensitive detection, and the phase delays that tell responding species from those that do not)
+        - Gleaves, Yablonskii, Phanawadee and Schuurman, Appl. Catal. A 1997, 160, 55, doi:10.1016/S0926-860X(97)00124-5
+          (pulse responses in the Knudsen regime)
+        should:
+        - method
+        - temperature
+        - result_values
+        - limitations
+        evidence:
+          should:
+          - name: driven_test
+            description: the test whose responses it reads, operated dynamically (HAS_INPUT a test that HAS_OPERATION an
+              Operation of operation_mode dynamic)
+            path:
+            - edge: HAS_INPUT
+              label: CatalyticTest
+            - edge: HAS_OPERATION
+              label: Operation
+              where:
+                operation_mode:
+                  any_of:
+                  - dynamic
+      - analysis_kind:
+          any_of:
+          - kinetic_fit
+        maturity: provisional
+        basis:
+        - Motagamwala and Dumesic, Chem. Rev. 2021, 121, 1049, doi:10.1021/acs.chemrev.0c00394 (a kinetic model fitted to
+          rates is a model of the reactor as well as of the surface; the rate expressions and their basis are stated)
+        should:
+        - reactor_model
+        - rate_basis
+        - concentration_measure
+      - analysis_kind:
+          any_of:
+          - modulation_excitation
+          - frequency_response
+        maturity: provisional
+        basis:
+        - Urakawa, Burgi and Baiker, Chem. Eng. Sci. 2008, 63, 4902, doi:10.1016/j.ces.2007.06.009 (a phase is read at a
+          harmonic of the modulation frequency against a reference, the stimulus or another response, and changes with
+          the frequency)
+        should:
+        - phase_reference
+        - modulation_period
+        - demodulation_harmonic
+      - phase_reference:
+          any_of:
+          - species_response
+        maturity: provisional
+        should:
+        - phase_reference_species
     Computation:
       when:
       - computation_kind:
@@ -3450,6 +3715,61 @@ checklist:
         - time_pattern
         - varied_quantities
         - segments
+        - program_detail
+        - time_origin
+      - waveform:
+          any_of:
+          - pseudo_random_binary
+        maturity: provisional
+        basis:
+        - Godfrey, Perturbation Signals for System Identification, Prentice Hall 1993 (a pseudo-random binary sequence is
+          set by its length, its bit duration and the two levels it switches between)
+        should:
+        - levels
+        - sequence_length
+        - bit_duration
+      - waveform:
+          any_of:
+          - square
+          - sinusoidal
+          - triangular
+        maturity: provisional
+        basis:
+        - Urakawa, Burgi and Baiker, Chem. Eng. Sci. 2008, 63, 4902, doi:10.1016/j.ces.2007.06.009 (a periodic stimulus
+          is set by its period, its amplitude or levels, and the number of periods averaged)
+        should:
+        - levels
+        - period
+        - cycles
+      - waveform:
+          any_of:
+          - pulse_train
+        maturity: provisional
+        basis:
+        - Gleaves, Yablonskii, Phanawadee and Schuurman, Appl. Catal. A 1997, 160, 55, doi:10.1016/S0926-860X(97)00124-5
+          (a pulse experiment states what one pulse delivers)
+        should:
+        - pulse_amount
+        - pulse_width
+        - period
+    Design:
+      when:
+      - design_kind:
+          any_of:
+          - adaptive
+        maturity: provisional
+        basis:
+        - Xin et al., Transparent reporting for agentic catalysis enabled by artificial intelligence, Chem Catal. 2026,
+          doi:10.1016/j.checat.2026.101755 (TRACE-AI items C1-C5 and A5; the levels of autonomy of its Box 1)
+        should:
+        - autonomy_level
+        - human_oversight
+        - agent_policy
+        - objectives
+        - stopping_criterion
+        - stop_reason
+        - safety_measures
+        - negative_results_policy
     Feed:
       edges:
         must:

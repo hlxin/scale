@@ -1,0 +1,63 @@
+# A competency question of the catalysis domain (tools/competency.py; `scale domains cq catalysis`).
+# It runs on public synthetic examples, so anyone can rerun it and see the same answer.
+id: CQ-31
+question: Which surface species does a transient experiment read as an intermediate of a product or as a spectator, and
+  on which measured delays does that rest?
+description: |
+  A modulation experiment reads each species' phase_delay behind the stimulus (an Analysis of kind
+  modulation_excitation, by phase-sensitive detection). That a species is an intermediate or a spectator is a Claim the
+  analysis SUPPORTS, ABOUT the species with the role active or spectator, its premise_refs naming the delays it rests
+  on. In the example linear CO on Pt responds before the gas-phase CO2 and carbonate on ceria lags it by 12 s: two
+  claims, each with the analysis and its delays. A delay alone is never read as an assignment.
+documents:
+  - examples/scale-catal/transient-examples/transient-kinetics.json
+plan:
+  question: Which species does a transient read as an intermediate or a spectator, on which analysis?
+  match:
+    label: Claim
+    as: claim
+  steps:
+    - from: claim
+      edge: ABOUT
+      to: ChemicalSpecies
+      as: species
+      edge_as: about
+      edge_where:
+        - prop: role
+          op: in
+          value:
+            - active
+            - spectator
+    - from: claim
+      edge: SUPPORTS
+      direction: in
+      to: Analysis
+      as: analysis
+      edge_as: supports
+      where:
+        - prop: analysis_kind
+          op: in
+          value:
+            - modulation_excitation
+            - isotopic_transient
+            - pulse_response
+            - step_response
+            - frequency_response
+  return:
+    - claim.statement
+    - about.role
+    - species.name
+    - analysis.analysis_kind
+    - supports.premise_refs
+  evidence: true
+expect:
+  status: answered
+  min_rows: 2
+  max_rows: 2
+  values:
+    about.role:
+      - active
+      - spectator
+    species.name:
+      - CO adsorbed linearly on Pt (2070 cm-1)
+      - carbonate on CeO2 (1550 cm-1)

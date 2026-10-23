@@ -74,7 +74,7 @@ holds the terms of each:
 | photo | LightSource | ILLUMINATED_BY |
 | plasma | PlasmaSource | USES_PLASMA |
 | electrothermo (heat delivered electrically) | ElectricHeater | ELECTRICALLY_HEATS |
-| photo + thermo | ThermalContributionAnalysis | DARK_CONTROL_FOR |
+| photo + thermo | an Analysis of kind thermal_contribution (before 0.7.4, ThermalContributionAnalysis) | DARK_CONTROL_FOR |
 | electro + photo (a photoelectrode, or an electrogenerated species, absorbs the light) | Photoelectrode, IlluminatedCell | ILLUMINATES, ELECTROGENERATES, PHOTOEXCITES |
 
 ## The checklist: must, should and cases
@@ -106,8 +106,9 @@ reading needs:
 
 - intrinsic kinetics: a transport check that `HAS_INPUT` the test, and one that is more than asserted;
 - system performance: its reactor or cell;
-- light and heat separated: a dark control matched at a stated place and over a stated time, or a
-  `ThermalContributionAnalysis`; a non-thermal effect needs the match at the illuminated surface;
+- light and heat separated: a dark control matched at a stated place and over a stated time, or an analysis of the
+  thermal contribution (an Analysis with `analysis_kind: thermal_contribution`, or the deprecated
+  `ThermalContributionAnalysis`); a non-thermal effect needs the match at the illuminated surface;
 - plasma-catalyst synergy: a plasma-alone control and a catalyst-alone control;
 - performance stability: a time series;
 - material stability: the catalyst characterized during or after the test.

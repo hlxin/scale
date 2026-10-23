@@ -97,6 +97,40 @@ A value the experimenter set or the author specified is not a measurement.
   Michaelis-Menten rate law), of kind `michaelis_constant`, its substrate in `target`; kcat is a turnover
   frequency, divided by the amount of enzyme it counts (`normalized_by`).
 
+## Transients and the programs that drive them
+
+- **The program** (scale-catal 0.7.3) is the test's `Operation` (`HAS_OPERATION`, operation_mode `dynamic`): what
+  varies (`varied_quantities`), its `time_pattern` and `waveform` (square, sinusoidal, triangular, pulse_train,
+  pseudo_random_binary), the `levels` it switches between (numbers with units, or text values for what is exchanged:
+  12CO and 13CO), its `period`, `duty_cycle` and `cycles`, a pulse's `pulse_amount` and `pulse_width`, a pseudo-random
+  sequence's `sequence_length` and `bit_duration`, the `segments` of a chemical loop (each with its `label` as a text
+  value and its `duration`), and `time_origin` (what t = 0 is). `program_detail` says what the source gives: `exact`
+  (every switch, or the generator and seed that regenerate the sequence), `parametric` (the pattern's parameters
+  only) or `descriptive` (in words). Never reconstruct a sequence the source does not give.
+- **The responses** are TimeSeries the test `HAS_OUTPUT`, each with its `time_resolution`, its `delay` (the line or
+  cell dead time, as measured or stated) and whether the series was shifted for it (`delay_corrected`). An observation
+  made during the test is a Characterization `DURING` it; say in `synchronization` how the two were put on one time
+  axis.
+- **What the responses give** is an Analysis that `HAS_INPUT` the test and the series: `isotopic_transient` for an
+  isotope switch at steady state (its products' `surface_residence_time` and `surface_intermediate_amount` in
+  `result_values`, each with its product in `target`; Shannon and Goodwin, Chem. Rev. 1995, doi:10.1021/cr00035a011),
+  `modulation_excitation` for phase-sensitive detection (each band's or species' `phase_delay`; the analysis states
+  what the delays are measured against, `phase_reference` stimulus or species_response with `phase_reference_species`,
+  the `modulation_period` it read and the `demodulation_harmonic`, and delays against two references, or at two periods,
+  are two analyses; Urakawa, Burgi and Baiker, Chem. Eng. Sci. 2008, doi:10.1016/j.ces.2007.06.009), `pulse_response`,
+  `step_response` (`response_time_constant`) or `frequency_response`. The surface species are ChemicalSpecies records
+  named as the source names them, with their band ("CO adsorbed linearly on Pt (2070 cm-1)"). That a species is an
+  intermediate or a spectator is a Claim the analysis SUPPORTS (premise_refs: the delays it rests on), never read off a
+  delay by the curator.
+- **A kinetic model fitted to the responses** is an Analysis of kind `kinetic_fit` that states its `reactor_model`
+  (differential, stirred_tank, plug_flow, axial_dispersion, batch, knudsen_pulse), its `rate_basis`, its
+  `concentration_measure` (and `standard_pressure` for activities) and `thermodynamic_consistency`, as the source says;
+  `not_reported` when it does not. Each fitted constant is a value of its kind in its `result_values` (an elementary
+  step's activation energy with the step in `target`), `origin: fitted`, `produced_by` the fit, with how its interval
+  was obtained (`interval_method`: curvature for a covariance or Hessian estimate, profile_likelihood, bootstrap,
+  bayesian_posterior, …) and, when the source says, whether the data determine it (`identifiability`). The same model
+  fitted under two reactor treatments is two Analyses; a comparison shows each constant's treatment.
+
 ## Reaction thermochemistry
 
 - One Analysis per condition set (`analysis_kind: equilibrium` or `thermodynamic`), `OF_REACTION` the
