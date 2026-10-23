@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- **Identifiers on records checked by their scheme (no schema change).** Requested by @hlxin (stronger connections to
+  outside resources). A record's `identifiers` (a DOI, an InChIKey, a CAS number, an EC number, …) and a technique's
+  `technique_id` were free text that nothing checked, so a misspelt identifier or a technique written as "XRD"
+  pointed nowhere. Now core/mappings/identifiers.yaml lists 17 schemes with their patterns and resolvers, and the
+  validator warns, never rejects, about an identifier that does not match its scheme or fails its check digit (CAS,
+  ORCID), and about a `technique_id` or `method_id` that is no ontology term. The curation recipes list the Chemical
+  Methods Ontology terms of 32 common characterization techniques (XRD is CHMO:0000156). The real graphs gain no
+  warning. See docs/mappings.md.
+
 - **Schema 0.7.1 (additive): terms for the subdomains of catalysis research SCALE lacked.** Requested by @hlxin (use
   what the ontologies for catalysis know to develop the catalysis schema). Mapping SCALE onto the fourteen subdomains of
   Ontologies4Cat (Behr, Borgelt and Kockmann 2024, doi:10.1186/s13321-024-00807-2) showed four that SCALE did not

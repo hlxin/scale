@@ -465,6 +465,35 @@ queries). A value is in the unit printed; a fitted or derived value names its pr
 - **The specimen and its state:** `CHARACTERIZES {state}` the batch or portion measured; `technique` as named;
   `observation_mode`, `information_depth` (bulk, surface, projection), `sampling` (ensemble, single_particle);
   `temperature` and `atmosphere` during the measurement; `transfer`.
+- **The technique's term:** `technique_id`, the Chemical Methods Ontology term of the technique the source names,
+  where one fits it (the validator warns when `technique_id` is no ontology term). Looked up in CHMO's 2026-05-28
+  release:
+
+  | Technique as sources name it | `technique_id` |
+  |---|---|
+  | X-ray diffraction (XRD); powder XRD | CHMO:0000156; CHMO:0000158 |
+  | X-ray photoelectron spectroscopy (XPS) | CHMO:0000404 |
+  | transmission electron microscopy (TEM); high-resolution TEM | CHMO:0000080; CHMO:0000084 |
+  | scanning electron microscopy (SEM) | CHMO:0000073 |
+  | scanning transmission electron microscopy (STEM); HAADF-STEM | CHMO:0000086; CHMO:0000730 |
+  | energy-dispersive X-ray spectroscopy (EDX, EDS) | CHMO:0000309 |
+  | X-ray fluorescence (XRF) | CHMO:0000307 (X-ray emission spectroscopy, XRF its exact synonym) |
+  | X-ray absorption spectroscopy (XAS); EXAFS; XANES (NEXAFS) | CHMO:0000298; CHMO:0000300; CHMO:0000305 |
+  | Raman spectroscopy | CHMO:0000656 |
+  | Fourier-transform infrared spectroscopy (FTIR); DRIFTS | CHMO:0000636; CHMO:0000645 |
+  | UV-vis spectroscopy | CHMO:0000292 |
+  | temperature-programmed reduction (TPR); oxidation (TPO); desorption (TPD) | CHMO:0002908; CHMO:0002907; CHMO:0002673 |
+  | N2 physisorption, BET surface area | CHMO:0001168 (sorption measurement) |
+  | thermogravimetry (TGA); differential scanning calorimetry (DSC) | CHMO:0000690; CHMO:0000684 |
+  | NMR spectroscopy; EPR (ESR) spectroscopy | CHMO:0000591; CHMO:0000328 |
+  | ICP-OES (ICP-AES); ICP-MS | CHMO:0000267; CHMO:0000538 |
+  | Mössbauer spectroscopy | CHMO:0000417 |
+  | gas chromatography (GC) | CHMO:0001002 |
+  | cyclic voltammetry; electrochemical impedance spectroscopy | CHMO:0000025; CHMO:0000423 |
+  | atomic force microscopy (AFM) | CHMO:0000113 |
+
+  CHMO has no term for a chemisorption measurement as such; leave `technique_id` unset rather than use a broader
+  one. Other ontology terms (an OBI assay, an IRI) are accepted too.
 - **Acquisition settings:** `Characterization.conditions` (edge, detection mode, accelerating voltage, scans, regions
   imaged), the Instrument it `USES_INSTRUMENT` with its `settings`.
 - **Standards and calibration:** a reference measured with the specimen is `HAS_INPUT {role: reference_standard}`; a

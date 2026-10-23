@@ -86,6 +86,28 @@ kinds:
   constant (kcat), narrower than SCALE's turnover frequency. QUDT has no term for an activation energy, a space
   velocity, a site density or most catalysis-specific shares, so they stay unmapped.
 
+## Identifiers on records
+
+A mapping relates SCALE's terms to an ontology's. A record connects to the outside world through its own identifiers:
+every node may carry `identifiers`, a map from a scheme to an identifier, and a technique or a method may name its
+ontology term.
+
+- [core/mappings/identifiers.yaml](../core/mappings/identifiers.yaml) lists the schemes SCALE checks, each with its
+  pattern and where an identifier resolves: DOI, ORCID, ROR, InChIKey, PubChem, ChEBI, CAS Registry Number, EC
+  number, UniProt, COD, ICSD, Materials Project, arXiv, PubMed, PubMed Central, Wikidata and patent numbers. When a
+  document is validated, an identifier of a listed scheme that does not match its pattern as a whole (a trailing
+  line break included), or a CAS Registry Number or ORCID iD whose check digit is wrong, is a warning; the record
+  stays as written. A scheme the list does not hold is kept, unchecked. A patent number may keep its separators and
+  kind code as printed (WO 2008/004088 A1, US 1,625,924); an InChIKey's flag is S (standard) or N, its version A.
+- `technique_id` (a characterization's technique) and `method_id` (an experiment's method) name an ontology term: a
+  CURIE of an ontology of the registry (CHMO:0000156 for X-ray diffraction) or an http(s) IRI with a host. Anything
+  else (`XRD`) is a warning. The curation recipes list the Chemical Methods Ontology terms of the common techniques.
+- The registries checked are the tools' own (the checkout they run from, or the installed package's data), never the
+  repository `SCALE_REPO` names, and are read again when their file changes, so a document is checked alike wherever
+  it is validated.
+- Before this check, the real graphs used only patent numbers (on the 39 patent sources of the pre-1966 methanol
+  graph, all in form), and no record stated a technique's term; validating them gives no new warning.
+
 ## How they are checked
 
 `scale domains check` (part of `scale check`) and `scale schema mappings --check` check that:
@@ -154,7 +176,7 @@ ontologies SCALE's mappings already cite.
 
 | Subdomain | What SCALE records it with | What SCALE lacks |
 |---|---|---|
-| Biocatalysis | Catalyst (family enzyme or whole_cell), CatalyticTest (enzyme activity, Michaelis constant), HAS_COMPONENT (cofactor, solvent) | an EC number is kept in `identifiers`, unchecked; an assay's pH is a condition entry |
+| Biocatalysis | Catalyst (family enzyme or whole_cell), CatalyticTest (enzyme activity, Michaelis constant), HAS_COMPONENT (cofactor, solvent) | an EC number is kept in `identifiers`, its form checked but not that it names the enzyme used; an assay's pH is a condition entry |
 | Heterogeneous catalysis | Catalyst, CatalystSample, ActiveSite, CatalystState, CatalyticTest, Reactor, Feed | |
 | Homogeneous catalysis | Catalyst (family molecular_complex; roles ligand and cocatalyst), CatalyticTest (turnover number) | a catalyst loading relative to the substrate is an unchecked amount |
 | Photocatalysis | LightSource, ILLUMINATED_BY, IlluminatedCell, Photoelectrode, ThermalContributionAnalysis | |
@@ -171,6 +193,5 @@ ontologies SCALE's mappings already cite.
 
 ## Not done yet
 
-- Checked external identifiers on records, such as a characterization's technique identifier.
 - The kernel's `maps_to` still names vocabulary terms in words; the mapping set gives their identifiers.
 - Exports do not yet take a type's IRI from an exact mapping.
