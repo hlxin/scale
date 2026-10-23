@@ -1,0 +1,103 @@
+# A competency question of the catalysis domain (tools/competency.py; `scale domains cq catalysis`).
+# It runs on public synthetic examples, so anyone can rerun it and see the same answer.
+id: CQ-26
+question: Which model and checkpoint made a machine-learned prediction, what data was the model fitted to, and on which
+  data was it validated?
+description: |
+  A prediction names its model (USES_MODEL), whose version is the checkpoint and whose weights are a checksummed Dataset
+  (stored_in). What the model was fitted to is what its fitting experiment (EVALUATES with evaluation_kind calibration)
+  takes as training data; each validation (EVALUATES with evaluation_kind validation) takes its own data. The example's
+  model has two validations: one on a held-out split (test data) and one on its own training split. The validator
+  reports the second (a fit to its own data is a calibration, not independent predictive validation), and the query
+  shows both, each with the data it used.
+documents:
+  - examples/scale-catal/computation-examples/computed-energies.json
+plan:
+  question: Which model made the prediction, and on which data was the model validated?
+  match:
+    label: Computation
+    as: prediction
+    where:
+      - prop: computation_kind
+        op: eq
+        value: machine_learned
+  steps:
+    - from: prediction
+      edge: USES_MODEL
+      to: Model
+      as: model
+      where:
+        - prop: version
+          op: exists
+    - from: model
+      edge: EVALUATES
+      direction: in
+      to: Experiment
+      as: validation
+      edge_as: evaluates
+      edge_where:
+        - prop: evaluation_kind
+          op: eq
+          value: validation
+    - from: validation
+      edge: HAS_INPUT
+      to: Dataset
+      as: data
+      edge_as: used
+  return:
+    - prediction.name
+    - model.name
+    - model.version
+    - model.stored_in
+    - evaluates.outcome
+    - used.role
+    - data.name
+  evidence: true
+expect:
+  status: answered
+  min_rows: 2
+  max_rows: 2
+  values:
+    used.role:
+      - test_data
+      - validation_data
+    data.name:
+      - spin-polarized O adsorption energies, held-out split
+      - spin-polarized O adsorption energies, training split
+variants:
+  - description: The data the model was fitted to, from its fitting experiment.
+    plan:
+      steps:
+        - from: prediction
+          edge: USES_MODEL
+          to: Model
+          as: model
+          where:
+            - prop: version
+              op: exists
+        - from: model
+          edge: EVALUATES
+          direction: in
+          to: Experiment
+          as: fitting
+          edge_as: evaluates
+          edge_where:
+            - prop: evaluation_kind
+              op: eq
+              value: calibration
+        - from: fitting
+          edge: HAS_INPUT
+          to: Dataset
+          as: data
+          edge_as: used
+      return:
+        - model.version
+        - used.role
+        - data.name
+    expect:
+      status: answered
+      min_rows: 1
+      max_rows: 1
+      values:
+        used.role:
+          - training_data

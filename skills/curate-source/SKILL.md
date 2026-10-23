@@ -226,6 +226,16 @@ Never record `± 0`: keep the printed text in `as_reported` and leave `uncertain
 
   docs/curation.md has the details. Never add a criterion value, a conversion level or a control the source does not
   report.
+- **Computed energies** (scale-catal 0.7.0 on). Record each as a value of its kind (`reaction_energy` for an
+  adsorption or reaction energy, `reaction_free_energy`, `activation_energy` for an elementary step's barrier,
+  `apparent_activation_energy` for the fit of an overall rate, …), never a bare number in eV. An adsorption or reaction
+  energy names the Reaction it is the energy change of (its `target`), whose participants and coefficients are the
+  reference states. When the source does not say what it is relative to, write its words in `unresolved_target`. State
+  the computation's `level_of_theory` and `charge_treatment` (constant charge or constant potential) as the source
+  gives them, `not_reported` when it does not, and its dispersion, +U, spin, solvation and settings. Keep files in
+  checksummed Datasets. For a machine-learned prediction, name the model, its checkpoint and the data it was fitted to.
+  Never flip a sign, fill in a method or read a method text into these fields; the recipes (Computational details)
+  say where each goes.
 - **Keys and qualifiers.** Use one key per quantity and put what the value is about in its fields:
   the species or product in `target`, the basis in `basis`, the measurand in `variable` (a Variable)
   and how it was defined or measured in `definition`. When a source gives several values of one

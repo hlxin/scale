@@ -36,7 +36,10 @@ from . import results
 from .util import ScaleError
 
 BASES = ("L", "M", "T", "I", "Θ", "N")
-READ_FROM = ("unit", "basis", "definition", "target", "normalized_by", "sibling")
+READ_FROM = ("unit", "basis", "definition", "target", "normalized_by", "sibling", "record", "producer")
+OPEN_READ = ("target", "record", "producer")      # what an open context (no list of values) is read from
+UNSTATED_CONTEXT = ("exclude", "group")  # a value that does not state a context: left out (exclude), or compared apart
+NOT_STATED = "not stated"               # the context value of the values that do not state one read with unstated: group
 UNSPECIFIED = "<unspecified>"           # a statement that names no value of the context (other, not_reported)
 CONFLICT = "<conflict>"                 # one source naming two values of a context
 EVIDENCED = ("derived", "computed")     # a value derived from its record's own by a named experiment (produced_by)
@@ -45,8 +48,8 @@ VALUE_STATUS = {"present", "not_reported", "not_measured", "not_applicable", "be
                 "below_quantification_limit"}
 BLOCK_KEYS = {"maturity", "description", "basis", "dimensions", "units", "contexts", "kinds"}
 UNIT_KEYS = {"description", "prefixes", "prefixed", "unprefixed", "spellings", "stating"}
-CONTEXT_KEYS = {"description", "read_from", "values", "unspecified", "refine", "open"}
-KIND_KEYS = {"description", "dimensions", "compare_by", "denominator", "share", "closure", "maturity"}
+CONTEXT_KEYS = {"description", "read_from", "values", "unspecified", "refine", "open", "property", "unstated"}
+KIND_KEYS = {"description", "dimensions", "compare_by", "denominator", "share", "closure", "maturity", "shows"}
 UNSTATED = ("warning",)     # what the validator does with a value that does not say how it was calculated
 _EXP = re.compile(r"^(?P<base>.*?)(?:\^|\*\*)?(?P<exp>[-+]?\d+)$")
 _NUMBER = re.compile(r"^\d+(?:\.\d+)?$")
@@ -120,22 +123,45 @@ class Reading:
 @dataclass
 class Statement:
     source: str          # unit (what it states, or a dimension only one value fits), basis, definition, target,
-    #                      normalized_by or sibling
+    #                      normalized_by, sibling, record or producer
     value: str           # a value of the context, UNSPECIFIED or CONFLICT
     said: str            # what was read, for the message
+    none: bool = False   # the producer is of a label that has no such property (a measurement, a fit): a value of its own
 
 
 @dataclass
 class Context:
     """One context of one value: ``value`` (a value of the context), or why not: ``missing`` (nothing names one, or
     what is stated names none) or ``contradiction`` (statements disagree); ``converted`` when an evidenced conversion
-    kept the value's own over its record's."""
+    kept the value's own over its record's; ``unstated`` when it states none and its context compares such values apart
+    (``unstated: group``; its value is then :data:`NOT_STATED`, and ``missing`` says why)."""
     name: str
     value: str | None = None
     missing: str | None = None
     contradiction: str | None = None
     converted: bool = False
+    unstated: bool = False
     statements: list = field(default_factory=list)
+
+
+@dataclass
+class Holder:
+    """Where a value sits: the record that holds it (a node or a link), the records of its document and the schema, whose
+    labels say which records are experiments and which records a context names (context_targets)."""
+    record: dict | None
+    records: dict
+    spec: dict
+
+
+@dataclass
+class Produced:
+    """A property of a value's producer (:func:`produced`): ``status`` stated, unstated (the producer has the property
+    but states nothing), none (no record that produced it has the property: a measurement, a fit) or unknown (nothing
+    says what produced it), with the producer's id and label and what it states (``raw``)."""
+    status: str
+    producer: str | None = None
+    label: str | None = None
+    raw: Any = None
 
 
 class Contracts:
@@ -196,10 +222,18 @@ class Contracts:
                 raise ScaleError(f"quantities.contexts.{name}: read_from lists sources among {list(READ_FROM)}")
             values = c.get("values") or {}
             if c.get("open"):
-                if values or read != ["target"]:
-                    raise ScaleError(f"quantities.contexts.{name}: an open context reads target only and lists no values")
+                if values or set(read) - set(OPEN_READ):
+                    raise ScaleError(f"quantities.contexts.{name}: an open context reads {', '.join(OPEN_READ)} only and "
+                                     "lists no values")
             elif not values:
                 raise ScaleError(f"quantities.contexts.{name}: lists its values (or is open)")
+            if ("producer" in read) != isinstance(c.get("property"), str) or (c.get("property") is not None
+                                                                              and not str(c["property"]).strip()):
+                raise ScaleError(f"quantities.contexts.{name}: a context read from the value's producer names the property "
+                                 "of the producer it reads (property), and only such a context does")
+            if c.get("unstated", "exclude") not in UNSTATED_CONTEXT:
+                raise ScaleError(f"quantities.contexts.{name}: unstated is {' or '.join(UNSTATED_CONTEXT)} (what a "
+                                 "comparison does with a value that does not state the context)")
             vals = {}
             for v, d in values.items():
                 d = d or {}
@@ -213,8 +247,8 @@ class Contracts:
                 if v not in vals:
                     raise ScaleError(f"quantities.contexts.{name}.refine names {v!r}, not one of its values")
             self.contexts[name] = {"read_from": read, "values": vals, "unspecified": [str(x) for x in c.get("unspecified") or []],
-                                   "refine": dict(refine), "open": bool(c.get("open")),
-                                   "_terms": _term_patterns(vals)}
+                                   "refine": dict(refine), "open": bool(c.get("open")), "property": c.get("property"),
+                                   "unstated": c.get("unstated", "exclude"), "_terms": _term_patterns(vals)}
         for sym, d in self._stating.items():
             d = dict(d or {})
             vec = self.dim(d.pop("dimension", None), f"units.stating.{sym}")
@@ -260,17 +294,30 @@ class Contracts:
                                  f"of value it may name, and unstated: {' or '.join(UNSTATED)})")
             if k.get("share") and k.get("closure"):
                 raise ScaleError(f"quantities.kinds.{name}: a share (part of a whole) is not a closure (found over put in)")
+            shows = []
+            for i, s in enumerate(k.get("shows") or []):
+                s = {"property": s} if isinstance(s, str) else dict(s) if isinstance(s, dict) else {}
+                if set(s) - {"property", "warn"} or not isinstance(s.get("property"), str) or not s["property"] \
+                        or not isinstance(s.get("warn", False), bool):
+                    raise ScaleError(f"quantities.kinds.{name}.shows[{i}]: names a property of the value's producer "
+                                     "(property, or the name alone), and optionally warn: true (a value whose producer "
+                                     "does not state it is reported)")
+                shows.append({"property": s["property"], "warn": bool(s.get("warn"))})
             self.kinds[name] = {"dimensions": dims, "compare_by": compare, "share": bool(k.get("share")),
                                 "closure": bool(k.get("closure")),
                                 "denominator": [self.dim(x, f"kinds.{name}.denominator") for x in den["dimensions"]]
                                 if den else None,
                                 "denominator_kinds": [str(x) for x in den.get("kinds") or []] if den else [],
-                                "denominator_unstated": den.get("unstated") if den else None}
+                                "denominator_unstated": den.get("unstated") if den else None, "shows": shows}
         for name, k in self.kinds.items():
             bad = [x for x in k["denominator_kinds"] if x not in self.kinds or self.kinds[x]["share"]]
             if bad:
                 raise ScaleError(f"quantities.kinds.{name}.denominator.kinds: {bad[0]!r} is not a declared kind that "
                                  "counts (a share is never a denominator)")
+
+    def warned(self, kind: str) -> set:
+        """The properties a kind shows with warn: a value whose producer states none is reported."""
+        return {s["property"] for s in self.kinds[kind]["shows"] if s["warn"]}
 
     # ---- units
     def read_unit(self, text: Any, contexts: tuple = ()) -> Reading:
@@ -374,20 +421,24 @@ class Contracts:
         return True
 
     def resolve(self, kind: str, v: dict, reading: Reading | None, sibling: dict | None = None,
-                denominator_name: str | None = None) -> dict[str, Context]:
+                denominator_name: str | None = None, holder: Holder | None = None) -> dict[str, Context]:
         """Every context a value of ``kind`` is compared by, read from the value and its record (``sibling``: context
-        -> (the sibling property, its value), and ``refine:<field>`` -> (field, value))."""
+        -> (the sibling property, its value), and ``refine:<field>`` -> (field, value)), and, through ``holder``, from
+        the record that holds it (``record``) and the experiment that produced it (``producer``)."""
         out: dict[str, Context] = {}
         vec = reading.vector if reading else None
         for entry in self.kinds[kind]["compare_by"]:
             if self.applies(entry, vec, out):
-                out[entry["context"]] = self._resolve_one(entry["context"], v, reading, sibling or {}, denominator_name)
+                out[entry["context"]] = self._resolve_one(entry["context"], v, reading, sibling or {}, denominator_name,
+                                                          holder)
         return out
 
-    def _resolve_one(self, name: str, v: dict, reading: Reading | None, sibling: dict, den: str | None) -> Context:
+    def _resolve_one(self, name: str, v: dict, reading: Reading | None, sibling: dict, den: str | None,
+                     holder: Holder | None = None) -> Context:
         c = self.contexts[name]
         vec = reading.vector if reading else None
         st: list[Statement] = []
+        why: list[str] = []                  # what each source said instead of a value, for a missing context
         for src in c["read_from"]:
             if src == "unit" and reading is not None:
                 said = reading.contexts.get(name)
@@ -408,6 +459,36 @@ class Contracts:
                 st.append(Statement("target", v["target"], v["target"]))
             elif src == "target" and isinstance(v.get("unresolved_target"), str) and v["unresolved_target"].strip():
                 st.append(Statement("unresolved_target", UNSPECIFIED, v["unresolved_target"]))   # a product not identified
+            elif src == "target":
+                why.append("it names no target")
+            elif src == "record" and holder is not None:
+                labels = ((holder.spec.get("context_targets") or {}).get(name) or {}).get("targets") or []
+                rec = holder.record if isinstance(holder.record, dict) else {}
+                if rec.get("label") in labels and isinstance(rec.get("id"), str):
+                    st.append(Statement("record", rec["id"], f"{rec['id']}, a {rec['label']}"))
+                elif labels:
+                    what = f"a {rec['label']}" if rec.get("label") else "a link" if rec else "no record"
+                    why.append(f"it sits on {what}, not on a {' or '.join(labels)}")
+            elif src == "producer" and holder is not None:
+                got = produced(c["property"], v, holder)
+                prop = c["property"]
+                if got.status == "stated":
+                    ok, text = render(got.raw)
+                    said = f"{got.producer} {prop} {text}"
+                    if not ok:
+                        why.append(f"its producer {got.producer} states its {prop} as {text}")
+                    elif c["open"]:
+                        st.append(Statement("producer", text, said))
+                    else:
+                        mapped = self.sibling_value(name, got.raw) if isinstance(got.raw, str) else None
+                        st.append(Statement("producer", mapped if mapped is not None else CONFLICT, said))
+                elif got.status == "unstated":
+                    why.append(f"its producer {got.producer} states no {prop}")
+                elif got.status == "none":
+                    st.append(Statement("producer", f"none ({got.label})", f"{got.producer}, a {got.label}, which has no "
+                                                                         f"{prop}", none=True))
+                else:
+                    why.append("nothing names what produced it (no produced_by, and it does not sit on an experiment)")
             elif src == "normalized_by" and den:
                 hits = self.statements_in_text(name, den.replace("_", " "), None)
                 if len(hits) == 1:
@@ -423,10 +504,13 @@ class Contracts:
             ctx.contradiction = f"its {bad.source} names more than one {name} ({bad.said})"
             return ctx
         named = [s for s in st if s.value != UNSPECIFIED]
+        if any(not s.none for s in named):           # a producer that has no such property contradicts nothing stated
+            named = [s for s in named if not s.none]
         values = {s.value for s in named}
+        record_level = ("sibling", "producer")       # what the record or its producer states for all its values
         if len(values) > 1:
-            own = {s.value for s in named if s.source != "sibling"}
-            if len(own) == 1 and evidenced(v) and any(s.source == "sibling" for s in named):
+            own = {s.value for s in named if s.source not in record_level}
+            if len(own) == 1 and evidenced(v) and any(s.source in record_level for s in named):
                 ctx.value, ctx.converted = own.pop(), True        # an evidenced conversion keeps its own
             else:
                 ctx.contradiction = "; ".join(f"its {s.source} ({s.said}) says {s.value}" for s in named)
@@ -436,10 +520,16 @@ class Contracts:
         else:
             if st:                                   # stated, as other or not_reported
                 ctx.missing = "; ".join(f"its {s.source} ({s.said}) names no {name}" for s in st)
+            elif why and set(c["read_from"]) & {"record", "producer"}:
+                ctx.missing = f"nothing states its {name}: {'; '.join(why)}"
             else:
                 srcs = [s for s in c["read_from"] if s != "sibling" or name in sibling]
                 ctx.missing = f"nothing states its {name} (read from its {', '.join(srcs)})"
+            if c["unstated"] == "group":             # compared only with the values that do not state it either
+                ctx.value, ctx.unstated = NOT_STATED, True
             return ctx
+        if any(s.none and s.value == ctx.value for s in named):
+            return ctx                               # the producer has no such property: a group of its own, as it is
         if not c["open"]:
             dims = c["values"][ctx.value]["dimensions"]
             if dims is not None and vec is not None and vec not in dims:
@@ -461,6 +551,89 @@ class Contracts:
 def evidenced(v: dict) -> bool:
     """A value derived or computed from its record's own by a named experiment: an evidenced conversion."""
     return v.get("origin") in EVIDENCED and isinstance(v.get("produced_by"), str) and bool(v["produced_by"])
+
+
+def is_experiment(spec: dict, rec: Any) -> bool:
+    """Whether a record is a node whose label is an Experiment (a Computation, an Analysis, a catalytic test)."""
+    if not isinstance(rec, dict) or "label" not in rec:
+        return False
+    lab = rec.get("label")
+    return lab == "Experiment" or "Experiment" in (((spec.get("nodes") or {}).get(lab) or {}).get("ancestors") or [])
+
+
+def producers(v: dict, holder: Holder) -> list[dict]:
+    """The experiments a value's producer properties are read from, in order: the record its produced_by names, then the
+    record that holds it when that is an experiment (for a link, the experiment it starts from)."""
+    out = []
+    pb = v.get("produced_by")
+    if isinstance(pb, str) and isinstance(holder.records.get(pb), dict):
+        out.append(holder.records[pb])
+    rec = holder.record
+    if isinstance(rec, dict) and "source" in rec and "type" in rec:
+        rec = holder.records.get(rec.get("source"))
+    if is_experiment(holder.spec, rec) and not any(rec is x for x in out):
+        out.append(rec)
+    return out
+
+
+def produced(prop: str, v: dict, holder: Holder) -> Produced:
+    """What a value's producer states of ``prop``: the first of its producers (:func:`producers`) whose label has the
+    property, so a conversion recorded on its computation (produced_by an analysis that has no level of theory) reads the
+    computation's. A producer whose label has no such property (a measurement, a fit) has none: ``none``."""
+    ps = producers(v, holder)
+    if not ps:
+        return Produced("unknown")
+    for p in ps:
+        lab = p.get("label")
+        if prop in ((((holder.spec.get("nodes") or {}).get(lab) or {}).get("properties")) or {}):
+            raw = (p.get("props") or {}).get(prop) if isinstance(p.get("props"), dict) else None
+            return Produced("stated" if raw is not None else "unstated", p.get("id"), lab, raw)
+    return Produced("none", ps[0].get("id"), ps[0].get("label"))
+
+
+def _num(x: Any) -> str:
+    return f"{x:g}" if isinstance(x, float) else str(x)
+
+
+def render(x: Any) -> tuple[bool, str]:
+    """A property as a context or a shown setting reads it: (whether it states something, its text). Text and enum values
+    as written (runs of whitespace as one space); a value object by its number and unit (a range, a bound), its text, its
+    truth or the record it names, and one that is not reported by its status and reason; a map entry by entry, by key;
+    a list item by item."""
+    if isinstance(x, str):
+        s = " ".join(x.split())
+        return bool(s), s
+    if isinstance(x, bool):
+        return True, "true" if x else "false"
+    if isinstance(x, (int, float)):
+        return True, _num(x)
+    if isinstance(x, dict) and x.get("status") in VALUE_STATUS:
+        st, unit = x["status"], (" " + " ".join(str(x["unit"]).split())) if isinstance(x.get("unit"), str) else ""
+        if st == "not_reported":
+            return False, "not reported" + (f" ({x['missing_reason']})" if x.get("missing_reason") else "")
+        if st in ("not_measured", "not_applicable"):
+            return True, st.replace("_", " ")
+        if "text_value" in x:
+            return True, " ".join(str(x["text_value"]).split())
+        if "boolean_value" in x:
+            return True, "true" if x["boolean_value"] else "false"
+        if "ref_value" in x:
+            return True, str(x["ref_value"])
+        if "lower" in x and "upper" in x:
+            return True, f"{_num(x['lower'])}–{_num(x['upper'])}{unit}"
+        if "value" in x:
+            lead = {"upper": "at most ", "lower": "at least "}.get(x.get("bound"), "")
+            if st != "present":
+                lead = "below " + ("detection" if st == "below_detection_limit" else "quantification") + " limit "
+            return True, f"{lead}{_num(x['value'])}{unit}"
+        return False, st.replace("_", " ")
+    if isinstance(x, dict):
+        parts = [(k, render(x[k])) for k in sorted(x)]
+        return any(ok for _, (ok, _) in parts), "; ".join(f"{k} {s}" for k, (_, s) in parts)
+    if isinstance(x, list):
+        parts = [render(i) for i in x]
+        return any(ok for ok, _ in parts), ", ".join(s for _, s in parts)
+    return False, ""
 
 
 def _merge(a: dict, b: dict) -> dict:
@@ -674,11 +847,15 @@ def states_no_unit(u: Any) -> bool:
 
 @dataclass
 class Read:
-    """A value read under its contract: its kind, its unit, its contexts and its denominator."""
+    """A value read under its contract: its kind, its unit, its contexts, its denominator, and what its producer states
+    of the properties its kind shows (``shown``: property -> its text, None when nothing states it; a producer that has
+    no such property is left out), ``unstated`` the shown properties nothing states (not reported included)."""
     kind: str
     reading: Reading | None
     contexts: dict
     denominator: dict | None = None
+    shown: dict = field(default_factory=dict)
+    unstated: list = field(default_factory=list)
 
 
 def read_value(c: Contracts, spec: dict, record: dict, prop: str, v: dict, records: dict,
@@ -695,7 +872,18 @@ def read_value(c: Contracts, spec: dict, record: dict, prop: str, v: dict, recor
     reading = None if states_no_unit(v.get("unit")) else c.read_unit(v.get("unit"), names)
     den = denominator(v, records, spec, variables)
     sib = siblings(c, kind, record, ctx_map)
-    return Read(kind, reading, c.resolve(kind, v, reading, sib, den["name"] if den else None), den)
+    holder = Holder(record, records, spec)
+    shown, unstated = {}, []
+    for s in c.kinds[kind]["shows"]:
+        got = produced(s["property"], v, holder)
+        if got.status == "none":
+            continue                                    # a producer that has no such property: nothing to show
+        ok, text = render(got.raw) if got.status == "stated" else (False, "")
+        shown[s["property"]] = text or None
+        if not ok:
+            unstated.append(s["property"])
+    return Read(kind, reading, c.resolve(kind, v, reading, sib, den["name"] if den else None, holder), den, shown,
+                unstated)
 
 
 def denominator(v: dict, records: dict, spec: dict | None = None, variables: dict | None = None) -> dict | None:
@@ -800,6 +988,7 @@ def check_document(doc: dict, spec: dict, rep) -> None:
             where = results.name(path, v)
             _check_value(c, rep, rid, where, got, v, records, unread, (owner(r), where.split(".")[0]))
             _check_target(c, spec, rep, rid, where, got, v, records)
+            _check_shown(c, rep, rid, where, got, v)
     for n in nodes:
         p = n.get("props") if isinstance(n.get("props"), dict) else {}
         if n.get("label") == "Variable" and p.get("quantity_kind") in c.kinds and not states_no_unit(p.get("unit")):
@@ -827,12 +1016,31 @@ def _check_target(c: Contracts, spec: dict, rep, rid: str, where: str, got: Read
             continue
         rec = records[t]
         lab = None if "source" in rec and "type" in rec else rec.get("label")
-        if lab not in nt["targets"]:
+        if lab not in nt["targets"] and e["context"] == "species":
             rep.add("error", rid, f"{where}: its target {t} is {'a ' + lab if lab else 'a link'}, "
                                   f"but the {e['context']} a {got.kind} is counted for is a {' or '.join(nt['targets'])} "
                                   f"(context_targets of {nt['module']}); a product the source does not identify is an "
                                   "unresolved_target")
+        elif lab not in nt["targets"]:
+            rep.add("error", rid, f"{where}: its target {t} is {'a ' + lab if lab else 'a link'}, but the {e['context']} a "
+                                  f"{got.kind} is of is a {' or '.join(nt['targets'])} (context_targets of {nt['module']}); "
+                                  "what the source does not identify is an unresolved_target")
         return
+
+
+def _check_shown(c: Contracts, rep, rid: str, where: str, got: Read, v: dict) -> None:
+    """A value of a kind that shows a property with warn (a free energy's temperature) whose producer states none, or
+    states it as not reported: a warning. The value stays as reported, and a scientific comparison shows it as not
+    stated."""
+    if not numbered(v):
+        return
+    for s in c.kinds[got.kind]["shows"]:
+        if s["warn"] and s["property"] in got.unstated:
+            said = got.shown.get(s["property"])
+            rep.add("warning", rid, f"{where}: this {got.kind} does not state the {s['property']} it holds at: "
+                                    + (f"its producer states it as {said}" if said else "the experiment that produced it "
+                                       "(its produced_by, else the experiment that holds it) states none")
+                                    + "; it stays as reported, and a scientific comparison shows it as not stated")
 
 
 def _dims(c: Contracts, kind: str) -> str:
@@ -976,6 +1184,23 @@ def check_bindings(spec: dict) -> None:
                     for val, fld in c.contexts[ctx]["refine"].items():
                         if val in (sd.get("values") or []) and fld not in props:
                             raise ScaleError(f"{where}: context {ctx} {val} is refined by {fld!r}, which {owner} does not have")
+    # a context of listed values read from a value's producer: the property it reads, wherever a label has it, is an enum
+    # whose every value names one of the context's (or one it lists as unspecified)
+    for name, ctx in (c.contexts.items() if c is not None else ()):
+        prop = ctx.get("property")
+        if not prop or ctx["open"]:
+            continue
+        for lab, d in [*(spec.get("nodes") or {}).items(), *(spec.get("abstract") or {}).items()]:
+            pd = (d.get("properties") or {}).get(prop)
+            if pd is None:
+                continue
+            if not isinstance(pd, dict) or pd.get("type") != "enum":
+                raise ScaleError(f"{lab}.{prop}: the context {name} is read from a value's producer's {prop}, so it is an "
+                                 "enum whose values name the context's")
+            bad = [x for x in pd.get("values") or [] if c.sibling_value(name, x) is None]
+            if bad:
+                raise ScaleError(f"{lab}.{prop} values {bad} name no value of the context {name} (add them to its values, "
+                                 "terms or unspecified)")
 
 
 # ------------------------------------------------------------------------------------------ the schema diff
@@ -1038,7 +1263,7 @@ def diff(a: dict | None, b: dict | None, out: dict) -> None:
             if (va[v] or {}).get("dimensions") != (vb[v] or {}).get("dimensions"):
                 out["changed"].append(f"quantities.contexts.{k}.{v}: dimensions {(va[v] or {}).get('dimensions')} -> "
                                       f"{(vb[v] or {}).get('dimensions')}")
-        for key in ("unspecified", "refine", "open"):
+        for key in ("unspecified", "refine", "open", "property", "unstated"):
             if xa.get(key) != xb.get(key):
                 out["changed"].append(f"quantities.contexts.{k}: {key} {xa.get(key)!r} -> {xb.get(key)!r}")
     ka, kb = a.get("kinds") or {}, b.get("kinds") or {}
@@ -1081,6 +1306,28 @@ def diff(a: dict | None, b: dict | None, out: dict) -> None:
             out["changed"].append(f"quantities.kinds.{k}: share {bool(xa.get('share'))} -> {bool(xb.get('share'))}")
         if bool(xa.get("closure")) != bool(xb.get("closure")):
             out["changed"].append(f"quantities.kinds.{k}: closure {bool(xa.get('closure'))} -> {bool(xb.get('closure'))}")
+        # what a comparison shows of a value's producer (and warns about when it states none): display and advice only
+        sha, shb = _shows(xa), _shows(xb)
+        for s in sorted(set(sha) | set(shb)):
+            if s not in sha:
+                out["added"].append(f"quantities.kinds.{k} shows {s}" + (" (a value whose producer states none is "
+                                                                        "reported)" if shb[s] else ""))
+            elif s not in shb:
+                out["loosened"].append(f"quantities.kinds.{k} no longer shows {s}")
+            elif sha[s] != shb[s]:
+                (out["added"] if shb[s] else out["loosened"]).append(
+                    f"quantities.kinds.{k}: a value whose producer states no {s} is {'' if shb[s] else 'no longer '}reported")
+
+
+def _shows(kind: dict) -> dict[str, bool]:
+    """A kind's shown properties, each with whether a value whose producer states none is reported (warn)."""
+    out = {}
+    for s in kind.get("shows") or []:
+        if isinstance(s, str):
+            out[s] = False
+        elif isinstance(s, dict) and isinstance(s.get("property"), str):
+            out[s["property"]] = bool(s.get("warn"))
+    return out
 
 
 def diff_context_targets(a: dict | None, b: dict | None, out: dict) -> None:
@@ -1222,6 +1469,31 @@ def narrowed_targets(doc: dict, spec: dict | None) -> list[str]:
     return bad
 
 
+def misread_units(doc: dict, spec: dict | None) -> list[str]:
+    """The values of a document whose unit reads as another dimension than their kind's (a property's binding, else its
+    Variable's quantity_kind): what a step to a version that binds them cannot map (an activation energy in volts). Each
+    as ``record.path: 'unit' is <dimension>, not <kind>``; a unit the vocabulary cannot read is not listed."""
+    c = contracts(spec or {})
+    if c is None:
+        return []
+    variables = variable_kinds(doc)
+    records = {r["id"]: r for r in (doc.get("nodes") or []) + (doc.get("links") or []) if isinstance(r, dict)
+               and isinstance(r.get("id"), str)}
+    bad = []
+    for r in records.values():
+        props = r.get("props") if isinstance(r.get("props"), dict) else {}
+        for path, v in _values_anywhere(props):
+            top = path.split("/")[1]
+            direct = binding(spec, r, top)[0] is not None and re.fullmatch(rf"/{re.escape(top)}(?:/\d+)?", path)
+            got = read_value(c, spec, r, top if direct else "", v, records, variables)
+            if got is None or got.reading is None or not got.reading.read or not numbered(v):
+                continue
+            if got.reading.vector not in c.kinds[got.kind]["dimensions"]:
+                bad.append(f"{r['id']}{path.replace('/', '.', 1)}: {v.get('unit')!r} is "
+                           f"{c.dimension_name(got.reading.vector)}, not {got.kind}")
+    return bad
+
+
 def misnamed_denominators(doc: dict, spec: dict | None) -> list[str]:
     """The values of a document divided by a value of another kind than their contract's denominator names (a turnover
     frequency divided by a share): what the step to 0.6.0 cannot map. Each as ``record.path: normalized_by names a
@@ -1257,8 +1529,9 @@ def describe_binding(c: Contracts, d: dict) -> str | None:
     by = ", ".join(f"{x} (also from {sib[x]})" if x in sib else x for x in ctx)
     den = c.kinds[k]["denominator"]
     dk = c.kinds[k]["denominator_kinds"]
+    shows = ", ".join(s["property"] + (" (warns when not stated)" if s["warn"] else "") for s in c.kinds[k]["shows"])
     return (f"quantity {k} [{', '.join(c.names.get(x, formula(x)) for x in c.kinds[k]['dimensions'])}]"
-            + (f"; compared by {by}" if by else "")
+            + (f"; compared by {by}" if by else "") + (f"; shows its producer's {shows}" if shows else "")
             + (f"; divided by {' or '.join(c.names.get(x, formula(x)) for x in den)}"
                + (f", a {' or a '.join(dk)}" if dk else "") + " (normalized_by)"
                + ("; says how it was calculated (normalized_by, basis or definition)"

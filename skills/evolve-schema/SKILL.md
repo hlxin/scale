@@ -46,7 +46,11 @@ other: it edits the schema files directly, and CI checks that it carries what it
    **`maturity: provisional`**. Loosen a checklist with `unless` exemptions rather than removing requirements;
    items that hold only for some records go in a `when` case (a condition such as
    `driving_forces: {any_of: [electro]}` and its must, should, edges and values). Express a change of meaning as a
-   deprecation with what supersedes it; never delete or reuse an identifier.
+   deprecation with what supersedes it; never delete or reuse an identifier. Where an ontology defines the
+   concept you add (look it up in EBI OLS and read its definition), map it in the layer's mapping set
+   (`core/mappings/kernel.yaml` or `domain/mappings/catalysis.yaml`, with `exact`, `close`, `broad`, `narrow` or
+   `related`, the term's CURIE and its label; a new ontology also goes in `core/mappings/ontologies.yaml`) and run
+   `scale schema mappings --check` (docs/mappings.md). A mapping never decides what the concept means.
 4. **Add tests.** A fixture (a valid document under `domain/tests/fixtures/`, `domain/examples/` or
    `tools/tests/fixtures/`) that uses every label and edge type you add, and a counterexample in
    `domain/tests/fixtures/invalid/` (listed in its `expect.yaml` with the error and the reason). Update the

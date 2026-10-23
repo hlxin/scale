@@ -203,6 +203,8 @@ nodes:
         - balanced
         - not_checked
         - not_reported
+        description: Whether the reaction is balanced, as the source or the curator states it. The validator's own atom
+          and charge assessment of the recorded participants is reported apart and never written here.
       direction:
         type: enum
         values:
@@ -414,19 +416,105 @@ nodes:
     fixed:
       experiment_kind: computational
     description: |
-      A calculation (DFT, microkinetic model, equilibrium screen) with its model, software and structure
-      models, the conditions it assumes and its results. What it predicts is linked by PREDICTS.
+      A calculation (DFT, a machine-learned model's predictions, a microkinetic model, an equilibrium screen) with its
+      model, software and structure models, the conditions it assumes and its results. What it predicts is linked by
+      PREDICTS. The method its energies come from is stated in fields a comparison reads (level_of_theory,
+      charge_treatment) and shows (dispersion, hubbard_u, spin_treatment, solvation, its temperature, pressure and
+      electrode potential); the input files, the environment and the structures stay in versioned, checksummed Datasets
+      (configuration, execution_environment, a model's stored_in).
     properties:
       task:
         type: text
       method:
         type: text
+        description: The method as the source names it, in its words (kept as reported); the fields below state what a
+          comparison reads.
       temperature:
         type: value
         quantity: temperature
       pressure:
         type: value
         quantity: pressure
+      computation_kind:
+        type: enum
+        maturity: provisional
+        values:
+        - electronic_structure
+        - machine_learned
+        - force_field
+        - microkinetic
+        - kinetic_monte_carlo
+        - thermodynamic
+        - other
+        - not_reported
+        description: What kind of calculation it is. electronic_structure = DFT or another quantum-chemical method;
+          machine_learned = predictions by a trained model (its Model, with its version and the data it was fitted to);
+          force_field = classical interatomic potentials; microkinetic = a mean-field kinetic model of elementary steps;
+          thermodynamic = an equilibrium or phase calculation (ab initio thermodynamics included).
+      level_of_theory:
+        type: value
+        maturity: provisional
+        description: The electronic-structure method its energies come from, as a short name the source gives, in a text
+          value. For DFT it is the exchange-correlation functional (RPBE, PBE, BEEF-vdW, HSE06); another method goes by its
+          name (CCSD(T)), and a machine-learned model by its name and checkpoint. A comparison of computed energies reads
+          it, and energies of two methods are never compared; not_reported when the source does not say.
+      dispersion:
+        type: value
+        maturity: provisional
+        description: The dispersion (van der Waals) correction as the source names it, in a text value (D3, D3(BJ), TS,
+          vdW-DF2), or "none" when the source says none was used; a functional that includes it (BEEF-vdW) says so here
+          too.
+      hubbard_u:
+        type: map
+        maturity: provisional
+        key_pattern: ^[A-Z][a-z]?$
+        items:
+          type: value
+        description: The Hubbard U (or U − J) applied to each element, as stated (Co 3.3 eV); recorded only when the
+          source applies one.
+      spin_treatment:
+        type: enum
+        maturity: provisional
+        values:
+        - spin_polarized
+        - non_spin_polarized
+        - other
+        - not_reported
+        description: Whether the calculation lets the spins polarize (and so finds magnetic states); the initial
+          magnetic moments or the spin multiplicity go in settings.
+      solvation:
+        type: enum
+        maturity: provisional
+        values:
+        - none
+        - implicit
+        - explicit
+        - implicit_and_explicit
+        - not_reported
+        description: How a solvent is represented (an implicit continuum, explicit molecules, both, or none); the model
+          (VASPsol, a number of water layers) goes in settings.
+      charge_treatment:
+        type: enum
+        maturity: provisional
+        values:
+        - constant_charge
+        - constant_potential
+        - other
+        - not_reported
+        description: Whether the number of electrons is held fixed (constant_charge, an ordinary calculation of a neutral
+          or charged cell, a computational hydrogen electrode included) or the electrode potential is held while the
+          electrons vary (constant_potential, a grand-canonical calculation, which states its electrode_potential and its
+          reference_scale). Energies of the two are never compared unless the source converts one into the other.
+      settings:
+        type: map
+        maturity: provisional
+        items:
+          type: value
+        description: 'The numerical settings that set its precision and model, by key, as stated: cutoff_energy, kpoints
+          (a text value, "4×4×1"), smearing, scf_convergence, force_convergence, pseudopotentials, basis_set,
+          dipole_correction, transition_state_method, initial_magnetic_moments, solvation_model, thermochemistry (how free
+          energies were obtained: harmonic, ideal gas), potential_method. The full input stays in the configuration
+          Dataset.'
   Analysis:
     is_a: Experiment
     fixed:
@@ -490,8 +578,14 @@ nodes:
         quantity: pressure
   StructureModel:
     is_a: Model
-    description: An atomistic model used in a computation (periodic slab, cluster, bulk cell, molecule);
-      not the physical specimen.
+    description: 'An atomistic model used in a computation (periodic slab, cluster, bulk cell, molecule); not the
+      physical specimen. Its coordinates stay in a Dataset (stored_in, with its version and sha256); the record keeps what
+      a query compares: its representation (which also says how it repeats: a periodic slab or bulk cell, or an isolated
+      cluster or molecule), composition and facet, and in parameters the supercell (a text value, "p(3×3)"), layers,
+      fixed_layers, vacuum, lattice_constant (with its origin: computed or taken from experiment), boundary_conditions and
+      relaxation (text values) as stated. What adsorbs on it, and how much, is the computed CatalystState that is a state
+      of it (HAS_COMPONENT role adsorbate, with coverage and bound_to); which specimen or state it stands for is REPRESENTS,
+      with what that assumes.'
     properties:
       representation:
         type: enum
@@ -816,8 +910,26 @@ nodes:
         type: value
       activation_energy:
         type: value
+        quantity: activation_energy
+        description: The step's activation energy, a computed barrier (its transition state above its initial state) or
+          the Ea of its rate constant, as its definition says, with its origin and produced_by (the computation or the
+          fit); never an apparent activation energy of an overall rate.
       reaction_energy:
         type: value
+        quantity: reaction_energy
+        description: The step's electronic energy change, products minus reactants, with its origin and produced_by.
+      activation_free_energy:
+        type: value
+        quantity: activation_free_energy
+        maturity: provisional
+        description: The free energy of the step's transition state above its initial state, at the temperature and
+          potential of the computation that produced it.
+      reaction_free_energy:
+        type: value
+        quantity: reaction_free_energy
+        maturity: provisional
+        description: The step's free energy change at the temperature, pressures and potential of the computation that
+          produced it.
       sticking_coefficient:
         type: value
       coverage_dependence:
@@ -1504,7 +1616,11 @@ edges:
         type: text
         description: e.g. "equilibrium computed", "kinetic fit".
   HAS_PARTICIPANT:
-    description: A species takes part in a reaction or elementary step. One edge per source statement.
+    description: A species takes part in a reaction or elementary step. One edge per source statement. With the
+      coefficient of every reactant and product, and the composition (elemental_composition, or a formula that can be
+      read) and charge of every species, the validator reports whether the participants balance in atoms and in charge,
+      each check on its own and apart from what the source says (Reaction.balance_status); a species whose charge is not
+      stated is never taken as neutral.
     from:
     - Reaction
     - ElementaryStep
@@ -1521,7 +1637,8 @@ edges:
         - inert
       coefficient:
         type: number
-        description: Signed or unsigned stoichiometric coefficient, only when stated.
+        description: Signed or unsigned stoichiometric coefficient, only when stated; the role says the side (a reactant
+          or a product), and a product's coefficient is never negative.
       phase:
         type: enum
         values:
@@ -1592,7 +1709,10 @@ edges:
     to:
     - StructureModel
   RATE_CONTROL:
-    description: The sensitivity of a microkinetic computation's rate to a step.
+    description: The sensitivity of a microkinetic computation's rate to a step, at the conditions the computation states
+      (its temperature, pressure and conditions) and in the catalyst state it is IN_STATE. It changes with them, so a
+      sensitivity at other conditions is another computation (PART_OF the whole); it is neither the step's barrier nor an
+      apparent activation energy.
     from:
     - Computation
     to:
@@ -1600,6 +1720,9 @@ edges:
     properties:
       degree_of_rate_control:
         type: value
+        quantity: degree_of_rate_control
+        description: The degree of rate control of the step for the rate of forming one product (its target), as
+          reported.
       rate_determining:
         type: boolean
   USES_DESCRIPTOR:
@@ -2670,6 +2793,19 @@ context_targets:
     targets:
     - ChemicalSpecies
     - ProductLump
+  process:
+    maturity: provisional
+    description: In catalysis, what an energy change is of (a reaction, adsorption or activation energy) is a Reaction or
+      an ElementaryStep, whose participants name the reference species; a species, a material or a structure model never
+      is.
+    targets:
+    - Reaction
+    - ElementaryStep
+  structure:
+    maturity: provisional
+    description: In catalysis, what a total electronic energy is of is a StructureModel.
+    targets:
+    - StructureModel
 checklist:
   description: 'What a catalytic test reports, by the driving forces it lists (CatalyticTest.driving_forces).
     Every test: the catalyst sample it uses and the reaction it concerns. A thermally driven test (thermo,
@@ -2753,6 +2889,7 @@ checklist:
     Sites: record a site population on the HAS_SITE from the state it was counted or observed in (as prepared, pretreated, working, after the test); sites can change with the conditions, so a count made in one state is never carried to another. A share (population_fraction), a density (site_density), the exposed atoms counted (exposed_metal_count) and the sites a rate is divided by (site_inventory) are four values, each with its origin, uncertainty or bound, and what produced it: the counting measurement, or an Analysis that converts an uptake into sites and USES_MODEL a Model stating what it assumes (the adsorbate's stoichiometry, the particle shape). A turnover frequency is kept as reported, with how it was calculated: the count it is divided by (normalized_by) and, in its basis or definition, what was counted as sites and how. A rate per exposed atom is an average over sites that may differ, not a rate per active site; a comparison shows each rate with its count. A computed population sits on the computed state, STATE_OF the model; one the source gives only for the formulation on the Catalyst, with no specimen added.
     Assignments: that a phase, site or species is active, a spectator, a precursor or an inhibitor for a reaction in a state is a Claim, ABOUT the component (role active, spectator, precursor or inhibitor), the state (role state), the reaction or product (role reaction, product), the test it concerns (role test) and any elementary step or mechanism (role step, mechanism); SUPPORTS and CONTRADICTS from the tests, characterizations, analyses and claims it rests on name the results with premise_refs. Competing assignments are claims of their own, never merged. Abundance is not activity: a majority phase is assigned nothing unless the source argues it, and a minority one can carry an assignment with its evidence.
     Operando: an observation made while the kinetics are measured. One the source calls operando is kept as such (observation_mode); the checklist looks, on its DURING link, for a catalytic test under working conditions whose kinetics were measured on the same specimen while the observation was made (specimen same_specimen, timing simultaneous, kinetics measured or matched_to_benchmark). A conventional reactor or cell the kinetics were compared with is recorded when the source gives one (kinetics matched_to_benchmark, benchmark). An overlap in time is not a pairing, and a change that tracks the activity in time does not show that what changed is active.
+    Computations: a computed energy is a value of its kind (a total electronic energy, a reaction or adsorption energy, an enthalpy or a free energy, an elementary activation energy or activation free energy, an apparent activation energy, a degree of rate control), never a bare number in eV. A reaction, adsorption or activation energy names the Reaction or ElementaryStep it is the energy change of (its target, or the step that holds it), whose participants and coefficients are its reference states. The Computation that produced it states its level_of_theory and charge_treatment, which a comparison reads, and its dispersion, hubbard_u, spin_treatment, solvation, temperature, pressure and electrode potential, which it shows; its input files, environment and structures stay in versioned, checksummed Datasets (configuration, execution_environment, a model's stored_in). A state computed on a structure model is STATE_OF the model, with no specimen; the model REPRESENTS the specimen or state it stands for, with what that assumes. A machine-learned prediction names its model (USES_MODEL, with its version and stored_in), the data it was fitted to (an experiment that EVALUATES it with evaluation_kind calibration and HAS_INPUT that data as training_data) and its validation (one that EVALUATES it with evaluation_kind validation on validation_data or test_data); a validation on the data the model was fitted to is reported, never counted as independent. An apparent activation energy from a fit of rates, an elementary step's activation energy and a degree of rate control at stated conditions are three quantities.
     Spectra and fits: a measured spectrum is a Dataset the characterization HAS_OUTPUT; a fit to it is an Analysis (analysis_kind spectral_fit) with its method, its fitted parameters in results (origin fitted, with their uncertainties), the references it HAS_INPUT and its limitations; an alternative model is another Analysis; a site assignment drawn from it is a Claim that cites the fitted parameters (premise_refs). Whether an ensemble signal tells phases apart depends on the technique, the data, the references and the model.
   labels:
     CatalyticTest:
@@ -3202,6 +3339,75 @@ checklist:
             path:
             - edge: HAS_INPUT
               label: Experiment
+    Computation:
+      when:
+      - computation_kind:
+          any_of:
+          - electronic_structure
+        maturity: provisional
+        basis:
+        - Winther et al., Catalysis-Hub.org, an open electronic structure database for surface reactions, Sci. Data 2019, 6,
+          75, doi:10.1038/s41597-019-0081-y (each reaction energy is kept with the code, the functional and the
+          structures it was computed from)
+        should:
+        - level_of_theory
+        - charge_treatment
+        - spin_treatment
+        - dispersion
+        - settings
+        - configuration
+        edges:
+          should:
+          - USES_SOFTWARE
+          - USES_MODEL
+      - charge_treatment:
+          any_of:
+          - constant_potential
+        maturity: provisional
+        basis:
+        - Melander, Wu, Weckman and Honkala, Constant inner potential DFT for modelling electrochemical systems under
+          constant potential and bias, npj Comput. Mater. 2024, 10, 5, doi:10.1038/s41524-023-01184-4 (a single electrode
+          potential has several definitions, with different scales and references)
+        should:
+        - electrode_potential
+        - reference_scale
+      - computation_kind:
+          any_of:
+          - machine_learned
+        maturity: provisional
+        basis:
+        - Allam et al., AQCat25, npj Comput. Mater. 2026, 12, 226, doi:10.1038/s41524-026-02099-6 (models named with their
+          checkpoints; the data a model is trained on kept apart from the validation and test data used to evaluate it)
+        should:
+        - level_of_theory
+        edges:
+          should:
+          - USES_MODEL
+        evidence:
+          should:
+          - name: fitted_on
+            description: the data the model was fitted to, an experiment that EVALUATES the model it uses with
+              evaluation_kind calibration
+            path:
+            - edge: USES_MODEL
+            - edge: EVALUATES
+              direction: in
+              edge_where:
+                evaluation_kind:
+                  any_of:
+                  - calibration
+          - name: validated_by
+            description: its validation, an experiment that EVALUATES the model it uses with evaluation_kind validation or
+              benchmark (one on the data the model was fitted to is reported by the validator, not counted as independent)
+            path:
+            - edge: USES_MODEL
+            - edge: EVALUATES
+              direction: in
+              edge_where:
+                evaluation_kind:
+                  any_of:
+                  - validation
+                  - benchmark
     Operation:
       when:
       - operation_mode:

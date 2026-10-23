@@ -713,13 +713,17 @@ class Comparison:
         return None
 
     def tag(self, got: quantities.Read | None, x: dict) -> dict:
-        """The unit and contexts a value was compared on (and its denominator, with what the named value says of its
-        origin; whether it is an evidenced conversion)."""
+        """The unit, kind and contexts a value was compared on (and its denominator, with what the named value says of
+        its origin; whether it is an evidenced conversion; what its producer states of the properties its kind shows)."""
         out = {"unit": unit_key(x["unit"]) if isinstance(x.get("unit"), str) else None}
         if got is not None:
             out["kind"] = got.kind
             if got.contexts:
                 out["context"] = {n: ctx.value for n, ctx in sorted(got.contexts.items())}
+            shown = {k: (v if v is not None else quantities.NOT_STATED) for k, v in got.shown.items()
+                     if v is not None or k in self.c.warned(got.kind)}         # what is stated, and what should be
+            if shown:
+                out["shows"] = shown
             conv = sorted(n for n, ctx in got.contexts.items() if ctx.converted)
             if conv:
                 out["converted"] = conv
@@ -819,8 +823,8 @@ class Comparison:
             got = self.read(rec, path, x)
             if got is None or not got.contexts:
                 continue
-            sig = "; ".join(f"{n} {ctx.value or ('contradictory' if ctx.contradiction else 'not stated')}"
-                            for n, ctx in sorted(got.contexts.items()))
+            sig = "; ".join([f"kind {got.kind}"] + [f"{n} {ctx.value or ('contradictory' if ctx.contradiction else 'not stated')}"
+                                                     for n, ctx in sorted(got.contexts.items())])
             self.across.setdefault(path, Counter())[sig] += 1
 
     def limitations(self) -> list[str]:
@@ -1768,7 +1772,7 @@ def _run(doc: dict, spec: dict, plan: dict, evidence_index=None, graph: Graph | 
         """The record a ranking reads for a row's variable (a bound entry as :data:`ENTRY`), and the keys of the
         entries the row's filters bound on that path."""
         row = it["_row"]
-        if row.get(var) is None:
+        if row.get(var) is None and row["_edges"].get(var) is None:      # a link bound by edge_as ranks too
             return None, None
         e = row["_entries"].get(var)
         if e is not None:
@@ -1825,7 +1829,8 @@ def _run(doc: dict, spec: dict, plan: dict, evidence_index=None, graph: Graph | 
     if cmp.scientific:                      # rows grouped by the unit and context of every value compared, ranked within
         keyed = {}                          # a group; what else a value says (a conversion, its denominator) is the row's
         for it in out_rows:
-            on = {k: {"unit": t.get("unit"), **({"context": t["context"]} if t.get("context") else {})}
+            on = {k: {"unit": t.get("unit"), **({"kind": t["kind"]} if t.get("kind") else {}),
+                      **({"context": t["context"]} if t.get("context") else {})}
                   for k, t in sorted(it["_cmp"].items())}
             k = json.dumps(on, sort_keys=True, ensure_ascii=False)
             if k not in keyed:
@@ -1966,7 +1971,8 @@ def _comparison_limitations(groups: list[dict], total: int, reasons: Counter, in
                    f"({', '.join(f'{k} {x}' for k, x in ctx.items())}):"
                    " a scientific comparison compares a value only on a context the value or its record states (a potential's "
                    "reference scale, a current density's normalization, a pressure's convention, a volumetric flow's reference "
-                   "conditions, the species a share or an efficiency is counted for), never an assumed one, and not where its "
+                   "conditions, the species a share or an efficiency is counted for, a computed energy's reaction, level "
+                   "of theory and charge treatment), never an assumed one, and not where its "
                    "statements disagree; read "
                    "each value's as_reported and note, and curate the context where the source states it.")
     conv = sum(1 for it in rows if any(t.get("converted") for t in (it.get("compared") or {}).values()))
@@ -1979,6 +1985,18 @@ def _comparison_limitations(groups: list[dict], total: int, reasons: Counter, in
     if assumed:
         out.append(f"{assumed} row{'s were' if assumed != 1 else ' was'} compared on a value divided by an assumed denominator "
                    "(its normalized_by names a value of origin assumed): say so when stating it.")
+    # what the producers state of the properties a kind shows, not compared by: a group whose rows state them differently
+    shown: dict[tuple, set] = {}
+    for it in rows:
+        for path, t in sorted((it.get("compared") or {}).items()):
+            for prop, val in (t.get("shows") or {}).items():
+                shown.setdefault((it.get("comparison_group"), path, prop), set()).add(str(val))
+    mixed = [f"group {g}, {path} {prop}: {', '.join(sorted(vals))}" for (g, path, prop), vals in sorted(
+        shown.items(), key=lambda kv: (str(kv[0][0]), kv[0][1], kv[0][2])) if len(vals) > 1]
+    if mixed:
+        out.append("Rows of one comparison group were computed with settings the comparison shows but does not keep apart "
+                   f"({'; '.join(mixed)}): each row's compared says what its computation states; say so when comparing "
+                   "them.")
     return out
 
 

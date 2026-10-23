@@ -1,0 +1,93 @@
+# A competency question of the catalysis domain (tools/competency.py; `scale domains cq catalysis`).
+# It runs on public synthetic examples, so anyone can rerun it and see the same answer.
+id: CQ-24
+question: Which activation energies are elementary barriers with a transition-state structure, and which activation
+  energy comes from a fit of measured rates?
+description: |
+  An elementary step's activation energy (a computed barrier, its transition state above its initial state) and the
+  apparent activation energy of an overall rate (from the temperature dependence of measured rates, an Arrhenius fit) are
+  two kinds of quantity. The first is held by its step, names the computation that produced it and the step's
+  transition-state structure (a StructureModel whose coordinates are in a checksummed Dataset); the second is a result of
+  the fit, with the rates it fits and the temperature range it holds over. Asking every experiment for elementary
+  activation energies finds none: the fit's 105 kJ/mol is never returned as a step's barrier.
+documents:
+  - examples/scale-catal/computation-examples/computed-energies.json
+plan:
+  question: Which elementary barriers were computed, by which method, with which transition-state structures?
+  match:
+    label: ElementaryStep
+    as: step
+  steps:
+    - from: step
+      entries: activation_energy
+      kind: activation_energy
+      as: barrier
+    - from: barrier
+      field: produced_by
+      to: Computation
+      as: computation
+    - from: step
+      edge: TRANSITION_STATE
+      to: StructureModel
+      as: ts
+  return:
+    - step.name
+    - barrier
+    - computation.level_of_theory
+    - computation.settings.transition_state_method
+    - ts.name
+    - ts.stored_in
+  evidence: true
+expect:
+  status: answered
+  min_rows: 2
+  max_rows: 2
+  values:
+    step.name:
+      - O2* -> 2 O*
+      - CO* + O* -> CO2(g)
+variants:
+  - description: The apparent activation energy of CO2 formation is a result of the Arrhenius fit of three measured rates
+      (450–510 K), one row per rate it fits; it is not a step's barrier.
+    plan:
+      match:
+        label: Analysis
+        as: fit
+      steps:
+        - from: fit
+          entries: result_values
+          kind: apparent_activation_energy
+          as: apparent
+        - from: fit
+          edge: HAS_INPUT
+          to: CatalyticTest
+          as: test
+      return:
+        - fit.name
+        - fit.temperature
+        - apparent
+        - test.name
+    expect:
+      status: answered
+      min_rows: 3
+      max_rows: 3
+      values:
+        test.name:
+          - CO oxidation at 450 K
+          - CO oxidation at 480 K
+          - CO oxidation at 510 K
+  - description: No experiment holds an elementary activation energy, so the fit's apparent one is not returned as one.
+    plan:
+      match:
+        label: Experiment
+        as: x
+      steps:
+        - from: x
+          entries: result_values
+          kind: activation_energy
+          as: barrier
+      return:
+        - x.name
+        - barrier
+    expect:
+      status: no_matching_record

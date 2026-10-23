@@ -89,6 +89,15 @@ fixtures:
   - file: operando-specimen-not-in-vocabulary.json
     error: "specimen: 'same_reactor' is not one of"
     reason: Which specimen an operando observation saw comes from a closed list, so that the checklist can tell an observation paired with the performance of the same specimen from one that only overlapped a run.
+  - file: adsorption-energy-of-a-species.json
+    error: "its target ex:df-electro/species/nitrate is a ChemicalSpecies, but the process a reaction_energy is of is a Reaction or ElementaryStep"
+    reason: An adsorption energy is the energy change of a reaction whose reactants and products name its reference species (the adsorbate relative to H2O and H2, or to O2); the adsorbate alone does not say what the energy is relative to, so two such values could not be told apart.
+  - file: activation-energy-in-volts.json
+    error: "unit 'V' is electric_potential (M L2 T-3 I-1), not a dimension of activation_energy"
+    reason: An elementary step's activation energy is an energy (eV, kJ/mol) or, as a mechanism file may give it, an energy divided by the gas constant (K); a number in volts is a potential, whatever it measures.
+  - file: charge-treatment-not-in-vocabulary.json
+    error: "charge_treatment: 'grand_canonical' is not one of"
+    reason: Whether a calculation holds its charge or its potential constant comes from a closed list (constant_charge, constant_potential), so that a comparison can keep the two apart.
   - file: lump-subset-of-cycle.json
     error: "SUBSET_OF forms a cycle"
     reason: Containment is a strict order; two lumps each inside the other have no outer one, and no selectivity of either could be left out of a sum as the one that contains the other.

@@ -1,0 +1,35 @@
+# Frozen copy of scale-catal 0.6.0. Documents that pin 0.6.0 validate against it. Do not edit;
+# the current version is ../scale-catal.yaml.
+schema: scale-catal
+version: 0.6.0
+status: frozen
+maturity: provisional
+description: |
+  The catalysis domain's graph schema: the science kernel and the catalysis domain.
+
+  Shared Concepts, Attributes, and Links with Evidence. Concepts are the node labels, edge types,
+  property definitions and value kinds. Attributes are node and edge properties. Links are typed,
+  directed edges. Evidence is attached to every node and edge that states something.
+
+  Two layers, one job each:
+  - the science kernel (core/): the method of science (Question, Hypothesis, Prediction, Experiment,
+    Procedure, Protocol, Operation, Design, Variable, Claim), what is studied (ObjectOfStudy), what
+    science is done with (Instrument, Model, Dataset, Source) and who does it (Person, Institution,
+    Project, Software), with the value object, evidence item, record reference, stewardship, common
+    properties and extension keys. An Operation says whether an experiment is run statically or
+    dynamically, for any science and any driving force;
+  - the catalysis domain (catalysis.yaml): one vocabulary and one checklist. The vocabulary
+    covers species, materials, samples, reactions, reactors, preparations, characterizations,
+    computations, mechanisms, catalysts, active sites, feeds, catalyst samples and catalytic tests
+    (the role a substance plays, such as support, promoter, precursor or poison, is on the edge, not a
+    label), and every driving force: heat, electrically delivered heat, an applied potential or
+    current, light and plasma, with the terms that exist only where forces act together. The
+    checklist says what a record must report (a violation makes it non-conformant, never invalid) and
+    should report (a completeness score); its items for a catalytic test apply by the driving forces
+    the test lists (driving_forces).
+  A document follows the checklist with follows_domains: [catalysis] (the graph's list, or a node's
+  own). Properties outside the schema are extension keys with a registered prefix (_<prefix>_<name>);
+  a new driving force starts there and graduates into the domain.
+kernel: ../../../core/graph/frozen/kernel-0.6.0.yaml
+domains:
+- v0.6.0/catalysis.yaml

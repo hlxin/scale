@@ -1,0 +1,122 @@
+# A competency question of the catalysis domain (tools/competency.py; `scale domains cq catalysis`).
+# It runs on public synthetic examples, so anyone can rerun it and see the same answer.
+id: CQ-23
+question: Which computed O adsorption energies can be compared as one descriptor, and why are the others kept apart or
+  left out?
+description: |
+  A computed energy is compared only with energies of its kind (an electronic adsorption energy is not an adsorption free
+  energy, though both are in eV), of the same reaction (the reactants and products, so the reference species, define it),
+  from the same level of theory, and at the same charge treatment (constant charge or constant potential). The
+  computation that produced each value states its level of theory and charge treatment; each row also shows what that
+  computation states of its dispersion correction, spin, solvation, temperature and potential, which are not grouped by.
+  Ranked scientifically, the ten energies fall into six groups: the four electronic adsorption energies relative to H2O
+  and H2 from RPBE at constant charge (Cu, Pt, Ag, Au: the descriptor); the Pt(111) energy relative to O2 (another
+  reaction); the Pt(111) free energy at 298.15 K (another kind); the electrochemical free energy at constant charge
+  (computational hydrogen electrode); the constant-potential one with its constant-charge counterpart converted by an
+  analysis (an evidenced conversion; the rows show that their solvation differs); and the machine-learned prediction
+  (another method). Two values are left out as missing_context, each with its reason: the Pd(111) energy, whose
+  computation does not state its level of theory, and the Ni(111) energy, whose source does not say what it is relative
+  to.
+documents:
+  - examples/scale-catal/computation-examples/computed-energies.json
+plan:
+  question: Which computed O adsorption energies can be compared, and in which groups?
+  comparison: scientific
+  match:
+    label: Computation
+    as: comp
+  steps:
+    - from: comp
+      entries: result_values
+      kind:
+        - reaction_energy
+        - reaction_free_energy
+      as: energy
+    - from: energy
+      field: target
+      to: Reaction
+      as: process
+      optional: true
+  return:
+    - comp.name
+    - comp.level_of_theory
+    - comp.charge_treatment
+    - comp.dispersion
+    - comp.spin_treatment
+    - comp.solvation
+    - energy
+    - process.equation
+  order_by:
+    - var: energy
+      prop: value
+  evidence: true
+expect:
+  status: answered
+  min_rows: 10
+  max_rows: 10
+  excluded:
+    missing_context: 2
+  values:
+    process.equation:
+      - H2O(g) + * -> O* + H2(g)
+      - 1/2 O2(g) + * -> O*
+      - H2O(l) + * -> O* + 2 H+ + 2 e-
+variants:
+  - description: Ranked as one descriptor, with the reaction, the level of theory and the charge treatment stated, only the
+      four electronic O adsorption energies relative to H2O and H2 from RPBE at constant charge are compared (Cu, Pt, Ag,
+      Au). The energy relative to O2 and the machine-learned prediction are left out as incompatible_context; the Pd(111)
+      and Ni(111) energies as missing_context. The free energies are not of the kind asked for.
+    plan:
+      steps:
+        - from: comp
+          entries: result_values
+          kind: reaction_energy
+          as: energy
+      order_by:
+        - var: energy
+          prop: value
+          context:
+            process: ex:ce/reaction/o-adsorption-from-h2o
+            level_of_theory: RPBE
+            charge_treatment: constant_charge
+      return:
+        - comp.name
+        - energy
+    expect:
+      status: answered
+      min_rows: 4
+      max_rows: 4
+      excluded:
+        incompatible_context: 2
+        missing_context: 2
+      values:
+        comp.name:
+          - O on Cu(111), RPBE
+          - O on Pt(111), RPBE
+          - O on Ag(111), RPBE
+          - O on Au(111), RPBE
+  - description: Asked for constant-potential free energies, the comparison returns the constant-potential calculation and
+      the constant-charge result its analysis converted to constant potential (an evidenced conversion), never the
+      unconverted constant-charge one.
+    plan:
+      steps:
+        - from: comp
+          entries: result_values
+          kind: reaction_free_energy
+          as: energy
+      order_by:
+        - var: energy
+          prop: value
+          context:
+            charge_treatment: constant_potential
+      return:
+        - comp.name
+        - energy.id
+    expect:
+      status: answered
+      min_rows: 2
+      max_rows: 2
+      values:
+        energy.id:
+          - o_electroadsorption_constant_potential
+          - o_electroadsorption
