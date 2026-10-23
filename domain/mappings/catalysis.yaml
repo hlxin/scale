@@ -1,0 +1,647 @@
+# The catalysis vocabulary's labels, edge types and values mapped to terms of other ontologies
+# (core/mappings/ontologies.yaml lists them), and the subdomains of catalysis research the vocabulary covers.
+# A mapping says how a SCALE term relates to a term someone else defines; it changes nothing that SCALE
+# validates or queries. The entries follow core/mappings/kernel.yaml, which explains `match`: exact, close,
+# broad (the other term is broader), narrow (it is narrower) or related. Every term was looked up in the
+# release its ontology's entry names, and none is obsolete.
+#
+# `subdomains` are the fourteen subdomains of catalysis research by which Ontologies4Cat classifies ontologies
+# (Behr, Borgelt and Kockmann, J. Cheminform. 2024, 16, 16, doi:10.1186/s13321-024-00807-2). For each, `scale`
+# lists the SCALE labels and edge types that record it and `gap` what SCALE lacks for it (both SCALE's own
+# reading). `ontologies4cat` is how the authors' metadata collection rates the ontologies it holds for the
+# subdomain, by its own acronyms: contained, related_narrower or related_broader (its "related: narrower" and
+# "related: broader"; an ontology it rates missing is not listed). Source of these ratings:
+# github.com/nfdi4cat/Ontology-Overview-of-NFDI4Cat at commit 399b788 (json/), CC BY 4.0, which rates 27
+# ontologies (the paper describes 23). They are copied as the collection gives them, read by its own rule: a
+# rating that says contained counts as contained, as SBO's "contained: broader" and "contained: narrower" do.
+# Its entry for eNanoMapper repeats its entry for RO (the same name, OBO Relations Ontology, and the same
+# ratings); both are listed as given.
+#
+# Checked by `scale domains check`; listed by `scale schema mappings` (`--subdomains` for the subdomains). See
+# docs/mappings.md.
+mapping_set: catalysis-mappings
+title: The catalysis vocabulary mapped to ontology terms
+maps: domain/graph/catalysis.yaml
+checked: '2026-10-20'
+mappings:
+  ChemicalSpecies:
+  - match: close
+    term: CHEBI:23367
+    label: molecular entity
+  - match: broad
+    term: CHEBI:24431
+    label: chemical entity
+  ChemicalSpecies.species_kind=molecule:
+  - match: close
+    term: CHEBI:25367
+    label: molecule
+  ChemicalSpecies.species_kind=ion:
+  - match: close
+    term: CHEBI:24870
+    label: ion
+  ChemicalSpecies.species_kind=atom:
+  - match: close
+    term: CHEBI:33250
+    label: atom
+  ChemicalSpecies.species_kind=radical:
+  - match: close
+    term: CHEBI:26519
+    label: radical
+  Material:
+  - match: broad
+    term: CHEBI:59999
+    label: chemical substance
+    note: A SCALE Material is a solid's composition with its crystal structure or stated form.
+  Material.material_family=alloy:
+  - match: close
+    term: CHEBI:142648
+    label: alloy
+  Material.material_family=oxide:
+  - match: broad
+    term: CHEBI:25741
+    label: oxide
+    note: ChEBI's oxide is any compound of oxygen with other elements, molecular ones included.
+  Material.material_family=mixed_oxide:
+  - match: close
+    term: CHEBI:133332
+    label: mixed metal oxide
+  Material.material_family=sulfide:
+  - match: broad
+    term: CHEBI:26822
+    label: sulfide
+    note: ChEBI's sulfide is any entity with bonded or anionic sulfur, organic sulfides included.
+  Material.material_family=nitride:
+  - match: close
+    term: CHEBI:50882
+    label: nitride
+  Material.material_family=zeolite:
+  - match: close
+    term: CHEBI:48729
+    label: zeolite
+  Material.material_family=carbon:
+  - match: close
+    term: CHEBI:33415
+    label: elemental carbon
+  Material.material_family=clay:
+  - match: close
+    term: ENVO:00002982
+    label: clay
+  Material.material_family=molecular_complex:
+  - match: close
+    term: CHEBI:33240
+    label: coordination entity
+  Material.material_family=organic:
+  - match: close
+    term: CHEBI:50860
+    label: organic molecular entity
+  Sample:
+  - match: close
+    term: OBI:0100051
+    label: specimen
+  Reaction:
+  - match: close
+    term: REX:0000002
+    label: chemical reaction
+  - match: close
+    term: af-p:AFP_0003711
+    label: chemical reaction (molecular)
+  HAS_PARTICIPANT:
+  - match: close
+    term: RO:0000057
+    label: has participant
+  HAS_COMPONENT.role=reactant:
+  - match: close
+    term: af-rl:AFRL_0000231
+    label: reactant role
+  HAS_COMPONENT.role=diluent:
+  - match: close
+    term: af-rl:AFRL_0000224
+    label: diluent role
+  Reactor:
+  - match: close
+    term: af-e:AFE_0000153
+    label: reactor
+  Preparation:
+  - match: close
+    term: af-p:AFP_0001348
+    label: synthesis
+  - match: broad
+    term: af-p:AFP_0001159
+    label: sample preparation
+    note: Allotrope's sample preparation also covers changing a sample, which SCALE records as a Treatment.
+  Treatment:
+  - match: broad
+    term: af-p:AFP_0001159
+    label: sample preparation
+  Treatment.treatment_kind=drying:
+  - match: close
+    term: af-p:AFP_0001876
+    label: drying
+  Treatment.treatment_kind=calcination:
+  - match: close
+    term: CHMO:0001467
+    label: calcination
+  Treatment.treatment_kind=aging:
+  - match: narrow
+    term: CHMO:0001464
+    label: ageing of precipitate
+  Treatment.treatment_kind=purification:
+  - match: close
+    term: CHMO:0002231
+    label: purification
+  Treatment.treatment_kind=reduction:
+  - match: related
+    term: MOP:0000569
+    label: reduction
+    note: MOP's reduction is the chemical change; the treatment is what is done to a sample to bring it about.
+  Treatment.treatment_kind=oxidation:
+  - match: related
+    term: MOP:0000568
+    label: oxidation
+    note: MOP's oxidation is the chemical change; the treatment is what is done to a sample to bring it about.
+  ProcedureStep:
+  - match: broad
+    term: COB:0000082
+    label: planned process
+    note: A SCALE procedure step may also be only proposed or planned (procedure_status).
+  ProcedureStep.action=add:
+  - match: close
+    term: af-p:AFP_0003743
+    label: adding (material)
+  ProcedureStep.action=dissolve:
+  - match: close
+    term: CHMO:0002773
+    label: dissolving
+  ProcedureStep.action=mix:
+  - match: close
+    term: CHMO:0001685
+    label: mixing
+  ProcedureStep.action=precipitate:
+  - match: close
+    term: CHMO:0001688
+    label: precipitation
+  ProcedureStep.action=age:
+  - match: narrow
+    term: CHMO:0001464
+    label: ageing of precipitate
+  ProcedureStep.action=filter:
+  - match: close
+    term: CHMO:0001640
+    label: filtration
+  ProcedureStep.action=wash:
+  - match: close
+    term: af-p:AFP_0001878
+    label: washing
+  ProcedureStep.action=dry:
+  - match: close
+    term: af-p:AFP_0001876
+    label: drying
+  ProcedureStep.action=calcine:
+  - match: close
+    term: CHMO:0001467
+    label: calcination
+  ProcedureStep.action=reduce:
+  - match: related
+    term: MOP:0000569
+    label: reduction
+  ProcedureStep.action=oxidize:
+  - match: related
+    term: MOP:0000568
+    label: oxidation
+  ProcedureStep.action=grind:
+  - match: close
+    term: CHMO:0001652
+    label: grinding
+  ProcedureStep.action=stir:
+  - match: close
+    term: CHMO:0002774
+    label: stirring
+  ProcedureStep.action=cool:
+  - match: close
+    term: af-p:AFP_0001478
+    label: cooling
+  Characterization:
+  - match: broad
+    term: OBI:0000070
+    label: assay
+  Analysis:
+  - match: close
+    term: OBI:0200000
+    label: data transformation
+  - match: close
+    term: EDAM:operation_2945
+    label: Data analysis
+  TimeSeries:
+  - match: close
+    term: IAO:0000584
+    label: time sampled measurement data set
+  Descriptor:
+  - match: close
+    term: CHEMINF:000123
+    label: chemical descriptor
+  Catalyst:
+  - match: related
+    term: CHEBI:35223
+    label: catalyst
+    note: ChEBI's catalyst is a role; a SCALE Catalyst is the formulation that plays it.
+  - match: related
+    term: af-rl:AFRL_0000217
+    label: catalyst role
+  Catalyst.catalyst_family=alloy:
+  - match: close
+    term: CHEBI:142648
+    label: alloy
+  Catalyst.catalyst_family=oxide:
+  - match: broad
+    term: CHEBI:25741
+    label: oxide
+  Catalyst.catalyst_family=mixed_oxide:
+  - match: close
+    term: CHEBI:133332
+    label: mixed metal oxide
+  Catalyst.catalyst_family=sulfide:
+  - match: broad
+    term: CHEBI:26822
+    label: sulfide
+  Catalyst.catalyst_family=nitride:
+  - match: close
+    term: CHEBI:50882
+    label: nitride
+  Catalyst.catalyst_family=zeolite:
+  - match: close
+    term: CHEBI:48729
+    label: zeolite
+  Catalyst.catalyst_family=carbon:
+  - match: close
+    term: CHEBI:33415
+    label: elemental carbon
+  Catalyst.catalyst_family=molecular_complex:
+  - match: close
+    term: CHEBI:33240
+    label: coordination entity
+  Catalyst.catalyst_family=organic:
+  - match: close
+    term: CHEBI:50860
+    label: organic molecular entity
+  Feed:
+  - match: broad
+    term: CHEBI:60004
+    label: mixture
+  CatalyticTest:
+  - match: broad
+    term: OBI:0000070
+    label: assay
+  - match: related
+    term: REX:0000078
+    label: catalysis
+    note: The phenomenon a catalytic test measures.
+  - match: related
+    term: MOP:0000781
+    label: catalysis
+    note: The phenomenon a catalytic test measures.
+  CatalyticTest.driving_forces=thermo:
+  - match: close
+    term: REX:0000386
+    label: thermocatalysis
+  CatalyticTest.driving_forces=photo:
+  - match: close
+    term: REX:0000036
+    label: photocatalysis
+  ElementaryStep:
+  - match: close
+    term: REX:0000058
+    label: reaction step
+  - match: broad
+    term: REX:0000055
+    label: elementary reaction
+  StateTransition:
+  - match: related
+    term: REX:0000171
+    label: phase transition
+    note: Some state transitions are phase transitions; others are oxidations, reductions or reconstructions.
+  Heater:
+  - match: close
+    term: af-e:AFE_0001128
+    label: heating device
+  TemperatureProbe:
+  - match: close
+    term: af-e:AFE_0000410
+    label: thermometer
+  - match: narrow
+    term: CHMO:0001097
+    label: thermocouple
+  Electrode:
+  - match: broad
+    term: CHMO:0002344
+    label: electrode
+    note: SCALE records a reference electrode apart, as a ReferenceElectrode.
+  - match: broad
+    term: af-e:AFE_0000422
+    label: electrode
+  ReferenceElectrode:
+  - match: exact
+    term: CHMO:0002345
+    label: reference electrode
+  ElectrochemicalCell:
+  - match: close
+    term: CHMO:0002351
+    label: electrochemical cell
+  IlluminatedCell:
+  - match: broad
+    term: CHMO:0002351
+    label: electrochemical cell
+  Photoelectrode:
+  - match: broad
+    term: CHMO:0002344
+    label: electrode
+  LightSource:
+  - match: close
+    term: OBI:0400065
+    label: light source
+  - match: broad
+    term: af-e:AFE_0000097
+    label: electromagnetic radiation source
+subdomains:
+  biocatalysis:
+    title: Biocatalysis
+    scale: []
+    gap: No label for an enzyme or a whole-cell catalyst, and no quantity kind for enzyme activity.
+    ontologies4cat:
+      contained:
+      - SBO
+      related_narrower:
+      - BAO
+      - EDAM
+      - OBI
+      related_broader:
+      - ChEBI
+      - CHEMINF
+      - eNanoMapper
+      - MS
+      - RO
+  heterogeneous_catalysis:
+    title: Heterogeneous catalysis
+    scale:
+    - Catalyst
+    - CatalystSample
+    - ActiveSite
+    - CatalystState
+    - CatalyticTest
+    - Reactor
+    - Feed
+    ontologies4cat:
+      contained: []
+      related_narrower:
+      - MOP
+      - REX
+      - RXNO
+      related_broader:
+      - AFO
+      - ChEBI
+      - CHEMINF
+  homogeneous_catalysis:
+    title: Homogeneous catalysis
+    scale:
+    - Catalyst
+    - CatalyticTest
+    gap: A molecular catalyst is a Catalyst of family molecular_complex; there is no ligand or solvent role and no
+      turnover number.
+    ontologies4cat:
+      contained: []
+      related_narrower:
+      - MOP
+      - REX
+      - RXNO
+      related_broader:
+      - AFO
+      - ChEBI
+      - CHEMINF
+  photocatalysis:
+    title: Photocatalysis
+    scale:
+    - LightSource
+    - ILLUMINATED_BY
+    - IlluminatedCell
+    - Photoelectrode
+    - ThermalContributionAnalysis
+    ontologies4cat:
+      contained: []
+      related_narrower:
+      - AFO
+      - CHMO
+      - REX
+      related_broader:
+      - BAO
+      - OBI
+      - RXNO
+      - SBO
+  electrocatalysis:
+    title: Electrocatalysis
+    scale:
+    - Electrode
+    - ReferenceElectrode
+    - Electrolyte
+    - ElectrochemicalCell
+    - USES_ELECTRODE
+    ontologies4cat:
+      contained: []
+      related_narrower:
+      - CHMO
+      - REX
+      related_broader:
+      - AFO
+      - MOP
+      - RXNO
+  chemical_substance_modelling:
+    title: Chemical substance modelling
+    scale:
+    - ChemicalSpecies
+    - Reaction
+    - HAS_PARTICIPANT
+    ontologies4cat:
+      contained:
+      - ChEBI
+      - MOP
+      - OntoCAPE
+      - RXNO
+      - SBO
+      related_narrower:
+      - AFO
+      - BAO
+      - CAO
+      - ENMO
+      - OBI
+      related_broader:
+      - CHEMINF
+      - CHMO
+      - CIF
+      - EDAM
+      - EMMO
+      - ENVO
+      - OSMO
+      - REX
+      - VIMMP
+  material_modelling:
+    title: Material modelling
+    scale:
+    - Material
+    - StructureModel
+    - HAS_PHASE
+    ontologies4cat:
+      contained:
+      - AFO
+      - EMMO
+      - OSMO
+      - SBO
+      related_narrower:
+      - ChEBI
+      - CHEMINF
+      related_broader:
+      - BAO
+      - CAO
+      - CIF
+      - ENVO
+      - OBI
+      - OEO
+      - OntoCAPE
+      - VIMMP
+  process_modelling:
+    title: Process modelling
+    scale:
+    - ProcessUnit
+    - FEEDS_INTO
+    - Reactor
+    - Mechanism
+    - ElementaryStep
+    - Computation
+    ontologies4cat:
+      contained:
+      - metadata4ing
+      - OntoCAPE
+      - OSMO
+      - SBO
+      - VIMMP
+      related_narrower:
+      - AFO
+      - BAO
+      - EMMO
+      - MOP
+      - OBI
+      - OEO
+      - RXNO
+      related_broader:
+      - CAO
+      - CHEMINF
+      - CHMO
+      - M3
+  synthesis_data:
+    title: Synthesis data
+    scale:
+    - Preparation
+    - ProcedureStep
+    - Treatment
+    - Sample
+    - CatalystSample
+    - PREPARED_FROM
+    ontologies4cat:
+      contained: []
+      related_narrower: []
+      related_broader:
+      - AFO
+      - BAO
+      - CAO
+      - CHEMINF
+      - EDAM
+      - ENMO
+      - OSMO
+      - SBO
+      - VIMMP
+  operando_data:
+    title: Operando data
+    scale:
+    - Characterization
+    - DURING
+    - TimeSeries
+    - CatalystState
+    ontologies4cat:
+      contained:
+      - OSMO
+      related_narrower: []
+      related_broader:
+      - CHMO
+      - MS
+  performance_data:
+    title: Performance data
+    scale:
+    - CatalyticTest
+    - Analysis
+    ontologies4cat:
+      contained:
+      - OSMO
+      related_narrower:
+      - CHMO
+      - EDAM
+      - SBO
+      related_broader:
+      - AFO
+      - CHEMINF
+      - MS
+      - OntoCAPE
+  characterisation_data:
+    title: Characterisation data
+    scale:
+    - Characterization
+    - CHARACTERIZES
+    - DETECTS
+    - TimeSeries
+    ontologies4cat:
+      contained:
+      - AFO
+      - BAO
+      - CHEMINF
+      - CHMO
+      - EDAM
+      - MS
+      related_narrower: []
+      related_broader:
+      - CAO
+      - CIF
+      - OBI
+      - OSMO
+  heat_transport_and_kinetic_data:
+    title: Heat, transport and kinetic data
+    scale:
+    - Analysis
+    - Mechanism
+    - ElementaryStep
+    - Heater
+    - TemperatureProbe
+    gap: A transport check records its verdict and keeps its criterion values as results, but no quantity kind is
+      declared for a transport criterion (Weisz-Prater, Mears, Carberry), a Thiele modulus or an effectiveness
+      factor.
+    ontologies4cat:
+      contained: []
+      related_narrower:
+      - OntoCAPE
+      related_broader:
+      - CAO
+      - CHEMINF
+      - MS
+      - OSMO
+      - VIMMP
+  process_design_energy_and_cost_data:
+    title: Process design, energy and cost data
+    scale:
+    - ProcessUnit
+    gap: Energy per product is recorded for plasma tests only (specific_energy_input, energy_yield); there is no
+      energy consumption for other driving forces and no cost.
+    ontologies4cat:
+      contained:
+      - OEO
+      - OntoCAPE
+      related_narrower: []
+      related_broader:
+      - M3
+      - metadata4ing
+      - OSMO
+      - VIMMP

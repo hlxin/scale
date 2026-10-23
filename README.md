@@ -120,7 +120,7 @@ This sets up the environment and runs every check CI runs. Add `--fast` to skip 
 ## Documentation
 
 [Commands](docs/commands.md) · [Using SCALE with agents](docs/integrate.md) · [Architecture](docs/architecture.md) ·
-[Curation](docs/curation.md) · [Querying](docs/querying.md) · [Schema evolution](docs/evolution.md) ·
+[Curation](docs/curation.md) · [Querying](docs/querying.md) · [Schema evolution](docs/evolution.md) · [Mappings to ontologies](docs/mappings.md) ·
 [The catalysis domain](domain/README.md) · [The science kernel](core/graph/README.md) · [Tools](tools/README.md) ·
 [Governance](governance/README.md) · [Changelog](CHANGELOG.md)
 

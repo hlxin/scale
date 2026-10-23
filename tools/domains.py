@@ -61,16 +61,19 @@ DOMAIN_KEYS: dict[str, tuple[bool | str, tuple]] = {
     "examples": (True, _LIST), "example_documents": (True, _DICT), "competency": (True, _STR), "tests": (True, _STR),
     "docs": (False, _STR), "roadmap": (True, _STR),
     "decision_record": ("stable", _STR), "deprecation": (False, _STR), "contributors": (True, _LIST),
+    "mappings": (False, _STR),
 }
 CORE_KEYS: dict[str, tuple[bool | str, tuple]] = {
     "core": (True, _STR), "title": (True, _STR), "summary": (False, _STR), "version": (True, _STR),
     "kernel": (True, _STR), "scope": (True, _STR),
     "compatibility": (True, _STR), "maintainers": (True, _DICT), "review_areas": (True, _LIST), "examples": (True, _LIST),
     "example_documents": (False, _DICT), "tests": (True, _STR), "docs": (False, _STR),
-    "contributors": (True, _LIST),
+    "contributors": (True, _LIST), "mappings": (False, _STR),
 }
 # directories the tools read by convention (layout): a DOMAIN.yaml naming another place would be ignored
-CONVENTIONS = {"competency": layout.DOMAIN_COMPETENCY, "tests": "tests"}
+CONVENTIONS = {"competency": layout.DOMAIN_COMPETENCY, "tests": "tests",
+               "mappings": layout.DOMAIN_MAPPINGS.split("/", 1)[1]}
+CORE_MAPPINGS = layout.KERNEL_MAPPINGS.split("/", 1)[1]       # CORE.yaml mappings, relative to core/
 
 
 class Problems:
@@ -415,6 +418,20 @@ def check(repo: Path, only: list[str] | None = None, examples: bool = True) -> d
             continue
         _check_domain(repo, name, m, domains, core, kver, graph_names, core_digests, policy_areas, rules,
                       examples, cache, pb)
+    # the mappings of SCALE's terms to ontology terms (core/mappings/, domain/mappings/): declared where the tools
+    # read them, and every mapping on a term of the head schema and of a registered ontology (docs/mappings.md)
+    if core.get("mappings") is not None and core["mappings"] != CORE_MAPPINGS:
+        pb.error(cw, f"mappings must be {CORE_MAPPINGS!r}: the tools read {layout.KERNEL_MAPPINGS}")
+    from . import mappings
+    if (mappings.declared(repo) or (repo / layout.ONTOLOGY_REGISTRY).is_file()) and layout.graph_manifests(repo):
+        try:
+            res = mappings.check(repo)
+        except ScaleError as exc:
+            res = {"errors": [{"where": layout.ONTOLOGY_REGISTRY, "message": str(exc)}], "warnings": []}
+        for e in res["errors"]:
+            pb.error(e["where"], e["message"])
+        for w in res["warnings"]:
+            pb.warn(w["where"], w["message"])
     return {"ok": not pb.errors, "core": {"name": core.get("core"), "version": kver,
                                           "team": (core.get("maintainers") or {}).get("team")},
             "domains": [{"domain": n, "status": m.get("status"), "version": m.get("version")} for n, m in domains.items()
