@@ -412,7 +412,7 @@ def test_a_measured_spectrum_a_fitted_parameter_and_an_inferred_claim_stay_three
 
 # ---------------------------------------------------------------- the schema change
 def test_the_change_to_the_turnover_frequency_contract_is_breaking():
-    old, new = spec_at("0.5.0"), pgraph.load_spec(GRAPH_MANIFEST)
+    old, new = spec_at("0.5.2"), pgraph.load_spec(GRAPH_MANIFEST)
     d = diff_specs(old, new)
     assert {"quantities.kinds.turnover_frequency is compared by species",
             "quantities.kinds.turnover_frequency: its denominator names a site_count or a site_density only"} <= set(d["narrowed"])
@@ -448,12 +448,12 @@ def test_a_malformed_denominator_kind_never_loads():
 
 def test_the_step_to_site_populations_rewrites_nothing_and_stops_on_what_it_cannot_map():
     old = load_doc(EXAMPLES / "scale-catal/driving-force-examples/electro.json")
-    old["graph"]["schema_version"] = "0.5.0"
+    old["graph"]["schema_version"] = "0.5.2"
     new, log = pgraph_migrate.raise_version(old, "0.6.0", spec_at("0.6.0"))
-    step = next(s for s in log["steps"] if s["from"] == "0.5.0")
+    step = next(s for s in log["steps"] if s["from"] == "0.5.2")
     assert step["to"] == "0.6.0" and not step.get("changes")
     assert {k: v for k, v in new.items() if k != "graph"} == {k: v for k, v in old.items() if k != "graph"}
-    # a turnover frequency divided by a share, valid by its dimension under 0.5.0, cannot be mapped
+    # a turnover frequency divided by a share, valid by its dimension under 0.5.2, cannot be mapped
     bad = copy.deepcopy(old)
     t = next(x for x in bad["nodes"] if x["label"] == "CatalyticTest")
     bad["nodes"].append({"id": "ex:df-electro/variable/tof", "label": "Variable",
@@ -473,14 +473,14 @@ def test_turnover_frequencies_that_state_no_product_or_denominator_are_no_longer
     """The one committed document with turnover frequencies (the kernel's meta-analysis example, pinned 0.2.0) stays
     valid when moved to 0.6.0: its four rates, which say neither how they were calculated nor for which product, are
     warned about (never refused), and they leave a scientific comparison as missing_context (no product), where under
-    0.5.0 they were compared; an ordinary comparison is unchanged."""
+    0.5.2 they were compared; an ordinary comparison is unchanged."""
     meta = load_doc(REPO / "core/examples/science-examples/d-meta-analysis.json")
     new = pgraph_migrate.raise_version(meta, "0.6.0", spec_at("0.6.0"))[0]
     rep = pgraph.validate(new, spec_of(new))
     assert rep.errors == [] and len(rep.warnings) == 4
     assert all("does not say how it was calculated" in w["message"] for w in rep.warnings)
     old = copy.deepcopy(new)
-    old["graph"]["schema_version"] = "0.5.0"
+    old["graph"]["schema_version"] = "0.5.2"
     plan = {"comparison": "scientific", "match": {"label": "Experiment", "as": "e"},
             "where": [{"var": "e", "prop": "results.*[variable=ex:sk-d/variable/tof]", "op": "gt", "value": 0,
                        "unit": "1/s"}], "return": ["e.name"]}
