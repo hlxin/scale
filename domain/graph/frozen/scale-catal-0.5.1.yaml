@@ -1,7 +1,7 @@
-# Frozen copy of scale-catal 0.7.2. Documents that pin 0.7.2 validate against it. Do not edit;
+# Frozen copy of scale-catal 0.5.1. Documents that pin 0.5.1 validate against it. Do not edit;
 # the current version is ../scale-catal.yaml.
 schema: scale-catal
-version: 0.7.2
+version: 0.5.1
 status: frozen
 maturity: provisional
 description: |
@@ -30,6 +30,6 @@ description: |
   A document follows the checklist with follows_domains: [catalysis] (the graph's list, or a node's
   own). Properties outside the schema are extension keys with a registered prefix (_<prefix>_<name>);
   a new driving force starts there and graduates into the domain.
-kernel: ../../../core/graph/frozen/kernel-0.7.2.yaml
+kernel: ../../../core/graph/frozen/kernel-0.5.1.yaml
 domains:
-- v0.7.2/catalysis.yaml
+- v0.5.1/catalysis.yaml

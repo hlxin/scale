@@ -1,4 +1,41 @@
 {
   "description": "Gap themes raised by curation and the changes that addressed them.",
-  "themes": []
+  "themes": [
+    {
+      "id": "product-lumps",
+      "issue": 39,
+      "kind": "missing_concept",
+      "title": "Product lumps (C5+, C5-C11, C2-C4 olefins) have no target concept",
+      "status": "proposed",
+      "decision": "schema change (additive, provisional): ProductLump label, SUBSET_OF edge, selectivity-sum check reads containment",
+      "evidence": [
+        {
+          "source": "Cheng et al., Nat. Commun. 9, 3250 (2018), doi:10.1038/s41467-018-05755-8 (CC BY 4.0)",
+          "locator": "Table 2",
+          "quote": "CH4 | C2–C4 | C5+ | C5–C11 | C10–C20 | C21+"
+        },
+        {
+          "source": "Lyu et al., Nat. Commun. 11 (2020), doi:10.1038/s41467-020-20068-5 (CC BY 4.0)",
+          "locator": "Table 1",
+          "quote": "O/P ratio (C2-C4)"
+        }
+      ],
+      "motivating_records": "Issue 39: 79 lump nodes in 14 FTS documents, each a ChemicalSpecies with species_kind other; on Cheng Cat-12h the sum check warned 191.8 % because C5-C11, C10-C20 and C21+ lie inside C5+.",
+      "concepts_considered": {
+        "ChemicalSpecies (species_kind other, scope text)": "kept for single identities; a lump has no formula, and the carbon window and class would stay free text, so no comparison or containment check",
+        "value qualifiers (target, basis)": "carry which lump a value is for, but need a node to point at with a range and a class",
+        "Material": "describes solids, not product classes",
+        "ChEBI classes": "give a compound class but no carbon window; may fill compound_class later, no identifiers invented here"
+      },
+      "rights": "Only the two short quoted column headers above are stored, as evidence quotes; both sources are CC BY 4.0. No source text beyond them is committed.",
+      "convention_limit": "Comparison across documents relies on curators filling carbon_min, open_ended and compound_class on each ProductLump; a lump whose properties are unstated is missed by such a plan. No shared lump ids are provided: each document mints its own.",
+      "unreported_gaps": [
+        "A species inside a lump (CH4 in C1, ethene in C2-C4 olefins) cannot be declared, because SUBSET_OF links a lump to a lump only; selectivities on a species and on its lump can therefore be summed together.",
+        "Lyu's O/P ratio (C2-C4) is not modelled.",
+        "The selectivity basis and denominator are to be reported separately and are not modelled here.",
+        "Boiling-range lumps (for example by distillation cut) are not modelled.",
+        "The sum check drops any container lump from the sum, so an undeclared overlap beneath a declared container goes unseen."
+      ]
+    }
+  ]
 }
