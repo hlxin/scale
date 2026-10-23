@@ -270,21 +270,9 @@ value:
     record.
   - A value of a property bound to a quantity contract (quantities) is in a unit of one of its kind's dimensions;
     normalized_by goes only on a value whose kind declares a denominator, resolves (with its path) to a value object,
-    and names a value of the denominator's dimensions (and, where the denominator names kinds, a value of one of them).
-  - A value divided by a one-sided bound (its normalized_by names a value with bound) is a bound the other way (a rate
-    divided by at most N sites is at least the quotient) and states it (bound); one that does not is reported (a
-    warning) and kept as reported, and a scientific comparison shows the bound of what it is divided by.
-  - A value of a kind whose denominator is marked unstated (a turnover frequency) says how it was calculated (its
-    normalized_by names what it is divided by, or its basis or definition says it); one that says neither is reported
-    (a warning) and kept as reported. Its basis says how it was calculated, so a scientific comparison reads it, and
-    compares the value whatever it says.
+    and names a value of the denominator's dimensions.
   - target and unresolved_target do not go together; a target a domain narrows for a context (context_targets) names
     a record of one of its labels.
-  - A context read from a value's producer (a computed energy's level_of_theory and charge_treatment) is read from the
-    experiment its produced_by names, then from the experiment that holds it; a producer whose label has no such property
-    (a measurement, a fit) has none, and its values are compared apart from the others, never left out. A value whose kind
-    shows a property with warn (a free energy's temperature) and whose producer states none is reported (a warning) and
-    kept as reported.
   - id is snake_case and not only digits, and no two values of a record share one.
 evidence:
   description: Where an assertion comes from. Embedded on nodes and links; quotes are checked verbatim
@@ -1085,16 +1073,6 @@ nodes:
           type: value
       version:
         type: string
-        description: The model's version as its source names it; for a trained model, the checkpoint whose predictions
-          are recorded.
-      stored_in:
-        type: ref
-        targets:
-        - Dataset
-        maturity: provisional
-        description: The Dataset that holds the model itself, with its version and sha256 (the coordinates of an atomistic
-          structure, the weights of a trained model at its checkpoint, a mechanism or rate-law file). The record keeps what
-          a query reads and compares; the file keeps the rest.
   Source:
     maps_to:
     - IAO document
@@ -1812,26 +1790,11 @@ edges:
       state:
         type: text
   REPRESENTS:
-    description: A model represents an object of study (a modelling correspondence, not identity). An atomistic model of
-      a catalyst stands for a specimen or a state of it without being it, so a state computed on the model needs no
-      specimen; what of the object the model stands for, and what the correspondence assumes, are on the link.
+    description: A model represents an object of study (a modelling correspondence, not identity).
     from:
     - Model
     to:
     - ObjectOfStudy
-    properties:
-      aspect:
-        type: text
-        maturity: provisional
-        description: What of the object the model stands for, as the source says, when it is not the whole object (its
-          step sites, the working surface of one facet, one particle).
-      assumptions:
-        type: list
-        maturity: provisional
-        items:
-          type: text
-        description: What the correspondence assumes, as the source states it (a clean surface, no support, one facet for
-          every particle, a stated coverage). The model's own assumptions stay on the Model.
   HAS_PART:
     maps_to:
     - BFO has part
@@ -2116,12 +2079,6 @@ rules:
 - A Prediction tested by an experiment that started before the prediction's proposed_at is flagged post
   hoc (only when both dates are known).
 - A TESTS supports outcome that rests on a fitted value is flagged (a fit does not confirm its own data).
-- A validation or benchmark (EVALUATES) of a model is flagged (advisory) when its experiment uses data the model was
-  fitted to (what an experiment that calibrates the model, or outputs it, HAS_INPUT as training_data or calibration_data,
-  and the records a dataset among them INCLUDES), or when its passing outcome rests on a fitted value; a fit to its own
-  data is a calibration, never independent predictive validation.
-- A predicted value that does not sit on the experiment that predicted it names that experiment (produced_by)
-  (advisory).
 - A Hypothesis with hypothesis_status supported needs a supports outcome or a SUPPORTS link; refuted needs
   a refutes outcome or a CONTRADICTS link; disputed needs a disputes or refutes outcome or a CONTRADICTS
   link.
@@ -2207,14 +2164,9 @@ quantities:
     it: a unit of another dimension is an error, a unit it cannot read is reported and not checked. A context is
     read from what the value states (its unit, basis, definition, target or normalized_by) and from the sibling
     property; disagreeing statements are reported, except that a value derived from the record's own (origin
-    derived or computed, with produced_by: an evidenced conversion) keeps its own. A context may also be read from the
-    record that holds the value (an elementary step's activation energy is of that step) or from the experiment that
-    produced it (a computed energy's level of theory and charge treatment); a context that compares the values that do
-    not state it apart from the others (`unstated: group`) never leaves one out. A kind may show what the value's
-    producer states of other properties (`shows`: a free energy's temperature, a calculation's dispersion correction),
-    which a comparison shows in each row and never groups by. `scale graph query` with `comparison: scientific` compares
-    and ranks values of a kind only with values of that kind, in one unit and one context (docs/querying.md); without
-    it, values are compared as reported, as before. A domain says which records a context
+    derived or computed, with produced_by: an evidenced conversion) keeps its own. `scale graph query` with
+    `comparison: scientific` compares and ranks values of a kind only in one unit and one context
+    (docs/querying.md); without it, values are compared as reported, as before. A domain says which records a context
     read from a target may name (context_targets: in catalysis, a species is a ChemicalSpecies). A kind that closes
     (closure: a balance) is kept as reported above 100 % and flagged with what its uncertainty says.
   basis:
@@ -2227,11 +2179,6 @@ quantities:
   - Clark et al., Standards and protocols for data acquisition and reporting for studies of the electrochemical reduction of carbon dioxide, ACS Catal. 2018, 8, 6560, doi:10.1021/acscatal.8b01340 (Faradaic efficiency, the share of the charge that makes a given product; it and that product's rate, its partial current density, say different things; rates normalized by the geometric and by the electrochemically active area).
   - Kearnes et al., The Open Reaction Database, J. Am. Chem. Soc. 2021, 143, 18820, doi:10.1021/jacs.1c09820 (each measurement of a product names its type (identity, yield, selectivity, amount), the analysis it comes from and any standard used; the conversion and the reaction time belong to the outcome).
   - Bonchio et al., Best practices for experiments and reporting in photocatalytic CO2 reduction, Nat. Catal. 2023, 6, 657, doi:10.1038/s41929-023-00992-7 (gas and liquid products identified and quantified by their own analyses, each calibrated; control experiments; detection limits; selectivity as one product's amount over all products'; uncertainties from repeated measurements).
-  - Winther et al., Catalysis-Hub.org, an open electronic structure database for surface reactions, Sci. Data 2019, 6, 75, doi:10.1038/s41597-019-0081-y (an adsorption energy is the energy of a reaction with gas-phase references, H2O(g) - H2(g) + * -> O*; reaction energies from different DFT codes and exchange-correlation functionals are not necessarily directly comparable, so the code and the functional are tracked with every energy; lattice constants, sites, layers, cutoff, k-points and U-values also affect the energetics; the structures are stored with the energies).
-  - Mamun et al., High-throughput calculations of catalytic properties of bimetallic alloy surfaces, Sci. Data 2019, 6, 76, doi:10.1038/s41597-019-0080-z (an adsorption energy is E(slab+adsorbate) - E(slab) - the gas-phase references, chosen among CH4, H2, N2, H2O and H2S).
-  - Melander, Wu, Weckman and Honkala, Constant inner potential DFT for modelling electrochemical systems under constant potential and bias, npj Comput. Mater. 2024, 10, 5, doi:10.1038/s41524-023-01184-4 (constant-charge, canonical, and constant-potential, grand-canonical, calculations; grand free energies are a Legendre transform of canonical ones, and the two ensembles are equivalent only under stated conditions; at least four definitions of a single electrode potential, with different scales and references).
-  - Allam et al., AQCat25, unlocking spin-aware, high-fidelity machine learning potentials for heterogeneous catalysis, npj Comput. Mater. 2026, 12, 226, doi:10.1038/s41524-026-02099-6 (spin-polarized and unpolarized calculations, and calculations of different fidelity, give different energies, by up to about 1 eV for an adsorbate on a magnetic surface; adsorbate references CO, H2, H2O and N2; models evaluated on validation and test splits not seen in training).
-  - Cantera 3.2 documentation, Reactions and General Structure (Units), cantera.org/stable/yaml (a reaction equation names each participant with its stoichiometric coefficient; Ea is a parameter of a rate expression, given in an energy, an energy per quantity or K; a reaction is checked to balance in elements, and on surfaces in sites).
   dimensions:
     dimensionless: '1'
     length: L
@@ -2247,7 +2194,6 @@ quantities:
     pressure: M L-1 T-2
     force: M L T-2
     energy: M L2 T-2
-    molar_energy: M L2 T-2 N-1
     power: M L2 T-3
     current_density: I L-2
     specific_current: I M-1
@@ -2256,8 +2202,6 @@ quantities:
     amount_per_mass: N M-1
     mass_per_area: M L-2
     amount_per_area: N L-2
-    number_per_area: L-2
-    number_per_mass: M-1
     volumetric_flow: L3 T-1
     molar_flow: N T-1
     mass_flow: M T-1
@@ -2343,9 +2287,6 @@ quantities:
       inHg: pressure
       Btu: energy
       BTU: energy
-      Ha: energy
-      hartree: energy
-      Ry: energy
       '%': dimensionless
       ‰: dimensionless
       ppm: dimensionless
@@ -2621,48 +2562,6 @@ quantities:
           terms: [nitrogen balance, N balance]
         mass:
           terms: [mass balance, total mass]
-    process:
-      description: What an energy change is of, the reaction or elementary step its target names (or that holds it). Its
-        reactants and products, with their coefficients and phases, define the energy, the reference species included,
-        and its direction gives the sign (products minus reactants). An O adsorption energy relative to H2O and H2 and one
-        relative to O2 are energies of two reactions, never compared with one another; a binding energy that a source
-        reports as positive for stronger binding is the energy of the reverse reaction, a desorption. A domain says which
-        records a process is (context_targets).
-      read_from: [target, record]
-      open: true
-    structure:
-      description: The structure model a total energy is of, its target or the record that holds it. Total energies of two
-        structures are two quantities; their difference is a reaction energy. A domain says which records a structure is
-        (context_targets).
-      read_from: [target, record]
-      open: true
-    level_of_theory:
-      description: The electronic-structure method a computed energy comes from, as the experiment that produced it states
-        it in its level_of_theory (the exchange-correlation functional of a DFT calculation, such as RPBE or BEEF-vdW;
-        another method by its name; a machine-learned model by its name and checkpoint). Energies from two methods are
-        never compared with one another. It is read from the producer (the experiment the value's produced_by names, then
-        the experiment that holds it); a producer whose label has no level_of_theory (a measurement, a fit) has none to
-        state, and its values are compared apart from computed ones, never left out.
-      read_from: [producer]
-      property: level_of_theory
-      open: true
-    charge_treatment:
-      description: Whether a computed energy holds the number of electrons fixed (constant charge, as in an ordinary
-        calculation of a neutral or charged cell) or holds the electrode potential while the number of electrons varies
-        (constant potential, a grand-canonical energy). The two are different energies, compared only when the source
-        converts one into the other (an evidenced conversion whose produced_by names the conversion). A value whose
-        producer does not state it is compared only with others that do not state it either.
-      read_from: [basis, definition, producer]
-      property: charge_treatment
-      values:
-        constant_charge:
-          terms: [constant charge, constant-charge, fixed charge, fixed number of electrons, constant number of electrons]
-        constant_potential:
-          terms: [constant potential, constant-potential, constant electrode potential, constant inner potential, grand canonical, grand-canonical, grand potential, fixed potential]
-        other:
-          terms: []
-      unspecified: [not_reported]
-      unstated: group
   kinds:
     temperature:
       description: A thermodynamic temperature, or a difference of temperatures, as reported.
@@ -2830,133 +2729,9 @@ quantities:
       description: A dimensionless efficiency of energy or charge conversion (IPCE, ABPE, plasma energy efficiency).
       dimensions: [dimensionless]
       share: true
-    site_fraction:
-      description: The share of a stated whole that a population of sites makes up (of the exposed atoms of an element, of
-        all its atoms, of the sites of a kind), dimensionless; the value's basis names the whole and is compared as text.
-        A share is not a count of sites, so no rate is divided by it.
-      dimensions: [dimensionless]
-      share: true
-      maturity: provisional
-    site_density:
-      description: The sites of a population per surface area or per mass of the material or catalyst they belong to
-        (µmol/m2, sites/nm2, µmol/g), counted or estimated by a stated method.
-      dimensions: [amount_per_area, number_per_area, amount_per_mass, number_per_mass]
-      maturity: provisional
-    site_count:
-      description: A number of sites, or of exposed atoms taken as sites, absolute (µmol, a number of sites) or per mass
-        of catalyst (µmol/g), counted, estimated or assumed by a stated method; never a share (site_fraction).
-      dimensions: [amount, dimensionless, amount_per_mass, number_per_mass]
-      maturity: provisional
     turnover_frequency:
-      description: Events (one product formed or one reactant converted, its target) per site per time, as reported. How
-        it was calculated is recorded with it, never inferred, in the count of sites it is divided by (normalized_by, a
-        value that keeps its own method, origin and assumptions) and, in its basis or definition, in what was counted as
-        sites (the exposed atoms, the sites of one kind, every atom) and how. Rates of two species are never compared with one
-        another; rates calculated on different counts are compared as reported, each with its denominator.
+      description: Events per site per time; its denominator is a site inventory (a count of sites by a stated method).
       dimensions: [frequency]
-      compare_by: [species]
       denominator:
-        description: The count of sites the rate is divided by (sites counted by chemisorption, titration or a model),
-          absolute or per catalyst mass, or a density of sites per area for a rate per area; a site count or a site
-          density, never a share.
-        dimensions: [dimensionless, amount, amount_per_mass, number_per_mass, amount_per_area, number_per_area]
-        kinds: [site_count, site_density]
-        unstated: warning
-    electronic_energy:
-      description: The total electronic energy of one structure model, as an electronic-structure calculation reports it (a
-        DFT total energy). Its zero depends on the method, the code and its pseudopotentials or basis set, so totals are
-        compared only for one structure (its target, or the model that holds it) under one level of theory; a difference
-        of totals, such as an adsorption energy, is a reaction energy.
-      dimensions: [energy]
-      compare_by: [structure, level_of_theory, charge_treatment]
-      shows: [dispersion, hubbard_u, spin_treatment, solvation]
-      maturity: provisional
-    reaction_energy:
-      description: The electronic energy change of a reaction or an elementary step, products minus reactants; an
-        adsorption energy is the reaction energy of an adsorption. Its target, or the step that holds it, names the
-        process, whose participants are the reference states. Kept as reported, with or without zero-point energy as its
-        definition says; never an enthalpy or a free energy.
-      dimensions: [energy, molar_energy]
-      compare_by: [process, level_of_theory, charge_treatment]
-      shows: [electrode_potential, dispersion, hubbard_u, spin_treatment, solvation]
-      maturity: provisional
-    reaction_enthalpy:
-      description: The enthalpy change of a reaction or an elementary step at the temperature its producer states,
-        products minus reactants, as reported (computed with thermal corrections, or measured). It depends on the
-        temperature, which a value states.
-      dimensions: [energy, molar_energy]
-      compare_by: [process, level_of_theory, charge_treatment]
-      shows:
-      - property: temperature
-        warn: true
-      - pressure
-      - electrode_potential
-      - dispersion
-      - hubbard_u
-      - spin_treatment
-      - solvation
-      maturity: provisional
-    reaction_free_energy:
-      description: The free energy change of a reaction or an elementary step (a Gibbs energy, or a grand-canonical one at
-        constant potential), products minus reactants, at the temperature, pressures and electrode potential its producer
-        states; an adsorption free energy is the reaction free energy of an adsorption. Never compared with an electronic
-        energy change, even in the same unit.
-      dimensions: [energy, molar_energy]
-      compare_by: [process, level_of_theory, charge_treatment]
-      shows:
-      - property: temperature
-        warn: true
-      - pressure
-      - electrode_potential
-      - dispersion
-      - hubbard_u
-      - spin_treatment
-      - solvation
-      maturity: provisional
-    activation_energy:
-      description: The activation energy of one elementary step, the step that holds it or its target (its process). It is
-        either the energy of the step's transition state above its initial state (a computed barrier) or the activation
-        energy of its rate constant (the Ea of an Arrhenius expression in a mechanism), as its definition says. It is
-        never the apparent activation energy of an overall rate (apparent_activation_energy). A mechanism file may give it
-        divided by the gas constant, in kelvin; it is kept so, and compared only with values in that unit.
-      dimensions: [energy, molar_energy, temperature]
-      compare_by: [process, level_of_theory, charge_treatment]
-      shows: [electrode_potential, dispersion, hubbard_u, spin_treatment, solvation]
-      maturity: provisional
-    activation_free_energy:
-      description: The free energy of one elementary step's transition state above its initial state, at the temperature
-        and electrode potential its producer states.
-      dimensions: [energy, molar_energy]
-      compare_by: [process, level_of_theory, charge_treatment]
-      shows:
-      - property: temperature
-        warn: true
-      - pressure
-      - electrode_potential
-      - dispersion
-      - hubbard_u
-      - spin_treatment
-      - solvation
-      maturity: provisional
-    apparent_activation_energy:
-      description: The activation energy of an overall rate (of forming one product or converting one reactant, its target),
-        from the temperature dependence of measured or modelled rates over the range of its fit (an Arrhenius plot). It
-        combines the barriers and adsorption enthalpies of the steps behind the rate, so it is not the activation energy
-        of any one step; the temperature range of the fit is stated with it. A source may give it divided by the gas
-        constant, in kelvin (the slope of the plot); it is kept so, and compared only with values in that unit.
-      dimensions: [energy, molar_energy, temperature]
-      compare_by: [species]
-      shows:
-      - property: temperature
-        warn: true
-      - pressure
-      maturity: provisional
-    degree_of_rate_control:
-      description: How sensitive a rate (of forming one product, its target) is to the rate constant of one step, at the
-        conditions and in the catalyst state of the computation that found it (dimensionless; the degree of rate control).
-        It changes with the conditions, so it is shown with the temperature and pressure it holds at, and it is never a
-        property of the step alone.
-      dimensions: [dimensionless]
-      compare_by: [species]
-      shows: [temperature, pressure]
-      maturity: provisional
+        description: The site inventory the rate is divided by (sites counted by chemisorption, titration or a model).
+        dimensions: [dimensionless, amount]

@@ -620,6 +620,33 @@ def _decimals_tolerance(x: float) -> float:
     return 0.5 * 10 ** -len(frac)
 
 
+def _overlapping_lumps(lumps: dict, above: dict, targets: list[str]) -> list[tuple[str, str]]:
+    """Pairs of product lumps among ``targets`` whose carbon windows intersect (an open end reaches infinity), whose
+    compound classes agree (or one is unstated) and of which neither is declared inside the other (SUBSET_OF)."""
+    def window(p: dict):
+        lo, hi = p.get("carbon_min"), p.get("carbon_max")
+        if not isinstance(lo, int) or isinstance(lo, bool):
+            return None
+        if isinstance(hi, int) and not isinstance(hi, bool):
+            return lo, hi
+        return (lo, float("inf")) if p.get("open_ended") is True else None
+
+    def cls(p: dict):
+        c = p.get("compound_class")
+        return None if c in (None, "not_reported", "other") else c
+
+    out = []
+    for i, a in enumerate(targets):
+        for b in targets[i + 1:]:
+            if a not in lumps or b not in lumps or b in above.get(a, ()) or a in above.get(b, ()):
+                continue
+            wa, wb = window(lumps[a]), window(lumps[b])
+            ca, cb = cls(lumps[a]), cls(lumps[b])
+            if wa and wb and max(wa[0], wb[0]) <= min(wa[1], wb[1]) and (ca is None or cb is None or ca == cb):
+                out.append((a, b))
+    return out
+
+
 def plausibility(doc: dict, rep: Report) -> None:
     """Advisory warnings (:data:`PERCENT_NAME`): a percent-valued selectivity, conversion, yield or balance above
     100 %; selectivities of one record, each naming its product in ``target``, on one ``basis`` and in one unit
@@ -663,6 +690,14 @@ def plausibility(doc: dict, rep: Report) -> None:
                 return v[f]
         return None
 
+    lumps = {str(n.get("id")): n.get("props") or {} for n in doc.get("nodes") or [] if n.get("label") == "ProductLump"}
+    above: dict[str, set[str]] = {}   # lump -> every lump that contains it (SUBSET_OF, transitively)
+    for lk in doc.get("links") or []:
+        if lk.get("type") == "SUBSET_OF":
+            above.setdefault(str(lk.get("source")), set()).add(str(lk.get("target")))
+    for _ in range(len(above)):
+        for k, v in above.items():
+            v |= {w for u in list(v) for w in above.get(u, ())}
     for n in doc.get("nodes") or []:
         props = n.get("props") or {}
         if not isinstance(props, dict):
@@ -686,6 +721,15 @@ def plausibility(doc: dict, rep: Report) -> None:
         for (basis, unit), sel in groups.items():
             targets = [t for t, _, _, _ in sel]
             if len(sel) < 2 or len(set(targets)) < len(targets):
+                continue
+            # a lump that contains another lump of the group (SUBSET_OF) is not a part of one partition with it:
+            # only the innermost lumps are summed; overlapping lumps with no declared containment are reported
+            sel = [e for e in sel if not any(o != e[0] and e[0] in above.get(o, ()) for o, _, _, _ in sel)]
+            for a, b in _overlapping_lumps(lumps, above, [t for t, _, _, _ in sel]):
+                rep.add("warning", str(n.get("id")), f"selectivities on the product lumps {a!r} and {b!r} overlap (their "
+                        "carbon windows intersect and neither is declared SUBSET_OF the other); they are not parts of one "
+                        "partition")
+            if len(sel) < 2:
                 continue
             summed = [(x, p, b) for _, x, p, b in sel if x is not None]
             total = sum(x for x, _, _ in summed)

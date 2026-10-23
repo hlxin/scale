@@ -107,3 +107,33 @@ fixtures:
   - file: catalysis-mode-not-in-vocabulary.json
     error: "catalysis_mode: 'slurry' is not one of"
     reason: How a source describes its catalysis comes from a closed list (heterogeneous, homogeneous, biocatalytic, other, not_reported); a slurry reactor is how the test is run, not what kind of catalysis it is.
+  - file: lump-subset-of-cycle.json
+    error: "SUBSET_OF forms a cycle"
+    reason: Containment is a strict order; two lumps each inside the other have no outer one, and no selectivity of either could be left out of a sum as the one that contains the other.
+  - file: lump-subset-of-self.json
+    error: "a SUBSET_OF link joins a lump to itself"
+    reason: A lump is not a proper part of itself; the link would hide the lump from every sum that leaves out a lump that contains another.
+  - file: lump-subset-of-species.json
+    error: "SUBSET_OF target must be ['ProductLump']"
+    reason: Containment joins two lumps; a chemical species is an identity, not a class of products, so a lump is never declared inside one.
+  - file: lump-carbon-window-inverted.json
+    error: "carbon_min 11 is above carbon_max 5"
+    reason: A carbon window runs from its least to its greatest carbon number; an inverted one holds no product and would never overlap anything.
+  - file: lump-open-ended-with-maximum.json
+    error: "an open-ended product lump has no carbon_max"
+    reason: C5+ has no upper carbon number; a lump that is open ended and also gives one states two windows at once.
+  - file: integration-mode-not-allowed.json
+    error: "integration_mode: 'sandwich' is not one of"
+    reason: How the components of a multifunctional catalyst are put together comes from a closed list, so that catalysts can be grouped by it; an unlisted mode ("sandwich") is either one of the listed ones under another name or "other" said with its meaning.
+  - file: function-is-a-species.json
+    error: "is a ChemicalSpecies, expected ['Reaction']"
+    reason: A component's function is the reaction or step it performs, a Reaction record; a species (CO) is what the step converts, not what the component does.
+  - file: function-is-no-record.json
+    error: "reference 'ex:bifunctional/reaction/missing' does not resolve"
+    reason: A function names a reaction of the document; an id that is no record says nothing a reader can follow.
+  - file: function-on-has-part.json
+    error: "property 'function' is not declared for this type"
+    reason: The function is the scope of a component in its catalyst, so only HAS_COMPONENT states it; on the HAS_PART link between a reaction and its step it would have no meaning.
+  - file: site-proximity-without-status.json
+    error: "site_proximity: a value needs a status"
+    reason: A proximity says whether it is present or why it is missing; a bare distance or level hides missingness.
