@@ -40,10 +40,6 @@ nodes:
         - element
         - radical
         - other
-        - macromolecule
-        description: What kind of entity the species is; a macromolecule is a protein (an enzyme), a polymer or
-          another molecule of high molar mass, named by its source and identifiers (an enzyme's EC number), not by a
-          formula.
       properties:
         type: map
         items:
@@ -153,8 +149,6 @@ nodes:
         - balanced
         - not_checked
         - not_reported
-        description: Whether the reaction is balanced, as the source or the curator states it. The validator's own atom
-          and charge assessment of the recorded participants is reported apart and never written here.
       direction:
         type: enum
         values:
@@ -325,12 +319,9 @@ nodes:
         - quasi_in_situ
         - ex_situ
         - not_reported
-        description: The mode as the source reports it. operando = characterized while the kinetics (activity or
-          selectivity) are measured, under reaction conditions; in_situ = in a controlled environment; quasi_in_situ =
-          after the action without exposure to air; ex_situ = after transfer through air or other environments. The mode
-          is the source's label, kept as reported; whether an observation the source calls operando was made while the
-          kinetics were measured (on the same specimen, at the same time) is evaluated from its DURING link (the
-          checklist's operando case), never read from the label.
+        description: operando = under reaction conditions while activity is measured or runs; in_situ
+          = in a controlled environment; quasi_in_situ = after the action without exposure to air; ex_situ
+          = after transfer through air or other environments.
         maturity: provisional
       information_depth:
         type: enum
@@ -350,11 +341,8 @@ nodes:
         - local_region
         - ensemble
         - not_reported
-        description: Whether the measurement follows single particles, a local region or averages over the sample. An
-          ensemble signal (XAS, XRD, IR of a powder) averages over everything it samples, so whether it tells coexisting
-          phases apart from one mixed phase, or sees a minority species at all, depends on the technique, the data, the
-          reference spectra and the analysis model; a fit, with its alternatives and limitations, is an Analysis
-          (analysis_kind spectral_fit).
+        description: Whether the measurement follows single particles, a local region or averages over
+          the sample (an ensemble signal cannot tell coexisting phases apart from mixed ones).
         maturity: provisional
       transfer:
         type: text
@@ -366,105 +354,19 @@ nodes:
     fixed:
       experiment_kind: computational
     description: |
-      A calculation (DFT, a machine-learned model's predictions, a microkinetic model, an equilibrium screen) with its
-      model, software and structure models, the conditions it assumes and its results. What it predicts is linked by
-      PREDICTS. The method its energies come from is stated in fields a comparison reads (level_of_theory,
-      charge_treatment) and shows (dispersion, hubbard_u, spin_treatment, solvation, its temperature, pressure and
-      electrode potential); the input files, the environment and the structures stay in versioned, checksummed Datasets
-      (configuration, execution_environment, a model's stored_in).
+      A calculation (DFT, microkinetic model, equilibrium screen) with its model, software and structure
+      models, the conditions it assumes and its results. What it predicts is linked by PREDICTS.
     properties:
       task:
         type: text
       method:
         type: text
-        description: The method as the source names it, in its words (kept as reported); the fields below state what a
-          comparison reads.
       temperature:
         type: value
         quantity: temperature
       pressure:
         type: value
         quantity: pressure
-      computation_kind:
-        type: enum
-        maturity: provisional
-        values:
-        - electronic_structure
-        - machine_learned
-        - force_field
-        - microkinetic
-        - kinetic_monte_carlo
-        - thermodynamic
-        - other
-        - not_reported
-        description: What kind of calculation it is. electronic_structure = DFT or another quantum-chemical method;
-          machine_learned = predictions by a trained model (its Model, with its version and the data it was fitted to);
-          force_field = classical interatomic potentials; microkinetic = a mean-field kinetic model of elementary steps;
-          thermodynamic = an equilibrium or phase calculation (ab initio thermodynamics included).
-      level_of_theory:
-        type: value
-        maturity: provisional
-        description: The electronic-structure method its energies come from, as a short name the source gives, in a text
-          value. For DFT it is the exchange-correlation functional (RPBE, PBE, BEEF-vdW, HSE06); another method goes by its
-          name (CCSD(T)), and a machine-learned model by its name and checkpoint. A comparison of computed energies reads
-          it, and energies of two methods are never compared; not_reported when the source does not say.
-      dispersion:
-        type: value
-        maturity: provisional
-        description: The dispersion (van der Waals) correction as the source names it, in a text value (D3, D3(BJ), TS,
-          vdW-DF2), or "none" when the source says none was used; a functional that includes it (BEEF-vdW) says so here
-          too.
-      hubbard_u:
-        type: map
-        maturity: provisional
-        key_pattern: ^[A-Z][a-z]?$
-        items:
-          type: value
-        description: The Hubbard U (or U − J) applied to each element, as stated (Co 3.3 eV); recorded only when the
-          source applies one.
-      spin_treatment:
-        type: enum
-        maturity: provisional
-        values:
-        - spin_polarized
-        - non_spin_polarized
-        - other
-        - not_reported
-        description: Whether the calculation lets the spins polarize (and so finds magnetic states); the initial
-          magnetic moments or the spin multiplicity go in settings.
-      solvation:
-        type: enum
-        maturity: provisional
-        values:
-        - none
-        - implicit
-        - explicit
-        - implicit_and_explicit
-        - not_reported
-        description: How a solvent is represented (an implicit continuum, explicit molecules, both, or none); the model
-          (VASPsol, a number of water layers) goes in settings.
-      charge_treatment:
-        type: enum
-        maturity: provisional
-        values:
-        - constant_charge
-        - constant_potential
-        - other
-        - not_reported
-        description: Whether the number of electrons is held fixed (constant_charge, an ordinary calculation of a neutral
-          or charged cell, a computational hydrogen electrode included) or the electrode potential is held while the
-          electrons vary (constant_potential, a grand-canonical calculation, which states its electrode_potential and its
-          reference_scale). Energies of the two are never compared unless the source converts one into the other.
-      settings:
-        type: map
-        maturity: provisional
-        items:
-          type: value
-        description: 'The numerical settings that set its precision and model, by key, as stated: cutoff_energy, kpoints
-          (a text value, "4×4×1"), smearing, scf_convergence, force_convergence, pseudopotentials, basis_set,
-          dipole_correction, transition_state_method, initial_magnetic_moments, solvation_model, thermochemistry (how free
-          energies were obtained: harmonic, ideal gas), potential_method. The full input stays in the configuration
-          Dataset.'
   Analysis:
     is_a: Experiment
     fixed:
@@ -484,31 +386,11 @@ nodes:
         - statistical
         - other
         - balance
-        - spectral_fit
-        - isotopic_transient
-        - pulse_response
-        - modulation_excitation
-        - step_response
-        - frequency_response
         description: balance = a carbon, charge or mass balance of an experiment's results (provisional), over the assays
           it HAS_INPUT (the streams and phases they measured) and its interval; its result is a balance value in the
           experiment's result_values, produced_by the analysis. transport_check = whether heat and mass transport
           affect the rates of the experiment it HAS_INPUT, at the temperature and conditions it states (its
-          evaluation_basis says how it was checked). spectral_fit = a fit of measured spectra or patterns (linear
-          combination fitting, EXAFS shell fitting, principal component analysis; provisional). The data it fits (a
-          Dataset, or the Characterization) and the references it uses are what it HAS_INPUT, its fitted parameters
-          (shares of references, coordination numbers, distances) are its results, origin fitted, with their
-          uncertainties, and what it cannot tell apart is its limitations. An alternative model of the same data is an
-          analysis of its own. A fitted parameter is neither the spectrum nor the site assignment a Claim draws from
-          it. The transient kinds (provisional) read the responses of a test operated dynamically, which it HAS_INPUT
-          with the time series it reads. isotopic_transient = an isotope switch at steady state (SSITKA), giving each
-          product's surface_residence_time and surface_intermediate_amount; pulse_response = the responses to pulses
-          (a pulse reactor, a transient pulse in the Knudsen regime), giving conversions, residence times or fitted
-          constants; modulation_excitation = a periodic stimulus read by phase-sensitive detection, giving each band's
-          or species' phase_delay, against the reference and at the period and harmonic it states; step_response = the
-          response to a step or a switch (response_time_constant); frequency_response = responses at several modulation
-          frequencies, an analysis for each period it reads. A fit of a kinetic model to such responses is a kinetic_fit
-          that names its reactor_model.
+          evaluation_basis says how it was checked).
       evaluation_basis:
         type: enum
         maturity: provisional
@@ -527,115 +409,16 @@ nodes:
       verdict:
         type: text
         description: The conclusion of a check, e.g. "no internal diffusion limitation".
-      limitations:
-        type: text
-        maturity: provisional
-        description: What the analysis cannot tell apart or rests on, as the source states it (references that fit
-          equally well, a species too dilute to fit, parameters held fixed, a fit range), so that a claim drawn from it
-          carries them.
       temperature:
         type: value
         quantity: temperature
       pressure:
         type: value
         quantity: pressure
-      reactor_model:
-        type: enum
-        maturity: provisional
-        values:
-        - differential
-        - stirred_tank
-        - plug_flow
-        - axial_dispersion
-        - batch
-        - knudsen_pulse
-        - other
-        - not_reported
-        description: |
-          For a kinetic fit, how it treated the reactor its rates come from: differential = one composition throughout
-          (low conversion); stirred_tank = well mixed, the outlet composition throughout; plug_flow = composition
-          changing along the bed without mixing; axial_dispersion = plug flow with mixing along the bed; batch = a closed
-          vessel over time; knudsen_pulse = a pulse diffusing through the bed in the Knudsen regime. Constants fitted to
-          one data set under two treatments differ: a scientific comparison of a step's activation energy shows each
-          value's treatment and names, in its limitations, a group whose values were fitted under different ones.
-      rate_basis:
-        type: enum
-        maturity: provisional
-        values:
-        - per_site
-        - per_catalyst_mass
-        - per_surface_area
-        - per_reactor_volume
-        - not_reported
-        description: What the fitted rates are divided by, and so what the units of its rate constants count (per site,
-          a turnover frequency; per mass of catalyst; per surface area; per volume of the reactor or bed).
-      concentration_measure:
-        type: enum
-        maturity: provisional
-        values:
-        - partial_pressure
-        - mole_fraction
-        - concentration
-        - activity
-        - not_reported
-        description: What the gas-phase terms of its rate expressions are (partial pressures, mole fractions,
-          concentrations, or activities relative to a standard pressure), which sets the units of its adsorption and
-          rate constants; a constant fitted with partial pressures in bar and one with mole fractions differ by the
-          pressure, so the measure is stated with the constants.
-      standard_pressure:
-        type: value
-        maturity: provisional
-        quantity: pressure
-        description: The standard pressure activities are taken against, when concentration_measure is activity.
-      thermodynamic_consistency:
-        type: enum
-        maturity: provisional
-        values:
-        - enforced
-        - not_enforced
-        - not_reported
-        description: Whether the fit held the forward and reverse constants of its steps to the thermochemistry of the
-          overall reaction (the equilibrium constant), as the source says (Mhadeshwar, Wang and Vlachos, J. Phys. Chem. B
-          2003, 107, 12721, doi:10.1021/jp034954y).
-      phase_reference:
-        type: enum
-        maturity: provisional
-        values:
-        - stimulus
-        - species_response
-        - other
-        - not_reported
-        description: For a modulation_excitation or frequency_response analysis, what its phases and delays are measured
-          against - stimulus = the imposed modulation (the reference of phase-sensitive detection); species_response =
-          the response of another species, named in phase_reference_species. A source that gives delays against two
-          references is recorded as an analysis for each.
-      phase_reference_species:
-        type: ref
-        maturity: provisional
-        targets:
-        - ChemicalSpecies
-        description: The species whose response the analysis measures its delays against (phase_reference
-          species_response).
-      modulation_period:
-        type: value
-        maturity: provisional
-        description: The period of the modulation whose phases the analysis read. An analysis reads one period; a
-          frequency response read at several is recorded as an analysis for each.
-      demodulation_harmonic:
-        type: integer
-        maturity: provisional
-        description: The harmonic of the modulation frequency at which phase-sensitive detection read the phases (1 = the
-          fundamental).
   StructureModel:
     is_a: Model
-    description: 'An atomistic model used in a computation (periodic slab, cluster, bulk cell, molecule); not the
-      physical specimen. Its coordinates stay in a Dataset (stored_in, with its version and sha256); the record keeps what
-      a query compares: its representation (which also says how it repeats: a periodic slab or bulk cell, or an isolated
-      cluster or molecule), composition and facet, and in parameters the supercell (a text value, "p(3×3)"), layers,
-      fixed_layers, vacuum, lattice_constant (with its origin: computed or taken from experiment), boundary_conditions and
-      relaxation (text values) as stated. What adsorbs on it, and how much, is the computed CatalystState that is a state
-      of it (HAS_COMPONENT role adsorbate, with coverage and bound_to); which specimen or state it stands for is REPRESENTS,
-      with what that assumes.'
+    description: An atomistic model used in a computation (periodic slab, cluster, bulk cell, molecule);
+      not the physical specimen.
     properties:
       representation:
         type: enum
@@ -678,26 +461,6 @@ nodes:
         type: datetime
       finished_at:
         type: datetime
-      time_resolution:
-        type: value
-        maturity: provisional
-        description: The shortest change the series resolves (a spectrometer's scan time, a detector's response), as
-          stated; it can be longer than the sampling interval.
-      delay:
-        type: value
-        maturity: provisional
-        description: How long a change at the catalyst takes to reach the detector (the transport or dead time of the
-          lines and the cell), as the source measured or states it.
-      delay_corrected:
-        type: boolean
-        maturity: provisional
-        description: Whether the series as reported was shifted by that delay, so that its times are those at the
-          catalyst.
-      time_origin:
-        type: text
-        maturity: provisional
-        description: What t = 0 of the series is (the switch it responds to, the start of the run), as stated; a series
-          read against a program shares that program's origin.
   Catalyst:
     is_a: ObjectOfStudy
     fixed:
@@ -706,8 +469,7 @@ nodes:
       Its make-up is HAS_COMPONENT edges to species and materials, each with its role (active phase, support,
       promoter, binder, dopant) and fraction; its phases are HAS_PHASE; physical specimens are CatalystSamples
       (HAS_FORMULATION). There are no role labels: a support is a Material, a promoter a ChemicalSpecies,
-      and the role is on the edge. An enzyme catalyst (catalyst_family enzyme) has the enzyme, a macromolecule, as
-      its active component, and its support when immobilized; a molecular complex has its ligands (role ligand).'
+      and the role is on the edge.'
     properties:
       catalyst_family:
         type: enum
@@ -725,8 +487,6 @@ nodes:
         - organic
         - other
         - not_reported
-        - enzyme
-        - whole_cell
       nominal_formula:
         type: string
       properties:
@@ -734,6 +494,38 @@ nodes:
         items:
           type: value
         description: Stated properties other than composition (component ratios, masses, loadings).
+      integration_mode:
+        type: enum
+        maturity: provisional
+        values:
+        - granule_mixture
+        - powder_mixture
+        - dual_bed
+        - core_shell
+        - supported_on
+        - other
+        - not_reported
+        description: 'How the functional components of a multifunctional (bifunctional, tandem) catalyst are
+          put together, as the source states it: granule_mixture (granules of each component mixed in one
+          bed), powder_mixture (powders ground or mixed before pelletizing), dual_bed (separate beds in
+          series; each bed is also a USES_CATALYST with bed_position), core_shell (one component as a shell
+          on the other), supported_on (one component dispersed on the other). Say what "other" is in
+          integration_scale.note or the evidence. The ratio of the components is HAS_COMPONENT.fraction.'
+      integration_scale:
+        type: value
+        maturity: provisional
+        description: The length scale at which the components are integrated, as stated (granule diameter,
+          mixing or grinding scale, shell thickness), in the reported unit; the definition or basis says
+          which length it is. Text_value carries a stated level (nanoscale, millimetre-scale) when no number
+          is given.
+      site_proximity:
+        type: value
+        maturity: provisional
+        description: 'How close the sites of the different functions are, as stated. A distance (nm, um, mm)
+          in value and unit, or an ordinal level in text_value ("close", "intimate", "remote"). Basis says how
+          it was obtained (measured by microscopy, estimated from the integration scale, the authors''
+          ranking) and definition names the two kinds of site it is between. Not an inferred value: an
+          author''s ranking stays the author''s.'
   ActiveSite:
     is_a: ObjectOfStudy
     fixed:
@@ -741,9 +533,7 @@ nodes:
     description: |
       A site or site ensemble held responsible for catalysis (metal step, oxide vacancy, metal-oxide
       interface, acid site, single atom). Its identity is usually an interpretation: HAS_SITE carries
-      the epistemic status, and the population in a given state (a share, a density, a count) is on the
-      HAS_SITE from that CatalystState. Whether it is active, a spectator or a precursor for a reaction is
-      a Claim about it.
+      the epistemic status.
     properties:
       site_kind:
         type: enum
@@ -765,8 +555,7 @@ nodes:
         type: map
         items:
           type: value
-        description: Site density, coordination and similar stated values. A share, density or count of the site in a
-          stated catalyst state goes on the HAS_SITE from that state.
+        description: Site density, coordination and similar stated values.
   Feed:
     is_a: ObjectOfStudy
     fixed:
@@ -827,19 +616,6 @@ nodes:
           those forces meet. A test that lists none has unknown applicability: its driving-force items are neither
           checked nor met, and its checklist is never complete. Whether the test is operated statically or
           dynamically is its Operation (kernel), not a driving force.'
-      catalysis_mode:
-        type: enum
-        maturity: provisional
-        values:
-        - heterogeneous
-        - homogeneous
-        - biocatalytic
-        - other
-        - not_reported
-        description: How the source describes the catalysis of the test, as it states it, never inferred from the
-          catalyst - heterogeneous (at an interface between phases, a solid catalyst with fluid reactants),
-          homogeneous (the catalyst in the same phase as the reactants, a dissolved complex) or biocatalytic (an enzyme
-          or whole cells). An immobilized complex or enzyme is what the source calls it.
       interpretations:
         type: list
         maturity: provisional
@@ -964,26 +740,8 @@ nodes:
         type: value
       activation_energy:
         type: value
-        quantity: activation_energy
-        description: The step's activation energy, a computed barrier (its transition state above its initial state) or
-          the Ea of its rate constant, as its definition says, with its origin and produced_by (the computation or the
-          fit); never an apparent activation energy of an overall rate.
       reaction_energy:
         type: value
-        quantity: reaction_energy
-        description: The step's electronic energy change, products minus reactants, with its origin and produced_by.
-      activation_free_energy:
-        type: value
-        quantity: activation_free_energy
-        maturity: provisional
-        description: The free energy of the step's transition state above its initial state, at the temperature and
-          potential of the computation that produced it.
-      reaction_free_energy:
-        type: value
-        quantity: reaction_free_energy
-        maturity: provisional
-        description: The step's free energy change at the temperature, pressures and potential of the computation that
-          produced it.
       sticking_coefficient:
         type: value
       coverage_dependence:
@@ -1053,10 +811,9 @@ nodes:
       after a gas switch. It is the answer to "which phase is in effect": its phases are HAS_PHASE
       edges to Materials (with location and dominance), what it is a state of is STATE_OF, the action
       it is reached by is REACHED_BY (with the timing), and the characterizations or computations that
-      establish it are DETERMINED_BY. A test measured in the state is IN_STATE. Its sites and their
-      populations are HAS_SITE edges from it, which hold for this state only. A state predicted by a
-      simulation has origin computed and is STATE_OF the model, with no specimen of its own. The state
-      is a record of what the source reports, not an equilibrium assignment.
+      establish it are DETERMINED_BY. A test measured in the state is IN_STATE. A state predicted by a
+      simulation has origin computed. The state is a record of what the source reports, not an
+      equilibrium assignment.
     properties:
       state_kind:
         type: enum
@@ -1482,17 +1239,21 @@ edges:
         - not_stated
         - other
         - adsorbate
-        - ligand
-        - solvent
-        - cocatalyst
-        - cofactor
-        description: The component's role. A ligand binds the metal of a molecular complex; a solvent is the liquid a
-          reaction mixture or an electrolyte is in; a cocatalyst is a second component that the catalyst needs to work
-          (an activator, a photocatalyst's co-catalyst); a cofactor is the molecule or ion an enzyme needs (NAD+, a
-          metal ion). As the source states it.
       role_detail:
         type: text
         description: e.g. structural or electronic promoter, as stated.
+      function:
+        type: list
+        maturity: provisional
+        items:
+          type: ref
+          targets:
+          - Reaction
+        description: The reactions or reaction steps this component performs in the containing catalyst, when the
+          source assigns them (CO activation and chain growth on the oxide, C-C coupling or isomerization on the
+          zeolite acid sites). Each is a Reaction record (a sub-reaction of the test's reaction, HAS_PART). It
+          is the scope of the component in this catalyst, so one material in two catalysts may have two
+          functions; role stays about composition.
       fraction:
         type: value
         quantity: composition_fraction
@@ -1666,11 +1427,7 @@ edges:
         type: text
         description: e.g. "equilibrium computed", "kinetic fit".
   HAS_PARTICIPANT:
-    description: A species takes part in a reaction or elementary step. One edge per source statement. With the
-      coefficient of every reactant and product, and the composition (elemental_composition, or a formula that can be
-      read) and charge of every species, the validator reports whether the participants balance in atoms and in charge,
-      each check on its own and apart from what the source says (Reaction.balance_status); a species whose charge is not
-      stated is never taken as neutral.
+    description: A species takes part in a reaction or elementary step. One edge per source statement.
     from:
     - Reaction
     - ElementaryStep
@@ -1687,8 +1444,7 @@ edges:
         - inert
       coefficient:
         type: number
-        description: Signed or unsigned stoichiometric coefficient, only when stated; the role says the side (a reactant
-          or a product), and a product's coefficient is never negative.
+        description: Signed or unsigned stoichiometric coefficient, only when stated.
       phase:
         type: enum
         values:
@@ -1759,10 +1515,7 @@ edges:
     to:
     - StructureModel
   RATE_CONTROL:
-    description: The sensitivity of a microkinetic computation's rate to a step, at the conditions the computation states
-      (its temperature, pressure and conditions) and in the catalyst state it is IN_STATE. It changes with them, so a
-      sensitivity at other conditions is another computation (PART_OF the whole); it is neither the step's barrier nor an
-      apparent activation energy.
+    description: The sensitivity of a microkinetic computation's rate to a step.
     from:
     - Computation
     to:
@@ -1770,9 +1523,6 @@ edges:
     properties:
       degree_of_rate_control:
         type: value
-        quantity: degree_of_rate_control
-        description: The degree of rate control of the step for the rate of forming one product (its target), as
-          reported.
       rate_determining:
         type: boolean
   USES_DESCRIPTOR:
@@ -1855,23 +1605,11 @@ edges:
     to:
     - Catalyst
   HAS_SITE:
-    description: |-
-      A catalyst, a sample or a catalyst state has a site or site ensemble; the status says whether the source
-      asserts or hypothesizes it. From a CatalystState, the site and the population values on the link are that
-      state's (as prepared, pretreated, working, after the test): another state of the same sample has its own
-      HAS_SITE, or none, and nothing is carried from one state to another or from a sample to its states. A
-      population is four quantities, never one another: population_fraction (a share of a stated whole),
-      site_density (per area or per mass), exposed_metal_count (the exposed atoms counted) and site_inventory (the
-      sites a site-normalized rate is divided by, which the rate names with normalized_by). Each value keeps its
-      origin (measured, derived, computed, assumed), its uncertainty or bound, what produced it (produced_by: the
-      counting measurement, the analysis that converts an uptake into sites, the computation) and the evidence that
-      states it (evidence_ids). A measured population sits on the state of the specimen it was measured on when the
-      source says which; a computed one on the computed state (STATE_OF the model); one the source gives only for
-      the formulation on the Catalyst, with no specimen added.
+    description: A catalyst or sample has an active site; the status says whether the source asserts or
+      hypothesizes it.
     from:
     - Catalyst
     - CatalystSample
-    - CatalystState
     to:
     - ActiveSite
     properties:
@@ -1883,34 +1621,6 @@ edges:
           - CatalyticTest
           - Characterization
           - Computation
-      population_fraction:
-        type: value
-        quantity: site_fraction
-        maturity: provisional
-        description: The share of a stated whole that this site population makes up (of the exposed atoms of an element,
-          of all its atoms, of the sites of a kind), dimensionless; basis names the whole ("of exposed Cu atoms"). A
-          share the source gives only in words goes in text_value ("a minority"). A share is never a denominator.
-      site_density:
-        type: value
-        quantity: site_density
-        maturity: provisional
-        description: The sites of this population per surface area or per mass of the catalyst or material
-          (µmol/m2, sites/nm2, µmol/g), as stated.
-      exposed_metal_count:
-        type: value
-        quantity: site_count
-        maturity: provisional
-        description: The exposed (surface) atoms of the metal counted for this population, by chemisorption, titration,
-          microscopy or a particle model (µmol/g, µmol), with how they were counted and what the count assumes (the
-          adsorbate and its stoichiometry, the atoms per area) in definition, or in an Analysis that produced it.
-          Exposed atoms are not active sites; a rate divided by them is per exposed atom.
-      site_inventory:
-        type: value
-        quantity: site_count
-        maturity: provisional
-        description: The number of sites a site-normalized rate (a turnover frequency) is divided by, as the source
-          counts, estimates or assumes it (µmol/g, µmol, a number of sites); the rate names it with normalized_by.
-          When the source divides by the exposed atoms, the rate names exposed_metal_count instead.
   PREPARED_FROM:
     description: A sample was prepared from a starting chemical or material (the precursor role is the
       edge).
@@ -1966,70 +1676,14 @@ edges:
     to:
     - Material
   DURING:
-    description: |-
-      An in-situ or operando characterization carried out during a catalytic test or procedure, including a
-      treatment or procedure step. This asserts temporal overlap, not that the characterization itself measures
-      catalytic activity, and not that what it observes corresponds to the performance the test reports. That
-      pairing rests on what the source states besides the overlap: which specimen was observed (specimen), whether
-      the kinetics were measured while the observation was made (timing), and what of the kinetics was measured, and
-      whether it matched a conventional reactor or cell (kinetics, benchmark). Neither the overlap nor a change in
-      time that tracks the activity makes an observed species or phase active; an assignment is a Claim with its own
-      evidence.
+    description: An in-situ or operando characterization carried out during a catalytic test or procedure,
+      including a treatment or procedure step. This asserts temporal overlap, not that the characterization
+      itself measures catalytic activity.
     from:
     - Characterization
     to:
     - CatalyticTest
     - Procedure
-    properties:
-      specimen:
-        type: enum
-        maturity: provisional
-        values:
-        - same_specimen
-        - same_batch
-        - different_specimen
-        - not_reported
-        description: Which specimen the characterization observed, as the source states it. same_specimen = the one whose
-          performance the test measures, in the same cell or reactor; same_batch = another specimen of the batch the test
-          uses (in a separate cell); different_specimen = another specimen, not said to be of the same batch.
-      timing:
-        type: enum
-        maturity: provisional
-        values:
-        - simultaneous
-        - sequential
-        - not_reported
-        description: Whether the kinetics were measured while the observation was made, as the source states it (its
-          protocol in note and evidence). simultaneous = during the observation, in the same run (continuously, or by
-          analysing the products at intervals while it ran); sequential = before or after the observation, not during
-          it.
-      kinetics:
-        type: enum
-        maturity: provisional
-        values:
-        - measured
-        - matched_to_benchmark
-        - products_detected
-        - not_measured
-        - not_reported
-        description: What of the kinetics was measured in the cell of the observation. measured = activity or
-          selectivity measured quantitatively (rates, conversion, selectivity); matched_to_benchmark = measured so, and
-          compared with that of a conventional reactor or cell, with which it agreed (the comparison in the evidence, its
-          test in benchmark); products_detected = products seen, not quantified; not_measured = the reaction ran, but
-          its kinetics were not measured.
-      benchmark:
-        type: ref
-        maturity: provisional
-        targets:
-        - CatalyticTest
-        description: The test in a conventional reactor or cell whose kinetics the cell's were compared with (kinetics
-          matched_to_benchmark).
-      synchronization:
-        type: text
-        maturity: provisional
-        description: How the observation and the kinetics were put on one time axis, as the source states it (one
-          trigger for the valve and the spectrometer, timestamps on a shared clock, a delay measured with a tracer pulse
-          and removed). Without it, a response that seems to lead or lag another may be an artefact of the lines.
   IN_REACTOR:
     from:
     - CatalyticTest
@@ -2043,9 +1697,7 @@ edges:
     - Feed
     specializes: HAS_INPUT
   CATALYZES:
-    description: A source states that a catalyst or an active site catalyzes a reaction. That a site, phase or species
-      is active (or a spectator) for a reaction in a stated catalyst state, on stated evidence, is a Claim ABOUT them
-      (the checklist guidance, Assignments), which SUPPORTS and CONTRADICTS can reach.
+    description: A source states that a catalyst or an active site catalyzes a reaction.
     from:
     - Catalyst
     - ActiveSite
@@ -2838,19 +2490,6 @@ context_targets:
       source does not identify is an unresolved_target.
     targets:
     - ChemicalSpecies
-  process:
-    maturity: provisional
-    description: In catalysis, what an energy change is of (a reaction, adsorption or activation energy) is a Reaction or
-      an ElementaryStep, whose participants name the reference species; a species, a material or a structure model never
-      is.
-    targets:
-    - Reaction
-    - ElementaryStep
-  structure:
-    maturity: provisional
-    description: In catalysis, what a total electronic energy is of is a StructureModel.
-    targets:
-    - StructureModel
 checklist:
   description: 'What a catalytic test reports, by the driving forces it lists (CatalyticTest.driving_forces).
     Every test: the catalyst sample it uses and the reaction it concerns. A thermally driven test (thermo,
@@ -2871,10 +2510,7 @@ checklist:
     showing (interpretations) adds the evidence that reading needs, looked for in the records connected to the
     test: intrinsic kinetics, a transport assessment; separating light from heat, a dark control at matched
     temperature or a separation analysis; plasma-catalyst synergy, plasma-alone and catalyst-alone controls;
-    material stability, the catalyst characterized during or after the test. A characterization the source calls
-    operando adds a test under working conditions and a performance measured on the same specimen at a stated
-    synchronization and benchmarked; a spectral fit adds its method, results, limitations and the data it fits. These
-    cases are provisional.'
+    material stability, the catalyst characterized during or after the test. These cases are provisional.'
   basis:
   - Bligaard et al., Toward benchmarking in catalysis science, ACS Catal. 2016, doi:10.1021/acscatal.6b00183.
   - The thermal profile of the adopted catalysis schema 0.1.0 (temperature and pressure, feed composition,
@@ -2907,20 +2543,6 @@ checklist:
     temperature; the plasma power, not the supply's input; the catalyst characterized after the experiment).
   - Wismann et al., Electrified methane reforming, elucidating transient phenomena, Chem. Eng. J. 2021, 425,
     131509, doi:10.1016/j.cej.2021.131509 (the transient behaviour of an electrically heated reactor).
-  - Wrasman et al., Recommendations for improving rigor and reproducibility in site specific characterization, J.
-    Catal. 2024, 433, 115451, doi:10.1016/j.jcat.2024.115451 (sites counted with an assumed or determined adsorption
-    stoichiometry, every assumption reported; site quantification under conditions relevant to the reaction, since
-    the number and nature of sites change with them; the activity often dominated by a small fraction of the
-    accessible sites; probe molecules may bind sites that are not active).
-  - Meyer et al., Recommendations to standardize reporting, execution, and interpretation of X-ray Absorption
-    Spectroscopy measurements, J. Catal. 2024, 432, 115369, doi:10.1016/j.jcat.2024.115369 (a bulk-averaging technique
-    in which minority species may escape detection; fits reported with their parameters, constraints, uncertainties
-    and the poorer models they were preferred to; in situ unless the kinetics at the beamline match the laboratory
-    reactor's).
-  - Tackett et al., Rigor and Reproducibility in Electrocatalysis, Best Practices for Operando Studies, ACS Catal. 2026,
-    16, 13861, doi:10.1021/acscatal.6c01946 (operando as working conditions with quantitative activity or selectivity;
-    the synchronization protocol reported; performance benchmarked against conventional cells; spectators may mask
-    transient species).
   guidance: |
     Applicability: list every driving force of a test. A test that lists none has unknown applicability: its driving-force items are neither checked nor met, so it is never complete; an equilibrium (test_kind equilibrium_estimate, equilibrium_measurement) is exempt. Completeness is not validity, and neither makes a value comparable (comparison scientific decides that).
     Interpretations: record what the source reads the test as showing (interpretations), never your own reading. Each reading adds the evidence it needs, looked for in the records connected to the test; a reading without it is reported, and the test stays as it is. No conversion level, criterion value or control is required of every test.
@@ -2931,13 +2553,6 @@ checklist:
     Potential and light: separate the contributions with controls: the same test in the dark (differs in illumination) and at open circuit or without applied potential (differs in electrode potential), each CONTROL_FOR the combined test.
     Stability: a constant trace of performance (a TimeSeries the test HAS_OUTPUT) shows performance_stability, not material_stability; the material is shown unchanged by characterizing it during or after the test (a CatalystState the test reaches, REACHED_BY timing during or after, DETERMINED_BY a characterization: structure after the test, dissolution into the electrolyte). Repeats are REPLICATES links, and a planned set of repeats a Design (planned_replicates).
     Time: a test operated dynamically (pulses, ramps, switching) HAS_OPERATION an Operation with its time_pattern, the quantities it varies and its segments, so its results keep their time-dependent context.
-    Sites: record a site population on the HAS_SITE from the state it was counted or observed in (as prepared, pretreated, working, after the test); sites can change with the conditions, so a count made in one state is never carried to another. A share (population_fraction), a density (site_density), the exposed atoms counted (exposed_metal_count) and the sites a rate is divided by (site_inventory) are four values, each with its origin, uncertainty or bound, and what produced it: the counting measurement, or an Analysis that converts an uptake into sites and USES_MODEL a Model stating what it assumes (the adsorbate's stoichiometry, the particle shape). A turnover frequency is kept as reported, with how it was calculated: the count it is divided by (normalized_by) and, in its basis or definition, what was counted as sites and how. A rate per exposed atom is an average over sites that may differ, not a rate per active site; a comparison shows each rate with its count. A computed population sits on the computed state, STATE_OF the model; one the source gives only for the formulation on the Catalyst, with no specimen added.
-    Assignments: that a phase, site or species is active, a spectator, a precursor or an inhibitor for a reaction in a state is a Claim, ABOUT the component (role active, spectator, precursor or inhibitor), the state (role state), the reaction or product (role reaction, product), the test it concerns (role test) and any elementary step or mechanism (role step, mechanism); SUPPORTS and CONTRADICTS from the tests, characterizations, analyses and claims it rests on name the results with premise_refs. Competing assignments are claims of their own, never merged. Abundance is not activity: a majority phase is assigned nothing unless the source argues it, and a minority one can carry an assignment with its evidence.
-    Operando: an observation made while the kinetics are measured. One the source calls operando is kept as such (observation_mode); the checklist looks, on its DURING link, for a catalytic test under working conditions whose kinetics were measured on the same specimen while the observation was made (specimen same_specimen, timing simultaneous, kinetics measured or matched_to_benchmark). A conventional reactor or cell the kinetics were compared with is recorded when the source gives one (kinetics matched_to_benchmark, benchmark). An overlap in time is not a pairing, and a change that tracks the activity in time does not show that what changed is active.
-    Computations: a computed energy is a value of its kind (a total electronic energy, a reaction or adsorption energy, an enthalpy or a free energy, an elementary activation energy or activation free energy, an apparent activation energy, a degree of rate control), never a bare number in eV. A reaction, adsorption or activation energy names the Reaction or ElementaryStep it is the energy change of (its target, or the step that holds it), whose participants and coefficients are its reference states. The Computation that produced it states its level_of_theory and charge_treatment, which a comparison reads, and its dispersion, hubbard_u, spin_treatment, solvation, temperature, pressure and electrode potential, which it shows; its input files, environment and structures stay in versioned, checksummed Datasets (configuration, execution_environment, a model's stored_in). A state computed on a structure model is STATE_OF the model, with no specimen; the model REPRESENTS the specimen or state it stands for, with what that assumes. A machine-learned prediction names its model (USES_MODEL, with its version and stored_in), the data it was fitted to (an experiment that EVALUATES it with evaluation_kind calibration and HAS_INPUT that data as training_data) and its validation (one that EVALUATES it with evaluation_kind validation on validation_data or test_data); a validation on the data the model was fitted to is reported, never counted as independent, unless it states how it held its data out of that table (split_strategy, the folds of a cross-validation). An apparent activation energy from a fit of rates, an elementary step's activation energy and a degree of rate control at stated conditions are three quantities.
-    Campaigns: an adaptive or autonomous campaign, in which an agent chooses the next experiments, is a Design of kind adaptive that states what TRACE-AI asks of its workflow: its autonomy_level as the source declares it (A0-A5), its human_oversight and interventions, the agent_policy and objectives, the safety_bounds and safety_measures, its stopping_criterion and stop_reason, and what it did with failed or excluded runs (negative_results_policy, exclusion_criteria, excluded_count). Each run is PART_OF_DESIGN with its round (iteration) and PROPOSED_BY the agent (a Software of kind agent, with its version), with what a person decided about the proposal (human_decision); a rejected proposal is a record too. A machine-learned model states its architecture, hyperparameters, training objective and uncertainty method; a validation states how it split the data (split_strategy, grouped_by) and its metrics with their uncertainty. `scale trace-ai` reads the TRACE-AI checklist on these records.
-    Transients: a test driven by a program (an isotope switch, a concentration step, a square-wave or sinusoidal modulation, pulses, a pseudo-random binary sequence, the half-cycles of a chemical loop) HAS_OPERATION an Operation that states its waveform, the levels it switches between, its period, pulses or sequence (sequence_length, bit_duration), how much of the program the source gives (program_detail) and what t = 0 is (time_origin); a time series it HAS_OUTPUT states its delay and whether it was corrected for it. An Analysis that reads the responses (isotopic_transient, pulse_response, modulation_excitation, step_response, frequency_response) HAS_INPUT the test and the series, and its results are values of their kinds (surface_residence_time, surface_intermediate_amount, phase_delay, response_time_constant) for the species they are of; a modulation analysis states what its delays are measured against (phase_reference, phase_reference_species), the modulation_period and the demodulation_harmonic. That a surface species is an intermediate or a spectator stays a Claim the analysis SUPPORTS or CONTRADICTS, never a property of the delay. A kinetic model fitted to the responses is a kinetic_fit that states its reactor_model, rate_basis, concentration_measure and thermodynamic_consistency, and each fitted constant its origin fitted, its interval_method and, where the source says, its identifiability; a comparison of constants shows each one's reactor treatment and names a group that mixes treatments.
-    Spectra and fits: a measured spectrum is a Dataset the characterization HAS_OUTPUT; a fit to it is an Analysis (analysis_kind spectral_fit) with its method, its fitted parameters in results (origin fitted, with their uncertainties), the references it HAS_INPUT and its limitations; an alternative model is another Analysis; a site assignment drawn from it is a Claim that cites the fitted parameters (premise_refs). Whether an ensemble signal tells phases apart depends on the technique, the data, the references and the model.
   labels:
     CatalyticTest:
       applies_by:
@@ -3275,73 +2890,8 @@ checklist:
                     - after
               - edge: DETERMINED_BY
                 label: Analysis
-    Characterization:
-      when:
-      - observation_mode:
-          any_of:
-          - operando
-        maturity: provisional
-        basis:
-        - Tackett et al., Rigor and Reproducibility in Electrocatalysis, Best Practices for Operando Studies, ACS Catal.
-          2026, 16, 13861, doi:10.1021/acscatal.6c01946 (operando measurements are made under working catalytic conditions
-          while correlating what is observed with quantitative measures of activity or selectivity; the synchronization
-          protocol is reported; the performance in the spectroscopic cell is benchmarked against a conventional cell)
-        - Meyer et al., Recommendations to standardize reporting, execution, and interpretation of X-ray Absorption
-          Spectroscopy measurements, J. Catal. 2024, 432, 115369, doi:10.1016/j.jcat.2024.115369 (without kinetics
-          measured at the beamline that match those of a laboratory reactor, the experiment counts as in situ; for an
-          operando experiment, conversion and selectivity are reported)
-        evidence:
-          should:
-          - name: working_test
-            description: the catalytic test under whose working conditions it was made (DURING a CatalyticTest; a treatment
-              or procedure step is not working catalytic conditions)
-            path:
-            - edge: DURING
-              label: CatalyticTest
-          - name: kinetics_while_characterizing
-            description: the kinetics measured on the same specimen while it was made (DURING a CatalyticTest with
-              specimen same_specimen, timing simultaneous and kinetics measured or matched_to_benchmark); an overlap in
-              time alone is not a pairing
-            path:
-            - edge: DURING
-              label: CatalyticTest
-              edge_where:
-                specimen:
-                  any_of:
-                  - same_specimen
-                timing:
-                  any_of:
-                  - simultaneous
-                kinetics:
-                  any_of:
-                  - measured
-                  - matched_to_benchmark
     Analysis:
       when:
-      - analysis_kind:
-          any_of:
-          - spectral_fit
-        maturity: provisional
-        basis:
-        - Meyer et al. 2024, doi:10.1016/j.jcat.2024.115369 (XAS averages over every environment of the absorbing atoms;
-          linear combination fitting depends on the references assumed; the fitted parameters, the variables held fixed
-          or constrained and their uncertainties are reported; the best model is contrasted with poorer ones)
-        should:
-        - method
-        - results
-        - limitations
-        evidence:
-          should:
-          - name: fitted_data
-            description: the data the fit is made to, a Dataset (the measured spectra) or the Characterization that it
-              HAS_INPUT
-            any_of:
-            - path:
-              - edge: HAS_INPUT
-                label: Dataset
-            - path:
-              - edge: HAS_INPUT
-                label: Characterization
       - analysis_kind:
           any_of:
           - transport_check
@@ -3386,140 +2936,6 @@ checklist:
             path:
             - edge: HAS_INPUT
               label: Experiment
-      - analysis_kind:
-          any_of:
-          - isotopic_transient
-          - pulse_response
-          - modulation_excitation
-          - step_response
-          - frequency_response
-        maturity: provisional
-        basis:
-        - Shannon and Goodwin, Chem. Rev. 1995, 95, 677, doi:10.1021/cr00035a011 (isotopic transients at steady state, the
-          residence time and amount of the surface intermediates of each product, the inert tracer that corrects for the
-          gas holdup)
-        - Urakawa, Burgi and Baiker, Chem. Eng. Sci. 2008, 63, 4902, doi:10.1016/j.ces.2007.06.009 (a periodic stimulus,
-          phase-sensitive detection, and the phase delays that tell responding species from those that do not)
-        - Gleaves, Yablonskii, Phanawadee and Schuurman, Appl. Catal. A 1997, 160, 55, doi:10.1016/S0926-860X(97)00124-5
-          (pulse responses in the Knudsen regime)
-        should:
-        - method
-        - temperature
-        - result_values
-        - limitations
-        evidence:
-          should:
-          - name: driven_test
-            description: the test whose responses it reads, operated dynamically (HAS_INPUT a test that HAS_OPERATION an
-              Operation of operation_mode dynamic)
-            path:
-            - edge: HAS_INPUT
-              label: CatalyticTest
-            - edge: HAS_OPERATION
-              label: Operation
-              where:
-                operation_mode:
-                  any_of:
-                  - dynamic
-      - analysis_kind:
-          any_of:
-          - kinetic_fit
-        maturity: provisional
-        basis:
-        - Motagamwala and Dumesic, Chem. Rev. 2021, 121, 1049, doi:10.1021/acs.chemrev.0c00394 (a kinetic model fitted to
-          rates is a model of the reactor as well as of the surface; the rate expressions and their basis are stated)
-        should:
-        - reactor_model
-        - rate_basis
-        - concentration_measure
-      - analysis_kind:
-          any_of:
-          - modulation_excitation
-          - frequency_response
-        maturity: provisional
-        basis:
-        - Urakawa, Burgi and Baiker, Chem. Eng. Sci. 2008, 63, 4902, doi:10.1016/j.ces.2007.06.009 (a phase is read at a
-          harmonic of the modulation frequency against a reference, the stimulus or another response, and changes with
-          the frequency)
-        should:
-        - phase_reference
-        - modulation_period
-        - demodulation_harmonic
-      - phase_reference:
-          any_of:
-          - species_response
-        maturity: provisional
-        should:
-        - phase_reference_species
-    Computation:
-      when:
-      - computation_kind:
-          any_of:
-          - electronic_structure
-        maturity: provisional
-        basis:
-        - Winther et al., Catalysis-Hub.org, an open electronic structure database for surface reactions, Sci. Data 2019, 6,
-          75, doi:10.1038/s41597-019-0081-y (each reaction energy is kept with the code, the functional and the
-          structures it was computed from)
-        should:
-        - level_of_theory
-        - charge_treatment
-        - spin_treatment
-        - dispersion
-        - settings
-        - configuration
-        edges:
-          should:
-          - USES_SOFTWARE
-          - USES_MODEL
-      - charge_treatment:
-          any_of:
-          - constant_potential
-        maturity: provisional
-        basis:
-        - Melander, Wu, Weckman and Honkala, Constant inner potential DFT for modelling electrochemical systems under
-          constant potential and bias, npj Comput. Mater. 2024, 10, 5, doi:10.1038/s41524-023-01184-4 (a single electrode
-          potential has several definitions, with different scales and references)
-        should:
-        - electrode_potential
-        - reference_scale
-      - computation_kind:
-          any_of:
-          - machine_learned
-        maturity: provisional
-        basis:
-        - Allam et al., AQCat25, npj Comput. Mater. 2026, 12, 226, doi:10.1038/s41524-026-02099-6 (models named with their
-          checkpoints; the data a model is trained on kept apart from the validation and test data used to evaluate it)
-        should:
-        - level_of_theory
-        edges:
-          should:
-          - USES_MODEL
-        evidence:
-          should:
-          - name: fitted_on
-            description: the data the model was fitted to, an experiment that EVALUATES the model it uses with
-              evaluation_kind calibration
-            path:
-            - edge: USES_MODEL
-            - edge: EVALUATES
-              direction: in
-              edge_where:
-                evaluation_kind:
-                  any_of:
-                  - calibration
-          - name: validated_by
-            description: its validation, an experiment that EVALUATES the model it uses with evaluation_kind validation or
-              benchmark (one on the data the model was fitted to is reported by the validator, not counted as independent)
-            path:
-            - edge: USES_MODEL
-            - edge: EVALUATES
-              direction: in
-              edge_where:
-                evaluation_kind:
-                  any_of:
-                  - validation
-                  - benchmark
     Operation:
       when:
       - operation_mode:
@@ -3534,61 +2950,6 @@ checklist:
         - time_pattern
         - varied_quantities
         - segments
-        - program_detail
-        - time_origin
-      - waveform:
-          any_of:
-          - pseudo_random_binary
-        maturity: provisional
-        basis:
-        - Godfrey, Perturbation Signals for System Identification, Prentice Hall 1993 (a pseudo-random binary sequence is
-          set by its length, its bit duration and the two levels it switches between)
-        should:
-        - levels
-        - sequence_length
-        - bit_duration
-      - waveform:
-          any_of:
-          - square
-          - sinusoidal
-          - triangular
-        maturity: provisional
-        basis:
-        - Urakawa, Burgi and Baiker, Chem. Eng. Sci. 2008, 63, 4902, doi:10.1016/j.ces.2007.06.009 (a periodic stimulus
-          is set by its period, its amplitude or levels, and the number of periods averaged)
-        should:
-        - levels
-        - period
-        - cycles
-      - waveform:
-          any_of:
-          - pulse_train
-        maturity: provisional
-        basis:
-        - Gleaves, Yablonskii, Phanawadee and Schuurman, Appl. Catal. A 1997, 160, 55, doi:10.1016/S0926-860X(97)00124-5
-          (a pulse experiment states what one pulse delivers)
-        should:
-        - pulse_amount
-        - pulse_width
-        - period
-    Design:
-      when:
-      - design_kind:
-          any_of:
-          - adaptive
-        maturity: provisional
-        basis:
-        - Xin et al., Transparent reporting for agentic catalysis enabled by artificial intelligence, Chem Catal. 2026,
-          doi:10.1016/j.checat.2026.101755 (TRACE-AI items C1-C5 and A5; the levels of autonomy of its Box 1)
-        should:
-        - autonomy_level
-        - human_oversight
-        - agent_policy
-        - objectives
-        - stopping_criterion
-        - stop_reason
-        - safety_measures
-        - negative_results_policy
     Feed:
       edges:
         must:

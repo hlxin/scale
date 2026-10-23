@@ -318,6 +318,51 @@ def main() -> None:
     defect("research-data-without-stewardship", "research data that does not say who contributed it or which project it belongs to",
            lambda d: d["graph"].__setitem__("stewardship", {"access": "public"}), base=template("catalysis", VERSION))
 
+    # product lumps (issue #39): containment joins two lumps and is acyclic, and a carbon window runs upward
+    def lump(doc: dict, key: str, lo: int, hi: int | None, **props) -> str:
+        nid = f"ex:df-electro/lump/{key}"
+        p = {"name": key, "origin": "synthetic", "carbon_min": lo, "compound_class": "hydrocarbon", **props}
+        if hi is not None:
+            p["carbon_max"] = hi
+        doc["nodes"].append({"id": nid, "label": "ProductLump", "props": p})
+        return nid
+
+    def subset(doc: dict, name: str, a: str, b: str) -> None:
+        doc["links"].append({"id": f"ex:invalid/{name}", "type": "SUBSET_OF", "source": a, "target": b,
+                             "props": {"origin": "synthetic"}})
+
+    def cycle(doc: dict) -> None:
+        a, b = lump(doc, "c5-c11", 5, 11), lump(doc, "c5-plus", 5, None, open_ended=True)
+        subset(doc, "inside", a, b)
+        subset(doc, "and-back", b, a)
+    defect("lump-subset-of-cycle", "two product lumps each declared inside the other", cycle)
+    defect("lump-subset-of-self", "a product lump declared inside itself",
+           lambda d: (lambda a: subset(d, "self", a, a))(lump(d, "c5-c11", 5, 11)))
+    defect("lump-subset-of-species", "a product lump declared inside a chemical species",
+           lambda d: subset(d, "inside-species", lump(d, "c5-c11", 5, 11), node(d, "species/ammonia")["id"]))
+    defect("lump-carbon-window-inverted", "a product lump whose least carbon number is above its greatest",
+           lambda d: lump(d, "c11-c5", 11, 5))
+    defect("lump-open-ended-with-maximum", "a product lump that is open ended and also names its greatest carbon number",
+           lambda d: lump(d, "c5-plus", 5, 11, open_ended=True))
+    # multifunctional catalysts (#40): an integration mode outside its list, a function that is no reaction (a species, a
+    # record that does not exist), a function on a link that is no component, a proximity without its status
+    bi = REPO / "domain/examples/scale-catal/bifunctional-examples/tandem-granule-mixture.json"
+
+    def bifunctional(change):
+        return lambda d: change(d, next(n for n in d["nodes"] if n["id"] == "ex:bifunctional/catalyst/tandem"),
+                                next(e for e in d["links"] if e["id"] == "ex:bifunctional/link/1"))
+    defect("integration-mode-not-allowed", "an integration mode the list does not name",
+           bifunctional(lambda d, c, e: c["props"].__setitem__("integration_mode", "sandwich")), base=load_doc(bi))
+    defect("function-is-a-species", "a component whose function is a chemical species, not a reaction",
+           bifunctional(lambda d, c, e: e["props"].__setitem__("function", ["ex:bifunctional/species/co"])), base=load_doc(bi))
+    defect("function-is-no-record", "a component whose function is a reaction the document does not hold",
+           bifunctional(lambda d, c, e: e["props"].__setitem__("function", ["ex:bifunctional/reaction/missing"])), base=load_doc(bi))
+    defect("function-on-has-part", "a function stated on a HAS_PART link, which does not declare it",
+           bifunctional(lambda d, c, e: next(x for x in d["links"] if x["type"] == "HAS_PART")["props"].__setitem__(
+               "function", ["ex:bifunctional/reaction/step1"])), base=load_doc(bi))
+    defect("site-proximity-without-status", "a site proximity without its status",
+           bifunctional(lambda d, c, e: c["props"]["site_proximity"].pop("status")), base=load_doc(bi))
+
 
 if __name__ == "__main__":
     main()

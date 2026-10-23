@@ -126,6 +126,13 @@ is converted:
   otherwise with the reason `one_sided_bound` (at most 1 % against `gt 0.5 %`), counted, and
   `limitations` says so. `eq` and `in` never hold for a bound alone. `order_by` sorts a bound by its
   number, as reported.
+- A value with the status `below_detection_limit` or `below_quantification_limit` (its `value` the limit, with
+  its unit) can only lie below that limit, so a numeric filter reads it as `bound: upper` at the limit, keeping the
+  unit and basis checks: `le 5 %` passes a value below a 2 % limit, `ge 5 %` fails it, `le 1 %` leaves it out as
+  `one_sided_bound` (named "below the detection limit 2 %; le 1 cannot be decided"), and `eq` and `in` never hold.
+  Without a number it stays absent (reason: its status). A scientific `order_by` does not rank it (`one_sided_bound`);
+  `exists` still counts it as present. The limit itself counts as possible, so a strict `lt`, `gt` or `ge` at exactly
+  the limit is left out as `one_sided_bound` rather than decided.
 
 ## Scientific comparison
 
@@ -486,7 +493,7 @@ it by hand within the document's audience. A gap that states no access, one writ
 | a value left out or missing, reason `not_curated` | none (curation backlog; in a filtered document, possibly withheld: see `coverage.filtered_for`) |
 | a value left out or missing, reason `withheld` or `not_extractable` | none (the source reports it; this view does not share it, or it could not be extracted) |
 | a value left out or missing, reason `not_measured` or `not_applicable` | none (the source says it was not measured, or that the property does not apply) |
-| a value left out as `one_sided_bound`, or for its unit or basis | none (the source states it; the filter cannot compare it) |
+| a value left out as `one_sided_bound` (a bound, or a value below its detection or quantification limit), or for its unit or basis | none (the source states it; the filter cannot compare it) |
 | no_matching_record | `missing_source_coverage` |
 
 ## Presenting results

@@ -261,6 +261,23 @@ def science_checks(doc: dict, spec: dict, rep) -> None:
         for cyc in _cyclic([(e["source"], e["target"]) for e in links if e.get("type") == t]):
             err("<graph>", f"{t} forms a cycle: {cyc}")
 
+    # ---- product lumps (catalysis): containment is acyclic and joins two lumps, a window runs from its least to its
+    # greatest carbon number, an open-ended one has no greatest
+    for e in links:
+        if e.get("type") == "SUBSET_OF" and e.get("source") == e.get("target"):
+            err(e["id"], "a SUBSET_OF link joins a lump to itself")
+    for cyc in _cyclic([(e["source"], e["target"]) for e in links
+                                  if e.get("type") == "SUBSET_OF" and e.get("source") != e.get("target")]):
+        err("<graph>", f"SUBSET_OF forms a cycle: {cyc}")
+    for nid, n in nodes.items():
+        if n.get("label") != "ProductLump":
+            continue
+        lo, hi, p = props[nid].get("carbon_min"), props[nid].get("carbon_max"), props[nid]
+        if isinstance(lo, int) and isinstance(hi, int) and lo > hi:
+            err(nid, f"a product lump runs from its least carbon number to its greatest: carbon_min {lo} is above carbon_max {hi}")
+        if p.get("open_ended") is True and hi is not None:
+            err(nid, "an open-ended product lump has no carbon_max (open_ended true)")
+
     # ---- inputs used at an older version
     for e in links:
         if e.get("type") != "HAS_INPUT":

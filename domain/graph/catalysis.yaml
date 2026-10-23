@@ -53,6 +53,60 @@ nodes:
         type: text
         description: The isotopic label as stated (e.g. "C14 in the methyl group"); a labelled compound
           is a species of its own, not the unlabelled one.
+  ProductLump:
+    is_a: ObjectOfStudy
+    maturity: provisional
+    fixed:
+      object_kind: thing
+    description: A class of products that a source reports together, defined by a carbon-number
+      window (C1, C2-C4, C5+, C5-C11, C21+), often a compound class (olefins, paraffins, alcohols) and
+      sometimes a boiling range or collection phase. It is not a chemical identity (that is a ChemicalSpecies)
+      and has no formula. It is the target of a selectivity, yield or rate counted on the lump. Whether one
+      lump lies inside another is stated by SUBSET_OF, never inferred from the ranges. A document may mint its
+      own lumps; a shared id for a common lump (C5+) is a convention of a corpus, not part of the schema.
+    properties:
+      carbon_min:
+        type: integer
+        description: The least carbon number in the lump (5 for C5-C11 and C5+).
+      carbon_max:
+        type: integer
+        description: The greatest carbon number in the lump (11 for C5-C11). Absent for an open end (C5+);
+          then set open_ended.
+      open_ended:
+        type: boolean
+        description: true = the lump has no upper carbon number (C5+, C21+); false = carbon_max is its upper end.
+      compound_class:
+        type: enum
+        values:
+        - hydrocarbon
+        - paraffin
+        - isoparaffin
+        - olefin
+        - alpha_olefin
+        - aromatic
+        - oxygenate
+        - alcohol
+        - aldehyde
+        - other
+        - not_reported
+        description: The class of compounds within the carbon window, as the source names it; other with
+          the source's words in definition.
+      boiling_range:
+        type: text
+        description: The boiling range or fraction name as stated (e.g. "gasoline", "diesel", "jet").
+      phase:
+        type: enum
+        values:
+        - gas
+        - liquid
+        - solid
+        - aqueous
+        - organic
+        - not_reported
+        description: The phase in which the lump was collected, when the source says.
+      definition:
+        type: text
+        description: The lump as the source defines it, in its words.
   Material:
     is_a: ObjectOfStudy
     fixed:
@@ -760,6 +814,38 @@ nodes:
         items:
           type: value
         description: Stated properties other than composition (component ratios, masses, loadings).
+      integration_mode:
+        type: enum
+        maturity: provisional
+        values:
+        - granule_mixture
+        - powder_mixture
+        - dual_bed
+        - core_shell
+        - supported_on
+        - other
+        - not_reported
+        description: 'How the functional components of a multifunctional (bifunctional, tandem) catalyst are
+          put together, as the source states it: granule_mixture (granules of each component mixed in one
+          bed), powder_mixture (powders ground or mixed before pelletizing), dual_bed (separate beds in
+          series; each bed is also a USES_CATALYST with bed_position), core_shell (one component as a shell
+          on the other), supported_on (one component dispersed on the other). Say what "other" is in
+          integration_scale.note or the evidence. The ratio of the components is HAS_COMPONENT.fraction.'
+      integration_scale:
+        type: value
+        maturity: provisional
+        description: The length scale at which the components are integrated, as stated (granule diameter,
+          mixing or grinding scale, shell thickness), in the reported unit; the definition or basis says
+          which length it is. Text_value carries a stated level (nanoscale, millimetre-scale) when no number
+          is given.
+      site_proximity:
+        type: value
+        maturity: provisional
+        description: 'How close the sites of the different functions are, as stated. A distance (nm, um, mm)
+          in value and unit, or an ordinal level in text_value ("close", "intimate", "remote"). Basis says how
+          it was obtained (measured by microscopy, estimated from the integration scale, the authors''
+          ranking) and definition names the two kinds of site it is between. Not an inferred value: an
+          author''s ranking stays the author''s.'
   ActiveSite:
     is_a: ObjectOfStudy
     fixed:
@@ -1513,6 +1599,18 @@ edges:
       role_detail:
         type: text
         description: e.g. structural or electronic promoter, as stated.
+      function:
+        type: list
+        maturity: provisional
+        items:
+          type: ref
+          targets:
+          - Reaction
+        description: The reactions or reaction steps this component performs in the containing catalyst, when the
+          source assigns them (CO activation and chain growth on the oxide, C-C coupling or isomerization on the
+          zeolite acid sites). Each is a Reaction record (a sub-reaction of the test's reaction, HAS_PART). It
+          is the scope of the component in this catalyst, so one material in two catalysts may have two
+          functions; role stays about composition.
       fraction:
         type: value
         quantity: composition_fraction
@@ -2079,12 +2177,22 @@ edges:
           targets:
           - CatalyticTest
         description: The catalytic tests in which the statement holds, when the source identifies them.
+  SUBSET_OF:
+    maturity: provisional
+    description: One product lump lies wholly inside another (C5-C11 inside C5+; olefins inside hydrocarbons
+      of the same carbon window). Stated by the source or its definitions, never inferred from the carbon
+      windows. Acyclic. Selectivities on a lump and on a lump it contains are not parts of one partition.
+    from:
+    - ProductLump
+    to:
+    - ProductLump
   PRODUCES:
-    description: A source states that a catalyst forms a species.
+    description: A source states that a catalyst forms a species or a product lump.
     from:
     - Catalyst
     to:
     - ChemicalSpecies
+    - ProductLump
     properties:
       negated:
         type: boolean
@@ -2854,10 +2962,11 @@ context_targets:
     maturity: provisional
     description: In catalysis, the species a value is counted for (the reactant of a conversion; the product of a yield, a
       selectivity, a rate, an amount, a Faradaic efficiency, a quantum or photonic yield, an energy yield or a partial
-      current density) is a chemical species. A source, a dataset, a material or a catalyst never is; a product the
+      current density) is a chemical species or, for a class of products reported together (C5+), a product lump. A source, a dataset, a material or a catalyst never is; a product the
       source does not identify is an unresolved_target.
     targets:
     - ChemicalSpecies
+    - ProductLump
   process:
     maturity: provisional
     description: In catalysis, what an energy change is of (a reaction, adsorption or activation energy) is a Reaction or
