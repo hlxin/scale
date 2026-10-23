@@ -205,14 +205,14 @@ or open the file with DB Browser for SQLite, `sqlite3`, pandas (`pd.read_sql`) o
 
 | table | contents |
 |---|---|
-| `sources` | one row per work: `id, doi, identifier, title, authors, year, venue, publisher, doc_type, url, abstract, keywords, topic_a, topic_b, topic_c, related_topics, access_type, license, citations, is_preprint, is_retracted, is_notice, databases, notes …` |
+| `sources` | one row per work: `id, doi, identifier, title, authors, year, venue, publisher, doc_type, url, abstract, keywords, topic_a, topic_b, topic_c, related_topics, access_type, licence, citations, is_preprint, is_retracted, is_notice, databases, notes …` |
 | `sources_fts` | full-text index on `title, abstract, keywords` (`rowid` = `sources.id`) |
 | `authors`, `source_authors` | authors (name, ORCID) and their position, institutions and countries in each source |
 | `identifiers` | every identifier of a work: `scheme` = doi, pmid, pmcid, arxiv, osti, patent, s2, openalex … |
 | `source_subjects` | topics of each source: `term` (vocabulary id), `label`, `kind` = main (rank 1–3 = Topic A/B/C) or related |
 | `subjects` | the vocabulary |
-| `source_sources`, `sources` | which databases found each work |
-| `source_collections`, `collections` | topic indexes ("catalysis" and its subtopics) with relevance and in-scope flags |
+| `source_databases`, `databases` | which databases found each work |
+| `source_topics`, `topics` | topic indexes ("catalysis" and its subtopics) with relevance and in-scope flags |
 | `files`, `extractions`, SI-link table | downloaded PDFs / supplementary files and curation status (filled later) |
 | `about` | column descriptions, example queries, `built_at` |
 
@@ -264,17 +264,17 @@ related), so count with `kind = 'main'` unless you want that looser set.
   preprint ↔ published version, patent families); a few duplicates remain.
 - **Relevance:** every record passed a "cataly…" text gate, then keyword screening (2026-10-14) scored it 0–5:
   5 = "cataly…" in the title, 4 = only in the abstract; metaphors such as "catalyst for change" are out of scope.
-  In scope: 2,186,836; out of scope: 15,597 (in `excluded.csv` and `source_collections.in_scope = 0`).
-- **Access type and license:** every record was classified on 2026-10-14 (OpenAlex, Crossref, Unpaywall, Europe PMC,
+  In scope: 2,186,836; out of scope: 15,597 (in `excluded.csv` and `source_topics.in_scope = 0`).
+- **Access type and licence:** every record was classified on 2026-10-14 (OpenAlex, Crossref, Unpaywall, Europe PMC,
   PMC). In scope: OA 380,167 · OA+ND 74,198 · Free-to-read 366,090 · Paywalled 1,366,381. This is the metadata
-  verdict; a downloaded PDF's printed license can still change it. Filter with `--access OA,OA+ND`.
+  verdict; a downloaded PDF's printed licence can still change it. Filter with `--access OA,OA+ND`.
 - **Topics:** Topic A/B/C come from a deterministic match against a 125-term vocabulary (re-assigned on
   2026-10-14). Sources without a matching term have no Topic A; concepts add text matching, so they don't depend
   on topics alone.
 - **Abstracts:** 419,256 in-scope records (19 %) still have no abstract (113,558 were filled on 2026-10-14);
   they can only match on title and keywords.
 - **Historical methanol synthesis (added 2026-10-20):** SCALE's pre-1966 methanol-synthesis corpus
-  (`graphs/methanol-synthesis-pre1966/sources.json`) is the collection `methanol-synthesis-pre1966`: 178 records, of
+  (`graphs/methanol-synthesis-pre1966/sources.json`) is the topic `methanol-synthesis-pre1966`: 178 records, of
   which 128 were new to the catalog, among them 79 patents from 1923–1968 (42 from the 1920s) that the open patent
   sources do not reach. SCALE's statuses are its scope decisions (174 in scope, 4 off scope, with the reason in
   `relevance_note`); every in-scope record has Methanol synthesis among its Topic A/B/C, so `--concept co2-methanol

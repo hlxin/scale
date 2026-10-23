@@ -1,7 +1,7 @@
 # index-sources — README
 
-A Claude Code skill that indexes the sources of a topic — papers, preprints, patents, theses, reports and datasets —
-into a filterable database, and freezes the corpus a question needs. Ask Claude in plain words ("index the literature
+A Claude Code skill that indexes the sources of a topic — papers, preprints, patents, theses and reports, and the
+datasets found with them — into a filterable index, and freezes the corpus a question needs. Ask Claude in plain words ("index the literature
 on MXene catalysts for nitrate reduction", "update co2rr with newer sources", "export the 2020-2026 copper sources in
 ACS journals", "freeze the open-access CO2-to-ethylene sources since 2020 for curation"). Fetching a corpus's files
 (PDFs, SI) is the [fetch-corpus](../fetch-corpus/README.md) skill's; curating them is curate-corpus's.
@@ -10,7 +10,7 @@ ACS journals", "freeze the open-access CO2-to-ethylene sources since 2020 for cu
 
 | Mode | What happens |
 |---|---|
-| **Index** | searches every database, deduplicates, classifies access and license, screens relevance, lists every source's SI, assigns Topic A/B/C |
+| **Index** | searches every database, deduplicates, classifies access and licence, screens relevance, lists every source's SI, assigns Topic A/B/C |
 | **Update** | exhaustive refresh: every database and query since the last run, citation chasing, re-check of access, retractions and preprints |
 
 Neither downloads a source's files. When a topic already exists, Claude asks whether to freeze a corpus from it,
@@ -32,11 +32,11 @@ update it or rebuild the index. Everything else is just a request, no mode:
 - **A corpus** is the selection a question needs, frozen by a rule (relevance, Topic A/B/C, document types, years,
   access types, or a list of IDs): `freeze_corpus.py` writes `sources/<topic>/corpora/<name>/sources.json`, which
   fetch-corpus fetches and curate-corpus curates.
-- **Very large topics** (a whole field): index once as a catalog; access type, license and screening run on the whole
+- **Very large topics** (a whole field): index once as a catalog; access type, licence and screening run on the whole
   catalog in hours (blocks of 20,000 sources, every database at its allowed pace — about 2 million sources in 2-3 h);
   each question then freezes its own corpus from the catalog.
 - **An index made before the sources were so named** (`publications/papers.db`) is upgraded in place the first time a
-  script opens the project; `upgrade.py --db <file>` upgrades a database that came alone.
+  script opens the project; `upgrade.py --db <file>` upgrades an index file that came alone.
 
 ## What you get
 
@@ -53,8 +53,8 @@ sources/
 
 Index columns: ID, Title, Authors, Year, Venue, Publisher, Doc type, Retracted (Yes / Retraction notice / No), DOI/ID,
 URL (the journal version when there is one), Preprint link (the preprint of a journal article, merged into its row),
-Abstract, Keywords, Topic A, Topic B, Topic C, Related topics, Relevance, Relevance note, Access type, License (exact,
-e.g. CC BY-NC 4.0), License URL, License source, Version, Database, Index, Citations, Downloaded, Path, SI, Extracted,
+Abstract, Keywords, Topic A, Topic B, Topic C, Related topics, Relevance, Relevance note, Access type, Licence (exact,
+e.g. CC BY-NC 4.0), Licence URL, Licence source, Version, Database, Index, Citations, Downloaded, Path, SI, Extracted,
 Notes, Date added, Last checked.
 Details: `references/database.md`. Agent working files live in `.scripts/` (never needed to use the results).
 
@@ -107,11 +107,11 @@ datasets, ERIC) and 9 with a key (CORE, Scopus, Web of Science, Springer Nature,
 EPO). Another 35 are reached through those or deliberately skipped (Google Scholar, ResearchGate and pirate sites
 never) — the full list with reasons is in `references/databases.md`.
 
-## Using the database
+## Using the index
 
 ```sql
 -- sources of a topic, newest first
-SELECT id, title, year, venue FROM v_collection_sources WHERE collection = 'co2rr' AND in_scope = 1 ORDER BY year DESC;
+SELECT id, title, year, venue FROM v_topic_sources WHERE topic = 'co2rr' AND in_scope = 1 ORDER BY year DESC;
 -- by subject (Topic A/B/C or related)
 SELECT p.title FROM sources p JOIN source_subjects s ON s.source_id = p.id WHERE s.label = 'Single-atom catalysts';
 -- full-text search

@@ -1,6 +1,6 @@
 ---
 name: index-sources
-description: Builds and maintains a per-topic index of sources - papers, preprints, patents, theses, reports and datasets - and freezes corpora from it. Index mode finds every matching source in 34 automated databases (OpenAlex, Crossref, Europe PMC, arXiv, OSTI, Zenodo; Scopus, Web of Science, Lens, EPO with keys) and keeps sources/index.db up to date in place, holding every source with abstract, exact license, supplementary information (SI) links, Topic A/B/C and related topics, and the history of every run and change (index CSVs per access type — OA, OA+ND, Free-to-read, Paywalled — on request); copies of the database updated apart merge back into one (merge_db.py). Update mode exhaustively adds newer sources (all databases, citation chasing, access and retraction recheck). Duplicates merge automatically. Also imports Web of Science, Scopus or Zotero exports with their abstracts, answers questions about the indexed sources, writes filtered lists (CSV, BibTeX, RIS) and freezes a corpus (a selection by rule) for fetching and curation. Use whenever the user wants to find, index, import or list sources on a topic, refresh a literature index, query the source database, or choose the sources to curate. Fetching the corpus's files (PDFs, SI) belongs to fetch-corpus; curating them into scale-catal documents to curate-corpus.
+description: Builds and maintains a per-topic index of sources - papers, preprints, patents, theses and reports, and the datasets found with them - and freezes corpora from it. Index mode finds every matching source in 34 automated databases (OpenAlex, Crossref, Europe PMC, arXiv, OSTI, Zenodo; Scopus, Web of Science, Lens, EPO with keys) and keeps sources/index.db up to date in place, holding every source with abstract, exact licence, supplementary information (SI) links, Topic A/B/C and related topics, and the history of every run and change (index CSVs per access type — OA, OA+ND, Free-to-read, Paywalled — on request); copies of the database updated apart merge back into one (merge_db.py). Update mode exhaustively adds newer sources (all databases, citation chasing, access and retraction recheck). Duplicates merge automatically. Also imports Web of Science, Scopus or Zotero exports with their abstracts, answers questions about the indexed sources, writes filtered lists (CSV, BibTeX, RIS) and freezes a corpus (a selection by rule) for fetching and curation. Use whenever the user wants to find, index, import or list sources on a topic, refresh a literature index, query the source database, or choose the sources to curate. Fetching the corpus's files (PDFs, SI) belongs to fetch-corpus; curating them into scale-catal documents to curate-corpus.
 allowed-tools:
   - Bash(python3 -I ${CLAUDE_SKILL_DIR}/scripts/*)
   - Bash(nohup python3 -I ${CLAUDE_SKILL_DIR}/scripts/*)
@@ -27,8 +27,10 @@ human-review:
 
 Topic-agnostic: the research domain always comes from the user, and so does the topic vocabulary (a domain's own file;
 SCALE's catalysis vocabulary is [graphs/catal-commons/literature/vocabulary.json](../../graphs/catal-commons/literature/vocabulary.json),
-[references/topics.md](references/topics.md)). A source here is anything the index holds: a paper, a preprint, a patent,
-a thesis, a report or a dataset; the services that find them (OpenAlex, Crossref, Scopus …) are databases. The chain:
+[references/topics.md](references/topics.md)). A source is a paper, a preprint, a patent, a thesis or a report (SCALE's
+`Source`); the index also lists the datasets and software found with them, which SCALE records as a `Dataset`, not a
+`Source`, when one is curated. The services that find them (OpenAlex, Crossref, Scopus …) are databases, and
+`sources/index.db` is the index. The chain:
 
 > **index-sources** (index a topic, freeze a corpus) → [fetch-corpus](../fetch-corpus/SKILL.md) (the corpus's files) →
 > [curate-corpus](../curate-corpus/SKILL.md) (scale-catal documents, one source at a time)
@@ -44,7 +46,7 @@ belong to a corpus.
 - **SI is in the index before anything is fetched.** Every in-scope source's supplementary information is looked up
   at index time (`find_si.py`, Index step 7) and listed in the index (SI column "Available (n deposits)", table
   `supplements` in index.db); fetch-corpus fetches the files listed there first.
-- **Scripts do the exact work; you do the judgment.** Searching, deduplication, license decisions, the index CSVs and
+- **Scripts do the exact work; you do the judgment.** Searching, deduplication, licence decisions, the index CSVs and
   `index.db` are produced by the scripts below. Never write index files by hand, never write replacement code — if a
   script fails, read its error, fix the input (config, queries) and re-run.
 - **Every decision question uses `AskUserQuestion`** (clickable options + "Other"). Plain text only for free-form
@@ -167,7 +169,7 @@ process, one batch at a time, the index written once at the end.
 **4 · Citation chasing.** `search.py --topic <slug> --citing`, then `build_list.py --topic <slug> --run citing`.
 OpenAlex lists every work citing the topic's core sources; the gate keeps the on-topic ones.
 
-**5 · Classify.** `classify_access.py --topic <slug>` — access type, exact license with version, license source, and
+**5 · Classify.** `classify_access.py --topic <slug>` — access type, exact licence with version, licence source, and
 missing abstracts/keywords from Semantic Scholar, Europe PMC, OpenAlex and Crossref. Patents are Free-to-read. Any
 size: blocks of 20,000 sources, four looked up at once, every service at its own allowed pace (20,000 sources ≈ 1.5
 min; 2 million ≈ 2-3 h, bounded by Crossref's 3 requests at a time); each block is saved when decided, so a re-run
@@ -215,7 +217,7 @@ separate (Recommended) · Merge them all · Decide pair by pair. Then `dedup.py 
 
 **9 · Report.** `status.py --topic <slug>` and `topics.py summary --topic <slug>`. Tell the user in a few lines: sources
 indexed (by access type and document type), in scope, sources with SI listed (find_si `sources_with_si`), duplicates
-merged, the main Topic A values, sources without abstracts, databases skipped for want of a key, and where things are: `sources/index.db` (the topic is the collection `<slug>`;
+merged, the main Topic A values, sources without abstracts, databases skipped for want of a key, and where things are: `sources/index.db` (the topic is `<slug>` in its `topics` table;
 every later step updates it in place). The index CSVs are written only on request (`export.py --topic <slug> --csv`);
 over 1,048,576 rows they no longer open in Excel, so point to index.db (DB Browser for SQLite) or a filtered export. Nothing was downloaded; offer
 to freeze a corpus (below) and fetch it with fetch-corpus.
@@ -362,7 +364,7 @@ fetches it once, 133 MB — a download, so ask first), `fastembed:<model>`. A st
 | `search.py` | every query on every database; `--count-only`, `--since`, `--citing` |
 | `import_list.py` | add a WoS / Scopus / Zotero export (abstracts kept), a Google Patents CSV, a SCALE corpus list, DOIs, patent numbers or a web page of DOIs to a topic; `--scope screen\|file\|in` |
 | `build_list.py` | gate, dedup, doc types, SI links, merge into the ledger, vocabulary topics, refresh index; `--batches N`, `--no-export`, `--si-links-only` |
-| `classify_access.py` | access type, exact license, abstracts/keywords (any size, blocks; OpenAlex first, Unpaywall capped); `--recheck-older-than DAYS`, `--abstracts-only`, `--no-export` |
+| `classify_access.py` | access type, exact licence, abstracts/keywords (any size, blocks; OpenAlex first, Unpaywall capped); `--recheck-older-than DAYS`, `--abstracts-only`, `--no-export` |
 | `screen.py` | relevance 0-5 + Topic A/B/C; `prep/next/merge`, `api`, `keywords`, `none`, `status`; `--no-export` |
 | `find_si.py` | every in-scope source's SI listed in the index before any download (Crossref components, DataCite, Crossref relations, PMC; Elsevier/MDPI CDNs and publisher pages up to 50,000 sources); `--deep`, `--no-deep`, `--ids`, `--no-export` |
 | `topics.py` | `vocab`, `summary`, `assign` (`--no-export`), `proposed`, `set` (manual correction; `--add` keeps the source's own topics after it) |
@@ -401,10 +403,10 @@ docstring and [references/database.md](references/database.md). A merge that fin
 
 ## Where things are
 
-- `sources/index.db` — the source database (all topics), updated in place by every step, with its history
+- `sources/index.db` — the index (all topics), updated in place by every step, with its history
   (`runs`, `changes`), saved filters and working state ("The database evolves" below).
   `sources/<slug>/index/{OA,OA+ND,Free-to-read,Paywalled,merged,excluded}.csv` — the topic index (34 columns),
-  written on request (`export.py --csv`). Columns, tables, access and license rules, the
+  written on request (`export.py --csv`). Columns, tables, access and licence rules, the
   Extracted column: [references/database.md](references/database.md).
 - `sources/<slug>/corpora/<corpus>/sources.json` — a frozen corpus (freeze_corpus.py).
 - `sources/vectors.db` — the vector store of the downloaded sources' text (vectors.py; local, never shared).

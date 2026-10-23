@@ -15,8 +15,8 @@ Tables
   sources             one row per source: bibliographic data, abstract, Topic A/B/C, access, license, download state
   authors            one row per author (merged by ORCID / OpenAlex id, else by name; ids stay the same across updates)
   source_authors      author order, institutions and countries per source
-  collections        the indexed topics (sources/<topic>/) with counts and dates
-  source_collections  source <-> topic: relevance 0-5, scope decision, PDF path in that topic
+  topics             the indexed topics (sources/<topic>/): name, counts and dates
+  source_topics      source <-> topic: relevance 0-5, scope decision, PDF path in that topic
   subjects           the topic vocabulary (Topic A/B/C and Related topics come from it)
   source_subjects     source <-> subject: kind 'main' (rank 1-3 = Topic A/B/C) or 'related'
   databases          the search databases; source_databases: which databases found each source
@@ -33,7 +33,7 @@ Tables
   filters            saved filters (a definition in JSON) and filter_members, their sources with a label and level
   _source_state, project_files, author_keys, _si_links_unattached   the working state behind the tables above
                      (see adopt_ledger)
-Views: v_sources (sources + collections + authors as text), v_collection_sources (one row per source and topic).
+Views: v_sources (sources + their topics as text), v_topic_sources (one row per source and topic).
 """
 import hashlib
 import json
@@ -55,28 +55,28 @@ CREATE TABLE sources (
   id INTEGER PRIMARY KEY, doi TEXT, identifier TEXT, title TEXT, authors TEXT, year INTEGER, venue TEXT,
   publisher TEXT, doc_type TEXT, url TEXT, abstract TEXT, abstract_source TEXT, keywords TEXT,
   topic_a TEXT, topic_b TEXT, topic_c TEXT, related_topics TEXT,
-  access_type TEXT, license TEXT, license_url TEXT, license_source TEXT, oa_status TEXT, version TEXT,
+  access_type TEXT, licence TEXT, licence_url TEXT, licence_source TEXT, oa_status TEXT, version TEXT,
   citations INTEGER, citation_percentile REAL, is_preprint INTEGER, is_retracted INTEGER, is_notice INTEGER,
-  databases TEXT, downloaded TEXT, download_source TEXT, download_url TEXT, download_date TEXT, pages INTEGER,
+  databases TEXT, downloaded TEXT, retrieved_from TEXT, retrieved_url TEXT, retrieved_on TEXT, pages INTEGER,
   sha1 TEXT, si TEXT, notes TEXT, date_added TEXT, last_checked TEXT, preprint_url TEXT
 );
 CREATE TABLE authors (id INTEGER PRIMARY KEY, name TEXT NOT NULL, orcid TEXT, openalex_id TEXT);
 CREATE TABLE source_authors (source_id INTEGER, author_id INTEGER, position INTEGER, institutions TEXT, countries TEXT,
   PRIMARY KEY (source_id, position));
-CREATE TABLE collections (slug TEXT PRIMARY KEY, topic TEXT, created_at TEXT, last_index TEXT, last_update TEXT,
+CREATE TABLE topics (slug TEXT PRIMARY KEY, name TEXT, created_at TEXT, last_index TEXT, last_update TEXT,
   sources INTEGER, in_scope INTEGER, out_of_scope INTEGER, downloaded INTEGER, folder TEXT);
-CREATE TABLE source_collections (source_id INTEGER, collection TEXT, relevance INTEGER, relevance_note TEXT,
+CREATE TABLE source_topics (source_id INTEGER, topic TEXT, relevance INTEGER, relevance_note TEXT,
   relevance_method TEXT, in_scope INTEGER, pdf_path TEXT, si_paths TEXT, date_added TEXT,
-  PRIMARY KEY (source_id, collection));
+  PRIMARY KEY (source_id, topic));
 CREATE TABLE subjects (term TEXT PRIMARY KEY, label TEXT, name TEXT, facet TEXT, related TEXT);
 CREATE TABLE source_subjects (source_id INTEGER, term TEXT, label TEXT, kind TEXT, rank INTEGER, method TEXT, score REAL,
   PRIMARY KEY (source_id, term));
 CREATE TABLE databases (name TEXT PRIMARY KEY, label TEXT);
 CREATE TABLE source_databases (source_id INTEGER, database TEXT, PRIMARY KEY (source_id, database));
 CREATE TABLE identifiers (source_id INTEGER, scheme TEXT, value TEXT);
-CREATE TABLE files (source_id INTEGER, collection TEXT, kind TEXT, path TEXT);
+CREATE TABLE files (source_id INTEGER, topic TEXT, kind TEXT, path TEXT);
 CREATE TABLE supplements (source_id INTEGER, doi TEXT, url TEXT, title TEXT, found_by TEXT);
-CREATE TABLE extractions (source_id INTEGER, collection TEXT, kg TEXT, status TEXT, schema_version TEXT, nodes INTEGER,
+CREATE TABLE extractions (source_id INTEGER, topic TEXT, kg TEXT, status TEXT, schema_version TEXT, nodes INTEGER,
   edges INTEGER, date TEXT, note TEXT);
 CREATE TABLE about (name TEXT PRIMARY KEY, value TEXT);
 """
@@ -87,7 +87,7 @@ CREATE INDEX ix_p_doctype ON sources(doc_type);
 CREATE INDEX ix_p_access ON sources(access_type);
 CREATE INDEX ix_p_topica ON sources(topic_a);
 CREATE INDEX ix_p_doi ON sources(doi);
-CREATE INDEX ix_pc_coll ON source_collections(collection);
+CREATE INDEX ix_pc_coll ON source_topics(topic);
 CREATE INDEX ix_ps_term ON source_subjects(term);
 CREATE INDEX ix_ps_label ON source_subjects(label);
 CREATE INDEX ix_pa_author ON source_authors(author_id);
@@ -97,11 +97,11 @@ CREATE INDEX ix_id_value ON identifiers(value);
 CREATE INDEX ix_ps_src ON source_databases(database);
 CREATE INDEX ix_sup_source ON supplements(source_id);
 CREATE VIEW v_sources AS
-  SELECT p.*, (SELECT group_concat(collection, '; ') FROM source_collections c WHERE c.source_id = p.id) AS collections
+  SELECT p.*, (SELECT group_concat(topic, '; ') FROM source_topics c WHERE c.source_id = p.id) AS topics
   FROM sources p;
-CREATE VIEW v_collection_sources AS
-  SELECT c.collection, c.relevance, c.relevance_note, c.in_scope, c.pdf_path, c.date_added AS added_to_collection, p.*
-  FROM source_collections c JOIN sources p ON p.id = c.source_id;
+CREATE VIEW v_topic_sources AS
+  SELECT c.topic, c.relevance, c.relevance_note, c.in_scope, c.pdf_path, c.date_added AS added_to_topic, p.*
+  FROM source_topics c JOIN sources p ON p.id = c.source_id;
 """
 # history, working state and saved filters (added in place to an older database)
 STATE_DDL = """
@@ -145,8 +145,8 @@ COLUMN_HELP = {
     "sources.related_topics": "related topics ('; '-separated labels): other topics the source touches + vocabulary neighbours",
     "sources.access_type": "OA (open license allowing derivatives) / OA+ND (no derivatives) / Free-to-read (no reuse "
                           "license) / Paywalled (subscription)",
-    "sources.license": "exact license with version when stated (CC BY 4.0, CC BY-NC-ND 4.0, Elsevier user license ...)",
-    "sources.license_source": "where the license came from (PDF printed statement wins over metadata)",
+    "sources.licence": "exact licence with version when stated (CC BY 4.0, CC BY-NC-ND 4.0, Elsevier user license ...)",
+    "sources.licence_source": "where the licence came from (PDF printed statement wins over metadata)",
     "sources.version": "Published version / Accepted manuscript / Preprint (of the downloaded or best open copy)",
     "sources.url": "the source's link: its published (journal) version when there is one, else the preprint or landing page",
     "sources.preprint_url": "links of the source's preprint versions ('; '-separated): the preprint DOIs merged into it "
@@ -157,7 +157,7 @@ COLUMN_HELP = {
                            "(scheme retraction_of); the retracted source names its notice (scheme retraction_notice)",
     "sources.downloaded": "Yes / No / n/a (datasets and software are indexed, never downloaded)",
     "sources.abstract_source": "metadata source of the abstract, or 'pdf' when read from the downloaded source",
-    "source_collections.relevance": "0-5 relevance to that collection's topic (blank = not screened); in_scope 1/0",
+    "source_topics.relevance": "0-5 relevance to that topic (blank = not screened); in_scope 1/0",
     "source_subjects.kind": "'main' (rank 1-3 = Topic A/B/C) or 'related'",
     "identifiers.scheme": "doi (every DOI incl. preprint/version aliases), patent (every number of the same invention: "
                           "WO, EP, US ... merged into one row), pmid, pmcid, arxiv, osti, supplement_to, "
@@ -165,11 +165,11 @@ COLUMN_HELP = {
     "supplements": "SI deposits found by the search for a source (doi, url, title, found_by: the database or route that found it); files holds the SI actually "
                    "downloaded",
     "runs": "one row per step that changed the database (at, step, topics, sources added / updated / removed)",
-    "changes": "per source and run: change = added | removed | changed | collection; field, old and new value",
+    "changes": "per source and run: change = added | removed | changed | topic; field, old and new value",
     "filters": "saved filters: name, definition (JSON), last refresh, members; filter_members lists their sources",
 }
 EXAMPLES = [
-    "-- sources of a topic, newest first\nSELECT id, title, year, venue FROM v_collection_sources WHERE collection = 'co2rr' "
+    "-- sources of a topic, newest first\nSELECT id, title, year, venue FROM v_topic_sources WHERE topic = 'co2rr' "
     "AND in_scope = 1 ORDER BY year DESC;",
     "-- by venue and year range\nSELECT title, year FROM sources WHERE venue LIKE '%ACS Catal%' AND year BETWEEN 2020 AND 2026;",
     "-- by subject (Topic A/B/C or related)\nSELECT p.title, s.kind FROM sources p JOIN source_subjects s ON s.source_id = p.id "
@@ -202,15 +202,15 @@ COPIED = {"id": "id", "doi": "doi", "title": "title", "year": "year", "venue": "
           "doc_type": "doc_type", "abstract_source": "abstract_source", "access_type": "access_type",
           "oa_status": "oa_status", "citations": "cited_by", "citation_percentile": "percentile",
           "is_preprint": "is_preprint", "is_retracted": "retracted", "is_notice": "is_erratum",
-          "download_source": "download_source", "download_url": "download_url", "download_date": "download_date",
+          "retrieved_from": "download_source", "retrieved_url": "download_url", "retrieved_on": "download_date",
           "pages": "page_count", "sha1": "sha1", "date_added": "date_added", "last_checked": "last_checked"}
 STATE_SKIP = set(COPIED.values()) | {"abstract"}
-TRACKED = ("doi", "access_type", "license", "version", "is_preprint", "is_retracted", "downloaded", "si", "topic_a",
+TRACKED = ("doi", "access_type", "licence", "version", "is_preprint", "is_retracted", "downloaded", "si", "topic_a",
            "preprint_url")
 ADDED_COLUMNS = {"preprint_url": "TEXT"}    # sources columns added after a database's first build (filled in place)
 TEXTUAL = ("title", "abstract", "keywords", "topic_a", "topic_b", "topic_c", "related_topics", "is_retracted",
            "is_notice")
-BY_SOURCE = ("source_authors", "source_collections", "source_subjects", "source_databases", "identifiers", "files",
+BY_SOURCE = ("source_authors", "source_topics", "source_subjects", "source_databases", "identifiers", "files",
             "supplements", "extractions", "_source_state")
 PROJECT_FILES = ("config.json", "queries.json", "state.json", "criteria.md", "keywords.json")
 CHUNK = 20000
@@ -403,7 +403,7 @@ def _rows(p, side, vocab, authors, L):
         out["source_authors"].append((pid, authors.id_for(a, name), pos, "; ".join(a.get("institutions") or []) or None,
                                      "; ".join(a.get("countries") or []) or None))
     for t in ts:
-        out["source_collections"].append((pid, t["topic"], t.get("relevance"), t.get("relevance_note"),
+        out["source_topics"].append((pid, t["topic"], t.get("relevance"), t.get("relevance_note"),
                                          t.get("relevance_method"), t.get("in_scope"), t.get("path"), t.get("si_paths"),
                                          t.get("date_added")))
         if t.get("path"):
@@ -440,7 +440,7 @@ def _rows(p, side, vocab, authors, L):
 
 INSERT = {"sources": f"INSERT INTO sources VALUES ({','.join('?' * 40)})",
           "source_authors": "INSERT OR IGNORE INTO source_authors VALUES (?,?,?,?,?)",
-          "source_collections": "INSERT INTO source_collections VALUES (?,?,?,?,?,?,?,?,?)",
+          "source_topics": "INSERT INTO source_topics VALUES (?,?,?,?,?,?,?,?,?)",
           "source_subjects": "INSERT OR IGNORE INTO source_subjects VALUES (?,?,?,?,?,?,?)",
           "source_databases": "INSERT OR IGNORE INTO source_databases VALUES (?,?)",
           "identifiers": "INSERT INTO identifiers VALUES (?,?,?)",
@@ -458,7 +458,7 @@ def _insert(con, rows):
 
 # ------------------------------------------------------------------ the small tables, the project files
 def _contrib(state):
-    """What one source adds to each of its topics' counts in `collections`: (sources, in scope, out of scope, PDFs)."""
+    """What one source adds to each of its topics' counts in `topics`: (sources, in scope, out of scope, PDFs)."""
     if not state:
         return {}
     np_, rt = bool(state.get("is_notice")), bool(state.get("is_retracted"))
@@ -469,15 +469,15 @@ def _contrib(state):
 
 def _collections_full(con):
     rows = {}
-    for (slug,) in con.execute("SELECT DISTINCT collection FROM source_collections ORDER BY collection").fetchall():
+    for (slug,) in con.execute("SELECT DISTINCT topic FROM source_topics ORDER BY topic").fetchall():
         c = con.execute("SELECT COUNT(*), SUM(CASE WHEN c.in_scope=1 AND COALESCE(p.is_notice,0)=0 AND "
                         "COALESCE(p.is_retracted,0)=0 THEN 1 ELSE 0 END), SUM(CASE WHEN c.in_scope=0 AND "
                         "COALESCE(p.is_notice,0)=0 THEN 1 ELSE 0 END), SUM(CASE WHEN c.pdf_path IS NOT NULL THEN 1 "
-                        "ELSE 0 END) FROM source_collections c JOIN sources p ON p.id = c.source_id WHERE c.collection=?",
+                        "ELSE 0 END) FROM source_topics c JOIN sources p ON p.id = c.source_id WHERE c.topic=?",
                         (slug,)).fetchone()
         rows[slug] = tuple(x or 0 for x in c)
-    con.execute("DELETE FROM collections")
-    con.executemany("INSERT INTO collections (slug, sources, in_scope, out_of_scope, downloaded) VALUES (?,?,?,?,?)",
+    con.execute("DELETE FROM topics")
+    con.executemany("INSERT INTO topics (slug, sources, in_scope, out_of_scope, downloaded) VALUES (?,?,?,?,?)",
                     [(s, *v) for s, v in rows.items()])
 
 
@@ -486,13 +486,13 @@ def _collections_delta(con, deltas):
     for slug, d in deltas.items():
         if not any(d):
             continue
-        if con.execute("SELECT 1 FROM collections WHERE slug=?", (slug,)).fetchone():
-            con.execute("UPDATE collections SET sources=sources+?, in_scope=in_scope+?, out_of_scope=out_of_scope+?, "
+        if con.execute("SELECT 1 FROM topics WHERE slug=?", (slug,)).fetchone():
+            con.execute("UPDATE topics SET sources=sources+?, in_scope=in_scope+?, out_of_scope=out_of_scope+?, "
                         "downloaded=downloaded+? WHERE slug=?", (*d, slug))
         else:
-            con.execute("INSERT INTO collections (slug, sources, in_scope, out_of_scope, downloaded) VALUES (?,?,?,?,?)",
+            con.execute("INSERT INTO topics (slug, sources, in_scope, out_of_scope, downloaded) VALUES (?,?,?,?,?)",
                         (slug, *d))
-    con.execute("DELETE FROM collections WHERE sources <= 0")
+    con.execute("DELETE FROM topics WHERE sources <= 0")
 
 
 def _refresh_small(con, led, vocab, created_at=None, deltas=None):
@@ -510,13 +510,13 @@ def _refresh_small(con, led, vocab, created_at=None, deltas=None):
         _collections_full(con)
     else:
         _collections_delta(con, deltas)
-    for (slug,) in con.execute("SELECT slug FROM collections").fetchall():
+    for (slug,) in con.execute("SELECT slug FROM topics").fetchall():
         cfg = json_read(proj.topic_dir(slug) / "config.json", {}) or {}
         st = json_read(proj.topic_dir(slug) / "state.json", {}) or {}
         li, lu = run_dates(st)
-        con.execute("UPDATE collections SET topic=?, created_at=?, last_index=?, last_update=?, folder=? WHERE slug=?",
+        con.execute("UPDATE topics SET name=?, created_at=?, last_index=?, last_update=?, folder=? WHERE slug=?",
                     (cfg.get("topic"), cfg.get("created_at"), li, lu, proj.rel(proj.pub / slug), slug))
-    _capture_project_files(con, proj, [r[0] for r in con.execute("SELECT slug FROM collections")])
+    _capture_project_files(con, proj, [r[0] for r in con.execute("SELECT slug FROM topics")])
     old = dict(con.execute("SELECT name, value FROM about").fetchall())
     # SI links whose parent DOI is no indexed source (an issue DOI ...): kept so the ledger can be rebuilt whole;
     # looked for again only when the ledger's SI links or DOIs changed
@@ -562,7 +562,7 @@ def _snapshot(con, ids):
     cols = sorted(set(TRACKED) | set(TEXTUAL))
     out = {r[0]: dict(zip(["id"] + cols, r)) for r in
            con.execute(f"SELECT id, {', '.join(cols)} FROM sources WHERE id IN ({marks})", ids)}
-    for pid, coll, scope, pdf in con.execute(f"SELECT source_id, collection, in_scope, pdf_path FROM source_collections "
+    for pid, coll, scope, pdf in con.execute(f"SELECT source_id, topic, in_scope, pdf_path FROM source_topics "
                                              f"WHERE source_id IN ({marks})", ids):
         if pid in out:
             out[pid].setdefault("_collections", {})[coll] = scope
@@ -598,7 +598,7 @@ def _changes(run_id, pid, old, new, led):
     oc, nc = old.get("_collections") or {}, new.get("_collections") or {}
     for c in sorted(set(oc) | set(nc)):
         if oc.get(c, "-") != nc.get(c, "-"):
-            rows.append((run_id, pid, "collection", c, None if c not in oc else str(oc[c]),
+            rows.append((run_id, pid, "topic", c, None if c not in oc else str(oc[c]),
                          None if c not in nc else str(nc[c])))
     textual = any(str(old.get(f)) != str(new.get(f)) for f in TEXTUAL)
     return rows, textual
@@ -646,8 +646,8 @@ def sync_published_db(led, vocab, topics=None, note=None):
                         _insert(con, rows)
                         r = rows["sources"][0]
                         new = dict(zip(cols, r))
-                        new["_collections"] = {c[1]: c[5] for c in rows["source_collections"]}
-                        new["_pdf"] = {c[1]: c[6] for c in rows["source_collections"]}
+                        new["_collections"] = {c[1]: c[5] for c in rows["source_topics"]}
+                        new["_pdf"] = {c[1]: c[6] for c in rows["source_topics"]}
                         if pid in old_full and tuple(old_full[pid]) != tuple(r):
                             counts["updated"] += 1
                     o = old.get(pid)
@@ -792,12 +792,12 @@ def adopt_ledger(led):
             ids = [r["id"] for r in rows]
             marks = ",".join("?" * len(ids))
             led.db.executemany("INSERT OR REPLACE INTO source_topics VALUES (?,?,?,?,?,?,?,?,?)", [tuple(x) for x in pub.execute(
-                "SELECT source_id, collection, relevance, relevance_note, relevance_method, in_scope, pdf_path, "
-                f"COALESCE(si_paths, '[]'), date_added FROM source_collections WHERE source_id IN ({marks})", ids)])
+                "SELECT source_id, topic, relevance, relevance_note, relevance_method, in_scope, pdf_path, "
+                f"COALESCE(si_paths, '[]'), date_added FROM source_topics WHERE source_id IN ({marks})", ids)])
             led.db.executemany("INSERT OR REPLACE INTO source_subjects VALUES (?,?,?,?,?,?)", [tuple(x) for x in pub.execute(
                 f"SELECT source_id, term, kind, rank, method, score FROM source_subjects WHERE source_id IN ({marks})", ids)])
             led.db.executemany("INSERT OR REPLACE INTO extractions VALUES (?,?,?,?,?,?,?,?,?)", [tuple(x) for x in pub.execute(
-                "SELECT source_id, collection, kg, status, schema_version, nodes, edges, date, note FROM extractions "
+                "SELECT source_id, topic, kg, status, schema_version, nodes, edges, date, note FROM extractions "
                 f"WHERE source_id IN ({marks})", ids)])
     if "_si_links_unattached" in _tables(pub):
         with led.tx():

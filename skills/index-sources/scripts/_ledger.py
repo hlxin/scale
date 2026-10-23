@@ -121,7 +121,7 @@ JSON_COLS = {"authors", "authors_detail", "keywords", "databases", "external_ids
 
 INDEX_COLUMNS = ["ID", "Title", "Authors", "Year", "Venue", "Publisher", "Doc type", "Retracted", "DOI/ID", "URL",
                  "Preprint link", "Abstract", "Keywords", "Topic A", "Topic B", "Topic C", "Related topics", "Relevance",
-                 "Relevance note", "Access type", "License", "License URL", "License source", "Version", "Database",
+                 "Relevance note", "Access type", "Licence", "Licence URL", "Licence source", "Version", "Database",
                  "Index", "Citations", "Downloaded", "Path", "SI", "Extracted", "Notes", "Date added", "Last checked"]
 INDEX_FILES = ACCESS_TYPES + ["merged", "excluded"]
 MAX_AUTHORS = 10
@@ -139,7 +139,7 @@ def _j(v):
 
 
 def _scalar(v):
-    """Sources sometimes return lists or numbers for text fields (type, journal...): store them as text."""
+    """Databases sometimes return lists or numbers for text fields (type, journal...): store them as text."""
     if isinstance(v, (list, tuple)):
         return ", ".join(str(x) for x in v if x not in (None, "")) or None
     if isinstance(v, dict):
@@ -148,7 +148,7 @@ def _scalar(v):
 
 
 def _year(y):
-    """Plausible publication year or None (sources carry typos such as 2915)."""
+    """Plausible publication year or None (databases carry typos such as 2915)."""
     import datetime
     try:
         y = int(str(y)[:4])
@@ -669,7 +669,7 @@ def url_of(p):
 
 
 def license_cells(p):
-    """(License, License URL, License source) — exact label with version when known."""
+    """(Licence, Licence URL, Licence source) — exact label with version when known."""
     label = p.get("license_label")
     url = p.get("license_url") or ""
     if not label:
@@ -772,7 +772,7 @@ def render_row(p, topic, subj, exts, topics, vocab):
         "Relevance": "" if p.get("t_relevance") is None else p["t_relevance"],
         "Relevance note": p.get("t_relevance_note") or "",
         "Access type": p.get("access_type") or "",
-        "License": lic, "License URL": lic_url, "License source": lic_src,
+        "Licence": lic, "Licence URL": lic_url, "Licence source": lic_src,
         "Version": VERSION_LABEL.get(ver or "", ver or ""),
         "Database": "; ".join(dbs),
         "Index": "; ".join(topics),

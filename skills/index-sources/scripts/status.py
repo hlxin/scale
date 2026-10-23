@@ -136,7 +136,7 @@ def summarize(proj, slug):
         "missing_abstracts": no_abs, "skipped_databases_last_search": last.get("skipped_databases") or last.get("skipped_sources") or {},
         "years": {"min": min(yrs) if yrs else None, "max": max(yrs) if yrs else None,
                   "last_5_years": sum(v for y, v in yrs.items() if y >= _dt.date.today().year - 4)},
-        "database": proj.rel(proj.db), "collection": slug,
+        "index": proj.rel(proj.db), "topic": slug,
         "index_csv": proj.rel(proj.index_dir(slug)) if (proj.index_dir(slug) / "merged.csv").exists() else
         f"on request: export.py --topic {slug} --csv",
     }
@@ -179,7 +179,7 @@ def show(s):
     print(f"In-scope sources without an abstract: {s['missing_abstracts']}")
     y = s["years"]
     print(f"Years: {y['min']}–{y['max']} ({y['last_5_years']} in the last 5 years)")
-    print(f"Database: {s['database']} (collection {s['collection']})  ·  Index CSVs: {s['index_csv']}")
+    print(f"Index: {s['index']} (topic {s['topic']})  ·  Index CSVs: {s['index_csv']}")
 
 
 def main():

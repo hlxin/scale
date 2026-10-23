@@ -15,7 +15,7 @@ The catalog lives in `scripts/_databases.py` (`CATALOG`): 34 automated databases
 | Key | Database | Needs | Default | Covers |
 |---|---|---|---|---|
 | `openalex` | OpenAlex | optional `openalex` | yes | ~250M works; citations, OA locations, institutions; filter syntax |
-| `crossref` | Crossref | optional `crossref` | yes | every Crossref DOI; publisher-deposited licenses; relevance-ranked (loose) |
+| `crossref` | Crossref | optional `crossref` | yes | every Crossref DOI; publisher-deposited licences; relevance-ranked (loose) |
 | `s2` | Semantic Scholar | optional `s2` | yes | Semantic Scholar ~200M sources; strong CS/physics coverage; slow without a key |
 | `openaire` | OpenAIRE | — | yes | OpenAIRE Graph: EU repositories, funder links, theses |
 | `core` | CORE | `core` | yes | CORE ~300M OA records from repositories, full-text search |
@@ -116,7 +116,7 @@ The catalog lives in `scripts/_databases.py` (`CATALOG`): 34 automated databases
 | socarxiv | osf | hosted on OSF |
 | psyarxiv | osf | hosted on OSF (out of domain) |
 | pubmed | europepmc | Europe PMC indexes all of PubMed |
-| unpaywall | classify_access.py | not a search engine: DOIs that OpenAlex does not know are looked up there for access type and license (≤ 90,000 calls per UTC day on this machine) |
+| unpaywall | classify_access.py | not a search engine: DOIs that OpenAlex does not know are looked up there for access type and licence (≤ 90,000 calls per UTC day on this machine) |
 | publisher oa | crossref, openalex, doaj | BMC, Elsevier OA, Frontiers, Hindawi, MDPI, SAGE Open, SpringerOpen and Wiley OA have no search APIs; their sources are indexed through Crossref/OpenAlex/DOAJ and downloaded from their CDNs |
 | jstor open | crossref | no public search API |
 | scielo | crossref, openalex, doaj | search.scielo.org is behind a bot challenge |

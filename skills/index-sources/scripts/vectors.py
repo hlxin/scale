@@ -38,7 +38,7 @@ def allowed_ids(proj, a):
         return None
     where, args = [], []
     if a.topic:
-        where.append("id IN (SELECT source_id FROM source_collections WHERE collection = ? AND COALESCE(in_scope, 1) = 1)")
+        where.append("id IN (SELECT source_id FROM source_topics WHERE topic = ? AND COALESCE(in_scope, 1) = 1)")
         args.append(a.topic)
     if a.year:
         lo, _, hi = a.year.partition("-")

@@ -70,7 +70,7 @@ install` copies them). No corpus yet → index-sources first (its "Freeze a corp
 **Gate.** From the manifest and `status.py --topic <topic>` (index-sources): the included sources by access type,
 those already on disk, and the estimate (open: hours and GB; paywalled: days at the limits, about 120 sources per
 publisher per day). `AskUserQuestion` (`multiSelect`): which access types to fetch — OA (CC BY / BY-SA / BY-NC /
-BY-NC-SA / CC0) · OA+ND (CC BY-ND / BY-NC-ND) · Free-to-read (readable, no reuse license) · Paywalled (library EZproxy;
+BY-NC-SA / CC0) · OA+ND (CC BY-ND / BY-NC-ND) · Free-to-read (readable, no reuse licence) · Paywalled (library EZproxy;
 campus/VPN; slow). "Open access" = OA + OA+ND. Then: Everything chosen (Recommended) · Only the N most relevant (they
 type N); and "Fill missing abstracts from the fetched PDFs?" (Yes · No) when sources lack abstracts. Paywalled chosen
 → "Are you on the campus network or connected to the VPN?" (Yes · No, skip paywalled · Not sure, test it).

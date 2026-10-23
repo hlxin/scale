@@ -32,7 +32,7 @@ def query_ids(proj, a, vocab):
     con = sqlite3.connect(f"file:{proj.db}?mode=ro", uri=True)
     where, args = ["COALESCE(p.is_notice,0)=0 AND COALESCE(p.is_retracted,0)=0"], []   # never errata or retracted
     if a.topic:
-        where.append("p.id IN (SELECT source_id FROM source_collections WHERE collection=? AND COALESCE(in_scope,1)=1"
+        where.append("p.id IN (SELECT source_id FROM source_topics WHERE topic=? AND COALESCE(in_scope,1)=1"
                      + (" AND relevance>=?" if a.min_relevance is not None else "") + ")")
         args += [a.topic] + ([a.min_relevance] if a.min_relevance is not None else [])
     if a.subject:
@@ -116,7 +116,7 @@ def write_subset(proj, led, ids, a, vocab):
                         "patent": "misc", "dataset": "misc", "preprint": "misc"}.get(r["Doc type"], "misc")
                 fields = {"title": r["Title"], "author": " and ".join(p.get("authors") or []), "year": r["Year"],
                           "journal": r["Venue"], "doi": p.get("doi") or "", "url": r["URL"], "abstract": r["Abstract"],
-                          "keywords": r["Keywords"], "note": r["Access type"] + (f"; {r['License']}" if r["License"] else "")}
+                          "keywords": r["Keywords"], "note": r["Access type"] + (f"; {r['Licence']}" if r["Licence"] else "")}
                 body = ",\n".join(f"  {k} = {{{str(v).replace('{', '(').replace('}', ')')}}}" for k, v in fields.items() if v)
                 fh.write(f"@{kind}{{{bib_key(p)},\n{body}\n}}\n\n")
     else:

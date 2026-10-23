@@ -214,13 +214,13 @@ def merge(group):
         (u.get("type") or "").lower() in ("retraction", "correction", "erratum") for u in (m["update_to"] or []))
     if not m["doi"]:
         m["link"] = (m["landing_urls"] or m["oa_urls"] or [{}])[0].get("url")
-    # document type: the most specific type any source gave (patent/dataset/thesis/review beat a generic 'article')
+    # document type: the most specific type any database gave (patent/dataset/thesis/review beat a generic 'article')
     pri = ["erratum", "patent", "dataset", "software", "thesis", "review", "conference-paper", "book-chapter", "book",
            "report", "editorial", "letter", "preprint", "article", "other"]
     dts = sorted(set(m["doc_types"]), key=lambda t: pri.index(t) if t in pri else 99)
     m["doc_type"] = dts[0] if dts else norm_doc_type(m["type"], m["is_preprint"])
     if m["doc_type"] == "erratum" and not m["is_erratum"]:
-        # one source typed it as a correction, but neither its title nor its DOI is a notice: a research article
+        # one database typed it as a correction, but neither its title nor its DOI is a notice: a research article
         m["doc_type"] = next((t for t in dts if t != "erratum"), "article")
     if m["doc_type"] == "preprint" and not m["is_preprint"] and "article" in dts:
         m["doc_type"] = "article"          # a published version was merged with its preprint
@@ -356,7 +356,7 @@ def build_batch(proj, led, topic, gate, year_from, files, vocab):
                 continue
             y = str(r.get("year") or "")[:4]
             if year_from and r.get("source") != "manual" and y.isdigit() and int(y) < int(year_from):
-                n_old += 1          # sources that filter by registration date (DataCite, Crossref) let older works in
+                n_old += 1          # databases that filter by registration date (DataCite, Crossref) let older works in
                 continue
             recs.append(r)
     log(f"raw={n_raw} si_deposits={n_si} off_topic={n_off} kept={len(recs)}")

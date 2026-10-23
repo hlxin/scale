@@ -6,7 +6,7 @@ whole) and four blocks are looked up at once, every service at the pace it allow
 Each block is decided and saved as soon as its answers are in, so an interrupted run loses nothing and a re-run goes
 on where it stopped.
 
-Sources: Crossref (publisher-deposited licenses with their version), OpenAlex (every copy with its license and
+Databases: Crossref (publisher-deposited licenses with their version), OpenAlex (every copy with its license and
 version; goes on while the free daily budget or prepaid credit lasts, minus a small reserve), Unpaywall (only DOIs
 OpenAlex does not know and Crossref does — Unpaywall knows only Crossref DOIs; one call per DOI, at most 90,000 per
 UTC day on this machine, because Unpaywall asks API users to stay under 100,000), Europe PMC, the PMC open-data mirror,

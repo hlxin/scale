@@ -63,7 +63,7 @@ DATABASE_LABEL = {"openalex": "OpenAlex", "crossref": "Crossref", "crossref_prep
 DOC_TYPES = ["article", "review", "preprint", "conference-paper", "book-chapter", "book", "thesis", "report", "patent",
              "dataset", "software", "editorial", "letter", "erratum", "other"]
 NOT_DOWNLOADED_TYPES = {"dataset", "software"}
-_DOC_RULES = [  # (doc_type, regex on the source's raw type) — first match wins; order matters
+_DOC_RULES = [  # (doc_type, regex on a database's raw type) — first match wins; order matters
     ("erratum", r"erratum|correction|retraction|corrigendum|expression.of.concern"),
     ("patent", r"patent"),
     ("dataset", r"dataset|research.data|^data$|database"),
@@ -83,7 +83,7 @@ _DOC_RX = [(t, re.compile(rx, re.I)) for t, rx in _DOC_RULES]
 
 
 def norm_doc_type(raw, is_preprint=False):
-    """Any source's type string(s) -> one of DOC_TYPES. Several raw types (S2 'Review,JournalArticle') resolve to the
+    """Any database's type string(s) -> one of DOC_TYPES. Several raw types (S2 'Review,JournalArticle') resolve to the
     most specific one (review beats article)."""
     vals = raw if isinstance(raw, (list, tuple)) else re.split(r"[,;|]", str(raw or ""))
     vals = [re.sub(r"[_\-]+", " ", str(v)).strip().lower() for v in vals if str(v or "").strip()]
@@ -571,7 +571,7 @@ _ABS_PLACEHOLDER_RX = re.compile(r"^\W*(no abstract( is)? available|abstract (is
 
 
 def normalize_abstract(t, cap=6000):
-    """Any source's abstract -> clean plain text ('' for a placeholder). Idempotent."""
+    """Any database's abstract -> clean plain text ('' for a placeholder). Idempotent."""
     t = clean_text(t)
     if not t or _ABS_PLACEHOLDER_RX.match(t):
         return ""
@@ -666,7 +666,7 @@ PUBLISHER_TERMS = [  # license URL fragment -> readable name (publisher-specific
 
 
 def license_detail(raw, token=None):
-    """Exact, readable license with its version when the source states one:
+    """Exact, readable license with its version when the metadata states one:
     'http://creativecommons.org/licenses/by-nc/4.0/' -> ('CC BY-NC 4.0', url); 'cc-by' -> ('CC BY', None);
     an Elsevier TDM URL -> ('Elsevier TDM user license', url). Returns (label, url) — (None, None) when unknown."""
     if not raw and not token:

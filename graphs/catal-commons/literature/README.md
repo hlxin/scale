@@ -8,17 +8,17 @@ What catalysis brings to SCALE's general skills, kept with the commons rather th
 | [`co2-reduction-electricity.filter.json`](co2-reduction-electricity.filter.json) | the saved filter that selects the CO2 reduction database below from the catalysis index |
 | [`consult.py`](consult.py), [`CONSULT.md`](CONSULT.md) | a read-only query tool for the catalysis index and its CO2 subset, and its guide |
 
-The databases themselves are never committed (`*.db` and `*.db.gz` here are git-ignored).
+The index files themselves are never committed (`*.db` and `*.db.gz` here are git-ignored).
 
-## CO2 reduction driven by electricity: source database
+## CO2 reduction driven by electricity: source index
 
-A SQLite database of **23,631 sources on CO2 reduction driven by electricity**, taken from a whole-field catalysis
+A SQLite file of **23,631 sources on CO2 reduction driven by electricity**, taken from a whole-field catalysis
 index (2,313,134 records on 2026-10-20) built on 2026-10-13/14 with the [`index-sources`](../../../skills/index-sources/)
 skill (then named paper-acquisition) and updated in place since.
 It is an index of records, not a corpus. This folder holds its documentation and a query tool; the database itself
 is shared outside git.
 
-### Where the database is
+### Where the file is
 
 The file is not in this repository, for two reasons. Every new version of it would stay in the history of every
 clone (about 37 MB each). And its abstracts keep their sources' own licences, some of them non-commercial or
@@ -37,7 +37,7 @@ one. A project folder upgrades itself the first time an index-sources script ope
 
 ### Keeping it current
 
-The CO2 database is a saved filter of the catalysis database (`index.db`), which evolves: every index-sources
+The CO2 index is a saved filter of the catalysis index (`index.db`), which evolves: every index-sources
 step updates it in place and records what changed. The filter's definition is
 [`co2-reduction-electricity.filter.json`](co2-reduction-electricity.filter.json): concept CO2 reduction × driver
 (electrochemical, plasma, electrified heating), strict and broad, with errata, notices and retracted sources left
@@ -49,7 +49,7 @@ python3 -I $S/filters.py define --name co2-reduction-electricity --file graphs/c
 python3 -I $S/filters.py export --name co2-reduction-electricity --out co2-reduction-electricity.db --public
 ```
 
-`define` is needed once per database; `export --public` keeps abstracts only for OA and OA+ND sources, as in the shared
+`define` is needed once per index; `export --public` keeps abstracts only for OA and OA+ND sources, as in the shared
 file.
 
 ### What is in it
@@ -78,7 +78,7 @@ sources). The `License` and `License URL` columns give each source's licence, an
 
 **Preprints:** a preprint and its journal article are one row, under the journal article (`url`); `preprint_url`
 keeps the preprint's link. 711 journal articles have one, and the 471 records that are preprints link themselves.
-Retracted sources are left out of this database (`is_retracted` marks them in the full one).
+Retracted sources are left out of this index (`is_retracted` marks them in the full one).
 
 **Supporting information** was looked up for every source before anything is downloaded (`find_si.py`): **12,440 SI
 files and deposits for 8,182 sources** (OA 2,178 · OA+ND 758 · Free-to-read 1,058 · Paywalled 4,188), listed in table
@@ -95,11 +95,11 @@ Same layout as the index-sources `index.db` (column definitions in the `about` t
 | Table | Contents |
 |---|---|
 | `sources` | one row per source: DOI, title, authors, year, venue, publisher, doc type, abstract, keywords, Topic A/B/C, access type, exact licence, citations, notes; `url` (the journal version) and `preprint_url` (its preprints, merged into its row), `is_retracted` |
-| `co2_selection` | why the source is in this database: driver and level |
+| `co2_selection` | why the source is in this index: driver and level |
 | `authors`, `source_authors` | authors in order, with ORCID, institutions and countries |
 | `identifiers` | every identifier of a source (DOI aliases, PMID, PMCID, arXiv, OSTI, patent numbers; a retracted source's notice, `retraction_notice`) |
 | `source_subjects`, `subjects` | Topic A/B/C and related topics from a 125-term catalysis vocabulary |
-| `source_sources`, `sources` | which databases found each source |
+| `source_databases`, `databases` | which databases found each source |
 | `supplements` | each source's supporting information, found before download (DOI or file URL, title, route) |
 | `sources_fts` | full-text index on title, abstract and keywords |
 
@@ -108,14 +108,14 @@ Same layout as the index-sources `index.db` (column definitions in the `about` t
 SELECT p.year, p.title, p.doi, p.venue FROM co2_selection s JOIN sources p ON p.id = s.source_id
 WHERE s.driver = 'electro' AND s.level = 'strict' ORDER BY p.year DESC, p.citations DESC;
 -- open-access copper sources among them
-SELECT p.title, p.doi, p.license FROM sources_fts f JOIN sources p ON p.id = f.rowid
+SELECT p.title, p.doi, p.licence FROM sources_fts f JOIN sources p ON p.id = f.rowid
 JOIN co2_selection s ON s.source_id = p.id AND s.driver = 'electro'
 WHERE sources_fts MATCH 'copper' AND p.access_type IN ('OA', 'OA+ND');
 ```
 
 [`consult.py`](consult.py) answers questions in one command, for example
 `python3 -I consult.py count --concept co2-reduction --driver electro` ([`CONSULT.md`](CONSULT.md) explains the
-concepts and drivers). The membership of this database is `co2_selection`, decided on the full database with every
+concepts and drivers). The membership of this index is `co2_selection`, decided on the full index with every
 abstract; consult.py's text matching on this copy sees abstracts only for OA sources, so it finds slightly fewer
 (17,355 strict and 21,025 broad electrochemical records).
 
@@ -124,7 +124,7 @@ when the file was built. The PDFs are not shared.
 
 ### Limits
 
-- The full catalysis database (2,313,134 records, 12.9 GB) is not shared here either.
+- The full catalysis index (2,313,134 records, 12.9 GB) is not shared here either.
 - Keyed databases were not searched (Scopus, Web of Science, CORE, Lens, EPO, Springer Nature, IEEE Xplore, NASA
   ADS).
 - The selection uses deterministic text and vocabulary rules: the strict level is precise, the broad level adds

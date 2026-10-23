@@ -60,12 +60,12 @@ def project(tmp_path):
 def counts_match(proj):
     """The topics' counts kept by deltas equal a full recount."""
     con = sqlite3.connect(str(proj.db))
-    for slug, papers, ins, outs, dl in con.execute("SELECT slug, sources, in_scope, out_of_scope, downloaded FROM collections"):
+    for slug, papers, ins, outs, dl in con.execute("SELECT slug, sources, in_scope, out_of_scope, downloaded FROM topics"):
         full = con.execute("SELECT COUNT(*), SUM(CASE WHEN c.in_scope=1 AND COALESCE(p.is_notice,0)=0 AND "
                            "COALESCE(p.is_retracted,0)=0 THEN 1 ELSE 0 END), SUM(CASE WHEN c.in_scope=0 AND "
                            "COALESCE(p.is_notice,0)=0 THEN 1 ELSE 0 END), SUM(CASE WHEN c.pdf_path IS NOT NULL "
-                           "THEN 1 ELSE 0 END) FROM source_collections c JOIN sources p ON p.id = c.source_id "
-                           "WHERE c.collection=?", (slug,)).fetchone()
+                           "THEN 1 ELSE 0 END) FROM source_topics c JOIN sources p ON p.id = c.source_id "
+                           "WHERE c.topic=?", (slug,)).fetchone()
         assert (papers, ins, outs, dl) == tuple(x or 0 for x in full), slug
     con.close()
     return True

@@ -24,7 +24,7 @@ from _common import Project, add_project_arg, die, log, now_iso  # noqa: E402
 from _filters import define, refresh  # noqa: E402
 from _publish import DDL, FTS_DDL, FTS_TRIGGERS, POST, STATE_DDL, _fts_ok, has_state  # noqa: E402
 
-COPY = ("source_authors", "source_collections", "source_subjects", "source_databases", "identifiers", "files", "supplements",
+COPY = ("source_authors", "source_topics", "source_subjects", "source_databases", "identifiers", "files", "supplements",
         "extractions")
 
 
@@ -63,7 +63,7 @@ def export_subset(proj, name, out, public=False):
     for t in COPY:
         con.execute(f"INSERT INTO {t} SELECT * FROM src.{t} WHERE source_id IN (SELECT id FROM ids)")
     con.execute("INSERT INTO authors SELECT * FROM src.authors WHERE id IN (SELECT DISTINCT author_id FROM source_authors)")
-    for t in ("subjects", "databases", "collections"):
+    for t in ("subjects", "databases", "topics"):
         con.execute(f"INSERT INTO {t} SELECT * FROM src.{t}")
     about = dict(con.execute("SELECT name, value FROM src.about").fetchall())
     if public:
@@ -78,7 +78,7 @@ def export_subset(proj, name, out, public=False):
                   "subset_source_updated_at": dict(con.execute("SELECT name, value FROM src.about").fetchall()).get(
                       "updated_at", ""),
                   "subset_abstracts": "only for OA and OA+ND sources (their licences allow redistribution)" if public
-                  else "every abstract of the source database", "sources": str(n)})
+                  else "every abstract of the full index", "sources": str(n)})
     con.executemany("INSERT INTO about VALUES (?,?)", sorted(about.items()))
     con.commit()
     con.execute("DETACH DATABASE src")

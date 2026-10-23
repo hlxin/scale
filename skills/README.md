@@ -10,7 +10,7 @@ answers:
 
 | Skill | What it does |
 |---|---|
-| [index-sources](index-sources/SKILL.md) | find and index the sources of a topic (papers, preprints, patents, theses, reports, datasets) into a database that keeps their access, licence and supporting information, and freeze the corpus a question needs |
+| [index-sources](index-sources/SKILL.md) | find and index the sources of a topic (papers, preprints, patents, theses, reports, and the datasets found with them) into an index that keeps their access, licence and supporting information, and freeze the corpus a question needs |
 | [fetch-corpus](fetch-corpus/SKILL.md) | fetch a frozen corpus's files (PDFs and supporting information; paywalled ones only through the library's proxy) and record in the corpus what was fetched and what was not |
 | [curate-corpus](curate-corpus/SKILL.md) | curate one publication, one data file or a frozen corpus into scale-catal documents, with evidence on every statement and typed absences |
 | [query-graph](query-graph/SKILL.md) | answer a question with a graph query plan, rows as reported with their evidence |

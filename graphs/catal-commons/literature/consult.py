@@ -478,7 +478,7 @@ def cmd_breakdown(cat, a):
     return out
 
 
-LIST_COLS = "id, doi, identifier, year, title, venue, doc_type, topic_a, topic_b, topic_c, access_type, license, citations, url"
+LIST_COLS = "id, doi, identifier, year, title, venue, doc_type, topic_a, topic_b, topic_c, access_type, licence, citations, url"
 
 
 def cmd_list(cat, a):
@@ -544,8 +544,8 @@ def cmd_source(cat, a):
             if t in cat.tables:
                 cur = cat.c.execute(f"SELECT * FROM {t} WHERE source_id = ?", (pid,))
                 p[t] = [dict(zip([d[0] for d in cur.description], r)) for r in cur.fetchall()]
-        p["collections"] = [dict(zip(["collection", "relevance", "in_scope"], r)) for r in cat.c.execute(
-            "SELECT collection, relevance, in_scope FROM source_collections WHERE source_id = ?", (pid,))]
+        p["topics"] = [dict(zip(["topic", "relevance", "in_scope"], r)) for r in cat.c.execute(
+            "SELECT topic, relevance, in_scope FROM source_topics WHERE source_id = ?", (pid,))]
         out["matches"].append(p)
     return out
 

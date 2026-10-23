@@ -68,7 +68,7 @@ curate-dataset, merged into curate-corpus, still find it (the answer says `renam
 
 | skill | what it is for |
 |---|---|
-| `index-sources` | find and index the sources of a topic (papers, preprints, patents, theses, reports, datasets) into a database that keeps their access and licence, and freeze the corpus a question needs |
+| `index-sources` | find and index the sources of a topic (papers, preprints, patents, theses, reports, and the datasets found with them) into an index that keeps their access and licence, and freeze the corpus a question needs |
 | `fetch-corpus` | fetch a frozen corpus's files (PDFs and supporting information; paywalled ones only through the library's proxy) and record in the corpus what was fetched and what was not |
 | `curate-corpus` | curate one publication, one data file or a frozen corpus into scale-catal documents: values as printed, evidence, typed absences, gaps instead of schema changes; with recording recipes, and runs that curate many sources through subagents |
 | `query-graph` | answer a question with a graph query plan: rows as reported with evidence, what was left out and why, the coverage, the kind of answer |

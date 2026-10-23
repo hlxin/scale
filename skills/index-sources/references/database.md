@@ -1,10 +1,10 @@
-# The source database, the topic index and the folders
+# The index (index.db), the topic CSVs and the folders
 
 ## Contents
 - Folder layout
 - Index CSV columns
 - sources/index.db (tables, example queries)
-- Access type and license evidence
+- Access type and licence evidence
 - IDs, several topics per source, document types
 - The Extracted column (sources curated into a graph)
 - sources/vectors.db (the vector store)
@@ -14,7 +14,7 @@
 
 ```
 sources/
-  index.db                                   the source database: every topic, normalized, with full-text search
+  index.db                                    the index: every topic, normalized, with full-text search
   vectors.db                                  the vector store: the downloaded sources' passages and vectors (local)
   <topic>/index/OA.csv  OA+ND.csv  Free-to-read.csv  Paywalled.csv   (on request: export.py --topic <slug> --csv)
   <topic>/index/merged.csv                    every source of the topic that is in scope (or not screened)
@@ -47,17 +47,17 @@ touches, so change data through the scripts (`topics.py set`, `export.py --set-e
 | URL | the published (journal) version when there is one, `https://doi.org/<doi>`; else the preprint or landing page |
 | Preprint link | the source's preprint versions (`; `-separated): the preprint DOIs merged into it — a preprint and its journal article are one row — (ChemRxiv, SSRN, Research Square, bioRxiv, arXiv …) and its arXiv record; when none is known, its copies on preprint servers; a preprint's own link. Empty: no preprint known |
 | Abstract | full abstract from metadata or an imported WoS / Scopus export; after download optionally from the PDF (`abstract_source` in index.db) |
-| Keywords | author keywords / subjects from the sources |
+| Keywords | author keywords / subjects from the databases |
 | Topic A, Topic B, Topic C | the source's three main topics, most central first, from the topic vocabulary ([topics.md](topics.md)) |
 | Related topics | other vocabulary topics it touches + neighbours of A/B/C (CO2RR → CORR, OER → ORR) |
 | Relevance | 0-5 for this topic from screening; empty = not screened |
 | Relevance note | why (short) |
 | Access type | `OA` · `OA+ND` · `Free-to-read` · `Paywalled` |
-| License | exact license with version when stated: `CC BY 4.0`, `CC BY-NC-ND 4.0`, `CC0 1.0`, `Elsevier TDM user license`, `Free to read (no license)`, `Subscription — Wiley terms and conditions`, `Patent document (public record)` |
-| License URL | the license's URL when known |
-| License source | where it came from: `PDF (printed license statement)`, `PubMed Central`, `Crossref`, `Unpaywall`, `OpenAlex`, `DataCite` ... |
+| Licence | exact licence with version when stated: `CC BY 4.0`, `CC BY-NC-ND 4.0`, `CC0 1.0`, `Elsevier TDM user license`, `Free to read (no license)`, `Subscription — Wiley terms and conditions`, `Patent document (public record)` |
+| Licence URL | the licence's URL when known |
+| Licence source | where it came from: `PDF (printed license statement)`, `PubMed Central`, `Crossref`, `Unpaywall`, `OpenAlex`, `DataCite` ... |
 | Version | `Published version` / `Accepted manuscript` / `Preprint` (downloaded copy, else the best open copy) |
-| Database | every source that found it |
+| Database | every database that found it |
 | Index | every topic (index) the source belongs to |
 | Citations | citation count (OpenAlex, else Semantic Scholar / Crossref) |
 | Downloaded | `Yes` / `No` / `n/a` (datasets and software are indexed, never downloaded) |
@@ -66,7 +66,7 @@ touches, so change data through the scripts (`topics.py set`, `export.py --set-e
 | Extracted | `No`, or `Yes — <graph> (<date>)`, `Rejected — ...`, recorded when a source is curated (below) |
 | Notes | why: out of scope, not downloaded (reason), copy is the accepted manuscript, no abstract in the metadata, `RETRACTED (notice: <link>)`, `Retraction notice of <link>` ... |
 | Date added | date the source entered this topic (update runs: the run's date) |
-| Last checked | last time access / license / retraction were checked |
+| Last checked | last time access / licence / retraction were checked |
 
 Sort: relevance (unscreened counts as 3), then newest year, then most cited.
 
@@ -74,17 +74,18 @@ Sort: relevance (unscreened counts as 3), then newest year, then most cited.
 
 Normalized SQLite, open with DB Browser for SQLite, `sqlite3`, pandas (`pd.read_sql`) or R. The `about` table holds
 column descriptions and example queries. Tables: `sources` (one row per source; `topic_a/b/c`, `related_topics`,
-`license`, `access_type` ...), `authors` + `source_authors` (ORCID, institutions, countries), `collections` (topics with
-counts and last index/update dates) + `source_collections` (relevance, scope, PDF path per topic), `subjects` (the
-vocabulary) + `source_subjects` (kind `main` rank 1-3 = Topic A/B/C, or `related`), `sources` + `source_sources`,
-`identifiers` (every DOI alias, PMCID, arXiv, every patent number of one invention ...), `files` (PDF/SI per topic),
-`supplements` (the SI listed for a source before download: doi or file URL, url, title, source — the route that
-found it), `extractions` (curation
-status), `sources_fts` (full-text index on title, abstract, keywords; kept in step by triggers). Views: `v_sources`,
-`v_collection_sources`. In `sources`, `url` is the published version's link and `preprint_url` the preprint links (as
+`licence`, `access_type`, and `retrieved_from`, `retrieved_url`, `retrieved_on` for the file fetched, as SCALE's
+`Source` names them ...), `authors` + `source_authors` (ORCID, institutions, countries), `topics` (each topic's slug,
+name, counts and last index/update dates) + `source_topics` (relevance, scope, PDF path per topic), `subjects` (the
+vocabulary) + `source_subjects` (kind `main` rank 1-3 = Topic A/B/C, or `related`), `databases` + `source_databases`
+(the databases that found each source), `identifiers` (every DOI alias, PMCID, arXiv, every patent number of one
+invention ...), `files` (PDF/SI per topic), `supplements` (the SI listed for a source before it is fetched: doi or
+file URL, url, title, `found_by` — the database or route that found it), `extractions` (curation status),
+`sources_fts` (full-text index on title, abstract, keywords; kept in step by triggers). Views: `v_sources`,
+`v_topic_sources`. In `sources`, `url` is the published version's link and `preprint_url` the preprint links (as
 the index columns URL and Preprint link); `is_retracted` = 1 for a retracted source, whose notice is in `identifiers`
 (scheme `retraction_notice`); a retraction notice has `is_notice` = 1 and names the source it retracts (scheme
-`retraction_of`). Columns are only ever added: a database from an older version gains them, filled, at its next
+`retraction_of`). Columns are only ever added: an index from an older version gains them, filled, at its next
 update (a run of its own in `runs`).
 
 History and state, in the same file:
@@ -92,7 +93,7 @@ History and state, in the same file:
 | Table | Contents |
 |---|---|
 | `runs` | one row per publish that changed something: `at`, `step` (the script), `topics`, `added`, `updated`, `removed`, `sources` (in the database after it), `note` |
-| `changes` | per source and run: `change` = `added` (field: none; new: its topics) · `removed` (old: its DOI; new: `merged into <id>`, `supporting information of <id>`, `removed from every topic`) · `changed` (`field` = doi, access_type, license, version, is_preprint, is_retracted, downloaded, si, topic_a, preprint_url; `old`, `new`) · `collection` (field: the topic; old/new: in_scope, empty when it joined or left) |
+| `changes` | per source and run: `change` = `added` (field: none; new: its topics) · `removed` (old: its DOI; new: `merged into <id>`, `supporting information of <id>`, `removed from every topic`) · `changed` (`field` = doi, access_type, licence, version, is_preprint, is_retracted, downloaded, si, topic_a, preprint_url; `old`, `new`) · `topic` (field: the topic; old/new: in_scope, empty when it joined or left) |
 | `filters`, `filter_members` | saved filters (`filters.py`): name, definition (JSON), last refresh, members; their sources with a `label` and `level` (strict / broad) |
 | `_source_state` | the ledger fields the tables above do not show (JSON per source: key, author details, known copies, external ids, download state ...) |
 | `project_files` | the topics' `config.json`, `queries.json`, `state.json`, `criteria.md`, `keywords.json`, and the project's `dedup_decisions.jsonl` and `vocab_custom.json` |
@@ -107,7 +108,7 @@ rebuilds index.db from the ledger (a fallback; it keeps `runs`, `changes`, the f
 never by ID; a source only the other copy has gets a new ID here; when one source there matches two here, the other
 copy merged them and they are merged here too. Bibliographic fields are kept and only filled where empty here;
 citations take the larger count; a retraction or erratum flag from either copy holds; access and licence take a
-verdict read from a PDF over metadata, else the more recently checked one; known copies, sources, identifiers,
+verdict read from a PDF over metadata, else the more recently checked one; known copies, databases, identifiers,
 aliases and SI links are united; downloads stay each copy's own (the other copy's download URL joins the known
 copies, and `--files` copies the PDF and SI in under this copy's ID); topics are united, and in a topic both hold the
 better screening method decides; Topic A/B/C come from the better method; curation results are united; the topics'
@@ -124,7 +125,7 @@ WHERE c.field = 'access_type' AND c.new IN ('OA', 'OA+ND');
 ```
 
 ```sql
-SELECT id, title, year, venue FROM v_collection_sources WHERE collection = 'co2rr' AND in_scope = 1 ORDER BY year DESC;
+SELECT id, title, year, venue FROM v_topic_sources WHERE topic = 'co2rr' AND in_scope = 1 ORDER BY year DESC;
 SELECT title, year FROM sources WHERE venue LIKE '%ACS Catal%' AND year BETWEEN 2020 AND 2026;
 SELECT p.title FROM sources p JOIN source_subjects s ON s.source_id = p.id WHERE s.label = 'Single-atom catalysts' AND s.kind = 'main';
 SELECT p.id, p.title FROM sources_fts JOIN sources p ON p.id = sources_fts.rowid WHERE sources_fts MATCH 'copper AND ethylene';
@@ -150,25 +151,25 @@ WHERE sources_fts MATCH '("CO2 reduction" OR co2rr OR "carbon dioxide reduction"
   AND COALESCE(p.is_notice, 0) = 0;
 ```
 
-Per collection, join `source_collections` (`collection = '<slug>' AND COALESCE(in_scope, 1) = 1`); by year, `GROUP BY p.year`.
+Per topic, join `source_topics` (`topic = '<slug>' AND COALESCE(in_scope, 1) = 1`); by year, `GROUP BY p.year`.
 
 The same filters, as files: `export.py --name <name> --topic <slug> --subject ... --venue ... --year 2020-2026
 --access OA,OA+ND --doc-type article,review --format csv|jsonl|bib|ris` → `sources/exports/<name>.<ext>`.
 
-## Access type and license evidence
+## Access type and licence evidence
 
 | Value | Meaning | Reuse |
 |---|---|---|
 | OA | a copy under CC BY, BY-SA, BY-NC, BY-NC-SA, CC0 or public domain | derivatives allowed (respect NC/SA); attribution |
 | OA+ND | best copy is CC BY-ND or BY-NC-ND | share unchanged; no derivatives |
-| Free-to-read | an open copy exists but carries no reuse license (bronze, publisher terms, unlicensed manuscript); patents | read only |
+| Free-to-read | an open copy exists but carries no reuse licence (bronze, publisher terms, unlicensed manuscript); patents | read only |
 | Paywalled | no open copy anywhere | institutional copy for internal research only |
 
 Before download (`classify_access.py`) the value comes from metadata: the most open copy listed by Unpaywall,
-OpenAlex, Crossref (publisher-deposited license of the version of record), Europe PMC, the PMC open-data mirror,
-DataCite and Semantic Scholar; DOI-less records use the license their repository states. After download the PDF
-decides, strongest evidence first: the license statement printed in the article (version and URL read from it) >
-PMC license code > the copy's license metadata > how it was obtained. A source can move folders (metadata said OA,
+OpenAlex, Crossref (publisher-deposited licence of the version of record), Europe PMC, the PMC open-data mirror,
+DataCite and Semantic Scholar; DOI-less records use the licence their repository states. After download the PDF
+decides, strongest evidence first: the licence statement printed in the article (version and URL read from it) >
+PMC licence code > the copy's licence metadata > how it was obtained. A source can move folders (metadata said OA,
 the PDF says ND → `OA+ND/`; Notes records the difference). Update mode re-checks sources whose `Last checked` is old:
 embargoes end, open copies appear, retractions are flagged, preprints get their published DOI.
 
@@ -182,7 +183,7 @@ embargoes end, open copies appear, retractions are flagged, preprints get their 
   download: same DOI; same patent number (application and grant fall together); preprint ↔ published version (the
   journal article's row keeps the preprint's DOI, shown in the Preprint link column);
   repository copy ↔ journal article; Angewandte `ange.`/`anie.` twins; DOI-less records matched by title;
-  byte-identical PDFs. A dataset is never merged into its source. Uncertain pairs (the same title under two DOIs) wait
+  byte-identical PDFs. A dataset is never merged into the paper it belongs to. Uncertain pairs (the same title under two DOIs) wait
   for the user (`.scripts/dedup_review.csv`; `dedup.py --merge` / `--keep-separate`, remembered in
   `.scripts/dedup_decisions.jsonl`). Every merge is in `.scripts/logs/dedup_log.jsonl` with the full merged row.
 - Patents: one row per invention. Records with the same number (application A1 and grant B1) fall together in
@@ -191,22 +192,28 @@ embargoes end, open copies appear, retractions are flagged, preprints get their 
   Notes "Same invention also published as …"; the representative is the WO, else EP, else US number).
 - SI is listed before anything is downloaded and is never a source of its own: `si_links` in the ledger, `supplements`
   in index.db, "Available (n deposits)" in the index SI column. `find_si.py` (Index step 7) finds it by route
-  (`supplements.source`): `crossref_component` (ACS, PLOS `<DOI>.s001` …), `datacite` (publisher SI on Figshare,
+  (`supplements.found_by`): `crossref_component` (ACS, PLOS `<DOI>.s001` …), `datacite` (publisher SI on Figshare,
   Zenodo …) and `datacite_data` (data deposits such as Dryad, CCDC structures, repository data that declare
   IsSupplementTo the source), `crossref_relation` (is-supplemented-by), `pmc_oa` (PubMed Central open-access files),
   and for topics up to 50,000 sources `elsevier_cdn` (mmcN files), `mdpi_cdn` (-s001 files) and `landing` (publisher
   pages: Nature, Springer, BMC, Frontiers). A file found by two routes is listed once. `build_list.py` adds the SI
   deposits the search itself returned. Datasets found by the search also stay rows of type dataset, linked by
   `identifiers` scheme `supplement_to`. SI that only sits on walled publisher sites (Wiley, RSC, ACS and IOP pages)
-  is found by `fetch_si.py` when the source is downloaded; `fetch_si.py` downloads the listed SI first.
+  is found by fetch-corpus's `fetch_si.py` when the source is fetched; it fetches the listed SI first.
 - Abstracts are cleaned on the way in: a leading "Abstract"/"Summary" heading (also glued to the text), ACS
   graphical-abstract debris, the trailing copyright line and placeholders are removed (`normalize_abstract`).
 - Notices (errata, corrections, retraction notices such as "Retraction of …" / "Notice of retraction", withdrawn
   articles, expressions of concern, peer-review reports, cover art, ChemInform digests) and retracted sources go to
   `excluded.csv` and are never downloaded. A retraction is read from OpenAlex (Retraction Watch) and Crossref: a
   Crossref notice that names another DOI makes that source retracted (Retracted `Yes`, Notes link the notice) and is
-  itself a notice (Retracted `Retraction notice`), never a retracted source. A record that only one source typed as an erratum, with nothing else
+  itself a notice (Retracted `Retraction notice`), never a retracted source. A record that only one database typed as an erratum, with nothing else
   marking it as a notice, is kept as an article.
+- Document types (`doc_type`, the index's Doc type) keep the words Crossref and OpenAlex use. SCALE's `Source.kind`
+  says it its own way, so a curator maps them: article, conference-paper, editorial and letter → `article`; review →
+  `article` (a review article; SCALE's `review_report` is a peer-review report); preprint, patent, thesis, report and
+  book → the same `kind`; book-chapter → `book`; erratum → `correction` (or `retraction_notice`, `withdrawal_notice`
+  … as the notice says); dataset and software are no `Source`: a dataset curated from the index is a `Dataset`
+  (curate-corpus, a data file), its data paper, if any, the `Source` that reports it.
 
 ## The Extracted column (sources curated into a graph)
 
@@ -262,5 +269,5 @@ WHERE v.source_id = 12 ORDER BY v.rowid;
 `repair_log.jsonl`, `ezproxy_evidence/`), `rejected/wrong_paper/`,
 `duplicates/`, `tmp/`, `vocab_custom.json` (project topic terms), and per topic `<slug>/`: `config.json`,
 `queries.json`, `criteria.md` or `keywords.json`, `state.json` (progress, search cursors, run dates),
-`candidates.jsonl`, `raw/<run>/<source>.jsonl`, `screen/<stage>/{pending,out,done}/`, `out_of_scope/`, `kg/`
+`candidates.jsonl`, `raw/<run>/<database>.jsonl`, `screen/<stage>/{pending,out,done}/`, `out_of_scope/`, `kg/`
 (curation status files, above).

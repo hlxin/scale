@@ -1,6 +1,7 @@
-"""A project made before the sources were so named (publications/papers.db, tables papers / paper_*, paper_id, the
-PDFs in <topic>/papers/) is upgraded when a script opens it: folders, file names, tables, columns, the full-text index
-and the stored paths, with nothing lost; and it is upgraded once.
+"""A project made before the sources were so named (publications/papers.db, tables papers / paper_* / collections,
+paper_id, license, download_*, the PDFs in <topic>/papers/) is upgraded when a script opens it: folders, file names,
+tables, columns, the changes it recorded, the full-text index and the stored paths, with nothing lost; and it is
+upgraded once.
 
     python -m pytest tests          (from the skill folder; standard library and pytest only)
 """
@@ -42,15 +43,15 @@ def make_project(root):
     led.db.close()
 
 
-def downgrade_db(path, fts=False):
-    """The database as the skill wrote it before the rename (the upgrade's maps, read backwards)."""
+def downgrade_db(path, kind, fts=False):
+    """The database as the skill wrote it before the rename (the upgrade's maps for its kind, read backwards)."""
     con = sqlite3.connect(str(path), isolation_level=None)
     for t, n in con.execute("SELECT type, name FROM sqlite_master WHERE type IN ('view', 'trigger')").fetchall():
         if not n.startswith("passages_fts"):
             con.execute(f'DROP {t.upper()} "{n}"')
     con.execute("DROP TABLE IF EXISTS sources_fts")
     tables = {r[0] for r in con.execute("SELECT name FROM sqlite_master WHERE type='table'")}
-    for (t, old), new in TABLE_COLUMNS.items():
+    for (t, old), new in TABLE_COLUMNS.get(kind, {}).items():
         if t in tables:
             con.execute(f'ALTER TABLE "{t}" RENAME COLUMN "{new}" TO "{old}"')
     for t in tables:
@@ -58,10 +59,13 @@ def downgrade_db(path, fts=False):
             old = {v: k for k, v in COLUMNS.items()}.get(col)
             if old:
                 con.execute(f'ALTER TABLE "{t}" RENAME COLUMN "{col}" TO "{old}"')
-    for old, new in reversed(list(TABLES.items())):
+    for old, new in reversed(list(TABLES[kind].items())):
         if new in tables:
             con.execute(f'ALTER TABLE "{new}" RENAME TO "{old}"')
             tables = (tables - {new}) | {old}
+    if "changes" in tables:
+        con.execute("UPDATE changes SET change = 'collection' WHERE change = 'topic'")
+        con.execute("UPDATE changes SET field = 'license' WHERE field = 'licence'")
     for t, col in (("paper_topics", "path"), ("paper_collections", "pdf_path"), ("files", "path")):
         if t in tables:
             con.execute(f"UPDATE {t} SET {col} = replace(replace({col}, 'sources/t/files/', 'publications/t/papers/'), "
@@ -76,8 +80,8 @@ def downgrade_db(path, fts=False):
 
 def downgrade(root):
     pub = root / "sources"
-    downgrade_db(pub / "index.db", fts=True)
-    downgrade_db(root / ".scripts" / "ledger.sqlite")
+    downgrade_db(pub / "index.db", "index", fts=True)
+    downgrade_db(root / ".scripts" / "ledger.sqlite", "ledger")
     (pub / "index.db").rename(pub / "papers.db")
     (pub / "t" / "files").rename(pub / "t" / "papers")
     m = pub / "t/corpora/c/sources.json"
@@ -104,12 +108,18 @@ def test_an_old_project_is_upgraded_with_nothing_lost(tmp_path):
     proj = Project(root)                                     # what every script does first
     assert not (root / "publications").exists() and (root / "sources/t/files/OA/1.pdf").is_file()
     idx, ledger = names(root / "sources/index.db"), names(root / ".scripts/ledger.sqlite")
-    for n in ("sources", "databases", "source_databases", "source_collections", "_source_state", "sources_fts",
-              "v_sources", "v_collection_sources"):
+    for n in ("sources", "databases", "source_databases", "topics", "source_topics", "_source_state", "sources_fts",
+              "v_sources", "v_topic_sources"):
         assert n in idx, n
     assert not [n for n in idx if "paper" in n] and not [n for n in ledger if "paper" in n]
     con = sqlite3.connect(str(proj.db))
-    assert con.execute("SELECT source_id, pdf_path FROM source_collections ORDER BY 1").fetchall() == [
+    assert not [n for n in idx if "collection" in n]
+    cols = {r[1] for r in con.execute("PRAGMA table_info(sources)")}
+    assert {"licence", "licence_url", "licence_source", "retrieved_from", "retrieved_url", "retrieved_on",
+            "is_notice"} <= cols and not [c for c in cols if c.startswith(("license", "download_"))]
+    assert con.execute("SELECT slug, name, sources FROM topics").fetchall() == [("t", "Test topic", 2)]
+    assert not con.execute("SELECT 1 FROM changes WHERE change = 'collection' OR field = 'license'").fetchall()
+    assert con.execute("SELECT source_id, pdf_path FROM source_topics ORDER BY 1").fetchall() == [
         (1, "sources/t/files/OA/1.pdf"), (2, "sources/t/files/OA/2.pdf")]
     assert con.execute("SELECT database FROM source_databases WHERE source_id = 1").fetchone() == ("openalex",)
     assert con.execute("SELECT found_by FROM supplements").fetchone() == ("crossref_component",)
@@ -121,7 +131,7 @@ def test_an_old_project_is_upgraded_with_nothing_lost(tmp_path):
     led.set_topic(2, "t", relevance=1, relevance_note="after the upgrade")
     led.export()
     con = sqlite3.connect(str(proj.db))
-    assert con.execute("SELECT relevance_note FROM source_collections WHERE source_id = 2").fetchone() == (
+    assert con.execute("SELECT relevance_note FROM source_topics WHERE source_id = 2").fetchone() == (
         "after the upgrade",)
     con.close()
     led.db.close()

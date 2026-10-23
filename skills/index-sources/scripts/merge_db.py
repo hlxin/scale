@@ -131,9 +131,9 @@ def _fingerprints(con, ids, cols=None):
     fp = {r[0]: [tuple(r)] for r in con.execute(f"SELECT {', '.join(cols) if cols else '*'} FROM sources "
                                                 f"WHERE id IN ({marks})", ids)}
     for sql in (f"SELECT source_id, state FROM _source_state WHERE source_id IN ({marks})",
-                f"SELECT * FROM source_collections WHERE source_id IN ({marks}) ORDER BY source_id, collection",
+                f"SELECT * FROM source_topics WHERE source_id IN ({marks}) ORDER BY source_id, topic",
                 f"SELECT * FROM source_subjects WHERE source_id IN ({marks}) ORDER BY source_id, term",
-                f"SELECT * FROM extractions WHERE source_id IN ({marks}) ORDER BY source_id, collection, kg"):
+                f"SELECT * FROM extractions WHERE source_id IN ({marks}) ORDER BY source_id, topic, kg"):
         for r in con.execute(sql, ids):
             if r[0] in fp:
                 fp[r[0]].append(tuple(r))
@@ -222,17 +222,17 @@ class Merge:
         links = [s for s in o["_si_links"] if not led.q("SELECT 1 FROM si_links WHERE parent_doi=? AND si_doi=?",
                                                           (s["parent_doi"], s["si_doi"]))]
         local_t = {t["topic"]: t for t in led.topics_of(lid)}
-        t_new = [t for t in otopics if t["collection"] not in local_t]
-        t_better = [t for t in otopics if t["collection"] in local_t and
-                    _screen_rank(t.get("relevance_method")) > _screen_rank(local_t[t["collection"]].get("relevance_method"))]
+        t_new = [t for t in otopics if t["topic"] not in local_t]
+        t_better = [t for t in otopics if t["topic"] in local_t and
+                    _screen_rank(t.get("relevance_method")) > _screen_rank(local_t[t["topic"]].get("relevance_method"))]
         cur = led.q("SELECT method FROM source_subjects WHERE source_id=? AND kind='main' LIMIT 1", (lid,))
         omain = [s for s in osubj if s["kind"] == "main"]
         subj = bool(osubj) and (not led.q("SELECT 1 FROM source_subjects WHERE source_id=?", (lid,)) or (
             omain and METHOD_RANK.get(omain[0].get("method") or "vocab", 0) >
             METHOD_RANK.get((cur[0][0] if cur else None) or "vocab", 0)))
         lext = {(e["topic"], e["kg"]): e for e in led.q("SELECT * FROM extractions WHERE source_id=?", (lid,))}
-        e_new = [e for e in oext if (e["collection"], e["kg"]) not in lext or
-                 (e.get("date") or "") > (lext[(e["collection"], e["kg"])]["date"] or "")]
+        e_new = [e for e in oext if (e["topic"], e["kg"]) not in lext or
+                 (e.get("date") or "") > (lext[(e["topic"], e["kg"])]["date"] or "")]
         n = len(new_aliases) + len(links) + len(t_new) + len(t_better) + int(bool(subj)) + len(e_new)
         if self.dry or not n:
             return n
@@ -242,11 +242,11 @@ class Merge:
                                                                           s.get("title"), s.get("source"), s.get("date_added")))
         for t in t_new:
             led.x("INSERT OR IGNORE INTO source_topics VALUES (?,?,?,?,?,?,?,?,?)",
-                  (lid, t["collection"], t.get("relevance"), t.get("relevance_note"), t.get("relevance_method"),
+                  (lid, t["topic"], t.get("relevance"), t.get("relevance_note"), t.get("relevance_method"),
                    t.get("in_scope"), None, "[]", t.get("date_added")))
             self.n["topics_added"] += 1
         for t in t_better:
-            led.set_topic(lid, t["collection"], relevance=t.get("relevance"), relevance_note=t.get("relevance_note"),
+            led.set_topic(lid, t["topic"], relevance=t.get("relevance"), relevance_note=t.get("relevance_note"),
                           relevance_method=t.get("relevance_method"), in_scope=t.get("in_scope"))
             self.n["relevance_taken"] += 1
         if subj:
@@ -257,7 +257,7 @@ class Merge:
             self.n["topics_abc_taken"] += 1
         for e in e_new:
             led.x("INSERT OR REPLACE INTO extractions VALUES (?,?,?,?,?,?,?,?,?)",
-                  (lid, e["collection"], e["kg"], e["status"], e.get("schema_version"), e.get("nodes"), e.get("edges"),
+                  (lid, e["topic"], e["kg"], e["status"], e.get("schema_version"), e.get("nodes"), e.get("edges"),
                    e.get("date"), e.get("note")))
         return n
 
@@ -288,7 +288,7 @@ class Merge:
                     new_si.append(self.proj.rel(dst))
                     si_names.append(dst.name)
             if pdf and not self.dry:
-                self.led.set_topic(lid, t["collection"], path=pdf, si_paths=new_si)
+                self.led.set_topic(lid, t["topic"], path=pdf, si_paths=new_si)
             done = done or bool(pdf)
         if done and not self.dry:
             self.led.set(lid, **{f: o.get(f) for f in DOWNLOAD if f not in ("si_files", "dl_status", "dl_note")},
@@ -342,7 +342,7 @@ class Merge:
             if not changed:
                 continue
             ops = self.other.papers(changed)
-            otop = self.other.by_source("SELECT * FROM source_collections WHERE source_id IN ({})", changed)
+            otop = self.other.by_source("SELECT * FROM source_topics WHERE source_id IN ({})", changed)
             osub = self.other.by_source("SELECT * FROM source_subjects WHERE source_id IN ({})", changed)
             oext = self.other.by_source("SELECT * FROM extractions WHERE source_id IN ({})", changed)
             for oid in changed:

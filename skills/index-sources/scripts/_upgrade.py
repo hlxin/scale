@@ -9,9 +9,13 @@ for a paper, preprint, patent, thesis, report or dataset) and the services that 
   publications/papers.db        -> sources/index.db
   <topic>/papers/<access>/      -> <topic>/files/<access>/
   tables   papers -> sources, paper_* -> source_*, sources (search services) -> databases,
-           paper_sources -> source_databases, papers_fts -> sources_fts, _paper_state -> _source_state
-  columns  paper_id -> source_id, is_non_paper -> is_notice, source_databases.database, supplements.found_by,
-           collections.sources, runs.sources
+           paper_sources -> source_databases, papers_fts -> sources_fts, _paper_state -> _source_state;
+           in index.db also collections -> topics, paper_collections -> source_topics
+  columns  paper_id -> source_id; in index.db also is_non_paper -> is_notice, license* -> licence* (SCALE's
+           spelling), download_source / download_url / download_date -> retrieved_from / retrieved_url /
+           retrieved_on (as SCALE's Source names them), collection -> topic, topics.name, topics.sources,
+           runs.sources, source_databases.database, supplements.found_by; the changes it recorded say topic and
+           licence too
 
 upgrade_project() runs from Project() before anything is opened: it moves the folders, renames the databases'
 tables and columns (an ALTER TABLE rename rewrites only the schema, so even a database of millions of rows takes
@@ -24,17 +28,25 @@ import sqlite3
 import sys
 from pathlib import Path
 
-TABLES = {  # old -> new, in this order (the search services' `sources` makes way for the sources first)
-    "sources": "databases", "papers": "sources", "paper_authors": "source_authors",
-    "paper_collections": "source_collections", "paper_subjects": "source_subjects", "paper_topics": "source_topics",
-    "paper_sources": "source_databases", "_paper_state": "_source_state",
+TABLES = {  # per database, old -> new in this order (the search services' `sources` makes way for the sources first)
+    "index": {"sources": "databases", "papers": "sources", "paper_authors": "source_authors",
+              "collections": "topics", "paper_collections": "source_topics", "paper_subjects": "source_subjects",
+              "paper_sources": "source_databases", "_paper_state": "_source_state"},
+    "ledger": {"papers": "sources", "paper_topics": "source_topics", "paper_subjects": "source_subjects"},
+    "vectors": {"papers": "sources"},
 }
-COLUMNS = {"paper_id": "source_id", "is_non_paper": "is_notice"}
-TABLE_COLUMNS = {("source_databases", "source"): "database", ("supplements", "source"): "found_by",
-                 ("collections", "papers"): "sources", ("runs", "papers"): "sources"}
+COLUMNS = {"paper_id": "source_id"}                  # in every table of every database
+TABLE_COLUMNS = {"index": {  # (table as renamed, column) -> column
+    ("sources", "is_non_paper"): "is_notice", ("sources", "license"): "licence", ("sources", "license_url"): "licence_url",
+    ("sources", "license_source"): "licence_source", ("sources", "download_source"): "retrieved_from",
+    ("sources", "download_url"): "retrieved_url", ("sources", "download_date"): "retrieved_on",
+    ("topics", "topic"): "name", ("topics", "papers"): "sources", ("runs", "papers"): "sources",
+    ("source_topics", "collection"): "topic", ("files", "collection"): "topic", ("extractions", "collection"): "topic",
+    ("source_databases", "source"): "database", ("supplements", "source"): "found_by"}}
+VALUES = {"index": ["UPDATE changes SET change = 'topic' WHERE change = 'collection'",
+                    "UPDATE changes SET field = 'licence' WHERE field = 'license'"]}
 PATH_COLUMNS = {("source_topics", "path"), ("source_topics", "si_paths"), ("sources", "si_files"),
-                ("sources", "pdf"), ("source_collections", "pdf_path"), ("source_collections", "si_paths"),
-                ("files", "path")}
+                ("sources", "pdf"), ("source_topics", "pdf_path"), ("files", "path")}
 _OLD_PATH = re.compile(r"(?<![\w.-])publications/([^/\"]+)/papers/")
 
 
@@ -51,7 +63,14 @@ def _log(msg):
 
 def is_old(con):
     names = {r[0] for r in con.execute("SELECT name FROM sqlite_master WHERE type IN ('table', 'view')")}
-    return "papers" in names or bool(names & {"paper_topics", "paper_collections", "_paper_state"})
+    return "papers" in names or bool(names & {"paper_topics", "paper_collections", "_paper_state", "collections"})
+
+
+def kind_of(tables):
+    """index (index.db, papers.db), vectors (vectors.db) or ledger (.scripts/ledger.sqlite)."""
+    if tables & {"collections", "paper_collections", "topics", "_paper_state", "_source_state"}:
+        return "index"
+    return "vectors" if "passages" in tables else "ledger"
 
 
 def upgrade_db(path):
@@ -77,15 +96,19 @@ def upgrade_db(path):
         for n in fts:
             con.execute(f'DROP TABLE IF EXISTS "{n}"')
         tables -= set(fts) | {n + s for n in fts for s in ("_data", "_idx", "_docsize", "_config", "_content")}
-        for old, new in TABLES.items():
+        kind = kind_of(tables)
+        for old, new in TABLES[kind].items():
             if old in tables and new not in tables - {old}:
                 con.execute(f'ALTER TABLE "{old}" RENAME TO "{new}"')
                 tables = (tables - {old}) | {new}
         for t in sorted(tables):
             for col in [r[1] for r in con.execute(f'PRAGMA table_info("{t}")')]:
-                new = TABLE_COLUMNS.get((t, col)) or COLUMNS.get(col)
+                new = TABLE_COLUMNS.get(kind, {}).get((t, col)) or COLUMNS.get(col)
                 if new:
                     con.execute(f'ALTER TABLE "{t}" RENAME COLUMN "{col}" TO "{new}"')
+        for stmt in VALUES.get(kind, []):
+            if "changes" in tables:
+                con.execute(stmt)
         for n, s in con.execute("SELECT name, sql FROM sqlite_master WHERE type='index' AND sql IS NOT NULL "
                                 "AND name LIKE '%paper%'").fetchall():
             con.execute(f'DROP INDEX "{n}"')
@@ -95,7 +118,7 @@ def upgrade_db(path):
                 rows = con.execute(f'SELECT rowid, "{col}" FROM "{t}" WHERE "{col}" LIKE \'%publications/%\'').fetchall()
                 con.executemany(f'UPDATE "{t}" SET "{col}"=? WHERE rowid=?', [(new_path(v), r) for r, v in rows])
         con.execute("COMMIT")
-        if {"sources", "collections"} <= tables:                 # index.db: its views (and full-text index) again
+        if kind == "index":                                       # its views (and full-text index) again
             from _publish import FTS_DDL, FTS_TRIGGERS, POST
             for stmt in re.findall(r"CREATE VIEW .*?;\n", POST, re.S):
                 con.execute(stmt.replace("CREATE VIEW", "CREATE VIEW IF NOT EXISTS", 1))

@@ -4,7 +4,7 @@
                 (also glued: "AbstractMXenes ..."), ACS "High Resolution Image Download MS PowerPoint Slide" debris,
                 the trailing copyright line and placeholders such as "[No abstract available]"
   2 notices  notices the title rules now recognize ("Retraction of ...", "Notice of retraction", "Withdrawn: ...")
-                are flagged; a row that only one source typed as an erratum, with nothing else marking it as a notice,
+                are flagged; a row that only one database typed as an erratum, with nothing else marking it as a notice,
                 becomes an article
   3 topics      vocabulary Topic A/B/C of the sources whose abstract changed are recomputed (Claude, API and manual
                 topics are kept)
