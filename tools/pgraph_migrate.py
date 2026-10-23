@@ -26,7 +26,9 @@ STEPS: dict[str, tuple[str, str]] = {
     "0.2.1": ("0.3.0", "breaking: quantity contracts (a value's unit by its kind's dimension; the contexts a comparison needs; normalized_by; HAS_COMPONENT.concentration)"),
     "0.3.0": ("0.4.0", 'breaking: result entries (Experiment.result_values with value ids, phase, stream, unresolved_target); conversion, product_yield, selectivity, production_rate, product_amount and balance kinds; in catalysis a species is a ChemicalSpecies (context_targets)'),
     "0.4.0": ("0.5.0", "breaking: the catalysis checklist applies a test's cases by its driving_forces (a test that lists none has unknown applicability, never a complete checklist) and looks for connected evidence; CatalyticTest.interpretations, Analysis.evaluation_basis, power_supply_input and the dark control's control_kind, differs_in, temperature_matched_at and temperature_matched_over are new (provisional)"),
-    "0.5.0": ("0.6.0", "breaking: site populations of a catalyst state (HAS_SITE from CatalystState with population_fraction, site_density, exposed_metal_count and site_inventory); the site_fraction, site_density and site_count kinds; a turnover frequency compared by its species, divided by a site count or a site density, and saying how it was calculated (a warning when it does not); operando defined as characterized while the kinetics are measured; DURING's specimen, timing, kinetics and benchmark; Analysis spectral_fit and limitations; the checklist's operando and spectral-fit cases (provisional)"),
+    "0.5.0": ("0.5.1", 'Represent bifunctional (tandem) catalysts: component function, integration mode and scale, site proximity (provisional)'),
+    "0.5.1": ("0.5.2", "additive: ProductLump (a product reported as a lump or fraction) and SUBSET_OF; HAS_OUTPUT.to and PRODUCES.to accept a ProductLump; no record changes"),
+    "0.5.2": ("0.6.0", "breaking: site populations of a catalyst state (HAS_SITE from CatalystState with population_fraction, site_density, exposed_metal_count and site_inventory); the site_fraction, site_density and site_count kinds; a turnover frequency compared by its species, divided by a site count or a site density, and saying how it was calculated (a warning when it does not); operando defined as characterized while the kinetics are measured; DURING's specimen, timing, kinetics and benchmark; Analysis spectral_fit and limitations; the checklist's operando and spectral-fit cases (provisional)"),
 }
 
 
@@ -79,7 +81,7 @@ def _reporting_applicability(doc: dict, spec: dict | None) -> list:
 
 
 def _site_populations(doc: dict, spec: dict | None) -> list:
-    """0.5.0 -> 0.6.0: site populations of a catalyst state and site-normalized rates. Nothing a 0.5.0 document holds is
+    """0.5.2 -> 0.6.0: site populations of a catalyst state and site-normalized rates. Nothing a 0.5.2 document holds is
     rewritten: no population moves onto a state (a count recorded elsewhere stays there, and none is carried from a
     sample to its states), no operando label is changed, and no DURING link is given a specimen, a timing or kinetics
     it does not state. A turnover frequency is now compared by its species, so one that names none is left out of a
@@ -107,7 +109,7 @@ STEP_RULES: dict[str, tuple[str, Callable[[dict, dict | None], list]]] = {
     "0.4.0": ("reporting applicability and connected evidence: nothing is rewritten and nothing stops the step (a test "
               "that lists no driving force has unknown applicability; no interpretation is inferred); every record, id "
               "and value kept", _reporting_applicability),
-    "0.5.0": ("site populations and site-normalized rates: nothing is rewritten (no population moves onto a state, no "
+    "0.5.2": ("site populations and site-normalized rates: nothing is rewritten (no population moves onto a state, no "
               "operando label or DURING link changes); a turnover frequency whose target is no chemical species, or "
               "whose denominator is not a site count or a site density, stops the step; every record, id and value "
               "kept", _site_populations),

@@ -534,7 +534,18 @@ def vocabulary(spec: dict) -> tuple[dict, dict]:
             pub[f"{k}_as_reported"] = {"type": "string", "description": f"{k} as given (not a date)"}
     node_types["Publication"] = {"description": "A source document: article, patent, thesis or report.", "properties": pub}
 
-    def ends(labels: list) -> list[str]:
+    every = set(spec["nodes"])
+
+    def ends(labels: list) -> list[str] | None:
+        """The labels an endpoint stands for, sorted; ``[]`` (unconstrained) for an endpoint declared ``ANY``, which the
+        resolved spec carries as every concrete label (so that its digest is unchanged), and ``None`` for one that
+        names no label of the bundle.
+
+        The marker is inferred: the loader expands ``ANY`` to every concrete label before the spec is digested (and the
+        frozen versions hold it so), so a list that covers every concrete kind is read as ``ANY``. ``any_except`` leaves
+        a kind out and an explicit list names a few, so neither reaches it."""
+        if labels and every <= {x for x in labels if isinstance(x, str)}:
+            return []
         out = set()
         for lab in labels or []:
             if not isinstance(lab, str):
@@ -542,20 +553,20 @@ def vocabulary(spec: dict) -> tuple[dict, dict]:
             for name, d in spec["nodes"].items():
                 if name == lab or lab in (d.get("ancestors") or []):
                     out.add("Publication" if name == "Source" else name)
-        return sorted(x for x in out if x in node_types)
+        return sorted(x for x in out if x in node_types) or None
 
     edge_types: dict[str, dict] = {}
     for et, d in sorted(spec["edges"].items()):
         if et == "REPORTED_IN":
             continue
         frm, to = ends(d.get("from")), ends(d.get("to"))
-        if not frm or not to:
+        if frm is None or to is None:
             continue
         edge_types[et] = {"description": (d.get("description") or et).strip()[:2000], "from": frm, "to": to,
                           **({"iri": iri_of(d)} if iri_of(d) else {}),
                           "properties": _type_props({**common_l, **(d.get("properties") or {})}, True, status_def)}
     edge_types["REPORTED_IN"] = {"description": "An entity -> the source that reports it.",
-                                 "from": sorted(x for x in node_types if x != "Publication"), "to": ["Publication"],
+                                 "from": [], "to": ["Publication"],     # any entity reports: unconstrained
                                  "properties": {}}
     return node_types, edge_types
 
@@ -581,7 +592,8 @@ def _conforms(node_types: dict, edge_types: dict, nodes: list[dict], links: list
             problems.append(f"edge {e['id']}: type {e['type']} is not in {schema_id}")
             continue
         s, o = label_of.get(e["source"]), label_of.get(e["target"])
-        if s and s not in t["from"] or o and o not in t["to"]:
+        # an empty list is unconstrained (an endpoint declared ANY)
+        if s and t["from"] and s not in t["from"] or o and t["to"] and o not in t["to"]:
             problems.append(f"edge {e['id']}: {e['type']} from {s} to {o} is not allowed in {schema_id}")
         problems += [f"edge {e['id']}: {k} is not declared on {e['type']}" for k in e["props"]
                      if not k.startswith("_") and k not in FORMAT_FIELDS and k not in t["properties"]]
