@@ -1,0 +1,150 @@
+# A competency question of the catalysis domain (tools/competency.py; `scale domains cq catalysis`).
+# It runs on public synthetic examples, so anyone can rerun it and see the same answer.
+id: CQ-19
+question: Which loadings and compositions are nominal and which were measured, in the bulk or at the surface, in which
+  state, and which measured loadings can be compared?
+description: |
+  A nominal loading or composition is the formulation's (HAS_COMPONENT from the Catalyst or the Material, origin
+  assumed: set by the authors, not measured); a measured one is a result of the characterization that measured it, on
+  the specimen it measured (CHARACTERIZES, with the state), with its technique and information depth. Both stay, each
+  with its evidence: the 5 wt% Pt/gamma-Al2O3 has a nominal 5 wt% and, for batch 1, 3.8 wt% by ICP-OES. Compared
+  scientifically, measured loadings are compared only on one basis: a loading in wt% is by mass, and one the source
+  gives in "%" with no basis is left out as missing_context, never read as wt%. A composition measured in the bulk
+  (XRF, ICP-OES), at the surface (XPS) and at the surface under reaction conditions (near-ambient-pressure XPS) are
+  separate observations of one sample, told apart by technique, information depth and state.
+documents:
+  - examples/scale-catal/preparation-examples/impregnation.json
+  - examples/scale-catal/preparation-examples/coprecipitation.json
+  - examples/scale-catal/preparation-examples/high-entropy-alloy.json
+plan:
+  question: What Pt loading was intended for each batch and specimen of a Pt catalyst, and what was measured?
+  match:
+    label: CatalystSample
+    as: specimen
+  steps:
+    - from: specimen
+      edge: HAS_FORMULATION
+      to: Catalyst
+      as: formulation
+    - from: formulation
+      edge: HAS_COMPONENT
+      to: Material
+      as: active_phase
+      edge_as: nominal
+      where:
+        - prop: formula
+          op: eq
+          value: Pt
+      edge_where:
+        - prop: role
+          op: eq
+          value: active_phase
+    - from: specimen
+      edge: CHARACTERIZES
+      direction: in
+      to: Characterization
+      as: measurement
+      edge_as: measured_in
+    - from: measurement
+      entries: result_values
+      kind: loading
+      as: measured
+  return:
+    - specimen.name
+    - nominal.loading
+    - measured
+    - measurement.technique
+    - measured_in.state
+  evidence: true
+expect:
+  status: answered
+  min_rows: 4
+  max_rows: 4
+variants:
+  - description: Compared scientifically, the measured Pt loadings in wt% (by mass) are one group; the second commercial
+      lot's 4.7 %, whose basis the source does not state, is left out as missing_context.
+    plan:
+      comparison: scientific
+      match:
+        label: Characterization
+        as: measurement
+      steps:
+        - from: measurement
+          entries: result_values
+          kind: loading
+          as: measured
+          where:
+            - prop: target
+              op: eq
+              value: ex:pi/species/pt
+      order_by:
+        - var: measured
+          prop: value
+          desc: true
+      return:
+        - measurement.name
+        - measured
+    expect:
+      status: answered
+      min_rows: 3
+      max_rows: 3
+      excluded:
+        missing_context: 1
+  - description: Ruthenium in the five-metal alloy, measured three ways on one sample - in the bulk (ICP-OES), at the
+      surface as prepared (XPS), and at the surface under CO oxidation conditions (near-ambient-pressure XPS) - with the
+      technique, information depth and state of each.
+    plan:
+      match:
+        label: Characterization
+        as: measurement
+      steps:
+        - from: measurement
+          edge: CHARACTERIZES
+          to: CatalystSample
+          as: specimen
+          edge_as: measured_in
+        - from: measurement
+          entries: result_values
+          kind: composition_fraction
+          as: ruthenium
+          where:
+            - prop: target
+              op: eq
+              value: ex:hea/species/ru
+      return:
+        - measurement.technique
+        - measurement.information_depth
+        - measured_in.state
+        - ruthenium
+    expect:
+      status: answered
+      min_rows: 3
+      max_rows: 3
+      values:
+        measured_in.state:
+          - as_prepared
+          - operating
+  - description: The alloy's nominal composition, from the salts weighed, on the Material, each fraction with origin
+      assumed.
+    plan:
+      match:
+        label: Material
+        as: alloy
+        where:
+          - prop: material_family
+            op: eq
+            value: alloy
+      steps:
+        - from: alloy
+          edge: HAS_COMPONENT
+          to: ChemicalSpecies
+          as: element
+          edge_as: nominal
+      return:
+        - alloy.nominal_formula
+        - element.formula
+        - nominal.fraction
+    expect:
+      status: answered
+      min_rows: 5
+      max_rows: 5

@@ -1,0 +1,154 @@
+# A competency question of the catalysis domain (tools/competency.py; `scale domains cq catalysis`).
+# It runs on public synthetic examples, so anyone can rerun it and see the same answer.
+id: CQ-20
+question: Which samples have a crystallite size from X-ray diffraction, and what do microscopy and light scattering
+  give instead, with the statistics behind each size?
+description: |
+  A size from microscopy (the projected diameters of the particles counted), from diffraction (the coherent-domain
+  size from the width of a reflection) and from light scattering (the hydrodynamic diameter of a particle with its
+  shell in a liquid) are three quantities, all in nm. Each is a result entry with its own Variable, whose quantity_kind
+  (microscopy_particle_size, crystallite_size, hydrodynamic_size) and definition say what was measured; a plan that asks for one
+  follows the entry to its Variable (a field step) and gets that one only. So a microscopy average never answers for a
+  crystallite size: batch 1 of the Pt catalyst has a HAADF-STEM mean of 2.1 nm, and its XRD shows no Pt reflection,
+  which the paper reads as crystallites below about 3 nm (a value below the detection limit, its limit 3 nm); the
+  crystallite sizes give that, never the 2.1 nm. The statistics of a distribution are entries of their
+  own: its mean, its standard deviation (the width of the distribution, never an uncertainty of the mean) and the
+  number of particles counted.
+documents:
+  - examples/scale-catal/preparation-examples/impregnation.json
+  - examples/scale-catal/preparation-examples/coprecipitation.json
+  - examples/scale-catal/preparation-examples/high-entropy-alloy.json
+plan:
+  question: Which samples have a crystallite size from XRD?
+  match:
+    label: Characterization
+    as: measurement
+  steps:
+    - from: measurement
+      edge: CHARACTERIZES
+      to: Sample
+      as: sample
+    - from: measurement
+      entries: result_values
+      as: size
+    - from: size
+      field: variable
+      to: Variable
+      as: measurand
+      where:
+        - prop: quantity_kind
+          op: eq
+          value: crystallite_size
+  return:
+    - sample.name
+    - measurement.technique
+    - size
+    - measurand.definition
+  evidence: true
+expect:
+  status: answered
+  min_rows: 5
+  max_rows: 5
+  values:
+    sample.name:
+      - 5 wt% Pt/gamma-Al2O3, batch 1
+      - 5 wt% Pt/gamma-Al2O3, batch 2
+      - PtPdRhRuIr/C
+variants:
+  - description: The same question for batch 1 of the Pt catalyst finds only its XRD result, below the detection limit
+      of about 3 nm; its microscopy mean of 2.1 nm does not answer for it.
+    plan:
+      steps:
+        - from: measurement
+          edge: CHARACTERIZES
+          to: Sample
+          as: sample
+          where:
+            - prop: id
+              op: eq
+              value: ex:pi/sample/batch-1
+        - from: measurement
+          entries: result_values
+          as: size
+        - from: size
+          field: variable
+          to: Variable
+          as: measurand
+          where:
+            - prop: quantity_kind
+              op: eq
+              value: crystallite_size
+    expect:
+      status: answered
+      min_rows: 1
+      max_rows: 1
+      values:
+        measurement.technique:
+          - powder X-ray diffraction
+  - description: Microscopy sizes, each with the statistic its Variable names (mean, standard deviation, particles
+      counted), so a mean, its spread and its count come back as three entries.
+    plan:
+      steps:
+        - from: measurement
+          edge: CHARACTERIZES
+          to: Sample
+          as: sample
+        - from: measurement
+          entries: result_values
+          as: statistic
+        - from: statistic
+          field: variable
+          to: Variable
+          as: measurand
+          where:
+            - prop: quantity_kind
+              op: in
+              value:
+                - microscopy_particle_size
+                - microscopy_particle_size_spread
+                - count
+      return:
+        - sample.name
+        - measurand.name
+        - statistic
+    expect:
+      status: answered
+      min_rows: 9
+      max_rows: 9
+  - description: The five-metal alloy has all three sizes, each from its own technique and on its own specimen (the
+      hydrodynamic size on the colloid before deposition).
+    plan:
+      steps:
+        - from: measurement
+          edge: CHARACTERIZES
+          to: Sample
+          as: sample
+        - from: measurement
+          entries: result_values
+          as: size
+        - from: size
+          field: variable
+          to: Variable
+          as: measurand
+          where:
+            - prop: quantity_kind
+              op: in
+              value:
+                - microscopy_particle_size
+                - crystallite_size
+                - hydrodynamic_size
+            - prop: id
+              op: in
+              value:
+                - ex:hea/variable/dls-hydrodynamic-size
+                - ex:hea/variable/stem-mean-diameter
+                - ex:hea/variable/xrd-crystallite-size
+      return:
+        - sample.name
+        - measurement.technique
+        - measurand.quantity_kind
+        - size
+    expect:
+      status: answered
+      min_rows: 3
+      max_rows: 3

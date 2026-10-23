@@ -82,6 +82,14 @@ def cmd_graph_validate(args):
                   f"{ {k: r['summary'][k] for k in ('error', 'warning')} } {r['counts']}")
             for i in r["errors"][:50] + (r["warnings"][:20] if args.verbose else []):
                 print(f"  {i['record']}: {i['message']}")
+            bal = r.get("balance")
+            if bal:                                 # atom and charge balance of reactions and steps (advisory, never rewritten)
+                print(f"  balance: {bal['checked']} reactions and steps with participants; atoms {bal['atoms']}, "
+                      f"charge {bal['charge']}")
+                for b in bal["records"] if args.verbose else []:
+                    for check in ("atoms", "charge"):
+                        if b[check]["status"] == "not_checkable":
+                            print(f"    {b['record']}: {check} not checkable: {'; '.join(b[check]['missing'])}")
             lc = r["summary"].get("source_lifecycle")
             if lc:                                  # notices recorded: what rests on retracted sources (flagged, not rewritten)
                 print(f"  source lifecycle: sources {lc['sources_by_status'] or 'with no notice'}, {lc['sources_checked']} checked; "
@@ -389,7 +397,47 @@ def cmd_graph_describe(args):
     from . import pgraph
     hint = {"graph": {"follows_domains": [args.profile]}} if args.profile else None   # picks the domain that has it
     spec = pgraph.load_spec(pgraph.spec_path(_repo(args), args.spec, hint))
-    _emit(pgraph.describe(spec, args.names or None, args.profile), args)
+    _emit(pgraph.describe(spec, args.names or None, args.profile, _mapping_index(_repo(args))), args)
+
+
+def _mapping_index(repo):
+    """SCALE's terms mapped to ontology terms, by subject (none in a repository without the registry)."""
+    from . import layout, mappings
+    try:
+        return mappings.index(repo) if (Path(repo) / layout.ONTOLOGY_REGISTRY).is_file() else None
+    except ScaleError:
+        return None
+
+
+def cmd_schema_mappings(args):
+    from . import mappings
+    repo = _repo(args)
+    if args.check:
+        res = mappings.check(repo)
+        if args.json:
+            print(to_json(res))
+        else:
+            for e in res["errors"]:
+                print(f"error   {e['where']}: {e['message']}")
+            for w in res["warnings"]:
+                print(f"warning {w['where']}: {w['message']}")
+            n = sum(res["counts"].values())
+            print(f"{n} mappings ({', '.join(f'{k} {v}' for k, v in res['counts'].items())}): "
+                  + ("every one on a term of the schema and of a registered ontology" if res["ok"]
+                     else f"{len(res['errors'])} error(s)"))
+        return 0 if res["ok"] else 1
+    layer = None if args.layer == "all" else args.layer
+    if args.subdomains:
+        _emit(mappings.subdomains(repo) if args.format == "json" else mappings.subdomains_text(repo), args)
+        return 0
+    if args.format == "sssom":
+        if layer is None:
+            raise ScaleError("--format sssom writes one layer's set: name it with --layer kernel or --layer catalysis")
+        from .domains import schema_version
+        _emit(mappings.sssom(repo, layer, schema_version(repo)), args)
+        return 0
+    _emit(mappings.rows(repo, layer) if args.format == "json" else mappings.text(repo, layer), args)
+    return 0
 
 
 def cmd_graph_verify(args):
@@ -649,7 +697,22 @@ def cmd_review_sample(args):
         ids = {n["id"] for n in doc.get("nodes", [])}
         nonconf = [v["record"] for c in ((rep.conformance or {}).get("profiles") or {}).values() for v in c["violations"]]
         flagged = sorted({w["record"] for w in rep.warnings} | set(nonconf) & ids)
-    _emit({"fraction": frac, "seed": args.seed, "sample": sample_records(doc, 1.0 if args.full else frac, args.seed, flagged)}, args)
+    sample = sample_records(doc, 1.0 if args.full else frac, args.seed, flagged)
+    selection = "all" if args.full else ("sample_and_flagged" if args.include_flagged else "sample")
+    # the check to record once a person has made it (graph.checks, a record_check): what the sample fixes, filled in
+    check = {"records": [r["id"] for r in sample], "selection": selection,
+             **({} if args.full else {"fraction": frac, "seed": args.seed})}
+    _emit({"fraction": frac, "seed": args.seed, "sample": sample, "check": check,
+           "to_record": "after the check, add checked_by (a Person), checked_on, scope, outcome and the counts "
+                        "(fields_checked, fields_wrong, fields_missed) to check, and append it to the graph's checks"}, args)
+
+
+def cmd_trace_ai(args):
+    """The TRACE-AI checklist read on a document's records (docs/trace-ai.md)."""
+    from .traceai import assess, load_crosswalk, render_markdown
+    doc = load_doc(args.graph)
+    rep = assess(doc, _graph_spec(args, doc), load_crosswalk(_repo(args)), args.source)
+    _emit(rep, args, markdown=render_markdown(rep))
 
 
 def cmd_check(args):
@@ -1283,6 +1346,11 @@ def build_parser() -> argparse.ArgumentParser:
     sp.add_argument("--include-flagged", action="store_true", help="add records with warnings or checklist violations")
     sp.add_argument("--spec", help="a schema manifest (default: chosen by the document)"); out_opts(sp)
 
+    sp = add("trace-ai", cmd_trace_ai, "the TRACE-AI checklist read on a document's records: what they support, the gaps, "
+                                       "and what a person checks in the source (docs/trace-ai.md)")
+    sp.add_argument("graph"); sp.add_argument("--source", help="only the records of this Source (its id)")
+    sp.add_argument("--spec", help="a schema manifest (default: chosen by the document)"); out_opts(sp, ("markdown", "json"))
+
     sc = sub.add_parser("schema", help="a schema change on a branch: its diff, the version bump, its checks").add_subparsers(
         dest="sub", required=True)
     for name, fn, hlp in (("diff", cmd_schema_diff, "what the branch changes in the schema against the base, its kind "
@@ -1299,6 +1367,18 @@ def build_parser() -> argparse.ArgumentParser:
             sp.add_argument("--json", action="store_true", help="machine-readable result")
         if name == "check":
             sp.add_argument("--comment", help="also write the reviewer's summary (Markdown) here")
+
+    sp = add("mappings", cmd_schema_mappings, "SCALE's terms mapped to ontology terms (core/mappings/, domain/mappings/): "
+             "list them, check them, export a layer's set as SSSOM, or show the subdomains of catalysis research", sc)
+    sp.add_argument("--layer", choices=["all", "kernel", "catalysis"], default="all", help="whose set (default: both)")
+    sp.add_argument("--subdomains", action="store_true", help="the subdomains of catalysis research (Ontologies4Cat): "
+                    "what SCALE records for each and how the ontologies are rated for it")
+    sp.add_argument("--check", action="store_true", help="check the registry and the sets against the head schema "
+                    "(exit 1 on an error; scale domains check runs it too)")
+    sp.add_argument("--json", action="store_true", help="--check: machine-readable result")
+    sp.add_argument("--out", help="write output to a file")
+    sp.add_argument("--format", choices=["text", "json", "sssom"], default="text",
+                    help="text (default), json, or sssom (SSSOM TSV, one layer)")
 
     sp = add("check", cmd_check, "run every check of CI's test jobs (tests, release digests, schemas, domains, "
              "competency questions, style, links, invalid fixtures)")

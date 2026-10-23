@@ -1,0 +1,889 @@
+# The science kernel's labels and edge types mapped to terms of other ontologies (core/mappings/ontologies.yaml
+# lists them). A mapping says how a SCALE term relates to a term someone else defines; it changes nothing that
+# SCALE validates or queries.
+#
+# Each entry is keyed by a SCALE term: a label (Experiment), an edge type (HAS_INPUT), a property
+# (Label.property) or a value of one (Label.property=value). `match` says how the two relate, as SKOS mapping
+# relations do:
+#   exact     the two mean the same and can be used one for the other
+#   close     they mean nearly the same; fine for search, not for automatic reasoning
+#   broad     the other term is broader: every SCALE one is one of them, not the other way round
+#   narrow    the other term is narrower: every one of them is a SCALE one, not the other way round
+#   related   they are associated (a thing and the role it plays, a process and its record), neither is the other
+# `label` is the other term's label as its ontology gives it, so that a reader sees what it is and a misspelt
+# identifier shows; `note` says why, where the match is not obvious. Every term was looked up in the release
+# its ontology's entry names (checked), and none is obsolete.
+#
+# `kinds` maps the quantity kinds of the kernel's quantity contracts, by name, and `units` the units its unit
+# vocabulary reads, spelled as SCALE reads them, to QUDT (and a kind to SBO). SCALE reads a unit by its dimension only:
+# a gallon, a ton, a calorie or a Btu is whichever one the source printed, so each of QUDT's definitions of it is
+# narrower (narrow); normal and standard volumes do not fix their reference conditions, and QUDT counts them as
+# amounts of substance (close). A kind is broad only where every dimension SCALE reads it in is the QUDT kind's
+# (a conversion is a dimensionless ratio), narrow where QUDT's kind is one form SCALE's takes (a molar flow rate),
+# and related where neither holds (a reaction energy in eV or kJ/mol; QUDT's local current density, a vector).
+#
+# The kernel's own `maps_to` (in core/graph/kernel.yaml) names related vocabulary terms in words; this set gives
+# their identifiers where an ontology defines one. Checked by `scale domains check`; listed by
+# `scale schema mappings`. See docs/mappings.md.
+mapping_set: kernel-mappings
+title: The science kernel's terms mapped to ontology terms
+maps: core/graph/kernel.yaml
+checked: '2026-10-20'
+mappings:
+  Question:
+  - match: related
+    term: SIO:000085
+    label: question
+    note: SIO's question is any request for information; a SCALE Question is a research question or problem.
+  Hypothesis:
+  - match: close
+    term: SIO:000284
+    label: hypothesis
+  Prediction:
+  - match: narrow
+    term: OBI:0001934
+    label: predicted value
+    note: OBI's predicted value is an estimate of a value; a SCALE Prediction can also be a qualitative expectation.
+  - match: related
+    term: OBI:0302910
+    label: prediction
+    note: OBI's prediction is the process of predicting; a SCALE Prediction is what it expects.
+  Experiment:
+  - match: broad
+    term: COB:0000082
+    label: planned process
+    note: "COB's planned process is one an agent has started, completed or not; a SCALE experiment may also be only
+      proposed or planned (experiment_status). OBI's planned process (OBI:0000011), which the kernel's maps_to
+      names, is obsolete."
+  - match: narrow
+    term: OBI:0000070
+    label: assay
+    note: An assay examines a material entity; a SCALE Experiment can also be a computation.
+  - match: narrow
+    term: SIO:000994
+    label: experiment
+    note: SIO's experiment tests a hypothesis; a SCALE Experiment need not.
+  - match: broad
+    term: prov:Activity
+    label: Activity
+    note: A PROV activity is one that occurred or is occurring; a SCALE experiment may also be only proposed or planned.
+  Experiment.experiment_status=completed:
+  - match: broad
+    term: COB:0000035
+    label: completely executed planned process
+    note: The term OBI's obsolete planned process (OBI:0000011) points to; a SCALE experiment is one once completed.
+  Procedure:
+  - match: broad
+    term: COB:0000082
+    label: planned process
+    note: A SCALE procedure may also be only proposed or planned (procedure_status).
+  - match: broad
+    term: prov:Activity
+    label: Activity
+    note: A PROV activity is one that occurred or is occurring; a SCALE procedure may also be only proposed or planned.
+  Procedure.procedure_status=completed:
+  - match: close
+    term: COB:0000110
+    label: material processing
+    note: COB's material processing is completely executed and makes material entities from others.
+  Protocol:
+  - match: close
+    term: OBI:0000272
+    label: protocol
+  - match: broad
+    term: IAO:0000104
+    label: plan specification
+  Design:
+  - match: close
+    term: OBI:0500000
+    label: study design
+  Variable:
+  - match: close
+    term: STATO:0000258
+    label: variable
+  Claim:
+  - match: close
+    term: SEPIO:0000001
+    label: assertion
+  - match: narrow
+    term: IAO:0000144
+    label: conclusion textual entity
+  ObjectOfStudy:
+  - match: close
+    term: sosa:FeatureOfInterest
+    label: Feature Of Interest
+  - match: related
+    term: OBI:0000067
+    label: evaluant role
+    note: The role an object of study plays in an assay.
+  Instrument:
+  - match: broad
+    term: COB:0001300
+    label: device
+    note: OBI's device (OBI:0000968) is obsolete and replaced by this term.
+  Model:
+  - match: close
+    term: SIO:000510
+    label: model
+  Source:
+  - match: close
+    term: IAO:0000310
+    label: document
+  - match: close
+    term: dcterms:BibliographicResource
+    label: Bibliographic Resource
+  Dataset:
+  - match: close
+    term: dcat:Dataset
+    label: Dataset
+  Person:
+  - match: close
+    term: foaf:Person
+    label: Person
+  - match: close
+    term: prov:Person
+    label: Person
+  Institution:
+  - match: close
+    term: OBI:0000245
+    label: organization
+  - match: close
+    term: schema:Organization
+    label: Organization
+  - match: close
+    term: prov:Organization
+    label: Organization
+  Project:
+  - match: close
+    term: schema:ResearchProject
+    label: ResearchProject
+  Software:
+  - match: close
+    term: IAO:0000010
+    label: software
+  - match: close
+    term: schema:SoftwareApplication
+    label: SoftwareApplication
+  - match: related
+    term: prov:SoftwareAgent
+    label: SoftwareAgent
+    note: PROV's software agent is software acting as an agent in an activity.
+  HAS_PART:
+  - match: close
+    term: BFO:0000051
+    label: has part
+  PART_OF:
+  - match: close
+    term: BFO:0000050
+    label: part of
+  PRECEDES:
+  - match: close
+    term: BFO:0000063
+    label: precedes
+  HAS_INPUT:
+  - match: close
+    term: OBI:0000293
+    label: has specified input
+  - match: close
+    term: prov:used
+    label: used
+  HAS_OUTPUT:
+  - match: close
+    term: OBI:0000299
+    label: has specified output
+  - match: close
+    term: prov:generated
+    label: generated
+  PERFORMED_BY:
+  - match: close
+    term: OBI:0001950
+    label: has performer
+  - match: close
+    term: prov:wasAssociatedWith
+    label: wasAssociatedWith
+  SUPPORTS:
+  - match: close
+    term: RO:0002472
+    label: is evidence for
+  EXAMINES:
+  - match: close
+    term: sosa:hasFeatureOfInterest
+    label: has feature of interest
+  REVISES:
+  - match: close
+    term: prov:wasRevisionOf
+    label: wasRevisionOf
+  AUTHORED_BY:
+  - match: close
+    term: dcterms:creator
+    label: Creator
+  - match: broad
+    term: prov:wasAttributedTo
+    label: wasAttributedTo
+  SUPERSEDES:
+  - match: close
+    term: dcterms:replaces
+    label: Replaces
+  MEMBER_OF:
+  - match: close
+    term: schema:memberOf
+    label: memberOf
+  FUNDED_BY:
+  - match: close
+    term: schema:funder
+    label: funder
+kinds:
+  temperature:
+  - match: close
+    term: quantitykind:Temperature
+    label: Temperature
+  pressure:
+  - match: close
+    term: quantitykind:Pressure
+    label: Pressure
+    note: SCALE keeps absolute and gauge pressures apart by their convention.
+  electrode_potential:
+  - match: broad
+    term: quantitykind:ElectricPotential
+    label: Electric Potential
+    note: "An electrode potential is measured against a reference electrode, on a stated scale."
+  electric_potential:
+  - match: close
+    term: quantitykind:ElectricPotentialDifference
+    label: Electric Potential Difference
+  electric_current:
+  - match: close
+    term: quantitykind:ElectricCurrent
+    label: Electric Current
+  current_density:
+  - match: related
+    term: quantitykind:ElectricCurrentDensity
+    label: Electric Current Density
+    note: "QUDT's is the local current density, a vector; SCALE's is a reported current divided by an electrode area
+      or a catalyst mass."
+  concentration:
+  - match: narrow
+    term: quantitykind:AmountOfSubstanceConcentration
+    label: Amount of Substance of Concentration
+    note: "SCALE's concentration may also be a mass concentration or a molality."
+  - match: narrow
+    term: quantitykind:MassConcentration
+    label: Mass Concentration
+    note: "SCALE's concentration may also be an amount concentration or a molality."
+  - match: narrow
+    term: quantitykind:MolalityOfSolute
+    label: Molality of Solute
+    note: "SCALE's concentration may also be an amount or a mass per volume of the mixture."
+  composition_fraction:
+  - match: narrow
+    term: quantitykind:AmountOfSubstanceFraction
+    label: Fractional Amount of Substance
+    note: "SCALE's share may also be by mass, atoms or volume."
+  - match: narrow
+    term: quantitykind:VolumeFraction
+    label: Volume Fraction
+    note: "SCALE's share may also be by mass, mole or atoms."
+  flow_rate:
+  - match: narrow
+    term: quantitykind:VolumeFlowRate
+    label: Volume Flow Rate
+    note: "SCALE's flow rate may also be molar or by mass."
+  - match: narrow
+    term: quantitykind:MolarFlowRate
+    label: Molar Flow Rate
+    note: "SCALE's flow rate may also be volumetric or by mass."
+  - match: narrow
+    term: quantitykind:MassFlowRate
+    label: Mass Flow Rate
+    note: "SCALE's flow rate may also be volumetric or molar."
+  product_amount:
+  - match: related
+    term: quantitykind:AmountOfSubstance
+    label: Amount of Substance
+    note: "QUDT's is any amount of substance; SCALE's is the amount of one product formed, and may also be a mass or a
+      gas volume."
+  site_count:
+  - match: related
+    term: quantitykind:Count
+    label: Count
+    note: "QUDT's is any count of items; SCALE's counts sites, and may also be an amount (µmol) or per catalyst mass."
+  efficiency:
+  - match: narrow
+    term: quantitykind:Efficiency
+    label: Efficiency
+    note: "QUDT's efficiency is a ratio of output to input power; SCALE's may also be of charge or photons (IPCE)."
+  faradaic_efficiency:
+  - match: broad
+    term: quantitykind:DimensionlessRatio
+    label: Dimensionless Ratio
+    note: "A share of the charge passed, not QUDT's efficiency, which is a ratio of powers."
+  turnover_frequency:
+  - match: broad
+    term: quantitykind:InverseTime
+    label: Inverse Time
+  - match: narrow
+    term: SBO:0000025
+    label: catalytic rate constant
+    note: SBO's catalytic rate constant (kcat) is an enzyme's turnover frequency at substrate saturation.
+  electronic_energy:
+  - match: broad
+    term: quantitykind:Energy
+    label: Energy
+  reaction_energy:
+  - match: related
+    term: quantitykind:Energy
+    label: Energy
+    note: "A change of energy, which SCALE also reads per mole (kJ/mol), QUDT's molar energy."
+  - match: related
+    term: quantitykind:MolarEnergy
+    label: Molar Energy
+    note: "A reaction energy per mole of reaction; SCALE also reads one per structure (eV)."
+  reaction_enthalpy:
+  - match: related
+    term: quantitykind:Enthalpy
+    label: Enthalpy
+    note: "A change of enthalpy, which SCALE also reads per mole (kJ/mol), QUDT's molar energy."
+  - match: related
+    term: quantitykind:MolarEnergy
+    label: Molar Energy
+    note: "A reaction enthalpy per mole of reaction; SCALE also reads one per structure (eV)."
+  reaction_free_energy:
+  - match: related
+    term: quantitykind:GibbsEnergy
+    label: Gibbs Energy
+    note: "SCALE's free energy may also be grand-canonical, at constant potential, and per mole (kJ/mol)."
+  conversion:
+  - match: broad
+    term: quantitykind:DimensionlessRatio
+    label: Dimensionless Ratio
+  selectivity:
+  - match: broad
+    term: quantitykind:DimensionlessRatio
+    label: Dimensionless Ratio
+  product_yield:
+  - match: broad
+    term: quantitykind:DimensionlessRatio
+    label: Dimensionless Ratio
+  fraction:
+  - match: broad
+    term: quantitykind:DimensionlessRatio
+    label: Dimensionless Ratio
+  species_fraction:
+  - match: broad
+    term: quantitykind:DimensionlessRatio
+    label: Dimensionless Ratio
+  balance:
+  - match: broad
+    term: quantitykind:DimensionlessRatio
+    label: Dimensionless Ratio
+  site_fraction:
+  - match: broad
+    term: quantitykind:DimensionlessRatio
+    label: Dimensionless Ratio
+  quantum_yield:
+  - match: broad
+    term: quantitykind:DimensionlessRatio
+    label: Dimensionless Ratio
+  photonic_yield:
+  - match: broad
+    term: quantitykind:DimensionlessRatio
+    label: Dimensionless Ratio
+  degree_of_rate_control:
+  - match: broad
+    term: quantitykind:DimensionlessRatio
+    label: Dimensionless Ratio
+  enzyme_activity:
+  - match: narrow
+    term: SBO:0000559
+    label: enzyme activity
+    note: SBO's enzyme activity is per time; SCALE's may also be per mass (U/mg) or per volume (U/mL).
+  - match: narrow
+    term: SBO:0000558
+    label: specific activity
+    note: SBO's specific activity is per mass of enzyme; SCALE's may also be per time or per volume.
+  - match: related
+    term: quantitykind:CatalyticActivity
+    label: Catalytic Activity
+    note: "QUDT's is the activity of any catalyst, per time (katal); SCALE's is an enzyme's or a whole-cell
+      preparation's, and may also be per mass or per volume."
+  michaelis_constant:
+  - match: close
+    term: SBO:0000027
+    label: Michaelis constant
+  energy_consumption:
+  - match: related
+    term: quantitykind:SpecificEnergy
+    label: Specific Energy
+    note: "QUDT's is any energy per mass; SCALE's is the energy supplied per mass or per amount of one product."
+units:
+  "°C":
+  - match: exact
+    term: unit:DEG_C
+    label: Degree Celsius
+  K:
+  - match: exact
+    term: unit:K
+    label: Kelvin
+  "°F":
+  - match: exact
+    term: unit:DEG_F
+    label: Degree Fahrenheit
+  "°R":
+  - match: exact
+    term: unit:DEG_R
+    label: Degree Rankine
+  s:
+  - match: exact
+    term: unit:SEC
+    label: Second
+  min:
+  - match: exact
+    term: unit:MIN
+    label: Minute
+  h:
+  - match: exact
+    term: unit:HR
+    label: Hour
+  d:
+  - match: exact
+    term: unit:DAY
+    label: Day
+  week:
+  - match: exact
+    term: unit:WK
+    label: Week
+  yr:
+  - match: close
+    term: unit:YR
+    label: Year
+    note: SCALE does not say which year it means.
+  m:
+  - match: exact
+    term: unit:M
+    label: Metre
+  cm:
+  - match: exact
+    term: unit:CentiM
+    label: Centimetre
+  mm:
+  - match: exact
+    term: unit:MilliM
+    label: Millimetre
+  "μm":
+  - match: exact
+    term: unit:MicroM
+    label: Micrometre
+  nm:
+  - match: exact
+    term: unit:NanoM
+    label: Nanometre
+  "Å":
+  - match: exact
+    term: unit:ANGSTROM
+    label: Angstrom
+  in:
+  - match: exact
+    term: unit:IN
+    label: Inch
+  ft:
+  - match: exact
+    term: unit:FT
+    label: Foot
+  m2:
+  - match: exact
+    term: unit:M2
+    label: Square Metre
+  cm2:
+  - match: exact
+    term: unit:CentiM2
+    label: Square Centimetre
+  L:
+  - match: exact
+    term: unit:L
+    label: Litre
+  mL:
+  - match: exact
+    term: unit:MilliL
+    label: Millilitre
+  "μL":
+  - match: exact
+    term: unit:MicroL
+    label: Microlitre
+  cc:
+  - match: exact
+    term: unit:CentiM3
+    label: Cubic Centimetre
+  m3:
+  - match: exact
+    term: unit:M3
+    label: Cubic Metre
+  gal:
+  - match: narrow
+    term: unit:GAL_US
+    label: Us Gallon
+    note: "SCALE reads a gallon as printed, without saying US or UK."
+  - match: narrow
+    term: unit:GAL_UK
+    label: Gallon (UK)
+    note: "SCALE reads a gallon as printed, without saying US or UK."
+  g:
+  - match: exact
+    term: unit:GM
+    label: Gram
+  mg:
+  - match: exact
+    term: unit:MilliGM
+    label: Milligram
+  kg:
+  - match: exact
+    term: unit:KiloGM
+    label: Kilogram
+  lb:
+  - match: exact
+    term: unit:LB
+    label: Pound Mass
+  tonne:
+  - match: exact
+    term: unit:TONNE
+    label: Tonne
+  ton:
+  - match: narrow
+    term: unit:TON_Metric
+    label: Metric Ton
+    note: "SCALE reads a ton as printed, without saying metric, short or long."
+  - match: narrow
+    term: unit:TON_SHORT
+    label: Short Ton
+    note: "SCALE reads a ton as printed, without saying metric, short or long."
+  - match: narrow
+    term: unit:TON_LONG
+    label: Long Ton
+    note: "SCALE reads a ton as printed, without saying metric, short or long."
+  mol:
+  - match: exact
+    term: unit:MOL
+    label: Mole
+  mmol:
+  - match: exact
+    term: unit:MilliMOL
+    label: Millimole
+  "μmol":
+  - match: exact
+    term: unit:MicroMOL
+    label: Micromole
+  lbmol:
+  - match: exact
+    term: unit:MOL_LB
+    label: Pound Mole
+  A:
+  - match: exact
+    term: unit:A
+    label: Ampere
+  mA:
+  - match: exact
+    term: unit:MilliA
+    label: Milliampere
+  V:
+  - match: exact
+    term: unit:V
+    label: Volt
+  mV:
+  - match: exact
+    term: unit:MilliV
+    label: Millivolt
+  kV:
+  - match: exact
+    term: unit:KiloV
+    label: Kilovolt
+  W:
+  - match: exact
+    term: unit:W
+    label: Watt
+  mW:
+  - match: exact
+    term: unit:MilliW
+    label: Milliwatt
+  kW:
+  - match: exact
+    term: unit:KiloW
+    label: Kilowatt
+  J:
+  - match: exact
+    term: unit:J
+    label: Joule
+  kJ:
+  - match: exact
+    term: unit:KiloJ
+    label: Kilojoule
+  MJ:
+  - match: exact
+    term: unit:MegaJ
+    label: Megajoule
+  eV:
+  - match: exact
+    term: unit:EV
+    label: Electron Volt
+  Wh:
+  - match: exact
+    term: unit:W-HR
+    label: Watt Hour
+  kWh:
+  - match: exact
+    term: unit:KiloW-HR
+    label: Kilowatt Hour
+  cal:
+  - match: narrow
+    term: unit:CAL_TH
+    label: Thermochemical Calorie
+    note: "SCALE reads a calorie as printed, without saying thermochemical or international."
+  - match: narrow
+    term: unit:CAL_IT
+    label: International Table Calorie
+    note: "SCALE reads a calorie as printed, without saying thermochemical or international."
+  kcal:
+  - match: narrow
+    term: unit:KiloCAL_TH
+    label: Kilo Thermochemical Calorie
+    note: "SCALE reads a calorie as printed, without saying thermochemical or international."
+  - match: narrow
+    term: unit:KiloCAL_IT
+    label: Kilo International Table Calorie
+    note: "SCALE reads a calorie as printed, without saying thermochemical or international."
+  Btu:
+  - match: narrow
+    term: unit:BTU_IT
+    label: British Thermal Unit (international Definition)
+    note: "SCALE reads a Btu as printed, without saying which definition."
+  - match: narrow
+    term: unit:BTU_TH
+    label: British Thermal Unit (thermochemical Definition)
+    note: "SCALE reads a Btu as printed, without saying which definition."
+  Ha:
+  - match: exact
+    term: unit:E_h
+    label: Hartree
+  Hz:
+  - match: exact
+    term: unit:HZ
+    label: Hertz
+  kHz:
+  - match: exact
+    term: unit:KiloHZ
+    label: Kilohertz
+  MHz:
+  - match: exact
+    term: unit:MegaHZ
+    label: Megahertz
+  GHz:
+  - match: exact
+    term: unit:GigaHZ
+    label: Gigahertz
+  Pa:
+  - match: exact
+    term: unit:PA
+    label: Pascal
+  kPa:
+  - match: exact
+    term: unit:KiloPA
+    label: Kilopascal
+  MPa:
+  - match: exact
+    term: unit:MegaPA
+    label: Megapascal
+  bar:
+  - match: exact
+    term: unit:BAR
+    label: Bar
+  mbar:
+  - match: exact
+    term: unit:MilliBAR
+    label: Millibar
+  bara:
+  - match: exact
+    term: unit:BAR_A
+    label: Bar Absolute
+  Torr:
+  - match: exact
+    term: unit:TORR
+    label: Torr
+  atm:
+  - match: exact
+    term: unit:ATM
+    label: Standard Atmosphere
+  at:
+  - match: exact
+    term: unit:ATM_T
+    label: Technical Atmosphere
+  psi:
+  - match: exact
+    term: unit:PSI
+    label: Psi
+  mmHg:
+  - match: exact
+    term: unit:MilliM_HG
+    label: Millimetre of Mercury
+  cmHg:
+  - match: exact
+    term: unit:CentiM_HG
+    label: Centimetre of Mercury
+  inHg:
+  - match: exact
+    term: unit:IN_HG
+    label: Inch of Mercury
+  kgf:
+  - match: exact
+    term: unit:KiloGM_F
+    label: Kilo Gram Force
+  lbf:
+  - match: exact
+    term: unit:LB_F
+    label: Pound Force
+  "%":
+  - match: exact
+    term: unit:PERCENT
+    label: Percent
+    note: "The share's basis (mass, mole, volume) is a separate context in SCALE."
+  "‰":
+  - match: exact
+    term: unit:PERMILLE
+    label: Permille
+  ppm:
+  - match: exact
+    term: unit:PPM
+    label: Parts per Million
+    note: "The share's basis (mass, mole, volume) is a separate context in SCALE."
+  ppb:
+  - match: exact
+    term: unit:PPB
+    label: Parts per Billion
+  U:
+  - match: exact
+    term: unit:ENZ
+    label: Enzyme Unit
+    note: SCALE reads U as the enzyme unit, one micromole per minute; QUDT's unit:U is the unified atomic mass unit.
+  kat:
+  - match: exact
+    term: unit:KAT
+    label: Katal
+    note: "The share's basis (mass, mole, volume) is a separate context in SCALE."
+  mol/L:
+  - match: exact
+    term: unit:MOL-PER-L
+    label: Mole per Litre
+  M:
+  - match: exact
+    term: unit:MOL-PER-DeciM3
+    label: Mole per Cubic Decimetre
+    note: "SCALE's molar, one mole per litre."
+  mmol/L:
+  - match: exact
+    term: unit:MilliMOL-PER-L
+    label: Millimole per Litre
+  "μmol/L":
+  - match: exact
+    term: unit:MicroMOL-PER-L
+    label: Micromole per Litre
+  mol/m3:
+  - match: exact
+    term: unit:MOL-PER-M3
+    label: Mole per Cubic Metre
+  mol/kg:
+  - match: exact
+    term: unit:MOL-PER-KiloGM
+    label: Mole per Kilogram
+  mL/min:
+  - match: exact
+    term: unit:MilliL-PER-MIN
+    label: Millilitre per Minute
+  L/min:
+  - match: exact
+    term: unit:L-PER-MIN
+    label: Litre per Minute
+  L/h:
+  - match: exact
+    term: unit:L-PER-HR
+    label: Litre per Hour
+  m3/h:
+  - match: exact
+    term: unit:M3-PER-HR
+    label: Cubic Metre per Hour
+  mol/s:
+  - match: exact
+    term: unit:MOL-PER-SEC
+    label: Mole per Second
+  kg/h:
+  - match: exact
+    term: unit:KiloGM-PER-HR
+    label: Kilogram per Hour
+  Nm3:
+  - match: close
+    term: unit:NCM
+    label: Normal Cubic Metre
+    note: "SCALE reads a volume at normal conditions without fixing their temperature and pressure. QUDT counts it as
+      an amount of substance and gives it no conversion factor, so QUDT's factors do not convert SCALE's volumes."
+  scf:
+  - match: close
+    term: unit:SCF
+    label: Standard Cubic Foot
+    note: "SCALE reads a volume at standard conditions without fixing their temperature and pressure. QUDT counts it
+      as an amount of substance (1.1981 mol), so QUDT's factors do not convert SCALE's volumes."
+  h-1:
+  - match: exact
+    term: unit:PER-HR
+    label: Reciprocal Hour
+  min-1:
+  - match: exact
+    term: unit:PER-MIN
+    label: Reciprocal Minute
+  s-1:
+  - match: exact
+    term: unit:PER-SEC
+    label: Reciprocal Second
+  m2/g:
+  - match: exact
+    term: unit:M2-PER-GM
+    label: Square Metre per Gram
+  mmol/g:
+  - match: exact
+    term: unit:MilliMOL-PER-GM
+    label: Millimole per Gram
+  "μmol/g":
+  - match: exact
+    term: unit:MicroMOL-PER-GM
+    label: Micromole per Gram
+  kJ/mol:
+  - match: exact
+    term: unit:KiloJ-PER-MOL
+    label: Kilojoule per Mole
+  J/mol:
+  - match: exact
+    term: unit:J-PER-MOL
+    label: Joule per Mole
+  J/(mol·K):
+  - match: exact
+    term: unit:J-PER-MOL-K
+    label: Joule per Mole Kelvin
+  A/cm2:
+  - match: exact
+    term: unit:A-PER-CentiM2
+    label: Ampere per Square Centimetre
+  W/cm2:
+  - match: exact
+    term: unit:W-PER-CentiM2
+    label: Watt per Square Centimetre
+  W/m2:
+  - match: exact
+    term: unit:W-PER-M2
+    label: Watt per Square Metre
+  mol/(g·h):
+  - match: exact
+    term: unit:MOL-PER-GM-HR
+    label: Mole per Gram Hour
+  "μmol/(g·h)":
+  - match: exact
+    term: unit:MicroMOL-PER-GM-HR
+    label: Micromole per Gram Hour
+  g/kWh:
+  - match: exact
+    term: unit:GM-PER-KiloW-HR
+    label: Gram per Kilowatt Hour

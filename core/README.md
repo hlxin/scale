@@ -25,6 +25,7 @@ The science kernel, [`graph/kernel.yaml`](graph/kernel.yaml) (`scale-kernel`):
 | `graph/kernel.yaml` | the science kernel (it carries no version of its own) |
 | `graph/frozen/` | the kernel of each earlier schema version (`kernel-<version>.yaml`, `SHA256SUMS`), written when a schema change moves the schema on (`scale schema bump`); none yet |
 | `graph/README.md` | [the two layers and how a domain builds on the kernel](graph/README.md) |
+| `mappings/ontologies.yaml`, `mappings/kernel.yaml` | the ontologies SCALE's terms are mapped to, and the kernel's labels and edge types mapped to their terms (OBI, IAO, COB, SIO, PROV and others; [mappings](../docs/mappings.md)) |
 | `examples/science-kernel-only.yaml`, `examples/science-examples/` | the kernel on its own, with five synthetic cases ([examples](examples/README.md)) |
 | `tests/` | the kernel's tests |
 
@@ -48,7 +49,7 @@ kernel identifier; `scale domains check` reports both.
 ## One version
 
 - **The schema has one version for the kernel and the catalysis domain together**: the `version` of the
-  catalysis manifest, `domain/graph/scale-catal.yaml`. Today the schema is at 0.5.2 (kernel and catalysis
+  catalysis manifest, `domain/graph/scale-catal.yaml`. Today the schema is at 0.7.4 (kernel and catalysis
   together). The kernel file carries no version of its own (one that states one does not load); `CORE.yaml`
   states the same number (`version`), as do `domain/DOMAIN.yaml`, `scale-release.yaml` (`schema_version`) and
   `examples/science-kernel-only.yaml`, and `scale domains check` requires them to agree.
@@ -88,6 +89,7 @@ kernel identifier; `scale domains check` reports both.
 | `scope` | what the core covers |
 | `compatibility` | the versioning policy above |
 | `examples`, `tests`, `docs` | paths, relative to `core/` |
+| `mappings` | the kernel's terms mapped to ontology terms (always `mappings/kernel.yaml`), checked by `scale domains check` ([mappings](../docs/mappings.md)) |
 | `example_documents` | `graph`: kernel-only documents (globs allowed) that `scale domains check` validates against the kernel of the version they pin |
 | `review_areas` | `[kernel]` |
 | `contributors` | credit for core, tooling and documentation work: each with `name`, optional `github`, optional `orcid`, and `roles`; added with consent |

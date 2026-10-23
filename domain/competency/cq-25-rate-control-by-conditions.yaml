@@ -1,0 +1,64 @@
+# A competency question of the catalysis domain (tools/competency.py; `scale domains cq catalysis`).
+# It runs on public synthetic examples, so anyone can rerun it and see the same answer.
+id: CQ-25
+question: How much does each elementary step control the rate, at which conditions and in which catalyst state?
+description: |
+  A degree of rate control is the sensitivity of one rate (here, of CO2 formation) to one step's rate constant, at the
+  conditions of the microkinetic run that found it. Each run states its temperature, pressure and partial pressures and
+  the catalyst state it is in (a state computed on the Pt(111) model, with no specimen of its own). At 450 K O2
+  dissociation controls the rate (0.82), at 500 K the CO + O step does (0.66): the sensitivity belongs to the step at
+  stated conditions, never to the step alone. Compared scientifically, the four sensitivities form one group (one kind,
+  one product), each row showing the temperature it holds at; a limitation says that the group mixes temperatures.
+documents:
+  - examples/scale-catal/computation-examples/computed-energies.json
+plan:
+  question: Which steps control the rate of CO2 formation, at which temperatures and in which state?
+  match:
+    label: Computation
+    as: run
+    where:
+      - prop: computation_kind
+        op: eq
+        value: microkinetic
+  steps:
+    - from: run
+      edge: RATE_CONTROL
+      to: ElementaryStep
+      as: step
+      edge_as: control
+    - from: run
+      edge: IN_STATE
+      to: CatalystState
+      as: state
+  return:
+    - run.temperature
+    - run.pressure
+    - run.conditions
+    - step.name
+    - control.degree_of_rate_control
+    - control.rate_determining
+    - state.name
+  evidence: true
+expect:
+  status: answered
+  min_rows: 4
+  max_rows: 4
+  values:
+    step.name:
+      - O2* -> 2 O*
+      - CO* + O* -> CO2(g)
+    state.name:
+      - 'computed: Pt(111) with 0.25 ML O'
+variants:
+  - description: Ranked scientifically, the four sensitivities are one group (degree of rate control, for CO2), each row
+      showing the temperature of its run.
+    plan:
+      comparison: scientific
+      order_by:
+        - var: control
+          prop: degree_of_rate_control
+          desc: true
+    expect:
+      status: answered
+      min_rows: 4
+      max_rows: 4

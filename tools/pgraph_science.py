@@ -3,10 +3,11 @@
 Rules about the method of science that a type check cannot express: tests that assert an outcome
 cite what it rests on; predictions made after the result are flagged; a fit does not confirm its
 own data; a hypothesis's status agrees with the evidence recorded for it; references and evidence
-ids resolve (and so do the record_refs a value holds, its normalized_by); plans and orderings are acyclic; inputs used at an old version are flagged; records that rest on retracted sources are flagged (source lifecycle, ``lifecycle``).
+ids resolve (and so do the record_refs a value holds, its normalized_by); plans and orderings are acyclic; inputs used at an old version are flagged; records that rest on retracted sources are flagged (source lifecycle, ``lifecycle``); a model validated on the data it was fitted to is flagged, since a fit to its own data is a calibration, not independent validation (:func:`validation_checks`); a predicted value that names no producer is flagged.
 
 The checks report; they never grade science. Severity, independence and confounding are recorded
-as the source or an assessor states them and are not computed.
+as the source or an assessor states them and are not computed (the overlap of a validation's data with the data its
+model was fitted to is read from the records, not judged).
 """
 
 from __future__ import annotations
@@ -224,10 +225,22 @@ def science_checks(doc: dict, spec: dict, rep) -> None:
         if p.get("operation_mode") == "dynamic":
             if not p.get("varied_quantities"):
                 err(nid, "a dynamic operation names its varied_quantities")
-            if not (p.get("segments") or p.get("period") or p.get("frequency") or p.get("description")):
-                warn(nid, "a dynamic operation says how it varies (segments, period, frequency or description)")
+            said = any(p.get(k) for k in ("segments", "period", "frequency", "bit_duration", "pulse_width", "description"))
+            if not said and not (p.get("time_pattern") == "step" and p.get("levels")):     # a step: its levels say it
+                warn(nid, "a dynamic operation says how it varies (segments, period, frequency, a sequence's bit_duration, "
+                          "pulse_width, a step's levels or description)")
         elif p.get("operation_mode") == "static" and p.get("time_pattern") not in (None, "constant", "not_reported"):
             err(nid, f"a static operation has time_pattern constant, not {p['time_pattern']}")
+
+    # ---- a model validated on the data it was fitted to: not independent predictive validation
+    tables = {nid for nid, lab in label.items() if lab == "Dataset" or "Dataset" in _ancestors(spec, lab)}
+    validation_checks(links, label, resolved_refs, rep, tables)
+    for rid, p in props.items():
+        holder_is_experiment = rid in nodes and "Experiment" in [label.get(rid)] + _ancestors(spec, label.get(rid))
+        for path, v in _values(p):
+            if v.get("origin") == "predicted" and not v.get("produced_by") and not holder_is_experiment:
+                warn(rid, f"{path[1:]}: a predicted value names the experiment that predicted it (produced_by), whose model "
+                          "and the data it was fitted to say what the prediction rests on")
 
     # ---- controls and replication (recorded, not judged)
     for e in links:
@@ -276,6 +289,82 @@ def science_checks(doc: dict, spec: dict, rep) -> None:
             warn(e.get("source"), f"inputs revised: {e['target']} was used at version {used}; version {now} is current")
 
     lifecycle_checks(doc, spec, rep, nodes, links, props, inc)
+
+
+FIT_ROLES = ("training_data", "calibration_data")          # the inputs a calibration fits a model to
+SPLITS_OF_ONE_TABLE = ("random", "grouped", "time_based", "out_of_distribution", "other")   # held out within the data
+CALIBRATES = ("calibration",)
+VALIDATES = ("validation", "benchmark")
+
+
+def validation_checks(links: list[dict], label: dict, resolved_refs: dict, rep, tables: set | None = None) -> None:
+    """A validation is independent only of data its model was not fitted to. The data a model was fitted to is what an
+    experiment that calibrates it (EVALUATES with evaluation_kind calibration, or HAS_OUTPUT the model) HAS_INPUT as
+    training_data or calibration_data, with the records a dataset among them INCLUDES. A validation or benchmark
+    (EVALUATES) of the model whose experiment HAS_INPUT any of that data, or that rests on a fitted value (result_refs),
+    is reported (a warning): a fit to its own data is a calibration, never independent predictive validation. A
+    validation that states it split one table (split_strategy random, grouped, time_based, out_of_distribution or
+    other, 0.7.2 on: the folds of a cross-validation, a held-out part) shares that very table with the fit by design: a
+    dataset (``tables``) both take directly is not reported, nor what both reach only through it. What either reaches
+    some other way is (an observation both take directly, a record another dataset includes), and so is any overlap of a
+    validation that claims independent data (external, prospective). Whether the split keeps the folds apart is what
+    split_strategy says (a random split is flagged by `scale trace-ai`). Nothing is rewritten."""
+    out = defaultdict(list)
+    for e in links:
+        out[e.get("source")].append(e)
+
+    def direct(exp: str, roles: tuple | None) -> set:
+        return {e.get("target") for e in out.get(exp, []) if e.get("type") == "HAS_INPUT"
+                and (roles is None or (e.get("props") or {}).get("role") in roles)}
+
+    def inputs(exp: str, roles: tuple | None) -> set:
+        return _included(direct(exp, roles), out)
+
+    tables = tables or set()
+    fitted: dict[str, set] = defaultdict(set)
+    fitted_direct: dict[str, set] = defaultdict(set)       # what a fit takes directly (not through INCLUDES)
+    for e in links:
+        p = e.get("props") or {}
+        if (e.get("type") == "EVALUATES" and p.get("evaluation_kind") in CALIBRATES) or \
+                (e.get("type") == "HAS_OUTPUT" and label.get(e.get("target")) is not None):
+            fitted[e.get("target")] |= inputs(e.get("source"), FIT_ROLES)
+            fitted_direct[e.get("target")] |= direct(e.get("source"), FIT_ROLES)
+    for e in links:
+        p = e.get("props") or {}
+        if e.get("type") != "EVALUATES" or p.get("evaluation_kind") not in VALIDATES:
+            continue
+        model, exp = e.get("target"), e.get("source")
+        used = inputs(exp, None) - {model}
+        fit_all, fit_direct = fitted.get(model, set()), fitted_direct.get(model, set())
+        shared = used & fit_all
+        split = {x for x in direct(exp, None) & fit_direct if x in tables}
+        if p.get("split_strategy") in SPLITS_OF_ONE_TABLE and split:
+            # its folds are parts of a dataset the fit takes as well: what both reach only through it is held out by
+            # the split, as stated; what either reaches another way is not
+            fit_other = _included(fit_direct - split, out)
+            val_other = _included(direct(exp, None) - split - {model}, out)
+            shared = (used & fit_other) | (fit_all & val_other)
+        overlap = sorted(str(x) for x in shared)
+        if overlap:
+            rep.add("warning", e.get("id"), f"a {p['evaluation_kind']} of {model} on data it was fitted to "
+                                            f"({', '.join(overlap)}): a fit to its own data is a calibration, not "
+                                            "independent predictive validation; it stays as recorded")
+        fits = [v for v in resolved_refs.get(e.get("id"), []) if isinstance(v, dict) and v.get("origin") == "fitted"]
+        if fits and p.get("outcome") in ("passes", "partial"):
+            rep.add("warning", e.get("id"), f"a {p['evaluation_kind']} whose outcome rests on a fitted value: a fit does not "
+                                            "validate its own data")
+
+
+def _included(ids: set, out: dict) -> set:
+    """Records and what the datasets among them include (INCLUDES, followed to any depth)."""
+    seen, todo = set(ids), list(ids)
+    while todo:
+        x = todo.pop()
+        for e in out.get(x, []):
+            if e.get("type") == "INCLUDES" and e.get("target") not in seen:
+                seen.add(e.get("target"))
+                todo.append(e.get("target"))
+    return seen
 
 
 def lifecycle_checks(doc: dict, spec: dict, rep, nodes: dict, links: list[dict], props: dict, inc) -> None:

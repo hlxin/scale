@@ -163,6 +163,19 @@ TOOLS: list[dict] = [
             "format": {"type": "string", "enum": ["json", "markdown"], "description": "markdown adds a readable rendering."}}},
     },
     {
+        "name": "scale_trace_ai",
+        "description": "Read the TRACE-AI publication checklist (agentic catalysis: data, models, workflow, executable "
+                       "artifacts; Xin et al., Chem Catal. 2026) on a document's records, or on one source's: for each "
+                       "item, whether the records support it, partly, not at all (a gap), whether it applies, or what "
+                       "a person checks in the source, with the records and evidence found and what to look at (a "
+                       "random split, a metric without its uncertainty); and how the records were curated (the "
+                       "autonomy level of their curation, the checks people made, precision and recall). It decides "
+                       "nothing about the source: its authors fill the checklist. Writes nothing.",
+        "input_schema": {"type": "object", "properties": {**_DOC, **_DOMAIN,
+            "source": {"type": "string", "description": "Only the records of this Source (its id)."},
+            "format": {"type": "string", "enum": ["json", "markdown"], "description": "markdown adds a readable rendering."}}},
+    },
+    {
         "name": "scale_search",
         "description": "Search a document's evidence by words and meaning (its evidence index: the one saved beside it "
                        "by `scale graph index`, or built in memory from the document when none is); hits lead to the records that cite each passage. The "
@@ -444,6 +457,14 @@ class ScaleToolkit:
                          "example_plans": plans})
         return {"domains": rows, "examples": sorted(self._examples())}
 
+    def _mapping_index(self) -> dict | None:
+        """SCALE's terms mapped to ontology terms, by subject (docs/mappings.md); none without the registry."""
+        from . import mappings
+        try:
+            return mappings.index(self.repo) if (self.repo / layout.ONTOLOGY_REGISTRY).is_file() else None
+        except ScaleError:
+            return None
+
     def _scale_describe(self, names: list[str] | None = None, domain: str | None = None,
                         schema_version: str | None = None) -> dict:
         from . import pgraph
@@ -451,7 +472,7 @@ class ScaleToolkit:
         spec = self._spec(self._manifest(domain, hint), schema_version)
         profile = domain if domain and domain in (spec.get("profiles") or {}) else None
         if names:
-            return pgraph.describe(spec, list(names), profile)
+            return pgraph.describe(spec, list(names), profile, self._mapping_index())
         first = lambda t: (t or "").strip().split("\n")[0]   # noqa: E731
         return copy.deepcopy({"schema_version": spec["version"], "domain": domain,
                 "labels": {n: {"is_a": d.get("ancestors") or [], "description": first(d.get("description"))}
@@ -525,6 +546,15 @@ class ScaleToolkit:
         if format == "markdown":
             res["markdown"] = pgraph_query.render_markdown(res)
         return res
+
+    def _scale_trace_ai(self, document: dict | None = None, path: str | None = None, domain: str | None = None,
+                        source: str | None = None, format: str = "json") -> dict:
+        from .traceai import assess, load_crosswalk, render_markdown
+        doc = self._doc(document, path)
+        rep = assess(doc, self._doc_spec(doc, domain), load_crosswalk(self.repo), source)
+        if format == "markdown":
+            rep["markdown"] = render_markdown(rep)
+        return rep
 
     def _index(self, path: str | None, doc: dict, hit: dict | None = None):
         """The evidence index beside ``path``, refused unless it is ``doc``'s, or built in memory from ``doc`` when none is

@@ -12,7 +12,7 @@ table or a lab file is curated by the same skill (its section **A data file**), 
 | read the source; identify the records (samples, tests, conditions, results, claims); attach evidence | person or language-model agent following the skill | a **scale-catal document** that pins the catalysis schema version and follows its checklist |
 | check the document: validity, checklist conformance, quotes verbatim in the source text, REPORTED_IN backed by evidence | `scale graph validate` (deterministic) | validation report |
 | build the evidence index | `scale graph index` (deterministic) | a vector and term statistics per quote, for `scale graph search` and text queries |
-| review | catalysis reviewer (`scale review sample` draws a reproducible sample for a Tier 1 check) | the document's review status |
+| review | catalysis reviewer (`scale review sample` draws a reproducible sample for a Tier 1 check) | the check, recorded in the graph (`graph.checks`: who, when, which records, the fields checked, wrong and missed, the outcome; [trace-ai.md](trace-ai.md#how-the-records-were-curated)) |
 
 The extraction model is not the authority that defines the target concepts. The catalysis schema
 defines what a completed record means, and the source determines which parts can be populated.
@@ -156,7 +156,10 @@ source must be within its cap.
   - **Dark control.** A dark control is `DARK_CONTROL_FOR` the illuminated test. It states `control_kind`,
     `differs_in` (illumination), how the temperature was matched, where (`temperature_matched_at`: the illuminated
     surface, or a bulk temperature) and over which time (`temperature_matched_over`). Another way of separating light
-    from heat is a `ThermalContributionAnalysis` with its `partition_method`.
+    from heat is an Analysis with `analysis_kind: thermal_contribution` that `HAS_INPUT` the test (scale-catal 0.7.4
+    on). It states its `partition_method`, and gives the shares it attributes to heating and to the rest as result
+    entries, each with its variable and product. The same analysis serves a plasma or a field. `ThermalContributionAnalysis` is its
+    deprecated earlier form, still valid.
   - **Plasma synergy.** Record the plasma alone (an Experiment that `USES_PLASMA` with the bare packing) and the
     catalyst alone at the same temperature, each `CONTROL_FOR` the combined test. Record the plasma power
     (`discharge_power`, with how it was determined) apart from what the supply draws (`power_supply_input`).
@@ -305,7 +308,46 @@ infers it and counts the inferences.
 to record, with what the schema already has: set, nominal and specified values; conflicts between sources; rates and
 kinetics; reaction thermochemistry; computational details; reactor, bed and catalyst-body keys; pairwise and
 metals-only ratios; commercial catalysts; balances, impurities and data quality; driving forces outside the list;
-characterization results; digitizing a figure.
+characterization results; sites in a catalyst state; assignments, operando observations and fits; preparation
+recipes (the batch, its lots and its steps; supported-metal impregnation; precipitation and coprecipitation;
+activation, storage, transfer and reaction history); characterization recipes (what every measurement keeps; XAS;
+electron microscopy; chemisorption and site titration; physisorption; sizes from different techniques; nominal, bulk
+and surface composition); digitizing a figure.
+
+## Sites, assignments and operando observations
+
+Since scale-catal 0.6.0, a site population is recorded on the `HAS_SITE` from the `CatalystState` it was counted or
+observed in, and holds for that state only: sites change with the conditions, so a count made after reduction is not
+the count under reaction (Wrasman et al. 2024, doi:10.1016/j.jcat.2024.115451). Its share, density, exposed atoms
+counted and the sites a rate is divided by are four values, each with its origin, uncertainty or bound, the
+measurement or analysis that produced it and what the count assumes (a Model's `assumptions`). A turnover frequency
+is recorded as reported, with how it was calculated: the count it is divided by (`normalized_by`) and, in its `basis`
+or `definition`, what was counted as sites and how (or that the source does not say); the validator warns when it says
+neither, and a comparison shows each rate with its count. Which component is active, a spectator, a precursor or an
+inhibitor is a Claim with named `ABOUT` roles and its own evidence; abundance is not activity. Operando means
+characterized while the kinetics are measured. An observation the source calls operando is kept so; whether the
+kinetics were measured on the same specimen while it was made (Tackett et al. 2026, doi:10.1021/acscatal.6c01946; Meyer
+et al. 2024, doi:10.1016/j.jcat.2024.115369) is what its `DURING` link states, never read from the label or from an
+overlap in time. A fit to an ensemble measurement is an Analysis (`spectral_fit`) with its fitted values and limitations, apart
+from the spectrum it fits and from the claim drawn from it. The recipes say how to record each.
+
+## Preparations and characterizations
+
+A catalyst's preparation and characterization are recorded with the structures SCALE has, so that a second person
+could repeat them and two preparations of one nominal formula stay two. A batch is a CatalystSample with the batch
+identifier the source gives; a purchased lot of a precursor or support is a Sample with its lot number; each step is a
+ProcedureStep `PART_OF` the preparation, in order, with what it takes in and gives out and its conditions; each
+treatment after it (reduction, passivation, storage) is a Treatment the batch is `TREATED_BY`, in order. A nominal
+composition is the formulation's (`origin: assumed`); a measured bulk or surface composition is a result of the
+measurement on the specimen, in its state. Each measurand is its own Variable, so a size from microscopy, one from
+diffraction and one from light scattering stay three quantities, and a distribution's mean, standard deviation and
+count stay three results. A fit keeps its model, references, software and limitations. What the source leaves
+unstated stays unstated: a typed absence for a value, "not stated" for a text field, `availability: not_reported` for
+data. The recording guidance follows the workshop report on rigor and reproducibility in heterogeneous catalysis
+(doi:10.5281/zenodo.8029159) and the papers drawn from it (Alba-Rubio et al. 2024, doi:10.1016/j.jcat.2023.115259, on
+synthesis; Meyer et al. 2024, doi:10.1016/j.jcat.2024.115480, on STEM/TEM; Meyer et al. 2024,
+doi:10.1016/j.jcat.2024.115369, on XAS; Wrasman et al. 2024, doi:10.1016/j.jcat.2024.115451, on site counting); the
+companion reporting checklist is [domain/docs/reporting/catalyst-preparation-reporting.md](../domain/docs/reporting/catalyst-preparation-reporting.md).
 
 ## Retractions, corrections and other notices
 

@@ -68,7 +68,10 @@ Worked examples of what it produces are the synthetic documents in `domain/examp
 (one per driving force and combination). Short recording recipes for
 situations the schema covers less obviously (set and nominal values, conflicts, kinetics,
 thermochemistry, computations, reactor and bed keys, ratios, commercial catalysts, balances and
-impurities, driving forces outside the list, characterization results, digitizing a figure) are in `references/recipes.md` beside this file (through the agent tools:
+impurities, driving forces outside the list, characterization results, sites in a catalyst state, assignments,
+operando observations and fits, preparations (impregnation, coprecipitation, activation, storage and transfer),
+characterizations (XAS, electron microscopy, chemisorption, physisorption, sizes, composition), digitizing a figure)
+are in `references/recipes.md` beside this file (through the agent tools:
 `scale call skills '{"name": "curate-corpus", "reference": "references/recipes.md"}'`).
 
 ## Procedure: one source
@@ -237,7 +240,8 @@ Never record `± 0`: keep the printed text in `as_reported` and leave `uncertain
   - a transport check: an Analysis (`transport_check`) that `HAS_INPUT` the test, with `evaluation_basis` asserted,
     numerical or experimental;
   - a dark control: `DARK_CONTROL_FOR`, with `differs_in`, `temperature_matched_at` and `temperature_matched_over`;
-    or a `ThermalContributionAnalysis` instead;
+    or an Analysis with `analysis_kind: thermal_contribution` instead (0.7.4 on; earlier versions, a
+    `ThermalContributionAnalysis`);
   - plasma synergy: a plasma-alone control and a catalyst-alone control, each `CONTROL_FOR` the test; the plasma
     power (`discharge_power`) apart from what the supply draws (`power_supply_input`);
   - stability: a `TimeSeries` for performance; for the material, a `CatalystState` `REACHED_BY` the test and
@@ -246,6 +250,30 @@ Never record `± 0`: keep the printed text in `as_reported` and leave `uncertain
 
   docs/curation.md has the details. Never add a criterion value, a conversion level or a control the source does not
   report.
+- **Computed energies** (scale-catal 0.7.0 on). Record each as a value of its kind (`reaction_energy` for an
+  adsorption or reaction energy, `reaction_free_energy`, `activation_energy` for an elementary step's barrier,
+  `apparent_activation_energy` for the fit of an overall rate, …), never a bare number in eV. An adsorption or reaction
+  energy names the Reaction it is the energy change of (its `target`), whose participants and coefficients are the
+  reference states. When the source does not say what it is relative to, write its words in `unresolved_target`. State
+  the computation's `level_of_theory` and `charge_treatment` (constant charge or constant potential) as the source
+  gives them, `not_reported` when it does not, and its dispersion, +U, spin, solvation and settings. Keep files in
+  checksummed Datasets. For a machine-learned prediction, name the model, its checkpoint and the data it was fitted to.
+  Never flip a sign, fill in a method or read a method text into these fields; the recipes (Computational details)
+  say where each goes.
+- **Agentic campaigns and their models** (scale-catal 0.7.2 on). A campaign in which an agent chooses the next
+  experiments is a Design of kind `adaptive`: record, as the source states them, its `autonomy_level` (TRACE-AI's
+  A0-A5; `not_reported` when the source names none, never read off the workflow), `human_oversight`, `interventions`,
+  `agent_policy`, `objectives`, safety bounds and measures, the stopping criterion and why it stopped, and what it did
+  with failed or excluded runs. Each run is `PART_OF_DESIGN` with its `iteration` and `PROPOSED_BY` the agent (a
+  Software of kind `agent`, with its version), with the `human_decision`; a rejected proposal is a record too. A
+  machine-learned model states its architecture, hyperparameters, training objective and uncertainty method; each
+  validation its `split_strategy`. `scale trace-ai <doc>` shows what TRACE-AI asks that the records do not hold
+  (docs/trace-ai.md).
+- **Say how you curated.** An agent names itself in the graph's stewardship (`curated_by`: a Software of kind `agent`,
+  with its version) and states the `autonomy_level` of the curation: A2 when a person approves each record, A3 when
+  people check a sample and the flagged records (governance/review-policy.yaml), A4 when nobody checks them. A person's
+  check is written into `graph.checks` after it was made, with what it found, never before (`scale review sample`
+  returns what to fill in).
 - **Keys and qualifiers.** Use one key per quantity and put what the value is about in its fields:
   the species or product in `target`, the basis in `basis`, the measurand in `variable` (a Variable)
   and how it was defined or measured in `definition`. When a source gives several values of one

@@ -41,8 +41,8 @@ from pathlib import Path
 from . import layout
 from .util import ScaleError, load_yaml
 
-KERNEL_KEYS = ("format", "property_types", "value", "evidence", "record_ref", "stewardship", "status_check", "common",
-               "extensions", "rules", "quantities")
+KERNEL_KEYS = ("format", "property_types", "value", "evidence", "record_ref", "stewardship", "status_check",
+               "record_check", "common", "extensions", "rules", "quantities")
 PREFIX_REGISTRY = Path(layout.PREFIX_REGISTRY)
 
 

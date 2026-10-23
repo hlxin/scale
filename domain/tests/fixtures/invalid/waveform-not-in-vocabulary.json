@@ -1,0 +1,2583 @@
+{
+  "nodes": [
+    {
+      "id": "ex:tk/source/paper",
+      "label": "Source",
+      "props": {
+        "name": "Invented paper",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "Isotopic, modulated and pseudo-random transients over Pt/CeO2, Ni/Al2O3 and an iron oxide carrier (invented)",
+        "year": 2026
+      }
+    },
+    {
+      "id": "ex:tk/species/co",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "CO",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 1,
+          "O": 1
+        },
+        "formula": "CO",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:tk/species/o2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "O2",
+        "charge": 0,
+        "elemental_composition": {
+          "O": 2
+        },
+        "formula": "O2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:tk/species/co2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "CO2",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 1,
+          "O": 2
+        },
+        "formula": "CO2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:tk/species/13co",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "13CO",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 1,
+          "O": 1
+        },
+        "formula": "CO",
+        "isotopic_label": "13C",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:tk/species/kr",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "Kr",
+        "charge": 0,
+        "elemental_composition": {
+          "Kr": 1
+        },
+        "formula": "Kr",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:tk/species/ar",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "Ar",
+        "charge": 0,
+        "elemental_composition": {
+          "Ar": 1
+        },
+        "formula": "Ar",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:tk/species/ch4",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "CH4",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 1,
+          "H": 4
+        },
+        "formula": "CH4",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:tk/species/h2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "H2",
+        "charge": 0,
+        "elemental_composition": {
+          "H": 2
+        },
+        "formula": "H2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:tk/species/h2o",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "H2O",
+        "charge": 0,
+        "elemental_composition": {
+          "H": 2,
+          "O": 1
+        },
+        "formula": "H2O",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:tk/species/co-linear-pt",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "CO adsorbed linearly on Pt (2070 cm-1)",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 1,
+          "O": 1
+        },
+        "formula": "CO",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:tk/species/carbonate-ceria",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "carbonate on CeO2 (1550 cm-1)",
+        "charge": -2,
+        "elemental_composition": {
+          "C": 1,
+          "O": 3
+        },
+        "formula": "CO3",
+        "origin": "synthetic",
+        "species_kind": "ion"
+      }
+    },
+    {
+      "id": "ex:tk/reaction/water-gas-shift",
+      "label": "Reaction",
+      "props": {
+        "name": "CO + H2O -> CO2 + H2",
+        "balance_status": "balanced",
+        "direction": "forward",
+        "equation": "CO + H2O -> CO2 + H2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:tk/reaction/co2-methanation",
+      "label": "Reaction",
+      "props": {
+        "name": "CO2 + 4 H2 -> CH4 + 2 H2O",
+        "balance_status": "balanced",
+        "direction": "forward",
+        "equation": "CO2 + 4 H2 -> CH4 + 2 H2O",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:tk/reaction/ch4-partial-oxidation",
+      "label": "Reaction",
+      "props": {
+        "name": "CH4 + 1/2 O2 -> CO + 2 H2",
+        "balance_status": "balanced",
+        "direction": "forward",
+        "equation": "CH4 + 1/2 O2 -> CO + 2 H2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:tk/catalyst/pt-ceo2",
+      "label": "Catalyst",
+      "props": {
+        "name": "1 wt% Pt/CeO2",
+        "catalyst_family": "metal",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods, catalysts",
+            "source": "ex:tk/source/paper"
+          }
+        ],
+        "nominal_formula": "Pt/CeO2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:tk/sample/pt-ceo2",
+      "label": "CatalystSample",
+      "props": {
+        "name": "1 wt% Pt/CeO2, 150-250 um sieve fraction",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods, catalysts",
+            "source": "ex:tk/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "sample_kind": "granules"
+      }
+    },
+    {
+      "id": "ex:tk/catalyst/ni-al2o3",
+      "label": "Catalyst",
+      "props": {
+        "name": "10 wt% Ni/Al2O3",
+        "catalyst_family": "metal",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods, catalysts",
+            "source": "ex:tk/source/paper"
+          }
+        ],
+        "nominal_formula": "Ni/Al2O3",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:tk/sample/ni-al2o3",
+      "label": "CatalystSample",
+      "props": {
+        "name": "10 wt% Ni/Al2O3, 150-250 um sieve fraction",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods, catalysts",
+            "source": "ex:tk/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "sample_kind": "granules"
+      }
+    },
+    {
+      "id": "ex:tk/catalyst/fe2o3-al2o3",
+      "label": "Catalyst",
+      "props": {
+        "name": "Fe2O3/Al2O3 oxygen carrier (60 wt% Fe2O3)",
+        "catalyst_family": "oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods, catalysts",
+            "source": "ex:tk/source/paper"
+          }
+        ],
+        "nominal_formula": "Fe2O3/Al2O3",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:tk/sample/fe2o3-al2o3",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Fe2O3/Al2O3 oxygen carrier (60 wt% Fe2O3), 150-250 um sieve fraction",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods, catalysts",
+            "source": "ex:tk/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "sample_kind": "granules"
+      }
+    },
+    {
+      "id": "ex:tk/instrument/microreactor",
+      "label": "Reactor",
+      "props": {
+        "name": "Quartz microreactor, 4 mm i.d.",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods, reactors",
+            "source": "ex:tk/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "reactor_kind": "fixed_bed"
+      }
+    },
+    {
+      "id": "ex:tk/instrument/drifts-cell",
+      "label": "Reactor",
+      "props": {
+        "name": "DRIFTS reaction cell with a dome window",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods, reactors",
+            "source": "ex:tk/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "reactor_kind": "flow"
+      }
+    },
+    {
+      "id": "ex:tk/variable/residence-time",
+      "label": "Variable",
+      "props": {
+        "name": "surface residence time",
+        "origin": "synthetic",
+        "quantity_kind": "surface_residence_time",
+        "scale": "quantitative",
+        "unit": "s"
+      }
+    },
+    {
+      "id": "ex:tk/variable/intermediates",
+      "label": "Variable",
+      "props": {
+        "name": "amount of surface intermediates",
+        "origin": "synthetic",
+        "quantity_kind": "surface_intermediate_amount",
+        "scale": "quantitative",
+        "unit": "umol/g"
+      }
+    },
+    {
+      "id": "ex:tk/variable/phase-delay",
+      "label": "Variable",
+      "props": {
+        "name": "phase delay behind the stimulus",
+        "origin": "synthetic",
+        "quantity_kind": "phase_delay",
+        "scale": "quantitative",
+        "unit": "s"
+      }
+    },
+    {
+      "id": "ex:tk/variable/activation-energy",
+      "label": "Variable",
+      "props": {
+        "name": "activation energy of a step",
+        "origin": "synthetic",
+        "quantity_kind": "activation_energy",
+        "scale": "quantitative",
+        "unit": "kJ/mol"
+      }
+    },
+    {
+      "id": "ex:tk/feed/co-h2o-ar",
+      "label": "Feed",
+      "props": {
+        "name": "2 % CO and 10 % H2O in Ar (0.5 % Kr in the 13CO feed)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:tk/source/paper"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:tk/test/ssitka-200c",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Water-gas shift at 200 °C, 12CO switched to 13CO at steady state",
+        "conversion": {
+          "status": "present",
+          "target": "ex:tk/species/co",
+          "unit": "%",
+          "value": 6
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:tk/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "flow_rate": {
+          "status": "present",
+          "unit": "mL/min",
+          "value": 50
+        },
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "basis": "absolute",
+          "unit": "bar",
+          "value": 1
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 200
+        },
+        "temperature_measured_at": "catalyst_bed",
+        "test_kind": "kinetics"
+      }
+    },
+    {
+      "id": "ex:tk/operation/isotope-switch",
+      "label": "Operation",
+      "props": {
+        "name": "Switch from 12CO to 13CO at steady state",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods, transients",
+            "source": "ex:tk/source/paper"
+          }
+        ],
+        "levels": [
+          {
+            "status": "present",
+            "text_value": "12CO"
+          },
+          {
+            "status": "present",
+            "text_value": "13CO"
+          }
+        ],
+        "operation_mode": "dynamic",
+        "origin": "synthetic",
+        "program_detail": "exact",
+        "time_origin": "the switch of the four-way valve",
+        "time_pattern": "step",
+        "total_duration": {
+          "status": "present",
+          "unit": "min",
+          "value": 10
+        },
+        "varied_quantities": [
+          "isotopic label of the CO fed"
+        ]
+      }
+    },
+    {
+      "id": "ex:tk/dataset/13co2-response",
+      "label": "TimeSeries",
+      "props": {
+        "name": "outlet 13CO2 (m/z 45), normalized",
+        "availability": "not_reported",
+        "delay": {
+          "status": "present",
+          "unit": "s",
+          "value": 1.1
+        },
+        "delay_corrected": true,
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 2",
+            "source": "ex:tk/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "sampling_interval": {
+          "status": "present",
+          "unit": "s",
+          "value": 0.1
+        },
+        "series_kind": "instantaneous",
+        "time_origin": "the switch of the four-way valve",
+        "time_resolution": {
+          "status": "present",
+          "unit": "s",
+          "value": 0.2
+        },
+        "unit": "1",
+        "variable": "13CO2 response, normalized"
+      }
+    },
+    {
+      "id": "ex:tk/dataset/kr-response",
+      "label": "TimeSeries",
+      "props": {
+        "name": "outlet Kr (m/z 84), normalized",
+        "availability": "not_reported",
+        "delay": {
+          "status": "present",
+          "unit": "s",
+          "value": 1.1
+        },
+        "delay_corrected": true,
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 2",
+            "source": "ex:tk/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "sampling_interval": {
+          "status": "present",
+          "unit": "s",
+          "value": 0.1
+        },
+        "series_kind": "instantaneous",
+        "time_origin": "the switch of the four-way valve",
+        "time_resolution": {
+          "status": "present",
+          "unit": "s",
+          "value": 0.2
+        },
+        "unit": "1",
+        "variable": "Kr response, normalized"
+      }
+    },
+    {
+      "id": "ex:tk/analysis/ssitka-co2",
+      "label": "Analysis",
+      "props": {
+        "name": "Isotopic transient of CO2 formation at 200 °C",
+        "analysis_kind": "isotopic_transient",
+        "evidence": [
+          {
+            "id": "t2",
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:tk/source/paper"
+          }
+        ],
+        "limitations": "assumes one pool of intermediates and no kinetic isotope effect; CO2 readsorbing on ceria would lengthen the residence time",
+        "method": "the area between the normalized 13CO2 and Kr transients",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "tau_co2",
+            "status": "present",
+            "evidence_ids": [
+              "t2"
+            ],
+            "target": "ex:tk/species/co2",
+            "unit": "s",
+            "value": 1.6,
+            "variable": "ex:tk/variable/residence-time"
+          },
+          {
+            "id": "n_co2",
+            "status": "present",
+            "evidence_ids": [
+              "t2"
+            ],
+            "target": "ex:tk/species/co2",
+            "unit": "umol/g",
+            "value": 0.9,
+            "variable": "ex:tk/variable/intermediates"
+          }
+        ],
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 200
+        }
+      }
+    },
+    {
+      "id": "ex:tk/feed/co-modulated",
+      "label": "Feed",
+      "props": {
+        "name": "CO modulated in 10 % H2O in Ar",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:tk/source/paper"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:tk/test/modulation-250c",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Water-gas shift at 250 °C in the DRIFTS cell, CO modulated",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Figure 4",
+            "source": "ex:tk/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "basis": "absolute",
+          "unit": "bar",
+          "value": 1
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 250
+        },
+        "temperature_measured_at": "catalyst_bed",
+        "test_kind": "kinetics"
+      }
+    },
+    {
+      "id": "ex:tk/operation/co-square-wave",
+      "label": "Operation",
+      "props": {
+        "name": "CO switched between 0 and 1 % as a square wave, 60 s, 10 periods",
+        "cycles": 10,
+        "duty_cycle": {
+          "status": "present",
+          "unit": "%",
+          "value": 50
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods, transients",
+            "source": "ex:tk/source/paper"
+          }
+        ],
+        "levels": [
+          {
+            "status": "present",
+            "unit": "%",
+            "value": 0
+          },
+          {
+            "status": "present",
+            "unit": "%",
+            "value": 1
+          }
+        ],
+        "operation_mode": "dynamic",
+        "origin": "synthetic",
+        "period": {
+          "status": "present",
+          "unit": "s",
+          "value": 60
+        },
+        "program_detail": "parametric",
+        "time_origin": "the first switch to CO",
+        "time_pattern": "periodic",
+        "varied_quantities": [
+          "CO mole fraction in the feed"
+        ],
+        "waveform": "rectangular"
+      }
+    },
+    {
+      "id": "ex:tk/dataset/drifts-spectra",
+      "label": "TimeSeries",
+      "props": {
+        "name": "time-resolved DRIFT spectra",
+        "availability": "not_reported",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 4",
+            "source": "ex:tk/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "sampling_interval": {
+          "status": "present",
+          "unit": "s",
+          "value": 0.5
+        },
+        "series_kind": "instantaneous",
+        "time_origin": "the first switch to CO",
+        "time_resolution": {
+          "status": "present",
+          "unit": "s",
+          "value": 0.5
+        },
+        "unit": "1",
+        "variable": "absorbance"
+      }
+    },
+    {
+      "id": "ex:tk/dataset/co2-outlet",
+      "label": "TimeSeries",
+      "props": {
+        "name": "outlet CO2 (m/z 44)",
+        "availability": "not_reported",
+        "delay": {
+          "status": "present",
+          "unit": "s",
+          "value": 1.4
+        },
+        "delay_corrected": true,
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 4",
+            "source": "ex:tk/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "sampling_interval": {
+          "status": "present",
+          "unit": "s",
+          "value": 0.2
+        },
+        "series_kind": "instantaneous",
+        "time_origin": "the first switch to CO",
+        "unit": "A",
+        "variable": "CO2 signal"
+      }
+    },
+    {
+      "id": "ex:tk/characterization/operando-drifts",
+      "label": "Characterization",
+      "props": {
+        "name": "Operando DRIFTS during the CO modulation",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 4",
+            "source": "ex:tk/source/paper"
+          }
+        ],
+        "observation_mode": "operando",
+        "origin": "synthetic",
+        "technique": "diffuse reflectance infrared Fourier transform spectroscopy"
+      }
+    },
+    {
+      "id": "ex:tk/analysis/phase-sensitive-detection",
+      "label": "Analysis",
+      "props": {
+        "name": "Phase-sensitive detection of the spectra and the outlet CO2 at the modulation frequency",
+        "analysis_kind": "modulation_excitation",
+        "demodulation_harmonic": 1,
+        "evidence": [
+          {
+            "id": "f5",
+            "kind": "figure",
+            "locator": "Figure 5",
+            "source": "ex:tk/source/paper"
+          }
+        ],
+        "limitations": "delays are behind the CO stimulus; where two bands overlap, the measured phase is a mix of theirs, so it is assigned to one species only tentatively",
+        "method": "demodulation at the fundamental (k = 1); phase angles converted to delays at 1/60 Hz",
+        "modulation_period": {
+          "status": "present",
+          "unit": "s",
+          "value": 60
+        },
+        "origin": "synthetic",
+        "phase_reference": "stimulus",
+        "result_values": [
+          {
+            "id": "delay_co_linear",
+            "status": "present",
+            "definition": "lag of the 2070 cm-1 band behind the stimulus",
+            "evidence_ids": [
+              "f5"
+            ],
+            "target": "ex:tk/species/co-linear-pt",
+            "unit": "s",
+            "value": 2.0,
+            "variable": "ex:tk/variable/phase-delay"
+          },
+          {
+            "id": "delay_co2",
+            "status": "present",
+            "definition": "lag of gas-phase CO2 behind the stimulus, the line delay removed",
+            "evidence_ids": [
+              "f5"
+            ],
+            "target": "ex:tk/species/co2",
+            "unit": "s",
+            "value": 2.4,
+            "variable": "ex:tk/variable/phase-delay"
+          },
+          {
+            "id": "delay_carbonate",
+            "status": "present",
+            "definition": "lag of the 1550 cm-1 band behind the stimulus",
+            "evidence_ids": [
+              "f5"
+            ],
+            "target": "ex:tk/species/carbonate-ceria",
+            "unit": "s",
+            "value": 14.5,
+            "variable": "ex:tk/variable/phase-delay"
+          }
+        ],
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 250
+        }
+      }
+    },
+    {
+      "id": "ex:tk/claim/linear-co-intermediate",
+      "label": "Claim",
+      "props": {
+        "name": "Linearly adsorbed CO on Pt an intermediate of CO2 formation",
+        "claim_kind": "mechanism",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Discussion",
+            "source": "ex:tk/source/paper"
+          }
+        ],
+        "inference_type": "interventional",
+        "limitations": "rests on phase delays at one modulation frequency",
+        "origin": "synthetic",
+        "scope": "Pt/CeO2 at 250 °C, 1 % CO modulated in 10 % H2O",
+        "statement": "Linearly adsorbed CO on Pt is an intermediate of CO2 formation at 250 °C."
+      }
+    },
+    {
+      "id": "ex:tk/claim/carbonate-spectator",
+      "label": "Claim",
+      "props": {
+        "name": "Carbonate on ceria a spectator of CO2 formation",
+        "claim_kind": "mechanism",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Discussion",
+            "source": "ex:tk/source/paper"
+          }
+        ],
+        "inference_type": "interventional",
+        "origin": "synthetic",
+        "scope": "Pt/CeO2 at 250 °C, 1 % CO modulated in 10 % H2O",
+        "statement": "Carbonate on ceria is a spectator of CO2 formation at 250 °C."
+      }
+    },
+    {
+      "id": "ex:tk/feed/h2-co2",
+      "label": "Feed",
+      "props": {
+        "name": "40 % H2 in Ar, CO2 switched between 4 and 8 %",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:tk/source/paper"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:tk/test/methanation-prbs-320c",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "CO2 methanation at 320 °C, CO2 inlet in a pseudo-random binary sequence",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Figure 6",
+            "source": "ex:tk/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "basis": "absolute",
+          "unit": "bar",
+          "value": 1
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 320
+        },
+        "temperature_measured_at": "catalyst_bed",
+        "test_kind": "kinetics"
+      }
+    },
+    {
+      "id": "ex:tk/operation/co2-sequence",
+      "label": "Operation",
+      "props": {
+        "name": "CO2 inlet between 4 and 8 % in a 63-bit sequence of 5 s bits",
+        "bit_duration": {
+          "status": "present",
+          "unit": "s",
+          "value": 5
+        },
+        "cycles": 3,
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods, transients",
+            "source": "ex:tk/source/paper"
+          },
+          {
+            "kind": "table",
+            "locator": "Supporting Information, Table S1",
+            "source": "ex:tk/source/paper"
+          }
+        ],
+        "levels": [
+          {
+            "status": "present",
+            "unit": "%",
+            "value": 4
+          },
+          {
+            "status": "present",
+            "unit": "%",
+            "value": 8
+          }
+        ],
+        "note": "the sequence's generator and seed are given in the Supporting Information; H2 is held at 40 % throughout (Ar balances the CO2 switch), so H2/CO2 is 10 at the low level and 5 at the high one",
+        "operation_mode": "dynamic",
+        "origin": "synthetic",
+        "program_detail": "exact",
+        "sequence_length": 63,
+        "time_origin": "the first bit of the sequence",
+        "time_pattern": "programmed",
+        "varied_quantities": [
+          "CO2 mole fraction in the feed"
+        ],
+        "waveform": "pseudo_random_binary"
+      }
+    },
+    {
+      "id": "ex:tk/dataset/ch4-outlet",
+      "label": "TimeSeries",
+      "props": {
+        "name": "outlet CH4 (m/z 15)",
+        "availability": "not_reported",
+        "delay": {
+          "status": "present",
+          "unit": "s",
+          "value": 0.8
+        },
+        "delay_corrected": false,
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 6",
+            "source": "ex:tk/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "sampling_interval": {
+          "status": "present",
+          "unit": "s",
+          "value": 0.25
+        },
+        "series_kind": "instantaneous",
+        "time_origin": "the first bit of the sequence",
+        "time_resolution": {
+          "status": "present",
+          "unit": "s",
+          "value": 0.3
+        },
+        "unit": "A",
+        "variable": "CH4 signal"
+      }
+    },
+    {
+      "id": "ex:tk/mechanism/methanation-ni",
+      "label": "Mechanism",
+      "props": {
+        "name": "CO2 methanation on Ni, four steps",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods, kinetic model",
+            "source": "ex:tk/source/paper"
+          }
+        ],
+        "mechanism_format": "other",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:tk/step/co2-dissociation",
+      "label": "ElementaryStep",
+      "props": {
+        "name": "CO2* + * -> CO* + O*",
+        "equation": "CO2* + * -> CO* + O*",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 3",
+            "source": "ex:tk/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "reversible": true,
+        "step_kind": "surface_reaction"
+      }
+    },
+    {
+      "id": "ex:tk/step/co-hydrogenation",
+      "label": "ElementaryStep",
+      "props": {
+        "name": "CO* + H* -> HCO* + *",
+        "equation": "CO* + H* -> HCO* + *",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 3",
+            "source": "ex:tk/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "reversible": true,
+        "step_kind": "surface_reaction"
+      }
+    },
+    {
+      "id": "ex:tk/analysis/fit-plug-flow",
+      "label": "Analysis",
+      "props": {
+        "name": "The model fitted as plug flow",
+        "analysis_kind": "kinetic_fit",
+        "concentration_measure": "partial_pressure",
+        "evidence": [
+          {
+            "id": "t3",
+            "kind": "table",
+            "locator": "Table 3",
+            "source": "ex:tk/source/paper"
+          }
+        ],
+        "limitations": "the CO hydrogenation barrier is not determined by these responses; H2 adsorption is held at equilibrium",
+        "method": "weighted least squares on the outlet CH4 and CO2 responses",
+        "origin": "synthetic",
+        "rate_basis": "per_site",
+        "reactor_model": "plug_flow",
+        "result_values": [
+          {
+            "id": "ea_co2_dissociation",
+            "status": "present",
+            "confidence_level": 0.95,
+            "evidence_ids": [
+              "t3"
+            ],
+            "identifiability": "identifiable",
+            "interval_lower": 85,
+            "interval_method": "profile_likelihood",
+            "interval_upper": 99,
+            "origin": "fitted",
+            "produced_by": "ex:tk/analysis/fit-plug-flow",
+            "target": "ex:tk/step/co2-dissociation",
+            "uncertainty_kind": "confidence_interval",
+            "unit": "kJ/mol",
+            "value": 92,
+            "variable": "ex:tk/variable/activation-energy"
+          },
+          {
+            "id": "ea_co_hydrogenation",
+            "status": "present",
+            "evidence_ids": [
+              "t3"
+            ],
+            "identifiability": "practically_unidentifiable",
+            "note": "its profile stays flat above 60 kJ/mol",
+            "origin": "fitted",
+            "produced_by": "ex:tk/analysis/fit-plug-flow",
+            "target": "ex:tk/step/co-hydrogenation",
+            "unit": "kJ/mol",
+            "value": 68,
+            "variable": "ex:tk/variable/activation-energy"
+          }
+        ],
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 320
+        },
+        "thermodynamic_consistency": "enforced"
+      }
+    },
+    {
+      "id": "ex:tk/analysis/fit-differential",
+      "label": "Analysis",
+      "props": {
+        "name": "The same model fitted as a differential reactor",
+        "analysis_kind": "kinetic_fit",
+        "concentration_measure": "partial_pressure",
+        "evidence": [
+          {
+            "id": "t3",
+            "kind": "table",
+            "locator": "Table 3",
+            "source": "ex:tk/source/paper"
+          }
+        ],
+        "limitations": "treats the bed as one composition although the conversion reaches 30 %",
+        "method": "weighted least squares on the outlet CH4 and CO2 responses",
+        "origin": "synthetic",
+        "rate_basis": "per_site",
+        "reactor_model": "differential",
+        "result_values": [
+          {
+            "id": "ea_co2_dissociation",
+            "status": "present",
+            "evidence_ids": [
+              "t3"
+            ],
+            "identifiability": "identifiable",
+            "interval_method": "curvature",
+            "origin": "fitted",
+            "produced_by": "ex:tk/analysis/fit-differential",
+            "target": "ex:tk/step/co2-dissociation",
+            "uncertainty": 3,
+            "uncertainty_kind": "standard_error",
+            "unit": "kJ/mol",
+            "value": 78,
+            "variable": "ex:tk/variable/activation-energy"
+          }
+        ],
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 320
+        },
+        "thermodynamic_consistency": "enforced"
+      }
+    },
+    {
+      "id": "ex:tk/instrument/looping-reactor",
+      "label": "Reactor",
+      "props": {
+        "name": "Fixed-bed looping reactor",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods, reactors",
+            "source": "ex:tk/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "reactor_kind": "fixed_bed"
+      }
+    },
+    {
+      "id": "ex:tk/feed/ch4-then-air",
+      "label": "Feed",
+      "props": {
+        "name": "5 % CH4 in Ar, then air, alternating",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:tk/source/paper"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:tk/test/chemical-loop-900c",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "CH4 partial oxidation by chemical looping at 900 °C",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Figure 7",
+            "source": "ex:tk/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "basis": "absolute",
+          "unit": "bar",
+          "value": 1
+        },
+        "selectivity": {
+          "status": "present",
+          "definition": "CO selectivity during the reduction half-cycle, cycles 5-20",
+          "target": "ex:tk/species/co",
+          "unit": "%",
+          "value": 85
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 900
+        },
+        "temperature_measured_at": "catalyst_bed",
+        "test_kind": "activity"
+      }
+    },
+    {
+      "id": "ex:tk/operation/looping-cycle",
+      "label": "Operation",
+      "props": {
+        "name": "Reduction, purge, reoxidation, purge; 20 cycles",
+        "cycles": 20,
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods, chemical looping",
+            "source": "ex:tk/source/paper"
+          }
+        ],
+        "operation_mode": "dynamic",
+        "origin": "synthetic",
+        "program_detail": "exact",
+        "segments": [
+          {
+            "label": {
+              "status": "present",
+              "text_value": "reduction (5 % CH4 in Ar)"
+            },
+            "duration": {
+              "status": "present",
+              "unit": "s",
+              "value": 60
+            }
+          },
+          {
+            "label": {
+              "status": "present",
+              "text_value": "purge (Ar)"
+            },
+            "duration": {
+              "status": "present",
+              "unit": "s",
+              "value": 30
+            }
+          },
+          {
+            "label": {
+              "status": "present",
+              "text_value": "reoxidation (air)"
+            },
+            "duration": {
+              "status": "present",
+              "unit": "s",
+              "value": 45
+            }
+          },
+          {
+            "label": {
+              "status": "present",
+              "text_value": "purge (Ar)"
+            },
+            "duration": {
+              "status": "present",
+              "unit": "s",
+              "value": 30
+            }
+          }
+        ],
+        "time_origin": "the start of the first reduction",
+        "time_pattern": "periodic",
+        "varied_quantities": [
+          "the gas fed"
+        ]
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:tk/link/1",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:tk/reaction/water-gas-shift",
+      "target": "ex:tk/species/co"
+    },
+    {
+      "id": "ex:tk/link/2",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:tk/reaction/water-gas-shift",
+      "target": "ex:tk/species/h2o"
+    },
+    {
+      "id": "ex:tk/link/3",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "role": "product"
+      },
+      "source": "ex:tk/reaction/water-gas-shift",
+      "target": "ex:tk/species/co2"
+    },
+    {
+      "id": "ex:tk/link/4",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "role": "product"
+      },
+      "source": "ex:tk/reaction/water-gas-shift",
+      "target": "ex:tk/species/h2"
+    },
+    {
+      "id": "ex:tk/link/5",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:tk/reaction/co2-methanation",
+      "target": "ex:tk/species/co2"
+    },
+    {
+      "id": "ex:tk/link/6",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 4,
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:tk/reaction/co2-methanation",
+      "target": "ex:tk/species/h2"
+    },
+    {
+      "id": "ex:tk/link/7",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "role": "product"
+      },
+      "source": "ex:tk/reaction/co2-methanation",
+      "target": "ex:tk/species/ch4"
+    },
+    {
+      "id": "ex:tk/link/8",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 2,
+        "origin": "synthetic",
+        "role": "product"
+      },
+      "source": "ex:tk/reaction/co2-methanation",
+      "target": "ex:tk/species/h2o"
+    },
+    {
+      "id": "ex:tk/link/9",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:tk/reaction/ch4-partial-oxidation",
+      "target": "ex:tk/species/ch4"
+    },
+    {
+      "id": "ex:tk/link/10",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 0.5,
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:tk/reaction/ch4-partial-oxidation",
+      "target": "ex:tk/species/o2"
+    },
+    {
+      "id": "ex:tk/link/11",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "role": "product"
+      },
+      "source": "ex:tk/reaction/ch4-partial-oxidation",
+      "target": "ex:tk/species/co"
+    },
+    {
+      "id": "ex:tk/link/12",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 2,
+        "origin": "synthetic",
+        "role": "product"
+      },
+      "source": "ex:tk/reaction/ch4-partial-oxidation",
+      "target": "ex:tk/species/h2"
+    },
+    {
+      "id": "ex:tk/link/13",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/sample/pt-ceo2",
+      "target": "ex:tk/catalyst/pt-ceo2"
+    },
+    {
+      "id": "ex:tk/link/14",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/sample/ni-al2o3",
+      "target": "ex:tk/catalyst/ni-al2o3"
+    },
+    {
+      "id": "ex:tk/link/15",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/sample/fe2o3-al2o3",
+      "target": "ex:tk/catalyst/fe2o3-al2o3"
+    },
+    {
+      "id": "ex:tk/link/16",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:tk/feed/co-h2o-ar",
+      "target": "ex:tk/species/co"
+    },
+    {
+      "id": "ex:tk/link/17",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:tk/feed/co-h2o-ar",
+      "target": "ex:tk/species/13co"
+    },
+    {
+      "id": "ex:tk/link/18",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:tk/feed/co-h2o-ar",
+      "target": "ex:tk/species/h2o"
+    },
+    {
+      "id": "ex:tk/link/19",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:tk/feed/co-h2o-ar",
+      "target": "ex:tk/species/ar"
+    },
+    {
+      "id": "ex:tk/link/20",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:tk/feed/co-h2o-ar",
+      "target": "ex:tk/species/kr"
+    },
+    {
+      "id": "ex:tk/link/21",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "reduced"
+      },
+      "source": "ex:tk/test/ssitka-200c",
+      "target": "ex:tk/sample/pt-ceo2"
+    },
+    {
+      "id": "ex:tk/link/22",
+      "type": "FED_WITH",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/test/ssitka-200c",
+      "target": "ex:tk/feed/co-h2o-ar"
+    },
+    {
+      "id": "ex:tk/link/23",
+      "type": "IN_REACTOR",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/test/ssitka-200c",
+      "target": "ex:tk/instrument/microreactor"
+    },
+    {
+      "id": "ex:tk/link/24",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/test/ssitka-200c",
+      "target": "ex:tk/reaction/water-gas-shift"
+    },
+    {
+      "id": "ex:tk/link/25",
+      "type": "HAS_OPERATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/test/ssitka-200c",
+      "target": "ex:tk/operation/isotope-switch"
+    },
+    {
+      "id": "ex:tk/link/26",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/test/ssitka-200c",
+      "target": "ex:tk/dataset/13co2-response"
+    },
+    {
+      "id": "ex:tk/link/27",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/test/ssitka-200c",
+      "target": "ex:tk/dataset/kr-response"
+    },
+    {
+      "id": "ex:tk/link/28",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:tk/analysis/ssitka-co2",
+      "target": "ex:tk/test/ssitka-200c"
+    },
+    {
+      "id": "ex:tk/link/29",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:tk/analysis/ssitka-co2",
+      "target": "ex:tk/dataset/13co2-response"
+    },
+    {
+      "id": "ex:tk/link/30",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:tk/analysis/ssitka-co2",
+      "target": "ex:tk/dataset/kr-response"
+    },
+    {
+      "id": "ex:tk/link/31",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:tk/feed/co-modulated",
+      "target": "ex:tk/species/co"
+    },
+    {
+      "id": "ex:tk/link/32",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:tk/feed/co-modulated",
+      "target": "ex:tk/species/h2o"
+    },
+    {
+      "id": "ex:tk/link/33",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:tk/feed/co-modulated",
+      "target": "ex:tk/species/ar"
+    },
+    {
+      "id": "ex:tk/link/34",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "reduced"
+      },
+      "source": "ex:tk/test/modulation-250c",
+      "target": "ex:tk/sample/pt-ceo2"
+    },
+    {
+      "id": "ex:tk/link/35",
+      "type": "FED_WITH",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/test/modulation-250c",
+      "target": "ex:tk/feed/co-modulated"
+    },
+    {
+      "id": "ex:tk/link/36",
+      "type": "IN_REACTOR",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/test/modulation-250c",
+      "target": "ex:tk/instrument/drifts-cell"
+    },
+    {
+      "id": "ex:tk/link/37",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/test/modulation-250c",
+      "target": "ex:tk/reaction/water-gas-shift"
+    },
+    {
+      "id": "ex:tk/link/38",
+      "type": "HAS_OPERATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/test/modulation-250c",
+      "target": "ex:tk/operation/co-square-wave"
+    },
+    {
+      "id": "ex:tk/link/39",
+      "type": "DURING",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods, transients",
+            "source": "ex:tk/source/paper"
+          }
+        ],
+        "kinetics": "measured",
+        "origin": "synthetic",
+        "specimen": "same_specimen",
+        "synchronization": "one trigger starts the valve sequence and the spectrometer; the outlet MS lags by 1.4 s, measured with an Ar pulse and removed",
+        "timing": "simultaneous"
+      },
+      "source": "ex:tk/characterization/operando-drifts",
+      "target": "ex:tk/test/modulation-250c"
+    },
+    {
+      "id": "ex:tk/link/40",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/characterization/operando-drifts",
+      "target": "ex:tk/dataset/drifts-spectra"
+    },
+    {
+      "id": "ex:tk/link/41",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/test/modulation-250c",
+      "target": "ex:tk/dataset/co2-outlet"
+    },
+    {
+      "id": "ex:tk/link/42",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:tk/analysis/phase-sensitive-detection",
+      "target": "ex:tk/test/modulation-250c"
+    },
+    {
+      "id": "ex:tk/link/43",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:tk/analysis/phase-sensitive-detection",
+      "target": "ex:tk/dataset/drifts-spectra"
+    },
+    {
+      "id": "ex:tk/link/44",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:tk/analysis/phase-sensitive-detection",
+      "target": "ex:tk/dataset/co2-outlet"
+    },
+    {
+      "id": "ex:tk/link/45",
+      "type": "ABOUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "active"
+      },
+      "source": "ex:tk/claim/linear-co-intermediate",
+      "target": "ex:tk/species/co-linear-pt"
+    },
+    {
+      "id": "ex:tk/link/46",
+      "type": "ABOUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reaction"
+      },
+      "source": "ex:tk/claim/linear-co-intermediate",
+      "target": "ex:tk/reaction/water-gas-shift"
+    },
+    {
+      "id": "ex:tk/link/47",
+      "type": "ABOUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "product"
+      },
+      "source": "ex:tk/claim/linear-co-intermediate",
+      "target": "ex:tk/species/co2"
+    },
+    {
+      "id": "ex:tk/link/48",
+      "type": "ABOUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "test"
+      },
+      "source": "ex:tk/claim/linear-co-intermediate",
+      "target": "ex:tk/test/modulation-250c"
+    },
+    {
+      "id": "ex:tk/link/49",
+      "type": "SUPPORTS",
+      "props": {
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 5",
+            "source": "ex:tk/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "premise_refs": [
+          {
+            "path": "/result_values/delay_co_linear",
+            "record": "ex:tk/analysis/phase-sensitive-detection"
+          },
+          {
+            "path": "/result_values/delay_co2",
+            "record": "ex:tk/analysis/phase-sensitive-detection"
+          }
+        ],
+        "warrant": "the band responds before the product and follows the stimulus"
+      },
+      "source": "ex:tk/analysis/phase-sensitive-detection",
+      "target": "ex:tk/claim/linear-co-intermediate"
+    },
+    {
+      "id": "ex:tk/link/50",
+      "type": "ABOUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "spectator"
+      },
+      "source": "ex:tk/claim/carbonate-spectator",
+      "target": "ex:tk/species/carbonate-ceria"
+    },
+    {
+      "id": "ex:tk/link/51",
+      "type": "ABOUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reaction"
+      },
+      "source": "ex:tk/claim/carbonate-spectator",
+      "target": "ex:tk/reaction/water-gas-shift"
+    },
+    {
+      "id": "ex:tk/link/52",
+      "type": "ABOUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "product"
+      },
+      "source": "ex:tk/claim/carbonate-spectator",
+      "target": "ex:tk/species/co2"
+    },
+    {
+      "id": "ex:tk/link/53",
+      "type": "ABOUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "test"
+      },
+      "source": "ex:tk/claim/carbonate-spectator",
+      "target": "ex:tk/test/modulation-250c"
+    },
+    {
+      "id": "ex:tk/link/54",
+      "type": "SUPPORTS",
+      "props": {
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 5",
+            "source": "ex:tk/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "premise_refs": [
+          {
+            "path": "/result_values/delay_carbonate",
+            "record": "ex:tk/analysis/phase-sensitive-detection"
+          },
+          {
+            "path": "/result_values/delay_co2",
+            "record": "ex:tk/analysis/phase-sensitive-detection"
+          }
+        ],
+        "warrant": "the carbonate band lags the product by 12 s"
+      },
+      "source": "ex:tk/analysis/phase-sensitive-detection",
+      "target": "ex:tk/claim/carbonate-spectator"
+    },
+    {
+      "id": "ex:tk/link/55",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:tk/feed/h2-co2",
+      "target": "ex:tk/species/co2"
+    },
+    {
+      "id": "ex:tk/link/56",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:tk/feed/h2-co2",
+      "target": "ex:tk/species/h2"
+    },
+    {
+      "id": "ex:tk/link/57",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:tk/feed/h2-co2",
+      "target": "ex:tk/species/ar"
+    },
+    {
+      "id": "ex:tk/link/58",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "reduced"
+      },
+      "source": "ex:tk/test/methanation-prbs-320c",
+      "target": "ex:tk/sample/ni-al2o3"
+    },
+    {
+      "id": "ex:tk/link/59",
+      "type": "FED_WITH",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/test/methanation-prbs-320c",
+      "target": "ex:tk/feed/h2-co2"
+    },
+    {
+      "id": "ex:tk/link/60",
+      "type": "IN_REACTOR",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/test/methanation-prbs-320c",
+      "target": "ex:tk/instrument/microreactor"
+    },
+    {
+      "id": "ex:tk/link/61",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/test/methanation-prbs-320c",
+      "target": "ex:tk/reaction/co2-methanation"
+    },
+    {
+      "id": "ex:tk/link/62",
+      "type": "HAS_OPERATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/test/methanation-prbs-320c",
+      "target": "ex:tk/operation/co2-sequence"
+    },
+    {
+      "id": "ex:tk/link/63",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/test/methanation-prbs-320c",
+      "target": "ex:tk/dataset/ch4-outlet"
+    },
+    {
+      "id": "ex:tk/link/64",
+      "type": "DESCRIBES_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/mechanism/methanation-ni",
+      "target": "ex:tk/reaction/co2-methanation"
+    },
+    {
+      "id": "ex:tk/link/65",
+      "type": "HAS_ELEMENTARY_STEP",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/mechanism/methanation-ni",
+      "target": "ex:tk/step/co2-dissociation"
+    },
+    {
+      "id": "ex:tk/link/66",
+      "type": "HAS_ELEMENTARY_STEP",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/mechanism/methanation-ni",
+      "target": "ex:tk/step/co-hydrogenation"
+    },
+    {
+      "id": "ex:tk/link/67",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:tk/analysis/fit-plug-flow",
+      "target": "ex:tk/test/methanation-prbs-320c"
+    },
+    {
+      "id": "ex:tk/link/68",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:tk/analysis/fit-plug-flow",
+      "target": "ex:tk/dataset/ch4-outlet"
+    },
+    {
+      "id": "ex:tk/link/69",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "parameter"
+      },
+      "source": "ex:tk/analysis/fit-plug-flow",
+      "target": "ex:tk/mechanism/methanation-ni"
+    },
+    {
+      "id": "ex:tk/link/70",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:tk/analysis/fit-differential",
+      "target": "ex:tk/test/methanation-prbs-320c"
+    },
+    {
+      "id": "ex:tk/link/71",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:tk/analysis/fit-differential",
+      "target": "ex:tk/dataset/ch4-outlet"
+    },
+    {
+      "id": "ex:tk/link/72",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "parameter"
+      },
+      "source": "ex:tk/analysis/fit-differential",
+      "target": "ex:tk/mechanism/methanation-ni"
+    },
+    {
+      "id": "ex:tk/link/73",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:tk/feed/ch4-then-air",
+      "target": "ex:tk/species/ch4"
+    },
+    {
+      "id": "ex:tk/link/74",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:tk/feed/ch4-then-air",
+      "target": "ex:tk/species/o2"
+    },
+    {
+      "id": "ex:tk/link/75",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:tk/feed/ch4-then-air",
+      "target": "ex:tk/species/ar"
+    },
+    {
+      "id": "ex:tk/link/76",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "reduced"
+      },
+      "source": "ex:tk/test/chemical-loop-900c",
+      "target": "ex:tk/sample/fe2o3-al2o3"
+    },
+    {
+      "id": "ex:tk/link/77",
+      "type": "FED_WITH",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/test/chemical-loop-900c",
+      "target": "ex:tk/feed/ch4-then-air"
+    },
+    {
+      "id": "ex:tk/link/78",
+      "type": "IN_REACTOR",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/test/chemical-loop-900c",
+      "target": "ex:tk/instrument/looping-reactor"
+    },
+    {
+      "id": "ex:tk/link/79",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/test/chemical-loop-900c",
+      "target": "ex:tk/reaction/ch4-partial-oxidation"
+    },
+    {
+      "id": "ex:tk/link/80",
+      "type": "HAS_OPERATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/test/chemical-loop-900c",
+      "target": "ex:tk/operation/looping-cycle"
+    },
+    {
+      "id": "ex:tk/analysis/fit-differential/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/analysis/fit-differential",
+      "target": "ex:tk/source/paper"
+    },
+    {
+      "id": "ex:tk/analysis/fit-plug-flow/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/analysis/fit-plug-flow",
+      "target": "ex:tk/source/paper"
+    },
+    {
+      "id": "ex:tk/analysis/phase-sensitive-detection/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 5"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/analysis/phase-sensitive-detection",
+      "target": "ex:tk/source/paper"
+    },
+    {
+      "id": "ex:tk/analysis/ssitka-co2/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/analysis/ssitka-co2",
+      "target": "ex:tk/source/paper"
+    },
+    {
+      "id": "ex:tk/catalyst/fe2o3-al2o3/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods, catalysts"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/catalyst/fe2o3-al2o3",
+      "target": "ex:tk/source/paper"
+    },
+    {
+      "id": "ex:tk/catalyst/ni-al2o3/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods, catalysts"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/catalyst/ni-al2o3",
+      "target": "ex:tk/source/paper"
+    },
+    {
+      "id": "ex:tk/catalyst/pt-ceo2/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods, catalysts"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/catalyst/pt-ceo2",
+      "target": "ex:tk/source/paper"
+    },
+    {
+      "id": "ex:tk/characterization/operando-drifts/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 4"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/characterization/operando-drifts",
+      "target": "ex:tk/source/paper"
+    },
+    {
+      "id": "ex:tk/claim/carbonate-spectator/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Discussion"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/claim/carbonate-spectator",
+      "target": "ex:tk/source/paper"
+    },
+    {
+      "id": "ex:tk/claim/linear-co-intermediate/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Discussion"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/claim/linear-co-intermediate",
+      "target": "ex:tk/source/paper"
+    },
+    {
+      "id": "ex:tk/dataset/13co2-response/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/dataset/13co2-response",
+      "target": "ex:tk/source/paper"
+    },
+    {
+      "id": "ex:tk/dataset/ch4-outlet/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 6"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/dataset/ch4-outlet",
+      "target": "ex:tk/source/paper"
+    },
+    {
+      "id": "ex:tk/dataset/co2-outlet/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 4"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/dataset/co2-outlet",
+      "target": "ex:tk/source/paper"
+    },
+    {
+      "id": "ex:tk/dataset/drifts-spectra/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 4"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/dataset/drifts-spectra",
+      "target": "ex:tk/source/paper"
+    },
+    {
+      "id": "ex:tk/dataset/kr-response/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/dataset/kr-response",
+      "target": "ex:tk/source/paper"
+    },
+    {
+      "id": "ex:tk/feed/ch4-then-air/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/feed/ch4-then-air",
+      "target": "ex:tk/source/paper"
+    },
+    {
+      "id": "ex:tk/feed/co-h2o-ar/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/feed/co-h2o-ar",
+      "target": "ex:tk/source/paper"
+    },
+    {
+      "id": "ex:tk/feed/co-modulated/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/feed/co-modulated",
+      "target": "ex:tk/source/paper"
+    },
+    {
+      "id": "ex:tk/feed/h2-co2/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/feed/h2-co2",
+      "target": "ex:tk/source/paper"
+    },
+    {
+      "id": "ex:tk/instrument/drifts-cell/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods, reactors"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/instrument/drifts-cell",
+      "target": "ex:tk/source/paper"
+    },
+    {
+      "id": "ex:tk/instrument/looping-reactor/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods, reactors"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/instrument/looping-reactor",
+      "target": "ex:tk/source/paper"
+    },
+    {
+      "id": "ex:tk/instrument/microreactor/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods, reactors"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/instrument/microreactor",
+      "target": "ex:tk/source/paper"
+    },
+    {
+      "id": "ex:tk/mechanism/methanation-ni/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods, kinetic model"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/mechanism/methanation-ni",
+      "target": "ex:tk/source/paper"
+    },
+    {
+      "id": "ex:tk/operation/co-square-wave/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods, transients"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/operation/co-square-wave",
+      "target": "ex:tk/source/paper"
+    },
+    {
+      "id": "ex:tk/operation/co2-sequence/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods, transients",
+          "Supporting Information, Table S1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/operation/co2-sequence",
+      "target": "ex:tk/source/paper"
+    },
+    {
+      "id": "ex:tk/operation/isotope-switch/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods, transients"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/operation/isotope-switch",
+      "target": "ex:tk/source/paper"
+    },
+    {
+      "id": "ex:tk/operation/looping-cycle/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods, chemical looping"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/operation/looping-cycle",
+      "target": "ex:tk/source/paper"
+    },
+    {
+      "id": "ex:tk/sample/fe2o3-al2o3/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods, catalysts"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/sample/fe2o3-al2o3",
+      "target": "ex:tk/source/paper"
+    },
+    {
+      "id": "ex:tk/sample/ni-al2o3/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods, catalysts"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/sample/ni-al2o3",
+      "target": "ex:tk/source/paper"
+    },
+    {
+      "id": "ex:tk/sample/pt-ceo2/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods, catalysts"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/sample/pt-ceo2",
+      "target": "ex:tk/source/paper"
+    },
+    {
+      "id": "ex:tk/step/co-hydrogenation/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/step/co-hydrogenation",
+      "target": "ex:tk/source/paper"
+    },
+    {
+      "id": "ex:tk/step/co2-dissociation/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/step/co2-dissociation",
+      "target": "ex:tk/source/paper"
+    },
+    {
+      "id": "ex:tk/test/chemical-loop-900c/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 7"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/test/chemical-loop-900c",
+      "target": "ex:tk/source/paper"
+    },
+    {
+      "id": "ex:tk/test/methanation-prbs-320c/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 6"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/test/methanation-prbs-320c",
+      "target": "ex:tk/source/paper"
+    },
+    {
+      "id": "ex:tk/test/modulation-250c/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 4"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/test/modulation-250c",
+      "target": "ex:tk/source/paper"
+    },
+    {
+      "id": "ex:tk/test/ssitka-200c/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:tk/test/ssitka-200c",
+      "target": "ex:tk/source/paper"
+    }
+  ],
+  "directed": true,
+  "graph": {
+    "data_status": "synthetic_example",
+    "follows_domains": [
+      "catalysis"
+    ],
+    "graph_id": "ex:invalid/waveform-not-in-vocabulary",
+    "schema": "scale-catal",
+    "schema_version": "0.7.3",
+    "stewardship": {
+      "access": "public"
+    },
+    "title": "INVALID FIXTURE (waveform-not-in-vocabulary): a modulation whose waveform is stated in other words"
+  },
+  "multigraph": true
+}
