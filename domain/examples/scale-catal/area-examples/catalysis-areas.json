@@ -1,0 +1,2249 @@
+{
+  "nodes": [
+    {
+      "id": "ex:ca/source/enzyme",
+      "label": "Source",
+      "props": {
+        "name": "Invented paper (enzyme)",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "Ethanol oxidation by an alcohol dehydrogenase immobilized on silica (invented)",
+        "year": 2026
+      }
+    },
+    {
+      "id": "ex:ca/source/homogeneous",
+      "label": "Source",
+      "props": {
+        "name": "Invented paper (homogeneous)",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "Hydrogenation of 1-octene with a rhodium phosphine complex (invented)",
+        "year": 2026
+      }
+    },
+    {
+      "id": "ex:ca/source/transport",
+      "label": "Source",
+      "props": {
+        "name": "Invented paper (transport)",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "Ethylene hydrogenation over Pd/Al2O3, with and without transport limitation (invented)",
+        "year": 2026
+      }
+    },
+    {
+      "id": "ex:ca/source/energy",
+      "label": "Source",
+      "props": {
+        "name": "Invented paper (energy)",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "CO2 electrolysis to CO in a flow cell, and the energy it takes (invented)",
+        "year": 2026
+      }
+    },
+    {
+      "id": "ex:ca/species/ethanol",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "ethanol",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 2,
+          "H": 6,
+          "O": 1
+        },
+        "formula": "C2H6O",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ca/species/acetaldehyde",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "acetaldehyde",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 2,
+          "H": 4,
+          "O": 1
+        },
+        "formula": "C2H4O",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ca/species/nad",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "NAD+",
+        "charge": 1,
+        "elemental_composition": {
+          "C": 21,
+          "H": 28,
+          "N": 7,
+          "O": 14,
+          "P": 2
+        },
+        "formula": "C21H28N7O14P2",
+        "origin": "synthetic",
+        "species_kind": "ion"
+      }
+    },
+    {
+      "id": "ex:ca/species/nadh",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "NADH",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 21,
+          "H": 29,
+          "N": 7,
+          "O": 14,
+          "P": 2
+        },
+        "formula": "C21H29N7O14P2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ca/species/proton",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "H+",
+        "charge": 1,
+        "elemental_composition": {
+          "H": 1
+        },
+        "formula": "H+",
+        "origin": "synthetic",
+        "species_kind": "ion"
+      }
+    },
+    {
+      "id": "ex:ca/species/water",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "water",
+        "charge": 0,
+        "elemental_composition": {
+          "H": 2,
+          "O": 1
+        },
+        "formula": "H2O",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ca/species/adh",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "alcohol dehydrogenase (yeast)",
+        "identifiers": {
+          "ec": "1.1.1.1"
+        },
+        "origin": "synthetic",
+        "species_kind": "macromolecule"
+      }
+    },
+    {
+      "id": "ex:ca/material/silica",
+      "label": "Material",
+      "props": {
+        "name": "mesoporous silica",
+        "crystallinity": "amorphous",
+        "formula": "SiO2",
+        "material_family": "oxide",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ca/catalyst/adh-silica",
+      "label": "Catalyst",
+      "props": {
+        "name": "ADH immobilized on mesoporous silica",
+        "catalyst_family": "enzyme",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Section 2.1",
+            "source": "ex:ca/source/enzyme"
+          }
+        ],
+        "nominal_formula": "ADH/SiO2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ca/sample/adh-silica-batch",
+      "label": "CatalystSample",
+      "props": {
+        "name": "ADH/SiO2 batch",
+        "batch_identifier": "B-1",
+        "origin": "synthetic",
+        "sample_kind": "batch"
+      }
+    },
+    {
+      "id": "ex:ca/reaction/ethanol-oxidation",
+      "label": "Reaction",
+      "props": {
+        "name": "C2H6O + NAD+ -> C2H4O + NADH + H+",
+        "balance_status": "balanced",
+        "direction": "forward",
+        "equation": "C2H6O + NAD+ -> C2H4O + NADH + H+",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Scheme 1",
+            "source": "ex:ca/source/enzyme"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ca/feed/assay-mixture",
+      "label": "Feed",
+      "props": {
+        "name": "assay mixture: ethanol and NAD+ in phosphate buffer",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Section 2.3",
+            "source": "ex:ca/source/enzyme"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ca/reactor/stirred-vial",
+      "label": "Reactor",
+      "props": {
+        "name": "stirred glass vial",
+        "origin": "synthetic",
+        "reactor_kind": "batch",
+        "volume": {
+          "status": "present",
+          "unit": "mL",
+          "value": 5
+        }
+      }
+    },
+    {
+      "id": "ex:ca/variable/specific-activity",
+      "label": "Variable",
+      "props": {
+        "name": "specific activity of the immobilized ADH",
+        "origin": "synthetic",
+        "quantity_kind": "enzyme_activity",
+        "scale": "quantitative",
+        "unit": "U/mg"
+      }
+    },
+    {
+      "id": "ex:ca/variable/activity",
+      "label": "Variable",
+      "props": {
+        "name": "activity of the immobilized ADH in the assay",
+        "origin": "synthetic",
+        "quantity_kind": "enzyme_activity",
+        "scale": "quantitative",
+        "unit": "U"
+      }
+    },
+    {
+      "id": "ex:ca/variable/volumetric-activity",
+      "label": "Variable",
+      "props": {
+        "name": "activity per volume of the assay mixture",
+        "origin": "synthetic",
+        "quantity_kind": "enzyme_activity",
+        "scale": "quantitative",
+        "unit": "mU/mL"
+      }
+    },
+    {
+      "id": "ex:ca/variable/km-ethanol",
+      "label": "Variable",
+      "props": {
+        "name": "Michaelis constant for ethanol",
+        "origin": "synthetic",
+        "quantity_kind": "michaelis_constant",
+        "scale": "quantitative",
+        "unit": "mmol/L"
+      }
+    },
+    {
+      "id": "ex:ca/test/adh-assay",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "ADH/SiO2 activity assay at 30 °C",
+        "catalysis_mode": "biocatalytic",
+        "conditions": {
+          "pH": {
+            "status": "present",
+            "definition": "pH of the assay mixture (phosphate buffer)",
+            "evidence_ids": [
+              "s23"
+            ],
+            "unit": "1",
+            "value": 7.5
+          }
+        },
+        "driving_forces": [
+          "thermo"
+        ],
+        "duration": {
+          "status": "present",
+          "unit": "min",
+          "value": 10
+        },
+        "evidence": [
+          {
+            "id": "s23",
+            "kind": "text",
+            "locator": "Section 2.3",
+            "source": "ex:ca/source/enzyme"
+          },
+          {
+            "id": "t1_activity",
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:ca/source/enzyme"
+          }
+        ],
+        "experiment_kind": "physical",
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "basis": "absolute",
+          "unit": "atm",
+          "value": 1
+        },
+        "result_values": [
+          {
+            "id": "specific_activity",
+            "status": "present",
+            "definition": "micromoles of ethanol oxidized per minute per milligram of ADH (the enzyme, not the silica)",
+            "evidence_ids": [
+              "t1_activity"
+            ],
+            "target": "ex:ca/species/ethanol",
+            "unit": "U/mg",
+            "value": 12.5,
+            "variable": "ex:ca/variable/specific-activity"
+          },
+          {
+            "id": "activity",
+            "status": "present",
+            "definition": "activity of the 1 mg charge, which holds 48 µg of ADH",
+            "evidence_ids": [
+              "t1_activity"
+            ],
+            "target": "ex:ca/species/ethanol",
+            "unit": "U",
+            "value": 0.6,
+            "variable": "ex:ca/variable/activity"
+          },
+          {
+            "id": "volumetric_activity",
+            "status": "present",
+            "definition": "activity of the charge per millilitre of the 5 mL assay mixture",
+            "evidence_ids": [
+              "t1_activity"
+            ],
+            "target": "ex:ca/species/ethanol",
+            "unit": "mU/mL",
+            "value": 120,
+            "variable": "ex:ca/variable/volumetric-activity"
+          }
+        ],
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 30
+        },
+        "test_kind": "activity"
+      }
+    },
+    {
+      "id": "ex:ca/model/michaelis-menten",
+      "label": "Model",
+      "props": {
+        "name": "Michaelis-Menten rate law",
+        "equations": [
+          "r = r_max c / (Km + c)"
+        ],
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 3",
+            "source": "ex:ca/source/enzyme"
+          }
+        ],
+        "model_kind": "rate law",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ca/analysis/michaelis-menten-fit",
+      "label": "Analysis",
+      "props": {
+        "name": "Michaelis-Menten fit of initial rates against ethanol",
+        "analysis_kind": "kinetic_fit",
+        "evidence": [
+          {
+            "id": "f3_fit",
+            "kind": "figure",
+            "locator": "Figure 3",
+            "source": "ex:ca/source/enzyme"
+          }
+        ],
+        "method": "non-linear least squares of initial rates, 0.5-50 mM ethanol",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "km_ethanol",
+            "status": "present",
+            "evidence_ids": [
+              "f3_fit"
+            ],
+            "target": "ex:ca/species/ethanol",
+            "uncertainty": 0.2,
+            "uncertainty_kind": "standard_error",
+            "unit": "mmol/L",
+            "value": 1.8,
+            "variable": "ex:ca/variable/km-ethanol"
+          }
+        ],
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 30
+        }
+      }
+    },
+    {
+      "id": "ex:ca/species/1-octene",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "1-octene",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 8,
+          "H": 16
+        },
+        "formula": "C8H16",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ca/species/octane",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "octane",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 8,
+          "H": 18
+        },
+        "formula": "C8H18",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ca/species/h2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "hydrogen",
+        "charge": 0,
+        "elemental_composition": {
+          "H": 2
+        },
+        "formula": "H2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ca/species/toluene",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "toluene",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 7,
+          "H": 8
+        },
+        "formula": "C7H8",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ca/species/pph3",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "triphenylphosphine",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 18,
+          "H": 15,
+          "P": 1
+        },
+        "formula": "C18H15P",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ca/species/rh-complex",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "chloridotris(triphenylphosphine)rhodium(I)",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 54,
+          "Cl": 1,
+          "H": 45,
+          "P": 3,
+          "Rh": 1
+        },
+        "formula": "C54H45ClP3Rh",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ca/catalyst/rh-pph3",
+      "label": "Catalyst",
+      "props": {
+        "name": "RhCl(PPh3)3 with added PPh3",
+        "catalyst_family": "molecular_complex",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Section 2",
+            "source": "ex:ca/source/homogeneous"
+          }
+        ],
+        "nominal_formula": "RhCl(PPh3)3 + 2 PPh3",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ca/sample/rh-pph3-batch",
+      "label": "CatalystSample",
+      "props": {
+        "name": "RhCl(PPh3)3 as received",
+        "origin": "synthetic",
+        "sample_kind": "powder"
+      }
+    },
+    {
+      "id": "ex:ca/reaction/octene-hydrogenation",
+      "label": "Reaction",
+      "props": {
+        "name": "C8H16 + H2 -> C8H18",
+        "balance_status": "balanced",
+        "direction": "forward",
+        "equation": "C8H16 + H2 -> C8H18",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Scheme 1",
+            "source": "ex:ca/source/homogeneous"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ca/feed/octene-in-toluene",
+      "label": "Feed",
+      "props": {
+        "name": "1-octene in toluene under hydrogen",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ca/reactor/autoclave",
+      "label": "Reactor",
+      "props": {
+        "name": "glass autoclave",
+        "origin": "synthetic",
+        "reactor_kind": "stirred_tank"
+      }
+    },
+    {
+      "id": "ex:ca/variable/ton-octane",
+      "label": "Variable",
+      "props": {
+        "name": "turnover number to octane",
+        "origin": "synthetic",
+        "quantity_kind": "turnover_number",
+        "scale": "quantitative",
+        "unit": "1"
+      }
+    },
+    {
+      "id": "ex:ca/variable/octene-conversion",
+      "label": "Variable",
+      "props": {
+        "name": "conversion of 1-octene",
+        "origin": "synthetic",
+        "quantity_kind": "conversion",
+        "scale": "quantitative",
+        "unit": "%"
+      }
+    },
+    {
+      "id": "ex:ca/test/rh-hydrogenation",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "1-octene hydrogenation, 25 °C, 1 bar H2",
+        "catalysis_mode": "homogeneous",
+        "driving_forces": [
+          "thermo"
+        ],
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 2
+        },
+        "evidence": [
+          {
+            "id": "t2",
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:ca/source/homogeneous"
+          }
+        ],
+        "experiment_kind": "physical",
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "basis": "absolute",
+          "unit": "bar",
+          "value": 1
+        },
+        "result_values": [
+          {
+            "id": "ton",
+            "status": "present",
+            "definition": "mol octane formed per mol Rh charged, after 2 h",
+            "evidence_ids": [
+              "t2"
+            ],
+            "target": "ex:ca/species/octane",
+            "unit": "1",
+            "value": 950,
+            "variable": "ex:ca/variable/ton-octane"
+          },
+          {
+            "id": "conversion",
+            "status": "present",
+            "evidence_ids": [
+              "t2"
+            ],
+            "target": "ex:ca/species/1-octene",
+            "unit": "%",
+            "value": 95,
+            "variable": "ex:ca/variable/octene-conversion"
+          }
+        ],
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 25
+        },
+        "test_kind": "activity"
+      }
+    },
+    {
+      "id": "ex:ca/species/ethylene",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "ethylene",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 2,
+          "H": 4
+        },
+        "formula": "C2H4",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ca/species/ethane",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "ethane",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 2,
+          "H": 6
+        },
+        "formula": "C2H6",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ca/reaction/ethylene-hydrogenation",
+      "label": "Reaction",
+      "props": {
+        "name": "C2H4 + H2 -> C2H6",
+        "balance_status": "balanced",
+        "direction": "forward",
+        "equation": "C2H4 + H2 -> C2H6",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Scheme 1",
+            "source": "ex:ca/source/transport"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ca/catalyst/pd-alumina",
+      "label": "Catalyst",
+      "props": {
+        "name": "1 wt% Pd/Al2O3",
+        "catalyst_family": "metal",
+        "nominal_formula": "Pd/Al2O3",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ca/feed/ethylene-hydrogen",
+      "label": "Feed",
+      "props": {
+        "name": "2% ethylene and 20% hydrogen in helium",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ca/species/helium",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "helium",
+        "charge": 0,
+        "elemental_composition": {
+          "He": 1
+        },
+        "formula": "He",
+        "origin": "synthetic",
+        "species_kind": "atom"
+      }
+    },
+    {
+      "id": "ex:ca/variable/transport-criterion",
+      "label": "Variable",
+      "props": {
+        "name": "transport criterion",
+        "origin": "synthetic",
+        "quantity_kind": "transport_criterion",
+        "scale": "quantitative",
+        "unit": "1"
+      }
+    },
+    {
+      "id": "ex:ca/variable/effectiveness-factor",
+      "label": "Variable",
+      "props": {
+        "name": "effectiveness factor",
+        "origin": "synthetic",
+        "quantity_kind": "effectiveness_factor",
+        "scale": "quantitative",
+        "unit": "1"
+      }
+    },
+    {
+      "id": "ex:ca/variable/thiele-modulus",
+      "label": "Variable",
+      "props": {
+        "name": "Thiele modulus",
+        "origin": "synthetic",
+        "quantity_kind": "thiele_modulus",
+        "scale": "quantitative",
+        "unit": "1"
+      }
+    },
+    {
+      "id": "ex:ca/variable/ethane-rate",
+      "label": "Variable",
+      "props": {
+        "name": "rate of ethane formation",
+        "origin": "synthetic",
+        "quantity_kind": "production_rate",
+        "scale": "quantitative",
+        "unit": "µmol/(g s)"
+      }
+    },
+    {
+      "id": "ex:ca/sample/pd-alumina-fine",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Pd/Al2O3, 75-150 µm particles",
+        "origin": "synthetic",
+        "sample_kind": "granules"
+      }
+    },
+    {
+      "id": "ex:ca/test/ethylene-hydrogenation-fine",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "ethylene hydrogenation at 350 K, 75-150 µm",
+        "catalysis_mode": "heterogeneous",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "id": "t1_fine",
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:ca/source/transport"
+          }
+        ],
+        "experiment_kind": "physical",
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "basis": "absolute",
+          "unit": "bar",
+          "value": 1
+        },
+        "result_values": [
+          {
+            "id": "ethane_rate",
+            "status": "present",
+            "evidence_ids": [
+              "t1_fine"
+            ],
+            "target": "ex:ca/species/ethane",
+            "unit": "µmol/(g s)",
+            "value": 3.2,
+            "variable": "ex:ca/variable/ethane-rate"
+          }
+        ],
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 350
+        },
+        "test_kind": "kinetics"
+      }
+    },
+    {
+      "id": "ex:ca/analysis/transport-fine",
+      "label": "Analysis",
+      "props": {
+        "name": "transport check, 75-150 µm",
+        "analysis_kind": "transport_check",
+        "evaluation_basis": "numerical",
+        "evidence": [
+          {
+            "id": "s4_fine",
+            "kind": "text",
+            "locator": "Supporting information, Section S4",
+            "source": "ex:ca/source/transport"
+          }
+        ],
+        "method": "Weisz-Prater criterion and Mears criterion for external diffusion, from the rate at 350 K",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "weisz_prater",
+            "status": "present",
+            "definition": "Weisz-Prater criterion",
+            "evidence_ids": [
+              "s4_fine"
+            ],
+            "unit": "1",
+            "value": 0.04,
+            "variable": "ex:ca/variable/transport-criterion"
+          },
+          {
+            "id": "mears",
+            "status": "present",
+            "definition": "Mears criterion for external diffusion",
+            "evidence_ids": [
+              "s4_fine"
+            ],
+            "unit": "1",
+            "value": 0.002,
+            "variable": "ex:ca/variable/transport-criterion"
+          },
+          {
+            "id": "effectiveness_factor",
+            "status": "present",
+            "definition": "internal effectiveness factor",
+            "evidence_ids": [
+              "s4_fine"
+            ],
+            "unit": "1",
+            "value": 0.99,
+            "variable": "ex:ca/variable/effectiveness-factor"
+          },
+          {
+            "id": "thiele_modulus",
+            "status": "present",
+            "definition": "generalized Thiele modulus (Bischoff), with the length Vp/Sp",
+            "evidence_ids": [
+              "s4_fine"
+            ],
+            "unit": "1",
+            "value": 0.2,
+            "variable": "ex:ca/variable/thiele-modulus"
+          }
+        ],
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 350
+        },
+        "verdict": "no transport limitation"
+      }
+    },
+    {
+      "id": "ex:ca/sample/pd-alumina-coarse",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Pd/Al2O3, 1-2 mm particles",
+        "origin": "synthetic",
+        "sample_kind": "granules"
+      }
+    },
+    {
+      "id": "ex:ca/test/ethylene-hydrogenation-coarse",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "ethylene hydrogenation at 350 K, 1-2 mm",
+        "catalysis_mode": "heterogeneous",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "id": "t1_coarse",
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:ca/source/transport"
+          }
+        ],
+        "experiment_kind": "physical",
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "basis": "absolute",
+          "unit": "bar",
+          "value": 1
+        },
+        "result_values": [
+          {
+            "id": "ethane_rate",
+            "status": "present",
+            "evidence_ids": [
+              "t1_coarse"
+            ],
+            "target": "ex:ca/species/ethane",
+            "unit": "µmol/(g s)",
+            "value": 2.1,
+            "variable": "ex:ca/variable/ethane-rate"
+          }
+        ],
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 350
+        },
+        "test_kind": "kinetics"
+      }
+    },
+    {
+      "id": "ex:ca/analysis/transport-coarse",
+      "label": "Analysis",
+      "props": {
+        "name": "transport check, 1-2 mm",
+        "analysis_kind": "transport_check",
+        "evaluation_basis": "numerical",
+        "evidence": [
+          {
+            "id": "s4_coarse",
+            "kind": "text",
+            "locator": "Supporting information, Section S4",
+            "source": "ex:ca/source/transport"
+          }
+        ],
+        "method": "Weisz-Prater criterion and Mears criterion for external diffusion, from the rate at 350 K",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "weisz_prater",
+            "status": "present",
+            "definition": "Weisz-Prater criterion",
+            "evidence_ids": [
+              "s4_coarse"
+            ],
+            "unit": "1",
+            "value": 2.6,
+            "variable": "ex:ca/variable/transport-criterion"
+          },
+          {
+            "id": "mears",
+            "status": "present",
+            "definition": "Mears criterion for external diffusion",
+            "evidence_ids": [
+              "s4_coarse"
+            ],
+            "unit": "1",
+            "value": 0.03,
+            "variable": "ex:ca/variable/transport-criterion"
+          },
+          {
+            "id": "effectiveness_factor",
+            "status": "present",
+            "definition": "internal effectiveness factor",
+            "evidence_ids": [
+              "s4_coarse"
+            ],
+            "unit": "1",
+            "value": 0.62,
+            "variable": "ex:ca/variable/effectiveness-factor"
+          },
+          {
+            "id": "thiele_modulus",
+            "status": "present",
+            "definition": "generalized Thiele modulus (Bischoff), with the length Vp/Sp",
+            "evidence_ids": [
+              "s4_coarse"
+            ],
+            "unit": "1",
+            "value": 2.3,
+            "variable": "ex:ca/variable/thiele-modulus"
+          }
+        ],
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 350
+        },
+        "verdict": "pore diffusion limits the rate in the larger particles"
+      }
+    },
+    {
+      "id": "ex:ca/analysis/transport-unnamed",
+      "label": "Analysis",
+      "props": {
+        "name": "transport check whose criterion is not named",
+        "analysis_kind": "transport_check",
+        "evaluation_basis": "numerical",
+        "evidence": [
+          {
+            "id": "s5",
+            "kind": "text",
+            "locator": "Supporting information, Section S5",
+            "source": "ex:ca/source/transport"
+          }
+        ],
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "criterion",
+            "status": "present",
+            "evidence_ids": [
+              "s5"
+            ],
+            "unit": "1",
+            "value": 0.1,
+            "variable": "ex:ca/variable/transport-criterion"
+          }
+        ],
+        "verdict": "no transport limitation"
+      }
+    },
+    {
+      "id": "ex:ca/species/co2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "carbon dioxide",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 1,
+          "O": 2
+        },
+        "formula": "CO2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ca/species/co",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "carbon monoxide",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 1,
+          "O": 1
+        },
+        "formula": "CO",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ca/species/o2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "oxygen",
+        "charge": 0,
+        "elemental_composition": {
+          "O": 2
+        },
+        "formula": "O2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ca/reaction/co2-to-co",
+      "label": "Reaction",
+      "props": {
+        "name": "2 CO2 -> 2 CO + O2",
+        "balance_status": "balanced",
+        "direction": "forward",
+        "equation": "2 CO2 -> 2 CO + O2",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Scheme 1",
+            "source": "ex:ca/source/energy"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ca/catalyst/ag-gde",
+      "label": "Catalyst",
+      "props": {
+        "name": "Ag on a gas-diffusion electrode",
+        "catalyst_family": "metal",
+        "nominal_formula": "Ag",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ca/species/koh",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "potassium hydroxide",
+        "charge": 0,
+        "elemental_composition": {
+          "H": 1,
+          "K": 1,
+          "O": 1
+        },
+        "formula": "KOH",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ca/electrolyte/koh",
+      "label": "Electrolyte",
+      "props": {
+        "name": "1 M KOH",
+        "origin": "synthetic",
+        "pH": {
+          "status": "present",
+          "unit": "1",
+          "value": 14
+        }
+      }
+    },
+    {
+      "id": "ex:ca/variable/energy-per-mol-co",
+      "label": "Variable",
+      "props": {
+        "name": "electrical energy per mole of CO",
+        "origin": "synthetic",
+        "quantity_kind": "energy_consumption",
+        "scale": "quantitative",
+        "unit": "kJ/mol"
+      }
+    },
+    {
+      "id": "ex:ca/variable/energy-per-kg-co",
+      "label": "Variable",
+      "props": {
+        "name": "electrical energy per kilogram of CO",
+        "origin": "synthetic",
+        "quantity_kind": "energy_consumption",
+        "scale": "quantitative",
+        "unit": "kWh/kg"
+      }
+    },
+    {
+      "id": "ex:ca/variable/energy-efficiency",
+      "label": "Variable",
+      "props": {
+        "name": "energy efficiency of the cell",
+        "origin": "synthetic",
+        "quantity_kind": "efficiency",
+        "scale": "quantitative",
+        "unit": "%"
+      }
+    },
+    {
+      "id": "ex:ca/test/co2-electrolysis-100",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "CO2 electrolysis at 100 mA/cm2",
+        "catalysis_mode": "heterogeneous",
+        "control_mode": "galvanostatic",
+        "driving_forces": [
+          "electro"
+        ],
+        "evidence": [
+          {
+            "id": "t3_100",
+            "kind": "table",
+            "locator": "Table 3",
+            "source": "ex:ca/source/energy"
+          }
+        ],
+        "experiment_kind": "physical",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "energy_per_mol",
+            "status": "present",
+            "definition": "electrical energy into the cell per mole of CO formed",
+            "evidence_ids": [
+              "t3_100"
+            ],
+            "target": "ex:ca/species/co",
+            "unit": "kJ/mol",
+            "value": 420,
+            "variable": "ex:ca/variable/energy-per-mol-co"
+          },
+          {
+            "id": "energy_per_kg",
+            "status": "present",
+            "definition": "electrical energy into the cell per kilogram of CO formed",
+            "evidence_ids": [
+              "t3_100"
+            ],
+            "target": "ex:ca/species/co",
+            "unit": "kWh/kg",
+            "value": 4.2,
+            "variable": "ex:ca/variable/energy-per-kg-co"
+          },
+          {
+            "id": "energy_efficiency",
+            "status": "present",
+            "definition": "energy efficiency of CO formation (thermodynamic potential times Faradaic efficiency over cell voltage)",
+            "evidence_ids": [
+              "t3_100"
+            ],
+            "target": "ex:ca/species/co",
+            "unit": "%",
+            "value": 59,
+            "variable": "ex:ca/variable/energy-efficiency"
+          }
+        ],
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 25
+        },
+        "test_kind": "activity"
+      }
+    },
+    {
+      "id": "ex:ca/sample/ag-gde-100",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Ag gas-diffusion electrode, run at 100 mA/cm2",
+        "origin": "synthetic",
+        "sample_kind": "electrode"
+      }
+    },
+    {
+      "id": "ex:ca/test/co2-electrolysis-300",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "CO2 electrolysis at 300 mA/cm2",
+        "catalysis_mode": "heterogeneous",
+        "control_mode": "galvanostatic",
+        "driving_forces": [
+          "electro"
+        ],
+        "evidence": [
+          {
+            "id": "t3_300",
+            "kind": "table",
+            "locator": "Table 3",
+            "source": "ex:ca/source/energy"
+          }
+        ],
+        "experiment_kind": "physical",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "energy_per_mol",
+            "status": "present",
+            "definition": "electrical energy into the cell per mole of CO formed",
+            "evidence_ids": [
+              "t3_300"
+            ],
+            "target": "ex:ca/species/co",
+            "unit": "kJ/mol",
+            "value": 510,
+            "variable": "ex:ca/variable/energy-per-mol-co"
+          },
+          {
+            "id": "energy_per_kg",
+            "status": "present",
+            "definition": "electrical energy into the cell per kilogram of CO formed",
+            "evidence_ids": [
+              "t3_300"
+            ],
+            "target": "ex:ca/species/co",
+            "unit": "kWh/kg",
+            "value": 5.1,
+            "variable": "ex:ca/variable/energy-per-kg-co"
+          },
+          {
+            "id": "energy_efficiency",
+            "status": "present",
+            "definition": "energy efficiency of CO formation (thermodynamic potential times Faradaic efficiency over cell voltage)",
+            "evidence_ids": [
+              "t3_300"
+            ],
+            "target": "ex:ca/species/co",
+            "unit": "%",
+            "value": 48,
+            "variable": "ex:ca/variable/energy-efficiency"
+          }
+        ],
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 25
+        },
+        "test_kind": "activity"
+      }
+    },
+    {
+      "id": "ex:ca/sample/ag-gde-300",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Ag gas-diffusion electrode, run at 300 mA/cm2",
+        "origin": "synthetic",
+        "sample_kind": "electrode"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:ca/link/1",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "loading": {
+          "status": "present",
+          "unit": "mg/g",
+          "value": 48
+        },
+        "origin": "synthetic",
+        "role": "active_component"
+      },
+      "source": "ex:ca/catalyst/adh-silica",
+      "target": "ex:ca/species/adh"
+    },
+    {
+      "id": "ex:ca/link/2",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "support"
+      },
+      "source": "ex:ca/catalyst/adh-silica",
+      "target": "ex:ca/material/silica"
+    },
+    {
+      "id": "ex:ca/link/3",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ca/sample/adh-silica-batch",
+      "target": "ex:ca/catalyst/adh-silica"
+    },
+    {
+      "id": "ex:ca/link/4",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "phase": "liquid",
+        "role": "reactant"
+      },
+      "source": "ex:ca/reaction/ethanol-oxidation",
+      "target": "ex:ca/species/ethanol"
+    },
+    {
+      "id": "ex:ca/link/5",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "phase": "liquid",
+        "role": "reactant"
+      },
+      "source": "ex:ca/reaction/ethanol-oxidation",
+      "target": "ex:ca/species/nad"
+    },
+    {
+      "id": "ex:ca/link/6",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "phase": "liquid",
+        "role": "product"
+      },
+      "source": "ex:ca/reaction/ethanol-oxidation",
+      "target": "ex:ca/species/acetaldehyde"
+    },
+    {
+      "id": "ex:ca/link/7",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "phase": "liquid",
+        "role": "product"
+      },
+      "source": "ex:ca/reaction/ethanol-oxidation",
+      "target": "ex:ca/species/nadh"
+    },
+    {
+      "id": "ex:ca/link/8",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "phase": "liquid",
+        "role": "product"
+      },
+      "source": "ex:ca/reaction/ethanol-oxidation",
+      "target": "ex:ca/species/proton"
+    },
+    {
+      "id": "ex:ca/link/9",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "concentration": {
+          "status": "present",
+          "unit": "mmol/L",
+          "value": 50
+        },
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:ca/feed/assay-mixture",
+      "target": "ex:ca/species/ethanol"
+    },
+    {
+      "id": "ex:ca/link/10",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "concentration": {
+          "status": "present",
+          "unit": "mmol/L",
+          "value": 2
+        },
+        "origin": "synthetic",
+        "role": "cofactor"
+      },
+      "source": "ex:ca/feed/assay-mixture",
+      "target": "ex:ca/species/nad"
+    },
+    {
+      "id": "ex:ca/link/11",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "solvent",
+        "role_detail": "phosphate buffer, 50 mM"
+      },
+      "source": "ex:ca/feed/assay-mixture",
+      "target": "ex:ca/species/water"
+    },
+    {
+      "id": "ex:ca/link/12",
+      "type": "USES_CATALYST",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mg",
+          "value": 1
+        },
+        "origin": "synthetic"
+      },
+      "source": "ex:ca/test/adh-assay",
+      "target": "ex:ca/sample/adh-silica-batch"
+    },
+    {
+      "id": "ex:ca/link/13",
+      "type": "FED_WITH",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ca/test/adh-assay",
+      "target": "ex:ca/feed/assay-mixture"
+    },
+    {
+      "id": "ex:ca/link/14",
+      "type": "IN_REACTOR",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ca/test/adh-assay",
+      "target": "ex:ca/reactor/stirred-vial"
+    },
+    {
+      "id": "ex:ca/link/15",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ca/test/adh-assay",
+      "target": "ex:ca/reaction/ethanol-oxidation"
+    },
+    {
+      "id": "ex:ca/link/16",
+      "type": "USES_MODEL",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ca/analysis/michaelis-menten-fit",
+      "target": "ex:ca/model/michaelis-menten"
+    },
+    {
+      "id": "ex:ca/link/17",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:ca/analysis/michaelis-menten-fit",
+      "target": "ex:ca/test/adh-assay"
+    },
+    {
+      "id": "ex:ca/link/18",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ca/analysis/michaelis-menten-fit",
+      "target": "ex:ca/reaction/ethanol-oxidation"
+    },
+    {
+      "id": "ex:ca/link/19",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "active_component"
+      },
+      "source": "ex:ca/catalyst/rh-pph3",
+      "target": "ex:ca/species/rh-complex"
+    },
+    {
+      "id": "ex:ca/link/20",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "fraction": {
+          "status": "present",
+          "basis": "relative_to_component",
+          "definition": "mol PPh3 added per mol Rh",
+          "unit": "1",
+          "value": 2
+        },
+        "origin": "synthetic",
+        "relative_to": "ex:ca/species/rh-complex",
+        "role": "ligand"
+      },
+      "source": "ex:ca/catalyst/rh-pph3",
+      "target": "ex:ca/species/pph3"
+    },
+    {
+      "id": "ex:ca/link/21",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ca/sample/rh-pph3-batch",
+      "target": "ex:ca/catalyst/rh-pph3"
+    },
+    {
+      "id": "ex:ca/link/22",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "phase": "liquid",
+        "role": "reactant"
+      },
+      "source": "ex:ca/reaction/octene-hydrogenation",
+      "target": "ex:ca/species/1-octene"
+    },
+    {
+      "id": "ex:ca/link/23",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "phase": "gas",
+        "role": "reactant"
+      },
+      "source": "ex:ca/reaction/octene-hydrogenation",
+      "target": "ex:ca/species/h2"
+    },
+    {
+      "id": "ex:ca/link/24",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "phase": "liquid",
+        "role": "product"
+      },
+      "source": "ex:ca/reaction/octene-hydrogenation",
+      "target": "ex:ca/species/octane"
+    },
+    {
+      "id": "ex:ca/link/25",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "concentration": {
+          "status": "present",
+          "unit": "mol/L",
+          "value": 0.5
+        },
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:ca/feed/octene-in-toluene",
+      "target": "ex:ca/species/1-octene"
+    },
+    {
+      "id": "ex:ca/link/26",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "solvent"
+      },
+      "source": "ex:ca/feed/octene-in-toluene",
+      "target": "ex:ca/species/toluene"
+    },
+    {
+      "id": "ex:ca/link/27",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:ca/feed/octene-in-toluene",
+      "target": "ex:ca/species/h2"
+    },
+    {
+      "id": "ex:ca/link/28",
+      "type": "USES_CATALYST",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mol%",
+          "value": 0.1
+        },
+        "origin": "synthetic"
+      },
+      "source": "ex:ca/test/rh-hydrogenation",
+      "target": "ex:ca/sample/rh-pph3-batch"
+    },
+    {
+      "id": "ex:ca/link/29",
+      "type": "FED_WITH",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ca/test/rh-hydrogenation",
+      "target": "ex:ca/feed/octene-in-toluene"
+    },
+    {
+      "id": "ex:ca/link/30",
+      "type": "IN_REACTOR",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ca/test/rh-hydrogenation",
+      "target": "ex:ca/reactor/autoclave"
+    },
+    {
+      "id": "ex:ca/link/31",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ca/test/rh-hydrogenation",
+      "target": "ex:ca/reaction/octene-hydrogenation"
+    },
+    {
+      "id": "ex:ca/link/32",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "phase": "gas",
+        "role": "reactant"
+      },
+      "source": "ex:ca/reaction/ethylene-hydrogenation",
+      "target": "ex:ca/species/ethylene"
+    },
+    {
+      "id": "ex:ca/link/33",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "phase": "gas",
+        "role": "reactant"
+      },
+      "source": "ex:ca/reaction/ethylene-hydrogenation",
+      "target": "ex:ca/species/h2"
+    },
+    {
+      "id": "ex:ca/link/34",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "phase": "gas",
+        "role": "product"
+      },
+      "source": "ex:ca/reaction/ethylene-hydrogenation",
+      "target": "ex:ca/species/ethane"
+    },
+    {
+      "id": "ex:ca/link/35",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "fraction": {
+          "status": "present",
+          "unit": "mol%",
+          "value": 2
+        },
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:ca/feed/ethylene-hydrogen",
+      "target": "ex:ca/species/ethylene"
+    },
+    {
+      "id": "ex:ca/link/36",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "fraction": {
+          "status": "present",
+          "unit": "mol%",
+          "value": 20
+        },
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:ca/feed/ethylene-hydrogen",
+      "target": "ex:ca/species/h2"
+    },
+    {
+      "id": "ex:ca/link/37",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "diluent"
+      },
+      "source": "ex:ca/feed/ethylene-hydrogen",
+      "target": "ex:ca/species/helium"
+    },
+    {
+      "id": "ex:ca/link/38",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ca/sample/pd-alumina-fine",
+      "target": "ex:ca/catalyst/pd-alumina"
+    },
+    {
+      "id": "ex:ca/link/39",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ca/test/ethylene-hydrogenation-fine",
+      "target": "ex:ca/sample/pd-alumina-fine"
+    },
+    {
+      "id": "ex:ca/link/40",
+      "type": "FED_WITH",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ca/test/ethylene-hydrogenation-fine",
+      "target": "ex:ca/feed/ethylene-hydrogen"
+    },
+    {
+      "id": "ex:ca/link/41",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ca/test/ethylene-hydrogenation-fine",
+      "target": "ex:ca/reaction/ethylene-hydrogenation"
+    },
+    {
+      "id": "ex:ca/link/42",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:ca/analysis/transport-fine",
+      "target": "ex:ca/test/ethylene-hydrogenation-fine"
+    },
+    {
+      "id": "ex:ca/link/43",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ca/sample/pd-alumina-coarse",
+      "target": "ex:ca/catalyst/pd-alumina"
+    },
+    {
+      "id": "ex:ca/link/44",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ca/test/ethylene-hydrogenation-coarse",
+      "target": "ex:ca/sample/pd-alumina-coarse"
+    },
+    {
+      "id": "ex:ca/link/45",
+      "type": "FED_WITH",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ca/test/ethylene-hydrogenation-coarse",
+      "target": "ex:ca/feed/ethylene-hydrogen"
+    },
+    {
+      "id": "ex:ca/link/46",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ca/test/ethylene-hydrogenation-coarse",
+      "target": "ex:ca/reaction/ethylene-hydrogenation"
+    },
+    {
+      "id": "ex:ca/link/47",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:ca/analysis/transport-coarse",
+      "target": "ex:ca/test/ethylene-hydrogenation-coarse"
+    },
+    {
+      "id": "ex:ca/link/48",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:ca/analysis/transport-unnamed",
+      "target": "ex:ca/analysis/transport-fine"
+    },
+    {
+      "id": "ex:ca/link/49",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 2,
+        "origin": "synthetic",
+        "phase": "gas",
+        "role": "reactant"
+      },
+      "source": "ex:ca/reaction/co2-to-co",
+      "target": "ex:ca/species/co2"
+    },
+    {
+      "id": "ex:ca/link/50",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 2,
+        "origin": "synthetic",
+        "phase": "gas",
+        "role": "product"
+      },
+      "source": "ex:ca/reaction/co2-to-co",
+      "target": "ex:ca/species/co"
+    },
+    {
+      "id": "ex:ca/link/51",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "phase": "gas",
+        "role": "product"
+      },
+      "source": "ex:ca/reaction/co2-to-co",
+      "target": "ex:ca/species/o2"
+    },
+    {
+      "id": "ex:ca/link/52",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "concentration": {
+          "status": "present",
+          "unit": "mol/L",
+          "value": 1
+        },
+        "origin": "synthetic",
+        "role": "other",
+        "role_detail": "electrolyte salt"
+      },
+      "source": "ex:ca/electrolyte/koh",
+      "target": "ex:ca/species/koh"
+    },
+    {
+      "id": "ex:ca/link/53",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "solvent"
+      },
+      "source": "ex:ca/electrolyte/koh",
+      "target": "ex:ca/species/water"
+    },
+    {
+      "id": "ex:ca/link/54",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ca/test/co2-electrolysis-100",
+      "target": "ex:ca/reaction/co2-to-co"
+    },
+    {
+      "id": "ex:ca/link/55",
+      "type": "IN_ELECTROLYTE",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ca/test/co2-electrolysis-100",
+      "target": "ex:ca/electrolyte/koh"
+    },
+    {
+      "id": "ex:ca/link/56",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ca/sample/ag-gde-100",
+      "target": "ex:ca/catalyst/ag-gde"
+    },
+    {
+      "id": "ex:ca/link/57",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ca/test/co2-electrolysis-100",
+      "target": "ex:ca/sample/ag-gde-100"
+    },
+    {
+      "id": "ex:ca/link/58",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ca/test/co2-electrolysis-300",
+      "target": "ex:ca/reaction/co2-to-co"
+    },
+    {
+      "id": "ex:ca/link/59",
+      "type": "IN_ELECTROLYTE",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ca/test/co2-electrolysis-300",
+      "target": "ex:ca/electrolyte/koh"
+    },
+    {
+      "id": "ex:ca/link/60",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ca/sample/ag-gde-300",
+      "target": "ex:ca/catalyst/ag-gde"
+    },
+    {
+      "id": "ex:ca/link/61",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ca/test/co2-electrolysis-300",
+      "target": "ex:ca/sample/ag-gde-300"
+    },
+    {
+      "id": "ex:ca/analysis/michaelis-menten-fit/reported-in/enzyme",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ca/analysis/michaelis-menten-fit",
+      "target": "ex:ca/source/enzyme"
+    },
+    {
+      "id": "ex:ca/analysis/transport-coarse/reported-in/transport",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Supporting information, Section S4"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ca/analysis/transport-coarse",
+      "target": "ex:ca/source/transport"
+    },
+    {
+      "id": "ex:ca/analysis/transport-fine/reported-in/transport",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Supporting information, Section S4"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ca/analysis/transport-fine",
+      "target": "ex:ca/source/transport"
+    },
+    {
+      "id": "ex:ca/analysis/transport-unnamed/reported-in/transport",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Supporting information, Section S5"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ca/analysis/transport-unnamed",
+      "target": "ex:ca/source/transport"
+    },
+    {
+      "id": "ex:ca/catalyst/adh-silica/reported-in/enzyme",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Section 2.1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ca/catalyst/adh-silica",
+      "target": "ex:ca/source/enzyme"
+    },
+    {
+      "id": "ex:ca/catalyst/rh-pph3/reported-in/homogeneous",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Section 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ca/catalyst/rh-pph3",
+      "target": "ex:ca/source/homogeneous"
+    },
+    {
+      "id": "ex:ca/feed/assay-mixture/reported-in/enzyme",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Section 2.3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ca/feed/assay-mixture",
+      "target": "ex:ca/source/enzyme"
+    },
+    {
+      "id": "ex:ca/model/michaelis-menten/reported-in/enzyme",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ca/model/michaelis-menten",
+      "target": "ex:ca/source/enzyme"
+    },
+    {
+      "id": "ex:ca/reaction/co2-to-co/reported-in/energy",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Scheme 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ca/reaction/co2-to-co",
+      "target": "ex:ca/source/energy"
+    },
+    {
+      "id": "ex:ca/reaction/ethanol-oxidation/reported-in/enzyme",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Scheme 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ca/reaction/ethanol-oxidation",
+      "target": "ex:ca/source/enzyme"
+    },
+    {
+      "id": "ex:ca/reaction/ethylene-hydrogenation/reported-in/transport",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Scheme 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ca/reaction/ethylene-hydrogenation",
+      "target": "ex:ca/source/transport"
+    },
+    {
+      "id": "ex:ca/reaction/octene-hydrogenation/reported-in/homogeneous",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Scheme 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ca/reaction/octene-hydrogenation",
+      "target": "ex:ca/source/homogeneous"
+    },
+    {
+      "id": "ex:ca/test/adh-assay/reported-in/enzyme",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Section 2.3",
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ca/test/adh-assay",
+      "target": "ex:ca/source/enzyme"
+    },
+    {
+      "id": "ex:ca/test/co2-electrolysis-100/reported-in/energy",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ca/test/co2-electrolysis-100",
+      "target": "ex:ca/source/energy"
+    },
+    {
+      "id": "ex:ca/test/co2-electrolysis-300/reported-in/energy",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ca/test/co2-electrolysis-300",
+      "target": "ex:ca/source/energy"
+    },
+    {
+      "id": "ex:ca/test/ethylene-hydrogenation-coarse/reported-in/transport",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ca/test/ethylene-hydrogenation-coarse",
+      "target": "ex:ca/source/transport"
+    },
+    {
+      "id": "ex:ca/test/ethylene-hydrogenation-fine/reported-in/transport",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ca/test/ethylene-hydrogenation-fine",
+      "target": "ex:ca/source/transport"
+    },
+    {
+      "id": "ex:ca/test/rh-hydrogenation/reported-in/homogeneous",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ca/test/rh-hydrogenation",
+      "target": "ex:ca/source/homogeneous"
+    }
+  ],
+  "directed": true,
+  "graph": {
+    "data_status": "synthetic_example",
+    "follows_domains": [
+      "catalysis"
+    ],
+    "graph_id": "ex:ca/graph",
+    "schema": "scale-catal",
+    "schema_version": "0.7.1",
+    "stewardship": {
+      "access": "public"
+    },
+    "title": "An enzyme, a homogeneous catalyst, transport checks and the energy of an electrolysis, each with what its area of catalysis needs (synthetic)"
+  },
+  "multigraph": true
+}

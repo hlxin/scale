@@ -47,6 +47,10 @@ mappings:
   - match: close
     term: CHEBI:26519
     label: radical
+  ChemicalSpecies.species_kind=macromolecule:
+  - match: close
+    term: CHEBI:33839
+    label: macromolecule
   Material:
   - match: broad
     term: CHEBI:59999
@@ -117,6 +121,18 @@ mappings:
   - match: close
     term: af-rl:AFRL_0000224
     label: diluent role
+  HAS_COMPONENT.role=ligand:
+  - match: close
+    term: CHEBI:52214
+    label: ligand
+  HAS_COMPONENT.role=solvent:
+  - match: close
+    term: CHEBI:46787
+    label: solvent
+  HAS_COMPONENT.role=cofactor:
+  - match: close
+    term: CHEBI:23357
+    label: cofactor
   Reactor:
   - match: close
     term: af-e:AFE_0000153
@@ -283,6 +299,10 @@ mappings:
   - match: close
     term: CHEBI:50860
     label: organic molecular entity
+  Catalyst.catalyst_family=enzyme:
+  - match: close
+    term: SBO:0000014
+    label: enzyme
   Feed:
   - match: broad
     term: CHEBI:60004
@@ -307,6 +327,14 @@ mappings:
   - match: close
     term: REX:0000036
     label: photocatalysis
+  CatalyticTest.catalysis_mode=heterogeneous:
+  - match: close
+    term: REX:0000083
+    label: heterogeneous catalysis
+  CatalyticTest.catalysis_mode=homogeneous:
+  - match: close
+    term: REX:0000082
+    label: homogeneous catalysis
   ElementaryStep:
   - match: close
     term: REX:0000058
@@ -364,8 +392,12 @@ mappings:
 subdomains:
   biocatalysis:
     title: Biocatalysis
-    scale: []
-    gap: No label for an enzyme or a whole-cell catalyst, and no quantity kind for enzyme activity.
+    scale:
+    - Catalyst
+    - CatalyticTest
+    - HAS_COMPONENT
+    gap: An enzyme's EC number goes in its identifiers, where its form is checked but not that it names the enzyme
+      used; an assay's pH and buffer are condition entries of the test, each with its definition.
     ontologies4cat:
       contained:
       - SBO
@@ -404,8 +436,8 @@ subdomains:
     scale:
     - Catalyst
     - CatalyticTest
-    gap: A molecular catalyst is a Catalyst of family molecular_complex; there is no ligand or solvent role and no
-      turnover number.
+    gap: A catalyst loading relative to the substrate (mol%) is the amount of the catalyst a test uses, which no
+      quantity kind checks.
     ontologies4cat:
       contained: []
       related_narrower:
@@ -616,9 +648,7 @@ subdomains:
     - ElementaryStep
     - Heater
     - TemperatureProbe
-    gap: A transport check records its verdict and keeps its criterion values as results, but no quantity kind is
-      declared for a transport criterion (Weisz-Prater, Mears, Carberry), a Thiele modulus or an effectiveness
-      factor.
+    gap: No quantity kind for a heat-transfer coefficient or an adiabatic temperature rise.
     ontologies4cat:
       contained: []
       related_narrower:
@@ -633,8 +663,7 @@ subdomains:
     title: Process design, energy and cost data
     scale:
     - ProcessUnit
-    gap: Energy per product is recorded for plasma tests only (specific_energy_input, energy_yield); there is no
-      energy consumption for other driving forces and no cost.
+    gap: No cost.
     ontologies4cat:
       contained:
       - OEO

@@ -1,0 +1,64 @@
+# A competency question of the catalysis domain (tools/competency.py; `scale domains cq catalysis`).
+# It runs on public synthetic examples, so anyone can rerun it and see the same answer.
+id: CQ-27
+question: Which transport checks found their rates free of transport limitation, and by which criterion?
+description: |
+  A transport check (an Analysis with analysis_kind transport_check) records the criterion values it computed as results
+  of the kind transport_criterion, each naming its criterion in its definition: the Weisz-Prater criterion judges
+  diffusion in the pores, Mears' criterion for external diffusion mass transfer to the particle (Mears also gave one
+  for heat transfer, a different formula, so a Mears value is compared only with one judging the same transport, as
+  its definition names it). Values of two criteria are never compared with one another. Ranked scientifically, the two
+  Weisz-Prater values (0.04 for the fine particles, 2.6 for the coarse ones) are one group and the two Mears values for
+  external diffusion another; a criterion whose definition names none is left out as missing_context. The check's
+  verdict is the source's own reading of its criteria.
+documents:
+  - examples/scale-catal/area-examples/catalysis-areas.json
+plan:
+  question: Which transport criteria did the checks compute, grouped by criterion?
+  comparison: scientific
+  match:
+    label: Analysis
+    as: check
+    where:
+      - prop: analysis_kind
+        op: eq
+        value: transport_check
+  steps:
+    - from: check
+      entries: result_values
+      kind: transport_criterion
+      as: criterion
+  return:
+    - check.name
+    - check.verdict
+    - criterion
+  order_by:
+    - var: criterion
+      prop: value
+  evidence: true
+expect:
+  status: answered
+  min_rows: 4
+  max_rows: 4
+  excluded:
+    missing_context: 1
+  values:
+    check.verdict:
+      - no transport limitation
+      - pore diffusion limits the rate in the larger particles
+variants:
+  - description: Asked for the Weisz-Prater criterion only, the two checks rank 0.04 below 2.6; the Mears values are
+      another criterion and are left out as incompatible_context.
+    plan:
+      order_by:
+        - var: criterion
+          prop: value
+          context:
+            transport_criterion: weisz_prater
+    expect:
+      status: answered
+      min_rows: 2
+      max_rows: 2
+      excluded:
+        incompatible_context: 2
+        missing_context: 1

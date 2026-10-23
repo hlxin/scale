@@ -53,8 +53,10 @@ A value the experimenter set or the author specified is not a measurement.
   were counted when the source says it. When the source does not say, write that in `definition`; never
   supply a method. The validator warns about a rate that says none of it, and a comparison shows each rate
   with its count: rates on different counts are compared as reported, never recalculated. A rate divided
-  by a count that is only an upper bound is itself a lower bound (`bound: lower`). A turnover number goes
-  in `results` (`turnover_number`) with its `definition`.
+  by a count that is only an upper bound is itself a lower bound (`bound: lower`). A turnover number (events
+  per site or per molecule of catalyst over the run, dimensionless) goes in `result_values` with a Variable of
+  kind `turnover_number` (scale-catal 0.7.1), its product in `target` and in `definition` what it counts per
+  what ("mol octane per mol Rh charged, after 2 h"); it is never a turnover frequency, which is per time.
 - A light-off temperature: `results.light_off_temperature` with `definition` ("temperature at 50 %
   CO conversion") and the species in `target`.
 - An activation energy from the temperature dependence of measured rates (an Arrhenius plot) is the
@@ -72,9 +74,28 @@ A value the experimenter set or the author specified is not a measurement.
   `basis` or `note` ("differential, conversion below 5 %") and an Analysis
   (`analysis_kind: transport_check`) that `HAS_INPUT` the test, with its `verdict`, the `temperature`
   it applies to and its `evaluation_basis` (scale-catal 0.5.0 on): `asserted` when the source only
-  states it, `numerical` when it computes a criterion (its values in `results`), `experimental` when it
-  varies particle size, flow at constant contact time or stirring (each run an input of the check).
-  Never infer a regime the source does not state, and never judge a criterion value.
+  states it, `numerical` when it computes a criterion, `experimental` when it varies particle size, flow at
+  constant contact time or stirring (each run an input of the check). A computed criterion goes in the
+  check's `result_values` with a Variable of kind `transport_criterion` (scale-catal 0.7.1), naming the
+  criterion in `definition` ("Weisz-Prater criterion", "Mears criterion for external diffusion", "Carberry
+  number"); values of two criteria are never compared, and one whose criterion is not named is left out of a
+  comparison. Mears gave several criteria, so a Mears value names the transport it judges too (external or
+  internal diffusion; heat transfer between the fluid and the particle, intraparticle heat transfer, radial heat
+  transfer in the bed), as the source says it: one that says only "Mears criterion" is left out of a comparison.
+  An effectiveness factor and a Thiele modulus are results of their own kinds (`effectiveness_factor`,
+  `thiele_modulus`): say in `definition` whether the factor is the internal or the overall one, and with which
+  length (the particle radius, or Vp/Sp) and in which form (first order, or generalized) the modulus was
+  computed. Never infer a regime the source does not state, and never judge a criterion value: what the source
+  concludes is the check's `verdict`.
+- An enzyme's activity (scale-catal 0.7.1) goes in the assay's `result_values` with a Variable of kind
+  `enzyme_activity`, as printed: per time in enzyme units (`U`, `mU`, a micromole per minute) or katal (`kat`,
+  `nkat`), per mass of the enzyme or of the preparation (`U/mg`, a specific activity) or per volume of a solution
+  (`U/mL`), the substrate or product it counts in `target`, and in `definition` what was counted and what it is
+  divided by (or name that value, `normalized_by`). The assay's temperature is the test's; its pH, buffer and
+  substrate concentration are condition entries (`conditions`), each with its `definition`. A Michaelis
+  constant is a result of the Analysis that fits the rates (`analysis_kind: kinetic_fit`, `USES_MODEL` the
+  Michaelis-Menten rate law), of kind `michaelis_constant`, its substrate in `target`; kcat is a turnover
+  frequency, divided by the amount of enzyme it counts (`normalized_by`).
 
 ## Reaction thermochemistry
 
@@ -214,6 +235,32 @@ Map keys, so a value can be found under one name. Most follow quantity names alr
 - Two purchases of one product are two CatalystSamples that share their formulation (`HAS_FORMULATION`), never a
   batch: give each the lot number the source states, none when it states none, and its own characterizations. Nothing
   measured on one lot (a dispersion, a surface composition) is recorded for the other.
+
+## Catalysis mode, enzymes and molecular catalysts
+
+- A test's `catalysis_mode` (scale-catal 0.7.1) is how its source describes the catalysis: `heterogeneous`,
+  `homogeneous` or `biocatalytic`. Record it only when the source says it; never infer it from the catalyst. An
+  immobilized complex or enzyme is what the source calls it.
+- An enzyme or whole-cell catalyst is a Catalyst of `catalyst_family` `enzyme` or `whole_cell`. The enzyme
+  is a ChemicalSpecies of `species_kind` `macromolecule`, named as the source names it, with its EC number
+  (and a UniProt accession when given) in `identifiers` and no formula; when it is immobilized, the carrier is
+  its `support` (HAS_COMPONENT). The reaction mixture is a Feed: the substrate a `reactant`, the cofactor (NAD+,
+  a metal ion) a `cofactor`, the liquid a `solvent` (a buffer named in `role_detail`).
+- A molecular catalyst is a Catalyst of `catalyst_family` `molecular_complex`: the complex its
+  `active_component`, a ligand added beyond the complex a `ligand` (its ratio to the complex a `fraction`
+  with `fraction_basis: relative_to_component` and `relative_to`), an activator a `cocatalyst`. The solvent is
+  a component of the Feed. A catalyst loading relative to the substrate (mol%) is the test's `USES_CATALYST`
+  `amount` as printed.
+
+## Energy use
+
+- The energy a process takes per product (scale-catal 0.7.1) goes in `result_values` with a Variable of kind
+  `energy_consumption`, as printed: per amount (kJ/mol) or per mass (kWh/kg) of the product in `target`, which
+  are kept apart. Say in `definition` which energy (the electrical energy, the heat supplied, every input) and
+  over which boundary (the cell, stack, reactor or discharge; or the plant, with its separation or compression):
+  values of two energies or two boundaries are never compared, and one that says neither is left out of a
+  comparison. An energy efficiency (dimensionless) is of kind `efficiency`;
+  a plasma test's `energy_yield` and `specific_energy_input` stay where they are.
 
 ## Balances, impurities and data quality
 
@@ -418,6 +465,35 @@ queries). A value is in the unit printed; a fitted or derived value names its pr
 - **The specimen and its state:** `CHARACTERIZES {state}` the batch or portion measured; `technique` as named;
   `observation_mode`, `information_depth` (bulk, surface, projection), `sampling` (ensemble, single_particle);
   `temperature` and `atmosphere` during the measurement; `transfer`.
+- **The technique's term:** `technique_id`, the Chemical Methods Ontology term of the technique the source names,
+  where one fits it (the validator warns when `technique_id` is no ontology term). Looked up in CHMO's 2026-05-28
+  release:
+
+  | Technique as sources name it | `technique_id` |
+  |---|---|
+  | X-ray diffraction (XRD); powder XRD | CHMO:0000156; CHMO:0000158 |
+  | X-ray photoelectron spectroscopy (XPS) | CHMO:0000404 |
+  | transmission electron microscopy (TEM); high-resolution TEM | CHMO:0000080; CHMO:0000084 |
+  | scanning electron microscopy (SEM) | CHMO:0000073 |
+  | scanning transmission electron microscopy (STEM); HAADF-STEM | CHMO:0000086; CHMO:0000730 |
+  | energy-dispersive X-ray spectroscopy (EDX, EDS) | CHMO:0000309 |
+  | X-ray fluorescence (XRF) | CHMO:0000307 (X-ray emission spectroscopy, XRF its exact synonym) |
+  | X-ray absorption spectroscopy (XAS); EXAFS; XANES (NEXAFS) | CHMO:0000298; CHMO:0000300; CHMO:0000305 |
+  | Raman spectroscopy | CHMO:0000656 |
+  | Fourier-transform infrared spectroscopy (FTIR); DRIFTS | CHMO:0000636; CHMO:0000645 |
+  | UV-vis spectroscopy | CHMO:0000292 |
+  | temperature-programmed reduction (TPR); oxidation (TPO); desorption (TPD) | CHMO:0002908; CHMO:0002907; CHMO:0002673 |
+  | N2 physisorption, BET surface area | CHMO:0001168 (sorption measurement) |
+  | thermogravimetry (TGA); differential scanning calorimetry (DSC) | CHMO:0000690; CHMO:0000684 |
+  | NMR spectroscopy; EPR (ESR) spectroscopy | CHMO:0000591; CHMO:0000328 |
+  | ICP-OES (ICP-AES); ICP-MS | CHMO:0000267; CHMO:0000538 |
+  | Mössbauer spectroscopy | CHMO:0000417 |
+  | gas chromatography (GC) | CHMO:0001002 |
+  | cyclic voltammetry; electrochemical impedance spectroscopy | CHMO:0000025; CHMO:0000423 |
+  | atomic force microscopy (AFM) | CHMO:0000113 |
+
+  CHMO has no term for a chemisorption measurement as such; leave `technique_id` unset rather than use a broader
+  one. Other ontology terms (an OBI assay, an IRI) are accepted too.
 - **Acquisition settings:** `Characterization.conditions` (edge, detection mode, accelerating voltage, scans, regions
   imaged), the Instrument it `USES_INSTRUMENT` with its `settings`.
 - **Standards and calibration:** a reference measured with the specimen is `HAS_INPUT {role: reference_standard}`; a

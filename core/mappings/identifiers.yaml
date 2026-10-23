@@ -1,0 +1,95 @@
+# The identifier schemes a record may name in its `identifiers`, the map every node carries from a scheme to an
+# identifier ({ec: 1.1.1.1}, {inchikey: XLYOFNOQVPJJNP-UHFFFAOYSA-N}). A scheme listed here is checked when a document
+# is validated: an identifier that does not look like one of its scheme (`pattern`, and the check digit of a CAS
+# Registry Number or an ORCID iD) is a warning, and the record stays as written. A scheme not listed is kept,
+# unchecked. `resolves` is the address an identifier resolves at, `{id}` standing for it; `example` is one
+# identifier of the scheme (where a public record could be looked up), which `scale domains check` requires to match
+# its pattern.
+#
+# The ontology terms of a technique or a method (a Characterization's technique_id, an Experiment's method_id) are
+# checked against the ontologies of core/mappings/ontologies.yaml instead. See docs/mappings.md.
+schemes:
+  doi:
+    name: Digital Object Identifier
+    pattern: ^10\.\d{4,9}/\S+$
+    resolves: https://doi.org/{id}
+    example: 10.1186/s13321-024-00807-2
+  orcid:
+    name: ORCID iD
+    pattern: ^\d{4}-\d{4}-\d{4}-\d{3}[\dX]$
+    check_digit: iso7064_mod11_2
+    resolves: https://orcid.org/{id}
+    example: 0000-0002-1825-0097
+  ror:
+    name: Research Organization Registry ID
+    pattern: ^0[a-hj-km-np-tv-z0-9]{6}\d{2}$
+    resolves: https://ror.org/{id}
+    example: 03yrm5c26
+  inchikey:            # its flag is S for a standard key, N for a non-standard one; its version A, InChI version 1
+    name: InChIKey
+    pattern: ^[A-Z]{14}-[A-Z]{8}[SN]A-[A-Z]$
+    example: XLYOFNOQVPJJNP-UHFFFAOYSA-N
+  pubchem_cid:
+    name: PubChem compound identifier
+    pattern: ^[1-9]\d*$
+    resolves: https://pubchem.ncbi.nlm.nih.gov/compound/{id}
+    example: '962'
+  chebi:
+    name: ChEBI identifier
+    pattern: ^CHEBI:\d+$
+    resolves: https://www.ebi.ac.uk/chebi/searchId.do?chebiId={id}
+    example: CHEBI:15377
+  cas:
+    name: CAS Registry Number
+    pattern: ^\d{2,7}-\d{2}-\d$
+    check_digit: cas
+    resolves: https://commonchemistry.cas.org/detail?cas_rn={id}
+    example: 7732-18-5
+  ec:
+    name: Enzyme Commission number
+    pattern: ^\d+\.(\d+|-)\.(\d+|-)\.(n?\d+|-)$
+    resolves: https://enzyme.expasy.org/EC/{id}
+    example: 1.1.1.1
+  uniprot:
+    name: UniProtKB accession
+    pattern: ^([OPQ][0-9][A-Z0-9]{3}[0-9]|[A-NR-Z][0-9]([A-Z][A-Z0-9]{2}[0-9]){1,2})$
+    resolves: https://www.uniprot.org/uniprotkb/{id}
+    example: P00330
+  cod:
+    name: Crystallography Open Database entry
+    pattern: ^\d{7}$
+    resolves: https://www.crystallography.net/cod/{id}.html
+    example: '9008565'
+  icsd:
+    name: Inorganic Crystal Structure Database collection code
+    pattern: ^[1-9]\d*$
+  mp:
+    name: Materials Project material identifier
+    pattern: ^mp-\d+$
+    resolves: https://next-gen.materialsproject.org/materials/{id}
+    example: mp-149
+  arxiv:
+    name: arXiv identifier
+    pattern: ^(\d{2}(0[1-9]|1[0-2])\.\d{4,5}|[a-z-]+(\.[A-Z]{2})?/\d{2}(0[1-9]|1[0-2])\d{3})(v[1-9]\d*)?$
+    resolves: https://arxiv.org/abs/{id}
+    example: '2301.00001'
+  pmid:
+    name: PubMed identifier
+    pattern: ^[1-9]\d*$
+    resolves: https://pubmed.ncbi.nlm.nih.gov/{id}/
+    example: '38326906'
+  pmcid:
+    name: PubMed Central identifier
+    pattern: ^PMC\d+$
+    resolves: https://www.ncbi.nlm.nih.gov/pmc/articles/{id}/
+    example: PMC10851519
+  wikidata:
+    name: Wikidata item
+    pattern: ^Q[1-9]\d*$
+    resolves: https://www.wikidata.org/wiki/{id}
+    example: Q283
+  patent:
+    name: Patent publication number (country code, number with its separators, kind code)
+    pattern: ^[A-Z]{2} ?[A-Z]{0,2}[0-9]([0-9 ,./-]*[0-9])?( ?[A-Z][0-9]?)?$
+    resolves: https://worldwide.espacenet.com/patent/search?q=pn%3D{id}
+    example: US1625924A

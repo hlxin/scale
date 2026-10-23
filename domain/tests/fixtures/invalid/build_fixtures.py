@@ -255,6 +255,23 @@ def main() -> None:
     defect("activation-energy-in-volts", "an elementary step's activation energy in volts", barrier_in_volts)
     defect("charge-treatment-not-in-vocabulary", "a computation whose charge treatment is stated in other words",
            lambda d: computation(d, charge_treatment="grand_canonical"))
+    def result_of_kind(d: dict, kind: str, unit: str, value) -> None:
+        """The test with one result of ``kind`` in ``unit`` (a Variable of that kind, the evidence item that states it)."""
+        t = test_node(d)
+        d["nodes"].append({"id": f"ex:df-electro/variable/{kind}", "label": "Variable",
+                           "props": {"name": kind.replace("_", " "), "scale": "quantitative", "quantity_kind": kind,
+                                     "origin": "synthetic"}})
+        t["props"]["evidence"].append({"id": f"{kind}_table", "source": "ex:df-electro/source/paper",
+                                       "locator": "Table 2", "kind": "table"})
+        t["props"].setdefault("result_values", []).append(
+            {"status": "present", "value": value, "unit": unit, "id": kind, "variable": f"ex:df-electro/variable/{kind}",
+             "target": "ex:df-electro/species/ammonia", "evidence_ids": [f"{kind}_table"]})
+    defect("turnover-number-per-second", "a turnover number in reciprocal seconds",
+           lambda d: result_of_kind(d, "turnover_number", "s-1", 0.8))
+    defect("enzyme-activity-in-kilojoules", "an enzyme activity in kilojoules",
+           lambda d: result_of_kind(d, "enzyme_activity", "kJ", 12))
+    defect("catalysis-mode-not-in-vocabulary", "a test whose catalysis mode is stated in other words",
+           lambda d: test_node(d)["props"].__setitem__("catalysis_mode", "slurry"))
     # it states its access (public, like every committed document) but not who contributed it or its project
     defect("research-data-without-stewardship", "research data that does not say who contributed it or which project it belongs to",
            lambda d: d["graph"].__setitem__("stewardship", {"access": "public"}), base=template("catalysis", VERSION))

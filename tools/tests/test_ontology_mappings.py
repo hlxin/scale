@@ -114,7 +114,7 @@ def test_the_subdomains_are_the_fourteen_of_ontologies4cat_and_name_terms_of_the
     rows = mappings.subdomains(REPO)
     assert [r["subdomain"] for r in rows] == list(mappings.SUBDOMAINS)
     bio = rows[0]
-    assert bio["scale"] == [] and "enzyme" in bio["gap"] and bio["contained"] == ["SBO"]
+    assert "Catalyst" in bio["scale"] and bio["contained"] == ["SBO"]       # scale-catal 0.7.1 records enzymes
     het = next(r for r in rows if r["subdomain"] == "heterogeneous_catalysis")
     assert "Catalyst" in het["scale"] and het["contained"] == [] and "ChEBI" in het["mapped"]
     char = next(r for r in rows if r["subdomain"] == "characterisation_data")
@@ -236,7 +236,7 @@ def test_the_command_checks_lists_and_exports_the_mappings():
     r = run("--format", "sssom")
     assert r.returncode != 0 and "--layer kernel or --layer catalysis" in r.stderr
     r = run("--subdomains")
-    assert r.returncode == 0 and "Biocatalysis" in r.stdout and "nothing yet" in r.stdout
+    assert r.returncode == 0 and "Biocatalysis" in r.stdout and re.search(r"contains it:\s+SBO\n", r.stdout)
     assert "related, narrower: BAO, EDAM, OBI" in r.stdout
 
 
