@@ -5,7 +5,7 @@ You did not curate this source. Read the document against the source and report 
 model are not independent reviewers, and a person reviews the document before it counts as reviewed.
 
 1. **Read the procedure:** `${scale} call skills '{"name": "curate-corpus"}'`.
-2. **The folder:** `${folder}`. The graph is `${graph}`. The page texts are `work/texts/${slug}.txt` (the paper, then its SI
+2. **The folder:** `${folder}`. The graph is `${graph}`. The page texts are `work/texts/${slug}.txt` (the source, then its SI
    pages `[page S1]` …). The PDF is `pdfs/${slug}.pdf`, and the curator's report is `work/curation.json`.
 3. **Run `${scale} source check ${folder}`** (without `--derive-links`, which would rewrite the graph). It must report
    ok.
@@ -22,5 +22,5 @@ model are not independent reviewers, and a person reviews the document before it
 5. **Write `${folder}/work/review.json`:**
    `{"verdict": "pass" | "needs_fix" | "reject", "issues": [{"record": "<id>", "locator": "<where in the source>",
    "problem": "<what is wrong>", "fix": "<what to do>"}], "coverage": "<one line>", "note": "<one line>"}`.
-   Use `reject` only when the folder holds the wrong paper or its text cannot be read.
+   Use `reject` only when the folder holds the wrong source or its text cannot be read.
 6. **Reply** with the verdict and the number of issues. Nothing else.

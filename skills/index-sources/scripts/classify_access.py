@@ -1,6 +1,6 @@
-"""Step 4 — decide each paper's Access type (OA / OA+ND / Free-to-read / Paywalled) and list its known copies.
+"""Step 4 — decide each source's Access type (OA / OA+ND / Free-to-read / Paywalled) and list its known copies.
 
-Any topic size, as fast as the services allow: papers are taken 20,000 at a time (a block — the topic is never loaded
+Any topic size, as fast as the services allow: sources are taken 20,000 at a time (a block — the topic is never loaded
 whole) and four blocks are looked up at once, every service at the pace it allows: OpenAlex 30 requests/s with a key
 (100 DOIs each), Crossref 3 requests at a time (~200 DOIs each), Europe PMC and Semantic Scholar 500 DOIs per request.
 Each block is decided and saved as soon as its answers are in, so an interrupted run loses nothing and a re-run goes
@@ -11,29 +11,29 @@ version; goes on while the free daily budget or prepaid credit lasts, minus a sm
 OpenAlex does not know and Crossref does — Unpaywall knows only Crossref DOIs; one call per DOI, at most 90,000 per
 UTC day on this machine, because Unpaywall asks API users to stay under 100,000), Europe PMC, the PMC open-data mirror,
 DataCite (arXiv licenses) and Semantic Scholar. Answers are cached in .scripts/enrich/<api>.sqlite (shared by all
-topics). A paper whose OpenAlex / Unpaywall answer is still pending keeps an empty access type and is decided when the
+topics). A source whose OpenAlex / Unpaywall answer is still pending keeps an empty access type and is decided when the
 script is re-run (after 00:00 UTC when a daily budget stopped it). Access type = the most open copy found anywhere:
   OA            a copy under CC BY / BY-SA / BY-NC / BY-NC-SA / CC0 / public domain
   OA+ND         best copy is CC BY-ND / BY-NC-ND
   Free-to-read  an open copy exists but carries no reuse license (bronze, publisher terms, unlicensed manuscript)
   Paywalled     no open copy anywhere
 This is the metadata verdict. download_open.py / download_paywalled.py re-check the license printed in the PDF
-and may move a paper to another folder (the PDF wins). The exact license (with version, e.g. CC BY-NC 4.0), its URL
+and may move a source to another folder (the PDF wins). The exact license (with version, e.g. CC BY-NC 4.0), its URL
 and where it came from are stored too. Abstracts and keywords missing from the search records are filled from
 Semantic Scholar / Europe PMC / OpenAlex / Crossref when they have them. Patents are Free-to-read public documents;
 datasets and DOI-less records are judged from the license their repository states.
 
 usage:
-  python3 -I classify_access.py --topic <slug>                       # papers without an access type
-  python3 -I classify_access.py --topic <slug> --recheck-older-than 30   # update mode: re-query papers checked > 30
+  python3 -I classify_access.py --topic <slug>                       # sources without an access type
+  python3 -I classify_access.py --topic <slug> --recheck-older-than 30   # update mode: re-query sources checked > 30
                                                                      # days ago (embargoes end, OA copies appear,
                                                                      # retractions, preprints get published)
   python3 -I classify_access.py --topic <slug> --abstracts-only     # only fill missing abstracts / keywords
                                                                      # (OpenAlex, Semantic Scholar, Europe PMC,
                                                                      # Crossref); no access decision, no Unpaywall
-  options: --refresh (re-decide every paper from cached answers),
+  options: --refresh (re-decide every source from cached answers),
            --skip s2,openalex,unpaywall,europepmc,pmcaws,datacite,
-           --no-export (leave the index CSVs and papers.db for one export.py at the end of a chain of steps — on a
+           --no-export (leave the index CSVs and index.db for one export.py at the end of a chain of steps — on a
            topic of millions each export takes minutes)
 """
 import argparse
@@ -51,21 +51,22 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from _common import (ACCESS_TYPES, PACER, HTTPFail, ND_LICENSES, OPEN_LICENSES, SOURCE_LABEL, Project, access_rank,
+from _common import (ACCESS_TYPES, DATABASE_LABEL, GLOBAL_DIR, PACER, HTTPFail, ND_LICENSES, OPEN_LICENSES, Project,
+                     access_rank,
                      add_project_arg, clean_text, file_lock, get_json, host_of, http_get, license_access,
                      license_detail, load_config, load_keys, log, norm_doi, norm_license, normalize_abstract, now_iso,
                      polite_email, retraction_of, today, update_state)
 from _cache import Cache
 from _ledger import Ledger
 from build_list import is_preprint_doi, is_repository_doi
-from _sources import OALEX_SELECT, openalex_budget_ok, openalex_record
+from _databases import OALEX_SELECT, openalex_budget_ok, openalex_record
 from _topics import Vocab, apply_vocab
 
 VERSION_RANK = {"publishedVersion": 0, "acceptedVersion": 1, "submittedVersion": 2, None: 3}
 # Unpaywall asks API users to stay under 100,000 calls per day. 90,000 leaves room for anything else that uses the
 # same polite email; the count is shared by every project and process on this machine and resets at 00:00 UTC.
 UNPAYWALL_DAILY_CAP = 90_000
-UNPAYWALL_USAGE = Path.home() / ".paper-acquisition" / "unpaywall_usage.json"
+UNPAYWALL_USAGE = GLOBAL_DIR / "unpaywall_usage.json"
 OPENALEX_OR_MAX = 100   # OpenAlex OR-filters take up to 100 values; per_page 100 returns them all in one page
 OPENALEX_THREADS = 8    # OpenAlex allows 30 requests/s with a key (10 without): see set_paces()
 CROSSREF_URL_MAX = 6500  # Crossref answers 414 above ~8,000 URL characters (percent-encoded): ~170 DOIs per lookup
@@ -76,9 +77,9 @@ S2_BATCH = 500          # the Semantic Scholar batch endpoint's maximum
 S2_KEYLESS_MAX = 20000  # without a key Semantic Scholar shares one small pool with everyone (mostly HTTP 429): only
                         # topics up to this size wait for it; a larger one is classified without it (--abstracts-only
                         # can add its abstracts later; a free `s2:` key in keys.txt makes it part of every run)
-CHUNK = 20000           # papers per block: looked up together, decided and saved in one transaction
+CHUNK = 20000           # sources per block: looked up together, decided and saved in one transaction
 IN_FLIGHT = 4           # blocks looked up at the same time (every service keeps its own pace and limits)
-SLICE = 5000            # papers whose API answers are held in memory at once while a block is decided
+SLICE = 5000            # sources whose API answers are held in memory at once while a block is decided
 VERBOSE = True          # one line per service lookup; a topic of several blocks logs one line per block instead
 S2_STOPPED = threading.Event()        # Semantic Scholar failed for good: the rest of the run goes without it
 UP_CAP_LOGGED = threading.Event()
@@ -148,9 +149,9 @@ class DailyCap:
 
 
 class Hints:
-    """The search records' hints per paper (candidates.jsonl: copies, licenses, preprint DOIs ...), read by byte offset —
+    """The search records' hints per source (candidates.jsonl: copies, licenses, preprint DOIs ...), read by byte offset —
     the file reaches gigabytes on a large topic and is never loaded whole."""
-    ID_RX = re.compile(rb'\{"paper_id": (\d+)')
+    ID_RX = re.compile(rb'\{"(?:source|paper)_id": (\d+)')   # paper_id: written before the rename
 
     def __init__(self, path):
         self.path, self.lock, self.fh = Path(path), threading.Lock(), None
@@ -165,7 +166,7 @@ class Hints:
                         ids.append(pid)
                         offs.append(pos)
                     pos += len(line)
-        if not ordered:       # stable sort: of two lines of one paper the later one is found (it wins, as before)
+        if not ordered:       # stable sort: of two lines of one source the later one is found (it wins, as before)
             order = sorted(range(len(ids)), key=ids.__getitem__)
             ids, offs = array("q", (ids[i] for i in order)), array("q", (offs[i] for i in order))
         self.ids, self.offs = ids, offs
@@ -175,7 +176,8 @@ class Hints:
     @staticmethod
     def _pid(line):
         try:
-            return int(json.loads(line).get("paper_id"))
+            r = json.loads(line)
+            return int(r.get("source_id", r.get("paper_id")))
         except (ValueError, TypeError, AttributeError):
             return None
 
@@ -521,7 +523,7 @@ def do_s2(cache, dois, keys):
         cache.add(recs)
 
 
-# ---------------------------------------------------------------- license decision (per paper)
+# ---------------------------------------------------------------- license decision (per source)
 def crossref_vor_license(cr):
     if not cr or not cr.get("found"):
         return None
@@ -588,7 +590,7 @@ def versions_for(h, up, oa, ep, pmc, s2, crv, dc_by, up_cache, cr_cache, oa_cach
             if v.get("host_type") in ("publisher", "journal") and v.get("license") in (None, "other-oa"):
                 v["license"], v["license_inherited"] = crv, "crossref_vor"
                 v["license_raw"] = crossref_vor_url(cr_cache.get(h.get("doi"))) or v.get("license_raw")
-    # licensed preprint copies merged into this paper (ChemRxiv / Research Square / arXiv ...)
+    # licensed preprint copies merged into this source (ChemRxiv / Research Square / arXiv ...)
     for pd in h.get("preprint_dois") or []:
         u, c = up_cache.get(pd), cr_cache.get(pd)
         lic_cr = next((t for t in (norm_license(l.get("url")) for l in (c or {}).get("licenses") or [])
@@ -654,7 +656,7 @@ def license_fields(best, lic, src, crv, cr, h):
     if src:
         raw = src.get("license_raw")
         srcname = LICENSE_SOURCE.get(src.get("license_inherited") or "", None) or \
-            LICENSE_SOURCE.get(src.get("src"), SOURCE_LABEL.get(src.get("src"), src.get("src")))
+            LICENSE_SOURCE.get(src.get("src"), DATABASE_LABEL.get(src.get("src"), src.get("src")))
     if lic and lic == crv and (not raw or norm_license(raw) != lic):
         raw, srcname = crossref_vor_url(cr) or raw, "Crossref"
     # a versioned URL/string seen anywhere for the same license token beats a bare token ('cc-by')
@@ -675,17 +677,17 @@ OA_DROP = ("$.authors_detail", "$.authors")     # the parts of OpenAlex answers 
 
 
 def count_rows(led, topic, cond, args):
-    return led.q("SELECT COUNT(*) FROM papers p JOIN paper_topics t ON t.paper_id = p.id WHERE t.topic=? " + cond,
+    return led.q("SELECT COUNT(*) FROM sources p JOIN source_topics t ON t.source_id = p.id WHERE t.topic=? " + cond,
                  (topic, *args))[0][0]
 
 
 def blocks(led, topic, cond, args):
-    """The topic's papers matching `cond`, CHUNK at a time in id order (never the whole topic in memory)."""
+    """The topic's sources matching `cond`, CHUNK at a time in id order (never the whole topic in memory)."""
     return led.iter_topic(topic, cond, args, CHUNK)
 
 
 def run_blocks(fn, gen, total, label, proj=None, topic=None):
-    """fn(rows) -> papers done, for every block; IN_FLIGHT blocks at a time (at most that many in memory)."""
+    """fn(rows) -> sources done, for every block; IN_FLIGHT blocks at a time (at most that many in memory)."""
     t0, done, k, futs = time.time(), 0, 0, deque()
     nblocks = max(1, -(-total // CHUNK))
 
@@ -696,10 +698,10 @@ def run_blocks(fn, gen, total, label, proj=None, topic=None):
         if nblocks > 1:
             el = time.time() - t0
             eta = el / max(done, 1) * max(total - done, 0)
-            log(f"{label}: block {k}/{nblocks} — {done:,}/{total:,} papers ({el / 60:.1f} min, ~{eta / 60:.0f} min left)")
+            log(f"{label}: block {k}/{nblocks} — {done:,}/{total:,} sources ({el / 60:.1f} min, ~{eta / 60:.0f} min left)")
             if proj and topic:
                 update_state(proj, topic, lambda st: st.__setitem__(label + "_progress", {
-                    "papers_done": done, "papers_total": total, "blocks_done": k, "blocks_total": nblocks,
+                    "sources_done": done, "sources_total": total, "blocks_done": k, "blocks_total": nblocks,
                     "minutes": round(el / 60, 1), "minutes_left": round(eta / 60), "updated_at": now_iso()}))
 
     with ThreadPoolExecutor(IN_FLIGHT) as ex:
@@ -713,7 +715,7 @@ def run_blocks(fn, gen, total, label, proj=None, topic=None):
 
 
 class Classifier:
-    """Looks up one block of papers (every service at once, then the lookups that need their answers) and decides it.
+    """Looks up one block of sources (every service at once, then the lookups that need their answers) and decides it.
     Several blocks are looked up at the same time; decisions are written one block at a time."""
 
     def __init__(self, proj, led, topic, keys, skip, age, hints):
@@ -739,13 +741,13 @@ class Classifier:
         alias = defaultdict(list)
         for i in range(0, len(ids), 900):
             part = ids[i:i + 900]
-            for pid, d in led.q(f"SELECT paper_id, doi FROM dois WHERE paper_id IN ({','.join('?' * len(part))})",
+            for pid, d in led.q(f"SELECT source_id, doi FROM dois WHERE source_id IN ({','.join('?' * len(part))})",
                                 tuple(part)):
                 alias[pid].append(d)
         dois, all_dois, pmcids, arx, no_abs, oa_any = [], set(), set(), set(), set(), set()
         for r in rows:
             h = hints.get(r["id"], {})
-            # preprint / repository copies merged into this paper later (dedup.py) are copies of it too — but never a
+            # preprint / repository copies merged into this source later (dedup.py) are copies of it too — but never a
             # publisher's SI deposit on Figshare, whose license is not the article's
             extra = [d for d in alias.get(r["id"], ()) if d != r.get("doi") and d.startswith("10.")
                      and (is_preprint_doi(d) or is_repository_doi(d)) and not d.startswith(("10.6084/", "10.25384/"))]
@@ -780,7 +782,7 @@ class Classifier:
         do_crossref(self.cr, all_dois)          # second pass for a batch that failed (usually nothing is left)
         oa_left = res.get("openalex") or []
         # 2. Unpaywall only for DOIs OpenAlex lacks (it knows only Crossref DOIs: none that Crossref and OpenAlex both
-        #    do not know); Europe PMC for papers likely open or without an abstract
+        #    do not know); Europe PMC for sources likely open or without an abstract
         O = self.oa.summary(all_dois, ("$.found", "$.is_oa", "$.ids.pmcid"))
         C = self.cr.summary(all_dois, ("$.found",))
         need = [d for d in all_dois if not (O.get(d) or (None,))[0] and not (d in O and (C.get(d) or (None,))[0] == 0)]
@@ -793,7 +795,7 @@ class Classifier:
             jobs["europepmc"] = (do_europepmc, self.ep, epmc)
         res = run_parallel(jobs)
         up_left = res.get("unpaywall") or []
-        if "europepmc" not in skip:             # papers Unpaywall has found open
+        if "europepmc" not in skip:             # sources Unpaywall has found open
             asked, U = set(epmc), self.up.summary(dois, ("$.is_oa",))
             do_europepmc(self.ep, [d for d in dois if d not in asked and (U.get(d) or (None,))[0]])
         # 3. the PMC copies and arXiv licenses of the ids found so far
@@ -929,7 +931,7 @@ class Classifier:
             if kw != (r.get("keywords") or []):
                 upd["keywords"] = kw[:25]
             itself, retracts = retraction_of((c or {}).get("update_to"), d)
-            if retracts:                       # a retraction notice: the papers it names are the retracted ones
+            if retracts:                       # a retraction notice: the sources it names are the retracted ones
                 notices.append((r["id"], retracts))
             elif itself or ((o or {}).get("retracted") and not (r.get("external_ids") or {}).get("retraction_of")):
                 upd["retracted"] = 1
@@ -945,14 +947,14 @@ class Classifier:
                         break
             led.set(r["id"], **upd)
             self.cnt[final or best] += 1
-        for nid, retracts in notices:          # after the slice: a retracted paper's own update above cannot undo it
+        for nid, retracts in notices:          # after the slice: a retracted source's own update above cannot undo it
             self.n["retracted"] += led.record_retraction(nid, retracts)
             self.n["notices"] += 1
         return filled
 
 
 def fill_abstracts(proj, led, topic, keys, skip, export=True):
-    """Papers without an abstract (< 80 characters, not read from a PDF): look their DOIs up in OpenAlex (100 per
+    """Sources without an abstract (< 80 characters, not read from a PDF): look their DOIs up in OpenAlex (100 per
     call, daily budget), Semantic Scholar, Europe PMC and Crossref — all at once, block by block — and keep the first
     real abstract. Re-run after 00:00 UTC when OpenAlex's budget stopped it (lookups_left)."""
     global VERBOSE
@@ -960,7 +962,7 @@ def fill_abstracts(proj, led, topic, keys, skip, export=True):
             "AND COALESCE(p.abstract_source, '') NOT LIKE 'pdf%'")
     total = count_rows(led, topic, cond, ())
     VERBOSE = total <= CHUNK
-    log(f"{total:,} papers without an abstract")
+    log(f"{total:,} sources without an abstract")
     cr, oa = Cache(proj, "crossref"), Cache(proj, "openalex")
     ep, s2 = Cache(proj, "europepmc"), Cache(proj, "s2")
     stop, lock, vocab = threading.Event(), threading.Lock(), Vocab(proj)
@@ -1032,16 +1034,16 @@ def main():
     global VERBOSE
     ap = add_project_arg(argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter))
     ap.add_argument("--topic", required=True)
-    ap.add_argument("--refresh", action="store_true", help="re-decide papers that already have an access type")
+    ap.add_argument("--refresh", action="store_true", help="re-decide sources that already have an access type")
     ap.add_argument("--skip", default="", help="comma list of lookups to skip: s2,openalex,unpaywall,europepmc,pmcaws,"
                                                "datacite (Crossref is always used)")
     ap.add_argument("--abstracts-only", action="store_true",
                     help="only fill missing abstracts and keywords from metadata (no access decision, no Unpaywall)")
     ap.add_argument("--recheck-older-than", type=int, default=None, metavar="DAYS",
-                    help="re-query and re-decide papers last checked DAYS or more days ago (update mode); 0 = every paper, "
+                    help="re-query and re-decide sources last checked DAYS or more days ago (update mode); 0 = every source, "
                          "with fresh lookups — use it when the user asks to re-check everything")
     ap.add_argument("--no-export", action="store_true",
-                    help="do not refresh the index CSVs and papers.db (run export.py once after the last step)")
+                    help="do not refresh the index CSVs and index.db (run export.py once after the last step)")
     a = ap.parse_args()
     proj = Project(a.project)
     load_config(proj, a.topic)
@@ -1058,7 +1060,7 @@ def main():
     else:
         cond, args = ("" if a.refresh else "AND p.access_type IS NULL"), ()
     total = count_rows(led, a.topic, cond, args)
-    log(f"{total:,} papers to classify" + (f" in {-(-total // CHUNK)} blocks of {CHUNK:,}" if total > CHUNK else ""))
+    log(f"{total:,} sources to classify" + (f" in {-(-total // CHUNK)} blocks of {CHUNK:,}" if total > CHUNK else ""))
     if not total:
         print(json.dumps({"classified": 0}))
         return
@@ -1066,7 +1068,7 @@ def main():
     t0 = time.time()
     if "s2" not in skip and not keys.get("s2") and total > S2_KEYLESS_MAX:
         skip.add("s2")
-        log(f"semantic scholar: not used for {total:,} papers without a key (its shared keyless pool refuses most "
+        log(f"semantic scholar: not used for {total:,} sources without a key (its shared keyless pool refuses most "
             "requests); abstracts it could add: --abstracts-only later, or add a free `s2:` key to keys.txt")
     cl = Classifier(proj, led, a.topic, keys, skip, age, Hints(proj.topic_dir(a.topic) / "candidates.jsonl"))
     run_blocks(cl.process, blocks(led, a.topic, cond, args), total, "classify_access", proj, a.topic)
@@ -1083,7 +1085,7 @@ def main():
              "skipped_lookups": sorted(skip), "minutes": round((time.time() - t0) / 60, 1),
              "exported": not a.no_export, "finished_at": now_iso()}
     if pending:
-        stats["next"] = (f"{pending} papers wait for OpenAlex's budget or Unpaywall's daily cap; re-run "
+        stats["next"] = (f"{pending} sources wait for OpenAlex's budget or Unpaywall's daily cap; re-run "
                          f"classify_access.py --topic {a.topic} after 00:00 UTC (they keep an empty access type)")
 
     def fn(st):

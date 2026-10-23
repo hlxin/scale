@@ -16,13 +16,13 @@ prepare   checks the manifest with `scale corpus check`, picks its included sour
           a working folder for each: `scale source start --doi <doi> --pdf <pdf> --out <run>/sources/<id>` (the
           graph to fill, pinned to the schema, with its Source; the page texts; rights.yaml; BRIEF.md). The SI files'
           text is appended to the page texts as pages [page S1], [page S2] …: supporting information belongs to its
-          paper's Source. Re-running it skips folders that exist.
+          source's Source. Re-running it skips folders that exist.
 next      writes the prompt of the next N sources for a role (from ../templates) and prints one JSON line per source:
           {"id", "role", "prompt", "model"}. Launch one subagent per line, with that model. A handed-out source is not
           handed out again for 3 hours unless its report arrives.
           Models (asked before prepare): --curator is the model that curates and fixes; --reviewer the one that reads
           each document a second time — another Claude model (recommended: not the curator's), api:<model> (read by
-          review-api through an OpenAI-compatible endpoint, --api-base-url; key in ~/.paper-acquisition/keys.txt or
+          review-api through an OpenAI-compatible endpoint, --api-base-url; key in ~/.scale/sources/keys.txt or
           an environment variable), or skip (not recommended: a document then passes on SCALE's checks alone, and the
           index says it was not read a second time).
 review-api  the second reading of the next N curated sources by the API model: the document, the curator's report
@@ -30,9 +30,9 @@ review-api  the second reading of the next N curated sources by the API model: t
           work/review.json as a subagent's would be.
 status    runs `scale source check <folder>` on every folder (cached while the graph is unchanged), reads the
           curator's report (work/curation.json) and the second reading (work/review.json), and gives each source a
-          state; --apply records the settled ones in state.jsonl and hands their result to the paper index
+          state; --apply records the settled ones in state.jsonl and hands their result to the source index
           (<project>/.scripts/<topic>/kg/<run>/extraction_status.jsonl), then runs index-sources' export so
-          the index shows them at once (its Extracted column; papers.db table extractions).
+          the index shows them at once (its Extracted column; index.db table extractions).
 finish    `scale source finish <folder>` for every passed source (--public: the copy with quoted text capped).
 assemble  a local graph kept as parts (<run>/graph by default) with every passed document, added by `scale graph
           contribute --write` into that local folder, and built (`scale graph build`) into one document to query.
@@ -41,7 +41,7 @@ contribute  `scale graph contribute <graph> --to <folder>` for every passed sour
 
 States: prepared → (curator) curated → (second reading) passed | needs_fix → (fix) curated … ; check_failed when the
 curator's document does not pass the check; failed after 3 fixes; rejected when the second reading finds the wrong
-paper or an unreadable text. Settled: passed (extracted or no_data), rejected, failed. The scripts never read or write
+source or an unreadable text. Settled: passed (extracted or no_data), rejected, failed. The scripts never read or write
 a document's records: the curator writes them, SCALE's tools check them. Prints one JSON object on stdout.
 """
 import argparse
@@ -154,15 +154,15 @@ def contribute(cmd, graph, folder, write=False):
 
 
 def project_root(start):
-    """The index-sources project that holds the manifest (its working ledger, or its papers.db alone), if any."""
+    """The index-sources project that holds the manifest (its working ledger, or its index.db alone), if any."""
     for d in [Path(start).resolve(), *Path(start).resolve().parents]:
-        if (d / ".scripts" / "ledger.sqlite").is_file() or (d / "publications" / "papers.db").is_file():
+        if (d / ".scripts" / "ledger.sqlite").is_file() or (d / "sources" / "index.db").is_file() or (d / "publications" / "papers.db").is_file():
             return d
     return None
 
 
 def index_export(root):
-    """index-sources' export for the project, so the paper index shows the results now; what it said."""
+    """index-sources' export for the project, so the source index shows the results now; what it said."""
     for cand in (HERE.parents[1] / "index-sources" / "scripts" / "export.py",
                  root / ".claude" / "skills" / "index-sources" / "scripts" / "export.py",
                  root / ".claude" / "skills" / "paper-acquisition" / "scripts" / "export.py"):   # its earlier name
@@ -178,8 +178,8 @@ def index_export(root):
 
 
 def folder_id(src):
-    if src.get("paper_id") is not None:
-        return str(src["paper_id"])
+    if src.get("source_id") is not None:
+        return str(src["source_id"])
     return "".join(c if c.isalnum() or c in "._-" else "-" for c in str(src.get("slug") or src.get("id"))).strip("-.")
 
 
@@ -320,7 +320,7 @@ def cmd_prepare(a):
     for s in m["sources"]:
         if s.get("status") not in included or not s.get("pdf"):
             continue
-        if want is not None and not ({str(s.get("paper_id")), s.get("slug")} & want):
+        if want is not None and not ({str(s.get("source_id")), s.get("slug")} & want):
             continue
         pdf = (manifest_path.parent / s["pdf"]).resolve()
         if not pdf.is_file():
@@ -329,13 +329,13 @@ def cmd_prepare(a):
     if a.max:
         picked = picked[:a.max]
     if not picked:
-        die("no included source with its PDF on disk matches")
+        die("no included source with its PDF on disk matches: fetch the corpus's files first (fetch-corpus: download_open.py --corpus, then settle_corpus.py)")
     started, skipped, notes = 0, 0, Counter()
     for s, pdf in picked:
         i = folder_id(s)
         f = run_dir / "sources" / i
         entry = cfg["sources"].setdefault(i, {})
-        entry.update({k: s.get(k) for k in ("slug", "paper_id", "doi", "title", "year", "doc_type", "access_type",
+        entry.update({k: s.get(k) for k in ("slug", "source_id", "doi", "title", "year", "doc_type", "access_type",
                                             "licence", "licence_url", "text_version") if s.get(k) is not None})
         if (f / "source.json").is_file():
             skipped += 1
@@ -455,14 +455,16 @@ that every quote is verbatim in the text; check what they cannot:
 Answer with one JSON object and nothing else:
 {"verdict": "pass" | "needs_fix" | "reject", "issues": [{"record": "<id>", "locator": "<where in the source>",
 "problem": "<what is wrong>", "fix": "<what to do>"}], "coverage": "<one line>", "note": "<one line>"}.
-Use reject only when the text is of another paper or cannot be read."""
+Use reject only when the text is of another source or cannot be read."""
 
 
 def _api_key(api):
-    """The reader's key: its environment variable, else its line in ~/.paper-acquisition/keys.txt (never printed)."""
+    """The reader's key: its environment variable, else its line in ~/.scale/sources/keys.txt (never printed)."""
     if api.get("key_env") and os.environ.get(api["key_env"]):
         return os.environ[api["key_env"]]
-    f = Path(os.environ.get("PAPER_ACQ_HOME") or Path.home() / ".paper-acquisition") / "keys.txt"
+    env = os.environ.get("SCALE_SOURCES_HOME") or os.environ.get("PAPER_ACQ_HOME")    # as index-sources' global_dir()
+    new, old = Path.home() / ".scale" / "sources", Path.home() / ".paper-acquisition"
+    f = (Path(env) if env else old if old.is_dir() and not new.exists() else new) / "keys.txt"
     for line in (f.read_text().splitlines() if f.is_file() else []):
         k, sep, v = line.partition(":") if ":" in line else line.partition("=")
         if sep and k.strip() == api.get("key_name", "llm_api_key") and v.strip():
@@ -509,7 +511,7 @@ def cmd_review_api(a):
     api = run.models.get("api") or {}
     key = _api_key(api)
     if not key:
-        die(f"no key for the reader: add `{api.get('key_name', 'llm_api_key')}: <key>` to ~/.paper-acquisition/keys.txt"
+        die(f"no key for the reader: add `{api.get('key_name', 'llm_api_key')}: <key>` to ~/.scale/sources/keys.txt"
             + (f" or set {api['key_env']}" if api.get("key_env") else ""))
     hand, done, failed = run.handouts(), [], []
     for i in run.ids():
@@ -576,9 +578,9 @@ def cmd_status(a):
                    "schema_version": run.cfg.get("schema_version"), "nodes": rec.get("nodes"), "links": rec.get("links"),
                    "curator": run.models.get("curator"), "second_reading": run.models.get("reviewer")}
             append_jsonl(run.d / "state.jsonl", row)
-            pid = run.source(i).get("paper_id")
+            pid = run.source(i).get("source_id")
             if handoff and pid is not None:
-                append_jsonl(handoff, {"paper_id": pid, "topic": topic, "kg": run.cfg["name"], "status": result,
+                append_jsonl(handoff, {"source_id": pid, "topic": topic, "kg": run.cfg["name"], "status": result,
                                        "schema_version": run.cfg.get("schema_version"), "nodes": rec.get("nodes"),
                                        "edges": rec.get("links"), "date": now()[:10],
                                        "note": (f"scale-catal document: {run.folder(i)}" + ("; not read a second time"
@@ -678,8 +680,8 @@ def main():
     p = sub.add_parser("prepare")
     p.add_argument("--corpus", required=True)
     p.add_argument("--run", required=True)
-    p.add_argument("--ids", help="comma list of paper IDs or slugs to curate (default: every included source)")
-    p.add_argument("--ids-file", help="a file of paper IDs or slugs, one per line")
+    p.add_argument("--ids", help="comma list of source IDs or slugs to curate (default: every included source)")
+    p.add_argument("--ids-file", help="a file of source IDs or slugs, one per line")
     p.add_argument("--max", type=int, help="at most this many sources (in manifest order)")
     p.add_argument("--contributor", help="who curates: a stewardship registry id (scale source start --contributor)")
     p.add_argument("--project", help="the project the documents belong to (scale source start --project)")
@@ -691,7 +693,7 @@ def main():
     p.add_argument("--reviewer", help="who reads each document a second time: " + "|".join(MODELS) +
                    " (recommended: not the curator's), api:<model>, or skip (not recommended)")
     p.add_argument("--api-base-url", help="for --reviewer api:<model>: an OpenAI-compatible endpoint (…/v1)")
-    p.add_argument("--api-key-name", default="llm_api_key", help="its key's name in ~/.paper-acquisition/keys.txt")
+    p.add_argument("--api-key-name", default="llm_api_key", help="its key's name in ~/.scale/sources/keys.txt")
     p.add_argument("--api-key-env", help="or the environment variable that holds its key")
     p = sub.add_parser("review-api")
     p.add_argument("--run", required=True)

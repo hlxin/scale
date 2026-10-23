@@ -137,8 +137,8 @@ def _save(proj, r):
     return tmp
 
 
-def fetch_paper(proj, led, sess, lim, ez_host, paper, pub):
-    """One paper through EZproxy (the visit was already granted by the limiter) -> outcome string."""
+def fetch_source(proj, led, sess, lim, ez_host, paper, pub):
+    """One source through EZproxy (the visit was already granted by the limiter) -> outcome string."""
     doi = paper["doi"]
     entry = {"src": "ezproxy", "version": "publishedVersion", "access": "Paywalled" if paper.get("access_type") == "Paywalled"
              else paper.get("access_type"), "license": paper.get("license")}

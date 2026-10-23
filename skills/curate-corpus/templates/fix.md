@@ -2,7 +2,7 @@
 
 You curate ONE source again. Fix what the check and the second reading found, following SCALE's curate-corpus skill (its procedure for one source)
 (`${scale} call skills '{"name": "curate-corpus"}'`). Work only inside `${folder}`: the graph `${graph}`, the page texts
-`work/texts/${slug}.txt` (the paper, then its SI pages `[page S1]` …), the PDF `pdfs/${slug}.pdf` and `rights.yaml`.
+`work/texts/${slug}.txt` (the source, then its SI pages `[page S1]` …), the PDF `pdfs/${slug}.pdf` and `rights.yaml`.
 
 **The check's errors** (from `${scale} source check ${folder}`):
 ${check_errors}

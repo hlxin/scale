@@ -1,12 +1,12 @@
 """Fill missing abstracts from the downloaded PDFs (an option of Download mode and of curation — an index-only run has
 no PDFs, so its abstracts come from metadata only).
 
-Reads pages 1-2 of each downloaded paper of the topic whose abstract is missing or shorter than 80 characters, takes
+Reads pages 1-2 of each downloaded source of the topic whose abstract is missing or shorter than 80 characters, takes
 the text under an "Abstract" / "Summary" heading (up to Keywords / Introduction), and stores it with
 abstract_source = "pdf". PDFs without such a heading (common for RSC and Nature journals) are left alone: a curator
-copies the abstract verbatim while reading each paper. --heuristic also tries the first long prose paragraph of page 1
+copies the abstract verbatim while reading each source. --heuristic also tries the first long prose paragraph of page 1
 (abstract_source = "pdf (first-page paragraph)"); it is right only about half the time, so check a sample first.
-Topic A/B/C from the vocabulary are recomputed for the papers that got an abstract.
+Topic A/B/C from the vocabulary are recomputed for the sources that got an abstract.
 
   python3 -I fill_abstracts.py --topic <slug> [--dry-run] [--heuristic] [--ids 12,57]
 """

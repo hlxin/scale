@@ -1,13 +1,13 @@
-"""Index step 2 — federated search: run every query in .scripts/<topic>/queries.json on every chosen source and page
+"""Index step 2 — federated search: run every query in .scripts/<topic>/queries.json on every chosen database and page
 each one to the end. Resumable: cursors live in .scripts/<topic>/state.json, raw hits are appended to
-.scripts/<topic>/raw/<label>/<source>.jsonl. Nothing is downloaded here.
+.scripts/<topic>/raw/<label>/<database>.jsonl. Nothing is downloaded here.
 
 usage:
   python3 -I search.py --topic <slug> --count-only          # first page of each query -> estimated field size
-  python3 -I search.py --topic <slug>                       # full search (all sources in config, in parallel)
+  python3 -I search.py --topic <slug>                       # full search (all databases in config, in parallel)
   python3 -I search.py --topic <slug> --since 2026-09-01    # update mode: only works newer than the date
-  python3 -I search.py --topic <slug> --citing [--since D]  # citation chasing: works citing the topic's core papers
-Sources that need a key (keys.txt) are skipped with a message when the key is missing. Lists of DOIs, BibTeX/RIS files
+  python3 -I search.py --topic <slug> --citing [--since D]  # citation chasing: works citing the topic's core sources
+Databases that need a key (keys.txt) are skipped with a message when the key is missing. Lists of DOIs, BibTeX/RIS files
 and web pages are added with import_list.py. Prints one JSON summary line at the end.
 """
 import argparse
@@ -22,30 +22,30 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from _common import (KEY_FILES_HELP, Gate, HTTPFail, Project, add_project_arg, clean_text, die, http_get, json_read,
                      jsonl_append, load_config, load_keys, load_state, log, norm_doi, now_iso, polite_email, update_state)
-from _sources import CATALOG, FETCHERS, OALEX_SELECT, iso_or_none, keys_needed, openalex_budget_ok, openalex_record
+from _databases import CATALOG, FETCHERS, OALEX_SELECT, iso_or_none, keys_needed, openalex_budget_ok, openalex_record
 
-# Relevance-ranked sources stop a query when < 4% of a page passes the topic gate twice in a row (the rest is a tail
-# of loose matches). Strict boolean/filter sources and year-walked J-STAGE always page to the end.
+# Relevance-ranked databases stop a query when < 4% of a page passes the topic gate twice in a row (the rest is a tail
+# of loose matches). Strict boolean/filter databases and year-walked J-STAGE always page to the end.
 STRICT_SOURCES = {"openalex", "citations", "pmc", "arxiv", "jstage", "europepmc_patents", "epo", "lens_patents", "s2"}
 TAIL_STOP = 0.04
 
 
-def load_queries(proj, slug, sources):
+def load_queries(proj, slug, databases):
     qs = json_read(proj.topic_dir(slug) / "queries.json")
     if not qs:
-        die(f"missing .scripts/{slug}/queries.json — write the per-source queries first (references/queries.md)")
+        die(f"missing .scripts/{slug}/queries.json — write the per-database queries first (references/queries.md)")
     bad = [s for s in qs if s not in FETCHERS]
     if bad:
-        die(f"queries.json has unknown sources {bad}; valid: {sorted(FETCHERS)}")
-    return {s: qs[s] for s in sources if qs.get(s)}
+        die(f"queries.json has unknown databases {bad}; valid: {sorted(FETCHERS)}")
+    return {s: qs[s] for s in databases if qs.get(s)}
 
 
-def usable_sources(sources, keys):
-    """-> (usable, skipped{source: reason}). Key sources without their key are skipped, never queried."""
+def usable_databases(databases, keys):
+    """-> (usable, skipped{database: reason}). Key databases without their key are skipped, never queried."""
     ok, skipped = [], {}
-    for s in sources:
+    for s in databases:
         if s not in FETCHERS:
-            skipped[s] = CATALOG.get(s, {}).get("reason") or "unknown source"
+            skipped[s] = CATALOG.get(s, {}).get("reason") or "unknown database"
             continue
         missing = [k for k in keys_needed(s) if not keys.get(k)]
         if missing:
@@ -157,8 +157,8 @@ class Runner:
 
 
 def count_only(runner, queries, skipped=None):
-    """First page of every query. Strict sources: on-topic estimate = total x first-page topic-gate pass rate.
-    Relevance-ranked sources (Crossref, Zenodo, DataCite ...): the total counts any-word matches, so only the first
+    """First page of every query. Strict databases: on-topic estimate = total x first-page topic-gate pass rate.
+    Relevance-ranked databases (Crossref, Zenodo, DataCite ...): the total counts any-word matches, so only the first
     page's on-topic hits are reported, as a lower bound."""
     rows = []
     for src, qs in queries.items():
@@ -169,24 +169,24 @@ def count_only(runner, queries, skipped=None):
                 rate = ok / len(recs) if recs else 0
                 loose = src not in STRICT_SOURCES
                 est = ok if loose else round((tot or 0) * rate)
-                rows.append({"source": src, "qid": qid, "total": tot, "first_page": len(recs), "first_page_on_topic": ok,
+                rows.append({"database": src, "qid": qid, "total": tot, "first_page": len(recs), "first_page_on_topic": ok,
                              "estimated_on_topic": est, "loose": loose})
             except HTTPFail as e:
-                rows.append({"source": src, "qid": qid, "total": None, "error": str(e)[:200], "estimated_on_topic": 0})
+                rows.append({"database": src, "qid": qid, "total": None, "error": str(e)[:200], "estimated_on_topic": 0})
             log(f"{src} {qid}: total={rows[-1].get('total')} on-topic~{rows[-1].get('estimated_on_topic')}")
     by_src = Counter()
     for r in rows:
-        by_src[r["source"]] += r.get("estimated_on_topic") or 0
-    out = {"count_only": True, "estimated_on_topic_per_source": dict(by_src), "skipped_sources": skipped or {},
+        by_src[r["database"]] += r.get("estimated_on_topic") or 0
+    out = {"count_only": True, "estimated_on_topic_per_database": dict(by_src), "skipped_databases": skipped or {},
            "estimated_on_topic_sum": sum(by_src.values()), "queries": rows,
-           "note": "before deduplication (sources overlap ~30-60%); relevance-ranked sources (loose) are lower "
+           "note": "before deduplication (databases overlap ~30-60%); relevance-ranked databases (loose) are lower "
                    "bounds from page 1"}
     update_state(runner.proj, runner.slug, lambda st: st.update({"count_estimate": out, "count_estimate_at": now_iso()}))
     print(json.dumps(out))
 
 
 def openalex_ids(runner, rows):
-    """OpenAlex work ids of ledger rows (stored when OpenAlex found the paper; else looked up by DOI)."""
+    """OpenAlex work ids of ledger rows (stored when OpenAlex found the source; else looked up by DOI)."""
     ids, need = {}, []
     for r in rows:
         w = (r.get("external_ids") or {}).get("openalex")
@@ -215,17 +215,17 @@ def openalex_ids(runner, rows):
 
 
 def run_citations(runner, proj, slug, min_relevance=4, max_seeds=3000):
-    """Forward citation chasing: works that cite the topic's core papers (relevance >= 4, or every in-scope paper when
-    the topic is not screened), newer than --since when given. Finds papers that use other words for the topic."""
+    """Forward citation chasing: works that cite the topic's core sources (relevance >= 4, or every in-scope source when
+    the topic is not screened), newer than --since when given. Finds sources that use other words for the topic."""
     from _ledger import Ledger
     led = Ledger(proj)
-    # the most cited core papers, chosen by SQLite (a topic may hold millions)
+    # the most cited core sources, chosen by SQLite (a topic may hold millions)
     cond = ("AND COALESCE(t.in_scope, 1) = 1 AND p.is_erratum = 0 AND p.doc_type NOT IN ('dataset', 'software', 'patent') ")
     order = " ORDER BY COALESCE(p.cited_by, 0) DESC, t.rowid LIMIT ?"
     core = led.topic_rows(slug, cond + "AND COALESCE(t.relevance, 0) >= ?" + order, (min_relevance, max_seeds)) or \
         led.topic_rows(slug, cond + order, (max_seeds,))
     ids = list(dict.fromkeys(openalex_ids(runner, core).values()))
-    log(f"citations: {len(core)} core papers, {len(ids)} with OpenAlex ids")
+    log(f"citations: {len(core)} core sources, {len(ids)} with OpenAlex ids")
     queries = {}
     for i in range(0, len(ids), 50):
         queries[f"cites-{i // 50 + 1:04d}"] = {"filter": "cites:" + "|".join(ids[i:i + 50])}
@@ -236,10 +236,10 @@ def run_citations(runner, proj, slug, min_relevance=4, max_seeds=3000):
 def main():
     ap = add_project_arg(argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter))
     ap.add_argument("--topic", required=True)
-    ap.add_argument("--sources", default=None, help="comma list (default: config['sources'])")
+    ap.add_argument("--databases", "--sources", dest="databases", default=None, help="comma list (default: config['databases'])")
     ap.add_argument("--since", default=None, help="YYYY-MM-DD: only works published/registered on or after")
     ap.add_argument("--count-only", action="store_true")
-    ap.add_argument("--citing", action="store_true", help="citation chasing from the topic's core papers (OpenAlex)")
+    ap.add_argument("--citing", action="store_true", help="citation chasing from the topic's core sources (OpenAlex)")
     ap.add_argument("--year-from", type=int, default=None, help="index limited to works from this year on (default: "
                                                               "config search.year_from); the run stays a full index")
     a = ap.parse_args()
@@ -248,7 +248,7 @@ def main():
     since = iso_or_none(a.since)
     label = (f"citing-since-{since}" if since else "citing") if a.citing else (f"since-{since}" if since else "full")
     year_from = a.year_from or (cfg.get("search") or {}).get("year_from")
-    if year_from and not since:      # a year-limited index: each source's date filter, but still the full index run
+    if year_from and not since:      # a year-limited index: each database's date filter, but still the full index run
         since = f"{int(year_from)}-01-01"
     runner = Runner(proj, a.topic, cfg, label, since)
     if a.citing:
@@ -260,17 +260,17 @@ def main():
         update_state(proj, a.topic, lambda s_: s_["search_runs"][label].update(
             {"finished_at": now_iso() if not pending else None, "pending": pending,
              "hits": {"citations": sum(c.get("hits", 0) for c in st.values())}}))
-        print(json.dumps({"label": label, "core_papers": n_core, "queries": n_q,
+        print(json.dumps({"label": label, "core_sources": n_core, "queries": n_q,
                           "hits": sum(c.get("hits", 0) for c in st.values()), "pending_queries": pending,
                           "complete": not pending}))
         return
-    wanted = [s for s in (a.sources.split(",") if a.sources else cfg.get("sources") or []) if s]
-    sources, skipped = usable_sources(wanted, runner.ctx["keys"])
+    wanted = [s for s in (a.databases.split(",") if a.databases else cfg.get("databases") or cfg.get("sources") or []) if s]
+    databases, skipped = usable_databases(wanted, runner.ctx["keys"])
     for s_, why in skipped.items():
         log(f"{s_}: skipped — {why}")
-    queries = load_queries(proj, a.topic, sources)
+    queries = load_queries(proj, a.topic, databases)
     if not queries:
-        die("no queries for the chosen sources")
+        die("no queries for the chosen databases")
     if a.count_only:
         return count_only(runner, queries, skipped)
     update_state(proj, a.topic, lambda st: st.setdefault("search_runs", {}).setdefault(label, {}).update(
@@ -288,10 +288,10 @@ def main():
     def fin(s):
         r = s.setdefault("search_runs", {}).setdefault(label, {})
         r.update({"finished_at": now_iso() if not pending else None, "pending": pending, "hits": hits,
-                  "skipped_sources": skipped})
+                  "skipped_databases": skipped})
     update_state(proj, a.topic, fin)
     print(json.dumps({"label": label, "hits_per_source": hits, "pending_queries": pending, "errors": errors,
-                      "skipped_sources": skipped, "complete": not pending}))
+                      "skipped_databases": skipped, "complete": not pending}))
 
 
 if __name__ == "__main__":

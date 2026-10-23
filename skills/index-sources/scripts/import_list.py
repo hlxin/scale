@@ -1,22 +1,22 @@
-"""Add a list of papers to a topic: DOIs, a database or reference-manager export, or a web page that lists papers
+"""Add a list of sources to a topic: DOIs, a database or reference-manager export, or a web page that lists sources
 (journal table of contents, lab publication page, a review's reference list).
 
 Exports read: Web of Science (Plain text, Tab-delimited, BibTeX, RIS), Scopus (CSV, BibTeX, RIS), Zotero / EndNote /
 Mendeley (BibTeX, RIS, CSV), Google Patents CSV, this skill's own index CSVs, a SCALE corpus list (sources.json of a
 SCALE graph, or freeze_corpus.py's), and plain lists of DOIs or patent numbers (.txt, .json). The file's abstract
 and author keywords are kept (placeholders such as "[No abstract available]" and the trailing copyright line are
-dropped; a longer Crossref abstract wins), and a Web of Science or Scopus export adds that database to the paper's
+dropped; a longer Crossref abstract wins), and a Web of Science or Scopus export adds that database to the source's
 Database column. Metadata comes from Crossref for every DOI; entries without a DOI keep the file's title/authors/year
 and are matched by title later. A patent number (US1558559A, US-1558559-A, US 1,558,559) makes a patent row keyed by
 office and number (the same row a patent search finds), with its assignee, inventors and Google Patents link.
-Imported papers skip the topic gate (you chose them). Then run build_list.py as usual.
+Imported sources skip the topic gate (you chose them). Then run build_list.py as usual.
 
   python3 -I import_list.py --topic <slug> --file savedrecs.txt   # .txt .bib .ris .csv .tsv .json (auto-detected)
   python3 -I import_list.py --topic <slug> --url https://...      # static page: every DOI on it
-  --scope screen   (default) the screening decides which imported papers are in scope
+  --scope screen   (default) the screening decides which imported sources are in scope
   --scope file     the decisions the file records — a SCALE corpus list's statuses (in_scope, not_retrieved,
                    held_out_target, after_cutoff: in scope; off_scope, excluded, retracted: out, with the reason)
-  --scope in       every imported paper is in scope (a list someone chose by hand)
+  --scope in       every imported source is in scope (a list someone chose by hand)
   A decision from --scope file / in is a manual one: later screening runs keep it.
 For pages that need a browser (JavaScript, login), open them in Claude in Chrome, copy the DOIs into a .txt file and
 import that file. Excel exports (.xls, .xlsx) are not read: export Plain text, Tab-delimited, CSV, BibTeX or RIS.
@@ -33,7 +33,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from _common import (HTTPFail, Project, add_project_arg, clean_text, die, get_json, http_get, jsonl_append, load_config,
                      log, norm_doi, normalize_abstract, now_iso, polite_email, update_state)
-from _sources import crossref_items, patent_key
+from _databases import crossref_items, patent_key
 
 DOI_RX = re.compile(r"\b(10\.\d{4,9}/[^\s\"'<>{}|\\^`\[\]]+)", re.I)
 ORIGIN_LABEL = {"wos": "Web of Science export", "scopus": "Scopus export", "scale": "SCALE corpus list"}
@@ -434,7 +434,7 @@ def main():
     g.add_argument("--url")
     ap.add_argument("--scope", choices=["screen", "file", "in"], default="screen",
                     help="who decides the scope: the screening (default), the file's own decisions (a SCALE corpus "
-                         "list's statuses), or in = every imported paper is in scope; file / in are manual decisions")
+                         "list's statuses), or in = every imported source is in scope; file / in are manual decisions")
     a = ap.parse_args()
     proj = Project(a.project)
     load_config(proj, a.topic)

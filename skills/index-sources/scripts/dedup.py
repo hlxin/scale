@@ -1,17 +1,17 @@
-"""Find and merge duplicate papers across the whole ledger — every topic, every run.
+"""Find and merge duplicate sources across the whole ledger — every topic, every run.
 
   python3 -I dedup.py                          # report only (nothing changes)
   python3 -I dedup.py --apply                  # merge the safe cases; list the uncertain pairs (to_review)
-  python3 -I dedup.py --merge 12:57,30:31      # merge pairs the user confirmed are the same paper
-  python3 -I dedup.py --keep-separate 12:57    # the user says they are different papers ("all" = every listed pair)
-  --no-export with --apply / --merge: leave the index CSVs and papers.db for one export.py after the last step
+  python3 -I dedup.py --merge 12:57,30:31      # merge pairs the user confirmed are the same source
+  python3 -I dedup.py --keep-separate 12:57    # the user says they are different sources ("all" = every listed pair)
+  --no-export with --apply / --merge: leave the index CSVs and index.db for one export.py after the last step
 
 The skill runs --apply after every index, update and download without asking: only the uncertain pairs reach the user,
 and a pair kept separate is never listed (or merged) again (.scripts/dedup_decisions.jsonl).
 
 Safe cases (merged by --apply):
   preprint_vs_published  a preprint row and a published-version row with the same title (+-3 years)
-  journal_edition_twin   the same paper under two DOIs of one journal (Angewandte ange./anie. editions)
+  journal_edition_twin   the same source under two DOIs of one journal (Angewandte ange./anie. editions)
   repository_copy        a repository's own DOI (Zenodo, Figshare, institutional archive) for a journal article
   no_doi_vs_doi          a DOI-less row whose title (+-1 year) matches a row that has a DOI
   same_file              two rows whose downloaded PDFs are byte-identical
@@ -24,9 +24,9 @@ Safe cases (merged by --apply):
                          (identifiers scheme 'patent'; index Notes "Same invention also published as ...").
                          Two numbers of one office in the same series (same length: two grants, two applications)
                          are two patents — a series filed together, a continuation, a divisional — never one row.
-  si_deposit             a publisher's SI deposit (Figshare ...) indexed as a paper although it declares IsSupplementTo
-                         another paper: it becomes an SI link of that paper (si_links), not a row
-Also, every --apply turns SI deposits that an older version merged INTO their own paper (Figshare DOIs kept as
+  si_deposit             a publisher's SI deposit (Figshare ...) indexed as a source although it declares IsSupplementTo
+                         another source: it becomes an SI link of that source (si_links), not a row
+Also, every --apply turns SI deposits that an older version merged INTO their own source (Figshare DOIs kept as
 aliases, supplement_to pointing at itself) back into SI links.
 Uncertain (a person decides; listed in to_review and .scripts/dedup_review.csv): same_title_different_doi
 (republications, errata, conference+journal versions), near_title_same_author (two journal items with nearly the same
@@ -34,7 +34,7 @@ title by the same first author), patent_same_title (two patents with the same sp
 A merge keeps one row (published version > has DOI > downloaded > lowest ID): topics, databases, DOIs and missing
 fields move onto it; the other row's files move to .scripts/duplicates/ (never deleted). Every merge is logged in
 .scripts/logs/dedup_log.jsonl with the full merged row and its topic rows, so a wrong merge can be rebuilt by hand.
-Errata/corrections and retracted papers are counted (they are already flagged in Notes).
+Errata/corrections and retracted sources are counted (they are already flagged in Notes).
 """
 import argparse
 import csv
@@ -56,8 +56,8 @@ from _vectors import after_step
 from build_list import edition_twin, is_preprint_doi, is_repository_doi
 
 UNCERTAIN = ("same_title_different_doi", "near_title_same_author", "patent_same_title")
-SI_HOSTS = ("10.6084/", "10.25384/")    # Figshare: where ACS, RSC, T&F, SAGE ... deposit a paper's SI
-# the columns dedup needs (a ledger of millions of papers must not be loaded with abstracts and copies)
+SI_HOSTS = ("10.6084/", "10.25384/")    # Figshare: where ACS, RSC, T&F, SAGE ... deposit a source's SI
+# the columns dedup needs (a ledger of millions of sources must not be loaded with abstracts and copies)
 SLIM = ("id, key, doi, title, authors, year, journal, doc_type, is_preprint, is_erratum, retracted, downloaded, sha1, "
         "external_ids")
 
@@ -118,7 +118,7 @@ def decisions_file(proj):
 
 
 def kept_separate(proj):
-    """Pairs the user said are different papers: never listed or merged again."""
+    """Pairs the user said are different sources: never listed or merged again."""
     out = set()
     for r in jsonl_iter(decisions_file(proj)) or []:
         if r.get("decision") == "separate":
@@ -127,13 +127,13 @@ def kept_separate(proj):
 
 
 def is_si_row(p):
-    """A publisher's SI deposit (Figshare) that declares IsSupplementTo a paper — not a paper itself."""
+    """A publisher's SI deposit (Figshare) that declares IsSupplementTo a source — not a source itself."""
     return bool((p.get("doi") or "").startswith(SI_HOSTS) and (p.get("external_ids") or {}).get("supplement_to")
                 and doc_class(p) != "data")
 
 
 def find(led, separate=frozenset()):
-    everything = [led.row(r) for r in led.q(f"SELECT {SLIM} FROM papers")]
+    everything = [led.row(r) for r in led.q(f"SELECT {SLIM} FROM sources")]
     papers = [p for p in everything if not is_si_row(p)]     # SI rows are handled below, never as copies
     by_th = defaultdict(list)
     for p in papers:
@@ -267,7 +267,7 @@ def find(led, separate=frozenset()):
                     close = not (x.get("year") and y.get("year")) or abs(int(x["year"]) - int(y["year"])) <= 4
                     if close and (not x.get("authors") or not y.get("authors")) and not distinct_patents(x, y):
                         groups.append(("patent_same_title", *sorted([x, y], key=patent_order)))
-    # a publisher's SI deposit indexed as a paper: it declares IsSupplementTo another indexed paper
+    # a publisher's SI deposit indexed as a source: it declares IsSupplementTo another indexed source
     for p in everything:
         if not is_si_row(p):
             continue
@@ -289,20 +289,20 @@ def find(led, separate=frozenset()):
         if (k["id"], o["id"]) in seen or k["id"] == o["id"]:
             continue
         if (min(k["id"], o["id"]), max(k["id"], o["id"])) in separate:
-            continue   # the user said these are different papers
+            continue   # the user said these are different sources
         if kind not in ("same_file", "patent_family", "patent_same_title", "si_deposit") and \
                 (doc_class(k) != doc_class(o) or doc_class(k) == "patent"):
-            continue   # a dataset is not its paper; patents only merge as a family (title + inventors), never by title
+            continue   # a dataset is not its source; patents only merge as a family (title + inventors), never by title
         seen.add((k["id"], o["id"]))
         out.append((kind, k, o))
-    stats = {"papers": len(papers), "errata_or_corrections": sum(1 for p in papers if p.get("is_erratum")),
+    stats = {"sources": len(papers), "errata_or_corrections": sum(1 for p in papers if p.get("is_erratum")),
              "retracted": sum(1 for p in papers if p.get("retracted"))}
     return out, stats
 
 
 def merge(proj, led, keep, other, kind):
     """Fold `other` into `keep`. If only `other` was downloaded, its files are renamed to keep's ID (they stay in
-    publications/); otherwise other's files move to .scripts/duplicates/."""
+    sources/); otherwise other's files move to .scripts/duplicates/."""
     dup_dir = proj.scr / "duplicates"
     dup_dir.mkdir(parents=True, exist_ok=True)
     snapshot = json.loads(json.dumps({"row": other, "topics": led.topics_of(other["id"])}, default=str))
@@ -360,7 +360,7 @@ def merge(proj, led, keep, other, kind):
     from _common import access_rank
     if not transfer and not keep.get("downloaded") and other.get("access_type") and \
             access_rank(other["access_type"]) < access_rank(keep.get("access_type")):
-        # the merged copy (often a preprint or repository version) is more open: the paper is readable through it
+        # the merged copy (often a preprint or repository version) is more open: the source is readable through it
         for f in ("access_type", "license", "license_label", "license_url", "license_source", "oa_status"):
             upd[f] = other.get(f)
         seen_v = {(v.get("pdf_url") or v.get("url")) for v in keep.get("versions") or []}
@@ -374,21 +374,21 @@ def merge(proj, led, keep, other, kind):
             upd[f] = other.get(f)
         upd["si_files"] = [kid + n[len(oid):] if n.startswith(oid) else n for n in (other.get("si_files") or [])]
         upd["dl_status"], upd["dl_note"] = None, None
-    led.x("UPDATE papers SET sha1=NULL WHERE id=?", (other["id"],))
+    led.x("UPDATE sources SET sha1=NULL WHERE id=?", (other["id"],))
     led.set(keep["id"], **upd)
     for d in led.aliases(other["id"]):
-        led.x("UPDATE dois SET paper_id=? WHERE doi=?", (keep["id"], d))
+        led.x("UPDATE dois SET source_id=? WHERE doi=?", (keep["id"], d))
     if re.match(r"^(patent:[A-Z0-9]{3,}|nodoi:\S+|[a-z_]+:\S+)$", str(other.get("key") or "")) and \
             not str(other["key"]).startswith("10."):
         led.add_dois(keep["id"], [other["key"]])   # 'patent:EP2043970' / 'nodoi:...': later search hits land on keep
-    # topics (Topic A/B/C) and curation results follow the kept paper
-    if not led.q("SELECT 1 FROM paper_subjects WHERE paper_id=?", (keep["id"],)):
-        led.x("UPDATE paper_subjects SET paper_id=? WHERE paper_id=?", (keep["id"], other["id"]))
-    led.x("DELETE FROM paper_subjects WHERE paper_id=?", (other["id"],))
-    led.x("UPDATE OR IGNORE extractions SET paper_id=? WHERE paper_id=?", (keep["id"], other["id"]))
-    led.x("DELETE FROM extractions WHERE paper_id=?", (other["id"],))
-    led.x("DELETE FROM paper_topics WHERE paper_id=?", (other["id"],))
-    led.x("DELETE FROM papers WHERE id=?", (other["id"],))
+    # topics (Topic A/B/C) and curation results follow the kept source
+    if not led.q("SELECT 1 FROM source_subjects WHERE source_id=?", (keep["id"],)):
+        led.x("UPDATE source_subjects SET source_id=? WHERE source_id=?", (keep["id"], other["id"]))
+    led.x("DELETE FROM source_subjects WHERE source_id=?", (other["id"],))
+    led.x("UPDATE OR IGNORE extractions SET source_id=? WHERE source_id=?", (keep["id"], other["id"]))
+    led.x("DELETE FROM extractions WHERE source_id=?", (other["id"],))
+    led.x("DELETE FROM source_topics WHERE source_id=?", (other["id"],))
+    led.x("DELETE FROM sources WHERE id=?", (other["id"],))
     jsonl_append(proj.logs / "dedup_log.jsonl", {"kind": kind, "kept": keep["id"], "merged": other["id"],
                                                  "kept_doi": keep.get("doi"), "merged_doi": other.get("doi"),
                                                  "files_transferred": transfer, "files_moved": moved, "ts": now_iso(),
@@ -397,7 +397,7 @@ def merge(proj, led, keep, other, kind):
 
 
 def fold_si(proj, led, parent, other):
-    """An SI deposit indexed as a paper becomes an SI link of the paper it belongs to; the row goes (logged in full)."""
+    """An SI deposit indexed as a source becomes an SI link of the source it belongs to; the row goes (logged in full)."""
     snapshot = json.loads(json.dumps({"row": other, "topics": led.topics_of(other["id"])}, default=str))
     sup = norm_doi((other.get("external_ids") or {}).get("supplement_to")) or parent.get("doi")
     dois = [d for d in (led.aliases(other["id"]) or [other.get("doi")]) if d and not d.startswith(("patent:", "nodoi:"))]
@@ -411,9 +411,9 @@ def fold_si(proj, led, parent, other):
                 dst = dup_dir / f"{other['id']}__{Path(f).name}"
                 shutil.move(str(proj.root / f), str(dst))
                 moved.append(proj.rel(dst))
-    for tbl in ("dois", "paper_topics", "paper_subjects", "extractions"):
-        led.x(f"DELETE FROM {tbl} WHERE paper_id=?", (other["id"],))
-    led.x("DELETE FROM papers WHERE id=?", (other["id"],))
+    for tbl in ("dois", "source_topics", "source_subjects", "extractions"):
+        led.x(f"DELETE FROM {tbl} WHERE source_id=?", (other["id"],))
+    led.x("DELETE FROM sources WHERE id=?", (other["id"],))
     jsonl_append(proj.logs / "dedup_log.jsonl", {"kind": "si_deposit", "kept": parent["id"], "merged": other["id"],
                                                  "kept_doi": parent.get("doi"), "merged_doi": other.get("doi"),
                                                  "si_links": dois, "files_moved": moved, "ts": now_iso(),
@@ -421,10 +421,10 @@ def fold_si(proj, led, parent, other):
 
 
 def unmerge_self_si(proj, led):
-    """Older versions merged a paper's own SI deposit INTO the paper (Figshare DOIs as aliases, supplement_to pointing
-    at the paper itself): turn those aliases back into SI links of the paper."""
+    """Older versions merged a source's own SI deposit INTO the source (Figshare DOIs as aliases, supplement_to pointing
+    at the source itself): turn those aliases back into SI links of the source."""
     n = 0
-    rows = [led.row(r) for r in led.q("SELECT id, doi, external_ids FROM papers WHERE external_ids LIKE '%supplement_to%'")]
+    rows = [led.row(r) for r in led.q("SELECT id, doi, external_ids FROM sources WHERE external_ids LIKE '%supplement_to%'")]
     with led.tx():
         for p in rows:
             ext = dict(p.get("external_ids") or {})
@@ -435,7 +435,7 @@ def unmerge_self_si(proj, led):
             led.add_si_links([{"parent_doi": sup, "si_doi": d, "url": f"https://doi.org/{d}", "title": None,
                                "source": "figshare"} for d in si])
             for d in si:
-                led.x("DELETE FROM dois WHERE doi=? AND paper_id=?", (d, p["id"]))
+                led.x("DELETE FROM dois WHERE doi=? AND source_id=?", (d, p["id"]))
             ext.pop("supplement_to", None)
             led.set(p["id"], external_ids=ext)
             jsonl_append(proj.logs / "dedup_log.jsonl", {"kind": "si_unmerged", "kept": p["id"], "si_links": si,
@@ -482,7 +482,7 @@ def parse_pairs(s):
             continue
         p = x.replace("+", ":").split(":")
         if len(p) != 2 or not all(v.isdigit() for v in p) or p[0] == p[1]:
-            die(f"pairs look like 12:57 (two different paper IDs), got {x!r}")
+            die(f"pairs look like 12:57 (two different source IDs), got {x!r}")
         pairs.append((int(p[0]), int(p[1])))
     return pairs
 
@@ -514,9 +514,9 @@ def main():
     g = ap.add_mutually_exclusive_group()
     g.add_argument("--apply", action="store_true", help="merge the safe cases; list the uncertain pairs")
     g.add_argument("--merge", metavar="A:B,...", help="merge pairs the user confirmed")
-    g.add_argument("--keep-separate", metavar="A:B,...|all", help="record pairs the user says are different papers")
+    g.add_argument("--keep-separate", metavar="A:B,...|all", help="record pairs the user says are different sources")
     ap.add_argument("--show", type=int, default=10, help="examples / uncertain pairs to print")
-    ap.add_argument("--no-export", action="store_true", help="do not refresh the index CSVs and papers.db")
+    ap.add_argument("--no-export", action="store_true", help="do not refresh the index CSVs and index.db")
     a = ap.parse_args()
     proj = Project(a.project)
     led = Ledger(proj)
@@ -536,7 +536,7 @@ def main():
         for x, y in parse_pairs(a.merge):
             p, q = led.get(x), led.get(y)
             if not p or not q:
-                refused.append({"pair": f"{x}:{y}", "reason": "no such paper ID (already merged?)"})
+                refused.append({"pair": f"{x}:{y}", "reason": "no such source ID (already merged?)"})
                 continue
             if doc_class(p) != doc_class(q):
                 refused.append({"pair": f"{x}:{y}", "reason": "a dataset, a paper and a patent are never merged with "
@@ -551,7 +551,7 @@ def main():
         vec = None
         if merged and not a.no_export:
             led.export()
-            vec = after_step(proj, led)            # a merged paper's passages move to the ID it kept
+            vec = after_step(proj, led)            # a merged source's passages move to the ID it kept
         print(json.dumps({"merged": merged, "refused": refused, "vector_store": vec}))
         return
     report = {}

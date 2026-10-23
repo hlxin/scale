@@ -1,12 +1,12 @@
-"""Download step — download in-scope papers through OPEN routes (no institutional access needed).
+"""Download step — download in-scope sources through OPEN routes (no institutional access needed).
 
-Selects papers of the topic that are in scope (or unscreened), not yet downloaded, and whose Access type is one of
+Selects sources of the topic that are in scope (or unscreened), not yet downloaded, and whose Access type is one of
 config['download']['access_types']. Tries every known open copy, most open first (repositories, PMC open-data
 mirror, arXiv, publisher CDNs, landing-page citation_pdf_url), never touching hosts that block scripted clients.
 Each PDF is validated, checked against the title, and filed by the license printed in it.
 
-Papers it cannot get openly are marked: queued for EZproxy when paywalled access is set up and the publisher is
-supported, otherwise left as "No" with the reason in Notes. Paywalled papers are never attempted here. Datasets and
+Sources it cannot get openly are marked: queued for EZproxy when paywalled access is set up and the publisher is
+supported, otherwise left as "No" with the reason in Notes. Paywalled sources are never attempted here. Datasets and
 software are indexed only (never downloaded); US patents come from the USPTO image server.
 
 usage:
@@ -23,11 +23,13 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import _core  # noqa: F401,E402  (index-sources' scripts: the shared core)
 import _mdpi as MDPI
 from _common import (ACCESS_TYPES, NOT_DOWNLOADED_TYPES, Project, access_rank, add_project_arg, host_of, json_read,
                      load_config, log, now_iso, update_state)
 from _download import (NOT_PROXYABLE, arxiv_pdf, attempt, ez_publisher, fetch, file_pdf, is_blocked, link_existing,
                        load_blocked, pdf_links_from_html, publisher_pdf_patterns)
+from _corpus import add_corpus_arg, scope
 from _ledger import Ledger
 from _vectors import after_step
 
@@ -38,7 +40,7 @@ def paywalled_ready(proj):
 
 
 def routes(p, selected):
-    """Ordered open URLs for one paper: [(entry, url)]."""
+    """Ordered open URLs for one source: [(entry, url)]."""
     out, seen = [], set()
     doi = p.get("doi")
 
@@ -86,7 +88,7 @@ def routes(p, selected):
 
 def patent_pdf_urls(p):
     """Full-text PDF of a US patent or US application from the USPTO image server (no key). Other offices: none —
-    the paper keeps its Espacenet / Lens link."""
+    the source keeps its Espacenet / Lens link."""
     import re
     pn = str((p.get("external_ids") or {}).get("patent") or "").upper().replace("-", "")
     m = re.match(r"^US(\d{7,11})([A-Z]\d?)?$", pn)
@@ -145,24 +147,27 @@ def try_entry(proj, led, p, e):
 
 def main():
     ap = add_project_arg(argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter))
-    ap.add_argument("--topic", required=True)
-    ap.add_argument("--max", type=int, default=None, help="download at most N papers this run (most relevant first)")
+    add_corpus_arg(ap, topic_required=True)
+    ap.add_argument("--access", default=None, help="comma list of access types to fetch (default: the topic's config, download.access_types)")
+    ap.add_argument("--max", type=int, default=None, help="download at most N sources this run (most relevant first)")
     ap.add_argument("--workers", type=int, default=10)
-    ap.add_argument("--retry-failed", action="store_true", help="also retry papers that failed before")
-    ap.add_argument("--added-since", default=None, help="YYYY-MM-DD or YYYY-MM-DDTHH:MM:SSZ: only papers that entered this "
+    ap.add_argument("--retry-failed", action="store_true", help="also retry sources that failed before")
+    ap.add_argument("--added-since", default=None, help="YYYY-MM-DD or YYYY-MM-DDTHH:MM:SSZ: only sources that entered this "
                                                          "topic at/after that time (update mode: download just the new "
-                                                         "papers; build_list.py prints the run's start time)")
+                                                         "sources; build_list.py prints the run's start time)")
     a = ap.parse_args()
     proj = Project(a.project)
+    a.topic, ids = scope(a, topic_required=True)
     cfg = load_config(proj, a.topic)
-    selected = set((cfg.get("download") or {}).get("access_types") or ["OA", "OA+ND", "Free-to-read"])
+    selected = ({x.strip() for x in a.access.split(",") if x.strip()} if a.access else
+                set((cfg.get("download") or {}).get("access_types") or ["OA", "OA+ND", "Free-to-read"]))
     ez_ok = paywalled_ready(proj)                  # EZproxy is a route for walled open copies of any selected type
-    pw = ez_ok and "Paywalled" in selected         # ... and the only route for Paywalled papers
+    pw = ez_ok and "Paywalled" in selected         # ... and the only route for Paywalled sources
     load_blocked(proj)
     led = Ledger(proj)
     linked = link_existing(proj, led, a.topic)
     if linked:
-        log(f"{linked} papers were already downloaded for another topic — cloned into this topic's folders")
+        log(f"{linked} sources were already downloaded for another topic — cloned into this topic's folders")
     cond = "AND p.downloaded = 0 AND p.is_erratum = 0 AND COALESCE(t.in_scope, 1) = 1"
     args = ()
     if a.added_since:
@@ -172,6 +177,8 @@ def main():
     for rows in led.iter_topic(a.topic, cond, args):      # 20,000 at a time: a topic may hold millions
         with led.tx():
             for p in rows:
+                if ids is not None and p["id"] not in ids:
+                    continue                                  # not in the corpus
                 acc = p.get("access_type")
                 if (p.get("doc_type") or "") in NOT_DOWNLOADED_TYPES:
                     skipped["dataset_or_software"] += 1      # indexed only, never downloaded
@@ -204,7 +211,7 @@ def main():
     todo = [x[-1] for x in sorted(todo)]           # most relevant, then most cited first
     if a.max:
         todo = todo[:a.max]
-    log(f"open download: {len(todo)} papers to try; skipped {dict(skipped)}; EZproxy route ready={ez_ok}")
+    log(f"open download: {len(todo)} sources to try; skipped {dict(skipped)}; EZproxy route ready={ez_ok}")
     cnt, lock = Counter(), threading.Lock()
 
     def one(p):

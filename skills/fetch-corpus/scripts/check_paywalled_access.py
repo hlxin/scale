@@ -1,13 +1,13 @@
 """Set up paywalled (institutional) access: find the EZproxy host and verify that this machine can use it.
 
-  1. EZproxy host: --host, else the saved ~/.paper-acquisition/ezproxy/config.json, else guessed from the institution's email
+  1. EZproxy host: --host, else the saved ~/.scale/sources/ezproxy/config.json, else guessed from the institution's email
      domain (ezproxy.lib.<domain>, ezproxy.<domain>, proxy.lib.<domain>, libproxy.<domain>, <name>.idm.oclc.org);
      only hosts that resolve in DNS are kept.
-  2. Verification: ONE paced visit through the global limiter for a paywalled paper of the topic (or --doi). On the
+  2. Verification: ONE paced visit through the global limiter for a paywalled source of the topic (or --doi). On the
      campus network / VPN EZproxy serves it without a login. A login page means this machine is off-network: the
      script never logs in. If another EZproxy process is already running, its recent successful downloads count as
      proof instead of a new request.
-  3. Writes ~/.paper-acquisition/ezproxy/config.json ({enabled, host, verified_at, ...}; machine-wide) and prints one JSON verdict:
+  3. Writes ~/.scale/sources/ezproxy/config.json ({enabled, host, verified_at, ...}; machine-wide) and prints one JSON verdict:
      {"access": true|false, "host": ..., "reason": ..., "next": ...}
 
 usage: python3 -I check_paywalled_access.py --topic <slug> [--host ezproxy.lib.example.edu] [--doi 10.x/y]
@@ -23,6 +23,7 @@ from pathlib import Path
 import requests
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import _core  # noqa: F401,E402  (index-sources' scripts: the shared core)
 import _ezlimit as EZL
 import _ezproxy as EZ
 from _common import Project, add_project_arg, json_read, json_write_atomic, load_config, log, now_iso, polite_email, user_agent
@@ -92,11 +93,11 @@ def main():
     try:
         lim = EZL.Limiter(proj.ezg / "limiter_state.json", log=log)
     except EZL.Busy:
-        recent = led.q("SELECT COUNT(*) FROM papers WHERE download_source='ezproxy' AND download_date >= date('now','-2 day')")
+        recent = led.q("SELECT COUNT(*) FROM sources WHERE download_source='ezproxy' AND download_date >= date('now','-2 day')")
         if recent and recent[0][0] > 0:
             return verdict(proj, cfg_ez, True, cfg_ez.get("host") or host,
-                           f"an EZproxy download is already running and fetched {recent[0][0]} papers in the last 2 days",
-                           "queue paywalled papers; the running runner will pick them up")
+                           f"an EZproxy download is already running and fetched {recent[0][0]} sources in the last 2 days",
+                           "queue paywalled sources; the running runner will pick them up")
         return verdict(proj, cfg_ez, False, host, "another EZproxy process is running and has no recent successes",
                        "check .scripts/logs/paywalled.log, then re-run this check")
     if lim.hard_stopped():
@@ -107,8 +108,8 @@ def main():
         p = led.get(led.find_id(doi=a.doi.lower())) if led.find_id(doi=a.doi.lower()) else None
         probes = [p or {"id": 0, "doi": a.doi.lower(), "title": "", "access_type": "Paywalled"}]
     else:
-        by_pub = {}      # the most cited paywalled paper of each publisher (ids only: a topic may hold millions)
-        for pid, doi in led.q("SELECT p.id, p.doi FROM paper_topics t JOIN papers p ON p.id = t.paper_id WHERE t.topic = ? "
+        by_pub = {}      # the most cited paywalled source of each publisher (ids only: a topic may hold millions)
+        for pid, doi in led.q("SELECT p.id, p.doi FROM source_topics t JOIN sources p ON p.id = t.source_id WHERE t.topic = ? "
                               "AND p.downloaded = 0 AND p.access_type = 'Paywalled' AND COALESCE(t.in_scope,1) = 1 "
                               "ORDER BY COALESCE(p.cited_by, 0) DESC, t.rowid", (a.topic,)):
             pub = ez_publisher(doi)
@@ -119,7 +120,7 @@ def main():
             if pick else {}
         probes = [got[i] for i in pick if i in got]
     if not probes:
-        return verdict(proj, cfg_ez, False, host, "no paywalled paper from a supported publisher to test with",
+        return verdict(proj, cfg_ez, False, host, "no paywalled source from a supported publisher to test with",
                        "re-run with --doi <a paywalled DOI from ACS/Wiley/RSC/Springer/Nature>")
     sess = requests.Session()
     sess.headers.update({"User-Agent": user_agent()})
@@ -140,12 +141,12 @@ def main():
             r = EZ.ez_get(sess, lim, EZ.ezrewrite(f"https://doi.org/{p['doi']}", host), "text/html,*/*;q=0.8")
             out = "valid_pdf" if r.content[:4] == b"%PDF" else (EZ.signal(proj, r, host) or "landing_ok")
         else:
-            out = EZ.fetch_paper(proj, led, sess, lim, host, p, pub)
+            out = EZ.fetch_source(proj, led, sess, lim, host, p, pub)
         results.append({"doi": p["doi"], "publisher": pub, "outcome": out})
         log(f"probe {p['doi']} ({pub}): {out}")
         if out in ("valid_pdf", "duplicate", "landing_ok"):
             led.export()
-            return verdict(proj, cfg_ez, True, host, f"EZproxy served {p['doi']} without a login", "queue paywalled papers",
+            return verdict(proj, cfg_ez, True, host, f"EZproxy served {p['doi']} without a login", "queue paywalled sources",
                            probes=results)
         if out == "login_prompt":
             lim.login_prompt(p["doi"])

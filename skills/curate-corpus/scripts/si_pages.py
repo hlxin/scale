@@ -1,7 +1,7 @@
 """The text of a source's supporting-information files, as pages the verbatim check can read.
 
-Supporting information belongs to its paper's Source (docs/curation.md), so its text joins the source's page texts:
-`append(texts_file, si_files)` adds each file's pages after the paper's, headed `[page S1]`, `[page S2]` … with a line
+Supporting information belongs to its source's Source (docs/curation.md), so its text joins the source's page texts:
+`append(texts_file, si_files)` adds each file's pages after the source's, headed `[page S1]`, `[page S2]` … with a line
 naming the file, and returns what was read. PDFs are read with PyMuPDF (the text layer; a page without one stays
 empty, and its values are read from the page image with `scale pages`); Office files are zip archives of XML, read with
 the standard library, tables one row per line with cells separated by " | "; plain text files as they are. Other

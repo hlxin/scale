@@ -1,11 +1,11 @@
-"""API keys: which sources are usable, which keys are missing, and a live check of the keys you added.
+"""API keys: which databases are usable, which keys are missing, and a live check of the keys you added.
 
-Keys live in ~/.paper-acquisition/keys.txt (one `service: key` per line; `service = key` also works; # comments).
+Keys live in ~/.scale/sources/keys.txt (one `service: key` per line; `service = key` also works; # comments).
 An optional <project>/.claude/keys.txt overrides it for one project. No script ever prints or logs a key value —
 only "set" / "missing" and the last 4 characters. Never paste keys into the chat: write them into the file.
 
-  python3 -I keys.py                 # table: every source, needs which key, present or missing
-  python3 -I keys.py --init          # create ~/.paper-acquisition/keys.txt from the template (chmod 600) if absent
+  python3 -I keys.py                 # table: every database, needs which key, present or missing
+  python3 -I keys.py --init          # create ~/.scale/sources/keys.txt from the template (chmod 600) if absent
   python3 -I keys.py --test          # one tiny request per configured key -> ok / rejected / error
   python3 -I keys.py --json          # same table as JSON (for Claude)
 """
@@ -20,7 +20,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from _common import (GLOBAL_DIR, KEY_ALIASES, HTTPFail, Project, add_project_arg, key_files, load_keys, parse_keys,
                      set_contact)
-from _sources import CATALOG, FETCHERS, keys_needed
+from _databases import CATALOG, FETCHERS, keys_needed
 
 SKILL = Path(__file__).resolve().parents[1]
 WHERE = {   # how to get each key (also in README.md)
@@ -58,7 +58,7 @@ def table(proj):
         need = keys_needed(name)
         opt = c.get("optional_key")
         missing = [k for k in need if not keys.get(k)]
-        rows.append({"source": name, "status": "ready" if not missing else "needs key",
+        rows.append({"database": name, "status": "ready" if not missing else "needs key",
                      "requires": need, "optional": opt, "missing": missing,
                      "optional_present": bool(opt and keys.get(opt))})
     named = sorted(set(k for r in rows for k in r["requires"] + ([r["optional"]] if r["optional"] else [])) | {"llm_api_key"})
@@ -66,7 +66,7 @@ def table(proj):
 
 
 def unknown_names(proj):
-    """Names in the key files that no source reads: a typo ('opendalex') leaves the key unused without any error."""
+    """Names in the key files that no database reads: a typo ('opendalex') leaves the key unused without any error."""
     known = set(WHERE) | set(KEY_ALIASES.values()) | set(keys_needed_all())
     out = []
     for f in key_files(proj):
@@ -148,7 +148,7 @@ def main():
         return
     rows, named = table(proj)
     res = {"key_files": [str(f) + (" (present)" if f.exists() else " (absent)") for f in key_files(proj)],
-           "keys": named, "sources": rows, "permissions": perms_warning(), "unknown_names": unknown_names(proj)}
+           "keys": named, "databases": rows, "permissions": perms_warning(), "unknown_names": unknown_names(proj)}
     if a.test:
         res["test"] = test_keys(proj)
     if a.json:
@@ -158,15 +158,15 @@ def main():
     if res["permissions"]:
         print("WARNING: " + res["permissions"])
     for u in res["unknown_names"]:
-        print(f"WARNING: '{u['name']}' in {u['file']} is not a key name any source reads"
+        print(f"WARNING: '{u['name']}' in {u['file']} is not a key name any database reads"
               + (f" — did you mean '{u['did_you_mean']}'?" if u["did_you_mean"] else "")
               + " Rename it in the file (keep the key itself); until then that key is not used.")
     print(f"\n{'key':18}{'state':16}how to get it")
     for k, v in named.items():
         print(f"{k:18}{v['state']:16}{v['how_to_get']}")
-    ready = [r["source"] for r in rows if r["status"] == "ready"]
-    blocked = [f"{r['source']} ({', '.join(r['missing'])})" for r in rows if r["status"] != "ready"]
-    print(f"\nReady sources ({len(ready)}): " + ", ".join(ready))
+    ready = [r["database"] for r in rows if r["status"] == "ready"]
+    blocked = [f"{r['database']} ({', '.join(r['missing'])})" for r in rows if r["status"] != "ready"]
+    print(f"\nReady databases ({len(ready)}): " + ", ".join(ready))
     print(f"Waiting for a key ({len(blocked)}): " + (", ".join(blocked) or "none"))
     if a.test:
         print("\nKey test: " + (json.dumps(res["test"]) if res["test"] else "no keys to test"))

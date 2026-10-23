@@ -1,20 +1,20 @@
-"""Re-apply the current cleaning rules to papers already in the ledger (run once after a skill upgrade).
+"""Re-apply the current cleaning rules to sources already in the ledger (run once after a skill upgrade).
 
   1 abstracts   every stored abstract goes through normalize_abstract: a leading "Abstract" / "Summary" heading
                 (also glued: "AbstractMXenes ..."), ACS "High Resolution Image Download MS PowerPoint Slide" debris,
                 the trailing copyright line and placeholders such as "[No abstract available]"
-  2 non-papers  notices the title rules now recognize ("Retraction of ...", "Notice of retraction", "Withdrawn: ...")
+  2 notices  notices the title rules now recognize ("Retraction of ...", "Notice of retraction", "Withdrawn: ...")
                 are flagged; a row that only one source typed as an erratum, with nothing else marking it as a notice,
                 becomes an article
-  3 topics      vocabulary Topic A/B/C of the papers whose abstract changed are recomputed (Claude, API and manual
+  3 topics      vocabulary Topic A/B/C of the sources whose abstract changed are recomputed (Claude, API and manual
                 topics are kept)
-  4 retractions from the Crossref answers already cached (no request is made): a retraction notice is a non-paper
-                that names the paper it retracts, not a retracted paper itself; that paper is marked retracted and
-                names its notice (index columns Retracted and Notes; papers.db is_retracted and identifiers
-                retraction_of / retraction_notice). Older versions marked the notice as the retracted paper.
-Then the index CSVs and papers.db are refreshed (--no-export to skip). Works in chunks of 20,000 papers, so a
+  4 retractions from the Crossref answers already cached (no request is made): a retraction notice is a notice
+                that names the source it retracts, not a retracted source itself; that source is marked retracted and
+                names its notice (index columns Retracted and Notes; index.db is_retracted and identifiers
+                retraction_of / retraction_notice). Older versions marked the notice as the retracted source.
+Then the index CSVs and index.db are refreshed (--no-export to skip). Works in chunks of 20,000 sources, so a
 ledger of millions of rows is fine. Never deletes a row; --dry-run only counts.
-SI deposits merged into papers by older versions and patent families are fixed by dedup.py --apply; SI links from
+SI deposits merged into sources by older versions and patent families are fixed by dedup.py --apply; SI links from
 raw hits indexed by older versions by build_list.py --si-links-only.
 
   python3 -I repair.py [--dry-run] [--no-export] [--retractions-only]
@@ -36,7 +36,7 @@ CHUNK = 20000
 
 def repair_retractions(proj, led, dry=False):
     """Step 4: every cached Crossref answer that records a retraction, applied as classify_access.py now does."""
-    n = {"notices": 0, "notices_were_marked_retracted": 0, "papers_newly_retracted": 0, "marked_itself": 0}
+    n = {"notices": 0, "notices_were_marked_retracted": 0, "sources_newly_retracted": 0, "marked_itself": 0}
     for rec in Cache(proj, "crossref").iter_all(like='%"update_to": [{%'):
         doi = norm_doi(rec.get("doi"))
         itself, retracts = retraction_of(rec.get("update_to"), doi)
@@ -49,10 +49,10 @@ def repair_retractions(proj, led, dry=False):
             n["notices_were_marked_retracted"] += bool(row.get("retracted"))
             if dry:
                 tids = {led.find_id(doi=t) for t in retracts} - {None, pid}
-                n["papers_newly_retracted"] += sum(1 for t in tids if not led.get(t).get("retracted"))
+                n["sources_newly_retracted"] += sum(1 for t in tids if not led.get(t).get("retracted"))
             else:
                 with led.tx():
-                    n["papers_newly_retracted"] += led.record_retraction(pid, retracts)
+                    n["sources_newly_retracted"] += led.record_retraction(pid, retracts)
         elif not row.get("retracted"):
             n["marked_itself"] += 1
             if not dry:
@@ -64,8 +64,8 @@ def repair_retractions(proj, led, dry=False):
 def main():
     ap = add_project_arg(argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter))
     ap.add_argument("--dry-run", action="store_true", help="count what would change; write nothing")
-    ap.add_argument("--no-export", action="store_true", help="do not refresh the index CSVs and papers.db")
-    ap.add_argument("--retractions-only", action="store_true", help="only step 4 (retraction notices and their papers)")
+    ap.add_argument("--no-export", action="store_true", help="do not refresh the index CSVs and index.db")
+    ap.add_argument("--retractions-only", action="store_true", help="only step 4 (retraction notices and their sources)")
     a = ap.parse_args()
     proj = Project(a.project)
     led = Ledger(proj)
@@ -81,7 +81,7 @@ def main():
     last, n_rows, n_ab, n_emptied, n_flag, n_retype = 0, 0, 0, 0, 0, 0
     changed = []
     while True:
-        rows = led.q("SELECT id, title, doi, doc_type, is_erratum, abstract FROM papers WHERE id > ? ORDER BY id LIMIT ?",
+        rows = led.q("SELECT id, title, doi, doc_type, is_erratum, abstract FROM sources WHERE id > ? ORDER BY id LIMIT ?",
                      (last, CHUNK))
         if not rows:
             break
@@ -111,15 +111,15 @@ def main():
             with led.tx():
                 for pid, upd in updates:
                     led.set(pid, **upd)
-        log(f"repair: {n_rows} papers checked; abstracts cleaned {n_ab}, notices flagged {n_flag}, retyped {n_retype}")
+        log(f"repair: {n_rows} sources checked; abstracts cleaned {n_ab}, notices flagged {n_flag}, retyped {n_retype}")
     n_topics = 0
     if changed and not a.dry_run:
         vocab = Vocab(proj)
         for i in range(0, len(changed), 900):
             part = changed[i:i + 900]
-            rows = [led.row(r) for r in led.q(f"SELECT * FROM papers WHERE id IN ({','.join('?' * len(part))})", tuple(part))]
+            rows = [led.row(r) for r in led.q(f"SELECT * FROM sources WHERE id IN ({','.join('?' * len(part))})", tuple(part))]
             n_topics += apply_vocab(led, vocab, rows)
-    res = {"papers_checked": n_rows, "abstracts_cleaned": n_ab, "abstracts_emptied": n_emptied,
+    res = {"sources_checked": n_rows, "abstracts_cleaned": n_ab, "abstracts_emptied": n_emptied,
            "notices_flagged": n_flag, "erratum_rows_retyped_article": n_retype, "topics_recomputed": n_topics,
            "retractions": repair_retractions(proj, led, a.dry_run), "dry_run": a.dry_run, "finished_at": now_iso()}
     if not a.dry_run:

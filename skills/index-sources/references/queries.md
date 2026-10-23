@@ -3,17 +3,17 @@
 ## Contents
 - How many queries, and how to vary them
 - queries.json format
-- Query syntax per source (with tested examples)
-- Strict vs loose sources; date filters in update mode
+- Query syntax per database (with tested examples)
+- Strict vs loose databases; date filters in update mode
 - The topic gate (config.json → gate)
 - Keys, citation chasing, imported lists
 
 ## How many queries, and how to vary them
 
-Write **15-25 distinct queries for the main sources** (OpenAlex, Crossref, Europe PMC, Semantic Scholar, the keyed
-indexes when available) plus **1-2 short queries for every other selected source** (preprints, repositories,
-datasets, patents, regional) — every source in `config.json → sources` needs at least one query or it is skipped. One query per source finds a fraction of the
-field: each source ranks and matches differently, and different wording surfaces different papers. Vary along:
+Write **15-25 distinct queries for the main databases** (OpenAlex, Crossref, Europe PMC, Semantic Scholar, the keyed
+indexes when available) plus **1-2 short queries for every other selected database** (preprints, repositories,
+datasets, patents, regional) — every database in `config.json → databases` needs at least one query or it is skipped. One query per database finds a fraction of the
+field: each database ranks and matches differently, and different wording surfaces different sources. Vary along:
 - spelling / hyphenation (electroreduction, electro-reduction), singular/plural, British/US spelling
 - abbreviations and full names (CO2RR / CO2 reduction reaction; Ti3C2Tx / MXene)
 - synonyms of the core concept, and the main sub-classes (each material family, each product, each method)
@@ -23,8 +23,8 @@ Keep each query on-topic: precision comes from the gate, recall from the variety
 
 ## queries.json format
 
-`.scripts/<slug>/queries.json` — one object per source, query ids are free text (`Q01`, ...). The FIRST query of
-each source is its primary query (always paged to the end). A value is a string, or for Crossref/OpenAlex an object
+`.scripts/<slug>/queries.json` — one object per database, query ids are free text (`Q01`, ...). The FIRST query of
+each database is its primary query (always paged to the end). A value is a string, or for Crossref/OpenAlex an object
 with an extra filter.
 
 ```json
@@ -43,9 +43,9 @@ with an extra filter.
 }
 ```
 
-## Query syntax per source
+## Query syntax per database
 
-| Source (key) | Syntax | Example |
+| Database (key) | Syntax | Example |
 |---|---|---|
 | OpenAlex (`openalex`) | a **filter**; the script adds `type:article\|review\|preprint`. `title_and_abstract.search:` matches all words (AND); quotes = phrase. Also `topics.id:T12345`. Keep ≤ 5 boolean operators per filter. | `title_and_abstract.search:"nitrate electroreduction" MXene` |
 | Crossref (`crossref`) | free text, any-word relevance ranking (loose). Optional `filter`, e.g. `prefix:10.26434` (ChemRxiv), `prefix:10.21203` (Research Square), `prefix:10.2139` (SSRN), `prefix:10.31224` (EngrXiv) to reach preprint servers. Default filter: journal articles, posted content, proceedings. | `MXene electrocatalyst nitrate reduction ammonia` |
@@ -82,10 +82,10 @@ with an extra filter.
 | NASA ADS (`ads`, key) | ADS syntax: `abs:`, `title:` | `abs:"CO2 electrolysis"` |
 | EPO OPS (`epo`, keys `epo_key` + `epo_secret`) | CQL: `ta=` (title+abstract), `ti=`, `cpc=`; at most 2,000 results per query | `ta="carbon dioxide" and ta=electroreduction` |
 
-The default `config.json → sources` comes from the catalog ([sources.md](sources.md)): every keyless source plus the
+The default `config.json → databases` comes from the catalog ([databases.md](databases.md)): every keyless database plus the
 keyed ones whose keys are present.
 
-## Strict vs loose sources; date filters
+## Strict vs loose databases; date filters
 
 - **Strict** (OpenAlex search filter, Europe PMC, S2, PMC, arXiv): results are mostly on-topic; `--count-only` totals
   are meaningful.
@@ -94,13 +94,13 @@ keyed ones whose keys are present.
   4 % of a page passes the gate twice in a row; the gate drops the rest. OpenAlex, arXiv, PMC, S2, J-STAGE and the
   patent offices always page to the end.
 - OpenAlex queries after the first stop early when a whole page brings no new DOI (overlapping variants).
-- `search.py --since YYYY-MM-DD` adds each source's own date filter (OpenAlex publication date, Crossref DOI
+- `search.py --since YYYY-MM-DD` adds each database's own date filter (OpenAlex publication date, Crossref DOI
   registration date, Europe PMC first publication date, S2 publication date, arXiv submission date, OSTI/OpenAIRE/HAL/
   Zenodo/PMC/PLOS/OSF/Figshare dates; DOAJ by year). Raw hits of an update go to `raw/since-<date>/`.
 
 ## The topic gate (config.json → gate)
 
-Applied by `build_list.py` to title + abstract; papers that fail never enter the list (their raw hits stay in
+Applied by `build_list.py` to title + abstract; sources that fail never enter the list (their raw hits stay in
 `.scripts/<slug>/raw/`, so a changed gate only needs `build_list.py` again).
 
 ```json
@@ -111,24 +111,24 @@ Applied by `build_list.py` to title + abstract; papers that fail never enter the
 }
 ```
 
-- A paper passes if any `any` term matches, OR at least one term of EVERY `all_groups` group matches, OR (papers with
+- A source passes if any `any` term matches, OR at least one term of EVERY `all_groups` group matches, OR (sources with
   no usable abstract) a `title_only` pattern matches the title.
 - Terms are case-insensitive phrases; a space also matches a hyphen. Prefix `re:` for a regular expression.
 - Typical design: group 1 = the subject (material/organism/system names and acronyms), group 2 = the process or
   property; put unambiguous acronyms in `any`.
-- Check it: after `build_list.py`, compare `off_topic_dropped_by_gate` with `unique_papers`, then read 10 random
+- Check it: after `build_list.py`, compare `off_topic_dropped_by_gate` with `unique_sources`, then read 10 random
   titles from the CSV. Too many dropped → add synonyms; noise kept → tighten a group.
-- An empty gate keeps every hit; Crossref and OSTI then add thousands of unrelated papers.
+- An empty gate keeps every hit; Crossref and OSTI then add thousands of unrelated sources.
 
 ## Keys, citation chasing, imported lists
 
-- Sources that need a key are skipped (with a message naming the key) until the key is in
-  `~/.paper-acquisition/keys.txt` — see [sources.md](sources.md) and the skill's README.md. An OpenAlex key is free
+- Databases that need a key are skipped (with a message naming the key) until the key is in
+  `~/.scale/sources/keys.txt` — see [databases.md](databases.md) and the skill's README.md. An OpenAlex key is free
   and strongly recommended: without it OpenAlex shares a small daily budget with everyone on your network.
 - **Citation chasing** (`search.py --topic <slug> --citing [--since DATE]`): OpenAlex lists every work that cites the
-  topic's core papers (relevance >= 4, or all in-scope papers when unscreened). Results land in `raw/citing*/` and go
-  through the same gate (`build_list.py --run citing`). It finds papers that describe the topic in other words.
+  topic's core sources (relevance >= 4, or all in-scope sources when unscreened). Results land in `raw/citing*/` and go
+  through the same gate (`build_list.py --run citing`). It finds sources that describe the topic in other words.
 - **Lists from the user** (Web of Science / Scopus / Zotero exports, Google Patents CSV, SCALE corpus lists, DOIs,
   patent numbers, a web page with DOIs): `import_list.py
   --topic <slug> --file savedrecs.txt` (or `--url ...`), then `build_list.py --topic <slug> --run manual`. Imported
-  papers skip the gate; the file's abstracts and author keywords are kept.
+  sources skip the gate; the file's abstracts and author keywords are kept.

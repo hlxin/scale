@@ -6,7 +6,7 @@ species, reactions or people the graph already holds, links to them in `parts/sh
 with spare compute; the skills and the workflow for that come later.
 
 [`literature/`](literature/README.md) holds what catalysis brings to SCALE's general skills: the topic vocabulary
-`index-sources` uses and the catalysis paper index's tools (the databases themselves stay outside git).
+`index-sources` uses and the catalysis source index's tools (the databases themselves stay outside git).
 
 ## Adding a source
 

@@ -7,6 +7,7 @@ versioned skill ([`skills/`](../skills)). Agents do the work; people decide.
 | work | done by | with | what the tools check |
 |---|---|---|---|
 | find and index the sources of a topic, and freeze a corpus | a person or an agent | [index-sources](../skills/index-sources/SKILL.md) (its scripts) | `scale corpus check` on the frozen corpus |
+| fetch a corpus's files (PDFs, supporting information) | a person or an agent | [fetch-corpus](../skills/fetch-corpus/SKILL.md) (its scripts) | `scale corpus check` on the settled corpus |
 | curate a source, a data file or a corpus into scale-catal documents | a person or an agent | [curate-corpus](../skills/curate-corpus/SKILL.md); `scale_template`, `scale_describe`, `scale_validate` | validity, checklist conformance, verbatim quotes (`--source-text`), REPORTED_IN backed by evidence |
 | answer a question | a person or an agent | [query-graph](../skills/query-graph/SKILL.md); `scale_query`, `scale_search` | the plan's labels and properties exist (else `schema_gap`); values are returned as reported; absences are typed |
 | make a schema change | an agent (or a person) | [evolve-schema](../skills/evolve-schema/SKILL.md); `scale schema diff \| bump \| check` | the semantic diff and its kind (breaking or additive), the version raised by the rule, the base version frozen, the migration step (and rule, if breaking), a test for what is added, a CHANGELOG line; the competency questions (`scale check`) |

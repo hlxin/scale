@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
-"""consult.py - answer questions about the catalysis catalog (papers.db). Read-only, standard library only.
+"""consult.py - answer questions about the catalysis catalog (index.db). Read-only, standard library only.
 
-Run from this folder (CONSULT.md explains every definition). papers.db is not in the hlxin/scale repository
-(10.9 GB): pass --db /path/to/papers.db, set CATALYSIS_PAPERS_DB, or put papers.db next to this file.
+Run from this folder (CONSULT.md explains every definition). index.db is not in the hlxin/scale repository
+(10.9 GB): pass --db /path/to/index.db, set CATALYSIS_SOURCES_DB, or put index.db next to this file.
   python3 -I consult.py count     --concept co2-reduction --driver electro
   python3 -I consult.py breakdown --concept co2-reduction --by driver
   python3 -I consult.py breakdown --concept co2-reduction --driver electro --by year
   python3 -I consult.py list      --concept co2-reduction --driver electro --year 2024-2026 --limit 20 [--format csv]
   python3 -I consult.py terms     co2rr,pec,pulsed,electrolyzer,metal-air,bioelectro --with-co2   (per term, Topic A-C)
-  python3 -I consult.py paper     10.1002/adma.202202952          (a DOI, an ID, or title words)
+  python3 -I consult.py source     10.1002/adma.202202952          (a DOI, an ID, or title words)
   python3 -I consult.py concepts | drivers | topics | schema
-  python3 -I consult.py sql       "SELECT doc_type, COUNT(*) FROM papers GROUP BY 1"
+  python3 -I consult.py sql       "SELECT doc_type, COUNT(*) FROM sources GROUP BY 1"
 
 Filters (count / breakdown / list; all combine with AND, a comma means "any of"):
   --concept NAME     built-in concept (`concepts` lists them; every vocabulary id is one too)
@@ -21,7 +21,7 @@ Filters (count / breakdown / list; all combine with AND, a comma means "any of")
   --title EXPR       the same, title only
   --author NAME      author name contains NAME
   --year 2020-2026 | 2024   --doc-type article,review   --access OA,OA+ND   --venue "ACS Catal,Nature Catalysis"
-  --include-non-papers      also count errata, ChemInform digests, cover pages and retracted papers (excluded by default)
+  --include-notices      also count errata, ChemInform digests, cover pages and retracted sources (excluded by default)
 Concepts and drivers are answered at two levels: strict (title or Topic A/B/C) and broad (anywhere in title, abstract
 or keywords). Report both; strict is the conservative number.
 """
@@ -37,10 +37,12 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
-# papers.db is not in the repository (10.9 GB): --db, $CATALYSIS_PAPERS_DB, next to this file, or a project layout
-DB_CANDIDATES = ([Path(os.environ["CATALYSIS_PAPERS_DB"])] if os.environ.get("CATALYSIS_PAPERS_DB") else []) + [
-    ROOT / "co2-reduction-electricity.db", ROOT / "papers.db", ROOT / "publications" / "papers.db", ROOT.parent / "publications" / "papers.db"]
-DEFAULT_DB = next((p for p in DB_CANDIDATES if p.exists()), ROOT / "papers.db")
+# index.db is not in the repository (10.9 GB): --db, $CATALYSIS_SOURCES_DB, next to this file, or a project layout
+_ENV_DB = os.environ.get("CATALYSIS_SOURCES_DB") or os.environ.get("CATALYSIS_PAPERS_DB")      # (its earlier name)
+DB_CANDIDATES = ([Path(_ENV_DB)] if _ENV_DB else []) + [
+    ROOT / "co2-reduction-electricity.db", ROOT / "index.db", ROOT / "sources" / "index.db", ROOT.parent / "sources" / "index.db",
+    ROOT / "papers.db", ROOT / "publications" / "papers.db", ROOT.parent / "publications" / "papers.db"]   # their earlier names
+DEFAULT_DB = next((p for p in DB_CANDIDATES if p.exists()), ROOT / "index.db")
 VOCAB_FILES = [ROOT / "vocabulary.json",                                       # catal commons (hlxin/scale layout)
                ROOT / ".scripts" / "vocab.json",                                 # a project folder
                ROOT / ".scripts" / "vocab_custom.json"]
@@ -265,11 +267,14 @@ def vocab_concept(t):
 class Catalog:
     def __init__(self, db):
         if not Path(db).exists():
-            sys.exit(f"no database at {db}. papers.db is not in the repository (10.9 GB): pass --db /path/to/papers.db "
-                     f"or set CATALYSIS_PAPERS_DB, or put co2-reduction-electricity.db in this folder "
+            sys.exit(f"no database at {db}. index.db is not in the repository (10.9 GB): pass --db /path/to/index.db "
+                     f"or set CATALYSIS_SOURCES_DB, or put co2-reduction-electricity.db in this folder "
                      f"(the CO2 subset, README.md).")
         self.db = Path(db)
         self.c = sqlite3.connect(f"file:{db}?mode=ro", uri=True)
+        if self.c.execute("SELECT 1 FROM sqlite_master WHERE name = 'papers'").fetchone():
+            sys.exit(f"{db} names its tables as before the sources were so named (papers, paper_id ...). Upgrade it "
+                     f"once, where it can be written:\n  python3 -I skills/index-sources/scripts/upgrade.py --db {db}")
         self.c.execute("PRAGMA query_only=1")
         self.vocab = load_vocab()
         self.cache = {}
@@ -290,7 +295,7 @@ class Catalog:
             e = f"{{title}} : ({expr})" if title_only else expr
             try:
                 self.cache[key] = {r[0] for r in self.c.execute(
-                    "SELECT rowid FROM papers_fts WHERE papers_fts MATCH ?", (e,))}
+                    "SELECT rowid FROM sources_fts WHERE sources_fts MATCH ?", (e,))}
             except sqlite3.OperationalError as err:
                 sys.exit(f"full-text query not understood ({err}): {e}\nSyntax: words, \"exact phrase\", prefix*, "
                          f"AND / OR / NOT, parentheses, NEAR(a b, 5). See CONSULT.md.")
@@ -318,14 +323,14 @@ class Catalog:
             return set()
         key = ("topic", tuple(sorted(terms)), main_only)
         if key not in self.cache:
-            sql = (f"SELECT paper_id FROM paper_subjects WHERE term IN ({','.join('?' * len(terms))})"
+            sql = (f"SELECT source_id FROM source_subjects WHERE term IN ({','.join('?' * len(terms))})"
                    + (" AND kind='main'" if main_only else ""))
             self.cache[key] = {r[0] for r in self.c.execute(sql, terms)}
         return self.cache[key]
 
     def author(self, name):
         return {r[0] for r in self.c.execute(
-            "SELECT pa.paper_id FROM authors au JOIN paper_authors pa ON pa.author_id = au.id WHERE au.name LIKE ?",
+            "SELECT pa.source_id FROM authors au JOIN source_authors pa ON pa.author_id = au.id WHERE au.name LIKE ?",
             (f"%{name}%",))}
 
     def concept(self, name, level):
@@ -338,7 +343,7 @@ class Catalog:
         if level == "strict":
             return strict
         # broad adds text matches in the abstract/keywords; related topics are NOT used here: they include the
-        # vocabulary neighbours of Topic A/B/C (an ORR paper gets CO2RR as a related topic), which is too loose
+        # vocabulary neighbours of Topic A/B/C (an ORR source gets CO2RR as a related topic), which is too loose
         return strict | self.fts(spec["fts"])
 
     def driver(self, name, level):
@@ -354,8 +359,8 @@ class Catalog:
         return pos
 
     def rows(self, ids, where, args, cols):
-        """papers rows for these ids (None = every paper) that pass the SQL filters"""
-        base = f"SELECT {cols} FROM papers WHERE {' AND '.join(where) if where else '1'}"
+        """sources rows for these ids (None = every source) that pass the SQL filters"""
+        base = f"SELECT {cols} FROM sources WHERE {' AND '.join(where) if where else '1'}"
         if ids is None:
             yield from self.c.execute(base, args)
             return
@@ -370,10 +375,10 @@ def split(v):
     return [x.strip() for x in (v or "").split(",") if x.strip()]
 
 
-def paper_filters(a):
+def source_filters(a):
     w, args = [], []
-    if not a.include_non_papers:
-        w.append("COALESCE(is_non_paper,0)=0 AND COALESCE(is_retracted,0)=0")
+    if not a.include_notices:
+        w.append("COALESCE(is_notice,0)=0 AND COALESCE(is_retracted,0)=0")
     if a.year:
         y = a.year.split("-")
         w.append("year BETWEEN ? AND ?")
@@ -430,13 +435,13 @@ NOT_LITERATURE = {"patent", "dataset", "software"}
 NOTES = ["strict = the concept/driver is in the title or in Topic A/B/C; broad = anywhere in title, abstract or "
          "keywords (more recall, some noise). Report both.",
          "records = every matching row; papers = records minus patents, datasets and software (see by_doc_type).",
-         "Errata, ChemInform digests, cover pages and retracted papers are excluded unless --include-non-papers.",
+         "Errata, ChemInform digests, cover pages and retracted sources are excluded unless --include-notices.",
          "Access type and license are the metadata verdict (classify_access.py); a downloaded PDF can still change it."]
 
 
 def cmd_count(cat, a):
     out = header(cat, a, "count")
-    w, args = paper_filters(a)
+    w, args = source_filters(a)
     for lv in levels(a):
         ids = candidate_ids(cat, a, "broad" if lv == "any" else lv)
         by = Counter(r[0] for r in cat.rows(ids, w, args, "doc_type"))
@@ -449,7 +454,7 @@ def cmd_count(cat, a):
 
 def cmd_breakdown(cat, a):
     out = header(cat, a, "breakdown")
-    w, args = paper_filters(a)
+    w, args = source_filters(a)
     for lv in levels(a):
         lvl = "broad" if lv == "any" else lv
         ids = candidate_ids(cat, a, lvl)
@@ -462,7 +467,7 @@ def cmd_breakdown(cat, a):
                 seen |= s
             res["no_driver_detected"] = len(base - seen)
             out[lv] = {"total": len(base), "by_driver": res,
-                       "note": "drivers overlap (a paper can have two); no_driver_detected = none found"}
+                       "note": "drivers overlap (a source can have two); no_driver_detected = none found"}
         else:
             col = {"year": "year", "doc_type": "doc_type", "venue": "venue", "topic_a": "topic_a",
                    "access_type": "access_type", "publisher": "publisher"}[a.by]
@@ -477,7 +482,7 @@ LIST_COLS = "id, doi, identifier, year, title, venue, doc_type, topic_a, topic_b
 
 
 def cmd_list(cat, a):
-    w, args = paper_filters(a)
+    w, args = source_filters(a)
     lv = a.level if (a.concept or a.driver) else "broad"
     ids = candidate_ids(cat, a, lv)
     strict = candidate_ids(cat, a, "strict") if (a.concept or a.driver) and lv == "broad" else None
@@ -496,31 +501,31 @@ def cmd_list(cat, a):
         wr.writerows(rows)
         return None
     out = header(cat, a, "list")
-    out.update({"level": lv, "matching": total, "shown": len(rows), "sort": a.sort, "papers": rows})
+    out.update({"level": lv, "matching": total, "shown": len(rows), "sort": a.sort, "sources": rows})
     return out
 
 
-def cmd_paper(cat, a):
+def cmd_source(cat, a):
     key = a.query.strip()
     doi = re.sub(r"^(https?://(dx\.)?doi\.org/|doi:)", "", key, flags=re.I).lower()
     ids = []
     if key.isdigit():
         ids = [int(key)]
     if not ids and doi.startswith("10."):
-        ids = [r[0] for r in cat.c.execute("SELECT DISTINCT paper_id FROM identifiers WHERE value = ?", (doi,))]
-        ids += [r[0] for r in cat.c.execute("SELECT id FROM papers WHERE doi = ?", (doi,)) if r[0] not in ids]
+        ids = [r[0] for r in cat.c.execute("SELECT DISTINCT source_id FROM identifiers WHERE value = ?", (doi,))]
+        ids += [r[0] for r in cat.c.execute("SELECT id FROM sources WHERE doi = ?", (doi,)) if r[0] not in ids]
     if not ids:
-        ids = [r[0] for r in cat.c.execute("SELECT DISTINCT paper_id FROM identifiers WHERE value = ?", (key,))]
+        ids = [r[0] for r in cat.c.execute("SELECT DISTINCT source_id FROM identifiers WHERE value = ?", (key,))]
     if not ids:
         words = " AND ".join(q(t) for t in re.findall(r"\w+", key.lower()))
         hits = cat.fts(words, True) if words else set()
         ids = [r[0] for r in cat.c.execute(
-            f"SELECT id FROM papers WHERE id IN ({','.join('?' * len(hits))}) ORDER BY citations DESC LIMIT 5",
+            f"SELECT id FROM sources WHERE id IN ({','.join('?' * len(hits))}) ORDER BY citations DESC LIMIT 5",
             sorted(hits))] if hits else []
-    out = header(cat, a, "paper")
+    out = header(cat, a, "source")
     out["matches"] = []
     for pid in ids[:5]:
-        cur = cat.c.execute("SELECT * FROM papers WHERE id = ?", (pid,))
+        cur = cat.c.execute("SELECT * FROM sources WHERE id = ?", (pid,))
         cols = [d[0] for d in cur.description]
         row = cur.fetchone()
         if not row:
@@ -528,28 +533,28 @@ def cmd_paper(cat, a):
         p = dict(zip(cols, row))
         p.pop("sha1", None)
         p["authors_detail"] = [dict(zip(["position", "name", "orcid", "institutions", "countries"], r)) for r in cat.c.execute(
-            "SELECT pa.position, au.name, au.orcid, pa.institutions, pa.countries FROM paper_authors pa "
-            "JOIN authors au ON au.id = pa.author_id WHERE pa.paper_id = ? ORDER BY pa.position", (pid,))]
+            "SELECT pa.position, au.name, au.orcid, pa.institutions, pa.countries FROM source_authors pa "
+            "JOIN authors au ON au.id = pa.author_id WHERE pa.source_id = ? ORDER BY pa.position", (pid,))]
         p["identifiers"] = [f"{s}={v}" for s, v in cat.c.execute(
-            "SELECT scheme, value FROM identifiers WHERE paper_id = ?", (pid,))]
-        p["sources"] = [r[0] for r in cat.c.execute("SELECT source FROM paper_sources WHERE paper_id = ?", (pid,))]
+            "SELECT scheme, value FROM identifiers WHERE source_id = ?", (pid,))]
+        p["databases"] = [r[0] for r in cat.c.execute("SELECT database FROM source_databases WHERE source_id = ?", (pid,))]
         p["topics"] = [dict(zip(["label", "kind", "rank", "method"], r)) for r in cat.c.execute(
-            "SELECT label, kind, rank, method FROM paper_subjects WHERE paper_id = ? ORDER BY kind, rank", (pid,))]
+            "SELECT label, kind, rank, method FROM source_subjects WHERE source_id = ? ORDER BY kind, rank", (pid,))]
         for t in ("supplements", "si_links"):
             if t in cat.tables:
-                cur = cat.c.execute(f"SELECT * FROM {t} WHERE paper_id = ?", (pid,))
+                cur = cat.c.execute(f"SELECT * FROM {t} WHERE source_id = ?", (pid,))
                 p[t] = [dict(zip([d[0] for d in cur.description], r)) for r in cur.fetchall()]
         p["collections"] = [dict(zip(["collection", "relevance", "in_scope"], r)) for r in cat.c.execute(
-            "SELECT collection, relevance, in_scope FROM paper_collections WHERE paper_id = ?", (pid,))]
+            "SELECT collection, relevance, in_scope FROM source_collections WHERE source_id = ?", (pid,))]
         out["matches"].append(p)
     return out
 
 
 def cmd_terms(cat, a):
-    """the skill's vocabulary-first answer (references/database.md): papers per term as Topic A/B/C, each term
+    """the skill's vocabulary-first answer (references/database.md): sources per term as Topic A/B/C, each term
     separately so the asker decides what to include, plus how many of them mention CO2 and the union"""
     out = header(cat, a, "terms")
-    w, args = paper_filters(a)
+    w, args = source_filters(a)
     base = candidate_ids(cat, a, "broad")
     co2 = cat.fts(CO2_ANY) if a.with_co2 else None
     res, union = {}, set()
@@ -558,7 +563,7 @@ def cmd_terms(cat, a):
         if base is not None:
             ids = ids & base
         ids = {r[0] for r in cat.rows(ids, w, args, "id")}
-        entry = {"term": t, "papers_with_it_as_topic_A-C": len(ids)}
+        entry = {"term": t, "sources_with_it_as_topic_A-C": len(ids)}
         if co2 is not None:
             entry["of_which_mention_co2"] = len(ids & co2)
         res[cat.vocab.get(t, {}).get("label", t)] = entry
@@ -567,8 +572,8 @@ def cmd_terms(cat, a):
     out["union_all_terms"] = len(union)
     if co2 is not None:
         out["union_mentioning_co2"] = len(union & co2)
-    out["notes"] = ["Counts Topic A/B/C only (paper_subjects.kind = 'main'); errata/retracted excluded.",
-                    "Report each term separately; the union removes papers counted under two terms."]
+    out["notes"] = ["Counts Topic A/B/C only (source_subjects.kind = 'main'); errata/retracted excluded.",
+                    "Report each term separately; the union removes sources counted under two terms."]
     return out
 
 
@@ -592,7 +597,7 @@ def cmd_drivers(cat, a):
 
 def cmd_topics(cat, a):
     counts = Counter()
-    for term, kind, n in cat.c.execute("SELECT term, kind, COUNT(*) FROM paper_subjects GROUP BY term, kind"):
+    for term, kind, n in cat.c.execute("SELECT term, kind, COUNT(*) FROM source_subjects GROUP BY term, kind"):
         counts[(term, kind)] = n
     labels = {t["id"]: (t["label"], t["facet"], t.get("name", "")) for t in cat.vocab.values()}
     out = []
@@ -601,8 +606,8 @@ def cmd_topics(cat, a):
         if a.like and a.like.lower() not in f"{tid} {lab} {name}".lower():
             continue
         out.append({"id": tid, "label": lab, "facet": facet, "name": name,
-                    "papers_main_A-C": counts.get((tid, "main"), 0), "papers_related": counts.get((tid, "related"), 0)})
-    out.sort(key=lambda r: -r["papers_main_A-C"])
+                    "sources_main_A-C": counts.get((tid, "main"), 0), "sources_related": counts.get((tid, "related"), 0)})
+    out.sort(key=lambda r: -r["sources_main_A-C"])
     return {"db_built_at": cat.built_at(), "topics": out,
             "note": "topic counts come from the vocabulary match (topics.py); concepts and drivers add text matches"}
 
@@ -610,7 +615,7 @@ def cmd_topics(cat, a):
 def cmd_schema(cat, a):
     out = {}
     for (name,) in cat.c.execute("SELECT name FROM sqlite_master WHERE type IN ('table','view') AND name NOT LIKE "
-                                 "'papers_fts_%' AND name NOT LIKE 'sqlite_%' ORDER BY name"):
+                                 "'sources_fts_%' AND name NOT LIKE 'sqlite_%' ORDER BY name"):
         try:
             out[name] = [r[1] for r in cat.c.execute(f"PRAGMA table_info('{name}')")]
         except sqlite3.Error:
@@ -629,7 +634,7 @@ def cmd_sql(cat, a):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--db", default=str(DEFAULT_DB), help="papers.db to read (default: $CATALYSIS_PAPERS_DB or papers.db next to this file)")
+    ap.add_argument("--db", default=str(DEFAULT_DB), help="index.db to read (default: $CATALYSIS_SOURCES_DB or index.db next to this file)")
     sub = ap.add_subparsers(dest="cmd", required=True)
 
     def filters(p):
@@ -644,9 +649,9 @@ def main():
         p.add_argument("--doc-type")
         p.add_argument("--access")
         p.add_argument("--venue")
-        p.add_argument("--include-non-papers", action="store_true")
+        p.add_argument("--include-notices", "--include-non-papers", dest="include_notices", action="store_true")
 
-    p = sub.add_parser("count", help="how many papers match")
+    p = sub.add_parser("count", help="how many sources match")
     filters(p)
     p.set_defaults(func=cmd_count)
     p = sub.add_parser("breakdown", help="counts per driver / year / doc_type / venue / topic_a / access_type")
@@ -655,30 +660,30 @@ def main():
                                                    "publisher"])
     p.add_argument("--limit", type=int, default=40, help="top N values (venue, topic_a ...)")
     p.set_defaults(func=cmd_breakdown)
-    p = sub.add_parser("list", help="the matching papers")
+    p = sub.add_parser("list", help="the matching sources")
     filters(p)
     p.add_argument("--level", choices=["strict", "broad"], default="broad")
     p.add_argument("--sort", choices=["citations", "year", "id"], default="citations")
     p.add_argument("--limit", type=int, default=50, help="0 = all")
     p.add_argument("--format", choices=["json", "csv", "tsv"], default="json")
     p.set_defaults(func=cmd_list)
-    p = sub.add_parser("terms", help="papers per vocabulary term (Topic A/B/C), each term separately")
+    p = sub.add_parser("terms", help="sources per vocabulary term (Topic A/B/C), each term separately")
     p.add_argument("terms", help="comma list of vocabulary ids or labels, e.g. co2rr,pec,pulsed,electrolyzer")
     p.add_argument("--with-co2", action="store_true", help="also count how many of them mention CO2")
     filters(p)
     p.set_defaults(func=cmd_terms)
-    p = sub.add_parser("paper", help="one paper by DOI, ID or title words")
+    p = sub.add_parser("source", aliases=["paper"], help="one source by DOI, ID or title words")
     p.add_argument("query")
-    p.set_defaults(func=cmd_paper, concept=None, driver=None)
+    p.set_defaults(func=cmd_source, concept=None, driver=None)
     p = sub.add_parser("concepts", help="the built-in concepts and drivers with their exact definitions")
     p.add_argument("name", nargs="?")
     p.set_defaults(func=cmd_concepts)
     p = sub.add_parser("drivers", help="the drivers and how they are detected")
     p.set_defaults(func=cmd_drivers)
-    p = sub.add_parser("topics", help="vocabulary topics with paper counts")
+    p = sub.add_parser("topics", help="vocabulary topics with source counts")
     p.add_argument("--like")
     p.set_defaults(func=cmd_topics)
-    p = sub.add_parser("schema", help="tables and columns of papers.db")
+    p = sub.add_parser("schema", help="tables and columns of index.db")
     p.set_defaults(func=cmd_schema)
     p = sub.add_parser("sql", help="any read-only SQL")
     p.add_argument("query")

@@ -1,24 +1,24 @@
-"""Index step — find every paper's supplementary information (SI) BEFORE anything is downloaded.
+"""Index step — find every source's supplementary information (SI) BEFORE anything is downloaded.
 
-Each SI deposit or file found becomes an SI link of its paper (ledger si_links -> papers.db `supplements`, index SI
+Each SI deposit or file found becomes an SI link of its source (ledger si_links -> index.db `supplements`, index SI
 column "Available (n deposits)"); fetch_si.py later downloads the files listed here first. Nothing is downloaded.
 
-Routes for every paper (batched or read from caches, so a topic of millions of papers takes a few hours):
+Routes for every source (batched or read from caches, so a topic of millions of sources takes a few hours):
   1 Crossref components '<DOI>.s001', '.s002' ... (ACS, PLOS ...): existence checked 170 DOIs per request
-  2 DataCite deposits that declare IsSupplementTo the paper (publisher SI on Figshare, Zenodo, Dryad, Mendeley Data,
+  2 DataCite deposits that declare IsSupplementTo the source (publisher SI on Figshare, Zenodo, Dryad, Mendeley Data,
     institutional repositories): 100 DOIs per query
   3 Crossref relations is-supplemented-by / has-supplementary-material (read from classify_access's Crossref answers)
   4 the PubMed Central open-access mirror: the article's supplementary files (from classify_access's PMC answers)
-Routes that cost one request (or a few) per paper — on by default for topics up to 50,000 papers, `--deep` forces them,
+Routes that cost one request (or a few) per source — on by default for topics up to 50,000 sources, `--deep` forces them,
 `--no-deep` skips them; each host keeps the skill's polite pace:
   5 Elsevier SI CDN (mmcN files by PII)     6 MDPI CDN (-s001 files)
   7 publisher pages that serve scripted clients (Nature, Springer, BMC, Frontiers)
 SI on walled publisher sites (Wiley, RSC, ACS pages, IOP ...) without a deposit of its own is found by fetch_si.py when
-the paper is downloaded. Run after classify_access.py (routes 3-6 use its Crossref and PMC answers). Answers are cached
-in .scripts/enrich/si_*.sqlite: a re-run (or an update) only asks for papers not asked before.
+the source is downloaded. Run after classify_access.py (routes 3-6 use its Crossref and PMC answers). Answers are cached
+in .scripts/enrich/si_*.sqlite: a re-run (or an update) only asks for sources not asked before.
 
 usage: python3 -I find_si.py --topic <slug> [--deep | --no-deep] [--ids FILE] [--no-export]
-  --ids FILE   only these paper IDs (one per line), e.g. a subset of a catalog that should get the deep routes
+  --ids FILE   only these source IDs (one per line), e.g. a subset of a catalog that should get the deep routes
 """
 import argparse
 import json
@@ -36,13 +36,13 @@ import _mdpi as MDPI
 from _cache import Cache
 from _common import (PACER, HTTPFail, Project, add_project_arg, get_json, host_of, load_config, log, norm_doi, now_iso,
                      session, update_state)
-from _download import load_blocked
+from _download import load_blocked, route_landing
 from _ledger import Ledger
 
-CHUNK = 20000            # papers per block
+CHUNK = 20000            # sources per block
 CR_BATCH = 170           # DOIs per Crossref filter request
 DC_BATCH = 100           # DOIs per DataCite query
-DEEP_MAX = 50000         # topics up to this size get the per-paper routes by default
+DEEP_MAX = 50000         # topics up to this size get the per-source routes by default
 MAX_COMPONENTS = 30      # '.s001' ... at most '.s030'
 SKIP_TYPES = ("patent", "dataset", "software")
 LANDING_PREFIXES = ("10.1038/", "10.1007/", "10.1557/", "10.1140/", "10.1023/", "10.1186/", "10.3389/")
@@ -67,7 +67,7 @@ def link(parent, si_doi, url, title, source):
 
 # ---------------------------------------------------------------- 1 Crossref components (.s001 ...)
 def crossref_components(dois, cache):
-    """Ask Crossref which '<doi>.sNNN' exist, NNN = 1, 2 ... until a paper has no next one. Caches per paper DOI:
+    """Ask Crossref which '<doi>.sNNN' exist, NNN = 1, 2 ... until a source has no next one. Caches per source DOI:
     {"doi", "components": [[si_doi, title], ...]}."""
     todo = [d for d in cache.missing(dois) if "," not in d]
     if not todo:
@@ -118,7 +118,7 @@ def crossref_components(dois, cache):
 # ---------------------------------------------------------------- 2 DataCite IsSupplementTo
 def datacite_deposits(dois, cache):
     """DataCite records whose relatedIdentifiers say IsSupplementTo one of `dois` (checked pair by pair: the query
-    matches the two fields separately). Caches per paper DOI: {"doi", "deposits": [[doi, url, title, type], ...]}."""
+    matches the two fields separately). Caches per source DOI: {"doi", "deposits": [[doi, url, title, type], ...]}."""
     todo = [d for d in cache.missing(dois) if '"' not in d and "\\" not in d]
     if not todo:
         return
@@ -179,7 +179,7 @@ def pmc_files(pmc):
     return out
 
 
-# ---------------------------------------------------------------- 5-7 per-paper routes
+# ---------------------------------------------------------------- 5-7 per-source routes
 def head_ok(url):
     try:
         PACER.wait(host_of(url))
@@ -224,8 +224,7 @@ def mdpi_files(doi, cr, journal):
 
 
 def landing_files(proj, doi):
-    import fetch_si as FS                       # its landing-page reader (pages of hosts that serve scripted clients)
-    return [u for _, u in FS.route_landing(proj, doi)]
+    return [u for _, u in route_landing(proj, doi)]     # pages of hosts that serve scripted clients
 
 
 def deep_one(proj, p, cr):
@@ -240,7 +239,7 @@ def deep_one(proj, p, cr):
         elif doi.startswith(LANDING_PREFIXES):
             routes.append("landing")
             files += [("landing", u) for u in landing_files(proj, doi)]
-    except Exception as e:                      # one paper's failure never stops the run; not cached, so retried
+    except Exception as e:                      # one source's failure never stops the run; not cached, so retried
         log(f"find_si: deep routes failed for {doi}: {e!r}"[:200])
         return None
     return {"doi": doi, "routes": routes, "files": [[s, u] for s, u in files]}
@@ -255,10 +254,10 @@ def main():
     ap = add_project_arg(argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter))
     ap.add_argument("--topic", required=True)
     g = ap.add_mutually_exclusive_group()
-    g.add_argument("--deep", action="store_true", help="per-paper routes for any topic size")
+    g.add_argument("--deep", action="store_true", help="per-source routes for any topic size")
     g.add_argument("--no-deep", action="store_true", help="only the batched and cached routes")
-    ap.add_argument("--ids", help="file with paper IDs (one per line): only these papers")
-    ap.add_argument("--no-export", action="store_true", help="do not refresh the index CSVs and papers.db at the end")
+    ap.add_argument("--ids", help="file with source IDs (one per line): only these sources")
+    ap.add_argument("--no-export", action="store_true", help="do not refresh the index CSVs and index.db at the end")
     a = ap.parse_args()
     proj = Project(a.project)
     load_config(proj, a.topic)
@@ -270,16 +269,16 @@ def main():
     cond = ("AND p.is_erratum = 0 AND COALESCE(p.retracted, 0) = 0 AND COALESCE(t.in_scope, 1) = 1 "
             f"AND COALESCE(p.doc_type, '') NOT IN ({','.join('?' * len(SKIP_TYPES))})")
     total = len(only) if only is not None else led.q(
-        "SELECT COUNT(*) FROM papers p JOIN paper_topics t ON t.paper_id = p.id WHERE t.topic=? " + cond,
+        "SELECT COUNT(*) FROM sources p JOIN source_topics t ON t.source_id = p.id WHERE t.topic=? " + cond,
         (a.topic, *SKIP_TYPES))[0][0]
     deep = a.deep or (not a.no_deep and total <= DEEP_MAX)
     comp, dc = Cache(proj, "si_crossref_components"), Cache(proj, "si_datacite")
     deep_c, cr_c, pmc_c = Cache(proj, "si_deep"), Cache(proj, "crossref"), Cache(proj, "pmcaws", key="pmcid")
-    log(f"find_si: {total:,} papers; routes: crossref components, datacite, crossref relations, pmc mirror"
-        + (", elsevier cdn, mdpi cdn, publisher pages" if deep else " (per-paper routes off: --deep to add them)"))
-    cnt, by_route, papers_with = Counter(), Counter(), 0
+    log(f"find_si: {total:,} sources; routes: crossref components, datacite, crossref relations, pmc mirror"
+        + (", elsevier cdn, mdpi cdn, publisher pages" if deep else " (per-source routes off: --deep to add them)"))
+    cnt, by_route, sources_with = Counter(), Counter(), 0
     t0, done, k = time.time(), 0, 0
-    nblocks = max(1, -(-led.q("SELECT COUNT(*) FROM paper_topics WHERE topic=?", (a.topic,))[0][0] // CHUNK))
+    nblocks = max(1, -(-led.q("SELECT COUNT(*) FROM source_topics WHERE topic=?", (a.topic,))[0][0] // CHUNK))
     for rows in led.iter_topic(a.topic, cond, SKIP_TYPES, CHUNK):
         k += 1
         if only is not None:
@@ -366,7 +365,7 @@ def main():
                 kept.append(m)
             mine = kept
             if mine:
-                papers_with += 1
+                sources_with += 1
                 for m in mine:
                     by_route[m["source"]] += 1
             links += mine
@@ -374,17 +373,17 @@ def main():
             cnt["links_added"] += led.add_si_links(links)
         done += len(rows)
         el = time.time() - t0
-        log(f"find_si: block {k}/{nblocks} — {done:,}/{total:,} papers, {papers_with:,} with SI so far "
+        log(f"find_si: block {k}/{nblocks} — {done:,}/{total:,} sources, {sources_with:,} with SI so far "
             f"({el / 60:.1f} min, ~{el / max(done, 1) * max(total - done, 0) / 60:.0f} min left)")
         update_state(proj, a.topic, lambda st: st.__setitem__("find_si_progress", {
-            "papers_done": done, "papers_total": total, "minutes": round(el / 60, 1), "updated_at": now_iso()}))
+            "sources_done": done, "sources_total": total, "minutes": round(el / 60, 1), "updated_at": now_iso()}))
     if not a.no_export:
         led.export(topics=[a.topic])
-    res = {"papers": done, "papers_with_si": papers_with, "si_links_found": sum(by_route.values()),
+    res = {"sources": done, "sources_with_si": sources_with, "si_links_found": sum(by_route.values()),
            "si_links_added": cnt["links_added"], "by_route": dict(by_route), "deep_routes": deep,
            "database": None if a.no_export else led.last_publish, "complete": True, "finished_at": now_iso()}
     if a.no_export:
-        res["next"] = f"export.py --topic {a.topic} (index CSVs and papers.db were not refreshed)"
+        res["next"] = f"export.py --topic {a.topic} (index CSVs and index.db were not refreshed)"
     update_state(proj, a.topic, lambda st: st.__setitem__("find_si", res))
     print(json.dumps(res))
 

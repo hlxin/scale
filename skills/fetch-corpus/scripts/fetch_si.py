@@ -1,4 +1,4 @@
-"""Step 8 — supplementary information (SI) for downloaded papers of a topic.
+"""Step 8 — supplementary information (SI) for downloaded sources of a topic.
 
 Routes, by DOI (independent of where the main PDF came from):
   1 PMC open-data mirror media files     2 SI listed in the index (si_links: the search and find_si.py): its files
@@ -6,8 +6,8 @@ Routes, by DOI (independent of where the main PDF came from):
   3 publisher landing page on hosts that serve scripted clients     4 ACS SI mirrored on Figshare
   5 MDPI CDN (-s001...)      6 Elsevier SI CDN (mmcN by PII)
   7 Crossref has-supplementary-material / Zenodo / Figshare / Dryad (title-affinity checked)
-Files go to publications/<topic>/papers/SI/<ACCESS>/<ID>_SI.<ext> (one file) or <ID>_SI_1.<ext>, <ID>_SI_2.<ext> ...,
-ACCESS = the paper's own folder. SI that only lives on a walled publisher site is queued for the EZproxy runner
+Files go to sources/<topic>/files/SI/<ACCESS>/<ID>_SI.<ext> (one file) or <ID>_SI_1.<ext>, <ID>_SI_2.<ext> ...,
+ACCESS = the source's own folder. SI that only lives on a walled publisher site is queued for the EZproxy runner
 when paywalled access is set up.
 
 usage: python3 -I fetch_si.py --topic <slug> [--workers 8] [--retry]
@@ -24,37 +24,20 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import _core  # noqa: F401,E402  (index-sources' scripts: the shared core)
 import _mdpi as MDPI
 import _pdf as C
 from _common import (PACER, HTTPFail, Project, add_project_arg, get_json, host_of, http_get, json_read, jsonl_iter,
                      load_config, log, norm_title, now_iso, session, update_state)
-from _download import attempt, clone_or_copy, ez_publisher, fetch, is_blocked, load_blocked
+from _download import EXT, IMG, attempt, clone_or_copy, ez_publisher, is_blocked, load_blocked, route_landing
+from _corpus import add_corpus_arg, scope
 from _ledger import Ledger
 from _vectors import after_step
 
-SI_URL = re.compile(r"(suppl|supplement|support[-_]?info|supporting|MediaObjects|MOESM|_ESM\b|/esm/|mmc\d|suppdata|"
-                    r"additional[-_]?file|ancillary|Data[_-]?Sheet|DataSheet|Presentation[_-]\d|Video[_-]\d|"
-                    r"Table[_-]\d+\.(xlsx?|docx?|pdf|csv)|type=supplementary|downloadSupplement|_si_\d|[_-]si[_.-]|"
-                    r"/suppl_file/|supp\d)", re.I)
-EXT = re.compile(r"\.(pdf|docx?|xlsx?|csv|txt|zip|gz|tgz|rar|7z|cif|xyz|mp4|avi|mov|mpg|wmv|json|dat|xml|pptx?|tif|mat|h5)(\?|$|#)", re.I)
-IMG = re.compile(r"\.(jpe?g|png|gif|svg|webp)(\?|$)", re.I)
 MAX_SI_BYTES = 250 * 1024 * 1024  # larger SI archives are skipped (videos / raw data dumps)
 for _h, _iv in {"api.figshare.com": 1.1, "ars.els-cdn.com": 0.5, "media.springernature.com": 0.5,
                 "static-content.springer.com": 0.5, "datadryad.org": 1.0, "mdpi-res.com": 1.0}.items():
     PACER.set(_h, _iv)
-
-
-def extract_si_links(html, base):
-    urls = []
-    for m in re.finditer(r'(?:href|src|data-url|data-href)=["\']([^"\']+)["\']', html, re.I):
-        u = urllib.parse.urljoin(base, m.group(1).replace("&amp;", "&"))
-        du = urllib.parse.unquote(u)
-        if IMG.search(du.split("?")[0]) or not du.startswith("http"):
-            continue
-        if SI_URL.search(du) and (EXT.search(du) or "downloadSupplement" in du or "type=supplementary" in du):
-            if u not in urls:
-                urls.append(u)
-    return urls[:40]
 
 
 def ext_of(url, ctype=""):
@@ -117,10 +100,10 @@ def download_file(proj, url):
         r.close()
 
 
-def affinity_ok(paper_title, rec_title, rec_desc=""):
+def affinity_ok(source_title, rec_title, rec_desc=""):
     stop = {"data", "supporting", "supplementary", "information", "with", "from", "that", "this", "their", "using",
             "based", "study", "towards", "toward", "into", "through"}
-    a = {w for w in norm_title(paper_title).split() if len(w) >= 4 and w not in stop}
+    a = {w for w in norm_title(source_title).split() if len(w) >= 4 and w not in stop}
     b = {w for w in norm_title((rec_title or "") + " " + (rec_desc or "")[:500]).split() if len(w) >= 4 and w not in stop}
     return len(a & b) >= max(1, min(3, len(a) // 3))
 
@@ -136,36 +119,6 @@ def route_pmc(pmc):
             continue
         out.append(("pmc_aws", f"https://pmc-oa-opendata.s3.amazonaws.com/{k}"))
     return out
-
-
-def landing_url_for(doi):
-    pre, suf = doi.split("/", 1)
-    if pre == "10.1038":
-        return f"https://www.nature.com/articles/{suf}"
-    if pre in ("10.1007", "10.1557", "10.1140", "10.1023"):
-        return f"https://link.springer.com/article/{doi}"
-    if pre in ("10.1088", "10.1149"):
-        return f"https://iopscience.iop.org/article/{doi}/data"
-    if pre == "10.3389":
-        return f"https://www.frontiersin.org/articles/{doi}/full"
-    try:  # doi.org handle API -> target URL without touching the publisher
-        d = get_json(f"https://doi.org/api/handles/{urllib.parse.quote(doi, safe='/')}", tries=3)
-        for v in d.get("values") or []:
-            if v.get("type") == "URL":
-                return (v.get("data") or {}).get("value")
-    except Exception:
-        return None
-    return None
-
-
-def route_landing(proj, doi):
-    url = landing_url_for(doi)
-    if not url or is_blocked(host_of(url)):
-        return []
-    res = fetch(proj, url, accept="text/html,application/xhtml+xml,*/*;q=0.8")
-    if res["kind"] != "html" or is_blocked(host_of(res.get("final_url", ""))):
-        return []
-    return [("landing", u) for u in extract_si_links(res["text"], res["final_url"])]
 
 
 def route_acs_figshare(doi):
@@ -383,22 +336,23 @@ def process(proj, led, p, pmc_by, cr_by, ez_ready):
 
 def main():
     ap = add_project_arg(argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter))
-    ap.add_argument("--topic", required=True)
+    add_corpus_arg(ap, topic_required=True)
     ap.add_argument("--workers", type=int, default=8)
-    ap.add_argument("--retry", action="store_true", help="also retry papers whose SI was not found before")
+    ap.add_argument("--retry", action="store_true", help="also retry sources whose SI was not found before")
     a = ap.parse_args()
     proj = Project(a.project)
+    a.topic, ids = scope(a, topic_required=True)
     load_config(proj, a.topic)
     load_blocked(proj)
     led = Ledger(proj)
     cond = "AND p.downloaded = 1 AND t.path IS NOT NULL AND " + \
            ("(p.si_status IS NULL OR p.si_status IN ('not_found','queued_paywalled'))" if a.retry else "p.si_status IS NULL")
-    papers = led.topic_rows(a.topic, cond)
+    papers = [p for p in led.topic_rows(a.topic, cond) if ids is None or p["id"] in ids]
     for p in papers:
         p["_path"] = p["t_path"]
     from _cache import Cache
 
-    class _Found:          # the PMC mirror answers for papers it actually holds
+    class _Found:          # the PMC mirror answers for sources it actually holds
         def __init__(self, c):
             self.c = c
 
@@ -408,7 +362,7 @@ def main():
     pmc_by, cr_by = _Found(Cache(proj, "pmcaws", key="pmcid")), Cache(proj, "crossref")
     ez = json_read(proj.ezg / "config.json", {}) or {}
     ez_ready = bool(ez.get("enabled") and ez.get("verified_at"))
-    log(f"SI: {len(papers)} papers to process")
+    log(f"SI: {len(papers)} sources to process")
     cnt, lock = Counter(), threading.Lock()
 
     def one(p):
@@ -425,7 +379,7 @@ def main():
     with ThreadPoolExecutor(a.workers) as ex:
         list(ex.map(one, papers))
     led.export()
-    res = {"papers": len(papers), "outcomes": dict(cnt), "vector_store": after_step(proj, led), "finished_at": now_iso()}
+    res = {"sources": len(papers), "outcomes": dict(cnt), "vector_store": after_step(proj, led), "finished_at": now_iso()}
     update_state(proj, a.topic, lambda st: st.setdefault("fetch_si", {}).update(res))
     print(json.dumps(res))
 

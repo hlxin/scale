@@ -1,11 +1,11 @@
 """Hard limits for ALL EZproxy traffic (library module; also a tiny CLI for status / clearing a hard stop).
 
 Every visit through EZproxy must be granted by Limiter.acquire(). State persists in
-~/.paper-acquisition/ezproxy/limiter_state.json (machine-wide, shared by every project and topic on this computer)
+~/.scale/sources/ezproxy/limiter_state.json (machine-wide, shared by every project and topic on this computer)
 so restarts never reset the counters, and an exclusive OS lock guarantees that only ONE EZproxy process runs at a
 time on this machine (the limits protect the institution's IP range, not a topic or a project).
 
-A "visit" = one paper (landing page + PDF, the way a person clicks through) or one SI file.
+A "visit" = one source (landing page + PDF, the way a person clicks through) or one SI file.
 
   python3 -I _ezlimit.py status
   python3 -I _ezlimit.py clear-hard-stop      (only after a human has reviewed why it stopped)
@@ -238,7 +238,9 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("cmd", choices=["status", "clear-hard-stop"])
     a = ap.parse_args()
-    here = Path(os.environ.get("PAPER_ACQ_HOME") or (Path.home() / ".paper-acquisition")) / "ezproxy" / "limiter_state.json"
+    import _core  # noqa: F401  (index-sources' scripts: the shared core)
+    from _common import GLOBAL_DIR
+    here = GLOBAL_DIR / "ezproxy" / "limiter_state.json"
     here.parent.mkdir(parents=True, exist_ok=True)
     if a.cmd == "status":
         status(here)

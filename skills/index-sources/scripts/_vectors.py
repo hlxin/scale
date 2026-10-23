@@ -1,20 +1,20 @@
-"""The vector store: the downloaded papers' text cut into passages, with their vectors, to search by meaning and by
+"""The vector store: the downloaded sources' text cut into passages, with their vectors, to search by meaning and by
 words (library module — not run directly; vectors.py is the command).
 
-publications/vectors.db (SQLite; local, since it holds the papers' text: it is shared no more than the PDFs are)
-  papers        one row per paper in the store: the signature of the files it was read from (the PDF's sha1, the SI
+sources/vectors.db (SQLite; local, since it holds the sources' text: it is shared no more than the PDFs are)
+  sources        one row per source in the store: the signature of the files it was read from (the PDF's sha1, the SI
                 files), the pages read and those without a text layer, its passages, when, and why when unreadable
-  passages      id '<paper ID>/p<page>/<k>' (supporting-information pages are S1, S2 ... after the paper's, as
-                curate-corpus reads them), paper_id, page, k, start / end in the page's text, the text and its sha1
-  vectors       one int8 vector per passage text and embedder: a text is embedded once per embedder, whatever paper
+  passages      id '<source ID>/p<page>/<k>' (supporting-information pages are S1, S2 ... after the source's, as
+                curate-corpus reads them), source_id, page, k, start / end in the page's text, the text and its sha1
+  vectors       one int8 vector per passage text and embedder: a text is embedded once per embedder, whatever source
                 or page holds it, and kept while a passage holds it
   passages_fts  the passages' words (FTS5, BM25) for keyword and hybrid search
   about         the embedders the store keeps up to date, the passage cutter, when it was built and updated
-The paper index (papers.db and the ledger) keeps every record; the store keeps only what a search needs, and a
-search joins its hits to the index by paper ID.
+The source index (index.db and the ledger) keeps every record; the store keeps only what a search needs, and a
+search joins its hits to the index by source ID.
 
-Updates are incremental: a paper is read again only when its files changed (its signature), and then only passages
-whose text is new are embedded; a paper that leaves (no longer downloaded, merged into another ID, out of scope,
+Updates are incremental: a source is read again only when its files changed (its signature), and then only passages
+whose text is new are embedded; a source that leaves (no longer downloaded, merged into another ID, out of scope,
 retracted) leaves the store with its passages, and a vector no passage holds is dropped. Passages are cut as SCALE's
 tools/passages.py cuts source pages (split_page: paragraphs joined up to 900 characters, a longer paragraph cut at a
 sentence end), and the embedders keep SCALE's names: scale-hash-v1 (SCALE's default: deterministic, lexical with
@@ -33,7 +33,7 @@ from pathlib import Path
 
 from _common import log, now_iso
 
-CUTTER = "scale-split_page-900"        # how passages are cut (a change re-reads every paper)
+CUTTER = "scale-split_page-900"        # how passages are cut (a change re-reads every source)
 DEFAULT_EMBEDDER = "scale-hash-v1"
 MIN_PASSAGE = 25                          # characters: shorter spans (page numbers, running heads) are not stored
 BATCH = 1024                              # passage texts per embedding call
@@ -249,11 +249,11 @@ def encode(emb, texts, query=False):
 # ------------------------------------------------------------------ the store
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS about (name TEXT PRIMARY KEY, value TEXT);
-CREATE TABLE IF NOT EXISTS papers (paper_id INTEGER PRIMARY KEY, signature TEXT NOT NULL, pdf TEXT, si_files INTEGER,
+CREATE TABLE IF NOT EXISTS sources (source_id INTEGER PRIMARY KEY, signature TEXT NOT NULL, pdf TEXT, si_files INTEGER,
   pages INTEGER, pages_without_text INTEGER, passages INTEGER, chars INTEGER, read_at TEXT, note TEXT);
-CREATE TABLE IF NOT EXISTS passages (id TEXT PRIMARY KEY, paper_id INTEGER NOT NULL, page TEXT, k INTEGER, start INTEGER,
+CREATE TABLE IF NOT EXISTS passages (id TEXT PRIMARY KEY, source_id INTEGER NOT NULL, page TEXT, k INTEGER, start INTEGER,
   "end" INTEGER, text_sha1 TEXT NOT NULL, text TEXT NOT NULL);
-CREATE INDEX IF NOT EXISTS ix_passages_paper ON passages(paper_id);
+CREATE INDEX IF NOT EXISTS ix_passages_source ON passages(source_id);
 CREATE INDEX IF NOT EXISTS ix_passages_sha ON passages(text_sha1);
 CREATE TABLE IF NOT EXISTS vectors (text_sha1 TEXT NOT NULL, embedder TEXT NOT NULL, vec BLOB NOT NULL,
   PRIMARY KEY (embedder, text_sha1)) WITHOUT ROWID;
@@ -324,11 +324,11 @@ def set_about(con, **kv):
 
 # ------------------------------------------------------------------ what the store should hold
 def wanted(led):
-    """{paper_id: (pdf sha1, pdf path, [SI PDF paths])}: the downloaded research papers, in scope in a topic, whose
+    """{source_id: (pdf sha1, pdf path, [SI PDF paths])}: the downloaded research articles, in scope in a topic, whose
     PDF is on disk (the topic folders hold the same PDF as clones; the first one is read)."""
     root, out = led.proj.root, {}
-    # the topic rows with a PDF first (a few thousand), then each one's paper: never a scan of every paper
-    rows = led.q("SELECT p.id, p.sha1, t.path, t.si_paths FROM paper_topics t CROSS JOIN papers p ON p.id = t.paper_id "
+    # the topic rows with a PDF first (a few thousand), then each one's source: never a scan of every source
+    rows = led.q("SELECT p.id, p.sha1, t.path, t.si_paths FROM source_topics t CROSS JOIN sources p ON p.id = t.source_id "
                  "WHERE t.path IS NOT NULL AND COALESCE(t.in_scope, 1) = 1 AND p.downloaded = 1 AND p.is_erratum = 0 "
                  "AND COALESCE(p.retracted, 0) = 0 ORDER BY p.id, t.topic")
     for pid, sha, path, si in rows:
@@ -343,7 +343,7 @@ def wanted(led):
 
 
 def signature(root, sha, pdf, si):
-    """What the paper's passages depend on: the cutter, the PDF (its sha1) and each SI file (name and size)."""
+    """What the source's passages depend on: the cutter, the PDF (its sha1) and each SI file (name and size)."""
     parts = [CUTTER, sha or os.path.getsize(root / pdf)] + [(Path(s).name, os.path.getsize(root / s)) for s in si]
     return hashlib.sha1(json.dumps(parts).encode("utf-8")).hexdigest()
 
@@ -361,7 +361,7 @@ def pages_of(root, pdf, si):
                 for page in doc:
                     n += 1
                     out.append((f"S{n}", page.get_text()))
-        except Exception as e:          # an unreadable SI file leaves the paper's own pages in
+        except Exception as e:          # an unreadable SI file leaves the source's own pages in
             log(f"vectors: SI file skipped ({s}: {e})")
     return out
 
@@ -380,7 +380,7 @@ def passages_of(pid, pages):
 
 def _embed_missing(con, emb, progress=None):
     """Vectors for every passage text this embedder has none for, in one pass over the passages added since its last
-    pass (a passage is never changed in place: a paper read again gets new rows); returns how many were made."""
+    pass (a passage is never changed in place: a source read again gets new rows); returns how many were made."""
     mark = f"checked:{emb.id}"
     n, shown = 0, 0
     last = int(about(con).get(mark) or 0)
@@ -411,7 +411,7 @@ def _embed_missing(con, emb, progress=None):
 
 
 def update(proj, led, embedders=None, ids=None, limit=None, progress=log):
-    """Bring the store in line with the downloaded papers: read the new and changed ones, drop the ones that left,
+    """Bring the store in line with the downloaded sources: read the new and changed ones, drop the ones that left,
     embed the passage texts each embedder lacks, drop the vectors no passage holds."""
     con = open_store(proj, create=True)
     names = list(dict.fromkeys(embedders or embedders_of(con)))
@@ -422,23 +422,23 @@ def update(proj, led, embedders=None, ids=None, limit=None, progress=log):
     want = wanted(led)
     if ids:
         want = {k: v for k, v in want.items() if k in set(ids)}
-    have = dict(con.execute("SELECT paper_id, signature FROM papers").fetchall())
+    have = dict(con.execute("SELECT source_id, signature FROM sources").fetchall())
     gone = [] if ids else [pid for pid in have if pid not in want]
     st = Counter()
     with con:
         for pid in gone:
-            con.execute("DELETE FROM passages WHERE paper_id = ?", (pid,))
-            con.execute("DELETE FROM papers WHERE paper_id = ?", (pid,))
-    st["papers_removed"] = len(gone)
+            con.execute("DELETE FROM passages WHERE source_id = ?", (pid,))
+            con.execute("DELETE FROM sources WHERE source_id = ?", (pid,))
+    st["sources_removed"] = len(gone)
     todo = []
     for pid, (sha, pdf, si) in sorted(want.items()):
         sig = signature(root, sha, pdf, si)
         if have.get(pid) == sig:
-            st["papers_unchanged"] += 1
+            st["sources_unchanged"] += 1
         else:
             todo.append((pid, sig, pdf, si))
     if limit is not None:
-        st["papers_left_for_later"] = max(0, len(todo) - limit)
+        st["sources_left_for_later"] = max(0, len(todo) - limit)
         todo = todo[:limit]
     for i, (pid, sig, pdf, si) in enumerate(todo, 1):
         note, pages = None, []
@@ -446,32 +446,32 @@ def update(proj, led, embedders=None, ids=None, limit=None, progress=log):
             pages = pages_of(root, pdf, si)
         except Exception as e:           # recorded with its signature: read again only when the file changes
             note = f"unreadable: {str(e)[:200]}"
-            st["papers_unreadable"] += 1
+            st["sources_unreadable"] += 1
         ps = passages_of(pid, pages)
-        known = {r[0] for r in con.execute("SELECT DISTINCT text_sha1 FROM passages WHERE paper_id = ?", (pid,))}
+        known = {r[0] for r in con.execute("SELECT DISTINCT text_sha1 FROM passages WHERE source_id = ?", (pid,))}
         with con:
-            con.execute("DELETE FROM passages WHERE paper_id = ?", (pid,))
-            con.executemany("INSERT INTO passages (id, paper_id, page, k, start, \"end\", text_sha1, text) "
+            con.execute("DELETE FROM passages WHERE source_id = ?", (pid,))
+            con.executemany("INSERT INTO passages (id, source_id, page, k, start, \"end\", text_sha1, text) "
                             "VALUES (?,?,?,?,?,?,?,?)", [(p[0], pid, *p[1:]) for p in ps])
-            con.execute("INSERT OR REPLACE INTO papers VALUES (?,?,?,?,?,?,?,?,?,?)",
+            con.execute("INSERT OR REPLACE INTO sources VALUES (?,?,?,?,?,?,?,?,?,?)",
                         (pid, sig, pdf, len(si), len(pages), sum(1 for _, t in pages if len(t.strip()) < MIN_PASSAGE),
                          len(ps), sum(len(p[6]) for p in ps), now_iso(), note))
-        st["papers_read"] += 1
+        st["sources_read"] += 1
         st["passages_added"] += len(ps)
         st["passages_already_known"] += sum(1 for p in ps if p[5] in known)
         if progress and i % 200 == 0:
-            progress(f"vectors: {i}/{len(todo)} papers read")
+            progress(f"vectors: {i}/{len(todo)} sources read")
     embedded = {}
     for name in names:
         emb = get_embedder(name)
         embedded[name] = _embed_missing(con, emb, progress)
     n_drop = 0
-    if st["papers_removed"] or st["papers_read"]:              # only then can a text have lost its last passage
+    if st["sources_removed"] or st["sources_read"]:              # only then can a text have lost its last passage
         with con:
             n_drop = con.execute("DELETE FROM vectors WHERE NOT EXISTS (SELECT 1 FROM passages p WHERE "
                                  "p.text_sha1 = vectors.text_sha1)").rowcount
     set_about(con, updated_at=now_iso())
-    keys = ("papers_read", "papers_unchanged", "papers_removed", "papers_unreadable", "passages_added",
+    keys = ("sources_read", "sources_unchanged", "sources_removed", "sources_unreadable", "passages_added",
             "passages_already_known")
     res = {**{k: st[k] for k in keys}, **{k: v for k, v in st.items() if k not in keys}, "embedded": embedded,
            "vectors_dropped": n_drop, **counts(con)}
@@ -480,7 +480,7 @@ def update(proj, led, embedders=None, ids=None, limit=None, progress=log):
 
 
 def counts(con):
-    return {"papers": con.execute("SELECT COUNT(*) FROM papers").fetchone()[0],
+    return {"sources": con.execute("SELECT COUNT(*) FROM sources").fetchone()[0],
             "passages": con.execute("SELECT COUNT(*) FROM passages").fetchone()[0],
             "vectors": dict(con.execute("SELECT embedder, COUNT(*) FROM vectors GROUP BY embedder").fetchall())}
 
@@ -488,12 +488,12 @@ def counts(con):
 def status(proj, led):
     con = open_store(proj)
     want = wanted(led)
-    have = dict(con.execute("SELECT paper_id, signature FROM papers").fetchall())
+    have = dict(con.execute("SELECT source_id, signature FROM sources").fetchall())
     stale = sum(1 for pid, (sha, pdf, si) in want.items() if have.get(pid) != signature(proj.root, sha, pdf, si))
     texts = con.execute("SELECT COUNT(DISTINCT text_sha1) FROM passages").fetchone()[0]
-    out = {"store": proj.rel(store_path(proj)), **about(con), **counts(con), "downloaded_papers": len(want),
-           "papers_to_read": stale, "papers_to_remove": sum(1 for pid in have if pid not in want),
-           "passage_texts": texts, "unreadable": con.execute("SELECT COUNT(*) FROM papers WHERE note IS NOT NULL").fetchone()[0],
+    out = {"store": proj.rel(store_path(proj)), **about(con), **counts(con), "downloaded_sources": len(want),
+           "sources_to_read": stale, "sources_to_remove": sum(1 for pid in have if pid not in want),
+           "passage_texts": texts, "unreadable": con.execute("SELECT COUNT(*) FROM sources WHERE note IS NOT NULL").fetchone()[0],
            "megabytes": round(store_path(proj).stat().st_size / 1e6, 1)}
     out["embedders"] = embedders_of(con)
     out["texts_without_vector"] = {e: texts - out["vectors"].get(e, 0) for e in out["embedders"]}
@@ -535,7 +535,7 @@ def is_reference_list(text):
     return hits >= 4 and hits * 100 / max(1, len(text)) >= 2.5
 
 
-_MATRIX = {}         # (store, embedder) -> (when the store changed, rowids, paper ids, text rows, int8 vectors, norms)
+_MATRIX = {}         # (store, embedder) -> (when the store changed, rowids, source ids, text rows, int8 vectors, norms)
 BLOCK = 65536        # vectors converted to float32 at a time for the cosine, bounding the working memory
 
 
@@ -551,7 +551,7 @@ def _matrix(con, path, emb_id):
     for sha, vec in con.execute("SELECT text_sha1, vec FROM vectors WHERE embedder = ?", (emb_id,)):
         pos[sha] = len(blobs)
         blobs.append(vec)
-    rows = [(r, pid, pos[sha]) for r, pid, sha in con.execute("SELECT rowid, paper_id, text_sha1 FROM passages ORDER BY "
+    rows = [(r, pid, pos[sha]) for r, pid, sha in con.execute("SELECT rowid, source_id, text_sha1 FROM passages ORDER BY "
                                                               "rowid") if sha in pos]
     rowids = np.array([r[0] for r in rows], dtype=np.int64)
     pids = np.array([r[1] for r in rows], dtype=np.int64)
@@ -567,7 +567,7 @@ def _matrix(con, path, emb_id):
 
 def search(proj, query, k=10, mode="hybrid", embedder=None, allowed=None, depth=1000, references=False):
     """The best `k` passages for `query` (hybrid: the mean of BM25 scaled to its best and the cosine; vector;
-    keyword), among the papers in `allowed` (a set of IDs) when given, reference lists left out unless `references`,
+    keyword), among the sources in `allowed` (a set of IDs) when given, reference lists left out unless `references`,
     joined to their records in the index."""
     np = _np()
     con = open_store(proj)
@@ -589,7 +589,7 @@ def search(proj, query, k=10, mode="hybrid", embedder=None, allowed=None, depth=
     if mode in ("hybrid", "keyword"):
         fq = _fts_query(query)
         if fq:
-            for rowid, pid, score in con.execute("SELECT f.rowid, p.paper_id, -bm25(passages_fts) FROM passages_fts f "
+            for rowid, pid, score in con.execute("SELECT f.rowid, p.source_id, -bm25(passages_fts) FROM passages_fts f "
                                                  "JOIN passages p ON p.rowid = f.rowid WHERE passages_fts MATCH ? "
                                                  "ORDER BY bm25(passages_fts) LIMIT ?", (fq, depth)):
                 if allowed is None or pid in allowed:
@@ -603,12 +603,12 @@ def search(proj, query, k=10, mode="hybrid", embedder=None, allowed=None, depth=
         scored = {r: 0.5 * (kw.get(r, 0.0) / best) + 0.5 * max(cos.get(r, 0.0), 0.0) for r in set(cos) | set(kw)}
     out, left_out = [], 0
     for rowid, score in sorted(scored.items(), key=lambda x: (-x[1], x[0])):
-        pid_, pas, page, text = con.execute("SELECT paper_id, id, page, text FROM passages WHERE rowid = ?",
+        pid_, pas, page, text = con.execute("SELECT source_id, id, page, text FROM passages WHERE rowid = ?",
                                             (rowid,)).fetchone()
         if not references and is_reference_list(text):
             left_out += 1
             continue
-        out.append({"score": round(score, 4), "passage": pas, "paper_id": pid_, "page": page, "text": text})
+        out.append({"score": round(score, 4), "passage": pas, "source_id": pid_, "page": page, "text": text})
         if len(out) == k:
             break
     con.close()
@@ -617,44 +617,44 @@ def search(proj, query, k=10, mode="hybrid", embedder=None, allowed=None, depth=
             "reference_passages_left_out": None if references else left_out}
 
 
-def by_paper(proj, query, k=10, mode="hybrid", embedder=None, allowed=None, per_paper=3, references=False):
-    """The `k` best papers for `query`: each paper scored by its best passage, with its best `per_paper` passages,
-    joined to its record — the papers to curate for a question."""
+def by_source(proj, query, k=10, mode="hybrid", embedder=None, allowed=None, per_source=3, references=False):
+    """The `k` best sources for `query`: each source scored by its best passage, with its best `per_source` passages,
+    joined to its record — the sources to curate for a question."""
     res = search(proj, query, k=max(200, k * 40), mode=mode, embedder=embedder, allowed=allowed,
                  references=references)
     papers = {}
     for h in res["hits"]:
-        p = papers.setdefault(h["paper_id"], {"paper_id": h["paper_id"], "score": h["score"], "passages": [],
+        p = papers.setdefault(h["source_id"], {"source_id": h["source_id"], "score": h["score"], "passages": [],
                                               **{x: h.get(x) for x in ("title", "year", "venue", "doi", "url",
                                                                        "access_type")}})
-        if len(p["passages"]) < per_paper:
+        if len(p["passages"]) < per_source:
             p["passages"].append({x: h[x] for x in ("passage", "page", "score", "text")})
-    best = sorted(papers.values(), key=lambda p: (-p["score"], p["paper_id"]))[:k]
-    return {"query": query, "mode": mode, "embedder": res["embedder"], "papers": best}
+    best = sorted(papers.values(), key=lambda p: (-p["score"], p["source_id"]))[:k]
+    return {"query": query, "mode": mode, "embedder": res["embedder"], "sources": best}
 
 
-def paper_text(proj, ref):
-    """A paper as the store holds it, found by ID or DOI: its record, the files it was read from and its passages in
+def source_text(proj, ref):
+    """A source as the store holds it, found by ID or DOI: its record, the files it was read from and its passages in
     page order (the text to read for curation, page by page)."""
     pid = int(ref) if str(ref).isdigit() else None
     if pid is None and proj.db.exists():
         con = sqlite3.connect(f"file:{proj.db}?mode=ro", uri=True)
-        r = con.execute("SELECT paper_id FROM identifiers WHERE scheme = 'doi' AND value = ? COLLATE NOCASE",
+        r = con.execute("SELECT source_id FROM identifiers WHERE scheme = 'doi' AND value = ? COLLATE NOCASE",
                         (str(ref).strip().lower().removeprefix("https://doi.org/"),)).fetchone()
         con.close()
         pid = r[0] if r else None
     if pid is None:
-        raise RuntimeError(f"no paper with ID or DOI {ref!r} in the index")
+        raise RuntimeError(f"no source with ID or DOI {ref!r} in the index")
     con = open_store(proj)
-    info = con.execute("SELECT pdf, si_files, pages, pages_without_text, passages, read_at, note FROM papers WHERE "
-                       "paper_id = ?", (pid,)).fetchone()
+    info = con.execute("SELECT pdf, si_files, pages, pages_without_text, passages, read_at, note FROM sources WHERE "
+                       "source_id = ?", (pid,)).fetchone()
     if not info:
         con.close()
-        raise RuntimeError(f"paper {pid} is not in the vector store (not downloaded, out of scope, or not read yet: "
+        raise RuntimeError(f"source {pid} is not in the vector store (not downloaded, out of scope, or not read yet: "
                            f"vectors.py update)")
-    rows = con.execute("SELECT id, page, k, text FROM passages WHERE paper_id = ? ORDER BY rowid", (pid,)).fetchall()
+    rows = con.execute("SELECT id, page, k, text FROM passages WHERE source_id = ? ORDER BY rowid", (pid,)).fetchall()
     con.close()
-    out = {"paper_id": pid, **dict(zip(("pdf", "si_files", "pages", "pages_without_text", "passages", "read_at", "note"),
+    out = {"source_id": pid, **dict(zip(("pdf", "si_files", "pages", "pages_without_text", "passages", "read_at", "note"),
                                        info)),
            "text": [{"passage": r[0], "page": r[1], "text": r[3], "reference_list": is_reference_list(r[3])}
                     for r in rows]}
@@ -663,18 +663,18 @@ def paper_text(proj, ref):
 
 
 def _join_records(proj, hits):
-    """The paper records of the hits, from the index (papers.db, else the ledger)."""
-    ids = sorted({h["paper_id"] for h in hits})
+    """The source records of the hits, from the index (index.db, else the ledger)."""
+    ids = sorted({h["source_id"] for h in hits})
     if not ids:
         return
     marks = ",".join("?" * len(ids))
     recs = {}
     if proj.db.exists():
         con = sqlite3.connect(f"file:{proj.db}?mode=ro", uri=True)
-        recs = {r[0]: r[1:] for r in con.execute(f"SELECT id, title, year, venue, doi, url, access_type FROM papers "
+        recs = {r[0]: r[1:] for r in con.execute(f"SELECT id, title, year, venue, doi, url, access_type FROM sources "
                                                  f"WHERE id IN ({marks})", ids)}
         con.close()
     for h in hits:
-        r = recs.get(h["paper_id"])
+        r = recs.get(h["source_id"])
         if r:
             h.update(zip(("title", "year", "venue", "doi", "url", "access_type"), r))

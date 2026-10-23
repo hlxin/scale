@@ -9,16 +9,16 @@ report. Work only inside the folder below.
 2. **The working folder** (made by `scale source start`): `${folder}`
    - `BRIEF.md`: what to curate and how; read it next.
    - `${graph}`: the graph to fill. Its header, Source, steward and project are already there.
-   - `work/texts/${slug}.txt`: the page texts the verbatim check reads: the paper's pages (`[page 1]` …), then its
-     supporting information (`[page S1]` …; supporting information belongs to the paper's Source). SI appended:
+   - `work/texts/${slug}.txt`: the page texts the verbatim check reads: the source's pages (`[page 1]` …), then its
+     supporting information (`[page S1]` …; supporting information belongs to the source's Source). SI appended:
 ${si_read}
      SI files not appended (read them yourself if they matter; their values cannot be quoted verbatim):
 ${si_left}
    - `pdfs/${slug}.pdf`: the PDF. For a figure or a page whose text layer loses values, use `${scale} pages render`
      and `${scale} pages region`, as the skill says.
    - `rights.yaml`: the source's rights. Set `class`, `licence` and `basis` from the copy you read (its first page),
-     as the skill says. The paper index's verdict, to check against the copy: licence ${licence}; copy: ${text_version}.
-3. **What the paper index knows** (the copy wins where they differ): ${title} (${year}), DOI ${doi}. Set the Source's
+     as the skill says. The source index's verdict, to check against the copy: licence ${licence}; copy: ${text_version}.
+3. **What the source index knows** (the copy wins where they differ): ${title} (${year}), DOI ${doi}. Set the Source's
    `text_version` to the version of the copy you read.
    ${start_note}
 4. **Curate what the source itself reports**, by the skill's procedure: records, value objects in the printed unit

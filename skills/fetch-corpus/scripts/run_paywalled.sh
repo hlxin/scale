@@ -7,7 +7,7 @@ PROJ="${1:?usage: run_paywalled.sh <project_dir> [args for download_paywalled.py
 shift
 cd "$PROJ" || exit 1
 mkdir -p .scripts/logs .scripts/ezproxy
-G="${PAPER_ACQ_HOME:-$HOME/.paper-acquisition}/ezproxy"
+G="$(python3 -I -c "import sys; sys.path.insert(0, sys.argv[1]); import _core; from _common import GLOBAL_DIR; print(GLOBAL_DIR)" "$HERE")/ezproxy"
 L=.scripts/logs/paywalled.log
 echo $$ > .scripts/ezproxy/runner.pid
 restarts=0; day=$(date +%F)

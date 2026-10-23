@@ -1,15 +1,15 @@
-"""Merge another copy of the paper database into this project's: what the other copy found, checked or downloaded
-joins this one, and both histories are kept. The copies converge: share the merged papers.db afterwards.
+"""Merge another copy of the source database into this project's: what the other copy found, checked or downloaded
+joins this one, and both histories are kept. The copies converge: share the merged index.db afterwards.
 
-  python3 -I merge_db.py --from <their papers.db> [--files <their project folder>] [--dry-run]
+  python3 -I merge_db.py --from <their index.db> [--files <their project folder>] [--dry-run]
 
-When two people update separate copies of papers.db (Update, downloads, screening, curation), one of them runs this
-with the other's papers.db. Only that file is read (and, with --files, the other project's PDFs and SI); nothing in
+When two people update separate copies of index.db (Update, downloads, screening, curation), one of them runs this
+with the other's index.db. Only that file is read (and, with --files, the other project's PDFs and SI); nothing in
 the other copy changes. Run it again after either copy moves on: a merge that finds nothing new changes nothing.
 
-Papers are matched by identity, never by ID (each copy numbers its new papers on its own): the same key (canonical
-DOI, patent number or title hash) or any DOI or patent alias the two records share. A paper only the other copy has
-is added under a new ID here. When one paper of the other copy matches two here, the other copy merged them, and they
+Sources are matched by identity, never by ID (each copy numbers its new sources on its own): the same key (canonical
+DOI, patent number or title hash) or any DOI or patent alias the two records share. A source only the other copy has
+is added under a new ID here. When one source of the other copy matches two here, the other copy merged them, and they
 are merged here too (dedup's merge: files move with them). Values are merged so that nothing is lost and nothing this
 copy holds is removed:
 
@@ -18,8 +18,8 @@ copy holds is removed:
   retraction, erratum    either copy's flag holds
   access and licence     a verdict read from a downloaded PDF wins over metadata; otherwise the more recently
                          checked record's (last_checked)
-  known copies, sources, identifiers, DOI aliases, SI links: the union
-  downloads              this copy's files stay this copy's: a paper downloaded only in the other copy stays
+  known copies, databases, identifiers, DOI aliases, SI links: the union
+  downloads              this copy's files stay this copy's: a source downloaded only in the other copy stays
                          undownloaded here, and its download URL joins the known copies (download_open.py fetches it
                          from there), unless --files gives the other project's folder: its PDF and SI are then copied
                          in under this copy's ID
@@ -31,7 +31,7 @@ copy holds is removed:
                          knows every window either copy searched
   history                the other copy's runs since the copies parted are added with their changes, and the merge
                          is a run of its own
-Afterwards run dedup.py --apply (automatic): it merges papers the two copies indexed under different keys.
+Afterwards run dedup.py --apply (automatic): it merges sources the two copies indexed under different keys.
 """
 import argparse
 import json
@@ -45,6 +45,7 @@ from _common import Project, add_project_arg, die, json_write_atomic, log, now_i
 from _ledger import JSON_COLS, Ledger  # noqa: E402
 from _vectors import after_step  # noqa: E402
 from _publish import COPIED, _tables, has_state, unpack_state  # noqa: E402
+from _upgrade import upgrade_db  # noqa: E402
 from _topics import METHOD_RANK  # noqa: E402
 
 SCREEN_RANK = {"none": 1, "keywords": 2, "api": 3, "claude": 4, "manual": 5}
@@ -74,11 +75,12 @@ def _vkey(v):
 
 
 class Other:
-    """The other copy, read through its papers.db alone (the public tables and the working state)."""
+    """The other copy, read through its index.db alone (the public tables and the working state)."""
 
     def __init__(self, path):
+        upgrade_db(path)                     # a copy made before the sources were so named: renamed in place first
         if not has_state(path):
-            die(f"{path} is not an evolving papers.db (paper-acquisition 3.4 or later, now index-sources); nothing to merge from")
+            die(f"{path} is not an evolving index.db (paper-acquisition 3.4 or later, now index-sources); nothing to merge from")
         self.path = Path(path).resolve()
         self.con = sqlite3.connect(f"file:{self.path}?mode=ro", uri=True)
         self.con.row_factory = sqlite3.Row
@@ -87,7 +89,7 @@ class Other:
     def ids(self):
         last = 0
         while True:
-            ids = [r[0] for r in self.con.execute("SELECT id FROM papers WHERE id > ? ORDER BY id LIMIT ?", (last, CHUNK))]
+            ids = [r[0] for r in self.con.execute("SELECT id FROM sources WHERE id > ? ORDER BY id LIMIT ?", (last, CHUNK))]
             if not ids:
                 return
             last = ids[-1]
@@ -98,7 +100,7 @@ class Other:
 
     def papers(self, ids):
         out = {}
-        for r in self._q("SELECT p.*, s.state FROM papers p JOIN _paper_state s ON s.paper_id = p.id "
+        for r in self._q("SELECT p.*, s.state FROM sources p JOIN _source_state s ON s.source_id = p.id "
                          "WHERE p.id IN ({})", ids):
             st = unpack_state(r["state"])
             row = {k: v for k, v in st.items() if not k.startswith("_")}
@@ -112,26 +114,26 @@ class Other:
             out[r["id"]] = row
         return out
 
-    def by_paper(self, sql, ids):
+    def by_source(self, sql, ids):
         out = {}
         for r in self._q(sql, ids):
             out.setdefault(r[0], []).append(dict(r))
         return out
 
     def fingerprints(self, ids, cols=None):
-        """What a paper is in this copy, to tell untouched papers from changed ones quickly."""
+        """What a source is in this copy, to tell untouched sources from changed ones quickly."""
         return _fingerprints(self.con, ids, cols)
 
 
 def _fingerprints(con, ids, cols=None):
-    """cols: the papers columns both copies have (a copy of an older format lacks the newer ones)."""
+    """cols: the sources columns both copies have (a copy of an older format lacks the newer ones)."""
     marks = ",".join("?" * len(ids))
-    fp = {r[0]: [tuple(r)] for r in con.execute(f"SELECT {', '.join(cols) if cols else '*'} FROM papers "
+    fp = {r[0]: [tuple(r)] for r in con.execute(f"SELECT {', '.join(cols) if cols else '*'} FROM sources "
                                                 f"WHERE id IN ({marks})", ids)}
-    for sql in (f"SELECT paper_id, state FROM _paper_state WHERE paper_id IN ({marks})",
-                f"SELECT * FROM paper_collections WHERE paper_id IN ({marks}) ORDER BY paper_id, collection",
-                f"SELECT * FROM paper_subjects WHERE paper_id IN ({marks}) ORDER BY paper_id, term",
-                f"SELECT * FROM extractions WHERE paper_id IN ({marks}) ORDER BY paper_id, collection, kg"):
+    for sql in (f"SELECT source_id, state FROM _source_state WHERE source_id IN ({marks})",
+                f"SELECT * FROM source_collections WHERE source_id IN ({marks}) ORDER BY source_id, collection",
+                f"SELECT * FROM source_subjects WHERE source_id IN ({marks}) ORDER BY source_id, term",
+                f"SELECT * FROM extractions WHERE source_id IN ({marks}) ORDER BY source_id, collection, kg"):
         for r in con.execute(sql, ids):
             if r[0] in fp:
                 fp[r[0]].append(tuple(r))
@@ -142,24 +144,24 @@ class Merge:
     def __init__(self, proj, led, other, files=None, dry=False):
         self.proj, self.led, self.other, self.dry = proj, led, other, dry
         self.files = Path(files).resolve() if files else None
-        self.cols = [r[1] for r in led.q("PRAGMA table_info(papers)")]
+        self.cols = [r[1] for r in led.q("PRAGMA table_info(sources)")]
         self.id_map = {}
         self.n = Counter()
-        self.empty_here = not led.q("SELECT 1 FROM papers LIMIT 1")
+        self.empty_here = not led.q("SELECT 1 FROM sources LIMIT 1")
 
     # ---------------------------------------------------------------- matching
     def match(self, o):
         found = set()
         for a in dict.fromkeys([o.get("key"), o.get("doi")] + list(o["_aliases"])):
             if a:
-                found |= {r[0] for r in self.led.q("SELECT paper_id FROM dois WHERE doi=?", (a,))}
-        found |= {r[0] for r in self.led.q("SELECT id FROM papers WHERE key=?", (o.get("key"),))}
+                found |= {r[0] for r in self.led.q("SELECT source_id FROM dois WHERE doi=?", (a,))}
+        found |= {r[0] for r in self.led.q("SELECT id FROM sources WHERE key=?", (o.get("key"),))}
         if o.get("doi"):
-            found |= {r[0] for r in self.led.q("SELECT id FROM papers WHERE doi=?", (o["doi"],))}
+            found |= {r[0] for r in self.led.q("SELECT id FROM sources WHERE doi=?", (o["doi"],))}
         return found
 
     def fold(self, ids, o):
-        """The other copy holds as one paper what this copy holds as several: merge them here too."""
+        """The other copy holds as one source what this copy holds as several: merge them here too."""
         import dedup
         keyed = [i for i in ids if (self.led.get(i) or {}).get("key") == o.get("key")]
         keep = keyed[0] if keyed else min(ids)
@@ -169,7 +171,7 @@ class Merge:
             self.n["merged_here"] += 1
         return keep
 
-    # ---------------------------------------------------------------- one paper
+    # ---------------------------------------------------------------- one source
     def fields(self, L, o):
         upd = {}
         for f in BIB:
@@ -223,12 +225,12 @@ class Merge:
         t_new = [t for t in otopics if t["collection"] not in local_t]
         t_better = [t for t in otopics if t["collection"] in local_t and
                     _screen_rank(t.get("relevance_method")) > _screen_rank(local_t[t["collection"]].get("relevance_method"))]
-        cur = led.q("SELECT method FROM paper_subjects WHERE paper_id=? AND kind='main' LIMIT 1", (lid,))
+        cur = led.q("SELECT method FROM source_subjects WHERE source_id=? AND kind='main' LIMIT 1", (lid,))
         omain = [s for s in osubj if s["kind"] == "main"]
-        subj = bool(osubj) and (not led.q("SELECT 1 FROM paper_subjects WHERE paper_id=?", (lid,)) or (
+        subj = bool(osubj) and (not led.q("SELECT 1 FROM source_subjects WHERE source_id=?", (lid,)) or (
             omain and METHOD_RANK.get(omain[0].get("method") or "vocab", 0) >
             METHOD_RANK.get((cur[0][0] if cur else None) or "vocab", 0)))
-        lext = {(e["topic"], e["kg"]): e for e in led.q("SELECT * FROM extractions WHERE paper_id=?", (lid,))}
+        lext = {(e["topic"], e["kg"]): e for e in led.q("SELECT * FROM extractions WHERE source_id=?", (lid,))}
         e_new = [e for e in oext if (e["collection"], e["kg"]) not in lext or
                  (e.get("date") or "") > (lext[(e["collection"], e["kg"])]["date"] or "")]
         n = len(new_aliases) + len(links) + len(t_new) + len(t_better) + int(bool(subj)) + len(e_new)
@@ -239,7 +241,7 @@ class Merge:
             led.x("INSERT OR IGNORE INTO si_links VALUES (?,?,?,?,?,?)", (s["parent_doi"], s["si_doi"], s.get("url"),
                                                                           s.get("title"), s.get("source"), s.get("date_added")))
         for t in t_new:
-            led.x("INSERT OR IGNORE INTO paper_topics VALUES (?,?,?,?,?,?,?,?,?)",
+            led.x("INSERT OR IGNORE INTO source_topics VALUES (?,?,?,?,?,?,?,?,?)",
                   (lid, t["collection"], t.get("relevance"), t.get("relevance_note"), t.get("relevance_method"),
                    t.get("in_scope"), None, "[]", t.get("date_added")))
             self.n["topics_added"] += 1
@@ -260,7 +262,7 @@ class Merge:
         return n
 
     def import_files(self, lid, o, otopics):
-        """The other copy's PDF and SI of a paper this copy has not downloaded, copied in under this copy's ID."""
+        """The other copy's PDF and SI of a source this copy has not downloaded, copied in under this copy's ID."""
         from _download import clone_or_copy
         if not (self.files and o.get("downloaded")):
             return False
@@ -317,7 +319,7 @@ class Merge:
             self.n["added"] += 1
             return nid
         keys = [k for k in self.cols if k in row]
-        led.x(f"INSERT INTO papers ({', '.join(keys)}) VALUES ({','.join('?' * len(keys))})", [row[k] for k in keys])
+        led.x(f"INSERT INTO sources ({', '.join(keys)}) VALUES ({','.join('?' * len(keys))})", [row[k] for k in keys])
         self.related(nid, o, otopics, osubj, oext)
         self.n["added"] += 1
         return nid
@@ -327,8 +329,8 @@ class Merge:
         local_db = sqlite3.connect(f"file:{self.proj.db}?mode=ro", uri=True) if has_state(self.proj.db) else None
         cols = None
         if local_db:
-            theirs = {r[1] for r in self.other.con.execute("PRAGMA table_info(papers)")}
-            cols = [r[1] for r in local_db.execute("PRAGMA table_info(papers)") if r[1] in theirs]
+            theirs = {r[1] for r in self.other.con.execute("PRAGMA table_info(sources)")}
+            cols = [r[1] for r in local_db.execute("PRAGMA table_info(sources)") if r[1] in theirs]
         for ids in self.other.ids():
             ofp = self.other.fingerprints(ids, cols)
             lfp = _fingerprints(local_db, ids, cols) if local_db else {}
@@ -340,9 +342,9 @@ class Merge:
             if not changed:
                 continue
             ops = self.other.papers(changed)
-            otop = self.other.by_paper("SELECT * FROM paper_collections WHERE paper_id IN ({})", changed)
-            osub = self.other.by_paper("SELECT * FROM paper_subjects WHERE paper_id IN ({})", changed)
-            oext = self.other.by_paper("SELECT * FROM extractions WHERE paper_id IN ({})", changed)
+            otop = self.other.by_source("SELECT * FROM source_collections WHERE source_id IN ({})", changed)
+            osub = self.other.by_source("SELECT * FROM source_subjects WHERE source_id IN ({})", changed)
+            oext = self.other.by_source("SELECT * FROM extractions WHERE source_id IN ({})", changed)
             for oid in changed:
                 o = ops.get(oid)
                 if not o:
@@ -422,7 +424,7 @@ class Merge:
                 self.n["project_files_merged"] += 1
 
     def history(self, tag):
-        """The other copy's runs since the copies parted, with their changes (paper IDs as this copy numbers them)."""
+        """The other copy's runs since the copies parted, with their changes (source IDs as this copy numbers them)."""
         if self.dry or "runs" not in self.other.tables:
             return 0
         from _publish import ensure_state
@@ -441,15 +443,15 @@ class Merge:
                 r = {**dict(r), "uid": dict(r).get("uid") if "uid" in theirs else None}
                 if key(r) in have:
                     continue
-                rid = con.execute("INSERT INTO runs(at, step, topics, added, updated, removed, papers, note, uid) "
+                rid = con.execute("INSERT INTO runs(at, step, topics, added, updated, removed, sources, note, uid) "
                                   "VALUES (?,?,?,?,?,?,?,?,?)", (r["at"], r["step"], r["topics"], r["added"], r["updated"],
-                                                                 r["removed"], r["papers"],
+                                                                 r["removed"], r["sources"],
                                                                  ((r["note"] or "") + f" [from {tag}]").strip(),
                                                                  r["uid"])).lastrowid
                 for c in self.other.con.execute("SELECT * FROM changes WHERE run_id=?", (r["id"],)):
-                    pid = self.id_map.get(c["paper_id"])
-                    if pid is None and c["old"]:            # a paper the other copy has since merged away
-                        hit = con.execute("SELECT id FROM papers WHERE id=? AND doi=?", (c["paper_id"], c["old"])).fetchone()
+                    pid = self.id_map.get(c["source_id"])
+                    if pid is None and c["old"]:            # a source the other copy has since merged away
+                        hit = con.execute("SELECT id FROM sources WHERE id=? AND doi=?", (c["source_id"], c["old"])).fetchone()
                         pid = hit[0] if hit else None
                     con.execute("INSERT INTO changes VALUES (?,?,?,?,?,?)",
                                 (rid, pid, c["change"], c["field"], c["old"], c["new"]))
@@ -460,14 +462,14 @@ class Merge:
 
 def main():
     ap = add_project_arg(argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter))
-    ap.add_argument("--from", dest="src", required=True, help="the other copy's papers.db")
-    ap.add_argument("--files", help="the other project's folder (it holds publications/): copy in its PDFs and SI")
+    ap.add_argument("--from", dest="src", required=True, help="the other copy's index.db")
+    ap.add_argument("--files", help="the other project's folder (it holds sources/): copy in its PDFs and SI")
     ap.add_argument("--dry-run", action="store_true", help="say what would change; write nothing")
     a = ap.parse_args()
     proj = Project(a.project)
     src = Path(a.src).resolve()
     if src == proj.db.resolve():
-        die("--from is this project's own papers.db")
+        die("--from is this project's own index.db")
     led = Ledger(proj)
     if not a.dry_run:
         led.export()                                   # this copy's own pending changes first, as their own run
@@ -479,10 +481,10 @@ def main():
     res = {"from": str(src), "dry_run": a.dry_run, **dict(sorted(m.n.items()))}
     if not a.dry_run:
         led.export()
-        tag = f"{src.parent.parent.name}/{src.name}" if src.parent.name == "publications" else src.name
+        tag = f"{src.parent.parent.name}/{src.name}" if src.parent.name in ("sources", "publications") else src.name
         con = sqlite3.connect(str(proj.db))
         last = con.execute("SELECT MAX(id) FROM runs").fetchone()[0]
-        note = (f"merged {tag}: {m.n['added']} papers added, {m.n['updated']} updated, {m.n['merged_here']} merged "
+        note = (f"merged {tag}: {m.n['added']} sources added, {m.n['updated']} updated, {m.n['merged_here']} merged "
                 f"here, {m.n['files_imported']} downloads copied in")
         with con:
             if last and con.execute("SELECT step FROM runs WHERE id=?", (last,)).fetchone()[0] == "merge_db":
@@ -491,7 +493,7 @@ def main():
         res["runs_from_other"] = m.history(tag)
         res["database"] = led.last_publish
         res["vector_store"] = after_step(proj, led)     # downloads copied in (--files) are read and embedded
-        res["next"] = "dedup.py --apply (it merges papers the two copies indexed under different keys)"
+        res["next"] = "dedup.py --apply (it merges sources the two copies indexed under different keys)"
     print(json.dumps(res, default=str))
 
 

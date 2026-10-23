@@ -1,15 +1,15 @@
-"""Bring the paper database up to date, write a topic's index files, or export a filtered subset.
+"""Bring the source database up to date, write a topic's index files, or export a filtered subset.
 
-Every step already publishes the papers it changed into publications/papers.db, in place (_publish.py); run this
+Every step already publishes the sources it changed into sources/index.db, in place (_publish.py); run this
 after manual changes, to write a topic's index CSVs (only on request), or to export a subset someone asked for.
 
-  python3 -I export.py                                  # publish any pending change into publications/papers.db
-  python3 -I export.py --topic co2rr --csv              # also write publications/co2rr/index/*.csv
-  python3 -I export.py --rebuild                        # fallback: rebuild papers.db from the ledger (history kept)
+  python3 -I export.py                                  # publish any pending change into sources/index.db
+  python3 -I export.py --topic co2rr --csv              # also write sources/co2rr/index/*.csv
+  python3 -I export.py --rebuild                        # fallback: rebuild index.db from the ledger (history kept)
   python3 -I export.py --name cu-2020s --topic co2rr --subject "Copper catalysts" --year 2020-2026 \\
-          --access OA,OA+ND --format csv                # -> publications/exports/cu-2020s.csv
+          --access OA,OA+ND --format csv                # -> sources/exports/cu-2020s.csv
   python3 -I export.py --set-extracted 12,57 --topic co2rr --kg co2rr-kg --value extracted [--note "..."]
-Filters (all optional, combined with AND): --topic (in scope or unscreened; never errata or retracted papers),
+Filters (all optional, combined with AND): --topic (in scope or unscreened; never errata or retracted sources),
 --subject (matches Topic A/B/C AND related topics; label or id; comma = any), --main-only (Topic A/B/C only), --venue (substring; comma = any), --year 2018-2026 / 2020, --access,
 --doc-type (article,review,preprint,patent,dataset ...), --min-relevance N, --downloaded yes|no, --text "fts query",
 --author (substring). Formats: csv (index columns), jsonl, bib (BibTeX), ris.
@@ -30,14 +30,14 @@ from _topics import Vocab
 
 def query_ids(proj, a, vocab):
     con = sqlite3.connect(f"file:{proj.db}?mode=ro", uri=True)
-    where, args = ["COALESCE(p.is_non_paper,0)=0 AND COALESCE(p.is_retracted,0)=0"], []   # never errata or retracted
+    where, args = ["COALESCE(p.is_notice,0)=0 AND COALESCE(p.is_retracted,0)=0"], []   # never errata or retracted
     if a.topic:
-        where.append("p.id IN (SELECT paper_id FROM paper_collections WHERE collection=? AND COALESCE(in_scope,1)=1"
+        where.append("p.id IN (SELECT source_id FROM source_collections WHERE collection=? AND COALESCE(in_scope,1)=1"
                      + (" AND relevance>=?" if a.min_relevance is not None else "") + ")")
         args += [a.topic] + ([a.min_relevance] if a.min_relevance is not None else [])
     if a.subject:
         terms = [vocab.resolve(s) or s for s in a.subject.split(",") if s.strip()]
-        where.append(f"p.id IN (SELECT paper_id FROM paper_subjects WHERE (term IN ({','.join('?' * len(terms))}) "
+        where.append(f"p.id IN (SELECT source_id FROM source_subjects WHERE (term IN ({','.join('?' * len(terms))}) "
                      f"OR label IN ({','.join('?' * len(terms))}))" + (" AND kind='main'" if a.main_only else "") + ")")
         args += terms + [vocab.label(t) for t in terms]
     if a.venue:
@@ -66,9 +66,9 @@ def query_ids(proj, a, vocab):
         where.append("p.authors LIKE ?")
         args.append(f"%{a.author}%")
     if a.text:
-        where.append("p.id IN (SELECT rowid FROM papers_fts WHERE papers_fts MATCH ?)")
+        where.append("p.id IN (SELECT rowid FROM sources_fts WHERE sources_fts MATCH ?)")
         args.append(a.text)
-    sql = "SELECT p.id FROM papers p WHERE " + " AND ".join(where) + " ORDER BY p.year DESC, p.id"
+    sql = "SELECT p.id FROM sources p WHERE " + " AND ".join(where) + " ORDER BY p.year DESC, p.id"
     return [r[0] for r in con.execute(sql, args)]
 
 
@@ -86,7 +86,7 @@ def write_subset(proj, led, ids, a, vocab):
     subj = led._subject_map()
     ext = led._extraction_map()
     tp = {}
-    for r in led.q("SELECT paper_id, topic FROM paper_topics ORDER BY topic"):
+    for r in led.q("SELECT source_id, topic FROM source_topics ORDER BY topic"):
         tp.setdefault(r[0], []).append(r[1])
     rows = []
     for pid in ids:
@@ -134,7 +134,7 @@ def write_subset(proj, led, ids, a, vocab):
 def main():
     ap = add_project_arg(argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter))
     ap.add_argument("--topic")
-    ap.add_argument("--name", help="export name -> publications/exports/<name>.<format>; omit to just refresh")
+    ap.add_argument("--name", help="export name -> sources/exports/<name>.<format>; omit to just refresh")
     ap.add_argument("--subject")
     ap.add_argument("--main-only", action="store_true")
     ap.add_argument("--venue")
@@ -146,12 +146,12 @@ def main():
     ap.add_argument("--author")
     ap.add_argument("--text")
     ap.add_argument("--format", choices=["csv", "jsonl", "bib", "ris"], default="csv")
-    ap.add_argument("--set-extracted", help="comma list of paper IDs (records a curation result by hand)")
+    ap.add_argument("--set-extracted", help="comma list of source IDs (records a curation result by hand)")
     ap.add_argument("--kg", help="knowledge-graph / schema name for --set-extracted")
     ap.add_argument("--value", help="extracted | rejected | failed | no_data | none (removes the record)")
     ap.add_argument("--note")
     ap.add_argument("--csv", action="store_true", help="write the index CSVs of --topic (or of every topic)")
-    ap.add_argument("--rebuild", action="store_true", help="rebuild papers.db from the ledger, keeping its history")
+    ap.add_argument("--rebuild", action="store_true", help="rebuild index.db from the ledger, keeping its history")
     a = ap.parse_args()
     proj = Project(a.project)
     led = Ledger(proj)
@@ -163,7 +163,7 @@ def main():
         with led.tx():
             for i in ids:
                 if a.value == "none":
-                    led.x("DELETE FROM extractions WHERE paper_id=? AND topic=? AND kg=?", (i, a.topic, a.kg))
+                    led.x("DELETE FROM extractions WHERE source_id=? AND topic=? AND kg=?", (i, a.topic, a.kg))
                 else:
                     led.set_extraction(i, a.topic, a.kg, a.value, date=today(), note=a.note)
         led.export(topics=[a.topic])
@@ -182,7 +182,7 @@ def main():
         led.export()
     ids = query_ids(proj, a, vocab)
     path, n = write_subset(proj, led, ids, a, vocab)
-    print(json.dumps({"export": proj.rel(path), "papers": n}))
+    print(json.dumps({"export": proj.rel(path), "sources": n}))
 
 
 if __name__ == "__main__":

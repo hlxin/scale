@@ -1,7 +1,7 @@
 """Shared API answer caches (library module — not run directly): .scripts/enrich/<api>.sqlite, one row per DOI,
 PMCID or arXiv id, shared by every topic of the project.
 
-On disk, not in memory: a project that classifies millions of papers over many topics reads only the answers a run
+On disk, not in memory: a project that classifies millions of sources over many topics reads only the answers a run
 needs. An older .scripts/enrich/<api>.jsonl cache is imported once and left where it is.
 """
 import datetime as _dt
@@ -11,7 +11,7 @@ import threading
 
 from _common import jsonl_iter, log, now_iso
 
-MEMO_MAX = 50000   # recently read answers kept in memory (a decision reads each paper's answers several times)
+MEMO_MAX = 50000   # recently read answers kept in memory (a decision reads each source's answers several times)
 
 
 class Cache:

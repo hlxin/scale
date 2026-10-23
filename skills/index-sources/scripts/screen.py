@@ -1,17 +1,17 @@
-"""Index step — relevance screening (curation) of a topic's papers and their Topic A/B/C, BEFORE anything is downloaded.
+"""Index step — relevance screening (curation) of a topic's sources and their Topic A/B/C, BEFORE anything is downloaded.
 
 Methods (config['screening']['method']):
   claude    Claude subagents score batches of title+abstract:   prep -> next N -> (subagents) -> merge
   api       an OpenAI-compatible endpoint scores the batches:  prep -> api -> merge
   keywords  deterministic include/exclude term list (.scripts/<topic>/keywords.json): keywords
-  none      no screening; every paper that passed the topic gate stays in scope: none
+  none      no screening; every source that passed the topic gate stays in scope: none
 Every method writes Relevance (0-5, blank for none), a short note, and the in/out decision (score >= threshold,
 default 3) into the ledger; a manual decision (an imported list's, import_list.py --scope file / in) is never
-re-scored. claude / api also choose each paper's three main topics from the topic vocabulary
+re-scored. claude / api also choose each source's three main topics from the topic vocabulary
 (the topic vocabulary, _topics.vocab_path, + .scripts/vocab_custom.json); keywords / none keep the deterministic vocabulary topics that
-build_list / classify_access assigned (papers without topics get them; topics.py assign redoes them all after a
-vocabulary change). keywords and none work block by block (20,000 papers), so a topic of millions takes minutes.
-Then the topic's index CSVs and publications/papers.db are refreshed.
+build_list / classify_access assigned (sources without topics get them; topics.py assign redoes them all after a
+vocabulary change). keywords and none work block by block (20,000 sources), so a topic of millions takes minutes.
+Then the topic's index CSVs and sources/index.db are refreshed.
 
 usage:
   python3 -I screen.py --topic <slug> prep [--stage fulltext] [--size N]
@@ -21,8 +21,8 @@ usage:
   python3 -I screen.py --topic <slug> keywords [--no-export]
   python3 -I screen.py --topic <slug> none [--no-export]
   python3 -I screen.py --topic <slug> status
-Stage `abstract` (default) screens papers not yet screened; stage `fulltext` re-scores DOWNLOADED papers from the
-text of PDF pages 1-3 and moves papers that fall below the threshold to .scripts/<topic>/out_of_scope/.
+Stage `abstract` (default) screens sources not yet screened; stage `fulltext` re-scores DOWNLOADED sources from the
+text of PDF pages 1-3 and moves sources that fall below the threshold to .scripts/<topic>/out_of_scope/.
 """
 import argparse
 import json
@@ -47,7 +47,7 @@ from _topics import Vocab, apply_vocab
 
 SKILL = Path(__file__).resolve().parents[1]
 DEFAULT_SIZE = {"claude": 100, "api": 25}
-BLOCK = 20000           # papers per transaction in keywords / none (a topic may hold millions)
+BLOCK = 20000           # sources per transaction in keywords / none (a topic may hold millions)
 NOT_MANUAL = "COALESCE(t.relevance_method, '') != 'manual'"     # a person's decision: never re-scored
 
 
@@ -73,9 +73,9 @@ def render_instructions(proj, slug, cfg, stage):
     tpl = (SKILL / "templates" / "screen_instructions.md").read_text()
     basis = ("Each item has `title`, `abstract` (may be empty), `venue` and `year`. Judge from these only."
              if stage == "abstract" else
-             "Each item has `title` and `text` = the extracted text of the paper's pages 1-3. If `text_quality` is "
+             "Each item has `title` and `text` = the extracted text of the source's pages 1-3. If `text_quality` is "
              "\"poor\" or the text is garbled, read the PDF itself: Read(file_path=<pdf_path>, pages=\"1-3\"). "
-             "Score 0 if the text is clearly a different paper than the title.")
+             "Score 0 if the text is clearly a different source than the title.")
     vocab = Vocab(proj)
     out = (tpl.replace("{{CRITERIA}}", criteria_text(proj, slug, cfg)).replace("{{BASIS}}", basis)
            .replace("{{READ_PDF}}", "" if stage == "abstract" else ", and a PDF from the batch when its text is poor")
@@ -110,14 +110,14 @@ def page_text(path, pages=3, cap=9000):
 
 
 def prep_rows(led, slug, stage):
-    """The papers to batch, most cited first (abstract stage), read 900 at a time (a topic may hold millions)."""
+    """The sources to batch, most cited first (abstract stage), read 900 at a time (a topic may hold millions)."""
     if stage == "abstract":
-        ids = [r[0] for r in led.q("SELECT p.id FROM paper_topics t JOIN papers p ON p.id = t.paper_id WHERE t.topic = ? "
+        ids = [r[0] for r in led.q("SELECT p.id FROM source_topics t JOIN sources p ON p.id = t.source_id WHERE t.topic = ? "
                                    "AND t.relevance IS NULL AND p.is_erratum = 0 "
                                    "ORDER BY COALESCE(p.cited_by, 0) DESC, t.rowid", (slug,))]
         cond = ""
     else:
-        ids = [r[0] for r in led.q("SELECT t.paper_id FROM paper_topics t JOIN papers p ON p.id = t.paper_id "
+        ids = [r[0] for r in led.q("SELECT t.source_id FROM source_topics t JOIN sources p ON p.id = t.source_id "
                                    "WHERE t.topic = ? AND p.downloaded = 1 AND t.path IS NOT NULL AND "
                                    "(t.relevance_method IS NULL OR t.relevance_method NOT LIKE '%fulltext%') "
                                    f"AND {NOT_MANUAL} "
@@ -203,7 +203,7 @@ def parse_out(text):
 
 
 def apply_fulltext_move(proj, slug, led, pid, row_path):
-    """Score fell below threshold after reading the paper: move its files out of publications/ (never deleted)."""
+    """Score fell below threshold after reading the source: move its files out of sources/ (never deleted)."""
     src = proj.root / row_path
     dst_dir = proj.topic_dir(slug) / "out_of_scope"
     dst_dir.mkdir(parents=True, exist_ok=True)
@@ -263,7 +263,7 @@ def merge(proj, slug, cfg, led, stage, export=True):
         merged += 1
     if export:
         led.export(topics=[slug])
-    res = {"stage": stage, "batches_merged": merged, "papers_scored": scored, "unparsed_items": sum(bad.values()),
+    res = {"stage": stage, "batches_merged": merged, "sources_scored": scored, "unparsed_items": sum(bad.values()),
            "moved_out_of_scope": moved, "proposed_new_topics": dict(new_terms.most_common(20))}
 
     def fn(st):
@@ -323,7 +323,7 @@ def run_api(proj, slug, cfg, stage):
         die("config['screening'] needs base_url and model for the api method")
     key = api_key(proj, scfg)
     if not key:
-        die("no API key: add `llm_api_key: <key>` to ~/.paper-acquisition/keys.txt (see the skill's README.md), or "
+        die("no API key: add `llm_api_key: <key>` to ~/.scale/sources/keys.txt (see the skill's README.md), or "
             "set the env var named in screening.key_env")
     d = qdir(proj, slug, stage)
     instr = (d / "instructions.md").read_text() if (d / "instructions.md").exists() else render_instructions(proj, slug, cfg, stage).read_text()
@@ -334,7 +334,7 @@ def run_api(proj, slug, cfg, stage):
 
     def one(f):
         items = json.load(open(f))
-        msgs = [{"role": "system", "content": "You screen scientific papers for a literature collection. Follow the "
+        msgs = [{"role": "system", "content": "You screen scientific sources for a literature collection. Follow the "
                                               "instructions exactly and answer with JSON Lines only."},
                 {"role": "user", "content": instr + "\n\n## Items\n" +
                  "\n".join(json.dumps(it, ensure_ascii=False) for it in items) +
@@ -369,7 +369,7 @@ def _show(term):
 
 class _Term:
     """One keyword: its regex, the term as written, and the words any match must contain (a cheap test that skips the
-    regex for most papers; None for 're:' regexes, which always run)."""
+    regex for most sources; None for 're:' regexes, which always run)."""
     __slots__ = ("rx", "raw", "lits")
 
     def __init__(self, rx, raw):
@@ -385,7 +385,7 @@ class _Term:
 
 
 class KeywordScorer:
-    """keywords.json -> relevance 0-5 and a short note per paper; a topic of millions of papers is scored in minutes."""
+    """keywords.json -> relevance 0-5 and a short note per source; a topic of millions of sources is scored in minutes."""
 
     def __init__(self, kw):
         raw_groups = [g for g in kw.get("include_groups") or [] if g]
@@ -432,14 +432,14 @@ class KeywordScorer:
 
 
 def topic_count(led, slug, where=""):
-    return led.q("SELECT COUNT(*) FROM paper_topics t JOIN papers p ON p.id = t.paper_id WHERE t.topic = ? " + where,
+    return led.q("SELECT COUNT(*) FROM source_topics t JOIN sources p ON p.id = t.source_id WHERE t.topic = ? " + where,
                  (slug,))[0][0]
 
 
 def progress(label, done, total, t0):
     if total > BLOCK:
         el = time.time() - t0
-        log(f"{label}: {done:,}/{total:,} papers ({el / 60:.1f} min, ~{el / max(done, 1) * (total - done) / 60:.0f} min left)")
+        log(f"{label}: {done:,}/{total:,} sources ({el / 60:.1f} min, ~{el / max(done, 1) * (total - done) / 60:.0f} min left)")
 
 
 def run_keywords(proj, slug, cfg, led, export=True):
@@ -452,14 +452,14 @@ def run_keywords(proj, slug, cfg, led, export=True):
         die("keywords.json needs at least one include group")
     cnt, changed, vocab, done, t0 = Counter(), 0, Vocab(proj), 0, time.time()
     total = topic_count(led, slug, f"AND p.is_erratum = 0 AND {NOT_MANUAL}")
-    for rows in led.iter_topic(slug, f"AND p.is_erratum = 0 AND {NOT_MANUAL}", chunk=BLOCK):   # non-papers: never scored
+    for rows in led.iter_topic(slug, f"AND p.is_erratum = 0 AND {NOT_MANUAL}", chunk=BLOCK):   # notices: never scored
         with led.tx():
             for r in rows:
                 s, note = sc.score(r.get("title"), r.get("abstract"))
                 led.set_topic(r["id"], slug, relevance=s, relevance_note=note, relevance_method="keywords",
                               in_scope=int(s >= thr))
                 cnt[s] += 1
-        apply_vocab(led, vocab, rows, only_missing=True)     # papers that have no topics yet
+        apply_vocab(led, vocab, rows, only_missing=True)     # sources that have no topics yet
         changed += getattr(apply_vocab, "changed", 0)
         done += len(rows)
         progress("keywords", done, total, t0)
@@ -478,13 +478,13 @@ def run_none(proj, slug, led, export=True):
         with led.tx():
             for r in rows:
                 led.set_topic(r["id"], slug, relevance=None, relevance_note=None, relevance_method="none", in_scope=1)
-        apply_vocab(led, vocab, rows, only_missing=True)     # papers that have no topics yet
+        apply_vocab(led, vocab, rows, only_missing=True)     # sources that have no topics yet
         n += len(rows)
         progress("none", n, total, t0)
     if export:
         led.export(topics=[slug])
-    update_state(proj, slug, lambda st: st.setdefault("screen", {}).update({"abstract": {"method": "none", "papers": n}}))
-    print(json.dumps({"method": "none", "papers_kept_in_scope": n}))
+    update_state(proj, slug, lambda st: st.setdefault("screen", {}).update({"abstract": {"method": "none", "sources": n}}))
+    print(json.dumps({"method": "none", "sources_kept_in_scope": n}))
 
 
 def status(proj, slug, led, stage):
@@ -497,12 +497,12 @@ def status(proj, slug, led, stage):
         "SELECT COUNT(*), COUNT(t.relevance), "
         "COALESCE(SUM(t.in_scope = 1 AND COALESCE(p.is_erratum, 0) = 0 AND COALESCE(p.retracted, 0) = 0), 0), "
         "COALESCE(SUM(t.in_scope = 0 AND COALESCE(p.is_erratum, 0) = 0), 0) "
-        "FROM paper_topics t JOIN papers p ON p.id = t.paper_id WHERE t.topic = ?", (slug,))[0]
+        "FROM source_topics t JOIN sources p ON p.id = t.source_id WHERE t.topic = ?", (slug,))[0]
     print(json.dumps({"stage": stage, "pending_batches": len(pend),
                       "dispatched_waiting": len([p for p in pend if p in sent and p not in outs]),
                       "undispatched": len([p for p in pend if p not in sent]),
                       "outputs_ready_to_merge": len([p for p in pend if p in outs]),
-                      "papers": papers, "screened": screened, "in_scope": in_scope, "out_of_scope": out_scope}))
+                      "sources": papers, "screened": screened, "in_scope": in_scope, "out_of_scope": out_scope}))
 
 
 def main():
@@ -513,7 +513,7 @@ def main():
     ap.add_argument("--stage", choices=["abstract", "fulltext"], default="abstract")
     ap.add_argument("--size", type=int, default=None, help="items per batch (default 100 claude / 25 api)")
     ap.add_argument("--no-export", action="store_true",
-                    help="keywords / none / merge: do not refresh the index CSVs and papers.db (export.py later)")
+                    help="keywords / none / merge: do not refresh the index CSVs and index.db (export.py later)")
     a = ap.parse_args()
     proj = Project(a.project)
     cfg = load_config(proj, a.topic)

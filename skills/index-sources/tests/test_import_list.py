@@ -1,7 +1,7 @@
 """import_list.py with patent numbers and SCALE corpus lists: a patent number in its usual forms gives one patent row
 (keyed by office and number, the row a patent search finds), a corpus list's statuses become manual scope decisions
 that later screening keeps, two patents of one office's series are never merged however alike they look, and
-topics.py set --add puts a topic in front of a paper's own.
+topics.py set --add puts a topic in front of a source's own.
 
     python -m pytest tests          (from the skill folder; standard library and pytest only)
 """
@@ -101,7 +101,7 @@ def test_a_scale_corpus_list_keeps_its_statuses_as_manual_decisions(project):
     assert (b["new_in_ledger"], b["manual_decisions"]) == (7, 6)
     led = ledger(proj)
     rows = {r["key"]: dict(r) for r in led.q("SELECT p.*, t.relevance, t.relevance_note, t.relevance_method, t.in_scope "
-                                              "FROM papers p JOIN paper_topics t ON t.paper_id=p.id AND t.topic='t'")}
+                                              "FROM sources p JOIN source_topics t ON t.source_id=p.id AND t.topic='t'")}
     us = rows["patent:US1625924"]
     assert (us["doc_type"], us["journal"], us["publisher"], us["year"]) == ("patent", "US patent",
                                                                             "Roessler & Hasslacher Chemical", 1927)
@@ -119,8 +119,8 @@ def test_a_scale_corpus_list_keeps_its_statuses_as_manual_decisions(project):
     assert by_title["A note on zinc chromite catalysts and their reduction"]["relevance_method"] is None
     run("screen.py", proj, "--topic", "t", "keywords")          # would score every title out of scope
     led = ledger(proj)
-    methods = dict(led.q("SELECT p.key, t.relevance_method || ':' || t.in_scope FROM papers p JOIN paper_topics t "
-                         "ON t.paper_id=p.id AND t.topic='t'"))
+    methods = dict(led.q("SELECT p.key, t.relevance_method || ':' || t.in_scope FROM sources p JOIN source_topics t "
+                         "ON t.source_id=p.id AND t.topic='t'"))
     assert methods["patent:US1625924"] == "manual:1" and methods["patent:US3285948"] == "manual:0"
     assert sorted(v for v in methods.values() if not v.startswith("manual")) == ["keywords:0"]
 
@@ -133,8 +133,8 @@ def test_the_same_list_into_another_topic_finds_the_same_rows(project):
     b = run("build_list.py", proj, "--topic", "u", "--run", "manual")
     assert (b["new_in_ledger"], b["already_in_ledger"], b["manual_decisions"]) == (0, 7, 7)
     led = ledger(proj)
-    assert tuple(led.q("SELECT COUNT(*), SUM(in_scope) FROM paper_topics WHERE topic='u' AND relevance_method='manual'")[0]) == (7, 7)
-    assert led.q("SELECT in_scope FROM paper_topics t JOIN papers p ON p.id=t.paper_id "
+    assert tuple(led.q("SELECT COUNT(*), SUM(in_scope) FROM source_topics WHERE topic='u' AND relevance_method='manual'")[0]) == (7, 7)
+    assert led.q("SELECT in_scope FROM source_topics t JOIN sources p ON p.id=t.source_id "
                  "WHERE p.key='patent:US3285948' AND t.topic='t'")[0][0] == 0      # topic t keeps its own decision
 
 
@@ -155,7 +155,7 @@ def test_two_patents_of_one_series_are_never_merged(project):
     assert {kind for kind, _, _ in pairs} == {"patent_family"}
 
 
-def test_set_add_puts_a_topic_in_front_of_the_papers_own(project):
+def test_set_add_puts_a_topic_in_front_of_the_sources_own(project):
     proj, corpus = project
     run("import_list.py", proj, "--topic", "t", "--file", corpus, "--scope", "file")
     run("build_list.py", proj, "--topic", "t", "--run", "manual")

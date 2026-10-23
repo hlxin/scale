@@ -4,7 +4,7 @@ version: 0.3.0
 description: Curate a corpus into scale-catal documents (node-link JSON) under the schema version they pin — one publication, one data file, or many sources frozen together — preserving source locations, reported values, units, explicit missingness and evidential status, with verbatim evidence on every statement; many sources run one subagent per source with a second reading and resumable state; record gaps instead of changing the schema.
 scale_release: ">v0.2.0"
 inputs:
-  - The corpus - one publication (a DOI, a PDF, a text), one data file (a CSV, an instrument or lab-notebook export) with its column dictionary, or a frozen corpus manifest whose included sources have their PDF (and SI) on disk (index-sources' freeze_corpus.py writes one per topic)
+  - The corpus - one publication (a DOI, a PDF, a text), one data file (a CSV, an instrument or lab-notebook export) with its column dictionary, or a frozen corpus manifest whose included sources have their PDF (and SI) on disk (index-sources' freeze_corpus.py freezes one; fetch-corpus fetches its files)
   - Where licensing permits, each source's text for verbatim checks
   - The checklist the documents follow (catalysis - the catalysis schema and its one checklist) and the schema version to pin
   - For project data, who owns it and who may see it (the project and the access level its owners set)
@@ -261,7 +261,7 @@ Never record `± 0`: keep the printed text in `as_reported` and leave `uncertain
 - **Rights follow the copy read.** Read the licence from the copy you read (its first page, the
   publisher's article page), never from aggregator metadata or open-access colour, and say where in
   `rights.yaml` `basis`. Rights follow the text version read (`text_version`). Supporting information
-  belongs to its paper's Source.
+  belongs to its source's Source.
 - **Reinstatement.** A notice that reverses a retraction or an expression of concern is a Source of
   its own with an `UPDATES` link once the schema has `update_type: reinstatement` (planned: domain/ROADMAP.md);
   until then, record it in the retracted source's `unmodeled` list (with the notice's date and
@@ -289,7 +289,7 @@ moves it to the current one when asked.
 
 ## A data file
 
-A data file is a source like a paper, with two differences: its rows are the evidence, and its owners,
+A data file is a source like a source, with two differences: its rows are the evidence, and its owners,
 not a publisher, decide who may see it. The schema defines what a completed record means; the file
 and its column dictionary determine which parts can be populated.
 
@@ -297,7 +297,7 @@ and its column dictionary determine which parts can be populated.
    `availability`, `version`, `uri` (where it lives), `sha256` (of the exact file read), `media_type`,
    `data_schema` (the column dictionary: each column, its meaning, unit and how a missing value is
    written; or where that dictionary is and its digest) and `licence`. A published dataset may also be
-   reported in a Source (its data paper): give the Dataset an evidence item citing that Source (`source`,
+   reported in a Source (its data source): give the Dataset an evidence item citing that Source (`source`,
    a `locator` such as its data availability statement, a short `quote`), and derive its `REPORTED_IN`
    link from that evidence, as for any other record; a `REPORTED_IN` link that no evidence item backs
    is a validation error.
@@ -338,8 +338,8 @@ and estimated fields typed.
 
 ## Many sources
 
-A run curates every included source of a frozen corpus (index-sources' `freeze_corpus.py`, or any manifest `scale
-corpus check` accepts) by the procedure above, one subagent per source, with a second reading of each document by
+A run curates every included source of a frozen corpus (index-sources' `freeze_corpus.py`, its files fetched by
+fetch-corpus, or any manifest `scale corpus check` accepts) by the procedure above, one subagent per source, with a second reading of each document by
 another model and scripts that keep the books (`scripts/curate_run.py`): ask which model curates and who reads, prepare
 one `scale source start` folder per source, pilot 5 sources, then curate, check, read a second time and fix until every
 source is settled, record the results in the index, and finish. Read [references/runs.md](references/runs.md) before

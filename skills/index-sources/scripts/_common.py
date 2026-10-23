@@ -1,18 +1,18 @@
 """Shared helpers for the index-sources scripts (library module — not run directly).
 
 Project layout (all paths relative to the project root = the directory the scripts run from):
-  publications/papers.db                              the paper database (SQLite snapshot, all topics) — open it with
+  sources/index.db                              the source database (SQLite snapshot, all topics) — open it with
                                                       any SQLite tool; rebuilt by every step from the working ledger
-  publications/<topic>/index/{OA,OA+ND,Free-to-read,Paywalled,merged,excluded}.csv
+  sources/<topic>/index/{OA,OA+ND,Free-to-read,Paywalled,merged,excluded}.csv
                                                       the topic's index, one CSV per access type + all of them merged
-  publications/<topic>/papers/<ACCESS>/<ID>.pdf       downloaded papers, ACCESS in OA, OA+ND, Free-to-read, Paywalled
-  publications/<topic>/papers/SI/<ACCESS>/<ID>_SI*    supplementary files, same access folder as the paper
-  publications/exports/                               filtered subsets the user asked for (export.py --name ...)
+  sources/<topic>/files/<ACCESS>/<ID>.pdf       downloaded sources, ACCESS in OA, OA+ND, Free-to-read, Paywalled
+  sources/<topic>/files/SI/<ACCESS>/<ID>_SI*    supplementary files, same access folder as the source
+  sources/exports/                               filtered subsets the user asked for (export.py --name ...)
   .scripts/ledger.sqlite                              working ledger (source of truth; WAL mode)
   .scripts/<topic>/                                   per-topic config, queries, raw hits, caches, state, logs
   .scripts/ezproxy/                                   this project's EZproxy outcomes log
-  ~/.paper-acquisition/keys.txt                       API keys, one `service: key` per line (README.md)
-  ~/.paper-acquisition/ezproxy/                       machine-wide EZproxy config + limiter state (one per computer:
+  ~/.scale/sources/keys.txt                       API keys, one `service: key` per line (README.md)
+  ~/.scale/sources/ezproxy/                       machine-wide EZproxy config + limiter state (one per computer:
                                                       the limits protect the institution's IP, whatever the project)
 """
 import contextlib
@@ -47,7 +47,7 @@ LICENSE_LABEL = {"cc-by": "CC BY", "cc-by-sa": "CC BY-SA", "cc-by-nc": "CC BY-NC
                  "publisher-specific": "Publisher terms", "other-oa": "Free to read (no license)",
                  "all-rights-reserved": "All rights reserved", "none": "None"}
 
-SOURCE_LABEL = {"openalex": "OpenAlex", "crossref": "Crossref", "crossref_preprints": "Crossref (preprint servers)",
+DATABASE_LABEL = {"openalex": "OpenAlex", "crossref": "Crossref", "crossref_preprints": "Crossref (preprint servers)",
                 "s2": "Semantic Scholar", "europepmc": "Europe PMC", "europepmc_patents": "Europe PMC (patents)",
                 "pmc": "PubMed Central", "openaire": "OpenAIRE", "openaire_data": "OpenAIRE (datasets)", "osti": "OSTI",
                 "arxiv": "arXiv", "doaj": "DOAJ", "hal": "HAL", "zenodo": "Zenodo", "figshare": "Figshare",
@@ -59,7 +59,7 @@ SOURCE_LABEL = {"openalex": "OpenAlex", "crossref": "Crossref", "crossref_prepri
                 "citations": "Citation chasing (OpenAlex)", "manual": "Imported list", "legacy": "Previous run",
                 "scale": "SCALE corpus list"}
 
-# Document types (papers.doc_type). Datasets and software are indexed but never downloaded.
+# Document types (sources.doc_type). Datasets and software are indexed but never downloaded.
 DOC_TYPES = ["article", "review", "preprint", "conference-paper", "book-chapter", "book", "thesis", "report", "patent",
              "dataset", "software", "editorial", "letter", "erratum", "other"]
 NOT_DOWNLOADED_TYPES = {"dataset", "software"}
@@ -74,7 +74,7 @@ _DOC_RULES = [  # (doc_type, regex on the source's raw type) — first match win
     ("conference-paper", r"conference|proceedings|^comm$|poster|presentation|meeting.abstract|^conf"),
     ("book-chapter", r"chapter|book.?section|^section$|^couv$|reference.entry|^part$"),
     ("book", r"^book$|monograph|edited.book|^ouv$|^books$"),
-    ("report", r"report|memorandum|deliverable|technical.note|technicalnote|standard|white.?paper|^tm$"),
+    ("report", r"report|memorandum|deliverable|technical.note|technicalnote|standard|white.?source|^tm$"),
     ("editorial", r"editorial|news|paratext|^other.?editorial|biography|obituary"),
     ("letter", r"letter|comment|correspondence|^note$"),
     ("article", r"article|journal|^art$|^text$|^study$|research|^publication$|reprint|^jour$|communication"),
@@ -118,18 +118,31 @@ def slugify(text, maxlen=60):
 
 
 # ------------------------------------------------------------------ paths
-GLOBAL_DIR = Path(os.environ.get("PAPER_ACQ_HOME") or (Path.home() / ".paper-acquisition"))
+def global_dir():
+    """The machine-wide folder of SCALE's literature skills (keys.txt, ezproxy/): $SCALE_SOURCES_HOME, else
+    ~/.scale/sources, else the folder the skill used under its earlier name (~/.scale/sources, $PAPER_ACQ_HOME)
+    while the new one does not exist yet."""
+    env = os.environ.get("SCALE_SOURCES_HOME") or os.environ.get("PAPER_ACQ_HOME")
+    if env:
+        return Path(env)
+    new, old = Path.home() / ".scale" / "sources", Path.home() / ".paper-acquisition"
+    return old if old.is_dir() and not new.exists() else new
+
+
+GLOBAL_DIR = global_dir()
 
 
 class Project:
-    """All paths of one project (the folder that holds publications/ and .scripts/)."""
+    """All paths of one project (the folder that holds sources/ and .scripts/)."""
 
     def __init__(self, root=None):
         self.root = Path(root or os.getcwd()).resolve()
-        self.pub = self.root / "publications"
+        from _upgrade import upgrade_project
+        upgrade_project(self.root)                # a project made before the sources were so named: once, in place
+        self.pub = self.root / "sources"
         self.scr = self.root / ".scripts"
         self.ledger_db = self.scr / "ledger.sqlite"
-        self.db = self.pub / "papers.db"
+        self.db = self.pub / "index.db"
         self.exports = self.pub / "exports"
         self.logs = self.scr / "logs"
         self.tmp = self.scr / "tmp"
@@ -145,10 +158,10 @@ class Project:
         return self.pub / slug / "index"
 
     def pdf_dir(self, slug, access):
-        return self.pub / slug / "papers" / access
+        return self.pub / slug / "files" / access
 
     def si_dir(self, slug, access):
-        return self.pub / slug / "papers" / "SI" / access
+        return self.pub / slug / "files" / "SI" / access
 
     def rel(self, p):
         try:
@@ -288,7 +301,7 @@ def update_state(proj, slug, fn):
         return st
 
 
-KEY_FILES_HELP = "~/.paper-acquisition/keys.txt (one `service: key` per line; see the skill's README.md)"
+KEY_FILES_HELP = "~/.scale/sources/keys.txt (one `service: key` per line; see the skill's README.md)"
 KEY_ALIASES = {"semantic_scholar": "s2", "semanticscholar": "s2", "elsevier": "scopus", "sciencedirect": "scopus",
                "springer_nature": "springer", "springernature": "springer", "web_of_science": "wos",
                "clarivate": "wos", "lens.org": "lens", "nasa_ads": "ads", "ieee_xplore": "ieee", "core_api": "core",
@@ -321,7 +334,7 @@ def parse_keys(text):
 
 
 def load_keys(proj=None, with_origin=False):
-    """API keys from ~/.paper-acquisition/keys.txt and (optional override) <project>/.claude/keys.txt.
+    """API keys from ~/.scale/sources/keys.txt and (optional override) <project>/.claude/keys.txt.
     Lines look like `core: abc123` (also accepted: `core = abc123`); `#` starts a comment line. Values are never
     printed or logged by any script."""
     keys, origin = {}, {}
@@ -466,7 +479,7 @@ def arxiv_link(x):
 
 
 def preprint_links(p, aliases=()):
-    """Links of a paper's preprint versions: its own link when it is a preprint, the preprint DOIs merged into it
+    """Links of a source's preprint versions: its own link when it is a preprint, the preprint DOIs merged into it
     (ChemRxiv, SSRN, Research Square, bioRxiv ... — a preprint and its journal article are one row) and its arXiv
     record; when none is known, the copies on preprint servers among its known copies (`versions`)."""
     out = []
@@ -488,8 +501,8 @@ def preprint_links(p, aliases=()):
     return list(dict.fromkeys(out))
 
 
-# what a Crossref record's update-to says about retraction (the notice carries it, pointing at the retracted paper;
-# a few publishers also mark the retracted paper itself)
+# what a Crossref record's update-to says about retraction (the notice carries it, pointing at the retracted source;
+# a few publishers also mark the retracted source itself)
 RETRACTION_TYPES = ("retraction", "withdrawal", "removal")
 
 
@@ -575,7 +588,7 @@ def normalize_abstract(t, cap=6000):
 
 
 def export_abstract(t):
-    """normalize_abstract for the index CSVs and papers.db, skipped for the (already clean) abstracts that show none of
+    """normalize_abstract for the index CSVs and index.db, skipped for the (already clean) abstracts that show none of
     the debris it removes — a catalog of millions is exported without re-cleaning every text."""
     if not t:
         return ""
@@ -713,7 +726,7 @@ def polite_email():
 def user_agent():
     # The contact email is sent ONLY as the documented polite-pool parameter of OpenAlex, Unpaywall and Crossref,
     # never in headers that reach publishers, repositories or the library proxy.
-    return "paper-acquisition/3.0 (academic literature indexing)"
+    return "scale-index-sources/3.0 (academic literature indexing)"
 
 
 class HostPacer:

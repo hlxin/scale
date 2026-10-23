@@ -1,11 +1,11 @@
 """Topic A/B/C and Related topics: the vocabulary, assignment, proposed new terms and manual corrections.
 
   python3 -I topics.py vocab                                  # the vocabulary (bundled + .scripts/vocab_custom.json)
-  python3 -I topics.py summary --topic <slug>                 # how the topic's papers spread over Topic A/B/C
-  python3 -I topics.py assign --topic <slug>                  # deterministic match for papers without Claude/API topics
+  python3 -I topics.py summary --topic <slug>                 # how the topic's sources spread over Topic A/B/C
+  python3 -I topics.py assign --topic <slug>                  # deterministic match for sources without Claude/API topics
   python3 -I topics.py proposed [--topic <slug>]              # labels Claude/API used that are not in the vocabulary
   python3 -I topics.py set --ids 12,57 --main "CO2RR,Copper catalysts" [--related "CORR"]   # correct by hand
-  python3 -I topics.py set --ids 12,57 --main "Methanol synthesis" --add    # in front of each paper's own topics
+  python3 -I topics.py set --ids 12,57 --main "Methanol synthesis" --add    # in front of each source's own topics
 To extend the vocabulary, add terms to .scripts/vocab_custom.json (format in references/topics.md) and run `assign`.
 """
 import argparse
@@ -28,8 +28,8 @@ def main():
     ap.add_argument("--main")
     ap.add_argument("--related", default="")
     ap.add_argument("--add", action="store_true",
-                    help="set: put --main in front of each paper's own Topic A/B/C (three in all) instead of replacing them")
-    ap.add_argument("--no-export", action="store_true", help="assign: do not refresh the index CSVs and papers.db")
+                    help="set: put --main in front of each source's own Topic A/B/C (three in all) instead of replacing them")
+    ap.add_argument("--no-export", action="store_true", help="assign: do not refresh the index CSVs and index.db")
     a = ap.parse_args()
     proj = Project(a.project)
     vocab = Vocab(proj)
@@ -46,7 +46,7 @@ def main():
         if not a.topic:
             die("assign needs --topic")
         n = 0
-        for rows in led.iter_topic(a.topic):      # 20,000 papers at a time: a topic may hold millions
+        for rows in led.iter_topic(a.topic):      # 20,000 sources at a time: a topic may hold millions
             n += apply_vocab(led, vocab, rows)
         if not a.no_export:
             led.export(topics=[a.topic])
@@ -61,7 +61,7 @@ def main():
         with led.tx():
             for i in ids:
                 mains, extra = main_ids, [r for r in rel if r]
-                if a.add:                   # the paper's own topics follow; the ones pushed out become related
+                if a.add:                   # the source's own topics follow; the ones pushed out become related
                     own = led.subjects_of(i)
                     own_main = [x["term"] for x in sorted(own, key=lambda x: x["rank"]) if x["kind"] == "main"]
                     mains = list(dict.fromkeys(main_ids + own_main))[:3]
@@ -70,8 +70,8 @@ def main():
         led.export(topics=[a.topic] if a.topic else None)
         print(json.dumps({"set": len(ids), "main": [vocab.label(t) for t in main_ids]}))
         return
-    # counted by SQLite (a topic may hold millions of papers)
-    src = "paper_subjects s" + (" JOIN paper_topics t ON t.paper_id = s.paper_id AND t.topic = ?" if a.topic else "")
+    # counted by SQLite (a topic may hold millions of sources)
+    src = "source_subjects s" + (" JOIN source_topics t ON t.source_id = s.source_id AND t.topic = ?" if a.topic else "")
     targs = (a.topic,) if a.topic else ()
 
     def grouped(col, where):
@@ -80,14 +80,14 @@ def main():
     if a.cmd == "proposed":
         out = []
         for term, cnt in grouped("s.term", "s.term LIKE 'new:%'")[:40]:
-            ids = [r[0] for r in led.q(f"SELECT s.paper_id FROM {src} WHERE s.term = ? ORDER BY s.paper_id LIMIT 3",
+            ids = [r[0] for r in led.q(f"SELECT s.source_id FROM {src} WHERE s.term = ? ORDER BY s.source_id LIMIT 3",
                                        (*targs, term))]
-            out.append({"label": term[4:], "papers": cnt,
+            out.append({"label": term[4:], "sources": cnt,
                         "examples": [((led.get(i) or {}).get("title") or "")[:100] for i in ids]})
         print(json.dumps({"proposed": out}, indent=1, ensure_ascii=False))
         return
     # summary
-    n_papers = led.q(f"SELECT COUNT(DISTINCT s.paper_id) FROM {src}", targs)[0][0]
+    n_sources = led.q(f"SELECT COUNT(DISTINCT s.source_id) FROM {src}", targs)[0][0]
 
     def labels(rows):
         c = Counter()
@@ -97,8 +97,8 @@ def main():
     by_rank = {i: labels(grouped("s.term", f"s.kind = 'main' AND s.rank = {i}")) for i in (1, 2, 3)}
     any_main = labels(grouped("s.term", "s.kind = 'main'"))
     methods = Counter(dict(grouped("s.method", "s.kind = 'main' AND s.rank = 1")))
-    total = led.q("SELECT COUNT(*) FROM paper_topics WHERE topic = ?", (a.topic,))[0][0] if a.topic else None
-    print(json.dumps({"topic": a.topic, "papers": total, "with_topics": n_papers, "method": dict(methods),
+    total = led.q("SELECT COUNT(*) FROM source_topics WHERE topic = ?", (a.topic,))[0][0] if a.topic else None
+    print(json.dumps({"topic": a.topic, "sources": total, "with_topics": n_sources, "method": dict(methods),
                       "topic_a": dict(by_rank[1].most_common(15)), "any_of_a_b_c": dict(any_main.most_common(25))},
                      indent=1, ensure_ascii=False))
 

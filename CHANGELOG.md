@@ -10,6 +10,16 @@
   replaced by the request table in `skills/README.md`. What is catalysis's, not the skills' (the topic vocabulary,
   the CO2 reduction paper index's filter and query tool) moves to `graphs/catal-commons/literature/`; index-sources
   reads its vocabulary from a path, `$INDEX_SOURCES_VOCAB`, the project's `.scripts/vocab.json` or that file.
+- **Sources, not papers; fetching is its own skill.** The literature skills say *source* for anything they index (a
+  paper, preprint, patent, thesis, report or dataset, as SCALE's `Source`) and *database* for the services that find
+  them: `publications/papers.db` is `sources/index.db` (tables `sources`, `source_*`, `databases`,
+  `source_databases`; column `source_id`), a topic's PDFs are in `sources/<topic>/files/`, the machine-wide keys in
+  `~/.scale/sources/`. A project made before is upgraded in place the first time a script opens it (`upgrade.py
+  --db` for a database that came alone, such as a shared catalog). index-sources' download mode becomes
+  **`fetch-corpus`** (version 1.0.0): it fetches the files of a frozen corpus (`--corpus`), paywalled ones only
+  through the library's EZproxy, and `settle_corpus.py` records in the manifest which files it got and why the others
+  are missing. `freeze_corpus.py` now selects a corpus by its rule before anything is fetched, so a part of a large
+  catalog is fetched without making a subtopic.
 - **Schema 0.5.2 (additive): a product reported as a lump.** Answers #39. `ProductLump` (provisional) records a
   product the source reports as a fraction, a class or a carbon-number window rather than a species (C5-C11, gasoline
   range, "C2+"), with `SUBSET_OF` for a lump inside a wider one; `HAS_OUTPUT.to` and `PRODUCES.to` accept it (17 targets

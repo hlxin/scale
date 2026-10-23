@@ -11,17 +11,17 @@
 
 ## What screening decides
 
-Screening runs on the index BEFORE downloading, so nothing is fetched (or spent against EZproxy limits) for papers
+Screening runs on the index BEFORE downloading, so nothing is fetched (or spent against EZproxy limits) for sources
 outside the topic. Every method writes, per topic, `Relevance` 0-5, a short note, and in/out of scope: in scope when
-Relevance ≥ threshold (default 3, `config.screening.threshold`). Out-of-scope papers move to the topic's
+Relevance ≥ threshold (default 3, `config.screening.threshold`). Out-of-scope sources move to the topic's
 `index/excluded.csv` with `Notes: Out of scope: <reason>` and are never downloaded. Errata/correction notices are
 skipped, and so are manual decisions (method `manual`: an imported list's, `import_list.py --scope file` or `in`) —
-no method re-scores them. Claude and API screening also choose each paper's Topic A/B/C in the same pass ([topics.md](topics.md));
+no method re-scores them. Claude and API screening also choose each source's Topic A/B/C in the same pass ([topics.md](topics.md));
 keyword screening and no screening use the deterministic vocabulary match.
 
 Scale (shared by all methods): 5 core topic with substantive results or a review of it · 4 main theme · 3 one of
 several themes, or undecidable (kept) · 2 tangential / related-but-distinct system · 1 incidental mention ·
-0 not a research paper. Bias: when unsure keep it (3) — a wrong exclusion loses a paper, a wrong inclusion costs
+0 not a research article. Bias: when unsure keep it (3) — a wrong exclusion loses a source, a wrong inclusion costs
 one download.
 
 ## criteria.md
@@ -59,8 +59,8 @@ python3 -I ${CLAUDE_SKILL_DIR}/scripts/screen.py --topic <slug> status          
 ```
 
 Repeat `next` → subagents → `merge` until `next` prints nothing. Items a judge skipped or mangled stay unscreened
-and are re-batched by the next `prep`. If a subagent never wrote its output, `prep` again re-queues those papers.
-Cost guide: one subagent per 100 papers (~40-60k input tokens each).
+and are re-batched by the next `prep`. If a subagent never wrote its output, `prep` again re-queues those sources.
+Cost guide: one subagent per 100 sources (~40-60k input tokens each).
 
 ## API method
 
@@ -99,12 +99,12 @@ every group) at 2. The note says which concept was missing or which exclude term
 
 ## No screening
 
-`screen.py --topic <slug> none` keeps every gate-passing paper in scope with an empty Relevance. Use when the user
+`screen.py --topic <slug> none` keeps every gate-passing source in scope with an empty Relevance. Use when the user
 wants the whole field and will filter later.
 
 ## Full-text check (optional, Claude/API)
 
-After downloading: `screen.py --topic <slug> prep --stage fulltext` (batches of 10 papers with the text of pages
+After downloading: `screen.py --topic <slug> prep --stage fulltext` (batches of 10 sources with the text of pages
 1-3; judges read the PDF itself when the text is poor), then `next 5 --stage fulltext` + subagents (or
-`api --stage fulltext`), then `merge --stage fulltext`. The full-text score replaces the abstract score; papers that drop below the threshold are
+`api --stage fulltext`), then `merge --stage fulltext`. The full-text score replaces the abstract score; sources that drop below the threshold are
 moved (with their SI) to `.scripts/<slug>/out_of_scope/` and the CSV notes it.

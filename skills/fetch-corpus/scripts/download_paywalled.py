@@ -1,6 +1,6 @@
-"""Step 7b — download queued papers (and their SI) through the institution's EZproxy, slowly and safely.
+"""Step 7b — download queued sources (and their SI) through the institution's EZproxy, slowly and safely.
 
-Works the queue of every topic: papers marked "Queued for EZproxy" by download_open.py, most relevant and most cited
+Works the queue of every topic: sources marked "Queued for EZproxy" by download_open.py, most relevant and most cited
 first, round-robin over publishers. Every visit is granted by the global limiter (_ezlimit.py): >= 90 s (+ jitter)
 between two visits to the same publisher, <= 120 visits per publisher per day, global caps (15 s gap, 20 / 15 min,
 60 / hour, 600 / day, MB caps), and only ONE EZproxy process at a time. A login page pauses everything (never logs
@@ -8,9 +8,9 @@ in), a usage-limit page or blocks from 2 publishers in a day stop everything unt
 
 Runs for days. Start it in the background with the keep-alive wrapper:
   nohup zsh .../scripts/run_paywalled.sh <project> > /dev/null 2>&1 &
-or directly (foreground, e.g. to test a few papers):
-  python3 -I download_paywalled.py [--topic <slug>] [--max-papers 3] [--exit-when-empty] [--no-si]
-Requires ~/.paper-acquisition/ezproxy/config.json written by check_paywalled_access.py (enabled + verified).
+or directly (foreground, e.g. to test a few sources):
+  python3 -I download_paywalled.py [--topic <slug>] [--max-sources 3] [--exit-when-empty] [--no-si]
+Requires ~/.scale/sources/ezproxy/config.json written by check_paywalled_access.py (enabled + verified).
 """
 import argparse
 import json
@@ -22,10 +22,12 @@ from pathlib import Path
 import requests
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import _core  # noqa: F401,E402  (index-sources' scripts: the shared core)
 import _ezlimit as EZL
 import _ezproxy as EZ
 from _common import Project, add_project_arg, json_read, jsonl_append, jsonl_iter, log, now_iso, user_agent, set_contact
 from _download import clone_or_copy, ez_publisher
+from _corpus import add_corpus_arg, scope
 from _ledger import Ledger
 from _vectors import after_step
 
@@ -36,26 +38,30 @@ NOTE = {"not_subscribed": "EZproxy: not covered by the institution's subscriptio
         "no_pdf_link": "EZproxy: no PDF link on the publisher page"}
 
 
-def queues(proj, led, topic, with_si, tries, skip=frozenset()):
-    """{publisher: [(priority, kind, paper)]} — PDFs first, then SI. Publishers in `skip` are never contacted."""
+def queues(proj, led, topic, with_si, tries, skip=frozenset(), ids=None):
+    """{publisher: [(priority, kind, source)]} — PDFs first, then SI. Publishers in `skip` are never contacted."""
     where = "WHERE p.downloaded = 0 AND p.dl_status = 'queued_paywalled'"
     args = ()
     if topic:
-        where += " AND p.id IN (SELECT paper_id FROM paper_topics WHERE topic = ?)"
+        where += " AND p.id IN (SELECT source_id FROM source_topics WHERE topic = ?)"
         args = (topic,)
     q = defaultdict(list)
-    for r in led.q(f"SELECT p.* FROM papers p {where}", args):
+    for r in led.q(f"SELECT p.* FROM sources p {where}", args):
         p = led.row(r)
         pub = ez_publisher(p.get("doi"))
+        if ids is not None and p["id"] not in ids:
+            continue
         if not pub or pub in skip or tries.get(p["id"], 0) >= 3:
             continue
         ts = led.topics_of(p["id"])
         rel = max([t["relevance"] for t in ts if t.get("relevance") is not None] or [3])
         q[pub].append(((-rel, -(p.get("cited_by") or 0)), "pdf", p))
     if with_si:
-        for r in led.q("SELECT p.* FROM papers p WHERE p.downloaded = 1 AND p.si_status = 'queued_paywalled'"):
+        for r in led.q("SELECT p.* FROM sources p WHERE p.downloaded = 1 AND p.si_status = 'queued_paywalled'"):
             p = led.row(r)
             pub = ez_publisher(p.get("doi"))
+            if ids is not None and p["id"] not in ids:
+                continue
             if pub and pub not in skip and tries.get(("si", p["id"]), 0) < 2:
                 q[pub].append(((9, 0), "si", p))
     for pub in q:
@@ -65,8 +71,8 @@ def queues(proj, led, topic, with_si, tries, skip=frozenset()):
 
 def main():
     ap = add_project_arg(argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter))
-    ap.add_argument("--topic", default=None, help="only this topic's queue (default: every topic)")
-    ap.add_argument("--max-papers", type=int, default=None, help="stop after N papers (testing)")
+    add_corpus_arg(ap)                    # neither: the queue of every topic
+    ap.add_argument("--max-sources", "--max-papers", dest="max_sources", type=int, default=None, help="stop after N sources (testing)")
     ap.add_argument("--exit-when-empty", action="store_true")
     ap.add_argument("--no-si", action="store_true")
     ap.add_argument("--skip-publishers", default="",
@@ -74,6 +80,7 @@ def main():
                          "a login through the proxy; iop after a block page)")
     a = ap.parse_args()
     proj = Project(a.project)
+    a.topic, ids = scope(a)
     proj.ezg.mkdir(parents=True, exist_ok=True)
     ez = json_read(proj.ezg / "config.json", {}) or {}
     if not (ez.get("enabled") and ez.get("host") and ez.get("verified_at")):
@@ -91,7 +98,8 @@ def main():
         print(json.dumps({"error": "HARD STOP in effect", "detail": lim.hard_stopped(),
                           "next": "review .scripts/logs/ezproxy_evidence/, then: python3 -I _ezlimit.py clear-hard-stop"}))
         return 5
-    from fetch_si import extract_si_links, ext_of
+    from _download import extract_si_links
+    from fetch_si import ext_of
     led = Ledger(proj)
     sess = requests.Session()
     sess.headers.update({"User-Agent": user_agent()})
@@ -101,7 +109,7 @@ def main():
         if r.get("outcome") in EZ.RETRYABLE:
             tries[(r.get("kind") == "si" and ("si", r["id"])) or r["id"]] += 1
     skip = frozenset(x.strip().lower() for x in a.skip_publishers.split(",") if x.strip())
-    q = queues(proj, led, a.topic, not a.no_si, tries, skip)
+    q = queues(proj, led, a.topic, not a.no_si, tries, skip, ids)
     reloaded = time.time()
     log(f"EZproxy via {host}: queue " + ", ".join(f"{p}={len(v)}" for p, v in sorted(q.items())) + f" | limits={EZL.LIMITS}"
         + (f" | skipped publishers: {','.join(sorted(skip))}" if skip else ""))
@@ -109,7 +117,7 @@ def main():
     try:
         while True:
             if time.time() - reloaded > 1800:
-                q = queues(proj, led, a.topic, not a.no_si, tries, skip)
+                q = queues(proj, led, a.topic, not a.no_si, tries, skip, ids)
                 for p in unsupported:
                     q.pop(p, None)
                 reloaded = time.time()
@@ -144,7 +152,7 @@ def main():
                 continue
             prio, kind, p = q[chosen].pop(0)
             if kind == "pdf":
-                outcome = EZ.fetch_paper(proj, led, sess, lim, host, p, chosen)
+                outcome = EZ.fetch_source(proj, led, sess, lim, host, p, chosen)
                 nfiles = None
             else:
                 outcome, nfiles = EZ.fetch_si(proj, led, sess, lim, host, p, chosen, extract_si_links, ext_of, clone_or_copy)
@@ -180,7 +188,7 @@ def main():
             if since_export >= 10:
                 led.export_progress()
                 since_export = 0
-            if a.max_papers and handled >= a.max_papers:
+            if a.max_sources and handled >= a.max_sources:
                 break
     except EZL.HardStop as e:
         log(f"EZproxy stopped: {e}")

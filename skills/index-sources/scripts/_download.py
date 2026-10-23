@@ -3,8 +3,8 @@
 - which hosts refuse scripted clients (never touched by open routes; walled publishers go through EZproxy)
 - publisher URL patterns, DOI prefix -> publisher key for EZproxy pacing
 - fetch(): one URL, redirects followed by hand so a bot-walled host is never requested
-- file_pdf(): validate a downloaded PDF, check it is the right paper, read its printed license, file it as
-  publications/<topic>/<ACCESS>/<ID>.pdf for every topic that wants it (APFS clone for the 2nd+ topic) and update
+- file_pdf(): validate a downloaded PDF, check it is the right source, read its printed license, file it as
+  sources/<topic>/<ACCESS>/<ID>.pdf for every topic that wants it (APFS clone for the 2nd+ topic) and update
   the ledger. The license printed in the PDF decides the folder.
 """
 import json
@@ -22,7 +22,7 @@ from pathlib import Path
 import requests
 
 import _pdf as C
-from _common import (ACCESS_TYPES, PACER, access_rank, host_of, json_read, json_write_atomic, jsonl_append,
+from _common import (ACCESS_TYPES, PACER, access_rank, get_json, host_of, json_read, json_write_atomic, jsonl_append,
                      license_access, log, norm_license, now_iso, session, today)
 
 # Hosts that answered plain scripted requests with a bot challenge. Open routes never touch them.
@@ -185,8 +185,8 @@ def pdf_links_from_html(html, base):
     return out[:4]
 
 
-def attempt(proj, paper_id, doi, **kw):
-    jsonl_append(proj.logs / "download_attempts.jsonl", {"id": paper_id, "doi": doi, "ts": now_iso(), **kw})
+def attempt(proj, source_id, doi, **kw):
+    jsonl_append(proj.logs / "download_attempts.jsonl", {"id": source_id, "doi": doi, "ts": now_iso(), **kw})
 
 
 # ---------------------------------------------------------------- filing a PDF
@@ -297,11 +297,11 @@ def _file_checked(proj, led, paper, entry, tmp, pages, final_url, method, decisi
     access, lic, evidence, snip = decision
     digest = C.sha1(tmp)
     with _sha_lock:
-        dup = led.q("SELECT id FROM papers WHERE sha1=? AND id<>?", (digest, paper["id"]))
+        dup = led.q("SELECT id FROM sources WHERE sha1=? AND id<>?", (digest, paper["id"]))
         if dup:
             Path(tmp).unlink(missing_ok=True)
             led.set(paper["id"], dl_status="duplicate", dl_note=f"Same PDF as ID {dup[0][0]}")
-            return "duplicate", f"same file as paper {dup[0][0]}"
+            return "duplicate", f"same file as source {dup[0][0]}"
         topics = [t for t in led.topics_of(paper["id"]) if t.get("in_scope") != 0]
         if not topics:
             topics = led.topics_of(paper["id"])[:1]
@@ -333,8 +333,8 @@ def _file_checked(proj, led, paper, entry, tmp, pages, final_url, method, decisi
 
 
 def link_existing(proj, led, topic):
-    """Papers of `topic` that another topic already downloaded: clone the PDF (and SI) into this topic's folders
-    instead of downloading again. Returns the number of papers linked."""
+    """Sources of `topic` that another topic already downloaded: clone the PDF (and SI) into this topic's folders
+    instead of downloading again. Returns the number of sources linked."""
     rows = led.topic_rows(topic, "AND p.downloaded = 1 AND t.path IS NULL AND COALESCE(t.in_scope, 1) = 1")
     n = 0
     for p in rows:
@@ -356,3 +356,55 @@ def link_existing(proj, led, topic):
         led.set_topic(p["id"], topic, path=proj.rel(dst), si_paths=si_rels)
         n += 1
     return n
+
+
+# ------------------------------------------------------------------ SI links on a landing page (find_si, fetch_si)
+SI_URL = re.compile(r"(suppl|supplement|support[-_]?info|supporting|MediaObjects|MOESM|_ESM\b|/esm/|mmc\d|suppdata|"
+                    r"additional[-_]?file|ancillary|Data[_-]?Sheet|DataSheet|Presentation[_-]\d|Video[_-]\d|"
+                    r"Table[_-]\d+\.(xlsx?|docx?|pdf|csv)|type=supplementary|downloadSupplement|_si_\d|[_-]si[_.-]|"
+                    r"/suppl_file/|supp\d)", re.I)
+EXT = re.compile(r"\.(pdf|docx?|xlsx?|csv|txt|zip|gz|tgz|rar|7z|cif|xyz|mp4|avi|mov|mpg|wmv|json|dat|xml|pptx?|tif|mat|h5)(\?|$|#)", re.I)
+IMG = re.compile(r"\.(jpe?g|png|gif|svg|webp)(\?|$)", re.I)
+
+
+def extract_si_links(html, base):
+    urls = []
+    for m in re.finditer(r'(?:href|src|data-url|data-href)=["\']([^"\']+)["\']', html, re.I):
+        u = urllib.parse.urljoin(base, m.group(1).replace("&amp;", "&"))
+        du = urllib.parse.unquote(u)
+        if IMG.search(du.split("?")[0]) or not du.startswith("http"):
+            continue
+        if SI_URL.search(du) and (EXT.search(du) or "downloadSupplement" in du or "type=supplementary" in du):
+            if u not in urls:
+                urls.append(u)
+    return urls[:40]
+
+
+def landing_url_for(doi):
+    pre, suf = doi.split("/", 1)
+    if pre == "10.1038":
+        return f"https://www.nature.com/articles/{suf}"
+    if pre in ("10.1007", "10.1557", "10.1140", "10.1023"):
+        return f"https://link.springer.com/article/{doi}"
+    if pre in ("10.1088", "10.1149"):
+        return f"https://iopscience.iop.org/article/{doi}/data"
+    if pre == "10.3389":
+        return f"https://www.frontiersin.org/articles/{doi}/full"
+    try:  # doi.org handle API -> target URL without touching the publisher
+        d = get_json(f"https://doi.org/api/handles/{urllib.parse.quote(doi, safe='/')}", tries=3)
+        for v in d.get("values") or []:
+            if v.get("type") == "URL":
+                return (v.get("data") or {}).get("value")
+    except Exception:
+        return None
+    return None
+
+
+def route_landing(proj, doi):
+    url = landing_url_for(doi)
+    if not url or is_blocked(host_of(url)):
+        return []
+    res = fetch(proj, url, accept="text/html,application/xhtml+xml,*/*;q=0.8")
+    if res["kind"] != "html" or is_blocked(host_of(res.get("final_url", ""))):
+        return []
+    return [("landing", u) for u in extract_si_links(res["text"], res["final_url"])]

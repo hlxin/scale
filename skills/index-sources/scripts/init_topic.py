@@ -3,13 +3,13 @@
   python3 -I init_topic.py --list                         # every topic in this project with its counts and dates
   python3 -I init_topic.py --slug mxene-her --probe       # does the topic exist? what has been done? (changes nothing)
   python3 -I init_topic.py --topic "MXene catalysts for HER" --email you@uni.edu \
-          --access OA,OA+ND,Free-to-read --screening claude [--slug mxene-her] [--sources openalex,crossref,...]
+          --access OA,OA+ND,Free-to-read --screening claude [--slug mxene-her] [--databases openalex,crossref,...]
           [--base-url https://llm.example.edu/api/v1 --model gpt-oss-120b] [--threshold 3]
   python3 -I init_topic.py --slug mxene-her --check       # validate config.json, queries.json, gate, criteria/keywords
 
-Creates publications/<slug>/index/ and publications/<slug>/papers/{OA,OA+ND,Free-to-read,Paywalled}/ (SI folders appear
+Creates sources/<slug>/index/ and sources/<slug>/files/{OA,OA+ND,Free-to-read,Paywalled}/ (SI folders appear
 when the first SI file is saved), and .scripts/<slug>/{raw,screen}/. Re-running with new flags updates the existing
-config (nothing is deleted). Default sources: every keyless source in the catalog plus the key sources whose keys are in
+config (nothing is deleted). Default databases: every keyless database in the catalog plus the key databases whose keys are in
 keys.txt. The check prints {"ok": true} or every problem found with how to fix it.
 """
 import argparse
@@ -21,7 +21,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from _common import (ACCESS_TYPES, KEY_FILES_HELP, Project, add_project_arg, json_read, load_keys, now_iso, save_config,
                      slugify)
-from _sources import CATALOG, FETCHERS, default_sources, keys_needed
+from _databases import CATALOG, FETCHERS, default_databases, keys_needed
 METHODS = ["claude", "api", "keywords", "none"]
 
 
@@ -35,17 +35,17 @@ def check(proj, slug):
         errs.append("config.topic is empty")
     if not cfg.get("polite_email"):
         warns.append("config.polite_email missing: Unpaywall lookups are skipped and other APIs throttle harder")
-    srcs = cfg.get("sources") or []
+    srcs = cfg.get("databases") or cfg.get("sources") or []
     bad = [s for s in srcs if s not in FETCHERS]
     if bad:
-        errs.append(f"config.sources has unknown entries {bad}; valid: {sorted(FETCHERS)}")
+        errs.append(f"config.databases has unknown entries {bad}; valid: {sorted(FETCHERS)}")
     keys = load_keys(proj)
     nokey = [s for s in srcs if any(not keys.get(k) for k in keys_needed(s))]
     if nokey:
-        warns.append(f"sources waiting for a key (skipped until it is added to {KEY_FILES_HELP}): {nokey}")
-    missing_default = [s for s in default_sources(keys) if s not in srcs]
+        warns.append(f"databases waiting for a key (skipped until it is added to {KEY_FILES_HELP}): {nokey}")
+    missing_default = [s for s in default_databases(keys) if s not in srcs]
     if missing_default:
-        warns.append(f"sources available but not in this topic's plan (add them with a query each for a more complete "
+        warns.append(f"databases available but not in this topic's plan (add them with a query each for a more complete "
                      f"index): {missing_default}")
     if "openalex" in srcs and not keys.get("openalex"):
         warns.append("no OpenAlex key: OpenAlex then uses a small daily budget shared by everyone on your network and "
@@ -73,8 +73,8 @@ def check(proj, slug):
                         errs.append(f"keywords.json bad regex {t!r}: {e}")
     g = cfg.get("gate") or {}
     if not (g.get("any") or g.get("all_groups")):
-        warns.append("config.gate is empty: every search hit is kept (loose sources such as Crossref and OSTI then "
-                     "flood the list with off-topic papers)")
+        warns.append("config.gate is empty: every search hit is kept (loose databases such as Crossref and OSTI then "
+                     "flood the list with off-topic sources)")
     for t in (g.get("any") or []) + [t for grp in g.get("all_groups") or [] for t in grp] + (g.get("title_only") or []):
         if str(t).startswith("re:"):
             try:
@@ -83,15 +83,15 @@ def check(proj, slug):
                 errs.append(f"gate bad regex {t!r}: {e}")
     qs = json_read(td / "queries.json")
     if not qs:
-        errs.append(f"missing .scripts/{slug}/queries.json (per-source queries; references/queries.md)")
+        errs.append(f"missing .scripts/{slug}/queries.json (per-database queries; references/queries.md)")
     else:
         for s in qs:
             if s not in FETCHERS:
-                errs.append(f"queries.json: unknown source {s!r}")
+                errs.append(f"queries.json: unknown database {s!r}")
         for s in srcs:
             q = qs.get(s)
             if not q:
-                warns.append(f"queries.json has no queries for source {s!r} (it will be skipped)")
+                warns.append(f"queries.json has no queries for database {s!r} (it will be skipped)")
                 continue
             if not isinstance(q, dict):
                 errs.append(f"queries.json[{s!r}] must be an object {{query_id: query}}")
@@ -121,19 +121,19 @@ def probe(proj, slug):
     out = {"slug": slug, "exists": True, "topic": cfg.get("topic"), "created_at": cfg.get("created_at"),
            "last_full_index": li, "last_update": lu, "screening": (cfg.get("screening") or {}).get("method"),
            "download_access_types": (cfg.get("download") or {}).get("access_types"),
-           "database": proj.rel(proj.db), "papers_folder": proj.rel(proj.pub / slug / "papers"),
+           "database": proj.rel(proj.db), "files_folder": proj.rel(proj.pub / slug / "files"),
            "index_csv": proj.rel(proj.index_dir(slug)) if (proj.index_dir(slug) / "merged.csv").exists() else None}
     if proj.ledger_db.exists():
         import sqlite3
         con = sqlite3.connect(f"file:{proj.ledger_db}?mode=ro", uri=True)
         try:
-            # same definitions as status.py: non-papers (errata, corrections) and retracted papers are never in scope
+            # same definitions as status.py: notices (errata, corrections) and retracted sources are never in scope
             r = con.execute("SELECT COUNT(*), SUM(t.in_scope=1 AND p.is_erratum=0 AND COALESCE(p.retracted,0)=0), "
                             "SUM(t.in_scope=0 AND p.is_erratum=0), SUM(t.in_scope IS NULL AND p.is_erratum=0), "
-                            "SUM(t.path IS NOT NULL), SUM(p.is_erratum=1) FROM paper_topics t JOIN papers p ON p.id=t.paper_id "
+                            "SUM(t.path IS NOT NULL), SUM(p.is_erratum=1) FROM source_topics t JOIN sources p ON p.id=t.source_id "
                             "WHERE t.topic=?", (slug,)).fetchone()
-            out.update({"papers": r[0], "in_scope": r[1] or 0, "out_of_scope": r[2] or 0, "unscreened": r[3] or 0,
-                        "downloaded": r[4] or 0, "non_papers": r[5] or 0})
+            out.update({"sources": r[0], "in_scope": r[1] or 0, "out_of_scope": r[2] or 0, "unscreened": r[3] or 0,
+                        "downloaded": r[4] or 0, "notices": r[5] or 0})
         except sqlite3.Error:
             pass
     return out
@@ -149,7 +149,7 @@ def main():
     ap.add_argument("--threshold", type=int, default=None)
     ap.add_argument("--base-url", default=None)
     ap.add_argument("--model", default=None)
-    ap.add_argument("--sources", default=None)
+    ap.add_argument("--databases", "--sources", dest="databases", default=None)
     ap.add_argument("--year-from", type=int, default=None, help="index only works published in or after this year")
     ap.add_argument("--check", action="store_true")
     ap.add_argument("--probe", action="store_true", help="report whether the topic exists and what was done (no changes)")
@@ -178,9 +178,9 @@ def main():
         cfg["topic"] = a.topic
     if a.email:
         cfg["polite_email"] = a.email
-    cfg.setdefault("sources", default_sources(load_keys(proj)))
-    if a.sources:
-        cfg["sources"] = [s for s in a.sources.split(",") if s]
+    cfg.setdefault("databases", default_databases(load_keys(proj)))
+    if a.databases:
+        cfg["databases"] = [s for s in a.databases.split(",") if s]
     cfg.setdefault("gate", {})
     sc = cfg.setdefault("screening", {"method": "claude", "threshold": 3})
     if a.screening:
@@ -200,7 +200,7 @@ def main():
     need = ["queries.json"] + (["criteria.md"] if sc["method"] in ("claude", "api") else []) + \
         (["keywords.json"] if sc["method"] == "keywords" else [])
     print(json.dumps({"slug": slug, "config": proj.rel(td / "config.json"),
-                      "publications": proj.rel(proj.pub / slug), "write_next": [proj.rel(td / f) for f in need],
+                      "folder": proj.rel(proj.pub / slug), "write_next": [proj.rel(td / f) for f in need],
                       "then_run": f"init_topic.py --slug {slug} --check"}))
     return 0
 

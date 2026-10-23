@@ -1,21 +1,21 @@
-"""Index step 3 — build the topic's paper list from the raw search hits and merge it into the ledger.
+"""Index step 3 — build the topic's source list from the raw search hits and merge it into the ledger.
 
   1. topic gate (config['gate']) drops loose matches; SI deposits (DOI ...s001, Figshare files, "Supporting
-     information" records, deposits that declare IsSupplementTo a paper) are not papers: they become SI links of the
-     paper they belong to (si_links table; the index SI column says "Available (n deposits)")
+     information" records, deposits that declare IsSupplementTo a source) are not sources: they become SI links of the
+     source they belong to (si_links table; the index SI column says "Available (n deposits)")
   2. dedup: same DOI; same patent (jurisdiction + number); preprint <-> published version (shared title + preprint DOI
      prefix or Crossref relation); DOI-less records attached by title (+-1 year) or grouped by title+first author+year
-  3. merge into .scripts/ledger.sqlite: existing papers (other topics / earlier runs) gain this topic; new papers get
+  3. merge into .scripts/ledger.sqlite: existing sources (other topics / earlier runs) gain this topic; new sources get
      the next free ID and today's date in `Date added`; document type, keywords, authors with ORCID/affiliations kept
-Writes .scripts/<topic>/candidates.jsonl (per-paper copy/license hints for classify_access.py) and refreshes the
-topic's index CSVs and publications/papers.db. Safe to re-run.
+Writes .scripts/<topic>/candidates.jsonl (per-source copy/license hints for classify_access.py) and refreshes the
+topic's index CSVs and sources/index.db. Safe to re-run.
 
 usage: python3 -I build_list.py --topic <slug> [--run since-2026-09-01] [--batches N] [--no-export]
 --run limits the input to one search run (update mode on a big topic: only the new raw hits are read; DOIs already in
 the ledger are matched, title-level duplicates across runs are caught by dedup.py).
 --batches N splits the raw files into N groups processed one after another in this process (several million raw hits
-would not fit in memory at once); the index CSVs and papers.db are written once at the end. --no-export skips that
-final refresh (run export.py later). --si-links-only re-reads the raw hits only to link SI deposits to their papers.
+would not fit in memory at once); the index CSVs and index.db are written once at the end. --no-export skips that
+final refresh (run export.py later). --si-links-only re-reads the raw hits only to link SI deposits to their sources.
 """
 import argparse
 import json
@@ -25,7 +25,7 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from _common import (PREPRINT_PREFIXES, SOURCE_LABEL, Gate, Project, add_project_arg, is_erratum,  # noqa: F401
+from _common import (PREPRINT_PREFIXES, DATABASE_LABEL, Gate, Project, add_project_arg, is_erratum,  # noqa: F401
                      is_preprint_doi, jsonl_iter, json_write_atomic, load_config, log, norm_doc_type, norm_doi,
                      norm_title, now_iso, title_hash, update_state)
 from _ledger import Ledger
@@ -55,7 +55,7 @@ def is_repository_doi(doi, journal=None):
 
 
 def edition_twin(doi):
-    """Angewandte Chemie publishes every paper twice: 10.1002/ange.X (German) and 10.1002/anie.X (International)."""
+    """Angewandte Chemie publishes every source twice: 10.1002/ange.X (German) and 10.1002/anie.X (International)."""
     if doi and doi.startswith("10.1002/ange."):
         return "10.1002/anie." + doi[len("10.1002/ange."):]
     if doi and doi.startswith("10.1002/anie."):
@@ -90,8 +90,8 @@ def _type_token(r):
 
 
 def si_parent(r, title_parent=None):
-    """DOI of the paper an SI deposit belongs to: the ACS-style '<paper DOI>.s001', the deposit's IsSupplementTo
-    relation, or a paper of the same batch whose title it repeats ('Supporting information for: <title>')."""
+    """DOI of the source an SI deposit belongs to: the ACS-style '<source DOI>.s001', the deposit's IsSupplementTo
+    relation, or a source of the same batch whose title it repeats ('Supporting information for: <title>')."""
     doi = r.get("doi") or ""
     m = re.match(r"^(10\.\d{4,9}/.+?)\.s\d{3}$", doi)
     if m:
@@ -116,14 +116,14 @@ def si_link(r, parent):
 def is_si_deposit(r):
     doi = r.get("doi") or ""
     if r.get("supplement_to") and _type_token(r) not in DATA_TYPES | ARTICLE_TYPES:
-        return True   # 'journal contribution' / text / figure that declares IsSupplementTo a paper: that paper's SI
+        return True   # 'journal contribution' / text / figure that declares IsSupplementTo a source: that source's SI
     if re.search(r"\.s\d{3}$", doi):
         return True
     if SI_TITLE_RX.search(r.get("title") or ""):
         return True
     if doi.startswith(("10.6084/", "10.25384/")) and (str(r.get("type") or "").lower() not in (
             "journal contribution", "preprint", "conference contribution", "text", "journalarticle", "preprint")):
-        return True   # Figshare files deposited by publishers (ACS, RSC, T&F ...) as a paper's SI
+        return True   # Figshare files deposited by publishers (ACS, RSC, T&F ...) as a source's SI
     return r.get("source") == "figshare" and (r.get("type") or "").lower() not in (
         "journal contribution", "preprint", "conference contribution")
 
@@ -171,7 +171,7 @@ def merge(group):
                 m[k] = r[k]
         if len(r.get("abstract") or "") > len(m["abstract"]):
             m["abstract"] = r["abstract"]
-            m["abstract_source"] = r.get("abstract_source") or SOURCE_LABEL.get(src, src)
+            m["abstract_source"] = r.get("abstract_source") or DATABASE_LABEL.get(src, src)
         m["is_oa_any"] |= bool(r.get("is_oa"))
         m["retracted"] |= bool(r.get("retracted"))
         if r.get("cited_by_count") is not None and (m["cited_by"] is None or src == "openalex"):
@@ -220,7 +220,7 @@ def merge(group):
     dts = sorted(set(m["doc_types"]), key=lambda t: pri.index(t) if t in pri else 99)
     m["doc_type"] = dts[0] if dts else norm_doc_type(m["type"], m["is_preprint"])
     if m["doc_type"] == "erratum" and not m["is_erratum"]:
-        # one source typed it as a correction, but neither its title nor its DOI is a notice: a research paper
+        # one source typed it as a correction, but neither its title nor its DOI is a notice: a research article
         m["doc_type"] = next((t for t in dts if t != "erratum"), "article")
     if m["doc_type"] == "preprint" and not m["is_preprint"] and "article" in dts:
         m["doc_type"] = "article"          # a published version was merged with its preprint
@@ -323,18 +323,18 @@ def split_files(files, n):
 
 
 def merge_hints(hp, hints, partial):
-    """candidates.jsonl: write this batch's hints; with partial, keep the other papers' hints (streamed line by line,
+    """candidates.jsonl: write this batch's hints; with partial, keep the other sources' hints (streamed line by line,
     never loaded whole — the file reaches gigabytes on a large topic)."""
     tmp = Path(str(hp) + ".tmp")
-    new_ids = {h["paper_id"] for h in hints}
+    new_ids = {h["source_id"] for h in hints}
     with open(tmp, "w", encoding="utf-8") as out:
         if partial and hp.exists():
             with open(hp, encoding="utf-8") as fh:
                 for line in fh:
                     if not line.strip():
                         continue
-                    m = re.match(r'\{"paper_id": (\d+)', line)
-                    pid = int(m.group(1)) if m else json.loads(line).get("paper_id")
+                    m = re.match(r'\{"(?:source|paper)_id": (\d+)', line)   # paper_id: written before the rename
+                    pid = int(m.group(1)) if m else (lambda r: r.get("source_id", r.get("paper_id")))(json.loads(line))
                     if pid not in new_ids:
                         out.write(line if line.endswith("\n") else line + "\n")
         for h in hints:
@@ -391,7 +391,7 @@ def build_batch(proj, led, topic, gate, year_from, files, vocab):
                 upd["retracted"] = 1
             if upd:
                 led.set(pid, **upd)
-            hints.append({"paper_id": pid, "doi": m["doi"], "dois_all": m["dois_all"], "preprint_dois": m["preprint_dois"],
+            hints.append({"source_id": pid, "doi": m["doi"], "dois_all": m["dois_all"], "preprint_dois": m["preprint_dois"],
                           "oa_urls": m["oa_urls"], "landing_urls": m["landing_urls"], "locations": m["locations"],
                           "licenses_seen": m["licenses_seen"], "crossref_licenses": m["crossref_licenses"],
                           "epmc_fulltext": m["epmc_fulltext"], "is_oa_any": m["is_oa_any"], "oa_status": m["oa_status"],
@@ -399,7 +399,7 @@ def build_batch(proj, led, topic, gate, year_from, files, vocab):
                           "relevance_score": m["relevance_score"]})
         n_links = led.add_si_links(links)
     n_topics = 0
-    for i in range(0, len(ids), 20000):      # vocabulary topics for the papers of this batch that have none yet
+    for i in range(0, len(ids), 20000):      # vocabulary topics for the sources of this batch that have none yet
         ch = ids[i:i + 20000]
         rows = []
         for j in range(0, len(ch), 900):
@@ -407,7 +407,7 @@ def build_batch(proj, led, topic, gate, year_from, files, vocab):
             rows += led.topic_rows(topic, f"AND p.id IN ({','.join('?' * len(part))})", tuple(part))
         n_topics += apply_vocab(led, vocab, rows, only_missing=True)
     stats = {"raw_records": n_raw, "si_deposits_set_aside": n_si, "si_links_added": n_links,
-             "off_topic_dropped_by_gate": n_off, "older_than_year_from": n_old, "unique_papers": len(cands),
+             "off_topic_dropped_by_gate": n_off, "older_than_year_from": n_old, "unique_sources": len(cands),
              "new_in_ledger": created, "already_in_ledger": existing, "errata_or_corrections": errata,
              "manual_decisions": decided,
              "topics_assigned": n_topics, **dstats}
@@ -419,8 +419,8 @@ def main():
     ap.add_argument("--topic", required=True)
     ap.add_argument("--run", action="append", default=None, help="only these raw runs (full, since-YYYY-MM-DD, manual)")
     ap.add_argument("--batches", type=int, default=1, help="process the raw files in N groups (large topics)")
-    ap.add_argument("--no-export", action="store_true", help="do not refresh the index CSVs and papers.db at the end")
-    ap.add_argument("--si-links-only", action="store_true", help="only link SI deposits in the raw hits to their papers")
+    ap.add_argument("--no-export", action="store_true", help="do not refresh the index CSVs and index.db at the end")
+    ap.add_argument("--si-links-only", action="store_true", help="only link SI deposits in the raw hits to their sources")
     a = ap.parse_args()
     proj = Project(a.project)
     cfg = load_config(proj, a.topic)
@@ -467,7 +467,7 @@ def main():
     stats = {**dict(totals), "batches": len(groups), "database": None if a.no_export else led.last_publish, "new_ids": created_all[:50],
              "run_started": run_started, "built_at": now_iso()}
     if a.no_export:
-        stats["next"] = "export.py --topic " + a.topic + " (index CSVs and papers.db were not refreshed)"
+        stats["next"] = "export.py --topic " + a.topic + " (index CSVs and index.db were not refreshed)"
 
     def fn(st):
         st["build_list"] = stats

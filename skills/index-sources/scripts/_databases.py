@@ -1,12 +1,12 @@
-"""Search-API fetchers (library module — not run directly). One function per source:
+"""Search-API fetchers (library module — not run directly). One function per database:
 
     fetch(query, cursor, since, ctx) -> (records, next_cursor_or_None, total_or_None)
 
-`query` is a string in the source's own syntax, or a dict {"q": ..., "filter": ...} where the source supports an extra
+`query` is a string in the database's own syntax, or a dict {"q": ..., "filter": ...} where the database supports an extra
 filter (Crossref, OpenAlex, DataCite types). `since` (YYYY-MM-DD or None) restricts results to newer works for update
-mode. Records use one normalized shape (see `rec()` below). CATALOG at the end lists every source the skill knows —
+mode. Records use one normalized shape (see `rec()` below). CATALOG at the end lists every database the skill knows —
 automated (keyless or with a key from keys.txt) and the ones it deliberately does not query, with the reason.
-Query syntax per source: references/sources.md.
+Query syntax per database: references/databases.md.
 """
 import datetime as _dt
 import re
@@ -120,11 +120,11 @@ def fetch_openalex(query, cursor, since, ctx):
     else:
         if cursor and cursor != "*" and not page:
             raise HTTPFail("key", "OpenAlex: this query was being paged with an API key that is missing now; add "
-                                  "'openalex: <key>' to ~/.paper-acquisition/keys.txt and re-run")
+                                  "'openalex: <key>' to ~/.scale/sources/keys.txt and re-run")
         page = page or 1
         if page > OPENALEX_PAGE_LIMIT:
             raise HTTPFail("key", f"OpenAlex without an API key returns at most {OPENALEX_PAGE_LIMIT * 100:,} results "
-                                  "per query; add a free key ('openalex: <key>' in ~/.paper-acquisition/keys.txt) "
+                                  "per query; add a free key ('openalex: <key>' in ~/.scale/sources/keys.txt) "
                                   "and re-run to get the rest")
         params["page"] = page
     if polite_email():
@@ -413,7 +413,7 @@ def fetch_zenodo(query, cursor, since, ctx):
 def fetch_pmc(query, cursor, since, ctx):
     start = int(cursor or 0)
     params = {"db": "pmc", "term": _q(query), "retmode": "json", "retmax": 200, "retstart": start,
-              "tool": "paper-acquisition"}
+              "tool": "scale-index-sources"}
     if ctx.get("keys", {}).get("ncbi"):
         params["api_key"] = ctx["keys"]["ncbi"]
     if since:
@@ -424,7 +424,7 @@ def fetch_pmc(query, cursor, since, ctx):
     tot = int(es.get("count") or 0)
     recs = []
     if ids:
-        sp = {"db": "pmc", "id": ",".join(ids), "retmode": "json", "tool": "paper-acquisition"}
+        sp = {"db": "pmc", "id": ",".join(ids), "retmode": "json", "tool": "scale-index-sources"}
         s = get_json("https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi", params=sp, tries=6)
         res = s.get("result") or {}
         for i in ids:
@@ -498,7 +498,7 @@ def fetch_crossref_preprints(query, cursor, since, ctx):
 
 
 # ---------------------------------------------------------------- DataCite (datasets, theses, reports, preprints)
-SI_DOI_PREFIXES = ("10.6084/", "10.25384/")   # Figshare (ACS, RSC, T&F... SI) — attached to their paper, not listed
+SI_DOI_PREFIXES = ("10.6084/", "10.25384/")   # Figshare (ACS, RSC, T&F... SI) — attached to their source, not listed
 
 
 def fetch_datacite(query, cursor, since, ctx):
@@ -755,11 +755,11 @@ def fetch_openaire_data(query, cursor, since, ctx):
     return fetch_openaire(q, cursor, since, ctx)
 
 
-# ---------------------------------------------------------------- sources that need a key (keys.txt)
+# ---------------------------------------------------------------- databases that need a key (keys.txt)
 def _need(ctx, name):
     k = ctx.get("keys", {}).get(name)
     if not k:
-        raise HTTPFail("nokey", f"needs `{name}: <key>` in ~/.paper-acquisition/keys.txt")
+        raise HTTPFail("nokey", f"needs `{name}: <key>` in ~/.scale/sources/keys.txt")
     return k
 
 
@@ -898,7 +898,7 @@ def _patent_rec(jur, num, kind, title, abstract, year, applicants, inventors, li
 
 def patent_key(jur, num):
     """'patent:EP1234567' — jurisdiction + number without the kind code, so an application (A1) and its grant (B1)
-    found in different sources fall together."""
+    found in different databases fall together."""
     return "patent:" + re.sub(r"[^A-Z0-9]", "", f"{jur or ''}{num or ''}".upper())
 
 
@@ -944,7 +944,7 @@ def fetch_ieee(query, cursor, since, ctx):
                         journal=a.get("publication_title"), publisher=a.get("publisher"),
                         authors=[x.get("full_name") for x in (a.get("authors") or {}).get("authors") or []],
                         type=a.get("content_type"), is_oa=oa or None, pdf_url=a.get("pdf_url") if oa else None,
-                        landing_url=a.get("html_url"), cited_by_count=a.get("citing_paper_count"),
+                        landing_url=a.get("html_url"), cited_by_count=a.get("citing_source_count"),
                         keywords=((a.get("index_terms") or {}).get("author_terms") or {}).get("terms") or [],
                         ids={"ieee": a.get("article_number")}))
     tot = d.get("total_records") or 0
@@ -1055,8 +1055,8 @@ FETCHERS = {"openalex": fetch_openalex, "crossref": fetch_crossref, "crossref_pr
             "lens": fetch_lens, "lens_patents": fetch_lens_patents, "ieee": fetch_ieee, "ads": fetch_ads, "epo": fetch_epo,
             "citations": fetch_openalex}
 
-# Every source the skill knows. status: auto (keyless) | key (needs the named keys in keys.txt) | covered (found through
-# another source) | excluded (not queried, with the reason). default: queried for a new topic unless deselected.
+# Every database the skill knows. status: auto (keyless) | key (needs the named keys in keys.txt) | covered (found through
+# another database) | excluded (not queried, with the reason). default: queried for a new topic unless deselected.
 CATALOG = {
     # broad aggregators
     "openalex": dict(status="auto", group="aggregator", default=True, optional_key="openalex",
@@ -1064,7 +1064,7 @@ CATALOG = {
     "crossref": dict(status="auto", group="aggregator", default=True, optional_key="crossref",
                      covers="every Crossref DOI; publisher-deposited licenses; relevance-ranked (loose)"),
     "s2": dict(status="auto", group="aggregator", default=True, optional_key="s2",
-               covers="Semantic Scholar ~200M papers; strong CS/physics coverage; slow without a key"),
+               covers="Semantic Scholar ~200M sources; strong CS/physics coverage; slow without a key"),
     "openaire": dict(status="auto", group="aggregator", default=True,
                      covers="OpenAIRE Graph: EU repositories, funder links, theses"),
     "core": dict(status="key", group="aggregator", default=True, keys=["core"],
@@ -1094,7 +1094,7 @@ CATALOG = {
     "zenodo": dict(status="auto", group="repository", default=True, optional_key="zenodo",
                    covers="Zenodo publications (and datasets with {\"type\": \"dataset\"})"),
     "figshare": dict(status="auto", group="repository", default=True,
-                     covers="Figshare articles; publisher SI files are attached to their paper, not listed"),
+                     covers="Figshare articles; publisher SI files are attached to their source, not listed"),
     "doaj": dict(status="auto", group="publisher", default=True,
                  covers="DOAJ fully-OA journals (MDPI, Frontiers, Hindawi, SAGE Open, RSC Advances ...)"),
     "plos": dict(status="auto", group="publisher", default=True, covers="PLOS journals"),
@@ -1125,10 +1125,10 @@ CATALOG = {
     "epo": dict(status="key", group="patent", default=True, keys=["epo_key", "epo_secret"],
                 covers="EPO Open Patent Services (EP, WO, worldwide DOCDB); CQL queries"),
     "citations": dict(status="auto", group="citation", default=False,
-                      covers="forward citation chasing through OpenAlex (search.py --citing); not a query source"),
+                      covers="forward citation chasing through OpenAlex (search.py --citing); not a query database"),
     # education (off by default)
     "eric": dict(status="auto", group="domain", default=False, covers="ERIC: chemistry-education literature"),
-    # found through another source
+    # found through another database
     "chemrxiv": dict(status="covered", via="crossref_preprints, europepmc, s2",
                      reason="ChemRxiv's own API sits behind a Cloudflare challenge; its DOIs (10.26434) are in Crossref"),
     "biorxiv": dict(status="covered", via="crossref_preprints, europepmc", reason="the bioRxiv/medRxiv API lists by date only"),
@@ -1146,7 +1146,7 @@ CATALOG = {
                       reason="not a search engine: every DOI is looked up there for access type and license"),
     "publisher_oa": dict(status="covered", via="crossref, openalex, doaj",
                          reason="BMC, Elsevier OA, Frontiers, Hindawi, MDPI, SAGE Open, SpringerOpen and Wiley OA have no "
-                                "search APIs; their papers are indexed through Crossref/OpenAlex/DOAJ and downloaded from "
+                                "search APIs; their sources are indexed through Crossref/OpenAlex/DOAJ and downloaded from "
                                 "their CDNs"),
     "jstor_open": dict(status="covered", via="crossref", reason="no public search API"),
     "scielo": dict(status="covered", via="crossref, openalex, doaj", reason="search.scielo.org is behind a bot challenge"),
@@ -1184,8 +1184,8 @@ def keys_needed(src):
     return CATALOG.get(src, {}).get("keys") or []
 
 
-def default_sources(keys=None):
-    """Sources queried for a new topic: every keyless default plus the key sources whose keys are present."""
+def default_databases(keys=None):
+    """Databases queried for a new topic: every keyless default plus the key databases whose keys are present."""
     keys = keys or {}
     out = []
     for k, v in CATALOG.items():

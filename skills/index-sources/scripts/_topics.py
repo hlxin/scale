@@ -1,4 +1,4 @@
-"""Topic vocabulary: each paper's Topic A/B/C (its three main topics) and Related topics (library module).
+"""Topic vocabulary: each source's Topic A/B/C (its three main topics) and Related topics (library module).
 
 The vocabulary is the domain's, not the skill's (vocab_path: a path given, $INDEX_SOURCES_VOCAB, the project's
 .scripts/vocab.json, else SCALE's catalysis vocabulary in graphs/catal-commons/literature/vocabulary.json when the
@@ -6,7 +6,7 @@ skill runs from a checkout of hlxin/scale). A project can add or override terms 
 
 Deterministic assignment (no model): synonyms are matched on word tokens of the title (x3), keywords (x2) and abstract
 (x1); a longer synonym consumes its words so "electrochemical ammonia synthesis" counts for NRR, not for thermal
-ammonia synthesis. Topic A/B/C = the three best-scoring terms with score >= 1. Related topics = other terms the paper
+ammonia synthesis. Topic A/B/C = the three best-scoring terms with score >= 1. Related topics = other terms the source
 matches plus the vocabulary neighbours of A/B/C (CO2RR -> CORR, OER -> ORR ...).
 Claude / API screening assigns A/B/C itself from the same vocabulary; Related topics are completed the same way.
 """
@@ -198,18 +198,18 @@ class Vocab:
 
 
 def apply_vocab(led, vocab, rows, only_missing=False):
-    """Deterministic Topic A/B/C + Related for `rows` (ledger rows). Papers whose topics came from Claude, an API model
-    or a person keep them. Returns the number of papers written."""
+    """Deterministic Topic A/B/C + Related for `rows` (ledger rows). Sources whose topics came from Claude, an API model
+    or a person keep them. Returns the number of sources written."""
     have, before = {}, {}
     ids = [p["id"] for p in rows]
-    for i in range(0, len(ids), 900):     # only the given papers (a topic may hold millions)
+    for i in range(0, len(ids), 900):     # only the given sources (a topic may hold millions)
         ch = ids[i:i + 900]
         qs = ",".join("?" * len(ch))
-        for pid, m in led.q(f"SELECT paper_id, MAX(method) FROM paper_subjects WHERE kind='main' AND paper_id IN ({qs}) "
-                            "GROUP BY paper_id", tuple(ch)):
+        for pid, m in led.q(f"SELECT source_id, MAX(method) FROM source_subjects WHERE kind='main' AND source_id IN ({qs}) "
+                            "GROUP BY source_id", tuple(ch)):
             have[pid] = m
-        for pid, term, rank in led.q(f"SELECT paper_id, term, rank FROM paper_subjects WHERE kind='main' AND paper_id IN "
-                                     f"({qs}) ORDER BY paper_id, rank", tuple(ch)):
+        for pid, term, rank in led.q(f"SELECT source_id, term, rank FROM source_subjects WHERE kind='main' AND source_id IN "
+                                     f"({qs}) ORDER BY source_id, rank", tuple(ch)):
             before.setdefault(pid, []).append(term)
     n = 0
     apply_vocab.changed = 0

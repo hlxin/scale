@@ -38,22 +38,22 @@ def write(p, obj):
 
 @pytest.fixture()
 def corpus(tmp_path):
-    pdf = tmp_path / "papers" / "7.pdf"
+    pdf = tmp_path / "files" / "7.pdf"
     pdf.parent.mkdir()
     doc = fitz.open()
     for text in ("Cu foil reduces CO2 to formate at -0.9 V vs RHE.", "The Faradaic efficiency to formate was 61 %."):
         doc.new_page().insert_text((72, 72), text)
     doc.save(str(pdf))
-    si = tmp_path / "papers" / "7_SI.txt"
+    si = tmp_path / "files" / "7_SI.txt"
     si.write_text("Table S1. Faradaic efficiency to CO: 12 %.", encoding="utf-8")
     manifest = tmp_path / "corpus" / "sources.json"
     manifest.parent.mkdir()
     manifest.write_text(json.dumps({
         "corpus": "a test corpus", "frozen_at": "2026-10-19", "counts": {"in_scope": 1, "off_scope": 1},
         "included_status": "in_scope",
-        "sources": [{"slug": "7", "status": "in_scope", "paper_id": 7, "title": "Formate on Cu", "year": 2025,
-                     "pdf": "../papers/7.pdf", "si": ["../papers/7_SI.txt"], "licence": "cc-by"},
-                    {"slug": "8", "status": "off_scope", "paper_id": 8, "status_reason": "screened out"}]}),
+        "sources": [{"slug": "7", "status": "in_scope", "source_id": 7, "title": "Formate on Cu", "year": 2025,
+                     "pdf": "../files/7.pdf", "si": ["../files/7_SI.txt"], "licence": "cc-by"},
+                    {"slug": "8", "status": "off_scope", "source_id": 8, "status_reason": "screened out"}]}),
         encoding="utf-8")
     return manifest
 
@@ -117,7 +117,7 @@ def test_a_rejected_source_is_settled(corpus, tmp_path):
     run("prepare", "--corpus", corpus, "--run", r, "--scale", SCALE, *MODELS)
     f = r / "sources" / "7"
     write(f / "work" / "curation.json", {"result": "no_data", "records": 0, "gaps": 0, "note": "test"})
-    write(f / "work" / "review.json", {"verdict": "reject", "issues": [], "note": "wrong paper"})
+    write(f / "work" / "review.json", {"verdict": "reject", "issues": [], "note": "wrong source"})
     assert run("status", "--run", r)["states"] == {"rejected": 1}
 
 
@@ -141,8 +141,8 @@ def test_gap_reports_are_counted_by_kind(corpus, tmp_path):
     assert g["missing_concept"] == [{"source": "7", "gap": "GAP-1", "about": "about GAP-1"}]
 
 
-def test_a_passed_source_shows_in_the_paper_index_at_once(tmp_path):
-    """In an index-sources project, recording a passed source updates papers.db (the index's Extracted column)."""
+def test_a_passed_source_shows_in_the_source_index_at_once(tmp_path):
+    """In an index-sources project, recording a passed source updates index.db (the index's Extracted column)."""
     import sqlite3
     sys.path.insert(0, str(REPO / "skills" / "index-sources" / "scripts"))
     from _common import Project
@@ -150,23 +150,23 @@ def test_a_passed_source_shows_in_the_paper_index_at_once(tmp_path):
     proj = Project(tmp_path / "project")
     (proj.scr / "t").mkdir(parents=True)
     (proj.scr / "t" / "config.json").write_text(json.dumps({"topic": "Test topic", "slug": "t"}))
-    pdf = proj.root / "publications" / "t" / "papers" / "OA" / "7.pdf"
+    pdf = proj.root / "sources" / "t" / "files" / "OA" / "7.pdf"
     pdf.parent.mkdir(parents=True)
     doc = fitz.open()
     doc.new_page().insert_text((72, 72), "Cu foil reduces CO2 to formate at -0.9 V vs RHE.")
     doc.save(str(pdf))
     led = Ledger(proj)
-    led.x("INSERT INTO papers (id, key, doi, title, authors, year, journal, doc_type, access_type, downloaded) "
+    led.x("INSERT INTO sources (id, key, doi, title, authors, year, journal, doc_type, access_type, downloaded) "
           "VALUES (7, '10.1/seven', '10.1/seven', 'Formate on Cu', '[\"A. Author\"]', 2025, 'J. Test', 'article', 'OA', 1)")
-    led.set_topic(7, "t", in_scope=1, relevance=5, path="publications/t/papers/OA/7.pdf")
+    led.set_topic(7, "t", in_scope=1, relevance=5, path="sources/t/files/OA/7.pdf")
     led.add_dois(7, ["10.1/seven"])
     led.export()
-    manifest = proj.root / "publications" / "t" / "corpora" / "c" / "sources.json"
+    manifest = proj.root / "sources" / "t" / "corpora" / "c" / "sources.json"
     manifest.parent.mkdir(parents=True)
     manifest.write_text(json.dumps({"corpus": "c", "topic": "t", "frozen_at": "2026-10-22", "counts": {"in_scope": 1},
                                     "included_status": "in_scope",
-                                    "sources": [{"slug": "7", "status": "in_scope", "paper_id": 7, "title": "Formate on Cu",
-                                                 "year": 2025, "pdf": "../../papers/OA/7.pdf", "licence": "cc-by"}]}))
+                                    "sources": [{"slug": "7", "status": "in_scope", "source_id": 7, "title": "Formate on Cu",
+                                                 "year": 2025, "pdf": "../../files/OA/7.pdf", "licence": "cc-by"}]}))
     r = tmp_path / "run"
     run("prepare", "--corpus", manifest, "--run", r, "--scale", SCALE, *MODELS)
     f = r / "sources" / "7"
@@ -178,7 +178,7 @@ def test_a_passed_source_shows_in_the_paper_index_at_once(tmp_path):
     st = run("status", "--run", r, "--apply")
     assert st["applied"] == 1 and st["index"]["exported"] is True
     con = sqlite3.connect(str(proj.db))
-    assert con.execute("SELECT status, kg FROM extractions WHERE paper_id = 7").fetchone() == ("extracted", "run")
+    assert con.execute("SELECT status, kg FROM extractions WHERE source_id = 7").fetchone() == ("extracted", "run")
     con.close()
 
 

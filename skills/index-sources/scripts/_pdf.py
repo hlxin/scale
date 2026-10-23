@@ -114,7 +114,7 @@ def title_match(title, first_text):
 
 # --- license statements ------------------------------------------------------------------
 _CTX = re.compile(r"(open[\s-]+access|licen[cs]e|creative\s*commons|creativecommons|cc[\s-]*by|attribution|"
-                  r"this\s+(is\s+an|article|work|paper)|distributed\s+under|made\s+available\s+under|published\s+under|"
+                  r"this\s+(is\s+an|article|work|source)|distributed\s+under|made\s+available\s+under|published\s+under|"
                   r"terms\s+of\s+the)", re.I)
 _PATTERNS = [  # most specific first
     ("cc-by-nc-nd", r"(by[\s-]*nc[\s-]*nd\b|noncommercial[\s-]*no[\s-]*deriv|non[\s-]*commercial[\s-]*no[\s-]*deriv|licenses/by-nc-nd)"),
@@ -147,7 +147,7 @@ def license_from_text(first_text, last_text):
     if not found:
         return None, "", [], arr
     kinds = [k for k, _ in found]
-    # the paper's own statement should dominate; if any ND statement is present, be conservative
+    # the source's own statement should dominate; if any ND statement is present, be conservative
     nd = [f for f in found if f[0] in ND_LICENSES]
     if nd:
         return nd[0][0], nd[0][1][:400], sorted(set(kinds)), arr
@@ -156,16 +156,16 @@ def license_from_text(first_text, last_text):
     return best, snip[:400], sorted(set(kinds)), arr
 
 
-# Article-level license statements (the paper's OWN license, not a figure credit like
+# Article-level license statements (the source's OWN license, not a figure credit like
 # "Reproduced from ref. 12 under CC BY"). Used as the strongest evidence for the corpus folder.
 _ART_RX = re.compile(
-    r"(this\s+(is\s+an?\s+)?(open[\s-]+access\s+)?(article|work|paper|manuscript|chapter|review)\s+(is\s+)?"
+    r"(this\s+(is\s+an?\s+)?(open[\s-]+access\s+)?(article|work|source|manuscript|chapter|review)\s+(is\s+)?"
     r"(licensed|distributed|published|made\s+available|available)\s+under"
     r"|open[\s-]+access\s+(this\s+)?(article|work)\s+(is\s+)?(licensed|distributed|published)\s+under"
     r"|(is|are)\s+(an?\s+)?open[\s-]+access\s+article\s+(distributed|published|licensed)\s+under"
     r"|this\s+article\s+is\s+an\s+open\s+access\s+article\s+distributed"
-    r"|this\s+is\s+an?\s+open[\s-]+access\s+(article|paper)\s+under"
-    r"|(article|paper)\s+(is\s+)?(distributed\s+|published\s+)?under\s+the\s+terms\s+(and\s+conditions\s+)?of\s+the\s+creative\s+commons"
+    r"|this\s+is\s+an?\s+open[\s-]+access\s+(article|source)\s+under"
+    r"|(article|source)\s+(is\s+)?(distributed\s+|published\s+)?under\s+the\s+terms\s+(and\s+conditions\s+)?of\s+the\s+creative\s+commons"
     r"|content\s+from\s+this\s+work\s+may\s+be\s+used\s+under\s+the\s+terms\s+of"
     r"|published\s+under\s+(an?\s+|the\s+)?(creative\s+commons|cc[\s-]*by|acs\s+authorchoice)"
     r"|licen[cs]ed\s+under\s+(an?\s+|the\s+)?(creative\s+commons|cc[\s-]*by))", re.I)
@@ -173,7 +173,7 @@ _CREDIT_RX = re.compile(r"(reproduced|adapted|reprinted|modified)\s+(with\s+perm
 
 
 def article_license(first_text, last_text):
-    """Return (token, snippet) for the paper's own license statement, or (None, "")."""
+    """Return (token, snippet) for the source's own license statement, or (None, "")."""
     for part in (first_text, last_text):
         flat = re.sub(r"\s+", " ", part or "")
         for m in _ART_RX.finditer(flat):

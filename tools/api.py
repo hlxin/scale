@@ -190,8 +190,9 @@ TOOLS: list[dict] = [
     },
     {
         "name": "scale_skills",
-        "description": "List the SCALE skills (versioned procedures: index-sources, curate-corpus, query-graph, "
-                       "map-coverage, scan-conflicts, export-graph, evolve-schema, triage-feedback), or return one "
+        "description": "List the SCALE skills (versioned procedures: index-sources, fetch-corpus, curate-corpus, "
+                       "query-graph, map-coverage, scan-conflicts, export-graph, evolve-schema, triage-feedback), or "
+                       "return one "
                        "skill's text, or one of the reference files its text points to (e.g. curate-corpus's "
                        "references/recipes.md). curate-source and curate-dataset name curate-corpus.",
         "input_schema": {"type": "object", "properties": {

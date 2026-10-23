@@ -1,6 +1,6 @@
-"""The vector store (publications/vectors.db): the downloaded papers' passages and their vectors. A paper is read once
-and a text embedded once — an update reads only new and changed papers and embeds only new text, a paper merged into
-another ID keeps its vectors — a paper that leaves takes its passages along, a search finds passages by words and by
+"""The vector store (sources/vectors.db): the downloaded sources' passages and their vectors. A source is read once
+and a text embedded once — an update reads only new and changed sources and embeds only new text, a source merged into
+another ID keeps its vectors — a source that leaves takes its passages along, a search finds passages by words and by
 meaning and joins them to their records in the index, and every step that changes the downloads keeps the store in
 step when the project has one.
 
@@ -41,12 +41,12 @@ def make_pdf(path, pages):
     return hashlib.sha1(path.read_bytes()).hexdigest()
 
 
-def add_paper(proj, led, pid, title, doi, pages=None, **f):
-    led.x("INSERT INTO papers (id, key, doi, title, authors, year, journal, doc_type, access_type) "
+def add_source(proj, led, pid, title, doi, pages=None, **f):
+    led.x("INSERT INTO sources (id, key, doi, title, authors, year, journal, doc_type, access_type) "
           "VALUES (?,?,?,?,?,?,?,?,?)", (pid, doi, doi, title, json.dumps(["A. Author"]), 2024, "J. Test",
                                          f.pop("doc_type", "article"), "OA"))
     led.add_dois(pid, [doi])
-    rel = f"publications/t/papers/OA/{pid}.pdf"
+    rel = f"sources/t/files/OA/{pid}.pdf"
     if pages:
         sha = make_pdf(proj.root / rel, pages)
         led.set(pid, downloaded=1, sha1=sha, **f)
@@ -65,12 +65,12 @@ def project(tmp_path):
     (proj.scr / "t").mkdir(parents=True, exist_ok=True)
     (proj.scr / "t" / "config.json").write_text(json.dumps({"topic": "Test topic", "slug": "t"}))
     led = Ledger(proj)
-    add_paper(proj, led, 1, "Copper nanocubes for CO2 to ethylene", "10.1/one", TEXT[1])
-    add_paper(proj, led, 2, "Nickel phosphide for hydrogen evolution (preprint)", "10.26434/chemrxiv-two", TEXT[2],
+    add_source(proj, led, 1, "Copper nanocubes for CO2 to ethylene", "10.1/one", TEXT[1])
+    add_source(proj, led, 2, "Nickel phosphide for hydrogen evolution (preprint)", "10.26434/chemrxiv-two", TEXT[2],
               is_preprint=1, doc_type="preprint")
-    add_paper(proj, led, 3, "Zinc oxide promoted copper for methanol", "10.1/three", TEXT[3])
-    add_paper(proj, led, 4, "A paper not downloaded yet", "10.1/four")
-    add_paper(proj, led, 5, "Correction to a copper paper", "10.1/five", ["Correction: the copper loading was 2 percent."],
+    add_source(proj, led, 3, "Zinc oxide promoted copper for methanol", "10.1/three", TEXT[3])
+    add_source(proj, led, 4, "A source not downloaded yet", "10.1/four")
+    add_source(proj, led, 5, "Correction to a copper source", "10.1/five", ["Correction: the copper loading was 2 percent."],
               is_erratum=1)
     led.export()
     return proj
@@ -87,44 +87,44 @@ def store(proj):
     return sqlite3.connect(str(proj.pub / "vectors.db"))
 
 
-def test_an_update_reads_each_paper_once_and_embeds_only_new_text(project):
+def test_an_update_reads_each_source_once_and_embeds_only_new_text(project):
     from _ledger import Ledger
     proj = project
     first = run(proj, "update")
-    assert (first["papers_read"], first["papers"]) == (3, 3)                 # not the erratum, not the undownloaded
+    assert (first["sources_read"], first["sources"]) == (3, 3)                 # not the erratum, not the undownloaded
     n_passages = first["passages"]
     assert first["embedded"]["scale-hash-v1"] == n_passages > 3
     again = run(proj, "update")
-    assert (again["papers_read"], again["papers_unchanged"], again["embedded"]["scale-hash-v1"]) == (0, 3, 0)
-    led = Ledger(proj)                                   # paper 2 downloaded again, with one more page
-    sha = make_pdf(proj.root / "publications/t/papers/OA/2.pdf", TEXT[2] + ["Its Tafel slope is 46 mV per decade."])
+    assert (again["sources_read"], again["sources_unchanged"], again["embedded"]["scale-hash-v1"]) == (0, 3, 0)
+    led = Ledger(proj)                                   # source 2 downloaded again, with one more page
+    sha = make_pdf(proj.root / "sources/t/files/OA/2.pdf", TEXT[2] + ["Its Tafel slope is 46 mV per decade."])
     led.set(2, sha1=sha)
     changed = run(proj, "update")
-    assert changed["papers_read"] == 1 and changed["passages_already_known"] >= 1
+    assert changed["sources_read"] == 1 and changed["passages_already_known"] >= 1
     assert changed["embedded"]["scale-hash-v1"] == 1                          # only the new page's text
-    si = proj.root / "publications/t/papers/SI/OA/1_SI1.pdf"                  # SI of paper 1 arrives (fetch_si)
+    si = proj.root / "sources/t/files/SI/OA/1_SI1.pdf"                  # SI of source 1 arrives (fetch_si)
     make_pdf(si, ["Table S1. Ethylene Faradaic efficiency at five potentials."])
     led.set_topic(1, "t", si_paths=[str(si.relative_to(proj.root))])
     with_si = run(proj, "update")
-    assert with_si["papers_read"] == 1 and with_si["embedded"]["scale-hash-v1"] == 1
+    assert with_si["sources_read"] == 1 and with_si["embedded"]["scale-hash-v1"] == 1
     con = store(proj)
     assert con.execute("SELECT text FROM passages WHERE id = '1/pS1/1'").fetchone()[0].startswith("Table S1.")
-    assert con.execute("SELECT COUNT(*) FROM passages WHERE paper_id = 1 AND page IN ('1', '2')").fetchone()[0] >= 2
+    assert con.execute("SELECT COUNT(*) FROM passages WHERE source_id = 1 AND page IN ('1', '2')").fetchone()[0] >= 2
 
 
-def test_a_paper_that_leaves_takes_its_passages_and_a_merged_one_keeps_its_vectors(project):
+def test_a_source_that_leaves_takes_its_passages_and_a_merged_one_keeps_its_vectors(project):
     from _ledger import Ledger
     proj = project
     run(proj, "update")
     led = Ledger(proj)
     led.set(3, downloaded=0)                                                  # no longer downloaded
     out = run(proj, "update")
-    assert out["papers_removed"] == 1 and out["vectors_dropped"] >= 1
+    assert out["sources_removed"] == 1 and out["vectors_dropped"] >= 1
     con = store(proj)
-    assert con.execute("SELECT COUNT(*) FROM passages WHERE paper_id = 3").fetchone()[0] == 0
+    assert con.execute("SELECT COUNT(*) FROM passages WHERE source_id = 3").fetchone()[0] == 0
     con.close()
-    # the journal version of paper 2 is indexed: dedup keeps it and moves the downloaded preprint's PDF to its ID
-    add_paper(proj, led, 8, "Nickel phosphide for hydrogen evolution", "10.1/eight")
+    # the journal version of source 2 is indexed: dedup keeps it and moves the downloaded preprint's PDF to its ID
+    add_source(proj, led, 8, "Nickel phosphide for hydrogen evolution", "10.1/eight")
     led.export()
     r = subprocess.run([sys.executable, "-I", str(SCRIPTS / "dedup.py"), "--project", str(proj.root), "--merge", "2:8"],
                        capture_output=True, text=True, timeout=600)
@@ -132,25 +132,25 @@ def test_a_paper_that_leaves_takes_its_passages_and_a_merged_one_keeps_its_vecto
     res = json.loads(r.stdout.strip().splitlines()[-1])
     assert res["merged"] == [{"kept": 8, "merged": 2}]
     vec = res["vector_store"]                                                 # the merge kept the store in step
-    assert vec["papers_removed"] == 1 and vec["papers_read"] == 1 and vec["embedded"]["scale-hash-v1"] == 0
+    assert vec["sources_removed"] == 1 and vec["sources_read"] == 1 and vec["embedded"]["scale-hash-v1"] == 0
     con = store(proj)
-    assert {r[0] for r in con.execute("SELECT DISTINCT paper_id FROM passages")} == {1, 8}
+    assert {r[0] for r in con.execute("SELECT DISTINCT source_id FROM passages")} == {1, 8}
 
 
 def test_search_finds_passages_and_joins_their_records(project):
     proj = project
     run(proj, "update")
     hit = run(proj, "search", "ethylene from CO2 on copper", "--k", 3)["hits"][0]
-    assert hit["paper_id"] == 1 and hit["title"] == "Copper nanocubes for CO2 to ethylene" and hit["doi"] == "10.1/one"
+    assert hit["source_id"] == 1 and hit["title"] == "Copper nanocubes for CO2 to ethylene" and hit["doi"] == "10.1/one"
     assert hit["passage"].startswith("1/p1/") and "ethylene" in hit["text"]
     kw = run(proj, "search", "Tafel nickel phosphide", "--mode", "keyword")["hits"]
-    assert kw and kw[0]["paper_id"] == 2
+    assert kw and kw[0]["source_id"] == 2
     vec = run(proj, "search", "methanol synthesis over zinc oxide and copper", "--mode", "vector")["hits"]
-    assert vec[0]["paper_id"] == 3
+    assert vec[0]["source_id"] == 3
     only = run(proj, "search", "copper", "--ids", "3")["hits"]
-    assert {h["paper_id"] for h in only} == {3}
+    assert {h["source_id"] for h in only} == {3}
     st = run(proj, "status")
-    assert (st["papers"], st["downloaded_papers"], st["papers_to_read"]) == (3, 3, 0)
+    assert (st["sources"], st["downloaded_sources"], st["sources_to_read"]) == (3, 3, 0)
     assert st["texts_without_vector"] == {"scale-hash-v1": 0}
 
 
@@ -162,14 +162,15 @@ def test_every_download_step_keeps_the_store_in_step(project):
     assert V.after_step(proj, led) is None and not V.store_path(proj).exists()   # no store: nothing is made
     run(proj, "init")
     assert V.store_path(proj).exists()
-    rel = "publications/t/papers/OA/4.pdf"                    # download_open saves paper 4 ...
+    rel = "sources/t/files/OA/4.pdf"                    # download_open saves source 4 ...
     led.set(4, downloaded=1, sha1=make_pdf(proj.root / rel, ["Silver nanowires reduce CO2 to CO in a flow cell."]))
     led.set_topic(4, "t", path=rel)
     led.export()
     res = V.after_step(proj, led)                             # ... and ends with this
-    assert res["papers_read"] == 4 and res["papers"] == 4
-    hooked = [f for f in ("download_open.py", "download_paywalled.py", "fetch_si.py", "dedup.py", "merge_db.py")
-              if "after_step(proj, led)" in (SCRIPTS / f).read_text()]
+    assert res["sources_read"] == 4 and res["sources"] == 4
+    fetch = HERE.parents[1] / "fetch-corpus" / "scripts"            # the downloads are fetch-corpus's
+    hooked = [p for p in (fetch / "download_open.py", fetch / "download_paywalled.py", fetch / "fetch_si.py",
+                          SCRIPTS / "dedup.py", SCRIPTS / "merge_db.py") if "after_step(proj, led)" in p.read_text()]
     assert len(hooked) == 5
 
 
@@ -190,7 +191,7 @@ def test_a_second_embedder_is_kept_apart_and_can_be_dropped(project, monkeypatch
     led = Ledger(proj)
     V.update(proj, led)
     both = V.update(proj, led, embedders=[Stub.id])
-    assert both["embedded"][Stub.id] == both["passages"] and both["papers_read"] == 0   # vectors, no re-reading
+    assert both["embedded"][Stub.id] == both["passages"] and both["sources_read"] == 0   # vectors, no re-reading
     con = V.open_store(proj)
     assert V.embedders_of(con) == ["scale-hash-v1", Stub.id]
     con.close()
@@ -226,12 +227,12 @@ def test_a_local_model_embeds_offline_and_finds_by_meaning(project):
     run(proj, "update")
     name = f"sentence-transformers:{MODEL}"
     out = run(proj, "update", "--embedder", name)                     # offline: from the local cache only
-    assert out["papers_read"] == 0 and out["embedded"][name] == out["passages"]
+    assert out["sources_read"] == 0 and out["embedded"][name] == out["passages"]
     hit = run(proj, "search", "electrochemical conversion of carbon dioxide into C2 products", "--mode", "vector",
               "--embedder", name)["hits"][0]
-    assert hit["paper_id"] == 1 and hit["title"]
+    assert hit["source_id"] == 1 and hit["title"]
     hit = run(proj, "search", "making methanol from synthesis gas", "--mode", "vector", "--embedder", name)["hits"][0]
-    assert hit["paper_id"] == 3
+    assert hit["source_id"] == 3
     assert run(proj, "status")["texts_without_vector"] == {"scale-hash-v1": 0, name: 0}
     assert run(proj, "update")["embedded"] == {"scale-hash-v1": 0, name: 0}
 
@@ -246,7 +247,7 @@ def test_reference_lists_are_left_out_of_a_search_unless_asked(project):
     from _ledger import Ledger
     proj = project
     led = Ledger(proj)
-    add_paper(proj, led, 9, "A review whose last page cites copper papers", "10.1/nine",
+    add_source(proj, led, 9, "A review whose last page cites copper sources", "10.1/nine",
               ["Electrocatalysts are reviewed here in general terms for many reactions.", REFS])
     led.export()
     assert V.is_reference_list(REFS) and not any(V.is_reference_list(t) for pages in TEXT.values() for t in pages)
@@ -267,7 +268,7 @@ def test_a_store_of_the_first_layout_is_reordered_once(project):
                       "DROP TABLE vectors; ALTER TABLE old RENAME TO vectors;")
     con.close()
     hit = run(proj, "search", "methanol synthesis over zinc oxide and copper", "--mode", "vector")["hits"][0]
-    assert hit["paper_id"] == 3
+    assert hit["source_id"] == 3
     con = sqlite3.connect(str(V.store_path(proj)))
     assert {r[1]: r[5] for r in con.execute("PRAGMA table_info(vectors)")}["embedder"] == 1
     assert con.execute("SELECT COUNT(*) FROM vectors").fetchone()[0] == first["vectors"]["scale-hash-v1"]
@@ -275,11 +276,11 @@ def test_a_store_of_the_first_layout_is_reordered_once(project):
     assert run(proj, "update")["embedded"] == {"scale-hash-v1": 0}
 
 
-def test_a_paper_is_loaded_by_id_or_doi_and_papers_are_ranked_for_a_question(project, tmp_path):
+def test_a_source_is_loaded_by_id_or_doi_and_sources_are_ranked_for_a_question(project, tmp_path):
     proj = project
     run(proj, "update")
     one = run(proj, "get", "10.1/one")                                      # by DOI, through the index
-    assert one["paper_id"] == 1 and one["title"] == "Copper nanocubes for CO2 to ethylene" and one["pages"] == 2
+    assert one["source_id"] == 1 and one["title"] == "Copper nanocubes for CO2 to ethylene" and one["pages"] == 2
     assert [t["page"] for t in one["text"]] == sorted((t["page"] for t in one["text"]), key=int)
     assert "Isotope labelling" in " ".join(t["text"] for t in one["text"])
     assert run(proj, "get", "1")["text"] == one["text"]
@@ -287,10 +288,10 @@ def test_a_paper_is_loaded_by_id_or_doi_and_papers_are_ranked_for_a_question(pro
                         "--text"], capture_output=True, text=True, timeout=600)
     assert "[page 1]" in r.stdout and "[page 2]" in r.stdout and "10.1/one" in r.stdout
     ids = tmp_path / "ids.txt"
-    ranked = run(proj, "search", "copper catalysts", "--by-paper", "--k", 2, "--ids-out", ids)
-    got = [p["paper_id"] for p in ranked["papers"]]
+    ranked = run(proj, "search", "copper catalysts", "--by-source", "--k", 2, "--ids-out", ids)
+    got = [p["source_id"] for p in ranked["sources"]]
     assert got[0] == 1 and len(got) == 2 and ids.read_text().split() == [str(i) for i in got]
-    assert all(1 <= len(p["passages"]) <= 3 and p["title"] for p in ranked["papers"])
+    assert all(1 <= len(p["passages"]) <= 3 and p["title"] for p in ranked["sources"])
     r = subprocess.run([sys.executable, "-I", str(SCRIPTS / "vectors.py"), "--project", str(proj.root), "get", "4"],
                        capture_output=True, text=True, timeout=600)
     assert r.returncode != 0 and "not in the vector store" in r.stderr and "Traceback" not in r.stderr
