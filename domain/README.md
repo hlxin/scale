@@ -14,7 +14,7 @@ stewards are named in [`DOMAIN.yaml`](DOMAIN.yaml). A second domain would revisi
 | | |
 |---|---|
 | status | `stable`, `founding: true` (its stewardship targets are warnings) |
-| schema version | 0.5.2 (kernel and catalysis together) |
+| schema version | 0.7.1 (kernel and catalysis together) |
 | maintainers | `@hlxin` (the owner) and the reviewers of the review policy, open to more as they join |
 | stewards | Hongliang Xin (`hlxin`), since 2026-09-26 |
 | review areas | `catalysis`, `thermo`, `electrothermo`, `electro`, `photo`, `plasma` |
@@ -72,6 +72,7 @@ domain/
 ├── graph/              # scale-catal.yaml (the graph schema manifest), catalysis.yaml (with the checklist)
 ├── competency/         # competency questions: cq-NN-*.yaml (graph query plans with expected answers)
 ├── examples/           # public synthetic example documents
+├── mappings/           # catalysis.yaml: the catalysis terms mapped to ontology terms, and the subdomains of catalysis research
 ├── docs/               # catalysis documentation (reporting guidance)
 └── tests/              # test_*.py, collected by pytest; fixtures
 ```
@@ -81,9 +82,10 @@ domain/
 | `graph/scale-catal.yaml` | the catalysis graph schema manifest: the schema's one version, the science kernel (`../../core/graph/kernel.yaml`) and the catalysis file |
 | `graph/catalysis.yaml` | the catalysis file (`domain: catalysis`): the vocabulary and the checklist |
 | `graph/frozen/` | the frozen schema versions (`scale-catal-<version>.yaml`, `v<version>/`, `SHA256SUMS`), written when a schema change moves the schema on (`scale schema bump`); none yet |
-| `competency/` | competency questions CQ-01 … CQ-13: graph query plans over the public examples, with their expected answers |
+| `competency/` | competency questions CQ-01 … CQ-28: graph query plans over the public examples, with their expected answers |
 | `examples/` | the public synthetic examples ([overview](./examples/README.md)) |
-| `docs/` | [catalyst-state reporting](docs/reporting/catalyst-state-reporting.md) and the [supporting-information index](docs/supporting-information.md) |
+| `mappings/catalysis.yaml` | the catalysis labels, edge types and values mapped to ontology terms (ChEBI, the Chemical Methods Ontology, REX, MOP, Allotrope, OBI and others), and the fourteen subdomains of catalysis research of Ontologies4Cat with the SCALE terms that record each ([mappings](../docs/mappings.md)) |
+| `docs/` | [catalyst-state reporting](docs/reporting/catalyst-state-reporting.md), [catalyst-preparation reporting](docs/reporting/catalyst-preparation-reporting.md) and the [supporting-information index](docs/supporting-information.md) |
 | `tests/` | the catalysis tests and the invalid scale-catal fixtures (`fixtures/invalid/`, each rejected for the reason `expect.yaml` states) |
 
 Code that the catalysis domain needs goes in `tools/` ([tools/README.md](../tools/README.md)).
@@ -92,8 +94,13 @@ The examples, in `examples/scale-catal/`: a synthetic thermocatalytic test (`exa
 invented source), one synthetic document per other driving force or combination (`driving-force-examples/`), a
 source's lifecycle (`source-lifecycle/`), current densities a scientific comparison keeps apart
 (`comparison-examples/`) and product measurements identified by metric, product, assay, phase and interval
-(`product-measurement-examples/`), and what a test is read as showing with the evidence connected to it, a
-heating ramp and the stability of electrodes (`evidence-examples/`), all public.
+(`product-measurement-examples/`), what a test is read as showing with the evidence connected to it, a
+heating ramp and the stability of electrodes (`evidence-examples/`), and the site populations of a catalyst's states,
+the site counts its turnover frequencies are divided by, activity assignments with their evidence and operando
+observations with and without the kinetics measured while they ran (`state-site-examples/`), and preparations and
+characterizations recorded step by step: two impregnated batches of one nominal formula with their lots, activation,
+storage and transfer, two coprecipitations in opposite orders of addition, and a high-entropy alloy's nominal, bulk,
+surface and working-state compositions and three sizes (`preparation-examples/`), all public.
 
 ## Versions
 
@@ -134,6 +141,7 @@ other value.
 | `competency` | yes | the competency-question directory (always `competency`): graph query plans with expected answers, run on public examples by `scale domains cq` |
 | `tests` | yes | the test directory (always `tests`; at least one `test_*.py`) |
 | `docs` | no | the documentation directory |
+| `mappings` | no | the catalysis terms mapped to ontology terms (always `mappings/catalysis.yaml`), checked by `scale domains check` ([mappings](../docs/mappings.md)) |
 | `roadmap` | yes | the roadmap file |
 | `decision_record` | for `stable` and `deprecated` | the decision record that accepted it, repository-relative (`docs/decisions/NNNN-*.md`; for catalysis, 0001) |
 | `deprecation` | for `deprecated` | why it is deprecated and what replaces it |

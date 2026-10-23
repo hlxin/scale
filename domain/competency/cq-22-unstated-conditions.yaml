@@ -1,0 +1,98 @@
+# A competency question of the catalysis domain (tools/competency.py; `scale domains cq catalysis`).
+# It runs on public synthetic examples, so anyone can rerun it and see the same answer.
+id: CQ-22
+question: Which storage steps say what atmosphere the catalyst was kept in, which preparation steps leave the stirring
+  rate unstated, and which raw data are not available?
+description: |
+  What a source leaves unstated stays explicit, so that "not stated" is an answer and never a blank to fill. A text
+  field the source is silent on reads "not stated" (the storage atmosphere of batch 1 of the Pt catalyst and of batch R
+  of the Cu/ZnO/Al2O3); a value it is silent on is a value with status not_reported and missing_reason
+  not_stated_in_source (the stirring rate of both coprecipitations, the addition rate of batch R); data the source
+  does not deposit is a Dataset with availability not_reported (the XPS spectra, an N2 isotherm, one set of electron
+  images). Storage is a Treatment (treatment_kind exposure) the sample is TREATED_BY, in order, with its duration and
+  atmosphere.
+documents:
+  - examples/scale-catal/preparation-examples/impregnation.json
+  - examples/scale-catal/preparation-examples/coprecipitation.json
+  - examples/scale-catal/preparation-examples/high-entropy-alloy.json
+plan:
+  question: Which storage steps say what atmosphere the catalyst was kept in?
+  match:
+    label: Treatment
+    as: storage
+    where:
+      - prop: treatment_kind
+        op: eq
+        value: exposure
+  steps:
+    - from: storage
+      edge: TREATED_BY
+      direction: in
+      to: CatalystSample
+      as: batch
+      edge_as: treated
+  return:
+    - batch.name
+    - treated.order
+    - storage.duration
+    - storage.atmosphere
+  evidence: true
+expect:
+  status: answered
+  min_rows: 3
+  max_rows: 3
+  values:
+    storage.atmosphere:
+      - not stated
+      - dry air, in a desiccator over silica gel
+variants:
+  - description: The conditions of a preparation step that the source does not state, each a row whose bound entry names
+      it (/conditions/stirring_rate) - the stirring rate of both coprecipitations and the addition rate of batch R; the
+      alloy's steps state their stirring rate (400 rpm) and are not among them.
+    plan:
+      match:
+        label: ProcedureStep
+        as: step
+      steps:
+        - from: step
+          entries: conditions
+          as: condition
+          where:
+            - prop: status
+              op: eq
+              value: not_reported
+        - from: step
+          edge: PART_OF
+          to: Preparation
+          as: preparation
+      return:
+        - preparation.name
+        - step.name
+        - condition
+    expect:
+      status: answered
+      min_rows: 3
+      max_rows: 3
+  - description: The data a characterization produced that the source does not make available.
+    plan:
+      match:
+        label: Dataset
+        as: data
+        where:
+          - prop: availability
+            op: eq
+            value: not_reported
+      steps:
+        - from: data
+          edge: HAS_OUTPUT
+          direction: in
+          to: Characterization
+          as: measurement
+      return:
+        - data.name
+        - data.data_kind
+        - measurement.technique
+    expect:
+      status: answered
+      min_rows: 4
+      max_rows: 4

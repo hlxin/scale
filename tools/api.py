@@ -444,6 +444,14 @@ class ScaleToolkit:
                          "example_plans": plans})
         return {"domains": rows, "examples": sorted(self._examples())}
 
+    def _mapping_index(self) -> dict | None:
+        """SCALE's terms mapped to ontology terms, by subject (docs/mappings.md); none without the registry."""
+        from . import mappings
+        try:
+            return mappings.index(self.repo) if (self.repo / layout.ONTOLOGY_REGISTRY).is_file() else None
+        except ScaleError:
+            return None
+
     def _scale_describe(self, names: list[str] | None = None, domain: str | None = None,
                         schema_version: str | None = None) -> dict:
         from . import pgraph
@@ -451,7 +459,7 @@ class ScaleToolkit:
         spec = self._spec(self._manifest(domain, hint), schema_version)
         profile = domain if domain and domain in (spec.get("profiles") or {}) else None
         if names:
-            return pgraph.describe(spec, list(names), profile)
+            return pgraph.describe(spec, list(names), profile, self._mapping_index())
         first = lambda t: (t or "").strip().split("\n")[0]   # noqa: E731
         return copy.deepcopy({"schema_version": spec["version"], "domain": domain,
                 "labels": {n: {"is_a": d.get("ancestors") or [], "description": first(d.get("description"))}

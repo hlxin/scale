@@ -270,9 +270,21 @@ value:
     record.
   - A value of a property bound to a quantity contract (quantities) is in a unit of one of its kind's dimensions;
     normalized_by goes only on a value whose kind declares a denominator, resolves (with its path) to a value object,
-    and names a value of the denominator's dimensions.
+    and names a value of the denominator's dimensions (and, where the denominator names kinds, a value of one of them).
+  - A value divided by a one-sided bound (its normalized_by names a value with bound) is a bound the other way (a rate
+    divided by at most N sites is at least the quotient) and states it (bound); one that does not is reported (a
+    warning) and kept as reported, and a scientific comparison shows the bound of what it is divided by.
+  - A value of a kind whose denominator is marked unstated (a turnover frequency) says how it was calculated (its
+    normalized_by names what it is divided by, or its basis or definition says it); one that says neither is reported
+    (a warning) and kept as reported. Its basis says how it was calculated, so a scientific comparison reads it, and
+    compares the value whatever it says.
   - target and unresolved_target do not go together; a target a domain narrows for a context (context_targets) names
     a record of one of its labels.
+  - A context read from a value's producer (a computed energy's level_of_theory and charge_treatment) is read from the
+    experiment its produced_by names, then from the experiment that holds it; a producer whose label has no such property
+    (a measurement, a fit) has none, and its values are compared apart from the others, never left out. A value whose kind
+    shows a property with warn (a free energy's temperature) and whose producer states none is reported (a warning) and
+    kept as reported.
   - id is snake_case and not only digits, and no two values of a record share one.
 evidence:
   description: Where an assertion comes from. Embedded on nodes and links; quotes are checked verbatim
@@ -1073,6 +1085,16 @@ nodes:
           type: value
       version:
         type: string
+        description: The model's version as its source names it; for a trained model, the checkpoint whose predictions
+          are recorded.
+      stored_in:
+        type: ref
+        targets:
+        - Dataset
+        maturity: provisional
+        description: The Dataset that holds the model itself, with its version and sha256 (the coordinates of an atomistic
+          structure, the weights of a trained model at its checkpoint, a mechanism or rate-law file). The record keeps what
+          a query reads and compares; the file keeps the rest.
   Source:
     maps_to:
     - IAO document
@@ -1790,11 +1812,26 @@ edges:
       state:
         type: text
   REPRESENTS:
-    description: A model represents an object of study (a modelling correspondence, not identity).
+    description: A model represents an object of study (a modelling correspondence, not identity). An atomistic model of
+      a catalyst stands for a specimen or a state of it without being it, so a state computed on the model needs no
+      specimen; what of the object the model stands for, and what the correspondence assumes, are on the link.
     from:
     - Model
     to:
     - ObjectOfStudy
+    properties:
+      aspect:
+        type: text
+        maturity: provisional
+        description: What of the object the model stands for, as the source says, when it is not the whole object (its
+          step sites, the working surface of one facet, one particle).
+      assumptions:
+        type: list
+        maturity: provisional
+        items:
+          type: text
+        description: What the correspondence assumes, as the source states it (a clean surface, no support, one facet for
+          every particle, a stated coverage). The model's own assumptions stay on the Model.
   HAS_PART:
     maps_to:
     - BFO has part
@@ -2079,6 +2116,12 @@ rules:
 - A Prediction tested by an experiment that started before the prediction's proposed_at is flagged post
   hoc (only when both dates are known).
 - A TESTS supports outcome that rests on a fitted value is flagged (a fit does not confirm its own data).
+- A validation or benchmark (EVALUATES) of a model is flagged (advisory) when its experiment uses data the model was
+  fitted to (what an experiment that calibrates the model, or outputs it, HAS_INPUT as training_data or calibration_data,
+  and the records a dataset among them INCLUDES), or when its passing outcome rests on a fitted value; a fit to its own
+  data is a calibration, never independent predictive validation.
+- A predicted value that does not sit on the experiment that predicted it names that experiment (produced_by)
+  (advisory).
 - A Hypothesis with hypothesis_status supported needs a supports outcome or a SUPPORTS link; refuted needs
   a refutes outcome or a CONTRADICTS link; disputed needs a disputes or refutes outcome or a CONTRADICTS
   link.
@@ -2164,9 +2207,14 @@ quantities:
     it: a unit of another dimension is an error, a unit it cannot read is reported and not checked. A context is
     read from what the value states (its unit, basis, definition, target or normalized_by) and from the sibling
     property; disagreeing statements are reported, except that a value derived from the record's own (origin
-    derived or computed, with produced_by: an evidenced conversion) keeps its own. `scale graph query` with
-    `comparison: scientific` compares and ranks values of a kind only in one unit and one context
-    (docs/querying.md); without it, values are compared as reported, as before. A domain says which records a context
+    derived or computed, with produced_by: an evidenced conversion) keeps its own. A context may also be read from the
+    record that holds the value (an elementary step's activation energy is of that step) or from the experiment that
+    produced it (a computed energy's level of theory and charge treatment); a context that compares the values that do
+    not state it apart from the others (`unstated: group`) never leaves one out. A kind may show what the value's
+    producer states of other properties (`shows`: a free energy's temperature, a calculation's dispersion correction),
+    which a comparison shows in each row and never groups by. `scale graph query` with `comparison: scientific` compares
+    and ranks values of a kind only with values of that kind, in one unit and one context (docs/querying.md); without
+    it, values are compared as reported, as before. A domain says which records a context
     read from a target may name (context_targets: in catalysis, a species is a ChemicalSpecies). A kind that closes
     (closure: a balance) is kept as reported above 100 % and flagged with what its uncertainty says.
   basis:
@@ -2179,6 +2227,16 @@ quantities:
   - Clark et al., Standards and protocols for data acquisition and reporting for studies of the electrochemical reduction of carbon dioxide, ACS Catal. 2018, 8, 6560, doi:10.1021/acscatal.8b01340 (Faradaic efficiency, the share of the charge that makes a given product; it and that product's rate, its partial current density, say different things; rates normalized by the geometric and by the electrochemically active area).
   - Kearnes et al., The Open Reaction Database, J. Am. Chem. Soc. 2021, 143, 18820, doi:10.1021/jacs.1c09820 (each measurement of a product names its type (identity, yield, selectivity, amount), the analysis it comes from and any standard used; the conversion and the reaction time belong to the outcome).
   - Bonchio et al., Best practices for experiments and reporting in photocatalytic CO2 reduction, Nat. Catal. 2023, 6, 657, doi:10.1038/s41929-023-00992-7 (gas and liquid products identified and quantified by their own analyses, each calibrated; control experiments; detection limits; selectivity as one product's amount over all products'; uncertainties from repeated measurements).
+  - Winther et al., Catalysis-Hub.org, an open electronic structure database for surface reactions, Sci. Data 2019, 6, 75, doi:10.1038/s41597-019-0081-y (an adsorption energy is the energy of a reaction with gas-phase references, H2O(g) - H2(g) + * -> O*; reaction energies from different DFT codes and exchange-correlation functionals are not necessarily directly comparable, so the code and the functional are tracked with every energy; lattice constants, sites, layers, cutoff, k-points and U-values also affect the energetics; the structures are stored with the energies).
+  - Mamun et al., High-throughput calculations of catalytic properties of bimetallic alloy surfaces, Sci. Data 2019, 6, 76, doi:10.1038/s41597-019-0080-z (an adsorption energy is E(slab+adsorbate) - E(slab) - the gas-phase references, chosen among CH4, H2, N2, H2O and H2S).
+  - Melander, Wu, Weckman and Honkala, Constant inner potential DFT for modelling electrochemical systems under constant potential and bias, npj Comput. Mater. 2024, 10, 5, doi:10.1038/s41524-023-01184-4 (constant-charge, canonical, and constant-potential, grand-canonical, calculations; grand free energies are a Legendre transform of canonical ones, and the two ensembles are equivalent only under stated conditions; at least four definitions of a single electrode potential, with different scales and references).
+  - Allam et al., AQCat25, unlocking spin-aware, high-fidelity machine learning potentials for heterogeneous catalysis, npj Comput. Mater. 2026, 12, 226, doi:10.1038/s41524-026-02099-6 (spin-polarized and unpolarized calculations, and calculations of different fidelity, give different energies, by up to about 1 eV for an adsorbate on a magnetic surface; adsorbate references CO, H2, H2O and N2; models evaluated on validation and test splits not seen in training).
+  - Cantera 3.2 documentation, Reactions and General Structure (Units), cantera.org/stable/yaml (a reaction equation names each participant with its stoichiometric coefficient; Ea is a parameter of a rate expression, given in an energy, an energy per quantity or K; a reaction is checked to balance in elements, and on surfaces in sites).
+  - Behr, Borgelt and Kockmann, Ontologies4Cat, investigating the landscape of ontologies for catalysis research data management, J. Cheminform. 2024, 16, 16, doi:10.1186/s13321-024-00807-2 (of the 23 ontologies the paper describes, none contains heterogeneous or homogeneous catalysis, synthesis data, or heat, transport and kinetic data; one contains biocatalysis, one process design, energy and cost data).
+  - Systems Biology Ontology, enzyme activity (SBO:0000559, an amount converted per time under specified conditions, often micromoles per minute, the enzyme unit), specific activity (SBO:0000558, per mass of enzyme), Michaelis constant (SBO:0000027) and catalytic rate constant (SBO:0000025, kcat).
+  - Fogler, Elements of Chemical Reaction Engineering, 4th ed., Pearson, 2006, chapter 12 (the square of the Thiele modulus, with the particle radius, a measure of the ratio of a surface reaction rate to a rate of diffusion in the pellet; the internal and the overall effectiveness factor; Mears' criterion for external diffusion and his criterion for heat transfer between the fluid and the pellet, two formulas, each below 0.15; the Weisz-Prater criterion for internal diffusion).
+  - Mears, Tests for transport limitations in experimental catalytic reactors, Ind. Eng. Chem. Process Des. Dev. 1971, 10, 541, doi:10.1021/i260040a020, and Diagnostic criteria for heat transport limitations in fixed bed reactors, J. Catal. 1971, 20, 127, doi:10.1016/0021-9517(71)90073-X (criteria for mass and for heat transport, the second for heat in a fixed bed).
+  - Aris, On shape factors for irregular particles - I, Chem. Eng. Sci. 1957, 6, 262, doi:10.1016/0009-2509(57)85028-3, and Bischoff, Effectiveness factors for general reaction rate forms, AIChE J. 1965, 11, 351, doi:10.1002/aic.690110229 (a Thiele modulus with the particle volume over its external surface as length, and one generalized to any rate form).
   dimensions:
     dimensionless: '1'
     length: L
@@ -2194,6 +2252,7 @@ quantities:
     pressure: M L-1 T-2
     force: M L T-2
     energy: M L2 T-2
+    molar_energy: M L2 T-2 N-1
     power: M L2 T-3
     current_density: I L-2
     specific_current: I M-1
@@ -2202,6 +2261,8 @@ quantities:
     amount_per_mass: N M-1
     mass_per_area: M L-2
     amount_per_area: N L-2
+    number_per_area: L-2
+    number_per_mass: M-1
     volumetric_flow: L3 T-1
     molar_flow: N T-1
     mass_flow: M T-1
@@ -2212,6 +2273,7 @@ quantities:
     amount_per_volume_time: N L-3 T-1
     amount_per_area_time: N L-2 T-1
     mass_per_volume_time: M L-3 T-1
+    specific_energy: L2 T-2
   units:
     description: |
       The symbols a unit is read from. A unit is read as the source prints it: SI prefixes before the prefixed
@@ -2222,6 +2284,7 @@ quantities:
     prefixes: [p, 'n', μ, u, m, c, d, h, k, M, G]
     prefixed:
       m: length
+      U: molar_flow
       g: mass
       s: time
       A: electric_current
@@ -2241,6 +2304,7 @@ quantities:
       cal: energy
       Hz: frequency
       M: amount_concentration
+      kat: molar_flow
     unprefixed:
       °C: temperature
       °F: temperature
@@ -2287,6 +2351,9 @@ quantities:
       inHg: pressure
       Btu: energy
       BTU: energy
+      Ha: energy
+      hartree: energy
+      Ry: energy
       '%': dimensionless
       ‰: dimensionless
       ppm: dimensionless
@@ -2562,6 +2629,139 @@ quantities:
           terms: [nitrogen balance, N balance]
         mass:
           terms: [mass balance, total mass]
+    transport_criterion:
+      description: Which criterion a transport check computed. The Weisz-Prater criterion judges diffusion in the pores,
+        the Carberry number mass transfer to the particle, the Anderson criterion heat in the particle, and Mears gave
+        criteria for both mass and heat transfer (transport_mode says which); values of two criteria are two
+        quantities, never compared with one another. Read from the value's basis or definition.
+      read_from: [basis, definition]
+      values:
+        weisz_prater:
+          terms: [Weisz-Prater, Weisz–Prater, Weisz Prater, Weisz-Prater criterion, Weisz-Prater modulus, Weisz-Prater parameter]
+        mears:
+          terms: [Mears, Mears criterion]
+        carberry:
+          terms: [Carberry, Carberry number]
+        anderson:
+          terms: [Anderson, Anderson criterion]
+      unspecified: [other, not_reported]
+    transport_mode:
+      description: What a Mears criterion judges. Mears gave criteria for mass transfer between the fluid and the
+        particle (external diffusion) and in it, and for heat transfer between the fluid and the particle, in it and
+        across a fixed bed, each its own formula; a Mears value is compared only with one of the same, as its basis or
+        definition names it. One that names only heat or mass transfer, or nothing (a Mears criterion), is left out of
+        a comparison, never guessed.
+      read_from: [basis, definition]
+      values:
+        external_mass_transfer:
+          terms: [external diffusion, external mass transfer, external mass-transfer, interphase mass transfer, interphase diffusion, film diffusion, mass transfer to the particle, mass transfer to the catalyst surface]
+        internal_mass_transfer:
+          terms: [internal diffusion, internal mass transfer, pore diffusion, intraparticle diffusion, intraparticle mass transfer]
+        external_heat_transfer:
+          terms: [external heat transfer, interphase heat transfer, interphase heat transport, film heat transfer, heat transfer to the particle, heat transfer between the fluid and the particle]
+        internal_heat_transfer:
+          terms: [internal heat transfer, intraparticle heat transfer, intraparticle heat transport]
+        bed_heat_transfer:
+          terms: [radial heat transfer, radial heat transport, bed heat transfer]
+      unspecified: [other, not_reported]
+    characteristic_length:
+      description: The length a Thiele modulus is computed with, the particle radius or the particle volume over its
+        external surface (Aris; a third of the radius for a sphere), as its basis or definition names it. Moduli with
+        two lengths are two quantities.
+      read_from: [basis, definition]
+      values:
+        particle_radius:
+          terms: [particle radius, pellet radius, radius of the particle, radius of the pellet, sphere radius]
+        volume_to_surface:
+          terms: [volume to surface, volume-to-surface, volume to external surface, Vp/Sp, V_p/S_p, Aris]
+      unspecified: [other, not_reported]
+    thiele_form:
+      description: Which Thiele modulus a value is, the one of a first-order reaction or one generalized to another rate
+        form (Bischoff), as its basis or definition names it; a generalized modulus is named as such, not by the order
+        of its reaction.
+      read_from: [basis, definition]
+      values:
+        first_order:
+          terms: [first order, first-order]
+        generalized:
+          terms: [generalized, generalised, Bischoff]
+      unspecified: [other, not_reported]
+    effectiveness_basis:
+      description: Which effectiveness factor a value is, the internal one (the rate in the particle over the rate at
+        its external surface conditions) or the overall one (over the rate at the bulk fluid conditions, external
+        transfer included), as its basis or definition names it.
+      read_from: [basis, definition]
+      values:
+        internal:
+          terms: [internal effectiveness factor, internal effectiveness, intraparticle effectiveness]
+        overall:
+          terms: [overall effectiveness factor, overall effectiveness]
+      unspecified: [other, not_reported]
+    energy_input:
+      description: Which energy an energy consumption counts, the electrical input (to a cell, a stack or a plasma),
+        the heat supplied, or every input (primary energy), as its basis or definition names it.
+      read_from: [basis, definition]
+      values:
+        electrical:
+          terms: [electrical energy, electric energy, electricity, electrical input, electrical power, electric power, power supply, plasma power, discharge power, wall-plug, wall plug]
+        heat:
+          terms: [heat input, heat supplied, heat duty, thermal energy, thermal input]
+        total:
+          terms: [primary energy, total energy input, all energy inputs, every energy input]
+      unspecified: [other, not_reported]
+    system_boundary:
+      description: What an energy consumption is counted over, the device (a cell, a stack, a reactor, a discharge) or
+        the process around it (a plant, with separation or compression), as its basis or definition names it. Values
+        over two boundaries are two quantities.
+      read_from: [basis, definition]
+      values:
+        device:
+          terms: [cell, stack, electrolyzer, electrolyser, reactor, discharge]
+        process:
+          terms: [plant, whole process, entire process, separation, compression, balance of plant, downstream processing]
+      unspecified: [other, not_reported]
+    process:
+      description: What an energy change is of, the reaction or elementary step its target names (or that holds it). Its
+        reactants and products, with their coefficients and phases, define the energy, the reference species included,
+        and its direction gives the sign (products minus reactants). An O adsorption energy relative to H2O and H2 and one
+        relative to O2 are energies of two reactions, never compared with one another; a binding energy that a source
+        reports as positive for stronger binding is the energy of the reverse reaction, a desorption. A domain says which
+        records a process is (context_targets).
+      read_from: [target, record]
+      open: true
+    structure:
+      description: The structure model a total energy is of, its target or the record that holds it. Total energies of two
+        structures are two quantities; their difference is a reaction energy. A domain says which records a structure is
+        (context_targets).
+      read_from: [target, record]
+      open: true
+    level_of_theory:
+      description: The electronic-structure method a computed energy comes from, as the experiment that produced it states
+        it in its level_of_theory (the exchange-correlation functional of a DFT calculation, such as RPBE or BEEF-vdW;
+        another method by its name; a machine-learned model by its name and checkpoint). Energies from two methods are
+        never compared with one another. It is read from the producer (the experiment the value's produced_by names, then
+        the experiment that holds it); a producer whose label has no level_of_theory (a measurement, a fit) has none to
+        state, and its values are compared apart from computed ones, never left out.
+      read_from: [producer]
+      property: level_of_theory
+      open: true
+    charge_treatment:
+      description: Whether a computed energy holds the number of electrons fixed (constant charge, as in an ordinary
+        calculation of a neutral or charged cell) or holds the electrode potential while the number of electrons varies
+        (constant potential, a grand-canonical energy). The two are different energies, compared only when the source
+        converts one into the other (an evidenced conversion whose produced_by names the conversion). A value whose
+        producer does not state it is compared only with others that do not state it either.
+      read_from: [basis, definition, producer]
+      property: charge_treatment
+      values:
+        constant_charge:
+          terms: [constant charge, constant-charge, fixed charge, fixed number of electrons, constant number of electrons]
+        constant_potential:
+          terms: [constant potential, constant-potential, constant electrode potential, constant inner potential, grand canonical, grand-canonical, grand potential, fixed potential]
+        other:
+          terms: []
+      unspecified: [not_reported]
+      unstated: group
   kinds:
     temperature:
       description: A thermodynamic temperature, or a difference of temperatures, as reported.
@@ -2729,9 +2929,208 @@ quantities:
       description: A dimensionless efficiency of energy or charge conversion (IPCE, ABPE, plasma energy efficiency).
       dimensions: [dimensionless]
       share: true
+    site_fraction:
+      description: The share of a stated whole that a population of sites makes up (of the exposed atoms of an element, of
+        all its atoms, of the sites of a kind), dimensionless; the value's basis names the whole and is compared as text.
+        A share is not a count of sites, so no rate is divided by it.
+      dimensions: [dimensionless]
+      share: true
+      maturity: provisional
+    site_density:
+      description: The sites of a population per surface area or per mass of the material or catalyst they belong to
+        (µmol/m2, sites/nm2, µmol/g), counted or estimated by a stated method.
+      dimensions: [amount_per_area, number_per_area, amount_per_mass, number_per_mass]
+      maturity: provisional
+    site_count:
+      description: A number of sites, or of exposed atoms taken as sites, absolute (µmol, a number of sites) or per mass
+        of catalyst (µmol/g), counted, estimated or assumed by a stated method; never a share (site_fraction).
+      dimensions: [amount, dimensionless, amount_per_mass, number_per_mass]
+      maturity: provisional
     turnover_frequency:
-      description: Events per site per time; its denominator is a site inventory (a count of sites by a stated method).
+      description: Events (one product formed or one reactant converted, its target) per site per time, as reported. How
+        it was calculated is recorded with it, never inferred, in the count of sites it is divided by (normalized_by, a
+        value that keeps its own method, origin and assumptions) and, in its basis or definition, in what was counted as
+        sites (the exposed atoms, the sites of one kind, every atom) and how. Rates of two species are never compared with one
+        another; rates calculated on different counts are compared as reported, each with its denominator.
       dimensions: [frequency]
+      compare_by: [species]
       denominator:
-        description: The site inventory the rate is divided by (sites counted by chemisorption, titration or a model).
+        description: The count of sites the rate is divided by (sites counted by chemisorption, titration or a model),
+          absolute or per catalyst mass, or a density of sites per area for a rate per area; a site count or a site
+          density, never a share.
+        dimensions: [dimensionless, amount, amount_per_mass, number_per_mass, amount_per_area, number_per_area]
+        kinds: [site_count, site_density]
+        unstated: warning
+    electronic_energy:
+      description: The total electronic energy of one structure model, as an electronic-structure calculation reports it (a
+        DFT total energy). Its zero depends on the method, the code and its pseudopotentials or basis set, so totals are
+        compared only for one structure (its target, or the model that holds it) under one level of theory; a difference
+        of totals, such as an adsorption energy, is a reaction energy.
+      dimensions: [energy]
+      compare_by: [structure, level_of_theory, charge_treatment]
+      shows: [dispersion, hubbard_u, spin_treatment, solvation]
+      maturity: provisional
+    reaction_energy:
+      description: The electronic energy change of a reaction or an elementary step, products minus reactants; an
+        adsorption energy is the reaction energy of an adsorption. Its target, or the step that holds it, names the
+        process, whose participants are the reference states. Kept as reported, with or without zero-point energy as its
+        definition says; never an enthalpy or a free energy.
+      dimensions: [energy, molar_energy]
+      compare_by: [process, level_of_theory, charge_treatment]
+      shows: [electrode_potential, dispersion, hubbard_u, spin_treatment, solvation]
+      maturity: provisional
+    reaction_enthalpy:
+      description: The enthalpy change of a reaction or an elementary step at the temperature its producer states,
+        products minus reactants, as reported (computed with thermal corrections, or measured). It depends on the
+        temperature, which a value states.
+      dimensions: [energy, molar_energy]
+      compare_by: [process, level_of_theory, charge_treatment]
+      shows:
+      - property: temperature
+        warn: true
+      - pressure
+      - electrode_potential
+      - dispersion
+      - hubbard_u
+      - spin_treatment
+      - solvation
+      maturity: provisional
+    reaction_free_energy:
+      description: The free energy change of a reaction or an elementary step (a Gibbs energy, or a grand-canonical one at
+        constant potential), products minus reactants, at the temperature, pressures and electrode potential its producer
+        states; an adsorption free energy is the reaction free energy of an adsorption. Never compared with an electronic
+        energy change, even in the same unit.
+      dimensions: [energy, molar_energy]
+      compare_by: [process, level_of_theory, charge_treatment]
+      shows:
+      - property: temperature
+        warn: true
+      - pressure
+      - electrode_potential
+      - dispersion
+      - hubbard_u
+      - spin_treatment
+      - solvation
+      maturity: provisional
+    activation_energy:
+      description: The activation energy of one elementary step, the step that holds it or its target (its process). It is
+        either the energy of the step's transition state above its initial state (a computed barrier) or the activation
+        energy of its rate constant (the Ea of an Arrhenius expression in a mechanism), as its definition says. It is
+        never the apparent activation energy of an overall rate (apparent_activation_energy). A mechanism file may give it
+        divided by the gas constant, in kelvin; it is kept so, and compared only with values in that unit.
+      dimensions: [energy, molar_energy, temperature]
+      compare_by: [process, level_of_theory, charge_treatment]
+      shows: [electrode_potential, dispersion, hubbard_u, spin_treatment, solvation]
+      maturity: provisional
+    activation_free_energy:
+      description: The free energy of one elementary step's transition state above its initial state, at the temperature
+        and electrode potential its producer states.
+      dimensions: [energy, molar_energy]
+      compare_by: [process, level_of_theory, charge_treatment]
+      shows:
+      - property: temperature
+        warn: true
+      - pressure
+      - electrode_potential
+      - dispersion
+      - hubbard_u
+      - spin_treatment
+      - solvation
+      maturity: provisional
+    apparent_activation_energy:
+      description: The activation energy of an overall rate (of forming one product or converting one reactant, its target),
+        from the temperature dependence of measured or modelled rates over the range of its fit (an Arrhenius plot). It
+        combines the barriers and adsorption enthalpies of the steps behind the rate, so it is not the activation energy
+        of any one step; the temperature range of the fit is stated with it. A source may give it divided by the gas
+        constant, in kelvin (the slope of the plot); it is kept so, and compared only with values in that unit.
+      dimensions: [energy, molar_energy, temperature]
+      compare_by: [species]
+      shows:
+      - property: temperature
+        warn: true
+      - pressure
+      maturity: provisional
+    degree_of_rate_control:
+      description: How sensitive a rate (of forming one product, its target) is to the rate constant of one step, at the
+        conditions and in the catalyst state of the computation that found it (dimensionless; the degree of rate control).
+        It changes with the conditions, so it is shown with the temperature and pressure it holds at, and it is never a
+        property of the step alone.
+      dimensions: [dimensionless]
+      compare_by: [species]
+      shows: [temperature, pressure]
+      maturity: provisional
+    enzyme_activity:
+      description: The catalytic activity of an enzyme or a whole-cell preparation, its target the substrate converted or
+        the product formed, under the assay conditions its producer states. Per time it is an amount of substance per time
+        (the enzyme unit, U, one micromole per minute, or the katal, one mole per second, with their prefixes, as mU or nkat);
+        per mass of enzyme or of the preparation it is a specific activity (U/mg), per volume of a solution or a
+        suspension a volumetric activity (U/mL), each kept apart by its unit. What it is divided by is named (normalized_by)
+        or stated in its basis or definition. Activities toward two substrates are never compared with one another.
+      dimensions: [molar_flow, amount_per_mass_time, amount_per_volume_time]
+      compare_by: [species]
+      denominator:
+        description: The mass of enzyme or of the preparation (a specific activity) or the volume of the solution or
+          suspension (a volumetric activity) the activity is divided by.
+        dimensions: [mass, volume]
+      shows:
+      - property: temperature
+        warn: true
+      maturity: provisional
+    michaelis_constant:
+      description: The substrate concentration at which an enzyme-catalysed rate is half its limiting rate (Km), for one
+        substrate, its target, as reported from a fit of rates against concentration; its producer states the
+        conditions. The limiting rate per active site (kcat) is a turnover frequency.
+      dimensions: [amount_concentration]
+      compare_by: [species]
+      maturity: provisional
+    turnover_number:
+      description: Events (one product formed or one reactant converted, its target) per site or per molecule of
+        catalyst over a stated run, dimensionless (TON), as reported; how the catalyst or its sites were counted is
+        recorded with it (its definition or basis), never inferred. Distinct from a turnover frequency, which is per
+        time.
+      dimensions: [dimensionless]
+      compare_by: [species]
+      denominator:
+        description: The amount of catalyst (the molecules of a molecular catalyst) or the count of sites the events are
+          divided by, a site count or an amount; never a share.
         dimensions: [dimensionless, amount]
+      maturity: provisional
+    transport_criterion:
+      description: A dimensionless criterion computed from reported data to judge whether transport limits a measured
+        rate, as a transport check reports it - Weisz-Prater for diffusion in the pores, Carberry for mass transfer to
+        the particle, Anderson for heat in it, Mears for mass or heat transfer (which one, its transport_mode). Its basis
+        or definition names the criterion; values of two criteria, or of two Mears criteria, are never compared with one
+        another. What threshold the source applies stays with the check's verdict.
+      dimensions: [dimensionless]
+      compare_by:
+      - transport_criterion
+      - context: transport_mode
+        when:
+          transport_criterion: [mears]
+      maturity: provisional
+    effectiveness_factor:
+      description: The ratio of the rate observed in a catalyst particle to the rate it would have without transport
+        limitation, dimensionless, as reported or computed by a transport check (its producer). The internal factor
+        compares with the rate at the particle's external surface conditions, the overall one with the rate at the bulk
+        fluid conditions (external transfer included); its basis or definition says which (effectiveness_basis).
+      dimensions: [dimensionless]
+      compare_by: [effectiveness_basis]
+      maturity: provisional
+    thiele_modulus:
+      description: The Thiele modulus of a catalyst particle, dimensionless, as reported or computed by a transport check.
+        Its square measures the ratio of a surface reaction rate to a rate of diffusion in the particle. Its value
+        depends on the length it is computed with (the particle radius, or the volume over the external surface, a
+        third of it for a sphere) and on its form (first order, or generalized to another rate form), which its basis
+        or definition states; moduli of two conventions are never compared with one another.
+      dimensions: [dimensionless]
+      compare_by: [characteristic_length, thiele_form]
+      maturity: provisional
+    energy_consumption:
+      description: Energy supplied per amount (kJ/mol) or per mass (kWh/kg) of one product, its target, the inverse of an
+        energy yield. Its basis or definition says which energy it counts (energy_input; the electrical input to a cell
+        or a plasma, the heat supplied, every input) and over which boundary (system_boundary; the device, or the
+        process with its separation); values of two energies or two boundaries are never compared with one another, and
+        values per amount and per mass are kept apart by their unit.
+      dimensions: [molar_energy, specific_energy]
+      compare_by: [species, energy_input, system_boundary]
+      maturity: provisional

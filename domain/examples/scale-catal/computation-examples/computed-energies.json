@@ -1,0 +1,4357 @@
+{
+  "nodes": [
+    {
+      "id": "ex:ce/source/dft-paper",
+      "label": "Source",
+      "props": {
+        "name": "Invented paper (descriptor)",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "Oxygen adsorption on close-packed metal surfaces as an activity descriptor (invented)",
+        "year": 2026
+      }
+    },
+    {
+      "id": "ex:ce/source/cip-paper",
+      "label": "Source",
+      "props": {
+        "name": "Invented paper (constant potential)",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "Oxygen adsorption on Pt(111) at constant electrode potential (invented)",
+        "year": 2026
+      }
+    },
+    {
+      "id": "ex:ce/source/ml-paper",
+      "label": "Source",
+      "props": {
+        "name": "Invented paper (machine learning)",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "A machine-learned potential for oxygen on metal surfaces (invented)",
+        "year": 2026
+      }
+    },
+    {
+      "id": "ex:ce/source/kinetics-paper",
+      "label": "Source",
+      "props": {
+        "name": "Invented paper (kinetics)",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "CO oxidation kinetics over Pt/Al2O3, measured and modelled (invented)",
+        "year": 2026
+      }
+    },
+    {
+      "id": "ex:ce/species/o2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "O2",
+        "charge": 0,
+        "elemental_composition": {
+          "O": 2
+        },
+        "formula": "O2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ce/species/h2o",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "H2O",
+        "charge": 0,
+        "elemental_composition": {
+          "H": 2,
+          "O": 1
+        },
+        "formula": "H2O",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ce/species/h2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "H2",
+        "charge": 0,
+        "elemental_composition": {
+          "H": 2
+        },
+        "formula": "H2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ce/species/o",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "O (adsorbed)",
+        "charge": 0,
+        "elemental_composition": {
+          "O": 1
+        },
+        "formula": "O",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ce/species/proton",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "H+",
+        "charge": 1,
+        "elemental_composition": {
+          "H": 1
+        },
+        "formula": "H+",
+        "origin": "synthetic",
+        "species_kind": "ion"
+      }
+    },
+    {
+      "id": "ex:ce/species/electron",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "e-",
+        "charge": -1,
+        "elemental_composition": {},
+        "formula": "e-",
+        "origin": "synthetic",
+        "species_kind": "other"
+      }
+    },
+    {
+      "id": "ex:ce/species/co",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "CO",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 1,
+          "O": 1
+        },
+        "formula": "CO",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ce/species/co2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "CO2",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 1,
+          "O": 2
+        },
+        "formula": "CO2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ce/reaction/o-adsorption-from-h2o",
+      "label": "Reaction",
+      "props": {
+        "name": "H2O(g) + * -> O* + H2(g)",
+        "balance_status": "balanced",
+        "direction": "forward",
+        "equation": "H2O(g) + * -> O* + H2(g)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods, reference energies",
+            "source": "ex:ce/source/dft-paper"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ce/reaction/o-adsorption-from-o2",
+      "label": "Reaction",
+      "props": {
+        "name": "1/2 O2(g) + * -> O*",
+        "balance_status": "balanced",
+        "direction": "forward",
+        "equation": "1/2 O2(g) + * -> O*",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods, reference energies",
+            "source": "ex:ce/source/dft-paper"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ce/reaction/o-electroadsorption",
+      "label": "Reaction",
+      "props": {
+        "name": "H2O(l) + * -> O* + 2 H+ + 2 e-",
+        "balance_status": "balanced",
+        "direction": "forward",
+        "equation": "H2O(l) + * -> O* + 2 H+ + 2 e-",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods, reference energies",
+            "source": "ex:ce/source/cip-paper"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ce/reaction/co-oxidation",
+      "label": "Reaction",
+      "props": {
+        "name": "CO + 1/2 O2 -> CO2",
+        "balance_status": "balanced",
+        "direction": "forward",
+        "equation": "CO + 1/2 O2 -> CO2",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods, reference energies",
+            "source": "ex:ce/source/kinetics-paper"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ce/material/cu",
+      "label": "Material",
+      "props": {
+        "name": "fcc Cu",
+        "formula": "Cu",
+        "material_family": "metal",
+        "origin": "synthetic",
+        "structure_type": "fcc"
+      }
+    },
+    {
+      "id": "ex:ce/dataset/cu-111-structure",
+      "label": "Dataset",
+      "props": {
+        "name": "Cu(111) slab coordinates",
+        "availability": "available",
+        "data_kind": "structure",
+        "media_type": "chemical/x-cif",
+        "origin": "synthetic",
+        "sha256": "c09acc246c33729104d6035d045a8ee833aa1a764bdfc662f6bbb2bf7f214e20",
+        "uri": "https://example.org/invented/cu-111-structure",
+        "version": "1"
+      }
+    },
+    {
+      "id": "ex:ce/model/cu-111",
+      "label": "StructureModel",
+      "props": {
+        "name": "Cu(111) slab, p(2×2), 4 layers",
+        "composition": "Cu",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Computational methods",
+            "source": "ex:ce/source/dft-paper"
+          }
+        ],
+        "facet": "111",
+        "origin": "synthetic",
+        "parameters": {
+          "boundary_conditions": {
+            "status": "present",
+            "text_value": "periodic in three dimensions, vacuum along the surface normal"
+          },
+          "fixed_layers": {
+            "status": "present",
+            "unit": "1",
+            "value": 2
+          },
+          "lattice_constant": {
+            "status": "present",
+            "definition": "optimized for the bulk metal at this level of theory",
+            "unit": "Å",
+            "value": 3.71
+          },
+          "layers": {
+            "status": "present",
+            "unit": "1",
+            "value": 4
+          },
+          "relaxation": {
+            "status": "present",
+            "text_value": "adsorbate and the top two layers relaxed"
+          },
+          "supercell": {
+            "status": "present",
+            "text_value": "p(2×2)"
+          },
+          "vacuum": {
+            "status": "present",
+            "unit": "Å",
+            "value": 15
+          }
+        },
+        "representation": "periodic_slab",
+        "stored_in": "ex:ce/dataset/cu-111-structure"
+      }
+    },
+    {
+      "id": "ex:ce/material/pt",
+      "label": "Material",
+      "props": {
+        "name": "fcc Pt",
+        "formula": "Pt",
+        "material_family": "metal",
+        "origin": "synthetic",
+        "structure_type": "fcc"
+      }
+    },
+    {
+      "id": "ex:ce/dataset/pt-111-structure",
+      "label": "Dataset",
+      "props": {
+        "name": "Pt(111) slab coordinates",
+        "availability": "available",
+        "data_kind": "structure",
+        "media_type": "chemical/x-cif",
+        "origin": "synthetic",
+        "sha256": "657807d34ee85a36159ea135812032d1acff5293d47c77476830b019539a563a",
+        "uri": "https://example.org/invented/pt-111-structure",
+        "version": "1"
+      }
+    },
+    {
+      "id": "ex:ce/model/pt-111",
+      "label": "StructureModel",
+      "props": {
+        "name": "Pt(111) slab, p(2×2), 4 layers",
+        "composition": "Pt",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Computational methods",
+            "source": "ex:ce/source/dft-paper"
+          }
+        ],
+        "facet": "111",
+        "origin": "synthetic",
+        "parameters": {
+          "boundary_conditions": {
+            "status": "present",
+            "text_value": "periodic in three dimensions, vacuum along the surface normal"
+          },
+          "fixed_layers": {
+            "status": "present",
+            "unit": "1",
+            "value": 2
+          },
+          "lattice_constant": {
+            "status": "present",
+            "definition": "optimized for the bulk metal at this level of theory",
+            "unit": "Å",
+            "value": 3.99
+          },
+          "layers": {
+            "status": "present",
+            "unit": "1",
+            "value": 4
+          },
+          "relaxation": {
+            "status": "present",
+            "text_value": "adsorbate and the top two layers relaxed"
+          },
+          "supercell": {
+            "status": "present",
+            "text_value": "p(2×2)"
+          },
+          "vacuum": {
+            "status": "present",
+            "unit": "Å",
+            "value": 15
+          }
+        },
+        "representation": "periodic_slab",
+        "stored_in": "ex:ce/dataset/pt-111-structure"
+      }
+    },
+    {
+      "id": "ex:ce/material/ag",
+      "label": "Material",
+      "props": {
+        "name": "fcc Ag",
+        "formula": "Ag",
+        "material_family": "metal",
+        "origin": "synthetic",
+        "structure_type": "fcc"
+      }
+    },
+    {
+      "id": "ex:ce/dataset/ag-111-structure",
+      "label": "Dataset",
+      "props": {
+        "name": "Ag(111) slab coordinates",
+        "availability": "available",
+        "data_kind": "structure",
+        "media_type": "chemical/x-cif",
+        "origin": "synthetic",
+        "sha256": "e2f871890776463d77c429c32b370db53ea4be67808ffd370df1b906470ede3d",
+        "uri": "https://example.org/invented/ag-111-structure",
+        "version": "1"
+      }
+    },
+    {
+      "id": "ex:ce/model/ag-111",
+      "label": "StructureModel",
+      "props": {
+        "name": "Ag(111) slab, p(2×2), 4 layers",
+        "composition": "Ag",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Computational methods",
+            "source": "ex:ce/source/dft-paper"
+          }
+        ],
+        "facet": "111",
+        "origin": "synthetic",
+        "parameters": {
+          "boundary_conditions": {
+            "status": "present",
+            "text_value": "periodic in three dimensions, vacuum along the surface normal"
+          },
+          "fixed_layers": {
+            "status": "present",
+            "unit": "1",
+            "value": 2
+          },
+          "lattice_constant": {
+            "status": "present",
+            "definition": "optimized for the bulk metal at this level of theory",
+            "unit": "Å",
+            "value": 4.22
+          },
+          "layers": {
+            "status": "present",
+            "unit": "1",
+            "value": 4
+          },
+          "relaxation": {
+            "status": "present",
+            "text_value": "adsorbate and the top two layers relaxed"
+          },
+          "supercell": {
+            "status": "present",
+            "text_value": "p(2×2)"
+          },
+          "vacuum": {
+            "status": "present",
+            "unit": "Å",
+            "value": 15
+          }
+        },
+        "representation": "periodic_slab",
+        "stored_in": "ex:ce/dataset/ag-111-structure"
+      }
+    },
+    {
+      "id": "ex:ce/material/au",
+      "label": "Material",
+      "props": {
+        "name": "fcc Au",
+        "formula": "Au",
+        "material_family": "metal",
+        "origin": "synthetic",
+        "structure_type": "fcc"
+      }
+    },
+    {
+      "id": "ex:ce/dataset/au-111-structure",
+      "label": "Dataset",
+      "props": {
+        "name": "Au(111) slab coordinates",
+        "availability": "available",
+        "data_kind": "structure",
+        "media_type": "chemical/x-cif",
+        "origin": "synthetic",
+        "sha256": "41ef23a99755414d86dc4e1991d021786a1f6f56692a94392d169f9244dfc579",
+        "uri": "https://example.org/invented/au-111-structure",
+        "version": "1"
+      }
+    },
+    {
+      "id": "ex:ce/model/au-111",
+      "label": "StructureModel",
+      "props": {
+        "name": "Au(111) slab, p(2×2), 4 layers",
+        "composition": "Au",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Computational methods",
+            "source": "ex:ce/source/dft-paper"
+          }
+        ],
+        "facet": "111",
+        "origin": "synthetic",
+        "parameters": {
+          "boundary_conditions": {
+            "status": "present",
+            "text_value": "periodic in three dimensions, vacuum along the surface normal"
+          },
+          "fixed_layers": {
+            "status": "present",
+            "unit": "1",
+            "value": 2
+          },
+          "lattice_constant": {
+            "status": "present",
+            "definition": "optimized for the bulk metal at this level of theory",
+            "unit": "Å",
+            "value": 4.22
+          },
+          "layers": {
+            "status": "present",
+            "unit": "1",
+            "value": 4
+          },
+          "relaxation": {
+            "status": "present",
+            "text_value": "adsorbate and the top two layers relaxed"
+          },
+          "supercell": {
+            "status": "present",
+            "text_value": "p(2×2)"
+          },
+          "vacuum": {
+            "status": "present",
+            "unit": "Å",
+            "value": 15
+          }
+        },
+        "representation": "periodic_slab",
+        "stored_in": "ex:ce/dataset/au-111-structure"
+      }
+    },
+    {
+      "id": "ex:ce/material/pd",
+      "label": "Material",
+      "props": {
+        "name": "fcc Pd",
+        "formula": "Pd",
+        "material_family": "metal",
+        "origin": "synthetic",
+        "structure_type": "fcc"
+      }
+    },
+    {
+      "id": "ex:ce/dataset/pd-111-structure",
+      "label": "Dataset",
+      "props": {
+        "name": "Pd(111) slab coordinates",
+        "availability": "available",
+        "data_kind": "structure",
+        "media_type": "chemical/x-cif",
+        "origin": "synthetic",
+        "sha256": "4165c9f2bf3bd081d30b2830c8b1b39e7eee5982c0c143ed0d5b3c159c3993d1",
+        "uri": "https://example.org/invented/pd-111-structure",
+        "version": "1"
+      }
+    },
+    {
+      "id": "ex:ce/model/pd-111",
+      "label": "StructureModel",
+      "props": {
+        "name": "Pd(111) slab, p(2×2), 4 layers",
+        "composition": "Pd",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Computational methods",
+            "source": "ex:ce/source/dft-paper"
+          }
+        ],
+        "facet": "111",
+        "origin": "synthetic",
+        "parameters": {
+          "boundary_conditions": {
+            "status": "present",
+            "text_value": "periodic in three dimensions, vacuum along the surface normal"
+          },
+          "fixed_layers": {
+            "status": "present",
+            "unit": "1",
+            "value": 2
+          },
+          "lattice_constant": {
+            "status": "present",
+            "definition": "optimized for the bulk metal at this level of theory",
+            "unit": "Å",
+            "value": 3.99
+          },
+          "layers": {
+            "status": "present",
+            "unit": "1",
+            "value": 4
+          },
+          "relaxation": {
+            "status": "present",
+            "text_value": "adsorbate and the top two layers relaxed"
+          },
+          "supercell": {
+            "status": "present",
+            "text_value": "p(2×2)"
+          },
+          "vacuum": {
+            "status": "present",
+            "unit": "Å",
+            "value": 15
+          }
+        },
+        "representation": "periodic_slab",
+        "stored_in": "ex:ce/dataset/pd-111-structure"
+      }
+    },
+    {
+      "id": "ex:ce/material/ni",
+      "label": "Material",
+      "props": {
+        "name": "fcc Ni",
+        "formula": "Ni",
+        "material_family": "metal",
+        "origin": "synthetic",
+        "structure_type": "fcc"
+      }
+    },
+    {
+      "id": "ex:ce/dataset/ni-111-structure",
+      "label": "Dataset",
+      "props": {
+        "name": "Ni(111) slab coordinates",
+        "availability": "available",
+        "data_kind": "structure",
+        "media_type": "chemical/x-cif",
+        "origin": "synthetic",
+        "sha256": "a7c6e23d62e3ba999e31f93760788b4cc463a5af2d7da1b020b8bce85e468b41",
+        "uri": "https://example.org/invented/ni-111-structure",
+        "version": "1"
+      }
+    },
+    {
+      "id": "ex:ce/model/ni-111",
+      "label": "StructureModel",
+      "props": {
+        "name": "Ni(111) slab, p(2×2), 4 layers",
+        "composition": "Ni",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Computational methods",
+            "source": "ex:ce/source/dft-paper"
+          }
+        ],
+        "facet": "111",
+        "origin": "synthetic",
+        "parameters": {
+          "boundary_conditions": {
+            "status": "present",
+            "text_value": "periodic in three dimensions, vacuum along the surface normal"
+          },
+          "fixed_layers": {
+            "status": "present",
+            "unit": "1",
+            "value": 2
+          },
+          "lattice_constant": {
+            "status": "present",
+            "definition": "optimized for the bulk metal at this level of theory",
+            "unit": "Å",
+            "value": 3.55
+          },
+          "layers": {
+            "status": "present",
+            "unit": "1",
+            "value": 4
+          },
+          "relaxation": {
+            "status": "present",
+            "text_value": "adsorbate and the top two layers relaxed"
+          },
+          "supercell": {
+            "status": "present",
+            "text_value": "p(2×2)"
+          },
+          "vacuum": {
+            "status": "present",
+            "unit": "Å",
+            "value": 15
+          }
+        },
+        "representation": "periodic_slab",
+        "stored_in": "ex:ce/dataset/ni-111-structure"
+      }
+    },
+    {
+      "id": "ex:ce/dataset/pt3ni-111-structure",
+      "label": "Dataset",
+      "props": {
+        "name": "Pt3Ni(111) slab coordinates",
+        "availability": "available",
+        "data_kind": "structure",
+        "origin": "synthetic",
+        "sha256": "02a37f8854dcb4cfd86dc43ef53eed8dcc079a762f752a5ecaf291158a8dae05",
+        "uri": "https://example.org/invented/pt3ni-111-structure",
+        "version": "1"
+      }
+    },
+    {
+      "id": "ex:ce/model/pt3ni-111",
+      "label": "StructureModel",
+      "props": {
+        "name": "Pt3Ni(111) slab, p(2×2), 4 layers",
+        "composition": "Pt3Ni",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:ce/source/ml-paper"
+          }
+        ],
+        "facet": "111",
+        "origin": "synthetic",
+        "representation": "periodic_slab",
+        "stored_in": "ex:ce/dataset/pt3ni-111-structure"
+      }
+    },
+    {
+      "id": "ex:ce/dataset/h2o-structure",
+      "label": "Dataset",
+      "props": {
+        "name": "H2O molecule coordinates",
+        "availability": "available",
+        "data_kind": "structure",
+        "origin": "synthetic",
+        "sha256": "02ad2bcd39013a1d184252ba89a86871190b786f2e151b70be9814f8a47c68c8",
+        "uri": "https://example.org/invented/h2o-structure",
+        "version": "1"
+      }
+    },
+    {
+      "id": "ex:ce/model/h2o-molecule",
+      "label": "StructureModel",
+      "props": {
+        "name": "H2O molecule in a 15 Å box",
+        "composition": "H2O",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Computational methods",
+            "source": "ex:ce/source/dft-paper"
+          }
+        ],
+        "origin": "synthetic",
+        "representation": "molecule",
+        "stored_in": "ex:ce/dataset/h2o-structure"
+      }
+    },
+    {
+      "id": "ex:ce/dataset/ts-o2-dissociation",
+      "label": "Dataset",
+      "props": {
+        "name": "O2 dissociation transition state coordinates",
+        "availability": "available",
+        "data_kind": "structure",
+        "origin": "synthetic",
+        "sha256": "2f118344110e37e7a95283c4e6f3e997ae0d246603bc96677494143d3afe43fc",
+        "uri": "https://example.org/invented/ts-o2-dissociation",
+        "version": "1"
+      }
+    },
+    {
+      "id": "ex:ce/model/ts-o2-dissociation",
+      "label": "StructureModel",
+      "props": {
+        "name": "transition state of O2 dissociation on Pt(111)",
+        "composition": "Pt + O2",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 3",
+            "source": "ex:ce/source/kinetics-paper"
+          }
+        ],
+        "facet": "111",
+        "origin": "synthetic",
+        "representation": "periodic_slab",
+        "stored_in": "ex:ce/dataset/ts-o2-dissociation"
+      }
+    },
+    {
+      "id": "ex:ce/dataset/ts-co-o",
+      "label": "Dataset",
+      "props": {
+        "name": "CO + O transition state coordinates",
+        "availability": "available",
+        "data_kind": "structure",
+        "origin": "synthetic",
+        "sha256": "d25c98f5671dd9f3814861dae2ba40e741fa82c5df56023e34dc381c63d4d58d",
+        "uri": "https://example.org/invented/ts-co-o",
+        "version": "1"
+      }
+    },
+    {
+      "id": "ex:ce/model/ts-co-o",
+      "label": "StructureModel",
+      "props": {
+        "name": "transition state of CO + O on Pt(111)",
+        "composition": "Pt + CO + O",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 3",
+            "source": "ex:ce/source/kinetics-paper"
+          }
+        ],
+        "facet": "111",
+        "origin": "synthetic",
+        "representation": "periodic_slab",
+        "stored_in": "ex:ce/dataset/ts-co-o"
+      }
+    },
+    {
+      "id": "ex:ce/software/plane-wave-code",
+      "label": "Software",
+      "props": {
+        "name": "plane-wave DFT code (invented release)",
+        "origin": "synthetic",
+        "software_kind": "application",
+        "version": "6.4.2"
+      }
+    },
+    {
+      "id": "ex:ce/dataset/rpbe-inputs",
+      "label": "Dataset",
+      "props": {
+        "name": "input files of the RPBE calculations",
+        "availability": "available",
+        "data_kind": "configuration",
+        "media_type": "application/zip",
+        "origin": "synthetic",
+        "sha256": "38c06f3625e390cce0035ee8fae6c193a8bbb6acb891e0bc547c80483b3b7eb3",
+        "uri": "https://example.org/invented/rpbe-inputs",
+        "version": "1"
+      }
+    },
+    {
+      "id": "ex:ce/dataset/rpbe-environment",
+      "label": "Dataset",
+      "props": {
+        "name": "container image of the calculations",
+        "availability": "available",
+        "data_kind": "environment",
+        "origin": "synthetic",
+        "sha256": "6725bb85cb62da4a1747139a900a866a2c1ec2deafabf835818c73990af40cdf",
+        "uri": "https://example.org/invented/rpbe-environment",
+        "version": "1"
+      }
+    },
+    {
+      "id": "ex:ce/variable/o-adsorption-energy",
+      "label": "Variable",
+      "props": {
+        "name": "O adsorption energy",
+        "origin": "synthetic",
+        "quantity_kind": "reaction_energy",
+        "scale": "quantitative",
+        "unit": "eV"
+      }
+    },
+    {
+      "id": "ex:ce/variable/o-adsorption-free-energy",
+      "label": "Variable",
+      "props": {
+        "name": "O adsorption free energy",
+        "origin": "synthetic",
+        "quantity_kind": "reaction_free_energy",
+        "scale": "quantitative",
+        "unit": "eV"
+      }
+    },
+    {
+      "id": "ex:ce/variable/total-energy",
+      "label": "Variable",
+      "props": {
+        "name": "total electronic energy",
+        "origin": "synthetic",
+        "quantity_kind": "electronic_energy",
+        "scale": "quantitative",
+        "unit": "eV"
+      }
+    },
+    {
+      "id": "ex:ce/computation/rpbe-study",
+      "label": "Computation",
+      "props": {
+        "name": "RPBE study of O adsorption on close-packed metals",
+        "charge_treatment": "constant_charge",
+        "computation_kind": "electronic_structure",
+        "configuration": "ex:ce/dataset/rpbe-inputs",
+        "dispersion": {
+          "status": "present",
+          "text_value": "none"
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Computational methods",
+            "source": "ex:ce/source/dft-paper"
+          }
+        ],
+        "execution_environment": "ex:ce/dataset/rpbe-environment",
+        "level_of_theory": {
+          "status": "present",
+          "text_value": "RPBE"
+        },
+        "method": "DFT (RPBE), PAW, 450 eV",
+        "origin": "synthetic",
+        "settings": {
+          "cutoff_energy": {
+            "status": "present",
+            "unit": "eV",
+            "value": 450
+          },
+          "force_convergence": {
+            "status": "present",
+            "unit": "eV/Å",
+            "value": 0.02
+          },
+          "kpoints": {
+            "status": "present",
+            "text_value": "4×4×1"
+          },
+          "pseudopotentials": {
+            "status": "present",
+            "text_value": "PAW"
+          },
+          "smearing": {
+            "status": "present",
+            "definition": "Methfessel-Paxton, first order",
+            "unit": "eV",
+            "value": 0.1
+          }
+        },
+        "solvation": "none",
+        "spin_treatment": "non_spin_polarized"
+      }
+    },
+    {
+      "id": "ex:ce/computation/cu-111",
+      "label": "Computation",
+      "props": {
+        "name": "O on Cu(111), RPBE",
+        "charge_treatment": "constant_charge",
+        "computation_kind": "electronic_structure",
+        "configuration": "ex:ce/dataset/rpbe-inputs",
+        "dispersion": {
+          "status": "present",
+          "text_value": "none"
+        },
+        "evidence": [
+          {
+            "id": "t1_cu",
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:ce/source/dft-paper"
+          }
+        ],
+        "execution_environment": "ex:ce/dataset/rpbe-environment",
+        "level_of_theory": {
+          "status": "present",
+          "text_value": "RPBE"
+        },
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "o_adsorption_h2o",
+            "status": "present",
+            "evidence_ids": [
+              "t1_cu"
+            ],
+            "target": "ex:ce/reaction/o-adsorption-from-h2o",
+            "unit": "eV",
+            "value": 1.02,
+            "variable": "ex:ce/variable/o-adsorption-energy"
+          }
+        ],
+        "settings": {
+          "cutoff_energy": {
+            "status": "present",
+            "unit": "eV",
+            "value": 450
+          },
+          "force_convergence": {
+            "status": "present",
+            "unit": "eV/Å",
+            "value": 0.02
+          },
+          "kpoints": {
+            "status": "present",
+            "text_value": "4×4×1"
+          },
+          "pseudopotentials": {
+            "status": "present",
+            "text_value": "PAW"
+          },
+          "smearing": {
+            "status": "present",
+            "definition": "Methfessel-Paxton, first order",
+            "unit": "eV",
+            "value": 0.1
+          }
+        },
+        "solvation": "none",
+        "spin_treatment": "non_spin_polarized"
+      }
+    },
+    {
+      "id": "ex:ce/computation/pt-111",
+      "label": "Computation",
+      "props": {
+        "name": "O on Pt(111), RPBE",
+        "charge_treatment": "constant_charge",
+        "computation_kind": "electronic_structure",
+        "configuration": "ex:ce/dataset/rpbe-inputs",
+        "dispersion": {
+          "status": "present",
+          "text_value": "none"
+        },
+        "evidence": [
+          {
+            "id": "t1_pt",
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:ce/source/dft-paper"
+          },
+          {
+            "id": "t1_pt_o2",
+            "kind": "table",
+            "locator": "Table 1, last column",
+            "source": "ex:ce/source/dft-paper"
+          },
+          {
+            "id": "s2_slab",
+            "kind": "table",
+            "locator": "Supporting information, Table S2",
+            "source": "ex:ce/source/dft-paper"
+          }
+        ],
+        "execution_environment": "ex:ce/dataset/rpbe-environment",
+        "level_of_theory": {
+          "status": "present",
+          "text_value": "RPBE"
+        },
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "o_adsorption_h2o",
+            "status": "present",
+            "evidence_ids": [
+              "t1_pt"
+            ],
+            "target": "ex:ce/reaction/o-adsorption-from-h2o",
+            "unit": "eV",
+            "value": 1.55,
+            "variable": "ex:ce/variable/o-adsorption-energy"
+          },
+          {
+            "id": "o_adsorption_o2",
+            "status": "present",
+            "evidence_ids": [
+              "t1_pt_o2"
+            ],
+            "target": "ex:ce/reaction/o-adsorption-from-o2",
+            "unit": "eV",
+            "value": -0.91,
+            "variable": "ex:ce/variable/o-adsorption-energy"
+          },
+          {
+            "id": "slab_total_energy",
+            "status": "present",
+            "evidence_ids": [
+              "s2_slab"
+            ],
+            "target": "ex:ce/model/pt-111",
+            "unit": "eV",
+            "value": -312.4561,
+            "variable": "ex:ce/variable/total-energy"
+          }
+        ],
+        "settings": {
+          "cutoff_energy": {
+            "status": "present",
+            "unit": "eV",
+            "value": 450
+          },
+          "force_convergence": {
+            "status": "present",
+            "unit": "eV/Å",
+            "value": 0.02
+          },
+          "kpoints": {
+            "status": "present",
+            "text_value": "4×4×1"
+          },
+          "pseudopotentials": {
+            "status": "present",
+            "text_value": "PAW"
+          },
+          "smearing": {
+            "status": "present",
+            "definition": "Methfessel-Paxton, first order",
+            "unit": "eV",
+            "value": 0.1
+          }
+        },
+        "solvation": "none",
+        "spin_treatment": "non_spin_polarized"
+      }
+    },
+    {
+      "id": "ex:ce/computation/ag-111",
+      "label": "Computation",
+      "props": {
+        "name": "O on Ag(111), RPBE",
+        "charge_treatment": "constant_charge",
+        "computation_kind": "electronic_structure",
+        "configuration": "ex:ce/dataset/rpbe-inputs",
+        "dispersion": {
+          "status": "present",
+          "text_value": "none"
+        },
+        "evidence": [
+          {
+            "id": "t1_ag",
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:ce/source/dft-paper"
+          }
+        ],
+        "execution_environment": "ex:ce/dataset/rpbe-environment",
+        "level_of_theory": {
+          "status": "present",
+          "text_value": "RPBE"
+        },
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "o_adsorption_h2o",
+            "status": "present",
+            "evidence_ids": [
+              "t1_ag"
+            ],
+            "target": "ex:ce/reaction/o-adsorption-from-h2o",
+            "unit": "eV",
+            "value": 2.31,
+            "variable": "ex:ce/variable/o-adsorption-energy"
+          }
+        ],
+        "settings": {
+          "cutoff_energy": {
+            "status": "present",
+            "unit": "eV",
+            "value": 450
+          },
+          "force_convergence": {
+            "status": "present",
+            "unit": "eV/Å",
+            "value": 0.02
+          },
+          "kpoints": {
+            "status": "present",
+            "text_value": "4×4×1"
+          },
+          "pseudopotentials": {
+            "status": "present",
+            "text_value": "PAW"
+          },
+          "smearing": {
+            "status": "present",
+            "definition": "Methfessel-Paxton, first order",
+            "unit": "eV",
+            "value": 0.1
+          }
+        },
+        "solvation": "none",
+        "spin_treatment": "non_spin_polarized"
+      }
+    },
+    {
+      "id": "ex:ce/computation/au-111",
+      "label": "Computation",
+      "props": {
+        "name": "O on Au(111), RPBE",
+        "charge_treatment": "constant_charge",
+        "computation_kind": "electronic_structure",
+        "configuration": "ex:ce/dataset/rpbe-inputs",
+        "dispersion": {
+          "status": "present",
+          "text_value": "none"
+        },
+        "evidence": [
+          {
+            "id": "t1_au",
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:ce/source/dft-paper"
+          }
+        ],
+        "execution_environment": "ex:ce/dataset/rpbe-environment",
+        "level_of_theory": {
+          "status": "present",
+          "text_value": "RPBE"
+        },
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "o_adsorption_h2o",
+            "status": "present",
+            "evidence_ids": [
+              "t1_au"
+            ],
+            "target": "ex:ce/reaction/o-adsorption-from-h2o",
+            "unit": "eV",
+            "value": 2.78,
+            "variable": "ex:ce/variable/o-adsorption-energy"
+          }
+        ],
+        "settings": {
+          "cutoff_energy": {
+            "status": "present",
+            "unit": "eV",
+            "value": 450
+          },
+          "force_convergence": {
+            "status": "present",
+            "unit": "eV/Å",
+            "value": 0.02
+          },
+          "kpoints": {
+            "status": "present",
+            "text_value": "4×4×1"
+          },
+          "pseudopotentials": {
+            "status": "present",
+            "text_value": "PAW"
+          },
+          "smearing": {
+            "status": "present",
+            "definition": "Methfessel-Paxton, first order",
+            "unit": "eV",
+            "value": 0.1
+          }
+        },
+        "solvation": "none",
+        "spin_treatment": "non_spin_polarized"
+      }
+    },
+    {
+      "id": "ex:ce/computation/h2o-molecule",
+      "label": "Computation",
+      "props": {
+        "name": "H2O molecule, RPBE",
+        "charge_treatment": "constant_charge",
+        "computation_kind": "electronic_structure",
+        "configuration": "ex:ce/dataset/rpbe-inputs",
+        "dispersion": {
+          "status": "present",
+          "text_value": "none"
+        },
+        "evidence": [
+          {
+            "id": "s2_h2o",
+            "kind": "table",
+            "locator": "Supporting information, Table S2",
+            "source": "ex:ce/source/dft-paper"
+          }
+        ],
+        "execution_environment": "ex:ce/dataset/rpbe-environment",
+        "level_of_theory": {
+          "status": "present",
+          "text_value": "RPBE"
+        },
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "h2o_total_energy",
+            "status": "present",
+            "evidence_ids": [
+              "s2_h2o"
+            ],
+            "target": "ex:ce/model/h2o-molecule",
+            "unit": "eV",
+            "value": -14.2217,
+            "variable": "ex:ce/variable/total-energy"
+          }
+        ],
+        "settings": {
+          "cutoff_energy": {
+            "status": "present",
+            "unit": "eV",
+            "value": 450
+          },
+          "force_convergence": {
+            "status": "present",
+            "unit": "eV/Å",
+            "value": 0.02
+          },
+          "kpoints": {
+            "status": "present",
+            "text_value": "4×4×1"
+          },
+          "pseudopotentials": {
+            "status": "present",
+            "text_value": "PAW"
+          },
+          "smearing": {
+            "status": "present",
+            "definition": "Methfessel-Paxton, first order",
+            "unit": "eV",
+            "value": 0.1
+          }
+        },
+        "solvation": "none",
+        "spin_treatment": "non_spin_polarized"
+      }
+    },
+    {
+      "id": "ex:ce/computation/pt-111-free-energy",
+      "label": "Computation",
+      "props": {
+        "name": "O on Pt(111), RPBE free energy at 298.15 K",
+        "charge_treatment": "constant_charge",
+        "computation_kind": "electronic_structure",
+        "configuration": "ex:ce/dataset/rpbe-inputs",
+        "dispersion": {
+          "status": "present",
+          "text_value": "none"
+        },
+        "evidence": [
+          {
+            "id": "t4_pt",
+            "kind": "table",
+            "locator": "Table 4",
+            "source": "ex:ce/source/dft-paper"
+          }
+        ],
+        "execution_environment": "ex:ce/dataset/rpbe-environment",
+        "level_of_theory": {
+          "status": "present",
+          "text_value": "RPBE"
+        },
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "unit": "bar",
+          "value": 1
+        },
+        "result_values": [
+          {
+            "id": "o_adsorption_free_h2o",
+            "status": "present",
+            "evidence_ids": [
+              "t4_pt"
+            ],
+            "target": "ex:ce/reaction/o-adsorption-from-h2o",
+            "unit": "eV",
+            "value": 1.62,
+            "variable": "ex:ce/variable/o-adsorption-free-energy"
+          }
+        ],
+        "settings": {
+          "cutoff_energy": {
+            "status": "present",
+            "unit": "eV",
+            "value": 450
+          },
+          "force_convergence": {
+            "status": "present",
+            "unit": "eV/Å",
+            "value": 0.02
+          },
+          "kpoints": {
+            "status": "present",
+            "text_value": "4×4×1"
+          },
+          "pseudopotentials": {
+            "status": "present",
+            "text_value": "PAW"
+          },
+          "smearing": {
+            "status": "present",
+            "definition": "Methfessel-Paxton, first order",
+            "unit": "eV",
+            "value": 0.1
+          },
+          "thermochemistry": {
+            "status": "present",
+            "text_value": "harmonic adsorbate, ideal-gas H2O and H2 at 1 bar"
+          }
+        },
+        "solvation": "none",
+        "spin_treatment": "non_spin_polarized",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 298.15
+        }
+      }
+    },
+    {
+      "id": "ex:ce/computation/pd-111",
+      "label": "Computation",
+      "props": {
+        "name": "O on Pd(111)",
+        "charge_treatment": "constant_charge",
+        "computation_kind": "electronic_structure",
+        "configuration": "ex:ce/dataset/rpbe-inputs",
+        "dispersion": {
+          "status": "present",
+          "text_value": "none"
+        },
+        "evidence": [
+          {
+            "id": "t1_pd",
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:ce/source/dft-paper"
+          }
+        ],
+        "execution_environment": "ex:ce/dataset/rpbe-environment",
+        "level_of_theory": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source"
+        },
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "o_adsorption_h2o",
+            "status": "present",
+            "evidence_ids": [
+              "t1_pd"
+            ],
+            "target": "ex:ce/reaction/o-adsorption-from-h2o",
+            "unit": "eV",
+            "value": 1.35,
+            "variable": "ex:ce/variable/o-adsorption-energy"
+          }
+        ],
+        "settings": {
+          "cutoff_energy": {
+            "status": "present",
+            "unit": "eV",
+            "value": 450
+          },
+          "force_convergence": {
+            "status": "present",
+            "unit": "eV/Å",
+            "value": 0.02
+          },
+          "kpoints": {
+            "status": "present",
+            "text_value": "4×4×1"
+          },
+          "pseudopotentials": {
+            "status": "present",
+            "text_value": "PAW"
+          },
+          "smearing": {
+            "status": "present",
+            "definition": "Methfessel-Paxton, first order",
+            "unit": "eV",
+            "value": 0.1
+          }
+        },
+        "solvation": "none",
+        "spin_treatment": "non_spin_polarized"
+      }
+    },
+    {
+      "id": "ex:ce/computation/ni-111",
+      "label": "Computation",
+      "props": {
+        "name": "O on Ni(111), RPBE",
+        "charge_treatment": "constant_charge",
+        "computation_kind": "electronic_structure",
+        "configuration": "ex:ce/dataset/rpbe-inputs",
+        "dispersion": {
+          "status": "present",
+          "text_value": "none"
+        },
+        "evidence": [
+          {
+            "id": "t1_ni",
+            "kind": "table",
+            "locator": "Table 1, footnote",
+            "source": "ex:ce/source/dft-paper"
+          }
+        ],
+        "execution_environment": "ex:ce/dataset/rpbe-environment",
+        "level_of_theory": {
+          "status": "present",
+          "text_value": "RPBE"
+        },
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "o_adsorption",
+            "status": "present",
+            "evidence_ids": [
+              "t1_ni"
+            ],
+            "unit": "eV",
+            "unresolved_target": "O adsorption energy; the reference species are not stated",
+            "value": 0.78,
+            "variable": "ex:ce/variable/o-adsorption-energy"
+          }
+        ],
+        "settings": {
+          "cutoff_energy": {
+            "status": "present",
+            "unit": "eV",
+            "value": 450
+          },
+          "force_convergence": {
+            "status": "present",
+            "unit": "eV/Å",
+            "value": 0.02
+          },
+          "initial_magnetic_moments": {
+            "status": "present",
+            "text_value": "0.6 μB per Ni atom"
+          },
+          "kpoints": {
+            "status": "present",
+            "text_value": "4×4×1"
+          },
+          "pseudopotentials": {
+            "status": "present",
+            "text_value": "PAW"
+          },
+          "smearing": {
+            "status": "present",
+            "definition": "Methfessel-Paxton, first order",
+            "unit": "eV",
+            "value": 0.1
+          }
+        },
+        "solvation": "none",
+        "spin_treatment": "spin_polarized"
+      }
+    },
+    {
+      "id": "ex:ce/computation/pt-111-che",
+      "label": "Computation",
+      "props": {
+        "name": "O electroadsorption on Pt(111), computational hydrogen electrode",
+        "charge_treatment": "constant_charge",
+        "computation_kind": "electronic_structure",
+        "configuration": "ex:ce/dataset/rpbe-inputs",
+        "dispersion": {
+          "status": "present",
+          "text_value": "none"
+        },
+        "electrode_potential": {
+          "status": "present",
+          "unit": "V vs RHE",
+          "value": 0.9
+        },
+        "evidence": [
+          {
+            "id": "t5_che",
+            "kind": "table",
+            "locator": "Table 5",
+            "source": "ex:ce/source/cip-paper"
+          },
+          {
+            "id": "t5_converted",
+            "kind": "table",
+            "locator": "Table 5, converted",
+            "source": "ex:ce/source/cip-paper"
+          }
+        ],
+        "execution_environment": "ex:ce/dataset/rpbe-environment",
+        "level_of_theory": {
+          "status": "present",
+          "text_value": "RPBE"
+        },
+        "origin": "synthetic",
+        "reference_scale": "rhe",
+        "result_values": [
+          {
+            "id": "o_electroadsorption",
+            "status": "present",
+            "evidence_ids": [
+              "t5_che"
+            ],
+            "target": "ex:ce/reaction/o-electroadsorption",
+            "unit": "eV",
+            "value": -0.18,
+            "variable": "ex:ce/variable/o-adsorption-free-energy"
+          },
+          {
+            "id": "o_electroadsorption_constant_potential",
+            "status": "present",
+            "definition": "converted to constant potential by charge extrapolation, at 0.9 V vs SHE (pH 0)",
+            "evidence_ids": [
+              "t5_converted"
+            ],
+            "origin": "derived",
+            "produced_by": "ex:ce/analysis/charge-extrapolation",
+            "target": "ex:ce/reaction/o-electroadsorption",
+            "unit": "eV",
+            "value": -0.09,
+            "variable": "ex:ce/variable/o-adsorption-free-energy"
+          }
+        ],
+        "settings": {
+          "cutoff_energy": {
+            "status": "present",
+            "unit": "eV",
+            "value": 450
+          },
+          "force_convergence": {
+            "status": "present",
+            "unit": "eV/Å",
+            "value": 0.02
+          },
+          "kpoints": {
+            "status": "present",
+            "text_value": "4×4×1"
+          },
+          "potential_method": {
+            "status": "present",
+            "text_value": "computational hydrogen electrode, −eU per electron transferred"
+          },
+          "pseudopotentials": {
+            "status": "present",
+            "text_value": "PAW"
+          },
+          "smearing": {
+            "status": "present",
+            "definition": "Methfessel-Paxton, first order",
+            "unit": "eV",
+            "value": 0.1
+          },
+          "thermochemistry": {
+            "status": "present",
+            "text_value": "harmonic adsorbate"
+          }
+        },
+        "solvation": "none",
+        "spin_treatment": "non_spin_polarized",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 298.15
+        }
+      }
+    },
+    {
+      "id": "ex:ce/analysis/charge-extrapolation",
+      "label": "Analysis",
+      "props": {
+        "name": "charge extrapolation to constant potential",
+        "analysis_kind": "thermodynamic",
+        "electrode_potential": {
+          "status": "present",
+          "unit": "V vs SHE",
+          "value": 0.9
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Section 2.3",
+            "source": "ex:ce/source/cip-paper"
+          }
+        ],
+        "method": "charge extrapolation from constant-charge energies",
+        "origin": "synthetic",
+        "reference_scale": "she",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 298.15
+        }
+      }
+    },
+    {
+      "id": "ex:ce/computation/pt-111-constant-potential",
+      "label": "Computation",
+      "props": {
+        "name": "O electroadsorption on Pt(111) at constant potential",
+        "charge_treatment": "constant_potential",
+        "computation_kind": "electronic_structure",
+        "configuration": "ex:ce/dataset/rpbe-inputs",
+        "dispersion": {
+          "status": "present",
+          "text_value": "none"
+        },
+        "electrode_potential": {
+          "status": "present",
+          "unit": "V vs SHE",
+          "value": 0.9
+        },
+        "evidence": [
+          {
+            "id": "t5_cip",
+            "kind": "table",
+            "locator": "Table 5",
+            "source": "ex:ce/source/cip-paper"
+          }
+        ],
+        "execution_environment": "ex:ce/dataset/rpbe-environment",
+        "level_of_theory": {
+          "status": "present",
+          "text_value": "RPBE"
+        },
+        "origin": "synthetic",
+        "reference_scale": "she",
+        "result_values": [
+          {
+            "id": "o_electroadsorption",
+            "status": "present",
+            "definition": "grand free energy at 0.9 V vs SHE (pH 0)",
+            "evidence_ids": [
+              "t5_cip"
+            ],
+            "target": "ex:ce/reaction/o-electroadsorption",
+            "unit": "eV",
+            "value": -0.05,
+            "variable": "ex:ce/variable/o-adsorption-free-energy"
+          }
+        ],
+        "settings": {
+          "cutoff_energy": {
+            "status": "present",
+            "unit": "eV",
+            "value": 450
+          },
+          "force_convergence": {
+            "status": "present",
+            "unit": "eV/Å",
+            "value": 0.02
+          },
+          "kpoints": {
+            "status": "present",
+            "text_value": "4×4×1"
+          },
+          "potential_method": {
+            "status": "present",
+            "text_value": "constant inner potential, referred to SHE through the point of zero charge of the electrode"
+          },
+          "pseudopotentials": {
+            "status": "present",
+            "text_value": "PAW"
+          },
+          "smearing": {
+            "status": "present",
+            "definition": "Methfessel-Paxton, first order",
+            "unit": "eV",
+            "value": 0.1
+          },
+          "solvation_model": {
+            "status": "present",
+            "text_value": "implicit continuum with one explicit water layer"
+          }
+        },
+        "solvation": "implicit_and_explicit",
+        "spin_treatment": "non_spin_polarized",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 298.15
+        }
+      }
+    },
+    {
+      "id": "ex:ce/mechanism/co-oxidation-pt111",
+      "label": "Mechanism",
+      "props": {
+        "name": "CO oxidation on Pt(111)",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Scheme 1",
+            "source": "ex:ce/source/kinetics-paper"
+          }
+        ],
+        "mechanism_format": "other",
+        "mechanism_status": "proposed",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ce/computation/pt-111-barriers",
+      "label": "Computation",
+      "props": {
+        "name": "transition states on Pt(111), RPBE, CI-NEB",
+        "charge_treatment": "constant_charge",
+        "computation_kind": "electronic_structure",
+        "configuration": "ex:ce/dataset/rpbe-inputs",
+        "dispersion": {
+          "status": "present",
+          "text_value": "none"
+        },
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:ce/source/kinetics-paper"
+          }
+        ],
+        "execution_environment": "ex:ce/dataset/rpbe-environment",
+        "level_of_theory": {
+          "status": "present",
+          "text_value": "RPBE"
+        },
+        "origin": "synthetic",
+        "result_values": [],
+        "settings": {
+          "cutoff_energy": {
+            "status": "present",
+            "unit": "eV",
+            "value": 450
+          },
+          "force_convergence": {
+            "status": "present",
+            "unit": "eV/Å",
+            "value": 0.02
+          },
+          "kpoints": {
+            "status": "present",
+            "text_value": "4×4×1"
+          },
+          "pseudopotentials": {
+            "status": "present",
+            "text_value": "PAW"
+          },
+          "smearing": {
+            "status": "present",
+            "definition": "Methfessel-Paxton, first order",
+            "unit": "eV",
+            "value": 0.1
+          },
+          "transition_state_method": {
+            "status": "present",
+            "text_value": "CI-NEB, 7 images"
+          }
+        },
+        "solvation": "none",
+        "spin_treatment": "non_spin_polarized"
+      }
+    },
+    {
+      "id": "ex:ce/step/o2-dissociation",
+      "label": "ElementaryStep",
+      "props": {
+        "name": "O2* -> 2 O*",
+        "activation_energy": {
+          "status": "present",
+          "definition": "transition state above the initial state, electronic energies",
+          "evidence_ids": [
+            "t2_ea_o2"
+          ],
+          "origin": "computed",
+          "produced_by": "ex:ce/computation/pt-111-barriers",
+          "unit": "eV",
+          "value": 0.62
+        },
+        "equation": "O2* -> 2 O*",
+        "evidence": [
+          {
+            "id": "t2_ea_o2",
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:ce/source/kinetics-paper"
+          },
+          {
+            "id": "t2_de_o2",
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:ce/source/kinetics-paper"
+          }
+        ],
+        "origin": "synthetic",
+        "reaction_energy": {
+          "status": "present",
+          "evidence_ids": [
+            "t2_de_o2"
+          ],
+          "origin": "computed",
+          "produced_by": "ex:ce/computation/pt-111-barriers",
+          "unit": "eV",
+          "value": -1.48
+        },
+        "reversible": false,
+        "step_kind": "surface_reaction"
+      }
+    },
+    {
+      "id": "ex:ce/step/co-plus-o",
+      "label": "ElementaryStep",
+      "props": {
+        "name": "CO* + O* -> CO2(g)",
+        "activation_energy": {
+          "status": "present",
+          "definition": "transition state above the initial state, electronic energies",
+          "evidence_ids": [
+            "t2_ea_coo"
+          ],
+          "origin": "computed",
+          "produced_by": "ex:ce/computation/pt-111-barriers",
+          "unit": "eV",
+          "value": 0.98
+        },
+        "equation": "CO* + O* -> CO2(g)",
+        "evidence": [
+          {
+            "id": "t2_ea_coo",
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:ce/source/kinetics-paper"
+          },
+          {
+            "id": "t2_de_coo",
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:ce/source/kinetics-paper"
+          }
+        ],
+        "origin": "synthetic",
+        "reaction_energy": {
+          "status": "present",
+          "evidence_ids": [
+            "t2_de_coo"
+          ],
+          "origin": "computed",
+          "produced_by": "ex:ce/computation/pt-111-barriers",
+          "unit": "eV",
+          "value": -0.35
+        },
+        "reversible": false,
+        "step_kind": "surface_reaction"
+      }
+    },
+    {
+      "id": "ex:ce/catalyst/pt-al2o3",
+      "label": "Catalyst",
+      "props": {
+        "name": "Pt/Al2O3, 1 wt% Pt",
+        "catalyst_family": "metal",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental",
+            "source": "ex:ce/source/kinetics-paper"
+          }
+        ],
+        "nominal_formula": "Pt/Al2O3",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ce/sample/pt-al2o3-k",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Pt/Al2O3 batch K",
+        "batch_identifier": "K",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental",
+            "source": "ex:ce/source/kinetics-paper"
+          }
+        ],
+        "origin": "synthetic",
+        "sample_kind": "powder"
+      }
+    },
+    {
+      "id": "ex:ce/feed/co-o2",
+      "label": "Feed",
+      "props": {
+        "name": "1 % CO, 1 % O2 in He",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental",
+            "source": "ex:ce/source/kinetics-paper"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ce/instrument/plug-flow",
+      "label": "Reactor",
+      "props": {
+        "name": "quartz plug-flow reactor",
+        "origin": "synthetic",
+        "reactor_kind": "fixed_bed"
+      }
+    },
+    {
+      "id": "ex:ce/variable/co2-rate",
+      "label": "Variable",
+      "props": {
+        "name": "CO2 formation rate per catalyst mass",
+        "origin": "synthetic",
+        "quantity_kind": "production_rate",
+        "scale": "quantitative",
+        "unit": "µmol/(g s)"
+      }
+    },
+    {
+      "id": "ex:ce/variable/co2-apparent-activation-energy",
+      "label": "Variable",
+      "props": {
+        "name": "apparent activation energy of CO2 formation",
+        "origin": "synthetic",
+        "quantity_kind": "apparent_activation_energy",
+        "scale": "quantitative",
+        "unit": "kJ/mol"
+      }
+    },
+    {
+      "id": "ex:ce/test/co-oxidation-450k",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "CO oxidation at 450 K",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "id": "f2_rate",
+            "kind": "figure",
+            "locator": "Figure 2",
+            "source": "ex:ce/source/kinetics-paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "interpretations": [
+          "intrinsic_kinetics"
+        ],
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "basis": "absolute",
+          "unit": "bar",
+          "value": 1
+        },
+        "result_values": [
+          {
+            "id": "co2_rate",
+            "status": "present",
+            "evidence_ids": [
+              "f2_rate"
+            ],
+            "target": "ex:ce/species/co2",
+            "unit": "µmol/(g s)",
+            "value": 0.21,
+            "variable": "ex:ce/variable/co2-rate"
+          }
+        ],
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 450
+        },
+        "temperature_measured_at": "catalyst_bed",
+        "test_kind": "kinetics"
+      }
+    },
+    {
+      "id": "ex:ce/test/co-oxidation-480k",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "CO oxidation at 480 K",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "id": "f2_rate",
+            "kind": "figure",
+            "locator": "Figure 2",
+            "source": "ex:ce/source/kinetics-paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "interpretations": [
+          "intrinsic_kinetics"
+        ],
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "basis": "absolute",
+          "unit": "bar",
+          "value": 1
+        },
+        "result_values": [
+          {
+            "id": "co2_rate",
+            "status": "present",
+            "evidence_ids": [
+              "f2_rate"
+            ],
+            "target": "ex:ce/species/co2",
+            "unit": "µmol/(g s)",
+            "value": 1.05,
+            "variable": "ex:ce/variable/co2-rate"
+          }
+        ],
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 480
+        },
+        "temperature_measured_at": "catalyst_bed",
+        "test_kind": "kinetics"
+      }
+    },
+    {
+      "id": "ex:ce/test/co-oxidation-510k",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "CO oxidation at 510 K",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "id": "f2_rate",
+            "kind": "figure",
+            "locator": "Figure 2",
+            "source": "ex:ce/source/kinetics-paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "interpretations": [
+          "intrinsic_kinetics"
+        ],
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "basis": "absolute",
+          "unit": "bar",
+          "value": 1
+        },
+        "result_values": [
+          {
+            "id": "co2_rate",
+            "status": "present",
+            "evidence_ids": [
+              "f2_rate"
+            ],
+            "target": "ex:ce/species/co2",
+            "unit": "µmol/(g s)",
+            "value": 4.4,
+            "variable": "ex:ce/variable/co2-rate"
+          }
+        ],
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 510
+        },
+        "temperature_measured_at": "catalyst_bed",
+        "test_kind": "kinetics"
+      }
+    },
+    {
+      "id": "ex:ce/model/arrhenius",
+      "label": "Model",
+      "props": {
+        "name": "Arrhenius rate law",
+        "equations": [
+          "r = A exp(-Ea/(R T))"
+        ],
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 2",
+            "source": "ex:ce/source/kinetics-paper"
+          }
+        ],
+        "model_kind": "rate law",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ce/analysis/arrhenius-fit",
+      "label": "Analysis",
+      "props": {
+        "name": "Arrhenius fit of the CO2 formation rate, 450–510 K",
+        "analysis_kind": "kinetic_fit",
+        "evidence": [
+          {
+            "id": "f2_fit",
+            "kind": "figure",
+            "locator": "Figure 2, inset",
+            "source": "ex:ce/source/kinetics-paper"
+          }
+        ],
+        "method": "least-squares fit of ln r against 1/T",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "apparent_activation_energy",
+            "status": "present",
+            "evidence_ids": [
+              "f2_fit"
+            ],
+            "target": "ex:ce/species/co2",
+            "uncertainty": 4,
+            "uncertainty_kind": "standard_error",
+            "unit": "kJ/mol",
+            "value": 105,
+            "variable": "ex:ce/variable/co2-apparent-activation-energy"
+          }
+        ],
+        "temperature": {
+          "status": "present",
+          "lower": 450,
+          "unit": "K",
+          "upper": 510
+        }
+      }
+    },
+    {
+      "id": "ex:ce/analysis/weisz-prater",
+      "label": "Analysis",
+      "props": {
+        "name": "Weisz-Prater check at 510 K",
+        "analysis_kind": "transport_check",
+        "evaluation_basis": "numerical",
+        "evidence": [
+          {
+            "id": "s3_wp",
+            "kind": "text",
+            "locator": "Supporting information, Section S3",
+            "source": "ex:ce/source/kinetics-paper"
+          }
+        ],
+        "method": "Weisz-Prater criterion from the rate at 510 K",
+        "origin": "synthetic",
+        "results": {
+          "weisz_prater_number": {
+            "status": "present",
+            "evidence_ids": [
+              "s3_wp"
+            ],
+            "unit": "1",
+            "value": 0.02
+          }
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 510
+        },
+        "verdict": "no internal diffusion limitation"
+      }
+    },
+    {
+      "id": "ex:ce/site/pt111-fcc",
+      "label": "ActiveSite",
+      "props": {
+        "name": "fcc hollow site of Pt(111)",
+        "origin": "synthetic",
+        "site_kind": "metal_site"
+      }
+    },
+    {
+      "id": "ex:ce/state/o-covered-pt111",
+      "label": "CatalystState",
+      "props": {
+        "name": "computed: Pt(111) with 0.25 ML O",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 3",
+            "source": "ex:ce/source/kinetics-paper"
+          }
+        ],
+        "morphology": "Pt(111) terrace, O in fcc hollow sites",
+        "origin": "synthetic",
+        "state_kind": "working"
+      }
+    },
+    {
+      "id": "ex:ce/computation/microkinetic",
+      "label": "Computation",
+      "props": {
+        "name": "microkinetic model of CO oxidation on Pt(111)",
+        "computation_kind": "microkinetic",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Section 4",
+            "source": "ex:ce/source/kinetics-paper"
+          }
+        ],
+        "level_of_theory": {
+          "status": "present",
+          "text_value": "RPBE"
+        },
+        "method": "mean-field microkinetic model",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ce/computation/microkinetic-450k",
+      "label": "Computation",
+      "props": {
+        "name": "microkinetic model at 450 K",
+        "computation_kind": "microkinetic",
+        "conditions": {
+          "co_partial_pressure": {
+            "status": "present",
+            "unit": "bar",
+            "value": 0.01
+          },
+          "o2_partial_pressure": {
+            "status": "present",
+            "unit": "bar",
+            "value": 0.01
+          }
+        },
+        "evidence": [
+          {
+            "id": "f5",
+            "kind": "figure",
+            "locator": "Figure 5",
+            "source": "ex:ce/source/kinetics-paper"
+          }
+        ],
+        "level_of_theory": {
+          "status": "present",
+          "text_value": "RPBE"
+        },
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "unit": "bar",
+          "value": 1
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 450
+        }
+      }
+    },
+    {
+      "id": "ex:ce/computation/microkinetic-500k",
+      "label": "Computation",
+      "props": {
+        "name": "microkinetic model at 500 K",
+        "computation_kind": "microkinetic",
+        "conditions": {
+          "co_partial_pressure": {
+            "status": "present",
+            "unit": "bar",
+            "value": 0.01
+          },
+          "o2_partial_pressure": {
+            "status": "present",
+            "unit": "bar",
+            "value": 0.01
+          }
+        },
+        "evidence": [
+          {
+            "id": "f5",
+            "kind": "figure",
+            "locator": "Figure 5",
+            "source": "ex:ce/source/kinetics-paper"
+          }
+        ],
+        "level_of_theory": {
+          "status": "present",
+          "text_value": "RPBE"
+        },
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "unit": "bar",
+          "value": 1
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 500
+        }
+      }
+    },
+    {
+      "id": "ex:ce/dataset/adsorption-training-set",
+      "label": "Dataset",
+      "props": {
+        "name": "spin-polarized O adsorption energies, training split",
+        "availability": "available",
+        "data_kind": "processed",
+        "licence": "CC-BY-4.0 (invented)",
+        "origin": "synthetic",
+        "sha256": "bdc50c520f99d98c1fde2aedafbc5239b7bec68f40bc1c4ed0d6966a1c9d2ddf",
+        "uri": "https://example.org/invented/adsorption-training-set",
+        "version": "1"
+      }
+    },
+    {
+      "id": "ex:ce/dataset/adsorption-test-set",
+      "label": "Dataset",
+      "props": {
+        "name": "spin-polarized O adsorption energies, held-out split",
+        "availability": "available",
+        "data_kind": "processed",
+        "origin": "synthetic",
+        "sha256": "af0a28dfc986532eb44b9505687fa752bfbf40c9e42b5be3192c4645e34018fa",
+        "uri": "https://example.org/invented/adsorption-test-set",
+        "version": "1"
+      }
+    },
+    {
+      "id": "ex:ce/dataset/mlip-ckpt-0420",
+      "label": "Dataset",
+      "props": {
+        "name": "model weights at checkpoint 0420",
+        "availability": "available",
+        "data_kind": "other",
+        "media_type": "application/octet-stream",
+        "origin": "synthetic",
+        "sha256": "d32602acbe50425d8d53091f7e6275e4d4639388364cc26af03df2ed2781e958",
+        "uri": "https://example.org/invented/mlip-ckpt-0420",
+        "version": "1"
+      }
+    },
+    {
+      "id": "ex:ce/model/example-mlip",
+      "label": "Model",
+      "props": {
+        "name": "example machine-learned potential",
+        "assumptions": [
+          "energies of the spin-polarized RPBE calculations it was fitted to"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Section 2",
+            "source": "ex:ce/source/ml-paper"
+          }
+        ],
+        "model_kind": "machine-learned interatomic potential",
+        "origin": "synthetic",
+        "stored_in": "ex:ce/dataset/mlip-ckpt-0420",
+        "version": "ckpt-0420"
+      }
+    },
+    {
+      "id": "ex:ce/variable/energy-mae",
+      "label": "Variable",
+      "props": {
+        "name": "mean absolute error of adsorption energies",
+        "origin": "synthetic",
+        "quantity_kind": "mean_absolute_error",
+        "scale": "quantitative",
+        "unit": "eV"
+      }
+    },
+    {
+      "id": "ex:ce/experiment/mlip-training",
+      "label": "Experiment",
+      "props": {
+        "name": "fitting the potential",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Section 2",
+            "source": "ex:ce/source/ml-paper"
+          }
+        ],
+        "experiment_kind": "computational",
+        "goal": "calibrate",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:ce/experiment/mlip-validation-held-out",
+      "label": "Experiment",
+      "props": {
+        "name": "validation of the potential on the held-out data",
+        "evidence": [
+          {
+            "id": "mae_held-out",
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:ce/source/ml-paper"
+          }
+        ],
+        "experiment_kind": "computational",
+        "goal": "validate",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "mae",
+            "status": "present",
+            "evidence_ids": [
+              "mae_held-out"
+            ],
+            "unit": "eV",
+            "value": 0.07,
+            "variable": "ex:ce/variable/energy-mae"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:ce/experiment/mlip-validation-training-set",
+      "label": "Experiment",
+      "props": {
+        "name": "validation of the potential on the training-set data",
+        "evidence": [
+          {
+            "id": "mae_training-set",
+            "kind": "table",
+            "locator": "Table S1",
+            "source": "ex:ce/source/ml-paper"
+          }
+        ],
+        "experiment_kind": "computational",
+        "goal": "validate",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "mae",
+            "status": "present",
+            "evidence_ids": [
+              "mae_training-set"
+            ],
+            "unit": "eV",
+            "value": 0.03,
+            "variable": "ex:ce/variable/energy-mae"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:ce/computation/mlip-pt3ni",
+      "label": "Computation",
+      "props": {
+        "name": "O on Pt3Ni(111), predicted by the machine-learned potential",
+        "charge_treatment": "constant_charge",
+        "computation_kind": "machine_learned",
+        "evidence": [
+          {
+            "id": "t2_ml",
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:ce/source/ml-paper"
+          }
+        ],
+        "level_of_theory": {
+          "status": "present",
+          "text_value": "example machine-learned potential, ckpt-0420"
+        },
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "o_adsorption_h2o",
+            "status": "present",
+            "evidence_ids": [
+              "t2_ml"
+            ],
+            "origin": "predicted",
+            "target": "ex:ce/reaction/o-adsorption-from-h2o",
+            "unit": "eV",
+            "value": 1.71,
+            "variable": "ex:ce/variable/o-adsorption-energy"
+          }
+        ]
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:ce/link/1",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "phase": "gas",
+        "role": "reactant"
+      },
+      "source": "ex:ce/reaction/o-adsorption-from-h2o",
+      "target": "ex:ce/species/h2o"
+    },
+    {
+      "id": "ex:ce/link/2",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "phase": "adsorbed",
+        "role": "product"
+      },
+      "source": "ex:ce/reaction/o-adsorption-from-h2o",
+      "target": "ex:ce/species/o"
+    },
+    {
+      "id": "ex:ce/link/3",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "phase": "gas",
+        "role": "product"
+      },
+      "source": "ex:ce/reaction/o-adsorption-from-h2o",
+      "target": "ex:ce/species/h2"
+    },
+    {
+      "id": "ex:ce/link/4",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 0.5,
+        "origin": "synthetic",
+        "phase": "gas",
+        "role": "reactant"
+      },
+      "source": "ex:ce/reaction/o-adsorption-from-o2",
+      "target": "ex:ce/species/o2"
+    },
+    {
+      "id": "ex:ce/link/5",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "phase": "adsorbed",
+        "role": "product"
+      },
+      "source": "ex:ce/reaction/o-adsorption-from-o2",
+      "target": "ex:ce/species/o"
+    },
+    {
+      "id": "ex:ce/link/6",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "phase": "liquid",
+        "role": "reactant"
+      },
+      "source": "ex:ce/reaction/o-electroadsorption",
+      "target": "ex:ce/species/h2o"
+    },
+    {
+      "id": "ex:ce/link/7",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "phase": "adsorbed",
+        "role": "product"
+      },
+      "source": "ex:ce/reaction/o-electroadsorption",
+      "target": "ex:ce/species/o"
+    },
+    {
+      "id": "ex:ce/link/8",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 2,
+        "origin": "synthetic",
+        "phase": "liquid",
+        "role": "product"
+      },
+      "source": "ex:ce/reaction/o-electroadsorption",
+      "target": "ex:ce/species/proton"
+    },
+    {
+      "id": "ex:ce/link/9",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 2,
+        "origin": "synthetic",
+        "phase": "not_reported",
+        "role": "product"
+      },
+      "source": "ex:ce/reaction/o-electroadsorption",
+      "target": "ex:ce/species/electron"
+    },
+    {
+      "id": "ex:ce/link/10",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "phase": "gas",
+        "role": "reactant"
+      },
+      "source": "ex:ce/reaction/co-oxidation",
+      "target": "ex:ce/species/co"
+    },
+    {
+      "id": "ex:ce/link/11",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 0.5,
+        "origin": "synthetic",
+        "phase": "gas",
+        "role": "reactant"
+      },
+      "source": "ex:ce/reaction/co-oxidation",
+      "target": "ex:ce/species/o2"
+    },
+    {
+      "id": "ex:ce/link/12",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "phase": "gas",
+        "role": "product"
+      },
+      "source": "ex:ce/reaction/co-oxidation",
+      "target": "ex:ce/species/co2"
+    },
+    {
+      "id": "ex:ce/link/13",
+      "type": "APPLIES_TO",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/model/cu-111",
+      "target": "ex:ce/material/cu"
+    },
+    {
+      "id": "ex:ce/link/14",
+      "type": "APPLIES_TO",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/model/pt-111",
+      "target": "ex:ce/material/pt"
+    },
+    {
+      "id": "ex:ce/link/15",
+      "type": "APPLIES_TO",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/model/ag-111",
+      "target": "ex:ce/material/ag"
+    },
+    {
+      "id": "ex:ce/link/16",
+      "type": "APPLIES_TO",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/model/au-111",
+      "target": "ex:ce/material/au"
+    },
+    {
+      "id": "ex:ce/link/17",
+      "type": "APPLIES_TO",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/model/pd-111",
+      "target": "ex:ce/material/pd"
+    },
+    {
+      "id": "ex:ce/link/18",
+      "type": "APPLIES_TO",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/model/ni-111",
+      "target": "ex:ce/material/ni"
+    },
+    {
+      "id": "ex:ce/link/19",
+      "type": "USES_SOFTWARE",
+      "props": {
+        "origin": "synthetic",
+        "version": "6.4.2"
+      },
+      "source": "ex:ce/computation/rpbe-study",
+      "target": "ex:ce/software/plane-wave-code"
+    },
+    {
+      "id": "ex:ce/link/20",
+      "type": "PART_OF",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/computation/cu-111",
+      "target": "ex:ce/computation/rpbe-study"
+    },
+    {
+      "id": "ex:ce/link/21",
+      "type": "USES_SOFTWARE",
+      "props": {
+        "origin": "synthetic",
+        "version": "6.4.2"
+      },
+      "source": "ex:ce/computation/cu-111",
+      "target": "ex:ce/software/plane-wave-code"
+    },
+    {
+      "id": "ex:ce/link/22",
+      "type": "USES_MODEL",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/computation/cu-111",
+      "target": "ex:ce/model/cu-111"
+    },
+    {
+      "id": "ex:ce/link/23",
+      "type": "PART_OF",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/computation/pt-111",
+      "target": "ex:ce/computation/rpbe-study"
+    },
+    {
+      "id": "ex:ce/link/24",
+      "type": "USES_SOFTWARE",
+      "props": {
+        "origin": "synthetic",
+        "version": "6.4.2"
+      },
+      "source": "ex:ce/computation/pt-111",
+      "target": "ex:ce/software/plane-wave-code"
+    },
+    {
+      "id": "ex:ce/link/25",
+      "type": "USES_MODEL",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/computation/pt-111",
+      "target": "ex:ce/model/pt-111"
+    },
+    {
+      "id": "ex:ce/link/26",
+      "type": "PART_OF",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/computation/ag-111",
+      "target": "ex:ce/computation/rpbe-study"
+    },
+    {
+      "id": "ex:ce/link/27",
+      "type": "USES_SOFTWARE",
+      "props": {
+        "origin": "synthetic",
+        "version": "6.4.2"
+      },
+      "source": "ex:ce/computation/ag-111",
+      "target": "ex:ce/software/plane-wave-code"
+    },
+    {
+      "id": "ex:ce/link/28",
+      "type": "USES_MODEL",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/computation/ag-111",
+      "target": "ex:ce/model/ag-111"
+    },
+    {
+      "id": "ex:ce/link/29",
+      "type": "PART_OF",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/computation/au-111",
+      "target": "ex:ce/computation/rpbe-study"
+    },
+    {
+      "id": "ex:ce/link/30",
+      "type": "USES_SOFTWARE",
+      "props": {
+        "origin": "synthetic",
+        "version": "6.4.2"
+      },
+      "source": "ex:ce/computation/au-111",
+      "target": "ex:ce/software/plane-wave-code"
+    },
+    {
+      "id": "ex:ce/link/31",
+      "type": "USES_MODEL",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/computation/au-111",
+      "target": "ex:ce/model/au-111"
+    },
+    {
+      "id": "ex:ce/link/32",
+      "type": "PART_OF",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/computation/h2o-molecule",
+      "target": "ex:ce/computation/rpbe-study"
+    },
+    {
+      "id": "ex:ce/link/33",
+      "type": "USES_SOFTWARE",
+      "props": {
+        "origin": "synthetic",
+        "version": "6.4.2"
+      },
+      "source": "ex:ce/computation/h2o-molecule",
+      "target": "ex:ce/software/plane-wave-code"
+    },
+    {
+      "id": "ex:ce/link/34",
+      "type": "USES_MODEL",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/computation/h2o-molecule",
+      "target": "ex:ce/model/h2o-molecule"
+    },
+    {
+      "id": "ex:ce/link/35",
+      "type": "PART_OF",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/computation/pt-111-free-energy",
+      "target": "ex:ce/computation/rpbe-study"
+    },
+    {
+      "id": "ex:ce/link/36",
+      "type": "USES_SOFTWARE",
+      "props": {
+        "origin": "synthetic",
+        "version": "6.4.2"
+      },
+      "source": "ex:ce/computation/pt-111-free-energy",
+      "target": "ex:ce/software/plane-wave-code"
+    },
+    {
+      "id": "ex:ce/link/37",
+      "type": "USES_MODEL",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/computation/pt-111-free-energy",
+      "target": "ex:ce/model/pt-111"
+    },
+    {
+      "id": "ex:ce/link/38",
+      "type": "PART_OF",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/computation/pd-111",
+      "target": "ex:ce/computation/rpbe-study"
+    },
+    {
+      "id": "ex:ce/link/39",
+      "type": "USES_SOFTWARE",
+      "props": {
+        "origin": "synthetic",
+        "version": "6.4.2"
+      },
+      "source": "ex:ce/computation/pd-111",
+      "target": "ex:ce/software/plane-wave-code"
+    },
+    {
+      "id": "ex:ce/link/40",
+      "type": "USES_MODEL",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/computation/pd-111",
+      "target": "ex:ce/model/pd-111"
+    },
+    {
+      "id": "ex:ce/link/41",
+      "type": "PART_OF",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/computation/ni-111",
+      "target": "ex:ce/computation/rpbe-study"
+    },
+    {
+      "id": "ex:ce/link/42",
+      "type": "USES_SOFTWARE",
+      "props": {
+        "origin": "synthetic",
+        "version": "6.4.2"
+      },
+      "source": "ex:ce/computation/ni-111",
+      "target": "ex:ce/software/plane-wave-code"
+    },
+    {
+      "id": "ex:ce/link/43",
+      "type": "USES_MODEL",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/computation/ni-111",
+      "target": "ex:ce/model/ni-111"
+    },
+    {
+      "id": "ex:ce/link/44",
+      "type": "USES_SOFTWARE",
+      "props": {
+        "origin": "synthetic",
+        "version": "6.4.2"
+      },
+      "source": "ex:ce/computation/pt-111-che",
+      "target": "ex:ce/software/plane-wave-code"
+    },
+    {
+      "id": "ex:ce/link/45",
+      "type": "USES_MODEL",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/computation/pt-111-che",
+      "target": "ex:ce/model/pt-111"
+    },
+    {
+      "id": "ex:ce/link/46",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:ce/analysis/charge-extrapolation",
+      "target": "ex:ce/computation/pt-111-che"
+    },
+    {
+      "id": "ex:ce/link/47",
+      "type": "USES_SOFTWARE",
+      "props": {
+        "origin": "synthetic",
+        "version": "6.4.2"
+      },
+      "source": "ex:ce/computation/pt-111-constant-potential",
+      "target": "ex:ce/software/plane-wave-code"
+    },
+    {
+      "id": "ex:ce/link/48",
+      "type": "USES_MODEL",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/computation/pt-111-constant-potential",
+      "target": "ex:ce/model/pt-111"
+    },
+    {
+      "id": "ex:ce/link/49",
+      "type": "DESCRIBES_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/mechanism/co-oxidation-pt111",
+      "target": "ex:ce/reaction/co-oxidation"
+    },
+    {
+      "id": "ex:ce/link/50",
+      "type": "APPLIES_TO",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/mechanism/co-oxidation-pt111",
+      "target": "ex:ce/material/pt"
+    },
+    {
+      "id": "ex:ce/link/51",
+      "type": "USES_SOFTWARE",
+      "props": {
+        "origin": "synthetic",
+        "version": "6.4.2"
+      },
+      "source": "ex:ce/computation/pt-111-barriers",
+      "target": "ex:ce/software/plane-wave-code"
+    },
+    {
+      "id": "ex:ce/link/52",
+      "type": "USES_MODEL",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/computation/pt-111-barriers",
+      "target": "ex:ce/model/pt-111"
+    },
+    {
+      "id": "ex:ce/link/53",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "phase": "adsorbed",
+        "role": "reactant"
+      },
+      "source": "ex:ce/step/o2-dissociation",
+      "target": "ex:ce/species/o2"
+    },
+    {
+      "id": "ex:ce/link/54",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 2,
+        "origin": "synthetic",
+        "phase": "adsorbed",
+        "role": "product"
+      },
+      "source": "ex:ce/step/o2-dissociation",
+      "target": "ex:ce/species/o"
+    },
+    {
+      "id": "ex:ce/link/55",
+      "type": "HAS_ELEMENTARY_STEP",
+      "props": {
+        "order": 1,
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/mechanism/co-oxidation-pt111",
+      "target": "ex:ce/step/o2-dissociation"
+    },
+    {
+      "id": "ex:ce/link/56",
+      "type": "TRANSITION_STATE",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/step/o2-dissociation",
+      "target": "ex:ce/model/ts-o2-dissociation"
+    },
+    {
+      "id": "ex:ce/link/57",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "phase": "adsorbed",
+        "role": "reactant"
+      },
+      "source": "ex:ce/step/co-plus-o",
+      "target": "ex:ce/species/co"
+    },
+    {
+      "id": "ex:ce/link/58",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "phase": "adsorbed",
+        "role": "reactant"
+      },
+      "source": "ex:ce/step/co-plus-o",
+      "target": "ex:ce/species/o"
+    },
+    {
+      "id": "ex:ce/link/59",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "phase": "gas",
+        "role": "product"
+      },
+      "source": "ex:ce/step/co-plus-o",
+      "target": "ex:ce/species/co2"
+    },
+    {
+      "id": "ex:ce/link/60",
+      "type": "HAS_ELEMENTARY_STEP",
+      "props": {
+        "order": 2,
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/mechanism/co-oxidation-pt111",
+      "target": "ex:ce/step/co-plus-o"
+    },
+    {
+      "id": "ex:ce/link/61",
+      "type": "TRANSITION_STATE",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/step/co-plus-o",
+      "target": "ex:ce/model/ts-co-o"
+    },
+    {
+      "id": "ex:ce/link/62",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/sample/pt-al2o3-k",
+      "target": "ex:ce/catalyst/pt-al2o3"
+    },
+    {
+      "id": "ex:ce/link/63",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:ce/feed/co-o2",
+      "target": "ex:ce/species/co"
+    },
+    {
+      "id": "ex:ce/link/64",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:ce/feed/co-o2",
+      "target": "ex:ce/species/o2"
+    },
+    {
+      "id": "ex:ce/link/65",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "reduced"
+      },
+      "source": "ex:ce/test/co-oxidation-450k",
+      "target": "ex:ce/sample/pt-al2o3-k"
+    },
+    {
+      "id": "ex:ce/link/66",
+      "type": "FED_WITH",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/test/co-oxidation-450k",
+      "target": "ex:ce/feed/co-o2"
+    },
+    {
+      "id": "ex:ce/link/67",
+      "type": "IN_REACTOR",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/test/co-oxidation-450k",
+      "target": "ex:ce/instrument/plug-flow"
+    },
+    {
+      "id": "ex:ce/link/68",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/test/co-oxidation-450k",
+      "target": "ex:ce/reaction/co-oxidation"
+    },
+    {
+      "id": "ex:ce/link/69",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "reduced"
+      },
+      "source": "ex:ce/test/co-oxidation-480k",
+      "target": "ex:ce/sample/pt-al2o3-k"
+    },
+    {
+      "id": "ex:ce/link/70",
+      "type": "FED_WITH",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/test/co-oxidation-480k",
+      "target": "ex:ce/feed/co-o2"
+    },
+    {
+      "id": "ex:ce/link/71",
+      "type": "IN_REACTOR",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/test/co-oxidation-480k",
+      "target": "ex:ce/instrument/plug-flow"
+    },
+    {
+      "id": "ex:ce/link/72",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/test/co-oxidation-480k",
+      "target": "ex:ce/reaction/co-oxidation"
+    },
+    {
+      "id": "ex:ce/link/73",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "reduced"
+      },
+      "source": "ex:ce/test/co-oxidation-510k",
+      "target": "ex:ce/sample/pt-al2o3-k"
+    },
+    {
+      "id": "ex:ce/link/74",
+      "type": "FED_WITH",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/test/co-oxidation-510k",
+      "target": "ex:ce/feed/co-o2"
+    },
+    {
+      "id": "ex:ce/link/75",
+      "type": "IN_REACTOR",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/test/co-oxidation-510k",
+      "target": "ex:ce/instrument/plug-flow"
+    },
+    {
+      "id": "ex:ce/link/76",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/test/co-oxidation-510k",
+      "target": "ex:ce/reaction/co-oxidation"
+    },
+    {
+      "id": "ex:ce/link/77",
+      "type": "USES_MODEL",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/analysis/arrhenius-fit",
+      "target": "ex:ce/model/arrhenius"
+    },
+    {
+      "id": "ex:ce/link/78",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/analysis/arrhenius-fit",
+      "target": "ex:ce/reaction/co-oxidation"
+    },
+    {
+      "id": "ex:ce/link/79",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:ce/analysis/arrhenius-fit",
+      "target": "ex:ce/test/co-oxidation-450k"
+    },
+    {
+      "id": "ex:ce/link/80",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:ce/analysis/weisz-prater",
+      "target": "ex:ce/test/co-oxidation-450k"
+    },
+    {
+      "id": "ex:ce/link/81",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:ce/analysis/arrhenius-fit",
+      "target": "ex:ce/test/co-oxidation-480k"
+    },
+    {
+      "id": "ex:ce/link/82",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:ce/analysis/weisz-prater",
+      "target": "ex:ce/test/co-oxidation-480k"
+    },
+    {
+      "id": "ex:ce/link/83",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:ce/analysis/arrhenius-fit",
+      "target": "ex:ce/test/co-oxidation-510k"
+    },
+    {
+      "id": "ex:ce/link/84",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:ce/analysis/weisz-prater",
+      "target": "ex:ce/test/co-oxidation-510k"
+    },
+    {
+      "id": "ex:ce/link/85",
+      "type": "LOCATED_ON",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/site/pt111-fcc",
+      "target": "ex:ce/material/pt"
+    },
+    {
+      "id": "ex:ce/link/86",
+      "type": "STATE_OF",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/state/o-covered-pt111",
+      "target": "ex:ce/model/pt-111"
+    },
+    {
+      "id": "ex:ce/link/87",
+      "type": "DETERMINED_BY",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/state/o-covered-pt111",
+      "target": "ex:ce/computation/pt-111-barriers"
+    },
+    {
+      "id": "ex:ce/link/88",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "bound_to": "ex:ce/site/pt111-fcc",
+        "coverage": {
+          "status": "present",
+          "basis": "O atoms per surface Pt atom",
+          "unit": "ML",
+          "value": 0.25
+        },
+        "origin": "synthetic",
+        "role": "adsorbate"
+      },
+      "source": "ex:ce/state/o-covered-pt111",
+      "target": "ex:ce/species/o"
+    },
+    {
+      "id": "ex:ce/link/89",
+      "type": "REPRESENTS",
+      "props": {
+        "aspect": "the (111) terraces of its Pt particles",
+        "assumptions": [
+          "a clean Pt(111) terrace stands for the particles",
+          "the alumina support is left out",
+          "0.25 ML O, the coverage of the microkinetic model at 450 K"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Section 4",
+            "source": "ex:ce/source/kinetics-paper"
+          }
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/model/pt-111",
+      "target": "ex:ce/sample/pt-al2o3-k"
+    },
+    {
+      "id": "ex:ce/link/90",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "parameter"
+      },
+      "source": "ex:ce/computation/microkinetic",
+      "target": "ex:ce/mechanism/co-oxidation-pt111"
+    },
+    {
+      "id": "ex:ce/link/91",
+      "type": "IN_STATE",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/computation/microkinetic",
+      "target": "ex:ce/state/o-covered-pt111"
+    },
+    {
+      "id": "ex:ce/link/92",
+      "type": "PART_OF",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/computation/microkinetic-450k",
+      "target": "ex:ce/computation/microkinetic"
+    },
+    {
+      "id": "ex:ce/link/93",
+      "type": "IN_STATE",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/computation/microkinetic-450k",
+      "target": "ex:ce/state/o-covered-pt111"
+    },
+    {
+      "id": "ex:ce/link/94",
+      "type": "RATE_CONTROL",
+      "props": {
+        "degree_of_rate_control": {
+          "status": "present",
+          "evidence_ids": [
+            "f5_x"
+          ],
+          "target": "ex:ce/species/co2",
+          "unit": "1",
+          "value": 0.82
+        },
+        "evidence": [
+          {
+            "id": "f5_x",
+            "kind": "figure",
+            "locator": "Figure 5",
+            "source": "ex:ce/source/kinetics-paper"
+          }
+        ],
+        "origin": "synthetic",
+        "rate_determining": true
+      },
+      "source": "ex:ce/computation/microkinetic-450k",
+      "target": "ex:ce/step/o2-dissociation"
+    },
+    {
+      "id": "ex:ce/link/95",
+      "type": "RATE_CONTROL",
+      "props": {
+        "degree_of_rate_control": {
+          "status": "present",
+          "evidence_ids": [
+            "f5_x"
+          ],
+          "target": "ex:ce/species/co2",
+          "unit": "1",
+          "value": 0.15
+        },
+        "evidence": [
+          {
+            "id": "f5_x",
+            "kind": "figure",
+            "locator": "Figure 5",
+            "source": "ex:ce/source/kinetics-paper"
+          }
+        ],
+        "origin": "synthetic",
+        "rate_determining": false
+      },
+      "source": "ex:ce/computation/microkinetic-450k",
+      "target": "ex:ce/step/co-plus-o"
+    },
+    {
+      "id": "ex:ce/link/96",
+      "type": "PART_OF",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/computation/microkinetic-500k",
+      "target": "ex:ce/computation/microkinetic"
+    },
+    {
+      "id": "ex:ce/link/97",
+      "type": "IN_STATE",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/computation/microkinetic-500k",
+      "target": "ex:ce/state/o-covered-pt111"
+    },
+    {
+      "id": "ex:ce/link/98",
+      "type": "RATE_CONTROL",
+      "props": {
+        "degree_of_rate_control": {
+          "status": "present",
+          "evidence_ids": [
+            "f5_x"
+          ],
+          "target": "ex:ce/species/co2",
+          "unit": "1",
+          "value": 0.31
+        },
+        "evidence": [
+          {
+            "id": "f5_x",
+            "kind": "figure",
+            "locator": "Figure 5",
+            "source": "ex:ce/source/kinetics-paper"
+          }
+        ],
+        "origin": "synthetic",
+        "rate_determining": false
+      },
+      "source": "ex:ce/computation/microkinetic-500k",
+      "target": "ex:ce/step/o2-dissociation"
+    },
+    {
+      "id": "ex:ce/link/99",
+      "type": "RATE_CONTROL",
+      "props": {
+        "degree_of_rate_control": {
+          "status": "present",
+          "evidence_ids": [
+            "f5_x"
+          ],
+          "target": "ex:ce/species/co2",
+          "unit": "1",
+          "value": 0.66
+        },
+        "evidence": [
+          {
+            "id": "f5_x",
+            "kind": "figure",
+            "locator": "Figure 5",
+            "source": "ex:ce/source/kinetics-paper"
+          }
+        ],
+        "origin": "synthetic",
+        "rate_determining": true
+      },
+      "source": "ex:ce/computation/microkinetic-500k",
+      "target": "ex:ce/step/co-plus-o"
+    },
+    {
+      "id": "ex:ce/link/100",
+      "type": "EVALUATES",
+      "props": {
+        "evaluation_kind": "calibration",
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/experiment/mlip-training",
+      "target": "ex:ce/model/example-mlip"
+    },
+    {
+      "id": "ex:ce/link/101",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "training_data"
+      },
+      "source": "ex:ce/experiment/mlip-training",
+      "target": "ex:ce/dataset/adsorption-training-set"
+    },
+    {
+      "id": "ex:ce/link/102",
+      "type": "EVALUATES",
+      "props": {
+        "criterion": "mean absolute error below 0.1 eV",
+        "evaluation_kind": "validation",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:ce/source/ml-paper"
+          }
+        ],
+        "origin": "synthetic",
+        "outcome": "passes",
+        "result_refs": [
+          {
+            "path": "/result_values/mae",
+            "record": "ex:ce/experiment/mlip-validation-held-out"
+          }
+        ]
+      },
+      "source": "ex:ce/experiment/mlip-validation-held-out",
+      "target": "ex:ce/model/example-mlip"
+    },
+    {
+      "id": "ex:ce/link/103",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "test_data"
+      },
+      "source": "ex:ce/experiment/mlip-validation-held-out",
+      "target": "ex:ce/dataset/adsorption-test-set"
+    },
+    {
+      "id": "ex:ce/link/104",
+      "type": "EVALUATES",
+      "props": {
+        "criterion": "mean absolute error below 0.1 eV",
+        "evaluation_kind": "validation",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table S1",
+            "source": "ex:ce/source/ml-paper"
+          }
+        ],
+        "origin": "synthetic",
+        "outcome": "passes",
+        "result_refs": [
+          {
+            "path": "/result_values/mae",
+            "record": "ex:ce/experiment/mlip-validation-training-set"
+          }
+        ]
+      },
+      "source": "ex:ce/experiment/mlip-validation-training-set",
+      "target": "ex:ce/model/example-mlip"
+    },
+    {
+      "id": "ex:ce/link/105",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "validation_data"
+      },
+      "source": "ex:ce/experiment/mlip-validation-training-set",
+      "target": "ex:ce/dataset/adsorption-training-set"
+    },
+    {
+      "id": "ex:ce/link/106",
+      "type": "USES_MODEL",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/computation/mlip-pt3ni",
+      "target": "ex:ce/model/example-mlip"
+    },
+    {
+      "id": "ex:ce/link/107",
+      "type": "USES_MODEL",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/computation/mlip-pt3ni",
+      "target": "ex:ce/model/pt3ni-111"
+    },
+    {
+      "id": "ex:ce/analysis/arrhenius-fit/reported-in/kinetics-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 2, inset"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/analysis/arrhenius-fit",
+      "target": "ex:ce/source/kinetics-paper"
+    },
+    {
+      "id": "ex:ce/analysis/charge-extrapolation/reported-in/cip-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Section 2.3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/analysis/charge-extrapolation",
+      "target": "ex:ce/source/cip-paper"
+    },
+    {
+      "id": "ex:ce/analysis/weisz-prater/reported-in/kinetics-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Supporting information, Section S3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/analysis/weisz-prater",
+      "target": "ex:ce/source/kinetics-paper"
+    },
+    {
+      "id": "ex:ce/catalyst/pt-al2o3/reported-in/kinetics-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/catalyst/pt-al2o3",
+      "target": "ex:ce/source/kinetics-paper"
+    },
+    {
+      "id": "ex:ce/computation/ag-111/reported-in/dft-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/computation/ag-111",
+      "target": "ex:ce/source/dft-paper"
+    },
+    {
+      "id": "ex:ce/computation/au-111/reported-in/dft-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/computation/au-111",
+      "target": "ex:ce/source/dft-paper"
+    },
+    {
+      "id": "ex:ce/computation/cu-111/reported-in/dft-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/computation/cu-111",
+      "target": "ex:ce/source/dft-paper"
+    },
+    {
+      "id": "ex:ce/computation/h2o-molecule/reported-in/dft-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Supporting information, Table S2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/computation/h2o-molecule",
+      "target": "ex:ce/source/dft-paper"
+    },
+    {
+      "id": "ex:ce/computation/microkinetic/reported-in/kinetics-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Section 4"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/computation/microkinetic",
+      "target": "ex:ce/source/kinetics-paper"
+    },
+    {
+      "id": "ex:ce/computation/microkinetic-450k/reported-in/kinetics-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 5"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/computation/microkinetic-450k",
+      "target": "ex:ce/source/kinetics-paper"
+    },
+    {
+      "id": "ex:ce/computation/microkinetic-500k/reported-in/kinetics-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 5"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/computation/microkinetic-500k",
+      "target": "ex:ce/source/kinetics-paper"
+    },
+    {
+      "id": "ex:ce/computation/mlip-pt3ni/reported-in/ml-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/computation/mlip-pt3ni",
+      "target": "ex:ce/source/ml-paper"
+    },
+    {
+      "id": "ex:ce/computation/ni-111/reported-in/dft-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1, footnote"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/computation/ni-111",
+      "target": "ex:ce/source/dft-paper"
+    },
+    {
+      "id": "ex:ce/computation/pd-111/reported-in/dft-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/computation/pd-111",
+      "target": "ex:ce/source/dft-paper"
+    },
+    {
+      "id": "ex:ce/computation/pt-111/reported-in/dft-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Supporting information, Table S2",
+          "Table 1",
+          "Table 1, last column"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/computation/pt-111",
+      "target": "ex:ce/source/dft-paper"
+    },
+    {
+      "id": "ex:ce/computation/pt-111-barriers/reported-in/kinetics-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/computation/pt-111-barriers",
+      "target": "ex:ce/source/kinetics-paper"
+    },
+    {
+      "id": "ex:ce/computation/pt-111-che/reported-in/cip-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 5",
+          "Table 5, converted"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/computation/pt-111-che",
+      "target": "ex:ce/source/cip-paper"
+    },
+    {
+      "id": "ex:ce/computation/pt-111-constant-potential/reported-in/cip-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 5"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/computation/pt-111-constant-potential",
+      "target": "ex:ce/source/cip-paper"
+    },
+    {
+      "id": "ex:ce/computation/pt-111-free-energy/reported-in/dft-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 4"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/computation/pt-111-free-energy",
+      "target": "ex:ce/source/dft-paper"
+    },
+    {
+      "id": "ex:ce/computation/rpbe-study/reported-in/dft-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Computational methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/computation/rpbe-study",
+      "target": "ex:ce/source/dft-paper"
+    },
+    {
+      "id": "ex:ce/experiment/mlip-training/reported-in/ml-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Section 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/experiment/mlip-training",
+      "target": "ex:ce/source/ml-paper"
+    },
+    {
+      "id": "ex:ce/experiment/mlip-validation-held-out/reported-in/ml-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/experiment/mlip-validation-held-out",
+      "target": "ex:ce/source/ml-paper"
+    },
+    {
+      "id": "ex:ce/experiment/mlip-validation-training-set/reported-in/ml-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table S1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/experiment/mlip-validation-training-set",
+      "target": "ex:ce/source/ml-paper"
+    },
+    {
+      "id": "ex:ce/feed/co-o2/reported-in/kinetics-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/feed/co-o2",
+      "target": "ex:ce/source/kinetics-paper"
+    },
+    {
+      "id": "ex:ce/mechanism/co-oxidation-pt111/reported-in/kinetics-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Scheme 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/mechanism/co-oxidation-pt111",
+      "target": "ex:ce/source/kinetics-paper"
+    },
+    {
+      "id": "ex:ce/model/ag-111/reported-in/dft-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Computational methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/model/ag-111",
+      "target": "ex:ce/source/dft-paper"
+    },
+    {
+      "id": "ex:ce/model/arrhenius/reported-in/kinetics-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/model/arrhenius",
+      "target": "ex:ce/source/kinetics-paper"
+    },
+    {
+      "id": "ex:ce/model/au-111/reported-in/dft-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Computational methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/model/au-111",
+      "target": "ex:ce/source/dft-paper"
+    },
+    {
+      "id": "ex:ce/model/cu-111/reported-in/dft-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Computational methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/model/cu-111",
+      "target": "ex:ce/source/dft-paper"
+    },
+    {
+      "id": "ex:ce/model/example-mlip/reported-in/ml-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Section 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/model/example-mlip",
+      "target": "ex:ce/source/ml-paper"
+    },
+    {
+      "id": "ex:ce/model/h2o-molecule/reported-in/dft-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Computational methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/model/h2o-molecule",
+      "target": "ex:ce/source/dft-paper"
+    },
+    {
+      "id": "ex:ce/model/ni-111/reported-in/dft-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Computational methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/model/ni-111",
+      "target": "ex:ce/source/dft-paper"
+    },
+    {
+      "id": "ex:ce/model/pd-111/reported-in/dft-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Computational methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/model/pd-111",
+      "target": "ex:ce/source/dft-paper"
+    },
+    {
+      "id": "ex:ce/model/pt-111/reported-in/dft-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Computational methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/model/pt-111",
+      "target": "ex:ce/source/dft-paper"
+    },
+    {
+      "id": "ex:ce/model/pt3ni-111/reported-in/ml-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/model/pt3ni-111",
+      "target": "ex:ce/source/ml-paper"
+    },
+    {
+      "id": "ex:ce/model/ts-co-o/reported-in/kinetics-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/model/ts-co-o",
+      "target": "ex:ce/source/kinetics-paper"
+    },
+    {
+      "id": "ex:ce/model/ts-o2-dissociation/reported-in/kinetics-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/model/ts-o2-dissociation",
+      "target": "ex:ce/source/kinetics-paper"
+    },
+    {
+      "id": "ex:ce/reaction/co-oxidation/reported-in/kinetics-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods, reference energies"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/reaction/co-oxidation",
+      "target": "ex:ce/source/kinetics-paper"
+    },
+    {
+      "id": "ex:ce/reaction/o-adsorption-from-h2o/reported-in/dft-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods, reference energies"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/reaction/o-adsorption-from-h2o",
+      "target": "ex:ce/source/dft-paper"
+    },
+    {
+      "id": "ex:ce/reaction/o-adsorption-from-o2/reported-in/dft-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods, reference energies"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/reaction/o-adsorption-from-o2",
+      "target": "ex:ce/source/dft-paper"
+    },
+    {
+      "id": "ex:ce/reaction/o-electroadsorption/reported-in/cip-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods, reference energies"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/reaction/o-electroadsorption",
+      "target": "ex:ce/source/cip-paper"
+    },
+    {
+      "id": "ex:ce/sample/pt-al2o3-k/reported-in/kinetics-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/sample/pt-al2o3-k",
+      "target": "ex:ce/source/kinetics-paper"
+    },
+    {
+      "id": "ex:ce/state/o-covered-pt111/reported-in/kinetics-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/state/o-covered-pt111",
+      "target": "ex:ce/source/kinetics-paper"
+    },
+    {
+      "id": "ex:ce/step/co-plus-o/reported-in/kinetics-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/step/co-plus-o",
+      "target": "ex:ce/source/kinetics-paper"
+    },
+    {
+      "id": "ex:ce/step/o2-dissociation/reported-in/kinetics-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/step/o2-dissociation",
+      "target": "ex:ce/source/kinetics-paper"
+    },
+    {
+      "id": "ex:ce/test/co-oxidation-450k/reported-in/kinetics-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/test/co-oxidation-450k",
+      "target": "ex:ce/source/kinetics-paper"
+    },
+    {
+      "id": "ex:ce/test/co-oxidation-480k/reported-in/kinetics-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/test/co-oxidation-480k",
+      "target": "ex:ce/source/kinetics-paper"
+    },
+    {
+      "id": "ex:ce/test/co-oxidation-510k/reported-in/kinetics-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:ce/test/co-oxidation-510k",
+      "target": "ex:ce/source/kinetics-paper"
+    }
+  ],
+  "directed": true,
+  "graph": {
+    "data_status": "synthetic_example",
+    "follows_domains": [
+      "catalysis"
+    ],
+    "graph_id": "ex:ce/graph",
+    "schema": "scale-catal",
+    "schema_version": "0.7.1",
+    "stewardship": {
+      "access": "public"
+    },
+    "title": "Computed energies, barriers, rate control and a machine-learned model, each with what makes it comparable (synthetic)"
+  },
+  "multigraph": true
+}

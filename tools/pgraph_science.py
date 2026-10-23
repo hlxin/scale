@@ -3,10 +3,11 @@
 Rules about the method of science that a type check cannot express: tests that assert an outcome
 cite what it rests on; predictions made after the result are flagged; a fit does not confirm its
 own data; a hypothesis's status agrees with the evidence recorded for it; references and evidence
-ids resolve (and so do the record_refs a value holds, its normalized_by); plans and orderings are acyclic; inputs used at an old version are flagged; records that rest on retracted sources are flagged (source lifecycle, ``lifecycle``).
+ids resolve (and so do the record_refs a value holds, its normalized_by); plans and orderings are acyclic; inputs used at an old version are flagged; records that rest on retracted sources are flagged (source lifecycle, ``lifecycle``); a model validated on the data it was fitted to is flagged, since a fit to its own data is a calibration, not independent validation (:func:`validation_checks`); a predicted value that names no producer is flagged.
 
 The checks report; they never grade science. Severity, independence and confounding are recorded
-as the source or an assessor states them and are not computed.
+as the source or an assessor states them and are not computed (the overlap of a validation's data with the data its
+model was fitted to is read from the records, not judged).
 """
 
 from __future__ import annotations
@@ -229,6 +230,15 @@ def science_checks(doc: dict, spec: dict, rep) -> None:
         elif p.get("operation_mode") == "static" and p.get("time_pattern") not in (None, "constant", "not_reported"):
             err(nid, f"a static operation has time_pattern constant, not {p['time_pattern']}")
 
+    # ---- a model validated on the data it was fitted to: not independent predictive validation
+    validation_checks(links, label, resolved_refs, rep)
+    for rid, p in props.items():
+        holder_is_experiment = rid in nodes and "Experiment" in [label.get(rid)] + _ancestors(spec, label.get(rid))
+        for path, v in _values(p):
+            if v.get("origin") == "predicted" and not v.get("produced_by") and not holder_is_experiment:
+                warn(rid, f"{path[1:]}: a predicted value names the experiment that predicted it (produced_by), whose model "
+                          "and the data it was fitted to say what the prediction rests on")
+
     # ---- controls and replication (recorded, not judged)
     for e in links:
         p = e.get("props") or {}
@@ -276,6 +286,63 @@ def science_checks(doc: dict, spec: dict, rep) -> None:
             warn(e.get("source"), f"inputs revised: {e['target']} was used at version {used}; version {now} is current")
 
     lifecycle_checks(doc, spec, rep, nodes, links, props, inc)
+
+
+FIT_ROLES = ("training_data", "calibration_data")          # the inputs a calibration fits a model to
+CALIBRATES = ("calibration",)
+VALIDATES = ("validation", "benchmark")
+
+
+def validation_checks(links: list[dict], label: dict, resolved_refs: dict, rep) -> None:
+    """A validation is independent only of data its model was not fitted to. The data a model was fitted to is what an
+    experiment that calibrates it (EVALUATES with evaluation_kind calibration, or HAS_OUTPUT the model) HAS_INPUT as
+    training_data or calibration_data, with the records a dataset among them INCLUDES. A validation or benchmark
+    (EVALUATES) of the model whose experiment HAS_INPUT any of that data, or that rests on a fitted value (result_refs),
+    is reported (a warning): a fit to its own data is a calibration, never independent predictive validation. Nothing
+    is rewritten."""
+    out = defaultdict(list)
+    for e in links:
+        out[e.get("source")].append(e)
+
+    def inputs(exp: str, roles: tuple | None) -> set:
+        got = {e.get("target") for e in out.get(exp, []) if e.get("type") == "HAS_INPUT"
+               and (roles is None or (e.get("props") or {}).get("role") in roles)}
+        return _included(got, out)
+
+    fitted: dict[str, set] = defaultdict(set)
+    for e in links:
+        p = e.get("props") or {}
+        if e.get("type") == "EVALUATES" and p.get("evaluation_kind") in CALIBRATES:
+            fitted[e.get("target")] |= inputs(e.get("source"), FIT_ROLES)
+        elif e.get("type") == "HAS_OUTPUT" and label.get(e.get("target")) is not None:
+            fitted[e.get("target")] |= inputs(e.get("source"), FIT_ROLES)
+    for e in links:
+        p = e.get("props") or {}
+        if e.get("type") != "EVALUATES" or p.get("evaluation_kind") not in VALIDATES:
+            continue
+        model, exp = e.get("target"), e.get("source")
+        used = inputs(exp, None) - {model}
+        overlap = sorted(str(x) for x in used & fitted.get(model, set()))
+        if overlap:
+            rep.add("warning", e.get("id"), f"a {p['evaluation_kind']} of {model} on data it was fitted to "
+                                            f"({', '.join(overlap)}): a fit to its own data is a calibration, not "
+                                            "independent predictive validation; it stays as recorded")
+        fits = [v for v in resolved_refs.get(e.get("id"), []) if isinstance(v, dict) and v.get("origin") == "fitted"]
+        if fits and p.get("outcome") in ("passes", "partial"):
+            rep.add("warning", e.get("id"), f"a {p['evaluation_kind']} whose outcome rests on a fitted value: a fit does not "
+                                            "validate its own data")
+
+
+def _included(ids: set, out: dict) -> set:
+    """Records and what the datasets among them include (INCLUDES, followed to any depth)."""
+    seen, todo = set(ids), list(ids)
+    while todo:
+        x = todo.pop()
+        for e in out.get(x, []):
+            if e.get("type") == "INCLUDES" and e.get("target") not in seen:
+                seen.add(e.get("target"))
+                todo.append(e.get("target"))
+    return seen
 
 
 def lifecycle_checks(doc: dict, spec: dict, rep, nodes: dict, links: list[dict], props: dict, inc) -> None:

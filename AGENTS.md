@@ -18,7 +18,9 @@ scale-catal@0.2.0 …` a pinned one. In a checkout of this repository run `uv ru
   whose graph schema manifest (`domain/graph/scale-catal.yaml`) assembles the kernel with one catalysis file
   (`catalysis.yaml`) holding one vocabulary and one checklist; the checklist's items for a catalytic test apply
   by the driving forces it lists. The schema has **one version** for the kernel and the catalysis domain
-  together (the manifest's). Read it with `describe` (or `scale graph describe <Label> --domain catalysis`).
+  together (the manifest's). Read it with `describe` (or `scale graph describe <Label> --domain catalysis`), which
+  also shows how each term maps to ontology terms (ChEBI, the Chemical Methods Ontology, OBI and others): mappings
+  for finding and exchanging data, never SCALE's definitions ([docs/mappings.md](docs/mappings.md)).
 - **Curate** by following the `curate-corpus` skill, from a `template`. Record each value as a value
   object (`status`, `value`, `unit`, with the reported text in `as_reported` or `note` if it
   differs). Cite evidence on every node and edge that states something: a short verbatim quote, a
@@ -40,7 +42,8 @@ scale-catal@0.2.0 …` a pinned one. In a checkout of this repository run `uv ru
   on returned rows and cite their evidence. Quote values as reported, keep incompatible units and
   bases apart (a plan that compares or ranks values takes `comparison: scientific`, which keeps a
   potential's reference scale, a current density's normalization, a pressure's convention and a flow's
-  reference conditions apart too; a question about one result binds it with an `entries` step, so that
+  reference conditions apart too, a computed energy's kind, reaction, level of theory and charge
+  treatment, and a transport check's criterion; a question about one result binds it with an `entries` step, so that
   its value, product, assay and evidence are that result's and a yield never stands in for a
   selectivity), label author interpretations as the authors', and put your own extrapolations in a
   separate, labelled paragraph.

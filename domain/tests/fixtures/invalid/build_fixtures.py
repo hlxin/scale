@@ -69,6 +69,41 @@ def result(doc: dict, **entry) -> dict:
     return t
 
 
+def site_population(doc: dict, **props) -> dict:
+    """A working state of the sample (STATE_OF it) and a HAS_SITE from it to a Cu step site, with ``props`` (its
+    population values) and the evidence item they cite (``hs_table``). Returns the link."""
+    sample = node(doc, "sample/cu")["id"]
+    src = "ex:df-electro/source/paper"
+    doc["nodes"] += [{"id": "ex:df-electro/state/working", "label": "CatalystState",
+                      "props": {"name": "working, at -0.6 V vs RHE", "state_kind": "working", "origin": "synthetic"}},
+                     {"id": "ex:df-electro/site/cu-step", "label": "ActiveSite",
+                      "props": {"name": "Cu step site", "site_kind": "step_edge", "origin": "synthetic"}}]
+    doc["links"].append({"id": "ex:df-electro/state/working/state-of", "type": "STATE_OF", "source": "ex:df-electro/state/working",
+                         "target": sample, "props": {"origin": "synthetic"}})
+    link = {"id": "ex:df-electro/state/working/has-site", "type": "HAS_SITE", "source": "ex:df-electro/state/working",
+            "target": "ex:df-electro/site/cu-step",
+            "props": {"status": "hypothesized", "origin": "synthetic", **props,
+                      "evidence": [{"id": "hs_table", "source": src, "locator": "Table 2", "kind": "table"}]}}
+    doc["links"].append(link)
+    return link
+
+
+def tof_over(doc: dict, normalized_by: dict) -> dict:
+    """The test with one ammonia turnover frequency in result_values (a Variable of kind turnover_frequency, the evidence
+    item that states it), divided by what ``normalized_by`` names. Returns the test."""
+    t = test_node(doc)
+    var = {"id": "ex:df-electro/variable/tof", "label": "Variable",
+           "props": {"name": "ammonia turnover frequency", "scale": "quantitative", "quantity_kind": "turnover_frequency",
+                     "unit": "s-1", "origin": "synthetic"}}
+    doc["nodes"].append(var)
+    t["props"]["evidence"].append({"id": "tof_table", "source": "ex:df-electro/source/paper", "locator": "Table 2",
+                                   "kind": "table"})
+    t["props"]["result_values"] = [{"id": "nh3_tof", "status": "present", "value": 0.8, "unit": "s-1", "variable": var["id"],
+                                    "target": node(doc, "species/ammonia")["id"], "normalized_by": normalized_by,
+                                    "evidence_ids": ["tof_table"]}]
+    return t
+
+
 def defect(name: str, title: str, change, base: dict | None = None) -> None:
     doc = copy.deepcopy(base or load_doc(BASE))
     doc["graph"]["graph_id"] = f"ex:invalid/{name}"
@@ -154,6 +189,89 @@ def main() -> None:
                              "props": {"role": "data", "origin": "synthetic"}})
     defect("transport-basis-not-in-vocabulary", "a transport check whose basis is neither asserted, numerical nor experimental",
            transport_check)
+    # site populations of a catalyst state (0.6.0): a site that a test has, a share in a unit of a count, a count in a unit
+    # of a surface area, a computed count that does not name its computation, a rate per site divided by a share, and an
+    # operando pairing stated in words the vocabulary does not hold
+    def site_of_test(d: dict) -> None:
+        site_population(d, population_fraction={"status": "present", "value": 10, "unit": "%", "basis": "of the exposed Cu",
+                                                "evidence_ids": ["hs_table"]})
+        has = next(e for e in d["links"] if e["type"] == "HAS_SITE")
+        has["source"] = test_node(d)["id"]
+    defect("has-site-from-a-test", "a catalytic test that has a site population", site_of_test)
+    defect("site-fraction-in-umol-per-gram", "a share of sites stated in a unit of a count per mass",
+           lambda d: site_population(d, population_fraction={"status": "present", "value": 30, "unit": "µmol/g",
+                                                             "evidence_ids": ["hs_table"]}))
+    defect("site-inventory-as-surface-area", "a count of sites stated as a metal surface area",
+           lambda d: site_population(d, site_inventory={"status": "present", "value": 25, "unit": "m2/g",
+                                                        "evidence_ids": ["hs_table"]}))
+    defect("computed-site-count-without-producer", "a computed count of sites that does not name the computation",
+           lambda d: site_population(d, site_inventory={"status": "present", "value": 12, "unit": "µmol/g",
+                                                        "origin": "computed", "evidence_ids": ["hs_table"]}))
+
+    def tof_per_share(d: dict) -> None:
+        link = site_population(d, population_fraction={"status": "present", "value": 10, "unit": "%",
+                                                       "basis": "of the exposed Cu atoms", "evidence_ids": ["hs_table"]})
+        tof_over(d, {"record": link["id"], "path": "/population_fraction"})
+    defect("tof-divided-by-a-share", "a turnover frequency divided by a share of sites, not by a count", tof_per_share)
+
+    def operando_words(d: dict) -> None:
+        d["nodes"].append({"id": "ex:df-electro/characterization/xas", "label": "Characterization",
+                           "props": {"name": "Cu K-edge XAS during the electrolysis", "technique": "XAS",
+                                     "observation_mode": "operando", "origin": "synthetic"}})
+        d["links"].append({"id": "ex:df-electro/characterization/xas/during", "type": "DURING",
+                           "source": "ex:df-electro/characterization/xas", "target": test_node(d)["id"],
+                           "props": {"specimen": "same_reactor", "origin": "synthetic"}})
+    defect("operando-specimen-not-in-vocabulary", "an operando observation whose specimen is stated in other words",
+           operando_words)
+    # computed energies and kinetic parameters (0.7.0): an adsorption energy whose process is a species, an elementary
+    # activation energy in volts, and a charge treatment stated in words the vocabulary does not hold
+    def computation(d: dict, **props) -> dict:
+        c = {"id": "ex:df-electro/computation/dft", "label": "Computation",
+             "props": {"name": "DFT of nitrate on Cu(111)", "computation_kind": "electronic_structure",
+                       "level_of_theory": {"status": "present", "text_value": "RPBE"}, "origin": "synthetic",
+                       "evidence": [{"id": "dft_table", "source": "ex:df-electro/source/paper", "locator": "Table 3",
+                                     "kind": "table"}], **props}}
+        d["nodes"].append(c)
+        d["links"].append({"id": "ex:df-electro/computation/dft/reported-in", "type": "REPORTED_IN", "source": c["id"],
+                           "target": "ex:df-electro/source/paper", "props": {"origin": "synthetic"}})
+        return c
+
+    def energy_of_a_species(d: dict) -> None:
+        d["nodes"].append({"id": "ex:df-electro/variable/adsorption-energy", "label": "Variable",
+                           "props": {"name": "nitrate adsorption energy", "scale": "quantitative",
+                                     "quantity_kind": "reaction_energy", "unit": "eV", "origin": "synthetic"}})
+        computation(d, result_values=[{"id": "nitrate_adsorption", "status": "present", "value": -1.2, "unit": "eV",
+                                       "variable": "ex:df-electro/variable/adsorption-energy",
+                                       "target": node(d, "species/nitrate")["id"], "evidence_ids": ["dft_table"]}])
+    defect("adsorption-energy-of-a-species", "an adsorption energy whose target is the adsorbate, not the reaction that "
+           "defines it", energy_of_a_species)
+
+    def barrier_in_volts(d: dict) -> None:
+        c = computation(d)
+        d["nodes"].append({"id": "ex:df-electro/step/no3-dissociation", "label": "ElementaryStep",
+                           "props": {"name": "NO3* -> NO2* + O*", "origin": "synthetic",
+                                     "activation_energy": {"status": "present", "value": 0.7, "unit": "V",
+                                                           "origin": "computed", "produced_by": c["id"]}}})
+    defect("activation-energy-in-volts", "an elementary step's activation energy in volts", barrier_in_volts)
+    defect("charge-treatment-not-in-vocabulary", "a computation whose charge treatment is stated in other words",
+           lambda d: computation(d, charge_treatment="grand_canonical"))
+    def result_of_kind(d: dict, kind: str, unit: str, value) -> None:
+        """The test with one result of ``kind`` in ``unit`` (a Variable of that kind, the evidence item that states it)."""
+        t = test_node(d)
+        d["nodes"].append({"id": f"ex:df-electro/variable/{kind}", "label": "Variable",
+                           "props": {"name": kind.replace("_", " "), "scale": "quantitative", "quantity_kind": kind,
+                                     "origin": "synthetic"}})
+        t["props"]["evidence"].append({"id": f"{kind}_table", "source": "ex:df-electro/source/paper",
+                                       "locator": "Table 2", "kind": "table"})
+        t["props"].setdefault("result_values", []).append(
+            {"status": "present", "value": value, "unit": unit, "id": kind, "variable": f"ex:df-electro/variable/{kind}",
+             "target": "ex:df-electro/species/ammonia", "evidence_ids": [f"{kind}_table"]})
+    defect("turnover-number-per-second", "a turnover number in reciprocal seconds",
+           lambda d: result_of_kind(d, "turnover_number", "s-1", 0.8))
+    defect("enzyme-activity-in-kilojoules", "an enzyme activity in kilojoules",
+           lambda d: result_of_kind(d, "enzyme_activity", "kJ", 12))
+    defect("catalysis-mode-not-in-vocabulary", "a test whose catalysis mode is stated in other words",
+           lambda d: test_node(d)["props"].__setitem__("catalysis_mode", "slurry"))
     # it states its access (public, like every committed document) but not who contributed it or its project
     defect("research-data-without-stewardship", "research data that does not say who contributed it or which project it belongs to",
            lambda d: d["graph"].__setitem__("stewardship", {"access": "public"}), base=template("catalysis", VERSION))

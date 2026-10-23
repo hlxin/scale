@@ -32,9 +32,14 @@ KERNEL_FROZEN = "core/graph/frozen"              # the kernel of each earlier sc
                                                  # written by `scale schema bump`; none before the first schema change
 KERNEL_ONLY_MANIFEST = "core/examples/science-kernel-only.yaml"   # the kernel alone, for the core's example documents
 CORE_MANIFEST = "core/CORE.yaml"                 # the core's declaration (scale domains check)
+ONTOLOGY_REGISTRY = "core/mappings/ontologies.yaml"   # the ontologies SCALE's terms are mapped to (docs/mappings.md)
+KERNEL_MAPPINGS = "core/mappings/kernel.yaml"    # the kernel's terms mapped to ontology terms (CORE.yaml mappings)
+IDENTIFIER_REGISTRY = "core/mappings/identifiers.yaml"   # the identifier schemes a record's identifiers are checked by
 DOMAIN = "domain"                                # the catalysis domain, the one folder beside core/
 DOMAIN_MANIFEST = "DOMAIN.yaml"                  # domain/DOMAIN.yaml: the domain's declaration (its `domain:` names it)
 DOMAIN_DECLARATION = f"{DOMAIN}/{DOMAIN_MANIFEST}"
+DOMAIN_MAPPINGS = f"{DOMAIN}/mappings/catalysis.yaml"   # the catalysis terms mapped to ontology terms, and the
+                                                 # subdomains of catalysis research (DOMAIN.yaml mappings)
 DOMAIN_TEMPLATE = "tools/tests/fixtures/domain-template"   # what the tests' new_domain() copies (a test fixture)
 CODEOWNERS = ".github/CODEOWNERS"
 REPOSITORY_URL = "https://github.com/hlxin/scale"   # recorded as `source` in release manifests
@@ -72,7 +77,7 @@ TEST_DIRS = ("tools/tests", "core/tests", "service/tests", "domain/tests")
 
 # what runtime code reads; every anchor must lie under a BUNDLE root (tools/tests checks it)
 RUNTIME_ANCHORS = (RELEASE_MANIFEST, RELEASES, CORE, CORE_MANIFEST, KERNEL, KERNEL_FROZEN, KERNEL_ONLY_MANIFEST, DOMAIN,
-                   DOMAIN_DECLARATION,
+                   DOMAIN_DECLARATION, ONTOLOGY_REGISTRY, KERNEL_MAPPINGS, DOMAIN_MAPPINGS, IDENTIFIER_REGISTRY,
                    SKILLS, REVIEW_POLICY, PREFIX_REGISTRY, STEWARDSHIP, IMPLEMENTATION_STATUS)
 
 # ---------------------------------------------------------------- packaging (setup.py, MANIFEST.in)

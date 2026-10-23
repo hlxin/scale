@@ -243,6 +243,7 @@ class Report:
     counts: dict = field(default_factory=dict)
     conformance: dict | None = None
     lifecycle: dict | None = None          # source lifecycle counts (lifecycle.summary); None: no notice, no check
+    balance: dict | None = None            # atom and charge balance of reactions and steps (stoichiometry); None: none
 
     def add(self, severity: str, record: str, message: str) -> None:
         (self.errors if severity == "error" else self.warnings).append({"record": record, "message": message})
@@ -257,7 +258,8 @@ class Report:
             summary["source_lifecycle"] = self.lifecycle
         return {"valid": self.ok, "summary": summary,
                 "counts": self.counts, "errors": self.errors, "warnings": self.warnings,
-                **({"conformance": self.conformance} if self.conformance is not None else {})}
+                **({"conformance": self.conformance} if self.conformance is not None else {}),
+                **({"balance": self.balance} if self.balance is not None else {})}
 
 
 class Validator:
@@ -542,6 +544,11 @@ class Validator:
         if "Hypothesis" in self.nodes and "TESTS" in self.edges:
             from .pgraph_science import science_checks
             science_checks(doc, self.spec, rep)
+        if "HAS_PARTICIPANT" in self.edges and "ChemicalSpecies" in self.nodes:   # atom and charge balance (advisory)
+            from .stoichiometry import check_document as check_balance
+            check_balance(doc, rep)
+        from .identifiers import check_document as check_identifiers   # identifiers and ontology terms (warnings)
+        check_identifiers(doc, rep)
         for nid, inputs in outdated(doc).items():
             rep.add("warning", nid, f"outdated: inputs {inputs} were recorded after it finished")
         if source_texts:
@@ -1519,15 +1526,20 @@ def _items(c: dict, edge: bool = False, case: bool = False) -> dict:
     return out
 
 
-def describe(spec: dict, names: list[str] | None = None, profile: str | None = None) -> dict:
+def describe(spec: dict, names: list[str] | None = None, profile: str | None = None,
+             mappings: dict[str, list[dict]] | None = None) -> dict:
     """Labels and edge types with their properties, as an agent or a person reads them before curating.
 
-    With a profile, properties added by extensions of other driving forces are left out. The result shares no
-    object with ``spec``: a caller may change it without changing the schema a later validation reads."""
-    return copy.deepcopy(_describe(spec, names, profile))
+    With a profile, properties added by extensions of other driving forces are left out. ``mappings`` (by subject,
+    :func:`scale.mappings.index`) adds each term's mappings to ontology terms: a label's or edge type's own under
+    ``mappings``, its properties' and values' under ``property_mappings`` (``property`` or ``property=value``).
+    The result shares no object with ``spec``: a caller may change it without changing the schema a later
+    validation reads."""
+    return copy.deepcopy(_describe(spec, names, profile, mappings))
 
 
-def _describe(spec: dict, names: list[str] | None = None, profile: str | None = None) -> dict:
+def _describe(spec: dict, names: list[str] | None = None, profile: str | None = None,
+              mappings: dict[str, list[dict]] | None = None) -> dict:
     exts = _extensions_for(spec, profile)
     # the file that declares a label ("kernel" or the domain's name); a manifest that lists modules keeps their key
     owner = "module" if any(m.get("kind") == "module" for m in spec.get("modules", {}).values()) else "defined_in"
@@ -1544,17 +1556,28 @@ def _describe(spec: dict, names: list[str] | None = None, profile: str | None = 
         return (_ptype(v, spec) + (f" [{bound}]" if bound else "")
                 + (f" — {v['description']}" if v.get("description") else ""))
 
+    def mapped(n: str, props: dict) -> dict:
+        """A term's mappings to ontology terms (core/mappings/, domain/mappings/): its own, and those of its
+        properties and their values."""
+        if not mappings:
+            return {}
+        own = mappings.get(n) or []
+        by_prop = {s.split(".", 1)[1]: ms for s, ms in sorted(mappings.items())
+                   if s.startswith(f"{n}.") and s.split(".", 1)[1].split("=")[0] in props}
+        return {**({"mappings": own} if own else {}), **({"property_mappings": by_prop} if by_prop else {})}
+
     def lab(n: str) -> dict:
         d = spec["nodes"][n]
+        props = {k: v for k, v in (d.get("properties") or {}).items() if keep(v)}
         return {"is_a": d.get("ancestors") or [], owner: d.get("module"), "description": d.get("description"),
-                **({"maps_to": list(d["maps_to"])} if d.get("maps_to") else {}),
+                **({"maps_to": list(d["maps_to"])} if d.get("maps_to") else {}), **mapped(n, props),
                 "required": d.get("required") or [], "fixed": d.get("fixed") or {},
-                "properties": {k: text(v) for k, v in (d.get("properties") or {}).items() if keep(v)}}
+                "properties": {k: text(v) for k, v in props.items()}}
 
     def edge(n: str) -> dict:
         d = spec["edges"][n]
         return {"from": d.get("from"), "to": d.get("to"), "description": d.get("description"), "specializes": d.get("specializes"),
-                **({"maps_to": list(d["maps_to"])} if d.get("maps_to") else {}),
+                **({"maps_to": list(d["maps_to"])} if d.get("maps_to") else {}), **mapped(n, d.get("properties") or {}),
                 "properties": {k: text(v) for k, v in (d.get("properties") or {}).items()}}
 
     wanted = names or sorted(spec["nodes"]) + sorted(spec["edges"])
@@ -1585,6 +1608,11 @@ def _describe(spec: dict, names: list[str] | None = None, profile: str | None = 
             name = lambda x: qc.names.get(x) or formula(x)  # noqa: E731
             out["quantity_kinds"] = {k: {"dimensions": [name(x) for x in d["dimensions"]],
                                          "compared_by": [x["context"] for x in d["compare_by"]],
-                                         **({"denominator": [name(x) for x in d["denominator"]]} if d["denominator"] else {})}
+                                         **({"denominator": [name(x) for x in d["denominator"]]} if d["denominator"] else {}),
+                                         **({"denominator_kinds": d["denominator_kinds"]} if d["denominator_kinds"] else {}),
+                                         **({"denominator_unstated": d["denominator_unstated"]}
+                                            if d.get("denominator_unstated") else {}),
+                                         **({"mappings": mappings[f"kind:{k}"]}
+                                            if mappings and mappings.get(f"kind:{k}") else {})}
                                      for k, d in sorted(qc.kinds.items())}
     return out
