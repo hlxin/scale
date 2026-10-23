@@ -49,7 +49,7 @@ kernel identifier; `scale domains check` reports both.
 ## One version
 
 - **The schema has one version for the kernel and the catalysis domain together**: the `version` of the
-  catalysis manifest, `domain/graph/scale-catal.yaml`. Today the schema is at 0.6.0 (kernel and catalysis
+  catalysis manifest, `domain/graph/scale-catal.yaml`. Today the schema is at 0.7.0 (kernel and catalysis
   together). The kernel file carries no version of its own (one that states one does not load); `CORE.yaml`
   states the same number (`version`), as do `domain/DOMAIN.yaml`, `scale-release.yaml` (`schema_version`) and
   `examples/science-kernel-only.yaml`, and `scale domains check` requires them to agree.
