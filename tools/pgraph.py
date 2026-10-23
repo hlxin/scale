@@ -518,6 +518,9 @@ class Validator:
                 rep.add("error", str(nid), f"unknown node label {lab!r}")
                 continue
             nd = self.nodes[lab]
+            if nd.get("maturity") == "deprecated":                   # still valid; what replaces it is said once per record
+                rep.add("warning", str(nid), f"{lab} is deprecated" + (f"; record it as {' '.join(str(nd['superseded_by']).split())}"
+                                                                      if nd.get("superseded_by") else "") + "; it stays valid")
             declared = {**common_n["properties"], **(nd.get("properties") or {})}
             self.check_props(n.get("props"), declared, common_n["required"] + (nd.get("required") or []), nid, rep, ids)
             for k, v in (nd.get("fixed") or {}).items():
@@ -1595,6 +1598,7 @@ def _describe(spec: dict, names: list[str] | None = None, profile: str | None = 
         return {"is_a": d.get("ancestors") or [], owner: d.get("module"), "description": d.get("description"),
                 **({"maps_to": list(d["maps_to"])} if d.get("maps_to") else {}), **mapped(n, props),
                 "required": d.get("required") or [], "fixed": d.get("fixed") or {},
+                **({"deprecated": " ".join(str(d.get("superseded_by") or "yes").split())} if d.get("maturity") == "deprecated" else {}),
                 "properties": {k: text(v) for k, v in props.items()}}
 
     def edge(n: str) -> dict:

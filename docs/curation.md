@@ -155,7 +155,10 @@ source must be within its cap.
   - **Dark control.** A dark control is `DARK_CONTROL_FOR` the illuminated test. It states `control_kind`,
     `differs_in` (illumination), how the temperature was matched, where (`temperature_matched_at`: the illuminated
     surface, or a bulk temperature) and over which time (`temperature_matched_over`). Another way of separating light
-    from heat is a `ThermalContributionAnalysis` with its `partition_method`.
+    from heat is an Analysis with `analysis_kind: thermal_contribution` that `HAS_INPUT` the test (scale-catal 0.7.4
+    on). It states its `partition_method`, and gives the shares it attributes to heating and to the rest as result
+    entries, each with its variable and product. The same analysis serves a plasma or a field. `ThermalContributionAnalysis` is its
+    deprecated earlier form, still valid.
   - **Plasma synergy.** Record the plasma alone (an Experiment that `USES_PLASMA` with the bare packing) and the
     catalyst alone at the same temperature, each `CONTROL_FOR` the combined test. Record the plasma power
     (`discharge_power`, with how it was determined) apart from what the supply draws (`power_supply_input`).
