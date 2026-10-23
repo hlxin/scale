@@ -132,7 +132,7 @@ STEP_RULES: dict[str, tuple[str, Callable[[dict, dict | None], list]]] = {
               "operando label or DURING link changes); a turnover frequency whose target is no chemical species, or "
               "whose denominator is not a site count or a site density, stops the step; every record, id and value "
               "kept", _site_populations),
-    "0.6.0": ("computed energies and kinetic parameters: nothing is rewritten (no method text read into a level of theory, "
+    "TMP": ("computed energies and kinetic parameters: nothing is rewritten (no method text read into a level of theory, "
               "no reaction, charge treatment or setting filled in, balance_status kept); a value whose unit is of another "
               "dimension than its kind's, or whose target is not a record its kind's context names, stops the step; every "
               "record, id and value kept", _computed_energies),
