@@ -697,7 +697,22 @@ def cmd_review_sample(args):
         ids = {n["id"] for n in doc.get("nodes", [])}
         nonconf = [v["record"] for c in ((rep.conformance or {}).get("profiles") or {}).values() for v in c["violations"]]
         flagged = sorted({w["record"] for w in rep.warnings} | set(nonconf) & ids)
-    _emit({"fraction": frac, "seed": args.seed, "sample": sample_records(doc, 1.0 if args.full else frac, args.seed, flagged)}, args)
+    sample = sample_records(doc, 1.0 if args.full else frac, args.seed, flagged)
+    selection = "all" if args.full else ("sample_and_flagged" if args.include_flagged else "sample")
+    # the check to record once a person has made it (graph.checks, a record_check): what the sample fixes, filled in
+    check = {"records": [r["id"] for r in sample], "selection": selection,
+             **({} if args.full else {"fraction": frac, "seed": args.seed})}
+    _emit({"fraction": frac, "seed": args.seed, "sample": sample, "check": check,
+           "to_record": "after the check, add checked_by (a Person), checked_on, scope, outcome and the counts "
+                        "(fields_checked, fields_wrong, fields_missed) to check, and append it to the graph's checks"}, args)
+
+
+def cmd_trace_ai(args):
+    """The TRACE-AI checklist read on a document's records (docs/trace-ai.md)."""
+    from .traceai import assess, load_crosswalk, render_markdown
+    doc = load_doc(args.graph)
+    rep = assess(doc, _graph_spec(args, doc), load_crosswalk(_repo(args)), args.source)
+    _emit(rep, args, markdown=render_markdown(rep))
 
 
 def cmd_check(args):
@@ -1330,6 +1345,11 @@ def build_parser() -> argparse.ArgumentParser:
     sp.add_argument("--full", action="store_true", help="check every record (first batches of a new pipeline)")
     sp.add_argument("--include-flagged", action="store_true", help="add records with warnings or checklist violations")
     sp.add_argument("--spec", help="a schema manifest (default: chosen by the document)"); out_opts(sp)
+
+    sp = add("trace-ai", cmd_trace_ai, "the TRACE-AI checklist read on a document's records: what they support, the gaps, "
+                                       "and what a person checks in the source (docs/trace-ai.md)")
+    sp.add_argument("graph"); sp.add_argument("--source", help="only the records of this Source (its id)")
+    sp.add_argument("--spec", help="a schema manifest (default: chosen by the document)"); out_opts(sp, ("markdown", "json"))
 
     sc = sub.add_parser("schema", help="a schema change on a branch: its diff, the version bump, its checks").add_subparsers(
         dest="sub", required=True)

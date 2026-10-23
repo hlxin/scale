@@ -1,6 +1,7 @@
 # Invalid scale-catal documents, one defect each (built by build_fixtures.py from a valid public example).
 # `scale check` and test_invalid_fixtures.py validate each one and require that it is rejected (exit 1)
-# with an error message containing `error`; `reason` says why the schema must reject it.
+# with an error message containing `error`; `reason` says why the schema must reject it. A fixture pins its base
+# example's version: domain/examples/scale-catal/driving-force-examples/electro.json, or the example `base` names.
 fixtures:
   - file: dangling-link.json
     error: does not resolve
@@ -107,6 +108,29 @@ fixtures:
   - file: catalysis-mode-not-in-vocabulary.json
     error: "catalysis_mode: 'slurry' is not one of"
     reason: How a source describes its catalysis comes from a closed list (heterogeneous, homogeneous, biocatalytic, other, not_reported); a slurry reactor is how the test is run, not what kind of catalysis it is.
+  - file: check-names-unknown-record.json
+    base: domain/examples/scale-catal/agentic-examples/self-driving-campaign.json
+    error: "is not a node or link of this graph"
+    reason: A person's check names the records it covered; one the graph does not hold would claim a check of nothing.
+  - file: check-counts-more-wrong-than-checked.json
+    base: domain/examples/scale-catal/agentic-examples/self-driving-campaign.json
+    error: "exceeds fields_checked"
+    reason: The fields found wrong are among the fields checked; more wrong than checked makes the extraction's precision
+      meaningless.
+  - file: acknowledgement-on-an-unchecked-record.json
+    base: domain/examples/scale-catal/agentic-examples/self-driving-campaign.json
+    error: "is not among the records this check covers"
+    reason: A person acknowledges a warning on a record they checked; acknowledging one on a record they did not check
+      would close a warning nobody read.
+  - file: autonomy-level-not-in-vocabulary.json
+    base: domain/examples/scale-catal/agentic-examples/self-driving-campaign.json
+    error: "is not one of"
+    reason: A level of autonomy is one of TRACE-AI's A0-A5 (or not_reported), so that campaigns can be compared by it.
+  - file: split-strategy-not-in-vocabulary.json
+    base: domain/examples/scale-catal/agentic-examples/self-driving-campaign.json
+    error: "is not one of"
+    reason: How a validation held its data out is one of the listed strategies, so that a random split can be told from a
+      grouped one.
   - file: lump-subset-of-cycle.json
     error: "SUBSET_OF forms a cycle"
     reason: Containment is a strict order; two lumps each inside the other have no outer one, and no selectivity of either could be left out of a sum as the one that contains the other.

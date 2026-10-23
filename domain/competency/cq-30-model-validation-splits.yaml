@@ -1,0 +1,69 @@
+# A competency question of the catalysis domain (tools/competency.py; `scale domains cq catalysis`).
+# It runs on public synthetic examples, so anyone can rerun it and see the same answer.
+id: CQ-30
+question: How was a machine-learned model validated - how were its data split, what did the split keep together, and
+  what error did each validation give?
+description: |
+  A validation or benchmark of a model (EVALUATES with evaluation_kind validation or benchmark) says how it kept its
+  data apart from the data the model was fitted to (split_strategy, TRACE-AI B2: random, grouped, time_based,
+  out_of_distribution, prospective, external) and, for a grouped split, what it kept within one split (grouped_by). The
+  example's surrogate is validated twice on its campaign's table: with folds grouped by composition family, whose error
+  is stated with its spread, and with random folds, which mix runs of one family and give a lower error, stated as one
+  number. Both are returned, each with the error it names (result_refs); the variant keeps only the grouped split.
+documents:
+  - examples/scale-catal/agentic-examples/self-driving-campaign.json
+plan:
+  question: How were the model's data split for each validation, and with what error?
+  match:
+    label: Model
+    as: model
+  steps:
+    - from: model
+      edge: EVALUATES
+      direction: in
+      to: Experiment
+      as: validation
+      edge_as: evaluates
+      edge_where:
+        - prop: evaluation_kind
+          op: in
+          value:
+            - validation
+            - benchmark
+  return:
+    - model.name
+    - validation.name
+    - evaluates.split_strategy
+    - evaluates.grouped_by
+    - evaluates.folds
+    - validation.result_values.mae
+  evidence: true
+expect:
+  status: answered
+  min_rows: 2
+  max_rows: 2
+  values:
+    evaluates.split_strategy:
+      - grouped
+      - random
+variants:
+  - description: The validations whose split kept groups together.
+    plan:
+      steps:
+        - from: model
+          edge: EVALUATES
+          direction: in
+          to: Experiment
+          as: validation
+          edge_as: evaluates
+          edge_where:
+            - prop: split_strategy
+              op: eq
+              value: grouped
+    expect:
+      status: answered
+      min_rows: 1
+      max_rows: 1
+      values:
+        evaluates.grouped_by:
+          - composition family (the Cu:Zn ratio)

@@ -278,6 +278,60 @@ def test_a_degree_of_rate_control_belongs_to_the_conditions_of_its_run(doc, spec
 
 
 # ---------------------------------------------------------------- fitted, predicted, validated
+def test_a_stated_split_is_not_reported_as_validation_on_training_data():
+    """A cross-validation holds its folds out of the table the model was fitted to: with its split stated
+    (split_strategy, 0.7.2 on) the shared table is not reported; without it, it is."""
+    d = copy.deepcopy(load_doc(EXAMPLES / "scale-catal/agentic-examples/self-driving-campaign.json"))
+    assert not [w for w in pgraph.validate(d, spec_of(d)).warnings if "on data it was fitted to" in w["message"]]
+    for e in d["links"]:
+        if e["type"] == "EVALUATES" and e["props"].get("split_strategy") == "grouped":
+            e["props"]["split_strategy"] = "not_reported"
+    flagged = [w["record"] for w in pgraph.validate(d, spec_of(d)).warnings if "on data it was fitted to" in w["message"]]
+    assert len(flagged) == 1
+
+
+def test_a_stated_split_exempts_only_the_table_it_splits():
+    """A split of one table exempts that table, with the runs it includes, and nothing else: a record the fit and the
+    validation reach through another dataset is reported, and so is a validation that claims independent data (external,
+    prospective) on the table the model was fitted to."""
+    d = copy.deepcopy(load_doc(EXAMPLES / "scale-catal/agentic-examples/self-driving-campaign.json"))
+    runs, grouped = "ex:sdl/dataset/campaign-runs", "ex:sdl/experiment/gp-grouped-cv"
+    d["links"] += [{"id": f"ex:sdl/link/includes-{r}", "type": "INCLUDES", "source": runs, "target": f"ex:sdl/test/{r}",
+                    "props": {"origin": "synthetic"}} for r in ("round-1", "round-2", "round-3")]
+
+    def leaks(doc: dict) -> list[str]:
+        return [w["message"] for w in pgraph.validate(doc, spec_of(doc)).warnings if "on data it was fitted to" in w["message"]]
+    assert leaks(d) == []                                  # the folds of the table and the runs it includes
+    ev = next(e for e in d["links"] if e["type"] == "EVALUATES" and e["source"] == grouped)
+    for claim in ("external", "prospective"):
+        ev["props"]["split_strategy"] = claim
+        assert len(leaks(d)) == 1 and runs in leaks(d)[0], claim
+    ev["props"]["split_strategy"] = "grouped"
+    # held out in a table of its own, which includes a run the training table includes too
+    d["nodes"].append({"id": "ex:sdl/dataset/holdout", "label": "Dataset",
+                       "props": {"name": "the held-out runs", "data_kind": "table", "origin": "synthetic"}})
+    d["links"].append({"id": "ex:sdl/link/holdout-1", "type": "INCLUDES", "source": "ex:sdl/dataset/holdout",
+                       "target": "ex:sdl/test/round-1", "props": {"origin": "synthetic"}})
+    inp = next(e for e in d["links"] if e["type"] == "HAS_INPUT" and e["source"] == grouped)
+    inp["target"] = "ex:sdl/dataset/holdout"
+    assert len(leaks(d)) == 1 and "(ex:sdl/test/round-1)" in leaks(d)[0]
+    inp["target"] = runs
+    # an observation the fit and the validation both take directly, beside the table: no split holds it out
+    for exp, role in (("ex:sdl/experiment/gp-fit", "training_data"), (grouped, "validation_data")):
+        d["links"].append({"id": f"ex:sdl/link/direct-{role}", "type": "HAS_INPUT", "source": exp,
+                           "target": "ex:sdl/test/round-2", "props": {"origin": "synthetic", "role": role}})
+    assert len(leaks(d)) == 2 and all("(ex:sdl/test/round-2)" in w for w in leaks(d))    # the random folds too
+    d["links"] = [e for e in d["links"] if not e["id"].startswith("ex:sdl/link/direct-")]
+    # a run the fit also takes through another dataset: the split of the shared table does not hold it out
+    d["nodes"].append({"id": "ex:sdl/dataset/extra", "label": "Dataset",
+                       "props": {"name": "an earlier table", "data_kind": "table", "origin": "synthetic"}})
+    d["links"] += [{"id": "ex:sdl/link/extra-1", "type": "INCLUDES", "source": "ex:sdl/dataset/extra",
+                    "target": "ex:sdl/test/round-3", "props": {"origin": "synthetic"}},
+                   {"id": "ex:sdl/link/extra-fit", "type": "HAS_INPUT", "source": "ex:sdl/experiment/gp-fit",
+                    "target": "ex:sdl/dataset/extra", "props": {"origin": "synthetic", "role": "training_data"}}]
+    assert len(leaks(d)) == 2 and all("(ex:sdl/test/round-3)" in w for w in leaks(d))
+
+
 def test_fitting_data_are_never_counted_as_independent_validation(doc):
     rep = pgraph.validate(doc, spec_of(doc))
     flagged = {w["record"] for w in rep.warnings if "on data it was fitted to" in w["message"]}

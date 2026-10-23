@@ -2,6 +2,43 @@
 
 ## Unreleased
 
+- **Schema 0.7.2 (additive): what TRACE-AI asks of agentic catalysis, and who checked the records an agent
+  extracted.** Requested by @hlxin. TRACE-AI (Xin et al., Chem Catal. 2026, doi:10.1016/j.checat.2026.101755) is the
+  reporting checklist for catalysis enabled by AI: data, models, workflow and executable artifacts (items A1-D3). SCALE
+  could record a model and its validations, but not most of what TRACE-AI asks, and it said nothing of how its own
+  records were curated. All new terms are provisional.
+  - **Agentic campaigns.** A Design states its autonomy_level as the source declares it (TRACE-AI's A0-A5), its
+    human_oversight, interventions and intervention_count, the agent_policy and objectives, safety_bounds and
+    safety_measures, why it stopped (stop_reason, beside stopping_criterion), what it did with failed or excluded runs
+    (negative_results_policy, excluded_count) and what changed unplanned (post_hoc_changes). A proposal's PROPOSED_BY
+    says what a person decided about it (human_decision). The catalysis checklist asks an adaptive design for them.
+  - **Models and their validations.** A Model states its architecture, hyperparameters, training_objective, pretraining
+    and uncertainty_method, with the uncertainty it reports (uncertainty_components), how that was checked
+    (uncertainty_calibration) and used (uncertainty_use). A validation's EVALUATES states how it split the data
+    (split_strategy: random, grouped, time_based, out_of_distribution, prospective, external; grouped_by, folds,
+    split_seed, preprocessing_within_split) and what its results reflect (generalization). A validation that states
+    it split one table (random, grouped, time-based, out of distribution) is no longer flagged for sharing that dataset
+    with the fit (the folds of a cross-validation), nor for what both reach only through it; an observation both take
+    directly, or a record reached through another dataset, is still flagged, and so is a validation called external or
+    prospective on the training data. A Dataset may be a notebook.
+  - **How the records were curated, and who checked them.** A stewardship's autonomy_level says how much of the
+    curation an agent did (TRACE-AI's scale read for extraction). graph.checks records each check a person made of
+    records against their source (record_check): who, when, which records, what against what, the fields checked,
+    wrong and missed (the extraction's precision and recall), the outcome, and warnings acknowledged with a reason,
+    which validation lists apart from the open ones (an acknowledgement matches exactly one warning). A filtered view,
+    a bundle or a graph of some sources keeps the checks of the records it holds, leaves no id of a record it leaves
+    out, and drops the counts of a check it keeps only in part (a record left out, or one with a value or an evidence
+    item cut). `scale review sample` returns the check to fill in.
+  - **`scale trace-ai G [--source ID]`** (agent tool `scale_trace_ai`) reads the checklist on a graph's records
+    (domain/reporting/trace-ai.yaml: query plans per item): what they support, partly or not at all, what does not
+    apply and why, and what a person checks in the source; it flags a random split and a metric stated without its
+    uncertainty, and says how the records were curated. Items about a model, a dataset or a campaign are read record
+    by record. A plan that asks for a value an older vocabulary lacks is reported as not assessed
+    (`schema_gaps(..., values=True)`); a query's own answers are unchanged. It decides nothing about a source. See
+    docs/trace-ai.md.
+  - An example (agentic-examples), CQ-29 and CQ-30, five counterexamples. Existing documents keep 0.7.1; the migration
+    step rewrites nothing.
+
 - **Identifiers on records checked by their scheme (no schema change).** Requested by @hlxin (stronger connections to
   outside resources). A record's `identifiers` (a DOI, an InChIKey, a CAS number, an EC number, …) and a technique's
   `technique_id` were free text that nothing checked, so a misspelt identifier or a technique written as "XRD"

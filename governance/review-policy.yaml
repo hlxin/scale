@@ -62,7 +62,8 @@ tiers:
 
 new_concepts_maturity: provisional
 
-# Records extracted by an agent: how many a person checks against the sources (scale review sample).
+# Records extracted by an agent: how many a person checks against the sources (scale review sample). Each check is
+# recorded in the graph it checked (graph.checks, docs/trace-ai.md), with what it found.
 records:
   agent_extracted_records:
     full_check_first_batches: 3
