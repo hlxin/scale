@@ -35,6 +35,7 @@ BASE = REPO / "domain/examples/scale-catal/driving-force-examples/electro.json"
 VERSION = load_doc(BASE)["graph"]["schema_version"]      # the version a fixture pins: its base example's
 # what a later schema version added is shown wrong on an example of that version (expect.yaml names it as base)
 AGENTIC = REPO / "domain/examples/scale-catal/agentic-examples/self-driving-campaign.json"
+TRANSIENT = REPO / "domain/examples/scale-catal/transient-examples/transient-kinetics.json"
 
 
 def test_node(doc: dict) -> dict:
@@ -290,6 +291,25 @@ def main() -> None:
     defect("split-strategy-not-in-vocabulary", "a validation whose split is stated in other words",
            lambda d: next(e for e in d["links"] if (e["props"] or {}).get("split_strategy") == "random")["props"]
            .__setitem__("split_strategy", "shuffled"), base=agentic)
+    # a test's program, the analyses of its responses and kinetic constants fitted to them, 0.7.3 on
+    transient = load_doc(TRANSIENT)
+
+    def entry(d: dict, local: str, key: str) -> dict:
+        return next(v for v in node(d, local)["props"]["result_values"] if v["id"] == key)
+    defect("waveform-not-in-vocabulary", "a modulation whose waveform is stated in other words",
+           lambda d: node(d, "operation/co-square-wave")["props"].__setitem__("waveform", "rectangular"), base=transient)
+    defect("program-detail-not-in-vocabulary", "a program whose detail is stated in other words",
+           lambda d: node(d, "operation/co2-sequence")["props"].__setitem__("program_detail", "complete"), base=transient)
+    defect("residence-time-in-kelvin", "a surface residence time in kelvin",
+           lambda d: entry(d, "analysis/ssitka-co2", "tau_co2").__setitem__("unit", "K"), base=transient)
+    defect("reactor-model-not-in-vocabulary", "a kinetic fit whose reactor treatment is stated in other words",
+           lambda d: node(d, "analysis/fit-plug-flow")["props"].__setitem__("reactor_model", "pfr"), base=transient)
+    defect("interval-method-not-in-vocabulary", "an interval whose method is stated in other words",
+           lambda d: entry(d, "analysis/fit-differential", "ea_co2_dissociation").__setitem__("interval_method", "hessian"),
+           base=transient)
+    defect("phase-reference-not-in-vocabulary", "phase delays whose reference is stated in other words",
+           lambda d: node(d, "analysis/phase-sensitive-detection")["props"].__setitem__("phase_reference", "input"),
+           base=transient)
     # it states its access (public, like every committed document) but not who contributed it or its project
     defect("research-data-without-stewardship", "research data that does not say who contributed it or which project it belongs to",
            lambda d: d["graph"].__setitem__("stewardship", {"access": "public"}), base=template("catalysis", VERSION))

@@ -131,6 +131,35 @@ fixtures:
     error: "is not one of"
     reason: How a validation held its data out is one of the listed strategies, so that a random split can be told from a
       grouped one.
+  - file: waveform-not-in-vocabulary.json
+    base: domain/examples/scale-catal/transient-examples/transient-kinetics.json
+    error: "is not one of"
+    reason: A waveform is one of the listed shapes, so that a square-wave modulation is found as one, whatever a source
+      calls it.
+  - file: program-detail-not-in-vocabulary.json
+    base: domain/examples/scale-catal/transient-examples/transient-kinetics.json
+    error: "is not one of"
+    reason: How much of a program the source gives is exact, parametric or descriptive, so that a reader knows whether it
+      can be rebuilt.
+  - file: residence-time-in-kelvin.json
+    base: domain/examples/scale-catal/transient-examples/transient-kinetics.json
+    error: "not a dimension of surface_residence_time"
+    reason: A surface residence time is a time; a value in kelvin is no residence time, whatever its number.
+  - file: reactor-model-not-in-vocabulary.json
+    base: domain/examples/scale-catal/transient-examples/transient-kinetics.json
+    error: "is not one of"
+    reason: A fit's reactor treatment is one of the listed ones, so that constants fitted under two treatments are told
+      apart in a comparison.
+  - file: interval-method-not-in-vocabulary.json
+    base: domain/examples/scale-catal/transient-examples/transient-kinetics.json
+    error: "is not one of"
+    reason: How an interval was obtained is one of the listed methods, so that an asymptotic interval is never read as a
+      profile or a posterior.
+  - file: phase-reference-not-in-vocabulary.json
+    base: domain/examples/scale-catal/transient-examples/transient-kinetics.json
+    error: "is not one of"
+    reason: What a phase delay is measured against is the stimulus or another species' response, so that delays against
+      two references are never compared.
   - file: lump-subset-of-cycle.json
     error: "SUBSET_OF forms a cycle"
     reason: Containment is a strict order; two lumps each inside the other have no outer one, and no selectivity of either could be left out of a sum as the one that contains the other.

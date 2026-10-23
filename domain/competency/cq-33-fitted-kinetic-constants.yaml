@@ -1,0 +1,71 @@
+# A competency question of the catalysis domain (tools/competency.py; `scale domains cq catalysis`).
+# It runs on public synthetic examples, so anyone can rerun it and see the same answer.
+id: CQ-33
+question: Which fitted activation energies of an elementary step are compared with one another, how did each fit treat
+  the reactor, and which did the data determine?
+description: |
+  A kinetic model fitted to measured responses is an Analysis of kind kinetic_fit that states its reactor_model,
+  rate_basis, concentration_measure and thermodynamic_consistency; each fitted constant is a value of its kind,
+  origin fitted, with its interval_method and identifiability. A scientific comparison groups the barriers of one step
+  and shows each one's reactor treatment, and its limitations name a group that mixes treatments: the example's CO2
+  dissociation barrier is 92 kJ/mol fitted as plug flow (a 95 % profile-likelihood interval of 85-99) and 78 kJ/mol
+  fitted as a differential reactor (a standard error of 3 from the curvature), one group whose rows show plug_flow and
+  differential, beside the CO hydrogenation barrier. A variant leaves out the constant the data do not determine
+  (identifiability practically_unidentifiable).
+documents:
+  - examples/scale-catal/transient-examples/transient-kinetics.json
+plan:
+  question: Which fitted activation energies can be compared, under which reactor treatment?
+  comparison: scientific
+  match:
+    label: Analysis
+    as: fit
+    where:
+      - prop: analysis_kind
+        op: eq
+        value: kinetic_fit
+  steps:
+    - from: fit
+      entries: result_values
+      kind: activation_energy
+      as: barrier
+    - from: barrier
+      field: target
+      to: ElementaryStep
+      as: step
+  return:
+    - fit.name
+    - fit.reactor_model
+    - fit.rate_basis
+    - step.name
+    - barrier
+  order_by:
+    - var: barrier
+      prop: value
+  evidence: true
+expect:
+  status: answered
+  min_rows: 3
+  max_rows: 3
+  values:
+    fit.reactor_model:
+      - plug_flow
+      - differential
+    step.name:
+      - CO2* + * -> CO* + O*
+      - CO* + H* -> HCO* + *
+variants:
+  - description: Only the constants the data determine.
+    plan:
+      where:
+        - var: barrier
+          prop: identifiability
+          op: eq
+          value: identifiable
+    expect:
+      status: answered
+      min_rows: 2
+      max_rows: 2
+      values:
+        step.name:
+          - CO2* + * -> CO* + O*

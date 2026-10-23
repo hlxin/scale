@@ -1,0 +1,79 @@
+# A competency question of the catalysis domain (tools/competency.py; `scale domains cq catalysis`).
+# It runs on public synthetic examples, so anyone can rerun it and see the same answer.
+id: CQ-32
+question: Which tests were driven by a program - an isotope switch, a modulation, a pseudo-random sequence, a chemical
+  loop - with which levels and timing, and does the source give enough to rebuild the program?
+description: |
+  A test operated dynamically HAS_OPERATION an Operation that states its waveform, the levels it switches between, its
+  period and duty cycle, or its sequence (sequence_length and bit_duration), or its segments with their durations,
+  what t = 0 is (time_origin), and how much
+  of the program the source gives (program_detail - exact, every switch or a rule that regenerates them; parametric,
+  only the pattern's parameters; descriptive). The example's four tests are an isotope switch, a square-wave
+  modulation (parametric), a 63-bit pseudo-random sequence of 5 s bits (exact, its generator in the Supporting
+  Information) and a chemical-looping cycle of four labelled segments. A variant keeps the programs a reader can
+  rebuild exactly.
+documents:
+  - examples/scale-catal/transient-examples/transient-kinetics.json
+plan:
+  question: Which tests were driven by a program, and how?
+  match:
+    label: CatalyticTest
+    as: test
+  steps:
+    - from: test
+      edge: HAS_OPERATION
+      to: Operation
+      as: program
+      where:
+        - prop: operation_mode
+          op: eq
+          value: dynamic
+  return:
+    - test.name
+    - program.time_pattern
+    - program.waveform
+    - program.levels
+    - program.period
+    - program.duty_cycle
+    - program.sequence_length
+    - program.bit_duration
+    - program.segments
+    - program.cycles
+    - program.program_detail
+    - program.time_origin
+  evidence: true
+expect:
+  status: answered
+  min_rows: 4
+  max_rows: 4
+  values:
+    program.program_detail:
+      - exact
+      - parametric
+    program.waveform:
+      - square
+      - pseudo_random_binary
+    program.period:
+      - 60
+    program.duty_cycle:
+      - 50
+    program.sequence_length:
+      - 63
+    program.bit_duration:
+      - 5
+variants:
+  - description: The programs the source gives exactly, every switch or a rule that regenerates them.
+    plan:
+      steps:
+        - from: test
+          edge: HAS_OPERATION
+          to: Operation
+          as: program
+          where:
+            - prop: program_detail
+              op: eq
+              value: exact
+    expect:
+      status: answered
+      min_rows: 3
+      max_rows: 3

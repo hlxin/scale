@@ -32,6 +32,7 @@ STEPS: dict[str, tuple[str, str]] = {
     "0.6.0": ("0.7.0", "breaking: computed energies and kinetic parameters compared under explicit definitions (the kinds electronic_energy, reaction_energy, reaction_enthalpy, reaction_free_energy, activation_energy, activation_free_energy, apparent_activation_energy and degree_of_rate_control; the contexts process, structure, level_of_theory and charge_treatment, the last two read from the value's producer; what a kind shows); ElementaryStep energies and RATE_CONTROL's degree of rate control bound to their kinds; Computation's method fields, Model.stored_in and REPRESENTS aspect and assumptions (provisional)"),
     "0.7.0": ("0.7.1", 'additive change: kinds for enzyme activity, a Michaelis constant, a turnover number, transport criteria, an effectiveness factor, a Thiele modulus and energy consumption; the enzyme unit (U) and the katal; roles ligand, solvent, cocatalyst and cofactor; catalyst families enzyme and whole_cell; species kind macromolecule; CatalyticTest.catalysis_mode'),
     "0.7.1": ("0.7.2", "what TRACE-AI asks of agentic campaigns, models and their validations; the autonomy of curation and people's checks of records"),
+    "0.7.2": ("0.7.3", 'the programs that drive a test, the analyses of its responses, and the reactor treatment, interval method and identifiability of fitted constants'),
 }
 
 

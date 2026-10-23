@@ -173,6 +173,43 @@ value:
     replicates:
       type: integer
       description: Number of independent determinations behind the value (n ≥ 1).
+    interval_method:
+      type: enum
+      maturity: provisional
+      values:
+      - replicate_statistics
+      - curvature
+      - profile_likelihood
+      - bootstrap
+      - bayesian_posterior
+      - monte_carlo_propagation
+      - linear_propagation
+      - judgement
+      - not_stated
+      description: |
+        How the uncertainty or interval was obtained, as the source says: replicate_statistics = the spread
+        of repeated determinations; curvature = from the curvature of a fit's objective at its optimum (a
+        covariance or Hessian estimate, asymptotic); profile_likelihood = by refitting along each
+        parameter; bootstrap = by refitting resampled data; bayesian_posterior = a credible interval of
+        sampled posteriors; monte_carlo_propagation and linear_propagation = by propagating input
+        uncertainties (GUM Supplement 1, or the GUM's law of propagation); judgement = stated without a
+        calculation (a Type B estimate). A curvature interval assumes the objective is near quadratic, and
+        can be far narrower than a profile for a poorly constrained parameter.
+    identifiability:
+      type: enum
+      maturity: provisional
+      values:
+      - identifiable
+      - practically_unidentifiable
+      - structurally_unidentifiable
+      - not_assessed
+      description: |
+        For a fitted value, whether the data the fit used determine it, as the source says:
+        practically_unidentifiable = the data leave it unbounded or unbounded on one side (its profile
+        stays flat); structurally_unidentifiable = the model determines only a combination of it with
+        another parameter (a product or a ratio), whatever the data. An unidentifiable value is kept as
+        reported, with what the source says of it, so that a query can leave it out of a comparison
+        (identifiability eq identifiable) (Raue et al., Bioinformatics 2009, doi:10.1093/bioinformatics/btp358).
     variable:
       type: ref
       targets:
@@ -276,6 +313,8 @@ value:
     and need uncertainty_kind.
   - confidence_interval needs confidence_level; expanded_uncertainty needs coverage_factor or confidence_level;
     0 < confidence_level < 1; replicates ≥ 1.
+  - interval_method goes with an uncertainty or an interval (advisory); identifiability goes with a fitted value
+    (origin fitted, advisory).
   - origin derived, computed or fitted names produced_by; evidence_ids name evidence items of the owning
     record.
   - A value of a property bound to a quantity contract (quantities) is in a unit of one of its kind's dimensions;
@@ -887,7 +926,75 @@ nodes:
             type: value
         description: |
           The program, in order: each segment is a map of the values held in it, including its
-          duration (e.g. {electrode_potential: 0.2 V, duration: 2 s}).
+          duration (e.g. {electrode_potential: 0.2 V, duration: 2 s}). A segment may carry its
+          label as a text value (label: reduction, purge, reoxidation, as the source names the
+          half-cycles of a chemical-looping cycle).
+      waveform:
+        type: enum
+        maturity: provisional
+        values:
+        - square
+        - sinusoidal
+        - triangular
+        - pulse_train
+        - pseudo_random_binary
+        - other
+        - not_reported
+        description: |
+          The shape of a periodic or programmed variation, as the source states it: square
+          (switching between levels and holding each, a concentration-modulation or chopped-light
+          experiment), sinusoidal, triangular, pulse_train (short pulses on a steady background, as
+          in a pulse reactor), pseudo_random_binary (switching between two levels in a pseudo-random
+          sequence, whose length and bit duration say how it runs).
+      levels:
+        type: list
+        maturity: provisional
+        items:
+          type: value
+        description: The values a switched or modulated quantity takes, in the order the program uses
+          them (the two levels of a square wave or a pseudo-random sequence; text values for what is
+          exchanged, such as the isotopic labels 12CO and 13CO of an isotope switch).
+      amplitude:
+        type: value
+        maturity: provisional
+        description: The amplitude of a modulation, as its definition says (half the peak-to-peak
+          change, or the peak-to-peak change).
+      pulse_amount:
+        type: value
+        maturity: provisional
+        description: What one pulse delivers (molecules, an amount, a gas volume at stated conditions),
+          as stated.
+      pulse_width:
+        type: value
+        maturity: provisional
+        description: How long one pulse lasts.
+      sequence_length:
+        type: integer
+        maturity: provisional
+        description: The number of bits in one period of a pseudo-random binary sequence.
+      bit_duration:
+        type: value
+        maturity: provisional
+        description: How long each bit of a pseudo-random binary sequence is held.
+      program_detail:
+        type: enum
+        maturity: provisional
+        values:
+        - exact
+        - parametric
+        - descriptive
+        - not_reported
+        description: |
+          How much of the program the source gives: exact = every switch or segment, or a rule that
+          regenerates them (a sequence's generator and seed); parametric = the pattern's parameters
+          only (a period, duty cycle and amplitude), so that each switch is implied but not given;
+          descriptive = in words. A response is fitted or compared against the program it was
+          driven by, so a program a reader cannot rebuild limits what can be done with its results.
+      time_origin:
+        type: text
+        maturity: provisional
+        description: What t = 0 of the program and of its responses is (the switch of a valve, the
+          start of illumination, the first pulse), as the source states it.
   Design:
     maps_to:
     - EXPO ExperimentalDesign
@@ -2378,8 +2485,9 @@ rules:
 - CONTROL_FOR names at least one variable in differs_in (advisory). No confounding verdict is drawn from
   the count.
 - REPLICATES with level reproduce lists what changed (advisory).
-- A dynamic Operation names its varied_quantities and says how they vary (segments, period or frequency);
-  a static one has time_pattern constant (or none).
+- A dynamic Operation names its varied_quantities and says how they vary (segments, period or frequency, a
+  pseudo-random sequence's bit_duration, pulse_width, or a step's levels); a static one has time_pattern constant (or
+  none).
 - PART_OF, PRECEDES, HAS_PART and REVISES are acyclic; no kernel edge joins a record to itself; REVISES
   joins records of the same label.
 - A record_ref resolves to a node or link, and its path to a property of it; evidence_ids name evidence
@@ -2550,7 +2658,10 @@ quantities:
     derived or computed, with produced_by: an evidenced conversion) keeps its own. A context may also be read from the
     record that holds the value (an elementary step's activation energy is of that step) or from the experiment that
     produced it (a computed energy's level of theory and charge treatment); a context that compares the values that do
-    not state it apart from the others (`unstated: group`) never leaves one out. A kind may show what the value's
+    not state it apart from the others (`unstated: group`) never leaves one out. A producer whose label has no such
+    property (a measurement has no level of theory) has its values compared apart, unless the context reads it as
+    stating none (`without_property: unstated`: a phase delay recorded on a test, which cannot say what it was measured
+    against). An open context compares a number exactly, as stated with its unit. A kind may show what the value's
     producer states of other properties (`shows`: a free energy's temperature, a calculation's dispersion correction),
     which a comparison shows in each row and never groups by. `scale graph query` with `comparison: scientific` compares
     and ranks values of a kind only with values of that kind, in one unit and one context (docs/querying.md); without
@@ -3102,6 +3213,48 @@ quantities:
           terms: []
       unspecified: [not_reported]
       unstated: group
+    phase_reference:
+      description: What a phase delay is measured against, as the analysis that produced it states it
+        (phase_reference) - the stimulus (the imposed modulation, the reference of phase-sensitive detection) or the
+        response of another species (phase_reference_species). A lag behind the stimulus and a lag behind another
+        response are two quantities, never compared with one another; a delay whose analysis states neither, or whose
+        producer cannot state it (a delay recorded on the test itself, not produced by an analysis), is left out of a
+        comparison.
+      read_from: [producer]
+      property: phase_reference
+      without_property: unstated
+      values:
+        stimulus:
+          terms: [stimulus]
+        species_response:
+          terms: [species response]
+      unspecified: [other, not_reported]
+    phase_reference_species:
+      description: The species whose response a phase delay is measured against, when its analysis measures against
+        another response (phase_reference_species). Lags behind two species' responses are two quantities; one whose
+        analysis names no species is left out of a comparison.
+      read_from: [producer]
+      property: phase_reference_species
+      without_property: unstated
+      open: true
+    modulation_period:
+      description: The period of the modulation a phase delay was read at, as its analysis states it
+        (modulation_period). A response's phase, and so its delay, depends on the frequency of the stimulus; delays read
+        at two periods are two quantities, compared by the period's exact number and unit. A delay whose analysis states
+        no period, or states it as not measured, is left out of a comparison.
+      read_from: [producer]
+      property: modulation_period
+      without_property: unstated
+      open: true
+    demodulation_harmonic:
+      description: The harmonic of the modulation frequency at which phase-sensitive detection read a phase
+        (demodulation_harmonic, 1 for the fundamental). Phases at two harmonics are two quantities; a delay whose
+        analysis states no harmonic is compared only with the others that state none.
+      read_from: [producer]
+      property: demodulation_harmonic
+      without_property: unstated
+      open: true
+      unstated: group
   kinds:
     temperature:
       description: A thermodynamic temperature, or a difference of temperatures, as reported.
@@ -3360,7 +3513,7 @@ quantities:
         divided by the gas constant, in kelvin; it is kept so, and compared only with values in that unit.
       dimensions: [energy, molar_energy, temperature]
       compare_by: [process, level_of_theory, charge_treatment]
-      shows: [electrode_potential, dispersion, hubbard_u, spin_treatment, solvation]
+      shows: [electrode_potential, dispersion, hubbard_u, spin_treatment, solvation, reactor_model]
       maturity: provisional
     activation_free_energy:
       description: The free energy of one elementary step's transition state above its initial state, at the temperature
@@ -3398,6 +3551,49 @@ quantities:
       dimensions: [dimensionless]
       compare_by: [species]
       shows: [temperature, pressure]
+      maturity: provisional
+    surface_residence_time:
+      description: The mean time the surface intermediates that lead to a product (its target) stay on the surface, from an
+        isotopic transient at steady state (SSITKA, the area between the product's normalized isotopic transient and an
+        inert tracer's; Shannon and Goodwin, Chem. Rev. 1995, 95, 677, doi:10.1021/cr00035a011). Its inverse is the
+        pseudo-first-order rate constant of those intermediates, not a turnover frequency of every site.
+      dimensions: [time]
+      compare_by: [species]
+      shows:
+      - property: temperature
+        warn: true
+      maturity: provisional
+    surface_intermediate_amount:
+      description: The amount of the surface intermediates that lead to a product (its target), from an isotopic transient
+        at steady state (the product's rate times its surface residence time), per catalyst mass or in all.
+      dimensions: [amount_per_mass, number_per_mass, amount]
+      compare_by: [species]
+      shows:
+      - property: temperature
+        warn: true
+      maturity: provisional
+    phase_delay:
+      description: How long a response lags the stimulus in a periodic experiment (or the response of another species, as
+        its analysis states), from its phase angle at the modulation frequency (phase-sensitive detection; Urakawa, Burgi
+        and Baiker, Chem. Eng. Sci. 2008, 63, 4902, doi:10.1016/j.ces.2007.06.009), its target the species or band that
+        responds. A species that responds no later than the product may be its intermediate; one that lags it may be a
+        spectator; neither delay alone shows which. Delays are compared only for one species, one reference, one period
+        and one harmonic, as the analysis that produced them states them.
+      dimensions: [time]
+      compare_by:
+      - species
+      - phase_reference
+      - context: phase_reference_species
+        when:
+          phase_reference: [species_response]
+      - modulation_period
+      - demodulation_harmonic
+      maturity: provisional
+    response_time_constant:
+      description: The time constant of a response to a step, a pulse or a switch (an exponential fitted to it, or as its
+        definition says), its target the species that responds, with the delay of its detection removed or stated.
+      dimensions: [time]
+      compare_by: [species]
       maturity: provisional
     enzyme_activity:
       description: The catalytic activity of an enzyme or a whole-cell preparation, its target the substrate converted or

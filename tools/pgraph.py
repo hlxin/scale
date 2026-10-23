@@ -408,6 +408,11 @@ class Validator:
             err("confidence_level is between 0 and 1")
         if "replicates" in v and isinstance(v["replicates"], int) and v["replicates"] < 1:
             err("replicates is at least 1")
+        if "interval_method" in v and not ("uncertainty" in v or "interval_lower" in v):   # 0.7.3 on (advisory)
+            rep.add("warning", rid, f"{where}: interval_method says how an uncertainty or an interval was obtained, and "
+                                    "this value states neither")
+        if "identifiability" in v and v.get("origin") != "fitted":
+            rep.add("warning", rid, f"{where}: identifiability is said of a fitted value (origin fitted)")
         if v.get("origin") in ("derived", "computed", "fitted") and "produced_by" not in v:
             err(f"a {v.get('origin')} value names the experiment that produced it (produced_by)")
 
