@@ -529,7 +529,7 @@ def test_the_computational_recipe_names_only_labels_links_and_properties_the_sch
     """The links and the Computation and StructureModel properties the recipe on computational details names in code are
     declared by the schema the example pins."""
     import re
-    text = (REPO / "skills/curate-source/references/recipes.md").read_text(encoding="utf-8")
+    text = (REPO / "skills/curate-corpus/references/recipes.md").read_text(encoding="utf-8")
     section = text[text.index("## Computational details"):text.index("## Reactor, bed and catalyst-body keys")]
     links = set(re.findall(r"`([A-Z][A-Z_]{3,})`", section)) - {"RPBE"}           # a functional's name is a value
     assert links and not sorted(x for x in links if x not in spec["edges"])

@@ -2,7 +2,7 @@
 
 **Draft 0.1 (2026-10-20), for expert review. Not endorsed by any journal or society.** It is the reporting companion
 to the recording recipes for preparations and characterizations
-([skills/curate-source/references/recipes.md](../../../skills/curate-source/references/recipes.md), "Preparation
+([skills/curate-corpus/references/recipes.md](../../../skills/curate-corpus/references/recipes.md), "Preparation
 recipes" and "Characterization recipes") and to the [catalyst-state checklist](catalyst-state-reporting.md), whose
 section A (the action history) it details. It adds no field to the schema: every item names what SCALE already has
 (scale-catal 0.6.0), and the preparation examples (domain/examples/scale-catal/preparation-examples/) record each.

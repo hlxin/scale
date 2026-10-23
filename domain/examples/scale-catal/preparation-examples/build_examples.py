@@ -1,6 +1,6 @@
 """Build the synthetic preparation-and-characterization examples of the catalysis domain (all values invented): how a
 catalyst was made, activated, stored and moved, and how it was characterized, recorded with the structures SCALE has
-(the recording recipes, skills/curate-source/references/recipes.md).
+(the recording recipes, skills/curate-corpus/references/recipes.md).
 
     python build_examples.py
 
