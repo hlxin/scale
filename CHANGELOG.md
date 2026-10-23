@@ -220,6 +220,32 @@
     (doi:10.1016/j.jcat.2024.115369) on XAS, and Tackett et al. 2026 (doi:10.1021/acscatal.6c01946) on operando
     studies; the checklist cases cite them.
 
+- **Schema 0.5.2 (additive): a product reported as a lump.** Answers #39. `ProductLump` (provisional) records a
+  product the source reports as a fraction, a class or a carbon-number window rather than a species (C5-C11, gasoline
+  range, "C2+"), with `SUBSET_OF` for a lump inside a wider one; `HAS_OUTPUT.to` and `PRODUCES.to` accept it (17 targets
+  loosened). Existing records move unchanged (no migration rule). The selectivity sum check warns when selectivities of
+  one record to a lump and to a lump or species it overlaps exceed 100 %; it drops containers (a lump that contains
+  others) from the sum, reads no `result_values`, and cannot declare a species inside a lump. Fixtures, five
+  counterexamples and competency question CQ-13 are added.
+- **Query fix (#38): a value below its detection or quantification limit is read as an upper bound at its limit.** A
+  numeric filter (`graph query`) left such a value out with the reason `below_detection_limit`; it now passes `le`/`lt`
+  and fails `ge`/`gt` when every number below the limit decides, is left out as `one_sided_bound` when the limit
+  straddles the filter, and never holds for `eq`/`in`. No schema change.
+- **Schema 0.5.1 (additive): bifunctional (tandem) catalysts.** Requested by @hlxin (#40). A catalyst of two or more
+  components that perform different steps (an oxide that activates CO, a zeolite that couples or isomerizes) can now
+  say what each component does and how they are combined. `HAS_COMPONENT.function` lists the Reaction records a
+  component performs; a Catalyst has `integration_mode` (granule mixture, core-shell, supported-on, dual bed),
+  `integration_scale` and `site_proximity` (the authors' description). All are provisional. Competency question CQ-12
+  and a fixture with five counterexamples cover them; CQ-01 to CQ-11 are unchanged. Records of earlier versions need
+  no change.
+- **Bundle schema: an endpoint declared `ANY` is exported unconstrained (tooling; no schema version raised).** Requested
+  in #44. `REVISES` (both ends) and the targets of `HAS_INPUT`, `HAS_OUTPUT`, `ABOUT` and `INCLUDES`, which the
+  kernel declares `ANY`, were written as all 55 kinds in the bundle's `edge_types`; they are now `[]`, which the
+  conformance check reads as unconstrained, and so is `REPORTED_IN`'s source (any entity reports; its target stays
+  `Publication`). The declared kind pairs drop from 6,014 to 1,395, the pairs the schema types; the pairs that occur
+  are left to consumers to draw from the data. The other typed lists (`HAS_PART` 14 x 14, `PART_OF`, `PRECEDES` and
+  the like) stay as the schema declares them; narrowing them is a separate schema change. The spec, its digest and the
+  frozen versions are untouched.
 - **Schema 0.5.0 (breaking): the checklist says when a test's reporting cannot be judged, and checks the evidence a
   reading needs.** Requested by @hlxin ("Check reporting applicability and connected kinetic evidence"). Before, a test
   that listed no driving force matched none of the checklist's driving-force cases, so a test stripped of every

@@ -27,8 +27,20 @@ def test_the_index_names_every_fixture_and_scale_check_uses_it():
     from conftest import REPO
     assert len(invalid_fixtures(REPO)) == len(INDEX) >= 8
     assert sorted(p.name for p in (FIXTURES / "invalid").glob("*.json")) == sorted(e["file"] for e in INDEX)
+    electro = load_doc(REPO / "domain/examples/scale-catal/driving-force-examples/electro.json")
+    bi = load_doc(REPO / "domain/examples/scale-catal/bifunctional-examples/tandem-granule-mixture.json")
+    lump = load_doc(REPO / "domain/examples/scale-catal/product-measurement-examples/product-lumps-cheng-like.json")
     for e in INDEX:                                                          # each pins its base example's version
-        base = load_doc(REPO / e.get("base", "domain/examples/scale-catal/driving-force-examples/electro.json"))
-        pin = load_doc(FIXTURES / "invalid" / e["file"])["graph"]["schema_version"]
-        assert pin == base["graph"]["schema_version"], (e["file"], pin)
-        assert pinned_schema(base)                                            # the head or a frozen version
+        doc = load_doc(FIXTURES / "invalid" / e["file"])
+        # an entry may name its base; otherwise build_fixtures built the multifunctional ones (#40) on the bifunctional
+        # example, the lump ones on the lump example, and every other one on the base example
+        if "base" in e:
+            on = load_doc(REPO / e["base"])
+        elif e["file"].startswith("lump-"):
+            on = lump
+        elif any(n["id"].startswith("ex:bifunctional/") for n in doc["nodes"]):
+            on = bi
+        else:
+            on = electro
+        assert doc["graph"]["schema_version"] == on["graph"]["schema_version"], (e["file"], doc["graph"]["schema_version"])
+        assert pinned_schema(on)                                              # the head or a frozen version

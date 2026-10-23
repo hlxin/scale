@@ -397,6 +397,52 @@ def test_eq_ne_and_in_on_a_number_compare_in_the_filters_unit(doc, spec):
     assert pgraph_query.run(d, spec, year)["row_count"] == 1
 
 
+@pytest.mark.parametrize("status", ["below_detection_limit", "below_quantification_limit"])
+def test_a_value_below_its_limit_is_read_as_an_upper_bound_at_the_limit(doc, spec, status):
+    """Issue #38: a value below its detection or quantification limit (value = the limit) can only lie below it, so it
+    reads as `bound: upper` at its limit. Run 1 is exactly 1 %, run 2 is at most 2 %, run 3 is below a 2 % limit.
+    le 5 passes all three; le 1 passes run 1 only and leaves run 3 out as one_sided_bound (the limit straddles); ge 5
+    fails run 3 (excluded by the filter, not as one-sided); eq and in never hold for it; ranking never ranks it as exact."""
+    d = copy.deepcopy(doc)
+    vals = {"ex:t/cu/test": V(1, "%"), "ex:t/cr/test": {**V(2, "%", "< 2"), "bound": "upper"},
+            "ex:t/late/test": {"status": status, "value": 2, "unit": "%", "as_reported": "n.d. (limit 2 %)"}}
+    found_nodes = 0
+    for n in d["nodes"]:
+        if n["id"] in vals:
+            n["props"]["conversion"] = vals[n["id"]]
+            found_nodes += 1
+    assert found_nodes == 3 and pgraph.validate(d, spec).errors == []
+    plan = {"match": {"label": "CatalyticTest", "as": "t"}, "return": ["t.name"]}
+    r1, r2, r3 = "ex:t/cu/test", "ex:t/cr/test", "ex:t/late/test"
+
+    def run(op, value):
+        res = pgraph_query.run(d, spec, {**plan, "where": [{"var": "t", "prop": "conversion", "op": op, "value": value,
+                                                            "unit": "%"}]})
+        return sorted(r["bound"]["t"] for r in res["rows"]), res["coverage"]["excluded"]["by_reason"], res
+    rows, why, res = run("le", 5)
+    assert rows == sorted([r1, r2, r3]) and "below_detection_limit" not in why and "below_quantification_limit" not in why
+    rows, why, res = run("lt", 5)
+    assert rows == sorted([r1, r2, r3])
+    rows, why, res = run("le", 1)
+    assert rows == [r1] and why.get("one_sided_bound") == 2          # run 2 and run 3: the limit 2 % straddles 1 %
+    ex = next(x for x in res["excluded"] if x["record"] == r3)
+    limit = "detection" if status == "below_detection_limit" else "quantification"
+    assert ex["reason"] == f"one_sided_bound (below the {limit} limit 2 %; le 1 cannot be decided)"
+    rows, why, res = run("ge", 5)
+    assert rows == [] and "one_sided_bound" not in why              # decidable: fails for run 2 and run 3
+    rows, why, res = run("gt", 1.5)
+    assert rows == [] and why.get("one_sided_bound") == 2           # at most 2 % cannot decide gt 1.5 for runs 2 and 3
+    for op, value in (("eq", 2), ("in", [2, 3])):
+        assert r3 not in run(op, value)[0]
+    # ranking: a value below its limit is not ranked as the exact number
+    ranked = pgraph_query.run(d, spec, {**plan, "order_by": [{"var": "t", "prop": "conversion"}]})
+    assert [r["bound"]["t"] for r in ranked["rows"]] == [r1, r2, r3]        # ordinary order_by sorts by the number, as for a bound
+    sci = pgraph_query.run(d, spec, {**plan, "comparison": "scientific", "order_by": [{"var": "t", "prop": "conversion"}]})
+    why3 = next(x["reason"] for x in sci["excluded"] if x["record"] == r3)
+    assert why3 == f"one_sided_bound (conversion is below its {limit} limit; a bound is not ranked)"
+    assert r3 not in [r["bound"]["t"] for r in sci["rows"]]
+
+
 def test_a_one_sided_bound_is_never_read_as_the_exact_number(doc, spec):
     """A value with a bound ("did not exceed 1 %", "at least 2") passes a numeric filter only when every number the
     bound allows passes it, fails when none does, and is left out otherwise (one_sided_bound, counted; with no row the
