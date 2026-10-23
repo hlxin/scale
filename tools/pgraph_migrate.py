@@ -28,6 +28,7 @@ STEPS: dict[str, tuple[str, str]] = {
     "0.4.0": ("0.5.0", "breaking: the catalysis checklist applies a test's cases by its driving_forces (a test that lists none has unknown applicability, never a complete checklist) and looks for connected evidence; CatalyticTest.interpretations, Analysis.evaluation_basis, power_supply_input and the dark control's control_kind, differs_in, temperature_matched_at and temperature_matched_over are new (provisional)"),
     "0.5.0": ("0.5.1", 'Represent bifunctional (tandem) catalysts: component function, integration mode and scale, site proximity (provisional)'),
     "0.5.1": ("0.5.2", "additive: ProductLump (a product reported as a lump or fraction) and SUBSET_OF; HAS_OUTPUT.to and PRODUCES.to accept a ProductLump; no record changes"),
+    "0.5.2": ("0.6.0", "breaking: site populations of a catalyst state (HAS_SITE from CatalystState with population_fraction, site_density, exposed_metal_count and site_inventory); the site_fraction, site_density and site_count kinds; a turnover frequency compared by its species, divided by a site count or a site density, and saying how it was calculated (a warning when it does not); operando defined as characterized while the kinetics are measured; DURING's specimen, timing, kinetics and benchmark; Analysis spectral_fit and limitations; the checklist's operando and spectral-fit cases (provisional)"),
 }
 
 
@@ -79,6 +80,24 @@ def _reporting_applicability(doc: dict, spec: dict | None) -> list:
     return []
 
 
+def _site_populations(doc: dict, spec: dict | None) -> list:
+    """0.5.2 -> 0.6.0: site populations of a catalyst state and site-normalized rates. Nothing a 0.5.2 document holds is
+    rewritten: no population moves onto a state (a count recorded elsewhere stays there, and none is carried from a
+    sample to its states), no operando label is changed, and no DURING link is given a specimen, a timing or kinetics
+    it does not state. A turnover frequency is now compared by its species, so one that names none is left out of a
+    scientific comparison as missing_context, and one that does not say how it was calculated is reported (a warning);
+    those change what the validator and the comparison report, not the document. What the step cannot map stops it:
+    a turnover frequency whose target is not a chemical species, or one divided by a value of another kind than a site
+    count or a site density (a share, a composition fraction), which would be invalid under 0.6.0; curate it by hand,
+    then migrate. ``spec`` is the target schema."""
+    from .quantities import misnamed_denominators, narrowed_targets
+    bad = narrowed_targets(doc, spec) + misnamed_denominators(doc, spec)
+    if bad:
+        raise ScaleError("the step to site populations cannot map these values (curate them by hand, then migrate): "
+                         f"{'; '.join(bad[:20])}" + (f" (and {len(bad) - 20} more)" if len(bad) > 20 else ""))
+    return []
+
+
 STEP_RULES: dict[str, tuple[str, Callable[[dict, dict | None], list]]] = {
     "0.1.0": ("graph.schema renamed scale-graph -> scale-catal; every record, id and value kept", _rename_schema),
     "0.2.1": ("quantity contracts: a HAS_COMPONENT fraction in an amount unit moves to amount, one in a concentration unit "
@@ -90,6 +109,10 @@ STEP_RULES: dict[str, tuple[str, Callable[[dict, dict | None], list]]] = {
     "0.4.0": ("reporting applicability and connected evidence: nothing is rewritten and nothing stops the step (a test "
               "that lists no driving force has unknown applicability; no interpretation is inferred); every record, id "
               "and value kept", _reporting_applicability),
+    "0.5.2": ("site populations and site-normalized rates: nothing is rewritten (no population moves onto a state, no "
+              "operando label or DURING link changes); a turnover frequency whose target is no chemical species, or "
+              "whose denominator is not a site count or a site density, stops the step; every record, id and value "
+              "kept", _site_populations),
 }
 
 

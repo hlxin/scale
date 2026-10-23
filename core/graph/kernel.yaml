@@ -270,7 +270,14 @@ value:
     record.
   - A value of a property bound to a quantity contract (quantities) is in a unit of one of its kind's dimensions;
     normalized_by goes only on a value whose kind declares a denominator, resolves (with its path) to a value object,
-    and names a value of the denominator's dimensions.
+    and names a value of the denominator's dimensions (and, where the denominator names kinds, a value of one of them).
+  - A value divided by a one-sided bound (its normalized_by names a value with bound) is a bound the other way (a rate
+    divided by at most N sites is at least the quotient) and states it (bound); one that does not is reported (a
+    warning) and kept as reported, and a scientific comparison shows the bound of what it is divided by.
+  - A value of a kind whose denominator is marked unstated (a turnover frequency) says how it was calculated (its
+    normalized_by names what it is divided by, or its basis or definition says it); one that says neither is reported
+    (a warning) and kept as reported. Its basis says how it was calculated, so a scientific comparison reads it, and
+    compares the value whatever it says.
   - target and unresolved_target do not go together; a target a domain narrows for a context (context_targets) names
     a record of one of its labels.
   - id is snake_case and not only digits, and no two values of a record share one.
@@ -2202,6 +2209,8 @@ quantities:
     amount_per_mass: N M-1
     mass_per_area: M L-2
     amount_per_area: N L-2
+    number_per_area: L-2
+    number_per_mass: M-1
     volumetric_flow: L3 T-1
     molar_flow: N T-1
     mass_flow: M T-1
@@ -2729,9 +2738,35 @@ quantities:
       description: A dimensionless efficiency of energy or charge conversion (IPCE, ABPE, plasma energy efficiency).
       dimensions: [dimensionless]
       share: true
+    site_fraction:
+      description: The share of a stated whole that a population of sites makes up (of the exposed atoms of an element, of
+        all its atoms, of the sites of a kind), dimensionless; the value's basis names the whole and is compared as text.
+        A share is not a count of sites, so no rate is divided by it.
+      dimensions: [dimensionless]
+      share: true
+      maturity: provisional
+    site_density:
+      description: The sites of a population per surface area or per mass of the material or catalyst they belong to
+        (µmol/m2, sites/nm2, µmol/g), counted or estimated by a stated method.
+      dimensions: [amount_per_area, number_per_area, amount_per_mass, number_per_mass]
+      maturity: provisional
+    site_count:
+      description: A number of sites, or of exposed atoms taken as sites, absolute (µmol, a number of sites) or per mass
+        of catalyst (µmol/g), counted, estimated or assumed by a stated method; never a share (site_fraction).
+      dimensions: [amount, dimensionless, amount_per_mass, number_per_mass]
+      maturity: provisional
     turnover_frequency:
-      description: Events per site per time; its denominator is a site inventory (a count of sites by a stated method).
+      description: Events (one product formed or one reactant converted, its target) per site per time, as reported. How
+        it was calculated is recorded with it, never inferred, in the count of sites it is divided by (normalized_by, a
+        value that keeps its own method, origin and assumptions) and, in its basis or definition, in what was counted as
+        sites (the exposed atoms, the sites of one kind, every atom) and how. Rates of two species are never compared with one
+        another; rates calculated on different counts are compared as reported, each with its denominator.
       dimensions: [frequency]
+      compare_by: [species]
       denominator:
-        description: The site inventory the rate is divided by (sites counted by chemisorption, titration or a model).
-        dimensions: [dimensionless, amount]
+        description: The count of sites the rate is divided by (sites counted by chemisorption, titration or a model),
+          absolute or per catalyst mass, or a density of sites per area for a rate per area; a site count or a site
+          density, never a share.
+        dimensions: [dimensionless, amount, amount_per_mass, number_per_mass, amount_per_area, number_per_area]
+        kinds: [site_count, site_density]
+        unstated: warning

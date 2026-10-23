@@ -1585,6 +1585,9 @@ def _describe(spec: dict, names: list[str] | None = None, profile: str | None = 
             name = lambda x: qc.names.get(x) or formula(x)  # noqa: E731
             out["quantity_kinds"] = {k: {"dimensions": [name(x) for x in d["dimensions"]],
                                          "compared_by": [x["context"] for x in d["compare_by"]],
-                                         **({"denominator": [name(x) for x in d["denominator"]]} if d["denominator"] else {})}
+                                         **({"denominator": [name(x) for x in d["denominator"]]} if d["denominator"] else {}),
+                                         **({"denominator_kinds": d["denominator_kinds"]} if d["denominator_kinds"] else {}),
+                                         **({"denominator_unstated": d["denominator_unstated"]}
+                                            if d.get("denominator_unstated") else {})}
                                      for k, d in sorted(qc.kinds.items())}
     return out

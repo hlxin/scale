@@ -5,12 +5,17 @@ pull request that makes it is. Each item is a suggestion @scale-agents can take 
 
 ## Schema changes to make
 
-- **Activity in a catalyst state and reaction pathways as records** (catalysis): the activity of a component in a
-  catalyst state (which phase or site is active for which reaction, on what evidence), reaction pathways as
-  records with their intermediates and rate-determining step, site populations in a state and a test's measured
-  product distribution. The draft reporting checklist for authors,
-  [docs/reporting/catalyst-state-reporting.md](docs/reporting/catalyst-state-reporting.md), names the fields such a
-  change would add; schema 0.1.0 does not have them.
+- **Reaction pathways as records** (catalysis): reaction pathways with their intermediates in order, their
+  rate-determining step and the state they run on (`ReactionPathway`, `PROCEEDS_VIA {order, intermediate_role}`,
+  `HAS_ELEMENTARY_STEP {kinetic_role}`), a test's measured product distribution as a whole, and the material a site
+  sits on in a given state (`LOCATED_ON {in_state}`). The draft reporting checklist for authors,
+  [docs/reporting/catalyst-state-reporting.md](docs/reporting/catalyst-state-reporting.md), names them *(planned)*.
+  Done in scale-catal 0.6.0: the site populations of a catalyst state (`HAS_SITE` from the `CatalystState`, with a
+  share, a density, the exposed atoms counted and the sites a rate is divided by), turnover frequencies kept as
+  reported with how they were calculated, activity assignments as claims with named `ABOUT` roles, and operando
+  observations made while the kinetics are measured (`DURING`'s specimen, timing, kinetics and benchmark). Still open there: whether the `ABOUT` roles of an
+  assignment become a closed list, and whether a `SUPPORTS` link names the kind of evidence it is (the reporting
+  draft's open points).
 - **Stability maps and the order of phenomena** (kernel): which species or phase is most stable over a region of
   condition space (phase, Pourbaix and regime maps), and the order in time between phenomena. Both are general
   scientific distinctions built from kernel parts, so they belong in the kernel.
@@ -67,8 +72,8 @@ up (stability maps and the order of phenomena are under "Schema changes to make"
   were not checked against them again: surface components and molecular detections; measurement during a treatment
   and states inferred from reactivity; site populations covered by a phase or assigned a pathway effect; computed
   pathway results paired with predicted states; the delay from a trigger to the onset of a transition. They are
-  checked when those sources are curated under the current version; site populations and pathway effects overlap
-  "Activity in a catalyst state and reaction pathways as records" above.
+  checked when those sources are curated under the current version; site populations in a state are recorded since
+  scale-catal 0.6.0, and pathway effects overlap "Reaction pathways as records" above.
 
 ## Checklist review
 

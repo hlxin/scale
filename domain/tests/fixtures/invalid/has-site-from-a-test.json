@@ -1,0 +1,577 @@
+{
+  "nodes": [
+    {
+      "id": "ex:df-electro/source/paper",
+      "label": "Source",
+      "props": {
+        "name": "Invented paper",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "Nitrate electroreduction to ammonia on a Cu electrode (invented)",
+        "year": 2026
+      }
+    },
+    {
+      "id": "ex:df-electro/species/nitrate",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "NO3-",
+        "charge": -1,
+        "elemental_composition": {
+          "N": 1,
+          "O": 3
+        },
+        "formula": "NO3-",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:df-electro/species/ammonia",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "NH3",
+        "charge": 0,
+        "elemental_composition": {
+          "H": 3,
+          "N": 1
+        },
+        "formula": "NH3",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:df-electro/species/water",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "H2O",
+        "charge": 0,
+        "elemental_composition": {
+          "H": 2,
+          "O": 1
+        },
+        "formula": "H2O",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:df-electro/species/hydroxide",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "OH-",
+        "charge": -1,
+        "elemental_composition": {
+          "H": 1,
+          "O": 1
+        },
+        "formula": "OH-",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:df-electro/species/electron",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "e-",
+        "charge": -1,
+        "elemental_composition": {},
+        "formula": "e-",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:df-electro/reaction/no3rr",
+      "label": "Reaction",
+      "props": {
+        "name": "NO3- + 6 H2O + 8 e- -> NH3 + 9 OH-",
+        "balance_status": "balanced",
+        "direction": "forward",
+        "equation": "NO3- + 6 H2O + 8 e- -> NH3 + 9 OH-",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:df-electro/catalyst/cu",
+      "label": "Catalyst",
+      "props": {
+        "name": "Cu nanoparticles",
+        "catalyst_family": "oxide",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:df-electro/source/paper"
+          }
+        ],
+        "nominal_formula": "Cu",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:df-electro/sample/cu",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Cu nanoparticles, batch 1",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:df-electro/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "sample_kind": "powder"
+      }
+    },
+    {
+      "id": "ex:df-electro/electrode/cu-on-cp",
+      "label": "Electrode",
+      "props": {
+        "name": "Cu on carbon paper",
+        "catalyst_loading": {
+          "status": "present",
+          "unit": "mg/cm2",
+          "value": 0.2
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:df-electro/source/paper"
+          }
+        ],
+        "geometric_area": {
+          "status": "present",
+          "unit": "cm2",
+          "value": 1.0
+        },
+        "origin": "synthetic",
+        "substrate": "carbon paper"
+      }
+    },
+    {
+      "id": "ex:df-electro/instrument/ref",
+      "label": "ReferenceElectrode",
+      "props": {
+        "name": "Ag/AgCl reference",
+        "filling": "saturated KCl",
+        "origin": "synthetic",
+        "reference_type": "ag_agcl"
+      }
+    },
+    {
+      "id": "ex:df-electro/electrode/pt",
+      "label": "Electrode",
+      "props": {
+        "name": "Pt foil counter electrode",
+        "origin": "synthetic",
+        "substrate": "Pt foil"
+      }
+    },
+    {
+      "id": "ex:df-electro/species/k2so4",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "K2SO4",
+        "charge": 0,
+        "elemental_composition": {
+          "K": 2,
+          "O": 4,
+          "S": 1
+        },
+        "formula": "K2SO4",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:df-electro/electrolyte/k2so4-kno3",
+      "label": "Electrolyte",
+      "props": {
+        "name": "0.5 M K2SO4 + 0.1 M KNO3",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:df-electro/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "pH": {
+          "status": "present",
+          "unit": "1",
+          "value": 7.0
+        }
+      }
+    },
+    {
+      "id": "ex:df-electro/instrument/h-cell",
+      "label": "ElectrochemicalCell",
+      "props": {
+        "name": "H-cell",
+        "cell_kind": "h_cell",
+        "compartments": 2,
+        "origin": "synthetic",
+        "separator": "Nafion 117"
+      }
+    },
+    {
+      "id": "ex:df-electro/test/m03",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Electrolysis at -0.3 V vs RHE",
+        "charge_passed": {
+          "status": "present",
+          "unit": "C",
+          "value": -50
+        },
+        "control_mode": "potentiostatic",
+        "current_density": {
+          "status": "present",
+          "basis": "geometric area",
+          "unit": "mA/cm2",
+          "value": -120
+        },
+        "current_normalization": "geometric_area",
+        "driving_forces": [
+          "electro"
+        ],
+        "electrode_potential": {
+          "status": "present",
+          "as_reported": "-0.3 V vs RHE (converted by the authors from Ag/AgCl)",
+          "unit": "V",
+          "value": -0.3
+        },
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 2",
+            "source": "ex:df-electro/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "faradaic_efficiency": [
+          {
+            "status": "present",
+            "replicates": 3,
+            "target": "ex:df-electro/species/ammonia",
+            "uncertainty": 3,
+            "uncertainty_kind": "standard_deviation",
+            "unit": "%",
+            "value": 92
+          }
+        ],
+        "ir_compensation": "partial",
+        "ir_compensation_fraction": 0.85,
+        "origin": "synthetic",
+        "reference_scale": "rhe",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 298
+        },
+        "test_kind": "activity"
+      }
+    },
+    {
+      "id": "ex:df-electro/state/working",
+      "label": "CatalystState",
+      "props": {
+        "name": "working, at -0.6 V vs RHE",
+        "origin": "synthetic",
+        "state_kind": "working"
+      }
+    },
+    {
+      "id": "ex:df-electro/site/cu-step",
+      "label": "ActiveSite",
+      "props": {
+        "name": "Cu step site",
+        "origin": "synthetic",
+        "site_kind": "step_edge"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:df-electro/link/1",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:df-electro/reaction/no3rr",
+      "target": "ex:df-electro/species/nitrate"
+    },
+    {
+      "id": "ex:df-electro/link/2",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 6,
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:df-electro/reaction/no3rr",
+      "target": "ex:df-electro/species/water"
+    },
+    {
+      "id": "ex:df-electro/link/3",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 8,
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:df-electro/reaction/no3rr",
+      "target": "ex:df-electro/species/electron"
+    },
+    {
+      "id": "ex:df-electro/link/4",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "role": "product"
+      },
+      "source": "ex:df-electro/reaction/no3rr",
+      "target": "ex:df-electro/species/ammonia"
+    },
+    {
+      "id": "ex:df-electro/link/5",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 9,
+        "origin": "synthetic",
+        "role": "product"
+      },
+      "source": "ex:df-electro/reaction/no3rr",
+      "target": "ex:df-electro/species/hydroxide"
+    },
+    {
+      "id": "ex:df-electro/link/6",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:df-electro/sample/cu",
+      "target": "ex:df-electro/catalyst/cu"
+    },
+    {
+      "id": "ex:df-electro/link/7",
+      "type": "HAS_PART",
+      "props": {
+        "origin": "synthetic",
+        "role": "catalyst layer"
+      },
+      "source": "ex:df-electro/electrode/cu-on-cp",
+      "target": "ex:df-electro/sample/cu"
+    },
+    {
+      "id": "ex:df-electro/link/8",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "concentration": {
+          "status": "present",
+          "unit": "mol/L",
+          "value": 0.5
+        },
+        "origin": "synthetic",
+        "role": "inert"
+      },
+      "source": "ex:df-electro/electrolyte/k2so4-kno3",
+      "target": "ex:df-electro/species/k2so4"
+    },
+    {
+      "id": "ex:df-electro/link/9",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "concentration": {
+          "status": "present",
+          "unit": "mol/L",
+          "value": 0.1
+        },
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:df-electro/electrolyte/k2so4-kno3",
+      "target": "ex:df-electro/species/nitrate"
+    },
+    {
+      "id": "ex:df-electro/link/10",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "as_prepared"
+      },
+      "source": "ex:df-electro/test/m03",
+      "target": "ex:df-electro/sample/cu"
+    },
+    {
+      "id": "ex:df-electro/link/11",
+      "type": "USES_ELECTRODE",
+      "props": {
+        "origin": "synthetic",
+        "role": "working"
+      },
+      "source": "ex:df-electro/test/m03",
+      "target": "ex:df-electro/electrode/cu-on-cp"
+    },
+    {
+      "id": "ex:df-electro/link/12",
+      "type": "USES_ELECTRODE",
+      "props": {
+        "origin": "synthetic",
+        "role": "counter"
+      },
+      "source": "ex:df-electro/test/m03",
+      "target": "ex:df-electro/electrode/pt"
+    },
+    {
+      "id": "ex:df-electro/link/13",
+      "type": "USES_ELECTRODE",
+      "props": {
+        "origin": "synthetic",
+        "role": "reference"
+      },
+      "source": "ex:df-electro/test/m03",
+      "target": "ex:df-electro/instrument/ref"
+    },
+    {
+      "id": "ex:df-electro/link/14",
+      "type": "IN_ELECTROLYTE",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:df-electro/test/m03",
+      "target": "ex:df-electro/electrolyte/k2so4-kno3"
+    },
+    {
+      "id": "ex:df-electro/link/15",
+      "type": "IN_CELL",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:df-electro/test/m03",
+      "target": "ex:df-electro/instrument/h-cell"
+    },
+    {
+      "id": "ex:df-electro/link/16",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:df-electro/test/m03",
+      "target": "ex:df-electro/reaction/no3rr"
+    },
+    {
+      "id": "ex:df-electro/catalyst/cu/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:df-electro/catalyst/cu",
+      "target": "ex:df-electro/source/paper"
+    },
+    {
+      "id": "ex:df-electro/electrode/cu-on-cp/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:df-electro/electrode/cu-on-cp",
+      "target": "ex:df-electro/source/paper"
+    },
+    {
+      "id": "ex:df-electro/electrolyte/k2so4-kno3/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:df-electro/electrolyte/k2so4-kno3",
+      "target": "ex:df-electro/source/paper"
+    },
+    {
+      "id": "ex:df-electro/sample/cu/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:df-electro/sample/cu",
+      "target": "ex:df-electro/source/paper"
+    },
+    {
+      "id": "ex:df-electro/test/m03/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:df-electro/test/m03",
+      "target": "ex:df-electro/source/paper"
+    },
+    {
+      "id": "ex:df-electro/state/working/state-of",
+      "type": "STATE_OF",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:df-electro/state/working",
+      "target": "ex:df-electro/sample/cu"
+    },
+    {
+      "id": "ex:df-electro/state/working/has-site",
+      "type": "HAS_SITE",
+      "props": {
+        "status": "hypothesized",
+        "evidence": [
+          {
+            "id": "hs_table",
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:df-electro/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "population_fraction": {
+          "status": "present",
+          "basis": "of the exposed Cu",
+          "evidence_ids": [
+            "hs_table"
+          ],
+          "unit": "%",
+          "value": 10
+        }
+      },
+      "source": "ex:df-electro/test/m03",
+      "target": "ex:df-electro/site/cu-step"
+    }
+  ],
+  "directed": true,
+  "graph": {
+    "data_status": "synthetic_example",
+    "follows_domains": [
+      "catalysis"
+    ],
+    "graph_id": "ex:invalid/has-site-from-a-test",
+    "schema": "scale-catal",
+    "schema_version": "0.6.0",
+    "stewardship": {
+      "access": "public"
+    },
+    "title": "INVALID FIXTURE (has-site-from-a-test): a catalytic test that has a site population"
+  },
+  "multigraph": true
+}

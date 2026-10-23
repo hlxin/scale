@@ -1,0 +1,91 @@
+# A competency question of the catalysis domain (tools/competency.py; `scale domains cq catalysis`).
+# It runs on public synthetic examples, so anyone can rerun it and see the same answer.
+id: CQ-15
+question: Which site counts are the turnover frequencies divided by, in which state were those sites counted, and how
+  was each turnover frequency calculated?
+description: |
+  A turnover frequency is kept as reported, with how it was calculated: the count it is divided by (normalized_by),
+  a value on the HAS_SITE from the state the sites were counted in (exposed_metal_count for the exposed atoms counted,
+  site_inventory for the sites a rate is divided by), and what was counted, in its basis or definition. A field step
+  follows normalized_by into that link (link HAS_SITE, end source or target, edge_as), so each row carries the rate's
+  state (IN_STATE) and the denominator's state, site, value, origin and bound. One methanol rate (4.1 mmol/(g h) in the
+  working state) gives five rates per site: per exposed Cu atom, whose count was made after reduction, not under
+  reaction; per Zn-decorated step site (28 µmol/g, derived from a share); at least 0.038 s-1 per titrated site, since
+  the titration gives at most 30 µmol/g; per Cu atom, every Cu atom taken as a site (its basis says so); and one whose
+  source does not say how it was calculated (kept as reported; the validator warns). The last two name no site count,
+  so the field step leaves them out. In a scientific comparison the turnover frequencies of one product are compared
+  as reported, each row showing what it is divided by (its compared tag: the denominator, its origin and any bound);
+  a rate of another product, or of none, is not compared with them.
+documents:
+  - examples/scale-catal/state-site-examples/sites-and-assignments.json
+plan:
+  question: Which site counts are the turnover frequencies divided by, and where were they counted?
+  match:
+    label: CatalyticTest
+    as: test
+  steps:
+    - from: test
+      entries: result_values
+      kind: turnover_frequency
+      as: tof
+    - from: tof
+      field: normalized_by
+      link: HAS_SITE
+      end: source
+      to: CatalystState
+      as: counted_in
+      edge_as: count
+    - from: tof
+      field: normalized_by
+      link: HAS_SITE
+      end: target
+      to: ActiveSite
+      as: site
+    - from: test
+      edge: IN_STATE
+      to: CatalystState
+      as: measured_in
+  return:
+    - test.name
+    - tof
+    - measured_in.name
+    - counted_in.name
+    - counted_in.state_kind
+    - site.name
+    - count.exposed_metal_count
+    - count.site_inventory
+  evidence: true
+expect:
+  status: answered
+  min_rows: 3
+  max_rows: 3
+  values:
+    counted_in.state_kind:
+      - pretreated
+      - working
+    site.name:
+      - exposed Cu atoms
+      - Zn-decorated Cu step site
+variants:
+  - description: Compared scientifically, the five methanol rates are compared as reported, in one group; each row
+      shows what it is divided by (the rates per Cu atom and the one that says nothing name no count), and its basis.
+    plan:
+      comparison: scientific
+      steps:
+        - from: test
+          entries: result_values
+          kind: turnover_frequency
+          as: tof
+      where:
+        - var: tof
+          prop: value
+          op: gt
+          value: 0
+          unit: s-1
+      return:
+        - tof
+        - tof.basis
+    expect:
+      status: answered
+      min_rows: 5
+      max_rows: 5

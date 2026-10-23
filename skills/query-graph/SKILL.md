@@ -61,7 +61,12 @@ A generated explanation is a presentation of the retrieved evidence, not a repla
    then that one result's, never another assay's, and `kind` keeps a yield from standing in for a selectivity.
    Worked plans: the catalysis competency questions (`domain/competency/*.yaml`, also returned by
    `scale call domains`; CQ-06 compares current densities, CQ-01, CQ-07 and CQ-08 bind results, CQ-09 follows the
-   transport check into a test, CQ-10 a test's dynamic operation and CQ-11 its dark controls). A step on an edge
+   transport check into a test, CQ-10 a test's dynamic operation and CQ-11 its dark controls; CQ-14 the site
+   populations of a specimen's states, CQ-15 a turnover frequency into the site count it is divided by, CQ-16
+   activity assignments and CQ-17 operando observations made while the kinetics were measured, and the fits an
+   assignment rests on; CQ-18 how batches of one nominal catalyst differ, CQ-19 nominal and measured compositions,
+   CQ-20 sizes by technique, CQ-21 what a fitted coordination number rests on and CQ-22 what a source leaves
+   unstated). A step on an edge
    type follows its specializations too (`CONTROL_FOR` finds `DARK_CONTROL_FOR` links), as `to` finds subtypes.
 4. **Run it:** `scale graph query <graph> plan.yaml --format markdown` (or `scale call query`).
 5. **Read the kind of answer and the coverage:** `answered`; `no_matching_record` (none in this
@@ -108,6 +113,20 @@ A generated explanation is a presentation of the retrieved evidence, not a repla
 - Call a conflict only after checking the entity, the conditions, the unit and basis, and whether the intervals overlap; say on which of these the values differ.
 - For returned Claims and values, follow incoming CONTRADICTS and SUPPORTS, say whether they are disputed, and say "none recorded" when no such link is there.
 - Keep equilibrium constants (Kp, Kc) on different standard states or units apart.
+- A site population holds for the state its `HAS_SITE` starts from: never report it for another state of the sample.
+  Report each turnover frequency as reported, with how it was calculated (its basis and the site count it is divided
+  by, from the row's `compared`), and say when it does not say. When its site count was made in another state than
+  the rate (CQ-15), say so. Never recalculate a rate on another count.
+- A size, a composition or any other characterization result is the measurand its Variable names: ask for one by its
+  Variable (a field step to `variable`, filtered on its `quantity_kind`, CQ-20), and report a microscopy size, a
+  crystallite size and a hydrodynamic size apart. Report a nominal value as nominal and a measured one with its
+  technique, information depth and state (CQ-19); two batches or two purchased lots of one formulation are two
+  records, never one batch.
+- An assignment of activity is a claim (`ABOUT` roles active, spectator, precursor, inhibitor): report it as the
+  authors', with what supports and contradicts it, never a phase as active because it is abundant. Operando means
+  characterized while the kinetics are measured: an observation labelled operando was made so only where its `DURING`
+  link states it (same specimen, timing simultaneous, kinetics measured); an overlap or a change that tracks the
+  activity is not evidence of activity.
 - An answer goes only where the whole queried document may go: the result's `access` is the least open stewardship anywhere in it (its header, every record, the notices, sources and datasets no row shows included), and no part of the answer (a row, a value, a record named as left out, a count) is more open. When it is not public and the answer is for readers the document does not admit, never pass it on: query the view `scale graph filter --public` (or `--as <id>`) makes for them, whose answers have that view's own `access`, and say that the view holds only what they may see. A second-hand note names its sources by id unless the document is all public. Embargoes are read today, the earlier of the local and the UTC date, as every SCALE path reads them (an `as_of` YYYY-MM-DD may read them on an earlier day, never a later one). A `scale graph search` result carries the same `access`.
 - Synthetic examples (`data_status: synthetic_example`) are not evidence about the world; use them only to test a plan, and label them.
 - An absence means absence in the queried graph, never in the literature.
